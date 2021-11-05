@@ -352,7 +352,7 @@ int wxAuiDefaultDockArt::GetMetric(int id)
         case wxAUI_DOCKART_PANE_BORDER_SIZE:   return m_borderSize;
         case wxAUI_DOCKART_PANE_BUTTON_SIZE:   return m_buttonSize;
         case wxAUI_DOCKART_GRADIENT_TYPE:      return m_gradientType;
-        default: wxFAIL_MSG(wxT("Invalid Metric Ordinal")); break;
+        default: wxFAIL_MSG("Invalid Metric Ordinal"); break;
     }
 
     return 0;
@@ -368,7 +368,7 @@ void wxAuiDefaultDockArt::SetMetric(int id, int new_val)
         case wxAUI_DOCKART_PANE_BORDER_SIZE:   m_borderSize = new_val; break;
         case wxAUI_DOCKART_PANE_BUTTON_SIZE:   m_buttonSize = new_val; break;
         case wxAUI_DOCKART_GRADIENT_TYPE:      m_gradientType = new_val; break;
-        default: wxFAIL_MSG(wxT("Invalid Metric Ordinal")); break;
+        default: wxFAIL_MSG("Invalid Metric Ordinal"); break;
     }
 }
 
@@ -386,7 +386,7 @@ wxColour wxAuiDefaultDockArt::GetColour(int id)
         case wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR:       return m_activeCaptionTextColour;
         case wxAUI_DOCKART_BORDER_COLOUR:                    return m_borderPen.GetColour();
         case wxAUI_DOCKART_GRIPPER_COLOUR:                   return m_gripperBrush.GetColour();
-        default: wxFAIL_MSG(wxT("Invalid Metric Ordinal")); break;
+        default: wxFAIL_MSG("Invalid Metric Ordinal"); break;
     }
 
     return {};
@@ -410,7 +410,7 @@ void wxAuiDefaultDockArt::SetColour(int id, const wxColor& colour)
             m_gripperPen1.SetColour(colour.ChangeLightness(40));
             m_gripperPen2.SetColour(colour.ChangeLightness(60));
             break;
-        default: wxFAIL_MSG(wxT("Invalid Metric Ordinal")); break;
+        default: wxFAIL_MSG("Invalid Metric Ordinal"); break;
     }
 
     InitBitmaps();

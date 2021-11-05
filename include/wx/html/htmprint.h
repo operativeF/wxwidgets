@@ -114,7 +114,7 @@ enum class wxHeaderFooterPaging
 class WXDLLIMPEXP_HTML wxHtmlPrintout : public wxPrintout
 {
 public:
-    wxHtmlPrintout(const wxString& title = wxT("Printout"));
+    wxHtmlPrintout(const wxString& title = "Printout");
 
     wxHtmlPrintout& operator=(wxHtmlPrintout&&) = delete;
 
@@ -232,7 +232,7 @@ private:
 class WXDLLIMPEXP_HTML wxHtmlEasyPrinting : public wxObject
 {
 public:
-    wxHtmlEasyPrinting(const wxString& name = wxT("Printing"), wxWindow *parentWindow = nullptr);
+    wxHtmlEasyPrinting(const wxString& name = "Printing", wxWindow *parentWindow = nullptr);
     ~wxHtmlEasyPrinting();
 
     wxHtmlEasyPrinting& operator=(wxHtmlEasyPrinting&&) = delete;

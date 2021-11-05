@@ -34,7 +34,7 @@ wxObject *wxPanelXmlHandler::DoCreateResource()
     panel->Create(m_parentAsWindow,
                   GetID(),
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxTAB_TRAVERSAL),
+                  GetStyle("style", wxTAB_TRAVERSAL),
                   GetName());
 
     SetupWindow(panel);
@@ -45,7 +45,7 @@ wxObject *wxPanelXmlHandler::DoCreateResource()
 
 bool wxPanelXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxPanel"));
+    return IsOfClass(node, "wxPanel");
 }
 
 #endif // wxUSE_XRC

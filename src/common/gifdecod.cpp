@@ -171,7 +171,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
         }
         else
         {
-            wxFAIL_MSG( wxS("Unknown wxIMAGE_OPTION_GIF_TRANSPARENCY value") );
+            wxFAIL_MSG( "Unknown wxIMAGE_OPTION_GIF_TRANSPARENCY value" );
         }
     }
     else

@@ -188,7 +188,7 @@ wxString wxFileType::ExpandCommand(const wxString& command,
                             wxString mimetype;
                             wxLogWarning(_("Unmatched '{' in an entry for mime type %s."),
                                          params.GetMimeType().c_str());
-                            str << wxT("%{");
+                            str << "%{";
                         }
                         else {
                             wxString param(pc + 1, pEnd - pc - 1);
@@ -206,7 +206,7 @@ wxString wxFileType::ExpandCommand(const wxString& command,
                     break;
 
                 default:
-                    wxLogDebug(wxT("Unknown field %%%c in command '%s'."),
+                    wxLogDebug("Unknown field %%%c in command '%s'.",
                                *pc, command.c_str());
                     str << *pc;
             }
@@ -226,11 +226,11 @@ wxString wxFileType::ExpandCommand(const wxString& command,
     // test now carried out on reading file so test should never get here
     if ( !hasFilename && !str.empty()
 #ifdef __UNIX__
-                      && !str.StartsWith(wxT("test "))
+                      && !str.StartsWith("test ")
 #endif // Unix
        )
     {
-        str << wxT(" < ");
+        str << " < ";
         if ( needToQuoteFilename )
             str << '"';
         str << params.GetFileName();
@@ -269,7 +269,7 @@ bool wxFileType::GetExtensions(std::vector<wxString>& extensions)
 
 bool wxFileType::GetMimeType(wxString *mimeType) const
 {
-    wxCHECK_MSG( mimeType, false, wxT("invalid parameter in GetMimeType") );
+    wxCHECK_MSG( mimeType, false, "invalid parameter in GetMimeType" );
 
     if ( m_info )
     {
@@ -334,7 +334,7 @@ wxFileType::GetIcon(wxIconLocation *iconloc,
 
 bool wxFileType::GetDescription(wxString *desc) const
 {
-    wxCHECK_MSG( desc, false, wxT("invalid parameter in GetDescription") );
+    wxCHECK_MSG( desc, false, "invalid parameter in GetDescription" );
 
     if ( m_info )
     {
@@ -350,7 +350,7 @@ bool
 wxFileType::GetOpenCommand(wxString *openCmd,
                            const wxFileType::MessageParameters& params) const
 {
-    wxCHECK_MSG( openCmd, false, wxT("invalid parameter in GetOpenCommand") );
+    wxCHECK_MSG( openCmd, false, "invalid parameter in GetOpenCommand" );
 
     if ( m_info )
     {
@@ -378,7 +378,7 @@ bool
 wxFileType::GetPrintCommand(wxString *printCmd,
                             const wxFileType::MessageParameters& params) const
 {
-    wxCHECK_MSG( printCmd, false, wxT("invalid parameter in GetPrintCommand") );
+    wxCHECK_MSG( printCmd, false, "invalid parameter in GetPrintCommand" );
 
     if ( m_info )
     {
@@ -417,7 +417,7 @@ size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
     if ( GetOpenCommand(&cmd, params) )
     {
         if ( verbs )
-            verbs->push_back(wxT("Open"));
+            verbs->push_back("Open");
         if ( commands )
             commands->push_back(cmd);
         count++;
@@ -426,7 +426,7 @@ size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
     if ( GetPrintCommand(&cmd, params) )
     {
         if ( verbs )
-            verbs->push_back(wxT("Print"));
+            verbs->push_back("Print");
         if ( commands )
             commands->push_back(cmd);
 
@@ -444,7 +444,7 @@ bool wxFileType::Unassociate()
 #elif defined(__UNIX__)
     return m_impl->Unassociate(this);
 #else
-    wxFAIL_MSG( wxT("not implemented") ); // TODO
+    wxFAIL_MSG( "not implemented" ); // TODO
     return false;
 #endif
 }
@@ -459,7 +459,7 @@ bool wxFileType::SetCommand(const wxString& cmd,
     wxUnusedVar(cmd);
     wxUnusedVar(verb);
     wxUnusedVar(overwriteprompt);
-    wxFAIL_MSG(wxT("not implemented"));
+    wxFAIL_MSG("not implemented");
     return false;
 #endif
 }
@@ -473,13 +473,13 @@ bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
     if ( sTmp.empty() )
         GetOpenCommand(&sTmp, wxFileType::MessageParameters({}, {}));
 #endif
-    wxCHECK_MSG( !sTmp.empty(), false, wxT("need the icon file") );
+    wxCHECK_MSG( !sTmp.empty(), false, "need the icon file" );
 
 #if defined (WX_WINDOWS) || defined(__UNIX__)
     return m_impl->SetDefaultIcon (cmd, index);
 #else
     wxUnusedVar(index);
-    wxFAIL_MSG(wxT("not implemented"));
+    wxFAIL_MSG("not implemented");
     return false;
 #endif
 }
@@ -526,7 +526,7 @@ bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
                                   const wxString& wildcard)
 {
     wxASSERT_MSG( mimeType.Find(wxT('*')) == wxNOT_FOUND,
-                  wxT("first MIME type can't contain wildcards") );
+                  "first MIME type can't contain wildcards" );
 
     // all comparaisons are case insensitive (2nd arg of IsSameAs() is false)
     if ( wildcard.BeforeFirst(wxT('/')).
@@ -534,7 +534,7 @@ bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
     {
         wxString strSubtype = wildcard.AfterFirst(wxT('/'));
 
-        if ( strSubtype == wxT("*") ||
+        if ( strSubtype == "*" ||
              strSubtype.IsSameAs(mimeType.AfterFirst(wxT('/')), false) )
         {
             // matches (either exactly or it's a wildcard)
@@ -571,7 +571,7 @@ wxMimeTypesManager::Associate(const wxFileTypeInfo& ftInfo)
     return m_impl->Associate(ftInfo);
 #else // other platforms
     wxUnusedVar(ftInfo);
-    wxFAIL_MSG( wxT("not implemented") ); // TODO
+    wxFAIL_MSG( "not implemented" ); // TODO
     return NULL;
 #endif // platforms
 }
@@ -589,7 +589,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
     else
         extWithoutDot = ext;
 
-    wxCHECK_MSG( !ext.empty(), nullptr, wxT("extension can't be empty") );
+    wxCHECK_MSG( !ext.empty(), nullptr, "extension can't be empty" );
 
     wxFileType *ft = m_impl->GetFileTypeFromExtension(extWithoutDot);
 

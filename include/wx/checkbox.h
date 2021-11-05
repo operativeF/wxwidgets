@@ -68,8 +68,8 @@ public:
 
     bool IsChecked() const
     {
-        wxASSERT_MSG( !Is3State(), wxT("Calling IsChecked() doesn't make sense for")
-            wxT(" a three state checkbox, Use Get3StateValue() instead") );
+        wxASSERT_MSG( !Is3State(), "Calling IsChecked() doesn't make sense for"
+                                   " a three state checkbox, Use Get3StateValue() instead" );
 
         return GetValue();
     }
@@ -81,8 +81,8 @@ public:
         if ( state == wxCheckBoxState::Indeterminate && !Is3State() )
         {
             // Undetermined state with a 2-state checkbox??
-            wxFAIL_MSG( wxT("DoGet3StateValue() says the 2-state checkbox is ")
-                wxT("in an undetermined/third state") );
+            wxFAIL_MSG( "DoGet3StateValue() says the 2-state checkbox is "
+                "in an undetermined/third state" );
 
             state = wxCheckBoxState::Unchecked;
         }
@@ -94,7 +94,7 @@ public:
     {
         if ( state == wxCheckBoxState::Indeterminate && !Is3State() )
         {
-            wxFAIL_MSG(wxT("Setting a 2-state checkbox to undetermined state"));
+            wxFAIL_MSG("Setting a 2-state checkbox to undetermined state");
             state = wxCheckBoxState::Unchecked;
         }
 

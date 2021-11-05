@@ -37,7 +37,7 @@
 //-----------------------------------------------------------------------------
 //  wxLogTrace mask string
 //-----------------------------------------------------------------------------
-constexpr wxChar wxTRACE_GStreamer[] = wxT("GStreamer");
+constexpr wxChar wxTRACE_GStreamer[] = "GStreamer";
 
 //-----------------------------------------------------------------------------
 //
@@ -257,14 +257,14 @@ bool wxGStreamerMediaBackend(wxControl* ctrl, wxWindow* parent,
     {
         if(error)
         {
-            wxLogSysError(wxT("Could not initialize GStreamer\n")
-                          wxT("Error Message:%s"),
+            wxLogSysError("Could not initialize GStreamer\n"
+                          "Error Message:%s",
                           (const wxChar*) wxConvUTF8.cMB2WX(error->message)
                          );
             g_error_free(error);
         }
         else
-            wxLogSysError(wxT("Could not initialize GStreamer"));
+            wxLogSysError("Could not initialize GStreamer");
 
         return false;
     }
@@ -283,7 +283,7 @@ bool wxGStreamerMediaBackend(wxControl* ctrl, wxWindow* parent,
                             style,  // TODO: remove borders???
                             validator, name) )
     {
-        wxFAIL_MSG(wxT("Could not create wxControl!!!"));
+        wxFAIL_MSG("Could not create wxControl!!!");
         return false;
     }
 

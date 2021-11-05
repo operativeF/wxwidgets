@@ -75,11 +75,11 @@ class wxPseudoTransparentFrame : public wxFrame
 public:
     explicit wxPseudoTransparentFrame(wxWindow* parent = nullptr,
                 wxWindowID id = wxID_ANY,
-                const wxString& title = {},
+                const std::string& title = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const wxString &name = wxT("frame"))
+                const std::string& name = "frame")
                     : wxFrame(parent, id, title, pos, size, style | wxFRAME_SHAPED, name)
     {
         SetBackgroundStyle(wxBackgroundStyle::Paint);
@@ -229,11 +229,11 @@ class wxPseudoTransparentFrame: public wxFrame
 public:
     wxPseudoTransparentFrame(wxWindow* parent = NULL,
                 wxWindowID id = wxID_ANY,
-                const wxString& title = {},
+                const std::string& title = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const wxString &name = wxT("frame"))
+                const std::string& name = "frame")
     {
          if (!CreateBase( parent, id, pos, size, style, wxDefaultValidator, name ))
             return;
@@ -665,7 +665,7 @@ wxAuiPaneInfo& wxAuiManager::GetPane(wxWindow* window)
 
 // this version of GetPane() looks up a pane based on a
 // 'pane name', see above comment for more info
-wxAuiPaneInfo& wxAuiManager::GetPane(const wxString& name)
+wxAuiPaneInfo& wxAuiManager::GetPane(const std::string& name)
 {
     for (size_t i = 0; i < m_panes.GetCount(); ++i)
     {
@@ -870,7 +870,7 @@ void wxAuiManager::UpdateHintWindowConfig()
 // the frame which should be managed by the frame manager
 void wxAuiManager::SetManagedWindow(wxWindow* wnd)
 {
-    wxASSERT_MSG(wnd, wxT("specified window must be non-NULL"));
+    wxASSERT_MSG(wnd, "specified window must be non-NULL");
 
     UnInit();
 
@@ -887,20 +887,20 @@ void wxAuiManager::SetManagedWindow(wxWindow* wnd)
         wxMDIParentFrame* mdi_frame = (wxMDIParentFrame*)m_frame;
         wxWindow* client_window = mdi_frame->GetClientWindow();
 
-        wxASSERT_MSG(client_window, wxT("Client window is NULL!"));
+        wxASSERT_MSG(client_window, "Client window is NULL!");
 
         AddPane(client_window,
-                wxAuiPaneInfo().Name(wxT("mdiclient")).
+                wxAuiPaneInfo().Name("mdiclient").
                 CenterPane().PaneBorder(false));
     }
     else if (wxDynamicCast(m_frame, wxAuiMDIParentFrame))
     {
         wxAuiMDIParentFrame* mdi_frame = (wxAuiMDIParentFrame*)m_frame;
         wxAuiMDIClientWindow* client_window = mdi_frame->GetClientWindow();
-        wxASSERT_MSG(client_window, wxT("Client window is NULL!"));
+        wxASSERT_MSG(client_window, "Client window is NULL!");
 
         AddPane(client_window,
-                wxAuiPaneInfo().Name(wxT("mdiclient")).
+                wxAuiPaneInfo().Name("mdiclient").
                 CenterPane().PaneBorder(false));
     }
 
@@ -963,7 +963,7 @@ void wxAuiManager::SetArtProvider(wxAuiDockArt* art_provider)
 
 bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
 {
-    wxASSERT_MSG(window, wxT("NULL window ptrs are not allowed"));
+    wxASSERT_MSG(window, "NULL window ptrs are not allowed");
 
     // check if the pane has a valid window
     if (!window)
@@ -978,7 +978,7 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
     bool already_exists = false;
     if (!paneInfo.name.empty() && GetPane(paneInfo.name).IsOk())
     {
-        wxFAIL_MSG(wxT("A pane with that name already exists in the manager!"));
+        wxFAIL_MSG("A pane with that name already exists in the manager!");
         already_exists = true;
     }
 
@@ -1030,11 +1030,11 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
     // if the pane's name identifier is blank, create a random string
     if (pinfo.name.empty() || already_exists)
     {
-        pinfo.name.Printf(wxT("%08lx%08x%08x%08lx"),
-             (unsigned long)(wxPtrToUInt(pinfo.window) & 0xffffffff),
-             (unsigned int)time(nullptr),
-             (unsigned int)clock(),
-             (unsigned long)m_panes.GetCount());
+        pinfo.name = fmt::format("%08lx%08x%08x%08lx",
+             static_cast<unsigned long>(wxPtrToUInt(pinfo.window) & 0xffffffff),
+             static_cast<unsigned int>(time(nullptr)),
+             static_cast<unsigned int>(clock()),
+             static_cast<unsigned long>(m_panes.GetCount()));
     }
 
     // set initial proportion (if not already set)
@@ -1088,7 +1088,7 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
 
 bool wxAuiManager::AddPane(wxWindow* window,
                            int direction,
-                           const wxString& caption)
+                           const std::string& caption)
 {
     wxAuiPaneInfo pinfo;
     pinfo.Caption(caption);
@@ -1120,7 +1120,7 @@ bool wxAuiManager::AddPane(wxWindow* window,
 bool wxAuiManager::InsertPane(wxWindow* window, const wxAuiPaneInfo& paneInfo,
                                 int insert_level)
 {
-    wxASSERT_MSG(window, wxT("NULL window ptrs are not allowed"));
+    wxASSERT_MSG(window, "NULL window ptrs are not allowed");
 
     // shift the panes around, depending on the insert level
     switch (insert_level)
@@ -1182,7 +1182,7 @@ bool wxAuiManager::InsertPane(wxWindow* window, const wxAuiPaneInfo& paneInfo,
 // method will not destroy the window that is removed.
 bool wxAuiManager::DetachPane(wxWindow* window)
 {
-    wxASSERT_MSG(window, wxT("NULL window ptrs are not allowed"));
+    wxASSERT_MSG(window, "NULL window ptrs are not allowed");
 
     for (size_t i = 0; i < m_panes.GetCount(); ++i)
     {
@@ -1353,125 +1353,121 @@ void wxAuiManager::RestoreMaximizedPane()
 // EscapeDelimiters() changes ";" into "\;" and "|" into "\|"
 // in the input string.  This is an internal functions which is
 // used for saving perspectives
-static wxString EscapeDelimiters(const wxString& s)
+static std::string EscapeDelimiters(const std::string& s)
 {
-    wxString result;
-    result.Alloc(s.length());
-    const wxChar* ch = s.c_str();
+    std::string result;
+    result.reserve(s.length());
+
+    const char* ch = s.c_str();
+
     while (*ch)
     {
-        if (*ch == wxT(';') || *ch == wxT('|'))
-            result += wxT('\\');
+        if (*ch == ';' || *ch == '|')
+            result += '\\';
         result += *ch;
         ++ch;
     }
     return result;
 }
 
-wxString wxAuiManager::SavePaneInfo(const wxAuiPaneInfo& pane)
+std::string wxAuiManager::SavePaneInfo(const wxAuiPaneInfo& pane)
 {
-    wxString result = wxT("name=");
-    result += EscapeDelimiters(pane.name);
-    result += wxT(";");
+    std::string result = fmt::format("name={};caption={};", EscapeDelimiters(pane.name), EscapeDelimiters(pane.caption));
 
-    result += wxT("caption=");
-    result += EscapeDelimiters(pane.caption);
-    result += wxT(";");
-
-    result += wxString::Format(wxT("state=%u;"), pane.state);
-    result += wxString::Format(wxT("dir=%d;"), pane.dock_direction);
-    result += wxString::Format(wxT("layer=%d;"), pane.dock_layer);
-    result += wxString::Format(wxT("row=%d;"), pane.dock_row);
-    result += wxString::Format(wxT("pos=%d;"), pane.dock_pos);
-    result += wxString::Format(wxT("prop=%d;"), pane.dock_proportion);
-    result += wxString::Format(wxT("bestw=%d;"), pane.best_size.x);
-    result += wxString::Format(wxT("besth=%d;"), pane.best_size.y);
-    result += wxString::Format(wxT("minw=%d;"), pane.min_size.x);
-    result += wxString::Format(wxT("minh=%d;"), pane.min_size.y);
-    result += wxString::Format(wxT("maxw=%d;"), pane.max_size.x);
-    result += wxString::Format(wxT("maxh=%d;"), pane.max_size.y);
-    result += wxString::Format(wxT("floatx=%d;"), pane.floating_pos.x);
-    result += wxString::Format(wxT("floaty=%d;"), pane.floating_pos.y);
-    result += wxString::Format(wxT("floatw=%d;"), pane.floating_size.x);
-    result += wxString::Format(wxT("floath=%d"), pane.floating_size.y);
+    result += fmt::format("state=%u;", pane.state);
+    result += fmt::format("dir=%d;", pane.dock_direction);
+    result += fmt::format("layer=%d;", pane.dock_layer);
+    result += fmt::format("row=%d;", pane.dock_row);
+    result += fmt::format("pos=%d;", pane.dock_pos);
+    result += fmt::format("prop=%d;", pane.dock_proportion);
+    result += fmt::format("bestw=%d;", pane.best_size.x);
+    result += fmt::format("besth=%d;", pane.best_size.y);
+    result += fmt::format("minw=%d;", pane.min_size.x);
+    result += fmt::format("minh=%d;", pane.min_size.y);
+    result += fmt::format("maxw=%d;", pane.max_size.x);
+    result += fmt::format("maxh=%d;", pane.max_size.y);
+    result += fmt::format("floatx=%d;", pane.floating_pos.x);
+    result += fmt::format("floaty=%d;", pane.floating_pos.y);
+    result += fmt::format("floatw=%d;", pane.floating_size.x);
+    result += fmt::format("floath=%d", pane.floating_size.y);
 
     return result;
 }
 
 // Load a "pane" with the pane information settings in pane_part
-void wxAuiManager::LoadPaneInfo(wxString pane_part, wxAuiPaneInfo &pane)
+void wxAuiManager::LoadPaneInfo(std::string pane_part, wxAuiPaneInfo &pane)
 {
     // replace escaped characters so we can
     // split up the string easily
-    pane_part.Replace(wxT("\\|"), wxT("\a"));
-    pane_part.Replace(wxT("\\;"), wxT("\b"));
+    wx::utils::ReplaceAll(pane_part, "\\|", "\a");
+    wx::utils::ReplaceAll(pane_part, "\\;", "\b");
 
     while(true)
     {
-        wxString val_part = pane_part.BeforeFirst(wxT(';'));
-        pane_part = pane_part.AfterFirst(wxT(';'));
-        wxString val_name = val_part.BeforeFirst(wxT('='));
-        wxString value = val_part.AfterFirst(wxT('='));
-        val_name.MakeLower();
-        val_name.Trim(true);
-        val_name.Trim(false);
-        value.Trim(true);
-        value.Trim(false);
+        auto val_part = wx::utils::BeforeFirst(pane_part, ";");
+        pane_part = wx::utils::AfterFirst(pane_part, ";");
+
+        auto val_name = wx::utils::BeforeFirst(val_part, "=");
+        auto value    = wx::utils::AfterFirst(val_part, "=");
+
+        wx::utils::ToLower(val_name);
+        wx::utils::TrimAllSpace(val_name);
+        wx::utils::TrimAllSpace(value);
 
         if (val_name.empty())
             break;
 
-        if (val_name == wxT("name"))
+        if (val_name == "name")
             pane.name = value;
-        else if (val_name == wxT("caption"))
+        else if (val_name == "caption")
             pane.caption = value;
-        else if (val_name == wxT("state"))
+        else if (val_name == "state")
             pane.state = (unsigned int)wxAtoi(value.c_str());
-        else if (val_name == wxT("dir"))
+        else if (val_name == "dir")
             pane.dock_direction = wxAtoi(value.c_str());
-        else if (val_name == wxT("layer"))
+        else if (val_name == "layer")
             pane.dock_layer = wxAtoi(value.c_str());
-        else if (val_name == wxT("row"))
+        else if (val_name == "row")
             pane.dock_row = wxAtoi(value.c_str());
-        else if (val_name == wxT("pos"))
+        else if (val_name == "pos")
             pane.dock_pos = wxAtoi(value.c_str());
-        else if (val_name == wxT("prop"))
+        else if (val_name == "prop")
             pane.dock_proportion = wxAtoi(value.c_str());
-        else if (val_name == wxT("bestw"))
+        else if (val_name == "bestw")
             pane.best_size.x = wxAtoi(value.c_str());
-        else if (val_name == wxT("besth"))
+        else if (val_name == "besth")
             pane.best_size.y = wxAtoi(value.c_str());
-        else if (val_name == wxT("minw"))
+        else if (val_name == "minw")
             pane.min_size.x = wxAtoi(value.c_str());
-        else if (val_name == wxT("minh"))
+        else if (val_name == "minh")
             pane.min_size.y = wxAtoi(value.c_str());
-        else if (val_name == wxT("maxw"))
+        else if (val_name == "maxw")
             pane.max_size.x = wxAtoi(value.c_str());
-        else if (val_name == wxT("maxh"))
+        else if (val_name == "maxh")
             pane.max_size.y = wxAtoi(value.c_str());
-        else if (val_name == wxT("floatx"))
+        else if (val_name == "floatx")
             pane.floating_pos.x = wxAtoi(value.c_str());
-        else if (val_name == wxT("floaty"))
+        else if (val_name == "floaty")
             pane.floating_pos.y = wxAtoi(value.c_str());
-        else if (val_name == wxT("floatw"))
+        else if (val_name == "floatw")
             pane.floating_size.x = wxAtoi(value.c_str());
-        else if (val_name == wxT("floath"))
+        else if (val_name == "floath")
             pane.floating_size.y = wxAtoi(value.c_str());
         else {
-            wxFAIL_MSG(wxT("Bad Perspective String"));
+            wxFAIL_MSG("Bad Perspective String");
         }
     }
 
     // replace escaped characters so we can
     // split up the string easily
-    pane.name.Replace(wxT("\a"), wxT("|"));
-    pane.name.Replace(wxT("\b"), wxT(";"));
-    pane.caption.Replace(wxT("\a"), wxT("|"));
-    pane.caption.Replace(wxT("\b"), wxT(";"));
-    pane_part.Replace(wxT("\a"), wxT("|"));
-    pane_part.Replace(wxT("\b"), wxT(";"));
+    wx::utils::ReplaceAll(pane.name, "\a", "|");
+    wx::utils::ReplaceAll(pane.name, "\b", ";");
 
-    return;
+    wx::utils::ReplaceAll(pane.caption, "\a", "|");
+    wx::utils::ReplaceAll(pane.caption, "\b", ";");
+
+    wx::utils::ReplaceAll(pane_part, "\a", "|");
+    wx::utils::ReplaceAll(pane_part, "\b", ";");
 }
 
 
@@ -1480,25 +1476,27 @@ void wxAuiManager::LoadPaneInfo(wxString pane_part, wxAuiPaneInfo &pane)
 // all pane settings.  This save and load mechanism allows an
 // exact pane configuration to be saved and restored at a later time
 
-wxString wxAuiManager::SavePerspective()
+std::string wxAuiManager::SavePerspective()
 {
-    wxString result;
-    result.Alloc(500);
-    result = wxT("layout2|");
+    std::string result;
+    result.reserve(500);
+    result = "layout2|";
 
     for (std::size_t pane_i{0}; pane_i != m_panes.GetCount(); ++pane_i)
     {
         wxAuiPaneInfo& pane = m_panes.Item(pane_i);
-        result += SavePaneInfo(pane)+wxT("|");
+        result += SavePaneInfo(pane) + "|";
     }
 
     for (std::size_t dock_i{0}; dock_i != m_docks.GetCount(); ++dock_i)
     {
         wxAuiDockInfo& dock = m_docks.Item(dock_i);
 
-        result += wxString::Format(wxT("dock_size(%d,%d,%d)=%d|"),
-                                   dock.dock_direction, dock.dock_layer,
-                                   dock.dock_row, dock.size);
+        result += fmt::format("dock_size(%d,%d,%d)=%d|",
+                               dock.dock_direction,
+                               dock.dock_layer,
+                               dock.dock_row,
+                               dock.size);
     }
 
     return result;
@@ -1507,19 +1505,19 @@ wxString wxAuiManager::SavePerspective()
 // LoadPerspective() loads a layout which was saved with SavePerspective()
 // If the "update" flag parameter is true, the GUI will immediately be updated
 
-bool wxAuiManager::LoadPerspective(const wxString& layout, bool update)
+bool wxAuiManager::LoadPerspective(const std::string& layout, bool update)
 {
-    wxString input = layout;
-    wxString part;
+    std::string input = layout;
 
     // check layout string version
     //    'layout1' = wxAUI 0.9.0 - wxAUI 0.9.2
     //    'layout2' = wxAUI 0.9.2 (wxWidgets 2.8)
-    part = input.BeforeFirst(wxT('|'));
-    input = input.AfterFirst(wxT('|'));
-    part.Trim(true);
-    part.Trim(false);
-    if (part != wxT("layout2"))
+    std::string part = wx::utils::BeforeFirst(input, "|");
+    input = wx::utils::AfterFirst(input, "|");
+
+    wx::utils::TrimAllSpace(part);
+
+    if (part != "layout2")
         return false;
 
     // Mark all panes currently managed as hidden. Also, dock all panes that are dockable.
@@ -1537,35 +1535,46 @@ bool wxAuiManager::LoadPerspective(const wxString& layout, bool update)
 
     // replace escaped characters so we can
     // split up the string easily
-    input.Replace(wxT("\\|"), wxT("\a"));
-    input.Replace(wxT("\\;"), wxT("\b"));
+    wx::utils::ReplaceAll(input, "\\|", "\a");
+    wx::utils::ReplaceAll(input, "\\;", "\b");
 
     m_hasMaximized = false;
     while (true)
     {
         wxAuiPaneInfo pane;
 
-        wxString pane_part = input.BeforeFirst(wxT('|'));
-        input = input.AfterFirst(wxT('|'));
-        pane_part.Trim(true);
+        std::string pane_part = wx::utils::BeforeFirst(input, "|");
+        input = wx::utils::AfterFirst(input, "|");
+
+        wx::utils::TrimTrailingSpace(pane_part);
 
         // if the string is empty, we're done parsing
         if (pane_part.empty())
             break;
 
-        if (pane_part.Left(9) == wxT("dock_size"))
+        if (pane_part.substr(0, 9) == "dock_size")
         {
-            wxString val_name = pane_part.BeforeFirst(wxT('='));
-            wxString value = pane_part.AfterFirst(wxT('='));
+            auto val_name = wx::utils::BeforeFirst(pane_part, "=");
+            auto value    = wx::utils::AfterFirst(pane_part, "=");
 
             long dir, layer, row, size;
-            wxString piece = val_name.AfterFirst(wxT('('));
-            piece = piece.BeforeLast(wxT(')'));
-            piece.BeforeFirst(wxT(',')).ToLong(&dir);
-            piece = piece.AfterFirst(wxT(','));
-            piece.BeforeFirst(wxT(',')).ToLong(&layer);
-            piece.AfterFirst(wxT(',')).ToLong(&row);
-            value.ToLong(&size);
+
+            auto piece = wx::utils::AfterFirst(val_name, "(");
+            piece = wx::utils::BeforeLast(piece, ")");
+
+            auto dir_val = wx::utils::BeforeFirst(piece, ",");
+
+            piece = wx::utils::AfterFirst(piece, ",");
+            
+            auto layer_val = wx::utils::BeforeFirst(piece, ",");
+            auto row_val   = wx::utils::AfterFirst(piece, ",");
+
+            auto [pDir, ecDir] = std::from_chars(dir_val.data(), dir_val.data() + dir_val.size(), dir);
+            auto [pLay, ecLay] = std::from_chars(layer_val.data(), layer_val.data() + layer_val.size(), layer);
+            auto [pRow, ecRow] = std::from_chars(row_val.data(), row_val.data() + row_val.size(), row);
+            auto [pVal, ecVal] = std::from_chars(value.data(), value.data() + value.size(), size);
+
+            // TODO: Just return if there's an error?
 
             wxAuiDockInfo dock;
             dock.dock_direction = dir;
@@ -1578,8 +1587,8 @@ bool wxAuiManager::LoadPerspective(const wxString& layout, bool update)
 
         // Undo our escaping as LoadPaneInfo needs to take an unescaped
         // name so it can be called by external callers
-        pane_part.Replace(wxT("\a"), wxT("|"));
-        pane_part.Replace(wxT("\b"), wxT(";"));
+        wx::utils::ReplaceAll(pane_part, "\a", "|");
+        wx::utils::ReplaceAll(pane_part, "\b", ";");
 
         LoadPaneInfo(pane_part, pane);
 
@@ -1624,7 +1633,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
 
         if (pane.HasFlag(wxAuiPaneInfo::actionPane))
         {
-            wxASSERT_MSG(action_pane==-1, wxT("Too many fixed action panes"));
+            wxASSERT_MSG(action_pane==-1, "Too many fixed action panes");
             action_pane = pane_i;
         }
     }
@@ -3440,7 +3449,7 @@ wxRect wxAuiManager::CalculateHintRect(wxWindow* pane_window,
     wxAuiPaneInfoArray panes;
     wxAuiDockUIPartArray uiparts;
     wxAuiPaneInfo hint = GetPane(pane_window);
-    hint.name = wxT("__HINT__");
+    hint.name = "__HINT__";
     hint.PaneBorder(true);
     hint.Show();
 
@@ -3479,7 +3488,7 @@ wxRect wxAuiManager::CalculateHintRect(wxWindow* pane_window,
         wxAuiDockUIPart& part = uiparts.Item(i);
 
         if (part.type == wxAuiDockUIPart::typePaneBorder &&
-            part.pane && part.pane->name == wxT("__HINT__"))
+            part.pane && part.pane->name == "__HINT__")
         {
             rect = wxRect(part.sizer_item->GetPosition(),
                           part.sizer_item->GetSize());
@@ -3530,7 +3539,7 @@ void wxAuiManager::OnFloatingPaneMoveStart(wxWindow* wnd)
 {
     // try to find the pane
     wxAuiPaneInfo& pane = GetPane(wnd);
-    wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+    wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
     if(!pane.frame)
         return;
@@ -3543,7 +3552,7 @@ void wxAuiManager::OnFloatingPaneMoving(wxWindow* wnd, wxDirection dir)
 {
     // try to find the pane
     wxAuiPaneInfo& pane = GetPane(wnd);
-    wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+    wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
     if(!pane.frame)
         return;
@@ -3646,7 +3655,7 @@ void wxAuiManager::OnFloatingPaneMoved(wxWindow* wnd, wxDirection dir)
 {
     // try to find the pane
     wxAuiPaneInfo& pane = GetPane(wnd);
-    wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+    wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
     if(!pane.frame)
         return;
@@ -3727,7 +3736,7 @@ void wxAuiManager::OnFloatingPaneResized(wxWindow* wnd, const wxRect& rect)
 {
     // try to find the pane
     wxAuiPaneInfo& pane = GetPane(wnd);
-    wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+    wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
     pane.FloatingSize(rect.GetWidth(), rect.GetHeight());
 
@@ -3740,7 +3749,7 @@ void wxAuiManager::OnFloatingPaneClosed(wxWindow* wnd, wxCloseEvent& evt)
 {
     // try to find the pane
     wxAuiPaneInfo& pane = GetPane(wnd);
-    wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+    wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
 
     // fire pane close event
@@ -4249,7 +4258,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         // determine the pane rectangle by getting the pane part
         wxAuiDockUIPart* pane_part = GetPanePart(pane.window);
         wxASSERT_MSG(pane_part,
-            wxT("Pane border part not found -- shouldn't happen"));
+            "Pane border part not found -- shouldn't happen");
 
         // determine the new pixel size that the user wants;
         // this will help us recalculate the pane's proportion
@@ -4320,7 +4329,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
 
         // demand that the pane being resized is found in this dock
         // (this assert really never should be raised)
-        wxASSERT_MSG(pane_position != -1, wxT("Pane not found in dock"));
+        wxASSERT_MSG(pane_position != -1, "Pane not found in dock");
 
         // prevent division by zero
         if (dock_pixels == 0 || total_proportion == 0 || borrow_pane == -1)
@@ -4455,7 +4464,7 @@ void wxAuiManager::OnLeftUp(wxMouseEvent& event)
         m_frame->ReleaseMouse();
 
         wxAuiPaneInfo& pane = GetPane(m_actionWindow);
-        wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+        wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
         // save the new positions
         wxAuiDockInfoPtrArray docks;
@@ -4617,7 +4626,7 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
     else if (m_action == actionDragToolbarPane)
     {
         wxAuiPaneInfo& pane = GetPane(m_actionWindow);
-        wxASSERT_MSG(pane.IsOk(), wxT("Pane window not found"));
+        wxASSERT_MSG(pane.IsOk(), "Pane window not found");
 
         pane.SetFlag(wxAuiPaneInfo::actionPane, true);
 
@@ -4727,7 +4736,7 @@ void wxAuiManager::OnChildFocus(wxChildFocusEvent& event)
 // when a pane button has been pressed.
 void wxAuiManager::OnPaneButton(wxAuiManagerEvent& evt)
 {
-    wxASSERT_MSG(evt.pane, wxT("Pane Info passed to wxAuiManager::OnPaneButton must be non-null"));
+    wxASSERT_MSG(evt.pane, "Pane Info passed to wxAuiManager::OnPaneButton must be non-null");
 
     wxAuiPaneInfo& pane = *(evt.pane);
 

@@ -45,7 +45,7 @@ bool wxGenericColourButton::Create( wxWindow *parent,
     if (!wxBitmapButton::Create( parent, id, m_bitmap, pos,
                            size, style, validator, name ))
     {
-        wxFAIL_MSG( wxT("wxGenericColourButton creation failed") );
+        wxFAIL_MSG( "wxGenericColourButton creation failed" );
         return false;
     }
 

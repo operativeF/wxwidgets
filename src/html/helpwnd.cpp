@@ -129,7 +129,7 @@ public:
         wxString pg = win->GetOpenedPage();
         if(!an.empty())
         {
-            pg << wxT("#") << an;
+            pg << "#" << an;
         }
         return pg;
     }
@@ -170,7 +170,7 @@ void wxHtmlHelpWindow::UpdateMergedIndex()
     for (size_t i = 0; i < len; i++)
     {
         const wxHtmlHelpDataItem& item = items[i];
-        wxASSERT_MSG( item.level < 128, wxT("nested index entries too deep") );
+        wxASSERT_MSG( item.level < 128, "nested index entries too deep" );
 
         if (history[item.level] &&
             history[item.level]->items[0]->name == item.name)
@@ -647,7 +647,7 @@ void wxHtmlHelpWindow::AddToolbarButtons(wxToolBar *toolBar, unsigned int style)
                    wupBitmap.IsOk() && wdownBitmap.IsOk() &&
                    wopenBitmap.IsOk() && wprintBitmap.IsOk() &&
                    woptionsBitmap.IsOk()),
-                  wxT("One or more HTML help frame toolbar bitmap could not be loaded.")) ;
+                  "One or more HTML help frame toolbar bitmap could not be loaded.") ;
 
 
     toolBar->AddTool(wxID_HTML_PANEL, "", wpanelBitmap, "Show/hide navigation panel");
@@ -898,7 +898,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
         switch ( mode )
         {
             default:
-                wxFAIL_MSG( wxT("unknown help search mode") );
+                wxFAIL_MSG( "unknown help search mode" );
                 [[fallthrough]];
 
             case wxHelpSearchMode::All:
@@ -1072,25 +1072,25 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
     if (!path.empty())
     {
         oldpath = cfg->GetPath();
-        cfg->SetPath(wxT("/") + path);
+        cfg->SetPath("/" + path);
     }
 
-    m_Cfg.navig_on = cfg->Read(wxT("hcNavigPanel"), m_Cfg.navig_on) != 0;
-    m_Cfg.sashpos = cfg->Read(wxT("hcSashPos"), m_Cfg.sashpos);
-    m_Cfg.x = cfg->Read(wxT("hcX"), m_Cfg.x);
-    m_Cfg.y = cfg->Read(wxT("hcY"), m_Cfg.y);
-    m_Cfg.w = cfg->Read(wxT("hcW"), m_Cfg.w);
-    m_Cfg.h = cfg->Read(wxT("hcH"), m_Cfg.h);
+    m_Cfg.navig_on = cfg->Read("hcNavigPanel", m_Cfg.navig_on) != 0;
+    m_Cfg.sashpos = cfg->Read("hcSashPos", m_Cfg.sashpos);
+    m_Cfg.x = cfg->Read("hcX", m_Cfg.x);
+    m_Cfg.y = cfg->Read("hcY", m_Cfg.y);
+    m_Cfg.w = cfg->Read("hcW", m_Cfg.w);
+    m_Cfg.h = cfg->Read("hcH", m_Cfg.h);
 
-    m_FixedFace = cfg->Read(wxT("hcFixedFace"), m_FixedFace);
-    m_NormalFace = cfg->Read(wxT("hcNormalFace"), m_NormalFace);
-    m_FontSize = cfg->Read(wxT("hcBaseFontSize"), m_FontSize);
+    m_FixedFace = cfg->Read("hcFixedFace", m_FixedFace);
+    m_NormalFace = cfg->Read("hcNormalFace", m_NormalFace);
+    m_FontSize = cfg->Read("hcBaseFontSize", m_FontSize);
 
     {
         int cnt;
         wxString val, s;
 
-        cnt = cfg->Read(wxT("hcBookmarksCnt"), 0L);
+        cnt = cfg->Read("hcBookmarksCnt", 0L);
         if (cnt != 0)
         {
             int i;
@@ -1104,11 +1104,11 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
 
             for (i = 0; i < cnt; i++)
             {
-                val.Printf(wxT("hcBookmark_%i"), i);
+                val.Printf("hcBookmark_%i", i);
                 s = cfg->Read(val);
                 m_BookmarksNames.Add(s);
                 if (m_Bookmarks) m_Bookmarks->Append(s);
-                val.Printf(wxT("hcBookmark_%i_url"), i);
+                val.Printf("hcBookmark_%i_url", i);
                 s = cfg->Read(val);
                 m_BookmarksPages.Add(s);
             }
@@ -1130,22 +1130,22 @@ void wxHtmlHelpWindow::WriteCustomization(wxConfigBase *cfg, const wxString& pat
     if (!path.empty())
     {
         oldpath = cfg->GetPath();
-        cfg->SetPath(wxT("/") + path);
+        cfg->SetPath("/" + path);
     }
 
-    cfg->Write(wxT("hcNavigPanel"), m_Cfg.navig_on);
-    cfg->Write(wxT("hcSashPos"), (long)m_Cfg.sashpos);
+    cfg->Write("hcNavigPanel", m_Cfg.navig_on);
+    cfg->Write("hcSashPos", (long)m_Cfg.sashpos);
 
     //  Don't write if iconized as this would make the window
     //  disappear next time it is shown!
-    cfg->Write(wxT("hcX"), (long)m_Cfg.x);
-    cfg->Write(wxT("hcY"), (long)m_Cfg.y);
-    cfg->Write(wxT("hcW"), (long)m_Cfg.w);
-    cfg->Write(wxT("hcH"), (long)m_Cfg.h);
+    cfg->Write("hcX", (long)m_Cfg.x);
+    cfg->Write("hcY", (long)m_Cfg.y);
+    cfg->Write("hcW", (long)m_Cfg.w);
+    cfg->Write("hcH", (long)m_Cfg.h);
 
-    cfg->Write(wxT("hcFixedFace"), m_FixedFace);
-    cfg->Write(wxT("hcNormalFace"), m_NormalFace);
-    cfg->Write(wxT("hcBaseFontSize"), (long)m_FontSize);
+    cfg->Write("hcFixedFace", m_FixedFace);
+    cfg->Write("hcNormalFace", m_NormalFace);
+    cfg->Write("hcBaseFontSize", (long)m_FontSize);
 
     if (m_Bookmarks)
     {
@@ -1153,12 +1153,12 @@ void wxHtmlHelpWindow::WriteCustomization(wxConfigBase *cfg, const wxString& pat
         int cnt = m_BookmarksNames.GetCount();
         wxString val;
 
-        cfg->Write(wxT("hcBookmarksCnt"), (long)cnt);
+        cfg->Write("hcBookmarksCnt", (long)cnt);
         for (i = 0; i < cnt; i++)
         {
-            val.Printf(wxT("hcBookmark_%i"), i);
+            val.Printf("hcBookmark_%i", i);
             cfg->Write(val, m_BookmarksNames[i]);
-            val.Printf(wxT("hcBookmark_%i_url"), i);
+            val.Printf("hcBookmark_%i_url", i);
             cfg->Write(val, m_BookmarksPages[i]);
         }
     }
@@ -1249,25 +1249,25 @@ public:
 
         wxString content(_("font size"));
 
-        content = wxT("<font size=-2>") + content + wxT(" -2</font><br>")
-                  wxT("<font size=-1>") + content + wxT(" -1</font><br>")
-                  wxT("<font size=+0>") + content + wxT(" +0</font><br>")
-                  wxT("<font size=+1>") + content + wxT(" +1</font><br>")
-                  wxT("<font size=+2>") + content + wxT(" +2</font><br>")
-                  wxT("<font size=+3>") + content + wxT(" +3</font><br>")
-                  wxT("<font size=+4>") + content + wxT(" +4</font><br>") ;
+        content = "<font size=-2>" + content + " -2</font><br>"
+                  "<font size=-1>" + content + " -1</font><br>"
+                  "<font size=+0>" + content + " +0</font><br>"
+                  "<font size=+1>" + content + " +1</font><br>"
+                  "<font size=+2>" + content + " +2</font><br>"
+                  "<font size=+3>" + content + " +3</font><br>"
+                  "<font size=+4>" + content + " +4</font><br>";
 
-        content = wxString( wxT("<html><body><table><tr><td>") ) +
+        content = wxString( "<html><body><table><tr><td>" ) +
                   _("Normal face<br>and <u>underlined</u>. ") +
                   _("<i>Italic face.</i> ") +
                   _("<b>Bold face.</b> ") +
                   _("<b><i>Bold italic face.</i></b><br>") +
                   content +
-                  wxString( wxT("</td><td><tt>") ) +
+                  wxString( "</td><td><tt>" ) +
                   _("Fixed size face.<br> <b>bold</b> <i>italic</i> ") +
                   _("<b><i>bold italic <u>underlined</u></i></b><br>") +
                   content +
-                  wxT("</tt></td></tr></table></body></html>");
+                  "</tt></td></tr></table></body></html>";
 
         TestWin->SetPage( content );
     }
@@ -1516,7 +1516,7 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
                     m_BookmarksNames.RemoveAt(pos);
                     m_BookmarksPages.RemoveAt(pos);
                     pos = m_Bookmarks->GetSelection();
-                    wxASSERT_MSG( pos != wxNOT_FOUND , wxT("Unknown bookmark position") ) ;
+                    wxASSERT_MSG( pos != wxNOT_FOUND , "Unknown bookmark position" ) ;
                     m_Bookmarks->Delete((unsigned int)pos);
                 }
             }
@@ -1559,11 +1559,11 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
                 if (!s.empty())
                 {
                     wxString ext = s.Right(4).Lower();
-                    if (ext == wxT(".zip") || ext == wxT(".htb") ||
+                    if (ext == ".zip" || ext == ".htb" ||
 #if wxUSE_LIBMSPACK
-                        ext == wxT(".chm") ||
+                        ext == ".chm" ||
 #endif
-                        ext == wxT(".hhp"))
+                        ext == ".hhp")
                     {
                         wxBusyCursor bcur;
                         m_Data->AddBook(s);

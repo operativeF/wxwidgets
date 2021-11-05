@@ -33,7 +33,7 @@ wxConnectionBase::wxConnectionBase(const wxConnectionBase& copy)
 
 {
   // copy constructor would require ref-counted pointer to buffer
-  wxFAIL_MSG( wxT("Copy constructor of wxConnectionBase not implemented") );
+  wxFAIL_MSG( "Copy constructor of wxConnectionBase not implemented" );
 }
 
 

@@ -43,7 +43,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr wxChar FILECONF_TRACE_MASK[] = wxT("fileconf");
+constexpr char FILECONF_TRACE_MASK[] = "fileconf";
 
 // ----------------------------------------------------------------------------
 // global functions declarations
@@ -287,7 +287,7 @@ wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
                            const wxString& strLocal, const wxString& strGlobal,
                            unsigned int style,
                            const wxMBConv& conv)
-            : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
+            : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName.ToStdString(),
                            vendorName,
                            strLocal, strGlobal,
                            style),
@@ -865,7 +865,7 @@ bool wxFileConfig::DoReadLong(const wxString& key, long *pl) const
 
 bool wxFileConfig::DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const
 {
-    wxCHECK_MSG( buf, false, wxT("NULL buffer") );
+    wxCHECK_MSG( buf, false, "NULL buffer" );
 
     wxString str;
     if ( !Read(key, &str) )
@@ -883,7 +883,7 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
     wxString                strName = path.Name();
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("  Writing String '%s' = '%s' to Group '%s'"),
+                "  Writing String '%s' = '%s' to Group '%s'",
                 strName.c_str(),
                 szValue.c_str(),
                 GetPath().c_str() );
@@ -892,12 +892,12 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
     {
             // setting the value of a group is an error
 
-        wxASSERT_MSG( szValue.empty(), wxT("can't set value of a group!") );
+        wxASSERT_MSG( szValue.empty(), "can't set value of a group!" );
 
             // ... except if it's empty in which case it's a way to force it's creation
 
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("  Creating group %s"),
+                    "  Creating group %s",
                     m_pCurrentGroup->Name().c_str() );
 
         SetDirty();
@@ -921,13 +921,13 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
         if ( pEntry == nullptr )
         {
             wxLogTrace( FILECONF_TRACE_MASK,
-                        wxT("  Adding Entry %s"),
+                        "  Adding Entry %s",
                         strName.c_str() );
             pEntry = m_pCurrentGroup->AddEntry(strName);
         }
 
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("  Setting value %s"),
+                    "  Setting value %s",
                     szValue.c_str() );
         pEntry->SetValue(szValue);
 
@@ -939,7 +939,7 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
 
 bool wxFileConfig::DoWriteLong(const wxString& key, long lValue)
 {
-  return Write(key, wxString::Format(wxT("%ld"), lValue));
+  return Write(key, wxString::Format("%ld", lValue));
 }
 
 #if wxUSE_BASE64
@@ -1027,7 +1027,7 @@ bool wxFileConfig::RenameEntry(const wxString& oldName,
                                const wxString& newName)
 {
     wxASSERT_MSG( oldName.find(wxCONFIG_PATH_SEPARATOR) == wxString::npos,
-                   wxT("RenameEntry(): paths are not supported") );
+                   "RenameEntry(): paths are not supported" );
 
     // check that the entry exists
     wxFileConfigEntry *oldEntry = m_pCurrentGroup->FindEntry(oldName);
@@ -1086,7 +1086,7 @@ bool wxFileConfig::DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso)
   if ( bGroupIfEmptyAlso && m_pCurrentGroup->IsEmpty() ) {
     if ( m_pCurrentGroup != m_pRootGroup ) {
       wxFileConfigGroup *pGroup = m_pCurrentGroup;
-      SetPath(wxT(".."));  // changes m_pCurrentGroup!
+      SetPath("..");  // changes m_pCurrentGroup!
       m_pCurrentGroup->DeleteSubgroupByName(pGroup->Name());
     }
     //else: never delete the root group
@@ -1189,14 +1189,14 @@ bool wxFileConfig::DeleteAll()
 wxFileConfigLineList *wxFileConfig::LineListAppend(const wxString& str)
 {
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("    ** Adding Line '%s'"),
+                "    ** Adding Line '%s'",
                 str.c_str() );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1217,11 +1217,11 @@ wxFileConfigLineList *wxFileConfig::LineListAppend(const wxString& str)
     m_linesTail = pLine;
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1233,16 +1233,16 @@ wxFileConfigLineList *wxFileConfig::LineListInsert(const wxString& str,
                                                    wxFileConfigLineList *pLine)
 {
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("    ** Inserting Line '%s' after '%s'"),
+                "    ** Inserting Line '%s' after '%s'",
                 str.c_str(),
                 ((pLine) ? (const wxChar*)pLine->Text().c_str()
                          : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1268,11 +1268,11 @@ wxFileConfigLineList *wxFileConfig::LineListInsert(const wxString& str,
     }
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1282,14 +1282,14 @@ wxFileConfigLineList *wxFileConfig::LineListInsert(const wxString& str,
 void wxFileConfig::LineListRemove(wxFileConfigLineList *pLine)
 {
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("    ** Removing Line '%s'"),
+                "    ** Removing Line '%s'",
                 pLine->Text().c_str() );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1311,11 +1311,11 @@ void wxFileConfig::LineListRemove(wxFileConfigLineList *pLine)
         pNext->SetPrev(pPrev);
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        head: %s"),
+                "        head: %s",
                 ((m_linesHead) ? (const wxChar*)m_linesHead->Text().c_str()
                                : wxString{}) );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("        tail: %s"),
+                "        tail: %s",
                 ((m_linesTail) ? (const wxChar*)m_linesTail->Text().c_str()
                                : wxString{}) );
 
@@ -1368,7 +1368,7 @@ void wxFileConfigGroup::SetLine(wxFileConfigLineList *pLine)
     // for a normal (i.e. not root) group this method shouldn't be called twice
     // unless we are resetting the line
     wxASSERT_MSG( !m_pParent || !m_pLine || !pLine,
-                   wxT("changing line for a non-root group?") );
+                   "changing line for a non-root group?" );
 
     m_pLine = pLine;
 }
@@ -1410,13 +1410,13 @@ void wxFileConfigGroup::SetLine(wxFileConfigLineList *pLine)
 wxFileConfigLineList *wxFileConfigGroup::GetGroupLine()
 {
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("  GetGroupLine() for Group '%s'"),
+                "  GetGroupLine() for Group '%s'",
                 Name().c_str() );
 
     if ( !m_pLine )
     {
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("    Getting Line item pointer") );
+                    "    Getting Line item pointer" );
 
         wxFileConfigGroup   *pParent = Parent();
 
@@ -1424,15 +1424,15 @@ wxFileConfigLineList *wxFileConfigGroup::GetGroupLine()
         if ( pParent )
         {
             wxLogTrace( FILECONF_TRACE_MASK,
-                        wxT("    checking parent '%s'"),
+                        "    checking parent '%s'",
                         pParent->Name().c_str() );
 
             wxString    strFullName;
 
             // add 1 to the name because we don't want to start with '/'
-            strFullName << wxT("[")
+            strFullName << "["
                         << FilterOutEntryName(GetFullName().c_str() + 1)
-                        << wxT("]");
+                        << "]";
             m_pLine = m_pConfig->LineListInsert(strFullName,
                                                 pParent->GetLastGroupLine());
             pParent->SetLastGroup(this);  // we're surely after all the others
@@ -1455,7 +1455,7 @@ wxFileConfigLineList *wxFileConfigGroup::GetLastGroupLine()
     {
         wxFileConfigLineList *pLine = m_pLastGroup->GetLastGroupLine();
 
-        wxASSERT_MSG( pLine, wxT("last group must have !NULL associated line") );
+        wxASSERT_MSG( pLine, "last group must have !NULL associated line" );
 
         return pLine;
     }
@@ -1470,14 +1470,14 @@ wxFileConfigLineList *wxFileConfigGroup::GetLastGroupLine()
 wxFileConfigLineList *wxFileConfigGroup::GetLastEntryLine()
 {
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("  GetLastEntryLine() for Group '%s'"),
+                "  GetLastEntryLine() for Group '%s'",
                 Name().c_str() );
 
     if ( m_pLastEntry )
     {
         wxFileConfigLineList    *pLine = m_pLastEntry->GetLine();
 
-        wxASSERT_MSG( pLine, wxT("last entry must have !NULL associated line") );
+        wxASSERT_MSG( pLine, "last entry must have !NULL associated line" );
 
         return pLine;
     }
@@ -1495,7 +1495,7 @@ void wxFileConfigGroup::SetLastEntry(wxFileConfigEntry *pEntry)
         // the only situation in which a group without its own line can have
         // an entry is when the first entry is added to the initially empty
         // root pseudo-group
-        wxASSERT_MSG( !m_pParent, wxT("unexpected for non root group") );
+        wxASSERT_MSG( !m_pParent, "unexpected for non root group" );
 
         // let the group know that it does have a line in the file now
         m_pLine = pEntry->GetLine();
@@ -1510,10 +1510,10 @@ void wxFileConfigGroup::UpdateGroupAndSubgroupsLines()
 {
     // update the line of this group
     wxFileConfigLineList *line = GetGroupLine();
-    wxCHECK_RET( line, wxT("a non root group must have a corresponding line!") );
+    wxCHECK_RET( line, "a non root group must have a corresponding line!" );
 
     // +1: skip the leading '/'
-    line->SetText(wxString::Format(wxT("[%s]"), GetFullName().c_str() + 1));
+    line->SetText(wxString::Format("[%s]", GetFullName().c_str() + 1));
 
 
     // also update all subgroups as they have this groups name in their lines
@@ -1526,7 +1526,7 @@ void wxFileConfigGroup::UpdateGroupAndSubgroupsLines()
 
 void wxFileConfigGroup::Rename(const wxString& newName)
 {
-    wxCHECK_RET( m_pParent, wxT("the root group can't be renamed") );
+    wxCHECK_RET( m_pParent, "the root group can't be renamed" );
 
     if ( newName == m_strName )
         return;
@@ -1663,20 +1663,20 @@ bool wxFileConfigGroup::DeleteSubgroupByName(const wxString& name)
 // other data structures.
 bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
 {
-    wxCHECK_MSG( pGroup, false, wxT("deleting non existing group?") );
+    wxCHECK_MSG( pGroup, false, "deleting non existing group?" );
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("Deleting group '%s' from '%s'"),
+                "Deleting group '%s' from '%s'",
                 pGroup->Name().c_str(),
                 Name().c_str() );
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("  (m_pLine) = prev: %p, this %p, next %p"),
+                "  (m_pLine) = prev: %p, this %p, next %p",
                 m_pLine ? static_cast<void*>(m_pLine->Prev()) : nullptr,
                 m_pLine,
                 m_pLine ? static_cast<void*>(m_pLine->Next()) : nullptr );
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("  text: '%s'"),
+                "  text: '%s'",
                 m_pLine ? (const wxChar*)m_pLine->Text().c_str()
                         : wxString{} );
 
@@ -1684,7 +1684,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     size_t nCount = pGroup->m_aEntries.GetCount();
 
     wxLogTrace(FILECONF_TRACE_MASK,
-               wxT("Removing %lu entries"), (unsigned long)nCount );
+               "Removing %lu entries", (unsigned long)nCount );
 
     for ( size_t nEntry = 0; nEntry < nCount; nEntry++ )
     {
@@ -1693,7 +1693,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
         if ( pLine )
         {
             wxLogTrace( FILECONF_TRACE_MASK,
-                        wxT("    '%s'"),
+                        "    '%s'",
                         pLine->Text().c_str() );
             m_pConfig->LineListRemove(pLine);
         }
@@ -1703,7 +1703,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     nCount = pGroup->m_aSubgroups.GetCount();
 
     wxLogTrace( FILECONF_TRACE_MASK,
-                wxT("Removing %lu subgroups"), (unsigned long)nCount );
+                "Removing %lu subgroups", (unsigned long)nCount );
 
     for ( size_t nGroup = 0; nGroup < nCount; nGroup++ )
     {
@@ -1715,11 +1715,11 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     if ( pLine )
     {
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("  Removing line for group '%s' : '%s'"),
+                    "  Removing line for group '%s' : '%s'",
                     pGroup->Name().c_str(),
                     pLine->Text().c_str() );
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("  Removing from group '%s' : '%s'"),
+                    "  Removing from group '%s' : '%s'",
                     Name().c_str(),
                     ((m_pLine) ? (const wxChar*)m_pLine->Text().c_str()
                                : wxString{}) );
@@ -1729,7 +1729,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
         if ( pGroup == m_pLastGroup )
         {
             wxLogTrace( FILECONF_TRACE_MASK,
-                        wxT("  Removing last group") );
+                        "  Removing last group" );
 
             // our last entry is being deleted, so find the last one which
             // stays by going back until we find a subgroup or reach the
@@ -1763,7 +1763,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     else
     {
         wxLogTrace( FILECONF_TRACE_MASK,
-                    wxT("  No line entry for Group '%s'?"),
+                    "  No line entry for Group '%s'?",
                     pGroup->Name().c_str() );
     }
 
@@ -2099,7 +2099,7 @@ static wxString FilterOutEntryName(const wxString& str)
     //
     // NB: note that wxCONFIG_IMMUTABLE_PREFIX and wxCONFIG_PATH_SEPARATOR
     //     should *not* be quoted
-    if ( !wxIsalnum(c) && !wxStrchr(wxT("@_/-!.*%()"), c) )
+    if ( !wxIsalnum(c) && !wxStrchr(wxT("@_/-!.*%()"), c) ) // FIXME: Use narrow string.
     {
       strResult += wxT('\\');
     }

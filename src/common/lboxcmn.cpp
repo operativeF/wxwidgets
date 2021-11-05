@@ -68,15 +68,15 @@ wxEVENT_PROPERTY( Select, wxEVT_LISTBOX, wxCommandEvent )
 wxEVENT_PROPERTY( DoubleClick, wxEVT_LISTBOX_DCLICK, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 wxPROPERTY_COLLECTION( Choices, wxArrayString, wxString, AppendString, \
-                      GetStrings, 0 /*flags*/, wxT("Helpstring"), wxT("group") )
+                      GetStrings, 0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Selection, int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 
 wxPROPERTY_FLAGS( WindowStyle, wxListBoxStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxListBox)
@@ -299,7 +299,7 @@ void wxListBoxBase::SetFirstItem(std::string_view s)
 {
     int n = FindString(s);
 
-    wxCHECK_RET( n != wxNOT_FOUND, wxT("invalid string in wxListBox::SetFirstItem") );
+    wxCHECK_RET( n != wxNOT_FOUND, "invalid string in wxListBox::SetFirstItem" );
 
     DoSetFirstItem(n);
 }

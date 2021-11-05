@@ -44,12 +44,12 @@ wxToolbookXmlHandler::wxToolbookXmlHandler()
 
 wxObject *wxToolbookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("toolbookpage"))
+    if (m_class == "toolbookpage")
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -63,9 +63,9 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
             {
                 int imgId = -1;
 
-                if ( HasParam(wxT("bitmap")) )
+                if ( HasParam("bitmap") )
                 {
-                    wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+                    wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
                     wxImageList *imgList = m_toolbook->GetImageList();
                     if ( imgList == nullptr )
                     {
@@ -74,11 +74,11 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
                     }
                     imgId = imgList->Add(bmp);
                 }
-                else if ( HasParam(wxT("image")) )
+                else if ( HasParam("image") )
                 {
                     if ( m_toolbook->GetImageList() )
                     {
-                        imgId = (int)GetLong(wxT("image"));
+                        imgId = (int)GetLong("image");
                     }
                     else // image without image list?
                     {
@@ -87,8 +87,8 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
                     }
                 }
 
-                m_toolbook->AddPage(wnd, GetText(wxT("label")),
-                        GetBool(wxT("selected")), imgId );
+                m_toolbook->AddPage(wnd, GetText("label"),
+                        GetBool("selected"), imgId );
             }
             else
             {
@@ -110,7 +110,7 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
         nb->Create( m_parentAsWindow,
                     GetID(),
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style")),
+                    GetStyle("style"),
                     GetName() );
 
         wxImageList *imagelist = GetImageList();
@@ -131,8 +131,8 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
 
 bool wxToolbookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxToolbook"))) ||
-            (m_isInside && IsOfClass(node, wxT("toolbookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxToolbook")) ||
+            (m_isInside && IsOfClass(node, "toolbookpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_TOOLBOOK

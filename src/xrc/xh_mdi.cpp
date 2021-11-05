@@ -53,15 +53,15 @@ wxMdiXmlHandler::wxMdiXmlHandler()
 
 wxWindow *wxMdiXmlHandler::CreateFrame()
 {
-    if (m_class == wxT("wxMDIParentFrame"))
+    if (m_class == "wxMDIParentFrame")
     {
         XRC_MAKE_INSTANCE(frame, wxMDIParentFrame)
 
         frame->Create(m_parentAsWindow,
                       GetID(),
-                      GetText(wxT("title")),
+                      GetText("title"),
                       wxDefaultPosition, wxDefaultSize,
-                      GetStyle(wxT("style"),
+                      GetStyle("style",
                                wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL),
                       GetName());
         return frame;
@@ -80,9 +80,9 @@ wxWindow *wxMdiXmlHandler::CreateFrame()
 
         frame->Create(mdiParent,
                       GetID(),
-                      GetText(wxT("title")),
+                      GetText("title"),
                       wxDefaultPosition, wxDefaultSize,
-                      GetStyle(wxT("style"), wxDEFAULT_FRAME_STYLE),
+                      GetStyle("style", wxDEFAULT_FRAME_STYLE),
                       GetName());
 
         return frame;
@@ -93,22 +93,22 @@ wxObject *wxMdiXmlHandler::DoCreateResource()
 {
     wxWindow *frame = CreateFrame();
 
-    if (HasParam(wxT("size")))
+    if (HasParam("size"))
         frame->SetClientSize(GetSize());
-    if (HasParam(wxT("pos")))
+    if (HasParam("pos"))
         frame->Move(GetPosition());
-    if (HasParam(wxT("icon")))
+    if (HasParam("icon"))
     {
         wxFrame* f = wxDynamicCast(frame, wxFrame);
         if (f)
-            f->SetIcons(GetIconBundle(wxT("icon"), wxART_FRAME_ICON));
+            f->SetIcons(GetIconBundle("icon", wxART_FRAME_ICON));
     }
 
     SetupWindow(frame);
 
     CreateChildren(frame);
 
-    if (GetBool(wxT("centered"), false))
+    if (GetBool("centered", false))
         frame->Centre();
 
     return frame;
@@ -116,8 +116,8 @@ wxObject *wxMdiXmlHandler::DoCreateResource()
 
 bool wxMdiXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxMDIParentFrame")) ||
-            IsOfClass(node, wxT("wxMDIChildFrame")));
+    return (IsOfClass(node, "wxMDIParentFrame") ||
+            IsOfClass(node, "wxMDIChildFrame"));
 }
 
 #endif // wxUSE_XRC && wxUSE_MDI

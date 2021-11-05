@@ -30,7 +30,7 @@ wxObject *wxGridXmlHandler::DoCreateResource()
     grid->Create(m_parentAsWindow,
                    GetID(),
                    GetPosition(), GetSize(),
-                   GetStyle(wxT("style")),
+                   GetStyle("style"),
                    GetName());
 
     SetupWindow( grid);
@@ -40,7 +40,7 @@ wxObject *wxGridXmlHandler::DoCreateResource()
 
 bool wxGridXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxGrid"));
+    return IsOfClass(node, "wxGrid");
 }
 
 #endif // wxUSE_XRC && wxUSE_GRID

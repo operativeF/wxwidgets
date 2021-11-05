@@ -128,14 +128,14 @@ public:
     bool GetOpenCommand(wxString *openCmd,
                         const wxFileType::MessageParameters& params) const
     {
-        *openCmd = GetExpandedCommand(wxT("open"), params);
+        *openCmd = GetExpandedCommand("open", params);
         return (! openCmd -> IsEmpty() );
     }
 
     bool GetPrintCommand(wxString *printCmd,
                          const wxFileType::MessageParameters& params) const
     {
-        *printCmd = GetExpandedCommand(wxT("print"), params);
+        *printCmd = GetExpandedCommand("print", params);
         return (! printCmd -> IsEmpty() );
     }
 

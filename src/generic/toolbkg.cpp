@@ -144,7 +144,7 @@ std::string wxToolbook::GetPageText(size_t n) const
 
 int wxToolbook::GetPageImage(size_t WXUNUSED(n)) const
 {
-    wxFAIL_MSG( wxT("wxToolbook::GetPageImage() not implemented") );
+    wxFAIL_MSG( "wxToolbook::GetPageImage() not implemented" );
 
     return wxNOT_FOUND;
 }

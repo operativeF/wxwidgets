@@ -76,7 +76,7 @@ public:
                 break;
         }
 
-        wxFAIL_MSG(wxS("invalid parameter"));
+        wxFAIL_MSG("invalid parameter");
         return false;
     }
 

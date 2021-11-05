@@ -50,7 +50,7 @@ bool wxRichTextHTMLHandler::CanHandle(const std::string& filename) const
     wxString path, file, ext;
     wxFileName::SplitPath(filename, & path, & file, & ext);
 
-    return (ext.Lower() == wxT("html") || ext.Lower() == wxT("htm"));
+    return (ext.Lower() == "html") || ext.Lower() == wxT("htm");
 }
 
 
@@ -95,7 +95,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
         wxRichTextAttr currentCharStyle = buffer->GetAttributes();
 
         if ((GetFlags() & wxRICHTEXT_HANDLER_NO_HEADER_FOOTER) == 0)
-            str << wxT("<html><head></head><body>\n");
+            str << "<html><head></head><body>\n";
 
         OutputFont(currentParaStyle, str);
 
@@ -149,7 +149,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
 
                 EndParagraphFormatting(currentParaStyle, paraStyle, str);
 
-                str << wxT("\n");
+                str << "\n";
             }
             node = node->GetNext();
         }
@@ -157,12 +157,12 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
         CloseLists(-1, str);
 
         if (currentParaStyle.HasFont())
-            str << wxT("</font>");
+            str << "</font>";
 
         if ((GetFlags() & wxRICHTEXT_HANDLER_NO_HEADER_FOOTER) == 0)
-            str << wxT("</body></html>");
+            str << "</body></html>";
 
-        str << wxT("\n");
+        str << "\n";
     }
 
     if (customEncoding)
@@ -215,52 +215,52 @@ void wxRichTextHTMLHandler::BeginCharacterFormatting(const wxRichTextAttr& curre
     }
 
     if (thisStyle.GetFontWeight() == wxFONTWEIGHT_BOLD)
-        str << wxT("<b>");
+        str << "<b>";
     if (thisStyle.GetFontStyle() == wxFontStyle::Italic)
-        str << wxT("<i>");
+        str << "<i>";
     if (thisStyle.GetFontUnderlined())
-        str << wxT("<u>");
+        str << "<u>";
 
     if (thisStyle.HasURL())
-        str << wxT("<a href=\"") << thisStyle.GetURL() << wxT("\">");
+        str << "<a href=\"" << thisStyle.GetURL() << "\">";
 
     if (thisStyle.HasTextEffects())
     {
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
-            str << wxT("<del>");
+            str << "<del>";
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_SUPERSCRIPT)
-            str << wxT("<sup>");
+            str << "<sup>";
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_SUBSCRIPT)
-            str << wxT("<sub>");
+            str << "<sub>";
     }
 }
 
 void wxRichTextHTMLHandler::EndCharacterFormatting(const wxRichTextAttr& WXUNUSED(currentStyle), const wxRichTextAttr& thisStyle, const wxRichTextAttr& WXUNUSED(paraStyle), wxTextOutputStream& stream)
 {
     if (thisStyle.HasURL())
-        stream << wxT("</a>");
+        stream << "</a>";
 
     if (thisStyle.GetFontUnderlined())
-        stream << wxT("</u>");
+        stream << "</u>";
     if (thisStyle.GetFontStyle() == wxFontStyle::Italic)
-        stream << wxT("</i>");
+        stream << "</i>";
     if (thisStyle.GetFontWeight() == wxFONTWEIGHT_BOLD)
-        stream << wxT("</b>");
+        stream << "</b>";
 
     if (thisStyle.HasTextEffects())
     {
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
-            stream << wxT("</del>");
+            stream << "</del>";
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_SUPERSCRIPT)
-            stream << wxT("</sup>");
+            stream << "</sup>";
         if (thisStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_SUBSCRIPT)
-            stream << wxT("</sub>");
+            stream << "</sub>";
     }
 
     if (m_font)
     {
         m_font = false;
-        stream << wxT("</font>");
+        stream << "</font>";
     }
 }
 
@@ -269,7 +269,7 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
 {
     if (thisStyle.HasPageBreak())
     {
-        str << wxT("<div style=\"page-break-after:always\"></div>\n");
+        str << "<div style=\"page-break-after:always\"></div>\n";
     }
 
     if (thisStyle.HasLeftIndent() && thisStyle.GetLeftIndent() != 0)
@@ -295,12 +295,12 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
 
                 // wxHTML needs an extra <p> before a list when using <p> ... </p> in previous paragraphs.
                 // TODO: pass a flag that indicates we're using wxHTML.
-                str << wxT("<p>\n");
+                str << "<p>\n";
 
                 str << tag;
             }
 
-            str << wxT("<li> ");
+            str << "<li> ";
         }
         else
         {
@@ -342,9 +342,9 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
             }
 
             if (!styleStr.empty())
-                str << wxT(" style=\"") << styleStr << wxT("\"");
+                str << " style=\"" << styleStr << "\"";
 
-            str << wxT(">");
+            str << ">";
 
             // TODO: convert to pixels
             int indentPixels = static_cast<int>(indentLeftMM*10/4);
@@ -385,9 +385,9 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
         }
 
         if (!styleStr.empty())
-            str << wxT(" style=\"") << styleStr << wxT("\"");
+            str << " style=\"" << styleStr << "\"";
 
-        str << wxT(">");
+        str << ">";
     }
     OutputFont(thisStyle, str);
 }
@@ -396,15 +396,15 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
 void wxRichTextHTMLHandler::EndParagraphFormatting(const wxRichTextAttr& WXUNUSED(currentStyle), const wxRichTextAttr& thisStyle, wxTextOutputStream& stream)
 {
     if (thisStyle.HasFont())
-        stream << wxT("</font>");
+        stream << "</font>";
 
     if (m_inTable)
     {
-        stream << wxT("</td></tr></table></p>\n");
+        stream << "</td></tr></table></p>\n";
         m_inTable = false;
     }
     else if (!thisStyle.HasBulletStyle())
-        stream << wxT("</p>\n");
+        stream << "</p>\n";
 }
 
 /// Closes lists to level (-1 means close all)
@@ -418,9 +418,9 @@ void wxRichTextHTMLHandler::CloseLists(int level, wxTextOutputStream& str)
         if (l > level)
         {
             if (m_listTypes[i] == 0)
-                str << wxT("</ol>");
+                str << "</ol>";
             else
-                str << wxT("</ul>");
+                str << "</ul>";
             m_indents.erase(std::begin(m_indents) + i);
             m_listTypes.erase(std::begin(m_listTypes) + i);
         }
@@ -438,7 +438,7 @@ void wxRichTextHTMLHandler::OutputFont(const wxRichTextAttr& style, wxTextOutput
         stream << fmt::format("<font face=\"{:s}\" size=\"{:ld}\"", style.GetFontFaceName().c_str(), PtToSize(style.GetFontSize()));
         if (style.HasTextColour())
             stream << fmt::format(" color=\"{:s}\"", style.GetTextColour().GetAsString(wxC2S_HTML_SYNTAX).c_str());
-        stream << wxT(" >");
+        stream << " >";
     }
 }
 
@@ -491,7 +491,7 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
 {
     wxTextOutputStream str(stream);
 
-    str << wxT("<img src=\"");
+    str << "<img src=\"";
 
 #if wxUSE_FILESYSTEM
     if (GetFlags() & wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY)
@@ -515,11 +515,11 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
 
                 m_imageLocations.push_back(tempFilename);
 
-                str << wxT("memory:") << tempFilename;
+                str << "memory:" << tempFilename;
             }
         }
         else
-            str << wxT("memory:?");
+            str << "memory:?";
 
         sm_fileCounter ++;
     }
@@ -548,16 +548,16 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
             str << wxFileSystem::FileNameToURL(wxString(tempFilename));
         }
         else
-            str << wxT("file:?");
+            str << "file:?";
 
         sm_fileCounter ++;
     }
     else // if (GetFlags() & wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64) // this is implied
 #endif
     {
-        str << wxT("data:");
+        str << "data:";
         str << GetMimeType(image->GetImageBlock().GetImageType());
-        str << wxT(";base64,");
+        str << ";base64,";
 #if 0
         if (image->GetImage().IsOk() && !image->GetImageBlock().GetData())
             image->MakeBlock();
@@ -571,7 +571,7 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
         }
     }
 
-    str << wxT("\" />");
+    str << "\" />";
 }
 
 long wxRichTextHTMLHandler::PtToSize(long size)
@@ -592,22 +592,23 @@ std::string wxRichTextHTMLHandler::SymbolicIndent(long indent)
     return in;
 }
 
+// FIXME: Convert to narrow string.
 const wxChar* wxRichTextHTMLHandler::GetMimeType(wxBitmapType imageType)
 {
     switch(imageType)
     {
     case wxBitmapType::BMP:
-        return wxT("image/bmp");
+        return L"image/bmp";
     case wxBitmapType::TIFF:
-        return wxT("image/tiff");
+        return L"image/tiff";
     case wxBitmapType::GIF:
-        return wxT("image/gif");
+        return L"image/gif";
     case wxBitmapType::PNG:
-        return wxT("image/png");
+        return L"image/png";
     case wxBitmapType::JPEG:
-        return wxT("image/jpeg");
+        return L"image/jpeg";
     default:
-        return wxT("image/unknown");
+        return L"image/unknown";
     }
 }
 
@@ -618,7 +619,7 @@ wxChar* wxRichTextHTMLHandler::b64enc( unsigned char* input, size_t in_len )
     // otherwise encoder will fail
     // hmmm.. Does wxT macro define a char as 16 bit value
     // when compiling with UNICODE option?
-    static constexpr wxChar enc64[] = wxT("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+    static constexpr wxChar enc64[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     wxChar* output = new wxChar[4*((in_len+2)/3)+1];
     wxChar* p = output;
 

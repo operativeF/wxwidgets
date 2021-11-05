@@ -31,14 +31,14 @@ wxObject *wxFontPickerCtrlXmlHandler::DoCreateResource()
    XRC_MAKE_INSTANCE(picker, wxFontPickerCtrl)
 
     wxFont f = *wxNORMAL_FONT;
-    if (HasParam(wxT("value")))
-        f = GetFont(wxT("value"));
+    if (HasParam("value"))
+        f = GetFont("value");
 
    picker->Create(m_parentAsWindow,
                   GetID(),
                   f,
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxFNTP_DEFAULT_STYLE),
+                  GetStyle("style", wxFNTP_DEFAULT_STYLE),
                   wxDefaultValidator,
                   GetName());
 
@@ -49,7 +49,7 @@ wxObject *wxFontPickerCtrlXmlHandler::DoCreateResource()
 
 bool wxFontPickerCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxFontPickerCtrl"));
+    return IsOfClass(node, "wxFontPickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_FONTPICKERCTRL

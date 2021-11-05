@@ -39,14 +39,14 @@ wxObject *wxStaticTextXmlHandler::DoCreateResource()
 
     text->Create(m_parentAsWindow,
                  GetID(),
-                 GetText(wxT("label")),
+                 GetText("label"),
                  GetPosition(), GetSize(),
                  GetStyle(),
                  GetName());
 
     SetupWindow(text);
 
-    long wrap = GetDimension(wxT("wrap"), -1);
+    long wrap = GetDimension("wrap", -1);
     if (wrap != -1)
         text->Wrap(wrap);
 
@@ -55,7 +55,7 @@ wxObject *wxStaticTextXmlHandler::DoCreateResource()
 
 bool wxStaticTextXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxStaticText"));
+    return IsOfClass(node, "wxStaticText");
 }
 
 #endif // wxUSE_XRC && wxUSE_STATTEXT

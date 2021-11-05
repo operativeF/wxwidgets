@@ -680,7 +680,7 @@ int wxRibbonMSWArtProvider::GetMetric(int id) const
         case wxRIBBON_ART_GALLERY_BITMAP_PADDING_BOTTOM_SIZE:
             return m_gallery_bitmap_padding_bottom_size;
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 
@@ -728,7 +728,7 @@ void wxRibbonMSWArtProvider::SetMetric(int id, int new_val)
             m_gallery_bitmap_padding_bottom_size = new_val;
             break;
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 }
@@ -747,7 +747,7 @@ void wxRibbonMSWArtProvider::SetFont(int id, const wxFont& font)
             m_panel_label_font = font;
             break;
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 }
@@ -763,7 +763,7 @@ wxFont wxRibbonMSWArtProvider::GetFont(int id) const
         case wxRIBBON_ART_PANEL_LABEL_FONT:
             return m_panel_label_font;
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 
@@ -962,7 +962,7 @@ wxColour wxRibbonMSWArtProvider::GetColour(int id) const
         case wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_GRADIENT_COLOUR:
             return m_tool_active_background_gradient_colour;
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 
@@ -1309,7 +1309,7 @@ void wxRibbonMSWArtProvider::SetColour(int id, const wxColor& colour)
             m_tool_active_background_gradient_colour = colour;
             break;        
         default:
-            wxFAIL_MSG(wxT("Invalid Metric Ordinal"));
+            wxFAIL_MSG("Invalid Metric Ordinal");
             break;
     }
 }

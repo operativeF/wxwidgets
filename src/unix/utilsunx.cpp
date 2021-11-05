@@ -222,7 +222,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *rc, unsigned int flags)
 
             default:
                 // this goes against Unix98 docs so log it
-                wxLogDebug(wxT("unexpected kill(2) return value %d"), err);
+                wxLogDebug("unexpected kill(2) return value %d", err);
 
                 // something else...
                 *rc = wxKILL_ERROR;
@@ -257,7 +257,7 @@ bool wxShutdown(unsigned int flags)
             return false;
 
         default:
-            wxFAIL_MSG( wxT("unknown wxShutdown() flag") );
+            wxFAIL_MSG( "unknown wxShutdown() flag" );
             return false;
     }
 
@@ -298,7 +298,7 @@ bool wxPipeInputStream::CanRead() const
             return false;
 
         default:
-            wxFAIL_MSG(wxT("unexpected select() return value"));
+            wxFAIL_MSG("unexpected select() return value");
             [[fallthrough]];
 
         case 1:
@@ -360,12 +360,12 @@ static wxString wxMakeShellCommand(const wxString& command)
     if ( !command )
     {
         // just an interactive shell
-        cmd = wxT("xterm");
+        cmd = "xterm";
     }
     else
     {
         // execute command in a shell
-        cmd << wxT("/bin/sh -c '") << command << wxT('\'');
+        cmd << "/bin/sh -c '" << command << wxT('\'');
     }
 
     return cmd;
@@ -378,7 +378,7 @@ bool wxShell(const wxString& command)
 
 bool wxShell(const wxString& command, wxArrayString& output)
 {
-    wxCHECK_MSG( !command.empty(), false, wxT("can't exec shell non interactively") );
+    wxCHECK_MSG( !command.empty(), false, "can't exec shell non interactively" );
 
     return wxExecute(wxMakeShellCommand(command), output);
 }
@@ -479,7 +479,7 @@ namespace
 int BlockUntilChildExit(wxExecuteData& execData)
 {
     wxCHECK_MSG( wxTheApp, -1,
-                    wxS("Can't block until child exit without wxTheApp") );
+                    "Can't block until child exit without wxTheApp" );
 
 #if wxUSE_SELECT_DISPATCHER
 
@@ -538,7 +538,7 @@ int BlockUntilChildExit(wxExecuteData& execData)
 
     return execData.m_exitcode;
 #else // !wxUSE_SELECT_DISPATCHER
-    wxFAIL_MSG( wxS("Can't block until child exit without wxSelectDispatcher") );
+    wxFAIL_MSG( "Can't block until child exit without wxSelectDispatcher" );
 
     return -1;
 #endif // wxUSE_SELECT_DISPATCHER/!wxUSE_SELECT_DISPATCHER
@@ -557,7 +557,7 @@ long wxExecute(const char* const* argv, unsigned int flags, wxProcess* process,
     // about "ERROR_RETURN_CODE value may be clobbered by fork()"
     #define ERROR_RETURN_CODE ((flags & wxEXEC_SYNC) ? -1 : 0)
 
-    wxCHECK_MSG( *argv, ERROR_RETURN_CODE, wxT("can't exec empty command") );
+    wxCHECK_MSG( *argv, ERROR_RETURN_CODE, "can't exec empty command" );
 
 #if wxUSE_THREADS
     // fork() doesn't mix well with POSIX threads: on many systems the program
@@ -566,7 +566,7 @@ long wxExecute(const char* const* argv, unsigned int flags, wxProcess* process,
     // don't know what yet, so for now just warn the user (this is the least we
     // can do) about it
     wxASSERT_MSG( wxThread::IsMain(),
-                    wxT("wxExecute() can be called only from the main thread") );
+                    "wxExecute() can be called only from the main thread" );
 #endif // wxUSE_THREADS
     pid_t pid;
 #if defined(__DARWIN__) && !defined(__WXOSX_IPHONE__)
@@ -855,7 +855,7 @@ const wxChar* wxGetHomeDir( wxString *home  )
     *home = wxGetUserHome();
     wxString tmp;
     if ( home->empty() )
-        *home = wxT("/");
+        *home = "/";
 #ifdef __VMS
     tmp = *home;
     if ( tmp.Last() != wxT(']'))
@@ -872,13 +872,13 @@ wxString wxGetUserHome( const wxString &user )
     {
         wxChar *ptr;
 
-        if ((ptr = wxGetenv(wxT("HOME"))) != NULL)
+        if ((ptr = wxGetenv("HOME")) != NULL)
         {
             return ptr;
         }
 
-        if ((ptr = wxGetenv(wxT("USER"))) != NULL ||
-             (ptr = wxGetenv(wxT("LOGNAME"))) != NULL)
+        if ((ptr = wxGetenv("USER")) != NULL ||
+             (ptr = wxGetenv("LOGNAME")) != NULL)
         {
             who = getpwnam(wxSafeConvertWX2MB(ptr));
         }
@@ -918,7 +918,7 @@ wxGetCommandOutput(const wxString &cmd, wxMBConv& conv = wxConvISO8859_1)
         // Notice that this doesn't happen simply if the command doesn't exist,
         // but only in case of some really catastrophic failure inside popen()
         // so we should really notify the user about this as this is not normal.
-        wxLogSysError(wxT("Executing \"%s\" failed"), cmd);
+        wxLogSysError("Executing \"%s\" failed", cmd);
         return {};
     }
 
@@ -945,7 +945,7 @@ wxGetCommandOutput(const wxString &cmd, wxMBConv& conv = wxConvISO8859_1)
 // private use only)
 static bool wxGetHostNameInternal(wxChar *buf, int sz)
 {
-    wxCHECK_MSG( buf, false, wxT("NULL pointer in wxGetHostNameInternal") );
+    wxCHECK_MSG( buf, false, "NULL pointer in wxGetHostNameInternal" );
 
     *buf = wxT('\0');
 
@@ -965,7 +965,7 @@ static bool wxGetHostNameInternal(wxChar *buf, int sz)
         wxStrlcpy(buf, wxSafeConvertMB2WX(cbuf), sz);
     }
 #else // no uname, no gethostname
-    wxFAIL_MSG(wxT("don't know host name for this machine"));
+    wxFAIL_MSG("don't know host name for this machine");
 
     bool ok = false;
 #endif // uname/gethostname
@@ -1069,14 +1069,14 @@ bool wxIsPlatform64Bit()
 
     // the test for "64" is obviously not 100% reliable but seems to work fine
     // in practice
-    return machine.Contains(wxT("64")) ||
-                machine.Contains(wxT("alpha"));
+    return machine.Contains("64") ||
+                machine.Contains("alpha");
 #endif
 }
 
 wxString wxGetCpuArchitectureName()
 {
-    return wxGetCommandOutput(wxT("uname -m"));
+    return wxGetCommandOutput("uname -m");
 }
 
 #ifdef __LINUX__
@@ -1087,7 +1087,7 @@ wxGetValueFromLSBRelease(const wxString& arg, const wxString& lhs, wxString* rhs
     // lsb_release seems to just read a global file which is always in UTF-8
     // and hence its output is always in UTF-8 as well, regardless of the
     // locale currently configured by our environment.
-    return wxGetCommandOutput(wxS("lsb_release ") + arg, wxConvUTF8)
+    return wxGetCommandOutput("lsb_release " + arg, wxConvUTF8)
                 .StartsWith(lhs, rhs);
 }
 
@@ -1095,18 +1095,18 @@ wxLinuxDistributionInfo wxGetLinuxDistributionInfo()
 {
     wxLinuxDistributionInfo ret;
 
-    if ( !wxGetValueFromLSBRelease(wxS("--id"), wxS("Distributor ID:\t"),
+    if ( !wxGetValueFromLSBRelease("--id"), wxS("Distributor ID:\t",
                                    &ret.Id) )
     {
         // Don't bother to continue, lsb_release is probably not available.
         return ret;
     }
 
-    wxGetValueFromLSBRelease(wxS("--description"), wxS("Description:\t"),
+    wxGetValueFromLSBRelease("--description"), wxS("Description:\t",
                              &ret.Description);
-    wxGetValueFromLSBRelease(wxS("--release"), wxS("Release:\t"),
+    wxGetValueFromLSBRelease("--release"), wxS("Release:\t",
                              &ret.Release);
-    wxGetValueFromLSBRelease(wxS("--codename"), wxS("Codename:\t"),
+    wxGetValueFromLSBRelease("--codename"), wxS("Codename:\t",
                              &ret.CodeName);
 
     return ret;
@@ -1120,13 +1120,13 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj, int *verMin, int *verMicro)
 {
     // get OS version
     int major = -1, minor = -1, micro = -1;
-    wxString release = wxGetCommandOutput(wxT("uname -r"));
+    wxString release = wxGetCommandOutput("uname -r");
     if ( !release.empty() )
     {
-        if ( wxSscanf(release.c_str(), wxT("%d.%d.%d"), &major, &minor, &micro ) != 3 )
+        if ( wxSscanf(release.c_str(), "%d.%d.%d", &major, &minor, &micro ) != 3 )
         {
             micro = 0;
-            if ( wxSscanf(release.c_str(), wxT("%d.%d"), &major, &minor ) != 2 )
+            if ( wxSscanf(release.c_str(), "%d.%d", &major, &minor ) != 2 )
             {
                 // failed to get version string or unrecognized format
                 major = minor = micro = -1;
@@ -1142,9 +1142,9 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj, int *verMin, int *verMicro)
         *verMicro = micro;
 
     // try to understand which OS are we running
-    wxString kernel = wxGetCommandOutput(wxT("uname -s"));
+    wxString kernel = wxGetCommandOutput("uname -s");
     if ( kernel.empty() )
-        kernel = wxGetCommandOutput(wxT("uname -o"));
+        kernel = wxGetCommandOutput("uname -o");
 
     if ( kernel.empty() )
         return wxOS_UNKNOWN;
@@ -1154,7 +1154,7 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj, int *verMin, int *verMicro)
 
 wxString wxGetOsDescription()
 {
-    return wxGetCommandOutput(wxT("uname -s -r -m"));
+    return wxGetCommandOutput("uname -s -r -m");
 }
 
 bool wxCheckOsVersion(int majorVsn, int minorVsn, int microVsn)
@@ -1255,7 +1255,7 @@ bool wxGetDiskSpace(const wxString& path, wxDiskspaceSize_t *pTotal, wxDiskspace
     wxStatfs_t fs;
     if ( wxStatfs(const_cast<char*>(static_cast<const char*>(path.fn_str())), &fs) != 0 )
     {
-        wxLogSysError( wxT("Failed to get file system statistics") );
+        wxLogSysError( "Failed to get file system statistics" );
 
         return false;
     }
@@ -1436,7 +1436,7 @@ bool wxHandleFatalExceptions(bool doit)
         ok &= sigaction(SIGSEGV, &act, &s_handlerSEGV) == 0;
         if ( !ok )
         {
-            wxLogDebug(wxT("Failed to install our signal handler."));
+            wxLogDebug("Failed to install our signal handler.");
         }
 
         s_savedHandlers = true;
@@ -1450,7 +1450,7 @@ bool wxHandleFatalExceptions(bool doit)
         ok &= sigaction(SIGSEGV, &s_handlerSEGV, NULL) == 0;
         if ( !ok )
         {
-            wxLogDebug(wxT("Failed to uninstall our signal handler."));
+            wxLogDebug("Failed to uninstall our signal handler.");
         }
 
         s_savedHandlers = false;
@@ -1472,7 +1472,7 @@ int wxAppTraits::WaitForChild(wxExecuteData& execData)
     wxConsoleEventLoop loop;
     return RunLoopUntilChildExit(execData, loop);
 #else // !wxUSE_CONSOLE_EVENTLOOP
-    wxFAIL_MSG( wxS("Can't wait for child process without wxConsoleEventLoop") );
+    wxFAIL_MSG( "Can't wait for child process without wxConsoleEventLoop" );
 
     return -1;
 #endif // wxUSE_CONSOLE_EVENTLOOP/!wxUSE_CONSOLE_EVENTLOOP
@@ -1622,7 +1622,7 @@ void wxExecuteData::OnSomeChildExited(int WXUNUSED(sig))
 void wxExecuteData::OnStart(int pid)
 {
     wxCHECK_RET( wxTheApp,
-                 wxS("Ensure wxTheApp is set before calling wxExecute()") );
+                 "Ensure wxTheApp is set before calling wxExecute()" );
 
     // Setup the signal handler for SIGCHLD to be able to detect the child
     // termination.
@@ -1663,7 +1663,7 @@ void wxExecuteData::OnExit(int exitcode)
     // if another SIGCHLD happens.
     if ( !ms_childProcesses.erase(m_pid) )
     {
-        wxFAIL_MSG(wxString::Format(wxS("Data for PID %d not in the list?"), m_pid));
+        wxFAIL_MSG(wxString::Format("Data for PID %d not in the list?", m_pid));
     }
 
 

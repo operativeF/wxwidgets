@@ -22,7 +22,7 @@
 #include <string>
 #include <string_view>
 
-constexpr wxChar wxSVGVersion[] = wxT("v0101");
+constexpr char wxSVGVersion[] = "v0101";
 
 enum class wxSVGShapeRenderingMode
 {
@@ -99,7 +99,7 @@ public:
 
     int GetDepth() const override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::GetDepth Call not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::GetDepth Call not implemented");
         return -1;
     }
 
@@ -113,18 +113,18 @@ public:
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& WXUNUSED(palette)) override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::SetPalette not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::SetPalette not implemented");
     }
 #endif
 
     void SetLogicalFunction(wxRasterOperationMode WXUNUSED(function)) override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::SetLogicalFunction Call not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::SetLogicalFunction Call not implemented");
     }
 
     wxRasterOperationMode GetLogicalFunction() const override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::GetLogicalFunction() not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::GetLogicalFunction() not implemented");
         return wxRasterOperationMode::Copy;
     }
 
@@ -162,7 +162,7 @@ private:
     bool DoGetPixel(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
                             wxColour* WXUNUSED(col)) const override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::DoGetPixel Call not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::DoGetPixel Call not implemented");
         return true;
     }
 
@@ -176,7 +176,7 @@ private:
 
     void DoCrossHair(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y)) override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::CrossHair Call not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::CrossHair Call not implemented");
     }
 
     void DoDrawArc(wxCoord x1, wxCoord y1,
@@ -223,7 +223,7 @@ private:
                              const wxColour& WXUNUSED(col),
                              wxFloodFillStyle WXUNUSED(style)) override
     {
-        wxFAIL_MSG(wxT("wxSVGFILEDC::DoFloodFill Call not implemented"));
+        wxFAIL_MSG("wxSVGFILEDC::DoFloodFill Call not implemented");
         return false;
     }
 

@@ -201,7 +201,7 @@ bool wxPopupTransientWindowBase::Destroy()
     // the next idle time when we're sure that it's safe to really destroy it.
 
     wxCHECK_MSG( !wxPendingDelete.Member(this), false,
-                 wxS("Shouldn't destroy the popup twice.") );
+                 "Shouldn't destroy the popup twice." );
 
     wxPendingDelete.Append(this);
 
@@ -589,7 +589,7 @@ void wxPopupWindowHandler::OnLeftDown(wxMouseEvent& event)
 
         default:
             // forgot to update the switch after adding a new hit test code?
-            wxFAIL_MSG( wxT("unexpected HitTest() return value") );
+            wxFAIL_MSG( "unexpected HitTest() return value" );
             [[fallthrough]];
 
         case wxHT_WINDOW_CORNER:

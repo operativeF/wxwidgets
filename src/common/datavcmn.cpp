@@ -311,7 +311,7 @@ void wxDataViewModel::RemoveNotifier( wxDataViewModelNotifier *notifier )
         }
     }
 
-    wxFAIL_MSG(wxS("Removing non-registered notifier"));
+    wxFAIL_MSG("Removing non-registered notifier");
 }
 
 int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
@@ -2801,7 +2801,7 @@ int wxDataViewTreeStore::Compare( const wxDataViewItem &item1, const wxDataViewI
         (wxDataViewTreeStoreContainerNode*) node1->GetParent();
 
     wxCHECK_MSG( node2->GetParent() == parent, 0,
-                 wxS("Comparing items with different parent.") );
+                 "Comparing items with different parent." );
 
     if (node1->IsContainer() && !node2->IsContainer())
         return -1;
@@ -2818,7 +2818,7 @@ int wxDataViewTreeStore::Compare( const wxDataViewItem &item1, const wxDataViewI
             return 1;
     }
 
-    wxFAIL_MSG(wxS("Unreachable"));
+    wxFAIL_MSG("Unreachable");
     return 0;
 }
 

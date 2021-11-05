@@ -85,7 +85,7 @@ void wxAuiXmlHandler::OnManagedWindowClose( wxWindowDestroyEvent &event )
 
 wxObject *wxAuiXmlHandler::DoCreateResource()
 {
-    if (m_class == wxS("wxAuiManager"))
+    if (m_class == "wxAuiManager")
     {
         wxAuiManager *manager = nullptr;
 
@@ -100,7 +100,7 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
             // assign the new values related to this manager
             m_window    = m_parentAsWindow;
             manager     = new wxAuiManager( m_window,
-                                            GetStyle(wxS("style"), wxAUI_MGR_DEFAULT) );
+                                            GetStyle("style", wxAUI_MGR_DEFAULT) );
             m_manager   = manager;
             m_mgrInside = true;
 
@@ -115,8 +115,8 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
             CreateChildren(m_manager);
 
             // Load a custom perspective if any
-            if (HasParam(wxS("perspective")))
-                m_manager->LoadPerspective( GetParamValue(wxS("perspective")) );
+            if (HasParam("perspective"))
+                m_manager->LoadPerspective( GetParamValue("perspective") );
 
             m_manager->Update();
 
@@ -134,11 +134,11 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
     }
     else if (m_class == "wxAuiPaneInfo")
     {
-        wxXmlNode *node   = GetParamNode(wxS("object"));
+        wxXmlNode *node   = GetParamNode("object");
         wxWindow  *window = nullptr;
 
         if (!node)
-            node = GetParamNode(wxS("object_ref"));
+            node = GetParamNode("object_ref");
 
         if (node)
         {
@@ -162,51 +162,51 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
 
             wxString name = GetName();              paneInfo.Name( name );
 // Caption
-            if ( HasParam(wxS("caption")) )         paneInfo.Caption( GetText(wxS("caption")) );
-            if ( HasParam(wxS("caption_visible")) ) paneInfo.CaptionVisible( GetBool(wxS("caption_visible")) );
+            if ( HasParam("caption")) )         paneInfo.Caption( GetText(wxS("caption") );
+            if ( HasParam("caption_visible")) ) paneInfo.CaptionVisible( GetBool(wxS("caption_visible") );
 // Buttons
-            if ( HasParam(wxS("close_button")) )    paneInfo.CloseButton( GetBool(wxS("close_button")) );
-            if ( HasParam(wxS("minimize_button")) ) paneInfo.MinimizeButton( GetBool(wxS("minimize_button")) );
-            if ( HasParam(wxS("maximize_button")) ) paneInfo.MaximizeButton( GetBool(wxS("maximize_button")) );
-            if ( HasParam(wxS("pin_button")) )      paneInfo.PinButton( GetBool(wxS("pin_button")) );
-            if ( HasParam(wxS("gripper")) )         paneInfo.Gripper( GetBool(wxS("gripper")) );
+            if ( HasParam("close_button")) )    paneInfo.CloseButton( GetBool(wxS("close_button") );
+            if ( HasParam("minimize_button")) ) paneInfo.MinimizeButton( GetBool(wxS("minimize_button") );
+            if ( HasParam("maximize_button")) ) paneInfo.MaximizeButton( GetBool(wxS("maximize_button") );
+            if ( HasParam("pin_button")) )      paneInfo.PinButton( GetBool(wxS("pin_button") );
+            if ( HasParam("gripper")) )         paneInfo.Gripper( GetBool(wxS("gripper") );
 // Appearance
-            if ( HasParam(wxS("pane_border")) )     paneInfo.PaneBorder( GetBool(wxS("pane_border")) );
+            if ( HasParam("pane_border")) )     paneInfo.PaneBorder( GetBool(wxS("pane_border") );
 // State
-            if ( HasParam(wxS("dock")) )            paneInfo.Dock();
-            else if ( HasParam(wxS("float")) )      paneInfo.Float();
+            if ( HasParam("dock") )            paneInfo.Dock();
+            else if ( HasParam("float") )      paneInfo.Float();
 
 // Dockable Directions
-            if ( HasParam(wxS("top_dockable")) )    paneInfo.TopDockable( GetBool(wxS("top_dockable")) );
-            if ( HasParam(wxS("bottom_dockable")) ) paneInfo.BottomDockable( GetBool(wxS("bottom_dockable")) );
-            if ( HasParam(wxS("left_dockable")) )   paneInfo.LeftDockable( GetBool(wxS("left_dockable")) );
-            if ( HasParam(wxS("right_dockable")) )  paneInfo.RightDockable( GetBool(wxS("right_dockable")) );
+            if ( HasParam("top_dockable")) )    paneInfo.TopDockable( GetBool(wxS("top_dockable") );
+            if ( HasParam("bottom_dockable")) ) paneInfo.BottomDockable( GetBool(wxS("bottom_dockable") );
+            if ( HasParam("left_dockable")) )   paneInfo.LeftDockable( GetBool(wxS("left_dockable") );
+            if ( HasParam("right_dockable")) )  paneInfo.RightDockable( GetBool(wxS("right_dockable") );
 // Behaviours
-            if ( HasParam(wxS("dock_fixed")) )      paneInfo.DockFixed( GetBool(wxS("dock_fixed")) );
-            if ( HasParam(wxS("resizable")) )       paneInfo.Resizable( GetBool(wxS("resizable")) );
-            if ( HasParam(wxS("movable")) )         paneInfo.Movable( GetBool(wxS("movable")) );
-            if ( HasParam(wxS("floatable")) )       paneInfo.Floatable( GetBool(wxS("floatable")) );
+            if ( HasParam("dock_fixed")) )      paneInfo.DockFixed( GetBool(wxS("dock_fixed") );
+            if ( HasParam("resizable")) )       paneInfo.Resizable( GetBool(wxS("resizable") );
+            if ( HasParam("movable")) )         paneInfo.Movable( GetBool(wxS("movable") );
+            if ( HasParam("floatable")) )       paneInfo.Floatable( GetBool(wxS("floatable") );
 // Sizes
-            if ( HasParam(wxS("floating_size")) )   paneInfo.FloatingSize( GetSize(wxS("floating_size")) );
-            if ( HasParam(wxS("min_size")) )        paneInfo.MinSize( GetSize(wxS("min_size")) );
-            if ( HasParam(wxS("max_size")) )        paneInfo.MaxSize( GetSize(wxS("max_size")) );
-            if ( HasParam(wxS("best_size")) )       paneInfo.BestSize( GetSize(wxS("best_size")) );
+            if ( HasParam("floating_size")) )   paneInfo.FloatingSize( GetSize(wxS("floating_size") );
+            if ( HasParam("min_size")) )        paneInfo.MinSize( GetSize(wxS("min_size") );
+            if ( HasParam("max_size")) )        paneInfo.MaxSize( GetSize(wxS("max_size") );
+            if ( HasParam("best_size")) )       paneInfo.BestSize( GetSize(wxS("best_size") );
 // Positions
-            if ( HasParam(wxS("row")) )             paneInfo.Row( GetLong(wxS("row")) );
-            if ( HasParam(wxS("layer")) )           paneInfo.Layer( GetLong(wxS("layer")) );
-            if ( HasParam(wxS("default_pane")) )    paneInfo.DefaultPane();
-            else if( HasParam(wxS("toolbar_pane")) ) paneInfo.ToolbarPane();
+            if ( HasParam("row")) )             paneInfo.Row( GetLong(wxS("row") );
+            if ( HasParam("layer")) )           paneInfo.Layer( GetLong(wxS("layer") );
+            if ( HasParam("default_pane") )    paneInfo.DefaultPane();
+            else if( HasParam("toolbar_pane") ) paneInfo.ToolbarPane();
 
 // Directions - CenterPane()/CentrePane != Center()/Centre()
-            if ( HasParam(wxS("center_pane") ) ||
-                 HasParam(wxS("centre_pane")) )     paneInfo.CenterPane();
-            if ( HasParam(wxS("direction")) )       paneInfo.Direction( GetLong(wxS("direction")) );
-            else if ( HasParam(wxS("top")) )        paneInfo.Top();
-            else if ( HasParam(wxS("bottom")) )     paneInfo.Bottom();
-            else if ( HasParam(wxS("left")) )       paneInfo.Left();
-            else if ( HasParam(wxS("right")) )      paneInfo.Right();
-            else if ( HasParam(wxS("center")) ||
-                      HasParam(wxS("centre")) )     paneInfo.Center();
+            if ( HasParam("center_pane" ) ||
+                 HasParam("centre_pane") )     paneInfo.CenterPane();
+            if ( HasParam("direction")) )       paneInfo.Direction( GetLong(wxS("direction") );
+            else if ( HasParam("top") )        paneInfo.Top();
+            else if ( HasParam("bottom") )     paneInfo.Bottom();
+            else if ( HasParam("left") )       paneInfo.Left();
+            else if ( HasParam("right") )      paneInfo.Right();
+            else if ( HasParam("center") ||
+                      HasParam("centre") )     paneInfo.Center();
 
             m_manager->AddPane(window, paneInfo);
         }
@@ -217,12 +217,12 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
 
         return window;
     }
-    else if (m_class == wxS("notebookpage"))
+    else if (m_class == "notebookpage")
     {
-        wxXmlNode *anb = GetParamNode(wxS("object"));
+        wxXmlNode *anb = GetParamNode("object");
 
         if (!anb)
-            anb = GetParamNode(wxS("object_ref"));
+            anb = GetParamNode("object_ref");
 
         if (anb)
         {
@@ -234,18 +234,18 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                if ( HasParam(wxS("bitmap")) )
+                if ( HasParam("bitmap") )
                 {
                     m_notebook->AddPage(wnd,
-                                        GetText(wxS("label")),
-                                        GetBool(wxS("selected")),
-                                        GetBitmap(wxS("bitmap"), wxART_OTHER));
+                                        GetText("label"),
+                                        GetBool("selected"),
+                                        GetBitmap("bitmap", wxART_OTHER));
                 }
                 else
                 {
                     m_notebook->AddPage(wnd,
-                                        GetText(wxS("label")),
-                                        GetBool(wxS("selected")));
+                                        GetText("label"),
+                                        GetBool("selected"));
                 }
             }
             else
@@ -260,7 +260,7 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
             return nullptr;
         }
     }
-    else // if (m_class == wxS("wxAuiNotebook"))
+    else // if (m_class == "wxAuiNotebook")
     {
         XRC_MAKE_INSTANCE(anb, wxAuiNotebook)
 
@@ -268,7 +268,7 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
                     GetID(),
                     GetPosition(),
                     GetSize(),
-                    GetStyle(wxS("style")));
+                    GetStyle("style"));
 
         SetupWindow(anb);
 
@@ -286,10 +286,10 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
 
 bool wxAuiXmlHandler::CanHandle( wxXmlNode *node )
 {
-    return ((!m_mgrInside && IsOfClass(node, wxS("wxAuiManager")))  ||
-            (m_mgrInside && IsOfClass(node, wxS("wxAuiPaneInfo")))  ||
-            (!m_anbInside && IsOfClass(node, wxS("wxAuiNotebook"))) ||
-            (m_anbInside && IsOfClass(node, wxS("notebookpage")))   );
+    return ((!m_mgrInside && IsOfClass(node, "wxAuiManager"))  ||
+            (m_mgrInside && IsOfClass(node, "wxAuiPaneInfo"))  ||
+            (!m_anbInside && IsOfClass(node, "wxAuiNotebook")) ||
+            (m_anbInside && IsOfClass(node, "notebookpage"))   );
 }
 
 #endif // wxUSE_XRC && wxUSE_AUI

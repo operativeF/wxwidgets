@@ -139,7 +139,7 @@ wxFontMapper *wxFontMapper::Get()
 {
     wxFontMapperBase *fontmapper = wxFontMapperBase::Get();
     wxASSERT_MSG( !fontmapper->IsDummy(),
-                 wxT("GUI code requested a wxFontMapper but we only have a wxFontMapperBase.") );
+                 "GUI code requested a wxFontMapper but we only have a wxFontMapperBase." );
 
     // Now return it anyway because there's a chance the GUI code might just
     // only want to call wxFontMapperBase functions and it's better than
@@ -278,7 +278,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
     ReentrancyBlocker blocker(s_inGetAltForEncoding);
 #endif // wxUSE_GUI
 
-    wxCHECK_MSG( info, false, wxT("bad pointer in GetAltForEncoding") );
+    wxCHECK_MSG( info, false, "bad pointer in GetAltForEncoding" );
 
     info->facename = facename;
 
@@ -302,7 +302,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
              encName = GetEncodingName(encoding);
     if ( !facename.empty() )
     {
-        configEntry = facename + wxT("_");
+        configEntry = facename + "_";
     }
     configEntry += encName;
 
@@ -344,7 +344,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
             }
             else
             {
-                wxLogDebug(wxT("corrupted config data: string '%s' is not a valid font encoding info"),
+                wxLogDebug("corrupted config data: string '%s' is not a valid font encoding info",
                            fontinfo);
             }
         }
@@ -467,7 +467,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                      bool interactive)
 {
     wxCHECK_MSG( encodingAlt, false,
-                    wxT("wxFontEncoding::GetAltForEncoding(): NULL pointer") );
+                    "wxFontEncoding::GetAltForEncoding(): NULL pointer" );
 
     wxNativeEncodingInfo info;
     if ( !GetAltForEncoding(encoding, &info, facename, interactive) )

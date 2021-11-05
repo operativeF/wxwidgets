@@ -125,22 +125,22 @@ wxHtmlTableCell::wxHtmlTableCell(wxHtmlContainerCell *parent, const wxHtmlTag& t
    m_PixelScale(pixel_scale)
 {
     /* scan params: */
-    if (tag.GetParamAsColour(wxT("BGCOLOR"), &m_tBkg))
+    if (tag.GetParamAsColour("BGCOLOR", &m_tBkg))
         SetBackgroundColour(m_tBkg);
-    m_tValign = tag.GetParam(wxT("VALIGN"));
-    if (!tag.GetParamAsInt(wxT("CELLSPACING"), &m_Spacing))
+    m_tValign = tag.GetParam("VALIGN");
+    if (!tag.GetParamAsInt("CELLSPACING", &m_Spacing))
         m_Spacing = 2;
-    if (!tag.GetParamAsInt(wxT("CELLPADDING"), &m_Padding))
+    if (!tag.GetParamAsInt("CELLPADDING", &m_Padding))
         m_Padding = 3;
     m_Spacing = (int)(m_PixelScale * (double)m_Spacing);
     m_Padding = (int)(m_PixelScale * (double)m_Padding);
 
-    if(tag.HasParam(wxT("BORDER")))
+    if(tag.HasParam("BORDER"))
     {
         if(tag.GetParam("BORDER").IsEmpty())
             m_Border = 1;
         else
-            tag.GetParamAsInt(wxT("BORDER"), &m_Border);
+            tag.GetParamAsInt("BORDER", &m_Border);
     }
     if (m_Border == 1)
         SetBorder(TABLE_BORDER_CLR_1, TABLE_BORDER_CLR_2, m_Border); // special case see wxHtmlContainerCell::Draw
@@ -238,8 +238,8 @@ void wxHtmlTableCell::AddRow(const wxHtmlTag& tag)
 
     // scan params:
     m_rBkg = m_tBkg;
-    tag.GetParamAsColour(wxT("BGCOLOR"), &m_rBkg);
-    if (!tag.GetParamAsString(wxT("VALIGN"), &m_rValign))
+    tag.GetParamAsColour("BGCOLOR", &m_rBkg);
+    if (!tag.GetParamAsString("VALIGN", &m_rValign))
         m_rValign = m_tValign;
 }
 
@@ -279,7 +279,7 @@ void wxHtmlTableCell::AddCell(wxHtmlContainerCell *cell, const wxHtmlTag& tag)
 
     // id:
     wxString idvalue;
-    if (tag.GetParamAsString(wxT("ID"), &idvalue))
+    if (tag.GetParamAsString("ID", &idvalue))
     {
         cell->SetId(idvalue);
     }
@@ -288,7 +288,7 @@ void wxHtmlTableCell::AddCell(wxHtmlContainerCell *cell, const wxHtmlTag& tag)
     {
         int width = 0;
         bool wpercent = false;
-        if (tag.GetParamAsIntOrPercent(wxT("WIDTH"), &width, wpercent))
+        if (tag.GetParamAsIntOrPercent("WIDTH", &width, wpercent))
         {
             if (wpercent)
             {
@@ -306,8 +306,8 @@ void wxHtmlTableCell::AddCell(wxHtmlContainerCell *cell, const wxHtmlTag& tag)
 
     // spanning:
     {
-        tag.GetParamAsInt(wxT("COLSPAN"), &m_CellInfo[r][c].colspan);
-        tag.GetParamAsInt(wxT("ROWSPAN"), &m_CellInfo[r][c].rowspan);
+        tag.GetParamAsInt("COLSPAN", &m_CellInfo[r][c].colspan);
+        tag.GetParamAsInt("ROWSPAN", &m_CellInfo[r][c].rowspan);
 
         // VS: the standard says this about col/rowspan:
         //     "This attribute specifies the number of rows spanned by the
@@ -338,7 +338,7 @@ void wxHtmlTableCell::AddCell(wxHtmlContainerCell *cell, const wxHtmlTag& tag)
     //background color:
     {
         wxColour bk = m_rBkg;
-        tag.GetParamAsColour(wxT("BGCOLOR"), &bk);
+        tag.GetParamAsColour("BGCOLOR", &bk);
         if (bk.IsOk())
             cell->SetBackgroundColour(bk);
     }
@@ -348,18 +348,18 @@ void wxHtmlTableCell::AddCell(wxHtmlContainerCell *cell, const wxHtmlTag& tag)
     // vertical alignment:
     {
         wxString valign;
-        if (!tag.GetParamAsString(wxT("VALIGN"), &valign))
+        if (!tag.GetParamAsString("VALIGN", &valign))
             valign = m_tValign;
         valign.MakeUpper();
-        if (valign == wxT("TOP"))
+        if (valign == "TOP")
             m_CellInfo[r][c].valign = wxHTML_ALIGN_TOP;
-        else if (valign == wxT("BOTTOM"))
+        else if (valign == "BOTTOM")
             m_CellInfo[r][c].valign = wxHTML_ALIGN_BOTTOM;
         else m_CellInfo[r][c].valign = wxHTML_ALIGN_CENTER;
     }
 
     // nowrap
-    m_CellInfo[r][c].nowrap = tag.HasParam(wxT("NOWRAP"));
+    m_CellInfo[r][c].nowrap = tag.HasParam("NOWRAP");
 
     cell->SetIndent(m_Padding, wxHTML_INDENT_ALL, wxHTML_UNITS_PIXELS);
 }
@@ -708,7 +708,7 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
         wxHtmlContainerCell *c;
 
         // new table started, backup upper-level table (if any) and create new:
-        if (tag.GetName() == wxT("TABLE"))
+        if (tag.GetName() == "TABLE")
         {
             wxHtmlTableCell *oldt = m_Table;
 
@@ -721,7 +721,7 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
             {
                 int width = 0;
                 bool wpercent = false;
-                if (tag.GetParamAsIntOrPercent(wxT("WIDTH"), &width, wpercent))
+                if (tag.GetParamAsIntOrPercent("WIDTH", &width, wpercent))
                 {
                     if (wpercent)
                     {
@@ -736,7 +736,7 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
                     m_Table->SetWidthFloat(0, wxHTML_UNITS_PIXELS);
             }
             int oldAlign = m_WParser->GetAlign();
-            if (!tag.GetParamAsString(wxT("ALIGN"), &m_tAlign))
+            if (!tag.GetParamAsString("ALIGN", &m_tAlign))
                 m_tAlign.clear();
 
             CallParseInnerWithBg(tag, m_Table->GetBackgroundColour());
@@ -755,10 +755,10 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
         else if (m_Table)
         {
             // new row in table
-            if (tag.GetName() == wxT("TR"))
+            if (tag.GetName() == "TR")
             {
                 m_Table->AddRow(tag);
-                if (!tag.GetParamAsString(wxT("ALIGN"), &m_rAlign))
+                if (!tag.GetParamAsString("ALIGN", &m_rAlign))
                     m_rAlign = m_tAlign;
             }
 
@@ -770,18 +770,18 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
 
                 m_WParser->OpenContainer();
 
-                const bool isHeader = tag.GetName() == wxT("TH");
+                const bool isHeader = tag.GetName() == "TH";
 
                 wxString als;
-                if (!tag.GetParamAsString(wxT("ALIGN"), &als))
+                if (!tag.GetParamAsString("ALIGN", &als))
                     als = m_rAlign;
                 als.MakeUpper();
 
-                if (als == wxT("RIGHT"))
+                if (als == "RIGHT")
                     m_WParser->SetAlign(wxHTML_ALIGN_RIGHT);
-                else if (als == wxT("LEFT"))
+                else if (als == "LEFT")
                     m_WParser->SetAlign(wxHTML_ALIGN_LEFT);
-                else if (als == wxT("CENTER"))
+                else if (als == "CENTER")
                     m_WParser->SetAlign(wxHTML_ALIGN_CENTER);
                 else // use default alignment
                     m_WParser->SetAlign(isHeader ? wxHTML_ALIGN_CENTER
@@ -800,7 +800,7 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
                 }
 
                 wxColour bgCol;
-                if ( !tag.GetParamAsColour(wxT("BGCOLOR"), &bgCol) )
+                if ( !tag.GetParamAsColour("BGCOLOR", &bgCol) )
                     bgCol = m_Table->GetRowDefaultBackgroundColour();
 
                 CallParseInnerWithBg(tag, bgCol);

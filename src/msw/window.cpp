@@ -228,7 +228,7 @@ public:
 private:
     static void LoadGestureSymbols()
     {
-        wxLoadedDLL dll(wxS("user32.dll"));
+        wxLoadedDLL dll("user32.dll");
 
         wxDL_INIT_FUNC(ms_pfn, GetGestureInfo, dll);
         wxDL_INIT_FUNC(ms_pfn, CloseGestureInfoHandle, dll);
@@ -263,7 +263,7 @@ void wxTraceMSWMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     // The casts to size_t allow to avoid having different code for Win32 and
     // Win64 as size_t is of the right size in both cases, unlike int or long.
     wxLogTrace("winmsg",
-               wxT("Processing %s(hWnd=%p, wParam=%zx, lParam=%zx)"),
+               "Processing %s(hWnd=%p, wParam=%zx, lParam=%zx)",
                wxGetMessageName(message),
                hWnd,
                static_cast<size_t>(wParam),
@@ -283,7 +283,7 @@ static inline void wxBringWindowToTop(HWND hwnd)
     // raise top level parent to top of z order
     if (!::SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE))
     {
-        wxLogLastError(wxT("SetWindowPos"));
+        wxLogLastError("SetWindowPos");
     }
 }
 
@@ -436,7 +436,7 @@ wxWindowMSW::~wxWindowMSW()
         {
             if ( !::DestroyWindow(GetHwnd()) )
             {
-                wxLogLastError(wxT("DestroyWindow"));
+                wxLogLastError("DestroyWindow");
             }
         }
 
@@ -467,7 +467,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
                                       unsigned int style,
                                       const std::string& name)
 {
-    wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );
+    wxCHECK_MSG( parent, false, "can't create wxWindow without parent" );
 
     if ( !CreateBase(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;
@@ -514,7 +514,7 @@ void wxWindowMSW::SetId(wxWindowID winid)
         {
             const DWORD err = ::GetLastError();
             if ( err )
-                wxLogApiError(wxT("SetWindowLong(GWL_ID)"), err);
+                wxLogApiError("SetWindowLong(GWL_ID)", err);
         }
     }
 }
@@ -526,7 +526,7 @@ void wxWindowMSW::SetId(wxWindowID winid)
 void wxWindowMSW::SetFocus()
 {
     HWND hWnd = (HWND)MSWGetFocusHWND();
-    wxCHECK_RET( hWnd, wxT("can't set focus to invalid window") );
+    wxCHECK_RET( hWnd, "can't set focus to invalid window" );
 
     ::SetLastError(0);
 
@@ -539,7 +539,7 @@ void wxWindowMSW::SetFocus()
             HWND hwndFocus = ::GetFocus();
             if ( hwndFocus != hWnd )
             {
-                wxLogApiError(wxT("SetFocus"), dwRes);
+                wxLogApiError("SetFocus", dwRes);
             }
         }
     }
@@ -697,17 +697,17 @@ wxWindowMSW::MSWShowWithEffect(bool show,
 
 
         case wxShowEffect::Max:
-            wxFAIL_MSG( wxT("invalid window show effect") );
+            wxFAIL_MSG( "invalid window show effect" );
             return false;
 
         default:
-            wxFAIL_MSG( wxT("unknown window show effect") );
+            wxFAIL_MSG( "unknown window show effect" );
             return false;
     }
 
     if ( !::AnimateWindow(GetHwnd(), timeout, dwFlags) )
     {
-        wxLogLastError(wxT("AnimateWindow"));
+        wxLogLastError("AnimateWindow");
 
         return false;
     }
@@ -744,7 +744,7 @@ void wxWindowMSW::DoReleaseMouse()
 {
     if ( !::ReleaseCapture() )
     {
-        wxLogLastError(wxT("ReleaseCapture"));
+        wxLogLastError("ReleaseCapture");
     }
 }
 
@@ -844,7 +844,7 @@ void wxWindowMSW::WarpPointer(int x, int y)
 
     if ( !::SetCursorPos(x, y) )
     {
-        wxLogLastError(wxT("SetCursorPos"));
+        wxLogLastError("SetCursorPos");
     }
 }
 
@@ -939,7 +939,7 @@ bool wxWindowMSW::EnableTouchEvents(int eventsMask)
             // As we clear all the known bits if they're set in the code above,
             // there should be nothing left.
             wxCHECK_MSG( eventsMask == 0, false,
-                         wxS("Unknown touch event mask bit specified") );
+                         "Unknown touch event mask bit specified" );
 
             ptrConfigs = &configs[0];
         }
@@ -999,7 +999,7 @@ inline UINT WXOrientToSB(int orient)
 int wxWindowMSW::GetScrollPos(int orient) const
 {
     HWND hWnd = GetHwnd();
-    wxCHECK_MSG( hWnd, 0, wxT("no HWND in GetScrollPos") );
+    wxCHECK_MSG( hWnd, 0, "no HWND in GetScrollPos" );
 
     return GetScrollPosition(hWnd, WXOrientToSB(orient));
 }
@@ -1018,7 +1018,7 @@ int wxWindowMSW::GetScrollRange(int orient) const
     {
         // Most of the time this is not really an error, since the return
         // value can also be zero when there is no scrollbar yet.
-        // wxLogLastError(wxT("GetScrollInfo"));
+        // wxLogLastError("GetScrollInfo");
     }
     maxPos = scrollInfo.nMax;
 
@@ -1034,7 +1034,7 @@ int wxWindowMSW::GetScrollThumb(int orient) const
 void wxWindowMSW::SetScrollPos(int orient, int pos, bool refresh)
 {
     HWND hWnd = GetHwnd();
-    wxCHECK_RET( hWnd, wxT("SetScrollPos: no HWND") );
+    wxCHECK_RET( hWnd, "SetScrollPos: no HWND" );
 
     WinStruct<SCROLLINFO> info;
     info.nPage = 0;
@@ -1205,7 +1205,7 @@ void wxWindowMSW::SetLayoutDirection(wxLayoutDirection dir)
 
 wxLayoutDirection wxWindowMSW::GetLayoutDirection() const
 {
-    wxCHECK_MSG( GetHwnd(), wxLayoutDirection::Default, wxT("invalid window") );
+    wxCHECK_MSG( GetHwnd(), wxLayoutDirection::Default, "invalid window" );
 
     return wxHasWindowExStyle(this, WS_EX_LAYOUTRTL) ? wxLayoutDirection::RightToLeft
                                                      : wxLayoutDirection::LeftToRight;
@@ -1227,10 +1227,10 @@ wxWindowMSW::AdjustForLayoutDirection(wxCoord x,
 
 void wxWindowMSW::SubclassWin(WXHWND hWnd)
 {
-    wxASSERT_MSG( !m_oldWndProc, wxT("subclassing window twice?") );
+    wxASSERT_MSG( !m_oldWndProc, "subclassing window twice?" );
 
     HWND hwnd = (HWND)hWnd;
-    wxCHECK_RET( ::IsWindow(hwnd), wxT("invalid HWND in SubclassWin") );
+    wxCHECK_RET( ::IsWindow(hwnd), "invalid HWND in SubclassWin" );
 
     SetHWND(hWnd);
 
@@ -1273,7 +1273,7 @@ void wxWindowMSW::UnsubclassWin()
     {
         SetHWND(nullptr);
 
-        wxCHECK_RET( ::IsWindow(hwnd), wxT("invalid HWND in UnsubclassWin") );
+        wxCHECK_RET( ::IsWindow(hwnd), "invalid HWND in UnsubclassWin" );
 
         if ( m_oldWndProc )
         {
@@ -1293,7 +1293,7 @@ void wxWindowMSW::AssociateHandle(WXWidget handle)
     {
       if ( !::DestroyWindow(GetHwnd()) )
       {
-        wxLogLastError(wxT("DestroyWindow"));
+        wxLogLastError("DestroyWindow");
       }
     }
 
@@ -1423,7 +1423,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
                              SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE |
                              SWP_FRAMECHANGED) )
         {
-            wxLogLastError(wxT("SetWindowPos"));
+            wxLogLastError("SetWindowPos");
         }
     }
 }
@@ -1473,7 +1473,7 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
     // box is not redrawn twice), but sometimes results in redraw problems, so
     // optionally allow the old code to continue to use it provided a special
     // system option is turned on
-    if ( !wxSystemOptions::GetOptionInt(wxT("msw.window.no-clip-children"))
+    if ( !wxSystemOptions::GetOptionInt("msw.window.no-clip-children")
             || (flags & wxCLIP_CHILDREN) )
         style |= WS_CLIPCHILDREN;
 
@@ -1510,7 +1510,7 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
         {
             default:
             case wxBORDER_DEFAULT:
-                wxFAIL_MSG( wxT("unknown border style") );
+                wxFAIL_MSG( "unknown border style" );
                 [[fallthrough]];
 
             case wxBORDER_NONE:
@@ -1663,7 +1663,7 @@ void wxWindowMSW::Update()
 {
     if ( !::UpdateWindow(GetHwnd()) )
     {
-        wxLogLastError(wxT("UpdateWindow"));
+        wxLogLastError("UpdateWindow");
     }
 
     // just calling UpdateWindow() is not enough, what we did in our WM_PAINT
@@ -1960,7 +1960,7 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, wxRect boundary)
                                     SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOACTIVATE);
             if ( !hdwp )
             {
-                wxLogLastError(wxT("DeferWindowPos"));
+                wxLogLastError("DeferWindowPos");
             }
         }
 
@@ -2001,7 +2001,7 @@ void wxWindowMSW::MSWMoveWindowToAnyPosition(WXHWND hwnd, wxRect boundary, bool 
     // move to relative coordinates
     if ( !::MoveWindow(hwnd, (scroll ? 0 : boundary.x), (scroll ? 0 : boundary.y), boundary.width, boundary.height, bRepaint) )
     {
-        wxLogLastError(wxT("MoveWindow"));
+        wxLogLastError("MoveWindow");
     }
 
     if ( scroll )
@@ -2208,7 +2208,7 @@ wxSize wxWindowMSW::DoGetBorderSize() const
             break;
 
         default:
-            wxFAIL_MSG( wxT("unknown border style") );
+            wxFAIL_MSG( "unknown border style" );
             [[fallthrough]];
 
         case wxBORDER_NONE:
@@ -2250,7 +2250,7 @@ wxSize wxWindowMSW::DoGetTextExtent(std::string_view string,
     else
         font = *fontToUse;
 
-    //wxCHECK_RET( font.IsOk(), wxT("invalid font in GetTextExtent()") );
+    //wxCHECK_RET( font.IsOk(), "invalid font in GetTextExtent()" );
 
     const wxWindow* win = static_cast<const wxWindow*>(this);
     wxTextMeasure txm(win, &font);
@@ -3823,7 +3823,7 @@ WXLRESULT wxWindowMSW::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM l
     if ( !MSWHandleMessage(&result, message, wParam, lParam) )
     {
 #if wxDEBUG_LEVEL >= 2
-        wxLogTrace("winmsg", wxT("Forwarding %s to DefWindowProc."),
+        wxLogTrace("winmsg", "Forwarding %s to DefWindowProc.",
                    wxGetMessageName(message));
 #endif // wxDEBUG_LEVEL >= 2
         result = MSWDefWindowProc(message, wParam, lParam);
@@ -3847,7 +3847,7 @@ void wxAssociateWinWithHandle(HWND hwnd, wxWindowMSW *win)
     // adding NULL hwnd is (first) surely a result of an error and
     // (secondly) breaks menu command processing
     wxCHECK_RET( hwnd != (HWND)nullptr,
-                 wxT("attempt to add a NULL hwnd to window list ignored") );
+                 "attempt to add a NULL hwnd to window list ignored" );
 
 #if wxDEBUG_LEVEL
     WindowHandles::const_iterator i = gs_windowHandles.find(hwnd);
@@ -3857,7 +3857,7 @@ void wxAssociateWinWithHandle(HWND hwnd, wxWindowMSW *win)
         {
             wxFAIL_MSG(
                 wxString::Format(
-                    wxT("HWND %p already associated with another window (%s)"),
+                    "HWND %p already associated with another window (%s)",
                     hwnd, win->wxGetClassInfo()->wxGetClassName()
                 )
             );
@@ -3993,7 +3993,7 @@ WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::strin
     {
         wxLogLastError(wxString::Format
         (
-            wxT("CreateWindowEx(\"%s\", flags=%08lx, ex=%08lx)"),
+            "CreateWindowEx(\"%s\", flags=%08lx, ex=%08lx)",
             clName, style, exStyle
         ));
     }
@@ -4485,7 +4485,7 @@ bool wxWindowMSW::HandlePower(WXWPARAM wParam,
             break;
 
         default:
-            wxLogDebug(wxT("Unknown WM_POWERBROADCAST(%zd) event"), wParam);
+            wxLogDebug("Unknown WM_POWERBROADCAST(%zd) event", wParam);
             [[fallthrough]];
 
         // these messages are currently not mapped to wx events
@@ -4565,7 +4565,7 @@ wxWindowMSW::MSWOnDrawItem(int WXUNUSED_UNLESS_ODRAWN(id),
             return false;
 
         wxCHECK_MSG( dynamic_cast<wxMenuItem*>(pMenuItem),
-                         false, wxT("MSWOnDrawItem: bad wxMenuItem pointer") );
+                         false, "MSWOnDrawItem: bad wxMenuItem pointer" );
 
         // prepare to call OnDrawItem(): notice using of wxDCTemp to prevent
         // the DC from being released
@@ -4631,7 +4631,7 @@ wxWindowMSW::MSWOnMeasureItem(int id, WXMEASUREITEMSTRUCT *itemStruct)
             return false;
 
         wxCHECK_MSG( dynamic_cast<wxMenuItem*>(pMenuItem),
-                        false, wxT("MSWOnMeasureItem: bad wxMenuItem pointer") );
+                        false, "MSWOnMeasureItem: bad wxMenuItem pointer" );
 
         size_t w, h;
         bool rc = pMenuItem->OnMeasureItem(&w, &h);
@@ -5112,7 +5112,7 @@ extern wxCOLORMAP *wxGetStdColourMap()
             {
                 // the pixels in the bitmap must correspond to wxSTD_COL_XXX!
                 wxASSERT_MSG( stdColourBitmap.GetWidth() == wxSTD_COL_MAX,
-                              wxT("forgot to update wxBITMAP_STD_COLOURS!") );
+                              "forgot to update wxBITMAP_STD_COLOURS!" );
 
                 wxMemoryDC memDC;
                 memDC.SelectObject(stdColourBitmap);
@@ -5186,7 +5186,7 @@ wxColour wxWindowMSW::MSWGetThemeColour(const wchar_t *themeName,
                 themeProperty = TMT_BORDERCOLOR;
                 break;
             default:
-                wxFAIL_MSG(wxT("unsupported theme colour"));
+                wxFAIL_MSG("unsupported theme colour");
         }
 
         wxUxThemeHandle hTheme((const wxWindow *)this, themeName);
@@ -5235,11 +5235,11 @@ bool wxWindowMSW::HandlePaint()
     HRGN hRegion = ::CreateRectRgn(0, 0, 0, 0); // Dummy call to get a handle
     if ( !hRegion )
     {
-        wxLogLastError(wxT("CreateRectRgn"));
+        wxLogLastError("CreateRectRgn");
     }
     if ( ::GetUpdateRgn(GetHwnd(), hRegion, FALSE) == ERROR )
     {
-        wxLogLastError(wxT("GetUpdateRgn"));
+        wxLogLastError("GetUpdateRgn");
     }
 
     m_updateRegion = wxRegion((WXHRGN) hRegion);
@@ -5378,14 +5378,14 @@ void wxWindowMSW::MSWSetEraseBgHook(wxWindow *child)
         if ( !gs_eraseBgHooks.insert(
                 EraseBgHooks::value_type(this, child)).second )
         {
-            wxFAIL_MSG( wxT("Setting erase background hook twice?") );
+            wxFAIL_MSG( "Setting erase background hook twice?" );
         }
     }
     else // reset the hook
     {
         if ( gs_eraseBgHooks.erase(this) != 1 )
         {
-            wxFAIL_MSG( wxT("Resetting erase background which was not set?") );
+            wxFAIL_MSG( "Resetting erase background which was not set?" );
         }
     }
 }
@@ -5437,7 +5437,7 @@ wxWindowMSW::MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child)
 
         if ( !::SetBrushOrgEx((HDC)hDC, -x, -y, nullptr) )
         {
-            wxLogLastError(wxT("SetBrushOrgEx(bg brush)"));
+            wxLogLastError("SetBrushOrgEx(bg brush)");
         }
 
         return hbrush;
@@ -5598,7 +5598,7 @@ bool wxWindowMSW::BeginRepositioningChildren()
     m_hDWP = (WXHANDLE)::BeginDeferWindowPos(numChildren);
     if ( !m_hDWP )
     {
-        wxLogLastError(wxT("BeginDeferWindowPos"));
+        wxLogLastError("BeginDeferWindowPos");
         return false;
     }
 
@@ -5608,7 +5608,7 @@ bool wxWindowMSW::BeginRepositioningChildren()
 
 void wxWindowMSW::EndRepositioningChildren()
 {
-    wxASSERT_MSG( m_hDWP, wxS("Shouldn't be called") );
+    wxASSERT_MSG( m_hDWP, "Shouldn't be called" );
 
     // reset m_hDWP to NULL so that child windows don't try to use our
     // m_hDWP after we call EndDeferWindowPos() on it (this shouldn't
@@ -5620,7 +5620,7 @@ void wxWindowMSW::EndRepositioningChildren()
     // do put all child controls in place at once
     if ( !::EndDeferWindowPos(hDWP) )
     {
-        wxLogLastError(wxT("EndDeferWindowPos"));
+        wxLogLastError("EndDeferWindowPos");
     }
 
     // Reset our children's pending pos/size values.
@@ -5646,7 +5646,7 @@ bool wxWindowMSW::HandleSize(int WXUNUSED(w), int WXUNUSED(h), WXUINT wParam)
     switch ( wParam )
     {
         default:
-            wxFAIL_MSG( wxT("unexpected WM_SIZE parameter") );
+            wxFAIL_MSG( "unexpected WM_SIZE parameter" );
             // fall through nevertheless
             [[fallthrough]];
 
@@ -5892,11 +5892,11 @@ bool wxWindowMSW::HandleMouseMove(int x, int y, WXUINT flags)
             {
                 // see comment in wxApp::GetComCtl32Version() explaining the
                 // use of wxLoadedDLL
-                wxLoadedDLL dllComCtl32(wxT("comctl32.dll"));
+                wxLoadedDLL dllComCtl32("comctl32.dll");
                 if ( dllComCtl32.IsLoaded() )
                 {
                     s_pfn_TrackMouseEvent = (_TrackMouseEvent_t)
-                        dllComCtl32.RawGetSymbol(wxT("_TrackMouseEvent"));
+                        dllComCtl32.RawGetSymbol("_TrackMouseEvent");
                 }
 
                 s_initDone = true;
@@ -5987,7 +5987,7 @@ wxWindowMSW::HandleMouseWheel(wxMouseWheelAxis axis,
                                      &s_linesPerRotation, 0))
         {
             // this is not supposed to happen
-            wxLogLastError(wxT("SystemParametersInfo(GETWHEELSCROLLLINES)"));
+            wxLogLastError("SystemParametersInfo(GETWHEELSCROLLLINES)");
 
             // the default is 3, so use it if SystemParametersInfo() failed
             s_linesPerRotation = 3;
@@ -6383,7 +6383,7 @@ int wxWindowMSW::HandleMenuChar(int chAccel,
         else // failed to get the menu text?
         {
             // it's not fatal, so don't show error, but still log it
-            wxLogLastError(wxT("GetMenuItemInfo"));
+            wxLogLastError("GetMenuItemInfo");
         }
     }
     return wxNOT_FOUND;
@@ -6465,7 +6465,7 @@ bool wxWindowMSW::MSWOnScroll(int orientation, WXWORD wParam,
                                   &scrollInfo) )
             {
                 // Not necessarily an error, if there are no scrollbars yet.
-                // wxLogLastError(wxT("GetScrollInfo"));
+                // wxLogLastError("GetScrollInfo");
             }
 
             event.SetPosition(scrollInfo.nTrackPos);
@@ -6491,7 +6491,7 @@ bool wxWindowMSW::MSWOnScroll(int orientation, WXWORD wParam,
 wxWindowMSW::MSWRegisterMessageHandler(int msg, MSWMessageHandler handler)
 {
     wxCHECK_MSG( gs_messageHandlers.find(msg) == gs_messageHandlers.end(),
-                 false, wxT("registering handler for the same message twice") );
+                 false, "registering handler for the same message twice" );
 
     gs_messageHandlers[msg] = handler;
     return true;
@@ -6502,7 +6502,7 @@ wxWindowMSW::MSWUnregisterMessageHandler(int msg, MSWMessageHandler handler)
 {
     const MSWMessageHandlers::iterator i = gs_messageHandlers.find(msg);
     wxCHECK_RET( i != gs_messageHandlers.end() && i->second == handler,
-                 wxT("unregistering non-registered handler?") );
+                 "unregistering non-registered handler?" );
 
     gs_messageHandlers.erase(i);
 }
@@ -6936,7 +6936,7 @@ bool wxGetKeyState(wxKeyCode key)
     wxASSERT_MSG( key != VK_LBUTTON &&
                     key != VK_RBUTTON &&
                         key != VK_MBUTTON,
-                    wxT("can't use wxGetKeyState() for mouse buttons") );
+                    "can't use wxGetKeyState() for mouse buttons" );
 
     const WXWORD vk = wxMSWKeyboard::WXToVK(key);
 
@@ -7123,7 +7123,7 @@ void wxSetKeyboardHook(bool doIt)
                               );
         if ( !wxTheKeyboardHook )
         {
-            wxLogLastError(wxT("SetWindowsHookEx(wxKeyboardHook)"));
+            wxLogLastError("SetWindowsHookEx(wxKeyboardHook)");
         }
     }
     else // uninstall
@@ -7138,471 +7138,471 @@ const wxChar *wxGetMessageName(int message)
 {
     switch ( message )
     {
-        case 0x0000: return wxT("WM_NULL");
-        case 0x0001: return wxT("WM_CREATE");
-        case 0x0002: return wxT("WM_DESTROY");
-        case 0x0003: return wxT("WM_MOVE");
-        case 0x0005: return wxT("WM_SIZE");
-        case 0x0006: return wxT("WM_ACTIVATE");
-        case 0x0007: return wxT("WM_SETFOCUS");
-        case 0x0008: return wxT("WM_KILLFOCUS");
-        case 0x000A: return wxT("WM_ENABLE");
-        case 0x000B: return wxT("WM_SETREDRAW");
-        case 0x000C: return wxT("WM_SETTEXT");
-        case 0x000D: return wxT("WM_GETTEXT");
-        case 0x000E: return wxT("WM_GETTEXTLENGTH");
-        case 0x000F: return wxT("WM_PAINT");
-        case 0x0010: return wxT("WM_CLOSE");
-        case 0x0011: return wxT("WM_QUERYENDSESSION");
-        case 0x0012: return wxT("WM_QUIT");
-        case 0x0013: return wxT("WM_QUERYOPEN");
-        case 0x0014: return wxT("WM_ERASEBKGND");
-        case 0x0015: return wxT("WM_SYSCOLORCHANGE");
-        case 0x0016: return wxT("WM_ENDSESSION");
-        case 0x0017: return wxT("WM_SYSTEMERROR");
-        case 0x0018: return wxT("WM_SHOWWINDOW");
-        case 0x0019: return wxT("WM_CTLCOLOR");
-        case 0x001A: return wxT("WM_WININICHANGE");
-        case 0x001B: return wxT("WM_DEVMODECHANGE");
-        case 0x001C: return wxT("WM_ACTIVATEAPP");
-        case 0x001D: return wxT("WM_FONTCHANGE");
-        case 0x001E: return wxT("WM_TIMECHANGE");
-        case 0x001F: return wxT("WM_CANCELMODE");
-        case 0x0020: return wxT("WM_SETCURSOR");
-        case 0x0021: return wxT("WM_MOUSEACTIVATE");
-        case 0x0022: return wxT("WM_CHILDACTIVATE");
-        case 0x0023: return wxT("WM_QUEUESYNC");
-        case 0x0024: return wxT("WM_GETMINMAXINFO");
-        case 0x0026: return wxT("WM_PAINTICON");
-        case 0x0027: return wxT("WM_ICONERASEBKGND");
-        case 0x0028: return wxT("WM_NEXTDLGCTL");
-        case 0x002A: return wxT("WM_SPOOLERSTATUS");
-        case 0x002B: return wxT("WM_DRAWITEM");
-        case 0x002C: return wxT("WM_MEASUREITEM");
-        case 0x002D: return wxT("WM_DELETEITEM");
-        case 0x002E: return wxT("WM_VKEYTOITEM");
-        case 0x002F: return wxT("WM_CHARTOITEM");
-        case 0x0030: return wxT("WM_SETFONT");
-        case 0x0031: return wxT("WM_GETFONT");
-        case 0x0037: return wxT("WM_QUERYDRAGICON");
-        case 0x0039: return wxT("WM_COMPAREITEM");
-        case 0x0041: return wxT("WM_COMPACTING");
-        case 0x0044: return wxT("WM_COMMNOTIFY");
-        case 0x0046: return wxT("WM_WINDOWPOSCHANGING");
-        case 0x0047: return wxT("WM_WINDOWPOSCHANGED");
-        case 0x0048: return wxT("WM_POWER");
+        case 0x0000: return "WM_NULL";
+        case 0x0001: return "WM_CREATE";
+        case 0x0002: return "WM_DESTROY";
+        case 0x0003: return "WM_MOVE";
+        case 0x0005: return "WM_SIZE";
+        case 0x0006: return "WM_ACTIVATE";
+        case 0x0007: return "WM_SETFOCUS";
+        case 0x0008: return "WM_KILLFOCUS";
+        case 0x000A: return "WM_ENABLE";
+        case 0x000B: return "WM_SETREDRAW";
+        case 0x000C: return "WM_SETTEXT";
+        case 0x000D: return "WM_GETTEXT";
+        case 0x000E: return "WM_GETTEXTLENGTH";
+        case 0x000F: return "WM_PAINT";
+        case 0x0010: return "WM_CLOSE";
+        case 0x0011: return "WM_QUERYENDSESSION";
+        case 0x0012: return "WM_QUIT";
+        case 0x0013: return "WM_QUERYOPEN";
+        case 0x0014: return "WM_ERASEBKGND";
+        case 0x0015: return "WM_SYSCOLORCHANGE";
+        case 0x0016: return "WM_ENDSESSION";
+        case 0x0017: return "WM_SYSTEMERROR";
+        case 0x0018: return "WM_SHOWWINDOW";
+        case 0x0019: return "WM_CTLCOLOR";
+        case 0x001A: return "WM_WININICHANGE";
+        case 0x001B: return "WM_DEVMODECHANGE";
+        case 0x001C: return "WM_ACTIVATEAPP";
+        case 0x001D: return "WM_FONTCHANGE";
+        case 0x001E: return "WM_TIMECHANGE";
+        case 0x001F: return "WM_CANCELMODE";
+        case 0x0020: return "WM_SETCURSOR";
+        case 0x0021: return "WM_MOUSEACTIVATE";
+        case 0x0022: return "WM_CHILDACTIVATE";
+        case 0x0023: return "WM_QUEUESYNC";
+        case 0x0024: return "WM_GETMINMAXINFO";
+        case 0x0026: return "WM_PAINTICON";
+        case 0x0027: return "WM_ICONERASEBKGND";
+        case 0x0028: return "WM_NEXTDLGCTL";
+        case 0x002A: return "WM_SPOOLERSTATUS";
+        case 0x002B: return "WM_DRAWITEM";
+        case 0x002C: return "WM_MEASUREITEM";
+        case 0x002D: return "WM_DELETEITEM";
+        case 0x002E: return "WM_VKEYTOITEM";
+        case 0x002F: return "WM_CHARTOITEM";
+        case 0x0030: return "WM_SETFONT";
+        case 0x0031: return "WM_GETFONT";
+        case 0x0037: return "WM_QUERYDRAGICON";
+        case 0x0039: return "WM_COMPAREITEM";
+        case 0x0041: return "WM_COMPACTING";
+        case 0x0044: return "WM_COMMNOTIFY";
+        case 0x0046: return "WM_WINDOWPOSCHANGING";
+        case 0x0047: return "WM_WINDOWPOSCHANGED";
+        case 0x0048: return "WM_POWER";
 
-        case 0x004A: return wxT("WM_COPYDATA");
-        case 0x004B: return wxT("WM_CANCELJOURNAL");
-        case 0x004E: return wxT("WM_NOTIFY");
-        case 0x0050: return wxT("WM_INPUTLANGCHANGEREQUEST");
-        case 0x0051: return wxT("WM_INPUTLANGCHANGE");
-        case 0x0052: return wxT("WM_TCARD");
-        case 0x0053: return wxT("WM_HELP");
-        case 0x0054: return wxT("WM_USERCHANGED");
-        case 0x0055: return wxT("WM_NOTIFYFORMAT");
-        case 0x007B: return wxT("WM_CONTEXTMENU");
-        case 0x007C: return wxT("WM_STYLECHANGING");
-        case 0x007D: return wxT("WM_STYLECHANGED");
-        case 0x007E: return wxT("WM_DISPLAYCHANGE");
-        case 0x007F: return wxT("WM_GETICON");
-        case 0x0080: return wxT("WM_SETICON");
+        case 0x004A: return "WM_COPYDATA";
+        case 0x004B: return "WM_CANCELJOURNAL";
+        case 0x004E: return "WM_NOTIFY";
+        case 0x0050: return "WM_INPUTLANGCHANGEREQUEST";
+        case 0x0051: return "WM_INPUTLANGCHANGE";
+        case 0x0052: return "WM_TCARD";
+        case 0x0053: return "WM_HELP";
+        case 0x0054: return "WM_USERCHANGED";
+        case 0x0055: return "WM_NOTIFYFORMAT";
+        case 0x007B: return "WM_CONTEXTMENU";
+        case 0x007C: return "WM_STYLECHANGING";
+        case 0x007D: return "WM_STYLECHANGED";
+        case 0x007E: return "WM_DISPLAYCHANGE";
+        case 0x007F: return "WM_GETICON";
+        case 0x0080: return "WM_SETICON";
 
-        case 0x0081: return wxT("WM_NCCREATE");
-        case 0x0082: return wxT("WM_NCDESTROY");
-        case 0x0083: return wxT("WM_NCCALCSIZE");
-        case 0x0084: return wxT("WM_NCHITTEST");
-        case 0x0085: return wxT("WM_NCPAINT");
-        case 0x0086: return wxT("WM_NCACTIVATE");
-        case 0x0087: return wxT("WM_GETDLGCODE");
-        case 0x00A0: return wxT("WM_NCMOUSEMOVE");
-        case 0x00A1: return wxT("WM_NCLBUTTONDOWN");
-        case 0x00A2: return wxT("WM_NCLBUTTONUP");
-        case 0x00A3: return wxT("WM_NCLBUTTONDBLCLK");
-        case 0x00A4: return wxT("WM_NCRBUTTONDOWN");
-        case 0x00A5: return wxT("WM_NCRBUTTONUP");
-        case 0x00A6: return wxT("WM_NCRBUTTONDBLCLK");
-        case 0x00A7: return wxT("WM_NCMBUTTONDOWN");
-        case 0x00A8: return wxT("WM_NCMBUTTONUP");
-        case 0x00A9: return wxT("WM_NCMBUTTONDBLCLK");
+        case 0x0081: return "WM_NCCREATE";
+        case 0x0082: return "WM_NCDESTROY";
+        case 0x0083: return "WM_NCCALCSIZE";
+        case 0x0084: return "WM_NCHITTEST";
+        case 0x0085: return "WM_NCPAINT";
+        case 0x0086: return "WM_NCACTIVATE";
+        case 0x0087: return "WM_GETDLGCODE";
+        case 0x00A0: return "WM_NCMOUSEMOVE";
+        case 0x00A1: return "WM_NCLBUTTONDOWN";
+        case 0x00A2: return "WM_NCLBUTTONUP";
+        case 0x00A3: return "WM_NCLBUTTONDBLCLK";
+        case 0x00A4: return "WM_NCRBUTTONDOWN";
+        case 0x00A5: return "WM_NCRBUTTONUP";
+        case 0x00A6: return "WM_NCRBUTTONDBLCLK";
+        case 0x00A7: return "WM_NCMBUTTONDOWN";
+        case 0x00A8: return "WM_NCMBUTTONUP";
+        case 0x00A9: return "WM_NCMBUTTONDBLCLK";
 
-        case 0x00B0: return wxT("EM_GETSEL");
-        case 0x00B1: return wxT("EM_SETSEL");
-        case 0x00B2: return wxT("EM_GETRECT");
-        case 0x00B3: return wxT("EM_SETRECT");
-        case 0x00B4: return wxT("EM_SETRECTNP");
-        case 0x00B5: return wxT("EM_SCROLL");
-        case 0x00B6: return wxT("EM_LINESCROLL");
-        case 0x00B7: return wxT("EM_SCROLLCARET");
-        case 0x00B8: return wxT("EM_GETMODIFY");
-        case 0x00B9: return wxT("EM_SETMODIFY");
-        case 0x00BA: return wxT("EM_GETLINECOUNT");
-        case 0x00BB: return wxT("EM_LINEINDEX");
-        case 0x00BC: return wxT("EM_SETHANDLE");
-        case 0x00BD: return wxT("EM_GETHANDLE");
-        case 0x00BE: return wxT("EM_GETTHUMB");
-        case 0x00C1: return wxT("EM_LINELENGTH");
-        case 0x00C2: return wxT("EM_REPLACESEL");
-        case 0x00C4: return wxT("EM_GETLINE");
-        case 0x00C5: return wxT("EM_LIMITTEXT/EM_SETLIMITTEXT"); /* ;win40 Name change */
-        case 0x00C6: return wxT("EM_CANUNDO");
-        case 0x00C7: return wxT("EM_UNDO");
-        case 0x00C8: return wxT("EM_FMTLINES");
-        case 0x00C9: return wxT("EM_LINEFROMCHAR");
-        case 0x00CB: return wxT("EM_SETTABSTOPS");
-        case 0x00CC: return wxT("EM_SETPASSWORDCHAR");
-        case 0x00CD: return wxT("EM_EMPTYUNDOBUFFER");
-        case 0x00CE: return wxT("EM_GETFIRSTVISIBLELINE");
-        case 0x00CF: return wxT("EM_SETREADONLY");
-        case 0x00D0: return wxT("EM_SETWORDBREAKPROC");
-        case 0x00D1: return wxT("EM_GETWORDBREAKPROC");
-        case 0x00D2: return wxT("EM_GETPASSWORDCHAR");
-        case 0x00D3: return wxT("EM_SETMARGINS");
-        case 0x00D4: return wxT("EM_GETMARGINS");
-        case 0x00D5: return wxT("EM_GETLIMITTEXT");
-        case 0x00D6: return wxT("EM_POSFROMCHAR");
-        case 0x00D7: return wxT("EM_CHARFROMPOS");
-        case 0x00D8: return wxT("EM_SETIMESTATUS");
-        case 0x00D9: return wxT("EM_GETIMESTATUS");
+        case 0x00B0: return "EM_GETSEL";
+        case 0x00B1: return "EM_SETSEL";
+        case 0x00B2: return "EM_GETRECT";
+        case 0x00B3: return "EM_SETRECT";
+        case 0x00B4: return "EM_SETRECTNP";
+        case 0x00B5: return "EM_SCROLL";
+        case 0x00B6: return "EM_LINESCROLL";
+        case 0x00B7: return "EM_SCROLLCARET";
+        case 0x00B8: return "EM_GETMODIFY";
+        case 0x00B9: return "EM_SETMODIFY";
+        case 0x00BA: return "EM_GETLINECOUNT";
+        case 0x00BB: return "EM_LINEINDEX";
+        case 0x00BC: return "EM_SETHANDLE";
+        case 0x00BD: return "EM_GETHANDLE";
+        case 0x00BE: return "EM_GETTHUMB";
+        case 0x00C1: return "EM_LINELENGTH";
+        case 0x00C2: return "EM_REPLACESEL";
+        case 0x00C4: return "EM_GETLINE";
+        case 0x00C5: return "EM_LIMITTEXT/EM_SETLIMITTEXT"; /* ;win40 Name change */
+        case 0x00C6: return "EM_CANUNDO";
+        case 0x00C7: return "EM_UNDO";
+        case 0x00C8: return "EM_FMTLINES";
+        case 0x00C9: return "EM_LINEFROMCHAR";
+        case 0x00CB: return "EM_SETTABSTOPS";
+        case 0x00CC: return "EM_SETPASSWORDCHAR";
+        case 0x00CD: return "EM_EMPTYUNDOBUFFER";
+        case 0x00CE: return "EM_GETFIRSTVISIBLELINE";
+        case 0x00CF: return "EM_SETREADONLY";
+        case 0x00D0: return "EM_SETWORDBREAKPROC";
+        case 0x00D1: return "EM_GETWORDBREAKPROC";
+        case 0x00D2: return "EM_GETPASSWORDCHAR";
+        case 0x00D3: return "EM_SETMARGINS";
+        case 0x00D4: return "EM_GETMARGINS";
+        case 0x00D5: return "EM_GETLIMITTEXT";
+        case 0x00D6: return "EM_POSFROMCHAR";
+        case 0x00D7: return "EM_CHARFROMPOS";
+        case 0x00D8: return "EM_SETIMESTATUS";
+        case 0x00D9: return "EM_GETIMESTATUS";
 
-        case 0x0100: return wxT("WM_KEYDOWN");
-        case 0x0101: return wxT("WM_KEYUP");
-        case 0x0102: return wxT("WM_CHAR");
-        case 0x0103: return wxT("WM_DEADCHAR");
-        case 0x0104: return wxT("WM_SYSKEYDOWN");
-        case 0x0105: return wxT("WM_SYSKEYUP");
-        case 0x0106: return wxT("WM_SYSCHAR");
-        case 0x0107: return wxT("WM_SYSDEADCHAR");
-        case 0x0108: return wxT("WM_KEYLAST");
+        case 0x0100: return "WM_KEYDOWN";
+        case 0x0101: return "WM_KEYUP";
+        case 0x0102: return "WM_CHAR";
+        case 0x0103: return "WM_DEADCHAR";
+        case 0x0104: return "WM_SYSKEYDOWN";
+        case 0x0105: return "WM_SYSKEYUP";
+        case 0x0106: return "WM_SYSCHAR";
+        case 0x0107: return "WM_SYSDEADCHAR";
+        case 0x0108: return "WM_KEYLAST";
 
-        case 0x010D: return wxT("WM_IME_STARTCOMPOSITION");
-        case 0x010E: return wxT("WM_IME_ENDCOMPOSITION");
-        case 0x010F: return wxT("WM_IME_COMPOSITION");
+        case 0x010D: return "WM_IME_STARTCOMPOSITION";
+        case 0x010E: return "WM_IME_ENDCOMPOSITION";
+        case 0x010F: return "WM_IME_COMPOSITION";
 
-        case 0x0110: return wxT("WM_INITDIALOG");
-        case 0x0111: return wxT("WM_COMMAND");
-        case 0x0112: return wxT("WM_SYSCOMMAND");
-        case 0x0113: return wxT("WM_TIMER");
-        case 0x0114: return wxT("WM_HSCROLL");
-        case 0x0115: return wxT("WM_VSCROLL");
-        case 0x0116: return wxT("WM_INITMENU");
-        case 0x0117: return wxT("WM_INITMENUPOPUP");
-        case 0x011F: return wxT("WM_MENUSELECT");
-        case 0x0120: return wxT("WM_MENUCHAR");
-        case 0x0121: return wxT("WM_ENTERIDLE");
+        case 0x0110: return "WM_INITDIALOG";
+        case 0x0111: return "WM_COMMAND";
+        case 0x0112: return "WM_SYSCOMMAND";
+        case 0x0113: return "WM_TIMER";
+        case 0x0114: return "WM_HSCROLL";
+        case 0x0115: return "WM_VSCROLL";
+        case 0x0116: return "WM_INITMENU";
+        case 0x0117: return "WM_INITMENUPOPUP";
+        case 0x011F: return "WM_MENUSELECT";
+        case 0x0120: return "WM_MENUCHAR";
+        case 0x0121: return "WM_ENTERIDLE";
 
-        case 0x0127: return wxT("WM_CHANGEUISTATE");
-        case 0x0128: return wxT("WM_UPDATEUISTATE");
-        case 0x0129: return wxT("WM_QUERYUISTATE");
+        case 0x0127: return "WM_CHANGEUISTATE";
+        case 0x0128: return "WM_UPDATEUISTATE";
+        case 0x0129: return "WM_QUERYUISTATE";
 
-        case 0x0132: return wxT("WM_CTLCOLORMSGBOX");
-        case 0x0133: return wxT("WM_CTLCOLOREDIT");
-        case 0x0134: return wxT("WM_CTLCOLORLISTBOX");
-        case 0x0135: return wxT("WM_CTLCOLORBTN");
-        case 0x0136: return wxT("WM_CTLCOLORDLG");
-        case 0x0137: return wxT("WM_CTLCOLORSCROLLBAR");
-        case 0x0138: return wxT("WM_CTLCOLORSTATIC");
-        case 0x01E1: return wxT("MN_GETHMENU");
+        case 0x0132: return "WM_CTLCOLORMSGBOX";
+        case 0x0133: return "WM_CTLCOLOREDIT";
+        case 0x0134: return "WM_CTLCOLORLISTBOX";
+        case 0x0135: return "WM_CTLCOLORBTN";
+        case 0x0136: return "WM_CTLCOLORDLG";
+        case 0x0137: return "WM_CTLCOLORSCROLLBAR";
+        case 0x0138: return "WM_CTLCOLORSTATIC";
+        case 0x01E1: return "MN_GETHMENU";
 
-        case 0x0200: return wxT("WM_MOUSEMOVE");
-        case 0x0201: return wxT("WM_LBUTTONDOWN");
-        case 0x0202: return wxT("WM_LBUTTONUP");
-        case 0x0203: return wxT("WM_LBUTTONDBLCLK");
-        case 0x0204: return wxT("WM_RBUTTONDOWN");
-        case 0x0205: return wxT("WM_RBUTTONUP");
-        case 0x0206: return wxT("WM_RBUTTONDBLCLK");
-        case 0x0207: return wxT("WM_MBUTTONDOWN");
-        case 0x0208: return wxT("WM_MBUTTONUP");
-        case 0x0209: return wxT("WM_MBUTTONDBLCLK");
-        case 0x020A: return wxT("WM_MOUSEWHEEL");
-        case 0x020B: return wxT("WM_XBUTTONDOWN");
-        case 0x020C: return wxT("WM_XBUTTONUP");
-        case 0x020D: return wxT("WM_XBUTTONDBLCLK");
-        case 0x0210: return wxT("WM_PARENTNOTIFY");
-        case 0x0211: return wxT("WM_ENTERMENULOOP");
-        case 0x0212: return wxT("WM_EXITMENULOOP");
+        case 0x0200: return "WM_MOUSEMOVE";
+        case 0x0201: return "WM_LBUTTONDOWN";
+        case 0x0202: return "WM_LBUTTONUP";
+        case 0x0203: return "WM_LBUTTONDBLCLK";
+        case 0x0204: return "WM_RBUTTONDOWN";
+        case 0x0205: return "WM_RBUTTONUP";
+        case 0x0206: return "WM_RBUTTONDBLCLK";
+        case 0x0207: return "WM_MBUTTONDOWN";
+        case 0x0208: return "WM_MBUTTONUP";
+        case 0x0209: return "WM_MBUTTONDBLCLK";
+        case 0x020A: return "WM_MOUSEWHEEL";
+        case 0x020B: return "WM_XBUTTONDOWN";
+        case 0x020C: return "WM_XBUTTONUP";
+        case 0x020D: return "WM_XBUTTONDBLCLK";
+        case 0x0210: return "WM_PARENTNOTIFY";
+        case 0x0211: return "WM_ENTERMENULOOP";
+        case 0x0212: return "WM_EXITMENULOOP";
 
-        case 0x0213: return wxT("WM_NEXTMENU");
-        case 0x0214: return wxT("WM_SIZING");
-        case 0x0215: return wxT("WM_CAPTURECHANGED");
-        case 0x0216: return wxT("WM_MOVING");
-        case 0x0218: return wxT("WM_POWERBROADCAST");
-        case 0x0219: return wxT("WM_DEVICECHANGE");
+        case 0x0213: return "WM_NEXTMENU";
+        case 0x0214: return "WM_SIZING";
+        case 0x0215: return "WM_CAPTURECHANGED";
+        case 0x0216: return "WM_MOVING";
+        case 0x0218: return "WM_POWERBROADCAST";
+        case 0x0219: return "WM_DEVICECHANGE";
 
-        case 0x0220: return wxT("WM_MDICREATE");
-        case 0x0221: return wxT("WM_MDIDESTROY");
-        case 0x0222: return wxT("WM_MDIACTIVATE");
-        case 0x0223: return wxT("WM_MDIRESTORE");
-        case 0x0224: return wxT("WM_MDINEXT");
-        case 0x0225: return wxT("WM_MDIMAXIMIZE");
-        case 0x0226: return wxT("WM_MDITILE");
-        case 0x0227: return wxT("WM_MDICASCADE");
-        case 0x0228: return wxT("WM_MDIICONARRANGE");
-        case 0x0229: return wxT("WM_MDIGETACTIVE");
-        case 0x0230: return wxT("WM_MDISETMENU");
-        case 0x0233: return wxT("WM_DROPFILES");
+        case 0x0220: return "WM_MDICREATE";
+        case 0x0221: return "WM_MDIDESTROY";
+        case 0x0222: return "WM_MDIACTIVATE";
+        case 0x0223: return "WM_MDIRESTORE";
+        case 0x0224: return "WM_MDINEXT";
+        case 0x0225: return "WM_MDIMAXIMIZE";
+        case 0x0226: return "WM_MDITILE";
+        case 0x0227: return "WM_MDICASCADE";
+        case 0x0228: return "WM_MDIICONARRANGE";
+        case 0x0229: return "WM_MDIGETACTIVE";
+        case 0x0230: return "WM_MDISETMENU";
+        case 0x0233: return "WM_DROPFILES";
 
-        case 0x0281: return wxT("WM_IME_SETCONTEXT");
-        case 0x0282: return wxT("WM_IME_NOTIFY");
-        case 0x0283: return wxT("WM_IME_CONTROL");
-        case 0x0284: return wxT("WM_IME_COMPOSITIONFULL");
-        case 0x0285: return wxT("WM_IME_SELECT");
-        case 0x0286: return wxT("WM_IME_CHAR");
-        case 0x0290: return wxT("WM_IME_KEYDOWN");
-        case 0x0291: return wxT("WM_IME_KEYUP");
+        case 0x0281: return "WM_IME_SETCONTEXT";
+        case 0x0282: return "WM_IME_NOTIFY";
+        case 0x0283: return "WM_IME_CONTROL";
+        case 0x0284: return "WM_IME_COMPOSITIONFULL";
+        case 0x0285: return "WM_IME_SELECT";
+        case 0x0286: return "WM_IME_CHAR";
+        case 0x0290: return "WM_IME_KEYDOWN";
+        case 0x0291: return "WM_IME_KEYUP";
 
-        case 0x02A0: return wxT("WM_NCMOUSEHOVER");
-        case 0x02A1: return wxT("WM_MOUSEHOVER");
-        case 0x02A2: return wxT("WM_NCMOUSELEAVE");
-        case 0x02A3: return wxT("WM_MOUSELEAVE");
+        case 0x02A0: return "WM_NCMOUSEHOVER";
+        case 0x02A1: return "WM_MOUSEHOVER";
+        case 0x02A2: return "WM_NCMOUSELEAVE";
+        case 0x02A3: return "WM_MOUSELEAVE";
 
-        case 0x0300: return wxT("WM_CUT");
-        case 0x0301: return wxT("WM_COPY");
-        case 0x0302: return wxT("WM_PASTE");
-        case 0x0303: return wxT("WM_CLEAR");
-        case 0x0304: return wxT("WM_UNDO");
-        case 0x0305: return wxT("WM_RENDERFORMAT");
-        case 0x0306: return wxT("WM_RENDERALLFORMATS");
-        case 0x0307: return wxT("WM_DESTROYCLIPBOARD");
-        case 0x0308: return wxT("WM_DRAWCLIPBOARD");
-        case 0x0309: return wxT("WM_PAINTCLIPBOARD");
-        case 0x030A: return wxT("WM_VSCROLLCLIPBOARD");
-        case 0x030B: return wxT("WM_SIZECLIPBOARD");
-        case 0x030C: return wxT("WM_ASKCBFORMATNAME");
-        case 0x030D: return wxT("WM_CHANGECBCHAIN");
-        case 0x030E: return wxT("WM_HSCROLLCLIPBOARD");
-        case 0x030F: return wxT("WM_QUERYNEWPALETTE");
-        case 0x0310: return wxT("WM_PALETTEISCHANGING");
-        case 0x0311: return wxT("WM_PALETTECHANGED");
-        case 0x0312: return wxT("WM_HOTKEY");
+        case 0x0300: return "WM_CUT";
+        case 0x0301: return "WM_COPY";
+        case 0x0302: return "WM_PASTE";
+        case 0x0303: return "WM_CLEAR";
+        case 0x0304: return "WM_UNDO";
+        case 0x0305: return "WM_RENDERFORMAT";
+        case 0x0306: return "WM_RENDERALLFORMATS";
+        case 0x0307: return "WM_DESTROYCLIPBOARD";
+        case 0x0308: return "WM_DRAWCLIPBOARD";
+        case 0x0309: return "WM_PAINTCLIPBOARD";
+        case 0x030A: return "WM_VSCROLLCLIPBOARD";
+        case 0x030B: return "WM_SIZECLIPBOARD";
+        case 0x030C: return "WM_ASKCBFORMATNAME";
+        case 0x030D: return "WM_CHANGECBCHAIN";
+        case 0x030E: return "WM_HSCROLLCLIPBOARD";
+        case 0x030F: return "WM_QUERYNEWPALETTE";
+        case 0x0310: return "WM_PALETTEISCHANGING";
+        case 0x0311: return "WM_PALETTECHANGED";
+        case 0x0312: return "WM_HOTKEY";
 
-        case 0x0317: return wxT("WM_PRINT");
-        case 0x0318: return wxT("WM_PRINTCLIENT");
+        case 0x0317: return "WM_PRINT";
+        case 0x0318: return "WM_PRINTCLIENT";
 
         // common controls messages - although they're not strictly speaking
         // standard, it's nice to decode them nevertheless
 
         // listview
-        case 0x1000 + 0: return wxT("LVM_GETBKCOLOR");
-        case 0x1000 + 1: return wxT("LVM_SETBKCOLOR");
-        case 0x1000 + 2: return wxT("LVM_GETIMAGELIST");
-        case 0x1000 + 3: return wxT("LVM_SETIMAGELIST");
-        case 0x1000 + 4: return wxT("LVM_GETITEMCOUNT");
-        case 0x1000 + 5: return wxT("LVM_GETITEMA");
-        case 0x1000 + 75: return wxT("LVM_GETITEMW");
-        case 0x1000 + 6: return wxT("LVM_SETITEMA");
-        case 0x1000 + 76: return wxT("LVM_SETITEMW");
-        case 0x1000 + 7: return wxT("LVM_INSERTITEMA");
-        case 0x1000 + 77: return wxT("LVM_INSERTITEMW");
-        case 0x1000 + 8: return wxT("LVM_DELETEITEM");
-        case 0x1000 + 9: return wxT("LVM_DELETEALLITEMS");
-        case 0x1000 + 10: return wxT("LVM_GETCALLBACKMASK");
-        case 0x1000 + 11: return wxT("LVM_SETCALLBACKMASK");
-        case 0x1000 + 12: return wxT("LVM_GETNEXTITEM");
-        case 0x1000 + 13: return wxT("LVM_FINDITEMA");
-        case 0x1000 + 83: return wxT("LVM_FINDITEMW");
-        case 0x1000 + 14: return wxT("LVM_GETITEMRECT");
-        case 0x1000 + 15: return wxT("LVM_SETITEMPOSITION");
-        case 0x1000 + 16: return wxT("LVM_GETITEMPOSITION");
-        case 0x1000 + 17: return wxT("LVM_GETSTRINGWIDTHA");
-        case 0x1000 + 87: return wxT("LVM_GETSTRINGWIDTHW");
-        case 0x1000 + 18: return wxT("LVM_HITTEST");
-        case 0x1000 + 19: return wxT("LVM_ENSUREVISIBLE");
-        case 0x1000 + 20: return wxT("LVM_SCROLL");
-        case 0x1000 + 21: return wxT("LVM_REDRAWITEMS");
-        case 0x1000 + 22: return wxT("LVM_ARRANGE");
-        case 0x1000 + 23: return wxT("LVM_EDITLABELA");
-        case 0x1000 + 118: return wxT("LVM_EDITLABELW");
-        case 0x1000 + 24: return wxT("LVM_GETEDITCONTROL");
-        case 0x1000 + 25: return wxT("LVM_GETCOLUMNA");
-        case 0x1000 + 95: return wxT("LVM_GETCOLUMNW");
-        case 0x1000 + 26: return wxT("LVM_SETCOLUMNA");
-        case 0x1000 + 96: return wxT("LVM_SETCOLUMNW");
-        case 0x1000 + 27: return wxT("LVM_INSERTCOLUMNA");
-        case 0x1000 + 97: return wxT("LVM_INSERTCOLUMNW");
-        case 0x1000 + 28: return wxT("LVM_DELETECOLUMN");
-        case 0x1000 + 29: return wxT("LVM_GETCOLUMNWIDTH");
-        case 0x1000 + 30: return wxT("LVM_SETCOLUMNWIDTH");
-        case 0x1000 + 31: return wxT("LVM_GETHEADER");
-        case 0x1000 + 33: return wxT("LVM_CREATEDRAGIMAGE");
-        case 0x1000 + 34: return wxT("LVM_GETVIEWRECT");
-        case 0x1000 + 35: return wxT("LVM_GETTEXTCOLOR");
-        case 0x1000 + 36: return wxT("LVM_SETTEXTCOLOR");
-        case 0x1000 + 37: return wxT("LVM_GETTEXTBKCOLOR");
-        case 0x1000 + 38: return wxT("LVM_SETTEXTBKCOLOR");
-        case 0x1000 + 39: return wxT("LVM_GETTOPINDEX");
-        case 0x1000 + 40: return wxT("LVM_GETCOUNTPERPAGE");
-        case 0x1000 + 41: return wxT("LVM_GETORIGIN");
-        case 0x1000 + 42: return wxT("LVM_UPDATE");
-        case 0x1000 + 43: return wxT("LVM_SETITEMSTATE");
-        case 0x1000 + 44: return wxT("LVM_GETITEMSTATE");
-        case 0x1000 + 45: return wxT("LVM_GETITEMTEXTA");
-        case 0x1000 + 115: return wxT("LVM_GETITEMTEXTW");
-        case 0x1000 + 46: return wxT("LVM_SETITEMTEXTA");
-        case 0x1000 + 116: return wxT("LVM_SETITEMTEXTW");
-        case 0x1000 + 47: return wxT("LVM_SETITEMCOUNT");
-        case 0x1000 + 48: return wxT("LVM_SORTITEMS");
-        case 0x1000 + 49: return wxT("LVM_SETITEMPOSITION32");
-        case 0x1000 + 50: return wxT("LVM_GETSELECTEDCOUNT");
-        case 0x1000 + 51: return wxT("LVM_GETITEMSPACING");
-        case 0x1000 + 52: return wxT("LVM_GETISEARCHSTRINGA");
-        case 0x1000 + 117: return wxT("LVM_GETISEARCHSTRINGW");
-        case 0x1000 + 53: return wxT("LVM_SETICONSPACING");
-        case 0x1000 + 54: return wxT("LVM_SETEXTENDEDLISTVIEWSTYLE");
-        case 0x1000 + 55: return wxT("LVM_GETEXTENDEDLISTVIEWSTYLE");
-        case 0x1000 + 56: return wxT("LVM_GETSUBITEMRECT");
-        case 0x1000 + 57: return wxT("LVM_SUBITEMHITTEST");
-        case 0x1000 + 58: return wxT("LVM_SETCOLUMNORDERARRAY");
-        case 0x1000 + 59: return wxT("LVM_GETCOLUMNORDERARRAY");
-        case 0x1000 + 60: return wxT("LVM_SETHOTITEM");
-        case 0x1000 + 61: return wxT("LVM_GETHOTITEM");
-        case 0x1000 + 62: return wxT("LVM_SETHOTCURSOR");
-        case 0x1000 + 63: return wxT("LVM_GETHOTCURSOR");
-        case 0x1000 + 64: return wxT("LVM_APPROXIMATEVIEWRECT");
-        case 0x1000 + 65: return wxT("LVM_SETWORKAREA");
+        case 0x1000 + 0: return "LVM_GETBKCOLOR";
+        case 0x1000 + 1: return "LVM_SETBKCOLOR";
+        case 0x1000 + 2: return "LVM_GETIMAGELIST";
+        case 0x1000 + 3: return "LVM_SETIMAGELIST";
+        case 0x1000 + 4: return "LVM_GETITEMCOUNT";
+        case 0x1000 + 5: return "LVM_GETITEMA";
+        case 0x1000 + 75: return "LVM_GETITEMW";
+        case 0x1000 + 6: return "LVM_SETITEMA";
+        case 0x1000 + 76: return "LVM_SETITEMW";
+        case 0x1000 + 7: return "LVM_INSERTITEMA";
+        case 0x1000 + 77: return "LVM_INSERTITEMW";
+        case 0x1000 + 8: return "LVM_DELETEITEM";
+        case 0x1000 + 9: return "LVM_DELETEALLITEMS";
+        case 0x1000 + 10: return "LVM_GETCALLBACKMASK";
+        case 0x1000 + 11: return "LVM_SETCALLBACKMASK";
+        case 0x1000 + 12: return "LVM_GETNEXTITEM";
+        case 0x1000 + 13: return "LVM_FINDITEMA";
+        case 0x1000 + 83: return "LVM_FINDITEMW";
+        case 0x1000 + 14: return "LVM_GETITEMRECT";
+        case 0x1000 + 15: return "LVM_SETITEMPOSITION";
+        case 0x1000 + 16: return "LVM_GETITEMPOSITION";
+        case 0x1000 + 17: return "LVM_GETSTRINGWIDTHA";
+        case 0x1000 + 87: return "LVM_GETSTRINGWIDTHW";
+        case 0x1000 + 18: return "LVM_HITTEST";
+        case 0x1000 + 19: return "LVM_ENSUREVISIBLE";
+        case 0x1000 + 20: return "LVM_SCROLL";
+        case 0x1000 + 21: return "LVM_REDRAWITEMS";
+        case 0x1000 + 22: return "LVM_ARRANGE";
+        case 0x1000 + 23: return "LVM_EDITLABELA";
+        case 0x1000 + 118: return "LVM_EDITLABELW";
+        case 0x1000 + 24: return "LVM_GETEDITCONTROL";
+        case 0x1000 + 25: return "LVM_GETCOLUMNA";
+        case 0x1000 + 95: return "LVM_GETCOLUMNW";
+        case 0x1000 + 26: return "LVM_SETCOLUMNA";
+        case 0x1000 + 96: return "LVM_SETCOLUMNW";
+        case 0x1000 + 27: return "LVM_INSERTCOLUMNA";
+        case 0x1000 + 97: return "LVM_INSERTCOLUMNW";
+        case 0x1000 + 28: return "LVM_DELETECOLUMN";
+        case 0x1000 + 29: return "LVM_GETCOLUMNWIDTH";
+        case 0x1000 + 30: return "LVM_SETCOLUMNWIDTH";
+        case 0x1000 + 31: return "LVM_GETHEADER";
+        case 0x1000 + 33: return "LVM_CREATEDRAGIMAGE";
+        case 0x1000 + 34: return "LVM_GETVIEWRECT";
+        case 0x1000 + 35: return "LVM_GETTEXTCOLOR";
+        case 0x1000 + 36: return "LVM_SETTEXTCOLOR";
+        case 0x1000 + 37: return "LVM_GETTEXTBKCOLOR";
+        case 0x1000 + 38: return "LVM_SETTEXTBKCOLOR";
+        case 0x1000 + 39: return "LVM_GETTOPINDEX";
+        case 0x1000 + 40: return "LVM_GETCOUNTPERPAGE";
+        case 0x1000 + 41: return "LVM_GETORIGIN";
+        case 0x1000 + 42: return "LVM_UPDATE";
+        case 0x1000 + 43: return "LVM_SETITEMSTATE";
+        case 0x1000 + 44: return "LVM_GETITEMSTATE";
+        case 0x1000 + 45: return "LVM_GETITEMTEXTA";
+        case 0x1000 + 115: return "LVM_GETITEMTEXTW";
+        case 0x1000 + 46: return "LVM_SETITEMTEXTA";
+        case 0x1000 + 116: return "LVM_SETITEMTEXTW";
+        case 0x1000 + 47: return "LVM_SETITEMCOUNT";
+        case 0x1000 + 48: return "LVM_SORTITEMS";
+        case 0x1000 + 49: return "LVM_SETITEMPOSITION32";
+        case 0x1000 + 50: return "LVM_GETSELECTEDCOUNT";
+        case 0x1000 + 51: return "LVM_GETITEMSPACING";
+        case 0x1000 + 52: return "LVM_GETISEARCHSTRINGA";
+        case 0x1000 + 117: return "LVM_GETISEARCHSTRINGW";
+        case 0x1000 + 53: return "LVM_SETICONSPACING";
+        case 0x1000 + 54: return "LVM_SETEXTENDEDLISTVIEWSTYLE";
+        case 0x1000 + 55: return "LVM_GETEXTENDEDLISTVIEWSTYLE";
+        case 0x1000 + 56: return "LVM_GETSUBITEMRECT";
+        case 0x1000 + 57: return "LVM_SUBITEMHITTEST";
+        case 0x1000 + 58: return "LVM_SETCOLUMNORDERARRAY";
+        case 0x1000 + 59: return "LVM_GETCOLUMNORDERARRAY";
+        case 0x1000 + 60: return "LVM_SETHOTITEM";
+        case 0x1000 + 61: return "LVM_GETHOTITEM";
+        case 0x1000 + 62: return "LVM_SETHOTCURSOR";
+        case 0x1000 + 63: return "LVM_GETHOTCURSOR";
+        case 0x1000 + 64: return "LVM_APPROXIMATEVIEWRECT";
+        case 0x1000 + 65: return "LVM_SETWORKAREA";
 
         // tree view
-        case 0x1100 + 0: return wxT("TVM_INSERTITEMA");
-        case 0x1100 + 50: return wxT("TVM_INSERTITEMW");
-        case 0x1100 + 1: return wxT("TVM_DELETEITEM");
-        case 0x1100 + 2: return wxT("TVM_EXPAND");
-        case 0x1100 + 4: return wxT("TVM_GETITEMRECT");
-        case 0x1100 + 5: return wxT("TVM_GETCOUNT");
-        case 0x1100 + 6: return wxT("TVM_GETINDENT");
-        case 0x1100 + 7: return wxT("TVM_SETINDENT");
-        case 0x1100 + 8: return wxT("TVM_GETIMAGELIST");
-        case 0x1100 + 9: return wxT("TVM_SETIMAGELIST");
-        case 0x1100 + 10: return wxT("TVM_GETNEXTITEM");
-        case 0x1100 + 11: return wxT("TVM_SELECTITEM");
-        case 0x1100 + 12: return wxT("TVM_GETITEMA");
-        case 0x1100 + 62: return wxT("TVM_GETITEMW");
-        case 0x1100 + 13: return wxT("TVM_SETITEMA");
-        case 0x1100 + 63: return wxT("TVM_SETITEMW");
-        case 0x1100 + 14: return wxT("TVM_EDITLABELA");
-        case 0x1100 + 65: return wxT("TVM_EDITLABELW");
-        case 0x1100 + 15: return wxT("TVM_GETEDITCONTROL");
-        case 0x1100 + 16: return wxT("TVM_GETVISIBLECOUNT");
-        case 0x1100 + 17: return wxT("TVM_HITTEST");
-        case 0x1100 + 18: return wxT("TVM_CREATEDRAGIMAGE");
-        case 0x1100 + 19: return wxT("TVM_SORTCHILDREN");
-        case 0x1100 + 20: return wxT("TVM_ENSUREVISIBLE");
-        case 0x1100 + 21: return wxT("TVM_SORTCHILDRENCB");
-        case 0x1100 + 22: return wxT("TVM_ENDEDITLABELNOW");
-        case 0x1100 + 23: return wxT("TVM_GETISEARCHSTRINGA");
-        case 0x1100 + 64: return wxT("TVM_GETISEARCHSTRINGW");
-        case 0x1100 + 24: return wxT("TVM_SETTOOLTIPS");
-        case 0x1100 + 25: return wxT("TVM_GETTOOLTIPS");
+        case 0x1100 + 0: return "TVM_INSERTITEMA";
+        case 0x1100 + 50: return "TVM_INSERTITEMW";
+        case 0x1100 + 1: return "TVM_DELETEITEM";
+        case 0x1100 + 2: return "TVM_EXPAND";
+        case 0x1100 + 4: return "TVM_GETITEMRECT";
+        case 0x1100 + 5: return "TVM_GETCOUNT";
+        case 0x1100 + 6: return "TVM_GETINDENT";
+        case 0x1100 + 7: return "TVM_SETINDENT";
+        case 0x1100 + 8: return "TVM_GETIMAGELIST";
+        case 0x1100 + 9: return "TVM_SETIMAGELIST";
+        case 0x1100 + 10: return "TVM_GETNEXTITEM";
+        case 0x1100 + 11: return "TVM_SELECTITEM";
+        case 0x1100 + 12: return "TVM_GETITEMA";
+        case 0x1100 + 62: return "TVM_GETITEMW";
+        case 0x1100 + 13: return "TVM_SETITEMA";
+        case 0x1100 + 63: return "TVM_SETITEMW";
+        case 0x1100 + 14: return "TVM_EDITLABELA";
+        case 0x1100 + 65: return "TVM_EDITLABELW";
+        case 0x1100 + 15: return "TVM_GETEDITCONTROL";
+        case 0x1100 + 16: return "TVM_GETVISIBLECOUNT";
+        case 0x1100 + 17: return "TVM_HITTEST";
+        case 0x1100 + 18: return "TVM_CREATEDRAGIMAGE";
+        case 0x1100 + 19: return "TVM_SORTCHILDREN";
+        case 0x1100 + 20: return "TVM_ENSUREVISIBLE";
+        case 0x1100 + 21: return "TVM_SORTCHILDRENCB";
+        case 0x1100 + 22: return "TVM_ENDEDITLABELNOW";
+        case 0x1100 + 23: return "TVM_GETISEARCHSTRINGA";
+        case 0x1100 + 64: return "TVM_GETISEARCHSTRINGW";
+        case 0x1100 + 24: return "TVM_SETTOOLTIPS";
+        case 0x1100 + 25: return "TVM_GETTOOLTIPS";
 
         // header
-        case 0x1200 + 0: return wxT("HDM_GETITEMCOUNT");
-        case 0x1200 + 1: return wxT("HDM_INSERTITEMA");
-        case 0x1200 + 10: return wxT("HDM_INSERTITEMW");
-        case 0x1200 + 2: return wxT("HDM_DELETEITEM");
-        case 0x1200 + 3: return wxT("HDM_GETITEMA");
-        case 0x1200 + 11: return wxT("HDM_GETITEMW");
-        case 0x1200 + 4: return wxT("HDM_SETITEMA");
-        case 0x1200 + 12: return wxT("HDM_SETITEMW");
-        case 0x1200 + 5: return wxT("HDM_LAYOUT");
-        case 0x1200 + 6: return wxT("HDM_HITTEST");
-        case 0x1200 + 7: return wxT("HDM_GETITEMRECT");
-        case 0x1200 + 8: return wxT("HDM_SETIMAGELIST");
-        case 0x1200 + 9: return wxT("HDM_GETIMAGELIST");
-        case 0x1200 + 15: return wxT("HDM_ORDERTOINDEX");
-        case 0x1200 + 16: return wxT("HDM_CREATEDRAGIMAGE");
-        case 0x1200 + 17: return wxT("HDM_GETORDERARRAY");
-        case 0x1200 + 18: return wxT("HDM_SETORDERARRAY");
-        case 0x1200 + 19: return wxT("HDM_SETHOTDIVIDER");
+        case 0x1200 + 0: return "HDM_GETITEMCOUNT";
+        case 0x1200 + 1: return "HDM_INSERTITEMA";
+        case 0x1200 + 10: return "HDM_INSERTITEMW";
+        case 0x1200 + 2: return "HDM_DELETEITEM";
+        case 0x1200 + 3: return "HDM_GETITEMA";
+        case 0x1200 + 11: return "HDM_GETITEMW";
+        case 0x1200 + 4: return "HDM_SETITEMA";
+        case 0x1200 + 12: return "HDM_SETITEMW";
+        case 0x1200 + 5: return "HDM_LAYOUT";
+        case 0x1200 + 6: return "HDM_HITTEST";
+        case 0x1200 + 7: return "HDM_GETITEMRECT";
+        case 0x1200 + 8: return "HDM_SETIMAGELIST";
+        case 0x1200 + 9: return "HDM_GETIMAGELIST";
+        case 0x1200 + 15: return "HDM_ORDERTOINDEX";
+        case 0x1200 + 16: return "HDM_CREATEDRAGIMAGE";
+        case 0x1200 + 17: return "HDM_GETORDERARRAY";
+        case 0x1200 + 18: return "HDM_SETORDERARRAY";
+        case 0x1200 + 19: return "HDM_SETHOTDIVIDER";
 
         // tab control
-        case 0x1300 + 2: return wxT("TCM_GETIMAGELIST");
-        case 0x1300 + 3: return wxT("TCM_SETIMAGELIST");
-        case 0x1300 + 4: return wxT("TCM_GETITEMCOUNT");
-        case 0x1300 + 5: return wxT("TCM_GETITEMA");
-        case 0x1300 + 60: return wxT("TCM_GETITEMW");
-        case 0x1300 + 6: return wxT("TCM_SETITEMA");
-        case 0x1300 + 61: return wxT("TCM_SETITEMW");
-        case 0x1300 + 7: return wxT("TCM_INSERTITEMA");
-        case 0x1300 + 62: return wxT("TCM_INSERTITEMW");
-        case 0x1300 + 8: return wxT("TCM_DELETEITEM");
-        case 0x1300 + 9: return wxT("TCM_DELETEALLITEMS");
-        case 0x1300 + 10: return wxT("TCM_GETITEMRECT");
-        case 0x1300 + 11: return wxT("TCM_GETCURSEL");
-        case 0x1300 + 12: return wxT("TCM_SETCURSEL");
-        case 0x1300 + 13: return wxT("TCM_HITTEST");
-        case 0x1300 + 14: return wxT("TCM_SETITEMEXTRA");
-        case 0x1300 + 40: return wxT("TCM_ADJUSTRECT");
-        case 0x1300 + 41: return wxT("TCM_SETITEMSIZE");
-        case 0x1300 + 42: return wxT("TCM_REMOVEIMAGE");
-        case 0x1300 + 43: return wxT("TCM_SETPADDING");
-        case 0x1300 + 44: return wxT("TCM_GETROWCOUNT");
-        case 0x1300 + 45: return wxT("TCM_GETTOOLTIPS");
-        case 0x1300 + 46: return wxT("TCM_SETTOOLTIPS");
-        case 0x1300 + 47: return wxT("TCM_GETCURFOCUS");
-        case 0x1300 + 48: return wxT("TCM_SETCURFOCUS");
-        case 0x1300 + 49: return wxT("TCM_SETMINTABWIDTH");
-        case 0x1300 + 50: return wxT("TCM_DESELECTALL");
+        case 0x1300 + 2: return "TCM_GETIMAGELIST";
+        case 0x1300 + 3: return "TCM_SETIMAGELIST";
+        case 0x1300 + 4: return "TCM_GETITEMCOUNT";
+        case 0x1300 + 5: return "TCM_GETITEMA";
+        case 0x1300 + 60: return "TCM_GETITEMW";
+        case 0x1300 + 6: return "TCM_SETITEMA";
+        case 0x1300 + 61: return "TCM_SETITEMW";
+        case 0x1300 + 7: return "TCM_INSERTITEMA";
+        case 0x1300 + 62: return "TCM_INSERTITEMW";
+        case 0x1300 + 8: return "TCM_DELETEITEM";
+        case 0x1300 + 9: return "TCM_DELETEALLITEMS";
+        case 0x1300 + 10: return "TCM_GETITEMRECT";
+        case 0x1300 + 11: return "TCM_GETCURSEL";
+        case 0x1300 + 12: return "TCM_SETCURSEL";
+        case 0x1300 + 13: return "TCM_HITTEST";
+        case 0x1300 + 14: return "TCM_SETITEMEXTRA";
+        case 0x1300 + 40: return "TCM_ADJUSTRECT";
+        case 0x1300 + 41: return "TCM_SETITEMSIZE";
+        case 0x1300 + 42: return "TCM_REMOVEIMAGE";
+        case 0x1300 + 43: return "TCM_SETPADDING";
+        case 0x1300 + 44: return "TCM_GETROWCOUNT";
+        case 0x1300 + 45: return "TCM_GETTOOLTIPS";
+        case 0x1300 + 46: return "TCM_SETTOOLTIPS";
+        case 0x1300 + 47: return "TCM_GETCURFOCUS";
+        case 0x1300 + 48: return "TCM_SETCURFOCUS";
+        case 0x1300 + 49: return "TCM_SETMINTABWIDTH";
+        case 0x1300 + 50: return "TCM_DESELECTALL";
 
         // toolbar
-        case WM_USER+1: return wxT("TB_ENABLEBUTTON");
-        case WM_USER+2: return wxT("TB_CHECKBUTTON");
-        case WM_USER+3: return wxT("TB_PRESSBUTTON");
-        case WM_USER+4: return wxT("TB_HIDEBUTTON");
-        case WM_USER+5: return wxT("TB_INDETERMINATE");
-        case WM_USER+9: return wxT("TB_ISBUTTONENABLED");
-        case WM_USER+10: return wxT("TB_ISBUTTONCHECKED");
-        case WM_USER+11: return wxT("TB_ISBUTTONPRESSED");
-        case WM_USER+12: return wxT("TB_ISBUTTONHIDDEN");
-        case WM_USER+13: return wxT("TB_ISBUTTONINDETERMINATE");
-        case WM_USER+17: return wxT("TB_SETSTATE");
-        case WM_USER+18: return wxT("TB_GETSTATE");
-        case WM_USER+19: return wxT("TB_ADDBITMAP");
-        case WM_USER+20: return wxT("TB_ADDBUTTONS");
-        case WM_USER+21: return wxT("TB_INSERTBUTTON");
-        case WM_USER+22: return wxT("TB_DELETEBUTTON");
-        case WM_USER+23: return wxT("TB_GETBUTTON");
-        case WM_USER+24: return wxT("TB_BUTTONCOUNT");
-        case WM_USER+25: return wxT("TB_COMMANDTOINDEX");
-        case WM_USER+26: return wxT("TB_SAVERESTOREA");
-        case WM_USER+76: return wxT("TB_SAVERESTOREW");
-        case WM_USER+27: return wxT("TB_CUSTOMIZE");
-        case WM_USER+28: return wxT("TB_ADDSTRINGA");
-        case WM_USER+77: return wxT("TB_ADDSTRINGW");
-        case WM_USER+29: return wxT("TB_GETITEMRECT");
-        case WM_USER+30: return wxT("TB_BUTTONSTRUCTSIZE");
-        case WM_USER+31: return wxT("TB_SETBUTTONSIZE");
-        case WM_USER+32: return wxT("TB_SETBITMAPSIZE");
-        case WM_USER+33: return wxT("TB_AUTOSIZE");
-        case WM_USER+35: return wxT("TB_GETTOOLTIPS");
-        case WM_USER+36: return wxT("TB_SETTOOLTIPS");
-        case WM_USER+37: return wxT("TB_SETPARENT");
-        case WM_USER+39: return wxT("TB_SETROWS");
-        case WM_USER+40: return wxT("TB_GETROWS");
-        case WM_USER+42: return wxT("TB_SETCMDID");
-        case WM_USER+43: return wxT("TB_CHANGEBITMAP");
-        case WM_USER+44: return wxT("TB_GETBITMAP");
-        case WM_USER+45: return wxT("TB_GETBUTTONTEXTA");
-        case WM_USER+75: return wxT("TB_GETBUTTONTEXTW");
-        case WM_USER+46: return wxT("TB_REPLACEBITMAP");
-        case WM_USER+47: return wxT("TB_SETINDENT");
-        case WM_USER+48: return wxT("TB_SETIMAGELIST");
-        case WM_USER+49: return wxT("TB_GETIMAGELIST");
-        case WM_USER+50: return wxT("TB_LOADIMAGES");
-        case WM_USER+51: return wxT("TB_GETRECT");
-        case WM_USER+52: return wxT("TB_SETHOTIMAGELIST");
-        case WM_USER+53: return wxT("TB_GETHOTIMAGELIST");
-        case WM_USER+54: return wxT("TB_SETDISABLEDIMAGELIST");
-        case WM_USER+55: return wxT("TB_GETDISABLEDIMAGELIST");
-        case WM_USER+56: return wxT("TB_SETSTYLE");
-        case WM_USER+57: return wxT("TB_GETSTYLE");
-        case WM_USER+58: return wxT("TB_GETBUTTONSIZE");
-        case WM_USER+59: return wxT("TB_SETBUTTONWIDTH");
-        case WM_USER+60: return wxT("TB_SETMAXTEXTROWS");
-        case WM_USER+61: return wxT("TB_GETTEXTROWS");
-        case WM_USER+41: return wxT("TB_GETBITMAPFLAGS");
+        case WM_USER+1: return "TB_ENABLEBUTTON";
+        case WM_USER+2: return "TB_CHECKBUTTON";
+        case WM_USER+3: return "TB_PRESSBUTTON";
+        case WM_USER+4: return "TB_HIDEBUTTON";
+        case WM_USER+5: return "TB_INDETERMINATE";
+        case WM_USER+9: return "TB_ISBUTTONENABLED";
+        case WM_USER+10: return "TB_ISBUTTONCHECKED";
+        case WM_USER+11: return "TB_ISBUTTONPRESSED";
+        case WM_USER+12: return "TB_ISBUTTONHIDDEN";
+        case WM_USER+13: return "TB_ISBUTTONINDETERMINATE";
+        case WM_USER+17: return "TB_SETSTATE";
+        case WM_USER+18: return "TB_GETSTATE";
+        case WM_USER+19: return "TB_ADDBITMAP";
+        case WM_USER+20: return "TB_ADDBUTTONS";
+        case WM_USER+21: return "TB_INSERTBUTTON";
+        case WM_USER+22: return "TB_DELETEBUTTON";
+        case WM_USER+23: return "TB_GETBUTTON";
+        case WM_USER+24: return "TB_BUTTONCOUNT";
+        case WM_USER+25: return "TB_COMMANDTOINDEX";
+        case WM_USER+26: return "TB_SAVERESTOREA";
+        case WM_USER+76: return "TB_SAVERESTOREW";
+        case WM_USER+27: return "TB_CUSTOMIZE";
+        case WM_USER+28: return "TB_ADDSTRINGA";
+        case WM_USER+77: return "TB_ADDSTRINGW";
+        case WM_USER+29: return "TB_GETITEMRECT";
+        case WM_USER+30: return "TB_BUTTONSTRUCTSIZE";
+        case WM_USER+31: return "TB_SETBUTTONSIZE";
+        case WM_USER+32: return "TB_SETBITMAPSIZE";
+        case WM_USER+33: return "TB_AUTOSIZE";
+        case WM_USER+35: return "TB_GETTOOLTIPS";
+        case WM_USER+36: return "TB_SETTOOLTIPS";
+        case WM_USER+37: return "TB_SETPARENT";
+        case WM_USER+39: return "TB_SETROWS";
+        case WM_USER+40: return "TB_GETROWS";
+        case WM_USER+42: return "TB_SETCMDID";
+        case WM_USER+43: return "TB_CHANGEBITMAP";
+        case WM_USER+44: return "TB_GETBITMAP";
+        case WM_USER+45: return "TB_GETBUTTONTEXTA";
+        case WM_USER+75: return "TB_GETBUTTONTEXTW";
+        case WM_USER+46: return "TB_REPLACEBITMAP";
+        case WM_USER+47: return "TB_SETINDENT";
+        case WM_USER+48: return "TB_SETIMAGELIST";
+        case WM_USER+49: return "TB_GETIMAGELIST";
+        case WM_USER+50: return "TB_LOADIMAGES";
+        case WM_USER+51: return "TB_GETRECT";
+        case WM_USER+52: return "TB_SETHOTIMAGELIST";
+        case WM_USER+53: return "TB_GETHOTIMAGELIST";
+        case WM_USER+54: return "TB_SETDISABLEDIMAGELIST";
+        case WM_USER+55: return "TB_GETDISABLEDIMAGELIST";
+        case WM_USER+56: return "TB_SETSTYLE";
+        case WM_USER+57: return "TB_GETSTYLE";
+        case WM_USER+58: return "TB_GETBUTTONSIZE";
+        case WM_USER+59: return "TB_SETBUTTONWIDTH";
+        case WM_USER+60: return "TB_SETMAXTEXTROWS";
+        case WM_USER+61: return "TB_GETTEXTROWS";
+        case WM_USER+41: return "TB_GETBITMAPFLAGS";
 
         default:
             static wxString s_szBuf;
-            s_szBuf.Printf(wxT("<unknown message = %d>"), message);
+            s_szBuf.Printf("<unknown message = %d>", message);
             return s_szBuf.c_str();
     }
 }
@@ -7726,7 +7726,7 @@ bool wxWindowMSW::RegisterHotKey(int hotkeyId, int modifiers, int keycode)
 
     if ( !::RegisterHotKey(GetHwnd(), hotkeyId, win_modifiers, keycode) )
     {
-        wxLogLastError(wxT("RegisterHotKey"));
+        wxLogLastError("RegisterHotKey");
 
         return false;
     }
@@ -7738,7 +7738,7 @@ bool wxWindowMSW::UnregisterHotKey(int hotkeyId)
 {
     if ( !::UnregisterHotKey(GetHwnd(), hotkeyId) )
     {
-        wxLogLastError(wxT("UnregisterHotKey"));
+        wxLogLastError("UnregisterHotKey");
 
         return false;
     }
@@ -7781,7 +7781,7 @@ public:
 
         if ( !ms_hMsgHookProc )
         {
-            wxLogLastError(wxT("SetWindowsHookEx(WH_GETMESSAGE)"));
+            wxLogLastError("SetWindowsHookEx(WH_GETMESSAGE)");
 
             return false;
         }

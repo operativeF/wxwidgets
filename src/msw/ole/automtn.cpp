@@ -208,7 +208,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
             }
             // Mustn't free the SAFEARRAY if it is contained in the retValue
             if ((vReturn.vt & VT_ARRAY) &&
-                    retValue.GetType() == wxS("safearray"))
+                    retValue.GetType() == "safearray")
             {
                 vReturn.parray = nullptr;
             }
@@ -415,7 +415,7 @@ WXIDISPATCH* wxAutomationObject::GetDispatchProperty(const wxString& property, i
     wxVariant retVariant;
     if (Invoke(property, DISPATCH_PROPERTYGET, retVariant, noArgs, args))
     {
-        if (retVariant.GetType() == wxT("void*"))
+        if (retVariant.GetType() == "void*")
         {
             return (WXIDISPATCH*) retVariant.GetVoidPtr();
         }
@@ -433,7 +433,7 @@ WXIDISPATCH* wxAutomationObject::GetDispatchProperty(const wxString& property, i
     wxVariant retVariant;
     if (Invoke(property, DISPATCH_PROPERTYGET, retVariant, noArgs, nullptr, args))
     {
-        if (retVariant.GetType() == wxT("void*"))
+        if (retVariant.GetType() == "void*")
         {
             return (WXIDISPATCH*) retVariant.GetVoidPtr();
         }
@@ -618,7 +618,7 @@ ShowException(const wxString& member,
             if ( pexcep )
             {
                 if ( pexcep->bstrDescription )
-                    message << pexcep->bstrDescription << wxS(" ");
+                    message << pexcep->bstrDescription << " ";
                 message += fmt::format("error code {:u}", pexcep->wCode);
             }
             else

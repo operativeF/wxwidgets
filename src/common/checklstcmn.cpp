@@ -71,7 +71,7 @@ wxBEGIN_PROPERTIES_TABLE(wxCheckListBox)
     wxEVENT_PROPERTY( Toggle, wxEVT_CHECKLISTBOX, wxCommandEvent )
     wxPROPERTY_FLAGS( WindowStyle, wxCheckListBoxStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, wxLB_OWNERDRAW /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxCheckListBox)

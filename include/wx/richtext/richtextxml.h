@@ -47,11 +47,11 @@ public:
     // Convert 6-digit hex string to a colour
     static wxColour HexStringToColour(const wxString& hex);
 
-    static wxString MakeString(const int& v) { return wxString::Format(wxT("%d"), v); }
-    static wxString MakeString(const long& v) { return wxString::Format(wxT("%ld"), v); }
-    static wxString MakeString(const double& v) { return wxString::Format(wxS("%.2f"), v); }
+    static wxString MakeString(const int& v) { return wxString::Format("%d", v); }
+    static wxString MakeString(const long& v) { return wxString::Format("%ld", v); }
+    static wxString MakeString(const double& v) { return wxString::Format("%.2f", v); }
     static wxString MakeString(const wxString& s) { return s; }
-    static wxString MakeString(const wxColour& col) { return wxT("#") + ColourToHexString(col); }
+    static wxString MakeString(const wxColour& col) { return "#" + ColourToHexString(col); }
 
     static bool HasParam(wxXmlNode* node, const wxString& param);
     static wxXmlNode *GetParamNode(wxXmlNode* node, const wxString& param);
@@ -97,12 +97,12 @@ public:
     void OutputString(wxOutputStream& stream, const wxString& str);
     void OutputStringEnt(wxOutputStream& stream, const wxString& str);
 
-    static void AddString(wxString& str, const int& v) { str << wxString::Format(wxT("%d"), v); }
-    static void AddString(wxString& str, const long& v) { str << wxString::Format(wxT("%ld"), v); }
-    static void AddString(wxString& str, const double& v) { str << wxString::Format(wxS("%.2f"), v); }
+    static void AddString(wxString& str, const int& v) { str << wxString::Format("%d", v); }
+    static void AddString(wxString& str, const long& v) { str << wxString::Format("%ld", v); }
+    static void AddString(wxString& str, const double& v) { str << wxString::Format("%.2f", v); }
     static void AddString(wxString& str, const wxChar* s) { str << s; }
     static void AddString(wxString& str, const wxString& s) { str << s; }
-    static void AddString(wxString& str, const wxColour& col) { str << wxT("#") << ColourToHexString(col); }
+    static void AddString(wxString& str, const wxColour& col) { str << "#" << ColourToHexString(col); }
 
     static void AddAttribute(wxString& str, const wxString& name, const int& v);
     static void AddAttribute(wxString& str, const wxString& name, const long& v);
@@ -175,7 +175,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHandler: public wxRichTextFileHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextXMLHandler);
 public:
-    wxRichTextXMLHandler(const wxString& name = wxT("XML"), const wxString& ext = wxT("xml"), int type = wxRICHTEXT_TYPE_XML)
+    wxRichTextXMLHandler(const wxString& name = "XML", const wxString& ext = "xml", int type = wxRICHTEXT_TYPE_XML)
         : wxRichTextFileHandler(name, ext, type)
     {}
 

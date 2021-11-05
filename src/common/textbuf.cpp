@@ -24,7 +24,7 @@ std::string wxTextBuffer::GetEOL(wxTextFileType type)
 {
     switch ( type ) {
         default:
-            wxFAIL_MSG(wxT("bad buffer type in wxTextBuffer::GetEOL."));
+            wxFAIL_MSG("bad buffer type in wxTextBuffer::GetEOL.");
             [[fallthrough]]; // fall through nevertheless - we must return something...
 
         case wxTextFileType::None: return {};
@@ -184,7 +184,7 @@ wxTextFileType wxTextBuffer::GuessType() const
             case wxTextFileType::Unix: nUnix++; break;   \
             case wxTextFileType::Dos:  nDos++;  break;   \
             case wxTextFileType::Mac:  nMac++;  break;   \
-            default: wxFAIL_MSG(wxT("unknown line terminator")); \
+            default: wxFAIL_MSG("unknown line terminator"); \
         }
 
     for ( size_t n = 0; n < nScan; n++ )     // the beginning

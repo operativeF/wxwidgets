@@ -257,7 +257,7 @@ static wxTopLevelWindow *GetTLWParentIfNotBeingDeleted(wxWindow *win)
         win = parent;
     }
 
-    wxASSERT_MSG( win, wxT("button without top level parent?") );
+    wxASSERT_MSG( win, "button without top level parent?" );
 
     // Note that this may still return null for a button inside wxPopupWindow.
     return wxDynamicCast(win, wxTopLevelWindow);
@@ -323,7 +323,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
             return;
 
         wxWindow * const tlw = wxGetTopLevelParent(btn);
-        wxCHECK_RET( tlw, wxT("button without top level window?") );
+        wxCHECK_RET( tlw, "button without top level window?" );
 
         ::SendMessageW(GetHwndOf(tlw), DM_SETDEFID, btn->GetId(), 0L);
 

@@ -60,8 +60,7 @@ BSTR wxBasicString::Detach()
 
 BSTR* wxBasicString::ByRef()
 {
-    wxASSERT_MSG(!m_bstrBuf,
-        wxS("Can't get direct access to initialized BSTR"));
+    wxASSERT_MSG(!m_bstrBuf, "Can't get direct access to initialized BSTR");
     return &m_bstrBuf;
 }
 
@@ -70,7 +69,7 @@ wxBasicString& wxBasicString::operator=(const wxBasicString& src)
     if ( this != &src )
     {
         wxCHECK_MSG(m_bstrBuf == nullptr || m_bstrBuf != src.m_bstrBuf,
-            *this, wxS("Attempting to assign already owned BSTR"));
+            *this, "Attempting to assign already owned BSTR");
         SysFreeString(m_bstrBuf);
         m_bstrBuf = src.Copy();
     }
@@ -108,7 +107,7 @@ REGISTER_WXANY_CONVERSION(CURRENCY, wxVariantDataCurrency)
 
 bool wxVariantDataCurrency::Eq(wxVariantData& data) const
 {
-    wxASSERT_MSG( (data.GetType() == wxS("currency")),
+    wxASSERT_MSG( (data.GetType() == "currency"),
                   "wxVariantDataCurrency::Eq: argument mismatch" );
 
     wxVariantDataCurrency& otherData = (wxVariantDataCurrency&) data;
@@ -159,7 +158,7 @@ REGISTER_WXANY_CONVERSION(SCODE, wxVariantDataErrorCode)
 
 bool wxVariantDataErrorCode::Eq(wxVariantData& data) const
 {
-    wxASSERT_MSG( (data.GetType() == wxS("errorcode")),
+    wxASSERT_MSG( (data.GetType() == "errorcode"),
                   "wxVariantDataErrorCode::Eq: argument mismatch" );
 
     wxVariantDataErrorCode& otherData = (wxVariantDataErrorCode&) data;
@@ -205,7 +204,7 @@ REGISTER_WXANY_CONVERSION(SAFEARRAY*, wxVariantDataSafeArray)
 
 bool wxVariantDataSafeArray::Eq(wxVariantData& data) const
 {
-    wxASSERT_MSG( (data.GetType() == wxS("safearray")),
+    wxASSERT_MSG( (data.GetType() == "safearray"),
                   "wxVariantDataSafeArray::Eq: argument mismatch" );
 
     wxVariantDataSafeArray& otherData = (wxVariantDataSafeArray&) data;
@@ -223,7 +222,7 @@ bool wxVariantDataSafeArray::Write(std::ostream& str) const
 
 bool wxVariantDataSafeArray::Write(wxString& str) const
 {
-    str.Printf(wxS("SAFEARRAY: %p"), (void*)m_value);
+    str.Printf("SAFEARRAY: %p", (void*)m_value);
     return true;
 }
 
@@ -238,7 +237,7 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
 
     wxString type(variant.GetType());
 
-    if (type == wxT("errorcode"))
+    if (type == "errorcode")
     {
         wxVariantDataErrorCode* const
             ec = wxStaticCastVariantData(variant.GetData(),
@@ -246,7 +245,7 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
         oleVariant.vt = VT_ERROR;
         oleVariant.scode = ec->GetValue();
     }
-    else if (type == wxT("currency"))
+    else if (type == "currency")
     {
         wxVariantDataCurrency* const
             c = wxStaticCastVariantData(variant.GetData(),
@@ -254,7 +253,7 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
         oleVariant.vt = VT_CY;
         oleVariant.cyVal = c->GetValue();
     }
-    else if (type == wxT("safearray"))
+    else if (type == "safearray")
     {
         wxVariantDataSafeArray* const
             vsa = wxStaticCastVariantData(variant.GetData(),
@@ -266,48 +265,48 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
         HRESULT hr = SafeArrayGetVartype(psa, &vt);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("SafeArrayGetVartype()"), hr);
+            wxLogApiError("SafeArrayGetVartype()", hr);
             SafeArrayDestroy(psa);
             return false;
         }
         oleVariant.vt = vt | VT_ARRAY;
         oleVariant.parray = psa;
     }
-    else if (type == wxT("long"))
+    else if (type == "long")
     {
         oleVariant.vt = VT_I4;
         oleVariant.lVal = variant.GetLong() ;
     }
 #if wxUSE_LONGLONG
-    else if (type == wxT("longlong"))
+    else if (type == "longlong")
     {
         oleVariant.vt = VT_I8;
         oleVariant.llVal = variant.GetLongLong().GetValue();
     }
 #endif
-    else if (type == wxT("char"))
+    else if (type == "char")
     {
         oleVariant.vt=VT_I1;            // Signed Char
         oleVariant.cVal=variant.GetChar();
     }
-    else if (type == wxT("double"))
+    else if (type == "double")
     {
         oleVariant.vt = VT_R8;
         oleVariant.dblVal = variant.GetDouble();
     }
-    else if (type == wxT("bool"))
+    else if (type == "bool")
     {
         oleVariant.vt = VT_BOOL;
         oleVariant.boolVal = variant.GetBool() ? VARIANT_TRUE : VARIANT_FALSE;
     }
-    else if (type == wxT("string"))
+    else if (type == "string")
     {
         wxString str( variant.GetString() );
         oleVariant.vt = VT_BSTR;
         oleVariant.bstrVal = wxConvertStringToOle(str);
     }
 #if wxUSE_DATETIME
-    else if (type == wxT("datetime"))
+    else if (type == "datetime")
     {
         wxDateTime date( variant.GetDateTime() );
         oleVariant.vt = VT_DATE;
@@ -318,12 +317,12 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
         SystemTimeToVariantTime(&st, &oleVariant.date);
     }
 #endif
-    else if (type == wxT("void*"))
+    else if (type == "void*")
     {
         oleVariant.vt = VT_DISPATCH;
         oleVariant.pdispVal = (IDispatch*) variant.GetVoidPtr();
     }
-    else if (type == wxT("list"))
+    else if (type == "list")
     {
         wxSafeArray<VT_VARIANT> safeArray;
         if (!safeArray.CreateFromListVariant(variant))
@@ -332,7 +331,7 @@ bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
         oleVariant.vt = VT_VARIANT | VT_ARRAY;
         oleVariant.parray = safeArray.Detach();
     }
-    else if (type == wxT("arrstring"))
+    else if (type == "arrstring")
     {
         wxSafeArray<VT_BSTR> safeArray;
 
@@ -394,7 +393,7 @@ wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long fla
             }
             if ( !ok )
             {
-                wxLogDebug(wxT("unhandled VT_ARRAY type %x in wxConvertOleToVariant"),
+                wxLogDebug("unhandled VT_ARRAY type %x in wxConvertOleToVariant",
                            oleVariant.vt & VT_TYPEMASK);
                 variant = wxVariant();
             }
@@ -413,7 +412,7 @@ wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long fla
                 }
 
             default:
-                wxLogError(wxT("wxAutomationObject::ConvertOleToVariant: [as yet] unhandled reference %X"),
+                wxLogError("wxAutomationObject::ConvertOleToVariant: [as yet] unhandled reference %X",
                             oleVariant.vt);
                 return false;
         }
@@ -488,7 +487,7 @@ wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long fla
                 break;
 
             default:
-                wxLogError(wxT("wxAutomationObject::ConvertOleToVariant: Unknown variant value type %X -> %X"),
+                wxLogError("wxAutomationObject::ConvertOleToVariant: Unknown variant value type %X -> %X",
                            oleVariant.vt,oleVariant.vt&VT_TYPEMASK);
                 return false;
         }

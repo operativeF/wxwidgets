@@ -35,7 +35,7 @@ wxPGProperty* wxPGPropArgCls::GetPtr( wxPropertyGridInterface* iface ) const
 {
     if ( m_flags == IsProperty )
     {
-        wxASSERT_MSG( m_ptr.property, wxS("invalid property ptr") );
+        wxASSERT_MSG( m_ptr.property, "invalid property ptr" );
         return m_ptr.property;
     }
     else if ( m_flags & IsWxString )
@@ -146,13 +146,13 @@ wxPGProperty* wxPropertyGridInterface::ReplaceProperty( wxPGPropArg id, wxPGProp
     wxPGProperty* replaced = p;
     wxCHECK_MSG( replaced && property,
                  wxNullProperty,
-                 wxS("NULL property") );
+                 "NULL property" );
     wxCHECK_MSG( !replaced->IsCategory(),
                  wxNullProperty,
-                 wxS("cannot replace this type of property") );
+                 "cannot replace this type of property" );
     wxCHECK_MSG( !m_pState->IsInNonCatMode(),
                  wxNullProperty,
-                 wxS("cannot replace properties in alphabetic mode") );
+                 "cannot replace properties in alphabetic mode" );
 
     // Get address to the slot
     wxPGProperty* parent = replaced->GetParent();
@@ -366,7 +366,7 @@ bool wxPropertyGridInterface::SetColumnProportion( unsigned int column,
 
 void wxPGGetFailed( const wxPGProperty* p, const wxString& typestr )
 {
-    wxPGTypeOperationFailed(p, typestr, wxS("Get"));
+    wxPGTypeOperationFailed(p, typestr, "Get");
 }
 
 // -----------------------------------------------------------------------
@@ -412,7 +412,7 @@ void wxPropertyGridInterface::SetValidationFailureBehavior( int vfbFlags )
 wxPGProperty* wxPropertyGridInterface::GetPropertyByNameA( const wxString& name ) const
 {
     wxPGProperty* p = GetPropertyByName(name);
-    wxASSERT_MSG(p,wxString::Format(wxS("no property with name '%s'"),name));
+    wxASSERT_MSG(p,wxString::Format("no property with name '%s'",name).ToStdString());
     return p;
 }
 
@@ -805,7 +805,7 @@ bool wxPropertyGridInterface::ChangePropertyValue( wxPGPropArg id, wxVariant new
 void wxPropertyGridInterface::BeginAddChildren( wxPGPropArg id )
 {
     wxPG_PROP_ARG_CALL_PROLOG()
-    wxCHECK_RET( p->HasFlag(wxPG_PROP_AGGREGATE), wxS("only call on properties with fixed children") );
+    wxCHECK_RET( p->HasFlag(wxPG_PROP_AGGREGATE), "only call on properties with fixed children" );
     p->ClearFlag(wxPG_PROP_AGGREGATE);
     p->SetFlag(wxPG_PROP_MISC_PARENT);
 }
@@ -822,7 +822,7 @@ bool wxPropertyGridInterface::EditorValidate()
 void wxPropertyGridInterface::EndAddChildren( wxPGPropArg id )
 {
     wxPG_PROP_ARG_CALL_PROLOG()
-    wxCHECK_RET( p->HasFlag(wxPG_PROP_MISC_PARENT), wxS("only call on properties for which BeginAddChildren was called prior") );
+    wxCHECK_RET( p->HasFlag(wxPG_PROP_MISC_PARENT), "only call on properties for which BeginAddChildren was called prior" );
     p->ClearFlag(wxPG_PROP_MISC_PARENT);
     p->SetFlag(wxPG_PROP_AGGREGATE);
 }
@@ -897,9 +897,9 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
             wxString sel;
             if ( pageState->GetSelection() )
                 sel = pageState->GetSelection()->GetName();
-            result += wxS("selection=");
+            result += "selection=";
             result += EscapeDelimiters(sel);
-            result += wxS(";");
+            result += ";";
         }
         if ( includedStates & ExpandedState )
         {
@@ -908,7 +908,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
                                              wxPG_ITERATE_ALL_PARENTS_RECURSIVELY|wxPG_ITERATE_HIDDEN,
                                              wxNullProperty );
 
-            result += wxS("expanded=");
+            result += "expanded=";
 
             for ( ;
                   !it.AtEnd();
@@ -918,47 +918,47 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
 
                 if ( !p->HasFlag(wxPG_PROP_COLLAPSED) )
                     result += EscapeDelimiters(p->GetName());
-                result += wxS(",");
+                result += ",";
 
             }
 
             if ( result.Last() == wxS(',') )
                 result.RemoveLast();
 
-            result += wxS(";");
+            result += ";";
         }
         if ( includedStates & ScrollPosState )
         {
             wxPoint start = GetPropertyGrid()->GetViewStart();
-            result += wxString::Format(wxS("scrollpos=%i,%i;"), start.x, start.y);
+            result += wxString::Format("scrollpos=%i,%i;", start.x, start.y);
         }
         if ( includedStates & SplitterPosState )
         {
-            result += wxS("splitterpos=");
+            result += "splitterpos=";
 
             for ( size_t i=0; i<pageState->GetColumnCount(); i++ )
-                result += wxString::Format(wxS("%i,"), pageState->DoGetSplitterPosition(i));
+                result += wxString::Format("%i,", pageState->DoGetSplitterPosition(i));
 
             result.RemoveLast();  // Remove last comma
-            result += wxS(";");
+            result += ";";
         }
         if ( includedStates & PageState )
         {
-            result += wxS("ispageselected=");
+            result += "ispageselected=";
 
             if ( GetPageState(-1) == pageState )
-                result += wxS("1;");
+                result += "1;";
             else
-                result += wxS("0;");
+                result += "0;";
         }
         if ( includedStates & DescBoxState )
         {
-            wxVariant v = GetEditableStateItem(wxS("descboxheight"));
+            wxVariant v = GetEditableStateItem("descboxheight");
             if ( !v.IsNull() )
-                result += wxString::Format(wxS("descboxheight=%i;"), (int)v.GetLong());
+                result += wxString::Format("descboxheight=%i;", (int)v.GetLong());
         }
         result.RemoveLast();  // Remove last semicolon
-        result += wxS("|");
+        result += "|";
     }
 
     // Remove last '|'
@@ -1002,7 +1002,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                 // Further split value by commas
                 std::vector<wxString> values = ::wxSplit(value, wxS(','), wxS('\\'));
 
-                if ( key == wxS("expanded") )
+                if ( key == "expanded" )
                 {
                     if ( restoreStates & ExpandedState )
                     {
@@ -1028,7 +1028,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                         }
                     }
                 }
-                else if ( key == wxS("scrollpos") )
+                else if ( key == "scrollpos" )
                 {
                     if ( restoreStates & ScrollPosState )
                     {
@@ -1043,7 +1043,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                         }
                     }
                 }
-                else if ( key == wxS("splitterpos") )
+                else if ( key == "splitterpos" )
                 {
                     if ( restoreStates & SplitterPosState )
                     {
@@ -1056,7 +1056,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                         }
                     }
                 }
-                else if ( key == wxS("selection") )
+                else if ( key == "selection" )
                 {
                     if ( restoreStates & SelectionState )
                     {
@@ -1078,7 +1078,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                         }
                     }
                 }
-                else if ( key == wxS("ispageselected") )
+                else if ( key == "ispageselected" )
                 {
                     if ( restoreStates & PageState )
                     {
@@ -1094,14 +1094,14 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                         }
                     }
                 }
-                else if ( key == wxS("descboxheight") )
+                else if ( key == "descboxheight" )
                 {
                     if ( restoreStates & DescBoxState )
                     {
                         long descBoxHeight;
                         if ( values.size() == 1 && values[0].ToLong(&descBoxHeight) )
                         {
-                            SetEditableStateItem(wxS("descboxheight"), descBoxHeight);
+                            SetEditableStateItem("descboxheight", descBoxHeight);
                         }
                         else
                         {

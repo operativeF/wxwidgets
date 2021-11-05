@@ -117,7 +117,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
     if (!win)
     {
-        wxLogDebug(wxT("Could not create an abort dialog."));
+        wxLogDebug("Could not create an abort dialog.");
         sm_lastError = wxPrinterError::Error;
 
         delete dc;

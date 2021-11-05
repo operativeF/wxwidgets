@@ -30,12 +30,12 @@ wxSimplebookXmlHandler::wxSimplebookXmlHandler()
 
 wxObject *wxSimplebookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxS("simplebookpage"))
+    if (m_class == "simplebookpage")
     {
-        wxXmlNode *n = GetParamNode(wxS("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxS("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -47,8 +47,8 @@ wxObject *wxSimplebookXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                m_simplebook->AddPage(wnd, GetText(wxS("label")),
-                                      GetBool(wxS("selected")));
+                m_simplebook->AddPage(wnd, GetText("label"),
+                                      GetBool("selected"));
             }
             else
             {
@@ -70,7 +70,7 @@ wxObject *wxSimplebookXmlHandler::DoCreateResource()
         sb->Create(m_parentAsWindow,
                    GetID(),
                    GetPosition(), GetSize(),
-                   GetStyle(wxS("style")),
+                   GetStyle("style"),
                    GetName());
 
         SetupWindow(sb);
@@ -89,8 +89,8 @@ wxObject *wxSimplebookXmlHandler::DoCreateResource()
 
 bool wxSimplebookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxS("wxSimplebook"))) ||
-            (m_isInside && IsOfClass(node, wxS("simplebookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxSimplebook")) ||
+            (m_isInside && IsOfClass(node, "simplebookpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_BOOKCTRL

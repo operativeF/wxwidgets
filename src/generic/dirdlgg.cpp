@@ -75,9 +75,9 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
         return false;
 
     m_path = defaultPath;
-    if (m_path == wxT("~"))
+    if (m_path == "~")
         wxGetHomeDir(&m_path);
-    if (m_path == wxT("."))
+    if (m_path == ".")
         m_path = wxGetCwd();
 
     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
@@ -297,7 +297,7 @@ void wxGenericDirDialog::OnNew( wxCommandEvent& WXUNUSED(event) )
         do {
             new_name = _("NewName");
             wxString num;
-            num.Printf( wxT("%d"), i );
+            num.Printf( "%d", i );
             new_name += num;
 
             path = data->m_path;

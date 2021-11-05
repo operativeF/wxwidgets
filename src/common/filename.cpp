@@ -454,7 +454,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
             break;
 
         default:
-            wxFAIL_MSG( wxT("Unknown path format") );
+            wxFAIL_MSG( "Unknown path format" );
             [[fallthrough]];
 
         case wxPATH_UNIX:
@@ -482,7 +482,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
         if (token.empty())
         {
             if (format == wxPATH_MAC)
-                m_dirs.push_back( wxT("..") );
+                m_dirs.push_back( ".." );
             // else ignore
         }
         else
@@ -524,14 +524,14 @@ void wxFileName::Assign(const wxString& fullpathOrig,
     SplitPath(fullname, &volDummy, &pathDummy, &name, &ext, &hasExt, format);
 
     wxASSERT_MSG( volDummy.empty() && pathDummy.empty(),
-                  wxT("the file name shouldn't contain the path") );
+                  "the file name shouldn't contain the path" );
 
     SplitPath(fullpath, &volume, &path, &nameDummy, &extDummy, format);
 
 #ifndef __VMS
    // This test makes no sense on an OpenVMS system.
    wxASSERT_MSG( nameDummy.empty() && extDummy.empty(),
-                  wxT("the path shouldn't contain file name nor extension") );
+                  "the path shouldn't contain file name nor extension" );
 #endif
     Assign(volume, path, name, ext, hasExt, format);
 }
@@ -841,7 +841,7 @@ static bool wxTempOpen(wxFFile *file, const wxString& path, bool *deleteOnClose)
 {
 #ifndef wx_fdopen
     *deleteOnClose = false;
-    return file->Open(path, wxT("w+b"));
+    return file->Open(path, "w+b");
 #else // wx_fdopen
     const int fd = wxTempOpen(path, deleteOnClose);
     if (fd == -1)
@@ -899,7 +899,7 @@ static wxString wxCreateTempImpl(
     if (!::GetTempFileNameW(dir.t_str(), name.t_str(), 0,
                            wxStringBuffer(path, MAX_PATH + 1)))
     {
-        wxLogLastError(wxT("GetTempFileName"));
+        wxLogLastError("GetTempFileName");
 
         path.clear();
     }
@@ -917,7 +917,7 @@ static wxString wxCreateTempImpl(
 
 #if defined(HAVE_MKSTEMP)
     // scratch space for mkstemp()
-    path += wxT("XXXXXX");
+    path += "XXXXXX";
 
     // we need to copy the path to the buffer in which mkstemp() can modify it
     wxCharBuffer buf(path.fn_str());
@@ -949,7 +949,7 @@ static wxString wxCreateTempImpl(
         #ifdef wx_fdopen
             ffileTemp->Attach(wx_fdopen(fdTemp, "r+b"), path);
         #else
-            ffileTemp->Open(path, wxT("r+b"));
+            ffileTemp->Open(path, "r+b");
             close(fdTemp);
         #endif
         }
@@ -964,7 +964,7 @@ static wxString wxCreateTempImpl(
 
 #ifdef HAVE_MKTEMP
     // same as above
-    path += wxT("XXXXXX");
+    path += "XXXXXX";
 
     wxCharBuffer buf = wxConvFile.cWX2MB( path );
     if ( !mktemp( (char*)(const char*) buf ) )
@@ -985,7 +985,7 @@ static wxString wxCreateTempImpl(
     for ( size_t n = 0; n < numTries; n++ )
     {
         // 3 hex digits is enough for numTries == 1000 < 4096
-        pathTry = path + wxString::Format(wxT("%.03x"), (unsigned int) n);
+        pathTry = path + wxString::Format("%.03x", (unsigned int) n);
         if ( !wxFileName::FileExists(pathTry) )
         {
             break;
@@ -1204,7 +1204,7 @@ wxString wxFileName::GetTempDir()
 #if defined(WX_WINDOWS)
         if ( !::GetTempPathW(MAX_PATH, wxStringBuffer(dir, MAX_PATH + 1)) )
         {
-            wxLogLastError(wxT("GetTempPath"));
+            wxLogLastError("GetTempPath");
         }
 #endif // systems with native way
     }
@@ -1311,7 +1311,7 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
         {
             // SHFileOperation may return non-Win32 error codes, so the error
             // message can be incorrect
-            wxLogApiError(wxT("SHFileOperation"), ret);
+            wxLogApiError("SHFileOperation", ret);
             return false;
         }
 
@@ -1476,13 +1476,13 @@ bool wxFileName::Normalize(unsigned int flags,
 
         if ( flags & wxPATH_NORM_DOTS )
         {
-            if ( dir == wxT(".") )
+            if ( dir == "." )
             {
                 // just ignore
                 continue;
             }
 
-            if ( dir == wxT("..") )
+            if ( dir == ".." )
             {
                 if ( m_dirs.empty() )
                 {
@@ -1499,7 +1499,7 @@ bool wxFileName::Normalize(unsigned int flags,
                 }
                 else // Normal case, go one step up unless it's .. as well.
                 {
-                    if (m_dirs.back() != wxT("..") )
+                    if (m_dirs.back() != ".." )
                     {
                         m_dirs.pop_back();
                         continue;
@@ -1607,7 +1607,7 @@ bool wxFileName::GetShortcutTarget(const wxString& shortcutPath,
     bool success = false;
 
     // Assume it's not a shortcut if it doesn't end with lnk
-    if (ext.CmpNoCase(wxT("lnk"))!=0)
+    if (ext.CmpNoCase("lnk")!=0)
         return false;
 
     // Ensure OLE is initialized.
@@ -1780,14 +1780,14 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
     size_t count = fnBase.m_dirs.size();
     for ( size_t i = 0; i < count; i++ )
     {
-        m_dirs.insert(std::begin(m_dirs), wxT(".."));
+        m_dirs.insert(std::begin(m_dirs), "..");
     }
 
     switch ( GetFormat(format) )
     {
         case wxPATH_NATIVE:
         case wxPATH_MAX:
-            wxFAIL_MSG( wxS("unreachable") );
+            wxFAIL_MSG( "unreachable" );
             [[fallthrough]];
 
         case wxPATH_UNIX:
@@ -1853,7 +1853,7 @@ bool wxFileName::IsCaseSensitive( wxPathFormat format )
 wxString wxFileName::GetForbiddenChars(wxPathFormat format)
 {
     // Inits to forbidden characters that are common to (almost) all platforms.
-    wxString strForbiddenChars = wxT("*?");
+    wxString strForbiddenChars = "*?";
 
     // If asserts, wxPathFormat has been changed. In case of a new path format
     // addition, the following code might have to be updated.
@@ -1875,7 +1875,7 @@ wxString wxFileName::GetForbiddenChars(wxPathFormat format)
             break;
 
         case wxPATH_DOS:
-            strForbiddenChars += wxT("\\/:\"<>|");
+            strForbiddenChars += "\\/:\"<>|";
             break;
 
         case wxPATH_VMS:
@@ -1913,7 +1913,7 @@ wxString wxFileName::GetPathSeparators(wxPathFormat format)
             break;
 
         default:
-            wxFAIL_MSG( wxT("Unknown wxPATH_XXX style") );
+            wxFAIL_MSG( "Unknown wxPATH_XXX style" );
             [[fallthrough]];
 
         case wxPATH_UNIX:
@@ -1958,7 +1958,7 @@ wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
     // with a Windows unique volume name ("\\?\Volume{guid}\")
     return format == wxPATH_DOS &&
             path.length() >= wxMSWUniqueVolumePrefixLength &&
-             path.StartsWith(wxS("\\\\?\\Volume{")) &&
+             path.StartsWith("\\\\?\\Volume{") &&
               path[wxMSWUniqueVolumePrefixLength - 1] == wxFILE_SEP_PATH_DOS;
 }
 
@@ -1970,7 +1970,7 @@ wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
 {
     if ( dir.empty() )
     {
-        wxFAIL_MSG( wxT("empty directory passed to wxFileName::InsertDir()") );
+        wxFAIL_MSG( "empty directory passed to wxFileName::InsertDir()" );
 
         return false;
     }
@@ -1980,7 +1980,7 @@ wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
     {
         if ( dir[n] == GetVolumeSeparator() || IsPathSeparator(dir[n]) )
         {
-            wxFAIL_MSG( wxT("invalid directory component in wxFileName") );
+            wxFAIL_MSG( "invalid directory component in wxFileName" );
 
             return false;
         }
@@ -2062,7 +2062,7 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
             break;
 
         default:
-            wxFAIL_MSG( wxT("Unknown path format") );
+            wxFAIL_MSG( "Unknown path format" );
             [[fallthrough]];
 
         case wxPATH_UNIX:
@@ -2098,7 +2098,7 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
         switch (format)
         {
             case wxPATH_MAC:
-                if ( m_dirs[i] == wxT(".") )
+                if ( m_dirs[i] == "." )
                 {
                     // skip appending ':', this shouldn't be done in this
                     // case as "::" is interpreted as ".." under Unix
@@ -2106,12 +2106,12 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
                 }
 
                 // convert back from ".." to nothing
-                if ( !m_dirs[i].IsSameAs(wxT("..")) )
+                if ( !m_dirs[i].IsSameAs("..") )
                      fullpath += m_dirs[i];
                 break;
 
             default:
-                wxFAIL_MSG( wxT("Unexpected path format") );
+                wxFAIL_MSG( "Unexpected path format" );
                 [[fallthrough]];
 
             case wxPATH_DOS:
@@ -2123,7 +2123,7 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
                 // TODO: What to do with ".." under VMS
 
                 // convert back from ".." to nothing
-                if ( !m_dirs[i].IsSameAs(wxT("..")) )
+                if ( !m_dirs[i].IsSameAs("..") )
                     fullpath += m_dirs[i];
                 break;
         }
@@ -2544,8 +2544,8 @@ bool wxFileName::SetPermissions(int permissions)
 wxFileName wxFileName::URLToFileName(const wxString& url)
 {
     wxString path;
-    if ( !url.StartsWith(wxS("file://"), &path) &&
-            !url.StartsWith(wxS("file:"), &path) )
+    if ( !url.StartsWith("file://", &path) &&
+            !url.StartsWith("file:", &path) )
     {
         // Consider it's just the path without any schema.
         path = url;
@@ -2561,11 +2561,11 @@ wxFileName wxFileName::URLToFileName(const wxString& url)
     {
         path = path.Mid(1);
     }
-    else if ( url.StartsWith(wxS("file://")) &&
+    else if ( url.StartsWith("file://") &&
               (path.Find(wxT('/')) != wxNOT_FOUND) &&
               (path.length() > 1) && (path[1u] != wxT(':')) )
     {
-        path = wxT("//") + path;
+        path = "//" + path;
     }
 #endif
 
@@ -2609,13 +2609,13 @@ wxString wxFileName::FileNameToURL(const wxFileName& filename)
 
 #ifndef __UNIX__
     // unc notation, wxMSW
-    if ( url.Find(wxT("\\\\")) == 0 )
+    if ( url.Find("\\\\") == 0 )
     {
         url = url.Mid(2);
     }
     else
     {
-        url = wxT("/") + url;
+        url = "/" + url;
     }
 #endif
 
@@ -2623,7 +2623,7 @@ wxString wxFileName::FileNameToURL(const wxFileName& filename)
 
     // Do wxURI- and common practice-compatible escaping: encode the string
     // into UTF-8, then escape anything non-ASCII:
-    return wxT("file://") + EscapeFileNameCharsInURL(url.utf8_str());
+    return "file://" + EscapeFileNameCharsInURL(url.utf8_str());
 }
 
 // ----------------------------------------------------------------------------

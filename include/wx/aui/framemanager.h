@@ -210,8 +210,8 @@ public:
         *this = test;
         return *this;
     }
-    wxAuiPaneInfo& Name(const wxString& n) { name = n; return *this; }
-    wxAuiPaneInfo& Caption(const wxString& c) { caption = c; return *this; }
+    wxAuiPaneInfo& Name(const std::string& n) { name = n; return *this; }
+    wxAuiPaneInfo& Caption(const std::string& c) { caption = c; return *this; }
     wxAuiPaneInfo& Icon(const wxBitmap& b) { icon = b; return *this; }
     wxAuiPaneInfo& Left() { dock_direction = wxAUI_DOCK_LEFT; return *this; }
     wxAuiPaneInfo& Right() { dock_direction = wxAUI_DOCK_RIGHT; return *this; }
@@ -357,8 +357,8 @@ public:
     };
 
 public:
-    wxString name;        // name of the pane
-    wxString caption;     // caption displayed on the window
+    std::string name;        // name of the pane
+    std::string caption;     // caption displayed on the window
     wxBitmap icon;        // icon of the pane, may be invalid
 
     wxRect rect;              // current rectangle (populated by wxAUI)
@@ -414,7 +414,7 @@ public:
     wxAuiDockArt* GetArtProvider() const;
 
     wxAuiPaneInfo& GetPane(wxWindow* window);
-    wxAuiPaneInfo& GetPane(const wxString& name);
+    wxAuiPaneInfo& GetPane(const std::string& name);
     wxAuiPaneInfoArray& GetAllPanes();
 
     bool AddPane(wxWindow* window,
@@ -426,7 +426,7 @@ public:
 
     bool AddPane(wxWindow* window,
                  int direction = wxLEFT,
-                 const wxString& caption = {});
+                 const std::string& caption = {});
 
     bool InsertPane(wxWindow* window,
                  const wxAuiPaneInfo& insertLocation,
@@ -436,10 +436,10 @@ public:
 
     void Update();
 
-    wxString SavePaneInfo(const wxAuiPaneInfo& pane);
-    void LoadPaneInfo(wxString panePart, wxAuiPaneInfo &pane);
-    wxString SavePerspective();
-    bool LoadPerspective(const wxString& perspective, bool update = true);
+    std::string SavePaneInfo(const wxAuiPaneInfo& pane);
+    void LoadPaneInfo(std::string panePart, wxAuiPaneInfo &pane);
+    std::string SavePerspective();
+    bool LoadPerspective(const std::string& perspective, bool update = true);
 
     void SetDockSizeConstraint(double widthPct, double heightPct);
     void GetDockSizeConstraint(double* widthPct, double* heightPct) const;

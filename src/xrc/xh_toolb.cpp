@@ -47,7 +47,7 @@ wxToolBarXmlHandler::wxToolBarXmlHandler()
 
 wxObject *wxToolBarXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("tool"))
+    if (m_class == "tool")
     {
         if ( !m_toolbar )
         {
@@ -56,10 +56,10 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
         }
 
         wxItemKind kind = wxITEM_NORMAL;
-        if (GetBool(wxT("radio")))
+        if (GetBool("radio"))
             kind = wxITEM_RADIO;
 
-        if (GetBool(wxT("toggle")))
+        if (GetBool("toggle"))
         {
             if ( kind != wxITEM_NORMAL )
             {
@@ -122,18 +122,18 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
             m_toolbar->AddTool
                        (
                           GetID(),
-                          GetText(wxT("label")),
-                          GetBitmap(wxT("bitmap"), wxART_TOOLBAR, m_toolSize),
-                          GetBitmap(wxT("bitmap2"), wxART_TOOLBAR, m_toolSize),
+                          GetText("label"),
+                          GetBitmap("bitmap", wxART_TOOLBAR, m_toolSize),
+                          GetBitmap("bitmap2", wxART_TOOLBAR, m_toolSize),
                           kind,
-                          GetText(wxT("tooltip")),
-                          GetText(wxT("longhelp"))
+                          GetText("tooltip"),
+                          GetText("longhelp")
                        );
 
-        if ( GetBool(wxT("disabled")) )
+        if ( GetBool("disabled") )
             m_toolbar->EnableTool(tool->GetId(), false);
 
-        if ( GetBool(wxS("checked")) )
+        if ( GetBool("checked") )
         {
             if ( kind == wxITEM_NORMAL )
             {
@@ -157,7 +157,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
         return m_toolbar; // must return non-NULL
     }
 
-    else if (m_class == wxT("separator") || m_class == wxT("space"))
+    else if (m_class == "separator") || m_class == wxT("space")
     {
         if ( !m_toolbar )
         {
@@ -165,7 +165,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
             return nullptr;
         }
 
-        if ( m_class == wxT("separator") )
+        if ( m_class == "separator" )
             m_toolbar->AddSeparator();
         else
             m_toolbar->AddStretchableSpace();
@@ -175,7 +175,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
 
     else /*<object class="wxToolBar">*/
     {
-        int style = GetStyle(wxT("style"), wxNO_BORDER | wxTB_HORIZONTAL);
+        int style = GetStyle("style", wxNO_BORDER | wxTB_HORIZONTAL);
 #ifdef __WXMSW__
         if (!(style & wxNO_BORDER)) style |= wxNO_BORDER;
 #endif
@@ -190,22 +190,22 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
                          GetName());
         SetupWindow(toolbar);
 
-        m_toolSize = GetSize(wxT("bitmapsize"));
+        m_toolSize = GetSize("bitmapsize");
         if (!(m_toolSize == wxDefaultSize))
             toolbar->SetToolBitmapSize(m_toolSize);
-        wxSize margins = GetSize(wxT("margins"));
+        wxSize margins = GetSize("margins");
         if (!(margins == wxDefaultSize))
             toolbar->SetMargins(margins.x, margins.y);
-        long packing = GetLong(wxT("packing"), -1);
+        long packing = GetLong("packing", -1);
         if (packing != -1)
             toolbar->SetToolPacking(packing);
-        long separation = GetLong(wxT("separation"), -1);
+        long separation = GetLong("separation", -1);
         if (separation != -1)
             toolbar->SetToolSeparation(separation);
 
-        wxXmlNode *children_node = GetParamNode(wxT("object"));
+        wxXmlNode *children_node = GetParamNode("object");
         if (!children_node)
-           children_node = GetParamNode(wxT("object_ref"));
+           children_node = GetParamNode("object_ref");
 
         if (children_node == nullptr) return toolbar;
 
@@ -217,13 +217,13 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
         while (n)
         {
             if ((n->GetType() == wxXML_ELEMENT_NODE) &&
-                (n->GetName() == wxT("object") || n->GetName() == wxT("object_ref")))
+                (n->GetName() == "object") || n->GetName() == wxT("object_ref"))
             {
                 wxObject *created = CreateResFromNode(n, toolbar, nullptr);
                 wxControl *control = wxDynamicCast(created, wxControl);
-                if (!IsOfClass(n, wxT("tool")) &&
-                    !IsOfClass(n, wxT("separator")) &&
-                    !IsOfClass(n, wxT("space")) &&
+                if (!IsOfClass(n, "tool") &&
+                    !IsOfClass(n, "separator") &&
+                    !IsOfClass(n, "space") &&
                     control != nullptr)
                     toolbar->AddControl(control);
             }
@@ -233,7 +233,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
         m_isInside = false;
         m_toolbar = nullptr;
 
-        if (m_parentAsWindow && !GetBool(wxT("dontattachtoframe")))
+        if (m_parentAsWindow && !GetBool("dontattachtoframe"))
         {
             wxFrame *parentFrame = wxDynamicCast(m_parent, wxFrame);
             if (parentFrame)
@@ -248,10 +248,10 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
 
 bool wxToolBarXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxToolBar"))) ||
-            (m_isInside && IsOfClass(node, wxT("tool"))) ||
-            (m_isInside && IsOfClass(node, wxT("space"))) ||
-            (m_isInside && IsOfClass(node, wxT("separator"))));
+    return ((!m_isInside && IsOfClass(node, "wxToolBar")) ||
+            (m_isInside && IsOfClass(node, "tool")) ||
+            (m_isInside && IsOfClass(node, "space")) ||
+            (m_isInside && IsOfClass(node, "separator")));
 }
 
 #endif // wxUSE_XRC && wxUSE_TOOLBAR

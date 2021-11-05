@@ -108,7 +108,7 @@ wxEVENT_PROPERTY( TextUpdated, wxEVT_TEXT, wxCommandEvent )
 
 wxPROPERTY_FLAGS( WindowStyle, wxListCtrlStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxListCtrl)

@@ -72,7 +72,7 @@ bool wxAppBase::Initialize(int& argcOrig, wxChar **argvOrig)
     // not in a port-specific file.
     if ( argcOrig > 1 )
     {
-        static constexpr wxChar ARG_PSN[] = wxT("-psn_");
+        static constexpr wxChar ARG_PSN[] = "-psn_";
         if ( wxStrncmp(argvOrig[1], ARG_PSN, wxStrlen(ARG_PSN)) == 0 )
         {
             // remove this argument
@@ -269,7 +269,7 @@ bool wxAppBase::OnCmdLineParsed(wxCmdLineParser& parser)
     if ( parser.Found(OPTION_MODE, &modeDesc) )
     {
         unsigned w, h, bpp;
-        if ( wxSscanf(modeDesc.c_str(), wxT("%ux%u-%u"), &w, &h, &bpp) != 3 )
+        if ( wxSscanf(modeDesc.c_str(), "%ux%u-%u", &w, &h, &bpp) != 3 )
         {
             wxLogError(_("Invalid display mode specification '%s'."), modeDesc.c_str());
             return false;
@@ -449,7 +449,7 @@ wxRendererNative *wxGUIAppTraitsBase::CreateRenderer()
     return nullptr;
 }
 
-bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
+bool wxGUIAppTraitsBase::ShowAssertDialog(const std::string& msg)
 {
 #if wxDEBUG_LEVEL
     // If possible, show the assert using a dialog allowing to hide the stack
@@ -471,10 +471,10 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
     {
         // Note that this and the other messages here are intentionally not
         // translated -- they are for developpers only.
-        static const wxString caption = "wxWidgets Debug Alert";
+        static const std::string caption = "wxWidgets Debug Alert";
 
-        wxString msgDlg = wxS("A debugging check in this application ")
-                          wxS("has failed.\n\n") + msg;
+        std::string msgDlg = "A debugging check in this application "
+                             "has failed.\n\n" + msg;
 
         // "No" button means to continue execution, so it should be the default
         // action as leaving the "Yes" button the default one would mean that
@@ -482,11 +482,11 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
         static constexpr unsigned int flags = wxYES_NO | wxNO_DEFAULT | wxICON_STOP;
 
 #if wxUSE_STACKWALKER
-        const wxString stackTrace = GetAssertStackTrace();
+        const std::string stackTrace = GetAssertStackTrace();
 #endif // wxUSE_STACKWALKER
 
 #if wxUSE_RICHMSGDLG
-        wxRichMessageDialog dlg(nullptr, msgDlg.ToStdString(), caption.ToStdString(), flags);
+        wxRichMessageDialog dlg(nullptr, msgDlg, caption, flags);
 
         dlg.SetYesNoLabels("Stop", "Continue");
 
@@ -499,12 +499,12 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
 #else // !wxUSE_RICHMSGDLG
 #if wxUSE_STACKWALKER
         if ( !stackTrace.empty() )
-            msgDlg << wxT("\n\nCall stack:\n") << stackTrace;
+            msgDlg << "\n\nCall stack:\n" << stackTrace;
 #endif // wxUSE_STACKWALKER
 
-        msgDlg += wxT("\nDo you want to stop the program?\n")
-                  wxT("You can also choose [Cancel] to suppress ")
-                  wxT("further warnings.");
+        msgDlg += "\nDo you want to stop the program?\n"
+                  "You can also choose [Cancel] to suppress "
+                  "further warnings.";
 
         wxMessageDialog dlg(NULL, msg, caption, flags);
 #endif // wxUSE_RICHMSGDLG/!wxUSE_RICHMSGDLG

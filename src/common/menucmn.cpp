@@ -57,14 +57,14 @@ wxBEGIN_PROPERTIES_TABLE(wxMenu)
 wxEVENT_PROPERTY( Select, wxEVT_MENU, wxCommandEvent)
 
 wxPROPERTY( Title, std::string, SetTitle, GetTitle, "", \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 
 wxREADONLY_PROPERTY_FLAGS( MenuStyle, wxMenuStyle, long, GetStyle, \
-                          wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), \
-                          wxT("group")) // style
+                          wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", \
+                          "group") // style
 
 wxPROPERTY_COLLECTION( MenuItems, wxMenuItemList, wxMenuItem*, Append, \
-                      GetMenuItems, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                      GetMenuItems, 0 /*flags*/, "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenu)
@@ -99,10 +99,10 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxMenuInfoHelper, wxObject, "wx/menu.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxMenuInfoHelper)
 wxREADONLY_PROPERTY( Menu, wxMenu*, GetMenu, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring", "group")
 
 wxREADONLY_PROPERTY( Title, std::string, GetTitle, "", \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenuInfoHelper)
@@ -121,7 +121,7 @@ template<> void wxCollectionToVariantArray( wxMenuInfoHelperList const &theList,
 
 wxBEGIN_PROPERTIES_TABLE(wxMenuBar)
 wxPROPERTY_COLLECTION( MenuInfos, wxMenuInfoHelperList, wxMenuInfoHelper*, AppendMenuInfo, \
-                      GetMenuInfos, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                      GetMenuInfos, 0 /*flags*/, "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenuBar)
@@ -177,23 +177,23 @@ wxEND_ENUM( wxItemKind )
 
 wxBEGIN_PROPERTIES_TABLE(wxMenuItem)
 wxPROPERTY( Parent, wxMenu*, SetMenu, GetMenu, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Id, int, SetId, GetId, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( ItemLabel, std::string, SetItemLabel, GetItemLabel, "", \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Help, std::string, SetHelp, GetHelp, "", \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxREADONLY_PROPERTY( Kind, wxItemKind, GetKind, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group") )
+                    0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( SubMenu, wxMenu*, SetSubMenu, GetSubMenu, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Enabled, bool, Enable, IsEnabled, wxAny((bool)true), \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Checked, bool, Check, IsChecked, wxAny((bool)false), \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Checkable, bool, SetCheckable, IsCheckable, wxAny((bool)false), \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenuItem)
@@ -241,7 +241,7 @@ wxMenuItemBase::wxMenuItemBase(wxMenu *parentMenu,
             // fine though)
             wxASSERT_MSG( (itemid >= 0 && itemid < SHRT_MAX) ||
                             (itemid >= wxID_AUTO_LOWEST && itemid <= wxID_AUTO_HIGHEST),
-                          wxS("invalid itemid value") );
+                          "invalid itemid value" );
             m_id = itemid;
     }
 
@@ -291,7 +291,7 @@ void wxMenuItemBase::SetItemLabel(const std::string& str)
     if ( m_text.empty() && !IsSeparator() )
     {
         wxASSERT_MSG( wxIsStockID(GetId()),
-                      wxT("A non-stock menu item with an empty label?") );
+                      "A non-stock menu item with an empty label?" );
         m_text = wxGetStockLabel(GetId(), wxSTOCK_WITH_ACCELERATOR |
                                           wxSTOCK_WITH_MNEMONIC);
     }
@@ -339,14 +339,14 @@ wxMenuBase::~wxMenuBase()
 
 void wxMenuBase::AddSubMenu(wxMenu *submenu)
 {
-    wxCHECK_RET( submenu, wxT("can't add a NULL submenu") );
+    wxCHECK_RET( submenu, "can't add a NULL submenu" );
 
     submenu->SetParent((wxMenu *)this);
 }
 
 wxMenuItem* wxMenuBase::DoAppend(wxMenuItem *item)
 {
-    wxCHECK_MSG( item, nullptr, wxT("invalid item in wxMenu::Append()") );
+    wxCHECK_MSG( item, nullptr, "invalid item in wxMenu::Append()" );
 
     m_items.Append(item);
     item->SetMenu((wxMenu*)this);
@@ -360,7 +360,7 @@ wxMenuItem* wxMenuBase::DoAppend(wxMenuItem *item)
 
 wxMenuItem* wxMenuBase::Insert(size_t pos, wxMenuItem *item)
 {
-    wxCHECK_MSG( item, nullptr, wxT("invalid item in wxMenu::Insert") );
+    wxCHECK_MSG( item, nullptr, "invalid item in wxMenu::Insert" );
 
     if ( pos == GetMenuItemCount() )
     {
@@ -369,7 +369,7 @@ wxMenuItem* wxMenuBase::Insert(size_t pos, wxMenuItem *item)
     else
     {
         wxCHECK_MSG( pos < GetMenuItemCount(), nullptr,
-                     wxT("invalid index in wxMenu::Insert") );
+                     "invalid index in wxMenu::Insert" );
 
         return DoInsert(pos, item);
     }
@@ -377,10 +377,10 @@ wxMenuItem* wxMenuBase::Insert(size_t pos, wxMenuItem *item)
 
 wxMenuItem* wxMenuBase::DoInsert(size_t pos, wxMenuItem *item)
 {
-    wxCHECK_MSG( item, nullptr, wxT("invalid item in wxMenu::Insert()") );
+    wxCHECK_MSG( item, nullptr, "invalid item in wxMenu::Insert()" );
 
     wxMenuItemList::compatibility_iterator node = m_items.Item(pos);
-    wxCHECK_MSG( node, nullptr, wxT("invalid index in wxMenu::Insert()") );
+    wxCHECK_MSG( node, nullptr, "invalid index in wxMenu::Insert()" );
 
     m_items.Insert(node, item);
     item->SetMenu((wxMenu*)this);
@@ -394,12 +394,12 @@ wxMenuItem* wxMenuBase::DoInsert(size_t pos, wxMenuItem *item)
 
 wxMenuItem *wxMenuBase::Remove(wxMenuItem *item)
 {
-    wxCHECK_MSG( item, nullptr, wxT("invalid item in wxMenu::Remove") );
+    wxCHECK_MSG( item, nullptr, "invalid item in wxMenu::Remove" );
 
     wxMenuItemList::compatibility_iterator node = m_items.Find(item);
 
     // if we get here, the item is valid or one of Remove() functions is broken
-    wxCHECK_MSG( node, nullptr, wxT("removing item not in the menu?") );
+    wxCHECK_MSG( node, nullptr, "removing item not in the menu?" );
 
     // call DoRemove() before removing the item from the list of items as the
     // existing code in port-specific implementation may rely on the item still
@@ -431,7 +431,7 @@ wxMenuItem *wxMenuBase::DoRemove(wxMenuItem *item)
 
 bool wxMenuBase::Delete(wxMenuItem *item)
 {
-    wxCHECK_MSG( item, false, wxT("invalid item in wxMenu::Delete") );
+    wxCHECK_MSG( item, false, "invalid item in wxMenu::Delete" );
 
     return DoDelete(item);
 }
@@ -439,7 +439,7 @@ bool wxMenuBase::Delete(wxMenuItem *item)
 bool wxMenuBase::DoDelete(wxMenuItem *item)
 {
     wxMenuItem *item2 = Remove(item);
-    wxCHECK_MSG( item2, false, wxT("failed to delete menu item") );
+    wxCHECK_MSG( item2, false, "failed to delete menu item" );
 
     // don't delete the submenu
     item2->SetSubMenu(nullptr);
@@ -451,7 +451,7 @@ bool wxMenuBase::DoDelete(wxMenuItem *item)
 
 bool wxMenuBase::Destroy(wxMenuItem *item)
 {
-    wxCHECK_MSG( item, false, wxT("invalid item in wxMenu::Destroy") );
+    wxCHECK_MSG( item, false, "invalid item in wxMenu::Destroy" );
 
     return DoDestroy(item);
 }
@@ -459,7 +459,7 @@ bool wxMenuBase::Destroy(wxMenuItem *item)
 bool wxMenuBase::DoDestroy(wxMenuItem *item)
 {
     wxMenuItem *item2 = Remove(item);
-    wxCHECK_MSG( item2, false, wxT("failed to delete menu item") );
+    wxCHECK_MSG( item2, false, "failed to delete menu item" );
 
     delete item2;
 
@@ -562,7 +562,7 @@ wxMenuItem *wxMenuBase::FindChildItem(int itemid, size_t *ppos) const
 wxMenuItem* wxMenuBase::FindItemByPosition(size_t position) const
 {
     wxCHECK_MSG( position < m_items.GetCount(), nullptr,
-                 wxT("wxMenu::FindItemByPosition(): invalid menu index") );
+                 "wxMenu::FindItemByPosition(): invalid menu index" );
 
     return m_items.Item( position )->GetData();
 }
@@ -707,10 +707,10 @@ wxMenuBar* wxMenuBase::GetMenuBar() const
 void wxMenuBase::Attach(wxMenuBarBase *menubar)
 {
     // use Detach() instead!
-    wxASSERT_MSG( menubar, wxT("menu can't be attached to NULL menubar") );
+    wxASSERT_MSG( menubar, "menu can't be attached to NULL menubar" );
 
     // use IsAttached() to prevent this from happening
-    wxASSERT_MSG( !m_menuBar, wxT("attaching menu twice?") );
+    wxASSERT_MSG( !m_menuBar, "attaching menu twice?" );
 
     m_menuBar = (wxMenuBar *)menubar;
 }
@@ -718,7 +718,7 @@ void wxMenuBase::Attach(wxMenuBarBase *menubar)
 void wxMenuBase::Detach()
 {
     // use IsAttached() to prevent this from happening
-    wxASSERT_MSG( m_menuBar, wxT("detaching unattached menu?") );
+    wxASSERT_MSG( m_menuBar, "detaching unattached menu?" );
 
     m_menuBar = nullptr;
 }
@@ -765,7 +765,7 @@ void wxMenuBase::Enable( int itemid, bool enable )
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenu::Enable: no such item") );
+    wxCHECK_RET( item, "wxMenu::Enable: no such item" );
 
     item->Enable(enable);
 }
@@ -774,7 +774,7 @@ bool wxMenuBase::IsEnabled( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, false, wxT("wxMenu::IsEnabled: no such item") );
+    wxCHECK_MSG( item, false, "wxMenu::IsEnabled: no such item" );
 
     return item->IsEnabled();
 }
@@ -783,7 +783,7 @@ void wxMenuBase::Check( int itemid, bool enable )
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenu::Check: no such item") );
+    wxCHECK_RET( item, "wxMenu::Check: no such item" );
 
     item->Check(enable);
 }
@@ -792,7 +792,7 @@ bool wxMenuBase::IsChecked( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, false, wxT("wxMenu::IsChecked: no such item") );
+    wxCHECK_MSG( item, false, "wxMenu::IsChecked: no such item" );
 
     return item->IsChecked();
 }
@@ -801,7 +801,7 @@ void wxMenuBase::SetLabel( int itemid, const std::string &label )
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenu::SetLabel: no such item") );
+    wxCHECK_RET( item, "wxMenu::SetLabel: no such item" );
 
     item->SetItemLabel(label);
 }
@@ -810,7 +810,7 @@ std::string wxMenuBase::GetLabel( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, "", wxT("wxMenu::GetLabel: no such item") );
+    wxCHECK_MSG( item, "", "wxMenu::GetLabel: no such item" );
 
     return item->GetItemLabel();
 }
@@ -819,7 +819,7 @@ void wxMenuBase::SetHelpString( int itemid, const std::string& helpString )
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenu::SetHelpString: no such item") );
+    wxCHECK_RET( item, "wxMenu::SetHelpString: no such item" );
 
     item->SetHelp( helpString );
 }
@@ -828,7 +828,7 @@ std::string wxMenuBase::GetHelpString( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, "", wxT("wxMenu::GetHelpString: no such item") );
+    wxCHECK_MSG( item, "", "wxMenu::GetHelpString: no such item" );
 
     return item->GetHelp();
 }
@@ -852,15 +852,15 @@ wxMenuBarBase::~wxMenuBarBase()
 wxMenu *wxMenuBarBase::GetMenu(size_t pos) const
 {
     wxMenuList::compatibility_iterator node = m_menus.Item(pos);
-    wxCHECK_MSG( node, nullptr, wxT("bad index in wxMenuBar::GetMenu()") );
+    wxCHECK_MSG( node, nullptr, "bad index in wxMenuBar::GetMenu()" );
 
     return node->GetData();
 }
 
 bool wxMenuBarBase::Append(wxMenu *menu, const std::string& title)
 {
-    wxCHECK_MSG( menu, false, wxT("can't append NULL menu") );
-    wxCHECK_MSG( !title.empty(), false, wxT("can't append menu with empty title") );
+    wxCHECK_MSG( menu, false, "can't append NULL menu" );
+    wxCHECK_MSG( !title.empty(), false, "can't append menu with empty title" );
 
     m_menus.Append(menu);
     menu->Attach(this);
@@ -877,10 +877,10 @@ bool wxMenuBarBase::Insert(size_t pos, wxMenu *menu,
     }
     else // not at the end
     {
-        wxCHECK_MSG( menu, false, wxT("can't insert NULL menu") );
+        wxCHECK_MSG( menu, false, "can't insert NULL menu" );
 
         wxMenuList::compatibility_iterator node = m_menus.Item(pos);
-        wxCHECK_MSG( node, false, wxT("bad index in wxMenuBar::Insert()") );
+        wxCHECK_MSG( node, false, "bad index in wxMenuBar::Insert()" );
 
         m_menus.Insert(node, menu);
         menu->Attach(this);
@@ -892,10 +892,10 @@ bool wxMenuBarBase::Insert(size_t pos, wxMenu *menu,
 wxMenu *wxMenuBarBase::Replace(size_t pos, wxMenu *menu,
                                const std::string& WXUNUSED(title))
 {
-    wxCHECK_MSG( menu, nullptr, wxT("can't insert NULL menu") );
+    wxCHECK_MSG( menu, nullptr, "can't insert NULL menu" );
 
     wxMenuList::compatibility_iterator node = m_menus.Item(pos);
-    wxCHECK_MSG( node, nullptr, wxT("bad index in wxMenuBar::Replace()") );
+    wxCHECK_MSG( node, nullptr, "bad index in wxMenuBar::Replace()" );
 
     wxMenu *menuOld = node->GetData();
     node->SetData(menu);
@@ -909,7 +909,7 @@ wxMenu *wxMenuBarBase::Replace(size_t pos, wxMenu *menu,
 wxMenu *wxMenuBarBase::Remove(size_t pos)
 {
     wxMenuList::compatibility_iterator node = m_menus.Item(pos);
-    wxCHECK_MSG( node, nullptr, wxT("bad index in wxMenuBar::Remove()") );
+    wxCHECK_MSG( node, nullptr, "bad index in wxMenuBar::Remove()" );
 
     wxMenu *menu = node->GetData();
     m_menus.Erase(node);
@@ -944,7 +944,7 @@ int wxMenuBarBase::FindMenu(const std::string& title) const
 
 void wxMenuBarBase::Attach(wxFrame *frame)
 {
-    wxASSERT_MSG( !IsAttached(), wxT("menubar already attached!") );
+    wxASSERT_MSG( !IsAttached(), "menubar already attached!" );
 
     SetParent(frame);
     m_menuBarFrame = frame;
@@ -952,7 +952,7 @@ void wxMenuBarBase::Attach(wxFrame *frame)
 
 void wxMenuBarBase::Detach()
 {
-    wxASSERT_MSG( IsAttached(), wxT("detaching unattached menubar") );
+    wxASSERT_MSG( IsAttached(), "detaching unattached menubar" );
 
     m_menuBarFrame = nullptr;
     SetParent(nullptr);
@@ -1002,7 +1002,7 @@ void wxMenuBarBase::Enable(int itemid, bool enable)
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("attempt to enable an item which doesn't exist") );
+    wxCHECK_RET( item, "attempt to enable an item which doesn't exist" );
 
     item->Enable(enable);
 }
@@ -1011,8 +1011,8 @@ void wxMenuBarBase::Check(int itemid, bool check)
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("attempt to check an item which doesn't exist") );
-    wxCHECK_RET( item->IsCheckable(), wxT("attempt to check an uncheckable item") );
+    wxCHECK_RET( item, "attempt to check an item which doesn't exist" );
+    wxCHECK_RET( item->IsCheckable(), "attempt to check an uncheckable item" );
 
     item->Check(check);
 }
@@ -1021,7 +1021,7 @@ bool wxMenuBarBase::IsChecked(int itemid) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, false, wxT("wxMenuBar::IsChecked(): no such item") );
+    wxCHECK_MSG( item, false, "wxMenuBar::IsChecked(): no such item" );
 
     return item->IsChecked();
 }
@@ -1030,7 +1030,7 @@ bool wxMenuBarBase::IsEnabled(int itemid) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, false, wxT("wxMenuBar::IsEnabled(): no such item") );
+    wxCHECK_MSG( item, false, "wxMenuBar::IsEnabled(): no such item" );
 
     return item->IsEnabled();
 }
@@ -1039,7 +1039,7 @@ void wxMenuBarBase::SetLabel(int itemid, const std::string& label)
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenuBar::SetLabel(): no such item") );
+    wxCHECK_RET( item, "wxMenuBar::SetLabel(): no such item" );
 
     item->SetItemLabel(label);
 }
@@ -1049,7 +1049,7 @@ std::string wxMenuBarBase::GetLabel(int itemid) const
     wxMenuItem *item = FindItem(itemid);
 
     wxCHECK_MSG( item, "",
-                 wxT("wxMenuBar::GetLabel(): no such item") );
+                 "wxMenuBar::GetLabel(): no such item" );
 
     return item->GetItemLabel();
 }
@@ -1058,7 +1058,7 @@ void wxMenuBarBase::SetHelpString(int itemid, const std::string& helpString)
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_RET( item, wxT("wxMenuBar::SetHelpString(): no such item") );
+    wxCHECK_RET( item, "wxMenuBar::SetHelpString(): no such item" );
 
     item->SetHelp(helpString);
 }
@@ -1068,7 +1068,7 @@ std::string wxMenuBarBase::GetHelpString(int itemid) const
     wxMenuItem *item = FindItem(itemid);
 
     wxCHECK_MSG( item, "",
-                 wxT("wxMenuBar::GetHelpString(): no such item") );
+                 "wxMenuBar::GetHelpString(): no such item" );
 
     return item->GetHelp();
 }

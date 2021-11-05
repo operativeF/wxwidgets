@@ -256,7 +256,7 @@ public:
     MakeConfigFileName(const wxString& basename,
                        ConfigFileConv WXUNUSED(conv) = ConfigFileConv_Ext) const
     {
-        return m_prefix + wxS("/") + basename;
+        return m_prefix + "/" + basename;
     }
 
 protected:

@@ -220,7 +220,7 @@ bool wxHtmlWindowMouseHelper::OnCellClicked(wxHtmlCell *cell,
     {
         // if the event wasn't handled, do the default processing here:
 
-        wxASSERT_MSG( cell, wxT("can't be called with NULL cell") );
+        wxASSERT_MSG( cell, "can't be called with NULL cell" );
 
         // If we don't return true, HTML listboxes will always think that they should take
         // the focus
@@ -720,9 +720,9 @@ void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, std::string path)
         cfg->SetPath(path);
     }
 
-    m_Borders = cfg->Read(wxT("wxHtmlWindow/Borders"), m_Borders);
-    p_fff = cfg->Read(wxT("wxHtmlWindow/FontFaceFixed"), m_Parser->m_FontFaceFixed);
-    p_ffn = cfg->Read(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
+    m_Borders = cfg->Read("wxHtmlWindow/Borders", m_Borders);
+    p_fff = cfg->Read("wxHtmlWindow/FontFaceFixed", m_Parser->m_FontFaceFixed);
+    p_ffn = cfg->Read("wxHtmlWindow/FontFaceNormal", m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
         tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);
@@ -748,9 +748,9 @@ void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, std::string path)
         cfg->SetPath(path);
     }
 
-    cfg->Write(wxT("wxHtmlWindow/Borders"), (long) m_Borders);
-    cfg->Write(wxT("wxHtmlWindow/FontFaceFixed"), m_Parser->m_FontFaceFixed);
-    cfg->Write(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
+    cfg->Write("wxHtmlWindow/Borders", (long) m_Borders);
+    cfg->Write("wxHtmlWindow/FontFaceFixed", m_Parser->m_FontFaceFixed);
+    cfg->Write("wxHtmlWindow/FontFaceNormal", m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
         tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);
@@ -781,7 +781,7 @@ bool wxHtmlWindow::HistoryBack()
     m_HistoryOn = false;
     m_tmpCanDrawLocks++;
     if (a.empty()) LoadPage(l);
-    else LoadPage(l + wxT("#") + a);
+    else LoadPage(l + "#" + a);
     m_HistoryOn = true;
     m_tmpCanDrawLocks--;
     Scroll(0, m_History[m_HistoryPos]->GetPos());
@@ -810,7 +810,7 @@ bool wxHtmlWindow::HistoryForward()
     m_HistoryOn = false;
     m_tmpCanDrawLocks++;
     if (a.empty()) LoadPage(l);
-    else LoadPage(l + wxT("#") + a);
+    else LoadPage(l + "#" + a);
     m_HistoryOn = true;
     m_tmpCanDrawLocks--;
     Scroll(0, m_History[m_HistoryPos]->GetPos());
@@ -957,7 +957,7 @@ bool wxHtmlWindow::CopySelection(ClipboardType t)
             const std::string txt(SelectionToText());
             wxTheClipboard->SetData(new wxTextDataObject(txt));
             wxTheClipboard->Close();
-            wxLogTrace(wxT("wxhtmlselection"),
+            wxLogTrace("wxhtmlselection",
                        _("Copied to clipboard:\"%s\""), txt.c_str());
 
             return true;
@@ -1533,7 +1533,7 @@ void wxHtmlWindow::OnMouseLeave(wxMouseEvent& event)
                 // but seems to happen sometimes under wxMSW - maybe it's a bug
                 // there but for now just ignore it
 
-                //wxFAIL_MSG( wxT("can't understand where has mouse gone") );
+                //wxFAIL_MSG( "can't understand where has mouse gone" );
 
                 return;
             }

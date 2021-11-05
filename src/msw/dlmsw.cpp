@@ -63,7 +63,7 @@ static wxString GetFileVersion(const wxString& filename)
                                     &sizeInfo) )
             {
                 VS_FIXEDFILEINFO *info = (VS_FIXEDFILEINFO *)pVer;
-                ver.Printf(wxT("%d.%d.%d.%d"),
+                ver.Printf("%d.%d.%d.%d",
                             HIWORD(info->dwFileVersionMS),
                             LOWORD(info->dwFileVersionMS),
                             HIWORD(info->dwFileVersionLS),
@@ -174,7 +174,7 @@ void wxDynamicLibrary::Unload(wxDllType handle)
 {
     if ( !::FreeLibrary(handle) )
     {
-        wxLogLastError(wxT("FreeLibrary"));
+        wxLogLastError("FreeLibrary");
     }
 }
 
@@ -208,7 +208,7 @@ wxDynamicLibraryDetailsArray wxDynamicLibrary::ListLoaded()
                                 &params
                             ) )
         {
-            wxLogLastError(wxT("EnumerateLoadedModules"));
+            wxLogLastError("EnumerateLoadedModules");
         }
     }
 #endif // wxUSE_DBGHELP
@@ -236,7 +236,7 @@ HMODULE CallGetModuleHandleEx(const void* addr)
     static GetModuleHandleEx_t s_pfnGetModuleHandleEx = INVALID_FUNC_PTR;
     if ( s_pfnGetModuleHandleEx == INVALID_FUNC_PTR )
     {
-        wxDynamicLibrary dll(wxT("kernel32.dll"), wxDL_VERBATIM);
+        wxDynamicLibrary dll("kernel32.dll", wxDL_VERBATIM);
 
         wxDL_INIT_FUNC_AW(s_pfn, GetModuleHandleEx, dll);
 
@@ -263,7 +263,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
     HMODULE hmod = CallGetModuleHandleEx(addr);
     if ( !hmod )
     {
-        wxLogLastError(wxT("GetModuleHandleEx"));
+        wxLogLastError("GetModuleHandleEx");
         return nullptr;
     }
 
@@ -276,7 +276,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
             // prepended with "//?/", maximum length is 32767 charachters) so,
             // in principle, MAX_PATH could be unsufficient and we should try
             // increasing the buffer size here.
-            wxLogLastError(wxT("GetModuleFromAddress"));
+            wxLogLastError("GetModuleFromAddress");
             return nullptr;
         }
 

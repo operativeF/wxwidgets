@@ -31,9 +31,9 @@ wxObject *wxColourPickerCtrlXmlHandler::DoCreateResource()
 
    picker->Create(m_parentAsWindow,
                   GetID(),
-                  GetColour(wxT("value"), *wxBLACK),
+                  GetColour("value", *wxBLACK),
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxCLRP_DEFAULT_STYLE),
+                  GetStyle("style", wxCLRP_DEFAULT_STYLE),
                   wxDefaultValidator,
                   GetName());
 
@@ -44,7 +44,7 @@ wxObject *wxColourPickerCtrlXmlHandler::DoCreateResource()
 
 bool wxColourPickerCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxColourPickerCtrl"));
+    return IsOfClass(node, "wxColourPickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_COLOURPICKERCTRL

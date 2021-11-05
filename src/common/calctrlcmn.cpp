@@ -72,11 +72,11 @@ wxEVENT_RANGE_PROPERTY( Updated, wxEVT_CALENDAR_SEL_CHANGED, \
 wxHIDE_PROPERTY( Children )
 
 wxPROPERTY( Date,wxDateTime, SetDate, GetDate, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 wxPROPERTY_FLAGS( WindowStyle, wxCalendarCtrlStyle, long, \
                  SetWindowStyleFlag, GetWindowStyleFlag, \
-                 wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), \
-                 wxT("group")) // style
+                 wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", \
+                 "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxCalendarCtrl)

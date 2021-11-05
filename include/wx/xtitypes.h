@@ -167,7 +167,7 @@ void wxSetToString( wxString &s, const wxBitset<e> &data )
         {
             // this could also be done by the templated calls
             if ( !s.empty() )
-                s += wxT("|");
+                s += "|";
             s += edata->GetEnumMemberNameByIndex(i);
         }
     }
@@ -226,7 +226,7 @@ void wxFlagsToString( wxString &s, const e& data )
             dataValue &= ~value;
             // this could also be done by the templated calls
             if ( !s.empty() )
-                s +=wxT("|");
+                s +="|";
             s += edata->GetEnumMemberNameByIndex(i);
         }
     }
@@ -354,7 +354,7 @@ public:
         if ( m_toString )
             (*m_toString)( data, result );
         else
-            wxLogError( wxGetTranslation(wxT("String conversions not supported")) );
+            wxLogError( wxGetTranslation("String conversions not supported") );
     }
 
     // convert a string into a wxAny holding the corresponding data in this type
@@ -363,7 +363,7 @@ public:
         if( m_fromString )
             (*m_fromString)( data, result );
         else
-            wxLogError( wxGetTranslation(wxT("String conversions not supported")) );
+            wxLogError( wxGetTranslation("String conversions not supported") );
     }
 
     // statics:
@@ -391,7 +391,7 @@ public:
                        wxString2VariantFnc from = NULL,
                        const wxString &name = {} ) :
             wxTypeInfo( kind, to, from, name )
-       { wxASSERT_MSG( GetKind() < wxT_SET, wxT("Illegal Kind for Base Type") ); }
+       { wxASSERT_MSG( GetKind() < wxT_SET, "Illegal Kind for Base Type" ); }
 };
 
 class wxCustomTypeInfo : public wxTypeInfo
@@ -415,7 +415,7 @@ public:
         wxTypeInfo( kind, to, from, name ), m_toLong( toLong ), m_fromLong( fromLong )
     {
         wxASSERT_MSG( kind == wxT_ENUM || kind == wxT_SET,
-                      wxT("Illegal Kind for Enum Type"));
+                      "Illegal Kind for Enum Type" );
         m_enumInfo = enumInfo;
     }
 
@@ -427,7 +427,7 @@ public:
         if( m_toLong )
             (*m_toLong)( data, result );
         else
-            wxLogError( wxGetTranslation(wxT("Long Conversions not supported")) );
+            wxLogError( wxGetTranslation("Long Conversions not supported") );
     }
 
     // convert a long into a wxAny holding the corresponding data in this type
@@ -436,7 +436,7 @@ public:
         if( m_fromLong )
             (*m_fromLong)( data, result );
         else
-            wxLogError( wxGetTranslation(wxT("Long Conversions not supported")) );
+            wxLogError( wxGetTranslation("Long Conversions not supported") );
     }
 
 private:

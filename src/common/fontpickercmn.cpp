@@ -87,7 +87,7 @@ wxFont wxFontPickerCtrl::String2Font(const wxString &s)
     if (size.ToDouble(&n))
     {
         if (n < 1)
-            str = str.Left(str.length() - size.length()) + wxT("1");
+            str = str.Left(str.length() - size.length()) + "1";
         else if (n >= m_nMaxPointSize)
             str = str.Left(str.length() - size.length()) +
                   fmt::format("{:d}", m_nMaxPointSize);

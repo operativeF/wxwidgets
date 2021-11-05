@@ -406,7 +406,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxStaticText* labelCtrl = (wxStaticText*) wxFindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
     if (labelCtrl)
-        labelCtrl->SetLabel(def->GetName() + wxT(":"));
+        labelCtrl->SetLabel(def->GetName() + ":");
 
     wxRichTextAttr attr(def->GetStyleMergedWithBase(GetStyleSheet()));
 
@@ -416,7 +416,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxRichTextAttr normalParaAttr;
     normalParaAttr.SetFont(font);
-    normalParaAttr.SetTextColour(wxColour(wxT("LIGHT GREY")));
+    normalParaAttr.SetTextColour(wxColour("LIGHT GREY"));
 
     m_previewCtrl->Freeze();
     m_previewCtrl->Clear();
@@ -435,7 +435,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
             wxRichTextAttr levelAttr = * listDef->GetLevelAttributes(i);
             levelAttr.SetBulletNumber(1);
             m_previewCtrl->BeginStyle(levelAttr);
-            m_previewCtrl->WriteText(wxString::Format(wxT("List level %d. "), i+1) + s_para2List);
+            m_previewCtrl->WriteText(wxString::Format("List level %d. ", i+1) + s_para2List);
             m_previewCtrl->EndStyle();
         }
         long listEnd = m_previewCtrl->GetInsertionPoint();
@@ -452,7 +452,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
         m_previewCtrl->SetFocusObject(textBox);
         m_previewCtrl->BeginStyle(cellParaAttr);
         wxString text(s_para2);
-        text.Replace(wxT("\n"), {});
+        text.Replace("\n", {});
         m_previewCtrl->WriteText(text);
         m_previewCtrl->EndStyle();
         m_previewCtrl->SetFocusObject(nullptr); // Set the focus back to the main buffer
@@ -788,15 +788,15 @@ void wxRichTextStyleOrganiserDialog::OnNewListClick( wxCommandEvent& WXUNUSED(ev
         {
             wxString bulletSymbol;
             if (i == 0)
-                bulletSymbol = wxT("*");
+                bulletSymbol = "*";
             else if (i == 1)
-                bulletSymbol = wxT("-");
+                bulletSymbol = "-";
             else if (i == 2)
-                bulletSymbol = wxT("*");
+                bulletSymbol = "*";
             else if (i == 3)
-                bulletSymbol = wxT("-");
+                bulletSymbol = "-";
             else
-                bulletSymbol = wxT("*");
+                bulletSymbol = "*";
 
             style->SetAttributes(i, (i+1)*60, 60, wxTEXT_ATTR_BULLET_STYLE_SYMBOL, bulletSymbol);
         }

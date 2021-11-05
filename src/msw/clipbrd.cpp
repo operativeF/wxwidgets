@@ -60,7 +60,7 @@ static int gs_pngcfid{};
 
 bool wxOpenClipboard()
 {
-    wxCHECK_MSG( !gs_wxClipboardIsOpen, true, wxT("clipboard already opened.") );
+    wxCHECK_MSG( !gs_wxClipboardIsOpen, true, "clipboard already opened." );
 
     wxWindow *win = wxTheApp->GetTopWindow();
     if ( win )
@@ -76,7 +76,7 @@ bool wxOpenClipboard()
     }
     else
     {
-        wxLogDebug(wxT("Cannot open clipboard without a main window."));
+        wxLogDebug("Cannot open clipboard without a main window.");
 
         return false;
     }
@@ -84,7 +84,7 @@ bool wxOpenClipboard()
 
 bool wxCloseClipboard()
 {
-    wxCHECK_MSG( gs_wxClipboardIsOpen, false, wxT("clipboard is not opened") );
+    wxCHECK_MSG( gs_wxClipboardIsOpen, false, "clipboard is not opened" );
 
     gs_wxClipboardIsOpen = false;
 
@@ -478,7 +478,7 @@ void wxClipboard::Clear()
             hr = OleSetClipboard(nullptr);
             if ( FAILED(hr) )
             {
-                wxLogApiError(wxT("OleSetClipboard(NULL)"), hr);
+                wxLogApiError("OleSetClipboard(NULL)", hr);
             }
         }
         m_lastDataObject = nullptr;
@@ -499,7 +499,7 @@ bool wxClipboard::Flush()
             hr = OleFlushClipboard();
             if ( FAILED(hr) )
             {
-                wxLogApiError(wxT("OleFlushClipboard"), hr);
+                wxLogApiError("OleFlushClipboard", hr);
 
                 return false;
             }
@@ -560,14 +560,14 @@ bool wxClipboard::AddData( wxDataObject *data )
     if ( IsUsingPrimarySelection() )
         return false;
 
-    wxCHECK_MSG( data, false, wxT("data is invalid") );
+    wxCHECK_MSG( data, false, "data is invalid" );
 
     const wxDataFormat format = data->GetPreferredFormat();
     if ( format == wxDF_BITMAP || format == wxDF_DIB )
     {
         wxBitmapDataObject* bmpData = (wxBitmapDataObject*)data;
         wxBitmap bmp = bmpData->GetBitmap();
-        wxASSERT_MSG( bmp.IsOk(), wxS("Invalid bitmap") );
+        wxASSERT_MSG( bmp.IsOk(), "Invalid bitmap" );
         // Replace 0RGB bitmap with its RGB copy
         // to ensure compatibility with applications
         // not recognizing bitmaps in 0RGB format.
@@ -608,7 +608,7 @@ bool wxClipboard::AddData( wxDataObject *data )
 
     return true;
 #elif wxUSE_DATAOBJ
-    wxCHECK_MSG( wxIsClipboardOpened(), false, wxT("clipboard not open") );
+    wxCHECK_MSG( wxIsClipboardOpened(), false, "clipboard not open" );
 
     bool bRet = false;
     switch ( format )
@@ -654,7 +654,7 @@ bool wxClipboard::AddData( wxDataObject *data )
         {
 #if 1
             // TODO
-            wxLogError(wxT("Not implemented because wxMetafileDataObject does not contain width and height values."));
+            wxLogError("Not implemented because wxMetafileDataObject does not contain width and height values.");
 #else
             wxMetafileDataObject* metaFileDataObject =
                 (wxMetafileDataObject*) data;
@@ -672,7 +672,7 @@ bool wxClipboard::AddData( wxDataObject *data )
 // This didn't compile, of course
 //            return wxSetClipboardData(data);
             // TODO
-            wxLogError(wxT("Not implemented."));
+            wxLogError("Not implemented.");
         }
     }
     // Delete owned, no longer necessary data.
@@ -756,7 +756,7 @@ bool wxClipboard::GetData( wxDataObject& data )
             cf = formatEtc.cfFormat;
 
             wxLogTrace(wxTRACE_OleCalls,
-                       wxT("Object on the clipboard supports format %s."),
+                       "Object on the clipboard supports format %s.",
                        wxDataObject::GetFormatName(cf));
         }
 
@@ -822,7 +822,7 @@ bool wxClipboard::GetData( wxDataObject& data )
             hr = data.GetInterface()->SetData(&formatEtc, &medium, true);
             if ( FAILED(hr) )
             {
-                wxLogDebug(wxT("Failed to set data in wxIDataObject"));
+                wxLogDebug("Failed to set data in wxIDataObject");
 
                 // IDataObject only takes the ownership of data if it
                 // successfully got it - which is not the case here
@@ -842,7 +842,7 @@ bool wxClipboard::GetData( wxDataObject& data )
 
     return result;
 #elif wxUSE_DATAOBJ
-    wxCHECK_MSG( wxIsClipboardOpened(), false, wxT("clipboard not open") );
+    wxCHECK_MSG( wxIsClipboardOpened(), false, "clipboard not open" );
 
     wxDataFormat format = data.GetPreferredFormat();
     switch ( format )
@@ -916,7 +916,7 @@ bool wxClipboard::GetData( wxDataObject& data )
     }
     return false;
 #else // !wxUSE_DATAOBJ
-    wxFAIL_MSG( wxT("no clipboard implementation") );
+    wxFAIL_MSG( "no clipboard implementation" );
     return false;
 #endif // wxUSE_OLE_CLIPBOARD/wxUSE_DATAOBJ
 }

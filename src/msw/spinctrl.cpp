@@ -147,7 +147,7 @@ wxSpinCtrl *wxSpinCtrl::GetSpinForTextCtrl(WXHWND hwndBuddy)
 
     // sanity check
     wxASSERT_MSG( spin->m_hwndBuddy == hwndBuddy,
-                  wxT("wxSpinCtrl has incorrect buddy HWND!") );
+                  "wxSpinCtrl has incorrect buddy HWND!" );
 
     return spin;
 }
@@ -304,7 +304,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
 
     if ( !m_hwndBuddy )
     {
-        wxLogLastError(wxT("CreateWindow(buddy text window)"));
+        wxLogLastError("CreateWindow(buddy text window)");
 
         return false;
     }
@@ -356,8 +356,8 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     // because GetBestSize() uses them.
     if ( size.x > 0 && size.x < GetBestSize().x )
     {
-        wxLogDebug(wxS("wxSpinCtrl \"%s\": initial width %d is too small, ")
-                   wxS("at least %d pixels needed."),
+        wxLogDebug("wxSpinCtrl \"%s\": initial width %d is too small, "
+                   "at least %d pixels needed.",
                    name, size.x, GetBestSize().x);
     }
 
@@ -437,7 +437,7 @@ void wxSpinCtrl::SetValue(const std::string& text)
 
     if ( !::SetWindowTextW(GetBuddyHwnd(), boost::nowide::widen(text).c_str()) )
     {
-        wxLogLastError(wxT("SetWindowText(buddy)"));
+        wxLogLastError("SetWindowText(buddy)");
     }
 }
 
@@ -623,7 +623,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
     UnsubclassWin();
     if ( !::DestroyWindow(hwndOld) )
     {
-        wxLogLastError(wxT("DestroyWindow"));
+        wxLogLastError("DestroyWindow");
     }
 
     // create and initialize the new one
@@ -686,7 +686,7 @@ void wxSpinCtrl::SendSpinUpdate(int value)
 bool wxSpinCtrl::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
                              WXWORD WXUNUSED(pos), WXHWND control)
 {
-    wxCHECK_MSG( control, false, wxT("scrolling what?") );
+    wxCHECK_MSG( control, false, "scrolling what?" );
 
     if ( wParam != SB_THUMBPOSITION )
     {

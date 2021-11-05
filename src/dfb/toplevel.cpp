@@ -157,7 +157,7 @@ void wxTopLevelWindowDFB::Restore()
 
 void wxTopLevelWindowDFB::Iconize(bool WXUNUSED(iconize))
 {
-    wxFAIL_MSG(wxT("Iconize not supported under wxDFB"));
+    wxFAIL_MSG("Iconize not supported under wxDFB");
 }
 
 bool wxTopLevelWindowDFB::IsIconized() const

@@ -71,7 +71,7 @@
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())
 #else
-#define IsTopMostDir(dir)   (dir == wxT("/"))
+#define IsTopMostDir(dir)   (dir == "/")
 #endif
 
 //-----------------------------------------------------------------------------
@@ -163,14 +163,14 @@ bool wxGenericFileDialog::Create( wxWindow *parent,
 #if wxUSE_CONFIG
     if (wxConfig::Get(false))
     {
-        wxConfig::Get()->Read(wxT("/wxWindows/wxFileDialog/ViewStyle"),
+        wxConfig::Get()->Read("/wxWindows/wxFileDialog/ViewStyle",
                               &ms_lastViewStyle);
-        wxConfig::Get()->Read(wxT("/wxWindows/wxFileDialog/ShowHidden"),
+        wxConfig::Get()->Read("/wxWindows/wxFileDialog/ShowHidden",
                               &ms_lastShowHidden);
     }
 #endif
 
-    if ((m_dir.empty()) || (m_dir == wxT(".")))
+    if ((m_dir.empty()) || (m_dir == "."))
     {
         m_dir = wxGetCwd();
         if (m_dir.empty())
@@ -263,9 +263,9 @@ wxGenericFileDialog::~wxGenericFileDialog()
 #if wxUSE_CONFIG
         if (wxConfig::Get(false))
         {
-            wxConfig::Get()->Write(wxT("/wxWindows/wxFileDialog/ViewStyle"),
+            wxConfig::Get()->Write("/wxWindows/wxFileDialog/ViewStyle",
                                    ms_lastViewStyle);
-            wxConfig::Get()->Write(wxT("/wxWindows/wxFileDialog/ShowHidden"),
+            wxConfig::Get()->Write("/wxWindows/wxFileDialog/ShowHidden",
                                    ms_lastShowHidden);
         }
 #endif

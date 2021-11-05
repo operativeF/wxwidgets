@@ -189,7 +189,7 @@ class wxSpinCtrlGenericBase : public wxTextCtrl
 public:
     wxSpinCtrlGenericBase() : m_value(0), m_min(0), m_max(100),
                               m_increment(1), m_snap_to_ticks(false),
-                              m_format(wxT("%g")) { }
+                              m_format("%g") { }
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -199,7 +199,7 @@ public:
                 unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const std::string& name = wxT("wxSpinCtrl"))
+                const std::string& name = "wxSpinCtrl")
     {
         m_min = min;
         m_max = max;
@@ -237,7 +237,7 @@ protected:
     double DoGetValue() const
     {
         double n;
-        if ( (wxSscanf(wxTextCtrl::GetValue(), wxT("%lf"), &n) != 1) )
+        if ( (wxSscanf(wxTextCtrl::GetValue(), "%lf", &n) != 1) )
             n = std::numeric_limits<int>::min();
 
         return n;
@@ -293,7 +293,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
-               const std::string& name = wxT("wxSpinCtrl"))
+               const std::string& name = "wxSpinCtrl")
     {
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
@@ -305,7 +305,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
-                const std::string& name = wxT("wxSpinCtrl"))
+                const std::string& name = "wxSpinCtrl")
     {
         return wxSpinCtrlGenericBase::Create(parent, id, value, pos, size,
                                              style, min, max, initial, 1, name);

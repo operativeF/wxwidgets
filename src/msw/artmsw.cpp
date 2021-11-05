@@ -43,7 +43,7 @@ MSW_SHDefExtractIcon(LPCTSTR pszIconFile, int iIndex, UINT uFlags,
     static SHDefExtractIcon_t s_SHDefExtractIcon = NULL;
     if ( !s_SHDefExtractIcon )
     {
-        wxDynamicLibrary shell32(wxT("shell32.dll"));
+        wxDynamicLibrary shell32("shell32.dll");
         wxDL_INIT_FUNC_AW(s_, SHDefExtractIcon, shell32);
 
         if ( !s_SHDefExtractIcon )
@@ -98,9 +98,9 @@ MSW_SHGetStockIconInfo(SHSTOCKICONID siid,
 
     if ( pSHGetStockIconInfo == (PSHGETSTOCKICONINFO)-1 )
     {
-        wxDynamicLibrary shell32(wxT("shell32.dll"));
+        wxDynamicLibrary shell32("shell32.dll");
 
-        pSHGetStockIconInfo = (PSHGETSTOCKICONINFO)shell32.RawGetSymbol( wxT("SHGetStockIconInfo") );
+        pSHGetStockIconInfo = (PSHGETSTOCKICONINFO)shell32.RawGetSymbol( "SHGetStockIconInfo" );
     }
 
     if ( !pSHGetStockIconInfo )

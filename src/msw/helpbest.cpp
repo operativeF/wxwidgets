@@ -79,7 +79,7 @@ std::string wxBestHelpController::GetValidFilename( const std::string& filename 
 
         default:
             // we CAN'T get here
-            wxFAIL_MSG( wxT("wxBestHelpController: Must call Initialize, first!") );
+            wxFAIL_MSG( "wxBestHelpController: Must call Initialize, first!" );
     }
 
     return {};

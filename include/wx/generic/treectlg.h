@@ -116,7 +116,7 @@ public:
     wxTreeItemId GetSelection() const override
     {
         wxASSERT_MSG( !HasFlag(wxTR_MULTIPLE),
-                       wxT("must use GetSelections() with this control") );
+                      "must use GetSelections() with this control" );
 
         return m_current;
     }

@@ -144,7 +144,7 @@ bool wxPopupWindow::Show(bool show)
             if ( !::SetWindowPos(GetHwnd(), HWND_TOP, 0, 0, 0, 0,
                                  SWP_NOMOVE | SWP_NOSIZE) )
             {
-                wxLogLastError(wxT("SetWindowPos"));
+                wxLogLastError("SetWindowPos");
             }
 
             // and set it as the foreground window so the mouse can be captured

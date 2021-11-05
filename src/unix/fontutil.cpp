@@ -267,63 +267,63 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
     {
         case wxFontFamily::Script:
             // corresponds to the cursive font family in the page linked above
-            facename.Add(wxS("URW Chancery L"));
-            facename.Add(wxS("Comic Sans MS"));
+            facename.Add("URW Chancery L");
+            facename.Add("Comic Sans MS");
             break;
 
         case wxFontFamily::Decorative:
             // corresponds to the fantasy font family in the page linked above
-            facename.Add(wxS("Impact"));
+            facename.Add("Impact");
             break;
 
         case wxFontFamily::Roman:
             // corresponds to the serif font family in the page linked above
-            facename.Add(wxS("Serif"));
-            facename.Add(wxS("DejaVu Serif"));
-            facename.Add(wxS("DejaVu LGC Serif"));
-            facename.Add(wxS("Bitstream Vera Serif"));
-            facename.Add(wxS("Liberation Serif"));
-            facename.Add(wxS("FreeSerif"));
-            facename.Add(wxS("Luxi Serif"));
-            facename.Add(wxS("Times New Roman"));
-            facename.Add(wxS("Century Schoolbook L"));
-            facename.Add(wxS("URW Bookman L"));
-            facename.Add(wxS("URW Palladio L"));
-            facename.Add(wxS("Times"));
+            facename.Add("Serif");
+            facename.Add("DejaVu Serif");
+            facename.Add("DejaVu LGC Serif");
+            facename.Add("Bitstream Vera Serif");
+            facename.Add("Liberation Serif");
+            facename.Add("FreeSerif");
+            facename.Add("Luxi Serif");
+            facename.Add("Times New Roman");
+            facename.Add("Century Schoolbook L");
+            facename.Add("URW Bookman L");
+            facename.Add("URW Palladio L");
+            facename.Add("Times");
             break;
 
         case wxFontFamily::Teletype:
         case wxFontFamily::Modern:
             // corresponds to the monospace font family in the page linked above
-            facename.Add(wxS("Monospace"));
-            facename.Add(wxS("DejaVu Sans Mono"));
-            facename.Add(wxS("DejaVu LGC Sans Mono"));
-            facename.Add(wxS("Bitstream Vera Sans Mono"));
-            facename.Add(wxS("Liberation Mono"));
-            facename.Add(wxS("FreeMono"));
-            facename.Add(wxS("Luxi Mono"));
-            facename.Add(wxS("Courier New"));
-            facename.Add(wxS("Lucida Sans Typewriter"));
-            facename.Add(wxS("Nimbus Mono L"));
-            facename.Add(wxS("Andale Mono"));
-            facename.Add(wxS("Courier"));
+            facename.Add("Monospace");
+            facename.Add("DejaVu Sans Mono");
+            facename.Add("DejaVu LGC Sans Mono");
+            facename.Add("Bitstream Vera Sans Mono");
+            facename.Add("Liberation Mono");
+            facename.Add("FreeMono");
+            facename.Add("Luxi Mono");
+            facename.Add("Courier New");
+            facename.Add("Lucida Sans Typewriter");
+            facename.Add("Nimbus Mono L");
+            facename.Add("Andale Mono");
+            facename.Add("Courier");
             break;
 
         case wxFontFamily::Swiss:
         case wxFontFamily::Default:
         default:
             // corresponds to the sans-serif font family in the page linked above
-            facename.Add(wxS("Sans"));
-            facename.Add(wxS("DejaVu Sans"));
-            facename.Add(wxS("DejaVu LGC Sans"));
-            facename.Add(wxS("Bitstream Vera Sans"));
-            facename.Add(wxS("Liberation Sans"));
-            facename.Add(wxS("FreeSans"));
-            facename.Add(wxS("Luxi Sans"));
-            facename.Add(wxS("Arial"));
-            facename.Add(wxS("Lucida Sans"));
-            facename.Add(wxS("Nimbus Sans L"));
-            facename.Add(wxS("URW Gothic L"));
+            facename.Add("Sans");
+            facename.Add("DejaVu Sans");
+            facename.Add("DejaVu LGC Sans");
+            facename.Add("Bitstream Vera Sans");
+            facename.Add("Liberation Sans");
+            facename.Add("FreeSans");
+            facename.Add("Luxi Sans");
+            facename.Add("Arial");
+            facename.Add("Lucida Sans");
+            facename.Add("Nimbus Sans L");
+            facename.Add("URW Gothic L");
             break;
     }
 
@@ -342,8 +342,8 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     // Pango font description doesn't have 'underlined' or 'strikethrough'
     // attributes, so we handle them specially by extracting them from the
     // string before passing it to Pango.
-    m_underlined = str.StartsWith(wxS("underlined "), &str);
-    m_strikethrough = str.StartsWith(wxS("strikethrough "), &str);
+    m_underlined = str.StartsWith("underlined ", &str);
+    m_strikethrough = str.StartsWith("strikethrough ", &str);
 
     if (description)
         pango_font_description_free( description );
@@ -355,15 +355,15 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     // we do the check on the size here using same (arbitrary) limits used by
     // pango > 1.13. Note that the segfault could happen also for pointsize
     // smaller than this limit !!
-    const size_t pos = str.find_last_of(wxS(" "));
+    const size_t pos = str.find_last_of(" ");
     double size;
     if ( pos != wxString::npos && wxString(str, pos + 1).ToDouble(&size) )
     {
         wxString sizeStr;
         if ( size < 1 )
-            sizeStr = wxS("1");
+            sizeStr = "1";
         else if ( size >= 1E6 )
-            sizeStr = wxS("1E6");
+            sizeStr = "1E6";
 
         if ( !sizeStr.empty() )
         {
@@ -393,9 +393,9 @@ wxString wxNativeFontInfo::ToString() const
     // Notice that we must add them in the same order they are extracted in
     // FromString() above.
     if (m_strikethrough)
-        desc.insert(0, wxS("strikethrough "));
+        desc.insert(0, "strikethrough ");
     if (m_underlined)
-        desc.insert(0, wxS("underlined "));
+        desc.insert(0, "underlined ");
 
     return desc;
 }
@@ -500,7 +500,7 @@ static wxNativeFont wxLoadQueryFont(double pointSize,
 bool wxNativeEncodingInfo::FromString(const wxString& s)
 {
     // use ";", not "-" because it may be part of encoding name
-    wxStringTokenizer tokenizer(s, wxT(";"));
+    wxStringTokenizer tokenizer(s, ";");
 
     wxString encid = tokenizer.GetNextToken();
     long enc;
@@ -545,7 +545,7 @@ void wxNativeFontInfo::Init()
 
 bool wxNativeFontInfo::FromString(const wxString& s)
 {
-    wxStringTokenizer tokenizer(s, wxT(";"));
+    wxStringTokenizer tokenizer(s, ";");
 
     // check the version
     wxString token = tokenizer.GetNextToken();
@@ -564,7 +564,7 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 wxString wxNativeFontInfo::ToString() const
 {
     // 0 is the version
-    return wxString::Format(wxT("%d;%s"), 0, GetXFontName().c_str());
+    return wxString::Format("%d;%s", 0, GetXFontName().c_str());
 }
 
 bool wxNativeFontInfo::FromUserString(const wxString& s)
@@ -586,7 +586,7 @@ bool wxNativeFontInfo::HasElements() const
 
 wxString wxNativeFontInfo::GetXFontComponent(wxXLFDField field) const
 {
-    wxCHECK_MSG( field < wxXLFD_MAX, {}, wxT("invalid XLFD field") );
+    wxCHECK_MSG( field < wxXLFD_MAX, {}, "invalid XLFD field" );
 
     if ( !HasElements() )
     {
@@ -600,7 +600,7 @@ wxString wxNativeFontInfo::GetXFontComponent(wxXLFDField field) const
 bool wxNativeFontInfo::FromXFontName(const wxString& fontname)
 {
     // TODO: we should be able to handle the font aliases here, but how?
-    wxStringTokenizer tokenizer(fontname, wxT("-"));
+    wxStringTokenizer tokenizer(fontname, "-");
 
     // skip the leading, usually empty field (font name registry)
     if ( !tokenizer.HasMoreTokens() )
@@ -657,7 +657,7 @@ wxString wxNativeFontInfo::GetXFontName() const
 void
 wxNativeFontInfo::SetXFontComponent(wxXLFDField field, const wxString& value)
 {
-    wxCHECK_RET( field < wxXLFD_MAX, wxT("invalid XLFD field") );
+    wxCHECK_RET( field < wxXLFD_MAX, "invalid XLFD field" );
 
     if ( !HasElements() )
     {
@@ -720,25 +720,25 @@ wxFontStyle wxNativeFontInfo::GetStyle() const
 int wxNativeFontInfo::GetNumericWeight() const
 {
     const wxString weight = GetXFontComponent(wxXLFD_WEIGHT).MakeLower();
-    if (weight == wxT("thin") || weight == wxT("ultralight"))
+    if (weight == "thin") || weight == wxT("ultralight")
         return wxFONTWEIGHT_THIN;
-    else if (weight == wxT("extralight"))
+    else if (weight == "extralight")
         return wxFONTWEIGHT_EXTRALIGHT;
-    else if (weight == wxT("light"))
+    else if (weight == "light")
         return wxFONTWEIGHT_LIGHT;
-    else if (weight == wxT("book") || weight == wxT("semilight") || weight == wxT("demilight"))
+    else if (weight == "book") || weight == wxT("semilight") || weight == wxT("demilight")
         return 350;
-    else if (weight == wxT("medium"))
+    else if (weight == "medium")
         return wxFONTWEIGHT_MEDIUM;
-    else if (weight == wxT("semibold") || weight == wxT("demibold"))
+    else if (weight == "semibold") || weight == wxT("demibold")
         return wxFONTWEIGHT_SEMIBOLD;
-    else if (weight == wxT("bold"))
+    else if (weight == "bold")
         return wxFONTWEIGHT_BOLD;
-    else if (weight == wxT("extrabold"))
+    else if (weight == "extrabold")
         return wxFONTWEIGHT_EXTRABOLD;
-    else if (weight == wxT("heavy"))
+    else if (weight == "heavy")
         return wxFONTWEIGHT_HEAVY;
-    else if (weight == wxT("extraheavy") || weight == wxT("black") || weight == wxT("ultrabold"))
+    else if (weight == "extraheavy") || weight == wxT("black") || weight == wxT("ultrabold")
         return wxFONTWEIGHT_EXTRAHEAVY;
 
     return wxFONTWEIGHT_NORMAL;
@@ -760,7 +760,7 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
 {
     // and wxWidgets family -- to X foundry, but we have to translate it to
     // wxFontFamily somehow...
-    wxFAIL_MSG(wxT("not implemented")); // GetXFontComponent(wxXLFD_FOUNDRY);
+    wxFAIL_MSG("not implemented"); // GetXFontComponent(wxXLFD_FOUNDRY);
 
     return wxFontFamily::Default;
 }
@@ -768,7 +768,7 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
 wxFontEncoding wxNativeFontInfo::GetEncoding() const
 {
     // we already have the code for this but need to refactor it first
-    wxFAIL_MSG( wxT("not implemented") );
+    wxFAIL_MSG( "not implemented" );
 
     return wxFONTENCODING_MAX;
 }
@@ -802,7 +802,7 @@ void wxNativeFontInfo::SetStyle(wxFontStyle style)
             break;
 
         default:
-            wxFAIL_MSG( wxT("unknown wxFontStyle in wxNativeFontInfo::SetStyle") );
+            wxFAIL_MSG( "unknown wxFontStyle in wxNativeFontInfo::SetStyle" );
             return;
     }
 
@@ -917,7 +917,7 @@ void wxNativeFontInfo::SetEncoding(wxFontEncoding encoding)
 bool wxGetNativeFontEncoding(wxFontEncoding encoding,
                              wxNativeEncodingInfo *info)
 {
-    wxCHECK_MSG( info, false, wxT("bad pointer in wxGetNativeFontEncoding") );
+    wxCHECK_MSG( info, false, "bad pointer in wxGetNativeFontEncoding" );
 
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
@@ -943,27 +943,27 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
         case wxFONTENCODING_ISO8859_15:
             {
                 int cp = encoding - wxFONTENCODING_ISO8859_1 + 1;
-                info->xregistry = wxT("iso8859");
-                info->xencoding.Printf(wxT("%d"), cp);
+                info->xregistry = "iso8859";
+                info->xencoding.Printf("%d", cp);
             }
             break;
 
         case wxFONTENCODING_UTF8:
-            info->xregistry = wxT("iso10646");
-            info->xencoding = wxT("*");
+            info->xregistry = "iso10646";
+            info->xencoding = "*";
             break;
 
         case wxFONTENCODING_GB2312:
-            info->xregistry = wxT("GB2312");   // or the otherway round?
-            info->xencoding = wxT("*");
+            info->xregistry = "GB2312";   // or the otherway round?
+            info->xencoding = "*";
             break;
 
         case wxFONTENCODING_KOI8:
         case wxFONTENCODING_KOI8_U:
-            info->xregistry = wxT("koi8");
+            info->xregistry = "koi8";
 
             // we don't make distinction between koi8-r, koi8-u and koi8-ru (so far)
-            info->xencoding = wxT("*");
+            info->xencoding = "*";
             break;
 
         case wxFONTENCODING_CP1250:
@@ -976,8 +976,8 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
         case wxFONTENCODING_CP1257:
             {
                 int cp = encoding - wxFONTENCODING_CP1250 + 1250;
-                info->xregistry = wxT("microsoft");
-                info->xencoding.Printf(wxT("cp%d"), cp);
+                info->xregistry = "microsoft";
+                info->xencoding.Printf("cp%d", cp);
             }
             break;
 
@@ -989,7 +989,7 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
 
         case wxFONTENCODING_SYSTEM:
             info->xregistry =
-            info->xencoding = wxT("*");
+            info->xencoding = "*";
             break;
 
         default:
@@ -1005,7 +1005,7 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
 bool wxTestFontEncoding(const wxNativeEncodingInfo& info)
 {
     wxString fontspec;
-    fontspec.Printf(wxT("-*-%s-*-*-*-*-*-*-*-*-*-*-%s-%s"),
+    fontspec.Printf("-*-%s-*-*-*-*-*-*-*-*-*-*-%s-%s",
                     info.facename.empty() ? wxString("*") : info.facename,
                     info.xregistry,
                     info.xencoding);
@@ -1068,7 +1068,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
         //
         //  Make sure point size is correct for scale factor.
         //
-        wxStringTokenizer tokenizer(*xFontName, wxT("-"), wxTOKEN_RET_DELIMS);
+        wxStringTokenizer tokenizer(*xFontName, "-", wxTOKEN_RET_DELIMS);
         wxString newFontName;
 
         for(int i = 0; i < 8; i++)
@@ -1076,7 +1076,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
 
         (void) tokenizer.NextToken();
 
-        newFontName += wxString::Format(wxT("%d-"), pointSize);
+        newFontName += wxString::Format("%d-", pointSize);
 
         while(tokenizer.HasMoreTokens())
           newFontName += tokenizer.GetNextToken();
@@ -1189,12 +1189,12 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                     // NULL or we'd crash in wxFont code
                     if ( !font )
                     {
-                        wxFAIL_MSG( wxT("this encoding should be available!") );
+                        wxFAIL_MSG( "this encoding should be available!" );
 
                         font = wxLoadQueryFont(-1, wxFontFamily::Default,
                                                wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                                false, {},
-                                               wxT("*"), wxT("*"),
+                                               "*"), wxT("*",
                                                xFontName);
                     }
                 }
@@ -1214,7 +1214,7 @@ static bool wxTestFontSpec(const wxString& fontspec)
 {
     // some X servers will fail to load this font because there are too many
     // matches so we must test explicitly for this
-    if ( fontspec == wxT("-*-*-*-*-*-*-*-*-*-*-*-*-*-*") )
+    if ( fontspec == "-*-*-*-*-*-*-*-*-*-*-*-*-*-*" )
     {
         return true;
     }

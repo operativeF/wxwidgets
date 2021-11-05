@@ -16,7 +16,7 @@
 #include "wx/radiobut.h"
 
 // trace mask for focus messages
-constexpr wxChar TRACE_FOCUS[] = wxT("focus");
+constexpr char TRACE_FOCUS[] = "focus";
 
 #if (defined(__WXMSW__) || defined(__WXMAC__)) && wxUSE_RADIOBTN
 #define USE_RADIOBTN_NAV
@@ -85,7 +85,7 @@ bool wxControlContainerBase::HasAnyChildrenAcceptingFocus() const
 
 bool wxControlContainerBase::DoSetFocus()
 {
-    wxLogTrace(TRACE_FOCUS, wxT("SetFocus on wxPanel 0x%p."),
+    wxLogTrace(TRACE_FOCUS, "SetFocus on wxPanel 0x%p.",
                m_winParent->GetHandle());
 
     if (m_inSetFocus)
@@ -186,7 +186,7 @@ void wxControlContainer::SetLastFocus(wxWindow *win)
                 // (under wxGTK)
 
                 wxASSERT_MSG( winParent,
-                              wxT("Setting last focus for a window that is not our child?") );
+                              "Setting last focus for a window that is not our child?" );
             }
         }
 
@@ -194,13 +194,13 @@ void wxControlContainer::SetLastFocus(wxWindow *win)
 
         if ( win )
         {
-            wxLogTrace(TRACE_FOCUS, wxT("Set last focus to %s(%s)"),
+            wxLogTrace(TRACE_FOCUS, "Set last focus to %s(%s)",
                        win->wxGetClassInfo()->wxGetClassName(),
                        win->GetLabel().c_str());
         }
         else
         {
-            wxLogTrace(TRACE_FOCUS, wxT("No more last focus"));
+            wxLogTrace(TRACE_FOCUS, "No more last focus");
         }
     }
 }
@@ -550,7 +550,7 @@ void wxControlContainer::HandleOnWindowDestroy(wxWindowBase *child)
 
 void wxControlContainer::HandleOnFocus(wxFocusEvent& event)
 {
-    wxLogTrace(TRACE_FOCUS, wxT("OnFocus on wxPanel 0x%p, name: %s"),
+    wxLogTrace(TRACE_FOCUS, "OnFocus on wxPanel 0x%p, name: %s",
                m_winParent->GetHandle(),
                m_winParent->GetName().c_str() );
 
@@ -578,9 +578,9 @@ bool wxControlContainer::SetFocusToChild()
 
 bool wxSetFocusToChild(wxWindow *win, wxWindow **childLastFocused)
 {
-    wxCHECK_MSG( win, false, wxT("wxSetFocusToChild(): invalid window") );
+    wxCHECK_MSG( win, false, "wxSetFocusToChild(): invalid window" );
     //    wxCHECK_MSG( childLastFocused, false,
-    //             wxT("wxSetFocusToChild(): NULL child poonter") );
+    //             "wxSetFocusToChild(): NULL child poonter" );
 
     if ( childLastFocused && *childLastFocused )
     {
@@ -619,7 +619,7 @@ bool wxSetFocusToChild(wxWindow *win, wxWindow **childLastFocused)
                 *childLastFocused = deepestVisibleWindow;
 
                 wxLogTrace(TRACE_FOCUS,
-                           wxT("SetFocusToChild() => last child (0x%p)."),
+                           "SetFocusToChild() => last child (0x%p).",
                            (*childLastFocused)->GetHandle());
 
                 // not SetFocusFromKbd(): we're restoring focus back to the old
@@ -661,7 +661,7 @@ bool wxSetFocusToChild(wxWindow *win, wxWindow **childLastFocused)
 #endif // USE_RADIOBTN_NAV
 
             wxLogTrace(TRACE_FOCUS,
-                       wxT("SetFocusToChild() => first child (0x%p)."),
+                       "SetFocusToChild() => first child (0x%p).",
                        child->GetHandle());
 
             if (childLastFocused)

@@ -103,7 +103,7 @@ wxHyperlinkCtrlBase::CheckParams(const std::string& label,
                     (int)((style & wxHL_ALIGN_CENTRE) != 0) +
                     (int)((style & wxHL_ALIGN_RIGHT) != 0);
     wxASSERT_MSG(alignment == 1,
-        wxT("Specify exactly one align flag!"));
+        "Specify exactly one align flag!");
 #else // !wxDEBUG_LEVEL
     wxUnusedVar(label);
     wxUnusedVar(url);

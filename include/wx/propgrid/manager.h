@@ -266,8 +266,8 @@ public:
     wxPropertyGridIterator GetIterator( int flags = wxPG_ITERATE_DEFAULT,
                                         wxPGProperty* firstProp = nullptr )
     {
-        wxFAIL_MSG( wxS("Please only iterate through individual pages ")
-                    wxS("or use CreateVIterator()") );
+        wxFAIL_MSG( "Please only iterate through individual pages "
+                    "or use CreateVIterator()" );
         return wxPropertyGridInterface::GetIterator( flags, firstProp );
     }
 
@@ -275,8 +275,8 @@ public:
     GetIterator(int flags = wxPG_ITERATE_DEFAULT,
                 wxPGProperty* firstProp = nullptr) const
     {
-        wxFAIL_MSG( wxS("Please only iterate through individual pages ")
-                    wxS("or use CreateVIterator()") );
+        wxFAIL_MSG( "Please only iterate through individual pages "
+                    "or use CreateVIterator()" );
         return wxPropertyGridInterface::GetIterator( flags, firstProp );
     }
 
@@ -286,16 +286,16 @@ public:
     // CreateVIterator().
     wxPropertyGridIterator GetIterator( int flags, int startPos )
     {
-        wxFAIL_MSG( wxS("Please only iterate through individual pages ")
-                    wxS("or use CreateVIterator()") );
+        wxFAIL_MSG( "Please only iterate through individual pages "
+                    "or use CreateVIterator()" );
 
         return wxPropertyGridInterface::GetIterator( flags, startPos );
     }
 
     wxPropertyGridConstIterator GetIterator( int flags, int startPos ) const
     {
-        wxFAIL_MSG( wxS("Please only iterate through individual pages ")
-                    wxS("or use CreateVIterator()") );
+        wxFAIL_MSG( "Please only iterate through individual pages "
+                    "or use CreateVIterator()" );
         return wxPropertyGridInterface::GetIterator( flags, startPos );
     }
 
@@ -406,7 +406,7 @@ public:
     void SelectPage( const wxString& label )
     {
         int index = GetPageByName(label);
-        wxCHECK_RET( index >= 0, wxS("No page with such name") );
+        wxCHECK_RET( index >= 0, "No page with such name" );
         SelectPage( index );
     }
 

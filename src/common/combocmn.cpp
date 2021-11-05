@@ -69,17 +69,17 @@ wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 
 // TODO DELEGATES
 wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 wxPROPERTY_COLLECTION( Choices, wxArrayString, std::string, AppendString, \
-                      GetStrings, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                      GetStrings, 0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Value,std::string, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Selection,int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 
 wxPROPERTY_FLAGS( WindowStyle, wxComboBoxStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxComboBox)
@@ -490,7 +490,7 @@ void wxComboPopupWindow::OnDismiss()
 {
     wxComboCtrlBase* combo = (wxComboCtrlBase*) GetParent();
     wxASSERT_MSG( wxDynamicCast(combo, wxComboCtrlBase),
-                  wxT("parent might not be wxComboCtrl, but check wxIMPLEMENT_DYNAMIC_CLASS2() macro for correctness") );
+                  "parent might not be wxComboCtrl, but check wxIMPLEMENT_DYNAMIC_CLASS2() macro for correctness" );
 
     combo->OnPopupDismiss(true);
 }
@@ -1212,8 +1212,8 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
 /*
     if ( m_text )
     {
-        ::wxMessageBox(wxString::Format(wxT("ButtonArea (%i,%i,%i,%i)\n"),m_btnArea.x,m_btnArea.y,m_btnArea.width,m_btnArea.height) +
-                       wxString::Format(wxT("TextCtrlArea (%i,%i,%i,%i)"),m_tcArea.x,m_tcArea.y,m_tcArea.width,m_tcArea.height));
+        ::wxMessageBox(wxString::Format("ButtonArea (%i,%i,%i,%i)\n",m_btnArea.x,m_btnArea.y,m_btnArea.width,m_btnArea.height) +
+                       wxString::Format("TextCtrlArea (%i,%i,%i,%i)",m_tcArea.x,m_tcArea.y,m_tcArea.width,m_tcArea.height));
     }
 */
 }
@@ -2126,7 +2126,7 @@ void wxComboCtrlBase::DestroyPopup()
 
 void wxComboCtrlBase::DoSetPopupControl(wxComboPopup* iface)
 {
-    wxCHECK_RET( iface, wxT("no popup interface set for wxComboCtrl") );
+    wxCHECK_RET( iface, "no popup interface set for wxComboCtrl" );
 
     DestroyPopup();
 
@@ -2192,7 +2192,7 @@ void wxComboCtrlBase::Popup()
 void wxComboCtrlBase::ShowPopup()
 {
     EnsurePopupControl();
-    wxCHECK_RET( !IsPopupWindowState(Visible), wxT("popup window already shown") );
+    wxCHECK_RET( !IsPopupWindowState(Visible), "popup window already shown" );
 
     if ( IsPopupWindowState(Animating) )
         return;

@@ -360,7 +360,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    const wxString& name = wxT("canvas"));
+                    const wxString& name = "canvas");
 
     wxPreviewCanvas& operator=(wxPreviewCanvas&&) = delete;
 
@@ -490,7 +490,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxTAB_TRAVERSAL,
-                        const wxString& name = wxT("panel"));
+                        const wxString& name = "panel");
 
     wxPreviewControlBar& operator=(wxPreviewControlBar&&) = delete;
 
@@ -744,7 +744,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDEFAULT_DIALOG_STYLE,
-                       const wxString& name = wxT("dialog"));
+                       const wxString& name = "dialog");
 
     wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = delete;
 

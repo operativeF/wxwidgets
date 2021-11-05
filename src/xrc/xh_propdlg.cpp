@@ -53,11 +53,11 @@ wxPropertySheetDialogXmlHandler::wxPropertySheetDialogXmlHandler()
 
 wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("propertysheetpage"))
+    if (m_class == "propertysheetpage")
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
-        if (!n) n = GetParamNode(wxT("object_ref"));
+        if (!n) n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -70,10 +70,10 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                bookctrl->AddPage(wnd, GetText(wxT("label")), GetBool(wxT("selected")));
-                if (HasParam(wxT("bitmap")))
+                bookctrl->AddPage(wnd, GetText("label")), GetBool(wxT("selected"));
+                if (HasParam("bitmap"))
                 {
-                    wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+                    wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
                     wxImageList *imgList = bookctrl->GetImageList();
                     if (imgList == nullptr)
                     {
@@ -103,14 +103,14 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
 
         dlg->Create(m_parentAsWindow,
                    GetID(),
-                   GetText(wxT("title")),
+                   GetText("title"),
                    GetPosition(),
                    GetSize(),
                    GetStyle(),
                    GetName());
 
-        if (HasParam(wxT("icon")))
-            dlg->SetIcons(GetIconBundle(wxT("icon"), wxART_FRAME_ICON));
+        if (HasParam("icon"))
+            dlg->SetIcons(GetIconBundle("icon", wxART_FRAME_ICON));
 
         SetupWindow(dlg);
 
@@ -122,17 +122,17 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
         m_isInside = old_ins;
         m_dialog = old_par;
 
-        if (GetBool(wxT("centered"), false)) dlg->Centre();
-        wxString buttons = GetText(wxT("buttons"));
+        if (GetBool("centered", false)) dlg->Centre();
+        wxString buttons = GetText("buttons");
         if (!buttons.IsEmpty())
         {
             int flags = 0;
-            if (buttons.Find(wxT("wxOK"))         != wxNOT_FOUND) flags |= wxOK;
-            if (buttons.Find(wxT("wxCANCEL"))     != wxNOT_FOUND) flags |= wxCANCEL;
-            if (buttons.Find(wxT("wxYES"))        != wxNOT_FOUND) flags |= wxYES;
-            if (buttons.Find(wxT("wxNO"))         != wxNOT_FOUND) flags |= wxNO;
-            if (buttons.Find(wxT("wxHELP"))       != wxNOT_FOUND) flags |= wxHELP;
-            if (buttons.Find(wxT("wxNO_DEFAULT")) != wxNOT_FOUND) flags |= wxNO_DEFAULT;
+            if (buttons.Find("wxOK")         != wxNOT_FOUND) flags |= wxOK;
+            if (buttons.Find("wxCANCEL")     != wxNOT_FOUND) flags |= wxCANCEL;
+            if (buttons.Find("wxYES")        != wxNOT_FOUND) flags |= wxYES;
+            if (buttons.Find("wxNO")         != wxNOT_FOUND) flags |= wxNO;
+            if (buttons.Find("wxHELP")       != wxNOT_FOUND) flags |= wxHELP;
+            if (buttons.Find("wxNO_DEFAULT") != wxNOT_FOUND) flags |= wxNO_DEFAULT;
             dlg->CreateButtons(flags);
         }
 
@@ -142,8 +142,8 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
 
 bool wxPropertySheetDialogXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxPropertySheetDialog"))) ||
-            (m_isInside && IsOfClass(node, wxT("propertysheetpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxPropertySheetDialog")) ||
+            (m_isInside && IsOfClass(node, "propertysheetpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_BOOKCTRL

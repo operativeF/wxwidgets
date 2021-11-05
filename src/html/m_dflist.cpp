@@ -24,7 +24,7 @@ TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
         wxHtmlContainerCell *c;
 
 
-        if (tag.GetName() == wxT("DL"))
+        if (tag.GetName() == "DL")
         {
             if (m_WParser->GetContainer()->wxGetFirstChild() != nullptr)
             {
@@ -44,7 +44,7 @@ TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
 
             return true;
         }
-        else if (tag.GetName() == wxT("DT"))
+        else if (tag.GetName() == "DT")
         {
             m_WParser->CloseContainer();
             c = m_WParser->OpenContainer();

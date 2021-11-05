@@ -45,12 +45,12 @@ wxListbookXmlHandler::wxListbookXmlHandler()
 
 wxObject *wxListbookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("listbookpage"))
+    if (m_class == "listbookpage")
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -62,11 +62,11 @@ wxObject *wxListbookXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                m_listbook->AddPage(wnd, GetText(wxT("label")),
-                                         GetBool(wxT("selected")));
-                if ( HasParam(wxT("bitmap")) )
+                m_listbook->AddPage(wnd, GetText("label"),
+                                         GetBool("selected"));
+                if ( HasParam("bitmap") )
                 {
-                    wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+                    wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
                     wxImageList *imgList = m_listbook->GetImageList();
                     if ( imgList == nullptr )
                     {
@@ -76,12 +76,12 @@ wxObject *wxListbookXmlHandler::DoCreateResource()
                     int imgIndex = imgList->Add(bmp);
                     m_listbook->SetPageImage(m_listbook->GetPageCount()-1, imgIndex );
                 }
-                else if ( HasParam(wxT("image")) )
+                else if ( HasParam("image") )
                 {
                     if ( m_listbook->GetImageList() )
                     {
                         m_listbook->SetPageImage(m_listbook->GetPageCount()-1,
-                                                 GetLong(wxT("image")) );
+                                                 GetLong("image") );
                     }
                     else // image without image list?
                     {
@@ -110,7 +110,7 @@ wxObject *wxListbookXmlHandler::DoCreateResource()
         nb->Create(m_parentAsWindow,
                    GetID(),
                    GetPosition(), GetSize(),
-                   GetStyle(wxT("style")),
+                   GetStyle("style"),
                    GetName());
 
         wxImageList *imagelist = GetImageList();
@@ -131,8 +131,8 @@ wxObject *wxListbookXmlHandler::DoCreateResource()
 
 bool wxListbookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxListbook"))) ||
-            (m_isInside && IsOfClass(node, wxT("listbookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxListbook")) ||
+            (m_isInside && IsOfClass(node, "listbookpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_LISTBOOK

@@ -130,12 +130,12 @@ wxFont wxCreateFontFromStockObject(int index)
         }
         else
         {
-            wxFAIL_MSG( wxT("failed to get LOGFONTW") );
+            wxFAIL_MSG( "failed to get LOGFONTW" );
         }
     }
     else // GetStockObject() failed
     {
-        wxFAIL_MSG( wxT("stock font not found") );
+        wxFAIL_MSG( "stock font not found" );
     }
 
     return font;
@@ -241,7 +241,7 @@ constexpr int gs_metricsMap[] =
 int wxSystemSettingsNative::GetMetric(wxSystemMetric index, const wxWindow* win)
 {
     wxCHECK_MSG( index > 0 && (size_t)index < WXSIZEOF(gs_metricsMap), 0,
-                 wxT("invalid metric") );
+                 "invalid metric" );
 
     if ( index == wxSYS_DCLICK_MSEC )
     {
@@ -297,7 +297,7 @@ bool wxSystemSettingsNative::HasFeature(wxSystemFeature index)
             return ::GetSystemMetrics(SM_TABLETPC) != 0;
 
         default:
-            wxFAIL_MSG( wxT("unknown system feature") );
+            wxFAIL_MSG( "unknown system feature" );
 
             return false;
     }
@@ -329,7 +329,7 @@ extern wxFont wxGetCCDefaultFont()
     }
     else
     {
-        wxLogLastError(wxT("SystemParametersInfo(SPI_GETICONTITLELOGFONT"));
+        wxLogLastError("SystemParametersInfo(SPI_GETICONTITLELOGFONT");
     }
 
     // fall back to the default font for the normal controls

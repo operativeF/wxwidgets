@@ -933,7 +933,7 @@ static int GetMultiplier()
 
 static void RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
 {
-    wxCHECK_RET( sizeNeeded.IsFullySpecified(), wxS("New size must be given") );
+    wxCHECK_RET( sizeNeeded.IsFullySpecified(), "New size must be given" );
 
 #if wxUSE_IMAGE
     wxImage img = bmp.ConvertToImage();

@@ -125,7 +125,7 @@ public:
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataCurrency(m_value); }
-    wxString GetType() const override { return wxS("currency"); }
+    wxString GetType() const override { return "currency"; }
 
     DECLARE_WXANY_CONVERSION()
 
@@ -149,7 +149,7 @@ public:
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataErrorCode(m_value); }
-    wxString GetType() const override { return wxS("errorcode"); }
+    wxString GetType() const override { return "errorcode"; }
 
     DECLARE_WXANY_CONVERSION()
 
@@ -175,7 +175,7 @@ public:
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataSafeArray(m_value); }
-    wxString GetType() const override { return wxS("safearray"); }
+    wxString GetType() const override { return "safearray"; }
 
     DECLARE_WXANY_CONVERSION()
 

@@ -196,7 +196,7 @@ WXHWND wxTopLevelWindowMSW::MSWGetParent() const
         if ( !parent )
         {
             // this flag doesn't make sense then and will be ignored
-            wxFAIL_MSG( wxT("wxFRAME_FLOAT_ON_PARENT but no parent?") );
+            wxFAIL_MSG( "wxFRAME_FLOAT_ON_PARENT but no parent?" );
         }
         else
         {
@@ -319,9 +319,9 @@ bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
 
     if ( !m_hWnd )
     {
-        wxFAIL_MSG(wxT("Failed to create dialog. Incorrect DLGTEMPLATE?"));
+        wxFAIL_MSG("Failed to create dialog. Incorrect DLGTEMPLATE?");
 
-        wxLogSysError(wxT("Can't create dialog using memory template"));
+        wxLogSysError("Can't create dialog using memory template");
 
         return false;
     }
@@ -365,7 +365,7 @@ bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
     {
         if ( !::MoveWindow(GetHwnd(), x, y, w, h, FALSE) )
         {
-            wxLogLastError(wxT("MoveWindow"));
+            wxLogLastError("MoveWindow");
         }
     }
 
@@ -791,7 +791,7 @@ wxPoint wxTopLevelWindowMSW::DoGetPosition() const
             return {rc.left, rc.top};
         }
 
-        wxLogLastError(wxT("GetWindowPlacement"));
+        wxLogLastError("GetWindowPlacement");
     }
     //else: normal case
 
@@ -814,7 +814,7 @@ wxSize wxTopLevelWindowMSW::DoGetSize() const
             return {rc.right - rc.left, rc.bottom - rc.top};
         }
 
-        wxLogLastError(wxT("GetWindowPlacement"));
+        wxLogLastError("GetWindowPlacement");
     }
     //else: normal case
 
@@ -1036,14 +1036,14 @@ bool wxTopLevelWindowMSW::MSWEnableCloseButton(WXHWND hwnd, bool enable)
                           MF_BYCOMMAND |
                           (enable ? MF_ENABLED : MF_GRAYED)) == -1 )
     {
-        wxLogLastError(wxT("EnableMenuItem(SC_CLOSE)"));
+        wxLogLastError("EnableMenuItem(SC_CLOSE)");
 
         return false;
     }
     // update appearance immediately
     if ( !::DrawMenuBar(hwnd) )
     {
-        wxLogLastError(wxT("DrawMenuBar"));
+        wxLogLastError("DrawMenuBar");
     }
 
     return true;
@@ -1138,7 +1138,7 @@ wxMenu *wxTopLevelWindowMSW::MSWGetSystemMenu() const
         HMENU hmenu = ::GetSystemMenu(GetHwnd(), FALSE);
         if ( !hmenu )
         {
-            wxLogLastError(wxT("GetSystemMenu()"));
+            wxLogLastError("GetSystemMenu()");
             return nullptr;
         }
 
@@ -1250,7 +1250,7 @@ void wxTopLevelWindowMSW::OnActivate(wxActivateEvent& event)
         // count, if only because this would be always the case for an MDI
         // child frame as the MDI parent sets focus to it before it's
         // activated)
-        wxLogTrace(wxT("focus"), wxT("wxTLW %p activated."), m_hWnd);
+        wxLogTrace("focus", "wxTLW %p activated.", m_hWnd);
 
         wxWindow* const winFocus = FindFocus();
         if ( winFocus == this || !IsDescendant(winFocus) )
@@ -1260,8 +1260,8 @@ void wxTopLevelWindowMSW::OnActivate(wxActivateEvent& event)
     {
         DoSaveLastFocus();
 
-        wxLogTrace(wxT("focus"),
-                   wxT("wxTLW %p deactivated, last focused: %p."),
+        wxLogTrace("focus",
+                   "wxTLW %p deactivated, last focused: %p.",
                    m_hWnd,
                    m_winLastFocused ? GetHwndOf(m_winLastFocused) : nullptr);
 
@@ -1314,7 +1314,7 @@ void wxTLWHiddenParentModule::OnExit()
     {
         if ( !::DestroyWindow(ms_hwnd) )
         {
-            wxLogLastError(wxT("DestroyWindow(hidden TLW parent)"));
+            wxLogLastError("DestroyWindow(hidden TLW parent)");
         }
 
         ms_hwnd = nullptr;
@@ -1324,7 +1324,7 @@ void wxTLWHiddenParentModule::OnExit()
     {
         if ( !::UnregisterClassW(ms_className, wxGetInstance()) )
         {
-            wxLogLastError(wxT("UnregisterClass(\"wxTLWHiddenParent\")"));
+            wxLogLastError("UnregisterClass(\"wxTLWHiddenParent\")");
         }
 
         ms_className = nullptr;
@@ -1349,7 +1349,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
 
             if ( !::RegisterClassW(&wndclass) )
             {
-                wxLogLastError(wxT("RegisterClass(\"wxTLWHiddenParent\")"));
+                wxLogLastError("RegisterClass(\"wxTLWHiddenParent\")");
             }
             else
             {
@@ -1361,7 +1361,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
                                  (HMENU)nullptr, wxGetInstance(), nullptr);
         if ( !ms_hwnd )
         {
-            wxLogLastError(wxT("CreateWindow(hidden TLW parent)"));
+            wxLogLastError("CreateWindow(hidden TLW parent)");
         }
     }
 

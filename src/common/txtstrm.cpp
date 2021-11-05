@@ -180,7 +180,7 @@ bool wxTextInputStream::EatEOL(const wxChar &c)
 
 std::uint64_t wxTextInputStream::Read64(int base)
 {
-    wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
+    wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
     if(!m_input) return 0;
 
     wxString word = ReadWord();
@@ -195,7 +195,7 @@ std::uint64_t wxTextInputStream::Read64(int base)
 
 std::uint32_t wxTextInputStream::Read32(int base)
 {
-    wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
+    wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
     if(!m_input) return 0;
 
     wxString word = ReadWord();
@@ -216,7 +216,7 @@ std::uint8_t wxTextInputStream::Read8(int base)
 
 std::int64_t wxTextInputStream::Read64S(int base)
 {
-    wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
+    wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
     if(!m_input) return 0;
 
     wxString word = ReadWord();
@@ -231,7 +231,7 @@ std::int64_t wxTextInputStream::Read64S(int base)
 
 std::int32_t wxTextInputStream::Read32S(int base)
 {
-    wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
+    wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
     if(!m_input) return 0;
 
     wxString word = ReadWord();
@@ -445,7 +445,7 @@ void wxTextOutputStream::Write64(std::uint64_t i)
 void wxTextOutputStream::Write32(std::uint32_t i)
 {
     wxString str;
-    str.Printf(wxT("%u"), i);
+    str.Printf("%u", i);
 
     WriteString(str);
 }
@@ -453,7 +453,7 @@ void wxTextOutputStream::Write32(std::uint32_t i)
 void wxTextOutputStream::Write16(std::uint16_t i)
 {
     wxString str;
-    str.Printf(wxT("%u"), (unsigned)i);
+    str.Printf("%u", (unsigned)i);
 
     WriteString(str);
 }
@@ -461,7 +461,7 @@ void wxTextOutputStream::Write16(std::uint16_t i)
 void wxTextOutputStream::Write8(std::uint8_t i)
 {
     wxString str;
-    str.Printf(wxT("%u"), (unsigned)i);
+    str.Printf("%u", (unsigned)i);
 
     WriteString(str);
 }
@@ -470,7 +470,7 @@ void wxTextOutputStream::WriteDouble(double d)
 {
     wxString str;
 
-    str.Printf(wxT("%f"), d);
+    str.Printf("%f", d);
     WriteString(str);
 }
 
@@ -489,7 +489,7 @@ void wxTextOutputStream::WriteString(const wxString& string)
             switch ( m_mode )
             {
                 case wxEOL::Dos:
-                    out << wxT("\r\n");
+                    out << "\r\n";
                     continue;
 
                 case wxEOL::Mac:
@@ -497,7 +497,7 @@ void wxTextOutputStream::WriteString(const wxString& string)
                     continue;
 
                 default:
-                    wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
+                    wxFAIL_MSG( "unknown EOL mode in wxTextOutputStream" );
                     [[fallthrough]];
 
                 case wxEOL::Unix:
@@ -561,7 +561,7 @@ wxTextOutputStream& wxTextOutputStream::PutChar(wxChar c)
                         continue;
 
                     default:
-                        wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
+                        wxFAIL_MSG( "unknown EOL mode in wxTextOutputStream" );
                         [[fallthrough]];
 
                     case wxEOL::Unix:

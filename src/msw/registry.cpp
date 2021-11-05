@@ -55,18 +55,18 @@ using RegBinary = BYTE *;
 static struct
 {
   HKEY        hkey;
-  const wxChar *szName;
-  const wxChar *szShortName;
+  const char* szName;
+  const char* szShortName;
 }
 aStdKeys[] =
 {
-  { HKEY_CLASSES_ROOT,      wxT("HKEY_CLASSES_ROOT"),      wxT("HKCR") },
-  { HKEY_CURRENT_USER,      wxT("HKEY_CURRENT_USER"),      wxT("HKCU") },
-  { HKEY_LOCAL_MACHINE,     wxT("HKEY_LOCAL_MACHINE"),     wxT("HKLM") },
-  { HKEY_USERS,             wxT("HKEY_USERS"),             wxT("HKU")  }, // short name?
-  { HKEY_PERFORMANCE_DATA,  wxT("HKEY_PERFORMANCE_DATA"),  wxT("HKPD") }, // (Obsolete under XP and later)
-  { HKEY_CURRENT_CONFIG,    wxT("HKEY_CURRENT_CONFIG"),    wxT("HKCC") },
-  { HKEY_DYN_DATA,          wxT("HKEY_DYN_DATA"),          wxT("HKDD") }, // (Obsolete under XP and later)
+  { HKEY_CLASSES_ROOT,      "HKEY_CLASSES_ROOT",      "HKCR" },
+  { HKEY_CURRENT_USER,      "HKEY_CURRENT_USER",      "HKCU" },
+  { HKEY_LOCAL_MACHINE,     "HKEY_LOCAL_MACHINE",     "HKLM" },
+  { HKEY_USERS,             "HKEY_USERS",             "HKU"  }, // short name?
+  { HKEY_PERFORMANCE_DATA,  "HKEY_PERFORMANCE_DATA",  "HKPD" }, // (Obsolete under XP and later)
+  { HKEY_CURRENT_CONFIG,    "HKEY_CURRENT_CONFIG",    "HKCC" },
+  { HKEY_DYN_DATA,          "HKEY_DYN_DATA",          "HKDD" }, // (Obsolete under XP and later)
 };
 
 // the registry name separator (perhaps one day MS will change it to '/' ;-)
@@ -148,15 +148,15 @@ const size_t wxRegKey::nStdKeys = WXSIZEOF(aStdKeys);
 
 // @@ should take a `StdKey key', but as it's often going to be used in loops
 //    it would require casts in user code.
-const wxChar *wxRegKey::GetStdKeyName(size_t key)
+const char *wxRegKey::GetStdKeyName(size_t key)
 {
   // return empty string if key is invalid
-  wxCHECK_MSG( key < nStdKeys, {}, wxT("invalid key in wxRegKey::GetStdKeyName") );
+  wxCHECK_MSG( key < nStdKeys, {}, "invalid key in wxRegKey::GetStdKeyName" );
 
   return aStdKeys[key].szName;
 }
 
-const wxChar *wxRegKey::GetStdKeyShortName(size_t key)
+const char *wxRegKey::GetStdKeyShortName(size_t key)
 {
   // return empty string if key is invalid
   wxCHECK( key < nStdKeys, {} );
@@ -178,7 +178,7 @@ wxRegKey::StdKey wxRegKey::ExtractKeyName(wxString& strKey)
   }
 
   if ( ui == nStdKeys ) {
-    wxFAIL_MSG(wxT("invalid key prefix in wxRegKey::ExtractKeyName."));
+    wxFAIL_MSG("invalid key prefix in wxRegKey::ExtractKeyName.");
 
     ui = HKCR;
   }
@@ -198,7 +198,7 @@ wxRegKey::StdKey wxRegKey::GetStdKeyFromHkey(WXHKEY hkey)
       return (StdKey)ui;
   }
 
-  wxFAIL_MSG(wxT("non root hkey passed to wxRegKey::GetStdKeyFromHkey."));
+  wxFAIL_MSG("non root hkey passed to wxRegKey::GetStdKeyFromHkey.");
 
   return HKCR;
 }
@@ -338,7 +338,7 @@ wxString wxRegKey::GetName(bool bShortPrefix) const
   wxString str = bShortPrefix ? aStdKeys[key].szShortName
                               : aStdKeys[key].szName;
   if ( !m_strKey.empty() )
-    str << wxT("\\") << m_strKey;
+    str << "\\" << m_strKey;
 
   return str;
 }
@@ -349,7 +349,7 @@ bool wxRegKey::GetKeyInfo(size_t *pnSubKeys,
                           size_t *pnMaxValueLen) const
 {
   // it might be unexpected to some that this function doesn't open the key
-  wxASSERT_MSG( IsOpened(), wxT("key should be opened in GetKeyInfo") );
+  wxASSERT_MSG( IsOpened(), "key should be opened in GetKeyInfo" );
 
   // We need to use intermediate variables in 64 bit build as the function
   // parameters must be 32 bit DWORDs and not 64 bit size_t values.
@@ -569,7 +569,7 @@ bool wxRegKey::CopyValue(const wxString& szValue,
 
 bool wxRegKey::Rename(const wxString& szNewName)
 {
-    wxCHECK_MSG( !m_strKey.empty(), false, wxT("registry hives can't be renamed") );
+    wxCHECK_MSG( !m_strKey.empty(), false, "registry hives can't be renamed" );
 
     if ( !Exists() ) {
         wxLogError(_("Registry key '%s' does not exist, cannot rename it."),
@@ -735,7 +735,7 @@ bool wxRegKey::DeleteSelf()
 
   // deleting a key which doesn't exist is not considered an error
 #if wxUSE_DYNLIB_CLASS
-  wxDynamicLibrary dllAdvapi32(wxT("advapi32"));
+  wxDynamicLibrary dllAdvapi32("advapi32");
   // Minimum supported OS for RegDeleteKeyEx: Vista, XP Pro x64, Win Server 2008, Win Server 2003 SP1
   using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCTSTR, REGSAM, DWORD);
   RegDeleteKeyEx_t wxDL_INIT_FUNC_AW(pfn, RegDeleteKeyEx, dllAdvapi32);
@@ -1078,7 +1078,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
 
                     if ( !ok )
                     {
-                        wxLogLastError(wxT("ExpandEnvironmentStrings"));
+                        wxLogLastError("ExpandEnvironmentStrings");
                     }
                 }
             }
@@ -1266,7 +1266,7 @@ bool wxRegKey::Export(const wxString& filename) const
         return false;
     }
 
-    wxFFileOutputStream ostr(filename, wxT("w"));
+    wxFFileOutputStream ostr(filename, "w");
 
     return ostr.IsOk() && Export(ostr);
 #else
@@ -1292,7 +1292,7 @@ FormatAsHex(const void *data,
             size_t size,
             wxRegKey::ValueType type = wxRegKey::Type_Binary)
 {
-    wxString value(wxT("hex"));
+    wxString value("hex");
 
     // binary values use just "hex:" prefix while the other ones must indicate
     // the real type
@@ -1378,7 +1378,7 @@ wxString wxRegKey::FormatValue(const wxString& name) const
                 if ( !QueryValue(name, &value) )
                     break;
 
-                rhs.Printf(wxT("dword:%08x"), (unsigned int)value);
+                rhs.Printf("dword:%08x", (unsigned int)value);
             }
             break;
 
@@ -1577,7 +1577,7 @@ wxString GetFullName(const wxRegKey *pKey, const wxString& szValue)
 {
   wxString str(pKey->GetName());
   if ( !szValue.empty() )
-    str << wxT("\\") << szValue;
+    str << "\\" << szValue;
 
   return str;
 }

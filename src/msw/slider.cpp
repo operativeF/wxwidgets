@@ -55,7 +55,7 @@ bool wxSlider::Create(wxWindow *parent,
                       const std::string& name)
 {
     wxCHECK_MSG( minValue < maxValue, false,
-        wxT("Slider minimum must be strictly less than the maximum.") );
+        "Slider minimum must be strictly less than the maximum." );
 
     // our styles are redundant: wxSL_LEFT/RIGHT imply wxSL_VERTICAL and
     // wxSL_TOP/BOTTOM imply wxSL_HORIZONTAL, but for backwards compatibility
@@ -83,7 +83,7 @@ bool wxSlider::Create(wxWindow *parent,
     }
 
     wxASSERT_MSG( !(style & wxSL_VERTICAL) || !(style & wxSL_HORIZONTAL),
-                    wxT("incompatible slider direction and orientation") );
+                    "incompatible slider direction and orientation" );
 
 
     // initialize everything

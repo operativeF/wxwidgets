@@ -214,7 +214,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
                            const wxIcon& icon)
 {
     wxCHECK_MSG( m_iconAdded, false,
-                    wxT("can't be used before the icon is created") );
+                    "can't be used before the icon is created" );
 
     const HWND hwnd = GetHwndOf(m_win.get());
 
@@ -226,7 +226,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
 
     if ( !::Shell_NotifyIconW(NIM_SETVERSION, &notifyData) )
     {
-        wxLogLastError(wxT("Shell_NotifyIcon(NIM_SETVERSION)"));
+        wxLogLastError("Shell_NotifyIcon(NIM_SETVERSION)");
     }
 
     // do show the balloon now
@@ -258,7 +258,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     bool ok = ::Shell_NotifyIconW(NIM_MODIFY, &notifyData) != 0;
     if ( !ok )
     {
-        wxLogLastError(wxT("Shell_NotifyIcon(NIM_MODIFY)"));
+        wxLogLastError("Shell_NotifyIcon(NIM_MODIFY)");
     }
 
     return ok;
@@ -278,7 +278,7 @@ bool wxTaskBarIcon::RemoveIcon()
     bool ok = ::Shell_NotifyIconW(NIM_DELETE, &notifyData) != 0;
     if ( !ok )
     {
-        wxLogLastError(wxT("Shell_NotifyIcon(NIM_DELETE)"));
+        wxLogLastError("Shell_NotifyIcon(NIM_DELETE)");
     }
 
     return ok;
@@ -287,7 +287,7 @@ bool wxTaskBarIcon::RemoveIcon()
 #if wxUSE_MENUS
 bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
 {
-    wxASSERT_MSG( m_win.get() != nullptr, wxT("taskbar icon not initialized") );
+    wxASSERT_MSG( m_win.get() != nullptr, "taskbar icon not initialized" );
 
     static bool s_inPopup = false;
 

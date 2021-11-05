@@ -30,7 +30,7 @@ public:
         // Always add the wxTAB_TRAVERSAL and wxNO_BORDER styles to what comes
         // from the XRC if anything.
         : wxPanel(parent, id, pos, size, style | wxTAB_TRAVERSAL | wxNO_BORDER,
-                  controlName + wxT("_container")),
+                  controlName + "_container"),
           m_controlName(controlName),
           m_control(nullptr)
     {
@@ -92,7 +92,7 @@ wxEND_EVENT_TABLE()
 
 void wxUnknownControlContainer::AddChild(wxWindowBase *child)
 {
-    wxASSERT_MSG( !m_control, wxT("Couldn't add two unknown controls to the same container!") );
+    wxASSERT_MSG( !m_control, "Couldn't add two unknown controls to the same container!" );
 
     wxPanel::AddChild(child);
 
@@ -126,20 +126,20 @@ wxUnknownWidgetXmlHandler::wxUnknownWidgetXmlHandler()
 wxObject *wxUnknownWidgetXmlHandler::DoCreateResource()
 {
     wxASSERT_MSG( m_instance == nullptr,
-                  wxT("'unknown' controls can't be subclassed, use wxXmlResource::AttachUnknownControl") );
+                  "'unknown' controls can't be subclassed, use wxXmlResource::AttachUnknownControl" );
 
     wxPanel *panel =
         new wxUnknownControlContainer(m_parentAsWindow,
                                       GetName(), wxID_ANY,
                                       GetPosition(), GetSize(),
-                                      GetStyle(wxT("style")));
+                                      GetStyle("style"));
     SetupWindow(panel);
     return panel;
 }
 
 bool wxUnknownWidgetXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("unknown"));
+    return IsOfClass(node, "unknown");
 }
 
 #endif // wxUSE_XRC

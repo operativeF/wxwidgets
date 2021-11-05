@@ -21,7 +21,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define TRACE_EVENTS wxT("events")
+#define TRACE_EVENTS "events"
 
 // ============================================================================
 // wxWakeUpPipe implementation
@@ -48,7 +48,7 @@ wxWakeUpPipe::wxWakeUpPipe()
         return;
     }
 
-    wxLogTrace(TRACE_EVENTS, wxT("Wake up pipe (%d, %d) created"),
+    wxLogTrace(TRACE_EVENTS, "Wake up pipe (%d, %d) created",
                m_pipe[wxPipe::Read], m_pipe[wxPipe::Write]);
 }
 

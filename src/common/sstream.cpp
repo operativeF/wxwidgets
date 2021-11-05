@@ -28,7 +28,7 @@ wxStringInputStream::wxStringInputStream(const wxString& s)
     // FIXME-UTF8: use wxCharBufferWithLength if we have it
     : m_str(s), m_buf(s.utf8_str()), m_len(strlen(m_buf))
 {
-    wxASSERT_MSG(m_buf.data() != nullptr, wxT("Could not convert string to UTF8!"));
+    wxASSERT_MSG(m_buf.data() != nullptr, "Could not convert string to UTF8!");
     m_pos = 0;
 }
 
@@ -62,7 +62,7 @@ wxFileOffset wxStringInputStream::OnSysSeek(wxFileOffset ofs, wxSeekMode mode)
             break;
 
         default:
-            wxFAIL_MSG( wxT("invalid seek mode") );
+            wxFAIL_MSG( "invalid seek mode" );
             return wxInvalidOffset;
     }
 

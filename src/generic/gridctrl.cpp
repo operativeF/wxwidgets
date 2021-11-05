@@ -437,7 +437,7 @@ wxGridCellAutoWrapStringRenderer::BreakLine(wxDC& dc,
     std::string line;
 
     // For each word
-    wxStringTokenizer wordTokenizer(logicalLine, wxS(" \t"), wxStringTokenizerMode::RetDelims);
+    wxStringTokenizer wordTokenizer(logicalLine, " \t", wxStringTokenizerMode::RetDelims);
     while ( wordTokenizer.HasMoreTokens() )
     {
         const std::string word = wordTokenizer.GetNextToken();

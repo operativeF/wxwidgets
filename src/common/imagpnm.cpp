@@ -178,7 +178,7 @@ bool wxPNMHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool WXUNUS
     //text_stream << "P6" << endl
     //<< image->GetWidth() << " " << image->GetHeight() << endl
     //<< "255" << endl;
-    text_stream << wxT("P6\n") << image->GetWidth() << wxT(" ") << image->GetHeight() << wxT("\n255\n");
+    text_stream << "P6\n" << image->GetWidth() << " " << image->GetHeight() << "\n255\n";
     stream.Write(image->GetData(),3*image->GetWidth()*image->GetHeight());
 
     return stream.IsOk();

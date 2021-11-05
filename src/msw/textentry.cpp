@@ -372,7 +372,7 @@ public:
                      );
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("CoCreateInstance(CLSID_AutoComplete)"), hr);
+            wxLogApiError("CoCreateInstance(CLSID_AutoComplete)", hr);
             return;
         }
 
@@ -383,7 +383,7 @@ public:
                                   nullptr, nullptr);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("IAutoComplete::Init"), hr);
+            wxLogApiError("IAutoComplete::Init", hr);
 
             m_enumStrings->Release();
             m_enumStrings = nullptr;
@@ -404,7 +404,7 @@ public:
                              );
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("IAutoComplete::QI(IAutoCompleteDropDown)"), hr);
+            wxLogApiError("IAutoComplete::QI(IAutoCompleteDropDown)", hr);
             return;
         }
 

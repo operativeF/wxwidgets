@@ -40,7 +40,7 @@ wxMemoryInputStream::wxMemoryInputStream(const wxMemoryOutputStream& stream)
 
     // FIXME: how is this not large enough?
     const auto len = gsl::narrow_cast<size_t>(lenFile);
-    wxASSERT_MSG( len == lenFile + size_t(0), wxT("huge files not supported") );
+    wxASSERT_MSG( len == lenFile + size_t(0), "huge files not supported" );
 
     m_i_streambuf = new wxStreamBuffer(wxStreamBuffer::read);
     m_i_streambuf->SetBufferIO(len); // create buffer
@@ -65,7 +65,7 @@ wxMemoryInputStream::InitFromStream(wxInputStream& stream, wxFileOffset lenFile)
 
     // FIXME: how is this not large enough?
     const auto len = gsl::narrow_cast<std::size_t>(lenFile);
-    wxASSERT_MSG( (wxFileOffset)len == lenFile, wxT("huge files not supported") );
+    wxASSERT_MSG( (wxFileOffset)len == lenFile, "huge files not supported" );
 
     m_i_streambuf = new wxStreamBuffer(wxStreamBuffer::read);
     m_i_streambuf->SetBufferIO(len); // create buffer
@@ -168,7 +168,7 @@ wxFileOffset wxMemoryOutputStream::OnSysTell() const
 
 size_t wxMemoryOutputStream::CopyTo(void *buffer, size_t len) const
 {
-    wxCHECK_MSG( buffer, 0, wxT("must have buffer to CopyTo") );
+    wxCHECK_MSG( buffer, 0, "must have buffer to CopyTo" );
 
     if ( len > GetSize() )
         len = GetSize();

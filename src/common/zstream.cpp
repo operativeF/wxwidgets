@@ -63,8 +63,8 @@ wxZlibClassFactory::wxZlibClassFactory()
 const wxChar * const *
 wxZlibClassFactory::GetProtocols(wxStreamProtocolType type) const
 {
-    static const wxChar *mimes[] = { wxT("application/x-deflate"), nullptr };
-    static const wxChar *encs[] =  { wxT("deflate"), nullptr };
+    static const wxChar *mimes[] = { "application/x-deflate", nullptr };
+    static const wxChar *encs[] =  { "deflate", nullptr };
     static const wxChar *empty[] = { nullptr };
 
     switch (type) {
@@ -90,13 +90,13 @@ const wxChar * const *
 wxGzipClassFactory::GetProtocols(wxStreamProtocolType type) const
 {
     static const wxChar *protos[] =
-        { wxT("gzip"), nullptr };
+        { "gzip", nullptr };
     static const wxChar *mimes[] =
-        { wxT("application/gzip"), wxT("application/x-gzip"), nullptr };
+        { "application/gzip"), wxT("application/x-gzip", nullptr };
     static const wxChar *encs[] =
-        { wxT("gzip"), nullptr };
+        { "gzip", nullptr };
     static const wxChar *exts[] =
-        { wxT(".gz"), wxT(".gzip"), nullptr };
+        { ".gz"), wxT(".gzip", nullptr };
     static const wxChar *empty[] =
         { nullptr };
 
@@ -159,7 +159,7 @@ void wxZlibInputStream::Init(int flags)
         case wxZLIB_ZLIB:       windowBits = MAX_WBITS; break;
         case wxZLIB_GZIP:       windowBits = MAX_WBITS | ZSTREAM_GZIP; break;
         case wxZLIB_AUTO:       windowBits = MAX_WBITS | ZSTREAM_AUTO; break;
-        default:                wxFAIL_MSG(wxT("Invalid zlib flag"));
+        default:                wxFAIL_MSG("Invalid zlib flag");
       }
 
       if (inflateInit2(m_inflate, windowBits) == Z_OK)
@@ -181,7 +181,7 @@ wxZlibInputStream::~wxZlibInputStream()
 
 size_t wxZlibInputStream::OnSysRead(void *buffer, size_t size)
 {
-  wxASSERT_MSG(m_inflate && m_z_buffer, wxT("Inflate stream not open"));
+  wxASSERT_MSG(m_inflate && m_z_buffer, "Inflate stream not open");
 
   if (!m_inflate || !m_z_buffer)
     m_lasterror = wxSTREAM_READ_ERROR;
@@ -295,7 +295,7 @@ void wxZlibOutputStream::Init(int level, int flags)
   }
   else
   {
-    wxASSERT_MSG(level >= 0 && level <= 9, wxT("wxZlibOutputStream compression level must be between 0 and 9!"));
+    wxASSERT_MSG(level >= 0 && level <= 9, "wxZlibOutputStream compression level must be between 0 and 9!");
   }
 
   // if gzip is asked for but not supported...
@@ -319,7 +319,7 @@ void wxZlibOutputStream::Init(int level, int flags)
         case wxZLIB_NO_HEADER:  windowBits = -MAX_WBITS; break;
         case wxZLIB_ZLIB:       windowBits = MAX_WBITS; break;
         case wxZLIB_GZIP:       windowBits = MAX_WBITS | ZSTREAM_GZIP; break;
-        default:                wxFAIL_MSG(wxT("Invalid zlib flag"));
+        default:                wxFAIL_MSG("Invalid zlib flag");
       }
 
       if (deflateInit2(m_deflate, level, Z_DEFLATED, windowBits,
@@ -357,7 +357,7 @@ void wxZlibOutputStream::DoFlush(bool final)
     if (len) {
       if (m_parent_o_stream->Write(m_z_buffer, len).LastWrite() != len) {
         m_lasterror = wxSTREAM_WRITE_ERROR;
-        wxLogDebug(wxT("wxZlibOutputStream: Error writing to underlying stream"));
+        wxLogDebug("wxZlibOutputStream: Error writing to underlying stream");
         break;
       }
       m_deflate->next_out = m_z_buffer;
@@ -373,7 +373,7 @@ void wxZlibOutputStream::DoFlush(bool final)
 
 size_t wxZlibOutputStream::OnSysWrite(const void *buffer, size_t size)
 {
-  wxASSERT_MSG(m_deflate && m_z_buffer, wxT("Deflate stream not open"));
+  wxASSERT_MSG(m_deflate && m_z_buffer, "Deflate stream not open");
 
   if (!m_deflate || !m_z_buffer)
   {
@@ -393,7 +393,7 @@ size_t wxZlibOutputStream::OnSysWrite(const void *buffer, size_t size)
       m_parent_o_stream->Write(m_z_buffer, m_z_size);
       if (m_parent_o_stream->LastWrite() != m_z_size) {
         m_lasterror = wxSTREAM_WRITE_ERROR;
-        wxLogDebug(wxT("wxZlibOutputStream: Error writing to underlying stream"));
+        wxLogDebug("wxZlibOutputStream: Error writing to underlying stream");
         break;
       }
 

@@ -136,7 +136,7 @@ void wxAcceleratorTable::Remove(const wxAcceleratorEntry& entry)
         node = node->GetNext();
     }
 
-    wxFAIL_MSG(wxT("deleting inexistent accel from wxAcceleratorTable"));
+    wxFAIL_MSG("deleting inexistent accel from wxAcceleratorTable");
 }
 
 // ----------------------------------------------------------------------------

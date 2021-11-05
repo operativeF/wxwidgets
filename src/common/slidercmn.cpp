@@ -71,21 +71,21 @@ wxBEGIN_PROPERTIES_TABLE(wxSlider)
     wxEVENT_PROPERTY( Updated, wxEVT_SLIDER, wxCommandEvent )
 
     wxPROPERTY( Value, int, SetValue, GetValue, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( Minimum, int, SetMin, GetMin, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( Maximum, int, SetMax, GetMax, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( PageSize, int, SetPageSize, GetLineSize, 1, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( LineSize, int, SetLineSize, GetLineSize, 1, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( ThumbLength, int, SetThumbLength, GetThumbLength, 1, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
 
     wxPROPERTY_FLAGS( WindowStyle, wxSliderStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxSlider)

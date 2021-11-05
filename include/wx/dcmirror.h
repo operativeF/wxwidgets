@@ -127,7 +127,7 @@ protected:
                            wxCoord x2, wxCoord y2,
                            wxCoord xc, wxCoord yc) override
     {
-        wxFAIL_MSG( wxT("this is probably wrong") );
+        wxFAIL_MSG( "this is probably wrong" );
 
         m_dc.DoDrawArc(GetX(x1, y1), GetY(x1, y1),
                        GetX(x2, y2), GetY(x2, y2),
@@ -144,7 +144,7 @@ protected:
     void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
                                    double sa, double ea) override
     {
-        wxFAIL_MSG( wxT("this is probably wrong") );
+        wxFAIL_MSG( "this is probably wrong" );
 
         m_dc.DoDrawEllipticArc(GetX(x, y), GetY(x, y),
                                GetX(w, h), GetY(w, h),
@@ -248,7 +248,7 @@ protected:
 
     void DoSetDeviceClippingRegion(const wxRegion& WXUNUSED(region)) override
     {
-        wxFAIL_MSG( wxT("not implemented") );
+        wxFAIL_MSG( "not implemented" );
     }
 
     void DoSetClippingRegion(wxCoord x, wxCoord y,

@@ -224,7 +224,7 @@ TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
         wxHtmlContainerCell *c;
 
         // List Item:
-        if (m_List && tag.GetName() == wxT("LI"))
+        if (m_List && tag.GetName() == "LI")
         {
             c = m_WParser->SetContainer(new wxHtmlContainerCell(m_List));
             c->SetAlignVer(wxHTML_ALIGN_TOP);
@@ -241,7 +241,7 @@ TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
             {
                 c->SetAlignHor(wxHTML_ALIGN_RIGHT);
                 wxString markStr;
-                markStr.Printf(wxT("%i. "), m_Numbering);
+                markStr.Printf("%i. ", m_Numbering);
                 c->InsertCell(new wxHtmlWordCell(markStr, *(m_WParser->GetDC())));
             }
             m_WParser->CloseContainer();
@@ -256,11 +256,11 @@ TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
         }
 
         // Begin of List (not-numbered): "UL", "OL"
-        else if (tag.GetName() == wxT("UL") || tag.GetName() == wxT("OL"))
+        else if (tag.GetName() == "UL" || tag.GetName() == "OL")
         {
             int oldnum = m_Numbering;
 
-            if (tag.GetName() == wxT("UL")) m_Numbering = 0;
+            if (tag.GetName() == "UL") m_Numbering = 0;
             else m_Numbering = 1;
 
             wxHtmlContainerCell *oldcont;

@@ -67,14 +67,14 @@ bool wxFileDialogBase::Create(wxWindow *parent,
 
     // check that the styles are not contradictory
     wxASSERT_MSG( !(HasFdFlag(wxFD_SAVE) && HasFdFlag(wxFD_OPEN)),
-                  wxT("can't specify both wxFD_SAVE and wxFD_OPEN at once") );
+                  "can't specify both wxFD_SAVE and wxFD_OPEN at once" );
 
     wxASSERT_MSG( !HasFdFlag(wxFD_SAVE) ||
                     (!HasFdFlag(wxFD_MULTIPLE) && !HasFdFlag(wxFD_FILE_MUST_EXIST)),
-                   wxT("wxFD_MULTIPLE or wxFD_FILE_MUST_EXIST can't be used with wxFD_SAVE" ) );
+                   "wxFD_MULTIPLE or wxFD_FILE_MUST_EXIST can't be used with wxFD_SAVE" );
 
     wxASSERT_MSG( !HasFdFlag(wxFD_OPEN) || !HasFdFlag(wxFD_OVERWRITE_PROMPT),
-                  wxT("wxFD_OVERWRITE_PROMPT can't be used with wxFD_OPEN") );
+                  "wxFD_OVERWRITE_PROMPT can't be used with wxFD_OPEN" );
 
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
@@ -87,7 +87,7 @@ bool wxFileDialogBase::Create(wxWindow *parent,
         // convert m_wildCard from "*.bar" to "bar files (*.bar)|*.bar"
         if ( m_wildCard.Find(wxT('|')) == wxNOT_FOUND )
         {
-            wxString::size_type nDot = m_wildCard.find(wxT("*."));
+            wxString::size_type nDot = m_wildCard.find("*.");
             if ( nDot != wxString::npos )
                 nDot++;
             else
@@ -135,7 +135,7 @@ wxString wxFileDialogBase::AppendExtension(const wxString &filePath,
 
     // if fileName doesn't have a '.' then add one
     if (filePath.Last() != wxT('.'))
-        ext = wxT(".") + ext;
+        ext = "." + ext;
 
     return filePath + ext;
 }
@@ -252,7 +252,7 @@ wxString wxFileSelector(const wxString& title,
 
     wxString filter2;
     if ( !defaultExtension.empty() && filter.empty() )
-        filter2 = wxString(wxT("*.")) + defaultExtension;
+        filter2 = wxString("*.") + defaultExtension;
     else if ( !filter.empty() )
         filter2 = filter;
 
@@ -332,7 +332,7 @@ static wxString wxDefaultFileSelector(bool load,
         else
             ext = extension;
 
-        wild.Printf(wxT("*.%s"), ext);
+        wild.Printf("*.%s", ext);
     }
     else // no extension specified
     {

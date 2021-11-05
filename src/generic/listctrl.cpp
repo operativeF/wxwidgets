@@ -191,7 +191,7 @@ void wxListItemData::SetItem( const wxListItem &info )
 
 void wxListItemData::SetPosition( int x, int y )
 {
-    wxCHECK_RET( m_rect, wxT("unexpected SetPosition() call") );
+    wxCHECK_RET( m_rect, "unexpected SetPosition() call" );
 
     m_rect->x = x;
     m_rect->y = y;
@@ -199,7 +199,7 @@ void wxListItemData::SetPosition( int x, int y )
 
 void wxListItemData::SetSize( int width, int height )
 {
-    wxCHECK_RET( m_rect, wxT("unexpected SetSize() call") );
+    wxCHECK_RET( m_rect, "unexpected SetSize() call" );
 
     if ( width != -1 )
         m_rect->width = width;
@@ -209,35 +209,35 @@ void wxListItemData::SetSize( int width, int height )
 
 bool wxListItemData::IsHit( int x, int y ) const
 {
-    wxCHECK_MSG( m_rect, false, wxT("can't be called in this mode") );
+    wxCHECK_MSG( m_rect, false, "can't be called in this mode" );
 
     return wxRect(GetX(), GetY(), GetWidth(), GetHeight()).Contains(x, y);
 }
 
 int wxListItemData::GetX() const
 {
-    wxCHECK_MSG( m_rect, 0, wxT("can't be called in this mode") );
+    wxCHECK_MSG( m_rect, 0, "can't be called in this mode" );
 
     return m_rect->x;
 }
 
 int wxListItemData::GetY() const
 {
-    wxCHECK_MSG( m_rect, 0, wxT("can't be called in this mode") );
+    wxCHECK_MSG( m_rect, 0, "can't be called in this mode" );
 
     return m_rect->y;
 }
 
 int wxListItemData::GetWidth() const
 {
-    wxCHECK_MSG( m_rect, 0, wxT("can't be called in this mode") );
+    wxCHECK_MSG( m_rect, 0, "can't be called in this mode" );
 
     return m_rect->width;
 }
 
 int wxListItemData::GetHeight() const
 {
-    wxCHECK_MSG( m_rect, 0, wxT("can't be called in this mode") );
+    wxCHECK_MSG( m_rect, 0, "can't be called in this mode" );
 
     return m_rect->height;
 }
@@ -429,7 +429,7 @@ wxListLineData::wxListLineData( wxListMainWindow *owner )
 void wxListLineData::CalculateSize( wxDC *dc, int spacing )
 {
     wxListItemDataList::compatibility_iterator node = m_items.GetFirst();
-    wxCHECK_RET( node, wxT("no subitems at all??") );
+    wxCHECK_RET( node, "no subitems at all??" );
 
     wxListItemData *item = node->GetData();
 
@@ -519,11 +519,11 @@ void wxListLineData::CalculateSize( wxDC *dc, int spacing )
             break;
 
         case wxLC_REPORT:
-            wxFAIL_MSG( wxT("unexpected call to SetSize") );
+            wxFAIL_MSG( "unexpected call to SetSize" );
             break;
 
         default:
-            wxFAIL_MSG( wxT("unknown mode") );
+            wxFAIL_MSG( "unknown mode" );
             break;
     }
 }
@@ -531,7 +531,7 @@ void wxListLineData::CalculateSize( wxDC *dc, int spacing )
 void wxListLineData::SetPosition( int x, int y, int spacing )
 {
     wxListItemDataList::compatibility_iterator node = m_items.GetFirst();
-    wxCHECK_RET( node, wxT("no subitems at all??") );
+    wxCHECK_RET( node, "no subitems at all??" );
 
     wxListItemData *item = node->GetData();
 
@@ -586,11 +586,11 @@ void wxListLineData::SetPosition( int x, int y, int spacing )
             break;
 
         case wxLC_REPORT:
-            wxFAIL_MSG( wxT("unexpected call to SetPosition") );
+            wxFAIL_MSG( "unexpected call to SetPosition" );
             break;
 
         default:
-            wxFAIL_MSG( wxT("unknown mode") );
+            wxFAIL_MSG( "unknown mode" );
             break;
     }
 }
@@ -604,7 +604,7 @@ void wxListLineData::InitItems( int num )
 void wxListLineData::SetItem( int index, const wxListItem &info )
 {
     wxListItemDataList::compatibility_iterator node = m_items.Item( index );
-    wxCHECK_RET( node, wxT("invalid column index in SetItem") );
+    wxCHECK_RET( node, "invalid column index in SetItem" );
 
     wxListItemData *item = node->GetData();
     item->SetItem( info );
@@ -647,7 +647,7 @@ void wxListLineData::SetText( int index, const wxString& s )
 void wxListLineData::SetImage( int index, int image )
 {
     wxListItemDataList::compatibility_iterator node = m_items.Item( index );
-    wxCHECK_RET( node, wxT("invalid column index in SetImage()") );
+    wxCHECK_RET( node, "invalid column index in SetImage()" );
 
     wxListItemData *item = node->GetData();
     item->SetImage(image);
@@ -656,7 +656,7 @@ void wxListLineData::SetImage( int index, int image )
 int wxListLineData::GetImage( int index ) const
 {
     wxListItemDataList::compatibility_iterator node = m_items.Item( index );
-    wxCHECK_MSG( node, -1, wxT("invalid column index in GetImage()") );
+    wxCHECK_MSG( node, -1, "invalid column index in GetImage()" );
 
     wxListItemData *item = node->GetData();
     return item->GetImage();
@@ -665,7 +665,7 @@ int wxListLineData::GetImage( int index ) const
 wxItemAttr *wxListLineData::GetAttr() const
 {
     wxListItemDataList::compatibility_iterator node = m_items.GetFirst();
-    wxCHECK_MSG( node, NULL, wxT("invalid column index in GetAttr()") );
+    wxCHECK_MSG( node, NULL, "invalid column index in GetAttr()" );
 
     wxListItemData *item = node->GetData();
     return item->GetAttr();
@@ -674,7 +674,7 @@ wxItemAttr *wxListLineData::GetAttr() const
 void wxListLineData::SetAttr(wxItemAttr *attr)
 {
     wxListItemDataList::compatibility_iterator node = m_items.GetFirst();
-    wxCHECK_RET( node, wxT("invalid column index in SetAttr()") );
+    wxCHECK_RET( node, "invalid column index in SetAttr()" );
 
     wxListItemData *item = node->GetData();
     item->SetAttr(attr);
@@ -761,7 +761,7 @@ void wxListLineData::ApplyAttributes(wxDC *dc,
 void wxListLineData::Draw(wxDC *dc, bool current)
 {
     wxListItemDataList::compatibility_iterator node = m_items.GetFirst();
-    wxCHECK_RET( node, wxT("no subitems at all??") );
+    wxCHECK_RET( node, "no subitems at all??" );
 
     ApplyAttributes(dc, m_gi->m_rectHighlight, IsHighlighted(), current);
 
@@ -860,7 +860,7 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
     // we don't support displaying multiple lines currently (and neither does
     // wxMSW FWIW) so just merge all the lines
     wxString text(textOrig);
-    text.Replace(wxT("\n"), wxT(" "));
+    text.Replace("\n"), " ";
 
     wxCoord w, h;
     dc->GetTextExtent(text, &w, &h);
@@ -890,7 +890,7 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unknown list item format") );
+                wxFAIL_MSG( "unknown list item format" );
                 break;
         }
 
@@ -899,7 +899,7 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
     else // otherwise, truncate and add an ellipsis if possible
     {
         // determine the base width
-        wxString ellipsis(wxT("..."));
+        wxString ellipsis("...");
         wxCoord base_w;
         dc->GetTextExtent(ellipsis, &base_w, &h);
 
@@ -932,7 +932,7 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
 
 bool wxListLineData::Highlight( bool on )
 {
-    wxCHECK_MSG( !IsVirtual(), false, wxT("unexpected call to Highlight") );
+    wxCHECK_MSG( !IsVirtual(), false, "unexpected call to Highlight" );
 
     if ( on == m_highlighted )
         return false;
@@ -1130,7 +1130,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         switch ( wLabel < cw ? item.GetAlign() : wxListColumnFormat::Left )
         {
             default:
-                wxFAIL_MSG( wxT("unknown list item format") );
+                wxFAIL_MSG( "unknown list item format" );
                 [[fallthrough]];
 
             case wxListColumnFormat::Left:
@@ -1512,7 +1512,7 @@ void wxListTextCtrlWrapper::OnKeyUp( wxKeyEvent &event )
         wxPoint myPos = m_text->GetPosition();
         wxSize mySize = m_text->GetSize();
         int sx, sy;
-        m_text->GetTextExtent(m_text->GetValue() + wxT("MM"), &sx, &sy);
+        m_text->GetTextExtent(m_text->GetValue() + "MM", &sx, &sy);
         if (myPos.x + sx > parentSize.x)
             sx = parentSize.x - myPos.x;
        if (mySize.x > sx)
@@ -1682,8 +1682,8 @@ void wxListMainWindow::CacheLineData(size_t line)
 
 wxListLineData *wxListMainWindow::GetDummyLine() const
 {
-    wxASSERT_MSG( !IsEmpty(), wxT("invalid line index") );
-    wxASSERT_MSG( IsVirtual(), wxT("GetDummyLine() shouldn't be called") );
+    wxASSERT_MSG( !IsEmpty(), "invalid line index" );
+    wxASSERT_MSG( IsVirtual(), "GetDummyLine() shouldn't be called" );
 
     wxListMainWindow *self = const_cast<wxListMainWindow *>(this);
 
@@ -1724,7 +1724,7 @@ wxCoord wxListMainWindow::GetLineHeight() const
         dc.SetFont( GetFont() );
 
         wxCoord y;
-        dc.GetTextExtent(wxT("H"), NULL, &y);
+        dc.GetTextExtent("H", NULL, &y);
 
         if ( m_small_image_list && m_small_image_list->GetImageCount() )
         {
@@ -1742,7 +1742,7 @@ wxCoord wxListMainWindow::GetLineHeight() const
 
 wxCoord wxListMainWindow::GetLineY(size_t line) const
 {
-    wxASSERT_MSG( InReportView(), wxT("only works in report mode") );
+    wxASSERT_MSG( InReportView(), "only works in report mode" );
 
     return LINE_SPACING + line * GetLineHeight();
 }
@@ -1795,7 +1795,7 @@ wxRect wxListMainWindow::GetLineIconRect(size_t line) const
         return GetLine(line)->m_gi->m_rectIcon;
 
     wxListLineData *ld = GetLine(line);
-    wxASSERT_MSG( ld->HasImage(), wxT("should have an image") );
+    wxASSERT_MSG( ld->HasImage(), "should have an image" );
 
     wxRect rect;
     rect.x = HEADER_OFFSET_X;
@@ -1813,7 +1813,7 @@ wxRect wxListMainWindow::GetLineHighlightRect(size_t line) const
 
 long wxListMainWindow::HitTestLine(size_t line, int x, int y) const
 {
-    wxASSERT_MSG( line < GetItemCount(), wxT("invalid line in HitTestLine") );
+    wxASSERT_MSG( line < GetItemCount(), "invalid line in HitTestLine" );
 
     wxListLineData *ld = GetLine(line);
 
@@ -1848,7 +1848,7 @@ bool wxListMainWindow::IsHighlighted(size_t line) const
     else // !virtual
     {
         wxListLineData *ld = GetLine(line);
-        wxCHECK_MSG( ld, false, wxT("invalid index in IsHighlighted") );
+        wxCHECK_MSG( ld, false, "invalid index in IsHighlighted" );
 
         return ld->IsHighlighted();
     }
@@ -1902,7 +1902,7 @@ bool wxListMainWindow::HighlightLine( size_t line, bool highlight, SendEvent sen
     else // !virtual
     {
         wxListLineData *ld = GetLine(line);
-        wxCHECK_MSG( ld, false, wxT("invalid index in HighlightLine") );
+        wxCHECK_MSG( ld, false, "invalid index in HighlightLine" );
 
         changed = ld->Highlight(highlight);
     }
@@ -1936,9 +1936,9 @@ void wxListMainWindow::RefreshLine( size_t line )
 void wxListMainWindow::RefreshLines( size_t lineFrom, size_t lineTo )
 {
     // we suppose that they are ordered by caller
-    wxASSERT_MSG( lineFrom <= lineTo, wxT("indices in disorder") );
+    wxASSERT_MSG( lineFrom <= lineTo, "indices in disorder" );
 
-    wxASSERT_MSG( lineTo < GetItemCount(), wxT("invalid line range") );
+    wxASSERT_MSG( lineTo < GetItemCount(), "invalid line range" );
 
     if ( InReportView() )
     {
@@ -2214,7 +2214,7 @@ void wxListMainWindow::HighlightAll( bool on )
 {
     if ( IsSingleSel() )
     {
-        wxASSERT_MSG( !on, wxT("can't do this in a single selection control") );
+        wxASSERT_MSG( !on, "can't do this in a single selection control" );
 
         // we just have one item to turn off
         if ( HasCurrent() && IsHighlighted(m_current) )
@@ -2352,10 +2352,10 @@ void wxListMainWindow::ChangeCurrent(size_t current)
 wxTextCtrl *wxListMainWindow::EditLabel(long item, wxClassInfo* textControlClass)
 {
     wxCHECK_MSG( (item >= 0) && ((size_t)item < GetItemCount()), NULL,
-                 wxT("wrong index in wxGenericListCtrl::EditLabel()") );
+                 "wrong index in wxGenericListCtrl::EditLabel()" );
 
     wxASSERT_MSG( textControlClass->IsKindOf(wxCLASSINFO(wxTextCtrl)),
-                 wxT("EditLabel() needs a text control") );
+                 "EditLabel() needs a text control" );
 
     size_t itemEdit = (size_t)item;
 
@@ -2364,7 +2364,7 @@ wxTextCtrl *wxListMainWindow::EditLabel(long item, wxClassInfo* textControlClass
     le.m_item.m_itemId =
     le.m_itemIndex = item;
     wxListLineData *data = GetLine(itemEdit);
-    wxCHECK_MSG( data, NULL, wxT("invalid index in EditLabel()") );
+    wxCHECK_MSG( data, NULL, "invalid index in EditLabel()" );
     data->GetItem( 0, le.m_item );
 
     if ( GetParent()->GetEventHandler()->ProcessEvent( le ) && !le.IsAllowed() )
@@ -2397,7 +2397,7 @@ bool wxListMainWindow::EndEditLabel(bool cancel)
 
 void wxListMainWindow::OnRenameTimer()
 {
-    wxCHECK_RET( HasCurrent(), wxT("unexpected rename timer") );
+    wxCHECK_RET( HasCurrent(), "unexpected rename timer" );
 
     EditLabel( m_current );
 }
@@ -2411,7 +2411,7 @@ bool wxListMainWindow::OnRenameAccept(size_t itemEdit, const wxString& value)
 
     wxListLineData *data = GetLine(itemEdit);
 
-    wxCHECK_MSG( data, false, wxT("invalid index in OnRenameAccept()") );
+    wxCHECK_MSG( data, false, "invalid index in OnRenameAccept()" );
 
     data->GetItem( 0, le.m_item );
     le.m_item.m_text = value;
@@ -2431,7 +2431,7 @@ void wxListMainWindow::OnRenameCancelled(size_t itemEdit)
     le.m_itemIndex = itemEdit;
 
     wxListLineData *data = GetLine(itemEdit);
-    wxCHECK_RET( data, wxT("invalid index in OnRenameCancelled()") );
+    wxCHECK_RET( data, "invalid index in OnRenameCancelled()" );
 
     data->GetItem( 0, le.m_item );
     GetEventHandler()->ProcessEvent( le );
@@ -2732,7 +2732,7 @@ void wxListMainWindow::OnMouse( wxMouseEvent &event )
             else // !ctrl, !shift
             {
                 // test in the enclosing if should make it impossible
-                wxFAIL_MSG( wxT("how did we get here?") );
+                wxFAIL_MSG( "how did we get here?" );
             }
         }
 
@@ -2918,7 +2918,7 @@ void wxListMainWindow::ExtendSelection(size_t oldCurrent, size_t newCurrent)
 void wxListMainWindow::OnArrowChar(size_t newCurrent, const wxKeyEvent& event)
 {
     wxCHECK_RET( newCurrent < (size_t)GetItemCount(),
-                 wxT("invalid item index in OnArrowChar()") );
+                 "invalid item index in OnArrowChar()" );
 
     size_t oldCurrent = m_current;
 
@@ -3032,7 +3032,7 @@ void wxListMainWindow::OnChar( wxKeyEvent &event )
 
     // don't use m_linesPerPage directly as it might not be computed yet
     const int pageSize = GetCountPerPage();
-    wxCHECK_RET( pageSize, wxT("should have non zero page size") );
+    wxCHECK_RET( pageSize, "should have non zero page size" );
 
     if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
@@ -3383,7 +3383,7 @@ void wxListMainWindow::SetColumn( int col, const wxListItem &item )
 {
     wxListHeaderDataList::compatibility_iterator node = m_columns.Item( col );
 
-    wxCHECK_RET( node, wxT("invalid column index in SetColumn") );
+    wxCHECK_RET( node, "invalid column index in SetColumn" );
 
     wxListHeaderData *column = node->GetData();
     column->SetItem( item );
@@ -3415,7 +3415,7 @@ public:
         wxListLineData *line = m_listmain->GetLine( row );
         wxListItemDataList::compatibility_iterator n = line->m_items.Item( GetColumn() );
 
-        wxCHECK_RET( n, wxS("no subitem?") );
+        wxCHECK_RET( n, "no subitem?" );
 
         wxListItemData* const itemData = n->GetData();
 
@@ -3433,10 +3433,10 @@ private:
 void wxListMainWindow::SetColumnWidth( int col, int width )
 {
     wxCHECK_RET( col >= 0 && col < GetColumnCount(),
-                 wxT("invalid column index") );
+                 "invalid column index" );
 
     wxCHECK_RET( InReportView(),
-                 wxT("SetColumnWidth() can only be called in report mode.") );
+                 "SetColumnWidth() can only be called in report mode." );
 
     m_dirty = true;
 
@@ -3445,7 +3445,7 @@ void wxListMainWindow::SetColumnWidth( int col, int width )
         headerWin->m_dirty = true;
 
     wxListHeaderDataList::compatibility_iterator node = m_columns.Item( col );
-    wxCHECK_RET( node, wxT("no column?") );
+    wxCHECK_RET( node, "no column?" );
 
     wxListHeaderData *column = node->GetData();
 
@@ -3522,7 +3522,7 @@ int wxListMainWindow::GetHeaderWidth() const
 void wxListMainWindow::GetColumn( int col, wxListItem &item ) const
 {
     wxListHeaderDataList::compatibility_iterator node = m_columns.Item( col );
-    wxCHECK_RET( node, wxT("invalid column index in GetColumn") );
+    wxCHECK_RET( node, "invalid column index in GetColumn" );
 
     wxListHeaderData *column = node->GetData();
     column->GetItem( item );
@@ -3531,7 +3531,7 @@ void wxListMainWindow::GetColumn( int col, wxListItem &item ) const
 int wxListMainWindow::GetColumnWidth( int col ) const
 {
     wxListHeaderDataList::compatibility_iterator node = m_columns.Item( col );
-    wxCHECK_MSG( node, 0, wxT("invalid column index") );
+    wxCHECK_MSG( node, 0, "invalid column index" );
 
     wxListHeaderData *column = node->GetData();
     return column->GetWidth();
@@ -3545,7 +3545,7 @@ void wxListMainWindow::SetItem( wxListItem &item )
 {
     long id = item.m_itemId;
     wxCHECK_RET( id >= 0 && (size_t)id < GetItemCount(),
-                 wxT("invalid item index in SetItem") );
+                 "invalid item index in SetItem" );
 
     if ( !IsVirtual() )
     {
@@ -3633,7 +3633,7 @@ void wxListMainWindow::SetItemState( long litem, long state, long stateMask )
     }
 
     wxCHECK_RET( litem >= 0 && (size_t)litem < GetItemCount(),
-                 wxT("invalid list ctrl item index in SetItem") );
+                 "invalid list ctrl item index in SetItem" );
 
     size_t oldCurrent = m_current;
     size_t item = (size_t)litem;    // safe because of the check above
@@ -3721,7 +3721,7 @@ void wxListMainWindow::SetItemState( long litem, long state, long stateMask )
 int wxListMainWindow::GetItemState( long item, long stateMask ) const
 {
     wxCHECK_MSG( item >= 0 && (size_t)item < GetItemCount(), 0,
-                 wxT("invalid list ctrl item index in GetItemState()") );
+                 "invalid list ctrl item index in GetItemState()" );
 
     int ret = ListStates::Nil;
 
@@ -3743,7 +3743,7 @@ int wxListMainWindow::GetItemState( long item, long stateMask ) const
 void wxListMainWindow::GetItem( wxListItem &item ) const
 {
     wxCHECK_RET( item.m_itemId >= 0 && (size_t)item.m_itemId < GetItemCount(),
-                 wxT("invalid item index in GetItem") );
+                 "invalid item index in GetItem" );
 
     wxListLineData *line = GetLine((size_t)item.m_itemId);
     line->GetItem( item.m_col, item );
@@ -3842,9 +3842,9 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
 {
     wxCHECK_MSG( subItem == wxLIST_GETSUBITEMRECT_WHOLEITEM || InReportView(),
                  false,
-                 wxT("GetSubItemRect only meaningful in report view") );
+                 "GetSubItemRect only meaningful in report view" );
     wxCHECK_MSG( item >= 0 && (size_t)item < GetItemCount(), false,
-                 wxT("invalid item in GetSubItemRect") );
+                 "invalid item in GetSubItemRect" );
 
     // ensure that we're laid out, otherwise we could return nonsense
     if ( m_dirty )
@@ -3859,7 +3859,7 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
     if ( subItem != wxLIST_GETSUBITEMRECT_WHOLEITEM )
     {
         wxCHECK_MSG( subItem >= 0 && subItem < GetColumnCount(), false,
-                     wxT("invalid subItem in GetSubItemRect") );
+                     "invalid subItem in GetSubItemRect" );
 
         for (int i = 0; i < subItem; i++)
         {
@@ -3908,7 +3908,7 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
                 break;
 
             default:
-                wxFAIL_MSG(wxS("Unknown rectangle requested"));
+                wxFAIL_MSG("Unknown rectangle requested");
                 return false;
         }
     }
@@ -4229,7 +4229,7 @@ long wxListMainWindow::GetNextItem( long item,
     long ret = item,
          max = GetItemCount();
     wxCHECK_MSG( (ret == -1) || (ret < max), -1,
-                 wxT("invalid listctrl index in GetNextItem()") );
+                 "invalid listctrl index in GetNextItem()" );
 
     // notice that we start with the next item (or the first one if item == -1)
     // and this is intentional to allow writing a simple loop to iterate over
@@ -4266,7 +4266,7 @@ void wxListMainWindow::DeleteItem( long lindex )
     size_t count = GetItemCount();
 
     wxCHECK_RET( (lindex >= 0) && ((size_t)lindex < count),
-                 wxT("invalid item index in DeleteItem") );
+                 "invalid item index in DeleteItem" );
 
     size_t index = (size_t)lindex;
 
@@ -4336,7 +4336,7 @@ void wxListMainWindow::DeleteColumn( int col )
 {
     wxListHeaderDataList::compatibility_iterator node = m_columns.Item( col );
 
-    wxCHECK_RET( node, wxT("invalid column index in DeleteColumn()") );
+    wxCHECK_RET( node, "invalid column index in DeleteColumn()" );
 
     m_dirty = true;
     delete node->GetData();
@@ -4441,7 +4441,7 @@ void wxListMainWindow::DeleteEverything()
 void wxListMainWindow::EnsureVisible( long index )
 {
     wxCHECK_RET( index >= 0 && (size_t)index < GetItemCount(),
-                 wxT("invalid index in EnsureVisible") );
+                 "invalid index in EnsureVisible" );
 
     // We have to call this here because the label in question might just have
     // been added and its position is not known yet
@@ -4554,10 +4554,10 @@ long wxListMainWindow::HitTest( int x, int y, int &flags ) const
 
 void wxListMainWindow::InsertItem( wxListItem &item )
 {
-    wxASSERT_MSG( !IsVirtual(), wxT("can't be used with virtual control") );
+    wxASSERT_MSG( !IsVirtual(), "can't be used with virtual control" );
 
     int count = GetItemCount();
-    wxCHECK_RET( item.m_itemId >= 0, wxT("invalid item index") );
+    wxCHECK_RET( item.m_itemId >= 0, "invalid item index" );
 
     if (item.m_itemId > count)
         item.m_itemId = count;
@@ -4741,7 +4741,7 @@ void wxListMainWindow::OnScroll(wxScrollWinEvent& event)
     if ( event.GetOrientation() == wxHORIZONTAL && HasHeader() )
     {
         wxGenericListCtrl* lc = GetListCtrl();
-        wxCHECK_RET( lc, wxT("no listctrl window?") );
+        wxCHECK_RET( lc, "no listctrl window?" );
 
         if (lc->m_headerWin) // when we use wxLC_NO_HEADER, m_headerWin==NULL
         {
@@ -4764,7 +4764,7 @@ int wxListMainWindow::GetCountPerPage() const
 
 void wxListMainWindow::GetVisibleLinesRange(size_t *from, size_t *to)
 {
-    wxASSERT_MSG( InReportView(), wxT("this is for report mode only") );
+    wxASSERT_MSG( InReportView(), "this is for report mode only" );
 
     if ( m_lineFrom == (size_t)-1 )
     {
@@ -4792,7 +4792,7 @@ void wxListMainWindow::GetVisibleLinesRange(size_t *from, size_t *to)
 
     wxASSERT_MSG( IsEmpty() ||
                   (m_lineFrom <= m_lineTo && m_lineTo < GetItemCount()),
-                  wxT("GetVisibleLinesRange() returns incorrect result") );
+                  "GetVisibleLinesRange() returns incorrect result" );
 
     if ( from )
         *from = m_lineFrom;
@@ -4945,7 +4945,7 @@ bool wxGenericListCtrl::Create(wxWindow *parent,
 
     // just like in other ports, an assert will fail if the user doesn't give any type style:
     wxASSERT_MSG( (style & wxLC_MASK_TYPE),
-                  wxT("wxListCtrl style should have exactly one mode bit set") );
+                  "wxListCtrl style should have exactly one mode bit set" );
 
     if ( !wxListCtrlBase::Create( parent, id, pos, size,
                                   style | wxVSCROLL | wxHSCROLL,
@@ -5062,7 +5062,7 @@ bool wxGenericListCtrl::IsItemChecked(long item) const
 void wxGenericListCtrl::SetSingleStyle( unsigned int style, bool add )
 {
     wxASSERT_MSG( !(style & wxLC_VIRTUAL),
-                  wxT("wxLC_VIRTUAL can't be [un]set") );
+                  "wxLC_VIRTUAL can't be [un]set" );
 
     long flag = wxGetWindowStyle();
 
@@ -5573,7 +5573,7 @@ long wxGenericListCtrl::InsertItem( long index, const wxString &label, int image
 
 long wxGenericListCtrl::DoInsertColumn( long col, const wxListItem &item )
 {
-    wxCHECK_MSG( InReportView(), -1, wxT("can't add column in non report mode") );
+    wxCHECK_MSG( InReportView(), -1, "can't add column in non report mode" );
 
     long idx = m_mainWin->InsertColumn( col, item );
 
@@ -5805,7 +5805,7 @@ wxSize wxGenericListCtrl::DoGetBestClientSize() const
 
 void wxGenericListCtrl::SetItemCount(long count)
 {
-    wxASSERT_MSG( IsVirtual(), wxT("this is for virtual controls only") );
+    wxASSERT_MSG( IsVirtual(), "this is for virtual controls only" );
 
     m_mainWin->SetItemCount(count);
 }

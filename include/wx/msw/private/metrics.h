@@ -45,7 +45,7 @@ inline const NONCLIENTMETRICSW GetNonClientMetrics(const wxWindow* win)
 #endif // WINVER >= 0x0600
         {
             // maybe we should initialize the struct with some defaults?
-            wxLogLastError(wxT("SystemParametersInfo(SPI_GETNONCLIENTMETRICS)"));
+            wxLogLastError("SystemParametersInfo(SPI_GETNONCLIENTMETRICS)");
         }
     }
 

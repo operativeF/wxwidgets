@@ -95,7 +95,7 @@
 //-----------------------------------------------------------------------------
 //  wxLogTrace mask string
 //-----------------------------------------------------------------------------
-constexpr wxChar wxTRACE_GStreamer[] = wxT("GStreamer");
+constexpr wxChar wxTRACE_GStreamer[] = "GStreamer";
 
 //-----------------------------------------------------------------------------
 //
@@ -333,7 +333,7 @@ extern "C" {
 static void gst_finish_callback(GstElement *WXUNUSED(play),
                                 wxGStreamerMediaBackend* be)
 {
-    wxLogTrace(wxTRACE_GStreamer, wxT("gst_finish_callback"));
+    wxLogTrace(wxTRACE_GStreamer, "gst_finish_callback");
     wxMediaEvent event(wxEVT_MEDIA_FINISHED);
     be->m_eventHandler->AddPendingEvent(event);
 }
@@ -371,7 +371,7 @@ static void gst_notify_caps_callback(GstPad* pad,
                                      GParamSpec* WXUNUSED(pspec),
                                      wxGStreamerMediaBackend* be)
 {
-    wxLogTrace(wxTRACE_GStreamer, wxT("gst_notify_caps_callback"));
+    wxLogTrace(wxTRACE_GStreamer, "gst_notify_caps_callback");
     be->QueryVideoSizeFromPad(pad);
 }
 }
@@ -394,7 +394,7 @@ static void gst_notify_stream_info_callback(GstElement* WXUNUSED(element),
                                             GParamSpec* WXUNUSED(pspec),
                                             wxGStreamerMediaBackend* be)
 {
-    wxLogTrace(wxTRACE_GStreamer, wxT("gst_notify_stream_info_callback"));
+    wxLogTrace(wxTRACE_GStreamer, "gst_notify_stream_info_callback");
     be->QueryVideoSizeFromElement(be->m_playbin);
 }
 }
@@ -481,7 +481,7 @@ static GstBusSyncReply gst_bus_sync_callback(GstBus* bus,
             return GST_BUS_DROP;
     }
 
-    wxLogTrace(wxTRACE_GStreamer, wxT("Got prepare-xwindow-id"));
+    wxLogTrace(wxTRACE_GStreamer, "Got prepare-xwindow-id");
     be->CallSetupXOverlay();
     return GST_BUS_DROP; // We handled this message - drop from the queue
 }
@@ -506,7 +506,7 @@ void wxGStreamerMediaBackend::HandleStateChange(GstState oldstate,
     switch(newstate)
     {
         case GST_STATE_PLAYING:
-            wxLogTrace(wxTRACE_GStreamer, wxT("Play event"));
+            wxLogTrace(wxTRACE_GStreamer, "Play event");
             QueuePlayEvent();
             break;
         case GST_STATE_PAUSED:
@@ -517,12 +517,12 @@ void wxGStreamerMediaBackend::HandleStateChange(GstState oldstate,
                 break;
             if(wxGStreamerMediaBackend::GetPosition() != 0)
             {
-                wxLogTrace(wxTRACE_GStreamer, wxT("Pause event"));
+                wxLogTrace(wxTRACE_GStreamer, "Pause event");
                 QueuePauseEvent();
             }
             else
             {
-                wxLogTrace(wxTRACE_GStreamer, wxT("Stop event"));
+                wxLogTrace(wxTRACE_GStreamer, "Stop event");
                 QueueStopEvent();
             }
             break;
@@ -621,7 +621,7 @@ bool wxGStreamerMediaBackend::QueryVideoSizeFromPad(GstPad* pad)
         if (par)
         {
             wxLogTrace(wxTRACE_GStreamer,
-                       wxT("pixel-aspect-ratio found in pad"));
+                       "pixel-aspect-ratio found in pad");
             int num = par->data[0].v_int,
                 den = par->data[1].v_int;
 
@@ -632,7 +632,7 @@ bool wxGStreamerMediaBackend::QueryVideoSizeFromPad(GstPad* pad)
                 m_videoSize.y = (int) ((float) den * m_videoSize.y / num);
         }
 
-        wxLogTrace(wxTRACE_GStreamer, wxT("Adjusted video size: [%i,%i]"),
+        wxLogTrace(wxTRACE_GStreamer, "Adjusted video size: [%i,%i]",
                     m_videoSize.x, m_videoSize.y);
 #if GST_CHECK_VERSION(1,0,0)
         gst_caps_unref (caps);
@@ -773,7 +773,7 @@ bool wxGStreamerMediaBackend::SyncStateChange(GstElement* element,
                     break;
                 }
                 case GST_MESSAGE_EOS:
-                    wxLogSysError(wxT("Reached end of stream prematurely"));
+                    wxLogSysError("Reached end of stream prematurely");
                     bBreak = true;
                     break;
                 default:
@@ -1017,14 +1017,14 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     {
         if(error)
         {
-            wxLogSysError(wxT("Could not initialize GStreamer\n")
-                          wxT("Error Message:%s"),
+            wxLogSysError("Could not initialize GStreamer\n"
+                          "Error Message:%s",
                           (const wxChar*) wxConvUTF8.cMB2WX(error->message)
                          );
             g_error_free(error);
         }
         else
-            wxLogSysError(wxT("Could not initialize GStreamer"));
+            wxLogSysError("Could not initialize GStreamer");
 
         return false;
     }
@@ -1043,7 +1043,7 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
                             style,  // TODO: remove borders???
                             validator, name) )
     {
-        wxFAIL_MSG(wxT("Could not create wxControl!!!"));
+        wxFAIL_MSG("Could not create wxControl!!!");
         return false;
     }
 
@@ -1064,7 +1064,7 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     {
         if(G_IS_OBJECT(m_playbin))
             g_object_unref(m_playbin);
-        wxLogSysError(wxT("Got an invalid playbin"));
+        wxLogSysError("Got an invalid playbin");
         return false;
     }
 
@@ -1097,7 +1097,7 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
                 audiosink = gst_element_factory_make ("osssink", "play_audio");
                 if( !TryAudioSink(audiosink) )
                 {
-                    wxLogSysError(wxT("Could not find a valid audiosink"));
+                    wxLogSysError("Could not find a valid audiosink");
                     return false;
                 }
             }
@@ -1126,7 +1126,7 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
                 if( !TryVideoSink(videosink) )
                 {
                     g_object_unref(audiosink);
-                    wxLogSysError(wxT("Could not find a suitable video sink"));
+                    wxLogSysError("Could not find a suitable video sink");
                     return false;
                 }
             }
@@ -1180,13 +1180,13 @@ bool wxGStreamerMediaBackend::Load(const wxString& fileName)
 bool wxGStreamerMediaBackend::Load(const wxURI& location)
 {
 #if !GST_CHECK_VERSION(1,0,0)
-    if(location.GetScheme().CmpNoCase(wxT("file")) == 0)
+    if(location.GetScheme().CmpNoCase("file") == 0)
     {
         wxString uristring = location.BuildUnescapedURI();
 
         //Workaround GstURI leading "//" problem and make sure it leads
         //with that
-        return DoLoad(wxString(wxT("file://")) +
+        return DoLoad(wxString("file://") +
                       uristring.Right(uristring.length() - 5)
                      );
     }
@@ -1317,7 +1317,7 @@ bool wxGStreamerMediaBackend::Stop()
           !SyncStateChange(m_playbin, GST_STATE_PAUSED))
         {
             CheckForErrors();
-            wxLogSysError(wxT("Could not set state to paused for Stop()"));
+            wxLogSysError("Could not set state to paused for Stop()");
             return false;
         }
     }   // end state lock
@@ -1326,7 +1326,7 @@ bool wxGStreamerMediaBackend::Stop()
 
     if(!bSeekedOK)
     {
-        wxLogSysError(wxT("Could not seek to initial position in Stop()"));
+        wxLogSysError("Could not seek to initial position in Stop()");
         return false;
     }
 
@@ -1573,8 +1573,8 @@ bool wxGStreamerMediaBackend::SetVolume(double dVolume)
     else
     {
         wxLogTrace(wxTRACE_GStreamer,
-            wxT("SetVolume: volume prop not found - 0.8.5 of ")
-            wxT("gst-plugins probably needed"));
+            "SetVolume: volume prop not found - 0.8.5 of "
+            "gst-plugins probably needed");
     return false;
     }
 }
@@ -1592,8 +1592,8 @@ double wxGStreamerMediaBackend::GetVolume()
     else
     {
         wxLogTrace(wxTRACE_GStreamer,
-            wxT("GetVolume: volume prop not found - 0.8.5 of ")
-            wxT("gst-plugins probably needed"));
+            "GetVolume: volume prop not found - 0.8.5 of "
+            "gst-plugins probably needed");
     }
 
     return dVolume;

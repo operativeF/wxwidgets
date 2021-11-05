@@ -37,7 +37,7 @@ typedef wxLongLong wxTimerTick_t;
     #define wxTimerTickFmtSpec wxLongLongFmtSpec "d"
     #define wxTimerTickPrintfArg(tt) (tt.GetValue())
 #else // using native wxLongLong
-    constexpr wxChar wxTimerTickFmtSpec[] = wxT("s");
+    constexpr wxChar wxTimerTickFmtSpec[] = "s";
     #define wxTimerTickPrintfArg(tt) (tt.ToString().c_str())
 #endif // wx/native long long
 
@@ -87,8 +87,8 @@ void wxTimerScheduler::QueueTimer(wxTimerDesc *desc, wxTimerTick_t when)
     desc->shotTime = when;
     desc->running = true;
 
-    wxLogTrace( wxT("timer"),
-                wxT("queued timer %p at tick %") wxTimerTickFmtSpec,
+    wxLogTrace( "timer",
+                "queued timer %p at tick %" wxTimerTickFmtSpec,
                desc->timer,  wxTimerTickPrintfArg(when));
 
     if ( m_timers )
@@ -141,8 +141,8 @@ void wxTimerScheduler::NotifyTimers()
 
                 if ( !timerDeleted )
                 {
-                    wxLogTrace( wxT("timer"),
-                                wxT("notified timer %p sheduled for %")
+                    wxLogTrace( "timer",
+                                "notified timer %p sheduled for %"
                                 wxTimerTickFmtSpec,
                                 desc->timer,
                                 wxTimerTickPrintfArg(desc->shotTime) );
@@ -178,7 +178,7 @@ void wxGenericTimerImpl::Init()
 
 wxGenericTimerImpl::~wxGenericTimerImpl()
 {
-    wxLogTrace( wxT("timer"), wxT("destroying timer %p..."), this);
+    wxLogTrace( "timer"), wxT("destroying timer %p...", this);
     if ( IsRunning() )
         Stop();
 
@@ -190,7 +190,7 @@ wxGenericTimerImpl::~wxGenericTimerImpl()
         *m_desc->deleteFlag = true;
 
     delete m_desc;
-    wxLogTrace( wxT("timer"), wxT("    ...done destroying timer %p..."), this);
+    wxLogTrace( "timer"), wxT("    ...done destroying timer %p...", this);
 }
 
 bool wxGenericTimerImpl::IsRunning() const
@@ -200,7 +200,7 @@ bool wxGenericTimerImpl::IsRunning() const
 
 bool wxGenericTimerImpl::Start(int millisecs, bool oneShot)
 {
-    wxLogTrace( wxT("timer"), wxT("started timer %p: %i ms, oneshot=%i"),
+    wxLogTrace( "timer"), wxT("started timer %p: %i ms, oneshot=%i",
                this, millisecs, oneShot);
 
      if ( !wxTimerImpl::Start(millisecs, oneShot) )

@@ -168,9 +168,9 @@ bool wxURL::ParseURL()
     if (m_useProxy)
     {
         // Third, we rebuild the URL.
-        m_url = m_scheme + wxT(":");
+        m_url = m_scheme + ":";
         if (m_protoinfo->m_needhost)
-            m_url = m_url + wxT("//") + m_server;
+            m_url = m_url + "//" + m_server;
 
         // We initialize specific variables.
         if (m_protocol)
@@ -439,7 +439,7 @@ wxURLModule::wxURLModule()
 {
     // we must be cleaned up before wxSocketModule as otherwise deleting
     // ms_proxyDefault from our OnExit() won't work (and can actually crash)
-    AddDependency(wxClassInfo::FindClass(wxT("wxSocketModule")));
+    AddDependency(wxClassInfo::FindClass("wxSocketModule"));
 }
 
 bool wxURLModule::OnInit()
@@ -450,7 +450,7 @@ bool wxURLModule::OnInit()
     // down the program startup (especially if there is no DNS server
     // available, in which case it may take up to 1 minute)
 
-    if ( wxGetenv(wxT("HTTP_PROXY")) )
+    if ( wxGetenv("HTTP_PROXY") )
     {
         wxURL::ms_useDefaultProxy = true;
     }

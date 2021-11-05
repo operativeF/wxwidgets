@@ -66,10 +66,10 @@ public:
 
 private:
     // formatted output to m_hFile
-    void Output(const wxChar *format, ...);
+    void Output(const wxChar* format, ...);
 
     // output end of line
-    void OutputEndl() { Output(wxT("\r\n")); }
+    void OutputEndl() { Output(L"\r\n"); } // FIXME: Change to narrow string.
 
     // the handle of the report file
     HANDLE m_hFile;
@@ -109,7 +109,7 @@ wxCrashReportImpl::wxCrashReportImpl(const wxChar *filename)
                 );
 }
 
-void wxCrashReportImpl::Output(const wxChar *format, ...)
+void wxCrashReportImpl::Output(const wxChar* format, ...)
 {
     va_list argptr;
     va_start(argptr, format);
@@ -135,7 +135,7 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
 
     if ( !ep )
     {
-        Output(wxT("Context for crash report generation not available."));
+        Output("Context for crash report generation not available.");
         return false;
     }
 
@@ -147,14 +147,14 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
     TCHAR envFlags[64];
     const DWORD dwLen = ::GetEnvironmentVariableW
                     (
-                        wxT("WX_CRASH_FLAGS"),
+                        "WX_CRASH_FLAGS",
                         envFlags,
                         WXSIZEOF(envFlags)
                     );
 
     unsigned int flagsEnv;
     if ( dwLen && dwLen < WXSIZEOF(envFlags) &&
-            wxSscanf(envFlags, wxT("%d"), &flagsEnv) == 1 )
+            wxSscanf(envFlags, "%d", &flagsEnv) == 1 )
     {
         flags = flagsEnv;
     }
@@ -204,7 +204,7 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
                 nullptr                        // no callbacks
               ) )
         {
-            Output(wxT("MiniDumpWriteDump() failed."));
+            Output("MiniDumpWriteDump() failed.");
 
             return false;
         }
@@ -213,7 +213,7 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
     }
     else // dbghelp.dll couldn't be loaded
     {
-        Output(wxT("%s"), static_cast<const wxChar*>(
+        Output("%s", static_cast<const wxChar*>(
                     wxDbgHelpDLL::GetErrorMessage().c_str()
               ));
     }
@@ -221,8 +221,8 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
     wxUnusedVar(flags);
     wxUnusedVar(ep);
 
-    Output(wxT("Support for crash report generation was not included ")
-           wxT("in this wxWidgets version."));
+    Output(L"Support for crash report generation was not included "
+           "in this wxWidgets version.");
 #endif // wxUSE_DBGHELP/!wxUSE_DBGHELP
 
     return false;
@@ -280,7 +280,7 @@ wxCrashContext::wxCrashContext(_EXCEPTION_POINTERS *ep)
 
     if ( !ep )
     {
-        wxCHECK_RET( wxGlobalSEInformation, wxT("no exception info available") );
+        wxCHECK_RET( wxGlobalSEInformation, "no exception info available" );
         ep = wxGlobalSEInformation;
     }
 

@@ -24,6 +24,8 @@
 #include "wx/intl.h"        // for wxLayoutDirection
 #include "wx/log.h"         // for wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD()
 
+#include <string>
+
 class wxAppConsole;
 class wxAppTraits;
 class wxCmdLineParser;
@@ -138,8 +140,8 @@ public:
     //     be argv[0]
 
         // set/get the application name
-    wxString GetAppName() const;
-    void SetAppName(const wxString& name) { m_appName = name; }
+    std::string GetAppName() const;
+    void SetAppName(const std::string& name) { m_appName = name; }
 
         // set/get the application display name: the display name is the name
         // shown to the user in titles, reports, etc while the app name is
@@ -150,25 +152,25 @@ public:
         // usually better to set it explicitly to something nicer
     std::string GetAppDisplayName() const;
 
-    void SetAppDisplayName(const wxString& name) { m_appDisplayName = name; }
+    void SetAppDisplayName(const std::string& name) { m_appDisplayName = name; }
 
         // set/get the app class name
-    wxString wxGetClassName() const { return m_className; }
-    void SetClassName(const wxString& name) { m_className = name; }
+    const std::string& wxGetClassName() const { return m_className; }
+    void SetClassName(const std::string& name) { m_className = name; }
 
         // set/get the vendor name
-    const wxString& GetVendorName() const { return m_vendorName; }
-    void SetVendorName(const wxString& name) { m_vendorName = name; }
+    const std::string& GetVendorName() const { return m_vendorName; }
+    void SetVendorName(const std::string& name) { m_vendorName = name; }
 
         // set/get the vendor display name:  the display name is shown
         // in titles/reports/dialogs to the user, while the vendor name
         // is used in some areas such as wxConfig, wxStandardPaths, etc
-    const wxString& GetVendorDisplayName() const
+    const std::string& GetVendorDisplayName() const
     {
         return m_vendorDisplayName.empty() ? GetVendorName()
                                            : m_vendorDisplayName;
     }
-    void SetVendorDisplayName(const wxString& name)
+    void SetVendorDisplayName(const std::string& name)
     {
         m_vendorDisplayName = name;
     }
@@ -420,18 +422,18 @@ public:
     // the arguments are the location of the failed assert (func may be empty
     // if the compiler doesn't support C99 __FUNCTION__), the text of the
     // assert itself and the user-specified message
-    virtual void OnAssertFailure(const wxChar *file,
+    virtual void OnAssertFailure(const char* file,
                                  int line,
-                                 const wxChar *func,
-                                 const wxChar *cond,
-                                 const wxChar *msg);
+                                 const char* func,
+                                 const char* cond,
+                                 const char* msg);
 
     // old version of the function without func parameter, for compatibility
     // only, override OnAssertFailure() in the new code
-    virtual void OnAssert(const wxChar *file,
+    virtual void OnAssert(const char* file,
                           int line,
-                          const wxChar *cond,
-                          const wxChar *msg);
+                          const char* cond,
+                          const char* msg);
 
     // check that the wxBuildOptions object (constructed in the application
     // itself, usually the one from wxIMPLEMENT_APP() macro) matches the build
@@ -454,11 +456,11 @@ public:
 
 protected:
     // application info (must be set from the user code)
-    wxString m_vendorName,        // vendor name ("acme")
-             m_vendorDisplayName, // vendor display name (e.g. "ACME Inc")
-             m_appName,           // app name ("myapp")
-             m_appDisplayName,    // app display name ("My Application")
-             m_className;         // class name
+    std::string m_vendorName;        // vendor name ("acme")
+    std::string m_vendorDisplayName; // vendor display name (e.g. "ACME Inc")
+    std::string m_appName;           // app name ("myapp")
+    std::string m_appDisplayName;    // app display name ("My Application")
+    std::string m_className;         // class name
 
 public:
     wxCmdLineArgsArray argv;
@@ -646,7 +648,7 @@ public:
     virtual wxLayoutDirection GetLayoutDirection() const;
 
     // Change the theme used by the application, return true on success.
-    virtual bool SetNativeTheme(const wxString& WXUNUSED(theme)) { return false; }
+    virtual bool SetNativeTheme(const std::string& WXUNUSED(theme)) { return false; }
 
 
     // command line parsing (GUI-specific)

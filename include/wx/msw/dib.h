@@ -243,7 +243,7 @@ void wxDIB::Free()
     {
         if ( !::DeleteObject(m_handle) )
         {
-            wxLogLastError(wxT("DeleteObject(hDIB)"));
+            wxLogLastError("DeleteObject(hDIB)");
         }
 
         m_handle = nullptr;

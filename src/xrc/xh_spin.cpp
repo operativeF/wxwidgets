@@ -41,12 +41,12 @@ wxObject *wxSpinButtonXmlHandler::DoCreateResource()
     control->Create(m_parentAsWindow,
                     GetID(),
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style"), wxSP_ARROW_KEYS),
+                    GetStyle("style", wxSP_ARROW_KEYS),
                     GetName());
 
-    control->SetValue(GetLong( wxT("value"), DEFAULT_VALUE));
-    control->SetRange(GetLong( wxT("min"), DEFAULT_MIN),
-                      GetLong(wxT("max"), DEFAULT_MAX));
+    control->SetValue(GetLong( "value", DEFAULT_VALUE));
+    control->SetRange(GetLong( "min", DEFAULT_MIN),
+                      GetLong("max", DEFAULT_MAX));
     SetupWindow(control);
 
     return control;
@@ -54,7 +54,7 @@ wxObject *wxSpinButtonXmlHandler::DoCreateResource()
 
 bool wxSpinButtonXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxSpinButton"));
+    return IsOfClass(node, "wxSpinButton");
 }
 
 #endif // wxUSE_SPINBTN
@@ -90,15 +90,15 @@ wxObject *wxSpinCtrlXmlHandler::DoCreateResource()
 
     control->Create(m_parentAsWindow,
                     GetID(),
-                    GetText(wxT("value")),
+                    GetText("value"),
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style"), wxSP_ARROW_KEYS),
-                    GetLong(wxT("min"), DEFAULT_MIN),
-                    GetLong(wxT("max"), DEFAULT_MAX),
-                    GetLong(wxT("value"), DEFAULT_VALUE),
+                    GetStyle("style", wxSP_ARROW_KEYS),
+                    GetLong("min", DEFAULT_MIN),
+                    GetLong("max", DEFAULT_MAX),
+                    GetLong("value", DEFAULT_VALUE),
                     GetName());
 
-    const long base = GetLong(wxS("base"), 10);
+    const long base = GetLong("base", 10);
     if ( base != 10 )
         control->SetBase(base);
 
@@ -109,7 +109,7 @@ wxObject *wxSpinCtrlXmlHandler::DoCreateResource()
 
 bool wxSpinCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxSpinCtrl"));
+    return IsOfClass(node, "wxSpinCtrl");
 }
 
 
@@ -127,13 +127,13 @@ wxObject *wxSpinCtrlDoubleXmlHandler::DoCreateResource()
 
     control->Create(m_parentAsWindow,
                     GetID(),
-                    GetText(wxS("value")),
+                    GetText("value"),
                     GetPosition(), GetSize(),
-                    GetStyle(wxS("style"), wxSP_ARROW_KEYS),
-                    double(GetFloat(wxS("min"), DEFAULT_MIN)),
-                    double(GetFloat(wxS("max"), DEFAULT_MAX)),
-                    double(GetFloat(wxS("value"), DEFAULT_VALUE)),
-                    double(GetFloat(wxS("inc"), DEFAULT_INC)),
+                    GetStyle("style", wxSP_ARROW_KEYS),
+                    double(GetFloat("min", DEFAULT_MIN)),
+                    double(GetFloat("max", DEFAULT_MAX)),
+                    double(GetFloat("value", DEFAULT_VALUE)),
+                    double(GetFloat("inc", DEFAULT_INC)),
                     GetName());
 
     SetupWindow(control);
@@ -143,7 +143,7 @@ wxObject *wxSpinCtrlDoubleXmlHandler::DoCreateResource()
 
 bool wxSpinCtrlDoubleXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxS("wxSpinCtrlDouble"));
+    return IsOfClass(node, "wxSpinCtrlDouble");
 }
 
 #endif // wxUSE_SPINCTRL

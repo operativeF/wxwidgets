@@ -107,7 +107,7 @@ enum class wxWindowVariant
 };
 
 #if wxUSE_SYSTEM_OPTIONS
-    constexpr wxChar wxWINDOW_DEFAULT_VARIANT[] = wxT("window-default-variant");
+    constexpr char wxWINDOW_DEFAULT_VARIANT[] = "window-default-variant";
 #endif
 
 // valid values for Show/HideWithEffect()
@@ -2129,9 +2129,9 @@ public:
         // of this object.
         // Acceptable values:
         // - a null variant (IsNull() returns true)
-        // - a list variant (GetType() == wxT("list")
+        // - a list variant (GetType() == "list"
         // - an integer representing the selected child element,
-        //   or 0 if this object is selected (GetType() == wxT("long")
+        //   or 0 if this object is selected (GetType() == "long"
         // - a "void*" pointer to a wxAccessible child object
     wxAccStatus GetSelections(wxVariant* selections) override;
 #endif // wxUSE_VARIANT

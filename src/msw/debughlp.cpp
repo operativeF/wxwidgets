@@ -113,7 +113,7 @@ bool wxDbgHelpDLL::BindDbgHelpFunctions(const wxDynamicLibrary& dllDbgHelp)
             dllDbgHelp.GetSymbol(wxT(#name));                                 \
         if ( !wxDbgHelpDLL::func )                                            \
         {                                                                     \
-            gs_errMsg += wxT("Function ") wxT(#name) wxT("() not found.\n");  \
+            gs_errMsg += "Function ") wxT(#name) wxT("() not found.\n";  \
             return false;                                                     \
         }
 
@@ -139,7 +139,7 @@ bool wxDbgHelpDLL::BindDbgHelpFunctions(const wxDynamicLibrary& dllDbgHelp)
 /* static */
 bool wxDbgHelpDLL::DoInit()
 {
-    wxDynamicLibrary dllDbgHelp(wxT("dbghelp.dll"), wxDL_VERBATIM);
+    wxDynamicLibrary dllDbgHelp("dbghelp.dll", wxDL_VERBATIM);
     if ( dllDbgHelp.IsLoaded() )
     {
         if ( BindDbgHelpFunctions(dllDbgHelp) )
@@ -155,19 +155,19 @@ bool wxDbgHelpDLL::DoInit()
             return true;
         }
 
-        gs_errMsg += wxT("\nPlease update your dbghelp.dll version, ")
-                     wxT("at least version 5.1 is needed!\n")
-                     wxT("(if you already have a new version, please ")
-                     wxT("put it in the same directory where the program is.)\n");
+        gs_errMsg += "\nPlease update your dbghelp.dll version, "
+                     "at least version 5.1 is needed!\n"
+                     "(if you already have a new version, please "
+                     "put it in the same directory where the program is.)\n";
     }
     else // failed to load dbghelp.dll
     {
-        gs_errMsg += wxT("Please install dbghelp.dll available free of charge ")
-                     wxT("from Microsoft to get more detailed crash information!");
+        gs_errMsg += "Please install dbghelp.dll available free of charge "
+                     "from Microsoft to get more detailed crash information!";
     }
 
-    gs_errMsg += wxT("\nLatest dbghelp.dll is available at ")
-                 wxT("http://www.microsoft.com/whdc/ddk/debugging/\n");
+    gs_errMsg += "\nLatest dbghelp.dll is available at "
+                 "http://www.microsoft.com/whdc/ddk/debugging/\n";
 
     return false;
 }
@@ -200,7 +200,7 @@ const wxString& wxDbgHelpDLL::GetErrorMessage()
 /* static */
 void wxDbgHelpDLL::LogError(const wxChar *func)
 {
-    ::OutputDebugStringW(wxString::Format(wxT("dbghelp: %s() failed: %s\r\n"),
+    ::OutputDebugStringW(wxString::Format("dbghelp: %s() failed: %s\r\n",
                         func, wxSysErrorMsgStr(::GetLastError())).t_str());
 }
 
@@ -268,12 +268,12 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
 {
     if ( !pAddress )
     {
-        return wxT("null");
+        return "null";
     }
 
     if ( ::IsBadReadPtr(pAddress, length) != 0 )
     {
-        return wxT("BAD");
+        return "BAD";
     }
 
 
@@ -285,13 +285,13 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
         const BYTE b = *(PBYTE)pAddress;
 
         if ( bt == BASICTYPE_BOOL )
-            s = b ? wxT("true") : wxT("false");
+            s = b ? "true") : wxT("false";
         else
-            s.Printf(wxT("%#04x"), b);
+            s.Printf("%#04x", b);
     }
     else if ( length == 2 )
     {
-        s.Printf(bt == BASICTYPE_UINT ? wxT("%#06x") : wxT("%d"),
+        s.Printf(bt == BASICTYPE_UINT ? "%#06x") : wxT("%d",
                  *(PWORD)pAddress);
     }
     else if ( length == 4 )
@@ -300,7 +300,7 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
 
         if ( bt == BASICTYPE_FLOAT )
         {
-            s.Printf(wxS("%f"), double(*(PFLOAT)pAddress));
+            s.Printf("%f", double(*(PFLOAT)pAddress));
 
             handled = true;
         }
@@ -326,14 +326,14 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
         if ( !handled )
         {
             // treat just as an opaque DWORD
-            s.Printf(wxT("%#x"), *(PDWORD)pAddress);
+            s.Printf("%#x", *(PDWORD)pAddress);
         }
     }
     else if ( length == 8 )
     {
         if ( bt == BASICTYPE_FLOAT )
         {
-            s.Printf(wxT("%lf"), *(double *)pAddress);
+            s.Printf("%lf", *(double *)pAddress);
         }
         else // opaque 64 bit value
         {
@@ -371,7 +371,7 @@ wxDbgHelpDLL::DumpField(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
         case SYMBOL_TAG_DATA:
             if ( !pVariable )
             {
-                s = wxT("NULL");
+                s = "NULL";
             }
             else // valid location
             {
@@ -424,7 +424,7 @@ wxDbgHelpDLL::DumpField(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
 
             if ( !s.empty() )
             {
-                s = GetSymbolName(pSym) + wxT(" = ") + s;
+                s = GetSymbolName(pSym) + " = " + s;
             }
             break;
 
@@ -477,7 +477,7 @@ wxDbgHelpDLL::DumpUDT(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
         return s;
     }
 
-    s << wxT(" {\n");
+    s << " {\n";
 
     // Iterate through all children
     wxSYMBOL_INFO sym;
@@ -878,37 +878,37 @@ static wxString TagString(wxDbgHelpDLL::SymbolTag tag)
 {
     static const wxChar *tags[] =
     {
-        wxT("null"),
-        wxT("exe"),
-        wxT("compiland"),
-        wxT("compiland details"),
-        wxT("compiland env"),
-        wxT("function"),
-        wxT("block"),
-        wxT("data"),
-        wxT("annotation"),
-        wxT("label"),
-        wxT("public symbol"),
-        wxT("udt"),
-        wxT("enum"),
-        wxT("function type"),
-        wxT("pointer type"),
-        wxT("array type"),
-        wxT("base type"),
-        wxT("typedef"),
-        wxT("base class"),
-        wxT("friend"),
-        wxT("function arg type"),
-        wxT("func debug start"),
-        wxT("func debug end"),
-        wxT("using namespace"),
-        wxT("vtable shape"),
-        wxT("vtable"),
-        wxT("custom"),
-        wxT("thunk"),
-        wxT("custom type"),
-        wxT("managed type"),
-        wxT("dimension"),
+        "null",
+        "exe",
+        "compiland",
+        "compiland details",
+        "compiland env",
+        "function",
+        "block",
+        "data",
+        "annotation",
+        "label",
+        "public symbol",
+        "udt",
+        "enum",
+        "function type",
+        "pointer type",
+        "array type",
+        "base type",
+        "typedef",
+        "base class",
+        "friend",
+        "function arg type",
+        "func debug start",
+        "func debug end",
+        "using namespace",
+        "vtable shape",
+        "vtable",
+        "custom",
+        "thunk",
+        "custom type",
+        "managed type",
+        "dimension",
     };
 
     static_assert(WXSIZEOF(tags) == wxDbgHelpDLL::SYMBOL_TAG_MAX, "Symbol tag string mismatch");
@@ -917,7 +917,7 @@ static wxString TagString(wxDbgHelpDLL::SymbolTag tag)
     if ( tag < WXSIZEOF(tags) )
         s = tags[tag];
     else
-        s.Printf(wxT("unrecognized tag (%d)"), tag);
+        s.Printf("unrecognized tag (%d)", tag);
 
     return s;
 }
@@ -926,16 +926,16 @@ static wxString KindString(wxDbgHelpDLL::DataKind kind)
 {
     static const wxChar *kinds[] =
     {
-         wxT("unknown"),
-         wxT("local"),
-         wxT("static local"),
-         wxT("param"),
-         wxT("object ptr"),
-         wxT("file static"),
-         wxT("global"),
-         wxT("member"),
-         wxT("static member"),
-         wxT("constant"),
+         "unknown",
+         "local",
+         "static local",
+         "param",
+         "object ptr",
+         "file static",
+         "global",
+         "member",
+         "static member",
+         "constant",
     };
 
     static_assert(WXSIZEOF(kinds) == wxDbgHelpDLL::DATA_MAX, "Data kind string mismatch");
@@ -944,7 +944,7 @@ static wxString KindString(wxDbgHelpDLL::DataKind kind)
     if ( kind < WXSIZEOF(kinds) )
         s = kinds[kind];
     else
-        s.Printf(wxT("unrecognized kind (%d)"), kind);
+        s.Printf("unrecognized kind (%d)", kind);
 
     return s;
 }
@@ -953,9 +953,9 @@ static wxString UdtKindString(wxDbgHelpDLL::UdtKind kind)
 {
     static const wxChar *kinds[] =
     {
-         wxT("struct"),
-         wxT("class"),
-         wxT("union"),
+         "struct",
+         "class",
+         "union",
     };
 
     static_assert(WXSIZEOF(kinds) == wxDbgHelpDLL::UDT_MAX, "UDT kind string mismatch" );
@@ -964,7 +964,7 @@ static wxString UdtKindString(wxDbgHelpDLL::UdtKind kind)
     if ( kind < WXSIZEOF(kinds) )
         s = kinds[kind];
     else
-        s.Printf(wxT("unrecognized UDT (%d)"), kind);
+        s.Printf("unrecognized UDT (%d)", kind);
 
     return s;
 }
@@ -973,24 +973,21 @@ static wxString TypeString(wxDbgHelpDLL::BasicType bt)
 {
     static const wxChar *types[] =
     {
-        wxT("no type"),
-        wxT("void"),
-        wxT("char"),
-        wxT("wchar"),
+        "no type",
+        "void",
+        "char",
+        "wchar",
         wxT(""),
         wxT(""),
-        wxT("int"),
-        wxT("uint"),
-        wxT("float"),
-        wxT("bcd"),
-        wxT("bool"),
+        "int",
+        "uint",
+        "float",
+        "bcd",
+        "bool",
         wxT(""),
         wxT(""),
-        wxT("long"),
-        wxT("ulong"),
-        wxT(""),
-        wxT(""),
-        wxT(""),
+        "long",
+        "ulong",
         wxT(""),
         wxT(""),
         wxT(""),
@@ -998,13 +995,16 @@ static wxString TypeString(wxDbgHelpDLL::BasicType bt)
         wxT(""),
         wxT(""),
         wxT(""),
-        wxT("CURRENCY"),
-        wxT("DATE"),
-        wxT("VARIANT"),
-        wxT("complex"),
-        wxT("bit"),
-        wxT("BSTR"),
-        wxT("HRESULT"),
+        wxT(""),
+        wxT(""),
+        wxT(""),
+        "CURRENCY",
+        "DATE",
+        "VARIANT",
+        "complex",
+        "bit",
+        "BSTR",
+        "HRESULT",
     };
 
     static_assert(WXSIZEOF(types) == wxDbgHelpDLL::BASICTYPE_MAX, "Basic type string mismatch");
@@ -1014,7 +1014,7 @@ static wxString TypeString(wxDbgHelpDLL::BasicType bt)
         s = types[bt];
 
     if ( s.empty() )
-        s.Printf(wxT("unrecognized type (%d)"), bt);
+        s.Printf("unrecognized type (%d)", bt);
 
     return s;
 }
@@ -1031,11 +1031,11 @@ extern "C" void DumpTI(ULONG ti)
     DoGetTypeInfo(&sym, TI_GET_SYMTAG, &tag);
     DoGetTypeInfo(&sym, TI_GET_TYPEID, &ti);
 
-    OutputDebugString(wxString::Format(wxT("Type 0x%x: "), sym.TypeIndex));
+    OutputDebugString(wxString::Format("Type 0x%x: ", sym.TypeIndex));
     wxString name = wxDbgHelpDLL::GetSymbolName(&sym);
     if ( !name.empty() )
     {
-        OutputDebugString(wxString::Format(wxT("name=\"%s\", "), name.c_str()));
+        OutputDebugString(wxString::Format("name=\"%s\", ", name.c_str()));
     }
 
     DWORD nested;
@@ -1044,15 +1044,15 @@ extern "C" void DumpTI(ULONG ti)
         nested = FALSE;
     }
 
-    OutputDebugString(wxString::Format(wxT("tag=%s%s"),
-                      nested ? wxT("nested ") : {},
+    OutputDebugString(wxString::Format("tag=%s%s",
+                      nested ? "nested " : {},
                       TagString(tag).c_str()));
     if ( tag == wxDbgHelpDLL::SYMBOL_TAG_UDT )
     {
         wxDbgHelpDLL::UdtKind udtKind;
         if ( DoGetTypeInfo(&sym, TI_GET_UDTKIND, &udtKind) )
         {
-            OutputDebugString(wxT(" (") + UdtKindString(udtKind) + wxT(')'));
+            OutputDebugString(" (" + UdtKindString(udtKind) + wxT(')'));
         }
     }
 
@@ -1060,13 +1060,13 @@ extern "C" void DumpTI(ULONG ti)
     if ( DoGetTypeInfo(&sym, TI_GET_DATAKIND, &kind) )
     {
         OutputDebugString(wxString::Format(
-            wxT(", kind=%s"), KindString(kind).c_str()));
+            ", kind=%s", KindString(kind).c_str()));
         if ( kind == wxDbgHelpDLL::DATA_MEMBER )
         {
             DWORD ofs = 0;
             if ( DoGetTypeInfo(&sym, TI_GET_OFFSET, &ofs) )
             {
-                OutputDebugString(wxString::Format(wxT(" (ofs=0x%x)"), ofs));
+                OutputDebugString(wxString::Format(" (ofs=0x%x)", ofs));
             }
         }
     }
@@ -1074,16 +1074,16 @@ extern "C" void DumpTI(ULONG ti)
     wxDbgHelpDLL::BasicType bt = GetBasicType(&sym);
     if ( bt )
     {
-        OutputDebugString(wxString::Format(wxT(", type=%s"),
+        OutputDebugString(wxString::Format(", type=%s",
                                 TypeString(bt).c_str()));
     }
 
     if ( ti != sym.TypeIndex )
     {
-        OutputDebugString(wxString::Format(wxT(", next ti=0x%x"), ti));
+        OutputDebugString(wxString::Format(", next ti=0x%x", ti));
     }
 
-    OutputDebugString(wxT("\r\n"));
+    OutputDebugString("\r\n");
 }
 
 #endif // NDEBUG

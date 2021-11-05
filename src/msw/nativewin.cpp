@@ -23,10 +23,10 @@ wxNativeWindow::Create(wxWindow* parent,
                        wxWindowID winid,
                        wxNativeWindowHandle hwnd)
 {
-    wxCHECK_MSG( hwnd, false, wxS("Invalid null HWND") );
-    wxCHECK_MSG( parent, false, wxS("Must have a valid parent") );
+    wxCHECK_MSG( hwnd, false, "Invalid null HWND" );
+    wxCHECK_MSG( parent, false, "Must have a valid parent" );
     wxASSERT_MSG( ::GetParent(hwnd) == GetHwndOf(parent),
-                  wxS("The native window has incorrect parent") );
+                  "The native window has incorrect parent" );
 
     const wxRect r = wxRectFromRECT(wxGetWindowRect(hwnd));
 
@@ -53,7 +53,7 @@ wxNativeWindow::Create(wxWindow* parent,
         // For the same reason as above, check that it's the same as the one
         // used by the native HWND.
         wxASSERT_MSG( ::GetWindowLongPtrW(hwnd, GWL_ID) == winid,
-                      wxS("Mismatch between wx and native IDs") );
+                      "Mismatch between wx and native IDs" );
     }
 
     InheritAttributes();

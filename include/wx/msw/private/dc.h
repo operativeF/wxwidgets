@@ -73,7 +73,7 @@ protected:
             m_oldColFg = ::SetTextColor(m_hdc, colFg);
             if ( m_oldColFg == CLR_INVALID )
             {
-                wxLogLastError(wxT("SetTextColor"));
+                wxLogLastError("SetTextColor");
             }
         }
         else
@@ -86,7 +86,7 @@ protected:
             m_oldColBg = ::SetBkColor(m_hdc, colBg);
             if ( m_oldColBg == CLR_INVALID )
             {
-                wxLogLastError(wxT("SetBkColor"));
+                wxLogLastError("SetBkColor");
             }
         }
         else
@@ -130,7 +130,7 @@ protected:
                                         : OPAQUE);
         if ( !m_oldMode )
         {
-            wxLogLastError(wxT("SetBkMode"));
+            wxLogLastError("SetBkMode");
         }
     }
 

@@ -35,13 +35,13 @@ wxComboCtrlXmlHandler::wxComboCtrlXmlHandler()
 
 wxObject *wxComboCtrlXmlHandler::DoCreateResource()
 {
-    if( m_class == wxT("wxComboCtrl"))
+    if( m_class == "wxComboCtrl")
     {
         XRC_MAKE_INSTANCE(control, wxComboCtrl)
 
         control->Create(m_parentAsWindow,
                         GetID(),
-                        GetText(wxT("value")),
+                        GetText("value"),
                         GetPosition(), GetSize(),
                         GetStyle(),
                         wxDefaultValidator,
@@ -56,7 +56,7 @@ wxObject *wxComboCtrlXmlHandler::DoCreateResource()
 
 bool wxComboCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxComboCtrl"));
+    return IsOfClass(node, "wxComboCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_COMBOBOX

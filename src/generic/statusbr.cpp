@@ -166,7 +166,7 @@ void wxStatusBarGeneric::DoUpdateStatusText(int number)
 void wxStatusBarGeneric::SetStatusWidths(int n, const int widths_field[])
 {
     // only set status widths when n == number of statuswindows
-    wxCHECK_RET( (size_t)n == m_panes.GetCount(), wxT("status bar field count mismatch") );
+    wxCHECK_RET( (size_t)n == m_panes.GetCount(), "status bar field count mismatch" );
 
     wxStatusBarBase::SetStatusWidths(n, widths_field);
 
@@ -315,7 +315,7 @@ void wxStatusBarGeneric::DrawField(wxDC& dc, int i, int textHeight)
 bool wxStatusBarGeneric::GetFieldRect(int n, wxRect& rect) const
 {
     wxCHECK_MSG( (n >= 0) && ((size_t)n < m_panes.GetCount()), false,
-                 wxT("invalid status bar field index") );
+                 "invalid status bar field index" );
 
     // We can be called from the user-defined EVT_SIZE handler in which case
     // the widths haven't been updated yet and we need to do it now. This is

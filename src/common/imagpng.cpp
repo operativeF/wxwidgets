@@ -701,7 +701,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
             break;
 
         default:
-            wxFAIL_MSG( wxT("unsupported image resolution units") );
+            wxFAIL_MSG( "unsupported image resolution units" );
     }
 
     if ( resX && resY )
@@ -740,7 +740,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
             switch ( iColorType )
             {
                 default:
-                    wxFAIL_MSG( wxT("unknown wxPNG_TYPE_XXX") );
+                    wxFAIL_MSG( "unknown wxPNG_TYPE_XXX" );
                     [[fallthrough]];
 
                 case wxPNG_TYPE_COLOUR:

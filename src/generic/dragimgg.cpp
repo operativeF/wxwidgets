@@ -168,7 +168,7 @@ bool wxGenericDragImage::BeginDrag(const wxPoint& hotspot,
                                    bool fullScreen,
                                    wxRect* rect)
 {
-    wxCHECK_MSG( window, false, wxT("Window must not be null in BeginDrag."));
+    wxCHECK_MSG( window, false, "Window must not be null in BeginDrag.");
 
     // The image should be offset by this amount
     m_offset = hotspot;
@@ -301,7 +301,7 @@ bool wxGenericDragImage::EndDrag()
 // is non-NULL, or in screen coordinates if NULL.
 bool wxGenericDragImage::Move(const wxPoint& pt)
 {
-    wxASSERT_MSG( (m_windowDC != nullptr), wxT("No window DC in wxGenericDragImage::Move()") );
+    wxASSERT_MSG( (m_windowDC != nullptr), "No window DC in wxGenericDragImage::Move()" );
 
     wxPoint pt2(pt);
     if (m_fullScreen)
@@ -325,7 +325,7 @@ bool wxGenericDragImage::Move(const wxPoint& pt)
 
 bool wxGenericDragImage::Show()
 {
-    wxASSERT_MSG( (m_windowDC != nullptr), wxT("No window DC in wxGenericDragImage::Show()") );
+    wxASSERT_MSG( (m_windowDC != nullptr), "No window DC in wxGenericDragImage::Show()" );
 
     // Show at the current position
 
@@ -363,7 +363,7 @@ bool wxGenericDragImage::UpdateBackingFromWindow(wxDC& windowDC, wxMemoryDC& des
 
 bool wxGenericDragImage::Hide()
 {
-    wxASSERT_MSG( (m_windowDC != nullptr), wxT("No window DC in wxGenericDragImage::Hide()") );
+    wxASSERT_MSG( (m_windowDC != nullptr), "No window DC in wxGenericDragImage::Hide()" );
 
     // Repair the old position
 

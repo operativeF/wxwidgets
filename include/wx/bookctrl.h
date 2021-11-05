@@ -264,16 +264,16 @@ protected:
 
     // called to notify the control about a new current page
     virtual void UpdateSelectedPage(size_t WXUNUSED(newsel))
-        { wxFAIL_MSG(wxT("Override this function!")); }
+        { wxFAIL_MSG("Override this function!"); }
 
     // create a new "page changing" event
     virtual wxBookCtrlEvent* CreatePageChangingEvent() const
-        { wxFAIL_MSG(wxT("Override this function!")); return nullptr; }
+        { wxFAIL_MSG("Override this function!"); return nullptr; }
 
     // modify the event created by CreatePageChangingEvent() to "page changed"
     // event, usually by just calling SetEventType() on it
     virtual void MakeChangedEvent(wxBookCtrlEvent& WXUNUSED(event))
-        { wxFAIL_MSG(wxT("Override this function!")); }
+        { wxFAIL_MSG("Override this function!"); }
 
 
     // The derived class also may override the following method, also called

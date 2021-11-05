@@ -486,7 +486,7 @@ private:
                 break;
         }
 
-        wxASSERT_MSG( dy != -1, wxS("Unknown tip kind?") );
+        wxASSERT_MSG( dy != -1, "Unknown tip kind?" );
 
         size.y += tipSize;
         SetSize(size);

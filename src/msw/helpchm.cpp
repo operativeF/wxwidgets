@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 
 using HTMLHELP = HWND ( WINAPI*)( HWND, LPCWSTR, UINT, ULONG_PTR );
-constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpW");
+constexpr char HTMLHELP_NAME[] = "HtmlHelpW";
 
 HTMLHELP GetHtmlHelpFunction()
 {
@@ -39,7 +39,7 @@ HTMLHELP GetHtmlHelpFunction()
 
     if ( !s_htmlHelp )
     {
-        static wxDynamicLibrary s_dllHtmlHelp(wxT("HHCTRL.OCX"), wxDL_VERBATIM);
+        static wxDynamicLibrary s_dllHtmlHelp("HHCTRL.OCX", wxDL_VERBATIM);
 
         if ( !s_dllHtmlHelp.IsLoaded() )
         {
@@ -237,11 +237,11 @@ std::string wxCHMHelpController::GetValidFilename() const
 
     wxString fullName;
     if (path.IsEmpty())
-        fullName = name + wxT(".chm");
+        fullName = name + ".chm";
     else if (path.Last() == wxT('\\'))
-        fullName = path + name + wxT(".chm");
+        fullName = path + name + ".chm";
     else
-        fullName = path + wxT("\\") + name + wxT(".chm");
+        fullName = path + "\\" + name + ".chm";
     return fullName;
 }
 

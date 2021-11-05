@@ -133,7 +133,7 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
                               int imageId)
 {
     wxCHECK_MSG( pagePos <= DoInternalGetPageCount(), false,
-                        wxT("Invalid treebook page position") );
+                        "Invalid treebook page position" );
 
     if ( !wxBookCtrlBase::InsertPage(pagePos, page, text, bSelect, imageId) )
         return false;
@@ -161,7 +161,7 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
         }
         else // no prev siblings -- insert as a first child
         {
-            wxASSERT_MSG( parentId.IsOk(), wxT( "Tree has no root node?" ) );
+            wxASSERT_MSG( parentId.IsOk(), "Tree has no root node?" );
 
             newId = tree->PrependItem(parentId, text, imageId);
         }
@@ -173,7 +173,7 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
         //something wrong -> cleaning and returning with false
         wxBookCtrlBase::DoRemovePage(pagePos);
 
-        wxFAIL_MSG( wxT("Failed to insert treebook page") );
+        wxFAIL_MSG( "Failed to insert treebook page" );
         return false;
     }
 
@@ -193,7 +193,7 @@ bool wxTreebook::DoAddSubPage(wxWindow *page, const std::string& text, bool bSel
     const wxTreeItemId lastNodeId = tree->GetLastChild(rootId);
 
     wxCHECK_MSG( lastNodeId.IsOk(), false,
-                        wxT("Can't insert sub page when there are no pages") );
+                        "Can't insert sub page when there are no pages" );
 
     // now calculate its position (should we save/update it too?)
     const size_t newPos = tree->GetCount() -
@@ -209,13 +209,13 @@ bool wxTreebook::DoInsertSubPage(size_t pagePos,
                                  int imageId)
 {
     const wxTreeItemId parentId = DoInternalGetPage(pagePos);
-    wxCHECK_MSG( parentId.IsOk(), false, wxT("invalid tree item") );
+    wxCHECK_MSG( parentId.IsOk(), false, "invalid tree item" );
 
     wxTreeCtrl *tree = GetTreeCtrl();
 
     const size_t newPos = pagePos + tree->GetChildrenCount(parentId, true) + 1;
     wxASSERT_MSG( newPos <= DoInternalGetPageCount(),
-                    wxT("Internal error in tree insert point calculation") );
+                    "Internal error in tree insert point calculation" );
 
     if ( !wxBookCtrlBase::InsertPage(newPos, page, text, bSelect, imageId) )
         return false;
@@ -226,7 +226,7 @@ bool wxTreebook::DoInsertSubPage(size_t pagePos,
     {
         std::ignore = wxBookCtrlBase::DoRemovePage(newPos);
 
-        wxFAIL_MSG( wxT("Failed to insert treebook page") );
+        wxFAIL_MSG( "Failed to insert treebook page" );
         return false;
     }
 
@@ -239,7 +239,7 @@ bool wxTreebook::DoInsertSubPage(size_t pagePos,
 
 bool wxTreebook::DeletePage(size_t pagePos)
 {
-    wxCHECK_MSG( IS_VALID_PAGE(pagePos), false, wxT("Invalid tree index") );
+    wxCHECK_MSG( IS_VALID_PAGE(pagePos), false, "Invalid tree index" );
 
     wxTreebookPage *oldPage = DoRemovePage(pagePos);
     if ( !oldPage )
@@ -253,14 +253,14 @@ bool wxTreebook::DeletePage(size_t pagePos)
 wxTreebookPage *wxTreebook::DoRemovePage(size_t pagePos)
 {
     const wxTreeItemId pageId = DoInternalGetPage(pagePos);
-    wxCHECK_MSG( pageId.IsOk(), nullptr, wxT("Invalid tree index") );
+    wxCHECK_MSG( pageId.IsOk(), nullptr, "Invalid tree index" );
 
     wxTreebookPage * oldPage = GetPage(pagePos);
     wxTreeCtrl *tree = GetTreeCtrl();
 
     const size_t subCount = tree->GetChildrenCount(pageId, true);
     wxASSERT_MSG ( IS_VALID_PAGE(pagePos + subCount),
-                        wxT("Internal error in wxTreebook::DoRemovePage") );
+                        "Internal error in wxTreebook::DoRemovePage" );
 
     // here we are going to delete ALL the pages in the range
     // [pagePos, pagePos + subCount] -- the page and its children
@@ -302,7 +302,7 @@ void wxTreebook::DoInternalAddPage(size_t newPos,
                                    wxTreeItemId pageId)
 {
     wxASSERT_MSG( newPos <= m_treeIds.size(),
-                  wxT("Invalid index passed to wxTreebook::DoInternalAddPage") );
+                  "Invalid index passed to wxTreebook::DoInternalAddPage" );
 
     // hide newly inserted page initially (it will be shown when selected)
     if ( page )
@@ -331,7 +331,7 @@ void wxTreebook::DoInternalRemovePageRange(size_t pagePos, size_t subCount)
     // with all its children so pagePos is the node's index and subCount is the
     // node children count
     wxASSERT_MSG( pagePos + subCount < m_treeIds.size(),
-                    wxT("Invalid page index") );
+                    "Invalid page index" );
 
     wxTreeItemId pageId = m_treeIds[pagePos];
 
@@ -434,7 +434,7 @@ bool wxTreebook::IsNodeExpanded(size_t pagePos) const
 {
     const wxTreeItemId pageId = DoInternalGetPage(pagePos);
 
-    wxCHECK_MSG( pageId.IsOk(), false, wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), false, "invalid tree item" );
 
     return GetTreeCtrl()->IsExpanded(pageId);
 }
@@ -443,7 +443,7 @@ bool wxTreebook::ExpandNode(size_t pagePos, bool expand)
 {
     const wxTreeItemId pageId = DoInternalGetPage(pagePos);
 
-    wxCHECK_MSG( pageId.IsOk(), false, wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), false, "invalid tree item" );
 
     if ( expand )
     {
@@ -462,7 +462,7 @@ bool wxTreebook::ExpandNode(size_t pagePos, bool expand)
 int wxTreebook::GetPageParent(size_t pagePos) const
 {
     const wxTreeItemId nodeId = DoInternalGetPage( pagePos );
-    wxCHECK_MSG( nodeId.IsOk(), wxNOT_FOUND, wxT("Invalid page index spacified!") );
+    wxCHECK_MSG( nodeId.IsOk(), wxNOT_FOUND, "Invalid page index spacified!" );
 
     const wxTreeItemId parent = GetTreeCtrl()->GetItemParent( nodeId );
 
@@ -473,7 +473,7 @@ bool wxTreebook::SetPageText(size_t n, const std::string& strText)
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
-    wxCHECK_MSG( pageId.IsOk(), false, wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), false, "invalid tree item" );
 
     GetTreeCtrl()->SetItemText(pageId, strText);
 
@@ -484,7 +484,7 @@ std::string wxTreebook::GetPageText(size_t n) const
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
-    wxCHECK_MSG( pageId.IsOk(), "", wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), "", "invalid tree item" );
 
     return GetTreeCtrl()->GetItemText(pageId);
 }
@@ -493,7 +493,7 @@ int wxTreebook::GetPageImage(size_t n) const
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
-    wxCHECK_MSG( pageId.IsOk(), wxNOT_FOUND, wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), wxNOT_FOUND, "invalid tree item" );
 
     return GetTreeCtrl()->GetItemImage(pageId);
 }
@@ -502,7 +502,7 @@ bool wxTreebook::SetPageImage(size_t n, int imageId)
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
-    wxCHECK_MSG( pageId.IsOk(), false, wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), false, "invalid tree item" );
 
     GetTreeCtrl()->SetItemImage(pageId, imageId);
 
@@ -602,7 +602,7 @@ void wxTreebook::OnTreeNodeExpandedCollapsed(wxTreeEvent & event)
     if ( !nodeId.IsOk() || nodeId == GetTreeCtrl()->GetRootItem() )
         return;
     const int pagePos = DoInternalFindPageById(nodeId);
-    wxCHECK_RET( pagePos != wxNOT_FOUND, wxT("Internal problem in wxTreebook!..") );
+    wxCHECK_RET( pagePos != wxNOT_FOUND, "Internal problem in wxTreebook!.." );
 
     wxBookCtrlEvent ev(GetTreeCtrl()->IsExpanded(nodeId)
             ? wxEVT_TREEBOOK_NODE_EXPANDED

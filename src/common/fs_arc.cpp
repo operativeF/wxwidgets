@@ -316,15 +316,16 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
         const wxString& location)
 {
     wxString right = GetRightLocation(location);
-    wxString left = GetLeftLocation(location);
-    wxString protocol = GetProtocol(location);
-    wxString key = left + wxT("#") + protocol + wxT(":");
+    std::string left = GetLeftLocation(location);
+    std::string protocol = GetProtocol(location);
 
-    if (right.Contains(wxT("./")))
+    wxString key = fmt::format("{}#{}:", left, protocol);
+
+    if (right.Contains("./"))
     {
         if (right.GetChar(0) != wxT('/')) right = wxT('/') + right;
         wxFileName rightPart(right, wxPATH_UNIX);
-        rightPart.Normalize(wxPATH_NORM_DOTS, wxT("/"), wxPATH_UNIX);
+        rightPart.Normalize(wxPATH_NORM_DOTS, "/", wxPATH_UNIX);
         right = rightPart.GetFullPath(wxPATH_UNIX);
     }
 
@@ -386,9 +387,10 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
 wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 {
     wxString right = GetRightLocation(spec);
-    wxString left = GetLeftLocation(spec);
-    wxString protocol = GetProtocol(spec);
-    wxString key = left + wxT("#") + protocol + wxT(":");
+    std::string left = GetLeftLocation(spec);
+    std::string protocol = GetProtocol(spec);
+
+    wxString key = fmt::format("{}#{}:", left, protocol);
 
     if (!right.empty() && right.Last() == wxT('/')) right.RemoveLast();
 
@@ -425,7 +427,7 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 
     m_Pattern = right.AfterLast(wxT('/'));
     m_BaseDir = right.BeforeLast(wxT('/'));
-    if (m_BaseDir.StartsWith(wxT("/")))
+    if (m_BaseDir.StartsWith("/"))
         m_BaseDir = m_BaseDir.Mid(1);
 
     if (m_Archive)
@@ -477,7 +479,7 @@ wxString wxArchiveFSHandler::DoFind()
                     dir = dir.BeforeLast(wxT('/'));
                     if (!filename.empty() && m_BaseDir == dir &&
                                 wxMatchWild(m_Pattern, filename, false))
-                        match = m_ZipFile + dir + wxT("/") + filename;
+                        match = m_ZipFile + dir + "/" + filename;
                 }
                 else
                     break; // already tranversed

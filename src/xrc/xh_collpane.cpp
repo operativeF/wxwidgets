@@ -31,12 +31,12 @@ wxCollapsiblePaneXmlHandler::wxCollapsiblePaneXmlHandler()
 
 wxObject *wxCollapsiblePaneXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("panewindow"))   // read the XRC for the pane window
+    if (m_class == "panewindow")   // read the XRC for the pane window
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -57,7 +57,7 @@ wxObject *wxCollapsiblePaneXmlHandler::DoCreateResource()
     {
         XRC_MAKE_INSTANCE(ctrl, wxCollapsiblePane)
 
-        wxString label = GetText(wxT("label"));
+        wxString label = GetText("label");
         if (label.empty())
         {
             ReportParamError("label", "label cannot be empty");
@@ -68,11 +68,11 @@ wxObject *wxCollapsiblePaneXmlHandler::DoCreateResource()
                     GetID(),
                     label,
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style"), wxCP_DEFAULT_STYLE),
+                    GetStyle("style", wxCP_DEFAULT_STYLE),
                     wxDefaultValidator,
                     GetName());
 
-        ctrl->Collapse(GetBool(wxT("collapsed")));
+        ctrl->Collapse(GetBool("collapsed"));
         SetupWindow(ctrl);
 
         wxCollapsiblePane *old_par = m_collpane;
@@ -89,8 +89,8 @@ wxObject *wxCollapsiblePaneXmlHandler::DoCreateResource()
 
 bool wxCollapsiblePaneXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxCollapsiblePane")) ||
-            (m_isInside && IsOfClass(node, wxT("panewindow")));
+    return IsOfClass(node, "wxCollapsiblePane") ||
+            (m_isInside && IsOfClass(node, "panewindow"));
 }
 
 #endif // wxUSE_XRC && wxUSE_COLLPANE

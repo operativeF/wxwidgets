@@ -54,7 +54,7 @@ wxWinAPI::Event::Create(wxWinAPI::Event::Kind kind,
                         wxWinAPI::Event::InitialState initialState,
                         const wxChar* name)
 {
-    wxCHECK_MSG( !IsOk(), false, wxS("Event can't be created twice") );
+    wxCHECK_MSG( !IsOk(), false, "Event can't be created twice" );
 
     WXHANDLE handle = ::CreateEventW(nullptr,
                                     kind == ManualReset,
@@ -62,7 +62,7 @@ wxWinAPI::Event::Create(wxWinAPI::Event::Kind kind,
                                     name);
     if ( !handle )
     {
-        wxLogLastError(wxS("CreateEvent"));
+        wxLogLastError("CreateEvent");
         return false;
     }
 
@@ -72,11 +72,11 @@ wxWinAPI::Event::Create(wxWinAPI::Event::Kind kind,
 
 inline bool wxWinAPI::Event::Set()
 {
-    wxCHECK_MSG( m_handle, false, wxS("Event must be valid") );
+    wxCHECK_MSG( m_handle, false, "Event must be valid" );
 
     if ( !::SetEvent(m_handle) )
     {
-        wxLogLastError(wxS("SetEvent"));
+        wxLogLastError("SetEvent");
         return false;
     }
 
@@ -85,11 +85,11 @@ inline bool wxWinAPI::Event::Set()
 
 inline bool wxWinAPI::Event::Reset()
 {
-    wxCHECK_MSG( m_handle, false, wxS("Event must be valid") );
+    wxCHECK_MSG( m_handle, false, "Event must be valid" );
 
     if ( !::ResetEvent(m_handle) )
     {
-        wxLogLastError(wxS("ResetEvent"));
+        wxLogLastError("ResetEvent");
         return false;
     }
 

@@ -39,7 +39,7 @@ public:
     {
         wxASSERT_MSG( (flags & wxSOUND_LOOP) == 0 ||
                       (flags & wxSOUND_ASYNC) != 0,
-                     wxT("sound can only be looped asynchronously") );
+                      "sound can only be looped asynchronously" );
         return DoPlay(flags);
     }
 

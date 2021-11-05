@@ -55,7 +55,7 @@ static wxGDIImage* ConvertImage( const wxGDIImage& bitmap )
     if( !isIcon )
     {
         wxASSERT_MSG( wxDynamicCast(&bitmap, wxBitmap),
-                      wxT("not an icon and not a bitmap?") );
+                      "not an icon and not a bitmap?" );
 
         const wxBitmap& bmp = (const wxBitmap&)bitmap;
         wxMask *mask = bmp.GetMask();
@@ -135,10 +135,10 @@ bool wxStaticBitmap::ImageIsOk() const
 
 wxIcon wxStaticBitmap::GetIcon() const
 {
-    wxCHECK_MSG( m_image, wxIcon(), wxT("no image in wxStaticBitmap") );
+    wxCHECK_MSG( m_image, wxIcon(), "no image in wxStaticBitmap" );
 
     // we can't ask for an icon if all we have is a bitmap
-    wxCHECK_MSG( m_isIcon, wxIcon(), wxT("no icon in this wxStaticBitmap") );
+    wxCHECK_MSG( m_isIcon, wxIcon(), "no icon in this wxStaticBitmap" );
 
     return *(wxIcon *)m_image;
 }
@@ -155,7 +155,7 @@ wxBitmap wxStaticBitmap::GetBitmap() const
     }
     else // we have a bitmap
     {
-        wxCHECK_MSG( m_image, wxBitmap(), wxT("no image in wxStaticBitmap") );
+        wxCHECK_MSG( m_image, wxBitmap(), "no image in wxStaticBitmap" );
 
         return *(wxBitmap *)m_image;
     }

@@ -63,7 +63,7 @@ void ScreenshotFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
     info.SetName(_("Automatic Screenshot Generator"));
     info.SetVersion(_("1.0"));
     info.SetDescription(_("This utility automatically creates screenshots of wxWidgets controls for use in wxWidgets documentation."));
-    info.SetCopyright(wxT("(C) 2008 Utensil Candel"));
+    info.SetCopyright("(C) 2008 Utensil Candel");
 
     wxAboutBox(info);
 }
@@ -80,10 +80,10 @@ void ScreenshotFrame::OnCaptureFullScreen(wxCommandEvent& WXUNUSED(event))
     wxBitmap fullscreen(1, 1);
     AutoCaptureMechanism::Capture(&fullscreen, 0, 0, screenWidth, screenHeight);
 
-    AutoCaptureMechanism::Save(&fullscreen, wxT("fullscreen"));
+    AutoCaptureMechanism::Save(&fullscreen, "fullscreen");
 
     wxMessageBox(_("A screenshot of the entire screen was saved as:\n\n  ")
-                + AutoCaptureMechanism::GetDefaultDirectoryAbsPath() + wxT("fullscreen.png"),
+                + AutoCaptureMechanism::GetDefaultDirectoryAbsPath() + "fullscreen.png",
                  _("Full screen capture"), wxICON_INFORMATION|wxOK, this);
 }
 
@@ -104,7 +104,7 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
             case wxYES:
             {
                 wxArrayString files;
-                wxDir::GetAllFiles(dir, &files, wxT("*.png"), wxDIR_FILES);
+                wxDir::GetAllFiles(dir, &files, "*.png", wxDIR_FILES);
 
                 // remove all PNG files from the screenshots folder
                 int n = files.GetCount();
@@ -132,11 +132,11 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
     auto_cap.RegisterControl(m_radioBtn2, AJ_UnionEnd);
     auto_cap.RegisterControl(m_bpButton1);
     auto_cap.RegisterControl(m_bitmap1);
-    auto_cap.RegisterControl(m_gauge1, wxT("wxGauge"));
+    auto_cap.RegisterControl(m_gauge1, "wxGauge");
     auto_cap.RegisterControl(m_slider1);
     auto_cap.RegisterControl(m_toggleBtn1, AJ_Union);
     auto_cap.RegisterControl(m_toggleBtn2, AJ_UnionEnd);
-    auto_cap.RegisterControl(m_hyperlink1, wxT("wxHyperlinkCtrl"));
+    auto_cap.RegisterControl(m_hyperlink1, "wxHyperlinkCtrl");
     auto_cap.RegisterControl(m_spinCtrl1, AJ_RegionAdjust);
     auto_cap.RegisterControl(m_spinBtn1);
     auto_cap.RegisterControl(m_scrollBar1);
@@ -148,10 +148,10 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
     auto_cap.RegisterControl(m_radioBox1);
     auto_cap.RegisterControl(m_staticBox1);
     auto_cap.RegisterControl(m_treeCtrl1);
-    auto_cap.RegisterControl(m_listCtrl1, wxT("wxListCtrl"));
+    auto_cap.RegisterControl(m_listCtrl1, "wxListCtrl");
 
     auto_cap.RegisterControl(m_animationCtrl1);
-    auto_cap.RegisterControl(m_collPane1, wxT("wxCollapsiblePane"), AJ_Union);
+    auto_cap.RegisterControl(m_collPane1, "wxCollapsiblePane", AJ_Union);
     auto_cap.RegisterControl(m_collPane2, AJ_UnionEnd);
 
     auto_cap.RegisterPageTurn();
@@ -162,13 +162,13 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
 
     auto_cap.RegisterPageTurn();
 
-    auto_cap.RegisterControl(m_colourPicker1, wxT("wxColourPickerCtrl"));
-    auto_cap.RegisterControl(m_fontPicker1, wxT("wxFontPickerCtrl"));
-    auto_cap.RegisterControl(m_filePicker1, wxT("wxFilePickerCtrl"), AJ_RegionAdjust);
-    auto_cap.RegisterControl(m_calendar1, wxT("wxCalendarCtrl"), AJ_RegionAdjust);
-    auto_cap.RegisterControl(m_datePicker1, wxT("wxDatePickerCtrl"));
-    auto_cap.RegisterControl(m_genericDirCtrl1, wxT("wxGenericDirCtrl"));
-    auto_cap.RegisterControl(m_dirPicker1, wxT("wxDirPickerCtrl"), AJ_RegionAdjust);
+    auto_cap.RegisterControl(m_colourPicker1, "wxColourPickerCtrl");
+    auto_cap.RegisterControl(m_fontPicker1, "wxFontPickerCtrl");
+    auto_cap.RegisterControl(m_filePicker1, "wxFilePickerCtrl", AJ_RegionAdjust);
+    auto_cap.RegisterControl(m_calendar1, "wxCalendarCtrl", AJ_RegionAdjust);
+    auto_cap.RegisterControl(m_datePicker1, "wxDatePickerCtrl");
+    auto_cap.RegisterControl(m_genericDirCtrl1, "wxGenericDirCtrl");
+    auto_cap.RegisterControl(m_dirPicker1, "wxDirPickerCtrl", AJ_RegionAdjust);
 
     auto_cap.RegisterPageTurn();
 

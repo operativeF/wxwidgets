@@ -77,7 +77,7 @@ bool wxGBSizerItem::SetPos( const wxGBPosition& pos )
     if (m_gbsizer)
     {
         wxCHECK_MSG( !m_gbsizer->CheckForIntersection(pos, m_span, this), false,
-                 wxT("An item is already at that position") );
+                 "An item is already at that position" );
     }
     m_pos = pos;
     return true;
@@ -88,7 +88,7 @@ bool wxGBSizerItem::SetSpan( const wxGBSpan& span )
     if (m_gbsizer)
     {
         wxCHECK_MSG( !m_gbsizer->CheckForIntersection(m_pos, span, this), false,
-                 wxT("An item is already at that position") );
+                 "An item is already at that position" );
     }
     m_span = span;
     return true;
@@ -191,7 +191,7 @@ wxSizerItem* wxGridBagSizer::Add( int width, int height,
 wxSizerItem* wxGridBagSizer::Add( wxGBSizerItem *item )
 {
     wxCHECK_MSG( !CheckForIntersection(item), nullptr,
-                 wxT("An item is already at that position") );
+                 "An item is already at that position" );
     m_children.Append(item);
     item->SetGBSizer(this);
     if ( item->GetWindow() )
@@ -220,7 +220,7 @@ wxSize wxGridBagSizer::GetCellSize(int row, int col) const
 {
     wxCHECK_MSG( (row < m_rows) && (col < m_cols),
                  wxDefaultSize,
-                 wxT("Invalid cell."));
+                 "Invalid cell.");
     return wxSize( m_colWidths[col], m_rowHeights[row] );
 }
 
@@ -229,7 +229,7 @@ wxGBPosition wxGridBagSizer::GetItemPosition(wxWindow *window)
 {
     wxGBPosition badpos(-1,-1);
     wxGBSizerItem* item = FindItem(window);
-    wxCHECK_MSG(item, badpos, wxT("Failed to find item."));
+    wxCHECK_MSG(item, badpos, "Failed to find item.");
     return item->GetPos();
 }
 
@@ -238,7 +238,7 @@ wxGBPosition wxGridBagSizer::GetItemPosition(wxSizer *sizer)
 {
     wxGBPosition badpos(-1,-1);
     wxGBSizerItem* item = FindItem(sizer);
-    wxCHECK_MSG(item, badpos, wxT("Failed to find item."));
+    wxCHECK_MSG(item, badpos, "Failed to find item.");
     return item->GetPos();
 }
 
@@ -247,7 +247,7 @@ wxGBPosition wxGridBagSizer::GetItemPosition(size_t index)
 {
     wxGBPosition badpos(-1,-1);
     wxSizerItemList::compatibility_iterator node = m_children.Item( index );
-    wxCHECK_MSG( node, badpos, wxT("Failed to find item.") );
+    wxCHECK_MSG( node, badpos, "Failed to find item." );
     wxGBSizerItem* item = (wxGBSizerItem*)node->GetData();
     return item->GetPos();
 }
@@ -257,7 +257,7 @@ wxGBPosition wxGridBagSizer::GetItemPosition(size_t index)
 bool wxGridBagSizer::SetItemPosition(wxWindow *window, const wxGBPosition& pos)
 {
     wxGBSizerItem* item = FindItem(window);
-    wxCHECK_MSG(item, false, wxT("Failed to find item."));
+    wxCHECK_MSG(item, false, "Failed to find item.");
     return item->SetPos(pos);
 }
 
@@ -265,7 +265,7 @@ bool wxGridBagSizer::SetItemPosition(wxWindow *window, const wxGBPosition& pos)
 bool wxGridBagSizer::SetItemPosition(wxSizer *sizer, const wxGBPosition& pos)
 {
     wxGBSizerItem* item = FindItem(sizer);
-    wxCHECK_MSG(item, false, wxT("Failed to find item."));
+    wxCHECK_MSG(item, false, "Failed to find item.");
     return item->SetPos(pos);
 }
 
@@ -273,7 +273,7 @@ bool wxGridBagSizer::SetItemPosition(wxSizer *sizer, const wxGBPosition& pos)
 bool wxGridBagSizer::SetItemPosition(size_t index, const wxGBPosition& pos)
 {
     wxSizerItemList::compatibility_iterator node = m_children.Item( index );
-    wxCHECK_MSG( node, false, wxT("Failed to find item.") );
+    wxCHECK_MSG( node, false, "Failed to find item." );
     wxGBSizerItem* item = (wxGBSizerItem*)node->GetData();
     return item->SetPos(pos);
 }
@@ -283,7 +283,7 @@ bool wxGridBagSizer::SetItemPosition(size_t index, const wxGBPosition& pos)
 wxGBSpan wxGridBagSizer::GetItemSpan(wxWindow *window)
 {
     wxGBSizerItem* item = FindItem(window);
-    wxCHECK_MSG( item, wxGBSpan::Invalid(), wxT("Failed to find item.") );
+    wxCHECK_MSG( item, wxGBSpan::Invalid(), "Failed to find item." );
     return item->GetSpan();
 }
 
@@ -291,7 +291,7 @@ wxGBSpan wxGridBagSizer::GetItemSpan(wxWindow *window)
 wxGBSpan wxGridBagSizer::GetItemSpan(wxSizer *sizer)
 {
     wxGBSizerItem* item = FindItem(sizer);
-    wxCHECK_MSG( item, wxGBSpan::Invalid(), wxT("Failed to find item.") );
+    wxCHECK_MSG( item, wxGBSpan::Invalid(), "Failed to find item." );
     return item->GetSpan();
 }
 
@@ -299,7 +299,7 @@ wxGBSpan wxGridBagSizer::GetItemSpan(wxSizer *sizer)
 wxGBSpan wxGridBagSizer::GetItemSpan(size_t index)
 {
     wxSizerItemList::compatibility_iterator node = m_children.Item( index );
-    wxCHECK_MSG( node, wxGBSpan::Invalid(), wxT("Failed to find item.") );
+    wxCHECK_MSG( node, wxGBSpan::Invalid(), "Failed to find item." );
     wxGBSizerItem* item = (wxGBSizerItem*)node->GetData();
     return item->GetSpan();
 }
@@ -309,7 +309,7 @@ wxGBSpan wxGridBagSizer::GetItemSpan(size_t index)
 bool wxGridBagSizer::SetItemSpan(wxWindow *window, const wxGBSpan& span)
 {
     wxGBSizerItem* item = FindItem(window);
-    wxCHECK_MSG(item, false, wxT("Failed to find item."));
+    wxCHECK_MSG(item, false, "Failed to find item.");
     return item->SetSpan(span);
 }
 
@@ -317,7 +317,7 @@ bool wxGridBagSizer::SetItemSpan(wxWindow *window, const wxGBSpan& span)
 bool wxGridBagSizer::SetItemSpan(wxSizer *sizer, const wxGBSpan& span)
 {
     wxGBSizerItem* item = FindItem(sizer);
-    wxCHECK_MSG(item, false, wxT("Failed to find item."));
+    wxCHECK_MSG(item, false, "Failed to find item.");
     return item->SetSpan(span);
 }
 
@@ -325,7 +325,7 @@ bool wxGridBagSizer::SetItemSpan(wxSizer *sizer, const wxGBSpan& span)
 bool wxGridBagSizer::SetItemSpan(size_t index, const wxGBSpan& span)
 {
     wxSizerItemList::compatibility_iterator node = m_children.Item( index );
-    wxCHECK_MSG( node, false, wxT("Failed to find item.") );
+    wxCHECK_MSG( node, false, "Failed to find item." );
     wxGBSizerItem* item = (wxGBSizerItem*)node->GetData();
     return item->SetSpan(span);
 }
@@ -711,56 +711,56 @@ wxSizerItem* wxGridBagSizer::Add( int width, int height, int, int flag, int bord
 
 wxSizerItem* wxGridBagSizer::Add( wxSizerItem * )
 {
-    wxFAIL_MSG(wxT("Invalid Add form called."));
+    wxFAIL_MSG("Invalid Add form called.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Prepend( wxWindow *, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Prepend should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Prepend should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Prepend( wxSizer *, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Prepend should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Prepend should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Prepend( int, int, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Prepend should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Prepend should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Prepend( wxSizerItem * )
 {
-    wxFAIL_MSG(wxT("Prepend should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Prepend should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 
 wxSizerItem* wxGridBagSizer::Insert( size_t, wxWindow *, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Insert should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Insert should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Insert( size_t, wxSizer *, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Insert should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Insert should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Insert( size_t, int, int, int, int, int, wxObject*  )
 {
-    wxFAIL_MSG(wxT("Insert should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Insert should not be used with wxGridBagSizer.");
     return nullptr;
 }
 
 wxSizerItem* wxGridBagSizer::Insert( size_t, wxSizerItem * )
 {
-    wxFAIL_MSG(wxT("Insert should not be used with wxGridBagSizer."));
+    wxFAIL_MSG("Insert should not be used with wxGridBagSizer.");
     return nullptr;
 }
 

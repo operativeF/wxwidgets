@@ -102,11 +102,11 @@ std::string wxWinHelpController::GetValidFilename(const std::string& file) const
 
     std::string fullName;
     if (path.empty())
-        fullName = name + wxT(".hlp");
+        fullName = name + ".hlp";
     else if (path.Last() == wxT('\\'))
-        fullName = path + name + wxT(".hlp");
+        fullName = path + name + ".hlp";
     else
-        fullName = path + wxT("\\") + name + wxT(".hlp");
+        fullName = path + "\\" + name + ".hlp";
     return fullName;
 }
 

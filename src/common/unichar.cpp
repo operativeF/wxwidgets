@@ -127,7 +127,7 @@ wxUniCharRef& wxUniCharRef::operator=(const wxUniChar& c)
 
             if ( iterNum == STATIC_SIZE )
             {
-                wxLogTrace( wxT("utf8"), wxT("unexpectedly many iterators") );
+                wxLogTrace( "utf8"), wxT("unexpectedly many iterators" );
 
                 size_t total = iterNum + 1;
                 for ( wxStringIteratorNode *it2 = it; it2; it2 = it2->m_next )

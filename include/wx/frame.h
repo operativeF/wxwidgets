@@ -25,11 +25,12 @@
 // the default names for various classes
 constexpr char wxStatusLineNameStr[] = "status_line";
 
-class wxFrame;
 #if wxUSE_MENUBAR
-#include <wx/menu.h>
-class wxMenuBar;
+    #include <wx/menu.h>
+    class wxMenuBar;
 #endif
+
+class wxFrame;
 class wxMenuItem;
 class wxStatusBar;
 class wxToolBar;
@@ -124,9 +125,9 @@ public:
     virtual void SetStatusBar(wxStatusBar *statBar);
 
     // forward these to status bar
-    virtual void SetStatusText(const wxString &text, int number = 0);
+    virtual void SetStatusText(const std::string& text, int number = 0);
     virtual void SetStatusWidths(int n, const int widths_field[]);
-    void PushStatusText(const wxString &text, int number = 0);
+    void PushStatusText(const std::string& text, int number = 0);
     void PopStatusText(int number = 0);
 
     // set the status bar pane the help will be shown in
@@ -178,7 +179,7 @@ public:
     // show help text for the currently selected menu or toolbar item
     // (typically in the status bar) or hide it and restore the status bar text
     // originally shown before the menu was opened if show == false
-    virtual void DoGiveHelp(const wxString& text, bool show);
+    virtual void DoGiveHelp(const std::string& text, bool show);
 #endif
 
     bool IsClientAreaChild(const wxWindow *child) const override
@@ -209,10 +210,10 @@ protected:
 
 #if wxUSE_STATUSBAR && (wxUSE_MENUS || wxUSE_TOOLBAR)
     // the saved status bar text overwritten by DoGiveHelp()
-    wxString m_oldStatusText;
+    std::string m_oldStatusText;
 
     // the last help string we have shown in the status bar
-    wxString m_lastHelpShown;
+    std::string m_lastHelpShown;
 #endif
 
 #if wxUSE_MENUBAR

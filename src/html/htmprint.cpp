@@ -542,22 +542,22 @@ wxString wxHtmlPrintout::TranslateHeader(const wxString& instr, int page)
     wxString r = instr;
     wxString num;
 
-    num.Printf(wxT("%i"), page);
-    r.Replace(wxT("@PAGENUM@"), num);
+    num.Printf("%i", page);
+    r.Replace("@PAGENUM@", num);
 
-    num.Printf(wxT("%lu"), (unsigned long)(m_PageBreaks.size() - 1));
-    r.Replace(wxT("@PAGESCNT@"), num);
+    num.Printf("%lu", (unsigned long)(m_PageBreaks.size() - 1));
+    r.Replace("@PAGESCNT@", num);
 
 #if wxUSE_DATETIME
     const wxDateTime now = wxDateTime::Now();
-    r.Replace(wxT("@DATE@"), now.FormatDate());
-    r.Replace(wxT("@TIME@"), now.FormatTime());
+    r.Replace("@DATE@", now.FormatDate());
+    r.Replace("@TIME@", now.FormatTime());
 #else
-    r.Replace(wxT("@DATE@"), {});
-    r.Replace(wxT("@TIME@"), {});
+    r.Replace("@DATE@", {});
+    r.Replace("@TIME@", {});
 #endif
 
-    r.Replace(wxT("@TITLE@"), GetTitle());
+    r.Replace("@TITLE@", GetTitle());
 
     return r;
 }

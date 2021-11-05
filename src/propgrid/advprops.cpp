@@ -382,7 +382,7 @@ wxPGWindowList wxPGDatePickerCtrlEditor::CreateControls( wxPropertyGrid* propgri
 {
     wxCHECK_MSG( wxDynamicCast(property, wxDateProperty),
                  nullptr,
-                 wxS("DatePickerCtrl editor can only be used with wxDateProperty or derivative.") );
+                 "DatePickerCtrl editor can only be used with wxDateProperty or derivative." );
 
     wxDateProperty* prop = wxDynamicCast(property, wxDateProperty);
 
@@ -480,11 +480,12 @@ void wxPGDatePickerCtrlEditor::SetValueToUnspecified( wxPGProperty* property,
 // NB: Do not use wxS here since unlike wxT it doesn't translate to wxChar*
 //
 
+// FIXME: Use narrow strings.
 static const wxChar* const gs_fp_es_family_labels[] = {
-    wxT("Default"), wxT("Decorative"),
-    wxT("Roman"), wxT("Script"),
-    wxT("Swiss"), wxT("Modern"),
-    wxT("Teletype"), wxT("Unknown"),
+    L"Default", L"Decorative",
+    L"Roman", L"Script",
+    L"Swiss", L"Modern",
+    L"Teletype", L"Unknown",
     (const wxChar*) nullptr
 };
 
@@ -501,9 +502,9 @@ constexpr long gs_fp_es_family_values[] = {
 };
 
 static const wxChar* const gs_fp_es_style_labels[] = {
-    wxT("Normal"),
-    wxT("Slant"),
-    wxT("Italic"),
+    L"Normal",
+    L"Slant",
+    L"Italic",
     (const wxChar*) nullptr
 };
 
@@ -515,16 +516,16 @@ constexpr long gs_fp_es_style_values[] = {
 };
 
 static const wxChar* const gs_fp_es_weight_labels[] = {
-    wxT("Thin"),
-    wxT("ExtraLight"),
-    wxT("Light"),
-    wxT("Normal"),
-    wxT("Medium"),
-    wxT("SemiBold"),
-    wxT("Bold"),
-    wxT("ExtraBold"),
-    wxT("Heavy"),
-    wxT("ExtraHeavy"),
+    L"Thin",
+    L"ExtraLight",
+    L"Light",
+    L"Normal",
+    L"Medium",
+    L"SemiBold",
+    L"Bold",
+    L"ExtraBold",
+    L"Heavy",
+    L"ExtraHeavy",
     (const wxChar*) nullptr
 };
 
@@ -568,7 +569,7 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
 
     /* TRANSLATORS: Label of font point size */
     AddPrivateChild( new wxIntProperty( _("Point Size"),
-                     wxS("Point Size"),(long)font.GetPointSize() ) );
+                     "Point Size",(long)font.GetPointSize() ) );
 
     wxString faceName = font.GetFaceName();
     // If font was not in there, add it now
@@ -577,7 +578,7 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
         wxPGGlobalVars->m_fontFamilyChoices->AddAsSorted(faceName);
 
     /* TRANSLATORS: Label of font face name */
-    wxPGProperty* p = new wxEnumProperty(_("Face Name"), wxS("Face Name"),
+    wxPGProperty* p = new wxEnumProperty(_("Face Name"), "Face Name",
                                          *wxPGGlobalVars->m_fontFamilyChoices);
 
     p->SetValueFromString(faceName, wxPG_FULL_VALUE);
@@ -585,22 +586,25 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
     AddPrivateChild( p );
 
     /* TRANSLATORS: Label of font style */
-    AddPrivateChild( new wxEnumProperty(_("Style"), wxS("Style"),
-                     gs_fp_es_style_labels,gs_fp_es_style_values,
+    AddPrivateChild( new wxEnumProperty(_("Style"), "Style",
+                     gs_fp_es_style_labels,
+                     gs_fp_es_style_values,
                      static_cast<int>(font.GetStyle())) ); // FIXME: Stupid solution.
 
     /* TRANSLATORS: Label of font weight */
-    AddPrivateChild( new wxEnumProperty(_("Weight"), wxS("Weight"),
-                     gs_fp_es_weight_labels,gs_fp_es_weight_values,
+    AddPrivateChild( new wxEnumProperty(_("Weight"), "Weight",
+                     gs_fp_es_weight_labels,
+                     gs_fp_es_weight_values,
                      font.GetWeight()) );
 
     /* TRANSLATORS: Label of underlined font */
-    AddPrivateChild( new wxBoolProperty(_("Underlined"), wxS("Underlined"),
+    AddPrivateChild( new wxBoolProperty(_("Underlined"), "Underlined",
                      font.GetUnderlined()) );
 
     /* TRANSLATORS: Label of font family */
-    AddPrivateChild( new wxEnumProperty(_("Family"), wxS("PointSize"),
-                     gs_fp_es_family_labels,gs_fp_es_family_values,
+    AddPrivateChild( new wxEnumProperty(_("Family"), "PointSize",
+                     gs_fp_es_family_labels,
+                     gs_fp_es_family_values,
                      static_cast<int>(font.GetFamily())) ); // FIXME: Stupid solution.
 }
 
@@ -625,8 +629,8 @@ bool wxFontProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 {
     wxFont font;
 
-    wxASSERT_MSG(value.IsType(wxS("wxFont")), "Function called for incompatible property");
-    if ( value.IsType(wxS("wxFont")) )
+    wxASSERT_MSG(value.IsType("wxFont"), "Function called for incompatible property");
+    if ( value.IsType("wxFont") )
         font << value;
 
     wxFontData data;
@@ -743,7 +747,7 @@ void wxFontProperty::OnCustomPaint(wxDC& dc,
         dc.SetFont(wxFontInfo(oldFont.GetPointSize().Bold().FaceName(drawFace));
 
         dc.SetTextForeground( wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT) );
-        dc.wxDrawText( wxS("Aa"), rect.x+2, rect.y+1 );
+        dc.wxDrawText( "Aa", rect.x+2, rect.y+1 );
 
         dc.SetFont(oldFont);
     }
@@ -894,7 +898,7 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
         return {wxPG_COLOUR_UNSPECIFIED, wxColour()};
 
     const wxString valType(pVariant->GetType());
-    if ( valType == wxS("wxColourPropertyValue") )
+    if ( valType == "wxColourPropertyValue" )
     {
         wxColourPropertyValue v;
         v << *pVariant;
@@ -904,12 +908,12 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
     wxColour col;
     bool variantProcessed = true;
 
-    if ( valType == wxS("wxColour*") )
+    if ( valType == "wxColour*" )
     {
         wxColour* pCol = wxStaticCast(pVariant->GetWxObjectPtr(), wxColour);
         col = *pCol;
     }
-    else if ( valType == wxS("wxColour") )
+    else if ( valType == "wxColour" )
     {
         col << *pVariant;
     }
@@ -971,7 +975,7 @@ int wxSystemColourProperty::ColToInd( const wxColour& colour ) const
 
         if ( colour == GetColour(ind) )
         {
-            /*wxLogDebug(wxS("%s(%s): Index %i for ( getcolour(%i,%i,%i), colour(%i,%i,%i))"),
+            /*wxLogDebug("%s(%s): Index %i for ( getcolour(%i,%i,%i), colour(%i,%i,%i))",
                 wxGetClassName(),GetLabel(),
                 (int)i,(int)GetColour(ind).Red(),(int)GetColour(ind).Green(),(int)GetColour(ind).Blue(),
                 (int)colour.Red(),(int)colour.Green(),(int)colour.Blue());*/
@@ -984,7 +988,7 @@ int wxSystemColourProperty::ColToInd( const wxColour& colour ) const
 void wxSystemColourProperty::OnSetValue()
 {
     // Convert from generic wxobject ptr to wxPGVariantDataColour
-    if ( m_value.IsType(wxS("wxColour*")) )
+    if ( m_value.IsType("wxColour*") )
     {
         wxColour* pCol = wxStaticCast(m_value.GetWxObjectPtr(), wxColour);
         m_value = WXVARIANT(*pCol);
@@ -1008,7 +1012,7 @@ void wxSystemColourProperty::OnSetValue()
 
     int ind = wxNOT_FOUND;
 
-    if ( m_value.IsType(wxS("wxColourPropertyValue")) )
+    if ( m_value.IsType("wxColourPropertyValue") )
     {
         wxColourPropertyValue cpv;
         cpv << m_value;
@@ -1070,7 +1074,7 @@ wxString wxSystemColourProperty::ColourToString( const wxColour& col,
 
         if ( (argFlags & wxPG_FULL_VALUE) || (m_flags & wxPG_PROP_COLOUR_HAS_ALPHA) )
         {
-            return wxString::Format(wxS("(%i,%i,%i,%i)"),
+            return wxString::Format("(%i,%i,%i,%i)",
                                     (int)col.Red(),
                                     (int)col.Green(),
                                     (int)col.Blue(),
@@ -1078,7 +1082,7 @@ wxString wxSystemColourProperty::ColourToString( const wxColour& col,
         }
         else
         {
-            return wxString::Format(wxS("(%i,%i,%i)"),
+            return wxString::Format("(%i,%i,%i)",
                                     (int)col.Red(),
                                     (int)col.Green(),
                                     (int)col.Blue());
@@ -1263,7 +1267,7 @@ public:
             dc.SetBrush( *wxWHITE );
 
         wxRect imageRect = propertyGrid->GetImageRect(property, item);
-        wxLogDebug(wxS("%i, %i"),imageRect.x,imageRect.y);
+        wxLogDebug("%i, %i",imageRect.x,imageRect.y);
         dc.DrawRectangle( rect.x+imageRect.x, rect.y+imageRect.y,
                           imageRect.width, imageRect.height );
 
@@ -1326,7 +1330,7 @@ void wxSystemColourProperty::OnCustomPaint( wxDC& dc, const wxRect& rect,
 #endif
             else
             {
-                wxFAIL_MSG( wxS("Unknown wxDC kind") );
+                wxFAIL_MSG( "Unknown wxDC kind" );
             }
         }
 
@@ -1364,16 +1368,16 @@ bool wxSystemColourProperty::StringToValue( wxVariant& value, const wxString& te
 
     if ( !isCustomColour )
     {
-        if ( colStr.Find(wxS("(")) == 0 )
+        if ( colStr.Find("(") == 0 )
         {
             // Eliminate whitespace
-            colStr.Replace(wxS(" "), {});
+            colStr.Replace(" ", {});
 
             int commaCount = colStr.Freq(wxS(','));
             if ( commaCount == 2 )
             {
                 // Convert (R,G,B) to rgb(R,G,B)
-                colStr = wxS("rgb") + colStr;
+                colStr = "rgb" + colStr;
             }
             else if ( commaCount == 3 )
             {
@@ -1382,7 +1386,7 @@ bool wxSystemColourProperty::StringToValue( wxVariant& value, const wxString& te
                 // ourselves instead of trying to convert it to a format
                 // that wxColour::FromString() understands.
                 int r = -1, g = -1, b = -1, a = -1;
-                wxSscanf(colStr, wxS("(%i,%i,%i,%i)"), &r, &g, &b, &a);
+                wxSscanf(colStr, "(%i,%i,%i,%i)", &r, &g, &b, &a);
                 customColour.Set(r, g, b, a);
                 conversionSuccess = customColour.IsOk();
             }
@@ -1567,7 +1571,7 @@ wxColourProperty::wxColourProperty( const wxString& label,
                              gs_cp_es_normcolour_values,
                              &gs_wxColourProperty_choicesCache, value )
 {
-    wxASSERT_MSG( wxTheColourDatabase, wxS("No colour database") );
+    wxASSERT_MSG( wxTheColourDatabase, "No colour database" );
     if ( wxTheColourDatabase )
     {
         // Extend colour database with PG-specific colours.
@@ -1799,14 +1803,14 @@ const wxString& wxPGGetDefaultImageWildcard()
             wxString ext_up = ext_lo.Upper();
 
             str.append( ext_up );
-            str.append( wxS(" files (*.") );
+            str.append( " files (*." );
             str.append( ext_up );
-            str.append( wxS(")|*.") );
+            str.append( ")|*." );
             str.append( ext_lo );
-            str.append( wxS("|") );
+            str.append( "|" );
         }
 
-        str.append ( wxS("All files (*.*)|*.*") );
+        str.append ( "All files (*.*)|*.*" );
 
         wxPGGlobalVars->m_pDefaultImageWildcard = str;
     }
@@ -1967,14 +1971,14 @@ void wxMultiChoiceProperty::GenerateValueAsString( wxVariant& value,
     tempStr.Empty();
 
     if ( itemCount )
-        tempStr.append( wxS("\"") );
+        tempStr.append( "\"" );
 
     for ( size_t i = 0; i < itemCount; i++ )
     {
         tempStr.append( strings[i] );
-        tempStr.append( wxS("\"") );
+        tempStr.append( "\"" );
         if ( i < (itemCount-1) )
-            tempStr.append ( wxS(" \"") );
+            tempStr.append ( " \"" );
     }
 }
 
@@ -2165,7 +2169,7 @@ wxString wxDateProperty::ValueToString( wxVariant& value,
     wxDateTime dateTime = value.GetDateTime();
 
     if ( !dateTime.IsValid() )
-        return wxS("Invalid");
+        return "Invalid";
 
     if ( ms_defaultDateFormat.empty() )
     {
@@ -2195,13 +2199,13 @@ wxString wxDateProperty::DetermineDefaultDateFormat( bool showCentury )
 #if wxUSE_INTL
     wxString format = wxLocale::GetOSInfo(wxLOCALE_SHORT_DATE_FMT);
     if ( showCentury )
-        format.Replace(wxS("%y"), wxS("%Y"));
+        format.Replace("%y", "%Y");
     else
-        format.Replace(wxS("%Y"), wxS("%y"));
+        format.Replace("%Y", "%y");
 
     return format;
 #else
-    return wxS("%x");
+    return "%x";
 #endif // wxUSE_INTL/!wxUSE_INTL
 }
 

@@ -57,7 +57,7 @@ void wxOverlay::Clear( wxDC* dc)
 
 void wxOverlay::Reset()
 {
-    wxASSERT_MSG(m_inDrawing == false, wxT("cannot reset overlay during drawing"));
+    wxASSERT_MSG(m_inDrawing == false, "cannot reset overlay during drawing");
     m_impl->Reset();
 }
 

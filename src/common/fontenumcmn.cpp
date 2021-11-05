@@ -99,8 +99,8 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
     //     page 1252. It is not a font but a face name for a nonexistent font."
     // Thus we need to consider "Ms Shell Dlg" and "Ms Shell Dlg 2" as valid
     // font face names even if they are not enumerated by wxFontEnumerator
-    if (facename.IsSameAs(wxT("Ms Shell Dlg"), false) ||
-        facename.IsSameAs(wxT("Ms Shell Dlg 2"), false))
+    if (facename.IsSameAs("Ms Shell Dlg", false) ||
+        facename.IsSameAs("Ms Shell Dlg 2", false))
         return true;
 #endif
 
@@ -123,7 +123,7 @@ bool wxFontEnumerator::EnumerateEncodingsUTF8(const wxString& facename)
 {
     // name of UTF-8 encoding: no need to use wxFontMapper for it as it's
     // unlikely to change
-    const wxString utf8(wxT("UTF-8"));
+    const wxString utf8("UTF-8");
 
     // all fonts are in UTF-8 only if this code is used
     if ( !facename.empty() )

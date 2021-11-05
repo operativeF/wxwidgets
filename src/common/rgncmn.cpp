@@ -119,7 +119,7 @@ bool wxRegionBase::Union(const wxBitmap& bmp)
     if (bmp.GetMask())
     {
         wxImage image = bmp.ConvertToImage();
-        wxASSERT_MSG( image.HasMask(), wxT("wxBitmap::ConvertToImage doesn't preserve mask?") );
+        wxASSERT_MSG( image.HasMask(), "wxBitmap::ConvertToImage doesn't preserve mask?" );
         return DoRegionUnion(*this, image,
                              image.GetMaskRed(),
                              image.GetMaskGreen(),

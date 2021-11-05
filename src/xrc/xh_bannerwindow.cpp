@@ -29,16 +29,16 @@ wxObject *wxBannerWindowXmlHandler::DoCreateResource()
 
     banner->Create(m_parentAsWindow,
                    GetID(),
-                   GetDirection(wxS("direction")),
+                   GetDirection("direction"),
                    GetPosition(),
                    GetSize(),
-                   GetStyle(wxS("style")),
+                   GetStyle("style"),
                    GetName());
 
     SetupWindow(banner);
 
-    const wxColour colStart = GetColour(wxS("gradient-start"));
-    const wxColour colEnd = GetColour(wxS("gradient-end"));
+    const wxColour colStart = GetColour("gradient-start");
+    const wxColour colEnd = GetColour("gradient-end");
     if ( colStart.IsOk() || colEnd.IsOk() )
     {
         if ( !colStart.IsOk() || !colEnd.IsOk() )
@@ -70,14 +70,14 @@ wxObject *wxBannerWindowXmlHandler::DoCreateResource()
         banner->SetBitmap(bitmap);
     }
 
-    banner->SetText(GetText(wxS("title")), GetText(wxS("message")));
+    banner->SetText(GetText("title")), GetText(wxS("message"));
 
     return banner;
 }
 
 bool wxBannerWindowXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxS("wxBannerWindow"));
+    return IsOfClass(node, "wxBannerWindow");
 }
 
 #endif // wxUSE_XRC && wxUSE_BANNERWINDOW

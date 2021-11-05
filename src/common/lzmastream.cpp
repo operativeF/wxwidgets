@@ -372,9 +372,9 @@ wxLZMAClassFactory::wxLZMAClassFactory()
 const wxChar * const *
 wxLZMAClassFactory::GetProtocols(wxStreamProtocolType type) const
 {
-    static const wxChar *mime[] = { wxT("application/xz"), NULL };
-    static const wxChar *encs[] = { wxT("xz"), NULL };
-    static const wxChar *exts[] = { wxT(".xz"), NULL };
+    static const wxChar *mime[] = { "application/xz", NULL };
+    static const wxChar *encs[] = { "xz", NULL };
+    static const wxChar *exts[] = { ".xz", NULL };
 
     const wxChar* const* ret = NULL;
     switch ( type )

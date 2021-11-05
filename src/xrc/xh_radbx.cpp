@@ -32,23 +32,23 @@ wxRadioBoxXmlHandler::wxRadioBoxXmlHandler()
 
 wxObject *wxRadioBoxXmlHandler::DoCreateResource()
 {
-    if ( m_class == wxT("wxRadioBox"))
+    if ( m_class == "wxRadioBox")
     {
         // find the selection
-        long selection = GetLong( wxT("selection"), -1 );
+        long selection = GetLong( "selection", -1 );
 
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately( nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately( nullptr, GetParamNode("content"));
 
         XRC_MAKE_INSTANCE(control, wxRadioBox)
 
         control->Create(m_parentAsWindow,
                         GetID(),
-                        GetText(wxT("label")),
+                        GetText("label"),
                         GetPosition(), GetSize(),
                         m_labels,
-                        GetLong(wxT("dimension"), 1),
+                        GetLong("dimension", 1),
                         GetStyle(),
                         wxDefaultValidator,
                         GetName());
@@ -108,11 +108,11 @@ wxObject *wxRadioBoxXmlHandler::DoCreateResource()
                                         ? 0
                                         : wxXRC_TEXT_NO_ESCAPE));
 #if wxUSE_TOOLTIPS
-        m_tooltips.push_back(GetNodeText(GetParamNode(wxT("tooltip")),
+        m_tooltips.push_back(GetNodeText(GetParamNode("tooltip"),
                                          wxXRC_TEXT_NO_ESCAPE));
 #endif // wxUSE_TOOLTIPS
 #if wxUSE_HELP
-        const wxXmlNode* const nodeHelp = GetParamNode(wxT("helptext"));
+        const wxXmlNode* const nodeHelp = GetParamNode("helptext");
         m_helptexts.push_back(GetNodeText(nodeHelp, wxXRC_TEXT_NO_ESCAPE));
         m_helptextSpecified.push_back(nodeHelp != nullptr);
 #endif // wxUSE_HELP
@@ -126,8 +126,8 @@ wxObject *wxRadioBoxXmlHandler::DoCreateResource()
 
 bool wxRadioBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxRadioBox")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxRadioBox") ||
+           (m_insideBox && node->GetName() == "item"));
 }
 
 #endif // wxUSE_XRC && wxUSE_RADIOBOX

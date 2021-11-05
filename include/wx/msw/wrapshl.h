@@ -45,7 +45,7 @@ public:
             }
             else
             {
-                wxLogLastError(wxT("SHGetMalloc"));
+                wxLogLastError("SHGetMalloc");
             }
         }
     }
@@ -64,7 +64,7 @@ public:
         wxString path;
         if ( !::SHGetPathFromIDListW(m_pidl, wxStringBuffer(path, MAX_PATH)) )
         {
-            wxLogLastError(wxT("SHGetPathFromIDList"));
+            wxLogLastError("SHGetPathFromIDList");
         }
 
         return path;

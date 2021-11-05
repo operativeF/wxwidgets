@@ -73,7 +73,7 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxRadioBox, wxControl, "wx/radiobox.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxRadioBox)
 wxEVENT_PROPERTY( Select , wxEVT_RADIOBOX , wxCommandEvent )
-wxPROPERTY_FLAGS( WindowStyle , wxRadioBoxStyle , long , SetWindowStyleFlag , GetWindowStyleFlag , , 0 /*flags*/ , wxT("Helpstring") , wxT("group")) // style
+wxPROPERTY_FLAGS( WindowStyle , wxRadioBoxStyle , long , SetWindowStyleFlag , GetWindowStyleFlag , , 0 /*flags*/ , "Helpstring") , wxT("group") // style
 wxEND_PROPERTIES_TABLE()
 
 /*
@@ -93,7 +93,7 @@ wxEND_PROPERTIES_TABLE()
 
 void wxRadioBoxBase::SetMajorDim(unsigned int majorDim, unsigned int style)
 {
-    wxCHECK_RET( majorDim != 0, wxT("major radiobox dimension can't be 0") );
+    wxCHECK_RET( majorDim != 0, "major radiobox dimension can't be 0" );
 
     m_majorDim = majorDim;
 
@@ -174,7 +174,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unexpected wxDirection value") );
+                wxFAIL_MSG( "unexpected wxDirection value" );
                 return wxNOT_FOUND;
         }
 
@@ -207,7 +207,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
         }
 
         wxASSERT_MSG( item < count && item >= 0,
-                      wxT("logic error in wxRadioBox::GetNextItem()") );
+                      "logic error in wxRadioBox::GetNextItem()" );
     }
     // we shouldn't select the non-active items, continue looking for a
     // visible and shown one unless we came back to the item we started from in
@@ -221,7 +221,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
 
 void wxRadioBoxBase::SetItemToolTip(unsigned int item, const std::string& text)
 {
-    wxASSERT_MSG( item < GetCount(), wxT("Invalid item index") );
+    wxASSERT_MSG( item < GetCount(), "Invalid item index" );
 
     // extend the array to have entries for all our items on first use
     if ( !m_itemsTooltips )
@@ -295,7 +295,7 @@ wxRadioBoxBase::~wxRadioBoxBase()
 // set helptext for a particular item
 void wxRadioBoxBase::SetItemHelpText(unsigned int n, const std::string& helpText)
 {
-    wxCHECK_RET( n < GetCount(), wxT("Invalid item index") );
+    wxCHECK_RET( n < GetCount(), "Invalid item index" );
 
     if ( m_itemsHelpTexts.empty() )
     {
@@ -309,7 +309,7 @@ void wxRadioBoxBase::SetItemHelpText(unsigned int n, const std::string& helpText
 // retrieve helptext for a particular item
 std::string wxRadioBoxBase::GetItemHelpText( unsigned int n ) const
 {
-    wxCHECK_MSG( n < GetCount(), "", wxT("Invalid item index") );
+    wxCHECK_MSG( n < GetCount(), "", "Invalid item index" );
 
     return m_itemsHelpTexts.empty() ? "" : m_itemsHelpTexts[n];
 }

@@ -35,8 +35,8 @@ bool wxChoice::Create(wxWindow *parent,
     wxASSERT_MSG( !(style & wxCB_DROPDOWN) &&
                   !(style & wxCB_READONLY) &&
                   !(style & wxCB_SIMPLE),
-                  wxT("this style flag is ignored by wxChoice, you ")
-                  wxT("probably want to use a wxComboBox") );
+                  "this style flag is ignored by wxChoice, you "
+                  "probably want to use a wxComboBox" );
 
     return CreateAndInit(parent, id, pos, size, choices, style,
                          validator, name);
@@ -204,7 +204,7 @@ int wxChoice::DoInsertItems(const std::vector<std::string>& items,
 
 void wxChoice::DoDeleteOneItem(unsigned int n)
 {
-    wxCHECK_RET( IsValid(n), wxT("invalid item index in wxChoice::Delete") );
+    wxCHECK_RET( IsValid(n), "invalid item index in wxChoice::Delete" );
 
     ::SendMessageW(GetHwnd(), CB_DELETESTRING, n, 0);
 
@@ -289,7 +289,7 @@ int wxChoice::FindString(std::string_view s, bool bCase) const
 
 void wxChoice::SetString(unsigned int n, const std::string& s)
 {
-    wxCHECK_RET( IsValid(n), wxT("invalid item index in wxChoice::SetString") );
+    wxCHECK_RET( IsValid(n), "invalid item index in wxChoice::SetString" );
 
     // we have to delete and add back the string as there is no way to change a
     // string in place
@@ -345,7 +345,7 @@ std::string wxChoice::GetString(unsigned int n) const
                 reinterpret_cast<LPARAM>(&str[0])
                ) == CB_ERR )
         {
-            wxLogLastError(wxT("SendMessage(CB_GETLBTEXT)"));
+            wxLogLastError("SendMessage(CB_GETLBTEXT)");
         }
     }
 
@@ -361,7 +361,7 @@ void wxChoice::DoSetItemClientData(unsigned int n, void* clientData)
     if ( ::SendMessageW(GetHwnd(), CB_SETITEMDATA,
                        n, (LPARAM)clientData) == CB_ERR )
     {
-        wxLogLastError(wxT("CB_SETITEMDATA"));
+        wxLogLastError("CB_SETITEMDATA");
     }
 }
 
@@ -379,7 +379,7 @@ void* wxChoice::DoGetItemClientData(unsigned int n) const
     // of CB_ERR (-1).
     if ( rc == CB_ERR && GetLastError() != ERROR_SUCCESS )
     {
-        wxLogLastError(wxT("CB_GETITEMDATA"));
+        wxLogLastError("CB_GETITEMDATA");
 
         // unfortunately, there is no way to return an error code to the user
         rc = (LPARAM) NULL;
@@ -596,7 +596,7 @@ wxSize wxChoice::DoGetSizeFromTextSize(int xlen, int ylen) const
 void wxChoice::MSWDoPopupOrDismiss(bool show)
 {
     wxASSERT_MSG( !HasFlag(wxCB_SIMPLE),
-                  wxT("can't popup/dismiss the list for simple combo box") );
+                  "can't popup/dismiss the list for simple combo box" );
 
     // we *must* set focus to the combobox before showing or hiding the drop
     // down as without this we get WM_LBUTTONDOWN messages with invalid HWND

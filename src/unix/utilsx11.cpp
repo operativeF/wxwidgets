@@ -495,8 +495,8 @@ wxX11FullScreenMethod wxGetFullScreenMethodX11(WXDisplay* display,
     wxMAKE_ATOM(_NET_WM_STATE_FULLSCREEN, disp);
     if (wxQueryWMspecSupport(disp, root, _NET_WM_STATE_FULLSCREEN))
     {
-        wxLogTrace(wxT("fullscreen"),
-                   wxT("detected _NET_WM_STATE_FULLSCREEN support"));
+        wxLogTrace("fullscreen",
+                   "detected _NET_WM_STATE_FULLSCREEN support");
         return wxX11_FS_WMSPEC;
     }
 
@@ -504,12 +504,12 @@ wxX11FullScreenMethod wxGetFullScreenMethodX11(WXDisplay* display,
     // kwin doesn't understand any other method:
     if (wxKwinRunning(disp, root))
     {
-        wxLogTrace(wxT("fullscreen"), wxT("detected kwin"));
+        wxLogTrace("fullscreen"), wxT("detected kwin");
         return wxX11_FS_KDE;
     }
 
     // finally, fall back to ICCCM heuristic method:
-    wxLogTrace(wxT("fullscreen"), wxT("unknown WM, using _WIN_LAYER"));
+    wxLogTrace("fullscreen"), wxT("unknown WM, using _WIN_LAYER");
     return wxX11_FS_GENERIC;
 }
 
@@ -2551,7 +2551,7 @@ int wxUnicodeCharXToWX(WXKeySym keySym)
 static bool wxGetKeyStateX11(wxKeyCode key)
 {
     wxASSERT_MSG(key != WXK_LBUTTON && key != WXK_RBUTTON && key !=
-        WXK_MBUTTON, wxT("can't use wxGetKeyState() for mouse buttons"));
+        WXK_MBUTTON, "can't use wxGetKeyState() for mouse buttons");
 
     Display *pDisplay = (Display*) wxGetDisplay();
 
@@ -2567,7 +2567,7 @@ static bool wxGetKeyStateX11(wxKeyCode key)
     if ( IsModifierKey(iKey) )  // If iKey is a modifier key, use a different method
     {
         XModifierKeymap *map = XGetModifierMapping(pDisplay);
-        wxCHECK_MSG( map, false, wxT("failed to get X11 modifiers map") );
+        wxCHECK_MSG( map, false, "failed to get X11 modifiers map" );
 
         for (int i = 0; i < 8; ++i)
         {
@@ -2627,7 +2627,7 @@ static bool wxGetKeyStateGTK(wxKeyCode key)
             break;
 
         default:
-            wxFAIL_MSG(wxS("Unsupported key, only modifiers can be used"));
+            wxFAIL_MSG("Unsupported key, only modifiers can be used");
             return false;
     }
     return (state & mask) != 0;
@@ -2730,13 +2730,13 @@ wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
 
     // GNOME and KDE desktops have some applications which should be always installed
     // together with their main parts, which give us the
-    if (desktop == wxT("GNOME"))
+    if (desktop == "GNOME")
     {
         wxArrayString errors;
         wxArrayString output;
 
         // gconf will tell us the path of the application to use as browser
-        long res = wxExecute( wxT("gconftool-2 --get /desktop/gnome/applications/browser/exec"),
+        long res = wxExecute( "gconftool-2 --get /desktop/gnome/applications/browser/exec",
                               output, errors, wxEXEC_NODISABLE );
         if (res >= 0 && errors.GetCount() == 0)
         {
@@ -2745,7 +2745,7 @@ wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                 return true;
         }
     }
-    else if (desktop == wxT("KDE"))
+    else if (desktop == "KDE")
     {
         // kfmclient directly opens the given URL
         argv[2] = argv[1];

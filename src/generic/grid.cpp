@@ -476,7 +476,7 @@ void wxGridCellAttr::SetSize(int num_rows, int num_cols)
     wxASSERT_MSG( (!((num_rows > 0) && (num_cols <= 0)) ||
                   !((num_rows <= 0) && (num_cols > 0)) ||
                   !((num_rows == 0) && (num_cols == 0))),
-                  wxT("wxGridCellAttr::SetSize only takes two positive values or negative/zero values"));
+                  "wxGridCellAttr::SetSize only takes two positive values or negative/zero values");
 
     m_sizeRows = num_rows;
     m_sizeCols = num_cols;
@@ -494,7 +494,7 @@ const wxColour& wxGridCellAttr::GetTextColour() const
     }
     else
     {
-        wxFAIL_MSG(wxT("Missing default cell attribute"));
+        wxFAIL_MSG("Missing default cell attribute");
         return wxNullColour;
     }
 }
@@ -511,7 +511,7 @@ const wxColour& wxGridCellAttr::GetBackgroundColour() const
     }
     else
     {
-        wxFAIL_MSG(wxT("Missing default cell attribute"));
+        wxFAIL_MSG("Missing default cell attribute");
         return wxNullColour;
     }
 }
@@ -528,7 +528,7 @@ const wxFont& wxGridCellAttr::GetFont() const
     }
     else
     {
-        wxFAIL_MSG(wxT("Missing default cell attribute"));
+        wxFAIL_MSG("Missing default cell attribute");
         return wxNullFont;
     }
 }
@@ -548,7 +548,7 @@ void wxGridCellAttr::GetAlignment(int *hAlign, int *vAlign) const
     }
     else
     {
-        wxFAIL_MSG(wxT("Missing default cell attribute"));
+        wxFAIL_MSG("Missing default cell attribute");
     }
 }
 
@@ -610,7 +610,7 @@ wxGridFitMode wxGridCellAttr::GetFitMode() const
     }
     else
     {
-        wxFAIL_MSG(wxT("Missing default cell attribute"));
+        wxFAIL_MSG("Missing default cell attribute");
         return {};
     }
 }
@@ -675,7 +675,7 @@ wxGridCellRenderer* wxGridCellAttr::GetRenderer(const wxGrid* grid, int row, int
     }
 
     // we're supposed to always find something
-    wxASSERT_MSG(renderer, wxT("Missing default cell renderer"));
+    wxASSERT_MSG(renderer, "Missing default cell renderer");
 
     return renderer;
 }
@@ -719,7 +719,7 @@ wxGridCellEditor* wxGridCellAttr::GetEditor(const wxGrid* grid, int row, int col
     }
 
     // we're supposed to always find something
-    wxASSERT_MSG(editor, wxT("Missing default cell editor"));
+    wxASSERT_MSG(editor, "Missing default cell editor");
 
     return editor;
 }
@@ -1552,14 +1552,14 @@ void wxGridTableBase::SetColAttr(wxGridCellAttr *attr, int col)
 bool wxGridTableBase::InsertRows( size_t WXUNUSED(pos),
                                   size_t WXUNUSED(numRows) )
 {
-    wxFAIL_MSG( wxT("Called grid table class function InsertRows\nbut your derived table class does not override this function") );
+    wxFAIL_MSG( "Called grid table class function InsertRows\nbut your derived table class does not override this function" );
 
     return false;
 }
 
 bool wxGridTableBase::AppendRows( size_t WXUNUSED(numRows) )
 {
-    wxFAIL_MSG( wxT("Called grid table class function AppendRows\nbut your derived table class does not override this function"));
+    wxFAIL_MSG( "Called grid table class function AppendRows\nbut your derived table class does not override this function");
 
     return false;
 }
@@ -1567,7 +1567,7 @@ bool wxGridTableBase::AppendRows( size_t WXUNUSED(numRows) )
 bool wxGridTableBase::DeleteRows( size_t WXUNUSED(pos),
                                   size_t WXUNUSED(numRows) )
 {
-    wxFAIL_MSG( wxT("Called grid table class function DeleteRows\nbut your derived table class does not override this function"));
+    wxFAIL_MSG( "Called grid table class function DeleteRows\nbut your derived table class does not override this function");
 
     return false;
 }
@@ -1575,14 +1575,14 @@ bool wxGridTableBase::DeleteRows( size_t WXUNUSED(pos),
 bool wxGridTableBase::InsertCols( size_t WXUNUSED(pos),
                                   size_t WXUNUSED(numCols) )
 {
-    wxFAIL_MSG( wxT("Called grid table class function InsertCols\nbut your derived table class does not override this function"));
+    wxFAIL_MSG( "Called grid table class function InsertCols\nbut your derived table class does not override this function");
 
     return false;
 }
 
 bool wxGridTableBase::AppendCols( size_t WXUNUSED(numCols) )
 {
-    wxFAIL_MSG(wxT("Called grid table class function AppendCols\nbut your derived table class does not override this function"));
+    wxFAIL_MSG("Called grid table class function AppendCols\nbut your derived table class does not override this function");
 
     return false;
 }
@@ -1590,7 +1590,7 @@ bool wxGridTableBase::AppendCols( size_t WXUNUSED(numCols) )
 bool wxGridTableBase::DeleteCols( size_t WXUNUSED(pos),
                                   size_t WXUNUSED(numCols) )
 {
-    wxFAIL_MSG( wxT("Called grid table class function DeleteCols\nbut your derived table class does not override this function"));
+    wxFAIL_MSG( "Called grid table class function DeleteCols\nbut your derived table class does not override this function");
 
     return false;
 }
@@ -1740,7 +1740,7 @@ void wxGridStringTable::SetValue( int row, int col, const std::string& value )
 {
     wxCHECK_RET( (row >= 0 && row < GetNumberRows()) &&
                  (col >= 0 && col < GetNumberCols()),
-                 wxT("invalid row or column index in wxGridStringTable") );
+                 "invalid row or column index in wxGridStringTable" );
 
     m_data[row][col] = value;
 }
@@ -2767,7 +2767,7 @@ bool wxGrid::CreateGrid( int numRows, int numCols,
 {
     wxCHECK_MSG( !m_created,
                  false,
-                 wxT("wxGrid::CreateGrid or wxGrid::SetTable called more than once") );
+                 "wxGrid::CreateGrid or wxGrid::SetTable called more than once" );
 
     return SetTable(new wxGridStringTable(numRows, numCols), true, selmode);
 }
@@ -2775,7 +2775,7 @@ bool wxGrid::CreateGrid( int numRows, int numCols,
 void wxGrid::SetSelectionMode(wxGridSelectionModes selmode)
 {
     wxCHECK_RET( m_created,
-                 wxT("Called wxGrid::SetSelectionMode() before calling CreateGrid()") );
+                 "Called wxGrid::SetSelectionMode() before calling CreateGrid()" );
 
     m_selection->SetSelectionMode( selmode );
 }
@@ -2783,7 +2783,7 @@ void wxGrid::SetSelectionMode(wxGridSelectionModes selmode)
 wxGrid::wxGridSelectionModes wxGrid::GetSelectionMode() const
 {
     wxCHECK_MSG( m_created, wxGridSelectCells,
-                 wxT("Called wxGrid::GetSelectionMode() before calling CreateGrid()") );
+                 "Called wxGrid::GetSelectionMode() before calling CreateGrid()" );
 
     return m_selection->GetSelectionMode();
 }
@@ -2859,8 +2859,8 @@ wxGrid::SetTable(wxGridTableBase *table,
 
 void wxGrid::AssignTable(wxGridTableBase *table, wxGridSelectionModes selmode)
 {
-    wxCHECK_RET( table, wxS("Table pointer must be valid") );
-    wxCHECK_RET( !m_created, wxS("wxGrid already has a table") );
+    wxCHECK_RET( table, "Table pointer must be valid" );
+    wxCHECK_RET( !m_created, "wxGrid already has a table" );
 
     SetTable(table, true /* take ownership */, selmode);
 }
@@ -4360,21 +4360,21 @@ void wxGrid::ChangeCursorMode(CursorMode mode,
                               bool captureMouse)
 {
 #if wxUSE_LOG_TRACE
-    static const wxChar *const cursorModes[] =
+    static const wxChar *const cursorModes[] = // FIXME: Use narrow strings.
     {
-        wxT("SELECT_CELL"),
-        wxT("RESIZE_ROW"),
-        wxT("RESIZE_COL"),
-        wxT("SELECT_ROW"),
-        wxT("SELECT_COL"),
-        wxT("MOVE_COL"),
+        L"SELECT_CELL",
+        L"RESIZE_ROW",
+        L"RESIZE_COL",
+        L"SELECT_ROW",
+        L"SELECT_COL",
+        L"MOVE_COL",
     };
 
-    wxLogTrace(wxT("grid"),
-               wxT("wxGrid cursor mode (mouse capture for %s): %s -> %s"),
-               win == m_colLabelWin ? wxT("colLabelWin")
-                                    : win ? wxT("rowLabelWin")
-                                          : wxT("gridWin"),
+    wxLogTrace("grid",
+               "wxGrid cursor mode (mouse capture for %s): %s -> %s",
+               win == m_colLabelWin ? "colLabelWin"
+                                    : win ? "rowLabelWin"
+                                          : "gridWin",
                cursorModes[static_cast<int>(m_cursorMode)], cursorModes[static_cast<int>(mode)]);
 #endif // wxUSE_LOG_TRACE
 
@@ -7126,7 +7126,7 @@ void wxGrid::EnableCellEditControl( bool enable )
         if ( enable )
         {
             // this should be checked by the caller!
-            wxCHECK_RET( CanEnableCellControl(), wxT("can't enable editing for this cell!") );
+            wxCHECK_RET( CanEnableCellControl(), "can't enable editing for this cell!" );
 
             DoEnableCellEditControl(wxGridActivationSource::FromProgram());
         }
@@ -8915,7 +8915,7 @@ int wxGrid::GetDefaultRowSize() const
 
 int wxGrid::GetRowSize( int row ) const
 {
-    wxCHECK_MSG( row >= 0 && row < m_numRows, 0, wxT("invalid row index") );
+    wxCHECK_MSG( row >= 0 && row < m_numRows, 0, "invalid row index" );
 
     return GetRowHeight(row);
 }
@@ -8927,7 +8927,7 @@ int wxGrid::GetDefaultColSize() const
 
 int wxGrid::GetColSize( int col ) const
 {
-    wxCHECK_MSG( col >= 0 && col < m_numCols, 0, wxT("invalid column index") );
+    wxCHECK_MSG( col >= 0 && col < m_numCols, 0, "invalid column index" );
 
     return GetColWidth(col);
 }
@@ -9185,8 +9185,8 @@ wxGridCellAttr *wxGrid::GetOrCreateCellAttr(int row, int col) const
     wxGridCellAttr *attr = nullptr;
     const bool canHave = CanHaveAttributes();
 
-    wxCHECK_MSG( canHave, attr, wxT("Cell attributes not allowed"));
-    wxCHECK_MSG( m_table, attr, wxT("must have a table") );
+    wxCHECK_MSG( canHave, attr, "Cell attributes not allowed");
+    wxCHECK_MSG( m_table, attr, "must have a table" );
 
     attr = m_table->GetAttr(row, col, wxGridCellAttr::Cell);
     if ( !attr )
@@ -9348,9 +9348,9 @@ void wxGrid::SetCellSize( int row, int col, int num_rows, int num_cols )
         // handle all the possibilies, do it by hand by getting the CellAttr.
         // You can only set the size of a cell to 1,1 or greater with this fn
         wxASSERT_MSG( !((cell_rows < 1) || (cell_cols < 1)),
-                      wxT("wxGrid::SetCellSize setting cell size that is already part of another cell"));
+                      "wxGrid::SetCellSize setting cell size that is already part of another cell");
         wxASSERT_MSG( !((num_rows < 1) || (num_cols < 1)),
-                      wxT("wxGrid::SetCellSize setting cell size to < 1"));
+                      "wxGrid::SetCellSize setting cell size to < 1");
 
         // if this was already a multicell then "turn off" the other cells first
         if ((cell_rows > 1) || (cell_cols > 1))
@@ -9537,7 +9537,7 @@ int UpdateRowOrColSize(int& sizeCurrent, int sizeNew)
     if ( sizeNew < 0 )
     {
         // We're showing back a previously hidden row/column.
-        wxASSERT_MSG( sizeNew == -1, wxS("New size must be positive or -1.") );
+        wxASSERT_MSG( sizeNew == -1, "New size must be positive or -1." );
 
         // If it's already visible, simply do nothing.
         if ( sizeCurrent >= 0 )
@@ -9602,7 +9602,7 @@ void wxGrid::SetRowSize( int row, int height )
 
 void wxGrid::DoSetRowSize( int row, int height )
 {
-    wxCHECK_RET( row >= 0 && row < m_numRows, wxT("invalid row index") );
+    wxCHECK_RET( row >= 0 && row < m_numRows, "invalid row index" );
 
     if ( m_rowHeights.empty() )
     {
@@ -9781,7 +9781,7 @@ void wxGrid::SetColSize( int col, int width )
 
 void wxGrid::DoSetColSize( int col, int width )
 {
-    wxCHECK_RET( col >= 0 && col < m_numCols, wxT("invalid column index") );
+    wxCHECK_RET( col >= 0 && col < m_numCols, "invalid column index" );
 
     if ( m_colWidths.empty() )
     {
@@ -10466,7 +10466,7 @@ void wxGrid::SelectAll()
 
 void wxGrid::DeselectRow(int row)
 {
-    wxCHECK_RET( row >= 0 && row < m_numRows, wxT("invalid row index") );
+    wxCHECK_RET( row >= 0 && row < m_numRows, "invalid row index" );
 
     if ( m_selection )
         m_selection->DeselectBlock(wxGridBlockCoords(row, 0, row, m_numCols - 1));
@@ -10474,7 +10474,7 @@ void wxGrid::DeselectRow(int row)
 
 void wxGrid::DeselectCol(int col)
 {
-    wxCHECK_RET( col >= 0 && col < m_numCols, wxT("invalid column index") );
+    wxCHECK_RET( col >= 0 && col < m_numCols, "invalid column index" );
 
     if ( m_selection )
         m_selection->DeselectBlock(wxGridBlockCoords(0, col, m_numRows - 1, col));
@@ -10484,7 +10484,7 @@ void wxGrid::DeselectCell( int row, int col )
 {
     wxCHECK_RET( row >= 0 && row < m_numRows &&
                  col >= 0 && col < m_numCols,
-                 wxT("invalid cell coords") );
+                 "invalid cell coords" );
 
     if ( m_selection )
         m_selection->DeselectBlock(wxGridBlockCoords(row, col, row, col));

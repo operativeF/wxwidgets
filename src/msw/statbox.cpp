@@ -76,7 +76,7 @@ bool wxStaticBox::Create(wxWindow *parent,
     if ( !MSWCreateControl("BUTTON", label, pos, size) )
         return false;
 
-    if (!wxSystemOptions::IsFalse(wxT("msw.staticbox.optimized-paint")))
+    if (!wxSystemOptions::IsFalse("msw.staticbox.optimized-paint"))
     {
         Bind(wxEVT_PAINT, &wxStaticBox::OnPaint, this);
 
@@ -96,7 +96,7 @@ bool wxStaticBox::Create(wxWindow* parent,
                          unsigned int style,
                          const std::string& name)
 {
-    wxCHECK_MSG( labelWin, false, wxS("Label window can't be null") );
+    wxCHECK_MSG( labelWin, false, "Label window can't be null" );
 
     if ( !Create(parent, id, "", pos, size, style, name) )
         return false;
@@ -139,7 +139,7 @@ DWORD wxStaticBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
         // navigation ourselves, but this could change in the future).
         *exstyle |= WS_EX_CONTROLPARENT;
 
-        if (wxSystemOptions::IsFalse(wxT("msw.staticbox.optimized-paint")))
+        if (wxSystemOptions::IsFalse("msw.staticbox.optimized-paint"))
             *exstyle |= WS_EX_TRANSPARENT;
     }
 
@@ -236,7 +236,7 @@ WXLRESULT wxStaticBox::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPar
 
         static int s_useHTClient = -1;
         if (s_useHTClient == -1)
-            s_useHTClient = wxSystemOptions::GetOptionInt(wxT("msw.staticbox.htclient"));
+            s_useHTClient = wxSystemOptions::GetOptionInt("msw.staticbox.htclient");
         if (s_useHTClient == 1)
         {
             int xPos = GET_X_LPARAM(lParam);
@@ -313,7 +313,7 @@ SubtractRectFromRgn(HRGN hrgn, int left, int top, int right, int bottom)
 
     if ( !hrgnRect )
     {
-        wxLogLastError(wxT("CreateRectRgn()"));
+        wxLogLastError("CreateRectRgn()");
         return;
     }
 
@@ -397,7 +397,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
         wxMSWWinStyleUpdater updateStyle(child);
         wxString str(wxGetWindowClass(child));
         str.UpperCase();
-        if ( str == wxT("BUTTON") && updateStyle.IsOn(BS_GROUPBOX) )
+        if ( str == "BUTTON" && updateStyle.IsOn(BS_GROUPBOX) )
         {
             if ( child == GetHwnd() )
                 foundThis = true;

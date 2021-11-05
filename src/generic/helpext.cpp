@@ -82,7 +82,7 @@ void wxExtHelpController::SetViewer(const std::string& viewer, unsigned int flag
 bool wxExtHelpController::DisplayHelp(const std::string &relativeURL)
 {
     // construct hte URL to open -- it's just a file
-    wxString url(wxT("file://") + m_helpDir);
+    wxString url("file://" + m_helpDir);
     url << wxFILE_SEP_PATH << relativeURL;
 
     // use the explicit browser program if specified
@@ -92,7 +92,7 @@ bool wxExtHelpController::DisplayHelp(const std::string &relativeURL)
         {
             wxString command;
             command << m_BrowserName
-                    << wxT(" -remote openURL(") << url << wxT(')');
+                    << " -remote openURL(" << url << wxT(')');
             if ( wxExecute(command, wxEXEC_SYNC) != -1 )
                 return true;
         }

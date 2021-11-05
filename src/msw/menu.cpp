@@ -61,7 +61,7 @@ void SetDefaultMenuItem(HMENU hmenu, UINT id)
 
     if ( !::SetMenuItemInfoW(hmenu, id, FALSE, &mii) )
     {
-        wxLogLastError(wxT("SetMenuItemInfo"));
+        wxLogLastError("SetMenuItemInfo");
     }
 }
 
@@ -81,7 +81,7 @@ void SetOwnerDrawnMenuItem(HMENU hmenu,
 
     if ( !::SetMenuItemInfoW(hmenu, id, byPositon, &mii) )
     {
-        wxLogLastError(wxT("SetMenuItemInfo"));
+        wxLogLastError("SetMenuItemInfo");
     }
 }
 
@@ -136,7 +136,7 @@ wxMenu::~wxMenu()
     {
         if ( !::DestroyMenu(GetHmenu()) )
         {
-            wxLogLastError(wxT("DestroyMenu"));
+            wxLogLastError("DestroyMenu");
         }
     }
 }
@@ -282,7 +282,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
     UINT_PTR id;
     wxMenu *submenu = pItem->GetSubMenu();
     if ( submenu != nullptr ) {
-        wxASSERT_MSG( submenu->GetHMenu(), wxT("invalid submenu") );
+        wxASSERT_MSG( submenu->GetHMenu(), "invalid submenu" );
 
         submenu->SetParent(this);
 
@@ -325,7 +325,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
         if ( m_radioData->UpdateOnInsertNonRadio(pos) )
         {
             // One of the existing groups has been split into two subgroups.
-            wxFAIL_MSG(wxS("Inserting non-radio item inside a radio group?"));
+            wxFAIL_MSG("Inserting non-radio item inside a radio group?");
         }
     }
 
@@ -416,7 +416,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
                 ok = ::InsertMenuItemW(GetHmenu(), pos, TRUE /* by pos */, &mii);
                 if ( !ok )
                 {
-                    wxLogLastError(wxT("InsertMenuItem()"));
+                    wxLogLastError("InsertMenuItem()");
 #if wxUSE_OWNER_DRAWN
             // In case of failure switch new item to the owner-drawn mode.
             makeItemOwnerDrawn = true;
@@ -433,7 +433,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
                     mi.dwStyle = MNS_CHECKORBMP;
                     if ( !::SetMenuInfo(GetHmenu(), &mi) )
                     {
-                        wxLogLastError(wxT("SetMenuInfo(MNS_NOCHECK)"));
+                        wxLogLastError("SetMenuInfo(MNS_NOCHECK)");
                     }
                 }
         }
@@ -515,7 +515,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
     {
         if ( !::InsertMenuW(GetHmenu(), pos, flags | MF_BYPOSITION, id, pData) )
         {
-            wxLogLastError(wxT("InsertMenu[Item]()"));
+            wxLogLastError("InsertMenu[Item]()");
 
             return false;
         }
@@ -587,7 +587,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
         if ( m_radioData->UpdateOnRemoveItem(pos) )
         {
             wxASSERT_MSG( item->IsRadio(),
-                          wxT("Removing non radio button from radio group?") );
+                          "Removing non radio button from radio group?" );
         }
         //else: item being removed is not in a radio group
     }
@@ -595,7 +595,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
     // remove the item from the menu
     if ( !::RemoveMenu(GetHmenu(), gsl::narrow_cast<UINT>(pos), MF_BYPOSITION) )
     {
-        wxLogLastError(wxT("RemoveMenu"));
+        wxLogLastError("RemoveMenu");
     }
 
     if ( IsAttached() && GetMenuBar()->IsAttached() )
@@ -637,7 +637,7 @@ std::unique_ptr<wxAcceleratorTable> wxMenu::CreateAccelTable() const
 
 void wxMenu::CalculateMaxAccelWidth()
 {
-    wxASSERT_MSG( m_maxAccelWidth == -1, wxT("it's really needed?") );
+    wxASSERT_MSG( m_maxAccelWidth == -1, "it's really needed?" );
 
     wxMenuItemList::compatibility_iterator node = GetMenuItems().GetFirst();
     while (node)
@@ -676,7 +676,7 @@ void wxMenu::SetTitle(const std::string& label)
                                (UINT_PTR)idMenuTitle, boost::nowide::widen(m_title).c_str()) ||
                  !::InsertMenuW(hMenu, 1u, MF_BYPOSITION, (unsigned)-1, nullptr) )
             {
-                wxLogLastError(wxT("InsertMenu"));
+                wxLogLastError("InsertMenu");
             }
         }
     }
@@ -688,7 +688,7 @@ void wxMenu::SetTitle(const std::string& label)
             if ( !::RemoveMenu(hMenu, 0, MF_BYPOSITION) ||
                  !::RemoveMenu(hMenu, 0, MF_BYPOSITION) )
             {
-                wxLogLastError(wxT("RemoveMenu"));
+                wxLogLastError("RemoveMenu");
             }
         }
         else
@@ -698,7 +698,7 @@ void wxMenu::SetTitle(const std::string& label)
                              MF_BYPOSITION | MF_STRING,
                              (UINT_PTR)idMenuTitle, boost::nowide::widen(m_title).c_str()) )
             {
-                wxLogLastError(wxT("ModifyMenu"));
+                wxLogLastError("ModifyMenu");
             }
         }
     }
@@ -830,7 +830,7 @@ void wxMenuBar::Refresh()
     if ( IsFrozen() )
         return;
 
-    wxCHECK_RET( IsAttached(), wxT("can't refresh unattached menubar") );
+    wxCHECK_RET( IsAttached(), "can't refresh unattached menubar" );
 
     DrawMenuBar(GetHwndOf(GetFrame()));
 }
@@ -844,7 +844,7 @@ WXHMENU wxMenuBar::Create()
 
     if ( !m_hMenu )
     {
-        wxLogLastError(wxT("CreateMenu"));
+        wxLogLastError("CreateMenu");
     }
     else
     {
@@ -856,7 +856,7 @@ WXHMENU wxMenuBar::Create()
                                (UINT_PTR)(*it)->GetHMenu(),
                                boost::nowide::widen((*it)->GetTitle()).c_str()) )
             {
-                wxLogLastError(wxT("AppendMenu"));
+                wxLogLastError("AppendMenu");
             }
         }
     }
@@ -896,8 +896,8 @@ int wxMenuBar::MSWPositionForWxMenu(wxMenu *menu, int wxpos)
 
 void wxMenuBar::EnableTop(size_t pos, bool enable)
 {
-    wxCHECK_RET( IsAttached(), wxT("doesn't work with unattached menubars") );
-    wxCHECK_RET( pos < GetMenuCount(), wxT("invalid menu index") );
+    wxCHECK_RET( IsAttached(), "doesn't work with unattached menubars" );
+    wxCHECK_RET( pos < GetMenuCount(), "invalid menu index" );
 
     int flag = enable ? MF_ENABLED : MF_GRAYED;
 
@@ -908,12 +908,12 @@ void wxMenuBar::EnableTop(size_t pos, bool enable)
 
 bool wxMenuBar::IsEnabledTop(size_t pos) const
 {
-    wxCHECK_MSG( pos < GetMenuCount(), false, wxS("invalid menu index") );
+    wxCHECK_MSG( pos < GetMenuCount(), false, "invalid menu index" );
     WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_STATE;
     if ( !::GetMenuItemInfoW(GetHmenu(), pos, TRUE, &mii) )
     {
-        wxLogLastError(wxS("GetMenuItemInfo(menubar)"));
+        wxLogLastError("GetMenuItemInfo(menubar)");
     }
 
     return !(mii.fState & MFS_GRAYED);
@@ -921,7 +921,7 @@ bool wxMenuBar::IsEnabledTop(size_t pos) const
 
 void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
 {
-    wxCHECK_RET( pos < GetMenuCount(), wxT("invalid menu index") );
+    wxCHECK_RET( pos < GetMenuCount(), "invalid menu index" );
 
     m_menus[pos]->wxMenuBase::SetTitle(label);
 
@@ -937,7 +937,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
     UINT flagsOld = ::GetMenuState((HMENU)m_hMenu, mswpos, MF_BYPOSITION);
     if ( flagsOld == 0xFFFFFFFF )
     {
-        wxLogLastError(wxT("GetMenuState"));
+        wxLogLastError("GetMenuState");
 
         return;
     }
@@ -956,7 +956,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
     if ( ::ModifyMenuW(GetHmenu(), mswpos, MF_BYPOSITION | MF_STRING | flagsOld,
                       id, boost::nowide::widen(label).c_str()) == (int)0xFFFFFFFF )
     {
-        wxLogLastError(wxT("ModifyMenu"));
+        wxLogLastError("ModifyMenu");
     }
 
     Refresh();
@@ -965,7 +965,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
 std::string wxMenuBar::GetMenuLabel(size_t pos) const
 {
     wxCHECK_MSG( pos < GetMenuCount(), "",
-                 wxT("invalid menu index in wxMenuBar::GetMenuLabel") );
+                 "invalid menu index in wxMenuBar::GetMenuLabel" );
 
     return m_menus[pos]->GetTitle();
 }
@@ -989,7 +989,7 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const std::string& title)
         // can't use ModifyMenu() because it deletes the submenu it replaces
         if ( !::RemoveMenu(GetHmenu(), (UINT)mswpos, MF_BYPOSITION) )
         {
-            wxLogLastError(wxT("RemoveMenu"));
+            wxLogLastError("RemoveMenu");
         }
 
         if ( !::InsertMenuW(GetHmenu(), (UINT)mswpos,
@@ -997,7 +997,7 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const std::string& title)
                            (UINT_PTR)GetHmenuOf(menu),
                            boost::nowide::widen(title).c_str()) )
         {
-            wxLogLastError(wxT("InsertMenu"));
+            wxLogLastError("InsertMenu");
         }
 
 #if wxUSE_ACCEL
@@ -1060,7 +1060,7 @@ bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const std::string& title)
                            (UINT_PTR)GetHmenuOf(menu),
                            boost::nowide::widen(title).c_str()) )
         {
-            wxLogLastError(wxT("InsertMenu"));
+            wxLogLastError("InsertMenu");
         }
 #if wxUSE_ACCEL
         if ( menu->HasAccels() )
@@ -1080,7 +1080,7 @@ bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const std::string& title)
 bool wxMenuBar::Append(wxMenu *menu, const std::string& title)
 {
     WXHMENU submenu = menu ? menu->GetHMenu() : nullptr;
-    wxCHECK_MSG( submenu, false, wxT("can't append invalid menu to menubar") );
+    wxCHECK_MSG( submenu, false, "can't append invalid menu to menubar" );
 
     if ( !wxMenuBarBase::Append(menu, title) )
         return false;
@@ -1094,7 +1094,7 @@ bool wxMenuBar::Append(wxMenu *menu, const std::string& title)
                            (UINT_PTR)submenu,
                            boost::nowide::widen(title).c_str()) )
         {
-            wxLogLastError(wxT("AppendMenu"));
+            wxLogLastError("AppendMenu");
         }
 
 #if wxUSE_ACCEL
@@ -1122,7 +1122,7 @@ wxMenu *wxMenuBar::Remove(size_t pos)
     {
         if ( !::RemoveMenu(GetHmenu(), (UINT)MSWPositionForWxMenu(menu,pos), MF_BYPOSITION) )
         {
-            wxLogLastError(wxT("RemoveMenu"));
+            wxLogLastError("RemoveMenu");
         }
 
 #if wxUSE_ACCEL

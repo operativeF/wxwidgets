@@ -488,7 +488,7 @@ std::string wxSpinCtrlGenericBase::GetTextValue() const
 
 void wxSpinCtrlGenericBase::SetValue(const wxString& text)
 {
-    wxCHECK_RET( m_textCtrl, wxT("invalid call to wxSpinCtrl::SetValue") );
+    wxCHECK_RET( m_textCtrl, "invalid call to wxSpinCtrl::SetValue" );
 
     double val;
     if ( DoTextToValue(text, &val) && InRange(val) )
@@ -506,7 +506,7 @@ void wxSpinCtrlGenericBase::SetValue(const wxString& text)
 
 bool wxSpinCtrlGenericBase::DoSetValue(double val, SendEvent sendEvent)
 {
-    wxCHECK_MSG( m_textCtrl, false, wxT("invalid call to wxSpinCtrl::SetValue") );
+    wxCHECK_MSG( m_textCtrl, false, "invalid call to wxSpinCtrl::SetValue" );
 
     if ( val < m_min )
         val = m_min;
@@ -597,7 +597,7 @@ void wxSpinCtrlGenericBase::SetSnapToTicks(bool snap_to_ticks)
 
 void wxSpinCtrlGenericBase::SetSelection(long from, long to)
 {
-    wxCHECK_RET( m_textCtrl, wxT("invalid call to wxSpinCtrl::SetSelection") );
+    wxCHECK_RET( m_textCtrl, "invalid call to wxSpinCtrl::SetSelection" );
 
     m_textCtrl->SetSelection(from, to);
 }
@@ -667,7 +667,7 @@ wxString wxSpinCtrl::DoValueToText(double val)
             return wxSpinCtrlImpl::FormatAsHex(static_cast<long>(val), GetMax());
 
         default:
-            wxFAIL_MSG( wxS("Unsupported spin control base") );
+            wxFAIL_MSG( "Unsupported spin control base" );
             [[fallthrough]];
 
         case 10:
@@ -731,7 +731,7 @@ void wxSpinCtrlDouble::SetDigits(unsigned digits)
 
     m_digits = digits;
 
-    m_format.Printf(wxT("%%0.%ulf"), digits);
+    m_format.Printf("%%0.%ulf", digits);
 
     ResetTextValidator();
     m_textCtrl->InvalidateBestSize();

@@ -485,7 +485,7 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
 
         if (flagofs == wxMAX_SVNPRINTF_FLAGBUFFER_LEN)
         {
-            wxLogDebug(wxT("Too many flags specified for a single conversion specifier!"));
+            wxLogDebug("Too many flags specified for a single conversion specifier!");
             return false;
         }
     }
@@ -501,7 +501,7 @@ void wxPrintfConvSpec<CharType>::ReplaceAsteriskWith(int width)
 
     // find the first * in our flag buffer
     char *pwidth = strchr(m_szFlags, '*');
-    wxCHECK_RET(pwidth, wxT("field width must be specified"));
+    wxCHECK_RET(pwidth, "field width must be specified");
 
     // save what follows the * (the +1 is to skip the asterisk itself!)
     strcpy(temp, pwidth+1);
@@ -689,7 +689,7 @@ int wxPrintfConvSpec<CharType>::Process(CharType *buf, size_t lenMax, wxPrintfAr
                 if ( !p->pad_str )
                 {
                     if ( m_nMaxWidth >= 6 )
-                        s = wxT("(null)");
+                        s = "(null)";
                 }
                 else if (m_type == wxPAT_PCHAR)
                     s.assign(static_cast<const char *>(p->pad_str));

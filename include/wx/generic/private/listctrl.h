@@ -187,7 +187,7 @@ public:
         void ExtendWidth(wxCoord w)
         {
             wxASSERT_MSG( m_rectAll.width <= w,
-                            wxT("width can only be increased") );
+                          "width can only be increased" );
 
             m_rectAll.width = w;
             m_rectLabel.x += (w - m_rectLabel.width) / 2;
@@ -273,7 +273,7 @@ public:
 
     bool IsHighlighted() const
     {
-        wxASSERT_MSG( !IsVirtual(), wxT("unexpected call to IsHighlighted") );
+        wxASSERT_MSG( !IsVirtual(), "unexpected call to IsHighlighted" );
 
         return m_highlighted;
     }
@@ -861,7 +861,7 @@ protected:
     // get the line data for the given index
     wxListLineData *GetLine(size_t n) const
     {
-        wxASSERT_MSG( n != (size_t)-1, wxT("invalid line index") );
+        wxASSERT_MSG( n != (size_t)-1, "invalid line index" );
 
         if ( IsVirtual() )
         {

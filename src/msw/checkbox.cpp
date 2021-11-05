@@ -138,7 +138,7 @@ void wxCheckBox::Command(wxCommandEvent& event)
     auto state = static_cast<wxCheckBoxState>(event.GetInt());
     wxCHECK_RET( (state == wxCheckBoxState::Unchecked) || (state == wxCheckBoxState::Checked)
         || (state == wxCheckBoxState::Indeterminate),
-        wxT("event.GetInt() returned an invalid checkbox state") );
+        "event.GetInt() returned an invalid checkbox state" );
 
     Set3StateValue(state);
     ProcessCommand(event);
@@ -222,7 +222,7 @@ unsigned int wxCheckBox::MSWGetButtonCheckedFlag() const
             return wxCONTROL_NONE;
     }
 
-    wxFAIL_MSG( wxT("unexpected Get3StateValue() return value") );
+    wxFAIL_MSG( "unexpected Get3StateValue() return value" );
 
     return 0;
 }

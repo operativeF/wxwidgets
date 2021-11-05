@@ -157,7 +157,7 @@ public:
     void SetHasDropDown(bool b)
     {
         wxCHECK_RET( !b || m_kind == wxITEM_NORMAL,
-                     wxS("Only normal tools can have drop downs") );
+                     "Only normal tools can have drop downs" );
 
         m_dropDown = b;
     }

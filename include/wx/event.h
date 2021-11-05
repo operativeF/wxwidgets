@@ -1178,7 +1178,7 @@ public:
           m_propagatedFromOld(event.m_propagatedFrom)
     {
         wxASSERT_MSG( m_event.m_propagationLevel > 0,
-                        wxT("shouldn't be used unless ShouldPropagate()!") );
+                      "shouldn't be used unless ShouldPropagate()!" );
 
         m_event.m_propagationLevel--;
         m_event.m_propagatedFrom = handler;
@@ -2655,7 +2655,7 @@ public:
         // m_loggingOff flag is only used by wxEVT_[QUERY_]END_SESSION, it
         // doesn't make sense for wxEVT_CLOSE_WINDOW
         wxASSERT_MSG( m_eventType != wxEVT_CLOSE_WINDOW,
-                      wxT("this flag is for end session events only") );
+                      "this flag is for end session events only" );
 
         return m_loggingOff;
     }
@@ -2664,7 +2664,7 @@ public:
     {
         // GetVeto() will return false anyhow...
         wxCHECK_RET( m_canVeto,
-                     wxT("call to Veto() ignored (can't veto this event)") );
+                     "call to Veto() ignored (can't veto this event)" );
 
         m_veto = veto;
     }

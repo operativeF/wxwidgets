@@ -26,7 +26,7 @@
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")
 
-const wxChar *wxTRACE_HTML_DEBUG = wxT("htmldebug");
+const char wxTRACE_HTML_DEBUG[] = "htmldebug";
 
 //-----------------------------------------------------------------------------
 // wxHtmlParser helpers
@@ -314,7 +314,7 @@ void wxHtmlParser::AddTag(const wxHtmlTag& tag)
 void wxHtmlParser::AddTagHandler(wxHtmlTagHandler *handler)
 {
     wxString s(handler->GetSupportedTags());
-    wxStringTokenizer tokenizer(s, wxT(", "));
+    wxStringTokenizer tokenizer(s, ", ");
 
     while (tokenizer.HasMoreTokens())
         m_HandlersHash[tokenizer.GetNextToken()] = handler;
@@ -326,7 +326,7 @@ void wxHtmlParser::AddTagHandler(wxHtmlTagHandler *handler)
 
 void wxHtmlParser::PushTagHandler(wxHtmlTagHandler *handler, const wxString& tags)
 {
-    wxStringTokenizer tokenizer(tags, wxT(", "));
+    wxStringTokenizer tokenizer(tags, ", ");
     wxString key;
 
     m_HandlersStack.push_back(new wxHtmlTagHandlersHash(m_HandlersHash));
@@ -503,18 +503,18 @@ wxChar wxHtmlEntitiesParser::GetEntityChar(const wxString& entity) const
         // NB: parsed value is a number, so it's OK to use wx_str(), internal
         //     representation is the same for numbers
         const wxStringCharType *ent_s = entity.wx_str();
-        const wxStringCharType *format;
+        wxString format;
 
         if (ent_s[1] == wxS('x') || ent_s[1] == wxS('X'))
         {
-            format = wxS("%x");
+            format = "%x";
             ent_s++;
         }
         else
-            format = wxS("%u");
+            format = "%u";
         ent_s++;
 
-        if (wxSscanf(ent_s, format, &code) != 1)
+        if (wxSscanf(ent_s, format.c_str(), &code) != 1)
             code = 0;
     }
     else
@@ -838,7 +838,7 @@ public:
     wxMetaTagHandler(const wxMetaTagHandler&) = delete;
 	wxMetaTagHandler& operator=(const wxMetaTagHandler&) = delete;
 
-    wxString GetSupportedTags() override { return wxT("META,BODY"); }
+    wxString GetSupportedTags() override { return "META,BODY"; }
     bool HandleTag(const wxHtmlTag& tag) override;
 
 private:
@@ -847,7 +847,7 @@ private:
 
 bool wxMetaTagHandler::HandleTag(const wxHtmlTag& tag)
 {
-    if (tag.GetName() == wxT("BODY"))
+    if (tag.GetName() == "BODY")
     {
         m_Parser->StopParsing();
         return false;
@@ -855,12 +855,12 @@ bool wxMetaTagHandler::HandleTag(const wxHtmlTag& tag)
 
     wxString httpEquiv,
              content;
-    if (tag.GetParamAsString(wxT("HTTP-EQUIV"), &httpEquiv) &&
-        httpEquiv.IsSameAs(wxT("Content-Type"), false) &&
-        tag.GetParamAsString(wxT("CONTENT"), &content))
+    if (tag.GetParamAsString("HTTP-EQUIV", &httpEquiv) &&
+        httpEquiv.IsSameAs("Content-Type", false) &&
+        tag.GetParamAsString("CONTENT", &content))
     {
         content.MakeLower();
-        if (content.Left(19) == wxT("text/html; charset="))
+        if (content.Left(19) == "text/html; charset=")
         {
             *m_retval = content.Mid(19);
             m_Parser->StopParsing();
@@ -889,7 +889,7 @@ bool
 wxHtmlParser::SkipCommentTag(wxString::const_iterator& start,
                              wxString::const_iterator end)
 {
-    wxASSERT_MSG( *start == '<', wxT("should be called on the tag start") );
+    wxASSERT_MSG( *start == '<', "should be called on the tag start" );
 
     wxString::const_iterator p = start;
 

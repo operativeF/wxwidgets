@@ -114,7 +114,7 @@ wxDEFINE_EVENT(wxEVT_SOCKET, wxSocketEvent);
 // discard buffer
 constexpr int MAX_DISCARD_SIZE = (10 * 1024);
 
-constexpr wxChar wxTRACE_Socket[] = wxT("wxSocket");
+constexpr wxChar wxTRACE_Socket[] = "wxSocket";
 
 // --------------------------------------------------------------------------
 // wxWin macros
@@ -1813,14 +1813,14 @@ wxSocketServer::wxSocketServer(const wxSockAddress& addr,
                                wxSocketFlags flags)
               : wxSocketBase(flags, wxSOCKET_SERVER)
 {
-    wxLogTrace( wxTRACE_Socket, wxT("Opening wxSocketServer") );
+    wxLogTrace( wxTRACE_Socket, "Opening wxSocketServer" );
 
     wxSocketManager * const manager = wxSocketManager::Get();
     m_impl = manager ? manager->CreateSocket(*this) : nullptr;
 
     if (!m_impl)
     {
-        wxLogTrace( wxTRACE_Socket, wxT("*** Failed to create m_impl") );
+        wxLogTrace( wxTRACE_Socket, "*** Failed to create m_impl" );
         return;
     }
 
@@ -1841,14 +1841,14 @@ wxSocketServer::wxSocketServer(const wxSockAddress& addr,
     {
         m_impl.reset();
 
-        wxLogTrace( wxTRACE_Socket, wxT("*** CreateServer() failed") );
+        wxLogTrace( wxTRACE_Socket, "*** CreateServer() failed" );
         return;
     }
 
     // Notice that we need a cast as wxSOCKET_T is 64 bit under Win64 and that
     // the cast is safe because a wxSOCKET_T is a handle and so limited to 32
     // (or, actually, even 24) bit values anyhow.
-    wxLogTrace( wxTRACE_Socket, wxT("wxSocketServer on fd %u"),
+    wxLogTrace( wxTRACE_Socket, "wxSocketServer on fd %u",
                 gsl::narrow<unsigned>(m_impl->m_fd) );
 }
 
@@ -1915,7 +1915,7 @@ bool wxSocketServer::WaitForAccept(long seconds, long milliseconds)
 
 wxSOCKET_T wxSocketBase::GetSocket() const
 {
-    wxASSERT_MSG( m_impl, wxS("Socket not initialised") );
+    wxASSERT_MSG( m_impl, "Socket not initialised" );
 
     return m_impl->m_fd;
 }
@@ -1923,7 +1923,7 @@ wxSOCKET_T wxSocketBase::GetSocket() const
 
 bool wxSocketBase::GetOption(int level, int optname, void *optval, int *optlen)
 {
-    wxASSERT_MSG( m_impl, wxT("Socket not initialised") );
+    wxASSERT_MSG( m_impl, "Socket not initialised" );
 
     SOCKOPTLEN_T lenreal = *optlen;
     if ( getsockopt(m_impl->m_fd, level, optname,
@@ -1938,7 +1938,7 @@ bool wxSocketBase::GetOption(int level, int optname, void *optval, int *optlen)
 bool
 wxSocketBase::SetOption(int level, int optname, const void *optval, int optlen)
 {
-    wxASSERT_MSG( m_impl, wxT("Socket not initialised") );
+    wxASSERT_MSG( m_impl, "Socket not initialised" );
 
     return setsockopt(m_impl->m_fd, level, optname,
                       static_cast<const char *>(optval), optlen) == 0;
@@ -1968,8 +1968,8 @@ wxSocketClient::wxSocketClient(wxSocketFlags flags)
     // doing this as it can still work correctly if it only uses non-blocking
     // sockets once the event loop is running.
     wxASSERT_MSG( (flags & wxSOCKET_BLOCK) || wxIsMainThread(),
-                  wxS("Non-blocking sockets may only be created ")
-                  wxS("in the main thread") );
+                  "Non-blocking sockets may only be created "
+                  "in the main thread" );
 
     m_initialRecvBufferSize =
     m_initialSendBufferSize = -1;
@@ -2122,7 +2122,7 @@ wxDatagramSocket& wxDatagramSocket::SendTo( const wxSockAddress& addr,
                                             const void* buf,
                                             std::uint32_t nBytes )
 {
-    wxASSERT_MSG( m_impl, wxT("Socket not initialised") );
+    wxASSERT_MSG( m_impl, "Socket not initialised" );
 
     m_impl->SetPeer(addr.GetAddress());
     Write(buf, nBytes);

@@ -306,14 +306,14 @@ wxDebugReportDialog::wxDebugReportDialog(wxDebugReport& dbgrpt)
             ? _("A debug report has been generated in the directory\n")
             : _("The following debug report will be generated\n"))
         << wxT('\n')
-        << wxT("             \"") << debugDir << wxT("\"\n")
+        << "             \"") << debugDir << wxT("\"\n"
         << wxT('\n')
         << _("The report contains the files listed below. If any of these files contain private information,\nplease uncheck them and they will be removed from the report.\n")
         << wxT('\n')
         << _("If you wish to suppress this debug report completely, please choose the \"Cancel\" button,\nbut be warned that it may hinder improving the program, so if\nat all possible please do continue with the report generation.\n")
         << wxT('\n')
         << _("              Thank you and we're sorry for the inconvenience!\n")
-        << wxT("\n\n"); // just some white space to separate from other stuff
+        << "\n\n"; // just some white space to separate from other stuff
 
     const wxSizerFlags flagsFixed(SizerFlags(0));
     const wxSizerFlags flagsExpand(SizerFlags(1));
@@ -383,7 +383,7 @@ bool wxDebugReportDialog::TransferDataToWindow()
             desc;
         if ( m_dbgrpt.GetFile(n, &name, &desc) )
         {
-            m_checklst->Append(name + wxT(" (") + desc + wxT(')'));
+            m_checklst->Append(name + " (" + desc + wxT(')'));
 #if wxUSE_OWNER_DRAWN
             m_checklst->Check(n);
 #endif
@@ -414,7 +414,7 @@ bool wxDebugReportDialog::TransferDataFromWindow()
     if ( !notes.empty() )
     {
         // for now filename fixed, could make it configurable in the future...
-        m_dbgrpt.AddText(wxT("notes.txt"), notes, wxT("user notes"));
+        m_dbgrpt.AddText("notes.txt"), notes, wxT("user notes");
     }
 
     return true;
@@ -427,7 +427,7 @@ bool wxDebugReportDialog::TransferDataFromWindow()
 void wxDebugReportDialog::OnView(wxCommandEvent& )
 {
     const int sel = m_checklst->GetSelection();
-    wxCHECK_RET( sel != wxNOT_FOUND, wxT("invalid selection in OnView()") );
+    wxCHECK_RET( sel != wxNOT_FOUND, "invalid selection in OnView()" );
 
     wxFileName fn(m_dbgrpt.GetDirectory(), m_files[sel]);
     wxString str;
@@ -448,7 +448,7 @@ void wxDebugReportDialog::OnView(wxCommandEvent& )
 void wxDebugReportDialog::OnOpen(wxCommandEvent& )
 {
     const int sel = m_checklst->GetSelection();
-    wxCHECK_RET( sel != wxNOT_FOUND, wxT("invalid selection in OnOpen()") );
+    wxCHECK_RET( sel != wxNOT_FOUND, "invalid selection in OnOpen()" );
 
     wxFileName fn(m_dbgrpt.GetDirectory(), m_files[sel]);
 
@@ -485,7 +485,7 @@ void wxDebugReportDialog::OnOpen(wxCommandEvent& )
 #endif // wxUSE_MIMETYPE
                 {
                     // append the file name to the end
-                    command << cmd << wxT(" \"") << fn.GetFullPath() << wxT('"');
+                    command << cmd << " \"" << fn.GetFullPath() << wxT('"');
                 }
             }
         }

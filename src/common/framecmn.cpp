@@ -213,7 +213,7 @@ bool wxFrameBase::ProcessCommand(int id)
 
 bool wxFrameBase::ProcessCommand(wxMenuItem *item)
 {
-    wxCHECK_MSG( item, false, wxS("Menu item can't be NULL") );
+    wxCHECK_MSG( item, false, "Menu item can't be NULL" );
 
     if (!item->IsEnabled())
         return true;
@@ -235,7 +235,7 @@ bool wxFrameBase::ProcessCommand(wxMenuItem *item)
     }
 
     wxMenu* const menu = item->GetMenu();
-    wxCHECK_MSG( menu, false, wxS("Menu item should be attached to a menu") );
+    wxCHECK_MSG( menu, false, "Menu item should be attached to a menu" );
 
     return menu->SendEvent(item->GetId(), checked);
 }
@@ -328,7 +328,7 @@ wxStatusBar* wxFrameBase::CreateStatusBar(int number,
     // the main status bar can only be created once (or else it should be
     // deleted before calling CreateStatusBar() again)
     wxCHECK_MSG( !m_frameStatusBar, nullptr,
-                 wxT("recreating status bar in wxFrame") );
+                 "recreating status bar in wxFrame" );
 
     SetStatusBar(OnCreateStatusBar(number, style, id, name));
 
@@ -347,32 +347,32 @@ wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
     return statusBar;
 }
 
-void wxFrameBase::SetStatusText(const wxString& text, int number)
+void wxFrameBase::SetStatusText(const std::string& text, int number)
 {
-    wxCHECK_RET( m_frameStatusBar != nullptr, wxT("no statusbar to set text for") );
+    wxCHECK_RET( m_frameStatusBar != nullptr, "no statusbar to set text for" );
 
     m_frameStatusBar->SetStatusText(text, number);
 }
 
 void wxFrameBase::SetStatusWidths(int n, const int widths_field[] )
 {
-    wxCHECK_RET( m_frameStatusBar != nullptr, wxT("no statusbar to set widths for") );
+    wxCHECK_RET( m_frameStatusBar != nullptr, "no statusbar to set widths for" );
 
     m_frameStatusBar->SetStatusWidths(n, widths_field);
 
     PositionStatusBar();
 }
 
-void wxFrameBase::PushStatusText(const wxString& text, int number)
+void wxFrameBase::PushStatusText(const std::string& text, int number)
 {
-    wxCHECK_RET( m_frameStatusBar != nullptr, wxT("no statusbar to set text for") );
+    wxCHECK_RET( m_frameStatusBar != nullptr, "no statusbar to set text for" );
 
     m_frameStatusBar->PushStatusText(text, number);
 }
 
 void wxFrameBase::PopStatusText(int number)
 {
-    wxCHECK_RET( m_frameStatusBar != nullptr, wxT("no statusbar to set text for") );
+    wxCHECK_RET( m_frameStatusBar != nullptr, "no statusbar to set text for" );
 
     m_frameStatusBar->PopStatusText(number);
 }
@@ -383,7 +383,7 @@ bool wxFrameBase::ShowMenuHelp(int menuId)
     // if no help string found, we will clear the status bar text
     //
     // NB: wxID_NONE is used for (sub)menus themselves by wxMSW
-    wxString helpString;
+    std::string helpString;
     if ( menuId != wxID_SEPARATOR && menuId != wxID_NONE )
     {
         const wxMenuItem * const item = FindItemInMenuBar(menuId);
@@ -418,7 +418,7 @@ void wxFrameBase::SetStatusBar(wxStatusBar *statBar)
 #endif // wxUSE_STATUSBAR
 
 #if wxUSE_MENUS || wxUSE_TOOLBAR
-void wxFrameBase::DoGiveHelp(const wxString& help, bool show)
+void wxFrameBase::DoGiveHelp(const std::string& help, bool show)
 {
 #if wxUSE_STATUSBAR
     if ( m_statusBarPane < 0 )
@@ -431,7 +431,8 @@ void wxFrameBase::DoGiveHelp(const wxString& help, bool show)
     if ( !statbar )
         return;
 
-    wxString text;
+    std::string text;
+
     if ( show )
     {
         // remember the old status bar text if this is the first time we're
@@ -451,17 +452,17 @@ void wxFrameBase::DoGiveHelp(const wxString& help, bool show)
             if ( m_oldStatusText.empty() )
             {
                 // use special value to prevent us from doing this the next time
-                m_oldStatusText += wxT('\0');
+                m_oldStatusText += '\0';
             }
         }
 
-        m_lastHelpShown =
+        m_lastHelpShown = help;
         text = help;
     }
     else // hide help, restore the original text
     {
         // clear the last shown help string but remember its value
-        wxString lastHelpShown;
+        std::string lastHelpShown;
         lastHelpShown.swap(m_lastHelpShown);
 
         // also clear the old status text but remember it too to restore it
@@ -500,7 +501,7 @@ wxToolBar* wxFrameBase::CreateToolBar(unsigned int style,
     // the main toolbar can't be recreated (unless it was explicitly deleted
     // before)
     wxCHECK_MSG( !m_frameToolBar, nullptr,
-                 wxT("recreating toolbar in wxFrame") );
+                 "recreating toolbar in wxFrame" );
 
     if ( style == -1 )
     {

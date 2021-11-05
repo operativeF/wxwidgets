@@ -61,7 +61,7 @@ public:
     T** operator&()
     {
         wxASSERT_MSG(!m_ptr,
-                     wxS("Can't get direct access to initialized pointer"));
+                     "Can't get direct access to initialized pointer");
 
         return &m_ptr;
     }

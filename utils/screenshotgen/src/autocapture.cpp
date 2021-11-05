@@ -39,7 +39,7 @@ AutoCaptureMechanism::AutoCaptureMechanism(wxNotebook *notebook,
 }
 
 /* static */
-wxString AutoCaptureMechanism::default_dir = wxT("screenshots");
+wxString AutoCaptureMechanism::default_dir = "screenshots";
 
 /* static */
 wxString AutoCaptureMechanism::GetDefaultDirectoryAbsPath()
@@ -67,7 +67,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, int x, int y,
     // Somehow wxScreenDC.Blit() doesn't work under Mac for now. Here is a trick.
 #ifdef __WXMAC__
 
-    // wxExecute(wxT("screencapture -x ") + tempfile, wxEXEC_SYNC);
+    // wxExecute("screencapture -x " + tempfile, wxEXEC_SYNC);
 
     char captureCommand[80] =""; // a reasonable max size is 80
     sprintf(captureCommand, "sleep %d;%s", delay, "screencapture -x /tmp/wx_screen_capture.png");
@@ -78,7 +78,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, int x, int y,
     wxBitmap fullscreen;
     do
     {
-        fullscreen = wxBitmap(wxT("/tmp/wx_screen_capture.png"), wxBitmapType::PNG);
+        fullscreen = wxBitmap("/tmp/wx_screen_capture.png", wxBitmapType::PNG);
     }
     while(!fullscreen.IsOk());
 
@@ -230,7 +230,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, Control& ctrl)
 
     // cut off "wx" and change the name into lowercase.
     // e.g. wxButton will have a name of "button" at the end
-    ctrl.name.StartsWith(wxT("wx"), &(ctrl.name));
+    ctrl.name.StartsWith("wx", &(ctrl.name));
     ctrl.name.MakeLower();
 
     // take the screenshot
@@ -303,16 +303,16 @@ wxRect AutoCaptureMechanism::GetRect(wxWindow* ctrl, int flag)
         wxStaticText* l[4];
 
         for (int i = 0; i < 4; ++i)
-            l[i] = new wxStaticText(parent, wxID_ANY, wxT(" "));
+            l[i] = new wxStaticText(parent, wxID_ANY, " ");
 
         m_grid->Add(l[0]);
-        m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
+        m_grid->Add(new wxStaticText(parent, wxID_ANY, " "));
         m_grid->Add(l[1]);
-        m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
+        m_grid->Add(new wxStaticText(parent, wxID_ANY, " "));
         m_grid->Add(ctrl, 1, wxEXPAND);
-        m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
+        m_grid->Add(new wxStaticText(parent, wxID_ANY, " "));
         m_grid->Add(l[2]);
-        m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
+        m_grid->Add(new wxStaticText(parent, wxID_ANY, " "));
         m_grid->Add(l[3]);
 
         sizer->Add(m_grid);

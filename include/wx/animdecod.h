@@ -110,7 +110,7 @@ public:
         // restore the old position to be able to test other formats and so on
         if ( stream.SeekI(posOld) == wxInvalidOffset )
         {
-            wxLogDebug(wxT("Failed to rewind the stream in wxAnimationDecoder!"));
+            wxLogDebug("Failed to rewind the stream in wxAnimationDecoder!");
 
             // reading would fail anyhow as we're not at the right position
             return false;

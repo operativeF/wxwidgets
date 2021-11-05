@@ -123,7 +123,7 @@ public:
     // init without conversion
     void Init(LV_ITEM_NATIVE& item)
     {
-        wxASSERT_MSG( !m_pItem, wxT("Init() called twice?") );
+        wxASSERT_MSG( !m_pItem, "Init() called twice?" );
 
         m_pItem = &item;
     }
@@ -321,7 +321,7 @@ DWORD wxListCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     MAP_MODE_STYLE(wxLC_REPORT, LVS_REPORT)
 
     wxASSERT_MSG( nModes == 1,
-                  wxT("wxListCtrl style should have exactly one mode bit set") );
+                  "wxListCtrl style should have exactly one mode bit set" );
 
 #undef MAP_MODE_STYLE
 
@@ -351,7 +351,7 @@ DWORD wxListCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
         wstyle |= LVS_SORTASCENDING;
 
         wxASSERT_MSG( !(style & wxLC_SORT_DESCENDING),
-                      wxT("can't sort in ascending and descending orders at once") );
+                      "can't sort in ascending and descending orders at once" );
     }
     else if ( style & wxLC_SORT_DESCENDING )
         wstyle |= LVS_SORTDESCENDING;
@@ -530,9 +530,9 @@ bool wxListCtrl::SetBackgroundColour(const wxColour& col)
     // background
     COLORREF color = wxColourToRGB(col);
     if ( !ListView_SetBkColor(GetHwnd(), color) )
-        wxLogLastError(wxS("ListView_SetBkColor()"));
+        wxLogLastError("ListView_SetBkColor()");
     if ( !ListView_SetTextBkColor(GetHwnd(), color) )
-        wxLogLastError(wxS("ListView_SetTextBkColor()"));
+        wxLogLastError("ListView_SetTextBkColor()");
 
     return true;
 }
@@ -708,7 +708,7 @@ int wxListCtrl::GetColumnIndexFromOrder(int order) const
 {
     const int numCols = GetColumnCount();
     wxCHECK_MSG( order >= 0 && order < numCols, -1,
-                wxT("Column position out of bounds") );
+                "Column position out of bounds" );
 
     std::vector<int> indexArray(numCols);
     if ( !ListView_GetColumnOrderArray(GetHwnd(), numCols, &indexArray[0]) )
@@ -720,7 +720,7 @@ int wxListCtrl::GetColumnIndexFromOrder(int order) const
 int wxListCtrl::GetColumnOrder(int col) const
 {
     const int numCols = GetColumnCount();
-    wxASSERT_MSG( col >= 0 && col < numCols, wxT("Column index out of bounds") );
+    wxASSERT_MSG( col >= 0 && col < numCols, "Column index out of bounds" );
 
     std::vector<int> indexArray(numCols);
     if ( !ListView_GetColumnOrderArray(GetHwnd(), numCols, &indexArray[0]) )
@@ -732,7 +732,7 @@ int wxListCtrl::GetColumnOrder(int col) const
             return pos;
     }
 
-    wxFAIL_MSG( wxT("no column with with given order?") );
+    wxFAIL_MSG( "no column with with given order?" );
 
     return -1;
 }
@@ -755,7 +755,7 @@ bool wxListCtrl::SetColumnsOrder(const std::vector<int>& orders)
     const int numCols = GetColumnCount();
 
     wxCHECK_MSG( orders.size() == (size_t)numCols, false,
-                    wxT("wrong number of elements in column orders array") );
+                    "wrong number of elements in column orders array" );
 
     return ListView_SetColumnOrderArray(GetHwnd(), numCols, &orders[0]) != 0;
 }
@@ -873,7 +873,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
 {
     const long id = info.GetId();
     wxCHECK_MSG( id >= 0 && id < GetItemCount(), false,
-                 wxT("invalid item index in SetItem") );
+                 "invalid item index in SetItem" );
 
     LV_ITEM item;
     wxConvertToMSWListItem(this, info, item);
@@ -922,7 +922,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
     {
         if ( !ListView_SetItem(GetHwnd(), &item) )
         {
-            wxLogDebug(wxT("ListView_SetItem() failed"));
+            wxLogDebug("ListView_SetItem() failed");
 
             return false;
         }
@@ -969,7 +969,7 @@ bool wxListCtrl::SetItem(long index, int col, const wxString& label, int imageId
 ListStateFlags wxListCtrl::GetItemState(long item, ListStateFlags stateMask) const
 {
     wxCHECK_MSG( item >= 0 && item < GetItemCount(), {},
-                 wxS("invalid list control item index in GetItemState()") );
+                 "invalid list control item index in GetItemState()" );
 
     wxListItem info;
 
@@ -1013,7 +1013,7 @@ bool wxListCtrl::SetItemState(long item, ListStateFlags state, ListStateFlags st
     if ( !::SendMessageW(GetHwnd(), LVM_SETITEMSTATE,
                         (WPARAM)item, (LPARAM)&lvItem) )
     {
-        wxLogLastError(wxT("ListView_SetItemState"));
+        wxLogLastError("ListView_SetItemState");
 
         return false;
     }
@@ -1137,7 +1137,7 @@ wxRect wxListCtrl::GetViewRect() const
         RECT rc;
         if ( !ListView_GetViewRect(GetHwnd(), &rc) )
         {
-            wxLogDebug(wxT("ListView_GetViewRect() failed."));
+            wxLogDebug("ListView_GetViewRect() failed.");
 
             wxZeroMemory(rc);
         }
@@ -1159,7 +1159,7 @@ wxRect wxListCtrl::GetViewRect() const
     }
     else
     {
-        wxFAIL_MSG( wxT("not implemented in this mode") );
+        wxFAIL_MSG( "not implemented in this mode" );
     }
 
     return rect;
@@ -1178,11 +1178,11 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, wxListRec
     // completely bogus in this case), so we check item validity ourselves
     wxCHECK_MSG( subItem == wxLIST_GETSUBITEMRECT_WHOLEITEM ||
                     (subItem >= 0 && subItem < GetColumnCount()),
-                 false, wxT("invalid sub item index") );
+                 false, "invalid sub item index" );
 
     // use wxCHECK_MSG against "item" too, for coherency with the generic implementation:
     wxCHECK_MSG( item >= 0 && item < GetItemCount(), false,
-                 wxT("invalid item in GetSubItemRect") );
+                 "invalid item in GetSubItemRect" );
 
     int codeWin;
     switch ( code )
@@ -1210,7 +1210,7 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, wxListRec
             break;
 
         default:
-            wxFAIL_MSG( wxT("incorrect code in GetItemRect() / GetSubItemRect()") );
+            wxFAIL_MSG( "incorrect code in GetItemRect() / GetSubItemRect()" );
             return false;
     }
 
@@ -1368,7 +1368,7 @@ wxColour wxListCtrl::GetTextColour() const
 void wxListCtrl::SetTextColour(const wxColour& col)
 {
     if ( !ListView_SetTextColor(GetHwnd(), wxColourToPalRGB(col)) )
-        wxLogLastError(wxS("ListView_SetTextColor()"));
+        wxLogLastError("ListView_SetTextColor()");
 }
 
 // Gets the index of the topmost visible item when in
@@ -1536,7 +1536,7 @@ bool wxListCtrl::DeleteItem(long item)
 {
     if ( !ListView_DeleteItem(GetHwnd(), (int) item) )
     {
-        wxLogLastError(wxT("ListView_DeleteItem"));
+        wxLogLastError("ListView_DeleteItem");
         return false;
     }
 
@@ -1591,7 +1591,7 @@ bool wxListCtrl::DeleteAllColumns()
     {
         if ( ListView_DeleteColumn(GetHwnd(), 0) == 0 )
         {
-            wxLogLastError(wxT("ListView_DeleteColumn"));
+            wxLogLastError("ListView_DeleteColumn");
 
             return false;
         }
@@ -1599,7 +1599,7 @@ bool wxListCtrl::DeleteAllColumns()
         m_colCount--;
     }
 
-    wxASSERT_MSG( m_colCount == 0, wxT("no columns should be left") );
+    wxASSERT_MSG( m_colCount == 0, "no columns should be left" );
 
     return true;
 }
@@ -1867,13 +1867,13 @@ wxListCtrl::HitTest(const wxPoint& point, ListHitTestFlags& flags, long *ptrSubI
 // -1 otherwise.
 long wxListCtrl::InsertItem(const wxListItem& info)
 {
-    wxASSERT_MSG( !IsVirtual(), wxT("can't be used with virtual controls") );
+    wxASSERT_MSG( !IsVirtual(), "can't be used with virtual controls" );
 
     // In 2.8 it was possible to succeed inserting an item without initializing
     // its ID as it defaulted to 0. This was however never supported and in 2.9
     // the ID is -1 by default and inserting it simply fails, but it might be
     // not obvious why does it happen, so check it proactively.
-    wxASSERT_MSG( info.m_itemId != -1, wxS("Item ID must be set.") );
+    wxASSERT_MSG( info.m_itemId != -1, "Item ID must be set." );
 
     LV_ITEM item;
     wxConvertToMSWListItem(this, info, item);
@@ -1961,7 +1961,7 @@ long wxListCtrl::DoInsertColumn(long col, const wxListItem& item)
     long n = ListView_InsertColumn(GetHwnd(), col, &lvCol);
     if ( n == -1 )
     {
-        wxLogDebug(wxT("Failed to insert the column '%s' into listview!"),
+        wxLogDebug("Failed to insert the column '%s' into listview!",
                    lvCol.pszText);
         return -1;
     }
@@ -1984,7 +1984,7 @@ bool wxListCtrl::ScrollList(int dx, int dy)
 {
     if ( !ListView_Scroll(GetHwnd(), dx, dy) )
     {
-        wxLogDebug(wxT("ListView_Scroll(%d, %d) failed"), dx, dy);
+        wxLogDebug("ListView_Scroll(%d, %d) failed", dx, dy);
 
         return false;
     }
@@ -2039,7 +2039,7 @@ bool wxListCtrl::SortItems(wxListCtrlCompare fn, wxIntPtr data)
                              wxInternalDataCompareFunc,
                              (WPARAM) &internalData) )
     {
-        wxLogDebug(wxT("ListView_SortItems() failed"));
+        wxLogDebug("ListView_SortItems() failed");
 
         return false;
     }
@@ -2104,12 +2104,12 @@ int wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick)
     POINT ptClickHeader = *ptClick;
     if ( !::ScreenToClient(nmhdr->hwndFrom, &ptClickHeader) )
     {
-        wxLogLastError(wxT("ScreenToClient(listctrl header)"));
+        wxLogLastError("ScreenToClient(listctrl header)");
     }
 
     if ( !::ScreenToClient(::GetParent(nmhdr->hwndFrom), ptClick) )
     {
-        wxLogLastError(wxT("ScreenToClient(listctrl)"));
+        wxLogLastError("ScreenToClient(listctrl)");
     }
 
     for ( int col = 0; col < Header_GetItemCount(nmhdr->hwndFrom); col++ )
@@ -2438,7 +2438,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                             else
                             {
                                 eventType = wxEVT_NULL;
-                                wxLogDebug(wxS("Unknown LVIS_STATEIMAGE state: %u"), stNew);
+                                wxLogDebug("Unknown LVIS_STATEIMAGE state: %u", stNew);
                             }
 
                             event.m_itemIndex = iItem;
@@ -2637,9 +2637,9 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                         // accept this silently.
                         if ( startPos != maxPos )
                         {
-                            wxLogDebug(wxT("Ignoring invalid search start ")
-                                       wxT("position %d in list control with ")
-                                       wxT("%d items."), startPos, maxPos);
+                            wxLogDebug("Ignoring invalid search start "
+                                       "position %d in list control with "
+                                       "%d items.", startPos, maxPos);
                         }
 
                         startPos = 0;
@@ -3243,7 +3243,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
                                                numCols,
                                                &indexArray[0]) )
             {
-                wxFAIL_MSG( wxT("invalid column index array in OnPaint()") );
+                wxFAIL_MSG( "invalid column index array in OnPaint()" );
                 return;
             }
 
@@ -3319,12 +3319,12 @@ wxItemAttr *wxListCtrl::DoGetItemColumnAttr(long item, long column) const
 
 void wxListCtrl::SetItemCount(long count)
 {
-    wxASSERT_MSG( IsVirtual(), wxT("this is for virtual controls only") );
+    wxASSERT_MSG( IsVirtual(), "this is for virtual controls only" );
 
     if ( !::SendMessageW(GetHwnd(), LVM_SETITEMCOUNT, (WPARAM)count,
                         LVSICF_NOSCROLL | LVSICF_NOINVALIDATEALL) )
     {
-        wxLogLastError(wxT("ListView_SetItemCount"));
+        wxLogLastError("ListView_SetItemCount");
     }
 }
 
@@ -3336,7 +3336,7 @@ void wxListCtrl::RefreshItem(long item)
 void wxListCtrl::RefreshItems(long itemFrom, long itemTo)
 {
     if ( !ListView_RedrawItems(GetHwnd(), itemFrom, itemTo) )
-        wxLogLastError(wxS("ListView_RedrawItems"));
+        wxLogLastError("ListView_RedrawItems");
 }
 
 // ----------------------------------------------------------------------------

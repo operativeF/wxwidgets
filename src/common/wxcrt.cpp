@@ -221,14 +221,14 @@ int /* not wint_t */ wxCRT_FputcW(wchar_t wc, FILE *stream)
 // TODO: implement the scanf() functions
 static int vwscanf(const wchar_t *format, va_list argptr)
 {
-    wxFAIL_MSG( wxT("TODO") );
+    wxFAIL_MSG( "TODO" );
 
     return -1;
 }
 
 static int vfwscanf(FILE *stream, const wchar_t *format, va_list argptr)
 {
-    wxFAIL_MSG( wxT("TODO") );
+    wxFAIL_MSG( "TODO" );
 
     return -1;
 }
@@ -266,9 +266,9 @@ static int vswscanf(const wchar_t *ws, const wchar_t *format, va_list argptr)
     // in size of char and wchar_t, though.
 
     wxCHECK_MSG( wxStrstr(format, L"%s") == NULL, -1,
-                 wxT("incomplete vswscanf implementation doesn't allow %s") );
+                 "incomplete vswscanf implementation doesn't allow %s" );
     wxCHECK_MSG( wxStrstr(format, L"%c") == NULL, -1,
-                 wxT("incomplete vswscanf implementation doesn't allow %c") );
+                 "incomplete vswscanf implementation doesn't allow %c" );
 
     return wxCRT_VsscanfA(static_cast<const char*>(wxConvLibc.cWC2MB(ws)),
         wxConvLibc.cWC2MB(format), argptr);
@@ -1111,7 +1111,7 @@ void wxUpdateLocaleIsUtf8()
 #if wxUSE_UTF8_LOCALE_ONLY
     if ( !wxIsLocaleUtf8() )
     {
-        wxLogFatalError(wxT("This program requires UTF-8 locale to run."));
+        wxLogFatalError("This program requires UTF-8 locale to run.");
     }
 #else // !wxUSE_UTF8_LOCALE_ONLY
     wxLocaleIsUtf8 = wxIsLocaleUtf8();

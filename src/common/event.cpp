@@ -570,7 +570,7 @@ bool wxMouseEvent::ButtonDClick(int but) const
     switch (but)
     {
         default:
-            wxFAIL_MSG(wxT("invalid parameter in wxMouseEvent::ButtonDClick"));
+            wxFAIL_MSG("invalid parameter in wxMouseEvent::ButtonDClick");
             [[fallthrough]];
 
         case wxMOUSE_BTN_ANY:
@@ -600,7 +600,7 @@ bool wxMouseEvent::ButtonDown(int but) const
     switch (but)
     {
         default:
-            wxFAIL_MSG(wxT("invalid parameter in wxMouseEvent::ButtonDown"));
+            wxFAIL_MSG("invalid parameter in wxMouseEvent::ButtonDown");
             [[fallthrough]];
 
         case wxMOUSE_BTN_ANY:
@@ -630,7 +630,7 @@ bool wxMouseEvent::ButtonUp(int but) const
     switch (but)
     {
         default:
-            wxFAIL_MSG(wxT("invalid parameter in wxMouseEvent::ButtonUp"));
+            wxFAIL_MSG("invalid parameter in wxMouseEvent::ButtonUp");
             [[fallthrough]];
 
         case wxMOUSE_BTN_ANY:
@@ -660,7 +660,7 @@ bool wxMouseEvent::Button(int but) const
     switch (but)
     {
         default:
-            wxFAIL_MSG(wxT("invalid parameter in wxMouseEvent::Button"));
+            wxFAIL_MSG("invalid parameter in wxMouseEvent::Button");
             [[fallthrough]];
 
         case wxMOUSE_BTN_ANY:
@@ -1194,7 +1194,7 @@ bool wxEvtHandler::ProcessThreadEvent(const wxEvent& event)
 {
     // check that we are really in a child thread
     wxASSERT_MSG( !wxThread::IsMain(),
-                  wxT("use ProcessEvent() in main thread") );
+                  "use ProcessEvent() in main thread" );
 
     AddPendingEvent(event);
 
@@ -1781,7 +1781,7 @@ wxEvtHandler::GetNextDynamicEntry(size_t& cookie) const
 bool wxEvtHandler::SearchDynamicEventTable( wxEvent& event )
 {
     wxCHECK_MSG( m_dynamicEvents, false,
-                 wxT("caller should check that we have dynamic events") );
+                 "caller should check that we have dynamic events" );
 
     DynamicEvents& dynamicEvents = *m_dynamicEvents;
 
@@ -1848,7 +1848,7 @@ bool wxEvtHandler::SearchDynamicEventTable( wxEvent& event )
 void wxEvtHandler::DoSetClientObject( wxClientData *data )
 {
     wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
-                  wxT("can't have both object and void client data") );
+                  "can't have both object and void client data" );
 
     delete m_clientObject;
 
@@ -1861,7 +1861,7 @@ wxClientData *wxEvtHandler::DoGetClientObject() const
     // it's not an error to call GetClientObject() on a window which doesn't
     // have client data at all - NULL will be returned
     wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
-                  wxT("this window doesn't have object client data") );
+                  "this window doesn't have object client data" );
 
     return m_clientObject;
 }
@@ -1869,7 +1869,7 @@ wxClientData *wxEvtHandler::DoGetClientObject() const
 void wxEvtHandler::DoSetClientData( void *data )
 {
     wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
-                  wxT("can't have both object and void client data") );
+                  "can't have both object and void client data" );
 
     m_clientData = data;
     m_clientDataType = wxClientDataType::Void;
@@ -1880,7 +1880,7 @@ void *wxEvtHandler::DoGetClientData() const
     // it's not an error to call GetClientData() on a window which doesn't have
     // client data at all - NULL will be returned
     wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
-                  wxT("this window doesn't have void client data") );
+                  "this window doesn't have void client data" );
 
     return m_clientData;
 }
@@ -1958,7 +1958,7 @@ wxWindow* wxFindFocusDescendant(wxWindow* ancestor)
 
 wxEventBlocker::wxEventBlocker(wxWindow *win, wxEventType type)
 {
-    wxCHECK_RET(win, wxT("Null window given to wxEventBlocker"));
+    wxCHECK_RET(win, "Null window given to wxEventBlocker");
 
     m_window = win;
 
@@ -1970,7 +1970,7 @@ wxEventBlocker::~wxEventBlocker()
 {
     wxEvtHandler *popped = m_window->PopEventHandler(false);
     wxCHECK_RET(popped == this,
-        wxT("Don't push other event handlers into a window managed by wxEventBlocker!"));
+        "Don't push other event handlers into a window managed by wxEventBlocker!");
 }
 
 bool wxEventBlocker::ProcessEvent(wxEvent& event)

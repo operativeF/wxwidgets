@@ -314,7 +314,7 @@ wxDCImpl::wxDCImpl( wxDC *owner )
 void wxDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
 {
     wxASSERT_MSG( w >= 0 && h >= 0,
-                  wxS("Clipping box size values cannot be negative") );
+                  "Clipping box size values cannot be negative" );
 
     wxRect clipRegion(x, y, w, h);
 
@@ -545,7 +545,7 @@ void wxDCImpl::GetMultiLineTextExtent(std::string_view text,
 void wxDCImpl::DoDrawCheckMark(wxCoord x1, wxCoord y1,
                                wxCoord width, wxCoord height)
 {
-    wxCHECK_RET( IsOk(), wxT("invalid window dc") );
+    wxCHECK_RET( IsOk(), "invalid window dc" );
 
     const wxCoord x2 = x1 + width;
     const wxCoord y2 = y1 + height;
@@ -574,7 +574,7 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                         wxPoint srcMask)
 {
     wxCHECK_MSG( srcWidth && srcHeight && dstWidth && dstHeight, false,
-                 wxT("invalid blit size") );
+                 "invalid blit size" );
 
     // emulate the stretching by modifying the DC scale
     const double xscale = (double)srcWidth / dstWidth;
@@ -831,7 +831,7 @@ static void wx_spline_draw_point_array(wxDC *dc)
 
 void wxDCImpl::DoDrawSpline( const wxPointList *points )
 {
-    wxCHECK_RET( IsOk(), wxT("invalid window dc") );
+    wxCHECK_RET( IsOk(), "invalid window dc" );
 
     wxPointList::compatibility_iterator node = points->GetFirst();
     if (!node)

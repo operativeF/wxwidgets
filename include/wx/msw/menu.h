@@ -44,7 +44,7 @@ public:
         m_hMenu = (WXHMENU)CreatePopupMenu();
         if ( !m_hMenu )
         {
-            wxLogLastError(wxT("CreatePopupMenu"));
+            wxLogLastError("CreatePopupMenu");
         }
 
         // if we have a title, insert it in the beginning of the menu
@@ -64,7 +64,7 @@ public:
         m_hMenu = (WXHMENU)CreatePopupMenu();
         if ( !m_hMenu )
         {
-            wxLogLastError(wxT("CreatePopupMenu"));
+            wxLogLastError("CreatePopupMenu");
         }
 
         // if we have a title, insert it in the beginning of the menu

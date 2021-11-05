@@ -53,7 +53,7 @@ bool wxAppProgressIndicator::IsAvailable() const
 
 void wxAppProgressIndicator::SetValue(int value)
 {
-    wxASSERT_MSG( value <= m_maxValue, wxT("invalid progress value") );
+    wxASSERT_MSG( value <= m_maxValue, "invalid progress value" );
 
     std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
             [value](auto& button){

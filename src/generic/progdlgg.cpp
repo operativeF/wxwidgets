@@ -348,7 +348,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
     value /= m_factor;
 #endif // __WXMSW__
 
-    wxASSERT_MSG( value <= m_maximum, wxT("invalid progress value") );
+    wxASSERT_MSG( value <= m_maximum, "invalid progress value" );
 
     m_gauge->SetValue(value);
 

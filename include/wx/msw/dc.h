@@ -335,7 +335,7 @@ public:
     wxSize DoGetSize() const override
     {
         wxASSERT_MSG( m_size.IsFullySpecified(),
-                      wxT("size of this DC hadn't been set and is unknown") );
+                      "size of this DC hadn't been set and is unknown" );
 
         return {m_size.x, m_size.y};
     }

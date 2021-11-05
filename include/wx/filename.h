@@ -408,7 +408,7 @@ public:
         //    fn.ReplaceEnvVariable("OPENWINHOME");
         //         // now fn.GetFullPath() == "$OPENWINHOME/lib/someFile"
     bool ReplaceEnvVariable(const wxString& envname,
-                            const wxString& replacementFmtString = wxS("$%s"),
+                            const wxString& replacementFmtString = "$%s",
                             wxPathFormat format = wxPATH_NATIVE);
 
         // replaces, if present in the path, the home directory for the given user

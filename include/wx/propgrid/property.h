@@ -453,26 +453,26 @@ wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000
 // your binary size by some amount.
 
 // Set default value for property.
-#define wxPG_ATTR_DEFAULT_VALUE           wxS("DefaultValue")
+#define wxPG_ATTR_DEFAULT_VALUE           "DefaultValue"
 
 // Universal, int or double. Minimum value for numeric properties.
-#define wxPG_ATTR_MIN                     wxS("Min")
+#define wxPG_ATTR_MIN                     "Min"
 
 // Universal, int or double. Maximum value for numeric properties.
-#define wxPG_ATTR_MAX                     wxS("Max")
+#define wxPG_ATTR_MAX                     "Max"
 
 // Universal, string. When set, will be shown as text after the displayed
 // text value. Alternatively, if third column is enabled, text will be shown
 // there (for any type of property).
-#define wxPG_ATTR_UNITS                     wxS("Units")
+#define wxPG_ATTR_UNITS                     "Units"
 
 // When set, will be shown as 'greyed' text in property's value cell when
 // the actual displayed value is blank.
-#define wxPG_ATTR_HINT                      wxS("Hint")
+#define wxPG_ATTR_HINT                      "Hint"
 
 // Universal, std::vector<wxString>. Set to enable auto-completion in any
 // wxTextCtrl-based property editor.
-#define wxPG_ATTR_AUTOCOMPLETE              wxS("AutoComplete")
+#define wxPG_ATTR_AUTOCOMPLETE              "AutoComplete"
 
 // wxBoolProperty and wxFlagsProperty specific. Value type is bool.
 // Default value is False.
@@ -480,7 +480,7 @@ wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000
 // combo box as its editor control. If you set this attribute
 // for a wxFlagsProperty, it is automatically applied to child
 // bool properties.
-#define wxPG_BOOL_USE_CHECKBOX              wxS("UseCheckbox")
+#define wxPG_BOOL_USE_CHECKBOX              "UseCheckbox"
 
 // wxBoolProperty and wxFlagsProperty specific. Value type is bool.
 // Default value is False.
@@ -488,94 +488,94 @@ wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000
 // (instead of showing the popup listbox). If you set this attribute
 // for a wxFlagsProperty, it is automatically applied to child
 // bool properties.
-#define wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING  wxS("UseDClickCycling")
+#define wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING  "UseDClickCycling"
 
 // wxFloatProperty (and similar) specific, int, default -1.
 // Sets the (max) precision used when floating point value is rendered as
 // text. The default -1 means infinite precision.
-#define wxPG_FLOAT_PRECISION                wxS("Precision")
+#define wxPG_FLOAT_PRECISION                "Precision"
 
 // The text will be echoed as asterisks (wxTE_PASSWORD will be passed
 // to textctrl etc.).
-#define wxPG_STRING_PASSWORD                wxS("Password")
+#define wxPG_STRING_PASSWORD                "Password"
 
 // Define base used by a wxUIntProperty. Valid constants are
 // wxPG_BASE_OCT, wxPG_BASE_DEC, wxPG_BASE_HEX and wxPG_BASE_HEXL
 // (lowercase characters).
-#define wxPG_UINT_BASE                      wxS("Base")
+#define wxPG_UINT_BASE                      "Base"
 
 // Define prefix rendered to wxUIntProperty. Accepted constants
 // wxPG_PREFIX_NONE, wxPG_PREFIX_0x, and wxPG_PREFIX_DOLLAR_SIGN.
 // Note:
 // Only wxPG_PREFIX_NONE works with Decimal and Octal numbers.
-#define wxPG_UINT_PREFIX                    wxS("Prefix")
+#define wxPG_UINT_PREFIX                    "Prefix"
 
 // Specific to wxEditorDialogProperty and derivatives, wxString, default is empty.
 // Sets a specific title for the editor dialog.
-#define wxPG_DIALOG_TITLE                   wxS("DialogTitle")
+#define wxPG_DIALOG_TITLE                   "DialogTitle"
 
 // wxFileProperty/wxImageFileProperty specific, wxChar*, default is
 // detected/varies.
 // Sets the wildcard used in the triggered wxFileDialog. Format is the same.
-#define wxPG_FILE_WILDCARD                  wxS("Wildcard")
+#define wxPG_FILE_WILDCARD                  "Wildcard"
 
 // wxFileProperty/wxImageFileProperty specific, int, default 1.
 // When 0, only the file name is shown (i.e. drive and directory are hidden).
-#define wxPG_FILE_SHOW_FULL_PATH            wxS("ShowFullPath")
+#define wxPG_FILE_SHOW_FULL_PATH            "ShowFullPath"
 
 // Specific to wxFileProperty and derived properties, wxString, default empty.
 // If set, then the filename is shown relative to the given path string.
-#define wxPG_FILE_SHOW_RELATIVE_PATH        wxS("ShowRelativePath")
+#define wxPG_FILE_SHOW_RELATIVE_PATH        "ShowRelativePath"
 
 // Specific to wxFileProperty and derived properties, wxString,
 // default is empty.
 // Sets the initial path of where to look for files.
-#define wxPG_FILE_INITIAL_PATH              wxS("InitialPath")
+#define wxPG_FILE_INITIAL_PATH              "InitialPath"
 
 // Specific to wxFileProperty and derivatives, long, default is 0.
 // Sets a specific wxFileDialog style for the file dialog, e.g. ::wxFD_SAVE.
-#define wxPG_FILE_DIALOG_STYLE              wxS("DialogStyle")
+#define wxPG_FILE_DIALOG_STYLE              "DialogStyle"
 
 // wxArrayStringProperty's string delimiter character. If this is
 // a quotation mark or hyphen, then strings will be quoted instead
 // (with given character).
 // Default delimiter is quotation mark.
-#define wxPG_ARRAY_DELIMITER                wxS("Delimiter")
+#define wxPG_ARRAY_DELIMITER                "Delimiter"
 
 // Sets displayed date format for wxDateProperty.
-#define wxPG_DATE_FORMAT                    wxS("DateFormat")
+#define wxPG_DATE_FORMAT                    "DateFormat"
 
 // Sets wxDatePickerCtrl window style used with wxDateProperty. Default
 // is wxDP_DEFAULT | wxDP_SHOWCENTURY. Using wxDP_ALLOWNONE will enable
 // better unspecified value support in the editor
-#define wxPG_DATE_PICKER_STYLE              wxS("PickerStyle")
+#define wxPG_DATE_PICKER_STYLE              "PickerStyle"
 
 #if wxUSE_SPINBTN
 // SpinCtrl editor, int or double. How much number changes when button is
 // pressed (or up/down on keyboard).
-#define wxPG_ATTR_SPINCTRL_STEP             wxS("Step")
+#define wxPG_ATTR_SPINCTRL_STEP             "Step"
 
 // SpinCtrl editor, bool. If true, value wraps at Min/Max.
-#define wxPG_ATTR_SPINCTRL_WRAP             wxS("Wrap")
+#define wxPG_ATTR_SPINCTRL_WRAP             "Wrap"
 
 // SpinCtrl editor, bool. If true, moving mouse when one of the spin
 //    buttons is depressed rapidly changing "spin" value.
-#define wxPG_ATTR_SPINCTRL_MOTION           wxS("MotionSpin")
+#define wxPG_ATTR_SPINCTRL_MOTION           "MotionSpin"
 #endif  // wxUSE_SPINBTN
 
 // wxMultiChoiceProperty, int.
 // If 0, no user strings allowed. If 1, user strings appear before list
 // strings. If 2, user strings appear after list string.
-#define wxPG_ATTR_MULTICHOICE_USERSTRINGMODE    wxS("UserStringMode")
+#define wxPG_ATTR_MULTICHOICE_USERSTRINGMODE    "UserStringMode"
 
 // wxColourProperty and its kind, int, default 1.
 // Setting this attribute to 0 hides custom colour from property's list of
 // choices.
-#define wxPG_COLOUR_ALLOW_CUSTOM            wxS("AllowCustom")
+#define wxPG_COLOUR_ALLOW_CUSTOM            "AllowCustom"
 
 // wxColourProperty and its kind: Set to True in order to support editing
 // alpha colour component.
-#define wxPG_COLOUR_HAS_ALPHA               wxS("HasAlpha")
+#define wxPG_COLOUR_HAS_ALPHA               "HasAlpha"
 
 // Redefine attribute macros to use cached strings
 #undef wxPG_ATTR_DEFAULT_VALUE
@@ -649,13 +649,13 @@ public:
 
     const wxPGChoiceEntry& Item( unsigned int i ) const
     {
-        wxASSERT_MSG( i < GetCount(), wxS("invalid index") );
+        wxASSERT_MSG( i < GetCount(), "invalid index" );
         return m_items[i];
     }
 
     wxPGChoiceEntry& Item( unsigned int i )
     {
-        wxASSERT_MSG( i < GetCount(), wxS("invalid index") );
+        wxASSERT_MSG( i < GetCount(), "invalid index" );
         return m_items[i];
     }
 
@@ -2034,7 +2034,7 @@ class WXDLLIMPEXP_PROPGRID wxPGRootProperty : public wxPGProperty
 public:
     WX_PG_DECLARE_PROPERTY_CLASS(wxPGRootProperty)
 public:
-    explicit wxPGRootProperty( const wxString& name = wxS("<Root>") );
+    explicit wxPGRootProperty( const wxString& name = "<Root>" );
 
     bool StringToValue( wxVariant&, const wxString&, int ) const override
     {

@@ -12,6 +12,7 @@
 
 #include <cassert>
 #include <climits>          // for CHAR_BIT used below
+#include <string>
 
 #include "wx/chartype.h"     // for __TFILE__ and wxChar
 #include "wx/cpp.h"          // for __WXFUNCTION__
@@ -72,17 +73,17 @@ class wxCStrData;
     Type for the function called in case of assert failure, see
     wxSetAssertHandler().
  */
-typedef void (*wxAssertHandler_t)(const wxString& file,
+typedef void (*wxAssertHandler_t)(const std::string& file,
                                   int line,
-                                  const wxString& func,
-                                  const wxString& cond,
-                                  const wxString& msg);
+                                  const std::string& func,
+                                  const std::string& cond,
+                                  const std::string& msg);
 
 #if wxDEBUG_LEVEL
 
 // the global assert handler function, if it is NULL asserts don't check their
 // conditions
-extern WXDLLIMPEXP_DATA_BASE(wxAssertHandler_t) wxTheAssertHandler;
+extern wxAssertHandler_t wxTheAssertHandler;
 
 /*
     Sets the function to be called in case of assertion failure.
@@ -173,56 +174,50 @@ inline void wxDisableAsserts() { wxSetAssertHandler(nullptr); }
 // also notice that these functions can't be inline as wxString is not defined
 // yet (and can't be as wxString code itself may use assertions)
 extern void wxOnAssert(const char *file,
-                                        int line,
-                                        const char *func,
-                                        const char *cond);
+                       int line,
+                       const char *func,
+                       const char *cond);
 
 extern void wxOnAssert(const char *file,
-                                        int line,
-                                        const char *func,
-                                        const char *cond,
-                                        const char *msg);
+                       int line,
+                       const char *func,
+                       const char *cond,
+                       const char *msg);
 
 extern void wxOnAssert(const char *file,
-                                        int line,
-                                        const char *func,
-                                        const char *cond,
-                                        const wxChar *msg) ;
+                       int line,
+                       const char* func,
+                       const char* cond,
+                       const char* msg) ;
 
 // this version is for compatibility with wx 2.8 Unicode build only, we don't
 // use it ourselves any more except in ANSI-only build in which case it is all
 // we need
-extern void wxOnAssert(const wxChar *file,
-                                        int line,
-                                        const char *func,
-                                        const wxChar *cond,
-                                        const wxChar *msg = nullptr);
+extern void wxOnAssert(const char* file,
+                       int line,
+                       const char* func,
+                       const char* cond,
+                       const char* msg = nullptr);
 
 // these overloads work when msg passed to debug macro is a string and we
 // also have to provide wxCStrData overload to resolve ambiguity which would
 // otherwise arise from wxASSERT( s.c_str() )
-extern void wxOnAssert(const wxString& file,
-                                        int line,
-                                        const wxString& func,
-                                        const wxString& cond,
-                                        const wxString& msg);
+extern void wxOnAssert(const std::string& file,
+                       int line,
+                       const std::string& func,
+                       const std::string& cond,
+                       const std::string& msg);
 
-extern void wxOnAssert(const wxString& file,
-                                        int line,
-                                        const wxString& func,
-                                        const wxString& cond);
-
-extern void wxOnAssert(const char *file,
-                                        int line,
-                                        const char *func,
-                                        const char *cond,
-                                        const wxCStrData& msg);
+extern void wxOnAssert(const std::string& file,
+                       int line,
+                       const std::string& func,
+                       const std::string& cond);
 
 extern void wxOnAssert(const char *file,
                                         int line,
                                         const char *func,
                                         const char *cond,
-                                        const wxString& msg);
+                                        const std::string& msg);
 
 #endif // wxDEBUG_LEVEL
 

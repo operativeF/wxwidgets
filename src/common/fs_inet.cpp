@@ -94,7 +94,7 @@ bool wxInternetFSHandler::CanOpen(const wxString& location)
 {
 #if wxUSE_URL
     std::string p = GetProtocol(location);
-    if ((p == wxT("http")) || (p == wxT("ftp")))
+    if ((p == "http")) || (p == wxT("ftp"))
     {
         wxURL url(p + ":" + StripProtocolAnchor(location));
         return (url.GetError() == wxURLError::None);
@@ -120,7 +120,7 @@ wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
         if (s)
         {
             wxString tmpfile =
-                wxFileName::CreateTempFileName(wxT("wxhtml"));
+                wxFileName::CreateTempFileName("wxhtml");
 
             {   // now copy streams content to temporary file:
                 wxFileOutputStream sout(tmpfile);

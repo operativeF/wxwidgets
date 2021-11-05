@@ -2711,7 +2711,7 @@ public:
     /**
         Returns the XML node name of this object. This must be overridden for wxXmlNode-base XML export to work.
     */
-    virtual wxString GetXMLNodeName() const { return wxT("unknown"); }
+    virtual wxString GetXMLNodeName() const { return "unknown"; }
 
     /**
         Invalidates the object at the given range. With no argument, invalidates the whole object.
@@ -2964,12 +2964,12 @@ public:
     /**
         Sets the identifying name for this object as a property using the "name" key.
     */
-    void SetName(const wxString& name) { m_properties.SetProperty(wxT("name"), name); }
+    void SetName(const wxString& name) { m_properties.SetProperty("name", name); }
 
     /**
         Returns the identifying name for this object from the properties, using the "name" key.
     */
-    wxString GetName() const { return m_properties.GetPropertyString(wxT("name")); }
+    wxString GetName() const { return m_properties.GetPropertyString("name"); }
 
     /**
         Returns @true if this object is top-level, i.e. contains its own paragraphs, such as a text box.
@@ -3263,7 +3263,7 @@ public:
     bool ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler) override;
 #endif
 
-    wxString GetXMLNodeName() const override { return wxT("paragraphlayout"); }
+    wxString GetXMLNodeName() const override { return "paragraphlayout"; }
 
     bool AcceptsFocus() const override { return true; }
 
@@ -3853,7 +3853,7 @@ public:
 
     bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    wxString GetXMLNodeName() const override { return wxT("textbox"); }
+    wxString GetXMLNodeName() const override { return "textbox"; }
 
     bool CanEditProperties() const override { return true; }
 
@@ -3937,7 +3937,7 @@ public:
 
     bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
-    wxString GetXMLNodeName() const override { return wxT("field"); }
+    wxString GetXMLNodeName() const override { return "field"; }
 
     bool CanEditProperties() const override;
 
@@ -3960,8 +3960,8 @@ public:
 
 // Accessors
 
-    void SetFieldType(const wxString& fieldType) { GetProperties().SetProperty(wxT("FieldType"), fieldType); }
-    wxString GetFieldType() const { return GetProperties().GetPropertyString(wxT("FieldType")); }
+    void SetFieldType(const wxString& fieldType) { GetProperties().SetProperty("FieldType", fieldType); }
+    wxString GetFieldType() const { return GetProperties().GetPropertyString("FieldType"); }
 
 // Operations
 
@@ -4508,7 +4508,7 @@ public:
 
     void CalculateRange(long start, long& end) override;
 
-    wxString GetXMLNodeName() const override { return wxT("paragraph"); }
+    wxString GetXMLNodeName() const override { return "paragraph"; }
 
 // Accessors
 
@@ -4727,7 +4727,7 @@ public:
     bool ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler) override;
 #endif
 
-    wxString GetXMLNodeName() const override { return wxT("text"); }
+    wxString GetXMLNodeName() const override { return "text"; }
 
 // Accessors
 
@@ -4975,7 +4975,7 @@ public:
     // Images can be floatable (optionally).
     bool IsFloatable() const override { return true; }
 
-    wxString GetXMLNodeName() const override { return wxT("image"); }
+    wxString GetXMLNodeName() const override { return "image"; }
 
 // Accessors
 
@@ -5890,7 +5890,7 @@ public:
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    wxString GetXMLNodeName() const override { return wxT("cell"); }
+    wxString GetXMLNodeName() const override { return "cell"; }
 
     bool CanEditProperties() const override { return true; }
 
@@ -5968,7 +5968,7 @@ public:
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    wxString GetXMLNodeName() const override { return wxT("table"); }
+    wxString GetXMLNodeName() const override { return "table"; }
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
@@ -6776,8 +6776,8 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPlainTextHandler: public wxRichTextFileHand
 {
     wxDECLARE_CLASS(wxRichTextPlainTextHandler);
 public:
-    wxRichTextPlainTextHandler(const wxString& name = wxT("Text"),
-                               const wxString& ext = wxT("txt"),
+    wxRichTextPlainTextHandler(const wxString& name = "Text",
+                               const wxString& ext = "txt",
                                wxRichTextFileType type = wxRICHTEXT_TYPE_TEXT)
         : wxRichTextFileHandler(name, ext, type)
         { }

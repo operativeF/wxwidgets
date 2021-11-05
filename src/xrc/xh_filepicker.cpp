@@ -36,11 +36,11 @@ wxObject *wxFilePickerCtrlXmlHandler::DoCreateResource()
 
     picker->Create(m_parentAsWindow,
                   GetID(),
-                  GetParamValue(wxT("value")),
-                  GetText(wxT("message")),
-                  GetParamValue(wxT("wildcard")),
+                  GetParamValue("value"),
+                  GetText("message"),
+                  GetParamValue("wildcard"),
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxFLP_DEFAULT_STYLE),
+                  GetStyle("style", wxFLP_DEFAULT_STYLE),
                   wxDefaultValidator,
                   GetName());
 
@@ -50,7 +50,7 @@ wxObject *wxFilePickerCtrlXmlHandler::DoCreateResource()
 
 bool wxFilePickerCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxFilePickerCtrl"));
+    return IsOfClass(node, "wxFilePickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_FILEPICKERCTRL

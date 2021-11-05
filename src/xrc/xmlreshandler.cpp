@@ -18,7 +18,7 @@ wxXmlResourceHandlerImplBase* wxXmlResourceHandler::GetImpl() const
 {
     if ( !m_impl )
     {
-        wxFAIL_MSG(wxT("SetImpl() must have been called!"));
+        wxFAIL_MSG("SetImpl() must have been called!");
     }
 
     return m_impl;

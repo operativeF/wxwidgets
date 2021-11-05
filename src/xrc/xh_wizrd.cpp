@@ -30,16 +30,16 @@ wxWizardXmlHandler::wxWizardXmlHandler()
 
 wxObject *wxWizardXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("wxWizard"))
+    if (m_class == "wxWizard")
     {
         XRC_MAKE_INSTANCE(wiz, wxWizard)
 
-        unsigned int style = GetStyle(wxT("exstyle"), 0);
+        unsigned int style = GetStyle("exstyle", 0);
         if (style != 0)
             wiz->SetExtraStyle(style);
         wiz->Create(m_parentAsWindow,
                     GetID(),
-                    GetText(wxT("title")),
+                    GetText("title"),
                     GetBitmap(),
                     GetPosition());
         SetupWindow(wiz);
@@ -55,7 +55,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
     {
         wxWizardPage *page;
 
-        if (m_class == wxT("wxWizardPageSimple"))
+        if (m_class == "wxWizardPageSimple")
         {
             XRC_MAKE_INSTANCE(p, wxWizardPageSimple)
             p->Create(m_wizard, nullptr, nullptr, GetBitmap());
@@ -64,7 +64,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
             page = p;
             m_lastSimplePage = p;
         }
-        else /*if (m_class == wxT("wxWizardPage"))*/
+        else /*if (m_class == "wxWizardPage")*/
         {
             if ( !m_instance )
             {
@@ -87,10 +87,10 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
 
 bool wxWizardXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxWizard")) ||
+    return IsOfClass(node, "wxWizard") ||
            (m_wizard != nullptr &&
-                (IsOfClass(node, wxT("wxWizardPage")) ||
-                 IsOfClass(node, wxT("wxWizardPageSimple")))
+                (IsOfClass(node, "wxWizardPage") ||
+                 IsOfClass(node, "wxWizardPageSimple"))
            );
 }
 

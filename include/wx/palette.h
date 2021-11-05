@@ -22,7 +22,7 @@
 class wxPaletteBase: public wxGDIObject
 {
 public:
-    virtual int GetColoursCount() const { wxFAIL_MSG( wxT("not implemented") ); return 0; }
+    virtual int GetColoursCount() const { wxFAIL_MSG( "not implemented" ); return 0; }
 };
 
 #if defined(__WXMSW__)

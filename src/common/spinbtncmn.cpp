@@ -60,15 +60,15 @@ wxBEGIN_PROPERTIES_TABLE(wxSpinButton)
     wxEVENT_RANGE_PROPERTY( Spin, wxEVT_SCROLL_TOP, wxEVT_SCROLL_CHANGED, wxSpinEvent )
 
     wxPROPERTY( Value, int, SetValue, GetValue, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( Min, int, SetMin, GetMin, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
     wxPROPERTY( Max, int, SetMax, GetMax, 0, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
+                "Helpstring", "group")
 
     wxPROPERTY_FLAGS( WindowStyle, wxSpinButtonStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxSpinButton)

@@ -38,7 +38,7 @@ public:
     // timer is running
     void MarkStopped()
     {
-        wxASSERT_MSG( m_isRunning, wxT("stopping non-running timer?") );
+        wxASSERT_MSG( m_isRunning, "stopping non-running timer?" );
 
         m_isRunning = false;
     }

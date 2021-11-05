@@ -52,13 +52,13 @@ TAG_HANDLER_BEGIN(A, "A")
     TAG_HANDLER_PROC(tag)
     {
         wxString name;
-        if (tag.GetParamAsString(wxT("NAME"), &name))
+        if (tag.GetParamAsString("NAME", &name))
         {
             m_WParser->GetContainer()->InsertCell(new wxHtmlAnchorCell(name));
         }
 
         wxString href;
-        if (tag.GetParamAsString(wxT("HREF"), &href))
+        if (tag.GetParamAsString("HREF", &href))
         {
             wxHtmlLinkInfo oldlnk = m_WParser->GetLink();
             wxColour oldclr = m_WParser->GetActualColor();
@@ -69,7 +69,7 @@ TAG_HANDLER_BEGIN(A, "A")
             int olditalic = m_WParser->GetFontItalic();
             int oldund = m_WParser->GetFontUnderlined();
             wxString oldfontface = m_WParser->GetFontFace();
-            wxString target = tag.GetParam( wxT("TARGET") );
+            wxString target = tag.GetParam( "TARGET" );
 
             // set default styles, might get overridden by ApplyStyle
             m_WParser->SetActualColor(m_WParser->GetLinkColor());

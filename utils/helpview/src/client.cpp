@@ -216,8 +216,8 @@ void MyFrame::OnHelp_Tempdir(wxCommandEvent& event)
 
 void MyFrame::OnHelp_Quitserver(wxCommandEvent& event)
 {
-    // if (!wxGetApp().m_help->m_connection->Poke( wxT("--YouAreDead"), wxT("") ) )
-    // wxLogError(wxT("wxRemoteHtmlHelpController - YouAreDead Failed"));
+    // if (!wxGetApp().m_help->m_connection->Poke( "--YouAreDead"), wxT("" ) )
+    // wxLogError("wxRemoteHtmlHelpController - YouAreDead Failed");
 
     wxGetApp().m_help->Quit();
 }

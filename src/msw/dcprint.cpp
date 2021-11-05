@@ -112,7 +112,7 @@ bool wxPrinterDCImpl::wxStartDoc(const std::string& message)
 
     if ( ::StartDocW(GetHdc(), &docinfo) <= 0 )
     {
-        wxLogLastError(wxT("StartDoc"));
+        wxLogLastError("StartDoc");
         return false;
     }
 
@@ -244,7 +244,7 @@ WXHDC wxGetPrinterDC(const wxPrintData& printDataConst)
                 );
     if ( !hDC )
     {
-        wxLogLastError(wxT("CreateDC(printer)"));
+        wxLogLastError("CreateDC(printer)");
     }
 
     return (WXHDC) hDC;
@@ -270,7 +270,7 @@ bool DrawBitmapUsingStretchDIBits(HDC hdc,
     DIBSECTION ds;
     if ( !::GetObjectW(dib.GetHandle(), sizeof(ds), &ds) )
     {
-        wxLogLastError(wxT("GetObject(DIBSECTION)"));
+        wxLogLastError("GetObject(DIBSECTION)");
 
         return false;
     }
@@ -289,7 +289,7 @@ bool DrawBitmapUsingStretchDIBits(HDC hdc,
                 SRCCOPY
             ) == GDI_ERROR )
     {
-        wxLogLastError(wxT("StretchDIBits"));
+        wxLogLastError("StretchDIBits");
 
         return false;
     }
@@ -304,7 +304,7 @@ void wxPrinterDCImpl::DoDrawBitmap(const wxBitmap& bmp,
                                wxCoord x, wxCoord y,
                                bool useMask)
 {
-    wxCHECK_RET( bmp.IsOk(), wxT("invalid bitmap in wxPrinterDC::DrawBitmap") );
+    wxCHECK_RET( bmp.IsOk(), "invalid bitmap in wxPrinterDC::DrawBitmap" );
 
     int width = bmp.GetWidth(),
         height = bmp.GetHeight();

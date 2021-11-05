@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 
 // default: delimiters are usual white space characters
-constexpr wxChar wxDEFAULT_DELIMITERS[] = wxT(" \t\r\n");
+constexpr char wxDEFAULT_DELIMITERS[] = " \t\r\n";
 
 // wxStringTokenizer mode flags which determine its behaviour
 enum class wxStringTokenizerMode

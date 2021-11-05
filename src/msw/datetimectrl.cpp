@@ -71,7 +71,7 @@ wxDateTimePickerCtrl::MSWCreateDateTimePicker(wxWindow *parent,
 void wxDateTimePickerCtrl::SetValue(const wxDateTime& dt)
 {
     wxCHECK_RET( dt.IsValid() || MSWAllowsNone(),
-                    wxT("this control requires a valid date") );
+                    "this control requires a valid date" );
 
     SYSTEMTIME st;
     if ( dt.IsValid() )
@@ -83,7 +83,7 @@ void wxDateTimePickerCtrl::SetValue(const wxDateTime& dt)
     {
         // The only expected failure is when the date is out of range but we
         // already checked for this above.
-        wxFAIL_MSG( wxT("Setting the calendar date unexpectedly failed.") );
+        wxFAIL_MSG( "Setting the calendar date unexpectedly failed." );
 
         // In any case, skip updating m_date below.
         return;
@@ -133,7 +133,7 @@ void wxDateTimePickerCtrl::SetNullText(const wxString& text)
         //
         // Coincidentally, it's also convenient for us, as we can just check if
         // null text is empty to see if we need to use it elsewhere in the code.
-        m_nullText = wxS(" ");
+        m_nullText = " ";
     }
     else
     {
@@ -189,7 +189,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
                      );
 
             wxCHECK_MSG( hwnd, wxSize(),
-                         wxS("SysDateTimePick32 creation unexpected failed") );
+                         "SysDateTimePick32 creation unexpected failed" );
 
             wxSetWindowFont(hwnd, GetFont());
         }

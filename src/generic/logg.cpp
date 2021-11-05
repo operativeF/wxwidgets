@@ -70,7 +70,7 @@ static wxString TimeStamp(const wxString& format, time_t t)
     if ( !wxStrftime(buf, WXSIZEOF(buf), format, wxLocaltime_r(&t, &tm)) )
     {
         // buffer is too small?
-        wxFAIL_MSG(wxT("strftime() failed"));
+        wxFAIL_MSG("strftime() failed");
     }
     return {buf};
 }
@@ -258,7 +258,7 @@ wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
     const size_t nMsgCount = messages.size();
     message.reserve(nMsgCount*100);
     for ( size_t n = nMsgCount; n > 0; n-- ) {
-        message << m_aMessages[n - 1] << wxT("\n");
+        message << m_aMessages[n - 1] << "\n";
     }
 
     DoShowSingleLogMessage(message, title, style);
@@ -850,7 +850,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
         }
 
         wxString msg = m_messages[n];
-        msg.Replace(wxT("\n"), wxT(" "));
+        msg.Replace("\n", " ");
         msg = EllipsizeString(msg);
 
         m_listctrl->InsertItem(n, msg, image);
@@ -985,7 +985,7 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
 {
     // get the file name
     // -----------------
-    wxString filename = wxSaveFileSelector(wxT("log"), wxT("txt"), wxT("log.txt"), parent);
+    wxString filename = wxSaveFileSelector("log", "txt", "log.txt", parent);
     if ( !filename ) {
         // cancelled
         return -1;

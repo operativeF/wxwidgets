@@ -34,7 +34,7 @@ bool UpdatePowerResourceExecutionState()
 
     if ( ::SetThreadExecutionState(executionState) == 0 )
     {
-        wxLogLastError(wxT("SetThreadExecutionState()"));
+        wxLogLastError("SetThreadExecutionState()");
         return false;
     }
 
@@ -100,7 +100,7 @@ static inline bool wxGetPowerStatus(SYSTEM_POWER_STATUS *sps)
 {
     if ( !::GetSystemPowerStatus(sps) )
     {
-        wxLogLastError(wxT("GetSystemPowerStatus()"));
+        wxLogLastError("GetSystemPowerStatus()");
         return false;
     }
 
@@ -125,7 +125,7 @@ wxPowerType wxGetPowerType()
                 return wxPowerType::Socket;
 
             default:
-                wxLogDebug(wxT("Unknown ACLineStatus=%u"), sps.ACLineStatus);
+                wxLogDebug("Unknown ACLineStatus=%u", sps.ACLineStatus);
                 [[fallthrough]];
             case 255:
                 break;

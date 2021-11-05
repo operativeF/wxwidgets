@@ -50,23 +50,23 @@ wxObject *wxDialogXmlHandler::DoCreateResource()
 
     dlg->Create(m_parentAsWindow,
                 GetID(),
-                GetText(wxT("title")),
+                GetText("title"),
                 wxDefaultPosition, wxDefaultSize,
-                GetStyle(wxT("style"), wxDEFAULT_DIALOG_STYLE),
+                GetStyle("style", wxDEFAULT_DIALOG_STYLE),
                 GetName());
 
-    if (HasParam(wxT("size")))
-        dlg->SetClientSize(GetSize(wxT("size"), dlg));
-    if (HasParam(wxT("pos")))
+    if (HasParam("size"))
+        dlg->SetClientSize(GetSize("size", dlg));
+    if (HasParam("pos"))
         dlg->Move(GetPosition());
-    if (HasParam(wxT("icon")))
-        dlg->SetIcons(GetIconBundle(wxT("icon"), wxART_FRAME_ICON));
+    if (HasParam("icon"))
+        dlg->SetIcons(GetIconBundle("icon", wxART_FRAME_ICON));
 
     SetupWindow(dlg);
 
     CreateChildren(dlg);
 
-    if (GetBool(wxT("centered"), false))
+    if (GetBool("centered", false))
         dlg->Centre();
 
     return dlg;
@@ -74,7 +74,7 @@ wxObject *wxDialogXmlHandler::DoCreateResource()
 
 bool wxDialogXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxDialog"));
+    return IsOfClass(node, "wxDialog");
 }
 
 #endif // wxUSE_XRC

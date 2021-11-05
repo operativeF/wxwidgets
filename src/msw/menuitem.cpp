@@ -504,7 +504,7 @@ void wxMenuItem::Enable(bool enable)
 
         if ( rc == -1 )
         {
-            wxLogLastError(wxT("EnableMenuItem"));
+            wxLogLastError("EnableMenuItem");
         }
     }
 
@@ -513,7 +513,7 @@ void wxMenuItem::Enable(bool enable)
 
 void wxMenuItem::Check(bool check)
 {
-    wxCHECK_RET( IsCheckable(), wxT("only checkable items may be checked") );
+    wxCHECK_RET( IsCheckable(), "only checkable items may be checked" );
 
     if ( m_isChecked == check )
         return;
@@ -534,7 +534,7 @@ void wxMenuItem::Check(bool check)
             const wxMenuItemList& items = m_parentMenu->GetMenuItems();
             int pos = items.IndexOf(this);
             wxCHECK_RET( pos != wxNOT_FOUND,
-                         wxT("menuitem not found in the menu items list?") );
+                         "menuitem not found in the menu items list?" );
 
             // get the radio group range
             int start,
@@ -542,7 +542,7 @@ void wxMenuItem::Check(bool check)
 
             if ( !m_parentMenu->MSWGetRadioGroupRange(pos, &start, &end) )
             {
-                wxFAIL_MSG( wxT("Menu radio item not part of radio group?") );
+                wxFAIL_MSG( "Menu radio item not part of radio group?" );
                 return;
             }
 
@@ -550,7 +550,7 @@ void wxMenuItem::Check(bool check)
             // (NT4 SP6) and I suspect this could happen to the others as well,
             // so don't do it!
             wxCHECK_RET( start != -1 && end != -1,
-                         wxT("invalid ::CheckMenuRadioItem() parameter(s)") );
+                         "invalid ::CheckMenuRadioItem() parameter(s)" );
 
             if ( !::CheckMenuRadioItem(hmenu,
                                        start,   // the first radio group item
@@ -558,7 +558,7 @@ void wxMenuItem::Check(bool check)
                                        pos,     // the one to check
                                        MF_BYPOSITION) )
             {
-                wxLogLastError(wxT("CheckMenuRadioItem"));
+                wxLogLastError("CheckMenuRadioItem");
             }
 
             // also uncheck all the other items in this radio group
@@ -579,7 +579,7 @@ void wxMenuItem::Check(bool check)
                                  GetMSWId(),
                                  MF_BYCOMMAND | flags) == (DWORD)-1 )
             {
-                wxFAIL_MSG(wxT("CheckMenuItem() failed, item not in the menu?"));
+                wxFAIL_MSG("CheckMenuItem() failed, item not in the menu?");
             }
         }
     }
@@ -626,7 +626,7 @@ void wxMenuItem::SetItemLabel(const std::string& txt)
                  MIIM_FTYPE;
     if ( !::GetMenuItemInfoW(hMenu, itemPos, TRUE, &info) )
     {
-        wxLogLastError(wxT("GetMenuItemInfo"));
+        wxLogLastError("GetMenuItemInfo");
         return;
     }
 
@@ -655,7 +655,7 @@ void wxMenuItem::SetItemLabel(const std::string& txt)
 
     if ( !::SetMenuItemInfoW(hMenu, itemPos, TRUE, &info) )
     {
-        wxLogLastError(wxT("SetMenuItemInfo"));
+        wxLogLastError("SetMenuItemInfo");
     }
 }
 
@@ -696,7 +696,7 @@ void wxMenuItem::DoSetBitmap(const wxBitmap& bmpNew, bool bChecked)
             wxMenuItem *item = m_parentMenu->FindChildItem(GetId(), &pos);
             if ( item )
             {
-                wxCHECK_RET( item == this, wxS("Non unique menu item ID?") );
+                wxCHECK_RET( item == this, "Non unique menu item ID?" );
 
                 // Use a copied value of m_parentMenu because it is
                 // nullified by Remove.
@@ -736,7 +736,7 @@ void wxMenuItem::DoSetBitmap(const wxBitmap& bmpNew, bool bChecked)
 
     if ( !::SetMenuItemInfoW(GetHMenuOf(m_parentMenu), itemPos, TRUE, &mii) )
     {
-        wxLogLastError(wxT("SetMenuItemInfo"));
+        wxLogLastError("SetMenuItemInfo");
     }
 }
 

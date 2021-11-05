@@ -166,7 +166,7 @@ public:
     static void Chain(wxWizardPageSimple *first, wxWizardPageSimple *second)
     {
         wxCHECK_RET( first && second,
-                     wxT("NULL passed to wxWizardPageSimple::Chain") );
+                     "NULL passed to wxWizardPageSimple::Chain" );
 
         first->SetNext(second);
         second->SetPrev(first);

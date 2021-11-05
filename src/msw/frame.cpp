@@ -81,7 +81,7 @@ bool wxFrame::Create(wxWindow *parent,
         // FIXME: Change to use ChangeWindowMessageFilterEx instead.
         using ChangeWindowMessageFilter_t = BOOL (WINAPI*)(UINT message,
                                                            DWORD dwFlag);
-        wxDynamicLibrary dllUser32(wxT("user32.dll"));
+        wxDynamicLibrary dllUser32("user32.dll");
 
         ChangeWindowMessageFilter_t pfnChangeWindowMessageFilter = nullptr;
         wxDL_INIT_FUNC(pfn, ChangeWindowMessageFilter, dllUser32);
@@ -314,7 +314,7 @@ void wxFrame::AttachMenuBar(wxMenuBar *menubar)
 
             if ( !m_hMenu )
             {
-                wxFAIL_MSG( wxT("failed to create menu bar") );
+                wxFAIL_MSG( "failed to create menu bar" );
                 return;
             }
         }
@@ -326,7 +326,7 @@ void wxFrame::InternalSetMenuBar()
 {
     if ( !::SetMenu(GetHwnd(), (HMENU)m_hMenu) )
     {
-        wxLogLastError(wxT("SetMenu"));
+        wxLogLastError("SetMenu");
     }
 }
 
@@ -360,13 +360,13 @@ bool wxFrame::DoSendMenuOpenCloseEvent(wxEventType evtType, wxMenu* menu)
         }
         else if ( evtType == wxEVT_MENU_CLOSE )
         {
-            wxASSERT_MSG( m_menuDepth > 0, wxS("No open menus?") );
+            wxASSERT_MSG( m_menuDepth > 0, "No open menus?" );
 
             m_menuDepth--;
         }
         else
         {
-            wxFAIL_MSG( wxS("Unexpected menu event type") );
+            wxFAIL_MSG( "Unexpected menu event type" );
         }
     }
 

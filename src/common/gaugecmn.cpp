@@ -59,13 +59,13 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxGauge, wxControl, "wx/gauge.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxGauge)
 wxPROPERTY( Value, int, SetValue, GetValue, 0, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 wxPROPERTY( Range, int, SetRange, GetRange, 0, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 
 wxPROPERTY_FLAGS( WindowStyle, wxGaugeStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxGauge)

@@ -319,7 +319,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxRichTextAttr normalParaAttr;
     normalParaAttr.SetFont(font);
-    normalParaAttr.SetTextColour(wxColour(wxT("LIGHT GREY")));
+    normalParaAttr.SetTextColour(wxColour("LIGHT GREY"));
 
     m_previewCtrl->Freeze();
     m_previewCtrl->Clear();
@@ -445,8 +445,8 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
 
     if (attr->HasLeftIndent())
     {
-        wxString leftIndent(wxString::Format(wxT("%ld"), attr->GetLeftIndent() + attr->GetLeftSubIndent()));
-        wxString leftFirstIndent(wxString::Format(wxT("%ld"), attr->GetLeftIndent()));
+        wxString leftIndent(wxString::Format("%ld", attr->GetLeftIndent() + attr->GetLeftSubIndent()));
+        wxString leftFirstIndent(wxString::Format("%ld", attr->GetLeftIndent()));
 
         m_indentLeft->SetValue(leftIndent);
         m_indentLeftFirst->SetValue(leftFirstIndent);
@@ -459,7 +459,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
 
     if (attr->HasRightIndent())
     {
-        wxString rightIndent(wxString::Format(wxT("%ld"), attr->GetRightIndent()));
+        wxString rightIndent(wxString::Format("%ld", attr->GetRightIndent()));
 
         m_indentRight->SetValue(rightIndent);
     }
@@ -468,7 +468,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
 
     if (attr->HasParagraphSpacingAfter())
     {
-        wxString spacingAfter(wxString::Format(wxT("%d"), attr->GetParagraphSpacingAfter()));
+        wxString spacingAfter(wxString::Format("%d", attr->GetParagraphSpacingAfter()));
 
         m_spacingAfter->SetValue(spacingAfter);
     }
@@ -477,7 +477,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
 
     if (attr->HasParagraphSpacingBefore())
     {
-        wxString spacingBefore(wxString::Format(wxT("%d"), attr->GetParagraphSpacingBefore()));
+        wxString spacingBefore(wxString::Format("%d", attr->GetParagraphSpacingBefore()));
 
         m_spacingBefore->SetValue(spacingBefore);
     }

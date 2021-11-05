@@ -509,9 +509,9 @@ constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
 // there is no PATH variable in Classic Mac OS so just use the
 // semicolon (it must be different from the file name separator)
 // NB: these are strings and not characters on purpose!
-constexpr wxChar wxPATH_SEP_DOS[]        = wxT(";");
-constexpr wxChar wxPATH_SEP_UNIX[]       = wxT(":");
-constexpr wxChar wxPATH_SEP_MAC[]        = wxT(";");
+constexpr char wxPATH_SEP_DOS[]        = ";";
+constexpr char wxPATH_SEP_UNIX[]       = ":";
+constexpr char wxPATH_SEP_MAC[]        = ";";
 
 // platform independent versions
 #if defined(__UNIX__)

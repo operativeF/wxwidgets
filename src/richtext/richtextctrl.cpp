@@ -830,7 +830,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
                 case wxDragResult::Copy:  break;
 
                 case wxDragResult::Error:
-                    wxLogError(wxT("An error occurred during drag and drop operation"));
+                    wxLogError("An error occurred during drag and drop operation");
                     [[fallthrough]];
                 case wxDragResult::None:
                 case wxDragResult::Cancel:
@@ -1779,7 +1779,7 @@ bool wxRichTextCtrl::ExtendSelection(long oldPos, long newPos, int flags)
 
         if (newRange.GetStart() > newRange.GetEnd())
         {
-            wxLogDebug(wxT("Strange selection range"));
+            wxLogDebug("Strange selection range");
         }
 
         return true;
@@ -4099,7 +4099,7 @@ void wxRichTextCtrl::PositionCaret(wxRichTextParagraphLayoutBox* container)
     if (!GetCaret())
         return;
 
-    //wxLogDebug(wxT("PositionCaret"));
+    //wxLogDebug("PositionCaret");
 
     wxRect caretRect;
     if (GetCaretPositionForIndex(GetCaretPosition(), caretRect, container))
@@ -4797,7 +4797,7 @@ void wxRichTextCtrl::ClearAvailableFontNames()
 
 void wxRichTextCtrl::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
 {
-    //wxLogDebug(wxT("wxRichTextCtrl::OnSysColourChanged"));
+    //wxLogDebug("wxRichTextCtrl::OnSysColourChanged");
 
     wxTextAttrEx basicStyle = GetBasicStyle();
     basicStyle.SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
@@ -5043,7 +5043,7 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
 #if wxUSE_DRAG_AND_DROP
 bool wxRichTextDropSource::GiveFeedback(wxDragResult WXUNUSED(effect))
 {
-    wxCHECK_MSG(m_rtc, false, wxT("NULL m_rtc"));
+    wxCHECK_MSG(m_rtc, false, "NULL m_rtc");
 
     long position = 0;
     int hit = 0;

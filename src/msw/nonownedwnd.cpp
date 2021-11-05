@@ -30,7 +30,7 @@ bool wxNonOwnedWindow::DoClearShape()
 {
     if (::SetWindowRgn(GetHwnd(), nullptr, TRUE) == 0)
     {
-        wxLogLastError(wxT("SetWindowRgn"));
+        wxLogLastError("SetWindowRgn");
         return false;
     }
 
@@ -55,7 +55,7 @@ bool wxNonOwnedWindow::DoSetRegionShape(const wxRegion& region)
     // Now call the shape API with the new region.
     if (::SetWindowRgn(GetHwnd(), hrgn, TRUE) == 0)
     {
-        wxLogLastError(wxT("SetWindowRgn"));
+        wxLogLastError("SetWindowRgn");
         return false;
     }
     return true;

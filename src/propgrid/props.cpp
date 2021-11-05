@@ -44,7 +44,7 @@ wxStringProperty::wxStringProperty( const wxString& label,
 
 void wxStringProperty::OnSetValue()
 {
-    if ( !m_value.IsNull() && m_value.GetString() == wxS("<composed>") )
+    if ( !m_value.IsNull() && m_value.GetString() == "<composed>" )
         SetFlag(wxPG_PROP_COMPOSED_VALUE);
 
     if ( HasFlag(wxPG_PROP_COMPOSED_VALUE) )
@@ -69,8 +69,8 @@ wxString wxStringProperty::ValueToString( wxVariant& value,
         {
             // Calling this under incorrect conditions will fail
             wxASSERT_MSG( argFlags & wxPG_VALUE_IS_CURRENT,
-                          wxS("Sorry, currently default wxPGProperty::ValueToString() ")
-                          wxS("implementation only works if value is m_value.") );
+                          "Sorry, currently default wxPGProperty::ValueToString() "
+                          "implementation only works if value is m_value." );
 
             DoGenerateComposedValue(s, argFlags);
         }
@@ -128,10 +128,10 @@ wxNumericPropertyValidator::
     switch ( base )
     {
         case 2:
-            allowedChars += wxS("01");
+            allowedChars += "01";
             break;
         case 8:
-            allowedChars += wxS("01234567");
+            allowedChars += "01234567";
             break;
         case 10:
             style |= wxFILTER_DIGITS;
@@ -147,14 +147,14 @@ wxNumericPropertyValidator::
 
     if ( numericType == Signed )
     {
-        allowedChars += wxS("-+");
+        allowedChars += "-+";
     }
     else if ( numericType == Float )
     {
-        allowedChars += wxS("-+eE");
+        allowedChars += "-+eE";
 
         // Use locale-specific decimal point
-        allowedChars += wxString::Format(wxS("%g"), 1.1)[1];
+        allowedChars += wxString::Format("%g", 1.1)[1];
     }
 
     SetStyle(style);
@@ -363,7 +363,7 @@ wxString wxIntProperty::ValueToString( wxVariant& value,
     const wxString valType(value.GetType());
     if ( valType == wxPG_VARIANT_TYPE_LONG )
     {
-        return wxString::Format(wxS("%li"),value.GetLong());
+        return wxString::Format("%li",value.GetLong());
     }
 #if wxUSE_LONGLONG
     else if ( valType == wxPG_VARIANT_TYPE_LONGLONG )
@@ -996,7 +996,7 @@ wxString wxBoolProperty::ValueToString( wxVariant& value,
             if ( wxPGGlobalVars->m_autoGetTranslation )
                 notFmt = _("Not %s");
             else
-                notFmt = wxS("Not %s");
+                notFmt = "Not %s";
 
             return wxString::Format(notFmt, m_label);
         }
@@ -1007,14 +1007,14 @@ wxString wxBoolProperty::ValueToString( wxVariant& value,
         return wxPGGlobalVars->m_boolChoices[boolValue?1:0].GetText();
     }
 
-    return boolValue? wxS("true"): wxS("false");
+    return boolValue ? "true" : "false";
 }
 
 bool wxBoolProperty::StringToValue( wxVariant& variant, const wxString& text, int WXUNUSED(argFlags) ) const
 {
     bool boolValue = false;
     if ( text.CmpNoCase(wxPGGlobalVars->m_boolChoices[1].GetText()) == 0 ||
-         text.CmpNoCase(wxS("true")) == 0 ||
+         text.CmpNoCase("true") == 0 ||
          text.CmpNoCase(m_label) == 0 )
         boolValue = true;
 
@@ -1162,7 +1162,7 @@ void wxEnumProperty::OnSetValue()
     }
     else
     {
-        wxFAIL_MSG( wxS("Unexpected value type") );
+        wxFAIL_MSG( "Unexpected value type" );
         return;
     }
 
@@ -1345,7 +1345,7 @@ void wxEditEnumProperty::OnSetValue()
     }
     else
     {
-        wxFAIL_MSG( wxS("Unexpected value type") );
+        wxFAIL_MSG( "Unexpected value type" );
         return;
     }
 
@@ -1587,7 +1587,7 @@ wxString wxFlagsProperty::ValueToString( wxVariant& value,
         if ( doAdd )
         {
             text += choices.GetLabel(i);
-            text += wxS(", ");
+            text += ", ";
         }
     }
 
@@ -1748,7 +1748,7 @@ wxValidator* wxDirProperty::DoGetValidator() const
 
 bool wxDirProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 {
-    wxASSERT_MSG(value.IsType(wxS("string")), "Function called for incompatible property");
+    wxASSERT_MSG(value.IsType("string"), "Function called for incompatible property");
 
     // Update property value from editor, if necessary
     wxSize dlg_sz;
@@ -1882,12 +1882,12 @@ void wxFileProperty::OnSetValue()
         size_t pos = 0;
         size_t len = m_wildcard.length();
 
-        pos = m_wildcard.find(wxS("|"), pos);
+        pos = m_wildcard.find("|", pos);
         while ( pos != wxString::npos && pos < (len-3) )
         {
             size_t ext_begin = pos + 3;
 
-            pos = m_wildcard.find(wxS("|"), ext_begin);
+            pos = m_wildcard.find("|", ext_begin);
             if ( pos == wxString::npos )
                 pos = len;
             wxString found_ext = m_wildcard.substr(ext_begin, pos-ext_begin);
@@ -1907,7 +1907,7 @@ void wxFileProperty::OnSetValue()
             }
 
             if ( pos != len )
-                pos = m_wildcard.find(wxS("|"), pos+1);
+                pos = m_wildcard.find("|", pos+1);
 
             curind++;
         }
@@ -2015,7 +2015,7 @@ bool wxFileProperty::DoSetAttribute( const wxString& name, wxVariant& value )
 
 bool wxFileProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 {
-    wxASSERT_MSG(value.IsType(wxS("string")), "Function called for incompatible property");
+    wxASSERT_MSG(value.IsType("string"), "Function called for incompatible property");
 
     wxFileName filename(value.GetString());
     wxString path = filename.GetPath();
@@ -2067,7 +2067,7 @@ wxString wxLongStringProperty::ValueToString( wxVariant& value,
 
 bool wxLongStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 {
-    wxASSERT_MSG(value.IsType(wxS("string")), "Function called for incompatible property");
+    wxASSERT_MSG(value.IsType("string"), "Function called for incompatible property");
 
     // launch editor dialog
     wxDialog* dlg = new wxDialog(pg->GetPanel(), wxID_ANY,
@@ -2567,7 +2567,7 @@ wxArrayStringProperty::ArrayStringToString( wxString& dst,
     if ( flags & Escape )
     {
         preas = delimiter;
-        pdr = wxS("\\");
+        pdr = "\\";
         pdr += delimiter;
     }
 
@@ -2585,7 +2585,7 @@ wxArrayStringProperty::ArrayStringToString( wxString& dst,
         // Useful when quoting.
         if ( flags & Escape )
         {
-            str.Replace( wxS("\\"), wxS("\\\\"), true );
+            str.Replace("\\", "\\\\", true);
             if ( !pdr.empty() )
                 str.Replace( preas, pdr, true );
         }
@@ -2595,7 +2595,7 @@ wxArrayStringProperty::ArrayStringToString( wxString& dst,
         if ( i < (itemCount-1) )
         {
             dst.append( delimStr );
-            dst.append( wxS(" ") );
+            dst.append( " " );
             dst.append( preas );
         }
         else if ( flags & QuoteStrings )
@@ -2697,7 +2697,7 @@ bool wxArrayStringProperty::StringToValue( wxVariant& variant,
 
             // Need to replace backslashes with empty characters
             // (opposite what is done in ConvertArrayToString()).
-            token.Replace ( wxS("\\\\"), wxS("\\"), true );
+            token.Replace ("\\\\", "\\", true );
 
             arr.push_back( token );
 

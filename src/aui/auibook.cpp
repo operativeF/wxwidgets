@@ -329,14 +329,14 @@ int wxAuiTabContainer::GetIdxFromWindow(wxWindow* wnd) const
 
 wxAuiNotebookPage& wxAuiTabContainer::GetPage(size_t idx)
 {
-    wxASSERT_MSG(idx < m_pages.GetCount(), wxT("Invalid Page index"));
+    wxASSERT_MSG(idx < m_pages.GetCount(), "Invalid Page index");
 
     return m_pages[idx];
 }
 
 const wxAuiNotebookPage& wxAuiTabContainer::GetPage(size_t idx) const
 {
-    wxASSERT_MSG(idx < m_pages.GetCount(), wxT("Invalid Page index"));
+    wxASSERT_MSG(idx < m_pages.GetCount(), "Invalid Page index");
 
     return m_pages[idx];
 }
@@ -1667,7 +1667,7 @@ void wxAuiNotebook::OnSysColourChanged(wxSysColourChangedEvent &event)
     for (i = 0; i < pane_count; ++i)
     {
         wxAuiPaneInfo& pane = all_panes.Item(i);
-        if (pane.name == wxT("dummy"))
+        if (pane.name == "dummy")
             continue;
         wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
         wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
@@ -1727,7 +1727,7 @@ void wxAuiNotebook::InitNotebook(unsigned int style)
     m_mgr.SetDockSizeConstraint(1.0, 1.0); // no dock size constraint
 
     m_mgr.AddPane(m_dummyWnd,
-              wxAuiPaneInfo().Name(wxT("dummy")).Bottom().CaptionVisible(false).Show(false));
+              wxAuiPaneInfo().Name("dummy").Bottom().CaptionVisible(false).Show(false));
 
     m_mgr.Update();
 }
@@ -1757,7 +1757,7 @@ void wxAuiNotebook::SetArtProvider(wxAuiTabArt* art)
         for (size_t i = 0; i < pane_count; ++i)
         {
             wxAuiPaneInfo& pane = all_panes.Item(i);
-            if (pane.name == wxT("dummy"))
+            if (pane.name == "dummy")
                 continue;
             wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
             wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
@@ -1824,7 +1824,7 @@ bool wxAuiNotebook::UpdateTabCtrlHeight()
     for (i = 0; i < pane_count; ++i)
     {
         wxAuiPaneInfo& pane = all_panes.Item(i);
-        if (pane.name == wxT("dummy"))
+        if (pane.name == "dummy")
             continue;
         wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
         wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
@@ -1841,7 +1841,7 @@ void wxAuiNotebook::UpdateHintWindowSize()
     wxSize size = CalculateNewSplitSize();
 
     // the placeholder hint window should be set to this size
-    wxAuiPaneInfo& info = m_mgr.GetPane(wxT("dummy"));
+    wxAuiPaneInfo& info = m_mgr.GetPane("dummy");
     if (info.IsOk())
     {
         info.MinSize(size);
@@ -1861,7 +1861,7 @@ wxSize wxAuiNotebook::CalculateNewSplitSize()
     for (i = 0; i < pane_count; ++i)
     {
         wxAuiPaneInfo& pane = all_panes.Item(i);
-        if (pane.name == wxT("dummy"))
+        if (pane.name == "dummy")
             continue;
         tab_ctrl_count++;
     }
@@ -1924,7 +1924,7 @@ void wxAuiNotebook::SetWindowStyleFlag(unsigned int style)
         for (i = 0; i < pane_count; ++i)
         {
             wxAuiPaneInfo& pane = all_panes.Item(i);
-            if (pane.name == wxT("dummy"))
+            if (pane.name == "dummy")
                 continue;
             wxTabFrame* tabframe = (wxTabFrame*)pane.window;
             wxAuiTabCtrl* tabctrl = tabframe->m_tabs;
@@ -1951,7 +1951,7 @@ bool wxAuiNotebook::InsertPage(size_t page_idx,
                                bool select,
                                const wxBitmap& bitmap)
 {
-    wxASSERT_MSG(page, wxT("page pointer must be non-NULL"));
+    wxASSERT_MSG(page, "page pointer must be non-NULL");
     if (!page)
         return false;
 
@@ -2259,7 +2259,7 @@ int wxAuiNotebook::SetSelection(size_t new_page)
 void wxAuiNotebook::SetSelectionToWindow(wxWindow *win)
 {
     const int idx = m_tabs.GetIdxFromWindow(win);
-    wxCHECK_RET( idx != wxNOT_FOUND, wxT("invalid notebook page") );
+    wxCHECK_RET( idx != wxNOT_FOUND, "invalid notebook page" );
 
 
     // since a tab was clicked, let the parent know that we received
@@ -2302,7 +2302,7 @@ void wxAuiNotebook::DoSizing()
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*)all_panes.Item(i).window;
@@ -2332,7 +2332,7 @@ wxAuiTabCtrl* wxAuiNotebook::GetActiveTabCtrl()
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*)all_panes.Item(i).window;
@@ -2366,7 +2366,7 @@ bool wxAuiNotebook::FindTab(wxWindow* page, wxAuiTabCtrl** ctrl, int* idx)
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*)all_panes.Item(i).window;
@@ -2677,7 +2677,7 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
 
 
     wxAuiTabCtrl* src_tabs = (wxAuiTabCtrl*)evt.GetEventObject();
-    wxCHECK_RET( src_tabs, wxT("no source object?") );
+    wxCHECK_RET( src_tabs, "no source object?" );
 
     src_tabs->SetCursor(wxCursor(wxCURSOR_ARROW));
 
@@ -2743,7 +2743,7 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
 
                 // get main index of the page
                 int main_idx = m_tabs.GetIdxFromWindow(src_page);
-                wxCHECK_RET( main_idx != wxNOT_FOUND, wxT("no source page?") );
+                wxCHECK_RET( main_idx != wxNOT_FOUND, "no source page?" );
 
 
                 // make a copy of the page info
@@ -2911,7 +2911,7 @@ void wxAuiNotebook::OnTabCancelDrag(wxAuiNotebookEvent& command_evt)
     m_mgr.HideHint();
 
     wxAuiTabCtrl* src_tabs = (wxAuiTabCtrl*)evt.GetEventObject();
-    wxCHECK_RET( src_tabs, wxT("no source object?") );
+    wxCHECK_RET( src_tabs, "no source object?" );
 
     src_tabs->SetCursor(wxCursor(wxCURSOR_ARROW));
 }
@@ -2924,7 +2924,7 @@ wxAuiTabCtrl* wxAuiNotebook::GetTabCtrlFromPoint(const wxPoint& pt)
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*)all_panes.Item(i).window;
@@ -2943,7 +2943,7 @@ wxWindow* wxAuiNotebook::GetTabFrameFromTabCtrl(wxWindow* tab_ctrl)
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*)all_panes.Item(i).window;
@@ -2964,7 +2964,7 @@ void wxAuiNotebook::RemoveEmptyTabFrames()
     size_t i, pane_count = all_panes.GetCount();
     for (i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tab_frame = (wxTabFrame*)all_panes.Item(i).window;
@@ -2992,7 +2992,7 @@ void wxAuiNotebook::RemoveEmptyTabFrames()
     bool center_found = false;
     for (i = 0; i < pane_count; ++i)
     {
-        if (panes.Item(i).name == wxT("dummy"))
+        if (panes.Item(i).name == "dummy")
             continue;
         if (panes.Item(i).dock_direction == wxAUI_DOCK_CENTRE)
             center_found = true;
@@ -3024,7 +3024,7 @@ void wxAuiNotebook::OnChildFocusNotebook(wxChildFocusEvent& evt)
     for (i = 0; i < pane_count; ++i)
     {
         wxAuiPaneInfo& pane = all_panes.Item(i);
-        if (pane.name == wxT("dummy"))
+        if (pane.name == "dummy")
             continue;
         wxTabFrame* tabframe = (wxTabFrame*)pane.window;
         if (tabframe->m_tabs->IsDragging())
@@ -3170,7 +3170,7 @@ void wxAuiNotebook::OnTabButton(wxAuiNotebookEvent& evt)
 #endif
             {
                 int main_idx = m_tabs.GetIdxFromWindow(close_wnd);
-                wxCHECK_RET( main_idx != wxNOT_FOUND, wxT("no page to delete?") );
+                wxCHECK_RET( main_idx != wxNOT_FOUND, "no page to delete?" );
 
                 DeletePage(main_idx);
             }
@@ -3341,7 +3341,7 @@ int wxAuiNotebook::HitTest (const wxPoint &pt, unsigned int* flags) const
     const size_t pane_count = all_panes.GetCount();
     for (size_t i = 0; i < pane_count; ++i)
     {
-        if (all_panes.Item(i).name == wxT("dummy"))
+        if (all_panes.Item(i).name == "dummy")
             continue;
 
         wxTabFrame* tabframe = (wxTabFrame*) all_panes.Item(i).window;
@@ -3531,7 +3531,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
     for ( size_t n = 0; n < pane_count; ++n )
     {
         const wxAuiPaneInfo &pInfo = all_panes[n];
-        if ( pInfo.name == wxT("dummy") || pInfo.IsFloating() )
+        if ( pInfo.name == "dummy" || pInfo.IsFloating() )
             continue;
 
         const wxTabFrame* tabframe = (wxTabFrame*) all_panes.Item(n).window;
@@ -3633,7 +3633,7 @@ int wxAuiNotebook::DoModifySelection(size_t n, bool events)
             for (i = 0; i < pane_count; ++i)
             {
                 wxAuiPaneInfo& pane = all_panes.Item(i);
-                if (pane.name == wxT("dummy"))
+                if (pane.name == "dummy")
                     continue;
                 wxAuiTabCtrl* tabctrl = ((wxTabFrame*)pane.window)->m_tabs;
                 if (tabctrl != ctrl)

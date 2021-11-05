@@ -170,7 +170,7 @@ STDMETHODIMP wxIEnumVARIANT::Next(ULONG      celt,
                                     VARIANT *rgelt,
                                     ULONG     *pceltFetched)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumVARIANT::Next"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumVARIANT::Next");
 
     if ( celt > 1 ) {
         // we only return 1 element at a time - mainly because I'm too lazy to
@@ -178,7 +178,7 @@ STDMETHODIMP wxIEnumVARIANT::Next(ULONG      celt,
         return S_FALSE;
     }
 
-    if ( !m_variant.IsType(wxS("list")) )
+    if ( !m_variant.IsType("list") )
         return S_FALSE;
 
     if ( m_nCurrent < (int) m_variant.GetList().GetCount() ) {
@@ -200,9 +200,9 @@ STDMETHODIMP wxIEnumVARIANT::Next(ULONG      celt,
 
 STDMETHODIMP wxIEnumVARIANT::Skip(ULONG celt)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumVARIANT::Skip"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumVARIANT::Skip");
 
-    if ( !m_variant.IsType(wxS("list")) )
+    if ( !m_variant.IsType("list") )
         return S_FALSE;
 
     m_nCurrent += celt;
@@ -217,7 +217,7 @@ STDMETHODIMP wxIEnumVARIANT::Skip(ULONG celt)
 
 STDMETHODIMP wxIEnumVARIANT::Reset()
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumVARIANT::Reset"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumVARIANT::Reset");
 
     m_nCurrent = 0;
 
@@ -226,7 +226,7 @@ STDMETHODIMP wxIEnumVARIANT::Reset()
 
 STDMETHODIMP wxIEnumVARIANT::Clone(IEnumVARIANT **ppenum)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumVARIANT::Clone"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumVARIANT::Clone");
 
     wxIEnumVARIANT *pNew = new wxIEnumVARIANT(m_variant);
     pNew->AddRef();
@@ -438,7 +438,7 @@ void wxIAccessible::Quiesce()
 
 STDMETHODIMP wxIAccessible::accHitTest(LONG xLeft, LONG yLeft, VARIANT* pVarID)
 {
-    wxLogTrace(wxT("access"), wxT("accHitTest"));
+    wxLogTrace("access", "accHitTest");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -511,7 +511,7 @@ STDMETHODIMP wxIAccessible::accHitTest(LONG xLeft, LONG yLeft, VARIANT* pVarID)
 
 STDMETHODIMP wxIAccessible::accLocation ( LONG* pxLeft, LONG* pyTop, LONG* pcxWidth, LONG* pcyHeight, VARIANT varID)
 {
-    wxLogTrace(wxT("access"), wxT("accLocation"));
+    wxLogTrace("access", "accLocation");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -565,11 +565,12 @@ STDMETHODIMP wxIAccessible::accNavigate ( LONG navDir, VARIANT varStart, VARIANT
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
-    wxLogTrace(wxT("access"), wxString(wxT("accNavigate for ")) + m_pAccessible->GetWindow()->wxGetClassInfo()->wxGetClassName());
+    // FIXME: Log trace doesn't play nice with std::string.
+    //wxLogTrace("access", fmt::format("accNavigate for {}", m_pAccessible->GetWindow()->wxGetClassInfo()->wxGetClassName()));
 
     if ( varStart.vt != VT_I4 || varStart.lVal < 0 )
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for accNavigate"));
+        wxLogTrace("access", "Invalid arg for accNavigate");
         return E_INVALIDARG;
     }
 
@@ -584,75 +585,75 @@ STDMETHODIMP wxIAccessible::accNavigate ( LONG navDir, VARIANT varStart, VARIANT
     {
     case NAVDIR_DOWN:
         navDirWX = wxNavDir::Down;
-        navStr = wxT("wxNavDir::Down");
+        navStr = "wxNavDir::Down";
         break;
 
     case NAVDIR_FIRSTCHILD:
         navDirWX = wxNavDir::FirstChild;
-        navStr = wxT("wxNavDir::FirstChild");
+        navStr = "wxNavDir::FirstChild";
         break;
 
     case NAVDIR_LASTCHILD:
         navDirWX = wxNavDir::LastChild;
-        navStr = wxT("wxNavDir::LastChild");
+        navStr = "wxNavDir::LastChild";
         break;
 
     case NAVDIR_LEFT:
         navDirWX = wxNavDir::Left;
-        navStr = wxT("wxNavDir::Left");
+        navStr = "wxNavDir::Left";
         break;
 
     case NAVDIR_NEXT:
         navDirWX = wxNavDir::Next;
-        navStr = wxT("wxNavDir::Next");
+        navStr = "wxNavDir::Next";
         break;
 
     case NAVDIR_PREVIOUS:
         navDirWX = wxNavDir::Previous;
-        navStr = wxT("wxNavDir::Previous");
+        navStr = "wxNavDir::Previous";
         break;
 
     case NAVDIR_RIGHT:
         navDirWX = wxNavDir::Right;
-        navStr = wxT("wxNavDir::Right");
+        navStr = "wxNavDir::Right";
         break;
 
     case NAVDIR_UP:
         navDirWX = wxNavDir::Up;
-        navStr = wxT("wxNavDir::Up");
+        navStr = "wxNavDir::Up";
         break;
     default:
         {
-            wxLogTrace(wxT("access"), wxT("Unknown NAVDIR symbol"));
+            wxLogTrace("access", "Unknown NAVDIR symbol");
             break;
         }
     }
-    wxLogTrace(wxT("access"), navStr);
+    wxLogTrace("access", navStr);
 
     wxAccStatus status = m_pAccessible->Navigate(navDirWX, varStart.lVal, & elementId,
         & elementObject);
 
     if (status == wxAccStatus::Fail)
     {
-        wxLogTrace(wxT("access"), wxT("wxAccessible::Navigate failed"));
+        wxLogTrace("access", "wxAccessible::Navigate failed");
         return E_FAIL;
     }
 
     if (status == wxAccStatus::InvalidArg)
     {
-        wxLogTrace(wxS("access"), wxS("Invalid argument passed to wxAccessible::Navigate"));
+        wxLogTrace("access", "Invalid argument passed to wxAccessible::Navigate");
         return E_INVALIDARG;
     }
 
     if (status == wxAccStatus::False)
     {
-        wxLogTrace(wxT("access"), wxT("wxAccessible::Navigate found no object in this direction"));
+        wxLogTrace("access", "wxAccessible::Navigate found no object in this direction");
         return S_FALSE;
     }
 
     if (status == wxAccStatus::NotImplemented)
     {
-        wxLogTrace(wxT("access"), wxT("Navigate not implemented"));
+        wxLogTrace("access", "Navigate not implemented");
 
         // Try to use child object directly.
         if (varStart.lVal > 0)
@@ -675,41 +676,41 @@ STDMETHODIMP wxIAccessible::accNavigate ( LONG navDir, VARIANT varStart, VARIANT
     {
         if (elementObject)
         {
-            wxLogTrace(wxT("access"), wxT("Getting wxIAccessible and calling QueryInterface for Navigate"));
+            wxLogTrace("access", "Getting wxIAccessible and calling QueryInterface for Navigate");
             wxIAccessible* objectIA = elementObject->GetIAccessible();
             if (!objectIA)
             {
-                wxLogTrace(wxT("access"), wxT("No wxIAccessible"));
+                wxLogTrace("access", "No wxIAccessible");
                 return E_FAIL;
             }
 
             HRESULT hResult = objectIA->QueryInterface(IID_IDispatch, (LPVOID*) & pVarEnd->pdispVal);
             if (hResult != S_OK)
             {
-                wxLogTrace(wxT("access"), wxT("QueryInterface failed"));
+                wxLogTrace("access", "QueryInterface failed");
                 return E_FAIL;
             }
 
-            wxLogTrace(wxT("access"), wxT("Called QueryInterface for Navigate"));
+            wxLogTrace("access", "Called QueryInterface for Navigate");
             pVarEnd->vt = VT_DISPATCH;
             return S_OK;
         }
         else if (elementId > 0)
         {
-            wxLogTrace(wxT("access"), wxT("Returning element id from Navigate"));
+            wxLogTrace("access", "Returning element id from Navigate");
             pVarEnd->vt = VT_I4;
             pVarEnd->lVal = elementId;
             return S_OK;
         }
         else
         {
-            wxLogTrace(wxT("access"), wxT("No object in accNavigate"));
+            wxLogTrace("access", "No object in accNavigate");
             pVarEnd->vt = VT_EMPTY;
             return S_FALSE;
         }
     }
 
-    wxLogTrace(wxT("access"), wxT("Failing Navigate"));
+    wxLogTrace("access", "Failing Navigate");
     return E_NOTIMPL;
 }
 
@@ -718,14 +719,14 @@ STDMETHODIMP wxIAccessible::accNavigate ( LONG navDir, VARIANT varStart, VARIANT
 
 STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDispChild)
 {
-    wxLogTrace(wxT("access"), wxT("get_accChild"));
+    wxLogTrace("access", "get_accChild");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varChildID.vt != VT_I4 || varChildID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accChild"));
+        wxLogTrace("access", "Invalid arg for get_accChild");
         return E_INVALIDARG;
     }
 
@@ -741,12 +742,12 @@ STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDis
     wxAccStatus status = m_pAccessible->GetChild(varChildID.lVal, & child);
     if (status == wxAccStatus::Fail)
     {
-        wxLogTrace(wxT("access"), wxT("GetChild failed"));
+        wxLogTrace("access", "GetChild failed");
         return E_FAIL;
     }
     if (status == wxAccStatus::InvalidArg)
     {
-        wxLogTrace(wxS("access"), wxS("Invalid argument passed to GetChild"));
+        wxLogTrace("access", "Invalid argument passed to GetChild");
         return E_INVALIDARG;
     }
 
@@ -758,7 +759,7 @@ STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDis
             return E_NOTIMPL;
         else
         {
-            wxLogTrace(wxT("access"), wxT("Using standard interface for get_accChild"));
+            wxLogTrace("access", "Using standard interface for get_accChild");
             return stdInterface->get_accChild (varChildID, ppDispChild);
         }
     }
@@ -772,7 +773,7 @@ STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDis
 
             if (objectIA->QueryInterface(IID_IDispatch, (LPVOID*) ppDispChild) != S_OK)
             {
-                wxLogTrace(wxT("access"), wxT("QueryInterface failed in get_accChild"));
+                wxLogTrace("access", "QueryInterface failed in get_accChild");
                 return E_FAIL;
             }
 
@@ -780,7 +781,7 @@ STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDis
         }
         else
         {
-            wxLogTrace(wxT("access"), wxT("Not an accessible object"));
+            wxLogTrace("access", "Not an accessible object");
             return S_FALSE; // Indicates it's not an accessible object
         }
     }
@@ -797,7 +798,7 @@ STDMETHODIMP wxIAccessible::get_accChild ( VARIANT varChildID, IDispatch** ppDis
 
 STDMETHODIMP wxIAccessible::get_accChildCount ( LONG* pCountChildren)
 {
-    wxLogTrace(wxT("access"), wxT("get_accChildCount"));
+    wxLogTrace("access", "get_accChildCount");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -815,11 +816,11 @@ STDMETHODIMP wxIAccessible::get_accChildCount ( LONG* pCountChildren)
             return E_NOTIMPL;
         else
         {
-            wxLogTrace(wxT("access"), wxT("Using standard interface for get_accChildCount"));
+            wxLogTrace("access", "Using standard interface for get_accChildCount");
             HRESULT res = stdInterface->get_accChildCount (pCountChildren);
             wxString str;
-            str.Printf(wxT("Number of children was %d"), (int) (*pCountChildren));
-            wxLogTrace(wxT("access"), str);
+            str.Printf("Number of children was %d", (int) (*pCountChildren));
+            wxLogTrace("access", str);
             return res;
         }
     }
@@ -841,7 +842,7 @@ STDMETHODIMP wxIAccessible::get_accChildCount ( LONG* pCountChildren)
 
 STDMETHODIMP wxIAccessible::get_accParent ( IDispatch** ppDispParent)
 {
-    wxLogTrace(wxT("access"), wxT("get_accParent"));
+    wxLogTrace("access", "get_accParent");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -857,7 +858,7 @@ STDMETHODIMP wxIAccessible::get_accParent ( IDispatch** ppDispParent)
     // it to the standard interface.
     if (status == wxAccStatus::NotImplemented || !parent)
     {
-        wxLogTrace(wxT("access"), wxT("Using standard interface to get the parent."));
+        wxLogTrace("access", "Using standard interface to get the parent.");
         // Use standard interface instead.
         IAccessible* stdInterface = m_pAccessible->GetIAccessibleStd();
         if (!stdInterface)
@@ -873,21 +874,21 @@ STDMETHODIMP wxIAccessible::get_accParent ( IDispatch** ppDispParent)
             if (!objectIA)
                 return E_FAIL;
 
-            wxLogTrace(wxT("access"), wxT("About to call QueryInterface"));
+            wxLogTrace("access", "About to call QueryInterface");
             if (objectIA->QueryInterface(IID_IDispatch, (LPVOID*) ppDispParent) != S_OK)
             {
-                wxLogTrace(wxT("access"), wxT("Failed QueryInterface"));
+                wxLogTrace("access", "Failed QueryInterface");
                 return E_FAIL;
             }
 
-            wxLogTrace(wxT("access"), wxT("Returning S_OK for get_accParent"));
+            wxLogTrace("access", "Returning S_OK for get_accParent");
             return S_OK;
         }
         else
         {
             // This doesn't seem to be allowed, despite the documentation,
             // so we handle it higher up by using the standard interface.
-            wxLogTrace(wxT("access"), wxT("Returning NULL parent because there was none"));
+            wxLogTrace("access", "Returning NULL parent because there was none");
             *ppDispParent = nullptr;
             return S_FALSE;
         }
@@ -905,14 +906,14 @@ STDMETHODIMP wxIAccessible::get_accParent ( IDispatch** ppDispParent)
 
 STDMETHODIMP wxIAccessible::accDoDefaultAction(VARIANT varID)
 {
-    wxLogTrace(wxT("access"), wxT("accDoDefaultAction"));
+    wxLogTrace("access", "accDoDefaultAction");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for accDoDefaultAction"));
+        wxLogTrace("access", "Invalid arg for accDoDefaultAction");
         return E_INVALIDARG;
     }
 
@@ -956,14 +957,14 @@ STDMETHODIMP wxIAccessible::accDoDefaultAction(VARIANT varID)
 
 STDMETHODIMP wxIAccessible::get_accDefaultAction ( VARIANT varID, BSTR* pszDefaultAction)
 {
-    wxLogTrace(wxT("access"), wxT("get_accDefaultAction"));
+    wxLogTrace("access", "get_accDefaultAction");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accDefaultAction"));
+        wxLogTrace("access", "Invalid arg for get_accDefaultAction");
         return E_INVALIDARG;
     }
 
@@ -1018,14 +1019,14 @@ STDMETHODIMP wxIAccessible::get_accDefaultAction ( VARIANT varID, BSTR* pszDefau
 
 STDMETHODIMP wxIAccessible::get_accDescription ( VARIANT varID, BSTR* pszDescription)
 {
-    wxLogTrace(wxT("access"), wxT("get_accDescription"));
+    wxLogTrace("access", "get_accDescription");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accDescription"));
+        wxLogTrace("access", "Invalid arg for get_accDescription");
         return E_INVALIDARG;
     }
 
@@ -1078,14 +1079,14 @@ STDMETHODIMP wxIAccessible::get_accDescription ( VARIANT varID, BSTR* pszDescrip
 
 STDMETHODIMP wxIAccessible::get_accHelp ( VARIANT varID, BSTR* pszHelp)
 {
-    wxLogTrace(wxT("access"), wxT("get_accHelp"));
+    wxLogTrace("access", "get_accHelp");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accHelp"));
+        wxLogTrace("access", "Invalid arg for get_accHelp");
         return E_INVALIDARG;
     }
 
@@ -1141,14 +1142,14 @@ STDMETHODIMP wxIAccessible::get_accHelp ( VARIANT varID, BSTR* pszHelp)
 
 STDMETHODIMP wxIAccessible::get_accHelpTopic ( BSTR* pszHelpFile, VARIANT varChild, LONG* pidTopic)
 {
-    wxLogTrace(wxT("access"), wxT("get_accHelpTopic"));
+    wxLogTrace("access", "get_accHelpTopic");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varChild.vt != VT_I4 || varChild.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accHelpTopic"));
+        wxLogTrace("access", "Invalid arg for get_accHelpTopic");
         return E_INVALIDARG;
     }
 
@@ -1186,7 +1187,7 @@ STDMETHODIMP wxIAccessible::get_accHelpTopic ( BSTR* pszHelpFile, VARIANT varChi
 
 STDMETHODIMP wxIAccessible::get_accKeyboardShortcut ( VARIANT varID, BSTR* pszKeyboardShortcut)
 {
-    wxLogTrace(wxT("access"), wxT("get_accKeyboardShortcut"));
+    wxLogTrace("access", "get_accKeyboardShortcut");
     *pszKeyboardShortcut = nullptr;
 
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
@@ -1195,7 +1196,7 @@ STDMETHODIMP wxIAccessible::get_accKeyboardShortcut ( VARIANT varID, BSTR* pszKe
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accKeyboardShortcut"));
+        wxLogTrace("access", "Invalid arg for get_accKeyboardShortcut");
         return E_INVALIDARG;
     }
 
@@ -1248,7 +1249,7 @@ STDMETHODIMP wxIAccessible::get_accKeyboardShortcut ( VARIANT varID, BSTR* pszKe
 
 STDMETHODIMP wxIAccessible::get_accName ( VARIANT varID, BSTR* pszName)
 {
-    wxLogTrace(wxT("access"), wxT("get_accName"));
+    wxLogTrace("access", "get_accName");
     *pszName = nullptr;
 
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
@@ -1257,7 +1258,7 @@ STDMETHODIMP wxIAccessible::get_accName ( VARIANT varID, BSTR* pszName)
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accName"));
+        wxLogTrace("access", "Invalid arg for get_accName");
         return E_INVALIDARG;
     }
 
@@ -1311,14 +1312,14 @@ STDMETHODIMP wxIAccessible::get_accName ( VARIANT varID, BSTR* pszName)
 
 STDMETHODIMP wxIAccessible::get_accRole ( VARIANT varID, VARIANT* pVarRole)
 {
-    wxLogTrace(wxT("access"), wxT("get_accRole"));
+    wxLogTrace("access", "get_accRole");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accRole"));
+        wxLogTrace("access", "Invalid arg for get_accRole");
         return E_INVALIDARG;
     }
 
@@ -1374,14 +1375,14 @@ STDMETHODIMP wxIAccessible::get_accRole ( VARIANT varID, VARIANT* pVarRole)
 
 STDMETHODIMP wxIAccessible::get_accState ( VARIANT varID, VARIANT* pVarState)
 {
-    wxLogTrace(wxT("access"), wxT("get_accState"));
+    wxLogTrace("access", "get_accState");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accState"));
+        wxLogTrace("access", "Invalid arg for get_accState");
         return E_INVALIDARG;
     }
 
@@ -1427,14 +1428,14 @@ STDMETHODIMP wxIAccessible::get_accState ( VARIANT varID, VARIANT* pVarState)
 
 STDMETHODIMP wxIAccessible::get_accValue ( VARIANT varID, BSTR* pszValue)
 {
-    wxLogTrace(wxT("access"), wxT("get_accValue"));
+    wxLogTrace("access", "get_accValue");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for get_accValue"));
+        wxLogTrace("access", "Invalid arg for get_accValue");
         return E_INVALIDARG;
     }
 
@@ -1492,14 +1493,14 @@ STDMETHODIMP wxIAccessible::get_accValue ( VARIANT varID, BSTR* pszValue)
 
 STDMETHODIMP wxIAccessible::accSelect ( LONG flagsSelect, VARIANT varID )
 {
-    wxLogTrace(wxT("access"), wxT("get_accSelect"));
+    wxLogTrace("access", "get_accSelect");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
 
     if (varID.vt != VT_I4 || varID.lVal < 0)
     {
-        wxLogTrace(wxT("access"), wxT("Invalid arg for accSelect"));
+        wxLogTrace("access", "Invalid arg for accSelect");
         return E_INVALIDARG;
     }
 
@@ -1543,7 +1544,7 @@ STDMETHODIMP wxIAccessible::accSelect ( LONG flagsSelect, VARIANT varID )
 
 STDMETHODIMP wxIAccessible::get_accFocus ( VARIANT* pVarID)
 {
-    wxLogTrace(wxT("access"), wxT("get_accFocus"));
+    wxLogTrace("access", "get_accFocus");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -1613,7 +1614,7 @@ STDMETHODIMP wxIAccessible::get_accFocus ( VARIANT* pVarID)
 STDMETHODIMP wxIAccessible::get_accSelection ( VARIANT * pVarChildren)
 {
 #if wxUSE_VARIANT
-    wxLogTrace(wxT("access"), wxT("get_accSelection"));
+    wxLogTrace("access", "get_accSelection");
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
@@ -1644,14 +1645,14 @@ STDMETHODIMP wxIAccessible::get_accSelection ( VARIANT * pVarChildren)
 
             return S_OK;
         }
-        else if ( selections.IsType(wxS("long")) )
+        else if ( selections.IsType("long") )
         {
             pVarChildren->vt = VT_I4;
             pVarChildren->lVal = selections.GetLong();
 
             return S_OK;
         }
-        else if ( selections.IsType(wxS("void*")) )
+        else if ( selections.IsType("void*") )
         {
             wxAccessible* childObject = (wxAccessible*) selections.GetVoidPtr();
             wxIAccessible* childIA = childObject->GetIAccessible();
@@ -1665,10 +1666,10 @@ STDMETHODIMP wxIAccessible::get_accSelection ( VARIANT * pVarChildren)
 
             return S_OK;
         }
-        else if ( selections.IsType(wxS("list")) )
+        else if ( selections.IsType("list") )
         {
             wxASSERT_MSG( selections.GetCount() > 1,
-                          wxS("Multiple child objects should be selected") );
+                          "Multiple child objects should be selected" );
             // TODO: should we AddRef for every "void*" member??
 
             wxIEnumVARIANT* enumVariant = new wxIEnumVARIANT(selections);

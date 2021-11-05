@@ -36,7 +36,7 @@ int wxCaretBase::GetBlinkTime()
     int blinkTime = ::GetCaretBlinkTime();
     if ( !blinkTime )
     {
-        wxLogLastError(wxT("GetCaretBlinkTime"));
+        wxLogLastError("GetCaretBlinkTime");
     }
 
     return blinkTime;
@@ -54,8 +54,8 @@ void wxCaretBase::SetBlinkTime(int milliseconds)
 
 bool wxCaret::MSWCreateCaret()
 {
-    wxASSERT_MSG( GetWindow(), wxT("caret without window cannot be created") );
-    wxASSERT_MSG( IsOk(),  wxT("caret of zero size cannot be created") );
+    wxASSERT_MSG( GetWindow(), "caret without window cannot be created" );
+    wxASSERT_MSG( IsOk(),  "caret of zero size cannot be created" );
 
     if ( !m_hasCaret )
     {
@@ -100,8 +100,8 @@ void wxCaret::OnKillFocus()
 
 void wxCaret::DoShow()
 {
-    wxASSERT_MSG( GetWindow(), wxT("caret without window cannot be shown") );
-    wxASSERT_MSG( IsOk(), wxT("caret of zero size cannot be shown") );
+    wxASSERT_MSG( GetWindow(), "caret without window cannot be shown" );
+    wxASSERT_MSG( IsOk(), "caret of zero size cannot be shown" );
 
     // we might not have created the caret yet if we had got the focus first
     // and the caret was shown later - so do it now if we have the focus but
@@ -138,7 +138,7 @@ void wxCaret::DoMove()
     if ( m_hasCaret )
     {
         wxASSERT_MSG( wxWindow::FindFocus() == GetWindow(),
-                      wxT("how did we lose focus?") );
+                      "how did we lose focus?" );
 
         // for compatibility with the generic version, the coordinates are
         // client ones

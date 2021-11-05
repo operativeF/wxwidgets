@@ -374,7 +374,7 @@ public:
     void UseAltPopupWindow( bool enable = true )
     {
         wxASSERT_MSG( !m_winPopup,
-                      wxT("call this only before SetPopupControl") );
+                      "call this only before SetPopupControl" );
 
         if ( enable )
             m_iFlags |= wxCC_IFLAG_USE_ALT_POPUP;

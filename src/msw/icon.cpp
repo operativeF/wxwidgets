@@ -92,7 +92,7 @@ void wxIcon::CopyFromBitmap(const wxBitmap& bmp)
     HICON hicon = wxBitmapToHICON(bmp);
     if ( !hicon )
     {
-        wxLogLastError(wxT("CreateIconIndirect"));
+        wxLogLastError("CreateIconIndirect");
     }
     else
     {
@@ -142,7 +142,7 @@ bool wxIcon::InitFromHICON(WXHICON icon, wxSize sz)
     {
         wxSize size = wxGetHiconSize(icon);
         wxASSERT_MSG(size.GetWidth() == width && size.GetHeight() == height,
-                     wxS("Inconsistent icon parameters"));
+                     "Inconsistent icon parameters");
     }
 #endif // wxDEBUG_LEVEL >= 2
 

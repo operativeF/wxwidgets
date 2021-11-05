@@ -63,7 +63,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
     m_strLocalFilename = localFilename;
     if (m_strLocalFilename.empty())
     {
-        m_strLocalFilename = GetAppName() + wxT(".ini");
+        m_strLocalFilename = GetAppName() + ".ini";
     }
 
     // append the extension if none given and it's not an absolute file name
@@ -71,7 +71,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
     if ( !wxIsPathSeparator(m_strLocalFilename[0u]) &&
         m_strLocalFilename.Find(wxT('.')) == wxNOT_FOUND )
     {
-        m_strLocalFilename << wxT(".ini");
+        m_strLocalFilename << ".ini";
     }
 
     // set root path
@@ -334,7 +334,7 @@ bool wxIniConfig::DoWriteString(const wxString& szKey, const wxString& szValue)
 
   if ( !bOk )
   {
-    wxLogLastError(wxT("WritePrivateProfileString"));
+    wxLogLastError("WritePrivateProfileString");
   }
 
   return bOk;
@@ -342,7 +342,7 @@ bool wxIniConfig::DoWriteString(const wxString& szKey, const wxString& szValue)
 
 bool wxIniConfig::DoWriteLong(const wxString& szKey, long lValue)
 {
-  return Write(szKey, wxString::Format(wxT("%ld"), lValue));
+  return Write(szKey, wxString::Format("%ld", lValue));
 }
 
 bool wxIniConfig::DoReadBinary(const wxString& WXUNUSED(key),
@@ -391,7 +391,7 @@ bool wxIniConfig::DeleteEntry(const wxString& szKey, bool bGroupIfEmptyAlso)
 
   if ( !bOk )
   {
-    wxLogLastError(wxT("WritePrivateProfileString"));
+    wxLogLastError("WritePrivateProfileString");
   }
 
   return bOk;
@@ -408,7 +408,7 @@ bool wxIniConfig::DeleteGroup(const wxString& szKey)
 
   if ( !bOk )
   {
-    wxLogLastError(wxT("WritePrivateProfileString"));
+    wxLogLastError("WritePrivateProfileString");
   }
 
   return bOk;
@@ -428,11 +428,11 @@ bool wxIniConfig::DeleteAll()
   size_t nRc = GetWindowsDirectory(szBuf, WXSIZEOF(szBuf));
   if ( nRc == 0 )
   {
-    wxLogLastError(wxT("GetWindowsDirectory"));
+    wxLogLastError("GetWindowsDirectory");
   }
   else if ( nRc > WXSIZEOF(szBuf) )
   {
-    wxFAIL_MSG(wxT("buffer is too small for Windows directory."));
+    wxFAIL_MSG("buffer is too small for Windows directory.");
   }
 
   wxString strFile = szBuf;

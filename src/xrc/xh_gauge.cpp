@@ -34,15 +34,15 @@ wxObject *wxGaugeXmlHandler::DoCreateResource()
 
     control->Create(m_parentAsWindow,
                     GetID(),
-                    GetLong(wxT("range"), DEFAULT_RANGE),
+                    GetLong("range", DEFAULT_RANGE),
                     GetPosition(), GetSize(),
                     GetStyle(),
                     wxDefaultValidator,
                     GetName());
 
-    if( HasParam(wxT("value")))
+    if( HasParam("value"))
     {
-        control->SetValue(GetLong(wxT("value")));
+        control->SetValue(GetLong("value"));
     }
 
     SetupWindow(control);
@@ -52,7 +52,7 @@ wxObject *wxGaugeXmlHandler::DoCreateResource()
 
 bool wxGaugeXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxGauge"));
+    return IsOfClass(node, "wxGauge");
 }
 
 #endif // wxUSE_XRC && wxUSE_GAUGE

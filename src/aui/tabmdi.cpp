@@ -374,7 +374,7 @@ void wxAuiMDIParentFrame::DoHandleUpdateUI(wxUpdateUIEvent& event)
         case wxWINDOWCLOSEALL:
         {
             wxAuiMDIClientWindow* client_window = GetClientWindow();
-            wxCHECK_RET(client_window, wxS("Missing MDI Client Window"));
+            wxCHECK_RET(client_window, "Missing MDI Client Window");
             size_t pages = client_window->GetPageCount();
             event.Enable(pages >= 1);
             break;
@@ -384,7 +384,7 @@ void wxAuiMDIParentFrame::DoHandleUpdateUI(wxUpdateUIEvent& event)
         case wxWINDOWPREV:
         {
             wxAuiMDIClientWindow* client_window = GetClientWindow();
-            wxCHECK_RET(client_window, wxS("Missing MDI Client Window"));
+            wxCHECK_RET(client_window, "Missing MDI Client Window");
             size_t pages = client_window->GetPageCount();
             event.Enable(pages >= 2);
             break;
@@ -404,7 +404,7 @@ wxSize wxAuiMDIParentFrame::DoGetClientSize() const
 void wxAuiMDIParentFrame::Tile(wxOrientation orient)
 {
     wxAuiMDIClientWindow* client_window = GetClientWindow();
-    wxASSERT_MSG(client_window, wxT("Missing MDI Client Window"));
+    wxASSERT_MSG(client_window, "Missing MDI Client Window");
 
     int cur_idx = client_window->GetSelection();
     if (cur_idx == -1)
@@ -492,7 +492,7 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
                                 const std::string& name)
 {
     wxAuiMDIClientWindow* pClientWindow = parent->GetClientWindow();
-    wxASSERT_MSG((pClientWindow != nullptr), wxT("Missing MDI client window."));
+    wxASSERT_MSG((pClientWindow != nullptr), "Missing MDI client window.");
 
     // see comment in constructor
     if (style & wxMINIMIZE)
@@ -520,7 +520,7 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
     (
         (m_activateOnCreate || pClientWindow->GetPageCount() == 1)
             == (parent->GetActiveChild() == this),
-        wxS("Logic error: child [not] activated when it should [not] have been.")
+        "Logic error: child [not] activated when it should [not] have been."
     );
 
     pClientWindow->Refresh();
@@ -531,10 +531,10 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
 bool wxAuiMDIChildFrame::Destroy()
 {
     wxAuiMDIParentFrame* pParentFrame = GetMDIParentFrame();
-    wxASSERT_MSG(pParentFrame, wxT("Missing MDI Parent Frame"));
+    wxASSERT_MSG(pParentFrame, "Missing MDI Parent Frame");
 
     wxAuiMDIClientWindow* pClientWindow = pParentFrame->GetClientWindow();
-    wxASSERT_MSG(pClientWindow, wxT("Missing MDI Client Window"));
+    wxASSERT_MSG(pClientWindow, "Missing MDI Client Window");
 
     if (pParentFrame->GetActiveChild() == this)
     {
@@ -565,7 +565,7 @@ void wxAuiMDIChildFrame::SetMenuBar(wxMenuBar *menu_bar)
     if (m_pMenuBar)
     {
         wxAuiMDIParentFrame* pParentFrame = GetMDIParentFrame();
-        wxASSERT_MSG(pParentFrame, wxT("Missing MDI Parent Frame"));
+        wxASSERT_MSG(pParentFrame, "Missing MDI Parent Frame");
 
         m_pMenuBar->SetParent(pParentFrame);
         if (pParentFrame->GetActiveChild() == this)
@@ -589,7 +589,7 @@ void wxAuiMDIChildFrame::SetTitle(const std::string& title)
     m_title = title;
 
     wxAuiMDIParentFrame* pParentFrame = GetMDIParentFrame();
-    wxASSERT_MSG(pParentFrame, wxT("Missing MDI Parent Frame"));
+    wxASSERT_MSG(pParentFrame, "Missing MDI Parent Frame");
 
     wxAuiMDIClientWindow* pClientWindow = pParentFrame->GetClientWindow();
     if (pClientWindow != nullptr)
@@ -610,7 +610,7 @@ void wxAuiMDIChildFrame::SetIcons(const wxIconBundle& icons)
     wxTDIChildFrame::SetIcons(icons);
 
     wxAuiMDIParentFrame* pParentFrame = GetMDIParentFrame();
-    wxASSERT_MSG(pParentFrame, wxT("Missing MDI Parent Frame"));
+    wxASSERT_MSG(pParentFrame, "Missing MDI Parent Frame");
 
     const wxSize sizeIcon(wxSystemSettings::GetMetric(wxSYS_SMALLICON_X, this),
                           wxSystemSettings::GetMetric(wxSYS_SMALLICON_Y, this));
@@ -632,7 +632,7 @@ void wxAuiMDIChildFrame::SetIcons(const wxIconBundle& icons)
 void wxAuiMDIChildFrame::Activate()
 {
     wxAuiMDIParentFrame* pParentFrame = GetMDIParentFrame();
-    wxASSERT_MSG(pParentFrame, wxT("Missing MDI Parent Frame"));
+    wxASSERT_MSG(pParentFrame, "Missing MDI Parent Frame");
 
     wxAuiMDIClientWindow* pClientWindow = pParentFrame->GetClientWindow();
 
@@ -767,7 +767,7 @@ void wxAuiMDIClientWindow::PageChanged(int old_selection, int new_selection)
     if ((old_selection != -1) && (old_selection < (int)GetPageCount()))
     {
         wxAuiMDIChildFrame* old_child = (wxAuiMDIChildFrame*)GetPage(old_selection);
-        wxASSERT_MSG(old_child, wxT("wxAuiMDIClientWindow::PageChanged - null page pointer"));
+        wxASSERT_MSG(old_child, "wxAuiMDIClientWindow::PageChanged - null page pointer");
 
         wxActivateEvent event(wxEVT_ACTIVATE, false, old_child->GetId());
         event.SetEventObject(old_child);
@@ -778,7 +778,7 @@ void wxAuiMDIClientWindow::PageChanged(int old_selection, int new_selection)
     if (new_selection != -1)
     {
         wxAuiMDIChildFrame* active_child = (wxAuiMDIChildFrame*)GetPage(new_selection);
-        wxASSERT_MSG(active_child, wxT("wxAuiMDIClientWindow::PageChanged - null page pointer"));
+        wxASSERT_MSG(active_child, "wxAuiMDIClientWindow::PageChanged - null page pointer");
 
         wxActivateEvent event(wxEVT_ACTIVATE, true, active_child->GetId());
         event.SetEventObject(active_child);

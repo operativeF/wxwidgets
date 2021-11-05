@@ -64,7 +64,7 @@ class wxXmlResourceDataRecords;
 #define WX_XMLRES_CURRENT_VERSION_MINOR            5
 #define WX_XMLRES_CURRENT_VERSION_RELEASE          3
 #define WX_XMLRES_CURRENT_VERSION_REVISION         0
-#define WX_XMLRES_CURRENT_VERSION_STRING       wxT("2.5.3.0")
+#define WX_XMLRES_CURRENT_VERSION_STRING       "2.5.3.0"
 
 #define WX_XMLRES_CURRENT_VERSION \
                 (WX_XMLRES_CURRENT_VERSION_MAJOR * 256*256*256 + \
@@ -453,7 +453,7 @@ private:
 // Example:
 //    wxDialog dlg;
 //    wxXmlResource::Get()->LoadDialog(&dlg, mainFrame, "my_dialog");
-//    XRCCTRL(dlg, "my_textctrl", wxTextCtrl)->SetValue(wxT("default value"));
+//    XRCCTRL(dlg, "my_textctrl", wxTextCtrl)->SetValue("default value");
 
 #define XRCCTRL(window, id, type) \
     (wxStaticCast((window).wxFindWindow(XRCID(id)), type))
@@ -524,7 +524,7 @@ public:
 
     // Gets style flags from text in form "flag | flag2| flag3 |..."
     // Only understands flags added with AddStyle
-    int GetStyle(const wxString& param = wxT("style"), int defaults = 0) override;
+    int GetStyle(const wxString& param = "style", int defaults = 0) override;
 
     // Gets text from param and does some conversions:
     // - replaces \n, \r, \t by respective chars (according to C syntax)
@@ -554,11 +554,11 @@ public:
     wxColour GetColour(const wxString& param, const wxColour& defaultv = wxNullColour) override;
 
     // Gets the size (may be in dialog units).
-    wxSize GetSize(const wxString& param = wxT("size"),
+    wxSize GetSize(const wxString& param = "size",
                    wxWindow *windowToUse = nullptr) override;
 
     // Gets the position (may be in dialog units).
-    wxPoint GetPosition(const wxString& param = wxT("pos")) override;
+    wxPoint GetPosition(const wxString& param = "pos") override;
 
     // Gets a dimension (may be in dialog units).
     wxCoord GetDimension(const wxString& param, wxCoord defaultv = 0,
@@ -571,7 +571,7 @@ public:
     wxDirection GetDirection(const wxString& param, wxDirection dirDefault = wxLEFT) override;
 
     // Gets a bitmap.
-    wxBitmap GetBitmap(const wxString& param = wxT("bitmap"),
+    wxBitmap GetBitmap(const wxString& param = "bitmap",
                        const wxArtClient& defaultArtClient = wxASCII_STR(wxART_OTHER),
                        wxSize size = wxDefaultSize) override;
 
@@ -581,7 +581,7 @@ public:
                        wxSize size = wxDefaultSize) override;
 
     // Gets an icon.
-    wxIcon GetIcon(const wxString& param = wxT("icon"),
+    wxIcon GetIcon(const wxString& param = "icon",
                    const wxArtClient& defaultArtClient = wxASCII_STR(wxART_OTHER),
                    wxSize size = wxDefaultSize) override;
 
@@ -595,17 +595,17 @@ public:
                                const wxArtClient& defaultArtClient = wxASCII_STR(wxART_OTHER)) override;
 
     // Gets an image list.
-    wxImageList *GetImageList(const wxString& param = wxT("imagelist")) override;
+    wxImageList *GetImageList(const wxString& param = "imagelist") override;
 
 #if wxUSE_ANIMATIONCTRL
     // Gets an animation creating it using the provided control (so that it
     // will be compatible with it) if any.
-    wxAnimation* GetAnimation(const wxString& param = wxT("animation"),
+    wxAnimation* GetAnimation(const wxString& param = "animation",
                               wxAnimationCtrlBase* ctrl = nullptr) override;
 #endif
 
     // Gets a font.
-    wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = nullptr) override;
+    wxFont GetFont(const wxString& param = "font", wxWindow* parent = nullptr) override;
 
     // Gets the value of a boolean attribute (only "0" and "1" are valid values)
     bool GetBoolAttr(const wxString& attr, bool defaultv) override;
@@ -652,7 +652,7 @@ public:
        variable = wxStaticCast(m_instance, classname); \
    if (!variable) \
        variable = new classname; \
-   if (GetBool(wxT("hidden"), 0) == 1) \
+   if (GetBool("hidden", 0) == 1) \
        variable->Hide();
 
 

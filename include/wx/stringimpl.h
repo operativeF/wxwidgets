@@ -31,7 +31,7 @@
 
 // implementation only
 #define   wxASSERT_VALID_INDEX(i) \
-    wxASSERT_MSG( (size_t)(i) <= length(), wxT("invalid index in wxString") )
+    wxASSERT_MSG( (size_t)(i) <= length(), "invalid index in wxString" )
 
 
 // ----------------------------------------------------------------------------

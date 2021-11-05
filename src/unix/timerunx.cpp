@@ -34,7 +34,7 @@
 WX_DEFINE_LIST(wxTimerList)
 
 // trace mask for the debugging messages used here
-constexpr wxChar wxTrace_Timer[] = wxT("timer");
+constexpr wxChar wxTrace_Timer[] = "timer";
 
 // ============================================================================
 // wxTimerScheduler implementation
@@ -64,7 +64,7 @@ void wxTimerScheduler::DoAddTimer(wxTimerSchedule *s)
     for ( node = m_timers.begin(); node != m_timers.end(); ++node )
     {
         wxASSERT_MSG( (*node)->m_timer != s->m_timer,
-                      wxT("adding the same timer twice?") );
+                      "adding the same timer twice?" );
 
         if ( (*node)->m_expiration > s->m_expiration )
             break;
@@ -72,14 +72,14 @@ void wxTimerScheduler::DoAddTimer(wxTimerSchedule *s)
 
     m_timers.insert(node, s);
 
-    wxLogTrace(wxTrace_Timer, wxT("Inserted timer %d expiring at %s"),
+    wxLogTrace(wxTrace_Timer, "Inserted timer %d expiring at %s",
                s->m_timer->GetId(),
                s->m_expiration.ToString());
 }
 
 void wxTimerScheduler::RemoveTimer(wxUnixTimerImpl *timer)
 {
-    wxLogTrace(wxTrace_Timer, wxT("Removing timer %d"), timer->GetId());
+    wxLogTrace(wxTrace_Timer, "Removing timer %d", timer->GetId());
 
     for ( wxTimerList::iterator node = m_timers.begin();
           node != m_timers.end();
@@ -93,7 +93,7 @@ void wxTimerScheduler::RemoveTimer(wxUnixTimerImpl *timer)
         }
     }
 
-    wxFAIL_MSG( wxT("removing inexistent timer?") );
+    wxFAIL_MSG( "removing inexistent timer?" );
 }
 
 bool wxTimerScheduler::GetNext(wxUsecClock_t *remaining) const
@@ -101,7 +101,7 @@ bool wxTimerScheduler::GetNext(wxUsecClock_t *remaining) const
     if ( m_timers.empty() )
       return false;
 
-    wxCHECK_MSG( remaining, false, wxT("NULL pointer") );
+    wxCHECK_MSG( remaining, false, "NULL pointer" );
 
     *remaining = (*m_timers.begin())->m_expiration - wxGetUTCTimeUSec();
     if ( *remaining < 0 )
@@ -219,7 +219,7 @@ bool wxUnixTimerImpl::IsRunning() const
 
 wxUnixTimerImpl::~wxUnixTimerImpl()
 {
-    wxASSERT_MSG( !m_isRunning, wxT("must have been stopped before") );
+    wxASSERT_MSG( !m_isRunning, "must have been stopped before" );
 }
 
 // ============================================================================

@@ -119,7 +119,7 @@ wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // longer, check for it to avoid bogus assert failures
             if ( !win->IsBeingDeleted() )
             {
-                wxFAIL_MSG( wxT("should have combo as parent") );
+                wxFAIL_MSG( "should have combo as parent" );
             }
         }
         else if ( combo->MSWProcessEditMsg(message, wParam, lParam) )
@@ -130,7 +130,7 @@ wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     else if ( message == WM_GETDLGCODE )
     {
-        wxCHECK_MSG( win, 0, wxT("should have a parent") );
+        wxCHECK_MSG( win, 0, "should have a parent" );
 
         if ( win->wxGetWindowStyle() & wxTE_PROCESS_ENTER )
         {
@@ -415,7 +415,7 @@ WXHWND wxComboBox::GetEditHWNDIfAvailable() const
     }
 
     // we assume that the only child of the combobox is the edit window
-    return (WXHWND)::FindWindowExW(GetHwnd(), nullptr, wxT("EDIT"), nullptr);
+    return (WXHWND)::FindWindowExW(GetHwnd(), nullptr, L"EDIT", nullptr);
 }
 
 WXHWND wxComboBox::GetEditHWND() const
@@ -423,10 +423,10 @@ WXHWND wxComboBox::GetEditHWND() const
     // this function should not be called for wxCB_READONLY controls, it is
     // the callers responsibility to check this
     wxASSERT_MSG( !HasFlag(wxCB_READONLY),
-                  wxT("read-only combobox doesn't have any edit control") );
+                  "read-only combobox doesn't have any edit control" );
 
     WXHWND hWndEdit = GetEditHWNDIfAvailable();
-    wxASSERT_MSG( hWndEdit, wxT("combobox without edit control?") );
+    wxASSERT_MSG( hWndEdit, "combobox without edit control?" );
 
     return hWndEdit;
 }
@@ -434,7 +434,7 @@ WXHWND wxComboBox::GetEditHWND() const
 wxWindow *wxComboBox::GetEditableWindow()
 {
     wxASSERT_MSG( !HasFlag(wxCB_READONLY),
-                  wxT("read-only combobox doesn't have any edit control") );
+                  "read-only combobox doesn't have any edit control" );
 
     return this;
 }

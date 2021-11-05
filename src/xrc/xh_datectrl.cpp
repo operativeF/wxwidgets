@@ -35,22 +35,22 @@ wxObject *wxDateCtrlXmlHandler::DoCreateResource()
                   GetID(),
                   wxDefaultDateTime,
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxDP_DEFAULT | wxDP_SHOWCENTURY),
+                  GetStyle("style", wxDP_DEFAULT | wxDP_SHOWCENTURY),
                   wxDefaultValidator,
                   GetName());
 
     SetupWindow(picker);
 
     // Note that we want to set this one even if it's empty.
-    if ( HasParam(wxS("null-text")) )
-        picker->SetNullText(GetText(wxS("null-text")));
+    if ( HasParam("null-text") )
+        picker->SetNullText(GetText("null-text"));
 
     return picker;
 }
 
 bool wxDateCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxDatePickerCtrl"));
+    return IsOfClass(node, "wxDatePickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_DATEPICKCTRL

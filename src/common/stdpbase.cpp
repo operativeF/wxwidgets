@@ -39,7 +39,7 @@ static wxStandardPathsDefault gs_stdPaths;
 wxStandardPaths& wxStandardPathsBase::Get()
 {
     wxAppTraits * const traits = wxApp::GetTraitsIfExists();
-    wxCHECK_MSG( traits, gs_stdPaths, wxT("create wxApp before calling this") );
+    wxCHECK_MSG( traits, gs_stdPaths, "create wxApp before calling this" );
 
     return traits->GetStandardPaths();
 }
@@ -55,7 +55,7 @@ std::string wxStandardPathsBase::GetExecutablePath() const
 
     // Search PATH.environment variable...
     wxPathList pathlist;
-    pathlist.AddEnvList(wxT("PATH"));
+    pathlist.AddEnvList("PATH");
     wxString path = pathlist.FindAbsoluteValidPath(argv0);
     if ( path.empty() )
         return argv0.ToStdString();       // better than nothing

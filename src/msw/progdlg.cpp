@@ -462,7 +462,7 @@ bool wxProgressDialog::Update(int value, const std::string& newmsg, bool *skip)
 
         value /= m_factor;
 
-        wxASSERT_MSG( value <= m_maximum, wxT("invalid progress value") );
+        wxASSERT_MSG( value <= m_maximum, "invalid progress value" );
 
         {
             wxCriticalSectionLocker locker(m_sharedData->m_cs);

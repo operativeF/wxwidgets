@@ -30,59 +30,59 @@ wxPlatformInfo gs_platInfo(wxPORT_UNKNOWN);
 
 // Keep "Unknown" entries to avoid breaking the indexes
 
-const wxChar* const wxOperatingSystemIdNames[] =
+const char* const wxOperatingSystemIdNames[] =
 {
-    wxT("Apple Mac OS"),
-    wxT("Apple Mac OS X"),
+    "Apple Mac OS",
+    "Apple Mac OS X",
 
-    wxT("Unknown"), // STL build: cannot use _() to translate strings here
-    wxT("Microsoft Windows NT"),
-    wxT("Unknown"),
-    wxT("Unknown"),
+    "Unknown", // STL build: cannot use _() to translate strings here
+    "Microsoft Windows NT",
+    "Unknown",
+    "Unknown",
 
-    wxT("Linux"),
-    wxT("FreeBSD"),
-    wxT("OpenBSD"),
-    wxT("NetBSD"),
+    "Linux",
+    "FreeBSD",
+    "OpenBSD",
+    "NetBSD",
 
-    wxT("SunOS"),
-    wxT("AIX"),
-    wxT("HPUX"),
+    "SunOS",
+    "AIX",
+    "HPUX",
 
-    wxT("Other Unix"),
-    wxT("Other Unix"),
+    "Other Unix",
+    "Other Unix",
 
-    wxT("Unknown"),
-    wxT("Unknown"),
+    "Unknown",
+    "Unknown",
 
 };
 
-const wxChar* const wxPortIdNames[] =
+const char* const wxPortIdNames[] =
 {
-    wxT("wxBase"),
-    wxT("wxMSW"),
-    wxT("wxMotif"),
-    wxT("wxGTK"),
-    wxT("wxDFB"),
-    wxT("wxX11"),
-    wxT("Unknown"),
-    wxT("wxMac"),
-    wxT("wxCocoa"),
-    wxT("Unknown"),
-    wxT("wxQT")
+    "wxBase",
+    "wxMSW",
+    "wxMotif",
+    "wxGTK",
+    "wxDFB",
+    "wxX11",
+    "Unknown",
+    "wxMac",
+    "wxCocoa",
+    "Unknown",
+    "wxQT"
 };
 
-const wxChar* const wxBitnessNames[] =
+const char* const wxBitnessNames[] =
 {
-    wxT("32 bit"),
-    wxT("64 bit")
+    "32 bit",
+    "64 bit"
 };
 
-const wxChar* const wxEndiannessNames[] =
+const char* const wxEndiannessNames[] =
 {
-    wxT("Big endian"),
-    wxT("Little endian"),
-    wxT("PDP endian")
+    "Big endian",
+    "Little endian",
+    "PDP endian"
 };
 
 // ----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ const wxChar* const wxEndiannessNames[] =
 // corresponding indexes of the string arrays above
 unsigned wxGetIndexFromEnumValue(int value)
 {
-    wxCHECK_MSG( value, (unsigned)-1, wxT("invalid enum value") );
+    wxCHECK_MSG( value, (unsigned)-1, "invalid enum value" );
 
     int n = 0;
     while ( !(value & 1) )
@@ -102,7 +102,7 @@ unsigned wxGetIndexFromEnumValue(int value)
         n++;
     }
 
-    wxASSERT_MSG( value == 1, wxT("more than one bit set in enum value") );
+    wxASSERT_MSG( value == 1, "more than one bit set in enum value" );
 
     return n;
 }
@@ -162,7 +162,7 @@ void wxPlatformInfo::InitForCurrentPlatform()
     const wxAppTraits * const traits = wxApp::GetTraitsIfExists();
     if ( !traits )
     {
-        wxFAIL_MSG( wxT("failed to initialize wxPlatformInfo") );
+        wxFAIL_MSG( "failed to initialize wxPlatformInfo" );
 
         m_port = wxPORT_UNKNOWN;
         m_usingUniversal = false;
@@ -217,13 +217,13 @@ wxString wxPlatformInfo::GetOperatingSystemDirectory()
 
 wxString wxPlatformInfo::GetOperatingSystemFamilyName(wxOperatingSystemId os)
 {
-    const wxChar* string = wxT("Unknown");
+    const char* string = "Unknown";
     if ( os & wxOS_MAC )
-        string = wxT("Macintosh");
+        string = "Macintosh";
     else if ( os & wxOS_WINDOWS )
-        string = wxT("Windows");
+        string = "Windows";
     else if ( os & wxOS_UNIX )
-        string = wxT("Unix");
+        string = "Unix";
 
     return string;
 }
@@ -233,24 +233,24 @@ wxString wxPlatformInfo::GetOperatingSystemIdName(wxOperatingSystemId os)
     const unsigned idx = wxGetIndexFromEnumValue(os);
 
     wxCHECK_MSG( idx < WXSIZEOF(wxOperatingSystemIdNames), {},
-                 wxT("invalid OS id") );
+                 "invalid OS id" );
 
     return wxOperatingSystemIdNames[idx];
 }
 
 wxString wxPlatformInfo::GetPortIdName(wxPortId port, bool usingUniversal)
 {
-    wxString ret;
+    std::string ret;
 
     const unsigned idx = wxGetIndexFromEnumValue(port);
 
     wxCHECK_MSG( idx < WXSIZEOF(wxPortIdNames), ret,
-                 wxT("invalid port id") );
+                 "invalid port id" );
 
     ret = wxPortIdNames[idx];
 
     if ( usingUniversal )
-        ret += wxT("/wxUniversal");
+        ret += "/wxUniversal";
 
     return ret;
 }
@@ -262,13 +262,13 @@ wxString wxPlatformInfo::GetPortIdShortName(wxPortId port, bool usingUniversal)
     const unsigned idx = wxGetIndexFromEnumValue(port);
 
     wxCHECK_MSG( idx < WXSIZEOF(wxPortIdNames), ret,
-                 wxT("invalid port id") );
+                 "invalid port id" );
 
     ret = wxPortIdNames[idx];
     ret = ret.Mid(2).Lower();       // remove 'wx' prefix
 
     if ( usingUniversal )
-        ret += wxT("univ");
+        ret += "univ";
 
     return ret;
 }
@@ -339,10 +339,10 @@ wxPortId wxPlatformInfo::GetPortId(const wxString &str)
 wxEndianness wxPlatformInfo::GetEndianness(const wxString& end)
 {
     const wxString endl(end.Lower());
-    if ( endl.StartsWith(wxT("little")) )
+    if ( endl.StartsWith("little") )
         return wxENDIAN_LITTLE;
 
-    if ( endl.StartsWith(wxT("big")) )
+    if ( endl.StartsWith("big") )
         return wxENDIAN_BIG;
 
     return wxENDIAN_INVALID;

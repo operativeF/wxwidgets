@@ -344,7 +344,7 @@ size_t wxVarScrollHelperBase::GetNewScrollPosition(wxScrollWinEvent& event) cons
     }
 
     // unknown scroll event?
-    wxFAIL_MSG( wxT("unknown scroll event type?") );
+    wxFAIL_MSG( "unknown scroll event type?" );
     return 0;
 }
 
@@ -435,7 +435,7 @@ void wxVarScrollHelperBase::DoSetTargetWindow(wxWindow *target)
 
 void wxVarScrollHelperBase::SetTargetWindow(wxWindow *target)
 {
-    wxCHECK_RET( target, wxT("target window must not be NULL") );
+    wxCHECK_RET( target, "target window must not be NULL" );
 
     if ( target == m_targetWindow )
         return;
@@ -488,7 +488,7 @@ void wxVarScrollHelperBase::RefreshUnit(size_t unit)
 
 void wxVarScrollHelperBase::RefreshUnits(size_t from, size_t to)
 {
-    wxASSERT_MSG( from <= to, wxT("RefreshUnits(): empty range") );
+    wxASSERT_MSG( from <= to, "RefreshUnits(): empty range" );
 
     // clump the range to just the visible units -- it is useless to refresh
     // the other ones
@@ -860,7 +860,7 @@ void wxVarHVScrollHelper::RefreshRowsColumns(size_t fromRow, size_t toRow,
                                              size_t fromColumn, size_t toColumn)
 {
     wxASSERT_MSG( fromRow <= toRow || fromColumn <= toColumn,
-        wxT("RefreshRowsColumns(): empty range") );
+        "RefreshRowsColumns(): empty range" );
 
     // clump the range to just the visible units -- it is useless to refresh
     // the other ones

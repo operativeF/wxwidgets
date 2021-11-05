@@ -43,7 +43,7 @@ wxBannerWindow::Create(wxWindow* parent,
     wxASSERT_MSG
     (
         dir == wxLEFT || dir == wxRIGHT || dir == wxTOP || dir == wxBOTTOM,
-        wxS("Invalid banner direction")
+        "Invalid banner direction"
     );
 
     m_direction = dir;
@@ -221,7 +221,7 @@ wxColour wxBannerWindow::GetBitmapBg()
         // This case is there only to prevent g++ warnings about not handling
         // some enum elements in the switch, it can't really happen.
         case wxALL:
-            wxFAIL_MSG( wxS("Unreachable") );
+            wxFAIL_MSG( "Unreachable" );
     }
 
     m_colBitmapBg.Set(image.GetRed(p.x, p.y),
@@ -275,7 +275,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
         // This case is there only to prevent g++ warnings about not handling
         // some enum elements in the switch, it can't really happen.
         case wxALL:
-            wxFAIL_MSG( wxS("Unreachable") );
+            wxFAIL_MSG( "Unreachable" );
     }
 
     if ( rectSolid.width > 0 && rectSolid.height > 0 )

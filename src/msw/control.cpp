@@ -572,7 +572,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
         if ( !::DrawTextW(hdc, boost::nowide::widen(label).c_str(), label.length(), &rectLabel,
                          fmt | DT_CALCRECT) )
         {
-            wxLogLastError(wxT("DrawText(DT_CALCRECT)"));
+            wxLogLastError("DrawText(DT_CALCRECT)");
         }
 
         if ( isRightAligned )
@@ -591,7 +591,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
 
     if ( !::DrawTextW(hdc, boost::nowide::widen(label).c_str(), label.length(), &rectLabel, fmt) )
     {
-        wxLogLastError(wxT("DrawText()"));
+        wxLogLastError("DrawText()");
     }
 
     // finally draw the focus
@@ -601,7 +601,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
         rectLabel.right++;
         if ( !::DrawFocusRect(hdc, &rectLabel) )
         {
-            wxLogLastError(wxT("DrawFocusRect()"));
+            wxLogLastError("DrawFocusRect()");
         }
     }
 
@@ -626,7 +626,7 @@ void wxControlWithItems::MSWAllocStorage(const std::vector<std::string>& items,
     if ( ::SendMessageW((HWND)MSWGetItemsHWND(), wm, numItems,
                      (LPARAM)totalTextLength*sizeof(wxChar)) == LB_ERRSPACE )
     {
-        wxLogLastError(wxT("SendMessage(XX_INITSTORAGE)"));
+        wxLogLastError("SendMessage(XX_INITSTORAGE)");
     }
 }
 
@@ -638,7 +638,7 @@ int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
                             reinterpret_cast<LPARAM>(boost::nowide::widen(item).c_str()));
     if ( n == CB_ERR || n == CB_ERRSPACE )
     {
-        wxLogLastError(wxT("SendMessage(XX_ADD/INSERTSTRING)"));
+        wxLogLastError("SendMessage(XX_ADD/INSERTSTRING)");
         return wxNOT_FOUND;
     }
 

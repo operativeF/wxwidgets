@@ -193,7 +193,7 @@ public:
     wxCStrData operator-(ptrdiff_t n) const
     {
         wxASSERT_MSG( n <= (ptrdiff_t)m_offset,
-                      wxT("attempt to construct address before the beginning of the string") );
+                      "attempt to construct address before the beginning of the string" );
         return wxCStrData(m_str, m_offset - n, m_owned);
     }
 
@@ -1419,14 +1419,14 @@ public:
     // get last character
     wxUniChar Last() const
     {
-      wxASSERT_MSG( !empty(), wxT("wxString: index out of bounds") );
+      wxASSERT_MSG( !empty(), "wxString: index out of bounds" );
       return *rbegin();
     }
 
     // get writable last character
     wxUniCharRef Last()
     {
-      wxASSERT_MSG( !empty(), wxT("wxString: index out of bounds") );
+      wxASSERT_MSG( !empty(), "wxString: index out of bounds" );
       return *rbegin();
     }
 
@@ -1933,16 +1933,16 @@ public:
   // stream-like functions
       // insert an int into string
   wxString& operator<<(int i)
-    { return (*this) << Format(wxT("%d"), i); }
+    { return (*this) << Format("%d", i); }
       // insert an unsigned int into string
   wxString& operator<<(unsigned int ui)
-    { return (*this) << Format(wxT("%u"), ui); }
+    { return (*this) << Format("%u", ui); }
       // insert a long into string
   wxString& operator<<(long l)
-    { return (*this) << Format(wxT("%ld"), l); }
+    { return (*this) << Format("%ld", l); }
       // insert an unsigned long into string
   wxString& operator<<(unsigned long ul)
-    { return (*this) << Format(wxT("%lu"), ul); }
+    { return (*this) << Format("%lu", ul); }
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
       // insert a long long if they exist and aren't longs
   wxString& operator<<(wxLongLong_t ll)
@@ -1957,10 +1957,10 @@ public:
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
       // insert a float into string
   wxString& operator<<(float f)
-    { return *this << Format(wxS("%f"), static_cast<double>(f)); }
+    { return *this << Format("%f", static_cast<double>(f)); }
       // insert a double into string
   wxString& operator<<(double d)
-    { return (*this) << Format(wxT("%g"), d); }
+    { return (*this) << Format("%g", d); }
 
   // string comparison
     // case-sensitive comparison (returns a value < 0, = 0 or > 0)
@@ -2273,7 +2273,7 @@ public:
                CreateConstIterator(last).impl())
   {
       wxASSERT_MSG( first.m_str == last.m_str,
-                    wxT("pointers must be into the same string") );
+                    "pointers must be into the same string" );
   }
 #endif // WXWIN_COMPATIBILITY_STRING_PTR_AS_ITER
 

@@ -40,21 +40,21 @@ wxTreebookXmlHandler::wxTreebookXmlHandler()
 
 bool wxTreebookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxTreebook"))) ||
-            (m_isInside && IsOfClass(node, wxT("treebookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxTreebook")) ||
+            (m_isInside && IsOfClass(node, "treebookpage")));
 }
 
 
 wxObject *wxTreebookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("wxTreebook"))
+    if (m_class == "wxTreebook")
     {
         XRC_MAKE_INSTANCE(tbk, wxTreebook)
 
         tbk->Create(m_parentAsWindow,
                     GetID(),
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style")),
+                    GetStyle("style"),
                     GetName());
 
         wxImageList *imagelist = GetImageList();
@@ -97,12 +97,12 @@ wxObject *wxTreebookXmlHandler::DoCreateResource()
         return tbk;
     }
 
-//    else ( m_class == wxT("treebookpage") )
-    wxXmlNode *n = GetParamNode(wxT("object"));
+//    else ( m_class == "treebookpage" )
+    wxXmlNode *n = GetParamNode("object");
     wxWindow *wnd = nullptr;
 
     if ( !n )
-        n = GetParamNode(wxT("object_ref"));
+        n = GetParamNode("object_ref");
 
     if (n)
     {
@@ -118,15 +118,15 @@ wxObject *wxTreebookXmlHandler::DoCreateResource()
         }
     }
 
-    size_t depth = GetLong( wxT("depth") );
+    size_t depth = GetLong( "depth" );
 
     if( depth <= m_treeContext.GetCount() )
     {
         // first prepare the icon
         int imgIndex = wxNOT_FOUND;
-        if ( HasParam(wxT("bitmap")) )
+        if ( HasParam("bitmap") )
         {
-            wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+            wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
             wxImageList *imgList = m_tbk->GetImageList();
             if ( imgList == nullptr )
             {
@@ -135,11 +135,11 @@ wxObject *wxTreebookXmlHandler::DoCreateResource()
             }
             imgIndex = imgList->Add(bmp);
         }
-        else if ( HasParam(wxT("image")) )
+        else if ( HasParam("image") )
         {
             if ( m_tbk->GetImageList() )
             {
-                imgIndex = GetLong(wxT("image"));
+                imgIndex = GetLong("image");
             }
             else // image without image list?
             {
@@ -154,12 +154,12 @@ wxObject *wxTreebookXmlHandler::DoCreateResource()
         if( depth == 0)
         {
             m_tbk->AddPage(wnd,
-                GetText(wxT("label")), GetBool(wxT("selected")), imgIndex);
+                GetText("label")), GetBool(wxT("selected"), imgIndex);
         }
         else
         {
             m_tbk->InsertSubPage(m_treeContext.Item(depth - 1), wnd,
-                GetText(wxT("label")), GetBool(wxT("selected")), imgIndex);
+                GetText("label")), GetBool(wxT("selected"), imgIndex);
         }
 
         m_treeContext.Add( m_tbk->GetPageCount() - 1);

@@ -176,7 +176,7 @@ public:
         // the case under the standard Unix LP64 model).
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
         wxASSERT_MSG( (m_ll >= LONG_MIN) && (m_ll <= LONG_MAX),
-                      wxT("wxLongLong to long conversion loss of precision") );
+                      "wxLongLong to long conversion loss of precision" );
 #endif
 
         return gsl::narrow_cast<long>(m_ll);
@@ -400,7 +400,7 @@ public:
     unsigned long ToULong() const
     {
         wxASSERT_MSG( m_ll <= ULONG_MAX,
-                      wxT("wxULongLong to long conversion loss of precision") );
+                      "wxULongLong to long conversion loss of precision" );
 
         return gsl::narrow_cast<unsigned long>(m_ll);
     }
@@ -671,7 +671,7 @@ public:
     long ToLong() const
     {
         wxASSERT_MSG( (m_hi == 0l) || (m_hi == -1l),
-                      wxT("wxLongLong to long conversion loss of precision") );
+                      "wxLongLong to long conversion loss of precision" );
 
         return (long)m_lo;
     }
@@ -893,7 +893,7 @@ public:
     unsigned long ToULong() const
     {
         wxASSERT_MSG( m_hi == 0ul,
-                      wxT("wxULongLong to long conversion loss of precision") );
+                      "wxULongLong to long conversion loss of precision" );
 
         return (unsigned long)m_lo;
     }

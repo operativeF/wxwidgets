@@ -169,9 +169,9 @@ TAG_HANDLER_BEGIN(DIV, "DIV")
     TAG_HANDLER_PROC(tag)
     {
         wxString style;
-        if(tag.GetParamAsString(wxT("STYLE"), &style))
+        if(tag.GetParamAsString("STYLE", &style))
         {
-            if(style.IsSameAs(wxT("PAGE-BREAK-BEFORE:ALWAYS"), false))
+            if(style.IsSameAs("PAGE-BREAK-BEFORE:ALWAYS", false))
             {
                 m_WParser->CloseContainer();
                 m_WParser->OpenContainer()->InsertCell(new wxHtmlPageBreakCell);
@@ -179,7 +179,7 @@ TAG_HANDLER_BEGIN(DIV, "DIV")
                 m_WParser->OpenContainer();
                 return false;
             }
-            else if(style.IsSameAs(wxT("PAGE-BREAK-INSIDE:AVOID"), false))
+            else if(style.IsSameAs("PAGE-BREAK-INSIDE:AVOID", false))
             {
                 // As usual, reuse the current container if it's empty.
                 wxHtmlContainerCell *c = m_WParser->GetContainer();
@@ -214,7 +214,7 @@ TAG_HANDLER_BEGIN(DIV, "DIV")
                 return false;
             }
         }
-        else if(tag.HasParam(wxT("ALIGN")))
+        else if(tag.HasParam("ALIGN"))
         {
             int old = m_WParser->GetAlign();
             wxHtmlContainerCell *c = m_WParser->GetContainer();
@@ -293,13 +293,13 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
     {
         wxColour clr;
 
-        if (tag.GetParamAsColour(wxT("TEXT"), &clr))
+        if (tag.GetParamAsColour("TEXT", &clr))
         {
             m_WParser->SetActualColor(clr);
             m_WParser->GetContainer()->InsertCell(new wxHtmlColourCell(clr));
         }
 
-        if (tag.GetParamAsColour(wxT("LINK"), &clr))
+        if (tag.GetParamAsColour("LINK", &clr))
             m_WParser->SetLinkColor(clr);
 
         wxHtmlWindowInterface *winIface = m_WParser->GetWindowInterface();
@@ -308,7 +308,7 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
             return false;
 
         wxString bg;
-        if (tag.GetParamAsString(wxT("BACKGROUND"), &bg))
+        if (tag.GetParamAsString("BACKGROUND", &bg))
         {
             wxFSFile *fileBgImage = m_WParser->OpenURL(wxHtmlURLType::Image, bg);
             if ( fileBgImage )
@@ -325,7 +325,7 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
             }
         }
 
-        if (tag.GetParamAsColour(wxT("BGCOLOR"), &clr))
+        if (tag.GetParamAsColour("BGCOLOR", &clr))
         {
             m_WParser->GetContainer()->InsertCell(
                 new wxHtmlColourCell(clr, wxHTML_CLR_TRANSPARENT_BACKGROUND));
@@ -372,7 +372,7 @@ TAG_HANDLER_BEGIN(SUBSUP, "SUB,SUP")
 
     TAG_HANDLER_PROC(tag)
     {
-        bool issub = (tag.GetName() == wxT("SUB"));
+        bool issub = (tag.GetName() == "SUB");
         wxHtmlScriptMode oldmode = m_WParser->GetScriptMode();
         int oldbase = m_WParser->GetScriptBaseline();
         int oldsize = m_WParser->GetFontSize();

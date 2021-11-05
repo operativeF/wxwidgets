@@ -87,7 +87,7 @@ public:
         else // invalid date
         {
             wxASSERT_MSG( HasDPFlag(wxDP_ALLOWNONE),
-                            wxT("this control must have a valid date") );
+                            "this control must have a valid date" );
 
             m_combo->SetText("");
         }
@@ -226,7 +226,7 @@ private:
 
         return fmt;
 #else // !wxUSE_INTL
-        return wxS("%x");
+        return "%x";
 #endif // wxUSE_INTL/!wxUSE_INTL
     }
 
@@ -236,7 +236,7 @@ private:
 
         if ( m_combo )
         {
-            wxString allowedChars = wxS("0123456789");
+            wxString allowedChars = "0123456789";
 
             const wxChar *p2 = m_format.c_str();
             while ( *p2 )
@@ -326,7 +326,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
                                      const std::string& name)
 {
     wxASSERT_MSG( !(style & wxDP_SPIN),
-                  wxT("wxDP_SPIN style not supported, use wxDP_DEFAULT") );
+                  "wxDP_SPIN style not supported, use wxDP_DEFAULT" );
 
     if ( !wxControl::Create(parent, id, pos, size,
                             style | wxCLIP_CHILDREN | wxWANTS_CHARS | wxBORDER_NONE,

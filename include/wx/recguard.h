@@ -34,7 +34,7 @@ public:
 
     ~wxRecursionGuard()
     {
-        wxASSERT_MSG( m_flag > 0, wxT("unbalanced wxRecursionGuards!?") );
+        wxASSERT_MSG( m_flag > 0, "unbalanced wxRecursionGuards!?" );
 
         m_flag--;
     }

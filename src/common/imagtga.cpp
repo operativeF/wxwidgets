@@ -840,7 +840,7 @@ bool wxTGAHandler::LoadFile(wxImage* image,
     {
         if ( verbose )
         {
-            wxLogError(wxT("TGA: this is not a TGA file."));
+            wxLogError("TGA: this is not a TGA file.");
         }
 
         return false;
@@ -856,19 +856,19 @@ bool wxTGAHandler::LoadFile(wxImage* image,
             switch ( error )
             {
                 case wxTGA_INVFORMAT:
-                    wxLogError(wxT("TGA: image format unsupported."));
+                    wxLogError("TGA: image format unsupported.");
                     break;
 
                 case wxTGA_MEMERR:
-                    wxLogError(wxT("TGA: couldn't allocate memory."));
+                    wxLogError("TGA: couldn't allocate memory.");
                     break;
 
                 case wxTGA_IOERR:
-                    wxLogError(wxT("TGA: couldn't read image data."));
+                    wxLogError("TGA: couldn't read image data.");
                     break;
 
                 default:
-                    wxLogError(wxT("TGA: unknown error!"));
+                    wxLogError("TGA: unknown error!");
             }
         }
 
@@ -891,15 +891,15 @@ bool wxTGAHandler::SaveFile(wxImage* image, wxOutputStream& stream, bool verbose
             switch ( error )
             {
                 case wxTGA_MEMERR:
-                    wxLogError(wxT("TGA: couldn't allocate memory."));
+                    wxLogError("TGA: couldn't allocate memory.");
                     break;
 
                 case wxTGA_IOERR:
-                    wxLogError(wxT("TGA: couldn't write image data."));
+                    wxLogError("TGA: couldn't write image data.");
                     break;
 
                 default:
-                    wxLogError(wxT("TGA: unknown error!"));
+                    wxLogError("TGA: unknown error!");
             }
         }
 

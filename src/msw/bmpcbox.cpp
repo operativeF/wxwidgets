@@ -276,7 +276,7 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
             else
                 index = wxComboBox::DoInsertItems(std::vector<std::string>{items[i]}, pos+i, nullptr, wxClientDataType::None);
 
-            wxASSERT_MSG( index != wxNOT_FOUND, wxS("Invalid wxBitmapComboBox state") );
+            wxASSERT_MSG( index != wxNOT_FOUND, "Invalid wxBitmapComboBox state" );
             if ( index == wxNOT_FOUND )
             {
                 continue;
@@ -286,12 +286,12 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
             if ( GetCount() > m_bitmaps.size() )
             {
                 wxASSERT_MSG( GetCount() == m_bitmaps.size() + 1,
-                              wxS("Invalid wxBitmapComboBox state") );
+                              "Invalid wxBitmapComboBox state" );
                 // Control is in the normal state.
                 // New item has been just added.
                 // Insert bitmap at the given index into the array.
                 wxASSERT_MSG( (size_t)index <= m_bitmaps.size(),
-                              wxS("wxBitmapComboBox item index out of bound") );
+                              "wxBitmapComboBox item index out of bound" );
                 m_bitmaps.insert(std::begin(m_bitmaps) + index, new wxBitmap(wxNullBitmap));
             }
             else
@@ -302,9 +302,9 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
                 // Required and actual indices should be the same to assure
                 // consistency between list of items and bitmap array.
                 wxASSERT_MSG( (size_t)index < m_bitmaps.size(),
-                              wxS("wxBitmapComboBox item index out of bound") );
+                              "wxBitmapComboBox item index out of bound" );
                 wxASSERT_MSG( (unsigned int)index == pos+i,
-                              wxS("Invalid index for wxBitmapComboBox item") );
+                              "Invalid index for wxBitmapComboBox item" );
             }
         }
     }
@@ -325,14 +325,14 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
         else
         {
             wxASSERT_MSG( GetCount() < m_bitmaps.size(),
-                          wxS("Invalid wxBitmapComboBox state") );
+                          "Invalid wxBitmapComboBox state" );
             // There are less items then bitmaps.
             // (This can happen if control is e.g. recreated with RecreateControl).
             // In this case existing bitmaps are reused.
             // The whole block of inserted items should be within the range
             // of indices of the existing bitmap array.
             wxASSERT_MSG( pos + numItems <= m_bitmaps.size(),
-                      wxS("wxBitmapComboBox item index out of bound") );
+                          "wxBitmapComboBox item index out of bound" );
         }
 
         index = wxComboBox::DoInsertItems(items, pos,
@@ -349,7 +349,7 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
             // Index of the last inserted item should be consistent
             // with required position and number of items.
             wxASSERT_MSG( (unsigned int)index == pos+numItems-1,
-                           wxS("Invalid index for wxBitmapComboBox item") );
+                           "Invalid index for wxBitmapComboBox item" );
         }
     }
 

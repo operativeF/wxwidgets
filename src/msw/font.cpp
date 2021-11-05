@@ -364,7 +364,7 @@ bool wxFontRefData::Alloc()
 
     if ( !m_hFont )
     {
-        wxLogLastError(wxT("CreateFont"));
+        wxLogLastError("CreateFont");
         return false;
     }
 
@@ -645,7 +645,7 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 {
     long l;
 
-    wxStringTokenizer tokenizer(s, wxS(";"), wxStringTokenizerMode::RetEmptyAll);
+    wxStringTokenizer tokenizer(s, ";", wxStringTokenizerMode::RetEmptyAll);
 
     // first the version
     wxString token = tokenizer.GetNextToken();
@@ -765,7 +765,7 @@ wxString wxNativeFontInfo::ToString() const
 {
     wxString s;
 
-    s.Printf(wxS("%d;%s;%ld;%ld;%ld;%ld;%ld;%d;%d;%d;%d;%d;%d;%d;%d;%s"),
+    s.Printf("%d;%s;%ld;%ld;%ld;%ld;%ld;%d;%d;%d;%d;%d;%d;%d;%d;%s",
              1, // version
              wxString::FromCDouble(pointSize),
              lf.lfHeight,
@@ -972,21 +972,21 @@ void wxFont::DoSetNativeFontInfo(const wxNativeFontInfo& info)
 
 double wxFont::GetFractionalPointSize() const
 {
-    wxCHECK_MSG( IsOk(), 0, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), 0, "invalid font" );
 
     return M_FONTDATA->GetFractionalPointSize();
 }
 
 wxSize wxFont::GetPixelSize() const
 {
-    wxCHECK_MSG( IsOk(), wxDefaultSize, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxDefaultSize, "invalid font" );
 
     return M_FONTDATA->GetPixelSize();
 }
 
 bool wxFont::IsUsingSizeInPixels() const
 {
-    wxCHECK_MSG( IsOk(), 0, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), 0, "invalid font" );
 
     return M_FONTDATA->IsUsingSizeInPixels();
 }
@@ -998,42 +998,42 @@ wxFontFamily wxFont::DoGetFamily() const
 
 wxFontStyle wxFont::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxFontStyle::Max, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontStyle::Max, "invalid font" );
 
     return M_FONTDATA->GetStyle();
 }
 
 int wxFont::GetNumericWeight() const
 {
-    wxCHECK_MSG(IsOk(), wxFONTWEIGHT_MAX, wxT("invalid font"));
+    wxCHECK_MSG(IsOk(), wxFONTWEIGHT_MAX, "invalid font");
 
     return M_FONTDATA->GetNumericWeight();
 }
 
 bool wxFont::GetUnderlined() const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), false, "invalid font" );
 
     return M_FONTDATA->GetUnderlined();
 }
 
 bool wxFont::GetStrikethrough() const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), false, "invalid font" );
 
     return M_FONTDATA->GetStrikethrough();
 }
 
 wxString wxFont::GetFaceName() const
 {
-    wxCHECK_MSG( IsOk(), {}, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), {}, "invalid font" );
 
     return M_FONTDATA->GetFaceName();
 }
 
 wxFontEncoding wxFont::GetEncoding() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTENCODING_DEFAULT, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFONTENCODING_DEFAULT, "invalid font" );
 
     return M_FONTDATA->GetEncoding();
 }
@@ -1045,7 +1045,7 @@ const wxNativeFontInfo *wxFont::GetNativeFontInfo() const
 
 bool wxFont::IsFixedWidth() const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), false, "invalid font" );
 
     // LOGFONTW doesn't contain the correct pitch information so we need to call
     // GetTextMetrics() to get it
@@ -1058,7 +1058,7 @@ bool wxFont::IsFixedWidth() const
     TEXTMETRICW tm;
     if ( !::GetTextMetricsW(screenDC.get(), &tm) )
     {
-        wxLogLastError(wxT("GetTextMetrics"));
+        wxLogLastError("GetTextMetrics");
         return false;
     }
 

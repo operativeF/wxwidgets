@@ -80,7 +80,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                            bool IsMask)
 
 {
-    wxCHECK_MSG( image, false, wxT("invalid pointer in wxBMPHandler::SaveFile") );
+    wxCHECK_MSG( image, false, "invalid pointer in wxBMPHandler::SaveFile" );
 
     if ( !image->IsOk() )
     {
@@ -193,7 +193,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     switch ( GetResolutionFromOptions(*image, &hres, &vres) )
     {
         default:
-            wxFAIL_MSG( wxT("unexpected image resolution units") );
+            wxFAIL_MSG( "unexpected image resolution units" );
             [[fallthrough]];
 
         case wxImageResolution::None:

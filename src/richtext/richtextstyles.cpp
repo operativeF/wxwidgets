@@ -586,13 +586,13 @@ wxRichTextStyleDefinition* wxRichTextStyleListBox::GetStyle(size_t i) const
 
     wxString styleType = wxGetRichTextStyleType(m_styleNames[i]);
     wxString style = wxGetRichTextStyle(m_styleNames[i]);
-    if (styleType == wxT("P"))
+    if (styleType == "P")
         return GetStyleSheet()->FindParagraphStyle(style);
-    else if (styleType == wxT("C"))
+    else if (styleType == "C")
         return GetStyleSheet()->FindCharacterStyle(style);
-    else if (styleType == wxT("L"))
+    else if (styleType == "L")
         return GetStyleSheet()->FindListStyle(style);
-    else if (styleType == wxT("B"))
+    else if (styleType == "B")
         return GetStyleSheet()->FindBoxStyle(style);
     else
         return GetStyleSheet()->FindStyle(style);
@@ -613,22 +613,22 @@ void wxRichTextStyleListBox::UpdateStyles()
         if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Paragraph)
         {
             for (i = 0; i < GetStyleSheet()->GetParagraphStyleCount(); i++)
-                m_styleNames.Add(GetStyleSheet()->GetParagraphStyle(i)->GetName() + wxT("|P"));
+                m_styleNames.Add(GetStyleSheet()->GetParagraphStyle(i)->GetName() + "|P");
         }
         if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Character)
         {
             for (i = 0; i < GetStyleSheet()->GetCharacterStyleCount(); i++)
-                m_styleNames.Add(GetStyleSheet()->GetCharacterStyle(i)->GetName() + wxT("|C"));
+                m_styleNames.Add(GetStyleSheet()->GetCharacterStyle(i)->GetName() + "|C");
         }
         if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::List)
         {
             for (i = 0; i < GetStyleSheet()->GetListStyleCount(); i++)
-                m_styleNames.Add(GetStyleSheet()->GetListStyle(i)->GetName() + wxT("|L"));
+                m_styleNames.Add(GetStyleSheet()->GetListStyle(i)->GetName() + "|L");
         }
         if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Box)
         {
             for (i = 0; i < GetStyleSheet()->GetBoxStyleCount(); i++)
-                m_styleNames.Add(GetStyleSheet()->GetBoxStyle(i)->GetName() + wxT("|B"));
+                m_styleNames.Add(GetStyleSheet()->GetBoxStyle(i)->GetName() + "|B");
         }
 
         m_styleNames.Sort();
@@ -671,13 +671,13 @@ int wxRichTextStyleListBox::GetIndexForStyle(const std::string& name) const
         s += "|B";
     else
     {
-        if (m_styleNames.Index(s + wxT("|P")) != wxNOT_FOUND)
+        if (m_styleNames.Index(s + "|P") != wxNOT_FOUND)
             s += "|P";
-        else if (m_styleNames.Index(s + wxT("|C")) != wxNOT_FOUND)
+        else if (m_styleNames.Index(s + "|C") != wxNOT_FOUND)
             s += "|C";
-        else if (m_styleNames.Index(s + wxT("|L")) != wxNOT_FOUND)
+        else if (m_styleNames.Index(s + "|L") != wxNOT_FOUND)
             s += "|L";
-        else if (m_styleNames.Index(s + wxT("|B")) != wxNOT_FOUND)
+        else if (m_styleNames.Index(s + "|B") != wxNOT_FOUND)
             s += "|B";
     }
     return m_styleNames.Index(s);
@@ -722,32 +722,32 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
     if (attr.HasAlignment() && attr.GetAlignment() == wxTextAttrAlignment::Centre)
         isCentred = true;
 
-    str << wxT("<html><head></head>");
-    str << wxT("<body");
+    str << "<html><head></head>";
+    str << "<body";
     if (attr.GetBackgroundColour().IsOk())
-        str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
-    str << wxT(">");
+        str << " bgcolor=\"#" << ColourToHexString(attr.GetBackgroundColour()) << "\"";
+    str << ">";
 
     if (isCentred)
-        str << wxT("<center>");
+        str << "<center>";
 
-    str << wxT("<table");
+    str << "<table";
     if (attr.GetBackgroundColour().IsOk())
-        str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
+        str << " bgcolor=\"#" << ColourToHexString(attr.GetBackgroundColour()) << "\"";
 
-    str << wxT("><tr>");
+    str << "><tr>";
 
     if (attr.GetLeftIndent() > 0)
     {
         wxClientDC dc(const_cast<wxRichTextStyleListBox*>(this));
 
-        str << wxT("<td width=") << std::min(50, (ConvertTenthsMMToPixels(dc, attr.GetLeftIndent())/2)) << wxT("></td>");
+        str << "<td width=" << std::min(50, (ConvertTenthsMMToPixels(dc, attr.GetLeftIndent())/2)) << "></td>";
     }
 
     if (isCentred)
-        str << wxT("<td nowrap align=\"center\">");
+        str << "<td nowrap align=\"center\">";
     else
-        str << wxT("<td nowrap>");
+        str << "<td nowrap>";
 
 #ifdef __WXMSW__
     int size = 2;
@@ -818,20 +818,20 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
     else if (thisFontSize > stdFontSize)
         size ++;
 
-    str += wxT("<font");
+    str += "<font";
 
-    str << wxT(" size=") << size;
+    str << " size=" << size;
 
     if (!attr.GetFontFaceName().IsEmpty())
-        str << wxT(" face=\"") << attr.GetFontFaceName() << wxT("\"");
+        str << " face=\"" << attr.GetFontFaceName() << "\"";
 
     if (attr.GetTextColour().IsOk() && attr.GetTextColour() != attr.GetBackgroundColour() && !(!attr.HasBackgroundColour() && attr.GetTextColour() == *wxWHITE))
-        str << wxT(" color=\"#") << ColourToHexString(attr.GetTextColour()) << wxT("\"");
+        str << " color=\"#" << ColourToHexString(attr.GetTextColour()) << "\"";
 
     if (attr.GetBackgroundColour().IsOk())
-        str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
+        str << " bgcolor=\"#" << ColourToHexString(attr.GetBackgroundColour()) << "\"";
 
-    str << wxT(">");
+    str << ">";
 
     bool hasBold = false;
     bool hasItalic = false;
@@ -845,11 +845,11 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
         hasUnderline = true;
 
     if (hasBold)
-        str << wxT("<b>");
+        str << "<b>";
     if (hasItalic)
-        str << wxT("<i>");
+        str << "<i>";
     if (hasUnderline)
-        str << wxT("<u>");
+        str << "<u>";
 
     wxString name(def->GetName());
     if (attr.HasTextEffects() && (attr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
@@ -858,23 +858,23 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
     str += name;
 
     if (hasUnderline)
-        str << wxT("</u>");
+        str << "</u>";
     if (hasItalic)
-        str << wxT("</i>");
+        str << "</i>";
     if (hasBold)
-        str << wxT("</b>");
+        str << "</b>";
 
     if (isCentred)
-        str << wxT("</centre>");
+        str << "</centre>";
 
-    str << wxT("</font>");
+    str << "</font>";
 
-    str << wxT("</td></tr></table>");
+    str << "</td></tr></table>";
 
     if (isCentred)
-        str << wxT("</center>");
+        str << "</center>";
 
-    str << wxT("</body></html>");
+    str << "</body></html>";
     return str;
 }
 

@@ -146,7 +146,7 @@ class HP_TagHandler : public wxHtmlTagHandler
             m_count = 0;
             m_parentItem = nullptr;
         }
-        wxString GetSupportedTags() override { return wxT("UL,OBJECT,PARAM"); }
+        wxString GetSupportedTags() override { return "UL,OBJECT,PARAM"; }
         bool HandleTag(const wxHtmlTag& tag) override;
 
         void Reset(wxHtmlHelpDataItems& data)
@@ -164,7 +164,7 @@ class HP_TagHandler : public wxHtmlTagHandler
 
 bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
 {
-    if (tag.GetName() == wxT("UL"))
+    if (tag.GetName() == "UL")
     {
         wxHtmlHelpDataItem *oldparent = m_parentItem;
         m_level++;
@@ -174,7 +174,7 @@ bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
         m_parentItem = oldparent;
         return true;
     }
-    else if (tag.GetName() == wxT("OBJECT"))
+    else if (tag.GetName() == "OBJECT")
     {
         m_name.clear();
         m_page.clear();
@@ -199,7 +199,7 @@ bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
            condition because text/site properties does not contain Local param
         */
 #endif
-        if (tag.GetParam(wxT("TYPE")) == wxT("text/sitemap"))
+        if (tag.GetParam("TYPE") == "text/sitemap")
         {
             wxHtmlHelpDataItem *item = new wxHtmlHelpDataItem();
 
@@ -218,15 +218,15 @@ bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
     }
     else
     { // "PARAM"
-        if (m_name.empty() && tag.GetParam(wxT("NAME")) == wxT("Name"))
-            m_name = tag.GetParam(wxT("VALUE"));
-        if (tag.GetParam(wxT("NAME")) == wxT("Local"))
+        if (m_name.empty() && tag.GetParam("NAME") == "Name")
+            m_name = tag.GetParam("VALUE");
+        if (tag.GetParam("NAME") == "Local")
         {
-            m_page = tag.GetParam(wxT("VALUE"));
+            m_page = tag.GetParam("VALUE");
             m_page.Replace("\\", "/");
         }
-        if (tag.GetParam(wxT("NAME")) == wxT("ID"))
-            tag.GetParamAsInt(wxT("VALUE"), &m_id);
+        if (tag.GetParam("NAME") == "ID")
+            tag.GetParamAsInt("VALUE", &m_id);
         return false;
     }
 }
@@ -238,7 +238,7 @@ bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
 
 wxString wxHtmlBookRecord::GetFullPath(const wxString &page) const
 {
-    if (wxIsAbsolutePath(page) || page.Find(wxT("file:")) == 0)
+    if (wxIsAbsolutePath(page) || page.Find("file:") == 0)
         return page;
     else
         return m_BasePath + page;
@@ -248,7 +248,7 @@ wxString wxHtmlHelpDataItem::GetIndentedName() const
 {
     wxString s;
     for (int i = 1; i < level; i++)
-        s << wxT("   ");
+        s << "   ";
     s << name;
     return s;
 }
@@ -480,10 +480,10 @@ void wxHtmlHelpData::SetTempDir(const wxString& path)
 static wxString SafeFileName(const wxString& s)
 {
     wxString res(s);
-    res.Replace(wxT("#"), wxT("_"));
-    res.Replace(wxT(":"), wxT("_"));
-    res.Replace(wxT("\\"), wxT("_"));
-    res.Replace(wxT("/"), wxT("_"));
+    res.Replace("#", "_");
+    res.Replace(":", "_");
+    res.Replace("\\", "_");
+    res.Replace("/", "_");
     return res;
 }
 
@@ -541,7 +541,7 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
     // 2. same as 1. but in temp path
     // 3. otherwise or if cache load failed, load it from MS.
 
-    fi = fsys.OpenFile(bookfile.GetLocation() + wxT(".cached"));
+    fi = fsys.OpenFile(bookfile.GetLocation() + ".cached");
 
     if (fi == nullptr ||
 #if wxUSE_DATETIME
@@ -550,7 +550,7 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
           !LoadCachedBook(bookr, fi->GetStream()))
     {
         if (fi != nullptr) delete fi;
-        fi = fsys.OpenFile(m_tempPath + wxFileNameFromPath(bookfile.GetLocation()) + wxT(".cached"));
+        fi = fsys.OpenFile(m_tempPath + wxFileNameFromPath(bookfile.GetLocation()) + ".cached");
         if (m_tempPath.empty() || fi == nullptr ||
 #if wxUSE_DATETIME
             fi->GetModificationTime() < bookfile.GetModificationTime() ||
@@ -561,7 +561,7 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
             if (!m_tempPath.empty())
             {
                 wxFileOutputStream *outs = new wxFileOutputStream(m_tempPath +
-                                                  SafeFileName(wxFileNameFromPath(bookfile.GetLocation())) + wxT(".cached"));
+                                                  SafeFileName(wxFileNameFromPath(bookfile.GetLocation())) + ".cached");
                 SaveCachedBook(bookr, outs);
                 delete outs;
             }
@@ -609,22 +609,22 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
 bool wxHtmlHelpData::AddBook(const wxString& book)
 {
     wxString extension(book.Right(4).Lower());
-    if (extension == wxT(".zip") ||
+    if (extension == ".zip" ||
 #if wxUSE_LIBMSPACK
-        extension == wxT(".chm") /*compressed html help book*/ ||
+        extension == ".chm" /*compressed html help book*/ ||
 #endif
-        extension == wxT(".htb") /*html book*/)
+        extension == ".htb" /*html book*/)
     {
         wxFileSystem fsys;
         wxString s;
         bool rt = false;
 
 #if wxUSE_LIBMSPACK
-        if (extension == wxT(".chm"))
-            s = fsys.FindFirst(book + wxT("#chm:*.hhp"), wxFILE);
+        if (extension == ".chm")
+            s = fsys.FindFirst(book + "#chm:*.hhp", wxFILE);
         else
 #endif
-            s = fsys.FindFirst(book + wxT("#zip:*.hhp"), wxFILE);
+            s = fsys.FindFirst(book + "#zip:*.hhp", wxFILE);
 
         while (!s.empty())
         {
@@ -668,18 +668,18 @@ bool wxHtmlHelpData::AddBook(const wxString& book)
            *ch = (wxChar)wxTolower(*ch);
 
         if (wxStrstr(linebuf, wxT("title=")) == linebuf)
-            title = linebuf + wxStrlen(wxT("title="));
+            title = linebuf + wxStrlen("title=");
         if (wxStrstr(linebuf, wxT("default topic=")) == linebuf)
         {
-            start = linebuf + wxStrlen(wxT("default topic="));
+            start = linebuf + wxStrlen("default topic=");
             start.Replace("\\", "/");
         }
         if (wxStrstr(linebuf, wxT("index file=")) == linebuf)
-            index = linebuf + wxStrlen(wxT("index file="));
+            index = linebuf + wxStrlen("index file=");
         if (wxStrstr(linebuf, wxT("contents file=")) == linebuf)
-            contents = linebuf + wxStrlen(wxT("contents file="));
+            contents = linebuf + wxStrlen("contents file=");
         if (wxStrstr(linebuf, wxT("charset=")) == linebuf)
-            charset = linebuf + wxStrlen(wxT("charset="));
+            charset = linebuf + wxStrlen("charset=");
     } while (lineptr != nullptr);
 
     wxFontEncoding enc = wxFONTENCODING_SYSTEM;
@@ -929,7 +929,7 @@ static inline wxString CompressSpaces(const wxString & str)
 
 bool wxHtmlSearchEngine::Scan(const wxFSFile& file)
 {
-    wxASSERT_MSG(!m_Keyword.empty(), wxT("wxHtmlSearchEngine::LookFor must be called before scanning!"));
+    wxASSERT_MSG(!m_Keyword.empty(), "wxHtmlSearchEngine::LookFor must be called before scanning!");
 
     wxHtmlFilterHTML filter;
     wxString bufStr = filter.ReadFile(file);
@@ -974,10 +974,10 @@ bool wxHtmlSearchEngine::Scan(const wxFSFile& file)
     if (m_WholeWords)
     {
         // insert ' ' at the beginning and at the end
-        keyword.insert( 0, wxT(" ") );
-        keyword.append( wxT(" ") );
-        bufStr.insert( 0, wxT(" ") );
-        bufStr.append( wxT(" ") );
+        keyword.insert( 0, " " );
+        keyword.append( " " );
+        bufStr.insert( 0, " " );
+        bufStr.append( " " );
     }
 
     // remove continuous spaces

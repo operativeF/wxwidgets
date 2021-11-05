@@ -409,7 +409,7 @@ bool wxBitmap::CreateWithFormat(int width, int height, int dfbFormat)
 {
     UnRef();
 
-    wxCHECK_MSG( width > 0 && height > 0, false, wxT("invalid bitmap size") );
+    wxCHECK_MSG( width > 0 && height > 0, false, "invalid bitmap size" );
 
     return Create(CreateSurfaceWithFormat(width, height,
                                           DFBSurfacePixelFormat(dfbFormat)));
@@ -418,7 +418,7 @@ bool wxBitmap::CreateWithFormat(int width, int height, int dfbFormat)
 #if wxUSE_IMAGE
 wxBitmap::wxBitmap(const wxImage& imageOrig, int depth, double WXUNUSED(scale))
 {
-    wxCHECK_RET( imageOrig.IsOk(), wxT("invalid image") );
+    wxCHECK_RET( imageOrig.IsOk(), "invalid image" );
 
     wxImage image(imageOrig);
 
@@ -464,7 +464,7 @@ wxBitmap::wxBitmap(const wxImage& imageOrig, int depth, double WXUNUSED(scale))
 
 wxImage wxBitmap::ConvertToImage() const
 {
-    wxCHECK_MSG( IsOk(), wxNullImage, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), wxNullImage, "invalid bitmap" );
 
     wxImage img(GetWidth(), GetHeight());
     wxIDirectFBSurfacePtr src = M_BITMAP->m_surface;
@@ -550,7 +550,7 @@ wxBitmap::wxBitmap(const wxString &filename, wxBitmapType type)
 
 wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
 {
-    wxCHECK_RET( depth == 1, wxT("can only create mono bitmap from XBM data") );
+    wxCHECK_RET( depth == 1, "can only create mono bitmap from XBM data" );
 
     // create bitmap in the device-dependent format
     if ( !CreateWithFormat(width, height, DSPF_UNKNOWN) )
@@ -563,7 +563,7 @@ wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
 
 int wxBitmap::GetHeight() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), -1, "invalid bitmap" );
 
     int h = -1;
     M_BITMAP->m_surface->GetSize(NULL, &h);
@@ -572,7 +572,7 @@ int wxBitmap::GetHeight() const
 
 int wxBitmap::GetWidth() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), -1, "invalid bitmap" );
 
     int w = -1;
     M_BITMAP->m_surface->GetSize(&w, NULL);
@@ -581,21 +581,21 @@ int wxBitmap::GetWidth() const
 
 int wxBitmap::GetDepth() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), -1, "invalid bitmap" );
 
     return M_BITMAP->m_surface->GetDepth();
 }
 
 wxMask *wxBitmap::GetMask() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid bitmap" );
 
     return M_BITMAP->m_mask;
 }
 
 void wxBitmap::SetMask(wxMask *mask)
 {
-    wxCHECK_RET( IsOk(), wxT("invalid bitmap") );
+    wxCHECK_RET( IsOk(), "invalid bitmap" );
 
     AllocExclusive();
     delete M_BITMAP->m_mask;
@@ -615,7 +615,7 @@ wxBitmap wxBitmap::GetSubBitmap(const wxRect& rect) const
                  rect.x+rect.width <= GetWidth() &&
                  rect.y+rect.height <= GetHeight(),
                  wxNullBitmap,
-                 wxT("invalid bitmap or bitmap region") );
+                 "invalid bitmap or bitmap region" );
 
     // NB: DirectFB subsurfaces share the same pixels buffer, so we must
     //     clone the obtained subsurface
@@ -653,7 +653,7 @@ bool wxBitmap::LoadFile(const wxString &name, wxBitmapType type)
 #warning "to common code"
 bool wxBitmap::SaveFile(const wxString& filename, wxBitmapType type, const wxPalette *palette) const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), false, "invalid bitmap" );
 
     wxBitmapHandler *handler = FindHandler(type);
 
@@ -680,15 +680,15 @@ bool wxBitmap::SaveFile(const wxString& filename, wxBitmapType type, const wxPal
 #if wxUSE_PALETTE
 wxPalette *wxBitmap::GetPalette() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid bitmap" );
 
     return M_BITMAP->m_palette;
 }
 
 void wxBitmap::SetPalette(const wxPalette& palette)
 {
-    wxCHECK_RET( IsOk(), wxT("invalid bitmap") );
-    wxCHECK_RET( GetDepth() > 1 && GetDepth() <= 8, wxT("cannot set palette for bitmap of this depth") );
+    wxCHECK_RET( IsOk(), "invalid bitmap" );
+    wxCHECK_RET( GetDepth() > 1 && GetDepth() <= 8, "cannot set palette for bitmap of this depth" );
 
     AllocExclusive();
     wxDELETE(M_BITMAP->m_palette);
@@ -701,7 +701,7 @@ void wxBitmap::SetPalette(const wxPalette& palette)
 
 wxIDirectFBSurfacePtr wxBitmap::GetDirectFBSurface() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid bitmap") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid bitmap" );
 
     return M_BITMAP->m_surface;
 }

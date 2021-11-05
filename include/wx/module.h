@@ -62,7 +62,7 @@ protected:
     // after that
     void AddDependency(wxClassInfo *dep)
     {
-        wxCHECK_RET( dep, wxT("NULL module dependency") );
+        wxCHECK_RET( dep, "NULL module dependency" );
 
         m_dependencies.push_back(dep);
     }

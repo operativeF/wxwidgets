@@ -901,9 +901,9 @@ bool wxIPV6address::IsLocalHost() const
         return true;
 
     wxString addr = IPAddress();
-    return addr == wxT("::1") ||
-                addr == wxT("0:0:0:0:0:0:0:1") ||
-                    addr == wxT("::ffff:127.0.0.1");
+    return addr == "::1" ||
+                addr == "0:0:0:0:0:0:0:1" ||
+                    addr == "::ffff:127.0.0.1";
 }
 
 wxString wxIPV6address::IPAddress() const

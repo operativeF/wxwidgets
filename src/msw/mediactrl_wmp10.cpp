@@ -760,7 +760,7 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
         if( m_pWMPPlayer->get_settings(&m_pWMPSettings) != 0)
         {
             m_pWMPPlayer->Release();
-            wxLogSysError(wxT("Could not obtain settings from WMP10!"));
+            wxLogSysError("Could not obtain settings from WMP10!");
             return false;
         }
 
@@ -768,7 +768,7 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
         {
             m_pWMPSettings->Release();
             m_pWMPPlayer->Release();
-            wxLogSysError(wxT("Could not obtain controls from WMP10!"));
+            wxLogSysError("Could not obtain controls from WMP10!");
             return false;
         }
         if (m_pWMPControls )
@@ -811,13 +811,13 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     ::GetClientRect((HWND)ctrl->GetHandle(), &rcClient);
     m_wndView.Create((HWND)ctrl->GetHandle(), rcClient, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, WS_EX_CLIENTEDGE);
     hr = m_wndView.QueryHost(&spHost);
-    hr = spHost->CreateControl(CComBSTR(wxT("{6BF52A52-394A-11d3-B153-00C04F79FAA6}")), m_wndView, 0);
+    hr = spHost->CreateControl(CComBSTR("{6BF52A52-394A-11d3-B153-00C04F79FAA6}"), m_wndView, 0);
     hr = m_wndView.QueryControl(&m_pWMPPlayer);
 
     if( m_pWMPPlayer->get_settings(&m_pWMPSettings) != 0)
     {
         m_pWMPPlayer->Release();
-        wxLogSysError(wxT("Could not obtain settings from WMP10!"));
+        wxLogSysError("Could not obtain settings from WMP10!");
         return false;
     }
 
@@ -825,7 +825,7 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     {
         m_pWMPSettings->Release();
         m_pWMPPlayer->Release();
-        wxLogSysError(wxT("Could not obtain controls from WMP10!"));
+        wxLogSysError("Could not obtain controls from WMP10!");
         return false;
     }
 #endif
@@ -1031,7 +1031,7 @@ void wxWMP10MediaBackend::FinishLoad()
     }
     else
     {
-        wxLogDebug(wxT("Could not get media"));
+        wxLogDebug("Could not get media");
     }
 
     NotifyMovieLoaded();
@@ -1045,12 +1045,12 @@ bool wxWMP10MediaBackend::ShowPlayerControls(wxMediaCtrlPlayerControls flags)
     if(!flags)
     {
         m_pWMPPlayer->put_enabled(VARIANT_FALSE);
-        m_pWMPPlayer->put_uiMode(wxBasicString(wxS("none")));
+        m_pWMPPlayer->put_uiMode(wxBasicString("none"));
     }
     else
     {
         // TODO: use "custom"? (note that CE only supports none/full)
-        m_pWMPPlayer->put_uiMode(wxBasicString(wxS("full")));
+        m_pWMPPlayer->put_uiMode(wxBasicString("full"));
         m_pWMPPlayer->put_enabled(VARIANT_TRUE);
     }
 
@@ -1225,7 +1225,7 @@ wxLongLong wxWMP10MediaBackend::GetDuration()
     {
         if(pWMPMedia->get_duration(&outDuration) != 0)
         {
-            wxLogDebug(wxT("get_duration failed"));
+            wxLogDebug("get_duration failed");
         }
         pWMPMedia->Release();
     }
@@ -1350,7 +1350,7 @@ wxLongLong wxWMP10MediaBackend::GetDownloadTotal()
     if(m_pWMPPlayer->get_currentMedia(&pWMPMedia) == 0)
     {
         BSTR bsOut;
-        pWMPMedia->getItemInfo(wxBasicString(wxS("FileSize")),
+        pWMPMedia->getItemInfo(wxBasicString("FileSize"),
                                &bsOut);
 
         wxString sFileSize = wxConvertStringFromOle(bsOut);

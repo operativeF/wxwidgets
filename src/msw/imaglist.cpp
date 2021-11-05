@@ -64,7 +64,7 @@ bool wxImageList::Create(int width, int height, bool mask, int initial)
                                                    initial, 1);
     if ( !m_hImageList )
     {
-        wxLogLastError(wxT("ImageList_Create()"));
+        wxLogLastError("ImageList_Create()");
     }
 
     m_useMask = (flags & ILC_MASK) != 0;
@@ -87,7 +87,7 @@ wxImageList::~wxImageList()
 // Returns the number of images in the image list.
 int wxImageList::GetImageCount() const
 {
-    wxASSERT_MSG( m_hImageList, wxT("invalid image list") );
+    wxASSERT_MSG( m_hImageList, "invalid image list" );
 
     return ImageList_GetImageCount(GetHImageList());
 }
@@ -95,7 +95,7 @@ int wxImageList::GetImageCount() const
 // Returns the size (same for all images) of the images in the list
 bool wxImageList::GetSize(int WXUNUSED(index), int &width, int &height) const
 {
-    wxASSERT_MSG( m_hImageList, wxT("invalid image list") );
+    wxASSERT_MSG( m_hImageList, "invalid image list" );
 
     return ImageList_GetIconSize(GetHImageList(), &width, &height) != 0;
 }
@@ -248,7 +248,7 @@ bool wxImageList::Replace(int index,
 
     if ( !ImageList_Replace(GetHImageList(), index, hbmp, hbmpMask.get()) )
     {
-        wxLogLastError(wxT("ImageList_Replace()"));
+        wxLogLastError("ImageList_Replace()");
         return false;
     }
 
@@ -261,7 +261,7 @@ bool wxImageList::Replace(int i, const wxIcon& icon)
     bool ok = ImageList_ReplaceIcon(GetHImageList(), i, GetHiconOf(icon)) != -1;
     if ( !ok )
     {
-        wxLogLastError(wxT("ImageList_ReplaceIcon()"));
+        wxLogLastError("ImageList_ReplaceIcon()");
     }
 
     return ok;
@@ -273,7 +273,7 @@ bool wxImageList::Remove(int index)
     bool ok = index >= 0 && ImageList_Remove(GetHImageList(), index) != FALSE;
     if ( !ok )
     {
-        wxLogLastError(wxT("ImageList_Remove()"));
+        wxLogLastError("ImageList_Remove()");
     }
 
     return ok;
@@ -286,7 +286,7 @@ bool wxImageList::RemoveAll()
     bool ok = ImageList_Remove(GetHImageList(), -1) != FALSE;
     if ( !ok )
     {
-        wxLogLastError(wxT("ImageList_Remove()"));
+        wxLogLastError("ImageList_Remove()");
     }
 
     return ok;
@@ -308,7 +308,7 @@ bool wxImageList::Draw(int index,
        return false;
 
     HDC hDC = GetHdcOf(*msw_impl);
-    wxCHECK_MSG( hDC, false, wxT("invalid wxDC in wxImageList::Draw") );
+    wxCHECK_MSG( hDC, false, "invalid wxDC in wxImageList::Draw" );
 
     COLORREF clr = CLR_NONE;    // transparent by default
     if ( solidBackground )
@@ -335,7 +335,7 @@ bool wxImageList::Draw(int index,
     bool ok = ImageList_Draw(GetHImageList(), index, hDC, x, y, style) != 0;
     if ( !ok )
     {
-        wxLogLastError(wxT("ImageList_Draw()"));
+        wxLogLastError("ImageList_Draw()");
     }
 
     return ok;

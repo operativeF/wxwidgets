@@ -155,7 +155,7 @@ wxWindow* wxWindow::GetWindowChild(wxWindowID id)
 
 wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
 {
-    wxCHECK_MSG( parent, nullptr, wxT("must have valid parent for a control") );
+    wxCHECK_MSG( parent, nullptr, "must have valid parent for a control" );
 
     std::string str = wxGetWindowClass(hWnd);
     wx::utils::ToUpper(str);
@@ -188,7 +188,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
         {
             // TODO: how to find the bitmap?
             win = new wxBitmapButton;
-            wxLogError(wxT("Have not yet implemented bitmap button as BS_BITMAP button."));
+            wxLogError("Have not yet implemented bitmap button as BS_BITMAP button.");
         }
         else
         if (style1 == BS_OWNERDRAW)
@@ -218,7 +218,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
         else
 #endif
         {
-            wxLogError(wxT("Don't know what kind of button this is: id = %ld"),
+            wxLogError("Don't know what kind of button this is: id = %ld",
                        id);
         }
     }
@@ -280,7 +280,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
             win = new wxStaticBitmap;
 
             // Help! this doesn't correspond with the wxWin implementation.
-            wxLogError(wxT("Please make SS_BITMAP statics into owner-draw buttons."));
+            wxLogError("Please make SS_BITMAP statics into owner-draw buttons.");
         }
 #endif /* wxUSE_STATBMP */
     }

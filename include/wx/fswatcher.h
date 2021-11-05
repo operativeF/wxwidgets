@@ -271,7 +271,7 @@ public:
 
     int DecRef()
     {
-        wxASSERT_MSG( m_refcount > 0, wxS("Trying to decrement a zero count") );
+        wxASSERT_MSG( m_refcount > 0, "Trying to decrement a zero count" );
         return --m_refcount;
     }
 

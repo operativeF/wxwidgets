@@ -28,14 +28,14 @@ wxChoiceXmlHandler::wxChoiceXmlHandler()
 
 wxObject *wxChoiceXmlHandler::DoCreateResource()
 {
-    if( m_class == wxT("wxChoice"))
+    if( m_class == "wxChoice")
     {
         // find the selection
-        long selection = GetLong(wxT("selection"), -1);
+        long selection = GetLong("selection", -1);
 
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately(nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately(nullptr, GetParamNode("content"));
 
         XRC_MAKE_INSTANCE(control, wxChoice)
 
@@ -70,8 +70,8 @@ wxObject *wxChoiceXmlHandler::DoCreateResource()
 
 bool wxChoiceXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxChoice")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxChoice") ||
+           (m_insideBox && node->GetName() == "item"));
 }
 
 #endif // wxUSE_XRC && wxUSE_CHOICE

@@ -191,7 +191,7 @@ static int ConvertPenStyle(wxPenStyle style)
             return PS_NULL;
 
         default:
-            wxFAIL_MSG( wxT("unknown pen style") );
+            wxFAIL_MSG( "unknown pen style" );
             [[fallthrough]];
 
         case wxPenStyle::Dot:
@@ -227,7 +227,7 @@ static int ConvertJoinStyle(wxPenJoin join)
             return PS_JOIN_MITER;
 
         default:
-            wxFAIL_MSG( wxT("unknown pen join style") );
+            wxFAIL_MSG( "unknown pen join style" );
             [[fallthrough]];
 
         case wxJOIN_ROUND:
@@ -246,7 +246,7 @@ static int ConvertCapStyle(wxPenCap cap)
             return PS_ENDCAP_FLAT;
 
         default:
-            wxFAIL_MSG( wxT("unknown pen cap style") );
+            wxFAIL_MSG( "unknown pen cap style" );
             [[fallthrough]];
 
         case wxCAP_ROUND:
@@ -537,49 +537,49 @@ void wxPen::SetQuality(wxPenQuality quality)
 
 wxColour wxPen::GetColour() const
 {
-    wxCHECK_MSG( IsOk(), wxNullColour, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxNullColour, "invalid pen" );
 
     return M_PENDATA->GetColour();
 }
 
 int wxPen::GetWidth() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), -1, "invalid pen" );
 
     return M_PENDATA->GetWidth();
 }
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, "invalid pen" );
 
     return M_PENDATA->GetStyle();
 }
 
 wxPenJoin wxPen::GetJoin() const
 {
-    wxCHECK_MSG( IsOk(), wxJOIN_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxJOIN_INVALID, "invalid pen" );
 
     return M_PENDATA->GetJoin();
 }
 
 wxPenCap wxPen::GetCap() const
 {
-    wxCHECK_MSG( IsOk(), wxCAP_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxCAP_INVALID, "invalid pen" );
 
     return M_PENDATA->GetCap();
 }
 
 wxPenQuality wxPen::GetQuality() const
 {
-    wxCHECK_MSG( IsOk(), wxPenQuality::Default, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenQuality::Default, "invalid pen" );
 
     return M_PENDATA->GetQuality();
 }
 
 int wxPen::GetDashes(wxDash** ptr) const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), -1, "invalid pen" );
 
     *ptr = M_PENDATA->GetDash();
     return M_PENDATA->GetDashCount();
@@ -587,21 +587,21 @@ int wxPen::GetDashes(wxDash** ptr) const
 
 wxDash* wxPen::GetDash() const
 {
-    wxCHECK_MSG( IsOk(), nullptr, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), nullptr, "invalid pen" );
 
     return m_refData ? M_PENDATA->GetDash() : nullptr;
 }
 
 int wxPen::GetDashCount() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), -1, "invalid pen" );
 
     return m_refData ? M_PENDATA->GetDashCount() : 0;
 }
 
 wxBitmap* wxPen::GetStipple() const
 {
-    wxCHECK_MSG( IsOk(), nullptr, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), nullptr, "invalid pen" );
 
     return m_refData ? M_PENDATA->GetStipple() : nullptr;
 }

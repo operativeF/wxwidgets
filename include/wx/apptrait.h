@@ -27,7 +27,6 @@ class wxMessageOutput;
 class wxObject;
 class wxRendererNative;
 class wxStandardPaths;
-class wxString;
 class wxTimer;
 class wxTimerImpl;
 
@@ -88,7 +87,7 @@ public:
     // virtual) in base/appbase.cpp which can be called as last resort.
     //
     // return true to suppress subsequent asserts, false to continue as before
-    virtual bool ShowAssertDialog(const wxString& msg) = 0;
+    virtual bool ShowAssertDialog(const std::string& msg) = 0;
 
     // show the message safely to the user, i.e. show it in a message box if
     // possible (even in a console application!) or return false if we can't do
@@ -150,14 +149,14 @@ public:
 
     // return the name of the Desktop Environment such as
     // "KDE" or "GNOME". May return an empty string.
-    virtual wxString GetDesktopEnvironment() const = 0;
+    virtual std::string GetDesktopEnvironment() const = 0;
 
     // returns a short string to identify the block of the standard command
     // line options parsed automatically by current port: if this string is
     // empty, there are no such options, otherwise the function also fills
     // passed arrays with the names and the descriptions of those options.
-    virtual wxString GetStandardCmdLineOptions(std::vector<wxString>& names,
-                                               std::vector<wxString>& desc) const
+    virtual std::string GetStandardCmdLineOptions(std::vector<std::string>& names,
+                                               std::vector<std::string>& desc) const
     {
         wxUnusedVar(names);
         wxUnusedVar(desc);
@@ -170,8 +169,8 @@ public:
     // Helper function mostly useful for derived classes ShowAssertDialog()
     // implementation.
     //
-    // Returns the stack frame as a plain (and possibly empty) wxString.
-    virtual wxString GetAssertStackTrace();
+    // Returns the stack frame as a plain (and possibly empty) string.
+    virtual std::string GetAssertStackTrace();
 #endif // wxUSE_STACKWALKER
 
 private:
@@ -212,7 +211,7 @@ public:
 #endif // wxUSE_FONTMAP
     wxRendererNative *CreateRenderer() override;
 
-    bool ShowAssertDialog(const wxString& msg) override;
+    bool ShowAssertDialog(const std::string& msg) override;
     bool HasStderr() override;
     bool SafeMessageBox(const std::string& text,
                         const std::string& title) override;
@@ -232,7 +231,7 @@ public:
     }
 
     bool IsUsingUniversalWidgets() const override { return false; }
-    wxString GetDesktopEnvironment() const override { return {}; }
+    std::string GetDesktopEnvironment() const override { return {}; }
 };
 
 #if wxUSE_GUI
@@ -249,14 +248,14 @@ public:
 #endif // wxUSE_FONTMAP
     wxRendererNative *CreateRenderer() override;
 
-    bool ShowAssertDialog(const wxString& msg) override;
+    bool ShowAssertDialog(const std::string& msg) override;
     bool HasStderr() override;
 
     // Win32 has its own implementation using native message box directly in
     // the base class, don't override it.
 #ifndef __WIN32__
-    bool SafeMessageBox(const wxString& text,
-                        const wxString& title) override;
+    bool SafeMessageBox(const std::string& text,
+                        const std::string& title) override;
 #endif // !__WIN32__
 
     bool IsUsingUniversalWidgets() const override
@@ -268,7 +267,7 @@ public:
     #endif
     }
 
-    wxString GetDesktopEnvironment() const override { return {}; }
+    std::string GetDesktopEnvironment() const override { return {}; }
 };
 
 #endif // wxUSE_GUI

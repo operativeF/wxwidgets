@@ -55,13 +55,13 @@ wxEND_FLAGS( wxCommandLinkButtonStyle )
 
 wxBEGIN_PROPERTIES_TABLE(wxCommandLinkButton)
 wxPROPERTY( MainLabel, wxString, SetMainLabel, GetMainLabel, wxString(), \
-           0 /*flags*/, wxT("The main label"), wxT("group") )
+           0 /*flags*/, "The main label", "group" )
 
 wxPROPERTY( Note, wxString, SetNote, GetNote, wxString(), \
-           0 /*flags*/, wxT("The link URL"), wxT("group") )
+           0 /*flags*/, "The link URL", "group" )
 wxPROPERTY_FLAGS( WindowStyle, wxCommandLinkButtonStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/,     \
-                 wxT("The link style"), wxT("group")) // style
+                 "The link style", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxCommandLinkButton)

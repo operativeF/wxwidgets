@@ -534,7 +534,7 @@ void wxSymbolPickerDialog::UpdateSymbolDisplay(bool updateSymbolList, bool showA
         m_symbolStaticCtrl->SetLabelText(m_symbol);
 
         int symbol = (int) m_symbol[0];
-        m_characterCodeCtrl->SetValue(wxString::Format(wxT("%X hex (%d dec)"), symbol, symbol));
+        m_characterCodeCtrl->SetValue(wxString::Format("%X hex (%d dec)", symbol, symbol));
     }
     else
     {
@@ -772,7 +772,7 @@ bool wxSymbolListCtrl::DoSetCurrent(int current)
 {
     wxASSERT_MSG( current == wxNOT_FOUND ||
                     (current >= m_minSymbolValue && current <= m_maxSymbolValue),
-                  wxT("wxSymbolListCtrl::DoSetCurrent(): invalid symbol value") );
+                  "wxSymbolListCtrl::DoSetCurrent(): invalid symbol value" );
 
     if ( current == m_current )
     {
@@ -825,7 +825,7 @@ void wxSymbolListCtrl::SetSelection(int selection)
 {
     wxCHECK_RET( selection == wxNOT_FOUND ||
                   (selection >= m_minSymbolValue && selection < m_maxSymbolValue),
-                  wxT("wxSymbolListCtrl::SetSelection(): invalid symbol value") );
+                  "wxSymbolListCtrl::SetSelection(): invalid symbol value" );
 
     DoSetCurrent(selection);
 }

@@ -411,13 +411,13 @@ wxString wxXmlDoctype::GetFullString() const
 
         if ( !m_publicId.empty() )
         {
-            content << wxS(" PUBLIC \"") << m_publicId << wxS("\"");
+            content << " PUBLIC \"" << m_publicId << "\"";
         }
 
         if ( !m_systemId.empty() )
         {
             if ( m_publicId.empty() )
-                content << wxS(" SYSTEM");
+                content << " SYSTEM";
 
             // Prefer to use double quotes, but switch to single ones if a
             // double quote appears inside the string to be quoted.
@@ -446,7 +446,7 @@ bool wxXmlDoctype::IsValid() const
 //-----------------------------------------------------------------------------
 
 wxXmlDocument::wxXmlDocument()
-    : m_version(wxS("1.0")), m_fileEncoding(wxS("UTF-8")) 
+    : m_version("1.0"), m_fileEncoding("UTF-8") 
 {
     SetFileType(wxTextFileType::Unix);
 }
@@ -708,7 +708,7 @@ static void TextHnd(void *userData, const char *s, int len)
         if (!whiteOnly)
         {
             wxXmlNode *textnode =
-                new wxXmlNode(wxXML_TEXT_NODE, wxS("text"), str,
+                new wxXmlNode(wxXML_TEXT_NODE, "text", str,
                               XML_GetCurrentLineNumber(ctx->parser));
 
             ASSERT_LAST_CHILD_OK(ctx);
@@ -723,7 +723,7 @@ static void StartCdataHnd(void *userData)
     wxXmlParsingContext *ctx = (wxXmlParsingContext*)userData;
 
     wxXmlNode *textnode =
-        new wxXmlNode(wxXML_CDATA_SECTION_NODE, wxS("cdata"), wxS(""),
+        new wxXmlNode(wxXML_CDATA_SECTION_NODE, "cdata", "",
                       XML_GetCurrentLineNumber(ctx->parser));
 
     ASSERT_LAST_CHILD_OK(ctx);
@@ -748,7 +748,7 @@ static void CommentHnd(void *userData, const char *data)
 
     wxXmlNode *commentnode =
         new wxXmlNode(wxXML_COMMENT_NODE,
-                      wxS("comment"), CharToString(ctx->conv, data),
+                      "comment", CharToString(ctx->conv, data),
                       XML_GetCurrentLineNumber(ctx->parser));
 
     ASSERT_LAST_CHILD_OK(ctx);
@@ -796,10 +796,10 @@ static void DefaultHnd(void *userData, const char *s, int len)
 
         wxString buf = CharToString(ctx->conv, s, (size_t)len);
         int pos;
-        pos = buf.Find(wxS("encoding="));
+        pos = buf.Find("encoding=");
         if (pos != wxNOT_FOUND)
             ctx->encoding = buf.Mid(pos + 10).BeforeFirst(buf[(size_t)pos+9]);
-        pos = buf.Find(wxS("version="));
+        pos = buf.Find("version=");
         if (pos != wxNOT_FOUND)
             ctx->version = buf.Mid(pos + 9).BeforeFirst(buf[(size_t)pos+8]);
     }
@@ -850,7 +850,7 @@ bool wxXmlDocument::Load(wxInputStream& stream, const wxString& encoding, int fl
     XML_Parser parser = XML_ParserCreate(nullptr);
     wxXmlNode *root = new wxXmlNode(wxXML_DOCUMENT_NODE, {});
 
-    ctx.encoding = wxS("UTF-8"); // default in absence of encoding=""
+    ctx.encoding = "UTF-8"; // default in absence of encoding=""
     ctx.conv = nullptr;
 
     ctx.doctype = &m_doctype;
@@ -965,16 +965,16 @@ bool OutputEscapedString(wxOutputStream& stream,
         switch ( c )
         {
             case wxS('<'):
-                escaped.append(wxS("&lt;"));
+                escaped.append("&lt;");
                 break;
             case wxS('>'):
-                escaped.append(wxS("&gt;"));
+                escaped.append("&gt;");
                 break;
             case wxS('&'):
-                escaped.append(wxS("&amp;"));
+                escaped.append("&amp;");
                 break;
             case wxS('\r'):
-                escaped.append(wxS("&#xD;"));
+                escaped.append("&#xD;");
                 break;
             default:
                 if ( mode == Escape_Attribute )
@@ -982,13 +982,13 @@ bool OutputEscapedString(wxOutputStream& stream,
                     switch ( c )
                     {
                         case wxS('"'):
-                            escaped.append(wxS("&quot;"));
+                            escaped.append("&quot;");
                             break;
                         case wxS('\t'):
-                            escaped.append(wxS("&#x9;"));
+                            escaped.append("&#x9;");
                             break;
                         case wxS('\n'):
-                            escaped.append(wxS("&#xA;"));
+                            escaped.append("&#xA;");
                             break;
                         default:
                             escaped.append(c);
@@ -1028,9 +1028,9 @@ bool OutputNode(wxOutputStream& stream,
     switch (node->GetType())
     {
         case wxXML_CDATA_SECTION_NODE:
-            rc = OutputString(stream, wxS("<![CDATA["), convMem, convFile) &&
+            rc = OutputString(stream, "<![CDATA[", convMem, convFile) &&
                  OutputString(stream, node->GetContent(), convMem, convFile) &&
-                 OutputString(stream, wxS("]]>"), convMem, convFile);
+                 OutputString(stream, "]]>", convMem, convFile);
             break;
 
         case wxXML_TEXT_NODE:
@@ -1046,7 +1046,7 @@ bool OutputNode(wxOutputStream& stream,
             break;
 
         case wxXML_ELEMENT_NODE:
-            rc = OutputString(stream, wxS("<"), convMem, convFile) &&
+            rc = OutputString(stream, "<", convMem, convFile) &&
                  OutputString(stream, node->GetName(), convMem, convFile);
 
             if ( rc )
@@ -1056,18 +1056,18 @@ bool OutputNode(wxOutputStream& stream,
                       attr = attr->GetNext() )
                 {
                     rc = OutputString(stream,
-                                      wxS(" ") + attr->GetName() +  wxS("=\""),
+                                      " " + attr->GetName() +  "=\"",
                                       convMem, convFile) &&
                          OutputEscapedString(stream, attr->GetValue(),
                                              convMem, convFile,
                                              Escape_Attribute) &&
-                         OutputString(stream, wxS("\""), convMem, convFile);
+                         OutputString(stream, "\"", convMem, convFile);
                 }
             }
 
             if ( node->GetChildren() )
             {
-                rc = OutputString(stream, wxS(">"), convMem, convFile);
+                rc = OutputString(stream, ">", convMem, convFile);
 
                 wxXmlNode *prev = nullptr;
                 for ( wxXmlNode *n = node->GetChildren();
@@ -1096,30 +1096,30 @@ bool OutputNode(wxOutputStream& stream,
 
                 if ( rc )
                 {
-                    rc = OutputString(stream, wxS("</"), convMem, convFile) &&
+                    rc = OutputString(stream, "</", convMem, convFile) &&
                          OutputString(stream, node->GetName(),
                                       convMem, convFile) &&
-                         OutputString(stream, wxS(">"), convMem, convFile);
+                         OutputString(stream, ">", convMem, convFile);
                 }
             }
             else // no children, output "<foo/>"
             {
-                rc = OutputString(stream, wxS("/>"), convMem, convFile);
+                rc = OutputString(stream, "/>", convMem, convFile);
             }
             break;
 
         case wxXML_COMMENT_NODE:
-            rc = OutputString(stream, wxS("<!--"), convMem, convFile) &&
+            rc = OutputString(stream, "<!--", convMem, convFile) &&
                  OutputString(stream, node->GetContent(), convMem, convFile) &&
-                 OutputString(stream, wxS("-->"), convMem, convFile);
+                 OutputString(stream, "-->", convMem, convFile);
             break;
 
         case wxXML_PI_NODE:
-            rc = OutputString(stream, wxS("<?"), convMem, convFile) &&
+            rc = OutputString(stream, "<?", convMem, convFile) &&
                  OutputString(stream, node->GetName(), convMem, convFile) &&
-                 OutputString(stream, wxS(" "), convMem, convFile) &&
+                 OutputString(stream, " ", convMem, convFile) &&
                  OutputString(stream, node->GetContent(), convMem, convFile) &&
-                 OutputString(stream, wxS("?>"), convMem, convFile);
+                 OutputString(stream, "?>", convMem, convFile);
             break;
 
         default:
@@ -1142,7 +1142,7 @@ bool wxXmlDocument::Save(wxOutputStream& stream, int indentstep) const
     convFile.reset(new wxCSConv(GetFileEncoding()));
 
     wxString dec = wxString::Format(
-                                    wxS("<?xml version=\"%s\" encoding=\"%s\"?>") + m_eol,
+                                    "<?xml version=\"%s\" encoding=\"%s\"?>" + m_eol,
                                     GetVersion(), GetFileEncoding()
                                    );
     bool rc = OutputString(stream, dec, convMem.get(), convFile.get());
@@ -1153,7 +1153,7 @@ bool wxXmlDocument::Save(wxOutputStream& stream, int indentstep) const
         if ( !doctype.empty() )
         {
             rc = OutputString(stream,
-                              wxS("<!DOCTYPE ") + doctype + wxS(">") + m_eol,
+                              "<!DOCTYPE " + doctype + ">" + m_eol,
                               convMem.get(), convFile.get());
         }
     }

@@ -414,8 +414,8 @@ bool wxRichTextPrintout::SubstituteKeywords(std::string& str, const std::string&
     wx::utils::ReplaceAll(str, "@DATE@", now.FormatDate().ToStdString());
     wx::utils::ReplaceAll(str, "@TIME@", now.FormatTime().ToStdString());
 #else
-    str.Replace(wxT("@DATE@"), {});
-    str.Replace(wxT("@TIME@"), {});
+    str.Replace("@DATE@", {});
+    str.Replace("@TIME@", {});
 #endif
 
     wx::utils::ReplaceAll(str, "@TITLE@", title);

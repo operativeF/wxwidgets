@@ -253,7 +253,7 @@ private:
     // The hidden window we use for receiving WM_SETTINGCHANGE and its class
     // name.
     HWND m_hiddenHwnd{nullptr};
-    const wxChar* m_hiddenClass{nullptr};
+    const wchar_t* m_hiddenClass{nullptr}; // FIXME: Use narrow string.
 };
 
 // ----------------------------------------------------------------------------
@@ -344,7 +344,7 @@ wxVideoMode wxDisplayMSW::GetCurrentMode() const
 
     if ( !::EnumDisplaySettingsW(deviceName, ENUM_CURRENT_SETTINGS, &dm) )
     {
-        wxLogLastError(wxT("EnumDisplaySettings(ENUM_CURRENT_SETTINGS)"));
+        wxLogLastError("EnumDisplaySettings(ENUM_CURRENT_SETTINGS)");
     }
     else
     {
@@ -408,7 +408,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
     else // change to the given mode
     {
         wxCHECK_MSG( mode.GetWidth() && mode.GetHeight(), false,
-                        wxT("at least the width and height must be specified") );
+                        "at least the width and height must be specified" );
 
         wxZeroMemory(dm);
         dm.dmSize = sizeof(dm);
@@ -466,7 +466,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
             break;
 
         default:
-            wxFAIL_MSG( wxT("unexpected ChangeDisplaySettingsEx() return value") );
+            wxFAIL_MSG( "unexpected ChangeDisplaySettingsEx() return value" );
     }
 
     return false;
@@ -501,7 +501,7 @@ wxDisplayFactoryMSW::wxDisplayFactoryMSW()
     m_hiddenHwnd = wxCreateHiddenWindow
                    (
                     &m_hiddenClass,
-                    wxT("wxDisplayHiddenWindow"),
+                    L"wxDisplayHiddenWindow", // FIXME: Use narrow string.
                     wxDisplayWndProc
                    );
 }
@@ -512,14 +512,14 @@ wxDisplayFactoryMSW::~wxDisplayFactoryMSW()
     {
         if ( !::DestroyWindow(m_hiddenHwnd) )
         {
-            wxLogLastError(wxT("DestroyWindow(wxDisplayHiddenWindow)"));
+            wxLogLastError("DestroyWindow(wxDisplayHiddenWindow)");
         }
 
         if ( m_hiddenClass )
         {
             if ( !::UnregisterClassW(m_hiddenClass, wxGetInstance()) )
             {
-                wxLogLastError(wxT("UnregisterClass(wxDisplayHiddenWindow)"));
+                wxLogLastError("UnregisterClass(wxDisplayHiddenWindow)");
             }
         }
     }
@@ -553,7 +553,7 @@ void wxDisplayFactoryMSW::DoRefreshMonitors()
     // this code is executed while a UAC prompt is shown or during log-off.
     if ( !::EnumDisplayMonitors(nullptr, nullptr, MultimonEnumProc, (LPARAM)this) )
     {
-        wxLogLastError(wxT("EnumDisplayMonitors"));
+        wxLogLastError("EnumDisplayMonitors");
     }
 }
 
@@ -571,7 +571,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
     WinStruct<MONITORINFOEXW> monInfo;
     if ( !::GetMonitorInfoW(hMonitor, &monInfo) )
     {
-        wxLogLastError(wxT("GetMonitorInfo"));
+        wxLogLastError("GetMonitorInfo");
     }
 
     HDC hdcMonitor = ::CreateDCW(nullptr, monInfo.szDevice, nullptr, nullptr);
@@ -586,7 +586,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
 
 wxDisplayImpl *wxDisplayFactoryMSW::CreateDisplay(unsigned n)
 {
-    wxCHECK_MSG( n < m_displays.size(), nullptr, wxT("An invalid index was passed to wxDisplay") );
+    wxCHECK_MSG( n < m_displays.size(), nullptr, "An invalid index was passed to wxDisplay" );
 
     return new wxDisplayMSW(n, m_displays[n]);
 }

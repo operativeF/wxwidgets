@@ -720,7 +720,7 @@ public:
                             wxWindowID id,
                             const wxPoint &pos = wxDefaultPosition,
                             const wxSize &size = wxDefaultSize,
-                            const wxString &name = wxT("wxdataviewctrlmainwindow") );
+                            const wxString &name = "wxdataviewctrlmainwindow" );
     ~wxDataViewMainWindow();
 
     bool IsList() const { return GetModel()->IsListModel(); }
@@ -1163,7 +1163,7 @@ std::string wxDataViewCustomRenderer::GetAccessibleDescription() const
     GetValue(val);
 
     wxString strVal;
-    if ( val.IsType(wxS("bool")) )
+    if ( val.IsType("bool") )
     {
         /* TRANSLATORS: Name of Boolean true value */
         strVal = val.GetBool() ? _("true")
@@ -1321,11 +1321,11 @@ wxDataViewBitmapRenderer::wxDataViewBitmapRenderer( const wxString &varianttype,
 
 bool wxDataViewBitmapRenderer::SetValue( const wxVariant &value )
 {
-    if (value.GetType() == wxT("wxBitmap"))
+    if (value.GetType() == "wxBitmap")
     {
         m_bitmap << value;
     }
-    else if (value.GetType() == wxT("wxIcon"))
+    else if (value.GetType() == "wxIcon")
     {
         m_icon << value;
     }
@@ -1852,7 +1852,7 @@ void wxDataViewTreeNode::InsertChild(wxDataViewMainWindow* window,
     {
         // For open branches, children should be already sorted.
         wxASSERT_MSG( m_branchData->sortOrder == sortOrder,
-                      wxS("Logic error in wxDVC sorting code") );
+                      "Logic error in wxDVC sorting code" );
 
         // We can use fast insertion.
         insertSorted = true;
@@ -5301,7 +5301,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
             else // !ctrl, !shift
             {
                 // test in the enclosing if should make it impossible
-                wxFAIL_MSG( wxT("how did we get here?") );
+                wxFAIL_MSG( "how did we get here?" );
             }
         }
 
@@ -6728,7 +6728,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, std::string* name)
 
             wxVariant value;
             model->GetValue(value, item, dvCol->GetModelColumn());
-            if ( value.IsNull() || value.IsType(wxS("bool")) )
+            if ( value.IsNull() || value.IsType("bool") )
                 continue; // Skip non-textual items
 
             wxDataViewRenderer* r = dvCol->GetRenderer();
@@ -6893,7 +6893,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* d
             r->PrepareForItem(model, item, dvCol->GetModelColumn());
             wxString valStr = r->GetAccessibleDescription();
             // Skip first textual item
-            if ( !firstTextSkipped && !value.IsNull() && !value.IsType(wxS("bool")) && !valStr.empty() )
+            if ( !firstTextSkipped && !value.IsNull() && !value.IsType("bool") && !valStr.empty() )
             {
                 firstTextSkipped = true;
                 continue;
@@ -6910,9 +6910,9 @@ wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* d
                 }
 
                 if ( !itemDesc.empty() )
-                    itemDesc.Append(wxS(", "));
+                    itemDesc.Append(", ");
                 itemDesc.Append(colName);
-                itemDesc.Append(wxS(": "));
+                itemDesc.Append(": ");
                 itemDesc.Append(valStr);
             }
         }
@@ -7104,7 +7104,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
         }
         else if ( selectFlags != wxACC_SEL_NONE )
         {
-            wxFAIL_MSG( wxS("Invalid selection flag") );
+            wxFAIL_MSG( "Invalid selection flag" );
             return wxAccStatus::InvalidArg;
         }
     }
@@ -7114,7 +7114,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
         if ( dvWnd->IsSingleSel() &&
              selectFlags & (wxACC_SEL_EXTENDSELECTION | wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
         {
-            wxFAIL_MSG( wxS("Invalid selection flag") );
+            wxFAIL_MSG( "Invalid selection flag" );
             return wxAccStatus::InvalidArg;
         }
 
@@ -7129,7 +7129,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             // This flag must not be combined with the following flags:
             if ( selectFlags & (wxACC_SEL_EXTENDSELECTION | wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
             {
-                wxFAIL_MSG( wxS("Invalid selection flag") );
+                wxFAIL_MSG( "Invalid selection flag" );
                 return wxAccStatus::InvalidArg;
             }
 
@@ -7145,14 +7145,14 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             // This flag must not be combined with the following flag:
             if ( selectFlags & wxACC_SEL_TAKESELECTION )
             {
-                wxFAIL_MSG( wxS("Invalid selection flag") );
+                wxFAIL_MSG( "Invalid selection flag" );
                 return wxAccStatus::InvalidArg;
             }
             // These flags cannot be set together:
             if ( (selectFlags & (wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION))
                  == (wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
             {
-                wxFAIL_MSG( wxS("Invalid selection flag") );
+                wxFAIL_MSG( "Invalid selection flag" );
                 return wxAccStatus::InvalidArg;
             }
 
@@ -7160,7 +7160,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             unsigned int focusedRow = dvWnd->GetCurrentRow();
             if ( focusedRow == (unsigned int)-1 )
             {
-                wxFAIL_MSG( wxS("No selection anchor") );
+                wxFAIL_MSG( "No selection anchor" );
                 return wxAccStatus::InvalidArg;
             }
 
@@ -7194,7 +7194,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             // This flag must not be combined with the following flags:
             if ( selectFlags & (wxACC_SEL_TAKESELECTION | wxACC_SEL_REMOVESELECTION) )
             {
-                wxFAIL_MSG( wxS("Invalid selection flag") );
+                wxFAIL_MSG( "Invalid selection flag" );
                 return wxAccStatus::InvalidArg;
             }
 
@@ -7211,7 +7211,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             // This flag must not be combined with the following flags:
             if ( selectFlags & (wxACC_SEL_TAKESELECTION | wxACC_SEL_ADDSELECTION) )
             {
-                wxFAIL_MSG( wxS("Invalid selection flag") );
+                wxFAIL_MSG( "Invalid selection flag" );
                 return wxAccStatus::InvalidArg;
             }
 
@@ -7280,8 +7280,8 @@ wxAccStatus wxDataViewCtrlAccessible::GetFocus(int* childId, wxAccessible** chil
 // - a null variant (IsNull() returns true)
 // - a "void*" pointer to a wxAccessible child object
 // - an integer representing the selected child element,
-//   or 0 if this object is selected (GetType() == wxT("long"))
-// - a list variant (GetType() == wxT("list"))
+//   or 0 if this object is selected (GetType() == "long")
+// - a list variant (GetType() == "list")
 wxAccStatus wxDataViewCtrlAccessible::GetSelections(wxVariant* selections)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);

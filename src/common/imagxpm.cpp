@@ -129,7 +129,7 @@ MakeValidCIdent(wxString* str)
 
     // Double underscores are not allowed in normal C identifiers and are
     // useless anyhow.
-    str->Replace(wxT("__"), wxT("_"));
+    str->Replace("__", "_");
 }
 
 } // anonymous namespace
@@ -157,13 +157,13 @@ bool wxXPMHandler::SaveFile(wxImage * image,
     {
         sName = wxFileName(image->GetOption(wxIMAGE_OPTION_FILENAME)).GetName();
         MakeValidCIdent(&sName);
-        sName << wxT("_xpm");
+        sName << "_xpm";
     }
 
     if ( !sName.empty() )
-        sName = wxString(wxT("/* XPM */\nstatic const char *")) + sName;
+        sName = wxString("/* XPM */\nstatic const char *") + sName;
     else
-        sName = wxT("/* XPM */\nstatic const char *xpm_data");
+        sName = "/* XPM */\nstatic const char *xpm_data";
     stream.Write( (const char*) sName.ToAscii(), sName.Len() );
 
     char tmpbuf[200];

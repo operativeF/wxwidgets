@@ -47,12 +47,12 @@ wxAddRemoveCtrl::~wxAddRemoveCtrl()
 
 void wxAddRemoveCtrl::SetAdaptor(wxAddRemoveAdaptor* adaptor)
 {
-    wxCHECK_RET( !m_impl, wxS("should be only called once") );
+    wxCHECK_RET( !m_impl, "should be only called once" );
 
-    wxCHECK_RET( adaptor, wxS("should have a valid adaptor") );
+    wxCHECK_RET( adaptor, "should have a valid adaptor" );
 
     wxWindow* const ctrlItems = adaptor->GetItemsCtrl();
-    wxCHECK_RET( ctrlItems, wxS("should have a valid items control") );
+    wxCHECK_RET( ctrlItems, "should have a valid items control" );
 
     m_impl = new wxAddRemoveImpl(adaptor, this, ctrlItems);
 }
@@ -61,7 +61,7 @@ void
 wxAddRemoveCtrl::SetButtonsToolTips(const std::string& addtip,
                                     const std::string& removetip)
 {
-    wxCHECK_RET( m_impl, wxS("can only be called after SetAdaptor()") );
+    wxCHECK_RET( m_impl, "can only be called after SetAdaptor()" );
 
     m_impl->SetButtonsToolTips(addtip, removetip);
 }

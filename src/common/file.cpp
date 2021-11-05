@@ -110,7 +110,7 @@ bool wxFile::Access(const wxString& name, OpenMode mode)
         switch ( mode )
         {
             default:
-                wxFAIL_MSG(wxT("bad wxFile::Access mode parameter."));
+                wxFAIL_MSG("bad wxFile::Access mode parameter.");
                 [[fallthrough]];
 
             case read:
@@ -243,7 +243,7 @@ bool wxFile::Close()
 
 bool wxFile::ReadAll(wxString *str, const wxMBConv& conv)
 {
-    wxCHECK_MSG( str, false, wxS("Output string must be non-NULL") );
+    wxCHECK_MSG( str, false, "Output string must be non-NULL" );
 
     static constexpr ssize_t READSIZE = 4096;
 
@@ -252,7 +252,7 @@ bool wxFile::ReadAll(wxString *str, const wxMBConv& conv)
     ssize_t length = Length();
     if ( length != -1 )
     {
-        wxCHECK_MSG( (wxFileOffset)length == Length(), false, wxT("huge file not supported") );
+        wxCHECK_MSG( (wxFileOffset)length == Length(), false, "huge file not supported" );
 
         if ( !buf.extend(length) )
             return false;
@@ -403,15 +403,15 @@ bool wxFile::Flush()
 // seek
 wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
 {
-    wxASSERT_MSG( IsOpened(), wxT("can't seek on closed file") );
+    wxASSERT_MSG( IsOpened(), "can't seek on closed file" );
     wxCHECK_MSG( ofs != wxInvalidOffset || mode != wxSeekMode::FromStart,
                  wxInvalidOffset,
-                 wxT("invalid absolute file offset") );
+                 "invalid absolute file offset" );
 
     const int origin = [mode]() {
         switch ( mode ) {
         default:
-            wxFAIL_MSG(wxT("unknown seek origin"));
+            wxFAIL_MSG("unknown seek origin");
             [[fallthrough]];
 
         case wxSeekMode::FromStart:

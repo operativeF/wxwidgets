@@ -368,7 +368,7 @@ void wxTextEntryBase::ForceUpper()
     // provided: this is just a tiny size-saving optimization, nothing else.
 #ifndef wxHAS_NATIVE_TEXT_FORCEUPPER
     wxWindow* const win = GetEditableWindow();
-    wxCHECK_RET( win, wxS("can't be called before creating the window") );
+    wxCHECK_RET( win, "can't be called before creating the window" );
 
     // Convert the current control contents to upper case
     ConvertToUpperCase();

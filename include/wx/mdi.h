@@ -212,7 +212,7 @@ public:
 
     wxStatusBar *GetStatusBar() const override
         { return nullptr; }
-    void SetStatusText(const wxString &WXUNUSED(text),
+    void SetStatusText(const std::string& WXUNUSED(text),
                        int WXUNUSED(number)=0) override
         { }
     void SetStatusWidths(int WXUNUSED(n),

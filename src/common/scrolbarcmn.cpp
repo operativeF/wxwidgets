@@ -60,17 +60,17 @@ wxBEGIN_PROPERTIES_TABLE(wxScrollBar)
                             wxEVT_SCROLL_CHANGED, wxScrollEvent )
 
     wxPROPERTY( ThumbPosition, int, SetThumbPosition, GetThumbPosition, 0, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
     wxPROPERTY( Range, int, SetRange, GetRange, 0, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
     wxPROPERTY( ThumbSize, int, SetThumbSize, GetThumbSize, 0, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
     wxPROPERTY( PageSize, int, SetPageSize, GetPageSize, 0, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
 
     wxPROPERTY_FLAGS( WindowStyle, wxScrollBarStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxScrollBar)

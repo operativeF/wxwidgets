@@ -103,10 +103,10 @@ bool wxListCtrlXmlHandler::CanHandle(wxXmlNode *node)
 
 void wxListCtrlXmlHandler::HandleCommonItemAttrs(wxListItem& item)
 {
-    if (HasParam(wxT("align")))
-        item.SetAlign((wxListColumnFormat)GetStyle(wxT("align")));
-    if (HasParam(wxT("text")))
-        item.SetText(GetText(wxT("text")));
+    if (HasParam("align"))
+        item.SetAlign((wxListColumnFormat)GetStyle("align"));
+    if (HasParam("text"))
+        item.SetText(GetText("text"));
 }
 
 void wxListCtrlXmlHandler::HandleListCol()
@@ -123,10 +123,10 @@ void wxListCtrlXmlHandler::HandleListCol()
     wxListItem item;
 
     HandleCommonItemAttrs(item);
-    if (HasParam(wxT("width")))
-        item.SetWidth((int)GetLong(wxT("width")));
-    if (HasParam(wxT("image")))
-        item.SetImage((int)GetLong(wxT("image")));
+    if (HasParam("width"))
+        item.SetWidth((int)GetLong("width"));
+    if (HasParam("image"))
+        item.SetImage((int)GetLong("image"));
 
     list->InsertColumn(list->GetColumnCount(), item);
 }
@@ -140,20 +140,20 @@ void wxListCtrlXmlHandler::HandleListItem()
 
     HandleCommonItemAttrs(item);
 
-    if (HasParam(wxT("bg")))
-        item.SetBackgroundColour(GetColour(wxT("bg")));
-    if (HasParam(wxT("col")))
-        item.SetColumn((int)GetLong(wxT("col")));
-    if (HasParam(wxT("data")))
-        item.SetData(GetLong(wxT("data")));
-    if (HasParam(wxT("font")))
-        item.SetFont(GetFont(wxT("font"), list));
-    if (HasParam(wxT("state")))
-        item.SetState(ListStateFlags{GetStyle(wxT("state"))});
-    if (HasParam(wxT("textcolour")))
-        item.SetTextColour(GetColour(wxT("textcolour")));
-    if (HasParam(wxT("textcolor")))
-        item.SetTextColour(GetColour(wxT("textcolor")));
+    if (HasParam("bg"))
+        item.SetBackgroundColour(GetColour("bg"));
+    if (HasParam("col"))
+        item.SetColumn((int)GetLong("col"));
+    if (HasParam("data"))
+        item.SetData(GetLong("data"));
+    if (HasParam("font"))
+        item.SetFont(GetFont("font", list));
+    if (HasParam("state"))
+        item.SetState(ListStateFlags{GetStyle("state")});
+    if (HasParam("textcolour"))
+        item.SetTextColour(GetColour("textcolour"));
+    if (HasParam("textcolor"))
+        item.SetTextColour(GetColour("textcolor"));
 
     // the list control icon style, may be 0
     int image;
@@ -186,10 +186,10 @@ wxListCtrl *wxListCtrlXmlHandler::HandleListCtrl()
 
     // we can optionally have normal and/or small image lists
     wxImageList *imagelist;
-    imagelist = GetImageList(wxT("imagelist"));
+    imagelist = GetImageList("imagelist");
     if ( imagelist )
         list->AssignImageList(imagelist, wxIMAGE_LIST_NORMAL);
-    imagelist = GetImageList(wxT("imagelist-small"));
+    imagelist = GetImageList("imagelist-small");
     if ( imagelist )
         list->AssignImageList(imagelist, wxIMAGE_LIST_SMALL);
 

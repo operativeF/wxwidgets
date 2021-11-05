@@ -251,7 +251,7 @@ void wxGenericAnimationCtrl::SetAnimation(const wxAnimation& animation)
     }
 
     wxCHECK_RET(animation.IsCompatibleWith(wxGetClassInfo()),
-                wxT("incompatible animation") );
+                "incompatible animation" );
 
     if (AnimationImplGetBackgroundColour() == wxNullColour)
         SetUseWindowBackgroundColour();
@@ -610,31 +610,31 @@ void wxGenericAnimationCtrl::OnSize(wxSizeEvent &WXUNUSED(event))
 
 wxPoint wxGenericAnimationCtrl::AnimationImplGetFramePosition(unsigned int frame) const
 {
-    wxCHECK_MSG( m_animation.IsOk(), wxDefaultPosition, wxT("invalid animation") );
+    wxCHECK_MSG( m_animation.IsOk(), wxDefaultPosition, "invalid animation" );
     return ANIMATION->GetFramePosition(frame);
 }
 
 wxSize wxGenericAnimationCtrl::AnimationImplGetFrameSize(unsigned int frame) const
 {
-    wxCHECK_MSG( m_animation.IsOk(), wxDefaultSize, wxT("invalid animation") );
+    wxCHECK_MSG( m_animation.IsOk(), wxDefaultSize, "invalid animation" );
     return ANIMATION->GetFrameSize(frame);
 }
 
 wxAnimationDisposal wxGenericAnimationCtrl::AnimationImplGetDisposalMethod(unsigned int frame) const
 {
-    wxCHECK_MSG( m_animation.IsOk(), wxANIM_UNSPECIFIED, wxT("invalid animation") );
+    wxCHECK_MSG( m_animation.IsOk(), wxANIM_UNSPECIFIED, "invalid animation" );
     return ANIMATION->GetDisposalMethod(frame);
 }
 
 wxColour wxGenericAnimationCtrl::AnimationImplGetTransparentColour(unsigned int frame) const
 {
-    wxCHECK_MSG( m_animation.IsOk(), wxNullColour, wxT("invalid animation") );
+    wxCHECK_MSG( m_animation.IsOk(), wxNullColour, "invalid animation" );
     return ANIMATION->GetTransparentColour(frame);
 }
 
 wxColour wxGenericAnimationCtrl::AnimationImplGetBackgroundColour() const
 {
-    wxCHECK_MSG( m_animation.IsOk(), wxNullColour, wxT("invalid animation") );
+    wxCHECK_MSG( m_animation.IsOk(), wxNullColour, "invalid animation" );
     return ANIMATION->GetBackgroundColour();
 }
 

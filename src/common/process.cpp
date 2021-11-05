@@ -48,7 +48,7 @@ void wxProcess::Init(wxEvtHandler *parent, int id, unsigned int flags)
 /* static */
 wxProcess *wxProcess::Open(const wxString& cmd, unsigned int flags)
 {
-    wxASSERT_MSG( !(flags & wxEXEC_SYNC), wxT("wxEXEC_SYNC should not be used." ));
+    wxASSERT_MSG( !(flags & wxEXEC_SYNC), "wxEXEC_SYNC should not be used." );
     wxProcess *process = new wxProcess(wxPROCESS_REDIRECT);
     const long pid = wxExecute(cmd, flags, process);
     if( !pid )
@@ -154,7 +154,7 @@ bool wxProcess::Exists(int pid)
         default:
         case wxKILL_ERROR:
         case wxKILL_BAD_SIGNAL:
-            wxFAIL_MSG( wxT("unexpected wxProcess::Kill() return code") );
+            wxFAIL_MSG( "unexpected wxProcess::Kill() return code" );
             [[fallthrough]];
 
         case wxKILL_NO_PROCESS:
@@ -177,7 +177,7 @@ bool wxProcess::Activate() const
 void wxProcess::SetPriority(unsigned priority)
 {
     wxCHECK_RET( priority <= wxPRIORITY_MAX,
-                 wxS("Invalid process priority value.") );
+                 "Invalid process priority value." );
 
     m_priority = priority;
 }

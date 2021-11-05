@@ -68,16 +68,16 @@ wxEVENT_PROPERTY( TextUpdated, wxEVT_TEXT, wxCommandEvent )
 wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 
 wxPROPERTY( ValueString, wxString, SetValue, GetValue, \
-           wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), wxT("group")) ;
+           wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", "group") ;
 wxPROPERTY( Value, int, SetValue, GetValue, 0, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 #if 0
- wxPROPERTY( Min, int, SetMin, GetMin, 0, 0 /*flags*/, wxT("Helpstring"), wxT("group") )
- wxPROPERTY( Max, int, SetMax, GetMax, 0, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+ wxPROPERTY( Min, int, SetMin, GetMin, 0, 0 /*flags*/, "Helpstring", "group" )
+ wxPROPERTY( Max, int, SetMax, GetMax, 0, 0 /*flags*/, "Helpstring", "group")
 #endif
 wxPROPERTY_FLAGS( WindowStyle, wxSpinCtrlStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 /*
  TODO PROPERTIES
  style wxSP_ARROW_KEYS
@@ -99,9 +99,9 @@ wxString wxSpinCtrlImpl::FormatAsHex(long val, long maxVal)
     // behaviour of) wxMSW
     wxString text;
     if ( maxVal < 0x10000 )
-        text.Printf(wxS("0x%04lx"), val);
+        text.Printf("0x%04lx", val);
     else
-        text.Printf(wxS("0x%08lx"), val);
+        text.Printf("0x%08lx", val);
 
     return text;
 }

@@ -119,21 +119,21 @@ void wxXLocale::Init(const char *loc)
         //       in wxLocale code (but with newlocale() calls instead of wxSetlocale())
         wxString buf(loc);
         wxString buf2;
-        buf2 = buf + wxS(".UTF-8");
+        buf2 = buf + ".UTF-8";
         m_locale = newlocale(LC_ALL_MASK, buf2.c_str(), NULL);
         if ( !m_locale )
         {
-            buf2 = buf + wxS(".utf-8");
+            buf2 = buf + ".utf-8";
             m_locale = newlocale(LC_ALL_MASK, buf2.c_str(), NULL);
         }
         if ( !m_locale )
         {
-            buf2 = buf + wxS(".UTF8");
+            buf2 = buf + ".UTF8";
             m_locale = newlocale(LC_ALL_MASK, buf2.c_str(), NULL);
         }
         if ( !m_locale )
         {
-            buf2 = buf + wxS(".utf8");
+            buf2 = buf + ".utf8";
             m_locale = newlocale(LC_ALL_MASK, buf2.c_str(), NULL);
         }
     }
@@ -274,7 +274,7 @@ public:
         if ( !wxSetlocale(LC_NUMERIC, "C") )
         {
             // Setting locale to "C" should really always work.
-            wxFAIL_MSG( wxS("Couldn't set LC_NUMERIC to \"C\"") );
+            wxFAIL_MSG( "Couldn't set LC_NUMERIC to \"C\"" );
         }
     }
 

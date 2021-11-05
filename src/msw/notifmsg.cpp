@@ -97,7 +97,7 @@ public:
     static void ReleaseIcon()
     {
         wxASSERT_MSG( ms_refCountIcon != -1,
-                      wxS("Must not be called when not using own icon") );
+                      "Must not be called when not using own icon" );
 
         if ( ms_refCountIcon > 0 && !--ms_refCountIcon )
         {
@@ -205,7 +205,7 @@ void wxBalloonNotifMsgImpl::SetUpIcon(wxWindow *win)
     else // Create a new icon.
     {
         wxASSERT_MSG( ms_refCountIcon == 0,
-                      wxS("Shouldn't reference not existent icon") );
+                      "Shouldn't reference not existent icon" );
 
         ms_icon = new wxTaskBarIcon;
         ms_refCountIcon = 1;

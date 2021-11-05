@@ -79,7 +79,7 @@ public:
     int GetSelection() const
     {
         wxASSERT_MSG( !HasMultipleSelection(),
-                        wxT("GetSelection() can't be used with wxLB_MULTIPLE") );
+                      "GetSelection() can't be used with wxLB_MULTIPLE" );
 
         return m_current;
     }

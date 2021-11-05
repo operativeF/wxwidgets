@@ -32,7 +32,7 @@
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())
 #else
-#define IsTopMostDir(dir)   (dir == wxT("/"))
+#define IsTopMostDir(dir)   (dir == "/")
 #endif
 
 
@@ -46,9 +46,9 @@ int wxCALLBACK wxFileDataNameCompare( wxIntPtr data1, wxIntPtr data2, wxIntPtr s
      wxFileData *fd1 = (wxFileData *)wxUIntToPtr(data1);
      wxFileData *fd2 = (wxFileData *)wxUIntToPtr(data2);
 
-     if (fd1->GetFileName() == wxT(".."))
+     if (fd1->GetFileName() == "..")
          return -sortOrder;
-     if (fd2->GetFileName() == wxT(".."))
+     if (fd2->GetFileName() == "..")
          return sortOrder;
      if (fd1->IsDir() && !fd2->IsDir())
          return -sortOrder;
@@ -64,9 +64,9 @@ int wxCALLBACK wxFileDataSizeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
      wxFileData *fd1 = (wxFileData *)wxUIntToPtr(data1);
      wxFileData *fd2 = (wxFileData *)wxUIntToPtr(data2);
 
-     if (fd1->GetFileName() == wxT(".."))
+     if (fd1->GetFileName() == "..")
          return -sortOrder;
-     if (fd2->GetFileName() == wxT(".."))
+     if (fd2->GetFileName() == "..")
          return sortOrder;
      if (fd1->IsDir() && !fd2->IsDir())
          return -sortOrder;
@@ -86,9 +86,9 @@ int wxCALLBACK wxFileDataTypeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
      wxFileData *fd1 = (wxFileData *)wxUIntToPtr(data1);
      wxFileData *fd2 = (wxFileData *)wxUIntToPtr(data2);
 
-     if (fd1->GetFileName() == wxT(".."))
+     if (fd1->GetFileName() == "..")
          return -sortOrder;
-     if (fd2->GetFileName() == wxT(".."))
+     if (fd2->GetFileName() == "..")
          return sortOrder;
      if (fd1->IsDir() && !fd2->IsDir())
          return -sortOrder;
@@ -108,9 +108,9 @@ int wxCALLBACK wxFileDataTimeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
      wxFileData *fd1 = (wxFileData *)wxUIntToPtr(data1);
      wxFileData *fd2 = (wxFileData *)wxUIntToPtr(data2);
 
-     if (fd1->GetFileName() == wxT(".."))
+     if (fd1->GetFileName() == "..")
          return -sortOrder;
-     if (fd2->GetFileName() == wxT(".."))
+     if (fd2->GetFileName() == "..")
          return sortOrder;
      if (fd1->IsDir() && !fd2->IsDir())
          return -sortOrder;
@@ -159,7 +159,7 @@ void wxFileData::ReadData()
 
 #if defined(WX_WINDOWS)
     // c:\.. is a drive don't stat it
-    if ((m_fileName == wxT("..")) && (m_filePath.length() <= 5))
+    if ((m_fileName == "..") && (m_filePath.length() <= 5))
     {
         m_type = is_drive;
         m_size = 0;
@@ -192,7 +192,7 @@ void wxFileData::ReadData()
 #if defined(__UNIX__)
     if ( hasStat )
     {
-        m_permissions.Printf(wxT("%c%c%c%c%c%c%c%c%c"),
+        m_permissions.Printf("%c%c%c%c%c%c%c%c%c",
                              buff.st_mode & wxS_IRUSR ? wxT('r') : wxT('-'),
                              buff.st_mode & wxS_IWUSR ? wxT('w') : wxT('-'),
                              buff.st_mode & wxS_IXUSR ? wxT('x') : wxT('-'),
@@ -208,7 +208,7 @@ void wxFileData::ReadData()
     DWORD attribs = ::GetFileAttributesW(m_filePath.c_str());
     if (attribs != (DWORD)-1)
     {
-        m_permissions.Printf(wxT("%c%c%c%c"),
+        m_permissions.Printf("%c%c%c%c",
                              attribs & FILE_ATTRIBUTE_ARCHIVE  ? wxT('A') : wxT(' '),
                              attribs & FILE_ATTRIBUTE_READONLY ? wxT('R') : wxT(' '),
                              attribs & FILE_ATTRIBUTE_HIDDEN   ? wxT('H') : wxT(' '),
@@ -246,13 +246,13 @@ wxString wxFileData::GetFileType() const
 wxString wxFileData::GetModificationTime() const
 {
     // want time as 01:02 so they line up nicely, no %r in WIN32
-    return m_dateTime.FormatDate() + wxT(" ") + m_dateTime.Format(wxT("%I:%M:%S %p"));
+    return m_dateTime.FormatDate() + " " + m_dateTime.Format(wxT("%I:%M:%S %p"));
 }
 
 wxString wxFileData::GetHint() const
 {
     wxString s = m_filePath;
-    s += wxT("  ");
+    s += "  ";
 
     if (IsDir())
         s += _("<DIR>");
@@ -269,7 +269,7 @@ wxString wxFileData::GetHint() const
     if ( !IsDrive() )
     {
         s << GetModificationTime()
-          << wxT("  ")
+          << "  "
           << m_permissions;
     }
 
@@ -306,7 +306,7 @@ wxString wxFileData::GetEntry( fileListFieldType num ) const
 #endif // defined(__UNIX__) || defined(__WIN32__)
 
         default:
-            wxFAIL_MSG( wxT("unexpected field in wxFileData::GetEntry()") );
+            wxFAIL_MSG( "unexpected field in wxFileData::GetEntry()" );
     }
 
     return s;
@@ -331,7 +331,7 @@ void wxFileData::MakeItem( wxListItem &item )
 
     if (IsLink())
     {
-        wxColour dg = wxTheColourDatabase->Find( wxT("MEDIUM GREY") );
+        wxColour dg = wxTheColourDatabase->Find( "MEDIUM GREY" );
         if ( dg.IsOk() )
             item.SetTextColour(dg);
     }
@@ -364,7 +364,7 @@ wxFileListCtrl::wxFileListCtrl(wxWindow *win,
           : wxListCtrl(win, id, pos, size, style, validator, name),
             m_wild(wild),
             m_showHidden(showHidden),
-            m_dirName(wxT("*"))
+            m_dirName("*")
 {
     wxImageList *imageList = wxTheFileIconsTable->GetSmallImageList();
 
@@ -390,7 +390,7 @@ void wxFileListCtrl::ChangeToReportMode()
     // don't hardcode since mm/dd is dd/mm elsewhere
     int w, h;
     wxDateTime dt(22, wxDateTime::Dec, 2002, 22, 22, 22);
-    std::string txt = dt.FormatDate() + wxT("22") + dt.Format(wxT("%I:%M:%S %p"));
+    std::string txt = dt.FormatDate() + "22" + dt.Format(wxT("%I:%M:%S %p"));
     GetTextExtent(txt, &w, &h);
 
     InsertColumn( 0, _("Name"), wxListColumnFormat::Left, w );
@@ -398,7 +398,7 @@ void wxFileListCtrl::ChangeToReportMode()
     InsertColumn( 2, _("Type"), wxListColumnFormat::Left, w/2 );
     InsertColumn( 3, _("Modified"), wxListColumnFormat::Left, w );
 #if defined(__UNIX__)
-    GetTextExtent(wxT("Permissions 2"), &w, &h);
+    GetTextExtent("Permissions 2", &w, &h);
     InsertColumn( 4, _("Permissions"), wxListColumnFormat::Left, w );
 #elif defined(__WIN32__)
     GetTextExtent("Attributes 2", &w, &h);
@@ -443,7 +443,7 @@ long wxFileListCtrl::Add( wxFileData *fd, wxListItem &item )
 void wxFileListCtrl::UpdateItem(const wxListItem &item)
 {
     wxFileData *fd = (wxFileData*)GetItemData(item);
-    wxCHECK_RET(fd, wxT("invalid filedata"));
+    wxCHECK_RET(fd, "invalid filedata");
 
     fd->ReadData();
 
@@ -460,7 +460,7 @@ void wxFileListCtrl::UpdateItem(const wxListItem &item)
 void wxFileListCtrl::UpdateFiles()
 {
     // don't do anything before ShowModal() call which sets m_dirName
-    if ( m_dirName == wxT("*") )
+    if ( m_dirName == "*" )
         return;
 
     wxBusyCursor bcur; // this may take a while...
@@ -507,7 +507,7 @@ void wxFileListCtrl::UpdateFiles()
         {
             wxString p(wxPathOnly(m_dirName));
 #if defined(__UNIX__)
-            if (p.empty()) p = wxT("/");
+            if (p.empty()) p = "/";
 #endif // __UNIX__
             wxFileData *fd = new wxFileData(p, "..", wxFileData::is_dir, wxFileIconsTable::folder);
             if (Add(fd, item) != -1)
@@ -555,7 +555,7 @@ void wxFileListCtrl::UpdateFiles()
 
             // Tokenize the wildcard string, so we can handle more than 1
             // search pattern in a wildcard.
-            wxStringTokenizer tokenWild(m_wild, wxT(";"));
+            wxStringTokenizer tokenWild(m_wild, ";");
             while ( tokenWild.HasMoreTokens() )
             {
                 cont = dir.GetFirst(&f, tokenWild.GetNextToken(),
@@ -599,7 +599,7 @@ void wxFileListCtrl::MakeDir()
         do {
             new_name = _("NewName");
             wxString num;
-            num.Printf( wxT("%d"), i );
+            num.Printf( "%d", i );
             new_name += num;
 
             path = m_dirName;
@@ -651,7 +651,7 @@ void wxFileListCtrl::GoToParentDir()
         }
 #elif defined(__UNIX__)
         if (m_dirName.empty())
-            m_dirName = wxT("/");
+            m_dirName = "/";
 #endif
         UpdateFiles();
         long id = FindItem( 0, fname );
@@ -722,8 +722,8 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     wxASSERT( fd );
 
     if ((event.GetLabel().empty()) ||
-        (event.GetLabel() == wxT(".")) ||
-        (event.GetLabel() == wxT("..")) ||
+        (event.GetLabel() == ".") ||
+        (event.GetLabel() == "..") ||
         (event.GetLabel().find( wxFILE_SEP_PATH ) != std::string::npos))
     {
         wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
@@ -874,10 +874,10 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 
     // check that the styles are not contradictory
     wxASSERT_MSG( !( ( m_style & wxFC_SAVE ) && ( m_style & wxFC_OPEN ) ),
-                  wxT( "can't specify both wxFC_SAVE and wxFC_OPEN at once" ) );
+                  "can't specify both wxFC_SAVE and wxFC_OPEN at once" );
 
     wxASSERT_MSG( !( ( m_style & wxFC_SAVE ) && ( m_style & wxFC_MULTIPLE ) ),
-                  wxT( "wxFC_MULTIPLE can't be used with wxFC_SAVE" ) );
+                  "wxFC_MULTIPLE can't be used with wxFC_SAVE" );
 
     wxNavigationEnabled<wxControl>::Create( parent, id,
                                             pos, size,
@@ -1097,7 +1097,7 @@ bool wxGenericFileCtrl::SetFilename( const wxString& name )
     wxString dir, fn, ext;
     wxFileName::SplitPath(name, &dir, &fn, &ext);
     wxCHECK_MSG( dir.empty(), false,
-                 wxS( "can't specify directory component to SetFilename" ) );
+                 "can't specify directory component to SetFilename" );
 
     m_noSelChgEvent = true;
 
@@ -1174,7 +1174,7 @@ void wxGenericFileCtrl::SetWildcard( const wxString& wildCard )
     const size_t count = wxParseCommonDialogsFilter( m_wildCard,
                          wildDescriptions,
                          wildFilters );
-    wxCHECK_RET( count, wxT( "wxFileDialog: bad wildcard string" ) );
+    wxCHECK_RET( count, "wxFileDialog: bad wildcard string" );
 
     m_choice->Clear();
 

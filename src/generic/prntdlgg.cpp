@@ -71,9 +71,9 @@ wxIMPLEMENT_CLASS(wxPostScriptPrintNativeData, wxPrintNativeDataBase);
 wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
 {
 #ifdef __VMS__
-    m_printerCommand = wxT("print");
-    m_printerOptions = wxT("/nonotify/queue=psqueue");
-    m_afmPath = wxT("sys$ps_font_metrics:");
+    m_printerCommand = "print";
+    m_printerOptions = "/nonotify/queue=psqueue";
+    m_afmPath = "sys$ps_font_metrics:";
 #endif
 
 #ifdef __WXMSW__
@@ -82,7 +82,7 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
 #endif
 
 #if !defined(__VMS__) && !defined(__WXMSW__)
-    m_printerCommand = wxT("lpr");
+    m_printerCommand = "lpr";
 #endif
 
     m_printerScaleX = 1.0;
@@ -269,7 +269,7 @@ void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
         wxFileName fname( m_printDialogData.GetPrintData().GetFilename() );
 
         wxFileDialog dialog( this, _("PostScript file"),
-            fname.GetPath(), fname.GetFullName(), wxT("*.ps"), wxFD_SAVE | wxFD_OVERWRITE_PROMPT );
+            fname.GetPath(), fname.GetFullName(), "*.ps", wxFD_SAVE | wxFD_OVERWRITE_PROMPT );
         if (dialog.ShowModal() != wxID_OK) return;
 
         m_printDialogData.GetPrintData().SetFilename( dialog.GetPath() );
@@ -472,10 +472,10 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
     image_list->Add( wxBitmap(check_xpm) );
     m_printerListCtrl->AssignImageList( image_list, wxIMAGE_LIST_SMALL );
 
-    m_printerListCtrl->InsertColumn( 0, wxT(" "), wxListColumnFormat::Left, 20 );
-    m_printerListCtrl->InsertColumn( 1, wxT("Printer"), wxListColumnFormat::Left, 150 );
-    m_printerListCtrl->InsertColumn( 2, wxT("Device"), wxListColumnFormat::Left, 150 );
-    m_printerListCtrl->InsertColumn( 3, wxT("Status"), wxListColumnFormat::Left, 80 );
+    m_printerListCtrl->InsertColumn( 0, " ", wxListColumnFormat::Left, 20 );
+    m_printerListCtrl->InsertColumn( 1, "Printer", wxListColumnFormat::Left, 150 );
+    m_printerListCtrl->InsertColumn( 2, "Device", wxListColumnFormat::Left, 150 );
+    m_printerListCtrl->InsertColumn( 3, "Status", wxListColumnFormat::Left, 80 );
 
     wxListItem item;
     item.SetMask( wxLIST_MASK_TEXT );
@@ -498,18 +498,18 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
     wxArrayString errors;
     wxArrayString output;
-    long res = wxExecute( wxT("lpstat -v"), output, errors, wxEXEC_NODISABLE );
+    long res = wxExecute( "lpstat -v", output, errors, wxEXEC_NODISABLE );
     if (res >= 0 && errors.GetCount() == 0)
     {
         size_t i;
         for (i = 0; i < output.GetCount(); i++)
         {
-            wxStringTokenizer tok( output[i], wxT(" ") );
+            wxStringTokenizer tok( output[i], " " );
             wxString tmp = tok.GetNextToken(); // "device"
-            if (tmp != wxT("device"))
+            if (tmp != "device")
                 break;  // the lpstat syntax must have changed.
             tmp = tok.GetNextToken();          // "for"
-            if (tmp != wxT("for"))
+            if (tmp != "for")
                 break;  // the lpstat syntax must have changed.
             tmp = tok.GetNextToken();          // "hp_deskjet930c:"
             if (tmp[tmp.length()-1] == wxT(':'))
@@ -532,7 +532,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
                 m_printerListCtrl->SetItemState( item.GetId(), ListStates::Selected, ListStates::Selected );
             }
 
-            wxString command = wxT("lpstat -p ");
+            wxString command = "lpstat -p ";
             command += name;
             wxArrayString errors2;
             wxArrayString output2;
@@ -543,14 +543,14 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
                 int pos = tmp.Find( wxT('.') );
                 if (pos != wxNOT_FOUND)
                     tmp.Remove( (size_t)pos, tmp.length()-(size_t)pos );
-                wxStringTokenizer tok2( tmp, wxT(" ") );
+                wxStringTokenizer tok2( tmp, " " );
                 tmp = tok2.GetNextToken();  // "printer"
                 tmp = tok2.GetNextToken();  // "hp_deskjet930c"
                 tmp.clear();
                 while (tok2.HasMoreTokens())
                 {
                     tmp += tok2.GetNextToken();
-                    tmp += wxT(" ");
+                    tmp += " ";
                 }
                 item.SetColumn( 3 );
                 item.SetText( tmp );

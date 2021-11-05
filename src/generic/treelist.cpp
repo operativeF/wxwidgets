@@ -772,7 +772,7 @@ wxTreeListModel::Compare(const wxDataViewItem& item1,
 int wxTreeListModel::DoCompareValues(const wxVariant& value1,
                                      const wxVariant& value2) const
 {
-    if ( value1.GetType() == wxS("wxDataViewCheckIconText") )
+    if ( value1.GetType() == "wxDataViewCheckIconText" )
     {
         wxDataViewCheckIconText iconText1, iconText2;
 

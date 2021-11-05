@@ -164,9 +164,9 @@ wxZipClassFactory::wxZipClassFactory()
 const wxChar * const *
 wxZipClassFactory::GetProtocols(wxStreamProtocolType type) const
 {
-    static const wxChar *protocols[] = { wxT("zip"), nullptr };
-    static const wxChar *mimetypes[] = { wxT("application/zip"), nullptr };
-    static const wxChar *fileexts[]  = { wxT(".zip"), wxT(".htb"), nullptr };
+    static const wxChar *protocols[] = { "zip", nullptr };
+    static const wxChar *mimetypes[] = { "application/zip", nullptr };
+    static const wxChar *fileexts[]  = { ".zip"), wxT(".htb", nullptr };
     static const wxChar *empty[]     = { nullptr };
 
     switch (type) {
@@ -216,7 +216,7 @@ wxZipHeader::wxZipHeader(wxInputStream& stream, size_t size)
     m_pos(0),
     m_ok(false)
 {
-    wxCHECK_RET(size <= sizeof(m_data), wxT("buffer too small"));
+    wxCHECK_RET(size <= sizeof(m_data), "buffer too small");
     m_size = stream.Read(m_data, size).LastRead();
     m_ok = m_size == size;
 }
@@ -226,7 +226,7 @@ wxZipHeader::wxZipHeader(const char* data, size_t size)
     m_pos(0),
     m_ok(true)
 {
-    wxCHECK_RET(size <= sizeof(m_data), wxT("buffer too small"));
+    wxCHECK_RET(size <= sizeof(m_data), "buffer too small");
     memcpy(m_data, data, size);
 }
 
@@ -871,7 +871,7 @@ wxString wxZipEntry::GetInternalName(const wxString& name,
     while (!internal.empty() &&
             (internal[0] == wxS('.') && IsDOSPathSep(internal[1])))
         internal.erase(0, 2);
-    if (internal == wxT(".") || internal == wxT(".."))
+    if (internal == ".") || internal == wxT("..")
         internal.clear();
 
     return internal;

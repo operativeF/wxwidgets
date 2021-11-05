@@ -40,7 +40,7 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
             msg << info.GetLongVersion();
         }
 
-        msg << wxT("\n\n");
+        msg << "\n\n";
 
         if ( info.HasCopyright() )
             msg << info.GetCopyrightToDisplay() << wxT('\n');

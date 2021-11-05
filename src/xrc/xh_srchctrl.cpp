@@ -36,16 +36,16 @@ wxObject *wxSearchCtrlXmlHandler::DoCreateResource()
 
     ctrl->Create(m_parentAsWindow,
                  GetID(),
-                 GetText(wxT("value")),
+                 GetText("value"),
                  GetPosition(),
                  GetSize(),
-                 GetStyle(wxT("style"), wxTE_LEFT),
+                 GetStyle("style", wxTE_LEFT),
                  wxDefaultValidator,
                  GetName());
 
     SetupWindow(ctrl);
 
-    const wxString& hint = GetText(wxS("hint"));
+    const wxString& hint = GetText("hint");
     if ( !hint.empty() )
         ctrl->SetDescriptiveText(hint);
 
@@ -54,7 +54,7 @@ wxObject *wxSearchCtrlXmlHandler::DoCreateResource()
 
 bool wxSearchCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxSearchCtrl"));
+    return IsOfClass(node, "wxSearchCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_SEARCHCTRL

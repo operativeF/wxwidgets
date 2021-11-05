@@ -15,7 +15,7 @@
 
 #include <algorithm>
 
-constexpr wxChar TRACE_MODULE[] = wxT("module");
+constexpr char TRACE_MODULE[] = "module";
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxModule, wxObject)
 
@@ -45,7 +45,7 @@ void wxModule::RegisterModules()
         if ( classInfo->IsKindOf(wxCLASSINFO(wxModule)) &&
              (classInfo != (& (wxModule::ms_classInfo))) )
         {
-            wxLogTrace(TRACE_MODULE, wxT("Registering module %s"),
+            wxLogTrace(TRACE_MODULE, "Registering module %s",
                        classInfo->wxGetClassName());
             wxModule* module = (wxModule *)classInfo->CreateObject();
             wxModule::RegisterModule(module);
@@ -124,7 +124,7 @@ bool wxModule::DoInitializeModule(wxModule *module,
         return false;
     }
 
-    wxLogTrace(TRACE_MODULE, wxT("Module \"%s\" initialized"),
+    wxLogTrace(TRACE_MODULE, "Module \"%s\" initialized",
                module->wxGetClassInfo()->wxGetClassName());
 
     module->m_state = State_Initialized;
@@ -183,13 +183,13 @@ void wxModule::DoCleanUpModules(const wxModuleList& modules)
           rit != modules.rend();
           ++rit )
     {
-        wxLogTrace(TRACE_MODULE, wxT("Cleanup module %s"),
+        wxLogTrace(TRACE_MODULE, "Cleanup module %s",
                    (*rit)->wxGetClassInfo()->wxGetClassName());
 
         wxModule * module = *rit;
 
         wxASSERT_MSG( module->m_state == State_Initialized,
-                        wxT("not initialized module being cleaned up") );
+                        "not initialized module being cleaned up" );
 
         module->Exit();
         module->m_state = State_Registered;

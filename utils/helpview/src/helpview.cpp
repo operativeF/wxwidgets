@@ -79,22 +79,22 @@ bool hvApp::OnInit()
     {
         argStr = argv[i];
 
-        if ( argStr.Find( wxT(".hhp") ) >= 0
-            || argStr.Find( wxT(".htb") ) >= 0
-            || argStr.Find( wxT(".zip") ) >= 0 )
+        if ( argStr.Find( ".hhp" ) >= 0
+            || argStr.Find( ".htb" ) >= 0
+            || argStr.Find( ".zip" ) >= 0 )
         {
             book[bookCount] = argStr;
             bookCount++;
         }
-        else if ( argStr == wxT("--server") )
+        else if ( argStr == "--server" )
         {
             createServer = true;
 #if defined(__WXMSW__)
-            service = wxT("generic_helpservice");
+            service = "generic_helpservice";
 #elif defined(__UNIX__)
-            service = wxT("/tmp/") + wxString(wxT("generic_helpservice"));
+            service = "/tmp/") + wxString(wxT("generic_helpservice");
 #else
-            service = wxT("4242");
+            service = "4242";
 #endif
         }
         else if ( !hasService )
@@ -108,13 +108,13 @@ bool hvApp::OnInit()
             windowName = argStr;
             hasWindowName = true;
         }
-        else if ( argStr.Find( wxT("--Style") )  >= 0 )
+        else if ( argStr.Find( "--Style" )  >= 0 )
         {
             unsigned int style;
             wxString numb = argStr.AfterLast(wxT('e'));
             if ( !(numb.ToLong(&style) ) )
             {
-                wxLogError( wxT("Integer conversion failed for --Style") );
+                wxLogError( "Integer conversion failed for --Style" );
             }
             else
             {
@@ -132,11 +132,11 @@ bool hvApp::OnInit()
 #ifndef __WXMAC__
     if ( bookCount < 1 )
     {
-        wxString s = wxFileSelector( wxT("Open help file"),
+        wxString s = wxFileSelector( "Open help file",
             wxGetCwd(),
             {},
             {},
-            wxT("Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|HTML Help Project (*.hhp)|*.hhp"),
+            "Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|HTML Help Project (*.hhp)|*.hhp",
             wxFD_OPEN | wxFD_FILE_MUST_EXIST,
             NULL);
 
@@ -157,7 +157,7 @@ bool hvApp::OnInit()
 
         if ( !m_server->Create(service) )
         {
-            wxString wxm = wxT("Server Create failed - service: ");
+            wxString wxm = "Server Create failed - service: ";
             wxString xxm = wxm << service;
             wxLogError( xxm );
             //if MSW quits here, probably another copy already exists
@@ -173,8 +173,8 @@ bool hvApp::OnInit()
     wxInitAllImageHandlers();
     wxFileSystem::AddHandler(new wxZipFSHandler);
 
-    SetVendorName(wxT("wxWidgets") );
-    SetAppName(wxT("wxHTMLHelpServer") );
+    SetVendorName("wxWidgets" );
+    SetAppName("wxHTMLHelpServer" );
     wxConfig::Get(); // create an instance
 
     m_helpController = new wxHtmlHelpController( istyle );
@@ -187,12 +187,12 @@ bool hvApp::OnInit()
 
     if ( !hasWindowName )
     {
-        titleFormat = wxT("Help: %s") ;
+        titleFormat = "Help: %s" ;
     }
     else
     {
         //remove underscores
-        windowName.Replace( wxT("_"), wxT(" ") );
+        windowName.Replace( "_"), wxT(" " );
         titleFormat = windowName;
     }
 
@@ -256,7 +256,7 @@ bool hvApp::OpenBook(wxHtmlHelpController* controller)
     if ( !s.empty() )
     {
         wxString ext = s.Right(4).Lower();
-        if (ext == wxT(".zip") || ext == wxT(".htb") || ext == wxT(".hhp"))
+        if (ext == ".zip") || ext == wxT(".htb") || ext == wxT(".hhp")
         {
             wxBusyCursor bcur;
             wxFileName fileName(s);
@@ -377,7 +377,7 @@ wxBitmap AlternateArtProvider::CreateBitmap(const wxArtID& id,
 
 wxConnectionBase *hvServer::OnAcceptConnection(const wxString& topic)
 {
-    if (topic == wxT("HELP"))
+    if (topic == "HELP")
         return new hvConnection();
     else
         return NULL;
@@ -410,7 +410,7 @@ bool hvConnection::OnExec(const wxString& WXUNUSED(topic),
         wxString numb = argStr.AfterLast(wxT('g'));
         if ( !(numb.ToLong(&i) ) )
         {
-            wxLogError( wxT("Integer conversion failed for --intstring") );
+            wxLogError( "Integer conversion failed for --intstring" );
         }
         else
         {
@@ -438,35 +438,35 @@ bool hvConnection::OnPoke(const wxString& WXUNUSED(topic),
 
     if ( wxGetApp().GetHelpController() )
     {
-        if ( item == wxT("--AddBook") )
+        if ( item == "--AddBook" )
         {
             wxGetApp().GetHelpController()->AddBook(data);
         }
-        else if ( item == wxT("--DisplayContents") )
+        else if ( item == "--DisplayContents" )
         {
             wxGetApp().GetHelpController()->DisplayContents();
         }
-        else if ( item == wxT("--DisplayIndex") )
+        else if ( item == "--DisplayIndex" )
         {
             wxGetApp().GetHelpController()->DisplayIndex();
         }
-        else if ( item == wxT("--KeywordSearch") )
+        else if ( item == "--KeywordSearch" )
         {
             wxGetApp().GetHelpController()->KeywordSearch(data);
         }
-        else if ( item == wxT("--SetTitleFormat") )
+        else if ( item == "--SetTitleFormat" )
         {
             wxString newname = data;
-            newname.Replace( wxT("_"), wxT(" ") );
+            newname.Replace( "_"), wxT(" " );
             wxGetApp().GetHelpController()->SetTitleFormat(newname);
             //does not redraw title bar?
             //wxGetApp().GetHelpController()->ReFresh(); - or something
         }
-        else if ( item == wxT("--SetTempDir") )
+        else if ( item == "--SetTempDir" )
         {
             wxGetApp().GetHelpController()->SetTempDir(data);
         }
-        else if ( item == wxT("--YouAreDead") )
+        else if ( item == "--YouAreDead" )
         {
             // don't really know how to kill app from down here...
             // use wxKill from client instead

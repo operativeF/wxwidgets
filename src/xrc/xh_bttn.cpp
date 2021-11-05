@@ -34,13 +34,13 @@ wxObject *wxButtonXmlHandler::DoCreateResource()
 
    button->Create(m_parentAsWindow,
                     GetID(),
-                    GetText(wxT("label")),
+                    GetText("label"),
                     GetPosition(), GetSize(),
                     GetStyle(),
                     wxDefaultValidator,
                     GetName());
 
-    if (GetBool(wxT("default"), false))
+    if (GetBool("default", false))
         button->SetDefault();
 
     if ( GetParamNode("bitmap") )
@@ -56,7 +56,7 @@ wxObject *wxButtonXmlHandler::DoCreateResource()
 
 bool wxButtonXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxButton"));
+    return IsOfClass(node, "wxButton");
 }
 
 #endif // wxUSE_XRC && wxUSE_BUTTON

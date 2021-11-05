@@ -45,7 +45,7 @@ wxDEFINE_EVENT(wxEVT_WEBREQUEST_DATA, wxWebRequestEvent);
 
 #ifdef __WXDEBUG__
 static const wxStringCharType* wxNO_IMPL_MSG
-    = wxS("can't be used with an invalid/uninitialized object");
+    = "can't be used with an invalid/uninitialized object";
 #endif
 
 #define wxCHECK_IMPL(rc) wxCHECK_MSG( m_impl, (rc), wxNO_IMPL_MSG )
@@ -185,12 +185,12 @@ wxString StateName(wxWebRequest::State state)
 {
     switch ( state )
     {
-        case wxWebRequest::State_Idle:            return wxS("IDLE");
-        case wxWebRequest::State_Unauthorized:    return wxS("UNAUTHORIZED");
-        case wxWebRequest::State_Active:          return wxS("ACTIVE");
-        case wxWebRequest::State_Completed:       return wxS("COMPLETED");
-        case wxWebRequest::State_Failed:          return wxS("FAILED");
-        case wxWebRequest::State_Cancelled:       return wxS("CANCELLED");
+        case wxWebRequest::State_Idle:            return "IDLE";
+        case wxWebRequest::State_Unauthorized:    return "UNAUTHORIZED";
+        case wxWebRequest::State_Active:          return "ACTIVE";
+        case wxWebRequest::State_Completed:       return "COMPLETED";
+        case wxWebRequest::State_Failed:          return "FAILED";
+        case wxWebRequest::State_Cancelled:       return "CANCELLED";
     }
 
     return wxString::Format("invalid state %d", state);

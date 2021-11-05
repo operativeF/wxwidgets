@@ -125,7 +125,7 @@ public:
 
     wxRichTextFormattingDialog() = default;
 
-    wxRichTextFormattingDialog(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
+    wxRichTextFormattingDialog(long flags, wxWindow* parent, const std::string& title = wxGetTranslation("Formatting"), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
         unsigned int style = wxDEFAULT_DIALOG_STYLE)
     {
@@ -134,7 +134,7 @@ public:
 
     ~wxRichTextFormattingDialog();
 
-    bool Create(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
+    bool Create(long flags, wxWindow* parent, const std::string& title = wxGetTranslation("Formatting"), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
         unsigned int style = wxDEFAULT_DIALOG_STYLE);
 

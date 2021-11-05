@@ -62,10 +62,10 @@ wxObject *wxHyperlinkCtrlXmlHandler::DoCreateResource()
              (
                 m_parentAsWindow,
                 GetID(),
-                GetText(wxT("label")),
-                GetParamValue(wxT("url")),
+                GetText("label"),
+                GetParamValue("url"),
                 GetPosition(), GetSize(),
-                GetStyle(wxT("style"), wxHL_DEFAULT_STYLE),
+                GetStyle("style", wxHL_DEFAULT_STYLE),
                 GetName()
              );
 
@@ -76,7 +76,7 @@ wxObject *wxHyperlinkCtrlXmlHandler::DoCreateResource()
 
 bool wxHyperlinkCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxHyperlinkCtrl"));
+    return IsOfClass(node, "wxHyperlinkCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_HYPERLINKCTRL

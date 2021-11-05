@@ -29,7 +29,7 @@ wxObject *wxStaticBoxXmlHandler::DoCreateResource()
 
     box->Create(m_parentAsWindow,
                 GetID(),
-                GetText(wxT("label")),
+                GetText("label"),
                 GetPosition(), GetSize(),
                 GetStyle(),
                 GetName());
@@ -41,7 +41,7 @@ wxObject *wxStaticBoxXmlHandler::DoCreateResource()
 
 bool wxStaticBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxStaticBox"));
+    return IsOfClass(node, "wxStaticBox");
 }
 
 #endif // wxUSE_XRC && wxUSE_STATBOX

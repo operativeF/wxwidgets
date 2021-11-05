@@ -136,7 +136,7 @@ wxDateTime wxDatePickerCtrl::GetValue() const
 
     wxASSERT_MSG( m_date.IsValid() == dt.IsValid() &&
                     (!dt.IsValid() || dt == m_date),
-                  wxT("bug in wxDateTimePickerCtrl: m_date not in sync") );
+                  "bug in wxDateTimePickerCtrl: m_date not in sync" );
 #endif // wxDEBUG_LEVEL
 
     return wxDateTimePickerCtrl::GetValue();
@@ -161,7 +161,7 @@ void wxDatePickerCtrl::SetRange(const wxDateTime& dt1, const wxDateTime& dt2)
 
     if ( !DateTime_SetRange(GetHwnd(), flags, st) )
     {
-        wxLogDebug(wxT("DateTime_SetRange() failed"));
+        wxLogDebug("DateTime_SetRange() failed");
         return;
     }
 

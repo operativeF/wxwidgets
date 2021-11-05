@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHTTP, wxProtocol);
-IMPLEMENT_PROTOCOL(wxHTTP, wxT("http"), wxT("80"), true)
+IMPLEMENT_PROTOCOL(wxHTTP, "http"), wxT("80", true)
 
 wxHTTP::~wxHTTP()
 {
@@ -49,7 +49,7 @@ void wxHTTP::ClearCookies()
 
 wxString wxHTTP::GetContentType() const
 {
-    return GetHeader(wxT("Content-Type"));
+    return GetHeader("Content-Type");
 }
 
 void wxHTTP::SetProxyMode(bool on)
@@ -142,26 +142,26 @@ wxString wxHTTP::GenerateAuthString(const wxString& user, const wxString& pass) 
     wxString buf;
     wxString toencode;
 
-    buf.Printf(wxT("Basic "));
+    buf.Printf("Basic ");
 
-    toencode.Printf(wxT("%s:%s"),user.c_str(),pass.c_str());
+    toencode.Printf("%s:%s",user.c_str(),pass.c_str());
 
     size_t len = toencode.length();
     const wxChar *from = toencode.c_str();
     while (len >= 3) { // encode full blocks first
-        buf << wxString::Format(wxT("%c%c"), base64[(from[0] >> 2) & 0x3f], base64[((from[0] << 4) & 0x30) | ((from[1] >> 4) & 0xf)]);
-        buf << wxString::Format(wxT("%c%c"), base64[((from[1] << 2) & 0x3c) | ((from[2] >> 6) & 0x3)], base64[from[2] & 0x3f]);
+        buf << wxString::Format("%c%c", base64[(from[0] >> 2) & 0x3f], base64[((from[0] << 4) & 0x30) | ((from[1] >> 4) & 0xf)]);
+        buf << wxString::Format("%c%c", base64[((from[1] << 2) & 0x3c) | ((from[2] >> 6) & 0x3)], base64[from[2] & 0x3f]);
         from += 3;
         len -= 3;
     }
     if (len > 0) { // pad the remaining characters
-        buf << wxString::Format(wxT("%c"), base64[(from[0] >> 2) & 0x3f]);
+        buf << wxString::Format("%c", base64[(from[0] >> 2) & 0x3f]);
         if (len == 1) {
-            buf << wxString::Format(wxT("%c="), base64[(from[0] << 4) & 0x30]);
+            buf << wxString::Format("%c=", base64[(from[0] << 4) & 0x30]);
         } else {
-            buf << wxString::Format(wxT("%c%c"), base64[((from[0] << 4) & 0x30) | ((from[1] >> 4) & 0xf)], base64[(from[1] << 2) & 0x3c]);
+            buf << wxString::Format("%c%c", base64[((from[0] << 4) & 0x30) | ((from[1] >> 4) & 0xf)], base64[(from[1] << 2) & 0x3c]);
         }
-        buf << wxT("=");
+        buf << "=";
     }
 
     return buf;
@@ -203,7 +203,7 @@ void wxHTTP::SendHeaders()
 
     for (iterator it = m_headers.begin(), en = m_headers.end(); it != en; ++it )
     {
-        buf.Printf(wxT("%s: %s\r\n"), it->first.c_str(), it->second.c_str());
+        buf.Printf("%s: %s\r\n", it->first.c_str(), it->second.c_str());
 
         const wxWX2MBbuf cbuf = buf.mb_str();
         Write(cbuf, strlen(cbuf));
@@ -265,13 +265,13 @@ bool wxHTTP::Connect(const wxString& host, unsigned short port)
 
     if ( port )
         addr->Service(port);
-    else if (!addr->Service(wxT("http")))
+    else if (!addr->Service("http"))
         addr->Service(80);
 
     wxString hostHdr = host;
     if ( port && port != 80 )
-        hostHdr << wxT(":") << port;
-    SetHeader(wxT("Host"), hostHdr);
+        hostHdr << ":" << port;
+    SetHeader("Host", hostHdr);
 
     m_lastError = wxPROTO_NOERR;
     return true;
@@ -293,8 +293,8 @@ bool wxHTTP::Connect(const wxSockAddress& addr, bool WXUNUSED(wait))
         wxString hostHdr = ipv4addr->OrigHostname();
         unsigned short port = ipv4addr->Service();
         if ( port && port != 80 )
-            hostHdr << wxT(":") << port;
-        SetHeader(wxT("Host"), hostHdr);
+            hostHdr << ":" << port;
+        SetHeader("Host", hostHdr);
     }
 
     m_lastError = wxPROTO_NOERR;
@@ -312,27 +312,27 @@ bool wxHTTP::BuildRequest(const wxString& path, const wxString& method)
         // Content length must be correct, so always set, possibly
         // overriding the value set explicitly by a previous call to
         // SetHeader("Content-Length").
-        SetHeader(wxS("Content-Length"), len);
+        SetHeader("Content-Length", len);
 
         // However if the user had explicitly set the content type, don't
         // override it with the content type passed to SetPostText().
         if ( !m_contentType.empty() && GetContentType().empty() )
-            SetHeader(wxS("Content-Type"), m_contentType);
+            SetHeader("Content-Type", m_contentType);
     }
 
     m_http_response = 0;
 
     // If there is no User-Agent defined, define it.
-    if ( GetHeader(wxT("User-Agent")).empty() )
-        SetHeader(wxT("User-Agent"), wxVERSION_STRING);
+    if ( GetHeader("User-Agent").empty() )
+        SetHeader("User-Agent", wxVERSION_STRING);
 
     // Send authentication information
     if (!m_username.empty() || !m_password.empty()) {
-        SetHeader(wxT("Authorization"), GenerateAuthString(m_username, m_password));
+        SetHeader("Authorization", GenerateAuthString(m_username, m_password));
     }
 
     wxString buf;
-    buf.Printf(wxT("%s %s HTTP/1.0\r\n"), method, path);
+    buf.Printf("%s %s HTTP/1.0\r\n", method, path);
     const wxWX2MBbuf pathbuf = buf.mb_str();
     Write(pathbuf, strlen(pathbuf));
     SendHeaders();
@@ -349,12 +349,12 @@ bool wxHTTP::BuildRequest(const wxString& path, const wxString& method)
     if (m_lastError != wxPROTO_NOERR)
         return false;
 
-    if (!tmp_str.Contains(wxT("HTTP/"))) {
+    if (!tmp_str.Contains("HTTP/")) {
         // TODO: support HTTP v0.9 which can have no header.
         // FIXME: tmp_str is not put back in the in-queue of the socket.
         m_lastError = wxPROTO_NOERR;
-        SetHeader(wxT("Content-Length"), wxT("-1"));
-        SetHeader(wxT("Content-Type"), wxT("none/none"));
+        SetHeader("Content-Length"), wxT("-1");
+        SetHeader("Content-Type"), wxT("none/none");
         RestoreState();
         return true;
     }
@@ -475,15 +475,15 @@ wxInputStream *wxHTTP::GetInputStream(const wxString& path)
     // automatically depending on whether we have anything to post or not.
     wxString method = m_method;
     if (method.empty())
-        method = m_postBuffer.IsEmpty() ? wxS("GET"): wxS("POST");
+        method = m_postBuffer.IsEmpty() ? "GET"): wxS("POST";
 
     if (!BuildRequest(path, method))
         return nullptr;
 
     inp_stream = new wxHTTPStream(this);
 
-    if (!GetHeader(wxT("Content-Length")).empty())
-        inp_stream->m_httpsize = wxAtoi(GetHeader(wxT("Content-Length")));
+    if (!GetHeader("Content-Length").empty())
+        inp_stream->m_httpsize = wxAtoi(GetHeader("Content-Length"));
     else
         inp_stream->m_httpsize = (size_t)-1;
 

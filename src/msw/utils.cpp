@@ -89,14 +89,12 @@
 
 // In the WIN.INI file
 #if !defined(USE_NET_API)
-constexpr wxChar WX_SECTION[] = wxT("wxWindows");
+constexpr auto WX_SECTION = L"wxWindows"; // FIXME: Narrow string
 #endif
 
 #if !defined(USE_NET_API)
-constexpr wxChar eUSERNAME[]  = wxT("UserName");
+constexpr auto eUSERNAME  = L"UserName"; // FIXME: Narrow string
 #endif
-
-WXDLLIMPEXP_DATA_BASE(const wxChar *) wxUserResourceStr = wxT("TEXT");
 
 // ============================================================================
 // implementation
@@ -112,7 +110,7 @@ bool wxGetHostName(wxChar *buf, int maxSize)
     DWORD nSize = maxSize;
     if ( !::GetComputerNameW(buf, &nSize) )
     {
-        wxLogLastError(wxT("GetComputerName"));
+        wxLogLastError("GetComputerName");
 
         return false;
     }
@@ -213,7 +211,7 @@ bool wxGetUserId(wxChar *buf,
     if ( ::GetUserNameW(buf, &nSize) == 0 )
     {
         // actually, it does happen if the user didn't log on
-        const DWORD res = ::GetEnvironmentVariableW(wxT("username"), buf, maxSize);
+        const DWORD res = ::GetEnvironmentVariableW(L"username", buf, maxSize);
         if ( res == 0 )
         {
             // not found
@@ -228,7 +226,7 @@ bool wxGetUserId(wxChar *buf,
 bool wxGetUserName(wxChar *buf, int maxSize)
 {
     wxCHECK_MSG( buf && ( maxSize > 0 ), false,
-                    wxT("empty buffer in wxGetUserName") );
+                    "empty buffer in wxGetUserName" );
 #if defined(USE_NET_API)
     CHAR szUserName[256];
     if ( !wxGetUserId(szUserName, WXSIZEOF(szUserName)) )
@@ -253,7 +251,7 @@ bool wxGetUserName(wxChar *buf, int maxSize)
     // Get the computer name of a DC for the domain.
     if ( NetGetDCName( NULL, wszDomain, &ComputerName ) != NERR_Success )
     {
-        wxLogError(wxT("Cannot find domain controller"));
+        wxLogError("Cannot find domain controller");
 
         goto error;
     }
@@ -270,17 +268,17 @@ bool wxGetUserName(wxChar *buf, int maxSize)
             break;
 
         case NERR_InvalidComputer:
-            wxLogError(wxT("Invalid domain controller name."));
+            wxLogError("Invalid domain controller name.");
 
             goto error;
 
         case NERR_UserNotFound:
-            wxLogError(wxT("Invalid user name '%s'."), szUserName);
+            wxLogError("Invalid user name '%s'.", szUserName);
 
             goto error;
 
         default:
-            wxLogSysError(wxT("Can't get information about user"));
+            wxLogSysError("Can't get information about user");
 
             goto error;
     }
@@ -292,7 +290,7 @@ bool wxGetUserName(wxChar *buf, int maxSize)
     return true;
 
 error:
-    wxLogError(wxT("Couldn't look up full user name."));
+    wxLogError("Couldn't look up full user name.");
 
     return false;
 #else  // !USE_NET_API
@@ -306,7 +304,7 @@ error:
 
     if ( !ok )
     {
-        wxStrlcpy(buf, wxT("Unknown User"), maxSize);
+        wxStrlcpy(buf, L"Unknown User", maxSize); // FIXME: Use narrow string
     }
 
     return true;
@@ -319,11 +317,11 @@ const wxChar* wxGetHomeDir(wxString *pstr)
 
     // first branch is for Cygwin
 #if defined(__UNIX__) && !defined(__WINE__)
-    const wxChar *szHome = wxGetenv(wxT("HOME"));
+    const wxChar *szHome = wxGetenv("HOME");
     if ( szHome == NULL ) {
       // we're homeless...
       wxLogWarning(_("can't find user's HOME, using current directory."));
-      strDir = wxT(".");
+      strDir = ".";
     }
     else
        strDir = szHome;
@@ -345,9 +343,11 @@ const wxChar* wxGetHomeDir(wxString *pstr)
 #else
     strDir.clear();
 
+    // FIXME: Use narrow strings.
+
     // If we have a valid HOME directory, as is used on many machines that
     // have unix utilities on them, we should use that.
-    const wxChar *szHome = wxGetenv(wxT("HOME"));
+    const wxChar *szHome = wxGetenv(L"HOME");
 
     if ( szHome != nullptr )
     {
@@ -355,10 +355,10 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     }
     else // no HOME, try HOMEDRIVE/PATH
     {
-        szHome = wxGetenv(wxT("HOMEDRIVE"));
+        szHome = wxGetenv(L"HOMEDRIVE");
         if ( szHome != nullptr )
             strDir << szHome;
-        szHome = wxGetenv(wxT("HOMEPATH"));
+        szHome = wxGetenv(L"HOMEPATH");
 
         if ( szHome != nullptr )
         {
@@ -370,16 +370,17 @@ const wxChar* wxGetHomeDir(wxString *pstr)
             // create it in our program's dir. However, if the user took care
             // to set HOMEPATH to something other than "\\", we suppose that he
             // knows what he is doing and use the supplied value.
-            if ( wxStrcmp(szHome, wxT("\\")) == 0 )
+            if ( wxStrcmp(szHome, "\\") == 0 )
                 strDir.clear();
         }
     }
 
     if ( strDir.empty() )
     {
+        // FIXME: Use narrow strings.
         // If we have a valid USERPROFILE directory, as is the case in
         // Windows NT, 2000 and XP, we should use that as our home directory.
-        szHome = wxGetenv(wxT("USERPROFILE"));
+        szHome = wxGetenv(L"USERPROFILE");
 
         if ( szHome != nullptr )
             strDir = szHome;
@@ -426,7 +427,7 @@ bool wxGetDiskSpace(const std::string& path,
                                &bytesTotal,
                                nullptr) )
     {
-        wxLogLastError(wxT("GetDiskFreeSpaceEx"));
+        wxLogLastError("GetDiskFreeSpaceEx");
 
         return false;
     }
@@ -510,7 +511,7 @@ bool wxDoSetEnv(const std::string& var, const std::string& value)
 #else // other compiler
     if ( !::SetEnvironmentVariableW(boost::nowide::widen(var).c_str(), value) )
     {
-        wxLogLastError(wxT("SetEnvironmentVariable"));
+        wxLogLastError("SetEnvironmentVariable");
 
         return false;
     }
@@ -656,12 +657,12 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, unsigned int flags)
                         //     can also use SendMesageTimeout(WM_CLOSE)
                         if ( !::PostMessageW(params.hwnd, WM_QUIT, 0, 0) )
                         {
-                            wxLogLastError(wxT("PostMessage(WM_QUIT)"));
+                            wxLogLastError("PostMessage(WM_QUIT)");
                         }
                     }
                     else // it was an error then
                     {
-                        wxLogLastError(wxT("EnumWindows"));
+                        wxLogLastError("EnumWindows");
 
                         ok = false;
                     }
@@ -697,11 +698,11 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, unsigned int flags)
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unexpected WaitForSingleObject() return") );
+                wxFAIL_MSG( "unexpected WaitForSingleObject() return" );
                 [[fallthrough]];
 
             case WAIT_FAILED:
-                wxLogLastError(wxT("WaitForSingleObject"));
+                wxLogLastError("WaitForSingleObject");
                 [[fallthrough]];
 
             case WAIT_TIMEOUT:
@@ -745,7 +746,7 @@ bool wxMSWActivatePID(long pid)
 
     if ( !::BringWindowToTop(params.hwnd) )
     {
-        wxLogLastError(wxS("BringWindowToTop"));
+        wxLogLastError("BringWindowToTop");
         return false;
     }
 
@@ -797,9 +798,9 @@ bool wxShell(const wxString& command)
 {
     wxString cmd;
 
-    const wxChar* shell = wxGetenv(wxT("COMSPEC"));
+    const wxChar* shell = wxGetenv(L"COMSPEC"); // FIXME: Convert to narrow string
     if ( !shell )
-        shell = wxT("\\COMMAND.COM");
+        shell = L"\\COMMAND.COM"; // FIXME: Convert to narrow string
 
     if ( !command )
     {
@@ -809,7 +810,7 @@ bool wxShell(const wxString& command)
     else
     {
         // pass the command to execute to the command processor
-        cmd.Printf(wxT("%s /c %s"), shell, command.c_str());
+        cmd.Printf("%s /c %s", shell, command.c_str());
     }
 
     return wxExecute(cmd, wxEXEC_SYNC) == 0;
@@ -871,7 +872,7 @@ bool wxShutdown(unsigned int flags)
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unknown wxShutdown() flag") );
+                wxFAIL_MSG( "unknown wxShutdown() flag" );
                 return false;
         }
 
@@ -954,14 +955,14 @@ wxLoadUserResource(const void **outData,
 }
 
 char *
-wxLoadUserResource(const wxString& resourceName,
+wxLoadUserResource(const std::string& resourceName,
                    const wxChar* resourceType,
                    int* pLen,
                    WXHINSTANCE instance)
 {
     const void *data;
     size_t len;
-    if ( !wxLoadUserResource(&data, &len, resourceName.ToStdString(), resourceType, instance) )
+    if ( !wxLoadUserResource(&data, &len, resourceName, resourceType, instance) )
         return nullptr;
 
     char *s = new char[len + 1];
@@ -993,7 +994,7 @@ OSVERSIONINFOEXW wxGetWindowsVersionInfo()
     // RtlGetVersion() directly, if it is available.
 #if wxUSE_DYNLIB_CLASS
     wxDynamicLibrary dllNtDll;
-    if ( dllNtDll.Load(wxS("ntdll.dll"), wxDL_VERBATIM | wxDL_QUIET) )
+    if ( dllNtDll.Load("ntdll.dll", wxDL_VERBATIM | wxDL_QUIET) )
     {
         using RtlGetVersion_t = LONG /* NTSTATUS */ (WINAPI*)(OSVERSIONINFOEXW*);
 
@@ -1115,11 +1116,11 @@ wxString wxGetOsDescription()
                            info.dwMinorVersion);
             }
 
-            str << wxT(" (")
+            str << " ("
                 << wxString::Format(_("build %lu"), info.dwBuildNumber);
             if ( !wxIsEmpty(info.szCSDVersion) )
             {
-                str << wxT(", ") << info.szCSDVersion;
+                str << ", " << info.szCSDVersion;
             }
             str << wxT(')');
 
@@ -1139,9 +1140,9 @@ bool wxIsPlatform64Bit()
     // 32-bit programs run on both 32-bit and 64-bit Windows so check
     typedef BOOL (WINAPI *IsWow64Process_t)(HANDLE, BOOL *);
 
-    wxDynamicLibrary dllKernel32(wxT("kernel32.dll"));
+    wxDynamicLibrary dllKernel32("kernel32.dll");
     IsWow64Process_t pfnIsWow64Process =
-        (IsWow64Process_t)dllKernel32.RawGetSymbol(wxT("IsWow64Process"));
+        (IsWow64Process_t)dllKernel32.RawGetSymbol("IsWow64Process");
 
     BOOL wow64 = FALSE;
     if ( pfnIsWow64Process )
@@ -1490,7 +1491,7 @@ extern long wxCharsetToCodepage(const char *name)
     long CP = -1;
 
 #if wxUSE_REGKEY
-    wxString path(wxT("MIME\\Database\\Charset\\"));
+    wxString path("MIME\\Database\\Charset\\");
     wxString cn(name);
 
     // follow the alias loop
@@ -1506,13 +1507,13 @@ extern long wxCharsetToCodepage(const char *name)
         // The InternetEncoding gives us the actual encoding,
         // the Codepage just says which Windows character set to
         // use when displaying the data.
-        if (key.HasValue(wxT("InternetEncoding")) &&
-            key.QueryValue(wxT("InternetEncoding"), &CP))
+        if (key.HasValue("InternetEncoding") &&
+            key.QueryValue("InternetEncoding", &CP))
             break;
 
         // no encoding, see if it's an alias
-        if (!key.HasValue(wxT("AliasForCharset")) ||
-            !key.QueryValue(wxT("AliasForCharset"), cn))
+        if (!key.HasValue("AliasForCharset") ||
+            !key.QueryValue("AliasForCharset", cn))
             break;
     }
 #endif // wxUSE_REGKEY
@@ -1526,7 +1527,7 @@ extern "C" HWND
 wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 {
     wxCHECK_MSG( classname && pclassname && wndproc, nullptr,
-                    wxT("NULL parameter in wxCreateHiddenWindow") );
+                    "NULL parameter in wxCreateHiddenWindow" );
 
     // register the class fi we need to first
     if ( *pclassname == nullptr )
@@ -1540,7 +1541,7 @@ wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 
         if ( !::RegisterClassW(&wndclass) )
         {
-            wxLogLastError(wxT("RegisterClass() in wxCreateHiddenWindow"));
+            wxLogLastError("RegisterClass() in wxCreateHiddenWindow");
 
             return nullptr;
         }
@@ -1563,7 +1564,7 @@ wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 
     if ( !hwnd )
     {
-        wxLogLastError(wxT("CreateWindow() in wxCreateHiddenWindow"));
+        wxLogLastError("CreateWindow() in wxCreateHiddenWindow");
     }
 
     return hwnd;

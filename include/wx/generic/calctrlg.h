@@ -147,14 +147,14 @@ public:
 
     wxCalendarDateAttr *GetAttr(size_t day) const override
     {
-        wxCHECK_MSG( day > 0 && day < 32, nullptr, wxT("invalid day") );
+        wxCHECK_MSG( day > 0 && day < 32, nullptr, "invalid day" );
 
         return m_attrs[day - 1];
     }
 
     void SetAttr(size_t day, wxCalendarDateAttr *attr) override
     {
-        wxCHECK_RET( day > 0 && day < 32, wxT("invalid day") );
+        wxCHECK_RET( day > 0 && day < 32, "invalid day" );
 
         delete m_attrs[day - 1];
         m_attrs[day - 1] = attr;

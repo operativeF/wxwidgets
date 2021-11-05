@@ -34,7 +34,7 @@ wxObject *wxActivityIndicatorXmlHandler::DoCreateResource()
 
     SetupWindow(ctrl);
 
-    if ( GetBool(wxS("running")) )
+    if ( GetBool("running") )
         ctrl->Start();
 
     return ctrl;
@@ -42,7 +42,7 @@ wxObject *wxActivityIndicatorXmlHandler::DoCreateResource()
 
 bool wxActivityIndicatorXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxS("wxActivityIndicator"));
+    return IsOfClass(node, "wxActivityIndicator");
 }
 
 #endif // wxUSE_XRC && wxUSE_ACTIVITYINDICATOR

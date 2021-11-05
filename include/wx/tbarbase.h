@@ -95,7 +95,7 @@ public:
 
     wxControl *GetControl() const
     {
-        wxASSERT_MSG( IsControl(), wxT("this toolbar tool is not a control") );
+        wxASSERT_MSG( IsControl(), "this toolbar tool is not a control" );
 
         return m_control;
     }
@@ -111,7 +111,7 @@ public:
     wxToolBarToolStyle GetStyle() const { return m_toolStyle; }
     wxItemKind GetKind() const
     {
-        wxASSERT_MSG( IsButton(), wxT("only makes sense for buttons") );
+        wxASSERT_MSG( IsButton(), "only makes sense for buttons" );
 
         return m_kind;
     }

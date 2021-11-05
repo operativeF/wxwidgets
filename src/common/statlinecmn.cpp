@@ -56,7 +56,7 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxStaticLine, wxControl, "wx/statline.h");
 wxBEGIN_PROPERTIES_TABLE(wxStaticLine)
     wxPROPERTY_FLAGS( WindowStyle, wxStaticLineStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxStaticLine)

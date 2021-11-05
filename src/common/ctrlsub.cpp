@@ -82,7 +82,7 @@ void wxItemContainer::Clear()
 
 void wxItemContainer::Delete(unsigned int pos)
 {
-    wxCHECK_RET( pos < GetCount(), wxT("invalid index") );
+    wxCHECK_RET( pos < GetCount(), "invalid index" );
 
     if ( HasClientObjectData() )
         ResetItemClientObject(pos);
@@ -124,7 +124,7 @@ int
 wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
                                  unsigned int WXUNUSED(pos))
 {
-    wxFAIL_MSG( wxT("Must be overridden if DoInsertItemsInLoop() is used") );
+    wxFAIL_MSG( "Must be overridden if DoInsertItemsInLoop() is used" );
 
     return wxNOT_FOUND;
 }
@@ -137,7 +137,7 @@ wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
 void wxItemContainer::SetClientObject(unsigned int n, wxClientData *data)
 {
     wxASSERT_MSG( !HasClientUntypedData(),
-                  wxT("can't have both object and void client data") );
+                  "can't have both object and void client data" );
 
     wxCHECK_RET( IsValid(n), "Invalid index passed to SetClientObject()" );
 
@@ -161,7 +161,7 @@ void wxItemContainer::SetClientObject(unsigned int n, wxClientData *data)
 wxClientData *wxItemContainer::GetClientObject(unsigned int n) const
 {
     wxCHECK_MSG( HasClientObjectData(), nullptr,
-                  wxT("this window doesn't have object client data") );
+                  "this window doesn't have object client data" );
 
     wxCHECK_MSG( IsValid(n), nullptr,
                  "Invalid index passed to GetClientObject()" );
@@ -190,7 +190,7 @@ void wxItemContainer::SetClientData(unsigned int n, void *data)
     }
 
     wxASSERT_MSG( HasClientUntypedData(),
-                  wxT("can't have both object and void client data") );
+                  "can't have both object and void client data" );
 
     wxCHECK_RET( IsValid(n), "Invalid index passed to SetClientData()" );
 
@@ -200,7 +200,7 @@ void wxItemContainer::SetClientData(unsigned int n, void *data)
 void *wxItemContainer::GetClientData(unsigned int n) const
 {
     wxCHECK_MSG( HasClientUntypedData(), nullptr,
-                  wxT("this window doesn't have void client data") );
+                  "this window doesn't have void client data" );
 
     wxCHECK_MSG( IsValid(n), nullptr,
                  "Invalid index passed to GetClientData()" );
@@ -228,7 +228,7 @@ void wxItemContainer::AssignNewItemClientData(unsigned int pos,
             break;
 
         default:
-            wxFAIL_MSG( wxT("unknown client data type") );
+            wxFAIL_MSG( "unknown client data type" );
             [[fallthrough]];
 
         case wxClientDataType::None:

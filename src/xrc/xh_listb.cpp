@@ -35,14 +35,14 @@ wxListBoxXmlHandler::wxListBoxXmlHandler()
 
 wxObject *wxListBoxXmlHandler::DoCreateResource()
 {
-    if ( m_class == wxT("wxListBox"))
+    if ( m_class == "wxListBox")
     {
         // find the selection
-        long selection = GetLong(wxT("selection"), -1);
+        long selection = GetLong("selection", -1);
 
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately(nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately(nullptr, GetParamNode("content"));
         m_insideBox = false;
 
         XRC_MAKE_INSTANCE(control, wxListBox)
@@ -77,8 +77,8 @@ wxObject *wxListBoxXmlHandler::DoCreateResource()
 
 bool wxListBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxListBox")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxListBox") ||
+           (m_insideBox && node->GetName() == "item"));
 }
 
 #endif // wxUSE_XRC && wxUSE_LISTBOX

@@ -484,7 +484,7 @@ void wxAnyButton::SetLabel(const std::string& label)
 
 void wxAnyButton::AdjustForBitmapSize(wxSize &size) const
 {
-    wxCHECK_RET( m_imageData, wxT("shouldn't be called if no image") );
+    wxCHECK_RET( m_imageData, "shouldn't be called if no image" );
 
     // account for the bitmap size, including the user-specified margins
     const wxSize sizeBmp = m_imageData->GetBitmap(State_Normal).GetSize()
@@ -511,7 +511,7 @@ void wxAnyButton::AdjustForBitmapSize(wxSize &size) const
 
 void wxAnyButton::AdjustForBitmapMargins(wxSize& size) const
 {
-    wxCHECK_RET(m_imageData, wxT("shouldn't be called if no image"));
+    wxCHECK_RET(m_imageData, "shouldn't be called if no image");
 
     // and also for the margins we always add internally (unless we have no
     // border at all in which case the button has exactly the same size as

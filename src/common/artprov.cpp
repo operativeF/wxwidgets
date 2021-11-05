@@ -149,8 +149,8 @@ void wxArtProvider::PushBack(wxArtProvider *provider)
 
 bool wxArtProvider::Pop()
 {
-    wxCHECK_MSG( sm_providers, false, wxT("no wxArtProvider exists") );
-    wxCHECK_MSG( !sm_providers->empty(), false, wxT("wxArtProviders stack is empty") );
+    wxCHECK_MSG( sm_providers, false, "no wxArtProvider exists" );
+    wxCHECK_MSG( !sm_providers->empty(), false, "wxArtProviders stack is empty" );
 
     delete sm_providers->GetFirst()->GetData();
     sm_cache->Clear();
@@ -159,7 +159,7 @@ bool wxArtProvider::Pop()
 
 bool wxArtProvider::Remove(wxArtProvider *provider)
 {
-    wxCHECK_MSG( sm_providers, false, wxT("no wxArtProvider exists") );
+    wxCHECK_MSG( sm_providers, false, "no wxArtProvider exists" );
 
     if ( sm_providers->DeleteObject(provider) )
     {
@@ -196,7 +196,7 @@ void wxArtProvider::CleanUpProviders()
 
 void wxArtProvider::RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
 {
-    wxCHECK_RET( sizeNeeded.IsFullySpecified(), wxS("New size must be given") );
+    wxCHECK_RET( sizeNeeded.IsFullySpecified(), "New size must be given" );
 
 #if wxUSE_IMAGE
     wxImage img = bmp.ConvertToImage();
@@ -225,9 +225,9 @@ wxBitmap wxArtProvider::GetBitmap(const wxArtID& id,
                                   const wxSize& size)
 {
     // safety-check against writing client,id,size instead of id,client,size:
-    wxASSERT_MSG( client.back() == 'C', wxT("invalid 'client' parameter") );
+    wxASSERT_MSG( client.back() == 'C', "invalid 'client' parameter" );
 
-    wxCHECK_MSG( sm_providers, wxNullBitmap, wxT("no wxArtProvider exists") );
+    wxCHECK_MSG( sm_providers, wxNullBitmap, "no wxArtProvider exists" );
 
     std::string hashId = wxArtProviderCache::ConstructHashID(id, client, size);
 
@@ -296,9 +296,9 @@ wxIconBundle wxArtProvider::GetIconBundle(const wxArtID& id, const wxArtClient& 
 wxIconBundle wxArtProvider::DoGetIconBundle(const wxArtID& id, const wxArtClient& client)
 {
     // safety-check against writing client,id,size instead of id,client,size:
-    wxASSERT_MSG( client.back() == 'C', wxT("invalid 'client' parameter") );
+    wxASSERT_MSG( client.back() == 'C', "invalid 'client' parameter" );
 
-    wxCHECK_MSG( sm_providers, wxNullIconBundle, wxT("no wxArtProvider exists") );
+    wxCHECK_MSG( sm_providers, wxNullIconBundle, "no wxArtProvider exists" );
 
     std::string hashId = wxArtProviderCache::ConstructHashID(id, client);
 

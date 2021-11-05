@@ -48,37 +48,37 @@ wxObject *wxSliderXmlHandler::DoCreateResource()
 
     control->Create(m_parentAsWindow,
                     GetID(),
-                    GetLong(wxT("value"), DEFAULT_VALUE),
-                    GetLong(wxT("min"), DEFAULT_MIN),
-                    GetLong(wxT("max"), DEFAULT_MAX),
+                    GetLong("value", DEFAULT_VALUE),
+                    GetLong("min", DEFAULT_MIN),
+                    GetLong("max", DEFAULT_MAX),
                     GetPosition(), GetSize(),
                     GetStyle(),
                     wxDefaultValidator,
                     GetName());
 
-    if( HasParam(wxT("tickfreq")))
+    if( HasParam("tickfreq"))
     {
-        control->SetTickFreq(GetLong(wxT("tickfreq")));
+        control->SetTickFreq(GetLong("tickfreq"));
     }
-    if( HasParam(wxT("pagesize")))
+    if( HasParam("pagesize"))
     {
-        control->SetPageSize(GetLong(wxT("pagesize")));
+        control->SetPageSize(GetLong("pagesize"));
     }
-    if( HasParam(wxT("linesize")))
+    if( HasParam("linesize"))
     {
-        control->SetLineSize(GetLong(wxT("linesize")));
+        control->SetLineSize(GetLong("linesize"));
     }
-    if( HasParam(wxT("thumb")))
+    if( HasParam("thumb"))
     {
-        control->SetThumbLength(GetLong(wxT("thumb")));
+        control->SetThumbLength(GetLong("thumb"));
     }
-    if( HasParam(wxT("tick")))
+    if( HasParam("tick"))
     {
-        control->SetTick(GetLong(wxT("tick")));
+        control->SetTick(GetLong("tick"));
     }
-    if( HasParam(wxT("selmin")) && HasParam(wxT("selmax")))
+    if( HasParam("selmin")) && HasParam(wxT("selmax"))
     {
-        control->SetSelection(GetLong(wxT("selmin")), GetLong(wxT("selmax")));
+        control->SetSelection(GetLong("selmin")), GetLong(wxT("selmax"));
     }
 
     SetupWindow(control);
@@ -88,7 +88,7 @@ wxObject *wxSliderXmlHandler::DoCreateResource()
 
 bool wxSliderXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxSlider"));
+    return IsOfClass(node, "wxSlider");
 }
 
 #endif // wxUSE_XRC && wxUSE_SLIDER

@@ -47,8 +47,8 @@ bool wxMask::InitFromColour(const wxBitmap& bitmap, const wxColour& colour)
 
 bool wxMask::InitFromMonoBitmap(const wxBitmap& bitmap)
 {
-    wxCHECK_MSG( bitmap.IsOk(), false, wxT("Invalid bitmap") );
-    wxCHECK_MSG( bitmap.GetDepth() == 1, false, wxT("Cannot create mask from colour bitmap") );
+    wxCHECK_MSG( bitmap.IsOk(), false, "Invalid bitmap" );
+    wxCHECK_MSG( bitmap.GetDepth() == 1, false, "Cannot create mask from colour bitmap" );
 
     m_bitmap = bitmap;
 

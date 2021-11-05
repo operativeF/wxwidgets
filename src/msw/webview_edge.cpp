@@ -859,7 +859,7 @@ bool wxWebViewEdge::RunScript(const wxString& javascript, wxString* output) cons
     // no error or used in the warning message below if there is one.
     wxString result;
     if (RunScriptSync(wrapJS.GetWrappedCode(), &result)
-        && result == wxS("true"))
+        && result == "true")
     {
         if (RunScriptSync(wrapJS.GetUnwrappedOutputCode() + ";", &result))
         {

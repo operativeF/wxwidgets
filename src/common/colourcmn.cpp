@@ -51,11 +51,11 @@ wxIMPLEMENT_DYNAMIC_CLASS_WITH_COPY_AND_STREAMERS_XTI( wxColour, wxObject,  \
 //WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxColour>)
 wxBEGIN_PROPERTIES_TABLE(wxColour)
 wxREADONLY_PROPERTY( Red, unsigned char, Red, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring"), wxT("group")
 wxREADONLY_PROPERTY( Green, unsigned char, Green, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring"), wxT("group")
 wxREADONLY_PROPERTY( Blue, unsigned char, Blue, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring"), wxT("group")
 wxEND_PROPERTIES_TABLE()
 
 wxDIRECT_CONSTRUCTOR_3( wxColour, unsigned char, Red, \
@@ -81,7 +81,7 @@ bool wxColourBase::FromString(const wxString& str)
     if ( str.empty() )
         return false;       // invalid or empty string
 
-    if ( wxStrnicmp(str, wxT("RGB"), 3) == 0 )
+    if ( wxStrnicmp(str, "RGB", 3) == 0 )
     {
         // CSS-like RGB specification
         // according to http://www.w3.org/TR/css3-color/#colorunits
@@ -112,7 +112,7 @@ bool wxColourBase::FromString(const wxString& str)
             // Construct the format string which ensures that the last argument
             // receives all the rest of the string.
             wxString formatStr;
-            formatStr << wxS("( %d , %d , %d , %") << len << wxS("[^)] )");
+            formatStr << "( %d , %d , %d , %" << len << "[^)] )";
 
             // Notice that we use sscanf() here because if the string is not
             // ASCII it can't represent a valid RGB colour specification anyhow
@@ -141,7 +141,7 @@ bool wxColourBase::FromString(const wxString& str)
         }
         else // no 'a' following "rgb"
         {
-            if ( wxSscanf(str.wx_str() + 3, wxT("( %d , %d , %d )"),
+            if ( wxSscanf(str.wx_str() + 3, "( %d , %d , %d )",
                                                 &red, &green, &blue) != 3 )
                 return false;
         }
@@ -156,7 +156,7 @@ bool wxColourBase::FromString(const wxString& str)
         // hexadecimal prefixed with # ("HTML syntax")
         // see https://drafts.csswg.org/css-color/#hex-notation
         unsigned long tmp{0};
-        if (wxSscanf(str.wx_str() + 1, wxT("%lx"), &tmp) != 1)
+        if (wxSscanf(str.wx_str() + 1, "%lx", &tmp) != 1)
             return false;
 
         switch (wxStrlen(str) - 1)
@@ -240,11 +240,11 @@ wxString wxColourBase::GetAsString(unsigned int flags) const
                 // no name for this colour; return it in CSS syntax
                 if ( isOpaque )
                 {
-                    colName.Printf(wxT("rgb(%d, %d, %d)"), red, green, blue);
+                    colName.Printf("rgb(%d, %d, %d)", red, green, blue);
                 }
                 else // use rgba() form
                 {
-                    colName.Printf(wxT("rgba(%d, %d, %d, %s)"),
+                    colName.Printf("rgba(%d, %d, %d, %s)",
                                    red, green, blue,
                                    wxString::FromCDouble(alpha / 255., 3));
                 }
@@ -253,9 +253,9 @@ wxString wxColourBase::GetAsString(unsigned int flags) const
             {
                 // no name for this colour; return it in HTML syntax
                 if ( isOpaque )
-                    colName.Printf(wxT("#%02X%02X%02X"), red, green, blue);
+                    colName.Printf("#%02X%02X%02X", red, green, blue);
                 else
-                    colName.Printf(wxT("#%02X%02X%02X%02X"), red, green, blue, alpha);
+                    colName.Printf("#%02X%02X%02X%02X", red, green, blue, alpha);
             }
         }
     }
@@ -263,17 +263,17 @@ wxString wxColourBase::GetAsString(unsigned int flags) const
     {
         if ( flags & wxC2S_CSS_SYNTAX )
         {
-            colName = wxS("rgb(??, ??, \?\?)"); // \? form to avoid ??) trigraph
+            colName = "rgb(??, ??, \?\?)"; // \? form to avoid ??) trigraph
         }
         else if ( flags & wxC2S_HTML_SYNTAX )
         {
-            colName = wxS("#??????");
+            colName = "#??????";
         }
     }
 
     // this function should alway returns a non-empty string
     wxASSERT_MSG(!colName.empty(),
-                 wxT("Invalid wxColour -> wxString conversion flags"));
+                 "Invalid wxColour -> wxString conversion flags");
 
     return colName;
 }
@@ -392,7 +392,7 @@ wxString wxToString(const wxColourBase& col)
 
 bool wxFromString(const wxString& str, wxColourBase *col)
 {
-    wxCHECK_MSG( col, false, wxT("NULL output parameter") );
+    wxCHECK_MSG( col, false, "NULL output parameter" );
 
     if ( str.empty() )
     {

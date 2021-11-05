@@ -61,8 +61,8 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxBitmapButton, wxButton, "wx/bmpbuttn.h");
 wxBEGIN_PROPERTIES_TABLE(wxBitmapButton)
     wxPROPERTY_FLAGS( WindowStyle, wxBitmapButtonStyle, long, \
                       SetWindowStyleFlag, GetWindowStyleFlag, \
-                      wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), \
-                      wxT("group")) // style
+                      wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", \
+                      "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxBitmapButton)
@@ -110,7 +110,7 @@ wxBitmapButton::CreateCloseButton(wxWindow* parent,
                                   wxWindowID winid,
                                   const std::string& name)
 {
-    wxCHECK_MSG( parent, false, wxS("Must have a valid parent") );
+    wxCHECK_MSG( parent, false, "Must have a valid parent" );
 
     const wxColour colBg = parent->GetBackgroundColour();
 

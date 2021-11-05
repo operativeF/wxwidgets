@@ -96,7 +96,7 @@ bool wxHtmlCell::ProcessMouseClick(wxHtmlWindowInterface *window,
                                    const wxPoint& pos,
                                    const wxMouseEvent& event)
 {
-    wxCHECK_MSG( window, false, wxT("window interface must be provided") );
+    wxCHECK_MSG( window, false, "window interface must be provided" );
 
     wxHtmlLinkInfo *lnk = GetLink(pos.x, pos.y);
     bool retval = false;
@@ -270,7 +270,7 @@ bool wxHtmlCell::IsBefore(wxHtmlCell *cell) const
         }
     }
 
-    wxFAIL_MSG(wxT("Cells are in different trees"));
+    wxFAIL_MSG("Cells are in different trees");
     return false;
 }
 
@@ -1212,16 +1212,16 @@ void wxHtmlContainerCell::Detach(wxHtmlCell *cell)
 void wxHtmlContainerCell::SetAlign(const wxHtmlTag& tag)
 {
     wxString alg;
-    if (tag.GetParamAsString(wxT("ALIGN"), &alg))
+    if (tag.GetParamAsString("ALIGN", &alg))
     {
         alg.MakeUpper();
-        if (alg == wxT("CENTER"))
+        if (alg == "CENTER")
             SetAlignHor(wxHTML_ALIGN_CENTER);
-        else if (alg == wxT("LEFT"))
+        else if (alg == "LEFT")
             SetAlignHor(wxHTML_ALIGN_LEFT);
-        else if (alg == wxT("JUSTIFY"))
+        else if (alg == "JUSTIFY")
             SetAlignHor(wxHTML_ALIGN_JUSTIFY);
-        else if (alg == wxT("RIGHT"))
+        else if (alg == "RIGHT")
             SetAlignHor(wxHTML_ALIGN_RIGHT);
         m_LastLayout = -1;
     }
@@ -1233,7 +1233,7 @@ void wxHtmlContainerCell::SetWidthFloat(const wxHtmlTag& tag, double pixel_scale
 {
     int wdi;
     bool wpercent;
-    if (tag.GetParamAsIntOrPercent(wxT("WIDTH"), &wdi, wpercent))
+    if (tag.GetParamAsIntOrPercent("WIDTH", &wdi, wpercent))
     {
         if (wpercent)
         {
@@ -1582,7 +1582,7 @@ void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
     wxScrolledWindow *scrolwin =
         wxDynamicCast(m_Wnd->GetParent(), wxScrolledWindow);
     wxCHECK_RET( scrolwin,
-                 wxT("widget cells can only be placed in wxHtmlWindow") );
+                 "widget cells can only be placed in wxHtmlWindow" );
 
     wxPoint start = scrolwin->GetViewStart();
     m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * start.x,

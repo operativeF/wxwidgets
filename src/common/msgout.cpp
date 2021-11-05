@@ -210,7 +210,7 @@ void wxMessageOutputMessageBox::Output(const std::string& str)
 
     // the native MSW msg box understands the TABs, others don't
 #ifndef WX_WINDOWS
-    out.Replace(wxT("\t"), wxT("        "));
+    out.Replace("\t"), wxT("        ");
 #endif
 
     std::string title = "wxWidgets";

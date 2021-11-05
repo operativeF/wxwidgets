@@ -207,7 +207,7 @@ bool ReadLine(FILE* fp, unsigned long num, wxString* line)
     {
         wxUnusedVar(num); // could be unused if debug tracing is disabled
 
-        wxLogDebug(wxS("cannot read address information for stack frame #%lu"),
+        wxLogDebug("cannot read address information for stack frame #%lu",
                    num);
         return false;
     }
@@ -230,8 +230,8 @@ int wxStackWalker::InitFrames(wxStackFrame *arr, size_t n, void **addresses, cha
         exepath = wxStandardPaths::Get().GetExecutablePath();
         if ( exepath.empty() )
         {
-            wxLogDebug(wxT("Cannot parse stack frame because the executable ")
-                       wxT("path could not be detected"));
+            wxLogDebug("Cannot parse stack frame because the executable "
+                       "path could not be detected");
             return 0;
         }
     }
@@ -250,7 +250,7 @@ int wxStackWalker::InitFrames(wxStackFrame *arr, size_t n, void **addresses, cha
         len = strlen(g_buf);
     }
 
-    //wxLogDebug(wxT("piping the command '%s'"), g_buf);  // for debug only
+    //wxLogDebug("piping the command '%s'", g_buf);  // for debug only
 
     wxStdioPipe fp(g_buf, "r");
     if ( !fp )
@@ -303,7 +303,7 @@ int wxStackWalker::InitFrames(wxStackFrame *arr, size_t n, void **addresses, cha
         name = wxString::FromAscii(g_buf);
         name.RemoveLast(); // trailing newline
 
-        if ( name == wxT("??") )
+        if ( name == "??" )
             name.clear();
 
         // 2nd one -- the file/line info
@@ -319,13 +319,13 @@ int wxStackWalker::InitFrames(wxStackFrame *arr, size_t n, void **addresses, cha
 
             // remove line number from 'filename'
             filename.erase(posColon);
-            if ( filename == wxT("??") )
+            if ( filename == "??" )
                 filename.clear();
         }
         else
         {
-            wxLogDebug(wxT("Unexpected addr2line format: \"%s\" - ")
-                       wxT("the semicolon is missing"),
+            wxLogDebug("Unexpected addr2line format: \"%s\" - "
+                       "the semicolon is missing",
                        filename.c_str());
         }
 #endif // __WXOSX__/!__WXOSX__

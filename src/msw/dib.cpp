@@ -87,7 +87,7 @@ bool wxDIB::Create(wxSize sz, int depth)
 {
     // we don't support formats using palettes right now so we only create
     // either 24bpp (RGB) or 32bpp (RGBA) bitmaps
-    wxASSERT_MSG( depth, wxT("invalid image depth in wxDIB::Create()") );
+    wxASSERT_MSG( depth, "invalid image depth in wxDIB::Create()" );
     if ( depth != 1 && depth < 24 )
         depth = 24;
 
@@ -121,7 +121,7 @@ bool wxDIB::Create(wxSize sz, int depth)
 
     if ( !m_handle )
     {
-        wxLogLastError(wxT("CreateDIBSection"));
+        wxLogLastError("CreateDIBSection");
 
         return false;
     }
@@ -134,7 +134,7 @@ bool wxDIB::Create(wxSize sz, int depth)
 
 bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
 {
-    wxCHECK_MSG( hbmp, false, wxT("wxDIB::Create(): invalid bitmap") );
+    wxCHECK_MSG( hbmp, false, "wxDIB::Create(): invalid bitmap" );
 
     // this bitmap could already be a DIB section in which case we don't need
     // to convert it to DIB
@@ -159,7 +159,7 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
         BITMAP bm;
         if ( !::GetObjectW(hbmp, sizeof(bm), &bm) )
         {
-            wxLogLastError(wxT("GetObject(bitmap)"));
+            wxLogLastError("GetObject(bitmap)");
 
             return false;
         }
@@ -183,7 +183,7 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
     if ( !GetDIBSection(m_handle, &ds) )
     {
         // we're sure that our handle is a DIB section, so this should work
-        wxFAIL_MSG( wxT("GetObject(DIBSECTION) unexpectedly failed") );
+        wxFAIL_MSG( "GetObject(DIBSECTION) unexpectedly failed" );
 
         return false;
     }
@@ -201,7 +201,7 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
                 DIB_RGB_COLORS              // and not DIB_PAL_COLORS
             ) )
     {
-        wxLogLastError(wxT("GetDIBits()"));
+        wxLogLastError("GetDIBits()");
 
         return false;
     }
@@ -226,7 +226,7 @@ bool wxDIB::Load(const std::string& filename)
 
     if ( !m_handle )
     {
-        wxLogLastError(wxT("Loading DIB from file"));
+        wxLogLastError("Loading DIB from file");
 
         return false;
     }
@@ -236,7 +236,7 @@ bool wxDIB::Load(const std::string& filename)
 
 bool wxDIB::Save(const std::string& filename)
 {
-    wxCHECK_MSG( m_handle, false, wxT("wxDIB::Save(): invalid object") );
+    wxCHECK_MSG( m_handle, false, "wxDIB::Save(): invalid object" );
 
 #if wxUSE_FILE
     wxFile file(filename, wxFile::write);
@@ -246,7 +246,7 @@ bool wxDIB::Save(const std::string& filename)
         DIBSECTION ds;
         if ( !GetDIBSection(m_handle, &ds) )
         {
-            wxLogLastError(wxT("GetObject(hDIB)"));
+            wxLogLastError("GetObject(hDIB)");
         }
         else
         {
@@ -267,7 +267,7 @@ bool wxDIB::Save(const std::string& filename)
                 nColors = GetDIBColorTable(hDC, 0, WXSIZEOF(monoBmiColors), monoBmiColors);
                 if ( nColors != 2 )
                 {
-                    wxLogLastError(wxT("GetDIBColorTable"));
+                    wxLogLastError("GetDIBColorTable");
                     return false;
                 }
             }
@@ -320,7 +320,7 @@ void wxDIB::DoGetObject() const
         DIBSECTION ds;
         if ( !GetDIBSection(m_handle, &ds) )
         {
-            wxLogLastError(wxT("GetObject(hDIB)"));
+            wxLogLastError("GetObject(hDIB)");
             return;
         }
 
@@ -338,12 +338,12 @@ void wxDIB::DoGetObject() const
 
 HBITMAP wxDIB::CreateDDB(HDC hdc) const
 {
-    wxCHECK_MSG( m_handle, nullptr, wxT("wxDIB::CreateDDB(): invalid object") );
+    wxCHECK_MSG( m_handle, nullptr, "wxDIB::CreateDDB(): invalid object" );
 
     DIBSECTION ds;
     if ( !GetDIBSection(m_handle, &ds) )
     {
-        wxLogLastError(wxT("GetObject(hDIB)"));
+        wxLogLastError("GetObject(hDIB)");
 
         return nullptr;
     }
@@ -378,7 +378,7 @@ HBITMAP wxDIB::CreateDDB(HDC hdc) const
 /* static */
 HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits)
 {
-    wxCHECK_MSG( pbmi, nullptr, wxT("invalid DIB in ConvertToBitmap") );
+    wxCHECK_MSG( pbmi, nullptr, "invalid DIB in ConvertToBitmap" );
 
     // here we get BITMAPINFO struct followed by the actual bitmap bits and
     // BITMAPINFO starts with BITMAPINFOHEADER followed by colour info
@@ -438,7 +438,7 @@ HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits
 
     if ( !hbmp )
     {
-        wxLogLastError(wxT("CreateDIBitmap"));
+        wxLogLastError("CreateDIBitmap");
     }
 
     return hbmp;
@@ -447,13 +447,13 @@ HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits
 /* static */
 size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
 {
-    wxASSERT_MSG( hbmp, wxT("invalid bmp can't be converted to DIB") );
+    wxASSERT_MSG( hbmp, "invalid bmp can't be converted to DIB" );
 
     // prepare all the info we need
     BITMAP bm;
     if ( !::GetObjectW(hbmp, sizeof(bm), &bm) )
     {
-        wxLogLastError(wxT("GetObject(bitmap)"));
+        wxLogLastError("GetObject(bitmap)");
 
         return 0;
     }
@@ -496,7 +496,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
                 DIB_RGB_COLORS                      // or DIB_PAL_COLORS
             ) )
     {
-        wxLogLastError(wxT("GetDIBits()"));
+        wxLogLastError("GetDIBits()");
 
         return 0;
     }
@@ -531,7 +531,7 @@ HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
     {
         // this really shouldn't happen... it worked the first time, why not
         // now?
-        wxFAIL_MSG( wxT("wxDIB::ConvertFromBitmap() unexpectedly failed") );
+        wxFAIL_MSG( "wxDIB::ConvertFromBitmap() unexpectedly failed" );
 
         return nullptr;
     }
@@ -547,12 +547,12 @@ HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
 
 wxPalette *wxDIB::CreatePalette() const
 {
-    wxCHECK_MSG( m_handle, nullptr, wxT("wxDIB::CreatePalette(): invalid object") );
+    wxCHECK_MSG( m_handle, nullptr, "wxDIB::CreatePalette(): invalid object" );
 
     DIBSECTION ds;
     if ( !GetDIBSection(m_handle, &ds) )
     {
-        wxLogLastError(wxT("GetObject(hDIB)"));
+        wxLogLastError("GetObject(hDIB)");
 
         return nullptr;
     }
@@ -580,7 +580,7 @@ wxPalette *wxDIB::CreatePalette() const
     // going to have biClrUsed of them so add necessary space
     LOGPALETTE *pPalette = (LOGPALETTE *)
         malloc(sizeof(LOGPALETTE) + (biClrUsed - 1)*sizeof(PALETTEENTRY));
-    wxCHECK_MSG( pPalette, nullptr, wxT("out of memory") );
+    wxCHECK_MSG( pPalette, nullptr, "out of memory" );
 
     // initialize the palette header
     pPalette->palVersion = 0x300;  // magic number, not in docs but works
@@ -605,7 +605,7 @@ wxPalette *wxDIB::CreatePalette() const
 
     if ( !hPalette )
     {
-        wxLogLastError(wxT("CreatePalette"));
+        wxLogLastError("CreatePalette");
 
         return nullptr;
     }
@@ -626,7 +626,7 @@ wxPalette *wxDIB::CreatePalette() const
 
 bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
 {
-    wxCHECK_MSG( image.IsOk(), false, wxT("invalid wxImage in wxDIB ctor") );
+    wxCHECK_MSG( image.IsOk(), false, "invalid wxImage in wxDIB ctor" );
 #if !wxUSE_PALETTE
     wxCHECK_MSG(dstDepth != 1, false,
         "wxImage conversion to monochrome bitmap requires wxUSE_PALETTE");
@@ -683,7 +683,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         UINT rc = SetDIBColorTable(hDC, 0, WXSIZEOF(colorTable), colorTable);
         if ( rc != WXSIZEOF(colorTable))
         {
-            wxLogLastError(wxT("SetDIBColorTable"));
+            wxLogLastError("SetDIBColorTable");
             return false;
         }
     }
@@ -773,7 +773,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
 wxImage wxDIB::ConvertToImage(ConversionFlags flags) const
 {
     wxCHECK_MSG( IsOk(), wxNullImage,
-                    wxT("can't convert invalid DIB to wxImage") );
+                    "can't convert invalid DIB to wxImage" );
 
     // create the wxImage object
     const int w = GetWidth();
@@ -781,7 +781,7 @@ wxImage wxDIB::ConvertToImage(ConversionFlags flags) const
     wxImage image(w, h, false /* don't bother clearing memory */);
     if ( !image.IsOk() )
     {
-        wxFAIL_MSG( wxT("could not allocate data for image") );
+        wxFAIL_MSG( "could not allocate data for image" );
         return wxNullImage;
     }
 

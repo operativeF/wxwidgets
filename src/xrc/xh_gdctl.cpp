@@ -40,11 +40,11 @@ wxObject *wxGenericDirCtrlXmlHandler::DoCreateResource()
 
     ctrl->Create(m_parentAsWindow,
                  GetID(),
-                 GetText(wxT("defaultfolder")),
+                 GetText("defaultfolder"),
                  GetPosition(), GetSize(),
                  GetStyle(),
-                 GetText(wxT("filter")),
-                 (int)GetLong(wxT("defaultfilter")),
+                 GetText("filter"),
+                 (int)GetLong("defaultfilter"),
                  GetName());
 
     SetupWindow(ctrl);
@@ -54,7 +54,7 @@ wxObject *wxGenericDirCtrlXmlHandler::DoCreateResource()
 
 bool wxGenericDirCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxGenericDirCtrl"));
+    return IsOfClass(node, "wxGenericDirCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_DIRDLG

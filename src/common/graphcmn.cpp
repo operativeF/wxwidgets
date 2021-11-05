@@ -79,7 +79,7 @@ wxGraphicsObjectRefData* wxGraphicsObject::GetGraphicsData() const
 
 wxObjectRefData* wxGraphicsObject::CreateRefData() const
 {
-    wxLogDebug(wxT("A Null Object cannot be changed"));
+    wxLogDebug("A Null Object cannot be changed");
     return nullptr;
 }
 

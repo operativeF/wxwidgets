@@ -607,7 +607,7 @@ bool wxQTMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     int nError = m_lib.InitializeQTML(0);
     if (nError != noErr)    //-2093 no dll
     {
-        wxFAIL_MSG(wxString::Format(wxT("Couldn't Initialize Quicktime-%i"), nError));
+        wxFAIL_MSG(wxString::Format("Couldn't Initialize Quicktime-%i", nError));
         return false;
     }
 

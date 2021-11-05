@@ -43,7 +43,7 @@ wxObject *wxTreeCtrlXmlHandler::DoCreateResource()
     tree->Create(m_parentAsWindow,
                 GetID(),
                 GetPosition(), GetSize(),
-                GetStyle(wxT("style"), wxTR_DEFAULT_STYLE),
+                GetStyle("style", wxTR_DEFAULT_STYLE),
                 wxDefaultValidator,
                 GetName());
 
@@ -58,7 +58,7 @@ wxObject *wxTreeCtrlXmlHandler::DoCreateResource()
 
 bool wxTreeCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxTreeCtrl"));
+    return IsOfClass(node, "wxTreeCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_TREECTRL

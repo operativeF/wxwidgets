@@ -503,7 +503,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxRichTextAttr normalParaAttr;
     normalParaAttr.SetFont(font);
-    normalParaAttr.SetTextColour(wxColour(wxT("LIGHT GREY")));
+    normalParaAttr.SetTextColour(wxColour("LIGHT GREY"));
 
     m_previewCtrl->Freeze();
     m_previewCtrl->Clear();
@@ -520,7 +520,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
         wxRichTextAttr levelAttr = * def->GetLevelAttributes(i);
         levelAttr.SetBulletNumber(1);
         m_previewCtrl->BeginStyle(levelAttr);
-        m_previewCtrl->WriteText(wxString::Format(wxT("List level %d. "), i+1) + s_para2);
+        m_previewCtrl->WriteText(wxString::Format("List level %d. ", i+1) + s_para2);
         m_previewCtrl->EndStyle();
     }
     m_previewCtrl->EndStyle();
@@ -702,8 +702,8 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
 
     if (attr->HasLeftIndent())
     {
-        wxString leftIndent(wxString::Format(wxT("%ld"), attr->GetLeftIndent() + attr->GetLeftSubIndent()));
-        wxString leftFirstIndent(wxString::Format(wxT("%ld"), attr->GetLeftIndent()));
+        wxString leftIndent(wxString::Format("%ld", attr->GetLeftIndent() + attr->GetLeftSubIndent()));
+        wxString leftFirstIndent(wxString::Format("%ld", attr->GetLeftIndent()));
 
         m_indentLeft->SetValue(leftIndent);
         m_indentLeftFirst->SetValue(leftFirstIndent);
@@ -716,7 +716,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
 
     if (attr->HasRightIndent())
     {
-        wxString rightIndent(wxString::Format(wxT("%ld"), attr->GetRightIndent()));
+        wxString rightIndent(wxString::Format("%ld", attr->GetRightIndent()));
 
         m_indentRight->SetValue(rightIndent);
     }
@@ -725,7 +725,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
 
     if (attr->HasParagraphSpacingAfter())
     {
-        wxString spacingAfter(wxString::Format(wxT("%d"), attr->GetParagraphSpacingAfter()));
+        wxString spacingAfter(wxString::Format("%d", attr->GetParagraphSpacingAfter()));
 
         m_spacingAfter->SetValue(spacingAfter);
     }
@@ -734,7 +734,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
 
     if (attr->HasParagraphSpacingBefore())
     {
-        wxString spacingBefore(wxString::Format(wxT("%d"), attr->GetParagraphSpacingBefore()));
+        wxString spacingBefore(wxString::Format("%d", attr->GetParagraphSpacingBefore()));
 
         m_spacingBefore->SetValue(spacingBefore);
     }

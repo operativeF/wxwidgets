@@ -212,7 +212,7 @@ class wxPGValidationInfo;
 #define wxPG_LABEL              (*wxPGProperty::sm_wxPG_LABEL)
 
 // This is the value placed in wxPGProperty::sm_wxPG_LABEL
-#define wxPG_LABEL_STRING       wxS("@!")
+#define wxPG_LABEL_STRING       "@!"
 
 #define wxPG_COLOUR_BLACK       (*wxBLACK)
 
@@ -412,7 +412,7 @@ WX_PG_DECLARE_EDITOR_WITH_DECL(ChoiceAndButton,WXDLLIMPEXP_PROPGRID)
 template<class T>
 wxVariant WXVARIANT( const T& WXUNUSED(value) )
 {
-    wxFAIL_MSG(wxS("Code should always call specializations of this template"));
+    wxFAIL_MSG("Code should always call specializations of this template");
     return wxVariant();
 }
 
@@ -510,8 +510,8 @@ expdecl wxVariant& operator << ( wxVariant &variant, const classname &value )\
 expdecl classname& classname##RefFromVariant( wxVariant& variant ) \
 { \
     wxASSERT_MSG( variant.GetType() == wxS(#classname), \
-                  wxString::Format(wxS("Variant type should have been '%s'") \
-                                   wxS("instead of '%s'"), \
+                  wxString::Format("Variant type should have been '%s'" \
+                                   "instead of '%s'", \
                                    wxS(#classname), \
                                    variant.GetType())); \
     classname##VariantData *data = \
@@ -521,8 +521,8 @@ expdecl classname& classname##RefFromVariant( wxVariant& variant ) \
 expdecl const classname& classname##RefFromVariant( const wxVariant& variant ) \
 { \
     wxASSERT_MSG( variant.GetType() == wxS(#classname), \
-                  wxString::Format(wxS("Variant type should have been '%s'") \
-                                   wxS("instead of '%s'"), \
+                  wxString::Format("Variant type should have been '%s'" \
+                                   "instead of '%s'", \
                                    wxS(#classname), \
                                    variant.GetType())); \
     classname##VariantData *data = \
@@ -597,14 +597,14 @@ template<> inline wxVariant WXVARIANT( const wxColour& value )
 #define wxPG_VARIANT_TYPE_LONG          wxPGGlobalVars->m_strlong
 #define wxPG_VARIANT_TYPE_BOOL          wxPGGlobalVars->m_strbool
 #define wxPG_VARIANT_TYPE_LIST          wxPGGlobalVars->m_strlist
-#define wxPG_VARIANT_TYPE_DOUBLE        wxS("double")
-#define wxPG_VARIANT_TYPE_ARRSTRING     wxS("arrstring")
+#define wxPG_VARIANT_TYPE_DOUBLE        "double"
+#define wxPG_VARIANT_TYPE_ARRSTRING     "arrstring"
 #if wxUSE_DATETIME
-#define wxPG_VARIANT_TYPE_DATETIME      wxS("datetime")
+#define wxPG_VARIANT_TYPE_DATETIME      "datetime"
 #endif
 #if wxUSE_LONGLONG
-#define wxPG_VARIANT_TYPE_LONGLONG      wxS("longlong")
-#define wxPG_VARIANT_TYPE_ULONGLONG     wxS("ulonglong")
+#define wxPG_VARIANT_TYPE_LONGLONG      "longlong"
+#define wxPG_VARIANT_TYPE_ULONGLONG     "ulonglong"
 #endif
 #endif // !SWIG
 

@@ -205,7 +205,7 @@ wxWindow* wxHtmlHelpController::CreateHelpWindow()
     {
         m_Config = wxConfigBase::Get(false);
         if (m_Config != nullptr)
-            m_ConfigRoot = wxT("wxWindows/wxHtmlHelpController");
+            m_ConfigRoot = "wxWindows/wxHtmlHelpController";
     }
 #endif // wxUSE_CONFIG
 
@@ -265,17 +265,17 @@ bool wxHtmlHelpController::Initialize(const std::string& file)
         dir = dir + wxFILE_SEP_PATH;
 
     // Try to find a suitable file
-    std::string actualFilename = dir + filename + wxString(wxT(".zip"));
+    std::string actualFilename = dir + filename + wxString(".zip");
     if (!wxFileExists(actualFilename))
     {
-        actualFilename = dir + filename + wxString(wxT(".htb"));
+        actualFilename = dir + filename + wxString(".htb");
         if (!wxFileExists(actualFilename))
         {
-            actualFilename = dir + filename + wxString(wxT(".hhp"));
+            actualFilename = dir + filename + wxString(".hhp");
             if (!wxFileExists(actualFilename))
             {
 #if wxUSE_LIBMSPACK
-                actualFilename = dir + filename + wxString(wxT(".chm"));
+                actualFilename = dir + filename + wxString(".chm");
                 if (!wxFileExists(actualFilename))
 #endif
                     return false;

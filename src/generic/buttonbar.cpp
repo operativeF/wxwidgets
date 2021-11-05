@@ -139,7 +139,7 @@ bool wxButtonToolBar::Create(wxWindow *parent,
         wxClientDC dc(this);
         dc.SetFont(font);
         int w, h;
-        dc.GetTextExtent(wxT("X"), & w, & h);
+        dc.GetTextExtent("X", & w, & h);
         m_labelHeight = h;
     }
     return true;
@@ -193,7 +193,7 @@ void wxButtonToolBar::GetRectLimits(const wxRect& rect,
                               wxCoord *start,
                               wxCoord *end) const
 {
-    wxCHECK_RET( start && end, wxT("NULL pointer in GetRectLimits") );
+    wxCHECK_RET( start && end, "NULL pointer in GetRectLimits" );
 
     if ( IsVertical() )
     {
@@ -212,7 +212,7 @@ void wxButtonToolBar::SetToolShortHelp(int id, const std::string& help)
 {
     wxToolBarToolBase *tool = FindById(id);
 
-    wxCHECK_RET( tool, wxT("SetToolShortHelp: no such tool") );
+    wxCHECK_RET( tool, "SetToolShortHelp: no such tool" );
 
     // TODO: set tooltip/short help
     tool->SetShortHelp(help);
@@ -275,7 +275,7 @@ wxRect wxButtonToolBar::GetToolRect(wxToolBarToolBase *toolBase) const
 
     wxRect rect;
 
-    wxCHECK_MSG( tool, rect, wxT("GetToolRect: NULL tool") );
+    wxCHECK_MSG( tool, rect, "GetToolRect: NULL tool" );
 
     // ensure that we always have the valid tool position
     if ( m_needsLayout )

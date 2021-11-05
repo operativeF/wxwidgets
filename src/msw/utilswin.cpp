@@ -66,29 +66,29 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     {
         // ShellExecuteEx() opens the URL in an existing window by default so
         // we can't use it if we need a new window
-        wxRegKey key(wxRegKey::HKCR, params.scheme + wxT("\\shell\\open"));
+        wxRegKey key(wxRegKey::HKCR, params.scheme + "\\shell\\open");
         if ( !key.Exists() )
         {
             // try the default browser, it must be registered at least for http URLs
-            key.SetName(wxRegKey::HKCR, wxT("http\\shell\\open"));
+            key.SetName(wxRegKey::HKCR, "http\\shell\\open");
         }
 
         if ( key.Exists() )
         {
-            wxRegKey keyDDE(key, wxT("DDEExec"));
+            wxRegKey keyDDE(key, "DDEExec");
             if ( keyDDE.Exists() )
             {
                 // we only know the syntax of WWW_OpenURL DDE request for IE,
                 // optimistically assume that all other browsers are compatible
                 // with it
-                static constexpr wxChar TOPIC_OPEN_URL[] = wxT("WWW_OpenURL");
-                wxString ddeCmd;
-                wxRegKey keyTopic(keyDDE, wxT("topic"));
+                static constexpr auto TOPIC_OPEN_URL = L"WWW_OpenURL"; // FIXME: Use narrow strings.
+                std::string ddeCmd;
+                wxRegKey keyTopic(keyDDE, "topic");
                 bool ok = keyTopic.Exists() &&
                             keyTopic.QueryDefaultValue() == TOPIC_OPEN_URL;
                 if ( ok )
                 {
-                    ddeCmd = keyDDE.QueryDefaultValue();
+                    ddeCmd = keyDDE.QueryDefaultValue().ToStdString();
                     ok = !ddeCmd.empty();
                 }
 
@@ -99,14 +99,25 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                     // with 0 which means "new" (see KB article 160957), but
                     // don't fail if there is no -1 as at least for recent
                     // Firefox versions the default value already is 0
-                    ddeCmd.Replace(wxT("-1"), wxT("0"),
-                                   false /* only first occurrence */);
+                    ddeCmd.replace(ddeCmd.find_first_of("-1"), 1, "0"); // only first occurrence
 
                     // and also replace the parameters: the topic should
                     // contain a placeholder for the URL and we should fail if
                     // we didn't find it as this would mean that we have no way
                     // of passing the URL to the browser
-                    ok = ddeCmd.Replace(wxT("%1"), params.url, false) == 1;
+                    // FIXME: Bounds checks.
+                    auto paramInsertionPt = ddeCmd.erase(ddeCmd.begin() + ddeCmd.find_first_of("%1"), ddeCmd.begin() + 2);
+
+                    if(paramInsertionPt != ddeCmd.end())
+                    {
+                        ddeCmd.insert(paramInsertionPt, params.url.begin(), params.url.end());
+                        ok = true;
+                    }
+                    else
+                    {
+                        //assert("Failed to get placeholder for URL to pass to the browser.");
+                        ok = false;
+                    }
                 }
 
                 if ( ok )
@@ -114,7 +125,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                     // try to send it the DDE request now but ignore the errors
                     wxLogNull noLog;
 
-                    const wxString ddeServer = wxRegKey(keyDDE, wxT("application"));
+                    const wxString ddeServer = wxRegKey(keyDDE, "application");
                     if ( wxExecuteDDE(ddeServer, TOPIC_OPEN_URL, ddeCmd) )
                         return true;
 

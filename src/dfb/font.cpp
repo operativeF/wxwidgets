@@ -75,7 +75,7 @@ wxGDIRefData *wxFont::CloneGDIRefData(const wxGDIRefData *data) const
 
 wxIDirectFBFontPtr wxFont::GetDirectFBFont(bool antialiased) const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid font" );
 
     // we don't support DC scaling yet, so use scale=1
     wxFontInstance *i = M_FONTDATA->GetFontInstance(1.0, antialiased);
@@ -84,14 +84,14 @@ wxIDirectFBFontPtr wxFont::GetDirectFBFont(bool antialiased) const
 
 double wxFont::GetFractionalPointSize() const
 {
-    wxCHECK_MSG( IsOk(), 0, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), 0, "invalid font" );
 
     return M_FONTDATA->GetFractionalPointSize();
 }
 
 wxString wxFont::GetFaceName() const
 {
-    wxCHECK_MSG( IsOk(), {}, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), {}, "invalid font" );
 
     return M_FONTDATA->GetFaceName();
 }
@@ -103,21 +103,21 @@ wxFontFamily wxFont::DoGetFamily() const
 
 wxFontStyle wxFont::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxFontStyle::Max, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontStyle::Max, "invalid font" );
 
     return M_FONTDATA->GetStyle();
 }
 
 int wxFont::GetNumericWeight() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTWEIGHT_MAX, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFONTWEIGHT_MAX, "invalid font" );
 
     return M_FONTDATA->GetNumericWeight();
 }
 
 bool wxFont::GetUnderlined() const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), false, "invalid font" );
 
     return M_FONTDATA->GetUnderlined();
 }
@@ -125,21 +125,21 @@ bool wxFont::GetUnderlined() const
 
 wxFontEncoding wxFont::GetEncoding() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTENCODING_DEFAULT, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFONTENCODING_DEFAULT, "invalid font" );
 
     return M_FONTDATA->GetEncoding();
 }
 
 bool wxFont::IsFixedWidth() const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), false, "invalid font" );
 
     return M_FONTDATA->IsFixedWidth();
 }
 
 const wxNativeFontInfo *wxFont::GetNativeFontInfo() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid font" );
 
     return M_FONTDATA->GetNativeFontInfo();
 }

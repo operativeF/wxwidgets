@@ -278,7 +278,7 @@ wxSize wxMSWHeaderCtrl::DoGetBestSize() const
     HDLAYOUT layout = { &rc, &wpos };
     if ( !Header_Layout(GetHwnd(), &layout) )
     {
-        wxLogLastError(wxT("Header_Layout"));
+        wxLogLastError("Header_Layout");
         return wxControl::DoGetBestSize();
     }
 
@@ -326,7 +326,7 @@ void wxMSWHeaderCtrl::SetCount(unsigned int count)
     {
         if ( !Header_DeleteItem(GetHwnd(), 0) )
         {
-            wxLogLastError(wxT("Header_DeleteItem"));
+            wxLogLastError("Header_DeleteItem");
         }
     }
 
@@ -368,7 +368,7 @@ void wxMSWHeaderCtrl::UpdateHeader(unsigned int idx)
         {
             // but it wasn't hidden before, so remove it
             if ( !Header_DeleteItem(GetHwnd(), MSWToNativeIdx(idx)) )
-                wxLogLastError(wxS("Header_DeleteItem()"));
+                wxLogLastError("Header_DeleteItem()");
 
             m_isHidden[idx] = true;
         }
@@ -384,7 +384,7 @@ void wxMSWHeaderCtrl::UpdateHeader(unsigned int idx)
         {
             // we need to remove the old column
             if ( !Header_DeleteItem(GetHwnd(), MSWToNativeIdx(idx)) )
-                wxLogLastError(wxS("Header_DeleteItem()"));
+                wxLogLastError("Header_DeleteItem()");
         }
 
         DoInsertItem(col, idx);
@@ -478,7 +478,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
     if ( ::SendMessageW(GetHwnd(), HDM_INSERTITEM,
                        MSWToNativeIdx(idx), (LPARAM)&hdi) == -1)
     {
-        wxLogLastError(wxT("Header_InsertItem()"));
+        wxLogLastError("Header_InsertItem()");
     }
 
     // Resizing cursor that correctly reflects per-column IsResizable() cannot
@@ -519,7 +519,7 @@ void wxMSWHeaderCtrl::SetColumnsOrder(const std::vector<int>& order)
 
     if ( !Header_SetOrderArray(GetHwnd(), orderShown.size(), &orderShown[0]) )
     {
-        wxLogLastError(wxT("Header_GetOrderArray"));
+        wxLogLastError("Header_GetOrderArray");
     }
 
     m_colIndices = order;
@@ -707,7 +707,7 @@ wxEventType wxMSWHeaderCtrl::GetClickEventType(bool dblclk, int button)
             break;
 
         default:
-            wxFAIL_MSG( wxS("unexpected event type") );
+            wxFAIL_MSG( "unexpected event type" );
             evtType = wxEVT_NULL;
     }
 

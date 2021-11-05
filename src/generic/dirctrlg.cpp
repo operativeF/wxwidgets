@@ -104,7 +104,7 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
         switch (vol.GetKind())
         {
             case wxFSVolumeKind::Floppy:
-                if ( (path == wxT("a:\\")) || (path == wxT("b:\\")) )
+                if ( (path == "a:\\") || (path == "b:\\") )
                     imageId = wxFileIconsTable::floppy;
                 else
                     imageId = wxFileIconsTable::removeable;
@@ -146,14 +146,14 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
 #endif // __WIN32__/!__WIN32__
 
 #elif defined(__UNIX__)
-    paths.Add(wxT("/"));
-    names.Add(wxT("/"));
+    paths.Add("/");
+    names.Add("/");
     icon_ids.push_back(wxFileIconsTable::computer);
 #else
     #error "Unsupported platform in wxGenericDirCtrl!"
 #endif
-    wxASSERT_MSG( (paths.GetCount() == names.GetCount()), wxT("The number of paths and their human readable names should be equal in number."));
-    wxASSERT_MSG( (paths.GetCount() == icon_ids.size()), wxT("Wrong number of icons for available drives."));
+    wxASSERT_MSG( (paths.GetCount() == names.GetCount()), "The number of paths and their human readable names should be equal in number.");
+    wxASSERT_MSG( (paths.GetCount() == icon_ids.size()), "Wrong number of icons for available drives.");
     return paths.GetCount();
 }
 #endif
@@ -316,7 +316,7 @@ void wxGenericDirCtrl::ExpandRoot()
         // On Unix, there's only one node under the (hidden) root node. It
         // represents the / path, so the user would always have to expand it;
         // let's do it ourselves
-        ExpandPath( wxT("/") );
+        ExpandPath( "/" );
     }
 #endif
 }
@@ -457,7 +457,7 @@ void wxGenericDirCtrl::SetupSections()
 #ifdef __WXGTK20__
     wxString home = wxGetHomeDir();
     AddSection( home, _("Home directory"), 1);
-    home += wxT("/Desktop");
+    home += "/Desktop";
     AddSection( home, _("Desktop"), 1);
 #endif
 
@@ -496,8 +496,8 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
         return;
 
     if ((event.GetLabel().empty()) ||
-        (event.GetLabel() == wxT(".")) ||
-        (event.GetLabel() == wxT("..")) ||
+        (event.GetLabel() == ".") ||
+        (event.GetLabel() == "..") ||
         (event.GetLabel().Find(wxT('/')) != wxNOT_FOUND) ||
         (event.GetLabel().Find(wxT('\\')) != wxNOT_FOUND) ||
         (event.GetLabel().Find(wxT('|')) != wxNOT_FOUND))
@@ -639,7 +639,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     if (!wxIsDriveAvailable(dirName))
     {
         data->m_isExpanded = false;
-        //wxMessageBox(wxT("Sorry, this drive is not available."));
+        //wxMessageBox("Sorry, this drive is not available.");
         return;
     }
 #endif
@@ -669,7 +669,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
         {
             do
             {
-                if ((eachFilename != wxT(".")) && (eachFilename != wxT("..")))
+                if ((eachFilename != ".") && (eachFilename != ".."))
                 {
                     dirs.Add(eachFilename);
                 }
@@ -691,7 +691,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             // Process each filter (ex: "JPEG Files (*.jpg;*.jpeg)|*.jpg;*.jpeg")
             wxStringTokenizer strTok;
             wxString curFilter;
-            strTok.SetString(m_currentFilterStr,wxT(";"));
+            strTok.SetString(m_currentFilterStr,";");
             while(strTok.HasMoreTokens())
             {
                 curFilter = strTok.GetNextToken();
@@ -699,7 +699,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
                 {
                     do
                     {
-                        if ((eachFilename != wxT(".")) && (eachFilename != wxT("..")))
+                        if ((eachFilename != ".") && (eachFilename != ".."))
                         {
                             filenames.Add(eachFilename);
                         }
@@ -748,7 +748,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             if (!wxEndsWithPathSeparator(path))
                 path += wxString(wxFILE_SEP_PATH);
             path += eachFilename;
-            //path = dirName + wxString(wxT("/")) + eachFilename;
+            //path = dirName + wxString("/") + eachFilename;
             wxDirItemData *dir_item = new wxDirItemData(path,eachFilename,false);
             int image_id = wxFileIconsTable::file;
             if (eachFilename.Find(wxT('.')) != wxNOT_FOUND)
@@ -789,8 +789,8 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
     wxString path2(path);
 
     // Make sure all separators are as per the current platform
-    path2.Replace(wxT("\\"), wxString(wxFILE_SEP_PATH));
-    path2.Replace(wxT("/"), wxString(wxFILE_SEP_PATH));
+    path2.Replace("\\", wxString(wxFILE_SEP_PATH));
+    path2.Replace("/", wxString(wxFILE_SEP_PATH));
 
     // Append a separator to foil bogus substring matching
     path2 += wxString(wxFILE_SEP_PATH);
@@ -1076,7 +1076,7 @@ void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, wxArray
         {
             do
             {
-                if ((eachFilename != wxT(".")) && (eachFilename != wxT("..")))
+                if ((eachFilename != ".")) && (eachFilename != wxT(".."))
                 {
                     filenames.Add(eachFilename);
                 }
@@ -1096,9 +1096,9 @@ void wxGenericDirCtrl::SetFilterIndex(int n)
         m_currentFilterStr = f;
     else
 #ifdef __UNIX__
-        m_currentFilterStr = wxT("*");
+        m_currentFilterStr = "*";
 #else
-        m_currentFilterStr = wxT("*.*");
+        m_currentFilterStr = "*.*";
 #endif
 }
 
@@ -1119,9 +1119,9 @@ void wxGenericDirCtrl::SetFilter(const wxString& filter)
         m_currentFilterStr = f;
     else
 #ifdef __UNIX__
-        m_currentFilterStr = wxT("*");
+        m_currentFilterStr = "*";
 #else
-        m_currentFilterStr = wxT("*.*");
+        m_currentFilterStr = "*.*";
 #endif
     // current filter index is meaningless after filter change, set it to zero
     SetFilterIndex(0);
@@ -1385,7 +1385,7 @@ wxFileIconsTable::~wxFileIconsTable()
 // delayed initialization - wait until first use (wxArtProv not created yet)
 void wxFileIconsTable::Create(const wxSize& sz)
 {
-    wxCHECK_RET(!m_smallImageList && !m_HashTable, wxT("creating icons twice"));
+    wxCHECK_RET(!m_smallImageList && !m_HashTable, "creating icons twice");
     m_HashTable = new wxHashTable(wxKEY_STRING);
     m_smallImageList = new wxImageList(sz.x, sz.y);
 
@@ -1431,14 +1431,14 @@ void wxFileIconsTable::Create(const wxSize& sz)
                                                    wxART_CMN_DIALOG,
                                                    sz));
     // executable
-    if (GetIconID({}, wxT("application/x-executable")) == file)
+    if (GetIconID({}, "application/x-executable") == file)
     {
         m_smallImageList->Add(wxArtProvider::GetBitmap(wxART_EXECUTABLE_FILE,
                                                        wxART_CMN_DIALOG,
                                                        sz));
-        delete m_HashTable->Get(wxT("exe"));
-        m_HashTable->Delete(wxT("exe"));
-        m_HashTable->Put(wxT("exe"), new wxFileIconEntry(executable));
+        delete m_HashTable->Get("exe");
+        m_HashTable->Delete("exe");
+        m_HashTable->Put("exe", new wxFileIconEntry(executable));
     }
     /* else put into list by GetIconID
        (KDE defines application/x-executable for *.exe and has nice icon)
@@ -1555,7 +1555,7 @@ int wxFileIconsTable::GetIconID(const wxString& extension, const wxString& mime)
 #else // !wxUSE_MIMETYPE
 
     wxUnusedVar(mime);
-    if (extension == wxT("exe"))
+    if (extension == "exe")
         return executable;
     else
         return file;

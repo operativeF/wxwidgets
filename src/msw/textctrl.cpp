@@ -263,7 +263,7 @@ public:
         : m_count(count)
     {
         wxASSERT_MSG( m_count == -1 || m_count == -2,
-                      wxT("wrong initial m_updatesCount value") );
+                      "wrong initial m_updatesCount value" );
 
         if (m_count != -2)
             m_count = 0;
@@ -424,8 +424,8 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
         // However, an application can veto ink edit controls by either specifying
         // msw.inkedit = 0 or by removing wxTE_RICH[2] from the style.
         //
-        if ((wxSystemSettings::HasFeature(wxSYS_TABLET_PRESENT) || wxSystemOptions::GetOptionInt(wxT("msw.inkedit")) != 0) &&
-            !(wxSystemOptions::HasOption(wxT("msw.inkedit")) && wxSystemOptions::GetOptionInt(wxT("msw.inkedit")) == 0))
+        if ((wxSystemSettings::HasFeature(wxSYS_TABLET_PRESENT) || wxSystemOptions::GetOptionInt("msw.inkedit") != 0) &&
+            !(wxSystemOptions::HasOption("msw.inkedit")) && wxSystemOptions::GetOptionInt(wxT("msw.inkedit") == 0))
         {
             if (wxRichEditModule::LoadInkEdit())
             {
@@ -684,16 +684,16 @@ void wxTextCtrl::AdoptAttributesFromHWND()
 #if wxUSE_RICHEDIT
     wxString classname = wxGetWindowClass(GetHWND());
 
-    if ( classname.IsSameAs(wxT("EDIT"), false /* no case */) )
+    if ( classname.IsSameAs("EDIT", false /* no case */) )
     {
         m_verRichEdit = 0;
     }
     else // rich edit?
     {
         wxChar c;
-        if ( wxSscanf(classname, wxT("RichEdit%d0%c"), &m_verRichEdit, &c) != 2 )
+        if ( wxSscanf(classname, "RichEdit%d0%c", &m_verRichEdit, &c) != 2 )
         {
-            wxLogDebug(wxT("Unknown edit control '%s'."), classname.c_str());
+            wxLogDebug("Unknown edit control '%s'.", classname.c_str());
 
             m_verRichEdit = 0;
         }
@@ -3456,7 +3456,7 @@ bool wxRichEditModule::LoadInkEdit()
     ms_inkEditLibLoadAttemped = true;
 
     wxLogNull logNull;
-    return ms_inkEditLib.Load(wxT("inked"));
+    return ms_inkEditLib.Load("inked");
 }
 #endif // wxUSE_INKEDIT
 

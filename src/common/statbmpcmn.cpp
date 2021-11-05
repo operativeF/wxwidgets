@@ -55,8 +55,8 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxStaticBitmap, wxControl, "wx/statbmp.h");
 wxBEGIN_PROPERTIES_TABLE(wxStaticBitmap)
     wxPROPERTY_FLAGS( WindowStyle, wxStaticBitmapStyle, long, \
                       SetWindowStyleFlag, GetWindowStyleFlag, \
-                      wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), \
-                      wxT("group")) // style
+                      wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", \
+                      "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxStaticBitmap)

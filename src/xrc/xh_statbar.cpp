@@ -46,9 +46,9 @@ wxObject *wxStatusBarXmlHandler::DoCreateResource()
                     GetStyle(),
                     GetName());
 
-    int fields = GetLong(wxT("fields"), 1);
-    wxString widths = GetParamValue(wxT("widths"));
-    wxString styles = GetParamValue(wxT("styles"));
+    int fields = GetLong("fields", 1);
+    wxString widths = GetParamValue("widths");
+    wxString styles = GetParamValue("styles");
 
     if (fields > 1 && !widths.IsEmpty())
     {
@@ -74,13 +74,13 @@ wxObject *wxStatusBarXmlHandler::DoCreateResource()
             style[i] = wxSB_NORMAL;
 
             wxString first = styles.BeforeFirst(wxT(','));
-            if (first == wxT("wxSB_NORMAL"))
+            if (first == "wxSB_NORMAL")
                 style[i] = wxSB_NORMAL;
-            else if (first == wxT("wxSB_FLAT"))
+            else if (first == "wxSB_FLAT")
                 style[i] = wxSB_FLAT;
-            else if (first == wxT("wxSB_RAISED"))
+            else if (first == "wxSB_RAISED")
                 style[i] = wxSB_RAISED;
-            else if (first == wxT("wxSB_SUNKEN"))
+            else if (first == "wxSB_SUNKEN")
                 style[i] = wxSB_SUNKEN;
             else if (!first.empty())
             {
@@ -116,7 +116,7 @@ wxObject *wxStatusBarXmlHandler::DoCreateResource()
 
 bool wxStatusBarXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxStatusBar"));
+    return IsOfClass(node, "wxStatusBar");
 }
 
 #endif // wxUSE_XRC && wxUSE_STATUSBAR

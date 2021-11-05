@@ -94,7 +94,7 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
 
         if ( !ms_msgFindDialog )
         {
-            wxLogLastError(wxT("RegisterWindowMessage(FINDMSGSTRING)"));
+            wxLogLastError("RegisterWindowMessage(FINDMSGSTRING)");
         }
 
         wxWindow::MSWRegisterMessageHandler
@@ -178,7 +178,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
                                             WPARAM WXUNUSED(wParam),
                                             LPARAM lParam)
 {
-    wxASSERT_MSG( nMsg == ms_msgFindDialog, wxT("unexpected message received") );
+    wxASSERT_MSG( nMsg == ms_msgFindDialog, "unexpected message received" );
 
     FINDREPLACE *pFR = (FINDREPLACE *)lParam;
 
@@ -216,7 +216,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
     }
     else
     {
-        wxFAIL_MSG( wxT("unknown find dialog event") );
+        wxFAIL_MSG( "unknown find dialog event" );
 
         return false;
     }
@@ -294,7 +294,7 @@ wxFindReplaceDialog::~wxFindReplaceDialog()
             // if it wasn't, delete the dialog ourselves
             if ( !::DestroyWindow(GetHwnd()) )
             {
-                wxLogLastError(wxT("DestroyWindow(find dialog)"));
+                wxLogLastError("DestroyWindow(find dialog)");
             }
         }
 
@@ -353,9 +353,9 @@ bool wxFindReplaceDialog::Show(bool show)
         return true;
     }
 
-    wxCHECK_MSG( m_FindReplaceData, false, wxT("call Create() first!") );
+    wxCHECK_MSG( m_FindReplaceData, false, "call Create() first!" );
 
-    wxASSERT_MSG( !m_impl, wxT("why don't we have the window then?") );
+    wxASSERT_MSG( !m_impl, "why don't we have the window then?" );
 
     m_impl = new wxFindReplaceDialogImpl(this, m_FindReplaceData->GetFlags());
 
@@ -387,7 +387,7 @@ bool wxFindReplaceDialog::Show(bool show)
 
     if ( !::ShowWindow(hwnd, SW_SHOW) )
     {
-        wxLogLastError(wxT("ShowWindow(find dialog)"));
+        wxLogLastError("ShowWindow(find dialog)");
     }
 
     m_hWnd = (WXHWND)hwnd;

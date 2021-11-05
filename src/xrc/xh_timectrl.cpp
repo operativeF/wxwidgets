@@ -31,7 +31,7 @@ wxObject *wxTimeCtrlXmlHandler::DoCreateResource()
                   GetID(),
                   wxDefaultDateTime,
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxTP_DEFAULT),
+                  GetStyle("style", wxTP_DEFAULT),
                   wxDefaultValidator,
                   GetName());
 
@@ -42,7 +42,7 @@ wxObject *wxTimeCtrlXmlHandler::DoCreateResource()
 
 bool wxTimeCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxS("wxTimePickerCtrl"));
+    return IsOfClass(node, "wxTimePickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_TIMEPICKCTRL

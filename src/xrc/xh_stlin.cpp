@@ -32,7 +32,7 @@ wxObject *wxStaticLineXmlHandler::DoCreateResource()
     line->Create(m_parentAsWindow,
                 GetID(),
                 GetPosition(), GetSize(),
-                GetStyle(wxT("style"), wxLI_HORIZONTAL),
+                GetStyle("style", wxLI_HORIZONTAL),
                 GetName());
 
     SetupWindow(line);
@@ -42,7 +42,7 @@ wxObject *wxStaticLineXmlHandler::DoCreateResource()
 
 bool wxStaticLineXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxStaticLine"));
+    return IsOfClass(node, "wxStaticLine");
 }
 
 #endif // wxUSE_XRC && wxUSE_STATLINE

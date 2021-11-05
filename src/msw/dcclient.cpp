@@ -139,7 +139,7 @@ wxWindowDCImpl::wxWindowDCImpl( wxDC *owner ) :
 wxWindowDCImpl::wxWindowDCImpl( wxDC *owner, wxWindow *window ) :
    wxMSWDCImpl( owner )
 {
-    wxCHECK_RET( window, wxT("invalid window in wxWindowDCImpl") );
+    wxCHECK_RET( window, "invalid window in wxWindowDCImpl" );
 
     m_window = window;
     m_hDC = (WXHDC) ::GetWindowDC(GetHwndOf(m_window));
@@ -164,7 +164,7 @@ void wxWindowDCImpl::InitDC()
 wxSize wxWindowDCImpl::DoGetSize() const
 {
     // FIXME: Return value?
-    //wxCHECK_RET( m_window, wxT("wxWindowDCImpl without a window?") );
+    //wxCHECK_RET( m_window, "wxWindowDCImpl without a window?" );
 
     return m_window->GetSize();
 }
@@ -183,7 +183,7 @@ wxClientDCImpl::wxClientDCImpl( wxDC *owner ) :
 wxClientDCImpl::wxClientDCImpl( wxDC *owner, wxWindow *window ) :
    wxWindowDCImpl( owner )
 {
-    wxCHECK_RET( window, wxT("invalid window in wxClientDCImpl") );
+    wxCHECK_RET( window, "invalid window in wxClientDCImpl" );
 
     m_window = window;
     m_hDC = (WXHDC)::GetDC(GetHwndOf(window));
@@ -217,7 +217,7 @@ void wxClientDCImpl::InitDC()
 wxSize wxClientDCImpl::DoGetSize() const
 {
     // FIXME: Not sure about this.
-    //wxCHECK_RET( m_window, wxT("wxClientDCImpl without a window?") );
+    //wxCHECK_RET( m_window, "wxClientDCImpl without a window?" );
 
     return m_window->GetClientSize();
 }
@@ -236,7 +236,7 @@ wxPaintDCImpl::wxPaintDCImpl( wxDC *owner ) :
 wxPaintDCImpl::wxPaintDCImpl( wxDC *owner, wxWindow *window ) :
    wxClientDCImpl( owner )
 {
-    wxCHECK_RET( window, wxT("NULL canvas in wxPaintDCImpl ctor") );
+    wxCHECK_RET( window, "NULL canvas in wxPaintDCImpl ctor" );
 
     using namespace wxMSWImpl;
     wxCHECK_RET( !paintStack.empty(),
@@ -331,7 +331,7 @@ wxPaintDCEx::wxPaintDCEx(wxWindow *window, WXHDC dc)
 wxPaintDCExImpl::wxPaintDCExImpl(wxDC *owner, wxWindow *window, WXHDC dc)
                : wxPaintDCImpl( owner )
 {
-    wxCHECK_RET( dc, wxT("wxPaintDCEx requires an existing device context") );
+    wxCHECK_RET( dc, "wxPaintDCEx requires an existing device context" );
 
     m_window = window;
     m_hDC = dc;

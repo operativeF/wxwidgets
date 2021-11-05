@@ -150,7 +150,7 @@ static unsigned GetBasicFlags(const wxChar* filename)
         // this error is not fatal, so don't show a message to the user about
         // it, otherwise it would appear every time a generic directory picker
         // dialog is used and there is a connected network drive
-        wxLogLastError(wxT("SHGetFileInfo"));
+        wxLogLastError("SHGetFileInfo");
     }
     else
     {
@@ -389,12 +389,12 @@ std::vector<wxString> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned
     ::InterlockedExchange(&s_cancelSearch, FALSE);     // reset
 
 #if wxUSE_DYNLIB_CLASS
-    if (!s_mprLib.IsLoaded() && s_mprLib.Load(wxT("mpr.dll")))
+    if (!s_mprLib.IsLoaded() && s_mprLib.Load("mpr.dll"))
     {
-        s_pWNetOpenEnum = (WNetOpenEnumPtr)s_mprLib.GetSymbol(wxT("WNetOpenEnumW"));
-        s_pWNetEnumResource = (WNetEnumResourcePtr)s_mprLib.GetSymbol(wxT("WNetEnumResourceW"));
+        s_pWNetOpenEnum = (WNetOpenEnumPtr)s_mprLib.GetSymbol("WNetOpenEnumW");
+        s_pWNetEnumResource = (WNetEnumResourcePtr)s_mprLib.GetSymbol("WNetEnumResourceW");
 
-        s_pWNetCloseEnum = (WNetCloseEnumPtr)s_mprLib.GetSymbol(wxT("WNetCloseEnum"));
+        s_pWNetCloseEnum = (WNetCloseEnumPtr)s_mprLib.GetSymbol("WNetCloseEnum");
     }
 #endif
 
@@ -552,7 +552,7 @@ void wxFSVolume::InitIcons()
 wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
 {
     wxCHECK_MSG( type >= 0 && (size_t)type < m_icons.GetCount(), wxNullIcon,
-                 wxT("wxFSIconType::GetIcon(): invalid icon index") );
+                 "wxFSIconType::GetIcon(): invalid icon index" );
 
 #ifdef __WXMSW__
     // Load on demand.
@@ -578,7 +578,7 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
             break;
 
         case wxFS_VOL_ICO_MAX:
-            wxFAIL_MSG(wxT("wxFS_VOL_ICO_MAX is not valid icon type"));
+            wxFAIL_MSG("wxFS_VOL_ICO_MAX is not valid icon type");
             break;
         }
 
@@ -596,7 +596,7 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
 
     return m_icons[type];
 #else
-    wxFAIL_MSG(wxS("Can't convert HICON to wxIcon in this port."));
+    wxFAIL_MSG("Can't convert HICON to wxIcon in this port.");
     return wxNullIcon;
 #endif
 } // GetIcon

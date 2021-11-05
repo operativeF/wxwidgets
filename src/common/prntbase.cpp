@@ -2007,7 +2007,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
 
     if (!m_previewCanvas)
     {
-        wxFAIL_MSG(wxT("wxPrintPreviewBase::RenderPage: must use wxPrintPreviewBase::SetCanvas to let me know about the canvas!"));
+        wxFAIL_MSG("wxPrintPreviewBase::RenderPage: must use wxPrintPreviewBase::SetCanvas to let me know about the canvas!");
         return false;
     }
 

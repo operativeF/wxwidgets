@@ -48,7 +48,7 @@ public:
     void Resume()
     {
         wxASSERT_MSG( m_pauseCount > 0,
-                      wxT("Resuming stop watch which is not paused") );
+                      "Resuming stop watch which is not paused" );
 
         if ( --m_pauseCount == 0 )
         {

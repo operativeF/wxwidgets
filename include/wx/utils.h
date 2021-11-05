@@ -142,7 +142,7 @@ wxMouseState wxGetMouseState();
  *
  * Examples:
  *  long val = wxPlatform::If(wxMac, 1).ElseIf(wxGTK, 2).ElseIf(stPDA, 5).Else(3);
- *  wxString strVal = wxPlatform::If(wxMac, wxT("Mac")).ElseIf(wxMSW, wxT("MSW")).Else(wxT("Other"));
+ *  wxString strVal = wxPlatform::If(wxMac, "Mac")).ElseIf(wxMSW, wxT("MSW")).Else(wxT("Other");
  *
  * A custom platform symbol:
  *
@@ -249,7 +249,7 @@ inline int wxHexToDec(const char* buf)
     else
         firstDigit = -1;
 
-    wxCHECK_MSG( firstDigit >= 0 && firstDigit <= 15, -1, wxS("Invalid argument") );
+    wxCHECK_MSG( firstDigit >= 0 && firstDigit <= 15, -1, "Invalid argument" );
 
     if (buf[1] >= 'A')
         secondDigit = buf[1] - 'A' + 10;
@@ -258,7 +258,7 @@ inline int wxHexToDec(const char* buf)
     else
         secondDigit = -1;
 
-    wxCHECK_MSG( secondDigit >= 0 && secondDigit <= 15, -1, wxS("Invalid argument") );
+    wxCHECK_MSG( secondDigit >= 0 && secondDigit <= 15, -1, "Invalid argument" );
 
     return firstDigit * 16 + secondDigit;
 }

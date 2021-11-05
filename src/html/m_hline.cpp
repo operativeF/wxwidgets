@@ -51,8 +51,8 @@ void wxHtmlLineCell::Draw(wxDC& dc, int x, int y,
                           int WXUNUSED(view_y1), int WXUNUSED(view_y2),
                           wxHtmlRenderingInfo& WXUNUSED(info))
 {
-    wxBrush mybrush(wxT("GREY"), (m_HasShading) ? wxBrushStyle::Transparent : wxBrushStyle::Solid);
-    wxPen mypen(wxT("GREY"), 1, wxPenStyle::Solid);
+    wxBrush mybrush("GREY", (m_HasShading) ? wxBrushStyle::Transparent : wxBrushStyle::Solid);
+    wxPen mypen("GREY", 1, wxPenStyle::Solid);
     dc.SetBrush(mybrush);
     dc.SetPen(mypen);
     dc.DrawRectangle(x + m_PosX, y + m_PosY, m_Width, m_Height);
@@ -83,8 +83,8 @@ TAG_HANDLER_BEGIN(HR, "HR")
         c->SetAlign(tag);
         c->SetWidthFloat(tag);
         sz = 1;
-        tag.GetParamAsInt(wxT("SIZE"), &sz);
-        HasShading = !(tag.HasParam(wxT("NOSHADE")));
+        tag.GetParamAsInt("SIZE", &sz);
+        HasShading = !(tag.HasParam("NOSHADE"));
         c->InsertCell(new wxHtmlLineCell((int)((double)sz * m_WParser->GetPixelScale()), HasShading));
 
         m_WParser->CloseContainer();

@@ -59,7 +59,7 @@ void wxBeginBusyCursor(const wxCursor *cursor)
 void wxEndBusyCursor()
 {
     wxCHECK_RET( gs_wxBusyCursorCount > 0,
-                 wxT("no matching wxBeginBusyCursor() for wxEndBusyCursor()") );
+                 "no matching wxBeginBusyCursor() for wxEndBusyCursor()" );
 
     if ( --gs_wxBusyCursorCount == 0 )
     {
@@ -250,7 +250,7 @@ extern bool wxEnableFileNameAutoComplete(HWND hwnd)
     HRESULT hr = ::SHAutoComplete(hwnd, 0x10 /* SHACF_FILESYS_ONLY */);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxT("SHAutoComplete"), hr);
+        wxLogApiError("SHAutoComplete", hr);
         return false;
     }
 

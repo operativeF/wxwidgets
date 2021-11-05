@@ -273,8 +273,8 @@ void wxObjectWriter::WriteOneProperty( const wxObject *obj, const wxClassInfo* c
                         }
                         else
                         {
-                            wxLogError( wxT("Streaming delegates for not already ")
-                                        wxT("streamed objects not yet supported") );
+                            wxLogError( "Streaming delegates for not already "
+                                        "streamed objects not yet supported" );
                         }
                     }
                 }

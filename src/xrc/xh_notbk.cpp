@@ -50,12 +50,12 @@ wxNotebookXmlHandler::wxNotebookXmlHandler()
 
 wxObject *wxNotebookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("notebookpage"))
+    if (m_class == "notebookpage")
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -67,11 +67,11 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                m_notebook->AddPage(wnd, GetText(wxT("label")),
-                                         GetBool(wxT("selected")));
-                if ( HasParam(wxT("bitmap")) )
+                m_notebook->AddPage(wnd, GetText("label"),
+                                         GetBool("selected"));
+                if ( HasParam("bitmap") )
                 {
-                    wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+                    wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
                     wxImageList *imgList = m_notebook->GetImageList();
                     if ( imgList == nullptr )
                     {
@@ -81,12 +81,12 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
                     int imgIndex = imgList->Add(bmp);
                     m_notebook->SetPageImage(m_notebook->GetPageCount()-1, imgIndex );
                 }
-                else if ( HasParam(wxT("image")) )
+                else if ( HasParam("image") )
                 {
                     if ( m_notebook->GetImageList() )
                     {
                         m_notebook->SetPageImage(m_notebook->GetPageCount()-1,
-                                                 GetLong(wxT("image")) );
+                                                 GetLong("image") );
                     }
                     else // image without image list?
                     {
@@ -115,7 +115,7 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
         nb->Create(m_parentAsWindow,
                    GetID(),
                    GetPosition(), GetSize(),
-                   GetStyle(wxT("style")),
+                   GetStyle("style"),
                    GetName());
 
         wxImageList *imagelist = GetImageList();
@@ -138,8 +138,8 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
 
 bool wxNotebookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxNotebook"))) ||
-            (m_isInside && IsOfClass(node, wxT("notebookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxNotebook")) ||
+            (m_isInside && IsOfClass(node, "notebookpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_NOTEBOOK

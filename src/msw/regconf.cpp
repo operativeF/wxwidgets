@@ -25,7 +25,7 @@
 // ----------------------------------------------------------------------------
 
 // we put our data in HKLM\SOFTWARE_KEY\appname
-#define SOFTWARE_KEY    wxString(wxT("Software\\"))
+#define SOFTWARE_KEY    wxString("Software\\")
 
 // ----------------------------------------------------------------------------
 // global functions
@@ -110,7 +110,7 @@ wxRegConfig::wxRegConfig(const wxString& appName,
 
     if ( appName.empty() )
     {
-      wxCHECK_RET( wxTheApp, wxT("No application name in wxRegConfig ctor!") );
+      wxCHECK_RET( wxTheApp, "No application name in wxRegConfig ctor!" );
       strRoot << wxTheApp->GetAppName();
     }
     else
@@ -296,7 +296,7 @@ void wxRegConfig::SetPath(const wxString& strPath)
 
                         // we must have found a slash one way or another!
                         wxASSERT_MSG( *dst == wxCONFIG_PATH_SEPARATOR,
-                                      wxT("error in wxRegConfig::SetPath") );
+                                      "error in wxRegConfig::SetPath" );
 
                         // stay at the same position
                         dst--;
@@ -568,7 +568,7 @@ wxConfigBase::EntryType wxRegConfig::GetEntryType(const wxString& key) const
 template <typename T>
 bool wxRegConfig::DoReadValue(const wxString& key, T* pValue) const
 {
-    wxCHECK_MSG( pValue, false, wxT("wxRegConfig::Read(): NULL param") );
+    wxCHECK_MSG( pValue, false, "wxRegConfig::Read(): NULL param" );
 
   wxConfigPathChanger path(this, key);
 
@@ -579,7 +579,7 @@ bool wxRegConfig::DoReadValue(const wxString& key, T* pValue) const
   if ( IsImmutable(path.Name()) ) {
     if ( TryGetValue(m_keyGlobal, path.Name(), pValue) ) {
       if ( m_keyLocal.Exists() && LocalKey().HasValue(path.Name()) ) {
-        wxLogWarning(wxT("User value for immutable key '%s' ignored."),
+        wxLogWarning("User value for immutable key '%s' ignored.",
                    path.Name().c_str());
       }
 
@@ -624,7 +624,7 @@ bool wxRegConfig::DoWriteValue(const wxString& key, const T& value)
   wxConfigPathChanger path(this, key);
 
   if ( IsImmutable(path.Name()) ) {
-    wxLogError(wxT("Can't change immutable entry '%s'."), path.Name().c_str());
+    wxLogError("Can't change immutable entry '%s'.", path.Name().c_str());
     return false;
   }
 
@@ -697,7 +697,7 @@ bool wxRegConfig::DeleteEntry(const wxString& value, bool bGroupIfEmptyAlso)
 
     if ( bGroupIfEmptyAlso && m_keyLocal.IsEmpty() ) {
       wxString strKey = GetPath().AfterLast(wxCONFIG_PATH_SEPARATOR);
-      SetPath(wxT(".."));  // changes m_keyLocal
+      SetPath("..");  // changes m_keyLocal
       return LocalKey().DeleteKey(strKey);
     }
   }

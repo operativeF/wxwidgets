@@ -60,7 +60,7 @@ wxBEGIN_PROPERTIES_TABLE(wxRadioButton)
     wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
                 "Helpstring", "group")
     wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group") )
+                "Helpstring", "group" )
     wxPROPERTY( Value,bool, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
                 "Helpstring", "group")
     wxPROPERTY_FLAGS( WindowStyle, wxRadioButtonStyle, long, SetWindowStyleFlag, \
@@ -113,7 +113,7 @@ wxRadioButton* wxRadioButtonBase::GetPreviousInGroup() const
 
     const wxWindowList& siblings = GetParent()->GetChildren();
     wxWindowList::compatibility_iterator nodeThis = siblings.Find(this);
-    wxCHECK_MSG( nodeThis, nullptr, wxT("radio button not a child of its parent?") );
+    wxCHECK_MSG( nodeThis, nullptr, "radio button not a child of its parent?" );
 
     // Iterate over all previous siblings until we find the next radio button
     wxWindowList::compatibility_iterator nodeBefore = nodeThis->GetPrevious();
@@ -143,7 +143,7 @@ wxRadioButton* wxRadioButtonBase::GetNextInGroup() const
 
     const wxWindowList& siblings = GetParent()->GetChildren();
     wxWindowList::compatibility_iterator nodeThis = siblings.Find(this);
-    wxCHECK_MSG( nodeThis, nullptr, wxT("radio button not a child of its parent?") );
+    wxCHECK_MSG( nodeThis, nullptr, "radio button not a child of its parent?" );
 
     // Iterate over all previous siblings until we find the next radio button
     wxWindowList::compatibility_iterator nodeNext = nodeThis->GetNext();

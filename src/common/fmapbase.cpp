@@ -94,7 +94,7 @@ wxFontMapperBase *wxFontMapperBase::Get()
             sm_instance = traits->CreateFontMapper();
 
             wxASSERT_MSG( sm_instance,
-                            wxT("wxAppTraits::CreateFontMapper() failed") );
+                            "wxAppTraits::CreateFontMapper() failed" );
         }
 
         if ( !sm_instance )
@@ -149,7 +149,7 @@ const std::string& wxFontMapperBase::GetDefaultConfigPath()
 void wxFontMapperBase::SetConfigPath(const std::string& prefix)
 {
     wxCHECK_RET( !prefix.empty() && prefix[0] == wxCONFIG_PATH_SEPARATOR,
-                 wxT("an absolute path should be given to wxFontMapper::SetConfigPath()") );
+                 "an absolute path should be given to wxFontMapper::SetConfigPath()" );
 
     m_configRootPath = prefix;
 }
@@ -210,7 +210,7 @@ bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString* pathOld)
 
     // FIXME: Stupid.
     //wxASSERT_MSG( pathNew.empty() || (pathNew.Front() != wxCONFIG_PATH_SEPARATOR),
-    //              wxT("should be a relative path") );
+    //              "should be a relative path" );
 
     path += pathNew;
 
@@ -283,7 +283,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
             }
             else
             {
-                wxLogDebug(wxT("corrupted config data: invalid encoding %ld for charset '%s' ignored"),
+                wxLogDebug("corrupted config data: invalid encoding %ld for charset '%s' ignored",
                            value, charset.c_str());
             }
         }
@@ -349,7 +349,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
                 }
             }
         }
-        else if ( cs.substr(0, 4) == wxT("8859") )
+        else if ( cs.substr(0, 4) == "8859" )
         {
             const char* p = cs.data();
 

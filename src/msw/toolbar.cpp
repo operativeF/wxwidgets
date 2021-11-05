@@ -173,7 +173,7 @@ public:
     void SetLabel(const std::string& label) override
     {
         wxASSERT_MSG( IsControl() || IsButton(),
-           wxS("Label can be set for control or button tool only") );
+           "Label can be set for control or button tool only" );
 
         if ( label == m_label )
             return;
@@ -215,7 +215,7 @@ public:
     wxStaticText* GetStaticText()
     {
         wxASSERT_MSG( IsControl(),
-                      wxT("only makes sense for embedded control tools") );
+                      "only makes sense for embedded control tools" );
 
         return m_staticText;
     }
@@ -292,7 +292,7 @@ static RECT wxGetTBItemRect(HWND hwnd, int index, int id = wxID_NONE)
             }
 
             if ( reportError )
-                wxLogLastError(wxT("TB_GETITEMRECT"));
+                wxLogLastError("TB_GETITEMRECT");
         }
 
         ::SetRectEmpty(&r);
@@ -458,7 +458,7 @@ void wxToolBar::Recreate()
     if ( !MSWCreateToolbar(pos, size) )
     {
         // what can we do?
-        wxFAIL_MSG( wxT("recreating the toolbar failed") );
+        wxFAIL_MSG( "recreating the toolbar failed" );
 
         return;
     }
@@ -698,7 +698,7 @@ bool wxToolBar::DoDeleteTool(size_t pos, wxToolBarToolBase *tool)
     m_nButtons--;
     if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, pos, 0) )
     {
-        wxLogLastError(wxT("TB_DELETEBUTTON"));
+        wxLogLastError("TB_DELETEBUTTON");
 
         return false;
     }
@@ -780,7 +780,7 @@ bool wxToolBar::Realize()
     // the user-specified option overrides anything, but if it wasn't set, only
     // remap the buttons on 8bpp displays as otherwise the bitmaps usually look
     // much worse after remapping
-    static constexpr wxChar remapOption[] = wxT("msw.remap");
+    static constexpr char remapOption[] = "msw.remap";
 
     int remapValue = wxSystemOptions::HasOption(remapOption)
                           ? wxSystemOptions::GetOptionInt(remapOption)
@@ -793,7 +793,7 @@ bool wxToolBar::Realize()
     {
         if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, 0, 0) )
         {
-            wxLogDebug(wxT("TB_DELETEBUTTON failed"));
+            wxLogDebug("TB_DELETEBUTTON failed");
         }
     }
 
@@ -915,7 +915,7 @@ bool wxToolBar::Realize()
                 }
                 else
                 {
-                    wxFAIL_MSG( wxT("invalid tool button bitmap") );
+                    wxFAIL_MSG( "invalid tool button bitmap" );
                 }
 
                 // also deal with disabled bitmap if we want to use them
@@ -1012,7 +1012,7 @@ bool wxToolBar::Realize()
             if ( !::SendMessageW(GetHwnd(), TB_REPLACEBITMAP,
                                 0, (LPARAM) &replaceBitmap) )
             {
-                wxFAIL_MSG(wxT("Could not replace the old bitmap"));
+                wxFAIL_MSG("Could not replace the old bitmap");
             }
 
             ::DeleteObject(oldToolBarBitmap);
@@ -1039,7 +1039,7 @@ bool wxToolBar::Realize()
             if ( ::SendMessageW(GetHwnd(), TB_ADDBITMAP,
                                (WPARAM) nButtons, (LPARAM)&tbAddBitmap) == -1 )
             {
-                wxFAIL_MSG(wxT("Could not add bitmap to toolbar"));
+                wxFAIL_MSG("Could not add bitmap to toolbar");
             }
         }
 
@@ -1179,7 +1179,7 @@ bool wxToolBar::Realize()
                         break;
 
                     default:
-                        wxFAIL_MSG( wxT("unexpected toolbar button kind") );
+                        wxFAIL_MSG( "unexpected toolbar button kind" );
                         button.fsStyle = TBSTYLE_BUTTON;
                         break;
                 }
@@ -1214,7 +1214,7 @@ bool wxToolBar::Realize()
 
     if ( !::SendMessageW(GetHwnd(), TB_ADDBUTTONS, i, (LPARAM)buttons.get()) )
     {
-        wxLogLastError(wxT("TB_ADDBUTTONS"));
+        wxLogLastError("TB_ADDBUTTONS");
     }
 
 
@@ -1428,14 +1428,14 @@ void wxToolBar::UpdateStretchableSpacersSize()
                 if ( !::SendMessageW(GetHwnd(), TB_SETBUTTONINFOW,
                                     toolIndex, (LPARAM)&tbbi) )
                 {
-                    wxLogLastError(wxT("TB_SETBUTTONINFO (separator)"));
+                    wxLogLastError("TB_SETBUTTONINFO (separator)");
                 }
             }
             else // Vertical case, use the workaround.
             {
                 if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, toolIndex, 0) )
                 {
-                    wxLogLastError(wxT("TB_DELETEBUTTON (separator)"));
+                    wxLogLastError("TB_DELETEBUTTON (separator)");
                 }
                 else
                 {
@@ -1449,7 +1449,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
                     if ( !::SendMessageW(GetHwnd(), TB_INSERTBUTTONW,
                                         toolIndex, (LPARAM)&button) )
                     {
-                        wxLogLastError(wxT("TB_INSERTBUTTON (separator)"));
+                        wxLogLastError("TB_INSERTBUTTON (separator)");
                     }
                 }
             }
@@ -1582,7 +1582,7 @@ bool wxToolBar::MSWOnNotify(int WXUNUSED(idCtrl),
         }
 
         const wxToolBarToolBase * const tool = FindById(tbhdr->iItem);
-        wxCHECK_MSG( tool, false, wxT("drop down message for unknown tool") );
+        wxCHECK_MSG( tool, false, "drop down message for unknown tool" );
 
         wxMenu * const menu = tool->GetDropdownMenu();
         if ( !menu )
@@ -1680,7 +1680,7 @@ void wxToolBar::SetRows(int nRows)
             if ( !::SendMessageW(GetHwnd(), TB_SETSTATE,
                                 tool->GetId(), MAKELONG(state, 0)) )
             {
-                wxLogLastError(wxT("TB_SETSTATE (stretchable spacer)"));
+                wxLogLastError("TB_SETSTATE (stretchable spacer)");
             }
         }
     }
@@ -1789,7 +1789,7 @@ void wxToolBar::DoEnableTool(wxToolBarToolBase *tool, bool enable)
 void wxToolBar::DoToggleTool(wxToolBarToolBase *tool,
                              bool WXUNUSED_UNLESS_DEBUG(toggle))
 {
-    wxASSERT_MSG( tool->IsToggled() == toggle, wxT("Inconsistent tool state") );
+    wxASSERT_MSG( tool->IsToggled() == toggle, "Inconsistent tool state" );
 
     ::SendMessageW(GetHwnd(), TB_CHECKBUTTON,
                   (WPARAM)tool->GetId(),
@@ -1800,7 +1800,7 @@ void wxToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(tog
 {
     // VZ: AFAIK, the button has to be created either with TBSTYLE_CHECK or
     //     without, so we really need to delete the button and recreate it here
-    wxFAIL_MSG( wxT("not implemented") );
+    wxFAIL_MSG( "not implemented" );
 }
 
 void wxToolBar::SetToolNormalBitmap( int id, const wxBitmap& bitmap )
@@ -1809,7 +1809,7 @@ void wxToolBar::SetToolNormalBitmap( int id, const wxBitmap& bitmap )
 
     if ( tool )
     {
-        wxCHECK_RET( tool->IsButton(), wxT("Can only set bitmap on button tools."));
+        wxCHECK_RET( tool->IsButton(), "Can only set bitmap on button tools.");
 
         tool->SetNormalBitmap(bitmap);
         Realize();
@@ -1822,7 +1822,7 @@ void wxToolBar::SetToolDisabledBitmap( int id, const wxBitmap& bitmap )
 
     if ( tool )
     {
-        wxCHECK_RET( tool->IsButton(), wxT("Can only set bitmap on button tools."));
+        wxCHECK_RET( tool->IsButton(), "Can only set bitmap on button tools.");
 
         tool->SetDisabledBitmap(bitmap);
         Realize();
@@ -2025,7 +2025,7 @@ bool wxToolBar::HandlePaint(WXWPARAM wParam, WXLPARAM lParam)
         // separators in it
         if ( !::ValidateRgn(GetHwnd(), rgnDummySeps.GetHRGN()) )
         {
-            wxLogLastError(wxT("ValidateRgn()"));
+            wxLogLastError("ValidateRgn()");
         }
     }
 
@@ -2114,7 +2114,7 @@ bool wxToolBar::MSWEraseBgHook(WXHDC hDC)
     POINT ptOldOrg;
     if ( !::SetWindowOrgEx(hdc, 0, 0, &ptOldOrg) )
     {
-        wxLogLastError(wxT("SetWindowOrgEx(tbar-bg-hdc)"));
+        wxLogLastError("SetWindowOrgEx(tbar-bg-hdc)");
         return false;
     }
 
@@ -2181,7 +2181,7 @@ WXHBITMAP wxToolBar::MapBitmap(WXHBITMAP bitmap, int width, int height)
 
     if ( !hdcMem )
     {
-        wxLogLastError(wxT("CreateCompatibleDC"));
+        wxLogLastError("CreateCompatibleDC");
 
         return bitmap;
     }
@@ -2190,7 +2190,7 @@ WXHBITMAP wxToolBar::MapBitmap(WXHBITMAP bitmap, int width, int height)
 
     if ( !bmpInHDC )
     {
-        wxLogLastError(wxT("SelectObject"));
+        wxLogLastError("SelectObject");
 
         return bitmap;
     }

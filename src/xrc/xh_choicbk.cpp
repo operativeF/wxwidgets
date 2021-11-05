@@ -45,12 +45,12 @@ wxChoicebookXmlHandler::wxChoicebookXmlHandler()
 
 wxObject *wxChoicebookXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("choicebookpage"))
+    if (m_class == "choicebookpage")
     {
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
 
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         if (n)
         {
@@ -62,11 +62,11 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
 
             if (wnd)
             {
-                m_choicebook->AddPage(wnd, GetText(wxT("label")),
-                                           GetBool(wxT("selected")));
-                if ( HasParam(wxT("bitmap")) )
+                m_choicebook->AddPage(wnd, GetText("label"),
+                                           GetBool("selected"));
+                if ( HasParam("bitmap") )
                 {
-                    wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
+                    wxBitmap bmp = GetBitmap("bitmap", wxART_OTHER);
                     wxImageList *imgList = m_choicebook->GetImageList();
                     if ( imgList == nullptr )
                     {
@@ -76,12 +76,12 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
                     int imgIndex = imgList->Add(bmp);
                     m_choicebook->SetPageImage(m_choicebook->GetPageCount()-1, imgIndex );
                 }
-                else if ( HasParam(wxT("image")) )
+                else if ( HasParam("image") )
                 {
                     if ( m_choicebook->GetImageList() )
                     {
                         m_choicebook->SetPageImage(m_choicebook->GetPageCount()-1,
-                                                   GetLong(wxT("image")) );
+                                                   GetLong("image") );
                     }
                     else // image without image list?
                     {
@@ -110,7 +110,7 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
         nb->Create(m_parentAsWindow,
                    GetID(),
                    GetPosition(), GetSize(),
-                   GetStyle(wxT("style")),
+                   GetStyle("style"),
                    GetName());
 
         wxImageList *imagelist = GetImageList();
@@ -131,8 +131,8 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
 
 bool wxChoicebookXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxChoicebook"))) ||
-            (m_isInside && IsOfClass(node, wxT("choicebookpage"))));
+    return ((!m_isInside && IsOfClass(node, "wxChoicebook")) ||
+            (m_isInside && IsOfClass(node, "choicebookpage")));
 }
 
 #endif // wxUSE_XRC && wxUSE_CHOICEBOOK

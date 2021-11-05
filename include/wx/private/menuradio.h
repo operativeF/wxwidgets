@@ -74,8 +74,7 @@ public:
             }
             else if ( pos <= r.end + 1 )
             {
-                wxASSERT_MSG(!inExistingGroup,
-                    wxS("Item already inserted inside another range"));
+                wxASSERT_MSG(!inExistingGroup, "Item already inserted inside another range");
                 // Item is inserted in the middle of this range or immediately
                 // after it in which case it extends this range so make it span
                 // one more item in any case.
@@ -124,8 +123,7 @@ public:
             }
             else if ( pos <= r.end )
             {
-                wxASSERT_MSG(!wasSplit,
-                    wxS("Item already inserted inside another range"));
+                wxASSERT_MSG(!wasSplit, "Item already inserted inside another range");
                 // Item is inserted inside this range in which case
                 // it breaks the range into two parts: one ending before
                 // the item and one started after it.

@@ -255,7 +255,7 @@ void wxGridCellEditor::Destroy()
 
 void wxGridCellEditor::Show(bool show, wxGridCellAttr *attr)
 {
-    wxASSERT_MSG(m_control, wxT("The wxGridCellEditor must be created first!"));
+    wxASSERT_MSG(m_control, "The wxGridCellEditor must be created first!");
 
     m_control->Show(show);
 
@@ -308,7 +308,7 @@ void wxGridCellEditor::Show(bool show, wxGridCellAttr *attr)
 
 void wxGridCellEditor::SetSize(const wxRect& rect)
 {
-    wxASSERT_MSG(m_control, wxT("The wxGridCellEditor must be created first!"));
+    wxASSERT_MSG(m_control, "The wxGridCellEditor must be created first!");
 
     m_control->SetSize(rect, wxSIZE_ALLOW_MINUS_ONE);
 }
@@ -489,7 +489,7 @@ void wxGridCellTextEditor::SetSize(const wxRect& rectOrig)
 
 void wxGridCellTextEditor::BeginEdit(int row, int col, wxGrid* grid)
 {
-    wxASSERT_MSG(m_control, wxT("The wxGridCellEditor must be created first!"));
+    wxASSERT_MSG(m_control, "The wxGridCellEditor must be created first!");
 
     m_value = grid->GetTable()->GetValue(row, col);
 
@@ -607,7 +607,7 @@ void wxGridCellTextEditor::HandleReturn( wxKeyEvent&
     // wxMotif needs a little extra help...
     size_t pos = (size_t)( Text()->GetInsertionPoint() );
     std::string s( Text()->GetValue() );
-    s = s.Left(pos) + wxT("\n") + s.Mid(pos);
+    s = s.Left(pos) + "\n" + s.Mid(pos);
     Text()->SetValue(s);
     Text()->SetInsertionPoint( pos );
 #else
@@ -635,7 +635,7 @@ void wxGridCellTextEditor::SetParameters(const std::string& params)
         }
         else
         {
-            wxLogDebug( wxT("Invalid wxGridCellTextEditor parameter string '%s' ignored"), params.c_str() );
+            wxLogDebug( "Invalid wxGridCellTextEditor parameter string '%s' ignored", params.c_str() );
         }
     }
 }
@@ -752,7 +752,7 @@ void wxGridCellNumberEditor::BeginEdit(int row, int col, wxGrid* grid)
 
         if ( ec != std::errc() )
         {
-            wxFAIL_MSG( wxT("this cell doesn't have numeric value") );
+            wxFAIL_MSG( "this cell doesn't have numeric value" );
             return;
         }
     }
@@ -931,7 +931,7 @@ void wxGridCellNumberEditor::SetParameters(const std::string& params)
             }
         }
 
-        wxLogDebug(wxT("Invalid wxGridCellNumberEditor parameter string '%s' ignored"), params.c_str());
+        wxLogDebug("Invalid wxGridCellNumberEditor parameter string '%s' ignored", params.c_str());
     }
 }
 
@@ -1070,7 +1070,7 @@ void wxGridCellFloatEditor::StartingKey(wxKeyEvent& event)
     bool is_decimal_point = ( strbuf ==
        wxLocale::GetInfo(wxLOCALE_DECIMAL_POINT, wxLOCALE_CAT_NUMBER) );
 #else
-    bool is_decimal_point = ( strbuf == wxT(".") );
+    bool is_decimal_point = ( strbuf == "." );
 #endif
 
     if ( wxIsdigit(keycode) || keycode == '+' || keycode == '-'
@@ -1345,7 +1345,7 @@ void wxGridCellBoolEditor::Show(bool show, wxGridCellAttr *attr)
 void wxGridCellBoolEditor::BeginEdit(int row, int col, wxGrid* grid)
 {
     wxASSERT_MSG(m_control,
-                 wxT("The wxGridCellEditor must be created first!"));
+                 "The wxGridCellEditor must be created first!");
 
     SetValueFromGrid(row, col, grid);
 
@@ -1379,7 +1379,7 @@ void wxGridCellBoolEditor::ApplyEdit(int row, int col, wxGrid* grid)
 void wxGridCellBoolEditor::Reset()
 {
     wxASSERT_MSG(m_control,
-                 wxT("The wxGridCellEditor must be created first!"));
+                 "The wxGridCellEditor must be created first!");
 
     CBox()->SetValue(m_value);
 }
@@ -1464,7 +1464,7 @@ void wxGridCellBoolEditor::SetValueFromGrid(int row, int col, wxGrid* grid)
             // because we'll still overwrite it with something different and
             // this risks to be very surprising for the user code, let them
             // know about it
-            wxFAIL_MSG( wxT("invalid value for a cell with bool editor!") );
+            wxFAIL_MSG( "invalid value for a cell with bool editor!" );
 
             // Still need to initialize it to something.
             m_value = false;
@@ -1524,7 +1524,7 @@ void wxGridCellChoiceEditor::Create(wxWindow* parent,
 void wxGridCellChoiceEditor::SetSize(const wxRect& rect)
 {
     wxASSERT_MSG(m_control,
-                 wxT("The wxGridCellChoiceEditor must be created first!"));
+                 "The wxGridCellChoiceEditor must be created first!");
 
     // Use normal wxChoice size, except for extending it to fill the cell
     // width: we can't be smaller because this could make the control unusable
@@ -1539,7 +1539,7 @@ void wxGridCellChoiceEditor::SetSize(const wxRect& rect)
 void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
 {
     wxASSERT_MSG(m_control,
-                 wxT("The wxGridCellEditor must be created first!"));
+                 "The wxGridCellEditor must be created first!");
 
     wxGridCellEditorEvtHandler* evtHandler = nullptr;
     if (m_control)
@@ -1687,7 +1687,7 @@ wxGridCellEditor *wxGridCellEnumEditor::Clone() const
 void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
 {
     wxASSERT_MSG(m_control,
-                 wxT("The wxGridCellEnumEditor must be Created first!"));
+                 "The wxGridCellEnumEditor must be Created first!");
 
     wxGridCellEditorEvtHandler* evtHandler = nullptr;
     if (m_control)

@@ -181,7 +181,7 @@ void wxFileHistoryBase::RemoveFileFromHistory(size_t i)
 {
     auto numFiles = m_fileHistory.size();
     wxCHECK_RET( i < numFiles,
-                 wxT("invalid index in wxFileHistoryBase::RemoveFileFromHistory") );
+                 "invalid index in wxFileHistoryBase::RemoveFileFromHistory" );
 
     // delete the element from the array
     m_fileHistory.erase(std::begin(m_fileHistory) + i);
@@ -239,7 +239,7 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
     m_fileHistory.clear();
 
     wxString buf;
-    buf.Printf(wxT("file%d"), 1);
+    buf.Printf("file%d", 1);
 
     wxString historyFile; // TODO: Need to have config read filesystem paths.
     while ((m_fileHistory.size() < m_fileMaxFiles) &&
@@ -247,7 +247,7 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
     {
         m_fileHistory.push_back(fs::path{historyFile.ToStdString()});
 
-        buf.Printf(wxT("file%d"), (int)m_fileHistory.size()+1);
+        buf.Printf("file%d", (int)m_fileHistory.size()+1);
         historyFile.clear();
     }
 
@@ -259,7 +259,7 @@ void wxFileHistoryBase::Save(wxConfigBase& config)
     for (size_t i = 0; i < m_fileMaxFiles; i++)
     {
         wxString buf;
-        buf.Printf(wxT("file%d"), (int)i+1);
+        buf.Printf("file%d", (int)i+1);
         if (i < m_fileHistory.size())
             config.Write(buf, wxString(m_fileHistory[i]));
         else

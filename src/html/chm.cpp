@@ -94,7 +94,7 @@ wxChmTools::wxChmTools(const wxFileName &archive)
 {
     m_chmFileName = archive.GetFullPath();
 
-    wxASSERT_MSG( !m_chmFileName.empty(), wxT("empty archive name") );
+    wxASSERT_MSG( !m_chmFileName.empty(), "empty archive name" );
 
     m_archive = NULL;
     m_decompressor = NULL;
@@ -422,7 +422,7 @@ wxChmInputStream::wxChmInputStream(const wxString& archive,
         // if the file could not be located, but was *.hhp, than we create
         // the content of the hhp-file on the fly and store it for reading
         // by the application
-        if ( m_fileName.Find(wxT(".hhp")) != wxNOT_FOUND && m_simulateHHP )
+        if ( m_fileName.Find(".hhp") != wxNOT_FOUND && m_simulateHHP )
         {
             // now we open an hhp-file
             CreateHHPStream();
@@ -558,7 +558,7 @@ wxChmInputStream::CreateHHPStream()
 
     // Try to open the #SYSTEM-File and create the HHP File out of it
     // see http://bonedaddy.net/pabs3/chmspec/0.1.2/Internal.html#SYSTEM
-    if ( ! m_chm->Contains(wxT("/#SYSTEM")) )
+    if ( ! m_chm->Contains("/#SYSTEM") )
     {
 #ifdef DEBUG
         wxLogDebug("Archive doesn't contain #SYSTEM file");
@@ -567,10 +567,10 @@ wxChmInputStream::CreateHHPStream()
     }
     else
     {
-        file = wxFileName(wxT("/#SYSTEM"));
+        file = wxFileName("/#SYSTEM");
     }
 
-    if ( CreateFileStream(wxT("/#SYSTEM")) )
+    if ( CreateFileStream("/#SYSTEM") )
     {
         // New stream for writing a memory area to simulate the
         // .hhp-file
@@ -665,13 +665,13 @@ wxChmInputStream::CreateHHPStream()
             free (m_content);
 
         // Now add entries which are missing
-        if ( !hhc && m_chm->Contains(wxT("*.hhc")) )
+        if ( !hhc && m_chm->Contains("*.hhc") )
         {
             tmp = "Contents File=*.hhc\r\n";
             out->Write((const void *) tmp, strlen(tmp));
         }
 
-        if ( !hhk && m_chm->Contains(wxT("*.hhk")) )
+        if ( !hhk && m_chm->Contains("*.hhk") )
         {
             tmp = "Index File=*.hhk\r\n";
             out->Write((const void *) tmp, strlen(tmp));
@@ -699,7 +699,7 @@ wxChmInputStream::CreateHHPStream()
 bool wxChmInputStream::CreateFileStream(const wxString& pattern)
 {
     wxFileInputStream * fin;
-    wxString tmpfile = wxFileName::CreateTempFileName(wxT("chmstrm"));
+    wxString tmpfile = wxFileName::CreateTempFileName("chmstrm");
 
     if ( tmpfile.empty() )
     {
@@ -782,8 +782,8 @@ wxChmFSHandler::~wxChmFSHandler()
 bool wxChmFSHandler::CanOpen(const wxString& location)
 {
     wxString p = GetProtocol(location);
-    return (p == wxT("chm")) &&
-           (GetProtocol(GetLeftLocation(location)) == wxT("file"));
+    return (p == "chm") &&
+           (GetProtocol(GetLeftLocation(location)) == "file");
 }
 
 wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
@@ -796,7 +796,7 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 
     int index;
 
-    if ( GetProtocol(left) != wxT("file") )
+    if ( GetProtocol(left) != "file" )
     {
         wxLogError(_("CHM handler currently supports only local files!"));
         return NULL;
@@ -804,21 +804,21 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 
     // Work around javascript
     wxString tmp = wxString(right);
-    if ( tmp.MakeLower().Contains(wxT("javascipt")) && tmp.Contains(wxT("\'")) )
+    if ( tmp.MakeLower().Contains("javascipt")) && tmp.Contains(wxT("\'") )
     {
         right = right.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
     }
 
     // now work on the right location
-    if (right.Contains(wxT("..")))
+    if (right.Contains(".."))
     {
         wxFileName abs(right);
-        abs.MakeAbsolute(wxT("/"));
+        abs.MakeAbsolute("/");
         right = abs.GetFullPath();
     }
 
     // a workaround for absolute links to root
-    if ( (index=right.Index(wxT("//"))) != wxNOT_FOUND )
+    if ( (index=right.Index("//")) != wxNOT_FOUND )
     {
         right=wxString(right.Mid(index+1));
         wxLogWarning(_("Link contained '//', converted to absolute link."));
@@ -834,7 +834,7 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
     if ( s )
     {
         return new wxFSFile(s,
-                            left + wxT("#chm:") + right,
+                            left + "#chm:" + right,
                             {},
                             GetAnchor(location),
                             wxDateTime(leftFilename.GetModificationTime()));
@@ -855,7 +855,7 @@ wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(f
     wxString left = GetLeftLocation(spec);
     wxString nativename = wxFileSystem::URLToFileName(left).GetFullPath();
 
-    if ( GetProtocol(left) != wxT("file") )
+    if ( GetProtocol(left) != "file" )
     {
         wxLogError(_("CHM handler currently supports only local files!"));
         return {};
@@ -868,10 +868,10 @@ wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(f
 
     // now fake around hhp-files which are not existing in projects...
     if (m_found.empty() &&
-        m_pattern.Contains(wxT(".hhp")) &&
-        !m_pattern.Contains(wxT(".hhp.cached")))
+        m_pattern.Contains(".hhp") &&
+        !m_pattern.Contains(".hhp.cached"))
     {
-        m_found.Printf(wxT("%s#chm:%s.hhp"),
+        m_found.Printf("%s#chm:%s.hhp",
                        left.c_str(), m_pattern.BeforeLast(wxT('.')).c_str());
     }
 

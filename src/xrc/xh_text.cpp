@@ -41,7 +41,7 @@ wxTextCtrlXmlHandler::wxTextCtrlXmlHandler()
     // this style doesn't exist since wx 2.9.0 but we still support it (by
     // ignoring it silently) in XRC files to avoid unimportant warnings when
     // using XRC produced by old tools
-    AddStyle(wxT("wxTE_AUTO_SCROLL"), 0);
+    AddStyle("wxTE_AUTO_SCROLL", 0);
 
     AddWindowStyles();
 }
@@ -52,7 +52,7 @@ wxObject *wxTextCtrlXmlHandler::DoCreateResource()
 
     text->Create(m_parentAsWindow,
                  GetID(),
-                 GetText(wxT("value")),
+                 GetText("value"),
                  GetPosition(), GetSize(),
                  GetStyle(),
                  wxDefaultValidator,
@@ -60,12 +60,12 @@ wxObject *wxTextCtrlXmlHandler::DoCreateResource()
 
     SetupWindow(text);
 
-    if (HasParam(wxT("maxlength")))
-        text->SetMaxLength(GetLong(wxT("maxlength")));
-    if (GetBool(wxS("forceupper")))
+    if (HasParam("maxlength"))
+        text->SetMaxLength(GetLong("maxlength"));
+    if (GetBool("forceupper"))
         text->ForceUpper();
 
-    const wxString hint = GetText(wxS("hint"));
+    const wxString hint = GetText("hint");
     if (!hint.empty())
         text->SetHint(hint);
 
@@ -74,7 +74,7 @@ wxObject *wxTextCtrlXmlHandler::DoCreateResource()
 
 bool wxTextCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxTextCtrl"));
+    return IsOfClass(node, "wxTextCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_TEXTCTRL

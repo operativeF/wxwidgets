@@ -289,8 +289,8 @@ bool wxDocument::SaveAs()
         return false;
 
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
-    wxString filter = docTemplate->GetDescription() + wxT(" (") +
-        docTemplate->GetFileFilter() + wxT(")|") +
+    wxString filter = docTemplate->GetDescription() + " (" +
+        docTemplate->GetFileFilter() + ")|" +
         docTemplate->GetFileFilter();
 
     // Now see if there are some other template with identical view and document
@@ -825,7 +825,7 @@ wxView *wxDocTemplate::CreateView(wxDocument *doc, unsigned int flags)
 // that of the template
 bool wxDocTemplate::FileMatchesTemplate(const fs::path& path)
 {
-    wxStringTokenizer parser (GetFileFilter(), wxT(";"));
+    wxStringTokenizer parser (GetFileFilter(), ";");
     std::string anything = "*";
     while (parser.HasMoreTokens())
     {
@@ -1664,12 +1664,12 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                 descrBuf << wxT('|');
 
             descrBuf << templates[i]->GetDescription()
-                << wxT(" (") << templates[i]->GetFileFilter() << wxT(") |")
+                << " (" << templates[i]->GetFileFilter() << ") |"
                 << templates[i]->GetFileFilter();
         }
     }
 #else
-    wxString descrBuf = wxT("*.*");
+    wxString descrBuf = "*.*";
     wxUnusedVar(noTemplates);
 #endif
 
@@ -2127,7 +2127,7 @@ void wxDocPrintout::GetPageInfo(int *minPage, int *maxPage,
 bool wxTransferFileToStream(const std::string& filename, std::ostream& stream)
 {
 #if wxUSE_FFILE
-    wxFFile file(filename, wxT("rb"));
+    wxFFile file(filename, "rb");
 #elif wxUSE_FILE
     wxFile file(filename, wxFile::read);
 #endif
@@ -2154,7 +2154,7 @@ bool wxTransferFileToStream(const std::string& filename, std::ostream& stream)
 bool wxTransferStreamToFile(std::istream& stream, const std::string& filename)
 {
 #if wxUSE_FFILE
-    wxFFile file(filename, wxT("wb"));
+    wxFFile file(filename, "wb");
 #elif wxUSE_FILE
     wxFile file(filename, wxFile::write);
 #endif

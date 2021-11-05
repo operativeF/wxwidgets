@@ -43,14 +43,14 @@ public:
     bool GetOpenCommand(wxString *openCmd,
                         const wxFileType::MessageParameters& params) const
     {
-        *openCmd = GetExpandedCommand(wxS("open"), params);
+        *openCmd = GetExpandedCommand("open", params);
         return !openCmd->empty();
     }
 
     bool GetPrintCommand(wxString *printCmd,
                          const wxFileType::MessageParameters& params) const
     {
-        *printCmd = GetExpandedCommand(wxS("print"), params);
+        *printCmd = GetExpandedCommand("print", params);
         return !printCmd->empty();
     }
 

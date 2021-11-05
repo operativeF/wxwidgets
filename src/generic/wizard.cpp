@@ -356,8 +356,8 @@ void wxWizard::AddStaticLine(wxBoxSizer *mainColumn)
 void wxWizard::AddBackNextPair(wxBoxSizer *buttonRow)
 {
     wxASSERT_MSG( m_btnNext && m_btnPrev,
-                  wxT("You must create the buttons before calling ")
-                  wxT("wxWizard::AddBackNextPair") );
+                  "You must create the buttons before calling "
+                  "wxWizard::AddBackNextPair" );
 
     wxBoxSizer *backNextPair = new wxBoxSizer(wxHORIZONTAL);
     buttonRow->Add(
@@ -483,13 +483,13 @@ void wxWizard::DoCreateControls()
 
 void wxWizard::SetPageSize(const wxSize& size)
 {
-    wxCHECK_RET(!m_started, wxT("wxWizard::SetPageSize after RunWizard"));
+    wxCHECK_RET(!m_started, "wxWizard::SetPageSize after RunWizard");
     m_sizePage = size;
 }
 
 void wxWizard::FitToPage(const wxWizardPage *page)
 {
-    wxCHECK_RET(!m_started, wxT("wxWizard::FitToPage after RunWizard"));
+    wxCHECK_RET(!m_started, "wxWizard::FitToPage after RunWizard");
 
     while ( page )
     {
@@ -503,7 +503,7 @@ void wxWizard::FitToPage(const wxWizardPage *page)
 
 bool wxWizard::ShowPage(wxWizardPage *page, bool goingForward)
 {
-    wxASSERT_MSG( page != m_page, wxT("this is useless") );
+    wxASSERT_MSG( page != m_page, "this is useless" );
 
     wxSizerFlags flags(1);
     flags.Border(wxALL, m_border).Expand();
@@ -674,7 +674,7 @@ void wxWizard::DoWizardLayout()
 
 bool wxWizard::RunWizard(wxWizardPage *firstPage)
 {
-    wxCHECK_MSG( firstPage, false, wxT("can't run empty wizard") );
+    wxCHECK_MSG( firstPage, false, "can't run empty wizard" );
 
     m_firstpage = firstPage;
 
@@ -736,7 +736,7 @@ wxSizer *wxWizard::GetPageAreaSizer() const
 
 void wxWizard::SetBorder(int border)
 {
-    wxCHECK_RET(!m_started, wxT("wxWizard::SetBorder after RunWizard"));
+    wxCHECK_RET(!m_started, "wxWizard::SetBorder after RunWizard");
 
     m_border = border;
 }
@@ -768,9 +768,9 @@ void wxWizard::OnBackOrNext(wxCommandEvent& event)
 {
     wxASSERT_MSG( (event.GetEventObject() == m_btnNext) ||
                   (event.GetEventObject() == m_btnPrev),
-                  wxT("unknown button") );
+                  "unknown button" );
 
-    wxCHECK_RET( m_page, wxT("should have a valid current page") );
+    wxCHECK_RET( m_page, "should have a valid current page" );
 
     // ask the current page first: notice that we do it before calling
     // GetNext/Prev() because the data transferred from the controls of the page
@@ -799,7 +799,7 @@ void wxWizard::OnBackOrNext(wxCommandEvent& event)
     {
         page = m_page->GetPrev();
 
-        wxASSERT_MSG( page, wxT("\"<Back\" button should have been disabled") );
+        wxASSERT_MSG( page, "\"<Back\" button should have been disabled" );
     }
 
     // just pass to the new page (or maybe not - but we don't care here)

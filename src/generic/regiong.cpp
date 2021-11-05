@@ -1785,11 +1785,11 @@ bool REGION::XXorRegion(Region sra, Region srb, Region dr)
 {
     Region tra = XCreateRegion();
 
-    wxCHECK_MSG( tra, false, wxT("region not created") );
+    wxCHECK_MSG( tra, false, "region not created" );
 
     Region trb = XCreateRegion();
 
-    wxCHECK_MSG( trb, false, wxT("region not created") );
+    wxCHECK_MSG( trb, false, "region not created" );
 
     (void) XSubtractRegion(sra,srb,tra);
     (void) XSubtractRegion(srb,sra,trb);

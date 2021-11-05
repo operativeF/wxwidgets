@@ -106,7 +106,7 @@ wxPluginLibrary::~wxPluginLibrary()
 wxPluginLibrary *wxPluginLibrary::RefLib()
 {
     wxCHECK_MSG( m_linkcount > 0, nullptr,
-                 wxT("Library had been already deleted!") );
+                 "Library had been already deleted!" );
 
     ++m_linkcount;
     return this;
@@ -115,7 +115,7 @@ wxPluginLibrary *wxPluginLibrary::RefLib()
 bool wxPluginLibrary::UnrefLib()
 {
     wxASSERT_MSG( m_objcount == 0,
-                  wxT("Library unloaded before all objects were destroyed") );
+                  "Library unloaded before all objects were destroyed" );
 
     if ( m_linkcount == 0 || --m_linkcount == 0 )
     {
@@ -178,7 +178,7 @@ void wxPluginLibrary::RegisterModules()
     // though, as there is currently no way to Unregister it without it.
 
     wxASSERT_MSG( m_linkcount == 1,
-                  wxT("RegisterModules should only be called for the first load") );
+                  "RegisterModules should only be called for the first load" );
 
     if ( m_ourFirst )
     {
@@ -188,7 +188,7 @@ void wxPluginLibrary::RegisterModules()
             {
                 wxModule *m = wxDynamicCast(info->CreateObject(), wxModule);
 
-                wxASSERT_MSG( m, wxT("wxDynamicCast of wxModule failed") );
+                wxASSERT_MSG( m, "wxDynamicCast of wxModule failed" );
 
                 m_wxmodules.push_back(m);
                 wxModule::RegisterModule(m);
@@ -207,7 +207,7 @@ void wxPluginLibrary::RegisterModules()
     {
         if( !(*it)->Init() )
         {
-            wxLogDebug(wxT("wxModule::Init() failed for wxPluginLibrary"));
+            wxLogDebug("wxModule::Init() failed for wxPluginLibrary");
 
             // XXX: Watch this, a different hash implementation might break it,
             //      a good hash implementation would let us fix it though.
@@ -266,8 +266,8 @@ wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
 
     if ( entry )
     {
-        wxLogTrace(wxT("dll"),
-                   wxT("wxLoadLibrary(%s): already loaded."), realname.c_str());
+        wxLogTrace("dll",
+                   "wxLoadLibrary(%s): already loaded.", realname.c_str());
 
         entry->RefLib();
     }
@@ -279,20 +279,20 @@ wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
         {
             (*ms_manifest)[realname] = entry;
 
-            wxLogTrace(wxT("dll"),
-                       wxT("wxLoadLibrary(%s): loaded ok."), realname.c_str());
+            wxLogTrace("dll",
+                       "wxLoadLibrary(%s): loaded ok.", realname.c_str());
 
         }
         else
         {
-            wxLogTrace(wxT("dll"),
-                       wxT("wxLoadLibrary(%s): failed to load."), realname.c_str());
+            wxLogTrace("dll",
+                       "wxLoadLibrary(%s): failed to load.", realname.c_str());
 
             // we have created entry just above
             if ( !entry->UnrefLib() )
             {
                 // ... so UnrefLib() is supposed to delete it
-                wxFAIL_MSG( wxT("Currently linked library is not loaded?") );
+                wxFAIL_MSG( "Currently linked library is not loaded?" );
             }
 
             entry = nullptr;
@@ -317,13 +317,13 @@ bool wxPluginManager::UnloadLibrary(const wxString& libname)
 
     if ( !entry )
     {
-        wxLogDebug(wxT("Attempt to unload library '%s' which is not loaded."),
+        wxLogDebug("Attempt to unload library '%s' which is not loaded.",
                    libname.c_str());
 
         return false;
     }
 
-    wxLogTrace(wxT("dll"), wxT("UnloadLibrary(%s)"), realname.c_str());
+    wxLogTrace("dll", "UnloadLibrary(%s)", realname.c_str());
 
     if ( !entry->UnrefLib() )
     {
@@ -349,7 +349,7 @@ bool wxPluginManager::Load(const wxString &libname, unsigned int flags)
 
 void wxPluginManager::Unload()
 {
-    wxCHECK_RET( m_entry, wxT("unloading an invalid wxPluginManager?") );
+    wxCHECK_RET( m_entry, "unloading an invalid wxPluginManager?" );
 
     for ( wxDLManifest::iterator i = ms_manifest->begin();
           i != ms_manifest->end();

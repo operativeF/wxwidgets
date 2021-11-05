@@ -37,7 +37,7 @@ using namespace std;
 
 void wxXmlAddContentToNode( wxXmlNode* node, const wxString& data )
 {
-    node->AddChild(new wxXmlNode(wxXML_TEXT_NODE, wxT("value"), data ) );
+    node->AddChild(new wxXmlNode(wxXML_TEXT_NODE, "value", data ) );
 }
 
 wxString wxXmlGetContentFromNode( wxXmlNode *node )
@@ -82,8 +82,8 @@ wxObjectXmlWriter::~wxObjectXmlWriter()
 void wxObjectXmlWriter::DoBeginWriteTopLevelEntry( const wxString &name )
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("entry"));
-    pnode->AddAttribute(wxString(wxT("name")), name);
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "entry");
+    pnode->AddAttribute(wxString("name"), name);
     m_data->m_current->AddChild(pnode);
     m_data->Push( pnode );
 }
@@ -98,9 +98,9 @@ void wxObjectXmlWriter::DoBeginWriteObject(const wxObject *WXUNUSED(object),
                                      int objectID, const wxStringToAnyHashMap &metadata   )
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("object"));
-    pnode->AddAttribute(wxT("class"), wxString(classInfo->wxGetClassName()));
-    pnode->AddAttribute(wxT("id"), wxString::Format( wxT("%d"), objectID ) );
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "object");
+    pnode->AddAttribute("class", wxString(classInfo->wxGetClassName()));
+    pnode->AddAttribute("id"), wxString::Format( wxT("%d", objectID ) );
 
     wxStringToAnyHashMap::const_iterator it, en;
     for( it = metadata.begin(), en = metadata.end(); it != en; ++it )
@@ -127,7 +127,7 @@ void wxObjectXmlWriter::DoWriteSimpleType( const wxAny &value )
 void wxObjectXmlWriter::DoBeginWriteElement()
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("element") );
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "element" );
     m_data->m_current->AddChild(pnode);
     m_data->Push( pnode );
 }
@@ -140,8 +140,8 @@ void wxObjectXmlWriter::DoEndWriteElement()
 void wxObjectXmlWriter::DoBeginWriteProperty(const wxPropertyInfo *pi )
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("prop") );
-    pnode->AddAttribute(wxT("name"), pi->GetName() );
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "prop" );
+    pnode->AddAttribute("name", pi->GetName() );
     m_data->m_current->AddChild(pnode);
     m_data->Push( pnode );
 }
@@ -154,15 +154,15 @@ void wxObjectXmlWriter::DoEndWriteProperty(const wxPropertyInfo *WXUNUSED(propIn
 void wxObjectXmlWriter::DoWriteRepeatedObject( int objectID )
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("object"));
-    pnode->AddAttribute(wxString(wxT("href")), wxString::Format( wxT("%d"), objectID ) );
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "object");
+    pnode->AddAttribute(wxString("href")), wxString::Format( wxT("%d", objectID ) );
     m_data->m_current->AddChild(pnode);
 }
 
 void wxObjectXmlWriter::DoWriteNullObject()
 {
     wxXmlNode *pnode;
-    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("object"));
+    pnode = new wxXmlNode(wxXML_ELEMENT_NODE, "object");
     m_data->m_current->AddChild(pnode);
 }
 
@@ -176,7 +176,7 @@ void wxObjectXmlWriter::DoWriteDelegate( const wxObject *WXUNUSED(object),
     if ( eventSink != NULL && handlerInfo != NULL )
     {
         wxXmlAddContentToNode( m_data->m_current,
-            wxString::Format(wxT("%d.%s"), sinkObjectID, handlerInfo->GetName().c_str()) );
+            wxString::Format("%d.%s", sinkObjectID, handlerInfo->GetName().c_str()) );
     }
 }
 
@@ -193,7 +193,7 @@ and create params are always toplevel class only
 
 int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *callbacks)
 {
-    wxASSERT_MSG( callbacks, wxT("Does not support reading without a Depersistor") );
+    wxASSERT_MSG( callbacks, "Does not support reading without a Depersistor" );
     wxString className;
     wxClassInfo *classInfo;
 
@@ -208,7 +208,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
     if (!children)
     {
         // check for a null object or href
-        if (node->GetAttribute(wxT("href"), &ObjectIdString ) )
+        if (node->GetAttribute("href", &ObjectIdString ) )
         {
             objectID = atoi( ObjectIdString.ToAscii() );
             if ( HasObjectClassInfo( objectID ) )
@@ -221,12 +221,12 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
                 return wxInvalidObjectID;
             }
         }
-        if ( !node->GetAttribute(wxT("id"), &ObjectIdString ) )
+        if ( !node->GetAttribute("id", &ObjectIdString ) )
         {
             return wxNullObjectID;
         }
     }
-    if (!node->GetAttribute(wxT("class"), &className))
+    if (!node->GetAttribute("class", &className))
     {
         // No class name.  Eek. FIXME: error handling
         return wxInvalidObjectID;
@@ -244,7 +244,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
         wxLogError(_("objects cannot have XML Text Nodes") );
         return wxInvalidObjectID;
     }
-    if (!node->GetAttribute(wxT("id"), &ObjectIdString))
+    if (!node->GetAttribute("id", &ObjectIdString))
     {
         wxLogError(_("Objects must have an id attribute") );
         // No object id.  Eek. FIXME: error handling
@@ -267,8 +267,8 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
     wxXmlAttribute *xp = node->GetAttributes();
     while ( xp )
     {
-        if ( xp->GetName() != wxString(wxT("class")) &&
-             xp->GetName() != wxString(wxT("id")) )
+        if ( xp->GetName() != wxString("class") &&
+             xp->GetName() != wxString("id") )
         {
             metadata[xp->GetName()] = wxAny( xp->GetValue() );
         }
@@ -292,7 +292,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
     while( children )
     {
         wxString name;
-        children->GetAttribute( wxT("name"), &name );
+        children->GetAttribute( "name", &name );
         propertyNames.push_back( (const wxChar*)name.c_str() );
         propertyNodes[(const wxChar*)name.c_str()] = children->GetChildren();
         children = children->GetNext();
@@ -394,7 +394,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
                     const wxTypeInfo * elementType = collType->GetElementType();
                     while( prop )
                     {
-                        if ( prop->GetName() != wxT("element") )
+                        if ( prop->GetName() != "element" )
                         {
                             wxLogError( _("A non empty collection must consist of 'element' nodes" ) );
                             break;
@@ -432,7 +432,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
                     // in case we have no node, then the object's streaming out has been vetoed
                     if ( prop )
                     {
-                        if ( prop->GetName() == wxT("object") )
+                        if ( prop->GetName() == "object" )
                         {
                             int valueId = ReadComponent( prop, callbacks );
                             if ( valueId != wxInvalidObjectID )
@@ -520,7 +520,7 @@ int wxObjectXmlReader::ReadObject( const wxString &name, wxObjectReaderCallback 
     while ( iter )
     {
         wxString entryName;
-        if ( iter->GetAttribute(wxT("name"), &entryName) )
+        if ( iter->GetAttribute("name", &entryName) )
         {
             if ( entryName == name )
                 return ReadComponent( iter->GetChildren(), callbacks );

@@ -38,7 +38,7 @@ extern const char *wxDumpFont(const wxFont *font)
     static char buf[256];
 
     wxString s;
-    s.Printf(wxS("%s-%d-%s-%.2f-%d"),
+    s.Printf("%s-%d-%s-%.2f-%d",
              font->GetFaceName(),
              font->GetNumericWeight(),
              font->GetStyle() == wxFontStyle::Normal ? "regular" : "italic",
@@ -88,21 +88,21 @@ wxIMPLEMENT_DYNAMIC_CLASS_WITH_COPY_XTI(wxFont, wxGDIObject, "wx/font.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxFont)
 wxPROPERTY( Size,int, SetPointSize, GetPointSize, 12, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 wxPROPERTY( Family, wxFontFamily , SetFamily, GetFamily, (wxFontFamily)wxDEFAULT, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group")) // wxFontFamily
+           0 /*flags*/, "Helpstring", "group") // wxFontFamily
 wxPROPERTY( Style, wxFontStyle, SetStyle, GetStyle, wxFontStyle::Normal, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group")) // wxFontStyle
+           "Helpstring", "group") // wxFontStyle
 wxPROPERTY( Weight, wxFontWeight, SetWeight, GetWeight, wxFONTWEIGHT_NORMAL, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group")) // wxFontWeight
+           "Helpstring", "group") // wxFontWeight
 wxPROPERTY( Underlined, bool, SetUnderlined, GetUnderlined, false, 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+           "Helpstring", "group")
 wxPROPERTY( Strikethrough, bool, SetStrikethrough, GetStrikethrough, false, 0, \
-                   wxT("Helpstring"), wxT("group"))
+                   "Helpstring", "group")
 wxPROPERTY( Face, wxString, SetFaceName, GetFaceName, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Encoding, wxFontEncoding, SetEncoding, GetEncoding, \
-           wxFONTENCODING_DEFAULT, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           wxFONTENCODING_DEFAULT, 0 /*flags*/, "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxCONSTRUCTOR_6( wxFont, int, Size, wxFontFamily, Family, wxFontStyle, Style, wxFontWeight, Weight, \
@@ -124,7 +124,7 @@ void wxFontBase::SetDefaultEncoding(wxFontEncoding encoding)
     // GetDefaultEncoding() should return something != wxFONTENCODING_DEFAULT
     // and, besides, using this value here doesn't make any sense
     wxCHECK_RET( encoding != wxFONTENCODING_DEFAULT,
-                 wxT("can't set default encoding to wxFONTENCODING_DEFAULT") );
+                 "can't set default encoding to wxFONTENCODING_DEFAULT" );
 
     ms_encodingDefault = encoding;
 }
@@ -354,11 +354,11 @@ wxString wxFontBase::GetNativeFontInfoDesc() const
     if ( fontInfo )
     {
         fontDesc = fontInfo->ToString();
-        wxASSERT_MSG(!fontDesc.empty(), wxT("This should be a non-empty string!"));
+        wxASSERT_MSG(!fontDesc.empty(), "This should be a non-empty string!");
     }
     else
     {
-        wxFAIL_MSG(wxT("Derived class should have created the wxNativeFontInfo!"));
+        wxFAIL_MSG("Derived class should have created the wxNativeFontInfo!");
     }
 
     return fontDesc;
@@ -374,11 +374,11 @@ wxString wxFontBase::GetNativeFontInfoUserDesc() const
     if ( fontInfo )
     {
         fontDesc = fontInfo->ToUserString();
-        wxASSERT_MSG(!fontDesc.empty(), wxT("This should be a non-empty string!"));
+        wxASSERT_MSG(!fontDesc.empty(), "This should be a non-empty string!");
     }
     else
     {
-        wxFAIL_MSG(wxT("Derived class should have created the wxNativeFontInfo!"));
+        wxFAIL_MSG("Derived class should have created the wxNativeFontInfo!");
     }
 
     return fontDesc;
@@ -434,7 +434,7 @@ bool wxFontBase::operator==(const wxFontBase& font) const
 
 wxFontFamily wxFontBase::GetFamily() const
 {
-    wxCHECK_MSG( IsOk(), wxFontFamily::Unknown, wxS("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontFamily::Unknown, "invalid font" );
 
     // Don't return wxFontFamily::Unknown from here because it prevents the code
     // like wxFont(size, wxNORMAL_FONT->GetFamily(), ...) from working (see
@@ -693,7 +693,7 @@ void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
 
     // set the first valid facename we can find on this system
     const wxString validfacename = *wxFontEnumerator::GetFacenames().cbegin();
-    wxLogTrace(wxT("font"), wxT("Falling back to '%s'"), validfacename.c_str());
+    wxLogTrace("font", "Falling back to '%s'", validfacename.c_str());
     SetFaceName(validfacename);
 #else // !wxUSE_FONTENUM
     SetFaceName(facenames[0]);
@@ -726,7 +726,7 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     double d;
     unsigned long version;
 
-    wxStringTokenizer tokenizer(s, wxT(";"));
+    wxStringTokenizer tokenizer(s, ";");
 
     wxString token = tokenizer.GetNextToken();
     if ( !token.ToULong(&version) || version > 1 )
@@ -788,7 +788,7 @@ wxString wxNativeFontInfo::ToString() const
 {
     wxString s;
 
-    s.Printf(wxT("%d;%s;%d;%d;%d;%d;%d;%s;%d"),
+    s.Printf("%d;%s;%d;%d;%d;%d;%d;%s;%d",
              1,                                 // version
              wxString::FromCDouble(GetFractionalPointSize()),
              family,
@@ -923,7 +923,7 @@ wxString wxNativeFontInfo::ToUserString() const
     switch ( GetWeight() )
     {
         default:
-            wxFAIL_MSG( wxT("unknown font weight") );
+            wxFAIL_MSG( "unknown font weight" );
             [[fallthrough]];
 
         case wxFONTWEIGHT_NORMAL:
@@ -969,7 +969,7 @@ wxString wxNativeFontInfo::ToUserString() const
     switch ( GetStyle() )
     {
         default:
-            wxFAIL_MSG( wxT("unknown font style") );
+            wxFAIL_MSG( "unknown font style" );
             [[fallthrough]];
 
         case wxFontStyle::Normal:
@@ -995,7 +995,7 @@ wxString wxNativeFontInfo::ToUserString() const
             // that the different words which compose this facename are
             // not different adjectives or other data but rather all parts
             // of the facename
-            desc << wxT(" '") << face << wxT("'");
+            desc << " '" << face << "'";
         }
         else
             desc << wxT(' ') << face;
@@ -1069,7 +1069,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
     // a single token:
 
     // parse a more or less free form string
-    wxStringTokenizer tokenizer(s, wxT(";, "), wxStringTokenizerMode::StrTok);
+    wxStringTokenizer tokenizer(s, ";, ", wxStringTokenizerMode::StrTok);
 
     wxString face;
     unsigned long size;
@@ -1117,38 +1117,38 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
             face += " " + token;
             continue;
         }
-        if ( token == wxT("underlined") || token == _("underlined") )
+        if ( token == "underlined" || token == _("underlined").ToStdString() )
         {
             SetUnderlined(true);
         }
-        else if ( token == wxT("strikethrough") || token == _("strikethrough") )
+        else if ( token == "strikethrough" || token == _("strikethrough").ToStdString() )
         {
             SetStrikethrough(true);
         }
-        else if ( token == wxT("underlinedstrikethrough") )
+        else if ( token == "underlinedstrikethrough" )
         {
             SetUnderlined(true);
             SetStrikethrough(true);
         }
-        else if ( token == wxS("thin") || token == _("thin") )
+        else if ( token == "thin" || token == _("thin").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_THIN);
             weightfound = true;
         }
-        else if ( token == wxS("extra") || token == wxS("ultra"))
+        else if ( token == "extra" || token == "ultra" )
         {
             extraQualifierFound = true;
         }
-        else if ( token == wxS("semi") || token == wxS("demi") )
+        else if ( token == "semi" || token == "demi" )
         {
             semiQualifierFound = true;
         }
-       else if ( token == wxS("extralight") || token == _("extralight") )
+       else if ( token == "extralight" || token == _("extralight").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_EXTRALIGHT);
             weightfound = true;
         }
-        else if ( token == wxS("light") || token == _("light") )
+        else if ( token == "light" || token == _("light").ToStdString() )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRALIGHT);
@@ -1156,22 +1156,22 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 SetWeight(wxFONTWEIGHT_LIGHT);
             weightfound = true;
         }
-        else if ( token == wxS("normal") || token == _("normal") )
+        else if ( token == "normal" || token == _("normal").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_NORMAL);
             weightfound = true;
         }
-        else if ( token == wxS("medium") || token == _("medium") )
+        else if ( token == "medium" || token == _("medium").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_MEDIUM);
             weightfound = true;
         }
-        else if ( token == wxS("semibold") || token == _("semibold") )
+        else if ( token == "semibold" || token == _("semibold").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_SEMIBOLD);
             weightfound = true;
         }
-        else if ( token == wxS("bold") || token == _("bold") )
+        else if ( token == "bold" || token == _("bold").ToStdString() )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRABOLD);
@@ -1181,17 +1181,17 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 SetWeight(wxFONTWEIGHT_BOLD);
             weightfound = true;
         }
-        else if ( token == wxS("extrabold") || token == _("extrabold") )
+        else if ( token == "extrabold" || token == _("extrabold").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_EXTRABOLD);
             weightfound = true;
         }
-        else if ( token == wxS("semibold") || token == _("semibold") )
+        else if ( token == "semibold" || token == _("semibold").ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_SEMIBOLD);
             weightfound = true;
         }
-        else if ( token == wxS("heavy") || token == _("heavy") )
+        else if ( token == "heavy" || token == _("heavy").ToStdString() )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRAHEAVY);
@@ -1199,12 +1199,12 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 SetWeight(wxFONTWEIGHT_HEAVY);
             weightfound = true;
         }
-        else if ( token == wxS("extraheavy") || token == _("extraheavy") )
+        else if ( token == "extraheavy" || token == _("extraheavy" ).ToStdString() )
         {
             SetWeight(wxFONTWEIGHT_EXTRAHEAVY);
             weightfound = true;
         }
-        else if ( token == wxT("italic") || token == _("italic") )
+        else if ( token == "italic" || token == _("italic").ToStdString() )
         {
             SetStyle(wxFontStyle::Italic);
         }
@@ -1345,7 +1345,7 @@ wxString wxToString(const wxFontBase& font)
 
 bool wxFromString(const wxString& str, wxFontBase *font)
 {
-    wxCHECK_MSG( font, false, wxT("NULL output parameter") );
+    wxCHECK_MSG( font, false, "NULL output parameter" );
 
     if ( str.empty() )
     {

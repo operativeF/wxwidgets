@@ -151,7 +151,7 @@ std::string wxFileTipProvider::GetTip()
 
         // Break if tip isn't a comment, and isn't an empty string
         // (or only stray space characters).
-        if ( !tip.StartsWith(wxT("#")) && !tip.Trim().empty() )
+        if ( !tip.StartsWith("#") && !tip.Trim().empty() )
         {
             break;
         }
@@ -164,7 +164,7 @@ std::string wxFileTipProvider::GetTip()
         //...and strip off the trailing '")'...
         tip = tip.BeforeLast(wxT('\"'));
         // ...and replace escaped quotes
-        tip.Replace(wxT("\\\""), wxT("\""));
+        tip.Replace("\\\"", "\"");
 
         // and translate it as requested
         tip = wxGetTranslation(tip);

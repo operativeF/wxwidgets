@@ -43,32 +43,32 @@ wxObject *wxBitmapButtonXmlHandler::DoCreateResource()
     {
         button->Create(m_parentAsWindow,
                        GetID(),
-                       GetBitmap(wxT("bitmap"), wxART_BUTTON),
+                       GetBitmap("bitmap", wxART_BUTTON),
                        GetPosition(), GetSize(),
-                       GetStyle(wxT("style")),
+                       GetStyle("style"),
                        wxDefaultValidator,
                        GetName());
     }
 
-    if (GetBool(wxT("default"), false))
+    if (GetBool("default", false))
         button->SetDefault();
     SetupWindow(button);
 
-    if (GetParamNode(wxT("selected")))
-        button->SetBitmapSelected(GetBitmap(wxT("selected")));
-    if (GetParamNode(wxT("focus")))
-        button->SetBitmapFocus(GetBitmap(wxT("focus")));
-    if (GetParamNode(wxT("disabled")))
-        button->SetBitmapDisabled(GetBitmap(wxT("disabled")));
-    if (GetParamNode(wxT("hover")))
-        button->SetBitmapHover(GetBitmap(wxT("hover")));
+    if (GetParamNode("selected"))
+        button->SetBitmapSelected(GetBitmap("selected"));
+    if (GetParamNode("focus"))
+        button->SetBitmapFocus(GetBitmap("focus"));
+    if (GetParamNode("disabled"))
+        button->SetBitmapDisabled(GetBitmap("disabled"));
+    if (GetParamNode("hover"))
+        button->SetBitmapHover(GetBitmap("hover"));
 
     return button;
 }
 
 bool wxBitmapButtonXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxBitmapButton"));
+    return IsOfClass(node, "wxBitmapButton");
 }
 
 #endif // wxUSE_XRC && wxUSE_BMPBUTTON

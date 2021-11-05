@@ -576,7 +576,7 @@ public:
                 const std::vector<std::string>& choices,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxS("wxOwnerDrawnComboBox"))
+                const wxString& name = "wxOwnerDrawnComboBox")
     {
         if ( !wxOwnerDrawnComboBox::Create( parent,
                                             id,
@@ -764,7 +764,7 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
     if ( (flags & wxODCB_PAINTING_CONTROL) )
         paintdata.m_choiceItem = -1;
 
-    wxCHECK_RET( pDc, wxS("Invalid DC") );
+    wxCHECK_RET( pDc, "Invalid DC" );
 
     wxDC& dc = *pDc;
     dc.SetBrush(*wxWHITE_BRUSH);

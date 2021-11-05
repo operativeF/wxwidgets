@@ -312,7 +312,7 @@ public:
         {
             if ( !::FreeConsole() )
             {
-                wxLogLastError(wxT("FreeConsole"));
+                wxLogLastError("FreeConsole");
             }
         }
     }
@@ -384,7 +384,7 @@ bool wxConsoleStderr::DoInit()
     if ( hStderr == INVALID_HANDLE_VALUE || !hStderr )
         return false;
 
-    if ( !m_dllKernel32.Load(wxT("kernel32.dll")) )
+    if ( !m_dllKernel32.Load("kernel32.dll") )
         return false;
 
     if ( !::AttachConsole(ATTACH_PARENT_PROCESS) )
@@ -414,7 +414,7 @@ bool wxConsoleStderr::DoInit()
 
     if ( !::GetConsoleScreenBufferInfo(m_hStderr, &csbi) )
     {
-        wxLogLastError(wxT("GetConsoleScreenBufferInfo"));
+        wxLogLastError("GetConsoleScreenBufferInfo");
         return false;
     }
 
@@ -431,7 +431,7 @@ bool wxConsoleStderr::DoInit()
         if ( !::ReadConsoleOutputCharacterW(m_hStderr, buf, WXSIZEOF(buf),
                                             pos, &ret) )
         {
-            wxLogLastError(wxT("ReadConsoleOutputCharacterA"));
+            wxLogLastError("ReadConsoleOutputCharacterA");
             return false;
         }
     } while ( wxStrncmp("    ", buf, WXSIZEOF(buf)) != 0 );
@@ -446,7 +446,7 @@ bool wxConsoleStderr::DoInit()
         if ( !::ReadConsoleOutputCharacterW(m_hStderr, m_data.data(), m_dataLen,
                                             pos, &ret) )
         {
-            wxLogLastError(wxT("ReadConsoleOutputCharacterA"));
+            wxLogLastError("ReadConsoleOutputCharacterA");
             return false;
         }
     }
@@ -457,7 +457,7 @@ bool wxConsoleStderr::DoInit()
 int wxConsoleStderr::GetCommandHistory(wxWxCharBuffer& buf) const
 {
     // these functions are internal and may only be called by cmd.exe
-    static constexpr wxChar CMD_EXE[] = wxT("cmd.exe");
+    static constexpr auto CMD_EXE = L"cmd.exe";
 
     const int len = m_pfnGetConsoleCommandHistoryLength(CMD_EXE);
     if ( len )
@@ -468,7 +468,7 @@ int wxConsoleStderr::GetCommandHistory(wxWxCharBuffer& buf) const
 
         if ( len2 != len )
         {
-            wxFAIL_MSG( wxT("failed getting history?") );
+            wxFAIL_MSG( "failed getting history?" );
         }
     }
 
@@ -477,7 +477,7 @@ int wxConsoleStderr::GetCommandHistory(wxWxCharBuffer& buf) const
 
 bool wxConsoleStderr::IsHistoryUnchanged() const
 {
-    wxASSERT_MSG( m_ok == 1, wxT("shouldn't be called if not initialized") );
+    wxASSERT_MSG( m_ok == 1, "shouldn't be called if not initialized" );
 
     // get (possibly changed) command history
     wxWxCharBuffer history;
@@ -491,13 +491,13 @@ bool wxConsoleStderr::IsHistoryUnchanged() const
 bool wxConsoleStderr::Write(const std::string& text)
 {
     wxASSERT_MSG( m_hStderr != INVALID_HANDLE_VALUE,
-                    wxT("should only be called if Init() returned true") );
+                    "should only be called if Init() returned true" );
 
     // get current position
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     if ( !::GetConsoleScreenBufferInfo(m_hStderr, &csbi) )
     {
-        wxLogLastError(wxT("GetConsoleScreenBufferInfo"));
+        wxLogLastError("GetConsoleScreenBufferInfo");
         return false;
     }
 
@@ -507,7 +507,7 @@ bool wxConsoleStderr::Write(const std::string& text)
 
     if ( !::SetConsoleCursorPosition(m_hStderr, csbi.dwCursorPosition) )
     {
-        wxLogLastError(wxT("SetConsoleCursorPosition"));
+        wxLogLastError("SetConsoleCursorPosition");
         return false;
     }
 
@@ -515,13 +515,13 @@ bool wxConsoleStderr::Write(const std::string& text)
     if ( !::FillConsoleOutputCharacterW(m_hStderr, ' ', m_dataLen,
                                        csbi.dwCursorPosition, &ret) )
     {
-        wxLogLastError(wxT("FillConsoleOutputCharacter"));
+        wxLogLastError("FillConsoleOutputCharacter");
         return false;
     }
 
     if ( !::WriteConsoleW(m_hStderr, boost::nowide::widen(text).c_str(), text.length(), &ret, nullptr) )
     {
-        wxLogLastError(wxT("WriteConsole"));
+        wxLogLastError("WriteConsole");
         return false;
     }
 
@@ -660,7 +660,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
 
     if ( !::RegisterClassW(&wndclass) )
     {
-        wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
+        wxLogLastError(wxString::Format("RegisterClass(%s)",
                        regClass.regname));
         boost::nowide::wstackstring stackRegname(regClass.regname.c_str());
         ::UnregisterClassW(stackRegname.get(), wxGetInstance());
@@ -699,14 +699,14 @@ void wxApp::UnregisterWindowClasses()
         {
             if ( !::UnregisterClassW(boost::nowide::widen(regClass.regname).c_str(), wxGetInstance()) )
             {
-                wxLogLastError(wxString::Format(wxT("UnregisterClass(%s)"),
+                wxLogLastError(wxString::Format("UnregisterClass(%s)",
                                regClass.regname));
             }
         }
 
         if ( !::UnregisterClassW(boost::nowide::widen(regClass.regnameNR).c_str(), wxGetInstance()) )
         {
-            wxLogLastError(wxString::Format(wxT("UnregisterClass(%s)"),
+            wxLogLastError(wxString::Format("UnregisterClass(%s)",
                            regClass.regnameNR));
         }
     }
@@ -838,7 +838,7 @@ int CallDllGetVersion(wxDynamicLibrary& dll)
     HRESULT hr = (*pfnDllGetVersion)(&dvi);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxT("DllGetVersion"), hr);
+        wxLogApiError("DllGetVersion", hr);
 
         return 0;
     }
@@ -866,7 +866,7 @@ int wxApp::GetComCtl32Version()
         // depending on the OS version and the presence of the manifest, it can
         // be either v5 or v6 and instead of trying to guess it just get the
         // handle of the already loaded version
-        wxLoadedDLL dllComCtl32(wxT("comctl32.dll"));
+        wxLoadedDLL dllComCtl32("comctl32.dll");
         if ( !dllComCtl32.IsLoaded() )
         {
             s_verComCtl32 = 0;
@@ -881,7 +881,7 @@ int wxApp::GetComCtl32Version()
         if ( !s_verComCtl32 )
         {
             // InitCommonControlsEx is unique to 4.70 and later
-            void *pfn = dllComCtl32.GetSymbol(wxT("InitCommonControlsEx"));
+            void *pfn = dllComCtl32.GetSymbol("InitCommonControlsEx");
             if ( !pfn )
             {
                 // not found, must be 4.00
@@ -891,7 +891,7 @@ int wxApp::GetComCtl32Version()
             {
                 // many symbols appeared in comctl32 4.71, could use any of
                 // them except may be DllInstall()
-                pfn = dllComCtl32.GetSymbol(wxT("InitializeFlatSB"));
+                pfn = dllComCtl32.GetSymbol("InitializeFlatSB");
                 if ( !pfn )
                 {
                     // not found, must be 4.70
@@ -936,7 +936,7 @@ bool wxApp::OnExceptionInMainLoop()
                 L"An unhandled exception occurred. Press \"Abort\" to \
 terminate the program,\r\n\
 \"Retry\" to exit the program normally and \"Ignore\" to try to continue.",
-                wxT("Unhandled exception"),
+                L"Unhandled exception",
                 MB_ABORTRETRYIGNORE |
                 MB_ICONERROR|
                 MB_TASKMODAL
@@ -947,7 +947,7 @@ terminate the program,\r\n\
             throw;
 
         default:
-            wxFAIL_MSG( wxT("unexpected MessageBox() return code") );
+            wxFAIL_MSG( "unexpected MessageBox() return code" );
             [[fallthrough]];
 
         case IDRETRY:

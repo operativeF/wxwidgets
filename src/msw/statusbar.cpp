@@ -64,7 +64,7 @@ DWORD wxStatusBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // show size grip if this is the status bar of a non-resizable TLW so turn
     // it off in such case
     wxWindow * const parent = GetParent();
-    wxCHECK_MSG( parent, msStyle, wxS("Status bar must have a parent") );
+    wxCHECK_MSG( parent, msStyle, "Status bar must have a parent" );
     if ( parent->IsTopLevel() && !parent->HasFlag(wxRESIZE_BORDER) )
         style &= ~wxSTB_SIZEGRIP;
 

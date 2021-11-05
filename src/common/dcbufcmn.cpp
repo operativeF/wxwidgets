@@ -52,7 +52,7 @@ public:
     {
         if ( buffer == ms_buffer )
         {
-            wxASSERT_MSG( ms_usingSharedBuffer, wxT("shared buffer already released") );
+            wxASSERT_MSG( ms_usingSharedBuffer, "shared buffer already released" );
             ms_usingSharedBuffer = false;
         }
         else
@@ -119,8 +119,8 @@ void wxBufferedDC::UseBuffer(wxCoord w, wxCoord h)
 
 void wxBufferedDC::UnMask()
 {
-    wxCHECK_RET( m_dc, wxT("no underlying wxDC?") );
-    wxASSERT_MSG( m_buffer && m_buffer->IsOk(), wxT("invalid backing store") );
+    wxCHECK_RET( m_dc, "no underlying wxDC?" );
+    wxASSERT_MSG( m_buffer && m_buffer->IsOk(), "invalid backing store" );
 
     wxPoint DOrigin;
 

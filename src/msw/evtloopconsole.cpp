@@ -25,13 +25,13 @@ wxMSWEventLoopBase::wxMSWEventLoopBase()
 {
     // Create initially not signalled auto-reset event object.
     if ( !m_heventWake )
-        wxLogLastError(wxS("CreateEvent(wake)"));
+        wxLogLastError("CreateEvent(wake)");
 }
 
 wxMSWEventLoopBase::~wxMSWEventLoopBase()
 {
     if ( m_heventWake && !::CloseHandle(m_heventWake) )
-        wxLogLastError(wxS("CloseHandle(wake)"));
+        wxLogLastError("CloseHandle(wake)");
 }
 
 // ----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ bool wxMSWEventLoopBase::Pending() const
 void wxMSWEventLoopBase::WakeUp()
 {
     if ( !::SetEvent(m_heventWake) )
-        wxLogLastError(wxS("SetEvent(wake)"));
+        wxLogLastError("SetEvent(wake)");
 }
 
 bool wxMSWEventLoopBase::MSWIsWakeUpRequested()

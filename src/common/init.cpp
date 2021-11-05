@@ -53,7 +53,7 @@ public:
     wxDummyConsoleApp(const wxDummyConsoleApp&) = delete;
 	wxDummyConsoleApp& operator=(const wxDummyConsoleApp&) = delete;
 
-    int OnRun() override { wxFAIL_MSG( wxT("unreachable code") ); return 0; }
+    int OnRun() override { wxFAIL_MSG( "unreachable code" ); return 0; }
     virtual bool DoYield(bool, long) { return true; }
 };
 

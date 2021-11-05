@@ -78,13 +78,13 @@ template<> void wxCollectionToVariantArray( wxNotebookPageInfoList const &theLis
 
 wxBEGIN_PROPERTIES_TABLE(wxNotebookPageInfo)
 wxREADONLY_PROPERTY( Page, wxNotebookPage*, GetPage, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                    0 /*flags*/, "Helpstring", "group")
 wxREADONLY_PROPERTY( Text, wxString, GetText, wxString(), 0 /*flags*/, \
-                    wxT("Helpstring"), wxT("group"))
+                    "Helpstring", "group")
 wxREADONLY_PROPERTY( Selected, bool, GetSelected, false, 0 /*flags*/, \
-                    wxT("Helpstring"), wxT("group") )
+                    "Helpstring", "group" )
 wxREADONLY_PROPERTY( ImageId, int, GetImageId, -1, 0 /*flags*/, \
-                    wxT("Helpstring"), wxT("group"))
+                    "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxNotebookPageInfo)
@@ -122,11 +122,11 @@ wxEVENT_PROPERTY( PageChanging, wxEVT_NOTEBOOK_PAGE_CHANGING, wxNotebookEvent )
 wxEVENT_PROPERTY( PageChanged, wxEVT_NOTEBOOK_PAGE_CHANGED, wxNotebookEvent )
 
 wxPROPERTY_COLLECTION( PageInfos, wxNotebookPageInfoList, wxNotebookPageInfo*, \
-                      AddPageInfo, GetPageInfos, 0 /*flags*/, wxT("Helpstring"), \
-                      wxT("group"))
+                      AddPageInfo, GetPageInfos, 0 /*flags*/, "Helpstring", \
+                      "group")
 wxPROPERTY_FLAGS( WindowStyle, wxNotebookStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxNotebook)

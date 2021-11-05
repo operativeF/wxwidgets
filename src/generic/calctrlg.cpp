@@ -167,11 +167,11 @@ bool wxGenericCalendarCtrl::Create(wxWindow *parent,
     if ( !HasFlag(wxCAL_SEQUENTIAL_MONTH_SELECTION) )
     {
         CreateYearSpinCtrl();
-        m_staticYear = new wxStaticText(GetParent(), wxID_ANY, m_date.Format(wxT("%Y")),
+        m_staticYear = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%Y"),
                                         wxDefaultPosition, wxDefaultSize,
                                         wxALIGN_CENTRE);
         CreateMonthComboBox();
-        m_staticMonth = new wxStaticText(GetParent(), wxID_ANY, m_date.Format(wxT("%B")),
+        m_staticMonth = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%B"),
                                          wxDefaultPosition, wxDefaultSize,
                                          wxALIGN_CENTRE);
     }
@@ -215,7 +215,7 @@ void wxGenericCalendarCtrl::SetWindowStyleFlag(unsigned int style)
     // created/shown/hidden accordingly
     wxASSERT_MSG( (style & wxCAL_SEQUENTIAL_MONTH_SELECTION) ==
                     (m_windowStyle & wxCAL_SEQUENTIAL_MONTH_SELECTION),
-                  wxT("wxCAL_SEQUENTIAL_MONTH_SELECTION can't be changed after creation") );
+                  "wxCAL_SEQUENTIAL_MONTH_SELECTION can't be changed after creation" );
 
     wxASSERT_MSG( !((style & wxCAL_SUNDAY_FIRST) &&
                    (style & wxCAL_MONDAY_FIRST)),
@@ -256,7 +256,7 @@ void wxGenericCalendarCtrl::CreateMonthComboBox()
 void wxGenericCalendarCtrl::CreateYearSpinCtrl()
 {
     m_spinYear = new wxSpinCtrl(GetParent(), wxID_ANY,
-                                GetDate().Format(wxT("%Y")),
+                                GetDate().Format("%Y"),
                                 wxDefaultPosition,
                                 wxDefaultSize,
                                 wxSP_ARROW_KEYS | wxCLIP_SIBLINGS,
@@ -435,7 +435,7 @@ bool wxGenericCalendarCtrl::SetDate(const wxDateTime& date)
                     if ( AllowYearChange() )
                     {
                         if ( !m_userChangedYear )
-                            m_spinYear->SetValue(m_date.Format(wxT("%Y")));
+                            m_spinYear->SetValue(m_date.Format("%Y"));
                     }
                 }
 
@@ -792,7 +792,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         // Get extent of month-name + year
         wxCoord monthw, monthh;
-        std::string headertext = m_date.Format(wxT("%B %Y"));
+        std::string headertext = m_date.Format("%B %Y");
         dc.GetTextExtent(headertext, &monthw, &monthh);
 
         // draw month-name centered above weekdays
@@ -1023,7 +1023,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                             break;
 
                         default:
-                            wxFAIL_MSG(wxT("unknown border type"));
+                            wxFAIL_MSG("unknown border type");
                     }
                 }
 
@@ -1360,7 +1360,7 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
             break;
 
         default:
-            wxFAIL_MSG(wxT("unknown hittest code"));
+            wxFAIL_MSG("unknown hittest code");
             [[fallthrough]];
 
         case wxCalendarHitTestResult::Nowhere:
@@ -1679,7 +1679,7 @@ void wxGenericCalendarCtrl::OnChar(wxKeyEvent& event)
 
 void wxGenericCalendarCtrl::SetHoliday(size_t day)
 {
-    wxCHECK_RET( day > 0 && day < 32, wxT("invalid day in SetHoliday") );
+    wxCHECK_RET( day > 0 && day < 32, "invalid day in SetHoliday" );
 
     wxCalendarDateAttr *attr = GetAttr(day);
     if ( !attr )
@@ -1706,7 +1706,7 @@ void wxGenericCalendarCtrl::ResetHolidayAttrs()
 
 void wxGenericCalendarCtrl::Mark(size_t day, bool mark)
 {
-    wxCHECK_RET( day > 0 && day < 32, wxT("invalid day in Mark") );
+    wxCHECK_RET( day > 0 && day < 32, "invalid day in Mark" );
 
     const wxCalendarDateAttr& m = wxCalendarDateAttr::GetMark();
     if (mark) {

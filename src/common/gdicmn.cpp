@@ -60,24 +60,24 @@ WX_DEFINE_LIST(wxPointList)
 
 template<> void wxStringReadValue(const wxString &s , wxPoint &data )
 {
-    wxSscanf(s, wxT("%d,%d"), &data.x , &data.y ) ;
+    wxSscanf(s, "%d,%d", &data.x , &data.y ) ;
 }
 
 template<> void wxStringWriteValue(wxString &s , const wxPoint &data )
 {
-    s = wxString::Format(wxT("%d,%d"), data.x , data.y ) ;
+    s = wxString::Format("%d,%d", data.x , data.y ) ;
 }
 
 wxCUSTOM_TYPE_INFO(wxPoint, wxToStringConverter<wxPoint> , wxFromStringConverter<wxPoint>)
 
 template<> void wxStringReadValue(const wxString &s , wxSize &data )
 {
-    wxSscanf(s, wxT("%d,%d"), &data.x , &data.y ) ;
+    wxSscanf(s, "%d,%d", &data.x , &data.y ) ;
 }
 
 template<> void wxStringWriteValue(wxString &s , const wxSize &data )
 {
-    s = wxString::Format(wxT("%d,%d"), data.x , data.y ) ;
+    s = wxString::Format("%d,%d", data.x , data.y ) ;
 }
 
 wxCUSTOM_TYPE_INFO(wxSize, wxToStringConverter<wxSize> , wxFromStringConverter<wxSize>)
@@ -119,79 +119,80 @@ void wxColourDatabase::Initialize()
         unsigned char r,g,b;
     };
 
+    // FIXME: Convert to narrow string.
     static constexpr wxColourDesc wxColourTable[] =
     {
-        {wxT("AQUAMARINE"),112, 219, 147},
-        {wxT("BLACK"),0, 0, 0},
-        {wxT("BLUE"), 0, 0, 255},
-        {wxT("BLUE VIOLET"), 159, 95, 159},
-        {wxT("BROWN"), 165, 42, 42},
-        {wxT("CADET BLUE"), 95, 159, 159},
-        {wxT("CORAL"), 255, 127, 0},
-        {wxT("CORNFLOWER BLUE"), 66, 66, 111},
-        {wxT("CYAN"), 0, 255, 255},
-        {wxT("DARK GREY"), 47, 47, 47},   // ?
+        {L"AQUAMARINE",112, 219, 147},
+        {L"BLACK",0, 0, 0},
+        {L"BLUE", 0, 0, 255},
+        {L"BLUE VIOLET", 159, 95, 159},
+        {L"BROWN", 165, 42, 42},
+        {L"CADET BLUE", 95, 159, 159},
+        {L"CORAL", 255, 127, 0},
+        {L"CORNFLOWER BLUE", 66, 66, 111},
+        {L"CYAN", 0, 255, 255},
+        {L"DARK GREY", 47, 47, 47},   // ?
 
-        {wxT("DARK GREEN"), 47, 79, 47},
-        {wxT("DARK OLIVE GREEN"), 79, 79, 47},
-        {wxT("DARK ORCHID"), 153, 50, 204},
-        {wxT("DARK SLATE BLUE"), 107, 35, 142},
-        {wxT("DARK SLATE GREY"), 47, 79, 79},
-        {wxT("DARK TURQUOISE"), 112, 147, 219},
-        {wxT("DIM GREY"), 84, 84, 84},
-        {wxT("FIREBRICK"), 142, 35, 35},
-        {wxT("FOREST GREEN"), 35, 142, 35},
-        {wxT("GOLD"), 204, 127, 50},
-        {wxT("GOLDENROD"), 219, 219, 112},
-        {wxT("GREY"), 128, 128, 128},
-        {wxT("GREEN"), 0, 255, 0},
-        {wxT("GREEN YELLOW"), 147, 219, 112},
-        {wxT("INDIAN RED"), 79, 47, 47},
-        {wxT("KHAKI"), 159, 159, 95},
-        {wxT("LIGHT BLUE"), 191, 216, 216},
-        {wxT("LIGHT GREY"), 192, 192, 192},
-        {wxT("LIGHT STEEL BLUE"), 143, 143, 188},
-        {wxT("LIME GREEN"), 50, 204, 50},
-        {wxT("LIGHT MAGENTA"), 255, 119, 255},
-        {wxT("MAGENTA"), 255, 0, 255},
-        {wxT("MAROON"), 142, 35, 107},
-        {wxT("MEDIUM AQUAMARINE"), 50, 204, 153},
-        {wxT("MEDIUM GREY"), 100, 100, 100},
-        {wxT("MEDIUM BLUE"), 50, 50, 204},
-        {wxT("MEDIUM FOREST GREEN"), 107, 142, 35},
-        {wxT("MEDIUM GOLDENROD"), 234, 234, 173},
-        {wxT("MEDIUM ORCHID"), 147, 112, 219},
-        {wxT("MEDIUM SEA GREEN"), 66, 111, 66},
-        {wxT("MEDIUM SLATE BLUE"), 127, 0, 255},
-        {wxT("MEDIUM SPRING GREEN"), 127, 255, 0},
-        {wxT("MEDIUM TURQUOISE"), 112, 219, 219},
-        {wxT("MEDIUM VIOLET RED"), 219, 112, 147},
-        {wxT("MIDNIGHT BLUE"), 47, 47, 79},
-        {wxT("NAVY"), 35, 35, 142},
-        {wxT("ORANGE"), 204, 50, 50},
-        {wxT("ORANGE RED"), 255, 0, 127},
-        {wxT("ORCHID"), 219, 112, 219},
-        {wxT("PALE GREEN"), 143, 188, 143},
-        {wxT("PINK"), 255, 192, 203},
-        {wxT("PLUM"), 234, 173, 234},
-        {wxT("PURPLE"), 176, 0, 255},
-        {wxT("RED"), 255, 0, 0},
-        {wxT("SALMON"), 111, 66, 66},
-        {wxT("SEA GREEN"), 35, 142, 107},
-        {wxT("SIENNA"), 142, 107, 35},
-        {wxT("SKY BLUE"), 50, 153, 204},
-        {wxT("SLATE BLUE"), 0, 127, 255},
-        {wxT("SPRING GREEN"), 0, 255, 127},
-        {wxT("STEEL BLUE"), 35, 107, 142},
-        {wxT("TAN"), 219, 147, 112},
-        {wxT("THISTLE"), 216, 191, 216},
-        {wxT("TURQUOISE"), 173, 234, 234},
-        {wxT("VIOLET"), 79, 47, 79},
-        {wxT("VIOLET RED"), 204, 50, 153},
-        {wxT("WHEAT"), 216, 216, 191},
-        {wxT("WHITE"), 255, 255, 255},
-        {wxT("YELLOW"), 255, 255, 0},
-        {wxT("YELLOW GREEN"), 153, 204, 50}
+        {L"DARK GREEN", 47, 79, 47},
+        {L"DARK OLIVE GREEN", 79, 79, 47},
+        {L"DARK ORCHID", 153, 50, 204},
+        {L"DARK SLATE BLUE", 107, 35, 142},
+        {L"DARK SLATE GREY", 47, 79, 79},
+        {L"DARK TURQUOISE", 112, 147, 219},
+        {L"DIM GREY", 84, 84, 84},
+        {L"FIREBRICK", 142, 35, 35},
+        {L"FOREST GREEN", 35, 142, 35},
+        {L"GOLD", 204, 127, 50},
+        {L"GOLDENROD", 219, 219, 112},
+        {L"GREY", 128, 128, 128},
+        {L"GREEN", 0, 255, 0},
+        {L"GREEN YELLOW", 147, 219, 112},
+        {L"INDIAN RED", 79, 47, 47},
+        {L"KHAKI", 159, 159, 95},
+        {L"LIGHT BLUE", 191, 216, 216},
+        {L"LIGHT GREY", 192, 192, 192},
+        {L"LIGHT STEEL BLUE", 143, 143, 188},
+        {L"LIME GREEN", 50, 204, 50},
+        {L"LIGHT MAGENTA", 255, 119, 255},
+        {L"MAGENTA", 255, 0, 255},
+        {L"MAROON", 142, 35, 107},
+        {L"MEDIUM AQUAMARINE", 50, 204, 153},
+        {L"MEDIUM GREY", 100, 100, 100},
+        {L"MEDIUM BLUE", 50, 50, 204},
+        {L"MEDIUM FOREST GREEN", 107, 142, 35},
+        {L"MEDIUM GOLDENROD", 234, 234, 173},
+        {L"MEDIUM ORCHID", 147, 112, 219},
+        {L"MEDIUM SEA GREEN", 66, 111, 66},
+        {L"MEDIUM SLATE BLUE", 127, 0, 255},
+        {L"MEDIUM SPRING GREEN", 127, 255, 0},
+        {L"MEDIUM TURQUOISE", 112, 219, 219},
+        {L"MEDIUM VIOLET RED", 219, 112, 147},
+        {L"MIDNIGHT BLUE", 47, 47, 79},
+        {L"NAVY", 35, 35, 142},
+        {L"ORANGE", 204, 50, 50},
+        {L"ORANGE RED", 255, 0, 127},
+        {L"ORCHID", 219, 112, 219},
+        {L"PALE GREEN", 143, 188, 143},
+        {L"PINK", 255, 192, 203},
+        {L"PLUM", 234, 173, 234},
+        {L"PURPLE", 176, 0, 255},
+        {L"RED", 255, 0, 0},
+        {L"SALMON", 111, 66, 66},
+        {L"SEA GREEN", 35, 142, 107},
+        {L"SIENNA", 142, 107, 35},
+        {L"SKY BLUE", 50, 153, 204},
+        {L"SLATE BLUE", 0, 127, 255},
+        {L"SPRING GREEN", 0, 255, 127},
+        {L"STEEL BLUE", 35, 107, 142},
+        {L"TAN", 219, 147, 112},
+        {L"THISTLE", 216, 191, 216},
+        {L"TURQUOISE", 173, 234, 234},
+        {L"VIOLET", 79, 47, 79},
+        {L"VIOLET RED", 204, 50, 153},
+        {L"WHEAT", 216, 216, 191},
+        {L"WHITE", 255, 255, 255},
+        {L"YELLOW", 255, 255, 0},
+        {L"YELLOW GREEN", 153, 204, 50}
     };
 
     for ( const auto& cc : wxColourTable )
@@ -315,13 +316,13 @@ const wxBrush* wxStockGDI::GetBrush(Item item)
             brush = new wxBrush(*GetColour(COLOUR_YELLOW), wxBrushStyle::Solid);
             break;
         case BRUSH_GREY:
-            brush = new wxBrush(wxColour(wxT("GREY")), wxBrushStyle::Solid);
+            brush = new wxBrush(wxColour("GREY"), wxBrushStyle::Solid);
             break;
         case BRUSH_LIGHTGREY:
             brush = new wxBrush(*GetColour(COLOUR_LIGHTGREY), wxBrushStyle::Solid);
             break;
         case BRUSH_MEDIUMGREY:
-            brush = new wxBrush(wxColour(wxT("MEDIUM GREY")), wxBrushStyle::Solid);
+            brush = new wxBrush(wxColour("MEDIUM GREY"), wxBrushStyle::Solid);
             break;
         case BRUSH_RED:
             brush = new wxBrush(*GetColour(COLOUR_RED), wxBrushStyle::Solid);
@@ -470,13 +471,13 @@ const wxPen* wxStockGDI::GetPen(Item item)
             pen = new wxPen(*GetColour(COLOUR_YELLOW), 1, wxPenStyle::Solid);
             break;
         case PEN_GREY:
-            pen = new wxPen(wxColour(wxT("GREY")), 1, wxPenStyle::Solid);
+            pen = new wxPen(wxColour("GREY"), 1, wxPenStyle::Solid);
             break;
         case PEN_LIGHTGREY:
             pen = new wxPen(*GetColour(COLOUR_LIGHTGREY), 1, wxPenStyle::Solid);
             break;
         case PEN_MEDIUMGREY:
-            pen = new wxPen(wxColour(wxT("MEDIUM GREY")), 1, wxPenStyle::Solid);
+            pen = new wxPen(wxColour("MEDIUM GREY"), 1, wxPenStyle::Solid);
             break;
         case PEN_RED:
             pen = new wxPen(*GetColour(COLOUR_RED), 1, wxPenStyle::Solid);

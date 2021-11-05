@@ -782,7 +782,7 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
         // if there is no caption, make it a space.  This will prevent
         // an assert in the menu code.
         if (caption.IsEmpty())
-            caption = wxT(" ");
+            caption = " ";
 
         wxMenuItem* item = new wxMenuItem(nullptr, 1000+i, caption);
         if (page.bitmap.IsOk())

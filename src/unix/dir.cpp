@@ -79,7 +79,7 @@ wxDirData::wxDirData(const wxString& dirname)
 
     // throw away the trailing slashes
     size_t n = m_dirname.length();
-    wxCHECK_RET( n, wxT("empty dir name in wxDir") );
+    wxCHECK_RET( n, "empty dir name in wxDir" );
 
     while ( n > 0 && m_dirname[--n] == '/' )
         ;
@@ -96,7 +96,7 @@ wxDirData::~wxDirData()
     {
         if ( closedir(m_dir) != 0 )
         {
-            wxLogLastError(wxT("closedir"));
+            wxLogLastError("closedir");
         }
     }
 }
@@ -174,7 +174,7 @@ bool wxDirData::Read(wxString *filename)
 
 wxDirData::wxDirData(const wxString& WXUNUSED(dirname))
 {
-    wxFAIL_MSG(wxT("not implemented"));
+    wxFAIL_MSG("not implemented");
 }
 
 wxDirData::~wxDirData()
@@ -256,7 +256,7 @@ bool wxDir::GetFirst(wxString *filename,
                      const wxString& filespec,
                      int flags) const
 {
-    wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
+    wxCHECK_MSG( IsOpened(), false, "must wxDir::Open() first" );
 
     M_DIR->Rewind();
 
@@ -268,16 +268,16 @@ bool wxDir::GetFirst(wxString *filename,
 
 bool wxDir::GetNext(wxString *filename) const
 {
-    wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
+    wxCHECK_MSG( IsOpened(), false, "must wxDir::Open() first" );
 
-    wxCHECK_MSG( filename, false, wxT("bad pointer in wxDir::GetNext()") );
+    wxCHECK_MSG( filename, false, "bad pointer in wxDir::GetNext()" );
 
     return M_DIR->Read(filename);
 }
 
 bool wxDir::HasSubDirs(const wxString& spec) const
 {
-    wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
+    wxCHECK_MSG( IsOpened(), false, "must wxDir::Open() first" );
 
     if ( spec.empty() )
     {

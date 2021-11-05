@@ -69,7 +69,7 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
     SetData(data);
 
     wxCHECK_MSG( m_FindReplaceData, false,
-                 wxT("can't create dialog without data") );
+                 "can't create dialog without data" );
 
     bool isPda = (wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA);
 

@@ -13,6 +13,7 @@
 #include "wx/sysopt.h"
 #include "wx/app.h"
 #include "wx/string.h"
+#include "wx/stringutils.h"
 
 // ----------------------------------------------------------------------------
 // private globals
@@ -48,7 +49,7 @@ void wxSystemOptions::SetOption(const wxString& name, const wxString& value)
 
 void wxSystemOptions::SetOption(const wxString& name, int value)
 {
-    SetOption(name, wxString::Format(wxT("%d"), value));
+    SetOption(name, wxString::Format("%d", value));
 }
 
 wxString wxSystemOptions::GetOption(const wxString& name)
@@ -69,19 +70,20 @@ wxString wxSystemOptions::GetOption(const wxString& name)
         // look in the environment: first for a variable named "wx_appname_name"
         // which can be set to affect the behaviour or just this application
         // and then for "wx_name" which can be set to change the option globally
-        wxString var(name);
-        var.Replace(wxT("."), wxT("_"));  // '.'s not allowed in env var names
-        var.Replace(wxT("-"), wxT("_"));  // and neither are '-'s
+        std::string var = name;
+
+        wx::utils::ReplaceAll(var, ".", "_"); // '.'s not allowed in env var names
+        wx::utils::ReplaceAll(var, "-", "_"); // and neither are '-'s
 
         wxString appname;
         if ( wxTheApp )
             appname = wxTheApp->GetAppName();
 
         if ( !appname.empty() )
-            val = wxGetenv(wxT("wx_") + appname + wxT('_') + var);
+            val = wxGetenv("wx_" + appname + wxT('_') + var);
 
         if ( val.empty() )
-            val = wxGetenv(wxT("wx_") + var);
+            val = wxGetenv("wx_" + var);
     }
 
     return val;

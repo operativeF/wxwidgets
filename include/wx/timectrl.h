@@ -81,7 +81,7 @@ public:
     bool GetTime(int* hour, int* min, int* sec) const
     {
         wxCHECK_MSG( hour && min && sec, false,
-                     wxS("Time component pointers must be non-NULL") );
+                     "Time component pointers must be non-NULL" );
 
         const wxDateTime::Tm tm = this->GetValue().GetTm();
         *hour = tm.hour;

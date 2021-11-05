@@ -145,7 +145,7 @@ public:
 
     void Close()
     {
-        wxCHECK_RET(IsOk(), wxT("Handle must be valid"));
+        wxCHECK_RET(IsOk(), "Handle must be valid");
 
         DoClose();
 
@@ -164,7 +164,7 @@ protected:
     void DoClose()
     {
         if ( !::CloseHandle(m_handle) )
-            wxLogLastError(wxT("CloseHandle"));
+            wxLogLastError("CloseHandle");
     }
 
     WXHANDLE m_handle;
@@ -360,7 +360,7 @@ inline RECT wxGetWindowRect(HWND hwnd)
 
     if ( !::GetWindowRect(hwnd, &rect) )
     {
-        wxLogLastError(wxT("GetWindowRect"));
+        wxLogLastError("GetWindowRect");
     }
 
     return rect;
@@ -372,7 +372,7 @@ inline RECT wxGetClientRect(HWND hwnd)
 
     if ( !::GetClientRect(hwnd, &rect) )
     {
-        wxLogLastError(wxT("GetClientRect"));
+        wxLogLastError("GetClientRect");
     }
 
     return rect;
@@ -475,7 +475,7 @@ public:
 
     void Init(HDC hdc, HGDIOBJ hgdiobj)
     {
-        wxASSERT_MSG( !m_hdc, wxT("initializing twice?") );
+        wxASSERT_MSG( !m_hdc, "initializing twice?" );
 
         m_hdc = hdc;
 
@@ -505,7 +505,7 @@ public:
     {
         if ( !::GetIconInfo(hIcon, this) )
         {
-            wxLogLastError(wxT("GetIconInfo"));
+            wxLogLastError("GetIconInfo");
             return false;
         }
 
@@ -530,7 +530,7 @@ public:
     {
         if ( !::SelectClipRgn(hdc, hrgn) )
         {
-            wxLogLastError(wxT("SelectClipRgn"));
+            wxLogLastError("SelectClipRgn");
         }
     }
 
@@ -555,7 +555,7 @@ private:
             m_modeOld = ::SetMapMode(hdc, mm);
             if ( !m_modeOld )
             {
-                wxLogLastError(wxT("SelectClipRgn"));
+                wxLogLastError("SelectClipRgn");
             }
         }
 
@@ -590,7 +590,7 @@ public:
         m_hGlobal = ::GlobalAlloc(flags, size);
         if ( !m_hGlobal )
         {
-            wxLogLastError(wxT("GlobalAlloc"));
+            wxLogLastError("GlobalAlloc");
         }
     }
 
@@ -603,7 +603,7 @@ public:
     {
         if ( m_hGlobal && ::GlobalFree(m_hGlobal) )
         {
-            wxLogLastError(wxT("GlobalFree"));
+            wxLogLastError("GlobalFree");
         }
     }
 
@@ -637,7 +637,7 @@ public:
         m_ptr = GlobalLock(hGlobal);
         if ( !m_ptr )
         {
-            wxLogLastError(wxT("GlobalLock"));
+            wxLogLastError("GlobalLock");
         }
     }
 
@@ -655,7 +655,7 @@ public:
             const DWORD dwLastError = ::GetLastError();
             if ( dwLastError != NO_ERROR )
             {
-                wxLogApiError(wxT("GlobalUnlock"), dwLastError);
+                wxLogApiError("GlobalUnlock", dwLastError);
             }
         }
     }
@@ -667,7 +667,7 @@ public:
     {
         const size_t size = ::GlobalSize(m_hGlobal);
         if ( !size )
-            wxLogLastError(wxT("GlobalSize"));
+            wxLogLastError("GlobalSize");
 
         return size;
     }
@@ -695,12 +695,12 @@ public:
     {
         // we should only be called if we hadn't been initialized yet
         wxASSERT_MSG( m_registered == -1,
-                        wxT("calling ClassRegistrar::Register() twice?") );
+                        "calling ClassRegistrar::Register() twice?" );
 
         m_registered = ::RegisterClassW(&wc) ? 1 : 0;
         if ( !IsRegistered() )
         {
-            wxLogLastError(wxT("RegisterClassEx()"));
+            wxLogLastError("RegisterClassEx()");
         }
         else
         {
@@ -721,7 +721,7 @@ public:
         {
             if ( !::UnregisterClassW(boost::nowide::widen(m_clsname).c_str(), wxGetInstance()) )
             {
-                wxLogLastError(wxT("UnregisterClass"));
+                wxLogLastError("UnregisterClass");
             }
         }
     }
@@ -798,7 +798,7 @@ inline std::string wxGetFullModuleName(HMODULE hmod)
                 MAX_PATH
             ) )
     {
-        wxLogLastError(wxT("GetModuleFileName"));
+        wxLogLastError("GetModuleFileName");
     }
 
     return boost::nowide::narrow(fullname);
@@ -922,7 +922,7 @@ wxUpdateExStyleForLayoutDirection(WXHWND hWnd,
                                   LONG_PTR flagsForRTL)
 {
     wxCHECK_MSG( hWnd, false,
-                 wxS("Can't set layout direction for invalid window") );
+                 "Can't set layout direction for invalid window" );
 
     const LONG_PTR styleOld = ::GetWindowLongPtrW(hWnd, GWL_EXSTYLE);
 
@@ -974,7 +974,7 @@ inline bool wxUpdateEditLayoutDirection(WXHWND hWnd, wxLayoutDirection dir)
 // Companion of the above function checking if an EDIT control uses RTL.
 inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
 {
-    wxCHECK_MSG( hWnd, wxLayoutDirection::Default, wxS("invalid window") );
+    wxCHECK_MSG( hWnd, wxLayoutDirection::Default, "invalid window" );
 
     // While we set 3 style bits above, we're only really interested in one of
     // them here. In particularly, don't check for WS_EX_RIGHT as it can be set

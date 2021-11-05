@@ -604,7 +604,7 @@ bool wxGLContext::SetCurrent(const wxGLCanvas& win) const
 {
     if ( !::wglMakeCurrent(win.GetHDC(), m_glContext.get()) )
     {
-        wxLogLastError(wxT("wglMakeCurrent"));
+        wxLogLastError("wglMakeCurrent");
         return false;
     }
     return true;
@@ -665,7 +665,7 @@ bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
                               unsigned int style,
                               const std::string& name)
 {
-    wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );
+    wxCHECK_MSG( parent, false, "can't create wxWindow without parent" );
 
     if ( !CreateBase(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;
@@ -760,7 +760,7 @@ bool wxGLCanvas::SwapBuffers()
 {
     if ( !::SwapBuffers(m_hDC) )
     {
-        wxLogLastError(wxT("SwapBuffers"));
+        wxLogLastError("SwapBuffers");
         return false;
     }
 
@@ -1163,14 +1163,14 @@ bool wxGLCanvas::SetupPalette(const wxPalette& palette)
     const int pixelFormat = ::GetPixelFormat(m_hDC);
     if ( !pixelFormat )
     {
-        wxLogLastError(wxT("GetPixelFormat"));
+        wxLogLastError("GetPixelFormat");
         return false;
     }
 
     PIXELFORMATDESCRIPTOR pfd;
     if ( !::DescribePixelFormat(m_hDC, pixelFormat, sizeof(pfd), &pfd) )
     {
-        wxLogLastError(wxT("DescribePixelFormat"));
+        wxLogLastError("DescribePixelFormat");
         return false;
     }
 
@@ -1188,13 +1188,13 @@ bool wxGLCanvas::SetupPalette(const wxPalette& palette)
 
     if ( !::SelectPalette(m_hDC, GetHpaletteOf(m_palette), FALSE) )
     {
-        wxLogLastError(wxT("SelectPalette"));
+        wxLogLastError("SelectPalette");
         return false;
     }
 
     if ( ::RealizePalette(m_hDC) == GDI_ERROR )
     {
-        wxLogLastError(wxT("RealizePalette"));
+        wxLogLastError("RealizePalette");
         return false;
     }
 

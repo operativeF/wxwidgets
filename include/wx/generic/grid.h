@@ -2946,7 +2946,7 @@ public:
     // FIXME: This isn't a good way to lock a resource.
     void Create(wxGrid *grid)
     {
-        wxASSERT_MSG( !m_grid, wxT("shouldn't be called more than once") );
+        wxASSERT_MSG( !m_grid, "shouldn't be called more than once" );
 
         m_grid = grid;
 

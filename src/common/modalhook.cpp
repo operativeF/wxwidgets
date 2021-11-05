@@ -32,7 +32,7 @@ void wxModalDialogHook::Register()
     {
         if ( *it == this )
         {
-            wxFAIL_MSG( wxS("Registering already registered hook?") );
+            wxFAIL_MSG( "Registering already registered hook?" );
             return;
         }
     }
@@ -45,7 +45,7 @@ void wxModalDialogHook::Unregister()
 {
     if ( !DoUnregister() )
     {
-        wxFAIL_MSG( wxS("Unregistering not registered hook?") );
+        wxFAIL_MSG( "Unregistering not registered hook?" );
     }
 }
 

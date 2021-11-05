@@ -40,7 +40,7 @@ WX_DEFINE_USER_EXPORTED_OBJARRAY(wxDynamicLibraryDetailsArray)
 
 wxDllType wxDynamicLibrary::GetProgramHandle()
 {
-   wxFAIL_MSG( wxT("GetProgramHandle() is not implemented under this platform"));
+   wxFAIL_MSG( "GetProgramHandle() is not implemented under this platform");
    return 0;
 }
 
@@ -49,7 +49,7 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
 
 bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
 {
-    wxASSERT_MSG(m_handle == nullptr, wxT("Library already loaded."));
+    wxASSERT_MSG(m_handle == nullptr, "Library already loaded.");
 
     // add the proper extension for the DLL ourselves unless told not to
     wxString libname = libnameOrig;
@@ -77,7 +77,7 @@ bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
 void *wxDynamicLibrary::DoGetSymbol(const wxString &name, bool *success) const
 {
     wxCHECK_MSG( IsLoaded(), nullptr,
-                 wxT("Can't load symbol from unloaded library") );
+                 "Can't load symbol from unloaded library" );
 
     void *symbol = RawGetSymbol(m_handle, name);
 
@@ -166,7 +166,7 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
 #endif
 
     if ( !suffix.empty() )
-        suffix = wxString(wxT("_")) + suffix;
+        suffix = wxString("_") + suffix;
 
 #define WXSTRINGIZE(x)  #x
 #if defined(__UNIX__)
@@ -191,9 +191,9 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
 #ifdef WX_WINDOWS
     // Add compiler identification:
     #if defined(__GNUG__)
-        suffix << wxT("_gcc");
+        suffix << "_gcc";
     #elif defined(__VISUALC__)
-        suffix << wxT("_vc");
+        suffix << "_vc";
     #endif
 #endif
 
@@ -209,13 +209,13 @@ wxString wxDynamicLibrary::GetPluginsDirectory()
         return {};
     wxString dir;
     format << wxFILE_SEP_PATH
-           << wxT("lib") << wxFILE_SEP_PATH
-           << wxT("wx") << wxFILE_SEP_PATH
+           << "lib" << wxFILE_SEP_PATH
+           << "wx" << wxFILE_SEP_PATH
 #if (wxMINOR_VERSION % 2) == 0
-           << wxT("%i.%i");
+           << "%i.%i";
     dir.Printf(format.c_str(), wxMAJOR_VERSION, wxMINOR_VERSION);
 #else
-           << wxT("%i.%i.%i");
+           << "%i.%i.%i";
     dir.Printf(format.c_str(),
                wxMAJOR_VERSION, wxMINOR_VERSION, wxRELEASE_NUMBER);
 #endif

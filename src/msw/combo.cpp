@@ -563,9 +563,9 @@ std::uint32_t GetUserPreferencesMask()
         return userPreferencesMask;
 
     wxRegKey* pKey = nullptr;
-    wxRegKey key1(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Control Panel"));
-    wxRegKey key2(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Windows\\Control Panel"));
-    wxRegKey key3(wxRegKey::HKCU, wxT("Control Panel\\Desktop"));
+    wxRegKey key1(wxRegKey::HKCU, "Software\\Policies\\Microsoft\\Control Panel");
+    wxRegKey key2(wxRegKey::HKCU, "Software\\Policies\\Microsoft\\Windows\\Control Panel");
+    wxRegKey key3(wxRegKey::HKCU, "Control Panel\\Desktop");
 
     if ( key1.Exists() )
         pKey = &key1;
@@ -577,8 +577,8 @@ std::uint32_t GetUserPreferencesMask()
     if ( pKey && pKey->Open(wxRegKey::Read) )
     {
         wxMemoryBuffer buf;
-        if ( pKey->HasValue(wxT("UserPreferencesMask")) &&
-             pKey->QueryValue(wxT("UserPreferencesMask"), buf) )
+        if ( pKey->HasValue("UserPreferencesMask") &&
+             pKey->QueryValue("UserPreferencesMask", buf) )
         {
             if ( buf.GetDataLen() >= 4 )
             {

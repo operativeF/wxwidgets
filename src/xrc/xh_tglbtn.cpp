@@ -37,7 +37,7 @@ wxObject *wxToggleButtonXmlHandler::DoCreateResource()
 
 #ifdef wxHAVE_BITMAPS_IN_BUTTON
 
-    if (m_class == wxT("wxBitmapToggleButton"))
+    if (m_class == "wxBitmapToggleButton")
     {
        if (!control)
            control = new wxBitmapToggleButton;
@@ -61,8 +61,8 @@ wxObject *wxToggleButtonXmlHandler::DoCreateResource()
 bool wxToggleButtonXmlHandler::CanHandle(wxXmlNode *node)
 {
     return (
-               IsOfClass(node, wxT("wxToggleButton")) ||
-               IsOfClass(node, wxT("wxBitmapToggleButton"))
+               IsOfClass(node, "wxToggleButton") ||
+               IsOfClass(node, "wxBitmapToggleButton")
            );
 }
 
@@ -72,7 +72,7 @@ void wxToggleButtonXmlHandler::DoCreateToggleButton(wxObject *control)
 
     button->Create(m_parentAsWindow,
                    GetID(),
-                   GetText(wxT("label")),
+                   GetText("label"),
                    GetPosition(), GetSize(),
                    GetStyle(),
                    wxDefaultValidator,
@@ -86,7 +86,7 @@ void wxToggleButtonXmlHandler::DoCreateToggleButton(wxObject *control)
     }
 #endif
 
-    button->SetValue(GetBool( wxT("checked")));
+    button->SetValue(GetBool( "checked"));
 }
 
 #ifdef wxHAVE_BITMAPS_IN_BUTTON
@@ -96,13 +96,13 @@ void wxToggleButtonXmlHandler::DoCreateBitmapToggleButton(wxObject *control)
 
     button->Create(m_parentAsWindow,
                    GetID(),
-                   GetBitmap(wxT("bitmap"), wxART_BUTTON),
+                   GetBitmap("bitmap", wxART_BUTTON),
                    GetPosition(), GetSize(),
                    GetStyle(),
                    wxDefaultValidator,
                    GetName());
 
-    button->SetValue(GetBool( wxT("checked")));
+    button->SetValue(GetBool( "checked"));
 }
 #endif
 #endif // wxUSE_XRC && wxUSE_TOGGLEBTN

@@ -148,7 +148,7 @@ wxDash* wxPen::GetDash() const
 
 wxPenCap wxPen::GetCap() const
 {
-    wxCHECK_MSG( IsOk(), wxCAP_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxCAP_INVALID, "invalid pen" );
 
     wxFAIL_MSG( "GetCap not implemented" );
     return wxCAP_INVALID;
@@ -156,7 +156,7 @@ wxPenCap wxPen::GetCap() const
 
 wxPenJoin wxPen::GetJoin() const
 {
-    wxCHECK_MSG( IsOk(), wxJOIN_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxJOIN_INVALID, "invalid pen" );
 
     wxFAIL_MSG( "GetJoin not implemented" );
     return wxJOIN_INVALID;
@@ -164,28 +164,28 @@ wxPenJoin wxPen::GetJoin() const
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, "invalid pen" );
 
     return M_PENDATA->m_style;
 }
 
 int wxPen::GetWidth() const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), -1, "invalid pen" );
 
     return 1;
 }
 
 wxColour wxPen::GetColour() const
 {
-    wxCHECK_MSG( IsOk(), wxNullColour, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxNullColour, "invalid pen" );
 
     return M_PENDATA->m_colour;
 }
 
 wxBitmap *wxPen::GetStipple() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), NULL, "invalid pen" );
 
     wxFAIL_MSG( "GetStipple not implemented" );
     return NULL;

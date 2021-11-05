@@ -435,7 +435,7 @@ wxRendererMSW::DrawComboBoxDropButton(wxWindow * WXUNUSED(win),
                                       const wxRect& rect,
                                       unsigned int flags)
 {
-    wxCHECK_RET( dc.GetImpl(), wxT("Invalid wxDC") );
+    wxCHECK_RET( dc.GetImpl(), "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -456,7 +456,7 @@ wxRendererMSW::DoDrawFrameControl(UINT type,
                                   const wxRect& rect,
                                   unsigned int flags)
 {
-    wxCHECK_RET( dc.GetImpl(), wxT("Invalid wxDC") );
+    wxCHECK_RET( dc.GetImpl(), "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -637,7 +637,7 @@ wxRendererXP::DrawComboBoxDropButton(wxWindow * win,
         return;
     }
 
-    wxCHECK_RET( dc.GetImpl(), wxT("Invalid wxDC") );
+    wxCHECK_RET( dc.GetImpl(), "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -677,7 +677,7 @@ wxRendererXP::DrawHeaderButton(wxWindow *win,
         return m_rendererNative.DrawHeaderButton(win, dc, rect, flags, sortArrow, params);
     }
 
-    wxCHECK_MSG( dc.GetImpl(), -1, wxT("Invalid wxDC") );
+    wxCHECK_MSG( dc.GetImpl(), -1, "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -720,7 +720,7 @@ wxRendererXP::DrawTreeItemButton(wxWindow *win,
         return;
     }
 
-    wxCHECK_RET( dc.GetImpl(), wxT("Invalid wxDC") );
+    wxCHECK_RET( dc.GetImpl(), "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -763,7 +763,7 @@ wxRendererXP::DoDrawCheckMark(int kind,
     if ( !hTheme )
         return false;
 
-    wxCHECK_MSG( dc.GetImpl(), false, wxT("Invalid wxDC") );
+    wxCHECK_MSG( dc.GetImpl(), false, "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 
@@ -791,7 +791,7 @@ wxRendererXP::DoDrawButtonLike(HTHEME htheme,
                                const wxRect& rect,
                                unsigned int flags)
 {
-    wxCHECK_RET( dc.GetImpl(), wxT("Invalid wxDC") );
+    wxCHECK_RET( dc.GetImpl(), "Invalid wxDC" );
 
     RECT r = ConvertToRECT(dc, rect);
 

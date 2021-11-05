@@ -43,7 +43,7 @@ void wxTextMeasure::BeginMeasuring()
 
         // Non-native wxDC subclasses should override their DoGetTextExtent()
         // and other methods.
-        wxASSERT_MSG( m_hdc, wxS("Must not be used with non-native wxDCs") );
+        wxASSERT_MSG( m_hdc, "Must not be used with non-native wxDCs" );
     }
     else if ( m_win )
     {
@@ -85,7 +85,7 @@ wxSize wxTextMeasure::DoGetTextExtent(std::string_view string,
 
     if ( !::GetTextExtentPoint32W(m_hdc, tmpStr.c_str(), len, &sizeRect) )
     {
-        wxLogLastError(wxT("GetTextExtentPoint32()"));
+        wxLogLastError("GetTextExtentPoint32()");
     }
 
     // the result computed by GetTextExtentPoint32() may be too small as it
@@ -151,7 +151,7 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(std::string_view text, d
                                  &widths[0],   // array to fill
                                  &sz) )
     {
-        wxLogLastError(wxT("GetTextExtentExPoint"));
+        wxLogLastError("GetTextExtentExPoint");
         // FIXME: Return empty or perhaps partially filled vector?
         return widths;
     }

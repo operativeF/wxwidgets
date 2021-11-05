@@ -110,7 +110,7 @@ constexpr char wxTRACE_ResAlloc[] = "resalloc"; // trace GDI resource allocation
 constexpr char wxTRACE_RefCount[] = "refcount"; // trace various ref counting operations
 
 #ifdef  WX_WINDOWS
-    constexpr wxChar wxTRACE_OleCalls[] = wxT("ole");  // OLE interface calls
+    constexpr char wxTRACE_OleCalls[] = "ole";  // OLE interface calls
 #endif
 
 // ----------------------------------------------------------------------------
@@ -614,7 +614,7 @@ private:
 
     // format string for strftime(), if empty, time stamping log messages is
     // disabled
-    inline static wxString    ms_timestamp{wxS("%X")}; // time only, no date
+    inline static wxString    ms_timestamp{"%X"}; // time only, no date
 };
 
 // ----------------------------------------------------------------------------
@@ -1331,13 +1331,13 @@ wxSafeShowMessage(const wxString& title, const wxString& text);
     // will take us immediately to the place of the failed API
 #ifdef __VISUALC__
     #define wxLogApiError(api, rc)                                            \
-        wxLogDebug(wxT("%s(%d): '%s' failed with error 0x%08lx (%s)."),       \
+        wxLogDebug("%s(%d): '%s' failed with error 0x%08lx (%s).",       \
                    __FILE__, __LINE__, api,                                   \
                    (long)rc, wxSysErrorMsgStr(rc))
 #else // !VC++
     #define wxLogApiError(api, rc)                                            \
-        wxLogDebug(wxT("In file %s at line %d: '%s' failed with ")            \
-                   wxT("error 0x%08lx (%s)."),                                \
+        wxLogDebug("In file %s at line %d: '%s' failed with "            \
+                   "error 0x%08lx (%s).",                                \
                    __FILE__, __LINE__, api,                                   \
                    (long)rc, wxSysErrorMsgStr(rc))
 #endif // VC++/!VC++

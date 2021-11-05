@@ -176,8 +176,8 @@ public:
     wxSizerFlags& Border(unsigned int direction, int borderInPixels)
     {
         wxCHECK_MSG( !(direction & ~wxALL), *this,
-                     wxS("direction must be a combination of wxDirection ")
-                     wxS("enum values.") );
+                     "direction must be a combination of wxDirection "
+                     "enum values." );
 
         m_flags &= ~wxALL;
         m_flags |= direction;
@@ -973,7 +973,7 @@ public:
         m_totalProportion = 0;
 
         wxASSERT_MSG( m_orient == wxHORIZONTAL || m_orient == wxVERTICAL,
-                      wxT("invalid value for wxBoxSizer orientation") );
+                      "invalid value for wxBoxSizer orientation" );
     }
 
     wxSizerItem *AddSpacer(int size) override;

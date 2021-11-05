@@ -250,7 +250,7 @@ int wxDirDialog::ShowIFileOpenDialog(WXHWND owner)
         }
         else
         {
-            wxLogApiError(wxS("IFileDialog::Show"), hr);
+            wxLogApiError("IFileDialog::Show", hr);
         }
     }
     else if ( GetPathsFromIFileOpenDialog(fileDialog, HasFlag(wxDD_MULTIPLE),
@@ -287,7 +287,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
                             wxIID_PPV_ARGS(IFileOpenDialog, &dlg));
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("CoCreateInstance(CLSID_FileOpenDialog)"), hr);
+        wxLogApiError("CoCreateInstance(CLSID_FileOpenDialog)", hr);
         return false;
     }
 
@@ -299,7 +299,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
     hr = dlg->SetOptions(options);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("IFileOpenDialog::SetOptions"), hr);
+        wxLogApiError("IFileOpenDialog::SetOptions", hr);
         return false;
     }
 
@@ -308,7 +308,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
     {
         // This error is not serious, let's just log it and continue even
         // without the title set.
-        wxLogApiError(wxS("IFileOpenDialog::SetTitle"), hr);
+        wxLogApiError("IFileOpenDialog::SetTitle", hr);
     }
 
     // set the initial path
@@ -323,14 +323,14 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
 
         SHCreateItemFromParsingName_t pfnSHCreateItemFromParsingName = nullptr;
         wxDynamicLibrary dllShell32;
-        if ( dllShell32.Load(wxS("shell32.dll"), wxDL_VERBATIM | wxDL_QUIET) )
+        if ( dllShell32.Load("shell32.dll", wxDL_VERBATIM | wxDL_QUIET) )
         {
             wxDL_INIT_FUNC(pfn, SHCreateItemFromParsingName, dllShell32);
         }
 
         if ( !pfnSHCreateItemFromParsingName )
         {
-            wxLogLastError(wxS("SHCreateItemFromParsingName() not found"));
+            wxLogLastError("SHCreateItemFromParsingName() not found");
             return false;
         }
 
@@ -347,7 +347,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
         {
             hr = dlg->SetFolder(folder);
             if ( FAILED(hr) )
-                wxLogApiError(wxS("IFileOpenDialog::SetFolder"), hr);
+                wxLogApiError("IFileOpenDialog::SetFolder", hr);
         }
     }
 
@@ -370,7 +370,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
         hr = fileDialog->GetResults(&itemArray);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("IShellItemArray::GetResults"), hr);
+            wxLogApiError("IShellItemArray::GetResults", hr);
             return false;
         }
 
@@ -379,7 +379,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
         hr = itemArray->GetCount(&count);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("IShellItemArray::GetCount"), hr);
+            wxLogApiError("IShellItemArray::GetCount", hr);
             return false;
         }
 
@@ -392,7 +392,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             {
                 // do not attempt to retrieve any other items
                 // and just fail
-                wxLogApiError(wxS("IShellItemArray::GetItem"), hr);
+                wxLogApiError("IShellItemArray::GetItem", hr);
                 tempPaths.clear();
                 break;
             }
@@ -416,7 +416,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
         hr = fileDialog->GetResult(&item);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("IFileOpenDialog::GetResult"), hr);
+            wxLogApiError("IFileOpenDialog::GetResult", hr);
             return false;
         }
 
@@ -443,7 +443,7 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path)
 
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("IShellItem::GetDisplayName"), hr);
+        wxLogApiError("IShellItem::GetDisplayName", hr);
         return false;
     }
 
@@ -488,7 +488,7 @@ BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
                     if ( strDir.length() > maxChars )
                     {
                         strDir = strDir.Right(maxChars);
-                        strDir = wxString(wxT("...")) + strDir;
+                        strDir = wxString("...") + strDir;
                     }
 
                     ::SendMessageW(hwnd, BFFM_SETSTATUSTEXT,

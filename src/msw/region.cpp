@@ -132,7 +132,7 @@ void wxRegion::Clear()
 
 bool wxRegion::DoOffset(wxCoord x, wxCoord y)
 {
-    wxCHECK_MSG( GetHRGN(), false, wxT("invalid wxRegion") );
+    wxCHECK_MSG( GetHRGN(), false, "invalid wxRegion" );
 
     if ( !x && !y )
     {
@@ -144,7 +144,7 @@ bool wxRegion::DoOffset(wxCoord x, wxCoord y)
 
     if ( ::OffsetRgn(GetHRGN(), x, y) == ERROR )
     {
-        wxLogLastError(wxT("OffsetRgn"));
+        wxLogLastError("OffsetRgn");
 
         return false;
     }
@@ -169,7 +169,7 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unknown region operation") );
+                wxFAIL_MSG( "unknown region operation" );
                 [[fallthrough]];
 
             case wxRegionOp::And:
@@ -202,7 +202,7 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
                 break;
 
             default:
-                wxFAIL_MSG( wxT("unknown region operation") );
+                wxFAIL_MSG( "unknown region operation" );
                 [[fallthrough]];
 
             case wxRegionOp::Copy:
@@ -212,7 +212,7 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
 
         if ( ::CombineRgn(M_REGION.get(), M_REGION.get(), M_REGION_OF(rgn).get(), mode) == ERROR )
         {
-            wxLogLastError(wxT("CombineRgn"));
+            wxLogLastError("CombineRgn");
 
             return false;
         }
@@ -392,28 +392,28 @@ wxRegionIterator wxRegionIterator::operator ++ (int)
 
 wxCoord wxRegionIterator::GetX() const
 {
-    wxCHECK_MSG( m_current < m_numRects, 0, wxT("invalid wxRegionIterator") );
+    wxCHECK_MSG( m_current < m_numRects, 0, "invalid wxRegionIterator" );
 
     return m_rects[m_current].x;
 }
 
 wxCoord wxRegionIterator::GetY() const
 {
-    wxCHECK_MSG( m_current < m_numRects, 0, wxT("invalid wxRegionIterator") );
+    wxCHECK_MSG( m_current < m_numRects, 0, "invalid wxRegionIterator" );
 
     return m_rects[m_current].y;
 }
 
 wxCoord wxRegionIterator::GetW() const
 {
-    wxCHECK_MSG( m_current < m_numRects, 0, wxT("invalid wxRegionIterator") );
+    wxCHECK_MSG( m_current < m_numRects, 0, "invalid wxRegionIterator" );
 
     return m_rects[m_current].width;
 }
 
 wxCoord wxRegionIterator::GetH() const
 {
-    wxCHECK_MSG( m_current < m_numRects, 0, wxT("invalid wxRegionIterator") );
+    wxCHECK_MSG( m_current < m_numRects, 0, "invalid wxRegionIterator" );
 
     return m_rects[m_current].height;
 }

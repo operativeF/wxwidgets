@@ -216,8 +216,7 @@ public:
     {
         wxVariantDataT<T> *dataptr =
             wx_dynamic_cast(wxVariantDataT<T>*, m_data);
-        wxASSERT_MSG( dataptr,
-            wxString::Format(wxT("Cast to %s not possible"), typeid(T).name()) );
+        wxASSERT_MSG( dataptr, fmt::format("Cast to {:s} not possible", typeid(T).name()) );
         return dataptr->Get();
     }
 
@@ -226,8 +225,7 @@ public:
     {
         const wxVariantDataT<T> *dataptr =
             wx_dynamic_cast(const wxVariantDataT<T>*, m_data);
-        wxASSERT_MSG( dataptr,
-            wxString::Format(wxT("Cast to %s not possible"), typeid(T).name()) );
+        wxASSERT_MSG( dataptr, fmt::format("Cast to {:s} not possible", typeid(T).name()) );
         return dataptr->Get();
     }
 

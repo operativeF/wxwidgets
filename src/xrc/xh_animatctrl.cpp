@@ -64,7 +64,7 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
 
     // if no inactive-bitmap has been provided, GetBitmap() will return wxNullBitmap
     // which just tells wxAnimationCtrl to use the default for inactive status
-    ctrl->SetInactiveBitmap(GetBitmap(wxT("inactive-bitmap")));
+    ctrl->SetInactiveBitmap(GetBitmap("inactive-bitmap"));
 
     SetupWindow(ctrl);
 
@@ -73,8 +73,8 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
 
 bool wxAnimationCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxAnimationCtrl")) ||
-           IsOfClass(node, wxT("wxGenericAnimationCtrl"));
+    return IsOfClass(node, "wxAnimationCtrl") ||
+           IsOfClass(node, "wxGenericAnimationCtrl");
 }
 
 wxAnimation* wxXmlResourceHandlerImpl::GetAnimation(const wxString& param,

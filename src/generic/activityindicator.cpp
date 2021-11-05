@@ -200,14 +200,14 @@ wxActivityIndicatorGeneric::~wxActivityIndicatorGeneric()
 
 void wxActivityIndicatorGeneric::Start()
 {
-    wxCHECK_RET( m_impl, wxS("Must be created first") );
+    wxCHECK_RET( m_impl, "Must be created first" );
 
     m_impl->Start();
 }
 
 void wxActivityIndicatorGeneric::Stop()
 {
-    wxCHECK_RET( m_impl, wxS("Must be created first") );
+    wxCHECK_RET( m_impl, "Must be created first" );
 
     m_impl->Stop();
 }
@@ -223,7 +223,7 @@ wxSize wxActivityIndicatorGeneric::DoGetBestClientSize() const
     switch ( GetWindowVariant() )
     {
         case wxWindowVariant::Max:
-            wxFAIL_MSG(wxS("Invalid window variant"));
+            wxFAIL_MSG("Invalid window variant");
             [[fallthrough]];
 
         case wxWindowVariant::Normal:
@@ -243,7 +243,7 @@ wxSize wxActivityIndicatorGeneric::DoGetBestClientSize() const
             break;
     }
 
-    wxASSERT_MSG( size, wxS("Unknown window variant") );
+    wxASSERT_MSG( size, "Unknown window variant" );
 
     return FromDIP(wxSize(size, size));
 }

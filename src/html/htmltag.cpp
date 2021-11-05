@@ -56,14 +56,14 @@ class wxHtmlTagsCacheData : public std::vector<wxHtmlCacheItem>
 
 bool wxIsCDATAElement(const wxChar *tag)
 {
-    return (wxStrcmp(tag, wxT("SCRIPT")) == 0) ||
-           (wxStrcmp(tag, wxT("STYLE")) == 0);
+    return (wxStrcmp(tag, "SCRIPT") == 0) ||
+           (wxStrcmp(tag, "STYLE") == 0);
 }
 
 bool wxIsCDATAElement(const wxString& tag)
 {
-    return (wxStrcmp(tag.wx_str(), wxS("SCRIPT")) == 0) ||
-           (wxStrcmp(tag.wx_str(), wxS("STYLE")) == 0);
+    return (wxStrcmp(tag.wx_str(), "SCRIPT") == 0) ||
+           (wxStrcmp(tag.wx_str(), "STYLE") == 0);
 }
 
 wxHtmlTagsCache::wxHtmlTagsCache(const wxString& source)
@@ -499,7 +499,7 @@ wxString wxHtmlTag::GetParam(const wxString& par, bool with_quotes) const
 
 bool wxHtmlTag::GetParamAsString(const wxString& par, wxString *str) const
 {
-    wxCHECK_MSG( str, false, wxT("NULL output string argument") );
+    wxCHECK_MSG( str, false, "NULL output string argument" );
 
     int index = m_ParamNames.Index(par, false);
     if (index == wxNOT_FOUND)
@@ -529,7 +529,7 @@ int wxHtmlTag::ScanParam(const wxString& par,
 /* static */
 bool wxHtmlTag::ParseAsColour(const wxString& str, wxColour *clr)
 {
-    wxCHECK_MSG( clr, false, wxT("invalid colour argument") );
+    wxCHECK_MSG( clr, false, "invalid colour argument" );
 
     // handle colours defined in HTML 4.0 first:
     if (str.length() > 1 && str[0] != wxT('#'))

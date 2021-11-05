@@ -110,7 +110,7 @@ public:
     {
         if ( !::GetWindowPlacement(GetHwndOf(tlw), &m_placement) )
         {
-            wxLogLastError(wxS("GetWindowPlacement"));
+            wxLogLastError("GetWindowPlacement");
             return false;
         }
 
@@ -133,7 +133,7 @@ public:
 
         if ( !::SetWindowPlacement(GetHwndOf(tlw), &m_placement) )
         {
-            wxLogLastError(wxS("SetWindowPlacement"));
+            wxLogLastError("SetWindowPlacement");
             return false;
         }
 

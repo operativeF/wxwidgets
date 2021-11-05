@@ -55,23 +55,23 @@ wxObject *wxFrameXmlHandler::DoCreateResource()
 
     frame->Create(m_parentAsWindow,
                   GetID(),
-                  GetText(wxT("title")),
+                  GetText("title"),
                   wxDefaultPosition, wxDefaultSize,
-                  GetStyle(wxT("style"), wxDEFAULT_FRAME_STYLE),
+                  GetStyle("style", wxDEFAULT_FRAME_STYLE),
                   GetName());
 
-    if (HasParam(wxT("size")))
-        frame->SetClientSize(GetSize(wxT("size"), frame));
-    if (HasParam(wxT("pos")))
+    if (HasParam("size"))
+        frame->SetClientSize(GetSize("size", frame));
+    if (HasParam("pos"))
         frame->Move(GetPosition());
-    if (HasParam(wxT("icon")))
-        frame->SetIcons(GetIconBundle(wxT("icon"), wxART_FRAME_ICON));
+    if (HasParam("icon"))
+        frame->SetIcons(GetIconBundle("icon", wxART_FRAME_ICON));
 
     SetupWindow(frame);
 
     CreateChildren(frame);
 
-    if (GetBool(wxT("centered"), false))
+    if (GetBool("centered", false))
         frame->Centre();
 
     return frame;
@@ -79,7 +79,7 @@ wxObject *wxFrameXmlHandler::DoCreateResource()
 
 bool wxFrameXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxFrame"));
+    return IsOfClass(node, "wxFrame");
 }
 
 #endif // wxUSE_XRC

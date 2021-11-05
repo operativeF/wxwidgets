@@ -89,11 +89,11 @@ static wxString FormatAssertMessage(const wxString& file,
     return str;
 }
 
-static void TestAssertHandler(const wxString& file,
+static void TestAssertHandler(const std::string& file,
                               int line,
-                              const wxString& func,
-                              const wxString& cond,
-                              const wxString& msg)
+                              const std::string& func,
+                              const std::string& cond,
+                              const std::string& msg)
 {
     // Determine whether we can safely throw an exception to just make the test
     // fail or whether we need to abort (in this case "msg" will contain the

@@ -64,7 +64,7 @@ using size_t32 = std::uint32_t;
 constexpr size_t32 MSGCATALOG_MAGIC    = 0x950412de;
 constexpr size_t32 MSGCATALOG_MAGIC_SW = 0xde120495;
 
-constexpr wxChar TRACE_I18N[] = wxS("i18n");
+constexpr char TRACE_I18N[] = "i18n";
 
 // ============================================================================
 // implementation
@@ -1104,7 +1104,7 @@ bool wxMsgCatalogFile::LoadFile(const wxString& filename,
         return false;
 
     auto nSize = gsl::narrow_cast<size_t>(lenFile);
-    wxASSERT_MSG( nSize == lenFile + size_t(0), wxS("message catalog bigger than 4GB?") );
+    wxASSERT_MSG( nSize == lenFile + size_t(0), "message catalog bigger than 4GB?" );
 
     wxMemoryBuffer filedata;
 
@@ -1177,7 +1177,7 @@ bool wxMsgCatalogFile::LoadData(const DataBuffer& data,
             if ( csetEnd )
             {
                 m_charset = wxString(cset, csetEnd - cset);
-                if ( m_charset == wxS("CHARSET") )
+                if ( m_charset == "CHARSET" )
                 {
                     // "CHARSET" is not valid charset, but lazy translator
                     m_charset.clear();
@@ -1457,7 +1457,7 @@ bool wxTranslations::AddStdCatalog()
     if ( AddCatalog("wxstd-" wxSTRINGIZE(wxMAJOR_VERSION) "." wxSTRINGIZE(wxMINOR_VERSION)) )
         return true;
 
-    if ( AddCatalog(wxS("wxstd")) )
+    if ( AddCatalog("wxstd") )
         return true;
 
     return false;
@@ -1472,13 +1472,13 @@ bool wxTranslations::AddCatalog(const wxString& domain,
     if ( domain_lang.empty() )
     {
         wxLogTrace(TRACE_I18N,
-                    wxS("no suitable translation for domain '%s' found"),
+                    "no suitable translation for domain '%s' found",
                     domain);
         return false;
     }
 
     wxLogTrace(TRACE_I18N,
-                wxS("adding '%s' translation for domain '%s' (msgid language '%s')"),
+                "adding '%s' translation for domain '%s' (msgid language '%s')",
                 domain_lang, domain, msgIdLang);
 
     return LoadCatalog(domain, domain_lang, msgIdLang);
@@ -1684,7 +1684,7 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
     if ( !trans || trans->empty() )
         return {};
 
-    size_t found = trans->find(header + wxS(": "));
+    size_t found = trans->find(header + ": ");
     if ( found == wxString::npos )
         return {};
 
@@ -1799,7 +1799,7 @@ std::vector<wxString> GetSearchPrefixes()
     wxString wxp = wxGetInstallPrefix();
     if ( !wxp.empty() )
     {
-        wxp += wxS("/share/locale");
+        wxp += "/share/locale";
         if ( paths.Index(wxp) == wxNOT_FOUND )
             paths.Add(wxp);
     }
@@ -1856,7 +1856,7 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
     //);
 
     wxFileName fn(domain);
-    fn.SetExt(wxS("mo"));
+    fn.SetExt("mo");
 
     wxString strFullName;
     if ( !wxFindFileInPath(&strFullName, searchPath, fn.GetFullPath()) )
@@ -1864,7 +1864,7 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
 
     // open file and read its data
     wxLogVerbose(_("using catalog '%s' from '%s'."), domain, strFullName.c_str());
-    wxLogTrace(TRACE_I18N, wxS("Using catalog \"%s\"."), strFullName.c_str());
+    wxLogTrace(TRACE_I18N, "Using catalog \"%s\".", strFullName.c_str());
 
     return wxMsgCatalog::CreateFromFile(strFullName, domain);
 }

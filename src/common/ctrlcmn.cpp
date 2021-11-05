@@ -58,7 +58,7 @@ bool wxControlBase::CreateControl(wxWindowBase *parent,
     // even if it's possible to create controls without parents in some port,
     // it should surely be discouraged because it doesn't work at all under
     // Windows
-    wxCHECK_MSG( parent, false, wxT("all controls must have parents") );
+    wxCHECK_MSG( parent, false, "all controls must have parents" );
 
     if ( !CreateBase(parent, id, pos, size, style, validator, name) )
         return false;
@@ -197,7 +197,7 @@ int wxControlBase::FindAccelIndex(const std::string& label, std::string* labelOn
                 }
                 else
                 {
-                    wxFAIL_MSG(wxT("duplicate accel char in control label"));
+                    wxFAIL_MSG("duplicate accel char in control label");
                 }
             }
         }

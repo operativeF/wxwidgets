@@ -60,15 +60,15 @@ wxBEGIN_PROPERTIES_TABLE(wxGenericDirCtrl)
     wxHIDE_PROPERTY( Children )
 
     wxPROPERTY( DefaultPath, wxString, SetDefaultPath, GetDefaultPath, \
-                wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", "group")
     wxPROPERTY( Filter, wxString, SetFilter, GetFilter, wxEMPTY_PARAMETER_VALUE, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group") )
+                0 /*flags*/, "Helpstring", "group" )
     wxPROPERTY( DefaultFilter, int, SetFilterIndex, GetFilterIndex, \
-                wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), wxT("group") )
+                wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, "Helpstring", "group" )
 
     wxPROPERTY_FLAGS( WindowStyle, wxGenericDirCtrlStyle, long, SetWindowStyleFlag, \
-                      GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0, wxT("Helpstring"), \
-                      wxT("group") )
+                      GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0, "Helpstring", \
+                      "group" )
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxGenericDirCtrl)

@@ -79,7 +79,7 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
 wxString wxFileCtrlEvent::GetFile() const
 {
     wxASSERT_MSG( !wxDynamicCast( GetEventObject(), wxFileCtrl )->HasMultipleFileSelection(),
-                  wxT( "Please use GetFiles() to get all files instead of this function" ) );
+                  "Please use GetFiles() to get all files instead of this function" );
 
     wxString string;
     if (!m_files.empty())

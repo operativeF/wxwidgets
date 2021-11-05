@@ -34,7 +34,7 @@ static wxString AllAsString(const std::vector<wxString>& a)
     s.reserve(20*count);
     for ( size_t n = 0; n < count; n++ )
     {
-        s << a[n] << (n == count - 1 ? wxT("\n") : wxT(", "));
+        s << a[n] << (n == count - 1 ? "\n" : ", ");
     }
 
     return s;
@@ -211,8 +211,8 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
 
 void wxGenericAboutDialog::AddControl(wxWindow *win, const wxSizerFlags& flags)
 {
-    wxCHECK_RET( m_sizerText, wxT("can only be called after Create()") );
-    wxASSERT_MSG( win, wxT("can't add NULL window to about dialog") );
+    wxCHECK_RET( m_sizerText, "can only be called after Create()" );
+    wxASSERT_MSG( win, "can't add NULL window to about dialog" );
 
     m_sizerText->Add(win, flags);
 }

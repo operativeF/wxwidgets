@@ -316,10 +316,10 @@ inline HRESULT InitPropVariantFromString(PCWSTR psz, PROPVARIANT *ppropvar)
     static SHStrDupW_t s_pfnSHStrDupW = nullptr;
     if ( !s_pfnSHStrDupW )
     {
-        wxDynamicLibrary dll(wxT("shlwapi.dll"));
+        wxDynamicLibrary dll("shlwapi.dll");
         if ( dll.IsLoaded() )
         {
-            s_pfnSHStrDupW = (SHStrDupW_t)dll.GetSymbol(wxT("SHStrDupW"));
+            s_pfnSHStrDupW = (SHStrDupW_t)dll.GetSymbol("SHStrDupW");
         }
     }
 
@@ -704,7 +704,7 @@ std::unique_ptr<wxTaskBarButton> wxTaskBarButton::Create(wxWindow* parent)
     if ( FAILED(hr) )
     {
         // This is however unexpected.
-        wxLogApiError(wxT("ITaskbarList3::Init"), hr);
+        wxLogApiError("ITaskbarList3::Init", hr);
 
         taskbarList->Release();
         return nullptr;
@@ -923,7 +923,7 @@ bool wxTaskBarButtonImpl::InitOrUpdateThumbBarButtons()
                                                buttons);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("ITaskbarList3::ThumbBarAddButtons"), hr);
+            wxLogApiError("ITaskbarList3::ThumbBarAddButtons", hr);
         }
         m_hasInitThumbnailToolbar = true;
     }
@@ -934,7 +934,7 @@ bool wxTaskBarButtonImpl::InitOrUpdateThumbBarButtons()
                                                   buttons);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("ITaskbarList3::ThumbBarUpdateButtons"), hr);
+            wxLogApiError("ITaskbarList3::ThumbBarUpdateButtons", hr);
         }
     }
 
@@ -1264,7 +1264,7 @@ wxTaskBarJumpListImpl::wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList,
                 );
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxT("CoCreateInstance(wxCLSID_DestinationList)"), hr);
+        wxLogApiError("CoCreateInstance(wxCLSID_DestinationList)", hr);
         return;
     }
 }

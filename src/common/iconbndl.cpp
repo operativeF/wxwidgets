@@ -231,15 +231,15 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
             if ( hIcon && icon.CreateFromHICON(hIcon) )
                 AddIcon(icon);
             else
-                wxLogDebug(wxS("Failed to create icon from resource with id %u."), iconID);
+                wxLogDebug("Failed to create icon from resource with id %u.", iconID);
         }
         else
         {
-            wxLogDebug(wxS("Failed to load icon with id %u for group icon resource '%s'."), iconID, resourceName);
+            wxLogDebug("Failed to load icon with id %u for group icon resource '%s'.", iconID, resourceName);
         }
     }
 #else
-    wxLogError(wxS("Loading icons from resources isn't implemented in this toolkit port yet."));
+    wxLogError("Loading icons from resources isn't implemented in this toolkit port yet.");
 #endif
 }
 
@@ -265,7 +265,7 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, IconFallback flags) const
     if ( size == wxDefaultSize )
     {
         wxASSERT_MSG( flags == IconFallback::System,
-                      wxS("Must have valid size if not using IconFallback::System") );
+                      "Must have valid size if not using IconFallback::System" );
 
         sizeX = sysX;
         sizeY = sysY;
@@ -345,7 +345,7 @@ wxIcon wxIconBundle::GetIconOfExactSize(const wxSize& size) const
 
 void wxIconBundle::AddIcon(const wxIcon& icon)
 {
-    wxCHECK_RET( icon.IsOk(), wxT("invalid icon") );
+    wxCHECK_RET( icon.IsOk(), "invalid icon" );
 
     AllocExclusive();
 
@@ -376,7 +376,7 @@ size_t wxIconBundle::GetIconCount() const
 
 wxIcon wxIconBundle::GetIconByIndex(size_t n) const
 {
-    wxCHECK_MSG( n < GetIconCount(), wxNullIcon, wxT("invalid index") );
+    wxCHECK_MSG( n < GetIconCount(), wxNullIcon, "invalid index" );
 
     return M_ICONBUNDLEDATA->m_icons[n];
 }

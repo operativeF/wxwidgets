@@ -34,7 +34,7 @@ wxObject *wxRichTextCtrlXmlHandler::DoCreateResource()
 
     text->Create(m_parentAsWindow,
                  GetID(),
-                 GetText(wxT("value")),
+                 GetText("value"),
                  GetPosition(), GetSize(),
                  GetStyle(),
                  wxDefaultValidator,
@@ -42,15 +42,15 @@ wxObject *wxRichTextCtrlXmlHandler::DoCreateResource()
 
     SetupWindow(text);
 
-    if (HasParam(wxT("maxlength")))
-        text->SetMaxLength(GetLong(wxT("maxlength")));
+    if (HasParam("maxlength"))
+        text->SetMaxLength(GetLong("maxlength"));
 
     return text;
 }
 
 bool wxRichTextCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxRichTextCtrl"));
+    return IsOfClass(node, "wxRichTextCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_RICHTEXT

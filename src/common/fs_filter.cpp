@@ -60,7 +60,7 @@ wxFSFile* wxFilterFSHandler::OpenFile(
         mime = GetMimeTypeFromExt(factory->PopExtension(left));
 
     return new wxFSFile(stream.release(),
-                        left + wxT("#") + protocol + wxT(":") + right,
+                        left + "#" + protocol + ":" + right,
                         mime,
                         GetAnchor(location)
 #if wxUSE_DATETIME

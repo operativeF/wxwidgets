@@ -124,7 +124,7 @@ extern void wxDDEInitialize()
         const UINT rc = DdeInitialize(&DDEIdInst, _DDECallback, APPCLASS_STANDARD, 0L);
         if ( rc != DMLERR_NO_ERROR )
         {
-            DDELogError(wxT("Failed to initialize DDE"), rc);
+            DDELogError("Failed to initialize DDE", rc);
         }
         else
         {
@@ -138,7 +138,7 @@ void wxDDECleanUp()
     // deleting them later won't work as DDE won't be initialized any more
     wxASSERT_MSG( wxDDEServerObjects.empty() &&
                     wxDDEClientObjects.empty(),
-                    wxT("all DDE objects should be deleted by now") );
+                    "all DDE objects should be deleted by now" );
 
     wxAtomTable.clear();
 
@@ -488,7 +488,7 @@ bool wxDDEConnection::Disconnect()
     bool ok = DdeDisconnect(GetHConv()) != 0;
     if ( !ok )
     {
-        DDELogError(wxT("Failed to disconnect from DDE server gracefully"));
+        DDELogError("Failed to disconnect from DDE server gracefully");
     }
 
     SetConnected( false );  // so we don't try and disconnect again
@@ -503,7 +503,7 @@ wxDDEConnection::DoExecute(const void *data, size_t size, wxIPCFormat format)
                  format == wxIPC_UTF8TEXT ||
                  format == wxIPC_UNICODETEXT,
                  false,
-                 wxT("wxDDEServer::Execute() supports only text data") );
+                 "wxDDEServer::Execute() supports only text data" );
 
     wxMemoryBuffer buffer;
     LPBYTE realData = nullptr;
@@ -563,7 +563,7 @@ wxDDEConnection::DoExecute(const void *data, size_t size, wxIPCFormat format)
 
     if ( !ok )
     {
-        DDELogError(wxT("DDE execute request failed"));
+        DDELogError("DDE execute request failed");
     }
 
     return ok;
@@ -583,7 +583,7 @@ const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFo
                                                   &result);
     if ( !returned_data )
     {
-        DDELogError(wxT("DDE data request failed"));
+        DDELogError("DDE data request failed");
 
         return nullptr;
     }
@@ -592,7 +592,7 @@ const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFo
 
     void *data = GetBufferAtLeast(len);
     wxASSERT_MSG(data != nullptr,
-                 wxT("Buffer too small in wxDDEConnection::Request") );
+                 "Buffer too small in wxDDEConnection::Request" );
     std::ignore = DdeGetData(returned_data, (LPBYTE)data, len, 0);
 
     std::ignore = DdeFreeDataHandle(returned_data);
@@ -812,7 +812,7 @@ _DDECallback(UINT wType,
 
                     void *data = connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
-                                 wxT("Buffer too small in _DDECallback (XTYP_EXECUTE)") );
+                                 "Buffer too small in _DDECallback (XTYP_EXECUTE)" );
 
                     DdeGetData(hData, (LPBYTE)data, len, 0);
 
@@ -891,7 +891,7 @@ _DDECallback(UINT wType,
 
                     void *data = connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
-                                 wxT("Buffer too small in _DDECallback (XTYP_POKE)") );
+                                 "Buffer too small in _DDECallback (XTYP_POKE)" );
 
                     DdeGetData(hData, (LPBYTE)data, len, 0);
 
@@ -978,7 +978,7 @@ _DDECallback(UINT wType,
 
                     char* const data = (char *)connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
-                                 wxT("Buffer too small in _DDECallback (XTYP_ADVDATA)") );
+                                 "Buffer too small in _DDECallback (XTYP_ADVDATA)" );
 
                     DdeGetData(hData, (LPBYTE)data, len, 0);
 
@@ -1044,7 +1044,7 @@ The returned handle has to be freed by the caller (using
 */
 static HSZ DDEAtomFromString(const wxString& s)
 {
-    wxASSERT_MSG( DDEIdInst, wxT("DDE not initialized") );
+    wxASSERT_MSG( DDEIdInst, "DDE not initialized" );
 
     HSZ hsz = DdeCreateStringHandle(DDEIdInst, wxMSW_CONV_LPTSTR(s), DDE_CP);
     if ( !hsz )
@@ -1071,7 +1071,7 @@ static void DDEFreeString(HSZ hsz)
     // DS: Failure to free a string handle might indicate there's
     // some other severe error.
     bool ok = (::DdeFreeStringHandle(DDEIdInst, hsz) != 0);
-    wxASSERT_MSG( ok, wxT("Failed to free DDE string handle") );
+    wxASSERT_MSG( ok, "Failed to free DDE string handle" );
     wxUnusedVar(ok);
 }
 
@@ -1086,7 +1086,7 @@ static void DDELogError(const wxString& s, UINT error)
         error = DdeGetLastError(DDEIdInst);
     }
 
-    wxLogError(s + wxT(": ") + DDEGetErrorMsg(error));
+    wxLogError(s + ": " + DDEGetErrorMsg(error));
 }
 
 static wxString DDEGetErrorMsg(UINT error)

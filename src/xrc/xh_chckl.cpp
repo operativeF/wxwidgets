@@ -39,11 +39,11 @@ wxCheckListBoxXmlHandler::wxCheckListBoxXmlHandler()
 
 wxObject *wxCheckListBoxXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("wxCheckListBox"))
+    if (m_class == "wxCheckListBox")
     {
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately(nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately(nullptr, GetParamNode("content"));
 
         XRC_MAKE_INSTANCE(control, wxCheckListBox)
 
@@ -56,14 +56,14 @@ wxObject *wxCheckListBoxXmlHandler::DoCreateResource()
                         GetName());
 
         // step through children myself (again.)
-        wxXmlNode *n = GetParamNode(wxT("content"));
+        wxXmlNode *n = GetParamNode("content");
         if (n)
             n = n->GetChildren();
         int i = 0;
         while (n)
         {
             if (n->GetType() != wxXML_ELEMENT_NODE ||
-                n->GetName() != wxT("item"))
+                n->GetName() != "item")
                { n = n->GetNext(); continue; }
 
             // FIXME: bad.
@@ -96,8 +96,8 @@ wxObject *wxCheckListBoxXmlHandler::DoCreateResource()
 
 bool wxCheckListBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxCheckListBox")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxCheckListBox") ||
+           (m_insideBox && node->GetName() == "item"));
 }
 
 #endif // wxUSE_XRC && wxUSE_CHECKLISTBOX

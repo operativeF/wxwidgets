@@ -28,10 +28,11 @@ struct _SYSTEMTIME;
 
 #include "wx/dynarray.h"
 
+#include <fmt/core.h>
+#include <gsl/gsl>
+
 #include <ctime>
 #include <vector>
-
-#include <gsl/gsl>
 
 // not all c-runtimes are based on 1/1/1970 being (time_t) 0
 // set this to the corresponding value in seconds 1/1/1970 has on your
@@ -972,19 +973,19 @@ public:
     bool ParseISODate(const wxString& date)
     {
         wxString::const_iterator end;
-        return ParseFormat(date, wxS("%Y-%m-%d"), &end) && end == date.end();
+        return ParseFormat(date, "%Y-%m-%d", &end) && end == date.end();
     }
 
     bool ParseISOTime(const wxString& time)
     {
         wxString::const_iterator end;
-        return ParseFormat(time, wxS("%H:%M:%S"), &end) && end == time.end();
+        return ParseFormat(time, "%H:%M:%S", &end) && end == time.end();
     }
 
     bool ParseISOCombined(const wxString& datetime, char sep = 'T')
     {
         wxString::const_iterator end;
-        const wxString fmt = wxS("%Y-%m-%d") + wxString(sep) + wxS("%H:%M:%S");
+        const wxString fmt = fmt::format("%Y-%m-%d{}%H:%M:%S", sep);
         return ParseFormat(datetime, fmt, &end) && end == datetime.end();
     }
 
@@ -1010,15 +1011,15 @@ public:
     wxString Format(const wxString& format = wxDefaultDateTimeFormat,
                     const TimeZone& tz = Local) const;
         // preferred date representation for the current locale
-    wxString FormatDate() const { return Format(wxS("%x")); }
+    wxString FormatDate() const { return Format("%x"); }
         // preferred time representation for the current locale
-    wxString FormatTime() const { return Format(wxS("%X")); }
+    wxString FormatTime() const { return Format("%X"); }
         // returns the string representing the date in ISO 8601 format
         // (YYYY-MM-DD)
-    wxString FormatISODate() const { return Format(wxS("%Y-%m-%d")); }
+    wxString FormatISODate() const { return Format("%Y-%m-%d"); }
         // returns the string representing the time in ISO 8601 format
         // (HH:MM:SS)
-    wxString FormatISOTime() const { return Format(wxS("%H:%M:%S")); }
+    wxString FormatISOTime() const { return Format("%H:%M:%S"); }
         // return the combined date time representation in ISO 8601 format; the
         // separator character should be 'T' according to the standard but it
         // can also be useful to set it to ' '
@@ -1686,7 +1687,7 @@ inline wxDateTime::wxDateTime(double jdn)
 
 inline wxDateTime& wxDateTime::Set(const Tm& tm)
 {
-    wxASSERT_MSG( tm.IsValid(), wxT("invalid broken down date/time") );
+    wxASSERT_MSG( tm.IsValid(), "invalid broken down date/time" );
 
     return Set(tm.mday, (Month)tm.mon, tm.year,
                tm.hour, tm.min, tm.sec, tm.msec);
@@ -1717,14 +1718,14 @@ inline wxDateTime::wxDateTime(wxDateTime_t day,
 
 inline wxLongLong wxDateTime::GetValue() const
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
 
     return m_time;
 }
 
 inline time_t wxDateTime::GetTicks() const
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
     if ( !IsInStdRange() )
     {
         return (time_t)-1;
@@ -1857,14 +1858,14 @@ inline bool wxDateTime::IsEqualUpTo(const wxDateTime& dt,
 
 inline wxDateTime wxDateTime::Add(const wxTimeSpan& diff) const
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
 
     return wxDateTime(m_time + diff.GetValue());
 }
 
 inline wxDateTime& wxDateTime::Add(const wxTimeSpan& diff)
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
 
     m_time += diff.GetValue();
 
@@ -1878,14 +1879,14 @@ inline wxDateTime& wxDateTime::operator+=(const wxTimeSpan& diff)
 
 inline wxDateTime wxDateTime::Subtract(const wxTimeSpan& diff) const
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
 
     return wxDateTime(m_time - diff.GetValue());
 }
 
 inline wxDateTime& wxDateTime::Subtract(const wxTimeSpan& diff)
 {
-    wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid(), "invalid wxDateTime");
 
     m_time -= diff.GetValue();
 
@@ -1899,7 +1900,7 @@ inline wxDateTime& wxDateTime::operator-=(const wxTimeSpan& diff)
 
 inline wxTimeSpan wxDateTime::Subtract(const wxDateTime& datetime) const
 {
-    wxASSERT_MSG( IsValid() && datetime.IsValid(), wxT("invalid wxDateTime"));
+    wxASSERT_MSG( IsValid() && datetime.IsValid(), "invalid wxDateTime");
 
     return wxTimeSpan(GetValue() - datetime.GetValue());
 }

@@ -35,7 +35,7 @@ class wxTextInputStream
 {
 public:
     wxTextInputStream(wxInputStream& s,
-                      const wxString &sep=wxT(" \t"),
+                      const wxString &sep=" \t",
                       const wxMBConv& conv = wxConvAuto());
 
     ~wxTextInputStream();

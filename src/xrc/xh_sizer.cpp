@@ -89,18 +89,18 @@ wxSizerXmlHandler::wxSizerXmlHandler()
 bool wxSizerXmlHandler::CanHandle(wxXmlNode *node)
 {
     return ( (!m_isInside && IsSizerNode(node)) ||
-             (m_isInside && IsOfClass(node, wxT("sizeritem"))) ||
-             (m_isInside && IsOfClass(node, wxT("spacer")))
+             (m_isInside && IsOfClass(node, "sizeritem")) ||
+             (m_isInside && IsOfClass(node, "spacer"))
         );
 }
 
 
 wxObject* wxSizerXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("sizeritem"))
+    if (m_class == "sizeritem")
         return Handle_sizeritem();
 
-    else if (m_class == wxT("spacer"))
+    else if (m_class == "spacer")
         return Handle_spacer();
 
     else
@@ -110,27 +110,27 @@ wxObject* wxSizerXmlHandler::DoCreateResource()
 
 wxSizer* wxSizerXmlHandler::DoCreateSizer(const wxString& name)
 {
-    if (name == wxT("wxBoxSizer"))
+    if (name == "wxBoxSizer")
         return Handle_wxBoxSizer();
 #if wxUSE_STATBOX
-    else if (name == wxT("wxStaticBoxSizer"))
+    else if (name == "wxStaticBoxSizer")
         return Handle_wxStaticBoxSizer();
 #endif
-    else if (name == wxT("wxGridSizer"))
+    else if (name == "wxGridSizer")
     {
         if ( !ValidateGridSizerChildren() )
             return nullptr;
         return Handle_wxGridSizer();
     }
-    else if (name == wxT("wxFlexGridSizer"))
+    else if (name == "wxFlexGridSizer")
     {
         return Handle_wxFlexGridSizer();
     }
-    else if (name == wxT("wxGridBagSizer"))
+    else if (name == "wxGridBagSizer")
     {
         return Handle_wxGridBagSizer();
     }
-    else if (name == wxT("wxWrapSizer"))
+    else if (name == "wxWrapSizer")
     {
         return Handle_wxWrapSizer();
     }
@@ -143,21 +143,21 @@ wxSizer* wxSizerXmlHandler::DoCreateSizer(const wxString& name)
 
 bool wxSizerXmlHandler::IsSizerNode(wxXmlNode *node) const
 {
-    return (IsOfClass(node, wxT("wxBoxSizer"))) ||
-           (IsOfClass(node, wxT("wxStaticBoxSizer"))) ||
-           (IsOfClass(node, wxT("wxGridSizer"))) ||
-           (IsOfClass(node, wxT("wxFlexGridSizer"))) ||
-           (IsOfClass(node, wxT("wxGridBagSizer"))) ||
-           (IsOfClass(node, wxT("wxWrapSizer")));
+    return (IsOfClass(node, "wxBoxSizer")) ||
+           (IsOfClass(node, "wxStaticBoxSizer")) ||
+           (IsOfClass(node, "wxGridSizer")) ||
+           (IsOfClass(node, "wxFlexGridSizer")) ||
+           (IsOfClass(node, "wxGridBagSizer")) ||
+           (IsOfClass(node, "wxWrapSizer"));
 }
 
 
 wxObject* wxSizerXmlHandler::Handle_sizeritem()
 {
     // find the item to be managed by this sizeritem
-    wxXmlNode *n = GetParamNode(wxT("object"));
+    wxXmlNode *n = GetParamNode("object");
     if ( !n )
-        n = GetParamNode(wxT("object_ref"));
+        n = GetParamNode("object_ref");
 
     // did we find one?
     if (n)
@@ -236,7 +236,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
     if ( !sizer )
         return nullptr;
 
-    wxSize minsize = GetSize(wxT("minsize"));
+    wxSize minsize = GetSize("minsize");
     if (!(minsize == wxDefaultSize))
         sizer->SetMinSize(minsize);
 
@@ -247,7 +247,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
     // set new state
     m_parentSizer = sizer;
     m_isInside = true;
-    m_isGBS = (m_class == wxT("wxGridBagSizer"));
+    m_isGBS = (m_class == "wxGridBagSizer");
 
     wxObject* parent = m_parent;
 #if wxUSE_STATBOX
@@ -261,15 +261,15 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
     CreateChildren(parent, true/*only this handler*/);
 
     // This has to be done after CreateChildren().
-    if ( GetBool(wxT("hideitems"), false) == 1 )
+    if ( GetBool("hideitems", false) == 1 )
         sizer->ShowItems(false);
 
     // set growable rows and cols for sizers which support this
     if ( wxFlexGridSizer *flexsizer = wxDynamicCast(sizer, wxFlexGridSizer) )
     {
         SetFlexibleMode(flexsizer);
-        SetGrowables(flexsizer, wxT("growablerows"), true);
-        SetGrowables(flexsizer, wxT("growablecols"), false);
+        SetGrowables(flexsizer, "growablerows", true);
+        SetGrowables(flexsizer, "growablecols", false);
     }
 
     // restore state
@@ -307,14 +307,14 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
 
 wxSizer*  wxSizerXmlHandler::Handle_wxBoxSizer()
 {
-    return new wxBoxSizer(GetStyle(wxT("orient"), wxHORIZONTAL));
+    return new wxBoxSizer(GetStyle("orient", wxHORIZONTAL));
 }
 
 #if wxUSE_STATBOX
 wxSizer*  wxSizerXmlHandler::Handle_wxStaticBoxSizer()
 {
-    wxXmlNode* nodeWindowLabel = GetParamNode(wxS("windowlabel"));
-    wxString const& labelText = GetText(wxS("label"));
+    wxXmlNode* nodeWindowLabel = GetParamNode("windowlabel");
+    wxString const& labelText = GetText("label");
 
     wxStaticBox* box = nullptr;
     if ( nodeWindowLabel )
@@ -369,14 +369,14 @@ wxSizer*  wxSizerXmlHandler::Handle_wxStaticBoxSizer()
                               GetName());
     }
 
-    return new wxStaticBoxSizer(box, GetStyle(wxS("orient"), wxHORIZONTAL));
+    return new wxStaticBoxSizer(box, GetStyle("orient", wxHORIZONTAL));
 }
 #endif // wxUSE_STATBOX
 
 wxSizer*  wxSizerXmlHandler::Handle_wxGridSizer()
 {
-    return new wxGridSizer(GetLong(wxT("rows")), GetLong(wxT("cols")),
-                           GetDimension(wxT("vgap")), GetDimension(wxT("hgap")));
+    return new wxGridSizer(GetLong("rows")), GetLong(wxT("cols"),
+                           GetDimension("vgap")), GetDimension(wxT("hgap"));
 }
 
 
@@ -384,8 +384,8 @@ wxFlexGridSizer* wxSizerXmlHandler::Handle_wxFlexGridSizer()
 {
     if ( !ValidateGridSizerChildren() )
         return nullptr;
-    return new wxFlexGridSizer(GetLong(wxT("rows")), GetLong(wxT("cols")),
-                               GetDimension(wxT("vgap")), GetDimension(wxT("hgap")));
+    return new wxFlexGridSizer(GetLong("rows")), GetLong(wxT("cols"),
+                               GetDimension("vgap")), GetDimension(wxT("hgap"));
 }
 
 
@@ -393,7 +393,7 @@ wxGridBagSizer* wxSizerXmlHandler::Handle_wxGridBagSizer()
 {
     if ( !ValidateGridSizerChildren() )
         return nullptr;
-    return new wxGridBagSizer(GetDimension(wxT("vgap")), GetDimension(wxT("hgap")));
+    return new wxGridBagSizer(GetDimension("vgap")), GetDimension(wxT("hgap"));
 }
 
 wxSizer*  wxSizerXmlHandler::Handle_wxWrapSizer()
@@ -444,41 +444,41 @@ bool wxSizerXmlHandler::ValidateGridSizerChildren()
 
 void wxSizerXmlHandler::SetFlexibleMode(wxFlexGridSizer* fsizer)
 {
-    if (HasParam(wxT("flexibledirection")))
+    if (HasParam("flexibledirection"))
     {
-        wxString dir = GetParamValue(wxT("flexibledirection"));
+        wxString dir = GetParamValue("flexibledirection");
 
-        if (dir == wxT("wxVERTICAL"))
+        if (dir == "wxVERTICAL")
             fsizer->SetFlexibleDirection(wxVERTICAL);
-        else if (dir == wxT("wxHORIZONTAL"))
+        else if (dir == "wxHORIZONTAL")
             fsizer->SetFlexibleDirection(wxHORIZONTAL);
-        else if (dir == wxT("wxBOTH"))
+        else if (dir == "wxBOTH")
             fsizer->SetFlexibleDirection(wxBOTH);
         else
         {
             ReportParamError
             (
-                wxT("flexibledirection"),
+                "flexibledirection",
                 wxString::Format("unknown direction \"%s\"", dir)
             );
         }
     }
 
-    if (HasParam(wxT("nonflexiblegrowmode")))
+    if (HasParam("nonflexiblegrowmode"))
     {
-        wxString mode = GetParamValue(wxT("nonflexiblegrowmode"));
+        wxString mode = GetParamValue("nonflexiblegrowmode");
 
-        if (mode == wxT("wxFlexSizerGrowMode::None"))
+        if (mode == "wxFlexSizerGrowMode::None")
             fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::None);
-        else if (mode == wxT("wxFlexSizerGrowMode::Specified"))
+        else if (mode == "wxFlexSizerGrowMode::Specified")
             fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::Specified);
-        else if (mode == wxT("wxFlexSizerGrowMode::All"))
+        else if (mode == "wxFlexSizerGrowMode::All")
             fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::All);
         else
         {
             ReportParamError
             (
-                wxT("nonflexiblegrowmode"),
+                "nonflexiblegrowmode",
                 wxString::Format("unknown grow mode \"%s\"", mode)
             );
         }
@@ -495,7 +495,7 @@ void wxSizerXmlHandler::SetGrowables(wxFlexGridSizer* sizer,
     const int nslots = rows ? nrows : ncols;
 
     wxStringTokenizer tkn;
-    tkn.SetString(GetParamValue(param), wxT(","));
+    tkn.SetString(GetParamValue(param), ",");
 
     while (tkn.HasMoreTokens())
     {
@@ -556,7 +556,7 @@ void wxSizerXmlHandler::SetGrowables(wxFlexGridSizer* sizer,
 
 wxGBPosition wxSizerXmlHandler::GetGBPos()
 {
-    wxSize sz = GetPairInts(wxS("cellpos"));
+    wxSize sz = GetPairInts("cellpos");
     if (sz.x < 0) sz.x = 0;
     if (sz.y < 0) sz.y = 0;
     return {sz.x, sz.y};
@@ -564,7 +564,7 @@ wxGBPosition wxSizerXmlHandler::GetGBPos()
 
 wxGBSpan wxSizerXmlHandler::GetGBSpan()
 {
-    wxSize sz = GetPairInts(wxS("cellspan"));
+    wxSize sz = GetPairInts("cellspan");
     if (sz.x < 1) sz.x = 1;
     if (sz.y < 1) sz.y = 1;
     return {sz.x, sz.y};
@@ -582,7 +582,7 @@ wxSizerItem* wxSizerXmlHandler::MakeSizerItem()
 
 int wxSizerXmlHandler::GetSizerFlags()
 {
-    const wxString s = GetParamValue(wxS("flag"));
+    const wxString s = GetParamValue("flag");
     if ( s.empty() )
         return 0;
 
@@ -642,7 +642,7 @@ int wxSizerXmlHandler::GetSizerFlags()
 
     int flags = 0;
 
-    wxStringTokenizer tkn(s, wxS("| \t\n"), wxStringTokenizerMode::StrTok);
+    wxStringTokenizer tkn(s, "| \t\n", wxStringTokenizerMode::StrTok);
     while ( tkn.HasMoreTokens() )
     {
         // TODO: Verify this.
@@ -726,9 +726,9 @@ int wxSizerXmlHandler::GetSizerFlags()
                 // This is a special case: both wxALIGN_LEFT and wxALIGN_TOP
                 // have value of 0, so we need to examine the name of the flag
                 // and not just its value.
-                if ( flagName == wxS("wxALIGN_LEFT") )
+                if ( flagName == "wxALIGN_LEFT" )
                     flagSpecifiesAlignIn[Orient_Horz] = true;
-                else if ( flagName == wxS("wxALIGN_TOP") )
+                else if ( flagName == "wxALIGN_TOP" )
                     flagSpecifiesAlignIn[Orient_Vert] = true;
                 break;
         }
@@ -893,13 +893,13 @@ int wxSizerXmlHandler::GetSizerFlags()
 
 void wxSizerXmlHandler::SetSizerItemAttributes(wxSizerItem* sitem)
 {
-    sitem->SetProportion(GetLong(wxT("option")));  // Should this check for "proportion" too?
+    sitem->SetProportion(GetLong("option"));  // Should this check for "proportion" too?
     sitem->SetFlag(GetSizerFlags());
-    sitem->SetBorder(GetDimension(wxT("border")));
-    wxSize sz = GetSize(wxT("minsize"));
+    sitem->SetBorder(GetDimension("border"));
+    wxSize sz = GetSize("minsize");
     if (!(sz == wxDefaultSize))
         sitem->SetMinSize(sz);
-    sz = GetPairInts(wxT("ratio"));
+    sz = GetPairInts("ratio");
     if (!(sz == wxDefaultSize))
         sitem->SetRatio(sz);
 
@@ -933,7 +933,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler, wxXmlResourceHandler
 
 wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("wxStdDialogButtonSizer"))
+    if (m_class == "wxStdDialogButtonSizer")
     {
         wxASSERT( !m_parentSizer );
 
@@ -954,9 +954,9 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
         wxASSERT( m_parentSizer );
 
         // find the item to be managed by this sizeritem
-        wxXmlNode *n = GetParamNode(wxT("object"));
+        wxXmlNode *n = GetParamNode("object");
         if ( !n )
-            n = GetParamNode(wxT("object_ref"));
+            n = GetParamNode("object_ref");
 
         // did we find one?
         if (n)
@@ -981,8 +981,8 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
 
 bool wxStdDialogButtonSizerXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (!m_isInside && IsOfClass(node, wxT("wxStdDialogButtonSizer"))) ||
-           (m_isInside && IsOfClass(node, wxT("button")));
+    return (!m_isInside && IsOfClass(node, "wxStdDialogButtonSizer")) ||
+           (m_isInside && IsOfClass(node, "button"));
 }
 #endif // wxUSE_BUTTON
 

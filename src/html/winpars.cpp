@@ -157,7 +157,7 @@ void wxHtmlWinParser::SetStandardFonts(int size,
 void wxHtmlWinParser::InitParser(const wxString& source)
 {
     wxHtmlParser::InitParser(source);
-    wxASSERT_MSG(m_DC != nullptr, wxT("no DC assigned to wxHtmlWinParser!!"));
+    wxASSERT_MSG(m_DC != nullptr, "no DC assigned to wxHtmlWinParser!!");
 
     m_FontBold = m_FontItalic = m_FontUnderlined = m_FontFixed = FALSE;
     m_FontSize = 3; //default one
@@ -582,7 +582,7 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
 {
     wxString str;
 
-    str = styleParams.GetParam(wxS("color"));
+    str = styleParams.GetParam("color");
     if ( !str.empty() )
     {
         wxColour clr;
@@ -593,7 +593,7 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         }
     }
 
-    str = styleParams.GetParam(wxS("background-color"));
+    str = styleParams.GetParam("background-color");
     if ( !str.empty() )
     {
         wxColour clr;
@@ -605,11 +605,11 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         }
     }
 
-    str = styleParams.GetParam(wxS("font-size"));
+    str = styleParams.GetParam("font-size");
     if ( !str.empty() )
     {
         // Point size
-        int foundIndex = str.Find(wxS("pt"));
+        int foundIndex = str.Find("pt");
         if (foundIndex != wxNOT_FOUND)
         {
             str.Truncate(foundIndex);
@@ -626,17 +626,17 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         // else: check for other ways of specifying size (TODO)
     }
 
-    str = styleParams.GetParam(wxS("font-weight"));
+    str = styleParams.GetParam("font-weight");
     if ( !str.empty() )
     {
         // Only bold and normal supported just now
-        if ( str == wxS("bold") )
+        if ( str == "bold" )
         {
             m_WParser->SetFontBold(true);
             m_WParser->GetContainer()->InsertCell(
                 new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
         }
-        else if ( str == wxS("normal") )
+        else if ( str == "normal" )
         {
             m_WParser->SetFontBold(false);
             m_WParser->GetContainer()->InsertCell(
@@ -644,18 +644,18 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         }
     }
 
-    str = styleParams.GetParam(wxS("font-style"));
+    str = styleParams.GetParam("font-style");
     if ( !str.empty() )
     {
         // "oblique" and "italic" are more or less the same.
         // "inherit" (using the parent font) is not supported.
-        if ( str == wxS("oblique") || str == wxS("italic") )
+        if ( str == "oblique" || str == "italic" )
         {
             m_WParser->SetFontItalic(true);
             m_WParser->GetContainer()->InsertCell(
                 new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
         }
-        else if ( str == wxS("normal") )
+        else if ( str == "normal" )
         {
             m_WParser->SetFontItalic(false);
             m_WParser->GetContainer()->InsertCell(
@@ -663,11 +663,11 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         }
     }
 
-    str = styleParams.GetParam(wxS("text-decoration"));
+    str = styleParams.GetParam("text-decoration");
     if ( !str.empty() )
     {
         // Only underline is supported.
-        if ( str == wxS("underline") )
+        if ( str == "underline" )
         {
             m_WParser->SetFontUnderlined(true);
             m_WParser->GetContainer()->InsertCell(
@@ -675,7 +675,7 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
         }
     }
 
-    str = styleParams.GetParam(wxS("font-family"));
+    str = styleParams.GetParam("font-family");
     if ( !str.empty() )
     {
         m_WParser->SetFontFace(str);

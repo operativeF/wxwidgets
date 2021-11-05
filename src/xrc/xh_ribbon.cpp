@@ -54,19 +54,19 @@ wxRibbonXmlHandler::wxRibbonXmlHandler()
 
 wxObject *wxRibbonXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("button"))
+    if (m_class == "button")
         return Handle_button();
-    if (m_class == wxT("wxRibbonButtonBar"))
+    if (m_class == "wxRibbonButtonBar")
         return Handle_buttonbar();
-    else if (m_class == wxT("item"))
+    else if (m_class == "item")
         return Handle_galleryitem();
-    else if (m_class == wxT("wxRibbonGallery"))
+    else if (m_class == "wxRibbonGallery")
         return Handle_gallery();
-    else if (m_class == wxT("wxRibbonPanel") || m_class == wxT("panel"))
+    else if (m_class == "wxRibbonPanel") || m_class == wxT("panel")
         return Handle_panel();
-    else if (m_class == wxT("wxRibbonPage") || m_class == wxT("page"))
+    else if (m_class == "wxRibbonPage") || m_class == wxT("page")
         return Handle_page();
-    else if (m_class == wxT("wxRibbonBar"))
+    else if (m_class == "wxRibbonBar")
         return Handle_bar();
     else
         return Handle_control ();
@@ -76,23 +76,23 @@ bool wxRibbonXmlHandler::CanHandle(wxXmlNode *node)
 {
     return IsRibbonControl(node) ||
            (m_isInside == &wxRibbonButtonBar::ms_classInfo &&
-                IsOfClass(node, wxT("button"))) ||
+                IsOfClass(node, "button")) ||
            (m_isInside == &wxRibbonBar::ms_classInfo &&
-                IsOfClass(node, wxT("page"))) ||
+                IsOfClass(node, "page")) ||
            (m_isInside == &wxRibbonPage::ms_classInfo &&
-                IsOfClass(node, wxT("panel"))) ||
+                IsOfClass(node, "panel")) ||
            (m_isInside == &wxRibbonGallery::ms_classInfo &&
-                IsOfClass(node, wxT("item")));
+                IsOfClass(node, "item"));
 }
 
 bool wxRibbonXmlHandler::IsRibbonControl (wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxRibbonBar")) ||
-           IsOfClass(node, wxT("wxRibbonButtonBar")) ||
-           IsOfClass(node, wxT("wxRibbonPage")) ||
-           IsOfClass(node, wxT("wxRibbonPanel")) ||
-           IsOfClass(node, wxT("wxRibbonGallery")) ||
-           IsOfClass(node, wxT("wxRibbonControl"));
+    return IsOfClass(node, "wxRibbonBar") ||
+           IsOfClass(node, "wxRibbonButtonBar") ||
+           IsOfClass(node, "wxRibbonPage") ||
+           IsOfClass(node, "wxRibbonPanel") ||
+           IsOfClass(node, "wxRibbonGallery") ||
+           IsOfClass(node, "wxRibbonControl");
 }
 
 void wxRibbonXmlHandler::Handle_RibbonArtProvider(wxRibbonControl *control)
@@ -138,7 +138,7 @@ wxObject* wxRibbonXmlHandler::Handle_button()
 
     wxRibbonButtonKind  kind = wxRIBBON_BUTTON_NORMAL;
 
-    if (GetBool(wxT("hybrid")))
+    if (GetBool("hybrid"))
         kind = wxRIBBON_BUTTON_HYBRID;
 
     // FIXME: The code below uses wxXmlNode directly but this can't be done
@@ -198,7 +198,7 @@ wxObject* wxRibbonXmlHandler::Handle_button()
         ReportError ("could not create button");
     }
 
-    if ( GetBool(wxT("disabled")) )
+    if ( GetBool("disabled") )
             buttonBar->EnableButton(GetID(), false);
 
     return nullptr; // nothing to return

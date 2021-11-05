@@ -30,7 +30,7 @@ wxObject* wxVariantOfPtrToObjectConverterwxObject ( const wxAny &data )
  wxAny wxObjectToVariantConverterwxObject ( wxObject *data )
  { return wxAny( dynamic_cast<wxObject*> (data)  ) ; }
 
- wxClassInfo wxObject::ms_classInfo(ms_classParents , {} , wxT("wxObject"),
+ wxClassInfo wxObject::ms_classInfo(ms_classParents , {} , "wxObject",
             (int) sizeof(wxObject),                              \
             (wxObjectConstructorFn) 0   ,
             NULL,NULL,0 , 0 ,
@@ -41,8 +41,8 @@ wxObject* wxVariantOfPtrToObjectConverterwxObject ( const wxAny &data )
 
  wxClassTypeInfo s_typeInfo(wxT_OBJECT_PTR , &wxObject::ms_classInfo , NULL , NULL , typeid(wxObject*).name() ) ;
  wxClassTypeInfo s_typeInfowxObject(wxT_OBJECT , &wxObject::ms_classInfo , NULL , NULL , typeid(wxObject).name() ) ;
-#else
-wxClassInfo wxObject::ms_classInfo( wxT("wxObject"), nullptr, nullptr,
+#else // FIXME: Change to narrow string.
+wxClassInfo wxObject::ms_classInfo( L"wxObject", nullptr, nullptr,
                                         (int) sizeof(wxObject),
                                         (wxObjectConstructorFn) nullptr );
 #endif
@@ -212,7 +212,7 @@ void wxClassInfo::Register()
     else
     {
         // guard againt reentrance once the global has been created
-        wxASSERT_MSG(++entry == 1, wxT("wxClassInfo::Register() reentrance"));
+        wxASSERT_MSG(++entry == 1, "wxClassInfo::Register() reentrance");
         classTable = sm_classTable;
     }
 
@@ -224,9 +224,9 @@ void wxClassInfo::Register()
     wxASSERT_MSG( classTable->Get(m_className) == nullptr,
         wxString::Format
         (
-            wxT("Class \"%s\" already in RTTI table - have you used wxIMPLEMENT_DYNAMIC_CLASS() multiple times or linked some object file twice)?"),
+            "Class \"%s\" already in RTTI table - have you used wxIMPLEMENT_DYNAMIC_CLASS() multiple times or linked some object file twice)?",
             m_className
-        )
+        ).ToStdString()
     );
 
     classTable->Put(m_className, (wxObject *)this);
@@ -379,13 +379,13 @@ void wxObject::AllocExclusive()
     //else: ref count is 1, we are exclusive owners of m_refData anyhow
 
     wxASSERT_MSG( m_refData && m_refData->GetRefCount() == 1,
-                  wxT("wxObject::AllocExclusive() failed.") );
+                  "wxObject::AllocExclusive() failed." );
 }
 
 wxObjectRefData *wxObject::CreateRefData() const
 {
     // if you use AllocExclusive() you must override this method
-    wxFAIL_MSG( wxT("CreateRefData() must be overridden if called!") );
+    wxFAIL_MSG( "CreateRefData() must be overridden if called!" );
 
     return nullptr;
 }
@@ -394,7 +394,7 @@ wxObjectRefData *
 wxObject::CloneRefData(const wxObjectRefData * WXUNUSED(data)) const
 {
     // if you use AllocExclusive() you must override this method
-    wxFAIL_MSG( wxT("CloneRefData() must be overridden if called!") );
+    wxFAIL_MSG( "CloneRefData() must be overridden if called!" );
 
     return nullptr;
 }

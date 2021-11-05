@@ -176,7 +176,7 @@ bool wxNotebook::Create(wxWindow *parent,
             }
             else
             {
-                wxLogLastError(wxT("GetClassInfoEx(SysTabCtl32)"));
+                wxLogLastError("GetClassInfoEx(SysTabCtl32)");
             }
         }
 
@@ -207,7 +207,7 @@ bool wxNotebook::Create(wxWindow *parent,
 
 #if wxUSE_UXTHEME
     if ( HasFlag(wxNB_NOPAGETHEME) ||
-            wxSystemOptions::IsFalse(wxT("msw.notebook.themed-background")) )
+            wxSystemOptions::IsFalse("msw.notebook.themed-background") )
     {
         SetBackgroundColour(GetThemeBackgroundColour());
     }
@@ -277,7 +277,7 @@ int wxNotebook::GetRowCount() const
 
 int wxNotebook::SetSelection(size_t nPage)
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, "notebook page out of range" );
 
     if ( m_selection == wxNOT_FOUND || nPage != (size_t)m_selection )
     {
@@ -328,7 +328,7 @@ void wxNotebook::UpdateSelection(int selNew)
 
 int wxNotebook::ChangeSelection(size_t nPage)
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, "notebook page out of range" );
 
     const int selOld = m_selection;
 
@@ -344,7 +344,7 @@ int wxNotebook::ChangeSelection(size_t nPage)
 
 bool wxNotebook::SetPageText(size_t nPage, const std::string& strText)
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), false, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), false, "notebook page out of range" );
 
     TC_ITEM tcItem;
     tcItem.mask = TCIF_TEXT;
@@ -388,7 +388,7 @@ std::string wxNotebook::GetPageText(size_t nPage) const
 
 int wxNotebook::GetPageImage(size_t nPage) const
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, "notebook page out of range" );
 
     TC_ITEM tcItem;
     tcItem.mask = TCIF_IMAGE;
@@ -399,7 +399,7 @@ int wxNotebook::GetPageImage(size_t nPage) const
 
 bool wxNotebook::SetPageImage(size_t nPage, int nImage)
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), false, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), false, "notebook page out of range" );
 
     TC_ITEMW tcItem = {
         .mask = TCIF_IMAGE,
@@ -510,7 +510,7 @@ wxSize wxNotebook::CalcSizeFromPage(const wxSize& sizePage) const
 
 void wxNotebook::AdjustPageSize(wxNotebookPage *page)
 {
-    wxCHECK_RET( page, wxT("NULL page in wxNotebook::AdjustPageSize") );
+    wxCHECK_RET( page, "NULL page in wxNotebook::AdjustPageSize" );
 
     const wxRect r = GetPageSize();
     if ( !r.IsEmpty() )
@@ -535,7 +535,7 @@ wxNotebookPage *wxNotebook::DoRemovePage(size_t nPage)
     pageRemoved->Show(false);
 
     if ( !TabCtrl_DeleteItem(GetHwnd(), nPage) )
-        wxLogLastError(wxS("TabCtrl_DeleteItem()"));
+        wxLogLastError("TabCtrl_DeleteItem()");
 
     if ( m_pages.empty() )
     {
@@ -584,7 +584,7 @@ bool wxNotebook::DeleteAllPages()
     wxBookCtrlBase::DeleteAllPages();
 
     if ( !TabCtrl_DeleteAllItems(GetHwnd()) )
-        wxLogLastError(wxS("TabCtrl_DeleteAllItems()"));
+        wxLogLastError("TabCtrl_DeleteAllItems()");
 
     return true;
 }
@@ -596,12 +596,12 @@ bool wxNotebook::InsertPage(size_t nPage,
                             bool bSelect,
                             int imageId)
 {
-    wxCHECK_MSG( pPage != nullptr, false, wxT("NULL page in wxNotebook::InsertPage") );
+    wxCHECK_MSG( pPage != nullptr, false, "NULL page in wxNotebook::InsertPage" );
     wxCHECK_MSG( IS_VALID_PAGE(nPage) || nPage == GetPageCount(), false,
-                 wxT("invalid index in wxNotebook::InsertPage") );
+                 "invalid index in wxNotebook::InsertPage" );
 
     wxASSERT_MSG( pPage->GetParent() == this,
-                    wxT("notebook pages must have notebook as parent") );
+                    "notebook pages must have notebook as parent" );
 
     // add a new tab to the control
     // ----------------------------
@@ -1242,7 +1242,7 @@ wxColour wxNotebook::GetThemeBackgroundColour() const
                 if (S_OK == ::GetCurrentThemeName(szwThemeFile, 1024, szwThemeColor, 256, nullptr, 0))
                 {
                     wxString themeFile(szwThemeFile);
-                    if (themeFile.Find(wxT("Aero")) != -1 && wxString(szwThemeColor) == wxT("NormalColor"))
+                    if (themeFile.Find("Aero") != -1 && wxString(szwThemeColor) == "NormalColor")
                         s_AeroStatus = 1;
                     else
                         s_AeroStatus = 0;

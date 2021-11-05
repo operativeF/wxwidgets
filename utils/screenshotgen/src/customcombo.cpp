@@ -140,19 +140,19 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
     wxArrayString   arrItems;
 
     // Create common strings array
-//    arrItems.Add( wxT("Solid") );
-//    arrItems.Add( wxT("Transparent") );
-//    arrItems.Add( wxT("Dot") );
-//    arrItems.Add( wxT("Long Dash") );
-//    arrItems.Add( wxT("Short Dash") );
+//    arrItems.Add( "Solid" );
+//    arrItems.Add( "Transparent" );
+//    arrItems.Add( "Dot" );
+//    arrItems.Add( "Long Dash" );
+//    arrItems.Add( "Short Dash" );
     //    Comment the following since we don't need too long a drop list
-        arrItems.Add( wxT("Dot Dash") );
-        arrItems.Add( wxT("Backward Diagonal Hatch") );
-        arrItems.Add( wxT("Cross-diagonal Hatch") );
-//        arrItems.Add( wxT("Forward Diagonal Hatch") );
-//        arrItems.Add( wxT("Cross Hatch") );
-//        arrItems.Add( wxT("Horizontal Hatch") );
-//        arrItems.Add( wxT("Vertical Hatch") );
+        arrItems.Add( "Dot Dash" );
+        arrItems.Add( "Backward Diagonal Hatch" );
+        arrItems.Add( "Cross-diagonal Hatch" );
+//        arrItems.Add( "Forward Diagonal Hatch" );
+//        arrItems.Add( "Cross Hatch" );
+//        arrItems.Add( "Horizontal Hatch" );
+//        arrItems.Add( "Vertical Hatch" );
 
     // When defining derivative class for callbacks, we need
     // to use two-stage creation (or redefine the common wx
@@ -168,9 +168,9 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
     odc->SetSelection(0);
 
     // Load images from disk
-    wxImage imgNormal(wxT("bitmaps/dropbutn.png"));
-    wxImage imgPressed(wxT("bitmaps/dropbutp.png"));
-    wxImage imgHover(wxT("bitmaps/dropbuth.png"));
+    wxImage imgNormal("bitmaps/dropbutn.png");
+    wxImage imgPressed("bitmaps/dropbutp.png");
+    wxImage imgHover("bitmaps/dropbuth.png");
 
     if ( imgNormal.IsOk() && imgPressed.IsOk() && imgHover.IsOk() )
     {
@@ -180,7 +180,7 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
         odc->SetButtonBitmaps(bmpNormal,false,bmpPressed,bmpHover);
     }
     else
-        wxLogError(wxT("Dropbutton images not found"));
+        wxLogError("Dropbutton images not found");
 
     return odc;
 }

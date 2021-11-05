@@ -35,14 +35,14 @@ wxObject *wxCommandLinkButtonXmlHandler::DoCreateResource()
 
    button->Create(m_parentAsWindow,
                     GetID(),
-                    GetText(wxS("label")),
-                    GetText(wxS("note")),
+                    GetText("label"),
+                    GetText("note"),
                     GetPosition(), GetSize(),
                     GetStyle(),
                     wxDefaultValidator,
                     GetName());
 
-    if (GetBool(wxT("default"), false))
+    if (GetBool("default", false))
         button->SetDefault();
 
     if ( GetParamNode("bitmap") )
@@ -58,7 +58,7 @@ wxObject *wxCommandLinkButtonXmlHandler::DoCreateResource()
 
 bool wxCommandLinkButtonXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxS("wxCommandLinkButton"));
+    return IsOfClass(node, "wxCommandLinkButton");
 }
 
 #endif // wxUSE_XRC && wxUSE_COMMANDLINKBUTTON

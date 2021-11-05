@@ -37,7 +37,7 @@ public:
         wxCHECK_MSG
         (
             HasFlag(wxFRAME_SHAPED), false,
-            wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
+            "Shaped windows must be created with the wxFRAME_SHAPED style."
         );
 
         return region.IsEmpty() ? DoClearShape() : DoSetRegionShape(region);
@@ -50,7 +50,7 @@ public:
         wxCHECK_MSG
         (
             HasFlag(wxFRAME_SHAPED), false,
-            wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
+            "Shaped windows must be created with the wxFRAME_SHAPED style."
         );
 
         return DoSetPathShape(path);

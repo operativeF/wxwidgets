@@ -76,32 +76,32 @@ bool wxAnimation::IsOk() const
 
 bool wxAnimation::IsCompatibleWith(wxClassInfo* ci) const
 {
-    wxCHECK_MSG( IsOk(), false, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), false, "invalid animation" );
 
     return GetImpl()->IsCompatibleWith(ci);
 }
 
 std::chrono::milliseconds wxAnimation::GetDelay(unsigned int frame) const
 {
-    wxCHECK_MSG( IsOk(), -1ms, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), -1ms, "invalid animation" );
     return GetImpl()->GetDelay(frame);
 }
 
 unsigned int wxAnimation::GetFrameCount() const
 {
-    wxCHECK_MSG( IsOk(), 0, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), 0, "invalid animation" );
     return GetImpl()->GetFrameCount();
 }
 
 wxImage wxAnimation::GetFrame(unsigned int frame) const
 {
-    wxCHECK_MSG( IsOk(), wxNullImage, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), wxNullImage, "invalid animation" );
     return GetImpl()->GetFrame(frame);
 }
 
 wxSize wxAnimation::GetSize() const
 {
-    wxCHECK_MSG( IsOk(), wxDefaultSize, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), wxDefaultSize, "invalid animation" );
     return GetImpl()->GetSize();
 }
 
@@ -109,13 +109,13 @@ bool wxAnimation::LoadFile(const std::string& name, wxAnimationType type)
 {
     // the animation impl may not be fully ready until after it has loaded the
     // file, so just check GetImpl in the Load methods
-    wxCHECK_MSG( GetImpl(), false, wxT("invalid animation") );
+    wxCHECK_MSG( GetImpl(), false, "invalid animation" );
     return GetImpl()->LoadFile(name, type);
 }
 
 bool wxAnimation::Load(wxInputStream& stream, wxAnimationType type)
 {
-    wxCHECK_MSG( GetImpl(), false, wxT("invalid animation") );
+    wxCHECK_MSG( GetImpl(), false, "invalid animation" );
     return GetImpl()->Load(stream, type);
 }
 
@@ -141,7 +141,7 @@ void wxAnimationCtrlBase::UpdateStaticImage()
             // need to (re)create m_bmpStaticReal
             if (!m_bmpStaticReal.Create(sz, m_bmpStatic.GetDepth()))
             {
-                wxLogDebug(wxT("Cannot create the static bitmap"));
+                wxLogDebug("Cannot create the static bitmap");
                 m_bmpStatic = wxNullBitmap;
                 return;
             }
@@ -202,7 +202,7 @@ void wxAnimation::AddHandler( wxAnimationDecoder *handler )
         // a good reason to add and remove duplicate handlers (and they
         // may) we should probably refcount the duplicates.
 
-        wxLogDebug( wxT("Adding duplicate animation handler for '%d' type"),
+        wxLogDebug( "Adding duplicate animation handler for '%d' type",
                     handler->GetType() );
         delete handler;
     }
@@ -218,7 +218,7 @@ void wxAnimation::InsertHandler( wxAnimationDecoder *handler )
     else
     {
         // see AddHandler for additional comments.
-        wxLogDebug( wxT("Inserting duplicate animation handler for '%d' type"),
+        wxLogDebug( "Inserting duplicate animation handler for '%d' type",
                     handler->GetType() );
         delete handler;
     }

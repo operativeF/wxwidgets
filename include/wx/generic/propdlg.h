@@ -36,7 +36,7 @@ class wxBookCtrlBase;
 //
 //     // Add page
 //     wxPanel* panel = new wxPanel(GetBookCtrl(), ...);
-//     GetBookCtrl()->AddPage(panel, wxT("General"));
+//     GetBookCtrl()->AddPage(panel, "General");
 //
 //     CreateButtons();
 //     LayoutDialog();

@@ -205,7 +205,7 @@ std::string wxGetStockLabel(wxWindowID id, unsigned int flags)
         STOCKITEM(wxID_ZOOM_OUT,            _("Zoom &Out"),           _("Zoom Out"));
 
         default:
-            wxFAIL_MSG( wxT("invalid stock item ID") );
+            wxFAIL_MSG( "invalid stock item ID" );
             break;
     }
 
@@ -329,6 +329,6 @@ bool wxIsStockLabel(wxWindowID id, const wxString& label)
     if (label == stock)
         return true;
 
-    stock.Replace(wxT("&"), {});
+    stock.Replace("&", {});
     return label == stock;
 }

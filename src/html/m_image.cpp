@@ -380,8 +380,8 @@ wxHtmlImageCell::wxHtmlImageCell(wxHtmlWindowInterface *windowIface,
 #if wxUSE_GIF && wxUSE_TIMER
                 bool readImg = true;
                 if ( m_windowIface &&
-                     (input->GetLocation().Matches(wxT("*.gif")) ||
-                      input->GetLocation().Matches(wxT("*.GIF"))) )
+                     (input->GetLocation().Matches("*.gif") ||
+                      input->GetLocation().Matches("*.GIF")) )
                 {
                     m_gifDecoder = new wxGIFDecoder();
                     if ( m_gifDecoder->LoadGIF(*s) == wxGIFErrorCode::OK )
@@ -660,10 +660,10 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
 
     TAG_HANDLER_PROC(tag)
     {
-        if (tag.GetName() == wxT("IMG"))
+        if (tag.GetName() == "IMG")
         {
             wxString tmp;
-            if (tag.GetParamAsString(wxT("SRC"), &tmp))
+            if (tag.GetParamAsString("SRC", &tmp))
             {
                 int w = wxDefaultCoord, h = wxDefaultCoord;
                 bool wpercent = false;
@@ -696,7 +696,7 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
                 if (!str)
                     str = m_WParser->OpenURL(wxHtmlURLType::Image, tmp);
 
-                if (tag.GetParamAsIntOrPercent(wxT("WIDTH"), &w, wpercent))
+                if (tag.GetParamAsIntOrPercent("WIDTH", &w, wpercent))
                 {
                     if (wpercent)
                     {
@@ -707,22 +707,22 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
                     }
                 }
 
-                if (tag.GetParamAsInt(wxT("HEIGHT"), &h))
+                if (tag.GetParamAsInt("HEIGHT", &h))
                 {
                     hpresent = true;
                 }
 
                 al = wxHTML_ALIGN_BOTTOM;
                 wxString alstr;
-                if (tag.GetParamAsString(wxT("ALIGN"), &alstr))
+                if (tag.GetParamAsString("ALIGN", &alstr))
                 {
                     alstr.MakeUpper();  // for the case alignment was in ".."
-                    if (alstr == wxT("TEXTTOP"))
+                    if (alstr == "TEXTTOP")
                         al = wxHTML_ALIGN_TOP;
-                    else if ((alstr == wxT("CENTER")) || (alstr == wxT("ABSCENTER")))
+                    else if ((alstr == "CENTER") || (alstr == "ABSCENTER"))
                         al = wxHTML_ALIGN_CENTER;
                 }
-                if (tag.GetParamAsString(wxT("USEMAP"), &mn))
+                if (tag.GetParamAsString("USEMAP", &mn))
                 {
                     if ( !mn.empty() && *mn.begin() == '#' )
                     {
@@ -736,18 +736,18 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
                                           al, mn);
                 m_WParser->ApplyStateToCell(cel);
                 m_WParser->StopCollapsingSpaces();
-                cel->SetId(tag.GetParam(wxT("id"))); // may be empty
-                cel->SetAlt(tag.GetParam(wxT("alt")));
+                cel->SetId(tag.GetParam("id")); // may be empty
+                cel->SetAlt(tag.GetParam("alt"));
                 m_WParser->GetContainer()->InsertCell(cel);
                 delete str;
             }
         }
-        if (tag.GetName() == wxT("MAP"))
+        if (tag.GetName() == "MAP")
         {
             m_WParser->CloseContainer();
             m_WParser->OpenContainer();
             wxString tmp;
-            if (tag.GetParamAsString(wxT("NAME"), &tmp))
+            if (tag.GetParamAsString("NAME", &tmp))
             {
                 wxHtmlImageMapCell *cel = new wxHtmlImageMapCell( tmp );
                 m_WParser->GetContainer()->InsertCell( cel );
@@ -756,29 +756,29 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
             m_WParser->CloseContainer();
             m_WParser->OpenContainer();
         }
-        if (tag.GetName() == wxT("AREA"))
+        if (tag.GetName() == "AREA")
         {
             wxString tmp;
-            if (tag.GetParamAsString(wxT("SHAPE"), &tmp))
+            if (tag.GetParamAsString("SHAPE", &tmp))
             {
-                wxString coords = tag.GetParam(wxT("COORDS"));
+                wxString coords = tag.GetParam("COORDS");
                 tmp.MakeUpper();
                 wxHtmlImageMapAreaCell *cel = nullptr;
-                if (tmp == wxT("POLY"))
+                if (tmp == "POLY")
                 {
                     cel = new wxHtmlImageMapAreaCell( wxHtmlImageMapAreaCell::POLY, coords, m_WParser->GetPixelScale() );
                 }
-                else if (tmp == wxT("CIRCLE"))
+                else if (tmp == "CIRCLE")
                 {
                     cel = new wxHtmlImageMapAreaCell( wxHtmlImageMapAreaCell::CIRCLE, coords, m_WParser->GetPixelScale() );
                 }
-                else if (tmp == wxT("RECT"))
+                else if (tmp == "RECT")
                 {
                     cel = new wxHtmlImageMapAreaCell( wxHtmlImageMapAreaCell::RECT, coords, m_WParser->GetPixelScale() );
                 }
                 wxString href;
-                if (cel != nullptr && tag.GetParamAsString(wxT("HREF"), &href))
-                    cel->SetLink(wxHtmlLinkInfo(href, tag.GetParam(wxT("TARGET"))));
+                if (cel != nullptr && tag.GetParamAsString("HREF", &href))
+                    cel->SetLink(wxHtmlLinkInfo(href, tag.GetParam("TARGET")));
                 if (cel != nullptr)
                     m_WParser->GetContainer()->InsertCell( cel );
             }

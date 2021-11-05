@@ -28,13 +28,13 @@ wxMenuXmlHandler::wxMenuXmlHandler()
 
 wxObject *wxMenuXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("wxMenu"))
+    if (m_class == "wxMenu")
     {
         wxMenu *menu = m_instance ? wxStaticCast(m_instance, wxMenu)
                                   : new wxMenu(GetStyle());
 
-        wxString title = GetText(wxT("label"));
-        wxString help = GetText(wxT("help"));
+        wxString title = GetText("label");
+        wxString help = GetText("help");
 
         bool oldins = m_insideMenu;
         m_insideMenu = true;
@@ -54,8 +54,8 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
             if (p_menu)
             {
                 p_menu->Append(GetID(), title, menu, help);
-                if (HasParam(wxT("enabled")))
-                    p_menu->Enable(GetID(), GetBool(wxT("enabled")));
+                if (HasParam("enabled"))
+                    p_menu->Enable(GetID(), GetBool("enabled"));
             }
         }
 
@@ -66,22 +66,22 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
     {
         wxMenu *p_menu = wxDynamicCast(m_parent, wxMenu);
 
-        if (m_class == wxT("separator"))
+        if (m_class == "separator")
             p_menu->AppendSeparator();
-        else if (m_class == wxT("break"))
+        else if (m_class == "break")
             p_menu->Break();
         else /*wxMenuItem*/
         {
             int id = GetID();
-            wxString label = GetText(wxT("label"));
+            wxString label = GetText("label");
 #if wxUSE_ACCEL
-            wxString accel = GetText(wxT("accel"), false);
+            wxString accel = GetText("accel", false);
 #endif // wxUSE_ACCEL
 
             wxItemKind kind = wxITEM_NORMAL;
-            if (GetBool(wxT("radio")))
+            if (GetBool("radio"))
                 kind = wxITEM_RADIO;
-            if (GetBool(wxT("checkable")))
+            if (GetBool("checkable"))
             {
                 if ( kind != wxITEM_NORMAL )
                 {
@@ -96,7 +96,7 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
             }
 
             wxMenuItem *mitem = new wxMenuItem(p_menu, id, label,
-                                               GetText(wxT("help")), kind);
+                                               GetText("help"), kind);
 #if wxUSE_ACCEL
             if (!accel.empty())
             {
@@ -107,23 +107,23 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
 #endif // wxUSE_ACCEL
 
 #if !defined(__WXMSW__) || wxUSE_OWNER_DRAWN
-            if (HasParam(wxT("bitmap")))
+            if (HasParam("bitmap"))
             {
                 // currently only wxMSW has support for using different checked
                 // and unchecked bitmaps for menu items
 #ifdef __WXMSW__
-                if (HasParam(wxT("bitmap2")))
-                    mitem->SetBitmaps(GetBitmap(wxT("bitmap2"), wxART_MENU),
-                                      GetBitmap(wxT("bitmap"), wxART_MENU));
+                if (HasParam("bitmap2"))
+                    mitem->SetBitmaps(GetBitmap("bitmap2", wxART_MENU),
+                                      GetBitmap("bitmap", wxART_MENU));
                 else
 #endif // __WXMSW__
-                    mitem->SetBitmap(GetBitmap(wxT("bitmap"), wxART_MENU));
+                    mitem->SetBitmap(GetBitmap("bitmap", wxART_MENU));
             }
 #endif
             p_menu->Append(mitem);
-            mitem->Enable(GetBool(wxT("enabled"), true));
+            mitem->Enable(GetBool("enabled", true));
             if (kind == wxITEM_CHECK)
-                mitem->Check(GetBool(wxT("checked")));
+                mitem->Check(GetBool("checked"));
         }
         return nullptr;
     }
@@ -133,11 +133,11 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
 
 bool wxMenuXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxMenu")) ||
+    return IsOfClass(node, "wxMenu") ||
            (m_insideMenu &&
-               (IsOfClass(node, wxT("wxMenuItem")) ||
-                IsOfClass(node, wxT("break")) ||
-                IsOfClass(node, wxT("separator")))
+               (IsOfClass(node, "wxMenuItem") ||
+                IsOfClass(node, "break") ||
+                IsOfClass(node, "separator"))
            );
 }
 
@@ -179,7 +179,7 @@ wxObject *wxMenuBarXmlHandler::DoCreateResource()
 
 bool wxMenuBarXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxMenuBar"));
+    return IsOfClass(node, "wxMenuBar");
 }
 
 #endif // wxUSE_MENUBAR

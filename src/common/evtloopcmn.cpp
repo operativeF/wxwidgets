@@ -56,7 +56,7 @@ void wxEventLoopBase::SetActive(wxEventLoopBase* loop)
 int wxEventLoopBase::Run()
 {
     // event loops are not recursive, you need to create another loop!
-    wxCHECK_MSG( !IsInsideRun(), -1, wxT("can't reenter a message loop") );
+    wxCHECK_MSG( !IsInsideRun(), -1, "can't reenter a message loop" );
 
     // ProcessIdle() and ProcessEvents() below may throw so the code here should
     // be exception-safe, hence we must use local objects for all actions we
@@ -77,7 +77,7 @@ int wxEventLoopBase::Run()
 
 void wxEventLoopBase::Exit(int rc)
 {
-    wxCHECK_RET( IsRunning(), wxS("Use ScheduleExit() on not running loop") );
+    wxCHECK_RET( IsRunning(), "Use ScheduleExit() on not running loop" );
 
     ScheduleExit(rc);
 }
@@ -178,7 +178,7 @@ wxEventLoopBase::AddSourceForFD(int fd,
     // Delegate to the event loop sources manager defined by it.
     wxEventLoopSourcesManagerBase* const
         manager = wxApp::GetValidTraits().GetEventLoopSourcesManager();
-    wxCHECK_MSG( manager, NULL, wxS("Must have wxEventLoopSourcesManager") );
+    wxCHECK_MSG( manager, NULL, "Must have wxEventLoopSourcesManager" );
 
     return manager->AddSourceForFD(fd, handler, flags);
 #else // !wxUSE_CONSOLE_EVENTLOOP
@@ -358,7 +358,7 @@ int wxEventLoopManual::DoRun()
 
 void wxEventLoopManual::ScheduleExit(int rc)
 {
-    wxCHECK_RET( IsInsideRun(), wxT("can't call ScheduleExit() if not running") );
+    wxCHECK_RET( IsInsideRun(), "can't call ScheduleExit() if not running" );
 
     m_exitcode = rc;
     m_shouldExit = true;

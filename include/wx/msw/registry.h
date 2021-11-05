@@ -84,9 +84,9 @@ public:
     // number of standard keys
   static const size_t nStdKeys;
     // get the name of a standard key
-  static const wxChar *GetStdKeyName(size_t key);
+  static const char* GetStdKeyName(size_t key);
     // get the short name of a standard key
-  static const wxChar *GetStdKeyShortName(size_t key);
+  static const char* GetStdKeyShortName(size_t key);
     // get StdKey from root HKEY
   static StdKey GetStdKeyFromHkey(WXHKEY hkey);
 

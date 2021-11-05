@@ -35,7 +35,7 @@ wxBitmapComboBoxXmlHandler::wxBitmapComboBoxXmlHandler()
 
 wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
 {
-    if (m_class == wxT("ownerdrawnitem"))
+    if (m_class == "ownerdrawnitem")
     {
         if ( !m_combobox )
         {
@@ -43,21 +43,21 @@ wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
             return nullptr;
         }
 
-        m_combobox->Append(GetText(wxT("text")),
-                           GetBitmap(wxT("bitmap")));
+        m_combobox->Append(GetText("text"),
+                           GetBitmap("bitmap"));
 
         return m_combobox;
     }
-    else /*if( m_class == wxT("wxBitmapComboBox"))*/
+    else /*if( m_class == "wxBitmapComboBox")*/
     {
         // find the selection
-        long selection = GetLong( wxT("selection"), -1 );
+        long selection = GetLong( "selection", -1 );
 
         XRC_MAKE_INSTANCE(control, wxBitmapComboBox)
 
         control->Create(m_parentAsWindow,
                         GetID(),
-                        GetText(wxT("value")),
+                        GetText("value"),
                         GetPosition(), GetSize(),
                         {},
                         GetStyle(),
@@ -67,14 +67,14 @@ wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
         m_isInside = true;
         m_combobox = control;
 
-        wxXmlNode *children_node = GetParamNode(wxT("object"));
+        wxXmlNode *children_node = GetParamNode("object");
 
         wxXmlNode *n = children_node;
 
         while (n)
         {
             if ((n->GetType() == wxXML_ELEMENT_NODE) &&
-                (n->GetName() == wxT("object")))
+                (n->GetName() == "object"))
             {
                 CreateResFromNode(n, control, nullptr);
             }
@@ -95,8 +95,8 @@ wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
 
 bool wxBitmapComboBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return ((!m_isInside && IsOfClass(node, wxT("wxBitmapComboBox"))) ||
-            (m_isInside && IsOfClass(node, wxT("ownerdrawnitem"))));
+    return ((!m_isInside && IsOfClass(node, "wxBitmapComboBox")) ||
+            (m_isInside && IsOfClass(node, "ownerdrawnitem")));
 }
 
 #endif // wxUSE_XRC && wxUSE_BITMAPCOMBOBOX

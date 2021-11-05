@@ -572,7 +572,7 @@ bool wxGLContext::SetCurrent(const wxGLCanvas& win) const
         return false;
 
     const Window xid = win.GetXWindow();
-    wxCHECK2_MSG( xid, return false, wxT("window must be shown") );
+    wxCHECK2_MSG( xid, return false, "window must be shown" );
 
     return MakeCurrent(xid, m_glContext);
 }
@@ -758,7 +758,7 @@ int wxGLCanvasX11::GetGLXVersion()
         // check the GLX version
         int glxMajorVer, glxMinorVer;
         bool ok = glXQueryVersion(wxGetX11Display(), &glxMajorVer, &glxMinorVer);
-        wxASSERT_MSG( ok, wxT("GLX version not found") );
+        wxASSERT_MSG( ok, "GLX version not found" );
         if (!ok)
             s_glxVersion = 10; // 1.0 by default
         else
@@ -771,7 +771,7 @@ int wxGLCanvasX11::GetGLXVersion()
 bool wxGLCanvasX11::SwapBuffers()
 {
     const Window xid = GetXWindow();
-    wxCHECK2_MSG( xid, return false, wxT("window must be shown") );
+    wxCHECK2_MSG( xid, return false, "window must be shown" );
 
     glXSwapBuffers(wxGetX11Display(), xid);
     return true;

@@ -36,20 +36,20 @@ wxComboBoxXmlHandler::wxComboBoxXmlHandler()
 
 wxObject *wxComboBoxXmlHandler::DoCreateResource()
 {
-    if( m_class == wxT("wxComboBox"))
+    if( m_class == "wxComboBox")
     {
         // find the selection
-        long selection = GetLong( wxT("selection"), -1 );
+        long selection = GetLong( "selection", -1 );
 
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately(nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately(nullptr, GetParamNode("content"));
 
         XRC_MAKE_INSTANCE(control, wxComboBox)
 
         control->Create(m_parentAsWindow,
                         GetID(),
-                        GetText(wxT("value")),
+                        GetText("value"),
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle(),
@@ -61,7 +61,7 @@ wxObject *wxComboBoxXmlHandler::DoCreateResource()
 
         SetupWindow(control);
 
-        const wxString hint = GetText(wxS("hint"));
+        const wxString hint = GetText("hint");
         if ( !hint.empty() )
             control->SetHint(hint);
 
@@ -83,8 +83,8 @@ wxObject *wxComboBoxXmlHandler::DoCreateResource()
 
 bool wxComboBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return (IsOfClass(node, wxT("wxComboBox")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxComboBox") ||
+           (m_insideBox && node->GetName() == "item"));
 }
 
 #endif // wxUSE_XRC && wxUSE_COMBOBOX

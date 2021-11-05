@@ -191,14 +191,14 @@ SAFEARRAY* MakeOneElementVariantSafeArray(const wxString& str)
     wxSafeArray<VT_VARIANT> sa;
     if ( !sa.Create(1) )
     {
-        wxLogLastError(wxT("SafeArrayCreateVector"));
+        wxLogLastError("SafeArrayCreateVector");
         return nullptr;
     }
 
     long ind = 0;
     if ( !sa.SetElement(&ind, str) )
     {
-        wxLogLastError(wxT("SafeArrayPtrOfIndex"));
+        wxLogLastError("SafeArrayPtrOfIndex");
         return nullptr;
     }
 
@@ -983,8 +983,8 @@ bool wxWebViewIE::MSWSetEmulationLevel(wxWebViewIE_EmulationLevel level)
 {
     // Registry key where emulation level for programs are set
     static constexpr wxChar IE_EMULATION_KEY[] =
-        wxT("SOFTWARE\\Microsoft\\Internet Explorer\\Main")
-        wxT("\\FeatureControl\\FEATURE_BROWSER_EMULATION");
+        "SOFTWARE\\Microsoft\\Internet Explorer\\Main"
+        "\\FeatureControl\\FEATURE_BROWSER_EMULATION";
 
     wxRegKey key(wxRegKey::HKCU, IE_EMULATION_KEY);
     if ( !key.Exists() )
@@ -1172,13 +1172,13 @@ bool wxWebViewIEImpl::IsElementVisible(wxCOMPtr<IHTMLElement> elm)
 
                 //Check if the object has the style display:none.
                 if((style->get_display(display_bstr.ByRef()) != S_OK) ||
-                    wxString(display_bstr).IsSameAs(wxS("none"), false))
+                    wxString(display_bstr).IsSameAs("none", false))
                 {
                     is_visible = false;
                 }
                 //Check if the object has the style visibility:hidden.
                 if((is_visible && (style->get_visibility(visibility_bstr.ByRef()) != S_OK)) ||
-                    wxString(visibility_bstr).IsSameAs(wxS("hidden"), false))
+                    wxString(visibility_bstr).IsSameAs("hidden", false))
                 {
                     is_visible = false;
                 }
@@ -1215,7 +1215,7 @@ void wxWebViewIEImpl::FindInternal(const wxString& text, unsigned int flags, uns
         if(SUCCEEDED(document->QueryInterface(wxIID_IMarkupContainer, (void **)&pIMC)))
         {
             wxCOMPtr<wxIMarkupPointer> ptrBegin, ptrEnd;
-            wxBasicString attr_bstr(wxS("style=\"background-color:#ffff00\""));
+            wxBasicString attr_bstr("style=\"background-color:#ffff00\"");
             wxBasicString text_bstr(text);
 
             pIMS->CreateMarkupPointer(&ptrBegin);
@@ -1394,7 +1394,7 @@ bool wxWebViewIEImpl::EnableControlFeature(long flag, bool enable)
                                                (enable ? TRUE : FALSE));
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxT("CoInternetSetFeatureEnabled"), hr);
+            wxLogApiError("CoInternetSetFeatureEnabled", hr);
             return false;
         }
         return true;
@@ -1629,7 +1629,7 @@ VirtualProtocol::VirtualProtocol(std::shared_ptr<wxWebViewHandler> handler)
 
 STDMETHODIMP VirtualProtocol::QueryInterface(REFIID riid, void **ppv)
 {
-    wxLogQueryInterface(wxT("VirtualProtocol"), riid);
+    wxLogQueryInterface("VirtualProtocol", riid);
 
     if(riid == IID_IUnknown)
     {
@@ -1667,13 +1667,13 @@ STDMETHODIMP VirtualProtocol::QueryInterface(REFIID riid, void **ppv)
 
 STDMETHODIMP_(ULONG) VirtualProtocol::AddRef()
 {
-    wxLogAddRef(wxT("VirtualProtocol"), m_cRef);
+    wxLogAddRef("VirtualProtocol", m_cRef);
     return ++m_cRef;
 }
 
 STDMETHODIMP_(ULONG) VirtualProtocol::Release()
 {
-    wxLogRelease(wxT("VirtualProtocol"), m_cRef);
+    wxLogRelease("VirtualProtocol", m_cRef);
     if( --m_cRef == wxAutoULong(0))
     {
         delete this;

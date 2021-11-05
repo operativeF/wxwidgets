@@ -161,7 +161,7 @@ bool wxSafeShowMessage(const wxString& title, const wxString& text)
 {
     if ( !wxApp::GetValidTraits().SafeMessageBox(text.ToStdString(), title.ToStdString()) )
     {
-        wxFprintf(stderr, wxS("%s: %s\n"), title.c_str(), text.c_str());
+        wxFprintf(stderr, "%s: %s\n", title.c_str(), text.c_str());
         fflush(stderr);
         return false;
     }
@@ -258,7 +258,7 @@ unsigned wxLog::LogLastRepeatIfNeeded()
                        gs_prevLog.numRepeated);
         }
 #else
-        msg.Printf(wxS("The previous message was repeated %u time(s)."),
+        msg.Printf("The previous message was repeated %u time(s).",
                    gs_prevLog.numRepeated);
 #endif
         gs_prevLog.numRepeated = 0;
@@ -285,7 +285,7 @@ wxLog::~wxLog()
                 gs_prevLog.numRepeated
             ),
 #else
-            wxS("Last repeated message (\"%s\", %u time(s)) wasn't output"),
+            "Last repeated message (\"%s\", %u time(s)) wasn't output",
 #endif
             gs_prevLog.msg,
             gs_prevLog.numRepeated
@@ -322,7 +322,7 @@ wxLog::OnLog(wxLogLevel level,
     // and always terminate the program
     if ( level == wxLOG_FatalError )
     {
-        wxSafeShowMessage(wxS("Fatal Error"), msg);
+        wxSafeShowMessage("Fatal Error", msg);
 
         wxAbort();
     }
@@ -657,7 +657,7 @@ void wxLog::TimeStamp(wxString *str)
     if ( !ms_timestamp.empty() )
     {
         *str = wxDateTime::UNow().Format(ms_timestamp);
-        *str += wxS(": ");
+        *str += ": ";
     }
 }
 
@@ -666,7 +666,7 @@ void wxLog::TimeStamp(wxString *str, time_t t)
     if ( !ms_timestamp.empty() )
     {
         *str = wxDateTime(t).Format(ms_timestamp);
-        *str += wxS(": ");
+        *str += ": ";
     }
 }
 
@@ -675,7 +675,7 @@ void wxLog::TimeStampMS(wxString *str, wxLongLong_t msec)
     if ( !ms_timestamp.empty() )
     {
         *str = wxDateTime(wxLongLong(msec)).Format(wxLog::GetTimestamp());
-        *str += wxS(": ");
+        *str += ": ";
     }
 }
 
@@ -779,7 +779,7 @@ void wxLogBuffer::Flush()
     if ( !m_str.empty() )
     {
         wxMessageOutputBest out;
-        out.Printf(wxS("%s"), m_str.c_str());
+        out.Printf("%s", m_str.c_str());
         m_str.clear();
     }
 }
@@ -796,7 +796,7 @@ void wxLogBuffer::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
             break;
 
         default:
-            m_str << msg << wxS("\n");
+            m_str << msg << "\n";
     }
 }
 
@@ -1008,7 +1008,7 @@ wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
             nullptr
          ) == 0 )
     {
-        wxLogDebug(wxS("FormatMessage failed with error 0x%lx"), GetLastError());
+        wxLogDebug("FormatMessage failed with error 0x%lx", GetLastError());
 
         // if this happens, something is seriously wrong, so don't use _() here
         // for safety

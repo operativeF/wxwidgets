@@ -100,11 +100,11 @@ static bool DoShowAssertDialog(const std::string& msg);
 // prepare for showing the assert dialog, use the given traits or
 // DoShowAssertDialog() as last fallback to really show it
 static
-void ShowAssertDialog(const wxString& file,
+void ShowAssertDialog(const std::string& file,
                         int line,
-                        const wxString& func,
-                        const wxString& cond,
-                        const wxString& msg,
+                        const std::string& func,
+                        const std::string& cond,
+                        const std::string& msg,
                         wxAppTraits *traits = nullptr);
 #endif // wxDEBUG_LEVEL
 
@@ -167,7 +167,7 @@ bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
     return true;
 }
 
-wxString wxAppConsoleBase::GetAppName() const
+std::string wxAppConsoleBase::GetAppName() const
 {
     wxString name = m_appName;
     if ( name.empty() )
@@ -188,23 +188,23 @@ wxString wxAppConsoleBase::GetAppName() const
         }
 #endif // wxUSE_STDPATHS
     }
-    return name;
+    return name.ToStdString();
 }
 
 std::string wxAppConsoleBase::GetAppDisplayName() const
 {
     // use the explicitly provided display name, if any
     if ( !m_appDisplayName.empty() )
-        return m_appDisplayName.ToStdString();
+        return m_appDisplayName;
 
     // if the application name was explicitly set, use it as is as capitalizing
     // it won't always produce good results
     if ( !m_appName.empty() )
-        return m_appName.ToStdString();
+        return m_appName;
 
     // if neither is set, use the capitalized version of the program file as
     // it's the most reasonable default
-    return GetAppName().Capitalize().ToStdString();
+    return wx::utils::ToUpperCopy(GetAppName());
 }
 
 wxEventLoopBase *wxAppConsoleBase::CreateMainLoop()
@@ -298,7 +298,7 @@ wxAppTraits *wxAppConsoleBase::GetTraits()
     {
         m_traits = CreateTraits();
 
-        wxASSERT_MSG( m_traits, wxT("wxApp::CreateTraits() failed?") );
+        wxASSERT_MSG( m_traits, "wxApp::CreateTraits() failed?" );
     }
 
     return m_traits;
@@ -799,7 +799,7 @@ bool wxAppConsoleBase::CheckBuildOptions(const char *optionsSignature,
         wxString progName = wxString::FromAscii(componentName);
         wxString msg;
 
-        msg.Printf(wxT("Mismatch between the program and library build versions detected.\nThe library used %s,\nand %s used %s."),
+        msg.Printf("Mismatch between the program and library build versions detected.\nThe library used %s,\nand %s used %s.",
                    lib.c_str(), progName.c_str(), prog.c_str());
 
         wxLogFatalError(msg.c_str());
@@ -811,11 +811,11 @@ bool wxAppConsoleBase::CheckBuildOptions(const char *optionsSignature,
     return true;
 }
 
-void wxAppConsoleBase::OnAssertFailure(const wxChar *file,
+void wxAppConsoleBase::OnAssertFailure(const char* file,
                                        int line,
-                                       const wxChar *func,
-                                       const wxChar *cond,
-                                       const wxChar *msg)
+                                       const char* func,
+                                       const char* cond,
+                                       const char* msg)
 {
 #if wxDEBUG_LEVEL
     ShowAssertDialog(file, line, func, cond, msg, GetTraits());
@@ -831,10 +831,10 @@ void wxAppConsoleBase::OnAssertFailure(const wxChar *file,
 #endif // wxDEBUG_LEVEL/!wxDEBUG_LEVEL
 }
 
-void wxAppConsoleBase::OnAssert(const wxChar *file,
+void wxAppConsoleBase::OnAssert(const char* file,
                                 int line,
-                                const wxChar *cond,
-                                const wxChar *msg)
+                                const char* cond,
+                                const char* msg)
 {
     OnAssertFailure(file, line, nullptr, cond, msg);
 }
@@ -888,7 +888,7 @@ wxRendererNative *wxConsoleAppTraitsBase::CreateRenderer()
     return nullptr;
 }
 
-bool wxConsoleAppTraitsBase::ShowAssertDialog(const wxString& msg)
+bool wxConsoleAppTraitsBase::ShowAssertDialog(const std::string& msg)
 {
     return wxAppTraitsBase::ShowAssertDialog(msg);
 }
@@ -940,22 +940,22 @@ void wxMutexGuiLeave()
 }
 #endif // wxUSE_THREADS
 
-bool wxAppTraitsBase::ShowAssertDialog(const wxString& msgOriginal)
+bool wxAppTraitsBase::ShowAssertDialog(const std::string& msgOriginal)
 {
 #if wxDEBUG_LEVEL
-    wxString msg;
+    std::string msg;
 
 #if wxUSE_STACKWALKER
-    const wxString stackTrace = GetAssertStackTrace();
+    const std::string stackTrace = GetAssertStackTrace();
     if ( !stackTrace.empty() )
     {
-        msg << wxT("\n\nCall stack:\n") << stackTrace;
+        msg += "\n\nCall stack:\n" + stackTrace;
 
         wxMessageOutputDebug().Output(msg);
     }
 #endif // wxUSE_STACKWALKER
 
-    return DoShowAssertDialog(msgOriginal.ToStdString() + msg.ToStdString());
+    return DoShowAssertDialog(msgOriginal + msg);
 #else // !wxDEBUG_LEVEL
     wxUnusedVar(msgOriginal);
 
@@ -964,7 +964,7 @@ bool wxAppTraitsBase::ShowAssertDialog(const wxString& msgOriginal)
 }
 
 #if wxUSE_STACKWALKER
-wxString wxAppTraitsBase::GetAssertStackTrace()
+std::string wxAppTraitsBase::GetAssertStackTrace()
 {
 #if wxDEBUG_LEVEL
 
@@ -979,7 +979,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
     class StackDump : public wxStackWalker
     {
     public:
-        const wxString& GetStackTrace() const { return m_stackTrace; }
+        const std::string& GetStackTrace() const { return m_stackTrace; }
 
     protected:
         void OnStackFrame(const wxStackFrame& frame) override
@@ -989,11 +989,11 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
             // 15 pixel high characters it is still only 300 pixels...
             if ( m_numFrames++ > 20 )
                 return;
+            m_stackTrace += fmt::format("{%02u} ", m_numFrames);
 
-            m_stackTrace << wxString::Format(wxT("[%02u] "), m_numFrames);
+            const auto name = frame.GetName();
 
-            const wxString name = frame.GetName();
-            if ( name.StartsWith("wxOnAssert") )
+            if ( name.starts_with("wxOnAssert") )
             {
                 // Ignore all frames until the wxOnAssert() one, they are
                 // internal to wxWidgets and not interesting for the user
@@ -1007,26 +1007,23 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 
             if ( !name.empty() )
             {
-                m_stackTrace << wxString::Format(wxT("%-40s"), name.c_str());
+                m_stackTrace += fmt::format("{}-40s", name);
             }
             else
             {
-                m_stackTrace << wxString::Format(wxT("%p"), frame.GetAddress());
+                m_stackTrace += fmt::format("{%p}", frame.GetAddress());
             }
 
             if ( frame.HasSourceLocation() )
             {
-                m_stackTrace << wxT('\t')
-                             << frame.GetFileName()
-                             << wxT(':')
-                             << frame.GetLine();
+                m_stackTrace += fmt::format("\t{}:{}", frame.GetFileName(), frame.GetLine());
             }
 
-            m_stackTrace << wxT('\n');
+            m_stackTrace += '\n';
         }
 
     private:
-        wxString m_stackTrace;
+        std::string m_stackTrace;
         unsigned m_numFrames{0};
     };
 
@@ -1095,11 +1092,11 @@ void wxTrap()
 
 // default assert handler
 static void
-wxDefaultAssertHandler(const wxString& file,
+wxDefaultAssertHandler(const std::string& file,
                        int line,
-                       const wxString& func,
-                       const wxString& cond,
-                       const wxString& msg)
+                       const std::string& func,
+                       const std::string& cond,
+                       const std::string& msg)
 {
     // If this option is set, we should abort immediately when assert happens.
     if ( wxSystemOptions::GetOptionInt("exit-on-assert") )
@@ -1126,7 +1123,6 @@ wxDefaultAssertHandler(const wxString& file,
     else
     {
         // let the app process it as it wants
-        // FIXME-UTF8: use wc_str(), not c_str(), when ANSI build is removed
         wxTheApp->OnAssertFailure(file.c_str(), line, func.c_str(),
                                   cond.c_str(), msg.c_str());
     }
@@ -1139,28 +1135,28 @@ void wxSetDefaultAssertHandler()
     wxTheAssertHandler = wxDefaultAssertHandler;
 }
 
-void wxOnAssert(const wxString& file,
+void wxOnAssert(const std::string& file,
                 int line,
-                const wxString& func,
-                const wxString& cond,
-                const wxString& msg)
+                const std::string& func,
+                const std::string& cond,
+                const std::string& msg)
 {
     wxTheAssertHandler(file, line, func, cond, msg);
 }
 
-void wxOnAssert(const wxString& file,
+void wxOnAssert(const std::string& file,
                 int line,
-                const wxString& func,
-                const wxString& cond)
+                const std::string& func,
+                const std::string& cond)
 {
-    wxTheAssertHandler(file, line, func, cond, wxString());
+    wxTheAssertHandler(file, line, func, cond, std::string());
 }
 
-void wxOnAssert(const wxChar *file,
+void wxOnAssert(const char* file,
                 int line,
                 const char *func,
-                const wxChar *cond,
-                const wxChar *msg)
+                const char* cond,
+                const char* msg)
 {
     // this is the backwards-compatible version (unless we don't use Unicode)
     // so it could be called directly from the user code and this might happen
@@ -1173,16 +1169,7 @@ void wxOnAssert(const char *file,
                 int line,
                 const char *func,
                 const char *cond,
-                const wxString& msg)
-{
-    wxTheAssertHandler(file, line, func, cond, msg);
-}
-
-void wxOnAssert(const char *file,
-                int line,
-                const char *func,
-                const char *cond,
-                const wxCStrData& msg)
+                const std::string& msg)
 {
     wxTheAssertHandler(file, line, func, cond, msg);
 }
@@ -1192,25 +1179,7 @@ void wxOnAssert(const char *file,
                 const char *func,
                 const char *cond)
 {
-    wxTheAssertHandler(file, line, func, cond, wxString());
-}
-
-void wxOnAssert(const char *file,
-                int line,
-                const char *func,
-                const char *cond,
-                const char *msg)
-{
-    wxTheAssertHandler(file, line, func, cond, msg);
-}
-
-void wxOnAssert(const char *file,
-                int line,
-                const char *func,
-                const char *cond,
-                const wxChar *msg)
-{
-    wxTheAssertHandler(file, line, func, cond, msg);
+    wxTheAssertHandler(file, line, func, cond, std::string());
 }
 
 #endif // wxDEBUG_LEVEL
@@ -1224,13 +1193,16 @@ void wxOnAssert(const char *file,
 static void SetTraceMasks()
 {
 #if wxUSE_LOG
+
     std::string mask;
+
     if ( wxGetEnv("WXTRACE", &mask) )
     {
-        wxStringTokenizer tkn(mask, wxT(",;:"));
+        wxStringTokenizer tkn(mask, ",;:");
         while ( tkn.HasMoreTokens() )
             wxLog::AddTraceMask(tkn.GetNextToken());
     }
+
 #endif // wxUSE_LOG
 }
 
@@ -1284,47 +1256,47 @@ bool DoShowAssertDialog(const std::string& msg)
 
 // show the standard assert dialog
 static
-void ShowAssertDialog(const wxString& file,
+void ShowAssertDialog(const std::string& file,
                       int line,
-                      const wxString& func,
-                      const wxString& cond,
-                      const wxString& msgUser,
+                      const std::string& func,
+                      const std::string& cond,
+                      const std::string& msgUser,
                       wxAppTraits *traits)
 {
     // this variable can be set to true to suppress "assert failure" messages
     static bool s_bNoAsserts = false;
 
-    wxString msg;
+    std::string msg;
     msg.reserve(2048);
 
     // make life easier for people using VC++ IDE by using this format: like
     // this, clicking on the message will take us immediately to the place of
     // the failed assert
-    msg.Printf(wxT("%s(%d): assert \"%s\" failed"), file, line, cond);
+    msg += fmt::format("{:s}({:d}): assert \"{:s}\" failed", file, line, cond);
 
     // add the function name, if any
     if ( !func.empty() )
-        msg << wxT(" in ") << func << wxT("()");
+        msg += fmt::format(" in {}()", func);
 
     // and the message itself
     if ( !msgUser.empty() )
     {
-        msg << wxT(": ") << msgUser;
+        msg += fmt::format(": {}", msgUser);
     }
     else // no message given
     {
-        msg << wxT('.');
+        msg += '.';
     }
 
 #if wxUSE_THREADS
     if ( !wxThread::IsMain() )
     {
-        msg += wxString::Format(" [in thread %lx]", wxThread::GetCurrentId());
+        msg += fmt::format(" [in thread {%lx}", wxThread::GetCurrentId());
     }
 #endif // wxUSE_THREADS
 
     // log the assert in any case
-    wxMessageOutputDebug().Output(msg.ToStdString());
+    wxMessageOutputDebug().Output(msg);
 
     if ( !s_bNoAsserts )
     {
@@ -1336,7 +1308,7 @@ void ShowAssertDialog(const wxString& file,
         else // no traits object
         {
             // fall back to the function of last resort
-            s_bNoAsserts = DoShowAssertDialog(msg.ToStdString());
+            s_bNoAsserts = DoShowAssertDialog(msg);
         }
     }
 }

@@ -322,7 +322,7 @@ void wxRichTextFontPage::CreateControls()
     int i;
     for (i = 8; i < 40; i++)
     {
-        nStr.Printf(wxT("%d"), i);
+        nStr.Printf("%d", i);
         m_sizeListBox->Append(nStr);
     }
     m_sizeListBox->Append("48");
@@ -536,7 +536,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
 
     if (attr->HasFontPointSize())
     {
-        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize()).ToStdString();
+        std::string strSize = wxString::Format("%d", attr->GetFontSize()).ToStdString();
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(0);
@@ -545,7 +545,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
     }
     else if (attr->HasFontPixelSize())
     {
-        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize()).ToStdString();
+        std::string strSize = wxString::Format("%d", attr->GetFontSize()).ToStdString();
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(1);
@@ -1117,7 +1117,7 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( wxSpinEvent& WXUNUSED(
     if (m_fontSizeSpinButtons->GetValue() != size)
         m_fontSizeSpinButtons->SetValue(size);
 
-    std::string newText(wxString::Format(wxT("%d"), size));
+    std::string newText(wxString::Format("%d", size));
 
     m_sizeTextCtrl->SetValue(newText);
     if (!newText.empty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)
@@ -1153,7 +1153,7 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( wxSpinEvent& WXUNUSE
     if (m_fontSizeSpinButtons->GetValue() != size)
         m_fontSizeSpinButtons->SetValue(size);
 
-    std::string newText(wxString::Format(wxT("%d"), size));
+    std::string newText(wxString::Format("%d", size));
 
     m_sizeTextCtrl->SetValue(newText);
     if (!newText.empty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)

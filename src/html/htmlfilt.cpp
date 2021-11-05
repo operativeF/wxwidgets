@@ -55,10 +55,10 @@ wxString wxHtmlFilterPlainText::ReadFile(const wxFSFile& file) const
     if (s == nullptr) return {};
     ReadString(doc, s, wxConvISO8859_1);
 
-    doc.Replace(wxT("&"), wxT("&amp;"), true);
-    doc.Replace(wxT("<"), wxT("&lt;"), true);
-    doc.Replace(wxT(">"), wxT("&gt;"), true);
-    doc2 = wxT("<HTML><BODY><PRE>\n") + doc + wxT("\n</PRE></BODY></HTML>");
+    doc.Replace("&", "&amp;", true);
+    doc.Replace("<", "&lt;", true);
+    doc.Replace(">", "&gt;", true);
+    doc2 = "<HTML><BODY><PRE>\n" + doc + "\n</PRE></BODY></HTML>";
     return doc2;
 }
 
@@ -86,14 +86,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlFilterImage, wxHtmlFilter);
 
 bool wxHtmlFilterImage::CanRead(const wxFSFile& file) const
 {
-    return (file.GetMimeType().Left(6) == wxT("image/"));
+    return (file.GetMimeType().Left(6) == "image/");
 }
 
 
 
 wxString wxHtmlFilterImage::ReadFile(const wxFSFile& file) const
 {
-    wxString res = wxT("<HTML><BODY><IMG SRC=\"") + file.GetLocation() + wxT("\"></BODY></HTML>");
+    wxString res = "<HTML><BODY><IMG SRC=\"" + file.GetLocation() + "\"></BODY></HTML>";
     return res;
 }
 
@@ -114,7 +114,7 @@ bool wxHtmlFilterHTML::CanRead(const wxFSFile& file) const
 // This is true in most case but some page can return:
 // "text/html; char-encoding=...."
 // So we use Find instead
-  return (file.GetMimeType().Find(wxT("text/html")) == 0);
+  return (file.GetMimeType().Find("text/html") == 0);
 }
 
 
@@ -135,7 +135,7 @@ wxString wxHtmlFilterHTML::ReadFile(const wxFSFile& file) const
     //     do it as it is done by wxHtmlParser (for this reason, we add <meta>
     //     tag if we used Content-Type header).
     int charsetPos;
-    if ((charsetPos = file.GetMimeType().Find(wxT("; charset="))) != wxNOT_FOUND)
+    if ((charsetPos = file.GetMimeType().Find("; charset=")) != wxNOT_FOUND)
     {
         wxString charset = file.GetMimeType().Mid(charsetPos + 10);
         wxCSConv conv(charset);

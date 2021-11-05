@@ -34,10 +34,10 @@ wxObject *wxFileCtrlXmlHandler::DoCreateResource()
 
     filectrl->Create(m_parentAsWindow,
                      GetID(),
-                     GetText(wxT("defaultdirectory")),
-                     GetText(wxT("defaultfilename")),
-                     GetParamValue(wxT("wildcard")),
-                     GetStyle(wxT("style"), wxFC_DEFAULT_STYLE),
+                     GetText("defaultdirectory"),
+                     GetText("defaultfilename"),
+                     GetParamValue("wildcard"),
+                     GetStyle("style", wxFC_DEFAULT_STYLE),
                      GetPosition(),
                      GetSize(),
                      GetName());
@@ -48,7 +48,7 @@ wxObject *wxFileCtrlXmlHandler::DoCreateResource()
 
 bool wxFileCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxFileCtrl"));
+    return IsOfClass(node, "wxFileCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_FILECTRL

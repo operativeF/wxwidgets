@@ -151,7 +151,7 @@ int wxDialog::ShowModal()
 {
     WX_HOOK_MODAL_DIALOG();
 
-    wxASSERT_MSG( !IsModal(), wxT("ShowModal() can't be called twice") );
+    wxASSERT_MSG( !IsModal(), "ShowModal() can't be called twice" );
 
     wxDialogModalDataTiedPtr modalData(&m_modalData,
                                        new wxDialogModalData(this));
@@ -170,7 +170,7 @@ int wxDialog::ShowModal()
 
 void wxDialog::EndModal(int retCode)
 {
-    wxASSERT_MSG( IsModal(), wxT("EndModal() called for non modal dialog") );
+    wxASSERT_MSG( IsModal(), "EndModal() called for non modal dialog" );
 
     SetReturnCode(retCode);
 
@@ -196,10 +196,10 @@ void wxDialog::CreateGripper()
     if ( !m_hGripper )
     {
         // just create it here, it will be positioned and shown later
-        m_hGripper = (WXHWND)::CreateWindow
+        m_hGripper = (WXHWND)::CreateWindowW
                                (
-                                    wxT("SCROLLBAR"),
-                                    wxT(""),
+                                    L"SCROLLBAR",
+                                    L"",
                                     WS_CHILD |
                                     WS_CLIPSIBLINGS |
                                     SBS_SIZEGRIP |
@@ -225,7 +225,7 @@ void wxDialog::DestroyGripper()
         // have been called yet)
         wxASSERT_MSG( !IsShown() ||
                       ::GetWindow((HWND)m_hGripper, GW_HWNDNEXT) == nullptr,
-            wxT("Bug in wxWidgets: gripper should be at the bottom of Z-order") );
+            "Bug in wxWidgets: gripper should be at the bottom of Z-order" );
         ::DestroyWindow((HWND) m_hGripper);
         m_hGripper = nullptr;
     }
@@ -233,7 +233,7 @@ void wxDialog::DestroyGripper()
 
 void wxDialog::ShowGripper(bool show)
 {
-    wxASSERT_MSG( m_hGripper, wxT("shouldn't be called if we have no gripper") );
+    wxASSERT_MSG( m_hGripper, "shouldn't be called if we have no gripper" );
 
     if ( show )
         ResizeGripper();
@@ -243,7 +243,7 @@ void wxDialog::ShowGripper(bool show)
 
 void wxDialog::ResizeGripper()
 {
-    wxASSERT_MSG( m_hGripper, wxT("shouldn't be called if we have no gripper") );
+    wxASSERT_MSG( m_hGripper, "shouldn't be called if we have no gripper" );
 
     HWND hwndGripper = (HWND)m_hGripper;
 

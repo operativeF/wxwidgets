@@ -60,7 +60,7 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
 wxDllType wxDynamicLibrary::RawLoad(const wxString& libname, int flags)
 {
     wxASSERT_MSG( !(flags & wxDL_NOW) || !(flags & wxDL_LAZY),
-                  wxT("wxDL_LAZY and wxDL_NOW are mutually exclusive.") );
+                  "wxDL_LAZY and wxDL_NOW are mutually exclusive." );
 
     // we need to use either RTLD_NOW or RTLD_LAZY because if we call dlopen()
     // with flags == 0 recent versions of glibc just fail the call, so use
@@ -109,7 +109,7 @@ void wxDynamicLibrary::ReportError(const wxString& message,
     if ( err.empty() )
         err = _("Unknown dynamic library error");
 
-    wxLogError(msg + wxT(": %s"), name, err);
+    wxLogError(msg + ": %s", name, err);
 }
 
 
@@ -133,7 +133,7 @@ public:
         details->m_length = (char *)end - (char *)start;
 
         // try to extract the library version from its name
-        const size_t posExt = path.rfind(wxT(".so"));
+        const size_t posExt = path.rfind(".so");
         if ( posExt != wxString::npos )
         {
             if ( path.c_str()[posExt + 3] == wxT('.') )
@@ -164,7 +164,7 @@ wxDynamicLibraryDetailsArray wxDynamicLibrary::ListLoaded()
 
 #ifdef __LINUX__
     // examine /proc/self/maps to find out what is loaded in our address space
-    wxFFile file(wxT("/proc/self/maps"));
+    wxFFile file("/proc/self/maps");
     if ( file.IsOpened() )
     {
         // details of the module currently being parsed
@@ -194,13 +194,13 @@ wxDynamicLibraryDetailsArray wxDynamicLibrary::ListLoaded()
                 default:
                     // chop '\n'
                     buf[strlen(buf) - 1] = '\0';
-                    wxLogDebug(wxT("Failed to parse line \"%s\" in /proc/self/maps."),
+                    wxLogDebug("Failed to parse line \"%s\" in /proc/self/maps.",
                                buf);
                     continue;
             }
 
             wxASSERT_MSG( start >= endCur,
-                          wxT("overlapping regions in /proc/self/maps?") );
+                          "overlapping regions in /proc/self/maps?" );
 
             wxString pathNew = wxString::FromAscii(path);
             if ( pathCur.empty() )

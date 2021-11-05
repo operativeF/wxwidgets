@@ -162,7 +162,7 @@ wxDropSource::~wxDropSource()
 // Notes   : you must call SetData() before if you had used def ctor
 wxDragResult wxDropSource::DoDragDrop(unsigned int flags)
 {
-  wxCHECK_MSG( m_data != nullptr, wxDragResult::None, wxT("No data in wxDropSource!") );
+  wxCHECK_MSG( m_data != nullptr, wxDragResult::None, "No data in wxDropSource!" );
 
   DWORD dwEffect;
   HRESULT hr = ::DoDragDrop(m_data->GetInterface(),
@@ -191,11 +191,11 @@ wxDragResult wxDropSource::DoDragDrop(unsigned int flags)
   }
   else {
     if ( FAILED(hr) ) {
-      wxLogApiError(wxT("DoDragDrop"), hr);
-      wxLogError(wxT("Drag & drop operation failed."));
+      wxLogApiError("DoDragDrop", hr);
+      wxLogError("Drag & drop operation failed.");
     }
     else {
-      wxLogDebug(wxT("Unexpected success return code %08lx from DoDragDrop."),
+      wxLogDebug("Unexpected success return code %08lx from DoDragDrop.",
                  hr);
     }
 

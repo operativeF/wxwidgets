@@ -202,8 +202,8 @@ namespace
 inline bool IsObjectNode(wxXmlNode *node)
 {
     return node->GetType() == wxXML_ELEMENT_NODE &&
-             (node->GetName() == wxS("object") ||
-                node->GetName() == wxS("object_ref"));
+             (node->GetName() == "object" ||
+                node->GetName() == "object_ref");
 }
 
 // special XML attribute with name of input file, see GetFileNameFromNode()
@@ -335,7 +335,7 @@ bool wxXmlResource::IsArchive(const wxString& filename)
 {
     const wxString fnd = filename.Lower();
 
-    return fnd.Matches(wxT("*.zip")) || fnd.Matches(wxT("*.xrs"));
+    return fnd.Matches("*.zip")) || fnd.Matches(wxT("*.xrs");
 }
 
 #endif // wxUSE_FILESYSTEM
@@ -395,7 +395,7 @@ bool wxXmlResource::Load(const wxString& filemask_)
 #if wxUSE_FILESYSTEM
         if ( IsArchive(fnd) )
         {
-            if ( !Load(fnd + wxT("#zip:*.xrc")) )
+            if ( !Load(fnd + "#zip:*.xrc") )
                 thisOK = false;
         }
         else // a single resource URL
@@ -430,13 +430,13 @@ bool wxXmlResource::Load(const wxString& filemask_)
 bool wxXmlResource::Unload(const wxString& filename)
 {
     wxASSERT_MSG( !wxIsWild(filename),
-                    wxT("wildcards not supported by wxXmlResource::Unload()") );
+                    "wildcards not supported by wxXmlResource::Unload()" );
 
     wxString fnd = ConvertFileNameToURL(filename);
 #if wxUSE_FILESYSTEM
     const bool isArchive = IsArchive(fnd);
     if ( isArchive )
-        fnd += wxT("#zip:");
+        fnd += "#zip:";
 #endif // wxUSE_FILESYSTEM
 
     bool unloaded = false;
@@ -498,14 +498,14 @@ void wxXmlResource::ClearHandlers()
 
 wxMenu *wxXmlResource::wxLoadMenu(const wxString& name)
 {
-    return (wxMenu*)CreateResFromNode(wxFindResource(name, wxT("wxMenu")), nullptr, nullptr);
+    return (wxMenu*)CreateResFromNode(wxFindResource(name, "wxMenu"), nullptr, nullptr);
 }
 
 
 
 wxMenuBar *wxXmlResource::LoadMenuBar(wxWindow *parent, const wxString& name)
 {
-    return (wxMenuBar*)CreateResFromNode(wxFindResource(name, wxT("wxMenuBar")), parent, nullptr);
+    return (wxMenuBar*)CreateResFromNode(wxFindResource(name, "wxMenuBar"), parent, nullptr);
 }
 
 
@@ -513,47 +513,47 @@ wxMenuBar *wxXmlResource::LoadMenuBar(wxWindow *parent, const wxString& name)
 #if wxUSE_TOOLBAR
 wxToolBar *wxXmlResource::LoadToolBar(wxWindow *parent, const wxString& name)
 {
-    return (wxToolBar*)CreateResFromNode(wxFindResource(name, wxT("wxToolBar")), parent, nullptr);
+    return (wxToolBar*)CreateResFromNode(wxFindResource(name, "wxToolBar"), parent, nullptr);
 }
 #endif
 
 
 wxDialog *wxXmlResource::LoadDialog(wxWindow *parent, const wxString& name)
 {
-    return (wxDialog*)CreateResFromNode(wxFindResource(name, wxT("wxDialog")), parent, nullptr);
+    return (wxDialog*)CreateResFromNode(wxFindResource(name, "wxDialog"), parent, nullptr);
 }
 
 bool wxXmlResource::LoadDialog(wxDialog *dlg, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(wxFindResource(name, wxT("wxDialog")), parent, dlg) != nullptr;
+    return CreateResFromNode(wxFindResource(name, "wxDialog"), parent, dlg) != nullptr;
 }
 
 
 
 wxPanel *wxXmlResource::LoadPanel(wxWindow *parent, const wxString& name)
 {
-    return (wxPanel*)CreateResFromNode(wxFindResource(name, wxT("wxPanel")), parent, nullptr);
+    return (wxPanel*)CreateResFromNode(wxFindResource(name, "wxPanel"), parent, nullptr);
 }
 
 bool wxXmlResource::LoadPanel(wxPanel *panel, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(wxFindResource(name, wxT("wxPanel")), parent, panel) != nullptr;
+    return CreateResFromNode(wxFindResource(name, "wxPanel"), parent, panel) != nullptr;
 }
 
 wxFrame *wxXmlResource::LoadFrame(wxWindow* parent, const wxString& name)
 {
-    return (wxFrame*)CreateResFromNode(wxFindResource(name, wxT("wxFrame")), parent, nullptr);
+    return (wxFrame*)CreateResFromNode(wxFindResource(name, "wxFrame"), parent, nullptr);
 }
 
 bool wxXmlResource::LoadFrame(wxFrame* frame, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(wxFindResource(name, wxT("wxFrame")), parent, frame) != nullptr;
+    return CreateResFromNode(wxFindResource(name, "wxFrame"), parent, frame) != nullptr;
 }
 
 wxBitmap wxXmlResource::wxLoadBitmap(const wxString& name)
 {
     wxBitmap *bmp = (wxBitmap*)CreateResFromNode(
-                               wxFindResource(name, wxT("wxBitmap")), nullptr, nullptr);
+                               wxFindResource(name, "wxBitmap"), nullptr, nullptr);
     wxBitmap rt;
 
     if (bmp) { rt = *bmp; delete bmp; }
@@ -563,7 +563,7 @@ wxBitmap wxXmlResource::wxLoadBitmap(const wxString& name)
 wxIcon wxXmlResource::wxLoadIcon(const wxString& name)
 {
     wxIcon *icon = (wxIcon*)CreateResFromNode(
-                            wxFindResource(name, wxT("wxIcon")), nullptr, nullptr);
+                            wxFindResource(name, "wxIcon"), nullptr, nullptr);
     wxIcon rt;
 
     if (icon) { rt = *icon; delete icon; }
@@ -600,7 +600,7 @@ bool wxXmlResource::AttachUnknownControl(const wxString& name,
 {
     if (parent == nullptr)
         parent = control->GetParent();
-    wxWindow *container = parent->wxFindWindow(name + wxT("_container"));
+    wxWindow *container = parent->wxFindWindow(name + "_container");
     if (!container)
     {
         wxLogError("Cannot find container for unknown control '%s'.", name);
@@ -619,11 +619,11 @@ static void ProcessPlatformProperty(wxXmlNode *node)
     while (c)
     {
         isok = false;
-        if (!c->GetAttribute(wxT("platform"), &s))
+        if (!c->GetAttribute("platform", &s))
             isok = true;
         else
         {
-            wxStringTokenizer tkn(s, wxT(" |"));
+            wxStringTokenizer tkn(s, " |");
 
             while (tkn.HasMoreTokens())
             {
@@ -656,7 +656,7 @@ static void PreprocessForIdRanges(wxXmlNode *rootnode)
     wxXmlNode *c = rootnode->GetChildren();
     while (c)
     {
-        if (c->GetName() == wxT("ids-range"))
+        if (c->GetName() == "ids-range")
             wxIdRangeManager::Get()->AddRange(c);
         c = c->GetNext();
     }
@@ -738,7 +738,7 @@ bool wxXmlResource::UpdateResources()
 
 wxXmlDocument *wxXmlResource::DoLoadFile(const wxString& filename)
 {
-    wxLogTrace(wxT("xrc"), wxT("opening file '%s'"), filename);
+    wxLogTrace("xrc"), wxT("opening file '%s'", filename);
 
     wxInputStream *stream = nullptr;
 
@@ -762,7 +762,7 @@ wxXmlDocument *wxXmlResource::DoLoadFile(const wxString& filename)
         return nullptr;
     }
 
-    wxString encoding(wxT("UTF-8"));
+    wxString encoding("UTF-8");
     std::unique_ptr<wxXmlDocument> doc(new wxXmlDocument);
     if (!doc->Load(*stream, encoding))
     {
@@ -779,7 +779,7 @@ wxXmlDocument *wxXmlResource::DoLoadFile(const wxString& filename)
 bool wxXmlResource::DoLoadDocument(const wxXmlDocument& doc)
 {
     wxXmlNode * const root = doc.GetRoot();
-    if (root->GetName() != wxT("resource"))
+    if (root->GetName() != "resource")
     {
         ReportError
         (
@@ -792,7 +792,7 @@ bool wxXmlResource::DoLoadDocument(const wxXmlDocument& doc)
     long version;
     int v1, v2, v3, v4;
     wxString verstr = root->GetAttribute("version", "0.0.0.0");
-    if (wxSscanf(verstr, wxT("%i.%i.%i.%i"), &v1, &v2, &v3, &v4) == 4)
+    if (wxSscanf(verstr, "%i.%i.%i.%i", &v1, &v2, &v3, &v4) == 4)
         version = v1*256*256*256+v2*256*256+v3*256+v4;
     else
         version = 0;
@@ -812,7 +812,7 @@ bool wxXmlResource::DoLoadDocument(const wxXmlDocument& doc)
 
 bool wxXmlResource::LoadDocument(wxXmlDocument* doc, const wxString& name)
 {
-    wxCHECK_MSG( doc, false, wxS("must have a valid document") );
+    wxCHECK_MSG( doc, false, "must have a valid document" );
 
     if ( !DoLoadDocument(*doc) )
     {
@@ -829,7 +829,7 @@ bool wxXmlResource::LoadDocument(wxXmlDocument* doc, const wxString& name)
         static unsigned long s_xrcDocument = 0;
 
         // Make it look different from any real file name.
-        docname = wxString::Format(wxS("<XML document #%lu>"), ++s_xrcDocument);
+        docname = wxString::Format("<XML document #%lu>", ++s_xrcDocument);
     }
 
     Data().push_back(new wxXmlResourceDataRecord(docname, doc, XRCWhence::From_Doc));
@@ -857,7 +857,7 @@ wxXmlNode *wxXmlResource::DoFindResource(wxXmlNode *parent,
             wxString cls(node->GetAttribute("class"));
 
             // object_ref may not have 'class' attribute:
-            if (cls.empty() && node->GetName() == wxS("object_ref"))
+            if (cls.empty() && node->GetName() == "object_ref")
             {
                 wxString refName = node->GetAttribute("ref");
                 if (refName.empty())
@@ -1006,7 +1006,7 @@ static void MergeNodesOver(wxXmlNode& dest, wxXmlNode& overwriteWith,
             {
                 dest.AddChild(copyOfNode);
             }
-            else if ( insert_pos == wxT("begin") )
+            else if ( insert_pos == "begin" )
             {
                 dest.InsertChild(copyOfNode, dest.GetChildren());
             }
@@ -1024,7 +1024,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
                                    wxXmlResourceHandler *handlerToUse)
 {
     // handling of referenced resource
-    if ( node.GetName() == wxT("object_ref") )
+    if ( node.GetName() == "object_ref" )
     {
         wxString refName = node.GetAttribute("ref", "");
         wxXmlNode* refNode = wxFindResource(refName, {}, true);
@@ -1080,7 +1080,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
             return handlerToUse->CreateResource(&node, parent, instance);
         }
     }
-    else if (node.GetName() == wxT("object"))
+    else if (node.GetName() == "object")
     {
         for ( std::vector<wxXmlResourceHandler*>::iterator h = m_handlers.begin();
               h != m_handlers.end(); ++h )
@@ -1482,7 +1482,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
     wxWindow *myParentAW = m_handler->m_parentAsWindow;
 
     m_handler->m_instance = instance;
-    if (!m_handler->m_instance && node->HasAttribute(wxT("subclass")) &&
+    if (!m_handler->m_instance && node->HasAttribute("subclass") &&
         !(m_handler->m_resource->GetFlags() & wxXRC_NO_SUBCLASSING))
     {
         std::string subclass = node->GetAttribute("subclass", "");
@@ -1539,7 +1539,7 @@ int wxXmlResourceHandlerImpl::GetStyle(const wxString& param, int defaults)
 
     if (!s) return defaults;
 
-    wxStringTokenizer tkn(s, wxT("| \t\n"), wxStringTokenizerMode::StrTok);
+    wxStringTokenizer tkn(s, "| \t\n", wxStringTokenizerMode::StrTok);
     int style = 0;
 
     wxString fl;
@@ -2004,7 +2004,7 @@ wxImageList *wxXmlResourceHandlerImpl::GetImageList(const wxString& param)
     // Start adding images, we'll create the image list when adding the first
     // one.
     wxImageList * imagelist = nullptr;
-    wxString parambitmap = wxT("bitmap");
+    wxString parambitmap = "bitmap";
     if ( HasParam(parambitmap) )
     {
         wxXmlNode *n = m_handler->m_node->GetChildren();
@@ -2020,7 +2020,7 @@ wxImageList *wxXmlResourceHandlerImpl::GetImageList(const wxString& param)
                         size = icon.GetSize();
 
                     // We use the mask by default.
-                    bool mask = GetBool(wxS("mask"), true);
+                    bool mask = GetBool("mask", true);
 
                     imagelist = new wxImageList(size.x, size.y, mask);
                 }
@@ -2048,7 +2048,7 @@ wxString wxXmlResourceHandlerImpl::GetFilePath(const wxXmlNode* node)
 
 wxXmlNode *wxXmlResourceHandlerImpl::GetParamNode(const wxString& param)
 {
-    wxCHECK_MSG(m_handler->m_node, nullptr, wxT("You can't access handler data before it was initialized!"));
+    wxCHECK_MSG(m_handler->m_node, nullptr, "You can't access handler data before it was initialized!");
 
     wxXmlNode *n = m_handler->m_node->GetChildren();
 
@@ -2079,8 +2079,8 @@ bool wxXmlResourceHandlerImpl::IsObjectNode(const wxXmlNode *node) const
 {
     return node &&
             node->GetType() == wxXML_ELEMENT_NODE &&
-                (node->GetName() == wxS("object") ||
-                    node->GetName() == wxS("object_ref"));
+                (node->GetName() == "object" ||
+                    node->GetName() == "object_ref");
 }
 
 wxString wxXmlResourceHandlerImpl::GetNodeContent(const wxXmlNode *node)
@@ -2340,21 +2340,21 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
 
     // size
     float pointSize = -1.0f;
-    bool hasSize = HasParam(wxT("size"));
+    bool hasSize = HasParam("size");
     if (hasSize)
-        pointSize = GetFloat(wxT("size"), -1.0f);
+        pointSize = GetFloat("size", -1.0f);
 
     // style
     wxFontStyle istyle = wxFontStyle::Normal;
-    bool hasStyle = HasParam(wxT("style"));
+    bool hasStyle = HasParam("style");
     if (hasStyle)
     {
-        wxString style = GetParamValue(wxT("style"));
-        if (style == wxT("italic"))
+        wxString style = GetParamValue("style");
+        if (style == "italic")
             istyle = wxFontStyle::Italic;
-        else if (style == wxT("slant"))
+        else if (style == "slant")
             istyle = wxFontStyle::Slant;
-        else if (style != wxT("normal"))
+        else if (style != "normal")
         {
             ReportParamError
             (
@@ -2366,10 +2366,10 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
 
     // weight
     long iweight = wxFONTWEIGHT_NORMAL;
-    bool hasWeight = HasParam(wxT("weight"));
+    bool hasWeight = HasParam("weight");
     if (hasWeight)
     {
-        wxString weight = GetParamValue(wxT("weight"));
+        wxString weight = GetParamValue("weight");
         if (weight.ToLong(&iweight))
         {
             if (iweight <= wxFONTWEIGHT_INVALID || iweight > wxFONTWEIGHT_MAX)
@@ -2381,25 +2381,25 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
                 );
             }
         }
-        else if (weight == wxT("thin"))
+        else if (weight == "thin")
             iweight = wxFONTWEIGHT_THIN;
-        else if (weight == wxT("extralight"))
+        else if (weight == "extralight")
             iweight = wxFONTWEIGHT_EXTRALIGHT;
-        else if (weight == wxT("light"))
+        else if (weight == "light")
             iweight = wxFONTWEIGHT_LIGHT;
-        else if (weight == wxT("medium"))
+        else if (weight == "medium")
             iweight = wxFONTWEIGHT_MEDIUM;
-        else if (weight == wxT("semibold"))
+        else if (weight == "semibold")
             iweight = wxFONTWEIGHT_SEMIBOLD;
-        else if (weight == wxT("bold"))
+        else if (weight == "bold")
             iweight = wxFONTWEIGHT_BOLD;
-        else if (weight == wxT("extrabold"))
+        else if (weight == "extrabold")
             iweight = wxFONTWEIGHT_EXTRABOLD;
-        else if (weight == wxT("heavy"))
+        else if (weight == "heavy")
             iweight = wxFONTWEIGHT_HEAVY;
-        else if (weight == wxT("extraheavy"))
+        else if (weight == "extraheavy")
             iweight = wxFONTWEIGHT_EXTRAHEAVY;
-        else if (weight != wxT("normal"))
+        else if (weight != "normal")
         {
             ReportParamError
             (
@@ -2410,26 +2410,26 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
     }
 
     // underline
-    bool hasUnderlined = HasParam(wxT("underlined"));
-    bool underlined = hasUnderlined ? GetBool(wxT("underlined"), false) : false;
+    bool hasUnderlined = HasParam("underlined");
+    bool underlined = hasUnderlined ? GetBool("underlined", false) : false;
 
     // strikethrough
-    bool hasStrikethrough = HasParam(wxT("strikethrough"));
-    bool strikethrough = hasStrikethrough ? GetBool(wxT("strikethrough"), false) : false;
+    bool hasStrikethrough = HasParam("strikethrough");
+    bool strikethrough = hasStrikethrough ? GetBool("strikethrough", false) : false;
 
     // family and facename
     wxFontFamily ifamily = wxFontFamily::Default;
-    bool hasFamily = HasParam(wxT("family"));
+    bool hasFamily = HasParam("family");
     if (hasFamily)
     {
-        wxString family = GetParamValue(wxT("family"));
-        if (family == wxT("default")) ifamily = wxFontFamily::Default;
-        else if (family == wxT("decorative")) ifamily = wxFontFamily::Decorative;
-        else if (family == wxT("roman")) ifamily = wxFontFamily::Roman;
-        else if (family == wxT("script")) ifamily = wxFontFamily::Script;
-        else if (family == wxT("swiss")) ifamily = wxFontFamily::Swiss;
-        else if (family == wxT("modern")) ifamily = wxFontFamily::Modern;
-        else if (family == wxT("teletype")) ifamily = wxFontFamily::Teletype;
+        wxString family = GetParamValue("family");
+        if (family == "default") ifamily = wxFontFamily::Default;
+        else if (family == "decorative") ifamily = wxFontFamily::Decorative;
+        else if (family == "roman") ifamily = wxFontFamily::Roman;
+        else if (family == "script") ifamily = wxFontFamily::Script;
+        else if (family == "swiss") ifamily = wxFontFamily::Swiss;
+        else if (family == "modern") ifamily = wxFontFamily::Modern;
+        else if (family == "teletype") ifamily = wxFontFamily::Teletype;
         else
         {
             ReportParamError
@@ -2442,11 +2442,11 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
 
 
     wxString facename;
-    bool hasFacename = HasParam(wxT("face"));
+    bool hasFacename = HasParam("face");
     if (hasFacename)
     {
-        wxString faces = GetParamValue(wxT("face"));
-        wxStringTokenizer tk(faces, wxT(","));
+        wxString faces = GetParamValue("face");
+        wxStringTokenizer tk(faces, ",");
 #if wxUSE_FONTENUM
         std::vector<std::string> facenames(wxFontEnumerator::GetFacenames());
         while (tk.HasMoreTokens())
@@ -2472,11 +2472,11 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
 
     // encoding
     wxFontEncoding enc = wxFONTENCODING_DEFAULT;
-    bool hasEncoding = HasParam(wxT("encoding"));
+    bool hasEncoding = HasParam("encoding");
 #if wxUSE_FONTMAP
     if (hasEncoding)
     {
-        wxString encoding = GetParamValue(wxT("encoding"));
+        wxString encoding = GetParamValue("encoding");
         wxFontMapper mapper;
         if (!encoding.empty())
             enc = mapper.CharsetToEncoding(encoding);
@@ -2488,10 +2488,10 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
     wxFont font;
 
     // is this font based on a system font?
-    if (HasParam(wxT("sysfont")))
+    if (HasParam("sysfont"))
     {
-        font = GetSystemFont(GetParamValue(wxT("sysfont")));
-        if (HasParam(wxT("inherit")))
+        font = GetSystemFont(GetParamValue("sysfont"));
+        if (HasParam("inherit"))
         {
             ReportParamError
             (
@@ -2501,7 +2501,7 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         }
     }
     // or should the font of the widget be used?
-    else if (GetBool(wxT("inherit"), false))
+    else if (GetBool("inherit", false))
     {
         if (parent)
             font = parent->GetFont();
@@ -2520,7 +2520,7 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         if (pointSize > 0)
         {
             font.SetFractionalPointSize(double(pointSize));
-            if (HasParam(wxT("relativesize")))
+            if (HasParam("relativesize"))
             {
                 ReportParamError
                 (
@@ -2529,9 +2529,9 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
                 );
             }
         }
-        else if (HasParam(wxT("relativesize")))
+        else if (HasParam("relativesize"))
             font.SetPointSize(int(font.GetPointSize() *
-                                     GetFloat(wxT("relativesize"))));
+                                     GetFloat("relativesize")));
 
         if (hasStyle)
             font.SetStyle(istyle);
@@ -2580,22 +2580,22 @@ void wxXmlResourceHandlerImpl::SetupWindow(wxWindow *wnd)
 
     //FIXME : add cursor
 
-    const wxString variant = GetParamValue(wxS("variant"));
+    const wxString variant = GetParamValue("variant");
     if (!variant.empty())
     {
-        if (variant == wxS("normal"))
+        if (variant == "normal")
             wnd->SetWindowVariant(wxWindowVariant::Normal);
-        else if (variant == wxS("small"))
+        else if (variant == "small")
             wnd->SetWindowVariant(wxWindowVariant::Small);
-        else if (variant == wxS("mini"))
+        else if (variant == "mini")
             wnd->SetWindowVariant(wxWindowVariant::Mini);
-        else if (variant == wxS("large"))
+        else if (variant == "large")
             wnd->SetWindowVariant(wxWindowVariant::Large);
         else
         {
             ReportParamError
             (
-                wxS("variant"),
+                "variant",
                 wxString::Format
                 (
                     "Invalid window variant \"%s\": must be one of "
@@ -2605,33 +2605,33 @@ void wxXmlResourceHandlerImpl::SetupWindow(wxWindow *wnd)
             );
         }
     }
-    if (HasParam(wxT("exstyle")))
+    if (HasParam("exstyle"))
         // Have to OR it with existing style, since
         // some implementations (e.g. wxGTK) use the extra style
         // during creation
-        wnd->SetExtraStyle(wnd->GetExtraStyle() | GetStyle(wxT("exstyle")));
-    if (HasParam(wxT("bg")))
-        wnd->SetBackgroundColour(GetColour(wxT("bg")));
-    if (HasParam(wxT("ownbg")))
-        wnd->SetOwnBackgroundColour(GetColour(wxT("ownbg")));
-    if (HasParam(wxT("fg")))
-        wnd->SetForegroundColour(GetColour(wxT("fg")));
-    if (HasParam(wxT("ownfg")))
-        wnd->SetOwnForegroundColour(GetColour(wxT("ownfg")));
-    if (GetBool(wxT("enabled"), true) == 0)
+        wnd->SetExtraStyle(wnd->GetExtraStyle() | GetStyle("exstyle"));
+    if (HasParam("bg"))
+        wnd->SetBackgroundColour(GetColour("bg"));
+    if (HasParam("ownbg"))
+        wnd->SetOwnBackgroundColour(GetColour("ownbg"));
+    if (HasParam("fg"))
+        wnd->SetForegroundColour(GetColour("fg"));
+    if (HasParam("ownfg"))
+        wnd->SetOwnForegroundColour(GetColour("ownfg"));
+    if (GetBool("enabled", true) == 0)
         wnd->Enable(false);
-    if (GetBool(wxT("focused"), false) == 1)
+    if (GetBool("focused", false) == 1)
         wnd->SetFocus();
 #if wxUSE_TOOLTIPS
-    if (HasParam(wxT("tooltip")))
-        wnd->SetToolTip(GetNodeText(GetParamNode(wxT("tooltip"))));
+    if (HasParam("tooltip"))
+        wnd->SetToolTip(GetNodeText(GetParamNode("tooltip")));
 #endif
-    if (HasParam(wxT("font")))
-        wnd->SetFont(GetFont(wxT("font"), wnd));
-    if (HasParam(wxT("ownfont")))
-        wnd->SetOwnFont(GetFont(wxT("ownfont"), wnd));
-    if (HasParam(wxT("help")))
-        wnd->SetHelpText(GetNodeText(GetParamNode(wxT("help"))));
+    if (HasParam("font"))
+        wnd->SetFont(GetFont("font", wnd));
+    if (HasParam("ownfont"))
+        wnd->SetOwnFont(GetFont("ownfont", wnd));
+    if (HasParam("help"))
+        wnd->SetHelpText(GetNodeText(GetParamNode("help")));
 }
 
 

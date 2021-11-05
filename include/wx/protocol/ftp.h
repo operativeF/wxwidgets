@@ -175,7 +175,7 @@ public:
 
 // the trace mask used by assorted wxLogTrace() in ftp code, do
 // wxLog::AddTraceMask(FTP_TRACE_MASK) to see them in output
-#define FTP_TRACE_MASK wxT("ftp")
+#define FTP_TRACE_MASK "ftp"
 
 #endif // wxUSE_PROTOCOL_FTP
 

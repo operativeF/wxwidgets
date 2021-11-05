@@ -14,7 +14,7 @@
 
 wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
 {
-    wxString wd = tag.GetParam(wxT("STYLE"));
+    wxString wd = tag.GetParam("STYLE");
 
     // Make sure no whitespace
     wd.Trim(true).Trim(false);
@@ -44,7 +44,7 @@ wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
     // Should now have a semi-colon delimited list of options
     // Each option is a name and a value separated by a colon
     // Split the list into names and values
-    wxStringTokenizer tkz(wd, wxT(";"), wxStringTokenizerMode::StrTok);
+    wxStringTokenizer tkz(wd, ";", wxStringTokenizerMode::StrTok);
     while ( tkz.HasMoreTokens() )
     {
         wxString token = tkz.GetNextToken();

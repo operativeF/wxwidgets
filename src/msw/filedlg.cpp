@@ -90,7 +90,7 @@ void ChangeExceptionPolicy()
 #if wxUSE_DYNLIB_CLASS
     gs_changedPolicy = false;
 
-    wxLoadedDLL dllKernel32(wxT("kernel32.dll"));
+    wxLoadedDLL dllKernel32("kernel32.dll");
 
     if ( gs_pfnGetProcessUserModeExceptionPolicy
         == (GetProcessUserModeExceptionPolicy_t) -1)
@@ -552,7 +552,7 @@ int wxFileDialog::ShowModal()
 
     size_t items = wxParseCommonDialogsFilter(m_wildCard, wildDescriptions, wildFilters);
 
-    wxASSERT_MSG( items > 0 , wxT("empty wildcard list") );
+    wxASSERT_MSG( items > 0 , "empty wildcard list" );
 
     std::string filterBuffer;
 
@@ -591,8 +591,8 @@ int wxFileDialog::ShowModal()
             extension = extension + wxStrlen( extension ) + 1;
 
         // use dummy name a to avoid assert in AppendExtension
-        defextBuffer = AppendExtension(wxT("a"), extension);
-        if (defextBuffer.StartsWith(wxT("a.")))
+        defextBuffer = AppendExtension("a", extension);
+        if (defextBuffer.StartsWith("a."))
         {
             defextBuffer = defextBuffer.Mid(2); // remove "a."
             of.lpstrDefExt = defextBuffer.c_str();

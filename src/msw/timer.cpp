@@ -136,7 +136,7 @@ void wxMSWTimerImpl::Stop()
 
 void wxProcessTimer(wxMSWTimerImpl& timer)
 {
-    wxASSERT_MSG( timer.IsRunning(), wxT("bogus timer id") );
+    wxASSERT_MSG( timer.IsRunning(), "bogus timer id" );
 
     if ( timer.IsOneShot() )
         timer.Stop();
@@ -188,7 +188,7 @@ void wxTimerHiddenWindowModule::OnExit()
     {
         if ( !::DestroyWindow(ms_hwnd) )
         {
-            wxLogLastError(wxT("DestroyWindow(wxTimerHiddenWindow)"));
+            wxLogLastError("DestroyWindow(wxTimerHiddenWindow)");
         }
 
         ms_hwnd = nullptr;
@@ -198,7 +198,7 @@ void wxTimerHiddenWindowModule::OnExit()
     {
         if ( !::UnregisterClassW(ms_className, wxGetInstance()) )
         {
-            wxLogLastError(wxT("UnregisterClass(\"wxTimerHiddenWindow\")"));
+            wxLogLastError("UnregisterClass(\"wxTimerHiddenWindow\")");
         }
 
         ms_className = nullptr;
@@ -208,7 +208,8 @@ void wxTimerHiddenWindowModule::OnExit()
 /* static */
 HWND wxTimerHiddenWindowModule::GetHWND()
 {
-    static const wxChar *HIDDEN_WINDOW_CLASS = wxT("wxTimerHiddenWindow");
+    static constexpr auto HIDDEN_WINDOW_CLASS = L"wxTimerHiddenWindow";
+
     if ( !ms_hwnd )
     {
         ms_hwnd = wxCreateHiddenWindow(&ms_className, HIDDEN_WINDOW_CLASS,

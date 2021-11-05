@@ -39,27 +39,27 @@ wxOwnerDrawnComboBoxXmlHandler::wxOwnerDrawnComboBoxXmlHandler()
 
 wxObject *wxOwnerDrawnComboBoxXmlHandler::DoCreateResource()
 {
-    if( m_class == wxT("wxOwnerDrawnComboBox"))
+    if( m_class == "wxOwnerDrawnComboBox")
     {
         // find the selection
-        long selection = GetLong( wxT("selection"), -1 );
+        long selection = GetLong( "selection", -1 );
 
         // need to build the list of strings from children
         m_insideBox = true;
-        CreateChildrenPrivately(nullptr, GetParamNode(wxT("content")));
+        CreateChildrenPrivately(nullptr, GetParamNode("content"));
 
         XRC_MAKE_INSTANCE(control, wxOwnerDrawnComboBox)
 
         control->Create(m_parentAsWindow,
                         GetID(),
-                        GetText(wxT("value")),
+                        GetText("value"),
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle(),
                         wxDefaultValidator,
                         GetName());
 
-        wxSize sizeBtn=GetSize(wxT("buttonsize"));
+        wxSize sizeBtn=GetSize("buttonsize");
 
         if (sizeBtn != wxDefaultSize)
             control->SetButtonPosition(sizeBtn.x, sizeBtn.y);
@@ -89,8 +89,8 @@ bool wxOwnerDrawnComboBoxXmlHandler::CanHandle(wxXmlNode *node)
 {
 #if wxCHECK_VERSION(2,7,0)
 
-    return (IsOfClass(node, wxT("wxOwnerDrawnComboBox")) ||
-           (m_insideBox && node->GetName() == wxT("item")));
+    return (IsOfClass(node, "wxOwnerDrawnComboBox") ||
+           (m_insideBox && node->GetName() == "item"));
 
 #else
 
@@ -100,9 +100,9 @@ bool wxOwnerDrawnComboBoxXmlHandler::CanHandle(wxXmlNode *node)
 //  above should work fine. This code is left in here so this file can easily be used
 //  in a version backported to 2.6. All we are doing here is expanding the macro
 
-    bool fOurClass = node->GetAttribute(wxT("class"), {}) == wxT("wxOwnerDrawnComboBox");
+    bool fOurClass = node->GetAttribute("class"), {}) == wxT("wxOwnerDrawnComboBox";
     return (fOurClass ||
-          (m_insideBox && node->GetName() == wxT("item")));
+          (m_insideBox && node->GetName() == "item"));
 #endif
 }
 

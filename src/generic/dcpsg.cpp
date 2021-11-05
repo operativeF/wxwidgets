@@ -327,7 +327,7 @@ int wxPostScriptDCImpl::GetResolution() const
 
 void wxPostScriptDCImpl::DoSetClippingRegion (wxCoord x, wxCoord y, wxCoord w, wxCoord h)
 {
-    wxCHECK_RET( m_ok , wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok , "invalid postscript dc" );
 
     if (m_clipping)
         DestroyClippingRegion();
@@ -358,7 +358,7 @@ void wxPostScriptDCImpl::DoSetClippingRegion (wxCoord x, wxCoord y, wxCoord w, w
 
 void wxPostScriptDCImpl::DestroyClippingRegion()
 {
-    wxCHECK_RET( m_ok , wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok , "invalid postscript dc" );
 
     if (m_clipping)
     {
@@ -373,29 +373,29 @@ void wxPostScriptDCImpl::Clear()
 {
     // This should fail silently to avoid unnecessary
     // asserts
-    //    wxFAIL_MSG( wxT("wxPostScriptDCImpl::Clear not implemented.") );
+    //    wxFAIL_MSG( "wxPostScriptDCImpl::Clear not implemented." );
 }
 
 bool wxPostScriptDCImpl::DoFloodFill (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), const wxColour &WXUNUSED(col), wxFloodFillStyle WXUNUSED(style))
 {
-    wxFAIL_MSG( wxT("wxPostScriptDCImpl::FloodFill not implemented.") );
+    wxFAIL_MSG( "wxPostScriptDCImpl::FloodFill not implemented." );
     return false;
 }
 
 bool wxPostScriptDCImpl::DoGetPixel (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxColour * WXUNUSED(col)) const
 {
-    wxFAIL_MSG( wxT("wxPostScriptDCImpl::GetPixel not implemented.") );
+    wxFAIL_MSG( "wxPostScriptDCImpl::GetPixel not implemented." );
     return false;
 }
 
 void wxPostScriptDCImpl::DoCrossHair (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y))
 {
-    wxFAIL_MSG( wxT("wxPostScriptDCImpl::CrossHair not implemented.") );
+    wxFAIL_MSG( "wxPostScriptDCImpl::CrossHair not implemented." );
 }
 
 void wxPostScriptDCImpl::DoDrawLine (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if ( m_pen.IsTransparent() )
         return;
@@ -418,7 +418,7 @@ void wxPostScriptDCImpl::DoDrawLine (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord
 
 void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, wxCoord xc, wxCoord yc)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     wxCoord dx = x1 - xc;
     wxCoord dy = y1 - yc;
@@ -500,7 +500,7 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
 
 void wxPostScriptDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,double sa,double ea)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if ( sa >= 360 || sa <= -360 )
         sa -= int(sa/360)*360;
@@ -555,7 +555,7 @@ void wxPostScriptDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord
 
 void wxPostScriptDCImpl::DoDrawPoint (wxCoord x, wxCoord y)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if ( m_pen.IsTransparent() )
         return;
@@ -577,7 +577,7 @@ void wxPostScriptDCImpl::DoDrawPoint (wxCoord x, wxCoord y)
 
 void wxPostScriptDCImpl::DoDrawPolygon (int n, const wxPoint points[], wxCoord xoffset, wxCoord yoffset, wxPolygonFillMode fillStyle)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (n <= 0) return;
 
@@ -647,7 +647,7 @@ void wxPostScriptDCImpl::DoDrawPolygon (int n, const wxPoint points[], wxCoord x
 
 void wxPostScriptDCImpl::DoDrawPolyPolygon (int n, const int count[], const wxPoint points[], wxCoord xoffset, wxCoord yoffset, wxPolygonFillMode fillStyle)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (n <= 0) return;
 
@@ -723,7 +723,7 @@ void wxPostScriptDCImpl::DoDrawPolyPolygon (int n, const int count[], const wxPo
 
 void wxPostScriptDCImpl::DoDrawLines (int n, const wxPoint points[], wxCoord xoffset, wxCoord yoffset)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if ( m_pen.IsTransparent() )
         return;
@@ -757,7 +757,7 @@ void wxPostScriptDCImpl::DoDrawLines (int n, const wxPoint points[], wxCoord xof
 
 void wxPostScriptDCImpl::DoDrawRectangle (wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     width--;
     height--;
@@ -811,7 +811,7 @@ void wxPostScriptDCImpl::DoDrawRectangle (wxCoord x, wxCoord y, wxCoord width, w
 
 void wxPostScriptDCImpl::DoDrawRoundedRectangle (wxCoord x, wxCoord y, wxCoord width, wxCoord height, double radius)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     width--;
     height--;
@@ -893,7 +893,7 @@ void wxPostScriptDCImpl::DoDrawRoundedRectangle (wxCoord x, wxCoord y, wxCoord w
 
 void wxPostScriptDCImpl::DoDrawEllipse (wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     width--;
     height--;
@@ -940,7 +940,7 @@ void wxPostScriptDCImpl::DoDrawIcon( const wxIcon& icon, wxCoord x, wxCoord y )
 
 void wxPostScriptDCImpl::DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoord y, bool WXUNUSED(useMask) )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (!bitmap.IsOk()) return;
 
@@ -1045,7 +1045,7 @@ void wxPostScriptDCImpl::SetPSColour(const wxColor& col)
 
 void wxPostScriptDCImpl::SetFont( const wxFont& font )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (!font.IsOk())  return;
 
@@ -1060,7 +1060,7 @@ void wxPostScriptDCImpl::SetFont( const wxFont& font )
 // Actually set PostScript font.
 void wxPostScriptDCImpl::SetPSFont()
 {
-    wxASSERT_MSG( m_font.IsOk(), wxS("Font is not yet set") );
+    wxASSERT_MSG( m_font.IsOk(), "Font is not yet set" );
 
     if ( !m_isFontChanged )
         return;
@@ -1077,16 +1077,16 @@ void wxPostScriptDCImpl::SetPSFont()
             if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Courier-BoldOblique");
+                    name = "/Courier-BoldOblique";
                 else
-                    name = wxS("/Courier-Oblique");
+                    name = "/Courier-Oblique";
             }
             else
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Courier-Bold");
+                    name = "/Courier-Bold";
                 else
-                    name = wxS("/Courier");
+                    name = "/Courier";
             }
             break;
         }
@@ -1095,22 +1095,22 @@ void wxPostScriptDCImpl::SetPSFont()
             if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Times-BoldItalic");
+                    name = "/Times-BoldItalic";
                 else
-                    name = wxS("/Times-Italic");
+                    name = "/Times-Italic";
             }
             else
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Times-Bold");
+                    name = "/Times-Bold";
                 else
-                    name = wxS("/Times-Roman");
+                    name = "/Times-Roman";
             }
             break;
         }
         case wxFontFamily::Script:
         {
-            name = wxS("/ZapfChancery-MediumItalic");
+            name = "/ZapfChancery-MediumItalic";
             break;
         }
         case wxFontFamily::Swiss:
@@ -1119,16 +1119,16 @@ void wxPostScriptDCImpl::SetPSFont()
             if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Helvetica-BoldOblique");
+                    name = "/Helvetica-BoldOblique";
                 else
-                    name = wxS("/Helvetica-Oblique");
+                    name = "/Helvetica-Oblique";
             }
             else
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
-                    name = wxS("/Helvetica-Bold");
+                    name = "/Helvetica-Bold";
                 else
-                    name = wxS("/Helvetica");
+                    name = "/Helvetica";
             }
             break;
         }
@@ -1154,7 +1154,7 @@ void wxPostScriptDCImpl::SetPSFont()
 
 void wxPostScriptDCImpl::SetPen( const wxPen& pen )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (!pen.IsOk()) return;
 
@@ -1263,7 +1263,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
 
 void wxPostScriptDCImpl::SetBrush( const wxBrush& brush )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (!brush.IsOk()) return;
 
@@ -1276,7 +1276,7 @@ void wxPostScriptDCImpl::SetBrush( const wxBrush& brush )
 // Common part of DoDrawText() and DoDrawRotatedText()
 void wxPostScriptDCImpl::DrawAnyText(const wxWX2MBbuf& textbuf, wxCoord textDescent, double lineHeight)
 {
-    wxCHECK_RET( textbuf, wxS("Invalid text buffer") );
+    wxCHECK_RET( textbuf, "Invalid text buffer" );
 
     wxString buffer;
 
@@ -1345,7 +1345,7 @@ void wxPostScriptDCImpl::DrawAnyText(const wxWX2MBbuf& textbuf, wxCoord textDesc
 
 void wxPostScriptDCImpl::DoDrawText( const wxString& text, wxCoord x, wxCoord y )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     const wxWX2MBbuf textbuf = text.mb_str();
     if ( !textbuf )
@@ -1384,7 +1384,7 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, const wxPoint&
         return;
     }
 
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     const wxWX2MBbuf textbuf = text.mb_str();
     if ( !textbuf )
@@ -1434,13 +1434,13 @@ void wxPostScriptDCImpl::SetBackground (const wxBrush& brush)
 
 void wxPostScriptDCImpl::SetLogicalFunction(wxRasterOperationMode WXUNUSED(function))
 {
-    wxFAIL_MSG( wxT("wxPostScriptDCImpl::SetLogicalFunction not implemented.") );
+    wxFAIL_MSG( "wxPostScriptDCImpl::SetLogicalFunction not implemented." );
 }
 
 #if wxUSE_SPLINES
 void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     SetPen( m_pen );
 
@@ -1610,17 +1610,17 @@ wxSize wxPostScriptDCImpl::GetPPI() const
 
 bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
 {
-    wxCHECK_MSG( m_ok, false, wxT("invalid postscript dc") );
+    wxCHECK_MSG( m_ok, false, "invalid postscript dc" );
 
     if (m_printData.GetPrintMode() != wxPrintMode::Stream )
     {
         if ( m_printData.GetFilename().empty() )
         {
-            wxString filename = wxFileName::CreateTempFileName( wxT("ps") );
+            wxString filename = wxFileName::CreateTempFileName( "ps" );
             m_printData.SetFilename(filename);
         }
 
-        m_pstream = wxFopen( m_printData.GetFilename(), wxT("w+") );
+        m_pstream = wxFopen( m_printData.GetFilename(), "w+" );
 
         if (!m_pstream)
         {
@@ -1649,21 +1649,21 @@ bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
     const wxChar *paper;
     switch (m_printData.GetPaperId())
     {
-       case wxPaperSize::Letter: paper = wxT("Letter"); break;       // Letter: paper ""; 8 1/2 by 11 inches
-       case wxPaperSize::Legal: paper = wxT("Legal"); break;         // Legal, 8 1/2 by 14 inches
-       case wxPaperSize::A4: paper = wxT("A4"); break;               // A4 Sheet, 210 by 297 millimeters
-       case wxPaperSize::Tabloid: paper = wxT("Tabloid"); break;     // Tabloid, 11 by 17 inches
-       case wxPaperSize::Ledger: paper = wxT("Ledger"); break;       // Ledger, 17 by 11 inches
-       case wxPaperSize::Statement: paper = wxT("Statement"); break; // Statement, 5 1/2 by 8 1/2 inches
-       case wxPaperSize::Executive: paper = wxT("Executive"); break; // Executive, 7 1/4 by 10 1/2 inches
-       case wxPaperSize::A3: paper = wxT("A3"); break;               // A3 sheet, 297 by 420 millimeters
-       case wxPaperSize::A5: paper = wxT("A5"); break;               // A5 sheet, 148 by 210 millimeters
-       case wxPaperSize::B4: paper = wxT("B4"); break;               // B4 sheet, 250 by 354 millimeters
-       case wxPaperSize::B5: paper = wxT("B5"); break;               // B5 sheet, 182-by-257-millimeter paper
-       case wxPaperSize::Folio: paper = wxT("Folio"); break;         // Folio, 8-1/2-by-13-inch paper
-       case wxPaperSize::Quarto: paper = wxT("Quaro"); break;        // Quarto, 215-by-275-millimeter paper
-       case wxPaperSize::_10X14: paper = wxT("10x14"); break;         // 10-by-14-inch sheet
-       default: paper = wxT("A4");
+       case wxPaperSize::Letter: paper = "Letter"; break;       // Letter: paper ""; 8 1/2 by 11 inches
+       case wxPaperSize::Legal: paper = "Legal"; break;         // Legal, 8 1/2 by 14 inches
+       case wxPaperSize::A4: paper = "A4"; break;               // A4 Sheet, 210 by 297 millimeters
+       case wxPaperSize::Tabloid: paper = "Tabloid"; break;     // Tabloid, 11 by 17 inches
+       case wxPaperSize::Ledger: paper = "Ledger"; break;       // Ledger, 17 by 11 inches
+       case wxPaperSize::Statement: paper = "Statement"; break; // Statement, 5 1/2 by 8 1/2 inches
+       case wxPaperSize::Executive: paper = "Executive"; break; // Executive, 7 1/4 by 10 1/2 inches
+       case wxPaperSize::A3: paper = "A3"; break;               // A3 sheet, 297 by 420 millimeters
+       case wxPaperSize::A5: paper = "A5"; break;               // A5 sheet, 148 by 210 millimeters
+       case wxPaperSize::B4: paper = "B4"; break;               // B4 sheet, 250 by 354 millimeters
+       case wxPaperSize::B5: paper = "B5"; break;               // B5 sheet, 182-by-257-millimeter paper
+       case wxPaperSize::Folio: paper = "Folio"; break;         // Folio, 8-1/2-by-13-inch paper
+       case wxPaperSize::Quarto: paper = "Quaro"; break;        // Quarto, 215-by-275-millimeter paper
+       case wxPaperSize::_10X14: paper = "10x14"; break;         // 10-by-14-inch sheet
+       default: paper = "A4";
     }
 
     buffer.Printf( "%%%%DocumentPaperSizes: %s\n", paper );
@@ -1700,7 +1700,7 @@ bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
 
 void wxPostScriptDCImpl::EndDoc ()
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     if (m_clipping)
     {
@@ -1764,7 +1764,7 @@ void wxPostScriptDCImpl::EndDoc ()
 
     // The Adobe specifications call for integers; we round as to make
     // the bounding larger.
-    PsPrintf( wxT("%%%%BoundingBox: %d %d %d %d\n"),
+    PsPrintf( "%%%%BoundingBox: %d %d %d %d\n",
             (wxCoord)std::floor((double)llx), (wxCoord)std::floor((double)lly),
             (wxCoord)std::ceil((double)urx), (wxCoord)std::ceil((double)ury) );
 
@@ -1775,10 +1775,10 @@ void wxPostScriptDCImpl::EndDoc ()
     // adjustment of scale, rotation, or translation, and hence are in the
     // default user coordinates.
     PsPrint( "% newpath\n" );
-    PsPrintf( wxT("%% %d %d moveto\n"), llx, lly );
-    PsPrintf( wxT("%% %d %d lineto\n"), urx, lly );
-    PsPrintf( wxT("%% %d %d lineto\n"), urx, ury );
-    PsPrintf( wxT("%% %d %d lineto closepath stroke\n"), llx, ury );
+    PsPrintf( "%% %d %d moveto\n", llx, lly );
+    PsPrintf( "%% %d %d lineto\n", urx, lly );
+    PsPrintf( "%% %d %d lineto\n", urx, ury );
+    PsPrintf( "%% %d %d lineto closepath stroke\n", llx, ury );
 #endif
 
 #ifndef __WXMSW__
@@ -1792,9 +1792,9 @@ void wxPostScriptDCImpl::EndDoc ()
     {
         wxString command;
         command += data->GetPrinterCommand();
-        command += wxT(" ");
+        command += " ";
         command += data->GetPrinterOptions();
-        command += wxT(" ");
+        command += " ";
         command += m_printData.GetFilename();
 
         wxExecute( command, true );
@@ -1805,16 +1805,16 @@ void wxPostScriptDCImpl::EndDoc ()
 
 void wxPostScriptDCImpl::StartPage()
 {
-    wxCHECK_RET( m_ok, wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok, "invalid postscript dc" );
 
     wxString buffer;
-    buffer.Printf( wxT("%%%%Page: %d\n"), m_pageNumber++ );
+    buffer.Printf( "%%%%Page: %d\n", m_pageNumber++ );
     PsPrint( buffer );
 
 #if 0
     wxPostScriptPrintNativeData *data =
         wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
-    wxCHECK_RET( data, wxS("No PostScript print data") );
+    wxCHECK_RET( data, "No PostScript print data" );
 
     wxCoord translate_x = (wxCoord)data->GetPrinterTranslateX();
     wxCoord translate_y = (wxCoord)data->GetPrinterTranslateY();
@@ -1844,7 +1844,7 @@ void wxPostScriptDCImpl::StartPage()
 
 void wxPostScriptDCImpl::EndPage ()
 {
-    wxCHECK_RET( m_ok , wxT("invalid postscript dc") );
+    wxCHECK_RET( m_ok , "invalid postscript dc" );
 
     PsPrint( "showpage\n" );
 }
@@ -1856,9 +1856,9 @@ bool wxPostScriptDCImpl::DoBlit( wxCoord xdest, wxCoord ydest,
                            wxRasterOperationMode rop,
                            bool WXUNUSED(useMask), wxCoord WXUNUSED(xsrcMask), wxCoord WXUNUSED(ysrcMask) )
 {
-    wxCHECK_MSG( m_ok, false, wxT("invalid postscript dc") );
+    wxCHECK_MSG( m_ok, false, "invalid postscript dc" );
 
-    wxCHECK_MSG( source, false, wxT("invalid source dc") );
+    wxCHECK_MSG( source, false, "invalid source dc" );
 
     // blit into a bitmap
     wxBitmap bitmap( (int)fwidth, (int)fheight );
@@ -1896,9 +1896,9 @@ void wxPostScriptDCImpl::PsPrint( const wxString& str )
                 // wxPostScriptPrintNativeData methods on it crashes.
                 wxPostScriptPrintNativeData *data =
                     wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
-                wxCHECK_RET( data, wxS("Cannot obtain output stream") );
+                wxCHECK_RET( data, "Cannot obtain output stream" );
                 wxOutputStream* outputstream = data->GetOutputStream();
-                wxCHECK_RET( outputstream, wxT("invalid outputstream") );
+                wxCHECK_RET( outputstream, "invalid outputstream" );
                 outputstream->Write( psdata, strlen( psdata ) );
             }
             break;
@@ -1906,7 +1906,7 @@ void wxPostScriptDCImpl::PsPrint( const wxString& str )
 
         // save data into file
         default:
-            wxCHECK_RET( m_pstream, wxT("invalid postscript dc") );
+            wxCHECK_RET( m_pstream, "invalid postscript dc" );
             fwrite( psdata, 1, strlen( psdata ), m_pstream );
     }
 }
@@ -2024,32 +2024,32 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
             case wxFontFamily::Modern:
             case wxFontFamily::Teletype:
             {
-                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBoO.afm");
-                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBo.afm");
-                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("CourO.afm");
-                else name = wxT("Cour.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "CourBoO.afm";
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "CourBo.afm";
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = "CourO.afm";
+                else name = "Cour.afm";
                 break;
             }
             case wxFontFamily::Roman:
             {
-                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBoO.afm");
-                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBo.afm");
-                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("TimesO.afm");
-                else name = wxT("TimesRo.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "TimesBoO.afm";
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "TimesBo.afm";
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = "TimesO.afm";
+                else name = "TimesRo.afm";
                 break;
             }
             case wxFontFamily::Script:
             {
-                name = wxT("Zapf.afm");
+                name = "Zapf.afm";
                 break;
             }
             case wxFontFamily::Swiss:
             default:
             {
-                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBoO.afm");
-                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBo.afm");
-                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("HelvO.afm");
-                else name = wxT("Helv.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "HelvBoO.afm";
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = "HelvBo.afm";
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = "HelvO.afm";
+                else name = "Helv.afm";
                 break;
             }
         }
@@ -2075,7 +2075,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
 #endif // __WIN32__
 
         if ( !afmName.empty() )
-            afmFile = wxFopen(afmName, wxT("r"));
+            afmFile = wxFopen(afmName, "r");
 
         if ( !afmFile )
         {
@@ -2087,12 +2087,12 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
 
            afmName <<  wxFILE_SEP_PATH
 #if defined(__LINUX__) || defined(__FREEBSD__)
-                   << wxT("gs_afm") << wxFILE_SEP_PATH
+                   << "gs_afm" << wxFILE_SEP_PATH
 #else
-                   << wxT("afm") << wxFILE_SEP_PATH
+                   << "afm" << wxFILE_SEP_PATH
 #endif
                    << name;
-           afmFile = wxFopen(afmName,wxT("r"));
+           afmFile = wxFopen(afmName,"r");
         }
 
         /* 2. open and process the file
@@ -2110,8 +2110,8 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
            /  character widths in an array, which is processed below (see point 3.). */
         if (afmFile==nullptr)
         {
-            wxLogDebug( wxT("GetTextExtent: can't open AFM file '%s'"), afmName.c_str() );
-            wxLogDebug( wxT("               using approximate values"));
+            wxLogDebug( "GetTextExtent: can't open AFM file '%s'", afmName.c_str() );
+            wxLogDebug( "               using approximate values");
             for (int i=0; i<256; i++) lastWidths[i] = 500; /* an approximate value */
             lastDescender = -150; /* dito. */
         }
@@ -2135,7 +2135,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                     if ((sscanf(line,"%s%d",descString,&lastDescender)!=2) ||
                             (strcmp(descString,"Descender")!=0))
                     {
-                        wxLogDebug( wxT("AFM-file '%s': line '%s' has error (bad descender)"), afmName.c_str(),line );
+                        wxLogDebug( "AFM-file '%s': line '%s' has error (bad descender)", afmName.c_str(),line );
                     }
                 }
                 /* JC 1.) check for UnderlinePosition */
@@ -2144,7 +2144,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                     if ((sscanf(line,"%s%lf",upString,&UnderlinePosition)!=2) ||
                             (strcmp(upString,"UnderlinePosition")!=0))
                     {
-                        wxLogDebug( wxT("AFM-file '%s': line '%s' has error (bad UnderlinePosition)"), afmName.c_str(), line );
+                        wxLogDebug( "AFM-file '%s': line '%s' has error (bad UnderlinePosition)", afmName.c_str(), line );
                     }
                 }
                 /* JC 2.) check for UnderlineThickness */
@@ -2153,7 +2153,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                     if ((sscanf(line,"%s%lf",utString,&UnderlineThickness)!=2) ||
                             (strcmp(utString,"UnderlineThickness")!=0))
                     {
-                        wxLogDebug( wxT("AFM-file '%s': line '%s' has error (bad UnderlineThickness)"), afmName.c_str(), line );
+                        wxLogDebug( "AFM-file '%s': line '%s' has error (bad UnderlineThickness)", afmName.c_str(), line );
                     }
                 }
                 /* JC 3.) check for EncodingScheme */
@@ -2162,11 +2162,11 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                     if ((sscanf(line,"%s%s",utString,encString)!=2) ||
                             (strcmp(utString,"EncodingScheme")!=0))
                     {
-                        wxLogDebug( wxT("AFM-file '%s': line '%s' has error (bad EncodingScheme)"), afmName.c_str(), line );
+                        wxLogDebug( "AFM-file '%s': line '%s' has error (bad EncodingScheme)", afmName.c_str(), line );
                     }
                     else if (strncmp(encString, "AdobeStandardEncoding", 21))
                     {
-                        wxLogDebug( wxT("AFM-file '%s': line '%s' has error (unsupported EncodingScheme %s)"),
+                        wxLogDebug( "AFM-file '%s': line '%s' has error (unsupported EncodingScheme %s)",
                                 afmName.c_str(),line, encString);
                     }
                 }
@@ -2175,11 +2175,11 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                 {
                     if (sscanf(line,"%s%d%s%s%d",cString,&ascii,semiString,WXString,&cWidth)!=5)
                     {
-                        wxLogDebug(wxT("AFM-file '%s': line '%s' has an error (bad character width)"),afmName.c_str(),line);
+                        wxLogDebug("AFM-file '%s': line '%s' has an error (bad character width)",afmName.c_str(),line);
                     }
                     if(strcmp(cString,"C")!=0 || strcmp(semiString,";")!=0 || strcmp(WXString,"WX")!=0)
                     {
-                        wxLogDebug(wxT("AFM-file '%s': line '%s' has a format error"),afmName.c_str(),line);
+                        wxLogDebug("AFM-file '%s': line '%s' has a format error",afmName.c_str(),line);
                     }
                     /* printf("            char '%c'=%d has width '%d'\n",ascii,ascii,cWidth); */
                     if (ascii>=0 && ascii<256)
@@ -2240,7 +2240,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     {
         if(lastWidths[*p]== std::numeric_limits<int>::min())
         {
-            wxLogDebug(wxT("GetTextExtent: undefined width for character '%c' (%d)"), *p,*p);
+            wxLogDebug("GetTextExtent: undefined width for character '%c' (%d)", *p,*p);
             sum += lastWidths[(unsigned char)' ']; /* assume space */
         }
         else

@@ -20,7 +20,7 @@ wxTextMeasureBase::wxTextMeasureBase(const wxDC *dc, const wxFont *theFont)
       m_win(nullptr),
       m_font(theFont)
 {
-    wxASSERT_MSG( dc, wxS("wxTextMeasure needs a valid wxDC") );
+    wxASSERT_MSG( dc, "wxTextMeasure needs a valid wxDC" );
 
     // By default, use wxDC version, we'll explicitly reset this to false in
     // the derived classes if the DC is of native variety.
@@ -32,7 +32,7 @@ wxTextMeasureBase::wxTextMeasureBase(const wxWindow *win, const wxFont *theFont)
       m_win(win),
       m_font(theFont)
 {
-    wxASSERT_MSG( win, wxS("wxTextMeasure needs a valid wxWindow") );
+    wxASSERT_MSG( win, "wxTextMeasure needs a valid wxWindow" );
 
     // We don't have any wxDC so we can't forward to it.
     m_useDCImpl = false;

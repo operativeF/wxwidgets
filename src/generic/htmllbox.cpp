@@ -281,7 +281,7 @@ wxHtmlCell* wxHtmlListBox::CreateCellForItem(size_t n) const
 
     wxHtmlContainerCell *cell = (wxHtmlContainerCell *)m_htmlParser->
             Parse(OnGetItemMarkup(n));
-    wxCHECK_MSG( cell, nullptr, wxT("wxHtmlParser::Parse() returned NULL?") );
+    wxCHECK_MSG( cell, nullptr, "wxHtmlParser::Parse() returned NULL?" );
 
     // set the cell's ID to item's index so that CellCoordsToPhysical()
     // can quickly find the item:
@@ -365,7 +365,7 @@ void wxHtmlListBox::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
     CacheItem(n);
 
     wxHtmlCell *cell = m_cache->Get(n);
-    wxCHECK_RET( cell, wxT("this cell should be cached!") );
+    wxCHECK_RET( cell, "this cell should be cached!" );
 
     wxHtmlRenderingInfo htmlRendInfo;
 
@@ -505,11 +505,11 @@ bool wxHtmlListBox::PhysicalCoordsToCell(wxPoint& pos, wxHtmlCell*& cell) const
 
 size_t wxHtmlListBox::GetItemForCell(const wxHtmlCell *cell) const
 {
-    wxCHECK_MSG( cell, 0, wxT("no cell") );
+    wxCHECK_MSG( cell, 0, "no cell" );
 
     cell = cell->GetRootCell();
 
-    wxCHECK_MSG( cell, 0, wxT("no root cell") );
+    wxCHECK_MSG( cell, 0, "no root cell" );
 
     // the cell's ID contains item index, see CacheItem():
     // TODO: Return value.
@@ -518,7 +518,7 @@ size_t wxHtmlListBox::GetItemForCell(const wxHtmlCell *cell) const
 
     if ( ec != std::errc() )
     {
-        wxFAIL_MSG( wxT("unexpected root cell's ID") );
+        wxFAIL_MSG( "unexpected root cell's ID" );
         return 0;
     }
 
@@ -666,7 +666,7 @@ int wxSimpleHtmlListBox::DoInsertItems(const std::vector<std::string>& items,
 void wxSimpleHtmlListBox::SetString(unsigned int n, const std::string& s)
 {
     wxCHECK_RET( IsValid(n),
-                 wxT("invalid index in wxSimpleHtmlListBox::SetString") );
+                 "invalid index in wxSimpleHtmlListBox::SetString" );
 
     m_items[n] = s;
     RefreshRow(n);
@@ -675,7 +675,7 @@ void wxSimpleHtmlListBox::SetString(unsigned int n, const std::string& s)
 std::string wxSimpleHtmlListBox::GetString(unsigned int n) const
 {
     wxCHECK_MSG( IsValid(n), "",
-                 wxT("invalid index in wxSimpleHtmlListBox::GetString") );
+                 "invalid index in wxSimpleHtmlListBox::GetString" );
 
     return m_items[n];
 }

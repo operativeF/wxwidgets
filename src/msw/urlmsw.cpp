@@ -53,7 +53,7 @@ public:
 // the only "reason for being" for this class is to tell
 // wxURL that there is someone dealing with the http protocol
 wxIMPLEMENT_DYNAMIC_CLASS(wxHTTPDummyProto, wxProtocol);
-IMPLEMENT_PROTOCOL(wxHTTPDummyProto, wxT("http"), NULL, false)
+IMPLEMENT_PROTOCOL(wxHTTPDummyProto, "http", NULL, false)
 USE_PROTOCOL(wxHTTPDummyProto)
 
 #endif // !wxUSE_PROTOCOL_HTTP
@@ -169,7 +169,7 @@ size_t wxWinINetInputStream::OnSysRead(void *buffer, size_t bufsize)
                 &bLength
             );
 
-            wxLogError(wxT("Read failed with error %d: %s"),
+            wxLogError("Read failed with error %d: %s",
                        iError, errorString);
         }
     }
@@ -190,7 +190,7 @@ wxWinINetInputStream::wxWinINetInputStream(HINTERNET hFile)
 void wxWinINetInputStream::Attach(HINTERNET newHFile)
 {
     wxCHECK_RET(m_hFile==NULL,
-        wxT("cannot attach new stream when stream already exists"));
+        "cannot attach new stream when stream already exists");
     m_hFile=newHFile;
     SetError(m_hFile!=NULL ? wxSTREAM_NO_ERROR : wxSTREAM_READ_ERROR);
 }
@@ -212,11 +212,11 @@ wxURLNativeImp *wxURL::CreateNativeImpObject()
 wxInputStream *wxWinINetURL::GetInputStream(wxURL *owner)
 {
     DWORD service;
-    if ( owner->GetScheme() == wxT("http") )
+    if ( owner->GetScheme() == "http" )
     {
         service = INTERNET_SERVICE_HTTP;
     }
-    else if ( owner->GetScheme() == wxT("ftp") )
+    else if ( owner->GetScheme() == "ftp" )
     {
         service = INTERNET_SERVICE_FTP;
     }

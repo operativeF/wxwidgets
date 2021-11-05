@@ -93,7 +93,7 @@ public:
     // it from the user code.
     void Disown()
     {
-        wxCHECK_RET( m_ownedByUser, wxS("Can't disown more than once") );
+        wxCHECK_RET( m_ownedByUser, "Can't disown more than once" );
 
         m_ownedByUser = false;
 

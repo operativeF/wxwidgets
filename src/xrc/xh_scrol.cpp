@@ -36,10 +36,10 @@ wxObject *wxScrollBarXmlHandler::DoCreateResource()
                     wxDefaultValidator,
                     GetName());
 
-    control->SetScrollbar(GetLong( wxT("value"), 0),
-                          GetLong( wxT("thumbsize"),1),
-                          GetLong( wxT("range"), 10),
-                          GetLong( wxT("pagesize"),1));
+    control->SetScrollbar(GetLong( "value", 0),
+                          GetLong( "thumbsize",1),
+                          GetLong( "range", 10),
+                          GetLong( "pagesize",1));
 
     SetupWindow(control);
     CreateChildren(control);
@@ -49,7 +49,7 @@ wxObject *wxScrollBarXmlHandler::DoCreateResource()
 
 bool wxScrollBarXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxScrollBar"));
+    return IsOfClass(node, "wxScrollBar");
 }
 
 #endif // wxUSE_XRC && wxUSE_SCROLLBAR

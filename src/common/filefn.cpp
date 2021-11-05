@@ -111,11 +111,11 @@ void wxPathList::AddEnvList (const wxString& envVariable)
     // path such as "C:\Program Files" would be split into 2 paths:
     // "C:\Program" and "Files"; this is true for both Windows and Unix.
 
-    static constexpr wxChar PATH_TOKS[] =
+    static constexpr char PATH_TOKS[] =
 #if defined(WX_WINDOWS)
-        wxT(";"); // Don't separate with colon in DOS (used for drive)
+        ";"; // Don't separate with colon in DOS (used for drive)
 #else
-        wxT(":;");
+        ":;";
 #endif
 
     std::string val;
@@ -151,7 +151,7 @@ wxString wxPathList::FindValidPath (const wxString& file) const
     if (!fn.Normalize(wxPATH_NORM_TILDE|wxPATH_NORM_LONG|wxPATH_NORM_ENV_VARS))
         return {};
 
-    wxASSERT_MSG(!fn.IsDir(), wxT("Cannot search for directories; only for files"));
+    wxASSERT_MSG(!fn.IsDir(), "Cannot search for directories; only for files");
     if (fn.IsAbsolute())
         strend = fn.GetFullName();      // search for the file name and ignore the path part
     else
@@ -493,23 +493,23 @@ wxCopyFile (const std::string& file1, const std::string& file2, bool overwrite)
 
         // it's not enough to check for file existence: it always does on HFS
         // but is empty for files without resources
-        if ( fileRsrcIn.Open(file1 + wxT("/..namedfork/rsrc")) &&
+        if ( fileRsrcIn.Open(file1 + "/..namedfork/rsrc") &&
                 fileRsrcIn.Length() > 0 )
         {
             // we must be using HFS or another filesystem with resource fork
             // support, suppose that destination file system also is HFS[-like]
-            pathRsrcOut = file2 + wxT("/..namedfork/rsrc");
+            pathRsrcOut = file2 + "/..namedfork/rsrc";
         }
         else // check if we have resource fork in separate file (non-HFS case)
         {
             wxFileName fnRsrc(file1);
-            fnRsrc.SetName(wxT("._") + fnRsrc.GetName());
+            fnRsrc.SetName("._" + fnRsrc.GetName());
 
             fileRsrcIn.Close();
             if ( fileRsrcIn.Open( fnRsrc.GetFullPath() ) )
             {
                 fnRsrc = file2;
-                fnRsrc.SetName(wxT("._") + fnRsrc.GetName());
+                fnRsrc.SetName("._" + fnRsrc.GetName());
 
                 pathRsrcOut = fnRsrc.GetFullPath();
             }
@@ -647,7 +647,7 @@ wxString wxFindFirstFile(const wxString& spec, unsigned int flags)
 {
     wxFileName::SplitPath(spec, &gs_dirPath, nullptr, nullptr);
     if ( gs_dirPath.empty() )
-        gs_dirPath = wxT(".");
+        gs_dirPath = ".";
     if ( !wxEndsWithPathSeparator(gs_dirPath ) )
         gs_dirPath << wxFILE_SEP_PATH;
 
@@ -791,7 +791,7 @@ wxString wxGetOSDirectory()
     wxChar buf[MAX_PATH];
     if ( !::GetWindowsDirectoryW(buf, MAX_PATH) )
     {
-        wxLogLastError(wxS("GetWindowsDirectory"));
+        wxLogLastError("GetWindowsDirectory");
     }
 
     return {buf};
@@ -810,7 +810,7 @@ bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& sz
 {
     // we assume that it's not empty
     wxCHECK_MSG( !szFile.empty(), false,
-                 wxT("empty file name in wxFindFileInPath"));
+                 "empty file name in wxFindFileInPath");
 
     // skip path separator in the beginning of the file name if present
     wxString szFile2;
@@ -881,7 +881,7 @@ std::size_t wxParseCommonDialogsFilter(const wxString& filterStr,
             }
             else
             {
-                wxFAIL_MSG( wxT("missing '|' in the wildcard string!") );
+                wxFAIL_MSG( "missing '|' in the wildcard string!" );
             }
 
             break;

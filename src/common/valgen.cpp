@@ -330,7 +330,7 @@ bool wxGenericValidator::TransferToWindow()
         else if (m_pInt)
         {
             wxString str;
-            str.Printf(wxT("%d"), *m_pInt);
+            str.Printf("%d", *m_pInt);
             pControl->SetValue(str);
             return true;
         }

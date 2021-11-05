@@ -27,7 +27,7 @@ wxObject *wxBitmapXmlHandler::DoCreateResource()
 
 bool wxBitmapXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxBitmap"));
+    return IsOfClass(node, "wxBitmap");
 }
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxIconXmlHandler, wxXmlResourceHandler);
@@ -39,7 +39,7 @@ wxObject *wxIconXmlHandler::DoCreateResource()
 
 bool wxIconXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxIcon"));
+    return IsOfClass(node, "wxIcon");
 }
 
 #endif // wxUSE_XRC

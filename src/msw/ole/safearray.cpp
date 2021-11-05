@@ -29,7 +29,7 @@ void wxSafeArrayBase::Destroy()
         HRESULT hr = SafeArrayDestroy(m_array);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("SafeArrayDestroy()"), hr);
+            wxLogApiError("SafeArrayDestroy()", hr);
         }
         m_array = nullptr;
     }
@@ -37,7 +37,7 @@ void wxSafeArrayBase::Destroy()
 
 SAFEARRAY* wxSafeArrayBase::Detach()
 {
-    wxCHECK_MSG( m_array, nullptr, wxS("Uninitialized safe array") );
+    wxCHECK_MSG( m_array, nullptr, "Uninitialized safe array" );
 
     Unlock();
     SAFEARRAY* array = m_array;
@@ -54,13 +54,13 @@ size_t wxSafeArrayBase::GetDim() const
 
 bool wxSafeArrayBase::GetLBound(size_t dim, long& bound) const
 {
-    wxCHECK_MSG( m_array, false, wxS("Uninitialized safe array") );
-    wxCHECK_MSG( dim > 0, false, wxS("Invalid dimension index") );
+    wxCHECK_MSG( m_array, false, "Uninitialized safe array" );
+    wxCHECK_MSG( dim > 0, false, "Invalid dimension index" );
 
     HRESULT hr = SafeArrayGetLBound(m_array, dim, (LONG*)&bound);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("SafeArrayGetLBound()"), hr);
+        wxLogApiError("SafeArrayGetLBound()", hr);
         return false;
     }
     return true;
@@ -68,13 +68,13 @@ bool wxSafeArrayBase::GetLBound(size_t dim, long& bound) const
 
 bool wxSafeArrayBase::GetUBound(size_t dim, long& bound) const
 {
-    wxCHECK_MSG( m_array, false, wxS("Uninitialized safe array") );
-    wxCHECK_MSG( dim > 0, false, wxS("Invalid dimension index") );
+    wxCHECK_MSG( m_array, false, "Uninitialized safe array" );
+    wxCHECK_MSG( dim > 0, false, "Invalid dimension index" );
 
     HRESULT hr = SafeArrayGetUBound(m_array, dim, (LONG*)&bound);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("SafeArrayGetUBound()"), hr);
+        wxLogApiError("SafeArrayGetUBound()", hr);
         return false;
     }
     return true;
@@ -91,12 +91,12 @@ size_t wxSafeArrayBase::GetCount(size_t dim) const
 
 bool wxSafeArrayBase::Lock()
 {
-    wxCHECK_MSG( m_array, false, wxS("Uninitialized safe array") );
+    wxCHECK_MSG( m_array, false, "Uninitialized safe array" );
 
     HRESULT hr = SafeArrayLock(m_array);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("SafeArrayLock()"), hr);
+        wxLogApiError("SafeArrayLock()", hr);
         return false;
     }
     return true;
@@ -104,12 +104,12 @@ bool wxSafeArrayBase::Lock()
 
 bool wxSafeArrayBase::Unlock()
 {
-    wxCHECK_MSG( m_array, false, wxS("Uninitialized safe array") );
+    wxCHECK_MSG( m_array, false, "Uninitialized safe array" );
 
     HRESULT hr = SafeArrayUnlock(m_array);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxS("SafeArrayUnlock()"), hr);
+        wxLogApiError("SafeArrayUnlock()", hr);
         return false;
     }
     return true;

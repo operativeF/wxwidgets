@@ -63,7 +63,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
     if ( !wxButton::Create(parent, id, labelButton,
                            pos, size, styleButton, validator, name) )
     {
-        wxFAIL_MSG( wxT("wxGenericFileButton creation failed") );
+        wxFAIL_MSG( "wxGenericFileButton creation failed" );
         return false;
     }
 

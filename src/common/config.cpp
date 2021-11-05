@@ -67,7 +67,7 @@ wxConfigBase *wxConfigBase::Create()
 {
   if ( ms_bAutoCreate && ms_pConfig == nullptr ) {
     wxAppTraits * const traits = wxApp::GetTraitsIfExists();
-    wxCHECK_MSG( traits, nullptr, wxT("create wxApp before calling this") );
+    wxCHECK_MSG( traits, nullptr, "create wxApp before calling this" );
 
     ms_pConfig = traits->CreateConfig();
   }
@@ -83,7 +83,7 @@ wxConfigBase *wxConfigBase::Create()
 #define IMPLEMENT_READ_FOR_TYPE(name, type, deftype, extra)                 \
     bool wxConfigBase::Read(const wxString& key, type *val) const           \
     {                                                                       \
-        wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );  \
+        wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );  \
                                                                             \
         if ( !DoRead##name(key, val) )                                      \
             return false;                                                   \
@@ -97,7 +97,7 @@ wxConfigBase *wxConfigBase::Create()
                             type *val,                                      \
                             deftype defVal) const                           \
     {                                                                       \
-        wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );  \
+        wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );  \
                                                                             \
         bool read = DoRead##name(key, val);                                 \
         if ( !read )                                                        \
@@ -131,7 +131,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi) const
 {
     long l = *pi;
     const bool r = Read(key, &l);
-    wxASSERT_MSG( l < std::numeric_limits<int>::max(), wxT("int overflow in wxConfig::Read") );
+    wxASSERT_MSG( l < std::numeric_limits<int>::max(), "int overflow in wxConfig::Read" );
     *pi = (int)l;
     return r;
 }
@@ -140,7 +140,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
 {
     long l = *pi;
     const bool r = Read(key, &l, defVal);
-    wxASSERT_MSG( l < std::numeric_limits<int>::max(), wxT("int overflow in wxConfig::Read") );
+    wxASSERT_MSG( l < std::numeric_limits<int>::max(), "int overflow in wxConfig::Read" );
     *pi = (int)l;
     return r;
 }
@@ -156,7 +156,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
 
 bool wxConfigBase::Read(const wxString& key, size_t* val) const
 {
-    wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
+    wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );
 
     // TODO: Lambda
     SizeSameSizeAsSizeT tmp;
@@ -169,7 +169,7 @@ bool wxConfigBase::Read(const wxString& key, size_t* val) const
 
 bool wxConfigBase::Read(const wxString& key, size_t* val, size_t defVal) const
 {
-    wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
+    wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );
 
     if ( !Read(key, val) )
     {
@@ -183,7 +183,7 @@ bool wxConfigBase::Read(const wxString& key, size_t* val, size_t defVal) const
 // Read floats as doubles then just type cast it down.
 bool wxConfigBase::Read(const wxString& key, float* val) const
 {
-    wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
+    wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );
 
     // TODO: Lambda
     double temp;
@@ -191,9 +191,9 @@ bool wxConfigBase::Read(const wxString& key, float* val) const
         return false;
 
     wxCHECK_MSG( std::fabs(temp) <= double(FLT_MAX), false,
-                     wxT("float overflow in wxConfig::Read") );
+                     "float overflow in wxConfig::Read" );
     wxCHECK_MSG( temp == 0.0 || std::fabs(temp) >= double(FLT_MIN), false,
-                     wxT("float underflow in wxConfig::Read") );
+                     "float underflow in wxConfig::Read" );
 
     *val = static_cast<float>(temp);
 
@@ -202,7 +202,7 @@ bool wxConfigBase::Read(const wxString& key, float* val) const
 
 bool wxConfigBase::Read(const wxString& key, float* val, float defVal) const
 {
-    wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
+    wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );
 
     if ( Read(key, val) )
         return true;
@@ -215,7 +215,7 @@ bool wxConfigBase::Read(const wxString& key, float* val, float defVal) const
 // but can be overridden in the derived ones
 bool wxConfigBase::DoReadBool(const wxString& key, bool* val) const
 {
-    wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
+    wxCHECK_MSG( val, false, "wxConfig::Read(): NULL parameter" );
 
     long l;
     if ( !DoReadLong(key, &l) )
@@ -340,10 +340,10 @@ wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
            adding the following code to the config sample OnInit under
            Windows:
 
-           pConfig->SetPath(wxT("MySettings"));
-           pConfig->SetPath(wxT(".."));
+           pConfig->SetPath("MySettings");
+           pConfig->SetPath("..");
            int value;
-           pConfig->Read(wxT("MainWindowX"), & value);
+           pConfig->Read("MainWindowX", & value);
         */
         m_strOldPath = m_pContainer->GetPath().wc_str();
         if ( *m_strOldPath.c_str() != wxCONFIG_PATH_SEPARATOR )
@@ -537,10 +537,10 @@ std::vector<wxString> wxSplitPath(const wxString& path)
   wxString::const_iterator pc = path.begin();
   for ( ;; ) {
     if ( pc == path.end() || *pc == wxCONFIG_PATH_SEPARATOR ) {
-      if ( strCurrent == wxT(".") ) {
+      if ( strCurrent == "." ) {
         // ignore
       }
-      else if ( strCurrent == wxT("..") ) {
+      else if ( strCurrent == ".." ) {
         // go up one level
         if ( aParts.size() == 0 )
         {

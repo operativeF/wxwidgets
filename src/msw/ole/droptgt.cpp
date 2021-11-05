@@ -177,10 +177,10 @@ STDMETHODIMP wxIDropTarget::DragEnter(IDataObject *pIDataSource,
 {
     wxTRY
     {
-        wxLogTrace(wxTRACE_OleCalls, wxT("IDropTarget::DragEnter"));
+        wxLogTrace(wxTRACE_OleCalls, "IDropTarget::DragEnter");
 
         wxASSERT_MSG( !m_pIDataObject,
-                      wxT("drop target can't already have a data object") );
+                      "drop target can't already have a data object" );
 
         // show the list of formats supported by the source data object for the
         // debugging purposes, this is quite useful sometimes - please don't remove
@@ -191,7 +191,7 @@ STDMETHODIMP wxIDropTarget::DragEnter(IDataObject *pIDataSource,
             FORMATETC fmt;
             while ( penumFmt->Next(1, &fmt, NULL) == S_OK )
             {
-                wxLogDebug(wxT("Drop source supports format %s"),
+                wxLogDebug("Drop source supports format %s",
                            wxDataObject::GetFormatName(fmt.cfFormat));
             }
 
@@ -199,7 +199,7 @@ STDMETHODIMP wxIDropTarget::DragEnter(IDataObject *pIDataSource,
         }
         else
         {
-            wxLogLastError(wxT("IDataObject::EnumFormatEtc"));
+            wxLogLastError("IDataObject::EnumFormatEtc");
         }
 #endif // 0
 
@@ -222,7 +222,7 @@ STDMETHODIMP wxIDropTarget::DragEnter(IDataObject *pIDataSource,
         // we need client coordinates to pass to wxWin functions
         if ( !ScreenToClient(m_hwnd, (POINT *)&pt) )
         {
-            wxLogLastError(wxT("ScreenToClient"));
+            wxLogLastError("ScreenToClient");
         }
 
         // give some visual feedback
@@ -275,7 +275,7 @@ STDMETHODIMP wxIDropTarget::DragOver(DWORD   grfKeyState,
             // we need client coordinates to pass to wxWin functions
             if ( !ScreenToClient(m_hwnd, (POINT *)&pt) )
             {
-                wxLogLastError(wxT("ScreenToClient"));
+                wxLogLastError("ScreenToClient");
             }
 
             *pdwEffect = ConvertDragResultToEffect(
@@ -303,7 +303,7 @@ STDMETHODIMP wxIDropTarget::DragLeave()
 {
     wxTRY
     {
-        wxLogTrace(wxTRACE_OleCalls, wxT("IDropTarget::DragLeave"));
+        wxLogTrace(wxTRACE_OleCalls, "IDropTarget::DragLeave");
 
         // remove the UI feedback
         m_pTarget->OnLeave();
@@ -335,7 +335,7 @@ STDMETHODIMP wxIDropTarget::Drop(IDataObject *pIDataSource,
 {
     wxTRY
     {
-        wxLogTrace(wxTRACE_OleCalls, wxT("IDropTarget::Drop"));
+        wxLogTrace(wxTRACE_OleCalls, "IDropTarget::Drop");
 
         // TODO I don't know why there is this parameter, but so far I assume
         //      that it's the same we've already got in DragEnter
@@ -344,7 +344,7 @@ STDMETHODIMP wxIDropTarget::Drop(IDataObject *pIDataSource,
         // we need client coordinates to pass to wxWin functions
         if ( !ScreenToClient(m_hwnd, (POINT *)&pt) )
         {
-            wxLogLastError(wxT("ScreenToClient"));
+            wxLogLastError("ScreenToClient");
         }
 
         // Create a guard that will clean things up in case of exception: we
@@ -441,14 +441,14 @@ bool wxDropTarget::Register(WXHWND hwnd)
 
     hr = ::CoLockObjectExternal(m_pIDropTarget, TRUE, FALSE);
     if ( FAILED(hr) ) {
-        wxLogApiError(wxT("CoLockObjectExternal"), hr);
+        wxLogApiError("CoLockObjectExternal", hr);
         return false;
     }
 
     hr = ::RegisterDragDrop((HWND) hwnd, m_pIDropTarget);
     if ( FAILED(hr) ) {
         ::CoLockObjectExternal(m_pIDropTarget, FALSE, FALSE);
-        wxLogApiError(wxT("RegisterDragDrop"), hr);
+        wxLogApiError("RegisterDragDrop", hr);
         return false;
     }
 
@@ -465,7 +465,7 @@ void wxDropTarget::Revoke(WXHWND hwnd)
     HRESULT hr = ::RevokeDragDrop((HWND) hwnd);
 
     if ( FAILED(hr) ) {
-        wxLogApiError(wxT("RevokeDragDrop"), hr);
+        wxLogApiError("RevokeDragDrop", hr);
     }
 
     std::ignore = ::CoLockObjectExternal(m_pIDropTarget, FALSE, TRUE);
@@ -514,11 +514,11 @@ bool wxDropTarget::GetData()
             rc = true;
         }
         else {
-            wxLogApiError(wxT("IDataObject::SetData()"), hr);
+            wxLogApiError("IDataObject::SetData()", hr);
         }
     }
     else {
-        wxLogApiError(wxT("IDataObject::GetData()"), hr);
+        wxLogApiError("IDataObject::GetData()", hr);
     }
 
     return rc;
@@ -684,7 +684,7 @@ static wxDragResult ConvertDragEffectToResult(DWORD dwEffect)
             return wxDragResult::Move;
 
         default:
-            wxFAIL_MSG(wxT("invalid value in ConvertDragEffectToResult"));
+            wxFAIL_MSG("invalid value in ConvertDragEffectToResult");
             [[fallthrough]];
 
         case DROPEFFECT_NONE:
@@ -705,7 +705,7 @@ static DWORD ConvertDragResultToEffect(wxDragResult result)
             return DROPEFFECT_MOVE;
 
         default:
-            wxFAIL_MSG(wxT("invalid value in ConvertDragResultToEffect"));
+            wxFAIL_MSG("invalid value in ConvertDragResultToEffect");
             [[fallthrough]];
 
         case wxDragResult::None:

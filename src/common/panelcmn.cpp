@@ -54,7 +54,7 @@ wxBEGIN_PROPERTIES_TABLE(wxPanel)
     wxPROPERTY_FLAGS( WindowStyle, wxPanelStyle, long, \
                       SetWindowStyleFlag, GetWindowStyleFlag, \
                       wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
     // style wxTAB_TRAVERSAL
 wxEND_PROPERTIES_TABLE()
 

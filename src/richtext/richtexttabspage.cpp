@@ -167,7 +167,7 @@ bool wxRichTextTabsPage::TransferDataToWindow()
         size_t i;
         for (i = 0; i < attr->GetTabs().size(); i++)
         {
-            wxString s(wxString::Format(wxT("%d"), attr->GetTabs()[i]));
+            wxString s(wxString::Format("%d", attr->GetTabs()[i]));
             m_tabListCtrl->Append(s);
         }
     }
@@ -192,7 +192,7 @@ void wxRichTextTabsPage::SortTabs()
 
     for (size_t i = 0; i < tabs.size(); i++)
     {
-        wxString s(wxString::Format(wxT("%d"), tabs[i]));
+        wxString s(wxString::Format("%d", tabs[i]));
         m_tabListCtrl->Append(s);
     }
 }
@@ -246,7 +246,7 @@ void wxRichTextTabsPage::OnNewTabClick( wxCommandEvent& WXUNUSED(event) )
     wxString str = m_tabEditCtrl->GetValue();
     if (!str.empty() && str.IsNumber())
     {
-        wxString s(wxString::Format(wxT("%d"), wxAtoi(str)));
+        wxString s(wxString::Format("%d", wxAtoi(str)));
 
         m_tabListCtrl->Append(s);
         m_tabsPresent = true;
@@ -266,7 +266,7 @@ void wxRichTextTabsPage::OnNewTabUpdate( wxUpdateUIEvent& event )
     wxString str = m_tabEditCtrl->GetValue();
     if (!str.empty() && str.IsNumber())
     {
-        std::string s(wxString::Format(wxT("%d"), wxAtoi(str)));
+        std::string s(wxString::Format("%d", wxAtoi(str)));
         event.Enable(m_tabListCtrl->FindString(s) == wxNOT_FOUND);
     }
     else

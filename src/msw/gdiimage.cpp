@@ -114,7 +114,7 @@ public:
                       wxSize desiredSz) override
     {
         wxIcon *icon = wxDynamicCast(image, wxIcon);
-        wxCHECK_MSG( icon, false, wxT("wxIconHandler only works with icons") );
+        wxCHECK_MSG( icon, false, "wxIconHandler only works with icons" );
 
         return wxLoadIcon(icon, name, flags, desiredSz);
     }
@@ -311,7 +311,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
     if ( hbmp == nullptr )
     {
         // it's probably not found
-        wxLogError(wxT("Can't load bitmap '%s' from resources! Check .rc file."),
+        wxLogError("Can't load bitmap '%s' from resources! Check .rc file.",
             name.c_str());
 
         return false;
@@ -327,7 +327,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
     }
     else
     {
-        wxLogLastError(wxT("GetObject(HBITMAP)"));
+        wxLogLastError("GetObject(HBITMAP)");
         w = h = d = 0;
     }
 
@@ -344,7 +344,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
                                 wxBitmapType WXUNUSED(flags),
                                 wxSize WXUNUSED(desiredSz))
 {
-    wxCHECK_MSG( bitmap, false, wxT("NULL bitmap in LoadFile") );
+    wxCHECK_MSG( bitmap, false, "NULL bitmap in LoadFile" );
 
 #if wxUSE_WXDIB
     // Try loading using native Windows LoadImage() first.
@@ -374,7 +374,7 @@ bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
                                 const wxPalette * WXUNUSED(pal)) const
 {
 #if wxUSE_WXDIB
-    wxCHECK_MSG( bitmap, false, wxT("NULL bitmap in SaveFile") );
+    wxCHECK_MSG( bitmap, false, "NULL bitmap in SaveFile" );
 
     wxDIB dib(*bitmap);
 
@@ -441,8 +441,8 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
         {
             // it is not an error, but it might still be useful to be informed
             // about it optionally
-            wxLogTrace(wxT("iconload"),
-                       wxT("No large icons found in the file '%s'."),
+            wxLogTrace("iconload",
+                       "No large icons found in the file '%s'.",
                        name.c_str());
         }
     }
@@ -451,8 +451,8 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
         // get the specified small icon from file
         if ( !::ExtractIconExW(boost::nowide::widen(nameReal).c_str(), iconIndex, nullptr, &hicon, 1) )
         {
-            wxLogTrace(wxT("iconload"),
-                       wxT("No small icons found in the file '%s'."),
+            wxLogTrace("iconload",
+                       "No small icons found in the file '%s'.",
                        name.c_str());
         }
     }
@@ -466,7 +466,7 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
 
     if ( !hicon )
     {
-        wxLogSysError(wxT("Failed to load icon from the file '%s'"),
+        wxLogSysError("Failed to load icon from the file '%s'",
                       name.c_str());
 
         return false;
@@ -479,8 +479,8 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
     if ( (desiredSz.x != -1 && desiredSz.x != icon->GetWidth()) ||
          (desiredSz.y != -1 && desiredSz.y != icon->GetHeight()) )
     {
-        wxLogTrace(wxT("iconload"),
-                   wxT("Returning false from wxICOFileHandler::Load because of the size mismatch: actual (%d, %d), requested (%d, %d)"),
+        wxLogTrace("iconload",
+                   "Returning false from wxICOFileHandler::Load because of the size mismatch: actual (%d, %d), requested (%d, %d)",
                    icon->GetWidth(), icon->GetHeight(),
                    desiredSz.x, desiredSz.y);
 
@@ -502,7 +502,7 @@ bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
 
     // TODO: Assertion here is questionable.
     //wxASSERT_MSG( !hasSize || (desiredWidth != -1 && desiredHeight != -1),
-    //              wxT("width and height should be either both -1 or not") );
+    //              "width and height should be either both -1 or not" );
 
     // try to load the icon from this program first to allow overriding the
     // standard icons (although why one would want to do it considering that
@@ -571,16 +571,17 @@ bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
     // used for the embedded images. We could allow specifying the type as part
     // of the name in the future (e.g. "type:name" or something like this) if
     // really needed.
-    if ( !wxLoadUserResource(&pngData, &pngSize,
+    if ( !wxLoadUserResource(&pngData,
+                             &pngSize,
                              name,
                              RT_RCDATA,
                              wxGetInstance()) )
     {
         // Notice that this message is not translated because only the
         // programmer (and not the end user) can make any use of it.
-        wxLogError(wxS("Bitmap in PNG format \"%s\" not found, check ")
-                   wxS("that the resource file contains \"RCDATA\" ")
-                   wxS("resource with this name."),
+        wxLogError("Bitmap in PNG format \"%s\" not found, check "
+                   "that the resource file contains \"RCDATA\" "
+                   "resource with this name.",
                    name);
 
         return false;
@@ -589,8 +590,8 @@ bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
     *bitmap = wxBitmap::NewFromPNGData(pngData, pngSize);
     if ( !bitmap->IsOk() )
     {
-        wxLogError(wxS("Couldn't load resource bitmap \"%s\" as a PNG. ")
-                   wxS("Have you registered PNG image handler?"),
+        wxLogError("Couldn't load resource bitmap \"%s\" as a PNG. "
+                   "Have you registered PNG image handler?",
                    name);
 
         return false;

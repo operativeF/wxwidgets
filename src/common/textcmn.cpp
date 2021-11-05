@@ -88,13 +88,13 @@ wxEVENT_PROPERTY( TextUpdated, wxEVT_TEXT, wxCommandEvent )
 wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group") )
+           0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Value, std::string, SetValue, GetValue, "", \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 
 wxPROPERTY_FLAGS( WindowStyle, wxTextCtrlStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxTextCtrl)
@@ -910,7 +910,7 @@ bool wxTextAreaBase::DoLoadFile(const std::string& filename, int WXUNUSED(fileTy
 bool wxTextAreaBase::DoSaveFile(const std::string& filename, int WXUNUSED(fileType))
 {
 #if wxUSE_FFILE
-    wxFFile file(filename, wxT("w"));
+    wxFFile file(filename, "w");
     if ( file.IsOpened() && file.Write(GetValue()) )
     {
         // if it worked, save for future calls
@@ -934,7 +934,7 @@ bool wxTextAreaBase::SaveFile(const std::string& filename, int fileType)
     if ( filenameToUse.empty() )
     {
         // what kind of message to give? is it an error or a program bug?
-        wxLogDebug(wxT("Can't save textctrl to file without filename."));
+        wxLogDebug("Can't save textctrl to file without filename.");
 
         return false;
     }
@@ -1154,7 +1154,7 @@ bool wxTextCtrlBase::OnDynamicBind(wxDynamicEventTableEntry& entry)
         (
             HasFlag(wxTE_PROCESS_ENTER),
             false,
-            wxS("Must have wxTE_PROCESS_ENTER for wxEVT_TEXT_ENTER to work")
+            "Must have wxTE_PROCESS_ENTER for wxEVT_TEXT_ENTER to work"
         );
     }
 
@@ -1192,7 +1192,7 @@ wxTextAreaBase::HitTest(const wxPoint& WXUNUSED(pt), long * WXUNUSED(pos)) const
 wxPoint wxTextAreaBase::PositionToCoords(long pos) const
 {
     wxCHECK_MSG( IsValidPosition(pos), wxDefaultPosition,
-                 wxS("Position argument out of range.") );
+                 "Position argument out of range." );
 
     return DoPositionToCoords(pos);
 }

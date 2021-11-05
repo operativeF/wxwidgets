@@ -297,7 +297,7 @@ bool wxAnyValueTypeImplUint::ConvertValue(const wxAnyValueBuffer& src,
         const wxULongLong ull(value);
         wxString s = ull.ToString();
 #else
-        wxString s = wxString::Format(wxS("%lu"), (long)value);
+        wxString s = wxString::Format("%lu", (long)value);
 #endif
         wxAnyValueTypeImpl<wxString>::SetValue(s, dst);
     }
@@ -368,12 +368,12 @@ bool wxAnyConvertString(const wxString& value,
         bool value2;
         wxString s(value);
         s.MakeLower();
-        if ( s == wxS("true") ||
-             s == wxS("yes") ||
+        if ( s == "true" ||
+             s == "yes" ||
              s == wxS('1') )
             value2 = true;
-        else if ( s == wxS("false") ||
-                  s == wxS("no") ||
+        else if ( s == "false" ||
+                  s == "no" ||
                   s == wxS('0') )
             value2 = false;
         else
@@ -406,9 +406,9 @@ bool wxAnyValueTypeImpl<bool>::ConvertValue(const wxAnyValueBuffer& src,
     {
         wxString s;
         if ( value )
-            s = wxS("true");
+            s = "true";
         else
-            s = wxS("false");
+            s = "false";
         wxAnyValueTypeImpl<wxString>::SetValue(s, dst);
     }
     else

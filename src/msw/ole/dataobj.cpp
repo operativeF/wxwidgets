@@ -34,7 +34,7 @@
 #include <vector>
 
 #ifndef CFSTR_SHELLURL
-#define CFSTR_SHELLURL wxT("UniformResourceLocator")
+#define CFSTR_SHELLURL "UniformResourceLocator"
 #endif
 
 #if wxUSE_OLE
@@ -68,9 +68,9 @@ wxDataFormat NonStandardFormatsFixup(wxDataFormat format)
         wxChar szBuf[256];
         if ( ::GetClipboardFormatNameW(format, szBuf, WXSIZEOF(szBuf)) )
         {
-            if ( wxStrcmp(szBuf, wxT("HTML Format")) == 0 )
+            if ( wxStrcmp(szBuf, "HTML Format") == 0 )
                 format = wxDF_HTML;
-            else if ( wxStrcmp(szBuf, wxT("PNG")) == 0 )
+            else if ( wxStrcmp(szBuf, "PNG") == 0 )
                 format = wxDF_PNG;
         }
     }
@@ -385,7 +385,7 @@ wxString wxDataFormat::GetId() const
     wxString s;
 
     wxCHECK_MSG( !IsStandard(), s,
-                 wxT("name of predefined format cannot be retrieved") );
+                 "name of predefined format cannot be retrieved" );
 
     int len = ::GetClipboardFormatNameW(m_format, wxStringBuffer(s, max), max);
 
@@ -429,7 +429,7 @@ STDMETHODIMP wxIEnumFORMATETC::Next(ULONG      celt,
                                     FORMATETC *rgelt,
                                     ULONG     *pceltFetched)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumFORMATETC::Next"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumFORMATETC::Next");
 
     ULONG numFetched = 0;
     while (m_nCurrent < m_nCount && numFetched < celt) {
@@ -452,7 +452,7 @@ STDMETHODIMP wxIEnumFORMATETC::Next(ULONG      celt,
 
 STDMETHODIMP wxIEnumFORMATETC::Skip(ULONG celt)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumFORMATETC::Skip"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumFORMATETC::Skip");
 
     m_nCurrent += celt;
     if ( m_nCurrent < m_nCount )
@@ -466,7 +466,7 @@ STDMETHODIMP wxIEnumFORMATETC::Skip(ULONG celt)
 
 STDMETHODIMP wxIEnumFORMATETC::Reset()
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumFORMATETC::Reset"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumFORMATETC::Reset");
 
     m_nCurrent = 0;
 
@@ -475,7 +475,7 @@ STDMETHODIMP wxIEnumFORMATETC::Reset()
 
 STDMETHODIMP wxIEnumFORMATETC::Clone(IEnumFORMATETC **ppenum)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumFORMATETC::Clone"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIEnumFORMATETC::Clone");
 
     // unfortunately, we can't reuse the code in ctor - types are different
     wxIEnumFORMATETC *pNew = new wxIEnumFORMATETC(nullptr, 0);
@@ -526,7 +526,7 @@ wxIDataObject::~wxIDataObject()
 // get data functions
 STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::GetData"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::GetData");
 
     // is data is in our format?
     HRESULT hr = QueryGetData(pformatetcIn);
@@ -559,7 +559,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
             pmedium->hGlobal = GlobalAlloc(GMEM_MOVEABLE | GMEM_SHARE,
                                            sizeof(METAFILEPICT));
             if ( !pmedium->hGlobal ) {
-                wxLogLastError(wxT("GlobalAlloc"));
+                wxLogLastError("GlobalAlloc");
                 return E_OUTOFMEMORY;
             }
             pmedium->tymed = TYMED_MFPICT;
@@ -569,7 +569,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
             size_t size = m_pDataObject->GetDataSize(format);
             if ( !size ) {
                 // it probably means that the method is just not implemented
-                wxLogDebug(wxT("Invalid data size - can't be 0"));
+                wxLogDebug("Invalid data size - can't be 0");
 
                 return DV_E_FORMATETC;
             }
@@ -579,7 +579,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
 
             HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE | GMEM_SHARE, size);
             if ( hGlobal == nullptr ) {
-                wxLogLastError(wxT("GlobalAlloc"));
+                wxLogLastError("GlobalAlloc");
                 return E_OUTOFMEMORY;
             }
 
@@ -607,7 +607,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
 STDMETHODIMP wxIDataObject::GetDataHere(FORMATETC *pformatetc,
                                         STGMEDIUM *pmedium)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::GetDataHere"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::GetDataHere");
 
     // put data in caller provided medium
     switch ( pmedium->tymed )
@@ -657,7 +657,7 @@ STDMETHODIMP wxIDataObject::SetData(FORMATETC *pformatetc,
                                     STGMEDIUM *pmedium,
                                     BOOL       fRelease)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::SetData"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::SetData");
 
     switch ( pmedium->tymed )
     {
@@ -790,7 +790,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
     // do we accept data in this format?
     if ( pformatetc == nullptr ) {
         wxLogTrace(wxTRACE_OleCalls,
-                   wxT("wxIDataObject::QueryGetData: invalid ptr."));
+                   "wxIDataObject::QueryGetData: invalid ptr.");
 
         return E_INVALIDARG;
     }
@@ -798,7 +798,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
     // the only one allowed by current COM implementation
     if ( pformatetc->lindex != -1 ) {
         wxLogTrace(wxTRACE_OleCalls,
-                   wxT("wxIDataObject::QueryGetData: bad lindex %ld"),
+                   "wxIDataObject::QueryGetData: bad lindex %ld",
                    pformatetc->lindex);
 
         return DV_E_LINDEX;
@@ -807,7 +807,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
     // we don't support anything other (THUMBNAIL, ICON, DOCPRINT...)
     if ( pformatetc->dwAspect != DVASPECT_CONTENT ) {
         wxLogTrace(wxTRACE_OleCalls,
-                   wxT("wxIDataObject::QueryGetData: bad dwAspect %ld"),
+                   "wxIDataObject::QueryGetData: bad dwAspect %ld",
                    pformatetc->dwAspect);
 
         return DV_E_DVASPECT;
@@ -818,19 +818,19 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
     format = NonStandardFormatsFixup(format);
 
     if ( m_pDataObject->IsSupportedFormat(format) ) {
-        wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::QueryGetData: %s ok"),
+        wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::QueryGetData: %s ok",
                    wxGetFormatName(format));
     }
     else if ( HasSystemData(format) )
     {
-        wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::QueryGetData: %s ok (system data)"),
+        wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::QueryGetData: %s ok (system data)",
                    wxGetFormatName(format));
         // this is system data, so no further checks needed.
         return S_OK;
     }
     else {
         wxLogTrace(wxTRACE_OleCalls,
-                   wxT("wxIDataObject::QueryGetData: %s unsupported"),
+                   "wxIDataObject::QueryGetData: %s unsupported",
                    wxGetFormatName(format));
 
         return DV_E_FORMATETC;
@@ -842,7 +842,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
          !(tymed & TYMED_HGLOBAL) ) {
         // it's not what we're waiting for
         wxLogTrace(wxTRACE_OleCalls,
-                   wxT("wxIDataObject::QueryGetData: %s != %s"),
+                   "wxIDataObject::QueryGetData: %s != %s",
                    GetTymedName(tymed),
                    GetTymedName(format == wxDF_BITMAP ? TYMED_GDI
                                                       : TYMED_HGLOBAL));
@@ -856,7 +856,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
 STDMETHODIMP wxIDataObject::GetCanonicalFormatEtc(FORMATETC *WXUNUSED(pFormatetcIn),
                                                   FORMATETC *pFormatetcOut)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::GetCanonicalFormatEtc"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::GetCanonicalFormatEtc");
 
     // TODO we might want something better than this trivial implementation here
     if ( pFormatetcOut != nullptr )
@@ -868,7 +868,7 @@ STDMETHODIMP wxIDataObject::GetCanonicalFormatEtc(FORMATETC *WXUNUSED(pFormatetc
 STDMETHODIMP wxIDataObject::EnumFormatEtc(DWORD dwDir,
                                           IEnumFORMATETC **ppenumFormatEtc)
 {
-    wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::EnumFormatEtc"));
+    wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::EnumFormatEtc");
 
     wxDataObject::Direction dir = dwDir == DATADIR_GET ? wxDataObject::Get
                                                        : wxDataObject::Set;
@@ -960,7 +960,7 @@ const void *wxDataObject::GetSizeFromBuffer(const void *buffer,
     const size_t realsz = ::GlobalSize(::GlobalHandle(buffer));
     if ( !realsz )
     {
-        wxLogLastError(wxT("GlobalSize"));
+        wxLogLastError("GlobalSize");
         return nullptr;
     }
 
@@ -984,32 +984,33 @@ void* wxDataObject::SetSizeInBuffer( void* buffer, size_t size,
 
 #if wxDEBUG_LEVEL
 
+// FIXME: Use narrow strings.
 const wxChar *wxDataObject::GetFormatName(wxDataFormat format)
 {
     static wxChar s_szBuf[256];
     switch ( format ) {
-        case CF_TEXT:         return wxT("CF_TEXT");
-        case CF_BITMAP:       return wxT("CF_BITMAP");
-        case CF_SYLK:         return wxT("CF_SYLK");
-        case CF_DIF:          return wxT("CF_DIF");
-        case CF_TIFF:         return wxT("CF_TIFF");
-        case CF_OEMTEXT:      return wxT("CF_OEMTEXT");
-        case CF_DIB:          return wxT("CF_DIB");
-        case CF_PALETTE:      return wxT("CF_PALETTE");
-        case CF_PENDATA:      return wxT("CF_PENDATA");
-        case CF_RIFF:         return wxT("CF_RIFF");
-        case CF_WAVE:         return wxT("CF_WAVE");
-        case CF_UNICODETEXT:  return wxT("CF_UNICODETEXT");
-        case CF_METAFILEPICT: return wxT("CF_METAFILEPICT");
-        case CF_ENHMETAFILE:  return wxT("CF_ENHMETAFILE");
-        case CF_LOCALE:       return wxT("CF_LOCALE");
-        case CF_HDROP:        return wxT("CF_HDROP");
+        case CF_TEXT:         return L"CF_TEXT";
+        case CF_BITMAP:       return L"CF_BITMAP";
+        case CF_SYLK:         return L"CF_SYLK";
+        case CF_DIF:          return L"CF_DIF";
+        case CF_TIFF:         return L"CF_TIFF";
+        case CF_OEMTEXT:      return L"CF_OEMTEXT";
+        case CF_DIB:          return L"CF_DIB";
+        case CF_PALETTE:      return L"CF_PALETTE";
+        case CF_PENDATA:      return L"CF_PENDATA";
+        case CF_RIFF:         return L"CF_RIFF";
+        case CF_WAVE:         return L"CF_WAVE";
+        case CF_UNICODETEXT:  return L"CF_UNICODETEXT";
+        case CF_METAFILEPICT: return L"CF_METAFILEPICT";
+        case CF_ENHMETAFILE:  return L"CF_ENHMETAFILE";
+        case CF_LOCALE:       return L"CF_LOCALE";
+        case CF_HDROP:        return L"CF_HDROP";
 
         default:
             if ( !::GetClipboardFormatNameW(format, s_szBuf, WXSIZEOF(s_szBuf)) )
             {
                 // it must be a new predefined format we don't know the name of
-                wxSprintf(s_szBuf, wxT("unknown CF (0x%04x)"), format.GetFormatId());
+                wxSprintf(s_szBuf, "unknown CF (0x%04x)", format.GetFormatId());
             }
 
             return s_szBuf;
@@ -1052,7 +1053,7 @@ bool wxBitmapDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 
     HBITMAP hbmp = wxDIB::ConvertToBitmap(pbmi);
 
-    wxCHECK_MSG( hbmp, FALSE, wxT("pasting/dropping invalid bitmap") );
+    wxCHECK_MSG( hbmp, FALSE, "pasting/dropping invalid bitmap" );
 
     const BITMAPINFOHEADER * const pbmih = &pbmi->bmiHeader;
     wxBitmap bitmap;
@@ -1098,13 +1099,13 @@ bool wxBitmapDataObject2::SetData(size_t WXUNUSED(len), const void *pBuf)
     BITMAP bmp;
     if ( !GetObject(hbmp, sizeof(BITMAP), &bmp) )
     {
-        wxLogLastError(wxT("GetObject(HBITMAP)"));
+        wxLogLastError("GetObject(HBITMAP)");
     }
 
     wxBitmap bitmap;
     if ( !bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, wxSize{bmp.bmWidth, bmp.bmHeight}, bmp.bmBitsPixel) )
     {
-        wxFAIL_MSG(wxT("pasting/dropping invalid bitmap"));
+        wxFAIL_MSG("pasting/dropping invalid bitmap");
 
         return false;
     }
@@ -1125,14 +1126,14 @@ size_t wxBitmapDataObject::GetDataSize(const wxDataFormat& format) const
 
         // shouldn't be selected into a DC or GetDIBits() would fail
         wxASSERT_MSG( !m_bitmap.GetSelectedInto(),
-                      wxT("can't copy bitmap selected into wxMemoryDC") );
+                      "can't copy bitmap selected into wxMemoryDC" );
 
         // first get the info
         BITMAPINFO bi;
         if ( !GetDIBits(hdc, (HBITMAP)m_bitmap.GetHBITMAP(), 0, 0,
                         NULL, &bi, DIB_RGB_COLORS) )
         {
-            wxLogLastError(wxT("GetDIBits(NULL)"));
+            wxLogLastError("GetDIBits(NULL)");
 
             return 0;
         }
@@ -1149,7 +1150,7 @@ size_t wxBitmapDataObject::GetDataSize(const wxDataFormat& format) const
 bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
                                      void *pBuf) const
 {
-    wxASSERT_MSG( m_bitmap.IsOk(), wxT("copying invalid bitmap") );
+    wxASSERT_MSG( m_bitmap.IsOk(), "copying invalid bitmap" );
 
     HBITMAP hbmp = (HBITMAP)m_bitmap.GetHBITMAP();
     if ( format.GetFormatId() == CF_DIB )
@@ -1159,13 +1160,13 @@ bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
 
         // shouldn't be selected into a DC or GetDIBits() would fail
         wxASSERT_MSG( !m_bitmap.GetSelectedInto(),
-                      wxT("can't copy bitmap selected into wxMemoryDC") );
+                      "can't copy bitmap selected into wxMemoryDC" );
 
         // first get the info
         BITMAPINFO *pbi = (BITMAPINFO *)pBuf;
         if ( !GetDIBits(hdc, hbmp, 0, 0, NULL, pbi, DIB_RGB_COLORS) )
         {
-            wxLogLastError(wxT("GetDIBits(NULL)"));
+            wxLogLastError("GetDIBits(NULL)");
 
             return 0;
         }
@@ -1174,7 +1175,7 @@ bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
         if ( !GetDIBits(hdc, hbmp, 0, pbi->bmiHeader.biHeight, pbi + 1,
                         pbi, DIB_RGB_COLORS) )
         {
-            wxLogLastError(wxT("GetDIBits"));
+            wxLogLastError("GetDIBits");
 
             return false;
         }
@@ -1205,7 +1206,7 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
                               pbmi + 1, pbmi, DIB_RGB_COLORS);
         if ( !hbmp )
         {
-            wxLogLastError(wxT("CreateDIBitmap"));
+            wxLogLastError("CreateDIBitmap");
         }
 
         w = pbmih->biWidth;
@@ -1220,7 +1221,7 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
         BITMAP bmp;
         if ( !GetObject(hbmp, sizeof(BITMAP), &bmp) )
         {
-            wxLogLastError(wxT("GetObject(HBITMAP)"));
+            wxLogLastError("GetObject(HBITMAP)");
         }
 
         w = bmp.bmWidth;
@@ -1230,7 +1231,7 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
 
     m_bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, w, h, d);
 
-    wxASSERT_MSG( m_bitmap.IsOk(), wxT("pasting invalid bitmap") );
+    wxASSERT_MSG( m_bitmap.IsOk(), "pasting invalid bitmap" );
 
     return true;
 }
@@ -1257,7 +1258,7 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     // get number of files (magic value -1)
     UINT nFiles = ::DragQueryFileW(hdrop, (unsigned)-1, nullptr, 0u);
 
-    wxCHECK_MSG ( nFiles != (UINT)-1, FALSE, wxT("wrong HDROP handle") );
+    wxCHECK_MSG ( nFiles != (UINT)-1, FALSE, "wrong HDROP handle" );
 
     // for each file get the length, allocate memory and then get the name
     wxString str;
@@ -1360,7 +1361,7 @@ bool wxFileDataObject::GetDataHere(void *pData) const
 // Work around bug in Wine headers
 #if defined(__WINE__) && defined(CFSTR_SHELLURL)
 #undef CFSTR_SHELLURL
-#define CFSTR_SHELLURL wxT("CFSTR_SHELLURL")
+#define CFSTR_SHELLURL "CFSTR_SHELLURL"
 #endif
 
 class CFSTR_SHELLURLDataObject : public wxCustomDataObject
@@ -1416,7 +1417,7 @@ bool wxURLDataObject::SetData(const wxDataFormat& format,
     m_dataObjectLast = wxGetObject(format);
 
     wxCHECK_MSG( m_dataObjectLast, FALSE,
-                 wxT("unsupported format in wxURLDataObject"));
+                 "unsupported format in wxURLDataObject");
 
     return m_dataObjectLast->SetData(len, buf);
 }
@@ -1424,7 +1425,7 @@ bool wxURLDataObject::SetData(const wxDataFormat& format,
 wxString wxURLDataObject::GetURL() const
 {
     wxString url;
-    wxCHECK_MSG( m_dataObjectLast, url, wxT("no data in wxURLDataObject") );
+    wxCHECK_MSG( m_dataObjectLast, url, "no data in wxURLDataObject" );
 
     if ( m_dataObjectLast->GetPreferredFormat() == CFSTR_SHELLURL )
     {
@@ -1470,19 +1471,20 @@ void wxURLDataObject::SetURL(const wxString& url)
 
 #if wxDEBUG_LEVEL
 
+// FIXME: Use narrow strings.
 static const wxChar *GetTymedName(DWORD tymed)
 {
     static wxChar s_szBuf[128];
     switch ( tymed ) {
-        case TYMED_HGLOBAL:   return wxT("TYMED_HGLOBAL");
-        case TYMED_FILE:      return wxT("TYMED_FILE");
-        case TYMED_ISTREAM:   return wxT("TYMED_ISTREAM");
-        case TYMED_ISTORAGE:  return wxT("TYMED_ISTORAGE");
-        case TYMED_GDI:       return wxT("TYMED_GDI");
-        case TYMED_MFPICT:    return wxT("TYMED_MFPICT");
-        case TYMED_ENHMF:     return wxT("TYMED_ENHMF");
+        case TYMED_HGLOBAL:   return L"TYMED_HGLOBAL";
+        case TYMED_FILE:      return L"TYMED_FILE";
+        case TYMED_ISTREAM:   return L"TYMED_ISTREAM";
+        case TYMED_ISTORAGE:  return L"TYMED_ISTORAGE";
+        case TYMED_GDI:       return L"TYMED_GDI";
+        case TYMED_MFPICT:    return L"TYMED_MFPICT";
+        case TYMED_ENHMF:     return L"TYMED_ENHMF";
         default:
-            wxSprintf(s_szBuf, wxT("type of media format %ld (unknown)"), tymed);
+            wxSprintf(s_szBuf, "type of media format %ld (unknown)", tymed);
             return s_szBuf;
     }
 }

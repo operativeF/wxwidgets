@@ -85,7 +85,7 @@ public:
         for(size_t i = iStart; i < GetLineCount(); i++)
         {
             wxString sLine = GetLine(i);
-            if(bIncludeComments || ! sLine.StartsWith(wxT("#")))
+            if(bIncludeComments || ! sLine.StartsWith("#"))
             {
                 if(sLine.StartsWith(sTest))
                     return (int)i;
@@ -122,13 +122,13 @@ private:
 // ----------------------------------------------------------------------------
 
 // MIME code tracing mask
-#define TRACE_MIME wxT("mime")
+#define TRACE_MIME "mime"
 
 
 // Read a XDG *.desktop file of type 'Application'
 void wxMimeTypesManagerImpl::LoadXDGApp(const wxString& filename)
 {
-    wxLogTrace(TRACE_MIME, wxT("loading XDG file %s"), filename.c_str());
+    wxLogTrace(TRACE_MIME, "loading XDG file %s", filename.c_str());
 
     wxMimeTextFile file(filename);
     if ( !file.Open() )
@@ -145,7 +145,7 @@ void wxMimeTypesManagerImpl::LoadXDGApp(const wxString& filename)
         return;
 
     // Semicolon separated list of mime types handled by the application.
-    nIndex = file.pIndexOf( wxT("MimeType=") );
+    nIndex = file.pIndexOf( "MimeType=" );
     if (nIndex == wxNOT_FOUND)
         return;
     wxString mimetypes = file.GetCmd (nIndex);
@@ -156,10 +156,10 @@ void wxMimeTypesManagerImpl::LoadXDGApp(const wxString& filename)
 #if wxUSE_INTL // try "Name[locale name]" first
     wxLocale *locale = wxGetLocale();
     if ( locale )
-        nIndex = file.pIndexOf(wxT("Name[")+locale->GetName()+wxT("]="));
+        nIndex = file.pIndexOf("Name[")+locale->GetName()+wxT("]=");
 #endif // wxUSE_INTL
     if(nIndex == wxNOT_FOUND)
-        nIndex = file.pIndexOf( wxT("Name=") );
+        nIndex = file.pIndexOf( "Name=" );
     if(nIndex != wxNOT_FOUND)
         nameapp = file.GetCmd(nIndex);
 
@@ -168,38 +168,38 @@ void wxMimeTypesManagerImpl::LoadXDGApp(const wxString& filename)
     nIndex = wxNOT_FOUND;
 #if wxUSE_INTL // try "Icon[locale name]" first
     if ( locale )
-        nIndex = file.pIndexOf(wxT("Icon[")+locale->GetName()+wxT("]="));
+        nIndex = file.pIndexOf("Icon[")+locale->GetName()+wxT("]=");
 #endif // wxUSE_INTL
     if(nIndex == wxNOT_FOUND)
-        nIndex = file.pIndexOf( wxT("Icon=") );
+        nIndex = file.pIndexOf( "Icon=" );
     if(nIndex != wxNOT_FOUND) {
-        nameicon = wxString(wxT("--icon ")) + file.GetCmd(nIndex);
-        namemini = wxString(wxT("--miniicon ")) + file.GetCmd(nIndex);
+        nameicon = wxString("--icon ") + file.GetCmd(nIndex);
+        namemini = wxString("--miniicon ") + file.GetCmd(nIndex);
     }
 
     // Replace some of the field code in the 'Exec' entry.
     // TODO: deal with %d, %D, %n, %N, %k and %v (but last one is deprecated)
-    nIndex = file.pIndexOf( wxT("Exec=") );
+    nIndex = file.pIndexOf( "Exec=" );
     if (nIndex == wxNOT_FOUND)
         return;
     wxString sCmd = file.GetCmd(nIndex);
     // we expect %f; others including  %F and %U and %u are possible
-    sCmd.Replace(wxT("%F"), wxT("%f"));
-    sCmd.Replace(wxT("%U"), wxT("%f"));
-    sCmd.Replace(wxT("%u"), wxT("%f"));
-    if (0 == sCmd.Replace ( wxT("%f"), wxT("%s") ))
-        sCmd = sCmd + wxT(" %s");
-    sCmd.Replace(wxT("%c"), nameapp);
-    sCmd.Replace(wxT("%i"), nameicon);
-    sCmd.Replace(wxT("%m"), namemini);
+    sCmd.Replace("%F"), wxT("%f");
+    sCmd.Replace("%U"), wxT("%f");
+    sCmd.Replace("%u"), wxT("%f");
+    if (0 == sCmd.Replace ( "%f"), wxT("%s" ))
+        sCmd = sCmd + " %s";
+    sCmd.Replace("%c", nameapp);
+    sCmd.Replace("%i", nameicon);
+    sCmd.Replace("%m", namemini);
 
-    wxStringTokenizer tokenizer(mimetypes, wxT(";"));
+    wxStringTokenizer tokenizer(mimetypes, ";");
     while(tokenizer.HasMoreTokens()) {
         wxString mimetype = tokenizer.GetNextToken().Lower();
         nIndex = m_aTypes.Index(mimetype);
         if(nIndex != wxNOT_FOUND) { // is this a known MIME type?
             wxMimeTypeCommands* entry = m_aEntries[nIndex];
-            entry->AddOrReplaceVerb(wxT("open"), sCmd);
+            entry->AddOrReplaceVerb("open", sCmd);
         }
     }
 }
@@ -217,7 +217,7 @@ void wxMimeTypesManagerImpl::LoadXDGAppsFilesFromDir(const wxString& dirname)
 
     wxString filename;
     // Look into .desktop files
-    bool cont = dir.GetFirst(&filename, wxT("*.desktop"), wxDIR_FILES);
+    bool cont = dir.GetFirst(&filename, "*.desktop", wxDIR_FILES);
     while (cont)
     {
         wxFileName p(dirname, filename);
@@ -242,7 +242,7 @@ void wxMimeTypesManagerImpl::LoadXDGGlobs(const wxString& filename)
     if ( !wxFileName::FileExists(filename) )
         return;
 
-    wxLogTrace(TRACE_MIME, wxT("loading XDG globs file from %s"), filename.c_str());
+    wxLogTrace(TRACE_MIME, "loading XDG globs file from %s", filename.c_str());
 
     wxMimeTextFile file(filename);
     if ( !file.Open() )
@@ -337,7 +337,7 @@ size_t wxFileTypeImpl::GetAllCommands(wxArrayString *verbs,
             {
                  cmd = wxFileType::ExpandCommand(cmd, params);
                  count++;
-                 if ( vrb.IsSameAs(wxT("open")))
+                 if ( vrb.IsSameAs("open"))
                  {
                      if ( verbs )
                         verbs->Insert(vrb, 0u);
@@ -417,7 +417,7 @@ wxFileTypeImpl::SetCommand(const wxString& cmd,
         return false;
 
     wxMimeTypeCommands *entry = new wxMimeTypeCommands();
-    entry->Add(verb + wxT("=")  + cmd + wxT(" %s "));
+    entry->Add(verb + "=")  + cmd + wxT(" %s ");
 
     bool ok = false;
     size_t nCount = strTypes.GetCount();
@@ -618,12 +618,12 @@ void wxMimeTypesManagerImpl::Initialize(int mailcapStyles,
             wxMimeTextFile textfile(defaultsList);
             if ( textfile.Open() )
             {
-                int nIndex = textfile.pIndexOf( wxT("[Default Applications]") );
+                int nIndex = textfile.pIndexOf( "[Default Applications]" );
                 if (nIndex != wxNOT_FOUND)
                 {
                     for (i = nIndex+1; i < textfile.GetLineCount(); i++)
                     {
-                        if (textfile.GetLine(i).Find(wxT("=")) != wxNOT_FOUND)
+                        if (textfile.GetLine(i).Find("=") != wxNOT_FOUND)
                         {
                             wxString desktopFile = textfile.GetCmd(i);
 
@@ -679,9 +679,9 @@ wxFileType * wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
     wxMimeTypeCommands *entry = new wxMimeTypeCommands();
 
     if ( ! ftInfo.GetOpenCommand().empty())
-        entry->Add(wxT("open=")  + ftInfo.GetOpenCommand() + wxT(" %s "));
+        entry->Add("open=")  + ftInfo.GetOpenCommand() + wxT(" %s ");
     if ( ! ftInfo.GetPrintCommand().empty())
-        entry->Add(wxT("print=") + ftInfo.GetPrintCommand() + wxT(" %s "));
+        entry->Add("print=") + ftInfo.GetPrintCommand() + wxT(" %s ");
 
     // now find where these extensions are in the data store and remove them
     wxArrayString sA_Exts = ftInfo.GetExtensions();
@@ -699,7 +699,7 @@ wxFileType * wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
         for (nIndex = 0; nIndex < nCount; nIndex++)
         {
             sExtStore = m_aExtensions.Item(nIndex);
-            if (sExtStore.Replace(sExt, wxT(" ") ) > 0)
+            if (sExtStore.Replace(sExt, " " ) > 0)
                 m_aExtensions.Item(nIndex) = sExtStore;
         }
     }
@@ -930,7 +930,7 @@ wxFileType * wxMimeTypesManagerImpl::GetFileTypeFromMimeType(const wxString& mim
     for ( size_t n = 0; n < nCount; n++ )
     {
         if ( (m_aTypes[n].BeforeFirst(wxT('/')) == strCategory ) &&
-                m_aTypes[n].AfterFirst(wxT('/')) == wxT("*") )
+                m_aTypes[n].AfterFirst(wxT('/')) == "*" )
         {
             index = n;
             break;
@@ -951,7 +951,7 @@ wxFileType * wxMimeTypesManagerImpl::GetFileTypeFromMimeType(const wxString& mim
 wxString wxMimeTypesManagerImpl::GetCommand(const wxString & verb, size_t nIndex) const
 {
     wxString command, testcmd, sV, sTmp;
-    sV = verb + wxT("=");
+    sV = verb + "=";
 
     // list of verb = command pairs for this mimetype
     wxMimeTypeCommands * sPairs = m_aEntries [nIndex];

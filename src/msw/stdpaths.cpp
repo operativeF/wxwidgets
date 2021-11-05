@@ -34,7 +34,7 @@ using SHGetKnownFolderPath_t = HRESULT (WINAPI*)(const GUID&, DWORD, HANDLE, PWS
 // ----------------------------------------------------------------------------
 
 // used in our wxLogTrace messages
-constexpr wxChar TRACE_MASK[] = wxT("stdpaths");
+constexpr char TRACE_MASK[] = "stdpaths";
 
 #ifndef CSIDL_PERSONAL
     #define CSIDL_PERSONAL        0x0005
@@ -71,12 +71,12 @@ void ResolveShellFunctions()
 
     // start with the newest functions, fall back to the oldest ones
     // first check for SHGetFolderPath (shell32.dll 5.0)
-    wxString shellDllName(wxT("shell32"));
+    wxString shellDllName("shell32");
 
     wxDynamicLibrary dllShellFunctions( shellDllName );
     if ( !dllShellFunctions.IsLoaded() )
     {
-        wxLogTrace(TRACE_MASK, wxT("Failed to load %s.dll"), shellDllName.c_str() );
+        wxLogTrace(TRACE_MASK, "Failed to load %s.dll", shellDllName.c_str() );
     }
 
     // don't give errors if the functions are unavailable, we're ready to deal
@@ -287,7 +287,7 @@ wxStandardPaths::MakeConfigFileName(const wxString& basename,
                                     ConfigFileConv WXUNUSED(conv)) const
 {
     wxFileName fn({}, basename);
-    fn.SetExt(wxT("ini"));
+    fn.SetExt("ini");
     return fn.GetFullName();
 }
 
@@ -302,7 +302,7 @@ wxString wxStandardPathsWin16::GetConfigDir() const
     wxString dir;
     if ( !::GetWindowsDirectoryW(wxStringBuffer(dir, MAX_PATH), MAX_PATH) )
     {
-        wxLogLastError(wxT("GetWindowsDirectory"));
+        wxLogLastError("GetWindowsDirectory");
     }
 
     return dir;

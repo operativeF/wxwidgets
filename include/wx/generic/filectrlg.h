@@ -139,7 +139,7 @@ public:
                 const wxSize &size = wxDefaultSize,
                 unsigned int style = wxLC_LIST,
                 const wxValidator &validator = wxDefaultValidator,
-                const wxString &name = wxT("filelist") );
+                const wxString &name = "filelist" );
     ~wxFileListCtrl();
 
     virtual void ChangeToListMode();

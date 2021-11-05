@@ -764,7 +764,7 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
                 text = item.GetLabel();
 
             if (text.empty())
-                text = wxT(" ");
+                text = " ";
 
             wxMenuItem* m =  new wxMenuItem(&menuPopup, item.GetId(), text, item.GetShortHelp());
 
@@ -1560,7 +1560,7 @@ bool wxAuiToolBar::GetToolEnabled(int tool_id) const
 wxString wxAuiToolBar::GetToolLabel(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
+    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
 
@@ -1579,7 +1579,7 @@ void wxAuiToolBar::SetToolLabel(int tool_id, const wxString& label)
 wxBitmap wxAuiToolBar::GetToolBitmap(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
+    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return wxNullBitmap;
 
@@ -1598,7 +1598,7 @@ void wxAuiToolBar::SetToolBitmap(int tool_id, const wxBitmap& bitmap)
 wxString wxAuiToolBar::GetToolShortHelp(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
+    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
 
@@ -1617,7 +1617,7 @@ void wxAuiToolBar::SetToolShortHelp(int tool_id, const wxString& help_string)
 wxString wxAuiToolBar::GetToolLongHelp(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
+    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
 

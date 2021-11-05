@@ -27,7 +27,7 @@ constexpr char BOM_UTF8[]    = { '\xEF', '\xBB', '\xBF'         };
 void wxConvAuto::SetFallbackEncoding(wxFontEncoding enc)
 {
     wxASSERT_MSG( enc != wxFONTENCODING_DEFAULT,
-                  wxT("wxFONTENCODING_DEFAULT doesn't make sense here") );
+                  "wxFONTENCODING_DEFAULT doesn't make sense here" );
 
     ms_defaultMBEncoding = enc;
 }
@@ -35,7 +35,7 @@ void wxConvAuto::SetFallbackEncoding(wxFontEncoding enc)
 /* static */
 const char* wxConvAuto::GetBOMChars(wxBOM bom, size_t* count)
 {
-    wxCHECK_MSG( count , nullptr, wxS("count pointer must be provided") );
+    wxCHECK_MSG( count , nullptr, "count pointer must be provided" );
 
     switch ( bom )
     {
@@ -46,11 +46,11 @@ const char* wxConvAuto::GetBOMChars(wxBOM bom, size_t* count)
         case wxBOM::UTF8   : *count = WXSIZEOF(BOM_UTF8   ); return BOM_UTF8;
         case wxBOM::Unknown:
         case wxBOM::None:
-            wxFAIL_MSG( wxS("Invalid BOM type") );
+            wxFAIL_MSG( "Invalid BOM type" );
             return nullptr;
     }
 
-    wxFAIL_MSG( wxS("Unknown BOM type") );
+    wxFAIL_MSG( "Unknown BOM type" );
     return nullptr;
 }
 

@@ -307,7 +307,7 @@ bool wxScrollHelperEvtHandler::ProcessEvent(wxEvent& event)
 
 wxAnyScrollHelperBase::wxAnyScrollHelperBase(wxWindow* win)
 {
-    wxASSERT_MSG( win, wxT("associated window can't be NULL in wxScrollHelper") );
+    wxASSERT_MSG( win, "associated window can't be NULL in wxScrollHelper" );
 
     m_win = win;
     m_targetWindow = nullptr;
@@ -450,7 +450,7 @@ void wxScrollHelperBase::DoSetTargetWindow(wxWindow *target)
 
 void wxScrollHelperBase::SetTargetWindow(wxWindow *target)
 {
-    wxCHECK_RET( target, wxT("target window must not be NULL") );
+    wxCHECK_RET( target, "target window must not be NULL" );
 
     if ( target == m_targetWindow )
         return;
@@ -949,7 +949,7 @@ void wxScrollHelperBase::HandleOnMouseLeave(wxMouseEvent& event)
                 // but seems to happen sometimes under wxMSW - maybe it's a bug
                 // there but for now just ignore it
 
-                //wxFAIL_MSG( wxT("can't understand where has mouse gone") );
+                //wxFAIL_MSG( "can't understand where has mouse gone" );
 
                 return;
             }
@@ -1266,7 +1266,7 @@ wxScrollHelper::DoAdjustScrollbar(int orient,
             break;
 
         default:
-            wxFAIL_MSG( wxS("unknown scrollbar visibility") );
+            wxFAIL_MSG( "unknown scrollbar visibility" );
             [[fallthrough]];
 
         case wxScrollbarVisibility::Default:

@@ -51,7 +51,7 @@ public:
     // at all
     void Init(wxPipeInputStream *stream)
     {
-        wxASSERT_MSG( !m_stream, wxS("Can only initialize once") );
+        wxASSERT_MSG( !m_stream, "Can only initialize once" );
 
         m_stream = stream;
     }

@@ -114,7 +114,7 @@ wxMessageDialog::HookFunction(int code, WXWPARAM wParam, WXLPARAM lParam)
     const DWORD tid = ::GetCurrentThreadId();
     wxMessageDialogMap::iterator node = HookMap().find(tid);
     wxCHECK_MSG( node != HookMap().end(), false,
-                    wxT("bogus thread id in wxMessageDialog::Hook") );
+                    "bogus thread id in wxMessageDialog::Hook" );
 
     wxMessageDialog *  const wnd = node->second;
 
@@ -163,9 +163,9 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // find the static control to replace: normally there are two of them, the
     // icon and the text itself so search for all of them and ignore the icon
     // ones
-    HWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, wxT("STATIC"), nullptr);
+    HWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, L"STATIC", nullptr);
     if ( ::GetWindowLongPtrW(hwndStatic, GWL_STYLE) & SS_ICON )
-        hwndStatic = ::FindWindowExW(GetHwnd(), hwndStatic, wxT("STATIC"), nullptr);
+        hwndStatic = ::FindWindowExW(GetHwnd(), hwndStatic, L"STATIC", nullptr);
 
     if ( !hwndStatic )
     {
@@ -537,7 +537,7 @@ int wxMessageDialog::ShowModal()
     if ( HasNativeTaskDialog() )
     {
         TaskDialogIndirect_t taskDialogIndirect = GetTaskDialogIndirectFunc();
-        wxCHECK_MSG( taskDialogIndirect, wxID_CANCEL, wxS("no task dialog?") );
+        wxCHECK_MSG( taskDialogIndirect, wxID_CANCEL, "no task dialog?" );
 
         WinStruct<TASKDIALOGCONFIG> tdc;
         wxMSWTaskDialogConfig wxTdc( *this );
@@ -825,7 +825,7 @@ int wxMSWMessageDialog::MSWTranslateReturnCode(int msAns)
     switch (msAns)
     {
         default:
-            wxFAIL_MSG(wxT("unexpected return code"));
+            wxFAIL_MSG("unexpected return code");
             [[fallthrough]];
 
         case IDCANCEL:

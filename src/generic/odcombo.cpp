@@ -150,7 +150,7 @@ wxCoord wxVListBoxComboPopup::OnMeasureItem(size_t n) const
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
     wxASSERT_MSG( wxDynamicCast(combo, wxOwnerDrawnComboBox),
-                  wxT("you must subclass wxVListBoxComboPopup for drawing and measuring methods") );
+                  "you must subclass wxVListBoxComboPopup for drawing and measuring methods" );
 
     wxCoord h = combo->OnMeasureItem(n);
     if ( h < 0 )
@@ -163,7 +163,7 @@ wxCoord wxVListBoxComboPopup::OnMeasureItemWidth(size_t n) const
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
     wxASSERT_MSG( wxDynamicCast(combo, wxOwnerDrawnComboBox),
-                  wxT("you must subclass wxVListBoxComboPopup for drawing and measuring methods") );
+                  "you must subclass wxVListBoxComboPopup for drawing and measuring methods" );
 
     return combo->OnMeasureItemWidth(n);
 }
@@ -176,7 +176,7 @@ void wxVListBoxComboPopup::OnDrawBg( wxDC& dc,
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
     wxASSERT_MSG( wxDynamicCast(combo, wxOwnerDrawnComboBox),
-                  wxT("you must subclass wxVListBoxComboPopup for drawing and measuring methods") );
+                  "you must subclass wxVListBoxComboPopup for drawing and measuring methods" );
 
     if ( IsCurrent((size_t)item) && !(flags & wxODCB_PAINTING_CONTROL) )
         flags |= wxODCB_PAINTING_SELECTED;
@@ -195,7 +195,7 @@ void wxVListBoxComboPopup::OnDrawItem( wxDC& dc, const wxRect& rect, int item, u
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
     wxASSERT_MSG( wxDynamicCast(combo, wxOwnerDrawnComboBox),
-                  wxT("you must subclass wxVListBoxComboPopup for drawing and measuring methods") );
+                  "you must subclass wxVListBoxComboPopup for drawing and measuring methods" );
 
     combo->OnDrawItem(dc,rect,item,flags);
 }
@@ -686,7 +686,7 @@ std::string wxVListBoxComboPopup::GetStringValue() const
 void wxVListBoxComboPopup::SetSelection( int item )
 {
     wxCHECK_RET( item == wxNOT_FOUND || ((unsigned int)item < GetCount()),
-                 wxT("invalid index in wxVListBoxComboPopup::SetSelection") );
+                 "invalid index in wxVListBoxComboPopup::SetSelection" );
 
     m_value = item;
 
@@ -1004,7 +1004,7 @@ void wxOwnerDrawnComboBox::Clear()
 
 void wxOwnerDrawnComboBox::DoDeleteOneItem(unsigned int n)
 {
-    wxCHECK_RET( IsValid(n), wxT("invalid index in wxOwnerDrawnComboBox::Delete") );
+    wxCHECK_RET( IsValid(n), "invalid index in wxOwnerDrawnComboBox::Delete" );
 
     if ( GetSelection() == (int) n )
         ChangeValue("");
@@ -1023,7 +1023,7 @@ size_t wxOwnerDrawnComboBox::GetCount() const
 
 std::string wxOwnerDrawnComboBox::GetString(unsigned int n) const
 {
-    wxCHECK_MSG( IsValid(n), "", wxT("invalid index in wxOwnerDrawnComboBox::GetString") );
+    wxCHECK_MSG( IsValid(n), "", "invalid index in wxOwnerDrawnComboBox::GetString" );
 
     if ( !m_popupInterface )
         return m_initChs[n];
@@ -1035,7 +1035,7 @@ void wxOwnerDrawnComboBox::SetString(unsigned int n, const std::string& s)
 {
     EnsurePopupControl();
 
-    wxCHECK_RET( IsValid(n), wxT("invalid index in wxOwnerDrawnComboBox::SetString") );
+    wxCHECK_RET( IsValid(n), "invalid index in wxOwnerDrawnComboBox::SetString" );
 
     GetVListBoxComboPopup()->SetString(n,s);
 }
@@ -1056,7 +1056,7 @@ void wxOwnerDrawnComboBox::Select(int n)
 {
     EnsurePopupControl();
 
-    wxCHECK_RET( (n == wxNOT_FOUND) || IsValid(n), wxT("invalid index in wxOwnerDrawnComboBox::Select") );
+    wxCHECK_RET( (n == wxNOT_FOUND) || IsValid(n), "invalid index in wxOwnerDrawnComboBox::Select" );
 
     GetVListBoxComboPopup()->SetSelection(n);
 

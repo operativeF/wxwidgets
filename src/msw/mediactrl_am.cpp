@@ -926,16 +926,16 @@ wxString wxAMMediaBackend::GetErrorString(HRESULT hrdsv)
     if( m_lpAMGetErrorText != nullptr &&
        (*m_lpAMGetErrorText)(hrdsv, szError, MAX_ERROR_TEXT_LEN) == 0)
     {
-        return wxString::Format(wxT("DirectShow error \"%s\" \n")
-                                     wxT("(numeric %X)\n")
-                                     wxT("occurred"),
+        return wxString::Format("DirectShow error \"%s\" \n"
+                                     "(numeric %X)\n"
+                                     "occurred",
                                      szError, (int)hrdsv);
     }
     else
     {
-        return wxString::Format(wxT("Unknown error \n")
-                                     wxT("(numeric %X)\n")
-                                     wxT("occurred"),
+        return wxString::Format("Unknown error \n"
+                                     "(numeric %X)\n"
+                                     "occurred",
                                      (int)hrdsv);
     }
 }

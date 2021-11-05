@@ -52,8 +52,8 @@ public:
     int GetSelection() const override = 0;
     void GetSelection(long *from, long *to) const override = 0;
 
-    virtual void Popup() { wxFAIL_MSG( wxT("Not implemented") ); }
-    virtual void Dismiss() { wxFAIL_MSG( wxT("Not implemented") ); }
+    virtual void Popup() { wxFAIL_MSG( "Not implemented" ); }
+    virtual void Dismiss() { wxFAIL_MSG( "Not implemented" ); }
 
     // may return value different from GetSelection() when the combobox
     // dropdown is shown and the user selected, but not yet accepted, a value

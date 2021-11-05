@@ -148,18 +148,18 @@ static wxString GetIidName(REFIID riid)
 
 void wxLogQueryInterface(const wxChar *szInterface, REFIID riid)
 {
-  wxLogTrace(wxTRACE_OleCalls, wxT("%s::QueryInterface (iid = %s)"),
+  wxLogTrace(wxTRACE_OleCalls, "%s::QueryInterface (iid = %s)",
              szInterface, GetIidName(riid).c_str());
 }
 
 void wxLogAddRef(const wxChar *szInterface, ULONG cRef)
 {
-  wxLogTrace(wxTRACE_OleCalls, wxT("After %s::AddRef: m_cRef = %d"), szInterface, cRef + 1);
+  wxLogTrace(wxTRACE_OleCalls, "After %s::AddRef: m_cRef = %d", szInterface, cRef + 1);
 }
 
 void wxLogRelease(const wxChar *szInterface, ULONG cRef)
 {
-  wxLogTrace(wxTRACE_OleCalls, wxT("After %s::Release: m_cRef = %d"), szInterface, cRef - 1);
+  wxLogTrace(wxTRACE_OleCalls, "After %s::Release: m_cRef = %d", szInterface, cRef - 1);
 }
 
 #endif // __WXDEBUG__ && __VISUALC__

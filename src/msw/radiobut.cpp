@@ -84,7 +84,7 @@ void wxRadioButton::SetValue(bool value)
 
     const wxWindowList& siblings = GetParent()->GetChildren();
     wxWindowList::compatibility_iterator nodeThis = siblings.Find(this);
-    wxCHECK_RET( nodeThis, wxT("radio button not a child of its parent?") );
+    wxCHECK_RET( nodeThis, "radio button not a child of its parent?" );
 
     // this will be set to true in the code below if the focus belongs to one
     // of the other buttons in the same group
@@ -191,7 +191,7 @@ bool wxRadioButton::GetValue() const
     {
         wxASSERT_MSG( m_isChecked ==
                         (::SendMessageW(GetHwnd(), BM_GETCHECK, 0, 0L) != 0),
-                      wxT("wxRadioButton::m_isChecked is out of sync?") );
+                      "wxRadioButton::m_isChecked is out of sync?" );
     }
 
     return m_isChecked;

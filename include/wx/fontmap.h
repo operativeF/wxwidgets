@@ -163,7 +163,7 @@ constexpr std::array<EncodingInfo, 83> gs_encodings =
 constexpr wxFontEncoding GetFontEncodingFromIndex(size_t n)
 {
     wxCHECK_MSG( n < gs_encodings.size(), wxFONTENCODING_SYSTEM,
-                    wxT("wxFontMapper::GetEncoding(): invalid index") );
+                    "wxFontMapper::GetEncoding(): invalid index" );
 
     return gs_encodings[n].encoding;
 }

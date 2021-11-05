@@ -511,7 +511,7 @@ void wxMDIParentFrame::Cascade()
 void wxMDIParentFrame::Tile(wxOrientation orient)
 {
     wxASSERT_MSG( orient == wxHORIZONTAL || orient == wxVERTICAL,
-                  wxT("invalid orientation value") );
+                  "invalid orientation value" );
 
     ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDITILE,
                   orient == wxHORIZONTAL ? MDITILE_HORIZONTAL
@@ -860,7 +860,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
 
   if ( !m_hWnd )
   {
-      wxLogLastError(wxT("WM_MDICREATE"));
+      wxLogLastError("WM_MDICREATE");
       return false;
   }
 
@@ -1160,7 +1160,7 @@ bool wxMDIChildFrame::HandleMDIActivate(long WXUNUSED(activate),
     else if ( m_hWnd == hwndDeact )
     {
         wxASSERT_MSG( parent->GetActiveChild() == this,
-                      wxT("can't deactivate MDI child which wasn't active!") );
+                      "can't deactivate MDI child which wasn't active!" );
 
         activated = false;
         parent->SetActiveChild(nullptr);
@@ -1339,7 +1339,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, unsigned int styl
     m_hWnd = (WXHWND)::CreateWindowExW
                        (
                         exStyle,
-                        wxT("MDICLIENT"),
+                        L"MDICLIENT",
                         nullptr,
                         msStyle,
                         0, 0, 0, 0,
@@ -1349,7 +1349,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, unsigned int styl
                         (LPSTR)(LPCLIENTCREATESTRUCT)&ccs);
     if ( !m_hWnd )
     {
-        wxLogLastError(wxT("CreateWindowEx(MDI client)"));
+        wxLogLastError("CreateWindowEx(MDI client)");
 
         return false;
     }
@@ -1452,14 +1452,14 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
             const DWORD err = ::GetLastError();
             if ( err != ERROR_SUCCESS )
             {
-                wxLogApiError(wxT("SendMessageW(WM_MDISETMENU)"), err);
+                wxLogApiError("SendMessageW(WM_MDISETMENU)", err);
             }
         }
     }
 
     // update menu bar of the parent window
     wxWindow *parent = win->GetParent();
-    wxCHECK_RET( parent, wxT("MDI client without parent frame? weird...") );
+    wxCHECK_RET( parent, "MDI client without parent frame? weird..." );
 
     ::SendMessageW(GetHwndOf(win), WM_MDIREFRESHMENU, 0, 0L);
 
@@ -1569,7 +1569,7 @@ void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const wxString& windowMen
             {
                 if ( !::RemoveMenu(hmenu, it.GetPos(), MF_BYPOSITION) )
                 {
-                    wxLogLastError(wxT("RemoveMenu"));
+                    wxLogLastError("RemoveMenu");
                 }
 
                 break;

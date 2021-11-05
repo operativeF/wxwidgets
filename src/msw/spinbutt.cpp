@@ -100,7 +100,7 @@ bool wxSpinButton::Create(wxWindow *parent,
 
     if ( !m_hWnd )
     {
-        wxLogLastError(wxT("CreateUpDownControl"));
+        wxLogLastError("CreateUpDownControl");
 
         return false;
     }
@@ -204,7 +204,7 @@ void wxSpinButton::SetRange(int minVal, int maxVal)
 bool wxSpinButton::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
                                WXWORD WXUNUSED(pos), WXHWND control)
 {
-    wxCHECK_MSG( control, false, wxT("scrolling what?") );
+    wxCHECK_MSG( control, false, "scrolling what?" );
 
     if ( wParam != SB_THUMBPOSITION )
     {

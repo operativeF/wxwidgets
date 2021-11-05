@@ -146,14 +146,14 @@ public:
 private:
     static bool LoadLibraries()
     {
-        if ( !m_dllDirect2d.Load(wxT("d2d1.dll"), wxDL_VERBATIM | wxDL_QUIET) )
+        if ( !m_dllDirect2d.Load("d2d1.dll", wxDL_VERBATIM | wxDL_QUIET) )
             return false;
 
-        if ( !m_dllDirectWrite.Load(wxT("dwrite.dll"), wxDL_VERBATIM | wxDL_QUIET) )
+        if ( !m_dllDirectWrite.Load("dwrite.dll", wxDL_VERBATIM | wxDL_QUIET) )
             return false;
 
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
-        if (!m_dllDirect3d.Load(wxT("d3d11.dll"), wxDL_VERBATIM | wxDL_QUIET))
+        if (!m_dllDirect3d.Load("d3d11.dll", wxDL_VERBATIM | wxDL_QUIET))
             return false;
 #endif
 
@@ -1431,7 +1431,7 @@ wxD2DPathData::wxGraphicsObjectRefData* wxD2DPathData::Clone() const
 
     // Transfer geometry to the new geometry sink.
     HRESULT hr = m_pathGeometry->Stream(newPathData->m_geometrySink);
-    wxASSERT_MSG( SUCCEEDED(hr), wxS("Current geometry is in invalid state") );
+    wxASSERT_MSG( SUCCEEDED(hr), "Current geometry is in invalid state" );
     if ( FAILED(hr) )
     {
         delete newPathData;
@@ -3181,7 +3181,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
 
     LOGFONTW logfont;
     int n = GetObjectW(font.GetHFONT(), sizeof(logfont), &logfont);
-    wxCHECK_RET( n > 0, wxS("Failed to obtain font info") );
+    wxCHECK_RET( n > 0, "Failed to obtain font info" );
 
     // Ensure the LOGFONTW object contains the correct font face name
     if (logfont.lfFaceName[0] == L'\0')
@@ -3721,7 +3721,7 @@ protected:
         // what is what we need to pass to BindDC.
         RECT r;
         int status = ::GetClipBox(m_hdc, &r);
-        wxCHECK_RET( status != ERROR, wxS("Error retrieving DC dimensions") );
+        wxCHECK_RET( status != ERROR, "Error retrieving DC dimensions" );
 
         hr = renderTarget->BindDC(m_hdc, &r);
         wxCHECK_HRESULT_RET(hr);
@@ -4464,7 +4464,7 @@ void wxD2DContext::EndLayer()
         }
         else
         {
-            wxFAIL_MSG( wxS("Invalid layer type") );
+            wxFAIL_MSG( "Invalid layer type" );
         }
         // Store layer parameters.
         m_layers.push(ld);
@@ -4595,7 +4595,7 @@ void wxD2DContext::PushState()
 
 void wxD2DContext::PopState()
 {
-    wxCHECK_RET(!m_stateStack.empty(), wxS("No state to pop"));
+    wxCHECK_RET(!m_stateStack.empty(), "No state to pop");
 
     // Remove all layers from the stack of layers.
     while ( !m_layers.empty() )
@@ -4650,7 +4650,7 @@ std::pair<float, float> wxD2DContext::GetTextExtent(
 {
     // FIXME: Does not return wxSize.
     //wxCHECK_RET(!m_font.IsNull(),
-    //    wxS("wxD2DContext::GetTextExtent - no valid font set"));
+    //    "wxD2DContext::GetTextExtent - no valid font set");
 
     return wxD2DMeasuringContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, descent, externalLeading);
@@ -4659,7 +4659,7 @@ std::pair<float, float> wxD2DContext::GetTextExtent(
 std::vector<float> wxD2DContext::GetPartialTextExtents(std::string_view text) const
 {
     //wxCHECK_RET(!m_font.IsNull(),
-    //    wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
+    //    "wxD2DContext::GetPartialTextExtents - no valid font set");
 
     return wxD2DMeasuringContext::GetPartialTextExtents(wxGetD2DFontData(m_font), text);
 }
@@ -4692,7 +4692,7 @@ bool wxD2DContext::ShouldOffset() const
 void wxD2DContext::DoDrawText(std::string_view str, float x, float y)
 {
     wxCHECK_RET(!m_font.IsNull(),
-        wxS("wxD2DContext::wxDrawText - no valid font set"));
+        "wxD2DContext::wxDrawText - no valid font set");
 
     if (m_composition == wxCompositionMode::Dest)
         return;
@@ -5063,7 +5063,7 @@ std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxWindowDC
 std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxMemoryDC& dc)
 {
     wxBitmap bmp = dc.GetSelectedBitmap();
-    wxASSERT_MSG( bmp.IsOk(), wxS("Should select a bitmap before creating wxGraphicsContext") );
+    wxASSERT_MSG( bmp.IsOk(), "Should select a bitmap before creating wxGraphicsContext" );
 
     return std::make_unique<wxD2DContext>(this, m_direct2dFactory, dc.GetHDC(), &dc,
                             bmp.HasAlpha() ? D2D1_ALPHA_MODE_PREMULTIPLIED : D2D1_ALPHA_MODE_IGNORE);

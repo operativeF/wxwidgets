@@ -118,7 +118,7 @@ constexpr char hexArray[] = "0123456789ABCDEF";
 // Convert 2-digit hex number to decimal
 int wxHexToDec(const wxString& str)
 {
-    wxCHECK_MSG( str.Length() >= 2, -1, wxS("Invalid argument") );
+    wxCHECK_MSG( str.Length() >= 2, -1, "Invalid argument" );
 
     char buf[2];
     buf[0] = str.GetChar(0);
@@ -129,7 +129,7 @@ int wxHexToDec(const wxString& str)
 // Convert decimal integer to 2-character hex string (not prefixed by 0x).
 void wxDecToHex(unsigned char dec, wxChar *buf)
 {
-    wxASSERT_MSG( buf, wxS("Invalid argument") );
+    wxASSERT_MSG( buf, "Invalid argument" );
     buf[0] = hexArray[dec >> 4];
     buf[1] = hexArray[dec & 0x0F];
     buf[2] = 0;
@@ -138,7 +138,7 @@ void wxDecToHex(unsigned char dec, wxChar *buf)
 // Convert decimal integer to 2 characters
 void wxDecToHex(unsigned char dec, char* ch1, char* ch2)
 {
-    wxASSERT_MSG( ch1 && ch2, wxS("Invalid argument(s)") );
+    wxASSERT_MSG( ch1 && ch2, "Invalid argument(s)" );
     *ch1 = hexArray[dec >> 4];
     *ch2 = hexArray[dec & 0x0F];
 }
@@ -477,7 +477,7 @@ wxString wxGetCurrentDir()
         {
             if ( errno != ERANGE )
             {
-                wxLogSysError(wxT("Failed to get current directory"));
+                wxLogSysError("Failed to get current directory");
 
                 return {};
             }
@@ -507,13 +507,14 @@ wxString wxGetCurrentDir()
 
 bool wxGetEnvMap(wxEnvVariableHashMap *map)
 {
-    wxCHECK_MSG( map, false, wxS("output pointer can't be NULL") );
+    wxCHECK_MSG( map, false, "output pointer can't be NULL" );
 
 #if defined(__VISUALC__)
     // This variable only exists to force the CRT to fill the wide char array,
     // it might only have it in narrow char version until now as we use main()
     // (and not _wmain()) as our entry point.
-    static wxChar* s_dummyEnvVar = _tgetenv(wxT("TEMP"));
+    // TODO: Change this for narrow strings.
+    static wxChar* s_dummyEnvVar = _tgetenv(L"TEMP");
 
     wxChar **env = _tenviron;
 #elif defined(__VMS)
@@ -978,7 +979,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     wxString cmd;
 
 #if wxUSE_MIMETYPE
-    wxFileType *ft = wxTheMimeTypesManager->GetFileTypeFromExtension(wxT("html"));
+    wxFileType *ft = wxTheMimeTypesManager->GetFileTypeFromExtension("html");
     if ( ft )
     {
         wxString mt;
@@ -992,7 +993,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     if ( !ok || cmd.empty() )
     {
         // fallback to checking for the BROWSER environment variable
-        if ( !wxGetEnv(wxT("BROWSER"), &cmd) || cmd.empty() )
+        if ( !wxGetEnv("BROWSER", &cmd) || cmd.empty() )
             cmd << wxT(' ') << params.url;
     }
 
@@ -1071,7 +1072,7 @@ bool wxLaunchDefaultBrowser(const wxString& url, unsigned int flags)
 
 wxString wxStripMenuCodes(const wxString& in, unsigned int flags)
 {
-    wxASSERT_MSG( flags, wxT("this is useless to call without any flags") );
+    wxASSERT_MSG( flags, "this is useless to call without any flags" );
 
     wxString out;
 
@@ -1111,7 +1112,7 @@ wxString wxStripMenuCodes(const wxString& in, unsigned int flags)
             // can't be the last character of the string
             if ( ++it == in.end() )
             {
-                wxLogDebug(wxT("Invalid menu string '%s'"), in.c_str());
+                wxLogDebug("Invalid menu string '%s'", in.c_str());
                 break;
             }
             else
@@ -1286,7 +1287,7 @@ int wxMessageBox(const std::string& message, const std::string& caption, unsigne
             return wxHELP;
     }
 
-    wxFAIL_MSG( wxT("unexpected return code from wxMessageDialog") );
+    wxFAIL_MSG( "unexpected return code from wxMessageDialog" );
 
     return wxCANCEL;
 }
@@ -1295,12 +1296,12 @@ wxVersionInfo wxGetLibraryVersionInfo()
 {
     // don't translate these strings, they're for diagnostics purposes only
     wxString msg;
-    msg.Printf(wxS("wxWidgets Library (%s port)\n")
-               wxS("Version %d.%d.%d (Unicode: %s, debug level: %d),\n")
+    msg.Printf("wxWidgets Library (%s port)\n"
+               "Version %d.%d.%d (Unicode: %s, debug level: %d),\n"
 #if !wxUSE_REPRODUCIBLE_BUILD
-               wxS("compiled at %s %s\n\n")
+               "compiled at %s %s\n\n"
 #endif
-               wxS("Runtime version of toolkit used is %d.%d.\n"),
+               "Runtime version of toolkit used is %d.%d.\n",
                wxPlatformInfo::Get().GetPortIdName(),
                wxMAJOR_VERSION,
                wxMINOR_VERSION,

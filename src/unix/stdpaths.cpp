@@ -43,8 +43,8 @@ void wxStandardPaths::SetInstallPrefix(const wxString& prefix)
 static wxString GetXDGConfigHome()
 {
     wxString dir;
-    if ( !wxGetEnv(wxS("XDG_CONFIG_HOME"), &dir) || dir.empty() )
-        dir = wxFileName::GetHomeDir() + wxS("/.config");
+    if ( !wxGetEnv("XDG_CONFIG_HOME", &dir) || dir.empty() )
+        dir = wxFileName::GetHomeDir() + "/.config";
     return dir;
 }
 
@@ -63,7 +63,7 @@ wxString wxStandardPaths::GetUserConfigDir() const
             break;
     }
 
-    wxASSERT_MSG( !dir.empty(), wxS("unsupported file layout") );
+    wxASSERT_MSG( !dir.empty(), "unsupported file layout" );
 
     return dir;
 }
@@ -79,7 +79,7 @@ wxString wxStandardPaths::GetInstallPrefix() const
 {
     if ( m_prefix.empty() )
     {
-        const_cast<wxStandardPaths *>(this)->m_prefix = wxT("/sys$system");
+        const_cast<wxStandardPaths *>(this)->m_prefix = "/sys$system";
     }
 
     return m_prefix;
@@ -87,17 +87,17 @@ wxString wxStandardPaths::GetInstallPrefix() const
 
 wxString wxStandardPaths::GetConfigDir() const
 {
-   return wxT("/sys$manager");
+   return "/sys$manager";
 }
 
 wxString wxStandardPaths::GetDataDir() const
 {
-   return AppendAppInfo(GetInstallPrefix() + wxT("/sys$share"));
+   return AppendAppInfo(GetInstallPrefix() + "/sys$share");
 }
 
 wxString wxStandardPaths::GetLocalDataDir() const
 {
-   return AppendAppInfo(wxT("/sys$manager"));
+   return AppendAppInfo("/sys$manager");
 }
 
 wxString wxStandardPaths::GetUserDataDir() const
@@ -154,7 +154,7 @@ wxString wxStandardPaths::GetExecutablePath() const
         // /proc/self/exe contents. See
         //      http://sf.net/tracker/?func=detail&atid=309863&aid=1565357&group_id=9863
         // for more information about this issue.
-        wxGetEnv(wxT("   "), &exeStr);
+        wxGetEnv("   ", &exeStr);
     }
 
     if ( !exeStr.empty() )
@@ -171,14 +171,14 @@ void wxStandardPaths::DetectPrefix()
     if ( !exeStr.empty() )
     {
         // consider that we're in the last "bin" subdirectory of our prefix
-        size_t pos = exeStr.rfind(wxT("/bin/"));
+        size_t pos = exeStr.rfind("/bin/");
         if ( pos != wxString::npos )
             m_prefix.assign(exeStr, 0, pos);
     }
 
     if ( m_prefix.empty() )
     {
-        m_prefix = wxT("/usr/local");
+        m_prefix = "/usr/local";
     }
 }
 
@@ -199,7 +199,7 @@ wxString wxStandardPaths::GetInstallPrefix() const
 
 wxString wxStandardPaths::GetConfigDir() const
 {
-   return wxT("/etc");
+   return "/etc";
 }
 
 wxString wxStandardPaths::GetDataDir() const
@@ -218,22 +218,22 @@ wxString wxStandardPaths::GetDataDir() const
     if ( !envOverride.empty() )
         return envOverride;
 
-   return AppendAppInfo(GetInstallPrefix() + wxT("/share"));
+   return AppendAppInfo(GetInstallPrefix() + "/share");
 }
 
 wxString wxStandardPaths::GetLocalDataDir() const
 {
-   return AppendAppInfo(wxT("/etc"));
+   return AppendAppInfo("/etc");
 }
 
 wxString wxStandardPaths::GetUserDataDir() const
 {
-   return AppendAppInfo(wxFileName::GetHomeDir() + wxT("/."));
+   return AppendAppInfo(wxFileName::GetHomeDir() + "/.");
 }
 
 wxString wxStandardPaths::GetPluginsDir() const
 {
-    return AppendAppInfo(GetInstallPrefix() + wxT("/lib"));
+    return AppendAppInfo(GetInstallPrefix() + "/lib");
 }
 
 wxString
@@ -243,7 +243,7 @@ wxStandardPaths::GetLocalizedResourcesDir(const wxString& lang,
     if ( category != ResourceCat_Messages )
         return wxStandardPathsBase::GetLocalizedResourcesDir(lang, category);
 
-    return GetInstallPrefix() + wxT("/share/locale/") + lang + wxT("/LC_MESSAGES");
+    return GetInstallPrefix() + "/share/locale/") + lang + wxT("/LC_MESSAGES";
 }
 
 wxString wxStandardPaths::GetUserDir(Dir userDir) const
@@ -260,13 +260,13 @@ wxString wxStandardPaths::GetUserDir(Dir userDir) const
     if (userDir == Dir_Cache)
     {
         wxString cacheDir;
-        if ( !wxGetEnv(wxS("XDG_CACHE_HOME"), &cacheDir) )
-          cacheDir = homeDir + wxS("/.cache");
+        if ( !wxGetEnv("XDG_CACHE_HOME", &cacheDir) )
+          cacheDir = homeDir + "/.cache";
 
         return cacheDir;
     }
 
-    const wxFileName dirsFile(GetXDGConfigHome(), wxS("user-dirs.dirs"));
+    const wxFileName dirsFile(GetXDGConfigHome(), "user-dirs.dirs");
     if ( dirsFile.FileExists() )
     {
         wxString userDirId;
@@ -303,7 +303,7 @@ wxString wxStandardPaths::GetUserDir(Dir userDir) const
                 if (pos != wxNOT_FOUND)
                 {
                     wxString value = line.AfterFirst(wxT('='));
-                    value.Replace(wxT("$HOME"), homeDir);
+                    value.Replace("$HOME", homeDir);
                     value.Trim(true);
                     value.Trim(false);
                     // Remove quotes
@@ -352,7 +352,7 @@ wxStandardPaths::MakeConfigFileName(const wxString& basename,
     }
 
     if ( addExt )
-        fn.SetExt(wxS("conf"));
+        fn.SetExt("conf");
 
     return fn.GetFullName();
 }

@@ -179,7 +179,7 @@ public:
     // documentation for more information.
     bool Create(SAFEARRAYBOUND* bound, size_t dimensions)
     {
-        wxCHECK_MSG( !m_array, false, wxS("Can't be created twice") );
+        wxCHECK_MSG( !m_array, false, "Can't be created twice" );
 
         m_array = SafeArrayCreate(varType, dimensions, bound);
         if ( !m_array )
@@ -197,7 +197,7 @@ public:
     bool CreateFromListVariant(const wxVariant& variant)
     {
         wxCHECK(varType == VT_VARIANT, false);
-        wxCHECK(variant.GetType() == wxS("list"), false);
+        wxCHECK(variant.GetType() == "list", false);
 
         if ( !Create(variant.GetCount()) )
             return false;
@@ -242,18 +242,18 @@ public:
     bool Attach(SAFEARRAY* array)
     {
         wxCHECK_MSG(!m_array && array, false,
-                    wxS("Can only attach a valid array to an uninitialized one") );
+                    "Can only attach a valid array to an uninitialized one" );
 
         VARTYPE vt;
         HRESULT hr = SafeArrayGetVartype(array, &vt);
         if ( FAILED(hr) )
         {
-            wxLogApiError(wxS("SafeArrayGetVarType()"), hr);
+            wxLogApiError("SafeArrayGetVarType()", hr);
             return false;
         }
 
         wxCHECK_MSG(vt == varType, false,
-                    wxS("Attaching array of invalid type"));
+                    "Attaching array of invalid type");
 
         m_array = array;
         return Lock();
@@ -265,8 +265,8 @@ public:
     */
     bool SetElement(long* indices, const externT& element)
     {
-        wxCHECK_MSG( m_array, false, wxS("Uninitialized array") );
-        wxCHECK_MSG( indices, false, wxS("Invalid index") );
+        wxCHECK_MSG( m_array, false, "Uninitialized array" );
+        wxCHECK_MSG( indices, false, "Invalid index" );
 
         internT* data;
 
@@ -282,8 +282,8 @@ public:
     */
     bool GetElement(long* indices, externT& element) const
     {
-        wxCHECK_MSG( m_array, false, wxS("Uninitialized array") );
-        wxCHECK_MSG( indices, false, wxS("Invalid index") );
+        wxCHECK_MSG( m_array, false, "Uninitialized array" );
+        wxCHECK_MSG( indices, false, "Invalid index" );
 
         internT* data;
 
@@ -302,7 +302,7 @@ public:
     */
     bool ConvertToVariant(wxVariant& variant) const
     {
-        wxCHECK_MSG( m_array, false, wxS("Uninitialized array") );
+        wxCHECK_MSG( m_array, false, "Uninitialized array" );
 
         size_t dims = m_array->cDims;
         size_t count = 1;
@@ -335,7 +335,7 @@ public:
     */
     bool ConvertToArrayString(std::vector<wxString>& strings) const
     {
-        wxCHECK_MSG( m_array, false, wxS("Uninitialized array") );
+        wxCHECK_MSG( m_array, false, "Uninitialized array" );
         wxCHECK(varType == VT_BSTR, false);
 
         size_t dims = m_array->cDims;

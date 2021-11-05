@@ -38,15 +38,15 @@ wxObject *wxScrolledWindowXmlHandler::DoCreateResource()
     control->Create(m_parentAsWindow,
                     GetID(),
                     GetPosition(), GetSize(),
-                    GetStyle(wxT("style"), wxHSCROLL | wxVSCROLL),
+                    GetStyle("style", wxHSCROLL | wxVSCROLL),
                     GetName());
 
     SetupWindow(control);
     CreateChildren(control);
 
-    if ( HasParam(wxT("scrollrate")) )
+    if ( HasParam("scrollrate") )
     {
-        wxSize rate = GetSize(wxT("scrollrate"));
+        wxSize rate = GetSize("scrollrate");
         control->SetScrollRate(rate.x, rate.y);
     }
 
@@ -55,7 +55,7 @@ wxObject *wxScrolledWindowXmlHandler::DoCreateResource()
 
 bool wxScrolledWindowXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxScrolledWindow"));
+    return IsOfClass(node, "wxScrolledWindow");
 }
 
 #endif // wxUSE_XRC

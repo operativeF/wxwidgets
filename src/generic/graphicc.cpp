@@ -722,7 +722,7 @@ void wxCairoPenBrushBaseData::InitHatchPattern(cairo_t* ctext)
             break;
 
         default:
-            wxFAIL_MSG(wxS("Invalid hatch pattern style."));
+            wxFAIL_MSG("Invalid hatch pattern style.");
     }
 
     cairo_set_source_rgba(cr, m_red, m_green, m_blue, m_alpha);
@@ -737,7 +737,7 @@ void wxCairoPenBrushBaseData::InitHatchPattern(cairo_t* ctext)
 
 void wxCairoPenBrushBaseData::InitStipple(wxBitmap* bmp)
 {
-    wxCHECK_RET( bmp && bmp->IsOk(), wxS("Invalid stippled bitmap") );
+    wxCHECK_RET( bmp && bmp->IsOk(), "Invalid stippled bitmap" );
 
     m_bmpdata = new wxCairoBitmapData(GetRenderer(), *bmp);
     m_pattern = m_bmpdata->GetCairoPattern();
@@ -786,7 +786,7 @@ void wxCairoPenBrushBaseData::AddGradientStops(const wxGraphicsGradientStops& st
     }
 
     wxASSERT_MSG(cairo_pattern_status(m_pattern) == CAIRO_STATUS_SUCCESS,
-                 wxT("Couldn't create cairo pattern"));
+                 "Couldn't create cairo pattern");
 }
 
 void
@@ -1576,7 +1576,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
     m_surface = NULL;
     m_pattern = NULL;
     m_buffer = NULL;
-    wxCHECK_RET( bmp.IsOk(), wxT("Invalid bitmap in wxCairoContext::DrawBitmap"));
+    wxCHECK_RET( bmp.IsOk(), "Invalid bitmap in wxCairoContext::DrawBitmap");
 
 #ifdef wxHAS_RAW_BITMAP
     // Create a surface object and copy the bitmap pixel data to it.  if the
@@ -1608,7 +1608,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
         {
             // use the bitmap's alpha
             wxAlphaPixelData pixData(bmpSource);
-            wxCHECK_RET( pixData, wxT("Failed to gain raw access to bitmap data."));
+            wxCHECK_RET( pixData, "Failed to gain raw access to bitmap data.");
 
             wxAlphaPixelData::Iterator p(pixData);
             for (int y=0; y < pixData.GetHeight(); y++)
@@ -1657,7 +1657,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
     else  // no alpha
     {
         wxNativePixelData pixData(bmpSource);
-        wxCHECK_RET( pixData, wxT("Failed to gain raw access to bitmap data."));
+        wxCHECK_RET( pixData, "Failed to gain raw access to bitmap data.");
 
         wxNativePixelData::Iterator p(pixData);
         for (int y=0; y < pixData.GetHeight(); y++)
@@ -1688,7 +1688,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
         wxBitmap bmpMask = bmp.GetMask()->GetBitmap();
         data = (std::uint32_t*)m_buffer;
         wxNativePixelData pixData(bmpMask);
-        wxCHECK_RET( pixData, wxT("Failed to gain raw access to mask data."));
+        wxCHECK_RET( pixData, "Failed to gain raw access to mask data.");
 
         wxNativePixelData::Iterator p(pixData);
         for (int y=0; y < pixData.GetHeight(); y++)
@@ -1816,7 +1816,7 @@ wxImage wxCairoBitmapData::ConvertToImage() const
     // Get the surface type and format.
     wxCHECK_MSG( cairo_surface_get_type(m_surface) == CAIRO_SURFACE_TYPE_IMAGE,
                  wxNullImage,
-                 wxS("Can't convert non-image surface to image.") );
+                 "Can't convert non-image surface to image." );
 
     switch ( cairo_image_surface_get_format(m_surface) )
     {
@@ -1830,27 +1830,27 @@ wxImage wxCairoBitmapData::ConvertToImage() const
 
         case CAIRO_FORMAT_A8:
         case CAIRO_FORMAT_A1:
-            wxFAIL_MSG(wxS("Unsupported Cairo image surface type."));
+            wxFAIL_MSG("Unsupported Cairo image surface type.");
             return wxNullImage;
 
         default:
-            wxFAIL_MSG(wxS("Unknown Cairo image surface type."));
+            wxFAIL_MSG("Unknown Cairo image surface type.");
             return wxNullImage;
     }
 
     // Prepare for copying data.
     cairo_surface_flush(m_surface);
     const std::uint32_t* src = (std::uint32_t*)cairo_image_surface_get_data(m_surface);
-    wxCHECK_MSG( src, wxNullImage, wxS("Failed to get Cairo surface data.") );
+    wxCHECK_MSG( src, wxNullImage, "Failed to get Cairo surface data." );
 
     int stride = cairo_image_surface_get_stride(m_surface);
     wxCHECK_MSG( stride > 0, wxNullImage,
-                 wxS("Failed to get Cairo surface stride.") );
+                 "Failed to get Cairo surface stride." );
 
     // As we work with std::uint32_t pointers and not char ones, we need to adjust
     // the stride accordingly. This should be lossless as the stride must be a
     // multiple of pixel size.
-    wxASSERT_MSG( !(stride % sizeof(std::uint32_t)), wxS("Unexpected stride.") );
+    wxASSERT_MSG( !(stride % sizeof(std::uint32_t)), "Unexpected stride." );
     stride /= sizeof(std::uint32_t);
 
     unsigned char* dst = image.GetData();
@@ -2045,7 +2045,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
 #ifdef __WXMSW__
     wxBitmap bmp = dc.GetSelectedBitmap();
     wxASSERT_MSG(bmp.IsOk(),
-                 wxS("Should select a bitmap before creating wxCairoContext"));
+                 "Should select a bitmap before creating wxCairoContext");
 
     HDC hdc = (HDC)dc.GetHDC();
     m_mswStateSavedDC = ::SaveDC(hdc);
@@ -2145,12 +2145,12 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
             }
             else
             {
-                wxFAIL_MSG( wxS("Invalid bitmap") );
+                wxFAIL_MSG( "Invalid bitmap" );
             }
         }
         else
         {
-            wxLogLastError( wxS("wxCairoContext ctor - GetObject") );
+            wxLogLastError( "wxCairoContext ctor - GetObject" );
         }
     }
 
@@ -2191,7 +2191,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
             m_mswSurface = cairo_win32_surface_create(hdc);
         }
         wxASSERT_MSG( cairo_surface_status(m_mswSurface) == CAIRO_STATUS_SUCCESS,
-                      wxS("wxCairoContext ctor - Error creating Cairo surface") );
+                      "wxCairoContext ctor - Error creating Cairo surface" );
     }
 
     Init( cairo_create(m_mswSurface) );
@@ -2416,7 +2416,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, wxWindow *window)
         window = window->GetParent();
     }
 
-    wxASSERT_MSG( window->m_wxwindow, wxT("wxCairoContext needs a widget") );
+    wxASSERT_MSG( window->m_wxwindow, "wxCairoContext needs a widget" );
 
     Init(gdk_cairo_create(window->GTKGetDrawingWindow()));
 
@@ -2784,7 +2784,7 @@ void wxCairoContext::DrawIcon( const wxIcon &icon, double x, double y, double w,
 void wxCairoContext::DoDrawText(const wxString& str, double x, double y)
 {
     wxCHECK_RET( !m_font.IsNull(),
-                 wxT("wxCairoContext::wxDrawText - no valid font set") );
+                 "wxCairoContext::wxDrawText - no valid font set" );
 
     if ( str.empty())
         return;
@@ -2830,7 +2830,7 @@ void wxCairoContext::DoDrawText(const wxString& str, double x, double y)
 void wxCairoContext::GetTextExtent( const wxString &str,
                                     double *descent, double *externalLeading ) const
 {
-    wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetTextExtent - no valid font set") );
+    wxCHECK_RET( !m_font.IsNull(), "wxCairoContext::GetTextExtent - no valid font set" );
 
     if ( width )
         *width = 0;
@@ -2921,7 +2921,7 @@ void wxCairoContext::GetTextExtent( const wxString &str,
 
 std::vector<int> wxCairoContext::GetPartialTextExtents(const wxString& text) const
 {
-    //wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetPartialTextExtents - no valid font set") );
+    //wxCHECK_RET( !m_font.IsNull(), "wxCairoContext::GetPartialTextExtents - no valid font set" );
 #ifdef __WXGTK__
     const wxCharBuffer data = text.utf8_str();
     int w = 0;
@@ -3452,11 +3452,11 @@ wxCairoRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap,
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsBitmap);
 
-    wxCHECK_MSG(!bitmap.IsNull(), wxNullGraphicsBitmap, wxS("Invalid bitmap"));
+    wxCHECK_MSG(!bitmap.IsNull(), wxNullGraphicsBitmap, "Invalid bitmap");
 
     wxCairoBitmapData* dataSrc = static_cast<wxCairoBitmapData*>(bitmap.GetRefData());
     cairo_surface_t* srcSurface = dataSrc->GetCairoSurface();
-    wxCHECK_MSG(srcSurface, wxNullGraphicsBitmap, wxS("Invalid bitmap"));
+    wxCHECK_MSG(srcSurface, wxNullGraphicsBitmap, "Invalid bitmap");
 
     int srcWidth = cairo_image_surface_get_width(srcSurface);
     int srcHeight = cairo_image_surface_get_height(srcSurface);
@@ -3466,7 +3466,7 @@ wxCairoRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap,
 
     wxCHECK_MSG( x >= 0.0 && y >= 0.0 && dstWidth > 0 && dstHeight > 0 &&
                  x + dstWidth <= srcWidth && y + dstHeight <= srcHeight,
-                 wxNullGraphicsBitmap, wxS("Invalid bitmap region"));
+                 wxNullGraphicsBitmap, "Invalid bitmap region");
 
     cairo_surface_t* dstSurface;
 #if CAIRO_VERSION >= CAIRO_VERSION_ENCODE(1, 12, 0)

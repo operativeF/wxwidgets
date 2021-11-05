@@ -81,7 +81,7 @@ public:
                 unsigned int style = 0,
                 const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxT("mediaCtrl"))
+                const wxString& name = "mediaCtrl")
                 : m_imp(nullptr), m_bLoaded(false)
     {   Create(parent, winid, fileName, pos, size, style,
                szBackend, validator, name);                             }
@@ -93,7 +93,7 @@ public:
                 unsigned int style = 0,
                 const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxT("mediaCtrl"))
+                const wxString& name = "mediaCtrl")
                 : m_imp(nullptr), m_bLoaded(false)
     {   Create(parent, winid, location, pos, size, style,
                szBackend, validator, name);                             }
@@ -107,7 +107,7 @@ public:
                 unsigned int style = 0,
                 const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxT("mediaCtrl"));
+                const wxString& name = "mediaCtrl");
 
     [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid,
                 const wxURI& location,
@@ -116,7 +116,7 @@ public:
                 unsigned int style = 0,
                 const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxT("mediaCtrl"));
+                const wxString& name = "mediaCtrl");
 
     bool DoCreate(const wxClassInfo* instance,
                 wxWindow* parent, wxWindowID winid,
@@ -124,7 +124,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxT("mediaCtrl"));
+                const wxString& name = "mediaCtrl");
 
     bool Play();
     bool Pause();

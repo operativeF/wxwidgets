@@ -33,10 +33,10 @@ wxObject *wxDirPickerCtrlXmlHandler::DoCreateResource()
 
    picker->Create(m_parentAsWindow,
                   GetID(),
-                  GetParamValue(wxT("value")),
-                  GetText(wxT("message")),
+                  GetParamValue("value"),
+                  GetText("message"),
                   GetPosition(), GetSize(),
-                  GetStyle(wxT("style"), wxDIRP_DEFAULT_STYLE),
+                  GetStyle("style", wxDIRP_DEFAULT_STYLE),
                   wxDefaultValidator,
                   GetName());
 
@@ -47,7 +47,7 @@ wxObject *wxDirPickerCtrlXmlHandler::DoCreateResource()
 
 bool wxDirPickerCtrlXmlHandler::CanHandle(wxXmlNode *node)
 {
-    return IsOfClass(node, wxT("wxDirPickerCtrl"));
+    return IsOfClass(node, "wxDirPickerCtrl");
 }
 
 #endif // wxUSE_XRC && wxUSE_DIRPICKERCTRL

@@ -78,7 +78,7 @@ void wxSETranslator(unsigned int WXUNUSED(code), EXCEPTION_POINTERS *ep)
     switch ( wxGlobalSEHandler(ep) )
     {
         default:
-            wxFAIL_MSG( wxT("unexpected wxGlobalSEHandler() return value") );
+            wxFAIL_MSG( "unexpected wxGlobalSEHandler() return value" );
             // fall through
 
         case EXCEPTION_EXECUTE_HANDLER:
@@ -112,24 +112,24 @@ bool wxHandleFatalExceptions(bool doit)
         wxChar fullname[MAX_PATH];
         if ( !::GetTempPathW(WXSIZEOF(fullname), fullname) )
         {
-            wxLogLastError(wxT("GetTempPath"));
+            wxLogLastError("GetTempPath");
 
             // when all else fails...
-            wxStrcpy(fullname, wxT("c:\\"));
+            wxStrcpy(fullname, "c:\\");
         }
 
         // use PID and date to make the report file name more unique
         wxString name = wxString::Format
                         (
 #if wxUSE_DATETIME
-                            wxT("%s_%s_%lu.dmp"),
+                            "%s_%s_%lu.dmp",
 #else
-                            wxT("%s_%lu.dmp"),
+                            "%s_%lu.dmp",
 #endif
                             wxTheApp ? (const wxChar*)wxTheApp->GetAppDisplayName().c_str()
-                                     : wxT("wxwindows"),
+                                     : L"wxwindows", // TODO: Temporary, convert to narrow string.
 #if wxUSE_DATETIME
-                            wxDateTime::Now().Format(wxT("%Y%m%dT%H%M%S")).c_str(),
+                            wxDateTime::Now().Format("%Y%m%dT%H%M%S").c_str(),
 #endif
                             ::GetCurrentProcessId()
                         );

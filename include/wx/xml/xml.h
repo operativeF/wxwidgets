@@ -228,9 +228,9 @@ class WXDLLIMPEXP_XML wxXmlDocument : public wxObject
 public:
     wxXmlDocument();
     wxXmlDocument(const wxString& filename,
-                  const wxString& encoding = wxT("UTF-8"));
+                  const wxString& encoding = "UTF-8");
     wxXmlDocument(wxInputStream& stream,
-                  const wxString& encoding = wxT("UTF-8"));
+                  const wxString& encoding = "UTF-8");
     ~wxXmlDocument() { wxDELETE(m_docNode); }
 
     wxXmlDocument(const wxXmlDocument& doc);
@@ -239,9 +239,9 @@ public:
     // Parses .xml file and loads data. Returns TRUE on success, FALSE
     // otherwise.
     virtual bool Load(const wxString& filename,
-                      const wxString& encoding = wxT("UTF-8"), int flags = wxXMLDOC_NONE);
+                      const wxString& encoding = "UTF-8", int flags = wxXMLDOC_NONE);
     virtual bool Load(wxInputStream& stream,
-                      const wxString& encoding = wxT("UTF-8"), int flags = wxXMLDOC_NONE);
+                      const wxString& encoding = "UTF-8", int flags = wxXMLDOC_NONE);
 
     // Saves document as .xml file.
     virtual bool Save(const wxString& filename, int indentstep = 2) const;

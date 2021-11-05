@@ -41,7 +41,7 @@
     #define wxHAVE_WIN32_MB2WC
 #endif
 
-constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
+constexpr char TRACE_STRCONV[] = "strconv";
 
 // WC_UTF16 is defined only if sizeof(wchar_t) == 2, otherwise it's supposed to
 // be 4 bytes
@@ -537,8 +537,8 @@ size_t wxMBConvLibc::WC2MB(char *buf, const wchar_t *psz, size_t n) const
 
 wxConvBrokenFileNames::wxConvBrokenFileNames(const wxString& charset)
 {
-    if ( wxStricmp(charset, wxT("UTF-8")) == 0 ||
-         wxStricmp(charset, wxT("UTF8")) == 0  )
+    if ( wxStricmp(charset, "UTF-8") == 0 ||
+         wxStricmp(charset, "UTF8") == 0  )
         m_conv = new wxMBConvUTF8(wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
     else
         m_conv = new wxCSConv(charset);
@@ -1118,7 +1118,7 @@ wxMBConvStrictUTF8::FromWChar(char *dst, size_t dstLen,
         }
         else
         {
-            wxFAIL_MSG( wxT("trying to encode undefined Unicode character") );
+            wxFAIL_MSG( "trying to encode undefined Unicode character" );
             break;
         }
 
@@ -2098,7 +2098,7 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
     // check for charset that represents wchar_t:
     if ( ms_wcCharsetName.empty() )
     {
-        wxLogTrace(TRACE_STRCONV, wxT("Looking for wide char codeset:"));
+        wxLogTrace(TRACE_STRCONV, "Looking for wide char codeset:");
 
 #if wxUSE_FONTMAP
         const wxChar *const *names = wxFontMapperBase::GetAllEncodingNames(WC_ENC);
@@ -2106,9 +2106,9 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
         static const wxChar *const names_static[] =
         {
 #if SIZEOF_WCHAR_T == 4
-            wxT("UCS-4"),
+            "UCS-4",
 #elif SIZEOF_WCHAR_T == 2
-            wxT("UCS-2"),
+            "UCS-2",
 #endif
             NULL
         };
@@ -2123,19 +2123,19 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
             wxString nameXE(nameCS);
 
 #ifdef WORDS_BIGENDIAN
-                nameXE += wxT("BE");
+                nameXE += "BE";
 #else // little endian
-                nameXE += wxT("LE");
+                nameXE += "LE";
 #endif
 
-            wxLogTrace(TRACE_STRCONV, wxT("  trying charset \"%s\""),
+            wxLogTrace(TRACE_STRCONV, "  trying charset \"%s\"",
                        nameXE.c_str());
 
             m2w = iconv_open(nameXE.ToAscii(), name);
             if ( m2w == ICONV_T_INVALID )
             {
                 // try charset w/o bytesex info (e.g. "UCS4")
-                wxLogTrace(TRACE_STRCONV, wxT("  trying charset \"%s\""),
+                wxLogTrace(TRACE_STRCONV, "  trying charset \"%s\"",
                            nameCS.c_str());
                 m2w = iconv_open(nameCS.ToAscii(), name);
 
@@ -2161,7 +2161,7 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
 
                     if (ICONV_FAILED(res, insz))
                     {
-                        wxLogLastError(wxT("iconv"));
+                        wxLogLastError("iconv");
                         wxLogError(_("Conversion to charset '%s' doesn't work."),
                                    nameCS.c_str());
                     }
@@ -2179,10 +2179,10 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
         }
 
         wxLogTrace(TRACE_STRCONV,
-                   wxT("iconv wchar_t charset is \"%s\"%s"),
+                   "iconv wchar_t charset is \"%s\"%s",
                    ms_wcCharsetName.empty() ? wxString("<none>")
                                             : ms_wcCharsetName,
-                   ms_wcNeedsSwap ? wxT(" (needs swap)")
+                   ms_wcNeedsSwap ? " (needs swap)"
                                   : wxT(""));
     }
     else // we already have ms_wcCharsetName
@@ -2200,7 +2200,7 @@ wxMBConv_iconv::wxMBConv_iconv(const char *name)
         if ( w2m == ICONV_T_INVALID )
         {
             wxLogTrace(TRACE_STRCONV,
-                       wxT("\"%s\" -> \"%s\" works but not the converse!?"),
+                       "\"%s\" -> \"%s\" works but not the converse!?",
                        ms_wcCharsetName.c_str(), name);
         }
     }
@@ -2314,7 +2314,7 @@ wxMBConv_iconv::ToWChar(wchar_t *dst, size_t dstLen,
     if (ICONV_FAILED(cres, srcLen))
     {
         //VS: it is ok if iconv fails, hence trace only
-        wxLogTrace(TRACE_STRCONV, wxT("iconv failed: %s"), wxSysErrorMsgStr(wxSysErrorCode()));
+        wxLogTrace(TRACE_STRCONV, "iconv failed: %s", wxSysErrorMsgStr(wxSysErrorCode()));
         return wxCONV_FAILED;
     }
 
@@ -2382,7 +2382,7 @@ size_t wxMBConv_iconv::FromWChar(char *dst, size_t dstLen,
 
     if (ICONV_FAILED(cres, inbuflen))
     {
-        wxLogTrace(TRACE_STRCONV, wxT("iconv failed: %s"), wxSysErrorMsgStr(wxSysErrorCode()));
+        wxLogTrace(TRACE_STRCONV, "iconv failed: %s", wxSysErrorMsgStr(wxSysErrorCode()));
         return wxCONV_FAILED;
     }
 
@@ -2610,7 +2610,7 @@ public:
             switch ( len )
             {
                 default:
-                    wxLogDebug(wxT("Unexpected NUL length %d"), len);
+                    wxLogDebug("Unexpected NUL length %d", len);
                     self->m_minMBCharWidth = (size_t)-1;
                     break;
 
@@ -2815,7 +2815,7 @@ wxCSConv::wxCSConv(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_MAX || encoding == wxFONTENCODING_DEFAULT )
     {
-        wxFAIL_MSG( wxT("invalid encoding value in wxCSConv ctor") );
+        wxFAIL_MSG( "invalid encoding value in wxCSConv ctor" );
 
         encoding = wxFONTENCODING_SYSTEM;
     }
@@ -2876,7 +2876,7 @@ wxMBConv *wxCSConv::DoCreate() const
 #if wxUSE_FONTMAP
     // FIXME: Doesn't work with std::string
     //wxLogTrace(TRACE_STRCONV,
-    //           wxT("creating conversion for %s"),
+    //           "creating conversion for %s",
     //           (m_name ? m_name
     //                   : (const char*)wxFontMapperBase::GetEncodingName(m_encoding)));
 #endif // wxUSE_FONTMAP
@@ -3051,7 +3051,7 @@ wxMBConv *wxCSConv::DoCreate() const
     }
 
     wxLogTrace(TRACE_STRCONV,
-               wxT("encoding \"%s\" is not supported by this system"),
+               "encoding \"%s\" is not supported by this system",
                (m_name ? m_name
                        : wxFontMapperBase::GetEncodingName(m_encoding)));
 #endif // wxUSE_FONTMAP

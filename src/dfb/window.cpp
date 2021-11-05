@@ -286,7 +286,7 @@ void wxWindowDFB::DoCaptureMouse()
 
 void wxWindowDFB::DoReleaseMouse()
 {
-    wxASSERT_MSG( gs_mouseCapture == this, wxT("attempt to release mouse, but this window hasn't captured it") );
+    wxASSERT_MSG( gs_mouseCapture == this, "attempt to release mouse, but this window hasn't captured it" );
 
 #warning "implement this"
 #if 0

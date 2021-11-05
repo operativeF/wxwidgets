@@ -248,7 +248,7 @@ void wxToolTip::SetReshow(std::chrono::milliseconds reshowDelay)
 
 void wxToolTip::SetMaxWidth(int width)
 {
-    wxASSERT_MSG( width == -1 || width >= 0, wxT("invalid width value") );
+    wxASSERT_MSG( width == -1 || width >= 0, "invalid width value" );
 
     ms_maxWidth = width;
 }
@@ -432,7 +432,7 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
 
     if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
     {
-        wxLogDebug(wxT("Failed to create the tooltip '%s'"), m_text.c_str());
+        wxLogDebug("Failed to create the tooltip '%s'", m_text.c_str());
 
         return;
     }
@@ -449,7 +449,7 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
 
         if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
         {
-            wxLogDebug(wxT("Failed to create the tooltip '%s'"), m_text.c_str());
+            wxLogDebug("Failed to create the tooltip '%s'", m_text.c_str());
         }
     }
 }
@@ -482,7 +482,7 @@ void wxToolTip::SetWindow(wxWindow *win)
             }
 
             // must have it by now!
-            wxASSERT_MSG( hwnd, wxT("no hwnd for subcontrol?") );
+            wxASSERT_MSG( hwnd, "no hwnd for subcontrol?" );
 
             AddOtherWindow((WXHWND)hwnd);
         }
@@ -545,24 +545,24 @@ bool wxToolTip::AdjustMaxWidth()
         hfont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
         if ( !hfont )
         {
-            wxLogLastError(wxT("GetStockObject(DEFAULT_GUI_FONT)"));
+            wxLogLastError("GetStockObject(DEFAULT_GUI_FONT)");
         }
     }
 
     MemoryHDC hdc;
     if ( !hdc )
     {
-        wxLogLastError(wxT("CreateCompatibleDC(NULL)"));
+        wxLogLastError("CreateCompatibleDC(NULL)");
     }
 
     if ( !SelectObject(hdc, hfont) )
     {
-        wxLogLastError(wxT("SelectObject(hfont)"));
+        wxLogLastError("SelectObject(hfont)");
     }
 
     // find the width of the widest line
     int maxWidth = 0;
-    wxStringTokenizer tokenizer(m_text, wxT("\n"));
+    wxStringTokenizer tokenizer(m_text, "\n");
     while ( tokenizer.HasMoreTokens() )
     {
         const wxString token = tokenizer.GetNextToken();
@@ -571,7 +571,7 @@ bool wxToolTip::AdjustMaxWidth()
         if ( !::GetTextExtentPoint32W(hdc, token.t_str(),
                                      token.length(), &sz) )
         {
-            wxLogLastError(wxT("GetTextExtentPoint32"));
+            wxLogLastError("GetTextExtentPoint32");
         }
 
         if ( sz.cx > maxWidth )

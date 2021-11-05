@@ -667,7 +667,7 @@ bool wxRichTextFormattingDialog::ConvertFromString(const std::string& str, int& 
     else if (unit == wxTEXT_ATTR_UNITS_TENTHS_MM)
     {
         float value = 0;
-        wxSscanf(str.c_str(), wxT("%f"), &value);
+        wxSscanf(str.c_str(), "%f", &value);
         // Convert from cm
         // Do this in two steps, since using one step causes strange rounding error for VS 2010 at least.
         float v = value * 100;
@@ -682,7 +682,7 @@ bool wxRichTextFormattingDialog::ConvertFromString(const std::string& str, int& 
     else if (unit == wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT)
     {
         float value = 0;
-        wxSscanf(str.c_str(), wxT("%f"), &value);
+        wxSscanf(str.c_str(), "%f", &value);
         float v = value * 100;
         ret = (int) (v);
     }
@@ -848,7 +848,7 @@ std::string wxRichTextFontListBox::CreateHTML(const std::string& facename) const
         str += " face=\"" + facename + "\"";
 /*
     if (def->GetStyle().GetTextColour().IsOk())
-        str << wxT(" color=\"#") << ColourToHexString(def->GetStyle().GetTextColour()) << wxT("\"");
+        str << " color=\"#") << ColourToHexString(def->GetStyle().GetTextColour()) << wxT("\"";
 */
 
     str += ">";
