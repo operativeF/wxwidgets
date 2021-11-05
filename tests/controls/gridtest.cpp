@@ -882,7 +882,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ScrollWhenSelect")
     REQUIRE( m_grid->GetGridCursorCol() == 0 );
     REQUIRE( m_grid->GetGridCursorRow() == 0 );
     REQUIRE( m_grid->IsVisible(0, 0) );
-    REQUIRE( !m_grid->IsVisible(0, 4) );
+    REQUIRE( !m_grid->IsVisible(0, 5) );
 
     for ( int i = 0; i < 4; ++i )
     {
