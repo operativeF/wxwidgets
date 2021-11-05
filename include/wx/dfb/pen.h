@@ -12,7 +12,6 @@
 
 #include "wx/defs.h"
 #include "wx/object.h"
-#include "wx/string.h"
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
 

@@ -17,7 +17,6 @@
 
 #include "wx/defs.h"
 #include "wx/window.h"
-#include "wx/string.h"
 
 #include <memory>
 

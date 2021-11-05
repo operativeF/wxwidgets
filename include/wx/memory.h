@@ -12,7 +12,6 @@
 #define _WX_MEMORY_H_
 
 #include "wx/defs.h"
-#include "wx/string.h"
 #include "wx/msgout.h"
 
 #if wxUSE_MEMORY_TRACING || wxUSE_DEBUG_CONTEXT

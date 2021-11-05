@@ -14,7 +14,6 @@
 #define WXTAB_VERSION   1.1
 
 #include "wx/hashmap.h"
-#include "wx/string.h"
 #include "wx/dialog.h"
 #include "wx/panel.h"
 #include "wx/list.h"

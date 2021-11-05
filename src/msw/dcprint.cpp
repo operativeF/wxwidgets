@@ -12,7 +12,6 @@
 
 #include "wx/dcprint.h"
 #include "wx/msw/dcprint.h"
-#include "wx/string.h"
 #include "wx/log.h"
 #include "wx/dcmemory.h"
 
