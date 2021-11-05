@@ -15,6 +15,7 @@
 #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
 #include "wx/msw/wrapwin.h"
 
+#include "wx/display.h"
 #include "wx/uiaction.h"
 #include "wx/private/uiaction.h"
 
@@ -85,13 +86,12 @@ bool wxUIActionSimulatorMSWImpl::MouseMove(long x, long y)
 {
     // Because MOUSEEVENTF_ABSOLUTE takes measurements scaled between 0 & 65535
     // we need to scale our input too
-    int displayx, displayy;
-    wxDisplaySize(&displayx, &displayy);
+    auto displaySize = wxDisplay().GetGeometry().GetSize();
 
     // Casts are safe because x and y are supposed to be less than the display
     // size, so there is no danger of overflow.
-    DWORD scaledx = static_cast<DWORD>(std::ceil(x * 65535.0 / (displayx-1)));
-    DWORD scaledy = static_cast<DWORD>(std::ceil(y * 65535.0 / (displayy-1)));
+    DWORD scaledx = static_cast<DWORD>(std::ceil(x * 65535.0 / (displaySize.x - 1)));
+    DWORD scaledy = static_cast<DWORD>(std::ceil(y * 65535.0 / (displaySize.y - 1)));
     ::mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, scaledx, scaledy, 0, 0);
 
     return true;

@@ -29,24 +29,8 @@
 
 TEST_CASE("DisplaySize")
 {
-    // test that different (almost) overloads return the same results
-    int w, h;
-    wxDisplaySize(&w, &h);
-    wxSize sz = wxGetDisplaySize();
-
-    CHECK_EQ( w, sz.x );
-    CHECK_EQ( h, sz.y );
-
-    // test that passing nullptr works as expected, e.g. doesn't crash
-    wxDisplaySize(nullptr, nullptr);
-    wxDisplaySize(&w, nullptr);
-    wxDisplaySize(nullptr, &h);
-
-    CHECK_EQ( w, sz.x );
-    CHECK_EQ( h, sz.y );
-
     // test that display PPI is something reasonable
-    sz = wxGetDisplayPPI();
+    auto sz = wxGetDisplayPPI();
     CHECK( sz.x < 1000 );
     CHECK( sz.y < 1000 );
 }

@@ -24,6 +24,7 @@
 #include "wx/control.h"
 #include "wx/choice.h"
 #include "wx/combobox.h"
+#include "wx/display.h"
 #include "wx/image.h"
 #include "wx/stattext.h"
 
@@ -780,9 +781,10 @@ bool wxToolBar::Realize()
     // remap the buttons on 8bpp displays as otherwise the bitmaps usually look
     // much worse after remapping
     static constexpr wxChar remapOption[] = wxT("msw.remap");
+
     int remapValue = wxSystemOptions::HasOption(remapOption)
                           ? wxSystemOptions::GetOptionInt(remapOption)
-                          : wxDisplayDepth() <= 8 ? Remap_Buttons
+                          : wxDisplay().GetDepth() <= 8 ? Remap_Buttons
                                                   : Remap_None;
 
 

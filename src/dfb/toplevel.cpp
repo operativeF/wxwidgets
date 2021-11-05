@@ -91,9 +91,8 @@ bool wxTopLevelWindowDFB::ShowFullScreen(bool show, unsigned int style)
         if ( style & wxFULLSCREEN_NOBORDER )
             m_windowStyle = wxSIMPLE_BORDER;
 
-        int x, y;
-        wxDisplaySize(&x, &y);
-        SetSize(0, 0, x, y);
+        auto currSize = wxDisplay().GetGeometry().GetSize();
+        SetSize(0, 0, currSize.x, currSize.y);
     }
     else
     {

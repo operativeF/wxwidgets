@@ -25,6 +25,7 @@
 #include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
+#include "wx/display.h"
 #include "wx/toolbar.h"
 #include "wx/image.h"
 #include "wx/statusbr.h"
@@ -209,7 +210,7 @@ wxEND_EVENT_TABLE()
 static void
 gtk_pseudo_window_realized_callback( GtkWidget *m_widget, void *WXUNUSED(win) )
 {
-        wxSize disp = wxGetDisplaySize();
+        auto disp = wxDisplay().GetGeometry().GetSize();
         int amount = 128;
         wxRegion region;
         for (int y=0; y<disp.y; y++)

@@ -328,14 +328,13 @@ bool wxWindowDFB::SetCursor(const wxCursor& cursor)
 
 void wxWindowDFB::WarpPointer(int x, int y)
 {
-    int w, h;
-    wxDisplaySize(&w, &h);
+    auto currSz = wxDisplay().GetGeometry().GetSize();
 
     ClientToScreen(&x, &y);
     if ( x < 0 ) x = 0;
     if ( y < 0 ) y = 0;
-    if ( x >= w ) x = w-1;
-    if ( y >= h ) y = h-1;
+    if ( x >= currSize.x ) x = currSize.x - 1;
+    if ( y >= currSize.y ) y = currSize.y - 1;
 
     wxIDirectFBDisplayLayerPtr layer(wxIDirectFB::Get()->GetDisplayLayer());
     wxCHECK_RET( layer, "no display layer" );

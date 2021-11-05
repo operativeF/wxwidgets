@@ -1376,7 +1376,7 @@ void wxScrollHelper::AdjustScrollbars()
         if (!m_targetWindow->GetBackingPixmap() &&
            (m_xScrollLines != 0) && (m_yScrollLines != 0))
         {
-            int depth = wxDisplayDepth();
+            int depth = wxDisplay().GetDepth();
             m_targetWindow->SetPixmapWidth(totalPixelWidth);
             m_targetWindow->SetPixmapHeight(totalPixelHeight);
             m_targetWindow->SetBackingPixmap((WXPixmap) XCreatePixmap (dpy, RootWindow (dpy, DefaultScreen (dpy)),

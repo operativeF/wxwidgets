@@ -461,16 +461,7 @@ extern void wxDeleteStockLists();
 // Note: all the display-related functions here exist for compatibility only,
 // please use wxDisplay class in the new code
 
-// is the display colour (or monochrome)?
-extern bool wxColourDisplay();
-
-// Returns depth of screen
-extern int wxDisplayDepth();
-#define wxGetDisplayDepth wxDisplayDepth
-
 // get the display size
-extern void wxDisplaySize(int *width, int *height);
-extern wxSize wxGetDisplaySize();
 extern void wxDisplaySizeMM(int *width, int *height);
 extern wxSize wxGetDisplaySizeMM();
 extern wxSize wxGetDisplayPPI();

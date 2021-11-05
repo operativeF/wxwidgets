@@ -15,6 +15,7 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
+#include "wx/display.h"
 #include "wx/module.h"
 #include "wx/window.h"
 
@@ -1313,8 +1314,8 @@ double wxDCImpl::GetMMToPXx() const
     // FIXME: Double equality
     if ( m_mm_to_pix_x == 0.0 )
     {
-        m_mm_to_pix_x = (double)wxGetDisplaySize().x /
-                        (double)wxGetDisplaySizeMM().x;
+        m_mm_to_pix_x = (double)wxDisplay().GetGeometry().GetSize().x /
+                        (double)wxDisplay().GetGeometry().GetSize().x;
     }
 
     return m_mm_to_pix_x;
@@ -1325,7 +1326,7 @@ double wxDCImpl::GetMMToPXy() const
     // FIXME: Double equality
     if ( m_mm_to_pix_y == 0.0 )
     {
-        m_mm_to_pix_y = (double)wxGetDisplaySize().y /
+        m_mm_to_pix_y = (double)wxDisplay().GetGeometry().GetSize().y /
                         (double)wxGetDisplaySizeMM().y;
     }
 

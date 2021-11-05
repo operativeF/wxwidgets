@@ -13,6 +13,7 @@
 
 #include "wx/button.h"
 #include "wx/dcclient.h"
+#include "wx/display.h"
 #include "wx/menu.h"
 #include "wx/dcmemory.h"
 
@@ -923,9 +924,7 @@ bool wxSearchCtrl::ShouldInheritColours() const
 // antialiasing
 static int GetMultiplier()
 {
-    int depth = ::wxDisplayDepth();
-
-    if  ( depth >= 24 )
+    if( wxDisplay().GetDepth() >= 24 )
     {
         return 8;
     }

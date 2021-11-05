@@ -16,6 +16,7 @@
 
 #if wxUSE_WXDIB
 
+#include "wx/display.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/image.h"
@@ -165,7 +166,9 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
 
         int d = depth >= 1 ? depth : bm.bmBitsPixel;
         if ( d <= 0 )
-            d = wxDisplayDepth();
+        {
+            d = wxDisplay().GetDepth();
+        }
 
         if ( !Create(wxSize{bm.bmWidth, bm.bmHeight}, d) || !CopyFromDDB(hbmp) )
             return false;

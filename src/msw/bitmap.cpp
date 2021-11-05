@@ -14,6 +14,7 @@
 
 #include "wx/utils.h"
 #include "wx/app.h"
+#include "wx/display.h"
 #include "wx/palette.h"
 #include "wx/icon.h"
 #include "wx/log.h"
@@ -175,7 +176,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmap, wxGDIObject);
         return !hdc &&
                 (d >= 24 ||
                     (d == -1 &&
-                        wxDIB::GetLineSize(sz.x, wxDisplayDepth()) * sz.y > 16 * 1024 * 1024));
+                        wxDIB::GetLineSize(sz.x, wxDisplay().GetDepth()) * sz.y > 16 * 1024 * 1024));
     }
 
     #define SOMETIMES_USE_DIB
@@ -478,7 +479,7 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
     {
         refData->m_size.x = w;
         refData->m_size.y = h;
-        refData->m_depth = wxDisplayDepth();
+        refData->m_depth = wxDisplay().GetDepth();
         refData->m_hBitmap = (WXHBITMAP)iconInfo.hbmColor;
 
         // Reset this field to prevent it from being destroyed by AutoIconInfo,
@@ -492,7 +493,7 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
         // AND mask: 0 <= y <= h-1
         // XOR mask: h <= y <= 2*h-1
         // First we need to extract and store XOR mask from this bitmap.
-        HBITMAP hbmp = ::CreateBitmap(w, h, 1, wxDisplayDepth(), nullptr);
+        HBITMAP hbmp = ::CreateBitmap(w, h, 1, wxDisplay().GetDepth(), nullptr);
         if ( !hbmp )
         {
             wxLogLastError(wxT("wxBitmap::CopyFromIconOrCursor - CreateBitmap"));
@@ -522,9 +523,10 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
                 wxLogLastError(wxT("wxBitmap::CopyFromIconOrCursor - BitBlt"));
             }
         }
+    
         refData->m_size.x = w;
         refData->m_size.y = h;
-        refData->m_depth = wxDisplayDepth();
+        refData->m_depth = wxDisplay().GetDepth();
         refData->m_hBitmap = hbmp;
     }
 
@@ -769,7 +771,7 @@ bool wxBitmap::DoCreate(wxSize sz, int d, WXHDC hdc)
                 wxLogLastError(wxT("CreateCompatibleBitmap"));
             }
 
-            GetBitmapData()->m_depth = wxDisplayDepth();
+            GetBitmapData()->m_depth = wxDisplay().GetDepth();
         }
 #endif // !ALWAYS_USE_DIB
     }

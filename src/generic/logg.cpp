@@ -14,6 +14,7 @@
 
 #include "wx/app.h"
 #include "wx/button.h"
+#include "wx/display.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/menu.h"
@@ -670,7 +671,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
 
     if ( ms_maxLength == 0 )
     {
-        ms_maxLength = (2 * wxGetDisplaySize().x/3) / wxGetCharWidth();
+        ms_maxLength = (2 * wxDisplay().GetGeometry().GetSize().x / 3) / wxGetCharWidth();
     }
 
     size_t count = messages.size();
@@ -709,7 +710,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     // create the text sizer with a minimal size so that we are sure it won't be too small
     wxString message = EllipsizeString(messages.back());
     wxSizer *szText = CreateTextSizer(message);
-    szText->SetMinSize(wxSize{std::min(300, wxGetDisplaySize().x / 3), -1});
+    szText->SetMinSize(wxSize{std::min(300, wxDisplay().GetGeometry().GetSize().x / 3), -1});
 
     sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxLEFT | wxRIGHT));
 
@@ -871,7 +872,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
     // we use GetMinHeight() to get the height of the dialog part without the
     // details and we consider that the "Save" button below and the separator
     // line (and the margins around it) take about as much, hence double it
-    int heightMax = wxGetDisplaySize().y - GetPosition().y - 2*GetMinHeight();
+    int heightMax = wxDisplay().GetGeometry().GetSize().y - GetPosition().y - 2*GetMinHeight();
 
     // we should leave a margin
     heightMax *= 9;

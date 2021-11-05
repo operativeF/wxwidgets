@@ -16,6 +16,7 @@
 #include "wx/app.h"
 #include "wx/bitmap.h"
 #include "wx/dcmemory.h"
+#include "wx/display.h"
 #include "wx/log.h"
 #include "wx/icon.h"
 #include "wx/module.h"
@@ -1622,8 +1623,8 @@ void wxMSWDCImpl::SetPalette(const wxPalette& palette)
 }
 
 void wxMSWDCImpl::InitializePalette()
-{
-    if ( wxDisplayDepth() <= 8 )
+{    
+    if ( wxDisplay().GetDepth() <= 8 )
     {
         // look for any window or parent that has a custom palette. If any has
         // one then we need to use it in drawing operations

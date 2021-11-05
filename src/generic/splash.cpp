@@ -17,7 +17,7 @@
 #include "wx/splash.h"
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
-
+#include "wx/display.h"
 
 // ----------------------------------------------------------------------------
 // wxSplashScreen
@@ -129,7 +129,7 @@ wxSplashScreenWindow::wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* par
 {
 
 #if !defined(__WXGTK__) && wxUSE_PALETTE
-    const bool hiColour = (wxDisplayDepth() >= 16) ;
+    const bool hiColour = (wxDisplay().GetDepth() >= 16) ;
 
     if (bitmap.GetPalette() && !hiColour)
     {
@@ -148,7 +148,7 @@ static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, int WXUNUSED(x)
     wxMemoryDC dcMem;
 
 #ifdef USE_PALETTE_IN_SPLASH
-    bool hiColour = (wxDisplayDepth() >= 16) ;
+    bool hiColour = (wxDisplay().GetDepth() >= 16) ;
 
     if (bitmap.GetPalette() && !hiColour)
     {

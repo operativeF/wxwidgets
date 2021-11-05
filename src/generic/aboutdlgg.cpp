@@ -7,15 +7,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_ABOUTDLG
 
 #include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/button.h"
+#include "wx/display.h"
 
 #include "wx/aboutdlg.h"
 #include "wx/generic/aboutdlgg.h"
@@ -241,7 +239,7 @@ void wxGenericAboutDialog::AddCollapsiblePane(const std::string& title,
                                          wxALIGN_CENTRE);
 
     // don't make the text unreasonably wide
-    static const int maxWidth = wxGetDisplaySize().x/3;
+    static const int maxWidth = wxDisplay().GetGeometry().GetSize().x / 3;
     txt->Wrap(maxWidth);
 
 

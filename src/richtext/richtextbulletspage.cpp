@@ -10,6 +10,7 @@
 
 #if wxUSE_RICHTEXT
 
+#include "wx/display.h"
 #include "wx/spinctrl.h"
 #include "wx/utils.h"
 #include "wx/richtext/richtextbulletspage.h"
@@ -236,7 +237,7 @@ void wxRichTextBulletsPage::CreateControls()
 
 ////@end wxRichTextBulletsPage content construction
 
-    if (wxGetDisplaySize().y < 600)
+    if (wxDisplay().GetGeometry().GetSize().y < 600)
         m_previewCtrl->SetMinSize(wxSize(350, 50));
 
     m_styleListBox->Append(_("(None)"));

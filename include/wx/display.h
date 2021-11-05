@@ -32,12 +32,12 @@
 
 #include <memory>
 
-class  WXDLLIMPEXP_FWD_CORE wxWindow;
-class  WXDLLIMPEXP_FWD_BASE wxString;
+class wxWindow;
+class wxString;
 
 
-class WXDLLIMPEXP_FWD_CORE wxDisplayFactory;
-class WXDLLIMPEXP_FWD_CORE wxDisplayImpl;
+class wxDisplayFactory;
+class wxDisplayImpl;
 
 // ----------------------------------------------------------------------------
 // wxDisplay: represents a display/monitor attached to the system

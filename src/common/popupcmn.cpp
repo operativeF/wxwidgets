@@ -143,7 +143,7 @@ void wxPopupWindowBase::Position(const wxPoint& ptOrigin,
     {
         // just use the primary one then
         posScreen = wxPoint(0, 0);
-        sizeScreen = wxGetDisplaySize();
+        sizeScreen = wxDisplay().GetGeometry().GetSize();
     }
 
 

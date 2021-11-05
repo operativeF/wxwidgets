@@ -123,7 +123,7 @@ wxTipWindow::wxTipWindow(wxWindow *parent,
     {
         // just use the primary one then
         posScreen = wxPoint(0, 0);
-        sizeScreen = wxGetDisplaySize();
+        sizeScreen = wxDisplay().GetGeometry().GetSize();
     }
     wxPoint center(posScreen.x + sizeScreen.x / 2,
                    posScreen.y + sizeScreen.y / 2);

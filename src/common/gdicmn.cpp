@@ -651,32 +651,6 @@ wxFont *wxFontList::FindOrCreateFont(int pointSize,
     return font;
 }
 
-int wxDisplayDepth()
-{
-    return wxDisplay().GetDepth();
-}
-
-bool wxColourDisplay()
-{
-    // If GetDepth() returns 0, meaning unknown, we assume it's a colour
-    // display, hence the use of "!=" rather than ">" here.
-    return wxDisplay().GetDepth() != 1;
-}
-
-void wxDisplaySize(int *width, int *height)
-{
-    const wxSize size = wxGetDisplaySize();
-    if ( width )
-        *width = size.x;
-    if ( height )
-        *height = size.y;
-}
-
-wxSize wxGetDisplaySize()
-{
-    return wxDisplay().GetGeometry().GetSize();
-}
-
 void wxClientDisplayRect(int *x, int *y, int *width, int *height)
 {
     const wxRect rect = wxGetClientDisplayRect();
@@ -710,7 +684,7 @@ wxSize wxGetDisplaySizeMM()
     if ( !ppi.x || !ppi.y )
         return {0, 0};
 
-    const wxSize pixels = wxGetDisplaySize();
+    const auto pixels = wxDisplay().GetGeometry().GetSize();
     return {std::lround(pixels.x * inches2mm / ppi.x),
             std::lround(pixels.y * inches2mm / ppi.y)};
 }

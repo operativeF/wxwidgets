@@ -12,16 +12,9 @@
 
 #include "bench.h"
 
-BENCHMARK_FUNC(DisplaySize)
-{
-    int w, h;
-    wxDisplaySize(&w, &h);
-    return w > 0;
-}
-
 BENCHMARK_FUNC(GetDisplaySize)
 {
-    return wxGetDisplaySize().x > 0;
+    return wxDisplay().GetGeometry().GetSize().x > 0;
 }
 
 BENCHMARK_FUNC(DisplayGetGeometry)

@@ -13,6 +13,7 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
+#include "wx/display.h"
 #include "wx/frame.h"
 #include "wx/image.h"
 #include "wx/intl.h"
@@ -200,9 +201,8 @@ bool wxGenericDragImage::BeginDrag(const wxPoint& hotspot,
     }
     else
     {
-        int w, h;
-        wxDisplaySize(& w, & h);
-        clientSize.x = w; clientSize.y = h;
+        clientSize = wxDisplay().GetGeometry().GetSize();
+
         if (rect)
         {
             clientSize.x = m_boundingRect.width; clientSize.y = m_boundingRect.height;
@@ -210,7 +210,7 @@ bool wxGenericDragImage::BeginDrag(const wxPoint& hotspot,
         else
         {
             m_boundingRect.x = 0; m_boundingRect.y = 0;
-            m_boundingRect.width = w; m_boundingRect.height = h;
+            m_boundingRect.width = clientSize.x; m_boundingRect.height = clientSize.y;
         }
     }
 

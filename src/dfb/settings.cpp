@@ -61,16 +61,12 @@ wxFont wxSystemSettingsNative::GetFont(wxSystemFont index)
 int wxSystemSettingsNative::GetMetric(wxSystemMetric index,
                                       const wxWindow* WXUNUSED(win))
 {
-    int val;
-
     switch (index)
     {
         case wxSYS_SCREEN_X:
-            wxDisplaySize(&val, NULL);
-            return val;
+            return wxDisplay().GetGeometry().GetWidth();
         case wxSYS_SCREEN_Y:
-            wxDisplaySize(NULL, &val);
-            return val;
+            return wxDisplay().GetGeometry().GetHeight();
 
         default:
             return -1;
