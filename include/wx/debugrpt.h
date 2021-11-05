@@ -19,7 +19,7 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_XML wxXmlNode;
+class wxXmlNode;
 
 // ----------------------------------------------------------------------------
 // wxDebugReport: generate a debug report, processing is done in derived class

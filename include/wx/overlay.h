@@ -33,7 +33,7 @@
 // internal code
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
+class wxDC;
 
 class wxOverlay
 {
@@ -48,7 +48,7 @@ public:
     wxOverlayImpl* GetImpl() { return m_impl.get(); }
 
 private:
-    friend class WXDLLIMPEXP_FWD_CORE wxDCOverlay;
+    friend class wxDCOverlay;
 
     // returns true if it has been setup
     bool IsOk();

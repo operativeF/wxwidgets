@@ -21,7 +21,7 @@
 
 #include <chrono>
 
-class WXDLLIMPEXP_FWD_CORE wxImage;
+class wxImage;
 
 /*
 

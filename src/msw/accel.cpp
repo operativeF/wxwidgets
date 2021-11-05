@@ -32,7 +32,7 @@ using msw::utils::unique_accel;
 
 class wxAcceleratorRefData: public wxObjectRefData
 {
-    friend class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
+    friend class wxAcceleratorTable;
 public:
     inline HACCEL GetHACCEL() const { return m_hAccel.get(); }
 

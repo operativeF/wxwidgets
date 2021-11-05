@@ -86,7 +86,7 @@ public:
 // wxDir: portable equivalent of {open/read/close}dir functions
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxDirData;
+class wxDirData;
 
 class WXDLLIMPEXP_BASE wxDir
 {

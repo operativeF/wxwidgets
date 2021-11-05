@@ -28,10 +28,10 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
-class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
-class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;
-class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxStyle;
+class wxHtmlCell;
+class wxHtmlWinParser;
+class wxHtmlListBoxCache;
+class wxHtmlListBoxStyle;
 
 
 constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";

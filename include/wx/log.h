@@ -31,10 +31,10 @@ using wxLogLevel = unsigned long;
 // forward declarations
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxObject;
+class wxObject;
 
 #if wxUSE_GUI
-    class WXDLLIMPEXP_FWD_CORE wxFrame;
+    class wxFrame;
 #endif // wxUSE_GUI
 
 #if wxUSE_LOG

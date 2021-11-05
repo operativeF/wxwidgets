@@ -45,8 +45,8 @@ enum class wxLayoutDirection
 // forward decls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxLocale;
-class WXDLLIMPEXP_FWD_BASE wxLanguageInfoArray;
+class wxLocale;
+class wxLanguageInfoArray;
 
 // ============================================================================
 // locale support

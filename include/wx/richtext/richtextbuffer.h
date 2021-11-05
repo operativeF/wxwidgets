@@ -125,30 +125,30 @@ enum wxRichTextFileType
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCtrl;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextObject;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextImage;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextPlainText;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCacheObject;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextObjectList;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextLine;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextParagraph;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextFileHandler;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextDrawingHandler;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextField;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextFieldType;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextStyleSheet;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextListStyleDefinition;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextEvent;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextRenderer;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextBuffer;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextXMLHandler;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextParagraphLayoutBox;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextImageBlock;
-class WXDLLIMPEXP_FWD_XML      wxXmlNode;
+class wxRichTextCtrl;
+class wxRichTextObject;
+class wxRichTextImage;
+class wxRichTextPlainText;
+class wxRichTextCacheObject;
+class wxRichTextObjectList;
+class wxRichTextLine;
+class wxRichTextParagraph;
+class wxRichTextFileHandler;
+class wxRichTextDrawingHandler;
+class wxRichTextField;
+class wxRichTextFieldType;
+class wxRichTextStyleSheet;
+class wxRichTextListStyleDefinition;
+class wxRichTextEvent;
+class wxRichTextRenderer;
+class wxRichTextBuffer;
+class wxRichTextXMLHandler;
+class wxRichTextParagraphLayoutBox;
+class wxRichTextImageBlock;
+class      wxXmlNode;
 class                          wxRichTextFloatCollector;
-class WXDLLIMPEXP_FWD_BASE wxDataInputStream;
-class WXDLLIMPEXP_FWD_BASE wxDataOutputStream;
+class wxDataInputStream;
+class wxDataOutputStream;
 
 /**
     Flags determining the available space, passed to Layout.
@@ -5050,8 +5050,8 @@ protected:
     ImageState              m_imageState{ImageState::Unloaded};
 };
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCommand;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextAction;
+class wxRichTextCommand;
+class wxRichTextAction;
 
 /**
     @class wxRichTextBuffer
@@ -6307,7 +6307,7 @@ protected:
     std::vector<int>  m_address;
 };
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextAction;
+class wxRichTextAction;
 
 /**
     @class wxRichTextCommand

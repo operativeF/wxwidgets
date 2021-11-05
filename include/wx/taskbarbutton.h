@@ -21,10 +21,10 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
-class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListCategory;
-class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpList;
-class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListImpl;
+class wxTaskBarButton;
+class wxTaskBarJumpListCategory;
+class wxTaskBarJumpList;
+class wxTaskBarJumpListImpl;
 
 // ----------------------------------------------------------------------------
 // wxTaskBarButton: define wxTaskBarButton interface.

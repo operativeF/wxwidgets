@@ -31,15 +31,15 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxFileHistory;
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxDocument;
-class WXDLLIMPEXP_FWD_CORE wxView;
-class WXDLLIMPEXP_FWD_CORE wxDocTemplate;
-class WXDLLIMPEXP_FWD_CORE wxDocManager;
-class WXDLLIMPEXP_FWD_CORE wxPrintInfo;
-class WXDLLIMPEXP_FWD_BASE wxConfigBase;
+class wxFileHistory;
+class wxFrame;
+class wxWindow;
+class wxDocument;
+class wxView;
+class wxDocTemplate;
+class wxDocManager;
+class wxPrintInfo;
+class wxConfigBase;
 
 class wxDocChildFrameAnyBase;
 
@@ -290,7 +290,7 @@ private:
 class wxDocTemplate: public wxObject
 {
 
-friend class WXDLLIMPEXP_FWD_CORE wxDocManager;
+friend class wxDocManager;
 
 public:
     // Associate document and view types. They're for identifying what view is

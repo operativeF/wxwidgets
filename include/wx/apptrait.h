@@ -17,19 +17,19 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_BASE wxConfigBase;
-class WXDLLIMPEXP_FWD_BASE wxEventLoopBase;
+class wxConfigBase;
+class wxEventLoopBase;
 #if wxUSE_FONTMAP
-    class WXDLLIMPEXP_FWD_CORE wxFontMapper;
+    class wxFontMapper;
 #endif // wxUSE_FONTMAP
-class WXDLLIMPEXP_FWD_BASE wxLog;
-class WXDLLIMPEXP_FWD_BASE wxMessageOutput;
-class WXDLLIMPEXP_FWD_BASE wxObject;
-class WXDLLIMPEXP_FWD_CORE wxRendererNative;
-class WXDLLIMPEXP_FWD_BASE wxStandardPaths;
-class WXDLLIMPEXP_FWD_BASE wxString;
-class WXDLLIMPEXP_FWD_BASE wxTimer;
-class WXDLLIMPEXP_FWD_BASE wxTimerImpl;
+class wxLog;
+class wxMessageOutput;
+class wxObject;
+class wxRendererNative;
+class wxStandardPaths;
+class wxString;
+class wxTimer;
+class wxTimerImpl;
 
 class wxSocketManager;
 

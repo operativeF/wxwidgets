@@ -19,7 +19,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxTaskBarIconEvent;
+class wxTaskBarIconEvent;
 
 // ----------------------------------------------------------------------------
 

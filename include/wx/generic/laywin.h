@@ -20,8 +20,8 @@
 
 #include "wx/event.h"
 
-class WXDLLIMPEXP_FWD_CORE wxQueryLayoutInfoEvent;
-class WXDLLIMPEXP_FWD_CORE wxCalculateLayoutEvent;
+class wxQueryLayoutInfoEvent;
+class wxCalculateLayoutEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_QUERY_LAYOUT_INFO, wxQueryLayoutInfoEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALCULATE_LAYOUT,  wxCalculateLayoutEvent );
@@ -217,8 +217,8 @@ public:
 
 #endif // wxUSE_SASH
 
-class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
-class WXDLLIMPEXP_FWD_CORE wxFrame;
+class wxMDIParentFrame;
+class wxFrame;
 
 // This class implements the layout algorithm
 class wxLayoutAlgorithm

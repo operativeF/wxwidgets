@@ -20,8 +20,8 @@
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxBrush;
+class wxBitmap;
+class wxBrush;
 
 //-----------------------------------------------------------------------------
 // wxBrush

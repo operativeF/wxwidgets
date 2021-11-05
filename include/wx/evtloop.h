@@ -302,7 +302,7 @@ private:
 
 #include "wx/stopwatch.h"   // for wxMilliClock_t
 
-class WXDLLIMPEXP_FWD_CORE wxEventLoopImpl;
+class wxEventLoopImpl;
 
 class wxGUIEventLoop : public wxEventLoopBase
 {

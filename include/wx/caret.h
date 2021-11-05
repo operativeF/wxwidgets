@@ -19,8 +19,8 @@
 // forward declarations
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class wxWindow;
+class wxWindowBase;
 
 // ----------------------------------------------------------------------------
 // headers we have to include

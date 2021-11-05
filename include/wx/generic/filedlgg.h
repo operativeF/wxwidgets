@@ -22,10 +22,10 @@
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
-class WXDLLIMPEXP_FWD_CORE wxGenericFileCtrl;
-class WXDLLIMPEXP_FWD_CORE wxGenericFileDialog;
-class WXDLLIMPEXP_FWD_CORE wxFileCtrlEvent;
+class wxBitmapButton;
+class wxGenericFileCtrl;
+class wxGenericFileDialog;
+class wxFileCtrlEvent;
 
 //-------------------------------------------------------------------------
 // wxGenericFileDialog

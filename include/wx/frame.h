@@ -25,14 +25,14 @@
 // the default names for various classes
 constexpr char wxStatusLineNameStr[] = "status_line";
 
-class WXDLLIMPEXP_FWD_CORE wxFrame;
+class wxFrame;
 #if wxUSE_MENUBAR
 #include <wx/menu.h>
-class WXDLLIMPEXP_FWD_CORE wxMenuBar;
+class wxMenuBar;
 #endif
-class WXDLLIMPEXP_FWD_CORE wxMenuItem;
-class WXDLLIMPEXP_FWD_CORE wxStatusBar;
-class WXDLLIMPEXP_FWD_CORE wxToolBar;
+class wxMenuItem;
+class wxStatusBar;
+class wxToolBar;
 
 // ----------------------------------------------------------------------------
 // constants

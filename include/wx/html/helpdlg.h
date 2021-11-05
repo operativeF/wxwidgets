@@ -23,10 +23,10 @@
 #include "wx/html/helpwnd.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
+class wxHtmlHelpController;
+class wxHtmlHelpWindow;
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpDialog : public wxDialog
 {

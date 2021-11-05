@@ -11,9 +11,9 @@
 #ifndef _WX_GENERIC_FDREPDLG_H_
 #define _WX_GENERIC_FDREPDLG_H_
 
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxRadioBox;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxCheckBox;
+class wxRadioBox;
+class wxTextCtrl;
 
 #include <string>
 #include <tuple>

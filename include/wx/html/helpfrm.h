@@ -21,10 +21,10 @@
 #include "wx/html/helpwnd.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
-class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
+class wxButton;
+class wxTextCtrl;
+class wxTreeEvent;
+class wxTreeCtrl;
 
 
 // style flags for the Help Frame
@@ -47,9 +47,9 @@ class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 struct wxHtmlHelpMergedIndexItem;
 class wxHtmlHelpMergedIndex;
 
-class WXDLLIMPEXP_FWD_CORE wxHelpControllerBase;
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
+class wxHelpControllerBase;
+class wxHtmlHelpController;
+class wxHtmlHelpWindow;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpFrame : public wxFrame
 {

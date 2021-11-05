@@ -15,15 +15,15 @@
 #include "wx/textctrl.h"
 
 #if wxUSE_DRAG_AND_DROP
-class WXDLLIMPEXP_FWD_CORE wxDropTarget;
+class wxDropTarget;
 #endif
 
 //-----------------------------------------------------------------------------
 // internal classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxListHeaderWindow;
-class WXDLLIMPEXP_FWD_CORE wxListMainWindow;
+class wxListHeaderWindow;
+class wxListMainWindow;
 
 //-----------------------------------------------------------------------------
 // wxListCtrl
@@ -226,7 +226,7 @@ protected:
     wxSize DoGetBestClientSize() const override;
 
     // it calls our OnGetXXX() functions
-    friend class WXDLLIMPEXP_FWD_CORE wxListMainWindow;
+    friend class wxListMainWindow;
 
     wxBorder GetDefaultBorder() const override;
 

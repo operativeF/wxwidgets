@@ -14,8 +14,8 @@
 
 #if wxUSE_XRC && wxUSE_WIZARDDLG
 
-class WXDLLIMPEXP_FWD_CORE wxWizard;
-class WXDLLIMPEXP_FWD_CORE wxWizardPageSimple;
+class wxWizard;
+class wxWizardPageSimple;
 
 class WXDLLIMPEXP_XRC wxWizardXmlHandler : public wxXmlResourceHandler
 {

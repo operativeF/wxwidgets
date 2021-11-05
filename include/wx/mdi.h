@@ -24,10 +24,10 @@
 #include <string>
 
 // forward declarations
-class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
-class WXDLLIMPEXP_FWD_CORE wxMDIChildFrame;
-class WXDLLIMPEXP_FWD_CORE wxMDIClientWindowBase;
-class WXDLLIMPEXP_FWD_CORE wxMDIClientWindow;
+class wxMDIParentFrame;
+class wxMDIChildFrame;
+class wxMDIClientWindowBase;
+class wxMDIClientWindow;
 
 // ----------------------------------------------------------------------------
 // wxMDIParentFrameBase: base class for parent frame for MDI children

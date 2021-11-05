@@ -128,8 +128,8 @@ enum {
 
 // Forward decls
 //
-class WXDLLIMPEXP_FWD_BASE wxZipEntry;
-class WXDLLIMPEXP_FWD_BASE wxZipInputStream;
+class wxZipEntry;
+class wxZipInputStream;
 
 
 /////////////////////////////////////////////////////////////////////////////

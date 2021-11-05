@@ -561,7 +561,7 @@ public: \
 
 #if wxUSE_VARIANT
 
-class WXDLLIMPEXP_FWD_BASE wxAnyToVariantRegistration;
+class wxAnyToVariantRegistration;
 
 // Because of header inter-dependencies, cannot include this earlier
 #include "wx/variant.h"

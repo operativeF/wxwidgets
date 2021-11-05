@@ -12,7 +12,7 @@
 
 #include "wx/dfb/dfbptr.h"
 
-class WXDLLIMPEXP_FWD_CORE wxPixelDataBase;
+class wxPixelDataBase;
 
 wxDFB_DECLARE_INTERFACE(IDirectFBSurface);
 

@@ -16,9 +16,9 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxIcon;
-class WXDLLIMPEXP_FWD_CORE wxColour;
+class wxDC;
+class wxIcon;
+class wxColour;
 
 
 class wxGenericImageList: public wxObject

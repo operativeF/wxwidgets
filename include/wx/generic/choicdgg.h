@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxListBoxBase;
+class wxListBoxBase;
 
 // ----------------------------------------------------------------------------
 // some (ugly...) constants

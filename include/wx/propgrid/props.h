@@ -17,7 +17,7 @@
 
 // -----------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_PROPGRID wxPGArrayEditorDialog;
+class wxPGArrayEditorDialog;
 
 #include "wx/propgrid/property.h"
 

@@ -20,7 +20,7 @@
 #include <string>
 
 // Events
-class WXDLLIMPEXP_FWD_CORE wxSpinDoubleEvent;
+class wxSpinDoubleEvent;
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRL, wxSpinEvent);
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);

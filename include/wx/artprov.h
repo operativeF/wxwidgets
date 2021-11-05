@@ -17,8 +17,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxArtProvidersList;
-class WXDLLIMPEXP_FWD_CORE wxArtProviderCache;
+class wxArtProvidersList;
+class wxArtProviderCache;
 class wxArtProviderModule;
 
 // ----------------------------------------------------------------------------

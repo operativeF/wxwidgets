@@ -18,7 +18,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
+class wxButtonToolBarTool;
 
 
 // ----------------------------------------------------------------------------

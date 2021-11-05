@@ -15,9 +15,9 @@
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxColour;
-class WXDLLIMPEXP_FWD_CORE wxRegion;
+class wxBitmap;
+class wxColour;
+class wxRegion;
 
 // ----------------------------------------------------------------------------
 // constants

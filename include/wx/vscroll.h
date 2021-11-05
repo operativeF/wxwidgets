@@ -17,7 +17,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxVarScrollHelperEvtHandler;
+class wxVarScrollHelperEvtHandler;
 
 
 // Using the same techniques as the wxScrolledWindow class      |

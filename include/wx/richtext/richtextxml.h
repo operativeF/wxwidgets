@@ -168,8 +168,8 @@ public:
     that one, even though the code is a little less elegant.
  */
 
-class WXDLLIMPEXP_FWD_XML wxXmlNode;
-class WXDLLIMPEXP_FWD_XML wxXmlDocument;
+class wxXmlNode;
+class wxXmlDocument;
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHandler: public wxRichTextFileHandler
 {

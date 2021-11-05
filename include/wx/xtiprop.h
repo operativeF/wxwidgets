@@ -451,7 +451,7 @@ class WXDLLIMPEXP_BASE wxPropertyInfoMap : public wxPropertyInfoMapBase {
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxAny, wxStringToAnyHashMapBase,
                                      class WXDLLIMPEXP_BASE );
 
-class WXDLLIMPEXP_FWD_BASE wxStringToAnyHashMap : public wxStringToAnyHashMapBase {
+class wxStringToAnyHashMap : public wxStringToAnyHashMapBase {
 };
 
 #define wxBEGIN_PROPERTIES_TABLE(theClass)                      \

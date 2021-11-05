@@ -18,10 +18,10 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
-class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
-class WXDLLIMPEXP_FWD_CORE wxSpinEvent;
+class wxComboBox;
+class wxStaticText;
+class wxSpinCtrl;
+class wxSpinEvent;
 
 // ----------------------------------------------------------------------------
 // wxGenericCalendarCtrl

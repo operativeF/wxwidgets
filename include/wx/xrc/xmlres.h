@@ -29,21 +29,21 @@
 
 #include "wx/xrc/xmlreshandler.h"
 
-class WXDLLIMPEXP_FWD_BASE wxFileName;
+class wxFileName;
 
-class WXDLLIMPEXP_FWD_CORE wxIconBundle;
-class WXDLLIMPEXP_FWD_CORE wxImageList;
-class WXDLLIMPEXP_FWD_CORE wxMenu;
-class WXDLLIMPEXP_FWD_CORE wxMenuBar;
-class WXDLLIMPEXP_FWD_CORE wxDialog;
-struct WXDLLIMPEXP_FWD_CORE wxPanel;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxToolBar;
+class wxIconBundle;
+class wxImageList;
+class wxMenu;
+class wxMenuBar;
+class wxDialog;
+struct wxPanel;
+class wxWindow;
+class wxFrame;
+class wxToolBar;
 
-class WXDLLIMPEXP_FWD_XML wxXmlDocument;
-class WXDLLIMPEXP_FWD_XML wxXmlNode;
-class WXDLLIMPEXP_FWD_XRC wxXmlSubclassFactory;
+class wxXmlDocument;
+class wxXmlNode;
+class wxXmlSubclassFactory;
 class wxXmlSubclassFactories;
 class wxXmlResourceModule;
 class wxXmlResourceDataRecords;

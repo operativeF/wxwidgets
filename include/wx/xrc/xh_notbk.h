@@ -13,7 +13,7 @@
 
 #if wxUSE_XRC && wxUSE_NOTEBOOK
 
-class WXDLLIMPEXP_FWD_CORE wxNotebook;
+class wxNotebook;
 
 class WXDLLIMPEXP_XRC wxNotebookXmlHandler : public wxXmlResourceHandler
 {

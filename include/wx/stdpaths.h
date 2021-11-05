@@ -16,7 +16,7 @@
 #include "wx/string.h"
 #include "wx/filefn.h"
 
-class WXDLLIMPEXP_FWD_BASE wxStandardPaths;
+class wxStandardPaths;
 
 // ----------------------------------------------------------------------------
 // wxStandardPaths returns the standard locations in the file system

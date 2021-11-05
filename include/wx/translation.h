@@ -68,8 +68,8 @@
 // forward decls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxTranslationsLoader;
-class WXDLLIMPEXP_FWD_BASE wxLocale;
+class wxTranslationsLoader;
+class wxLocale;
 
 class wxPluralFormsCalculator;
 wxDECLARE_SCOPED_PTR(wxPluralFormsCalculator, wxPluralFormsCalculatorPtr)

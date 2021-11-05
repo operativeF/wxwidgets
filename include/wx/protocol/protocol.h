@@ -23,7 +23,7 @@
     #include "wx/socket.h"
 #endif
 
-class WXDLLIMPEXP_FWD_NET wxProtocolLog;
+class wxProtocolLog;
 
 // ----------------------------------------------------------------------------
 // constants

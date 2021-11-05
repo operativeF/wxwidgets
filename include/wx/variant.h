@@ -93,7 +93,7 @@ protected:
  * built in.
  */
 
-class WXDLLIMPEXP_FWD_BASE wxVariant;
+class wxVariant;
 
 WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class WXDLLIMPEXP_BASE);
 

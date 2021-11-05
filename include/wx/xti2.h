@@ -23,7 +23,7 @@
 
 class WXDLLIMPEXP_BASE wxDynamicObject : public wxObject
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxDynamicClassInfo ;
+    friend class wxDynamicClassInfo ;
 public:
     // instantiates this object with an instance of its superclass
     wxDynamicObject(wxObject* superClassInstance, const wxDynamicClassInfo *info) ;

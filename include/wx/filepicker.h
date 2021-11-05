@@ -21,8 +21,8 @@
 #include <memory>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxDialog;
-class WXDLLIMPEXP_FWD_CORE wxFileDirPickerEvent;
+class wxDialog;
+class wxFileDirPickerEvent;
 
 constexpr char wxFilePickerCtrlNameStr[] = "filepicker";
 constexpr char wxFilePickerWidgetNameStr[] = "filepickerwidget";

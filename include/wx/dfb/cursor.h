@@ -10,8 +10,8 @@
 #ifndef _WX_DFB_CURSOR_H_
 #define _WX_DFB_CURSOR_H_
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxImage;
+class wxBitmap;
+class wxImage;
 
 //-----------------------------------------------------------------------------
 // wxCursor

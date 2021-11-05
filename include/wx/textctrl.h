@@ -30,8 +30,8 @@
 
 #define wxHAS_TEXT_WINDOW_STREAM 1
 
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrlBase;
+class wxTextCtrl;
+class wxTextCtrlBase;
 
 // ----------------------------------------------------------------------------
 // wxTextCtrl types
@@ -794,7 +794,7 @@ protected:
 // wxTextCtrl events
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxTextUrlEvent;
+class wxTextUrlEvent;
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT, wxCommandEvent);
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_ENTER, wxCommandEvent);

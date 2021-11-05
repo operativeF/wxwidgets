@@ -28,7 +28,7 @@ constexpr unsigned int wxSP_NO_XP_THEME      = 0x0400;
 constexpr unsigned int wxSP_BORDER           = wxSP_3DBORDER;
 constexpr unsigned int wxSP_3D               = wxSP_3DBORDER | wxSP_3DSASH;
 
-class WXDLLIMPEXP_FWD_CORE wxSplitterEvent;
+class wxSplitterEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_SPLITTER_SASH_POS_CHANGED, wxSplitterEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_SPLITTER_SASH_POS_CHANGING, wxSplitterEvent );

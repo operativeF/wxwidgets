@@ -145,12 +145,12 @@ private:
 // -----------------------------------------------------------------------
 
 #if wxUSE_TOOLBAR
-class WXDLLIMPEXP_FWD_CORE wxToolBar;
+class wxToolBar;
 #endif
 #if wxUSE_HEADERCTRL
 class wxPGHeaderCtrl;
 #endif
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
+class wxStaticText;
 
 // wxPropertyGridManager is an efficient multi-page version of wxPropertyGrid,
 // which can optionally have toolbar for mode and page selection, and help

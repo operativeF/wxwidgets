@@ -20,8 +20,8 @@
 #include "wx/hashset.h"
 #include "wx/geometry/point.h"
 
-struct WXDLLIMPEXP_FWD_CORE wxSize;
-class  WXDLLIMPEXP_FWD_CORE wxFont;
+struct wxSize;
+class  wxFont;
 
 #include <numeric>
 
@@ -187,21 +187,21 @@ class  WXDLLIMPEXP_FWD_CORE wxFont;
 // -----------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_FWD_PROPGRID wxPGEditor;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGProperty;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyCategory;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGChoices;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGridPageState;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGCell;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGCellRenderer;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGChoiceEntry;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGPropArgCls;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGridInterface;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGrid;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGridEvent;
+class wxPGEditor;
+class wxPGProperty;
+class wxPropertyCategory;
+class wxPGChoices;
+class wxPropertyGridPageState;
+class wxPGCell;
+class wxPGCellRenderer;
+class wxPGChoiceEntry;
+class wxPGPropArgCls;
+class wxPropertyGridInterface;
+class wxPropertyGrid;
+class wxPropertyGridEvent;
 class wxPropertyGridManager;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGEditorDialogAdapter;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGValidationInfo;
+class wxPGEditorDialogAdapter;
+class wxPGValidationInfo;
 
 
 // -----------------------------------------------------------------------

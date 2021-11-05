@@ -31,9 +31,9 @@
 
 #include <gsl/gsl>
 
-class WXDLLIMPEXP_FWD_CORE wxImageList;
+class wxImageList;
 class wxItemAttr;
-class WXDLLIMPEXP_FWD_CORE wxHeaderCtrl;
+class wxHeaderCtrl;
 
 #if wxUSE_NATIVE_DATAVIEWCTRL && !defined(__WXUNIVERSAL__)
     #if defined(__WXGTK20__) || defined(__WXOSX__)
@@ -57,13 +57,13 @@ class WXDLLIMPEXP_FWD_CORE wxHeaderCtrl;
 // wxDataViewCtrl globals
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxDataViewModel;
-class WXDLLIMPEXP_FWD_CORE wxDataViewCtrl;
-class WXDLLIMPEXP_FWD_CORE wxDataViewColumn;
-class WXDLLIMPEXP_FWD_CORE wxDataViewRenderer;
-class WXDLLIMPEXP_FWD_CORE wxDataViewModelNotifier;
+class wxDataViewModel;
+class wxDataViewCtrl;
+class wxDataViewColumn;
+class wxDataViewRenderer;
+class wxDataViewModelNotifier;
 #if wxUSE_ACCESSIBILITY
-class WXDLLIMPEXP_FWD_CORE wxDataViewCtrlAccessible;
+class wxDataViewCtrlAccessible;
 #endif // wxUSE_ACCESSIBILITY
 
 constexpr char wxDataViewCtrlNameStr[] = "dataviewCtrl";

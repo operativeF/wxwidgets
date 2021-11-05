@@ -415,7 +415,7 @@ typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);
 // make a default book control for given platform
 #if wxUSE_NOTEBOOK
     // dedicated to majority of desktops
-    class WXDLLIMPEXP_FWD_CORE                     wxNotebook;
+    class                     wxNotebook;
     #define wxBookCtrl                             wxNotebook
     #define wxEVT_BOOKCTRL_PAGE_CHANGED            wxEVT_NOTEBOOK_PAGE_CHANGED
     #define wxEVT_BOOKCTRL_PAGE_CHANGING           wxEVT_NOTEBOOK_PAGE_CHANGING
@@ -423,7 +423,7 @@ typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);
     #define EVT_BOOKCTRL_PAGE_CHANGING(id, fn)     EVT_NOTEBOOK_PAGE_CHANGING(id, fn)
 #else
     // dedicated to Smartphones
-    class WXDLLIMPEXP_FWD_CORE                     wxChoicebook;
+    class                     wxChoicebook;
     #define wxBookCtrl                             wxChoicebook
     #define wxEVT_BOOKCTRL_PAGE_CHANGED            wxEVT_CHOICEBOOK_PAGE_CHANGED
     #define wxEVT_BOOKCTRL_PAGE_CHANGING           wxEVT_CHOICEBOOK_PAGE_CHANGING

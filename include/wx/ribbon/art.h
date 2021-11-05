@@ -22,8 +22,8 @@
 #include "wx/bitmap.h"
 #include "wx/ribbon/bar.h"
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxDC;
+class wxWindow;
 
 enum wxRibbonArtSetting
 {

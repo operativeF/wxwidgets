@@ -18,7 +18,7 @@
 
 #include <limits>
 
-class WXDLLIMPEXP_FWD_BASE wxString;
+class wxString;
 
 // the error value returned by wxMBConv methods
 constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();

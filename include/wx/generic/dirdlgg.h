@@ -14,9 +14,9 @@
 #ifndef _WX_DIRDLGG_H_
 #define _WX_DIRDLGG_H_
 
-class WXDLLIMPEXP_FWD_CORE wxGenericDirCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
+class wxGenericDirCtrl;
+class wxTextCtrl;
+class wxTreeEvent;
 
 #ifndef wxDD_DEFAULT_STYLE
 #define wxDD_DEFAULT_STYLE      (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER)

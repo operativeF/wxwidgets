@@ -31,8 +31,8 @@ class wxEventLoopBase;
 class wxMessageOutput;
 
 #if wxUSE_GUI
-    struct WXDLLIMPEXP_FWD_CORE wxVideoMode;
-    class WXDLLIMPEXP_FWD_CORE wxWindow;
+    struct wxVideoMode;
+    class wxWindow;
 #endif
 
 // this macro should be used in any main() or equivalent functions defined in wx

@@ -20,20 +20,20 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBookCtrlBase;
-class WXDLLIMPEXP_FWD_CORE wxBookCtrlEvent;
-class WXDLLIMPEXP_FWD_CORE wxIcon;
-class WXDLLIMPEXP_FWD_CORE wxIconBundle;
-class WXDLLIMPEXP_FWD_CORE wxNotebook;
+class wxBookCtrlBase;
+class wxBookCtrlEvent;
+class wxIcon;
+class wxIconBundle;
+class wxNotebook;
 
 #if wxUSE_GENERIC_MDI_AS_NATIVE
     #define wxGenericMDIParentFrame wxMDIParentFrame
     #define wxGenericMDIChildFrame wxMDIChildFrame
     #define wxGenericMDIClientWindow wxMDIClientWindow
 #else // !wxUSE_GENERIC_MDI_AS_NATIVE
-    class WXDLLIMPEXP_FWD_CORE wxGenericMDIParentFrame;
-    class WXDLLIMPEXP_FWD_CORE wxGenericMDIChildFrame;
-    class WXDLLIMPEXP_FWD_CORE wxGenericMDIClientWindow;
+    class wxGenericMDIParentFrame;
+    class wxGenericMDIChildFrame;
+    class wxGenericMDIClientWindow;
 #endif // wxUSE_GENERIC_MDI_AS_NATIVE/!wxUSE_GENERIC_MDI_AS_NATIVE
 
 // ----------------------------------------------------------------------------

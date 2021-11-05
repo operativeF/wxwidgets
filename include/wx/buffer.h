@@ -16,7 +16,7 @@
 
 #include <cstdlib>             // malloc() and free()
 
-class WXDLLIMPEXP_FWD_BASE wxCStrData;
+class wxCStrData;
 
 // ----------------------------------------------------------------------------
 // Special classes for (wide) character strings: they use malloc/free instead

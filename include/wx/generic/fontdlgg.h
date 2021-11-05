@@ -19,10 +19,10 @@
  * FONT DIALOG
  */
 
-class WXDLLIMPEXP_FWD_CORE wxChoice;
-class WXDLLIMPEXP_FWD_CORE wxText;
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxFontPreviewer;
+class wxChoice;
+class wxText;
+class wxCheckBox;
+class wxFontPreviewer;
 
 enum
 {

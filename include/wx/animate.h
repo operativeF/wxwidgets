@@ -22,7 +22,7 @@
 #include <chrono>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxAnimation;
+class wxAnimation;
 class wxAnimationImpl;
 
 extern WXDLLIMPEXP_DATA_CORE(wxAnimation) wxNullAnimation;

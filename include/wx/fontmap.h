@@ -30,13 +30,13 @@
 #include <vector>
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
-    class WXDLLIMPEXP_FWD_BASE wxConfigBase;
+    class wxConfigBase;
 #endif // wxUSE_CONFIG
 
-class WXDLLIMPEXP_FWD_CORE wxFontMapper;
+class wxFontMapper;
 
 #if wxUSE_GUI
-    class WXDLLIMPEXP_FWD_CORE wxWindow;
+    class wxWindow;
 #endif // wxUSE_GUI
 
 struct EncodingInfo

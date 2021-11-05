@@ -16,7 +16,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // possible values for wxSystemSettings::GetFont() parameter
 //

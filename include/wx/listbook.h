@@ -20,8 +20,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxListView;
-class WXDLLIMPEXP_FWD_CORE wxListEvent;
+class wxListView;
+class wxListEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGED,  wxBookCtrlEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGING, wxBookCtrlEvent );

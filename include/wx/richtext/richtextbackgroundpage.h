@@ -26,7 +26,7 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextColourSwatchCtrl;
+class wxRichTextColourSwatchCtrl;
 
 /*!
  * Control identifiers

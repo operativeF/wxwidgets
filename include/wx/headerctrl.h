@@ -26,7 +26,7 @@
 // notice that the classes in this header are defined in the core library even
 // although currently they're only used by wxGrid which is in wxAdv because we
 // plan to use it in wxListCtrl which is in core too in the future
-class WXDLLIMPEXP_FWD_CORE wxHeaderCtrlEvent;
+class wxHeaderCtrlEvent;
 
 
 // ----------------------------------------------------------------------------

@@ -17,9 +17,9 @@
 
 #include "wx/window.h"
 
-class WXDLLIMPEXP_FWD_PROPGRID wxPGCell;
-class WXDLLIMPEXP_FWD_PROPGRID wxPGProperty;
-class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGrid;
+class wxPGCell;
+class wxPGProperty;
+class wxPropertyGrid;
 
 // -----------------------------------------------------------------------
 // wxPGWindowList contains list of editor windows returned by CreateControls.

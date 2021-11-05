@@ -26,8 +26,8 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextColourSwatchCtrl;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextBorderPreviewCtrl;
+class wxRichTextColourSwatchCtrl;
+class wxRichTextBorderPreviewCtrl;
 
 /*!
  * Control identifiers

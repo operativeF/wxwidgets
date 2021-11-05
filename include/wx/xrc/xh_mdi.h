@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_MDI
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 class WXDLLIMPEXP_XRC wxMdiXmlHandler : public wxXmlResourceHandler
 {

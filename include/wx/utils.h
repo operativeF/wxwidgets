@@ -48,12 +48,12 @@
 // Forward declaration
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxProcess;
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxProcess;
+class wxFrame;
+class wxWindow;
 
 #if defined(__WXOSX__) && wxOSX_USE_COCOA
-class WXDLLIMPEXP_FWD_CORE wxEventLoop;
+class wxEventLoop;
 #endif
 
 // ----------------------------------------------------------------------------

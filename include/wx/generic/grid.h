@@ -89,26 +89,26 @@ enum wxGridRenderStyle
 // forward declarations
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxGrid;
-class WXDLLIMPEXP_FWD_CORE wxGridCellAttr;
-struct WXDLLIMPEXP_FWD_CORE wxGridCellAttrProviderData;
-class WXDLLIMPEXP_FWD_CORE wxGridColLabelWindow;
-class WXDLLIMPEXP_FWD_CORE wxGridCornerLabelWindow;
-class WXDLLIMPEXP_FWD_CORE wxGridEvent;
-class WXDLLIMPEXP_FWD_CORE wxGridRowLabelWindow;
-class WXDLLIMPEXP_FWD_CORE wxGridWindow;
-class WXDLLIMPEXP_FWD_CORE wxGridTypeRegistry;
-class WXDLLIMPEXP_FWD_CORE wxGridSelection;
+class wxGrid;
+class wxGridCellAttr;
+struct wxGridCellAttrProviderData;
+class wxGridColLabelWindow;
+class wxGridCornerLabelWindow;
+class wxGridEvent;
+class wxGridRowLabelWindow;
+class wxGridWindow;
+class wxGridTypeRegistry;
+class wxGridSelection;
 
-class WXDLLIMPEXP_FWD_CORE wxHeaderCtrl;
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxHeaderCtrl;
+class wxCheckBox;
+class wxComboBox;
+class wxTextCtrl;
 #if wxUSE_SPINCTRL
-class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
+class wxSpinCtrl;
 #endif
 #if wxUSE_DATEPICKCTRL
-class WXDLLIMPEXP_FWD_CORE wxDatePickerCtrl;
+class wxDatePickerCtrl;
 #endif
 
 class wxGridFixedIndicesSet;
@@ -2632,7 +2632,7 @@ protected:
     bool ShouldScrollToChildOnFocus(wxWindow* WXUNUSED(win)) override
         { return false; }
 
-    friend class WXDLLIMPEXP_FWD_CORE wxGridSelection;
+    friend class wxGridSelection;
     friend class wxGridRowOperations;
     friend class wxGridColumnOperations;
 

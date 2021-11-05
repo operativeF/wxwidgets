@@ -22,8 +22,8 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_GL wxGLCanvas;
-class WXDLLIMPEXP_FWD_GL wxGLContext;
+class wxGLCanvas;
+class wxGLContext;
 
 // ----------------------------------------------------------------------------
 // Constants for attributes list

@@ -154,7 +154,7 @@ private:
 // wxCalendarCtrl events
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxCalendarCtrl;
+class wxCalendarCtrl;
 
 class wxCalendarEvent : public wxDateEvent
 {

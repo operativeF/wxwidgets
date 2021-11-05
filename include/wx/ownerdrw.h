@@ -21,7 +21,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
+class wxDC;
 
 // ----------------------------------------------------------------------------
 // wxOwnerDrawn - a mix-in base class, derive from it to implement owner-drawn

@@ -31,10 +31,10 @@
 #include "wx/html/htmlwin.h"
 #include "wx/html/htmprint.h"
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
-class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
+class wxButton;
+class wxTextCtrl;
+class wxTreeEvent;
+class wxTreeCtrl;
 
 // style flags for the Help Frame
 #define wxHF_TOOLBAR                0x0001
@@ -71,8 +71,8 @@ struct wxHtmlHelpFrameCfg
 struct wxHtmlHelpMergedIndexItem;
 class wxHtmlHelpMergedIndex;
 
-class WXDLLIMPEXP_FWD_CORE wxHelpControllerBase;
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
+class wxHelpControllerBase;
+class wxHtmlHelpController;
 
 /*!
  * Help window

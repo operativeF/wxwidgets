@@ -16,8 +16,8 @@
 #include "wx/object.h"
 #include "wx/arrstr.h"
 
-class WXDLLIMPEXP_FWD_CORE wxColour;
-class WXDLLIMPEXP_FWD_HTML wxHtmlEntitiesParser;
+class wxColour;
+class wxHtmlEntitiesParser;
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

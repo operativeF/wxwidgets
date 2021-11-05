@@ -24,10 +24,10 @@
 // classes
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
-class WXDLLIMPEXP_FWD_CORE wxSizerItem;
-class WXDLLIMPEXP_FWD_CORE wxSizer;
+class wxButton;
+class wxBoxSizer;
+class wxSizerItem;
+class wxSizer;
 
 #ifndef wxUSE_BORDER_BY_DEFAULT
     #define wxUSE_BORDER_BY_DEFAULT 1
@@ -1058,7 +1058,7 @@ private:
 
 #if wxUSE_STATBOX
 
-class WXDLLIMPEXP_FWD_CORE wxStaticBox;
+class wxStaticBox;
 
 class wxStaticBoxSizer: public wxBoxSizer
 {

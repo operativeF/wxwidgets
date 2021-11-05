@@ -20,7 +20,7 @@
 
 // copied from event.h which cannot be included at this place
 
-class WXDLLIMPEXP_FWD_BASE wxEvent;
+class wxEvent;
 
 #ifdef __VISUALC__
 #define wxMSVC_FWD_MULTIPLE_BASES __multiple_inheritance
@@ -28,7 +28,7 @@ class WXDLLIMPEXP_FWD_BASE wxEvent;
 #define wxMSVC_FWD_MULTIPLE_BASES
 #endif
 
-class WXDLLIMPEXP_FWD_BASE wxMSVC_FWD_MULTIPLE_BASES wxEvtHandler;
+class wxMSVC_FWD_MULTIPLE_BASES wxEvtHandler;
 typedef void (wxEvtHandler::*wxEventFunction)(wxEvent&);
 typedef wxEventFunction wxObjectEventFunction;
 

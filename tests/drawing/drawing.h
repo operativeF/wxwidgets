@@ -17,7 +17,7 @@
 #include "wx/dcsvg.h"
 #endif
 
-class WXDLLIMPEXP_FWD_BASE wxDynamicLibrary;
+class wxDynamicLibrary;
 
 class GraphicsContextDrawingTestCase : public CppUnit::TestCase
 {

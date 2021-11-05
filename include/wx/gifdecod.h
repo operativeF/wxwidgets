@@ -22,7 +22,7 @@
 
 // internal utility used to store a frame in 8bit-per-pixel format
 struct GIFImage;
-class WXDLLIMPEXP_FWD_CORE wxImage;
+class wxImage;
 
 
 

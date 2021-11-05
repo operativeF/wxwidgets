@@ -22,10 +22,10 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxDataViewMainWindow;
-class WXDLLIMPEXP_FWD_CORE wxDataViewHeaderWindow;
+class wxDataViewMainWindow;
+class wxDataViewHeaderWindow;
 #if wxUSE_ACCESSIBILITY
-class WXDLLIMPEXP_FWD_CORE wxDataViewCtrlAccessible;
+class wxDataViewCtrlAccessible;
 #endif // wxUSE_ACCESSIBILITY
 
 // ---------------------------------------------------------

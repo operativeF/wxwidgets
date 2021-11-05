@@ -22,7 +22,7 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxImageList;
+class wxImageList;
 
 // ----------------------------------------------------------------------------
 // types

@@ -71,7 +71,7 @@
     #endif
 #endif // wxUSE_STRING_POS_CACHE
 
-class WXDLLIMPEXP_FWD_BASE wxString;
+class wxString;
 
 // unless this symbol is predefined to disable the compatibility functions, do
 // use them
@@ -214,7 +214,7 @@ private:
     // should m_str be deleted, i.e. is it owned by us?
     bool m_owned;
 
-    friend class WXDLLIMPEXP_FWD_BASE wxString;
+    friend class wxString;
 };
 
 // ----------------------------------------------------------------------------
@@ -765,7 +765,7 @@ public:
       private:                                                              \
           underlying_iterator m_cur
 
-  class WXDLLIMPEXP_FWD_BASE const_iterator;
+  class const_iterator;
 
 #if wxUSE_UNICODE_UTF8
   // NB: In UTF-8 build, (non-const) iterator needs to keep reference
@@ -3487,11 +3487,11 @@ private:
 
   wxStringIteratorNodeHead m_iterators;
 
-  friend class WXDLLIMPEXP_FWD_BASE wxStringIteratorNode;
-  friend class WXDLLIMPEXP_FWD_BASE wxUniCharRef;
+  friend class wxStringIteratorNode;
+  friend class wxUniCharRef;
 #endif // wxUSE_UNICODE_UTF8
 
-  friend class WXDLLIMPEXP_FWD_BASE wxCStrData;
+  friend class wxCStrData;
   friend class wxStringInternalBuffer;
   friend class wxStringInternalBufferLength;
 };

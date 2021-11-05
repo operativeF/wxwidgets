@@ -26,13 +26,13 @@
 /*!
  * Forward declarations
  */
-class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxChoice;
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxFlexGridSizer;
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxBoxSizer;
+class wxCheckBox;
+class wxChoice;
+class wxComboBox;
+class wxFlexGridSizer;
+class wxStaticText;
+class wxTextCtrl;
 
 /*!
  * Control identifiers

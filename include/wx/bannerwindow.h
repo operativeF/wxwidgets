@@ -20,9 +20,9 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxColour;
-class WXDLLIMPEXP_FWD_CORE wxDC;
+class wxBitmap;
+class wxColour;
+class wxDC;
 
 constexpr char wxBannerWindowNameStr[] = "bannerwindow";
 

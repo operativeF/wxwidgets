@@ -22,7 +22,7 @@
 #include "wx/textctrl.h"
 #endif
 
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxTextCtrl;
 
 constexpr char wxGetTextFromUserPromptStr[] = "Input Text";
 constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";

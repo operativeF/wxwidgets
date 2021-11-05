@@ -10,9 +10,9 @@
 #ifndef _WX_PRIVATE_TEXTMEASURE_H_
 #define _WX_PRIVATE_TEXTMEASURE_H_
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxFont;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxDC;
+class wxFont;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxTextMeasure: class used to measure text extent.

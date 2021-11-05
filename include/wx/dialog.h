@@ -19,13 +19,13 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxSizer;
-class WXDLLIMPEXP_FWD_CORE wxStdDialogButtonSizer;
-class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
-class WXDLLIMPEXP_FWD_CORE wxDialogLayoutAdapter;
-class WXDLLIMPEXP_FWD_CORE wxDialog;
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxScrolledWindow;
+class wxSizer;
+class wxStdDialogButtonSizer;
+class wxBoxSizer;
+class wxDialogLayoutAdapter;
+class wxDialog;
+class wxButton;
+class wxScrolledWindow;
 class wxTextSizerWrapper;
 
 // Also see the bit summary table in wx/toplevel.h.

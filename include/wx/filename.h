@@ -20,11 +20,11 @@
 #include <vector>
 
 #if wxUSE_FILE
-class WXDLLIMPEXP_FWD_BASE wxFile;
+class wxFile;
 #endif
 
 #if wxUSE_FFILE
-class WXDLLIMPEXP_FWD_BASE wxFFile;
+class wxFFile;
 #endif
 
 // this symbol is defined for the platforms where file systems use volumes in

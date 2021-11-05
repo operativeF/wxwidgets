@@ -100,7 +100,7 @@ protected:
     virtual wxString GetIconFromMimeType(const wxString& mime);
 
     // give it access to m_aXXX variables
-    friend class WXDLLIMPEXP_FWD_BASE wxFileTypeImpl;
+    friend class wxFileTypeImpl;
 };
 
 class WXDLLIMPEXP_BASE wxFileTypeImpl

@@ -196,7 +196,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-class WXDLLIMPEXP_FWD_CORE wxSashEvent;
+class wxSashEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_SASH_DRAGGED, wxSashEvent );
 

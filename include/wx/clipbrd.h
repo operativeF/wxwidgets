@@ -22,7 +22,7 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxClipboard;
+class wxClipboard;
 
 // ----------------------------------------------------------------------------
 // wxClipboard represents the system clipboard. Normally, you should use

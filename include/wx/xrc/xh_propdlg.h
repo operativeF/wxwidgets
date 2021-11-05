@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC
 
-class WXDLLIMPEXP_FWD_CORE wxPropertySheetDialog;
+class wxPropertySheetDialog;
 
 class WXDLLIMPEXP_XRC wxPropertySheetDialogXmlHandler : public wxXmlResourceHandler
 {

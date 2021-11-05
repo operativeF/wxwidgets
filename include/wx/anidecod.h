@@ -19,7 +19,7 @@
 
 
 class /*WXDLLIMPEXP_CORE*/ wxANIFrameInfo;      // private implementation detail
-class WXDLLIMPEXP_FWD_CORE wxInputStream;
+class wxInputStream;
 
 
 WX_DECLARE_EXPORTED_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);

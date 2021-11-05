@@ -121,7 +121,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTIFICATION_MESSAGE_ACTION, w
 #ifdef wxHAS_NATIVE_NOTIFICATION_MESSAGE
 
 #if defined(__WXMSW__)
-class WXDLLIMPEXP_FWD_CORE wxTaskBarIcon;
+class wxTaskBarIcon;
 #endif // defined(__WXMSW__)
 
 #else

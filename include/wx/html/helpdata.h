@@ -22,7 +22,7 @@
 #include "wx/font.h"
 #include "wx/stream.h"
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlHelpData;
+class wxHtmlHelpData;
 
 //--------------------------------------------------------------------------------
 // helper classes & structs

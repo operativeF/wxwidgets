@@ -15,11 +15,11 @@
 // wxWizard
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxStaticBitmap;
-class WXDLLIMPEXP_FWD_CORE wxWizardEvent;
-class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
-class WXDLLIMPEXP_FWD_CORE wxWizardSizer;
+class wxButton;
+class wxStaticBitmap;
+class wxWizardEvent;
+class wxBoxSizer;
+class wxWizardSizer;
 
 class wxWizard : public wxWizardBase
 {

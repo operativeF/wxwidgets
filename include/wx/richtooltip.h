@@ -20,9 +20,9 @@
 #include <chrono>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFont;
-class WXDLLIMPEXP_FWD_CORE wxIcon;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxFont;
+class wxIcon;
+class wxWindow;
 
 class wxRichToolTipImpl;
 

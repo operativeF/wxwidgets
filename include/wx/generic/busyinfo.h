@@ -17,9 +17,9 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxControl;
+class wxFrame;
+class wxWindow;
+class wxControl;
 
 //--------------------------------------------------------------------------------
 // wxBusyInfo

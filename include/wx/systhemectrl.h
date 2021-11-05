@@ -16,7 +16,7 @@
     #define wxHAS_SYSTEM_THEMED_CONTROL
 #endif
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 class wxSystemThemedControlBase
 {

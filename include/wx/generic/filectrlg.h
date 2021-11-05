@@ -23,10 +23,10 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxChoice;
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxCheckBox;
+class wxChoice;
+class wxStaticText;
+class wxTextCtrl;
 
 //-----------------------------------------------------------------------------
 //  wxFileData - a class to hold the file info for the wxFileListCtrl

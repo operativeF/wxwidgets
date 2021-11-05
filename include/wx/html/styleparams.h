@@ -15,7 +15,7 @@
 
 #include "wx/arrstr.h"
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlTag;
+class wxHtmlTag;
 
 // This is a private class used by wxHTML to parse "style" attributes of HTML
 // elements. Currently both parsing and support for the parsed values is pretty

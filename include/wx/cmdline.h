@@ -28,8 +28,8 @@ enum class wxCmdLineSplitType
 
 #if wxUSE_CMDLINE_PARSER
 
-class WXDLLIMPEXP_FWD_BASE wxCmdLineParser;
-class WXDLLIMPEXP_FWD_BASE wxDateTime;
+class wxCmdLineParser;
+class wxDateTime;
 
 // by default, options are optional (sic) and each call to AddParam() allows
 // one more parameter - this may be changed by giving non-default flags to it

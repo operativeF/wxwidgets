@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_RIBBON
 
-class WXDLLIMPEXP_FWD_RIBBON wxRibbonControl;
+class wxRibbonControl;
 
 class WXDLLIMPEXP_RIBBON wxRibbonXmlHandler : public wxXmlResourceHandler
 {

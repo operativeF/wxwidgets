@@ -19,7 +19,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxTipWindowView;
+class wxTipWindowView;
 
 // ----------------------------------------------------------------------------
 // wxTipWindow

@@ -10,9 +10,9 @@
 #ifndef _WX_GENERIC_INFOBAR_H_
 #define _WX_GENERIC_INFOBAR_H_
 
-class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
-class WXDLLIMPEXP_FWD_CORE wxStaticBitmap;
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
+class wxBitmapButton;
+class wxStaticBitmap;
+class wxStaticText;
 
 // ----------------------------------------------------------------------------
 // wxInfoBar

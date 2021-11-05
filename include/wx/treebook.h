@@ -24,8 +24,8 @@
 
 using wxTreebookPage = wxWindow;
 
-class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
-class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
+class wxTreeCtrl;
+class wxTreeEvent;
 
 // ----------------------------------------------------------------------------
 // wxTreebook

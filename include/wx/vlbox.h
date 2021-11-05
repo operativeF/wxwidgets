@@ -17,7 +17,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxSelectionStore;
+class wxSelectionStore;
 
 constexpr char wxVListBoxNameStr[] = "wxVListBox";
 

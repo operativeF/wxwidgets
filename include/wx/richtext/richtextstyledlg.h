@@ -37,8 +37,8 @@ class wxRichTextCtrl;
 class wxStdDialogButtonSizer;
 ////@end forward declarations
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class wxButton;
+class wxCheckBox;
 
 /*!
  * Control identifiers

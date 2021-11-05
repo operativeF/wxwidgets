@@ -103,11 +103,11 @@ enum class wxMutexType
 };
 
 // forward declarations
-class WXDLLIMPEXP_FWD_BASE wxThreadHelper;
-class WXDLLIMPEXP_FWD_BASE wxConditionInternal;
-class WXDLLIMPEXP_FWD_BASE wxMutexInternal;
-class WXDLLIMPEXP_FWD_BASE wxSemaphoreInternal;
-class WXDLLIMPEXP_FWD_BASE wxThreadInternal;
+class wxThreadHelper;
+class wxConditionInternal;
+class wxMutexInternal;
+class wxSemaphoreInternal;
+class wxThreadInternal;
 
 // ----------------------------------------------------------------------------
 // A mutex object is a synchronization object whose state is set to signaled

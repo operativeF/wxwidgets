@@ -17,8 +17,8 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_BASE wxDateTime;
-class WXDLLIMPEXP_FWD_BASE wxFileName;
+class wxDateTime;
+class wxFileName;
 
 // ----------------------------------------------------------------------------
 // wxGenericValidator performs data transfer between many standard controls and

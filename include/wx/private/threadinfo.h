@@ -12,7 +12,7 @@
 
 #include "wx/defs.h"
 
-class WXDLLIMPEXP_FWD_BASE wxLog;
+class wxLog;
 
 #if wxUSE_INTL
 #include "wx/hashset.h"

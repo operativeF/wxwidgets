@@ -12,7 +12,7 @@
 #define _WX_COLLAPSABLE_PANE_H_GENERIC_
 
 // forward declared
-class WXDLLIMPEXP_FWD_CORE wxCollapsibleHeaderCtrl;
+class wxCollapsibleHeaderCtrl;
 
 #include "wx/containr.h"
 

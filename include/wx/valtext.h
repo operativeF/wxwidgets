@@ -15,7 +15,7 @@
 
 #if wxUSE_VALIDATORS && (wxUSE_TEXTCTRL || wxUSE_COMBOBOX)
 
-class WXDLLIMPEXP_FWD_CORE wxTextEntry;
+class wxTextEntry;
 
 #include "wx/validate.h"
 

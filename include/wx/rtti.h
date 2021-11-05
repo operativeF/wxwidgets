@@ -24,13 +24,13 @@
 // forward declarations
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxObject;
-class WXDLLIMPEXP_FWD_BASE wxString;
-class WXDLLIMPEXP_FWD_BASE wxClassInfo;
-class WXDLLIMPEXP_FWD_BASE wxHashTable;
-class WXDLLIMPEXP_FWD_BASE wxObject;
-class WXDLLIMPEXP_FWD_BASE wxPluginLibrary;
-class WXDLLIMPEXP_FWD_BASE wxHashTable_Node;
+class wxObject;
+class wxString;
+class wxClassInfo;
+class wxHashTable;
+class wxObject;
+class wxPluginLibrary;
+class wxHashTable_Node;
 
 // ----------------------------------------------------------------------------
 // wxClassInfo
@@ -40,7 +40,7 @@ typedef wxObject *(*wxObjectConstructorFn)();
 
 class WXDLLIMPEXP_BASE wxClassInfo
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxObject;
+    friend class wxObject;
     friend WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 public:
     wxClassInfo( const wxChar *className,

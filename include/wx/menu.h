@@ -24,11 +24,11 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxMenu;
-class WXDLLIMPEXP_FWD_CORE wxMenuBarBase;
-class WXDLLIMPEXP_FWD_CORE wxMenuBar;
-class WXDLLIMPEXP_FWD_CORE wxMenuItem;
+class wxFrame;
+class wxMenu;
+class wxMenuBarBase;
+class wxMenuBar;
+class wxMenuItem;
 
 // pseudo template list classes
 WX_DECLARE_EXPORTED_LIST(wxMenu, wxMenuList);

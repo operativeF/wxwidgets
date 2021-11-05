@@ -19,9 +19,9 @@
 #include "wx/longlong.h"
 #include "wx/anystr.h"
 
-class WXDLLIMPEXP_FWD_BASE wxDateTime;
-class WXDLLIMPEXP_FWD_BASE wxTimeSpan;
-class WXDLLIMPEXP_FWD_BASE wxDateSpan;
+class wxDateTime;
+class wxTimeSpan;
+class wxDateSpan;
 #ifdef WX_WINDOWS
 struct _SYSTEMTIME;
 #endif
@@ -101,7 +101,7 @@ struct _SYSTEMTIME;
 // argument for arguments of type wxDateTime; it is also returned by all
 // functions returning wxDateTime on failure (this is why it is also called
 // wxInvalidDateTime)
-class WXDLLIMPEXP_FWD_BASE wxDateTime;
+class wxDateTime;
 
 constexpr char wxDefaultDateTimeFormat[] = "%c";
 constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
@@ -1539,7 +1539,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxDateTime, wxDateTimeArray, WXDLLIMPEXP_BASE)
 //     virtual methods to work with the holidays they correspond to.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxDateTimeHolidayAuthority;
+class wxDateTimeHolidayAuthority;
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxDateTimeHolidayAuthority *,
                               wxHolidayAuthoritiesArray,
                               class WXDLLIMPEXP_BASE);

@@ -125,9 +125,9 @@ using wxMarkerType = unsigned int;
   allocated memory.
 */
 
-class WXDLLIMPEXP_BASE wxMemStruct {
+class wxMemStruct {
 
-friend class WXDLLIMPEXP_FWD_BASE wxDebugContext; // access to the m_next pointer for list traversal.
+friend class wxDebugContext; // access to the m_next pointer for list traversal.
 
 public:
 public:

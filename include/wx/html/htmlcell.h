@@ -19,12 +19,12 @@
 #include "wx/brush.h"
 #include "wx/window.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class wxWindowBase;
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlWindowInterface;
-class WXDLLIMPEXP_FWD_HTML wxHtmlLinkInfo;
-class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
-class WXDLLIMPEXP_FWD_HTML wxHtmlContainerCell;
+class wxHtmlWindowInterface;
+class wxHtmlLinkInfo;
+class wxHtmlCell;
+class wxHtmlContainerCell;
 
 
 // wxHtmlSelection is data holder with information about text selection.

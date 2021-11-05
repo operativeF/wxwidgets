@@ -14,8 +14,8 @@
 #include "wx/string.h"
 #include "wx/modalhook.h"
 
-class WXDLLIMPEXP_FWD_CORE wxMessageDialogBase;
-class WXDLLIMPEXP_FWD_CORE wxFileDialogBase;
+class wxMessageDialogBase;
+class wxFileDialogBase;
 
 // ----------------------------------------------------------------------------
 // testing API

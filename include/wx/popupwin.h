@@ -154,8 +154,8 @@ private:
 
 #else // !__WXMSW__
 
-class WXDLLIMPEXP_FWD_CORE wxPopupWindowHandler;
-class WXDLLIMPEXP_FWD_CORE wxPopupFocusHandler;
+class wxPopupWindowHandler;
+class wxPopupFocusHandler;
 
 class wxPopupTransientWindow : public wxPopupTransientWindowBase
 {
@@ -215,8 +215,8 @@ protected:
 // wxPopupComboWindow: wxPopupTransientWindow used by wxComboBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxComboCtrl;
+class wxComboBox;
+class wxComboCtrl;
 
 class wxPopupComboWindow : public wxPopupTransientWindow
 {

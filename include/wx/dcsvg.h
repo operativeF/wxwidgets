@@ -33,8 +33,8 @@ enum class wxSVGShapeRenderingMode
     OptimiseSpeed = OptimizeSpeed
 };
 
-class WXDLLIMPEXP_FWD_BASE wxFileOutputStream;
-class WXDLLIMPEXP_FWD_CORE wxSVGFileDC;
+class wxFileOutputStream;
+class wxSVGFileDC;
 
 // Base class for bitmap handlers used by wxSVGFileDC, used by the standard
 // "embed" and "link" handlers below but can also be used to create a custom

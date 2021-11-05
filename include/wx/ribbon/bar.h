@@ -15,7 +15,7 @@
 
 #if wxUSE_RIBBON
 
-class WXDLLIMPEXP_FWD_CORE wxImageList;
+class wxImageList;
 
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/page.h"

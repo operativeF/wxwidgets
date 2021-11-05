@@ -20,9 +20,9 @@
 #include <string>
 
 #if wxUSE_SPINCTRL
-    class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
+    class wxSpinCtrl;
 #else
-    class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+    class wxTextCtrl;
 #endif // wxUSE_SPINCTRL
 
 // ----------------------------------------------------------------------------

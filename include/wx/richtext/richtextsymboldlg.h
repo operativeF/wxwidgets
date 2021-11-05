@@ -23,9 +23,9 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxStaticText;
+class wxComboBox;
+class wxTextCtrl;
 
 ////@begin forward declarations
 class wxSymbolListCtrl;

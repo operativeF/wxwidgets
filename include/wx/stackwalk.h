@@ -17,7 +17,7 @@
 
 #include "wx/string.h"
 
-class WXDLLIMPEXP_FWD_BASE wxStackFrame;
+class wxStackFrame;
 
 // TODO: Make adjustable?
 constexpr unsigned int wxSTACKWALKER_MAX_DEPTH = 200;

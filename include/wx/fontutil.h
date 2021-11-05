@@ -35,8 +35,8 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-struct WXDLLIMPEXP_FWD_CORE wxNativeEncodingInfo;
+class wxWindow;
+struct wxNativeEncodingInfo;
 
 #if defined(_WX_X_FONTLIKE)
 

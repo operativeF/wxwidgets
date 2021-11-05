@@ -24,8 +24,8 @@
 #include <algorithm>
 #include <cstdint>
 
-class WXDLLIMPEXP_FWD_BASE wxDataInputStream;
-class WXDLLIMPEXP_FWD_BASE wxDataOutputStream;
+class wxDataInputStream;
+class wxDataOutputStream;
 
 // clipping from Cohen-Sutherland
 

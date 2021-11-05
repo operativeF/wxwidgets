@@ -33,8 +33,8 @@ constexpr bool wxTIMER_CONTINUOUS = false;
 // only send the notification once and then stop the timer
 constexpr bool wxTIMER_ONE_SHOT = true;
 
-class WXDLLIMPEXP_FWD_BASE wxTimerImpl;
-class WXDLLIMPEXP_FWD_BASE wxTimerEvent;
+class wxTimerImpl;
+class wxTimerEvent;
 
 // timer event type
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_BASE, wxEVT_TIMER, wxTimerEvent);

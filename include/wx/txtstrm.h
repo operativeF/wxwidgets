@@ -18,8 +18,8 @@
 
 #include <cstdint>
 
-class WXDLLIMPEXP_FWD_BASE wxTextInputStream;
-class WXDLLIMPEXP_FWD_BASE wxTextOutputStream;
+class wxTextInputStream;
+class wxTextOutputStream;
 
 typedef wxTextInputStream& (*__wxTextInputManip)(wxTextInputStream&);
 typedef wxTextOutputStream& (*__wxTextOutputManip)(wxTextOutputStream&);

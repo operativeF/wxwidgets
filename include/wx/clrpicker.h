@@ -22,7 +22,7 @@
 #include <string>
 
 
-class WXDLLIMPEXP_FWD_CORE wxColourPickerEvent;
+class wxColourPickerEvent;
 
 constexpr char wxColourPickerCtrlNameStr[] = "colourpicker";
 constexpr char wxColourPickerWidgetNameStr[] = "colourpickerwidget";

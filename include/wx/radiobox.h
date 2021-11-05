@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxToolTip;
+class wxToolTip;
 
 using wxToolTipArray = std::vector<wxToolTip*>;
 

@@ -14,7 +14,7 @@
 #include "wx/defs.h"
 #include "wx/string.h"
 
-class WXDLLIMPEXP_FWD_BASE wxObject;
+class wxObject;
 
 // the default size of the hash
 constexpr unsigned int wxHASH_SIZE_DEFAULT = 1000;
@@ -34,10 +34,10 @@ union wxHashKeyValue
 
 // for some compilers (AIX xlC), defining it as friend inside the class is not
 // enough, so provide a real forward declaration
-class WXDLLIMPEXP_FWD_BASE wxHashTableBase;
+class wxHashTableBase;
 
-// and clang doesn't like using WXDLLIMPEXP_FWD_BASE inside a typedef.
-class WXDLLIMPEXP_FWD_BASE wxHashTableBase_Node;
+// and clang doesn't like using inside a typedef.
+class wxHashTableBase_Node;
 
 class WXDLLIMPEXP_BASE wxHashTableBase_Node
 {
@@ -79,7 +79,7 @@ protected:
 
 class WXDLLIMPEXP_BASE wxHashTableBase
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxHashTableBase_Node;
+    friend class wxHashTableBase_Node;
 public:
     using Node = wxHashTableBase_Node;
 
@@ -152,7 +152,7 @@ protected:
 
 class WXDLLIMPEXP_BASE wxHashTable_Node : public wxHashTableBase_Node
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxHashTable;
+    friend class wxHashTable;
 public:
     wxHashTable_Node( long key, void* value,
                       wxHashTableBase* table )

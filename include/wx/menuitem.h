@@ -32,10 +32,10 @@
 // ----------------------------------------------------------------------------
 
 #if wxUSE_ACCEL
-class WXDLLIMPEXP_FWD_CORE wxAcceleratorEntry;
+class wxAcceleratorEntry;
 #endif // wxUSE_ACCEL
-class WXDLLIMPEXP_FWD_CORE wxMenuItem;
-class WXDLLIMPEXP_FWD_CORE wxMenu;
+class wxMenuItem;
+class wxMenu;
 
 // ----------------------------------------------------------------------------
 // wxMenuItem is an item in the menu which may be either a normal item, a sub

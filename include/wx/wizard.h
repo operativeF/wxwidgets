@@ -42,7 +42,7 @@ constexpr unsigned int wxWIZARD_HALIGN_RIGHT     = 0x20;
 constexpr unsigned int wxWIZARD_TILE             = 0x40;
 
 // forward declarations
-class WXDLLIMPEXP_FWD_CORE wxWizard;
+class wxWizard;
 
 // ----------------------------------------------------------------------------
 // wxWizardPage is one of the wizards screen: it must know what are the

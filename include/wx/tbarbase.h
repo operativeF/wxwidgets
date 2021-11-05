@@ -20,7 +20,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
+class wxToolBarBase;
 
 // ----------------------------------------------------------------------------
 // constants

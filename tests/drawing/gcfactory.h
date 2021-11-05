@@ -22,7 +22,7 @@
 
 #include "wx/filename.h"
 
-class WXDLLIMPEXP_FWD_CORE wxGraphicsContext;
+class wxGraphicsContext;
 
 // Implement a class derived from this one to let the drawing test create
 //  graphics context, save them and destroy them.

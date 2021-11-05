@@ -25,12 +25,12 @@ class wxHtmlProcessor;
 class wxHtmlWinModule;
 class wxHtmlProcessorList;
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlWinAutoScrollTimer;
-class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
-class WXDLLIMPEXP_FWD_HTML wxHtmlLinkEvent;
-class WXDLLIMPEXP_FWD_CORE wxStatusBar;
-class WXDLLIMPEXP_FWD_CORE wxFileSystem;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxHtmlWinAutoScrollTimer;
+class wxHtmlCellEvent;
+class wxHtmlLinkEvent;
+class wxStatusBar;
+class wxFileSystem;
+class wxWindow;
 
 // wxHtmlWindow flags:
 // FIXME: Bitfield
@@ -582,7 +582,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
+class wxHtmlCellEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_HTML, wxEVT_HTML_CELL_CLICKED, wxHtmlCellEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_HTML, wxEVT_HTML_CELL_HOVER, wxHtmlCellEvent );

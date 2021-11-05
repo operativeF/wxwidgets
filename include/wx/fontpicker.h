@@ -21,7 +21,7 @@
 #include <string>
 
 
-class WXDLLIMPEXP_FWD_CORE wxFontPickerEvent;
+class wxFontPickerEvent;
 
 constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
 constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";

@@ -18,7 +18,7 @@
 #include "wx/control.h"
 #include "wx/icon.h"
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
 

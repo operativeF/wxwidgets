@@ -14,8 +14,8 @@
 
 #if wxUSE_XRC && wxUSE_LISTCTRL
 
-class WXDLLIMPEXP_FWD_CORE wxListCtrl;
-class WXDLLIMPEXP_FWD_CORE wxListItem;
+class wxListCtrl;
+class wxListItem;
 
 class WXDLLIMPEXP_XRC wxListCtrlXmlHandler : public wxXmlResourceHandler
 {

@@ -17,10 +17,10 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxButton;
+class wxComboBox;
+class wxCheckBox;
+class wxTextCtrl;
 
 /*!
  * Includes

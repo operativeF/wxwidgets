@@ -24,8 +24,8 @@
 
 #include <gsl/gsl>
 
-class WXDLLIMPEXP_FWD_BASE wxCStrData;
-class WXDLLIMPEXP_FWD_BASE wxString;
+class wxCStrData;
+class wxString;
 
 // ----------------------------------------------------------------------------
 // WX_DEFINE_VARARG_FUNC* macros

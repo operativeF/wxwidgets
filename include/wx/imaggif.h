@@ -28,7 +28,7 @@ constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = "Unchanged";
 
 struct wxRGB;
 struct GifHashTableType;
-class WXDLLIMPEXP_FWD_CORE wxImageArray; // anidecod.h
+class wxImageArray; // anidecod.h
 
 class wxGIFHandler : public wxImageHandler
 {

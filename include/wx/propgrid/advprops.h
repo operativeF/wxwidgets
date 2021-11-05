@@ -271,8 +271,8 @@ class WXDLLIMPEXP_PROPGRID wxCursorProperty : public wxEnumProperty
 #if wxUSE_IMAGE
 
 WXDLLIMPEXP_PROPGRID const wxString& wxPGGetDefaultImageWildcard();
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxImage;
+class wxBitmap;
+class wxImage;
 
 // Property representing image file(name).
 class WXDLLIMPEXP_PROPGRID wxImageFileProperty : public wxFileProperty

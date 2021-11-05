@@ -19,9 +19,9 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
-class WXDLLIMPEXP_FWD_CORE wxListCtrl;
-class WXDLLIMPEXP_FWD_CORE wxListEvent;
+class wxBitmapButton;
+class wxListCtrl;
+class wxListEvent;
 
 constexpr unsigned int wxEL_ALLOW_NEW     = 0x0100;
 constexpr unsigned int wxEL_ALLOW_EDIT    = 0x0200;

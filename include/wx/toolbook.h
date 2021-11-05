@@ -20,8 +20,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
-class WXDLLIMPEXP_FWD_CORE wxCommandEvent;
+class wxToolBarBase;
+class wxCommandEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGED,  wxBookCtrlEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGING, wxBookCtrlEvent );

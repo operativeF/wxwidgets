@@ -25,8 +25,8 @@
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_BASE wxHashTable;
+class wxTextCtrl;
+class wxHashTable;
 
 //-----------------------------------------------------------------------------
 // Extra styles for wxGenericDirCtrl
@@ -74,7 +74,7 @@ public:
 // wxDirCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxDirFilterListCtrl;
+class wxDirFilterListCtrl;
 
 class wxGenericDirCtrl: public wxControl
 {
@@ -273,7 +273,7 @@ protected:
 
 #if wxUSE_DIRDLG || wxUSE_FILEDLG || wxUSE_FILECTRL
 
-class WXDLLIMPEXP_FWD_CORE wxImageList;
+class wxImageList;
 
 class wxFileIconsTable
 {

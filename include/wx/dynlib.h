@@ -18,7 +18,7 @@
 #include "wx/string.h"
 #include "wx/dynarray.h"
 
-class WXDLLIMPEXP_FWD_BASE wxDynamicLibraryDetailsCreator;
+class lsCreator;
 
 // ----------------------------------------------------------------------------
 // conditional compilation

@@ -29,7 +29,7 @@
 #include <ranges>
 #include <span>
 
-class WXDLLIMPEXP_FWD_CORE wxColour;
+class wxColour;
 
 // A macro to define the standard wxColour constructors:
 //

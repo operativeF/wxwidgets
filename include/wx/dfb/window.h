@@ -19,8 +19,8 @@
 wxDFB_DECLARE_INTERFACE(IDirectFBSurface);
 struct wxDFBWindowEvent;
 
-class WXDLLIMPEXP_FWD_CORE wxFont;
-class WXDLLIMPEXP_FWD_CORE wxNonOwnedWindow;
+class wxFont;
+class wxNonOwnedWindow;
 
 class wxOverlayImpl;
 class wxDfbOverlaysList;

@@ -12,7 +12,7 @@
 
 #include "wx/defs.h"
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 // ----------------------------------------------------------------------------
 // wxCustomBackgroundWindow: Adds support for custom backgrounds to any

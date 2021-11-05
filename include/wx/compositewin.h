@@ -15,8 +15,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxToolTip;
-class WXDLLIMPEXP_FWD_CORE wxWindow; 
+class wxToolTip;
+class wxWindow; 
 
 // NB: This is an experimental and, as for now, undocumented class used only by
 //     wxWidgets itself internally. Don't use it in your code until its API is

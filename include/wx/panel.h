@@ -21,7 +21,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxControlContainer;
+class wxControlContainer;
 
 // ----------------------------------------------------------------------------
 // wxPanel contains other controls and implements TAB traversal between them

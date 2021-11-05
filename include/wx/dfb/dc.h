@@ -156,7 +156,7 @@ private:
 protected:
     wxIDirectFBSurfacePtr m_surface;
 
-    friend class WXDLLIMPEXP_FWD_CORE wxOverlayImpl; // for Init
+    friend class wxOverlayImpl; // for Init
 
     wxDECLARE_ABSTRACT_CLASS(wxDFBDCImpl);
 };

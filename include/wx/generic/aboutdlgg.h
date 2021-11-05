@@ -16,9 +16,9 @@
 
 #include "wx/dialog.h"
 
-class WXDLLIMPEXP_FWD_CORE wxAboutDialogInfo;
-class WXDLLIMPEXP_FWD_CORE wxSizer;
-class WXDLLIMPEXP_FWD_CORE wxSizerFlags;
+class wxAboutDialogInfo;
+class wxSizer;
+class wxSizerFlags;
 
 // Under GTK and OS X "About" dialogs are not supposed to be modal, unlike MSW
 // and, presumably, all the other platforms.

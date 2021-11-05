@@ -32,7 +32,7 @@
 #define wxRICHTEXT_BUFFERED_PAINTING 0
 #endif
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextStyleDefinition;
+class wxRichTextStyleDefinition;
 
 /*
  * Styles and flags

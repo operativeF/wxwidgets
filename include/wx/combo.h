@@ -741,7 +741,7 @@ enum
     wxCP_IFLAG_CREATED      = 0x0001 // Set by wxComboCtrlBase after Create is called
 };
 
-class WXDLLIMPEXP_FWD_CORE wxComboCtrl;
+class wxComboCtrl;
 
 
 class wxComboPopup

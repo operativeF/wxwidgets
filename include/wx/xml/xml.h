@@ -28,12 +28,12 @@
     #define WXDLLIMPEXP_XML
 #endif
 
-class WXDLLIMPEXP_FWD_XML wxXmlNode;
-class WXDLLIMPEXP_FWD_XML wxXmlAttribute;
-class WXDLLIMPEXP_FWD_XML wxXmlDocument;
-class WXDLLIMPEXP_FWD_XML wxXmlIOHandler;
-class WXDLLIMPEXP_FWD_BASE wxInputStream;
-class WXDLLIMPEXP_FWD_BASE wxOutputStream;
+class wxXmlNode;
+class wxXmlAttribute;
+class wxXmlDocument;
+class wxXmlIOHandler;
+class wxInputStream;
+class wxOutputStream;
 
 // Represents XML node type.
 enum wxXmlNodeType

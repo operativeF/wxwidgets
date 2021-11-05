@@ -113,7 +113,7 @@ extern WXDLLIMPEXP_DATA_CORE(const wxGBSpan) wxDefaultSpan;
 // wxGBSizerItem
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxGridBagSizer;
+class wxGridBagSizer;
 
 
 class wxGBSizerItem : public wxSizerItem

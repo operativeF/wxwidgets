@@ -55,7 +55,7 @@ typedef int (* wxSortCompareFunction)(const void *elem1, const void *elem2);
 // types
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxObjectListNode;
+class wxObjectListNode;
 using wxNode = wxObjectListNode;
 
 #define wxLIST_COMPATIBILITY

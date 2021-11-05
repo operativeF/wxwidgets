@@ -17,7 +17,7 @@
 
 #include "wx/event.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 /*
  A validator has up to three purposes:

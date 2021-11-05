@@ -89,7 +89,7 @@ private:
 
     unique_palette m_hPalette;
 
-    friend class WXDLLIMPEXP_FWD_CORE wxPalette;
+    friend class wxPalette;
 };
 
 // ============================================================================

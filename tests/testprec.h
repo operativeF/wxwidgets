@@ -110,7 +110,7 @@ public:
 
 // these functions can be used to hook into wxApp event processing and are
 // currently used by the events propagation test
-class WXDLLIMPEXP_FWD_BASE wxEvent;
+class wxEvent;
 
 typedef int (*FilterEventFunc)(wxEvent&);
 typedef bool (*ProcessEventFunc)(wxEvent&);

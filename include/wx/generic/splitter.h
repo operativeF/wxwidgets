@@ -17,7 +17,7 @@
 
 #include <memory>
 
-class WXDLLIMPEXP_FWD_CORE wxSplitterEvent;
+class wxSplitterEvent;
 
 // ---------------------------------------------------------------------------
 // splitter constants
@@ -373,7 +373,7 @@ public:
     wxEvent *Clone() const override { return new wxSplitterEvent(*this); }
 
 private:
-    friend class WXDLLIMPEXP_FWD_CORE wxSplitterWindow;
+    friend class wxSplitterWindow;
 
     // data for the different types of event
     union

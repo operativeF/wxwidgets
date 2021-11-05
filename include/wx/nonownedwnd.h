@@ -16,7 +16,7 @@
 // Styles that can be used with any wxNonOwnedWindow:
 constexpr unsigned int wxFRAME_SHAPED = 0x0010;  // Create a window that is able to be shaped
 
-class WXDLLIMPEXP_FWD_CORE wxGraphicsPath;
+class wxGraphicsPath;
 
 // ----------------------------------------------------------------------------
 // wxNonOwnedWindow: a window that is not a child window of another one.

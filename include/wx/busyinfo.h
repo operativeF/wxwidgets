@@ -18,7 +18,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // This class is used to pass all the various parameters to wxBusyInfo ctor.
 // According to the usual naming conventions (see wxAboutDialogInfo,

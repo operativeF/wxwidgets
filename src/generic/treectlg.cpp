@@ -34,7 +34,7 @@
 // array types
 // -----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxGenericTreeItem;
+class wxGenericTreeItem;
 
 using wxArrayGenericTreeItems = std::vector<wxGenericTreeItem*>;
 

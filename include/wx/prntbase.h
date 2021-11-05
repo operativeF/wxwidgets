@@ -27,24 +27,24 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxChoice;
-class WXDLLIMPEXP_FWD_CORE wxPrintout;
-class WXDLLIMPEXP_FWD_CORE wxPrinterBase;
-class WXDLLIMPEXP_FWD_CORE wxPrintDialogBase;
-class WXDLLIMPEXP_FWD_CORE wxPrintDialog;
-class WXDLLIMPEXP_FWD_CORE wxPageSetupDialogBase;
-class WXDLLIMPEXP_FWD_CORE wxPageSetupDialog;
-class WXDLLIMPEXP_FWD_CORE wxPrintPreviewBase;
-class WXDLLIMPEXP_FWD_CORE wxPreviewCanvas;
-class WXDLLIMPEXP_FWD_CORE wxPreviewControlBar;
-class WXDLLIMPEXP_FWD_CORE wxPreviewFrame;
-class WXDLLIMPEXP_FWD_CORE wxPrintFactory;
-class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
-class WXDLLIMPEXP_FWD_CORE wxPrintPreview;
-class WXDLLIMPEXP_FWD_CORE wxPrintAbortDialog;
-class WXDLLIMPEXP_FWD_CORE wxStaticText;
+class wxDC;
+class wxButton;
+class wxChoice;
+class wxPrintout;
+class wxPrinterBase;
+class wxPrintDialogBase;
+class wxPrintDialog;
+class wxPageSetupDialogBase;
+class wxPageSetupDialog;
+class wxPrintPreviewBase;
+class wxPreviewCanvas;
+class wxPreviewControlBar;
+class wxPreviewFrame;
+class wxPrintFactory;
+class wxPrintNativeDataBase;
+class wxPrintPreview;
+class wxPrintAbortDialog;
+class wxStaticText;
 class wxPrintPageMaxCtrl;
 class wxPrintPageTextCtrl;
 

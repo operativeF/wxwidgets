@@ -84,7 +84,7 @@ private:
     bool DoIsAnotherRunning() const;
 
     // the implementation details (platform specific)
-    class WXDLLIMPEXP_FWD_BASE wxSingleInstanceCheckerImpl *m_impl{nullptr};
+    class wxSingleInstanceCheckerImpl *m_impl{nullptr};
 };
 
 #endif // wxUSE_SNGLINST_CHECKER

@@ -35,8 +35,8 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCtrl;
-class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextBuffer;
+class wxRichTextCtrl;
+class wxRichTextBuffer;
 
 /*!
  * wxRichTextStyleDefinition class declaration

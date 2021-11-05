@@ -48,8 +48,8 @@
  *
  */
 
-class WXDLLIMPEXP_FWD_NET wxTCPServer;
-class WXDLLIMPEXP_FWD_NET wxTCPClient;
+class wxTCPServer;
+class wxTCPClient;
 
 class wxIPCSocketStreams;
 

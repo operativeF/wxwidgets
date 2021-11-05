@@ -21,9 +21,9 @@
  * Forward declarations
  */
 
-class WXDLLIMPEXP_FWD_CORE wxCheckBox;
-class WXDLLIMPEXP_FWD_CORE wxComboBox;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class wxCheckBox;
+class wxComboBox;
+class wxTextCtrl;
 
 /*!
  * Control identifiers

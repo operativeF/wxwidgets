@@ -12,7 +12,7 @@
 
 #include "wx/dfb/dc.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 //-----------------------------------------------------------------------------
 // wxWindowDCImpl

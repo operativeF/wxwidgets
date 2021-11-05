@@ -22,8 +22,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxScrollHelperEvtHandler;
-class WXDLLIMPEXP_FWD_BASE wxTimer;
+class wxScrollHelperEvtHandler;
+class wxTimer;
 
 // default scrolled window style: scroll in both directions
 constexpr unsigned int wxScrolledWindowStyle = wxHSCROLL | wxVSCROLL;

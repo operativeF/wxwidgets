@@ -89,7 +89,7 @@ public:
 // wxHyperlinkEvent
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxHyperlinkEvent;
+class wxHyperlinkEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_HYPERLINK, wxHyperlinkEvent );
 

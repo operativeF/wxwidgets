@@ -13,8 +13,8 @@
 #include "wx/defs.h"
 
 enum class wxEllipsizeMode;
-class WXDLLIMPEXP_FWD_CORE wxDC;
-struct WXDLLIMPEXP_FWD_CORE wxSize;
+class wxDC;
+struct wxSize;
 
 class wxMarkupParserOutput;
 

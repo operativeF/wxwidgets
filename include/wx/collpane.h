@@ -67,7 +67,7 @@ public:
 // event types and macros
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxCollapsiblePaneEvent;
+class wxCollapsiblePaneEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEvent );
 

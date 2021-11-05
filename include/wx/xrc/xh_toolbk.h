@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_TOOLBOOK
 
-class WXDLLIMPEXP_FWD_CORE wxToolbook;
+class wxToolbook;
 
 class WXDLLIMPEXP_XRC wxToolbookXmlHandler : public wxXmlResourceHandler
 {

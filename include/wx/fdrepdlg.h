@@ -21,10 +21,10 @@
 #include <cstdint>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFindDialogEvent;
-class WXDLLIMPEXP_FWD_CORE wxFindReplaceDialog;
-class WXDLLIMPEXP_FWD_CORE wxFindReplaceData;
-class WXDLLIMPEXP_FWD_CORE wxFindReplaceDialogImpl;
+class wxFindDialogEvent;
+class wxFindReplaceDialog;
+class wxFindReplaceData;
+class wxFindReplaceDialogImpl;
 
 // ----------------------------------------------------------------------------
 // Flags for wxFindReplaceData.Flags

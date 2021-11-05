@@ -18,11 +18,11 @@
 #include "wx/html/htmlcell.h"
 #include "wx/encconv.h"
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlWindow;
-class WXDLLIMPEXP_FWD_HTML wxHtmlWindowInterface;
-class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
-class WXDLLIMPEXP_FWD_HTML wxHtmlWinTagHandler;
-class WXDLLIMPEXP_FWD_HTML wxHtmlTagsModule;
+class wxHtmlWindow;
+class wxHtmlWindowInterface;
+class wxHtmlWinParser;
+class wxHtmlWinTagHandler;
+class wxHtmlTagsModule;
 
 
 //--------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ private:
 //                  the wxHtmlWinParser object
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_HTML wxHtmlStyleParams;
+class wxHtmlStyleParams;
 
 class WXDLLIMPEXP_HTML wxHtmlWinTagHandler : public wxHtmlTagHandler
 {

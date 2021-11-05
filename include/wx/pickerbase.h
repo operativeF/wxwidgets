@@ -17,8 +17,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxToolTip;
+class wxTextCtrl;
+class wxToolTip;
 
 constexpr char wxPickerNameStr[] = "picker";
 

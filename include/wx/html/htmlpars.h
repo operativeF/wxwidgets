@@ -19,10 +19,10 @@
 #include <vector>
 #include "wx/fontenc.h"
 
-class WXDLLIMPEXP_FWD_BASE wxMBConv;
-class WXDLLIMPEXP_FWD_HTML wxHtmlParser;
-class WXDLLIMPEXP_FWD_HTML wxHtmlTagHandler;
-class WXDLLIMPEXP_FWD_HTML wxHtmlEntitiesParser;
+class wxMBConv;
+class wxHtmlParser;
+class wxHtmlTagHandler;
+class wxHtmlEntitiesParser;
 
 class wxHtmlTextPieces;
 struct wxHtmlParserState;

@@ -15,7 +15,7 @@
 #include "wx/dialog.h"
 
 #if wxUSE_SLIDER
-    class WXDLLIMPEXP_FWD_CORE wxSlider;
+    class wxSlider;
 #endif // wxUSE_SLIDER
 
 // Preview with opacity is possible only if wxGCDC and wxStaticBitmap are

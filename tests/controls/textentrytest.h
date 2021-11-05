@@ -30,7 +30,7 @@
 
 #include "wx/uiaction.h"
 
-class WXDLLIMPEXP_FWD_CORE wxTextEntry;
+class wxTextEntry;
 
 template<typename TextEntryT>
 class TextEntryTest

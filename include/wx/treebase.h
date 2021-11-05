@@ -54,8 +54,8 @@ public:
 
 class wxTreeItemData: public wxClientData
 {
-friend class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
-friend class WXDLLIMPEXP_FWD_CORE wxGenericTreeCtrl;
+friend class wxTreeCtrl;
+friend class wxGenericTreeCtrl;
 public:
     // creation/destruction
     // --------------------
@@ -183,7 +183,7 @@ constexpr char wxTreeCtrlNameStr[] = "treeCtrl";
 //     descriptions below
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxTreeCtrlBase;
+class wxTreeCtrlBase;
 
 class wxTreeEvent : public wxNotifyEvent
 {
@@ -238,8 +238,8 @@ private:
     wxPoint       m_pointDrag;
     bool          m_editCancelled{false};
 
-    friend class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
-    friend class WXDLLIMPEXP_FWD_CORE wxGenericTreeCtrl;
+    friend class wxTreeCtrl;
+    friend class wxGenericTreeCtrl;
 
     wxDECLARE_DYNAMIC_CLASS(wxTreeEvent);
 };

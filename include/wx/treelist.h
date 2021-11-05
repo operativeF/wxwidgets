@@ -27,8 +27,8 @@
 
 #include <gsl/gsl>
 
-class WXDLLIMPEXP_FWD_CORE wxDataViewCtrl;
-class WXDLLIMPEXP_FWD_CORE wxDataViewEvent;
+class wxDataViewCtrl;
+class wxDataViewEvent;
 
 constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
 

@@ -12,7 +12,7 @@
 
 #include "wx/persist.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxPersistentWindow: base class for persistent windows, uses the window name
