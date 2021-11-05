@@ -113,7 +113,7 @@ private:
 typedef wxBaseSortedArray<wxString, wxSortedArrayString_SortFunction>
     wxSortedArrayStringBase;
 
-class WXDLLIMPEXP_BASE wxSortedArrayString : public wxSortedArrayStringBase
+class wxSortedArrayString : public wxSortedArrayStringBase
 {
 public:
     wxSortedArrayString() : wxSortedArrayStringBase(wxStringSortAscending)
@@ -146,7 +146,7 @@ private:
 
 // this class provides a temporary wxString* from a
 // wxArrayString
-class WXDLLIMPEXP_BASE wxCArrayString
+class wxCArrayString
 {
 public:
     wxCArrayString( const wxArrayString& array )
@@ -186,11 +186,11 @@ private:
 // separators occurring inside the string to be joined, this can be disabled by
 // passing '\0' as escape
 
-WXDLLIMPEXP_BASE wxString wxJoin(const std::vector<wxString>& arr,
+wxString wxJoin(const std::vector<wxString>& arr,
                                  const wxChar sep,
                                  const wxChar escape = wxT('\\'));
 
-WXDLLIMPEXP_BASE std::vector<wxString> wxSplit(const wxString& str,
+std::vector<wxString> wxSplit(const wxString& str,
                                        const wxChar sep,
                                        const wxChar escape = wxT('\\'));
 

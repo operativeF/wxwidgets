@@ -224,7 +224,7 @@ private:
 
 #if wxUSE_UNICODE_UTF8
 // see the comment near wxString::iterator for why we need this
-class WXDLLIMPEXP_BASE wxStringIteratorNode
+class wxStringIteratorNode
 {
 public:
     wxStringIteratorNode()
@@ -260,7 +260,7 @@ private:
 };
 #endif // wxUSE_UNICODE_UTF8
 
-class WXDLLIMPEXP_BASE wxString
+class wxString
 {
   // NB: special care was taken in arranging the member functions in such order
   //     that all inline functions can be effectively inlined, verify that all
@@ -782,7 +782,7 @@ public:
   //     string and traversing it in wxUniCharRef::operator=(). Head of the
   //     list is stored in wxString. (FIXME-UTF8)
 
-  class WXDLLIMPEXP_BASE iterator
+  class iterator
   {
       WX_STR_ITERATOR_IMPL(iterator, wxChar*, wxUniCharRef);
 
@@ -829,7 +829,7 @@ public:
       friend class const_iterator;
   };
 
-  class WXDLLIMPEXP_BASE const_iterator
+  class const_iterator
   {
       // NB: reference_type is intentionally value, not reference, the character
       //     may be encoded differently in wxString data:
@@ -891,7 +891,7 @@ public:
     { return const_iterator(this, m_impl.begin() + PosToImpl(n)); }
 #else // !wxUSE_UNICODE_UTF8
 
-  class WXDLLIMPEXP_BASE iterator
+  class iterator
   {
       WX_STR_ITERATOR_IMPL(iterator, wxChar*, wxUniCharRef);
 
@@ -922,7 +922,7 @@ public:
       friend class const_iterator;
   };
 
-  class WXDLLIMPEXP_BASE const_iterator
+  class const_iterator
   {
       // NB: reference_type is intentionally value, not reference, the character
       //     may be encoded differently in wxString data:
@@ -1909,25 +1909,25 @@ public:
 
     // non-destructive concatenation
       // two strings
-  friend wxString WXDLLIMPEXP_BASE operator+(const wxString& string1,
+  friend wxString operator+(const wxString& string1,
                                              const wxString& string2);
       // string with a single char
-  friend wxString WXDLLIMPEXP_BASE operator+(const wxString& string, wxUniChar ch);
+  friend wxString operator+(const wxString& string, wxUniChar ch);
       // char with a string
-  friend wxString WXDLLIMPEXP_BASE operator+(wxUniChar ch, const wxString& string);
+  friend wxString operator+(wxUniChar ch, const wxString& string);
       // string with C string
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-  friend wxString WXDLLIMPEXP_BASE operator+(const wxString& string,
+  friend wxString operator+(const wxString& string,
                                              const char *psz);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-  friend wxString WXDLLIMPEXP_BASE operator+(const wxString& string,
+  friend wxString operator+(const wxString& string,
                                              const wchar_t *pwz);
       // C string with string
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-  friend wxString WXDLLIMPEXP_BASE operator+(const char *psz,
+  friend wxString operator+(const char *psz,
                                              const wxString& string);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-  friend wxString WXDLLIMPEXP_BASE operator+(const wchar_t *pwz,
+  friend wxString operator+(const wchar_t *pwz,
                                              const wxString& string);
 
   // stream-like functions
@@ -3511,18 +3511,18 @@ inline wxString::const_reverse_iterator operator+(ptrdiff_t n, wxString::const_r
 // enough, from the point of view of C++ standard we must have the declarations
 // here as friend ones are not injected in the enclosing namespace and without
 // them the code fails to compile with conforming compilers such as xlC or g++4
-wxString WXDLLIMPEXP_BASE operator+(const wxString& string1, const wxString& string2);
+wxString operator+(const wxString& string1, const wxString& string2);
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-wxString WXDLLIMPEXP_BASE operator+(const wxString& string, const char *psz);
+wxString operator+(const wxString& string, const char *psz);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-wxString WXDLLIMPEXP_BASE operator+(const wxString& string, const wchar_t *pwz);
+wxString operator+(const wxString& string, const wchar_t *pwz);
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-wxString WXDLLIMPEXP_BASE operator+(const char *psz, const wxString& string);
+wxString operator+(const char *psz, const wxString& string);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-wxString WXDLLIMPEXP_BASE operator+(const wchar_t *pwz, const wxString& string);
+wxString operator+(const wchar_t *pwz, const wxString& string);
 
-wxString WXDLLIMPEXP_BASE operator+(const wxString& string, wxUniChar ch);
-wxString WXDLLIMPEXP_BASE operator+(wxUniChar ch, const wxString& string);
+wxString operator+(const wxString& string, wxUniChar ch);
+wxString operator+(wxUniChar ch, const wxString& string);
 
 inline wxString operator+(const wxString& string, wxUniCharRef ch)
     { return string + (wxUniChar)ch; }
@@ -3748,7 +3748,7 @@ using wxUTF8StringBufferLength = wxStringInternalBufferLength;
 // _inheriting_ from a class can change whether it is being exported from DLL)
 //
 // But this results in link errors because the base template class is not DLL-
-// exported, whether it is declared with WXDLLIMPEXP_BASE or not, because it
+// exported, whether it is declared with or not, because it
 // does have only inline functions. So the simplest fix is to just make all the
 // functions of these classes inline too.
 
@@ -3962,18 +3962,18 @@ namespace std
 // Implementation only from here until the end of file
 // ---------------------------------------------------------------------------
 
-WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxString&);
-WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxCStrData&);
+std::ostream& operator<<(std::ostream&, const wxString&);
+std::ostream& operator<<(std::ostream&, const wxCStrData&);
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxScopedCharBuffer&);
+std::ostream& operator<<(std::ostream&, const wxScopedCharBuffer&);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxScopedWCharBuffer&);
+std::ostream& operator<<(std::ostream&, const wxScopedWCharBuffer&);
 
 #if defined(HAVE_WOSTREAM)
 
-WXDLLIMPEXP_BASE std::wostream& operator<<(std::wostream&, const wxString&);
-WXDLLIMPEXP_BASE std::wostream& operator<<(std::wostream&, const wxCStrData&);
-WXDLLIMPEXP_BASE std::wostream& operator<<(std::wostream&, const wxScopedWCharBuffer&);
+std::wostream& operator<<(std::wostream&, const wxString&);
+std::wostream& operator<<(std::wostream&, const wxCStrData&);
+std::wostream& operator<<(std::wostream&, const wxScopedWCharBuffer&);
 
 #endif  // defined(HAVE_WOSTREAM)
 

@@ -21,7 +21,7 @@
 // wxDynamicObject class, its instances connect to a 'super class instance'
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDynamicObject : public wxObject
+class wxDynamicObject : public wxObject
 {
     friend class wxDynamicClassInfo ;
 public:

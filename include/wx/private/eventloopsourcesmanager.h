@@ -15,7 +15,7 @@
 
 #if wxUSE_EVENTLOOP_SOURCE
 
-class WXDLLIMPEXP_BASE wxEventLoopSourcesManagerBase
+class wxEventLoopSourcesManagerBase
 {
 public:
     virtual wxEventLoopSource*

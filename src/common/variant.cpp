@@ -27,7 +27,7 @@
 
 #include "wx/tokenzr.h"
 
-wxVariant WXDLLIMPEXP_BASE wxNullVariant;
+wxVariant wxNullVariant;
 
 
 #include "wx/listimpl.cpp"
@@ -205,7 +205,7 @@ wxAny wxVariant::GetAny() const
 // wxVariantDataLong
 // -----------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDataLong: public wxVariantData
+class wxVariantDataLong: public wxVariantData
 {
 public:
     wxVariantDataLong() = default;
@@ -368,7 +368,7 @@ long wxVariant::GetLong() const
 // wxVariantDoubleData
 // -----------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDoubleData: public wxVariantData
+class wxVariantDoubleData: public wxVariantData
 {
 public:
     wxVariantDoubleData() = default;
@@ -501,7 +501,7 @@ double wxVariant::GetDouble() const
 // wxVariantBoolData
 // -----------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDataBool: public wxVariantData
+class wxVariantDataBool: public wxVariantData
 {
 public:
     wxVariantDataBool() = default;
@@ -636,7 +636,7 @@ bool wxVariant::GetBool() const
 // wxVariantDataChar
 // -----------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDataChar: public wxVariantData
+class wxVariantDataChar: public wxVariantData
 {
 public:
     wxVariantDataChar() : m_value(0) { }
@@ -783,7 +783,7 @@ wxUniChar wxVariant::GetChar() const
 // wxVariantDataString
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDataString: public wxVariantData
+class wxVariantDataString: public wxVariantData
 {
 public:
     wxVariantDataString() = default;
@@ -1438,7 +1438,7 @@ std::vector<wxString> wxVariant::GetArrayString() const
 
 #if wxUSE_LONGLONG
 
-class WXDLLIMPEXP_BASE wxVariantDataLongLong : public wxVariantData
+class wxVariantDataLongLong : public wxVariantData
 {
 public:
     wxVariantDataLongLong() : m_value(0) { }
@@ -1631,7 +1631,7 @@ wxLongLong wxVariant::GetLongLong() const
 
 #if wxUSE_LONGLONG
 
-class WXDLLIMPEXP_BASE wxVariantDataULongLong : public wxVariantData
+class wxVariantDataULongLong : public wxVariantData
 {
 public:
     wxVariantDataULongLong() : m_value(0) { }
@@ -1823,7 +1823,7 @@ wxULongLong wxVariant::GetULongLong() const
 // wxVariantDataList
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxVariantDataList: public wxVariantData
+class wxVariantDataList: public wxVariantData
 {
 public:
     wxVariantDataList() = default;

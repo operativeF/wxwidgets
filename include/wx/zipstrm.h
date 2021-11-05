@@ -135,7 +135,7 @@ class wxZipInputStream;
 /////////////////////////////////////////////////////////////////////////////
 // wxZipNotifier
 
-class WXDLLIMPEXP_BASE wxZipNotifier
+class wxZipNotifier
 {
 public:
     virtual ~wxZipNotifier() = default;
@@ -149,7 +149,7 @@ public:
 
 class wxDataOutputStream;
 
-class WXDLLIMPEXP_BASE wxZipEntry : public wxArchiveEntry
+class wxZipEntry : public wxArchiveEntry
 {
 public:
     wxZipEntry(const wxString& name = {},
@@ -297,7 +297,7 @@ private:
 
 WX_DECLARE_LIST_WITH_DECL(wxZipEntry, wxZipEntryList_, class WXDLLIMPEXP_BASE);
 
-class WXDLLIMPEXP_BASE wxZipOutputStream : public wxArchiveOutputStream
+class wxZipOutputStream : public wxArchiveOutputStream
 {
 public:
     wxZipOutputStream(wxOutputStream& stream,
@@ -383,7 +383,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // wxZipInputStream
 
-class WXDLLIMPEXP_BASE wxZipInputStream : public wxArchiveInputStream
+class wxZipInputStream : public wxArchiveInputStream
 {
 public:
     using entry_type = wxZipEntry;
@@ -473,7 +473,7 @@ using wxZipPairIter = wxArchiveIterator<wxZipInputStream, std::pair<wxString, wx
 /////////////////////////////////////////////////////////////////////////////
 // wxZipClassFactory
 
-class WXDLLIMPEXP_BASE wxZipClassFactory : public wxArchiveClassFactory
+class wxZipClassFactory : public wxArchiveClassFactory
 {
 public:
     using entry_type = wxZipEntry;

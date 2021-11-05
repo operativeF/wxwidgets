@@ -1321,7 +1321,7 @@ void wxMutexGuiLeaveImpl()
     gs_critsectGui->Leave();
 }
 
-void WXDLLIMPEXP_BASE wxMutexGuiLeaveOrEnter()
+void wxMutexGuiLeaveOrEnter()
 {
     wxASSERT_MSG( wxThread::IsMain(),
                   wxT("only main thread may call wxMutexGuiLeaveOrEnter()!") );
@@ -1351,13 +1351,13 @@ void WXDLLIMPEXP_BASE wxMutexGuiLeaveOrEnter()
     }
 }
 
-bool WXDLLIMPEXP_BASE wxGuiOwnedByMainThread()
+bool wxGuiOwnedByMainThread()
 {
     return gs_bGuiOwnedByMainThread;
 }
 
 // wake up the main thread if it's in ::GetMessage()
-void WXDLLIMPEXP_BASE wxWakeUpMainThread()
+void wxWakeUpMainThread()
 {
     // sending any message would do - hopefully WM_NULL is harmless enough
     if ( !::PostThreadMessageW(wxThread::GetMainId(), WM_NULL, 0, 0) )
@@ -1376,7 +1376,7 @@ void WXDLLIMPEXP_BASE wxWakeUpMainThread()
     }
 }
 
-bool WXDLLIMPEXP_BASE wxIsWaitingForThread()
+bool wxIsWaitingForThread()
 {
     return gs_waitingForThread;
 }

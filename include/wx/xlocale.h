@@ -72,7 +72,7 @@
 // that would be clearer
 #ifdef wxHAS_XLOCALE_SUPPORT
 
-class WXDLLIMPEXP_BASE wxXLocale
+class wxXLocale
 {
 public:
     // Construct an uninitialized locale
@@ -127,7 +127,7 @@ private:
 
 // Skeleton version supporting only the "C" locale for the systems without
 // xlocale support
-class WXDLLIMPEXP_BASE wxXLocale
+class wxXLocale
 {
 public:
     // Construct an uninitialized locale
@@ -302,27 +302,27 @@ extern WXDLLIMPEXP_DATA_BASE(wxXLocale) wxNullXLocale;
         { return wxCRT_Strtoul_lW(c, endptr, base, loc.Get()); }
 #else // !wxHAS_XLOCALE_SUPPORT
     // ctype functions
-    int WXDLLIMPEXP_BASE wxIsalnum_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsalpha_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIscntrl_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsdigit_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsgraph_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIslower_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsprint_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIspunct_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsspace_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsupper_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxIsxdigit_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxTolower_l(const wxUniChar& c, const wxXLocale& loc);
-    int WXDLLIMPEXP_BASE wxToupper_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsalnum_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsalpha_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIscntrl_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsdigit_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsgraph_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIslower_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsprint_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIspunct_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsspace_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsupper_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxIsxdigit_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxTolower_l(const wxUniChar& c, const wxXLocale& loc);
+    int wxToupper_l(const wxUniChar& c, const wxXLocale& loc);
 
     // stdlib functions
-    double WXDLLIMPEXP_BASE wxStrtod_l(const wchar_t* str, wchar_t **endptr, const wxXLocale& loc);
-    double WXDLLIMPEXP_BASE wxStrtod_l(const char* str, char **endptr, const wxXLocale& loc);
-    long WXDLLIMPEXP_BASE wxStrtol_l(const wchar_t* str, wchar_t **endptr, int base, const wxXLocale& loc);
-    long WXDLLIMPEXP_BASE wxStrtol_l(const char* str, char **endptr, int base, const wxXLocale& loc);
-    unsigned long WXDLLIMPEXP_BASE wxStrtoul_l(const wchar_t* str, wchar_t **endptr, int base, const wxXLocale& loc);
-    unsigned long WXDLLIMPEXP_BASE wxStrtoul_l(const char* str, char **endptr, int base, const wxXLocale& loc);
+    double wxStrtod_l(const wchar_t* str, wchar_t **endptr, const wxXLocale& loc);
+    double wxStrtod_l(const char* str, char **endptr, const wxXLocale& loc);
+    long wxStrtol_l(const wchar_t* str, wchar_t **endptr, int base, const wxXLocale& loc);
+    long wxStrtol_l(const char* str, char **endptr, int base, const wxXLocale& loc);
+    unsigned long wxStrtoul_l(const wchar_t* str, wchar_t **endptr, int base, const wxXLocale& loc);
+    unsigned long wxStrtoul_l(const char* str, char **endptr, int base, const wxXLocale& loc);
 
 #endif // wxHAS_XLOCALE_SUPPORT/!wxHAS_XLOCALE_SUPPORT
 

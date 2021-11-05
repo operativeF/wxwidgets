@@ -30,7 +30,7 @@ using wxU32CharBuffer = wxCharTypeBuffer<wxChar32>;
 using wxScopedU32CharBuffer = wxScopedCharTypeBuffer<wxChar32>;
 #endif
 
-class WXDLLIMPEXP_BASE wxUString: public std::basic_string<wxChar32>
+class wxUString: public std::basic_string<wxChar32>
 {
 public:
     wxUString() = default;

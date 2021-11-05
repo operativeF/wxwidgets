@@ -291,7 +291,7 @@ struct wxLogRecord
 // Derive from this class to customize format of log messages.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLogFormatter
+class wxLogFormatter
 {
 public:
     // Trivial but virtual destructor for the base class.
@@ -316,7 +316,7 @@ protected:
 // normally, only a single instance of this class exists but it's not enforced
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLog
+class wxLog
 {
 public:
     wxLog() : m_formatter(new wxLogFormatter) { }
@@ -623,7 +623,7 @@ private:
 
 // log everything except for the debug/trace messages (which are passed to
 // wxMessageOutputDebug) to a buffer
-class WXDLLIMPEXP_BASE wxLogBuffer : public wxLog
+class wxLogBuffer : public wxLog
 {
 public:
     wxLogBuffer& operator=(wxLogBuffer&&) = delete;
@@ -644,7 +644,7 @@ private:
 
 
 // log everything to a "FILE *", stderr by default
-class WXDLLIMPEXP_BASE wxLogStderr : public wxLog,
+class wxLogStderr : public wxLog,
                                      protected wxMessageOutputStderr
 {
 public:
@@ -660,7 +660,7 @@ protected:
 };
 
 // log everything to an "ostream", cerr by default
-class WXDLLIMPEXP_BASE wxLogStream : public wxLog,
+class wxLogStream : public wxLog,
                                      private wxMessageOutputWithConv
 {
 public:
@@ -698,7 +698,7 @@ protected:
         // ~wxLogNull called, old log sink restored
     }
  */
-class WXDLLIMPEXP_BASE wxLogNull
+class wxLogNull
 {
 public:
     wxLogNull() : m_flagOld(wxLog::EnableLogging(false)) { }
@@ -717,7 +717,7 @@ private:
 // does it itself in its ctor
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLogChain : public wxLog
+class wxLogChain : public wxLog
 {
 public:
     wxLogChain(wxLog *logger);
@@ -765,7 +765,7 @@ private:
 
 #define wxLogPassThrough wxLogInterposer
 
-class WXDLLIMPEXP_BASE wxLogInterposer : public wxLogChain
+class wxLogInterposer : public wxLogChain
 {
 public:
     wxLogInterposer();
@@ -776,7 +776,7 @@ public:
 // a temporary interposer which doesn't destroy the old log target
 // (calls DetachOldLog)
 
-class WXDLLIMPEXP_BASE wxLogInterposerTemp : public wxLogChain
+class wxLogInterposerTemp : public wxLogChain
 {
 public:
     wxLogInterposerTemp();
@@ -1075,13 +1075,13 @@ private:
 // ----------------------------------------------------------------------------
 
 // return the last system error code
-WXDLLIMPEXP_BASE unsigned long wxSysErrorCode();
+unsigned long wxSysErrorCode();
 
 // return the error message for given (or last if 0) error code
-WXDLLIMPEXP_BASE const wxChar* wxSysErrorMsg(unsigned long nErrCode = 0);
+const wxChar* wxSysErrorMsg(unsigned long nErrCode = 0);
 
 // return the error message for given (or last if 0) error code
-WXDLLIMPEXP_BASE wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
+wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
 
 // ----------------------------------------------------------------------------
 // define wxLog<level>() functions which can be used by application instead of
@@ -1259,7 +1259,7 @@ wxDEFINE_EMPTY_LOG_FUNCTION2(Generic, wxLogLevel);
 #endif // wxUSE_GUI
 
 // Empty Class to fake wxLogNull
-class WXDLLIMPEXP_BASE wxLogNull
+class wxLogNull
 {
 public:
     wxLogNull() { }

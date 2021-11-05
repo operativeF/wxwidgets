@@ -127,7 +127,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxDateTime) wxDefaultDateTime;
 // wxDateTime represents an absolute moment in the time
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDateTime
+class wxDateTime
 {
 public:
     // types
@@ -293,7 +293,7 @@ public:
 
         // a class representing a time zone: basically, this is just an offset
         // (in seconds) from GMT
-    class WXDLLIMPEXP_BASE TimeZone
+    class TimeZone
     {
     public:
         TimeZone() = default;
@@ -326,7 +326,7 @@ public:
         // NB: this struct should always be kept normalized (i.e. mon should
         //     be < 12, 1 <= day <= 31 &c), so use AddMonths(), AddDays()
         //     instead of modifying the member fields directly!
-    struct WXDLLIMPEXP_BASE Tm
+    struct Tm
     {
         wxDateTime_t msec{0};
         wxDateTime_t sec{0};
@@ -1169,7 +1169,7 @@ private:
 // objects of that class. See also wxDateSpan.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxTimeSpan
+class wxTimeSpan
 {
 public:
     // constructors
@@ -1395,7 +1395,7 @@ private:
 // associated with those.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDateSpan
+class wxDateSpan
 {
 public:
     // constructors
@@ -1545,7 +1545,7 @@ WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxDateTimeHolidayAuthority *,
                               class WXDLLIMPEXP_BASE);
 
 class wxDateTimeHolidaysModule;
-class WXDLLIMPEXP_BASE wxDateTimeHolidayAuthority
+class wxDateTimeHolidayAuthority
 {
 friend class wxDateTimeHolidaysModule;
 public:
@@ -1588,7 +1588,7 @@ private:
 };
 
 // the holidays for this class are all Saturdays and Sundays
-class WXDLLIMPEXP_BASE wxDateTimeWorkDays : public wxDateTimeHolidayAuthority
+class wxDateTimeWorkDays : public wxDateTimeHolidayAuthority
 {
 protected:
     bool DoIsHoliday(const wxDateTime& dt) const override;
@@ -2147,13 +2147,13 @@ inline wxDateSpan wxDateSpan::Subtract(const wxDateSpan& other) const
 // wxTimeSpan operators
 // ----------------------------------------------------------------------------
 
-wxTimeSpan WXDLLIMPEXP_BASE operator*(int n, const wxTimeSpan& ts);
+wxTimeSpan operator*(int n, const wxTimeSpan& ts);
 
 // ----------------------------------------------------------------------------
 // wxDateSpan
 // ----------------------------------------------------------------------------
 
-wxDateSpan WXDLLIMPEXP_BASE operator*(int n, const wxDateSpan& ds);
+wxDateSpan operator*(int n, const wxDateSpan& ds);
 
 // ============================================================================
 // other helper functions
@@ -2165,10 +2165,10 @@ wxDateSpan WXDLLIMPEXP_BASE operator*(int n, const wxDateSpan& ds);
 //  for ( m = wxDateTime::Jan; m < wxDateTime::Inv_Month; wxNextMonth(m) )
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_BASE void wxNextMonth(wxDateTime::Month& m);
-WXDLLIMPEXP_BASE void wxPrevMonth(wxDateTime::Month& m);
-WXDLLIMPEXP_BASE void wxNextWDay(wxDateTime::WeekDay& wd);
-WXDLLIMPEXP_BASE void wxPrevWDay(wxDateTime::WeekDay& wd);
+void wxNextMonth(wxDateTime::Month& m);
+void wxPrevMonth(wxDateTime::Month& m);
+void wxNextWDay(wxDateTime::WeekDay& wd);
+void wxPrevWDay(wxDateTime::WeekDay& wd);
 
 #endif // wxUSE_DATETIME
 

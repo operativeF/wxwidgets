@@ -34,5 +34,5 @@
 
 // FIXME-UTF8: get rid of this, have only one {}
 #if wxUSE_UNICODE_UTF8
-const wxStringCharType WXDLLIMPEXP_BASE *{}Impl = "";
+const wxStringCharType *{}Impl = "";
 #endif

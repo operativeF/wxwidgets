@@ -14,7 +14,7 @@
 
 #if wxUSE_FSWATCHER
 
-class WXDLLIMPEXP_BASE wxKqueueFileSystemWatcher :
+class wxKqueueFileSystemWatcher :
         public wxFileSystemWatcherBase
 {
 public:

@@ -63,7 +63,7 @@ inline wxList wxPendingDelete;
 // wxAppConsoleBase: wxApp for non-GUI applications
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxAppConsoleBase : public wxEvtHandler,
+class wxAppConsoleBase : public wxEvtHandler,
                                           public wxEventFilter
 {
 public:
@@ -751,7 +751,7 @@ protected:
 // ------------------------------------------------------
 
 // Force an exit from main loop
-WXDLLIMPEXP_BASE void wxExit();
+void wxExit();
 
 // avoid redeclaring this function here if it had been already declared by
 // wx/utils.h, this results in warnings from g++ with -Wredundant-decls
@@ -764,7 +764,7 @@ bool wxYield();
 #endif // wx_YIELD_DECLARED
 
 // Yield to other apps/messages
-WXDLLIMPEXP_BASE void wxWakeUpIdle();
+void wxWakeUpIdle();
 
 // ----------------------------------------------------------------------------
 // macros for dynamic creation of the application object
@@ -774,7 +774,7 @@ WXDLLIMPEXP_BASE void wxWakeUpIdle();
 // creator function. wxApp can then call this function to create a new app
 // object. Convoluted, but necessary.
 
-class WXDLLIMPEXP_BASE wxAppInitializer
+class wxAppInitializer
 {
 public:
     wxAppInitializer(wxAppInitializerFunction fn)

@@ -49,7 +49,7 @@ WX_DEFINE_USER_EXPORTED_ARRAY_INT(wxTextFileType,
 
 #endif // wxUSE_TEXTBUFFER
 
-class WXDLLIMPEXP_BASE wxTextBuffer
+class wxTextBuffer
 {
 protected:
     // default ctor, use Open(string)

@@ -19,8 +19,8 @@
 
 #include <cstddef>
 
-WXDLLIMPEXP_BASE void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool isVect = false);
-WXDLLIMPEXP_BASE void wxDebugFree(void * buf, bool isVect = false);
+void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool isVect = false);
+void wxDebugFree(void * buf, bool isVect = false);
 
 //**********************************************************************************
 /*
@@ -206,7 +206,7 @@ typedef void (*wxShutdownNotifyFunction)();
   globals which have to do with the wxMemStruct class.
 */
 
-class WXDLLIMPEXP_BASE wxDebugContext {
+class wxDebugContext {
 
 protected:
     // Used to set alignment for markers.
@@ -316,7 +316,7 @@ private:
 // destructed. Adding one wxDebugContextDumpDelayCounter per file will delay
 // memory leak checking until after destructing all global objects.
 
-class WXDLLIMPEXP_BASE wxDebugContextDumpDelayCounter
+class wxDebugContextDumpDelayCounter
 {
 public:
     wxDebugContextDumpDelayCounter();
@@ -333,8 +333,8 @@ static wxDebugContextDumpDelayCounter wxDebugContextDumpDelayCounter_File;
     static wxDebugContextDumpDelayCounter wxDebugContextDumpDelayCounter_Extra;
 
 // Output a debug message, in a system dependent fashion.
-void WXDLLIMPEXP_BASE wxTrace(const wxChar *fmt ...) WX_ATTRIBUTE_PRINTF_1;
-void WXDLLIMPEXP_BASE wxTraceLevel(int level, const wxChar *fmt ...) WX_ATTRIBUTE_PRINTF_2;
+void wxTrace(const wxChar *fmt ...) WX_ATTRIBUTE_PRINTF_1;
+void wxTraceLevel(int level, const wxChar *fmt ...) WX_ATTRIBUTE_PRINTF_2;
 
 #define WXTRACE wxTrace
 #define WXTRACELEVEL wxTraceLevel

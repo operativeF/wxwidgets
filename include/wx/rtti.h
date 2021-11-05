@@ -38,10 +38,10 @@ class wxHashTable_Node;
 
 typedef wxObject *(*wxObjectConstructorFn)();
 
-class WXDLLIMPEXP_BASE wxClassInfo
+class wxClassInfo
 {
     friend class wxObject;
-    friend WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+    friend wxObject *wxCreateDynamicObject(const wxString& name);
 public:
     wxClassInfo( const wxChar *className,
                  const wxClassInfo *baseInfo1,
@@ -131,7 +131,7 @@ protected:
     void Unregister();
 };
 
-WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+wxObject *wxCreateDynamicObject(const wxString& name);
 
 // ----------------------------------------------------------------------------
 // Dynamic class macros

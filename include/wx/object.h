@@ -26,7 +26,7 @@ enum wxItemKind
 };
 
 #define wxDECLARE_CLASS_INFO_ITERATORS()                                     \
-class WXDLLIMPEXP_BASE const_iterator                                    \
+class const_iterator                                    \
     {                                                                        \
     typedef wxHashTable_Node Node;                                       \
     public:                                                                  \
@@ -158,7 +158,7 @@ inline T *wxCheckCast(const void *ptr)
 // wxRefCounter: ref counted data "manager"
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxRefCounter
+class wxRefCounter
 {
 public:
     // It doesn't make sense to copy the reference counted objects, a new ref
@@ -297,7 +297,7 @@ private:
 // wxObject: the root class of wxWidgets object hierarchy
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxObject
+class wxObject
 {
 public:
     wxObject() = default;

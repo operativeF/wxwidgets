@@ -126,7 +126,7 @@ class wxString;
 // accounts for string changes done by wxArgNormalizer<>
 //
 // Note that this class can _only_ be used for function arguments!
-class WXDLLIMPEXP_BASE wxFormatString
+class wxFormatString
 {
 public:
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
@@ -507,7 +507,7 @@ struct wxArgNormalizerWithBuffer
 
 // string objects:
 template<>
-struct WXDLLIMPEXP_BASE wxArgNormalizerNative<const wxString&>
+struct wxArgNormalizerNative<const wxString&>
 {
     wxArgNormalizerNative(const wxString& s,
                           const wxFormatString *fmt,
@@ -524,7 +524,7 @@ struct WXDLLIMPEXP_BASE wxArgNormalizerNative<const wxString&>
 
 // c_str() values:
 template<>
-struct WXDLLIMPEXP_BASE wxArgNormalizerNative<const wxCStrData&>
+struct wxArgNormalizerNative<const wxCStrData&>
 {
     wxArgNormalizerNative(const wxCStrData& value,
                           const wxFormatString *fmt,
@@ -542,7 +542,7 @@ struct WXDLLIMPEXP_BASE wxArgNormalizerNative<const wxCStrData&>
 // wxString/wxCStrData conversion to wchar_t* value
 #if wxUSE_UNICODE_UTF8 && !wxUSE_UTF8_LOCALE_ONLY
 template<>
-struct WXDLLIMPEXP_BASE wxArgNormalizerWchar<const wxString&>
+struct wxArgNormalizerWchar<const wxString&>
     : public wxArgNormalizerWithBuffer<wchar_t>
 {
     wxArgNormalizerWchar(const wxString& s,
@@ -550,7 +550,7 @@ struct WXDLLIMPEXP_BASE wxArgNormalizerWchar<const wxString&>
 };
 
 template<>
-struct WXDLLIMPEXP_BASE wxArgNormalizerWchar<const wxCStrData&>
+struct wxArgNormalizerWchar<const wxCStrData&>
     : public wxArgNormalizerWithBuffer<wchar_t>
 {
     wxArgNormalizerWchar(const wxCStrData& s,
@@ -875,7 +875,7 @@ WX_ARG_NORMALIZER_FORWARD(const signed char&, signed char);
 // Replacement for va_arg() for use with strings in functions that accept
 // strings normalized by wxArgNormalizer<T>:
 
-struct WXDLLIMPEXP_BASE wxArgNormalizedString
+struct wxArgNormalizedString
 {
     wxArgNormalizedString(const void* ptr) : m_ptr(ptr) {}
 

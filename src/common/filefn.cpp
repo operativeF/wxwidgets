@@ -840,7 +840,7 @@ bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& sz
 
 #if wxUSE_DATETIME
 
-time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
+time_t wxFileModificationTime(const wxString& filename)
 {
     wxDateTime mtime;
     if ( !wxFileName(filename).GetTimes(nullptr, &mtime, nullptr) )
@@ -856,7 +856,7 @@ time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
 // Returns 0 if none or if there's a problem.
 // filterStr is in the form: "All files (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg"
 // TODO: string_view
-std::size_t WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
+std::size_t wxParseCommonDialogsFilter(const wxString& filterStr,
                                            std::vector<wxString>& descriptions,
                                            std::vector<wxString>& filters)
 {

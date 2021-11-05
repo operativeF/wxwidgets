@@ -54,7 +54,7 @@ struct UntypedBufferData
 };
 
 // NB: this is defined in string.cpp and not the (non-existent) buffer.cpp
-WXDLLIMPEXP_BASE UntypedBufferData * GetUntypedNullData();
+UntypedBufferData * GetUntypedNullData();
 
 } // namespace wxPrivate
 

@@ -39,7 +39,7 @@ class wxHashTableBase;
 // and clang doesn't like using inside a typedef.
 class wxHashTableBase_Node;
 
-class WXDLLIMPEXP_BASE wxHashTableBase_Node
+class wxHashTableBase_Node
 {
     friend class wxHashTableBase;
     typedef class wxHashTableBase_Node _Node;
@@ -77,7 +77,7 @@ protected:
     wxHashTableBase* m_hashPtr;
 };
 
-class WXDLLIMPEXP_BASE wxHashTableBase
+class wxHashTableBase
 {
     friend class wxHashTableBase_Node;
 public:
@@ -150,7 +150,7 @@ protected:
 // for compatibility only
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxHashTable_Node : public wxHashTableBase_Node
+class wxHashTable_Node : public wxHashTableBase_Node
 {
     friend class wxHashTable;
 public:
@@ -172,7 +172,7 @@ public:
 
 // should inherit protectedly, but it is public for compatibility in
 // order to publicly inherit from wxObject
-class WXDLLIMPEXP_BASE wxHashTable : public wxHashTableBase
+class wxHashTable : public wxHashTableBase
 {
     using hash = wxHashTableBase;
 public:

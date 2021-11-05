@@ -1309,7 +1309,7 @@ void wxSleep(int nSecs)
 // font encoding <-> Win32 codepage conversion functions
 // ----------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_BASE long wxEncodingToCharset(wxFontEncoding encoding)
+extern long wxEncodingToCharset(wxFontEncoding encoding)
 {
     switch ( encoding )
     {
@@ -1375,7 +1375,7 @@ extern WXDLLIMPEXP_BASE long wxEncodingToCharset(wxFontEncoding encoding)
 // politically correct and has more chances to work on other Windows versions
 // as well but the old version is still needed for !wxUSE_FONTMAP case
 
-extern WXDLLIMPEXP_BASE long wxEncodingToCodepage(wxFontEncoding encoding)
+extern long wxEncodingToCodepage(wxFontEncoding encoding)
 {
     // There don't seem to be symbolic names for
     // these under Windows so I just copied the
@@ -1522,7 +1522,7 @@ extern long wxCharsetToCodepage(const char *name)
 
 #endif // wxUSE_FONTMAP/!wxUSE_FONTMAP
 
-extern "C" WXDLLIMPEXP_BASE HWND
+extern "C" HWND
 wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 {
     wxCHECK_MSG( classname && pclassname && wndproc, nullptr,

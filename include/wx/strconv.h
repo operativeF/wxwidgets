@@ -38,7 +38,7 @@ constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
 // polymorphically.
 //
 // And you might need to override GetMBNulLen() as well.
-class WXDLLIMPEXP_BASE wxMBConv
+class wxMBConv
 {
 public:
     // The functions doing actual conversion from/to narrow to/from wide
@@ -176,7 +176,7 @@ private:
 //              conversion (hence it depends on the current locale)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvLibc : public wxMBConv
+class wxMBConvLibc : public wxMBConv
 {
 public:
     size_t MB2WC(wchar_t *outputBuf, const char *psz, size_t outputSize) const override;
@@ -196,7 +196,7 @@ public:
 // UTF8 but there might be files stored in ISO8859-1 on disk.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxConvBrokenFileNames : public wxMBConv
+class wxConvBrokenFileNames : public wxMBConv
 {
 public:
     wxConvBrokenFileNames(const wxString& charset);
@@ -241,7 +241,7 @@ private:
 // wxMBConvUTF7 (for conversion using UTF7 encoding)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF7 : public wxMBConv
+class wxMBConvUTF7 : public wxMBConv
 {
 public:
     wxMBConvUTF7() = default;
@@ -333,7 +333,7 @@ private:
 // this is the real UTF-8 conversion class, it has to be called "strict UTF-8"
 // for compatibility reasons: the wxMBConvUTF8 class below also supports lossy
 // conversions if it is created with non default options
-class WXDLLIMPEXP_BASE wxMBConvStrictUTF8 : public wxMBConv
+class wxMBConvStrictUTF8 : public wxMBConv
 {
 public:
     // compiler-generated default ctor and other methods are ok
@@ -352,7 +352,7 @@ public:
     bool IsUTF8() const override { return true; }
 };
 
-class WXDLLIMPEXP_BASE wxMBConvUTF8 : public wxMBConvStrictUTF8
+class wxMBConvUTF8 : public wxMBConvStrictUTF8
 {
 public:
     enum
@@ -385,7 +385,7 @@ private:
 // wxMBConvUTF16Base: for both LE and BE variants
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF16Base : public wxMBConv
+class wxMBConvUTF16Base : public wxMBConv
 {
 public:
     static constexpr auto BYTES_PER_CHAR = 2;
@@ -404,7 +404,7 @@ protected:
 // wxMBConvUTF16LE (for conversion using UTF16 Little Endian encoding)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF16LE : public wxMBConvUTF16Base
+class wxMBConvUTF16LE : public wxMBConvUTF16Base
 {
 public:
     size_t ToWChar(wchar_t *dst, size_t dstLen,
@@ -419,7 +419,7 @@ public:
 // wxMBConvUTF16BE (for conversion using UTF16 Big Endian encoding)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF16BE : public wxMBConvUTF16Base
+class wxMBConvUTF16BE : public wxMBConvUTF16Base
 {
 public:
     size_t ToWChar(wchar_t *dst, size_t dstLen,
@@ -434,7 +434,7 @@ public:
 // wxMBConvUTF32Base: base class for both LE and BE variants
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF32Base : public wxMBConv
+class wxMBConvUTF32Base : public wxMBConv
 {
 public:
     static constexpr auto BYTES_PER_CHAR = 4;
@@ -452,7 +452,7 @@ protected:
 // wxMBConvUTF32LE (for conversion using UTF32 Little Endian encoding)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF32LE : public wxMBConvUTF32Base
+class wxMBConvUTF32LE : public wxMBConvUTF32Base
 {
 public:
     size_t ToWChar(wchar_t *dst, size_t dstLen,
@@ -467,7 +467,7 @@ public:
 // wxMBConvUTF32BE (for conversion using UTF32 Big Endian encoding)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMBConvUTF32BE : public wxMBConvUTF32Base
+class wxMBConvUTF32BE : public wxMBConvUTF32Base
 {
 public:
     size_t ToWChar(wchar_t *dst, size_t dstLen,
@@ -484,7 +484,7 @@ public:
 
 #include "wx/fontenc.h"
 
-class WXDLLIMPEXP_BASE wxCSConv : public wxMBConv
+class wxCSConv : public wxMBConv
 {
 public:
     // we can be created either from charset name or from an encoding constant
@@ -552,7 +552,7 @@ private:
 // wxWhateverWorksConv: use whatever encoding works for the input
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxWhateverWorksConv : public wxMBConv
+class wxWhateverWorksConv : public wxMBConv
 {
 public:
     wxWhateverWorksConv()
@@ -595,7 +595,7 @@ public:
 // instead.
 #define WX_DECLARE_GLOBAL_CONV(klass, name)                             \
     extern WXDLLIMPEXP_DATA_BASE(klass*) name##Ptr;                     \
-    extern WXDLLIMPEXP_BASE klass* wxGet_##name##Ptr();                 \
+    extern klass* wxGet_##name##Ptr();                 \
     inline klass& wxGet_##name()                                        \
     {                                                                   \
         if ( !name##Ptr )                                               \

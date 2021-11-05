@@ -27,7 +27,7 @@ struct wxLZMAStream;
 
 // Common part of input and output LZMA streams: this is just an implementation
 // detail and is not part of the public API.
-class WXDLLIMPEXP_BASE wxLZMAData
+class wxLZMAData
 {
 public:
     wxLZMAData& operator=(wxLZMAData&&) = delete;
@@ -47,7 +47,7 @@ protected:
 // Filter for decompressing data compressed using LZMA
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLZMAInputStream : public wxFilterInputStream,
+class wxLZMAInputStream : public wxFilterInputStream,
                                            private wxPrivate::wxLZMAData
 {
 public:
@@ -78,7 +78,7 @@ private:
 // Filter for compressing data using LZMA(2) algorithm
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLZMAOutputStream : public wxFilterOutputStream,
+class wxLZMAOutputStream : public wxFilterOutputStream,
                                             private wxPrivate::wxLZMAData
 {
 public:
@@ -124,7 +124,7 @@ private:
 // Support for creating LZMA streams from extension/MIME type
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxLZMAClassFactory: public wxFilterClassFactory
+class wxLZMAClassFactory: public wxFilterClassFactory
 {
 public:
     wxLZMAClassFactory();
@@ -145,7 +145,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxLZMAClassFactory);
 };
 
-WXDLLIMPEXP_BASE wxVersionInfo wxGetLibLZMAVersionInfo();
+wxVersionInfo wxGetLibLZMAVersionInfo();
 
 #endif // wxUSE_LIBLZMA && wxUSE_STREAMS
 

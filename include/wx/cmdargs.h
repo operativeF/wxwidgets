@@ -25,7 +25,7 @@
 // as it's used for compatibility, it tries to look as much as traditional
 // (char **) argv as possible, in particular it provides implicit conversions
 // to "char **" and also array-like operator[]
-class WXDLLIMPEXP_BASE wxCmdLineArgsArray
+class wxCmdLineArgsArray
 {
 public:
     wxCmdLineArgsArray& operator=(wxCmdLineArgsArray&&) = delete;

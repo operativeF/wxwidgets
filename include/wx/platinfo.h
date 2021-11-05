@@ -180,7 +180,7 @@ public:
 
 // Information about the toolkit that the app is running under and some basic
 // platform and architecture bitness info
-class WXDLLIMPEXP_BASE wxPlatformInfo
+class wxPlatformInfo
 {
 public:
     wxPlatformInfo();

@@ -38,7 +38,7 @@ class wxSocketManager;
 // wxAppTraits: this class defines various configurable aspects of wxApp
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxAppTraitsBase
+class wxAppTraitsBase
 {
 public:
     // needed since this class declares virtual members
@@ -191,12 +191,12 @@ private:
     #include "wx/unix/apptbase.h"
 #else // no platform-specific methods to add to wxAppTraits
     // wxAppTraits must be a class because it was forward declared as class
-    class WXDLLIMPEXP_BASE wxAppTraits : public wxAppTraitsBase
+    class wxAppTraits : public wxAppTraitsBase
     {
     };
 #endif // platform
 
-class WXDLLIMPEXP_BASE wxConsoleAppTraitsBase : public wxAppTraits
+class wxConsoleAppTraitsBase : public wxAppTraits
 {
 public:
 #if !wxUSE_CONSOLE_EVENTLOOP

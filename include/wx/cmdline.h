@@ -96,7 +96,7 @@ struct wxCmdLineEntryDesc
 // wxCmdLineArg contains the value for one command line argument
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxCmdLineArg
+class wxCmdLineArg
 {
 public:
     virtual ~wxCmdLineArg() = default;
@@ -121,10 +121,10 @@ public:
 // allows enumerating them using the standard iterator-based approach.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxCmdLineArgs
+class wxCmdLineArgs
 {
 public:
-    class WXDLLIMPEXP_BASE const_iterator
+    class const_iterator
     {
     public:
         using difference_type = int;
@@ -191,7 +191,7 @@ private:
 // 4. use GetXXX() to retrieve the parsed info
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxCmdLineParser
+class wxCmdLineParser
 {
 public:
     // ctors and initializers
@@ -363,7 +363,7 @@ private:
 
 // this function is always available (even if !wxUSE_CMDLINE_PARSER) because it
 // is used by wxWin itself under Windows
-class WXDLLIMPEXP_BASE wxCmdLineParser
+class wxCmdLineParser
 {
 public:
     static std::vector<wxString>

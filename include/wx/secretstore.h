@@ -32,7 +32,7 @@ class wxSecretValueImpl;
 
 // This is an immutable value-like class which tries to ensure that the secret
 // value will be wiped out from memory once it's not needed any more.
-class WXDLLIMPEXP_BASE wxSecretValue
+class wxSecretValue
 {
 public:
     // Creates an empty secret value (not the same as an empty password).
@@ -105,7 +105,7 @@ private:
 // A collection of secrets, sometimes called a key chain.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxSecretStore
+class wxSecretStore
 {
 public:
     // Returns the default secrets collection to use.

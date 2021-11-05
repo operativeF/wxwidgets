@@ -50,7 +50,7 @@ enum wxIPCFormat
 class wxServerBase;
 class wxClientBase;
 
-class WXDLLIMPEXP_BASE wxConnectionBase
+class wxConnectionBase
 {
 public:
   wxConnectionBase(void *buffer, size_t size); // use external buffer
@@ -226,7 +226,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_BASE wxServerBase
+class wxServerBase
 {
 public:
   virtual ~wxServerBase() = default;
@@ -238,7 +238,7 @@ public:
   virtual wxConnectionBase *OnAcceptConnection(const wxString& topic) = 0;
 };
 
-class WXDLLIMPEXP_BASE wxClientBase
+class wxClientBase
 {
 public:
   virtual ~wxClientBase() = default;

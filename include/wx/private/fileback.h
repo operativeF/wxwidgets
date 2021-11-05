@@ -23,7 +23,7 @@
 // wxBackedInputStream using it is destroyed.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxBackingFile
+class wxBackingFile
 {
 public:
     static constexpr std::size_t DefaultBufSize = 16384;
@@ -51,7 +51,7 @@ private:
 // An input stream to read from a wxBackingFile.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxBackedInputStream : public wxInputStream
+class wxBackedInputStream : public wxInputStream
 {
 public:
     wxBackedInputStream(const wxBackingFile& backer);

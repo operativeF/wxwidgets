@@ -2210,7 +2210,7 @@ bool wxDateTime::IsWorkDay(Country WXUNUSED(country)) const
 // wxDateSpan
 // ============================================================================
 
-wxDateSpan WXDLLIMPEXP_BASE operator*(int n, const wxDateSpan& ds)
+wxDateSpan operator*(int n, const wxDateSpan& ds)
 {
     wxDateSpan ds1(ds);
     return ds1.Multiply(n);
@@ -2220,7 +2220,7 @@ wxDateSpan WXDLLIMPEXP_BASE operator*(int n, const wxDateSpan& ds)
 // wxTimeSpan
 // ============================================================================
 
-wxTimeSpan WXDLLIMPEXP_BASE operator*(int n, const wxTimeSpan& ts)
+wxTimeSpan operator*(int n, const wxTimeSpan& ts)
 {
     return wxTimeSpan(ts).Multiply(n);
 }

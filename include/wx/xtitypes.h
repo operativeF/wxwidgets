@@ -24,7 +24,7 @@
 #include "wx/log.h"
 #include <typeinfo>
 
-class WXDLLIMPEXP_BASE wxClassInfo;
+class wxClassInfo;
 
 // ----------------------------------------------------------------------------
 // Enum Support
@@ -39,13 +39,13 @@ class WXDLLIMPEXP_BASE wxClassInfo;
 // wxEND_ENUM( wxFlavor )
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_BASE wxEnumMemberData
+struct wxEnumMemberData
 {
     const wxChar*   m_name;
     int             m_value;
 };
 
-class WXDLLIMPEXP_BASE wxEnumData
+class wxEnumData
 {
 public:
     wxEnumData( wxEnumMemberData* data );
@@ -131,7 +131,7 @@ private:
 //
 // ----------------------------------------------------------------------------
 
-void WXDLLIMPEXP_BASE wxSetStringToArray( const wxString &s, wxArrayString &array );
+void wxSetStringToArray( const wxString &s, wxArrayString &array );
 
 template<typename e>
 void wxSetFromString(const wxString &s, wxBitset<e> &data )
@@ -296,12 +296,12 @@ enum wxTypeKind
     wxT_LAST_TYPE_KIND = wxT_DELEGATE // sentinel for bad data, asserts, debugging
 };
 
-class WXDLLIMPEXP_BASE wxAny;
-class WXDLLIMPEXP_BASE wxTypeInfo;
+class wxAny;
+class wxTypeInfo;
 
-WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxTypeInfo*, wxTypeInfoMap, class WXDLLIMPEXP_BASE );
+WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxTypeInfo*, wxTypeInfoMap, class );
 
-class WXDLLIMPEXP_BASE wxTypeInfo
+class wxTypeInfo
 {
 public:
     typedef void (*wxVariant2StringFnc)( const wxAny& data, wxString &result );
@@ -384,7 +384,7 @@ private:
     static wxTypeInfoMap* ms_typeTable;
 };
 
-class WXDLLIMPEXP_BASE wxBuiltInTypeInfo : public wxTypeInfo
+class wxBuiltInTypeInfo : public wxTypeInfo
 {
 public:
     wxBuiltInTypeInfo( wxTypeKind kind, wxVariant2StringFnc to = NULL,
@@ -394,7 +394,7 @@ public:
        { wxASSERT_MSG( GetKind() < wxT_SET, wxT("Illegal Kind for Base Type") ); }
 };
 
-class WXDLLIMPEXP_BASE wxCustomTypeInfo : public wxTypeInfo
+class wxCustomTypeInfo : public wxTypeInfo
 {
 public:
     wxCustomTypeInfo( const wxString &name, wxVariant2StringFnc to,
@@ -403,7 +403,7 @@ public:
        {}
 };
 
-class WXDLLIMPEXP_BASE wxEnumTypeInfo : public wxTypeInfo
+class wxEnumTypeInfo : public wxTypeInfo
 {
 public:
     typedef void (*converterToLong_t)( const wxAny& data, long &result );
@@ -446,7 +446,7 @@ private:
     wxEnumData *m_enumInfo; // Kind == wxT_ENUM or Kind == wxT_SET
 };
 
-class WXDLLIMPEXP_BASE wxClassTypeInfo : public wxTypeInfo
+class wxClassTypeInfo : public wxTypeInfo
 {
 public:
     wxClassTypeInfo( wxTypeKind kind, wxClassInfo* classInfo,
@@ -459,7 +459,7 @@ private:
     wxClassInfo *m_classInfo; // Kind == wxT_OBJECT - could be NULL
 };
 
-class WXDLLIMPEXP_BASE wxCollectionTypeInfo : public wxTypeInfo
+class wxCollectionTypeInfo : public wxTypeInfo
 {
 public:
     wxCollectionTypeInfo( const wxString &elementName, wxVariant2StringFnc to,
@@ -479,7 +479,7 @@ private:
     wxString    m_elementTypeName;
 };
 
-class WXDLLIMPEXP_BASE wxEventSourceTypeInfo : public wxTypeInfo
+class wxEventSourceTypeInfo : public wxTypeInfo
 {
 public:
     wxEventSourceTypeInfo( int eventType, wxClassInfo* eventClass,

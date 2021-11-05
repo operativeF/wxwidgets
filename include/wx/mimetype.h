@@ -45,7 +45,7 @@ enum wxMailcapStyle
 /*
     TODO: would it be more convenient to have this class?
 
-class WXDLLIMPEXP_BASE wxMimeType : public wxString
+class wxMimeType : public wxString
 {
 public:
     // all string ctors here
@@ -68,7 +68,7 @@ public:
 
 // wxMimeTypeCommands stores the verbs defined for the given MIME type with
 // their values
-class WXDLLIMPEXP_BASE wxMimeTypeCommands
+class wxMimeTypeCommands
 {
 public:
     wxMimeTypeCommands() = default;
@@ -121,7 +121,7 @@ private:
 // This class is used with wxMimeTypesManager::AddFallbacks() and Associate()
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFileTypeInfo
+class wxFileTypeInfo
 {
 private:
     void DoVarArgInit(const wxString& mimeType,
@@ -268,7 +268,7 @@ using wxArrayFileTypeInfo = std::vector<wxFileTypeInfo>;
 // the accessors *must* be checked!
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFileType
+class wxFileType
 {
 friend class wxMimeTypesManagerImpl;  // it has access to m_impl
 
@@ -384,7 +384,7 @@ private:
 // wxMimeTypesManagerFactory
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMimeTypesManagerFactory
+class wxMimeTypesManagerFactory
 {
 public:
     virtual ~wxMimeTypesManagerFactory() = default;
@@ -406,7 +406,7 @@ private:
 // given type) about them.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMimeTypesManager
+class wxMimeTypesManager
 {
 public:
     // static helper functions

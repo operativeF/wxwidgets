@@ -54,7 +54,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxULongLong) wxInvalidSize;
 // wxDirTraverser: helper class for wxDir::Traverse()
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDirTraverser
+class wxDirTraverser
 {
 public:
     /// a virtual dtor has been provided since this class has virtual members
@@ -88,7 +88,7 @@ public:
 
 class wxDirData;
 
-class WXDLLIMPEXP_BASE wxDir
+class wxDir
 {
 public:
     // default, use Open()

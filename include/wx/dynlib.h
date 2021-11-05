@@ -157,7 +157,7 @@ enum class wxPluginCategory
 // wxDynamicLibraryDetails: contains details about a loaded wxDynamicLibrary
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDynamicLibraryDetails
+class wxDynamicLibraryDetails
 {
 public:
     // ctor, normally never used as these objects are only created by
@@ -210,7 +210,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxDynamicLibraryDetails,
 // wxDynamicLibrary: represents a handle to a DLL/shared object
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxDynamicLibrary
+class wxDynamicLibrary
 {
 public:
     // return a valid handle for the main program itself or NULL if back

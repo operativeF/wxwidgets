@@ -155,7 +155,7 @@ private :
 #if wxUSE_EXTENDED_RTTI
 
 #define wxDEFINE_FLAGS( flags ) \
-    class WXDLLIMPEXP_BASE flags \
+    class flags \
     {\
     public : \
         flags(long data=0) :m_data(data) {} \

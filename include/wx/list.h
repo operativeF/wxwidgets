@@ -334,7 +334,7 @@ private:
 WX_DECLARE_LIST_2(wxObject, wxObjectList, wxObjectListNode,
                         class WXDLLIMPEXP_BASE);
 
-class WXDLLIMPEXP_BASE wxList : public wxObjectList
+class wxList : public wxObjectList
 {
 public:
     template<typename T>
@@ -355,7 +355,7 @@ public:
 
 WX_DECLARE_LIST_XO(wxString, wxStringListBase, class WXDLLIMPEXP_BASE);
 
-class WXDLLIMPEXP_BASE wxStringList : public wxStringListBase
+class wxStringList : public wxStringListBase
 {
 public:
     compatibility_iterator Append(wxChar* s)

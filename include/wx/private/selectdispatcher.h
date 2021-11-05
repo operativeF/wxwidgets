@@ -25,7 +25,7 @@
 #include "wx/private/fdiodispatcher.h"
 
 // helper class storing all the select() fd sets
-class WXDLLIMPEXP_BASE wxSelectSets
+class wxSelectSets
 {
 public:
     // ctor zeroes out all fd_sets
@@ -79,7 +79,7 @@ private:
     static Callback ms_handlers[Max];
 };
 
-class WXDLLIMPEXP_BASE wxSelectDispatcher : public wxMappedFDIODispatcher
+class wxSelectDispatcher : public wxMappedFDIODispatcher
 {
 public:
     // default ctor

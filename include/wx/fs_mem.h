@@ -126,7 +126,7 @@ public:
 #else // !wxUSE_GUI
 
 // just the same thing as the base class in wxBase
-class WXDLLIMPEXP_BASE wxMemoryFSHandler : public wxMemoryFSHandlerBase
+class wxMemoryFSHandler : public wxMemoryFSHandlerBase
 {
 };
 

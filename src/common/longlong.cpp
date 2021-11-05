@@ -1218,31 +1218,31 @@ std::ostream& operator<< (std::ostream& o, const wxULongLong& ll)
     return o << ll.ToString();
 }
 
-WXDLLIMPEXP_BASE wxString& operator<< (wxString& s, const wxLongLong& ll)
+wxString& operator<< (wxString& s, const wxLongLong& ll)
 {
     return s << ll.ToString();
 }
 
-WXDLLIMPEXP_BASE wxString& operator<< (wxString& s, const wxULongLong& ll)
+wxString& operator<< (wxString& s, const wxULongLong& ll)
 {
     return s << ll.ToString();
 }
 
 #if wxUSE_STREAMS
 
-WXDLLIMPEXP_BASE wxTextOutputStream& operator<< (wxTextOutputStream& o, const wxULongLong& ll)
+wxTextOutputStream& operator<< (wxTextOutputStream& o, const wxULongLong& ll)
 {
     return o << ll.ToString();
 }
 
-WXDLLIMPEXP_BASE wxTextOutputStream& operator<< (wxTextOutputStream& o, const wxLongLong& ll)
+wxTextOutputStream& operator<< (wxTextOutputStream& o, const wxLongLong& ll)
 {
     return o << ll.ToString();
 }
 
 #define READ_STRING_CHAR(s, idx, len) ((idx!=len) ? (wxChar)s[idx++] : wxT('\0'))
 
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o, wxULongLong &ll)
+class wxTextInputStream &operator>>(class wxTextInputStream &o, wxULongLong &ll)
 {
     wxString s = o.ReadWord();
 
@@ -1267,7 +1267,7 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
     return o;
 }
 
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o, wxLongLong &ll)
+class wxTextInputStream &operator>>(class wxTextInputStream &o, wxLongLong &ll)
 {
     wxString s = o.ReadWord();
 
@@ -1307,17 +1307,17 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
 
 #if wxUSE_LONGLONG_NATIVE
 
-WXDLLIMPEXP_BASE class wxTextOutputStream &operator<<(class wxTextOutputStream &o, wxULongLong_t value)
+class wxTextOutputStream &operator<<(class wxTextOutputStream &o, wxULongLong_t value)
 {
     return o << wxULongLong(value).ToString();
 }
 
-WXDLLIMPEXP_BASE class wxTextOutputStream &operator<<(class wxTextOutputStream &o, wxLongLong_t value)
+class wxTextOutputStream &operator<<(class wxTextOutputStream &o, wxLongLong_t value)
 {
     return o << wxLongLong(value).ToString();
 }
 
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o, wxULongLong_t &value)
+class wxTextInputStream &operator>>(class wxTextInputStream &o, wxULongLong_t &value)
 {
     wxULongLong ll;
     o >> ll;
@@ -1325,7 +1325,7 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
     return o;
 }
 
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o, wxLongLong_t &value)
+class wxTextInputStream &operator>>(class wxTextInputStream &o, wxLongLong_t &value)
 {
     wxLongLong ll;
     o >> ll;

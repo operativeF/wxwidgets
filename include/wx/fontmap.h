@@ -212,7 +212,7 @@ constexpr std::vector<std::string_view> GetAllEncodingNames(wxFontEncoding encod
     return {};
 }
 
-class WXDLLIMPEXP_BASE wxFontMapperBase
+class wxFontMapperBase
 {
 public:
     // virtual dtor for any base class

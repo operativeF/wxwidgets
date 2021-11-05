@@ -45,7 +45,7 @@ enum class wxBatteryState
 
 #define wxHAS_POWER_EVENTS
 
-class WXDLLIMPEXP_BASE wxPowerEvent : public wxEvent
+class wxPowerEvent : public wxEvent
 {
 public:
     wxPowerEvent() = default;
@@ -108,7 +108,7 @@ enum wxPowerResourceKind
     wxPOWER_RESOURCE_SYSTEM
 };
 
-class WXDLLIMPEXP_BASE wxPowerResource
+class wxPowerResource
 {
 public:
     static bool Acquire(wxPowerResourceKind kind,
@@ -144,9 +144,9 @@ private:
 // ----------------------------------------------------------------------------
 
 // return the current system power state: online or offline
-WXDLLIMPEXP_BASE wxPowerType wxGetPowerType();
+wxPowerType wxGetPowerType();
 
 // return approximate battery state
-WXDLLIMPEXP_BASE wxBatteryState wxGetBatteryState();
+wxBatteryState wxGetBatteryState();
 
 #endif // _WX_POWER_H_

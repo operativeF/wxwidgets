@@ -833,7 +833,7 @@ static void TestCoder(
 }
 
 
-WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_wxwin( const char* name );
+wxMBConv* new_wxMBConv_wxwin( const char* name );
 
 TEST_CASE("FontmapTests")
 {
@@ -1064,7 +1064,7 @@ TEST_CASE("NonBMPCharTests")
     }
 }
 
-WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_iconv( const char* name );
+wxMBConv* new_wxMBConv_iconv( const char* name );
 
 TEST_CASE("IconvTests")
 {

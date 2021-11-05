@@ -60,7 +60,7 @@ wxDECL_FOR_STRICT_MINGW32(int, vswprintf, (wchar_t*, const wchar_t*, __VALIST))
 wxDECL_FOR_STRICT_MINGW32(int, _putws, (const wchar_t*))
 wxDECL_FOR_STRICT_MINGW32(void, _wperror, (const wchar_t*))
 
-WXDLLIMPEXP_BASE size_t wxMB2WC(wchar_t *buf, const char *psz, size_t n)
+size_t wxMB2WC(wchar_t *buf, const char *psz, size_t n)
 {
   // assume that we have mbsrtowcs() too if we have wcsrtombs()
 #ifdef HAVE_WCSRTOMBS
@@ -93,7 +93,7 @@ WXDLLIMPEXP_BASE size_t wxMB2WC(wchar_t *buf, const char *psz, size_t n)
 #endif
 }
 
-WXDLLIMPEXP_BASE size_t wxWC2MB(char *buf, const wchar_t *pwz, size_t n)
+size_t wxWC2MB(char *buf, const wchar_t *pwz, size_t n)
 {
 #ifdef HAVE_WCSRTOMBS
   mbstate_t mbstate;
@@ -671,14 +671,14 @@ int wxVsnprintf(wchar_t *str, size_t size, const wxString& format, va_list argpt
 // ----------------------------------------------------------------------------
 
 #ifndef wxCRT_StrdupA
-WXDLLIMPEXP_BASE char *wxCRT_StrdupA(const char *s)
+char *wxCRT_StrdupA(const char *s)
 {
     return strcpy((char *)malloc(strlen(s) + 1), s);
 }
 #endif // wxCRT_StrdupA
 
 #ifndef wxCRT_StrdupW
-WXDLLIMPEXP_BASE wchar_t * wxCRT_StrdupW(const wchar_t *pwz)
+wchar_t * wxCRT_StrdupW(const wchar_t *pwz)
 {
   size_t size = (wxWcslen(pwz) + 1) * sizeof(wchar_t);
   wchar_t *ret = (wchar_t *) malloc(size);
@@ -725,7 +725,7 @@ wxChar32* wxStrdup(const wxChar32* s)
 #endif
 
 #ifndef wxCRT_StricmpA
-WXDLLIMPEXP_BASE int wxCRT_StricmpA(const char *psz1, const char *psz2)
+int wxCRT_StricmpA(const char *psz1, const char *psz2)
 {
   char c1, c2;
   do {
@@ -737,7 +737,7 @@ WXDLLIMPEXP_BASE int wxCRT_StricmpA(const char *psz1, const char *psz2)
 #endif // !defined(wxCRT_StricmpA)
 
 #ifndef wxCRT_StricmpW
-WXDLLIMPEXP_BASE int wxCRT_StricmpW(const wchar_t *psz1, const wchar_t *psz2)
+int wxCRT_StricmpW(const wchar_t *psz1, const wchar_t *psz2)
 {
   wchar_t c1, c2;
   do {
@@ -749,7 +749,7 @@ WXDLLIMPEXP_BASE int wxCRT_StricmpW(const wchar_t *psz1, const wchar_t *psz2)
 #endif // !defined(wxCRT_StricmpW)
 
 #ifndef wxCRT_StrnicmpA
-WXDLLIMPEXP_BASE int wxCRT_StrnicmpA(const char *s1, const char *s2, size_t n)
+int wxCRT_StrnicmpA(const char *s1, const char *s2, size_t n)
 {
   // initialize the variables just to suppress stupid gcc warning
   char c1 = 0, c2 = 0;
@@ -763,7 +763,7 @@ WXDLLIMPEXP_BASE int wxCRT_StrnicmpA(const char *s1, const char *s2, size_t n)
 #endif // !defined(wxCRT_StrnicmpA)
 
 #ifndef wxCRT_StrnicmpW
-WXDLLIMPEXP_BASE int wxCRT_StrnicmpW(const wchar_t *s1, const wchar_t *s2, size_t n)
+int wxCRT_StrnicmpW(const wchar_t *s1, const wchar_t *s2, size_t n)
 {
   // initialize the variables just to suppress stupid gcc warning
   wchar_t c1 = 0, c2 = 0;
@@ -783,7 +783,7 @@ WXDLLIMPEXP_BASE int wxCRT_StrnicmpW(const wchar_t *s1, const wchar_t *s2, size_
 // this (and wxCRT_StrncmpW below) are extern "C" because they are needed
 // by regex code, the rest isn't needed, so it's not declared as extern "C"
 #ifndef wxCRT_StrlenW
-extern "C" WXDLLIMPEXP_BASE size_t wxCRT_StrlenW(const wchar_t *s)
+extern "C" size_t wxCRT_StrlenW(const wchar_t *s)
 {
     size_t n = 0;
     while ( *s++ )
@@ -798,7 +798,7 @@ extern "C" WXDLLIMPEXP_BASE size_t wxCRT_StrlenW(const wchar_t *s)
 // ----------------------------------------------------------------------------
 
 #ifndef wxCRT_GetenvW
-WXDLLIMPEXP_BASE wchar_t* wxCRT_GetenvW(const wchar_t *name)
+wchar_t* wxCRT_GetenvW(const wchar_t *name)
 {
     // NB: buffer returned by getenv() is allowed to be overwritten next
     //     time getenv() is called, so it is OK to use static string
@@ -810,7 +810,7 @@ WXDLLIMPEXP_BASE wchar_t* wxCRT_GetenvW(const wchar_t *name)
 #endif // !wxCRT_GetenvW
 
 #ifndef wxCRT_StrftimeW
-WXDLLIMPEXP_BASE size_t
+size_t
 wxCRT_StrftimeW(wchar_t *s, size_t maxsize, const wchar_t *fmt, const struct tm *tm)
 {
     if ( !maxsize )

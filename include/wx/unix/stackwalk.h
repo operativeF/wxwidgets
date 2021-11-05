@@ -15,7 +15,7 @@
 // wxStackFrame
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStackFrame : public wxStackFrameBase
+class wxStackFrame : public wxStackFrameBase
 {
     friend class wxStackWalker;
 
@@ -55,7 +55,7 @@ private:
 // wxStackWalker
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStackWalker : public wxStackWalkerBase
+class wxStackWalker : public wxStackWalkerBase
 {
 public:
     // we need the full path to the program executable to be able to use

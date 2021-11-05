@@ -20,14 +20,14 @@
 #include "wx/any.h"
 
 /*
-class WXDLLIMPEXP_BASE wxObject;
-class WXDLLIMPEXP_BASE wxClassInfo;
-class WXDLLIMPEXP_BASE wxDynamicClassInfo;
+class wxObject;
+class wxClassInfo;
+class wxDynamicClassInfo;
 */
-class WXDLLIMPEXP_BASE wxHashTable;
-class WXDLLIMPEXP_BASE wxHashTable_Node;
-class WXDLLIMPEXP_BASE wxEvent;
-class WXDLLIMPEXP_BASE wxEvtHandler;
+class wxHashTable;
+class wxHashTable_Node;
+class wxEvent;
+class wxEvtHandler;
 
 // ----------------------------------------------------------------------------
 // Property Accessors
@@ -37,7 +37,7 @@ class WXDLLIMPEXP_BASE wxEvtHandler;
 // handled by wxPropertyInfo.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxPropertySetter
+class wxPropertySetter
 {
 public:
     wxPropertySetter( const wxString name ) { m_name = name; }
@@ -50,7 +50,7 @@ private:
     wxString m_name;
 };
 
-class WXDLLIMPEXP_BASE wxPropertyGetter
+class wxPropertyGetter
 {
 public:
     wxPropertyGetter( const wxString name ) { m_name = name; }
@@ -63,7 +63,7 @@ private:
     wxString m_name;
 };
 
-class WXDLLIMPEXP_BASE wxPropertyCollectionGetter
+class wxPropertyCollectionGetter
 {
 public:
     wxPropertyCollectionGetter( const wxString name ) { m_name = name; }
@@ -76,10 +76,10 @@ private:
     wxString m_name;
 };
 
-template<typename coll_t> void WXDLLIMPEXP_BASE \
+template<typename coll_t> void \
     wxCollectionToVariantArray( const coll_t& coll, wxAnyList& result );
 
-class WXDLLIMPEXP_BASE wxPropertyCollectionAdder
+class wxPropertyCollectionAdder
 {
 public:
     wxPropertyCollectionAdder( const wxString name ) { m_name = name; }
@@ -156,7 +156,7 @@ public:                                                                     \
     }                                                                       \
 };
 
-class WXDLLIMPEXP_BASE wxPropertyAccessor
+class wxPropertyAccessor
 {
 public:
     wxPropertyAccessor( wxPropertySetter *setter, wxPropertyGetter *getter,
@@ -223,7 +223,7 @@ protected:
     wxPropertyCollectionGetter* m_collectionGetter;
 };
 
-class WXDLLIMPEXP_BASE wxGenericPropertyAccessor : public wxPropertyAccessor
+class wxGenericPropertyAccessor : public wxPropertyAccessor
 {
 public:
     wxGenericPropertyAccessor( const wxString &propName );
@@ -297,9 +297,9 @@ enum
 // want access, look at wxPropertyAccessor.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxPropertyInfo
+class wxPropertyInfo
 {
-    friend class /* WXDLLIMPEXP_BASE */ wxDynamicClassInfo;
+    friend class /* */ wxDynamicClassInfo;
 
 public:
     wxPropertyInfo(wxPropertyInfo* &iter,
@@ -443,13 +443,13 @@ private:
 // stl is giving problems when forwarding declarations, therefore we define it as a subclass
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxPropertyInfo*, wxPropertyInfoMapBase,
-                                      class WXDLLIMPEXP_BASE );
+                                      class );
 
-class WXDLLIMPEXP_BASE wxPropertyInfoMap : public wxPropertyInfoMapBase {
+class wxPropertyInfoMap : public wxPropertyInfoMapBase {
 };
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxAny, wxStringToAnyHashMapBase,
-                                     class WXDLLIMPEXP_BASE );
+                                     class );
 
 class wxStringToAnyHashMap : public wxStringToAnyHashMapBase {
 };

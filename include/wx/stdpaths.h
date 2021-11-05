@@ -24,7 +24,7 @@ class wxStandardPaths;
 
 // NB: This is always compiled in, wxUSE_STDPATHS=0 only disables native
 //     wxStandardPaths class, but a minimal version is always available
-class WXDLLIMPEXP_BASE wxStandardPathsBase
+class wxStandardPathsBase
 {
 public:
     // possible resources categories
@@ -238,7 +238,7 @@ protected:
 
 #ifndef wxHAS_NATIVE_STDPATHS
 #define wxHAS_STDPATHS_INSTALL_PREFIX
-class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
+class wxStandardPaths : public wxStandardPathsBase
 {
 public:
     void SetInstallPrefix(const std::string& prefix) { m_prefix = prefix; }

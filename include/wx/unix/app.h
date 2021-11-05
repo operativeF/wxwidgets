@@ -15,7 +15,7 @@ class wxFDIOHandler;
 class wxWakeUpPipe;
 
 // wxApp subclass implementing event processing for console applications
-class WXDLLIMPEXP_BASE wxAppConsole : public wxAppConsoleBase
+class wxAppConsole : public wxAppConsoleBase
 {
 public:
     wxAppConsole();

@@ -27,7 +27,7 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
     class WXDLLIMPEXP_BASE
 );
 
-class WXDLLIMPEXP_BASE wxShadowObject
+class wxShadowObject
 {
 public:
     void AddMethod( const wxString &name, wxShadowObjectMethod method )
@@ -93,13 +93,13 @@ enum class wxClientDataType
 };
 
 // TODO: What's the purpose of this?
-class WXDLLIMPEXP_BASE wxClientData
+class wxClientData
 {
 public:
     virtual ~wxClientData() = default;
 };
 
-class WXDLLIMPEXP_BASE wxStringClientData : public wxClientData
+class wxStringClientData : public wxClientData
 {
 public:
     wxStringClientData()  = default;
@@ -120,7 +120,7 @@ private:
 // NOTE:  This functionality is currently duplicated in wxEvtHandler in order
 //        to avoid having more than one vtable in that class hierarchy.
 
-class WXDLLIMPEXP_BASE wxClientDataContainer
+class wxClientDataContainer
 {
 public:
     wxClientDataContainer();

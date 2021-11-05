@@ -21,7 +21,7 @@
 // wxSingleInstanceChecker
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxSingleInstanceChecker
+class wxSingleInstanceChecker
 {
 public:
     // default ctor, use Create() after it

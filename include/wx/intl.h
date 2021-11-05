@@ -57,7 +57,7 @@ class wxLanguageInfoArray;
 //                 translation information
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_BASE wxLanguageInfo
+struct wxLanguageInfo
 {
     int Language;                   // wxLanguage id
     wxString CanonicalName;         // Canonical name, e.g. fr_FR
@@ -143,7 +143,7 @@ enum wxLocaleInitFlags
     wxLOCALE_LOAD_DEFAULT      = 0x0001      // load wxwin.mo?
 };
 
-class WXDLLIMPEXP_BASE wxLocale
+class wxLocale
 {
 public:
     // ctor & dtor
@@ -370,7 +370,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // get the current locale object (note that it may be NULL!)
-extern WXDLLIMPEXP_BASE wxLocale* wxGetLocale();
+extern wxLocale* wxGetLocale();
 
 #endif // wxUSE_INTL
 

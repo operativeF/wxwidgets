@@ -154,7 +154,7 @@
 
 #ifndef wxCRT_VsnprintfW
     /* no (suitable) vsnprintf(), cook our own */
-    WXDLLIMPEXP_BASE int
+    int
     wxCRT_VsnprintfW(wchar_t *buf, size_t len, const wchar_t *format, va_list argptr);
     #define wxUSE_WXVSNPRINTFW 1
 #else
@@ -163,7 +163,7 @@
 
 #ifndef wxCRT_VsnprintfA
         /* no (suitable) vsnprintf(), cook our own */
-        WXDLLIMPEXP_BASE int
+        int
         wxCRT_VsnprintfA(char *buf, size_t len, const char *format, va_list argptr);
         #define wxUSE_WXVSNPRINTFA 1
 #else
@@ -323,10 +323,10 @@ wxVfprintf(FILE *f, const wxString& format, va_list ap)
 // writing to char* buffer and one for writing to wchar_t*:
 
 #if !wxUSE_UTF8_LOCALE_ONLY
-int WXDLLIMPEXP_BASE wxDoSprintfWchar(char *str, const wxChar *format, ...);
+int wxDoSprintfWchar(char *str, const wxChar *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
-int WXDLLIMPEXP_BASE wxDoSprintfUtf8(char *str, const char *format, ...);
+int wxDoSprintfUtf8(char *str, const char *format, ...);
 #endif
 WX_DEFINE_VARARG_FUNC(int, wxSprintf, 2, (char*, const wxFormatString&),
                       wxDoSprintfWchar, wxDoSprintfUtf8)
@@ -335,10 +335,10 @@ int WXDLLIMPEXP_BASE
 wxVsprintf(char *str, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
-int WXDLLIMPEXP_BASE wxDoSnprintfWchar(char *str, size_t size, const wxChar *format, ...);
+int wxDoSnprintfWchar(char *str, size_t size, const wxChar *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
-int WXDLLIMPEXP_BASE wxDoSnprintfUtf8(char *str, size_t size, const char *format, ...);
+int wxDoSnprintfUtf8(char *str, size_t size, const char *format, ...);
 #endif
 WX_DEFINE_VARARG_FUNC(int, wxSnprintf, 3, (char*, size_t, const wxFormatString&),
                       wxDoSnprintfWchar, wxDoSnprintfUtf8)
@@ -347,10 +347,10 @@ int WXDLLIMPEXP_BASE
 wxVsnprintf(char *str, size_t size, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
-int WXDLLIMPEXP_BASE wxDoSprintfWchar(wchar_t *str, const wxChar *format, ...);
+int wxDoSprintfWchar(wchar_t *str, const wxChar *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
-int WXDLLIMPEXP_BASE wxDoSprintfUtf8(wchar_t *str, const char *format, ...);
+int wxDoSprintfUtf8(wchar_t *str, const char *format, ...);
 #endif
 WX_DEFINE_VARARG_FUNC(int, wxSprintf, 2, (wchar_t*, const wxFormatString&),
                       wxDoSprintfWchar, wxDoSprintfUtf8)
@@ -359,10 +359,10 @@ int WXDLLIMPEXP_BASE
 wxVsprintf(wchar_t *str, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
-int WXDLLIMPEXP_BASE wxDoSnprintfWchar(wchar_t *str, size_t size, const wxChar *format, ...);
+int wxDoSnprintfWchar(wchar_t *str, size_t size, const wxChar *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
-int WXDLLIMPEXP_BASE wxDoSnprintfUtf8(wchar_t *str, size_t size, const char *format, ...);
+int wxDoSnprintfUtf8(wchar_t *str, size_t size, const char *format, ...);
 #endif
 WX_DEFINE_VARARG_FUNC(int, wxSnprintf, 3, (wchar_t*, size_t, const wxFormatString&),
                       wxDoSnprintfWchar, wxDoSnprintfUtf8)
@@ -408,7 +408,7 @@ wxVsnprintf(wchar_t *str, size_t size, const wxString& format, va_list argptr);
     #define wxScanfConvertFormatW(fmt) fmt
 #else
     const wxScopedWCharBuffer
-    WXDLLIMPEXP_BASE wxScanfConvertFormatW(const wchar_t *format);
+    wxScanfConvertFormatW(const wchar_t *format);
 #endif
 
 WX_DEFINE_SCANFUNC(wxScanf, 1, (const char *format),
@@ -444,14 +444,14 @@ WX_DEFINE_SCANFUNC(wxSscanf, 2, (const wxCStrData& str, const wchar_t *format),
 
 // Visual C++ doesn't provide vsscanf()
 #ifndef __VISUALC___
-int WXDLLIMPEXP_BASE wxVsscanf(const char *str, const char *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wchar_t *str, const wchar_t *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxScopedCharBuffer& str, const char *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxScopedWCharBuffer& str, const wchar_t *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxString& str, const char *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxString& str, const wchar_t *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxCStrData& str, const char *format, va_list ap);
-int WXDLLIMPEXP_BASE wxVsscanf(const wxCStrData& str, const wchar_t *format, va_list ap);
+int wxVsscanf(const char *str, const char *format, va_list ap);
+int wxVsscanf(const wchar_t *str, const wchar_t *format, va_list ap);
+int wxVsscanf(const wxScopedCharBuffer& str, const char *format, va_list ap);
+int wxVsscanf(const wxScopedWCharBuffer& str, const wchar_t *format, va_list ap);
+int wxVsscanf(const wxString& str, const char *format, va_list ap);
+int wxVsscanf(const wxString& str, const wchar_t *format, va_list ap);
+int wxVsscanf(const wxCStrData& str, const char *format, va_list ap);
+int wxVsscanf(const wxCStrData& str, const wchar_t *format, va_list ap);
 #endif // !__VISUALC__
 
 #endif /* _WX_WXCRTVARARG_H_ */

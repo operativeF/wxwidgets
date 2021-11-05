@@ -17,12 +17,12 @@
 
 #if wxUSE_STREAMS
 
-class WXDLLIMPEXP_BASE wxMBConv;
-class WXDLLIMPEXP_BASE wxInputStream;
-class WXDLLIMPEXP_BASE wxOutputStream;
+class wxMBConv;
+class wxInputStream;
+class wxOutputStream;
 
 // Common wxDataInputStream and wxDataOutputStream parameters.
-class WXDLLIMPEXP_BASE wxDataStreamBase
+class wxDataStreamBase
 {
 public:
     wxDataStreamBase& operator=(wxDataStreamBase&&) = delete;
@@ -52,7 +52,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_BASE wxDataInputStream : public wxDataStreamBase
+class wxDataInputStream : public wxDataStreamBase
 {
 public:
     wxDataInputStream(wxInputStream& s, const wxMBConv& conv = wxConvUTF8);
@@ -114,7 +114,7 @@ protected:
     wxInputStream *m_input;
 };
 
-class WXDLLIMPEXP_BASE wxDataOutputStream : public wxDataStreamBase
+class wxDataOutputStream : public wxDataStreamBase
 {
 public:
     wxDataOutputStream(wxOutputStream& s, const wxMBConv& conv = wxConvUTF8);

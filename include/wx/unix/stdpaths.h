@@ -15,7 +15,7 @@
 // wxStandardPaths
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
+class wxStandardPaths : public wxStandardPathsBase
 {
 public:
     // tries to determine the installation prefix automatically (Linux only right

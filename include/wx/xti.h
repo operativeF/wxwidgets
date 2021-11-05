@@ -62,7 +62,7 @@ class wxObjectAllocator;
 // wxClassInfo
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxObjectFunctor
+class wxObjectFunctor
 {
 public:
     virtual ~wxObjectFunctor();
@@ -81,21 +81,21 @@ typedef void (*wxVariantToObjectConverter)( const wxAny &data, wxObjectFunctor* 
 typedef wxObject* (*wxVariantToObjectPtrConverter) ( const wxAny& data);
 typedef wxAny (*wxObjectToVariantConverter)( wxObject* );
 
-WXDLLIMPEXP_BASE wxString wxAnyGetAsString( const wxAny& data);
-WXDLLIMPEXP_BASE const wxObject* wxAnyGetAsObjectPtr( const wxAny& data);
+wxString wxAnyGetAsString( const wxAny& data);
+const wxObject* wxAnyGetAsObjectPtr( const wxAny& data);
 
-class WXDLLIMPEXP_BASE wxObjectWriter;
-class WXDLLIMPEXP_BASE wxObjectWriterCallback;
+class wxObjectWriter;
+class wxObjectWriterCallback;
 
 typedef bool (*wxObjectStreamingCallback) ( const wxObject *, wxObjectWriter *, \
                                             wxObjectWriterCallback *, const wxStringToAnyHashMap & );
 
 
 
-class WXDLLIMPEXP_BASE wxClassInfo
+class wxClassInfo
 {
-    friend class WXDLLIMPEXP_BASE wxPropertyInfo;
-    friend class /* WXDLLIMPEXP_BASE */ wxHandlerInfo;
+    friend class wxPropertyInfo;
+    friend class /* */ wxHandlerInfo;
     friend wxObject *wxCreateDynamicObject(const wxString& name);
 
 public:
@@ -372,7 +372,7 @@ protected:
     void Unregister();
 };
 
-WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+wxObject *wxCreateDynamicObject(const wxString& name);
 
 // ----------------------------------------------------------------------------
 // wxDynamicClassInfo
@@ -380,9 +380,9 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 
 // this object leads to having a pure runtime-instantiation
 
-class WXDLLIMPEXP_BASE wxDynamicClassInfo : public wxClassInfo
+class wxDynamicClassInfo : public wxClassInfo
 {
-    friend class WXDLLIMPEXP_BASE wxDynamicObject;
+    friend class wxDynamicObject;
 
 public:
     wxDynamicClassInfo( const wxChar *_UnitName, const wxChar *_ClassName,

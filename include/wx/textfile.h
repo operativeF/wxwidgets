@@ -27,7 +27,7 @@
 // wxTextFile
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxTextFile : public wxTextBuffer
+class wxTextFile : public wxTextBuffer
 {
 public:
     // constructors

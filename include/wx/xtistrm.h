@@ -38,17 +38,17 @@ constexpr unsigned int wxNullObjectID = -3;
 // ----------------------------------------------------------------------------
 
 /*
- class WXDLLIMPEXP_BASE wxClassInfo;
- class WXDLLIMPEXP_BASE wxAnyList;
- class WXDLLIMPEXP_BASE wxPropertyInfo;
- class WXDLLIMPEXP_BASE wxAny;
- class WXDLLIMPEXP_BASE wxHandlerInfo;
+ class wxClassInfo;
+ class wxAnyList;
+ class wxPropertyInfo;
+ class wxAny;
+ class wxHandlerInfo;
  */
 
-class WXDLLIMPEXP_BASE wxObjectWriter;
-class WXDLLIMPEXP_BASE wxObjectReader;
+class wxObjectWriter;
+class wxObjectReader;
 
-class WXDLLIMPEXP_BASE wxObjectWriterCallback
+class wxObjectWriterCallback
 {
 public:
     virtual ~wxObjectWriterCallback() = default;
@@ -109,11 +109,11 @@ public:
         { }
 };
 
-class WXDLLIMPEXP_BASE wxObjectWriterFunctor: public wxObjectFunctor
+class wxObjectWriterFunctor: public wxObjectFunctor
 {
 };
 
-class WXDLLIMPEXP_BASE wxObjectWriter: public wxObject
+class wxObjectWriter: public wxObject
 {
     friend class wxObjectWriterFunctor;
 public:
@@ -210,7 +210,7 @@ protected:
 Streaming callbacks for depersisting XML to code, or running objects
 */
 
-class WXDLLIMPEXP_BASE wxObjectReaderCallback;
+class wxObjectReaderCallback;
 
 /*
 wxObjectReader handles streaming in a class from a arbitrary format.
@@ -218,7 +218,7 @@ While walking through it issues calls out to interfaces to readercallback
 the guts from the underlying storage format.
 */
 
-class WXDLLIMPEXP_BASE wxObjectReader: public wxObject
+class wxObjectReader: public wxObject
 {
 public:
     wxObjectReader();
@@ -246,7 +246,7 @@ private:
 // When generating code, these will just create statements of C++
 // code to create the objects.
 
-class WXDLLIMPEXP_BASE wxObjectReaderCallback
+class wxObjectReaderCallback
 {
 public:
     virtual ~wxObjectReaderCallback() = default;
@@ -323,7 +323,7 @@ wxObjectRuntimeReaderCallback implements the callbacks that will bring back
 an object into a life memory instance
 */
 
-class WXDLLIMPEXP_BASE wxObjectRuntimeReaderCallback: public wxObjectReaderCallback
+class wxObjectRuntimeReaderCallback: public wxObjectReaderCallback
 {
     struct wxObjectRuntimeReaderCallbackInternal;
     wxObjectRuntimeReaderCallbackInternal * m_data;

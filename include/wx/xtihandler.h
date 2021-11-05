@@ -38,9 +38,9 @@ typedef wxEventFunction wxObjectEventFunction;
 // this describes an event sink
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxHandlerInfo
+class wxHandlerInfo
 {
-    friend class WXDLLIMPEXP_BASE wxDynamicClassInfo;
+    friend class wxDynamicClassInfo;
 
 public:
     wxHandlerInfo(wxHandlerInfo* &iter,

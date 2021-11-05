@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 
 // class used to create wxDynamicLibraryDetails objects
-class WXDLLIMPEXP_BASE wxDynamicLibraryDetailsCreator
+class wxDynamicLibraryDetailsCreator
 {
 public:
     // type of parameters being passed to EnumModulesProc

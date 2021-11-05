@@ -116,7 +116,7 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
         encoding = wxFont::GetDefaultEncoding();
     }
 
-    extern WXDLLIMPEXP_BASE long wxEncodingToCharset(wxFontEncoding encoding);
+    extern long wxEncodingToCharset(wxFontEncoding encoding);
     info->charset = wxEncodingToCharset(encoding);
     if ( info->charset == -1 )
         return false;

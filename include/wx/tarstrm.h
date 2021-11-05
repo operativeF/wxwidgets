@@ -47,7 +47,7 @@ enum wxTarFormat
 /////////////////////////////////////////////////////////////////////////////
 // wxTarNotifier
 
-class WXDLLIMPEXP_BASE wxTarNotifier
+class wxTarNotifier
 {
 public:
     virtual ~wxTarNotifier() = default;
@@ -59,7 +59,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 // Tar Entry - hold the meta data for a file in the tar
 
-class WXDLLIMPEXP_BASE wxTarEntry : public wxArchiveEntry
+class wxTarEntry : public wxArchiveEntry
 {
 public:
     wxTarEntry(const wxString& name = {},
@@ -150,7 +150,7 @@ private:
 
 WX_DECLARE_STRING_HASH_MAP(wxString, wxTarHeaderRecords);
 
-class WXDLLIMPEXP_BASE wxTarInputStream : public wxArchiveInputStream
+class wxTarInputStream : public wxArchiveInputStream
 {
 public:
     using entry_type = wxTarEntry;
@@ -203,7 +203,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // wxTarOutputStream
 
-class WXDLLIMPEXP_BASE wxTarOutputStream : public wxArchiveOutputStream
+class wxTarOutputStream : public wxArchiveOutputStream
 {
 public:
     wxTarOutputStream(wxOutputStream& stream,
@@ -295,7 +295,7 @@ using wxTarPairIter = wxArchiveIterator<wxTarInputStream, std::pair<wxString, wx
 /////////////////////////////////////////////////////////////////////////////
 // wxTarClassFactory
 
-class WXDLLIMPEXP_BASE wxTarClassFactory : public wxArchiveClassFactory
+class wxTarClassFactory : public wxArchiveClassFactory
 {
 public:
     using entry_type = wxTarEntry;

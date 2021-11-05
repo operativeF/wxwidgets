@@ -26,7 +26,7 @@ constexpr unsigned int wxSTACKWALKER_MAX_DEPTH = 200;
 // wxStackFrame: a single stack level
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStackFrameBase
+class wxStackFrameBase
 {
 private:
     // put this inline function here so that it is defined before use
@@ -114,7 +114,7 @@ protected:
 // wxStackWalker: class for enumerating stack frames
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStackWalkerBase
+class wxStackWalkerBase
 {
 public:
     // dtor does nothing neither but should be virtual

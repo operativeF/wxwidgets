@@ -24,7 +24,7 @@
 
 // A constructor bridge allows to call a ctor with an arbitrary number
 // or parameters during runtime
-class WXDLLIMPEXP_BASE wxObjectAllocatorAndCreator
+class wxObjectAllocatorAndCreator
 {
 public:
     virtual ~wxObjectAllocatorAndCreator() { }
@@ -34,7 +34,7 @@ public:
 // a direct constructor bridge calls the operator new for this class and
 // passes all params to the constructor. Needed for classes that cannot be
 // instantiated using alloc-create semantics
-class WXDLLIMPEXP_BASE wxObjectAllocator : public wxObjectAllocatorAndCreator
+class wxObjectAllocator : public wxObjectAllocatorAndCreator
 {
 public:
     virtual bool Create(wxObject * &o, wxAny *args) = 0;

@@ -20,7 +20,7 @@
 // something you can printf() to
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMessageOutput
+class wxMessageOutput
 {
 public:
     virtual ~wxMessageOutput() = default;
@@ -57,7 +57,7 @@ private:
 // helper mix-in for output targets that can use difference encodings
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMessageOutputWithConv
+class wxMessageOutputWithConv
 {
 protected:
     explicit wxMessageOutputWithConv(const wxMBConv& conv)
@@ -86,7 +86,7 @@ protected:
 // implementation which sends output to stderr or specified file
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMessageOutputStderr : public wxMessageOutput,
+class wxMessageOutputStderr : public wxMessageOutput,
                                                protected wxMessageOutputWithConv
 {
 public:
@@ -112,7 +112,7 @@ enum class wxMessageOutputFlags
     MsgBox  // always use message box if available
 };
 
-class WXDLLIMPEXP_BASE wxMessageOutputBest : public wxMessageOutputStderr
+class wxMessageOutputBest : public wxMessageOutputStderr
 {
 public:
     wxMessageOutputBest() = default;
@@ -143,7 +143,7 @@ public:
 // implementation using the native way of outputting debug messages
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMessageOutputDebug : public wxMessageOutputStderr
+class wxMessageOutputDebug : public wxMessageOutputStderr
 {
 public:
     void Output(const std::string& str) override;
@@ -153,7 +153,7 @@ public:
 // implementation using wxLog (mainly for backwards compatibility)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMessageOutputLog : public wxMessageOutput
+class wxMessageOutputLog : public wxMessageOutput
 {
 public:
     void Output(const std::string& str) override;

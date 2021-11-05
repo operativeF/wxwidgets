@@ -19,7 +19,7 @@
 
 class wxMemoryOutputStream;
 
-class WXDLLIMPEXP_BASE wxMemoryInputStream : public wxInputStream
+class wxMemoryInputStream : public wxInputStream
 {
 public:
     wxMemoryInputStream(const void *data, size_t length);
@@ -64,7 +64,7 @@ private:
     wxDECLARE_ABSTRACT_CLASS(wxMemoryInputStream);
 };
 
-class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
+class wxMemoryOutputStream : public wxOutputStream
 {
 public:
     // if data is !NULL it must be allocated with malloc()

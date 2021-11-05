@@ -20,12 +20,12 @@
 
 /*
 class WXDLLIMPEXP_XML wxXmlNode;
-class WXDLLIMPEXP_BASE wxPropertyInfo;
-class WXDLLIMPEXP_BASE wxObject;
-class WXDLLIMPEXP_BASE wxClassInfo;
-class WXDLLIMPEXP_BASE wxAnyList;
-class WXDLLIMPEXP_BASE wxHandlerInfo;
-class WXDLLIMPEXP_BASE wxObjectWriterCallback;
+class wxPropertyInfo;
+class wxObject;
+class wxClassInfo;
+class wxAnyList;
+class wxHandlerInfo;
+class wxObjectWriterCallback;
 */
 
 class WXDLLIMPEXP_XML wxObjectXmlWriter: public wxObjectWriter

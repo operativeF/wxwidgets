@@ -26,7 +26,7 @@
 
 #if wxUSE_STOPWATCH
 
-class WXDLLIMPEXP_BASE wxStopWatch
+class wxStopWatch
 {
 public:
     // ctor starts the stop watch

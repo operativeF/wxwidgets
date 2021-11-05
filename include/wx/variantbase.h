@@ -56,7 +56,7 @@ class wxClassInfo;
  * overloading wxVariant with unnecessary functionality.
  */
 
-class WXDLLIMPEXP_BASE wxVariantData
+class wxVariantData
 {
     friend class wxVariantBase;
 
@@ -141,7 +141,7 @@ private:
  * built in.
  */
 
-class WXDLLIMPEXP_BASE wxVariantBase
+class wxVariantBase
 {
 public:
     wxVariantBase();

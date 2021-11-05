@@ -20,7 +20,7 @@ class wxMimeTypeCommands;
 WX_DEFINE_ARRAY_PTR(wxMimeTypeCommands *, wxMimeCommandsArray);
 
 // this is the real wxMimeTypesManager for Unix
-class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
+class wxMimeTypesManagerImpl
 {
 public:
     wxMimeTypesManagerImpl();
@@ -103,7 +103,7 @@ protected:
     friend class wxFileTypeImpl;
 };
 
-class WXDLLIMPEXP_BASE wxFileTypeImpl
+class wxFileTypeImpl
 {
 public:
     // initialization functions

@@ -43,7 +43,7 @@ using wxDLImports = wxDLManifest;
 //       instantiate this class directly anyway, use wxPluginManager
 //       instead.
 
-class WXDLLIMPEXP_BASE wxPluginLibrary : public wxDynamicLibrary
+class wxPluginLibrary : public wxDynamicLibrary
 {
 public:
 
@@ -100,7 +100,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_BASE wxPluginManager
+class wxPluginManager
 {
 public:
 

@@ -38,7 +38,7 @@ enum class wxStringTokenizerMode
 // wxStringTokenizer: replaces infamous strtok() and has some other features
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStringTokenizer
+class wxStringTokenizer
 {
 public:
     // ctors and initializers

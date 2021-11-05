@@ -426,68 +426,68 @@ constexpr auto wxInvalidOffset = gsl::narrow_cast<unsigned int>(-1);
 // ----------------------------------------------------------------------------
 // functions
 // ----------------------------------------------------------------------------
-WXDLLIMPEXP_BASE bool wxFileExists(const wxString& filename);
+bool wxFileExists(const wxString& filename);
 
 // does the path exist? (may have or not '/' or '\\' at the end)
-WXDLLIMPEXP_BASE bool wxDirExists(const wxString& pathName);
+bool wxDirExists(const wxString& pathName);
 
-WXDLLIMPEXP_BASE bool wxIsAbsolutePath(const wxString& filename);
+bool wxIsAbsolutePath(const wxString& filename);
 
 // Get filename
-WXDLLIMPEXP_BASE wxChar* wxFileNameFromPath(wxChar *path);
-WXDLLIMPEXP_BASE wxString wxFileNameFromPath(const wxString& path);
+wxChar* wxFileNameFromPath(wxChar *path);
+wxString wxFileNameFromPath(const wxString& path);
 
 // Get directory
-WXDLLIMPEXP_BASE wxString wxPathOnly(const wxString& path);
+wxString wxPathOnly(const wxString& path);
 
 // Get first file name matching given wild card.
 // Flags are reserved for future use.
 #define wxFILE  1
 #define wxDIR   2
-WXDLLIMPEXP_BASE wxString wxFindFirstFile(const wxString& spec, unsigned int flags = wxFILE);
-WXDLLIMPEXP_BASE wxString wxFindNextFile();
+wxString wxFindFirstFile(const wxString& spec, unsigned int flags = wxFILE);
+wxString wxFindNextFile();
 
 // Does the pattern contain wildcards?
-WXDLLIMPEXP_BASE bool wxIsWild(const wxString& pattern);
+bool wxIsWild(const wxString& pattern);
 
 // Does the pattern match the text (usually a filename)?
 // If dot_special is true, doesn't match * against . (eliminating
 // `hidden' dot files)
-WXDLLIMPEXP_BASE bool wxMatchWild(const wxString& pattern,  const wxString& text, bool dot_special = true);
+bool wxMatchWild(const wxString& pattern,  const wxString& text, bool dot_special = true);
 
 // Concatenate two files to form third
-WXDLLIMPEXP_BASE bool wxConcatFiles(const wxString& src1, const wxString& src2, const wxString& dest);
+bool wxConcatFiles(const wxString& src1, const wxString& src2, const wxString& dest);
 
 // Copy file
-WXDLLIMPEXP_BASE bool wxCopyFile(const std::string& src, const std::string& dest,
+bool wxCopyFile(const std::string& src, const std::string& dest,
                                  bool overwrite = true);
 
 // Remove file
-WXDLLIMPEXP_BASE bool wxRemoveFile(const wxString& file);
+bool wxRemoveFile(const wxString& file);
 
 // Rename file
-WXDLLIMPEXP_BASE bool wxRenameFile(const wxString& oldpath, const wxString& newpath, bool overwrite = true);
+bool wxRenameFile(const wxString& oldpath, const wxString& newpath, bool overwrite = true);
 
 // Get current working directory.
-WXDLLIMPEXP_BASE wxString wxGetCwd();
+wxString wxGetCwd();
 
 // Set working directory
-WXDLLIMPEXP_BASE bool wxSetWorkingDirectory(const std::string& d);
+bool wxSetWorkingDirectory(const std::string& d);
 
 // Make directory
-WXDLLIMPEXP_BASE bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);
+bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);
 
 // Remove directory. Flags reserved for future use.
-WXDLLIMPEXP_BASE bool wxRmdir(const wxString& dir, unsigned int flags = 0);
+bool wxRmdir(const wxString& dir, unsigned int flags = 0);
 
 // Return the type of an open file
-WXDLLIMPEXP_BASE wxFileKind wxGetFileKind(int fd);
-WXDLLIMPEXP_BASE wxFileKind wxGetFileKind(FILE *fp);
+wxFileKind wxGetFileKind(int fd);
+wxFileKind wxGetFileKind(FILE *fp);
 
 // permissions; these functions work both on files and directories:
-WXDLLIMPEXP_BASE bool wxIsWritable(const wxString &path);
-WXDLLIMPEXP_BASE bool wxIsReadable(const wxString &path);
-WXDLLIMPEXP_BASE bool wxIsExecutable(const wxString &path);
+bool wxIsWritable(const wxString &path);
+bool wxIsReadable(const wxString &path);
+bool wxIsExecutable(const wxString &path);
 
 // ----------------------------------------------------------------------------
 // separators in file names
@@ -546,19 +546,19 @@ constexpr bool wxIsPathSeparator(wxChar c)
 }
 
 // does the string ends with path separator?
-WXDLLIMPEXP_BASE bool wxEndsWithPathSeparator(const wxString& filename);
+bool wxEndsWithPathSeparator(const wxString& filename);
 
 // find a file in a list of directories, returns false if not found
-WXDLLIMPEXP_BASE bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& szFile);
+bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& szFile);
 
 // Get the OS directory if appropriate (such as the Windows directory).
 // On non-Windows platform, probably just return the empty string.
-WXDLLIMPEXP_BASE wxString wxGetOSDirectory();
+wxString wxGetOSDirectory();
 
 #if wxUSE_DATETIME
 
 // Get file modification time
-WXDLLIMPEXP_BASE time_t wxFileModificationTime(const wxString& filename);
+time_t wxFileModificationTime(const wxString& filename);
 
 #endif // wxUSE_DATETIME
 
@@ -567,7 +567,7 @@ WXDLLIMPEXP_BASE time_t wxFileModificationTime(const wxString& filename);
 // The arrays will contain an equal number of items found before the error.
 // wildCard is in the form:
 // "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
-WXDLLIMPEXP_BASE std::size_t wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
+std::size_t wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
 
 // ----------------------------------------------------------------------------
 // classes
@@ -576,7 +576,7 @@ WXDLLIMPEXP_BASE std::size_t wxParseCommonDialogsFilter(const wxString& wildCard
 #ifdef __UNIX__
 
 // set umask to the given value in ctor and reset it to the old one in dtor
-class WXDLLIMPEXP_BASE wxUmaskChanger
+class wxUmaskChanger
 {
 public:
     // change the umask to the given one if it is not -1: this allows to write

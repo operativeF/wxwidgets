@@ -23,7 +23,7 @@
 
 using namespace std::chrono_literals;
 
-class WXDLLIMPEXP_BASE wxTimerImpl
+class wxTimerImpl
 {
 public:
     // default ctor, SetOwner() must be called after it (wxTimer does it)

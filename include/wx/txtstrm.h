@@ -24,14 +24,14 @@ class wxTextOutputStream;
 typedef wxTextInputStream& (*__wxTextInputManip)(wxTextInputStream&);
 typedef wxTextOutputStream& (*__wxTextOutputManip)(wxTextOutputStream&);
 
-WXDLLIMPEXP_BASE wxTextOutputStream &endl( wxTextOutputStream &stream );
+wxTextOutputStream &endl( wxTextOutputStream &stream );
 
 // If you're scanning through a file using wxTextInputStream, you should check for EOF _before_
 // reading the next item (word / number), because otherwise the last item may get lost.
 // You should however be prepared to receive an empty item (empty string / zero number) at the
 // end of file, especially on Windows systems. This is unavoidable because most (but not all) files end
 // with whitespace (i.e. usually a newline).
-class WXDLLIMPEXP_BASE wxTextInputStream
+class wxTextInputStream
 {
 public:
     wxTextInputStream(wxInputStream& s,
@@ -120,7 +120,7 @@ enum class wxEOL
   Dos
 };
 
-class WXDLLIMPEXP_BASE wxTextOutputStream
+class wxTextOutputStream
 {
 public:
     wxTextOutputStream(wxOutputStream& s,

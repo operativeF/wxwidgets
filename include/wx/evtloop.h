@@ -63,7 +63,7 @@
 // wxEventLoopBase: interface for wxEventLoop
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxEventLoopBase
+class wxEventLoopBase
 {
 public:
     wxEventLoopBase();
@@ -233,7 +233,7 @@ private:
 // Pending() and Dispatch()
 //
 // it also handles idle processing automatically
-class WXDLLIMPEXP_BASE wxEventLoopManual : public wxEventLoopBase
+class wxEventLoopManual : public wxEventLoopBase
 {
 public:
     wxEventLoopManual& operator=(wxEventLoopManual&&) = delete;

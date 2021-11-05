@@ -22,7 +22,7 @@ class wxEventLoopSourcesManagerBase;
 // wxAppTraits: the Unix version adds extra hooks needed by Unix code
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxAppTraits : public wxAppTraitsBase
+class wxAppTraits : public wxAppTraitsBase
 {
 public:
     // wxExecute() support methods

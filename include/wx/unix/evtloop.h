@@ -20,7 +20,7 @@ class wxEventLoopSource;
 class wxFDIODispatcher;
 class wxWakeUpPipeMT;
 
-class WXDLLIMPEXP_BASE wxConsoleEventLoop
+class wxConsoleEventLoop
 #ifdef __WXOSX__
 : public wxCFEventLoop
 #else

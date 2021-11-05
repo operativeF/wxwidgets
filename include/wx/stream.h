@@ -222,7 +222,7 @@ protected:
 // wxOutputStream: base for the output streams
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxOutputStream : public wxStreamBase
+class wxOutputStream : public wxStreamBase
 {
 public:
     wxOutputStream& operator=(wxOutputStream&&) = delete;
@@ -264,7 +264,7 @@ protected:
 // A stream for measuring streamed output
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxCountingOutputStream : public wxOutputStream
+class wxCountingOutputStream : public wxOutputStream
 {
 public:
     wxCountingOutputStream();
@@ -287,7 +287,7 @@ protected:
 // "Filter" streams
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFilterInputStream : public wxInputStream
+class wxFilterInputStream : public wxInputStream
 {
 public:
     wxFilterInputStream() = default;
@@ -308,7 +308,7 @@ protected:
     bool m_owns;
 };
 
-class WXDLLIMPEXP_BASE wxFilterOutputStream : public wxOutputStream
+class wxFilterOutputStream : public wxOutputStream
 {
 public:
     wxFilterOutputStream() = default;
@@ -337,9 +337,9 @@ enum wxStreamProtocolType
     wxSTREAM_FILEEXT    // File extensions the stream handles
 };
 
-void WXDLLIMPEXP_BASE wxUseFilterClasses();
+void wxUseFilterClasses();
 
-class WXDLLIMPEXP_BASE wxFilterClassFactoryBase
+class wxFilterClassFactoryBase
 {
 public:
     virtual ~wxFilterClassFactoryBase() = default;
@@ -358,7 +358,7 @@ protected:
     wxString::size_type FindExtension(const wxString& location) const;
 };
 
-class WXDLLIMPEXP_BASE wxFilterClassFactory : public wxFilterClassFactoryBase
+class wxFilterClassFactory : public wxFilterClassFactoryBase
 {
 public:
     virtual wxFilterInputStream  *NewStream(wxInputStream& stream)  const = 0;
@@ -396,7 +396,7 @@ private:
 // wxBufferedStreams to implement custom buffering
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStreamBuffer
+class wxStreamBuffer
 {
 public:
     // suppress Xcode 11 warning about shadowing global read() symbol
@@ -522,7 +522,7 @@ protected:
 // wxBufferedInputStream
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxBufferedInputStream : public wxFilterInputStream
+class wxBufferedInputStream : public wxFilterInputStream
 {
 public:
     // create a buffered stream on top of the specified low-level stream
@@ -565,7 +565,7 @@ protected:
 // wxBufferedOutputStream
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxBufferedOutputStream : public wxFilterOutputStream
+class wxBufferedOutputStream : public wxFilterOutputStream
 {
 public:
     // create a buffered stream on top of the specified low-level stream
@@ -612,7 +612,7 @@ protected:
 // wxWrapperInputStream: forwards all IO to another stream.
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxWrapperInputStream : public wxFilterInputStream
+class wxWrapperInputStream : public wxFilterInputStream
 {
 public:
     // Constructor fully initializing the stream. The overload taking pointer

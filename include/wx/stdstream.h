@@ -22,7 +22,7 @@
 // wxStdInputStreamBuffer
 // ==========================================================================
 
-class WXDLLIMPEXP_BASE wxStdInputStreamBuffer : public std::streambuf
+class wxStdInputStreamBuffer : public std::streambuf
 {
 public:
     wxStdInputStreamBuffer(wxInputStream& stream);
@@ -52,7 +52,7 @@ protected:
 // wxStdInputStream
 // ==========================================================================
 
-class WXDLLIMPEXP_BASE wxStdInputStream : public std::istream
+class wxStdInputStream : public std::istream
 {
 public:
     wxStdInputStream(wxInputStream& stream);
@@ -65,7 +65,7 @@ protected:
 // wxStdOutputStreamBuffer
 // ==========================================================================
 
-class WXDLLIMPEXP_BASE wxStdOutputStreamBuffer : public std::streambuf
+class wxStdOutputStreamBuffer : public std::streambuf
 {
 public:
     wxStdOutputStreamBuffer(wxOutputStream& stream);
@@ -91,7 +91,7 @@ protected:
 // wxStdOutputStream
 // ==========================================================================
 
-class WXDLLIMPEXP_BASE wxStdOutputStream : public std::ostream
+class wxStdOutputStream : public std::ostream
 {
 public:
     wxStdOutputStream(wxOutputStream& stream);

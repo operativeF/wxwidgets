@@ -103,7 +103,7 @@
 
 #if wxUSE_LONGLONG_NATIVE
 
-class WXDLLIMPEXP_BASE wxLongLongNative
+class wxLongLongNative
 {
 public:
     // ctors
@@ -339,7 +339,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_BASE wxULongLongNative
+class wxULongLongNative
 {
 public:
     // ctors
@@ -563,7 +563,7 @@ wxLongLongNative& wxLongLongNative::operator=(const wxULongLongNative &ll)
 
 #if wxUSE_LONGLONG_WX
 
-class WXDLLIMPEXP_BASE wxLongLongWx
+class wxLongLongWx
 {
 public:
     // ctors
@@ -802,7 +802,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_BASE wxULongLongWx
+class wxULongLongWx
 {
 public:
     // ctors
@@ -1050,11 +1050,11 @@ inline wxLongLong operator-(unsigned long l, const wxULongLong& ull)
 
 #if wxUSE_LONGLONG_NATIVE && wxUSE_STREAMS
 
-WXDLLIMPEXP_BASE class wxTextOutputStream &operator<<(class wxTextOutputStream &stream, wxULongLong_t value);
-WXDLLIMPEXP_BASE class wxTextOutputStream &operator<<(class wxTextOutputStream &stream, wxLongLong_t value);
+class wxTextOutputStream &operator<<(class wxTextOutputStream &stream, wxULongLong_t value);
+class wxTextOutputStream &operator<<(class wxTextOutputStream &stream, wxLongLong_t value);
 
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &stream, wxULongLong_t &value);
-WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &stream, wxLongLong_t &value);
+class wxTextInputStream &operator>>(class wxTextInputStream &stream, wxULongLong_t &value);
+class wxTextInputStream &operator>>(class wxTextInputStream &stream, wxLongLong_t &value);
 
 #endif
 
@@ -1096,7 +1096,7 @@ namespace std
 #include "wx/strvararg.h"
 
 template<>
-struct WXDLLIMPEXP_BASE wxArgNormalizer<wxLongLong>
+struct wxArgNormalizer<wxLongLong>
 {
      wxArgNormalizer(wxLongLong value,
                      const wxFormatString *fmt, unsigned index)

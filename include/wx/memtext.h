@@ -17,7 +17,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_BASE wxMemoryText : public wxTextBuffer
+class wxMemoryText : public wxTextBuffer
 {
 public:
     wxMemoryText() = default;

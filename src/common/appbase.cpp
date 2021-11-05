@@ -925,14 +925,14 @@ void wxAppTraitsBase::MutexGuiLeave()
     wxMutexGuiLeaveImpl();
 }
 
-void WXDLLIMPEXP_BASE wxMutexGuiEnter()
+void wxMutexGuiEnter()
 {
     wxAppTraits * const traits = wxAppConsoleBase::GetTraitsIfExists();
     if ( traits )
         traits->MutexGuiEnter();
 }
 
-void WXDLLIMPEXP_BASE wxMutexGuiLeave()
+void wxMutexGuiLeave()
 {
     wxAppTraits * const traits = wxAppConsoleBase::GetTraitsIfExists();
     if ( traits )

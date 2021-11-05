@@ -41,8 +41,8 @@ inline bool wxIsEmpty(const wxCStrData& s) { return s.AsString().empty(); }
 /* multibyte to wide char conversion functions and macros */
 
 /* multibyte<->widechar conversion */
-WXDLLIMPEXP_BASE size_t wxMB2WC(wchar_t *buf, const char *psz, size_t n);
-WXDLLIMPEXP_BASE size_t wxWC2MB(char *buf, const wchar_t *psz, size_t n);
+size_t wxMB2WC(wchar_t *buf, const char *psz, size_t n);
+size_t wxWC2MB(char *buf, const wchar_t *psz, size_t n);
 
 #define wxMB2WX wxMB2WC
 #define wxWX2MB wxWC2MB
@@ -138,7 +138,7 @@ inline char* wxTmemset(char* szOut, char cIn, size_t len)
 // NB: we can't provide const wchar_t* (= wxChar*) overload, because calling
 //     wxSetlocale(category, NULL) -- which is a common thing to do -- would be
 //     ambiguous
-WXDLLIMPEXP_BASE char* wxSetlocale(int category, const char *locale);
+char* wxSetlocale(int category, const char *locale);
 inline char* wxSetlocale(int category, const wxScopedCharBuffer& locale)
     { return wxSetlocale(category, locale.data()); }
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
@@ -844,11 +844,11 @@ inline int wxRemove(const wxString& path)
 inline int wxRename(const wxString& oldpath, const wxString& newpath)
     { return wxCRT_Rename(oldpath.fn_str(), newpath.fn_str()); }
 
-extern WXDLLIMPEXP_BASE int wxPuts(const wxString& s);
-extern WXDLLIMPEXP_BASE int wxFputs(const wxString& s, FILE *stream);
-extern WXDLLIMPEXP_BASE void wxPerror(const wxString& s);
+extern int wxPuts(const wxString& s);
+extern int wxFputs(const wxString& s, FILE *stream);
+extern void wxPerror(const wxString& s);
 
-extern WXDLLIMPEXP_BASE int wxFputc(const wxUniChar& c, FILE *stream);
+extern int wxFputc(const wxUniChar& c, FILE *stream);
 
 #define wxPutc(c, stream)  wxFputc(c, stream)
 #define wxPutchar(c)       wxFputc(c, stdout)
@@ -859,7 +859,7 @@ extern WXDLLIMPEXP_BASE int wxFputc(const wxUniChar& c, FILE *stream);
 inline char *wxFgets(char *s, int size, FILE *stream)
     { return wxCRT_FgetsA(s, size, stream); }
 // This version calls ANSI version and converts the string using wxConvLibc
-extern WXDLLIMPEXP_BASE wchar_t *wxFgets(wchar_t *s, int size, FILE *stream);
+extern wchar_t *wxFgets(wchar_t *s, int size, FILE *stream);
 
 #define wxGets(s) wxGets_is_insecure_and_dangerous_use_wxFgets_instead
 

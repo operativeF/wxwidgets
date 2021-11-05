@@ -26,7 +26,7 @@
 //     dtor which is _not_ virtual, so it shouldn't be used as a base class.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFFile
+class wxFFile
 {
 public:
   // ctors
@@ -109,7 +109,7 @@ private:
 // you call neither of them, dtor will call Discard().
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxTempFFile
+class wxTempFFile
 {
 public:
   // ctors

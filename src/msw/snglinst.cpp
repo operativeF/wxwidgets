@@ -21,7 +21,7 @@
 // wxSingleInstanceCheckerImpl: the real implementation class
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxSingleInstanceCheckerImpl
+class wxSingleInstanceCheckerImpl
 {
 public:
     wxSingleInstanceCheckerImpl() = default;

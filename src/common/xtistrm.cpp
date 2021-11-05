@@ -178,7 +178,7 @@ void wxObjectWriter::WriteAllProperties( const wxObject * obj, const wxClassInfo
     }
 }
 
-class WXDLLIMPEXP_BASE wxObjectPropertyWriter: public wxObjectWriterFunctor
+class wxObjectPropertyWriter: public wxObjectWriterFunctor
 {
 public:
     wxObjectPropertyWriter(const wxClassTypeInfo* cti,

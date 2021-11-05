@@ -54,7 +54,7 @@ class wxAny;
  * overloading wxVariant with unnecessary functionality.
  */
 
-class WXDLLIMPEXP_BASE wxVariantData : public wxObjectRefData
+class wxVariantData : public wxObjectRefData
 {
     friend class wxVariant;
 public:
@@ -97,7 +97,7 @@ class wxVariant;
 
 WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class WXDLLIMPEXP_BASE);
 
-class WXDLLIMPEXP_BASE wxVariant: public wxObject
+class wxVariant: public wxObject
 {
 public:
     wxVariant() = default;
@@ -407,7 +407,7 @@ typedef wxVariantData* (*wxVariantDataFactory)(const wxAny& any);
 // wxAnyToVariantRegistration instances are kept in global scope and
 // wxAnyValueTypeGlobals in any.cpp will use their data when the time is
 // right.
-class WXDLLIMPEXP_BASE wxAnyToVariantRegistration
+class wxAnyToVariantRegistration
 {
 public:
     wxAnyToVariantRegistration(wxVariantDataFactory factory);
@@ -573,7 +573,7 @@ bool classname##VariantData::Eq(wxVariantData& data) const \
 
 #define wxStaticCastVariantData(data, classname) static_cast<classname*>(data)
 
-extern wxVariant WXDLLIMPEXP_BASE wxNullVariant;
+extern wxVariant wxNullVariant;
 
 #endif // wxUSE_VARIANT
 

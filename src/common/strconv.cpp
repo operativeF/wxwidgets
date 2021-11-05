@@ -2075,7 +2075,7 @@ private:
 };
 
 // make the constructor available for unit testing
-WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_iconv( const char* name )
+wxMBConv* new_wxMBConv_iconv( const char* name )
 {
     wxMBConv_iconv* result = new wxMBConv_iconv( name );
     if ( !result->IsOk() )
@@ -2436,9 +2436,9 @@ bool wxMBConv_iconv::IsUTF8() const
 
 // from utils.cpp
 #if wxUSE_FONTMAP
-extern WXDLLIMPEXP_BASE long wxCharsetToCodepage(const char *charset);
+extern long wxCharsetToCodepage(const char *charset);
 #endif
-extern WXDLLIMPEXP_BASE long wxEncodingToCodepage(wxFontEncoding encoding);
+extern long wxEncodingToCodepage(wxFontEncoding encoding);
 
 class wxMBConv_win32 : public wxMBConv
 {
@@ -2740,7 +2740,7 @@ private:
 };
 
 // make the constructors available for unit testing
-WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_wxwin( const char* name )
+wxMBConv* new_wxMBConv_wxwin( const char* name )
 {
     wxMBConv_wxwin* result = new wxMBConv_wxwin( name );
     if ( !result->IsOk() )
@@ -3201,7 +3201,7 @@ wxWhateverWorksConv::FromWChar(char *dst, size_t dstLen,
 
 #define WX_DEFINE_GLOBAL_CONV2(klass, impl_klass, name, ctor_args)      \
     WXDLLIMPEXP_DATA_BASE(klass*) name##Ptr = NULL;                     \
-    WXDLLIMPEXP_BASE klass* wxGet_##name##Ptr()                         \
+    klass* wxGet_##name##Ptr()                         \
     {                                                                   \
         static impl_klass name##Obj ctor_args;                          \
         return &name##Obj;                                              \

@@ -82,7 +82,7 @@ class wxFileSystemWatcherEvent;
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_BASE, wxEVT_FSWATCHER,
                          wxFileSystemWatcherEvent);
 
-class WXDLLIMPEXP_BASE wxFileSystemWatcherEvent: public wxEvent
+class wxFileSystemWatcherEvent: public wxEvent
 {
 public:
     // Constructor for any kind of events, also used as default ctor.
@@ -294,7 +294,7 @@ class wxFSWatcherImpl;
  * Main entry point for clients interested in file system events.
  * Defines interface that can be used to receive that kind of events.
  */
-class WXDLLIMPEXP_BASE wxFileSystemWatcherBase: public wxEvtHandler
+class wxFileSystemWatcherBase: public wxEvtHandler
 {
 public:
     wxFileSystemWatcherBase();

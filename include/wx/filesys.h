@@ -32,7 +32,7 @@ class wxFileSystem;
 //                  (in 'index.htm#chapter2', 'chapter2' is anchor)
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFSFile
+class wxFSFile
 {
 public:
     wxFSFile(wxInputStream *stream, const wxString& loc,
@@ -106,7 +106,7 @@ private:
 //                  kinds of files (HTPP, FTP, local, tar.gz etc..)
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFileSystemHandler : public wxObject
+class wxFileSystemHandler : public wxObject
 {
 public:
     wxFileSystemHandler()  = default;
@@ -167,7 +167,7 @@ enum wxFileSystemOpenFlags
 
 WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL(wxFileSystemHandler*, wxFSHandlerHash, class WXDLLIMPEXP_BASE);
 
-class WXDLLIMPEXP_BASE wxFileSystem : public wxObject
+class wxFileSystem : public wxObject
 {
 public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
@@ -267,7 +267,7 @@ special characters :
 */
 
 
-class WXDLLIMPEXP_BASE wxLocalFSHandler : public wxFileSystemHandler
+class wxLocalFSHandler : public wxFileSystemHandler
 {
 public:
     bool CanOpen(const wxString& location) override;
@@ -287,7 +287,7 @@ protected:
 
 // Stream reading data from wxFSFile: this allows to use virtual files with any
 // wx functions accepting streams.
-class WXDLLIMPEXP_BASE wxFSInputStream : public wxWrapperInputStream
+class wxFSInputStream : public wxWrapperInputStream
 {
 public:
     // Notice that wxFS_READ is implied in flags.

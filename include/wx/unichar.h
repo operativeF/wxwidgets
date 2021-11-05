@@ -29,7 +29,7 @@ class wxString;
 
 // This class represents single Unicode character. It can be converted to
 // and from char or wchar_t and implements commonly used character operations.
-class WXDLLIMPEXP_BASE wxUniChar
+class wxUniChar
 {
 public:
     // NB: this is not wchar_t on purpose, it needs to represent the entire
@@ -210,7 +210,7 @@ private:
 //
 // This class can be used in the same way wxChar is used, except that changing
 // its value updates the underlying string object.
-class WXDLLIMPEXP_BASE wxUniCharRef
+class wxUniCharRef
 {
 private:
     using iterator = wxStringImpl::iterator;

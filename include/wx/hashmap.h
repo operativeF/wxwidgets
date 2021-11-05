@@ -30,7 +30,7 @@
 #ifndef wxNEEDS_WX_HASH_MAP
 
 // integer types
-struct WXDLLIMPEXP_BASE wxIntegerHash
+struct wxIntegerHash
 {
 private:
     WX_HASH_MAP_NAMESPACE::hash<long> longHash;
@@ -72,7 +72,7 @@ public:
 #else // wxNEEDS_WX_HASH_MAP
 
 // integer types
-struct WXDLLIMPEXP_BASE wxIntegerHash
+struct wxIntegerHash
 {
     unsigned long operator()( long x ) const noexcept { return (unsigned long)x; }
     unsigned long operator()( unsigned long x ) const noexcept { return x; }
@@ -88,7 +88,7 @@ struct WXDLLIMPEXP_BASE wxIntegerHash
 
 #endif // !wxNEEDS_WX_HASH_MAP/wxNEEDS_WX_HASH_MAP
 
-struct WXDLLIMPEXP_BASE wxIntegerEqual
+struct wxIntegerEqual
 {
     bool operator()( long a, long b ) const { return a == b; }
     bool operator()( unsigned long a, unsigned long b ) const { return a == b; }
@@ -103,7 +103,7 @@ struct WXDLLIMPEXP_BASE wxIntegerEqual
 };
 
 // pointers
-struct WXDLLIMPEXP_BASE wxPointerHash
+struct wxPointerHash
 {
 #ifdef wxNEEDS_WX_HASH_MAP
     wxUIntPtr operator()( const void* k ) const noexcept { return wxPtrToUInt(k); }
@@ -112,13 +112,13 @@ struct WXDLLIMPEXP_BASE wxPointerHash
 #endif
 };
 
-struct WXDLLIMPEXP_BASE wxPointerEqual
+struct wxPointerEqual
 {
     bool operator()( const void* a, const void* b ) const noexcept { return a == b; }
 };
 
 // wxString, char*, wchar_t*
-struct WXDLLIMPEXP_BASE wxStringHash
+struct wxStringHash
 {
     unsigned long operator()( const wxString& x ) const noexcept
         { return stringHash( x.wx_str() ); }
@@ -131,7 +131,7 @@ struct WXDLLIMPEXP_BASE wxStringHash
     static unsigned long stringHash( const char* );
 };
 
-struct WXDLLIMPEXP_BASE wxStringEqual
+struct wxStringEqual
 {
     bool operator()( const wxString& a, const wxString& b ) const noexcept
         { return a == b; }
@@ -262,13 +262,13 @@ public: \
 // Declarations of common hashmap classes
 
 WX_DECLARE_HASH_MAP_WITH_DECL( long, long, wxIntegerHash, wxIntegerEqual,
-                               wxLongToLongHashMap, class WXDLLIMPEXP_BASE );
+                               wxLongToLongHashMap, class );
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxString, wxStringToStringHashMap,
-                                      class WXDLLIMPEXP_BASE );
+                                      class );
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxUIntPtr, wxStringToNumHashMap,
-                                      class WXDLLIMPEXP_BASE );
+                                      class );
 
 
 #endif // _WX_HASHMAP_H_

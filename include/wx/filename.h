@@ -122,7 +122,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxULongLong) wxInvalidSize;
 // wxFileName: encapsulates a file path
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFileName
+class wxFileName
 {
 public:
     // constructors and assignment

@@ -23,7 +23,7 @@ using wxRecursionGuardFlag = int;
 // wxRecursionGuard is the simplest way to protect a function from reentrancy
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxRecursionGuard
+class wxRecursionGuard
 {
 public:
     wxRecursionGuard(wxRecursionGuardFlag& flag)

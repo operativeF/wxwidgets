@@ -78,7 +78,7 @@ wxDECLARE_SCOPED_PTR(wxPluralFormsCalculator, wxPluralFormsCalculatorPtr)
 // wxMsgCatalog corresponds to one loaded message catalog.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMsgCatalog
+class wxMsgCatalog
 {
 public:
     // Ctor is protected, because CreateFromXXX functions must be used,
@@ -119,7 +119,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // this class allows to get translations for strings
-class WXDLLIMPEXP_BASE wxTranslations
+class wxTranslations
 {
 public:
     wxTranslations();
@@ -198,7 +198,7 @@ private:
 
 
 // abstraction of translations discovery and loading
-class WXDLLIMPEXP_BASE wxTranslationsLoader
+class wxTranslationsLoader
 {
 public:
     virtual ~wxTranslationsLoader() = default;
@@ -211,7 +211,7 @@ public:
 
 
 // standard wxTranslationsLoader implementation, using filesystem
-class WXDLLIMPEXP_BASE wxFileTranslationsLoader
+class wxFileTranslationsLoader
     : public wxTranslationsLoader
 {
 public:
@@ -226,7 +226,7 @@ public:
 
 #ifdef WX_WINDOWS
 // loads translations from win32 resources
-class WXDLLIMPEXP_BASE wxResourceTranslationsLoader
+class wxResourceTranslationsLoader
     : public wxTranslationsLoader
 {
 public:
