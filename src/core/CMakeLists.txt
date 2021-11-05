@@ -517,4 +517,11 @@ target_precompile_headers(wxcore
         <gsl/gsl>
     
         ${CMAKE_SOURCE_DIR}/include/wx/msw/wrapwin.h
+        ${CMAKE_SOURCE_DIR}/include/wx/defs.h
+        ${CMAKE_SOURCE_DIR}/include/wx/event.h
+        ${CMAKE_SOURCE_DIR}/include/wx/string.h
+        ${CMAKE_SOURCE_DIR}/include/wx/generic/grid.h
+        ${CMAKE_SOURCE_DIR}/include/wx/window.h
+        ${CMAKE_SOURCE_DIR}/include/wx/datetime.h
+        ${CMAKE_SOURCE_DIR}/include/wx/dataview.h
 )
