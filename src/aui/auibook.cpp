@@ -1609,8 +1609,6 @@ public:
 
 } // namespace anonymous
 
-constexpr int wxAuiBaseTabCtrlId = 5380;
-
 // -- wxAuiNotebook class implementation --
 
 #define EVT_AUI_RANGE(id1, id2, event, func) \
@@ -1675,16 +1673,6 @@ void wxAuiNotebook::OnSysColourChanged(wxSysColourChangedEvent &event)
         tabctrl->Refresh();
     }
     Refresh();
-}
-
-void wxAuiNotebook::Init()
-{
-    m_curPage = -1;
-    m_tabIdCounter = wxAuiBaseTabCtrlId;
-    m_dummyWnd = nullptr;
-    m_tabCtrlHeight = FromDIP(20);
-    m_requestedBmpSize = wxDefaultSize;
-    m_requestedTabCtrlHeight = -1;
 }
 
 bool wxAuiNotebook::Create(wxWindow* parent,

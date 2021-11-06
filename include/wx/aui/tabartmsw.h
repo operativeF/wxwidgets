@@ -79,10 +79,12 @@ public:
         const wxSize& requiredBmpSize) override;
 
 private:
-    bool m_themed;
     wxSize m_closeBtnSize{wxDefaultSize};
     wxSize m_tabSize;
+    
     int m_maxTabHeight{0};
+
+    bool m_themed;
 
     void InitSizes(wxWindow* wnd, wxDC& dc);
 

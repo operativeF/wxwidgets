@@ -46,11 +46,6 @@ wxBEGIN_EVENT_TABLE(wxAuiMDIParentFrame, wxFrame)
 #endif
 wxEND_EVENT_TABLE()
 
-wxAuiMDIParentFrame::wxAuiMDIParentFrame()
-{
-    Init();
-}
-
 wxAuiMDIParentFrame::wxAuiMDIParentFrame(wxWindow *parent,
                                          wxWindowID id,
                                          const std::string& title,
@@ -59,7 +54,6 @@ wxAuiMDIParentFrame::wxAuiMDIParentFrame(wxWindow *parent,
                                          unsigned int style,
                                          const std::string& name)
 {
-    Init();
     Create(parent, id, title, pos, size, style, name);
 }
 
@@ -301,16 +295,6 @@ void wxAuiMDIParentFrame::ActivatePrevious()
     }
 }
 
-void wxAuiMDIParentFrame::Init()
-{
-    m_pLastEvt = nullptr;
-    m_pClientWindow = nullptr;
-#if wxUSE_MENUS
-    m_pWindowMenu = nullptr;
-    m_pMyMenuBar = nullptr;
-#endif // wxUSE_MENUS
-}
-
 #if wxUSE_MENUS
 void wxAuiMDIParentFrame::RemoveWindowMenu(wxMenuBar* pMenuBar)
 {
@@ -431,11 +415,6 @@ wxBEGIN_EVENT_TABLE(wxAuiMDIChildFrame, wxFrame)
     EVT_MENU_HIGHLIGHT_ALL(wxAuiMDIChildFrame::OnMenuHighlight)
 wxEND_EVENT_TABLE()
 
-wxAuiMDIChildFrame::wxAuiMDIChildFrame()
-{
-    Init();
-}
-
 wxAuiMDIChildFrame::wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                                        wxWindowID id,
                                        const std::string& title,
@@ -444,8 +423,6 @@ wxAuiMDIChildFrame::wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                                        unsigned int style,
                                        const std::string& name)
 {
-    Init();
-
     // There are two ways to create an tabbed mdi child fram without
     // making it the active document.  Either Show(false) can be called
     // before Create() (as is customary on some ports with wxFrame-type
@@ -671,15 +648,6 @@ void wxAuiMDIChildFrame::SetMDIParentFrame(wxAuiMDIParentFrame* parentFrame)
 wxAuiMDIParentFrame* wxAuiMDIChildFrame::GetMDIParentFrame() const
 {
     return m_pMDIParentFrame;
-}
-
-void wxAuiMDIChildFrame::Init()
-{
-    m_activateOnCreate = true;
-    m_pMDIParentFrame = nullptr;
-#if wxUSE_MENUS
-    m_pMenuBar = nullptr;
-#endif // wxUSE_MENUS
 }
 
 bool wxAuiMDIChildFrame::Show(bool show)

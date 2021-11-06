@@ -81,8 +81,8 @@ public:
         const wxAuiToolBarItemArray& items) override;
 
 private:
-    bool m_themed;
     wxSize m_buttonSize;
+    bool m_themed;
 };
 
 #endif // _WX_AUI_BARART_MSW_H_

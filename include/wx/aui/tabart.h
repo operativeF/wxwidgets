@@ -193,11 +193,15 @@ protected:
     wxFont m_normalFont;
     wxFont m_selectedFont;
     wxFont m_measuringFont;
+    
+    wxColour m_activeColour;
     wxColour m_baseColour;
+    
     wxPen m_baseColourPen;
     wxPen m_borderPen;
+    
     wxBrush m_baseColourBrush;
-    wxColour m_activeColour;
+    
     wxBitmap m_activeCloseBmp;
     wxBitmap m_disabledCloseBmp;
     wxBitmap m_activeLeftBmp;
@@ -209,6 +213,7 @@ protected:
 
     int m_fixedTabWidth;
     int m_tabCtrlHeight;
+    
     unsigned int m_flags;
 };
 

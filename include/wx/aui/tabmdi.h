@@ -39,7 +39,7 @@ class wxAuiMDIChildFrame;
 class wxAuiMDIParentFrame : public wxFrame
 {
 public:
-    wxAuiMDIParentFrame();
+    wxAuiMDIParentFrame() = default;
     wxAuiMDIParentFrame(wxWindow *parent,
                         wxWindowID winid,
                         const std::string& title,
@@ -84,17 +84,15 @@ public:
     virtual void ActivatePrevious();
 
 protected:
-    wxAuiMDIClientWindow*   m_pClientWindow;
-    wxEvent*                m_pLastEvt;
+    wxAuiMDIClientWindow*   m_pClientWindow{nullptr};
+    wxEvent*                m_pLastEvt{nullptr};
 
 #if wxUSE_MENUS
-    wxMenu              *m_pWindowMenu;
-    wxMenuBar           *m_pMyMenuBar;
+    wxMenu*              m_pWindowMenu{nullptr};
+    wxMenuBar*           m_pMyMenuBar{nullptr};
 #endif // wxUSE_MENUS
 
 protected:
-    void Init();
-
 #if wxUSE_MENUS
     void RemoveWindowMenu(wxMenuBar *pMenuBar);
     void AddWindowMenu(wxMenuBar *pMenuBar);
@@ -124,7 +122,7 @@ private:
 class wxAuiMDIChildFrame : public wxTDIChildFrame
 {
 public:
-    wxAuiMDIChildFrame();
+    wxAuiMDIChildFrame() = default;
     wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                        wxWindowID winid,
                        const std::string& title,
@@ -161,9 +159,6 @@ public:
     void SetMDIParentFrame(wxAuiMDIParentFrame* parent);
     wxAuiMDIParentFrame* GetMDIParentFrame() const;
 
-protected:
-    void Init();
-
 public:
     // This function needs to be called when a size change is confirmed,
     // we needed this function to prevent anybody from the outside
@@ -171,14 +166,12 @@ public:
     void ApplyMDIChildFrameRect();
 
 protected:
-    wxAuiMDIParentFrame* m_pMDIParentFrame;
-    bool m_activateOnCreate;
-
+    wxAuiMDIParentFrame* m_pMDIParentFrame{nullptr};
 #if wxUSE_MENUS
-    wxMenuBar* m_pMenuBar;
+    wxMenuBar* m_pMenuBar{nullptr};
 #endif // wxUSE_MENUS
 
-
+    bool m_activateOnCreate{true};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxAuiMDIChildFrame);

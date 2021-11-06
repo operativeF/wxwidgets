@@ -60,7 +60,7 @@ enum wxAuiNotebookOption
 
 wxALLOW_COMBINING_ENUMS(wxAuiNotebookOption, wxBorder)
 
-
+constexpr int wxAuiBaseTabCtrlId = 5380;
 
 // aui notebook event class
 
@@ -108,8 +108,8 @@ struct wxAuiTabContainerButton
     wxBitmap bitmap;     // button's hover bitmap
     wxBitmap disBitmap;  // button's disabled bitmap
     wxRect rect;         // button's hit rectangle
-    int id{};            // button's id
     unsigned int curState{}; // current state (normal, hover, pressed, etc.)
+    int id{};            // button's id
     int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
@@ -123,7 +123,6 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiTabContainerButton, wxAuiTabContainerButt
 class wxAuiTabContainer
 {
 public:
-
     wxAuiTabContainer();
     virtual ~wxAuiTabContainer();
 
@@ -173,15 +172,17 @@ public:
     void MakeTabVisible(int tabPage, wxWindow* win);
 
 protected:
-
     virtual void Render(wxDC* dc, wxWindow* wnd);
 
-protected:
-    wxAuiTabArt* m_art;
     wxAuiNotebookPageArray m_pages;
+    
     wxAuiTabContainerButtonArray m_buttons;
     wxAuiTabContainerButtonArray m_tabCloseButtons;
+    
     wxRect m_rect;
+    
+    wxAuiTabArt* m_art;
+
     size_t m_tabOffset;
     unsigned int m_flags;
 };
@@ -227,10 +228,12 @@ protected:
 protected:
 
     wxPoint m_clickPt;
+
     wxWindow* m_clickTab;
-    bool m_isDragging;
     wxAuiTabContainerButton* m_hoverButton;
     wxAuiTabContainerButton* m_pressedButton;
+
+    bool m_isDragging;
 
     void SetHoverTab(wxWindow* wnd);
 
@@ -248,7 +251,7 @@ class wxAuiNotebook : public wxNavigationEnabled<wxBookCtrlBase>
 
 public:
 
-    wxAuiNotebook() { Init(); }
+    wxAuiNotebook() = default;
 
     wxAuiNotebook(wxWindow* parent,
                   wxWindowID id = wxID_ANY,
@@ -256,7 +259,6 @@ public:
                   const wxSize& size = wxDefaultSize,
                   unsigned int style = wxAUI_NB_DEFAULT_STYLE)
     {
-        Init();
         Create(parent, id, pos, size, style);
     }
 
@@ -359,9 +361,6 @@ public:
     bool FindTab(wxWindow* page, wxAuiTabCtrl** ctrl, int* idx);
 
 protected:
-    // Common part of all ctors.
-    void Init();
-
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
@@ -421,18 +420,21 @@ protected:
 protected:
     wxAuiManager m_mgr;
     wxAuiTabContainer m_tabs;
-    int m_curPage;
-    int m_tabIdCounter;
-    wxWindow* m_dummyWnd;
 
-    wxSize m_requestedBmpSize;
-    int m_requestedTabCtrlHeight;
     wxFont m_selectedFont;
     wxFont m_normalFont;
-    int m_tabCtrlHeight;
 
-    int m_lastDragX;
+    wxSize m_requestedBmpSize{wxDefaultSize};
+
+    wxWindow* m_dummyWnd{nullptr};
+
     unsigned int m_flags;
+
+    int m_tabCtrlHeight{FromDIP(20)};
+    int m_curPage{-1};
+    int m_tabIdCounter{wxAuiBaseTabCtrlId};
+    int m_lastDragX;
+    int m_requestedTabCtrlHeight{-1};
 
 #ifndef SWIG
     wxDECLARE_CLASS(wxAuiNotebook);

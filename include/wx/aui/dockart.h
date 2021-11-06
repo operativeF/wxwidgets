@@ -90,7 +90,6 @@ public:
 class wxAuiDefaultDockArt : public wxAuiDockArt
 {
 public:
-
     wxAuiDefaultDockArt();
 
     wxAuiDockArt* Clone() override;

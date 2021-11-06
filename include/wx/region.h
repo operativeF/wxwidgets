@@ -62,16 +62,14 @@ public:
     // -----
 
     // none are defined here but the following should be available:
-#if 0
-    wxRegion();
-    wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
-    wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
-    wxRegion(const wxRect& rect);
-    wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven);
-    wxRegion(const wxBitmap& bmp);
-    wxRegion(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
-#endif // 0
-
+    // wxRegion();
+    // wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
+    // wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
+    // wxRegion(const wxRect& rect);
+    // wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven);
+    // wxRegion(const wxBitmap& bmp);
+    // wxRegion(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
+// 
     bool operator==(const wxRegion& region) const { return IsEqual(region); }
     bool operator!=(const wxRegion& region) const { return !(*this == region); }
 

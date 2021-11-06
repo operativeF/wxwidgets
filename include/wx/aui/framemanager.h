@@ -149,7 +149,6 @@ extern wxAuiPaneInfo wxAuiNullPaneInfo;
 class wxAuiPaneInfo
 {
 public:
-
     wxAuiPaneInfo()
     {
         DefaultPane();
@@ -359,6 +358,7 @@ public:
 public:
     std::string name;        // name of the pane
     std::string caption;     // caption displayed on the window
+    
     wxBitmap icon;        // icon of the pane, may be invalid
 
     wxRect rect;              // current rectangle (populated by wxAUI)

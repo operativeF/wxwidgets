@@ -64,21 +64,22 @@ private:
     static bool isMouseDown();
 
 private:
-    wxWindow* m_paneWindow{nullptr};    // pane window being managed
-
+    wxWeakRef<wxAuiManager> m_ownerMgr;
+    wxAuiManager m_mgr;
+    
     wxRect m_lastRect;
     wxRect m_last2Rect;
     wxRect m_last3Rect;
 
     wxSize m_lastSize;
 
-    wxDirection m_lastDirection;
+    wxWindow* m_paneWindow{nullptr};    // pane window being managed
 
-    wxWeakRef<wxAuiManager> m_ownerMgr;
-    wxAuiManager m_mgr;
+    wxDirection m_lastDirection;
 
     bool m_solidDrag{false};          // true if system uses solid window drag
     bool m_moving{false};
+
 #ifndef SWIG
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxAuiFloatingFrame);
