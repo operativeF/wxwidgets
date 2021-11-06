@@ -314,7 +314,7 @@ protected:
                         int WXUNUSED(maxW), int WXUNUSED(maxH),
                         int WXUNUSED(incW), int WXUNUSED(incH)) override { }
 
-    wxString m_title;
+    std::string m_title;
 };
 
 // ----------------------------------------------------------------------------

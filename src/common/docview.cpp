@@ -8,14 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DOC_VIEW_ARCHITECTURE
 
 #include "wx/docview.h"
 #include "wx/list.h"
-#include "wx/string.h"
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/dc.h"
@@ -264,7 +260,7 @@ bool wxDocument::OnNewDocument()
 
     SetDocumentSaved(false);
 
-    const std::string name = GetDocumentManager()->MakeNewDocumentName().ToStdString();
+    auto name = GetDocumentManager()->MakeNewDocumentName();
     SetTitle(name);
     SetFilename(fs::path{name}, true);
 
@@ -1517,14 +1513,10 @@ wxCommandProcessor *wxDocManager::GetCurrentCommandProcessor() const
     return doc ? doc->GetCommandProcessor() : nullptr;
 }
 
-wxString wxDocManager::MakeNewDocumentName()
+std::string wxDocManager::MakeNewDocumentName()
 {
-    wxString name;
-
-    {
-        name.Printf(_("unnamed%d"), m_defaultDocumentNameCounter);
-        m_defaultDocumentNameCounter++;
-    }
+    auto name = fmt::format("{}{:d}", _("unnamed").ToStdString(), m_defaultDocumentNameCounter);
+    m_defaultDocumentNameCounter++;
 
     return name;
 }

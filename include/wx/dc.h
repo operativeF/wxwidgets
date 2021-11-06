@@ -714,8 +714,8 @@ public:
 
     // page and document
 
-    bool wxStartDoc(const wxString& message)
-        { return m_pimpl->wxStartDoc(message.ToStdString()); }
+    bool wxStartDoc(const std::string& message)
+        { return m_pimpl->wxStartDoc(message); }
     void EndDoc()
         { m_pimpl->EndDoc(); }
 

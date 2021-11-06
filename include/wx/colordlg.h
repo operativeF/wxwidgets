@@ -83,7 +83,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLOUR_CHANGED, wxColourDialogE
 // get the colour from user and return it
 wxColour wxGetColourFromUser(wxWindow *parent = nullptr,
                                               const wxColour& colInit = wxNullColour,
-                                              const wxString& caption = {},
+                                              const std::string& caption = {},
                                               wxColourData *data = nullptr);
 
 #endif // wxUSE_COLOURDLG

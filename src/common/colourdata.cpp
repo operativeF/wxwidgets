@@ -96,7 +96,7 @@ wxDEFINE_EVENT(wxEVT_COLOUR_CHANGED, wxColourDialogEvent);
 
 wxColour wxGetColourFromUser(wxWindow *parent,
                              const wxColour& colInit,
-                             const wxString& caption,
+                             const std::string& caption,
                              wxColourData *ptrData)
 {
     // contains serialized representation of wxColourData used the last time

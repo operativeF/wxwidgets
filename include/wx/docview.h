@@ -17,7 +17,6 @@
 
 #include "wx/list.h"
 #include "wx/dlist.h"
-#include "wx/string.h"
 #include "wx/cmdproc.h"
 
 
@@ -483,7 +482,7 @@ public:
 
     // Return the default name for a new document (by default returns strings
     // in the form "unnamed <counter>" but can be overridden)
-    virtual wxString MakeNewDocumentName();
+    virtual std::string MakeNewDocumentName();
 
     // Make a frame title (override this to do something different)
     virtual std::string MakeFrameTitle(wxDocument* doc);
