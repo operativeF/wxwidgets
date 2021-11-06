@@ -143,18 +143,6 @@ inline T *wxCheckCast(const void *ptr)
 #endif // wxUSE_MEMORY_TRACING
 
 // ----------------------------------------------------------------------------
-// Compatibility macro aliases DECLARE group
-// ----------------------------------------------------------------------------
-// deprecated variants _not_ requiring a semicolon after them and without wx prefix.
-// (note that also some wx-prefixed macro do _not_ require a semicolon because
-// it's not always possible to force the compiler to require it)
-
-#define DECLARE_CLASS_INFO_ITERATORS()                              wxDECLARE_CLASS_INFO_ITERATORS();
-#define DECLARE_ABSTRACT_CLASS(n)                                   wxDECLARE_ABSTRACT_CLASS(n);
-#define DECLARE_DYNAMIC_CLASS(n)                                    wxDECLARE_DYNAMIC_CLASS(n);
-#define DECLARE_CLASS(n)                                            wxDECLARE_CLASS(n);
-
-// ----------------------------------------------------------------------------
 // wxRefCounter: ref counted data "manager"
 // ----------------------------------------------------------------------------
 

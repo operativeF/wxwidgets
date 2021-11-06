@@ -45,14 +45,6 @@ class wxHeaderCtrl;
     #define wxHAS_GENERIC_DATAVIEWCTRL
 #endif
 
-#ifdef wxHAS_GENERIC_DATAVIEWCTRL
-    // this symbol doesn't follow the convention for wxUSE_XXX symbols which
-    // are normally always defined as either 0 or 1, so its use is deprecated
-    // and it only exists for backwards compatibility, don't use it any more
-    // and use wxHAS_GENERIC_DATAVIEWCTRL instead
-    #define wxUSE_GENERICDATAVIEWCTRL
-#endif
-
 // ----------------------------------------------------------------------------
 // wxDataViewCtrl globals
 // ----------------------------------------------------------------------------
