@@ -117,11 +117,8 @@ typedef void (wxEvtHandler::*wxCollapsiblePaneEventFunction)(wxCollapsiblePaneEv
     #include "wx/generic/collpaneg.h"
 
     // use #define and not a typedef to allow forward declaring the class
-    #define wxCollapsiblePane wxGenericCollapsiblePane
+    using wxCollapsiblePane = wxGenericCollapsiblePane;
 #endif
-
-// old wxEVT_COMMAND_* constant
-#define wxEVT_COMMAND_COLLPANE_CHANGED   wxEVT_COLLAPSIBLEPANE_CHANGED
 
 #endif // wxUSE_COLLPANE
 

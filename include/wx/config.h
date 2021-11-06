@@ -24,12 +24,12 @@
 // and should be discouraged as it's not portable, not easily manipulated,
 // and things like AppData folders can have data roam between systems.
 
-#include "wx/fileconf.h"
-#define wxConfig wxFileConfig
-
 #if defined(WX_WINDOWS) && wxUSE_REGISTRY
     #include "wx/msw/regconf.h"
-    #define wxConfig  wxRegConfig
+    using wxConfig = wxRegConfig;
+#else
+    #include "wx/fileconf.h"
+    using wxConfig = wxFileConfig;
 #endif
 
 #endif // wxUSE_CONFIG

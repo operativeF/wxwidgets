@@ -11,6 +11,7 @@
 #ifndef _WX_ICON_H_BASE_
 #define _WX_ICON_H_BASE_
 
+#include "wx/gdicmn.h"
 #include "wx/iconloc.h"
 
 #include <gsl/gsl>
@@ -23,38 +24,38 @@ constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 // functions.
 
 #ifdef WX_WINDOWS
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::ICO_Resource
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
   #include "wx/msw/icon.h"
 #elif defined(__WXMOTIF__)
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/motif/icon.h"
 #elif defined(__WXGTK20__)
   #ifdef WX_WINDOWS
-    #define wxICON_DEFAULT_TYPE   wxBitmapType::ICO_Resource
+    constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
   #else
-    #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+    constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #endif
   #include "wx/generic/icon.h"
 #elif defined(__WXGTK__)
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXX11__)
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXDFB__)
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXMAC__)
 #if wxOSX_USE_COCOA_OR_CARBON
-  #define wxICON_DEFAULT_TYPE   wxBITMAP_TYPE_ICON_RESOURCE
+  constexpr wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_ICON_RESOURCE;
   #include "wx/generic/icon.h"
 #else
   // iOS and others
-  #define wxICON_DEFAULT_TYPE   wxBITMAP_TYPE_PNG_RESOURCE
+  constexpr auto wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_PNG_RESOURCE;
   #include "wx/generic/icon.h"
 #endif
 #elif defined(__WXQT__)
-  #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
+  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #endif
 

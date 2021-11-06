@@ -71,11 +71,11 @@ void wxGenerateSelectionChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
 void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const wxString& filename = {} );
 
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
-    #define wxFileCtrl wxGtkFileCtrl
     #include "wx/gtk/filectrl.h"
+    #define wxFileCtrl wxGtkFileCtrl
 #else
-    #define wxFileCtrl wxGenericFileCtrl
     #include "wx/generic/filectrlg.h"
+    #define wxFileCtrl wxGenericFileCtrl
 #endif
 
 // Some documentation

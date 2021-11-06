@@ -31,7 +31,7 @@ class wxItemContainer;
 #if !defined(__WXGTK20__) || defined(__WXUNIVERSAL__)
     #define wxBITMAPCOMBOBOX_OWNERDRAWN_BASED
 
-class wxDC;
+    class wxDC;
 #endif
 
 constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";

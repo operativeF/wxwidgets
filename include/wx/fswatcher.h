@@ -398,20 +398,20 @@ protected:
 
 #ifdef wxHAS_INOTIFY
     #include "wx/unix/fswatcher_inotify.h"
-    #define wxFileSystemWatcher wxInotifyFileSystemWatcher
+    using wxFileSystemWatcher = wxInotifyFileSystemWatcher;
 #elif  defined(wxHAS_KQUEUE) && defined(wxHAVE_FSEVENTS_FILE_NOTIFICATIONS)
     #include "wx/unix/fswatcher_kqueue.h"
     #include "wx/osx/fswatcher_fsevents.h"
-    #define wxFileSystemWatcher wxFsEventsFileSystemWatcher
+    using wxFileSystemWatcher = wxFsEventsFileSystemWatcher;
 #elif defined(wxHAS_KQUEUE)
     #include "wx/unix/fswatcher_kqueue.h"
-    #define wxFileSystemWatcher wxKqueueFileSystemWatcher
+    using wxFileSystemWatcher = wxKqueueFileSystemWatcher;
 #elif defined(WX_WINDOWS)
     #include "wx/msw/fswatcher.h"
-    #define wxFileSystemWatcher wxMSWFileSystemWatcher
+    using wxFileSystemWatcher = wxMSWFileSystemWatcher;
 #else
     #include "wx/generic/fswatcher.h"
-    #define wxFileSystemWatcher wxPollingFileSystemWatcher
+    using wxFileSystemWatcher = wxPollingFileSystemWatcher;
 #endif
 
 #endif // wxUSE_FSWATCHER

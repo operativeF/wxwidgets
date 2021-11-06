@@ -680,12 +680,6 @@ typedef void (wxEvtHandler::*wxHtmlLinkEventFunction)(wxHtmlLinkEvent&);
 #define EVT_HTML_LINK_CLICKED(id, fn) \
     wx__DECLARE_EVT1(wxEVT_HTML_LINK_CLICKED, id, wxHtmlLinkEventHandler(fn))
 
-
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_HTML_CELL_CLICKED   wxEVT_HTML_CELL_CLICKED
-#define wxEVT_COMMAND_HTML_CELL_HOVER     wxEVT_HTML_CELL_HOVER
-#define wxEVT_COMMAND_HTML_LINK_CLICKED   wxEVT_HTML_LINK_CLICKED
-
 #endif // wxUSE_HTML
 
 #endif // _WX_HTMLWIN_H_

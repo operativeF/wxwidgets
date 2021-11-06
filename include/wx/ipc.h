@@ -28,15 +28,15 @@
 #endif
 
 #if wxUSE_DDE_FOR_IPC
-    #define wxConnection    wxDDEConnection
-    #define wxServer        wxDDEServer
-    #define wxClient        wxDDEClient
+    using wxConnection    = wxDDEConnection;
+    using wxServer        = wxDDEServer;
+    using wxClient        = wxDDEClient;
 
     #include "wx/dde.h"
 #else // !wxUSE_DDE_FOR_IPC
-    #define wxConnection    wxTCPConnection
-    #define wxServer        wxTCPServer
-    #define wxClient        wxTCPClient
+    using wxConnection    = wxTCPConnection;
+    using wxServer        = wxTCPServer;
+    using wxClient        = wxTCPClient;
 
     #include "wx/sckipc.h"
 #endif // wxUSE_DDE_FOR_IPC/!wxUSE_DDE_FOR_IPC

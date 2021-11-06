@@ -118,7 +118,7 @@ public:
 // wxListbookEvent is obsolete and defined for compatibility only (notice that
 // we use #define and not typedef to also keep compatibility with the existing
 // code which forward declares it)
-#define wxListbookEvent wxBookCtrlEvent
+using wxListbookEvent         = wxBookCtrlEvent;
 using wxListbookEventFunction = wxBookCtrlEventFunction;
 #define wxListbookEventHandler(func) wxBookCtrlEventHandler(func)
 
@@ -127,10 +127,6 @@ using wxListbookEventFunction = wxBookCtrlEventFunction;
 
 #define EVT_LISTBOOK_PAGE_CHANGING(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_LISTBOOK_PAGE_CHANGING, winid, wxBookCtrlEventHandler(fn))
-
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED    wxEVT_LISTBOOK_PAGE_CHANGED
-#define wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING   wxEVT_LISTBOOK_PAGE_CHANGING
 
 #endif // wxUSE_LISTBOOK
 

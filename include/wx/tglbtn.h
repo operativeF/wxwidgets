@@ -89,9 +89,6 @@ public:
     #include "wx/qt/tglbtn.h"
 #endif
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_TOGGLEBUTTON_CLICKED   wxEVT_TOGGLEBUTTON
-
 #endif // wxUSE_TOGGLEBTN
 
 #endif // _WX_TOGGLEBUTTON_H_BASE_

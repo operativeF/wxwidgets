@@ -189,9 +189,6 @@ typedef void (wxEvtHandler::*wxRibbonPanelEventFunction)(wxRibbonPanelEvent&);
 }
 #endif
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_RIBBONPANEL_EXTBUTTON_ACTIVATED   wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED
-
 #endif // wxUSE_RIBBON
 
 #endif // _WX_RIBBON_PANEL_H_

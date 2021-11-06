@@ -575,7 +575,7 @@ protected:
 // ----------------------------------------------------------------------------
 
 #ifdef wxUSE_BASE_CLASSES_ONLY
-    #define wxMenuItem wxMenuItemBase
+    using wxMenuItem = wxMenuItemBase;
 #else // !wxUSE_BASE_CLASSES_ONLY
 #if defined(__WXUNIVERSAL__)
     #include "wx/univ/menu.h"

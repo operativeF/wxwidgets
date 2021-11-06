@@ -12,21 +12,21 @@
 
 #ifdef wxHAS_INOTIFY
     class wxFSWatchEntryUnix;
-    #define wxFSWatchEntry wxFSWatchEntryUnix
+    using wxFSWatchEntry = wxFSWatchEntryUnix;
     WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/unix/private/fswatcher_inotify.h"
 #elif defined(wxHAS_KQUEUE)
     class wxFSWatchEntryKq;
-    #define wxFSWatchEntry wxFSWatchEntryKq
+    using wxFSWatchEntry = wxFSWatchEntryKq;
     WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/unix/private/fswatcher_kqueue.h"
 #elif defined(WX_WINDOWS)
     class wxFSWatchEntryMSW;
-    #define wxFSWatchEntry wxFSWatchEntryMSW
+    using wxFSWatchEntry = wxFSWatchEntryMSW;
     WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/msw/private/fswatcher.h"
 #else
-    #define wxFSWatchEntry wxFSWatchEntryPolling
+    using wxFSWatchEntry = wxFSWatchEntryPolling;
 #endif
 
 class wxFSWatcherImpl

@@ -112,17 +112,6 @@ private:
 #define EVT_SEARCH(id, fn) \
     wx__DECLARE_EVT1(wxEVT_SEARCH, id, wxCommandEventHandler(fn))
 
-// old synonyms
-#define wxEVT_SEARCHCTRL_CANCEL_BTN wxEVT_SEARCH_CANCEL
-#define wxEVT_SEARCHCTRL_SEARCH_BTN wxEVT_SEARCH
-
-#define EVT_SEARCHCTRL_CANCEL_BTN(id, fn) EVT_SEARCH_CANCEL(id, fn)
-#define EVT_SEARCHCTRL_SEARCH_BTN(id, fn) EVT_SEARCH(id, fn)
-
-// even older wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_SEARCHCTRL_CANCEL_BTN   wxEVT_SEARCHCTRL_CANCEL_BTN
-#define wxEVT_COMMAND_SEARCHCTRL_SEARCH_BTN   wxEVT_SEARCHCTRL_SEARCH_BTN
-
 #endif // wxUSE_SEARCHCTRL
 
 #endif // _WX_SEARCHCTRL_H_BASE_

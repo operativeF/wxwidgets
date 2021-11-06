@@ -353,7 +353,7 @@ constexpr char wxCalendarNameStr[] = "CalendarCtrl";
     #if defined(__WXGTK20__)
         #define wxHAS_NATIVE_CALENDARCTRL
         #include "wx/gtk/calctrl.h"
-        #define wxCalendarCtrl wxGtkCalendarCtrl
+        using wxCalendarCtrl = wxGtkCalendarCtrl;
     #elif defined(__WXMSW__)
         #define wxHAS_NATIVE_CALENDARCTRL
         #include "wx/msw/calctrl.h"
@@ -365,7 +365,7 @@ constexpr char wxCalendarNameStr[] = "CalendarCtrl";
 
 #ifndef wxHAS_NATIVE_CALENDARCTRL
     #include "wx/generic/calctrlg.h"
-    #define wxCalendarCtrl wxGenericCalendarCtrl
+    using wxCalendarCtrl = wxGenericCalendarCtrl;
 #endif
 
 // ----------------------------------------------------------------------------

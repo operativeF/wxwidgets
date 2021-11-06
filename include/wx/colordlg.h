@@ -28,7 +28,7 @@
 #else
     #include "wx/generic/colrdlgg.h"
 
-    #define wxColourDialog wxGenericColourDialog
+    using wxColourDialog = wxGenericColourDialog;
 #endif
 
 // Under some platforms (currently only wxMSW) wxColourDialog can send events

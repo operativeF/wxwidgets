@@ -72,11 +72,11 @@
     class wxLongLongWx;
     class wxULongLongWx;
 #if defined(__VISUALC__) && !defined(__WIN32__)
-    #define wxLongLong wxLongLongWx
-    #define wxULongLong wxULongLongWx
+    using wxLongLong  = wxLongLongWx;
+    using wxULongLong = wxULongLongWx;
 #else
-    typedef wxLongLongWx wxLongLong;
-    typedef wxULongLongWx wxULongLong;
+    using wxLongLongWx  = wxLongLong;
+    using wxULongLongWx = wxULongLong;
 #endif
 
 #else

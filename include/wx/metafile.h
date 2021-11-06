@@ -16,11 +16,11 @@
 #if wxUSE_METAFILE
 
 // provide synonyms for all metafile classes
-#define wxMetaFile wxMetafile
-#define wxMetaFileDC wxMetafileDC
-#define wxMetaFileDataObject wxMetafileDataObject
+using wxMetaFile = wxMetafile;
+using wxMetaFileDC = wxMetafileDC;
+using wxMetaFileDataObject = wxMetafileDataObject;
 
-#define wxMakeMetaFilePlaceable wxMakeMetafilePlaceable
+using wxMakeMetaFilePlaceable = wxMakeMetafilePlaceable;
 
 #if defined(__WXMSW__)
     #if wxUSE_ENH_METAFILE

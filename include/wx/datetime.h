@@ -1605,8 +1605,6 @@ protected:
 // private macros
 // ----------------------------------------------------------------------------
 
-#define MILLISECONDS_PER_DAY 86400000l
-
 // some broken compilers (HP-UX CC) refuse to compile the "normal" version, but
 // using a temp variable always might prevent other compilers from optimising
 // it away - hence use of this ugly macro

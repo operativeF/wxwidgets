@@ -199,11 +199,6 @@ typedef void (wxEvtHandler::*wxRibbonGalleryEventFunction)(wxRibbonGalleryEvent&
 }
 #endif // SWIG
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_RIBBONGALLERY_HOVER_CHANGED   wxEVT_RIBBONGALLERY_HOVER_CHANGED
-#define wxEVT_COMMAND_RIBBONGALLERY_SELECTED        wxEVT_RIBBONGALLERY_SELECTED
-#define wxEVT_COMMAND_RIBBONGALLERY_CLICKED         wxEVT_RIBBONGALLERY_CLICKED
-
 #endif // wxUSE_RIBBON
 
 #endif // _WX_RIBBON_GALLERY_H_

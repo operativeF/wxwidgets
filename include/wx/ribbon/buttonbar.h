@@ -272,10 +272,6 @@ typedef void (wxEvtHandler::*wxRibbonButtonBarEventFunction)(wxRibbonButtonBarEv
 }
 #endif
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_RIBBONBUTTON_CLICKED            wxEVT_RIBBONBUTTONBAR_CLICKED
-#define wxEVT_COMMAND_RIBBONBUTTON_DROPDOWN_CLICKED   wxEVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED
-
 #endif // wxUSE_RIBBON
 
 #endif // _WX_RIBBON_BUTTON_BAR_H_

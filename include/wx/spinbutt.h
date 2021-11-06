@@ -43,10 +43,10 @@ constexpr char wxSPIN_BUTTON_NAME[] = "wxSpinButton";
  * line controls (currently we reuse wxTE_CHARWRAP and wxTE_RICH2 neither of
  * which makes sense for them).
  */
-#define wxSP_HORIZONTAL       wxHORIZONTAL /*  4 */
-#define wxSP_VERTICAL         wxVERTICAL   /*  8 */
-#define wxSP_ARROW_KEYS       0x4000
-#define wxSP_WRAP             0x8000
+constexpr auto wxSP_HORIZONTAL       = wxHORIZONTAL; /*  4 */
+constexpr auto wxSP_VERTICAL         = wxVERTICAL;   /*  8 */
+constexpr auto wxSP_ARROW_KEYS       = 0x4000;
+constexpr auto wxSP_WRAP             = 0x8000;
 
 
 class wxSpinButtonBase : public wxControl

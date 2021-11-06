@@ -81,12 +81,12 @@ constexpr unsigned int wxCLRP_SHOW_ALPHA             = 0x0010;
 // since GTK > 2.4, there is GtkColorButton
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
     #include "wx/gtk/clrpicker.h"
-    #define wxColourPickerWidget      wxColourButton
+    using wxColourPickerWidget = wxColourButton;
 #elif defined(__WXQT__) && !defined(__WXUNIVERSAL__)
     #include "wx/qt/clrpicker.h"
 #else
     #include "wx/generic/clrpickerg.h"
-    #define wxColourPickerWidget      wxGenericColourButton
+    using wxColourPickerWidget = wxGenericColourButton;
 #endif
 
 
@@ -198,9 +198,6 @@ typedef void (wxEvtHandler::*wxColourPickerEventFunction)(wxColourPickerEvent&);
 
 #define EVT_COLOURPICKER_DIALOG_CANCELLED(id, fn) \
     wx__DECLARE_EVT1(wxEVT_COLOURPICKER_DIALOG_CANCELLED, id, wxColourPickerEventHandler(fn))
-
-// old wxEVT_COMMAND_* constant
-#define wxEVT_COMMAND_COLOURPICKER_CHANGED   wxEVT_COLOURPICKER_CHANGED
 
 #endif // wxUSE_COLOURPICKERCTRL
 

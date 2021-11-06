@@ -146,10 +146,6 @@ using wxToolbookEventFunction = wxBookCtrlEventFunction;
 #define EVT_TOOLBOOK_PAGE_CHANGING(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_TOOLBOOK_PAGE_CHANGING, winid, wxBookCtrlEventHandler(fn))
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED    wxEVT_TOOLBOOK_PAGE_CHANGED
-#define wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING   wxEVT_TOOLBOOK_PAGE_CHANGING
-
 #endif // wxUSE_TOOLBOOK
 
 #endif // _WX_TOOLBOOK_H_

@@ -134,12 +134,12 @@ constexpr unsigned int wxDIRP_SMALL                  = wxPB_SMALL;
 // since GTK >= 2.6, there is GtkFileButton
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
     #include "wx/gtk/filepicker.h"
-    #define wxFilePickerWidget      wxFileButton
-    #define wxDirPickerWidget       wxDirButton
+    using wxFilePickerWidget = wxFileButton;
+    using wxDirPickerWidget  = wxDirButton;
 #else
     #include "wx/generic/filepickerg.h"
-    #define wxFilePickerWidget      wxGenericFileButton
-    #define wxDirPickerWidget       wxGenericDirButton
+    using wxFilePickerWidget = wxGenericFileButton;
+    using wxDirPickerWidget  = wxGenericDirButton;
 #endif
 
 
@@ -410,10 +410,6 @@ private:
 };
 
 #endif      // wxUSE_DIRPICKERCTRL
-
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_FILEPICKER_CHANGED   wxEVT_FILEPICKER_CHANGED
-#define wxEVT_COMMAND_DIRPICKER_CHANGED    wxEVT_DIRPICKER_CHANGED
 
 #endif // _WX_FILEDIRPICKER_H_BASE_
 

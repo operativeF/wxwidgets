@@ -141,10 +141,6 @@ typedef void (wxEvtHandler::*wxSpinDoubleEventFunction)(wxSpinDoubleEvent&);
     #include "wx/generic/spinctlg.h"
 #endif
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_SPINCTRL_UPDATED         wxEVT_SPINCTRL
-#define wxEVT_COMMAND_SPINCTRLDOUBLE_UPDATED   wxEVT_SPINCTRLDOUBLE
-
 #endif // wxUSE_SPINCTRL
 
 #endif // _WX_SPINCTRL_H_

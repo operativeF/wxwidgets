@@ -259,32 +259,32 @@ protected:
 // the wxBITMAP_DEFAULT_TYPE constant defines the default argument value
 // for wxBitmap's ctor and wxBitmap::LoadFile() functions.
 #if defined(__WXMSW__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::BMP_Resource;
     #include "wx/msw/bitmap.h"
 #elif defined(__WXMOTIF__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/x11/bitmap.h"
 #elif defined(__WXGTK20__)
     #ifdef WX_WINDOWS
-        #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
+        constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::BMP_Resource;
     #else
-        #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
+        constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::XPM;
     #endif
     #include "wx/gtk/bitmap.h"
 #elif defined(__WXGTK__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
+    constexpr wxBITMAP_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/gtk1/bitmap.h"
 #elif defined(__WXX11__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/x11/bitmap.h"
 #elif defined(__WXDFB__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::BMP_Resource;
     #include "wx/dfb/bitmap.h"
 #elif defined(__WXMAC__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_PICT_RESOURCE
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBITMAP_TYPE_PICT_RESOURCE;
     #include "wx/osx/bitmap.h"
 #elif defined(__WXQT__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
+    constexpr auto wxBITMAP_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/qt/bitmap.h"
 #endif
 

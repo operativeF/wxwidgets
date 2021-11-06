@@ -36,8 +36,6 @@
 #include <string_view>
 #include <vector>
 
-#define wxUSE_NEW_DC 1
-
 class wxDC;
 class wxClientDC;
 class wxPaintDC;

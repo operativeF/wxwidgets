@@ -20,15 +20,15 @@
 #if defined(__WXMSW__)
     #include "wx/msw/helpchm.h"
 
-    #define wxHelpController wxCHMHelpController
+    using wxHelpController = wxCHMHelpController;
 #else // !MSW
 
 #if wxUSE_WXHTML_HELP
     #include "wx/html/helpctrl.h"
-    #define wxHelpController wxHtmlHelpController
+    using wxHelpController = wxHtmlHelpController;
 #else
     #include "wx/generic/helpext.h"
-    #define wxHelpController wxExtHelpController
+    using wxHelpController = wxExtHelpController;
 #endif
 
 #endif // MSW/!MSW

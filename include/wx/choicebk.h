@@ -123,10 +123,6 @@ using wxChoicebookEventFunction = wxBookCtrlEventFunction;
 #define EVT_CHOICEBOOK_PAGE_CHANGING(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_CHOICEBOOK_PAGE_CHANGING, winid, wxBookCtrlEventHandler(fn))
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED    wxEVT_CHOICEBOOK_PAGE_CHANGED
-#define wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING   wxEVT_CHOICEBOOK_PAGE_CHANGING
-
 #endif // wxUSE_CHOICEBOOK
 
 #endif // _WX_CHOICEBOOK_H_

@@ -177,9 +177,6 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
     };
 #endif
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_HYPERLINK   wxEVT_HYPERLINK
-
 #endif // wxUSE_HYPERLINKCTRL
 
 #endif // _WX_HYPERLINK_H_

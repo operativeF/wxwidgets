@@ -287,7 +287,7 @@ public:
     // duplicating the entire wxDataViewCustomRendererBase in the generic
     // wxDataViewRenderer class (well, we could use a mix-in but this would
     // make classes hierarchy non linear and arguably even more complex)
-    #define wxDataViewCustomRendererRealBase wxDataViewRendererBase
+    using wxDataViewCustomRendererRealBase = wxDataViewRendererBase;
 #else
     #if defined(__WXGTK20__)
         #include "wx/gtk/dvrenderer.h"
@@ -298,7 +298,7 @@ public:
     #else
         #error "unknown native wxDataViewCtrl implementation"
     #endif
-    #define wxDataViewCustomRendererRealBase wxDataViewRenderer
+    using wxDataViewCustomRendererRealBase = wxDataViewRenderer;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -591,10 +591,6 @@ public:
 };
 
 #endif // ! native __WXOSX__
-
-// this class is obsolete, its functionality was merged in
-// wxDataViewTextRenderer itself now, don't use it any more
-#define wxDataViewTextRendererAttr wxDataViewTextRenderer
 
 #endif // _WX_DVRENDERERS_H_
 

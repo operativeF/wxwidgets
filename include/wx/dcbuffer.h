@@ -213,9 +213,9 @@ private:
 // accepts single wxWindow* argument.
 //
 #if wxALWAYS_NATIVE_DOUBLE_BUFFER
-    #define wxAutoBufferedPaintDCBase           wxPaintDC
+    using wxAutoBufferedPaintDCBase = wxPaintDC;
 #else
-    #define wxAutoBufferedPaintDCBase           wxBufferedPaintDC
+    using wxAutoBufferedPaintDCBase = wxBufferedPaintDC;
 #endif
 
 class wxAutoBufferedPaintDC : public wxAutoBufferedPaintDCBase

@@ -125,7 +125,7 @@ protected:
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
     #include "wx/msw/fdrepdlg.h"
 #else
-    #define wxGenericFindReplaceDialog wxFindReplaceDialog
+    using wxGenericFindReplaceDialog = wxFindReplaceDialog;
 
     #include "wx/generic/fdrepdlg.h"
 #endif
@@ -191,13 +191,6 @@ typedef void (wxEvtHandler::*wxFindDialogEventFunction)(wxFindDialogEvent&);
 
 #define EVT_FIND_CLOSE(id, fn) \
     wx__DECLARE_EVT1(wxEVT_FIND_CLOSE, id, wxFindDialogEventHandler(fn))
-
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_FIND               wxEVT_FIND
-#define wxEVT_COMMAND_FIND_NEXT          wxEVT_FIND_NEXT
-#define wxEVT_COMMAND_FIND_REPLACE       wxEVT_FIND_REPLACE
-#define wxEVT_COMMAND_FIND_REPLACE_ALL   wxEVT_FIND_REPLACE_ALL
-#define wxEVT_COMMAND_FIND_CLOSE         wxEVT_FIND_CLOSE
 
 #endif // wxUSE_FINDREPLDLG
 

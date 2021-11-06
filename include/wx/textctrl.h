@@ -903,12 +903,6 @@ private:
 
 #endif // wxHAS_TEXT_WINDOW_STREAM
 
-// old wxEVT_COMMAND_* constants
-#define wxEVT_COMMAND_TEXT_UPDATED   wxEVT_TEXT
-#define wxEVT_COMMAND_TEXT_ENTER     wxEVT_TEXT_ENTER
-#define wxEVT_COMMAND_TEXT_URL       wxEVT_TEXT_URL
-#define wxEVT_COMMAND_TEXT_MAXLEN    wxEVT_TEXT_MAXLEN
-
 #endif // wxUSE_TEXTCTRL
 
 #endif

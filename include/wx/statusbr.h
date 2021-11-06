@@ -37,11 +37,6 @@ constexpr unsigned int wxSTB_ELLIPSIZE_END     = 0x0100;
 
 constexpr unsigned int wxSTB_DEFAULT_STYLE     = wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE;
 
-
-// old compat style name:
-constexpr unsigned int wxST_SIZEGRIP =    wxSTB_SIZEGRIP;
-
-
 // style flags for wxStatusBar fields
 constexpr unsigned int wxSB_NORMAL    = 0x0000;
 constexpr unsigned int wxSB_FLAT      = 0x0001;

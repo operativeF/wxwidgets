@@ -10,10 +10,10 @@
 #ifndef _WX_GENERIC_RICHMSGDLGG_H_
 #define _WX_GENERIC_RICHMSGDLGG_H_
 
+#include "wx/collpane.h"
 #include <string>
 
 class wxCheckBox;
-class wxCollapsiblePane;
 class wxCollapsiblePaneEvent;
 
 class wxGenericRichMessageDialog

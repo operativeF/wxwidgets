@@ -18,6 +18,7 @@
 #include "wx/help.h"
 
 #include "wx/hashmap.h"
+
 #if wxUSE_BMPBUTTON
 #include "wx/bmpbuttn.h"
 #endif

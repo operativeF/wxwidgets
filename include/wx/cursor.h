@@ -46,32 +46,32 @@ public:
 };
 
 #if defined(__WXMSW__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::CUR_Resource
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::CUR_Resource;
     #include "wx/msw/cursor.h"
 #elif defined(__WXMOTIF__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XBM
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::XBM;
     #include "wx/motif/cursor.h"
 #elif defined(__WXGTK20__)
     #ifdef WX_WINDOWS
-        #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::CUR_Resource
+        constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::CUR_Resource;
     #else
-        #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XPM
+        constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::XPM;
     #endif
     #include "wx/gtk/cursor.h"
 #elif defined(__WXGTK__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XPM
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/gtk1/cursor.h"
 #elif defined(__WXX11__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XPM
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::XPM;
     #include "wx/x11/cursor.h"
 #elif defined(__WXDFB__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::CUR_Resource
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::CUR_Resource;
     #include "wx/dfb/cursor.h"
 #elif defined(__WXMAC__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::MACCURSOR_Resource
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::MACCURSOR_Resource;
     #include "wx/osx/cursor.h"
 #elif defined(__WXQT__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::CUR
+    constexpr auto wxCURSOR_DEFAULT_TYPE = wxBitmapType::CUR;
     #include "wx/qt/cursor.h"
 #endif
 

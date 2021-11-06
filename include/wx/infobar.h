@@ -62,7 +62,7 @@ public:
 // if the generic version is the only one we have, use it
 #ifndef wxHAS_NATIVE_INFOBAR
     #include "wx/generic/infobar.h"
-    #define wxInfoBar wxInfoBarGeneric
+    using wxInfoBar = wxInfoBarGeneric;
 #endif
 
 #endif // wxUSE_INFOBAR

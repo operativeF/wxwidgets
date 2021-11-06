@@ -70,7 +70,7 @@ protected:
     defined(__WXGPE__)
 
     #include "wx/generic/fontdlgg.h"
-    #define wxFontDialog wxGenericFontDialog
+    using wxFontDialog = wxGenericFontDialog;
 #elif defined(__WXMSW__)
     #include "wx/msw/fontdlg.h"
 #elif defined(__WXGTK20__)
