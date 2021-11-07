@@ -673,9 +673,6 @@ protected:
     bool              m_previewFailed{false};
     bool              m_isOk{true};
     bool              m_printingPrepared{false}; // Called OnPreparePrinting?
-
-private:
-    void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
 };
 
 //----------------------------------------------------------------------------
