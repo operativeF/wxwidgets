@@ -2406,7 +2406,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextDropTarget : public wxDropTarget
 {
 public:
   wxRichTextDropTarget(wxRichTextCtrl* tc)
-    : wxDropTarget(new wxRichTextBufferDataObject(new wxRichTextBuffer)), m_rtc(tc) {}
+    : wxDropTarget(new wxRichTextBufferDataObject(std::make_unique<wxRichTextBuffer>())), m_rtc(tc) {}
 
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
     {

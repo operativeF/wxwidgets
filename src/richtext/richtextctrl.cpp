@@ -816,9 +816,9 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
 #endif
             compositeObject->Add(new wxTextDataObject(text), false /* not preferred */);
 
-            wxRichTextBuffer* richTextBuf = new wxRichTextBuffer;
+            auto richTextBuf = std::make_unique<wxRichTextBuffer>();
             GetFocusObject()->CopyFragment(range, *richTextBuf);
-            compositeObject->Add(new wxRichTextBufferDataObject(richTextBuf), true /* preferred */);
+            compositeObject->Add(new wxRichTextBufferDataObject(std::move(richTextBuf)), true /* preferred */);
 
             wxRichTextDropSource source(*compositeObject, this);
             // Use wxDrag_DefaultMove, not because it's the likelier choice but because pressing Ctrl for Copy obeys the principle of least surprise
@@ -4994,7 +4994,7 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
     wxRichTextParagraphLayoutBox* originContainer = GetSelection().GetContainer();
     wxRichTextParagraphLayoutBox* destContainer = GetFocusObject(); // This will be the drop container, not necessarily the same as the origin one
 
-    wxRichTextBuffer* richTextBuffer = ((wxRichTextBufferDataObject*)DataObj)->GetRichTextBuffer();
+    auto richTextBuffer = ((wxRichTextBufferDataObject*)DataObj)->GetRichTextBuffer();
 
     if (richTextBuffer)
     {
@@ -5024,8 +5024,6 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
 
         destContainer->InsertParagraphsWithUndo(&GetBuffer(), position+1, *richTextBuffer, this, 0);
         ShowPosition(position + richTextBuffer->GetOwnRange().GetEnd());
-
-        delete richTextBuffer;
 
         if (DeleteAfter)
         {

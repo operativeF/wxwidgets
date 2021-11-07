@@ -8783,10 +8783,10 @@ bool wxRichTextBuffer::CopyToClipboard(const wxRichTextRange& range)
 
         if (FindHandler(wxRICHTEXT_TYPE_XML))
         {
-            wxRichTextBuffer* richTextBuf = new wxRichTextBuffer;
+            auto richTextBuf = std::make_unique<wxRichTextBuffer>();
             container->CopyFragment(range, *richTextBuf);
 
-            compositeObject->Add(new wxRichTextBufferDataObject(richTextBuf), true /* preferred */);
+            compositeObject->Add(new wxRichTextBufferDataObject(std::move(richTextBuf)), true /* preferred */);
         }
 
         if (wxTheClipboard->SetData(compositeObject))
@@ -8818,7 +8818,7 @@ bool wxRichTextBuffer::PasteFromClipboard(long position)
             {
                 wxRichTextBufferDataObject data;
                 wxTheClipboard->GetData(data);
-                wxRichTextBuffer* richTextBuffer = data.GetRichTextBuffer();
+                auto richTextBuffer = data.GetRichTextBuffer();
                 if (richTextBuffer)
                 {
                     container->InsertParagraphsWithUndo(this, position+1, *richTextBuffer, GetRichTextCtrl(), 0);
@@ -8829,7 +8829,6 @@ bool wxRichTextBuffer::PasteFromClipboard(long position)
                         delete richTextBuffer->GetStyleSheet();
                         richTextBuffer->SetStyleSheet(nullptr);
                     }
-                    delete richTextBuffer;
                 }
             }
             else if (wxTheClipboard->IsSupported(wxDF_TEXT)
@@ -13302,8 +13301,8 @@ wxString wxRichTextImageBlock::GetExtension() const
  * The data object for a wxRichTextBuffer
  */
 
-wxRichTextBufferDataObject::wxRichTextBufferDataObject(wxRichTextBuffer* richTextBuffer)
-    : m_richTextBuffer(richTextBuffer)
+wxRichTextBufferDataObject::wxRichTextBufferDataObject(std::unique_ptr<wxRichTextBuffer> richTextBuffer)
+    : m_richTextBuffer(std::move(richTextBuffer))
 {
     // this string should uniquely identify our format, but is otherwise
     // arbitrary
@@ -13312,19 +13311,12 @@ wxRichTextBufferDataObject::wxRichTextBufferDataObject(wxRichTextBuffer* richTex
     SetFormat(m_formatRichTextBuffer);
 }
 
-wxRichTextBufferDataObject::~wxRichTextBufferDataObject()
-{
-    delete m_richTextBuffer;
-}
-
 // after a call to this function, the richTextBuffer is owned by the caller and it
 // is responsible for deleting it!
-wxRichTextBuffer* wxRichTextBufferDataObject::GetRichTextBuffer()
+// FIXME: Most likely dangerous to do this.
+std::unique_ptr<wxRichTextBuffer> wxRichTextBufferDataObject::GetRichTextBuffer()
 {
-    wxRichTextBuffer* richTextBuffer = m_richTextBuffer;
-    m_richTextBuffer = nullptr;
-
-    return richTextBuffer;
+    return std::move(m_richTextBuffer);
 }
 
 wxDataFormat wxRichTextBufferDataObject::GetPreferredFormat(Direction WXUNUSED(dir)) const
@@ -13380,11 +13372,9 @@ bool wxRichTextBufferDataObject::GetDataHere(void *pBuf) const
 
 bool wxRichTextBufferDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 {
-    wxDELETE(m_richTextBuffer);
-
     wxString bufXML((const char*) buf, wxConvUTF8);
 
-    m_richTextBuffer = new wxRichTextBuffer;
+    m_richTextBuffer = std::make_unique<wxRichTextBuffer>();
 
     wxStringInputStream stream(bufXML);
     m_richTextBuffer->SetHandlerFlags(wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET);
@@ -13392,7 +13382,7 @@ bool wxRichTextBufferDataObject::SetData(size_t WXUNUSED(len), const void *buf)
     {
         wxLogError("Could not read the buffer from an XML stream.\nYou may have forgotten to add the XML file handler.");
 
-        wxDELETE(m_richTextBuffer);
+        m_richTextBuffer.reset();
 
         return false;
     }

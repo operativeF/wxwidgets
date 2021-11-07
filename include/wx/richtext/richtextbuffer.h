@@ -6883,21 +6883,21 @@ protected:
     @see wxDataObjectSimple, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBufferDataObject: public wxDataObjectSimple
+class wxRichTextBufferDataObject: public wxDataObjectSimple
 {
 public:
     /**
         The constructor doesn't copy the pointer, so it shouldn't go away while this object
         is alive.
     */
-    wxRichTextBufferDataObject(wxRichTextBuffer* richTextBuffer = nullptr);
-    ~wxRichTextBufferDataObject();
+    wxRichTextBufferDataObject(std::unique_ptr<wxRichTextBuffer> richTextBuffer = {});
 
     /**
         After a call to this function, the buffer is owned by the caller and it
         is responsible for deleting it.
     */
-    wxRichTextBuffer* GetRichTextBuffer();
+    // FIXME: Most likely dangerous, and should probably destroy this object
+    std::unique_ptr<wxRichTextBuffer> GetRichTextBuffer();
 
     // base class pure virtuals
 
@@ -6916,7 +6916,7 @@ public:
 
 protected:
     wxDataFormat            m_formatRichTextBuffer;     // our custom format
-    wxRichTextBuffer*       m_richTextBuffer;           // our data
+    std::unique_ptr<wxRichTextBuffer>       m_richTextBuffer;           // our data
 };
 
 #endif
