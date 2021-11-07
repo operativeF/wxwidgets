@@ -148,7 +148,7 @@ public:
     virtual bool SetStyleDefinition(const wxRichTextStyleDefinition& styleDef, wxRichTextStyleSheet* sheet, bool update = true);
 
     /// Get the style definition, if any
-    virtual wxRichTextStyleDefinition* GetStyleDefinition() const { return m_styleDefinition; }
+    virtual wxRichTextStyleDefinition* GetStyleDefinition() const { return m_styleDefinition.get(); }
 
     /// Get the style sheet, if any
     virtual wxRichTextStyleSheet* GetStyleSheet() const { return m_styleSheet; }
@@ -196,8 +196,8 @@ public:
     void OnUpdateHelp(wxUpdateUIEvent& event);
 
     /// Get/set formatting factory object
-    static void SetFormattingDialogFactory(wxRichTextFormattingDialogFactory* factory);
-    static wxRichTextFormattingDialogFactory* GetFormattingDialogFactory() { return ms_FormattingDialogFactory; }
+    static void SetFormattingDialogFactory(std::unique_ptr<wxRichTextFormattingDialogFactory> factory);
+    static wxRichTextFormattingDialogFactory* GetFormattingDialogFactory() { return ms_FormattingDialogFactory.get(); }
 
     /// Helper for pages to get the top-level dialog
     static wxRichTextFormattingDialog* GetDialog(wxWindow* win);
@@ -251,7 +251,7 @@ public:
 protected:
 
     wxRichTextAttr                              m_attributes;
-    wxRichTextStyleDefinition*                  m_styleDefinition{nullptr};
+    std::unique_ptr<wxRichTextStyleDefinition>  m_styleDefinition;
     wxRichTextStyleSheet*                       m_styleSheet{nullptr};
     wxRichTextObject*                           m_object{nullptr};
     std::vector<int>                            m_pageIds; // mapping of book control indexes to page ids
@@ -259,7 +259,7 @@ protected:
     bool                                        m_ignoreUpdates{false};
     inline static wxColourData                  sm_colourData;
 
-    inline static wxRichTextFormattingDialogFactory*   ms_FormattingDialogFactory{nullptr};
+    inline static std::unique_ptr<wxRichTextFormattingDialogFactory>   ms_FormattingDialogFactory;
     inline static bool                          sm_showToolTips{false};
 
     inline static bool                          sm_restoreLastPage{true};

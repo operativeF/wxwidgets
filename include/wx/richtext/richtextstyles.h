@@ -75,7 +75,7 @@ public:
     bool operator ==(const wxRichTextStyleDefinition& def) const { return Eq(def); }
 
     /// Override to clone the object
-    virtual wxRichTextStyleDefinition* Clone() const = 0;
+    virtual std::unique_ptr<wxRichTextStyleDefinition> Clone() const = 0;
 
     /// Sets and gets the name of the style
     void SetName(const std::string& name) { m_name = name; }
@@ -134,7 +134,7 @@ public:
         wxRichTextStyleDefinition(name) {}
 
     /// Clones the object
-    wxRichTextStyleDefinition* Clone() const override { return new wxRichTextCharacterStyleDefinition(*this); }
+    std::unique_ptr<wxRichTextStyleDefinition> Clone() const override { return std::make_unique<wxRichTextCharacterStyleDefinition>(*this); }
 
 protected:
 };
@@ -169,7 +169,7 @@ public:
     bool operator ==(const wxRichTextParagraphStyleDefinition& def) const;
 
     /// Clones the object
-    wxRichTextStyleDefinition* Clone() const override { return new wxRichTextParagraphStyleDefinition(*this); }
+    std::unique_ptr<wxRichTextStyleDefinition> Clone() const override { return std::make_unique<wxRichTextParagraphStyleDefinition>(*this); }
 
 protected:
 
@@ -203,7 +203,7 @@ public:
     bool operator ==(const wxRichTextListStyleDefinition& def) const;
 
     /// Clones the object
-    wxRichTextStyleDefinition* Clone() const override { return new wxRichTextListStyleDefinition(*this); }
+    std::unique_ptr<wxRichTextStyleDefinition> Clone() const override { return std::make_unique<wxRichTextListStyleDefinition>(*this); }
 
     /// Sets/gets the attributes for the given level
     void SetLevelAttributes(int i, const wxRichTextAttr& attr);
@@ -266,7 +266,7 @@ public:
     bool operator ==(const wxRichTextBoxStyleDefinition& def) const;
 
     /// Clones the object
-    wxRichTextStyleDefinition* Clone() const override { return new wxRichTextBoxStyleDefinition(*this); }
+    std::unique_ptr<wxRichTextStyleDefinition> Clone() const override { return std::make_unique<wxRichTextBoxStyleDefinition>(*this); }
 };
 
 /*!

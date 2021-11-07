@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RICHTEXT
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-#endif
 
 #include "wx/richtext/richtextbuffer.h"
 
@@ -44,6 +37,8 @@
 
 #include "wx/listimpl.cpp"
 #include "wx/arrimpl.cpp"
+
+#include <cmath>
 
 WX_DEFINE_LIST(wxRichTextObjectList)
 WX_DEFINE_LIST(wxRichTextLineList)

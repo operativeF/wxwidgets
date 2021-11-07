@@ -86,8 +86,6 @@ wxRichTextFormattingDialog::~wxRichTextFormattingDialog()
     int sel = GetBookCtrl()->GetSelection();
     if (sel != -1 && sel < (int) m_pageIds.size())
         sm_lastPage = m_pageIds[sel];
-
-    delete m_styleDefinition;
 }
 
 bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const std::string& title, wxWindowID id,
@@ -162,8 +160,6 @@ bool wxRichTextFormattingDialog::SetStyleDefinition(const wxRichTextStyleDefinit
 {
     m_styleSheet = sheet;
 
-    if (m_styleDefinition)
-        delete m_styleDefinition;
     m_styleDefinition = styleDef.Clone();
 
     return SetStyle(m_styleDefinition->GetStyle(), update);
@@ -244,11 +240,9 @@ void wxRichTextFormattingDialog::OnUpdateHelp(wxUpdateUIEvent& event)
     event.Enable(true);
 }
 
-void wxRichTextFormattingDialog::SetFormattingDialogFactory(wxRichTextFormattingDialogFactory* factory)
+void wxRichTextFormattingDialog::SetFormattingDialogFactory(std::unique_ptr<wxRichTextFormattingDialogFactory> factory)
 {
-    if (ms_FormattingDialogFactory)
-        delete ms_FormattingDialogFactory;
-    ms_FormattingDialogFactory = factory;
+    ms_FormattingDialogFactory = std::move(factory);
 }
 
 // Find a page by class
@@ -453,7 +447,7 @@ class wxRichTextFormattingDialogModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextFormattingDialogModule);
 public:
-    bool OnInit() override { wxRichTextFormattingDialog::SetFormattingDialogFactory(new wxRichTextFormattingDialogFactory); return true; }
+    bool OnInit() override { wxRichTextFormattingDialog::SetFormattingDialogFactory(std::make_unique<wxRichTextFormattingDialogFactory>()); return true; }
     void OnExit() override { wxRichTextFormattingDialog::SetFormattingDialogFactory(nullptr); }
 };
 
