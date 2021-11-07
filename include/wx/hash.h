@@ -17,7 +17,7 @@
 class wxObject;
 
 // the default size of the hash
-constexpr unsigned int wxHASH_SIZE_DEFAULT = 1000;
+inline constexpr unsigned int wxHASH_SIZE_DEFAULT = 1000;
 
 /*
  * A hash table is an array of user-definable size with lists

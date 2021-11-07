@@ -19,7 +19,7 @@
 
 class wxSelectionStore;
 
-constexpr char wxVListBoxNameStr[] = "wxVListBox";
+inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
 
 // ----------------------------------------------------------------------------
 // wxVListBox

@@ -29,11 +29,11 @@ enum {
 };
 
 ////@begin control identifiers
-constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE = wxRESIZE_BORDER|wxTAB_TRAVERSAL;
-constexpr char SYMBOL_WXRICHTEXTSTYLEPAGE_TITLE[] = "";
-constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_IDNAME = ID_RICHTEXTSTYLEPAGE;
-constexpr wxSize SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE = {400, 300};
-constexpr wxPoint SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION = wxDefaultPosition;
+inline constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE = wxRESIZE_BORDER|wxTAB_TRAVERSAL;
+inline constexpr char SYMBOL_WXRICHTEXTSTYLEPAGE_TITLE[] = "";
+inline constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_IDNAME = ID_RICHTEXTSTYLEPAGE;
+inline constexpr wxSize SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE = {400, 300};
+inline constexpr wxPoint SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION = wxDefaultPosition;
 ////@end control identifiers
 
 /*!

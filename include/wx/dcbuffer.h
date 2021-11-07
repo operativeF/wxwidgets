@@ -34,15 +34,15 @@ class wxWindow;
 
 // Assumes the buffer bitmap covers the entire scrolled window,
 // and prepares the window DC accordingly
-constexpr unsigned int wxBUFFER_VIRTUAL_AREA = 0x01;
+inline constexpr unsigned int wxBUFFER_VIRTUAL_AREA = 0x01;
 
 // Assumes the buffer bitmap only covers the client area;
 // does not prepare the window DC
-constexpr unsigned int wxBUFFER_CLIENT_AREA = 0x02;
+inline constexpr unsigned int wxBUFFER_CLIENT_AREA = 0x02;
 
 // Set when not using specific buffer bitmap. Note that this
 // is private style and not returned by GetStyle.
-constexpr unsigned int wxBUFFER_USES_SHARED_BUFFER = 0x04;
+inline constexpr unsigned int wxBUFFER_USES_SHARED_BUFFER = 0x04;
 
 class wxBufferedDC : public wxMemoryDC
 {

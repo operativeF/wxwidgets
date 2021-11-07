@@ -25,7 +25,7 @@ class wxFrame;
 class wxWindow;
 
 // Flags for SetViewer
-constexpr unsigned int wxHELP_NETSCAPE = 1;
+inline constexpr unsigned int wxHELP_NETSCAPE = 1;
 
 // Search modes:
 enum class wxHelpSearchMode

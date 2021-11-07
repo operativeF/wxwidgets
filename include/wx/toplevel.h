@@ -25,7 +25,7 @@
 #include <string>
 
 // the default names for various classes
-constexpr char wxFrameNameStr[] = "frame";
+inline constexpr char wxFrameNameStr[] = "frame";
 
 // ----------------------------------------------------------------------------
 // constants
@@ -65,21 +65,21 @@ constexpr char wxFrameNameStr[] = "frame";
  */
 
 // style common to both wxFrame and wxDialog
-constexpr unsigned int wxSTAY_ON_TOP = 0x8000;
-constexpr unsigned int wxICONIZE     = 0x4000;
-constexpr unsigned int wxMINIMIZE    = wxICONIZE;
-constexpr unsigned int wxMAXIMIZE    = 0x2000;
-constexpr unsigned int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
+inline constexpr unsigned int wxSTAY_ON_TOP = 0x8000;
+inline constexpr unsigned int wxICONIZE     = 0x4000;
+inline constexpr unsigned int wxMINIMIZE    = wxICONIZE;
+inline constexpr unsigned int wxMAXIMIZE    = 0x2000;
+inline constexpr unsigned int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
 
-constexpr unsigned int wxSYSTEM_MENU  = 0x0800;
-constexpr unsigned int wxMINIMIZE_BOX = 0x0400;
-constexpr unsigned int wxMAXIMIZE_BOX = 0x0200;
+inline constexpr unsigned int wxSYSTEM_MENU  = 0x0800;
+inline constexpr unsigned int wxMINIMIZE_BOX = 0x0400;
+inline constexpr unsigned int wxMAXIMIZE_BOX = 0x0200;
 
-constexpr unsigned int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
-constexpr unsigned int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
+inline constexpr unsigned int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
+inline constexpr unsigned int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
 
 // default style
-constexpr unsigned int wxDEFAULT_FRAME_STYLE =
+inline constexpr unsigned int wxDEFAULT_FRAME_STYLE =
              wxSYSTEM_MENU |
              wxRESIZE_BORDER |
              wxMINIMIZE_BOX |
@@ -90,7 +90,7 @@ constexpr unsigned int wxDEFAULT_FRAME_STYLE =
 
 
 // Dialogs are created in a special way
-constexpr auto wxTOPLEVEL_EX_DIALOG = 0x00000008;
+inline constexpr auto wxTOPLEVEL_EX_DIALOG = 0x00000008;
 
 // Styles for ShowFullScreen
 // (note that wxTopLevelWindow only handles wxFULLSCREEN_NOBORDER and

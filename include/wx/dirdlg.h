@@ -25,9 +25,9 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr char wxDirDialogNameStr[] = "wxDirCtrl";
-constexpr char wxDirDialogDefaultFolderStr[] = "/";
-constexpr char wxDirSelectorPromptStr[] = "Select a directory";
+inline constexpr char wxDirDialogNameStr[] = "wxDirCtrl";
+inline constexpr char wxDirDialogDefaultFolderStr[] = "/";
+inline constexpr char wxDirSelectorPromptStr[] = "Select a directory";
 
 
 /*
@@ -41,12 +41,12 @@ constexpr char wxDirSelectorPromptStr[] = "Select a directory";
     #define wxDIALOG_NO_PARENT      0x00000020
 */
 
-constexpr unsigned int wxDD_CHANGE_DIR         = 0x0100;
-constexpr unsigned int wxDD_DIR_MUST_EXIST     = 0x0200;
-constexpr unsigned int wxDD_MULTIPLE           = 0x0400;
-constexpr unsigned int wxDD_SHOW_HIDDEN        = 0x0001;
+inline constexpr unsigned int wxDD_CHANGE_DIR         = 0x0100;
+inline constexpr unsigned int wxDD_DIR_MUST_EXIST     = 0x0200;
+inline constexpr unsigned int wxDD_MULTIPLE           = 0x0400;
+inline constexpr unsigned int wxDD_SHOW_HIDDEN        = 0x0001;
 
-constexpr unsigned int wxDD_DEFAULT_STYLE = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER;
+inline constexpr unsigned int wxDD_DEFAULT_STYLE = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER;
 
 //-------------------------------------------------------------------------
 // wxDirDialogBase

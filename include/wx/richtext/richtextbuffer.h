@@ -105,7 +105,7 @@
 /**
     The line break character that can be embedded in content.
  */
-constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
+inline constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
 
 
 /**
@@ -6587,24 +6587,24 @@ protected:
  */
 
 // Include style sheet when loading and saving
-constexpr unsigned int wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET       = 0x0001;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET       = 0x0001;
 
 // Save images to memory file system in HTML handler
-constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY    = 0x0010;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY    = 0x0010;
 
 // Save images to files in HTML handler
-constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_FILES     = 0x0020;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_FILES     = 0x0020;
 
 // Save images as inline base64 data in HTML handler
-constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64    = 0x0040;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64    = 0x0040;
 
 // Don't write header and footer (or BODY), so we can include the fragment
 // in a larger document
-constexpr unsigned int wxRICHTEXT_HANDLER_NO_HEADER_FOOTER         = 0x0080;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_NO_HEADER_FOOTER         = 0x0080;
 
 // Convert the more common face names to names that will work on the current platform
 // in a larger document
-constexpr unsigned int wxRICHTEXT_HANDLER_CONVERT_FACENAMES        = 0x0100;
+inline constexpr unsigned int wxRICHTEXT_HANDLER_CONVERT_FACENAMES        = 0x0100;
 
 /**
     @class wxRichTextFileHandler

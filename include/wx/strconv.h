@@ -21,7 +21,7 @@
 class wxString;
 
 // the error value returned by wxMBConv methods
-constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
+inline constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
 
 // ----------------------------------------------------------------------------
 // wxMBConv (abstract base class for conversions)

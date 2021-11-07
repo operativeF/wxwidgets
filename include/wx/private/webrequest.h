@@ -19,10 +19,10 @@
 WX_DECLARE_STRING_HASH_MAP(wxString, wxWebRequestHeaderMap);
 
 // Default buffer size when a fixed-size buffer must be used.
-constexpr int wxWEBREQUEST_BUFFER_SIZE = 64 * 1024;
+inline constexpr int wxWEBREQUEST_BUFFER_SIZE = 64 * 1024;
 
 // Trace mask used for the messages in wxWebRequest code.
-constexpr char wxTRACE_WEBREQUEST[] = "webrequest";
+inline constexpr char wxTRACE_WEBREQUEST[] = "webrequest";
 
 // ----------------------------------------------------------------------------
 // wxWebAuthChallengeImpl

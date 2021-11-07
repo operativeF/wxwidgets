@@ -21,7 +21,7 @@
 
 class wxPrintNativeDataBase;
 
-constexpr unsigned int wxPRINTMEDIA_DEFAULT = 0;
+inline constexpr unsigned int wxPRINTMEDIA_DEFAULT = 0;
 
 class wxPrintData
 {

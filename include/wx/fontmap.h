@@ -51,7 +51,7 @@ struct EncodingInfo
 // not recognizing it at all
 
 // encodings supported by GetEncodingDescription
-constexpr std::array<EncodingInfo, 83> gs_encodings =
+inline constexpr std::array<EncodingInfo, 83> gs_encodings =
 {{
     { wxFONTENCODING_ISO8859_1,         wxTRANSLATE("Western European (ISO-8859-1)"), "ISO-8859-1,ISO8859-1,iso88591,8859-1,iso_8859_1" },
     { wxFONTENCODING_ISO8859_2,         wxTRANSLATE("Central European (ISO-8859-2)"), "ISO-8859-2,ISO8859-2,iso88592,8859-2" },

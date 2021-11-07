@@ -106,30 +106,30 @@ enum wxTreeItemIcon
 };
 
 // special values for the 'state' parameter of wxTreeCtrl::SetItemState()
-constexpr int wxTREE_ITEMSTATE_NONE  = -1;   // not state (no display state image)
-constexpr int wxTREE_ITEMSTATE_NEXT  = -2;   // cycle to the next state
-constexpr int wxTREE_ITEMSTATE_PREV  = -3;   // cycle to the previous state
+inline constexpr int wxTREE_ITEMSTATE_NONE  = -1;   // not state (no display state image)
+inline constexpr int wxTREE_ITEMSTATE_NEXT  = -2;   // cycle to the next state
+inline constexpr int wxTREE_ITEMSTATE_PREV  = -3;   // cycle to the previous state
 
 // ----------------------------------------------------------------------------
 // wxTreeCtrl flags
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxTR_NO_BUTTONS              = 0x0000;     // for convenience
-constexpr unsigned int wxTR_HAS_BUTTONS             = 0x0001;     // draw collapsed/expanded btns
-constexpr unsigned int wxTR_NO_LINES                = 0x0004;     // don't draw lines at all
-constexpr unsigned int wxTR_LINES_AT_ROOT           = 0x0008;     // connect top-level nodes
-constexpr unsigned int wxTR_TWIST_BUTTONS           = 0x0010;     // still used by wxTreeListCtrl
+inline constexpr unsigned int wxTR_NO_BUTTONS              = 0x0000;     // for convenience
+inline constexpr unsigned int wxTR_HAS_BUTTONS             = 0x0001;     // draw collapsed/expanded btns
+inline constexpr unsigned int wxTR_NO_LINES                = 0x0004;     // don't draw lines at all
+inline constexpr unsigned int wxTR_LINES_AT_ROOT           = 0x0008;     // connect top-level nodes
+inline constexpr unsigned int wxTR_TWIST_BUTTONS           = 0x0010;     // still used by wxTreeListCtrl
 
-constexpr unsigned int wxTR_SINGLE                  = 0x0000;     // for convenience
-constexpr unsigned int wxTR_MULTIPLE                = 0x0020;     // can select multiple items
+inline constexpr unsigned int wxTR_SINGLE                  = 0x0000;     // for convenience
+inline constexpr unsigned int wxTR_MULTIPLE                = 0x0020;     // can select multiple items
 
-constexpr unsigned int wxTR_HAS_VARIABLE_ROW_HEIGHT = 0x0080;     // what it says
+inline constexpr unsigned int wxTR_HAS_VARIABLE_ROW_HEIGHT = 0x0080;     // what it says
 
-constexpr unsigned int wxTR_EDIT_LABELS             = 0x0200;     // can edit item labels
-constexpr unsigned int wxTR_ROW_LINES               = 0x0400;     // put border around items
-constexpr unsigned int wxTR_HIDE_ROOT               = 0x0800;     // don't display root node
+inline constexpr unsigned int wxTR_EDIT_LABELS             = 0x0200;     // can edit item labels
+inline constexpr unsigned int wxTR_ROW_LINES               = 0x0400;     // put border around items
+inline constexpr unsigned int wxTR_HIDE_ROOT               = 0x0800;     // don't display root node
 
-constexpr unsigned int wxTR_FULL_ROW_HIGHLIGHT      = 0x2000;     // highlight full horz space
+inline constexpr unsigned int wxTR_FULL_ROW_HIGHLIGHT      = 0x2000;     // highlight full horz space
 
 // make the default control appearance look more native-like depending on the
 // platform
@@ -145,36 +145,36 @@ constexpr unsigned int wxTR_FULL_ROW_HIGHLIGHT      = 0x2000;     // highlight f
 // values for the `flags' parameter of wxTreeCtrl::HitTest() which determine
 // where exactly the specified point is situated:
 
-constexpr unsigned int wxTREE_HITTEST_ABOVE            = 0x0001;
-constexpr unsigned int wxTREE_HITTEST_BELOW            = 0x0002;
-constexpr unsigned int wxTREE_HITTEST_NOWHERE          = 0x0004;
+inline constexpr unsigned int wxTREE_HITTEST_ABOVE            = 0x0001;
+inline constexpr unsigned int wxTREE_HITTEST_BELOW            = 0x0002;
+inline constexpr unsigned int wxTREE_HITTEST_NOWHERE          = 0x0004;
     // on the button associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMBUTTON     = 0x0008;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMBUTTON     = 0x0008;
     // on the bitmap associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMICON       = 0x0010;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMICON       = 0x0010;
     // on the indent associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMINDENT     = 0x0020;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMINDENT     = 0x0020;
     // on the label (string) associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMLABEL      = 0x0040;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMLABEL      = 0x0040;
     // on the right of the label associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMRIGHT      = 0x0080;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMRIGHT      = 0x0080;
     // on the label (string) associated with an item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0100;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0100;
     // on the left of the wxTreeCtrl.
-constexpr unsigned int wxTREE_HITTEST_TOLEFT           = 0x0200;
+inline constexpr unsigned int wxTREE_HITTEST_TOLEFT           = 0x0200;
     // on the right of the wxTreeCtrl.
-constexpr unsigned int wxTREE_HITTEST_TORIGHT          = 0x0400;
+inline constexpr unsigned int wxTREE_HITTEST_TORIGHT          = 0x0400;
     // on the upper part (first half) of the item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMUPPERPART  = 0x0800;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMUPPERPART  = 0x0800;
     // on the lower part (second half) of the item.
-constexpr unsigned int wxTREE_HITTEST_ONITEMLOWERPART  = 0x1000;
+inline constexpr unsigned int wxTREE_HITTEST_ONITEMLOWERPART  = 0x1000;
 
     // anywhere on the item
-constexpr unsigned int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
+inline constexpr unsigned int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
                                                 wxTREE_HITTEST_ONITEMLABEL;
 
 // tree ctrl default name
-constexpr char wxTreeCtrlNameStr[] = "treeCtrl";
+inline constexpr char wxTreeCtrlNameStr[] = "treeCtrl";
 
 // ----------------------------------------------------------------------------
 // wxTreeEvent is a special class for all events associated with tree controls

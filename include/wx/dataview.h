@@ -58,27 +58,27 @@ class wxDataViewModelNotifier;
 class wxDataViewCtrlAccessible;
 #endif // wxUSE_ACCESSIBILITY
 
-constexpr char wxDataViewCtrlNameStr[] = "dataviewCtrl";
+inline constexpr char wxDataViewCtrlNameStr[] = "dataviewCtrl";
 
 // ----------------------------------------------------------------------------
 // wxDataViewCtrl flags
 // ----------------------------------------------------------------------------
 
 // size of a wxDataViewRenderer without contents:
-constexpr wxSize wxDVC_DEFAULT_RENDERER_SIZE = {20, 20};
+inline constexpr wxSize wxDVC_DEFAULT_RENDERER_SIZE = {20, 20};
 
 // the default width of new (text) columns:
-constexpr unsigned int wxDVC_DEFAULT_WIDTH = 80;
+inline constexpr unsigned int wxDVC_DEFAULT_WIDTH = 80;
 
 // the default width of new toggle columns:
-constexpr unsigned int wxDVC_TOGGLE_DEFAULT_WIDTH = 30;
+inline constexpr unsigned int wxDVC_TOGGLE_DEFAULT_WIDTH = 30;
 
 // the default minimal width of the columns:
-constexpr unsigned int wxDVC_DEFAULT_MINWIDTH = 30;
+inline constexpr unsigned int wxDVC_DEFAULT_MINWIDTH = 30;
 
 // The default alignment of wxDataViewRenderers is to take
 // the alignment from the column it owns.
-constexpr unsigned int wxDVR_DEFAULT_ALIGNMENT = -1;
+inline constexpr unsigned int wxDVR_DEFAULT_ALIGNMENT = -1;
 
 
 // ---------------------------------------------------------
@@ -520,13 +520,13 @@ protected:
 // wxDataViewCtrlBase
 // ---------------------------------------------------------
 
-constexpr unsigned int wxDV_SINGLE                  = 0x0000;     // for convenience
-constexpr unsigned int wxDV_MULTIPLE                = 0x0001;     // can select multiple items
-constexpr unsigned int wxDV_NO_HEADER               = 0x0002;     // column titles not visible
-constexpr unsigned int wxDV_HORIZ_RULES             = 0x0004;     // light horizontal rules between rows
-constexpr unsigned int wxDV_VERT_RULES              = 0x0008;     // light vertical rules between columns
-constexpr unsigned int wxDV_ROW_LINES               = 0x0010;     // alternating colour in rows
-constexpr unsigned int wxDV_VARIABLE_LINE_HEIGHT    = 0x0020;     // variable line height
+inline constexpr unsigned int wxDV_SINGLE                  = 0x0000;     // for convenience
+inline constexpr unsigned int wxDV_MULTIPLE                = 0x0001;     // can select multiple items
+inline constexpr unsigned int wxDV_NO_HEADER               = 0x0002;     // column titles not visible
+inline constexpr unsigned int wxDV_HORIZ_RULES             = 0x0004;     // light horizontal rules between rows
+inline constexpr unsigned int wxDV_VERT_RULES              = 0x0008;     // light vertical rules between columns
+inline constexpr unsigned int wxDV_ROW_LINES               = 0x0010;     // alternating colour in rows
+inline constexpr unsigned int wxDV_VARIABLE_LINE_HEIGHT    = 0x0020;     // variable line height
 
 class wxDataViewCtrlBase: public wxSystemThemedControl<wxControl>
 {

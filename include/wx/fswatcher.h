@@ -22,7 +22,7 @@
 
 #include <vector>
 
-constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
+inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 
 // ----------------------------------------------------------------------------
 // wxFileSystemWatcherEventType & wxFileSystemWatcherEvent

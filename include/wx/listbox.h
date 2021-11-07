@@ -23,15 +23,15 @@
 // global data
 // ----------------------------------------------------------------------------
 
-constexpr char wxListBoxNameStr[] = "listBox";
+inline constexpr char wxListBoxNameStr[] = "listBox";
 
 /*
  * Styles for wxListBox
  */
-constexpr unsigned int wxLB_SORT           = 0x0010;
-constexpr unsigned int wxLB_SINGLE         = 0x0020;
-constexpr unsigned int wxLB_MULTIPLE       = 0x0040;
-constexpr unsigned int wxLB_EXTENDED       = 0x0080;
+inline constexpr unsigned int wxLB_SORT           = 0x0010;
+inline constexpr unsigned int wxLB_SINGLE         = 0x0020;
+inline constexpr unsigned int wxLB_MULTIPLE       = 0x0040;
+inline constexpr unsigned int wxLB_EXTENDED       = 0x0080;
 
 // ----------------------------------------------------------------------------
 // wxListBox interface is defined by the class wxListBoxBase

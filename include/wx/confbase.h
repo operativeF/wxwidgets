@@ -32,13 +32,13 @@
 
 /// separates group and entry names (probably shouldn't be changed)
 #ifndef wxCONFIG_PATH_SEPARATOR
-  constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
+  inline constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
 #endif
 
 /// introduces immutable entries
 // (i.e. the ones which can't be changed from the local config file)
 #ifndef wxCONFIG_IMMUTABLE_PREFIX
-  constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
+  inline constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
 #endif
 
 #if wxUSE_CONFIG

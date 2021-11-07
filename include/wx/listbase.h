@@ -38,30 +38,30 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 
 // style flags
 // FIXME: Bitfield
-constexpr unsigned int wxLC_VRULES          = 0x0001;
-constexpr unsigned int wxLC_HRULES          = 0x0002;
+inline constexpr unsigned int wxLC_VRULES          = 0x0001;
+inline constexpr unsigned int wxLC_HRULES          = 0x0002;
 
-constexpr unsigned int wxLC_ICON            = 0x0004;
-constexpr unsigned int wxLC_SMALL_ICON      = 0x0008;
-constexpr unsigned int wxLC_LIST            = 0x0010;
-constexpr unsigned int wxLC_REPORT          = 0x0020;
+inline constexpr unsigned int wxLC_ICON            = 0x0004;
+inline constexpr unsigned int wxLC_SMALL_ICON      = 0x0008;
+inline constexpr unsigned int wxLC_LIST            = 0x0010;
+inline constexpr unsigned int wxLC_REPORT          = 0x0020;
 
-constexpr unsigned int wxLC_ALIGN_TOP       = 0x0040;
-constexpr unsigned int wxLC_ALIGN_LEFT      = 0x0080;
-constexpr unsigned int wxLC_AUTOARRANGE     = 0x0100;
-constexpr unsigned int wxLC_VIRTUAL         = 0x0200;
-constexpr unsigned int wxLC_EDIT_LABELS     = 0x0400;
-constexpr unsigned int wxLC_NO_HEADER       = 0x0800;
-constexpr unsigned int wxLC_NO_SORT_HEADER  = 0x1000;
-constexpr unsigned int wxLC_SINGLE_SEL      = 0x2000;
-constexpr unsigned int wxLC_SORT_ASCENDING  = 0x4000;
-constexpr unsigned int wxLC_SORT_DESCENDING = 0x8000;
-constexpr unsigned int wxLC_MASK_TYPE       = wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT;
-constexpr unsigned int wxLC_MASK_ALIGN      = wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT;
-constexpr unsigned int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING;
+inline constexpr unsigned int wxLC_ALIGN_TOP       = 0x0040;
+inline constexpr unsigned int wxLC_ALIGN_LEFT      = 0x0080;
+inline constexpr unsigned int wxLC_AUTOARRANGE     = 0x0100;
+inline constexpr unsigned int wxLC_VIRTUAL         = 0x0200;
+inline constexpr unsigned int wxLC_EDIT_LABELS     = 0x0400;
+inline constexpr unsigned int wxLC_NO_HEADER       = 0x0800;
+inline constexpr unsigned int wxLC_NO_SORT_HEADER  = 0x1000;
+inline constexpr unsigned int wxLC_SINGLE_SEL      = 0x2000;
+inline constexpr unsigned int wxLC_SORT_ASCENDING  = 0x4000;
+inline constexpr unsigned int wxLC_SORT_DESCENDING = 0x8000;
+inline constexpr unsigned int wxLC_MASK_TYPE       = wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT;
+inline constexpr unsigned int wxLC_MASK_ALIGN      = wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT;
+inline constexpr unsigned int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING;
 
 // for compatibility only
-constexpr unsigned int wxLC_USER_TEXT       = wxLC_VIRTUAL;
+inline constexpr unsigned int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 
 // FIXME: Bitfields
 // Omitted because
@@ -126,7 +126,7 @@ enum class ListHitTest
 using ListHitTestFlags = InclBitfield<ListHitTest>;
 
 // GetSubItemRect constants
-constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
+inline constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
 
 // Flags for GetNextItem (MSW only except wxListGetNextItem::All)
 enum class wxListGetNextItem

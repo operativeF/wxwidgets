@@ -22,7 +22,7 @@
 
 #include <fmt/core.h>
 
-constexpr char wxMessageBoxCaptionStr[] = "Message";
+inline constexpr char wxMessageBoxCaptionStr[] = "Message";
 
 // ----------------------------------------------------------------------------
 // wxMessageDialogBase: base class defining wxMessageDialog interface

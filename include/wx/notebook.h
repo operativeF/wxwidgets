@@ -40,20 +40,20 @@ enum
 // wxNotebook flags
 
 // use common book wxBK_* flags for describing alignment
-constexpr unsigned int wxNB_DEFAULT = wxBK_DEFAULT;
-constexpr unsigned int wxNB_TOP     = wxBK_TOP;
-constexpr unsigned int wxNB_BOTTOM  = wxBK_BOTTOM;
-constexpr unsigned int wxNB_LEFT    = wxBK_LEFT;
-constexpr unsigned int wxNB_RIGHT   = wxBK_RIGHT;
+inline constexpr unsigned int wxNB_DEFAULT = wxBK_DEFAULT;
+inline constexpr unsigned int wxNB_TOP     = wxBK_TOP;
+inline constexpr unsigned int wxNB_BOTTOM  = wxBK_BOTTOM;
+inline constexpr unsigned int wxNB_LEFT    = wxBK_LEFT;
+inline constexpr unsigned int wxNB_RIGHT   = wxBK_RIGHT;
 
-constexpr unsigned int wxNB_FIXEDWIDTH  = 0x0100;
-constexpr unsigned int wxNB_MULTILINE   = 0x0200;
-constexpr unsigned int wxNB_NOPAGETHEME = 0x0400;
+inline constexpr unsigned int wxNB_FIXEDWIDTH  = 0x0100;
+inline constexpr unsigned int wxNB_MULTILINE   = 0x0200;
+inline constexpr unsigned int wxNB_NOPAGETHEME = 0x0400;
 
 
 using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
-constexpr char wxNotebookNameStr[] = "notebook";
+inline constexpr char wxNotebookNameStr[] = "notebook";
 
 #if wxUSE_EXTENDED_RTTI
 

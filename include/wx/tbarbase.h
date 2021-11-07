@@ -26,7 +26,7 @@ class wxToolBarBase;
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr char wxToolBarNameStr[] = "toolbar";
+inline constexpr char wxToolBarNameStr[] = "toolbar";
 
 enum class wxToolBarToolStyle
 {

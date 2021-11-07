@@ -139,32 +139,32 @@ enum wxAccObject {
 
 // Accessible states
 
-constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_HIGH       = 0x00000001;
-constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_MEDIUM     = 0x00000002;
-constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_LOW        = 0x00000004;
-constexpr unsigned int wxACC_STATE_SYSTEM_ANIMATED         = 0x00000008;
-constexpr unsigned int wxACC_STATE_SYSTEM_BUSY             = 0x00000010;
-constexpr unsigned int wxACC_STATE_SYSTEM_CHECKED          = 0x00000020;
-constexpr unsigned int wxACC_STATE_SYSTEM_COLLAPSED        = 0x00000040;
-constexpr unsigned int wxACC_STATE_SYSTEM_DEFAULT          = 0x00000080;
-constexpr unsigned int wxACC_STATE_SYSTEM_EXPANDED         = 0x00000100;
-constexpr unsigned int wxACC_STATE_SYSTEM_EXTSELECTABLE    = 0x00000200;
-constexpr unsigned int wxACC_STATE_SYSTEM_FLOATING         = 0x00000400;
-constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSABLE        = 0x00000800;
-constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSED          = 0x00001000;
-constexpr unsigned int wxACC_STATE_SYSTEM_HOTTRACKED       = 0x00002000;
-constexpr unsigned int wxACC_STATE_SYSTEM_INVISIBLE        = 0x00004000;
-constexpr unsigned int wxACC_STATE_SYSTEM_MARQUEED         = 0x00008000;
-constexpr unsigned int wxACC_STATE_SYSTEM_MIXED            = 0x00010000;
-constexpr unsigned int wxACC_STATE_SYSTEM_MULTISELECTABLE  = 0x00020000;
-constexpr unsigned int wxACC_STATE_SYSTEM_OFFSCREEN        = 0x00040000;
-constexpr unsigned int wxACC_STATE_SYSTEM_PRESSED          = 0x00080000;
-constexpr unsigned int wxACC_STATE_SYSTEM_PROTECTED        = 0x00100000;
-constexpr unsigned int wxACC_STATE_SYSTEM_READONLY         = 0x00200000;
-constexpr unsigned int wxACC_STATE_SYSTEM_SELECTABLE       = 0x00400000;
-constexpr unsigned int wxACC_STATE_SYSTEM_SELECTED         = 0x00800000;
-constexpr unsigned int wxACC_STATE_SYSTEM_SELFVOICING      = 0x01000000;
-constexpr unsigned int wxACC_STATE_SYSTEM_UNAVAILABLE      = 0x02000000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_HIGH       = 0x00000001;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_MEDIUM     = 0x00000002;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_LOW        = 0x00000004;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_ANIMATED         = 0x00000008;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_BUSY             = 0x00000010;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_CHECKED          = 0x00000020;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_COLLAPSED        = 0x00000040;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_DEFAULT          = 0x00000080;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_EXPANDED         = 0x00000100;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_EXTSELECTABLE    = 0x00000200;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_FLOATING         = 0x00000400;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSABLE        = 0x00000800;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSED          = 0x00001000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_HOTTRACKED       = 0x00002000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_INVISIBLE        = 0x00004000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_MARQUEED         = 0x00008000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_MIXED            = 0x00010000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_MULTISELECTABLE  = 0x00020000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_OFFSCREEN        = 0x00040000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_PRESSED          = 0x00080000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_PROTECTED        = 0x00100000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_READONLY         = 0x00200000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_SELECTABLE       = 0x00400000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_SELECTED         = 0x00800000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_SELFVOICING      = 0x01000000;
+inline constexpr unsigned int wxACC_STATE_SYSTEM_UNAVAILABLE      = 0x02000000;
 
 // Selection flag
 

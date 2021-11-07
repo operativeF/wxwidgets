@@ -17,7 +17,7 @@
 
 #include "wx/propgrid/property.h"
 
-constexpr unsigned int wxPG_DEFAULT_SPLITTERX = 110;
+inline constexpr unsigned int wxPG_DEFAULT_SPLITTERX = 110;
 
 // -----------------------------------------------------------------------
 

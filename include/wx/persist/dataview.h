@@ -22,14 +22,14 @@
 // String constants used by wxPersistentDataViewCtrl.
 // ----------------------------------------------------------------------------
 
-constexpr char wxPERSIST_DVC_KIND[] = "DataView";
-constexpr char wxPERSIST_DVC_HIDDEN[] = "Hidden";
-constexpr char wxPERSIST_DVC_POS[]    = "Position";
-constexpr char wxPERSIST_DVC_TITLE[]  = "Title";
-constexpr char wxPERSIST_DVC_WIDTH[]  = "Width";
+inline constexpr char wxPERSIST_DVC_KIND[] = "DataView";
+inline constexpr char wxPERSIST_DVC_HIDDEN[] = "Hidden";
+inline constexpr char wxPERSIST_DVC_POS[]    = "Position";
+inline constexpr char wxPERSIST_DVC_TITLE[]  = "Title";
+inline constexpr char wxPERSIST_DVC_WIDTH[]  = "Width";
 
-constexpr char wxPERSIST_DVC_SORT_KEY[] = "Sorting/Column";
-constexpr char wxPERSIST_DVC_SORT_ASC[] = "Sorting/Asc";
+inline constexpr char wxPERSIST_DVC_SORT_KEY[] = "Sorting/Column";
+inline constexpr char wxPERSIST_DVC_SORT_ASC[] = "Sorting/Asc";
 
 // ----------------------------------------------------------------------------
 // wxPersistentDataViewCtrl: Saves and restores user modified column widths

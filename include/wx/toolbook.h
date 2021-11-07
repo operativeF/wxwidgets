@@ -28,10 +28,10 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGING, wxBook
 
 
 // Use wxButtonToolBar
-constexpr unsigned int wxTBK_BUTTONBAR = 0x0100;
+inline constexpr unsigned int wxTBK_BUTTONBAR = 0x0100;
 
 // Use wxTB_HORZ_LAYOUT style for the controlling toolbar
-constexpr unsigned int wxTBK_HORZ_LAYOUT = 0x8000;
+inline constexpr unsigned int wxTBK_HORZ_LAYOUT = 0x8000;
 
 // ----------------------------------------------------------------------------
 // wxToolbook

@@ -18,10 +18,10 @@
 // string constants used by wxPersistentSplitter
 // ----------------------------------------------------------------------------
 
-constexpr char wxPERSIST_SPLITTER_KIND[] = "Splitter";
+inline constexpr char wxPERSIST_SPLITTER_KIND[] = "Splitter";
 
 // Special position value of -1 means the splitter is not split at all.
-constexpr char wxPERSIST_SPLITTER_POSITION[] = "Position";
+inline constexpr char wxPERSIST_SPLITTER_POSITION[] = "Position";
 
 // ----------------------------------------------------------------------------
 // wxPersistentSplitter: supports saving/restoring splitter position

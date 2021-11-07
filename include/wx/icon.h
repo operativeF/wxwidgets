@@ -17,45 +17,45 @@
 #include <gsl/gsl>
 
 // a more readable way to tell
-constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
+inline inline constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 
 // the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)
 // constant defines the default argument value for wxIcon ctor and wxIcon::LoadFile()
 // functions.
 
 #ifdef WX_WINDOWS
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
   #include "wx/msw/icon.h"
 #elif defined(__WXMOTIF__)
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/motif/icon.h"
 #elif defined(__WXGTK20__)
   #ifdef WX_WINDOWS
-    constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
+    inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::ICO_Resource;
   #else
-    constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+    inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #endif
   #include "wx/generic/icon.h"
 #elif defined(__WXGTK__)
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXX11__)
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXDFB__)
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #elif defined(__WXMAC__)
 #if wxOSX_USE_COCOA_OR_CARBON
-  constexpr wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_ICON_RESOURCE;
+  inline constexpr wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_ICON_RESOURCE;
   #include "wx/generic/icon.h"
 #else
   // iOS and others
-  constexpr auto wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_PNG_RESOURCE;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBITMAP_TYPE_PNG_RESOURCE;
   #include "wx/generic/icon.h"
 #endif
 #elif defined(__WXQT__)
-  constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
+  inline constexpr auto wxICON_DEFAULT_TYPE = wxBitmapType::XPM;
   #include "wx/generic/icon.h"
 #endif
 

@@ -42,7 +42,7 @@
 #define wxHAS_CALL_AFTER
 
 /*  this window should always process UI update events */
-constexpr unsigned int wxWS_EX_PROCESS_UI_UPDATES      = 0x00000020;
+inline constexpr unsigned int wxWS_EX_PROCESS_UI_UPDATES      = 0x00000020;
 
 // ----------------------------------------------------------------------------
 // forward declarations
@@ -85,7 +85,7 @@ class wxEventConnectionRef;
 
 using wxEventType = int;
 
-constexpr wxEventType wxEVT_ANY = -1;
+inline constexpr wxEventType wxEVT_ANY = -1;
 
 // This macro exists for compatibility only (even though it was never public,
 // it still appears in some code using wxWidgets), see public
@@ -650,8 +650,8 @@ wxNewEventTableFunctor(const EventTag&, void (Class::*method)(EventArg&))
 // many, but not all, standard event types
 
     // some generic events
-constexpr wxEventType wxEVT_FIRST = 10000;
-constexpr wxEventType wxEVT_USER_FIRST = wxEVT_FIRST + 2000;
+inline constexpr wxEventType wxEVT_FIRST = 10000;
+inline constexpr wxEventType wxEVT_USER_FIRST = wxEVT_FIRST + 2000;
 
 extern const wxEventType wxEVT_NULL;
 
@@ -1942,7 +1942,7 @@ public:
 
  // Gesture Event
 
-static constexpr unsigned int wxTwoFingerTimeInterval = 200;
+inline constexpr unsigned int wxTwoFingerTimeInterval = 200;
 
 class wxGestureEvent : public wxEvent
 {

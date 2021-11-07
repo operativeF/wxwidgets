@@ -25,16 +25,16 @@
 // wxGauge style flags
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxGA_HORIZONTAL      = wxHORIZONTAL;
-constexpr unsigned int wxGA_VERTICAL        = wxVERTICAL;
+inline constexpr unsigned int wxGA_HORIZONTAL      = wxHORIZONTAL;
+inline constexpr unsigned int wxGA_VERTICAL        = wxVERTICAL;
 
 // Available since Windows 7 only. With this style, the value of gauge will
 // reflect on the taskbar button.
-constexpr unsigned int wxGA_PROGRESS = 0x0010;
+inline constexpr unsigned int wxGA_PROGRESS = 0x0010;
 // Win32 only, is default (and only) on some other platforms
-constexpr unsigned int wxGA_SMOOTH = 0x0020;
+inline constexpr unsigned int wxGA_SMOOTH = 0x0020;
 // QT only, display current completed percentage (text default format "%p%")
-constexpr unsigned int wxGA_TEXT = 0x0040;
+inline constexpr unsigned int wxGA_TEXT = 0x0040;
 
 // GTK and Mac always have native implementation of the indeterminate mode
 // wxMSW has native implementation only if comctl32.dll >= 6.00
@@ -44,7 +44,7 @@ constexpr unsigned int wxGA_TEXT = 0x0040;
     #define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
 #endif
 
-constexpr char wxGaugeNameStr[] = "gauge";
+inline constexpr char wxGaugeNameStr[] = "gauge";
 
 // ----------------------------------------------------------------------------
 // wxGauge: a progress bar

@@ -19,8 +19,8 @@
 #include <string>
 #include <vector>
 
-constexpr char wxRearrangeListNameStr[] = "wxRearrangeList";
-constexpr char wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
+inline constexpr char wxRearrangeListNameStr[] = "wxRearrangeList";
+inline constexpr char wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
 
 // ----------------------------------------------------------------------------
 // wxRearrangeList: a (check) list box allowing to move items around

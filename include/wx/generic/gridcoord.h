@@ -45,7 +45,7 @@ struct wxGridCellCoords
     int m_col{-1};
 };
 
-constexpr wxGridCellCoords wxGridNoCellCoords{-1, -1};
+inline constexpr wxGridCellCoords wxGridNoCellCoords{-1, -1};
 
 
 #endif // _WX_GRID_COORD

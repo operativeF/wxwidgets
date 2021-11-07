@@ -31,33 +31,33 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr char wxGridNameStr[] = "grid";
+inline constexpr char wxGridNameStr[] = "grid";
 
 // Various constants used in wxGrid code.
 //
 // Note that all the values are in DIPs, not pixels, i.e. you must use
 // FromDIP() when using them in your code.
-constexpr int WXGRID_DEFAULT_COL_WIDTH              = 80;
-constexpr int WXGRID_DEFAULT_COL_LABEL_HEIGHT       = 32;
-constexpr int WXGRID_DEFAULT_ROW_LABEL_WIDTH        = 82;
-constexpr int WXGRID_LABEL_EDGE_ZONE                = 2;
-constexpr int WXGRID_MIN_ROW_HEIGHT                 = 15;
-constexpr int WXGRID_MIN_COL_WIDTH                  = 15;
+inline constexpr int WXGRID_DEFAULT_COL_WIDTH              = 80;
+inline constexpr int WXGRID_DEFAULT_COL_LABEL_HEIGHT       = 32;
+inline constexpr int WXGRID_DEFAULT_ROW_LABEL_WIDTH        = 82;
+inline constexpr int WXGRID_LABEL_EDGE_ZONE                = 2;
+inline constexpr int WXGRID_MIN_ROW_HEIGHT                 = 15;
+inline constexpr int WXGRID_MIN_COL_WIDTH                  = 15;
 
 // scroll line size
-constexpr int GRID_SCROLL_LINE_X = 15;
-constexpr int GRID_SCROLL_LINE_Y = GRID_SCROLL_LINE_X;
+inline constexpr int GRID_SCROLL_LINE_X = 15;
+inline constexpr int GRID_SCROLL_LINE_Y = GRID_SCROLL_LINE_X;
 
 // type names for grid table values
-constexpr char wxGRID_VALUE_STRING[]     = "string";
-constexpr char wxGRID_VALUE_BOOL[]       = "bool";
-constexpr char wxGRID_VALUE_NUMBER[]     = "long";
-constexpr char wxGRID_VALUE_FLOAT[]      = "double";
-constexpr char wxGRID_VALUE_CHOICE[]     = "choice";
-constexpr char wxGRID_VALUE_DATE[]       = "date";
+inline constexpr char wxGRID_VALUE_STRING[]     = "string";
+inline constexpr char wxGRID_VALUE_BOOL[]       = "bool";
+inline constexpr char wxGRID_VALUE_NUMBER[]     = "long";
+inline constexpr char wxGRID_VALUE_FLOAT[]      = "double";
+inline constexpr char wxGRID_VALUE_CHOICE[]     = "choice";
+inline constexpr char wxGRID_VALUE_DATE[]       = "date";
 
-constexpr auto wxGRID_VALUE_TEXT         = wxGRID_VALUE_STRING;
-constexpr auto wxGRID_VALUE_LONG         = wxGRID_VALUE_NUMBER;
+inline constexpr auto wxGRID_VALUE_TEXT         = wxGRID_VALUE_STRING;
+inline constexpr auto wxGRID_VALUE_LONG         = wxGRID_VALUE_NUMBER;
 
 // magic constant which tells (to some functions) to automatically calculate
 // the appropriate size

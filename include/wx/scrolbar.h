@@ -19,7 +19,7 @@
 
 #include <string>
 
-constexpr char wxScrollBarNameStr[] = "scrollBar";
+inline constexpr char wxScrollBarNameStr[] = "scrollBar";
 
 // ----------------------------------------------------------------------------
 // wxScrollBar: a scroll bar control

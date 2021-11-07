@@ -27,12 +27,12 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGED,  wxBo
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
 
 // wxChoicebook flags
-constexpr unsigned int wxCHB_DEFAULT          = wxBK_DEFAULT;
-constexpr unsigned int wxCHB_TOP              = wxBK_TOP;
-constexpr unsigned int wxCHB_BOTTOM           = wxBK_BOTTOM;
-constexpr unsigned int wxCHB_LEFT             = wxBK_LEFT;
-constexpr unsigned int wxCHB_RIGHT            = wxBK_RIGHT;
-constexpr unsigned int wxCHB_ALIGN_MASK       = wxBK_ALIGN_MASK;
+inline constexpr unsigned int wxCHB_DEFAULT          = wxBK_DEFAULT;
+inline constexpr unsigned int wxCHB_TOP              = wxBK_TOP;
+inline constexpr unsigned int wxCHB_BOTTOM           = wxBK_BOTTOM;
+inline constexpr unsigned int wxCHB_LEFT             = wxBK_LEFT;
+inline constexpr unsigned int wxCHB_RIGHT            = wxBK_RIGHT;
+inline constexpr unsigned int wxCHB_ALIGN_MASK       = wxBK_ALIGN_MASK;
 
 // ----------------------------------------------------------------------------
 // wxChoicebook

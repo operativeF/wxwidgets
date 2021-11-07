@@ -23,8 +23,8 @@
 
 class wxFontPickerEvent;
 
-constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
-constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
+inline constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
+inline constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
 
 // ----------------------------------------------------------------------------
 // wxFontPickerWidgetBase: a generic abstract interface which must be
@@ -64,12 +64,12 @@ protected:
 //      updates the wxFontButtonGeneric's label (overwriting any previous label)
 //      with the "Times New Roman, 10" text (only fontface + fontsize is displayed
 //      to avoid extralong labels).
-constexpr unsigned int wxFNTP_FONTDESC_AS_LABEL      = 0x0008;
+inline constexpr unsigned int wxFNTP_FONTDESC_AS_LABEL      = 0x0008;
 
 // uses the currently selected font to draw the label of the button
-constexpr unsigned int wxFNTP_USEFONT_FOR_LABEL      = 0x0010;
+inline constexpr unsigned int wxFNTP_USEFONT_FOR_LABEL      = 0x0010;
 
-constexpr unsigned int wxFONTBTN_DEFAULT_STYLE = wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL;
+inline constexpr unsigned int wxFONTBTN_DEFAULT_STYLE = wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL;
 
 // native version currently only exists in wxGTK2
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
@@ -85,12 +85,12 @@ constexpr unsigned int wxFONTBTN_DEFAULT_STYLE = wxFNTP_FONTDESC_AS_LABEL | wxFN
 // wxFontPickerCtrl specific flags
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxFNTP_USE_TEXTCTRL       = wxPB_USE_TEXTCTRL;
-constexpr unsigned int wxFNTP_DEFAULT_STYLE      = wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL;
+inline constexpr unsigned int wxFNTP_USE_TEXTCTRL       = wxPB_USE_TEXTCTRL;
+inline constexpr unsigned int wxFNTP_DEFAULT_STYLE      = wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL;
 
 // not a style but rather the default value of the minimum/maximum pointsize allowed
-constexpr auto wxFNTP_MINPOINT_SIZE = 0;
-constexpr auto wxFNTP_MAXPOINT_SIZE = 100;
+inline constexpr auto wxFNTP_MINPOINT_SIZE = 0;
+inline constexpr auto wxFNTP_MAXPOINT_SIZE = 100;
 
 
 // ----------------------------------------------------------------------------

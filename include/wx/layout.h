@@ -38,7 +38,7 @@ class wxLayoutConstraints;
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxLAYOUT_DEFAULT_MARGIN = 0;
+inline constexpr unsigned int wxLAYOUT_DEFAULT_MARGIN = 0;
 
 enum class wxEdge
 {

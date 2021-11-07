@@ -42,25 +42,25 @@ class wxRichTextStyleDefinition;
     Styles
 */
 
-constexpr auto wxRE_READONLY          = 0x0010;
-constexpr auto wxRE_MULTILINE         = 0x0020;
-constexpr auto wxRE_CENTRE_CARET      = 0x8000;
-constexpr auto wxRE_CENTER_CARET      = wxRE_CENTRE_CARET;
+inline constexpr auto wxRE_READONLY          = 0x0010;
+inline constexpr auto wxRE_MULTILINE         = 0x0020;
+inline constexpr auto wxRE_CENTRE_CARET      = 0x8000;
+inline constexpr auto wxRE_CENTER_CARET      = wxRE_CENTRE_CARET;
 
 /**
     Flags
 */
 
-constexpr auto wxRICHTEXT_SHIFT_DOWN  = 0x01;
-constexpr auto wxRICHTEXT_CTRL_DOWN   = 0x02;
-constexpr auto wxRICHTEXT_ALT_DOWN    = 0x04;
+inline constexpr auto wxRICHTEXT_SHIFT_DOWN  = 0x01;
+inline constexpr auto wxRICHTEXT_CTRL_DOWN   = 0x02;
+inline constexpr auto wxRICHTEXT_ALT_DOWN    = 0x04;
 
 /**
     Extra flags
 */
 
 // Don't draw guide lines around boxes and tables
-constexpr auto wxRICHTEXT_EX_NO_GUIDELINES = 0x00000100;
+inline constexpr auto wxRICHTEXT_EX_NO_GUIDELINES = 0x00000100;
 
 using namespace std::chrono_literals;
 
@@ -68,28 +68,28 @@ using namespace std::chrono_literals;
     Defaults
 */
 
-constexpr wxSize wxRICHTEXT_DEFAULT_OVERALL_SIZE = wxSize(-1, -1);
-constexpr wxSize wxRICHTEXT_DEFAULT_IMAGE_SIZE = wxSize(80, 80);
-constexpr auto wxRICHTEXT_DEFAULT_SPACING = 3;
-constexpr auto wxRICHTEXT_DEFAULT_MARGIN = 3;
+inline constexpr wxSize wxRICHTEXT_DEFAULT_OVERALL_SIZE = wxSize(-1, -1);
+inline constexpr wxSize wxRICHTEXT_DEFAULT_IMAGE_SIZE = wxSize(80, 80);
+inline constexpr auto wxRICHTEXT_DEFAULT_SPACING = 3;
+inline constexpr auto wxRICHTEXT_DEFAULT_MARGIN = 3;
 #define wxRICHTEXT_DEFAULT_UNFOCUSSED_BACKGROUND wxColour(175, 175, 175)
 #define wxRICHTEXT_DEFAULT_FOCUSSED_BACKGROUND wxColour(140, 140, 140)
 #define wxRICHTEXT_DEFAULT_UNSELECTED_BACKGROUND wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE)
 #define wxRICHTEXT_DEFAULT_TYPE_COLOUR wxColour(0, 0, 200)
 #define wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR wxColour(100, 80, 80)
-constexpr auto wxRICHTEXT_DEFAULT_CARET_WIDTH = 2;
+inline constexpr auto wxRICHTEXT_DEFAULT_CARET_WIDTH = 2;
 // Minimum buffer size before delayed layout kicks in
-constexpr auto wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD = 20000ms;
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD = 20000ms;
 // Milliseconds before layout occurs after resize
-constexpr auto wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL = 50ms;
+inline constexpr auto wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL = 50ms;
 // Milliseconds before delayed image processing occurs
-constexpr auto wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL = 200ms;
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL = 200ms;
 
 /* Identifiers
  */
-constexpr auto wxID_RICHTEXT_PROPERTIES1 = wxID_HIGHEST + 1;
-constexpr auto wxID_RICHTEXT_PROPERTIES2 = wxID_HIGHEST + 2;
-constexpr auto wxID_RICHTEXT_PROPERTIES3 = wxID_HIGHEST + 3;
+inline constexpr auto wxID_RICHTEXT_PROPERTIES1 = wxID_HIGHEST + 1;
+inline constexpr auto wxID_RICHTEXT_PROPERTIES2 = wxID_HIGHEST + 2;
+inline constexpr auto wxID_RICHTEXT_PROPERTIES3 = wxID_HIGHEST + 3;
 
 /*
     Normal selection occurs initially and as user drags within one container.

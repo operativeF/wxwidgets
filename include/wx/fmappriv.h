@@ -26,9 +26,9 @@ enum { wxFONTENCODING_UNKNOWN = -2 };
 // the config paths we use
 #if wxUSE_CONFIG
 
-constexpr char FONTMAPPER_ROOT_PATH[]            = "/wxWindows/FontMapper";
-constexpr char FONTMAPPER_CHARSET_PATH[]         = "Charsets";
-constexpr char FONTMAPPER_CHARSET_ALIAS_PATH[]   = "Aliases";
+inline constexpr char FONTMAPPER_ROOT_PATH[]            = "/wxWindows/FontMapper";
+inline constexpr char FONTMAPPER_CHARSET_PATH[]         = "Charsets";
+inline constexpr char FONTMAPPER_CHARSET_ALIAS_PATH[]   = "Aliases";
 
 #endif // wxUSE_CONFIG
 

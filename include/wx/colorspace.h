@@ -32,12 +32,12 @@ concept RGBColorSpaceable = requires
 };
 
 // Reference white points
-constexpr auto wp_D65            = std::pair{0.3127, 0.3290};
-constexpr auto wp_C              = std::pair{0.3101, 0.3162};
-constexpr auto wp_D50_ISO22028   = std::pair{0.3457, 0.3585};
-constexpr auto wp_6300K          = std::pair{0.3140, 0.3510};
-constexpr auto wp_D50            = std::pair{0.34567, 0.35850};
-constexpr auto wp_E              = std::pair{1.0 / 3.0, 1.0 / 3.0};
+inline constexpr auto wp_D65            = std::pair{0.3127, 0.3290};
+inline constexpr auto wp_C              = std::pair{0.3101, 0.3162};
+inline constexpr auto wp_D50_ISO22028   = std::pair{0.3457, 0.3585};
+inline constexpr auto wp_6300K          = std::pair{0.3140, 0.3510};
+inline constexpr auto wp_D50            = std::pair{0.34567, 0.35850};
+inline constexpr auto wp_E              = std::pair{1.0 / 3.0, 1.0 / 3.0};
 
 struct sRGB
 {

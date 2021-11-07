@@ -24,8 +24,8 @@ class wxListBoxBase;
 // some (ugly...) constants
 // ----------------------------------------------------------------------------
 
-constexpr int wxCHOICE_HEIGHT = 150;
-constexpr int wxCHOICE_WIDTH  = 200;
+inline constexpr int wxCHOICE_HEIGHT = 150;
+inline constexpr int wxCHOICE_WIDTH  = 200;
 
 #define wxCHOICEDLG_STYLE \
     (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)

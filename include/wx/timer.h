@@ -28,10 +28,10 @@
 // more readable flags for Start():
 
 // generate notifications periodically until the timer is stopped (default)
-constexpr bool wxTIMER_CONTINUOUS = false;
+inline constexpr bool wxTIMER_CONTINUOUS = false;
 
 // only send the notification once and then stop the timer
-constexpr bool wxTIMER_ONE_SHOT = true;
+inline constexpr bool wxTIMER_ONE_SHOT = true;
 
 class wxTimerImpl;
 class wxTimerEvent;

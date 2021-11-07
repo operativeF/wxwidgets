@@ -21,27 +21,27 @@
 #include <string>
 #include <vector>
 
-constexpr char wxStatusBarNameStr[] = "statusBar";
+inline constexpr char wxStatusBarNameStr[] = "statusBar";
 
 // ----------------------------------------------------------------------------
 // wxStatusBar constants
 // ----------------------------------------------------------------------------
 
 // wxStatusBar styles
-constexpr unsigned int wxSTB_SIZEGRIP          = 0x0010;
-constexpr unsigned int wxSTB_SHOW_TIPS         = 0x0020;
+inline constexpr unsigned int wxSTB_SIZEGRIP          = 0x0010;
+inline constexpr unsigned int wxSTB_SHOW_TIPS         = 0x0020;
 
-constexpr unsigned int wxSTB_ELLIPSIZE_START   = 0x0040;
-constexpr unsigned int wxSTB_ELLIPSIZE_MIDDLE  = 0x0080;
-constexpr unsigned int wxSTB_ELLIPSIZE_END     = 0x0100;
+inline constexpr unsigned int wxSTB_ELLIPSIZE_START   = 0x0040;
+inline constexpr unsigned int wxSTB_ELLIPSIZE_MIDDLE  = 0x0080;
+inline constexpr unsigned int wxSTB_ELLIPSIZE_END     = 0x0100;
 
-constexpr unsigned int wxSTB_DEFAULT_STYLE     = wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE;
+inline constexpr unsigned int wxSTB_DEFAULT_STYLE     = wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE;
 
 // style flags for wxStatusBar fields
-constexpr unsigned int wxSB_NORMAL    = 0x0000;
-constexpr unsigned int wxSB_FLAT      = 0x0001;
-constexpr unsigned int wxSB_RAISED    = 0x0002;
-constexpr unsigned int wxSB_SUNKEN    = 0x0003;
+inline constexpr unsigned int wxSB_NORMAL    = 0x0000;
+inline constexpr unsigned int wxSB_FLAT      = 0x0001;
+inline constexpr unsigned int wxSB_RAISED    = 0x0002;
+inline constexpr unsigned int wxSB_SUNKEN    = 0x0003;
 
 // ----------------------------------------------------------------------------
 // wxStatusBarPane: an helper for wxStatusBar

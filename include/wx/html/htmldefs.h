@@ -19,14 +19,14 @@
 //                  Describes alignment of text etc. in containers
 //--------------------------------------------------------------------------------
 
-constexpr unsigned int wxHTML_ALIGN_LEFT            = 0x0000;
-constexpr unsigned int wxHTML_ALIGN_RIGHT           = 0x0002;
-constexpr unsigned int wxHTML_ALIGN_JUSTIFY         = 0x0010;
+inline constexpr unsigned int wxHTML_ALIGN_LEFT            = 0x0000;
+inline constexpr unsigned int wxHTML_ALIGN_RIGHT           = 0x0002;
+inline constexpr unsigned int wxHTML_ALIGN_JUSTIFY         = 0x0010;
 
-constexpr unsigned int wxHTML_ALIGN_TOP             = 0x0004;
-constexpr unsigned int wxHTML_ALIGN_BOTTOM          = 0x0008;
+inline constexpr unsigned int wxHTML_ALIGN_TOP             = 0x0004;
+inline constexpr unsigned int wxHTML_ALIGN_BOTTOM          = 0x0008;
 
-constexpr unsigned int wxHTML_ALIGN_CENTER          = 0x0001;
+inline constexpr unsigned int wxHTML_ALIGN_CENTER          = 0x0001;
 
 
 
@@ -35,9 +35,9 @@ constexpr unsigned int wxHTML_ALIGN_CENTER          = 0x0001;
 //                  Used by wxHtmlColourCell to determine clr of what is changing
 //--------------------------------------------------------------------------------
 
-constexpr unsigned int wxHTML_CLR_FOREGROUND                = 0x0001;
-constexpr unsigned int wxHTML_CLR_BACKGROUND                = 0x0002;
-constexpr unsigned int wxHTML_CLR_TRANSPARENT_BACKGROUND    = 0x0004;
+inline constexpr unsigned int wxHTML_CLR_FOREGROUND                = 0x0001;
+inline constexpr unsigned int wxHTML_CLR_BACKGROUND                = 0x0002;
+inline constexpr unsigned int wxHTML_CLR_TRANSPARENT_BACKGROUND    = 0x0004;
 
 
 
@@ -46,8 +46,8 @@ constexpr unsigned int wxHTML_CLR_TRANSPARENT_BACKGROUND    = 0x0004;
 //                  Used to specify units
 //--------------------------------------------------------------------------------
 
-constexpr unsigned int wxHTML_UNITS_PIXELS          = 0x0001;
-constexpr unsigned int wxHTML_UNITS_PERCENT         = 0x0002;
+inline constexpr unsigned int wxHTML_UNITS_PIXELS          = 0x0001;
+inline constexpr unsigned int wxHTML_UNITS_PERCENT         = 0x0002;
 
 
 
@@ -56,14 +56,14 @@ constexpr unsigned int wxHTML_UNITS_PERCENT         = 0x0002;
 //                  Used to specify indetation relatives
 //--------------------------------------------------------------------------------
 
-constexpr unsigned int wxHTML_INDENT_LEFT           = 0x0010;
-constexpr unsigned int wxHTML_INDENT_RIGHT          = 0x0020;
-constexpr unsigned int wxHTML_INDENT_TOP            = 0x0040;
-constexpr unsigned int wxHTML_INDENT_BOTTOM         = 0x0080;
+inline constexpr unsigned int wxHTML_INDENT_LEFT           = 0x0010;
+inline constexpr unsigned int wxHTML_INDENT_RIGHT          = 0x0020;
+inline constexpr unsigned int wxHTML_INDENT_TOP            = 0x0040;
+inline constexpr unsigned int wxHTML_INDENT_BOTTOM         = 0x0080;
 
-constexpr unsigned int wxHTML_INDENT_HORIZONTAL     = wxHTML_INDENT_LEFT | wxHTML_INDENT_RIGHT;
-constexpr unsigned int wxHTML_INDENT_VERTICAL       = wxHTML_INDENT_TOP | wxHTML_INDENT_BOTTOM;
-constexpr unsigned int wxHTML_INDENT_ALL            = wxHTML_INDENT_VERTICAL | wxHTML_INDENT_HORIZONTAL;
+inline constexpr unsigned int wxHTML_INDENT_HORIZONTAL     = wxHTML_INDENT_LEFT | wxHTML_INDENT_RIGHT;
+inline constexpr unsigned int wxHTML_INDENT_VERTICAL       = wxHTML_INDENT_TOP | wxHTML_INDENT_BOTTOM;
+inline constexpr unsigned int wxHTML_INDENT_ALL            = wxHTML_INDENT_VERTICAL | wxHTML_INDENT_HORIZONTAL;
 
 
 
@@ -90,10 +90,10 @@ constexpr unsigned int wxHTML_INDENT_ALL            = wxHTML_INDENT_VERTICAL | w
 //--------------------------------------------------------------------------------
 
     /* size of one scroll step of wxHtmlWindow in pixels */
-constexpr int wxHTML_SCROLL_STEP = 16;
+inline constexpr int wxHTML_SCROLL_STEP = 16;
 
     /* size of temporary buffer used during parsing */
-constexpr unsigned int wxHTML_BUFLEN = 1024;
+inline constexpr unsigned int wxHTML_BUFLEN = 1024;
 
 #endif // wxUSE_HTML
 

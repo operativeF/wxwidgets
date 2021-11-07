@@ -41,12 +41,12 @@ enum
 };
 
 // wxBookCtrl flags (common for wxNotebook, wxListbook, wxChoicebook, wxTreebook)
-constexpr unsigned int wxBK_DEFAULT          = 0x0000;
-constexpr unsigned int wxBK_TOP              = 0x0010;
-constexpr unsigned int wxBK_BOTTOM           = 0x0020;
-constexpr unsigned int wxBK_LEFT             = 0x0040;
-constexpr unsigned int wxBK_RIGHT            = 0x0080;
-constexpr unsigned int wxBK_ALIGN_MASK       = wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT;
+inline constexpr unsigned int wxBK_DEFAULT          = 0x0000;
+inline constexpr unsigned int wxBK_TOP              = 0x0010;
+inline constexpr unsigned int wxBK_BOTTOM           = 0x0020;
+inline constexpr unsigned int wxBK_LEFT             = 0x0040;
+inline constexpr unsigned int wxBK_RIGHT            = 0x0080;
+inline constexpr unsigned int wxBK_ALIGN_MASK       = wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT;
 
 // ----------------------------------------------------------------------------
 // wxBookCtrlBase

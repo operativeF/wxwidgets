@@ -49,7 +49,7 @@ enum
     wxHD_DEFAULT_STYLE = wxHD_ALLOW_REORDER
 };
 
-constexpr char wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
+inline constexpr char wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
 
 // ----------------------------------------------------------------------------
 // wxHeaderCtrlBase defines the interface of a header control
@@ -267,8 +267,8 @@ private:
 // ----------------------------------------------------------------------------
 
 // FIXME: use max?
-constexpr unsigned int wxNO_COLUMN = gsl::narrow_cast<unsigned>(-1);
-constexpr unsigned int wxID_COLUMNS_BASE = 1;
+inline constexpr unsigned int wxNO_COLUMN = gsl::narrow_cast<unsigned>(-1);
+inline constexpr unsigned int wxID_COLUMNS_BASE = 1;
 
 // ----------------------------------------------------------------------------
 // wxHeaderCtrlSimple: concrete header control which can be used standalone

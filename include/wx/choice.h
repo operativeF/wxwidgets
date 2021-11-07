@@ -25,7 +25,7 @@
 // global data
 // ----------------------------------------------------------------------------
 
-constexpr char wxChoiceNameStr[] = "choice";
+inline constexpr char wxChoiceNameStr[] = "choice";
 
 // ----------------------------------------------------------------------------
 // wxChoice allows to select one of a non-modifiable list of strings

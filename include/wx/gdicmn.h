@@ -151,13 +151,13 @@ enum wxStockCursor
 };
 
 #ifndef __WXGTK__
-    constexpr unsigned int wxCURSOR_DEFAULT = wxCURSOR_ARROW;
+    inline constexpr unsigned int wxCURSOR_DEFAULT = wxCURSOR_ARROW;
 #endif
 
 #ifndef __WXMAC__
     // TODO CS supply openhand and closedhand cursors
-    constexpr unsigned int wxCURSOR_OPEN_HAND      = wxCURSOR_HAND;
-    constexpr unsigned int wxCURSOR_CLOSED_HAND    = wxCURSOR_HAND;
+    inline constexpr unsigned int wxCURSOR_OPEN_HAND      = wxCURSOR_HAND;
+    inline constexpr unsigned int wxCURSOR_CLOSED_HAND    = wxCURSOR_HAND;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -445,10 +445,10 @@ extern wxIconBundle wxNullIconBundle;
 
 extern wxColourDatabase*  wxTheColourDatabase;
 
-constexpr char wxPanelNameStr[] = "panel";
+inline constexpr char wxPanelNameStr[] = "panel";
 
-constexpr wxSize wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
-constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
+inline constexpr wxSize wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
+inline constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
 
 // ---------------------------------------------------------------------------
 // global functions

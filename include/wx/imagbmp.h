@@ -17,8 +17,8 @@
 
 // These two options are filled in upon reading CUR file and can (should) be
 // specified when saving a CUR file - they define the hotspot of the cursor:
-constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = "HotSpotX";
-constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = "HotSpotY";
+inline constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = "HotSpotX";
+inline constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = "HotSpotY";
 
 
 enum

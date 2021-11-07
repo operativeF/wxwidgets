@@ -13,7 +13,7 @@
 #include <array>
 
 // this table gives the length of the UTF-8 encoding from its first character:
-constexpr std::array<unsigned char, 256> tableUtf8Lengths = {
+inline constexpr std::array<unsigned char, 256> tableUtf8Lengths = {
     // single-byte sequences (ASCII):
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 00..0F
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  // 10..1F

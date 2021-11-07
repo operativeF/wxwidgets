@@ -48,13 +48,13 @@ public:
 // ----------------------------------------------------------------------------
 
 // names for various persistent options
-constexpr char wxPERSIST_TLW_X[] = "x";
-constexpr char wxPERSIST_TLW_Y[] = "y";
-constexpr char wxPERSIST_TLW_W[] = "w";
-constexpr char wxPERSIST_TLW_H[] = "h";
+inline constexpr char wxPERSIST_TLW_X[] = "x";
+inline constexpr char wxPERSIST_TLW_Y[] = "y";
+inline constexpr char wxPERSIST_TLW_W[] = "w";
+inline constexpr char wxPERSIST_TLW_H[] = "h";
 
-constexpr char wxPERSIST_TLW_MAXIMIZED[] = "Maximized";
-constexpr char wxPERSIST_TLW_ICONIZED[]  = "Iconized";
+inline constexpr char wxPERSIST_TLW_MAXIMIZED[] = "Maximized";
+inline constexpr char wxPERSIST_TLW_ICONIZED[]  = "Iconized";
 
 // MSW has its own native implementation and doesn't use this class.
 #ifndef __WXMSW__

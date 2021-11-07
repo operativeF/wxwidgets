@@ -21,19 +21,19 @@
 
 /* Scaling factors for various unit conversions: 1 inch = 2.54 cm */
 // FIXME: Problematic, as double aren't commutative.
-constexpr double METRIC_CONVERSION_CONSTANT = 1 / 25.4;
+inline constexpr double METRIC_CONVERSION_CONSTANT = 1 / 25.4;
 
-constexpr double mm2inches = METRIC_CONVERSION_CONSTANT;
+inline constexpr double mm2inches = METRIC_CONVERSION_CONSTANT;
 
-constexpr double inches2mm = 1 / mm2inches;
+inline constexpr double inches2mm = 1 / mm2inches;
 
-constexpr double mm2twips = METRIC_CONVERSION_CONSTANT * 1440;
+inline constexpr double mm2twips = METRIC_CONVERSION_CONSTANT * 1440;
 
-constexpr double twips2mm = 1 / mm2twips;
+inline constexpr double twips2mm = 1 / mm2twips;
 
-constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
+inline constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
 
-constexpr double pt2mm = 1 / mm2pt;
+inline constexpr double pt2mm = 1 / mm2pt;
 
 // Convert between degrees and radians.
 static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }

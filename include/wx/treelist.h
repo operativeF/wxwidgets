@@ -30,7 +30,7 @@
 class wxDataViewCtrl;
 class wxDataViewEvent;
 
-constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
+inline constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
 
 class wxTreeListCtrl;
 class wxTreeListModel;

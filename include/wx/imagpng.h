@@ -20,13 +20,13 @@
 #include "wx/image.h"
 #include "wx/versioninfo.h"
 
-constexpr char wxIMAGE_OPTION_PNG_FORMAT[]                   = "PngFormat";
-constexpr char wxIMAGE_OPTION_PNG_BITDEPTH[]                 = "PngBitDepth";
-constexpr char wxIMAGE_OPTION_PNG_FILTER[]                   = "PngF";
-constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL[]        = "PngZL";
-constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL[]    = "PngZM";
-constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY[]     = "PngZS";
-constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE[]  = "PngZB";
+inline constexpr char wxIMAGE_OPTION_PNG_FORMAT[]                   = "PngFormat";
+inline constexpr char wxIMAGE_OPTION_PNG_BITDEPTH[]                 = "PngBitDepth";
+inline constexpr char wxIMAGE_OPTION_PNG_FILTER[]                   = "PngF";
+inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL[]        = "PngZL";
+inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL[]    = "PngZM";
+inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY[]     = "PngZS";
+inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE[]  = "PngZB";
 
 enum
 {

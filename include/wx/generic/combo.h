@@ -29,8 +29,8 @@
 // all actions of single line text controls are supported
 
 // popup/dismiss the choice window
-constexpr wxChar wxACTION_COMBOBOX_POPUP[]     = "popup";
-constexpr wxChar wxACTION_COMBOBOX_DISMISS[]   = "dismiss";
+inline constexpr wxChar wxACTION_COMBOBOX_POPUP[]     = "popup";
+inline constexpr wxChar wxACTION_COMBOBOX_DISMISS[]   = "dismiss";
 
 #endif
 

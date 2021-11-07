@@ -14,7 +14,7 @@
 #include "wx/window.h"
 
 // Styles that can be used with any wxNonOwnedWindow:
-constexpr unsigned int wxFRAME_SHAPED = 0x0010;  // Create a window that is able to be shaped
+inline constexpr unsigned int wxFRAME_SHAPED = 0x0010;  // Create a window that is able to be shaped
 
 class wxGraphicsPath;
 

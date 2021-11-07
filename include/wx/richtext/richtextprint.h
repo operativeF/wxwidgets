@@ -19,7 +19,7 @@
 #include "wx/print.h"
 #include "wx/printdlg.h"
 
-constexpr auto wxRICHTEXT_PRINT_MAX_PAGES = 99999;
+inline constexpr auto wxRICHTEXT_PRINT_MAX_PAGES = 99999;
 
 // Header/footer page identifiers
 enum class wxRichTextOddEvenPage

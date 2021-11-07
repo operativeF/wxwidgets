@@ -541,7 +541,7 @@ private:
  * style types.
  */
 
-constexpr unsigned int wxRICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR     = 0x1000;
+inline constexpr unsigned int wxRICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR     = 0x1000;
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListCtrl: public wxControl
 {

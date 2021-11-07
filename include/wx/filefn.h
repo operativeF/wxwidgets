@@ -345,7 +345,7 @@ enum wxPosixPermissions
             #define wxFtell ftello
         #endif
     #else
-        constexpr wxChar wxFileOffsetFmtSpec[] = wxT("");
+        inline constexpr wxChar wxFileOffsetFmtSpec[] = wxT("");
     #endif
     // functions
     #define   wxClose      close
@@ -421,7 +421,7 @@ inline int wxMkDir(const wxString& path, mode_t mode)
     #define wxO_BINARY 0
 #endif
 
-constexpr auto wxInvalidOffset = gsl::narrow_cast<unsigned int>(-1);
+inline constexpr auto wxInvalidOffset = gsl::narrow_cast<unsigned int>(-1);
 
 // ----------------------------------------------------------------------------
 // functions
@@ -494,24 +494,24 @@ bool wxIsExecutable(const wxString &path);
 // ----------------------------------------------------------------------------
 
 // between file name and extension
-constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
+inline constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
 
 // between drive/volume name and the path
-constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
+inline constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
 
 // between the path components
-constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
-constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
-constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
-constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
+inline constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
+inline constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
+inline constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
+inline constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
 
 // separator in the path list (as in PATH environment variable)
 // there is no PATH variable in Classic Mac OS so just use the
 // semicolon (it must be different from the file name separator)
 // NB: these are strings and not characters on purpose!
-constexpr char wxPATH_SEP_DOS[]        = ";";
-constexpr char wxPATH_SEP_UNIX[]       = ":";
-constexpr char wxPATH_SEP_MAC[]        = ";";
+inline constexpr char wxPATH_SEP_DOS[]        = ";";
+inline constexpr char wxPATH_SEP_UNIX[]       = ":";
+inline constexpr char wxPATH_SEP_MAC[]        = ";";
 
 // platform independent versions
 #if defined(__UNIX__)

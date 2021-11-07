@@ -24,14 +24,14 @@
 
 class wxColourPickerEvent;
 
-constexpr char wxColourPickerCtrlNameStr[] = "colourpicker";
-constexpr char wxColourPickerWidgetNameStr[] = "colourpickerwidget";
+inline constexpr char wxColourPickerCtrlNameStr[] = "colourpicker";
+inline constexpr char wxColourPickerWidgetNameStr[] = "colourpickerwidget";
 
 // show the colour in HTML form (#AABBCC) as colour button label
-constexpr unsigned int wxCLRBTN_SHOW_LABEL = 100;
+inline constexpr unsigned int wxCLRBTN_SHOW_LABEL = 100;
 
 // the default style
-constexpr unsigned int wxCLRBTN_DEFAULT_STYLE = wxCLRBTN_SHOW_LABEL;
+inline constexpr unsigned int wxCLRBTN_DEFAULT_STYLE = wxCLRBTN_SHOW_LABEL;
 
 
 
@@ -69,8 +69,8 @@ protected:
 // (instead of no label at all)
 // NOTE: this style is supported just by wxColourButtonGeneric and
 //       thus is not exposed in wxColourPickerCtrl
-constexpr unsigned int wxCLRP_SHOW_LABEL             = 0x0008;
-constexpr unsigned int wxCLRP_SHOW_ALPHA             = 0x0010;
+inline constexpr unsigned int wxCLRP_SHOW_LABEL             = 0x0008;
+inline constexpr unsigned int wxCLRP_SHOW_ALPHA             = 0x0010;
 
 // map platform-dependent controls which implement the wxColourPickerWidgetBase
 // under the name "wxColourPickerWidget".

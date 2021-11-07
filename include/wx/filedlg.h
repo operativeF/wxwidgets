@@ -53,12 +53,12 @@ enum
     wxFD_SHOW_HIDDEN       = 0x0400
 };
 
-constexpr unsigned int wxFD_DEFAULT_STYLE = wxFD_OPEN;
+inline constexpr unsigned int wxFD_DEFAULT_STYLE = wxFD_OPEN;
 
-constexpr char wxFileDialogNameStr[] = "filedlg";
-constexpr char wxFileSelectorPromptStr[] = "Select a file";
+inline constexpr char wxFileDialogNameStr[] = "filedlg";
+inline constexpr char wxFileSelectorPromptStr[] = "Select a file";
 
-constexpr char wxFileSelectorDefaultWildcardStr[] =
+inline constexpr char wxFileSelectorDefaultWildcardStr[] =
 #if defined(__WXMSW__)
     "*.*"
 #else // Unix/Mac

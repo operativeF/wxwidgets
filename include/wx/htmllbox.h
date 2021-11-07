@@ -34,8 +34,8 @@ class wxHtmlListBoxCache;
 class wxHtmlListBoxStyle;
 
 
-constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";
-constexpr char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";
+inline constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";
+inline constexpr char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";
 
 // ----------------------------------------------------------------------------
 // wxHtmlListBox
@@ -198,8 +198,8 @@ private:
 // wxSimpleHtmlListBox
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBORDER_SUNKEN;
-constexpr unsigned int wxHLB_MULTIPLE          = wxLB_MULTIPLE;
+inline constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBORDER_SUNKEN;
+inline constexpr unsigned int wxHLB_MULTIPLE          = wxLB_MULTIPLE;
 
 class WXDLLIMPEXP_HTML wxSimpleHtmlListBox :
     public wxWindowWithItems<wxHtmlListBox, wxItemContainer>

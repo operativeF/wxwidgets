@@ -60,7 +60,7 @@ enum wxAuiNotebookOption
 
 wxALLOW_COMBINING_ENUMS(wxAuiNotebookOption, wxBorder)
 
-constexpr int wxAuiBaseTabCtrlId = 5380;
+inline constexpr int wxAuiBaseTabCtrlId = 5380;
 
 // aui notebook event class
 

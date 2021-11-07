@@ -112,15 +112,15 @@ private:
     wxString m_securityURL;
 };
 
-constexpr char wxWebViewNameStr[] = "wxWebView";
-constexpr char wxWebViewDefaultURLStr[] = "about:blank";
-constexpr char wxWebViewBackendEdge[] = "wxWebViewEdge";
-constexpr char wxWebViewBackendWebKit[] = "wxWebViewWebKit";
+inline constexpr char wxWebViewNameStr[] = "wxWebView";
+inline constexpr char wxWebViewDefaultURLStr[] = "about:blank";
+inline constexpr char wxWebViewBackendEdge[] = "wxWebViewEdge";
+inline constexpr char wxWebViewBackendWebKit[] = "wxWebViewWebKit";
 
 #ifdef WX_WINDOWS
-constexpr char wxWebViewBackendDefault[] = "wxWebViewEdge";
+inline constexpr char wxWebViewBackendDefault[] = "wxWebViewEdge";
 #else
-constexpr char wxWebViewBackendDefault[] = "wxWebViewWebKit";
+inline constexpr char wxWebViewBackendDefault[] = "wxWebViewWebKit";
 #endif
 
 class wxWebViewFactory

@@ -19,7 +19,7 @@
 #include <string>
 
 // class name
-constexpr char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
+inline constexpr char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
 
 //
 // wxGenericCollapsibleHeaderCtrl

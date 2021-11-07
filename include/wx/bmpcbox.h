@@ -34,7 +34,7 @@ class wxItemContainer;
     class wxDC;
 #endif
 
-constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
+inline constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 
 
 class wxBitmapComboBoxBase

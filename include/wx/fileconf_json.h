@@ -16,7 +16,7 @@ namespace wx::cfg
 namespace json = boost::json;
 namespace fs = std::filesystem;
 
-constexpr std::size_t DynamicExtentT = std::numeric_limits<std::size_t>::max();
+inline constexpr std::size_t DynamicExtentT = std::numeric_limits<std::size_t>::max();
 
 template<typename Key, typename Value>
 struct JsonEntry

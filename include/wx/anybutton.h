@@ -21,26 +21,26 @@
 // ----------------------------------------------------------------------------
 
 // These flags affect label alignment
-constexpr unsigned int wxBU_LEFT            = 0x0040;
-constexpr unsigned int wxBU_TOP             = 0x0080;
-constexpr unsigned int wxBU_RIGHT           = 0x0100;
-constexpr unsigned int wxBU_BOTTOM          = 0x0200;
-constexpr unsigned int wxBU_ALIGN_MASK      = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
+inline constexpr unsigned int wxBU_LEFT            = 0x0040;
+inline constexpr unsigned int wxBU_TOP             = 0x0080;
+inline constexpr unsigned int wxBU_RIGHT           = 0x0100;
+inline constexpr unsigned int wxBU_BOTTOM          = 0x0200;
+inline constexpr unsigned int wxBU_ALIGN_MASK      = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
 
 // These two flags are obsolete and have no effect any longer.
-constexpr unsigned int wxBU_NOAUTODRAW      = 0x0000;
-constexpr unsigned int wxBU_AUTODRAW        = 0x0004;
+inline constexpr unsigned int wxBU_NOAUTODRAW      = 0x0000;
+inline constexpr unsigned int wxBU_AUTODRAW        = 0x0004;
 
 // by default, the buttons will be created with some (system dependent)
 // minimal size to make them look nicer, giving this style will make them as
 // small as possible
-constexpr unsigned int wxBU_EXACTFIT        = 0x0001;
+inline constexpr unsigned int wxBU_EXACTFIT        = 0x0001;
 
 // this flag can be used to disable using the text label in the button: it is
 // mostly useful when creating buttons showing bitmap and having stock id as
 // without it both the standard label corresponding to the stock id and the
 // bitmap would be shown
-constexpr unsigned int wxBU_NOTEXT          = 0x0002;
+inline constexpr unsigned int wxBU_NOTEXT          = 0x0002;
 
 // ----------------------------------------------------------------------------
 // wxAnyButton: common button functionality

@@ -18,14 +18,14 @@
 /*
  * wxProgressDialog flags
  */
-constexpr unsigned int wxPD_CAN_ABORT          = 0x0001;
-constexpr unsigned int wxPD_APP_MODAL          = 0x0002;
-constexpr unsigned int wxPD_AUTO_HIDE          = 0x0004;
-constexpr unsigned int wxPD_ELAPSED_TIME       = 0x0008;
-constexpr unsigned int wxPD_ESTIMATED_TIME     = 0x0010;
-constexpr unsigned int wxPD_SMOOTH             = 0x0020;
-constexpr unsigned int wxPD_REMAINING_TIME     = 0x0040;
-constexpr unsigned int wxPD_CAN_SKIP           = 0x0080;
+inline constexpr unsigned int wxPD_CAN_ABORT          = 0x0001;
+inline constexpr unsigned int wxPD_APP_MODAL          = 0x0002;
+inline constexpr unsigned int wxPD_AUTO_HIDE          = 0x0004;
+inline constexpr unsigned int wxPD_ELAPSED_TIME       = 0x0008;
+inline constexpr unsigned int wxPD_ESTIMATED_TIME     = 0x0010;
+inline constexpr unsigned int wxPD_SMOOTH             = 0x0020;
+inline constexpr unsigned int wxPD_REMAINING_TIME     = 0x0040;
+inline constexpr unsigned int wxPD_CAN_SKIP           = 0x0080;
 
 
 #include "wx/generic/progdlgg.h"

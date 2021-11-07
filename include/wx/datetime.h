@@ -104,8 +104,8 @@ struct _SYSTEMTIME;
 // wxInvalidDateTime)
 class wxDateTime;
 
-constexpr char wxDefaultDateTimeFormat[] = "%c";
-constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
+inline constexpr char wxDefaultDateTimeFormat[] = "%c";
+inline constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
 
 extern WXDLLIMPEXP_DATA_BASE(const wxDateTime) wxDefaultDateTime;
 

@@ -22,7 +22,7 @@
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOGGLEBUTTON, wxCommandEvent );
 
-constexpr char wxToggleButtonNameStr[] = "toggle";
+inline constexpr char wxToggleButtonNameStr[] = "toggle";
 
 
 // ----------------------------------------------------------------------------

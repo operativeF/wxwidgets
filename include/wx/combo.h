@@ -151,7 +151,7 @@ struct wxComboCtrlFeatures
     };
 };
 
-constexpr char wxComboCtrlNameStr[] = "comboCtrl";
+inline constexpr char wxComboCtrlNameStr[] = "comboCtrl";
 
 class wxComboCtrlBase : public wxControl, public wxTextEntry
 {

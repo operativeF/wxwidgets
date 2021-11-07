@@ -398,7 +398,7 @@ extern void wxAbort();
 
 // Use of wxFalse instead of false suppresses compiler warnings about testing
 // constant expression
-constexpr bool wxFalse = false;
+inline constexpr bool wxFalse = false;
 
 #define wxAssertFailure wxFalse
 
