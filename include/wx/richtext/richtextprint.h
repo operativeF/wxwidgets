@@ -226,8 +226,8 @@ public:
     const wxRect& GetPreviewRect() const { return m_previewRect; }
 
 protected:
-    virtual wxRichTextPrintout *CreatePrintout();
-    virtual bool DoPreview(wxRichTextPrintout *printout1, wxRichTextPrintout *printout2);
+    virtual std::unique_ptr<wxRichTextPrintout> CreatePrintout();
+    virtual bool DoPreview(std::unique_ptr<wxRichTextPrintout> printout1, std::unique_ptr<wxRichTextPrintout> printout2);
     virtual bool DoPrint(wxRichTextPrintout *printout, bool showPrintDialog);
 
 private:

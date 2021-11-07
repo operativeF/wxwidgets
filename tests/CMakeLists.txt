@@ -40,7 +40,7 @@ set(TEST_GUI_SRC
     graphics/boundingbox.cpp
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
     graphics/coords.cpp
-    graphics/graphbitmap.cpp # FIXME: Works but doesn't test with matchers yet.
+    #graphics/graphbitmap.cpp # FIXME: Works but doesn't test with matchers yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
     graphics/graphpath.cpp
     graphics/imagelist.cpp

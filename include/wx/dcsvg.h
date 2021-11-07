@@ -153,7 +153,7 @@ public:
 
     void* GetHandle() const override { return nullptr; }
 
-    void SetBitmapHandler(wxSVGBitmapHandler* handler);
+    void SetBitmapHandler(std::unique_ptr<wxSVGBitmapHandler> handler);
 
     void SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode);
 
@@ -317,7 +317,7 @@ public:
     // wxSVGFileDC-specific methods:
 
     // Use a custom bitmap handler: takes ownership of the handler.
-    void SetBitmapHandler(wxSVGBitmapHandler* handler);
+    void SetBitmapHandler(std::unique_ptr<wxSVGBitmapHandler> handler);
 
     void SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode);
 

@@ -248,18 +248,18 @@ bool wxWindowsPrinter::Setup(wxWindow *WXUNUSED(parent))
 * Print preview
 */
 
-wxWindowsPrintPreview::wxWindowsPrintPreview(wxPrintout *printout,
-                                             wxPrintout *printoutForPrinting,
+wxWindowsPrintPreview::wxWindowsPrintPreview(std::unique_ptr<wxPrintout> printout,
+                                             std::unique_ptr<wxPrintout> printoutForPrinting,
                                              wxPrintDialogData *data)
-                     : wxPrintPreviewBase(printout, printoutForPrinting, data)
+                     : wxPrintPreviewBase(std::move(printout), std::move(printoutForPrinting), data)
 {
     DetermineScaling();
 }
 
-wxWindowsPrintPreview::wxWindowsPrintPreview(wxPrintout *printout,
-                                             wxPrintout *printoutForPrinting,
+wxWindowsPrintPreview::wxWindowsPrintPreview(std::unique_ptr<wxPrintout> printout,
+                                             std::unique_ptr<wxPrintout> printoutForPrinting,
                                              wxPrintData *data)
-                     : wxPrintPreviewBase(printout, printoutForPrinting, data)
+                     : wxPrintPreviewBase(std::move(printout), std::move(printoutForPrinting), data)
 {
     DetermineScaling();
 }
@@ -269,7 +269,7 @@ bool wxWindowsPrintPreview::Print(bool interactive)
     if (!m_printPrintout)
         return false;
     wxWindowsPrinter printer(&m_printDialogData);
-    return printer.Print(m_previewFrame, m_printPrintout, interactive);
+    return printer.Print(m_previewFrame, m_printPrintout.get(), interactive);
 }
 
 void wxWindowsPrintPreview::DetermineScaling()

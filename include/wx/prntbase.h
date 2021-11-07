@@ -23,7 +23,7 @@
 #include "wx/frame.h"
 #include "wx/dc.h"
 #include "wx/geometry/rect.h"
-
+#include "wx/sizer.h"
 
 #include <string>
 
@@ -83,11 +83,11 @@ public:
 
     virtual wxPrinterBase *CreatePrinter( wxPrintDialogData* data ) = 0;
 
-    virtual wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
-                                                    wxPrintout *printout = nullptr,
+    virtual std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+                                                    std::unique_ptr<wxPrintout> printout = nullptr,
                                                     wxPrintDialogData *data = nullptr ) = 0;
-    virtual wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
-                                                    wxPrintout *printout,
+    virtual std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+                                                    std::unique_ptr<wxPrintout> printout,
                                                     wxPrintData *data ) = 0;
 
     virtual wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
@@ -127,11 +127,11 @@ class wxNativePrintFactory: public wxPrintFactory
 public:
     wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
 
-    wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
-                                                    wxPrintout *printout = nullptr,
+    std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+                                                    std::unique_ptr<wxPrintout> printout = {},
                                                     wxPrintDialogData *data = nullptr ) override;
-    wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
-                                                    wxPrintout *printout,
+    std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+                                                    std::unique_ptr<wxPrintout> printout,
                                                     wxPrintData *data ) override;
 
     wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
@@ -574,20 +574,19 @@ private:
 class wxPrintPreviewBase
 {
 public:
-    wxPrintPreviewBase(wxPrintout *printout,
-                       wxPrintout *printoutForPrinting = nullptr,
+    wxPrintPreviewBase(std::unique_ptr<wxPrintout> printout,
+                       std::unique_ptr<wxPrintout> printoutForPrinting = {},
                        wxPrintDialogData *data = nullptr);
-    wxPrintPreviewBase(wxPrintout *printout,
-                       wxPrintout *printoutForPrinting,
+    wxPrintPreviewBase(std::unique_ptr<wxPrintout> printout,
+                       std::unique_ptr<wxPrintout> printoutForPrinting,
                        wxPrintData *data);
-    virtual ~wxPrintPreviewBase();
-
-    wxPrintPreviewBase& operator=(wxPrintPreviewBase&&) = delete;
+    
+    virtual ~wxPrintPreviewBase() = default;
 
     virtual bool SetCurrentPage(int pageNum);
     virtual int GetCurrentPage() const;
 
-    virtual void SetPrintout(wxPrintout *printout);
+    virtual void SetPrintout(std::unique_ptr<wxPrintout> printout);
     virtual wxPrintout *GetPrintout() const;
     virtual wxPrintout *GetPrintoutForPrinting() const;
 
@@ -653,27 +652,27 @@ protected:
 protected:
     wxPrintDialogData m_printDialogData;
     
-    wxPreviewCanvas*  m_previewCanvas;
-    wxFrame*          m_previewFrame;
-    wxBitmap*         m_previewBitmap;
-    wxPrintout*       m_previewPrintout;
-    wxPrintout*       m_printPrintout;
+    wxPreviewCanvas*  m_previewCanvas{nullptr};
+    wxFrame*          m_previewFrame{nullptr};
+    std::unique_ptr<wxBitmap>         m_previewBitmap;
+    std::unique_ptr<wxPrintout>       m_previewPrintout;
+    std::unique_ptr<wxPrintout> m_printPrintout;
     
-    int               m_currentPage;
-    int               m_currentZoom;
-    int               m_topMargin;
-    int               m_leftMargin;
-    int               m_pageWidth;
-    int               m_pageHeight;
-    int               m_minPage;
-    int               m_maxPage;
+    int               m_currentPage{1};
+    int               m_currentZoom{70};
+    int               m_topMargin{2 * wxSizerFlags::GetDefaultBorder()};
+    int               m_leftMargin{2 * wxSizerFlags::GetDefaultBorder()};
+    int               m_pageWidth{0};
+    int               m_pageHeight{0};
+    int               m_minPage{1};
+    int               m_maxPage{1};
 
     float             m_previewScaleX;
     float             m_previewScaleY;
     
-    bool              m_previewFailed;
-    bool              m_isOk;
-    bool              m_printingPrepared; // Called OnPreparePrinting?
+    bool              m_previewFailed{false};
+    bool              m_isOk{true};
+    bool              m_printingPrepared{false}; // Called OnPreparePrinting?
 
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
@@ -686,19 +685,16 @@ private:
 class wxPrintPreview: public wxPrintPreviewBase
 {
 public:
-    wxPrintPreview(wxPrintout *printout,
-                   wxPrintout *printoutForPrinting = nullptr,
+    wxPrintPreview(std::unique_ptr<wxPrintout> printout,
+                   std::unique_ptr<wxPrintout> printoutForPrinting = {},
                    wxPrintDialogData *data = nullptr);
-    wxPrintPreview(wxPrintout *printout,
-                   wxPrintout *printoutForPrinting,
+    wxPrintPreview(std::unique_ptr<wxPrintout> printout,
+                   std::unique_ptr<wxPrintout> printoutForPrinting,
                    wxPrintData *data);
-    ~wxPrintPreview();
-
-    wxPrintPreview& operator=(wxPrintPreview&&) = delete;
 
     bool SetCurrentPage(int pageNum) override;
     int GetCurrentPage() const override;
-    void SetPrintout(wxPrintout *printout) override;
+    void SetPrintout(std::unique_ptr<wxPrintout> printout) override;
     wxPrintout *GetPrintout() const override;
     wxPrintout *GetPrintoutForPrinting() const override;
     void SetFrame(wxFrame *frame) override;
@@ -726,7 +722,7 @@ public:
     void SetOk(bool ok) override;
 
 private:
-    wxPrintPreviewBase *m_pimpl;
+    std::unique_ptr<wxPrintPreviewBase> m_pimpl;
 
 private:
     wxDECLARE_CLASS(wxPrintPreview);

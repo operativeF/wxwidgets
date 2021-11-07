@@ -477,9 +477,9 @@ wxSVGBitmapFileHandler::ProcessBitmap(const wxBitmap& bmp,
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxSVGFileDC, wxDC);
 
-void wxSVGFileDC::SetBitmapHandler(wxSVGBitmapHandler* handler)
+void wxSVGFileDC::SetBitmapHandler(std::unique_ptr<wxSVGBitmapHandler> handler)
 {
-    ((wxSVGFileDCImpl*)GetImpl())->SetBitmapHandler(handler);
+    ((wxSVGFileDCImpl*)GetImpl())->SetBitmapHandler(std::move(handler));
 }
 
 void wxSVGFileDC::SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode)
@@ -515,13 +515,8 @@ wxSVGFileDCImpl::wxSVGFileDCImpl(wxSVGFileDC* owner,
     m_brush = *wxWHITE_BRUSH;
 
     m_filename = filename;
-
-        m_bmp_handler.reset();
-
-    if ( m_filename.empty() )
-        m_outfile.reset();
-    else
-        m_outfile.reset(new wxFileOutputStream(m_filename));
+    // FIXME: Empty filename?
+    m_outfile = std::make_unique<wxFileOutputStream>(m_filename);
 
     wxString s;
     s += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
@@ -1194,9 +1189,9 @@ void wxSVGFileDCImpl::SetBackgroundMode(wxBrushStyle mode)
     m_backgroundMode = mode;
 }
 
-void wxSVGFileDCImpl::SetBitmapHandler(wxSVGBitmapHandler* handler)
+void wxSVGFileDCImpl::SetBitmapHandler(std::unique_ptr<wxSVGBitmapHandler> handler)
 {
-    m_bmp_handler.reset(handler);
+    m_bmp_handler = std::move(handler);
 }
 
 void wxSVGFileDCImpl::SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode)
@@ -1301,7 +1296,7 @@ void wxSVGFileDCImpl::DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
 
     // If we don't have any bitmap handler yet, use the default one.
     if ( !m_bmp_handler )
-        m_bmp_handler.reset(new wxSVGBitmapFileHandler(wxFileName(m_filename)));
+        m_bmp_handler = std::make_unique<wxSVGBitmapFileHandler>(wxFileName{m_filename});
 
     m_OK = m_outfile && m_outfile->IsOk();
     if (!m_OK)

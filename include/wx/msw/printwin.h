@@ -42,11 +42,11 @@ public:
 class wxWindowsPrintPreview : public wxPrintPreviewBase
 {
 public:
-    wxWindowsPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting = nullptr,
+    wxWindowsPrintPreview(std::unique_ptr<wxPrintout> printout,
+                          std::unique_ptr<wxPrintout> printoutForPrinting = {},
                           wxPrintDialogData *data = nullptr);
-    wxWindowsPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting,
+    wxWindowsPrintPreview(std::unique_ptr<wxPrintout> printout,
+                          std::unique_ptr<wxPrintout> printoutForPrinting,
                           wxPrintData *data);
 
     wxWindowsPrintPreview& operator=(wxWindowsPrintPreview&&) = delete;

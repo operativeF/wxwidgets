@@ -107,25 +107,25 @@ wxPrinterBase *wxNativePrintFactory::CreatePrinter( wxPrintDialogData *data )
 #endif
 }
 
-wxPrintPreviewBase *wxNativePrintFactory::CreatePrintPreview( wxPrintout *preview,
-    wxPrintout *printout, wxPrintDialogData *data )
+std::unique_ptr<wxPrintPreviewBase> wxNativePrintFactory::CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+    std::unique_ptr<wxPrintout> printout, wxPrintDialogData *data )
 {
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    return new wxWindowsPrintPreview( preview, printout, data );
+    return std::make_unique<wxWindowsPrintPreview>( std::move(preview), std::move(printout), data );
 #elif defined(__WXMAC__)
-    return new wxMacPrintPreview( preview, printout, data );
+    return new wxMacPrintPreview( std::move(preview), std::move(printout), data );
 #elif defined(__WXQT__)
-    return new wxQtPrintPreview( preview, printout, data );
+    return new wxQtPrintPreview( std::move(preview), std::move(printout), data );
 #else
-    return new wxPostScriptPrintPreview( preview, printout, data );
+    return new wxPostScriptPrintPreview( std::move(preview), std::move(printout), data );
 #endif
 }
 
-wxPrintPreviewBase *wxNativePrintFactory::CreatePrintPreview( wxPrintout *preview,
-    wxPrintout *printout, wxPrintData *data )
+std::unique_ptr<wxPrintPreviewBase> wxNativePrintFactory::CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
+    std::unique_ptr<wxPrintout> printout, wxPrintData *data )
 {
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    return new wxWindowsPrintPreview( preview, printout, data );
+    return std::make_unique<wxWindowsPrintPreview>( std::move(preview), std::move(printout), data );
 #elif defined(__WXMAC__)
     return new wxMacPrintPreview( preview, printout, data );
 #elif defined(__WXQT__)
@@ -1767,56 +1767,30 @@ void wxPreviewFrame::CreateControlBar()
 * Print preview
 */
 
-wxPrintPreviewBase::wxPrintPreviewBase(wxPrintout *printout,
-                                       wxPrintout *printoutForPrinting,
+wxPrintPreviewBase::wxPrintPreviewBase(std::unique_ptr<wxPrintout> printout,
+                                       std::unique_ptr<wxPrintout> printoutForPrinting,
                                        wxPrintData *data)
+    : m_printPrintout{std::move(printoutForPrinting)},
+      m_previewPrintout{std::move(printout)}
 {
     if (data)
         m_printDialogData = (*data);
 
-    Init(printout, printoutForPrinting);
-}
-
-wxPrintPreviewBase::wxPrintPreviewBase(wxPrintout *printout,
-                                       wxPrintout *printoutForPrinting,
-                                       wxPrintDialogData *data)
-{
-    if (data)
-        m_printDialogData = (*data);
-
-    Init(printout, printoutForPrinting);
-}
-
-void wxPrintPreviewBase::Init(wxPrintout *printout,
-                              wxPrintout *printoutForPrinting)
-{
-    m_isOk = true;
-    m_previewPrintout = printout;
     if (m_previewPrintout)
         m_previewPrintout->SetPreview(dynamic_cast<wxPrintPreview *>(this));
-
-    m_printPrintout = printoutForPrinting;
-
-    m_previewCanvas = nullptr;
-    m_previewFrame = nullptr;
-    m_previewBitmap = nullptr;
-    m_previewFailed = false;
-    m_currentPage = 1;
-    m_currentZoom = 70;
-    m_topMargin =
-    m_leftMargin = 2*wxSizerFlags::GetDefaultBorder();
-    m_pageWidth = 0;
-    m_pageHeight = 0;
-    m_printingPrepared = false;
-    m_minPage = 1;
-    m_maxPage = 1;
 }
 
-wxPrintPreviewBase::~wxPrintPreviewBase()
+wxPrintPreviewBase::wxPrintPreviewBase(std::unique_ptr<wxPrintout> printout,
+                                       std::unique_ptr<wxPrintout> printoutForPrinting,
+                                       wxPrintDialogData *data)
+    : m_printPrintout{std::move(printoutForPrinting)},
+      m_previewPrintout{std::move(printout)}
 {
-    delete m_previewPrintout;
-    delete m_previewBitmap;
-    delete m_printPrintout;
+    if (data)
+        m_printDialogData = (*data);
+
+    if (m_previewPrintout)
+        m_previewPrintout->SetPreview(dynamic_cast<wxPrintPreview *>(this));
 }
 
 bool wxPrintPreviewBase::SetCurrentPage(int pageNum)
@@ -1840,12 +1814,12 @@ bool wxPrintPreviewBase::SetCurrentPage(int pageNum)
 
 int wxPrintPreviewBase::GetCurrentPage() const
     { return m_currentPage; }
-void wxPrintPreviewBase::SetPrintout(wxPrintout *printout)
-    { m_previewPrintout = printout; }
+void wxPrintPreviewBase::SetPrintout(std::unique_ptr<wxPrintout> printout)
+    { m_previewPrintout = std::move(printout); }
 wxPrintout *wxPrintPreviewBase::GetPrintout() const
-    { return m_previewPrintout; }
+    { return m_previewPrintout.get(); }
 wxPrintout *wxPrintPreviewBase::GetPrintoutForPrinting() const
-    { return m_printPrintout; }
+    { return m_printPrintout.get(); }
 void wxPrintPreviewBase::SetFrame(wxFrame *frame)
     { m_previewFrame = frame; }
 void wxPrintPreviewBase::SetCanvas(wxPreviewCanvas *canvas)
@@ -1889,7 +1863,7 @@ void wxPrintPreviewBase::CalcRects(wxPreviewCanvas *canvas, wxRect& pageRect, wx
 
 void wxPrintPreviewBase::InvalidatePreviewBitmap()
 {
-    wxDELETE(m_previewBitmap);
+    m_previewBitmap.reset();
     // if there was a problem with rendering the preview, try again now
     // that it changed in some way (less memory may be needed, for example):
     m_previewFailed = false;
@@ -2016,7 +1990,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
 
     if (!m_previewBitmap)
     {
-        m_previewBitmap = new wxBitmap(pageRect.GetSize());
+        m_previewBitmap = std::make_unique<wxBitmap>(pageRect.GetSize());
 
         if (!m_previewBitmap || !m_previewBitmap->IsOk())
         {
@@ -2112,32 +2086,22 @@ void wxPrintPreviewBase::SetOk(bool ok)
 // wxPrintPreview
 //----------------------------------------------------------------------------
 
-wxPrintPreview::wxPrintPreview(wxPrintout *printout,
-                   wxPrintout *printoutForPrinting,
+wxPrintPreview::wxPrintPreview(std::unique_ptr<wxPrintout> printout,
+                   std::unique_ptr<wxPrintout> printoutForPrinting,
                    wxPrintDialogData *data) :
-    wxPrintPreviewBase( printout, printoutForPrinting, data )
+    wxPrintPreviewBase( std::move(printout), std::move(printoutForPrinting), data )
 {
     m_pimpl = wxPrintFactory::GetFactory()->
-        CreatePrintPreview( printout, printoutForPrinting, data );
+        CreatePrintPreview( std::move(m_previewPrintout), std::move(m_printPrintout), data );
 }
 
-wxPrintPreview::wxPrintPreview(wxPrintout *printout,
-                   wxPrintout *printoutForPrinting,
+wxPrintPreview::wxPrintPreview(std::unique_ptr<wxPrintout> printout,
+                   std::unique_ptr<wxPrintout> printoutForPrinting,
                    wxPrintData *data )
-    : wxPrintPreviewBase( printout, printoutForPrinting, data ),
-      m_pimpl(wxPrintFactory::GetFactory()->
-        CreatePrintPreview( printout, printoutForPrinting, data ))
+    : wxPrintPreviewBase( std::move(printout), std::move(printoutForPrinting), data )
 {
-}
-
-wxPrintPreview::~wxPrintPreview()
-{
-    delete m_pimpl;
-
-    // don't delete twice
-    m_printPrintout = nullptr;
-    m_previewPrintout = nullptr;
-    m_previewBitmap = nullptr;
+    m_pimpl = wxPrintFactory::GetFactory()->
+        CreatePrintPreview( std::move(m_previewPrintout), std::move(m_printPrintout), data );
 }
 
 bool wxPrintPreview::SetCurrentPage(int pageNum)
@@ -2150,9 +2114,9 @@ int wxPrintPreview::GetCurrentPage() const
     return m_pimpl->GetCurrentPage();
 }
 
-void wxPrintPreview::SetPrintout(wxPrintout *printout)
+void wxPrintPreview::SetPrintout(std::unique_ptr<wxPrintout> printout)
 {
-    m_pimpl->SetPrintout( printout );
+    m_pimpl->SetPrintout( std::move(printout) );
 }
 
 wxPrintout *wxPrintPreview::GetPrintout() const

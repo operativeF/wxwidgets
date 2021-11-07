@@ -719,9 +719,9 @@ bool wxView::OnClose(bool WXUNUSED(deleteWindow))
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-wxPrintout *wxView::OnCreatePrintout()
+std::unique_ptr<wxPrintout> wxView::OnCreatePrintout()
 {
-    return new wxDocPrintout(this);
+    return std::make_unique<wxDocPrintout>(this);
 }
 #endif // wxUSE_PRINTING_ARCHITECTURE
 
@@ -1123,14 +1123,14 @@ void wxDocManager::OnPrint(wxCommandEvent& WXUNUSED(event))
     if (!view)
         return;
 
-    wxPrintout *printout = view->OnCreatePrintout();
+    auto printout = view->OnCreatePrintout();
+
+    // FIXME: Printout can be moved into Print?
     if (printout)
     {
         wxPrintDialogData printDialogData(m_pageSetupDialogData.GetPrintData());
         wxPrinter printer(&printDialogData);
-        printer.Print(view->GetFrame(), printout, true);
-
-        delete printout;
+        printer.Print(view->GetFrame(), printout.get(), true);
     }
 }
 
@@ -1157,14 +1157,15 @@ void wxDocManager::OnPreview(wxCommandEvent& WXUNUSED(event))
     if (!view)
         return;
 
-    wxPrintout *printout = view->OnCreatePrintout();
+    auto printout = view->OnCreatePrintout();
+
     if (printout)
     {
         wxPrintDialogData printDialogData(m_pageSetupDialogData.GetPrintData());
 
         // Pass two printout objects: for preview, and possible printing.
         wxPrintPreviewBase *
-            preview = new wxPrintPreview(printout,
+            preview = new wxPrintPreview(std::move(printout),
                                          view->OnCreatePrintout(),
                                          &printDialogData);
         if ( !preview->IsOk() )

@@ -498,12 +498,12 @@ bool wxRichTextPrinting::PreviewFile(const wxString& richTextFile)
     else
         SetRichTextBufferPrinting(new wxRichTextBuffer(*m_richTextBufferPreview));
 
-    wxRichTextPrintout *p1 = CreatePrintout();
+    auto p1 = CreatePrintout();
     p1->SetRichTextBuffer(m_richTextBufferPreview);
 
-    wxRichTextPrintout *p2 = CreatePrintout();
+    auto p2 = CreatePrintout();
     p2->SetRichTextBuffer(m_richTextBufferPrinting);
-    return DoPreview(p1, p2);
+    return DoPreview(std::move(p1), std::move(p2));
 }
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 
@@ -512,13 +512,13 @@ bool wxRichTextPrinting::PreviewBuffer(const wxRichTextBuffer& buffer)
     SetRichTextBufferPreview(new wxRichTextBuffer(buffer));
     SetRichTextBufferPrinting(new wxRichTextBuffer(buffer));
 
-    wxRichTextPrintout *p1 = CreatePrintout();
+    auto p1 = CreatePrintout();
     p1->SetRichTextBuffer(m_richTextBufferPreview);
 
-    wxRichTextPrintout *p2 = CreatePrintout();
+    auto p2 = CreatePrintout();
     p2->SetRichTextBuffer(m_richTextBufferPrinting);
 
-    return DoPreview(p1, p2);
+    return DoPreview(std::move(p1), std::move(p2));
 }
 
 #if wxUSE_FFILE && wxUSE_STREAMS
@@ -532,11 +532,12 @@ bool wxRichTextPrinting::PrintFile(const wxString& richTextFile, bool showPrintD
         return false;
     }
 
-    wxRichTextPrintout *p = CreatePrintout();
+    // FIXME: move p into DoPrint?
+    auto p = CreatePrintout();
     p->SetRichTextBuffer(m_richTextBufferPrinting);
 
-    bool ret = DoPrint(p, showPrintDialog);
-    delete p;
+    bool ret = DoPrint(p.get(), showPrintDialog);
+
     return ret;
 }
 #endif // wxUSE_FFILE && wxUSE_STREAMS
@@ -545,19 +546,19 @@ bool wxRichTextPrinting::PrintBuffer(const wxRichTextBuffer& buffer, bool showPr
 {
     SetRichTextBufferPrinting(new wxRichTextBuffer(buffer));
 
-    wxRichTextPrintout *p = CreatePrintout();
+    auto p = CreatePrintout();
     p->SetRichTextBuffer(m_richTextBufferPrinting);
 
-    bool ret = DoPrint(p, showPrintDialog);
-    delete p;
+    bool ret = DoPrint(p.get(), showPrintDialog);
+
     return ret;
 }
 
-bool wxRichTextPrinting::DoPreview(wxRichTextPrintout *printout1, wxRichTextPrintout *printout2)
+bool wxRichTextPrinting::DoPreview(std::unique_ptr<wxRichTextPrintout> printout1, std::unique_ptr<wxRichTextPrintout> printout2)
 {
     // Pass two printout objects: for preview, and possible printing.
     wxPrintDialogData printDialogData(*GetPrintData());
-    wxPrintPreview *preview = new wxPrintPreview(printout1, printout2, &printDialogData);
+    wxPrintPreview *preview = new wxPrintPreview(std::move(printout1), std::move(printout2), &printDialogData);
     if (!preview->IsOk())
     {
         delete preview;
@@ -605,9 +606,9 @@ void wxRichTextPrinting::PageSetup()
     }
 }
 
-wxRichTextPrintout *wxRichTextPrinting::CreatePrintout()
+std::unique_ptr<wxRichTextPrintout> wxRichTextPrinting::CreatePrintout()
 {
-    wxRichTextPrintout *p = new wxRichTextPrintout(m_title);
+    auto p = std::make_unique<wxRichTextPrintout>(m_title);
 
     p->SetHeaderFooterData(GetHeaderFooterData());
     p->SetMargins(10*m_pageSetupData->GetMarginTopLeft().y,

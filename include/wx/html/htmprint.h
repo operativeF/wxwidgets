@@ -295,8 +295,8 @@ public:
     void SetPromptMode(PromptMode promptMode) { m_promptMode = promptMode; }
 
 protected:
-    virtual wxHtmlPrintout *CreatePrintout();
-    virtual bool DoPreview(wxHtmlPrintout *printout1, wxHtmlPrintout *printout2);
+    virtual std::unique_ptr<wxHtmlPrintout> CreatePrintout();
+    virtual bool DoPreview(std::unique_ptr<wxHtmlPrintout> printout1, std::unique_ptr<wxHtmlPrintout> printout2);
     virtual bool DoPrint(wxHtmlPrintout *printout);
 
 private:

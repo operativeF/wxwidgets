@@ -258,7 +258,7 @@ public:
         { return m_viewDocument->GetDocumentManager(); }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-    virtual wxPrintout *OnCreatePrintout();
+    virtual std::unique_ptr<wxPrintout> OnCreatePrintout();
 #endif
 
     // implementation only

@@ -634,32 +634,32 @@ wxPrintData *wxHtmlEasyPrinting::GetPrintData()
 
 bool wxHtmlEasyPrinting::PreviewFile(const wxString &htmlfile)
 {
-    wxHtmlPrintout *p1 = CreatePrintout();
+    auto p1 = CreatePrintout();
     p1->SetHtmlFile(htmlfile);
-    wxHtmlPrintout *p2 = CreatePrintout();
+    auto p2 = CreatePrintout();
     p2->SetHtmlFile(htmlfile);
-    return DoPreview(p1, p2);
+    return DoPreview(std::move(p1), std::move(p2));
 }
 
 
 
 bool wxHtmlEasyPrinting::PreviewText(const wxString &htmltext, const wxString &basepath)
 {
-    wxHtmlPrintout *p1 = CreatePrintout();
+    auto p1 = CreatePrintout();
     p1->SetHtmlText(htmltext, basepath, true);
-    wxHtmlPrintout *p2 = CreatePrintout();
+    auto p2 = CreatePrintout();
     p2->SetHtmlText(htmltext, basepath, true);
-    return DoPreview(p1, p2);
+    return DoPreview(std::move(p1), std::move(p2));
 }
 
 
 
 bool wxHtmlEasyPrinting::PrintFile(const wxString &htmlfile)
 {
-    wxHtmlPrintout *p = CreatePrintout();
+    auto p = CreatePrintout();
     p->SetHtmlFile(htmlfile);
-    bool ret = DoPrint(p);
-    delete p;
+    bool ret = DoPrint(p.get());
+
     return ret;
 }
 
@@ -667,20 +667,20 @@ bool wxHtmlEasyPrinting::PrintFile(const wxString &htmlfile)
 
 bool wxHtmlEasyPrinting::PrintText(const wxString &htmltext, const wxString &basepath)
 {
-    wxHtmlPrintout *p = CreatePrintout();
+    auto p = CreatePrintout();
     p->SetHtmlText(htmltext, basepath, true);
-    bool ret = DoPrint(p);
-    delete p;
+    bool ret = DoPrint(p.get());
+
     return ret;
 }
 
 
 
-bool wxHtmlEasyPrinting::DoPreview(wxHtmlPrintout *printout1, wxHtmlPrintout *printout2)
+bool wxHtmlEasyPrinting::DoPreview(std::unique_ptr<wxHtmlPrintout> printout1, std::unique_ptr<wxHtmlPrintout> printout2)
 {
     // Pass two printout objects: for preview, and possible printing.
     wxPrintDialogData printDialogData(*GetPrintData());
-    wxPrintPreview *preview = new wxPrintPreview(printout1, printout2, &printDialogData);
+    wxPrintPreview *preview = new wxPrintPreview(std::move(printout1), std::move(printout2), &printDialogData);
     if (!preview->IsOk())
     {
         delete preview;
@@ -787,9 +787,9 @@ void wxHtmlEasyPrinting::SetStandardFonts(int size,
 }
 
 
-wxHtmlPrintout *wxHtmlEasyPrinting::CreatePrintout()
+std::unique_ptr<wxHtmlPrintout> wxHtmlEasyPrinting::CreatePrintout()
 {
-    wxHtmlPrintout *p = new wxHtmlPrintout(m_Name);
+    auto p = std::make_unique<wxHtmlPrintout>(m_Name);
 
     if (m_fontMode == FontMode::Explicit)
     {
