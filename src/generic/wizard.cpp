@@ -107,11 +107,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWizardEvent, wxNotifyEvent);
 // wxWizardPage
 // ----------------------------------------------------------------------------
 
-void wxWizardPage::Init()
-{
-    m_bitmap = wxNullBitmap;
-}
-
 wxWizardPage::wxWizardPage(wxWizard *parent,
                            const wxBitmap& bitmap)
 {
@@ -251,24 +246,6 @@ wxSize wxWizardSizer::SiblingSize(wxSizerItem *child)
 // ----------------------------------------------------------------------------
 // generic wxWizard implementation
 // ----------------------------------------------------------------------------
-
-void wxWizard::Init()
-{
-    m_posWizard = wxDefaultPosition;
-    m_page = nullptr;
-    m_firstpage = nullptr;
-    m_btnPrev = m_btnNext = nullptr;
-    m_statbmp = nullptr;
-    m_sizerBmpAndPage = nullptr;
-    m_sizerPage = nullptr;
-    m_border = 5;
-    m_started = false;
-    m_wasModal = false;
-    m_usingSizer = false;
-    m_bitmapBackgroundColour = *wxWHITE;
-    m_bitmapPlacement = 0;
-    m_bitmapMinimumWidth = 115;
-}
 
 bool wxWizard::Create(wxWindow *parent,
                       int id,

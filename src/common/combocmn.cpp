@@ -2131,7 +2131,6 @@ void wxComboCtrlBase::DoSetPopupControl(wxComboPopup* iface)
     DestroyPopup();
 
     iface->InitBase(this);
-    iface->Init();
 
     m_popupInterface = iface;
 

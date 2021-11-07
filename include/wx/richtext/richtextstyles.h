@@ -609,12 +609,6 @@ private:
 class wxRichTextStyleComboPopup : public wxRichTextStyleListBox, public wxComboPopup
 {
 public:
-    void Init() override
-    {
-        m_itemHere = -1; // hot item in list
-        m_value = -1;
-    }
-
     bool Create( wxWindow* parent ) override;
 
     wxWindow *GetControl() override { return this; }
@@ -639,8 +633,8 @@ public:
 
 protected:
 
-    int             m_itemHere{}; // hot item in popup
-    int             m_value{};
+    int             m_itemHere{-1}; // hot item in popup
+    int             m_value{-1};
 
 private:
     wxDECLARE_EVENT_TABLE();

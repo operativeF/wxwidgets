@@ -752,7 +752,6 @@ public:
     // variable has been initialized before the call.
     // NOTE: It is not in constructor so the derived class doesn't need to redefine
     //       a default constructor of its own.
-    virtual void Init() { }
 
     virtual ~wxComboPopup() = default;
 

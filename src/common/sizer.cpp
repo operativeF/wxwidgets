@@ -154,8 +154,8 @@ constexpr int SIZER_FLAGS_MASK =
 void wxSizerItem::Init(const wxSizerFlags& flags)
 {
     m_proportion = flags.GetProportion();
-    m_flag = flags.GetFlags();
-    m_border = flags.GetBorderInPixels();
+    m_flag       = flags.GetFlags();
+    m_border     = flags.GetBorderInPixels();
 
     ASSERT_VALID_SIZER_FLAGS( m_flag );
 }

@@ -167,17 +167,6 @@ wxBEGIN_EVENT_TABLE(wxGenericAnimationCtrl, wxAnimationCtrlBase)
     EVT_TIMER(wxID_ANY, wxGenericAnimationCtrl::OnTimer)
 wxEND_EVENT_TABLE()
 
-void wxGenericAnimationCtrl::Init()
-{
-    m_currentFrame = 0;
-    m_looped = false;
-    m_isPlaying = false;
-
-    // use the window background colour by default to be consistent
-    // with the GTK+ native version
-    m_useWinBackgroundColour = true;
-}
-
 bool wxGenericAnimationCtrl::Create(wxWindow *parent, wxWindowID id,
             const wxAnimation& animation, const wxPoint& pos,
             const wxSize& size, unsigned int style, const std::string& name)

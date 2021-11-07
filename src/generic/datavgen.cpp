@@ -188,17 +188,6 @@ wxTextCtrl *CreateEditorTextCtrl(wxWindow *parent, const wxRect& labelRect, cons
 // wxDataViewColumn
 //-----------------------------------------------------------------------------
 
-void wxDataViewColumn::Init(int width, wxAlignment align, unsigned int flags)
-{
-    m_width =
-    m_manuallySetWidth = width;
-    m_minWidth = 0;
-    m_align = align;
-    m_flags = flags;
-    m_sort = false;
-    m_sortAscending = true;
-}
-
 int wxDataViewColumn::DoGetEffectiveWidth(int width) const
 {
     switch ( width )
@@ -5537,18 +5526,6 @@ wxDataViewCtrl::~wxDataViewCtrl()
 #endif // wxUSE_ACCESSIBILITY
 }
 
-void wxDataViewCtrl::Init()
-{
-    m_notifier = nullptr;
-
-    m_headerArea = nullptr;
-    m_clientArea = nullptr;
-
-    m_colsDirty = false;
-
-    m_allowMultiColumnSort = false;
-}
-
 bool wxDataViewCtrl::Create(wxWindow *parent,
                             wxWindowID id,
                             const wxPoint& pos,
@@ -5559,8 +5536,6 @@ bool wxDataViewCtrl::Create(wxWindow *parent,
 {
 //    if ( (style & wxBORDER_MASK) == 0)
 //        style |= wxBORDER_SUNKEN;
-
-    Init();
 
     if (!wxControl::Create( parent, id, pos, size,
                             style | wxScrolledWindowStyle, validator, name))

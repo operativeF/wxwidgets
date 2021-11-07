@@ -24,7 +24,7 @@ class wxWizardSizer;
 class wxWizard : public wxWizardBase
 {
 public:
-    wxWizard() { Init(); }
+    wxWizard() = default;
     wxWizard(wxWindow *parent,
              int id = wxID_ANY,
              const std::string& title = {},
@@ -32,7 +32,6 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              unsigned int style = wxDEFAULT_DIALOG_STYLE)
     {
-        Init();
         Create(parent, id, title, bitmap, pos, style);
     }
 
@@ -45,7 +44,7 @@ public:
              const wxBitmap& bitmap = wxNullBitmap,
              const wxPoint& pos = wxDefaultPosition,
              unsigned int style = wxDEFAULT_DIALOG_STYLE);
-    void Init();
+
     ~wxWizard();
 
     bool RunWizard(wxWizardPage *firstPage) override;
@@ -117,52 +116,53 @@ protected:
     void AddBackNextPair(wxBoxSizer *buttonRow);
     void AddButtonRow(wxBoxSizer *mainColumn);
 
-    // the page size requested by user
-    wxSize m_sizePage;
-
-    // the dialog position from the ctor
-    wxPoint m_posWizard;
-
-    // wizard state
-    wxWizardPage *m_page;       // the current page or NULL
-    wxWizardPage *m_firstpage;  // the page RunWizard started on or NULL
     wxBitmap      m_bitmap;     // the default bitmap to show
-
-    // wizard controls
-    wxButton    *m_btnPrev,     // the "<Back" button
-                *m_btnNext;     // the "Next>" or "Finish" button
-    wxStaticBitmap *m_statbmp;  // the control for the bitmap
 
     // cached labels so their translations stay consistent
     std::string    m_nextLabel;
     std::string    m_finishLabel;
 
-    // Border around page area sizer requested using SetBorder()
-    int m_border;
+    // Bitmap background colour if resizing bitmap
+    wxColour    m_bitmapBackgroundColour{*wxWHITE};
 
-    // Whether RunWizard() was called
-    bool m_started;
+    // the page size requested by user
+    wxSize m_sizePage;
 
-    // Whether was modal (modeless has to be destroyed on finish or cancel)
-    bool m_wasModal;
-
-    // True if pages are laid out using the sizer
-    bool m_usingSizer;
-
-    // Page area sizer will be inserted here with padding
-    wxBoxSizer *m_sizerBmpAndPage;
+    // the dialog position from the ctor
+    wxPoint m_posWizard{wxDefaultPosition};
 
     // Actual position and size of pages
-    wxWizardSizer *m_sizerPage;
+    wxWizardSizer *m_sizerPage{nullptr};
 
-    // Bitmap background colour if resizing bitmap
-    wxColour    m_bitmapBackgroundColour;
+    // wizard state
+    wxWizardPage *m_page{nullptr};       // the current page or NULL
+    wxWizardPage *m_firstpage{nullptr};  // the page RunWizard started on or NULL
+
+    // Page area sizer will be inserted here with padding
+    wxBoxSizer *m_sizerBmpAndPage{nullptr};
+
+    // wizard controls
+    wxButton       *m_btnPrev{nullptr};  // the "<Back" button
+    wxButton       *m_btnNext{nullptr};  // the "Next>" or "Finish" button
+    wxStaticBitmap *m_statbmp{nullptr};  // the control for the bitmap
+
+    // Border around page area sizer requested using SetBorder()
+    int m_border{5};
 
     // Bitmap placement flags
-    int         m_bitmapPlacement;
+    int         m_bitmapPlacement{0};
 
     // Minimum bitmap width
-    int         m_bitmapMinimumWidth;
+    int         m_bitmapMinimumWidth{115};
+
+    // Whether RunWizard() was called
+    bool m_started{false};
+
+    // Whether was modal (modeless has to be destroyed on finish or cancel)
+    bool m_wasModal{false};
+
+    // True if pages are laid out using the sizer
+    bool m_usingSizer{false};
 
     friend class wxWizardSizer;
 

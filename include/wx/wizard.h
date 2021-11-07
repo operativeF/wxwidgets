@@ -55,7 +55,7 @@ class wxWizard;
 class wxWizardPage : public wxPanel
 {
 public:
-    wxWizardPage() { Init(); }
+    wxWizardPage() = default;
 
     // ctor accepts an optional bitmap which will be used for this page instead
     // of the default one for this wizard (should be of the same size). Notice
@@ -102,10 +102,7 @@ public:
 #endif // wxUSE_VALIDATORS
 
 protected:
-    // common part of ctors:
-    void Init();
-
-    wxBitmap m_bitmap;
+    wxBitmap m_bitmap{wxNullBitmap};
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

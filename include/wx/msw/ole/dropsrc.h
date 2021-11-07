@@ -66,9 +66,6 @@ public:
     // too slow). Just return false if you want default feedback.
     bool GiveFeedback(wxDragResult effect) override;
 
-protected:
-    void Init();
-
 private:
     wxIDropSource *m_pIDropSource;  // the pointer to COM interface
 };

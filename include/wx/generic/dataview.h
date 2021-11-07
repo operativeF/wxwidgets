@@ -42,9 +42,12 @@ public:
                      wxAlignment align = wxALIGN_CENTER,
                      unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
         : wxDataViewColumnBase(renderer, model_column),
-          m_title(title)
+          m_title{title},
+          m_width{width},
+          m_manuallySetWidth{width},
+          m_align{align},
+          m_flags{flags}
     {
-        Init(width, align, flags);
     }
 
     wxDataViewColumn(const wxBitmap& bitmap,
@@ -53,9 +56,12 @@ public:
                      int width = wxDVC_DEFAULT_WIDTH,
                      wxAlignment align = wxALIGN_CENTER,
                      unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
-        : wxDataViewColumnBase(bitmap, renderer, model_column)
+        : wxDataViewColumnBase(bitmap, renderer, model_column),
+          m_width{width},
+          m_manuallySetWidth{width},
+          m_align{align},
+          m_flags{flags}
     {
-        Init(width, align, flags);
     }
 
     // implement wxHeaderColumnBase methods
@@ -151,9 +157,6 @@ public:
     int WXGetSpecifiedWidth() const override;
 
 private:
-    // common part of all ctors
-    void Init(int width, wxAlignment align, unsigned int flags);
-
     // These methods forward to wxDataViewCtrl::OnColumnChange() and
     // OnColumnWidthChange() respectively, i.e. the latter is stronger than the
     // former.
@@ -164,15 +167,18 @@ private:
     // its negative values such as wxCOL_WIDTH_DEFAULT.
     int DoGetEffectiveWidth(int width) const;
 
-
     std::string m_title;
-    int m_width,
-        m_manuallySetWidth,
-        m_minWidth;
-    wxAlignment m_align;
+
+    int m_width;
+    int m_manuallySetWidth;
+    int m_minWidth{0};
+
     unsigned int m_flags;
-    bool m_sort,
-         m_sortAscending;
+
+    wxAlignment m_align;
+
+    bool m_sort{false};
+    bool m_sortAscending{true};
 
     friend class wxDataViewHeaderWindowBase;
     friend class wxDataViewHeaderWindow;
@@ -184,7 +190,7 @@ private:
 // ---------------------------------------------------------
 
 class wxDataViewCtrl : public wxDataViewCtrlBase,
-                                       public wxScrollHelper
+                       public wxScrollHelper
 {
     friend class wxDataViewMainWindow;
     friend class wxDataViewHeaderWindowBase;
@@ -198,7 +204,6 @@ class wxDataViewCtrl : public wxDataViewCtrlBase,
 public:
     wxDataViewCtrl() : wxScrollHelper(this)
     {
-        Init();
     }
 
     wxDataViewCtrl( wxWindow *parent, wxWindowID id,
@@ -215,8 +220,6 @@ public:
 	wxDataViewCtrl& operator=(const wxDataViewCtrl&) = delete;
 
     ~wxDataViewCtrl();
-
-    void Init();
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -394,17 +397,17 @@ private:
     std::vector<CachedColWidthInfo> m_colsBestWidths;
     std::vector<wxDataViewColumn*> m_cols;
 
-    wxDataViewModelNotifier  *m_notifier;
-    wxDataViewMainWindow     *m_clientArea;
-    wxDataViewHeaderWindow   *m_headerArea;
+    wxDataViewModelNotifier  *m_notifier{nullptr};
+    wxDataViewMainWindow     *m_clientArea{nullptr};
+    wxDataViewHeaderWindow   *m_headerArea{nullptr};
 
     // if true, allow sorting by more than one column
-    bool m_allowMultiColumnSort;
+    bool m_allowMultiColumnSort{false};
 
     // This indicates that at least one entry in m_colsBestWidths has 'dirty'
     // flag set. It's cheaper to check one flag in OnInternalIdle() than to
     // iterate over m_colsBestWidths to check if anything needs to be done.
-    bool                      m_colsDirty;
+    bool                      m_colsDirty{false};
 
 private:
     void OnSize( wxSizeEvent &event );

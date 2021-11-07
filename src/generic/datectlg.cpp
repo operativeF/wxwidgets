@@ -40,10 +40,6 @@ class wxCalendarComboPopup : public wxCalendarCtrl,
                              public wxComboPopup
 {
 public:
-    void Init() override
-    {
-    }
-
     // NB: Don't create lazily since it didn't work that way before
     //     wxComboCtrl was used, and changing behaviour would almost
     //     certainly introduce new bugs.

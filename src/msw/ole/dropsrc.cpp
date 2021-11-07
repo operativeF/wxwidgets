@@ -123,20 +123,14 @@ STDMETHODIMP wxIDropSource::GiveFeedback(DWORD dwEffect)
 
 // ctors
 
-// common part of all ctors
-void wxDropSource::Init()
-{
-    m_pIDropSource = new wxIDropSource(this);
-    m_pIDropSource->AddRef();
-}
-
 wxDropSource::wxDropSource(wxWindow* WXUNUSED(win),
                            const wxCursor &cursorCopy,
                            const wxCursor &cursorMove,
                            const wxCursor &cursorStop)
             : wxDropSourceBase(cursorCopy, cursorMove, cursorStop)
 {
-    Init();
+    m_pIDropSource = new wxIDropSource(this);
+    m_pIDropSource->AddRef();
 }
 
 wxDropSource::wxDropSource(wxDataObject& data,
@@ -146,7 +140,8 @@ wxDropSource::wxDropSource(wxDataObject& data,
                            const wxCursor &cursorStop)
             : wxDropSourceBase(cursorCopy, cursorMove, cursorStop)
 {
-    Init();
+    m_pIDropSource = new wxIDropSource(this);
+    m_pIDropSource->AddRef();
     SetData(data);
 }
 

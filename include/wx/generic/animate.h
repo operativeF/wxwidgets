@@ -21,7 +21,7 @@
 class wxGenericAnimationCtrl: public wxAnimationCtrlBase
 {
 public:
-    wxGenericAnimationCtrl() { Init(); }
+    wxGenericAnimationCtrl() = default;
     wxGenericAnimationCtrl(wxWindow *parent,
                            wxWindowID id,
                            const wxAnimation& anim = wxNullAnimation,
@@ -30,12 +30,8 @@ public:
                            unsigned int style = wxAC_DEFAULT_STYLE,
                            const std::string& name = wxAnimationCtrlNameStr)
     {
-        Init();
-
         Create(parent, id, anim, pos, size, style, name);
     }
-
-    void Init();
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxAnimation& anim = wxNullAnimation,
@@ -125,11 +121,11 @@ protected:
                                       
     wxTimer       m_timer;            // The timer
 
-    unsigned int  m_currentFrame;     // Current frame
+    unsigned int  m_currentFrame{0};     // Current frame
 
-    bool          m_isPlaying;        // Is the animation playing?
-    bool          m_useWinBackgroundColour; // Use animation bg colour or window bg colour?
-    bool          m_looped;           // Looped, or not
+    bool          m_isPlaying{false};        // Is the animation playing?
+    bool          m_useWinBackgroundColour{true}; // Use animation bg colour or window bg colour?
+    bool          m_looped{false};           // Looped, or not
 
 private:
     using base_type = wxAnimationCtrlBase;
