@@ -152,19 +152,11 @@ public:
         if ( IsControl() && !m_label.empty() )
         {
             // Create a control to render the control's label.
-            m_staticText = new wxStaticText(m_tbar, wxID_ANY, m_label);
+            m_staticText = std::make_unique<wxStaticText>(m_tbar, wxID_ANY, m_label);
         }
-        else // no label
-        {
-            m_staticText = nullptr;
-        }
+        //else // no label
 
         m_toBeDeleted  = false;
-    }
-
-    ~wxToolBarTool()
-    {
-        delete m_staticText;
     }
 
     wxToolBarTool(const wxToolBarTool&) = delete;
@@ -190,15 +182,14 @@ public:
                 }
                 else
                 {
-                    delete m_staticText;
-                    m_staticText = nullptr;
+                    m_staticText.reset();
                 }
             }
             else
             {
                 if ( !label.empty() )
                 {
-                    m_staticText = new wxStaticText(m_tbar, wxID_ANY, label);
+                    m_staticText = std::make_unique<wxStaticText>(m_tbar, wxID_ANY, label);
                 }
             }
         }
@@ -217,7 +208,7 @@ public:
         wxASSERT_MSG( IsControl(),
                       "only makes sense for embedded control tools" );
 
-        return m_staticText;
+        return m_staticText.get();
     }
 
     // we need ids for the spacers which we want to modify later on, this
@@ -247,7 +238,7 @@ public:
     bool IsToBeDeleted() const { return m_toBeDeleted; }
 
 private:
-    wxStaticText *m_staticText{nullptr};
+    std::unique_ptr<wxStaticText> m_staticText;
     bool m_toBeDeleted{false};
 };
 

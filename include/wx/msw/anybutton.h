@@ -11,6 +11,29 @@
 #define _WX_MSW_ANYBUTTON_H_
 
 // ----------------------------------------------------------------------------
+// button image data
+// ----------------------------------------------------------------------------
+
+// we use different data classes for owner drawn buttons and for themed XP ones
+
+class wxButtonImageData
+{
+public:
+    virtual ~wxButtonImageData() = default;
+
+	wxButtonImageData& operator=(wxButtonImageData&&) = delete;
+
+    virtual wxBitmap GetBitmap(wxAnyButtonBase::State which) const = 0;
+    virtual void SetBitmap(const wxBitmap& bitmap, wxAnyButtonBase::State which) = 0;
+
+    virtual wxSize GetBitmapMargins() const = 0;
+    virtual void SetBitmapMargins(wxCoord x, wxCoord y) = 0;
+
+    virtual wxDirection GetBitmapPosition() const = 0;
+    virtual void SetBitmapPosition(wxDirection dir) = 0;
+};
+
+// ----------------------------------------------------------------------------
 // Common button functionality
 // ----------------------------------------------------------------------------
 
@@ -52,7 +75,7 @@ protected:
     void AdjustForBitmapSize(wxSize& size) const;
     void AdjustForBitmapMargins(wxSize& size) const;
 
-    class wxButtonImageData *m_imageData{nullptr};
+    std::unique_ptr<wxButtonImageData> m_imageData;
 
 #if wxUSE_MARKUP
     class wxMarkupText *m_markupText{nullptr};

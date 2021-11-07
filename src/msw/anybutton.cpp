@@ -82,31 +82,6 @@ using msw::utils::unique_brush;
 extern wxWindowMSW *wxWindowBeingErased; // From src/msw/window.cpp
 #endif // wxUSE_UXTHEME
 
-// ----------------------------------------------------------------------------
-// button image data
-// ----------------------------------------------------------------------------
-
-// we use different data classes for owner drawn buttons and for themed XP ones
-
-class wxButtonImageData
-{
-public:
-    wxButtonImageData() = default;
-    virtual ~wxButtonImageData() = default;
-
-    wxButtonImageData(const wxButtonImageData&) = delete;
-	wxButtonImageData& operator=(const wxButtonImageData&) = delete;
-
-    virtual wxBitmap GetBitmap(wxAnyButton::State which) const = 0;
-    virtual void SetBitmap(const wxBitmap& bitmap, wxAnyButton::State which) = 0;
-
-    virtual wxSize GetBitmapMargins() const = 0;
-    virtual void SetBitmapMargins(wxCoord x, wxCoord y) = 0;
-
-    virtual wxDirection GetBitmapPosition() const = 0;
-    virtual void SetBitmapPosition(wxDirection dir) = 0;
-};
-
 // the gap between button edge and the interior area used by Windows for the
 // standard buttons
 constexpr int OD_BUTTON_MARGIN = 4;
@@ -448,7 +423,6 @@ wxSize wxMSWButton::IncreaseToStdSizeAndCache(wxControl *btn, const wxSize& size
 
 wxAnyButton::~wxAnyButton()
 {
-    delete m_imageData;
 #if wxUSE_MARKUP
     delete m_markupText;
 #endif // wxUSE_MARKUP
@@ -667,8 +641,7 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
             // button and resetting it to nothing disables all of them.
             if ( which == State_Normal )
             {
-                delete m_imageData;
-                m_imageData = nullptr;
+                m_imageData.reset();
             }
             else
             {
@@ -685,7 +658,7 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
     }
 
 #if wxUSE_UXTHEME
-    wxXPButtonImageData *oldData = nullptr;
+    std::unique_ptr<wxXPButtonImageData> oldData;
 #endif // wxUSE_UXTHEME
 
     // Check if we already had bitmaps of different size.
@@ -697,13 +670,10 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
 
 #if wxUSE_UXTHEME
         // We can't change the size of the images stored in wxImageList
-        // in wxXPButtonImageData::m_iml so force recreating it below but
+        // in wxXPButtonImageData::m_impl so force recreating it below but
         // keep the current data to copy its values into the new one.
-        oldData = dynamic_cast<wxXPButtonImageData*>(m_imageData);
-        if ( oldData )
-        {
-            m_imageData = nullptr;
-        }
+        oldData.reset(dynamic_cast<wxXPButtonImageData*>(m_imageData.release()));
+
 #endif // wxUSE_UXTHEME
         //else: wxODButtonImageData doesn't require anything special
     }
@@ -718,7 +688,7 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
         // strategy for bitmap-only buttons
         if ( ShowsLabel() && wxUxThemeIsActive() )
         {
-            m_imageData = new wxXPButtonImageData(this, bitmap);
+            m_imageData = std::make_unique<wxXPButtonImageData>(this, bitmap);
 
             if ( oldData )
             {
@@ -730,14 +700,12 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
 
                 // No need to preserve the bitmaps though as they were of wrong
                 // size anyhow.
-
-                delete oldData;
             }
         }
         else
 #endif // wxUSE_UXTHEME
         {
-            m_imageData = new wxODButtonImageData(this, bitmap);
+            m_imageData = std::make_unique<wxODButtonImageData>(this, bitmap);
             MakeOwnerDrawn();
         }
     }
@@ -1203,9 +1171,9 @@ void wxAnyButton::MakeOwnerDrawn()
         // We need to use owner-drawn specific data structure so we have
         // to create it and copy the data from native data structure,
         // if necessary.
-        if ( m_imageData && dynamic_cast<wxODButtonImageData*>(m_imageData) == nullptr )
+        if ( m_imageData && dynamic_cast<wxODButtonImageData*>(m_imageData.get()) == nullptr )
         {
-            wxODButtonImageData* newData = new wxODButtonImageData(this, m_imageData->GetBitmap(State_Normal));
+            auto newData = std::make_unique<wxODButtonImageData>(this, m_imageData->GetBitmap(State_Normal));
             for ( int n = 0; n < State_Max; n++ )
             {
                 State st = static_cast<State>(n);
@@ -1215,8 +1183,7 @@ void wxAnyButton::MakeOwnerDrawn()
             wxSize margs = m_imageData->GetBitmapMargins();
             newData->SetBitmapMargins(margs.x, margs.y);
 
-            delete m_imageData;
-            m_imageData = newData;
+            m_imageData = std::move(newData);
         }
         // make it so
         wxMSWWinStyleUpdater(GetHwnd()).TurnOff(BS_TYPEMASK).TurnOn(BS_OWNERDRAW);
