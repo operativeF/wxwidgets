@@ -17,7 +17,7 @@
 #include <gsl/gsl>
 
 // a more readable way to tell
-inline inline constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
+inline constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 
 // the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)
 // constant defines the default argument value for wxIcon ctor and wxIcon::LoadFile()
