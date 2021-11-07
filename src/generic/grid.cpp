@@ -10892,9 +10892,9 @@ int wxGridSizesInfo::GetSize(unsigned pos) const
 #if wxUSE_DRAG_AND_DROP
 
 // this allow setting drop target directly on wxGrid
-void wxGrid::SetDropTarget(wxDropTarget *dropTarget)
+void wxGrid::SetDropTarget(std::unique_ptr<wxDropTarget> dropTarget)
 {
-    GetGridWindow()->SetDropTarget(dropTarget);
+    GetGridWindow()->SetDropTarget(std::move(dropTarget));
 }
 
 #endif // wxUSE_DRAG_AND_DROP

@@ -340,7 +340,7 @@ bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const std::string&
     m_contextMenu->Append(wxID_RICHTEXT_PROPERTIES1, _("&Properties"));
 
 #if wxUSE_DRAG_AND_DROP
-    SetDropTarget(new wxRichTextDropTarget(this));
+    SetDropTarget(std::make_unique<wxRichTextDropTarget>(this));
 #endif
     SetModified( false );
     return true;

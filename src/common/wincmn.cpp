@@ -459,10 +459,6 @@ wxWindowBase::~wxWindowBase()
 
     delete m_windowSizer;
 
-#if wxUSE_DRAG_AND_DROP
-    delete m_dropTarget;
-#endif // wxUSE_DRAG_AND_DROP
-
 #if wxUSE_TOOLTIPS
     delete m_tooltip;
 #endif // wxUSE_TOOLTIPS

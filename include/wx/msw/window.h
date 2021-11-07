@@ -148,7 +148,7 @@ public:
     void SetId(wxWindowID winid) override;
 
 #if wxUSE_DRAG_AND_DROP
-    void SetDropTarget( wxDropTarget *dropTarget ) override;
+    void SetDropTarget( std::unique_ptr<wxDropTarget> dropTarget ) override;
 
     // Accept files for dragging
     void DragAcceptFiles(bool accept) override;

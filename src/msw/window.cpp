@@ -1708,14 +1708,15 @@ static inline void AdjustStaticBoxZOrder(wxWindow * WXUNUSED(parent))
 
 #endif // wxUSE_STATBOX/!wxUSE_STATBOX
 
-void wxWindowMSW::SetDropTarget(wxDropTarget *pDropTarget)
+void wxWindowMSW::SetDropTarget(std::unique_ptr<wxDropTarget> pDropTarget)
 {
-    if ( m_dropTarget != nullptr ) {
+    if ( m_dropTarget != nullptr )
+    {
         m_dropTarget->Revoke(m_hWnd);
-        delete m_dropTarget;
     }
 
-    m_dropTarget = pDropTarget;
+    m_dropTarget = std::move(pDropTarget);
+    
     if ( m_dropTarget != nullptr )
     {
         AdjustStaticBoxZOrder(GetParent());
@@ -4180,7 +4181,7 @@ bool wxWindowMSW::HandleDestroy()
     {
         m_dropTarget->Revoke(m_hWnd);
 
-        wxDELETE(m_dropTarget);
+        m_dropTarget.reset();
     }
 #endif // wxUSE_DRAG_AND_DROP
 

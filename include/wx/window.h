@@ -1398,10 +1398,9 @@ public:
     // drag and drop
     // -------------
 #if wxUSE_DRAG_AND_DROP
-        // set/retrieve the drop target associated with this window (may be
-        // NULL; it's owned by the window and will be deleted by it)
-    virtual void SetDropTarget( wxDropTarget *dropTarget ) = 0;
-    virtual wxDropTarget *GetDropTarget() const { return m_dropTarget; }
+        // set/retrieve the drop target associated with this window.
+    virtual void SetDropTarget( std::unique_ptr<wxDropTarget> dropTarget ) = 0;
+    virtual wxDropTarget* GetDropTarget() const { return m_dropTarget.get(); }
 
     // Accept files for dragging
     virtual void DragAcceptFiles(bool accept)
@@ -1673,7 +1672,7 @@ protected:
 #endif // wxUSE_VALIDATORS
 
 #if wxUSE_DRAG_AND_DROP
-    wxDropTarget        *m_dropTarget;
+    std::unique_ptr<wxDropTarget> m_dropTarget;
 #endif // wxUSE_DRAG_AND_DROP
 
 #if wxUSE_CARET

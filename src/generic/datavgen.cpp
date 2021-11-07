@@ -2142,7 +2142,7 @@ bool wxDataViewMainWindow::EnableDropTarget( const wxDataFormat &format )
     m_dropEnabled = format != wxDF_INVALID;
 
     if (m_dropEnabled)
-        SetDropTarget( new wxDataViewDropTarget( new wxCustomDataObject( format ), this ) );
+        SetDropTarget(std::make_unique<wxDataViewDropTarget>( new wxCustomDataObject( format ), this ) );
 
     return true;
 }

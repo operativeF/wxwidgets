@@ -2296,7 +2296,7 @@ public:
 
     // ------- drag and drop
 #if wxUSE_DRAG_AND_DROP
-    void SetDropTarget(wxDropTarget *dropTarget) override;
+    void SetDropTarget(std::unique_ptr<wxDropTarget> dropTarget) override;
 #endif // wxUSE_DRAG_AND_DROP
 
 
