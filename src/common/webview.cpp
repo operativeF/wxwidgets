@@ -6,10 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_WEBVIEW
-
 
 #include "wx/webview.h"
 
@@ -17,26 +14,13 @@
 #include "wx/osx/webview_webkit.h"
 #elif defined(__WXGTK__)
 #include "wx/gtk/webview_webkit.h"
-#elif defined(__WXMSW__)
-#include "wx/msw/webview_ie.h"
+#elif defined(WX_WINDOWS)
 #include "wx/msw/webview_edge.h"
 #endif
 
 // DLL options compatibility check:
 #include "wx/app.h"
 WX_CHECK_BUILD_OPTIONS("wxWEBVIEW")
-
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewNameStr[] = "wxWebView";
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewDefaultURLStr[] = "about:blank";
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendIE[] = "wxWebViewIE";
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendEdge[] = "wxWebViewEdge";
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendWebKit[] = "wxWebViewWebKit";
-
-#ifdef __WXMSW__
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendDefault[] = "";
-#else
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendDefault[] = "wxWebViewWebKit";
-#endif
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxWebView, wxControl);
 wxIMPLEMENT_DYNAMIC_CLASS(wxWebViewEvent, wxCommandEvent);
@@ -280,23 +264,16 @@ wxVersionInfo wxWebView::GetBackendVersionInfo(const wxString& backend)
 }
 
 // static
-wxStringWebViewFactoryMap::iterator wxWebView::FindFactory(const wxString &backend)
+wxStringWebViewFactoryMap::iterator wxWebView::FindFactory(const std::string& backend)
 {
     // Initialise the map, it checks internally for existing factories
     InitFactoryMap();
 
-#ifdef __WXMSW__
+#ifdef WX_WINDOWS
     // Use edge as default backend on MSW if available
     if (backend.empty())
     {
-        wxStringWebViewFactoryMap::iterator defaultBackend =
-            m_factoryMap.find(wxWebViewBackendIE);
-#if wxUSE_WEBVIEW_EDGE
-        wxStringWebViewFactoryMap::iterator edgeFactory = m_factoryMap.find(wxWebViewBackendEdge);
-        if (edgeFactory->second->IsAvailable())
-            return edgeFactory;
-#endif
-        return defaultBackend;
+        return m_factoryMap.find(wxWebViewBackendEdge);
     }
     else
 #endif
@@ -306,19 +283,10 @@ wxStringWebViewFactoryMap::iterator wxWebView::FindFactory(const wxString &backe
 // static
 void wxWebView::InitFactoryMap()
 {
-#ifdef __WXMSW__
-#if wxUSE_WEBVIEW_IE
-    if(m_factoryMap.find(wxWebViewBackendIE) == m_factoryMap.end())
-        RegisterFactory(wxWebViewBackendIE, std::shared_ptr<wxWebViewFactory>
-                                                   (new wxWebViewFactoryIE));
-#endif
-
-#if wxUSE_WEBVIEW_EDGE
+#ifdef WX_WINDOWS
     if (m_factoryMap.find(wxWebViewBackendEdge) == m_factoryMap.end())
         RegisterFactory(wxWebViewBackendEdge, std::shared_ptr<wxWebViewFactory>
         (new wxWebViewFactoryEdge));
-#endif
-
 #else
     if(m_factoryMap.find(wxWebViewBackendWebKit) == m_factoryMap.end())
         RegisterFactory(wxWebViewBackendWebKit, std::shared_ptr<wxWebViewFactory>

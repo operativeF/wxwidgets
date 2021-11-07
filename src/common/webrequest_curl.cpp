@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #include "wx/webrequest.h"
 
 #if wxUSE_WEBREQUEST && wxUSE_WEBREQUEST_CURL

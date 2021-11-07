@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_WEBREQUEST
 
 #include "wx/webrequest.h"
@@ -44,8 +42,7 @@ wxDEFINE_EVENT(wxEVT_WEBREQUEST_STATE, wxWebRequestEvent);
 wxDEFINE_EVENT(wxEVT_WEBREQUEST_DATA, wxWebRequestEvent);
 
 #ifdef __WXDEBUG__
-static const wxStringCharType* wxNO_IMPL_MSG
-    = "can't be used with an invalid/uninitialized object";
+constexpr std::string_view wxNO_IMPL_MSG = "can't be used with an invalid/uninitialized object";
 #endif
 
 #define wxCHECK_IMPL(rc) wxCHECK_MSG( m_impl, (rc), wxNO_IMPL_MSG )
@@ -385,23 +382,18 @@ void wxWebRequestImpl::ProcessStateEvent(wxWebRequest::State state, const wxStri
 // wxWebRequest
 //
 
-wxWebRequest::wxWebRequest()
-= default;
+wxWebRequest::wxWebRequest() = default;
 
 wxWebRequest::wxWebRequest(const wxWebRequestImplPtr& impl)
     : m_impl(impl)
 {
 }
 
-wxWebRequest::wxWebRequest(const wxWebRequest& other)
-     
-= default;
+wxWebRequest::wxWebRequest(const wxWebRequest& other) = default;
 
-wxWebRequest& wxWebRequest::operator=(const wxWebRequest& other)
-= default;
+wxWebRequest& wxWebRequest::operator=(const wxWebRequest& other) = default;
 
-wxWebRequest::~wxWebRequest()
-= default;
+wxWebRequest::~wxWebRequest() = default;
 
 void wxWebRequest::SetHeader(const wxString& name, const wxString& value)
 {

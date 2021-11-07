@@ -22,7 +22,7 @@
     #include "wx/osx/webviewhistoryitem_webkit.h"
 #elif defined(__WXGTK__)
     #include "wx/gtk/webviewhistoryitem_webkit.h"
-#elif defined(__WXMSW__)
+#elif defined(WX_WINDOWS)
     #include "wx/msw/webviewhistoryitem_ie.h"
 #else
     #error "wxWebView not implemented on this platform."
@@ -36,6 +36,7 @@
 class wxFSFile;
 class wxFileSystem;
 class wxWebView;
+class wxWebViewHistoryItem;
 
 enum class wxWebViewZoom
 {
@@ -96,7 +97,7 @@ enum class wxWebViewUserScriptInjectionTime
 };
 
 //Base class for custom scheme handlers
-class WXDLLIMPEXP_WEBVIEW wxWebViewHandler
+class wxWebViewHandler
 {
 public:
     wxWebViewHandler(const wxString& scheme)
@@ -111,14 +112,18 @@ private:
     wxString m_securityURL;
 };
 
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewNameStr[];
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewDefaultURLStr[];
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendDefault[];
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendIE[];
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendEdge[];
-extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendWebKit[];
+constexpr char wxWebViewNameStr[] = "wxWebView";
+constexpr char wxWebViewDefaultURLStr[] = "about:blank";
+constexpr char wxWebViewBackendEdge[] = "wxWebViewEdge";
+constexpr char wxWebViewBackendWebKit[] = "wxWebViewWebKit";
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewFactory
+#ifdef WX_WINDOWS
+constexpr char wxWebViewBackendDefault[] = "wxWebViewEdge";
+#else
+constexpr char wxWebViewBackendDefault[] = "wxWebViewWebKit";
+#endif
+
+class wxWebViewFactory
 {
 public:
     virtual wxWebView* Create() = 0;
@@ -135,7 +140,7 @@ public:
 
 WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxWebViewFactory>, wxStringWebViewFactoryMap);
 
-class WXDLLIMPEXP_WEBVIEW wxWebView : public wxControl
+class wxWebView : public wxControl
 {
 public:
     wxWebView()
@@ -274,16 +279,16 @@ protected:
 
 private:
     static void InitFactoryMap();
-    static wxStringWebViewFactoryMap::iterator FindFactory(const wxString &backend);
+    static wxStringWebViewFactoryMap::iterator FindFactory(const std::string& backend);
 
+    std::string m_findText;
     bool m_showMenu;
-    wxString m_findText;
     static wxStringWebViewFactoryMap m_factoryMap;
 
     wxDECLARE_ABSTRACT_CLASS(wxWebView);
 };
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewEvent : public wxNotifyEvent
+class wxWebViewEvent : public wxNotifyEvent
 {
 public:
     wxWebViewEvent() = default;

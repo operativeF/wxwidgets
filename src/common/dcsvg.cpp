@@ -494,32 +494,15 @@ void wxSVGFileDC::SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode)
 wxIMPLEMENT_ABSTRACT_CLASS(wxSVGFileDCImpl, wxDCImpl);
 
 wxSVGFileDCImpl::wxSVGFileDCImpl(wxSVGFileDC* owner,
-                                 const std::string& filename,
-                                 wxSize dimen,
-                                 double dpi,
-                                 const std::string& title)
-    : wxDCImpl(owner)
+                const std::string& filename,
+                wxSize dimen,
+                double dpi,
+                const std::string& title)
+    : wxDCImpl{owner},
+      m_width{dimen.x},
+      m_height{dimen.y},
+      m_dpi{dpi}
 {
-    Init(filename, dimen, dpi, title);
-}
-
-void wxSVGFileDCImpl::Init(const std::string& filename,
-                           wxSize dimen,
-                           double dpi,
-                           const std::string& title)
-{
-    m_width = dimen.x;
-    m_height = dimen.y;
-
-    m_dpi = dpi;
-
-    m_OK = true;
-
-    m_clipUniqueId = 0;
-    m_clipNestingLevel = 0;
-
-    m_gradientUniqueId = 0;
-
     m_mm_to_pix_x = dpi / 25.4;
     m_mm_to_pix_y = dpi / 25.4;
 
@@ -532,13 +515,8 @@ void wxSVGFileDCImpl::Init(const std::string& filename,
     m_brush = *wxWHITE_BRUSH;
 
     m_filename = filename;
-    m_graphics_changed = true;
 
-    m_renderingMode = wxSVGShapeRenderingMode::Auto;
-
-    ////////////////////code here
-
-    m_bmp_handler.reset();
+        m_bmp_handler.reset();
 
     if ( m_filename.empty() )
         m_outfile.reset();

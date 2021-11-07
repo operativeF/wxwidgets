@@ -274,25 +274,30 @@ private:
     void DoStartNewGraphics();
 
     std::string         m_filename;
-    bool                m_OK;
-    bool                m_graphics_changed;  // set by Set{Brush,Pen}()
-    int                 m_width;
-    int                 m_height;
-    double              m_dpi;
+
     std::unique_ptr<wxFileOutputStream> m_outfile;
     std::unique_ptr<wxSVGBitmapHandler> m_bmp_handler; // class to handle bitmaps
-    wxSVGShapeRenderingMode m_renderingMode;
 
     // The clipping nesting level is incremented by every call to
     // SetClippingRegion() and reset when DestroyClippingRegion() is called.
-    size_t m_clipNestingLevel;
+    size_t m_clipNestingLevel{0};
 
     // Unique ID for every clipping graphics group: this is simply always
     // incremented in each SetClippingRegion() call.
-    size_t m_clipUniqueId;
+    size_t m_clipUniqueId{0};
 
     // Unique ID for every gradient.
-    size_t m_gradientUniqueId;
+    size_t m_gradientUniqueId{0};
+
+    double              m_dpi;
+
+    int                 m_width;
+    int                 m_height;
+
+    wxSVGShapeRenderingMode m_renderingMode{wxSVGShapeRenderingMode::Auto};
+
+    bool                m_OK{true};
+    bool                m_graphics_changed{true};  // set by Set{Brush,Pen}()
 
     wxDECLARE_ABSTRACT_CLASS(wxSVGFileDCImpl);
 };
