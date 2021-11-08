@@ -22,167 +22,6 @@
 #include "wx/stringutils.h"
 
 // ----------------------------------------------------------------------------
-// wxTextEntryHintData
-// ----------------------------------------------------------------------------
-
-class wxTextEntryHintData : public wxEvtHandler
-{
-public:
-    wxTextEntryHintData(wxTextEntryBase *entry, wxWindow *win)
-        : m_entry(entry),
-          m_win(win),
-          m_text(m_entry->GetValue())
-    {
-        // We push ourselves as the event handler because this allows us to
-        // handle events before the user-defined handlers and notably process
-        // wxEVT_TEXT even if the user code already handles it, which is vital
-        // as if we don't get this event, we would always set the control text
-        // to the hint when losing focus, instead of preserving the text
-        // entered by user. Of course, the same problem could still happen if
-        // the user code pushed their own event handler before this one and
-        // didn't skip wxEVT_TEXT in it, but there doesn't seem anything we can
-        // do about this anyhow and this at least takes care of the much more
-        // common case.
-        m_win->PushEventHandler(this);
-
-        Bind(wxEVT_SET_FOCUS, &wxTextEntryHintData::OnSetFocus, this);
-        Bind(wxEVT_KILL_FOCUS, &wxTextEntryHintData::OnKillFocus, this);
-        Bind(wxEVT_TEXT, &wxTextEntryHintData::OnTextChanged, this);
-    }
-
-    ~wxTextEntryHintData()
-    {
-        m_win->PopEventHandler();
-    }
-
-    wxTextEntryHintData(const wxTextEntryHintData&) = delete;
-	wxTextEntryHintData& operator=(const wxTextEntryHintData&) = delete;
-
-    // Get the real text of the control such as it was before we replaced it
-    // with the hint.
-    const std::string& GetText() const { return m_text; }
-
-    // Set the hint to show, shouldn't be empty normally.
-    //
-    // This should be called after creating a new wxTextEntryHintData object
-    // and may be called more times in the future.
-    void SetHintString(const std::string& hint)
-    {
-        m_hint = hint;
-
-        if ( !m_win->HasFocus() )
-            ShowHintIfAppropriate();
-        //else: The new hint will be shown later when we lose focus.
-    }
-
-    const std::string& GetHintString() const { return m_hint; }
-
-    // This is called whenever the text control contents changes.
-    //
-    // We call it ourselves when this change generates an event but it's also
-    // necessary to call it explicitly from wxTextEntry::ChangeValue() as it,
-    // by design, does not generate any events.
-    void HandleTextUpdate(const std::string& text)
-    {
-        m_text = text;
-
-        // If we're called because of a call to Set or ChangeValue(), the
-        // control may still have the hint text colour, reset it in this case.
-        RestoreTextColourIfNecessary();
-    }
-
-private:
-    // Show the hint in the window if we should do it, i.e. if the window
-    // doesn't have any text of its own.
-    void ShowHintIfAppropriate()
-    {
-        // Never overwrite existing window text.
-        if ( !m_text.empty() )
-            return;
-
-        // Save the old text colour and set a more inconspicuous one for the
-        // hint.
-        if (!m_colFg.IsOk())
-        {
-            m_colFg = m_win->GetForegroundColour();
-            m_win->SetForegroundColour(*wxLIGHT_GREY);
-        }
-
-        m_entry->DoSetValue(m_hint, wxTextEntryBase::SetValue_NoEvent);
-    }
-
-    // Restore the original text colour if we had changed it to show the hint
-    // and not restored it yet.
-    void RestoreTextColourIfNecessary()
-    {
-        if ( m_colFg.IsOk() )
-        {
-            m_win->SetForegroundColour(m_colFg);
-            m_colFg = wxColour();
-        }
-    }
-
-    void OnSetFocus(wxFocusEvent& event)
-    {
-        // If we had been showing the hint before, remove it now and restore
-        // the normal colour.
-        if ( m_text.empty() )
-        {
-            RestoreTextColourIfNecessary();
-
-            m_entry->DoSetValue("", wxTextEntryBase::SetValue_NoEvent);
-        }
-
-        event.Skip();
-    }
-
-    void OnKillFocus(wxFocusEvent& event)
-    {
-        // Restore the hint if the user didn't enter anything.
-        ShowHintIfAppropriate();
-
-        event.Skip();
-    }
-
-    void OnTextChanged(wxCommandEvent& event)
-    {
-        // Update the stored window text.
-        //
-        // Notice that we can't use GetValue() nor wxCommandEvent::GetString()
-        // which uses it internally because this would just forward back to us
-        // so go directly to the private method which returns the real control
-        // contents.
-        HandleTextUpdate(m_entry->DoGetValue());
-
-        event.Skip();
-    }
-
-
-    // the text control we're associated with (as its interface and its window)
-    wxTextEntryBase * const m_entry;
-    wxWindow * const m_win;
-
-    // the original foreground colour of m_win before we changed it
-    wxColour m_colFg;
-
-    // The hint passed to wxTextEntry::SetHint(), never empty.
-    std::string m_hint;
-
-    // The real text of the window.
-    std::string m_text;
-
-};
-
-// ============================================================================
-// wxTextEntryBase implementation
-// ============================================================================
-
-wxTextEntryBase::~wxTextEntryBase()
-{
-    delete m_hintData;
-}
-
-// ----------------------------------------------------------------------------
 // text accessors
 // ----------------------------------------------------------------------------
 
@@ -392,15 +231,14 @@ bool wxTextEntryBase::SetHint(const std::string& hint)
     if ( !hint.empty() )
     {
         if ( !m_hintData )
-            m_hintData = new wxTextEntryHintData(this, GetEditableWindow());
+            m_hintData = std::make_unique<wxTextEntryHintData>(this, GetEditableWindow());
 
         m_hintData->SetHintString(hint);
     }
     else if ( m_hintData )
     {
         // Setting empty hint removes any currently set one.
-        delete m_hintData;
-        m_hintData = nullptr;
+        m_hintData.reset();
     }
     //else: Setting empty hint when we don't have any doesn't do anything.
 
