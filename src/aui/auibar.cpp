@@ -852,12 +852,6 @@ bool wxAuiToolBar::Create(wxWindow* parent,
     return true;
 }
 
-wxAuiToolBar::~wxAuiToolBar()
-{
-    delete m_art;
-    delete m_sizer;
-}
-
 void wxAuiToolBar::SetWindowStyleFlag(unsigned int style)
 {
     GetOrientation(style);      // assert if style is invalid
@@ -884,11 +878,9 @@ void wxAuiToolBar::SetWindowStyleFlag(unsigned int style)
         SetToolTextOrientation(wxAUI_TBTOOL_TEXT_BOTTOM);
 }
 
-void wxAuiToolBar::SetArtProvider(wxAuiToolBarArt* art)
+void wxAuiToolBar::SetArtProvider(std::unique_ptr<wxAuiToolBarArt> art)
 {
-    delete m_art;
-
-    m_art = art;
+    m_art = std::move(art);
 
     if (m_art)
     {
@@ -899,7 +891,7 @@ void wxAuiToolBar::SetArtProvider(wxAuiToolBarArt* art)
 
 wxAuiToolBarArt* wxAuiToolBar::GetArtProvider() const
 {
-    return m_art;
+    return m_art.get();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
@@ -1827,8 +1819,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
 {
     // Remove old sizer before adding any controls in this tool bar, which are
     // elements of this sizer, to the new sizer below.
-    delete m_sizer;
-    m_sizer = nullptr;
+    m_sizer.reset();
 
     // create the new sizer to add toolbar elements to
     wxBoxSizer* sizer = new wxBoxSizer(horizontal ? wxHORIZONTAL : wxVERTICAL);
@@ -1997,7 +1988,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
 
 
     // the outside sizer helps us apply the "top" and "bottom" padding
-    wxBoxSizer* outside_sizer = new wxBoxSizer(horizontal ? wxVERTICAL : wxHORIZONTAL);
+    auto outside_sizer = std::make_unique<wxBoxSizer>(horizontal ? wxVERTICAL : wxHORIZONTAL);
 
     // add "top" padding
     if (m_topPadding > 0)
@@ -2020,7 +2011,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             outside_sizer->Add(m_bottomPadding, 1);
     }
 
-    m_sizer = outside_sizer;
+    m_sizer = std::move(outside_sizer);
 
     // calculate the rock-bottom minimum size
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)

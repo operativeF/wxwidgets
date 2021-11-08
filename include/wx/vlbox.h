@@ -12,12 +12,11 @@
 #define _WX_VLBOX_H_
 
 #include "wx/vscroll.h"         // base class
+#include "wx/selstore.h"
 #include "wx/geometry/rect.h"
 #include "wx/bitmap.h"
 
 #include <string>
-
-class wxSelectionStore;
 
 inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
 
@@ -64,8 +63,6 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const std::string& name = wxVListBoxNameStr);
-
-    ~wxVListBox();
 
     // get the number of items in the control
     size_t GetItemCount() const { return GetRowCount(); }
@@ -286,7 +283,7 @@ private:
     int m_anchor{wxNOT_FOUND};
 
     // the object managing our selected items if not NULL
-    wxSelectionStore *m_selStore{nullptr};
+    std::unique_ptr<wxSelectionStore> m_selStore;
 
     // margins
     wxPoint m_ptMargins;

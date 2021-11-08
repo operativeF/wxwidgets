@@ -308,9 +308,7 @@ public:
 
 class wxAuiGenericToolBarArt : public wxAuiToolBarArt
 {
-
 public:
-
     wxAuiGenericToolBarArt();
     ~wxAuiGenericToolBarArt();
 
@@ -430,9 +428,9 @@ class wxAuiToolBar : public wxControl
 {
 public:
     wxAuiToolBar()
+        : m_art{std::make_unique<wxAuiDefaultToolBarArt>()},
+          m_sizer{std::make_unique<wxBoxSizer>(wxHORIZONTAL)}
     {
-        m_sizer = new wxBoxSizer(wxHORIZONTAL);
-        m_art = new wxAuiDefaultToolBarArt;
         m_toolPacking = FromDIP(2);
         m_toolBorderPadding = FromDIP(3);
     }
@@ -442,16 +440,14 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxAUI_TB_DEFAULT_STYLE)
+        : m_art{std::make_unique<wxAuiDefaultToolBarArt>()},
+          m_sizer{std::make_unique<wxBoxSizer>(wxHORIZONTAL)}
     {
-        m_sizer = new wxBoxSizer(wxHORIZONTAL);
-        m_art = new wxAuiDefaultToolBarArt;
         m_toolPacking = FromDIP(2);
         m_toolBorderPadding = FromDIP(3);
         
         Create(parent, id, pos, size, style);
     }
-
-    ~wxAuiToolBar();
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -461,7 +457,7 @@ public:
 
     void SetWindowStyleFlag(unsigned int style) override;
 
-    void SetArtProvider(wxAuiToolBarArt* art);
+    void SetArtProvider(std::unique_ptr<wxAuiToolBarArt> art);
     wxAuiToolBarArt* GetArtProvider() const;
 
     bool SetFont(const wxFont& font) override;
@@ -634,10 +630,9 @@ protected: // handlers
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
 protected:
-
     wxAuiToolBarItemArray m_items;      // array of toolbar items
-    wxAuiToolBarArt* m_art;             // art provider
-    wxBoxSizer* m_sizer;                // main sizer for toolbar
+    std::unique_ptr<wxAuiToolBarArt> m_art;             // art provider
+    std::unique_ptr<wxBoxSizer> m_sizer;                // main sizer for toolbar
     wxAuiToolBarItem* m_actionItem{nullptr};    // item that's being acted upon (pressed)
     wxAuiToolBarItem* m_tipItem{nullptr};       // item that has its tooltip shown
     wxBitmap m_bitmap;                  // double-buffer bitmap

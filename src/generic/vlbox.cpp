@@ -62,7 +62,7 @@ bool wxVListBox::Create(wxWindow *parent,
         return false;
 
     if ( style & wxLB_MULTIPLE )
-        m_selStore = new wxSelectionStore;
+        m_selStore = std::make_unique<wxSelectionStore>();
 
     // make sure the native widget has the right colour since we do
     // transparent drawing by default
@@ -76,11 +76,6 @@ bool wxVListBox::Create(wxWindow *parent,
     SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     return true;
-}
-
-wxVListBox::~wxVListBox()
-{
-    delete m_selStore;
 }
 
 void wxVListBox::SetItemCount(size_t count)
