@@ -209,9 +209,9 @@ void wxAuiGenericTabArt::UpdateColoursFromSystem()
     m_disabledWindowListBmp = wxAuiBitmapFromBits(list_bits, wxSize{16, 16}, wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
 }
 
-wxAuiTabArt* wxAuiGenericTabArt::Clone()
+std::unique_ptr<wxAuiTabArt> wxAuiGenericTabArt::Clone()
 {
-    return new wxAuiGenericTabArt(*this);
+    return std::make_unique<wxAuiGenericTabArt>(*this);
 }
 
 void wxAuiGenericTabArt::SetFlags(unsigned int flags)
@@ -920,9 +920,9 @@ wxAuiSimpleTabArt::wxAuiSimpleTabArt()
 
 }
 
-wxAuiTabArt* wxAuiSimpleTabArt::Clone()
+std::unique_ptr<wxAuiTabArt> wxAuiSimpleTabArt::Clone()
 {
-    return new wxAuiSimpleTabArt(*this);
+    return std::make_unique<wxAuiSimpleTabArt>(*this);
 }
 
 void wxAuiSimpleTabArt::SetFlags(unsigned int flags)

@@ -20,7 +20,7 @@ public:
 
     wxAuiMSWTabArt();
 
-    wxAuiTabArt* Clone() override;
+    std::unique_ptr<wxAuiTabArt> Clone() override;
     void SetSizingInfo(const wxSize& tabCtrlSize,
         size_t tabCount) override;
 

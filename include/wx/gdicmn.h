@@ -299,7 +299,7 @@ private:
     // first time, do nothing after this
     void Initialize();
 
-    wxStringToColourHashMap *m_map{nullptr};
+    std::unique_ptr<wxStringToColourHashMap> m_map;
 };
 
 class wxResourceCache: public wxList

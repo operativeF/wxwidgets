@@ -58,7 +58,7 @@ public:
                 unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
 
-    void SetArtProvider(wxAuiTabArt* provider);
+    void SetArtProvider(std::unique_ptr<wxAuiTabArt> provider);
     wxAuiTabArt* GetArtProvider();
     wxAuiNotebook* GetNotebook() const;
 

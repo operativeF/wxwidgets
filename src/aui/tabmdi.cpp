@@ -101,11 +101,11 @@ bool wxAuiMDIParentFrame::Create(wxWindow *parent,
 }
 
 
-void wxAuiMDIParentFrame::SetArtProvider(wxAuiTabArt* provider)
+void wxAuiMDIParentFrame::SetArtProvider(std::unique_ptr<wxAuiTabArt> provider)
 {
     if (m_pClientWindow)
     {
-        m_pClientWindow->SetArtProvider(provider);
+        m_pClientWindow->SetArtProvider(std::move(provider));
     }
 }
 

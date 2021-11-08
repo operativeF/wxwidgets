@@ -24,9 +24,9 @@ wxAuiMSWTabArt::wxAuiMSWTabArt()
     m_themed = wxUxThemeIsActive();
 }
 
-wxAuiTabArt* wxAuiMSWTabArt::Clone()
+std::unique_ptr<wxAuiTabArt> wxAuiMSWTabArt::Clone()
 {
-    return new wxAuiMSWTabArt(*this);
+    return std::make_unique<wxAuiMSWTabArt>(*this);
 }
 
 void wxAuiMSWTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,

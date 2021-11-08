@@ -124,9 +124,9 @@ class wxAuiTabContainer
 {
 public:
     wxAuiTabContainer();
-    virtual ~wxAuiTabContainer();
+    virtual ~wxAuiTabContainer() = default;
 
-    void SetArtProvider(wxAuiTabArt* art);
+    void SetArtProvider(std::unique_ptr<wxAuiTabArt> art);
     wxAuiTabArt* GetArtProvider() const;
 
     void SetFlags(unsigned int flags);
@@ -181,10 +181,10 @@ protected:
     
     wxRect m_rect;
     
-    wxAuiTabArt* m_art;
+    std::unique_ptr<wxAuiTabArt> m_art;
 
-    size_t m_tabOffset;
-    unsigned int m_flags;
+    size_t m_tabOffset{0};
+    unsigned int m_flags{0};
 };
 
 
@@ -271,7 +271,7 @@ public:
                 unsigned int style = 0);
 
     void SetWindowStyleFlag(unsigned int style) override;
-    void SetArtProvider(wxAuiTabArt* art);
+    void SetArtProvider(std::unique_ptr<wxAuiTabArt> art);
     wxAuiTabArt* GetArtProvider() const;
 
     virtual void SetUniformBitmapSize(const wxSize& size);

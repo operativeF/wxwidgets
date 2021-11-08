@@ -97,8 +97,6 @@ wxColourDatabase::~wxColourDatabase()
     if ( m_map )
     {
         WX_CLEAR_HASH_MAP(wxStringToColourHashMap, *m_map);
-
-        delete m_map;
     }
 }
 
@@ -111,7 +109,7 @@ void wxColourDatabase::Initialize()
         return;
     }
 
-    m_map = new wxStringToColourHashMap;
+    m_map = std::make_unique<wxStringToColourHashMap>();
 
     struct wxColourDesc
     {

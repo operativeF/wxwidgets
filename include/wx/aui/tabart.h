@@ -43,7 +43,7 @@ class wxAuiTabArt
 public:
     virtual ~wxAuiTabArt() = default;
 
-    virtual wxAuiTabArt* Clone() = 0;
+    virtual std::unique_ptr<wxAuiTabArt> Clone() = 0;
     virtual void SetFlags(unsigned int flags) = 0;
 
     virtual void SetSizingInfo(const wxSize& tabCtrlSize,
@@ -120,7 +120,7 @@ class wxAuiGenericTabArt : public wxAuiTabArt
 public:
     wxAuiGenericTabArt();
 
-    wxAuiTabArt* Clone() override;
+    std::unique_ptr<wxAuiTabArt> Clone() override;
     void SetFlags(unsigned int flags) override;
     void SetSizingInfo(const wxSize& tabCtrlSize,
                        size_t tabCount) override;
@@ -223,7 +223,7 @@ class wxAuiSimpleTabArt : public wxAuiTabArt
 public:
     wxAuiSimpleTabArt();
 
-    wxAuiTabArt* Clone() override;
+    std::unique_ptr<wxAuiTabArt> Clone() override;
     void SetFlags(unsigned int flags) override;
 
     void SetSizingInfo(const wxSize& tabCtrlSize,

@@ -410,7 +410,7 @@ public:
 
     static wxAuiManager* GetManager(wxWindow* window);
 
-    void SetArtProvider(wxAuiDockArt* artProvider);
+    void SetArtProvider(std::unique_ptr<wxAuiDockArt> artProvider);
     wxAuiDockArt* GetArtProvider() const;
 
     wxAuiPaneInfo& GetPane(wxWindow* window);
@@ -561,7 +561,7 @@ protected:
     };
 
     wxWindow* m_frame{nullptr};           // the window being managed
-    wxAuiDockArt* m_art;            // dock art object which does all drawing
+    std::unique_ptr<wxAuiDockArt> m_art;            // dock art object which does all drawing
     unsigned int m_flags;        // manager flags wxAUI_MGR_*
 
     wxAuiPaneInfoArray m_panes;     // array of panes structures

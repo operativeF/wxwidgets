@@ -618,8 +618,6 @@ wxAuiManager::~wxAuiManager()
             delete pinfo.window;
     }
 #endif
-
-    delete m_art;
 }
 
 void wxAuiManager::OnSysColourChanged(wxSysColourChangedEvent& event)
@@ -931,7 +929,7 @@ wxWindow* wxAuiManager::GetManagedWindow() const
 
 wxAuiDockArt* wxAuiManager::GetArtProvider() const
 {
-    return m_art;
+    return m_art.get();
 }
 
 void wxAuiManager::ProcessMgrEvent(wxAuiManagerEvent& event)
@@ -951,13 +949,10 @@ void wxAuiManager::ProcessMgrEvent(wxAuiManagerEvent& event)
 // plugable look-and-feel features.  The pointer that is
 // passed to this method subsequently belongs to wxAuiManager,
 // and is deleted in the frame manager destructor
-void wxAuiManager::SetArtProvider(wxAuiDockArt* art_provider)
+void wxAuiManager::SetArtProvider(std::unique_ptr<wxAuiDockArt> art_provider)
 {
-    // delete the last art provider, if any
-    delete m_art;
-
     // assign the new art provider
-    m_art = art_provider;
+    m_art = std::move(art_provider);
 }
 
 

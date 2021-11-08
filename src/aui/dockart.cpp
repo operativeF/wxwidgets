@@ -233,9 +233,9 @@ wxAuiDefaultDockArt::wxAuiDefaultDockArt()
     InitBitmaps();
 }
 
-wxAuiDockArt* wxAuiDefaultDockArt::Clone()
+std::unique_ptr<wxAuiDockArt> wxAuiDefaultDockArt::Clone()
 {
-    return new wxAuiDefaultDockArt(*this);
+    return std::make_unique<wxAuiDefaultDockArt>(*this);
 }
 
 void

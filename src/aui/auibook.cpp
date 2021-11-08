@@ -64,26 +64,17 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAuiNotebookEvent, wxBookCtrlEvent);
 
 
 wxAuiTabContainer::wxAuiTabContainer()
+    : m_art{std::make_unique<wxAuiDefaultTabArt>()}
 {
-    m_tabOffset = 0;
-    m_flags = 0;
-    m_art = new wxAuiDefaultTabArt;
-
     AddButton(wxAUI_BUTTON_LEFT, wxLEFT);
     AddButton(wxAUI_BUTTON_RIGHT, wxRIGHT);
     AddButton(wxAUI_BUTTON_WINDOWLIST, wxRIGHT);
     AddButton(wxAUI_BUTTON_CLOSE, wxRIGHT);
 }
 
-wxAuiTabContainer::~wxAuiTabContainer()
+void wxAuiTabContainer::SetArtProvider(std::unique_ptr<wxAuiTabArt> art)
 {
-    delete m_art;
-}
-
-void wxAuiTabContainer::SetArtProvider(wxAuiTabArt* art)
-{
-    delete m_art;
-    m_art = art;
+    m_art = std::move(art);
 
     if (m_art)
     {
@@ -93,7 +84,7 @@ void wxAuiTabContainer::SetArtProvider(wxAuiTabArt* art)
 
 wxAuiTabArt* wxAuiTabContainer::GetArtProvider() const
 {
-    return m_art;
+    return m_art.get();
 }
 
 void wxAuiTabContainer::SetFlags(unsigned int flags)
@@ -1704,7 +1695,7 @@ void wxAuiNotebook::InitNotebook(unsigned int style)
     m_selectedFont = *wxNORMAL_FONT;
     m_selectedFont.SetWeight(wxFONTWEIGHT_BOLD);
 
-    SetArtProvider(new wxAuiDefaultTabArt);
+    SetArtProvider(std::make_unique<wxAuiDefaultTabArt>());
 
     m_dummyWnd = new wxWindow(this, wxID_ANY, wxPoint(0,0), wxSize(0,0));
     m_dummyWnd->SetSize(FromDIP(wxSize(200, 200)));
@@ -1731,9 +1722,9 @@ wxAuiNotebook::~wxAuiNotebook()
     m_mgr.UnInit();
 }
 
-void wxAuiNotebook::SetArtProvider(wxAuiTabArt* art)
+void wxAuiNotebook::SetArtProvider(std::unique_ptr<wxAuiTabArt> art)
 {
-    m_tabs.SetArtProvider(art);
+    m_tabs.SetArtProvider(std::move(art));
 
     // Update the height and do nothing else if it did something but otherwise
     // (i.e. if the new art provider uses the same height as the old one) we

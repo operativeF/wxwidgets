@@ -35,7 +35,7 @@ class wxAuiDockArt
 public:
     virtual ~wxAuiDockArt() = default;
 
-    virtual wxAuiDockArt* Clone() = 0;
+    virtual std::unique_ptr<wxAuiDockArt> Clone() = 0;
     virtual int GetMetric(int id) = 0;
     virtual void SetMetric(int id, int newVal) = 0;
     virtual void SetFont(int id, const wxFont& font) = 0;
@@ -92,7 +92,7 @@ class wxAuiDefaultDockArt : public wxAuiDockArt
 public:
     wxAuiDefaultDockArt();
 
-    wxAuiDockArt* Clone() override;
+    std::unique_ptr<wxAuiDockArt> Clone() override;
     int GetMetric(int metricId) override;
     void SetMetric(int metricId, int newVal) override;
     wxColour GetColour(int id) override;
