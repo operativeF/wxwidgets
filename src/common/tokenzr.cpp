@@ -11,7 +11,7 @@
 #include "wx/tokenzr.h"
 #include "wx/crt.h"
 
-#include <vector>
+import <vector>;
 
 // ============================================================================
 // implementation

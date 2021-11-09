@@ -25,7 +25,7 @@
 #include "wx/osx/private.h"
 #endif
 
-#include <array>
+import <array>;
 
 // -- GUI helper classes and functions --
 

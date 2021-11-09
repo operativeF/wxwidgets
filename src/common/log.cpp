@@ -32,9 +32,9 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <iostream>
-#include <vector>
+import <algorithm>;
+import <iostream>;
+import <vector>;
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";

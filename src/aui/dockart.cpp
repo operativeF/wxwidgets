@@ -39,7 +39,7 @@
 #endif
 #endif
 
-#include <cmath>
+import <cmath>;
 
 wxColor wxAuiLightContrastColour(const wxColour& c)
 {

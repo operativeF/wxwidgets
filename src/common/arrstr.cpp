@@ -32,8 +32,8 @@
     #endif
 #endif
 
-#include <algorithm>
-#include <functional>
+import <algorithm>;
+import <functional>;
 
 // ===========================================================================
 // wxJoin and wxSplit

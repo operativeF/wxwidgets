@@ -52,9 +52,9 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <algorithm>
-#include <array>
-#include <vector>
+import <algorithm>;
+import <array>;
+import <vector>;
 
 #if defined(_MSC_VER) || defined(__MINGW32__)
     wxDECL_FOR_STRICT_MINGW32(wchar_t*, _wgetcwd, (wchar_t*, int))

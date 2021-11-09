@@ -46,9 +46,9 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <memory>
-#include <vector>
+import <algorithm>;
+import <memory>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // simple types

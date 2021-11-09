@@ -44,9 +44,6 @@
  *    wxDateTime::Tm.
  */
 
-
-
-
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
 #ifdef WX_WINDOWS

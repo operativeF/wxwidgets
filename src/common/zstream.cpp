@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_ZLIB && wxUSE_STREAMS
 
 #include "wx/zstream.h"

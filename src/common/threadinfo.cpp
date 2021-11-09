@@ -11,11 +11,11 @@
 
 #if wxUSE_THREADS
 
-#include <memory>
-#include <vector>
-
 #include "wx/tls.h"
 #include "wx/thread.h"
+
+import <memory>;
+import <vector>;
 
 namespace
 {

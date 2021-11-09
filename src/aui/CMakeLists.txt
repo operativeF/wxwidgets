@@ -44,7 +44,7 @@ target_include_directories(wxaui
 
 target_link_libraries(wxaui
     PRIVATE
-        #stdlibcore
+        stdlibcore
         Microsoft.GSL::GSL
 )
 

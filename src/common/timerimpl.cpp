@@ -15,7 +15,7 @@
 #include "wx/private/timer.h"
 #include "wx/thread.h"
 
-#include <chrono>
+import <chrono>;
 
 using namespace std::chrono_literals;
 

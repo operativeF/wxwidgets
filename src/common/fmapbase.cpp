@@ -31,10 +31,11 @@
     #include "wx/memconf.h"
 #endif
 
-#include <array>
 #include <cwctype>
-#include <string>
-#include <string_view>
+
+import <array>;
+import <string>;
+import <string_view>;
 
 // ----------------------------------------------------------------------------
 // constants

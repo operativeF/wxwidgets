@@ -13,7 +13,7 @@
 #include "wx/uri.h"
 #include "wx/arrstr.h"
 
-#include <vector>
+import <vector>;
 
 // ---------------------------------------------------------------------------
 // definitions

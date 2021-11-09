@@ -23,6 +23,7 @@
 
 #include "wx/utils.h"
 #include "wx/dcclient.h"
+#include "wx/dnd.h"
 #include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/textctrl.h"

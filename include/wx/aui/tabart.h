@@ -27,7 +27,7 @@
 #include "wx/bitmap.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;

@@ -13,7 +13,7 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 
-#include <algorithm>
+import <algorithm>;
 
 constexpr char TRACE_MODULE[] = "module";
 

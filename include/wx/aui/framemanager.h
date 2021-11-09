@@ -27,7 +27,7 @@
 #include "wx/sizer.h"
 #include "wx/bitmap.h"
 
-#include <vector>
+import <vector>;
 
 class wxWindow;
 

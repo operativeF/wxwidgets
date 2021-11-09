@@ -11,7 +11,7 @@
 #include "wx/msw/private.h"
 #include "wx/power.h"
 
-#include <atomic>
+import <atomic>;
 
 // ----------------------------------------------------------------------------
 // wxPowerResource

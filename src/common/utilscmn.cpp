@@ -8,10 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #include "wx/debug.h"
-
 
 // This is a needed to get the declaration of the global "environ" variable
 // from MinGW headers which don't declare it there when in strict ANSI mode. We
@@ -84,17 +81,6 @@
     #include "wx/osx/private.h"
 #endif
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <vector>
-#include <utility>
-
-#include <fmt/core.h>
-
 #if wxUSE_GUI
     // Include the definitions of GTK_XXX_VERSION constants.
     #ifdef __WXGTK20__
@@ -105,6 +91,17 @@
         #include <QtCore/QtGlobal>       // for QT_VERSION_STR constants
     #endif
 #endif
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <fmt/core.h>
+
+import <algorithm>;
+import <memory>;
+import <string>;
+import <vector>;
+import <utility>;
 
 #if wxUSE_BASE
 

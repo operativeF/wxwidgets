@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FILESYSTEM
 
 #include "wx/private/fileback.h"

@@ -36,8 +36,8 @@
     #include "wx/msw/private.h"
 #endif  //windows.h
 
-#include  <cctype>
-#include  <cstdlib>
+import <cctype>;
+import <cstdlib>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -27,7 +27,7 @@
 #include "wx/containr.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxAuiNotebook;
 

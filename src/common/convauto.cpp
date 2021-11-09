@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/convauto.h"
 #include "wx/private/unicode.h"
 

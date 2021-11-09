@@ -102,7 +102,7 @@
 
 #include <cassert>
 #if defined(wxHAS_NATIVE_READLINK)
-    #include <vector>
+    import <vector>;
 #endif
 
 #ifndef S_ISREG

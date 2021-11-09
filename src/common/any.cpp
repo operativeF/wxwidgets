@@ -20,8 +20,8 @@
 
 #include <fmt/core.h>
 
-#include <memory>
-#include <vector>
+import <memory>;
+import <vector>;
 
 using namespace wxPrivate;
 

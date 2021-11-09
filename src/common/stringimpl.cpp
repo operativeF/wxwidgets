@@ -16,13 +16,14 @@
  *  3) Unlock() decrements nRefs and frees memory if it goes to 0
  */
 
-#include <cstdlib>
-#include <cstring>
+#include "wx/stringimpl.h"
+#include "wx/wxcrt.h"
+
 #include <cctype>
 #include <cerrno>
 
-#include "wx/stringimpl.h"
-#include "wx/wxcrt.h"
+import <cstdlib>;
+import <cstring>;
 
 // ---------------------------------------------------------------------------
 // static class variables definition

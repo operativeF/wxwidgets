@@ -81,7 +81,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <tuple>
+import <tuple>;
 
 // ----------------------------------------------------------------------------
 // constants

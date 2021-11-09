@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/ustring.h"
 #include "wx/private/unicode.h"
 #include "wx/crt.h"

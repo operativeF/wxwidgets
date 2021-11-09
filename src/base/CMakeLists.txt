@@ -216,7 +216,7 @@ target_include_directories(wxsharedcmn
 target_link_libraries(wxsharedcmn
     PRIVATE
         Microsoft.GSL::GSL
-        #stdlibcore
+        stdlibcore
 )
 
 if(wxUSE_ZLIB)
@@ -271,7 +271,7 @@ endif()
 target_link_libraries(wxbase
     PRIVATE
         wxsharedcmn
-        #stdlibcore
+        stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
     

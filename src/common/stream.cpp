@@ -19,7 +19,7 @@
 
 #include <gsl/gsl>
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -16,7 +16,7 @@
 #include "wx/apptrait.h"
 #include "wx/private/timer.h"
 
-#include <chrono>
+import <chrono>;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

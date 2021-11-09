@@ -35,7 +35,7 @@
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
 
-#include <unordered_map>
+import <unordered_map>;
 
 #if defined(WX_WINDOWS)
     #define wxHAVE_WIN32_MB2WC

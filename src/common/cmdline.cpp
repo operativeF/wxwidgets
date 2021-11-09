@@ -15,8 +15,8 @@
 #include "wx/app.h"
 #include "wx/cmdline.h"
 
-#include <vector>
-#include <charconv>
+import <vector>;
+import <charconv>;
 #include <clocale>             // for LC_ALL
 
 #if wxUSE_CMDLINE_PARSER

@@ -14,7 +14,7 @@
 #include "wx/memory.h"
 #include "wx/crt.h"
 
-#include <cstring>
+import <cstring>;
 
 // we must disable optimizations for VC.NET because otherwise its too eager
 // linker discards wxClassInfo objects in release build thus breaking many,

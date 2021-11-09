@@ -48,7 +48,7 @@
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/private/event.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

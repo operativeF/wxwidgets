@@ -413,7 +413,7 @@ target_link_libraries(wxcore
     PRIVATE
         wxsharedcmn
         wxbase
-        #stdlibcore
+        stdlibcore
         Boost::nowide
         fmt::fmt
         Microsoft.GSL::GSL
