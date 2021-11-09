@@ -470,3 +470,4 @@ dummy.pch
 /3rdparty/webview2
 
 /3rdparty/tmp
+*.pch
