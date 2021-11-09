@@ -471,3 +471,4 @@ dummy.pch
 
 /3rdparty/tmp
 *.pch
+*.pdb
