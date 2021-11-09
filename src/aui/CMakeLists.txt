@@ -47,5 +47,3 @@ target_link_libraries(wxaui
         stdlibcore
         Microsoft.GSL::GSL
 )
-
-target_compile_options(wxaui PRIVATE -translateInclude)

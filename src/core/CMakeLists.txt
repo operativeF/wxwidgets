@@ -481,21 +481,3 @@ if(wxUSE_LIBNOTIFY)
     wx_lib_include_directories(wxcore PUBLIC ${LIBNOTIFY_INCLUDE_DIRS})
     wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})
 endif()
-
-target_precompile_headers(wxcore
-    PRIVATE
-        # Include external library headers that are necessary.
-        <fmt/core.h>
-        <boost/nowide/convert.hpp>
-        <boost/nowide/stackstring.hpp>
-        <gsl/gsl>
-    
-        ${CMAKE_SOURCE_DIR}/include/wx/msw/wrapwin.h
-        ${CMAKE_SOURCE_DIR}/include/wx/defs.h
-        ${CMAKE_SOURCE_DIR}/include/wx/event.h
-        ${CMAKE_SOURCE_DIR}/include/wx/string.h
-        ${CMAKE_SOURCE_DIR}/include/wx/generic/grid.h
-        ${CMAKE_SOURCE_DIR}/include/wx/window.h
-        ${CMAKE_SOURCE_DIR}/include/wx/datetime.h
-        ${CMAKE_SOURCE_DIR}/include/wx/dataview.h
-)
