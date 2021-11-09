@@ -15,8 +15,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/arrstr.h"
-
 #include "wx/propgrid/property.h"
 #include "wx/propgrid/propgridpagestate.h"
 
@@ -966,8 +964,8 @@ public:
         SetPropertyValueString( id, value );
     }
 
-    // Sets value (wxArrayString) of a property.
-    void SetPropertyValue( wxPGPropArg id, const wxArrayString& value )
+    // Sets value (std::vector<wxString>) of a property.
+    void SetPropertyValue( wxPGPropArg id, const std::vector<wxString>& value )
     {
         wxVariant v(value);
         SetPropVal( id, v );

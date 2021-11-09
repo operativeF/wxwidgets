@@ -7,12 +7,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XRC && wxUSE_RADIOBOX
 
-#include "wx/arrstr.h"
 #include "wx/xrc/xh_radbx.h"
 #include "wx/intl.h"
 #include "wx/radiobox.h"

@@ -12,7 +12,6 @@
 #define _WX_WX_H_
 
 #include "wx/app.h"
-#include "wx/arrstr.h"
 #include "wx/defs.h"
 #include "wx/dynarray.h"
 #include "wx/event.h"

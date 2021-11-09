@@ -215,14 +215,14 @@ public:
 private:
     void ParseParams(const wxCmdLineParser& cmdline);
     void CompileRes();
-    wxArrayString PrepareTempFiles();
-    void FindFilesInXML(wxXmlNode *node, wxArrayString& flist, const wxString& inputPath);
+    std::vector<wxString> PrepareTempFiles();
+    void FindFilesInXML(wxXmlNode *node, std::vector<wxString>& flist, const wxString& inputPath);
 
-    wxString GetInternalFileName(const wxString& name, const wxArrayString& flist);
-    void DeleteTempFiles(const wxArrayString& flist);
-    void MakePackageZIP(const wxArrayString& flist);
-    void MakePackageCPP(const wxArrayString& flist);
-    void MakePackagePython(const wxArrayString& flist);
+    wxString GetInternalFileName(const wxString& name, const std::vector<wxString>& flist);
+    void DeleteTempFiles(const std::vector<wxString>& flist);
+    void MakePackageZIP(const std::vector<wxString>& flist);
+    void MakePackageCPP(const std::vector<wxString>& flist);
+    void MakePackagePython(const std::vector<wxString>& flist);
 
     void OutputGettext();
     ExtractedStrings FindStrings();
@@ -232,7 +232,7 @@ private:
 
     bool flagVerbose, flagCPP, flagPython, flagGettext, flagValidate, flagValidateOnly;
     wxString parOutput, parFuncname, parOutputPath, parSchemaFile;
-    wxArrayString parFiles;
+    std::vector<wxString> parFiles;
     int retCode;
 
     ArrayOfXRCWndClassData aXRCWndClassData;
@@ -356,7 +356,7 @@ void XmlResApp::ParseParams(const wxCmdLineParser& cmdline)
 
 void XmlResApp::CompileRes()
 {
-    wxArrayString files = PrepareTempFiles();
+    std::vector<wxString> files = PrepareTempFiles();
 
     if ( wxFileExists(parOutput) )
         wxRemoveFile(parOutput);
@@ -378,7 +378,7 @@ void XmlResApp::CompileRes()
 }
 
 
-wxString XmlResApp::GetInternalFileName(const wxString& name, const wxArrayString& flist)
+wxString XmlResApp::GetInternalFileName(const wxString& name, const std::vector<wxString>& flist)
 {
     wxString name2 = name;
     name2.Replace(wxT(":"), wxT("_"));
@@ -401,9 +401,9 @@ wxString XmlResApp::GetInternalFileName(const wxString& name, const wxArrayStrin
     return s;
 }
 
-wxArrayString XmlResApp::PrepareTempFiles()
+std::vector<wxString> XmlResApp::PrepareTempFiles()
 {
-    wxArrayString flist;
+    std::vector<wxString> flist;
 
     for (size_t i = 0; i < parFiles.GetCount(); i++)
     {
@@ -498,7 +498,7 @@ static bool NodeContainsFilename(wxXmlNode *node)
 }
 
 // find all files mentioned in structure, e.g. <bitmap>filename</bitmap>
-void XmlResApp::FindFilesInXML(wxXmlNode *node, wxArrayString& flist, const wxString& inputPath)
+void XmlResApp::FindFilesInXML(wxXmlNode *node, std::vector<wxString>& flist, const wxString& inputPath)
 {
     // Is 'node' XML node element?
     if (node == nullptr) return;
@@ -543,7 +543,7 @@ void XmlResApp::FindFilesInXML(wxXmlNode *node, wxArrayString& flist, const wxSt
 
 
 
-void XmlResApp::DeleteTempFiles(const wxArrayString& flist)
+void XmlResApp::DeleteTempFiles(const std::vector<wxString>& flist)
 {
     for (size_t i = 0; i < flist.GetCount(); i++)
         wxRemoveFile(parOutputPath + wxFILE_SEP_PATH + flist[i]);
@@ -551,7 +551,7 @@ void XmlResApp::DeleteTempFiles(const wxArrayString& flist)
 
 
 
-void XmlResApp::MakePackageZIP(const wxArrayString& flist)
+void XmlResApp::MakePackageZIP(const std::vector<wxString>& flist)
 {
     wxString files;
 
@@ -624,7 +624,7 @@ static wxString FileToCppArray(wxString filename, int num)
 }
 
 
-void XmlResApp::MakePackageCPP(const wxArrayString& flist)
+void XmlResApp::MakePackageCPP(const std::vector<wxString>& flist)
 {
     wxFFile file(parOutput, wxT("wt"));
     unsigned i;
@@ -782,7 +782,7 @@ static wxString FileToPythonArray(wxString filename, int num)
 }
 
 
-void XmlResApp::MakePackagePython(const wxArrayString& flist)
+void XmlResApp::MakePackagePython(const std::vector<wxString>& flist)
 {
     wxFFile file(parOutput, wxT("wt"));
     unsigned i;

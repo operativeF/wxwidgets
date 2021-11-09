@@ -2549,7 +2549,7 @@ wxString wxArrayStringProperty::ValueToString( wxVariant& WXUNUSED(value),
     return s;
 }
 
-// Converts wxArrayString to a string separated by delimiters and spaces.
+// Converts std::vector<wxString> to a string separated by delimiters and spaces.
 // preDelim is useful for "str1" "str2" style. Set flags to 1 to do slash
 // conversion.
 void

@@ -380,7 +380,7 @@ wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long fla
                     break;
                 case VT_BSTR:
                     {
-                        wxArrayString strings;
+                        std::vector<wxString> strings;
                         if ( wxSafeArray<VT_BSTR>::ConvertToArrayString(oleVariant.parray, strings) )
                             variant = strings;
                         else

@@ -61,7 +61,7 @@ wxRichTextAttr wxRichTextStyleDefinition::GetStyleMergedWithBase(const wxRichTex
     bool isBoxStyle  = IsKindOf(wxCLASSINFO(wxRichTextBoxStyleDefinition));
 
     // Collect the styles, detecting loops
-    wxArrayString styleNames;
+    std::vector<wxString> styleNames;
     wxList styles;
     const wxRichTextStyleDefinition* def = this;
     while (def)

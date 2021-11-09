@@ -9,9 +9,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/arrstr.h"
 #include "wx/crt.h"
 #include "wx/uri.h"
+#include "wx/arrstr.h"
 
 #include <vector>
 

@@ -137,7 +137,7 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
     PenStyleComboBox* odc;
 
     // Common list of items for all dialogs.
-    wxArrayString   arrItems;
+    std::vector<wxString>   arrItems;
 
     // Create common strings array
 //    arrItems.Add( "Solid" );

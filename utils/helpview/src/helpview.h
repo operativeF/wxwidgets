@@ -35,7 +35,7 @@ public:
 
 #ifdef __WXMAC__
     /// Respond to Apple Event for opening a document
-    virtual void MacOpenFiles(const wxArrayString& fileNames);
+    virtual void MacOpenFiles(const std::vector<wxString>& fileNames);
 #endif
 
     /// Prompt the user for a book to open

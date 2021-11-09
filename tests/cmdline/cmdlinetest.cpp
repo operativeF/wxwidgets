@@ -23,7 +23,7 @@
 // test class
 // --------------------------------------------------------------------------
 
-// Use this macro to compare a wxArrayString with the pipe-separated elements
+// Use this macro to compare a std::vector<wxString> with the pipe-separated elements
 // of the given string
 //
 // NB: it's a macro and not a function to have the correct line numbers in the

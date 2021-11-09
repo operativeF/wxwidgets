@@ -11,7 +11,6 @@
 #if wxUSE_CONTROLS
 
 #include "wx/ctrlsub.h"
-#include "wx/arrstr.h"
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxControlWithItems, wxControl);
 
@@ -99,29 +98,7 @@ void wxItemContainer::Delete(unsigned int pos)
 //
 // ----------------------------------------------------------------------------
 
-// TODO: Use a span
-int wxItemContainer::DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
-                                         unsigned int pos,
-                                         void **clientData,
-                                         wxClientDataType type)
-{
-    int n = wxNOT_FOUND;
-
-    // TODO: Use algorithm
-    for ( unsigned int i = 0; i < items.GetCount(); ++i )
-    {
-        n = DoInsertOneItem(items[i], pos++);
-        if ( n == wxNOT_FOUND )
-            break;
-
-        AssignNewItemClientData(n, clientData, i, type);
-    }
-
-    return n;
-}
-
-int
-wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
+int wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
                                  unsigned int WXUNUSED(pos))
 {
     wxFAIL_MSG( "Must be overridden if DoInsertItemsInLoop() is used" );

@@ -70,7 +70,7 @@ wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 // TODO DELEGATES
 wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, "Helpstring", "group")
-wxPROPERTY_COLLECTION( Choices, wxArrayString, std::string, AppendString, \
+wxPROPERTY_COLLECTION( Choices, std::vector<wxString>, std::string, AppendString, \
                       GetStrings, 0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Value,std::string, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, "Helpstring", "group")

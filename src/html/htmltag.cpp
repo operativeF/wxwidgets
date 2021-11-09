@@ -352,16 +352,16 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
             {
                 if (state == ST_BEFORE_EQ || state == ST_NAME)
                 {
-                    m_ParamNames.Add(pname);
-                    m_ParamValues.Add(wxGetEmptyString());
+                    m_ParamNames.push_back(pname);
+                    m_ParamValues.push_back("");
                 }
                 else if (state == ST_VALUE && quote == 0)
                 {
-                    m_ParamNames.Add(pname);
+                    m_ParamNames.push_back(pname);
                     if (entParser)
-                        m_ParamValues.Add(entParser->Parse(pvalue));
+                        m_ParamValues.push_back(entParser->Parse(pvalue));
                     else
-                        m_ParamValues.Add(pvalue);
+                        m_ParamValues.push_back(pvalue);
                 }
                 break;
             }
@@ -387,8 +387,8 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
                         state = ST_BEFORE_VALUE;
                     else if (!IS_WHITE(c))
                     {
-                        m_ParamNames.Add(pname);
-                        m_ParamValues.Add(wxGetEmptyString());
+                        m_ParamNames.push_back(pname);
+                        m_ParamValues.push_back("");
                         pname = c;
                         state = ST_NAME;
                     }
@@ -407,7 +407,7 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
                     if ((quote != 0 && c == quote) ||
                         (quote == 0 && IS_WHITE(c)))
                     {
-                        m_ParamNames.Add(pname);
+                        m_ParamNames.push_back(pname);
                         if (quote == 0)
                         {
                             // VS: backward compatibility, no real reason,
@@ -415,9 +415,9 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
                             pvalue.MakeUpper();
                         }
                         if (entParser)
-                            m_ParamValues.Add(entParser->Parse(pvalue));
+                            m_ParamValues.push_back(entParser->Parse(pvalue));
                         else
-                            m_ParamValues.Add(pvalue);
+                            m_ParamValues.push_back(pvalue);
                         state = ST_BEFORE_NAME;
                     }
                     else
@@ -458,8 +458,8 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
         const EquivAttr& ea = equivAttrs[n];
         if ( styleParams.HasParam(ea.style) && !HasParam(ea.attr) )
         {
-            m_ParamNames.Add(ea.attr);
-            m_ParamValues.Add(styleParams.GetParam(ea.style));
+            m_ParamNames.push_back(ea.attr);
+            m_ParamValues.push_back(styleParams.GetParam(ea.style));
         }
     }
 }
@@ -477,35 +477,44 @@ wxHtmlTag::~wxHtmlTag()
 }
 
 bool wxHtmlTag::HasParam(const wxString& par) const
-{
-    return (m_ParamNames.Index(par, false) != wxNOT_FOUND);
+{        
+    const auto parUpper = wx::utils::ToUpperCopy(par);
+    auto paramMatch = std::find_if(m_ParamNames.begin(), m_ParamNames.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+
+    return paramMatch != m_ParamNames.end();
 }
 
 wxString wxHtmlTag::GetParam(const wxString& par, bool with_quotes) const
 {
-    int index = m_ParamNames.Index(par, false);
-    if (index == wxNOT_FOUND)
-        return wxGetEmptyString();
+    const auto parUpper = wx::utils::ToUpperCopy(par);
+    auto paramMatch = std::find_if(m_ParamNames.begin(), m_ParamNames.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+    
+    if (paramMatch == m_ParamNames.end())
+        return "";
+
     if (with_quotes)
     {
         // VS: backward compatibility, seems to be never used by wxHTML...
         wxString s;
-        s << wxT('"') << m_ParamValues[index] << wxT('"');
+        s << wxT('"') << *paramMatch << wxT('"');
         return s;
     }
     else
-        return m_ParamValues[index];
+        return *paramMatch;
 }
 
+// FIXME: Awful code that relies on indexing into another array with another one's index.
 bool wxHtmlTag::GetParamAsString(const wxString& par, wxString *str) const
 {
     wxCHECK_MSG( str, false, "NULL output string argument" );
 
-    int index = m_ParamNames.Index(par, false);
-    if (index == wxNOT_FOUND)
+    const auto parUpper = wx::utils::ToUpperCopy(par);
+    auto paramMatch = std::find_if(m_ParamNames.begin(), m_ParamNames.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+    
+    if (paramMatch == m_ParamNames.end())
         return false;
 
-    *str = m_ParamValues[index];
+    *str = m_ParamValues[std::distance(m_ParamNames.begin(), paramMatch)];
 
     return true;
 }
@@ -623,7 +632,7 @@ wxString wxHtmlTag::GetAllParams() const
     // VS: this function is for backward compatibility only,
     //     never used by wxHTML
     wxString s;
-    size_t cnt = m_ParamNames.GetCount();
+    size_t cnt = m_ParamNames.size();
     for (size_t i = 0; i < cnt; i++)
     {
         s << m_ParamNames[i];

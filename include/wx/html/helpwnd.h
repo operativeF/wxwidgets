@@ -233,7 +233,7 @@ protected:
     wxToolBar*  m_toolBar;
 
     wxComboBox *m_Bookmarks;
-    wxArrayString m_BookmarksNames, m_BookmarksPages;
+    std::vector<wxString> m_BookmarksNames, m_BookmarksPages;
 
     wxHtmlHelpFrameCfg m_Cfg;
 

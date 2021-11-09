@@ -3512,7 +3512,7 @@ public:
     DragAcceptFilesTarget(wxWindowBase *win) : m_win(win) {}
 
     virtual bool OnDropFiles(wxCoord x, wxCoord y,
-                             const wxArrayString& filenames) override
+                             const std::vector<wxString>& filenames) override
     {
         wxDropFilesEvent event(wxEVT_DROP_FILES,
                                filenames.size(),

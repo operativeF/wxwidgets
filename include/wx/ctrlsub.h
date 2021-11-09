@@ -15,7 +15,6 @@
 
 #if wxUSE_CONTROLS
 
-#include "wx/arrstr.h"
 #include "wx/control.h"      // base class
 #include "wx/stringutils.h"
 
@@ -355,11 +354,6 @@ protected:
     // classes should call DoInsertItemsInLoop() from their DoInsert() and
     // override DoInsertOneItem() to perform the real insertion
     virtual int DoInsertOneItem(const std::string& item, unsigned int pos);
-    int DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
-                            unsigned int pos,
-                            void **clientData,
-                            wxClientDataType type);
-
 
     // helper for DoInsertItems(): n is the index into clientData, pos is the
     // position of the item in the control

@@ -13,7 +13,6 @@
 #define _WX_TEXTBUFFER_H
 
 #include "wx/defs.h"
-#include "wx/arrstr.h"
 #include "wx/convauto.h"
 
 #include <string>

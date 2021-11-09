@@ -413,6 +413,7 @@ target_link_libraries(wxcore
     PRIVATE
         wxsharedcmn
         wxbase
+        #stdlibcore
         Boost::nowide
         fmt::fmt
         Microsoft.GSL::GSL
@@ -483,33 +484,6 @@ endif()
 
 target_precompile_headers(wxcore
     PRIVATE
-        # Include standard headers
-        <algorithm>
-        <array>
-        <cassert>
-        <cerrno>
-        <cctype>
-        <charconv>
-        <chrono>
-        <cmath>
-        <cstdlib>
-        <cstdio>
-        <cstring>
-        <ctime>
-        <filesystem>
-        <functional>
-        <iostream>
-        <limits>
-        <memory>
-        <numeric>
-        <numbers>
-        <span>
-        <string>
-        <string_view>
-        <tuple>
-        <unordered_map>
-        <vector>
-    
         # Include external library headers that are necessary.
         <fmt/core.h>
         <boost/nowide/convert.hpp>

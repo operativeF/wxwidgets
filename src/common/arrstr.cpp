@@ -12,10 +12,6 @@
 // headers, declarations, constants
 // ===========================================================================
 
-
-
-
-#include "wx/arrstr.h"
 #include "wx/scopedarray.h"
 #include "wx/wxcrt.h"
 
@@ -38,85 +34,6 @@
 
 #include <algorithm>
 #include <functional>
-
-// ============================================================================
-// ArrayString
-// ============================================================================
-
-wxArrayString::wxArrayString(size_t sz, const char** a)
-{
-    assign(a, a + sz);
-}
-
-wxArrayString::wxArrayString(size_t sz, const wchar_t** a)
-{
-    assign(a, a + sz);
-}
-
-wxArrayString::wxArrayString(size_t sz, const wxString* a)
-{
-    assign(a, a + sz);
-}
-
-#include "wx/arrstr.h"
-
-int wxArrayString::Index(const wxString& str, bool bCase, bool WXUNUSED(bFromEnd)) const
-{
-    int n = 0;
-    for ( const auto& s: *this )
-    {
-        if ( s.IsSameAs(str, bCase) )
-            return n;
-
-        ++n;
-    }
-
-    return wxNOT_FOUND;
-}
-
-void wxArrayString::Sort(CompareFunction function)
-{
-    std::sort(begin(), end(),
-              [function](const wxString& s1, const wxString& s2)
-              {
-                  return function(s1, s2) < 0;
-              }
-             );
-}
-
-void wxArrayString::Sort(bool reverseOrder)
-{
-    if (reverseOrder)
-    {
-        std::sort(begin(), end(), std::greater<wxString>());
-    }
-    else
-    {
-        std::sort(begin(), end());
-    }
-}
-
-int wxSortedArrayString::Index(const wxString& str,
-                               bool WXUNUSED_UNLESS_DEBUG(bCase),
-                               bool WXUNUSED_UNLESS_DEBUG(bFromEnd)) const
-{
-    wxASSERT_MSG( bCase && !bFromEnd,
-                  "search parameters ignored for sorted array" );
-
-    SCMPFUNC function = GetCompareFunction();
-    wxSortedArrayString::const_iterator
-        it = std::lower_bound(begin(), end(), str,
-                              [function](const wxString& s1, const wxString& s2)
-                              {
-                                  return function(s1, s2) < 0;
-                              }
-                              );
-
-    if ( it == end() || str.Cmp(*it) != 0 )
-        return wxNOT_FOUND;
-
-    return it - begin();
-}
 
 // ===========================================================================
 // wxJoin and wxSplit

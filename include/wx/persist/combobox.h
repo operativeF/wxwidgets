@@ -47,12 +47,12 @@ public:
     {
         const wxComboBox* const combobox = Get();
 
-        wxArrayString items = combobox->GetStrings();
+        std::vector<wxString> items = combobox->GetStrings();
 
         const wxString value = combobox->GetValue();
         if ( !value.empty() )
         {
-            wxArrayString::iterator it;
+            std::vector<wxString>::iterator it;
             for ( it = items.begin(); it != items.end(); ++it )
             {
                 if ( *it == value )

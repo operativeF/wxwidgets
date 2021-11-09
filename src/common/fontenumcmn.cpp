@@ -134,7 +134,7 @@ bool wxFontEnumerator::EnumerateEncodingsUTF8(const wxString& facename)
 
     // so enumerating all facenames supporting this encoding is the same as
     // enumerating all facenames
-    const wxArrayString facenames(GetFacenames(wxFONTENCODING_UTF8));
+    const std::vector<wxString> facenames(GetFacenames(wxFONTENCODING_UTF8));
     const size_t count = facenames.size();
     if ( !count )
         return false;

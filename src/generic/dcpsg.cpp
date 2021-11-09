@@ -1136,11 +1136,11 @@ void wxPostScriptDCImpl::SetPSFont()
 
     wxString buffer;
     // Generate PS code to register the font only once.
-    if ( m_definedPSFonts.Index(name) == wxNOT_FOUND )
+    if( std::find(m_definedPSFonts.begin(), m_definedPSFonts.end(), name) == m_definedPSFonts.end())
     {
         buffer.Printf( "%s reencodeISO def\n", name.c_str() );
         PsPrint( buffer );
-        m_definedPSFonts.Add(name);
+        m_definedPSFonts.push_back(name);
     }
 
     // Select font
@@ -1693,7 +1693,7 @@ bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
 
     m_pageNumber = 1;
     // Reset the list of fonts for which PS font registration code was generated.
-    m_definedPSFonts.Empty();
+    m_definedPSFonts.clear();
 
     return true;
 }
@@ -1714,7 +1714,7 @@ void wxPostScriptDCImpl::EndDoc ()
     }
 
     // Reset the list of fonts for which PS font registration code was generated.
-    m_definedPSFonts.Empty();
+    m_definedPSFonts.clear();
 
 #if 0
     // THE FOLLOWING HAS BEEN CONTRIBUTED BY Andy Fyfe <andy@hyperparallel.com>

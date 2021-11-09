@@ -151,14 +151,13 @@ void wxFontsManager::AddAllFonts()
             continue;
         }
 
-        wxArrayString indexFiles;
+        std::vector<wxString> indexFiles;
         if ( !wxDir::GetAllFiles(dir, &indexFiles, "FontsIndex") )
             continue;
 
-        for ( wxArrayString::const_iterator i = indexFiles.begin();
-              i != indexFiles.end(); ++i )
+        for ( const auto& file : indexFiles )
         {
-            AddFontsFromDir(*i);
+            AddFontsFromDir(file);
         }
     }
 

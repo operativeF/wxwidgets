@@ -20,7 +20,6 @@
 #include "wx/module.h"
 #include "wx/cmndata.h"
 #include "wx/strvararg.h"
-#include "wx/arrstr.h"
 
 //-----------------------------------------------------------------------------
 // wxPostScriptDC
@@ -156,7 +155,7 @@ protected:
     mutable double    m_underlineThickness;
     wxPrintData       m_printData;
     double            m_pageHeight{842 * PS2DEV};
-    wxArrayString     m_definedPSFonts;
+    std::vector<wxString>     m_definedPSFonts;
     bool              m_isFontChanged;
 
 private:

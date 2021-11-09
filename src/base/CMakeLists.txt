@@ -195,10 +195,17 @@ target_include_directories(wxbase
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
+target_compile_options(wxbase PRIVATE -translateInclude)
+
 add_library(wxsharedcmn
     OBJECT
         ${SHARED_BASE_CMN}
 )
+
+# target_compile_options(wxsharedcmn
+#     PRIVATE
+#         -translateInclude
+# )
 
 target_include_directories(wxsharedcmn
     PRIVATE
@@ -209,6 +216,7 @@ target_include_directories(wxsharedcmn
 target_link_libraries(wxsharedcmn
     PRIVATE
         Microsoft.GSL::GSL
+        #stdlibcore
 )
 
 if(wxUSE_ZLIB)
@@ -263,6 +271,7 @@ endif()
 target_link_libraries(wxbase
     PRIVATE
         wxsharedcmn
+        #stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
     

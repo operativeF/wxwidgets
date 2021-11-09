@@ -524,7 +524,7 @@ protected:
     std::string OnGetItem(size_t n) const override;
 
 private:
-    wxArrayString           m_styleNames;
+    std::vector<wxString>   m_styleNames;
 
     wxRichTextStyleSheet*   m_styleSheet{nullptr};
     wxRichTextCtrl*         m_richTextCtrl{nullptr};

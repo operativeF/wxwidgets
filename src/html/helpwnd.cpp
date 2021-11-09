@@ -1106,11 +1106,11 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
             {
                 val.Printf("hcBookmark_%i", i);
                 s = cfg->Read(val);
-                m_BookmarksNames.Add(s);
+                m_BookmarksNames.push_back(s);
                 if (m_Bookmarks) m_Bookmarks->Append(s);
                 val.Printf("hcBookmark_%i_url", i);
                 s = cfg->Read(val);
-                m_BookmarksPages.Add(s);
+                m_BookmarksPages.push_back(s);
             }
         }
     }
@@ -1498,8 +1498,8 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
                 if (m_BookmarksPages.Index(url) == wxNOT_FOUND)
                 {
                     m_Bookmarks->Append(item);
-                    m_BookmarksNames.Add(item);
-                    m_BookmarksPages.Add(url);
+                    m_BookmarksNames.push_back(item);
+                    m_BookmarksPages.push_back(url);
                 }
             }
             break;

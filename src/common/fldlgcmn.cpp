@@ -16,7 +16,6 @@
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/window.h"
-#include "wx/arrstr.h"
 
 //----------------------------------------------------------------------------
 // wxFileDialogBase
@@ -208,11 +207,12 @@ void wxFileDialogBase::SetFilterIndexFromExt(const wxString& ext)
     {
         int filterIndex = -1;
 
-        wxArrayString descriptions, filters;
+        std::vector<wxString> descriptions;
+        std::vector<wxString> filters;
         // don't care about errors, handled already by wxFileDialog
         std::ignore = wxParseCommonDialogsFilter(m_wildCard, descriptions, filters);
         
-        for (size_t n=0; n<filters.GetCount(); n++)
+        for (size_t n=0; n != filters.size(); n++)
         {
             if (filters[n].Contains(ext))
             {

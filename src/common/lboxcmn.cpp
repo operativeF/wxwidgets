@@ -10,7 +10,6 @@
 
 #if wxUSE_LISTBOX
 
-#include "wx/arrstr.h"
 #include "wx/log.h"
 #include "wx/listbox.h"
 #include "wx/dcclient.h"
@@ -69,7 +68,7 @@ wxEVENT_PROPERTY( DoubleClick, wxEVT_LISTBOX_DCLICK, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
            "Helpstring", "group")
-wxPROPERTY_COLLECTION( Choices, wxArrayString, wxString, AppendString, \
+wxPROPERTY_COLLECTION( Choices, std::vector<wxString>, wxString, AppendString, \
                       GetStrings, 0 /*flags*/, "Helpstring", "group" )
 wxPROPERTY( Selection, int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, "Helpstring", "group" )

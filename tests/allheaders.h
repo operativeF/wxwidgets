@@ -29,7 +29,6 @@
 #include <wx/appprogress.h>
 #include <wx/apptrait.h>
 #include <wx/archive.h>
-#include <wx/arrstr.h>
 #include <wx/artprov.h>
 #include <wx/bannerwindow.h>
 #include <wx/base64.h>

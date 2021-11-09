@@ -11,8 +11,6 @@
 #ifndef _WX_MSW_STACKWALK_H_
 #define _WX_MSW_STACKWALK_H_
 
-#include "wx/arrstr.h"
-
 #include <vector>
 
 // these structs are declared in windows headers

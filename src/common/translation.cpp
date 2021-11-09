@@ -15,7 +15,6 @@
     #include "wx/msw/wrapwin.h"
 #endif
 
-#include "wx/arrstr.h"
 #include "wx/dynarray.h"
 #include "wx/string.h"
 #include "wx/intl.h"
@@ -32,6 +31,7 @@
 #include "wx/stdpaths.h"
 #include "wx/version.h"
 #include "wx/private/threadinfo.h"
+#include "wx/arrstr.h"
 
 #ifdef WX_WINDOWS
     #include "wx/dynlib.h"

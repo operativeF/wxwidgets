@@ -103,7 +103,7 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
         {
             case wxYES:
             {
-                wxArrayString files;
+                std::vector<wxString> files;
                 wxDir::GetAllFiles(dir, &files, "*.png", wxDIR_FILES);
 
                 // remove all PNG files from the screenshots folder

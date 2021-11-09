@@ -15,7 +15,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/arrstr.h"
 #include "wx/colour.h"
 #include "wx/hashset.h"
 #include "wx/geometry/point.h"
@@ -424,7 +423,7 @@ template<> inline wxVariant WXVARIANT( const bool& value )
     { return wxVariant(value); }
 template<> inline wxVariant WXVARIANT( const double& value )
     { return wxVariant(value); }
-template<> inline wxVariant WXVARIANT( const wxArrayString& value )
+template<> inline wxVariant WXVARIANT( const std::vector<wxString>& value )
     { return wxVariant(value); }
 template<> inline wxVariant WXVARIANT( const wxString& value )
     { return wxVariant(value); }

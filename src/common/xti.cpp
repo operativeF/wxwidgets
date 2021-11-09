@@ -313,9 +313,9 @@ wxCUSTOM_TYPE_INFO(wxRange, wxToStringConverter<wxRange> , wxFromStringConverter
 
 // other types
 
-wxCOLLECTION_TYPE_INFO( wxString, wxArrayString );
+wxCOLLECTION_TYPE_INFO( wxString, std::vector<wxString> );
 
-template<> void wxCollectionToVariantArray( wxArrayString const &theArray,
+template<> void wxCollectionToVariantArray( std::vector<wxString> const &theArray,
                                             wxAnyList &value)
 {
     wxArrayCollectionToVariantArray( theArray, value );
@@ -381,7 +381,7 @@ void wxTypeInfo::Unregister()
 
 // removing header dependency on string tokenizer
 
-void wxSetStringToArray( const wxString &s, wxArrayString &array )
+void wxSetStringToArray( const wxString &s, std::vector<wxString> &array )
 {
     wxStringTokenizer tokenizer(s, "| \t\n", wxStringTokenizerMode::StrTok);
     wxString flag;

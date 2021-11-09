@@ -12,8 +12,6 @@
 
 #include "wx/xrc/xmlres.h"
 
-#include "wx/arrstr.h"
-
 #if wxUSE_XRC && wxUSE_RADIOBOX
 
 class WXDLLIMPEXP_XRC wxRadioBoxXmlHandler : public wxXmlResourceHandler
@@ -33,11 +31,11 @@ private:
 
 #if wxUSE_TOOLTIPS
     // the items tooltips
-    wxArrayString m_tooltips;
+    std::vector<wxString> m_tooltips;
 #endif // wxUSE_TOOLTIPS
 
     // the item help text
-    wxArrayString m_helptexts;
+    std::vector<wxString> m_helptexts;
     std::vector<int>    m_helptextSpecified;
 
     // if the corresponding array element is 1, the radiobox item is

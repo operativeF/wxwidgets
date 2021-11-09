@@ -535,7 +535,7 @@ bool IfaceCheckApp::FixMethod(const wxString& header, const wxMethod* iface, con
 
 #define WRAP_COLUMN     80
 
-    wxArrayString toinsert;
+    std::vector<wxString> toinsert;
     toinsert.Add(INDENTATION_STR + tmp.GetAsString() + ";");
 
     int nStartColumn = toinsert[0].Find('(');

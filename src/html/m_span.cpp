@@ -20,7 +20,7 @@ FORCE_LINK_ME(m_span)
 TAG_HANDLER_BEGIN(SPAN, "SPAN" )
 
     TAG_HANDLER_VARS
-        wxArrayString m_Faces;
+        std::vector<wxString> m_Faces;
 
     TAG_HANDLER_CONSTR(SPAN) { }
 

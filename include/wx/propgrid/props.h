@@ -735,7 +735,7 @@ DECL PROPNAME : public wxArrayStringProperty \
 public: \
     PROPNAME( const wxString& label = wxPG_LABEL, \
               const wxString& name = wxPG_LABEL, \
-              const wxArrayString& value = wxArrayString() ); \
+              const std::vector<wxString>& value = std::vector<wxString>() ); \
     ~PROPNAME(); \
     bool OnCustomStringEdit( wxWindow* parent, wxString& value ) override; \
     wxValidator* DoGetValidator() const override; \
@@ -751,7 +751,7 @@ wxPG_IMPLEMENT_PROPERTY_CLASS(PROPNAME, wxArrayStringProperty, \
                                TextCtrlAndButton) \
 PROPNAME::PROPNAME( const wxString& label, \
                     const wxString& name, \
-                    const wxArrayString& value ) \
+                    const std::vector<wxString>& value ) \
     : wxArrayStringProperty(label,name,value) \
 { \
     PROPNAME::GenerateValueAsString(); \

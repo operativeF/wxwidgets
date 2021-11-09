@@ -115,7 +115,7 @@ TEST_CASE("VariantListReturnSafeArray")
     }
 }
 
-// test converting a wxArrayString to an OLE VARIANT
+// test converting a std::vector<wxString> to an OLE VARIANT
 // and then to a wxVariant with the safearray type
 TEST_CASE("StringsReturnSafeArray")
 {

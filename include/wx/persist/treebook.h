@@ -14,7 +14,6 @@
 
 #if wxUSE_TREEBOOK
 
-#include "wx/arrstr.h"
 #include "wx/treebook.h"
 
 // ----------------------------------------------------------------------------

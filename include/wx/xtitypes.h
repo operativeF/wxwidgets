@@ -18,7 +18,6 @@
 
 #include "wx/string.h"
 #include "wx/hashmap.h"
-#include "wx/arrstr.h"
 #include "wx/flags.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -131,7 +130,7 @@ private:
 //
 // ----------------------------------------------------------------------------
 
-void wxSetStringToArray( const wxString &s, wxArrayString &array );
+void wxSetStringToArray( const wxString &s, std::vector<wxString> &array );
 
 template<typename e>
 void wxSetFromString(const wxString &s, wxBitset<e> &data )
@@ -139,7 +138,7 @@ void wxSetFromString(const wxString &s, wxBitset<e> &data )
     wxEnumData* edata = wxGetEnumData((e) 0);
     data.reset();
 
-    wxArrayString array;
+    std::vector<wxString> array;
     wxSetStringToArray( s, array );
     wxString flag;
     for ( int i = 0; i < array.Count(); ++i )
@@ -194,7 +193,7 @@ void wxFlagsFromString(const wxString &s, e &data )
     wxEnumData* edata = wxGetEnumData((e*) 0);
     data.m_data = 0;
 
-    wxArrayString array;
+    std::vector<wxString> array;
     wxSetStringToArray( s, array );
     wxString flag;
     for ( size_t i = 0; i < array.Count(); ++i )

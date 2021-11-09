@@ -18,7 +18,6 @@
 #include "wx/generic/gridcoord.h"
 #include "wx/generic/gridevt.h"
 
-#include "wx/arrstr.h"
 #include "wx/hashmap.h"
 #include "wx/scrolwin.h"
 #include "wx/settings.h"
@@ -1292,7 +1291,7 @@ private:
 // A 2-dimensional array of strings for data values
 //
 
-WX_DECLARE_OBJARRAY_WITH_DECL(wxArrayString, wxGridStringArray,
+WX_DECLARE_OBJARRAY_WITH_DECL(std::vector<wxString>, wxGridStringArray,
                               class WXDLLIMPEXP_CORE);
 
 

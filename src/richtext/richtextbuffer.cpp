@@ -12866,7 +12866,7 @@ bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& 
 wxString wxRichTextDecimalToRoman(long n)
 {
     static std::vector<int> decimalNumbers;
-    static wxArrayString romanNumbers;
+    static std::vector<wxString> romanNumbers;
 
     // Clean up arrays
     if (n == -1)
@@ -15033,9 +15033,9 @@ bool wxRichTextProperties::operator==(const wxRichTextProperties& props) const
     return true;
 }
 
-wxArrayString wxRichTextProperties::GetPropertyNames() const
+std::vector<wxString> wxRichTextProperties::GetPropertyNames() const
 {
-    wxArrayString arr;
+    std::vector<wxString> arr;
     size_t i;
     for (i = 0; i < m_properties.GetCount(); i++)
     {

@@ -58,13 +58,13 @@ wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
             tempString = token.SubString(0, colonIndex - 1);
             tempString.Trim(true).Trim(false);
             // Add to name list
-            m_names.Add(tempString);
+            m_names.push_back(tempString);
 
             // Extract and trim values
             tempString = token.SubString(colonIndex + 1, token.Length() - 1);
             tempString.Trim(true).Trim(false);
             // Add to values list
-            m_values.Add(tempString);
+            m_values.push_back(tempString);
         }
     }
 }

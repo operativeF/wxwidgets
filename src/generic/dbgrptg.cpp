@@ -264,7 +264,7 @@ private:
 #endif
     wxTextCtrl *m_notes;
 
-    wxArrayString m_files;
+    std::vector<wxString> m_files;
 
     wxDECLARE_EVENT_TABLE();
 };

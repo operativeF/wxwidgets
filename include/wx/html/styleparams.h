@@ -13,7 +13,7 @@
 
 #if wxUSE_HTML
 
-#include "wx/arrstr.h"
+#include "wx/stringutils.h"
 
 class wxHtmlTag;
 
@@ -30,20 +30,25 @@ public:
     // Check whether the named parameter is present or not.
     bool HasParam(const wxString& par) const
     {
-        return m_names.Index(par, false /* ignore case */) != wxNOT_FOUND;
+        const auto parUpper = wx::utils::ToUpperCopy(par);
+        auto paramMatch = std::find_if(m_names.begin(), m_names.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+
+        return paramMatch != m_names.end();
     }
 
     // Get the value of the named parameter, return empty string if none.
     wxString GetParam(const wxString& par) const
     {
-        int index = m_names.Index(par, false);
-        return index == wxNOT_FOUND ? wxString() : m_values[index];
+        const auto parUpper = wx::utils::ToUpperCopy(par);
+        auto paramMatch = std::find_if(m_names.begin(), m_names.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+
+        return paramMatch == m_names.end() ? wxString() : *paramMatch;
     }
 
 private:
     // Arrays if names and values of the parameters
-    wxArrayString m_names;
-    wxArrayString m_values;
+    std::vector<wxString> m_names;
+    std::vector<wxString> m_values;
 };
 
 #endif // wxUSE_HTML

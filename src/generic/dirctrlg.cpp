@@ -86,9 +86,9 @@ wxDEFINE_EVENT( wxEVT_DIRCTRL_FILEACTIVATED, wxTreeEvent );
 
 // since the macOS implementation needs objective-C this is dirdlg.mm
 #ifdef __WXOSX__
-extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids);
+extern size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids);
 #else
-size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids)
+size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids)
 {
 #ifdef wxHAS_FILESYSTEM_VOLUMES
 
@@ -124,8 +124,8 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
                 imageId = wxFileIconsTable::drive;
                 break;
         }
-        paths.Add(path);
-        names.Add(vol.GetDisplayName());
+        paths.push_back(path);
+        names.push_back(vol.GetDisplayName());
         icon_ids.push_back(imageId);
     }
 #else // !__WIN32__
@@ -152,9 +152,9 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
 #else
     #error "Unsupported platform in wxGenericDirCtrl!"
 #endif
-    wxASSERT_MSG( (paths.GetCount() == names.GetCount()), "The number of paths and their human readable names should be equal in number.");
-    wxASSERT_MSG( (paths.GetCount() == icon_ids.size()), "Wrong number of icons for available drives.");
-    return paths.GetCount();
+    wxASSERT_MSG( (paths.size() == names.size()), "The number of paths and their human readable names should be equal in number.");
+    wxASSERT_MSG( (paths.size() == icon_ids.size()), "Wrong number of icons for available drives.");
+    return paths.size();
 }
 #endif
 
@@ -228,7 +228,7 @@ bool wxIsDriveAvailable(const wxString& dirName)
 
 #if wxUSE_DIRDLG
 
-// Function which is called by quick sort. We want to override the default wxArrayString behaviour,
+// Function which is called by quick sort. We want to override the default std::vector<wxString> behaviour,
 // and sort regardless of case.
 static int wxCMPFUNC_CONV wxDirCtrlStringCompareFunction(const wxString& strFirst, const wxString& strSecond)
 {
@@ -449,7 +449,7 @@ wxGenericDirCtrl::AddSection(const wxString& path, const wxString& name, int ima
 
 void wxGenericDirCtrl::SetupSections()
 {
-    wxArrayString paths, names;
+    std::vector<wxString> paths, names;
     std::vector<int> icons;
 
     size_t count = wxGetAvailableDrives(paths, names, icons);
@@ -652,8 +652,8 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
         dirName += wxString(wxFILE_SEP_PATH);
 #endif
 
-    wxArrayString dirs;
-    wxArrayString filenames;
+    std::vector<wxString> dirs;
+    std::vector<wxString> filenames;
 
     wxDir d;
     wxString eachFilename;
@@ -671,13 +671,16 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             {
                 if ((eachFilename != ".") && (eachFilename != ".."))
                 {
-                    dirs.Add(eachFilename);
+                    dirs.push_back(eachFilename);
                 }
             }
             while (d.GetNext(&eachFilename));
         }
     }
-    dirs.Sort(wxDirCtrlStringCompareFunction);
+    
+    // FIXME: Sort based on case insensitivity.
+    std::sort(dirs.begin(), dirs.end());
+    // dirs.Sort(wxDirCtrlStringCompareFunction);
 
     // Now do the filenames -- but only if we're allowed to
     if (!HasFlag(wxDIRCTRL_DIR_ONLY))
@@ -701,14 +704,17 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
                     {
                         if ((eachFilename != ".") && (eachFilename != ".."))
                         {
-                            filenames.Add(eachFilename);
+                            filenames.push_back(eachFilename);
                         }
                     }
                     while (d.GetNext(& eachFilename));
                 }
             }
         }
-        filenames.Sort(wxDirCtrlStringCompareFunction);
+
+        // FIXME: Sort based on case insensitivity.
+        std::sort(filenames.begin(), filenames.end());
+        //filenames.Sort(wxDirCtrlStringCompareFunction);
     }
 
     // Now we really know whether we have any children so tell the tree control
@@ -716,7 +722,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     m_treeCtrl->SetItemHasChildren(parentId, !dirs.empty() || !filenames.empty());
 
     // Add the sorted dirs
-    for (size_t i = 0; i < dirs.GetCount(); i++)
+    for (size_t i = 0; i < dirs.size(); i++)
     {
         eachFilename = dirs[i];
         path = dirName;
@@ -741,7 +747,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     // Add the sorted filenames
     if (!HasFlag(wxDIRCTRL_DIR_ONLY))
     {
-        for (size_t i = 0; i < filenames.GetCount(); i++)
+        for (size_t i = 0; i < filenames.size(); i++)
         {
             eachFilename = filenames[i];
             path = dirName;
@@ -985,7 +991,7 @@ wxString wxGenericDirCtrl::GetFilePath() const
         return {};
 }
 
-void wxGenericDirCtrl::GetFilePaths(wxArrayString& paths) const
+void wxGenericDirCtrl::GetFilePaths(std::vector<wxString>& paths) const
 {
     paths.clear();
 
@@ -996,7 +1002,7 @@ void wxGenericDirCtrl::GetFilePaths(wxArrayString& paths) const
         wxTreeItemId treeid = items[n];
         wxDirItemData* data = (wxDirItemData*) m_treeCtrl->GetItemData(treeid);
         if ( !data->m_isDir )
-            paths.Add(data->m_path);
+            paths.push_back(data->m_path);
     }
 }
 
@@ -1027,7 +1033,7 @@ void wxGenericDirCtrl::SelectPath(const wxString& path, bool select)
     }
 }
 
-void wxGenericDirCtrl::SelectPaths(const wxArrayString& paths)
+void wxGenericDirCtrl::SelectPaths(const std::vector<wxString>& paths)
 {
     if ( HasFlag(wxDIRCTRL_MULTIPLE) )
     {
@@ -1046,7 +1052,7 @@ void wxGenericDirCtrl::UnselectAll()
 
 // Not used
 #if 0
-void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, wxArrayString& filenames)
+void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, std::vector<wxString>& filenames)
 {
     wxDirItemData *data = (wxDirItemData *) m_treeCtrl->GetItemData(treeid);
 
@@ -1132,7 +1138,7 @@ void wxGenericDirCtrl::SetFilter(const wxString& filter)
 // Extract description and actual filter from overall filter string
 bool wxGenericDirCtrl::ExtractWildcard(const wxString& filterStr, int n, wxString& filter, wxString& description)
 {
-    wxArrayString filters, descriptions;
+    std::vector<wxString> filters, descriptions;
     int count = wxParseCommonDialogsFilter(filterStr, descriptions, filters);
     if (count > 0 && n < count)
     {
@@ -1248,7 +1254,7 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
 void wxDirFilterListCtrl::FillFilterList(const wxString& filter, int defaultFilter)
 {
     Clear();
-    wxArrayString descriptions, filters;
+    std::vector<wxString> descriptions, filters;
     size_t n = (size_t) wxParseCommonDialogsFilter(filter, descriptions, filters);
 
     if (n > 0 && defaultFilter < (int) n)

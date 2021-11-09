@@ -11,7 +11,6 @@
 #ifndef _WX_GENERIC_CHOICDGG_H_
 #define _WX_GENERIC_CHOICDGG_H_
 
-#include "wx/arrstr.h"
 #include "wx/dynarray.h"
 #include "wx/dialog.h"
 
@@ -196,12 +195,6 @@ std::string wxGetSingleChoice(const std::string& message,
                                        int width = wxCHOICE_WIDTH,
                                        int height = wxCHOICE_HEIGHT,
                                        int initialSelection = 0);
-
-std::string wxGetSingleChoice(const std::string& message,
-                                            const std::string& caption,
-                                            const wxArrayString& choices,
-                                            int initialSelection,
-                                            wxWindow *parent = nullptr);
 
 std::string wxGetSingleChoice(const std::string& message,
                                             const std::string& caption,

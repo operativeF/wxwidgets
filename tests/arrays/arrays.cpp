@@ -150,7 +150,7 @@ struct Item
 
 WX_DEFINE_ARRAY_PTR(Item *, ItemPtrArray);
 
-std::ostream& operator<<(std::ostream& os, const wxArrayString& arr)
+std::ostream& operator<<(std::ostream& os, const std::vector<wxString>& arr)
 {
     os << "[ ";
     for ( size_t n = 0; n < arr.size(); ++n )
@@ -180,9 +180,9 @@ std::ostream& operator<<(std::ostream& os, const std::vector<wxString>& arr)
 // the tests
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxArrayString", "[dynarray]")
+TEST_CASE("std::vector<wxString>", "[dynarray]")
 {
-    wxArrayString a1;
+    std::vector<wxString> a1;
     a1.Add(wxT("thermit"));
     a1.Add(wxT("condor"));
     a1.Add(wxT("lion"), 3);
@@ -200,7 +200,7 @@ TEST_CASE("wxArrayString", "[dynarray]")
                                            wxT("alligator") )));
     CHECK( COMPARE_COUNT( a1 , 8 ) );
 
-    wxArrayString a2(a1);
+    std::vector<wxString> a2(a1);
 
     CHECK((COMPARE_8_VALUES( a2 , wxT("thermit") ,
                                            wxT("condor") ,
@@ -225,7 +225,7 @@ TEST_CASE("wxArrayString", "[dynarray]")
     CHECK( COMPARE_COUNT( a3 , 8 ) );
 
     wxSortedArrayString a4;
-    for (wxArrayString::iterator it = a1.begin(), en = a1.end(); it != en; ++it)
+    for (std::vector<wxString>::iterator it = a1.begin(), en = a1.end(); it != en; ++it)
         a4.Add(*it);
 
     CHECK((COMPARE_8_VALUES( a4 , wxT("alligator") ,
@@ -296,7 +296,7 @@ TEST_CASE("wxArrayString", "[dynarray]")
     CHECK( a1.Index( wxT("thermit"), /*bCase=*/true, /*fromEnd=*/true ) == 3 );
     CHECK( a1.Index( wxT("alligator"), /*bCase=*/true, /*fromEnd=*/true ) == 4 );
 
-    wxArrayString a5;
+    std::vector<wxString> a5;
 
     CHECK( a5.Add( wxT("x"), 1 ) == 0 );
     CHECK( a5.Add( wxT("a"), 3 ) == 1 );
@@ -328,14 +328,14 @@ TEST_CASE("wxArrayString", "[dynarray]")
     CHECK( a5.size() == 3 );
     CHECK( a5[2] == "Foo" );
 
-    wxArrayString a6;
+    std::vector<wxString> a6;
     a6.Add("Foo");
     a6.Insert(a6[0], 1, 100);
 
     // The whole point of this code is to test self-assignment, so suppress
     // clang warning about it.
 
-    wxArrayString a7;
+    std::vector<wxString> a7;
     a7 = a7;
     CHECK( a7.size() == 0 );
     a7.Add("Bar");
@@ -397,14 +397,14 @@ TEST_CASE("Arrays::Split", "[dynarray]")
             { wxT(""), wxT("\\"), wxT("first"), wxT("second"), wxT("third"), wxT("") };
 
         // escaping on:
-        wxArrayString exparr(WXSIZEOF(expected), expected);
+        std::vector<wxString> exparr(WXSIZEOF(expected), expected);
         // FIXME: Returns a vector now
-        //wxArrayString realarr(wxSplit(str, wxT(','), wxT('\\')));
+        //std::vector<wxString> realarr(wxSplit(str, wxT(','), wxT('\\')));
         //CHECK( exparr == realarr );
 
         // escaping turned off:
-        wxArrayString exparr2(WXSIZEOF(expected2), expected2);
-        //wxArrayString realarr2(wxSplit(str, wxT(','), wxT('\0')));
+        std::vector<wxString> exparr2(WXSIZEOF(expected2), expected2);
+        //std::vector<wxString> realarr2(wxSplit(str, wxT(','), wxT('\0')));
         //CHECK( exparr2 == realarr2 );
     }
 
@@ -419,13 +419,13 @@ TEST_CASE("Arrays::Split", "[dynarray]")
               wxT(""), wxT("\\third") };
 
         // escaping on:
-        //wxArrayString exparr(WXSIZEOF(expected), expected);
-        //wxArrayString realarr(wxSplit(str, wxT(','), wxT('\\')));
+        //std::vector<wxString> exparr(WXSIZEOF(expected), expected);
+        //std::vector<wxString> realarr(wxSplit(str, wxT(','), wxT('\\')));
         //CHECK( exparr == realarr );
 
         // escaping turned off:
-        //wxArrayString exparr2(WXSIZEOF(expected2), expected2);
-        //wxArrayString realarr2(wxSplit(str, wxT(','), wxT('\0')));
+        //std::vector<wxString> exparr2(WXSIZEOF(expected2), expected2);
+        //std::vector<wxString> realarr2(wxSplit(str, wxT(','), wxT('\0')));
         //CHECK( exparr2 == realarr2 );
     }
 }
@@ -438,7 +438,7 @@ TEST_CASE("Arrays::Join", "[dynarray]")
         const wxChar *arr[] = { wxT("first"), wxT(""), wxT("second"), wxT("third") };
         wxString expected = wxT("first,,second,third");
 
-        wxArrayString arrstr(WXSIZEOF(arr), arr);
+        std::vector<wxString> arrstr(WXSIZEOF(arr), arr);
         wxString result = wxJoin(arrstr, wxT(','));
         CHECK( expected == result );
     }
@@ -449,7 +449,7 @@ TEST_CASE("Arrays::Join", "[dynarray]")
         wxString expected2 = wxT("first, word,,,second,third,,");
 
         // escaping on:
-        wxArrayString arrstr(WXSIZEOF(arr), arr);
+        std::vector<wxString> arrstr(WXSIZEOF(arr), arr);
         wxString result = wxJoin(arrstr, wxT(','), wxT('\\'));
         CHECK( expected == result );
 
@@ -465,7 +465,7 @@ TEST_CASE("Arrays::Join", "[dynarray]")
         wxString expected2 = wxT("first\\, wo\\rd,seco\\nd,\\third\\");
 
         // escaping on:
-        wxArrayString arrstr(WXSIZEOF(arr), arr);
+        std::vector<wxString> arrstr(WXSIZEOF(arr), arr);
         wxString result = wxJoin(arrstr, wxT(','), wxT('\\'));
         CHECK( expected == result );
 
@@ -516,7 +516,7 @@ TEST_CASE("Arrays::SplitJoin", "[dynarray]")
             wxT("\nThat's the fourth token\n\n"), wxT(" - fifth\ndummy\ntoken - "),
             wxT("_sixth__token__with_underscores"), wxT("The! Last! One!")
         };
-    wxArrayString theArr(WXSIZEOF(arr), arr);
+    std::vector<wxString> theArr(WXSIZEOF(arr), arr);
 
     for (i = 0; i < WXSIZEOF(separators); i++)
     {
@@ -695,7 +695,7 @@ void DoTestSwap(T v1, T v2, T v3)
 
 TEST_CASE("wxDynArray::Swap", "[dynarray]")
 {
-    DoTestSwap<wxArrayString>("Foo", "Bar", "Baz");
+    DoTestSwap<std::vector<wxString>>("Foo", "Bar", "Baz");
 
     DoTestSwap<wxArrayInt>(1, 10, 100);
     DoTestSwap<std::vector<long>>(6, 28, 496);

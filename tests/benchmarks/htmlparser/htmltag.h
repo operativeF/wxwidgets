@@ -12,8 +12,7 @@
 #include "wx/defs.h"
 
 #include "wx/object.h"
-#include "wx/arrstr.h"
-
+ 
 class  wx28HtmlEntitiesParser;
 
 //-----------------------------------------------------------------------------

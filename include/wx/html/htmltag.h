@@ -14,7 +14,6 @@
 #if wxUSE_HTML
 
 #include "wx/object.h"
-#include "wx/arrstr.h"
 
 class wxColour;
 class wxHtmlEntitiesParser;
@@ -143,7 +142,7 @@ private:
     wxString m_Name;
     bool m_hasEnding;
     wxString::const_iterator m_Begin, m_End1, m_End2;
-    wxArrayString m_ParamNames, m_ParamValues;
+    std::vector<wxString> m_ParamNames, m_ParamValues;
 
     // DOM tree relations:
     wxHtmlTag *m_Next{nullptr};

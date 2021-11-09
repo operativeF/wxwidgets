@@ -10,7 +10,6 @@
 #ifndef _MSW_OLE_SAFEARRAY_H_
 #define _MSW_OLE_SAFEARRAY_H_
 
-#include "wx/arrstr.h"
 #include "wx/msw/ole/oleutils.h"
 
 #if wxUSE_OLE && wxUSE_VARIANT
@@ -18,7 +17,7 @@
 /*
     wxSafeArray is wxWidgets wrapper for working with MS Windows SAFEARRAYs.
     It also has convenience functions for converting between SAFEARRAY
-    and wxVariant with list type or wxArrayString.
+    and wxVariant with list type or std::vector<wxString>.
 */
 
 // The base class with type-independent methods. It exists solely in order to
@@ -213,7 +212,7 @@ public:
     }
 
     /**
-        Creates a 0-based one-dimensional SAFEARRAY from wxArrayString.
+        Creates a 0-based one-dimensional SAFEARRAY from std::vector<wxString>.
 
         Can be called only for wxSafeArray<VT_BSTR>.
     */
@@ -375,7 +374,7 @@ public:
         return result;
     }
 
-    static bool ConvertToArrayString(SAFEARRAY* psa, wxArrayString& strings)
+    static bool ConvertToArrayString(SAFEARRAY* psa, std::vector<wxString>& strings)
     {
         wxSafeArray<varType> sa;
         bool result = false;

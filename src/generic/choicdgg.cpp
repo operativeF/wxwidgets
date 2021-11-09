@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_CHOICEDLG
 
 #ifndef WX_PRECOMP
@@ -18,7 +15,6 @@
     #include <vector>
 #endif
 
-#include "wx/arrstr.h"
 #include "wx/button.h"
 #include "wx/checklst.h"
 #include "wx/dialog.h"

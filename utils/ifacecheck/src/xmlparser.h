@@ -383,7 +383,7 @@ protected:
     // because this makes _much_ easier the parsing process!
     // (basically because when parsing class X which derives from Y,
     //  we may have not parsed yet class Y!)
-    wxArrayString m_parents;
+    std::vector<wxString> m_parents;
 
     // see the wxMethod::m_nAvailability field for more info
     int m_nAvailability;

@@ -121,7 +121,7 @@ int wxCALLBACK wxFileDataTimeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
 }
 
 // defined in src/generic/dirctrlg.cpp
-extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids);
+extern size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids);
 
 //-----------------------------------------------------------------------------
 //  wxFileData
@@ -474,7 +474,7 @@ void wxFileListCtrl::UpdateFiles()
 #if defined(WX_WINDOWS) || defined(__WXMAC__)
     if ( IsTopMostDir(m_dirName) )
     {
-        wxArrayString names, paths;
+        std::vector<wxString> names, paths;
         std::vector<int> icons;
         const size_t count = wxGetAvailableDrives(paths, names, icons);
 
@@ -1170,7 +1170,7 @@ void wxGenericFileCtrl::SetWildcard( const wxString& wildCard )
     else
         m_wildCard = wildCard;
 
-    wxArrayString wildDescriptions, wildFilters;
+    std::vector<wxString> wildDescriptions, wildFilters;
     const size_t count = wxParseCommonDialogsFilter( m_wildCard,
                          wildDescriptions,
                          wildFilters );

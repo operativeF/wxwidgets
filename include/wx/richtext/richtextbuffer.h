@@ -58,7 +58,6 @@
 
 #if wxUSE_RICHTEXT
 
-#include "wx/arrstr.h"
 #include "wx/list.h"
 #include "wx/textctrl.h"
 #include "wx/bitmap.h"
@@ -1913,7 +1912,7 @@ public:
     /**
         Returns all the property names.
     */
-    wxArrayString GetPropertyNames() const;
+    std::vector<wxString> GetPropertyNames() const;
 
     /**
         Returns a count of the properties.
