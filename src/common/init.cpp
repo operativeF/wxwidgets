@@ -37,7 +37,7 @@
 #endif // WX_WINDOWS
 
 #if defined(__WXOSX__)
-    #include <clocale>
+    import <clocale>;
 #endif
 
 // ----------------------------------------------------------------------------

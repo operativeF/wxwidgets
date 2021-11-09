@@ -20,12 +20,12 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
-    #include <iostream>
+    import <iostream>;
 #endif
 
 #include "wx/apptrait.h"
 #include "wx/cmdline.h"
-#include <exception>
+import <exception>;
 
 #ifdef WX_WINDOWS
     #include "wx/msw/msvcrt.h"

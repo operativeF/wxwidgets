@@ -16,8 +16,8 @@
 #include "wx/choice.h"
 #include "wx/textentry.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxComboBox : public wxChoice,
                                     public wxTextEntry

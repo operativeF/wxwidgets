@@ -31,7 +31,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <numeric>
+import <numeric>;
 
 // ----------------------------------------------------------------------------
 // constants

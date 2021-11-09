@@ -16,8 +16,8 @@
 #include "wx/archive.h"
 #include "wx/hashmap.h"
 
-#include <cstdint>
-#include <utility>
+import <cstdint>;
+import <utility>;
 
 
 /////////////////////////////////////////////////////////////////////////////

@@ -25,7 +25,7 @@
 
 #include <boost/nowide/stackstring.hpp>
 
-#include <cstdlib>
+import <cstdlib>;
 
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter

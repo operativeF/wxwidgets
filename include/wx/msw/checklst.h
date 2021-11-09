@@ -16,8 +16,8 @@
 #endif
 
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 struct wxOwnerDrawn;
 class wxCheckListBoxItem; // fwd decl, defined in checklst.cpp

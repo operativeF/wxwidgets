@@ -19,9 +19,9 @@
 #include "wx/graphics.h"
 
 #include <memory>
-#include <string>
-#include <string_view>
-#include <vector>
+import <string>;
+import <string_view>;
+import <vector>;
 
 class wxWindowDC;
 

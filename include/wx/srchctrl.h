@@ -16,7 +16,7 @@
 
 #include "wx/textctrl.h"
 
-#include <string>
+import <string>;
 
 #if (!defined(__WXMAC__) && !defined(__WXGTK20__)) || defined(__WXUNIVERSAL__)
     // no native version, use the generic one

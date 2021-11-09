@@ -342,7 +342,7 @@ wxGLAPI s_glAPI;
 
 #if wxUSE_OPENGL_EMULATION
 
-#include <vector>
+import <vector>;
 
 GLenum s_mode;
 

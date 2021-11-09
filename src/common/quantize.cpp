@@ -40,8 +40,8 @@
 #include "wx/palette.h"
 #include "wx/image.h"
 
-#include <cstdlib>
-#include <cstring>
+import <cstdlib>;
+import <cstring>;
 
 namespace
 {

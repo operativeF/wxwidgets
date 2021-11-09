@@ -14,10 +14,10 @@
 #include "wx/toplevel.h"
 #include "wx/containr.h"
 
-#include <algorithm>
+import <algorithm>;
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxSizer;
 class wxStdDialogButtonSizer;

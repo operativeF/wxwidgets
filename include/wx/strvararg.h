@@ -18,9 +18,9 @@
 #include "wx/buffer.h"
 #include "wx/unichar.h"
 
-#include <cstddef>
-#include <string>
-#include <type_traits>
+import <cstddef>;
+import <string>;
+import <type_traits>;
 
 #include <gsl/gsl>
 

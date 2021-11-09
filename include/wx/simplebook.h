@@ -15,8 +15,8 @@
 
 #if wxUSE_BOOKCTRL
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxSimplebook: a book control without any user-actionable controller.

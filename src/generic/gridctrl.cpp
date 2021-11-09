@@ -28,7 +28,7 @@
 
 #include <fmt/core.h>
 
-#include <charconv>
+import <charconv>;
 
 // ----------------------------------------------------------------------------
 // wxGridCellRenderer

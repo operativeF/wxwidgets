@@ -21,7 +21,7 @@
 #include "wx/bitmap.h"
 #include "wx/list.h"
 
-#include <vector>
+import <vector>;
 
 // ============================================================================
 /*

@@ -16,7 +16,7 @@
 
 #include <GL/gl.h>
 
-#include <string>
+import <string>;
 
 class wxPalette;
 

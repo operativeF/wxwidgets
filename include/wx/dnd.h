@@ -18,7 +18,7 @@
 #include "wx/dataobj.h"
 #include "wx/cursor.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -16,9 +16,9 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <numeric>
-#include <utility>
+import <algorithm>;
+import <numeric>;
+import <utility>;
 
 namespace
 {

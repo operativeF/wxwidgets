@@ -24,8 +24,8 @@
 #include "wx/windowid.h"
 
 #include <memory>
-#include <optional>
-#include <string>
+import <optional>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // forward declarations

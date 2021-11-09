@@ -17,8 +17,8 @@
 
 #include "wx/object.h"
 
-#include <optional>
-#include <string>
+import <optional>;
+import <string>;
 
 class wxAcceleratorTable;
 class wxMenuItem;

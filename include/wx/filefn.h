@@ -13,7 +13,7 @@
 
 #include "wx/list.h"
 
-#include <ctime>
+import <ctime>;
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -33,7 +33,7 @@
 
 #include  <fcntl.h>       // O_RDONLY &c
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

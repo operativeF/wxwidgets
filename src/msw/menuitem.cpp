@@ -36,7 +36,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-#include <string>
+import <string>;
 
 // ---------------------------------------------------------------------------
 // macro

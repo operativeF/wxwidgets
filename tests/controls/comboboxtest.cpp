@@ -17,7 +17,7 @@
     #include "wx/app.h"
     #include "wx/combobox.h"
 
-    #include <array>
+    import <array>;
 #endif // WX_PRECOMP
 
 #include "textentrytest.h"

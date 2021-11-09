@@ -23,9 +23,9 @@
 #include "wx/xtistrm.h"
 #include "wx/xtixml.h"
 
-#include <map>
-#include <string>
-#include <vector>
+import <map>;
+import <string>;
+import <vector>;
 
 using namespace std;
 

@@ -16,7 +16,7 @@
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-#include <vector>
+import <vector>;
 #include "wx/fontenc.h"
 
 class wxMBConv;

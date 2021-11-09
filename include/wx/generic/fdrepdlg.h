@@ -15,8 +15,8 @@ class wxCheckBox;
 class wxRadioBox;
 class wxTextCtrl;
 
-#include <string>
-#include <tuple>
+import <string>;
+import <tuple>;
 
 // ----------------------------------------------------------------------------
 // wxGenericFindReplaceDialog: dialog for searching / replacing text

@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_PRIVATE_PAINT_H_
 #define _WX_MSW_PRIVATE_PAINT_H_
 
-#include <stack>
+import <stack>;
 
 namespace wxMSWImpl
 {

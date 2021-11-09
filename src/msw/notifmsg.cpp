@@ -22,7 +22,7 @@
 #include "wx/taskbar.h"
 
 #include <chrono>
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // different implementations used by wxNotificationMessage

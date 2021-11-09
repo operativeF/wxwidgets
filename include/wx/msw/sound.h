@@ -13,7 +13,7 @@
 
 #if wxUSE_SOUND
 
-#include <string>
+import <string>;
 
 class wxSound : public wxSoundBase
 {

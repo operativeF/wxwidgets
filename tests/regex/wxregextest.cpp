@@ -11,7 +11,7 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <string>
+    import <string>;
 #endif
 
 #if wxUSE_REGEX

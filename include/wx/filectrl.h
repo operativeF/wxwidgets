@@ -19,7 +19,7 @@
 #include "wx/string.h"
 #include "wx/event.h"
 
-#include <vector>
+import <vector>;
 
 enum
 {

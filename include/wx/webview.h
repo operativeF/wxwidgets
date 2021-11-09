@@ -29,8 +29,8 @@
 #endif
 
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 
 class wxFSFile;

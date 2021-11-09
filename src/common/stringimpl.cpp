@@ -19,7 +19,7 @@
 #include "wx/stringimpl.h"
 #include "wx/wxcrt.h"
 
-#include <cctype>
+import <cctype>;
 #include <cerrno>
 
 import <cstdlib>;

@@ -13,7 +13,7 @@
 #ifndef WX_PRECOMP
     #include "wx/timer.h"
 
-    #include <vector>
+    import <vector>;
 #endif
 
 #if wxUSE_FSWATCHER

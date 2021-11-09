@@ -42,8 +42,8 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <iostream>
-    #include <string>
+    import <iostream>;
+    import <string>;
 #endif
 
 

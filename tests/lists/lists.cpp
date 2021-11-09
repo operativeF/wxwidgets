@@ -174,7 +174,7 @@ TEST_CASE("wxListCtorTest")
     CHECK( Baz::GetNumber() == 0 );
 }
 
-#include <list>
+import <list>;
 
 // Check that we convert wxList to std::list using the latter's ctor taking 2
 // iterators: this used to be broken in C++11 because wxList iterators didn't

@@ -20,7 +20,7 @@
     #include "wx/scrolbar.h"
 #endif
 
-#include <string>
+import <string>;
 
 class wxScrollHelperEvtHandler;
 class wxTimer;

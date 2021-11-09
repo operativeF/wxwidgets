@@ -18,12 +18,12 @@
 #if wxUSE_ACCEL
     #include "wx/accel.h"
 
-    #include <vector>
+    import <vector>;
     using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
 
 #include <memory>
-#include <string>
+import <string>;
 
 class wxFrame;
 

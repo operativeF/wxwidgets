@@ -19,8 +19,8 @@
 #include "wx/containr.h"
 #include "wx/treebase.h"        // for wxTreeItemId
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 using wxTreebookPage = wxWindow;
 

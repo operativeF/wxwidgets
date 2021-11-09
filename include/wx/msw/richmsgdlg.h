@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_RICHMSGDLG_H_
 #define _WX_MSW_RICHMSGDLG_H_
 
-#include <string>
+import <string>;
 
 class wxRichMessageDialog : public wxGenericRichMessageDialog
 {

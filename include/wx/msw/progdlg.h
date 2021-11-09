@@ -12,7 +12,7 @@
 
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxProgressDialogTaskRunner;
 struct wxProgressDialogSharedData;

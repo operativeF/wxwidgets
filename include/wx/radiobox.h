@@ -19,8 +19,8 @@
 
 #if wxUSE_TOOLTIPS
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxToolTip;
 

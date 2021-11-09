@@ -16,7 +16,7 @@
 
 #include "wx/control.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxInfoBar shows non-critical but important information to the user

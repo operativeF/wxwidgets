@@ -14,7 +14,7 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <algorithm>
+    import <algorithm>;
 #endif // WX_PRECOMP
 
 

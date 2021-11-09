@@ -21,9 +21,9 @@
 #include "wx/textctrl.h"
 #include "wx/utils.h"
 
-#include <cctype>
-#include <cstdio>
-#include <cstdlib>
+import <cctype>;
+import <cstdio>;
+import <cstdlib>;
 
 
 // ----------------------------------------------------------------------------

@@ -13,8 +13,8 @@
 
 #include "wx/combobox.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown

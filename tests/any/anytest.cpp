@@ -13,9 +13,9 @@
 #include "wx/any.h"
 #include "wx/datetime.h"
 #include "wx/object.h"
-#include <vector>
+import <vector>;
 
-#include <cmath>
+import <cmath>;
 
 namespace Catch
 {

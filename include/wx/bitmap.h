@@ -19,7 +19,7 @@
 #include "wx/colour.h"
 #include "wx/image.h"
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 struct wxBitmapHandler;

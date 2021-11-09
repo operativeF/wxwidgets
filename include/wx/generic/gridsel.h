@@ -17,7 +17,7 @@
 
 #include "wx/grid.h"
 
-#include <vector>
+import <vector>;
 
 using wxVectorGridBlockCoords = std::vector<wxGridBlockCoords>;
 

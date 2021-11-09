@@ -24,9 +24,9 @@
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 
-#include <cmath>
-#include <numbers>
-#include <string_view>
+import <cmath>;
+import <numbers>;
+import <string_view>;
 
 #ifdef __WXMSW__
 

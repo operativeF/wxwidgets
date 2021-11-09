@@ -61,7 +61,7 @@
 #include "wx/tokenzr.h"
 
 #ifdef WX_WINDOWS
-    #include <clocale>
+    import <clocale>;
     #include <winnls.h>
 #endif
 

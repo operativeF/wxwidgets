@@ -19,7 +19,7 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 
-#include <cstring>
+import <cstring>;
 
 // prefer snprintf over sprintf
 #if defined(__VISUALC__)

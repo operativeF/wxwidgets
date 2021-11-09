@@ -18,7 +18,7 @@
 #include "wx/docview.h"
 #include "wx/mdi.h"
 
-#include <string>
+import <string>;
 
 // Define MDI versions of the doc-view frame classes. Note that we need to
 // define them as classes for wxRTTI, otherwise we could simply define them as

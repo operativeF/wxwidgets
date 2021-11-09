@@ -27,7 +27,7 @@
 #include "wx/math.h"
 #include "wx/bitflags.h"
 
-#include <cstdint>
+import <cstdint>;
 
 // ---------------------------------------------------------------------------
 // forward declarations

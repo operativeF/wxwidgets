@@ -17,7 +17,7 @@
 
 #include "wx/dialog.h"
 
-#include <string>
+import <string>;
 
 // this symbol is defined for the platforms which support multiple
 // ('|'-separated) filters in the file dialog

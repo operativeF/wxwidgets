@@ -27,7 +27,7 @@
 #include "wx/pen.h"
 #include "wx/settings.h"
 
-#include <cmath>
+import <cmath>;
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
 

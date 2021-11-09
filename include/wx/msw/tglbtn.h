@@ -12,7 +12,7 @@
 #ifndef _WX_TOGGLEBUTTON_H_
 #define _WX_TOGGLEBUTTON_H_
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 

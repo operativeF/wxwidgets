@@ -13,7 +13,7 @@
 
 #include "wx/frame.h"
 
-#include <string>
+import <string>;
 
 class wxMiniFrame : public wxFrame
 {

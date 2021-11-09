@@ -18,8 +18,8 @@
 
 #include "wx/fontenc.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxFontEnumerator enumerates all available fonts on the system or only the

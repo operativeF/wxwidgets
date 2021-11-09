@@ -16,7 +16,7 @@
 
 #include "wx/weakref.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxTopLevelWindowMSW

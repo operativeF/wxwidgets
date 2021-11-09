@@ -14,8 +14,8 @@
 #ifndef WX_PRECOMP
     #include "wx/gdicmn.h"
     
-    #include <algorithm>
-    #include <array>
+    import <algorithm>;
+    import <array>;
 #endif // WX_PRECOMP
 
 #include "asserthelper.h"

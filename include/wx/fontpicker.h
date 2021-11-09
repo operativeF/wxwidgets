@@ -18,7 +18,7 @@
 
 #include "wx/pickerbase.h"
 
-#include <string>
+import <string>;
 
 
 class wxFontPickerEvent;

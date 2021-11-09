@@ -15,7 +15,7 @@
 #if wxUSE_PREFERENCES_EDITOR
 
 #include "wx/bitmap.h"
-#include <vector>
+import <vector>;
 
 class wxWindow;
 

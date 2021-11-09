@@ -14,7 +14,7 @@
 #include "wx/private/animate.h"
 
 #include <chrono>
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxAnimationGenericImpl

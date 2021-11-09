@@ -30,7 +30,7 @@
 
 #include "wx/filesys.h"             // FileNameToURL()
 #include "wx/thread.h"              // wxMutex/wxMutexLocker
-#include <vector>              // std::vector<wxString>
+import <vector>;              // std::vector<wxString>
 
 #ifdef __WXGTK__
     #include "wx/gtk/private/wrapgtk.h"

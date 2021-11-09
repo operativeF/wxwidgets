@@ -16,7 +16,7 @@
 #include "wx/log.h"
 #include "wx/url.h"
 
-#include <cstdlib>
+import <cstdlib>;
 
 // ----------------------------------------------------------------------------
 // wxProtoInfo

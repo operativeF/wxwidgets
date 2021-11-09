@@ -17,7 +17,7 @@
 
 #include "wx/control.h"
 
-#include <string>
+import <string>;
 
 inline constexpr char wxScrollBarNameStr[] = "scrollBar";
 

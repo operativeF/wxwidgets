@@ -17,7 +17,7 @@
 #include "wx/helpbase.h"
 #include "wx/html/helpfrm.h"        // for wxHF_DEFAULT_STYLE
 
-#include <string>
+import <string>;
 
 class WXDLLIMPEXP_HTML wxBestHelpController: public wxHelpControllerBase
 {

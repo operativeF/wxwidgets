@@ -38,7 +38,7 @@
     #endif
 #endif
 
-#include <numbers>
+import <numbers>;
 
 // ----------------------------------------------------------------------------
 // wxRichToolTipPopup: the popup window used by wxRichToolTip.

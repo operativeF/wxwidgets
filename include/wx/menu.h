@@ -22,7 +22,7 @@
 // included wx/menu.h
 #include "wx/menuitem.h"
 
-#include <string>
+import <string>;
 
 class wxFrame;
 class wxMenu;

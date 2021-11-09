@@ -32,9 +32,9 @@
 #include "wx/geometry/size.h"
 
 #include <memory>
-#include <string>
-#include <string_view>
-#include <vector>
+import <string>;
+import <string_view>;
+import <vector>;
 
 class wxDC;
 class wxClientDC;

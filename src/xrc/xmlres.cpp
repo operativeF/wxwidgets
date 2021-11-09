@@ -13,7 +13,7 @@
 #if wxUSE_XRC
 
 #ifndef WX_PRECOMP
-    #include <vector>
+    import <vector>;
 
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
@@ -46,7 +46,7 @@
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
-#include <clocale>
+import <clocale>;
 
 namespace
 {

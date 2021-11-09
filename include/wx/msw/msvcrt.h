@@ -35,7 +35,7 @@
         #undef new
     #endif
 
-    #include <cstdlib>
+    import <cstdlib>;
 
     // Defining _CRTBLD should never be necessary at all, but keep it for now
     // as there is no time to retest all the compilers before 3.0 release.

@@ -24,8 +24,8 @@
     #include "wx/private/markupparser.h"
 #endif
 
-#include <cmath>
-#include <numbers>
+import <cmath>;
+import <numbers>;
 
 // ----------------------------------------------------------
 // Global utilities

@@ -13,7 +13,7 @@
 
 #include "wx/object.h"
 
-#include <cstdint>
+import <cstdint>;
 
 class wxColour : public wxColourBase
 {

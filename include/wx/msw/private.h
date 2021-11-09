@@ -22,7 +22,7 @@
     #include "wx/window.h"
 #endif // wxUSE_GUI
 
-#include <string>
+import <string>;
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>

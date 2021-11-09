@@ -17,7 +17,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/paint.h"
 
-#include <unordered_map>
+import <unordered_map>;
 
 // ----------------------------------------------------------------------------
 // local data structures

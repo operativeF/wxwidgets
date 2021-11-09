@@ -19,10 +19,10 @@
 #include "wx/tokenzr.h"
 #include "wx/range.h"
 
-#include <cstring>
-#include <list>
-#include <map>
-#include <string>
+import <cstring>;
+import <list>;
+import <map>;
+import <string>;
 
 using namespace std;
 

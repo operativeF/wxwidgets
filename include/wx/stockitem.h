@@ -16,7 +16,7 @@
 #include "wx/string.h"
 #include "wx/accel.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // Helper functions for stock items handling:

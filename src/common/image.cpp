@@ -24,9 +24,9 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <cmath>
-#include <cstring> // For memcpy
+import <algorithm>;
+import <cmath>;
+import <cstring>; // For memcpy
 
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:

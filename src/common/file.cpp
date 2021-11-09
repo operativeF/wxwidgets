@@ -13,7 +13,7 @@
     #include "wx/msw/wrapwin.h"
 #endif
 
-#include <cstdio>       // SEEK_xxx constants
+import <cstdio>;       // SEEK_xxx constants
 #include <cerrno>
 
 #if wxUSE_FILE

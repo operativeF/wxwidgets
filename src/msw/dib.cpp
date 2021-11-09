@@ -26,7 +26,7 @@
 #include "wx/msw/dib.h"
 
 #include <memory>
-#include <string>
+import <string>;
 
 using msw::utils::unique_dcwnd;
 

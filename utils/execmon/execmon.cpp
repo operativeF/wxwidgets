@@ -17,7 +17,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/cmdline.h"
-#include <vector>
+import <vector>;
 #include "wx/process.h"
 #include "wx/sstream.h"
 #include "wx/utils.h"

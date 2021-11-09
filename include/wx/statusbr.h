@@ -18,8 +18,8 @@
 #include "wx/dynarray.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 inline constexpr char wxStatusBarNameStr[] = "statusBar";
 

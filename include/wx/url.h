@@ -22,7 +22,7 @@
   #include "wx/protocol/http.h"
 #endif
 
-#include <string>
+import <string>;
 
 enum class wxURLError
 {

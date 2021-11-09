@@ -11,7 +11,7 @@
 #define _WX_PRIVATE_ROWHEIGHTCACHE_H_
 
 #include "wx/hashmap.h"
-#include <vector>
+import <vector>;
 
 // struct describing a range of rows which contains rows <from> .. <to-1>
 struct RowRange

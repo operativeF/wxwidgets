@@ -14,7 +14,7 @@
     #include "wx/wx.h"
 
     #ifdef __WXMAC__
-        #include <cstring>
+        import <cstring>;
     #endif
 #endif
 
@@ -22,7 +22,7 @@
 #include "wx/filename.h"
 #include "wx/notebook.h"
 
-#include <ctime>
+import <ctime>;
 
 
 // ----------------------------------------------------------------------------

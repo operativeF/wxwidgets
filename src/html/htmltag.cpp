@@ -16,9 +16,9 @@
 #include "wx/html/htmlpars.h"
 #include "wx/html/styleparams.h"
 
-#include <cstdio> // for vsscanf
-#include <cstdarg>
-#include <vector>
+import <cstdio>; // for vsscanf
+import <cstdarg>;
+import <vector>;
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

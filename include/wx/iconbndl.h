@@ -17,7 +17,7 @@
 
 #include "wx/dynarray.h"
 
-#include <string>
+import <string>;
 
 class wxInputStream;
 

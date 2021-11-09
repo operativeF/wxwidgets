@@ -14,7 +14,7 @@
 #include "wx/dialog.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxColourDialog: dialog for choosing a colours

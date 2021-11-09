@@ -26,7 +26,7 @@ IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLEXPORT)
 
 #if wxUSE_EXTENDED_RTTI
 
-#include <cstring>
+import <cstring>;
 
 template<> void wxStringReadValue(const wxString &s, wxColour &data )
 {

@@ -15,7 +15,7 @@
 
 #include "wx/object.h"
 
-#include <string>
+import <string>;
 
 class wxFrame;
 class wxWindow;

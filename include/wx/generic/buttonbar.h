@@ -16,7 +16,7 @@
 #include "wx/toolbar.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxButtonToolBarTool;
 

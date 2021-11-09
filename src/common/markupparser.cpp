@@ -15,7 +15,7 @@
 #include "wx/log.h"
 #include "wx/private/markupparser.h"
 
-#include <stack>
+import <stack>;
 
 namespace
 {

@@ -19,8 +19,8 @@
 #include "wx/gdicmn.h"      // wxEllipsize...
 #include "wx/geometry/point.h"
 
-#include <string>
-#include <string_view>
+import <string>;
+import <string_view>;
 
 inline constexpr char wxControlNameStr[] = "control";
 

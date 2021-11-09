@@ -22,7 +22,7 @@
 #include "wx/window.h"
 #include "wx/msw/dragimag.h"
 
-#include <string>
+import <string>;
 
 // Wine doesn't have this yet
 #ifndef ListView_CreateDragImage

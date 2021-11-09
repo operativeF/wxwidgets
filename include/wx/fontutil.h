@@ -33,7 +33,7 @@
 #include "wx/osx/core/cfref.h"
 #endif
 
-#include <vector>
+import <vector>;
 
 class wxWindow;
 struct wxNativeEncodingInfo;

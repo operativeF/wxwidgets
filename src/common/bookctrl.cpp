@@ -13,7 +13,7 @@
 #include "wx/imaglist.h"
 #include "wx/bookctrl.h"
 
-#include <numeric>
+import <numeric>;
 
 // ============================================================================
 // implementation

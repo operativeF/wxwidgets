@@ -18,9 +18,9 @@
 #include "wx/control.h"      // base class
 #include "wx/stringutils.h"
 
-#include <cstdint>
-#include <string>
-#include <vector>
+import <cstdint>;
+import <string>;
+import <vector>;
 
 #include <gsl/gsl>
 

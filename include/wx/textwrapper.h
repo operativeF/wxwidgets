@@ -10,7 +10,7 @@
 #ifndef _WX_TEXTWRAPPER_H_
 #define _WX_TEXTWRAPPER_H_
 
-#include <string>
+import <string>;
 
 class wxWindow;
 

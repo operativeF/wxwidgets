@@ -17,8 +17,8 @@
 #include "wx/headercol.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 #include <gsl/gsl>
 

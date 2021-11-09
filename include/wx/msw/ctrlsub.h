@@ -10,8 +10,8 @@
 #ifndef _WX_MSW_CTRLSUB_H_
 #define _WX_MSW_CTRLSUB_H_
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxControlWithItems : public wxControlWithItemsBase
 {

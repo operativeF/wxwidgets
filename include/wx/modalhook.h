@@ -10,7 +10,7 @@
 #ifndef _WX_MODALHOOK_H_
 #define _WX_MODALHOOK_H_
 
-#include <vector>
+import <vector>;
 
 class wxDialog;
 

@@ -52,7 +52,7 @@
     #include <CoreFoundation/CFString.h>
 #endif
 
-#include <clocale>
+import <clocale>;
 
 // ----------------------------------------------------------------------------
 // constants

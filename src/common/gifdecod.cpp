@@ -20,10 +20,10 @@
 
 #include <gsl/gsl>
 
-#include <array>
+import <array>;
 #include <chrono>
-#include <vector>
-#include <tuple>
+import <vector>;
+import <tuple>;
 
 enum
 {

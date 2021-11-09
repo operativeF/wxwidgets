@@ -14,8 +14,8 @@
 #include "wx/dynarray.h"
 #include "wx/dialog.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxListBoxBase;
 

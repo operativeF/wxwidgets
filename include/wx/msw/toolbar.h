@@ -15,7 +15,7 @@
 
 #include "wx/imaglist.h"
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 

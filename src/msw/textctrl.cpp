@@ -39,7 +39,7 @@
 #include <boost/nowide/convert.hpp>
 
 #include <cassert>
-#include <string>
+import <string>;
 
 #if wxUSE_RICHEDIT
     #include <richedit.h>
@@ -65,7 +65,7 @@
     #include <wx/dynlib.h>
 #endif
 
-#include <stack>
+import <stack>;
 
 
 #ifndef CFM_BACKCOLOR

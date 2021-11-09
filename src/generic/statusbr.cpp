@@ -14,7 +14,7 @@
 #if wxUSE_STATUSBAR
 
 #ifndef WX_PRECOMP
-    #include <numeric>
+    import <numeric>;
 #endif
 
 #include "wx/statusbr.h"

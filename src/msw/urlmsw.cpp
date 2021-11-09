@@ -14,8 +14,8 @@
 #include "wx/utils.h"
 #include "wx/log.h"
 
-#include <cctype>
-#include <cstring>
+import <cctype>;
+import <cstring>;
 
 #if !wxUSE_PROTOCOL_HTTP
 #include "wx/protocol/protocol.h"

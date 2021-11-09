@@ -23,7 +23,7 @@
 #include "wx/chartype.h"    // for wxChar
 #include "wx/wxcrtbase.h"   // for wxStrlen() etc.
 
-#include <string>
+import <string>;
 
 // ---------------------------------------------------------------------------
 // macros
@@ -50,7 +50,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) {}
 
 // we use STL-based string internally
 
-#include <string>
+import <string>;
 
 using wxStdWideString = std::wstring;
 

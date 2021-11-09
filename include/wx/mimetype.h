@@ -23,7 +23,7 @@
 // the things we really need
 #include "wx/string.h"
 
-#include <vector>
+import <vector>;
 
 // fwd decls
 class wxIconLocation;

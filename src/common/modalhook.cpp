@@ -10,7 +10,7 @@
 #include "wx/defs.h"
 #include "wx/modalhook.h"
 
-#include <algorithm>
+import <algorithm>;
 
 
 wxModalDialogHook::Hooks wxModalDialogHook::ms_hooks;

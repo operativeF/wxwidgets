@@ -17,8 +17,8 @@
 
 #include "wx/window.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 //---------------------------------------------------------------------------
 // classes

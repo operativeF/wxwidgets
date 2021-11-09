@@ -20,8 +20,8 @@
 #include "wx/filedlg.h"
 #include "wx/filename.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxCheckBox;
 class wxChoice;

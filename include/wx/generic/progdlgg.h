@@ -14,7 +14,7 @@
 #include "wx/dialog.h"
 #include "wx/weakref.h"
 
-#include <limits>
+import <limits>;
 
 class wxButton;
 class wxEventLoop;

@@ -13,7 +13,7 @@
 
 #include "wx/dynarray.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxSelectedIndices is just a sorted array of indices

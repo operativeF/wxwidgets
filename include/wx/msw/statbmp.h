@@ -13,7 +13,7 @@
 
 #include "wx/bitmap.h"
 
-#include <string>
+import <string>;
 
 class wxIcon;
 

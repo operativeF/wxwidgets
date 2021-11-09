@@ -13,9 +13,9 @@
 #include "wx/defs.h"
 #include "wx/utils.h"
 
-#include <algorithm>
-#include <iterator>
-#include <list>
+import <algorithm>;
+import <iterator>;
+import <list>;
 
 template<typename T>
 class wxDList: public std::list<T*>

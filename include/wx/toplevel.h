@@ -22,7 +22,7 @@
 #include "wx/iconbndl.h"
 #include "wx/weakref.h"
 
-#include <string>
+import <string>;
 
 // the default names for various classes
 inline constexpr char wxFrameNameStr[] = "frame";

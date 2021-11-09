@@ -7,7 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <clocale> // for setlocale and LC_ALL
+import <clocale>; // for setlocale and LC_ALL
 
 #include <fmt/core.h>
 

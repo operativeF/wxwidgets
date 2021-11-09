@@ -17,7 +17,7 @@
 
 #include "wx/event.h"
 
-#include <string>
+import <string>;
 
 class wxTaskBarIconEvent;
 

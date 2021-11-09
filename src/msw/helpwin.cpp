@@ -18,7 +18,7 @@
     #include "wx/msw/private.h"
 #endif
     
-#include <ctime>
+import <ctime>;
 
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {

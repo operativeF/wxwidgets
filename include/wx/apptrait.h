@@ -13,8 +13,8 @@
 
 #include "wx/platinfo.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxConfigBase;
 class wxEventLoopBase;

@@ -24,11 +24,11 @@
     #include "wx/print.h"
 #endif
 
-#include <filesystem>
-#include <iosfwd>
+import <filesystem>;
+import <iosfwd>;
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxFileHistory;
 class wxFrame;

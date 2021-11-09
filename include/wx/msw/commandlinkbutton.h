@@ -12,7 +12,7 @@
 
 #include "wx/stringutils.h"
 
-#include <string>
+import <string>;
 
 // Derive from the generic version to be able to fall back to it during
 // run-time if the command link buttons are not supported by the system we're

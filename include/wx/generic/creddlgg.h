@@ -17,7 +17,7 @@
 #include "wx/dialog.h"
 #include "wx/webrequest.h"
 
-#include <string>
+import <string>;
 
 class wxGenericCredentialEntryDialog : public wxDialog
 {

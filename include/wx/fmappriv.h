@@ -11,7 +11,7 @@
 #ifndef _WX_FMAPPRIV_H_
 #define _WX_FMAPPRIV_H_
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants

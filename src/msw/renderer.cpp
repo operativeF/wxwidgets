@@ -23,7 +23,7 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/dynlib.h"
 
-#include <string>
+import <string>;
 
 // These Vista+ only types used by DrawThemeTextEx may not be available in older SDK headers
 using WXDTT_CALLBACK_PROC = int(__stdcall*)(HDC hdc, const wchar_t * pszText,

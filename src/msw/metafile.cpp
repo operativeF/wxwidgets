@@ -15,8 +15,8 @@
 #include "wx/metafile.h"
 #include "wx/filename.h"
 
-#include <cstdio>
-#include <cstring>
+import <cstdio>;
+import <cstring>;
 
 #if wxUSE_METAFILE && !defined(wxMETAFILE_IS_ENH)
 

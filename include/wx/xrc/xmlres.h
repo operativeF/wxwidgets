@@ -25,7 +25,7 @@
 #include "wx/icon.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"
-#include <vector>
+import <vector>;
 
 #include "wx/xrc/xmlreshandler.h"
 

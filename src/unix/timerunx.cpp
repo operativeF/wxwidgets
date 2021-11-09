@@ -23,7 +23,7 @@
 #include "wx/apptrait.h"
 #include "wx/longlong.h"
 #include "wx/time.h"
-#include <vector>
+import <vector>;
 
 #include <sys/time.h>
 #include <signal.h>

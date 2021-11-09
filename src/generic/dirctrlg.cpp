@@ -678,9 +678,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
         }
     }
     
-    // FIXME: Sort based on case insensitivity.
-    std::sort(dirs.begin(), dirs.end());
-    // dirs.Sort(wxDirCtrlStringCompareFunction);
+    std::sort(dirs.begin(), dirs.end(), wxDirCtrlStringCompareFunction);
 
     // Now do the filenames -- but only if we're allowed to
     if (!HasFlag(wxDIRCTRL_DIR_ONLY))
@@ -712,9 +710,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             }
         }
 
-        // FIXME: Sort based on case insensitivity.
-        std::sort(filenames.begin(), filenames.end());
-        //filenames.Sort(wxDirCtrlStringCompareFunction);
+        std::sort(filenames.begin(), filenames.end(), wxDirCtrlStringCompareFunction);
     }
 
     // Now we really know whether we have any children so tell the tree control

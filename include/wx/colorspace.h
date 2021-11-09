@@ -11,8 +11,8 @@
 #ifndef _COLOR_SPACE_H
 #define _COLOR_SPACE_H
 
-#include <concepts>
-#include <utility>
+import <concepts>;
+import <utility>;
 
 namespace wx::color::colorspace::rgb
 {

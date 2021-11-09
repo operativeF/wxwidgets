@@ -29,8 +29,8 @@ class wxFileDialogBase;
 #include "wx/msgdlg.h"
 #include "wx/filedlg.h"
 
-#include <queue>
-#include <typeinfo>
+import <queue>;
+import <typeinfo>;
 
 class wxTestingModalHook;
 

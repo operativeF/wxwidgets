@@ -16,7 +16,7 @@
 #include "wx/meta/movable.h"
 
 #ifndef wxNO_RTTI
-#include <typeinfo>
+import <typeinfo>;
 #endif
 
 TEST_CASE("IsPod")

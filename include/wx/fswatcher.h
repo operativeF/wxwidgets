@@ -20,7 +20,7 @@
 #include "wx/filename.h"
 #include "wx/hashmap.h"
 
-#include <vector>
+import <vector>;
 
 inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 

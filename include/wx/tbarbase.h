@@ -18,7 +18,7 @@
 #include "wx/list.h"
 #include "wx/control.h"
 
-#include <string>
+import <string>;
 
 class wxToolBarBase;
 

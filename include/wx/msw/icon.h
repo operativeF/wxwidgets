@@ -17,7 +17,7 @@
 
 #include "wx/msw/gdiimage.h"
 
-#include <string>
+import <string>;
 
 // ---------------------------------------------------------------------------
 // icon data

@@ -19,7 +19,7 @@
 #include "wx/geometry/size.h"
 #include "wx/geometry/point.h"
 
-#include <string>
+import <string>;
 
 class wxFrame;
 class wxWindow;

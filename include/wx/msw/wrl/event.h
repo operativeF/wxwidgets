@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_PRIVATE_WRL_H_
 #define _WX_MSW_PRIVATE_WRL_H_
 
-#include <atomic>
+import <atomic>;
 
 template <typename baseT, typename ...argTs>
 class CInvokable : public baseT

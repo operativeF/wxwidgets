@@ -13,7 +13,7 @@
 
 #include "wx/event.h"
 
-#include <string_view>
+import <string_view>;
 
 class wxFrame;
 class wxWindow;

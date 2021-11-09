@@ -14,7 +14,7 @@
 #include "wx/defs.h"
 #include "wx/wxcrtbase.h"
 
-#include <cstdlib>             // malloc() and free()
+import <cstdlib>;             // malloc() and free()
 
 class wxCStrData;
 

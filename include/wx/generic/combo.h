@@ -18,7 +18,7 @@
 
 #include "wx/containr.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // Generic wxComboCtrl

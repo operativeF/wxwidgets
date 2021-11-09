@@ -25,7 +25,7 @@
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through wxCLASSINFO macro
 #include "wx/systhemectrl.h"
 
-#include <string>
+import <string>;
 
 class wxImageList;
 

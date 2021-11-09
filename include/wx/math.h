@@ -15,9 +15,9 @@
 
 #include "wx/defs.h"
 
-#include <cmath>
-#include <cstdlib>
-#include <numbers>
+import <cmath>;
+import <cstdlib>;
+import <numbers>;
 
 /* Scaling factors for various unit conversions: 1 inch = 2.54 cm */
 // FIXME: Problematic, as double aren't commutative.

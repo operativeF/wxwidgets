@@ -15,7 +15,7 @@
 // there is no separate setting for wxMemoryText, it's smallish anyhow
 #if wxUSE_TEXTBUFFER
 
-#include <string>
+import <string>;
 
 class wxMemoryText : public wxTextBuffer
 {

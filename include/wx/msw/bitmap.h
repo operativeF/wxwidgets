@@ -19,8 +19,8 @@
 
 #include "wx/msw/wrap/utils.h"
 
-#include <cmath>
-#include <string>
+import <cmath>;
+import <string>;
 
 class wxBitmap;
 struct wxBitmapHandler; // FIXME: uses in class in non-MSW

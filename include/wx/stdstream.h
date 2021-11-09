@@ -16,7 +16,7 @@
 #include "wx/defs.h"
 #include "wx/stream.h"
 
-#include <iostream>
+import <iostream>;
 
 // ==========================================================================
 // wxStdInputStreamBuffer

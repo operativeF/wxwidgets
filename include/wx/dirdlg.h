@@ -18,8 +18,8 @@
 
 #include "wx/dialog.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -16,7 +16,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/bitmap.h"
 
-#include <string>
+import <string>;
 
 inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
 

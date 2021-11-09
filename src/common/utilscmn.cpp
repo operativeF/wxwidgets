@@ -19,7 +19,7 @@
 #ifdef wxNEEDS_STRICT_ANSI_WORKAROUNDS
     // Notice that undefining __STRICT_ANSI__ and including it here doesn't
     // work because it could have been already included, e.g. when using PCH.
-    #include <cstdlib>
+    import <cstdlib>;
 
     #ifndef environ
         // This just reproduces what stdlib.h does in MinGW 4.8.1.
@@ -65,7 +65,7 @@
 #include "wx/config.h"
 #include "wx/versioninfo.h"
 
-#include <ctime>
+import <ctime>;
 
 #include "wx/vector.h"
 
@@ -98,7 +98,7 @@
 #include <fmt/core.h>
 
 import <algorithm>;
-import <memory>;
+#include <memory>
 import <string>;
 import <vector>;
 import <utility>;

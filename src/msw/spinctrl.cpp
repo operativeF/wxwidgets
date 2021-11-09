@@ -31,9 +31,9 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <algorithm>
-#include <charconv>
-#include <limits>
+import <algorithm>;
+import <charconv>;
+import <limits>;
 
 // ----------------------------------------------------------------------------
 // macros

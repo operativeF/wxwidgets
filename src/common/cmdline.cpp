@@ -17,7 +17,7 @@
 
 import <vector>;
 import <charconv>;
-#include <clocale>             // for LC_ALL
+import <clocale>;             // for LC_ALL
 
 #if wxUSE_CMDLINE_PARSER
 

@@ -17,7 +17,7 @@
 #include "wx/geometry/point.h"
 #include "wx/geometry/size.h"
 
-#include <string>
+import <string>;
 
 class wxPrintNativeDataBase;
 

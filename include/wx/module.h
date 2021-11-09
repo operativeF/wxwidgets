@@ -14,7 +14,7 @@
 #include "wx/object.h"
 #include "wx/string.h"
 
-#include <vector>
+import <vector>;
 
 class wxModule;
 

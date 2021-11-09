@@ -64,10 +64,10 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <limits>
+import <algorithm>;
+import <limits>;
 #include <memory>
-#include <stack>
+import <stack>;
 
 // This must be the last header included to only affect the DEFINE_GUID()
 // occurrences below but not any GUIDs declared in the standard files included

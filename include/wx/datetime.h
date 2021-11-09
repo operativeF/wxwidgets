@@ -31,8 +31,8 @@ struct _SYSTEMTIME;
 #include <fmt/core.h>
 #include <gsl/gsl>
 
-#include <ctime>
-#include <vector>
+import <ctime>;
+import <vector>;
 
 // not all c-runtimes are based on 1/1/1970 being (time_t) 0
 // set this to the corresponding value in seconds 1/1/1970 has on your

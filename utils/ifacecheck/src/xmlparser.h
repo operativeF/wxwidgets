@@ -447,7 +447,7 @@ WX_DECLARE_HASH_MAP( unsigned long, wxString,
 
 WX_DECLARE_STRING_HASH_MAP( wxString, wxStringHashMap );
 #else
-#include <map>
+import <map>;
 typedef std::basic_string<char> stlString;
 typedef std::map<unsigned long, stlString> wxTypeIdHashMap;
 #endif

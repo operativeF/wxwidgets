@@ -65,7 +65,7 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
-#include <cmath>
+import <cmath>;
 
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now

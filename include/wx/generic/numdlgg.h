@@ -17,7 +17,7 @@
 
 #include "wx/dialog.h"
 
-#include <string>
+import <string>;
 
 #if wxUSE_SPINCTRL
     class wxSpinCtrl;

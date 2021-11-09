@@ -13,7 +13,7 @@
 
 #include "wx/string.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxPlatformInfo enums & structs

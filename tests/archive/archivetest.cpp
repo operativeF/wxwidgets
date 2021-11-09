@@ -9,9 +9,9 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
-    #include <string>
-    #include <list>
-    #include <map>
+    import <string>;
+    import <list>;
+    import <map>;
 #endif
 
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS

@@ -16,7 +16,7 @@
 // see comment in wx/hashmap.h which also applies to different standard hash
 // set classes
 
-#include <unordered_set>
+import <unordered_set>;
 #define WX_HASH_SET_BASE_TEMPLATE std::unordered_set
 
 // we need to define the class declared by _WX_DECLARE_HASH_SET as a class and

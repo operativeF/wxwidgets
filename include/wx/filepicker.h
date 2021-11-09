@@ -19,7 +19,7 @@
 #include "wx/filename.h"
 
 #include <memory>
-#include <string>
+import <string>;
 
 class wxDialog;
 class wxFileDirPickerEvent;

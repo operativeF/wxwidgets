@@ -13,7 +13,7 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <array>
+    import <array>;
 #endif // WX_PRECOMP
 
 #include "wx/hash.h"

@@ -17,8 +17,8 @@
 #include "wx/string.h"
 #include "wx/strvararg.h"
 
-#include <iosfwd>
-#include <vector>
+import <iosfwd>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // types
@@ -39,7 +39,7 @@ class wxObject;
 
 #if wxUSE_LOG
 
-#include <ctime>   // for time_t
+import <ctime>;   // for time_t
 
 #include "wx/hashmap.h"
 #include "wx/msgout.h"

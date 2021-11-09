@@ -13,7 +13,7 @@
 
 #if wxUSE_SPINBTN
 
-#include <string>
+import <string>;
 
 class wxSpinButton : public wxSpinButtonBase
 {

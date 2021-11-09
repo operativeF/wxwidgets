@@ -20,7 +20,7 @@
 #include "wx/chartype.h"
 #include "wx/dataobj.h"     // for wxDataFormat
 
-#include <vector>
+import <vector>;
 
 class wxClipboard;
 

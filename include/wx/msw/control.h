@@ -11,8 +11,8 @@
 #ifndef _WX_CONTROL_H_
 #define _WX_CONTROL_H_
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // General item class
 class wxControl : public wxControlBase

@@ -15,7 +15,7 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <cstring>
+    import <cstring>;
 #endif
 
 #include "wx/stdstream.h"

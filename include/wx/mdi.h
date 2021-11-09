@@ -21,7 +21,7 @@
 
 
 #include <memory>
-#include <string>
+import <string>;
 
 // forward declarations
 class wxMDIParentFrame;

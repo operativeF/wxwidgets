@@ -19,7 +19,7 @@
 #include <boost/nowide/convert.hpp>
 #include <fmt/core.h>
 
-#include <filesystem>
+import <filesystem>;
 
 namespace
 {

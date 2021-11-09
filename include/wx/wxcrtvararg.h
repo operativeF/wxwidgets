@@ -25,7 +25,7 @@
 // ----------------------------------------------------------------------------
 
 /* Required for wxPrintf() etc */
-#include <cstdarg>
+import <cstdarg>;
 
 /* printf() family saga */
 

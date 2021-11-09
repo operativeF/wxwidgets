@@ -14,7 +14,7 @@
 #include "wx/gdicmn.h"
 #include "wx/geometry/size.h"
 
-#include <vector>
+import <vector>;
 
 class wxDC;
 class wxIcon;

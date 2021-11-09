@@ -11,7 +11,7 @@
 #ifndef _WX_ICONLOC_H_
 #define _WX_ICONLOC_H_
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxIconLocation: describes the location of an icon

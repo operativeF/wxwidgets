@@ -17,7 +17,7 @@
 
 #include "wx/string.h"
 
-#include <tuple>
+import <tuple>;
 
 // ----------------------------------------------------------------------------
 // constants

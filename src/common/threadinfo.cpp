@@ -14,7 +14,7 @@
 #include "wx/tls.h"
 #include "wx/thread.h"
 
-import <memory>;
+#include <memory>
 import <vector>;
 
 namespace

@@ -12,7 +12,7 @@
 
 #include "wx/dynarray.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxControlWithItemsGeneric: generic implementation of item client data

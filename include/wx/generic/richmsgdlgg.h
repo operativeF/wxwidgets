@@ -11,7 +11,7 @@
 #define _WX_GENERIC_RICHMSGDLGG_H_
 
 #include "wx/collpane.h"
-#include <string>
+import <string>;
 
 class wxCheckBox;
 class wxCollapsiblePaneEvent;

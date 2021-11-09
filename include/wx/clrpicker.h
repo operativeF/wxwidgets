@@ -19,7 +19,7 @@
 #include "wx/colour.h"
 #include "wx/pickerbase.h"
 
-#include <string>
+import <string>;
 
 
 class wxColourPickerEvent;

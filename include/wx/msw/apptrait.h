@@ -13,7 +13,7 @@
 
 #include "wx/defs.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase

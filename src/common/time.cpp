@@ -13,7 +13,7 @@
     #include "wx/msw/wrapwin.h"
 #endif
 
-#include <ctime>
+import <ctime>;
 
 #include "wx/intl.h"
 #include "wx/log.h"

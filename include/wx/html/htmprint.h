@@ -20,7 +20,7 @@
 
 #include "wx/print.h"
 #include "wx/printdlg.h"
-#include <vector>
+import <vector>;
 
 //--------------------------------------------------------------------------------
 // wxHtmlDCRenderer

@@ -23,7 +23,7 @@
 #include "wx/imagiff.h"
 #include "wx/wfstream.h"
 
-#include <array>
+import <array>;
 
 // --------------------------------------------------------------------------
 // Constants

@@ -22,7 +22,7 @@
 struct wxSize;
 class  wxFont;
 
-#include <numeric>
+import <numeric>;
 
 // -----------------------------------------------------------------------
 

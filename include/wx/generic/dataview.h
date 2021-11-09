@@ -19,8 +19,8 @@
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxDataViewMainWindow;
 class wxDataViewHeaderWindow;

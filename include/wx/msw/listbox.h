@@ -16,10 +16,10 @@
 #include "wx/geometry/rect.h"
 
 #include <memory>
-#include <string>
-#include <string_view>
-#include <utility>
-#include <vector>
+import <string>;
+import <string_view>;
+import <utility>;
+import <vector>;
 
 #include <gsl/gsl>
 

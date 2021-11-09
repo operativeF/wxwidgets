@@ -22,7 +22,7 @@
 #if wxUSE_DISPLAY
     #include "wx/vidmode.h"
 
-    #include <vector>
+    import <vector>;
 
     using wxArrayVideoModes = std::vector<wxVideoMode>;
 

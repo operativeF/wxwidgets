@@ -25,7 +25,7 @@
 
 #include "wx/generic/dragimgg.h"
 
-#include <cstdio>
+import <cstdio>;
 
 // ----------------------------------------------------------------------------
 // macros

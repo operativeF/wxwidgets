@@ -16,7 +16,7 @@
 #include "wx/colour.h"
 #include "wx/icon.h"
 
-#include <string>
+import <string>;
 
 class wxWindow;
 

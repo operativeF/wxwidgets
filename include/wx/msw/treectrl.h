@@ -22,7 +22,7 @@
 #include "wx/hashmap.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 #ifdef __GNUWIN32__
     // Cygwin windows.h defines these identifiers

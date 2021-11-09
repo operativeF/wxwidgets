@@ -16,7 +16,7 @@
 
 #include "wx/msw/uxtheme.h"
 
-#include <string>
+import <string>;
 
 bool wxUxThemeIsActive()
 {

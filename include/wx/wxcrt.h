@@ -15,7 +15,7 @@
 #include "wx/wxcrtbase.h"
 #include "wx/string.h"
 
-#include <cstdarg>
+import <cstdarg>;
 
 #ifndef __WX_SETUP_H__
 // For non-configure builds assume vsscanf is available, if not Visual C
@@ -56,7 +56,7 @@ size_t wxWC2MB(char *buf, const wchar_t *psz, size_t n);
 //  (including even MSC) inline them just like we do right in their
 //  headers.
 //
-#include <cstring>
+import <cstring>;
 
 //implement our own wmem variants
 inline wxChar* wxTmemchr(const wxChar* s, wxChar c, size_t l)

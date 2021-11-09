@@ -17,8 +17,8 @@
 
 #include "wx/listbox.h"
 
-#include <cstdint>
-#include <vector>
+import <cstdint>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxCheckListBox: a listbox whose items may be checked

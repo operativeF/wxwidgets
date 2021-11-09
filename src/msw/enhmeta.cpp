@@ -22,7 +22,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

@@ -35,9 +35,9 @@
 #include "wx/stringops.h"
 #include "wx/unichar.h"
 
-#include <iterator>
-#include <string>
-#include <utility>
+import <iterator>;
+import <string>;
+import <utility>;
 
 // by default we cache the mapping of the positions in UTF-8 string to the byte
 // offset as this results in noticeable performance improvements for loops over
@@ -3942,7 +3942,7 @@ wxDEFINE_ALL_COMPARISONS(const char *, const wxCStrData&, wxCMP_CHAR_CSTRDATA)
 // but, presumably, if using std::wstring is undesirable, then so is using
 // std::hash<> anyhow.
 
-#include <functional>
+import <functional>;
 
 namespace std
 {

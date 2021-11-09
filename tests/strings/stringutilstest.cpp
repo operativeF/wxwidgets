@@ -4,7 +4,7 @@
 
 #include "wx/stringutils.h"
 
-#include <array>
+import <array>;
 
 TEST_SUITE("Test auxilliary functions that work with strings")
 {

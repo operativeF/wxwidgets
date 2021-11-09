@@ -15,7 +15,7 @@
 
 #include "wx/geometry/rect.h"
 
-#include <vector>
+import <vector>;
 
 class wxClientDC;
 class wxToolTip;

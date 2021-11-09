@@ -14,7 +14,7 @@
 #include "wx/colour.h"
 #include "wx/font.h"
 
-#include <string>
+import <string>;
 
 class wxWindow;
 

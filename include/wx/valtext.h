@@ -19,8 +19,8 @@ class wxTextEntry;
 
 #include "wx/validate.h"
 
-#include <algorithm>
-#include <vector>
+import <algorithm>;
+import <vector>;
 
 enum wxTextValidatorStyle
 {

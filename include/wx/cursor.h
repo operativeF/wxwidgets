@@ -23,7 +23,7 @@
     using wxGDIImage = wxGDIObject;
 #endif
 
-#include <string>
+import <string>;
 
 class wxCursorBase : public wxGDIImage
 {

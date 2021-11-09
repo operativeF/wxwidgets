@@ -24,7 +24,7 @@
 
 #include "wx/sysopt.h"
 
-#include <string>
+import <string>;
 
 // ---------------------------------------------------------------------------
 // macros

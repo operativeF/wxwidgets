@@ -25,8 +25,8 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <vector>
+import <algorithm>;
+import <vector>;
 
 WX_DEFINE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfoArray)
 

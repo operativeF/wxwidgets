@@ -19,7 +19,7 @@
 #include "wx/utils.h"
 #include "wx/hashset.h"
 #include "wx/mimetype.h"
-#include <vector>
+import <vector>;
 
 WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, StringSet);
 

@@ -21,7 +21,7 @@
 
 #include "wx/file.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxTextFile

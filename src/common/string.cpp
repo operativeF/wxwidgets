@@ -21,13 +21,13 @@
 #include "wx/xlocale.h"
 
 
-#include <cctype>
+import <cctype>;
 #include <cerrno>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <sstream>
-#include <vector>
+import <cstdlib>;
+import <cstring>;
+import <iostream>;
+import <sstream>;
+import <vector>;
 
 // define a function declared in wx/buffer.h here as we don't have buffer.cpp
 // and don't want to add it just because of this simple function

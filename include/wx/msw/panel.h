@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_PANEL_H_
 #define _WX_MSW_PANEL_H_
 
-#include <string>
+import <string>;
 
 class wxBrush;
 

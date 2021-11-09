@@ -5,7 +5,7 @@
 #include <wx/geometry/size.h>
 #include <wx/position.h>
 
-#include <string>
+import <string>;
 
 #ifndef _WINDEF_
 class HWND__;

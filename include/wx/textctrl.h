@@ -23,10 +23,10 @@
 #include "wx/textentry.h"       // single-line text entry interface
 #include "wx/geometry/point.h"
 
-#include <iostream>
-#include <streambuf>
-#include <string>
-#include <vector>
+import <iostream>;
+import <streambuf>;
+import <string>;
+import <vector>;
 
 #define wxHAS_TEXT_WINDOW_STREAM 1
 

@@ -23,7 +23,7 @@
     #include "wx/dataobj.h"
 #endif
 
-#include <string>
+import <string>;
 
 
 // ----------------------------------------------------------------------------

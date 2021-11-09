@@ -27,7 +27,7 @@
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
-#include <numeric>
+import <numeric>;
 
 #define CHECK_EQUAL_COLOUR_RGB(c1, c2) \
     CHECK( (int)c1.Red()   == (int)c2.Red() ); \

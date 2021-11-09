@@ -29,8 +29,8 @@
 #include <windowsx.h>
 
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // private functions

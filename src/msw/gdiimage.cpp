@@ -27,7 +27,7 @@
 
 #include "wx/msw/private.h"
 
-#include <string>
+import <string>;
 
 #include <boost/nowide/convert.hpp>
 

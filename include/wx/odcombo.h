@@ -21,9 +21,9 @@
 #include "wx/timer.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <string_view>
-#include <vector>
+import <string>;
+import <string_view>;
+import <vector>;
 
 //
 // New window styles for wxOwnerDrawnComboBox

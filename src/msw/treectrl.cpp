@@ -31,7 +31,7 @@
 
 #include <boost/nowide/stackstring.hpp>
 
-#include <array>
+import <array>;
 
 // macros to hide the cast ugliness
 // --------------------------------

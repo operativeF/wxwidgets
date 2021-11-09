@@ -16,7 +16,7 @@
     #include "wx/list.h"
     #include "wx/event.h"
 
-    #include <cctype>
+    import <cctype>;
 #endif // WX_PRECOMP
 
 #include "wx/accel.h"

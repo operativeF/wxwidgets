@@ -20,8 +20,8 @@
 
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxImageList;
 class wxBookCtrlEvent;

@@ -31,11 +31,11 @@
 #include "wx/any.h"
 #include "wx/typeinfo.h"
 
-#include <bit>
-#include <cstdint>
-#include <string>
-#include <type_traits>
-#include <vector>
+import <bit>;
+import <cstdint>;
+import <string>;
+import <type_traits>;
+import <vector>;
 
 
 // This is now always defined, but keep it for backwards compatibility.

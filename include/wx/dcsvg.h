@@ -18,8 +18,8 @@
 #include "wx/geometry/rect.h"
 
 #include <memory>
-#include <string>
-#include <string_view>
+import <string>;
+import <string_view>;
 
 inline constexpr char wxSVGVersion[] = "v0101";
 

@@ -15,7 +15,7 @@
 #include "wx/string.h"
 #include "wx/filefn.h"      // for wxS_DIR_DEFAULT
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

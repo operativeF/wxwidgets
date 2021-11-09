@@ -48,8 +48,8 @@
 #include "wx/geometry/rect.h"
 
 
-#include <cstdint>
-#include <string>
+import <cstdint>;
+import <string>;
 
 class wxTextCtrl;
 class wxComboPopup;

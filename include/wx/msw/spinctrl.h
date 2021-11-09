@@ -16,9 +16,9 @@
 #include "wx/geometry/rect.h"
 #include "wx/spinbutt.h"    // the base class
 
-#include <limits>
-#include <string>
-#include <vector>
+import <limits>;
+import <string>;
+import <vector>;
 
 class wxSpinCtrl;
 

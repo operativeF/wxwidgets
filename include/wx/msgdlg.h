@@ -18,7 +18,7 @@
 #include "wx/dialog.h"
 #include "wx/stockitem.h"
 
-#include <string>
+import <string>;
 
 #include <fmt/core.h>
 

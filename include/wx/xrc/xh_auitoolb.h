@@ -12,7 +12,7 @@
 
 #include "wx/aui/auibar.h"
 #include "wx/menu.h"
-#include <vector>
+import <vector>;
 #include "wx/xrc/xmlres.h"
 
 #if wxUSE_XRC && wxUSE_AUI

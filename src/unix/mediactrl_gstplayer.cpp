@@ -22,7 +22,7 @@
 
 #include "wx/filesys.h"             // FileNameToURL()
 #include "wx/thread.h"              // wxMutex/wxMutexLocker
-#include <vector>              // std<wxString>
+import <vector>;              // std<wxString>
 
 #ifdef __WXGTK__
     #include "wx/gtk/private/wrapgtk.h"

@@ -26,7 +26,7 @@
 
 #include "wx/private/graphics.h"
 
-#include <cmath>
+import <cmath>;
 #include <memory>
 
 //-----------------------------------------------------------------------------

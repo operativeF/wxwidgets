@@ -15,7 +15,7 @@
 
 #include "wx/helpbase.h"
 
-#include <string>
+import <string>;
 
 class wxWinHelpController: public wxHelpControllerBase
 {

@@ -15,8 +15,8 @@
 
 #include "wx/helpbase.h"
 
-#include <filesystem>
-#include <string>
+import <filesystem>;
+import <string>;
 
 class wxCHMHelpController : public wxHelpControllerBase
 {

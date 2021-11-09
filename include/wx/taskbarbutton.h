@@ -18,8 +18,8 @@
 #include "wx/geometry/rect.h"
 #include "wx/icon.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxTaskBarButton;
 class wxTaskBarJumpListCategory;

@@ -18,7 +18,7 @@
 #include "wx/dialog.h"          // the base class
 #include "wx/fontdata.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxFontDialog interface

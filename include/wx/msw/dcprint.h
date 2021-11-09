@@ -18,7 +18,7 @@
 #include "wx/msw/dc.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxPrintData;
 

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_AUI
 
-#include <vector>
+import <vector>;
 
 class wxAuiManager;
 class wxAuiNotebook;

@@ -18,8 +18,8 @@
 #include "wx/bitflags.h"
 #include "wx/dialog.h"
 
-#include <cstdint>
-#include <string>
+import <cstdint>;
+import <string>;
 
 class wxFindDialogEvent;
 class wxFindReplaceDialog;

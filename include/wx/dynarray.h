@@ -13,8 +13,8 @@
 
 #include "wx/defs.h"
 
-#include <algorithm>
-#include <vector>
+import <algorithm>;
+import <vector>;
 
 /*
   This header defines legacy dynamic arrays and object arrays (i.e. arrays

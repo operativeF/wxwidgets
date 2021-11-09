@@ -17,7 +17,7 @@
 #include "wx/stream.h"
 #include "wx/versioninfo.h"
 
-#include <cstdint>
+import <cstdint>;
 
 namespace wxPrivate
 {

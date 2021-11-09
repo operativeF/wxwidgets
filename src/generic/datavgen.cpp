@@ -26,7 +26,7 @@
     #include <fmt/core.h>
     #include <gsl/gsl>
     
-    #include <vector>
+    import <vector>;
 #endif
 
 #include "wx/app.h"          // GetRegisteredClassName()

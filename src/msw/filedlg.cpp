@@ -29,9 +29,9 @@
 #include "wx/stringutils.h"
 
 #include <memory>
-#include <string>
-#include <tuple>
-#include <vector>
+import <string>;
+import <tuple>;
+import <vector>;
 
 
 // ----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 
 #include <png.h>
 
-#include <tuple>
+import <tuple>;
 
 // ----------------------------------------------------------------------------
 // local functions

@@ -17,7 +17,7 @@
 
 #include "wx/spinbutt.h"        // should make wxSpinEvent visible to the app
 
-#include <string>
+import <string>;
 
 // Events
 class wxSpinDoubleEvent;

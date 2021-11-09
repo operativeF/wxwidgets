@@ -15,7 +15,7 @@
 #include "wx/colour.h"
 #include "wx/font.h"
 
-#include <stack>
+import <stack>;
 
 // ----------------------------------------------------------------------------
 // wxMarkupParserAttrOutput: simplified wxFont-using version of the above.

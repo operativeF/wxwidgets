@@ -25,7 +25,7 @@
 
 #include "wx/event.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // classes used to implement context help UI

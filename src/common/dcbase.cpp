@@ -69,8 +69,8 @@
     #include "wx/qt/dcscreen.h"
 #endif
 
-#include <array>
-#include <cmath>
+import <array>;
+import <cmath>;
 
 //----------------------------------------------------------------------------
 // wxDCFactory

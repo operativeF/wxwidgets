@@ -21,7 +21,7 @@
 #include "wx/flags.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include <typeinfo>
+import <typeinfo>;
 
 class wxClassInfo;
 

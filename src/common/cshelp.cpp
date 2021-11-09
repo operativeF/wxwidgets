@@ -22,7 +22,7 @@
 
 #include <fmt/core.h>
 
-#include <charconv>
+import <charconv>;
 
 // ----------------------------------------------------------------------------
 // wxContextHelpEvtHandler private class

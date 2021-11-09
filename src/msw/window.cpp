@@ -100,9 +100,9 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
-#include <array>
-#include <numbers>
-#include <vector>
+import <array>;
+import <numbers>;
+import <vector>;
 
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT

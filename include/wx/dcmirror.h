@@ -13,7 +13,7 @@
 
 #include "wx/dc.h"
 
-#include <string_view>
+import <string_view>;
 
 // ----------------------------------------------------------------------------
 // wxMirrorDC allows to write the same code for horz/vertical layout

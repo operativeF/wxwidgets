@@ -43,7 +43,7 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
-#include <stack>
+import <stack>;
 
 // ----------------------------------------------------------------------------
 // constants

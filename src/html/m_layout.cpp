@@ -15,7 +15,7 @@
 
 #include "wx/html/htmlwin.h"
 
-#include <cstdlib>                     // bsearch()
+import <cstdlib>;                     // bsearch()
 
 FORCE_LINK_ME(m_layout)
 

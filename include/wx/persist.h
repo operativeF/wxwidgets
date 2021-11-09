@@ -14,7 +14,7 @@
 #include "wx/hashmap.h"
 #include "wx/confbase.h"
 
-#include <string>
+import <string>;
 
 class wxPersistentObject;
 

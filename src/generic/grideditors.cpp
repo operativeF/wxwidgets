@@ -50,8 +50,8 @@
 #endif
 
 // Required for wxIs... functions
-#include <cctype>
-#include <charconv>
+import <cctype>;
+import <charconv>;
 
 // ============================================================================
 // implementation

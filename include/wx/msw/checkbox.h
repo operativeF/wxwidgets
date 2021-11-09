@@ -14,7 +14,7 @@
 #include "wx/msw/ownerdrawnbutton.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 // Checkbox item (single checkbox)
 class wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>

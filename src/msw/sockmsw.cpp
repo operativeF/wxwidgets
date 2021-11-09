@@ -16,9 +16,9 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-#include <array>
+import <array>;
 #include <memory>
-#include <string_view>
+import <string_view>;
 
 /* including rasasync.h (included from windows.h itself included from
  * wx/setup.h and/or winsock.h results in this warning for

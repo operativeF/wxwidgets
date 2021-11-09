@@ -17,9 +17,9 @@
 #include "wx/tokenzr.h"
 #include "wx/txtstrm.h"
 
-#include <map>
-#include <string>
-#include <vector>
+import <map>;
+import <string>;
+import <vector>;
 
 using namespace std;
 

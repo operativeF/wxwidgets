@@ -12,7 +12,7 @@
 
 #include "wx/string.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxCmdLineArgsArray: helper class used by wxApp::argv

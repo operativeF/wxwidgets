@@ -13,7 +13,7 @@
 
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxFindReplaceDialog: dialog for searching / replacing text

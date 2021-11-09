@@ -28,7 +28,7 @@
     #include "wx/osx/private.h"
 #endif
 
-#include <numeric>
+import <numeric>;
 
 // -----------------------------------------------------------------------------
 // array types

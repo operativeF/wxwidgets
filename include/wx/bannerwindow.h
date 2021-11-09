@@ -18,7 +18,7 @@
 #include "wx/event.h"
 #include "wx/window.h"
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 class wxColour;

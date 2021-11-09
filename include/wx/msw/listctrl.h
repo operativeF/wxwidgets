@@ -14,8 +14,8 @@
 #include "wx/textctrl.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 struct wxMSWListItemData;
 class wxMSWListHeaderCustomDraw;

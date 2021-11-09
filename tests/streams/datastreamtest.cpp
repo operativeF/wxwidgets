@@ -14,7 +14,7 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <vector>
+    import <vector>;
 #endif // WX_PRECOMP
 
 

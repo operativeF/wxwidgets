@@ -18,8 +18,8 @@
 
 #include "wx/string.h"
 
-#include <climits>     // for LONG_MAX
-#include <iosfwd>
+import <climits>;     // for LONG_MAX
+import <iosfwd>;
 
 #include <gsl/gsl>
 
@@ -1064,7 +1064,7 @@ class wxTextInputStream &operator>>(class wxTextInputStream &stream, wxLongLong_
 
 #if wxUSE_LONGLONG_NATIVE
 
-#include <limits>
+import <limits>;
 
 namespace std
 {

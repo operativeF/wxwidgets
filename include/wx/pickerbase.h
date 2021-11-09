@@ -15,7 +15,7 @@
 #include "wx/sizer.h"
 #include "wx/containr.h"
 
-#include <string>
+import <string>;
 
 class wxTextCtrl;
 class wxToolTip;

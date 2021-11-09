@@ -17,7 +17,7 @@
 #include "wx/pen.h"
 #include "wx/scrolwin.h"
 
-#include <string>
+import <string>;
 
 // -----------------------------------------------------------------------------
 // forward declaration

@@ -28,7 +28,7 @@
 #undef min
 #undef max
 
-#include <limits>
+import <limits>;
 
 // Bit masks used for numeric validator styles.
 enum wxNumValidatorStyle

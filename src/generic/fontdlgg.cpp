@@ -33,9 +33,9 @@
 #include "wx/spinctrl.h"
 #endif
 
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
+import <cstdio>;
+import <cstring>;
+import <cstdlib>;
 
 //-----------------------------------------------------------------------------
 // helper class - wxFontPreviewer

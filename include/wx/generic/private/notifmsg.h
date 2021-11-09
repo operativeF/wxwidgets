@@ -12,7 +12,7 @@
 
 #include "wx/private/notifmsg.h"
 
-#include <string>
+import <string>;
 
 class wxGenericNotificationMessageImpl : public wxNotificationMessageImpl
 {

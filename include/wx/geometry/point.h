@@ -4,7 +4,7 @@
 #include "wx/list.h"
 #include "wx/math.h"
 
-#include <cmath>
+import <cmath>;
 
 template<typename NumericalT>
 struct wxPoint2D

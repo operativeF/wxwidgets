@@ -14,7 +14,7 @@
 #if wxUSE_NUMBERDLG
 
 #ifndef WX_PRECOMP
-    #include <string>
+    import <string>;
 #endif
 
 #include "wx/utils.h"

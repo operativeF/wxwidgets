@@ -43,7 +43,7 @@
 
 #include <gsl/gsl>
 
-#include <string>
+import <string>;
 
 #ifdef __UNIX__
     #include <cerrno>

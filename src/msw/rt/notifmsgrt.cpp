@@ -32,7 +32,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <string>
+import <string>;
 
 using namespace ABI::Windows::UI::Notifications;
 using namespace ABI::Windows::Data::Xml::Dom;

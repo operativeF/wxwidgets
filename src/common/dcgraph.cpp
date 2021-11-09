@@ -18,8 +18,8 @@
 #include "wx/geometry.h"
 #include "wx/stringutils.h"
 
-#include <cmath>
-#include <numbers>
+import <cmath>;
+import <numbers>;
 
 //-----------------------------------------------------------------------------
 // Local functions

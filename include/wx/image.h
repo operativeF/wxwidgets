@@ -23,8 +23,8 @@
 #  include "wx/stream.h"
 #endif
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 inline constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
 inline constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";

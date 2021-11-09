@@ -15,7 +15,7 @@
 #include "wx/msw/fswatcher.h"
 #include "wx/private/fswatcher.h"
 
-import <memory>;
+#include <memory>
 
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {

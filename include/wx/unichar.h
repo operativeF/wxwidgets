@@ -18,9 +18,9 @@
 // it is declared in different headers for C++98 and C++11. Instead of testing
 // which one is being used, just include both of them as it's simpler and less
 // error-prone.
-#include <algorithm>        // std::swap() for C++98
-#include <cstdint>
-#include <utility>          // std::swap() for C++11
+import <algorithm>;        // std::swap() for C++98
+import <cstdint>;
+import <utility>;          // std::swap() for C++11
 
 #include <gsl/gsl>
 

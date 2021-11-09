@@ -16,7 +16,7 @@
 
 #if wxUSE_STREAMS
 
-#include <cstdint>
+import <cstdint>;
 
 class wxTextInputStream;
 class wxTextOutputStream;

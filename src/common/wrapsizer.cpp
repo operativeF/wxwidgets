@@ -10,7 +10,7 @@
 
 #include "wx/wrapsizer.h"
 
-#include <vector>
+import <vector>;
 
 namespace
 {

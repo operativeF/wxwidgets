@@ -17,7 +17,7 @@
 #include "wx/button.h"
 #include "wx/stringutils.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // Command link button common base class

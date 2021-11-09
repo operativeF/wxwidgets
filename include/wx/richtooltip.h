@@ -18,7 +18,7 @@
 #include "wx/geometry/rect.h"
 
 #include <chrono>
-#include <string>
+import <string>;
 
 class wxFont;
 class wxIcon;

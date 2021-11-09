@@ -25,8 +25,8 @@
     #include "wx/filesys.h"
 #endif // wxUSE_FILESYSTEM
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxHtmlCell;
 class wxHtmlWinParser;

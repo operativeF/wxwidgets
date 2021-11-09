@@ -13,8 +13,8 @@
 #include "wx/module.h"
 #include "wx/fontenum.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 namespace
 {

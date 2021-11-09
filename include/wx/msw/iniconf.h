@@ -15,7 +15,7 @@
 
 #if wxUSE_CONFIG && wxUSE_INICONF
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxIniConfig is a wxConfig implementation which uses MS Windows INI files to

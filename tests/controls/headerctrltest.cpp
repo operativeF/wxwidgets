@@ -12,8 +12,8 @@
 
 #include "wx/app.h"
 
-#include <algorithm>
-#include <array>
+import <algorithm>;
+import <array>;
 
 #include "wx/headerctrl.h"
 

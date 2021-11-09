@@ -20,7 +20,7 @@
 #include "wx/list.h"
 #include "wx/geometry/size.h"
 
-#include <string>
+import <string>;
 
 struct wxGDIImageRefData;
 class wxGDIImageHandler;

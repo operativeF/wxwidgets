@@ -24,8 +24,8 @@
 #include "wx/private/window.h"
 
 #include <memory>
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 //---------------------------------------------------------------------------
 

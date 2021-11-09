@@ -16,7 +16,7 @@
 #include "wx/event.h"
 #include "wx/control.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // types

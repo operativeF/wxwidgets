@@ -39,7 +39,7 @@
 
 #include <fmt/core.h>
 
-#include <ctime>
+import <ctime>;
 
 // Report an OLE error when calling the specified method to the user via wxLog.
 static void

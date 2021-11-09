@@ -31,7 +31,7 @@
 
 #include <gsl/gsl>
 
-#include <vector>
+import <vector>;
 
 #ifndef CFSTR_SHELLURL
 #define CFSTR_SHELLURL "UniformResourceLocator"

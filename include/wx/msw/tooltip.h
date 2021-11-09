@@ -16,7 +16,7 @@
 #include "wx/geometry/rect.h"
 
 #include <chrono>
-#include <string>
+import <string>;
 
 class wxWindow;
 class wxToolTipOtherWindows;

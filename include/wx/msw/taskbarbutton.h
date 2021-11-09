@@ -16,7 +16,7 @@
 
 #include "wx/geometry/rect.h"
 
-#include <vector>
+import <vector>;
 #include "wx/taskbarbutton.h"
 
 class wxWindow;

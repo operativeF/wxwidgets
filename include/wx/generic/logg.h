@@ -13,8 +13,8 @@
 
 #include "wx/string.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 #if wxUSE_GUI
 

@@ -20,8 +20,8 @@
 
 #include "wx/stopwatch.h"
 
-#include <queue>
-#include <utility>
+import <queue>;
+import <utility>;
 
 enum class wxMessageQueueError
 {

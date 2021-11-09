@@ -11,7 +11,7 @@
 #ifndef _CHAR_UTILS_H
 #define _CHAR_UTILS_H
 
-#include <concepts>
+import <concepts>;
 
 namespace wx::utils
 {

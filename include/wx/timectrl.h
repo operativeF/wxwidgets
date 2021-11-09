@@ -16,7 +16,7 @@
 
 #include "wx/datetimectrl.h"
 
-#include <string>
+import <string>;
 
 inline constexpr char wxTimePickerCtrlNameStr[] = "timectrl";
 

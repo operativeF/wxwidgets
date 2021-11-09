@@ -17,8 +17,8 @@
 
 #include "wx/headerctrl.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // array classes

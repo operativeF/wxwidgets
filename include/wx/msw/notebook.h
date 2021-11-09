@@ -17,7 +17,7 @@
 
 #include "wx/msw/wrap/utils.h"
 
-#include <string>
+import <string>;
 
 using msw::utils::unique_brush;
 

@@ -63,7 +63,7 @@
         #error Neither compiler nor OS support thread-specific variables.
     #endif
 
-    #include <cstdlib> // for calloc()
+    import <cstdlib>; // for calloc()
 
     // wxTlsValue<T> represents a thread-specific value of type T but, unlike
     // with native compiler thread-specific variables, it behaves like a

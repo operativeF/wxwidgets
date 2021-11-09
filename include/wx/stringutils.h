@@ -5,11 +5,11 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <cctype>
-#include <string>
-#include <string_view>
-#include <vector>
+import <algorithm>;
+import <cctype>;
+import <string>;
+import <string_view>;
+import <vector>;
 
 namespace wx::utils
 {

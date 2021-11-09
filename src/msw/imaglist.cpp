@@ -26,7 +26,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrap/utils.h"
 
-#include <algorithm>
+import <algorithm>;
 
 using msw::utils::unique_bitmap;
 

@@ -11,7 +11,7 @@
 #ifndef WX_PRIVATE_MENURADIO_H_
 #define WX_PRIVATE_MENURADIO_H_
 
-#include <vector>
+import <vector>;
 
 // Contains the data about the radio items groups in the given menu.
 class wxMenuRadioItemsData

@@ -16,7 +16,7 @@
 
 #include "wx/msgdlg.h"
 
-#include <string>
+import <string>;
 
 // Extends a message dialog with an optional checkbox and user-expandable
 // detailed text.

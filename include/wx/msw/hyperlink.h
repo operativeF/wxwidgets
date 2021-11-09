@@ -13,7 +13,7 @@
 #include "wx/generic/hyperlink.h"
 #include "wx/app.h"
 
-#include <string>
+import <string>;
 
 static std::string GetLabelForSysLink(const std::string& text, const std::string& url)
 {

@@ -26,8 +26,8 @@
 #include "wx/gifdecod.h"
 #include "wx/artprov.h"
 
-#include <cmath>
-#include <vector>
+import <cmath>;
+import <vector>;
 
 FORCE_LINK_ME(m_image)
 

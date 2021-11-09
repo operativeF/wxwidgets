@@ -20,7 +20,7 @@
 #include "wx/defs.h"
 #include "wx/bookctrl.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -14,7 +14,7 @@
 
 #include "wx/event.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxNotificationMessage: allows to show the user a message non intrusively

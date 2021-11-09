@@ -14,7 +14,7 @@
 #include "wx/xlocale.h"
 
 #include <cerrno>
-#include <clocale>
+import <clocale>;
 
 // ----------------------------------------------------------------------------
 // module globals

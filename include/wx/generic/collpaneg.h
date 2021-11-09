@@ -16,7 +16,7 @@ class wxCollapsibleHeaderCtrl;
 
 #include "wx/containr.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxGenericCollapsiblePane

@@ -10,7 +10,7 @@
 
 #include "wx/colour.h"
 
-#include <array>
+import <array>;
 
 class wxColourData
 {

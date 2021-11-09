@@ -15,9 +15,9 @@
 #include "wx/generic/prntdlgg.h"
 
 #ifndef WX_PRECOMP
-    #include <array>
-    #include <string>
-    #include <vector>
+    import <array>;
+    import <string>;
+    import <vector>;
 
     #include <fmt/core.h>
 #endif

@@ -19,8 +19,8 @@
 #include "wx/palette.h"
 #include "wx/window.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxGLCanvas;
 class wxGLContext;

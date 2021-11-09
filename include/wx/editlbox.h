@@ -16,8 +16,8 @@
 
 #include "wx/panel.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxBitmapButton;
 class wxListCtrl;

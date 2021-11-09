@@ -13,7 +13,7 @@
 
 #include "wx/longlong.h"
 
-#include <cstdint>
+import <cstdint>;
 
 #if wxUSE_STREAMS
 

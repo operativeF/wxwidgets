@@ -19,7 +19,7 @@
 #include "wx/control.h"
 
 #include <memory>
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxGauge style flags

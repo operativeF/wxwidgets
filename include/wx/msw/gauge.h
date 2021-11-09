@@ -13,7 +13,7 @@
 
 #if wxUSE_GAUGE
 
-#include <string>
+import <string>;
 
 // Group box
 class wxGauge : public wxGaugeBase

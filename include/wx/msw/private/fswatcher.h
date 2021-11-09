@@ -15,7 +15,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <vector>
+import <vector>;
 
 // ============================================================================
 // wxFSWatcherEntry implementation & helper declarations

@@ -16,7 +16,7 @@
 
 #include <gsl/gsl>
 
-#include <cmath>
+import <cmath>;
 
 // ============================================================================
 // wxNumValidatorBase implementation

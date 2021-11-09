@@ -25,7 +25,7 @@
     struct tagRECT;
 #endif
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxMenuItem: an item in the menu, optionally implements owner-drawn behaviour

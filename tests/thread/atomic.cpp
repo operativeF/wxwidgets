@@ -14,7 +14,7 @@
 #include "wx/dynarray.h"
 #include "wx/log.h"
 
-#include <atomic>
+import <atomic>;
 
 WX_DEFINE_ARRAY_PTR(wxThread *, wxArrayThread);
 

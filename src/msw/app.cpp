@@ -36,8 +36,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // instead of including <shlwapi.h> which is not part of the core SDK and not
 // shipped at all with other compilers, we always define the parts of it we

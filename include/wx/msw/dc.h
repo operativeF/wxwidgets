@@ -17,8 +17,8 @@
 
 #include "wx/msw/wrap/utils.h"
 
-#include <string>
-#include <string_view>
+import <string>;
+import <string_view>;
 
 #if wxUSE_DC_CACHEING
 /*

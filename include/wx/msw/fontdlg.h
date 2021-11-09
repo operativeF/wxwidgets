@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_FONTDLG_H_
 #define _WX_MSW_FONTDLG_H_
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxFontDialog

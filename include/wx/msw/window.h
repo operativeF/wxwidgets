@@ -18,7 +18,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
 
-#include <string_view>
+import <string_view>;
 
 class wxButton;
 

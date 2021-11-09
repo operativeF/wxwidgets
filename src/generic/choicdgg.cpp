@@ -11,8 +11,8 @@
 #if wxUSE_CHOICEDLG
 
 #ifndef WX_PRECOMP
-    #include <string>
-    #include <vector>
+    import <string>;
+    import <vector>;
 #endif
 
 #include "wx/button.h"

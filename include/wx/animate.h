@@ -20,7 +20,7 @@
 #include "wx/bitmap.h"
 
 #include <chrono>
-#include <string>
+import <string>;
 
 class wxAnimation;
 class wxAnimationImpl;

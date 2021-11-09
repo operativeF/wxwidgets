@@ -26,7 +26,7 @@
 
 #include <memory.h>
 
-#include <tuple>
+import <tuple>;
 
 #ifndef INADDR_NONE
     #define INADDR_NONE INADDR_ANY

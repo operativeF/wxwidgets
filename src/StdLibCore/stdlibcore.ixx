@@ -1,23 +1,24 @@
+
 import <algorithm>;
-import <array>;
 import <atomic>;
+import <array>;
 import <bit>;
-import <cerrno>;
+// import <cassert>; // Fundamentally incompatible; can never be a header unit.
 import <cctype>;
 import <charconv>;
-import <chrono>;
+// import <chrono>; // Incompatible, relies on static crt function.
 import <climits>;
+import <clocale>;
 import <cmath>;
-import <compare>;
-import <complex>;
 import <concepts>;
 import <cstdarg>;
-import <cstdlib>;
+import <cstddef>;
 import <cstdint>;
 import <cstdio>;
-import <ctime>;
+import <cstdlib>;
 import <cstring>;
 import <ctime>;
+import <exception>;
 import <filesystem>;
 import <fstream>;
 import <functional>;
@@ -29,15 +30,18 @@ import <iterator>;
 import <limits>;
 import <list>;
 import <map>;
-import <memory>;
 import <new>;
-import <numeric>;
+// import <memory>; // Incompatible, relies on static crt function.
 import <numbers>;
+import <numeric>;
 import <optional>;
 import <ostream>;
+import <queue>;
 import <ranges>;
 import <span>;
+import <sstream>;
 import <stack>;
+import <stdexcept>;
 import <streambuf>;
 import <string>;
 import <string_view>;

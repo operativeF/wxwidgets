@@ -14,8 +14,8 @@
 #include "wx/checkbox.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 /*
     Note about the structure of various headers: they're organized in a more

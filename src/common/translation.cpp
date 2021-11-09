@@ -47,7 +47,7 @@
 #include <gsl/gsl>
 
 import <algorithm>;
-import <memory>;
+#include <memory>
 import <vector>;
 
 // ----------------------------------------------------------------------------

@@ -12,8 +12,8 @@
 
 #include "wx/compositewin.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxMSWHeaderCtrl;
 

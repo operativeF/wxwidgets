@@ -20,7 +20,7 @@
 
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 class wxIcon;

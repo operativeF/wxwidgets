@@ -15,7 +15,7 @@
 #include "wx/position.h"
 #include "wx/scrolwin.h"
 
-#include <string>
+import <string>;
 
 class wxVarScrollHelperEvtHandler;
 

@@ -11,7 +11,7 @@
 #ifndef _WX_MSGBOXDLG_H_
 #define _WX_MSGBOXDLG_H_
 
-#include <string>
+import <string>;
 
 class wxMessageDialog : public wxMessageDialogBase
 {

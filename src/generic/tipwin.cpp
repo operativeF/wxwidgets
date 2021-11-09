@@ -19,7 +19,7 @@
 
 #include <gsl/gsl>
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

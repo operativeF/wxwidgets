@@ -17,7 +17,7 @@
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
 
-#include <numbers>
+import <numbers>;
 
 
 static void DoAllTests(wxGraphicsContext* gc);

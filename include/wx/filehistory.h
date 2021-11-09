@@ -19,8 +19,8 @@
 #include "wx/list.h"
 #include "wx/string.h"
 
-#include <filesystem>
-#include <vector>
+import <filesystem>;
+import <vector>;
 
 class wxMenu;
 class wxConfigBase;

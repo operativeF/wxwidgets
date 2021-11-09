@@ -38,7 +38,7 @@
 #include "wx/listimpl.cpp"
 #include "wx/arrimpl.cpp"
 
-#include <cmath>
+import <cmath>;
 
 WX_DEFINE_LIST(wxRichTextObjectList)
 WX_DEFINE_LIST(wxRichTextLineList)

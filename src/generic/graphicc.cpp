@@ -38,7 +38,7 @@ bool wxCairoInit();
     #include "wx/msw/enhmeta.h"
 #endif
 
-#include <vector>
+import <vector>;
 
 using namespace std;
 

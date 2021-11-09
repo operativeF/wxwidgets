@@ -16,8 +16,8 @@
 #include "wx/splitter.h"
 
 #ifndef WX_PRECOMP
-    #include <limits>
-    #include <string>
+    import <limits>;
+    import <string>;
 #endif
 
 #include "wx/utils.h"

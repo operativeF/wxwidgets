@@ -66,7 +66,7 @@
 #include <unistd.h>
 #endif
 
-#include <ctime>
+import <ctime>;
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

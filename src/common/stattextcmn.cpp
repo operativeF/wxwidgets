@@ -21,7 +21,7 @@
 
 #include "wx/private/markupparser.h"
 
-#include <algorithm>
+import <algorithm>;
 
 // ----------------------------------------------------------------------------
 // XTI

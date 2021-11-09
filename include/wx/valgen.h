@@ -14,8 +14,8 @@
 
 #if wxUSE_VALIDATORS
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 class wxDateTime;
 class wxFileName;

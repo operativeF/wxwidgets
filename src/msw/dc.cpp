@@ -35,8 +35,8 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
-#include <cmath>
-#include <numeric>
+import <cmath>;
+import <numeric>;
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically

@@ -11,7 +11,7 @@
 #ifndef _WX_SCROLBAR_H_
 #define _WX_SCROLBAR_H_
 
-#include <string>
+import <string>;
 
 // Scrollbar item
 class wxScrollBar: public wxScrollBarBase

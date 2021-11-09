@@ -11,7 +11,7 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
-    #include <string>
+    import <string>;
 #endif // WX_PRECOMP
 
 #include "wx/thread.h"

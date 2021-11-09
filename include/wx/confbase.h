@@ -18,8 +18,8 @@
 #include "wx/object.h"
 #include "wx/base64.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

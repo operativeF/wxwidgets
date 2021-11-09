@@ -1,13 +1,13 @@
 #ifndef _CONFTYPE_H_
 #define _CONFTYPE_H_
 
-#include <algorithm>
-#include <charconv>
-#include <iostream>
-#include <optional>
-#include <utility>
-#include <string>
-#include <vector>
+import <algorithm>;
+import <charconv>;
+import <iostream>;
+import <optional>;
+import <utility>;
+import <string>;
+import <vector>;
 
 namespace wx::cfg
 {

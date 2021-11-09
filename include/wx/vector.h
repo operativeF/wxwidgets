@@ -14,8 +14,8 @@
 
 #include "wx/defs.h"
 
-#include <vector>
-#include <algorithm>
+import <vector>;
+import <algorithm>;
 
 template<typename T>
 inline bool wxVectorContains(const std::vector<T>& v, const T& obj)

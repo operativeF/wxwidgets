@@ -18,7 +18,7 @@
 
 #include "wx/panel.h"
 
-#include <string>
+import <string>;
 
 class wxBookCtrlBase;
 class wxBookCtrlEvent;

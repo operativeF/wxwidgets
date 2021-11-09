@@ -21,7 +21,7 @@
 
 #include "wx/textfile.h"
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxTipProvider - a class which is used by wxTipDialog to get the text of the

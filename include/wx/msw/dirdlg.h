@@ -11,7 +11,7 @@
 #ifndef _WX_DIRDLG_H_
 #define _WX_DIRDLG_H_
 
-#include <string>
+import <string>;
 
 class wxDirDialog : public wxDirDialogBase
 {

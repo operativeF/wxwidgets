@@ -14,7 +14,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxDisplayFactory: allows to create wxDisplay objects

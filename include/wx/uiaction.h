@@ -18,8 +18,8 @@
 
 #include "wx/mousestate.h"  // for wxMOUSE_BTN_XXX constants
 
-#include <string>
-#include <string_view>
+import <string>;
+import <string_view>;
 
 class wxUIActionSimulator
 {

@@ -11,7 +11,7 @@
 #ifndef _WX_ACCEL_H_
 #define _WX_ACCEL_H_
 
-#include <span>
+import <span>;
 
 class wxWindow;
 

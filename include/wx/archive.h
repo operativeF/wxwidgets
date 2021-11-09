@@ -16,7 +16,7 @@
 #include "wx/stream.h"
 #include "wx/filename.h"
 
-#include <utility>
+import <utility>;
 
 class wxArchiveNotifier
 {
@@ -157,8 +157,8 @@ private:
 // a container.
 
 #if defined WX_TEST_ARCHIVE_ITERATOR
-#include <iterator>
-#include <utility>
+import <iterator>;
+import <utility>;
 
 template <class X, class Y> inline
 void _wxSetArchiveIteratorValue(

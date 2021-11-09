@@ -16,10 +16,10 @@
 
 #include "wx/stdstream.h"
 
-#include <ios>
-#include <istream>
-#include <ostream>
-#include <streambuf>
+import <ios>;
+import <istream>;
+import <ostream>;
+import <streambuf>;
 
 // ==========================================================================
 // Helpers

@@ -44,10 +44,10 @@
 #include "wx/access.h"
 #endif
 
-#include <algorithm>
-#include <string>
-#include <string_view>
-#include <utility>
+import <algorithm>;
+import <string>;
+import <string_view>;
+import <utility>;
 
 // when building wxUniv/Foo we don't want the code for native menu use to be
 // compiled in - it should only be used when building real wxFoo

@@ -21,8 +21,8 @@
 #include "wx/geometry/rect.h"
 #include "wx/bitflags.h"
 
-#include <algorithm>
-#include <cstdint>
+import <algorithm>;
+import <cstdint>;
 
 class wxDataInputStream;
 class wxDataOutputStream;

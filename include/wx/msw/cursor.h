@@ -11,7 +11,7 @@
 #ifndef _WX_CURSOR_H_
 #define _WX_CURSOR_H_
 
-#include <string>
+import <string>;
 
 class wxImage;
 

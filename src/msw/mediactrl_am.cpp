@@ -49,7 +49,7 @@
 
 #include <gsl/gsl>
 
-#include <cmath>
+import <cmath>;
 
 //---------------------------------------------------------------------------
 //  IIDS - used by CoCreateInstance and IUnknown::QueryInterface

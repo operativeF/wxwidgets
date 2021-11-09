@@ -11,7 +11,7 @@
 #ifndef _WX_BMPBUTTN_H_
 #define _WX_BMPBUTTN_H_
 
-#include <string>
+import <string>;
 
 class wxBitmap;
 

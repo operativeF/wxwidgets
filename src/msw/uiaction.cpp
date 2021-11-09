@@ -21,7 +21,7 @@
 
 #include "wx/msw/private/keyboard.h"
 
-#include <cmath>
+import <cmath>;
 
 namespace
 {

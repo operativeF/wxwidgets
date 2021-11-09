@@ -20,7 +20,7 @@
     #include "wx/stream.h"
 #endif
 
-#include <fstream>
+import <fstream>;
 
 #if wxUSE_STREAMS
     #include "wx/txtstrm.h"

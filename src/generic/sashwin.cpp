@@ -24,7 +24,7 @@
 #include "wx/dcscreen.h"
 
 #ifndef WX_PRECOMP
-    #include <string>
+    import <string>;
 #endif
 
 #include "wx/laywin.h"

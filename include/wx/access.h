@@ -23,7 +23,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/variant.h"
 
-#include <string>
+import <string>;
 
 enum class wxAccStatus
 {

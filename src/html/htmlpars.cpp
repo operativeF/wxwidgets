@@ -21,7 +21,7 @@
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlpars.h"
 
-#include <vector>
+import <vector>;
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")

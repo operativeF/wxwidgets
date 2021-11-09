@@ -8,7 +8,7 @@
 #ifndef _AUTOCAPTURE_H_
 #define _AUTOCAPTURE_H_
 
-#include <vector>
+import <vector>;
 
 #include "wx/gdicmn.h"
 

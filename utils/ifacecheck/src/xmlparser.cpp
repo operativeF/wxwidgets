@@ -727,7 +727,7 @@ WX_DECLARE_HASH_MAP( unsigned long, wxClass*,
                      wxClassMemberIdHashMap );
 
 #else
-#include <map>
+import <map>;
 typedef std::map<unsigned long, toResolveTypeItem> wxToResolveTypeHashMap;
 #endif
 

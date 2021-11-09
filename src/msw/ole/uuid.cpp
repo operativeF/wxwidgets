@@ -16,7 +16,7 @@
 
 #include  "wx/msw/ole/uuid.h"
 
-#include <tuple>
+import <tuple>;
 
 // ============================================================================
 // Implementation

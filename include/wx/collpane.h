@@ -18,7 +18,7 @@
 
 #include "wx/control.h"
 
-#include <string>
+import <string>;
 
 // class name
 inline constexpr char wxCollapsiblePaneNameStr[] = "collapsiblePane";

@@ -20,7 +20,7 @@
 #include "wx/toolbar.h"
 
 #include <memory>
-#include <string>
+import <string>;
 
 // the default names for various classes
 inline constexpr char wxStatusLineNameStr[] = "status_line";

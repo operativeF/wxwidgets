@@ -21,8 +21,8 @@ class wxWindow;
 #include "wx/filefn.h"              // for wxFILE and wxDIR only
 #include "wx/geometry/point.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxTextEntryBase

@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_DATECTRL_H_
 #define _WX_MSW_DATECTRL_H_
 
-#include <string>
+import <string>;
 
 class wxDatePickerCtrl : public wxDatePickerCtrlBase
 {

@@ -11,7 +11,7 @@
 #ifndef _WX_FONT_H_
 #define _WX_FONT_H_
 
-#include <string>
+import <string>;
 
 struct wxSize;
 

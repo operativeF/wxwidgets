@@ -27,7 +27,7 @@
 #include "wx/anidecod.h"
 #include "wx/private/icondir.h"
 
-#include <array>
+import <array>;
 #include <memory>
 
 // ----------------------------------------------------------------------------

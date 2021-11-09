@@ -21,7 +21,7 @@
 #include "wx/translation.h"
 #include "wx/uiaction.h"
 
-#include <cstdarg>
+import <cstdarg>;
 
 // ----------------------------------------------------------------------------
 // helper

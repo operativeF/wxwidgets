@@ -10,7 +10,7 @@
 #ifndef _WX_PRIVATE_UNICODEH__
 #define _WX_PRIVATE_UNICODEH__
 
-#include <array>
+import <array>;
 
 // this table gives the length of the UTF-8 encoding from its first character:
 inline constexpr std::array<unsigned char, 256> tableUtf8Lengths = {

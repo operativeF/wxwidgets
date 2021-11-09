@@ -19,7 +19,7 @@
 
 #include "testimagefile.h"
 
-#include <stdexcept>
+import <stdexcept>;
 
 // ----------------------------------------------------------------------------
 // test class

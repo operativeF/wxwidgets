@@ -15,7 +15,7 @@
 #include "wx/utils.h"
 #include "wx/module.h"
 
-#include <string>
+import <string>;
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

@@ -13,7 +13,7 @@
 #include "wx/msw/wrapwin.h"
 #include "wx/thread.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxTlsKey is a helper class encapsulating a TLS slot

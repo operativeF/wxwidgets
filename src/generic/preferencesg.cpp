@@ -17,7 +17,7 @@
 #ifndef wxHAS_PREF_EDITOR_NATIVE
 
 #ifndef WX_PRECOMP
-    #include <vector>
+    import <vector>;
 #endif
 
 #include "wx/app.h"

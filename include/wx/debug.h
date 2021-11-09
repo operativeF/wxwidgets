@@ -11,8 +11,8 @@
 #define _WX_DEBUG_H_
 
 #include <cassert>
-#include <climits>          // for CHAR_BIT used below
-#include <string>
+import <climits>;          // for CHAR_BIT used below
+import <string>;
 
 #include "wx/chartype.h"     // for __TFILE__ and wxChar
 #include "wx/cpp.h"          // for __WXFUNCTION__

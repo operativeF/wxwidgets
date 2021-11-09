@@ -15,7 +15,7 @@
 #include "wx/string.h"
 #include "wx/dynarray.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // helper functions for working with arrays

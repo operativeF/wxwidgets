@@ -17,7 +17,7 @@
 
 #include "wx/mimetype.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxFileTypeImpl is the MSW version of wxFileType, this is a private class

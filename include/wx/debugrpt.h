@@ -17,7 +17,7 @@
 #include "wx/string.h"
 #include "wx/filename.h"
 
-#include <vector>
+import <vector>;
 
 class wxXmlNode;
 

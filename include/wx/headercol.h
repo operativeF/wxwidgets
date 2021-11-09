@@ -14,7 +14,7 @@
 
 #if wxUSE_HEADERCTRL
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants

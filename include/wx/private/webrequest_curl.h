@@ -15,11 +15,12 @@
 #include "wx/private/webrequest.h"
 
 #include "wx/thread.h"
-#include <vector>
 #include "wx/timer.h"
 #include "wx/hashmap.h"
 
 #include "curl/curl.h"
+
+import <vector>;
 
 class wxWebRequestCURL;
 class wxWebResponseCURL;

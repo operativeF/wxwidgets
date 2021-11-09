@@ -16,9 +16,9 @@
     #include "wx/intl.h"
     #include "wx/dcclient.h"
 
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstdarg>
+    import <cstdio>;
+    import <cstdlib>;
+    import <cstdarg>;
 #endif
 
 #include "wx/generic/tabg.h"

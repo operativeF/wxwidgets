@@ -18,7 +18,7 @@
 #include "wx/hashmap.h"
 #include "wx/stream.h"
 
-#include <string>
+import <string>;
 
 class wxFSFile;
 class wxFileSystemHandler;

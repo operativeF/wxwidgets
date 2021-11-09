@@ -22,12 +22,12 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 
-#include <algorithm>
-#include <array>
-#include <cstdint>
-#include <optional>
-#include <ranges>
-#include <span>
+import <algorithm>;
+import <array>;
+import <cstdint>;
+import <optional>;
+import <ranges>;
+import <span>;
 
 class wxColour;
 

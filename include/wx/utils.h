@@ -27,7 +27,7 @@
     #include "wx/mousestate.h"
     #include "wx/gdicmn.h"
     
-    #include <vector>
+    import <vector>;
 #endif
 
 // need this for wxGetDiskSpace() as we can't, unfortunately, forward declare
@@ -42,7 +42,7 @@
     #include <unistd.h>
 #endif
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // Forward declaration

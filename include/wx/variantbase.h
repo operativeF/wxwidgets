@@ -18,8 +18,8 @@
 #include "wx/string.h"
 #include "wx/cpp.h"
 
-#include <iosfwd>
-#include <typeinfo>
+import <iosfwd>;
+import <typeinfo>;
 
 #if wxUSE_DATETIME
     #include "wx/datetime.h"

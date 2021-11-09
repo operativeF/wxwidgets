@@ -16,7 +16,7 @@
 #include "wx/object.h"
 #include "wx/string.h"
 
-#include <vector>
+import <vector>;
 
 // Host Type that the server component can be
 enum wxURIHostType

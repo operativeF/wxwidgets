@@ -10,7 +10,7 @@
 #ifndef _WX_VERSIONINFO_H_
 #define _WX_VERSIONINFO_H_
 
-#include <optional>
+import <optional>;
 
 #include <fmt/core.h>
 

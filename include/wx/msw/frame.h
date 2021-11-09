@@ -11,7 +11,7 @@
 #ifndef _WX_FRAME_H_
 #define _WX_FRAME_H_
 
-#include <string>
+import <string>;
 
 #if wxUSE_TASKBARBUTTON
 #include <wx/taskbarbutton.h>

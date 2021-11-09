@@ -20,7 +20,7 @@
 #include "wx/systhemectrl.h"
 #include "wx/bitflags.h"
 
-#include <vector>
+import <vector>;
 
 class wxImageList;
 

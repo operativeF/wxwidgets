@@ -17,8 +17,8 @@
 #include "wx/menu.h"
 #include "wx/dcmemory.h"
 
-#include <cmath>
-#include <numbers>
+import <cmath>;
+import <numbers>;
 
 #if !wxUSE_NATIVE_SEARCH_CONTROL
 

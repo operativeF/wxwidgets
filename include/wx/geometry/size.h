@@ -1,7 +1,7 @@
 #ifndef _WX_SIZE_H
 #define _WX_SIZE_H
 
-#include <cmath>
+import <cmath>;
 
 #include "wx/geometry/point.h"
 

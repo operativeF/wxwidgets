@@ -15,7 +15,7 @@
     #include "wx/string.h"
 #endif // WX_PRECOMP
 
-#include <sstream>
+import <sstream>;
 
 #define ASSERT_OSTREAM_EQUAL(p, s) CHECK_EQ(std::string(p), s.str())
 #define ASSERT_WOSTREAM_EQUAL(p, s) CHECK_EQ(std::wstring(p), s.str())

@@ -14,7 +14,7 @@
 
 #include "wx/panel.h"
 
-#include <string>
+import <string>;
 
 inline constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 

@@ -42,12 +42,12 @@
 #endif
 
 #include <cerrno>
-#include <clocale>
-#include <ctime>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <limits>
+import <clocale>;
+import <ctime>;
+import <cstdio>;
+import <cstdlib>;
+import <cstring>;
+import <limits>;
 
 wxDECL_FOR_STRICT_MINGW32(int, vswprintf, (wchar_t*, const wchar_t*, __VALIST))
 wxDECL_FOR_STRICT_MINGW32(int, _putws, (const wchar_t*))

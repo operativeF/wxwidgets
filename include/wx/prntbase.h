@@ -25,7 +25,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/sizer.h"
 
-#include <string>
+import <string>;
 
 class wxDC;
 class wxButton;

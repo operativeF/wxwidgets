@@ -15,7 +15,7 @@
 #include "wx/icon.h"
 #include "wx/iconbndl.h"
 
-#include <string>
+import <string>;
 
 class wxArtProvidersList;
 class wxArtProviderCache;

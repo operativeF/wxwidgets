@@ -31,11 +31,11 @@
 #include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/string.h"
-#include <vector>
+import <vector>;
 
-#include <algorithm>
-#include <iterator>
-#include <list>
+import <algorithm>;
+import <iterator>;
+import <list>;
 
 /* ---------------------------------------------------------------------------- */
 /* wxList types */

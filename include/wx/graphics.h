@@ -24,10 +24,10 @@
 #include "wx/peninfobase.h"
 
 #include <memory>
-#include <string>
-#include <string_view>
-#include <utility>
-#include <vector>
+import <string>;
+import <string_view>;
+import <utility>;
+import <vector>;
 
 enum class wxAntialiasMode
 {

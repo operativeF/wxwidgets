@@ -31,7 +31,7 @@
 #endif
 
 #include <memory>
-#include <string>
+import <string>;
 
 // missing from mingw32 header
 #ifndef CLR_INVALID

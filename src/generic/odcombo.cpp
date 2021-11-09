@@ -14,7 +14,7 @@
 
 #ifndef WX_PRECOMP
     #include <chrono>
-    #include <utility>
+    import <utility>;
 #endif
 
 #include "wx/log.h"

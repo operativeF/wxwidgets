@@ -16,8 +16,8 @@
 #include "wx/ctrlsub.h"         // base class
 #include "wx/defs.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // global data

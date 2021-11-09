@@ -17,7 +17,7 @@
 #include "wx/longlong.h"
 #include "wx/file.h"
 
-#include <vector>
+import <vector>;
 
 #if wxUSE_FILE
 class wxFile;

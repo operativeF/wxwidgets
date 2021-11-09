@@ -20,8 +20,8 @@
 #include "wx/typeinfo.h"
 #include "wx/list.h"
 
-#include <cstdint>
-#include <new> // for placement new
+import <cstdint>;
+import <new>; // for placement new
 
 // Size of the wxAny value buffer.
 enum

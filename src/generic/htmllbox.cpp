@@ -20,9 +20,9 @@
 #include "wx/html/forcelnk.h"
 FORCE_WXHTML_MODULES()
 
-#include <algorithm>
-#include <array>
-#include <charconv>
+import <algorithm>;
+import <array>;
+import <charconv>;
 
 // ----------------------------------------------------------------------------
 // constants

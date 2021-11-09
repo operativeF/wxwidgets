@@ -19,7 +19,7 @@
 
 #include "wx/string.h"
 
-#include <vector>
+import <vector>;
 
 #if wxUSE_FSVOLUME
 

@@ -15,7 +15,7 @@
 #include "wx/geometry/rect.h"
 
 #include <memory>
-#include <string>
+import <string>;
 
 class wxAcceleratorTable;
 

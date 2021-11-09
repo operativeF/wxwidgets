@@ -39,31 +39,31 @@
 #endif
 
 // Include standard headers
-#include <algorithm>
-#include <array>
+import <algorithm>;
+import <array>;
 #include <cassert>
 #include <cerrno>
-#include <cctype>
-#include <charconv>
+import <cctype>;
+import <charconv>;
 #include <chrono>
-#include <cmath>
-#include <cstdlib>
-#include <cstdio>
-#include <cstring>
-#include <ctime>
-#include <filesystem>
-#include <functional>
-#include <iostream>
-#include <limits>
+import <cmath>;
+import <cstdlib>;
+import <cstdio>;
+import <cstring>;
+import <ctime>;
+import <filesystem>;
+import <functional>;
+import <iostream>;
+import <limits>;
 #include <memory>
-#include <numeric>
-#include <numbers>
-#include <span>
-#include <string>
-#include <string_view>
-#include <tuple>
-#include <unordered_map>
-#include <vector>
+import <numeric>;
+import <numbers>;
+import <span>;
+import <string>;
+import <string_view>;
+import <tuple>;
+import <unordered_map>;
+import <vector>;
 
 // Include external library headers that are necessary.
 #include <fmt/core.h>

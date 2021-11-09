@@ -10,7 +10,7 @@
 #ifndef _WX_PRIVATE_REFCOUNTERMT_H_
 #define _WX_PRIVATE_REFCOUNTERMT_H_
 
-#include <atomic>
+import <atomic>;
 
 // ----------------------------------------------------------------------------
 // Version of wxRefCounter with MT-safe count

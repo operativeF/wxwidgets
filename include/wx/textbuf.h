@@ -15,8 +15,8 @@
 #include "wx/defs.h"
 #include "wx/convauto.h"
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

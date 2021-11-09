@@ -583,7 +583,7 @@ static int wxPG_SortFunc_ByLabel(wxPGProperty **pp1, wxPGProperty **pp2)
 // For wxVector w/ wxUSE_STL=1, you would use code like this instead:
 //
 
-#include <algorithm>
+import <algorithm>;
 
 static bool wxPG_SortFunc_ByFunction(wxPGProperty *p1, wxPGProperty *p2)
 {

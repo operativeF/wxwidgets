@@ -52,9 +52,9 @@
 
 #include <gsl/gsl>
 
-#include <algorithm>
-#include <string>
-#include <vector>
+import <algorithm>;
+import <string>;
+import <vector>;
 
 WX_DECLARE_HASH_SET_WITH_DECL_PTR(int, wxIntegerHash, wxIntegerEqual,
                                   wxGridFixedIndicesSet, class WXDLLIMPEXP_CORE);

@@ -38,8 +38,8 @@
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
 
-    #include <string>
-    #include <vector>
+    import <string>;
+    import <vector>;
 #endif
 
 

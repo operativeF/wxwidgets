@@ -21,7 +21,7 @@ class wxPalette;
     #include "wx/bitmap.h"
 #endif // __WXMSW__
 
-#include <string>
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxDIB: represents a DIB section

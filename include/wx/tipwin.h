@@ -17,7 +17,7 @@
 #include "wx/popupwin.h"
 #include "wx/geometry/rect.h"
 
-#include <string>
+import <string>;
 
 class wxTipWindowView;
 

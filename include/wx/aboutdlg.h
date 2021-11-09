@@ -17,7 +17,7 @@
 #include "wx/app.h"
 #include "wx/icon.h"
 
-#include <vector>
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxAboutDialogInfo: information shown by the standard "About" dialog

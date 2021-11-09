@@ -32,7 +32,7 @@
 #include "wx/bitmap.h"
 #include "wx/string.h"
 
-#include <string>
+import <string>;
 
 class wxDC;
 class wxWindow;

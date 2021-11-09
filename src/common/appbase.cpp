@@ -34,14 +34,14 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <clocale>
+import <clocale>;
 
 #ifdef HAS_EXCEPTION_PTR
-    #include <exception>        // for std::current_exception()
-    #include <utility>          // for std::swap()
+    import <exception>;        // for std::current_exception()
+    import <utility>;          // for std::swap()
 #endif
 
-#include <typeinfo>
+import <typeinfo>;
 
 #if wxUSE_EXCEPTIONS
     // Any conforming C++11 compiler should have it, but g++ implementation

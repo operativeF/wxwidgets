@@ -8,7 +8,7 @@
 #include <boost/tmp/sequence/unpack.hpp>
 #include <boost/tmp/vocabulary.hpp>
 
-#include <concepts>
+import <concepts>;
 
 template<typename Enum>
 concept BitfieldCompatible =  requires

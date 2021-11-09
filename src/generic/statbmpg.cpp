@@ -19,7 +19,7 @@
     #include "wx/math.h"
 #endif
 
-#include <cmath>
+import <cmath>;
 
 bool wxGenericStaticBitmap::Create(wxWindow *parent,
                                    wxWindowID id,

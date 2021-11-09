@@ -15,7 +15,7 @@
 #include "wx/bmpbuttn.h"
 #include "wx/colourdata.h"
 
-#include <string>
+import <string>;
 
 class wxColourDialogEvent;
 

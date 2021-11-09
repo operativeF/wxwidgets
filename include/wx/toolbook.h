@@ -18,7 +18,7 @@
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 
-#include <string>
+import <string>;
 
 class wxToolBarBase;
 class wxCommandEvent;

@@ -12,7 +12,7 @@
 #include "wx/defs.h"
 #include "wx/string.h"
 
-#include <string>
+import <string>;
 
 #if SIZEOF_WCHAR_T == 2
 using wxU16CharBuffer = wxWCharBuffer;

@@ -10,7 +10,7 @@
 #ifndef _WX_GENERIC_COLLAPSIBLEHEADER_CTRL_H_
 #define _WX_GENERIC_COLLAPSIBLEHEADER_CTRL_H_
 
-#include <string>
+import <string>;
 
 class wxGenericCollapsibleHeaderCtrl
     : public wxCollapsibleHeaderCtrlBase

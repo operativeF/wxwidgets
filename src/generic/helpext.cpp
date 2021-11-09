@@ -34,8 +34,8 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <string>
-#include <vector>
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -17,9 +17,9 @@
 
 #include <gsl/gsl>
 
-#include <limits>
-#include <string>
-#include <vector>
+import <limits>;
+import <string>;
+import <vector>;
 
 #if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE))
 

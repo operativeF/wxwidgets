@@ -20,7 +20,7 @@
 #include "wx/intl.h"
 #include "wx/cmndata.h"
 
-#include <string>
+import <string>;
 
 
 // ---------------------------------------------------------------------------

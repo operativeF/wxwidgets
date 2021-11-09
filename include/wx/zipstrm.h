@@ -16,7 +16,7 @@
 #include "wx/archive.h"
 #include "wx/filename.h"
 
-#include <cstdint>
+import <cstdint>;
 
 // some methods from wxZipInputStream and wxZipOutputStream stream do not get
 // exported/imported when compiled with Mingw versions before 3.4.2. So they

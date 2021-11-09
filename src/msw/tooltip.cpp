@@ -27,7 +27,7 @@
 #include <fmt/core.h>
 
 #include <chrono>
-#include <vector>
+import <vector>;
 
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28

@@ -16,7 +16,7 @@
 #include "wx/chartype.h"
 #include "wx/buffer.h"
 
-#include <limits>
+import <limits>;
 
 class wxString;
 

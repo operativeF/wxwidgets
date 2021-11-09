@@ -24,7 +24,7 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 
-#include <string>
+import <string>;
 
 // ---------------------------------------------------------------------------
 // global functions

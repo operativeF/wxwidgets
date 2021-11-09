@@ -11,7 +11,7 @@
 #define _WX_GENERIC_HEADERCTRLG_H_
 
 #include "wx/event.h"
-#include <vector>
+import <vector>;
 #include "wx/overlay.h"
 
 // ----------------------------------------------------------------------------

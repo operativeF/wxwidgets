@@ -16,7 +16,7 @@
 #include "wx/geometry/rect.h"
 
 
-#include <string>
+import <string>;
 
 class wxComboBox;
 class wxStaticText;

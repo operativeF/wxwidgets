@@ -30,7 +30,7 @@
 #include "wx/msw/wrap/utils.h"
 
 #include <cassert>
-#include <vector>
+import <vector>;
 
 // Currently gcc doesn't define NMLVFINDITEM, and DMC only defines
 // it by its old name NM_FINDTIEM.
