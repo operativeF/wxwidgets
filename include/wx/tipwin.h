@@ -15,7 +15,8 @@
 #if wxUSE_TIPWINDOW
 
 #include "wx/popupwin.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

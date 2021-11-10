@@ -14,7 +14,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/module.h"
-#include "wx/geometry/size.h"
 #include "wx/wxcrtvararg.h"
 #include "wx/stringutils.h"
 
@@ -27,6 +26,8 @@ extern "C"
 #include "wx/wfstream.h"
 
 #include <gsl/gsl>
+
+import Utils.Geometry;
 
 #ifndef TIFFLINKAGEMODE
     #define TIFFLINKAGEMODE

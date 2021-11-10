@@ -11,7 +11,6 @@
 
 #include "testprec.h"
 
-
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/bitmap.h"
@@ -20,8 +19,8 @@
 #include "wx/icon.h"
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/size.h"
+
+import Utils.Geometry;
 
 static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int height, int margin = 0)
 {

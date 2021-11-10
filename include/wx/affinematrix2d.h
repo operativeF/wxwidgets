@@ -15,7 +15,8 @@
 #if wxUSE_GEOMETRY
 
 #include "wx/geometry.h"
-#include "wx/geometry/point.h"
+
+import Utils.Geometry;
 
 struct wxMatrix2D
 {

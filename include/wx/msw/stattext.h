@@ -11,7 +11,7 @@
 #ifndef _WX_STATTEXT_H_
 #define _WX_STATTEXT_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 class wxStaticText : public wxStaticTextBase
 {

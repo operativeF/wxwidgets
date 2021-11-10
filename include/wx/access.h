@@ -19,9 +19,9 @@
 
 #include "wx/defs.h"
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
 #include "wx/variant.h"
+
+import Utils.Geometry;
 
 import <string>;
 

@@ -19,7 +19,8 @@
 #include "wx/ctrlsub.h"
 #include "wx/vlbox.h"
 #include "wx/timer.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <string_view>;

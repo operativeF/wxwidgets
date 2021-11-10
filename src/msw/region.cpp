@@ -11,8 +11,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrap/utils.h"
 #include "wx/region.h"
-#include "wx/geometry/point.h"
 
+import Utils.Geometry;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);

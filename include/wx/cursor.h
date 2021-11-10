@@ -13,7 +13,6 @@
 
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
-#include "wx/geometry/point.h"
 
 // Under most ports, wxCursor derives directly from wxGDIObject, but in wxMSW
 // there is an intermediate wxGDIImage class.
@@ -22,6 +21,8 @@
 #else
     using wxGDIImage = wxGDIObject;
 #endif
+
+import Utils.Geometry;
 
 import <string>;
 

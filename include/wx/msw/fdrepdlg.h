@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_FDREPDLG_H_
 #define _WX_MSW_FDREPDLG_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 

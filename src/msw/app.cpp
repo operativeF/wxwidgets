@@ -13,7 +13,6 @@
 
 #include "wx/app.h"
 #include "wx/utils.h"
-#include "wx/geometry/point.h"
 #include "wx/dialog.h"
 #include "wx/crt.h"
 #include "wx/log.h"
@@ -35,6 +34,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

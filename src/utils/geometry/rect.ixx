@@ -1,8 +1,14 @@
-#ifndef _WX_GEOMETRY_RECT_H
-#define _WX_GEOMETRY_RECT_H
+module;
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/size.h"
+#include "wx/defs.h"
+
+export module Utils.Geometry.Rect;
+
+import Utils.Geometry.Point;
+import Utils.Geometry.Size;
+
+export
+{
 
 template<typename T>
 struct wxRect2D
@@ -326,4 +332,4 @@ using wxRect       = wxRect2D<int>;
 using wxRectDouble = wxRect2D<double>;
 using wxRectFloat  = wxRect2D<float>;
 
-#endif // _WX_GEOMETRY_RECT_H
+} // export

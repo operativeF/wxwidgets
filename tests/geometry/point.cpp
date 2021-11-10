@@ -10,11 +10,7 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
-#include "wx/geometry/point.h"
+import Utils.Geometry;
 
 TEST_CASE("Operators")
 {

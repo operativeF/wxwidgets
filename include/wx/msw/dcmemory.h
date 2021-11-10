@@ -13,7 +13,8 @@
 
 #include "wx/dcmemory.h"
 #include "wx/msw/dc.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 class wxMemoryDCImpl: public wxMSWDCImpl
 {

@@ -12,7 +12,8 @@
 #define _WX_COLORDLG_H_
 
 #include "wx/dialog.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

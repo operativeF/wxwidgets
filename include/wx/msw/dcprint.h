@@ -16,7 +16,8 @@
 #include "wx/dcprint.h"
 #include "wx/cmndata.h"
 #include "wx/msw/dc.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

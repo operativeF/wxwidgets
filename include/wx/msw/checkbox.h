@@ -12,7 +12,8 @@
 #define _WX_CHECKBOX_H_
 
 #include "wx/msw/ownerdrawnbutton.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

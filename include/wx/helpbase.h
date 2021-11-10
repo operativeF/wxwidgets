@@ -16,8 +16,8 @@
 #include "wx/defs.h"
 
 #include "wx/gdicmn.h"
-#include "wx/geometry/size.h"
-#include "wx/geometry/point.h"
+
+import Utils.Geometry;
 
 import <string>;
 

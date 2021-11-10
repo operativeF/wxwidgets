@@ -16,7 +16,6 @@
 #include "wx/control.h"
 #include "wx/dc.h"
 #include "wx/renderer.h"
-#include "wx/geometry/size.h"
 
 #include "wx/generic/private/markuptext.h"
 
@@ -24,8 +23,9 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
     #include "wx/graphics.h"
-    
 #endif
+
+import Utils.Geometry;
 
 namespace
 {

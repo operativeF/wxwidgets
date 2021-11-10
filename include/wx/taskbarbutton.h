@@ -15,8 +15,9 @@
 
 #if wxUSE_TASKBARBUTTON
 
-#include "wx/geometry/rect.h"
 #include "wx/icon.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

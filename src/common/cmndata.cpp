@@ -21,16 +21,13 @@
 
 #include "wx/gdicmn.h"
 #include "wx/log.h"
-#include "wx/geometry/size.h"
 #include "wx/utils.h"
 
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 #include "wx/paper.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // Print data

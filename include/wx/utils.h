@@ -23,11 +23,8 @@
 #include "wx/meta/implicitconversion.h"
 
 #if wxUSE_GUI
-    #include "wx/geometry/point.h"
     #include "wx/mousestate.h"
     #include "wx/gdicmn.h"
-    
-    import <vector>;
 #endif
 
 // need this for wxGetDiskSpace() as we can't, unfortunately, forward declare
@@ -42,7 +39,10 @@
     #include <unistd.h>
 #endif
 
+import Utils.Geometry;
+
 import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // Forward declaration

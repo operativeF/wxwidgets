@@ -10,8 +10,9 @@
 #ifndef _WX_MOUSESTATE_H_
 #define _WX_MOUSESTATE_H_
 
-#include "wx/geometry/point.h"
 #include "wx/kbdstate.h"
+
+import Utils.Geometry;
 
 // the symbolic names for the mouse buttons
 enum wxMouseButton

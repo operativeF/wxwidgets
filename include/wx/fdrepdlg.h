@@ -15,8 +15,9 @@
 
 #if wxUSE_FINDREPLDLG
 
-#include "wx/bitflags.h"
 #include "wx/dialog.h"
+
+import Utils.Bitfield;
 
 import <cstdint>;
 import <string>;

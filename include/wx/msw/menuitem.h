@@ -17,13 +17,13 @@
 
 #include "wx/bitmap.h"
 
-#include "wx/geometry/rect.h"
-
 #if wxUSE_OWNER_DRAWN
     #include "wx/ownerdrw.h"
 
     struct tagRECT;
 #endif
+
+import Utils.Geometry;
 
 import <string>;
 

@@ -13,7 +13,7 @@
 
 #if wxUSE_LISTBOX
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

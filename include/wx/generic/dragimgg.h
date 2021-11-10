@@ -12,8 +12,6 @@
 #ifndef _WX_DRAGIMGG_H_
 #define _WX_DRAGIMGG_H_
 
-#include "wx/geometry/rect.h"
-
 #include "wx/bitmap.h"
 #include "wx/icon.h"
 #include "wx/cursor.h"
@@ -21,6 +19,8 @@
 #include "wx/listctrl.h"
 #include "wx/log.h"
 #include "wx/overlay.h"
+
+import Utils.Geometry;
 
 /*
   To use this class, create a wxDragImage when you start dragging, for example:

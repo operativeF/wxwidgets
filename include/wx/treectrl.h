@@ -20,10 +20,11 @@
 #if wxUSE_TREECTRL
 
 #include "wx/control.h"
-#include "wx/geometry/rect.h"
 #include "wx/treebase.h"
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through wxCLASSINFO macro
 #include "wx/systhemectrl.h"
+
+import Utils.Geometry;
 
 import <string>;
 

@@ -13,7 +13,7 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // wxSubwindows contains all HWNDs making part of a single wx control

@@ -22,7 +22,8 @@
 #if wxUSE_SPINBTN
 
 #include "wx/compositewin.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 class wxSpinButton;
 class wxTextCtrl;

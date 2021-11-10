@@ -18,7 +18,8 @@
 #include "wx/gdiobj.h"          // base class
 #include "wx/gdicmn.h"          // wxBitmapType::Invalid
 #include "wx/list.h"
-#include "wx/geometry/size.h"
+
+import Utils.Geometry;
 
 import <string>;
 

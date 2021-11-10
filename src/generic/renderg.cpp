@@ -12,7 +12,6 @@
 
 #include "wx/dc.h"
 #include "wx/settings.h"
-#include "wx/geometry/point.h"
 #include "wx/module.h"
 #include "wx/control.h"
 #include "wx/dcmirror.h"
@@ -26,6 +25,8 @@
     // We only need it to get ::MulDiv() declaration, used by wxMulDivInt32().
     #include "wx/msw/wrapwin.h"
 #endif
+
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // wxRendererGeneric: our wxRendererNative implementation

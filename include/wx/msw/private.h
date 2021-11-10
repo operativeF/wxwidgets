@@ -14,13 +14,14 @@
 #define _WX_PRIVATE_H_
 
 #include "wx/msw/wrapwin.h"
-#include "wx/geometry/rect.h"
 
 #include "wx/log.h"
 
 #if wxUSE_GUI
     #include "wx/window.h"
 #endif // wxUSE_GUI
+
+import Utils.Geometry;
 
 import <string>;
 
@@ -203,8 +204,9 @@ struct WinStruct : public T
 
 #if wxUSE_GUI
 
-#include "wx/geometry/rect.h"
 #include "wx/colour.h"
+
+import Utils.Geometry;
 
 #ifdef COM_DECLSPEC_NOTHROW
     #define wxSTDMETHODIMP COM_DECLSPEC_NOTHROW STDMETHODIMP

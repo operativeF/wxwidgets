@@ -12,7 +12,8 @@
 #define _WX_LISTCTRL_H_
 
 #include "wx/textctrl.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

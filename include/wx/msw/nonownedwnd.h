@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_NONOWNEDWND_H_
 #define _WX_MSW_NONOWNEDWND_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 class wxNonOwnedWindowShapeImpl;
 

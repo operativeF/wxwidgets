@@ -24,13 +24,12 @@
 #ifndef _WX_RENDERER_H_
 #define _WX_RENDERER_H_
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-#include "wx/geometry/size.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"
 #include "wx/string.h"
+
+import Utils.Geometry;
 
 import <string>;
 

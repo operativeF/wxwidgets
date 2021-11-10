@@ -21,9 +21,9 @@
     // don't define wxHAS_NATIVE_OVERLAY
 #endif
 
-#include "wx/geometry/rect.h"
-
 #include "wx/private/overlay.h"
+
+import Utils.Geometry;
 
 #include <memory>
 

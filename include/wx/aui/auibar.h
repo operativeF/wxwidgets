@@ -15,12 +15,11 @@
 
 #if wxUSE_AUI
 
-#include "wx/geometry/rect.h"
-
 #include "wx/control.h"
 #include "wx/sizer.h"
 #include "wx/pen.h"
 
+import Utils.Geometry;
 
 class wxClientDC;
 class wxAuiPaneInfo;

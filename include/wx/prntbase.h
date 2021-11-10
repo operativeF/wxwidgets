@@ -22,8 +22,9 @@
 #include "wx/dialog.h"
 #include "wx/frame.h"
 #include "wx/dc.h"
-#include "wx/geometry/rect.h"
 #include "wx/sizer.h"
+
+import Utils.Geometry;
 
 import <string>;
 

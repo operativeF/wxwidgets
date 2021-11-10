@@ -13,8 +13,9 @@
 
 #include "wx/vscroll.h"         // base class
 #include "wx/selstore.h"
-#include "wx/geometry/rect.h"
 #include "wx/bitmap.h"
+
+import Utils.Geometry;
 
 import <string>;
 

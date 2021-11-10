@@ -17,19 +17,17 @@
 #include "wx/clntdata.h"
 
 #if wxUSE_GUI
-    #include "wx/geometry/size.h"
-    #include "wx/geometry/rect.h"
-
     #include "wx/cursor.h"
     #include "wx/mousestate.h"
 #endif
 
 #include "wx/dynarray.h"
-#include "wx/geometry/point.h"
 #include "wx/thread.h"
 #include "wx/tracker.h"
 #include "wx/any.h"
 #include "wx/typeinfo.h"
+
+import Utils.Geometry;
 
 import <bit>;
 import <cstdint>;

@@ -20,7 +20,8 @@
 #include "wx/dynarray.h"
 #include "wx/treebase.h"
 #include "wx/hashmap.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

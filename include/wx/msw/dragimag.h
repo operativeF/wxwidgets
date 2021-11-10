@@ -18,7 +18,7 @@
 #include "wx/treectrl.h"
 #include "wx/listctrl.h"
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 

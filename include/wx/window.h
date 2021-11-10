@@ -19,9 +19,6 @@
 
 #include "wx/list.h"            // defines wxWindowList
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-
 #include "wx/cursor.h"          // we have member variables of these classes
 #include "wx/font.h"            // so we can't do without them
 #include "wx/colour.h"
@@ -43,6 +40,8 @@
 #if wxUSE_ACCESSIBILITY
 #include "wx/access.h"
 #endif
+
+import Utils.Geometry;
 
 import <algorithm>;
 import <string>;

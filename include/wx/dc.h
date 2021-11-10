@@ -27,9 +27,7 @@
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-#include "wx/geometry/size.h"
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

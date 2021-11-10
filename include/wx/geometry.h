@@ -16,10 +16,9 @@
 #include "wx/defs.h"
 
 #include "wx/utils.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/size.h"
-#include "wx/geometry/rect.h"
-#include "wx/bitflags.h"
+
+import Utils.Bitfield;
+import Utils.Geometry;
 
 import <algorithm>;
 import <cstdint>;

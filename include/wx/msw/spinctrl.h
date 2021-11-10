@@ -13,8 +13,9 @@
 
 #if wxUSE_SPINCTRL
 
-#include "wx/geometry/rect.h"
 #include "wx/spinbutt.h"    // the base class
+
+import Utils.Geometry;
 
 import <limits>;
 import <string>;

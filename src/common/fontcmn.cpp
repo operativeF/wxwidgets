@@ -17,7 +17,6 @@
 #include "wx/dcscreen.h"
 #include "wx/log.h"
 #include "wx/gdicmn.h"
-#include "wx/geometry/size.h"
 
 #if defined(__WXMSW__)
     #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
@@ -28,6 +27,8 @@
 #include "wx/fontenum.h"
 
 #include "wx/tokenzr.h"
+
+import Utils.Geometry;
 
 #include <cassert>
 

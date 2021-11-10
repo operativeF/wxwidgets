@@ -16,7 +16,8 @@
 #include "wx/defs.h"
 
 #include "wx/dc.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 //-----------------------------------------------------------------------------
 // wxPrinterDC

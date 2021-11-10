@@ -413,6 +413,7 @@ target_link_libraries(wxcore
     PRIVATE
         wxsharedcmn
         wxbase
+        wxutils
         stdlibcore
         Boost::nowide
         fmt::fmt

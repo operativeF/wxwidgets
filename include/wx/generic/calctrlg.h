@@ -13,8 +13,8 @@
 
 #include "wx/control.h"         // the base class
 #include "wx/dcclient.h"        // for wxPaintDC
-#include "wx/geometry/rect.h"
 
+import Utils.Geometry;
 
 import <string>;
 

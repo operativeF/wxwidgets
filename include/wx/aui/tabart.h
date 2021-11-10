@@ -25,7 +25,8 @@
 #include "wx/pen.h"
 #include "wx/brush.h"
 #include "wx/bitmap.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

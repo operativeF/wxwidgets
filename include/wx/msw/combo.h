@@ -22,7 +22,7 @@
     #define wxUSE_COMBOCTRL_POPUP_ANIMATION     1
 #endif
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 

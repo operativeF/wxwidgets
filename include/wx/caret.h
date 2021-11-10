@@ -22,12 +22,7 @@
 class wxWindow;
 class wxWindowBase;
 
-// ----------------------------------------------------------------------------
-// headers we have to include
-// ----------------------------------------------------------------------------
-
-#include "wx/geometry/size.h"
-#include "wx/geometry/point.h"
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // A caret is a blinking cursor showing the position where the typed text will

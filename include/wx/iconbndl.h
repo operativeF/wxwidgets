@@ -12,10 +12,11 @@
 #define _WX_ICONBNDL_H_
 
 #include "wx/gdiobj.h"
-#include "wx/geometry/size.h"
 #include "wx/icon.h"
 
 #include "wx/dynarray.h"
+
+import Utils.Geometry;
 
 import <string>;
 

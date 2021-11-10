@@ -13,11 +13,11 @@
 
 #include "wx/msw/gdiimage.h"
 #include "wx/palette.h"
-#include "wx/geometry/rect.h"
-#include "wx/geometry/size.h"
 #include "wx/icon.h"
 
 #include "wx/msw/wrap/utils.h"
+
+import Utils.Geometry;
 
 import <cmath>;
 import <string>;

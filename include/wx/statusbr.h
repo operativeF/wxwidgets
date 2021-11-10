@@ -16,7 +16,8 @@
 #include "wx/defs.h"
 #include "wx/control.h"
 #include "wx/dynarray.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

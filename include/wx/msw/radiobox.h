@@ -12,7 +12,8 @@
 #define _WX_RADIOBOX_H_
 
 #include "wx/statbox.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

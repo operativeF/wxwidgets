@@ -13,12 +13,13 @@
 
 #include "wx/colour.h"
 #include "wx/font.h"
-#include "wx/geometry/point.h"
 #include "wx/event.h"
 #include "wx/control.h"
 #include "wx/itemattr.h"
 #include "wx/systhemectrl.h"
-#include "wx/bitflags.h"
+
+import Utils.Bitfield;
+import Utils.Geometry;
 
 import <vector>;
 

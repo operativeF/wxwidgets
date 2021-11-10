@@ -17,11 +17,12 @@
 
 #include "wx/affinematrix2d.h"
 #include "wx/geometry.h"
-#include "wx/geometry/point.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/image.h"
 #include "wx/peninfobase.h"
+
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

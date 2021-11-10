@@ -10,7 +10,7 @@
 #ifndef _WX_AUI_TABARTMSW_H_
 #define _WX_AUI_TABARTMSW_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 

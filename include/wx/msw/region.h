@@ -11,8 +11,9 @@
 #ifndef _WX_MSW_REGION_H_
 #define _WX_MSW_REGION_H_
 
-#include "wx/geometry/rect.h"
 #include "wx/gdicmn.h"
+
+import Utils.Geometry;
 
 #include <memory>
 

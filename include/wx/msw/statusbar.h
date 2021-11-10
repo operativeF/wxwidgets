@@ -13,7 +13,7 @@
 
 #if wxUSE_NATIVE_STATUSBAR
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <vector>;
 

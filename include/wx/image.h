@@ -15,13 +15,13 @@
 
 #include "wx/gdicmn.h"
 #include "wx/object.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
 #include "wx/hashmap.h"
 
 #if wxUSE_STREAMS
 #  include "wx/stream.h"
 #endif
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

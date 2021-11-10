@@ -1,9 +1,10 @@
-#ifndef _WX_SIZE_H
-#define _WX_SIZE_H
+export module Utils.Geometry.Size;
 
 import <cmath>;
+import Utils.Geometry.Point;
 
-#include "wx/geometry/point.h"
+export
+{
 
 struct wxSize
 {
@@ -163,4 +164,6 @@ inline wxSize operator*(double i, const wxSize& s)
     return wxSize(std::lround(s.x * i), std::lround(s.y * i));
 }
 
-#endif // _WX_SIZE_H
+inline constexpr wxSize wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
+
+} // export

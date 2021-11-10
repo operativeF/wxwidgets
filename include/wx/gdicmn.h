@@ -18,14 +18,13 @@
 #include "wx/defs.h"
 
 #include "wx/list.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-#include "wx/geometry/size.h"
 #include "wx/string.h"
 #include "wx/fontenc.h"
 #include "wx/hashmap.h"
 #include "wx/math.h"
-#include "wx/bitflags.h"
+
+import Utils.Bitfield;
+import Utils.Geometry;
 
 import <cstdint>;
 
@@ -446,9 +445,6 @@ extern wxIconBundle wxNullIconBundle;
 extern wxColourDatabase*  wxTheColourDatabase;
 
 inline constexpr char wxPanelNameStr[] = "panel";
-
-inline constexpr wxSize wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
-inline constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
 
 // ---------------------------------------------------------------------------
 // global functions

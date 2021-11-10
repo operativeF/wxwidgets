@@ -1,10 +1,16 @@
-#ifndef _WX_POINT_H
-#define _WX_POINT_H
+module;
 
 #include "wx/list.h"
 #include "wx/math.h"
 
+export module Utils.Geometry.Point;
+
 import <cmath>;
+
+export
+{
+
+inline constexpr int wxDefaultCoord{-1};
 
 template<typename NumericalT>
 struct wxPoint2D
@@ -261,4 +267,6 @@ constexpr bool IsFullySpecified(const wxPoint& pt) { return pt.x != wxDefaultCoo
 
 WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class WXDLLIMPEXP_CORE);
 
-#endif // _WX_POINT_H
+inline constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
+
+} // export

@@ -15,7 +15,8 @@
 #include "wx/defs.h"
 
 #include "wx/colour.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 #include <chrono>
 import <string>;

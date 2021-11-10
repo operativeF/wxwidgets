@@ -20,13 +20,14 @@
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"
-#include "wx/geometry/rect.h"
 
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 #include "wx/stringutils.h"
+
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

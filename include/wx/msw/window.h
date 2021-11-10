@@ -14,9 +14,7 @@
 
 #include "wx/msw/wrapwin.h"
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-#include "wx/geometry/size.h"
+import Utils.Geometry;
 
 import <string_view>;
 

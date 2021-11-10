@@ -13,9 +13,9 @@
 #if wxUSE_NOTEBOOK
 
 #include "wx/control.h"
-#include "wx/geometry/rect.h"
-
 #include "wx/msw/wrap/utils.h"
+
+import Utils.Geometry;
 
 import <string>;
 

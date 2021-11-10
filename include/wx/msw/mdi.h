@@ -12,7 +12,7 @@
 #ifndef _WX_MSW_MDI_H_
 #define _WX_MSW_MDI_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

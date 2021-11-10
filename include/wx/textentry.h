@@ -19,7 +19,8 @@ class wxTextEntryHintData;
 class wxWindow;
 
 #include "wx/filefn.h"              // for wxFILE and wxDIR only
-#include "wx/geometry/point.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

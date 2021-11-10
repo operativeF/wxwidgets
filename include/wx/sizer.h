@@ -12,10 +12,9 @@
 #define __WXSIZER_H__
 
 #include "wx/defs.h"
-
-#include "wx/geometry/rect.h"
-
 #include "wx/window.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

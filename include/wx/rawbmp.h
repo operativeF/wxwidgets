@@ -17,7 +17,8 @@
 
 #include "wx/image.h"
 #include "wx/bitmap.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <cstdint>;
 

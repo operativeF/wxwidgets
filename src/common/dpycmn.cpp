@@ -9,12 +9,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
 #include "wx/window.h"
 #include "wx/module.h"
 
 #include "wx/private/display.h"
+
+import Utils.Geometry;
 
 #include <memory>
 

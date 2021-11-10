@@ -12,8 +12,8 @@
 #define _WX_REGION_H_BASE_
 
 #include "wx/gdiobj.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 class wxBitmap;
 class wxColour;

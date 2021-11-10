@@ -10,7 +10,8 @@
 #ifndef _WX_PRIVATE_WINDOW_H_
 #define _WX_PRIVATE_WINDOW_H_
 
-#include "wx/geometry/size.h"
+import Utils.Geometry;
+
 #include "wx/dynlib.h"
 
 namespace wxPrivate

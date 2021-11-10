@@ -11,7 +11,7 @@
 #ifndef _WX_CHOICE_H_
 #define _WX_CHOICE_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 import <string_view>;

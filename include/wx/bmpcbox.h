@@ -16,7 +16,7 @@
 
 #if wxUSE_BITMAPCOMBOBOX
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

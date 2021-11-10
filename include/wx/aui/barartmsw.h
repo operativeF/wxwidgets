@@ -10,7 +10,7 @@
 #ifndef _WX_AUI_BARART_MSW_H_
 #define _WX_AUI_BARART_MSW_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 class wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 {

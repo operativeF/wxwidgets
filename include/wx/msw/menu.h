@@ -13,7 +13,6 @@
 
 #include "wx/log.h"
 #include "wx/private/menuradio.h"
-#include "wx/geometry/rect.h"
 
 #if wxUSE_ACCEL
     #include "wx/accel.h"
@@ -21,6 +20,8 @@
     import <vector>;
     using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
+
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

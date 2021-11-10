@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/geometry/size.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
-
 #include "wx/display.h"
 #include "wx/bitmap.h"
 #include "wx/brush.h"
@@ -26,6 +22,8 @@
 #include "wx/palette.h"
 #include "wx/pen.h"
 #include "wx/settings.h"
+
+import Utils.Geometry;
 
 import <cmath>;
 

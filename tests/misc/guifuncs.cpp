@@ -23,9 +23,10 @@
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 #include "wx/panel.h"
-#include "wx/geometry/point.h"
 
 #include "asserthelper.h"
+
+import Utils.Geometry;
 
 TEST_CASE("DisplaySize")
 {

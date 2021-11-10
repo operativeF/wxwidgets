@@ -10,7 +10,7 @@
 
 #include "testprec.h"
 
-#include "wx/bitflags.h"
+import Utils.Bitfield;
 
 TEST_CASE("Bitflags")
 {

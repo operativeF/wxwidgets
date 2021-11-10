@@ -17,7 +17,8 @@
 
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
-#include "wx/geometry/point.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <string_view>;

@@ -15,7 +15,8 @@
 #if wxUSE_HEADERCTRL
 
 #include "wx/headercol.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

@@ -15,8 +15,9 @@
 
 #include "wx/dc.h"
 #include "wx/geometry.h"
-#include "wx/geometry/rect.h"
 #include "wx/graphics.h"
+
+import Utils.Geometry;
 
 #include <memory>
 import <string>;

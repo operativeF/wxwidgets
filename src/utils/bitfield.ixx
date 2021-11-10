@@ -1,5 +1,4 @@
-#ifndef _BITFLAGS_H_
-#define _BITFLAGS_H_
+module;
 
 #include <boost/tmp/algorithm/find_if.hpp>
 #include <boost/tmp/algorithm/contains.hpp>
@@ -7,6 +6,8 @@
 #include <boost/tmp/sequence/take.hpp>
 #include <boost/tmp/sequence/unpack.hpp>
 #include <boost/tmp/vocabulary.hpp>
+
+export module Utils.Bitfield;
 
 import <concepts>;
 
@@ -19,6 +20,9 @@ concept BitfieldCompatible =  requires
 
 template<BitfieldCompatible Enum>
 class Bitfield;
+
+export
+{
 
 template<typename Enum>
 using InclBitfield = Bitfield<Enum>;
@@ -229,7 +233,7 @@ private:
 template<typename BaseOption, typename ConflictingOption, typename... ConflictingOptions>
 using ConflictOptions = boost::tmp::list_<BaseOption, ConflictingOption, ConflictingOptions...>;
 
-
+} // export
 
 // A bitfield that takes multiple options, but has some option combinations
 // that are invalid.
@@ -265,6 +269,9 @@ struct EnumOptionsCount
 };
 
 }
+
+export
+{
 
 template<typename... Enums> requires(CombinableBitfield<Enums...>)
 class CombineBitfield
@@ -438,4 +445,4 @@ constexpr auto operator&(CombineBitfield<Enums...> bf, const CombineBitfield<Enu
     return bf;
 }
 
-#endif // _BITFLAGS_H_
+} // export

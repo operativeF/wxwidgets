@@ -59,11 +59,8 @@
 #include "wx/palette.h"
 #include "wx/panel.h"
 #include "wx/pen.h"
-#include "wx/geometry/point.h"
-#include "wx/geometry/rect.h"
 #include "wx/region.h"
 #include "wx/settings.h"
-#include "wx/geometry/size.h"
 #include "wx/toplevel.h"
 #include "wx/window.h"
 

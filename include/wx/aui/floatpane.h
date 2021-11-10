@@ -11,14 +11,10 @@
 #ifndef _WX_FLOATPANE_H_
 #define _WX_FLOATPANE_H_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #include "wx/defs.h"
-#include "wx/geometry/rect.h"
-
 #include "wx/weakref.h"
+
+import Utils.Geometry;
 
 #if wxUSE_AUI
 

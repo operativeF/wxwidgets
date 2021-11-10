@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_OWNERDRAWNBUTTON_H_
 #define _WX_MSW_OWNERDRAWNBUTTON_H_
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // wxMSWOwnerDrawnButton: base class for any kind of Windows buttons

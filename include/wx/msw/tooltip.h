@@ -13,7 +13,7 @@
 
 #include "wx/object.h"
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 #include <chrono>
 import <string>;

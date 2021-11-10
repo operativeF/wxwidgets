@@ -13,7 +13,7 @@
 
 #if wxUSE_OWNER_DRAWN
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 struct wxOwnerDrawn : public wxOwnerDrawnBase
 {

@@ -18,12 +18,13 @@
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/geometry/size.h"
 #include "wx/utils.h"
 #include "wx/scopeguard.h"
 #include "wx/msw/private/dpiaware.h"
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.Geometry;
 
 import <string>;
 
