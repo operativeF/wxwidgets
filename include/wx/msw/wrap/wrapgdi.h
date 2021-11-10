@@ -3,7 +3,8 @@
 #define _MSW_WRAPGDI_H
 
 #include <wx/geometry/size.h>
-#include <wx/position.h>
+
+import Utils.Position;
 
 import <string>;
 

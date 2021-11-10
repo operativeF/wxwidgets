@@ -148,7 +148,7 @@ target_link_libraries(test_gui
         wxcore
         wxbase
         stdlibcore
-        wxutils
+        wxtype
         doctest::doctest
         ${JPEG_LIBRARIES}
     # Windows libraries

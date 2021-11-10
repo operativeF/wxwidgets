@@ -7,16 +7,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_POSITION_H_
-#define _WX_POSITION_H_
+export module Utils.Position;
 
-class wxPosition
+import Utils.Geometry.Size;
+
+export class wxPosition
 {
 public:
     constexpr wxPosition() noexcept = default;
     constexpr wxPosition(int row, int col) noexcept : m_row(row), m_column(col) {}
-
-    // default copy ctor and assignment operator are okay.
 
     constexpr int GetRow() const noexcept          { return m_row; }
     constexpr int GetColumn() const noexcept       { return m_column; }
@@ -52,6 +51,3 @@ private:
     int m_row{0};
     int m_column{0};
 };
-
-#endif // _WX_POSITION_H_
-

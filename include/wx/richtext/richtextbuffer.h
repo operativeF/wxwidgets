@@ -11,6 +11,8 @@
 #ifndef _WX_RICHTEXTBUFFER_H_
 #define _WX_RICHTEXTBUFFER_H_
 
+import Utils.Position;
+
 /*
 
   Data structures

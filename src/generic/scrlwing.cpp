@@ -17,7 +17,6 @@
 
 #include "wx/utils.h"
 #include "wx/panel.h"
-#include "wx/position.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
@@ -38,6 +37,8 @@
 # pragma message enable nosimpint
 #endif
 #endif
+
+import Utils.Position;
 
 /*
     TODO PROPERTIES

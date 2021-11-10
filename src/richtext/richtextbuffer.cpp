@@ -38,6 +38,8 @@
 #include "wx/listimpl.cpp"
 #include "wx/arrimpl.cpp"
 
+import Utils.Position;
+
 import <cmath>;
 
 WX_DEFINE_LIST(wxRichTextObjectList)

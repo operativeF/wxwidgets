@@ -14,7 +14,7 @@ target_link_libraries(wxxml
         stdlibcore
         Microsoft.GSL::GSL
         expat::expat
-        wxutils
+        wxtype
 )
 
 target_include_directories(wxxml

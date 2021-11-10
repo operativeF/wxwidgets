@@ -12,8 +12,9 @@
 #define _WX_VSCROLL_H_
 
 #include "wx/panel.h"
-#include "wx/position.h"
 #include "wx/scrolwin.h"
+
+import Utils.Position;
 
 import <string>;
 

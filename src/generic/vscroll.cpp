@@ -16,6 +16,8 @@
 
 #include "wx/utils.h"   // For std::min/std::max().
 
+import Utils.Position;
+
 // ============================================================================
 // wxVarScrollHelperEvtHandler declaration
 // ============================================================================
