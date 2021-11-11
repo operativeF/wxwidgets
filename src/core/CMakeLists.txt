@@ -414,6 +414,7 @@ target_link_libraries(wxcore
         wxsharedcmn
         wxbase
         wxtype
+        wxalgorithm
         stdlibcore
         Boost::nowide
         fmt::fmt

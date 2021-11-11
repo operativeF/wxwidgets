@@ -1,9 +1,9 @@
 #ifndef _WX_WXSTRINGUTILS_H__
 #define _WX_WXSTRINGUTILS_H__
 
-#include "wx/charutils.h"
-
 #include <gsl/gsl>
+
+import Utils.Chars;
 
 import <algorithm>;
 import <cctype>;

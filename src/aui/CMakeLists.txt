@@ -44,6 +44,7 @@ target_include_directories(wxaui
 
 target_link_libraries(wxaui
     PRIVATE
+        wxalgorithm
         stdlibcore
         wxtype
         Microsoft.GSL::GSL

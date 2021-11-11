@@ -8,10 +8,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _CHAR_UTILS_H
-#define _CHAR_UTILS_H
+export module Utils.Chars;
 
 import <concepts>;
+import <cstddef>;
+
+export
+{
 
 namespace wx::utils
 {
@@ -289,4 +292,4 @@ constexpr std::byte HexCharToDec(std::byte C)
 
 } // namespace wx::utils
 
-#endif // _CHAR_UTILS_H
+} // export

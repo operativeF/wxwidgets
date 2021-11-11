@@ -5,6 +5,7 @@
 # webview
 # xrc
 
+add_subdirectory(algorithm)
 add_subdirectory(aui)
 add_subdirectory(base)
 add_subdirectory(core)

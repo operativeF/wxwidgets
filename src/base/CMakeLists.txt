@@ -208,6 +208,7 @@ target_include_directories(wxsharedcmn
 
 target_link_libraries(wxsharedcmn
     PRIVATE
+        wxalgorithm
         wxtype
         Microsoft.GSL::GSL
         stdlibcore
@@ -265,6 +266,7 @@ endif()
 target_link_libraries(wxbase
     PRIVATE
         wxsharedcmn
+        wxalgorithm
         stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
