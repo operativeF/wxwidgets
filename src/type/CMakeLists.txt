@@ -2,8 +2,10 @@
 
 set(GeometrySrc
     ${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.ixx
+    ${CMAKE_CURRENT_SOURCE_DIR}/geometry/affinematrix2d.ixx
     ${CMAKE_CURRENT_SOURCE_DIR}/geometry/point.ixx
     ${CMAKE_CURRENT_SOURCE_DIR}/geometry/rect.ixx
+    ${CMAKE_CURRENT_SOURCE_DIR}/geometry/rectaa.ixx
     ${CMAKE_CURRENT_SOURCE_DIR}/geometry/size.ixx
 )
 

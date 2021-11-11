@@ -7,16 +7,14 @@
 // Licence:      wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_AFFINEMATRIX2D_H_
-#define _WX_AFFINEMATRIX2D_H_
+export module Utils.Geometry.AffineMatrix2D;
 
-#include "wx/defs.h"
+import <cmath>;
+import <utility>;
+import Utils.Geometry.Point;
 
-#if wxUSE_GEOMETRY
-
-#include "wx/geometry.h"
-
-import Utils.Geometry;
+export
+{
 
 struct wxMatrix2D
 {
@@ -188,6 +186,4 @@ private:
     float m_ty{0.0F};
 };
 
-#endif // wxUSE_GEOMETRY
-
-#endif // _WX_AFFINEMATRIX2D_H_
+} // export

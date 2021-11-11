@@ -25,7 +25,6 @@
 #include "wx/pen.h"
 #include "wx/palette.h"
 #include "wx/region.h"
-#include "wx/affinematrix2d.h"
 
 import Utils.Geometry;
 

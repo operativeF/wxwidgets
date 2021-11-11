@@ -15,7 +15,6 @@
 
 #include "wx/defs.h"
 
-#include "wx/affinematrix2d.h"
 #include "wx/geometry.h"
 #include "wx/colour.h"
 #include "wx/font.h"
