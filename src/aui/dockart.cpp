@@ -634,7 +634,7 @@ void wxAuiDefaultDockArt::DrawCaptionBackground(wxDC& dc, const wxRect& rect, bo
 
 void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
                                    wxWindow* window,
-                                   const wxString& text,
+                                   const std::string& text,
                                    const wxRect& rect,
                                    wxAuiPaneInfo& pane)
 {

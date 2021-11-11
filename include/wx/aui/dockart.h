@@ -53,7 +53,7 @@ public:
 
     virtual void DrawCaption(wxDC& dc,
                           wxWindow* window,
-                          const wxString& text,
+                          const std::string& text,
                           const wxRect& rect,
                           wxAuiPaneInfo& pane) = 0;
 
@@ -108,7 +108,7 @@ public:
 
     void DrawCaption(wxDC& dc,
                   wxWindow *window,
-                  const wxString& text,
+                  const std::string& text,
                   const wxRect& rect,
                   wxAuiPaneInfo& pane) override;
 

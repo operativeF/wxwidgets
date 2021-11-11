@@ -135,11 +135,11 @@ public:
     void SetHoverBitmap(const wxBitmap& bmp) { m_hoverBitmap = bmp; }
     const wxBitmap& GetHoverBitmap() const { return m_hoverBitmap; }
 
-    void SetShortHelp(const wxString& s) { m_shortHelp = s; }
-    const wxString& GetShortHelp() const { return m_shortHelp; }
+    void SetShortHelp(const std::string& s) { m_shortHelp = s; }
+    const std::string& GetShortHelp() const { return m_shortHelp; }
 
-    void SetLongHelp(const wxString& s) { m_longHelp = s; }
-    const wxString& GetLongHelp() const { return m_longHelp; }
+    void SetLongHelp(const std::string& s) { m_longHelp = s; }
+    const std::string& GetLongHelp() const { return m_longHelp; }
 
     void SetMinSize(const wxSize& s) { m_minSize = s; }
     const wxSize& GetMinSize() const { return m_minSize; }
@@ -178,9 +178,8 @@ public:
     }
 
 private:
-    wxString m_shortHelp;       // short help (for tooltip)
-    wxString m_longHelp;        // long help (for status bar)
-
+    std::string m_shortHelp;     // short help (for tooltip)
+    std::string m_longHelp;      // long help (for status bar)
     std::string m_label;         // label displayed on the item
 
     wxBitmap m_bitmap;           // item's bitmap
@@ -463,18 +462,18 @@ public:
 
 
     wxAuiToolBarItem* AddTool(int toolId,
-                 const wxString& label,
+                 const std::string& label,
                  const wxBitmap& bitmap,
-                 const wxString& shortHelpString = {},
+                 const std::string& shortHelpString = {},
                  wxItemKind kind = wxITEM_NORMAL);
 
     wxAuiToolBarItem* AddTool(int toolId,
-                 const wxString& label,
+                 const std::string& label,
                  const wxBitmap& bitmap,
                  const wxBitmap& disabledBitmap,
                  wxItemKind kind,
-                 const wxString& shortHelpString,
-                 const wxString& longHelpString,
+                 const std::string& shortHelpString,
+                 const std::string& longHelpString,
                  wxObject* clientData);
 
     wxAuiToolBarItem* AddTool(int toolId,
@@ -482,8 +481,8 @@ public:
                  const wxBitmap& disabledBitmap,
                  bool toggle = false,
                  wxObject* clientData = nullptr,
-                 const wxString& shortHelpString = {},
-                 const wxString& longHelpString = {})
+                 const std::string& shortHelpString = {},
+                 const std::string& longHelpString = {})
     {
         return AddTool(toolId,
                 {},
@@ -496,10 +495,10 @@ public:
     }
 
     wxAuiToolBarItem* AddLabel(int toolId,
-                  const wxString& label = {},
+                  const std::string& label = {},
                   const int width = -1);
     wxAuiToolBarItem* AddControl(wxControl* control,
-                    const wxString& label = {});
+                    const std::string& label = {});
     wxAuiToolBarItem* AddSeparator();
     wxAuiToolBarItem* AddSpacer(int pixels);
     wxAuiToolBarItem* AddStretchSpacer(int proportion = 1);
@@ -570,17 +569,17 @@ public:
     void SetToolSticky(int toolId, bool sticky);
     bool GetToolSticky(int toolId) const;
 
-    wxString GetToolLabel(int toolId) const;
-    void SetToolLabel(int toolId, const wxString& label);
+    std::string GetToolLabel(int toolId) const;
+    void SetToolLabel(int toolId, const std::string& label);
 
     wxBitmap GetToolBitmap(int toolId) const;
     void SetToolBitmap(int toolId, const wxBitmap& bitmap);
 
-    wxString GetToolShortHelp(int toolId) const;
-    void SetToolShortHelp(int toolId, const wxString& helpString);
+    std::string GetToolShortHelp(int toolId) const;
+    void SetToolShortHelp(int toolId, const std::string& helpString);
 
-    wxString GetToolLongHelp(int toolId) const;
-    void SetToolLongHelp(int toolId, const wxString& helpString);
+    std::string GetToolLongHelp(int toolId) const;
+    void SetToolLongHelp(int toolId, const std::string& helpString);
 
     void SetCustomOverflowItems(const wxAuiToolBarItemArray& prepend,
                                 const wxAuiToolBarItemArray& append);

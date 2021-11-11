@@ -1227,7 +1227,7 @@ void wxAuiTabCtrl::OnMotion(wxMouseEvent& evt)
         SetHoverTab(wnd);
 
 #if wxUSE_TOOLTIPS
-        wxString tooltip(m_pages[GetIdxFromWindow(wnd)].tooltip);
+        std::string tooltip(m_pages[GetIdxFromWindow(wnd)].tooltip);
 
         // If the text changes, set it else, keep old, to avoid
         // 'moving tooltip' effect
@@ -1917,7 +1917,7 @@ void wxAuiNotebook::SetWindowStyleFlag(unsigned int style)
 
 
 bool wxAuiNotebook::AddPage(wxWindow* page,
-                            const wxString& caption,
+                            const std::string& caption,
                             bool select,
                             const wxBitmap& bitmap)
 {
@@ -1926,7 +1926,7 @@ bool wxAuiNotebook::AddPage(wxWindow* page,
 
 bool wxAuiNotebook::InsertPage(size_t page_idx,
                                wxWindow* page,
-                               const wxString& caption,
+                               const std::string& caption,
                                bool select,
                                const wxBitmap& bitmap)
 {
@@ -2155,7 +2155,7 @@ std::string wxAuiNotebook::GetPageText(size_t page_idx) const
     return page_info.caption;
 }
 
-bool wxAuiNotebook::SetPageToolTip(size_t page_idx, const wxString& text)
+bool wxAuiNotebook::SetPageToolTip(size_t page_idx, const std::string& text)
 {
     if (page_idx >= m_tabs.GetPageCount())
         return false;
@@ -2177,7 +2177,7 @@ bool wxAuiNotebook::SetPageToolTip(size_t page_idx, const wxString& text)
     return true;
 }
 
-wxString wxAuiNotebook::GetPageToolTip(size_t page_idx) const
+std::string wxAuiNotebook::GetPageToolTip(size_t page_idx) const
 {
     if (page_idx >= m_tabs.GetPageCount())
         return {};

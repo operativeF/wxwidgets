@@ -759,7 +759,8 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
 
         if (item.GetKind() == wxITEM_NORMAL)
         {
-            wxString text = item.GetShortHelp();
+            auto text = item.GetShortHelp();
+
             if (text.empty())
                 text = item.GetLabel();
 
@@ -895,9 +896,9 @@ wxAuiToolBarArt* wxAuiToolBar::GetArtProvider() const
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
-                           const wxString& label,
+                           const std::string& label,
                            const wxBitmap& bitmap,
-                           const wxString& shortHelp_string,
+                           const std::string& shortHelp_string,
                            wxItemKind kind)
 {
     return AddTool(tool_id,
@@ -912,12 +913,12 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
 
 
 wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
-                           const wxString& label,
+                           const std::string& label,
                            const wxBitmap& bitmap,
                            const wxBitmap& disabledBitmap,
                            wxItemKind kind,
-                           const wxString& shortHelpString,
-                           const wxString& longHelpString,
+                           const std::string& shortHelpString,
+                           const std::string& longHelpString,
                            wxObject* WXUNUSED(client_data))
 {
     wxAuiToolBarItem item;
@@ -955,7 +956,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddControl(wxControl* control,
-                              const wxString& label)
+                              const std::string& label)
 {
     wxAuiToolBarItem item;
     item.m_window = (wxWindow*)control;
@@ -979,7 +980,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddControl(wxControl* control,
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddLabel(int tool_id,
-                            const wxString& label,
+                            const std::string& label,
                             const int width)
 {
     wxSize min_size = wxDefaultSize;
@@ -1549,7 +1550,7 @@ bool wxAuiToolBar::GetToolEnabled(int tool_id) const
     return false;
 }
 
-wxString wxAuiToolBar::GetToolLabel(int tool_id) const
+std::string wxAuiToolBar::GetToolLabel(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
@@ -1559,7 +1560,7 @@ wxString wxAuiToolBar::GetToolLabel(int tool_id) const
     return tool->m_label;
 }
 
-void wxAuiToolBar::SetToolLabel(int tool_id, const wxString& label)
+void wxAuiToolBar::SetToolLabel(int tool_id, const std::string& label)
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     if (tool)
@@ -1587,7 +1588,7 @@ void wxAuiToolBar::SetToolBitmap(int tool_id, const wxBitmap& bitmap)
     }
 }
 
-wxString wxAuiToolBar::GetToolShortHelp(int tool_id) const
+std::string wxAuiToolBar::GetToolShortHelp(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
@@ -1597,7 +1598,7 @@ wxString wxAuiToolBar::GetToolShortHelp(int tool_id) const
     return tool->m_shortHelp;
 }
 
-void wxAuiToolBar::SetToolShortHelp(int tool_id, const wxString& help_string)
+void wxAuiToolBar::SetToolShortHelp(int tool_id, const std::string& help_string)
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     if (tool)
@@ -1606,7 +1607,7 @@ void wxAuiToolBar::SetToolShortHelp(int tool_id, const wxString& help_string)
     }
 }
 
-wxString wxAuiToolBar::GetToolLongHelp(int tool_id) const
+std::string wxAuiToolBar::GetToolLongHelp(int tool_id) const
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
@@ -1616,7 +1617,7 @@ wxString wxAuiToolBar::GetToolLongHelp(int tool_id) const
     return tool->m_longHelp;
 }
 
-void wxAuiToolBar::SetToolLongHelp(int tool_id, const wxString& help_string)
+void wxAuiToolBar::SetToolLongHelp(int tool_id, const std::string& help_string)
 {
     wxAuiToolBarItem* tool = FindTool(tool_id);
     if (tool)

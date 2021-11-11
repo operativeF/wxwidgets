@@ -18,9 +18,6 @@ import <string>;
 #include "wx/cpp.h"          // for __WXFUNCTION__
 #include "wx/dlimpexp.h"     // for WXDLLIMPEXP_FWD_BASE
 
-class wxString;
-class wxCStrData;
-
 // ----------------------------------------------------------------------------
 // Defines controlling the debugging macros
 // ----------------------------------------------------------------------------
