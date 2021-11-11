@@ -16,10 +16,11 @@
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/containr.h"
-#include "wx/stringutils.h"
 #include "wx/textwrapper.h"
 
 #include "wx/private/markupparser.h"
+
+import Utils.Strings;
 
 import <algorithm>;
 

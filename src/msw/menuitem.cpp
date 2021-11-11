@@ -30,11 +30,12 @@
 #endif // wxUSE_ACCEL
 
 #include "wx/msw/dc.h"
-#include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.Strings;
 
 import <string>;
 

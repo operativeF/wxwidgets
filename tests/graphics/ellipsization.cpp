@@ -13,7 +13,8 @@
 
 #include "wx/control.h"
 #include "wx/dcmemory.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // test class

@@ -25,7 +25,8 @@
 #include "wx/tokenzr.h"
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 import Utils.Geometry;
 

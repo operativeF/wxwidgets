@@ -18,7 +18,6 @@
 #include "wx/dynlib.h"
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
-#include "wx/stringutils.h"
 
 #include "wx/msw/private/webview_ie.h"
 #include "wx/private/jsscriptwrapper.h"
@@ -26,6 +25,9 @@
 #include <initguid.h>
 #include <exdispid.h>
 #include <mshtml.h>
+
+import Utils.Strings;
+
 
 /* These GUID definitions are our own implementation to support interfaces
  * normally in urlmon.h. See include/wx/msw/webview_ie.h

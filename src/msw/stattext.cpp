@@ -17,9 +17,9 @@
 #include "wx/dcclient.h"
 #include "wx/settings.h"
 
-#include "wx/stringutils.h"
-
 #include "wx/msw/private/winstyle.h"
+
+import Utils.Strings;
 
 bool wxStaticText::Create(wxWindow *parent,
                           wxWindowID id,

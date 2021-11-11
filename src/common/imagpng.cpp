@@ -14,9 +14,10 @@
 #include "wx/intl.h"
 #include "wx/palette.h"
 #include "wx/stream.h"
-#include "wx/stringutils.h"
 
 #include <png.h>
+
+import Utils.Strings;
 
 import <tuple>;
 

@@ -10,11 +10,12 @@
 
 #include "wx/stockitem.h"
 
-#include "wx/stringutils.h"
 #include "wx/intl.h"
 #include "wx/utils.h" // for wxStripMenuCodes()
 
 #include <fmt/core.h>
+
+import Utils.Strings;
 
 bool wxIsStockID(wxWindowID id)
 {

@@ -14,7 +14,8 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 import <optional>;
 

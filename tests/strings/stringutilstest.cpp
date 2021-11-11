@@ -2,7 +2,7 @@
 
 #include "testprec.h"
 
-#include "wx/stringutils.h"
+import Utils.Strings;
 
 import <array>;
 

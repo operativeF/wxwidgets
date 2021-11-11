@@ -18,7 +18,8 @@
 #include "wx/menu.h"
 #include "wx/frame.h"
 #include "wx/stockitem.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // template lists

@@ -18,12 +18,14 @@
 #if wxUSE_FONTMAP
 
 #include "wx/fontenc.h"         // for wxFontEncoding
-#include "wx/stringutils.h"
 #include "wx/translation.h"
 
 #if wxUSE_GUI
     #include "wx/fontutil.h"    // for wxNativeEncodingInfo
 #endif // wxUSE_GUI
+
+import Utils.Chars;
+import Utils.Strings;
 
 import <string>;
 import <string_view>;

@@ -42,9 +42,10 @@
 #include "wx/dir.h"
 #include "wx/xml/xml.h"
 #include "wx/hashset.h"
-#include "wx/stringutils.h"
 #include "wx/config.h"
 #include "wx/platinfo.h"
+
+import Utils.Strings;
 
 import <clocale>;
 

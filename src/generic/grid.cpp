@@ -32,7 +32,6 @@
 #include "wx/valtext.h"
 #include "wx/intl.h"
 #include "wx/listbox.h"
-#include "wx/stringutils.h"
 #include "wx/dcbuffer.h"
 #include "wx/textfile.h"
 #include "wx/spinctrl.h"
@@ -51,6 +50,8 @@
 #include "wx/generic/private/grid.h"
 
 #include <gsl/gsl>
+
+import Utils.Strings;
 
 import <algorithm>;
 import <string>;

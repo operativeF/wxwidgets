@@ -16,7 +16,8 @@
 #include "wx/dcmemory.h"
 #include "wx/graphics.h"
 #include "wx/geometry.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 import <cmath>;
 import <numbers>;

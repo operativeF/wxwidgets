@@ -20,7 +20,6 @@
 #include "wx/log.h"
 #include "wx/icon.h"
 #include "wx/module.h"
-#include "wx/stringutils.h"
 
 #include "wx/msw/dc.h"
 #include "wx/sysopt.h"
@@ -34,6 +33,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
+
+import Utils.Strings;
 
 import <cmath>;
 import <numeric>;

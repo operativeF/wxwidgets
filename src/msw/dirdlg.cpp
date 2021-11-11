@@ -17,7 +17,6 @@
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/log.h"
-#include "wx/stringutils.h"
 
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/comptr.h"
@@ -30,6 +29,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.Strings;
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available

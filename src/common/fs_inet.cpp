@@ -18,8 +18,8 @@
 #include "wx/url.h"
 #include "wx/filesys.h"
 #include "wx/fs_inet.h"
-#include "wx/stringutils.h"
 
+import Utils.Strings;
 
 namespace
 {

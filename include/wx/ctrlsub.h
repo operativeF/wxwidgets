@@ -16,13 +16,15 @@
 #if wxUSE_CONTROLS
 
 #include "wx/control.h"      // base class
-#include "wx/stringutils.h"
+
+#include <gsl/gsl>
+
+import Utils.Strings;
 
 import <cstdint>;
 import <string>;
 import <vector>;
 
-#include <gsl/gsl>
 
 
 // ----------------------------------------------------------------------------

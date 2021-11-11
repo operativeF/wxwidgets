@@ -48,7 +48,8 @@ import <exception>;
 #include "wx/log.h"
 #include "wx/socket.h"
 #include "wx/evtloop.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 using namespace std;
 

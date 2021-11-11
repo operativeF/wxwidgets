@@ -19,7 +19,7 @@
 #include "wx/textcompleter.h"
 #include "wx/clipbrd.h"
 
-#include "wx/stringutils.h"
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // text accessors

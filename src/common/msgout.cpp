@@ -23,9 +23,10 @@
 
 #include "wx/apptrait.h"
 #include "wx/msgout.h"
-#include "wx/stringutils.h"
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.Strings;
 
 // ===========================================================================
 // implementation

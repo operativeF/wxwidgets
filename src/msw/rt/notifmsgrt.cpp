@@ -15,7 +15,6 @@
 #include "wx/msw/rt/private/notifmsg.h"
 
 #include "wx/notifmsg.h"
-#include "wx/stringutils.h"
 #include "wx/msw/rt/utils.h"
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/wrapshl.h"
@@ -31,6 +30,8 @@
 #include <wrl/implements.h>
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.Strings;
 
 import <string>;
 

@@ -18,7 +18,8 @@
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
 #include "wx/html/styleparams.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 FORCE_LINK_ME(m_fonts)
 

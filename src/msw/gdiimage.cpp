@@ -12,7 +12,6 @@
 #include "wx/app.h"
 #include "wx/bitmap.h"
 #include "wx/icon.h"
-#include "wx/stringutils.h"
 
 #if wxUSE_PNG_RESOURCE_HANDLER
     #include "wx/image.h"
@@ -26,6 +25,8 @@
 #endif
 
 #include "wx/msw/private.h"
+
+import Utils.Strings;
 
 import <string>;
 

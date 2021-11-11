@@ -27,12 +27,12 @@
 #include "wx/scopedarray.h"
 #include "wx/private/menuradio.h" // for wxMenuRadioItemsData
 
-#include "wx/stringutils.h"
-
 #include "wx/dynlib.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // global variables

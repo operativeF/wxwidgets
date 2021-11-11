@@ -15,7 +15,6 @@
 #include "wx/intl.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/stringutils.h"
 
 extern "C"
 {
@@ -27,6 +26,7 @@ extern "C"
 
 #include <gsl/gsl>
 
+import Utils.Strings;
 import Utils.Geometry;
 
 #ifndef TIFFLINKAGEMODE

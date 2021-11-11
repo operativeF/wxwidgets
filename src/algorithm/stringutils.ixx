@@ -1,22 +1,23 @@
-#ifndef _WX_WXSTRINGUTILS_H__
-#define _WX_WXSTRINGUTILS_H__
-
-#include <gsl/gsl>
+export module Utils.Strings;
 
 import Utils.Chars;
 
 import <algorithm>;
+import <cstddef>;
 import <cctype>;
 import <string>;
 import <string_view>;
 import <vector>;
+
+export
+{
 
 namespace wx::utils
 {
 
 // Modifying string functions
 
-[[maybe_unused]] constexpr std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+constexpr std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
 {
     std::size_t count{ 0 };
     for (std::string::size_type pos{};
@@ -29,7 +30,7 @@ namespace wx::utils
     return count;
 }
 
-[[maybe_unused]] constexpr std::size_t ReplaceAll(std::wstring& instr, std::wstring_view candidate, std::wstring_view replacement)
+constexpr std::size_t ReplaceAll(std::wstring& instr, std::wstring_view candidate, std::wstring_view replacement)
 {
     std::size_t count{ 0 };
     for (std::wstring::size_type pos{};
@@ -77,7 +78,7 @@ constexpr void ToLower(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings.
-[[nodiscard]] constexpr std::string ToUpperCopy(std::string_view str)
+constexpr std::string ToUpperCopy(std::string_view str)
 {
     std::string out;
     out.resize(str.size());
@@ -88,7 +89,7 @@ constexpr void ToLower(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings.
-[[nodiscard]] constexpr std::string ToLowerCopy(std::string_view str)
+constexpr std::string ToLowerCopy(std::string_view str)
 {
     std::string out;
     out.resize(str.size());
@@ -98,7 +99,7 @@ constexpr void ToLower(std::string& str)
     return out;
 }
 
-[[nodiscard]] constexpr std::vector<std::string> StrSplit(std::string_view strView, char delim)
+constexpr std::vector<std::string> StrSplit(std::string_view strView, char delim)
 {
     std::vector<std::string> output;
 
@@ -121,7 +122,7 @@ constexpr void ToLower(std::string& str)
 }
 
 // FIXME: could be improved, but is sufficient for string conversion.
-[[nodiscard]] constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char delim, char escape)
+constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char delim, char escape)
 {
     std::vector<std::string> output;
 
@@ -168,7 +169,7 @@ constexpr void ToLower(std::string& str)
 // Non-modifying string functions
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] constexpr int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     const auto nA = strViewA.size();
     const auto nB = strViewB.size();
@@ -176,25 +177,19 @@ constexpr void ToLower(std::string& str)
     std::string strA(nA, '0');
     std::string strB(nB, '0');
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](auto c) noexcept { return ToLowerCh(c); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](auto c) noexcept { return ToLowerCh(c); });
+    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
+    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
 
     return strA.compare(strB);
 }
 
-// FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] constexpr int CmpNoCase(const char* const chsA, const char* const chsB)
-{
-    return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
-}
-
-[[nodiscard]] constexpr bool IsSameAsCase(std::string_view strViewA, std::string_view strViewB) noexcept
+constexpr bool IsSameAsCase(std::string_view strViewA, std::string_view strViewB) noexcept
 {
     return strViewA == strViewB;
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] constexpr bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
+bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) noexcept
 {
     return CmpNoCase(strViewA, strViewB) == 0;
 }
@@ -349,6 +344,6 @@ constexpr std::vector<std::string_view> StrViewSplit(std::string_view strView, c
     return output;
 }
 
-}
+} // namespace wx::unsafe
 
-#endif _WX_WXSTRINGUTILS_H__
+} // export

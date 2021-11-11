@@ -19,7 +19,6 @@
 #include "wx/toplevel.h"
 
 #include "wx/msw/wrap/utils.h"
-#include "wx/stringutils.h"
 #include "wx/imaglist.h"
 #include "wx/stockitem.h"
 #include "wx/msw/private/button.h"
@@ -36,6 +35,8 @@
 #include "wx/msw/private.h"
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.Strings;
 
 using namespace wxMSWImpl;
 

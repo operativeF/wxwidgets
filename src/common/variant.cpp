@@ -13,12 +13,13 @@
 #include "wx/variant.h"
 
 #include "wx/string.h"
-#include "wx/stringutils.h"
 #include "wx/crt.h"
 
 #if wxUSE_STREAMS
     #include "wx/stream.h"
 #endif
+
+import Utils.Strings;
 
 import <fstream>;
 

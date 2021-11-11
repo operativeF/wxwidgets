@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_COMMANDLINKBUTTON_H_
 #define _WX_MSW_COMMANDLINKBUTTON_H_
 
-#include "wx/stringutils.h"
+import Utils.Strings;
 
 import <string>;
 

@@ -19,7 +19,8 @@
 #include "wx/printdlg.h"
 #include "wx/richtext/richtextprint.h"
 #include "wx/wfstream.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 /*!
  * wxRichTextPrintout

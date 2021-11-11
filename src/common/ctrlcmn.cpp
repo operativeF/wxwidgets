@@ -21,9 +21,10 @@
 #include "wx/bitmap.h"
 #include "wx/utils.h"       // for wxStripMenuCodes()
 #include "wx/settings.h"
-#include "wx/stringutils.h"
 
 #include "wx/private/markupparser.h"
+
+import Utils.Strings;
 
 // ============================================================================
 // implementation

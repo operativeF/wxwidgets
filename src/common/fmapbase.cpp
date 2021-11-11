@@ -21,7 +21,6 @@
 #include "wx/wxcrtvararg.h"
 #include "wx/fontmap.h"
 #include "wx/fmappriv.h"
-#include "wx/stringutils.h"
 
 #include "wx/apptrait.h"
 
@@ -32,6 +31,8 @@
 #endif
 
 #include <cwctype>
+
+import Utils.Strings;
 
 import <array>;
 import <string>;

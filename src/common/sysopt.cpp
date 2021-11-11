@@ -13,7 +13,8 @@
 #include "wx/sysopt.h"
 #include "wx/app.h"
 #include "wx/string.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // private globals

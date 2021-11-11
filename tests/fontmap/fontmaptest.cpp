@@ -16,7 +16,8 @@
 #if wxUSE_FONTMAP
 
 #include "wx/fontmap.h"
-#include "wx/stringutils.h"
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // test class

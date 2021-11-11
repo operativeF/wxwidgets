@@ -18,11 +18,12 @@
 #include "wx/filename.h"
 #include "wx/mstream.h"
 #include "wx/scopedarray.h"
-#include "wx/stringutils.h"
 
 #if wxUSE_MARKUP
     #include "wx/private/markupparser.h"
 #endif
+
+import Utils.Strings;
 
 import <cmath>;
 import <numbers>;

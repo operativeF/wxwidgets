@@ -17,12 +17,13 @@
 #include "wx/palette.h"
 #include "wx/intl.h"
 #include "wx/colour.h"
-#include "wx/stringutils.h"
 
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 
 #include <gsl/gsl>
+
+import Utils.Strings;
 
 import <algorithm>;
 import <cmath>;

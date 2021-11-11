@@ -179,7 +179,7 @@ constexpr bool isAlNum(char ch) noexcept
     return isDigit(ch) || isAlpha(ch);
 }
 
-[[nodiscard]] constexpr char ToUpperCh(char ch) noexcept
+constexpr char ToUpperCh(char ch) noexcept
 {
     switch(ch)
     {
@@ -213,7 +213,7 @@ constexpr bool isAlNum(char ch) noexcept
     }
 }
 
-[[nodiscard]] constexpr char ToLowerCh(char ch) noexcept
+constexpr char ToLowerCh(char ch) noexcept
 {
     switch(ch)
     {

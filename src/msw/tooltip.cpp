@@ -19,12 +19,13 @@
 #include "wx/control.h"
 #include "wx/module.h"
 #include "wx/toplevel.h"
-#include "wx/stringutils.h"
 #include "wx/tokenzr.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 #include <fmt/core.h>
+
+import Utils.Strings;
 
 #include <chrono>
 import <vector>;

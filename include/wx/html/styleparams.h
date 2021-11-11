@@ -13,7 +13,7 @@
 
 #if wxUSE_HTML
 
-#include "wx/stringutils.h"
+import Utils.Strings;
 
 class wxHtmlTag;
 

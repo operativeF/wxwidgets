@@ -22,7 +22,6 @@
 #include "wx/msgdlg.h"
 #include "wx/mdi.h"
 #include "wx/choicdlg.h"
-#include "wx/stringutils.h"
 #include "wx/filehistory.h"
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -44,6 +43,8 @@
 #include "wx/except.h"
 
 #include <gsl/gsl>
+
+import Utils.Strings;
 
 import <fstream>;
 import <filesystem>;
