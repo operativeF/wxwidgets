@@ -169,7 +169,7 @@ constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char
 // Non-modifying string functions
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+int CmpNoCase(const std::string& strViewA, const std::string& strViewB)
 {
     const auto nA = strViewA.size();
     const auto nB = strViewB.size();
@@ -189,7 +189,7 @@ constexpr bool IsSameAsCase(std::string_view strViewA, std::string_view strViewB
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) noexcept
+bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) noexcept
 {
     return CmpNoCase(strViewA, strViewB) == 0;
 }

@@ -787,7 +787,7 @@ public:
     // implementation. If the found item matched the string, but is
     // different, it should be written back to pItem. Default implementation
     // always return true and does not alter trueItem.
-    virtual bool FindItem(std::string_view item, std::string* trueItem = nullptr);
+    virtual bool FindItem(const std::string& item, std::string* trueItem = nullptr);
 
     // This is called to custom paint in the combo control itself (ie. not the popup).
     // Default implementation draws value as string.

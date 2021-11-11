@@ -62,7 +62,7 @@ public:
     int GetCurrentSelection() const override;
     void SetSelection(int n) override;
 
-    int FindString(std::string_view s, bool bCase = false) const override;
+    int FindString(const std::string& s, bool bCase = false) const override;
     std::string GetString(unsigned int n) const override;
     void SetString(unsigned int n, const std::string& s) override;
 

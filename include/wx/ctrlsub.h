@@ -57,7 +57,7 @@ public:
     // but never both so fall back to this base version for not
     // supported search type
     // FIXME: Remove this and split into two functions.
-    virtual int FindString(std::string_view s, bool bCase = false) const
+    virtual int FindString(const std::string& s, bool bCase = false) const
     {
         const std::size_t count = GetCount();
 

@@ -640,7 +640,7 @@ void wxComboPopup::SetStringValue( const std::string& WXUNUSED(value) )
 {
 }
 
-bool wxComboPopup::FindItem(std::string_view WXUNUSED(item),
+bool wxComboPopup::FindItem(const std::string& WXUNUSED(item),
                             std::string* WXUNUSED(trueItem))
 {
     return true;
