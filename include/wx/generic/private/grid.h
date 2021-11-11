@@ -17,6 +17,8 @@
 
 #include "wx/headerctrl.h"
 
+import Utils.Geometry;
+
 import <string>;
 import <vector>;
 

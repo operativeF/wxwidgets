@@ -17,10 +17,10 @@
 
 #include "wx/colour.h"
 #include "wx/hashset.h"
-#include "wx/geometry/point.h"
 
-struct wxSize;
 class  wxFont;
+
+import Utils.Geometry;
 
 import <numeric>;
 

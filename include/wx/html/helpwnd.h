@@ -31,6 +31,8 @@
 #include "wx/html/htmlwin.h"
 #include "wx/html/htmprint.h"
 
+import Utils.Geometry;
+
 class wxButton;
 class wxTextCtrl;
 class wxTreeEvent;

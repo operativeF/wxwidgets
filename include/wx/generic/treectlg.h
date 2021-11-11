@@ -17,6 +17,8 @@
 #include "wx/pen.h"
 #include "wx/scrolwin.h"
 
+import Utils.Geometry;
+
 import <string>;
 
 // -----------------------------------------------------------------------------

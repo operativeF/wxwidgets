@@ -18,6 +18,8 @@
 #include "wx/event.h"
 #include "wx/window.h"
 
+import Utils.Geometry.Size;
+
 import <string>;
 
 class wxBitmap;

@@ -11,9 +11,9 @@
 #ifndef _WX_FONT_H_
 #define _WX_FONT_H_
 
-import <string>;
+import Utils.Geometry;
 
-struct wxSize;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxFont

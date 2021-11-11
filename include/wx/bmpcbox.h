@@ -11,7 +11,6 @@
 #ifndef _WX_BMPCBOX_H_BASE_
 #define _WX_BMPCBOX_H_BASE_
 
-
 #include "wx/defs.h"
 
 #if wxUSE_BITMAPCOMBOBOX

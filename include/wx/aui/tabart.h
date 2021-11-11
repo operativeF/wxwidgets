@@ -35,8 +35,6 @@ class wxAuiNotebookPageArray;
 class wxWindow;
 class wxDC;
 
-struct wxSize;
-
 // tab art class
 
 class wxAuiTabArt

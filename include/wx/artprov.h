@@ -15,6 +15,8 @@
 #include "wx/icon.h"
 #include "wx/iconbndl.h"
 
+import Utils.Geometry.Size;
+
 import <string>;
 
 class wxArtProvidersList;

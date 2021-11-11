@@ -15,6 +15,8 @@
 
 #include "wx/defs.h"
 
+import Utils.Geometry.Size;
+
 #include "wx/anybutton.h"
 
 inline constexpr char wxButtonNameStr[] = "button";

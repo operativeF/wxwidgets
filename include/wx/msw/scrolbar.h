@@ -11,6 +11,8 @@
 #ifndef _WX_SCROLBAR_H_
 #define _WX_SCROLBAR_H_
 
+import Utils.Geometry;
+
 import <string>;
 
 // Scrollbar item

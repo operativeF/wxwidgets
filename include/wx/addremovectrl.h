@@ -14,6 +14,7 @@
 
 #include "wx/panel.h"
 
+import Utils.Geometry.Size;
 import <string>;
 
 inline constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";

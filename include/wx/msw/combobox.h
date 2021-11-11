@@ -16,6 +16,8 @@
 #include "wx/choice.h"
 #include "wx/textentry.h"
 
+import Utils.Geometry;
+
 import <string>;
 import <vector>;
 

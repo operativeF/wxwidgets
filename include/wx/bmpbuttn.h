@@ -16,6 +16,8 @@
 #include "wx/defs.h"
 #include "wx/button.h"
 
+import Utils.Geometry.Size;
+
 import <string>;
 
 // FIXME: right now only wxMSW, wxGTK and wxOSX implement bitmap support in wxButton

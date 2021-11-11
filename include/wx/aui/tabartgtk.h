@@ -20,11 +20,10 @@
 
 #if wxUSE_AUI
 
-#include "wx/geometry/rect.h"
-
 #include "wx/aui/tabart.h"
 
-struct wxSize;
+import Utils.Geometry;
+
 class wxWindow;
 class wxDC;
 

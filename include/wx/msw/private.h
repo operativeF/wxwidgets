@@ -29,7 +29,6 @@ import <string>;
 #include <boost/nowide/stackstring.hpp>
 
 class wxFont;
-struct wxSize;
 class wxWindow;
 class wxWindowBase;
 

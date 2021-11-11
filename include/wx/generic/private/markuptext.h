@@ -12,9 +12,10 @@
 
 #include "wx/defs.h"
 
+import Utils.Geometry;
+
 enum class wxEllipsizeMode;
 class wxDC;
-struct wxSize;
 
 class wxMarkupParserOutput;
 

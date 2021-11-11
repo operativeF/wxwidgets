@@ -19,6 +19,7 @@
 #include "wx/control.h"
 #include "wx/bitmap.h"
 
+import Utils.Geometry.Size;
 #include <chrono>
 import <string>;
 

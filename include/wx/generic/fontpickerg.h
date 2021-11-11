@@ -14,6 +14,8 @@
 #include "wx/button.h"
 #include "wx/fontdata.h"
 
+import Utils.Geometry;
+
 //-----------------------------------------------------------------------------
 // wxGenericFontButton: a button which brings up a wxFontDialog
 //-----------------------------------------------------------------------------

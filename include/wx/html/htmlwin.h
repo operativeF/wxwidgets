@@ -21,6 +21,8 @@
 #include "wx/filename.h"
 #include "wx/bitmap.h"
 
+import Utils.Geometry;
+
 class wxHtmlProcessor;
 class wxHtmlWinModule;
 class wxHtmlProcessorList;
