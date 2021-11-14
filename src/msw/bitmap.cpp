@@ -10,7 +10,6 @@
 
 #include "wx/bitmap.h"
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/utils.h"
 #include "wx/app.h"
@@ -31,6 +30,9 @@
 #endif
 
 #include <memory>
+
+import Utils.MSW.Wrap;
+
 import <string>;
 
 // missing from mingw32 header

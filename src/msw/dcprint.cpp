@@ -23,10 +23,11 @@
 #include "wx/msw/printdlg.h"
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 #include "wx/msw/wrapcdlg.h"
 
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.MSW.Wrap;
 
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)

@@ -18,7 +18,6 @@
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
 
-#include "wx/msw/wrap/utils.h"
 #include "wx/imaglist.h"
 #include "wx/stockitem.h"
 #include "wx/msw/private/button.h"
@@ -37,6 +36,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
+import Utils.MSW.Wrap;
 
 using namespace wxMSWImpl;
 

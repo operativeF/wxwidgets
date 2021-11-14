@@ -12,7 +12,6 @@
 
 #include "wx/statbox.h"
 
-#include "wx/msw/wrap/utils.h"
 #include "wx/msw/private.h"
 
 #include "wx/dcclient.h"
@@ -30,6 +29,8 @@
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.MSW.Wrap;
 
 namespace
 {

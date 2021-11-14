@@ -12,7 +12,6 @@
 
 #include "wx/msw/private.h"
 #include "wx/msw/wrapwin.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/app.h"
 #include "wx/frame.h"
@@ -22,6 +21,8 @@
 #include <boost/nowide/convert.hpp>
 
 #include <memory>
+
+import Utils.MSW.Wrap;
 
 namespace
 {

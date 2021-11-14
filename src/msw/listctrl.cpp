@@ -27,7 +27,8 @@
 
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
+
+import Utils.MSW.Wrap;
 
 #include <cassert>
 import <vector>;

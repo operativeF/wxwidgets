@@ -24,11 +24,13 @@
 
 #include "wx/msw/private.h"
 #include "wx/msw/wrapcctl.h"
-#include "wx/msw/wrap/utils.h"
 
 #include <windowsx.h>
 
 #include <memory>
+
+import Utils.MSW.Wrap;
+
 import <string>;
 import <vector>;
 

@@ -13,7 +13,6 @@
 #include "wx/menuitem.h"
 #include "wx/stockitem.h"
 
-#include "wx/msw/wrap/utils.h"
 #include "wx/msw/private.h"
 
 #include "wx/dcmemory.h"
@@ -35,6 +34,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import Utils.MSW.Wrap;
 import Utils.Strings;
 
 import <string>;

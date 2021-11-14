@@ -14,7 +14,6 @@
 #include "wx/hashmap.h"
 #include "wx/settings.h"
 #include "wx/log.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/msw/subwin.h"
 #include "wx/renderer.h"
@@ -24,6 +23,8 @@
 #endif // wxUSE_TOOLTIPS
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.MSW.Wrap;
 
 // TODO: wxCONSTRUCTOR
 #if 0 // wxUSE_EXTENDED_RTTI

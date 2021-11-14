@@ -15,8 +15,7 @@
 #include "wx/palette.h"
 #include "wx/icon.h"
 
-#include "wx/msw/wrap/utils.h"
-
+import Utils.MSW.Wrap;
 import Utils.Geometry;
 
 import <cmath>;

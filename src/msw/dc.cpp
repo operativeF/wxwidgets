@@ -9,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/wrapcdlg.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/window.h"
 #include "wx/utils.h"
@@ -34,6 +33,7 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
+import Utils.MSW.Wrap;
 import Utils.Strings;
 
 import <cmath>;

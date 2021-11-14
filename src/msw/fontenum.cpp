@@ -11,7 +11,6 @@
 #if wxUSE_FONTENUM
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/fontenum.h"
 
@@ -21,6 +20,8 @@
 #include "wx/encinfo.h"
 #include "wx/fontutil.h"
 #include "wx/fontmap.h"
+
+import Utils.MSW.Wrap;
 
 // ----------------------------------------------------------------------------
 // private classes

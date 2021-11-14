@@ -11,10 +11,10 @@
 #if wxUSE_PALETTE
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/palette.h"
 
+import Utils.MSW.Wrap;
 
 // ============================================================================
 // wxPaletteRefData

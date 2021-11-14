@@ -14,7 +14,6 @@
 
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/log.h"
 #include "wx/event.h"
@@ -35,6 +34,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.MSW.Wrap;
 
 #include <windowsx.h>
 

@@ -152,6 +152,8 @@ target_link_libraries(test_gui
         doctest::doctest
         ${JPEG_LIBRARIES}
     # Windows libraries
+        mswutils
+
         kernel32
         user32
         comdlg32

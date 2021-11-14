@@ -13,8 +13,8 @@
 #if wxUSE_NOTEBOOK
 
 #include "wx/control.h"
-#include "wx/msw/wrap/utils.h"
 
+import Utils.MSW.Wrap;
 import Utils.Geometry;
 
 import <string>;

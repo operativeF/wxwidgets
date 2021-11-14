@@ -13,8 +13,8 @@
 
 #include "wx/defs.h"
 #include "wx/dc.h"
-#include "wx/msw/wrap/utils.h"
 
+import Utils.MSW.Wrap;
 import Utils.Geometry;
 
 import <string>;

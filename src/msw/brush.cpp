@@ -9,12 +9,12 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/brush.h"
 #include "wx/utils.h"
 #include "wx/bitmap.h"
 
+import Utils.MSW.Wrap;
 
 // ----------------------------------------------------------------------------
 // private classes

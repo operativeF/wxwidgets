@@ -58,11 +58,12 @@
 #include "wx/private/graphics.h"
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include <boost/nowide/convert.hpp>
 #include <fmt/core.h>
 #include <gsl/gsl>
+
+import Utils.MSW.Wrap;
 
 import <algorithm>;
 import <limits>;

@@ -9,9 +9,9 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 #include "wx/region.h"
 
+import Utils.MSW.Wrap;
 import Utils.Geometry;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);

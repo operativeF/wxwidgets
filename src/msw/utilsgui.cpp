@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/msw/wrap/utils.h"
 #include "wx/msw/private.h"     // includes <windows.h>
 #include "wx/msw/wrapwin.h"
 
@@ -20,6 +19,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import Utils.MSW.Wrap;
 
 // ============================================================================
 // implementation

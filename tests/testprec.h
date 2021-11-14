@@ -1,7 +1,6 @@
 #ifndef WX_TESTPREC_INCLUDED
 #define WX_TESTPREC_INCLUDED 1
 
-#include "wx/wxprec.h"
 #include "wx/evtloop.h"
 
 // This needs to be included before catch.hpp to be taken into account.

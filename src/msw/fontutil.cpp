@@ -10,7 +10,6 @@
 
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/fontutil.h"
 
@@ -22,6 +21,7 @@
 #include "wx/fontmap.h"
 #include "wx/tokenzr.h"
 
+import Utils.MSW.Wrap;
 
 // convert to/from the string representation: format is
 //      encodingid;facename[;charset]

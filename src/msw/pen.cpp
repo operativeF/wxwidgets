@@ -9,12 +9,13 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/pen.h"
 
 #include "wx/bitmap.h"
 #include "wx/utils.h"
+
+import Utils.MSW.Wrap;
 
 #define M_PENDATA ((wxPenRefData*)m_refData)
 

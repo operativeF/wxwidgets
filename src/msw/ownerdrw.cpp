@@ -12,12 +12,12 @@
 
 #include "wx/msw/private.h"
 #include "wx/msw/wrapcctl.h"            // for HIMAGELIST
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/ownerdrw.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/private/dc.h"
 
+import Utils.MSW.Wrap;
 
 // ============================================================================
 // implementation of wxOwnerDrawn class

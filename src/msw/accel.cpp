@@ -16,11 +16,12 @@
 #include "wx/msw/private/keyboard.h"
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include <boost/nowide/convert.hpp>
 
 #include <gsl/gsl>
+
+import Utils.MSW.Wrap;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 

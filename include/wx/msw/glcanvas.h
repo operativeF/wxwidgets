@@ -12,10 +12,10 @@
 #define _WX_GLCANVAS_H_
 
 #include "wx/msw/wrapwin.h"
-#include "wx/msw/wrap/utils.h"
 
 #include <GL/gl.h>
 
+import Utils.MSW.Wrap;
 import <string>;
 
 class wxPalette;

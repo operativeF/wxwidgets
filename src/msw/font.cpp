@@ -9,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/font.h"
 
@@ -26,6 +25,8 @@
 
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
+
+import Utils.MSW.Wrap;
 
 // ----------------------------------------------------------------------------
 // constants

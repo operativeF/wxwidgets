@@ -209,6 +209,7 @@ target_include_directories(wxsharedcmn
 target_link_libraries(wxsharedcmn
     PRIVATE
         wxalgorithm
+        mswutils
         wxtype
         Microsoft.GSL::GSL
         stdlibcore
@@ -273,6 +274,8 @@ target_link_libraries(wxbase
         wxtype
 
     # Windows libraries
+        mswutils
+        
         kernel32
         user32
         comdlg32
