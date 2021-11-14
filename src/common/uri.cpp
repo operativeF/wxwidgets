@@ -9,9 +9,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+#include "wx/arrstr.h"
 #include "wx/crt.h"
 #include "wx/uri.h"
-#include "wx/arrstr.h"
+
+import Utils.Strings;
 
 import <vector>;
 
@@ -113,7 +115,7 @@ wxString wxURI::Unescape(const wxString& uri)
     return wxString::FromUTF8(buf);
 }
 
-void wxURI::AppendNextEscaped(wxString& s, const char *& p)
+void wxURI::AppendNextEscaped(std::string& s, const char *& p)
 {
     // check for an already encoded character:
     //
@@ -142,21 +144,21 @@ void wxURI::AppendNextEscaped(wxString& s, const char *& p)
 //
 // Gets the username and password via the old URL method.
 // ---------------------------------------------------------------------------
-wxString wxURI::GetUser() const
+std::string wxURI::GetUser() const
 {
     // if there is no colon at all, find() returns npos and this method returns
     // the entire string which is correct as it means that password was omitted
-    return m_userinfo(0, m_userinfo.find(':'));
+    return m_userinfo.substr(0, m_userinfo.find(':'));
 }
 
-wxString wxURI::GetPassword() const
+std::string wxURI::GetPassword() const
 {
       size_t posColon = m_userinfo.find(':');
 
-      if ( posColon == wxString::npos )
+      if ( posColon == std::string::npos )
           return {};
 
-      return m_userinfo(posColon + 1, wxString::npos);
+      return m_userinfo.substr(posColon + 1, wxString::npos);
 }
 
 // combine all URI fields in a single string, applying funcDecode to each
@@ -527,8 +529,8 @@ const char* wxURI::ParsePath(const char* uri)
     if ( isAbs )
         m_path += *uri++;
 
-    std::vector<wxString> segments;
-    wxString segment;
+    std::vector<std::string> segments;
+    std::string segment;
     for ( ;; )
     {
         const bool endPath = IsEndPath(*uri);
@@ -568,7 +570,7 @@ const char* wxURI::ParsePath(const char* uri)
             AppendNextEscaped(segment, uri);
     }
 
-    m_path += wxJoin(segments, '/', '\0');
+    m_path += wx::utils::JoinStrings(segments, '/');
     m_fields |= wxURI_PATH;
 
     return uri;
@@ -630,9 +632,9 @@ const char* wxURI::ParseFragment(const char* uri)
 // ---------------------------------------------------------------------------
 
 /* static */
-std::vector<wxString> wxURI::SplitInSegments(const wxString& path)
+std::vector<std::string> wxURI::SplitInSegments(const std::string& path)
 {
-    return wxSplit(path, '/', '\0' /* no escape character */);
+    return wx::utils::StrSplit(path, '/');
 }
 
 void wxURI::Resolve(const wxURI& base, int flags)
@@ -723,8 +725,8 @@ void wxURI::Resolve(const wxURI& base, int flags)
         // So we don't do anything for absolute paths and implement merge for
         // the relative ones
 
-        std::vector<wxString> our(SplitInSegments(m_path)),
-                      result(SplitInSegments(base.m_path));
+        std::vector<std::string> our = SplitInSegments(m_path);
+        std::vector<std::string> result = SplitInSegments(base.m_path);
 
         if ( !result.empty() )
             result.pop_back();
@@ -771,7 +773,7 @@ void wxURI::Resolve(const wxURI& base, int flags)
             }
         }
 
-        m_path = wxJoin(result, '/', '\0');
+        m_path = wx::utils::JoinStrings(result, '/');
     }
 
     //T.fragment = R.fragment;

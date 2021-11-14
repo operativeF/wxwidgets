@@ -89,8 +89,8 @@ public:
     // these functions only work if the user information part of the URI is in
     // the usual (but insecure and hence explicitly recommended against by the
     // RFC) "user:password" form
-    wxString GetUser() const;
-    wxString GetPassword() const;
+    std::string GetUser() const;
+    std::string GetPassword() const;
 
 
     // combine all URI components into a single string
@@ -145,14 +145,14 @@ protected:
     // not escaped (again) by this function, this allows to keep (backwards-
     // compatible) ambiguity about the input format to wxURI::Create(): it can
     // be either already escaped or not
-    void AppendNextEscaped(wxString& s, const char *& p);
+    void AppendNextEscaped(std::string& s, const char *& p);
 
     // convert hexadecimal digit to its value; return -1 if c isn't valid
     static int CharToHex(char c);
 
     // split an URI path string in its component segments (including empty and
     // "." ones, no post-processing is done)
-    static std::vector<wxString> SplitInSegments(const wxString& path);
+    static std::vector<std::string> SplitInSegments(const std::string& path);
 
     // various URI grammar helpers
     static bool IsUnreserved(char c);
@@ -165,12 +165,12 @@ protected:
     static bool IsEndPath(char c);
 
     wxString m_scheme;
-    wxString m_path;
-    wxString m_query;
-    wxString m_fragment;
+    std::string m_path;
+    std::string m_query;
+    std::string m_fragment;
 
-    wxString m_userinfo;
-    wxString m_server;
+    std::string m_userinfo;
+    std::string m_server;
     wxString m_port;
 
     wxURIHostType m_hostType{wxURI_REGNAME};

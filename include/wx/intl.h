@@ -270,7 +270,7 @@ public:
 
     // Returns ISO code ("canonical name") of language or empty string if the
     // language is not in database
-    static wxString GetLanguageCanonicalName(int lang);
+    static std::string GetLanguageCanonicalName(int lang);
 
     // Find the language for the given locale string which may be either a
     // canonical ISO 2 letter language code ("xx"), a language code followed by

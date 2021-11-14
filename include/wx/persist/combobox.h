@@ -47,12 +47,12 @@ public:
     {
         const wxComboBox* const combobox = Get();
 
-        std::vector<wxString> items = combobox->GetStrings();
+        std::vector<std::string> items = combobox->GetStrings();
 
         const wxString value = combobox->GetValue();
         if ( !value.empty() )
         {
-            std::vector<wxString>::iterator it;
+            std::vector<std::string>::iterator it;
             for ( it = items.begin(); it != items.end(); ++it )
             {
                 if ( *it == value )
@@ -76,7 +76,7 @@ public:
         }
 
         SaveValue(wxPERSIST_COMBOBOX_ITEMS,
-                  wxJoin(items, wxPERSIST_COMBOBOX_ITEMS_SEP));
+                  wx::utils::JoinStrings(items, wxPERSIST_COMBOBOX_ITEMS_SEP));
     }
 
     bool Restore() override

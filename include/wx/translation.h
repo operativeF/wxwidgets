@@ -137,12 +137,12 @@ public:
     void SetLanguage(const wxString& lang);
 
     // get languages available for this app
-    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const;
+    std::vector<std::string> GetAvailableTranslations(const std::string& domain) const;
 
     // find best translation language for given domain
-    wxString GetBestTranslation(const wxString& domain, wxLanguage msgIdLanguage);
-    wxString GetBestTranslation(const wxString& domain,
-                                const wxString& msgIdLanguage = wxASCII_STR("en"));
+    std::string GetBestTranslation(const std::string& domain, wxLanguage msgIdLanguage);
+    std::string GetBestTranslation(const std::string& domain,
+                                const std::string& msgIdLanguage = wxASCII_STR("en"));
 
     // add standard wxWidgets catalog ("wxstd")
     bool AddStdCatalog();
@@ -184,7 +184,7 @@ private:
     friend class wxLocale;
 
 private:
-    wxString m_lang;
+    std::string m_lang;
     wxTranslationsLoader *m_loader;
 
     wxMsgCatalog *m_pMsgCat{nullptr}; // pointer to linked list of catalogs
@@ -206,7 +206,7 @@ public:
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
                                       const wxString& lang) = 0;
 
-    virtual std::vector<wxString> GetAvailableTranslations(const wxString& domain) const = 0;
+    virtual std::vector<std::string> GetAvailableTranslations(const std::string& domain) const = 0;
 };
 
 
@@ -220,7 +220,7 @@ public:
     wxMsgCatalog *LoadCatalog(const wxString& domain,
                               const wxString& lang) override;
 
-    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const override;
+    std::vector<std::string> GetAvailableTranslations(const std::string& domain) const override;
 };
 
 
@@ -233,7 +233,7 @@ public:
     wxMsgCatalog *LoadCatalog(const wxString& domain,
                               const wxString& lang) override;
 
-    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const override;
+    std::vector<std::string> GetAvailableTranslations(const std::string& domain) const override;
 
 protected:
     // returns resource type to use for translations

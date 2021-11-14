@@ -445,33 +445,29 @@ TEST_CASE("Arrays::Join", "[dynarray]")
 
     {
         const wxChar *arr[] = { wxT("first, word"), wxT(",,second"), wxT("third,,") };
-        wxString expected = wxT("first\\, word,\\,\\,second,third\\,\\,");
-        wxString expected2 = wxT("first, word,,,second,third,,");
-
+ 
         // escaping on:
         std::vector<wxString> arrstr(WXSIZEOF(arr), arr);
         wxString result = wxJoin(arrstr, wxT(','), wxT('\\'));
-        CHECK( expected == result );
+        CHECK( wxT("first\\, word,\\,\\,second,third\\,\\,") == result );
 
         // escaping turned off:
         wxString result2 = wxJoin(arrstr, wxT(','), wxT('\0'));
-        CHECK( expected2 == result2 );
+        CHECK( wxT("first, word,,,second,third,,") == result2 );
     }
 
     {
         // test is escape characters placed in the original array are just ignored as they should:
         const wxChar *arr[] = { wxT("first\\, wo\\rd"), wxT("seco\\nd"), wxT("\\third\\") };
-        wxString expected = wxT("first\\\\, wo\\rd,seco\\nd,\\third\\");
-        wxString expected2 = wxT("first\\, wo\\rd,seco\\nd,\\third\\");
 
         // escaping on:
         std::vector<wxString> arrstr(WXSIZEOF(arr), arr);
         wxString result = wxJoin(arrstr, wxT(','), wxT('\\'));
-        CHECK( expected == result );
+        CHECK( wxT("first\\\\, wo\\rd,seco\\nd,\\third\\") == result );
 
         // escaping turned off:
         wxString result2 = wxJoin(arrstr, wxT(','), wxT('\0'));
-        CHECK( expected2 == result2 );
+        CHECK( wxT("first\\, wo\\rd,seco\\nd,\\third\\") == result2 );
     }
 }
 

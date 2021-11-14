@@ -988,18 +988,16 @@ wxString wxLocale::GetLanguageName(int lang)
 }
 
 /* static */
-wxString wxLocale::GetLanguageCanonicalName(int lang)
+std::string wxLocale::GetLanguageCanonicalName(int lang)
 {
-    wxString string;
-
     if ( lang == wxLANGUAGE_DEFAULT || lang == wxLANGUAGE_UNKNOWN )
-        return string;
+        return {};
 
     const wxLanguageInfo *info = GetLanguageInfo(lang);
     if (info)
-        string = info->CanonicalName;
+        return info->CanonicalName;
 
-    return string;
+    return {};
 }
 
 /* static */

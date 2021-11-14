@@ -44,10 +44,13 @@
     #include <CoreFoundation/CFLocale.h>
 #endif
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 #include <gsl/gsl>
 
 import <algorithm>;
 #include <memory>
+import <span>;
 import <vector>;
 
 // ----------------------------------------------------------------------------
@@ -79,14 +82,13 @@ namespace
 
 #if wxUSE_LOG_TRACE
 
-// TODO: Use span / string_view
-void LogTraceArray(const char *prefix, const std::vector<wxString>& arr)
+void LogTraceArray(const char *prefix, std::span<std::string> arr)
 {
-    wxLogTrace(TRACE_I18N, "%s: [%s]", prefix, wxJoin(arr, ','));
+    wxLogTrace(TRACE_I18N, "%s: [%s]", prefix, wx::utils::JoinStrings(arr, ','));
 }
 
 // TODO: Use span / string_view
-void LogTraceLargeArray(const wxString& prefix, const std::vector<wxString>& arr)
+void LogTraceLargeArray(const std::string& prefix, const std::vector<std::string>& arr)
 {
     wxLogTrace(TRACE_I18N, "%s:", prefix);
     for ( const auto& i : arr )
@@ -101,17 +103,16 @@ void LogTraceLargeArray(const wxString& prefix, const std::vector<wxString>& arr
 #endif // wxUSE_LOG_TRACE/!wxUSE_LOG_TRACE
 
 // Use locale-based detection as a fallback
-// TODO: Lambda
-wxString GetPreferredUILanguageFallback(const std::vector<wxString>& WXUNUSED(available))
+std::string GetPreferredUILanguageFallback(const std::vector<std::string>& WXUNUSED(available))
 {
-    wxString lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
+    std::string lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
     wxLogTrace(TRACE_I18N, " - obtained best language from locale: %s", lang);
     return lang;
 }
 
 #ifdef WX_WINDOWS
 
-wxString GetPreferredUILanguage(const std::vector<wxString>& available)
+std::string GetPreferredUILanguage(const std::vector<std::string>& available)
 {
     typedef BOOL (WINAPI *GetUserPreferredUILanguages_t)(DWORD, PULONG, PWSTR, PULONG);
     static GetUserPreferredUILanguages_t s_pfnGetUserPreferredUILanguages = nullptr;
@@ -139,24 +140,25 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
                                                      langs.get(),
                                                      &bufferSize) )
             {
-                std::vector<wxString> preferred;
+                std::vector<std::string> preferred;
 
                 WCHAR *buf = langs.get();
                 for ( unsigned i = 0; i < numLangs; i++ )
                 {
-                    const wxString lang(buf);
-                    preferred.push_back(lang);
+                    std::wstring lang{buf};
+                    preferred.push_back(boost::nowide::narrow(lang));
                     buf += lang.length() + 1;
                 }
                 LogTraceArray(" - system preferred languages", preferred);
 
                 for ( const auto& j : preferred )
                 {
-                    wxString lang(j);
-                    lang.Replace("-", "_");
+                    std::string lang{j};
+                    wx::utils::ReplaceAll(lang, "-", "_");
+
                     const auto isLang = std::find_if(available.cbegin(), available.cend(),
                         [lang](const auto& aLang){
-                            return lang.IsSameAs(aLang, false);
+                            return wx::utils::IsSameAsNoCase(lang, aLang);
                         });
                     if ( isLang != std::cend(available) )
                         return lang;
@@ -168,7 +170,7 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
                         lang = lang.substr(0, pos);
                         const auto isSubLang = std::find_if(available.cbegin(), available.cend(),
                             [lang](const auto& aLang){
-                                return lang.IsSameAs(aLang, false);
+                                return wx::utils::IsSameAsNoCase(lang, aLang);
                             });
                         if ( isSubLang != std::cend(available) )
                             return lang;
@@ -1440,9 +1442,9 @@ void wxTranslations::SetLanguage(const wxString& lang)
 }
 
 
-std::vector<wxString> wxTranslations::GetAvailableTranslations(const wxString& domain) const
+std::vector<std::string> wxTranslations::GetAvailableTranslations(const std::string& domain) const
 {
-    wxCHECK_MSG( m_loader, std::vector<wxString>(), "loader can't be NULL" );
+    wxCHECK_MSG( m_loader, std::vector<std::string>{}, "loader can't be NULL" );
 
     return m_loader->GetAvailableTranslations(domain);
 }
@@ -1558,29 +1560,29 @@ bool wxTranslations::IsLoaded(const wxString& domain) const
     return FindCatalog(domain) != nullptr;
 }
 
-wxString wxTranslations::GetBestTranslation(const wxString& domain,
+std::string wxTranslations::GetBestTranslation(const std::string& domain,
                                             wxLanguage msgIdLanguage)
 {
-    const wxString lang = wxLocale::GetLanguageCanonicalName(msgIdLanguage);
+    const std::string lang = wxLocale::GetLanguageCanonicalName(msgIdLanguage);
     return GetBestTranslation(domain, lang);
 }
 
-wxString wxTranslations::GetBestTranslation(const wxString& domain,
-                                            const wxString& msgIdLanguage)
+std::string wxTranslations::GetBestTranslation(const std::string& domain,
+                                            const std::string& msgIdLanguage)
 {
     // explicitly set language should always be respected
     if ( !m_lang.empty() )
         return m_lang;
 
-    std::vector<wxString> available(GetAvailableTranslations(domain));
+    std::vector<std::string> available = GetAvailableTranslations(domain);
     // it's OK to have duplicates, so just add msgid language
     available.push_back(msgIdLanguage);
-    available.push_back(msgIdLanguage.BeforeFirst('_'));
+    available.push_back(wx::utils::BeforeFirst(msgIdLanguage, '_'));
 
     wxLogTrace(TRACE_I18N, "choosing best language for domain '%s'", domain);
     LogTraceArray(" - available translations", available);
     // TODO: Lambda
-    wxString lang = GetPreferredUILanguage(available);
+    std::string lang = GetPreferredUILanguage(available);
     wxLogTrace(TRACE_I18N, " => using language '%s'", lang);
     return lang;
 }
@@ -1716,7 +1718,7 @@ namespace
 {
 
 // the list of the directories to search for message catalog files
-std::vector<wxString> gs_searchPrefixes;
+std::vector<std::string> gs_searchPrefixes;
 
 // return the directories to search for message catalogs under the given
 // prefix, separated by wxPATH_SEP
@@ -1758,9 +1760,9 @@ bool HasMsgCatalogInDir(const wxString& dir, const wxString& domain)
 
 // get prefixes to locale directories; if lang is empty, don't point to
 // OSX's .lproj bundles
-std::vector<wxString> GetSearchPrefixes()
+std::vector<std::string> GetSearchPrefixes()
 {
-    std::vector<wxString> paths;
+    std::vector<std::string> paths;
 
     // first take the entries explicitly added by the program
     paths = gs_searchPrefixes;
@@ -1870,14 +1872,14 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
 }
 
 
-std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
+std::vector<std::string> wxFileTranslationsLoader::GetAvailableTranslations(const std::string& domain) const
 {
-    std::vector<wxString> langs;
-    const std::vector<wxString> prefixes = GetSearchPrefixes();
+    std::vector<std::string> langs;
+    const std::vector<std::string> prefixes = GetSearchPrefixes();
 
     LogTraceLargeArray
     (
-        wxString::Format("looking for available translations of \"%s\" in search path", domain),
+        fmt::format("looking for available translations of \"%s\" in search path", domain),
         prefixes
     );
 
@@ -1894,7 +1896,7 @@ std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const w
               ok;
               ok = dir.GetNext(&lang) )
         {
-            const wxString langdir = i + wxFILE_SEP_PATH + lang;
+            const std::string langdir = fmt::format("{}{}{}", i, wxFILE_SEP_PATH, lang.ToStdString());
             if ( HasMsgCatalogInDir(langdir, domain) )
             {
 #ifdef __WXOSX__
@@ -1905,8 +1907,8 @@ std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const w
 
                 wxLogTrace(TRACE_I18N,
                            "found %s translation of \"%s\" in %s",
-                           lang, domain, langdir);
-                langs.push_back(lang);
+                           lang.ToStdString(), domain, langdir);
+                langs.push_back(lang.ToStdString());
             }
         }
     }
@@ -1955,22 +1957,24 @@ namespace
 
 struct EnumCallbackData
 {
-    wxString prefix;
-    std::vector<wxString> langs;
+    std::string prefix;
+    std::vector<std::string> langs;
 };
 
 BOOL CALLBACK EnumTranslations(HMODULE WXUNUSED(hModule),
-                               LPCTSTR WXUNUSED(lpszType),
-                               LPTSTR lpszName,
+                               LPCWSTR WXUNUSED(lpszType),
+                               LPWSTR lpszName,
                                LONG_PTR lParam)
 {
-    wxString name(lpszName);
-    name.MakeLower(); // resource names are case insensitive
+    std::string name = boost::nowide::narrow(lpszName);
+    
+    wx::utils::ToLower(name); // resource names are case insensitive
 
     EnumCallbackData *data = reinterpret_cast<EnumCallbackData*>(lParam);
 
-    wxString lang;
-    if ( name.StartsWith(data->prefix, &lang) && !lang.empty() )
+    auto foundPos = name.rfind(data->prefix);
+    std::string lang = name.substr(foundPos);
+    if ( foundPos == 0 && !lang.empty() )
         data->langs.push_back(lang);
 
     return TRUE; // continue enumeration
@@ -1979,14 +1983,17 @@ BOOL CALLBACK EnumTranslations(HMODULE WXUNUSED(hModule),
 } // anonymous namespace
 
 
-std::vector<wxString> wxResourceTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
+std::vector<std::string> wxResourceTranslationsLoader::GetAvailableTranslations(const std::string& domain) const
 {
     EnumCallbackData data;
     data.prefix = domain + "_";
-    data.prefix.MakeLower(); // resource names are case insensitive
+    wx::utils::ToLower(data.prefix); // resource names are case insensitive
 
-    if ( !EnumResourceNames(GetModule(),
-                            GetResourceType().t_str(),
+    auto resType = GetResourceType();
+
+    boost::nowide::wstackstring stackResType{resType.c_str()};
+    if ( !::EnumResourceNamesW(GetModule(),
+                            stackResType.get(),
                             EnumTranslations,
                             reinterpret_cast<LONG_PTR>(&data)) )
     {

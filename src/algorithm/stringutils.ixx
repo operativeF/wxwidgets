@@ -1,3 +1,8 @@
+module;
+
+#include <fmt/core.h>
+#include <fmt/format.h>
+
 export module Utils.Strings;
 
 import Utils.Chars;
@@ -5,6 +10,7 @@ import Utils.Chars;
 import <algorithm>;
 import <cstddef>;
 import <cctype>;
+import <span>;
 import <string>;
 import <string_view>;
 import <vector>;
@@ -167,6 +173,41 @@ constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char
 }
 
 // Non-modifying string functions
+
+// Delimit strings from a span of them.
+std::string JoinStrings(std::span<const std::string> strSpan, char delim)
+{
+    return fmt::format("{}", fmt::join(strSpan, std::string{delim}));
+}
+
+// Like JoinStrings, except there is an
+// escape character inserted before a delimiter that is found in a string.
+std::string JoinStringsEsc(std::span<const std::string> strSpan, char delim, std::string_view esc)
+{
+    std::string str;
+
+    const auto escBack = fmt::format("{}{}", esc, delim);
+
+    for(auto&& name : strSpan)
+    {
+        for(auto&& ch : name)
+        {
+            if(ch != delim)
+            {
+                str += ch;
+            }
+            else
+            {
+                str += escBack;
+            }
+        }
+
+        str += delim;
+    }
+
+    str.pop_back(); // Remove extra delimiter
+    return str;
+}
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
 int CmpNoCase(const std::string& strViewA, const std::string& strViewB)
