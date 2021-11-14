@@ -58,7 +58,7 @@ wxFileHistoryBase::wxFileHistoryBase(size_t maxFiles, wxWindowID idBase)
 }
 
 /* static */
-wxString wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
+std::string wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
 {
     // We specifically exclude wxPATH_NORM_LONG here as it can take a long time
     // (several seconds) for network file paths under MSW, resulting in huge
@@ -70,7 +70,7 @@ wxString wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
                      wxPATH_NORM_TILDE |
                      wxPATH_NORM_CASE |
                      wxPATH_NORM_ABSOLUTE);
-    return fnNorm.GetFullPath();
+    return fnNorm.GetFullPath().ToStdString();
 }
 
 void wxFileHistoryBase::AddFileToHistory(const fs::path& file)

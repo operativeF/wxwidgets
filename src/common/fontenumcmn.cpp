@@ -13,6 +13,8 @@
 #include "wx/module.h"
 #include "wx/fontenum.h"
 
+import Utils.Strings;
+
 import <string>;
 import <vector>;
 
@@ -48,15 +50,15 @@ class wxSimpleFontEnumerator : public wxFontEnumerator
 {
 public:
     // called by EnumerateFacenames
-    bool OnFacename(const wxString& facename) override
+    bool OnFacename(const std::string& facename) override
     {
         m_arrFacenames.push_back(facename);
         return true;
     }
 
     // called by EnumerateEncodings
-    bool OnFontEncoding(const wxString& WXUNUSED(facename),
-                        const wxString& encoding) override
+    bool OnFontEncoding(const std::string& WXUNUSED(facename),
+                        const std::string& encoding) override
     {
         m_arrEncodings.push_back(encoding);
         return true;
@@ -84,7 +86,7 @@ std::vector<std::string> wxFontEnumerator::GetEncodings(const std::string& facen
 }
 
 /* static */
-bool wxFontEnumerator::IsValidFacename(const wxString &facename)
+bool wxFontEnumerator::IsValidFacename(const std::string &facename)
 {
     // we cache the result of wxFontEnumerator::GetFacenames supposing that
     // the array of face names won't change in the session of this program
@@ -99,8 +101,8 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
     //     page 1252. It is not a font but a face name for a nonexistent font."
     // Thus we need to consider "Ms Shell Dlg" and "Ms Shell Dlg 2" as valid
     // font face names even if they are not enumerated by wxFontEnumerator
-    if (facename.IsSameAs("Ms Shell Dlg", false) ||
-        facename.IsSameAs("Ms Shell Dlg 2", false))
+    if (wx::utils::IsSameAsNoCase(facename, "Ms Shell Dlg") ||
+        wx::utils::IsSameAsNoCase(facename, "Ms Shell Dlg 2"))
         return true;
 #endif
 
@@ -108,7 +110,7 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
     return gs_allFacenames.cend() != std::find_if(gs_allFacenames.cbegin(), gs_allFacenames.cend(),
         [=](const auto& other)
         {
-            return facename.IsSameAs(other, false);
+            return wx::utils::IsSameAsNoCase(facename, other);
         });
 }
 
@@ -119,11 +121,11 @@ void wxFontEnumerator::InvalidateCache()
 }
 
 #ifdef wxHAS_UTF8_FONTS
-bool wxFontEnumerator::EnumerateEncodingsUTF8(const wxString& facename)
+bool wxFontEnumerator::EnumerateEncodingsUTF8(const std::string& facename)
 {
     // name of UTF-8 encoding: no need to use wxFontMapper for it as it's
     // unlikely to change
-    const wxString utf8("UTF-8");
+    const std::string utf8("UTF-8");
 
     // all fonts are in UTF-8 only if this code is used
     if ( !facename.empty() )
@@ -134,7 +136,7 @@ bool wxFontEnumerator::EnumerateEncodingsUTF8(const wxString& facename)
 
     // so enumerating all facenames supporting this encoding is the same as
     // enumerating all facenames
-    const std::vector<wxString> facenames(GetFacenames(wxFONTENCODING_UTF8));
+    const std::vector<std::string> facenames(GetFacenames(wxFONTENCODING_UTF8));
     const size_t count = facenames.size();
     if ( !count )
         return false;

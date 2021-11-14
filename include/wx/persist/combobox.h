@@ -85,7 +85,7 @@ public:
         if ( !RestoreValue(wxPERSIST_COMBOBOX_ITEMS, &items) )
             return false;
 
-        Get()->Set(wxSplit(items, wxPERSIST_COMBOBOX_ITEMS_SEP));
+        Get()->Set(wx::utils::SplitStr(items, wxPERSIST_COMBOBOX_ITEMS_SEP));
 
         return true;
     }

@@ -12,8 +12,8 @@
 #define _WX_MODULE_H_
 
 #include "wx/object.h"
-#include "wx/string.h"
 
+import <string>;
 import <vector>;
 
 class wxModule;
@@ -70,9 +70,9 @@ protected:
 
     // same as the version above except it will look up wxClassInfo by name on
     // its own. Note that className must be ASCII
-    void AddDependency(const char *className)
+    void AddDependency(const std::string& className)
     {
-        m_namedDependencies.push_back(wxASCII_STR(className));
+        m_namedDependencies.push_back(className);
     }
 
 
@@ -98,7 +98,7 @@ private:
 
     // and the named dependencies: those will be resolved during run-time and
     // added to m_dependencies
-    std::vector<wxString> m_namedDependencies;
+    std::vector<std::string> m_namedDependencies;
 
     // used internally while initializing/cleaning up modules
     enum

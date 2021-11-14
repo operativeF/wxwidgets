@@ -11,6 +11,7 @@
 #if wxUSE_FONTENUM
 
 #include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/fontenum.h"
 
@@ -42,7 +43,7 @@ public:
         // we enumerate fixed-width fonts
     void SetFixedOnly(bool fixedOnly) { m_fixedOnly = fixedOnly; }
         // we enumerate the encodings this font face is available in
-    void SetFaceName(const wxString& facename);
+    void SetFaceName(const std::string& facename);
 
     // call to start enumeration
     void DoEnumerate();
@@ -52,13 +53,13 @@ public:
 
 private:
     // if not empty, enum only the fonts with this facename
-    wxString m_facename;
+    std::string m_facename;
 
     // the list of charsets we already found while enumerating charsets
     std::vector<int> m_charsets;
 
     // the list of facenames we already found while enumerating facenames
-    std::vector<wxString> m_facenames;
+    std::vector<std::string> m_facenames;
 
     // the object we forward calls to OnFont() to
     wxFontEnumerator *m_fontEnum;
@@ -93,7 +94,7 @@ wxFontEnumeratorHelper::wxFontEnumeratorHelper(wxFontEnumerator *fontEnum)
 {
 }
 
-void wxFontEnumeratorHelper::SetFaceName(const wxString& facename)
+void wxFontEnumeratorHelper::SetFaceName(const std::string& facename)
 {
     m_enumEncodings = true;
     m_facename = facename;
@@ -124,16 +125,18 @@ bool wxFontEnumeratorHelper::SetEncoding(wxFontEncoding encoding)
 
 void wxFontEnumeratorHelper::DoEnumerate()
 {
-    HDC hDC = ::GetDC(nullptr);
+    msw::utils::unique_dcwnd hDC{::GetDC(nullptr)};
 
-    LOGFONTW lf;
-    lf.lfCharSet = (BYTE)m_charset;
-    wxStrlcpy(lf.lfFaceName, m_facename.c_str(), WXSIZEOF(lf.lfFaceName));
-    lf.lfPitchAndFamily = 0;
-    ::EnumFontFamiliesExW(hDC, &lf, (FONTENUMPROC)wxFontEnumeratorProc,
+    LOGFONTW lf
+    {
+        .lfCharSet = static_cast<BYTE>(m_charset),
+        .lfPitchAndFamily = 0
+    };
+
+    auto wideFaceName = boost::nowide::widen(m_facename);
+    wxStrlcpy(lf.lfFaceName, wideFaceName.c_str(), WXSIZEOF(lf.lfFaceName));
+    ::EnumFontFamiliesExW(hDC.get(), &lf, (FONTENUMPROC)wxFontEnumeratorProc,
                          (LPARAM)this, wxRESERVED_PARAM) ;
-
-    ::ReleaseDC(nullptr, hDC);
 }
 
 bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
@@ -149,7 +152,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
 
 #if wxUSE_FONTMAP
             wxFontEncoding enc = wxGetFontEncFromCharSet(cs);
-            return m_fontEnum->OnFontEncoding(lf->lfFaceName,
+            return m_fontEnum->OnFontEncoding(boost::nowide::narrow(lf->lfFaceName),
                                               wxFontMapper::GetEncodingName(enc));
 #else // !wxUSE_FONTMAP
             // Just use some unique and, hopefully, understandable, name.
@@ -191,17 +194,17 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
         // we can get the same facename twice or more in this case because it
         // may exist in several charsets but we only want to return one copy of
         // it (note that this can't happen for m_charset != DEFAULT_CHARSET)
-        if(std::find(m_facenames.cbegin(), m_facenames.cend(), lf->lfFaceName) != m_facenames.cend())
+        if(std::find(m_facenames.cbegin(), m_facenames.cend(), boost::nowide::narrow(lf->lfFaceName)) != m_facenames.cend())
         {
             // continue enumeration
             return true;
         }
 
         const_cast<wxFontEnumeratorHelper *>(this)->
-            m_facenames.push_back(lf->lfFaceName);
+            m_facenames.push_back(boost::nowide::narrow(lf->lfFaceName));
     }
 
-    return m_fontEnum->OnFacename(lf->lfFaceName);
+    return m_fontEnum->OnFacename(boost::nowide::narrow(lf->lfFaceName));
 }
 
 // ----------------------------------------------------------------------------

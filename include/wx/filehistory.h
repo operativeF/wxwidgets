@@ -17,7 +17,6 @@
 #include "wx/windowid.h"
 #include "wx/object.h"
 #include "wx/list.h"
-#include "wx/string.h"
 
 import <filesystem>;
 import <vector>;
@@ -99,7 +98,7 @@ private:
 
     // Normalize a file name to canonical form. We have a special function for
     // this to ensure the same normalization is used everywhere.
-    static wxString NormalizeFileName(const wxFileName& filename);
+    static std::string NormalizeFileName(const wxFileName& filename);
 
     // Remove any existing entries from the associated menus.
     void RemoveExistingHistory();

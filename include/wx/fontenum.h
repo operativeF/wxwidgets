@@ -54,12 +54,12 @@ public:
     // true to continue with it
 
     // called by EnumerateFacenames
-    virtual bool OnFacename(const wxString& WXUNUSED(facename))
+    virtual bool OnFacename(const std::string& WXUNUSED(facename))
         { return true; }
 
     // called by EnumerateEncodings
-    virtual bool OnFontEncoding(const wxString& WXUNUSED(facename),
-                                const wxString& WXUNUSED(encoding))
+    virtual bool OnFontEncoding(const std::string& WXUNUSED(facename),
+                                const std::string& WXUNUSED(encoding))
         { return true; }
 
 
@@ -74,7 +74,7 @@ public:
 
     // convenience function that returns true if the given face name exist
     // in the user's system
-    static bool IsValidFacename(const wxString &str);
+    static bool IsValidFacename(const std::string &str);
 
     // Invalidate cache used by some of the methods of this class internally.
     // This should be called if the list of the fonts available on the system
@@ -84,7 +84,7 @@ public:
 private:
 #ifdef wxHAS_UTF8_FONTS
     // helper for ports that only use UTF-8 encoding natively
-    bool EnumerateEncodingsUTF8(const wxString& facename);
+    bool EnumerateEncodingsUTF8(const std::string& facename);
 #endif
 };
 

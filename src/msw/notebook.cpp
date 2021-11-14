@@ -16,7 +16,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrap/utils.h"
 
-#include "wx/string.h"
 #include "wx/log.h"
 #include "wx/event.h"
 #include "wx/app.h"
@@ -373,25 +372,29 @@ std::string wxNotebook::GetPageText(size_t nPage) const
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), "", "notebook page out of range" );
 
-    wxChar buf[256];
-    TC_ITEM tcItem;
-    tcItem.mask = TCIF_TEXT;
-    tcItem.pszText = buf;
-    tcItem.cchTextMax = WXSIZEOF(buf);
+    boost::nowide::wstackstring stackBuf;
 
-    wxString str;
+    TC_ITEMW tcItem
+    {
+        .mask = TCIF_TEXT,
+        .pszText = stackBuf.get(),
+        .cchTextMax = stackBuf.buffer_size
+    };
+
     if ( TabCtrl_GetItem(GetHwnd(), nPage, &tcItem) )
-        str = tcItem.pszText;
+        return boost::nowide::narrow(tcItem.pszText);
 
-    return str;
+    return {};
 }
 
 int wxNotebook::GetPageImage(size_t nPage) const
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), wxNOT_FOUND, "notebook page out of range" );
 
-    TC_ITEM tcItem;
-    tcItem.mask = TCIF_IMAGE;
+    TC_ITEMW tcItem
+    {
+        .mask = TCIF_IMAGE
+    };
 
     return TabCtrl_GetItem(GetHwnd(), nPage, &tcItem) ? tcItem.iImage
                                                       : wxNOT_FOUND;
@@ -401,7 +404,8 @@ bool wxNotebook::SetPageImage(size_t nPage, int nImage)
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), false, "notebook page out of range" );
 
-    TC_ITEMW tcItem = {
+    TC_ITEMW tcItem
+    {
         .mask = TCIF_IMAGE,
         .iImage = nImage
     };
@@ -692,9 +696,11 @@ bool wxNotebook::InsertPage(size_t nPage,
 
 int wxNotebook::HitTest(const wxPoint& pt, unsigned int* flags) const
 {
-    TC_HITTESTINFO hitTestInfo;
-    hitTestInfo.pt.x = pt.x;
-    hitTestInfo.pt.y = pt.y;
+    TC_HITTESTINFO hitTestInfo
+    {
+        .pt = {pt.x, pt.y}
+    };
+
     int item = TabCtrl_HitTest(GetHwnd(), &hitTestInfo);
 
     if ( flags )
@@ -879,12 +885,13 @@ void wxNotebook::OnSize(wxSizeEvent& event)
 
     // fit all the notebook pages to the tab control's display area
 
-    RECT rc;
-
-    rc.left = 0;
-    rc.top = 0;
-    rc.right = GetSize().x;
-    rc.bottom = GetSize().y;
+    RECT rc
+    {
+        .left = 0,
+        .top = 0,
+        .right = GetSize().x,
+        .bottom = GetSize().y
+    };
 
     // save the total size, we'll use it below
     int widthNbook = rc.right - rc.left;
@@ -1237,12 +1244,12 @@ wxColour wxNotebook::GetThemeBackgroundColour() const
             static int s_AeroStatus = -1;
             if (s_AeroStatus == -1)
             {
-                WCHAR szwThemeFile[1024];
-                WCHAR szwThemeColor[256];
-                if (S_OK == ::GetCurrentThemeName(szwThemeFile, 1024, szwThemeColor, 256, nullptr, 0))
+                boost::nowide::basic_stackstring<wchar_t, char, 1024> stackThemeFile;
+                boost::nowide::wstackstring stackThemeColor;
+                if (S_OK == ::GetCurrentThemeName(stackThemeFile.get(), stackThemeFile.buffer_size, stackThemeColor.get(), stackThemeColor.buffer_size, nullptr, 0))
                 {
-                    wxString themeFile(szwThemeFile);
-                    if (themeFile.Find("Aero") != -1 && wxString(szwThemeColor) == "NormalColor")
+                    std::string themeFile = boost::nowide::narrow(stackThemeFile.get());
+                    if (themeFile.find("Aero") != -1 && boost::nowide::narrow(stackThemeColor.get()) == "NormalColor")
                         s_AeroStatus = 1;
                     else
                         s_AeroStatus = 0;
