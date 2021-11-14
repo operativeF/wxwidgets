@@ -1,7 +1,6 @@
 module;
 
 #include "wx/datstrm.h"
-#include "wx/utils.h"
 
 export module Utils.Geometry.RectAA;
 

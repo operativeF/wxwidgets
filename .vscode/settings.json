@@ -105,6 +105,8 @@
         "*.rh": "cpp",
         "*.inc": "cpp",
         "ranges": "cpp",
-        "gsl_util": "cpp"
+        "gsl_util": "cpp",
+        "*.ixx": "cpp",
+        "string_span": "cpp"
     }
 }
