@@ -19,7 +19,7 @@
 #ifndef WX_PRECOMP
     #ifdef __WXMSW__
         #include "wx/msw/private.h"
-        #include "wx/msw/wrapwin.h"
+        import Utils.Wrap.Windows;
         #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #endif
 

@@ -10,12 +10,6 @@
 // and "wx/cppunit.h"
 #include "testprec.h"
 
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #include "wx/zstream.h"
 #include "wx/wfstream.h"
 #include "wx/mstream.h"
@@ -23,6 +17,8 @@
 #include "wx/buffer.h"
 
 #include "bstream.h"
+
+import <string>;
 
 using std::string;
 

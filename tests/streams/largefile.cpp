@@ -23,17 +23,12 @@
 #include "testprec.h"
 
 
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #include "wx/filename.h"
 
 #include "wx/wfstream.h"
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 
     #include <winioctl.h>
 #endif

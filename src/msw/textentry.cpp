@@ -8,7 +8,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/event.h"
 #include "wx/string.h"
@@ -31,6 +30,7 @@
 
 #include <boost/nowide/convert.hpp>
 
+import Utils.Wrap.Windows;
 
 #define GetEditHwnd() ((HWND)(GetEditHWND()))
 

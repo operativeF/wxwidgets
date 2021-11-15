@@ -10,7 +10,7 @@
 #include "wx/iconbndl.h"
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif
 
 #include "wx/app.h"

@@ -10,7 +10,6 @@
 
 #if wxUSE_DATEPICKCTRL
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
@@ -19,6 +18,8 @@
 #include "wx/settings.h"
 #include "wx/datectrl.h"
 #include "wx/dateevt.h"
+
+import Utils.Wrap.Windows;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxDatePickerCtrl, wxControl);
 

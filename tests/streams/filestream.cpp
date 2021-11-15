@@ -10,12 +10,6 @@
 // and "wx/cppunit.h"
 #include "testprec.h"
 
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #include "wx/wfstream.h"
 
 #include "bstream.h"

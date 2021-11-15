@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
@@ -99,6 +98,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
+
+import Utils.Wrap.Windows;
 
 import <array>;
 import <numbers>;

@@ -15,9 +15,10 @@
 #if wxUSE_WINRT
 
 #include "wx/string.h"
-#include "wx/msw/wrapwin.h"
 
 #include <winstring.h>
+
+import Utils.Wrap.Windows;
 
 namespace wxWinRT
 {

@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// for all others, include the necessary headers (this file is usually all you
-// need because it includes almost all "standard" wxWidgets headers
-#include "wx/wx.h"
-
 #include "wx/filename.h"
 #include "wx/image.h"
 #include "wx/wxhtml.h"

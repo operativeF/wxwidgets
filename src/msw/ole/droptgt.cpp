@@ -11,7 +11,6 @@
 #if wxUSE_OLE && wxUSE_DRAG_AND_DROP
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/log.h"
 #include "wx/msw/private/comptr.h"
@@ -24,6 +23,8 @@
 #include "wx/msw/ole/oleutils.h"
 
 #include <initguid.h>
+
+import Utils.Wrap.Windows;
 
 // Some (very) old SDKs don't define IDropTargetHelper, so define our own
 // version of it here.

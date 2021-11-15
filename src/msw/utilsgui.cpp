@@ -9,7 +9,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"     // includes <windows.h>
-#include "wx/msw/wrapwin.h"
 
 #include "wx/cursor.h"
 #include "wx/window.h"
@@ -20,6 +19,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import Utils.Wrap.Windows;
 import Utils.MSW.Wrap;
 
 // ============================================================================

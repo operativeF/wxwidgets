@@ -5,14 +5,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
-#include "wx/wxprec.h"
-
-// for all others, include the necessary headers wxWidgets headers)
-#ifndef WX_PRECOMP
-#include "wx/wx.h"
-#endif
-
 #include "guiframe.h"
 
 ///////////////////////////////////////////////////////////////////////////

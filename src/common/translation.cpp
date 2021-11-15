@@ -12,7 +12,7 @@
 #if wxUSE_INTL
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif
 
 #include "wx/dynarray.h"

@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif // WX_WINDOWS
 
 #include "wx/string.h"

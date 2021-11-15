@@ -10,17 +10,11 @@
 // and "wx/cppunit.h"
 #include "testprec.h"
 
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    import <cstring>;
-#endif
-
 #include "wx/stdstream.h"
 
 #include "wx/mstream.h"
+
+import <cstring>;
 
 // ==========================================================================
 // Definitions

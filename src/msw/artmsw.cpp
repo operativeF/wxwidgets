@@ -16,9 +16,10 @@
 #include "wx/msw/wrapshl.h"
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include <boost/nowide/convert.hpp>
+
+import Utils.Wrap.Windows;
 
 #ifdef SHGSI_ICON
     #define wxHAS_SHGetStockIconInfo

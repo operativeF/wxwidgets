@@ -10,7 +10,6 @@
 
 #if wxUSE_AUI
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/private.h"
 
 #include "wx/aui/framemanager.h"
@@ -38,6 +37,10 @@ WX_DEFINE_OBJARRAY(wxAuiRectArray)
 WX_DEFINE_OBJARRAY(wxAuiDockUIPartArray)
 WX_DEFINE_OBJARRAY(wxAuiDockInfoArray)
 WX_DEFINE_OBJARRAY(wxAuiPaneInfoArray)
+
+import Utils.Wrap.Windows;
+
+import <charconv>;
 
 wxAuiPaneInfo wxAuiNullPaneInfo;
 wxAuiDockInfo wxAuiNullDockInfo;

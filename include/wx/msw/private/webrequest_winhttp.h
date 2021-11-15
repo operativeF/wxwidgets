@@ -12,9 +12,10 @@
 
 #include "wx/private/webrequest.h"
 
-#include "wx/msw/wrapwin.h"
 #include <winhttp.h>
 #include "wx/buffer.h"
+
+import Utils.Wrap.Windows;
 
 class wxWebSessionWinHTTP;
 class wxWebRequestWinHTTP;

@@ -61,7 +61,7 @@
 #include "wx/private/window.h"
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif
 
 namespace wxMouseCapture

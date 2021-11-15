@@ -12,9 +12,8 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
-#include "wx/msw/wrapwin.h"
-
 import Utils.Geometry;
+import Utils.Wrap.Windows;
 
 import <string_view>;
 

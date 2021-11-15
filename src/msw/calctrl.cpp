@@ -9,13 +9,14 @@
 
 #if wxUSE_CALENDARCTRL
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
 #include "wx/calctrl.h"
 
 #include "wx/msw/private/datecontrols.h"
+
+import Utils.Wrap.Windows;
 
 // ----------------------------------------------------------------------------
 // constants

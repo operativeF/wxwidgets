@@ -8,15 +8,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/time.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif
 
 import <ctime>;
-
-#include "wx/intl.h"
-#include "wx/log.h"
 
 #ifndef WX_GMTOFF_IN_TM
     // Define it for some systems which don't (always) use configure but are

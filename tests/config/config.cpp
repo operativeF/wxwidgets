@@ -18,10 +18,6 @@
 
 #if wxUSE_CONFIG
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif // WX_PRECOMP
-
 #include "wx/config.h"
 
 

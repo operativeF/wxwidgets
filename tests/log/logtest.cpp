@@ -19,7 +19,7 @@
 #if wxUSE_LOG
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #else
     #include <errno.h>
 #endif

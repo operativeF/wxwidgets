@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
+import Utils.Wrap.Windows;
 #endif
 
 import <cstdio>;       // SEEK_xxx constants
@@ -46,7 +46,7 @@ import <cstdio>;       // SEEK_xxx constants
     #include  <time.h>
     #include  <sys/stat.h>
     #ifdef __GNUWIN32__
-        #include "wx/msw/wrapwin.h"
+        import Utils.Wrap.Windows;
     #endif
 #elif (defined(__WXSTUBS__))
     // Have to ifdef this for different environments

@@ -11,10 +11,9 @@
 #ifndef _WX_GLCANVAS_H_
 #define _WX_GLCANVAS_H_
 
-#include "wx/msw/wrapwin.h"
-
 #include <GL/gl.h>
 
+import Utils.Wrap.Windows;
 import Utils.MSW.Wrap;
 import <string>;
 

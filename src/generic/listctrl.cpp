@@ -35,7 +35,7 @@
 #endif
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/wrapwin.h"
+    import Utils.Wrap.Windows;
 #endif
 
 // NOTE: If using the wxListBox visual attributes works everywhere then this can

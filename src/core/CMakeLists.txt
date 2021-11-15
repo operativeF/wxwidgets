@@ -423,7 +423,9 @@ target_link_libraries(wxcore
         ${JPEG_LIBRARIES}
         TIFF::TIFF
 
-    # Microsoft Libraries        
+    # Microsoft Libraries
+        mswutils
+
         kernel32
         user32
         comdlg32

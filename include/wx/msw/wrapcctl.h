@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_WRAPCCTL_H_
 #define _WX_MSW_WRAPCCTL_H_
 
-#include "wx/msw/wrapwin.h"
+import Utils.Wrap.Windows;
 
 #include <commctrl.h>
 

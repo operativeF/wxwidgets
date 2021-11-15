@@ -6,12 +6,7 @@
 // Copyright:   (c) 2004 Vadim Zeitlin, Wlodzimierz Skiba
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "doctest.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif // WX_PRECOMP
 
 #include "wx/longlong.h"
 #include "wx/timer.h"

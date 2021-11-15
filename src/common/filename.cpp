@@ -62,7 +62,7 @@
 
 #ifdef WX_WINDOWS
     #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
+    import Utils.Wrap.Windows; // For GetShort/LongPathName
 #endif
 
 #include "wx/intl.h"

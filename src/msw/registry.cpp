@@ -14,7 +14,6 @@
 #if wxUSE_REGKEY
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/string.h"
 #include "wx/intl.h"
@@ -26,6 +25,8 @@
 #include "wx/wfstream.h"
 
 #include <fmt/core.h>
+
+import Utils.Wrap.Windows;
 
 import <cstdlib>;      // for _MAX_PATH
 
