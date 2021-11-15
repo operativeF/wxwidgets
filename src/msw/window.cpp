@@ -86,7 +86,6 @@
 #include "wx/dynlib.h"
 #include "wx/display.h"
 
-#include <shellapi.h>
 #include <mmsystem.h>
 
 #if wxUSE_UXTHEME

@@ -25,7 +25,6 @@
 #include "wx/dynlib.h"
 #include "wx/arrimpl.cpp"
 
-#include <shellapi.h>
 #include "wx/msw/wrapshl.h"
 
 #if wxUSE_BASE

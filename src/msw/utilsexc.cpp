@@ -37,10 +37,6 @@
     #include <io.h>
 #endif
 
-#ifndef __GNUWIN32__
-    #include <shellapi.h>
-#endif
-
 #if wxUSE_IPC
     #include "wx/dde.h"         // for WX_DDE hack in wxExecute
 #endif // wxUSE_IPC

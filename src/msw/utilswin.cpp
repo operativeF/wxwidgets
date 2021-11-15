@@ -14,7 +14,6 @@
 
 #include "wx/private/launchbrowser.h"
 #include "wx/msw/registry.h"
-#include <shellapi.h> // needed for SHELLEXECUTEINFO
 
 // ----------------------------------------------------------------------------
 // Launch document with default app

@@ -67,10 +67,6 @@
     #include <io.h>
 #endif
 
-#ifndef __GNUWIN32__
-    #include <shellapi.h>
-#endif
-
 #ifndef PROCESSOR_ARCHITECTURE_ARM64
 #define PROCESSOR_ARCHITECTURE_ARM64 12
 #endif

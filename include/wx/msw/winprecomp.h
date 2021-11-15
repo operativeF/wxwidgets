@@ -37,4 +37,6 @@
 #include <oleacc.h>
 #include <oleauto.h>
 
+#include <shellapi.h>
+
 #endif // WINPRECOMP_H
