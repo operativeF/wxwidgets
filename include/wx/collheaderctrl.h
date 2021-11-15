@@ -16,6 +16,8 @@
 
 #include "wx/control.h"
 
+import Utils.Geometry;
+
 import <string>;
 
 // class name

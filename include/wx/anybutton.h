@@ -16,7 +16,7 @@
 #include "wx/bitmap.h"
 #include "wx/control.h"
 
-import Utils.Geometry.Size;
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // wxAnyButton specific flags

@@ -19,7 +19,7 @@
 #include "wx/colour.h"
 #include "wx/image.h"
 
-import Utils.Geometry.Size;
+import Utils.Geometry;
 
 import <string>;
 

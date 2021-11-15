@@ -13,10 +13,7 @@ export module Utils.Chars;
 import <concepts>;
 import <cstddef>;
 
-export
-{
-
-namespace wx::utils
+export namespace wx::utils
 {
 
 constexpr bool isAlphaUpper(char ch) noexcept

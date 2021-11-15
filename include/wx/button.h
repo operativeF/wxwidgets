@@ -15,7 +15,7 @@
 
 #include "wx/defs.h"
 
-import Utils.Geometry.Size;
+import Utils.Geometry;
 
 #include "wx/anybutton.h"
 

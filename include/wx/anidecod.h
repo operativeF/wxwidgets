@@ -17,6 +17,7 @@
 #include "wx/animdecod.h"
 #include "wx/dynarray.h"
 
+import Utils.Geometry;
 
 class /*WXDLLIMPEXP_CORE*/ wxANIFrameInfo;      // private implementation detail
 class wxInputStream;
