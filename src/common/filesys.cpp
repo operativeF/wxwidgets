@@ -364,7 +364,7 @@ static std::string MakeCorrectPath(const std::string& path)
             if (j >= 0 && r[j] != ':')
             {
                 for (j = j - 1; j >= 0 && r[j] != '/' && r[j] != ':'; j--) {}
-                r.Remove(j + 1);
+                r.erase(j + 1);
             }
         }
     }
@@ -414,7 +414,7 @@ void wxFileSystem::ChangePathTo(const std::string& location, bool is_dir)
             {
                 if (m_Path[(unsigned int) i] == ':')
                 {
-                    m_Path.Remove(i+1);
+                    m_Path.erase(i+1);
                     break;
                 }
             }
@@ -423,7 +423,7 @@ void wxFileSystem::ChangePathTo(const std::string& location, bool is_dir)
         }
         else
         {
-            m_Path.Remove(pathpos+1);
+            m_Path.erase(pathpos+1);
         }
     }
 }

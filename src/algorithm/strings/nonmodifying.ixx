@@ -110,7 +110,7 @@ std::vector<std::string> JoinChArray(std::span<const char> chSpan)
 {
     std::vector<std::string> vec;
 
-    for(auto chIter = chSpan.begin(); chIter != chSpan.end(); std::next(chIter))
+    for(auto chIter = chSpan.begin(); chIter != chSpan.end(); chIter = std::next(chIter))
     {
         auto chBeginIter = chIter;
 
@@ -300,6 +300,20 @@ bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) no
     std::string substrToFind = ToLowerCopy(strToFind);
 
     return str.find(substrToFind) != std::string::npos;
+}
+
+[[nodiscard]] constexpr bool StartsWith(std::string_view strView, std::string_view prefix, std::string& afterStart )
+{
+    auto pos = strView.rfind(prefix, 0);
+
+    if(pos != std::string::npos)
+    {
+        afterStart = strView.substr(pos);
+
+        return true;
+    }
+
+    return false;
 }
 
 } // export namespace wx::utils

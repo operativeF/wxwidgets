@@ -1827,12 +1827,12 @@ wxString GetFullSearchPath(const wxString& lang)
 } // anonymous namespace
 
 
-void wxFileTranslationsLoader::AddCatalogLookupPathPrefix(const wxString& prefix)
+void wxFileTranslationsLoader::AddCatalogLookupPathPrefix(const std::string& prefix)
 {
 
-    if (std::cend(gs_searchPrefixes) == std::find_if(gs_searchPrefixes.cbegin(), gs_searchPrefixes.cend(),
+    if (gs_searchPrefixes.cend() == std::find_if(gs_searchPrefixes.cbegin(), gs_searchPrefixes.cend(),
         [prefix](const auto& searchPrefix) {
-            return prefix.IsSameAs(searchPrefix);
+            return wx::utils::IsSameAsCase(prefix, searchPrefix); // TODO: Case sensitivity?
         }))
     {
         gs_searchPrefixes.push_back(prefix);
@@ -1841,10 +1841,10 @@ void wxFileTranslationsLoader::AddCatalogLookupPathPrefix(const wxString& prefix
 }
 
 
-wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
-                                                    const wxString& lang)
+wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const std::string& domain,
+                                                    const std::string& lang)
 {
-    wxString searchPath = GetFullSearchPath(lang);
+    std::string searchPath = GetFullSearchPath(lang).ToStdString();
 
     //LogTraceLargeArray
     //(

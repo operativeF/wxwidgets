@@ -120,10 +120,10 @@ void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
     }
 }
 
-void wxFileTypeInfo::VarArgInit(const wxString *mimeType,
-                                const wxString *openCmd,
-                                const wxString *printCmd,
-                                const wxString *desc,
+void wxFileTypeInfo::VarArgInit(const std::string *mimeType,
+                                const std::string *openCmd,
+                                const std::string *printCmd,
+                                const std::string *desc,
                                 ...)
 {
     va_list argptr;

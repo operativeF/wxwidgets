@@ -220,7 +220,7 @@ wxIsAbsolutePath (const std::string& filename)
 }
 
 // Return just the filename, not the path (basename)
-wxChar *wxFileNameFromPath (wxChar *path)
+char* wxFileNameFromPath (char *path)
 {
     std::string p = path;
     std::string n = wxFileNameFromPath(p);
