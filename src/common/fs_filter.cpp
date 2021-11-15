@@ -19,25 +19,25 @@ wxDEFINE_SCOPED_PTR_TYPE(wxInputStream)
 // wxFilterFSHandler
 //----------------------------------------------------------------------------
 
-bool wxFilterFSHandler::CanOpen(const wxString& location)
+bool wxFilterFSHandler::CanOpen(const std::string& location)
 {
     return wxFilterClassFactory::Find(GetProtocol(location)) != nullptr;
 }
 
 wxFSFile* wxFilterFSHandler::OpenFile(
         wxFileSystem& fs,
-        const wxString& location)
+        const std::string& location)
 {
-    wxString right = GetRightLocation(location);
+    std::string right = GetRightLocation(location);
     if (!right.empty())
         return nullptr;
 
-    wxString protocol = GetProtocol(location);
+    std::string protocol = GetProtocol(location);
     const wxFilterClassFactory *factory = wxFilterClassFactory::Find(protocol);
     if (!factory)
         return nullptr;
 
-    wxString left = GetLeftLocation(location);
+    std::string left = GetLeftLocation(location);
     wxFSFilePtr leftFile(fs.OpenFile(left));
     if (!leftFile.get())
         return nullptr;
@@ -55,7 +55,7 @@ wxFSFile* wxFilterFSHandler::OpenFile(
     // whether the mime type is that of this compression format (e.g.
     // application/gzip). If so pop any extension and try GetMimeTypeFromExt,
     // e.g. if it were '.ps.gz' pop the '.gz' and try looking up '.ps'
-    wxString mime = leftFile->GetMimeType();
+    std::string mime = leftFile->GetMimeType();
     if (factory->CanHandle(mime, wxSTREAM_MIMETYPE))
         mime = GetMimeTypeFromExt(factory->PopExtension(left));
 
@@ -69,12 +69,12 @@ wxFSFile* wxFilterFSHandler::OpenFile(
                        );
 }
 
-wxString wxFilterFSHandler::FindFirst(const wxString& WXUNUSED(spec), unsigned int WXUNUSED(flags))
+std::string wxFilterFSHandler::FindFirst(const std::string& WXUNUSED(spec), unsigned int WXUNUSED(flags))
 {
     return {};
 }
 
-wxString wxFilterFSHandler::FindNext()
+std::string wxFilterFSHandler::FindNext()
 {
     return {};
 }

@@ -137,7 +137,7 @@ bool wxTextFile::OnRead(const wxMBConv& conv)
 
 bool wxTextFile::OnWrite(wxTextFileType typeNew, const wxMBConv& conv)
 {
-    wxFileName fn = m_strBufferName;
+    wxFileName fn = m_strBufferName.ToStdString();
 
     // We do NOT want wxPATH_NORM_CASE here, or the case will not
     // be preserved.

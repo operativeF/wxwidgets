@@ -23,7 +23,7 @@
 class wxMemoryFSFile
 {
 public:
-    wxMemoryFSFile(const void *data, size_t len, const wxString& mime)
+    wxMemoryFSFile(const void *data, size_t len, const std::string& mime)
         : m_Data(new char[len]),
           m_Len(len),
           m_MimeType(mime)
@@ -32,7 +32,7 @@ public:
         InitTime();
     }
 
-    wxMemoryFSFile(const wxMemoryOutputStream& stream, const wxString& mime)
+    wxMemoryFSFile(const wxMemoryOutputStream& stream, const std::string& mime)
         : m_Len(stream.GetSize()),
           m_Data(new char[m_Len]),
           m_MimeType(mime)
@@ -51,7 +51,7 @@ public:
 
     char *m_Data;
     size_t m_Len;
-    wxString m_MimeType;
+    std::string m_MimeType;
 #if wxUSE_DATETIME
     wxDateTime m_Time;
 #endif // wxUSE_DATETIME
@@ -80,13 +80,13 @@ wxMemoryFSHandlerBase::~wxMemoryFSHandlerBase()
     WX_CLEAR_HASH_MAP(wxMemoryFSHash, m_Hash);
 }
 
-bool wxMemoryFSHandlerBase::CanOpen(const wxString& location)
+bool wxMemoryFSHandlerBase::CanOpen(const std::string& location)
 {
     return GetProtocol(location) == "memory";
 }
 
 wxFSFile * wxMemoryFSHandlerBase::OpenFile(wxFileSystem& WXUNUSED(fs),
-                                           const wxString& location)
+                                           const std::string& location)
 {
     wxMemoryFSHash::const_iterator i = m_Hash.find(GetRightLocation(location));
     if ( i == m_Hash.end() )
@@ -106,7 +106,7 @@ wxFSFile * wxMemoryFSHandlerBase::OpenFile(wxFileSystem& WXUNUSED(fs),
                );
 }
 
-wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, unsigned int flags)
+std::string wxMemoryFSHandlerBase::FindFirst(const std::string& url, unsigned int flags)
 {
     // Make sure to reset the find iterator, so that calling FindNext() doesn't
     // reuse its value from the last search that could well be invalid.
@@ -119,12 +119,12 @@ wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, unsigned int flag
         return {};
     }
 
-    const wxString spec = GetRightLocation(url);
-    if ( spec.find_first_of("?*") == wxString::npos )
+    const std::string spec = GetRightLocation(url);
+    if ( spec.find_first_of("?*") == std::string::npos )
     {
         // simple case: there are no wildcard characters so we can return
         // either 0 or 1 results and we can find the potential match quickly
-        return m_Hash.count(spec) ? url : wxString();
+        return m_Hash.count(spec) ? url : std::string();
     }
     //else: deal with wildcards in FindNext()
 
@@ -134,7 +134,7 @@ wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, unsigned int flag
     return FindNext();
 }
 
-wxString wxMemoryFSHandlerBase::FindNext()
+std::string wxMemoryFSHandlerBase::FindNext()
 {
     while ( m_findIter != m_Hash.end() )
     {
@@ -145,13 +145,13 @@ wxString wxMemoryFSHandlerBase::FindNext()
         ++m_findIter;
 
         if ( path.Matches(m_findArgument) )
-            return "memory:" + path;
+            return "memory:" + path.ToStdString();
     }
 
     return {};
 }
 
-bool wxMemoryFSHandlerBase::CheckDoesntExist(const wxString& filename)
+bool wxMemoryFSHandlerBase::CheckDoesntExist(const std::string& filename)
 {
     if ( m_Hash.count(filename) )
     {
@@ -164,20 +164,20 @@ bool wxMemoryFSHandlerBase::CheckDoesntExist(const wxString& filename)
 
 
 /*static*/
-void wxMemoryFSHandlerBase::AddFileWithMimeType(const wxString& filename,
-                                                const wxString& textdata,
-                                                const wxString& mimetype)
+void wxMemoryFSHandlerBase::AddFileWithMimeType(const std::string& filename,
+                                                const std::string& textdata,
+                                                const std::string& mimetype)
 {
-    const wxCharBuffer buf(textdata.To8BitData());
+    const wxCharBuffer buf(textdata.c_str());
 
     AddFileWithMimeType(filename, buf.data(), buf.length(), mimetype);
 }
 
 
 /*static*/
-void wxMemoryFSHandlerBase::AddFileWithMimeType(const wxString& filename,
+void wxMemoryFSHandlerBase::AddFileWithMimeType(const std::string& filename,
                                                 const void *binarydata, size_t size,
-                                                const wxString& mimetype)
+                                                const std::string& mimetype)
 {
     if ( !CheckDoesntExist(filename) )
         return;
@@ -186,15 +186,15 @@ void wxMemoryFSHandlerBase::AddFileWithMimeType(const wxString& filename,
 }
 
 /*static*/
-void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
-                                    const wxString& textdata)
+void wxMemoryFSHandlerBase::AddFile(const std::string& filename,
+                                    const std::string& textdata)
 {
     AddFileWithMimeType(filename, textdata, {});
 }
 
 
 /*static*/
-void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
+void wxMemoryFSHandlerBase::AddFile(const std::string& filename,
                                     const void *binarydata, size_t size)
 {
     AddFileWithMimeType(filename, binarydata, size, {});
@@ -202,7 +202,7 @@ void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
 
 
 
-/*static*/ void wxMemoryFSHandlerBase::RemoveFile(const wxString& filename)
+/*static*/ void wxMemoryFSHandlerBase::RemoveFile(const std::string& filename)
 {
     wxMemoryFSHash::iterator i = m_Hash.find(filename);
     if ( i == m_Hash.end() )
@@ -223,7 +223,7 @@ void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
 
 #if wxUSE_IMAGE
 /*static*/ void
-wxMemoryFSHandler::AddFile(const wxString& filename,
+wxMemoryFSHandler::AddFile(const std::string& filename,
                            const wxImage& image,
                            wxBitmapType type)
 {
@@ -246,7 +246,7 @@ wxMemoryFSHandler::AddFile(const wxString& filename,
 }
 
 /*static*/ void
-wxMemoryFSHandler::AddFile(const wxString& filename,
+wxMemoryFSHandler::AddFile(const std::string& filename,
                            const wxBitmap& bitmap,
                            wxBitmapType type)
 {

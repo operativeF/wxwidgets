@@ -27,6 +27,11 @@
 
 #include "wx/msw/wrapshl.h"
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+import Utils.Strings;
+
 #if wxUSE_BASE
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -93,7 +98,7 @@ static FileInfoMap& GetFileInfoMap()
 //        - Other flags are 'best guess' from type of drive.  The system will
 //          not report the file attributes with any degree of accuracy.
 //=============================================================================
-static unsigned GetBasicFlags(const wxChar* filename)
+static unsigned GetBasicFlags(const std::string& filename)
 {
     unsigned flags = wxFS_VOL_MOUNTED;
 
@@ -101,7 +106,8 @@ static unsigned GetBasicFlags(const wxChar* filename)
     // 'Best Guess' based on drive type.
     //----------------------------------
     wxFSVolumeKind type;
-    switch(GetDriveType(filename))
+    boost::nowide::wstackstring stackFileName{filename.c_str()};
+    switch(::GetDriveTypeW(stackFileName.get()))
     {
     case DRIVE_FIXED:
         type = wxFSVolumeKind::Disk;
@@ -138,8 +144,9 @@ static unsigned GetBasicFlags(const wxChar* filename)
     // But it is a good check if the Win API ever gets better about reporting
     // this information.
     //-----------------------------------------------------------------------
-    SHFILEINFO fi;
-    if (!::SHGetFileInfoW(filename, 0, &fi, sizeof(fi), SHGFI_ATTRIBUTES))
+    SHFILEINFOW fi;
+
+    if (!::SHGetFileInfoW(stackFileName.get(), 0, &fi, sizeof(fi), SHGFI_ATTRIBUTES))
     {
         // this error is not fatal, so don't show a message to the user about
         // it, otherwise it would appear every time a generic directory picker
@@ -167,7 +174,7 @@ static unsigned GetBasicFlags(const wxChar* filename)
 // Purpose: Add a file to the list if it meets the filter requirement.
 // Notes: - See GetBasicFlags for remarks about the Mounted flag.
 //=============================================================================
-static bool FilteredAdd(std::vector<wxString>& list, const wxChar* filename,
+static bool FilteredAdd(std::vector<std::string>& list, const std::string& filename,
                         unsigned int flagsSet, unsigned int flagsUnset)
 {
     bool accept = true;
@@ -204,7 +211,7 @@ static bool FilteredAdd(std::vector<wxString>& list, const wxChar* filename,
 //          all items while determining which are connected and not.  So this
 //          function will find either all items or connected items.
 //=============================================================================
-static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
+static void BuildListFromNN(std::vector<std::string>& list, NETRESOURCEW* pResSrc,
                             unsigned flagsSet, unsigned flagsUnset)
 {
     HANDLE hEnum;
@@ -226,8 +233,8 @@ static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
     {
         DWORD count = 1;
         DWORD size = 256;
-        NETRESOURCE* pRes = (NETRESOURCE*)malloc(size);
-        memset(pRes, 0, sizeof(NETRESOURCE));
+        NETRESOURCEW* pRes = (NETRESOURCEW*)malloc(size);
+        memset(pRes, 0, sizeof(NETRESOURCEW));
         while (rc = s_pWNetEnumResource(hEnum, &count, pRes, &size), rc == NO_ERROR || rc == ERROR_MORE_DATA)
         {
             if (s_cancelSearch)
@@ -235,7 +242,7 @@ static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
 
             if (rc == ERROR_MORE_DATA)
             {
-                pRes = (NETRESOURCE*)realloc(pRes, size);
+                pRes = (NETRESOURCEW*)realloc(pRes, size);
                 count = 1;
             }
             else if (count == 1)
@@ -249,7 +256,7 @@ static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
                 // Add the network share.
                 else
                 {
-                    wxString filename(pRes->lpRemoteName);
+                    std::string filename = boost::nowide::narrow(pRes->lpRemoteName);
 
                     // if the drive is unavailable, FilteredAdd() can hang for
                     // a long time and, moreover, its failure appears to be not
@@ -259,18 +266,18 @@ static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
                     // to try to avoid this
                     if ( pRes->lpLocalName &&
                             *pRes->lpLocalName &&
-                                !wxDirExists(pRes->lpLocalName) )
+                                !wxDirExists(boost::nowide::narrow(pRes->lpLocalName)) )
                         continue;
 
                     if (!filename.empty())
                     {
-                        if (filename.Last() != '\\')
-                            filename.Append('\\');
+                        if (filename.back() != '\\')
+                            filename.push_back('\\');
 
                         // The filter function will not know mounted from unmounted, and neither do we unless
                         // we are iterating using RESOURCE_CONNECTED, in which case they all are mounted.
                         // Volumes on disconnected servers, however, will correctly show as unmounted.
-                        FilteredAdd(list, filename.t_str(), flagsSet, flagsUnset&~wxFS_VOL_MOUNTED);
+                        FilteredAdd(list, filename, flagsSet, flagsUnset&~wxFS_VOL_MOUNTED);
                         if (scope == RESOURCE_GLOBALNET)
                             s_fileInfo[filename].m_flags &= ~wxFS_VOL_MOUNTED;
                     }
@@ -301,7 +308,7 @@ static int CompareFcn(const wxString& first, const wxString& second)
 //          way manually.
 //        - The resulting list is sorted alphabetically.
 //=============================================================================
-static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
+static bool BuildRemoteList(std::vector<std::string>& list, NETRESOURCEW* pResSrc,
                             unsigned flagsSet, unsigned flagsUnset)
 {
     // NN query depends on dynamically loaded library.
@@ -330,7 +337,7 @@ static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
     if (!(flagsSet & wxFS_VOL_MOUNTED))
     {
         // generate.
-        std::vector<wxString> mounted;
+        std::vector<std::string> mounted;
         BuildListFromNN(mounted, pResSrc, flagsSet | wxFS_VOL_MOUNTED, flagsUnset & ~wxFS_VOL_MOUNTED);
         
         std::sort(mounted.begin(), mounted.end(), CompareFcn);
@@ -340,8 +347,8 @@ static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
         for (ssize_t iMounted = mounted.size() - 1; iMounted >= 0 && iList >= 0; iMounted--)
         {
             int compare;
-            wxString all(list[iList]);
-            wxString mount(mounted[iMounted]);
+            std::string all = list[iList];
+            std::string mount = mounted[iMounted];
 
             while (compare =
                      wxStricmp(list[iList].c_str(), mounted[iMounted].c_str()),
@@ -378,7 +385,7 @@ static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
 // Purpose: Generate and return a list of all volumes (drives) available.
 // Notes:
 //=============================================================================
-std::vector<wxString> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned int flagsUnset)
+std::vector<std::string> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned int flagsUnset)
 {
     ::InterlockedExchange(&s_cancelSearch, FALSE);     // reset
 
@@ -392,29 +399,33 @@ std::vector<wxString> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned
     }
 #endif
 
-    std::vector<wxString> list;
+    std::vector<std::string> list;
 
     //-------------------------------
     // Local and mapped drives first.
     //-------------------------------
     // Allocate the required space for the API call.
-    const DWORD chars = GetLogicalDriveStrings(0, nullptr);
-    TCHAR* buf = new TCHAR[chars+1];
+    const DWORD chars = ::GetLogicalDriveStringsW(0, nullptr);
+
+    std::vector<WCHAR> buf;
+    buf.resize(chars + 1);
 
     // Get the list of drives.
-    GetLogicalDriveStrings(chars, buf);
+    ::GetLogicalDriveStringsW(chars, buf.data());
 
     // Parse the list into an array, applying appropriate filters.
-    TCHAR *pVol;
-    pVol = buf;
-    while (*pVol)
-    {
-        FilteredAdd(list, pVol, flagsSet, flagsUnset);
-        pVol = pVol + wxStrlen(pVol) + 1;
-    }
+    boost::nowide::stackstring stackBuf;
 
-    // Cleanup.
-    delete[] buf;
+    stackBuf.convert(buf.data(), buf.data() + buf.size());
+
+    std::string convertedBuffer{stackBuf.get(), stackBuf.buffer_size};
+
+    std::vector<std::string> vols = wx::utils::JoinChArray(convertedBuffer);
+
+    for(auto&& vol : vols)
+    {
+        FilteredAdd(list, vol, flagsSet, flagsUnset);
+    }
 
     //---------------------------
     // Network Neighborhood next.
@@ -427,7 +438,7 @@ std::vector<wxString> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned
     {
         // The returned list will be sorted alphabetically.  We don't pass
         // our in since we don't want to change to order of the local drives.
-        std::vector<wxString> nn;
+        std::vector<std::string> nn;
         if (BuildRemoteList(nn, nullptr, flagsSet, flagsUnset))
         {
             for (size_t idx = 0; idx < nn.size(); idx++)

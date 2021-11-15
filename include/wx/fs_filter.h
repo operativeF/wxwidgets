@@ -24,11 +24,11 @@ class wxFilterFSHandler : public wxFileSystemHandler
 public:
     wxFilterFSHandler& operator=(wxFilterFSHandler&&) = delete;
 
-    bool CanOpen(const wxString& location) override;
-    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
+    bool CanOpen(const std::string& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) override;
 
-    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
-    wxString FindNext() override;
+    std::string FindFirst(const std::string& spec, unsigned int flags = 0) override;
+    std::string FindNext() override;
 };
 
 #endif // wxUSE_FILESYSTEM

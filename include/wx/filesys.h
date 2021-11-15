@@ -18,6 +18,8 @@
 #include "wx/hashmap.h"
 #include "wx/stream.h"
 
+import Utils.Strings;
+
 import <string>;
 
 class wxFSFile;
@@ -35,14 +37,14 @@ class wxFileSystem;
 class wxFSFile
 {
 public:
-    wxFSFile(wxInputStream *stream, const wxString& loc,
-             const wxString& mimetype, const wxString& anchor
+    wxFSFile(wxInputStream *stream, const std::string& loc,
+             const std::string& mimetype, const std::string& anchor
 #if wxUSE_DATETIME
              , wxDateTime modif
 #endif // wxUSE_DATETIME
              )
         : m_Location(loc)
-        , m_MimeType(mimetype.Lower())
+        , m_MimeType(wx::utils::ToLowerCopy(mimetype))
         , m_Anchor(anchor)
 #if wxUSE_DATETIME
         , m_Modif(modif)
@@ -74,12 +76,12 @@ public:
     }
 
     // returns file's mime type
-    const wxString& GetMimeType() const;
+    const std::string& GetMimeType() const;
 
     // returns the original location (aka filename) of the file
-    const wxString& GetLocation() const { return m_Location; }
+    const std::string& GetLocation() const { return m_Location; }
 
-    const wxString& GetAnchor() const { return m_Anchor; }
+    const std::string& GetAnchor() const { return m_Anchor; }
 
 #if wxUSE_DATETIME
     wxDateTime GetModificationTime() const { return m_Modif; }
@@ -87,9 +89,9 @@ public:
 
 private:
     wxInputStream *m_Stream;
-    wxString m_Location;
-    wxString m_MimeType;
-    wxString m_Anchor;
+    std::string m_Location;
+    std::string m_MimeType;
+    std::string m_Anchor;
 #if wxUSE_DATETIME
     wxDateTime m_Modif;
 #endif // wxUSE_DATETIME
@@ -112,41 +114,41 @@ public:
     wxFileSystemHandler()  = default;
 
     // returns true if this handler is able to open given location
-    virtual bool CanOpen(const wxString& location) = 0;
+    virtual bool CanOpen(const std::string& location) = 0;
 
     // opens given file and returns pointer to input stream.
     // Returns NULL if opening failed.
     // The location is always absolute path.
-    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) = 0;
+    virtual wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) = 0;
 
     // Finds first/next file that matches spec wildcard. flags can be wxDIR for restricting
     // the query to directories or wxFILE for files only or 0 for either.
     // Returns filename or empty string if no more matching file exists
-    virtual wxString FindFirst(const wxString& spec, unsigned int flags = 0);
-    virtual wxString FindNext();
+    virtual std::string FindFirst(const std::string& spec, unsigned int flags = 0);
+    virtual std::string FindNext();
 
     // Returns MIME type of the file - w/o need to open it
     // (default behaviour is that it returns type based on extension)
-    static wxString GetMimeTypeFromExt(const wxString& location);
+    static std::string GetMimeTypeFromExt(const std::string& location);
 
 protected:
     // returns protocol ("file", "http", "tar" etc.) The last (most right)
     // protocol is used:
     // {it returns "tar" for "file:subdir/archive.tar.gz#tar:/README.txt"}
-    static wxString GetProtocol(const wxString& location);
+    static std::string GetProtocol(const std::string& location);
 
     // returns left part of address:
     // {it returns "file:subdir/archive.tar.gz" for "file:subdir/archive.tar.gz#tar:/README.txt"}
-    static wxString GetLeftLocation(const wxString& location);
+    static std::string GetLeftLocation(const std::string& location);
 
     // returns anchor part of address:
     // {it returns "anchor" for "file:subdir/archive.tar.gz#tar:/README.txt#anchor"}
     // NOTE:  anchor is NOT a part of GetLeftLocation()'s return value
-    static wxString GetAnchor(const wxString& location);
+    static std::string GetAnchor(const std::string& location);
 
     // returns right part of address:
     // {it returns "/README.txt" for "file:subdir/archive.tar.gz#tar:/README.txt"}
-    static wxString GetRightLocation(const wxString& location);
+    static std::string GetRightLocation(const std::string& location);
 };
 
 
@@ -181,26 +183,26 @@ public:
     // unless is_dir = true 'location' is *not* the directory but
     // file contained in this directory
     // (so ChangePathTo("dir/subdir/xh.htm") sets m_Path to "dir/subdir/")
-    void ChangePathTo(const wxString& location, bool is_dir = false);
+    void ChangePathTo(const std::string& location, bool is_dir = false);
 
-    wxString GetPath() const {return m_Path;}
+    std::string GetPath() const {return m_Path;}
 
     // opens given file and returns pointer to input stream.
     // Returns NULL if opening failed.
     // It first tries to open the file in relative scope
     // (based on ChangePathTo()'s value) and then as an absolute
     // path.
-    wxFSFile* OpenFile(const wxString& location, unsigned int flags = wxFS_READ);
+    wxFSFile* OpenFile(const std::string& location, unsigned int flags = wxFS_READ);
 
     // Finds first/next file that matches spec wildcard. flags can be wxDIR for restricting
     // the query to directories or wxFILE for files only or 0 for either.
     // Returns filename or empty string if no more matching file exists
-    wxString FindFirst(const wxString& spec, unsigned int flags = 0);
-    wxString FindNext();
+    std::string FindFirst(const std::string& spec, unsigned int flags = 0);
+    std::string FindNext();
 
     // find a file in a list of directories, returns false if not found
-    bool FindFileInPath(wxString *pStr,
-                        const wxString& path, const wxString& file);
+    bool FindFileInPath(std::string *pStr,
+                        const std::string& path, const std::string& file);
 
     // Adds FS handler.
     // In fact, this class is only front-end to the FS handlers :-)
@@ -210,13 +212,13 @@ public:
     static wxFileSystemHandler* RemoveHandler(wxFileSystemHandler *handler);
 
     // Returns true if there is a handler which can open the given location.
-    static bool HasHandlerForPath(const wxString& location);
+    static bool HasHandlerForPath(const std::string& location);
 
     // remove all items from the m_Handlers list
     static void CleanUpHandlers();
 
     // Returns the native path for a file URL
-    static wxFileName URLToFileName(const wxString& url);
+    static wxFileName URLToFileName(const std::string& url);
 
     // Returns the file URL for a native path
     static std::string FileNameToURL(const wxFileName& filename);
@@ -225,12 +227,12 @@ public:
 protected:
     wxFileSystemHandler *MakeLocal(wxFileSystemHandler *h);
 
-    wxString m_Path;
+    std::string m_Path;
             // the path (location) we are currently in
             // this is path, not file!
             // (so if you opened test/demo.htm, it is
             // "test/", not "test/demo.htm")
-    wxString m_LastName;
+    std::string m_LastName;
             // name of last opened file (full path)
     inline static wxList m_Handlers;
             // list of FS handlers
@@ -270,19 +272,19 @@ special characters :
 class wxLocalFSHandler : public wxFileSystemHandler
 {
 public:
-    bool CanOpen(const wxString& location) override;
-    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
-    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
-    wxString FindNext() override;
+    bool CanOpen(const std::string& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) override;
+    std::string FindFirst(const std::string& spec, unsigned int flags = 0) override;
+    std::string FindNext() override;
 
     // wxLocalFSHandler will prefix all filenames with 'root' before accessing
     // files on disk. This effectively makes 'root' the top-level directory
     // and prevents access to files outside this directory.
     // (This is similar to Unix command 'chroot'.)
-    static void Chroot(const wxString& root) { ms_root = root; }
+    static void Chroot(const std::string& root) { ms_root = root; }
 
 protected:
-    inline static wxString ms_root;
+    inline static std::string ms_root;
 };
 
 // Stream reading data from wxFSFile: this allows to use virtual files with any
@@ -291,7 +293,7 @@ class wxFSInputStream : public wxWrapperInputStream
 {
 public:
     // Notice that wxFS_READ is implied in flags.
-    wxFSInputStream(const wxString& filename, unsigned int flags = 0);
+    wxFSInputStream(const std::string& filename, unsigned int flags = 0);
     ~wxFSInputStream();
 
     wxFSInputStream& operator=(wxFSInputStream&&) = delete;

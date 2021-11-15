@@ -35,7 +35,7 @@ public:
         wxFSWatchInfo(winfo)
     {
         // get handle for this path
-        m_handle = OpenDir(m_path.ToStdString());
+        m_handle = OpenDir(m_path);
         m_overlapped = (OVERLAPPED*)calloc(1, sizeof(OVERLAPPED));
         wxZeroMemory(m_buffer);
     }
@@ -167,7 +167,7 @@ public:
         wxCHECK_MSG( m_iocp != INVALID_HANDLE_VALUE, false, "IOCP not init" );
         wxCHECK_MSG( watch->IsOk(), false, "Invalid watch" );
 
-        const wxString path = watch->GetPath();
+        const std::string path = watch->GetPath();
         wxFSWatchEntries::iterator it = m_watches.find(path);
         wxCHECK_MSG( it != m_watches.end(), false,
                      "Can't remove a watch we don't use" );
@@ -326,7 +326,7 @@ protected:
 
     static int Native2WatcherFlags(int flags);
 
-    static wxString FileNotifyInformationToString(
+    static std::string FileNotifyInformationToString(
                                             const FILE_NOTIFY_INFORMATION& e);
 
     static wxFileName GetEventPath(const wxFSWatchEntryMSW& watch,

@@ -148,9 +148,9 @@ protected:
 
 // the function takes the same parameters as wxStringTokenizer ctor and returns
 // the array containing all tokens
-std::vector<wxString> WXDLLIMPEXP_BASE
-wxStringTokenize(const wxString& str,
-                 const wxString& delims = wxDEFAULT_DELIMITERS,
+std::vector<std::string>
+wxStringTokenize(const std::string& str,
+                 const std::string& delims = wxDEFAULT_DELIMITERS,
                  wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
 #endif // _WX_TOKENZRH

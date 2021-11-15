@@ -177,7 +177,7 @@ void wxStandardPaths::IgnoreAppSubDir(const wxString& subdirPattern)
         return;
     }
 
-    const wxString lastdir = fn.GetDirs().back().Lower();
+    const wxString lastdir = wx::utils::ToLowerCopy(fn.GetDirs().back());
     if ( lastdir.Matches(subdirPattern.Lower()) )
     {
         fn.RemoveLastDir();

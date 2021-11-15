@@ -165,7 +165,7 @@ bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
 
 std::string wxAppConsoleBase::GetAppName() const
 {
-    wxString name = m_appName;
+    std::string name = m_appName;
     if ( name.empty() )
     {
         if ( argv )
@@ -184,7 +184,7 @@ std::string wxAppConsoleBase::GetAppName() const
         }
 #endif // wxUSE_STDPATHS
     }
-    return name.ToStdString();
+    return name;
 }
 
 std::string wxAppConsoleBase::GetAppDisplayName() const

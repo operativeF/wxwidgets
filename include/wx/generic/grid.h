@@ -1291,8 +1291,7 @@ private:
 // A 2-dimensional array of strings for data values
 //
 
-WX_DECLARE_OBJARRAY_WITH_DECL(std::vector<wxString>, wxGridStringArray,
-                              class WXDLLIMPEXP_CORE);
+WX_DECLARE_OBJARRAY_WITH_DECL(std::vector<std::string>, wxGridStringArray, class);
 
 
 

@@ -426,84 +426,84 @@ inline constexpr auto wxInvalidOffset = gsl::narrow_cast<unsigned int>(-1);
 // ----------------------------------------------------------------------------
 // functions
 // ----------------------------------------------------------------------------
-bool wxFileExists(const wxString& filename);
+bool wxFileExists(const std::string& filename);
 
 // does the path exist? (may have or not '/' or '\\' at the end)
-bool wxDirExists(const wxString& pathName);
+bool wxDirExists(const std::string& pathName);
 
-bool wxIsAbsolutePath(const wxString& filename);
+bool wxIsAbsolutePath(const std::string& filename);
 
 // Get filename
 wxChar* wxFileNameFromPath(wxChar *path);
-wxString wxFileNameFromPath(const wxString& path);
+std::string wxFileNameFromPath(const std::string& path);
 
 // Get directory
-wxString wxPathOnly(const wxString& path);
+std::string wxPathOnly(const std::string& path);
 
 // Get first file name matching given wild card.
 // Flags are reserved for future use.
 #define wxFILE  1
 #define wxDIR   2
-wxString wxFindFirstFile(const wxString& spec, unsigned int flags = wxFILE);
-wxString wxFindNextFile();
+std::string wxFindFirstFile(const std::string& spec, unsigned int flags = wxFILE);
+std::string wxFindNextFile();
 
 // Does the pattern contain wildcards?
-bool wxIsWild(const wxString& pattern);
+bool wxIsWild(const std::string& pattern);
 
 // Does the pattern match the text (usually a filename)?
 // If dot_special is true, doesn't match * against . (eliminating
 // `hidden' dot files)
-bool wxMatchWild(const wxString& pattern,  const wxString& text, bool dot_special = true);
+bool wxMatchWild(const std::string& pattern,  const std::string& text, bool dot_special = true);
 
 // Concatenate two files to form third
-bool wxConcatFiles(const wxString& src1, const wxString& src2, const wxString& dest);
+bool wxConcatFiles(const std::string& src1, const std::string& src2, const std::string& dest);
 
 // Copy file
 bool wxCopyFile(const std::string& src, const std::string& dest,
                                  bool overwrite = true);
 
 // Remove file
-bool wxRemoveFile(const wxString& file);
+bool wxRemoveFile(const std::string& file);
 
 // Rename file
-bool wxRenameFile(const wxString& oldpath, const wxString& newpath, bool overwrite = true);
+bool wxRenameFile(const std::string& oldpath, const std::string& newpath, bool overwrite = true);
 
 // Get current working directory.
-wxString wxGetCwd();
+std::string wxGetCwd();
 
 // Set working directory
 bool wxSetWorkingDirectory(const std::string& d);
 
 // Make directory
-bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);
+bool wxMkdir(const std::string& dir, int perm = wxS_DIR_DEFAULT);
 
 // Remove directory. Flags reserved for future use.
-bool wxRmdir(const wxString& dir, unsigned int flags = 0);
+bool wxRmdir(const std::string& dir, unsigned int flags = 0);
 
 // Return the type of an open file
 wxFileKind wxGetFileKind(int fd);
 wxFileKind wxGetFileKind(FILE *fp);
 
 // permissions; these functions work both on files and directories:
-bool wxIsWritable(const wxString &path);
-bool wxIsReadable(const wxString &path);
-bool wxIsExecutable(const wxString &path);
+bool wxIsWritable(const std::string &path);
+bool wxIsReadable(const std::string &path);
+bool wxIsExecutable(const std::string &path);
 
 // ----------------------------------------------------------------------------
 // separators in file names
 // ----------------------------------------------------------------------------
 
 // between file name and extension
-inline constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
+inline constexpr char wxFILE_SEP_EXT        = '.';
 
 // between drive/volume name and the path
-inline constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
+inline constexpr char wxFILE_SEP_DSK        = ':';
 
 // between the path components
-inline constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
-inline constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
-inline constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
-inline constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
+inline constexpr char wxFILE_SEP_PATH_DOS   = '\\';
+inline constexpr char wxFILE_SEP_PATH_UNIX  = '/';
+inline constexpr char wxFILE_SEP_PATH_MAC   = ':';
+inline constexpr char wxFILE_SEP_PATH_VMS   = '.'; // VMS also uses '[' and ']'
 
 // separator in the path list (as in PATH environment variable)
 // there is no PATH variable in Classic Mac OS so just use the
@@ -546,19 +546,19 @@ constexpr bool wxIsPathSeparator(wxChar c)
 }
 
 // does the string ends with path separator?
-bool wxEndsWithPathSeparator(const wxString& filename);
+bool wxEndsWithPathSeparator(const std::string& filename);
 
 // find a file in a list of directories, returns false if not found
-bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& szFile);
+bool wxFindFileInPath(std::string *pStr, const std::string& szPath, const std::string& szFile);
 
 // Get the OS directory if appropriate (such as the Windows directory).
 // On non-Windows platform, probably just return the empty string.
-wxString wxGetOSDirectory();
+std::string wxGetOSDirectory();
 
 #if wxUSE_DATETIME
 
 // Get file modification time
-time_t wxFileModificationTime(const wxString& filename);
+time_t wxFileModificationTime(const std::string& filename);
 
 #endif // wxUSE_DATETIME
 
@@ -567,7 +567,7 @@ time_t wxFileModificationTime(const wxString& filename);
 // The arrays will contain an equal number of items found before the error.
 // wildCard is in the form:
 // "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
-std::size_t wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
+std::size_t wxParseCommonDialogsFilter(const std::string& wildCard, std::vector<std::string>& descriptions, std::vector<std::string>& filters);
 
 // ----------------------------------------------------------------------------
 // classes
@@ -613,28 +613,28 @@ class wxPathList
 {
 public:
     wxPathList() = default;
-    wxPathList(const std::vector<wxString> &arr)
+    wxPathList(const std::vector<std::string> &arr)
         { Add(arr); }
 
     // Adds all paths in environment variable
-    void AddEnvList(const wxString& envVariable);
+    void AddEnvList(const std::string& envVariable);
 
     // Adds given path to this list
-    bool Add(const wxString& path);
-    void Add(const std::vector<wxString> &paths);
+    bool Add(const std::string& path);
+    void Add(const std::vector<std::string> &paths);
 
     // Find the first full path for which the file exists
-    wxString FindValidPath(const wxString& filename) const;
+    std::string FindValidPath(const std::string& filename) const;
 
     // Find the first full path for which the file exists; ensure it's an
     // absolute path that gets returned.
-    wxString FindAbsoluteValidPath(const wxString& filename) const;
+    std::string FindAbsoluteValidPath(const std::string& filename) const;
 
     // Given full path and filename, add path to list
-    bool EnsureFileAccessible(const wxString& path);
+    bool EnsureFileAccessible(const std::string& path);
 
 private:
-    std::vector<wxString> m_paths;
+    std::vector<std::string> m_paths;
 };
 
 #endif // _WX_FILEFN_H_

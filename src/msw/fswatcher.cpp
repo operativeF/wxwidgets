@@ -389,15 +389,15 @@ int wxIOCPThread::Native2WatcherFlags(int flags)
     }
 
     // never reached
-    wxFAIL_MSG(wxString::Format("Unknown file notify change %u", flags));
+    wxFAIL_MSG(fmt::format("Unknown file notify change %u", flags));
     return -1;
 }
 
-wxString wxIOCPThread::FileNotifyInformationToString(
+std::string wxIOCPThread::FileNotifyInformationToString(
                                               const FILE_NOTIFY_INFORMATION& e)
 {
-    wxString fname(e.FileName, e.FileNameLength / sizeof(e.FileName[0]));
-    return wxString::Format("Event: offset=%d, action=%d, len=%d, "
+    std::string fname(boost::nowide::narrow(e.FileName), e.FileNameLength / sizeof(e.FileName[0]));
+    return fmt::format("Event: offset=%d, action=%d, len=%d, "
                             "name(approx)='%s'", e.NextEntryOffset, e.Action,
                             e.FileNameLength, fname);
 }
@@ -408,7 +408,7 @@ wxFileName wxIOCPThread::GetEventPath(const wxFSWatchEntryMSW& watch,
     wxFileName path = watch.GetPath();
     if (path.IsDir())
     {
-        wxString rel(e.FileName, e.FileNameLength / sizeof(e.FileName[0]));
+        std::string rel{boost::nowide::narrow(e.FileName), e.FileNameLength / sizeof(e.FileName[0])};
         static constexpr int pathFlags = wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR;
         path = wxFileName(path.GetPath(pathFlags) + rel);
     }
@@ -450,7 +450,7 @@ bool wxMSWFileSystemWatcher::Init()
 bool
 wxMSWFileSystemWatcher::AddTree(const wxFileName& path,
                                 int events,
-                                const wxString& filter)
+                                const std::string& filter)
 {
     if ( !filter.empty() )
     {

@@ -203,8 +203,8 @@ class wxTranslationsLoader
 public:
     virtual ~wxTranslationsLoader() = default;
 
-    virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
-                                      const wxString& lang) = 0;
+    virtual wxMsgCatalog *LoadCatalog(const std::string& domain,
+                                      const std::string& lang) = 0;
 
     virtual std::vector<std::string> GetAvailableTranslations(const std::string& domain) const = 0;
 };
@@ -215,10 +215,10 @@ class wxFileTranslationsLoader
     : public wxTranslationsLoader
 {
 public:
-    static void AddCatalogLookupPathPrefix(const wxString& prefix);
+    static void AddCatalogLookupPathPrefix(const std::string& prefix);
 
-    wxMsgCatalog *LoadCatalog(const wxString& domain,
-                              const wxString& lang) override;
+    wxMsgCatalog *LoadCatalog(const std::string& domain,
+                              const std::string& lang) override;
 
     std::vector<std::string> GetAvailableTranslations(const std::string& domain) const override;
 };
@@ -230,14 +230,14 @@ class wxResourceTranslationsLoader
     : public wxTranslationsLoader
 {
 public:
-    wxMsgCatalog *LoadCatalog(const wxString& domain,
-                              const wxString& lang) override;
+    wxMsgCatalog *LoadCatalog(const std::string& domain,
+                              const std::string& lang) override;
 
     std::vector<std::string> GetAvailableTranslations(const std::string& domain) const override;
 
 protected:
     // returns resource type to use for translations
-    virtual wxString GetResourceType() const { return wxASCII_STR("MOFILE"); }
+    virtual std::string GetResourceType() const { return "MOFILE"; }
 
     // returns module to load resources from
     virtual WXHINSTANCE GetModule() const { return nullptr; }

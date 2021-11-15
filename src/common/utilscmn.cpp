@@ -1038,7 +1038,7 @@ static bool DoLaunchDefaultBrowserHelper(const std::string& url, unsigned int fl
         if ( params.scheme == "file" )
         {
             // for same reason as above, remove the scheme from the URL
-            params.path = wxFileName::URLToFileName(url).GetFullPath().ToStdString();
+            params.path = wxFileName::URLToFileName(url).GetFullPath();
         }
     }
 

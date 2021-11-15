@@ -1856,7 +1856,7 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
     wxFileName fn(domain);
     fn.SetExt("mo");
 
-    wxString strFullName;
+    std::string strFullName;
     if ( !wxFindFileInPath(&strFullName, searchPath, fn.GetFullPath()) )
         return nullptr;
 
@@ -1887,24 +1887,24 @@ std::vector<std::string> wxFileTranslationsLoader::GetAvailableTranslations(cons
         if ( !dir.Open(i) )
             continue;
 
-        wxString lang;
+        std::string lang;
         for ( bool ok = dir.GetFirst(&lang, "", wxDIR_DIRS);
               ok;
               ok = dir.GetNext(&lang) )
         {
-            const std::string langdir = fmt::format("{}{}{}", i, wxFILE_SEP_PATH, lang.ToStdString());
+            const std::string langdir = fmt::format("{}{}{}", i, wxFILE_SEP_PATH, lang);
             if ( HasMsgCatalogInDir(langdir, domain) )
             {
 #ifdef __WXOSX__
-                wxString rest;
+                std::string rest;
                 if ( lang.EndsWith(".lproj", &rest) )
                     lang = rest;
 #endif // __WXOSX__
 
                 wxLogTrace(TRACE_I18N,
                            "found %s translation of \"%s\" in %s",
-                           lang.ToStdString(), domain, langdir);
-                langs.push_back(lang.ToStdString());
+                           lang, domain, langdir);
+                langs.push_back(lang);
             }
         }
     }
@@ -1919,17 +1919,20 @@ std::vector<std::string> wxFileTranslationsLoader::GetAvailableTranslations(cons
 
 #ifdef WX_WINDOWS
 
-wxMsgCatalog *wxResourceTranslationsLoader::LoadCatalog(const wxString& domain,
-                                                        const wxString& lang)
+wxMsgCatalog *wxResourceTranslationsLoader::LoadCatalog(const std::string& domain,
+                                                        const std::string& lang)
 {
     const void *mo_data = nullptr;
     size_t mo_size = 0;
 
-    const wxString resname = wxString::Format("%s_%s", domain, lang);
+    const std::string resname = fmt::format("%s_%s", domain, lang);
+
+    const auto resType = GetResourceType();
+    boost::nowide::wstackstring stackResType{resType.c_str()};
 
     if ( !wxLoadUserResource(&mo_data, &mo_size,
                              resname,
-                             GetResourceType().t_str(),
+                             stackResType.get(),
                              GetModule()) )
         return nullptr;
 

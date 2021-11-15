@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 
 wxDirTraverseResult
-wxDirTraverser::OnOpenError(const wxString& WXUNUSED(dirname))
+wxDirTraverser::OnOpenError(const std::string& WXUNUSED(dirname))
 {
     return wxDirTraverseResult::Ignore;
 }
@@ -35,18 +35,18 @@ wxDirTraverser::OnOpenError(const wxString& WXUNUSED(dirname))
 
 // dumb generic implementation
 
-bool wxDir::HasFiles(const wxString& spec) const
+bool wxDir::HasFiles(const std::string& spec) const
 {
-    wxString s;
+    std::string s;
     return GetFirst(&s, spec, wxDIR_FILES | wxDIR_HIDDEN);
 }
 
 // we have a (much) faster version for Unix
 #if (defined(__CYGWIN__) && defined(WX_WINDOWS)) || !defined(__UNIX_LIKE__) || defined(__WINE__)
 
-bool wxDir::HasSubDirs(const wxString& spec) const
+bool wxDir::HasSubDirs(const std::string& spec) const
 {
-    wxString s;
+    std::string s;
     return GetFirst(&s, spec, wxDIR_DIRS | wxDIR_HIDDEN);
 }
 
@@ -56,18 +56,18 @@ bool wxDir::HasSubDirs(const wxString& spec) const
 // wxDir::GetNameWithSep()
 // ----------------------------------------------------------------------------
 
-wxString wxDir::GetNameWithSep() const
+std::string wxDir::GetNameWithSep() const
 {
     // Note that for historical reasons (i.e. because GetName() was there
     // first) we implement this one in terms of GetName() even though it might
     // actually make more sense to reverse this logic.
 
-    wxString name = GetName();
+    std::string name = GetName();
     if ( !name.empty() )
     {
         // Notice that even though GetName() isn't supposed to return the
         // separator, it can still be present for the root directory name.
-        if ( name.Last() != wxFILE_SEP_PATH )
+        if ( name.back() != wxFILE_SEP_PATH )
             name += wxFILE_SEP_PATH;
     }
 
@@ -79,7 +79,7 @@ wxString wxDir::GetNameWithSep() const
 // ----------------------------------------------------------------------------
 
 size_t wxDir::Traverse(wxDirTraverser& sink,
-                       const wxString& filespec,
+                       const std::string& filespec,
                        unsigned int flags) const
 {
     wxCHECK_MSG( IsOpened(), (size_t)-1,
@@ -89,19 +89,19 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
     size_t nFiles = 0;
 
     // the name of this dir with path delimiter at the end
-    const wxString prefix = GetNameWithSep();
+    const std::string prefix = GetNameWithSep();
 
     // first, recurse into subdirs
     if ( flags & wxDIR_DIRS )
     {
-        wxString dirname;
+        std::string dirname;
         for ( bool cont = GetFirst(&dirname, {},
                                    (flags & ~(wxDIR_FILES | wxDIR_DOTDOT))
                                    | wxDIR_DIRS);
               cont;
               cont = cont && GetNext(&dirname) )
         {
-            const wxString fulldirname = prefix + dirname;
+            const std::string fulldirname = prefix + dirname;
 
             switch ( sink.OnDir(fulldirname) )
             {
@@ -174,7 +174,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
     {
         flags &= ~wxDIR_DIRS;
 
-        wxString filename;
+        std::string filename;
         bool cont = GetFirst(&filename, filespec, flags);
         while ( cont )
         {
@@ -201,30 +201,30 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
 class wxDirTraverserSimple : public wxDirTraverser
 {
 public:
-    explicit wxDirTraverserSimple(std::vector<wxString>& files) : m_files(files) { }
+    explicit wxDirTraverserSimple(std::vector<std::string>& files) : m_files(files) { }
 
     wxDirTraverserSimple(const wxDirTraverserSimple&) = delete;
 	wxDirTraverserSimple& operator=(const wxDirTraverserSimple&) = delete;
 
-    wxDirTraverseResult OnFile(const wxString& filename) override
+    wxDirTraverseResult OnFile(const std::string& filename) override
     {
         m_files.push_back(filename);
         return wxDirTraverseResult::Continue;
     }
 
-    wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
     {
         return wxDirTraverseResult::Continue;
     }
 
 private:
-    std::vector<wxString>& m_files;
+    std::vector<std::string>& m_files;
 };
 
 /* static */
-size_t wxDir::GetAllFiles(const wxString& dirname,
-                          std::vector<wxString>* files,
-                          const wxString& filespec,
+size_t wxDir::GetAllFiles(const std::string& dirname,
+                          std::vector<std::string>* files,
+                          const std::string& filespec,
                           unsigned int flags)
 {
     wxCHECK_MSG( files, (size_t)-1, "NULL pointer in wxDir::GetAllFiles" );
@@ -251,29 +251,29 @@ class wxDirTraverserFindFirst : public wxDirTraverser
 public:
     wxDirTraverserFindFirst& operator=(wxDirTraverserFindFirst&&) = delete;
 
-    wxDirTraverseResult OnFile(const wxString& filename) override
+    wxDirTraverseResult OnFile(const std::string& filename) override
     {
         m_file = filename;
         return wxDirTraverseResult::Stop;
     }
 
-    wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
     {
         return wxDirTraverseResult::Continue;
     }
 
-    const wxString& GetFile() const
+    const std::string& GetFile() const
     {
         return m_file;
     }
 
 private:
-    wxString m_file;
+    std::string m_file;
 };
 
 /* static */
-wxString wxDir::FindFirst(const wxString& dirname,
-                          const wxString& filespec,
+std::string wxDir::FindFirst(const std::string& dirname,
+                          const std::string& filespec,
                           unsigned int flags)
 {
     wxDir dir(dirname);
@@ -298,7 +298,7 @@ wxString wxDir::FindFirst(const wxString& dirname,
 class wxDirTraverserSumSize : public wxDirTraverser
 {
 public:
-    wxDirTraverseResult OnFile(const wxString& filename) override
+    wxDirTraverseResult OnFile(const std::string& filename) override
     {
         // wxFileName::GetSize won't use this class again as
         // we're passing it a file and not a directory;
@@ -320,22 +320,22 @@ public:
         return wxDirTraverseResult::Continue;
     }
 
-    wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
     {
         return wxDirTraverseResult::Continue;
     }
 
     wxULongLong GetTotalSize() const
         { return m_sz; }
-    const std::vector<wxString>& GetSkippedFiles() const
+    const std::vector<std::string>& GetSkippedFiles() const
         { return m_skippedFiles; }
 
 protected:
     wxULongLong m_sz;
-    std::vector<wxString> m_skippedFiles;
+    std::vector<std::string> m_skippedFiles;
 };
 
-wxULongLong wxDir::GetTotalSize(const wxString &dirname, std::vector<wxString>* filesSkipped)
+wxULongLong wxDir::GetTotalSize(const std::string &dirname, std::vector<std::string>* filesSkipped)
 {
     if (!wxDirExists(dirname))
         return wxInvalidSize;
@@ -363,19 +363,19 @@ wxULongLong wxDir::GetTotalSize(const wxString &dirname, std::vector<wxString>* 
 // ----------------------------------------------------------------------------
 
 /* static */
-bool wxDir::Exists(const wxString& dir)
+bool wxDir::Exists(const std::string& dir)
 {
     return wxFileName::DirExists(dir);
 }
 
 /* static */
-bool wxDir::Make(const wxString &dir, unsigned int perm, unsigned int flags)
+bool wxDir::Make(const std::string &dir, unsigned int perm, unsigned int flags)
 {
     return wxFileName::Mkdir(dir, perm, flags);
 }
 
 /* static */
-bool wxDir::Remove(const wxString &dir, unsigned int flags)
+bool wxDir::Remove(const std::string &dir, unsigned int flags)
 {
     return wxFileName::Rmdir(dir, flags);
 }

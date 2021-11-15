@@ -134,27 +134,27 @@ public:
         // from a full filename: if it terminates with a '/', a directory path
         // is constructed (the name will be empty), otherwise a file name and
         // extension are extracted from it
-    wxFileName( const wxString& fullpath, wxPathFormat format = wxPATH_NATIVE )
+    wxFileName( const std::string& fullpath, wxPathFormat format = wxPATH_NATIVE )
         { Assign( fullpath, format ); m_dontFollowLinks = false; }
 
         // from a directory name and a file name
-    wxFileName(const wxString& path,
-               const wxString& name,
+    wxFileName(const std::string& path,
+               const std::string& name,
                wxPathFormat format = wxPATH_NATIVE)
         { Assign(path, name, format); m_dontFollowLinks = false; }
 
         // from a volume, directory name, file base name and extension
-    wxFileName(const wxString& volume,
-               const wxString& path,
-               const wxString& name,
-               const wxString& ext,
+    wxFileName(const std::string& volume,
+               const std::string& path,
+               const std::string& name,
+               const std::string& ext,
                wxPathFormat format = wxPATH_NATIVE)
         { Assign(volume, path, name, ext, format); m_dontFollowLinks = false; }
 
         // from a directory name, file base name and extension
-    wxFileName(const wxString& path,
-               const wxString& name,
-               const wxString& ext,
+    wxFileName(const std::string& path,
+               const std::string& name,
+               const std::string& ext,
                wxPathFormat format = wxPATH_NATIVE)
         { Assign(path, name, ext, format); m_dontFollowLinks = false; }
 
@@ -162,49 +162,49 @@ public:
 
     void Assign(const wxFileName& filepath);
 
-    void Assign(const wxString& fullpath,
+    void Assign(const std::string& fullpath,
                 wxPathFormat format = wxPATH_NATIVE);
 
-    void Assign(const wxString& volume,
-                const wxString& path,
-                const wxString& name,
-                const wxString& ext,
+    void Assign(const std::string& volume,
+                const std::string& path,
+                const std::string& name,
+                const std::string& ext,
                 bool hasExt,
                 wxPathFormat format = wxPATH_NATIVE);
 
-    void Assign(const wxString& volume,
-                const wxString& path,
-                const wxString& name,
-                const wxString& ext,
+    void Assign(const std::string& volume,
+                const std::string& path,
+                const std::string& name,
+                const std::string& ext,
                 wxPathFormat format = wxPATH_NATIVE)
         { Assign(volume, path, name, ext, !ext.empty(), format); }
 
-    void Assign(const wxString& path,
-                const wxString& name,
+    void Assign(const std::string& path,
+                const std::string& name,
                 wxPathFormat format = wxPATH_NATIVE);
 
-    void Assign(const wxString& path,
-                const wxString& name,
-                const wxString& ext,
+    void Assign(const std::string& path,
+                const std::string& name,
+                const std::string& ext,
                 wxPathFormat format = wxPATH_NATIVE);
 
-    void AssignDir(const wxString& dir, wxPathFormat format = wxPATH_NATIVE);
+    void AssignDir(const std::string& dir, wxPathFormat format = wxPATH_NATIVE);
 
         // assorted assignment operators
 
     wxFileName& operator=(const wxFileName& filename)
         { if (this != &filename) Assign(filename); return *this; }
 
-    wxFileName& operator=(const wxString& filename)
+    wxFileName& operator=(const std::string& filename)
         { Assign(filename); return *this; }
 
         // reset all components to default, uninitialized state
     void Clear();
 
         // static pseudo constructors
-    static wxFileName FileName(const wxString& file,
+    static wxFileName FileName(const std::string& file,
                                wxPathFormat format = wxPATH_NATIVE);
-    static wxFileName DirName(const wxString& dir,
+    static wxFileName DirName(const std::string& dir,
                               wxPathFormat format = wxPATH_NATIVE);
 
     // file tests
@@ -219,16 +219,16 @@ public:
 
         // does the file with this name exist?
     bool FileExists() const;
-    static bool FileExists( const wxString &file );
+    static bool FileExists( const std::string &file );
 
         // does the directory with this name exist?
     bool DirExists() const;
-    static bool DirExists( const wxString &dir );
+    static bool DirExists( const std::string &dir );
 
         // does anything at all with this name (i.e. file, directory or some
         // other file system object such as a device, socket, ...) exist?
     bool Exists(unsigned int flags = wxFILE_EXISTS_ANY) const;
-    static bool Exists(const wxString& path, unsigned int flags = wxFILE_EXISTS_ANY);
+    static bool Exists(const std::string& path, unsigned int flags = wxFILE_EXISTS_ANY);
 
 
         // checks on most common flags for files/directories;
@@ -236,32 +236,32 @@ public:
         // available in wxFileName
 
     bool IsDirWritable() const { return wxIsWritable(GetPath()); }
-    static bool IsDirWritable(const wxString &path) { return wxDirExists(path) && wxIsWritable(path); }
+    static bool IsDirWritable(const std::string &path) { return wxDirExists(path) && wxIsWritable(path); }
 
     bool IsDirReadable() const { return wxIsReadable(GetPath()); }
-    static bool IsDirReadable(const wxString &path) { return wxDirExists(path) && wxIsReadable(path); }
+    static bool IsDirReadable(const std::string &path) { return wxDirExists(path) && wxIsReadable(path); }
 
     // NOTE: IsDirExecutable() is not present because the meaning of "executable"
     //       directory is very platform-dependent and also not so useful
 
     bool IsFileWritable() const { return wxIsWritable(GetFullPath()); }
-    static bool IsFileWritable(const wxString &path) { return wxFileExists(path) && wxIsWritable(path); }
+    static bool IsFileWritable(const std::string &path) { return wxFileExists(path) && wxIsWritable(path); }
 
     bool IsFileReadable() const { return wxIsReadable(GetFullPath()); }
-    static bool IsFileReadable(const wxString &path) { return wxFileExists(path) && wxIsReadable(path); }
+    static bool IsFileReadable(const std::string &path) { return wxFileExists(path) && wxIsReadable(path); }
 
     bool IsFileExecutable() const { return wxIsExecutable(GetFullPath()); }
-    static bool IsFileExecutable(const wxString &path) { return wxFileExists(path) && wxIsExecutable(path); }
+    static bool IsFileExecutable(const std::string &path) { return wxFileExists(path) && wxIsExecutable(path); }
 
         // set the file permissions to a combination of wxPosixPermissions enum
         // values
     bool SetPermissions(int permissions);
 
     // Returns the native path for a file URL
-    static wxFileName URLToFileName(const wxString& url);
+    static wxFileName URLToFileName(const std::string& url);
 
     // Returns the file URL for a native path
-    static wxString FileNameToURL(const wxFileName& filename);
+    static std::string FileNameToURL(const wxFileName& filename);
 
     // time functions
 #if wxUSE_DATETIME
@@ -292,32 +292,32 @@ public:
     // various file/dir operations
 
         // retrieve the value of the current working directory
-    void AssignCwd(const wxString& volume = {});
-    static wxString GetCwd(const wxString& volume = {});
+    void AssignCwd(const std::string& volume = {});
+    static std::string GetCwd(const std::string& volume = {});
 
         // change the current working directory
     bool SetCwd() const;
-    static bool SetCwd( const wxString &cwd );
+    static bool SetCwd( const std::string &cwd );
 
         // get the value of user home (Unix only mainly)
     void AssignHomeDir();
-    static wxString GetHomeDir();
+    static std::string GetHomeDir();
 
         // get the system temporary directory
-    static wxString GetTempDir();
+    static std::string GetTempDir();
 
 #if wxUSE_FILE || wxUSE_FFILE
         // get a temp file name starting with the specified prefix
-    void AssignTempFileName(const wxString& prefix);
-    static wxString CreateTempFileName(const wxString& prefix);
+    void AssignTempFileName(const std::string& prefix);
+    static std::string CreateTempFileName(const std::string& prefix);
 #endif // wxUSE_FILE
 
 #if wxUSE_FILE
         // get a temp file name starting with the specified prefix and open the
         // file passed to us using this name for writing (atomically if
         // possible)
-    void AssignTempFileName(const wxString& prefix, wxFile *fileTemp);
-    static wxString CreateTempFileName(const wxString& prefix,
+    void AssignTempFileName(const std::string& prefix, wxFile *fileTemp);
+    static std::string CreateTempFileName(const std::string& prefix,
                                        wxFile *fileTemp);
 #endif // wxUSE_FILE
 
@@ -325,18 +325,18 @@ public:
         // get a temp file name starting with the specified prefix and open the
         // file passed to us using this name for writing (atomically if
         // possible)
-    void AssignTempFileName(const wxString& prefix, wxFFile *fileTemp);
-    static wxString CreateTempFileName(const wxString& prefix,
+    void AssignTempFileName(const std::string& prefix, wxFFile *fileTemp);
+    static std::string CreateTempFileName(const std::string& prefix,
                                        wxFFile *fileTemp);
 #endif // wxUSE_FFILE
 
     // directory creation and removal.
     bool Mkdir(int perm = wxS_DIR_DEFAULT, unsigned int flags = 0) const;
-    static bool Mkdir(const wxString &dir, int perm = wxS_DIR_DEFAULT,
+    static bool Mkdir(const std::string &dir, int perm = wxS_DIR_DEFAULT,
                       unsigned int flags = 0);
 
     bool Rmdir(unsigned int flags = 0) const;
-    static bool Rmdir(const wxString &dir, unsigned int flags = 0);
+    static bool Rmdir(const std::string &dir, unsigned int flags = 0);
 
     // operations on the path
 
@@ -346,7 +346,7 @@ public:
         //
         // this may be done using another (than current) value of cwd
     bool Normalize(unsigned int flags = wxPATH_NORM_ALL,
-                   const wxString& cwd = {},
+                   const std::string& cwd = {},
                    wxPathFormat format = wxPATH_NATIVE);
 
         // get a path path relative to the given base directory, i.e. opposite
@@ -357,13 +357,13 @@ public:
         // returns true if the file name was modified, false if we failed to do
         // anything with it (happens when the file is on a different volume,
         // for example)
-    bool MakeRelativeTo(const wxString& pathBase = {},
+    bool MakeRelativeTo(const std::string& pathBase = {},
                         wxPathFormat format = wxPATH_NATIVE);
 
         // make the path absolute
         //
         // this may be done using another (than current) value of cwd
-    bool MakeAbsolute(const wxString& cwd = {},
+    bool MakeAbsolute(const std::string& cwd = {},
                       wxPathFormat format = wxPATH_NATIVE)
         { return Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE |
                            wxPATH_NORM_TILDE, cwd, format); }
@@ -394,21 +394,21 @@ public:
 #if defined(__WIN32__) && wxUSE_OLE
         // if the path is a shortcut, return the target and optionally,
         // the arguments
-    bool GetShortcutTarget(const wxString& shortcutPath,
-                           wxString& targetFilename,
-                           wxString* arguments = nullptr) const;
+    bool GetShortcutTarget(const std::string& shortcutPath,
+                           std::string& targetFilename,
+                           std::string* arguments = nullptr) const;
 #endif
 
         // if the path contains the value of the environment variable named envname
         // then this function replaces it with the string obtained from
-        //    wxString::Format(replacementFmtString, value_of_envname_variable)
+        //    std::string::Format(replacementFmtString, value_of_envname_variable)
         //
         // Example:
         //    wxFileName fn("/usr/openwin/lib/someFile");
         //    fn.ReplaceEnvVariable("OPENWINHOME");
         //         // now fn.GetFullPath() == "$OPENWINHOME/lib/someFile"
-    bool ReplaceEnvVariable(const wxString& envname,
-                            const wxString& replacementFmtString = "$%s",
+    bool ReplaceEnvVariable(const std::string& envname,
+                            const std::string& replacementFmtString = "$%s",
                             wxPathFormat format = wxPATH_NATIVE);
 
         // replaces, if present in the path, the home directory for the given user
@@ -429,9 +429,9 @@ public:
         { return !SameAs(filename); }
 
         // compare with a filename string interpreted as a native file name
-    bool operator==(const wxString& filename) const
+    bool operator==(const std::string& filename) const
         { return SameAs(wxFileName(filename)); }
-    bool operator!=(const wxString& filename) const
+    bool operator!=(const std::string& filename) const
         { return !SameAs(wxFileName(filename)); }
 
         // are the file names of this type cases sensitive?
@@ -446,21 +446,21 @@ public:
 
     // Returns the characters that aren't allowed in filenames
     // on the specified platform.
-    static wxString GetForbiddenChars(wxPathFormat format = wxPATH_NATIVE);
+    static std::string GetForbiddenChars(wxPathFormat format = wxPATH_NATIVE);
 
     // Information about path format
 
     // get the string separating the volume from the path for this format,
     // return an empty string if this format doesn't support the notion of
     // volumes at all
-    static wxString GetVolumeSeparator(wxPathFormat format = wxPATH_NATIVE);
+    static std::string GetVolumeSeparator(wxPathFormat format = wxPATH_NATIVE);
 
     // get the string of path separators for this format
-    static wxString GetPathSeparators(wxPathFormat format = wxPATH_NATIVE);
+    static std::string GetPathSeparators(wxPathFormat format = wxPATH_NATIVE);
 
     // get the string of path terminators, i.e. characters which terminate the
     // path
-    static wxString GetPathTerminators(wxPathFormat format = wxPATH_NATIVE);
+    static std::string GetPathTerminators(wxPathFormat format = wxPATH_NATIVE);
 
     // get the canonical path separator for this format
     static wxUniChar GetPathSeparator(wxPathFormat format = wxPATH_NATIVE)
@@ -471,53 +471,53 @@ public:
 
     // is this is a DOS path which beings with a windows unique volume name
     // ('\\?\Volume{guid}\')?
-    static bool IsMSWUniqueVolumeNamePath(const wxString& path,
+    static bool IsMSWUniqueVolumeNamePath(const std::string& path,
                                           wxPathFormat format = wxPATH_NATIVE);
 
     // Dir accessors
     size_t GetDirCount() const { return m_dirs.size(); }
-    bool AppendDir(const wxString& dir);
-    void PrependDir(const wxString& dir);
-    bool InsertDir(size_t before, const wxString& dir);
+    bool AppendDir(const std::string& dir);
+    void PrependDir(const std::string& dir);
+    bool InsertDir(size_t before, const std::string& dir);
     void RemoveDir(size_t pos);
     void RemoveLastDir() { RemoveDir(GetDirCount() - 1); }
 
     // Other accessors
-    void SetExt( const wxString &ext )          { m_ext = ext; m_hasExt = !m_ext.empty(); }
+    void SetExt( const std::string &ext )          { m_ext = ext; m_hasExt = !m_ext.empty(); }
     void ClearExt()                             { m_ext.clear(); m_hasExt = false; }
     void SetEmptyExt()                          { m_ext.clear(); m_hasExt = true; }
-    wxString GetExt() const                     { return m_ext; }
+    std::string GetExt() const                     { return m_ext; }
     bool HasExt() const                         { return m_hasExt; }
 
-    void SetName( const wxString &name )        { m_name = name; }
-    wxString GetName() const                    { return m_name; }
+    void SetName( const std::string &name )        { m_name = name; }
+    std::string GetName() const                    { return m_name; }
     bool HasName() const                        { return !m_name.empty(); }
 
-    void SetVolume( const wxString &volume )    { m_volume = volume; }
-    wxString GetVolume() const                  { return m_volume; }
+    void SetVolume( const std::string &volume )    { m_volume = volume; }
+    std::string GetVolume() const                  { return m_volume; }
     bool HasVolume() const                      { return !m_volume.empty(); }
 
     // full name is the file name + extension (but without the path)
-    void SetFullName(const wxString& fullname);
-    wxString GetFullName() const;
+    void SetFullName(const std::string& fullname);
+    std::string GetFullName() const;
 
-    const std::vector<wxString>& GetDirs() const        { return m_dirs; }
+    const std::vector<std::string>& GetDirs() const        { return m_dirs; }
 
     // flags are combination of wxPATH_GET_XXX flags
-    wxString GetPath(unsigned int flags = wxPATH_GET_VOLUME,
+    std::string GetPath(unsigned int flags = wxPATH_GET_VOLUME,
                      wxPathFormat format = wxPATH_NATIVE) const;
 
     // Replace current path with this one
-    void SetPath( const wxString &path, wxPathFormat format = wxPATH_NATIVE );
+    void SetPath( const std::string &path, wxPathFormat format = wxPATH_NATIVE );
 
     // Construct full path with name and ext
-    wxString GetFullPath( wxPathFormat format = wxPATH_NATIVE ) const;
+    std::string GetFullPath( wxPathFormat format = wxPATH_NATIVE ) const;
 
     // Return the short form of the path (returns identity on non-Windows platforms)
-    wxString GetShortPath() const;
+    std::string GetShortPath() const;
 
     // Return the long form of the path (returns identity on non-Windows platforms)
-    wxString GetLongPath() const;
+    std::string GetLongPath() const;
 
     // Is this a file or directory (not necessarily an existing one)
     bool IsDir() const { return m_name.empty() && m_ext.empty(); }
@@ -529,43 +529,43 @@ public:
 
         // split a fullpath into the volume, path, (base) name and extension
         // (all of the pointers can be NULL)
-    static void SplitPath(const wxString& fullpath,
-                          wxString *volume,
-                          wxString *path,
-                          wxString *name,
-                          wxString *ext,
+    static void SplitPath(const std::string& fullpath,
+                          std::string *volume,
+                          std::string *path,
+                          std::string *name,
+                          std::string *ext,
                           bool *hasExt = nullptr,
                           wxPathFormat format = wxPATH_NATIVE);
 
-    static void SplitPath(const wxString& fullpath,
-                          wxString *volume,
-                          wxString *path,
-                          wxString *name,
-                          wxString *ext,
+    static void SplitPath(const std::string& fullpath,
+                          std::string *volume,
+                          std::string *path,
+                          std::string *name,
+                          std::string *ext,
                           wxPathFormat format)
     {
         SplitPath(fullpath, volume, path, name, ext, nullptr, format);
     }
 
         // compatibility version: volume is part of path
-    static void SplitPath(const wxString& fullpath,
-                          wxString *path,
-                          wxString *name,
-                          wxString *ext,
+    static void SplitPath(const std::string& fullpath,
+                          std::string *path,
+                          std::string *name,
+                          std::string *ext,
                           wxPathFormat format = wxPATH_NATIVE);
 
         // split a path into volume and pure path part
-    static void SplitVolume(const wxString& fullpathWithVolume,
-                            wxString *volume,
-                            wxString *path,
+    static void SplitVolume(const std::string& fullpathWithVolume,
+                            std::string *volume,
+                            std::string *path,
                             wxPathFormat format = wxPATH_NATIVE);
 
         // strip the file extension: "foo.bar" => "foo" (but ".baz" => ".baz")
-    static wxString StripExtension(const wxString& fullpath);
+    static std::string StripExtension(const std::string& fullpath);
 
 #ifdef wxHAS_FILESYSTEM_VOLUMES
         // return the string representing a file system volume, or drive
-    static wxString GetVolumeString(char drive, unsigned int flags = wxPATH_GET_SEPARATOR);
+    static std::string GetVolumeString(char drive, unsigned int flags = wxPATH_GET_SEPARATOR);
 #endif // wxHAS_FILESYSTEM_VOLUMES
 
     // File size
@@ -573,33 +573,33 @@ public:
 #if wxUSE_LONGLONG
         // returns the size of the given filename
     wxULongLong GetSize() const;
-    static wxULongLong GetSize(const wxString &file);
+    static wxULongLong GetSize(const std::string &file);
 
         // returns the size in a human readable form
-    wxString
-    GetHumanReadableSize(const wxString& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
+    std::string
+    GetHumanReadableSize(const std::string& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
                          int precision = 1,
                          wxSizeConvention conv = wxSizeConvention::Traditional) const;
-    static wxString
+    static std::string
     GetHumanReadableSize(const wxULongLong& sz,
-                         const wxString& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
+                         const std::string& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
                          int precision = 1,
                          wxSizeConvention conv = wxSizeConvention::Traditional);
 #endif // wxUSE_LONGLONG
 
 private:
     // check whether this dir is valid for Append/Prepend/InsertDir()
-    static bool IsValidDirComponent(const wxString& dir);
+    static bool IsValidDirComponent(const std::string& dir);
 
     // the drive/volume/device specification (always empty for Unix)
-    wxString        m_volume;
+    std::string        m_volume;
 
     // the path components of the file
-    std::vector<wxString>   m_dirs;
+    std::vector<std::string>   m_dirs;
 
     // the file name and extension (empty for directories)
-    wxString        m_name,
-                    m_ext;
+    std::string        m_name;
+    std::string        m_ext;
 
     // when m_dirs is empty it may mean either that we have no path at all or
     // that our path is '/', i.e. the root directory

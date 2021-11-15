@@ -105,6 +105,26 @@ constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char
     return output;
 }
 
+// Join a '\0' delimited array of chars into a vector of strings.
+std::vector<std::string> JoinChArray(std::span<const char> chSpan)
+{
+    std::vector<std::string> vec;
+
+    for(auto chIter = chSpan.begin(); chIter != chSpan.end(); std::next(chIter))
+    {
+        auto chBeginIter = chIter;
+
+        while(*chIter != '\0')
+        {
+            chIter = std::next(chIter);
+        }
+
+        vec.emplace_back(chBeginIter, chIter);
+    }
+
+    return vec;
+}
+
 // Delimit strings from a span of them.
 std::string JoinStrings(std::span<const std::string> strSpan, char delim)
 {

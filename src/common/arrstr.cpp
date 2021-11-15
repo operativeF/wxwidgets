@@ -96,9 +96,9 @@ wxString wxJoin(const std::vector<wxString>& arr, const wxChar sep, const wxChar
     return str;
 }
 
-std::vector<wxString> wxSplit(const wxString& str, const wxChar sep, const wxChar escape)
+std::vector<std::string> wxSplit(const wxString& str, const wxChar sep, const wxChar escape)
 {
-    if ( escape == wxT('\0') )
+    if ( escape == '\0' )
     {
         // simple case: we don't need to honour the escape character
         return wxStringTokenize(str, sep, wxStringTokenizerMode::RetEmptyAll);

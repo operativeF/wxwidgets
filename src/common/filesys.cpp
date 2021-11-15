@@ -23,7 +23,7 @@
 // wxFSFile
 // ----------------------------------------------------------------------------
 
-const wxString& wxFSFile::GetMimeType() const
+const std::string& wxFSFile::GetMimeType() const
 {
     if ( m_MimeType.empty() && !m_Location.empty() )
     {
@@ -40,10 +40,10 @@ const wxString& wxFSFile::GetMimeType() const
 
 
 /* static */
-wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
+std::string wxFileSystemHandler::GetMimeTypeFromExt(const std::string& location)
 {
-    wxString ext, mime;
-    wxString loc = GetRightLocation(location);
+    std::string ext, mime;
+    std::string loc = GetRightLocation(location);
     int l = loc.length();
     int l2 = l;
 
@@ -53,12 +53,12 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 
         if ( c == wxT('#') )
             l2 = i + 1;
-        if ( c == wxT('.') )
+        if ( c == '.' )
         {
-            ext = loc.Right(l2-i-1);
+            ext = loc.substr(l2-i-1);
             break;
         }
-        if ( (c == wxT('/')) || (c == wxT('\\')) || (c == wxT(':')) )
+        if ( (c == '/') || (c == wxT('\\')) || (c == ':') )
             return {};
     }
 
@@ -76,30 +76,30 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
             static const wxFileTypeInfo fallbacks[] =
             {
                 wxFileTypeInfo("image/jpeg",
-                    wxString{},
-                    wxString{},
+                    std::string{},
+                    std::string{},
                     "JPEG image (from fallback)",
-                    "jpg", wxT("jpeg"), wxT("JPG"), "JPEG", nullptr),
+                    "jpg", "jpeg", "JPG", "JPEG", nullptr),
                 wxFileTypeInfo("image/gif",
-                    wxString{},
-                    wxString{},
+                    std::string{},
+                    std::string{},
                     "GIF image (from fallback)",
                     "gif", "GIF", nullptr),
                 wxFileTypeInfo("image/png",
-                    wxString{},
-                    wxString{},
+                    std::string{},
+                    std::string{},
                     "PNG image (from fallback)",
                     "png", "PNG", nullptr),
                 wxFileTypeInfo("image/bmp",
-                    wxString{},
-                    wxString{},
+                    std::string{},
+                    std::string{},
                     "windows bitmap image (from fallback)",
                     "bmp", "BMP", nullptr),
                 wxFileTypeInfo("text/html",
-                    wxString{},
-                    wxString{},
+                    std::string{},
+                    std::string{},
                     "HTML document (from fallback)",
-                    "htm", wxT("html"), wxT("HTM"), "HTML", nullptr),
+                    "htm", "html", "HTM", "HTML", nullptr),
                 // must terminate the table with this!
                 wxFileTypeInfo()
             };
@@ -120,15 +120,15 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 #endif // wxUSE_MIMETYPE
 
     // Without wxUSE_MIMETYPE, recognize just a few hardcoded special cases.
-    if ( ext.IsSameAs("htm"), false || ext.IsSameAs("html", false) )
+    if ( wx::utils::IsSameAsNoCase("htm", ext) || wx::utils::IsSameAsNoCase("html", ext) )
         return "text/html";
-    if ( ext.IsSameAs("jpg"), false || ext.IsSameAs("jpeg", false) )
+    if ( wx::utils::IsSameAsNoCase("jpg", ext) || wx::utils::IsSameAsNoCase("jpeg", ext) )
         return "image/jpeg";
-    if ( ext.IsSameAs("gif", false) )
+    if ( wx::utils::IsSameAsNoCase("gif", ext) )
         return "image/gif";
-    if ( ext.IsSameAs("png", false) )
+    if ( wx::utils::IsSameAsNoCase("png", ext) )
         return "image/png";
-    if ( ext.IsSameAs("bmp", false) )
+    if ( wx::utils::IsSameAsNoCase("bmp", ext) )
         return "image/bmp";
 
     return {};
@@ -137,23 +137,23 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 
 
 /* static */
-wxString wxFileSystemHandler::GetProtocol(const wxString& location)
+std::string wxFileSystemHandler::GetProtocol(const std::string& location)
 {
-    wxString s;
+    std::string s;
     int i, l = location.length();
     bool fnd = false;
 
     for (i = l-1; (i >= 0) && ((location[i] != wxT('#')) || (!fnd)); i--) {
-        if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/)) fnd = true;
+        if ((location[i] == ':') && (i != 1 /*win: C:\path*/)) fnd = true;
     }
     if (!fnd) return "file";
-    for (++i; (i < l) && (location[i] != wxT(':')); i++) s << location[i];
+    for (++i; (i < l) && (location[i] != ':'); i++) s += location[i];
     return s;
 }
 
 
 /* static */
-wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
+std::string wxFileSystemHandler::GetLeftLocation(const std::string& location)
 {
     if(location.empty())
         return {};
@@ -161,13 +161,13 @@ wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
     bool fnd = false;
 
     for (int i = location.length()-1; i >= 0; i--) {
-        if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/))
+        if ((location[i] == ':') && (i != 1 /*win: C:\path*/))
         {
             fnd = true;
         }
         else if (fnd && (location[i] == wxT('#')))
         {
-            return location.Left(i);
+            return location.substr(0, i);
         }
     }
 
@@ -175,20 +175,20 @@ wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
 }
 
 /* static */
-wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
+std::string wxFileSystemHandler::GetRightLocation(const std::string& location)
 {
     int i, len = location.length();
     for (i = len-1; i >= 0; i--)
     {
         if (location[i] == wxT('#'))
             len = i;
-        if (location[i] != wxT(':'))
+        if (location[i] != ':')
             continue;
 
         // C: on Windows
         if (i == 1)
             continue;
-        if (i >= 2 && wxIsalpha(location[i-1]) && location[i-2] == wxT('/'))
+        if (i >= 2 && wxIsalpha(location[i-1]) && location[i-2] == '/')
             continue;
 
         // Could be the protocol
@@ -196,38 +196,38 @@ wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
     }
     if (i == 0) return {};
 
-    const static wxString protocol("file:");
+    const static std::string protocol("file:");
     if (i < (int)protocol.length() - 1 || location.compare(0, i + 1, protocol))
-        return location.Mid(i + 1, len - i - 1);
+        return location.substr(i + 1, len - i - 1);
 
     const int s = ++i; // Start position
     // Check if there are three '/'s after "file:"
     const int end = std::min(len, s + 3);
-    while (i < end && location[i] == wxT('/'))
+    while (i < end && location[i] == '/')
         i++;
     if (i == s + 2) // Host is specified, e.g. "file://host/path"
-        return location.Mid(s, len - s);
+        return location.substr(s, len - s);
     if (i > s)
     {
         // Remove the last '/' if it is preceding "C:/...".
         // Otherwise, keep it.
-        if (i + 1 >= len || location[i + 1] != wxT(':'))
+        if (i + 1 >= len || location[i + 1] != ':')
             i--;
         else if (i + 4 < len)
         {
             // Check if ':' was encoded
-            const static wxString colonLower("%3a");
-            const static wxString colonUpper("%3A");
-            wxString sub =location.Mid(i + 1, 3);
+            const static std::string colonLower("%3a");
+            const static std::string colonUpper("%3A");
+            std::string sub = location.substr(i + 1, 3);
             if (sub == colonLower || sub == colonUpper)
                 i--;
         }
     }
-    return location.Mid(i, len - i);
+    return location.substr(i, len - i);
 }
 
 /* static */
-wxString wxFileSystemHandler::GetAnchor(const wxString& location)
+std::string wxFileSystemHandler::GetAnchor(const std::string& location)
 {
     const int l = location.length();
 
@@ -235,21 +235,21 @@ wxString wxFileSystemHandler::GetAnchor(const wxString& location)
         wxChar c;
         c = location[i];
         if (c == wxT('#'))
-            return location.Right(l-i-1);
-        else if ((c == wxT('/')) || (c == wxT('\\')) || (c == wxT(':')))
+            return location.substr(l-i-1);
+        else if ((c == '/') || (c == wxT('\\')) || (c == ':'))
             break;
     }
     return {};
 }
 
 
-wxString wxFileSystemHandler::FindFirst(const wxString& WXUNUSED(spec),
+std::string wxFileSystemHandler::FindFirst(const std::string& WXUNUSED(spec),
                                         unsigned int WXUNUSED(flags))
 {
     return {};
 }
 
-wxString wxFileSystemHandler::FindNext()
+std::string wxFileSystemHandler::FindNext()
 {
     return {};
 }
@@ -258,17 +258,17 @@ wxString wxFileSystemHandler::FindNext()
 // wxLocalFSHandler
 //--------------------------------------------------------------------------------
 
-bool wxLocalFSHandler::CanOpen(const wxString& location)
+bool wxLocalFSHandler::CanOpen(const std::string& location)
 {
     return GetProtocol(location) == "file";
 }
 
-wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const wxString& location)
+wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const std::string& location)
 {
     // location has Unix path separators
-    wxString right = GetRightLocation(location);
+    std::string right = GetRightLocation(location);
     wxFileName fn = wxFileName::URLToFileName(right);
-    wxString fullpath = ms_root + fn.GetFullPath();
+    std::string fullpath = ms_root + fn.GetFullPath();
 
     if (!wxFileExists(fullpath))
         return nullptr;
@@ -299,19 +299,19 @@ wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const wxString&
 }
 
 // TODO: Lambda
-wxString wxLocalFSHandler::FindFirst(const wxString& spec, unsigned int flags)
+std::string wxLocalFSHandler::FindFirst(const std::string& spec, unsigned int flags)
 {
     wxFileName fn = wxFileName::URLToFileName(GetRightLocation(spec));
-    wxString found = wxFindFirstFile(ms_root + fn.GetFullPath(), flags);
+    std::string found = wxFindFirstFile(ms_root + fn.GetFullPath(), flags);
     if ( found.empty() )
         return found;
     return wxFileSystem::FileNameToURL(found);
 }
 
 // TODO: Lambda
-wxString wxLocalFSHandler::FindNext()
+std::string wxLocalFSHandler::FindNext()
 {
-    wxString found = wxFindNextFile();
+    std::string found = wxFindNextFile();
     if ( found.empty() )
         return found;
     return wxFileSystem::FileNameToURL(found);
@@ -331,68 +331,68 @@ wxFileSystem::~wxFileSystem()
 }
 
 
-static wxString MakeCorrectPath(const wxString& path)
+static std::string MakeCorrectPath(const std::string& path)
 {
-    wxString p(path);
-    wxString r;
+    std::string p(path);
+    std::string r;
     int i, j;
 
     int cnt = p.length();
     
     for (i = 0; i < cnt; i++)
     {
-      if (p.GetChar(i) == wxT('\\'))
-        p.GetWritableChar(i) = wxT('/'); // Want to be windows-safe
+      if (p[i] == '\\')
+        p[i] = '/'; // Want to be windows-safe
     }
 
-    if (p.Left(2) == "./") { p = p.Mid(2); cnt -= 2; }
+    if (p.substr(0, 2) == "./") { p = p.substr(2); cnt -= 2; }
 
     if (cnt < 3) return p;
 
-    r << p.GetChar(0) << p.GetChar(1);
+    r += p[0] + p[1];
 
     // skip trailing ../.., if any
-    for (i = 2; i < cnt && (p.GetChar(i) == wxT('/') || p.GetChar(i) == wxT('.')); i++) r << p.GetChar(i);
+    for (i = 2; i < cnt && (p[i] == '/' || p[i] == '.'); i++) r += p[i];
 
     // remove back references: translate dir1/../dir2 to dir2
     for (; i < cnt; i++)
     {
-        r << p.GetChar(i);
-        if (p.GetChar(i) == wxT('/') && p.GetChar(i-1) == wxT('.') && p.GetChar(i-2) == wxT('.'))
+        r += p[i];
+        if (p[i] == '/' && p[i-1] == '.' && p[i-2] == '.')
         {
-            for (j = r.length() - 2; j >= 0 && r.GetChar(j) != wxT('/') && r.GetChar(j) != wxT(':'); j--) {}
-            if (j >= 0 && r.GetChar(j) != wxT(':'))
+            for (j = r.length() - 2; j >= 0 && r[j] != '/' && r[j] != ':'; j--) {}
+            if (j >= 0 && r[j] != ':')
             {
-                for (j = j - 1; j >= 0 && r.GetChar(j) != wxT('/') && r.GetChar(j) != wxT(':'); j--) {}
+                for (j = j - 1; j >= 0 && r[j] != '/' && r[j] != ':'; j--) {}
                 r.Remove(j + 1);
             }
         }
     }
 
-    for (; i < cnt; i++) r << p.GetChar(i);
+    for (; i < cnt; i++) r += p[i];
 
     return r;
 }
 
 
-void wxFileSystem::ChangePathTo(const wxString& location, bool is_dir)
+void wxFileSystem::ChangePathTo(const std::string& location, bool is_dir)
 {
 
     m_Path = MakeCorrectPath(location);
 
     if (is_dir)
     {
-        if (!m_Path.empty() && m_Path.Last() != wxT('/') && m_Path.Last() != wxT(':'))
-            m_Path << wxT('/');
+        if (!m_Path.empty() && m_Path.back() != '/' && m_Path.back() != ':')
+            m_Path += '/';
     }
     else
     {
         int i, pathpos = -1;
         for (i = m_Path.length()-1; i >= 0; i--)
         {
-            if (m_Path[(unsigned int) i] == wxT('/'))
+            if (m_Path[(unsigned int) i] == '/')
             {
-                if ((i > 1) && (m_Path[(unsigned int) (i-1)] == wxT('/')) && (m_Path[(unsigned int) (i-2)] == wxT(':')))
+                if ((i > 1) && (m_Path[(unsigned int) (i-1)] == '/') && (m_Path[(unsigned int) (i-2)] == ':'))
                 {
                     i -= 2;
                     continue;
@@ -403,7 +403,7 @@ void wxFileSystem::ChangePathTo(const wxString& location, bool is_dir)
                     break;
                 }
             }
-            else if (m_Path[(unsigned int) i] == wxT(':')) {
+            else if (m_Path[(unsigned int) i] == ':') {
                 pathpos = i;
                 break;
             }
@@ -412,7 +412,7 @@ void wxFileSystem::ChangePathTo(const wxString& location, bool is_dir)
         {
             for (i = 0; i < (int) m_Path.length(); i++)
             {
-                if (m_Path[(unsigned int) i] == wxT(':'))
+                if (m_Path[(unsigned int) i] == ':')
                 {
                     m_Path.Remove(i+1);
                     break;
@@ -449,12 +449,12 @@ wxFileSystemHandler *wxFileSystem::MakeLocal(wxFileSystemHandler *h)
 
 
 
-wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
+wxFSFile* wxFileSystem::OpenFile(const std::string& location, unsigned int flags)
 {
     if ((flags & wxFS_READ) == 0)
         return nullptr;
 
-    wxString loc = MakeCorrectPath(location);
+    std::string loc = MakeCorrectPath(location);
     wxFSFile *s = nullptr;
     wxList::compatibility_iterator node;
 
@@ -464,7 +464,7 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
     {
         switch ( loc[i].GetValue() )
         {
-            case wxT('/') : case wxT(':') : case wxT('#') :
+            case '/' : case ':' : case wxT('#') :
                 meta = loc[i];
                 break;
         }
@@ -473,9 +473,9 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
     m_LastName.clear();
 
     // try relative paths first :
-    if (meta != wxT(':') && !m_Path.empty())
+    if (meta != ':' && !m_Path.empty())
     {
-        const wxString fullloc = m_Path + loc;
+        const std::string fullloc = m_Path + loc;
         node = m_Handlers.GetFirst();
         while (node)
         {
@@ -518,15 +518,15 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
 
 
 
-wxString wxFileSystem::FindFirst(const wxString& spec, unsigned int flags)
+std::string wxFileSystem::FindFirst(const std::string& spec, unsigned int flags)
 {
     wxList::compatibility_iterator node;
-    wxString spec2(spec);
+    std::string spec2(spec);
 
     m_FindFileHandler = nullptr;
 
     for (int i = spec2.length()-1; i >= 0; i--)
-        if (spec2[(unsigned int) i] == wxT('\\')) spec2.GetWritableChar(i) = wxT('/'); // Want to be windows-safe
+        if (spec2[(unsigned int) i] == wxT('\\')) spec2[i] = '/'; // Want to be windows-safe
 
     node = m_Handlers.GetFirst();
     while (node)
@@ -557,21 +557,21 @@ wxString wxFileSystem::FindFirst(const wxString& spec, unsigned int flags)
 
 
 
-wxString wxFileSystem::FindNext()
+std::string wxFileSystem::FindNext()
 {
     if (m_FindFileHandler == nullptr) return {};
     else return m_FindFileHandler -> FindNext();
 }
 
-bool wxFileSystem::FindFileInPath(wxString *pStr,
-                                  const wxString& path,
-                                  const wxString& basename)
+bool wxFileSystem::FindFileInPath(std::string *pStr,
+                                  const std::string& path,
+                                  const std::string& basename)
 {
     // we assume that it's not empty
     wxCHECK_MSG( !basename.empty(), false,
                 "empty file name in wxFileSystem::FindFileInPath");
 
-    wxString name;
+    std::string name;
     // skip path separator in the beginning of the file name if present
     if ( wxIsPathSeparator(basename[0u]) )
         name = basename.substr(1);
@@ -581,7 +581,7 @@ bool wxFileSystem::FindFileInPath(wxString *pStr,
     wxStringTokenizer tokenizer(path, wxPATH_SEP);
     while ( tokenizer.HasMoreTokens() )
     {
-        wxString strFile = tokenizer.GetNextToken();
+        std::string strFile = tokenizer.GetNextToken();
         if ( !wxEndsWithPathSeparator(strFile) )
             strFile += wxFILE_SEP_PATH;
         strFile += name;
@@ -619,7 +619,7 @@ wxFileSystemHandler* wxFileSystem::RemoveHandler(wxFileSystemHandler *handler)
 }
 
 
-bool wxFileSystem::HasHandlerForPath(const wxString &location)
+bool wxFileSystem::HasHandlerForPath(const std::string &location)
 {
     for ( wxList::compatibility_iterator node = m_Handlers.GetFirst();
            node; node = node->GetNext() )
@@ -638,7 +638,7 @@ void wxFileSystem::CleanUpHandlers()
 }
 
 // Returns the native path for a file URL
-wxFileName wxFileSystem::URLToFileName(const wxString& url)
+wxFileName wxFileSystem::URLToFileName(const std::string& url)
 {
     return wxFileName::URLToFileName( url );
 }
@@ -646,7 +646,7 @@ wxFileName wxFileSystem::URLToFileName(const wxString& url)
 // Returns the file URL for a native path
 std::string wxFileSystem::FileNameToURL(const wxFileName& filename)
 {
-    return wxFileName::FileNameToURL( filename ).ToStdString();
+    return wxFileName::FileNameToURL( filename );
 }
 
 
@@ -679,7 +679,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemModule, wxModule);
 
 //// wxFSInputStream
 
-wxFSInputStream::wxFSInputStream(const wxString& filename, unsigned int flags)
+wxFSInputStream::wxFSInputStream(const std::string& filename, unsigned int flags)
 {
     wxFileSystem fs;
     m_file = fs.OpenFile(filename, flags | wxFS_READ);

@@ -56,8 +56,8 @@ bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
     if ( !(flags & wxDL_VERBATIM) )
     {
         // and also check that the libname doesn't already have it
-        wxString ext;
-        wxFileName::SplitPath(libname, nullptr, nullptr, &ext);
+        std::string ext;
+        wxFileName::SplitPath(libname.ToStdString(), nullptr, nullptr, &ext);
         if ( ext.empty() )
         {
             libname += GetDllExt(wxDynamicLibraryCategory::Module);

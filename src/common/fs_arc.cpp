@@ -48,7 +48,7 @@ public:
     void Release() { if (--m_refcount == 0) delete this; }
     wxArchiveFSCacheDataImpl *AddRef() { m_refcount++; return this; }
 
-    wxArchiveEntry *Get(const wxString& name);
+    wxArchiveEntry *Get(const std::string& name);
     wxInputStream *NewStream() const;
 
     wxArchiveFSEntry *GetNext(wxArchiveFSEntry *fse);
@@ -125,7 +125,7 @@ void wxArchiveFSCacheDataImpl::CloseStreams()
     wxDELETE(m_stream);
 }
 
-wxArchiveEntry *wxArchiveFSCacheDataImpl::Get(const wxString& name)
+wxArchiveEntry *wxArchiveFSCacheDataImpl::Get(const std::string& name)
 {
     wxArchiveFSEntryHash::iterator it = m_hash.find(name);
 
@@ -197,7 +197,7 @@ public:
 
     ~wxArchiveFSCacheData() { if (m_impl) m_impl->Release(); }
 
-    wxArchiveEntry *Get(const wxString& name) { return m_impl->Get(name); }
+    wxArchiveEntry *Get(const std::string& name) { return m_impl->Get(name); }
     wxInputStream *NewStream() const { return m_impl->NewStream(); }
     wxArchiveFSEntry *GetNext(wxArchiveFSEntry *fse)
         { return m_impl->GetNext(fse); }
@@ -255,18 +255,18 @@ WX_DECLARE_STRING_HASH_MAP(wxArchiveFSCacheData, wxArchiveFSCacheDataHash);
 class wxArchiveFSCache
 {
 public:
-    wxArchiveFSCacheData* Add(const wxString& name,
+    wxArchiveFSCacheData* Add(const std::string& name,
                               const wxArchiveClassFactory& factory,
                               wxInputStream *stream);
 
-    wxArchiveFSCacheData *Get(const wxString& name);
+    wxArchiveFSCacheData *Get(const std::string& name);
 
 private:
     wxArchiveFSCacheDataHash m_hash;
 };
 
 wxArchiveFSCacheData* wxArchiveFSCache::Add(
-        const wxString& name,
+        const std::string& name,
         const wxArchiveClassFactory& factory,
         wxInputStream *stream)
 {
@@ -280,7 +280,7 @@ wxArchiveFSCacheData* wxArchiveFSCache::Add(
     return &data;
 }
 
-wxArchiveFSCacheData *wxArchiveFSCache::Get(const wxString& name)
+wxArchiveFSCacheData *wxArchiveFSCache::Get(const std::string& name)
 {
     wxArchiveFSCacheDataHash::iterator it;
 
@@ -305,31 +305,31 @@ void wxArchiveFSHandler::Cleanup()
     wxDELETE(m_DirsFound);
 }
 
-bool wxArchiveFSHandler::CanOpen(const wxString& location)
+bool wxArchiveFSHandler::CanOpen(const std::string& location)
 {
-    wxString p = GetProtocol(location);
+    std::string p = GetProtocol(location);
     return wxArchiveClassFactory::Find(p) != nullptr;
 }
 
 wxFSFile* wxArchiveFSHandler::OpenFile(
         wxFileSystem& WXUNUSED(fs),
-        const wxString& location)
+        const std::string& location)
 {
-    wxString right = GetRightLocation(location);
+    std::string right = GetRightLocation(location);
     std::string left = GetLeftLocation(location);
     std::string protocol = GetProtocol(location);
 
-    wxString key = fmt::format("{}#{}:", left, protocol);
+    std::string key = fmt::format("{}#{}:", left, protocol);
 
-    if (right.Contains("./"))
+    if (wx::utils::Contains(right, "./"))
     {
-        if (right.GetChar(0) != wxT('/')) right = wxT('/') + right;
+        if (right[0] != '/') right = '/' + right;
         wxFileName rightPart(right, wxPATH_UNIX);
         rightPart.Normalize(wxPATH_NORM_DOTS, "/", wxPATH_UNIX);
         right = rightPart.GetFullPath(wxPATH_UNIX);
     }
 
-    if (!right.empty() && right.GetChar(0) == wxT('/')) right = right.Mid(1);
+    if (!right.empty() && right[0] == '/') right = right.substr(1);
 
     if (!m_cache)
         m_cache = new wxArchiveFSCache;
@@ -384,15 +384,15 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
                         );
 }
 
-wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
+std::string wxArchiveFSHandler::FindFirst(const std::string& spec, unsigned int flags)
 {
-    wxString right = GetRightLocation(spec);
+    std::string right = GetRightLocation(spec);
     std::string left = GetLeftLocation(spec);
     std::string protocol = GetProtocol(spec);
 
-    wxString key = fmt::format("{}#{}:", left, protocol);
+    std::string key = fmt::format("{}#{}:", left, protocol);
 
-    if (!right.empty() && right.Last() == wxT('/')) right.RemoveLast();
+    if (!right.empty() && right.back() == '/') right.pop_back();
 
     if (!m_cache)
         m_cache = new wxArchiveFSCache;
@@ -425,10 +425,10 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 
     m_ZipFile = key;
 
-    m_Pattern = right.AfterLast(wxT('/'));
-    m_BaseDir = right.BeforeLast(wxT('/'));
-    if (m_BaseDir.StartsWith("/"))
-        m_BaseDir = m_BaseDir.Mid(1);
+    m_Pattern = wx::utils::AfterLast(right, '/');
+    m_BaseDir = wx::utils::BeforeLast(right, '/');
+    if (m_BaseDir.starts_with('/'))
+        m_BaseDir = m_BaseDir.substr(1);
 
     if (m_Archive)
     {
@@ -444,16 +444,16 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
     return {};
 }
 
-wxString wxArchiveFSHandler::FindNext()
+std::string wxArchiveFSHandler::FindNext()
 {
     if (!m_Archive) return {};
     return DoFind();
 }
 
-wxString wxArchiveFSHandler::DoFind()
+std::string wxArchiveFSHandler::DoFind()
 {
-    wxString namestr, dir, filename;
-    wxString match;
+    std::string namestr, dir, filename;
+    std::string match;
 
     while (match.empty())
     {
@@ -469,14 +469,14 @@ wxString wxArchiveFSHandler::DoFind()
 
         if (m_AllowDirs)
         {
-            dir = namestr.BeforeLast(wxT('/'));
+            dir = wx::utils::BeforeLast(namestr, '/');
             while (!dir.empty())
             {
                 if( m_DirsFound->find(dir) == m_DirsFound->end() )
                 {
                     (*m_DirsFound)[dir] = 1;
-                    filename = dir.AfterLast(wxT('/'));
-                    dir = dir.BeforeLast(wxT('/'));
+                    filename = wx::utils::AfterLast(dir, '/');
+                    dir = wx::utils::BeforeLast(dir, '/');
                     if (!filename.empty() && m_BaseDir == dir &&
                                 wxMatchWild(m_Pattern, filename, false))
                         match = m_ZipFile + dir + "/" + filename;
@@ -486,8 +486,8 @@ wxString wxArchiveFSHandler::DoFind()
             }
         }
 
-        filename = namestr.AfterLast(wxT('/'));
-        dir = namestr.BeforeLast(wxT('/'));
+        filename = wx::utils::AfterLast(namestr, '/');
+        dir = wx::utils::BeforeLast(namestr, '/');
         if (m_AllowFiles && !filename.empty() && m_BaseDir == dir &&
                             wxMatchWild(m_Pattern, filename, false))
             match = m_ZipFile + namestr;

@@ -74,7 +74,7 @@ public:
     // we have our own input handler and our own actions
     virtual bool PerformAction(const wxControlAction& action,
                                long numArg = 0l,
-                               const wxString& strArg = {});
+                               const std::string& strArg = {});
 #endif
 
 protected:

@@ -953,7 +953,7 @@ bool wxFileConfig::DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf)
 
 bool wxFileConfig::Flush(bool /* bCurrentOnly */)
 {
-  if ( !IsDirty() || !m_fnLocalFile.GetFullPath() )
+  if ( !IsDirty() || m_fnLocalFile.GetFullPath().empty() )
     return true;
 
   // set the umask if needed

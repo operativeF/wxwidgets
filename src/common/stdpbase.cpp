@@ -62,7 +62,7 @@ std::string wxStandardPathsBase::GetExecutablePath() const
 
     wxFileName filename(path);
     filename.Normalize();
-    return filename.GetFullPath().ToStdString();
+    return filename.GetFullPath();
 }
 
 wxStandardPaths& wxAppTraitsBase::GetStandardPaths()

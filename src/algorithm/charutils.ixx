@@ -287,6 +287,4 @@ constexpr std::byte HexCharToDec(std::byte C)
     }
 }
 
-} // namespace wx::utils
-
-} // export
+} // export namespace wx::utils

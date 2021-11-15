@@ -36,27 +36,27 @@ public:
     // Add file to list of files stored in memory. Stored data (bitmap, text or
     // raw data) will be copied into private memory stream and available under
     // name "memory:" + filename
-    static void AddFile(const wxString& filename, const wxString& textdata);
-    static void AddFile(const wxString& filename, const void *binarydata, size_t size);
-    static void AddFileWithMimeType(const wxString& filename,
-                                    const wxString& textdata,
-                                    const wxString& mimetype);
-    static void AddFileWithMimeType(const wxString& filename,
+    static void AddFile(const std::string& filename, const std::string& textdata);
+    static void AddFile(const std::string& filename, const void *binarydata, size_t size);
+    static void AddFileWithMimeType(const std::string& filename,
+                                    const std::string& textdata,
+                                    const std::string& mimetype);
+    static void AddFileWithMimeType(const std::string& filename,
                                     const void *binarydata, size_t size,
-                                    const wxString& mimetype);
+                                    const std::string& mimetype);
 
     // Remove file from memory FS and free occupied memory
-    static void RemoveFile(const wxString& filename);
+    static void RemoveFile(const std::string& filename);
 
-    bool CanOpen(const wxString& location) override;
-    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
-    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
-    wxString FindNext() override;
+    bool CanOpen(const std::string& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) override;
+    std::string FindFirst(const std::string& spec, unsigned int flags = 0) override;
+    std::string FindNext() override;
 
 protected:
     // check that the given file is not already present in m_Hash; logs an
     // error and returns false if it does exist
-    static bool CheckDoesntExist(const wxString& filename);
+    static bool CheckDoesntExist(const std::string& filename);
 
     // the hash map indexed by the names of the files stored in the memory FS
     inline static wxMemoryFSHash m_Hash{};
@@ -64,7 +64,7 @@ protected:
     // the file name currently being searched for, i.e. the argument of the
     // last FindFirst() call or empty string if FindFirst() hasn't been called
     // yet
-    wxString m_findArgument;
+    std::string m_findArgument;
 
     // iterator into m_Hash used by FindFirst/Next(), possibly m_Hash.end()
     wxMemoryFSHash::const_iterator m_findIter;
@@ -83,28 +83,28 @@ public:
     // bring the base class versions into the scope, otherwise they would be
     // inaccessible in wxMemoryFSHandler
     // (unfortunately "using" can't be used as gcc 2.95 doesn't have it...)
-    static void AddFile(const wxString& filename, const wxString& textdata)
+    static void AddFile(const std::string& filename, const std::string& textdata)
     {
         wxMemoryFSHandlerBase::AddFile(filename, textdata);
     }
 
-    static void AddFile(const wxString& filename,
+    static void AddFile(const std::string& filename,
                         const void *binarydata,
                         size_t size)
     {
         wxMemoryFSHandlerBase::AddFile(filename, binarydata, size);
     }
-    static void AddFileWithMimeType(const wxString& filename,
-                                    const wxString& textdata,
-                                    const wxString& mimetype)
+    static void AddFileWithMimeType(const std::string& filename,
+                                    const std::string& textdata,
+                                    const std::string& mimetype)
     {
         wxMemoryFSHandlerBase::AddFileWithMimeType(filename,
                                                    textdata,
                                                    mimetype);
     }
-    static void AddFileWithMimeType(const wxString& filename,
+    static void AddFileWithMimeType(const std::string& filename,
                                     const void *binarydata, size_t size,
-                                    const wxString& mimetype)
+                                    const std::string& mimetype)
     {
         wxMemoryFSHandlerBase::AddFileWithMimeType(filename,
                                                    binarydata, size,
@@ -112,11 +112,11 @@ public:
     }
 
 #if wxUSE_IMAGE
-    static void AddFile(const wxString& filename,
+    static void AddFile(const std::string& filename,
                         const wxImage& image,
                         wxBitmapType type);
 
-    static void AddFile(const wxString& filename,
+    static void AddFile(const std::string& filename,
                         const wxBitmap& bitmap,
                         wxBitmapType type);
 #endif // wxUSE_IMAGE

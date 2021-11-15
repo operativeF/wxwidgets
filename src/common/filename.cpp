@@ -99,6 +99,8 @@
 #include <unistd.h>
 #endif
 
+import Utils.Strings;
+
 #include <cassert>
 #if defined(wxHAS_NATIVE_READLINK)
     import <vector>;
@@ -139,10 +141,12 @@ public:
     // usual GENERIC_{READ,WRITE} as we don't want the file access time to
     // be changed when we open it because this class is used for setting
     // access time (see #10567)
-    wxFileHandle(const wxString& filename, OpenMode mode, unsigned int flags = 0)
-        : m_hFile(::CreateFile
+    wxFileHandle(const std::string& filename, OpenMode mode, unsigned int flags = 0)
+    {
+        boost::nowide::wstackstring stackFileName{filename.c_str()};
+        m_hFile = ::CreateFileW
                     (
-                     filename.t_str(),             // name
+                     stackFileName.get(),             // name
                      mode == OpenMode::ReadAttr ? FILE_READ_ATTRIBUTES    // access mask
                                       : FILE_WRITE_ATTRIBUTES,
                      FILE_SHARE_READ |              // sharing mode
@@ -151,8 +155,8 @@ public:
                      OPEN_EXISTING,                 // creation disposition
                      flags,                         // flags
                      nullptr                           // no template file
-                    ))
-    {
+                    );
+
         if ( m_hFile == INVALID_HANDLE_VALUE )
         {
             if ( mode == OpenMode::ReadAttr )
@@ -226,9 +230,9 @@ void ConvertWxToFileTime(FILETIME *ft, const wxDateTime& dt)
 #endif // wxUSE_DATETIME && __WIN32__
 
 // return a string with the volume par
-static wxString wxGetVolumeString(const wxString& volume, wxPathFormat format)
+static std::string wxGetVolumeString(const std::string& volume, wxPathFormat format)
 {
-    wxString path;
+    std::string path;
 
     if ( !volume.empty() )
     {
@@ -245,17 +249,17 @@ static wxString wxGetVolumeString(const wxString& volume, wxPathFormat format)
             if ( wxFileName::IsMSWUniqueVolumeNamePath(R"(\\?\)" + volume + "\\",
                                                        format) )
             {
-                path << R"(\\?\)" << volume;
+                path += R"(\\?\)" + volume;
             }
             else
             {
                 // it must be a UNC path
-                path << wxFILE_SEP_PATH_DOS << wxFILE_SEP_PATH_DOS << volume;
+                path += fmt::format("{}{}{}", wxFILE_SEP_PATH_DOS, wxFILE_SEP_PATH_DOS, volume);
             }
         }
         else if  ( format == wxPATH_DOS || format == wxPATH_VMS )
         {
-            path << volume << wxFileName::GetVolumeSeparator(format);
+            path += volume + wxFileName::GetVolumeSeparator(format);
         }
         // else ignore
     }
@@ -272,7 +276,7 @@ inline bool IsDOSPathSep(wxUniChar ch)
 
 // return true if the format used is the DOS/Windows one and the string looks
 // like a UNC path
-static bool IsUNCPath(const wxString& path, wxPathFormat format)
+static bool IsUNCPath(const std::string& path, wxPathFormat format)
 {
     return format == wxPATH_DOS &&
                 path.length() >= 4 && // "\\a" can't be a UNC path
@@ -297,7 +301,7 @@ static bool IsUNCPath(const wxString& path, wxPathFormat format)
 #ifdef wxHAVE_LSTAT
 
 // Private implementation, don't call directly, use one of the overloads below.
-bool DoStatAny(wxStructStat& st, wxString path, bool dereference)
+bool DoStatAny(wxStructStat& st, std::string path, bool dereference)
 {
     // We need to remove any trailing slashes from the path because they could
     // interfere with the symlink following decision: even if we use lstat(),
@@ -324,7 +328,7 @@ bool DoStatAny(wxStructStat& st, wxString path, bool dereference)
 // Overloads to use for a case when we don't have wxFileName object and when we
 // do have one.
 inline
-bool StatAny(wxStructStat& st, const wxString& path, unsigned int flags)
+bool StatAny(wxStructStat& st, const std::string& path, unsigned int flags)
 {
     return DoStatAny(st, path, !(flags & wxFILE_EXISTS_NO_FOLLOW));
 }
@@ -358,10 +362,10 @@ void wxFileName::Assign( const wxFileName &filepath )
     m_dontFollowLinks = filepath.m_dontFollowLinks;
 }
 
-void wxFileName::Assign(const wxString& volume,
-                        const wxString& path,
-                        const wxString& name,
-                        const wxString& ext,
+void wxFileName::Assign(const std::string& volume,
+                        const std::string& path,
+                        const std::string& name,
+                        const std::string& ext,
                         bool hasExt,
                         wxPathFormat format)
 {
@@ -378,7 +382,7 @@ void wxFileName::Assign(const wxString& volume,
     {
         // remove one of the 2 leading backslashes to ensure that it's not
         // recognized as an UNC path by SetPath()
-        wxString pathNonUNC(path, 1, wxString::npos);
+        std::string pathNonUNC(path, 1, std::string::npos);
         SetPath(pathNonUNC, format);
     }
     else // no UNC complications
@@ -393,7 +397,7 @@ void wxFileName::Assign(const wxString& volume,
     m_hasExt = hasExt;
 }
 
-void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
+void wxFileName::SetPath( const std::string& pathOrig, wxPathFormat format )
 {
     m_dirs.clear();
 
@@ -408,7 +412,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
     format = GetFormat( format );
 
     // 0) deal with possible volume part first
-    wxString volume,
+    std::string volume,
              path;
     SplitVolume(pathOrig, &volume, &path, format);
     if ( !volume.empty() )
@@ -474,7 +478,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
 
     while ( tn.HasMoreTokens() )
     {
-        wxString token = tn.GetNextToken();
+        std::string token = tn.GetNextToken();
 
         // Remove empty token under DOS and Unix, interpret them
         // as .. under Mac.
@@ -491,34 +495,34 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
     }
 }
 
-void wxFileName::Assign(const wxString& fullpath,
+void wxFileName::Assign(const std::string& fullpath,
                         wxPathFormat format)
 {
-    wxString volume, path, name, ext;
+    std::string volume, path, name, ext;
     bool hasExt;
     SplitPath(fullpath, &volume, &path, &name, &ext, &hasExt, format);
 
     Assign(volume, path, name, ext, hasExt, format);
 }
 
-void wxFileName::Assign(const wxString& fullpathOrig,
-                        const wxString& fullname,
+void wxFileName::Assign(const std::string& fullpathOrig,
+                        const std::string& fullname,
                         wxPathFormat format)
 {
     // always recognize fullpath as directory, even if it doesn't end with a
     // slash
-    wxString fullpath = fullpathOrig;
+    std::string fullpath = fullpathOrig;
     if ( !fullpath.empty() && !wxEndsWithPathSeparator(fullpath) )
     {
         fullpath += GetPathSeparator(format);
     }
 
-    wxString volume, path, name, ext;
+    std::string volume, path, name, ext;
     bool hasExt;
 
     // do some consistency checks: the name should be really just the filename
     // and the path should be really just a path
-    wxString volDummy, pathDummy, nameDummy, extDummy;
+    std::string volDummy, pathDummy, nameDummy, extDummy;
 
     SplitPath(fullname, &volDummy, &pathDummy, &name, &ext, &hasExt, format);
 
@@ -535,19 +539,19 @@ void wxFileName::Assign(const wxString& fullpathOrig,
     Assign(volume, path, name, ext, hasExt, format);
 }
 
-void wxFileName::Assign(const wxString& pathOrig,
-                        const wxString& name,
-                        const wxString& ext,
+void wxFileName::Assign(const std::string& pathOrig,
+                        const std::string& name,
+                        const std::string& ext,
                         wxPathFormat format)
 {
-    wxString volume,
+    std::string volume,
              path;
     SplitVolume(pathOrig, &volume, &path, format);
 
     Assign(volume, path, name, ext, format);
 }
 
-void wxFileName::AssignDir(const wxString& dir, wxPathFormat format)
+void wxFileName::AssignDir(const std::string& dir, wxPathFormat format)
 {
     Assign(dir, {}, format);
 }
@@ -570,13 +574,13 @@ void wxFileName::Clear()
 }
 
 /* static */
-wxFileName wxFileName::FileName(const wxString& file, wxPathFormat format)
+wxFileName wxFileName::FileName(const std::string& file, wxPathFormat format)
 {
     return {file, format};
 }
 
 /* static */
-wxFileName wxFileName::DirName(const wxString& dir, wxPathFormat format)
+wxFileName wxFileName::DirName(const std::string& dir, wxPathFormat format)
 {
     wxFileName fn;
     fn.AssignDir(dir, format);
@@ -592,7 +596,7 @@ namespace
 
 #if defined(WX_WINDOWS)
 
-void RemoveTrailingSeparatorsFromPath(wxString& strPath)
+void RemoveTrailingSeparatorsFromPath(std::string& strPath)
 {
     // Windows fails to find directory named "c:\dir\" even if "c:\dir" exists,
     // so remove all trailing backslashes from the path - but don't do this for
@@ -608,14 +612,14 @@ void RemoveTrailingSeparatorsFromPath(wxString& strPath)
             break;
         }
 
-        strPath.Truncate(len - 1);
+        strPath.pop_back();
     }
 }
 
 #endif // __WINDOWS_
 
 bool
-wxFileSystemObjectExists(const wxString& path, unsigned int flags)
+wxFileSystemObjectExists(const std::string& path, unsigned int flags)
 {
 
     // Should the existence of file/directory with this name be accepted, i.e.
@@ -623,7 +627,7 @@ wxFileSystemObjectExists(const wxString& path, unsigned int flags)
     const bool acceptFile = (flags & wxFILE_EXISTS_REGULAR) != 0;
     const bool acceptDir  = (flags & wxFILE_EXISTS_DIR)  != 0;
 
-    wxString strPath(path);
+    std::string strPath(path);
 
 #if defined(WX_WINDOWS)
     if ( acceptDir )
@@ -635,7 +639,8 @@ wxFileSystemObjectExists(const wxString& path, unsigned int flags)
 
     // we must use GetFileAttributes() instead of the ANSI C functions because
     // it can cope with network (UNC) paths unlike them
-    const DWORD ret = ::GetFileAttributesW(strPath.t_str());
+    boost::nowide::wstackstring stackStrPath{strPath.c_str()};
+    const DWORD ret = ::GetFileAttributesW(stackStrPath.get());
 
     if ( ret == INVALID_FILE_ATTRIBUTES )
         return false;
@@ -685,7 +690,7 @@ bool wxFileName::FileExists() const
 }
 
 /* static */
-bool wxFileName::FileExists( const wxString &filePath )
+bool wxFileName::FileExists( const std::string &filePath )
 {
     return wxFileSystemObjectExists(filePath, wxFILE_EXISTS_REGULAR);
 }
@@ -700,7 +705,7 @@ bool wxFileName::DirExists() const
 }
 
 /* static */
-bool wxFileName::DirExists( const wxString &dirPath )
+bool wxFileName::DirExists( const std::string &dirPath )
 {
     return wxFileSystemObjectExists(dirPath, wxFILE_EXISTS_DIR);
 }
@@ -718,7 +723,7 @@ bool wxFileName::Exists(unsigned int flags) const
 }
 
 /* static */
-bool wxFileName::Exists(const wxString& path, unsigned int flags)
+bool wxFileName::Exists(const std::string& path, unsigned int flags)
 {
     return wxFileSystemObjectExists(path, flags);
 }
@@ -727,26 +732,26 @@ bool wxFileName::Exists(const wxString& path, unsigned int flags)
 // CWD and HOME stuff
 // ----------------------------------------------------------------------------
 
-void wxFileName::AssignCwd(const wxString& volume)
+void wxFileName::AssignCwd(const std::string& volume)
 {
     AssignDir(wxFileName::GetCwd(volume));
 }
 
 /* static */
-wxString wxFileName::GetCwd(const wxString& volume)
+std::string wxFileName::GetCwd(const std::string& volume)
 {
     // if we have the volume, we must get the current directory on this drive
     // and to do this we have to chdir to this volume - at least under Windows,
     // I don't know how to get the current drive on another volume elsewhere
     // (TODO)
-    wxString cwdOld;
+    std::string cwdOld;
     if ( !volume.empty() )
     {
         cwdOld = wxGetCwd();
         SetCwd(volume + GetVolumeSeparator());
     }
 
-    wxString cwd = ::wxGetCwd();
+    std::string cwd = ::wxGetCwd();
 
     if ( !volume.empty() )
     {
@@ -761,9 +766,9 @@ bool wxFileName::SetCwd() const
     return wxFileName::SetCwd( GetPath() );
 }
 
-bool wxFileName::SetCwd( const wxString &cwd )
+bool wxFileName::SetCwd( const std::string &cwd )
 {
-    return ::wxSetWorkingDirectory( cwd.ToStdString() );
+    return ::wxSetWorkingDirectory( cwd );
 }
 
 void wxFileName::AssignHomeDir()
@@ -771,7 +776,7 @@ void wxFileName::AssignHomeDir()
     AssignDir(wxFileName::GetHomeDir());
 }
 
-wxString wxFileName::GetHomeDir()
+std::string wxFileName::GetHomeDir()
 {
     return ::wxGetHomeDir();
 }
@@ -801,7 +806,7 @@ wxString wxFileName::GetHomeDir()
 #define WX_HAVE_DELETE_ON_CLOSE
 // On Windows create a file with the FILE_FLAGS_DELETE_ON_CLOSE flags.
 //
-static int wxOpenWithDeleteOnClose(const wxString& filename)
+static int wxOpenWithDeleteOnClose(const std::string& filename)
 {
     static constexpr DWORD access = GENERIC_READ | GENERIC_WRITE;
 
@@ -810,7 +815,8 @@ static int wxOpenWithDeleteOnClose(const wxString& filename)
     static constexpr DWORD attributes = FILE_ATTRIBUTE_TEMPORARY |
                        FILE_FLAG_DELETE_ON_CLOSE;
 
-    HANDLE h = ::CreateFileW(filename.t_str(), access, 0, nullptr,
+    boost::nowide::wstackstring stackFileName{filename.c_str()};
+    HANDLE h = ::CreateFileW(stackFileName.get(), access, 0, nullptr,
                             disposition, attributes, nullptr);
 
     return wxOpenOSFHandle(h, wxO_BINARY);
@@ -820,7 +826,7 @@ static int wxOpenWithDeleteOnClose(const wxString& filename)
 
 // Helper to open the file
 //
-static int wxTempOpen(const wxString& path, bool *deleteOnClose)
+static int wxTempOpen(const std::string& path, bool *deleteOnClose)
 {
 #ifdef WX_HAVE_DELETE_ON_CLOSE
     if (*deleteOnClose)
@@ -836,7 +842,7 @@ static int wxTempOpen(const wxString& path, bool *deleteOnClose)
 #if wxUSE_FFILE
 // Helper to open the file and attach it to the wxFFile
 //
-static bool wxTempOpen(wxFFile *file, const wxString& path, bool *deleteOnClose)
+static bool wxTempOpen(wxFFile *file, const std::string& path, bool *deleteOnClose)
 {
 #ifndef wx_fdopen
     *deleteOnClose = false;
@@ -863,15 +869,14 @@ static bool wxTempOpen(wxFFile *file, const wxString& path, bool *deleteOnClose)
 
 // Implementation of wxFileName::CreateTempFileName().
 //
-static wxString wxCreateTempImpl(
-        const wxString& prefix,
+static std::string wxCreateTempImpl(
+        const std::string& prefix,
         WXFILEARGS(wxFile *fileTemp, wxFFile *ffileTemp),
         bool *deleteOnClose = nullptr)
 {
 #if wxUSE_FILE && wxUSE_FFILE
     wxASSERT(fileTemp == nullptr || ffileTemp == nullptr);
 #endif
-    wxString path, dir, name;
     bool wantDeleteOnClose = false;
 
     if (deleteOnClose)
@@ -886,6 +891,9 @@ static wxString wxCreateTempImpl(
         deleteOnClose = &wantDeleteOnClose;
     }
 
+    std::string dir;
+    std::string name;
+    
     // use the directory specified by the prefix
     wxFileName::SplitPath(prefix, &dir, &name, nullptr /* extension */);
 
@@ -894,17 +902,20 @@ static wxString wxCreateTempImpl(
         dir = wxFileName::GetTempDir();
     }
 
+    std::string path;
+
 #if defined(WX_WINDOWS)
-    if (!::GetTempFileNameW(dir.t_str(), name.t_str(), 0,
-                           wxStringBuffer(path, MAX_PATH + 1)))
+    boost::nowide::wstackstring stackDir{dir.c_str()};
+    boost::nowide::wstackstring stackName{name.c_str()};
+    boost::nowide::wstackstring stackPath;
+    if (!::GetTempFileNameW(stackDir.get(), stackName.get(), 0,
+                            stackPath.get()))
     {
         wxLogLastError("GetTempFileName");
-
-        path.clear();
     }
-
+    path = boost::nowide::narrow(stackPath.get());
 #else // !Windows
-    path = dir;
+    std::string path = dir;
 
     if ( !wxEndsWithPathSeparator(dir) &&
             (name.empty() || !wxIsPathSeparator(name[0u])) )
@@ -978,13 +989,13 @@ static wxString wxCreateTempImpl(
     // generate the unique file name ourselves
     path << (unsigned int)getpid();
 
-    wxString pathTry;
+    std::string pathTry;
 
     static constexpr size_t numTries = 1000;
     for ( size_t n = 0; n < numTries; n++ )
     {
         // 3 hex digits is enough for numTries == 1000 < 4096
-        pathTry = path + wxString::Format("%.03x", (unsigned int) n);
+        pathTry = path + fmt::format("%.03x", (unsigned int) n);
         if ( !wxFileName::FileExists(pathTry) )
         {
             break;
@@ -1048,9 +1059,9 @@ static wxString wxCreateTempImpl(
 
 
 static bool wxCreateTempImpl(
-        const wxString& prefix,
+        const std::string& prefix,
         WXFILEARGS(wxFile *fileTemp, wxFFile *ffileTemp),
-        wxString *name)
+        std::string *name)
 {
     bool deleteOnClose = true;
 
@@ -1073,10 +1084,10 @@ static bool wxCreateTempImpl(
 
 static void wxAssignTempImpl(
         wxFileName *fn,
-        const wxString& prefix,
+        const std::string& prefix,
         WXFILEARGS(wxFile *fileTemp, wxFFile *ffileTemp))
 {
-    wxString tempname;
+    std::string tempname;
     tempname = wxCreateTempImpl(prefix, WXFILEARGS(fileTemp, ffileTemp));
 
     if ( tempname.empty() )
@@ -1091,13 +1102,13 @@ static void wxAssignTempImpl(
 }
 
 
-void wxFileName::AssignTempFileName(const wxString& prefix)
+void wxFileName::AssignTempFileName(const std::string& prefix)
 {
     wxAssignTempImpl(this, prefix, WXFILEARGS(nullptr, nullptr));
 }
 
 /* static */
-wxString wxFileName::CreateTempFileName(const wxString& prefix)
+std::string wxFileName::CreateTempFileName(const std::string& prefix)
 {
     return wxCreateTempImpl(prefix, WXFILEARGS(nullptr, nullptr));
 }
@@ -1107,28 +1118,28 @@ wxString wxFileName::CreateTempFileName(const wxString& prefix)
 
 #if wxUSE_FILE
 
-wxString wxCreateTempFileName(const wxString& prefix,
+std::string wxCreateTempFileName(const std::string& prefix,
                               wxFile *fileTemp,
                               bool *deleteOnClose)
 {
     return wxCreateTempImpl(prefix, WXFILEARGS(fileTemp, nullptr), deleteOnClose);
 }
 
-bool wxCreateTempFile(const wxString& prefix,
+bool wxCreateTempFile(const std::string& prefix,
                       wxFile *fileTemp,
-                      wxString *name)
+                      std::string *name)
 {
     return wxCreateTempImpl(prefix, WXFILEARGS(fileTemp, nullptr), name);
 }
 
-void wxFileName::AssignTempFileName(const wxString& prefix, wxFile *fileTemp)
+void wxFileName::AssignTempFileName(const std::string& prefix, wxFile *fileTemp)
 {
     wxAssignTempImpl(this, prefix, WXFILEARGS(fileTemp, nullptr));
 }
 
 /* static */
-wxString
-wxFileName::CreateTempFileName(const wxString& prefix, wxFile *fileTemp)
+std::string
+wxFileName::CreateTempFileName(const std::string& prefix, wxFile *fileTemp)
 {
     return wxCreateTempFileName(prefix, fileTemp);
 }
@@ -1138,29 +1149,29 @@ wxFileName::CreateTempFileName(const wxString& prefix, wxFile *fileTemp)
 
 #if wxUSE_FFILE
 
-wxString wxCreateTempFileName(const wxString& prefix,
+std::string wxCreateTempFileName(const std::string& prefix,
                               wxFFile *fileTemp,
                               bool *deleteOnClose)
 {
     return wxCreateTempImpl(prefix, WXFILEARGS(nullptr, fileTemp), deleteOnClose);
 }
 
-bool wxCreateTempFile(const wxString& prefix,
+bool wxCreateTempFile(const std::string& prefix,
                       wxFFile *fileTemp,
-                      wxString *name)
+                      std::string *name)
 {
     return wxCreateTempImpl(prefix, WXFILEARGS(nullptr, fileTemp), name);
 
 }
 
-void wxFileName::AssignTempFileName(const wxString& prefix, wxFFile *fileTemp)
+void wxFileName::AssignTempFileName(const std::string& prefix, wxFFile *fileTemp)
 {
     wxAssignTempImpl(this, prefix, WXFILEARGS(nullptr, fileTemp));
 }
 
 /* static */
-wxString
-wxFileName::CreateTempFileName(const wxString& prefix, wxFFile *fileTemp)
+std::string
+wxFileName::CreateTempFileName(const std::string& prefix, wxFFile *fileTemp)
 {
     return wxCreateTempFileName(prefix, fileTemp);
 }
@@ -1177,19 +1188,19 @@ wxFileName::CreateTempFileName(const wxString& prefix, wxFFile *fileTemp)
 namespace
 {
 
-wxString CheckIfDirExists(const wxString& dir)
+std::string CheckIfDirExists(const std::string& dir)
 {
-    return wxFileName::DirExists(dir) ? dir : wxString();
+    return wxFileName::DirExists(dir) ? dir : std::string();
 }
 
 } // anonymous namespace
 
-wxString wxFileName::GetTempDir()
+std::string wxFileName::GetTempDir()
 {
     // first try getting it from environment: this allows overriding the values
     // used by default if the user wants to create temporary files in another
     // directory
-    wxString dir = CheckIfDirExists(wxGetenv("TMPDIR"));
+    std::string dir = CheckIfDirExists(wxGetenv("TMPDIR"));
     if ( dir.empty() )
     {
         dir = CheckIfDirExists(wxGetenv("TMP"));
@@ -1201,10 +1212,13 @@ wxString wxFileName::GetTempDir()
     if ( dir.empty() )
     {
 #if defined(WX_WINDOWS)
-        if ( !::GetTempPathW(MAX_PATH, wxStringBuffer(dir, MAX_PATH + 1)) )
+        boost::nowide::wstackstring stackDir;
+        if ( !::GetTempPathW(MAX_PATH, stackDir.get()) )
         {
             wxLogLastError("GetTempPath");
         }
+
+        dir = boost::nowide::narrow(stackDir.get());
 #endif // systems with native way
     }
 
@@ -1213,7 +1227,7 @@ wxString wxFileName::GetTempDir()
         // remove any trailing path separators, we don't want to ever return
         // them from this function for consistency
         const size_t lastNonSep = dir.find_last_not_of(GetPathSeparators());
-        if ( lastNonSep == wxString::npos )
+        if ( lastNonSep == std::string::npos )
         {
             // the string consists entirely of separators, leave only one
             dir = GetPathSeparator();
@@ -1242,7 +1256,7 @@ bool wxFileName::Mkdir( int perm, unsigned int flags ) const
     return wxFileName::Mkdir(GetPath(), perm, flags);
 }
 
-bool wxFileName::Mkdir( const wxString& dir, int perm, unsigned int flags )
+bool wxFileName::Mkdir( const std::string& dir, int perm, unsigned int flags )
 {
     if ( flags & wxPATH_MKDIR_FULL )
     {
@@ -1250,13 +1264,13 @@ bool wxFileName::Mkdir( const wxString& dir, int perm, unsigned int flags )
         wxFileName filename;
         filename.AssignDir(dir);
 
-        wxString currPath;
+        std::string currPath;
         if ( filename.HasVolume())
         {
-            currPath << wxGetVolumeString(filename.GetVolume(), wxPATH_NATIVE);
+            currPath += wxGetVolumeString(filename.GetVolume(), wxPATH_NATIVE);
         }
 
-        std::vector<wxString> dirs = filename.GetDirs();
+        std::vector<std::string> dirs = filename.GetDirs();
 
         for ( size_t i = 0; i < dirs.size(); i++ )
         {
@@ -1286,22 +1300,24 @@ bool wxFileName::Rmdir(unsigned int flags) const
     return wxFileName::Rmdir( GetPath(), flags );
 }
 
-bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
+bool wxFileName::Rmdir(const std::string& dir, unsigned int flags)
 {
 #ifdef WX_WINDOWS
     if ( flags & wxPATH_RMDIR_RECURSIVE )
     {
         // SHFileOperation needs double null termination string
         // but without separator at the end of the path
-        wxString path(dir);
-        if ( path.Last() == wxFILE_SEP_PATH )
-            path.RemoveLast();
-        path += wxT('\0');
+        std::string path(dir);
+        if ( path.back() == wxFILE_SEP_PATH )
+            path.pop_back();
+        path += '\0';
 
-        SHFILEOPSTRUCT fileop;
+        SHFILEOPSTRUCTW fileop;
         wxZeroMemory(fileop);
+
+        boost::nowide::wstackstring stackPath{path.c_str()};
         fileop.wFunc = FO_DELETE;
-        fileop.pFrom = path.t_str();
+        fileop.pFrom = stackPath.get();
         fileop.fFlags = FOF_SILENT | FOF_NOCONFIRMATION;
         fileop.fFlags |= FOF_NOERRORUI;
 
@@ -1335,8 +1351,8 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
         }
 #endif // !WX_WINDOWS
 
-        wxString path(dir);
-        if ( path.Last() != wxFILE_SEP_PATH )
+        std::string path(dir);
+        if ( path.back() != wxFILE_SEP_PATH )
             path += wxFILE_SEP_PATH;
 
         wxDir d(path);
@@ -1344,12 +1360,12 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
         if ( !d.IsOpened() )
             return false;
 
-        wxString filename;
+        std::string filename;
 
         // First delete all subdirectories: notice that we don't follow
         // symbolic links, potentially leading outside this directory, to avoid
         // unpleasant surprises.
-        bool cont = d.GetFirst(&filename, wxString(),
+        bool cont = d.GetFirst(&filename, std::string{},
                                wxDIR_DIRS | wxDIR_HIDDEN | wxDIR_NO_FOLLOW);
         while ( cont )
         {
@@ -1363,7 +1379,7 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
             // Delete all files too and, for the same reasons as above, don't
             // follow symlinks which could refer to the files outside of this
             // directory and just delete the symlinks themselves.
-            cont = d.GetFirst(&filename, wxString(),
+            cont = d.GetFirst(&filename, std::string(),
                               wxDIR_FILES | wxDIR_HIDDEN | wxDIR_NO_FOLLOW);
             while ( cont )
             {
@@ -1382,14 +1398,14 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
 // ----------------------------------------------------------------------------
 
 bool wxFileName::Normalize(unsigned int flags,
-                           const wxString& cwd,
+                           const std::string& cwd,
                            wxPathFormat format)
 {
     // deal with env vars renaming first as this may seriously change the path
     if ( flags & wxPATH_NORM_ENV_VARS )
     {
-        wxString pathOrig = GetFullPath(format);
-        wxString path = wxExpandEnvVars(pathOrig);
+        std::string pathOrig = GetFullPath(format);
+        std::string path = wxExpandEnvVars(pathOrig);
         if ( path != pathOrig )
         {
             Assign(path);
@@ -1397,7 +1413,7 @@ bool wxFileName::Normalize(unsigned int flags,
     }
 
     // the existing path components
-    std::vector<wxString> dirs = GetDirs();
+    std::vector<std::string> dirs = GetDirs();
 
     // the path to prepend in front to make the path absolute
     wxFileName curDir;
@@ -1422,7 +1438,7 @@ bool wxFileName::Normalize(unsigned int flags,
     {
         if ( !dirs.empty() )
         {
-            wxString dir = dirs[0u];
+            std::string dir = dirs[0u];
             if ( !dir.empty() && dir[0u] == wxT('~') )
             {
                 // to make the path absolute use the home directory
@@ -1450,7 +1466,7 @@ bool wxFileName::Normalize(unsigned int flags,
         }
 
         // finally, prepend curDir to the dirs array
-        std::vector<wxString> dirsNew = curDir.GetDirs();
+        std::vector<std::string> dirsNew = curDir.GetDirs();
         dirs.insert(dirs.begin(), dirsNew.begin(), dirsNew.end());
 
         // if we used e.g. tilde expansion previously and wxGetUserHome didn't
@@ -1471,7 +1487,7 @@ bool wxFileName::Normalize(unsigned int flags,
     size_t count = dirs.size();
     for ( size_t n = 0; n < count; n++ )
     {
-        wxString dir = dirs[n];
+        std::string dir = dirs[n];
 
         if ( flags & wxPATH_NORM_DOTS )
         {
@@ -1513,7 +1529,7 @@ bool wxFileName::Normalize(unsigned int flags,
 #if defined(__WIN32__) && wxUSE_OLE
     if ( (flags & wxPATH_NORM_SHORTCUT) )
     {
-        wxString filename;
+        std::string filename;
         if (GetShortcutTarget(GetFullPath(format), filename))
         {
             m_relative = false;
@@ -1533,38 +1549,41 @@ bool wxFileName::Normalize(unsigned int flags,
     // that the path doesn't change any more after we normalize its case)
     if ( (flags & wxPATH_NORM_CASE) && !IsCaseSensitive(format) )
     {
-        m_volume.MakeLower();
-        m_name.MakeLower();
-        m_ext.MakeLower();
+        wx::utils::ToLower(m_volume);
+        wx::utils::ToLower(m_name);
+        wx::utils::ToLower(m_ext);
 
         // directory entries must be made lower case as well
         count = m_dirs.size();
         for ( size_t i = 0; i < count; i++ )
         {
-            m_dirs[i].MakeLower();
+            wx::utils::ToLower(m_dirs[i]);
         }
     }
 
     return true;
 }
 
-bool wxFileName::ReplaceEnvVariable(const wxString& envname,
-                                    const wxString& replacementFmtString,
+bool wxFileName::ReplaceEnvVariable(const std::string& envname,
+                                    const std::string& replacementFmtString,
                                     wxPathFormat format)
 {
     // look into stringForm for the contents of the given environment variable
     std::string val;
     if (envname.empty() ||
-        !wxGetEnv(envname.ToStdString(), &val))
+        !wxGetEnv(envname, &val))
         return false;
     if (val.empty())
         return false;
 
-    wxString stringForm = GetPath(wxPATH_GET_VOLUME, format);
+    std::string stringForm = GetPath(wxPATH_GET_VOLUME, format);
         // do not touch the file name and the extension
 
-    wxString replacement = wxString::Format(replacementFmtString, envname);
-    stringForm.Replace(val, replacement);
+    // FIXME: What is format doing here?
+    //std::string replacement = wxString::Format(replacementFmtString, envname);
+    std::string replacement = fmt::format("{}{}", replacementFmtString, envname);
+
+    wx::utils::ReplaceAll(stringForm, val, replacement);
 
     // Now assign ourselves the modified path:
     Assign(stringForm, GetFullName(), format);
@@ -1574,14 +1593,14 @@ bool wxFileName::ReplaceEnvVariable(const wxString& envname,
 
 bool wxFileName::ReplaceHomeDir(wxPathFormat format)
 {
-    wxString homedir = wxGetHomeDir();
+    std::string homedir = wxGetHomeDir();
     if (homedir.empty())
         return false;
 
-    wxString stringForm = GetPath(wxPATH_GET_VOLUME, format);
+    std::string stringForm = GetPath(wxPATH_GET_VOLUME, format);
         // do not touch the file name and the extension
 
-    stringForm.Replace(homedir, "~");
+    wx::utils::ReplaceAll(stringForm, homedir, "~");
 
     // Now assign ourselves the modified path:
     Assign(stringForm, GetFullName(), format);
@@ -1595,18 +1614,18 @@ bool wxFileName::ReplaceHomeDir(wxPathFormat format)
 
 #if defined(__WIN32__) && wxUSE_OLE
 
-bool wxFileName::GetShortcutTarget(const wxString& shortcutPath,
-                                   wxString& targetFilename,
-                                   wxString* arguments) const
+bool wxFileName::GetShortcutTarget(const std::string& shortcutPath,
+                                   std::string& targetFilename,
+                                   std::string* arguments) const
 {
-    wxString path, file, ext;
+    std::string path, file, ext;
     wxFileName::SplitPath(shortcutPath, & path, & file, & ext);
 
     wxCOMPtr<IShellLink> psl;
     bool success = false;
 
     // Assume it's not a shortcut if it doesn't end with lnk
-    if (ext.CmpNoCase("lnk")!=0)
+    if (wx::utils::CmpNoCase(ext, "lnk")!=0)
         return false;
 
     // Ensure OLE is initialized.
@@ -1622,21 +1641,20 @@ bool wxFileName::GetShortcutTarget(const wxString& shortcutPath,
         hres = psl->QueryInterface( IID_IPersistFile, (LPVOID *) &ppf);
         if (SUCCEEDED(hres))
         {
-            WCHAR wsz[MAX_PATH];
+            boost::nowide::wstackstring stackShortcutPath{shortcutPath.c_str()};
 
-            MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, shortcutPath.mb_str(), -1, wsz,
-                                MAX_PATH);
-
-            hres = ppf->Load(wsz, 0);
+            hres = ppf->Load(stackShortcutPath.get(), 0);
             if (SUCCEEDED(hres))
             {
-                wxChar buf[2048];
-                psl->GetPath(buf, 2048, nullptr, SLGP_UNCPRIORITY);
-                targetFilename = wxString(buf);
+                boost::nowide::wstackstring stackBuf;
+                //wxChar buf[2048];
+                psl->GetPath(stackBuf.get(), 2048, nullptr, SLGP_UNCPRIORITY);
+                targetFilename = boost::nowide::narrow(stackBuf.get());
                 success = (shortcutPath != targetFilename);
 
-                psl->GetArguments(buf, 2048);
-                wxString args(buf);
+                // FIXME: clear buffer?
+                psl->GetArguments(stackBuf.get(), 2048);
+                std::string args = boost::nowide::narrow(stackBuf.get());
                 if (!args.empty() && arguments)
                 {
                     *arguments = args;
@@ -1659,7 +1677,7 @@ wxFileName wxFileName::ResolveLink()
 
 // Only resolve links on platforms with readlink (e.g. Unix-like platforms)
 #if defined(wxHAS_NATIVE_READLINK)
-    const wxString link = GetFullPath();
+    const std::string link = GetFullPath();
     wxStructStat st;
 
     // This means the link itself doesn't exist, so return an empty filename
@@ -1685,7 +1703,7 @@ wxFileName wxFileName::ResolveLink()
     if ( result != -1 )
     {
         buf[result] = '\0'; // readlink() doesn't NULL-terminate the buffer
-        linkTarget.Assign( wxString(buf, wxConvLibc) );
+        linkTarget.Assign( std::string(buf, wxConvLibc) );
 
         // Ensure the resulting path is absolute since readlink can return paths relative to the link
         if ( !linkTarget.IsAbsolute() )
@@ -1712,7 +1730,7 @@ bool wxFileName::IsAbsolute(wxPathFormat format) const
     {
         if ( !m_dirs.empty() )
         {
-            wxString dir = m_dirs[0u];
+            std::string dir = m_dirs[0u];
 
             if (!dir.empty() && dir[0u] == wxT('~'))
                 return true;
@@ -1735,12 +1753,12 @@ bool wxFileName::IsAbsolute(wxPathFormat format) const
     return true;
 }
 
-bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
+bool wxFileName::MakeRelativeTo(const std::string& pathBase, wxPathFormat format)
 {
     wxFileName fnBase = wxFileName::DirName(pathBase, format);
 
     // get cwd only once - small time saving
-    wxString cwd = wxGetCwd();
+    std::string cwd = wxGetCwd();
 
     // Normalize both paths to be absolute but avoid expanding environment
     // variables in them, this could be unexpected.
@@ -1754,7 +1772,7 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
     const bool withCase = IsCaseSensitive(format);
 
     // we can't do anything if the files live on different volumes
-    if ( !GetVolume().IsSameAs(fnBase.GetVolume(), withCase) )
+    if ( !wx::utils::IsSameAsCase(GetVolume(), fnBase.GetVolume()) )
     {
         // nothing done
         return false;
@@ -1796,7 +1814,7 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
             // for the files)
             if ( m_dirs.empty() && IsDir() )
             {
-                m_dirs.push_back(wxT('.'));
+                m_dirs.push_back(".");
             }
             break;
 
@@ -1821,7 +1839,7 @@ bool wxFileName::SameAs(const wxFileName& filepath, wxPathFormat format) const
                fn2 = filepath;
 
     // get cwd only once - small time saving
-    wxString cwd = wxGetCwd();
+    std::string cwd = wxGetCwd();
     fn1.Normalize(wxPATH_NORM_ALL | wxPATH_NORM_CASE, cwd, format);
     fn2.Normalize(wxPATH_NORM_ALL | wxPATH_NORM_CASE, cwd, format);
 
@@ -1849,10 +1867,10 @@ bool wxFileName::IsCaseSensitive( wxPathFormat format )
 }
 
 /* static */
-wxString wxFileName::GetForbiddenChars(wxPathFormat format)
+std::string wxFileName::GetForbiddenChars(wxPathFormat format)
 {
     // Inits to forbidden characters that are common to (almost) all platforms.
-    wxString strForbiddenChars = "*?";
+    std::string strForbiddenChars = "*?";
 
     // If asserts, wxPathFormat has been changed. In case of a new path format
     // addition, the following code might have to be updated.
@@ -1885,9 +1903,9 @@ wxString wxFileName::GetForbiddenChars(wxPathFormat format)
 }
 
 /* static */
-wxString wxFileName::GetVolumeSeparator(wxPathFormat format)
+std::string wxFileName::GetVolumeSeparator(wxPathFormat format)
 {
-    wxString sepVol;
+    std::string sepVol;
 
     if ( (GetFormat(format) == wxPATH_DOS) ||
          (GetFormat(format) == wxPATH_VMS) )
@@ -1900,15 +1918,15 @@ wxString wxFileName::GetVolumeSeparator(wxPathFormat format)
 }
 
 /* static */
-wxString wxFileName::GetPathSeparators(wxPathFormat format)
+std::string wxFileName::GetPathSeparators(wxPathFormat format)
 {
-    wxString seps;
+    std::string seps;
     switch ( GetFormat(format) )
     {
         case wxPATH_DOS:
             // accept both as native APIs do but put the native one first as
             // this is the one we use in GetFullPath()
-            seps << wxFILE_SEP_PATH_DOS << wxFILE_SEP_PATH_UNIX;
+            seps += fmt::format("{}{}", wxFILE_SEP_PATH_DOS, wxFILE_SEP_PATH_UNIX);
             break;
 
         default:
@@ -1932,32 +1950,32 @@ wxString wxFileName::GetPathSeparators(wxPathFormat format)
 }
 
 /* static */
-wxString wxFileName::GetPathTerminators(wxPathFormat format)
+std::string wxFileName::GetPathTerminators(wxPathFormat format)
 {
     format = GetFormat(format);
 
     // under VMS the end of the path is ']', not the path separator used to
     // separate the components
-    return format == wxPATH_VMS ? wxString(wxT(']')) : GetPathSeparators(format);
+    return format == wxPATH_VMS ? "]" : GetPathSeparators(format);
 }
 
 /* static */
 bool wxFileName::IsPathSeparator(wxChar ch, wxPathFormat format)
 {
-    // wxString::Find() doesn't work as expected with NUL - it will always find
+    // std::string::Find() doesn't work as expected with NUL - it will always find
     // it, so test for it separately
-    return ch != wxT('\0') && GetPathSeparators(format).Find(ch) != wxNOT_FOUND;
+    return ch != wxT('\0') && GetPathSeparators(format).find(ch) != std::string::npos;
 }
 
 /* static */
 bool
-wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
+wxFileName::IsMSWUniqueVolumeNamePath(const std::string& path, wxPathFormat format)
 {
     // return true if the format used is the DOS/Windows one and the string begins
     // with a Windows unique volume name ("\\?\Volume{guid}\")
     return format == wxPATH_DOS &&
             path.length() >= wxMSWUniqueVolumePrefixLength &&
-             path.StartsWith("\\\\?\\Volume{") &&
+             path.rfind("\\\\?\\Volume{", 0) == 0 &&
               path[wxMSWUniqueVolumePrefixLength - 1] == wxFILE_SEP_PATH_DOS;
 }
 
@@ -1965,7 +1983,7 @@ wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
 // path components manipulation
 // ----------------------------------------------------------------------------
 
-/* static */ bool wxFileName::IsValidDirComponent(const wxString& dir)
+/* static */ bool wxFileName::IsValidDirComponent(const std::string& dir)
 {
     if ( dir.empty() )
     {
@@ -1988,7 +2006,7 @@ wxFileName::IsMSWUniqueVolumeNamePath(const wxString& path, wxPathFormat format)
     return true;
 }
 
-bool wxFileName::AppendDir( const wxString& dir )
+bool wxFileName::AppendDir( const std::string& dir )
 {
     if (!IsValidDirComponent(dir))
         return false;
@@ -1996,12 +2014,12 @@ bool wxFileName::AppendDir( const wxString& dir )
     return true;
 }
 
-void wxFileName::PrependDir( const wxString& dir )
+void wxFileName::PrependDir( const std::string& dir )
 {
     InsertDir(0, dir);
 }
 
-bool wxFileName::InsertDir(size_t before, const wxString& dir)
+bool wxFileName::InsertDir(size_t before, const std::string& dir)
 {
     if (!IsValidDirComponent(dir))
         return false;
@@ -2018,28 +2036,28 @@ void wxFileName::RemoveDir(size_t pos)
 // accessors
 // ----------------------------------------------------------------------------
 
-void wxFileName::SetFullName(const wxString& fullname)
+void wxFileName::SetFullName(const std::string& fullname)
 {
     SplitPath(fullname, nullptr /* no volume */, nullptr /* no path */,
                         &m_name, &m_ext, &m_hasExt);
 }
 
-wxString wxFileName::GetFullName() const
+std::string wxFileName::GetFullName() const
 {
-    wxString fullname = m_name;
+    std::string fullname = m_name;
     if ( m_hasExt )
     {
-        fullname << wxFILE_SEP_EXT << m_ext;
+        fullname += fmt::format("{}{}", wxFILE_SEP_EXT, m_ext);
     }
 
     return fullname;
 }
 
-wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
+std::string wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
 {
     format = GetFormat( format );
 
-    wxString fullpath;
+    std::string fullpath;
 
     // return the volume with the path as well if requested
     if ( flags & wxPATH_GET_VOLUME )
@@ -2105,7 +2123,7 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
                 }
 
                 // convert back from ".." to nothing
-                if ( !m_dirs[i].IsSameAs("..") )
+                if ( !wx::utils::IsSameAsCase("..", m_dirs[i]) )
                      fullpath += m_dirs[i];
                 break;
 
@@ -2122,7 +2140,7 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
                 // TODO: What to do with ".." under VMS
 
                 // convert back from ".." to nothing
-                if ( !m_dirs[i].IsSameAs("..") )
+                if ( !wx::utils::IsSameAsCase("..", m_dirs[i]) )
                     fullpath += m_dirs[i];
                 break;
         }
@@ -2139,10 +2157,10 @@ wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
     return fullpath;
 }
 
-wxString wxFileName::GetFullPath( wxPathFormat format ) const
+std::string wxFileName::GetFullPath( wxPathFormat format ) const
 {
     // we already have a function to get the path
-    wxString fullpath = GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR,
+    std::string fullpath = GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR,
                                 format);
 
     // now just add the file name and extension to it
@@ -2152,23 +2170,24 @@ wxString wxFileName::GetFullPath( wxPathFormat format ) const
 }
 
 // Return the short form of the path (returns identity on non-Windows platforms)
-wxString wxFileName::GetShortPath() const
+std::string wxFileName::GetShortPath() const
 {
-    wxString path(GetFullPath());
+    std::string path = GetFullPath();
 
 #if defined(WX_WINDOWS) && defined(__WIN32__)
-    DWORD sz = ::GetShortPathNameW(path.t_str(), nullptr, 0);
+    boost::nowide::wstackstring stackPath{path.c_str()};
+    DWORD sz = ::GetShortPathNameW(stackPath.get(), nullptr, 0);
     if ( sz != 0 )
     {
-        wxString pathOut;
+        boost::nowide::wstackstring pathOut;
         if ( ::GetShortPathNameW
                (
-                path.t_str(),
-                wxStringBuffer(pathOut, sz),
+                stackPath.get(),
+                pathOut.get(),
                 sz
                ) != 0 )
         {
-            return pathOut;
+            return boost::nowide::narrow(pathOut.get());
         }
     }
 #endif // Windows
@@ -2177,46 +2196,46 @@ wxString wxFileName::GetShortPath() const
 }
 
 // Return the long form of the path (returns identity on non-Windows platforms)
-wxString wxFileName::GetLongPath() const
+std::string wxFileName::GetLongPath() const
 {
-    wxString pathOut,
-             path = GetFullPath();
+    std::string path = GetFullPath();
 
 #if defined(__WIN32__)
 
-    DWORD dwSize = ::GetLongPathNameW(path.t_str(), nullptr, 0);
+    boost::nowide::wstackstring stackPath{path.c_str()};
+    DWORD dwSize = ::GetLongPathNameW(stackPath.get(), nullptr, 0);
     if ( dwSize > 0 )
     {
+        boost::nowide::wstackstring stackPathOut;
         if ( ::GetLongPathNameW
                 (
-                path.t_str(),
-                wxStringBuffer(pathOut, dwSize),
+                stackPath.get(),
+                stackPathOut.get(),
                 dwSize
                 ) != 0 )
         {
-            return pathOut;
+            return boost::nowide::narrow(stackPathOut.get());
         }
     }
 
     // Some other error occured.
     // We need to call FindFirstFile on each component in turn.
+    std::string pathOut;
 
     if ( HasVolume() )
         pathOut = GetVolume() +
                   GetVolumeSeparator(wxPATH_DOS) +
                   GetPathSeparator(wxPATH_DOS);
-    else
-        pathOut.clear();
 
-    std::vector<wxString> dirs = GetDirs();
+    std::vector<std::string> dirs = GetDirs();
     dirs.push_back(GetFullName());
 
-    wxString tmpPath;
+    std::string tmpPath;
 
     size_t count = dirs.size();
     for ( size_t i = 0; i < count; i++ )
     {
-        const wxString& dir = dirs[i];
+        const std::string& dir = dirs[i];
 
         // We're using pathOut to collect the long-name path, but using a
         // temporary for appending the last path component which may be
@@ -2229,7 +2248,7 @@ wxString wxFileName::GetLongPath() const
         //
         // And we can't pass a drive and root dir to FindFirstFile (VZ: why?)
         if ( tmpPath.empty() || dir == '.' || dir == ".." ||
-                tmpPath.Last() == GetVolumeSeparator(wxPATH_DOS) )
+                tmpPath.back() == GetVolumeSeparator(wxPATH_DOS) )
         {
             tmpPath += wxFILE_SEP_PATH;
             pathOut = tmpPath;
@@ -2238,7 +2257,9 @@ wxString wxFileName::GetLongPath() const
 
         WIN32_FIND_DATA findFileData;
 
-        HANDLE hFind = ::FindFirstFileW(tmpPath.t_str(), &findFileData);
+        boost::nowide::wstackstring stackTmpPath{tmpPath.c_str()};
+
+        HANDLE hFind = ::FindFirstFileW(stackTmpPath.get(), &findFileData);
         if (hFind == INVALID_HANDLE_VALUE)
         {
             // Error: most likely reason is that path doesn't exist, so
@@ -2249,7 +2270,7 @@ wxString wxFileName::GetLongPath() const
             return tmpPath;
         }
 
-        pathOut += findFileData.cFileName;
+        pathOut += boost::nowide::narrow(findFileData.cFileName);
         if ( (i < (count-1)) )
             pathOut += wxFILE_SEP_PATH;
 
@@ -2280,11 +2301,11 @@ wxPathFormat wxFileName::GetFormat( wxPathFormat format )
 #ifdef wxHAS_FILESYSTEM_VOLUMES
 
 /* static */
-wxString wxFileName::GetVolumeString(char drive, unsigned int flags)
+std::string wxFileName::GetVolumeString(char drive, unsigned int flags)
 {
     wxASSERT_MSG( !(flags & ~wxPATH_GET_SEPARATOR), "invalid flag specified" );
 
-    wxString vol(drive);
+    std::string vol{drive};
     vol += wxFILE_SEP_DSK;
     if ( flags & wxPATH_GET_SEPARATOR )
         vol += wxFILE_SEP_PATH;
@@ -2300,14 +2321,14 @@ wxString wxFileName::GetVolumeString(char drive, unsigned int flags)
 
 /* static */
 void
-wxFileName::SplitVolume(const wxString& fullpathWithVolume,
-                        wxString *pstrVolume,
-                        wxString *pstrPath,
+wxFileName::SplitVolume(const std::string& fullpathWithVolume,
+                        std::string *pstrVolume,
+                        std::string *pstrPath,
                         wxPathFormat format)
 {
     format = GetFormat(format);
 
-    wxString fullpath = fullpathWithVolume;
+    std::string fullpath = fullpathWithVolume;
 
     if ( IsMSWUniqueVolumeNamePath(fullpath, format) )
     {
@@ -2333,7 +2354,7 @@ wxFileName::SplitVolume(const wxString& fullpathWithVolume,
 
         size_t posFirstSlash =
             fullpath.find_first_of(GetPathTerminators(format));
-        if ( posFirstSlash != wxString::npos )
+        if ( posFirstSlash != std::string::npos )
         {
             fullpath[posFirstSlash] = wxFILE_SEP_DSK;
 
@@ -2345,17 +2366,17 @@ wxFileName::SplitVolume(const wxString& fullpathWithVolume,
     // We separate the volume here
     if ( format == wxPATH_DOS || format == wxPATH_VMS )
     {
-        wxString sepVol = GetVolumeSeparator(format);
+        std::string sepVol = GetVolumeSeparator(format);
 
         // we have to exclude the case of a colon in the very beginning of the
         // string as it can't be a volume separator (nor can this be a valid
         // DOS file name at all but we'll leave dealing with this to our caller)
         size_t posFirstColon = fullpath.find_first_of(sepVol);
-        if ( posFirstColon && posFirstColon != wxString::npos )
+        if ( posFirstColon && posFirstColon != std::string::npos )
         {
             if ( pstrVolume )
             {
-                *pstrVolume = fullpath.Left(posFirstColon);
+                *pstrVolume = fullpath.substr(0, posFirstColon);
             }
 
             // remove the volume name and the separator from the full path
@@ -2368,17 +2389,17 @@ wxFileName::SplitVolume(const wxString& fullpathWithVolume,
 }
 
 /* static */
-void wxFileName::SplitPath(const wxString& fullpathWithVolume,
-                           wxString *pstrVolume,
-                           wxString *pstrPath,
-                           wxString *pstrName,
-                           wxString *pstrExt,
+void wxFileName::SplitPath(const std::string& fullpathWithVolume,
+                           std::string *pstrVolume,
+                           std::string *pstrPath,
+                           std::string *pstrName,
+                           std::string *pstrExt,
                            bool *hasExt,
                            wxPathFormat format)
 {
     format = GetFormat(format);
 
-    wxString fullpath;
+    std::string fullpath;
     SplitVolume(fullpathWithVolume, pstrVolume, &fullpath, format);
 
     // find the positions of the last dot and last path separator in the path
@@ -2386,7 +2407,7 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
     size_t posLastSlash = fullpath.find_last_of(GetPathTerminators(format));
 
     // check whether this dot occurs at the very beginning of a path component
-    if ( (posLastDot != wxString::npos) &&
+    if ( (posLastDot != std::string::npos) &&
          (posLastDot == 0 ||
             IsPathSeparator(fullpath[posLastDot - 1]) ||
             (format == wxPATH_VMS && fullpath[posLastDot - 1] == wxT(']'))) )
@@ -2394,25 +2415,25 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
         // dot may be (and commonly -- at least under Unix -- is) the first
         // character of the filename, don't treat the entire filename as
         // extension in this case
-        posLastDot = wxString::npos;
+        posLastDot = std::string::npos;
     }
 
     // if we do have a dot and a slash, check that the dot is in the name part
-    if ( (posLastDot != wxString::npos) &&
-         (posLastSlash != wxString::npos) &&
+    if ( (posLastDot != std::string::npos) &&
+         (posLastSlash != std::string::npos) &&
          (posLastDot < posLastSlash) )
     {
         // the dot is part of the path, not the start of the extension
-        posLastDot = wxString::npos;
+        posLastDot = std::string::npos;
     }
 
     // now fill in the variables provided by user
     if ( pstrPath )
     {
-        if ( posLastSlash == wxString::npos )
+        if ( posLastSlash == std::string::npos )
         {
             // no path at all
-            pstrPath->Empty();
+            pstrPath->clear();
         }
         else
         {
@@ -2426,7 +2447,7 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
             if ( !len && format != wxPATH_MAC)
                 len++;
 
-            *pstrPath = fullpath.Left(len);
+            *pstrPath = fullpath.substr(0, len);
 
             // special VMS hack: remove the initial bracket
             if ( format == wxPATH_VMS )
@@ -2441,15 +2462,15 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
     {
         // take all characters starting from the one after the last slash and
         // up to, but excluding, the last dot
-        size_t nStart = posLastSlash == wxString::npos ? 0 : posLastSlash + 1;
+        size_t nStart = posLastSlash == std::string::npos ? 0 : posLastSlash + 1;
         
         const size_t count = [posLastDot, posLastSlash]() {
-            if ( posLastDot == wxString::npos )
+            if ( posLastDot == std::string::npos )
             {
                 // take all until the end
-                return wxString::npos;
+                return std::string::npos;
             }
-            else if ( posLastSlash == wxString::npos )
+            else if ( posLastSlash == std::string::npos )
             {
                 return posLastDot;
             }
@@ -2459,14 +2480,14 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
             }
         }();
 
-        *pstrName = fullpath.Mid(nStart, count);
+        *pstrName = fullpath.substr(nStart, count);
     }
 
     // finally deal with the extension here: we have an added complication that
     // extension may be empty (but present) as in "foo." where trailing dot
     // indicates the empty extension at the end -- and hence we must remember
     // that we have it independently of pstrExt
-    if ( posLastDot == wxString::npos )
+    if ( posLastDot == std::string::npos )
     {
         // no extension
         if ( pstrExt )
@@ -2478,33 +2499,33 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
     {
         // take everything after the dot
         if ( pstrExt )
-            *pstrExt = fullpath.Mid(posLastDot + 1);
+            *pstrExt = fullpath.substr(posLastDot + 1);
         if ( hasExt )
             *hasExt = true;
     }
 }
 
 /* static */
-void wxFileName::SplitPath(const wxString& fullpath,
-                           wxString *path,
-                           wxString *name,
-                           wxString *ext,
+void wxFileName::SplitPath(const std::string& fullpath,
+                           std::string *path,
+                           std::string *name,
+                           std::string *ext,
                            wxPathFormat format)
 {
-    wxString volume;
+    std::string volume;
     SplitPath(fullpath, &volume, path, name, ext, format);
 
     if ( path )
     {
-        path->Prepend(wxGetVolumeString(volume, format));
+        *path += wxGetVolumeString(volume, format);
     }
 }
 
 /* static */
-wxString wxFileName::StripExtension(const wxString& fullpath)
+std::string wxFileName::StripExtension(const std::string& fullpath)
 {
     wxFileName fn(fullpath);
-    fn.SetExt(wxString());
+    fn.SetExt(std::string());
     return fn.GetFullPath();
 }
 
@@ -2540,9 +2561,9 @@ bool wxFileName::SetPermissions(int permissions)
 }
 
 // Returns the native path for a file URL
-wxFileName wxFileName::URLToFileName(const wxString& url)
+wxFileName wxFileName::URLToFileName(const std::string& url)
 {
-    wxString path;
+    std::string path;
     if ( !url.StartsWith("file://", &path) &&
             !url.StartsWith("file:", &path) )
     {
@@ -2556,27 +2577,27 @@ wxFileName wxFileName::URLToFileName(const wxString& url)
     // file urls either start with a forward slash (local harddisk),
     // otherwise they have a servername/sharename notation,
     // which only exists on msw and corresponds to a unc
-    if ( path.length() > 1 && (path[0u] == wxT('/') && path [1u] != wxT('/')) )
+    if ( path.length() > 1 && (path[0u] == '/' && path [1u] != '/') )
     {
-        path = path.Mid(1);
+        path = path.substr(1);
     }
-    else if ( url.StartsWith("file://") &&
-              (path.Find(wxT('/')) != wxNOT_FOUND) &&
-              (path.length() > 1) && (path[1u] != wxT(':')) )
+    else if ( (url.rfind("file://", 0) == 0) &&
+              (path.find('/') != std::string::npos) &&
+              (path.length() > 1) && (path[1u] != ':') )
     {
-        path = "//" + path;
+        path = fmt::format("{}{}", '//', path);
     }
 #endif
 
-    path.Replace(wxS('/'), wxFILE_SEP_PATH);
+    wx::utils::ReplaceAll(path, "/", std::string{wxFILE_SEP_PATH});
 
     return {path, wxPATH_NATIVE};
 }
 
 // Escapes non-ASCII and others characters in file: URL to be valid URLs
-static wxString EscapeFileNameCharsInURL(const char *in)
+static std::string EscapeFileNameCharsInURL(const char *in)
 {
-    wxString s;
+    std::string s;
 
     for ( const unsigned char *p = (const unsigned char*)in; *p; ++p )
     {
@@ -2588,11 +2609,11 @@ static wxString EscapeFileNameCharsInURL(const char *in)
              (c >= 'A' && c <= 'Z') ||
              strchr("/:$-_.+!*'(),", c) ) // Plus '/' and ':'
         {
-            s << c;
+            s += c;
         }
         else
         {
-            s << wxString::Format("%%%02x", c);
+            s += fmt::format("%%%02x", c);
         }
     }
 
@@ -2600,29 +2621,27 @@ static wxString EscapeFileNameCharsInURL(const char *in)
 }
 
 // Returns the file URL for a native path
-wxString wxFileName::FileNameToURL(const wxFileName& filename)
+std::string wxFileName::FileNameToURL(const wxFileName& filename)
 {
     wxFileName fn = filename;
     fn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_TILDE | wxPATH_NORM_ABSOLUTE);
-    wxString url = fn.GetFullPath(wxPATH_NATIVE);
+    std::string url = fn.GetFullPath(wxPATH_NATIVE);
 
 #ifndef __UNIX__
     // unc notation, wxMSW
-    if ( url.Find("\\\\") == 0 )
+    if ( url.find("\\\\") == 0 )
     {
-        url = url.Mid(2);
+        url = url.substr(2);
     }
     else
     {
         url = "/" + url;
     }
 #endif
+    wx::utils::ReplaceAll(url, std::string{wxFILE_SEP_PATH}, "/");
 
-    url.Replace(wxFILE_SEP_PATH, wxS('/'));
-
-    // Do wxURI- and common practice-compatible escaping: encode the string
-    // into UTF-8, then escape anything non-ASCII:
-    return "file://" + EscapeFileNameCharsInURL(url.utf8_str());
+    // Do wxURI- and common practice-compatible escaping
+    return "file://" + EscapeFileNameCharsInURL(url);
 }
 
 // ----------------------------------------------------------------------------
@@ -2645,7 +2664,7 @@ bool wxFileName::SetTimes(const wxDateTime *dtAccess,
     if ( dtMod )
         ConvertWxToFileTime(&ftWrite, *dtMod);
 
-    wxString path;
+    std::string path;
     unsigned int flags;
     if ( IsDir() )
     {
@@ -2732,7 +2751,7 @@ bool wxFileName::GetTimes(wxDateTime *dtAccess,
     if ( IsDir() )
     {
         // implemented in msw/dir.cpp
-        extern bool wxGetDirectoryTimes(const wxString& dirname,
+        extern bool wxGetDirectoryTimes(const std::string& dirname,
                                         FILETIME *, FILETIME *, FILETIME *);
 
         // we should pass the path without the trailing separator to
@@ -2805,7 +2824,7 @@ bool wxFileName::GetTimes(wxDateTime *dtAccess,
 #if wxUSE_LONGLONG
 
 /* static */
-wxULongLong wxFileName::GetSize(const wxString &filename)
+wxULongLong wxFileName::GetSize(const std::string &filename)
 {
     if (!wxFileExists(filename))
         return wxInvalidSize;
@@ -2830,8 +2849,8 @@ wxULongLong wxFileName::GetSize(const wxString &filename)
 }
 
 /* static */
-wxString wxFileName::GetHumanReadableSize(const wxULongLong &bs,
-                                          const wxString &nullsize,
+std::string wxFileName::GetHumanReadableSize(const wxULongLong &bs,
+                                          const std::string &nullsize,
                                           int precision,
                                           wxSizeConvention conv)
 {
@@ -2842,7 +2861,7 @@ wxString wxFileName::GetHumanReadableSize(const wxULongLong &bs,
     // depending on the convention used the multiplier may be either 1000 or
     // 1024 and the binary infix may be empty (for "KB") or "i" (for "KiB")
     double multiplier = 1024.;
-    wxString biInfix;
+    std::string biInfix;
 
     switch ( conv )
     {
@@ -2867,17 +2886,17 @@ wxString wxFileName::GetHumanReadableSize(const wxULongLong &bs,
 
     const double bytesize = bs.ToDouble();
 
-    wxString result;
+    std::string result;
     if ( bytesize < kiloByteSize )
-        result.Printf("%s B", bs.ToString());
+        result = fmt::format("%s B", bs.ToString());
     else if ( bytesize < megaByteSize )
-        result.Printf("%.*f K%sB", precision, bytesize/kiloByteSize, biInfix);
+        result = fmt::format("%.*f K%sB", precision, bytesize/kiloByteSize, biInfix);
     else if (bytesize < gigaByteSize)
-        result.Printf("%.*f M%sB", precision, bytesize/megaByteSize, biInfix);
+        result = fmt::format("%.*f M%sB", precision, bytesize/megaByteSize, biInfix);
     else if (bytesize < teraByteSize)
-        result.Printf("%.*f G%sB", precision, bytesize/gigaByteSize, biInfix);
+        result = fmt::format("%.*f G%sB", precision, bytesize/gigaByteSize, biInfix);
     else
-        result.Printf("%.*f T%sB", precision, bytesize/teraByteSize, biInfix);
+        result = fmt::format("%.*f T%sB", precision, bytesize/teraByteSize, biInfix);
 
     return result;
 }
@@ -2887,7 +2906,7 @@ wxULongLong wxFileName::GetSize() const
     return GetSize(GetFullPath());
 }
 
-wxString wxFileName::GetHumanReadableSize(const wxString& failmsg,
+std::string wxFileName::GetHumanReadableSize(const std::string& failmsg,
                                           int precision,
                                           wxSizeConvention conv) const
 {
