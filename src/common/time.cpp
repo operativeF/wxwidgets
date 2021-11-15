@@ -9,10 +9,6 @@
 
 #include "wx/time.h"
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 import <ctime>;
 
 #include "wx/intl.h"

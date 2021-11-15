@@ -15,7 +15,6 @@
 #if wxUSE_DBGHELP
 
 #include "wx/dynlib.h"
-#include "wx/msw/wrapwin.h"
 
 #include <imagehlp.h>
 

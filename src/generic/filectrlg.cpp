@@ -25,10 +25,6 @@
 #include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())
 #else

@@ -16,10 +16,6 @@
 #include <cairo.h>
 #include "wx/dynlib.h"
 
-#ifdef __WXMSW__
-#include "wx/msw/wrapwin.h"
-#endif
-
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #include <cairo-quartz.h>

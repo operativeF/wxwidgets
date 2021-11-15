@@ -17,9 +17,6 @@
 
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
 #include "wx/string.h"
 #include "wx/log.h"
 #include "wx/intl.h"

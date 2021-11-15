@@ -34,10 +34,6 @@
     #include "wx/osx/private.h"
 #endif
 
-#if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/wrapwin.h"
-#endif
-
 // NOTE: If using the wxListBox visual attributes works everywhere then this can
 // be removed, as well as the #else case below.
 #define _USE_VISATTR 0

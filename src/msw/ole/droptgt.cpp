@@ -11,7 +11,6 @@
 #if wxUSE_OLE && wxUSE_DRAG_AND_DROP
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/log.h"
 #include "wx/msw/private/comptr.h"

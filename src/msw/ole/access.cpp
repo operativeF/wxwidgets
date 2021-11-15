@@ -16,7 +16,6 @@
 #include "wx/access.h"
 
 #include "wx/app.h"
-#include "wx/msw/wrapwin.h"
 #include "wx/window.h"
 #include "wx/log.h"
 

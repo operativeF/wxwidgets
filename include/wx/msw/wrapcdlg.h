@@ -13,12 +13,7 @@
 
 #include "wx/defs.h"
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/private.h"
-
-#if wxUSE_COMMON_DIALOGS
-    #include <commdlg.h>
-#endif
 
 #endif // _WX_MSW_WRAPCDLG_H_
 

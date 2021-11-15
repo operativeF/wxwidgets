@@ -10,10 +10,6 @@
 
 #include "wx/imagbmp.h"
 
-#ifdef __WXMSW__
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/intl.h"

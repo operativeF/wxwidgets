@@ -13,7 +13,6 @@
 #if wxUSE_TIMER
 
 #include "wx/private/timer.h"
-#include "wx/msw/wrapwin.h"     // for WPARAM
 
 #include <chrono>
 

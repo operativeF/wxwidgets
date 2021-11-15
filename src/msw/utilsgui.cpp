@@ -9,7 +9,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"     // includes <windows.h>
-#include "wx/msw/wrapwin.h"
 
 #include "wx/cursor.h"
 #include "wx/window.h"

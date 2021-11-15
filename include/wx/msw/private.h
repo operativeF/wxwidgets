@@ -13,8 +13,6 @@
 #ifndef _WX_PRIVATE_H_
 #define _WX_PRIVATE_H_
 
-#include "wx/msw/wrapwin.h"
-
 #include "wx/log.h"
 
 #if wxUSE_GUI

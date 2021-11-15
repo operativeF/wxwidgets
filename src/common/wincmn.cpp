@@ -60,10 +60,6 @@
 #include "wx/recguard.h"
 #include "wx/private/window.h"
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 namespace wxMouseCapture
 {
 

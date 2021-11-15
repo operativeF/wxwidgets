@@ -10,8 +10,6 @@
 
 #if wxUSE_INICONF
 
-#include "wx/msw/wrapwin.h"
-
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/app.h"

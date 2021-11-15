@@ -12,8 +12,6 @@
 
 #include "wx/datetime.h"
 
-#include "wx/msw/wrapwin.h"
-
 // namespace for the helper functions related to the date controls
 namespace wxMSWDateControls
 {

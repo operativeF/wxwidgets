@@ -18,9 +18,7 @@
 
 #if wxUSE_LOG
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#else
+#ifndef WX_WINDOWS
     #include <errno.h>
 #endif
 

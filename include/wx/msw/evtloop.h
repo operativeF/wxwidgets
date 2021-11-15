@@ -12,7 +12,6 @@
 #define _WX_MSW_EVTLOOP_H_
 
 #include "wx/dynarray.h"
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/evtloopconsole.h" // for wxMSWEventLoopBase
 
 class wxWindowMSW;

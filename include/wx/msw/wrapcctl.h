@@ -11,10 +11,6 @@
 #ifndef _WX_MSW_WRAPCCTL_H_
 #define _WX_MSW_WRAPCCTL_H_
 
-#include "wx/msw/wrapwin.h"
-
-#include <commctrl.h>
-
 // Set Unicode format for a common control
 inline void wxSetCCUnicodeFormat(HWND hwnd)
 {

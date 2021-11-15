@@ -23,3 +23,5 @@ target_include_directories(wxxml
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
+
+target_precompile_headers(wxxml REUSE_FROM wxaui)

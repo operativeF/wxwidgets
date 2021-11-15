@@ -289,3 +289,6 @@ target_link_libraries(wxbase
         advapi32
         wininet
 )
+
+target_precompile_headers(wxbase REUSE_FROM wxaui)
+target_precompile_headers(wxsharedcmn REUSE_FROM wxaui)

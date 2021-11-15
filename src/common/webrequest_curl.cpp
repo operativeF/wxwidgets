@@ -22,7 +22,6 @@
 
 #ifdef WX_WINDOWS
     #include "wx/hashset.h"
-    #include "wx/msw/wrapwin.h"
 #else
     #include "wx/evtloopsrc.h"
     #include "wx/evtloop.h"

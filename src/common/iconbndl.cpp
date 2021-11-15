@@ -9,10 +9,6 @@
 
 #include "wx/iconbndl.h"
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #include "wx/app.h"
 #include "wx/settings.h"
 #include "wx/log.h"

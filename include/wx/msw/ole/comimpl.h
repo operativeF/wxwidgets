@@ -13,7 +13,6 @@
 
 #include "wx/defs.h"
 
-#include "wx/msw/wrapwin.h"
 // get IUnknown, REFIID &c
 #include <objbase.h>
 

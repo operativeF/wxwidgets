@@ -10,8 +10,6 @@
 
 #if wxUSE_OLE && (wxUSE_DRAG_AND_DROP || wxUSE_DATAOBJ)
 
-#include "wx/msw/wrapwin.h"
-
 #include  <rpc.h>                       // UUID related functions
 
 #include  "wx/msw/ole/uuid.h"

@@ -10,7 +10,6 @@
 
 #if wxUSE_AUI
 
-#include "wx/msw/wrapwin.h"
 #include "wx/msw/private.h"
 
 #include "wx/aui/framemanager.h"

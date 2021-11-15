@@ -50,3 +50,8 @@ target_link_libraries(wxaui
         wxtype
         Microsoft.GSL::GSL
 )
+
+target_precompile_headers(wxaui
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include/wx/msw/winprecomp.h
+)

@@ -197,3 +197,5 @@ endif()
 # if(wxUSE_WEBVIEW)
 #     target_link_libraries(test_gui PRIVATE wxwebview)
 # endif()
+
+target_precompile_headers(test_gui REUSE_FROM wxaui)

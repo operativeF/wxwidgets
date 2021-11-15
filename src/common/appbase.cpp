@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if defined(WX_WINDOWS)
-    #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
-#endif
-
 #include "wx/list.h"
 #include "wx/app.h"
 #include "wx/intl.h"

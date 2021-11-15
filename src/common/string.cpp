@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif // WX_WINDOWS
-
 #include "wx/string.h"
 #include "wx/wxcrtvararg.h"
 #include "wx/intl.h"

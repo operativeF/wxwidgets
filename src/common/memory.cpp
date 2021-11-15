@@ -12,10 +12,6 @@
 
 #include "wx/memory.h"
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/hash.h"

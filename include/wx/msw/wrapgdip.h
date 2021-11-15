@@ -10,8 +10,6 @@
 #ifndef _WX_MSW_WRAPGDIP_H_
 #define _WX_MSW_WRAPGDIP_H_
 
-#include "wx/msw/wrapwin.h"
-
 // min and max must be available for gdiplus.h but we cannot define them as
 // macros because they conflict with std::numeric_limits<T>::min and max when
 // compiling with mingw-w64 and -std=c++17. This happens because with c++17,

@@ -13,7 +13,6 @@
 #if wxUSE_UIACTIONSIMULATOR    
 
 #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
-#include "wx/msw/wrapwin.h"
 
 #include "wx/display.h"
 #include "wx/uiaction.h"

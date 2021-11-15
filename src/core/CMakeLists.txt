@@ -484,3 +484,5 @@ if(wxUSE_LIBNOTIFY)
     wx_lib_include_directories(wxcore PUBLIC ${LIBNOTIFY_INCLUDE_DIRS})
     wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})
 endif()
+
+target_precompile_headers(wxcore REUSE_FROM wxaui)

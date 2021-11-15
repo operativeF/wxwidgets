@@ -8,7 +8,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/event.h"
 #include "wx/string.h"

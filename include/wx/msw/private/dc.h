@@ -11,7 +11,6 @@
 #define _MSW_PRIVATE_DC_H_
 
 #include "wx/msw/dc.h"
-#include "wx/msw/wrapwin.h"
 
 #include "wx/log.h"
 

@@ -16,7 +16,6 @@
     #include <pthread.h>
 #elif defined(__WIN32__)
     #define HAVE_WIN32_THREAD
-    #include "wx/msw/wrapwin.h"
 #endif
 
 #ifdef __GNUC__

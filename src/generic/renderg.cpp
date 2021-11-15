@@ -21,11 +21,6 @@
     #include "wx/osx/private.h"
 #endif
 
-#ifdef WX_WINDOWS
-    // We only need it to get ::MulDiv() declaration, used by wxMulDivInt32().
-    #include "wx/msw/wrapwin.h"
-#endif
-
 import Utils.Geometry;
 
 // ----------------------------------------------------------------------------

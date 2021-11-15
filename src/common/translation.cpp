@@ -11,10 +11,6 @@
 
 #if wxUSE_INTL
 
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #include "wx/dynarray.h"
 #include "wx/string.h"
 #include "wx/intl.h"

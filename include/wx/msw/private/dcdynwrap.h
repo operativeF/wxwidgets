@@ -10,8 +10,6 @@
 #ifndef _WX_MSW_PRIVATE_DCDYNWRAP_H_
 #define _WX_MSW_PRIVATE_DCDYNWRAP_H_
 
-#include "wx/msw/wrapwin.h"
-
 // Namespace for the wrapper functions, hopefully one day we'll be able to get
 // rid of all of them and then it will be easy to find all occurrences of their
 // use by just searching for this namespace name.

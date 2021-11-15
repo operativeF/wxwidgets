@@ -32,7 +32,6 @@
 //
 //  - wxNativeWindowHandle for child windows, i.e. HWND/GtkWidget*/NSControl
 #if defined(__WXMSW__)
-    #include "wx/msw/wrapwin.h"
 
     using wxNativeContainerWindowId = HWND;
     using wxNativeContainerWindowHandle = HWND;

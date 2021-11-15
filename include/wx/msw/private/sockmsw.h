@@ -13,8 +13,6 @@
 #ifndef _WX_MSW_GSOCKMSW_H_
 #define _WX_MSW_GSOCKMSW_H_
 
-#include "wx/msw/wrapwin.h"
-
 #if defined(__CYGWIN__)
     //CYGWIN gives annoying warning about runtime stuff if we don't do this
 #   define USE_SYS_TYPES_FD_SET

@@ -56,9 +56,7 @@
 
 // include the header defining timeval: under Windows this struct is used only
 // with sockets so we need to include winsock.h which we do via windows.h
-#ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-#else
+#ifndef WX_WINDOWS
     #include <sys/time.h>   // for timeval
 #endif
 

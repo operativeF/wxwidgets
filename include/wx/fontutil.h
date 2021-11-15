@@ -21,10 +21,6 @@
 
 #include "wx/font.h"        // for wxFont and wxFontEncoding
 
-#if defined(__WXMSW__)
-    #include "wx/msw/wrapwin.h"
-#endif
-
 #if defined(__WXQT__)
     #include <QtGui/QFont>
 #endif

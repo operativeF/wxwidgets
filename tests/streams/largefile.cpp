@@ -33,8 +33,6 @@
 #include "wx/wfstream.h"
 
 #ifdef WX_WINDOWS
-    #include "wx/msw/wrapwin.h"
-
     #include <winioctl.h>
 #endif
 

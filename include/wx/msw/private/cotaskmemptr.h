@@ -10,9 +10,6 @@
 #ifndef _WX_MSW_PRIVATE_COTASKMEMPTR_H_
 #define _WX_MSW_PRIVATE_COTASKMEMPTR_H_
 
-// needed for ::CoTaskMem{Alloc|Free}()
-#include "wx/msw/wrapwin.h"
-
 // ----------------------------------------------------------------------------
 // wxCoTaskMemPtr: A barebone RAII class for pointers to be freed with ::CoTaskMemFree().
 // ----------------------------------------------------------------------------

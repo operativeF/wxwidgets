@@ -357,8 +357,6 @@ BENCHMARK_FUNC(StringCmpNoCase)
 // for case-sensitive comparison (see #10375).
 #ifdef WX_WINDOWS
 
-#include "wx/msw/wrapwin.h"
-
 BENCHMARK_FUNC(MSWlstrcmp)
 {
     const wxString& s = GetTestAsciiString();
