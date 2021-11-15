@@ -25,8 +25,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrapcctl.h"
 
-#include <windowsx.h>
-
 #include <memory>
 
 import Utils.MSW.Wrap;

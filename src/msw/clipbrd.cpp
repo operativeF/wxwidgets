@@ -42,10 +42,6 @@
     #define wxUSE_OLE_CLIPBOARD 0
 #endif
 
-#if wxUSE_OLE_CLIPBOARD
-    #include <ole2.h>
-#endif // wxUSE_OLE_CLIPBOARD
-
 // ===========================================================================
 // implementation
 // ===========================================================================

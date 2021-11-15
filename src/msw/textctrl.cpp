@@ -32,8 +32,6 @@
 
 #include "wx/textfile.h"
 
-#include <windowsx.h>
-
 #include <sys/types.h>
 
 #include <boost/nowide/convert.hpp>

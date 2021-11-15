@@ -19,9 +19,6 @@
 #include "wx/window.h"
 #include "wx/log.h"
 
-#include <oleauto.h>
-#include <oleacc.h>
-
 #include "wx/msw/ole/oleutils.h"
 
 #ifndef OBJID_CLIENT

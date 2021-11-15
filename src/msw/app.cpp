@@ -28,10 +28,6 @@
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/private/timer.h"
 
-#if wxUSE_OLE
-    #include <ole2.h>
-#endif
-
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 

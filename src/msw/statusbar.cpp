@@ -23,7 +23,6 @@
 #include "wx/msw/private.h"
 
 #include "wx/tooltip.h"
-#include <windowsx.h>
 
 #if wxUSE_UXTHEME
     #include "wx/msw/uxtheme.h"

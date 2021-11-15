@@ -32,8 +32,6 @@
 #include "wx/sysopt.h"
 #include "wx/rawbmp.h"
 
-#include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
-
 #include "wx/msw/dib.h"
 
 #if wxUSE_UXTHEME
@@ -42,6 +40,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
+
+#include <windowsx.h>
 
 import <stack>;
 

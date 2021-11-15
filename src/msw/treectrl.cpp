@@ -20,8 +20,6 @@
 #include "wx/app.h"
 #include "wx/settings.h"
 
-#include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
-
 #include "wx/msw/private/winstyle.h"
 
 #include "wx/imaglist.h"
@@ -30,6 +28,8 @@
 #include "wx/msw/uxtheme.h"
 
 #include <boost/nowide/stackstring.hpp>
+
+#include <windowsx.h>
 
 import <array>;
 

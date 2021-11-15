@@ -26,9 +26,9 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
 
-#include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
-
 #include <boost/nowide/convert.hpp>
+
+#include <windowsx.h>
 
 import Utils.MSW.Wrap;
 

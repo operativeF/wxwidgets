@@ -31,4 +31,10 @@
 
 #include <commctrl.h>
 
+#include <ole2.h>
+#include <ole2ver.h>
+#include <oleidl.h>
+#include <oleacc.h>
+#include <oleauto.h>
+
 #endif // WINPRECOMP_H

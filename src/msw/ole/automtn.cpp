@@ -22,12 +22,7 @@
 #include <wtypes.h>
 #include <unknwn.h>
 
-#include <ole2.h>
 #define _huge
-
-#include <ole2ver.h>
-
-#include <oleauto.h>
 
 #if wxUSE_DATETIME
 #include "wx/datetime.h"

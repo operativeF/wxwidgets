@@ -9,6 +9,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include <windowsx.h>
 #include "wx/msw/private.h"
 
 #include "wx/window.h"
@@ -52,8 +53,6 @@
 
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
-    #include <ole2.h>
-    #include <oleacc.h>
     #ifndef OBJID_CLIENT
         #define OBJID_CLIENT 0xFFFFFFFC
     #endif
@@ -89,8 +88,6 @@
 
 #include <shellapi.h>
 #include <mmsystem.h>
-
-#include <windowsx.h>
 
 #if wxUSE_UXTHEME
     #include "wx/msw/uxtheme.h"

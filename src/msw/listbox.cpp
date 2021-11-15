@@ -25,14 +25,14 @@
 
 #include "wx/msw/private.h"
 
-#include <windowsx.h>
-
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
 #include <gsl/gsl>
 
 #include <memory>
+
+#include <windowsx.h>
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"

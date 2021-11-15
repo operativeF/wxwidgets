@@ -17,9 +17,6 @@
 
 #include "wx/dnd.h"
 
-
-#include <oleauto.h>
-
 #include "wx/msw/ole/oleutils.h"
 
 // ----------------------------------------------------------------------------

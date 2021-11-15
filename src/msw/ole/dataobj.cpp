@@ -24,8 +24,6 @@
 #include "wx/msw/wrapshl.h"
 
 #if wxUSE_OLE
-#include <oleauto.h>
-
 #include "wx/msw/ole/oleutils.h"
 #endif // wxUSE_OLE
 
