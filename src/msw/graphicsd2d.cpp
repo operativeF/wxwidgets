@@ -70,11 +70,6 @@ import <limits>;
 #include <memory>
 import <stack>;
 
-// This must be the last header included to only affect the DEFINE_GUID()
-// occurrences below but not any GUIDs declared in the standard files included
-// above.
-#include <initguid.h>
-
 // Generic error message for a failed direct2d operation
 #define wxFAILED_HRESULT_MSG(result) \
     fmt::format("Direct2D failed with HRESULT {:x}", (result))
@@ -240,12 +235,6 @@ DEFINE_GUID(wxIID_IDWriteFactory,
 
 DEFINE_GUID(wxIID_IWICBitmapSource,
             0x00000120, 0xa8f2, 0x4877, 0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94);
-
-DEFINE_GUID(GUID_WICPixelFormat32bppPBGRA,
-            0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x10);
-
-DEFINE_GUID(GUID_WICPixelFormat32bppBGR,
-            0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x0e);
 
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
 DEFINE_GUID(IID_IDXGIDevice,

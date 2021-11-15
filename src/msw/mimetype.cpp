@@ -29,7 +29,6 @@
 
 #ifdef WX_WINDOWS
     #include "wx/msw/registry.h"
-    #include <shlwapi.h>
     #include "wx/msw/wrapshl.h"
 
     // For MSVC we can link in the required library explicitly, for the other

@@ -24,9 +24,6 @@
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/private/cotaskmemptr.h"
 
-#include <shlwapi.h>
-#include <initguid.h>
-
 #if wxUSE_DYNLIB_CLASS
     #include "wx/dynlib.h"
 #endif // wxUSE_DYNLIB_CLASS
@@ -84,45 +81,6 @@ DEFINE_GUID(wxIID_IShellItem,
 
 using HIMAGELIST = IUnknown*;
 
-typedef enum THUMBBUTTONFLAGS
-{
-    THBF_ENABLED    = 0,
-    THBF_DISABLED   = 0x1,
-    THBF_DISMISSONCLICK = 0x2,
-    THBF_NOBACKGROUND   = 0x4,
-    THBF_HIDDEN = 0x8,
-    THBF_NONINTERACTIVE = 0x10
-} THUMBBUTTONFLAGS;
-
-typedef enum THUMBBUTTONMASK
-{
-    THB_BITMAP  = 0x1,
-    THB_ICON    = 0x2,
-    THB_TOOLTIP = 0x4,
-    THB_FLAGS   = 0x8
-} THUMBBUTTONMASK;
-
-typedef struct THUMBBUTTON
-{
-    THUMBBUTTONMASK dwMask;
-    UINT iId;
-    UINT iBitmap;
-    HICON hIcon;
-    WCHAR szTip[260];
-    THUMBBUTTONFLAGS dwFlags;
-} THUMBBUTTON;
-
-typedef struct THUMBBUTTON *LPTHUMBBUTTON;
-
-typedef enum TBPFLAG
-{
-    TBPF_NOPROGRESS = 0,
-    TBPF_INDETERMINATE  = 0x1,
-    TBPF_NORMAL = 0x2,
-    TBPF_ERROR  = 0x4,
-    TBPF_PAUSED = 0x8
-} TBPFLAG;
-
 #ifndef PROPERTYKEY_DEFINED
 typedef struct _tagpropertykey
 {
@@ -148,42 +106,6 @@ DEFINE_PROPERTYKEY(PKEY_Link_Arguments,
 
 DEFINE_GUID(wxIID_IShellLink,
     0x000214F9, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
-
-typedef enum _SIGDN
-{
-    SIGDN_NORMALDISPLAY               = 0,
-    SIGDN_PARENTRELATIVEPARSING       = (int)0x80018001,
-    SIGDN_DESKTOPABSOLUTEPARSING      = (int)0x80028000,
-    SIGDN_PARENTRELATIVEEDITING       = (int)0x80031001,
-    SIGDN_DESKTOPABSOLUTEEDITING      = (int)0x8004c000,
-    SIGDN_FILESYSPATH                 = (int)0x80058000,
-    SIGDN_URL                         = (int)0x80068000,
-    SIGDN_PARENTRELATIVEFORADDRESSBAR = (int)0x8007c001,
-    SIGDN_PARENTRELATIVE              = (int)0x80080001
-} SIGDN;
-
-enum _SICHINTF
-{
-    SICHINT_DISPLAY                       = 0,
-    SICHINT_ALLFIELDS                     = (int)0x80000000,
-    SICHINT_CANONICAL                     = 0x10000000,
-    SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL = 0x20000000
-};
-
-using SICHINTF = DWORD;
-using SFGAOF = ULONG;
-
-typedef enum KNOWNDESTCATEGORY
-{
-    KDC_FREQUENT    = 1,
-    KDC_RECENT  = ( KDC_FREQUENT + 1 )
-} KNOWNDESTCATEGORY;
-
-typedef enum APPDOCLISTTYPE
-{
-    ADLT_RECENT   = 0,
-    ADLT_FREQUENT = ( ADLT_RECENT + 1 )
-} APPDOCLISTTYPE;
 
 } // anonymous namespace
 
@@ -243,57 +165,6 @@ struct wxIShellLinkW : public IUnknown
     virtual HRESULT wxSTDCALL SetRelativePath(LPCWSTR, DWORD) = 0;
     virtual HRESULT wxSTDCALL Resolve(HWND, DWORD) = 0;
     virtual HRESULT wxSTDCALL SetPath(LPCWSTR) = 0;
-};
-
-struct IShellItem : public IUnknown
-{
-    virtual HRESULT wxSTDCALL BindToHandler(IBindCtx*, REFGUID, REFIID, void **) = 0;
-    virtual HRESULT wxSTDCALL GetParent(IShellItem **) = 0;
-    virtual HRESULT wxSTDCALL GetDisplayName(SIGDN, LPWSTR*) = 0;
-    virtual HRESULT wxSTDCALL GetAttributes(SFGAOF, SFGAOF*) = 0;
-    virtual HRESULT wxSTDCALL Compare(IShellItem *, SICHINTF, int *) = 0;
-};
-
-struct IObjectArray : public IUnknown
-{
-    virtual HRESULT wxSTDCALL GetCount(UINT*) = 0;
-    virtual HRESULT wxSTDCALL GetAt(UINT, REFIID, void **) = 0;
-};
-
-struct IObjectCollection : public IObjectArray
-{
-    virtual HRESULT wxSTDCALL AddObject(IUnknown *) = 0;
-    virtual HRESULT wxSTDCALL AddFromArray(IObjectArray *) = 0;
-    virtual HRESULT wxSTDCALL RemoveObjectAt(UINT) = 0;
-    virtual HRESULT wxSTDCALL Clear() = 0;
-};
-
-struct IPropertyStore : public IUnknown
-{
-    virtual HRESULT wxSTDCALL GetCount(DWORD *) = 0;
-    virtual HRESULT wxSTDCALL GetAt(DWORD, PROPERTYKEY *) = 0;
-    virtual HRESULT wxSTDCALL GetValue(REFPROPERTYKEY, PROPVARIANT *) = 0;
-    virtual HRESULT wxSTDCALL SetValue(REFPROPERTYKEY, const PROPVARIANT&) = 0;
-    virtual HRESULT wxSTDCALL Commit() = 0;
-};
-
-struct ICustomDestinationList : public IUnknown
-{
-    virtual HRESULT wxSTDCALL SetAppID(LPCWSTR) = 0;
-    virtual HRESULT wxSTDCALL BeginList(UINT*, REFIID, void**) = 0;
-    virtual HRESULT wxSTDCALL AppendCategory(LPCWSTR, IObjectArray *) = 0;
-    virtual HRESULT wxSTDCALL AppendKnownCategory(KNOWNDESTCATEGORY) = 0;
-    virtual HRESULT wxSTDCALL AddUserTasks(IObjectArray *) = 0;
-    virtual HRESULT wxSTDCALL CommitList() = 0;
-    virtual HRESULT wxSTDCALL GetRemovedDestinations(REFIID, void**) = 0;
-    virtual HRESULT wxSTDCALL DeleteList(LPCWSTR) = 0;
-    virtual HRESULT wxSTDCALL AbortList() = 0;
-};
-
-struct IApplicationDocumentLists : public IUnknown
-{
-    virtual HRESULT wxSTDCALL SetAppID(LPCWSTR) = 0;
-    virtual HRESULT wxSTDCALL GetList(APPDOCLISTTYPE, UINT, REFIID, void**) = 0;
 };
 
 namespace

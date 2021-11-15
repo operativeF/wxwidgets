@@ -14,8 +14,6 @@
 #include "wx/window.h"
 #include "wx/utils.h"
 
-#include <shlwapi.h>
-
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 

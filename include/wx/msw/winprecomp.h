@@ -36,7 +36,9 @@
 #include <oleidl.h>
 #include <oleacc.h>
 #include <oleauto.h>
-
 #include <shellapi.h>
+#include <ShlObj.h>
+#include <shlwapi.h>
+#include <initguid.h>
 
 #endif // WINPRECOMP_H

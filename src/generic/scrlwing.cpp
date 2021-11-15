@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifdef WX_WINDOWS
-    #include <windows.h> // for DLGC_WANTARROWS
-#endif
-
 #include "wx/scrolwin.h"
 
 #include "wx/utils.h"

@@ -22,7 +22,6 @@
 #include "wx/msw/private/webview_ie.h"
 #include "wx/private/jsscriptwrapper.h"
 
-#include <initguid.h>
 #include <exdispid.h>
 #include <mshtml.h>
 

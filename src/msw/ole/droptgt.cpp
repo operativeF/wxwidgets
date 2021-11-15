@@ -22,8 +22,6 @@
 
 #include "wx/msw/ole/oleutils.h"
 
-#include <initguid.h>
-
 // Some (very) old SDKs don't define IDropTargetHelper, so define our own
 // version of it here.
 struct wxIDropTargetHelper : public IUnknown

@@ -26,8 +26,6 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include <shlwapi.h>
-
 #include <boost/nowide/convert.hpp>
 
 
@@ -63,11 +61,7 @@
     #define SHACF_FILESYS_DIRS 0x00000020
 #endif
 
-// This must be the last header included to only affect the DEFINE_GUID()
-// occurrences below but not any GUIDs declared in the standard files included
-// above.
-#include <initguid.h>
-
+#ifdef __CYGWIN__
 // Normally this interface and its IID are defined in shobjidl.h header file
 // included in the platform SDK but MinGW and Cygwin don't have it so redefine
 // the interface ourselves and, as long as we do it all, do it for all
@@ -79,6 +73,8 @@ public:
     virtual HRESULT wxSTDCALL GetDropDownStatus(DWORD *, LPWSTR *) = 0;
     virtual HRESULT wxSTDCALL ResetEnumerator() = 0;
 };
+
+#endif // __CYGWIN__
 
 namespace
 {

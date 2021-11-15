@@ -23,8 +23,6 @@
 #include "wx/msw/private/cotaskmemptr.h"
 #include "wx/dynlib.h"
 
-#include <initguid.h>
-
 #include "wx/msw/private.h"
 
 #include <boost/nowide/convert.hpp>

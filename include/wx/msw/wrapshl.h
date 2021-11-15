@@ -11,8 +11,6 @@
 #ifndef _WX_MSW_WRAPSHL_H_
 #define _WX_MSW_WRAPSHL_H_
 
-#include <shlobj.h>
-
 #include "wx/log.h"
 
 // ----------------------------------------------------------------------------
