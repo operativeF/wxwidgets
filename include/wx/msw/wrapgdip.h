@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_WRAPGDIP_H_
 #define _WX_MSW_WRAPGDIP_H_
 
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 // min and max must be available for gdiplus.h but we cannot define them as
 // macros because they conflict with std::numeric_limits<T>::min and max when

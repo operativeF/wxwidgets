@@ -28,9 +28,10 @@
 // some compilers require including <windows.h> before <shellapi.h> so do it
 // even if this is not necessary with most of them
 
-#include "wx/msw/wrapshl.h"
+#include "wx/msw/wrapwin.h"
 
-import Utils.Wrap.Windows;
+#include <shellapi.h>
+#include "wx/msw/wrapshl.h"
 
 #if wxUSE_BASE
 

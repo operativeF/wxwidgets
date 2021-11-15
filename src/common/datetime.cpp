@@ -47,7 +47,7 @@
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
 #ifdef WX_WINDOWS
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 #include "wx/string.h"

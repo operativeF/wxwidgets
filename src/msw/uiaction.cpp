@@ -13,14 +13,13 @@
 #if wxUSE_UIACTIONSIMULATOR    
 
 #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
+#include "wx/msw/wrapwin.h"
 
 #include "wx/display.h"
 #include "wx/uiaction.h"
 #include "wx/private/uiaction.h"
 
 #include "wx/msw/private/keyboard.h"
-
-import Utils.Wrap.Windows;
 
 import <cmath>;
 

@@ -11,9 +11,8 @@
 #ifndef _WX_MSW_TOPLEVEL_H_
 #define _WX_MSW_TOPLEVEL_H_
 
+#include "wx/msw/wrapwin.h"
 #include "wx/weakref.h"
-
-import Utils.Wrap.Windows;
 
 import Utils.Geometry;
 

@@ -5,14 +5,24 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+// For compilers that support precompilation, includes "wx/wx.h".
+#include "wx/wxprec.h"
+
 #include "autocapture.h"
+
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+
+    #ifdef __WXMAC__
+        import <cstring>;
+    #endif
+#endif
 
 #include "wx/bitmap.h"
 #include "wx/filename.h"
 #include "wx/notebook.h"
 
 import <ctime>;
-import <cstring>;
 
 
 // ----------------------------------------------------------------------------

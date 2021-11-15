@@ -13,7 +13,7 @@
 #include "wx/memory.h"
 
 #ifdef WX_WINDOWS
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 #include "wx/utils.h"

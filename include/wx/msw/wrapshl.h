@@ -11,11 +11,11 @@
 #ifndef _WX_MSW_WRAPSHL_H_
 #define _WX_MSW_WRAPSHL_H_
 
+#include "wx/msw/wrapwin.h"
+
 #include <shlobj.h>
 
 #include "wx/log.h"
-
-import Utils.Wrap.Windows;
 
 // ----------------------------------------------------------------------------
 // wxItemIdList implements RAII on top of ITEMIDLIST

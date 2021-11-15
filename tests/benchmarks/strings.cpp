@@ -357,7 +357,7 @@ BENCHMARK_FUNC(StringCmpNoCase)
 // for case-sensitive comparison (see #10375).
 #ifdef WX_WINDOWS
 
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 BENCHMARK_FUNC(MSWlstrcmp)
 {

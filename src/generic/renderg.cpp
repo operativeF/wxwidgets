@@ -23,7 +23,7 @@
 
 #ifdef WX_WINDOWS
     // We only need it to get ::MulDiv() declaration, used by wxMulDivInt32().
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 import Utils.Geometry;

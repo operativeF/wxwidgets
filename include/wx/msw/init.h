@@ -24,7 +24,7 @@ extern int wxEntry();
 #if wxUSE_GUI
 
 // we need HINSTANCE declaration to define WinMain()
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 #ifndef SW_SHOWNORMAL
     #define SW_SHOWNORMAL 1

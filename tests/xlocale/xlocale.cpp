@@ -15,6 +15,10 @@
 
 #if wxUSE_XLOCALE
 
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #include "wx/xlocale.h"
 
 // --------------------------------------------------------------------------

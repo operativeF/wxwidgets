@@ -10,6 +10,9 @@
 
 #include "testprec.h"
 
+// FIXME: Mass include
+#include "wx/wx.h"
+
 #if wxUSE_XRC
 
 #include "wx/fs_inet.h"

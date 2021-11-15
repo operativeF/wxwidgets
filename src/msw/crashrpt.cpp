@@ -15,10 +15,6 @@
 #include "wx/msw/debughlp.h"
 #include "wx/msw/crashrpt.h"
 
-import Utils.Wrap.Windows;
-
-#include <WinUser.h>
-
 // ----------------------------------------------------------------------------
 // classes
 // ----------------------------------------------------------------------------

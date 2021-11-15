@@ -16,12 +16,11 @@
 #undef GetHwnd
 
 // include before wincodec.h to prevent winsock/winsock2 redefinition warnings
+#include "wx/msw/wrapwin.h"
 
 #include <d2d1.h>
 #include <dwrite.h>
 #include <wincodec.h>
-
-import Utils.Wrap.Windows;
 
 IWICImagingFactory* wxWICImagingFactory();
 ID2D1Factory* wxD2D1Factory();

@@ -13,7 +13,7 @@
 #ifndef _WX_MSW_GSOCKMSW_H_
 #define _WX_MSW_GSOCKMSW_H_
 
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 #if defined(__CYGWIN__)
     //CYGWIN gives annoying warning about runtime stuff if we don't do this

@@ -37,8 +37,15 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "doctest.h"
 
-import <iostream>;
-import <string>;
+
+// for all others, include the necessary headers
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+
+    import <iostream>;
+    import <string>;
+#endif
+
 
 using std::string;
 

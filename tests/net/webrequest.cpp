@@ -13,6 +13,10 @@
 #pragma hdrstop
 #endif
 
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #if wxUSE_WEBREQUEST
 
 #include "wx/webrequest.h"

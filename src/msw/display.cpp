@@ -11,6 +11,7 @@
 
 
 #include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
 
 #include "wx/app.h"
 #include "wx/frame.h"
@@ -21,7 +22,6 @@
 
 #include <memory>
 
-import Utils.Wrap.Windows;
 import Utils.MSW.Wrap;
 
 namespace

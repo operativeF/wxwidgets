@@ -8,6 +8,10 @@
 
 #include "doctest.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #include "wx/list.h"
 
 // --------------------------------------------------------------------------

@@ -12,7 +12,7 @@
 
 #include "wx/datetime.h"
 
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 // namespace for the helper functions related to the date controls
 namespace wxMSWDateControls

@@ -34,8 +34,14 @@
 
 #if wxUSE_REGEX
 
-import <string>;
-import <vector>;
+// for all others, include the necessary headers
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+
+    import <string>;
+    import <vector>;
+#endif
+
 
 // many of the tests are specific to the builtin regex lib, so only attempts
 // to do them when using the builtin regex lib.

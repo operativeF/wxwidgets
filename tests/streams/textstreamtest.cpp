@@ -8,6 +8,11 @@
 
 #include "testprec.h"
 
+
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #include "wx/txtstrm.h"
 #include "wx/wfstream.h"
 

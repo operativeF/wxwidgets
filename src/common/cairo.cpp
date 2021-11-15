@@ -17,7 +17,7 @@
 #include "wx/dynlib.h"
 
 #ifdef __WXMSW__
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 #endif
 
 #ifdef __WXMAC__

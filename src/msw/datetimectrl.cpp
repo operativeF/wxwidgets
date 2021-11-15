@@ -13,6 +13,7 @@
 
 #ifdef wxNEEDS_DATETIMEPICKCTRL
 
+#include "wx/msw/wrapwin.h"
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
@@ -20,8 +21,6 @@
 #include "wx/settings.h"
 
 #include "wx/msw/private/datecontrols.h"
-
-import Utils.Wrap.Windows;
 
 // apparently some versions of mingw define these macros erroneously
 #ifndef DateTime_GetSystemtime

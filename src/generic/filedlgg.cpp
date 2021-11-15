@@ -19,9 +19,8 @@
 #endif
 
 #ifdef __WXMSW__
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
-
 #include "wx/hash.h"
 #include "wx/intl.h"
 #include "wx/settings.h"

@@ -8,11 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+
+
+
 #if wxUSE_OLE && wxUSE_ACCESSIBILITY
 
 #include "wx/access.h"
 
 #include "wx/app.h"
+#include "wx/msw/wrapwin.h"
 #include "wx/window.h"
 #include "wx/log.h"
 
@@ -20,8 +24,6 @@
 #include <oleacc.h>
 
 #include "wx/msw/ole/oleutils.h"
-
-import Utils.Wrap.Windows;
 
 #ifndef OBJID_CLIENT
 #define OBJID_CLIENT 0xFFFFFFFC

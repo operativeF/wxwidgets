@@ -8,6 +8,12 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
+
+// for all others, include the necessary headers
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif
+
 #if !wxUSE_COMBOCTRL
     #error "Please set wxUSE_COMBOCTRL to 1 and rebuild the library."
 #endif

@@ -17,7 +17,7 @@
 #include "wx/stopwatch.h"
 
 #ifdef WX_WINDOWS
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 #include "wx/log.h"

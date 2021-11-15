@@ -10,6 +10,10 @@
 
 #include "testprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #include "wx/event.h"
 #include "wx/weakref.h"
 

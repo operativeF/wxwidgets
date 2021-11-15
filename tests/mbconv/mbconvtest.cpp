@@ -10,6 +10,11 @@
 
 #include "testprec.h"
 
+
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif // WX_PRECOMP
+
 #include "wx/strconv.h"
 #include "wx/string.h"
 #include "wx/txtstrm.h"

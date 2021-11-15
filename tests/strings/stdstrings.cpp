@@ -10,7 +10,13 @@
 
 #include "testprec.h"
 
-import <algorithm>;
+
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+
+    import <algorithm>;
+#endif // WX_PRECOMP
+
 
 TEST_CASE("StdString::Constructors")
 {

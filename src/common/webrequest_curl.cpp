@@ -22,7 +22,7 @@
 
 #ifdef WX_WINDOWS
     #include "wx/hashset.h"
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #else
     #include "wx/evtloopsrc.h"
     #include "wx/evtloop.h"

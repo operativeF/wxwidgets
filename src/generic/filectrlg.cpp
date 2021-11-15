@@ -26,7 +26,7 @@
 #include "wx/imaglist.h"
 
 #ifdef WX_WINDOWS
-    import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 #if defined(WX_WINDOWS)

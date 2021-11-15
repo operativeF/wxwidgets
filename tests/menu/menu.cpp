@@ -12,10 +12,11 @@
 
 #if wxUSE_MENUBAR
 
-#include "wx/app.h"
-#include "wx/frame.h"
+// FIXME: Mass include.
+#include "wx/wx.h"
+
 #include "wx/menu.h"
-#include "wx/textctrl.h"
+
 
 #include "wx/translation.h"
 #include "wx/uiaction.h"

@@ -10,6 +10,13 @@
 
 #define USE_REMOTE 1
 
+
+
+
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+#endif
+
 #include <math.h>
 
 #include "wx/process.h"

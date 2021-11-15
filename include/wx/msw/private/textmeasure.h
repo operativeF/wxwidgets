@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_PRIVATE_TEXTMEASURE_H_
 #define _WX_MSW_PRIVATE_TEXTMEASURE_H_
 
-import Utils.Wrap.Windows;
+#include "wx/msw/wrapwin.h"
 
 // ----------------------------------------------------------------------------
 // wxTextMeasure for MSW.

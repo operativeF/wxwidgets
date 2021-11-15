@@ -15,8 +15,8 @@
 
 #if wxUSE_OLE
 
-import Utils.Wrap.Windows;
-
+// ole2.h includes windows.h, so include wrapwin.h first
+#include "wx/msw/wrapwin.h"
 // get IUnknown, REFIID &c
 #include <ole2.h>
 #include "wx/intl.h"

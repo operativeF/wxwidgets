@@ -22,7 +22,7 @@
 #include "wx/font.h"        // for wxFont and wxFontEncoding
 
 #if defined(__WXMSW__)
-import Utils.Wrap.Windows;
+    #include "wx/msw/wrapwin.h"
 #endif
 
 #if defined(__WXQT__)

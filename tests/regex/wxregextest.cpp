@@ -6,11 +6,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_REGEX
-
 #include "testprec.h"
 
-import <string>;
+#ifndef WX_PRECOMP
+    #include "wx/wx.h"
+
+    import <string>;
+#endif
+
+#if wxUSE_REGEX
 
 #include "wx/regex.h"
 #include "wx/tokenzr.h"
