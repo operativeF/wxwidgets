@@ -190,7 +190,7 @@ public:
 
         // the array elements correspond to the parameters of the ctor above in
         // the same order
-    wxFileTypeInfo(const std::vector<wxString>& sArray);
+    wxFileTypeInfo(const std::vector<std::string>& sArray);
 
         // invalid item - use this to terminate the array passed to
         // wxMimeTypesManager::AddFallbacks

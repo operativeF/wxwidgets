@@ -19,6 +19,7 @@
 
 import Utils.Strings;
 
+import <charconv>;
 import <limits>;
 import <string>;
 import <vector>;
@@ -248,7 +249,8 @@ bool wxConfigBase::DoReadLongLong(const std::string& key, wxLongLong_t *pll) con
 
     wx::utils::TrimTrailingSpace(str);
 
-    return str.ToLongLong(pll);
+    auto [p, ec] = std::from_chars(str.data(), str.data() + str.size(), *pll);
+    return ec == std::errc();
 }
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
@@ -258,14 +260,15 @@ bool wxConfigBase::DoReadDouble(const std::string& key, double* val) const
     std::string str;
     if ( Read(key, &str) )
     {
-        if ( str.ToCDouble(val) )
+        auto [p, ec] = std::from_chars(key.data(), key.data() + key.size(), *val);
+        if ( ec == std::errc() )
             return true;
 
         // Previous versions of wxFileConfig wrote the numbers out using the
         // current locale and not the C one as now, so attempt to parse the
         // string as a number in the current locale too, for compatibility.
-        if ( str.ToDouble(val) )
-            return true;
+        // if ( str.ToDouble(val) )
+        //     return true;
     }
 
     return false;
@@ -300,7 +303,8 @@ bool wxConfigBase::DoWriteDouble(const std::string& key, double val)
     // Notice that we always write out the numbers in C locale and not the
     // current one. This makes the config files portable between machines using
     // different locales.
-    return DoWriteString(key, std::string::FromCDouble(val));
+    auto valAsString = fmt::format("{:d}", val);
+    return DoWriteString(key, valAsString);
 }
 
 bool wxConfigBase::DoWriteBool(const std::string& key, bool value)
@@ -320,7 +324,8 @@ wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
 
   // the path is everything which precedes the last slash and the name is
   // everything after it -- and this works correctly if there is no slash too
-  std::string strPath = strEntry.BeforeLast(wxCONFIG_PATH_SEPARATOR, &m_strName);
+  std::string strPath = wx::utils::BeforeLast(strEntry, wxCONFIG_PATH_SEPARATOR);
+  m_strName = wx::utils::AfterLast(strEntry, wxCONFIG_PATH_SEPARATOR);
 
   // except in the special case of "/keyname" when there is nothing before "/"
   if ( strPath.empty() &&
@@ -347,7 +352,7 @@ wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
            int value;
            pConfig->Read("MainWindowX", & value);
         */
-        m_strOldPath = m_pContainer->GetPath().wc_str();
+        m_strOldPath = m_pContainer->GetPath();
         if ( *m_strOldPath.c_str() != wxCONFIG_PATH_SEPARATOR )
           m_strOldPath += wxCONFIG_PATH_SEPARATOR;
         m_pContainer->SetPath(strPath);
@@ -364,7 +369,7 @@ void wxConfigPathChanger::UpdateIfDeleted()
     // find the deepest still existing parent path of the original path
     while ( !m_pContainer->HasGroup(m_strOldPath) )
     {
-        m_strOldPath = m_strOldPath.BeforeLast(wxCONFIG_PATH_SEPARATOR);
+        m_strOldPath = wx::utils::BeforeLast(m_strOldPath, wxCONFIG_PATH_SEPARATOR);
         if ( m_strOldPath.empty() )
             m_strOldPath = wxCONFIG_PATH_SEPARATOR;
     }
@@ -422,19 +427,19 @@ enum Bracket
 std::string wxExpandEnvVars(const std::string& str)
 {
   std::string strResult;
-  strResult.Alloc(str.length());
+  strResult.resize(str.length());
 
   size_t m;
   for ( size_t n = 0; n < str.length(); n++ ) {
-    switch ( str[n].GetValue() ) {
+    switch ( str[n] ) {
 #ifdef WX_WINDOWS
-      case wxT('%'):
+      case '%':
 #endif // WX_WINDOWS
-      case wxT('$'):
+      case '$':
         {
           Bracket bracket;
           #ifdef WX_WINDOWS
-            if ( str[n] == wxT('%') )
+            if ( str[n] == '%' )
               bracket = Bracket_Windows;
             else
           #endif // WX_WINDOWS
@@ -442,13 +447,13 @@ std::string wxExpandEnvVars(const std::string& str)
             bracket = Bracket_None;
           }
           else {
-            switch ( str[n + 1].GetValue() ) {
-              case wxT('('):
+            switch ( str[n + 1] ) {
+              case '(':
                 bracket = Bracket_Normal;
                 n++;                   // skip the bracket
                 break;
 
-              case wxT('{'):
+              case '{':
                 bracket = Bracket_Curly;
                 n++;                   // skip the bracket
                 break;
@@ -460,7 +465,7 @@ std::string wxExpandEnvVars(const std::string& str)
 
           m = n + 1;
 
-          while ( m < str.length() && (wxIsalnum(str[m]) || str[m] == wxT('_')) )
+          while ( m < str.length() && (wxIsalnum(str[m]) || str[m] == '_') )
             m++;
 
           std::string strVarName(str.c_str() + n + 1, m - n - 1);
@@ -469,7 +474,7 @@ std::string wxExpandEnvVars(const std::string& str)
           //     set through wxSetEnv may not be read correctly!
           bool expanded = false;
           std::string tmp;
-          if (wxGetEnv(strVarName.ToStdString(), &tmp))
+          if (wxGetEnv(strVarName, &tmp))
           {
               strResult += tmp;
               expanded = true;
@@ -481,7 +486,7 @@ std::string wxExpandEnvVars(const std::string& str)
               if ( bracket != Bracket_Windows )
             #endif
                 if ( bracket != Bracket_None )
-                  strResult << str[n - 1];
+                  strResult += str[n - 1];
             strResult += str[n] + strVarName;
           }
 
@@ -514,7 +519,7 @@ std::string wxExpandEnvVars(const std::string& str)
       case wxT('\\'):
         // backslash can be used to suppress special meaning of % and $
         if ( n != str.length() - 1 &&
-                (str[n + 1] == wxT('%') || str[n + 1] == wxT('$')) ) {
+                (str[n + 1] == '%' || str[n + 1] == '$') ) {
           strResult += str[++n];
 
           break;

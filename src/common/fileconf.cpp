@@ -38,8 +38,11 @@
 
 #include <fmt/core.h>
 
+import Utils.Strings;
+
 import <cctype>;
 import <cstdlib>;
+import <charconv>;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -482,24 +485,23 @@ wxFileConfig::~wxFileConfig()
 // parse a config file
 // ----------------------------------------------------------------------------
 
+// FIXME: This is all pretty bogus.
 void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
 {
 
   for ( size_t n = 0; n < buffer.GetLineCount(); n++ )
   {
     std::string strLine = buffer[n];
-    // FIXME-UTF8: rewrite using iterators, without this buffer
-    wxWxCharBuffer buf(strLine.c_str());
-    const char* pStart;
-    const char* pEnd;
 
     // add the line to linked list
     if ( bLocal )
       LineListAppend(strLine);
 
-
+    // FIXME: where should this begin, really?
+    auto pEnd = strLine.begin();
+    auto pStart = strLine.begin();
     // skip leading spaces
-    for ( pStart = buf; wxIsspace(*pStart); pStart++ )
+    for ( ; wxIsspace(*pStart); pStart = std::next(pStart) )
       ;
 
     // skip blank/comment lines
@@ -530,7 +532,7 @@ void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
       // group name here is always considered as abs path
       pStart++;
       std::string strGroup = fmt::format("{}{}", wxCONFIG_PATH_SEPARATOR,
-                                                 FilterInEntryName(std::string(pStart, pEnd - pStart)));
+                                                 FilterInEntryName(std::string{pStart, pEnd}));
 
       // will create it if doesn't yet exist
       SetPath(strGroup);
@@ -579,7 +581,7 @@ void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
         pEnd++;
       }
 
-      std::string strKey = wx::utils::TrimTrailingSpace(FilterInEntryName(std::string(pStart, pEnd)));
+      std::string strKey = wx::utils::StripTrailingSpace(FilterInEntryName(std::string{pStart, pEnd}));
 
       // skip whitespace
       while ( wxIsspace(*pEnd) )
@@ -622,7 +624,7 @@ void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
         while ( wxIsspace(*pEnd) )
           pEnd++;
 
-        std::string value = pEnd;
+        std::string value{pEnd, strLine.end()}; // FIXME: Just remove all of this. This probably isn't right.
         if ( !(GetStyle() & wxCONFIG_USE_NO_ESCAPE_CHARACTERS) )
             value = FilterInValue(value);
 
@@ -859,7 +861,9 @@ bool wxFileConfig::DoReadLong(const std::string& key, long *pl) const
     // extra spaces shouldn't prevent us from reading numeric values
     wx::utils::TrimTrailingSpace(str);
 
-    return str.ToLong(pl);
+    auto [p, ec] = std::from_chars(str.data(), str.data() + str.size(), *pl);
+
+    return ec == std::errc();
 }
 
 #if wxUSE_BASE64
@@ -940,14 +944,14 @@ bool wxFileConfig::DoWriteString(const std::string& key, const std::string& szVa
 
 bool wxFileConfig::DoWriteLong(const std::string& key, long lValue)
 {
-  return Write(key, std::string::Format("%ld", lValue));
+  return Write(key, fmt::format("%ld", lValue));
 }
 
 #if wxUSE_BASE64
 
 bool wxFileConfig::DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf)
 {
-  return Write(key, wxBase64Encode(buf));
+  return Write(key, wxBase64Encode(buf).ToStdString());
 }
 
 #endif // wxUSE_BASE64
@@ -973,7 +977,7 @@ bool wxFileConfig::Flush(bool /* bCurrentOnly */)
   filetext.reserve(4096);
   for ( wxFileConfigLineList *p = m_linesHead; p != nullptr; p = p->Next() )
   {
-    filetext << p->Text() << wxTextFile::GetEOL();
+    filetext += p->Text() + wxTextFile::GetEOL();
   }
 
   if ( !file.Write(filetext, *m_conv) )
@@ -1003,9 +1007,9 @@ bool wxFileConfig::Save(wxOutputStream& os, const wxMBConv& conv)
     {
         std::string line = p->Text();
         line += wxTextFile::GetEOL();
-
-        wxCharBuffer buf(line.mb_str(conv));
-        if ( !os.Write(buf, strlen(buf)) )
+        
+        // FIXME: Use boost::nowide to write here?
+        if ( !os.Write(line.data(), line.length()) )
         {
             wxLogError(_("Error saving user configuration data."));
 
@@ -1965,7 +1969,7 @@ static std::string FilterInValue(const std::string& str)
                 break;
             }
 
-            switch ( (*i).GetValue() )
+            switch (*i)
             {
                 case 'n':
                     strResult += '\n';

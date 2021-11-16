@@ -102,12 +102,12 @@ static bool CanonicalizeParams(std::string& command)
     // FIXME: Use a lambda.
     for ( size_t n = 0; (n < len) && !foundFilename; n++ )
     {
-        if ( command[n] == wxT('%') &&
+        if ( command[n] == '%' &&
                 (n + 1 < len) &&
-                (command[n + 1] == wxT('1') || command[n + 1] == wxT('L')) )
+                (command[n + 1] == '1' || command[n + 1] == 'L') )
         {
             // replace it with '%s'
-            command[n + 1] = wxT('s');
+            command[n + 1] = 's';
 
             foundFilename = true;
         }
@@ -119,7 +119,7 @@ static bool CanonicalizeParams(std::string& command)
         // presumably supposed to be replaced with the names of the other files
         // accepted by the command. As we don't support more than one file
         // anyhow, simply ignore it.
-        std::erase(command, " %*");
+        wx::utils::EraseSubstr(command, " %*");
     }
 
     return foundFilename;
@@ -309,9 +309,9 @@ std::string wxFileTypeImpl::GetCommand(const std::string& verb) const
         //       just because we need it here: it will establish DDE
         //       conversation with the program it just launched
         command.Prepend("WX_DDE#");
-        command << wxT('#') << ddeServer
-                << wxT('#') << ddeTopic
-                << wxT('#') << ddeCommand;
+        command << '#' << ddeServer
+                << '#' << ddeTopic
+                << '#' << ddeCommand;
     }
     else
 #endif // wxUSE_IPC
@@ -550,8 +550,8 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
     wxCHECK_MSG( !ext.empty(), nullptr,
                  "Associate() needs non empty extension" );
 
-    if ( ext[0u] != wxT('.') )
-        extWithDot = wxT('.');
+    if ( ext[0u] != '.' )
+        extWithDot = '.';
     extWithDot += ext;
 
     // start by setting the entries under ".ext"
@@ -623,8 +623,8 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
     for (iExtCount=1; iExtCount < ftInfo.GetExtensionsCount(); iExtCount++ )
     {
         ext = ftInfo.GetExtensions()[iExtCount];
-        if ( ext[0u] != wxT('.') )
-           extWithDot = wxT('.');
+        if ( ext[0u] != '.' )
+           extWithDot = '.';
         extWithDot += ext;
 
         wxRegKey key2(wxRegKey::HKCU, CLASSES_ROOT_KEY + extWithDot);

@@ -43,7 +43,7 @@ wxMimeTypeCommands::AddOrReplaceVerb(const std::string& verb, const std::string&
     const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
     [verb](const auto& m_verb)
     {
-        return verb.IsSameAs(m_verb, false);
+        return wx::utils::IsSameAsNoCase(verb, m_verb);
     });
 
     if ( verb_iter == m_verbs.cend() )
@@ -66,7 +66,7 @@ wxMimeTypeCommands::GetCommandForVerb(const std::string& verb, size_t *idx) cons
     const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
         [verb](const auto& m_verb)
         {
-            return verb.IsSameAs(m_verb, false);
+            return wx::utils::IsSameAsNoCase(verb, m_verb);
         });
 
     if ( verb_iter != m_verbs.cend() )
@@ -160,7 +160,7 @@ std::string wxFileType::ExpandCommand(const std::string& command,
                                         != std::string::npos;
 
     std::string str;
-    for ( const wxChar *pc = command.c_str(); *pc != wxT('\0'); pc++ ) {
+    for ( const char* pc = command.c_str(); *pc != '\0'; pc++ ) {
         if ( *pc == '%' ) {
             switch ( *++pc ) {
                 case 's':
@@ -185,16 +185,16 @@ std::string wxFileType::ExpandCommand(const std::string& command,
 
                 case '{':
                     {
-                        const wxChar *pEnd = wxStrchr(pc, '}');
+                        const char* pEnd = std::strchr(pc, '}');
                         if ( pEnd == nullptr ) {
                             std::string mimetype;
                             wxLogWarning(_("Unmatched '{' in an entry for mime type %s."),
                                          params.GetMimeType().c_str());
-                            str << "%{";
+                            str += "%{";
                         }
                         else {
                             std::string param(pc + 1, pEnd - pc - 1);
-                            str << wxT('\'') << params.GetParamValue(param) << wxT('\'');
+                            str += fmt::format("\'{}\'", params.GetParamValue(param));
                             pc = pEnd;
                         }
                     }
@@ -531,13 +531,12 @@ bool wxMimeTypesManager::IsOfType(const std::string& mimeType,
                   "first MIME type can't contain wildcards" );
 
     // all comparaisons are case insensitive (2nd arg of IsSameAs() is false)
-    if ( wx::utils::BeforeFirst(wildcard, '/').
-            IsSameAs(wx::utils::BeforeFirst(mimeType, '/'), false) )
+    if (wx::utils::IsSameAsNoCase(wx::utils::BeforeFirst(wildcard, '/'), wx::utils::BeforeFirst(mimeType, '/')) )
     {
-        std::string strSubtype = wildcard.AfterFirst('/');
+        std::string strSubtype = wx::utils::AfterFirst(wildcard, '/');
 
         if ( strSubtype == "*" ||
-             strSubtype.IsSameAs(mimeType.AfterFirst('/'), false) )
+             wx::utils::IsSameAsNoCase(strSubtype, wx::utils::AfterFirst(mimeType, '/')) )
         {
             // matches (either exactly or it's a wildcard)
             return true;
@@ -604,7 +603,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const std::string& ext)
             const auto iter_idx = std::find_if(fallback.GetExtensions().cbegin(), fallback.GetExtensions().cend(),
                 [ext](const auto& anExt)
                 {
-                    return ext.IsSameAs(anExt);
+                    return wx::utils::IsSameAsCase(ext, anExt);
                 });
             if ( iter_idx != std::cend(fallback.GetExtensions())) {
                 ft = new wxFileType(fallback);
@@ -662,7 +661,7 @@ size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<std::string>& mimetypes)
         const auto iter_idx = std::find_if(mimetypes.cbegin(), mimetypes.cend(),
             [fallMime](const auto& aType)
             {
-                return fallMime.IsSameAs(aType);
+                return wx::utils::IsSameAsCase(fallMime, aType);
             });
         if ( iter_idx == std::cend(mimetypes) ) {
             mimetypes.push_back(fallback.GetMimeType());

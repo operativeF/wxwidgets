@@ -69,4 +69,14 @@ constexpr void ToLower(std::string& str)
     std::transform(str.begin(), str.end(), str.begin(), [](auto c) noexcept { return ToLowerCh(c); });
 }
 
+constexpr void EraseSubstr(std::string& str, std::string_view subToErase)
+{
+    std::size_t pos{std::string::npos};
+
+    while((pos = str.find(subToErase)) != std::string::npos)
+    {
+        str.erase(pos, subToErase.length());
+    }
+}
+
 } // export namespace wx::utils

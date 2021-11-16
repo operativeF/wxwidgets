@@ -186,6 +186,35 @@ bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) no
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
+[[nodiscard]] constexpr std::string StripAllSpace(const std::string& str)
+{
+    std::string tmpStr{str};
+
+    std::erase_if(tmpStr, isWhitespace);
+
+    return tmpStr;
+}
+
+constexpr std::string StripLeadingSpace(const std::string& str)
+{
+    std::string tmpStr{str};
+    auto it = std::find_if_not(tmpStr.begin(), tmpStr.end(), isWhitespace);
+
+    tmpStr.erase(tmpStr.begin(), it);
+
+    return tmpStr;
+}
+
+constexpr std::string StripTrailingSpace(const std::string& str)
+{
+    std::string tmpStr{str};
+
+    auto it = std::find_if_not(tmpStr.rbegin(), tmpStr.rend(), isWhitespace);
+
+    tmpStr.erase(it.base(), str.end());
+
+    return tmpStr;
+}
 
 bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCase) noexcept
 {

@@ -122,7 +122,7 @@ std::string wxFileSystemHandler::GetMimeTypeFromExt(const std::string& location)
         }
 
         wxFileType *ft = wxTheMimeTypesManager->GetFileTypeFromExtension(ext);
-        if ( !ft || (ft->GetMimeType(&mime)).empty() )
+        if ( !ft || ft->GetMimeType(&mime) )
         {
             mime.clear();
         }

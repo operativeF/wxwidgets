@@ -32,13 +32,13 @@ import <vector>;
 
 /// separates group and entry names (probably shouldn't be changed)
 #ifndef wxCONFIG_PATH_SEPARATOR
-  inline constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
+  inline constexpr char wxCONFIG_PATH_SEPARATOR = '/';
 #endif
 
 /// introduces immutable entries
 // (i.e. the ones which can't be changed from the local config file)
 #ifndef wxCONFIG_IMMUTABLE_PREFIX
-  inline constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
+  inline constexpr char wxCONFIG_IMMUTABLE_PREFIX = '!';
 #endif
 
 #if wxUSE_CONFIG
