@@ -500,12 +500,12 @@ bool wxGetUserName(wxChar *buf, int maxSize);
 wxString wxGetUserName();
 
 // Get current Home dir and copy to dest (returns pstr->c_str())
-wxString wxGetHomeDir();
-const wxChar* wxGetHomeDir(wxString *pstr);
+std::string wxGetHomeDir();
+std::string wxGetHomeDir(std::string* pstr);
 
 // Get the user's (by default use the current user name) home dir,
 // return empty string on error
-wxString wxGetUserHome(const wxString& user = {});
+std::string wxGetUserHome(const std::string& user = {});
 
 
 #if wxUSE_LONGLONG

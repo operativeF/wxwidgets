@@ -111,25 +111,25 @@ public:
   //
   // where file is the basename of szFile, ext is its extension
   // or .conf (Unix) or .ini (Win) if it has none
-  static wxFileName GetGlobalFile(const wxString& szFile);
-  static wxFileName GetLocalFile(const wxString& szFile, unsigned int style = 0);
+  static wxFileName GetGlobalFile(const std::string& szFile);
+  static wxFileName GetLocalFile(const std::string& szFile, unsigned int style = 0);
 
-  static wxString GetGlobalFileName(const wxString& szFile)
+  static std::string GetGlobalFileName(const std::string& szFile)
   {
       return GetGlobalFile(szFile).GetFullPath();
   }
 
-  static wxString GetLocalFileName(const wxString& szFile, unsigned int style = 0)
+  static std::string GetLocalFileName(const std::string& szFile, unsigned int style = 0)
   {
       return GetLocalFile(szFile, style).GetFullPath();
   }
 
     // New constructor: one size fits all. Specify wxCONFIG_USE_LOCAL_FILE or
     // wxCONFIG_USE_GLOBAL_FILE to say which files should be used.
-  wxFileConfig(const wxString& appName = {},
-               const wxString& vendorName = {},
-               const wxString& localFilename = {},
-               const wxString& globalFilename = {},
+  wxFileConfig(const std::string& appName = {},
+               const std::string& vendorName = {},
+               const std::string& localFilename = {},
+               const std::string& globalFilename = {},
                unsigned int style = wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_GLOBAL_FILE,
                const wxMBConv& conv = wxConvAuto());
 
@@ -152,27 +152,27 @@ public:
 #endif // __UNIX__/!__UNIX__
 
   // implement inherited pure virtual functions
-  void SetPath(const wxString& strPath) override;
-  const wxString& GetPath() const override;
+  void SetPath(const std::string& strPath) override;
+  const std::string& GetPath() const override;
 
-  bool GetFirstGroup(wxString& str, long& lIndex) const override;
-  bool GetNextGroup (wxString& str, long& lIndex) const override;
-  bool GetFirstEntry(wxString& str, long& lIndex) const override;
-  bool GetNextEntry (wxString& str, long& lIndex) const override;
+  bool GetFirstGroup(std::string& str, long& lIndex) const override;
+  bool GetNextGroup (std::string& str, long& lIndex) const override;
+  bool GetFirstEntry(std::string& str, long& lIndex) const override;
+  bool GetNextEntry (std::string& str, long& lIndex) const override;
 
   size_t GetNumberOfEntries(bool bRecursive = false) const override;
   size_t GetNumberOfGroups(bool bRecursive = false) const override;
 
-  bool HasGroup(const wxString& strName) const override;
-  bool HasEntry(const wxString& strName) const override;
+  bool HasGroup(const std::string& strName) const override;
+  bool HasEntry(const std::string& strName) const override;
 
   bool Flush(bool bCurrentOnly = false) override;
 
-  bool RenameEntry(const wxString& oldName, const wxString& newName) override;
-  bool RenameGroup(const wxString& oldName, const wxString& newName) override;
+  bool RenameEntry(const std::string& oldName, const std::string& newName) override;
+  bool RenameGroup(const std::string& oldName, const std::string& newName) override;
 
-  bool DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso = true) override;
-  bool DeleteGroup(const wxString& szKey) override;
+  bool DeleteEntry(const std::string& key, bool bGroupIfEmptyAlso = true) override;
+  bool DeleteGroup(const std::string& szKey) override;
   bool DeleteAll() override;
 
   // additional, wxFileConfig-specific, functionality
@@ -188,29 +188,29 @@ public:
 
 public:
   // functions to work with this list
-  wxFileConfigLineList *LineListAppend(const wxString& str);
-  wxFileConfigLineList *LineListInsert(const wxString& str,
+  wxFileConfigLineList *LineListAppend(const std::string& str);
+  wxFileConfigLineList *LineListInsert(const std::string& str,
                            wxFileConfigLineList *pLine);    // NULL => Prepend()
   void      LineListRemove(wxFileConfigLineList *pLine);
   bool      LineListIsEmpty();
 
 protected:
-  bool DoReadString(const wxString& key, wxString *pStr) const override;
-  bool DoReadLong(const wxString& key, long *pl) const override;
+  bool DoReadString(const std::string& key, std::string *pStr) const override;
+  bool DoReadLong(const std::string& key, long *pl) const override;
 #if wxUSE_BASE64
-  bool DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const override;
+  bool DoReadBinary(const std::string& key, wxMemoryBuffer* buf) const override;
 #endif // wxUSE_BASE64
 
-  bool DoWriteString(const wxString& key, const wxString& szValue) override;
-  bool DoWriteLong(const wxString& key, long lValue) override;
+  bool DoWriteString(const std::string& key, const std::string& szValue) override;
+  bool DoWriteLong(const std::string& key, long lValue) override;
 #if wxUSE_BASE64
-  bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) override;
+  bool DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf) override;
 #endif // wxUSE_BASE64
 
 private:
   // GetXXXFileName helpers: return ('/' terminated) directory names
-  static wxString GetGlobalDir();
-  static wxString GetLocalDir(unsigned int style = 0);
+  static std::string GetGlobalDir();
+  static std::string GetLocalDir(unsigned int style = 0);
 
   // common part of from dtor and DeleteAll
   void CleanUp();
@@ -223,7 +223,7 @@ private:
 
   // real SetPath() implementation, returns true if path could be set or false
   // if path doesn't exist and createMissingComponents == false
-  bool DoSetPath(const wxString& strPath, bool createMissingComponents);
+  bool DoSetPath(const std::string& strPath, bool createMissingComponents);
 
   // set/test the dirty flag
   void SetDirty() { m_isDirty = true; }
@@ -238,7 +238,7 @@ private:
 
   wxFileName  m_fnLocalFile,            // local  file name passed to ctor
               m_fnGlobalFile;           // global
-  wxString    m_strPath;                // current path (not '/' terminated)
+  std::string    m_strPath;                // current path (not '/' terminated)
 
   wxFileConfigGroup *m_pRootGroup,      // the top (unnamed) group
                     *m_pCurrentGroup;   // the current group

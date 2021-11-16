@@ -467,7 +467,7 @@ public:
         { return GetPathSeparators(format)[0u]; }
 
     // is the char a path separator for this format?
-    static bool IsPathSeparator(wxChar ch, wxPathFormat format = wxPATH_NATIVE);
+    static bool IsPathSeparator(char ch, wxPathFormat format = wxPATH_NATIVE);
 
     // is this is a DOS path which beings with a windows unique volume name
     // ('\\?\Volume{guid}\')?

@@ -35,8 +35,8 @@ public:
 
     wxFileDialog& operator=(wxFileDialog&&) = delete;
 
-    std::vector<wxString> GetPaths() const override;
-    std::vector<wxString> GetFilenames() const override;
+    std::vector<std::string> GetPaths() const override;
+    std::vector<std::string> GetFilenames() const override;
     bool SupportsExtraControl() const override { return true; }
     void MSWOnInitDialogHook(WXHWND hwnd);
 
@@ -62,7 +62,7 @@ protected:
     wxPoint DoGetPosition() const override;
 
 private:
-    std::vector<wxString> m_fileNames;
+    std::vector<std::string> m_fileNames;
 
     // remember if our SetPosition() or Centre() (which requires special
     // treatment) was called

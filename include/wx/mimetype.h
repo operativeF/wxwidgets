@@ -23,6 +23,8 @@
 // the things we really need
 #include "wx/string.h"
 
+import Utils.Strings;
+
 import <vector>;
 
 // fwd decls
@@ -73,19 +75,19 @@ class wxMimeTypeCommands
 public:
     wxMimeTypeCommands() = default;
 
-    wxMimeTypeCommands(const std::vector<wxString>& verbs,
-                       const std::vector<wxString>& commands)
+    wxMimeTypeCommands(const std::vector<std::string>& verbs,
+                       const std::vector<std::string>& commands)
         : m_verbs(verbs),
           m_commands(commands)
     {
     }
 
     // add a new verb with the command or replace the old value
-    void AddOrReplaceVerb(const wxString& verb, const wxString& cmd);
-    void Add(const wxString& s)
+    void AddOrReplaceVerb(const std::string& verb, const std::string& cmd);
+    void Add(const std::string& s)
     {
-        m_verbs.push_back(s.BeforeFirst(wxT('=')));
-        m_commands.push_back(s.AfterFirst(wxT('=')));
+        m_verbs.push_back(wx::utils::BeforeFirst(s, '='));
+        m_commands.push_back(wx::utils::AfterFirst(s, '='));
     }
 
     // access the commands
@@ -95,24 +97,24 @@ public:
     }
     
     // FIXME: Unsafe
-    const wxString& GetVerb(size_t n) const { return m_verbs[n]; }
-    const wxString& GetCmd(size_t n) const { return m_commands[n]; }
+    const std::string& GetVerb(size_t n) const { return m_verbs[n]; }
+    const std::string& GetCmd(size_t n) const { return m_commands[n]; }
 
     // TODO: string_view
-    bool HasVerb(const wxString& verb) const
+    bool HasVerb(const std::string& verb) const
     {
         return std::find(m_verbs.cbegin(), m_verbs.cend(), verb) != m_verbs.cend();
     }
 
     // returns empty string and wxNOT_FOUND in idx if no such verb
-    wxString GetCommandForVerb(const wxString& verb, size_t *idx = nullptr) const;
+    std::string GetCommandForVerb(const std::string& verb, size_t *idx = nullptr) const;
 
     // get a "verb=command" string
-    wxString GetVerbCmd(size_t n) const;
+    std::string GetVerbCmd(size_t n) const;
 
 private:
-    std::vector<wxString> m_verbs;
-    std::vector<wxString> m_commands;
+    std::vector<std::string> m_verbs;
+    std::vector<std::string> m_commands;
 };
 
 // ----------------------------------------------------------------------------
@@ -218,7 +220,7 @@ public:
     void SetShortDesc(const wxString& shortDesc) { m_shortDesc = shortDesc; }
 
         // get the MIME type
-    const wxString& GetMimeType() const { return m_mimeType; }
+    const std::string& GetMimeType() const { return m_mimeType; }
         // get the open command
     const wxString& GetOpenCommand() const { return m_openCmd; }
         // get the print command
@@ -228,15 +230,15 @@ public:
         // get the long, user visible description
     const wxString& GetDescription() const { return m_desc; }
         // get the array of all extensions
-    const std::vector<wxString>& GetExtensions() const { return m_exts; }
+    const std::vector<std::string>& GetExtensions() const { return m_exts; }
     size_t GetExtensionsCount() const {return m_exts.size(); }
         // get the icon info
     const wxString& GetIconFile() const { return m_iconFile; }
     int GetIconIndex() const { return m_iconIndex; }
 
 private:
-    wxString m_mimeType,    // the MIME type in "type/subtype" form
-             m_openCmd,     // command to use for opening the file (%s allowed)
+    std::string m_mimeType;    // the MIME type in "type/subtype" form
+    wxString m_openCmd,     // command to use for opening the file (%s allowed)
              m_printCmd,    // command to use for printing the file (%s allowed)
              m_shortDesc,   // a short string used in the registry
              m_desc;        // a free form description of this file type
@@ -245,7 +247,7 @@ private:
     wxString m_iconFile;      // the file containing the icon
     int      m_iconIndex{};   // icon index in this file
 
-    std::vector<wxString> m_exts;   // the extensions which are mapped on this filetype
+    std::vector<std::string> m_exts;   // the extensions which are mapped on this filetype
 
 
 #if 0 // TODO
@@ -281,25 +283,26 @@ public:
     {
     public:
         MessageParameters() = default;
-        MessageParameters(const wxString& filename,
-                          const wxString& mimetype = {})
+        MessageParameters(const std::string& filename,
+                          const std::string& mimetype = {})
             : m_filename(filename), m_mimetype(mimetype) { }
 
         // accessors (called by GetOpenCommand)
             // filename
-        const wxString& GetFileName() const { return m_filename; }
+        const std::string& GetFileName() const { return m_filename; }
             // mime type
-        const wxString& GetMimeType() const { return m_mimetype; }
+        const std::string& GetMimeType() const { return m_mimetype; }
 
         // override this function in derived class
-        virtual wxString GetParamValue(const wxString& WXUNUSED(name)) const
+        virtual std::string GetParamValue(const std::string& WXUNUSED(name)) const
             { return {}; }
 
         // virtual dtor as in any base class
         virtual ~MessageParameters() = default;
 
     protected:
-        wxString m_filename, m_mimetype;
+        std::string m_filename;
+        std::string m_mimetype;
     };
 
     // ctor from static data
@@ -309,40 +312,40 @@ public:
     // could be retrieved/found, false otherwise (and in this case all [out]
     // parameters are unchanged)
         // return the MIME type for this file type
-    bool GetMimeType(wxString *mimeType) const;
-    bool GetMimeTypes(std::vector<wxString>& mimeTypes) const;
+    bool GetMimeType(std::string *mimeType) const;
+    bool GetMimeTypes(std::vector<std::string>& mimeTypes) const;
         // fill passed in array with all extensions associated with this file
         // type
-    bool GetExtensions(std::vector<wxString>& extensions);
+    bool GetExtensions(std::vector<std::string>& extensions);
         // get the icon corresponding to this file type and of the given size
     bool GetIcon(wxIconLocation *iconloc) const;
     bool GetIcon(wxIconLocation *iconloc,
                  const MessageParameters& params) const;
         // get a brief file type description ("*.txt" => "text document")
-    bool GetDescription(wxString *desc) const;
+    bool GetDescription(std::string *desc) const;
 
     // get the command to be used to open/print the given file.
         // get the command to execute the file of given type
-    bool GetOpenCommand(wxString *openCmd,
+    bool GetOpenCommand(std::string *openCmd,
                         const MessageParameters& params) const;
         // a simpler to use version of GetOpenCommand() -- it only takes the
         // filename and returns an empty string on failure
-    wxString GetOpenCommand(const wxString& filename) const;
+    std::string GetOpenCommand(const std::string& filename) const;
         // get the command to print the file of given type
-    bool GetPrintCommand(wxString *printCmd,
+    bool GetPrintCommand(std::string *printCmd,
                          const MessageParameters& params) const;
 
 
         // return the number of commands defined for this file type, 0 if none
-    size_t GetAllCommands(std::vector<wxString> *verbs, std::vector<wxString> *commands,
+    size_t GetAllCommands(std::vector<std::string> *verbs, std::vector<std::string> *commands,
                           const wxFileType::MessageParameters& params) const;
 
     // set an arbitrary command, ask confirmation if it already exists and
     // overwriteprompt is true
-    bool SetCommand(const wxString& cmd, const wxString& verb,
+    bool SetCommand(const std::string& cmd, const std::string& verb,
         bool overwriteprompt = true);
 
-    bool SetDefaultIcon(const wxString& cmd = {}, int index = 0);
+    bool SetDefaultIcon(const std::string& cmd = {}, int index = 0);
 
 
     // remove the association for this filetype from the system MIME database:
@@ -354,14 +357,14 @@ public:
         // expand a string in the format of GetOpenCommand (which may contain
         // '%s' and '%t' format specifiers for the file name and mime type
         // and %{param} constructions).
-    static wxString ExpandCommand(const wxString& command,
+    static std::string ExpandCommand(const std::string& command,
                                   const MessageParameters& params);
 
     // dtor (not virtual, shouldn't be derived from)
     ~wxFileType();
 
-    wxString
-    GetExpandedCommand(const wxString& verb,
+    std::string
+    GetExpandedCommand(const std::string& verb,
                        const wxFileType::MessageParameters& params) const;
 private:
     // default ctor is private because the user code never creates us
@@ -416,7 +419,7 @@ public:
         // second argument may contain wildcards ('*'), but not the first. If
         // the types are equal or if the mimeType matches wildcard the function
         // returns true, otherwise it returns false
-    static bool IsOfType(const wxString& mimeType, const wxString& wildcard);
+    static bool IsOfType(const std::string& mimeType, const std::string& wildcard);
 
     wxMimeTypesManager() = default;
     ~wxMimeTypesManager();
@@ -433,7 +436,7 @@ public:
     // use the extraDir parameter if you want to look for files in another
     // directory
     void Initialize(int mailcapStyle = wxMAILCAP_ALL,
-                    const wxString& extraDir = {});
+                    const std::string& extraDir = {});
 
     // and this function clears all the data from the manager
     void ClearData();
@@ -443,14 +446,14 @@ public:
     // interested in. If the return value is !NULL, caller is responsible for
     // deleting it.
         // get file type from file extension
-    wxFileType *GetFileTypeFromExtension(const wxString& ext);
+    wxFileType *GetFileTypeFromExtension(const std::string& ext);
         // get file type from MIME type (in format <category>/<format>)
-    wxFileType *GetFileTypeFromMimeType(const wxString& mimeType);
+    wxFileType *GetFileTypeFromMimeType(const std::string& mimeType);
 
     // enumerate all known MIME types
     //
     // returns the number of retrieved file types
-    size_t EnumAllFileTypes(std::vector<wxString>& mimetypes);
+    size_t EnumAllFileTypes(std::vector<std::string>& mimetypes);
 
     // these functions can be used to provide default values for some of the
     // MIME types inside the program itself

@@ -59,12 +59,12 @@ class wxDirItemData : public wxTreeItemData
 public:
     wxDirItemData(const std::string& path, const std::string& name, bool isDir);
 
-    void SetNewDirName(const wxString& path);
+    void SetNewDirName(const std::string& path);
 
     bool HasSubDirs() const;
-    bool HasFiles(const wxString& spec = {}) const;
+    bool HasFiles(const std::string& spec = {}) const;
 
-    wxString m_path, m_name;
+    std::string m_path, m_name;
     bool m_isHidden{false};
     bool m_isExpanded{false};
     bool m_isDir;
@@ -113,33 +113,33 @@ public:
     void OnSize(wxSizeEvent &event );
 
     // Try to expand as much of the given path as possible.
-    virtual bool ExpandPath(const wxString& path);
+    virtual bool ExpandPath(const std::string& path);
     // collapse the path
-    virtual bool CollapsePath(const wxString& path);
+    virtual bool CollapsePath(const std::string& path);
 
     // Accessors
 
-    virtual inline wxString GetDefaultPath() const { return m_defaultPath; }
-    virtual void SetDefaultPath(const wxString& path) { m_defaultPath = path; }
+    virtual inline std::string GetDefaultPath() const { return m_defaultPath; }
+    virtual void SetDefaultPath(const std::string& path) { m_defaultPath = path; }
 
     // Get dir or filename
-    virtual wxString GetPath() const;
-    virtual std::vector<wxString> GetPaths() const;
+    virtual std::string GetPath() const;
+    virtual std::vector<std::string> GetPaths() const;
 
     // Get selected filename path only (else empty string).
     // I.e. don't count a directory as a selection
-    virtual wxString GetFilePath() const;
-    virtual void GetFilePaths(std::vector<wxString>& paths) const;
-    virtual void SetPath(const wxString& path);
+    virtual std::string GetFilePath() const;
+    virtual void GetFilePaths(std::vector<std::string>& paths) const;
+    virtual void SetPath(const std::string& path);
 
-    virtual void SelectPath(const wxString& path, bool select = true);
-    virtual void SelectPaths(const std::vector<wxString>& paths);
+    virtual void SelectPath(const std::string& path, bool select = true);
+    virtual void SelectPaths(const std::vector<std::string>& paths);
 
     virtual void ShowHidden( bool show );
     virtual bool GetShowHidden() { return m_showHidden; }
 
-    virtual wxString GetFilter() const { return m_filter; }
-    virtual void SetFilter(const wxString& filter);
+    virtual std::string GetFilter() const { return m_filter; }
+    virtual void SetFilter(const std::string& filter);
 
     virtual int GetFilterIndex() const { return m_currentFilter; }
     virtual void SetFilterIndex(int n);
@@ -158,9 +158,9 @@ public:
     // E.g. if a child path is "/usr" and 'path' is "/usr/include"
     // then the child for /usr is returned.
     // If the path string has been used (we're at the leaf), done is set to true
-    virtual wxTreeItemId FindChild(wxTreeItemId parentId, const wxString& path, bool& done);
+    virtual wxTreeItemId FindChild(wxTreeItemId parentId, const std::string& path, bool& done);
 
-    wxString GetPath(wxTreeItemId itemId) const;
+    std::string GetPath(wxTreeItemId itemId) const;
 
     // Resize the components of the control
     virtual void DoResize();
@@ -178,23 +178,23 @@ protected:
     virtual void ExpandRoot();
     virtual void ExpandDir(wxTreeItemId parentId);
     virtual void CollapseDir(wxTreeItemId parentId);
-    virtual const wxTreeItemId AddSection(const wxString& path, const wxString& name, int imageId = 0);
+    virtual const wxTreeItemId AddSection(const std::string& path, const std::string& name, int imageId = 0);
     virtual wxTreeItemId AppendItem (const wxTreeItemId & parent,
-                const wxString & text,
+                const std::string & text,
                 int image = -1, int selectedImage = -1,
                 wxTreeItemData * data = nullptr);
-    //void FindChildFiles(wxTreeItemId id, int dirFlags, std::vector<wxString>& filenames);
+    //void FindChildFiles(wxTreeItemId id, int dirFlags, std::vector<std::string>& filenames);
     virtual wxTreeCtrl* CreateTreeCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int treeStyle);
 
     // Extract description and actual filter from overall filter string
-    bool ExtractWildcard(const wxString& filterStr, int n, wxString& filter, wxString& description);
+    bool ExtractWildcard(const std::string& filterStr, int n, std::string& filter, std::string& description);
 
 private:
     void PopulateNode(wxTreeItemId node);
 
-    wxString        m_defaultPath; // Starting path
-    wxString        m_filter;  // Wildcards in same format as per wxFileDialog
-    wxString        m_currentFilterStr; // Current filter string
+    std::string        m_defaultPath; // Starting path
+    std::string        m_filter;  // Wildcards in same format as per wxFileDialog
+    std::string        m_currentFilterStr; // Current filter string
 
     wxTreeItemId    m_rootId;
 
@@ -245,7 +245,7 @@ public:
               unsigned int style = 0);
 
     //// Operations
-    void FillFilterList(const wxString& filter, int defaultFilter);
+    void FillFilterList(const std::string& filter, int defaultFilter);
 
     //// Events
     void OnSelFilter(wxCommandEvent& event);
@@ -294,7 +294,7 @@ public:
         executable
     };
 
-    int GetIconID(const wxString& extension, const wxString& mime = {});
+    int GetIconID(const std::string& extension, const std::string& mime = {});
     wxImageList *GetSmallImageList();
 
     const wxSize& GetSize() const { return m_size; }

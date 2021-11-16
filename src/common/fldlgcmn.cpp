@@ -77,24 +77,25 @@ bool wxFileDialogBase::Create(wxWindow *parent,
 
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        m_wildCard = wxString::Format(_("All files (%s)|%s"),
+        // FIXME: Translation removed for fmt lib
+        m_wildCard = fmt::format("All files (%s)|%s",
                                       wxFileSelectorDefaultWildcardStr,
                                       wxFileSelectorDefaultWildcardStr);
     }
     else // have wild card
     {
         // convert m_wildCard from "*.bar" to "bar files (*.bar)|*.bar"
-        if ( m_wildCard.Find(wxT('|')) == wxNOT_FOUND )
+        if ( m_wildCard.find('|') == std::string::npos )
         {
-            wxString::size_type nDot = m_wildCard.find("*.");
-            if ( nDot != wxString::npos )
+            std::string::size_type nDot = m_wildCard.find("*.");
+            if ( nDot != std::string::npos )
                 nDot++;
             else
                 nDot = 0;
 
-            m_wildCard = wxString::Format
-                         (
-                            _("%s files (%s)|%s"),
+            m_wildCard = fmt::format
+                         (// FIXME: Translation removed for fmt lib
+                            "%s files (%s)|%s",
                             wildCard.c_str() + nDot,
                             wildCard.c_str(),
                             wildCard.c_str()
@@ -105,35 +106,37 @@ bool wxFileDialogBase::Create(wxWindow *parent,
     return true;
 }
 
-wxString wxFileDialogBase::AppendExtension(const wxString &filePath,
-                                           const wxString &extensionList)
+std::string wxFileDialogBase::AppendExtension(const std::string &filePath,
+                                           const std::string &extensionList)
 {
     // strip off path, to avoid problems with "path.bar/foo"
-    wxString fileName = filePath.AfterLast(wxFILE_SEP_PATH);
+    std::string fileName = wx::utils::AfterLast(filePath, wxFILE_SEP_PATH);
 
     // if fileName is of form "foo.bar" it's ok, return it
-    const int idx_dot = fileName.Find(wxT('.'), true);
-    if ((idx_dot != wxNOT_FOUND) && (idx_dot < (int)fileName.length() - 1))
+    const auto idx_dot = fileName.rfind('.');
+    if ((idx_dot != std::string::npos) && (idx_dot < (int)fileName.length() - 1))
         return filePath;
 
     // get the first extension from extensionList, or all of it
-    wxString ext = extensionList.BeforeFirst(wxT(';'));
+    std::string ext = wx::utils::BeforeFirst(extensionList, ';');
 
     // if ext == "foo" or "foo." there's no extension
-    const int idx_ext_dot = ext.Find(wxT('.'), true);
+    const auto idx_ext_dot = ext.rfind('.');
     if ((idx_ext_dot == wxNOT_FOUND) || (idx_ext_dot == (int)ext.length() - 1))
         return filePath;
     else
-        ext = ext.AfterLast(wxT('.'));
+        ext = wx::utils::AfterLast(ext, '.');
 
     // if ext == "*" or "bar*" or "b?r" or " " then its not valid
-    if ((ext.Find(wxT('*')) != wxNOT_FOUND) ||
-        (ext.Find(wxT('?')) != wxNOT_FOUND) ||
-        (ext.Strip(wxString::both).empty()))
+    // FIXME: Make a strip function.
+    wx::utils::TrimAllSpace(ext);
+    if ((ext.empty()) || // FIXME: Is it okay to modify ext?
+        (ext.find('*') != std::string::npos) ||
+        (ext.find('?') != std::string::npos))
         return filePath;
 
     // if fileName doesn't have a '.' then add one
-    if (filePath.Last() != wxT('.'))
+    if (filePath.back() != '.')
         ext = "." + ext;
 
     return filePath + ext;
@@ -164,7 +167,7 @@ wxSize wxFileDialogBase::GetExtraControlSize()
     // create the extra control in an empty dialog just to find its size: this
     // is not terribly efficient but we do need to know the size before
     // creating the native dialog and this seems to be the only way
-    wxDialog dlg(nullptr, wxID_ANY, wxString());
+    wxDialog dlg(nullptr, wxID_ANY, std::string());
     return (*m_extraControlCreator)(&dlg)->GetSize();
 }
 
@@ -174,47 +177,47 @@ void wxFileDialogBase::UpdateExtraControlUI()
         m_extraControl->UpdateWindowUI(wxUPDATE_UI_RECURSE);
 }
 
-void wxFileDialogBase::SetPath(const wxString& path)
+void wxFileDialogBase::SetPath(const std::string& path)
 {
-    wxString ext;
+    std::string ext;
     wxFileName::SplitPath(path, &m_dir, &m_fileName, &ext);
     if ( !ext.empty() )
     {
         SetFilterIndexFromExt(ext);
 
-        m_fileName << wxT('.') << ext;
+        m_fileName += '.' + ext;
     }
 
     m_path = path;
 }
 
-void wxFileDialogBase::SetDirectory(const wxString& dir)
+void wxFileDialogBase::SetDirectory(const std::string& dir)
 {
     m_dir = dir;
     m_path = wxFileName(m_dir, m_fileName).GetFullPath();
 }
 
-void wxFileDialogBase::SetFilename(const wxString& name)
+void wxFileDialogBase::SetFilename(const std::string& name)
 {
     m_fileName = name;
     m_path = wxFileName(m_dir, m_fileName).GetFullPath();
 }
 
-void wxFileDialogBase::SetFilterIndexFromExt(const wxString& ext)
+void wxFileDialogBase::SetFilterIndexFromExt(const std::string& ext)
 {
     // if filter is of form "All files (*)|*|..." set correct filter index
-    if ( !ext.empty() && m_wildCard.find(wxT('|')) != wxString::npos )
+    if ( !ext.empty() && m_wildCard.find('|') != std::string::npos )
     {
         int filterIndex = -1;
 
-        std::vector<wxString> descriptions;
-        std::vector<wxString> filters;
+        std::vector<std::string> descriptions;
+        std::vector<std::string> filters;
         // don't care about errors, handled already by wxFileDialog
         std::ignore = wxParseCommonDialogsFilter(m_wildCard, descriptions, filters);
         
         for (size_t n=0; n != filters.size(); n++)
         {
-            if (filters[n].Contains(ext))
+            if (wx::utils::Contains(filters[n], ext))
             {
                 filterIndex = n;
                 break;
@@ -230,11 +233,11 @@ void wxFileDialogBase::SetFilterIndexFromExt(const wxString& ext)
 // wxFileDialog convenience functions
 //----------------------------------------------------------------------------
 
-wxString wxFileSelector(const wxString& title,
-                        const wxString& defaultDir,
-                        const wxString& defaultFileName,
-                        const wxString& defaultExtension,
-                        const wxString& filter,
+std::string wxFileSelector(const std::string& title,
+                        const std::string& defaultDir,
+                        const std::string& defaultFileName,
+                        const std::string& defaultExtension,
+                        const std::string& filter,
                         unsigned int flags,
                         wxWindow *parent,
                         int x, int y)
@@ -250,9 +253,9 @@ wxString wxFileSelector(const wxString& title,
     // If there's a default extension specified but no filter, we create a
     // suitable filter.
 
-    wxString filter2;
+    std::string filter2;
     if ( !defaultExtension.empty() && filter.empty() )
-        filter2 = wxString("*.") + defaultExtension;
+        filter2 = "*." + defaultExtension;
     else if ( !filter.empty() )
         filter2 = filter;
 
@@ -262,7 +265,7 @@ wxString wxFileSelector(const wxString& title,
 
     fileDialog.SetFilterIndexFromExt(defaultExtension);
 
-    wxString filename;
+    std::string filename;
     if ( fileDialog.ShowModal() == wxID_OK )
     {
         filename = fileDialog.GetPath();
@@ -275,11 +278,11 @@ wxString wxFileSelector(const wxString& title,
 // wxFileSelectorEx
 //----------------------------------------------------------------------------
 
-wxString wxFileSelectorEx(const wxString& title,
-                          const wxString& defaultDir,
-                          const wxString& defaultFileName,
+std::string wxFileSelectorEx(const std::string& title,
+                          const std::string& defaultDir,
+                          const std::string& defaultFileName,
                           int*            defaultFilterIndex,
-                          const wxString& filter,
+                          const std::string& filter,
                           int             flags,
                           wxWindow*       parent,
                           int             x,
@@ -293,7 +296,7 @@ wxString wxFileSelectorEx(const wxString& title,
                             filter,
                             flags, wxPoint(x, y));
 
-    wxString filename;
+    std::string filename;
     if ( fileDialog.ShowModal() == wxID_OK )
     {
         if ( defaultFilterIndex )
@@ -309,30 +312,30 @@ wxString wxFileSelectorEx(const wxString& title,
 // wxDefaultFileSelector - Generic load/save dialog (for internal use only)
 //----------------------------------------------------------------------------
 
-static wxString wxDefaultFileSelector(bool load,
-                                      const wxString& what,
-                                      const wxString& extension,
-                                      const wxString& default_name,
+static std::string wxDefaultFileSelector(bool load,
+                                      const std::string& what,
+                                      const std::string& extension,
+                                      const std::string& default_name,
                                       wxWindow *parent)
 {
-    wxString prompt;
-    wxString str;
+    std::string str;
     if (load)
         str = _("Load %s file");
     else
         str = _("Save %s file");
-    prompt.Printf(str, what);
+    
+    std::string prompt = str + what;
 
-    wxString wild;
-    wxString ext;
+    std::string wild;
+    std::string ext;
     if ( !extension.empty() )
     {
-        if ( extension[0u] == wxT('.') )
+        if ( extension[0u] == '.' )
             ext = extension.substr(1);
         else
             ext = extension;
 
-        wild.Printf("*.%s", ext);
+        wild = fmt::format("*.%s", ext);
     }
     else // no extension specified
     {
@@ -348,9 +351,9 @@ static wxString wxDefaultFileSelector(bool load,
 // wxLoadFileSelector
 //----------------------------------------------------------------------------
 
-wxString wxLoadFileSelector(const wxString& what,
-                                        const wxString& extension,
-                                        const wxString& default_name,
+std::string wxLoadFileSelector(const std::string& what,
+                                        const std::string& extension,
+                                        const std::string& default_name,
                                         wxWindow *parent)
 {
     return wxDefaultFileSelector(true, what, extension, default_name, parent);
@@ -360,9 +363,9 @@ wxString wxLoadFileSelector(const wxString& what,
 // wxSaveFileSelector
 //----------------------------------------------------------------------------
 
-wxString wxSaveFileSelector(const wxString& what,
-                                        const wxString& extension,
-                                        const wxString& default_name,
+std::string wxSaveFileSelector(const std::string& what,
+                                        const std::string& extension,
+                                        const std::string& default_name,
                                         wxWindow *parent)
 {
     return wxDefaultFileSelector(false, what, extension, default_name, parent);

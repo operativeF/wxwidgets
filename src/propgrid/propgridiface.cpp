@@ -980,7 +980,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
     bool res = true;
 
     pg->Freeze();
-    std::vector<wxString> pageStrings = ::wxSplit(src, wxS('|'), wxS('\\'));
+    std::vector<wxString> pageStrings = wx::utils::StrSplitEscape(src, '|', '\\');
 
     for ( pageIndex=0; pageIndex<pageStrings.size(); pageIndex++ )
     {
@@ -988,7 +988,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
         if ( !pageState )
             break;
 
-        std::vector<wxString> kvpairStrings = ::wxSplit(pageStrings[pageIndex], wxS(';'), wxS('\\'));
+        std::vector<wxString> kvpairStrings = wx::utils::StrSplitEscape(pageStrings[pageIndex], ';', '\\');
 
         for ( size_t i=0; i<kvpairStrings.size(); i++ )
         {
@@ -1000,7 +1000,7 @@ bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int res
                 wxString value = kvs.substr(eq_pos+1);
 
                 // Further split value by commas
-                std::vector<wxString> values = ::wxSplit(value, wxS(','), wxS('\\'));
+                std::vector<wxString> values = wx::utils::StrSplitEscape(value, ',', '\\');
 
                 if ( key == "expanded" )
                 {

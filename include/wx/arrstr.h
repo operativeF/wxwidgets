@@ -29,9 +29,4 @@ wxString wxJoin(const std::vector<wxString>& arr,
                                  const wxChar sep,
                                  const wxChar escape = wxT('\\'));
 
-std::vector<wxString> wxSplit(const wxString& str,
-                                       const wxChar sep,
-                                       const wxChar escape = wxT('\\'));
-
-
 #endif // _WX_ARRSTR_H

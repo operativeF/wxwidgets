@@ -59,22 +59,22 @@ public:
     void ReadData();
 
     // get the name of the file, dir, drive
-    wxString GetFileName() const { return m_fileName; }
+    std::string GetFileName() const { return m_fileName; }
     // get the full path + name of the file, dir, path
-    wxString GetFilePath() const { return m_filePath; }
+    std::string GetFilePath() const { return m_filePath; }
     // Set the path + name and name of the item
-    void SetNewName( const wxString &filePath, const wxString &fileName );
+    void SetNewName( const std::string &filePath, const std::string &fileName );
 
     // Get the size of the file in bytes
     wxFileOffset GetSize() const { return m_size; }
     // Get the type of file, either file extension or <DIR>, <LINK>, <DRIVE>
-    wxString GetFileType() const;
+    std::string GetFileType() const;
     // get the last modification time
     wxDateTime GetDateTime() const { return m_dateTime; }
     // Get the time as a formatted string
-    wxString GetModificationTime() const;
+    std::string GetModificationTime() const;
     // in UNIX get rwx for file, in MSW get attributes ARHS
-    wxString GetPermissions() const { return m_permissions; }
+    std::string GetPermissions() const { return m_permissions; }
     // Get the id of the image used in a wxImageList
     int GetImageId() const { return m_image; }
 
@@ -101,10 +101,10 @@ public:
     };
 
     // Get the entry for report view of wxFileListCtrl
-    wxString GetEntry( fileListFieldType num ) const;
+    std::string GetEntry( fileListFieldType num ) const;
 
     // Get a string representation of the file info
-    wxString GetHint() const;
+    std::string GetHint() const;
     // initialize a wxListItem attributes
     void MakeItem( wxListItem &item );
 
@@ -112,9 +112,9 @@ public:
     wxFileData& operator = (const wxFileData& fd) { Copy(fd); return *this; }
 
 protected:
-    wxString m_fileName;
-    wxString   m_filePath;
-    wxString m_permissions;
+    std::string m_fileName;
+    std::string   m_filePath;
+    std::string m_permissions;
 
     wxDateTime m_dateTime;
 
@@ -133,13 +133,13 @@ public:
     wxFileListCtrl() = default;
     wxFileListCtrl( wxWindow *win,
                 wxWindowID id,
-                const wxString &wild,
+                const std::string &wild,
                 bool showHidden,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
                 unsigned int style = wxLC_LIST,
                 const wxValidator &validator = wxDefaultValidator,
-                const wxString &name = "filelist" );
+                const std::string &name = "filelist" );
     ~wxFileListCtrl();
 
     virtual void ChangeToListMode();
@@ -154,10 +154,10 @@ public:
     virtual void MakeDir();
     virtual void GoToParentDir();
     virtual void GoToHomeDir();
-    virtual void GoToDir( const wxString &dir );
-    virtual void SetWild( const wxString &wild );
-    wxString GetWild() const { return m_wild; }
-    wxString GetDir() const { return m_dirName; }
+    virtual void GoToDir( const std::string &dir );
+    virtual void SetWild( const std::string &wild );
+    std::string GetWild() const { return m_wild; }
+    std::string GetDir() const { return m_dirName; }
 
     void OnListDeleteItem( wxListEvent &event );
     void OnListDeleteAllItems( wxListEvent &event );
@@ -173,8 +173,8 @@ protected:
     void FreeItemData(wxListItem& item);
     void FreeAllItemsData();
 
-    wxString      m_dirName;
-    wxString      m_wild;
+    std::string      m_dirName;
+    std::string      m_wild;
 
     wxFileData::fileListFieldType m_sort_field{wxFileData::FileList_Name};
 
@@ -217,27 +217,27 @@ public:
                  const wxSize& size = wxDefaultSize,
                  const std::string& name = wxFileCtrlNameStr);
 
-    void SetWildcard( const wxString& wildCard ) override;
+    void SetWildcard( const std::string& wildCard ) override;
     void SetFilterIndex( int filterindex ) override;
-    bool SetDirectory( const wxString& dir ) override;
+    bool SetDirectory( const std::string& dir ) override;
 
     // Selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and nothing happens
-    bool SetFilename( const wxString& name ) override;
+    bool SetFilename( const std::string& name ) override;
 
     // Changes to a certain directory and selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and if directory exists
     // it's chdir'ed to
-    bool SetPath( const wxString& path ) override;
+    bool SetPath( const std::string& path ) override;
 
-    wxString GetFilename() const override;
-    wxString GetDirectory() const override;
-    wxString GetWildcard() const override { return this->m_wildCard; }
-    wxString GetPath() const override;
-    std::vector<wxString> GetPaths() const override;
-    std::vector<wxString> GetFilenames() const override;
+    std::string GetFilename() const override;
+    std::string GetDirectory() const override;
+    std::string GetWildcard() const override { return this->m_wildCard; }
+    std::string GetPath() const override;
+    std::vector<std::string> GetPaths() const override;
+    std::vector<std::string> GetFilenames() const override;
     int GetFilterIndex() const override { return m_filterIndex; }
 
     bool HasMultipleFileSelection() const override
@@ -251,7 +251,7 @@ public:
     // from GetDirectory() if the user entered a full path (with a path other
     // than the one currently shown in the control) in the text control
     // manually
-    wxString GetShownDirectory() const { return m_list->GetDir(); }
+    std::string GetShownDirectory() const { return m_list->GetDir(); }
 
     wxFileListCtrl *GetFileList() { return m_list; }
 
@@ -266,7 +266,7 @@ private:
     void OnTextEnter( wxCommandEvent &WXUNUSED( event ) );
     void OnTextChange( wxCommandEvent &WXUNUSED( event ) );
     void OnSelected( wxListEvent &event );
-    void HandleAction( const wxString &fn );
+    void HandleAction( const std::string &fn );
 
     void DoSetFilterIndex( int filterindex );
     void UpdateControls();
@@ -274,20 +274,20 @@ private:
     // the first of these methods can only be used for the controls with single
     // selection (i.e. without wxFC_MULTIPLE style), the second one in any case
     wxFileName DoGetFileName() const;
-    std::vector<wxString> DoGetFilenames(bool fullPath ) const;
+    std::vector<std::string> DoGetFilenames(bool fullPath ) const;
 
     unsigned int m_style;
 
-    wxString         m_filterExtension;
+    std::string         m_filterExtension;
     wxChoice        *m_choice;
     wxTextCtrl      *m_text;
     wxFileListCtrl  *m_list;
     wxCheckBox      *m_check;
     wxStaticText    *m_static;
 
-    wxString        m_dir;
-    wxString        m_fileName;
-    wxString        m_wildCard; // wild card in one string as we got it
+    std::string        m_dir;
+    std::string        m_fileName;
+    std::string        m_wildCard; // wild card in one string as we got it
 
     int     m_filterIndex{};
     bool    m_inSelected{};

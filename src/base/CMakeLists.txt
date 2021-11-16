@@ -132,8 +132,8 @@ set(BASE_WIN32_SRC
     ${BASE_SRC_DIR}/msw/evtloopconsole.cpp
     ${BASE_SRC_DIR}/msw/mimetype.cpp
     ${BASE_SRC_DIR}/msw/power.cpp
-    ${BASE_SRC_DIR}/msw/regconf.cpp
-    ${BASE_SRC_DIR}/msw/registry.cpp
+    # ${BASE_SRC_DIR}/msw/regconf.cpp # Do not include unless registry is enabled.
+    #${BASE_SRC_DIR}/msw/registry.cpp # Do not include unless registry is enabled.
     ${BASE_SRC_DIR}/msw/secretstore.cpp
     ${BASE_SRC_DIR}/msw/snglinst.cpp
     ${BASE_SRC_DIR}/msw/stackwalk.cpp

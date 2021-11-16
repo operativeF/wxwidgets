@@ -97,13 +97,13 @@ bool wxWinHelpController::Quit()
 // Append extension if necessary.
 std::string wxWinHelpController::GetValidFilename(const std::string& file) const
 {
-    wxString path, name, ext;
+    std::string path, name, ext;
     wxFileName::SplitPath(file, & path, & name, & ext);
 
     std::string fullName;
     if (path.empty())
         fullName = name + ".hlp";
-    else if (path.Last() == wxT('\\'))
+    else if (path.back() == '\\')
         fullName = path + name + ".hlp";
     else
         fullName = path + "\\" + name + ".hlp";

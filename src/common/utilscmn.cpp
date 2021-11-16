@@ -450,9 +450,9 @@ wxString wxGetFullHostName()
     return buf;
 }
 
-wxString wxGetHomeDir()
+std::string wxGetHomeDir()
 {
-    wxString home;
+    std::string home;
     wxGetHomeDir(&home);
 
     return home;

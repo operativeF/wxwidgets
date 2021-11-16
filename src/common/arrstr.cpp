@@ -96,64 +96,6 @@ wxString wxJoin(const std::vector<wxString>& arr, const wxChar sep, const wxChar
     return str;
 }
 
-std::vector<std::string> wxSplit(const wxString& str, const wxChar sep, const wxChar escape)
-{
-    if ( escape == '\0' )
-    {
-        // simple case: we don't need to honour the escape character
-        return wxStringTokenize(str, sep, wxStringTokenizerMode::RetEmptyAll);
-    }
-
-    std::vector<wxString> ret;
-    wxString curr;
-
-    for ( wxString::const_iterator i = str.begin(),
-                                 end = str.end();
-          i != end;
-          ++i )
-    {
-        const wxChar ch = *i;
-
-        // Order of tests matters here in the uncommon, but possible, case when
-        // the separator is the same as the escape character: it has to be
-        // recognized as a separator in this case (escaping doesn't work at all
-        // in this case).
-        if ( ch == sep )
-        {
-            ret.push_back(curr);
-            curr.clear();
-        }
-        else if ( ch == escape )
-        {
-            ++i;
-            if ( i == end )
-            {
-                // Escape at the end of the string is not handled specially.
-                curr += ch;
-                break;
-            }
-
-            // Separator or the escape character itself may be escaped,
-            // cancelling their special meaning, but escape character followed
-            // by anything else is not handled specially.
-            if ( *i != sep && *i != escape )
-                curr += ch;
-
-            curr += *i;
-        }
-        else // normal character
-        {
-            curr += ch;
-        }
-    }
-
-    // add the last token, which we always have unless the string is empty
-    if ( !str.empty() )
-        ret.push_back(curr);
-
-    return ret;
-}
-
 namespace // helpers needed by wxCmpNaturalGeneric()
 {
 // Used for comparison of string parts

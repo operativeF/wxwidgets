@@ -102,39 +102,39 @@ public:
 
     bool HasFdFlag(unsigned int flag) const { return HasFlag(flag); }
 
-    virtual void SetMessage(const wxString& message) { m_message = message; }
-    virtual void SetPath(const wxString& path);
-    virtual void SetDirectory(const wxString& dir);
-    virtual void SetFilename(const wxString& name);
-    virtual void SetWildcard(const wxString& wildCard) { m_wildCard = wildCard; }
+    virtual void SetMessage(const std::string& message) { m_message = message; }
+    virtual void SetPath(const std::string& path);
+    virtual void SetDirectory(const std::string& dir);
+    virtual void SetFilename(const std::string& name);
+    virtual void SetWildcard(const std::string& wildCard) { m_wildCard = wildCard; }
     virtual void SetFilterIndex(int filterIndex) { m_filterIndex = filterIndex; }
 
-    virtual wxString wxGetMessage() const { return m_message; }
-    virtual wxString GetPath() const
+    virtual std::string wxGetMessage() const { return m_message; }
+    virtual std::string GetPath() const
     {
-        wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );
+        wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), std::string(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );
         return m_path;
     }
 
-    virtual std::vector<wxString> GetPaths() const
+    virtual std::vector<std::string> GetPaths() const
     {
         return {m_path};
     }
 
-    virtual wxString GetDirectory() const { return m_dir; }
-    virtual wxString GetFilename() const
+    virtual std::string GetDirectory() const { return m_dir; }
+    virtual std::string GetFilename() const
     {
-        wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
+        wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), std::string(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
         return m_fileName;
     }
-    virtual std::vector<wxString> GetFilenames() const
+    virtual std::vector<std::string> GetFilenames() const
     {
         return {m_fileName};
     }
-    virtual wxString GetWildcard() const { return m_wildCard; }
+    virtual std::string GetWildcard() const { return m_wildCard; }
     virtual int GetFilterIndex() const { return m_filterIndex; }
 
-    virtual wxString GetCurrentlySelectedFilename() const
+    virtual std::string GetCurrentlySelectedFilename() const
         { return m_currentlySelectedFilename; }
 
     virtual int GetCurrentlySelectedFilterIndex () const
@@ -155,28 +155,28 @@ public:
     // if filePath = "path/foo.bar" just return it as is
     // if filePath = "foo[.]" and extensionList = "*.jpg;*.png" return "foo.jpg"
     // if the extension is "*.j?g" (has wildcards) or "jpg" then return filePath
-    static wxString AppendExtension(const wxString &filePath,
-                                    const wxString &extensionList);
+    static std::string AppendExtension(const std::string &filePath,
+                                    const std::string &extensionList);
 
     // Set the filter index to match the given extension.
     //
     // This is always valid to call, even if the extension is empty or the
     // filter list doesn't contain it, the function will just do nothing in
     // these cases.
-    void SetFilterIndexFromExt(const wxString& ext);
+    void SetFilterIndexFromExt(const std::string& ext);
 
 protected:
     std::string      m_message;
-    wxString      m_dir;
-    wxString      m_path;       // Full path
-    wxString      m_fileName;
-    wxString      m_wildCard;
+    std::string      m_dir;
+    std::string   m_path;       // Full path
+    std::string      m_fileName;
+    std::string      m_wildCard;
     
     // Currently selected, but not yet necessarily accepted by the user, file.
     // This should be updated whenever the selection in the control changes by
     // the platform-specific code to provide a useful implementation of
     // GetCurrentlySelectedFilename().
-    wxString      m_currentlySelectedFilename;
+    std::string      m_currentlySelectedFilename;
 
     wxWindow*     m_extraControl{nullptr};
 
@@ -211,39 +211,39 @@ private:
 //----------------------------------------------------------------------------
 
 // File selector - backward compatibility
-wxString
-wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-               const wxString& default_path = {},
-               const wxString& default_filename = {},
-               const wxString& default_extension = {},
-               const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+std::string
+wxFileSelector(const std::string& message = wxFileSelectorPromptStr,
+               const std::string& default_path = {},
+               const std::string& default_filename = {},
+               const std::string& default_extension = {},
+               const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                unsigned int flags = 0,
                wxWindow *parent = nullptr,
                int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // An extended version of wxFileSelector
-wxString
-wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-                 const wxString& default_path = {},
-                 const wxString& default_filename = {},
+std::string
+wxFileSelectorEx(const std::string& message = wxFileSelectorPromptStr,
+                 const std::string& default_path = {},
+                 const std::string& default_filename = {},
                  int *indexDefaultExtension = nullptr,
-                 const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                 const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                  unsigned int flags = 0,
                  wxWindow *parent = nullptr,
                  int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // Ask for filename to load
-wxString
-wxLoadFileSelector(const wxString& what,
-                   const wxString& extension,
-                   const wxString& default_name = {},
+std::string
+wxLoadFileSelector(const std::string& what,
+                   const std::string& extension,
+                   const std::string& default_name = {},
                    wxWindow *parent = nullptr);
 
 // Ask for filename to save
-wxString
-wxSaveFileSelector(const wxString& what,
-                   const wxString& extension,
-                   const wxString& default_name = {},
+std::string
+wxSaveFileSelector(const std::string& what,
+                   const std::string& extension,
+                   const std::string& default_name = {},
                    wxWindow *parent = nullptr);
 
 

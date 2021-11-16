@@ -430,12 +430,12 @@ void wxFileName::SetPath( const std::string& pathOrig, wxPathFormat format )
         return;
     }
 
-    const wxChar leadingChar = path[0u];
+    const char leadingChar = path[0u];
 
     switch (format)
     {
         case wxPATH_MAC:
-            m_relative = leadingChar == wxT(':');
+            m_relative = leadingChar == ':';
 
             // We then remove a leading ":". The reason is in our
             // storage form for relative paths:
@@ -461,7 +461,7 @@ void wxFileName::SetPath( const std::string& pathOrig, wxPathFormat format )
             [[fallthrough]];
 
         case wxPATH_UNIX:
-            m_relative = leadingChar != wxT('/');
+            m_relative = leadingChar != '/';
             break;
 
         case wxPATH_DOS:
@@ -1786,7 +1786,7 @@ bool wxFileName::MakeRelativeTo(const std::string& pathBase, wxPathFormat format
     {
         const auto first_mismatching_dirs = std::mismatch(m_dirs.cbegin(), m_dirs.cend(), fnBase.m_dirs.cbegin(), fnBase.m_dirs.cend(),
             [withCase](const auto& dir, const auto& base_dir){
-                return dir.IsSameAs(base_dir, withCase);
+                return wx::utils::IsSameAs(dir, base_dir, withCase);
             });
 
         m_dirs.erase(std::begin(m_dirs), first_mismatching_dirs.first);
@@ -1960,11 +1960,11 @@ std::string wxFileName::GetPathTerminators(wxPathFormat format)
 }
 
 /* static */
-bool wxFileName::IsPathSeparator(wxChar ch, wxPathFormat format)
+bool wxFileName::IsPathSeparator(char ch, wxPathFormat format)
 {
     // std::string::Find() doesn't work as expected with NUL - it will always find
     // it, so test for it separately
-    return ch != wxT('\0') && GetPathSeparators(format).find(ch) != std::string::npos;
+    return ch != '\0' && GetPathSeparators(format).find(ch) != std::string::npos;
 }
 
 /* static */
@@ -2564,8 +2564,8 @@ bool wxFileName::SetPermissions(int permissions)
 wxFileName wxFileName::URLToFileName(const std::string& url)
 {
     std::string path;
-    if ( !url.StartsWith("file://", &path) &&
-            !url.StartsWith("file:", &path) )
+    if ( !wx::utils::StartsWith(url, "file://", path) &&
+            !wx::utils::StartsWith(url, "file:", path) )
     {
         // Consider it's just the path without any schema.
         path = url;
@@ -2595,25 +2595,23 @@ wxFileName wxFileName::URLToFileName(const std::string& url)
 }
 
 // Escapes non-ASCII and others characters in file: URL to be valid URLs
-static std::string EscapeFileNameCharsInURL(const char *in)
+static std::string EscapeFileNameCharsInURL(const std::string& in)
 {
     std::string s;
 
-    for ( const unsigned char *p = (const unsigned char*)in; *p; ++p )
+    for ( auto ch : in )
     {
-        const unsigned char c = *p;
-
         // https://tools.ietf.org/html/rfc1738#section-5
-        if ( (c >= '0' && c <= '9') ||
-             (c >= 'a' && c <= 'z') ||
-             (c >= 'A' && c <= 'Z') ||
-             strchr("/:$-_.+!*'(),", c) ) // Plus '/' and ':'
+        if ( (ch >= '0' && ch <= '9') ||
+             (ch >= 'a' && ch <= 'z') ||
+             (ch >= 'A' && ch <= 'Z') ||
+             std::strchr("/:$-_.+!*'(),", ch) ) // Plus '/' and ':'
         {
-            s += c;
+            s += ch;
         }
         else
         {
-            s += fmt::format("%%%02x", c);
+            s += fmt::format("%%%02x", ch);
         }
     }
 
@@ -2888,7 +2886,7 @@ std::string wxFileName::GetHumanReadableSize(const wxULongLong &bs,
 
     std::string result;
     if ( bytesize < kiloByteSize )
-        result = fmt::format("%s B", bs.ToString());
+        result = fmt::format("%s B", bs.ToString().ToStdString());
     else if ( bytesize < megaByteSize )
         result = fmt::format("%.*f K%sB", precision, bytesize/kiloByteSize, biInfix);
     else if (bytesize < gigaByteSize)

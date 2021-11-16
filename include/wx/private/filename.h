@@ -25,13 +25,13 @@
 // available.
 
 #if wxUSE_FILE
-wxString wxCreateTempFileName(const wxString& prefix,
+std::string wxCreateTempFileName(const std::string& prefix,
                               wxFile *fileTemp,
                               bool *deleteOnClose = nullptr);
 #endif
 
 #if wxUSE_FFILE
-wxString wxCreateTempFileName(const wxString& prefix,
+std::string wxCreateTempFileName(const std::string& prefix,
                               wxFFile *fileTemp,
                               bool *deleteOnClose = nullptr);
 #endif
@@ -41,15 +41,15 @@ wxString wxCreateTempFileName(const wxString& prefix,
 // possible, so that the caller can delete the file when done.
 
 #if wxUSE_FILE
-bool wxCreateTempFile(const wxString& prefix,
+bool wxCreateTempFile(const std::string& prefix,
                       wxFile *fileTemp,
-                      wxString *name);
+                      std::string *name);
 #endif
 
 #if wxUSE_FFILE
-bool wxCreateTempFile(const wxString& prefix,
+bool wxCreateTempFile(const std::string& prefix,
                       wxFFile *fileTemp,
-                      wxString *name);
+                      std::string *name);
 #endif
 
 #endif // _WX_PRIVATE_FILENAME_H_

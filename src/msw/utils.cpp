@@ -307,9 +307,9 @@ error:
 #endif // Win32/16
 }
 
-const wxChar* wxGetHomeDir(wxString *pstr)
+std::string wxGetHomeDir(std::string *pstr)
 {
-    wxString& strDir = *pstr;
+    std::string& strDir = *pstr;
 
     // first branch is for Cygwin
 #if defined(__UNIX__) && !defined(__WINE__)
@@ -323,8 +323,8 @@ const wxChar* wxGetHomeDir(wxString *pstr)
        strDir = szHome;
 
     // add a trailing slash if needed
-    if ( strDir.Last() != wxT('/') )
-      strDir << wxT('/');
+    if ( strDir.back() != '/' )
+      strDir += '/';
 
     #ifdef __CYGWIN__
         // Cygwin returns unix type path but that does not work well
@@ -339,26 +339,24 @@ const wxChar* wxGetHomeDir(wxString *pstr)
 #else
     strDir.clear();
 
-    // FIXME: Use narrow strings.
-
     // If we have a valid HOME directory, as is used on many machines that
     // have unix utilities on them, we should use that.
-    const wxChar *szHome = wxGetenv(L"HOME");
+    std::string szHome = boost::nowide::narrow(wxGetenv(L"HOME"));
 
-    if ( szHome != nullptr )
+    if ( !szHome.empty() )
     {
         strDir = szHome;
     }
     else // no HOME, try HOMEDRIVE/PATH
     {
-        szHome = wxGetenv(L"HOMEDRIVE");
-        if ( szHome != nullptr )
-            strDir << szHome;
-        szHome = wxGetenv(L"HOMEPATH");
+        szHome = boost::nowide::narrow(wxGetenv(L"HOMEDRIVE"));
+        if ( !szHome.empty() )
+            strDir += szHome;
+        szHome = boost::nowide::narrow(wxGetenv(L"HOMEPATH"));
 
-        if ( szHome != nullptr )
+        if ( !szHome.empty() )
         {
-            strDir << szHome;
+            strDir += szHome;
 
             // the idea is that under NT these variables have default values
             // of "%systemdrive%:" and "\\". As we don't want to create our
@@ -371,14 +369,13 @@ const wxChar* wxGetHomeDir(wxString *pstr)
         }
     }
 
-    if ( strDir.empty() )
+    if ( !strDir.empty() )
     {
-        // FIXME: Use narrow strings.
         // If we have a valid USERPROFILE directory, as is the case in
         // Windows NT, 2000 and XP, we should use that as our home directory.
-        szHome = wxGetenv(L"USERPROFILE");
+        szHome = boost::nowide::narrow(wxGetenv(L"USERPROFILE"));
 
-        if ( szHome != nullptr )
+        if ( !szHome.empty() )
             strDir = szHome;
     }
 
@@ -395,12 +392,12 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     }
 #endif  // UNIX/Win
 
-    return strDir.c_str();
+    return strDir;
 }
 
-wxString wxGetUserHome(const wxString& user)
+std::string wxGetUserHome(const std::string& user)
 {
-    wxString home;
+    std::string home;
 
     if ( user.empty() || user == wxGetUserId() )
         wxGetHomeDir(&home);

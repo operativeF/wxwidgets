@@ -232,13 +232,13 @@ bool wxCHMHelpController::Quit()
 
 std::string wxCHMHelpController::GetValidFilename() const
 {
-    wxString path, name, ext;
+    std::string path, name, ext;
     wxFileName::SplitPath(m_helpFile, &path, &name, &ext);
 
-    wxString fullName;
-    if (path.IsEmpty())
+    std::string fullName;
+    if (path.empty())
         fullName = name + ".chm";
-    else if (path.Last() == wxT('\\'))
+    else if (path.back() == '\\')
         fullName = path + name + ".chm";
     else
         fullName = path + "\\" + name + ".chm";

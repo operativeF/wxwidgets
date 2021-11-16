@@ -186,6 +186,19 @@ bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) no
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
+
+bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCase) noexcept
+{
+    if(bCase)
+    {
+        return IsSameAsCase(strViewA, strViewB);
+    }
+    else
+    {
+        return IsSameAsNoCase(strViewA, strViewB);
+    }
+}
+
 [[nodiscard]] constexpr std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0)
 {
     const auto n = strView.find(strFirst, pos);
@@ -302,13 +315,13 @@ bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) no
     return str.find(substrToFind) != std::string::npos;
 }
 
-[[nodiscard]] constexpr bool StartsWith(std::string_view strView, std::string_view prefix, std::string& afterStart )
+[[nodiscard]] constexpr bool StartsWith(const std::string& strView, std::string_view prefix, std::string& afterPrefix)
 {
-    auto pos = strView.rfind(prefix, 0);
+    bool prefixFound = strView.rfind(prefix, 0) == 0;
 
-    if(pos != std::string::npos)
+    if(prefixFound)
     {
-        afterStart = strView.substr(pos);
+        afterPrefix = strView.substr(prefix.length());
 
         return true;
     }

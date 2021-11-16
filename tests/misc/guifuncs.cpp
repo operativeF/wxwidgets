@@ -53,8 +53,8 @@ TEST_CASE("URLDataObject")
 
 TEST_CASE("ParseFileDialogFilter")
 {
-    std::vector<wxString> descs;
-    std::vector<wxString> filters;
+    std::vector<std::string> descs;
+    std::vector<std::string> filters;
 
     CHECK_EQ
     (
@@ -130,7 +130,7 @@ namespace
 class TestButton : public wxWindow
 {
 public:
-    TestButton(wxWindow* parent, const wxString& label, const wxPoint& pos)
+    TestButton(wxWindow* parent, const std::string& label, const wxPoint& pos)
         : wxWindow(parent, wxID_ANY, pos, wxSize(100, 50))
     {
         SetLabel(label);

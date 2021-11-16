@@ -295,7 +295,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
             // may be we have an alias?
             config->SetPath(FONTMAPPER_CHARSET_ALIAS_PATH);
 
-            std::string alias = config->Read(charset).ToStdString();
+            std::string alias = config->Read(charset);
             if ( !alias.empty() )
             {
                 // yes, we do - use it instead

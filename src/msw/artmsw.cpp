@@ -153,7 +153,7 @@ wxBitmap
 GetDriveBitmapForVolumeType(const wxFSVolumeKind& volKind, const wxSize& size)
 {
     // get all volumes and try to find one with a matching type
-    std::vector<wxString> volumes = wxFSVolume::GetVolumes();
+    std::vector<std::string> volumes = wxFSVolume::GetVolumes();
     for ( const auto& volume : volumes )
     {
         wxFSVolume vol( volume );

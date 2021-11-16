@@ -25,6 +25,8 @@
 #include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
+#include <boost/nowide/convert.hpp>
+
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())
 #else
@@ -117,7 +119,7 @@ int wxCALLBACK wxFileDataTimeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
 }
 
 // defined in src/generic/dirctrlg.cpp
-extern size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids);
+extern size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<std::string> &names, std::vector<int> &icon_ids);
 
 //-----------------------------------------------------------------------------
 //  wxFileData
@@ -200,24 +202,23 @@ void wxFileData::ReadData()
                              buff.st_mode & wxS_IXOTH ? wxT('x') : wxT('-'));
     }
 #elif defined(__WIN32__)
-    // FIXME: Doesn't convert to wide
-    DWORD attribs = ::GetFileAttributesW(m_filePath.c_str());
+    DWORD attribs = ::GetFileAttributesW(boost::nowide::widen(m_filePath).c_str());
     if (attribs != (DWORD)-1)
     {
-        m_permissions.Printf("%c%c%c%c",
-                             attribs & FILE_ATTRIBUTE_ARCHIVE  ? wxT('A') : wxT(' '),
-                             attribs & FILE_ATTRIBUTE_READONLY ? wxT('R') : wxT(' '),
-                             attribs & FILE_ATTRIBUTE_HIDDEN   ? wxT('H') : wxT(' '),
-                             attribs & FILE_ATTRIBUTE_SYSTEM   ? wxT('S') : wxT(' '));
+        m_permissions = fmt::format("%c%c%c%c",
+                             attribs & FILE_ATTRIBUTE_ARCHIVE  ? 'A' : ' ',
+                             attribs & FILE_ATTRIBUTE_READONLY ? 'R' : ' ',
+                             attribs & FILE_ATTRIBUTE_HIDDEN   ? 'H' : ' ',
+                             attribs & FILE_ATTRIBUTE_SYSTEM   ? 'S' : ' ');
     }
 #endif
 
     // try to get a better icon
     if (m_image == wxFileIconsTable::file)
     {
-        if (m_fileName.Find(wxT('.'), true) != wxNOT_FOUND)
+        if (m_fileName.rfind('.') != std::string::npos)
         {
-            m_image = wxTheFileIconsTable->GetIconID( m_fileName.AfterLast(wxT('.')));
+            m_image = wxTheFileIconsTable->GetIconID( wx::utils::AfterLast(m_fileName, '.'));
         } else if (IsExe())
         {
             m_image = wxFileIconsTable::executable;
@@ -225,29 +226,29 @@ void wxFileData::ReadData()
     }
 }
 
-wxString wxFileData::GetFileType() const
+std::string wxFileData::GetFileType() const
 {
     if (IsDir())
-        return _("<DIR>");
+        return _("<DIR>").ToStdString();
     else if (IsLink())
-        return _("<LINK>");
+        return _("<LINK>").ToStdString();
     else if (IsDrive())
-        return _("<DRIVE>");
-    else if (m_fileName.Find(wxT('.'), true) != wxNOT_FOUND)
-        return m_fileName.AfterLast(wxT('.'));
+        return _("<DRIVE>").ToStdString();
+    else if (m_fileName.rfind('.') != std::string::npos)
+        return wx::utils::AfterLast(m_fileName, '.');
 
     return {};
 }
 
-wxString wxFileData::GetModificationTime() const
+std::string wxFileData::GetModificationTime() const
 {
     // want time as 01:02 so they line up nicely, no %r in WIN32
     return m_dateTime.FormatDate() + " " + m_dateTime.Format(wxT("%I:%M:%S %p"));
 }
 
-wxString wxFileData::GetHint() const
+std::string wxFileData::GetHint() const
 {
-    wxString s = m_filePath;
+    std::string s = m_filePath;
     s += "  ";
 
     if (IsDir())
@@ -256,25 +257,22 @@ wxString wxFileData::GetHint() const
         s += _("<LINK>");
     else if (IsDrive())
         s += _("<DRIVE>");
-    else // plain file
-        s += wxString::Format(wxPLURAL("%ld byte", "%ld bytes", m_size),
-                              wxLongLong(m_size).ToString().c_str());
+    else // plain file // FIXME: was wxPLURAL("%ld byte", "%ld bytes", m_size), but fmt lib doesn't work with it yet.
+        s += fmt::format("%ld bytes", wxLongLong(m_size).ToString().c_str());
 
-    s += wxT(' ');
+    s += ' ';
 
     if ( !IsDrive() )
     {
-        s << GetModificationTime()
-          << "  "
-          << m_permissions;
+        s += fmt::format("{}  {}", GetModificationTime(), m_permissions);
     }
 
     return s;
 }
 
-wxString wxFileData::GetEntry( fileListFieldType num ) const
+std::string wxFileData::GetEntry( fileListFieldType num ) const
 {
-    wxString s;
+    std::string s;
     switch ( num )
     {
         case FileList_Name:
@@ -308,7 +306,7 @@ wxString wxFileData::GetEntry( fileListFieldType num ) const
     return s;
 }
 
-void wxFileData::SetNewName( const wxString &filePath, const wxString &fileName )
+void wxFileData::SetNewName( const std::string &filePath, const std::string &fileName )
 {
     m_fileName = fileName;
     m_filePath = filePath;
@@ -350,13 +348,13 @@ wxEND_EVENT_TABLE()
 
 wxFileListCtrl::wxFileListCtrl(wxWindow *win,
                        wxWindowID id,
-                       const wxString& wild,
+                       const std::string& wild,
                        bool showHidden,
                        const wxPoint& pos,
                        const wxSize& size,
                        unsigned int style,
                        const wxValidator &validator,
-                       const wxString &name)
+                       const std::string &name)
           : wxListCtrl(win, id, pos, size, style, validator, name),
             m_wild(wild),
             m_showHidden(showHidden),
@@ -470,7 +468,7 @@ void wxFileListCtrl::UpdateFiles()
 #if defined(WX_WINDOWS) || defined(__WXMAC__)
     if ( IsTopMostDir(m_dirName) )
     {
-        std::vector<wxString> names, paths;
+        std::vector<std::string> names, paths;
         std::vector<int> icons;
         const size_t count = wxGetAvailableDrives(paths, names, icons);
 
@@ -501,7 +499,7 @@ void wxFileListCtrl::UpdateFiles()
         // Real directory...
         if ( !m_dirName.empty() )
         {
-            wxString p(wxPathOnly(m_dirName));
+            std::string p = wxPathOnly(m_dirName);
 #if defined(__UNIX__)
             if (p.empty()) p = "/";
 #endif // __UNIX__
@@ -512,29 +510,29 @@ void wxFileListCtrl::UpdateFiles()
                 delete fd;
         }
 
-        wxString dirname(m_dirName);
+        std::string dirname{m_dirName};
 #if defined(WX_WINDOWS)
-        if (dirname.length() == 2 && dirname[1u] == wxT(':'))
-            dirname << wxT('\\');
+        if (dirname.length() == 2 && dirname[1u] == ':')
+            dirname += '\\';
 #endif // defined(WX_WINDOWS)
 
         if (dirname.empty())
             dirname = wxFILE_SEP_PATH;
 
         wxLogNull logNull;
-        wxDir dir(dirname);
+        wxDir dir{dirname};
 
         if ( dir.IsOpened() )
         {
-            wxString dirPrefix(dirname);
-            if (dirPrefix.Last() != wxFILE_SEP_PATH)
+            std::string dirPrefix(dirname);
+            if (dirPrefix.back() != wxFILE_SEP_PATH)
                 dirPrefix += wxFILE_SEP_PATH;
 
             int hiddenFlag = m_showHidden ? wxDIR_HIDDEN : 0;
 
             bool cont;
 
-            wxString f;
+            std::string f;
 
             // Get the directories first (not matched against wildcards):
             cont = dir.GetFirst(&f, {}, wxDIR_DIRS | hiddenFlag);
@@ -573,9 +571,9 @@ void wxFileListCtrl::UpdateFiles()
     SortItems(m_sort_field, m_sort_forward);
 }
 
-void wxFileListCtrl::SetWild( const wxString &wild )
+void wxFileListCtrl::SetWild( const std::string &wild )
 {
-    if (wild.Find(wxT('|')) != wxNOT_FOUND)
+    if (wild.find('|') != std::string::npos)
         return;
 
     m_wild = wild;
@@ -584,8 +582,8 @@ void wxFileListCtrl::SetWild( const wxString &wild )
 
 void wxFileListCtrl::MakeDir()
 {
-    wxString new_name( _("NewName") );
-    wxString path( m_dirName );
+    std::string new_name{_("NewName").ToStdString()};
+    std::string path{m_dirName};
     path += wxFILE_SEP_PATH;
     path += new_name;
     if (wxFileExists(path))
@@ -594,8 +592,8 @@ void wxFileListCtrl::MakeDir()
         int i = 0;
         do {
             new_name = _("NewName");
-            wxString num;
-            num.Printf( "%d", i );
+            std::string num;
+            num = fmt::format( "%d", i );
             new_name += num;
 
             path = m_dirName;
@@ -636,13 +634,13 @@ void wxFileListCtrl::GoToParentDir()
     {
         size_t len = m_dirName.length();
         if (wxEndsWithPathSeparator(m_dirName))
-            m_dirName.Remove( len-1, 1 );
-        wxString fname( wxFileNameFromPath(m_dirName) );
+            m_dirName.pop_back();
+        std::string fname( wxFileNameFromPath(m_dirName) );
         m_dirName = wxPathOnly( m_dirName );
 #if defined(WX_WINDOWS)
         if (!m_dirName.empty())
         {
-            if (m_dirName.Last() == wxT('.'))
+            if (m_dirName.back() == '.')
                 m_dirName.clear();
         }
 #elif defined(__UNIX__)
@@ -661,11 +659,11 @@ void wxFileListCtrl::GoToParentDir()
 
 void wxFileListCtrl::GoToHomeDir()
 {
-    wxString s = wxGetUserHome( wxString() );
+    std::string s = wxGetUserHome( std::string() );
     GoToDir(s);
 }
 
-void wxFileListCtrl::GoToDir( const wxString &dir )
+void wxFileListCtrl::GoToDir( const std::string &dir )
 {
     if (!wxDirExists(dir)) return;
 
@@ -728,7 +726,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
         return;
     }
 
-    wxString new_name( wxPathOnly( fd->GetFilePath() ) );
+    std::string new_name( wxPathOnly( fd->GetFilePath() ) );
     new_name += wxFILE_SEP_PATH;
     new_name += event.GetLabel();
 
@@ -894,7 +892,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 
     const size_t len = m_dir.length();
     if ( ( len > 1 ) && ( wxEndsWithPathSeparator( m_dir ) ) )
-        m_dir.Remove( len - 1, 1 );
+        m_dir.pop_back();
 
     m_filterExtension.clear();
 
@@ -981,21 +979,21 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 // NB: there is an unfortunate mismatch between wxFileName and wxFileDialog
 //     method names but our GetDirectory() does correspond to wxFileName::
 //     GetPath() while our GetPath() is wxFileName::GetFullPath()
-wxString wxGenericFileCtrl::GetPath() const
+std::string wxGenericFileCtrl::GetPath() const
 {
     wxASSERT_MSG ( !(m_style & wxFC_MULTIPLE), "use GetPaths() instead" );
 
     return DoGetFileName().GetFullPath();
 }
 
-wxString wxGenericFileCtrl::GetFilename() const
+std::string wxGenericFileCtrl::GetFilename() const
 {
     wxASSERT_MSG ( !(m_style & wxFC_MULTIPLE), "use GetFilenames() instead" );
 
     return DoGetFileName().GetFullName();
 }
 
-wxString wxGenericFileCtrl::GetDirectory() const
+std::string wxGenericFileCtrl::GetDirectory() const
 {
     // don't check for wxFC_MULTIPLE here, this one is probably safe to call in
     // any case as it can be always taken to mean "current directory"
@@ -1006,7 +1004,7 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
 {
     wxFileName fn;
 
-    wxString value = m_text->GetValue();
+    std::string value = m_text->GetValue();
     if ( value.empty() )
     {
         // nothing in the text control, get the selected file from the list
@@ -1033,13 +1031,13 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
     return fn;
 }
 
-std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
+std::vector<std::string> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
 {
-    std::vector<wxString> filenames;
+    std::vector<std::string> filenames;
 
-    const wxString dir = m_list->GetDir();
+    const std::string dir = m_list->GetDir();
 
-    const wxString value = m_text->GetValue();
+    const std::string value = m_text->GetValue();
     
     if ( !value.empty() )
     {
@@ -1078,7 +1076,7 @@ std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
     return filenames;
 }
 
-bool wxGenericFileCtrl::SetDirectory( const wxString& dir )
+bool wxGenericFileCtrl::SetDirectory( const std::string& dir )
 {
     m_ignoreChanges = true;
     m_list->GoToDir( dir );
@@ -1088,9 +1086,9 @@ bool wxGenericFileCtrl::SetDirectory( const wxString& dir )
     return wxFileName( dir ).SameAs( m_list->GetDir() );
 }
 
-bool wxGenericFileCtrl::SetFilename( const wxString& name )
+bool wxGenericFileCtrl::SetFilename( const std::string& name )
 {
-    wxString dir, fn, ext;
+    std::string dir, fn, ext;
     wxFileName::SplitPath(name, &dir, &fn, &ext);
     wxCHECK_MSG( dir.empty(), false,
                  "can't specify directory component to SetFilename" );
@@ -1138,12 +1136,12 @@ void wxGenericFileCtrl::DoSetFilterIndex( int filterindex )
     if ( !pcd )
         return;
 
-    const wxString& str = ((dynamic_cast<wxStringClientData *>(pcd))->GetData());
+    const std::string& str = ((dynamic_cast<wxStringClientData *>(pcd))->GetData());
     m_list->SetWild( str );
     m_filterIndex = filterindex;
-    if ( str.Left( 2 ) == wxT( "*." ) )
+    if ( str.substr(0, 2) == "*.")
     {
-        m_filterExtension = str.Mid( 1 );
+        m_filterExtension = str.substr( 1 );
         if ( m_filterExtension == wxT( ".*" ) )
             m_filterExtension.clear();
     }
@@ -1155,18 +1153,19 @@ void wxGenericFileCtrl::DoSetFilterIndex( int filterindex )
     wxGenerateFilterChangedEvent( this, this );
 }
 
-void wxGenericFileCtrl::SetWildcard( const wxString& wildCard )
+void wxGenericFileCtrl::SetWildcard( const std::string& wildCard )
 {
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        m_wildCard = wxString::Format( _( "All files (%s)|%s" ),
+        // FIXME: Removed translation for fmt lib
+        m_wildCard = fmt::format( "All files (%s)|%s",
                                        wxFileSelectorDefaultWildcardStr,
                                        wxFileSelectorDefaultWildcardStr );
     }
     else
         m_wildCard = wildCard;
 
-    std::vector<wxString> wildDescriptions, wildFilters;
+    std::vector<std::string> wildDescriptions, wildFilters;
     const size_t count = wxParseCommonDialogsFilter( m_wildCard,
                          wildDescriptions,
                          wildFilters );
@@ -1237,7 +1236,7 @@ void wxGenericFileCtrl::OnSelected( wxListEvent &event )
         return;
 
     m_inSelected = true;
-    const wxString filename( event.m_item.m_text );
+    const std::string filename( event.m_item.m_text );
 
     if ( filename == wxT( ".." ) )
     {
@@ -1245,7 +1244,7 @@ void wxGenericFileCtrl::OnSelected( wxListEvent &event )
         return;
     }
 
-    wxString dir = m_list->GetDir();
+    std::string dir = m_list->GetDir();
     if ( !IsTopMostDir( dir ) )
         dir += wxFILE_SEP_PATH;
     dir += filename;
@@ -1272,26 +1271,26 @@ void wxGenericFileCtrl::OnSelected( wxListEvent &event )
     m_inSelected = false;
 }
 
-void wxGenericFileCtrl::HandleAction( const wxString &fn )
+void wxGenericFileCtrl::HandleAction( const std::string &fn )
 {
     if ( m_ignoreChanges )
         return;
 
-    wxString filename( fn );
+    std::string filename( fn );
     if ( filename.empty() )
     {
         return;
     }
     if ( filename == wxT( "." ) ) return;
 
-    wxString dir = m_list->GetDir();
+    std::string dir = m_list->GetDir();
 
     // "some/place/" means they want to chdir not try to load "place"
-    const bool want_dir = filename.Last() == wxFILE_SEP_PATH;
+    const bool want_dir = filename.back() == wxFILE_SEP_PATH;
     if ( want_dir )
-        filename = filename.RemoveLast();
+        filename.pop_back();
 
-    if ( filename == wxT( ".." ) )
+    if ( filename == "..")
     {
         m_ignoreChanges = true;
         m_list->GoToParentDir();
@@ -1304,7 +1303,7 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
     }
 
 #ifdef __UNIX__
-    if ( filename == wxT( "~" ) )
+    if ( filename == "~")
     {
         m_ignoreChanges = true;
         m_list->GoToHomeDir();
@@ -1316,18 +1315,18 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
         return;
     }
 
-    if ( filename.BeforeFirst( wxT( '/' ) ) == wxT( "~" ) )
+    if ( wx::utils::BeforeFirst(filename, '/') == "~" )
     {
-        filename = wxString( wxGetUserHome() ) + filename.Remove( 0, 1 );
+        filename = std::string( wxGetUserHome() ) + filename.erase(0);
     }
 #endif // __UNIX__
 
     if ( !( m_style & wxFC_SAVE ) )
     {
-        if ( ( filename.Find( wxT( '*' ) ) != wxNOT_FOUND ) ||
-                ( filename.Find( wxT( '?' ) ) != wxNOT_FOUND ) )
+        if ( ( filename.find('*') != std::string::npos ) ||
+                ( filename.find('?') != std::string::npos ) )
         {
-            if ( filename.Find( wxFILE_SEP_PATH ) != wxNOT_FOUND )
+            if ( filename.find( wxFILE_SEP_PATH ) != std::string::npos )
             {
                 wxMessageBox( _( "Illegal file specification." ),
                               _( "Error" ), wxOK | wxICON_ERROR, this );
@@ -1381,9 +1380,9 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
     wxGenerateFileActivatedEvent( this, this );
 }
 
-bool wxGenericFileCtrl::SetPath( const wxString& path )
+bool wxGenericFileCtrl::SetPath( const std::string& path )
 {
-    wxString dir, fn, ext;
+    std::string dir, fn, ext;
     wxFileName::SplitPath(path, &dir, &fn, &ext);
 
     if ( !dir.empty() && !wxFileName::DirExists(dir) )
@@ -1391,9 +1390,9 @@ bool wxGenericFileCtrl::SetPath( const wxString& path )
 
     m_dir = dir;
     m_fileName = fn;
-    if ( !ext.empty() || path.Last() == '.' )
+    if ( !ext.empty() || path.back() == '.' )
     {
-        m_fileName += wxT( "." );
+        m_fileName += ".";
         m_fileName += ext;
     }
 
@@ -1403,19 +1402,19 @@ bool wxGenericFileCtrl::SetPath( const wxString& path )
     return true;
 }
 
-std::vector<wxString> wxGenericFileCtrl::GetPaths() const
+std::vector<std::string> wxGenericFileCtrl::GetPaths() const
 {
     return DoGetFilenames(true);
 }
 
-std::vector<wxString> wxGenericFileCtrl::GetFilenames() const
+std::vector<std::string> wxGenericFileCtrl::GetFilenames() const
 {
     return DoGetFilenames( false );
 }
 
 void wxGenericFileCtrl::UpdateControls()
 {
-    const wxString dir = m_list->GetDir();
+    const std::string dir = m_list->GetDir();
     m_static->SetLabel( dir );
 }
 

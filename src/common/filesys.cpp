@@ -76,30 +76,44 @@ std::string wxFileSystemHandler::GetMimeTypeFromExt(const std::string& location)
             static const wxFileTypeInfo fallbacks[] =
             {
                 wxFileTypeInfo("image/jpeg",
-                    std::string{},
-                    std::string{},
-                    "JPEG image (from fallback)",
-                    "jpg", "jpeg", "JPG", "JPEG", nullptr),
+                    wxString{},
+                    wxString{},
+                    wxString{"JPEG image (from fallback)"},
+                    wxString{"jpg"},
+                    wxString{"jpeg"},
+                    wxString{"JPG"},
+                    wxString{"JPEG"},
+                    nullptr),
                 wxFileTypeInfo("image/gif",
-                    std::string{},
-                    std::string{},
-                    "GIF image (from fallback)",
-                    "gif", "GIF", nullptr),
+                    wxString{},
+                    wxString{},
+                    wxString{"GIF image (from fallback)"},
+                    wxString{"gif"},
+                    wxString{"GIF"},
+                    nullptr),
                 wxFileTypeInfo("image/png",
-                    std::string{},
-                    std::string{},
-                    "PNG image (from fallback)",
-                    "png", "PNG", nullptr),
+                    wxString{},
+                    wxString{},
+                    wxString{"PNG image (from fallback)"},
+                    wxString{"png"},
+                    wxString{"PNG"},
+                    nullptr),
                 wxFileTypeInfo("image/bmp",
-                    std::string{},
-                    std::string{},
-                    "windows bitmap image (from fallback)",
-                    "bmp", "BMP", nullptr),
+                    wxString{},
+                    wxString{},
+                    wxString{"windows bitmap image (from fallback)"},
+                    wxString{"bmp"},
+                    wxString{"BMP"},
+                    nullptr),
                 wxFileTypeInfo("text/html",
-                    std::string{},
-                    std::string{},
-                    "HTML document (from fallback)",
-                    "htm", "html", "HTM", "HTML", nullptr),
+                    wxString{},
+                    wxString{},
+                    wxString{"HTML document (from fallback)"},
+                    wxString{"htm"},
+                    wxString{"html"},
+                    wxString{"HTM"},
+                    wxString{"HTML"},
+                    nullptr),
                 // must terminate the table with this!
                 wxFileTypeInfo()
             };
@@ -108,7 +122,7 @@ std::string wxFileSystemHandler::GetMimeTypeFromExt(const std::string& location)
         }
 
         wxFileType *ft = wxTheMimeTypesManager->GetFileTypeFromExtension(ext);
-        if ( !ft || !ft -> GetMimeType(&mime) )
+        if ( !ft || (ft->GetMimeType(&mime)).empty() )
         {
             mime.clear();
         }
@@ -462,9 +476,9 @@ wxFSFile* wxFileSystem::OpenFile(const std::string& location, unsigned int flags
     wxChar meta = 0;
     for (std::size_t i{}; i != ln; i++)
     {
-        switch ( loc[i].GetValue() )
+        switch ( loc[i] )
         {
-            case '/' : case ':' : case wxT('#') :
+            case '/' : case ':' : case '#' :
                 meta = loc[i];
                 break;
         }

@@ -226,13 +226,13 @@ wxFileDialog::wxFileDialog(wxWindow *parent,
     gs_rectDialog.y = 0;
 }
 
-std::vector<wxString> wxFileDialog::GetPaths() const
+std::vector<std::string> wxFileDialog::GetPaths() const
 {
-    std::vector<wxString> paths;
+    std::vector<std::string> paths;
 
-    wxString dir(m_dir);
-    if ( m_dir.empty() || m_dir.Last() != wxT('\\') )
-        dir += wxT('\\');
+    std::string dir(m_dir);
+    if ( m_dir.empty() || m_dir.back() != '\\' )
+        dir += '\\';
 
     for ( const auto& filename : m_fileNames )
     {
@@ -245,7 +245,7 @@ std::vector<wxString> wxFileDialog::GetPaths() const
     return paths;
 }
 
-std::vector<wxString> wxFileDialog::GetFilenames() const
+std::vector<std::string> wxFileDialog::GetFilenames() const
 {
     return m_fileNames;
 }
@@ -325,12 +325,13 @@ void wxFileDialog::MSWOnInitDone(WXHWND hDlg)
 
 void wxFileDialog::MSWOnSelChange(WXHWND hDlg)
 {
-    TCHAR buf[MAX_PATH];
+    boost::nowide::wstackstring buf;
+
     LRESULT len = ::SendMessageW(::GetParent(hDlg), CDM_GETFILEPATH,
-                              MAX_PATH, reinterpret_cast<LPARAM>(buf));
+                              MAX_PATH, reinterpret_cast<LPARAM>(buf.get()));
 
     if ( len > 0 )
-        m_currentlySelectedFilename = buf;
+        m_currentlySelectedFilename = boost::nowide::narrow(buf.get());
     else
         m_currentlySelectedFilename.clear();
 
@@ -414,11 +415,11 @@ int wxFileDialog::ShowModal()
     wxWindow* const parent = GetParentForModalDialog(m_parent, wxGetWindowStyle());
     WXHWND hWndParent = parent ? GetHwndOf(parent) : nullptr;
 
-    static wxChar fileNameBuffer [ wxMAXPATH ];           // the file-name
-    wxChar        titleBuffer    [ wxMAXFILE+1+wxMAXEXT ];  // the file-name, without path
+    std::string fileNameBuffer; // the filename
+    fileNameBuffer.resize(wxMAXPATH);
 
-    *fileNameBuffer = wxT('\0');
-    *titleBuffer    = wxT('\0');
+    std::string titleBuffer;
+    titleBuffer.resize(wxMAXFILE + wxMAXEXT + 1); // the file-name, without path
 
     unsigned int msw_flags = OFN_HIDEREADONLY;
 
@@ -470,11 +471,11 @@ int wxFileDialog::ShowModal()
     wxZeroMemory(of);
 
     boost::nowide::wstackstring stackTitle{m_message.c_str()};
-
+    boost::nowide::wstackstring stackTitleBuffer{titleBuffer.c_str()};
     of.lStructSize       = sizeof(OPENFILENAMEW);
     of.hwndOwner         = hWndParent;
     of.lpstrTitle        = stackTitle.get();
-    of.lpstrFileTitle    = titleBuffer;
+    of.lpstrFileTitle    = stackTitleBuffer.get();
     of.nMaxFileTitle     = wxMAXFILE + 1 + wxMAXEXT;
 
     GlobalPtr hgbl;
@@ -509,7 +510,7 @@ int wxFileDialog::ShowModal()
     // forward slashes) and also squeeze multiple consecutive slashes into one
     // as it doesn't like two backslashes in a row neither
 
-    wxString  dir;
+    std::string  dir;
     size_t    len = m_dir.length();
     dir.reserve(len);
     for (size_t i = 0; i < len; i++ )
@@ -543,14 +544,14 @@ int wxFileDialog::ShowModal()
         }
     }
 
-    of.lpstrInitialDir   = dir.c_str();
+    of.lpstrInitialDir   = boost::nowide::widen(dir).c_str();
 
     of.Flags             = msw_flags;
     of.lpfnHook          = wxFileDialogHookFunction;
     of.lCustData         = (LPARAM)this;
 
-    std::vector<wxString> wildDescriptions;
-    std::vector<wxString> wildFilters;
+    std::vector<std::string> wildDescriptions;
+    std::vector<std::string> wildFilters;
 
     size_t items = wxParseCommonDialogsFilter(m_wildCard, wildDescriptions, wildFilters);
 
@@ -560,7 +561,7 @@ int wxFileDialog::ShowModal()
 
     for (size_t i = 0; i < items ; i++)
     {
-        filterBuffer += fmt::format("{}|{}|", wildDescriptions[i].ToStdString(), wildFilters[i].ToStdString());
+        filterBuffer += fmt::format("{}|{}|", wildDescriptions[i], wildFilters[i]);
     }
 
     std::replace(filterBuffer.begin(), filterBuffer.end(), '|', '\0');
@@ -573,16 +574,17 @@ int wxFileDialog::ShowModal()
 
     //=== Setting defaultFileName >>=========================================
 
-    wxStrlcpy(fileNameBuffer, m_fileName.c_str(), WXSIZEOF(fileNameBuffer));
+    fileNameBuffer = m_fileName;
 
-    of.lpstrFile = fileNameBuffer;  // holds returned filename
+    boost::nowide::wstackstring stackFileNameBuf{fileNameBuffer.c_str()};
+    of.lpstrFile = stackFileNameBuf.get();  // holds returned filename
     of.nMaxFile  = wxMAXPATH;
 
     // we must set the default extension because otherwise Windows would check
     // for the existing of a wrong file with wxFD_OVERWRITE_PROMPT (i.e. if the
     // user types "foo" and the default extension is ".bar" we should force it
     // to check for "foo.bar" existence and not "foo")
-    wxString defextBuffer; // we need it to be alive until GetSaveFileName()!
+    std::string defextBuffer; // we need it to be alive until GetSaveFileName()!
     
     if (HasFdFlag(wxFD_SAVE))
     {
@@ -594,10 +596,10 @@ int wxFileDialog::ShowModal()
 
         // use dummy name a to avoid assert in AppendExtension
         defextBuffer = AppendExtension("a", extension);
-        if (defextBuffer.StartsWith("a."))
+        if (defextBuffer.rfind("a.", 0) == 0)
         {
-            defextBuffer = defextBuffer.Mid(2); // remove "a."
-            of.lpstrDefExt = defextBuffer.c_str();
+            defextBuffer = defextBuffer.substr(2); // remove "a."
+            of.lpstrDefExt = boost::nowide::widen(defextBuffer).c_str();
         }
     }
 
@@ -605,7 +607,7 @@ int wxFileDialog::ShowModal()
     // store off before the standard windows dialog can possibly change it
     struct CwdRestore
     {
-        wxString value;
+        std::string value;
         ~CwdRestore()
         {
             if (!value.empty())
@@ -628,7 +630,7 @@ int wxFileDialog::ShowModal()
     m_fileNames.clear();
 
     if ( ( HasFdFlag(wxFD_MULTIPLE) ) &&
-         ( fileNameBuffer[of.nFileOffset-1] == wxT('\0') )
+         ( fileNameBuffer[of.nFileOffset-1] == '\0' )
        )
     {
         m_dir = fileNameBuffer;
@@ -637,15 +639,15 @@ int wxFileDialog::ShowModal()
         m_fileNames.push_back(m_fileName);
         i += m_fileName.length() + 1;
 
-        while (fileNameBuffer[i] != wxT('\0'))
+        while (fileNameBuffer[i] != '\0')
         {
-            m_fileNames.push_back(&fileNameBuffer[i]);
+            m_fileNames.push_back(fileNameBuffer);
             i += wxStrlen(&fileNameBuffer[i]) + 1;
         }
 
         m_path = m_dir;
-        if ( m_dir.Last() != wxT('\\') )
-            m_path += wxT('\\');
+        if ( m_dir.back() != '\\' )
+            m_path += '\\';
 
         m_path += m_fileName;
         m_filterIndex = (int)of.nFilterIndex - 1;
@@ -656,7 +658,7 @@ int wxFileDialog::ShowModal()
 
         m_filterIndex = (int)of.nFilterIndex - 1;
 
-        if ( !of.nFileExtension || fileNameBuffer[of.nFileExtension] == wxT('\0') )
+        if ( !of.nFileExtension || fileNameBuffer[of.nFileExtension] == '\0' )
         {
             // User has typed a filename without an extension:
             const char* extension = filterBuffer.c_str();
@@ -666,7 +668,7 @@ int wxFileDialog::ShowModal()
                 extension = extension + wxStrlen( extension ) + 1;
 
             m_fileName = AppendExtension(fileNameBuffer, extension);
-            wxStrlcpy(fileNameBuffer, m_fileName.c_str(), WXSIZEOF(fileNameBuffer));
+            fileNameBuffer = m_fileName;
         }
 
         m_path = fileNameBuffer;

@@ -87,7 +87,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                             keyTopic.QueryDefaultValue() == TOPIC_OPEN_URL;
                 if ( ok )
                 {
-                    ddeCmd = keyDDE.QueryDefaultValue().ToStdString();
+                    ddeCmd = keyDDE.QueryDefaultValue();
                     ok = !ddeCmd.empty();
                 }
 

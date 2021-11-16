@@ -30,15 +30,15 @@ public:
     TestFile()
     {
         wxFile file;
-        m_name = wxFileName::CreateTempFileName(wxT("wxtest"), &file);
+        m_name = wxFileName::CreateTempFileName("wxtest", &file);
         file.Write("Before", 6);
     }
 
     ~TestFile() { if (wxFileExists(m_name)) wxRemoveFile(m_name); }
-    wxString GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
 
 private:
-    wxString m_name;
+    std::string m_name;
 };
 
 // ----------------------------------------------------------------------------

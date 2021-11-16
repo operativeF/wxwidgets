@@ -82,12 +82,12 @@ aStdKeys[] =
 // ----------------------------------------------------------------------------
 
 // removes the trailing backslash from the string if it has one
-static inline void RemoveTrailingSeparator(wxString& str);
+static inline void RemoveTrailingSeparator(std::string& str);
 
 // returns true if given registry key exists
 static bool KeyExists(
     WXHKEY hRootKey,
-    const wxString& szKey,
+    const std::string& szKey,
     wxRegKey::WOW64ViewMode viewMode = wxRegKey::WOW64ViewMode_Default);
 
 // return the WOW64 registry view flag which can be used with MSW registry
@@ -100,16 +100,16 @@ static long
 GetMSWAccessFlags(wxRegKey::AccessMode mode, wxRegKey::WOW64ViewMode viewMode);
 
 // combines value and key name
-static wxString GetFullName(const wxRegKey *pKey);
-static wxString GetFullName(const wxRegKey *pKey, const wxString& szValue);
+static std::string GetFullName(const wxRegKey *pKey);
+static std::string GetFullName(const wxRegKey *pKey, const std::string& szValue);
 
 // returns "value" argument of wxRegKey methods converted into a value that can
 // be passed to win32 registry functions; specifically, converts empty string
 // to NULL
-static inline const wxChar *RegValueStr(const wxString& szValue);
+static inline const wxChar *RegValueStr(const std::string& szValue);
 
 // Return the user-readable name of the given REG_XXX type constant.
-static wxString GetTypeString(DWORD dwType)
+static std::string GetTypeString(DWORD dwType)
 {
 #define REG_TYPE_TO_STR(type) case REG_ ## type: return wxS(#type)
 
@@ -130,8 +130,8 @@ static wxString GetTypeString(DWORD dwType)
         REG_TYPE_TO_STR(QWORD);
         // REG_TYPE_TO_STR(QWORD_LITTLE_ENDIAN); -- same as REG_QWORD
 
-        default:
-            return wxString::Format(_("unknown (%lu)"), dwType);
+        default:  // FIXME: Removed translation for fmt lib
+            return fmt::format("unknown (%lu)", dwType);
     }
 }
 
@@ -163,9 +163,9 @@ const char *wxRegKey::GetStdKeyShortName(size_t key)
   return aStdKeys[key].szShortName;
 }
 
-wxRegKey::StdKey wxRegKey::ExtractKeyName(wxString& strKey)
+wxRegKey::StdKey wxRegKey::ExtractKeyName(std::string& strKey)
 {
-  wxString strRoot = strKey.BeforeFirst(REG_SEPARATOR);
+  std::string strRoot = strKey.BeforeFirst(REG_SEPARATOR);
 
   // TODO: Lambda
   size_t ui;
@@ -212,7 +212,7 @@ wxRegKey::wxRegKey(WOW64ViewMode viewMode)
 {
 }
 
-wxRegKey::wxRegKey(const wxString& strKey, WOW64ViewMode viewMode)
+wxRegKey::wxRegKey(const std::string& strKey, WOW64ViewMode viewMode)
     : m_strKey(strKey),
       m_viewMode(viewMode),
       m_hRootKey((WXHKEY) aStdKeys[ExtractKeyName(m_strKey)].hkey)
@@ -221,7 +221,7 @@ wxRegKey::wxRegKey(const wxString& strKey, WOW64ViewMode viewMode)
 
 // parent is a predefined (and preopened) key
 wxRegKey::wxRegKey(StdKey keyParent,
-                   const wxString& strKey,
+                   const std::string& strKey,
                    WOW64ViewMode viewMode)
     : m_strKey(strKey), m_viewMode(viewMode),
       m_hRootKey((WXHKEY) aStdKeys[keyParent].hkey)
@@ -230,7 +230,7 @@ wxRegKey::wxRegKey(StdKey keyParent,
 }
 
 // parent is a normal regkey
-wxRegKey::wxRegKey(const wxRegKey& keyParent, const wxString& strKey)
+wxRegKey::wxRegKey(const wxRegKey& keyParent, const std::string& strKey)
     : m_strKey(keyParent.m_strKey), m_viewMode(keyParent.GetView())
 {
   // combine our name with parent's to get the full name
@@ -256,7 +256,7 @@ wxRegKey::~wxRegKey()
 // ----------------------------------------------------------------------------
 
 // set the full key name
-void wxRegKey::SetName(const wxString& strKey)
+void wxRegKey::SetName(const std::string& strKey)
 {
   Close();
 
@@ -265,7 +265,7 @@ void wxRegKey::SetName(const wxString& strKey)
 }
 
 // the name is relative to the parent key
-void wxRegKey::SetName(StdKey keyParent, const wxString& strKey)
+void wxRegKey::SetName(StdKey keyParent, const std::string& strKey)
 {
   Close();
 
@@ -275,7 +275,7 @@ void wxRegKey::SetName(StdKey keyParent, const wxString& strKey)
 }
 
 // the name is relative to the parent key
-void wxRegKey::SetName(const wxRegKey& keyParent, const wxString& strKey)
+void wxRegKey::SetName(const wxRegKey& keyParent, const std::string& strKey)
 {
   Close();
 
@@ -331,10 +331,10 @@ bool wxRegKey::Exists() const
 }
 
 // returns the full name of the key (prefix is abbreviated if bShortPrefix)
-wxString wxRegKey::GetName(bool bShortPrefix) const
+std::string wxRegKey::GetName(bool bShortPrefix) const
 {
   StdKey key = GetStdKeyFromHkey((WXHKEY) m_hRootKey);
-  wxString str = bShortPrefix ? aStdKeys[key].szShortName
+  std::string str = bShortPrefix ? aStdKeys[key].szShortName
                               : aStdKeys[key].szName;
   if ( !m_strKey.empty() )
     str << "\\" << m_strKey;
@@ -493,7 +493,7 @@ bool wxRegKey::Close()
 }
 
 bool
-wxRegKey::RenameValue(const wxString& szValueOld, const wxString& szValueNew)
+wxRegKey::RenameValue(const std::string& szValueOld, const std::string& szValueNew)
 {
     bool ok = true;
     if ( HasValue(szValueNew) ) {
@@ -514,11 +514,11 @@ wxRegKey::RenameValue(const wxString& szValueOld, const wxString& szValueNew)
     return true;
 }
 
-bool wxRegKey::CopyValue(const wxString& szValue,
+bool wxRegKey::CopyValue(const std::string& szValue,
                          wxRegKey& keyDst,
-                         const wxString& szValueNew)
+                         const std::string& szValueNew)
 {
-    wxString valueNew(szValueNew);
+    std::string valueNew(szValueNew);
     if ( valueNew.empty() ) {
         // by default, use the same name
         valueNew = szValue;
@@ -528,7 +528,7 @@ bool wxRegKey::CopyValue(const wxString& szValue,
         case Type_String:
         case Type_Expand_String:
             {
-                wxString strVal;
+                std::string strVal;
                 return QueryRawValue(szValue, strVal) &&
                        keyDst.SetValue(valueNew, strVal);
             }
@@ -566,7 +566,7 @@ bool wxRegKey::CopyValue(const wxString& szValue,
     }
 }
 
-bool wxRegKey::Rename(const wxString& szNewName)
+bool wxRegKey::Rename(const std::string& szNewName)
 {
     wxCHECK_MSG( !m_strKey.empty(), false, "registry hives can't be renamed" );
 
@@ -585,7 +585,7 @@ bool wxRegKey::Rename(const wxString& szNewName)
 
     if ( inSameHive ) {
         // rename the key to the new name under the same parent
-        wxString strKey = m_strKey.BeforeLast(REG_SEPARATOR);
+        std::string strKey = m_strKey.BeforeLast(REG_SEPARATOR);
         if ( !strKey.empty() ) {
             // don't add '\\' in the start if strFullNewName is empty
             strKey += REG_SEPARATOR;
@@ -621,7 +621,7 @@ bool wxRegKey::Rename(const wxString& szNewName)
     return ok;
 }
 
-bool wxRegKey::Copy(const wxString& szNewName)
+bool wxRegKey::Copy(const std::string& szNewName)
 {
     // create the new key first
     wxRegKey keyDst(szNewName);
@@ -643,12 +643,12 @@ bool wxRegKey::Copy(wxRegKey& keyDst)
     bool ok = true;
 
     // copy all sub keys to the new location
-    wxString strKey;
+    std::string strKey;
     long lIndex;
     bool bCont = GetFirstKey(strKey, lIndex);
     while ( ok && bCont ) {
         wxRegKey key(*this, strKey);
-        wxString keyName;
+        std::string keyName;
         keyName << GetFullName(&keyDst) << REG_SEPARATOR << strKey;
         ok = key.Copy(keyName);
 
@@ -661,7 +661,7 @@ bool wxRegKey::Copy(wxRegKey& keyDst)
     }
 
     // copy all values
-    wxString strVal;
+    std::string strVal;
     bCont = GetFirstValue(strVal, lIndex);
     while ( ok && bCont ) {
         ok = CopyValue(strVal, keyDst);
@@ -711,9 +711,9 @@ bool wxRegKey::DeleteSelf()
 
   // we can't delete keys while enumerating because it confuses GetNextKey, so
   // we first save the key names and then delete them all
-  std::vector<wxString> astrSubkeys;
+  std::vector<std::string> astrSubkeys;
 
-  wxString strKey;
+  std::string strKey;
   long lIndex;
   bool bCont = GetFirstKey(strKey, lIndex);
   while ( bCont ) {
@@ -760,7 +760,7 @@ bool wxRegKey::DeleteSelf()
   return true;
 }
 
-bool wxRegKey::DeleteKey(const wxString& szKey)
+bool wxRegKey::DeleteKey(const std::string& szKey)
 {
   if ( !Open() )
     return false;
@@ -769,7 +769,7 @@ bool wxRegKey::DeleteKey(const wxString& szKey)
   return key.DeleteSelf();
 }
 
-bool wxRegKey::DeleteValue(const wxString& szValue)
+bool wxRegKey::DeleteValue(const std::string& szValue)
 {
     if ( !Open() )
         return false;
@@ -793,7 +793,7 @@ bool wxRegKey::DeleteValue(const wxString& szValue)
 // ----------------------------------------------------------------------------
 
 // return true if value exists
-bool wxRegKey::HasValue(const wxString& szValue) const
+bool wxRegKey::HasValue(const std::string& szValue) const
 {
     // this function should be silent, so suppress possible messages from Open()
     wxLogNull nolog;
@@ -815,7 +815,7 @@ bool wxRegKey::HasValues() const
   wxLogNull nolog;
 
   // just call GetFirstValue with dummy parameters
-  wxString str;
+  std::string str;
   long     l;
   return CONST_CAST GetFirstValue(str, l);
 }
@@ -827,13 +827,13 @@ bool wxRegKey::HasSubkeys() const
   wxLogNull nolog;
 
   // just call GetFirstKey with dummy parameters
-  wxString str;
+  std::string str;
   long     l;
   return CONST_CAST GetFirstKey(str, l);
 }
 
 // returns true if given subkey exists
-bool wxRegKey::HasSubKey(const wxString& szKey) const
+bool wxRegKey::HasSubKey(const std::string& szKey) const
 {
   // this function should be silent, so suppress possible messages from Open()
   wxLogNull nolog;
@@ -844,7 +844,7 @@ bool wxRegKey::HasSubKey(const wxString& szKey) const
   return KeyExists(m_hKey, szKey, m_viewMode);
 }
 
-wxRegKey::ValueType wxRegKey::GetValueType(const wxString& szValue) const
+wxRegKey::ValueType wxRegKey::GetValueType(const std::string& szValue) const
 {
     if ( ! CONST_CAST Open(Read) )
       return Type_None;
@@ -861,7 +861,7 @@ wxRegKey::ValueType wxRegKey::GetValueType(const wxString& szValue) const
     return (ValueType)dwType;
 }
 
-bool wxRegKey::SetValue(const wxString& szValue, long lValue)
+bool wxRegKey::SetValue(const std::string& szValue, long lValue)
 {
   if ( CONST_CAST Open() ) {
     m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
@@ -876,7 +876,7 @@ bool wxRegKey::SetValue(const wxString& szValue, long lValue)
   return false;
 }
 
-bool wxRegKey::QueryValue(const wxString& szValue, long *plValue) const
+bool wxRegKey::QueryValue(const std::string& szValue, long *plValue) const
 {
   if ( CONST_CAST Open(Read) ) {
     DWORD dwType, dwSize = sizeof(DWORD);
@@ -903,7 +903,7 @@ bool wxRegKey::QueryValue(const wxString& szValue, long *plValue) const
     return false;
 }
 
-bool wxRegKey::SetValue64(const wxString& szValue, wxLongLong_t llValue)
+bool wxRegKey::SetValue64(const std::string& szValue, wxLongLong_t llValue)
 {
   if ( CONST_CAST Open() ) {
     m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
@@ -918,7 +918,7 @@ bool wxRegKey::SetValue64(const wxString& szValue, wxLongLong_t llValue)
   return false;
 }
 
-bool wxRegKey::QueryValue64(const wxString& szValue, wxLongLong_t *pllValue) const
+bool wxRegKey::QueryValue64(const std::string& szValue, wxLongLong_t *pllValue) const
 {
   if ( CONST_CAST Open(Read) ) {
     DWORD dwType, dwSize = sizeof(wxLongLong_t); // QWORD doesn't exist.
@@ -951,7 +951,7 @@ bool wxRegKey::QueryValue64(const wxString& szValue, wxLongLong_t *pllValue) con
   else
     return false;
 }
-bool wxRegKey::SetValue(const wxString& szValue, const wxMemoryBuffer& buffer)
+bool wxRegKey::SetValue(const std::string& szValue, const wxMemoryBuffer& buffer)
 {
   if ( CONST_CAST Open() ) {
     m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
@@ -966,7 +966,7 @@ bool wxRegKey::SetValue(const wxString& szValue, const wxMemoryBuffer& buffer)
   return false;
 }
 
-bool wxRegKey::QueryValue(const wxString& szValue, wxMemoryBuffer& buffer) const
+bool wxRegKey::QueryValue(const std::string& szValue, wxMemoryBuffer& buffer) const
 {
   if ( CONST_CAST Open(Read) ) {
     // first get the type and size of the data
@@ -1009,8 +1009,8 @@ bool wxRegKey::QueryValue(const wxString& szValue, wxMemoryBuffer& buffer) const
 
 
 
-bool wxRegKey::QueryValue(const wxString& szValue,
-                          wxString& strValue,
+bool wxRegKey::QueryValue(const std::string& szValue,
+                          std::string& strValue,
                           bool raw) const
 {
     if ( CONST_CAST Open(Read) )
@@ -1037,7 +1037,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
             {
                 // must treat this case specially as GetWriteBuf() doesn't like
                 // being called with 0 size
-                strValue.Empty();
+                strValue.clear();
             }
             else
             {
@@ -1067,8 +1067,9 @@ bool wxRegKey::QueryValue(const wxString& szValue,
                     bool ok = dwExpSize != 0;
                     if ( ok )
                     {
-                        wxString strExpValue;
-                        ok = ::ExpandEnvironmentStringsW(strValue.t_str(),
+                        std::string strExpValue;
+                        boost::nowide::wstackstring stackStrValue{strValue.c_str()};
+                        ok = ::ExpandEnvironmentStringsW(stackStrValue.get(),
                                                         wxStringBuffer(strExpValue, dwExpSize),
                                                         dwExpSize
                                                         ) != 0;
@@ -1092,14 +1093,15 @@ bool wxRegKey::QueryValue(const wxString& szValue,
     return false;
 }
 
-bool wxRegKey::SetValue(const wxString& szValue, const wxString& strValue)
+bool wxRegKey::SetValue(const std::string& szValue, const std::string& strValue)
 {
   if ( CONST_CAST Open() ) {
+      boost::nowide::wstackstring stackStrValue{strValue.c_str()};
       m_dwLastError = ::RegSetValueExW((HKEY) m_hKey,
                                     RegValueStr(szValue),
                                     wxRESERVED_PARAM, REG_SZ,
-                                    reinterpret_cast<const BYTE*>(wxMSW_CONV_LPCTSTR(strValue)),
-                                    (strValue.Len() + 1)*sizeof(wxChar));
+                                    reinterpret_cast<const BYTE*>(stackStrValue.get()),
+                                    (strValue.buffer_size + 1) * sizeof(wxChar));
       if ( m_dwLastError == ERROR_SUCCESS )
         return true;
   }
@@ -1109,9 +1111,9 @@ bool wxRegKey::SetValue(const wxString& szValue, const wxString& strValue)
   return false;
 }
 
-wxString wxRegKey::QueryDefaultValue() const
+std::string wxRegKey::QueryDefaultValue() const
 {
-  wxString str;
+  std::string str;
   QueryValue({}, str, false);
   return str;
 }
@@ -1122,7 +1124,7 @@ wxString wxRegKey::QueryDefaultValue() const
 //     several concurrently running indexations on the same key
 // ----------------------------------------------------------------------------
 
-bool wxRegKey::GetFirstValue(wxString& strValueName, long& lIndex)
+bool wxRegKey::GetFirstValue(std::string& strValueName, long& lIndex)
 {
   if ( !Open(Read) )
     return false;
@@ -1131,7 +1133,7 @@ bool wxRegKey::GetFirstValue(wxString& strValueName, long& lIndex)
   return GetNextValue(strValueName, lIndex);
 }
 
-bool wxRegKey::GetNextValue(wxString& strValueName, long& lIndex) const
+bool wxRegKey::GetNextValue(std::string& strValueName, long& lIndex) const
 {
     wxASSERT( IsOpened() );
 
@@ -1167,7 +1169,7 @@ bool wxRegKey::GetNextValue(wxString& strValueName, long& lIndex) const
   return true;
 }
 
-bool wxRegKey::GetFirstKey(wxString& strKeyName, long& lIndex)
+bool wxRegKey::GetFirstKey(std::string& strKeyName, long& lIndex)
 {
   if ( !Open(Read) )
     return false;
@@ -1176,7 +1178,7 @@ bool wxRegKey::GetFirstKey(wxString& strKeyName, long& lIndex)
   return GetNextKey(strKeyName, lIndex);
 }
 
-bool wxRegKey::GetNextKey(wxString& strKeyName, long& lIndex) const
+bool wxRegKey::GetNextKey(std::string& strKeyName, long& lIndex) const
 {
   wxASSERT( IsOpened() );
 
@@ -1206,7 +1208,7 @@ bool wxRegKey::GetNextKey(wxString& strKeyName, long& lIndex) const
 }
 
 // returns true if the value contains a number (else it's some string)
-bool wxRegKey::IsNumericValue(const wxString& szValue) const
+bool wxRegKey::IsNumericValue(const std::string& szValue) const
 {
     ValueType type = GetValueType(szValue);
     switch ( type ) {
@@ -1245,9 +1247,9 @@ static inline bool WriteAsciiString(wxOutputStream& ostr, const char *p)
     return ostr.Write(p, strlen(p)).IsOk();
 }
 
-static inline bool WriteAsciiString(wxOutputStream& ostr, const wxString& s)
+static inline bool WriteAsciiString(wxOutputStream& ostr, const std::string& s)
 {
-    wxCharBuffer name(s.mb_str());
+    wxCharBuffer name(s.c_str());
     ostr.Write(name, strlen(name));
 
     return ostr.IsOk();
@@ -1255,7 +1257,7 @@ static inline bool WriteAsciiString(wxOutputStream& ostr, const wxString& s)
 
 #endif // wxUSE_STREAMS
 
-bool wxRegKey::Export(const wxString& filename) const
+bool wxRegKey::Export(const std::string& filename) const
 {
 #if wxUSE_FILE && wxUSE_FFILE && wxUSE_STREAMS
     if ( wxFile::Exists(filename) )
@@ -1286,18 +1288,18 @@ bool wxRegKey::Export(wxOutputStream& ostr) const
 #endif // wxUSE_STREAMS
 
 static
-wxString
+std::string
 FormatAsHex(const void *data,
             size_t size,
             wxRegKey::ValueType type = wxRegKey::Type_Binary)
 {
-    wxString value("hex");
+    std::string value("hex");
 
     // binary values use just "hex:" prefix while the other ones must indicate
     // the real type
     if ( type != wxRegKey::Type_Binary )
-        value << wxT('(') << type << wxT(')');
-    value << wxT(':');
+        value += fmt::format("({})", type);
+    value += ':';
 
     // write all the rest as comma-separated bytes
     value.reserve(3*size + 10);
@@ -1308,30 +1310,30 @@ FormatAsHex(const void *data,
         //       the generated files easier to read and compare with the files
         //       produced by regedit
         if ( n )
-            value << wxT(',');
+            value += ',';
 
-        value << fmt::format("{:02x}", (unsigned char)p[n]);
+        value += fmt::format("{:02x}", (unsigned char)p[n]);
     }
 
     return value;
 }
 
 static inline
-wxString FormatAsHex(const wxString& value, wxRegKey::ValueType type)
+std::string FormatAsHex(const std::string& value, wxRegKey::ValueType type)
 {
     return FormatAsHex(value.c_str(), value.length() + 1, type);
 }
 
-wxString wxRegKey::FormatValue(const wxString& name) const
+std::string wxRegKey::FormatValue(const std::string& name) const
 {
-    wxString rhs;
+    std::string rhs;
     const ValueType type = GetValueType(name);
     switch ( type )
     {
         case Type_String:
         case Type_Expand_String:
             {
-                wxString value;
+                std::string value;
                 if ( !QueryRawValue(name, value) )
                     break;
 
@@ -1342,7 +1344,7 @@ wxString wxRegKey::FormatValue(const wxString& name) const
 
                 // there can be no NULs here
                 bool useHex = false;
-                for ( wxString::const_iterator p = value.begin();
+                for ( std::string::const_iterator p = value.begin();
                       p != value.end() && !useHex; ++p )
                 {
                     switch ( (*p).GetValue() )
@@ -1377,13 +1379,13 @@ wxString wxRegKey::FormatValue(const wxString& name) const
                 if ( !QueryValue(name, &value) )
                     break;
 
-                rhs.Printf("dword:%08x", (unsigned int)value);
+                rhs = fmt::format("dword:%08x", (unsigned int)value);
             }
             break;
 
         case Type_Multi_String:
             {
-                wxString value;
+                std::string value;
                 if ( !QueryRawValue(name, value) )
                     break;
 
@@ -1417,12 +1419,12 @@ wxString wxRegKey::FormatValue(const wxString& name) const
 
 #if wxUSE_STREAMS
 
-bool wxRegKey::DoExportValue(wxOutputStream& ostr, const wxString& name) const
+bool wxRegKey::DoExportValue(wxOutputStream& ostr, const std::string& name) const
 {
     // first examine the value type: if it's unsupported, simply skip it
     // instead of aborting the entire export process because we failed to
     // export a single value
-    wxString value = FormatValue(name);
+    std::string value = FormatValue(name);
     if ( value.empty() )
     {
         wxLogWarning(_("Ignoring value \"%s\" of the key \"%s\"."),
@@ -1467,7 +1469,7 @@ bool wxRegKey::DoExport(wxOutputStream& ostr) const
 
     // dump all our values
     long dummy;
-    wxString name;
+    std::string name;
     wxRegKey& self = const_cast<wxRegKey&>(*this);
     bool cont = self.GetFirstValue(name, dummy);
     while ( cont )
@@ -1503,7 +1505,7 @@ bool wxRegKey::DoExport(wxOutputStream& ostr) const
 // ============================================================================
 
 bool KeyExists(WXHKEY hRootKey,
-               const wxString& szKey,
+               const std::string& szKey,
                wxRegKey::WOW64ViewMode viewMode)
 {
     // don't close this key itself for the case of empty szKey!
@@ -1511,10 +1513,12 @@ bool KeyExists(WXHKEY hRootKey,
         return true;
 
     HKEY hkeyDummy;
+
+    boost::nowide::wstackstring stackSzKey{szKey.c_str()};
     if ( ::RegOpenKeyExW
          (
             (HKEY)hRootKey,
-            szKey.t_str(),
+            stackSzKey.get(),
             wxRESERVED_PARAM,
             // we might not have enough rights for rw access
             GetMSWAccessFlags(wxRegKey::Read, viewMode),
@@ -1572,29 +1576,29 @@ long GetMSWAccessFlags(wxRegKey::AccessMode mode,
     return sam;
 }
 
-wxString GetFullName(const wxRegKey *pKey, const wxString& szValue)
+std::string GetFullName(const wxRegKey *pKey, const std::string& szValue)
 {
-  wxString str(pKey->GetName());
+  std::string str(pKey->GetName());
   if ( !szValue.empty() )
-    str << "\\" << szValue;
+    str += "\\" + szValue;
 
   return str;
 }
 
-wxString GetFullName(const wxRegKey *pKey)
+std::string GetFullName(const wxRegKey *pKey)
 {
   return pKey->GetName();
 }
 
-inline void RemoveTrailingSeparator(wxString& str)
+inline void RemoveTrailingSeparator(std::string& str)
 {
-  if ( !str.empty() && str.Last() == REG_SEPARATOR )
-    str.Truncate(str.Len() - 1);
+  if ( !str.empty() && str.back() == REG_SEPARATOR )
+    str.pop_back();
 }
 
-inline const wxChar *RegValueStr(const wxString& szValue)
+inline const char* RegValueStr(const std::string& szValue)
 {
-    return szValue.empty() ? (const wxChar*)nullptr : szValue.t_str();
+    return szValue.empty() ? (const char*)nullptr : szValue.c_str();
 }
 
 #endif // wxUSE_REGKEY

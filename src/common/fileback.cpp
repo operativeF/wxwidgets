@@ -31,7 +31,7 @@ class wxBackingFileImpl
 public:
     wxBackingFileImpl(wxInputStream *stream,
                       size_t bufsize,
-                      const wxString& prefix);
+                      const std::string& prefix);
     ~wxBackingFileImpl();
 
     void Release() { if (--m_refcount == 0) delete this; }
@@ -41,8 +41,8 @@ public:
     wxFileOffset GetLength() const;
 
 private:
-    wxString m_prefix;
-    wxString m_filename;
+    std::string m_prefix;
+    std::string m_filename;
 
     wxBFFile m_file;
 
@@ -61,7 +61,7 @@ private:
 
 wxBackingFileImpl::wxBackingFileImpl(wxInputStream *stream,
                                      size_t bufsize,
-                                     const wxString& prefix) :
+                                     const std::string& prefix) :
     m_stream(stream),
     m_bufsize(bufsize),
     m_prefix(prefix)
@@ -212,7 +212,7 @@ wxFileOffset wxBackingFileImpl::GetLength() const
 
 wxBackingFile::wxBackingFile(wxInputStream *stream,
                              size_t bufsize,
-                             const wxString& prefix)
+                             const std::string& prefix)
   : m_impl(new wxBackingFileImpl(stream, bufsize, prefix))
 {
 }

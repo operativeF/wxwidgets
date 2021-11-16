@@ -70,7 +70,7 @@ std::string wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
                      wxPATH_NORM_TILDE |
                      wxPATH_NORM_CASE |
                      wxPATH_NORM_ABSOLUTE);
-    return fnNorm.GetFullPath().ToStdString();
+    return fnNorm.GetFullPath();
 }
 
 void wxFileHistoryBase::AddFileToHistory(const fs::path& file)

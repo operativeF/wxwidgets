@@ -309,9 +309,9 @@ void FileNameTestCase::TestSetPath()
 void FileNameTestCase::TestNormalize()
 {
     // prepare some data to be used later
-    wxString sep = wxFileName::GetPathSeparator();
-    wxString cwd = wxGetCwd();
-    wxString home = wxGetUserHome();
+    std::string sep = wxFileName::GetPathSeparator();
+    std::string cwd = wxGetCwd();
+    std::string home = wxGetUserHome();
 
     cwd.Replace(sep, wxT("/"));
     if (cwd.Last() != wxT('/'))

@@ -390,20 +390,20 @@ TEST_CASE("Arrays::Split", "[dynarray]")
     }
 
     {
-        wxString str = wxT(",\\,first,second,third,");
-        const wxChar *expected[] =
-            { wxT(""), wxT(",first"), wxT("second"), wxT("third"), wxT("") };
-        const wxChar *expected2[] =
-            { wxT(""), wxT("\\"), wxT("first"), wxT("second"), wxT("third"), wxT("") };
+        std::string str = ",\\,first,second,third,";
+        const std::vector<std::string> expected =
+            { "", ",first", "second", "third", "" };
+        const std::vector<std::string> expected2 =
+            { "", "\\", "first", "second", "third", "" };
 
         // escaping on:
-        std::vector<wxString> exparr(WXSIZEOF(expected), expected);
+        std::vector<std::string> exparr{WXSIZEOF(expected), expected};
         // FIXME: Returns a vector now
-        //std::vector<wxString> realarr(wxSplit(str, wxT(','), wxT('\\')));
-        //CHECK( exparr == realarr );
+        std::vector<std::string> realarr = wx::utils::StrSplitEscape(str, ',', '\\'));
+        CHECK( exparr == realarr );
 
         // escaping turned off:
-        std::vector<wxString> exparr2(WXSIZEOF(expected2), expected2);
+        std::vector<std::string> exparr2{WXSIZEOF(expected2), expected2};
         //std::vector<wxString> realarr2(wxSplit(str, wxT(','), wxT('\0')));
         //CHECK( exparr2 == realarr2 );
     }
@@ -495,7 +495,7 @@ TEST_CASE("Arrays::SplitJoin", "[dynarray]")
     size_t i;
     for (i = 0; i < WXSIZEOF(separators); i++)
     {
-        std::vector<wxString> arr = wxSplit(str, separators[i]);
+        auto arr = wx::utils::StrSplit(str, separators[i]);
 
         INFO("Using separator '" << static_cast<char>(separators[i]) << "' "
              "and split array \"" << arr << "\"");
@@ -516,21 +516,22 @@ TEST_CASE("Arrays::SplitJoin", "[dynarray]")
 
     for (i = 0; i < WXSIZEOF(separators); i++)
     {
-        wxString string = wxJoin(theArr, separators[i]);
+        std::string string = wxJoin(theArr, separators[i]).ToStdString();
 
         INFO("Using separator '" << static_cast<char>(separators[i]) << "' "
              "and joined string \"" << string << "\"");
 
-        CHECK( theArr == wxSplit(string, separators[i]) );
+        CHECK( theArr == wx::utils::StrSplit(string, separators[i]) );
     }
 
     std::vector<wxString> emptyArray;
     wxString string = wxJoin(emptyArray, wxT(';'));
     CHECK( string.empty() );
 
-    CHECK( wxSplit(string, wxT(';')).empty() );
+    CHECK( wx::utils::StrSplit(string, ';').empty() );
 
-    CHECK( wxSplit(wxT(";"), wxT(';')).size() == 2 );
+    // FIXME: Unsure what this would accomplish
+    // CHECK( wxSplit(wxT(";"), wxT(';')).size() == 2 );
 
     // Check for bug with escaping the escape character at the end (but not in
     // the middle).

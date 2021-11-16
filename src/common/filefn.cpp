@@ -54,6 +54,7 @@
 
 import <algorithm>;
 import <array>;
+import <filesystem>;
 import <vector>;
 
 #if defined(_MSC_VER) || defined(__MINGW32__)
@@ -763,9 +764,7 @@ wxChar *wxDoGetCwd(wxChar *buf, int sz)
 
 std::string wxGetCwd()
 {
-    std::string str;
-    wxDoGetCwd(wxStringBuffer(str, _MAXPATHLEN), _MAXPATHLEN);
-    return str;
+    return boost::nowide::narrow(std::filesystem::current_path().native());
 }
 
 bool wxSetWorkingDirectory(const std::string& d)
@@ -1118,7 +1117,7 @@ bool wxIsWild( const std::string& pattern )
 {
     for ( std::string::const_iterator p = pattern.begin(); p != pattern.end(); ++p )
     {
-        switch ( (*p).GetValue() )
+        switch ( *p )
         {
             case '?':
             case '*':

@@ -137,7 +137,7 @@ if(WIN32)
 endif()
 AddGlobalOption(wxUSE_DATAOBJ "use data object classes" ON)
 
-AddGlobalOption(wxUSE_IPC "use interprocess communication (wxSocket etc.)" ON)
+AddGlobalOption(wxUSE_IPC "use interprocess communication (wxSocket etc.)" OFF) # FIXME: Requires Registry
 
 AddGlobalOption(wxUSE_CONSOLE_EVENTLOOP "use event loop in console programs too" ON)
 
@@ -169,7 +169,7 @@ AddGlobalOption(wxUSE_FSWATCHER "use wxFileSystemWatcher class" ON)
 AddGlobalOption(wxUSE_GEOMETRY "use geometry class" ON)
 AddGlobalOption(wxUSE_LOG "use logging system" ON)
 AddGlobalOption(wxUSE_LONGLONG "use wxLongLong class" ON)
-AddGlobalOption(wxUSE_MIMETYPE "use wxMimeTypesManager" ON)
+AddGlobalOption(wxUSE_MIMETYPE "use wxMimeTypesManager" ON) # FIXME: Relies on Registry.
 AddGlobalOption(wxUSE_PRINTF_POS_PARAMS "use wxVsnprintf() which supports positional parameters" ON)
 AddGlobalOption(wxUSE_SECRETSTORE "use wxSecretStore class" ON)
 AddGlobalOption(wxUSE_SNGLINST_CHECKER "use wxSingleInstanceChecker class" ON)
@@ -415,7 +415,7 @@ AddGlobalOption(wxUSE_MOUSEWHEEL "use mousewheel" ON)
 AddGlobalOption(wxUSE_VALIDATORS "use wxValidator and derived classes" ON)
 AddGlobalOption(wxUSE_BUSYINFO "use wxBusyInfo" ON)
 AddGlobalOption(wxUSE_HOTKEY "use wxWindow::RegisterHotKey()" ON)
-AddGlobalOption(wxUSE_JOYSTICK "use wxJoystick" ON)
+AddGlobalOption(wxUSE_JOYSTICK "use wxJoystick" OFF) # FIXME: Requires use of Registry.
 AddGlobalOption(wxUSE_METAFILE "use wxMetaFile" OFF)
 AddGlobalOption(wxUSE_DRAGIMAGE "use wxDragImage" ON)
 AddGlobalOption(wxUSE_UIACTIONSIMULATOR "use wxUIActionSimulator (experimental)" ON)

@@ -30,7 +30,7 @@
 //     test failure messages
 #define WX_ASSERT_STRARRAY_EQUAL(s, a)                                        \
     {                                                                         \
-        std::vector<wxString> expected(wxSplit(s, '|', '\0'));                \
+        auto expected = wx::utils::StrSplitEscape(s, '|', '\0');              \
                                                                               \
         CHECK_EQ( expected.size(), a.size() );                    \
                                                                               \
@@ -285,7 +285,7 @@ TEST_CASE("Usage")
     };
 
     wxCmdLineParser p(desc);
-    const std::vector<wxString> usageLines = wxSplit(p.GetUsageString(), '\n');
+    const std::vector<std::string> usageLines = wx::utils::StrSplit(p.GetUsageString().ToStdString(), '\n');
 
     enum
     {
@@ -304,6 +304,7 @@ TEST_CASE("Usage")
         Line_Max
     };
 
+    // FIXME: Indexing with enum
     CHECK_EQ((size_t)Line_Max, usageLines.size());
     CHECK_EQ("Verbosity options", usageLines[Line_Text_Verbosity]);
     CHECK_EQ("", usageLines[Line_Text_Dummy1]);

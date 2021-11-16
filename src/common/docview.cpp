@@ -339,7 +339,7 @@ bool wxDocument::SaveAs()
             docTemplate->GetDefaultExtension(),
             filter,
             wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
-            GetDocumentWindow()).ToStdString();
+            GetDocumentWindow());
 
     if (fileName.empty())
         return false; // cancelled by user
@@ -348,7 +348,7 @@ bool wxDocument::SaveAs()
     if (!OnSaveDocument(fileName))
         return false;
 
-    SetTitle(wxFileNameFromPath(fileName).ToStdString());
+    SetTitle(wxFileNameFromPath(fileName));
     SetFilename(fileName, true);    // will call OnChangeFileName automatically
 
     // A file that doesn't use the default extension of its document template
@@ -1695,7 +1695,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
             return nullptr;
         }
 
-        SetLastDirectory(wxPathOnly(pathTmp).ToStdString());
+        SetLastDirectory(wxPathOnly(pathTmp));
 
         path = pathTmp.ToStdString();
 

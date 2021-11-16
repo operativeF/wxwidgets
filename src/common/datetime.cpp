@@ -534,11 +534,14 @@ bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
 }
 
 #ifdef WX_WINDOWS
-#include "wx/msw/registry.h"
+// FIXME: Requires use of registry.
+//#include "wx/msw/registry.h"
 
 /* static */
 wxDateTime::WeekDay wxDateTime::GetFirstWeekDay()
 {
+    // FIXME: Consider getting this from somewhere other than the registry.
+    /*
     wxRegKey key(wxRegKey::HKCU, "Control Panel\\International");
     wxString val;
 
@@ -551,6 +554,9 @@ wxDateTime::WeekDay wxDateTime::GetFirstWeekDay()
     {
         return wxDateTime::Sun;
     }
+    */
+
+    return wxDateTime::Sun;
 }
 
 #elif defined(__APPLE__)

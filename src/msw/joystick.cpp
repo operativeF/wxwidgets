@@ -423,19 +423,19 @@ wxString wxJoystick::GetProductName() const
     if (joyGetDevCaps(m_joystick, &joyCaps, sizeof(joyCaps)) != JOYERR_NOERROR)
         return {};
 
-    wxRegKey key1(wxString::Format("HKEY_LOCAL_MACHINE\\%s\\%s\\%s",
+    wxRegKey key1(fmt::format("HKEY_LOCAL_MACHINE\\%s\\%s\\%s",
                    REGSTR_PATH_JOYCONFIG, joyCaps.szRegKey, REGSTR_KEY_JOYCURR));
 
     if ( key1.Exists() )
     {
-        key1.QueryValue(wxString::Format("Joystick%d%s",
+        key1.QueryValue(fmt::format("Joystick%d%s",
                                         m_joystick + 1, REGSTR_VAL_JOYOEMNAME),
                         str);
     }
 
     if ( !str.empty() )
     {
-        wxRegKey key2(wxString::Format("HKEY_LOCAL_MACHINE\\%s\\%s",
+        wxRegKey key2(fmt::format("HKEY_LOCAL_MACHINE\\%s\\%s",
                                        REGSTR_PATH_JOYOEM, str.c_str()));
         if ( key2.Exists() )
         {

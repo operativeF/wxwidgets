@@ -1971,9 +1971,10 @@ BOOL CALLBACK EnumTranslations(HMODULE WXUNUSED(hModule),
 
     EnumCallbackData *data = reinterpret_cast<EnumCallbackData*>(lParam);
 
-    auto foundPos = name.rfind(data->prefix);
-    std::string lang = name.substr(foundPos);
-    if ( foundPos == 0 && !lang.empty() )
+    bool foundPos = name.rfind(data->prefix, 0) == 0;
+
+    std::string lang = name.substr(data->prefix.length());
+    if ( foundPos && !lang.empty() )
         data->langs.push_back(lang);
 
     return TRUE; // continue enumeration

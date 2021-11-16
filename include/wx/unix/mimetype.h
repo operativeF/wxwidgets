@@ -117,8 +117,8 @@ public:
         { m_manager = manager; m_index.Add(index); }
 
     bool GetExtensions(wxArrayString& extensions);
-    bool GetMimeType(wxString *mimeType) const
-        { *mimeType = m_manager->m_aTypes[m_index[0]]; return true; }
+    bool GetMimeType(std::string* mimeType) const
+        { *mimeType = m_manager->m_aTypes[m_index[0]].ToStdString(); return true; }
     bool GetMimeTypes(wxArrayString& mimeTypes) const;
     bool GetIcon(wxIconLocation *iconLoc) const;
 

@@ -71,7 +71,7 @@ import Utils.Geometry;
 #undef GetFirstChild
 #endif
 
-bool wxIsDriveAvailable(const wxString& dirName);
+bool wxIsDriveAvailable(const std::string& dirName);
 
 // ----------------------------------------------------------------------------
 // events
@@ -86,16 +86,16 @@ wxDEFINE_EVENT( wxEVT_DIRCTRL_FILEACTIVATED, wxTreeEvent );
 
 // since the macOS implementation needs objective-C this is dirdlg.mm
 #ifdef __WXOSX__
-extern size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids);
+extern size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<std::string> &names, std::vector<int> &icon_ids);
 #else
-size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> &names, std::vector<int> &icon_ids)
+size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<std::string> &names, std::vector<int> &icon_ids)
 {
 #ifdef wxHAS_FILESYSTEM_VOLUMES
 
 #if defined(__WIN32__) && wxUSE_FSVOLUME
     // TODO: this code (using wxFSVolumeBase) should be used for all platforms
     //       but unfortunately wxFSVolumeBase is not implemented everywhere
-    const std::vector<wxString> as = wxFSVolumeBase::GetVolumes();
+    const std::vector<std::string> as = wxFSVolumeBase::GetVolumes();
 
     for (const auto& path : as)
     {
@@ -132,7 +132,7 @@ size_t wxGetAvailableDrives(std::vector<wxString> &paths, std::vector<wxString> 
     /* If we can switch to the drive, it exists. */
     for ( char drive = 'A'; drive <= 'Z'; drive++ )
     {
-        const wxString
+        const std::string
             path = wxFileName::GetVolumeString(drive, wxPATH_GET_SEPARATOR);
 
         if (wxIsDriveAvailable(path))
@@ -188,7 +188,7 @@ int setdrive(int drive)
 #endif // !GNUWIN32
 }
 
-bool wxIsDriveAvailable(const wxString& dirName)
+bool wxIsDriveAvailable(const std::string& dirName)
 {
 #ifdef __WIN32__
     UINT errorMode = SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
@@ -197,9 +197,9 @@ bool wxIsDriveAvailable(const wxString& dirName)
 
     // Check if this is a root directory and if so,
     // whether the drive is available.
-    if (dirName.length() == 3 && dirName[(size_t)1] == wxT(':'))
+    if (dirName.length() == 3 && dirName[(size_t)1] == ':')
     {
-        wxString dirNameLower(dirName.Lower());
+        std::string dirNameLower = wx::utils::ToLowerCopy(dirName);
 #ifndef wxHAS_DRIVE_FUNCTIONS
         success = wxDirExists(dirNameLower);
 #else
@@ -228,11 +228,11 @@ bool wxIsDriveAvailable(const wxString& dirName)
 
 #if wxUSE_DIRDLG
 
-// Function which is called by quick sort. We want to override the default std::vector<wxString> behaviour,
+// Function which is called by quick sort. We want to override the default std::vector<std::string> behaviour,
 // and sort regardless of case.
-static int wxCMPFUNC_CONV wxDirCtrlStringCompareFunction(const wxString& strFirst, const wxString& strSecond)
+static int wxCMPFUNC_CONV wxDirCtrlStringCompareFunction(const std::string& strFirst, const std::string& strSecond)
 {
-    return strFirst.CmpNoCase(strSecond);
+    return wx::utils::CmpNoCase(strFirst, strSecond);
 }
 
 //-----------------------------------------------------------------------------
@@ -251,7 +251,7 @@ wxDirItemData::wxDirItemData(const std::string& path, const std::string& name,
     // m_isHidden = (bool)(wxFileNameFromPath(*m_path)[0] == '.');
 }
 
-void wxDirItemData::SetNewDirName(const wxString& path)
+void wxDirItemData::SetNewDirName(const std::string& path)
 {
     m_path = path;
     m_name = wxFileNameFromPath(path);
@@ -272,7 +272,7 @@ bool wxDirItemData::HasSubDirs() const
     return dir.HasSubDirs();
 }
 
-bool wxDirItemData::HasFiles(const wxString& WXUNUSED(spec)) const
+bool wxDirItemData::HasFiles(const std::string& WXUNUSED(spec)) const
 {
     if (m_path.empty())
         return false;
@@ -420,7 +420,7 @@ void wxGenericDirCtrl::ShowHidden( bool show )
 
     if ( HasFlag(wxDIRCTRL_MULTIPLE) )
     {
-        const std::vector<wxString> paths = GetPaths();
+        const std::vector<std::string> paths = GetPaths();
         ReCreateTree();
         for ( const auto& path : paths )
         {
@@ -429,14 +429,14 @@ void wxGenericDirCtrl::ShowHidden( bool show )
     }
     else
     {
-        const wxString path = GetPath();
+        const std::string path = GetPath();
         ReCreateTree();
         SetPath(path);
     }
 }
 
 const wxTreeItemId
-wxGenericDirCtrl::AddSection(const wxString& path, const wxString& name, int imageId)
+wxGenericDirCtrl::AddSection(const std::string& path, const std::string& name, int imageId)
 {
     wxDirItemData *dir_item = new wxDirItemData(path,name,true);
 
@@ -449,13 +449,13 @@ wxGenericDirCtrl::AddSection(const wxString& path, const wxString& name, int ima
 
 void wxGenericDirCtrl::SetupSections()
 {
-    std::vector<wxString> paths, names;
+    std::vector<std::string> paths, names;
     std::vector<int> icons;
 
     size_t count = wxGetAvailableDrives(paths, names, icons);
 
 #ifdef __WXGTK20__
-    wxString home = wxGetHomeDir();
+    std::string home = wxGetHomeDir();
     AddSection( home, _("Home directory"), 1);
     home += "/Desktop";
     AddSection( home, _("Desktop"), 1);
@@ -512,8 +512,8 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
     wxDirItemData *data = GetItemData( treeid );
     wxASSERT( data );
 
-    wxString new_name( wxPathOnly( data->m_path ) );
-    new_name += wxString(wxFILE_SEP_PATH);
+    std::string new_name( wxPathOnly( data->m_path ) );
+    new_name += std::string{wxFILE_SEP_PATH};
     new_name += event.GetLabel();
 
     wxLogNull log;
@@ -629,9 +629,9 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
 
     wxASSERT(data);
 
-    wxString path;
+    std::string path;
 
-    wxString dirName = data->m_path;
+    std::string dirName = data->m_path;
 
 #if defined(WX_WINDOWS)
     // Check if this is a root directory and if so,
@@ -648,15 +648,15 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     wxBusyCursor busy;
 
 #if defined(WX_WINDOWS)
-    if (dirName.Last() == ':')
-        dirName += wxString(wxFILE_SEP_PATH);
+    if (dirName.back() == ':')
+        dirName += fmt::format("{}", wxFILE_SEP_PATH);
 #endif
 
-    std::vector<wxString> dirs;
-    std::vector<wxString> filenames;
+    std::vector<std::string> dirs;
+    std::vector<std::string> filenames;
 
     wxDir d;
-    wxString eachFilename;
+    std::string eachFilename;
 
     wxLogNull log;
     d.Open(dirName);
@@ -691,7 +691,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             if (m_showHidden) style |= wxDIR_HIDDEN;
             // Process each filter (ex: "JPEG Files (*.jpg;*.jpeg)|*.jpg;*.jpeg")
             wxStringTokenizer strTok;
-            wxString curFilter;
+            std::string curFilter;
             strTok.SetString(m_currentFilterStr,";");
             while(strTok.HasMoreTokens())
             {
@@ -723,7 +723,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
         eachFilename = dirs[i];
         path = dirName;
         if (!wxEndsWithPathSeparator(path))
-            path += wxString(wxFILE_SEP_PATH);
+            path += fmt::format("{}", wxFILE_SEP_PATH);
         path += eachFilename;
 
         wxDirItemData *dir_item = new wxDirItemData(path,eachFilename,true);
@@ -748,13 +748,13 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             eachFilename = filenames[i];
             path = dirName;
             if (!wxEndsWithPathSeparator(path))
-                path += wxString(wxFILE_SEP_PATH);
+                path += fmt::format("{}", wxFILE_SEP_PATH);
             path += eachFilename;
-            //path = dirName + wxString("/") + eachFilename;
+            //path = dirName + std::string("/") + eachFilename;
             wxDirItemData *dir_item = new wxDirItemData(path,eachFilename,false);
             int image_id = wxFileIconsTable::file;
-            if (eachFilename.Find(wxT('.')) != wxNOT_FOUND)
-                image_id = wxTheFileIconsTable->GetIconID(eachFilename.AfterLast(wxT('.')));
+            if (eachFilename.find('.') != std::string::npos)
+                image_id = wxTheFileIconsTable->GetIconID(wx::utils::AfterLast(eachFilename, '.'));
             (void) AppendItem( parentId, eachFilename, image_id, -1, dir_item);
         }
     }
@@ -786,20 +786,20 @@ void wxGenericDirCtrl::CollapseTree()
 // Find the child that matches the first part of 'path'.
 // E.g. if a child path is "/usr" and 'path' is "/usr/include"
 // then the child for /usr is returned.
-wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& path, bool& done)
+wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const std::string& path, bool& done)
 {
-    wxString path2(path);
+    std::string path2(path);
 
     // Make sure all separators are as per the current platform
-    path2.Replace("\\", wxString(wxFILE_SEP_PATH));
-    path2.Replace("/", wxString(wxFILE_SEP_PATH));
+    wx::utils::ReplaceAll(path2, "\\", std::string{wxFILE_SEP_PATH});
+    wx::utils::ReplaceAll(path2, "/", std::string{wxFILE_SEP_PATH});
 
     // Append a separator to foil bogus substring matching
-    path2 += wxString(wxFILE_SEP_PATH);
+    path2 += fmt::format("{}", wxFILE_SEP_PATH);
 
     // In MSW case is not significant
 #if defined(WX_WINDOWS)
-    path2.MakeLower();
+    wx::utils::ToLower(path2);
 #endif
 
     wxTreeItemIdValue cookie;
@@ -810,18 +810,18 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
 
         if (data && !data->m_path.empty())
         {
-            wxString childPath(data->m_path);
+            std::string childPath(data->m_path);
             if (!wxEndsWithPathSeparator(childPath))
-                childPath += wxString(wxFILE_SEP_PATH);
+                childPath += fmt::format("{}", wxFILE_SEP_PATH);
 
             // In MSW case is not significant
 #if defined(WX_WINDOWS)
-            childPath.MakeLower();
+            wx::utils::ToLower(childPath);
 #endif
 
             if (childPath.length() <= path2.length())
             {
-                wxString path3 = path2.Mid(0, childPath.length());
+                std::string path3 = path2.substr(0, childPath.length());
                 if (childPath == path3)
                 {
                     done = path3.length() == path2.length();
@@ -838,7 +838,7 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
 
 // Try to expand as much of the given path as possible,
 // and select the given tree item.
-bool wxGenericDirCtrl::ExpandPath(const wxString& path)
+bool wxGenericDirCtrl::ExpandPath(const std::string& path)
 {
     bool done = false;
     wxTreeItemId treeid = FindChild(m_rootId, path, done);
@@ -894,7 +894,7 @@ bool wxGenericDirCtrl::ExpandPath(const wxString& path)
 }
 
 
-bool wxGenericDirCtrl::CollapsePath(const wxString& path)
+bool wxGenericDirCtrl::CollapsePath(const std::string& path)
 {
     bool done           = false;
     wxTreeItemId treeid     = FindChild(m_rootId, path, done);
@@ -924,14 +924,14 @@ wxDirItemData* wxGenericDirCtrl::GetItemData(wxTreeItemId itemId)
     return dynamic_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
 }
 
-wxString wxGenericDirCtrl::GetPath(wxTreeItemId itemId) const
+std::string wxGenericDirCtrl::GetPath(wxTreeItemId itemId) const
 {
     const auto* data = dynamic_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
 
-    return data ? data->m_path : wxString();
+    return data ? data->m_path : std::string();
 }
 
-wxString wxGenericDirCtrl::GetPath() const
+std::string wxGenericDirCtrl::GetPath() const
 {
     // Allow calling GetPath() in multiple selection from OnSelFilter
     if (m_treeCtrl->HasFlag(wxTR_MULTIPLE))
@@ -957,9 +957,9 @@ wxString wxGenericDirCtrl::GetPath() const
         return {};
 }
 
-std::vector<wxString> wxGenericDirCtrl::GetPaths() const
+std::vector<std::string> wxGenericDirCtrl::GetPaths() const
 {
-    std::vector<wxString> paths;
+    std::vector<std::string> paths;
 
     wxArrayTreeItemIds items;
     m_treeCtrl->GetSelections(items);
@@ -972,7 +972,7 @@ std::vector<wxString> wxGenericDirCtrl::GetPaths() const
     return paths;
 }
 
-wxString wxGenericDirCtrl::GetFilePath() const
+std::string wxGenericDirCtrl::GetFilePath() const
 {
     wxTreeItemId treeid = m_treeCtrl->GetSelection();
     if (treeid)
@@ -987,7 +987,7 @@ wxString wxGenericDirCtrl::GetFilePath() const
         return {};
 }
 
-void wxGenericDirCtrl::GetFilePaths(std::vector<wxString>& paths) const
+void wxGenericDirCtrl::GetFilePaths(std::vector<std::string>& paths) const
 {
     paths.clear();
 
@@ -1002,14 +1002,14 @@ void wxGenericDirCtrl::GetFilePaths(std::vector<wxString>& paths) const
     }
 }
 
-void wxGenericDirCtrl::SetPath(const wxString& path)
+void wxGenericDirCtrl::SetPath(const std::string& path)
 {
     m_defaultPath = path;
     if (m_rootId)
         ExpandPath(path);
 }
 
-void wxGenericDirCtrl::SelectPath(const wxString& path, bool select)
+void wxGenericDirCtrl::SelectPath(const std::string& path, bool select)
 {
     bool done = false;
     wxTreeItemId treeid = FindChild(m_rootId, path, done);
@@ -1029,7 +1029,7 @@ void wxGenericDirCtrl::SelectPath(const wxString& path, bool select)
     }
 }
 
-void wxGenericDirCtrl::SelectPaths(const std::vector<wxString>& paths)
+void wxGenericDirCtrl::SelectPaths(const std::vector<std::string>& paths)
 {
     if ( HasFlag(wxDIRCTRL_MULTIPLE) )
     {
@@ -1048,7 +1048,7 @@ void wxGenericDirCtrl::UnselectAll()
 
 // Not used
 #if 0
-void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, std::vector<wxString>& filenames)
+void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, std::vector<std::string>& filenames)
 {
     wxDirItemData *data = (wxDirItemData *) m_treeCtrl->GetItemData(treeid);
 
@@ -1057,17 +1057,17 @@ void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, std::ve
 
     wxASSERT(data);
 
-    wxString search,path,filename;
+    std::string search,path,filename;
 
-    wxString dirName(data->m_path);
+    std::string dirName(data->m_path);
 
 #if defined(WX_WINDOWS)
     if (dirName.Last() == ':')
-        dirName += wxString(wxFILE_SEP_PATH);
+        dirName += std::string(wxFILE_SEP_PATH);
 #endif
 
     wxDir d;
-    wxString eachFilename;
+    std::string eachFilename;
 
     wxLogNull log;
     d.Open(dirName);
@@ -1093,7 +1093,7 @@ void wxGenericDirCtrl::SetFilterIndex(int n)
 {
     m_currentFilter = n;
 
-    wxString f, d;
+    std::string f, d;
     if (ExtractWildcard(m_filter, n, f, d))
         m_currentFilterStr = f;
     else
@@ -1104,7 +1104,7 @@ void wxGenericDirCtrl::SetFilterIndex(int n)
 #endif
 }
 
-void wxGenericDirCtrl::SetFilter(const wxString& filter)
+void wxGenericDirCtrl::SetFilter(const std::string& filter)
 {
     m_filter = filter;
 
@@ -1116,7 +1116,7 @@ void wxGenericDirCtrl::SetFilter(const wxString& filter)
         m_filterListCtrl = nullptr;
     }
 
-    wxString f, d;
+    std::string f, d;
     if (ExtractWildcard(m_filter, m_currentFilter, f, d))
         m_currentFilterStr = f;
     else
@@ -1132,9 +1132,9 @@ void wxGenericDirCtrl::SetFilter(const wxString& filter)
 }
 
 // Extract description and actual filter from overall filter string
-bool wxGenericDirCtrl::ExtractWildcard(const wxString& filterStr, int n, wxString& filter, wxString& description)
+bool wxGenericDirCtrl::ExtractWildcard(const std::string& filterStr, int n, std::string& filter, std::string& description)
 {
-    std::vector<wxString> filters, descriptions;
+    std::vector<std::string> filters, descriptions;
     int count = wxParseCommonDialogsFilter(filterStr, descriptions, filters);
     if (count > 0 && n < count)
     {
@@ -1176,7 +1176,7 @@ void wxGenericDirCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
 }
 
 wxTreeItemId wxGenericDirCtrl::AppendItem (const wxTreeItemId & parent,
-                                           const wxString & text,
+                                           const std::string & text,
                                            int image, int selectedImage,
                                            wxTreeItemData * data)
 {
@@ -1221,7 +1221,7 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
 
     if (m_dirCtrl->HasFlag(wxDIRCTRL_MULTIPLE))
     {
-        const std::vector<wxString> paths = m_dirCtrl->GetPaths();
+        const std::vector<std::string> paths = m_dirCtrl->GetPaths();
 
         m_dirCtrl->SetFilterIndex(sel);
 
@@ -1237,7 +1237,7 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
     }
     else
     {
-        wxString currentPath = m_dirCtrl->GetPath();
+        std::string currentPath = m_dirCtrl->GetPath();
 
         m_dirCtrl->SetFilterIndex(sel);
         m_dirCtrl->ReCreateTree();
@@ -1247,10 +1247,10 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void wxDirFilterListCtrl::FillFilterList(const wxString& filter, int defaultFilter)
+void wxDirFilterListCtrl::FillFilterList(const std::string& filter, int defaultFilter)
 {
     Clear();
-    std::vector<wxString> descriptions, filters;
+    std::vector<std::string> descriptions, filters;
     size_t n = (size_t) wxParseCommonDialogsFilter(filter, descriptions, filters);
 
     if (n > 0 && defaultFilter < (int) n)
@@ -1455,7 +1455,7 @@ wxImageList *wxFileIconsTable::GetSmallImageList()
     return m_smallImageList;
 }
 
-int wxFileIconsTable::GetIconID(const wxString& extension, const wxString& mime)
+int wxFileIconsTable::GetIconID(const std::string& extension, const std::string& mime)
 {
     if (!m_smallImageList)
         Create(m_size);
