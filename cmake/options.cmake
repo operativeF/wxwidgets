@@ -137,7 +137,7 @@ if(WIN32)
 endif()
 AddGlobalOption(wxUSE_DATAOBJ "use data object classes" ON)
 
-AddGlobalOption(wxUSE_IPC "use interprocess communication (wxSocket etc.)" OFF) # FIXME: Requires Registry
+AddGlobalOption(wxUSE_IPC "use interprocess communication (wxSocket etc.)" ON) # FIXME: Requires Registry
 
 AddGlobalOption(wxUSE_CONSOLE_EVENTLOOP "use event loop in console programs too" ON)
 

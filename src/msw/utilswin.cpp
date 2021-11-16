@@ -124,7 +124,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                     // try to send it the DDE request now but ignore the errors
                     wxLogNull noLog;
 
-                    const wxString ddeServer = wxRegKey(keyDDE, "application");
+                    const std::string ddeServer = wxRegKey(keyDDE, "application");
                     if ( wxExecuteDDE(ddeServer, TOPIC_OPEN_URL, ddeCmd) )
                         return true;
 

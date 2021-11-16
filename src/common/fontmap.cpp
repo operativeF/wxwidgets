@@ -244,7 +244,7 @@ bool wxFontMapper::TestAltEncoding(const std::string& configEntry,
 
         if ( path.IsOk() )
         {
-            GetConfig()->Write(configEntry, info->ToString());
+            GetConfig()->Write(configEntry, info->ToString().ToStdString());
         }
 #else
         wxUnusedVar(configEntry);
@@ -423,7 +423,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                               FONTMAPPER_FONT_FROM_ENCODING_PATH);
                 if ( path2.IsOk() )
                 {
-                    GetConfig()->Write(configEntry, info->ToString());
+                    GetConfig()->Write(configEntry, info->ToString().ToStdString());
                 }
 #endif // wxUSE_CONFIG
 

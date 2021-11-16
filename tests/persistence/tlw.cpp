@@ -65,22 +65,24 @@ TEST_CASE_FIXTURE(PersistenceTests, "wxPersistTLW")
         // Test that the relevant keys have been stored correctly.
         int val = -1;
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/x", &val));
+        auto frameOpt = [](auto&& opt){ return fmt::format("{}{}", FRAME_OPTIONS_PREFIX, opt); };
+
+        CHECK(GetConfig().Read(frameOpt("/x"), &val));
         CHECK(pos.x == val);
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/y", &val));
+        CHECK(GetConfig().Read(frameOpt("/y"), &val));
         CHECK(pos.y == val);
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/w", &val));
+        CHECK(GetConfig().Read(frameOpt("/w"), &val));
         CHECK(size.x == val);
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/h", &val));
+        CHECK(GetConfig().Read(frameOpt("/h"), &val));
         CHECK(size.y == val);
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/Iconized", &val));
+        CHECK(GetConfig().Read(frameOpt("/Iconized"), &val));
         CHECK(0 == val);
 
-        CHECK(GetConfig().Read(FRAME_OPTIONS_PREFIX "/Maximized", &val));
+        CHECK(GetConfig().Read(frameOpt("/Maximized"), &val));
         CHECK(0 == val);
     }
 

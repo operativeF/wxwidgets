@@ -308,10 +308,8 @@ std::string wxFileTypeImpl::GetCommand(const std::string& verb) const
         // HACK: we use a special feature of wxExecute which exists
         //       just because we need it here: it will establish DDE
         //       conversation with the program it just launched
-        command.Prepend("WX_DDE#");
-        command << '#' << ddeServer
-                << '#' << ddeTopic
-                << '#' << ddeCommand;
+        command.insert(0, "WX_DDE#");
+        command += fmt::format("#{}#{}#{}", ddeServer, ddeTopic, ddeCommand);
     }
     else
 #endif // wxUSE_IPC

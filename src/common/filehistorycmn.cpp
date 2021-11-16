@@ -239,16 +239,15 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
 
     m_fileHistory.clear();
 
-    wxString buf;
-    buf.Printf("file%d", 1);
+    std::string buf = fmt::format("file{:d}", 1);
 
-    wxString historyFile; // TODO: Need to have config read filesystem paths.
+    std::string historyFile; // TODO: Need to have config read filesystem paths.
     while ((m_fileHistory.size() < m_fileMaxFiles) &&
            config.Read(buf, &historyFile) && !historyFile.empty())
     {
-        m_fileHistory.push_back(fs::path{historyFile.ToStdString()});
+        m_fileHistory.push_back(fs::path{historyFile});
 
-        buf.Printf("file%d", (int)m_fileHistory.size()+1);
+        buf += fmt::format("file{:d}", m_fileHistory.size() + 1);
         historyFile.clear();
     }
 
@@ -259,12 +258,11 @@ void wxFileHistoryBase::Save(wxConfigBase& config)
 {
     for (size_t i = 0; i < m_fileMaxFiles; i++)
     {
-        wxString buf;
-        buf.Printf("file%d", (int)i+1);
+        std::string buf = fmt::format("file%d", (int)i+1);
         if (i < m_fileHistory.size())
-            config.Write(buf, wxString(m_fileHistory[i]));
+            config.Write(buf, m_fileHistory[i].string());
         else
-            config.Write(buf, wxString{});
+            config.Write(buf, std::string{});
     }
 }
 #endif // wxUSE_CONFIG

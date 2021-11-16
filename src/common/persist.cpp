@@ -14,6 +14,8 @@
 
 #include "wx/persist.h"
 
+#include <fmt/core.h>
+
 namespace
 {
 
@@ -44,16 +46,13 @@ wxPersistenceManager& wxPersistenceManager::Get()
     return *gs_manager;
 }
 
-wxString
+std::string
 wxPersistenceManager::GetKey(const wxPersistentObject& who,
-                             const wxString& name) const
+                             const std::string& name) const
 {
-    wxString key("Persistent_Options"); // TODO: make this configurable
-    key << wxCONFIG_PATH_SEPARATOR << who.GetKind()
-        << wxCONFIG_PATH_SEPARATOR << who.GetName()
-        << wxCONFIG_PATH_SEPARATOR << name;
-
-    return key;
+    return fmt::format("Persistent_Options{}{}{}{}{}{}", wxCONFIG_PATH_SEPARATOR, who.GetKind(),
+                                                         wxCONFIG_PATH_SEPARATOR, who.GetName(),
+                                                         wxCONFIG_PATH_SEPARATOR, name);
 }
 
 wxPersistentObject *wxPersistenceManager::Find(void *obj) const
@@ -116,14 +115,14 @@ namespace
 
 template <typename T>
 inline bool
-DoSaveValue(wxConfigBase *conf, const wxString& key, T value)
+DoSaveValue(wxConfigBase *conf, const std::string& key, T value)
 {
     return conf && conf->Write(key, value);
 }
 
 template <typename T>
 bool
-DoRestoreValue(wxConfigBase *conf, const wxString& key, T *value)
+DoRestoreValue(wxConfigBase *conf, const std::string& key, T *value)
 {
     return conf && conf->Read(key, value);
 }
@@ -132,14 +131,14 @@ DoRestoreValue(wxConfigBase *conf, const wxString& key, T *value)
 
 #define wxPERSIST_DEFINE_SAVE_RESTORE_FOR(Type)                               \
     bool wxPersistenceManager::SaveValue(const wxPersistentObject& who,       \
-                                         const wxString& name,                \
+                                         const std::string& name,                \
                                          Type value)                          \
     {                                                                         \
         return DoSaveValue(GetConfig(), GetKey(who, name), value);            \
     }                                                                         \
                                                                               \
     bool wxPersistenceManager::RestoreValue(const wxPersistentObject& who,    \
-                                            const wxString& name,             \
+                                            const std::string& name,             \
                                             Type *value)                      \
     {                                                                         \
         return DoRestoreValue(GetConfig(), GetKey(who, name), value);         \
@@ -148,7 +147,7 @@ DoRestoreValue(wxConfigBase *conf, const wxString& key, T *value)
 wxPERSIST_DEFINE_SAVE_RESTORE_FOR(bool)
 wxPERSIST_DEFINE_SAVE_RESTORE_FOR(int)
 wxPERSIST_DEFINE_SAVE_RESTORE_FOR(long)
-wxPERSIST_DEFINE_SAVE_RESTORE_FOR(wxString)
+wxPERSIST_DEFINE_SAVE_RESTORE_FOR(std::string)
 
 #undef wxPERSIST_DEFINE_SAVE_RESTORE_FOR
 

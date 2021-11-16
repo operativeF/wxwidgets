@@ -29,10 +29,10 @@ class wxRegConfig : public wxConfigBase
 public:
   // ctor & dtor
     // will store data in HKLM\appName and HKCU\appName
-  wxRegConfig(const wxString& appName = {},
-              const wxString& vendorName = {},
-              const wxString& localFilename = {},
-              const wxString& globalFilename = {},
+  wxRegConfig(const std::string& appName = {},
+              const std::string& vendorName = {},
+              const std::string& localFilename = {},
+              const std::string& globalFilename = {},
               unsigned int style = wxCONFIG_USE_GLOBAL_FILE);
 
 	wxRegConfig& operator=(wxRegConfig&&) = delete;
@@ -41,20 +41,20 @@ public:
   // ------------------------------------------
 
   // path management
-  void SetPath(const wxString& strPath) override;
-  const wxString& GetPath() const override { return m_strPath; }
+  void SetPath(const std::string& strPath) override;
+  const std::string& GetPath() const override { return m_strPath; }
 
   // entry/subgroup info
     // enumerate all of them
-  bool GetFirstGroup(wxString& str, long& lIndex) const override;
-  bool GetNextGroup (wxString& str, long& lIndex) const override;
-  bool GetFirstEntry(wxString& str, long& lIndex) const override;
-  bool GetNextEntry (wxString& str, long& lIndex) const override;
+  bool GetFirstGroup(std::string& str, long& lIndex) const override;
+  bool GetNextGroup (std::string& str, long& lIndex) const override;
+  bool GetFirstEntry(std::string& str, long& lIndex) const override;
+  bool GetNextEntry (std::string& str, long& lIndex) const override;
 
     // tests for existence
-  bool HasGroup(const wxString& strName) const override;
-  bool HasEntry(const wxString& strName) const override;
-  EntryType GetEntryType(const wxString& name) const override;
+  bool HasGroup(const std::string& strName) const override;
+  bool HasEntry(const std::string& strName) const override;
+  EntryType GetEntryType(const std::string& name) const override;
 
     // get number of entries/subgroups in the current group, with or without
     // it's subgroups
@@ -64,12 +64,12 @@ public:
   bool Flush(bool WXUNUSED(bCurrentOnly) = false) override { return true; }
 
   // rename
-  bool RenameEntry(const wxString& oldName, const wxString& newName) override;
-  bool RenameGroup(const wxString& oldName, const wxString& newName) override;
+  bool RenameEntry(const std::string& oldName, const std::string& newName) override;
+  bool RenameGroup(const std::string& oldName, const std::string& newName) override;
 
   // delete
-  bool DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso = true) override;
-  bool DeleteGroup(const wxString& key) override;
+  bool DeleteEntry(const std::string& key, bool bGroupIfEmptyAlso = true) override;
+  bool DeleteGroup(const std::string& key) override;
   bool DeleteAll() override;
 
 protected:
@@ -89,23 +89,23 @@ protected:
 
   // Type-independent implementation of Do{Read,Write}Foo().
   template <typename T>
-  bool DoReadValue(const wxString& key, T* pValue) const;
+  bool DoReadValue(const std::string& key, T* pValue) const;
   template <typename T>
-  bool DoWriteValue(const wxString& key, const T& value);
+  bool DoWriteValue(const std::string& key, const T& value);
 
   // implement read/write methods
-  bool DoReadString(const wxString& key, wxString *pStr) const override;
-  bool DoReadLong(const wxString& key, long *plResult) const override;
-  bool DoReadLongLong(const wxString& key, wxLongLong_t *pll) const override;
+  bool DoReadString(const std::string& key, std::string *pStr) const override;
+  bool DoReadLong(const std::string& key, long *plResult) const override;
+  bool DoReadLongLong(const std::string& key, wxLongLong_t *pll) const override;
 #if wxUSE_BASE64
-  bool DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const override;
+  bool DoReadBinary(const std::string& key, wxMemoryBuffer* buf) const override;
 #endif // wxUSE_BASE64
 
-  bool DoWriteString(const wxString& key, const wxString& szValue) override;
-  bool DoWriteLong(const wxString& key, long lValue) override;
-  bool DoWriteLongLong(const wxString& key, wxLongLong_t llValue) override;
+  bool DoWriteString(const std::string& key, const std::string& szValue) override;
+  bool DoWriteLong(const std::string& key, long lValue) override;
+  bool DoWriteLongLong(const std::string& key, wxLongLong_t llValue) override;
 #if wxUSE_BASE64
-  bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) override;
+  bool DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf) override;
 #endif // wxUSE_BASE64
 
 private:
@@ -114,7 +114,7 @@ private:
             m_keyGlobalRoot, m_keyGlobal;
 
   // current path (not '/' terminated)
-  wxString  m_strPath;
+  std::string  m_strPath;
 
   wxDECLARE_ABSTRACT_CLASS(wxRegConfig);
 };

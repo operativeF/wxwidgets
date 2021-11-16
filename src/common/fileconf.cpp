@@ -559,8 +559,9 @@ void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
             break;
 
           default:
-            wxLogWarning(_("file '%s', line %zu: '%s' ignored after group header."),
-                         buffer.GetName(), n + 1, pEnd);
+            // FIXME: SPD log
+            //wxLogWarning(_("file '%s', line %zu: '%s' ignored after group header."),
+            //             buffer.GetName().ToStdString(), n + 1, pEnd);
             bCont = false;
         }
       }
@@ -2017,7 +2018,7 @@ static std::string FilterOutValue(const std::string& str)
       return str;
 
   std::string strResult;
-  strResult.resize(str.length());
+  strResult.reserve(str.length());
 
   // quoting is necessary to preserve spaces in the beginning of the string
   const bool bQuote = wxIsspace(str[0]) || str[0] == '"';

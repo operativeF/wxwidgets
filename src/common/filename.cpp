@@ -907,13 +907,16 @@ static std::string wxCreateTempImpl(
 #if defined(WX_WINDOWS)
     boost::nowide::wstackstring stackDir{dir.c_str()};
     boost::nowide::wstackstring stackName{name.c_str()};
-    boost::nowide::wstackstring stackPath;
+    
+    std::wstring wPath;
+    wPath.resize(MAX_PATH + 1);
+    
     if (!::GetTempFileNameW(stackDir.get(), stackName.get(), 0,
-                            stackPath.get()))
+                            &wPath[0]))
     {
         wxLogLastError("GetTempFileName");
     }
-    path = boost::nowide::narrow(stackPath.get());
+    path = boost::nowide::narrow(wPath);
 #else // !Windows
     std::string path = dir;
 
@@ -2517,7 +2520,7 @@ void wxFileName::SplitPath(const std::string& fullpath,
 
     if ( path )
     {
-        *path += wxGetVolumeString(volume, format);
+        path->insert(0, wxGetVolumeString(volume, format));
     }
 }
 

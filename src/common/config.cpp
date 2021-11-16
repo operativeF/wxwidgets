@@ -303,7 +303,19 @@ bool wxConfigBase::DoWriteDouble(const std::string& key, double val)
     // Notice that we always write out the numbers in C locale and not the
     // current one. This makes the config files portable between machines using
     // different locales.
-    auto valAsString = fmt::format("{:d}", val);
+    std::size_t currentSize{10};
+    std::string valAsString;
+    valAsString.resize(currentSize); // FIXME: What size to start with?
+
+    std::to_chars_result strValResult = std::to_chars(valAsString.data(), valAsString.data() + valAsString.size(), val);
+
+    while(strValResult.ec != std::errc())
+    {
+      currentSize += 10; // FIXME: What size to increment with?
+      valAsString.resize(currentSize);
+      strValResult = std::to_chars(valAsString.data(), valAsString.data() + valAsString.size(), val);
+    }
+
     return DoWriteString(key, valAsString);
 }
 
@@ -427,7 +439,7 @@ enum Bracket
 std::string wxExpandEnvVars(const std::string& str)
 {
   std::string strResult;
-  strResult.resize(str.length());
+  strResult.reserve(str.length());
 
   size_t m;
   for ( size_t n = 0; n < str.length(); n++ ) {
