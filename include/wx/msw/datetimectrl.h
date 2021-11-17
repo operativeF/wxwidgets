@@ -28,7 +28,7 @@ public:
     void SetValue(const wxDateTime& dt) override;
     wxDateTime GetValue() const override;
 
-    void SetNullText(const wxString& text) override;
+    void SetNullText(const std::string& text) override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }
@@ -77,7 +77,7 @@ private:
 
     // shown when there is no valid value (so only used with wxDP_ALLOWNONE),
     // always non-empty if SetNullText() was called, see the comments there
-    wxString m_nullText;
+    std::string m_nullText;
 };
 
 #endif // _WX_MSW_DATETIMECTRL_H_

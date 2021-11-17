@@ -121,7 +121,7 @@ struct wxHeaderButtonParams
 {
     wxColour    m_arrowColour;
     wxColour    m_selectionColour;
-    wxString    m_labelText;
+    std::string m_labelText;
     wxFont      m_labelFont;
     wxColour    m_labelColour;
     wxBitmap    m_labelBitmap;

@@ -16,6 +16,8 @@
 
 import Utils.Geometry;
 
+import <string>;
+
 #include <memory>
 
 namespace
@@ -140,9 +142,9 @@ int wxDisplay::GetDepth() const
     return m_impl->GetDepth();
 }
 
-wxString wxDisplay::GetName() const
+std::string wxDisplay::GetName() const
 {
-    wxCHECK_MSG( IsOk(), wxString(), "invalid wxDisplay object" );
+    wxCHECK_MSG( IsOk(), {}, "invalid wxDisplay object" );
 
     return m_impl->GetName();
 }

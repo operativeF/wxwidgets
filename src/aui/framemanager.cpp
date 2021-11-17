@@ -1506,10 +1506,8 @@ bool wxAuiManager::LoadPerspective(const std::string& layout, bool update)
     // check layout string version
     //    'layout1' = wxAUI 0.9.0 - wxAUI 0.9.2
     //    'layout2' = wxAUI 0.9.2 (wxWidgets 2.8)
-    std::string part = wx::utils::BeforeFirst(input, "|");
+    std::string part = wx::utils::StripAllSpace(wx::utils::BeforeFirst(input, "|"));
     input = wx::utils::AfterFirst(input, "|");
-
-    wx::utils::TrimAllSpace(part);
 
     if (part != "layout2")
         return false;

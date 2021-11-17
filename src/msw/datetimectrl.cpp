@@ -113,11 +113,18 @@ void wxDateTimePickerCtrl::MSWUpdateFormat(bool valid)
     // Note: due to a bug in MinGW headers, with missing parentheses around the
     // macro argument (corrected in or before 8.2, but still existing in 5.3),
     // we have to use a temporary variable here.
-    const TCHAR* const format = valid ? nullptr : m_nullText.t_str();
-    DateTime_SetFormat(GetHwnd(), format);
+    if(valid)
+    {
+        DateTime_SetFormat(GetHwnd(), nullptr);
+    }
+    else
+    {
+        boost::nowide::wstackstring stackNullText{m_nullText.c_str()};
+        DateTime_SetFormat(GetHwnd(), stackNullText.get());
+    }
 }
 
-void wxDateTimePickerCtrl::SetNullText(const wxString& text)
+void wxDateTimePickerCtrl::SetNullText(const std::string& text)
 {
     m_nullText = text;
     if ( m_nullText.empty() )
@@ -139,9 +146,9 @@ void wxDateTimePickerCtrl::SetNullText(const wxString& text)
         // We need to quote the text, as otherwise format specifiers (e.g.
         // "d", "m" etc) would be interpreted specially by the control. To make
         // things simple, we just quote it entirely and always.
-        m_nullText.Replace("'", "''");
+        wx::utils::ReplaceAll(m_nullText, "'", "''");
         m_nullText.insert(0, "'");
-        m_nullText.append("'");
+        m_nullText.push_back('\'');
     }
 
     // Apply it immediately if we don't have any value right now.

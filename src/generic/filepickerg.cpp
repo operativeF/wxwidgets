@@ -48,10 +48,10 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
     // use the shortest possible label and the smallest possible button fitting
     // it.
     long styleButton = 0;
-    wxString labelButton;
+    std::string labelButton;
     if ( m_pickerStyle & wxPB_SMALL )
     {
-        labelButton = _("...");
+        labelButton = _("...").ToStdString();
         styleButton = wxBU_EXACTFIT;
     }
     else

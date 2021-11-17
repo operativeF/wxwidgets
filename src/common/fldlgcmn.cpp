@@ -131,9 +131,7 @@ std::string wxFileDialogBase::AppendExtension(const std::string &filePath,
         ext = wx::utils::AfterLast(ext, '.');
 
     // if ext == "*" or "bar*" or "b?r" or " " then its not valid
-    // FIXME: Make a strip function.
-    wx::utils::TrimAllSpace(ext);
-    if ((ext.empty()) || // FIXME: Is it okay to modify ext?
+    if ((wx::utils::StripAllSpace(ext).empty()) ||
         (ext.find('*') != std::string::npos) ||
         (ext.find('?') != std::string::npos))
         return filePath;

@@ -1,7 +1,8 @@
 export module Utils.Geometry.Size;
 
-import <cmath>;
 import Utils.Geometry.Point;
+
+import <cmath>;
 
 export
 {

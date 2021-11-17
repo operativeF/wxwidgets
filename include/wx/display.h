@@ -12,8 +12,6 @@
 
 #include "wx/defs.h"
 
-import Utils.Geometry;
-
 // NB: no #if wxUSE_DISPLAY here, the display geometry part of this class (but
 //     not the video mode stuff) is always available but if wxUSE_DISPLAY == 0
 //     it becomes just a trivial wrapper around the old wxDisplayXXX() functions
@@ -29,11 +27,13 @@ import Utils.Geometry;
     inline const wxVideoMode wxDefaultVideoMode;
 #endif // wxUSE_DISPLAY
 
+import Utils.Geometry;
+
+import <string>;
+
 #include <memory>
 
 class wxWindow;
-class wxString;
-
 
 class wxDisplayFactory;
 class wxDisplayImpl;
@@ -111,7 +111,7 @@ public:
     double GetScaleFactor() const;
 
     // name may be empty
-    wxString GetName() const;
+    std::string GetName() const;
 
     // display 0 is usually the primary display
     bool IsPrimary() const;

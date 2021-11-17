@@ -13,7 +13,7 @@
 
 // defines for saving the BMP file in different formats, Bits Per Pixel
 // USE: wximage.SetOption( wxIMAGE_OPTION_BMP_FORMAT, wxBMP_xBPP );
-#define wxIMAGE_OPTION_BMP_FORMAT wxString("wxBMP_FORMAT")
+inline constexpr char wxIMAGE_OPTION_BMP_FORMAT[] = "wxBMP_FORMAT";
 
 // These two options are filled in upon reading CUR file and can (should) be
 // specified when saving a CUR file - they define the hotspot of the cursor:
