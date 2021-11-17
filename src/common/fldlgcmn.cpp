@@ -13,9 +13,12 @@
 #include "wx/filedlg.h"
 #include "wx/dirdlg.h"
 #include "wx/filename.h"
-#include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/window.h"
+
+import Utils.Strings;
+
+import <string>;
 
 //----------------------------------------------------------------------------
 // wxFileDialogBase

@@ -14,7 +14,6 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
@@ -41,6 +40,7 @@
 #include <fmt/core.h>
 
 import <cctype>;
+import <string>;
 
 // Unfortunately the corresponding SDK constants are absent from the headers
 // shipped with some old MinGW versions (e.g. 4.2.1 from Debian) and we can't

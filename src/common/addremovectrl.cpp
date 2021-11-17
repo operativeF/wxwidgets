@@ -7,22 +7,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_ADDREMOVECTRL
 
 #include "wx/addremovectrl.h"
 
 #include "wx/private/addremovectrl.h"
 
-// ============================================================================
-// wxAddRemoveCtrl implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// common part
-// ----------------------------------------------------------------------------
+import Utils.Geometry;
 
 bool
 wxAddRemoveCtrl::Create(wxWindow* parent,

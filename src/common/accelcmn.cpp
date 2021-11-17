@@ -145,8 +145,7 @@ bool
 wxAcceleratorEntry::ParseAccel(const std::string& text, unsigned int* flagsOut, int *keyOut)
 {
     // the parser won't like trailing spaces
-    std::string label = text;
-    wx::utils::TrimTrailingSpace(label);
+    std::string label = wx::utils::StripTrailingSpace(text);
 
     // For compatibility with the old wx versions which accepted (and actually
     // even required) a TAB character in the string passed to this function we
@@ -215,8 +214,7 @@ wxAcceleratorEntry::ParseAccel(const std::string& text, unsigned int* flagsOut, 
     }
 
     int keyCode;
-    const size_t len = current.length();
-    switch ( len )
+    switch ( current.length() )
     {
         case 0:
             wxLogDebug("No accel key found, accel string ignored.");

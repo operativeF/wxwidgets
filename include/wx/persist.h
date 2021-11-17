@@ -10,7 +10,6 @@
 #ifndef _WX_PERSIST_H_
 #define _WX_PERSIST_H_
 
-#include "wx/string.h"
 #include "wx/hashmap.h"
 #include "wx/confbase.h"
 

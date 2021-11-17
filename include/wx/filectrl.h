@@ -16,7 +16,6 @@
 
 #if wxUSE_FILECTRL
 
-#include "wx/string.h"
 #include "wx/event.h"
 
 import <vector>;

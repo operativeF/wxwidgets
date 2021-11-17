@@ -12,7 +12,6 @@
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
 
 #include  "wx/dynarray.h"
-#include  "wx/string.h"
 #include  "wx/intl.h"
 #include  "wx/log.h"
 #include  "wx/app.h"
@@ -43,6 +42,7 @@ import Utils.Strings;
 import <cctype>;
 import <cstdlib>;
 import <charconv>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants

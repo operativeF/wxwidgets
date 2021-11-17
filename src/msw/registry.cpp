@@ -15,7 +15,6 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
@@ -26,8 +25,6 @@
 
 #include <fmt/core.h>
 
-import <cstdlib>;      // for _MAX_PATH
-
 #ifndef _MAX_PATH
     #define _MAX_PATH 512
 #endif
@@ -36,6 +33,7 @@ import <cstdlib>;      // for _MAX_PATH
 //#define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
+import <string>;
 
 // some registry functions don't like signed chars
 using RegString = unsigned char *;

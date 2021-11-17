@@ -12,9 +12,9 @@
 #define _WX_DIR_H_
 
 #include "wx/longlong.h"
-#include "wx/string.h"
 #include "wx/filefn.h"      // for wxS_DIR_DEFAULT
 
+import <string>;
 import <vector>;
 
 // ----------------------------------------------------------------------------

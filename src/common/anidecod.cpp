@@ -72,11 +72,13 @@ wxAnimationDisposal wxANIDecoder::GetDisposalMethod(unsigned int WXUNUSED(frame)
     return wxANIM_TOBACKGROUND;
 }
 
+// FIXME: Unsafe index into array
 std::chrono::milliseconds wxANIDecoder::GetDelay(unsigned int frame) const
 {
     return m_info[frame].m_delay;
 }
 
+// FIXME: Unsage index into array
 wxColour wxANIDecoder::GetTransparentColour(unsigned int frame) const
 {
     unsigned int idx = m_info[frame].m_imageIndex;
@@ -344,7 +346,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
     // it from the size of the first frame (all frames are of the same size)
     if (m_szAnimation.x == 0 ||
         m_szAnimation.y == 0)
-        m_szAnimation = wxSize(m_images[0].GetWidth(), m_images[0].GetHeight());
+        m_szAnimation = m_images[0].GetSize();
 
     return m_szAnimation != wxDefaultSize;
 }
