@@ -820,7 +820,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
     // The version string seems to always have a leading space and a trailing
     // new line, get rid of them both.
     std::string str = png_get_header_version(nullptr) + 1;
-    wx::utils::ReplaceAll(str, "\n", "");
+    std::erase(str, '\n');
 
     return {"libpng",
             {PNG_LIBPNG_VER_MAJOR,

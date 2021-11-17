@@ -879,7 +879,7 @@ bool wxTIFFHandler::DoCanRead( wxInputStream& stream )
 
     std::string copyright = wx::utils::AfterFirst(ver, '\n');
     const auto desc = wx::utils::BeforeFirst(ver, '\n');
-    wx::utils::ReplaceAll(copyright, "\n", "");
+    std::erase(copyright, '\n');
 
     return {"libtiff", versioning, desc, copyright};
 }

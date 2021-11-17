@@ -270,8 +270,8 @@ public:
             vendorId = "wxWidgetsApp";
         std::string appId = vendorId + "." + wxTheApp->GetAppName();
         // Remove potential spaces
-        // TODO: Erase instead?
-        wx::utils::ReplaceAll(appId, " ", "");
+        std::erase(appId, " ");
+
         return appId;
     }
 
