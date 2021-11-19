@@ -183,34 +183,29 @@ bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) no
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
-[[nodiscard]] constexpr std::string StripAllSpace(const std::string& str)
+template<typename R>
+[[nodiscard]] constexpr std::string StripLeadingSpace(R&& str)
 {
-    std::string tmpStr{str};
+    auto it1 = std::ranges::find_if_not(str, isWhitespace);
 
-    std::erase_if(tmpStr, isWhitespace);
-
-    return tmpStr;
+    return {it1, str.end()};
 }
 
-constexpr std::string StripLeadingSpace(const std::string& str)
+template<typename R>
+[[nodiscard]] constexpr std::string StripTrailingSpace(R&& str)
 {
-    std::string tmpStr{str};
-    auto it = std::find_if_not(tmpStr.begin(), tmpStr.end(), isWhitespace);
+    auto it2 = std::ranges::find_if_not(std::ranges::reverse_view(str), isWhitespace);
 
-    tmpStr.erase(tmpStr.begin(), it);
-
-    return tmpStr;
+    return {str.begin(), it2.base()};
 }
 
-constexpr std::string StripTrailingSpace(const std::string& str)
+template<typename R>
+[[nodiscard]] constexpr std::string StripAllSpace(R&& str)
 {
-    std::string tmpStr{str};
+    auto it1 = std::ranges::find_if_not(str, isWhitespace);
+    auto it2 = std::ranges::find_if_not(std::ranges::reverse_view(str), isWhitespace);
 
-    auto it = std::find_if_not(tmpStr.rbegin(), tmpStr.rend(), isWhitespace);
-
-    tmpStr.erase(it.base(), str.end());
-
-    return tmpStr;
+    return {it1, it2.base()};
 }
 
 bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCase) noexcept
