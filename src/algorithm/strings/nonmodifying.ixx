@@ -8,6 +8,7 @@ export module Utils.Strings.Nonmodifying;
 import Utils.Chars;
 
 import <algorithm>;
+import <ranges>;
 import <span>;
 import <string>;
 import <string_view>;
@@ -16,26 +17,22 @@ import <vector>;
 export namespace wx::utils
 {
 
-// FIXME: Not valid for unicode strings.
-constexpr std::string ToUpperCopy(std::string_view str)
+// FIXME: Not valid for unicode strings. (ToUpperCh function).
+// Need to detect underlying char type for return type deduction.
+template<typename R>
+constexpr std::string ToUpperCopy(R&& str)
 {
-    std::string out;
-    out.resize(str.size());
+    auto tview = std::ranges::views::transform(str, [](auto c) noexcept { return ToUpperCh(c); });
 
-    std::transform(str.begin(), str.end(), out.begin(), [](auto c) noexcept { return ToUpperCh(c); });
-
-    return out;
+    return {tview.begin(), tview.end()};
 }
 
-// FIXME: Not valid for unicode strings.
-constexpr std::string ToLowerCopy(std::string_view str)
+template<typename R>
+constexpr std::string ToLowerCopy(R&& str)
 {
-    std::string out;
-    out.resize(str.size());
+    auto tview = std::ranges::views::transform(str, [](auto c) noexcept { return ToLowerCh(c); });
 
-    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return ToLowerCh(c); });
-
-    return out;
+    return {tview.begin(), tview.end()};
 }
 
 constexpr std::vector<std::string> StrSplit(std::string_view strView, char delim)
@@ -330,6 +327,41 @@ bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCa
     return AfterLast(strView, std::string_view{chs}, pos);
 }
 
+[[nodiscard]] constexpr bool EndsWith(const std::string& strView, std::string_view suffix, std::string& beforeSuffix)
+{
+    auto pos = strView.find(suffix, strView.size() - suffix.size());
+
+    if(pos != std::string::npos)
+    {
+        beforeSuffix = strView.substr(0, pos);
+
+        return true;
+    }
+
+    return false;
+}
+
+[[nodiscard]] constexpr bool StartsWith(const std::string& strView, std::string_view prefix, std::string& afterStart)
+{
+    auto pos = strView.rfind(prefix, 0);
+
+    if(pos != std::string::npos)
+    {
+        afterStart = strView.substr(prefix.size());
+
+        return true;
+    }
+
+    return false;
+}
+
+// FIXME: Replace template with span
+template<typename... Cs>
+[[nodiscard]] constexpr bool ContainsAnyOf(std::string_view strView, Cs&&... cs) noexcept
+{
+    return (Contains(strView, cs) || ...);
+}
+
 [[nodiscard]] constexpr bool Contains(std::string_view strView, std::string_view strToFind) noexcept
 {
     return strView.find(strToFind, 0) != std::string_view::npos;
@@ -342,20 +374,6 @@ bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCa
     std::string substrToFind = ToLowerCopy(strToFind);
 
     return str.find(substrToFind) != std::string::npos;
-}
-
-[[nodiscard]] constexpr bool StartsWith(const std::string& strView, std::string_view prefix, std::string& afterPrefix)
-{
-    bool prefixFound = strView.rfind(prefix, 0) == 0;
-
-    if(prefixFound)
-    {
-        afterPrefix = strView.substr(prefix.length());
-
-        return true;
-    }
-
-    return false;
 }
 
 } // export namespace wx::utils
