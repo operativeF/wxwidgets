@@ -271,7 +271,7 @@ class wxGridSubwindow : public wxWindow
 public:
     wxGridSubwindow(wxGrid *owner,
                     int additionalStyle = 0,
-                    const std::string& name = wxPanelNameStr)
+                    std::string_view name = wxPanelNameStr)
         : wxWindow(owner, wxID_ANY,
                    wxDefaultPosition, wxDefaultSize,
                    wxBORDER_NONE | additionalStyle,

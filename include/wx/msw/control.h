@@ -23,7 +23,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize, unsigned int style = 0,
               const wxValidator& validator = wxDefaultValidator,
-              const std::string& name = wxControlNameStr)
+              std::string_view name = wxControlNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -34,7 +34,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize, unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
-            const std::string& name = wxControlNameStr);
+            std::string_view name = wxControlNameStr);
 
 
     // Simulates an event

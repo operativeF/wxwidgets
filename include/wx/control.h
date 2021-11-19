@@ -23,7 +23,7 @@ import Utils.Geometry;
 import <string>;
 import <string_view>;
 
-inline constexpr char wxControlNameStr[] = "control";
+inline constexpr std::string_view wxControlNameStr = "control";
 
 
 // ----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxControlNameStr);
+                std::string_view name = wxControlNameStr);
 
     // get the control alignment (left/right/centre, top/bottom/centre)
     int GetAlignment() const { return m_windowStyle & wxALIGN_MASK; }
@@ -167,7 +167,7 @@ protected:
                        const wxSize& size,
                        unsigned int style,
                        const wxValidator& validator,
-                       const std::string& name);
+                       std::string_view name);
 
 #if wxUSE_MARKUP
     // This function may be overridden in the derived classes to implement

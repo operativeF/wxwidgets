@@ -122,7 +122,7 @@ protected:
                        const std::vector<std::string>& choices,
                        unsigned int style,
                        const wxValidator& validator,
-                       const std::string& name);
+                       std::string_view name);
 
     // free all memory we have (used by Clear() and dtor)
     void Free();

@@ -33,7 +33,7 @@ class wxItemContainer;
     class wxDC;
 #endif
 
-inline constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
+inline constexpr std::string_view wxBitmapComboBoxNameStr = "bitmapComboBox";
 
 
 class wxBitmapComboBoxBase

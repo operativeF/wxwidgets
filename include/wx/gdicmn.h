@@ -444,7 +444,7 @@ extern wxIconBundle wxNullIconBundle;
 
 extern wxColourDatabase*  wxTheColourDatabase;
 
-inline constexpr char wxPanelNameStr[] = "panel";
+inline constexpr std::string_view wxPanelNameStr = "panel";
 
 // ---------------------------------------------------------------------------
 // global functions

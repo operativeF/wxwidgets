@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxPanelNameStr)
+                std::string_view name = wxPanelNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -57,7 +57,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxPanelNameStr)
+                std::string_view name = wxPanelNameStr)
     {
         return CreateUsingMSWClass(GetMSWClassName(style),
                                    parent, id, pos, size, style, name);
@@ -73,7 +73,7 @@ public:
                              const wxPoint& pos = wxDefaultPosition,
                              const wxSize& size = wxDefaultSize,
                              unsigned int style = 0,
-                             const std::string& name = wxPanelNameStr);
+                             std::string_view name = wxPanelNameStr);
 
     
     void SetLabel(const std::string& label) override;

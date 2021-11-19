@@ -361,7 +361,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    const wxString& name = "canvas");
+                    std::string_view name = std::string_view{"canvas"});
 
     wxPreviewCanvas& operator=(wxPreviewCanvas&&) = delete;
 
@@ -491,7 +491,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxTAB_TRAVERSAL,
-                        const wxString& name = "panel");
+                        std::string_view name = std::string_view{"panel"});
 
     wxPreviewControlBar& operator=(wxPreviewControlBar&&) = delete;
 

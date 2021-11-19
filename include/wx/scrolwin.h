@@ -402,7 +402,7 @@ template<class T>
 bool wxCreateScrolled(T* self,
                       wxWindow *parent, wxWindowID winid,
                       const wxPoint& pos, const wxSize& size,
-                      unsigned int style, const std::string& name)
+                      unsigned int style, std::string_view name)
 {
     return self->Create(parent, winid, pos, size, style, name);
 }
@@ -432,7 +432,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxScrolledWindowStyle,
-               const std::string& name = wxPanelNameStr)
+               std::string_view name = wxPanelNameStr)
         : wxScrollHelper(this)
     {
         Create(parent, winid, pos, size, style, name);
@@ -445,7 +445,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxScrolledWindowStyle,
-                const std::string& name = wxPanelNameStr)
+                std::string_view name = wxPanelNameStr)
     {
         m_targetWindow = this;
 
@@ -499,7 +499,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxScrolledWindowStyle,
-                     const std::string& name = wxPanelNameStr)
+                     std::string_view name = wxPanelNameStr)
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name)
     {}
 

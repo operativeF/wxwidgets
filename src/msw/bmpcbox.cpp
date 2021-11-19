@@ -48,7 +48,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
                               const std::vector<std::string>& choices,
                               unsigned int style,
                               const wxValidator& validator,
-                              const std::string& name)
+                              std::string_view name)
 {
     if ( !wxComboBox::Create(parent, id, value, pos, size,
                              choices, style, validator, name) )

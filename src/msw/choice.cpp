@@ -49,7 +49,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              const std::vector<std::string>& choices,
                              unsigned int style,
                              const wxValidator& validator,
-                             const std::string& name)
+                             std::string_view name)
 {
     // initialize wxControl
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )

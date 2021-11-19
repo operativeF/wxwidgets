@@ -450,7 +450,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
                         const std::vector<std::string>& choices,
                         unsigned int style,
                         const wxValidator& validator,
-                        const std::string& name)
+                        std::string_view name)
 {
     // pretend that wxComboBox is hidden while it is positioned and resized and
     // show it only right before leaving this method because otherwise there is

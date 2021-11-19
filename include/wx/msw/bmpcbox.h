@@ -36,7 +36,7 @@ public:
                      const std::vector<std::string>& choices = {},
                      unsigned int style = 0,
                      const wxValidator& validator = wxDefaultValidator,
-                     const std::string& name = wxBitmapComboBoxNameStr)
+                     std::string_view name = wxBitmapComboBoxNameStr)
         
           
     {
@@ -52,7 +52,7 @@ public:
                 const std::vector<std::string>& choices,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxBitmapComboBoxNameStr);
+                std::string_view name = wxBitmapComboBoxNameStr);
 
     ~wxBitmapComboBox();
 

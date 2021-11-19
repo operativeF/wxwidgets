@@ -34,7 +34,7 @@ public:
             const std::vector<std::string>& choices = {},
             unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
-            const std::string& name = wxComboBoxNameStr)
+            std::string_view name = wxComboBoxNameStr)
     {
         Create(parent, id, value, pos, size, choices, style, validator, name);
     }
@@ -49,7 +49,7 @@ public:
                 const std::vector<std::string>& choices,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxComboBoxNameStr);
+                std::string_view name = wxComboBoxNameStr);
 
     // See wxComboBoxBase discussion of IsEmpty().
     bool IsListEmpty() const { return wxItemContainer::IsEmpty(); }

@@ -48,7 +48,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                const std::string& name = wxPanelNameStr);
+                std::string_view name = wxPanelNameStr);
 
 
     // implementation from now on

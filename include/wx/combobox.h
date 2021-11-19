@@ -15,7 +15,7 @@
 
 #if wxUSE_COMBOBOX
 
-inline constexpr char wxComboBoxNameStr[] = "comboBox";
+inline constexpr std::string_view wxComboBoxNameStr = "comboBox";
 
 // ----------------------------------------------------------------------------
 // wxComboBoxBase: this interface defines the methods wxComboBox must implement

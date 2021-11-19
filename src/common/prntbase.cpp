@@ -878,7 +878,7 @@ wxEND_EVENT_TABLE()
 //     really horrible flicker when resizing the preview frame, but without
 //     this style it simply doesn't work correctly at all...
 wxPreviewCanvas::wxPreviewCanvas(wxPrintPreviewBase *preview, wxWindow *parent,
-                                 const wxPoint& pos, const wxSize& size, unsigned int style, const wxString& name)
+                                 const wxPoint& pos, const wxSize& size, unsigned int style, std::string_view name)
     : wxScrolledWindow(parent, wxID_ANY, pos, size, style | wxFULL_REPAINT_ON_RESIZE, name),
       m_printPreview(preview)
 {
@@ -1249,7 +1249,7 @@ wxEND_EVENT_TABLE()
 
 wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, unsigned int buttons,
                                          wxWindow *parent, const wxPoint& pos, const wxSize& size,
-                                         unsigned int style, const wxString& name)
+                                         unsigned int style, std::string_view name)
     : wxPanel(parent, wxID_ANY, pos, size, style, name),
       m_printPreview(preview),
       m_buttonFlags(buttons)

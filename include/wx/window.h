@@ -253,7 +253,7 @@ public:
 
         // the window name is used for resource setting in X, it is not the
         // same as the window title/label
-    virtual void SetName( const std::string& name ) { m_windowName = name; }
+    virtual void SetName( std::string_view name ) { m_windowName = {name.begin(), name.end()}; }
     virtual std::string GetName() const { return m_windowName; }
 
         // sets the window variant, calls internally DoSetVariant if variant
@@ -1599,14 +1599,14 @@ protected:
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
-                    const std::string& name = wxPanelNameStr);
+                    std::string_view name = wxPanelNameStr);
 
     bool CreateBase(wxWindowBase *parent,
                     wxWindowID winid,
                     const wxPoint& pos,
                     const wxSize& size,
                     unsigned int style,
-                    const std::string& name);
+                    std::string_view name);
 
     // event handling specific to wxWindow
     bool TryBefore(wxEvent& event) override;
