@@ -573,7 +573,7 @@ wxFont *wxFontList::FindOrCreateFont(int pointSize,
                                      wxFontStyle style,
                                      wxFontWeight weight,
                                      bool underline,
-                                     const wxString& facename,
+                                     const std::string& facename,
                                      wxFontEncoding encoding)
 {
     // In all ports but wxOSX, the effective family of a font created using

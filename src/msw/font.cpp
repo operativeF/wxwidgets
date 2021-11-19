@@ -28,6 +28,8 @@
 
 import Utils.MSW.Wrap;
 
+import <charconv>;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -105,9 +107,9 @@ public:
         return m_nativeFontInfo.GetStrikethrough();
     }
 
-    wxString GetFaceName() const
+    std::string GetFaceName() const
     {
-        wxString facename = m_nativeFontInfo.GetFaceName();
+        std::string facename = m_nativeFontInfo.GetFaceName();
         if ( facename.empty() )
         {
             facename = GetMSWFaceName();
@@ -194,7 +196,7 @@ public:
         m_nativeFontInfo.SetNumericWeight(weight);
     }
 
-    bool SetFaceName(const wxString& faceName)
+    bool SetFaceName(const std::string& faceName)
     {
         m_hFont.reset();
 
@@ -262,7 +264,7 @@ protected:
     // retrieve the face name really being used by the font: this is used to
     // get the face name selected by the system when we don't specify it (but
     // use just the family for example)
-    wxString GetMSWFaceName() const
+    std::string GetMSWFaceName() const
     {
         using msw::utils::unique_dcwnd;
 
@@ -277,8 +279,8 @@ protected:
             return {};
         }
 
-        OUTLINETEXTMETRIC * const
-            otm = static_cast<OUTLINETEXTMETRIC *>(malloc(otmSize));
+        OUTLINETEXTMETRICW* const
+            otm = static_cast<OUTLINETEXTMETRICW *>(malloc(otmSize));
         wxON_BLOCK_EXIT1( free, otm );
 
         otm->otmSize = otmSize;
@@ -294,8 +296,8 @@ protected:
         //
         // FWIW otmpFaceName contains the same thing as otmpFamilyName followed
         // by a possible " Italic" or " Bold" or something else suffix
-        return reinterpret_cast<wxChar *>(otm) +
-                    wxPtrToUInt(otm->otmpFamilyName)/sizeof(wxChar);
+        return boost::nowide::narrow(reinterpret_cast<WCHAR*>(otm) +
+                    wxPtrToUInt(otm->otmpFamilyName)/sizeof(WCHAR));
     }
 
     // Windows font handle, created on demand in GetHFONT()
@@ -448,9 +450,9 @@ bool wxNativeFontInfo::GetStrikethrough() const
     return lf.lfStrikeOut != 0;
 }
 
-wxString wxNativeFontInfo::GetFaceName() const
+std::string wxNativeFontInfo::GetFaceName() const
 {
-    return lf.lfFaceName;
+    return boost::nowide::narrow(lf.lfFaceName);
 }
 
 wxFontFamily wxNativeFontInfo::GetFamily() const
@@ -567,9 +569,10 @@ void wxNativeFontInfo::SetStrikethrough(bool strikethrough)
     lf.lfStrikeOut = strikethrough;
 }
 
-bool wxNativeFontInfo::SetFaceName(const wxString& facename)
+bool wxNativeFontInfo::SetFaceName(const std::string& facename)
 {
-    wxStrlcpy(lf.lfFaceName, facename.c_str(), WXSIZEOF(lf.lfFaceName));
+    auto wideFacename = boost::nowide::widen(facename);
+    std::copy(wideFacename.begin(), wideFacename.end(), std::begin(lf.lfFaceName));
     return true;
 }
 
@@ -642,15 +645,16 @@ void wxNativeFontInfo::SetEncoding(wxFontEncoding encoding)
     lf.lfCharSet = (BYTE)info.charset;
 }
 
-bool wxNativeFontInfo::FromString(const wxString& s)
+bool wxNativeFontInfo::FromString(const std::string& s)
 {
-    long l;
-
     wxStringTokenizer tokenizer(s, ";", wxStringTokenizerMode::RetEmptyAll);
 
+    long l;
+
     // first the version
-    wxString token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    std::string token = tokenizer.GetNextToken();
+    std::from_chars_result tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
 
     // If fractional point size is not present (which can happen if we have a
@@ -666,8 +670,10 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 
         case 1:
             {
+                const auto doubleStr = tokenizer.GetNextToken();
                 double d;
-                if ( !tokenizer.GetNextToken().ToCDouble(&d) )
+                tokRes = std::from_chars(doubleStr.data(), doubleStr.data() + doubleStr.size(), d);
+                if (tokRes.ec != std::errc())
                     return false;
 
                 // If the size is present but 0, ignore it and still use
@@ -687,71 +693,85 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     }
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
+
     lf.lfHeight = l;
     if ( setPointSizeFromHeight )
         pointSize = GetPointSizeAtPPI(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
     lf.lfWidth = l;
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
     lf.lfEscapement = l;
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
     lf.lfOrientation = l;
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
     lf.lfWeight = l;
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfItalic = (BYTE)l;
+    lf.lfItalic = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfUnderline = (BYTE)l;
+    lf.lfUnderline = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfStrikeOut = (BYTE)l;
+    lf.lfStrikeOut = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfCharSet = (BYTE)l;
+    lf.lfCharSet = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfOutPrecision = (BYTE)l;
+    lf.lfOutPrecision = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfClipPrecision = (BYTE)l;
+    lf.lfClipPrecision = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfQuality = (BYTE)l;
+    lf.lfQuality = static_cast<BYTE>(l);
 
     token = tokenizer.GetNextToken();
-    if ( !token.ToLong(&l) )
+    tokRes = std::from_chars(token.data(), token.data() + token.size(), l);
+    if ( tokRes.ec != std::errc() )
         return false;
-    lf.lfPitchAndFamily = (BYTE)l;
+    lf.lfPitchAndFamily = static_cast<BYTE>(l);
 
     if ( !tokenizer.HasMoreTokens() )
         return false;
@@ -762,13 +782,13 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     return true;
 }
 
-wxString wxNativeFontInfo::ToString() const
+std::string wxNativeFontInfo::ToString() const
 {
-    wxString s;
-
-    s.Printf("%d;%s;%ld;%ld;%ld;%ld;%ld;%d;%d;%d;%d;%d;%d;%d;%d;%s",
+    // FIXME: Precision?
+    auto facename = boost::nowide::narrow(lf.lfFaceName);
+    return fmt::format("{:d};{:f};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{}",
              1, // version
-             wxString::FromCDouble(pointSize),
+             pointSize,
              lf.lfHeight,
              lf.lfWidth,
              lf.lfEscapement,
@@ -782,16 +802,14 @@ wxString wxNativeFontInfo::ToString() const
              lf.lfClipPrecision,
              lf.lfQuality,
              lf.lfPitchAndFamily,
-             lf.lfFaceName);
-
-    return s;
+             facename);
 }
 
 // ----------------------------------------------------------------------------
 // wxFont
 // ----------------------------------------------------------------------------
 
-wxFont::wxFont(const wxString& fontdesc)
+wxFont::wxFont(const std::string& fontdesc)
 {
     wxNativeFontInfo info;
     if ( info.FromString(fontdesc) )
@@ -922,7 +940,7 @@ void wxFont::SetNumericWeight(int weight)
     M_FONTDATA->SetNumericWeight(weight);
 }
 
-bool wxFont::SetFaceName(const wxString& faceName)
+bool wxFont::SetFaceName(const std::string& faceName)
 {
     AllocExclusive();
 
@@ -1025,7 +1043,7 @@ bool wxFont::GetStrikethrough() const
     return M_FONTDATA->GetStrikethrough();
 }
 
-wxString wxFont::GetFaceName() const
+std::string wxFont::GetFaceName() const
 {
     wxCHECK_MSG( IsOk(), {}, "invalid font" );
 

@@ -17,6 +17,8 @@
 
 #include <fmt/core.h>
 
+import <charconv>;
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -62,34 +64,35 @@ bool wxFontPickerCtrl::Create( wxWindow *parent,
     return true;
 }
 
-wxString wxFontPickerCtrl::Font2String(const wxFont &f)
+std::string wxFontPickerCtrl::Font2String(const wxFont &f)
 {
-    wxString ret = f.GetNativeFontInfoUserDesc();
+    std::string ret = f.GetNativeFontInfoUserDesc();
 #ifdef __WXMSW__
     // on wxMSW the encoding of the font is appended at the end of the string;
     // since encoding is not very user-friendly we remove it.
     const wxFontEncoding enc = f.GetEncoding();
     if ( enc != wxFONTENCODING_DEFAULT && enc != wxFONTENCODING_SYSTEM )
-        ret = ret.BeforeLast(wxT(' '));
+        ret = wx::utils::BeforeLast(ret, ' ');
 #endif
     return ret;
 }
 
-wxFont wxFontPickerCtrl::String2Font(const wxString &s)
+wxFont wxFontPickerCtrl::String2Font(const std::string &s)
 {
-    wxString str(s);
+    std::string str{s};
     wxFont ret;
     double n;
 
     // put a limit on the maximum point size which the user can enter
     // NOTE: we suppose the last word of given string is the pointsize
-    wxString size = str.AfterLast(wxT(' '));
-    if (size.ToDouble(&n))
+    std::string strSize = wx::utils::AfterLast(str, ' ');
+    auto [p, ec] = std::from_chars(strSize.data(), strSize.data() + strSize.size(), n);
+    if (ec == std::errc())
     {
         if (n < 1)
-            str = str.Left(str.length() - size.length()) + "1";
+            str = str.substr(0, str.length() - strSize.length()) + "1";
         else if (n >= m_nMaxPointSize)
-            str = str.Left(str.length() - size.length()) +
+            str = str.substr(0, str.length() - strSize.length()) +
                   fmt::format("{:d}", m_nMaxPointSize);
     }
 

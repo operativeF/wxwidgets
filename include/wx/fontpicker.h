@@ -158,9 +158,9 @@ public:
     // event handler for our picker
     void OnFontChange(wxFontPickerEvent &);
 
-    // used to convert wxString <-> wxFont
-    virtual wxString Font2String(const wxFont &font);
-    virtual wxFont String2Font(const wxString &font);
+    // used to convert std::string <-> wxFont
+    virtual std::string Font2String(const wxFont &font);
+    virtual wxFont String2Font(const std::string &font);
 
 protected:
 

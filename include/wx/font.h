@@ -112,8 +112,7 @@ class wxFontInfo
 public:
     // Default ctor uses the default font size appropriate for the current
     // platform.
-    wxFontInfo() : 
-        m_pixelSize(wxDefaultSize)
+    wxFontInfo()
     {    
         m_family = wxFontFamily::Default;
         m_weight = wxFONTWEIGHT_NORMAL;
@@ -124,7 +123,6 @@ public:
     // These ctors specify the font size, either in points or in pixels.
     explicit wxFontInfo(double pointSize)
         : m_pointSize(pointSize >= 0.0 ? pointSize : -1.0)
-        , m_pixelSize(wxDefaultSize)
     {
         
         m_family = wxFontFamily::Default;
@@ -153,7 +151,7 @@ public:
     // so that the calls to them could be chained.
     wxFontInfo& Family(wxFontFamily family)
         { m_family = family; return *this; }
-    wxFontInfo& FaceName(const wxString& faceName)
+    wxFontInfo& FaceName(const std::string& faceName)
         { m_faceName = faceName; return *this; }
 
     wxFontInfo& Weight(int weight)
@@ -213,7 +211,7 @@ public:
     // If face name is not empty, it has priority, otherwise use family.
     bool HasFaceName() const { return !m_faceName.empty(); }
     wxFontFamily GetFamily() const { return m_family; }
-    const wxString& GetFaceName() const { return m_faceName; }
+    const std::string& GetFaceName() const { return m_faceName; }
 
     wxFontStyle GetStyle() const
     {
@@ -287,10 +285,10 @@ private:
     // it is used. Otherwise m_pointSize is used, except if it is < 0, which
     // means that the platform dependent font size should be used instead.
     double m_pointSize{-1.0};
-    wxSize m_pixelSize;
+    wxSize m_pixelSize{wxDefaultSize};
 
     wxFontFamily m_family;
-    wxString m_faceName;
+    std::string m_faceName;
     FontFlags m_flags{wxFontFlags::Default};
     int m_weight;
     wxFontEncoding m_encoding;
@@ -310,21 +308,21 @@ public:
 
     wxFont();
     wxFont(const wxFontInfo& info);
-    wxFont(const wxString& nativeFontInfoString);
+    wxFont(const std::string& nativeFontInfoString);
     wxFont(const wxNativeFontInfo& info);
     wxFont(int size,
            wxFontFamily family,
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = {},
+           const std::string& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     wxFont(const wxSize& pixelSize,
            wxFontFamily family,
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = {},
+           const std::string& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     */
 
@@ -335,7 +333,7 @@ public:
         wxFontStyle style,          // see wxFontStyle enum
         wxFontWeight weight,        // see wxFontWeight enum
         bool underlined = false,    // not underlined by default
-        const wxString& face = {},              // facename
+        const std::string& face = {},              // facename
         wxFontEncoding encoding = wxFONTENCODING_DEFAULT); // ISO8859-X, ...
 
     // from the font components
@@ -345,7 +343,7 @@ public:
         wxFontStyle style,          // see wxFontStyle enum
         wxFontWeight weight,        // see wxFontWeight enum
         bool underlined = false,    // not underlined by default
-        const wxString& face = {},              // facename
+        const std::string& face = {},              // facename
         wxFontEncoding encoding = wxFONTENCODING_DEFAULT); // ISO8859-X, ...
 
     // from the font components but using the font flags instead of separate
@@ -353,7 +351,7 @@ public:
     static wxFont *New(int pointSize,
                        wxFontFamily family,
                        FontFlags flags = wxFontFlags::Default,
-                       const wxString& face = {},
+                       const std::string& face = {},
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
 
@@ -362,14 +360,14 @@ public:
     static wxFont *New(const wxSize& pixelSize,
                        wxFontFamily family,
                        FontFlags flags = wxFontFlags::Default,
-                       const wxString& face = {},
+                       const std::string& face = {},
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
     // from the (opaque) native font description object
     static wxFont *New(const wxNativeFontInfo& nativeFontDesc);
 
     // from the string representation of wxNativeFontInfo
-    static wxFont *New(const wxString& strNativeFontDesc);
+    static wxFont *New(const std::string& strNativeFontDesc);
 
     // Load the font from the given file and return true on success or false on
     // error (an error message will be logged in this case).
@@ -389,7 +387,7 @@ public:
     virtual int GetNumericWeight() const = 0;
     virtual bool GetUnderlined() const = 0;
     virtual bool GetStrikethrough() const { return false; }
-    virtual wxString GetFaceName() const = 0;
+    virtual std::string GetFaceName() const = 0;
     virtual wxFontEncoding GetEncoding() const = 0;
     virtual const wxNativeFontInfo *GetNativeFontInfo() const = 0;
 
@@ -398,8 +396,8 @@ public:
     virtual wxFontWeight GetWeight() const;
     virtual bool IsFixedWidth() const;
 
-    wxString GetNativeFontInfoDesc() const;
-    wxString GetNativeFontInfoUserDesc() const;
+    std::string GetNativeFontInfoDesc() const;
+    std::string GetNativeFontInfoUserDesc() const;
 
     // change the font characteristics
     virtual void SetPointSize( int pointSize );
@@ -412,7 +410,7 @@ public:
     virtual void SetUnderlined( bool underlined ) = 0;
     virtual void SetStrikethrough( bool WXUNUSED(strikethrough) ) {}
     virtual void SetEncoding(wxFontEncoding encoding) = 0;
-    virtual bool SetFaceName( const wxString& faceName );
+    virtual bool SetFaceName( const std::string& faceName );
     void SetNativeFontInfo(const wxNativeFontInfo& info)
         { DoSetNativeFontInfo(info); }
 
@@ -420,8 +418,8 @@ public:
     // reasonable default implementation in the base class.
     virtual void SetWeight( wxFontWeight weight );
 
-    bool SetNativeFontInfo(const wxString& info);
-    bool SetNativeFontInfoUserDesc(const wxString& info);
+    bool SetNativeFontInfo(const std::string& info);
+    bool SetNativeFontInfoUserDesc(const std::string& info);
 
     // Symbolic font sizes support: set the font size to "large" or "very
     // small" either absolutely (i.e. compared to the default font size) or
@@ -438,9 +436,9 @@ public:
 
     // translate the fonts into human-readable string (i.e. GetStyleString()
     // will return "wxITALIC" for an italic font, ...)
-    wxString GetFamilyString() const;
-    wxString GetStyleString() const;
-    wxString GetWeightString() const;
+    std::string GetFamilyString() const;
+    std::string GetStyleString() const;
+    std::string GetWeightString() const;
 
     // the default encoding is used for creating all fonts with default
     // encoding parameter
@@ -505,7 +503,7 @@ protected:
                                            wxFontStyle style,
                                            wxFontWeight weight,
                                            bool underlined,
-                                           const wxString& face,
+                                           const std::string& face,
                                            wxFontEncoding encoding);
 
     static wxFontInfo InfoFromLegacyParams(const wxSize& pixelSize,
@@ -513,7 +511,7 @@ protected:
                                            wxFontStyle style,
                                            wxFontWeight weight,
                                            bool underlined,
-                                           const wxString& face,
+                                           const std::string& face,
                                            wxFontEncoding encoding);
 
 private:
@@ -524,9 +522,9 @@ private:
     inline static wxFontEncoding ms_encodingDefault{wxFONTENCODING_SYSTEM};
 };
 
-// wxFontBase <-> wxString utilities, used by wxConfig
-wxString wxToString(const wxFontBase& font);
-bool wxFromString(const wxString& str, wxFontBase* font);
+// wxFontBase <-> std::string utilities, used by wxConfig
+std::string wxToString(const wxFontBase& font);
+bool wxFromString(const std::string& str, wxFontBase* font);
 
 
 // this macro must be used in all derived wxFont classes declarations
@@ -576,7 +574,7 @@ public:
                              wxFontStyle style,
                              wxFontWeight weight,
                              bool underline = false,
-                             const wxString& face = {},
+                             const std::string& face = {},
                              wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
     wxFont *FindOrCreateFont(const wxFontInfo& fontInfo)

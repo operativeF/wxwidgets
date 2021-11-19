@@ -70,7 +70,7 @@ public:
         Create(info, hFont);
     }
 
-    wxFont(const wxString& fontDesc);
+    wxFont(const std::string& fontDesc);
 
 
     [[maybe_unused]] bool Create(const wxSize& pixelSize,
@@ -100,7 +100,7 @@ public:
     int GetNumericWeight() const override;
     bool GetUnderlined() const override;
     bool GetStrikethrough() const override;
-    wxString GetFaceName() const override;
+    std::string GetFaceName() const override;
     wxFontEncoding GetEncoding() const override;
     const wxNativeFontInfo *GetNativeFontInfo() const override;
 
@@ -109,7 +109,7 @@ public:
     void SetFamily(wxFontFamily family) override;
     void SetStyle(wxFontStyle style) override;
     void SetNumericWeight(int weight) override;
-    bool SetFaceName(const wxString& faceName) override;
+    bool SetFaceName(const std::string& faceName) override;
     void SetUnderlined(bool underlined) override;
     void SetStrikethrough(bool strikethrough) override;
     void SetEncoding(wxFontEncoding encoding) override;

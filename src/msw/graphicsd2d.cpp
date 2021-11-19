@@ -3178,7 +3178,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     {
         // The length of the font name must not exceed LF_FACESIZE TCHARs,
         // including the terminating NULL.
-        std::wstring name = font.GetFaceName().substr(0, WXSIZEOF(logfont.lfFaceName)-1);
+        std::string name = font.GetFaceName().substr(0, WXSIZEOF(logfont.lfFaceName)-1);
         for(std::size_t i{}; auto&& ch : name)
         {
             logfont.lfFaceName[i] = ch;

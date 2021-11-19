@@ -45,20 +45,20 @@ public:
         // default ctor, call SetString() later
     wxStringTokenizer() = default;
         // ctor which gives us the string
-    wxStringTokenizer(const wxString& str,
-                      const wxString& delims = wxDEFAULT_DELIMITERS,
+    wxStringTokenizer(const std::string& str,
+                      const std::string& delims = wxDEFAULT_DELIMITERS,
                       wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
         // copy ctor and assignment operator
     wxStringTokenizer(const wxStringTokenizer& src);
     wxStringTokenizer& operator=(const wxStringTokenizer& src);
 
         // args are same as for the non default ctor above
-    void SetString(const wxString& str,
-                   const wxString& delims = wxDEFAULT_DELIMITERS,
+    void SetString(const std::string& str,
+                   const std::string& delims = wxDEFAULT_DELIMITERS,
                    wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
         // reinitialize the tokenizer with the same delimiters/mode
-    void Reinit(const wxString& str);
+    void Reinit(const std::string& str);
 
     // tokens access
         // return the number of remaining tokens
@@ -66,7 +66,7 @@ public:
         // did we reach the end of the string?
     bool HasMoreTokens() const;
         // get the next token, will return empty string if !HasMoreTokens()
-    wxString GetNextToken();
+    std::string GetNextToken();
         // get the delimiter which terminated the token last retrieved by
         // GetNextToken() or NUL if there had been no tokens yet or the last
         // one wasn't terminated (but ran to the end of the string)
@@ -75,7 +75,7 @@ public:
     // get current tokenizer state
         // returns the part of the string which remains to tokenize (*not* the
         // initial string)
-    wxString GetString() const { return wxString(m_pos, m_string.end()); }
+    std::string GetString() const { return std::string(m_pos, m_string.end()); }
 
         // returns the current position (i.e. one index after the last
         // returned token or 0 if GetNextToken() has never been called) in the
@@ -94,18 +94,18 @@ public:
     // -------------------------------------------
 
     // for compatibility only, use GetNextToken() instead
-    wxString NextToken() { return GetNextToken(); }
+    std::string NextToken() { return GetNextToken(); }
 
     // compatibility only, don't use
-    void SetString(const wxString& to_tokenize,
-                   const wxString& delims,
+    void SetString(const std::string& to_tokenize,
+                   const std::string& delims,
                    bool WXUNUSED(ret_delim))
     {
         SetString(to_tokenize, delims, wxStringTokenizerMode::RetDelims);
     }
 
-    wxStringTokenizer(const wxString& to_tokenize,
-                      const wxString& delims,
+    wxStringTokenizer(const std::string& to_tokenize,
+                      const std::string& delims,
                       bool ret_delim)
     {
         SetString(to_tokenize, delims, ret_delim);
@@ -125,13 +125,13 @@ protected:
         No
     };
 
-    wxString m_string;              // the string we tokenize
+    std::string m_string;              // the string we tokenize
     
-    wxString::const_iterator m_stringEnd;
+    std::string::const_iterator m_stringEnd;
     // FIXME-UTF8: use wxWcharBuffer
-    wxWxCharBuffer m_delims;        // all possible delimiters
+    std::string m_delims;        // all possible delimiters
 
-    wxString::const_iterator m_pos; // the current position in m_string
+    std::string::const_iterator m_pos; // the current position in m_string
 
     size_t m_delimsLen;
 
@@ -139,7 +139,7 @@ protected:
 
     wxStringTokenizerMode m_mode{wxStringTokenizerMode::Invalid}; // see wxTOKEN_XXX values
 
-    wxChar   m_lastDelim;           // delimiter after last token or '\0'
+    char   m_lastDelim;           // delimiter after last token or '\0'
 };
 
 // ----------------------------------------------------------------------------

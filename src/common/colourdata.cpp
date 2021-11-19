@@ -42,9 +42,9 @@ wxColour wxColourData::GetCustomColour(int i) const
 // separator used between different fields
 constexpr char wxCOL_DATA_SEP = ',';
 
-wxString wxColourData::ToString() const
+std::string wxColourData::ToString() const
 {
-    wxString str(m_chooseFull ? '1' : '0');
+    std::string str = fmt::format("{}", (m_chooseFull ? '1' : '0'));
 
     for ( int i = 0; i < NUM_CUSTOM; i++ )
     {
@@ -52,19 +52,19 @@ wxString wxColourData::ToString() const
 
         const wxColour& clr = m_custColours[i];
         if ( clr.IsOk() )
-            str += clr.GetAsString(wxC2S_HTML_SYNTAX);
+            str += clr.GetAsString(wxC2S_HTML_SYNTAX).ToStdString();
     }
 
-    str.Append(wxCOL_DATA_SEP);
-    str.Append(m_chooseAlpha ? '1' : '0');
+    str.push_back(wxCOL_DATA_SEP);
+    str.push_back(m_chooseAlpha ? '1' : '0');
 
     return str;
 }
 
-bool wxColourData::FromString(const wxString& str)
+bool wxColourData::FromString(const std::string& str)
 {
-    wxStringTokenizer tokenizer(str, wxCOL_DATA_SEP);
-    wxString token = tokenizer.GetNextToken();
+    wxStringTokenizer tokenizer(str, std::string{wxCOL_DATA_SEP});
+    std::string token = tokenizer.GetNextToken();
     m_chooseFull = token == '1';
     bool success = m_chooseFull || token == '0';
     for (int i = 0; success && i < NUM_CUSTOM; i++)
@@ -104,7 +104,7 @@ wxColour wxGetColourFromUser(wxWindow *parent,
     // the same custom colours to the user (and we can't just have static
     // wxColourData itself because it's a GUI object and so should be destroyed
     // before GUI shutdown and doing it during static cleanup is too late)
-    static wxString s_strColourData;
+    static std::string s_strColourData;
 
     wxColourData data;
     if ( !ptrData )

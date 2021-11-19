@@ -86,10 +86,10 @@ public:
     // xFontName on demand
 private:
     // the components of the XLFD
-    wxString     fontElements[wxXLFD_MAX];
+    std::string     fontElements[wxXLFD_MAX];
 
     // the full XLFD
-    wxString     xFontName;
+    std::string     xFontName;
 
     // true until SetXFontName() is called
     bool         m_isDefault;
@@ -99,22 +99,22 @@ private:
 
 public:
     // init the elements from an XLFD, return true if ok
-    bool FromXFontName(const wxString& xFontName);
+    bool FromXFontName(const std::string& xFontName);
 
     // return false if we were never initialized with a valid XLFD
     bool IsDefault() const { return m_isDefault; }
 
     // return the XLFD (using the fontElements if necessary)
-    wxString GetXFontName() const;
+    std::string GetXFontName() const;
 
     // get the given XFLD component
-    wxString GetXFontComponent(wxXLFDField field) const;
+    std::string GetXFontComponent(wxXLFDField field) const;
 
     // change the font component
-    void SetXFontComponent(wxXLFDField field, const wxString& value);
+    void SetXFontComponent(wxXLFDField field, const std::string& value);
 
     // set the XFLD
-    void SetXFontName(const wxString& xFontName);
+    void SetXFontName(const std::string& xFontName);
 #elif defined(__WXMSW__)
     // Preserve compatibility in the semi-public (i.e. private, but still
     // unfortunately used by some existing code outside of the library) API
@@ -165,8 +165,8 @@ public:
 
     // not all style attributes like condensed etc, are exposed in the public API methods
     // for best fidelity PostScript names are useful, they are also used in the toString/fromString methods
-    wxString GetPostScriptName() const;
-    bool SetPostScriptName(const wxString& postScriptName);
+    std::string GetPostScriptName() const;
+    bool SetPostScriptName(const std::string& postScriptName);
 
     static CGFloat GetCTWeight( CTFontRef font );
     static CGFloat GetCTWeight( CTFontDescriptorRef font );
@@ -185,8 +185,8 @@ private:
     CGFloat       m_ctSize;
     wxFontFamily  m_family;
 
-    wxString      m_familyName;
-    wxString      m_postScriptName;
+    std::string      m_familyName;
+    std::string      m_postScriptName;
 
     // native font description
     wxCFRef<CTFontDescriptorRef> m_descriptor;
@@ -213,7 +213,7 @@ public :
     int           weight;
     bool          underlined;
     bool          strikethrough;
-    wxString      faceName;
+    std::string      faceName;
     wxFontEncoding encoding;
 #endif // platforms
 
@@ -264,7 +264,7 @@ public:
 
         // set the family/facename
         SetFamily((wxFontFamily)font.GetFamily());
-        const wxString& facename = font.GetFaceName();
+        const std::string& facename = font.GetFaceName();
         if ( !facename.empty() )
         {
             SetFaceName(facename);
@@ -284,7 +284,7 @@ public:
     int GetNumericWeight() const;
     bool GetUnderlined() const;
     bool GetStrikethrough() const;
-    wxString GetFaceName() const;
+    std::string GetFaceName() const;
     wxFontFamily GetFamily() const;
     wxFontEncoding GetEncoding() const;
 
@@ -296,7 +296,7 @@ public:
     void SetWeight(wxFontWeight weight);
     void SetUnderlined(bool underlined);
     void SetStrikethrough(bool strikethrough);
-    bool SetFaceName(const wxString& facename);
+    bool SetFaceName(const std::string& facename);
     void SetFamily(wxFontFamily family);
     void SetEncoding(wxFontEncoding encoding);
 
@@ -315,19 +315,19 @@ public:
     // to be valid. If no valid facename is given, sets the
     // first valid facename returned by wxFontEnumerator::GetFacenames().
     // Does not return a bool since it cannot fail.
-    void SetFaceName(const std::vector<wxString>& facenames);
+    void SetFaceName(const std::vector<std::string>& facenames);
 
 
     // it is important to be able to serialize wxNativeFontInfo objects to be
     // able to store them (in config file, for example)
-    bool FromString(const wxString& s);
-    wxString ToString() const;
+    bool FromString(const std::string& s);
+    std::string ToString() const;
 
     // we also want to present the native font descriptions to the user in some
     // human-readable form (it is not platform independent neither, but can
     // hopefully be understood by the user)
-    bool FromUserString(const wxString& s);
-    wxString ToUserString() const;
+    bool FromUserString(const std::string& s);
+    std::string ToUserString() const;
 };
 
 // ----------------------------------------------------------------------------

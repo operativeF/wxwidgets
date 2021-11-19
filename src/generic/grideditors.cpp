@@ -1627,7 +1627,7 @@ void wxGridCellChoiceEditor::SetParameters(const std::string& params)
 
     m_choices.clear();
 
-    wxStringTokenizer tk(params, wxT(','));
+    wxStringTokenizer tk(params, ",");
     while ( tk.HasMoreTokens() )
     {
         m_choices.push_back(tk.GetNextToken());

@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/font.h"
 #include "wx/dc.h"
 #include "wx/intl.h"
@@ -30,24 +27,20 @@
 
 import Utils.Geometry;
 
+import <charconv>;
+
 #include <cassert>
 
 // debugger helper: this function can be called from a debugger to show what
 // the date really is
-extern const char *wxDumpFont(const wxFont *font)
+extern const std::string wxDumpFont(const wxFont *font)
 {
-    static char buf[256];
-
-    wxString s;
-    s.Printf("%s-%d-%s-%.2f-%d",
+    return fmt::format("%s-%d-%s-%.2f-%d",
              font->GetFaceName(),
              font->GetNumericWeight(),
              font->GetStyle() == wxFontStyle::Normal ? "regular" : "italic",
              font->GetFractionalPointSize(),
              font->GetEncoding());
-
-    wxStrlcpy(buf, s.mb_str(), WXSIZEOF(buf));
-    return buf;
 }
 
 // ----------------------------------------------------------------------------
@@ -100,14 +93,14 @@ wxPROPERTY( Underlined, bool, SetUnderlined, GetUnderlined, false, 0 /*flags*/, 
            "Helpstring", "group")
 wxPROPERTY( Strikethrough, bool, SetStrikethrough, GetStrikethrough, false, 0, \
                    "Helpstring", "group")
-wxPROPERTY( Face, wxString, SetFaceName, GetFaceName, wxEMPTY_PARAMETER_VALUE, \
+wxPROPERTY( Face, std::string, SetFaceName, GetFaceName, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Encoding, wxFontEncoding, SetEncoding, GetEncoding, \
            wxFONTENCODING_DEFAULT, 0 /*flags*/, "Helpstring", "group")
 wxEND_PROPERTIES_TABLE()
 
 wxCONSTRUCTOR_6( wxFont, int, Size, wxFontFamily, Family, wxFontStyle, Style, wxFontWeight, Weight, \
-                bool, Underlined, wxString, Face )
+                bool, Underlined, std::string, Face )
 
 wxEMPTY_HANDLERS_TABLE(wxFont)
 
@@ -136,7 +129,7 @@ wxFont *wxFontBase::New(int size,
                         wxFontStyle style,
                         wxFontWeight weight,
                         bool underlined,
-                        const wxString& face,
+                        const std::string& face,
                         wxFontEncoding encoding)
 {
     return new wxFont(size, family, style, weight, underlined, face, encoding);
@@ -148,7 +141,7 @@ wxFont *wxFontBase::New(const wxSize& pixelSize,
                         wxFontStyle style,
                         wxFontWeight weight,
                         bool underlined,
-                        const wxString& face,
+                        const std::string& face,
                         wxFontEncoding encoding)
 {
     return new wxFont(pixelSize, family, style, weight, underlined,
@@ -159,7 +152,7 @@ wxFont *wxFontBase::New(const wxSize& pixelSize,
 wxFont *wxFontBase::New(int pointSize,
                         wxFontFamily family,
                         FontFlags flags,
-                        const wxString& face,
+                        const std::string& face,
                         wxFontEncoding encoding)
 {
     return New(pointSize, family,
@@ -173,7 +166,7 @@ wxFont *wxFontBase::New(int pointSize,
 wxFont *wxFontBase::New(const wxSize& pixelSize,
                         wxFontFamily family,
                         FontFlags flags,
-                        const wxString& face,
+                        const std::string& face,
                         wxFontEncoding encoding)
 {
     return New(pixelSize, family,
@@ -190,7 +183,7 @@ wxFont *wxFontBase::New(const wxNativeFontInfo& info)
 }
 
 /* static */
-wxFont *wxFontBase::New(const wxString& strNativeFontDesc)
+wxFont *wxFontBase::New(const std::string& strNativeFontDesc)
 {
     wxNativeFontInfo fontInfo;
     if ( !fontInfo.FromString(strNativeFontDesc) )
@@ -345,9 +338,9 @@ void wxFontBase::DoSetNativeFontInfo(const wxNativeFontInfo& info)
 #endif
 }
 
-wxString wxFontBase::GetNativeFontInfoDesc() const
+std::string wxFontBase::GetNativeFontInfoDesc() const
 {
-    wxString fontDesc;
+    std::string fontDesc;
 
     wxCHECK_MSG(IsOk(), fontDesc, "invalid font");
 
@@ -365,9 +358,9 @@ wxString wxFontBase::GetNativeFontInfoDesc() const
     return fontDesc;
 }
 
-wxString wxFontBase::GetNativeFontInfoUserDesc() const
+std::string wxFontBase::GetNativeFontInfoUserDesc() const
 {
-    wxString fontDesc;
+    std::string fontDesc;
 
     wxCHECK_MSG(IsOk(), fontDesc, "invalid font");
 
@@ -385,7 +378,7 @@ wxString wxFontBase::GetNativeFontInfoUserDesc() const
     return fontDesc;
 }
 
-bool wxFontBase::SetNativeFontInfo(const wxString& info)
+bool wxFontBase::SetNativeFontInfo(const std::string& info)
 {
     wxNativeFontInfo fontInfo;
     if ( !info.empty() && fontInfo.FromString(info) )
@@ -397,7 +390,7 @@ bool wxFontBase::SetNativeFontInfo(const wxString& info)
     return false;
 }
 
-bool wxFontBase::SetNativeFontInfoUserDesc(const wxString& info)
+bool wxFontBase::SetNativeFontInfoUserDesc(const std::string& info)
 {
     wxNativeFontInfo fontInfo;
     if ( !info.empty() && fontInfo.FromUserString(info) )
@@ -428,7 +421,7 @@ bool wxFontBase::operator==(const wxFontBase& font) const
             GetNumericWeight() == font.GetNumericWeight() &&
             GetUnderlined() == font.GetUnderlined() &&
             GetStrikethrough() == font.GetStrikethrough() &&
-            GetFaceName().IsSameAs(font.GetFaceName(), false) &&
+            wx::utils::IsSameAsNoCase(GetFaceName(), font.GetFaceName()) &&
             GetEncoding() == font.GetEncoding()
            );
 }
@@ -447,7 +440,7 @@ wxFontFamily wxFontBase::GetFamily() const
     return family == wxFontFamily::Unknown ? wxFontFamily::Default : family;
 }
 
-wxString wxFontBase::GetFamilyString() const
+std::string wxFontBase::GetFamilyString() const
 {
     wxCHECK_MSG( IsOk(), "wxFontFamily::Default", "invalid font" );
 
@@ -464,7 +457,7 @@ wxString wxFontBase::GetFamilyString() const
     }
 }
 
-wxString wxFontBase::GetStyleString() const
+std::string wxFontBase::GetStyleString() const
 {
     wxCHECK_MSG( IsOk(), "wxFONTSTYLE_DEFAULT", "invalid font" );
 
@@ -477,7 +470,7 @@ wxString wxFontBase::GetStyleString() const
     }
 }
 
-wxString wxFontBase::GetWeightString() const
+std::string wxFontBase::GetWeightString() const
 {
     wxCHECK_MSG( IsOk(), "wxFONTWEIGHT_DEFAULT", "invalid font" );
 
@@ -497,7 +490,7 @@ wxString wxFontBase::GetWeightString() const
     }
 }
 
-bool wxFontBase::SetFaceName(const wxString& facename)
+bool wxFontBase::SetFaceName(const std::string& facename)
 {
 #if wxUSE_FONTENUM
     if (!wxFontEnumerator::IsValidFacename(facename))
@@ -520,7 +513,7 @@ void InitInfoWithLegacyParams(wxFontInfo& info,
                               wxFontStyle style,
                               wxFontWeight weight,
                               bool underlined,
-                              const wxString& face,
+                              const std::string& face,
                               wxFontEncoding encoding)
 {
     info
@@ -540,7 +533,7 @@ wxFontInfo wxFontBase::InfoFromLegacyParams(int pointSize,
                                             wxFontStyle style,
                                             wxFontWeight weight,
                                             bool underlined,
-                                            const wxString& face,
+                                            const std::string& face,
                                             wxFontEncoding encoding)
 {
     // Old code specifies wxDEFAULT instead of -1 or wxNORMAL instead of the
@@ -565,7 +558,7 @@ wxFontInfo wxFontBase::InfoFromLegacyParams(const wxSize& pixelSize,
                                             wxFontStyle style,
                                             wxFontWeight weight,
                                             bool underlined,
-                                            const wxString& face,
+                                            const std::string& face,
                                             wxFontEncoding encoding)
 {
     wxFontInfo info(pixelSize);
@@ -680,7 +673,7 @@ wxFont wxFont::Scaled(float x) const
 
 // Up to now, there are no native implementations of this function:
 // FIXME: Case sensitivity, does it matter here?
-void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
+void wxNativeFontInfo::SetFaceName(const std::vector<std::string>& facenames)
 {
 #if wxUSE_FONTENUM
     const auto possible_name = std::find_if(facenames.cbegin(), facenames.cend(),
@@ -693,7 +686,7 @@ void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
     }
 
     // set the first valid facename we can find on this system
-    const wxString validfacename = *wxFontEnumerator::GetFacenames().cbegin();
+    const std::string validfacename = *wxFontEnumerator::GetFacenames().cbegin();
     wxLogTrace("font", "Falling back to '%s'", validfacename.c_str());
     SetFaceName(validfacename);
 #else // !wxUSE_FONTENUM
@@ -721,7 +714,7 @@ void wxNativeFontInfo::SetPointSize(int pointsize)
 //      0;pointsize;family;style;weight;underlined;facename;encoding
 //      1;pointsize;family;style;weight;underlined;strikethrough;facename;encoding
 
-bool wxNativeFontInfo::FromString(const wxString& s)
+bool wxNativeFontInfo::FromString(const std::string& s)
 {
     long l;
     double d;
@@ -729,7 +722,7 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 
     wxStringTokenizer tokenizer(s, ";");
 
-    wxString token = tokenizer.GetNextToken();
+    std::string token = tokenizer.GetNextToken();
     if ( !token.ToULong(&version) || version > 1 )
         return false;
 
@@ -785,11 +778,9 @@ bool wxNativeFontInfo::FromString(const wxString& s)
     return true;
 }
 
-wxString wxNativeFontInfo::ToString() const
+std::string wxNativeFontInfo::ToString() const
 {
-    wxString s;
-
-    s.Printf("%d;%s;%d;%d;%d;%d;%d;%s;%d",
+    return fmt::format("%d;%s;%d;%d;%d;%d;%d;%s;%d",
              1,                                 // version
              wxString::FromCDouble(GetFractionalPointSize()),
              family,
@@ -799,8 +790,6 @@ wxString wxNativeFontInfo::ToString() const
              strikethrough,
              faceName.GetData(),
              (int)encoding);
-
-    return s;
 }
 
 void wxNativeFontInfo::Init()
@@ -840,7 +829,7 @@ bool wxNativeFontInfo::GetStrikethrough() const
     return strikethrough;
 }
 
-wxString wxNativeFontInfo::GetFaceName() const
+std::string wxNativeFontInfo::GetFaceName() const
 {
     return faceName;
 }
@@ -880,7 +869,7 @@ void wxNativeFontInfo::SetStrikethrough(bool strikethrough_)
     strikethrough = strikethrough_;
 }
 
-bool wxNativeFontInfo::SetFaceName(const wxString& facename_)
+bool wxNativeFontInfo::SetFaceName(const std::string& facename_)
 {
     faceName = facename_;
     return true;
@@ -905,20 +894,20 @@ void wxNativeFontInfo::SetEncoding(wxFontEncoding encoding_)
 
 #if defined(wxNO_NATIVE_FONTINFO) || defined(__WXMSW__) || defined(__WXOSX__)
 
-wxString wxNativeFontInfo::ToUserString() const
+std::string wxNativeFontInfo::ToUserString() const
 {
-    wxString desc;
+    std::string desc;
 
     // first put the adjectives, if any - this is English-centric, of course,
     // but what else can we do?
     if ( GetUnderlined() )
     {
-        desc << _("underlined");
+        desc += _("underlined").ToStdString();
     }
 
     if ( GetStrikethrough() )
     {
-        desc << _(" strikethrough");
+        desc += _(" strikethrough").ToStdString();
     }
 
     switch ( GetWeight() )
@@ -931,39 +920,39 @@ wxString wxNativeFontInfo::ToUserString() const
             break;
 
         case wxFONTWEIGHT_THIN:
-            desc << _(" thin");
+            desc += _(" thin").ToStdString();
             break;
 
         case wxFONTWEIGHT_EXTRALIGHT:
-            desc << _(" extra light");
+            desc += _(" extra light").ToStdString();
             break;
 
         case wxFONTWEIGHT_LIGHT:
-            desc << _(" light");
+            desc += _(" light").ToStdString();
             break;
 
         case wxFONTWEIGHT_MEDIUM:
-            desc << _(" medium");
+            desc += _(" medium").ToStdString();
             break;
 
         case wxFONTWEIGHT_SEMIBOLD:
-            desc << _(" semi bold");
+            desc += _(" semi bold").ToStdString();
             break;
 
         case wxFONTWEIGHT_BOLD:
-            desc << _(" bold");
+            desc += _(" bold").ToStdString();
             break;
 
         case wxFONTWEIGHT_EXTRABOLD:
-            desc << _(" extra bold");
+            desc += _(" extra bold").ToStdString();
             break;
 
         case wxFONTWEIGHT_HEAVY:
-            desc << _(" heavy");
+            desc += _(" heavy").ToStdString();
             break;
 
         case wxFONTWEIGHT_EXTRAHEAVY:
-            desc << _(" extra heavy");
+            desc += _(" extra heavy").ToStdString();
             break;
     }
 
@@ -979,32 +968,34 @@ wxString wxNativeFontInfo::ToUserString() const
             // we don't distinguish between the two for now anyhow...
         case wxFontStyle::Italic:
         case wxFontStyle::Slant:
-            desc << _(" italic");
+            desc += _(" italic").ToStdString();
             break;
     }
 
-    wxString face = GetFaceName();
+    std::string face = GetFaceName();
     if ( !face.empty() )
     {
-        if (face.Contains(' ') || face.Contains(';') || face.Contains(','))
+        if(wx::utils::ContainsAnyOf(face, " ", ";", ","))
         {
-            face.Replace("'", "");
-                // eventually remove quote characters: most systems do not
-                // allow them in a facename anyway so this usually does nothing
+            std::erase(face, '\'');
+            // eventually remove quote characters: most systems do not
+            // allow them in a facename anyway so this usually does nothing
 
             // make it possible for FromUserString() function to understand
             // that the different words which compose this facename are
             // not different adjectives or other data but rather all parts
             // of the facename
-            desc << " '" << face << "'";
+            desc += fmt::format(" '{}'", face);
         }
         else
-            desc << wxT(' ') << face;
+        {
+            desc += fmt::format(" {}", face);
+        }
     }
     else // no face name specified
     {
         // use the family
-        wxString familyStr;
+        std::string familyStr;
         switch ( GetFamily() )
         {
             case wxFontFamily::Decorative:
@@ -1040,27 +1031,27 @@ wxString wxNativeFontInfo::ToUserString() const
         }
 
         if ( !familyStr.empty() )
-            desc << " '" << familyStr << " family'";
+            desc += fmt::format(" '{} family'", familyStr);
     }
 
     const int size = GetPointSize();
     if ( size != wxNORMAL_FONT->GetPointSize() )
     {
-        desc << wxT(' ') << size;
+        desc += fmt::format(" {}", size);
     }
 
 #if wxUSE_FONTMAP
     const wxFontEncoding enc = GetEncoding();
     if ( enc != wxFONTENCODING_DEFAULT && enc != wxFONTENCODING_SYSTEM )
     {
-        desc << wxT(' ') << wxFontMapper::GetEncodingName(enc);
+        desc += fmt::format(" {}", wxFontMapper::GetEncodingName(enc));
     }
 #endif // wxUSE_FONTMAP
 
-    return desc.Strip(wxString::both).MakeLower();
+    return wx::utils::ToLowerCopy(wx::utils::StripAllSpace(desc));
 }
 
-bool wxNativeFontInfo::FromUserString(const wxString& s)
+bool wxNativeFontInfo::FromUserString(const std::string& s)
 {
     // reset to the default state
     Init();
@@ -1072,7 +1063,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
     // parse a more or less free form string
     wxStringTokenizer tokenizer(s, ";, ", wxStringTokenizerMode::StrTok);
 
-    wxString face;
+    std::string face;
     unsigned long size;
     bool weightfound = false, pointsizefound = false;
 #if wxUSE_FONTMAP
@@ -1084,14 +1075,13 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
 
     while ( tokenizer.HasMoreTokens() )
     {
-        wxString token = tokenizer.GetNextToken();
-
         // normalize it
-        token.Trim(true).Trim(false).MakeLower();
+        std::string token = wx::utils::ToLowerCopy(wx::utils::StripAllSpace(tokenizer.GetNextToken()));
+
         if (insideQuotes)
         {
-            if (token.StartsWith("'") ||
-                token.EndsWith("'"))
+            if (token.starts_with('\'') ||
+                token.ends_with('\''))
             {
                 insideQuotes = false;
 
@@ -1099,15 +1089,16 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 face += " " + token;
 
                 // normalize facename:
-                face = face.Trim(true).Trim(false);
-                face.Replace("'", "");
+                wx::utils::TrimAllSpace(face);
+
+                std::erase(face, '\'');
 
                 continue;
             }
         }
         else
         {
-            if (token.StartsWith("'"))
+            if (token.starts_with('\''))
                 insideQuotes = true;
         }
 
@@ -1118,6 +1109,9 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
             face += " " + token;
             continue;
         }
+
+        auto [p, ec] = std::from_chars(token.data(), token.data() + token.size(), size);
+
         if ( token == "underlined" || token == _("underlined").ToStdString() )
         {
             SetUnderlined(true);
@@ -1209,7 +1203,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
         {
             SetStyle(wxFontStyle::Italic);
         }
-        else if ( token.ToULong(&size ) )
+        else if ( ec == std::errc() )
         {
             SetPointSize(size);
             pointsizefound = true;
@@ -1232,7 +1226,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 // assume it is the face name
             if ( !face.empty() )
             {
-                face += wxT(' ');
+                face += ' ';
             }
 
             face += token;
@@ -1250,9 +1244,10 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
         // bar")
         if ( !face.empty() )
         {
-            wxString familyStr;
-            if ( face.EndsWith(" family", &familyStr) )
+            auto familyPos = face.rfind(" family");
+            if ( familyPos != std::string::npos )
             {
+                std::string familyStr{face.substr(0, familyPos)};
                 // it's not a facename but rather a font family
                 wxFontFamily family;
                 if ( familyStr == "decorative" )
@@ -1337,14 +1332,14 @@ void wxNativeFontInfo::SetWeight(wxFontWeight weight)
         SetNumericWeight(numWeight);
 }
 
-// wxFont <-> wxString utilities, used by wxConfig
-wxString wxToString(const wxFontBase& font)
+// wxFont <-> std::string utilities, used by wxConfig
+std::string wxToString(const wxFontBase& font)
 {
     return font.IsOk() ? font.GetNativeFontInfoDesc()
-                       : wxString();
+                       : std::string();
 }
 
-bool wxFromString(const wxString& str, wxFontBase *font)
+bool wxFromString(const std::string& str, wxFontBase *font)
 {
     wxCHECK_MSG( font, false, "NULL output parameter" );
 

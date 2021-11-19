@@ -21,14 +21,14 @@ import <vector>;
 // helpers
 // ----------------------------------------------------------------------------
 
-static wxString::const_iterator
-find_first_of(const wxChar *delims, size_t len,
-              const wxString::const_iterator& from,
-              const wxString::const_iterator& end)
+static std::string::const_iterator
+find_first_of(const char *delims, size_t len,
+              std::string::const_iterator from,
+              std::string::const_iterator end)
 {
     wxASSERT_MSG( from <= end,  "invalid index" );
 
-    for ( wxString::const_iterator i = from; i != end; ++i )
+    for ( std::string::const_iterator i = from; i != end; ++i )
     {
         if ( wxTmemchr(delims, *i, len) )
             return i;
@@ -37,14 +37,14 @@ find_first_of(const wxChar *delims, size_t len,
     return end;
 }
 
-static wxString::const_iterator
-find_first_not_of(const wxChar *delims, size_t len,
-                  const wxString::const_iterator& from,
-                  const wxString::const_iterator& end)
+static std::string::const_iterator
+find_first_not_of(const char* delims, size_t len,
+                  std::string::const_iterator from,
+                  std::string::const_iterator end)
 {
     wxASSERT_MSG( from <= end,  "invalid index" );
 
-    for ( wxString::const_iterator i = from; i != end; ++i )
+    for ( std::string::const_iterator i = from; i != end; ++i )
     {
         if ( !wxTmemchr(delims, *i, len) )
             return i;
@@ -57,8 +57,8 @@ find_first_not_of(const wxChar *delims, size_t len,
 // wxStringTokenizer construction
 // ----------------------------------------------------------------------------
 
-wxStringTokenizer::wxStringTokenizer(const wxString& str,
-                                     const wxString& delims,
+wxStringTokenizer::wxStringTokenizer(const std::string& str,
+                                     const std::string& delims,
                                      wxStringTokenizerMode mode)
 {
     SetString(str, delims, mode);
@@ -80,8 +80,8 @@ wxStringTokenizer& wxStringTokenizer::operator=(const wxStringTokenizer& src)
     return *this;
 }
 
-void wxStringTokenizer::SetString(const wxString& str,
-                                  const wxString& delims,
+void wxStringTokenizer::SetString(const std::string& str,
+                                  const std::string& delims,
                                   wxStringTokenizerMode mode)
 {
     if ( mode == wxStringTokenizerMode::Default )
@@ -90,7 +90,7 @@ void wxStringTokenizer::SetString(const wxString& str,
         // whitespace characters and as wxStringTokenizerMode::RetEmpty otherwise (for
         // whitespace delimiters, strtok() behaviour is better because we want
         // to count consecutive spaces as one delimiter)
-        wxString::const_iterator p;
+        std::string::const_iterator p;
         for ( p = delims.begin(); p != delims.end(); ++p )
         {
             if ( !wxIsspace(*p) )
@@ -109,8 +109,7 @@ void wxStringTokenizer::SetString(const wxString& str,
         }
     }
 
-    // FIXME-UTF8: only wc_str()
-    m_delims = delims.wc_str();
+    m_delims = delims;
     m_delimsLen = delims.length();
 
     m_mode = mode;
@@ -118,14 +117,14 @@ void wxStringTokenizer::SetString(const wxString& str,
     Reinit(str);
 }
 
-void wxStringTokenizer::Reinit(const wxString& str)
+void wxStringTokenizer::Reinit(const std::string& str)
 {
     wxASSERT_MSG( IsOk(), "you should call SetString() first" );
 
     m_string = str;
     m_stringEnd = m_string.end();
     m_pos = m_string.begin();
-    m_lastDelim = wxT('\0');
+    m_lastDelim = '\0';
     m_hasMoreTokens = MoreTokensState::Unknown;
 }
 
@@ -168,7 +167,7 @@ bool wxStringTokenizer::DoHasMoreTokens() const
 {
     wxCHECK_MSG( IsOk(), false, "you should call SetString() first" );
 
-    if ( find_first_not_of(m_delims, m_delimsLen, m_pos, m_stringEnd)
+    if ( find_first_not_of(m_delims.data(), m_delimsLen, m_pos, m_stringEnd)
          != m_stringEnd )
     {
         // there are non delimiter characters left, so we do have more tokens
@@ -190,7 +189,7 @@ bool wxStringTokenizer::DoHasMoreTokens() const
             // up to the end of the string in GetNextToken(), but if it is not
             // NUL yet we still have this last token to return even if m_pos is
             // already at m_string.length()
-            return m_pos < m_stringEnd || m_lastDelim != wxT('\0');
+            return m_pos < m_stringEnd || m_lastDelim != '\0';
 
         case wxStringTokenizerMode::Invalid:
         case wxStringTokenizerMode::Default:
@@ -214,7 +213,7 @@ size_t wxStringTokenizer::CountTokens() const
     //     important if its implementation here is not as efficient as it
     //     could be -- but OTOH like this we're sure to get the correct answer
     //     in all modes
-    wxStringTokenizer tkz(wxString(m_pos, m_stringEnd), m_delims, m_mode);
+    wxStringTokenizer tkz{std::string{m_pos, m_stringEnd}, m_delims, m_mode};
 
     size_t count = 0;
     while ( tkz.HasMoreTokens() )
@@ -231,9 +230,9 @@ size_t wxStringTokenizer::CountTokens() const
 // token extraction
 // ----------------------------------------------------------------------------
 
-wxString wxStringTokenizer::GetNextToken()
+std::string wxStringTokenizer::GetNextToken()
 {
-    wxString token;
+    std::string token;
     do
     {
         if ( !HasMoreTokens() )
@@ -244,8 +243,8 @@ wxString wxStringTokenizer::GetNextToken()
         m_hasMoreTokens = MoreTokensState::Unknown;
 
         // find the end of this token
-        wxString::const_iterator pos =
-            find_first_of(m_delims, m_delimsLen, m_pos, m_stringEnd);
+        std::string::const_iterator pos =
+            find_first_of(m_delims.data(), m_delimsLen, m_pos, m_stringEnd);
 
         // and the start of the next one
         if ( pos == m_stringEnd )
@@ -258,13 +257,13 @@ wxString wxStringTokenizer::GetNextToken()
             m_pos = m_stringEnd;
 
             // it wasn't terminated
-            m_lastDelim = wxT('\0');
+            m_lastDelim = '\0';
         }
         else // we found a delimiter at pos
         {
             // in wxStringTokenizerMode::RetDelims mode we return the delimiter character
             // with token, otherwise leave it out
-            wxString::const_iterator tokenEnd(pos);
+            std::string::const_iterator tokenEnd(pos);
             if ( m_mode == wxStringTokenizerMode::RetDelims )
                 ++tokenEnd;
 
@@ -273,7 +272,7 @@ wxString wxStringTokenizer::GetNextToken()
             // skip the token and the trailing delimiter
             m_pos = pos + 1;
 
-            m_lastDelim = (pos == m_stringEnd) ? wxT('\0') : (wxChar)*pos;
+            m_lastDelim = (pos == m_stringEnd) ? '\0' : *pos;
         }
     }
     while ( !AllowEmpty() && token.empty() );
@@ -294,7 +293,7 @@ std::vector<std::string> wxStringTokenize(const std::string& str,
 
     while ( tk.HasMoreTokens() )
     {
-        tokens.push_back(tk.GetNextToken().ToStdString());
+        tokens.push_back(tk.GetNextToken());
     }
 
     return tokens;

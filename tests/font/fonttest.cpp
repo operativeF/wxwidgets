@@ -42,15 +42,14 @@ static const wxFont *GetTestFonts(unsigned& numFonts)
     return testfonts;
 }
 
-wxString DumpFont(const wxFont *font)
+std::string DumpFont(const wxFont *font)
 {
     // dumps the internal properties of a wxFont in the same order they
     // are checked by wxFontBase::operator==()
 
     wxASSERT(font->IsOk());
 
-    wxString s;
-    s.Printf(wxS("%d-%d;%d-%d-%d-%d-%d-%s-%d"),
+    return fmt::format("%d-%d;%d-%d-%d-%d-%d-%s-%d",
              font->GetPointSize(),
              font->GetPixelSize().x,
              font->GetPixelSize().y,
@@ -60,8 +59,6 @@ wxString DumpFont(const wxFont *font)
              font->GetUnderlined() ? 1 : 0,
              font->GetFaceName(),
              font->GetEncoding());
-
-    return s;
 }
 
 // ----------------------------------------------------------------------------
@@ -276,7 +273,7 @@ TEST_CASE("wxFont::NativeFontInfo")
     {
         wxFont test(*pf++);
 
-        const wxString& nid = test.GetNativeFontInfoDesc();
+        std::string nid = test.GetNativeFontInfoDesc();
         CHECK( !nid.empty() );
             // documented to be never empty
 
@@ -330,7 +327,7 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc")
     {
         wxFont test(*pf++);
 
-        const wxString& niud = test.GetNativeFontInfoUserDesc();
+        std::string niud = test.GetNativeFontInfoUserDesc();
         CHECK( !niud.empty() );
             // documented to be never empty
 
@@ -355,10 +352,11 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc")
         // if the original face name was empty, it means that any face name (in
         // this family) can be used for the new font so we shouldn't be
         // surprised to find that they differ in this case
-        const wxString facename = test.GetFaceName();
+        const std::string facename = test.GetFaceName();
         if ( !facename.empty() )
         {
-            CHECK( facename.Upper() == temp2.GetFaceName().Upper() );
+
+            CHECK( wx::utils::ToUpperCopy(facename) == wx::utils::ToUpperCopy(temp2.GetFaceName()) );
         }
 
         CHECK( test.GetPointSize() == temp2.GetPointSize() );
@@ -381,7 +379,7 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc")
         const double sizeUsed = font.GetFractionalPointSize();
         CHECK( sizeUsed == doctest::Approx(fontSize).epsilon(0.001) );
 
-        const wxString& desc = font.GetNativeFontInfoDesc();
+        std::string desc = font.GetNativeFontInfoDesc();
         INFO("Font description: " << desc);
         CHECK( font.SetNativeFontInfo(desc) );
 

@@ -34,8 +34,8 @@ public:
     wxColour GetCustomColour(int i) const;
 
     // Serialize the object to a string and restore it from it
-    wxString ToString() const;
-    bool FromString(const wxString& str);
+    std::string ToString() const;
+    bool FromString(const std::string& str);
 
 
     // public for backwards compatibility only: don't use directly
