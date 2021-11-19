@@ -158,7 +158,7 @@ std::string JoinStringsEsc(std::span<const std::string> strSpan, char delim, std
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-int CmpNoCase(const std::string& strViewA, const std::string& strViewB)
+int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     const auto nA = strViewA.size();
     const auto nB = strViewB.size();
@@ -178,7 +178,7 @@ constexpr bool IsSameAsCase(std::string_view strViewA, std::string_view strViewB
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-bool IsSameAsNoCase(const std::string& strViewA, const std::string& strViewB) noexcept
+bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     return CmpNoCase(strViewA, strViewB) == 0;
 }
@@ -208,7 +208,7 @@ template<typename R>
     return {it1, it2.base()};
 }
 
-bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCase) noexcept
+bool IsSameAs(std::string_view strViewA, std::string_view strViewB, bool bCase)
 {
     if(bCase)
     {
@@ -322,7 +322,7 @@ bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCa
     return AfterLast(strView, std::string_view{chs}, pos);
 }
 
-[[nodiscard]] constexpr bool EndsWith(const std::string& strView, std::string_view suffix, std::string& beforeSuffix)
+[[nodiscard]] constexpr bool EndsWith(std::string_view strView, std::string_view suffix, std::string& beforeSuffix)
 {
     auto pos = strView.find(suffix, strView.size() - suffix.size());
 
@@ -336,7 +336,7 @@ bool IsSameAs(const std::string& strViewA, const std::string& strViewB, bool bCa
     return false;
 }
 
-[[nodiscard]] constexpr bool StartsWith(const std::string& strView, std::string_view prefix, std::string& afterStart)
+[[nodiscard]] constexpr bool StartsWith(std::string_view strView, std::string_view prefix, std::string& afterStart)
 {
     auto pos = strView.rfind(prefix, 0);
 
@@ -365,10 +365,8 @@ template<typename... Cs>
 // FIXME: Not valid for unicode strings
 [[nodiscard]] constexpr bool ContainsNoCase(std::string_view strView, std::string_view strToFind)
 {
-    std::string str = ToLowerCopy(strView);
-    std::string substrToFind = ToLowerCopy(strToFind);
-
-    return str.find(substrToFind) != std::string::npos;
+    return std::ranges::search(strView, strToFind, {}, ToLowerCh, ToLowerCh).begin() != strView.end();
 }
+
 
 } // export namespace wx::utils
