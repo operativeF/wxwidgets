@@ -29,7 +29,7 @@ inline constexpr unsigned int wxEL_ALLOW_DELETE  = 0x0400;
 inline constexpr unsigned int wxEL_NO_REORDER    = 0x0800;
 inline constexpr unsigned int wxEL_DEFAULT_STYLE = wxEL_ALLOW_NEW | wxEL_ALLOW_EDIT | wxEL_ALLOW_DELETE;
 
-inline constexpr char wxEditableListBoxNameStr[] = "editableListBox";
+inline constexpr std::string_view wxEditableListBoxNameStr = "editableListBox";
 
 // This class provides a composite control that lets the
 // user easily enter list of strings
@@ -44,7 +44,7 @@ public:
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
                       unsigned int style = wxEL_DEFAULT_STYLE,
-                      const std::string& name = wxEditableListBoxNameStr)
+                      std::string_view name = wxEditableListBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -54,7 +54,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxEL_DEFAULT_STYLE,
-                const std::string& name = wxEditableListBoxNameStr);
+                std::string_view name = wxEditableListBoxNameStr);
 
     void SetStrings(const std::vector<std::string>& strings);
     std::vector<std::string> GetStrings() const;

@@ -178,7 +178,7 @@ void wxNumValidatorBase::OnKillFocus(wxFocusEvent& event)
     if ( !control )
         return;
 
-    const wxString& valueNorm = NormalizeString(control->GetValue());
+    const std::string valueNorm = NormalizeString(control->GetValue()).ToStdString();
     if ( control->GetValue() == valueNorm )
     {
         // Don't do anything at all if the value doesn't really change, even if

@@ -29,22 +29,22 @@ public:
 
     wxSearchCtrl();
     wxSearchCtrl(wxWindow *parent, wxWindowID id,
-               const std::string& value = {},
+               std::string_view value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const std::string& name = wxSearchCtrlNameStr);
+               std::string_view name = wxSearchCtrlNameStr);
 
     ~wxSearchCtrl();
 
     bool Create(wxWindow *parent, wxWindowID id,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxSearchCtrlNameStr);
+                std::string_view name = wxSearchCtrlNameStr);
 
 #if wxUSE_MENUS
     // get/set search button menu
@@ -80,7 +80,7 @@ public:
 
     std::string GetStringSelection() const override;
 
-    void ChangeValue(const std::string& value) override;
+    void ChangeValue(std::string_view value) override;
 
     // editing
     void Clear() override;
@@ -101,7 +101,7 @@ public:
 
     // writing text inserts it at the current position, appending always
     // inserts it at the end
-    void WriteText(const std::string& text) override;
+    void WriteText(std::string_view text) override;
     void AppendText(const std::string& text) override;
 
     // insert the character which would have resulted from this key event,
@@ -178,7 +178,7 @@ public:
 #endif // wxUSE_MENUS
 
 protected:
-    void DoSetValue(const std::string& value, unsigned int flags) override;
+    void DoSetValue(std::string_view value, unsigned int flags) override;
     std::string DoGetValue() const override;
 
     bool DoLoadFile(const std::string& file, int fileType) override;

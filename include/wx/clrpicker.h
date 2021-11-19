@@ -24,8 +24,8 @@ import <string>;
 
 class wxColourPickerEvent;
 
-inline constexpr char wxColourPickerCtrlNameStr[] = "colourpicker";
-inline constexpr char wxColourPickerWidgetNameStr[] = "colourpickerwidget";
+inline constexpr std::string_view wxColourPickerCtrlNameStr = "colourpicker";
+inline constexpr std::string_view wxColourPickerWidgetNameStr = "colourpickerwidget";
 
 // show the colour in HTML form (#AABBCC) as colour button label
 inline constexpr unsigned int wxCLRBTN_SHOW_LABEL = 100;
@@ -108,7 +108,7 @@ public:
         const wxColour& col = *wxBLACK, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, unsigned int style = wxCLRP_DEFAULT_STYLE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxColourPickerCtrlNameStr)
+        std::string_view name = wxColourPickerCtrlNameStr)
         { Create(parent, id, col, pos, size, style, validator, name); }
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
@@ -117,7 +117,7 @@ public:
            const wxSize& size = wxDefaultSize,
            unsigned int style = wxCLRP_DEFAULT_STYLE,
            const wxValidator& validator = wxDefaultValidator,
-           const std::string& name = wxColourPickerCtrlNameStr);
+           std::string_view name = wxColourPickerCtrlNameStr);
 
     // get the colour chosen
     wxColour GetColour() const

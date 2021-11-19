@@ -17,7 +17,7 @@
 import Utils.Geometry.Size;
 import <string>;
 
-inline constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
+inline constexpr std::string_view wxAddRemoveCtrlNameStr = "wxAddRemoveCtrl";
 
 // ----------------------------------------------------------------------------
 // wxAddRemoveAdaptor: used by wxAddRemoveCtrl to work with the list control
@@ -62,7 +62,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    const std::string& name = wxAddRemoveCtrlNameStr)
+                    std::string_view name = wxAddRemoveCtrlNameStr)
     {
         Create(parent, winid, pos, size, style, name);
     }
@@ -74,7 +74,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxAddRemoveCtrlNameStr);
+                std::string_view name = wxAddRemoveCtrlNameStr);
 
     ~wxAddRemoveCtrl();
 

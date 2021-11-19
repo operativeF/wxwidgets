@@ -29,7 +29,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTB_DEFAULT_STYLE,
-                const std::string& name = wxToolBarNameStr)
+                std::string_view name = wxToolBarNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -41,7 +41,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTB_DEFAULT_STYLE,
-                const std::string& name = wxToolBarNameStr);
+                std::string_view name = wxToolBarNameStr);
 
     ~wxToolBar();
 

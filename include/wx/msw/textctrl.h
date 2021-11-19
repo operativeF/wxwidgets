@@ -23,12 +23,12 @@ public:
 
     wxTextCtrl() = default;
     wxTextCtrl(wxWindow *parent, wxWindowID id,
-               const std::string& value = {},
+               std::string_view value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const std::string& name = wxTextCtrlNameStr)
+               std::string_view name = wxTextCtrlNameStr)
     {
         Create(parent, id, value, pos, size, style, validator, name);
     }
@@ -38,12 +38,12 @@ public:
     wxTextCtrl& operator=(wxTextCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxTextCtrlNameStr);
+                std::string_view name = wxTextCtrlNameStr);
 
     // overridden wxTextEntry methods
     // ------------------------------
@@ -53,7 +53,7 @@ public:
 
     virtual bool IsEmpty() const;
 
-    void WriteText(const std::string& text) override;
+    void WriteText(std::string_view text) override;
     void AppendText(const std::string& text) override;
     void Clear() override;
 
@@ -204,11 +204,11 @@ protected:
     //
     // this is used by ctor/Create() and when we need to recreate the control
     // later
-    bool MSWCreateText(const std::string& value,
+    bool MSWCreateText(std::string_view value,
                        const wxPoint& pos,
                        const wxSize& size);
 
-    void DoSetValue(const std::string& value, unsigned int flags = 0) override;
+    void DoSetValue(std::string_view value, unsigned int flags = 0) override;
 
     wxPoint DoPositionToCoords(long pos) const override;
 
@@ -218,7 +218,7 @@ protected:
 
     // replace the contents of the selection or of the entire control with the
     // given text
-    void DoWriteText(const std::string& text,
+    void DoWriteText(std::string_view text,
                      unsigned int flags = SetValue_SendEvent | SetValue_SelectionOnly);
 
     // set the selection (possibly without scrolling the caret into view)

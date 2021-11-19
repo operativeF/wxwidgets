@@ -269,7 +269,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     UpdateOldSelections();
 }
 
-int wxListBox::FindString(const std::string& s, bool bCase) const
+int wxListBox::FindString(std::string_view s, bool bCase) const
 {
     // back to base class search for not native search type
     if (bCase)

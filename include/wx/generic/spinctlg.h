@@ -51,13 +51,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const std::string& name = "wxSpinCtrl");
+                std::string_view name = std::string_view{"wxSpinCtrl"});
 
     ~wxSpinCtrlGenericBase();
 
@@ -70,7 +70,7 @@ public:
     // unsigned GetDigits() const                   - wxSpinCtrlDouble only
 
     // operations
-    void SetValue(const wxString& text) override;
+    void SetValue(std::string_view text) override;
     // void SetValue(T val)
     // void SetRange(T minVal, T maxVal)
     // void SetIncrement(T inc)
@@ -141,7 +141,7 @@ protected:
 
     // Convert the text to/from the corresponding value.
     virtual bool DoTextToValue(const wxString& text, double *val) = 0;
-    virtual wxString DoValueToText(double val) = 0;
+    virtual std::string DoValueToText(double val) = 0;
 
     // check if the value is in range
     bool InRange(double n) const { return (n >= m_min) && (n <= m_max); }
@@ -194,13 +194,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const std::string& name = "wxSpinCtrl")
+                std::string_view name = std::string_view{"wxSpinCtrl"})
     {
         m_min = min;
         m_max = max;
@@ -289,24 +289,24 @@ public:
     wxSpinCtrl() = default;
     wxSpinCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
-               const std::string& value = {},
+               std::string_view value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
-               const std::string& name = "wxSpinCtrl")
+               std::string_view name = std::string_view{"wxSpinCtrl"})
     {
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
-                const std::string& name = "wxSpinCtrl")
+                std::string_view name = std::string_view{"wxSpinCtrl"})
     {
         return wxSpinCtrlGenericBase::Create(parent, id, value, pos, size,
                                              style, min, max, initial, 1, name);
@@ -330,7 +330,7 @@ protected:
     void DoSendEvent() override;
 
     bool DoTextToValue(const wxString& text, double *val) override;
-    wxString DoValueToText(double val) override;
+    std::string DoValueToText(double val) override;
     void ResetTextValidator() override;
 
 private:
@@ -351,13 +351,13 @@ public:
     wxSpinCtrlDouble() = default;
     wxSpinCtrlDouble(wxWindow *parent,
                      wxWindowID id = wxID_ANY,
-                     const std::string& value = {},
+                     std::string_view value = {},
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxSP_ARROW_KEYS,
                      double min = 0, double max = 100, double initial = 0,
                      double inc = 1,
-                     const std::string& name = "wxSpinCtrlDouble")
+                     std::string_view name = "wxSpinCtrlDouble")
     {
         Create(parent, id, value, pos, size, style,
                min, max, initial, inc, name);
@@ -365,13 +365,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const std::string& name = "wxSpinCtrlDouble")
+                std::string_view name = std::string_view{"wxSpinCtrlDouble"})
     {
         DetermineDigits(inc);
         return wxSpinCtrlGenericBase::Create(parent, id, value, pos, size,
@@ -386,7 +386,7 @@ public:
     unsigned GetDigits() const { return m_digits; }
 
     // operations
-    void SetValue(const wxString& value) override
+    void SetValue(std::string_view value) override
         { wxSpinCtrlGenericBase::SetValue(value); }
     void SetValue(double value)                 { DoSetValue(value, SendEvent::None); }
     void SetRange(double minVal, double maxVal) { DoSetRange(minVal, maxVal); }
@@ -405,7 +405,7 @@ protected:
     void DoSendEvent() override;
 
     bool DoTextToValue(const wxString& text, double *val) override;
-    wxString DoValueToText(double val) override;
+    std::string DoValueToText(double val) override;
     void ResetTextValidator() override;
     void DetermineDigits(double inc);
 

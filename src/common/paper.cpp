@@ -31,8 +31,8 @@
  * Paper size database for all platforms
  */
 
-wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h)
-    : m_paperName(name),
+wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, std::string_view name, int w, int h)
+    : m_paperName{name.begin(), name.end()},
       m_paperId(paperId),
       m_platformId(platformId),
       m_width(w),
@@ -200,23 +200,23 @@ void wxPrintPaperDatabase::ClearDatabase()
     delete m_map;
 }
 
-void wxPrintPaperDatabase::AddPaperType(wxPaperSize paperId, const wxString& name, int w, int h)
+void wxPrintPaperDatabase::AddPaperType(wxPaperSize paperId, std::string name, int w, int h)
 {
     wxPrintPaperType* tmp = new wxPrintPaperType(paperId, 0, name, w, h);
     (*m_map)[name] = tmp;
     m_list->push_back(tmp);
 }
 
-void wxPrintPaperDatabase::AddPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h)
+void wxPrintPaperDatabase::AddPaperType(wxPaperSize paperId, int platformId, std::string name, int w, int h)
 {
     wxPrintPaperType* tmp = new wxPrintPaperType(paperId, platformId, name, w, h);
     (*m_map)[name] = tmp;
     m_list->push_back(tmp);
 }
 
-wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(const wxString& name) const
+wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(std::string_view name) const
 {
-    wxStringToPrintPaperTypeHashMap::iterator it = m_map->find(name);
+    auto it = m_map->find(name);
     if (it != m_map->end())
         return it->second;
     else
@@ -269,7 +269,7 @@ wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(const wxSize& sz) const
 }
 
 // Convert name to size id
-wxPaperSize wxPrintPaperDatabase::ConvertNameToId(const wxString& name) const
+wxPaperSize wxPrintPaperDatabase::ConvertNameToId(std::string_view name) const
 {
     wxPrintPaperType* type = FindPaperType(name);
     if (type)

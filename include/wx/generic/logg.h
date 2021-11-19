@@ -100,7 +100,7 @@ private:
     virtual void DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                            const std::vector<int>& severities,
                                            const std::vector<long>& times,
-                                           const wxString& title,
+                                           std::string_view title,
                                            unsigned int style);
 };
 

@@ -95,7 +95,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                const wxValidator& validator = wxDefaultValidator,
-               const std::string& name = wxTreeCtrlNameStr)
+               std::string_view name = wxTreeCtrlNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -109,7 +109,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxTreeCtrlNameStr);
+                std::string_view name = wxTreeCtrlNameStr);
 
     unsigned int GetCount() const override;
 

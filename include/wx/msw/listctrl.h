@@ -87,7 +87,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxLC_ICON,
                const wxValidator& validator = wxDefaultValidator,
-               const std::string& name = wxListCtrlNameStr)
+               std::string_view name = wxListCtrlNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -102,7 +102,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxLC_ICON,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxListCtrlNameStr);
+                std::string_view name = wxListCtrlNameStr);
 
     // Set the control colours
     bool SetForegroundColour(const wxColour& col) override;

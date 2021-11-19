@@ -329,9 +329,9 @@ bool wxGenericValidator::TransferToWindow()
         }
         else if (m_pInt)
         {
-            wxString str;
-            str.Printf("%d", *m_pInt);
+            std::string str = fmt::format("{:d}", *m_pInt);
             pControl->SetValue(str);
+
             return true;
         }
         else if (m_pFileName)

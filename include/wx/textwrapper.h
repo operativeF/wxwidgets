@@ -27,7 +27,7 @@ public:
 
     // win is used for getting the font, text is the text to wrap, width is the
     // max line width or -1 to disable wrapping
-    void Wrap(wxWindow *win, const std::string& text, int widthMax);
+    void Wrap(wxWindow *win, std::string_view text, int widthMax);
 
     virtual ~wxTextWrapper() = default;
 
@@ -84,7 +84,7 @@ public:
         m_win = win;
     }
 
-    wxSizer *CreateSizer(const std::string& text, int widthMax)
+    wxSizer *CreateSizer(std::string_view text, int widthMax)
     {
         m_sizer = new wxBoxSizer(wxVERTICAL);
         Wrap(m_win, text, widthMax);

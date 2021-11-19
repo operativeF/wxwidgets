@@ -3923,7 +3923,7 @@ WXHWND wxWindowMSW::MSWGetParent() const
 }
 
 bool wxWindowMSW::MSWCreate(const std::string& wclass,
-                            const std::string& title,
+                            std::string_view title,
                             const wxPoint& pos,
                             const wxSize& size,
                             DWORD style,
@@ -3973,7 +3973,7 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
 }
 
 WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
-                                                 const std::string& title, DWORD style,
+                                                 std::string_view title, DWORD style,
                                                  wxRect boundary,
                                                  WXHWND parent, wxWindowID id)
 {

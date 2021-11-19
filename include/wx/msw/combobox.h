@@ -59,7 +59,7 @@ public:
     // classes
     void Clear() override;
     std::string GetValue() const override;
-    void SetValue(const std::string& value) override;
+    void SetValue(std::string_view value) override;
     std::string GetStringSelection() const override
         { return wxChoice::GetStringSelection(); }
     virtual void Popup() { MSWDoPopupOrDismiss(true); }

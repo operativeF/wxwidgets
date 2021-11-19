@@ -47,7 +47,7 @@ std::string wxTextEntryBase::GetRange(long from, long to) const
 // text operations
 // ----------------------------------------------------------------------------
 
-void wxTextEntryBase::ChangeValue(const std::string& value)
+void wxTextEntryBase::ChangeValue(std::string_view value)
 {
     DoSetValue(value, SetValue_NoEvent);
 
@@ -63,7 +63,7 @@ void wxTextEntryBase::AppendText(const std::string& text)
     WriteText(text);
 }
 
-void wxTextEntryBase::DoSetValue(const std::string& value, unsigned int flags)
+void wxTextEntryBase::DoSetValue(std::string_view value, unsigned int flags)
 {
     if ( value != DoGetValue() )
     {

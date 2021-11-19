@@ -83,7 +83,7 @@ wxCONSTRUCTOR_6( wxStaticText, wxWindow*, Parent, wxWindowID, Id, \
 // wxTextWrapper
 // ----------------------------------------------------------------------------
 
-void wxTextWrapper::Wrap(wxWindow *win, const std::string& text, int widthMax)
+void wxTextWrapper::Wrap(wxWindow *win, std::string_view text, int widthMax)
 {
     const wxClientDC dc(win);
 

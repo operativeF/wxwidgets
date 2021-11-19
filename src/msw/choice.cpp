@@ -258,7 +258,7 @@ size_t wxChoice::GetCount() const
     return ::SendMessageW(GetHwnd(), CB_GETCOUNT, 0, 0);
 }
 
-int wxChoice::FindString(const std::string& s, bool bCase) const
+int wxChoice::FindString(std::string_view s, bool bCase) const
 {
    //TODO:  Evidently some MSW versions (all?) don't like empty strings
    //passed to SendMessage, so we have to do it ourselves in that case

@@ -78,7 +78,7 @@ public:
     // except that the line terminator characters are changed to correspond the
     // given type. Called with the default argument, the function translates
     // the string to the native format (Unix for Unix, DOS for Windows, ...).
-    static std::string Translate(const std::string& text,
+    static std::string Translate(std::string_view text,
                                  wxTextFileType type = typeDefault);
 
     // get the buffer termination string

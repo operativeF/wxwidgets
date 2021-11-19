@@ -59,7 +59,7 @@ bool wxButton::Create(wxWindow *parent,
                       const wxSize& size,
                       unsigned int style,
                       const wxValidator& validator,
-                      const std::string& name)
+                      const std::string_view name)
 {
     std::string label;
     if ( !(style & wxBU_NOTEXT) )

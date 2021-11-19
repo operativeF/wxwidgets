@@ -29,13 +29,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileDirPickerEvent, wxCommandEvent);
 bool wxFileDirPickerCtrlBase::CreateBase(wxWindow *parent,
                                          wxWindowID id,
                                          const std::string& path,
-                                         const std::string& message,
+                                         std::string_view message,
                                          const std::string& wildcard,
                                          const wxPoint &pos,
                                          const wxSize &size,
                                          unsigned int style,
                                          const wxValidator& validator,
-                                         const std::string& name )
+                                         std::string_view name )
 {
     if (!wxPickerBase::CreateBase(parent, id, path, pos, size,
                                    style, validator, name))
@@ -155,13 +155,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFilePickerCtrl, wxPickerBase);
 bool wxFilePickerCtrl::Create(wxWindow *parent,
                               wxWindowID id,
                               const std::string& path,
-                              const std::string& message,
+                              std::string_view message,
                               const std::string& wildcard,
                               const wxPoint& pos,
                               const wxSize& size,
                               unsigned int style,
                               const wxValidator& validator,
-                              const std::string& name)
+                              std::string_view name)
 {
     if ( !wxFileDirPickerCtrlBase::CreateBase
                                    (
@@ -196,12 +196,12 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDirPickerCtrl, wxPickerBase);
 bool wxDirPickerCtrl::Create(wxWindow *parent,
                              wxWindowID id,
                              const std::string& path,
-                             const std::string& message,
+                             std::string_view message,
                              const wxPoint& pos,
                              const wxSize& size,
                              unsigned int style,
                              const wxValidator& validator,
-                             const std::string& name)
+                             std::string_view name)
 {
     if ( !wxFileDirPickerCtrlBase::CreateBase
                                    (

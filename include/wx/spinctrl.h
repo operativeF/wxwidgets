@@ -46,7 +46,7 @@ public:
     // unsigned GetDigits() const                   - wxSpinCtrlDouble only
 
     // operation functions that derived classes are expected to have
-    virtual void SetValue(const wxString& value) = 0;
+    virtual void SetValue(std::string_view value) = 0;
     // void SetValue(T val)
     // void SetRange(T minVal, T maxVal)
     // void SetIncrement(T inc)

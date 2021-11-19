@@ -43,9 +43,9 @@ public:
     }
 
     wxTextEntryDialog(wxWindow *parent,
-                      const std::string& message,
-                      const std::string& caption = wxGetTextFromUserPromptStr,
-                      const std::string& value = {},
+                      std::string_view message,
+                      std::string_view caption = wxGetTextFromUserPromptStr,
+                      std::string_view value = {},
                       unsigned int style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
@@ -53,9 +53,9 @@ public:
     }
 
     bool Create(wxWindow *parent,
-                const std::string& message,
-                const std::string& caption = wxGetTextFromUserPromptStr,
-                const std::string& value = {},
+                std::string_view message,
+                std::string_view caption = wxGetTextFromUserPromptStr,
+                std::string_view value = {},
                 unsigned int style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
@@ -99,9 +99,9 @@ class wxPasswordEntryDialog : public wxTextEntryDialog
 public:
     wxPasswordEntryDialog() = default;
     wxPasswordEntryDialog(wxWindow *parent,
-                      const std::string& message,
-                      const std::string& caption = wxGetPasswordFromUserPromptStr,
-                      const std::string& value = {},
+                      std::string_view message,
+                      std::string_view caption = wxGetPasswordFromUserPromptStr,
+                      std::string_view value = {},
                       unsigned int style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
@@ -109,9 +109,9 @@ public:
     }
 
     bool Create(wxWindow *parent,
-                const std::string& message,
-                const std::string& caption = wxGetPasswordFromUserPromptStr,
-                const std::string& value = {},
+                std::string_view message,
+                std::string_view caption = wxGetPasswordFromUserPromptStr,
+                std::string_view value = {},
                 unsigned int style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
@@ -127,22 +127,22 @@ private:
 // ----------------------------------------------------------------------------
 
 std::string
-    wxGetTextFromUser(const std::string& message,
-                    const std::string& caption = wxGetTextFromUserPromptStr,
-                    const std::string& default_value = {},
-                    wxWindow *parent = nullptr,
-                    wxCoord x = wxDefaultCoord,
-                    wxCoord y = wxDefaultCoord,
-                    bool centre = true);
+    wxGetTextFromUser(std::string_view message,
+                      std::string_view caption = wxGetTextFromUserPromptStr,
+                      std::string_view default_value = {},
+                      wxWindow *parent = nullptr,
+                      wxCoord x = wxDefaultCoord,
+                      wxCoord y = wxDefaultCoord,
+                      bool centre = true);
 
 std::string
-    wxGetPasswordFromUser(const std::string& message,
-                        const std::string& caption = wxGetPasswordFromUserPromptStr,
-                        const std::string& default_value = {},
-                        wxWindow *parent = nullptr,
-                        wxCoord x = wxDefaultCoord,
-                        wxCoord y = wxDefaultCoord,
-                        bool centre = true);
+    wxGetPasswordFromUser(std::string_view message,
+                          std::string_view caption = wxGetPasswordFromUserPromptStr,
+                          std::string_view default_value = {},
+                          wxWindow *parent = nullptr,
+                          wxCoord x = wxDefaultCoord,
+                          wxCoord y = wxDefaultCoord,
+                          bool centre = true);
 
 #endif
     // wxUSE_TEXTDLG

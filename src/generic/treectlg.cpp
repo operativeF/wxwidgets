@@ -98,7 +98,7 @@ protected:
     void Finish( bool setfocus );
 
 private:
-    wxString            m_startValue;
+    std::string         m_startValue;
 
     wxGenericTreeCtrl  *m_owner;
     wxGenericTreeItem  *m_itemEdited;
@@ -930,7 +930,7 @@ bool wxGenericTreeCtrl::Create(wxWindow *parent,
                                const wxSize& size,
                                unsigned int style,
                                const wxValidator& validator,
-                               const std::string& name )
+                               std::string_view name )
 {
     if ( !wxControl::Create( parent, id, pos, size,
                              style|wxHSCROLL|wxVSCROLL|wxWANTS_CHARS,

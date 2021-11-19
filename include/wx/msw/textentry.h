@@ -26,7 +26,7 @@ public:
     ~wxTextEntry();
 
     // implement wxTextEntryBase pure virtual methods
-    void WriteText(const std::string& text) override;
+    void WriteText(std::string_view text) override;
     void Remove(long from, long to) override;
 
     void Copy() override;

@@ -33,7 +33,7 @@ std::string wxItemContainerImmutable::GetStringSelection() const
     return s;
 }
 
-bool wxItemContainerImmutable::SetStringSelection(const std::string& s)
+bool wxItemContainerImmutable::SetStringSelection(std::string_view s)
 {
     const int sel = FindString(s);
     if ( sel == wxNOT_FOUND )

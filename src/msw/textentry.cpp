@@ -668,7 +668,7 @@ wxTextEntry::~wxTextEntry()
 // operations on text
 // ----------------------------------------------------------------------------
 
-void wxTextEntry::WriteText(const std::string& text)
+void wxTextEntry::WriteText(std::string_view text)
 {
     ::SendMessageW(GetEditHwnd(), EM_REPLACESEL, 0, reinterpret_cast<LPARAM>(boost::nowide::widen(text).c_str()));
 }
@@ -681,7 +681,7 @@ std::string wxTextEntry::DoGetValue() const
 void wxTextEntry::Remove(long from, long to)
 {
     DoSetSelection(from, to, SetSel_NoScroll);
-    WriteText(wxString());
+    WriteText("");
 }
 
 // ----------------------------------------------------------------------------

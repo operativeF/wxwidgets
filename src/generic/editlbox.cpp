@@ -30,7 +30,7 @@ public:
                   const wxSize &size = wxDefaultSize,
                   unsigned int style = wxLC_ICON,
                   const wxValidator& validator = wxDefaultValidator,
-                  const std::string& name = wxListCtrlNameStr)
+                  std::string_view name = wxListCtrlNameStr)
          : wxListCtrl(parent, id, pos, size, style, validator, name)
     {
         CreateColumns();
@@ -97,7 +97,7 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
                           const std::string& label,
                           const wxPoint& pos, const wxSize& size,
                           unsigned int style,
-                          const std::string& name)
+                          std::string_view name)
 {
     if (!wxPanel::Create(parent, id, pos, size, wxTAB_TRAVERSAL, name))
         return false;

@@ -45,7 +45,7 @@ public:
                 const wxSize& size,
                 unsigned int style,
                 const wxValidator& validator,
-                const std::string& name)
+                std::string_view name)
     {
         // We use wxBU_NOTEXT to let the base class Create() know that we are
         // not going to show the label: this is a hack needed for wxGTK where

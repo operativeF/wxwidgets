@@ -19,7 +19,7 @@
 // implementation
 // ============================================================================
 
-wxString wxDirSelector(const wxString& message,
+wxString wxDirSelector(std::string_view message,
                        const wxString& defaultPath,
                        unsigned int style,
                        const wxPoint& pos,

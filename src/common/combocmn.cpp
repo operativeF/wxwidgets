@@ -640,7 +640,7 @@ void wxComboPopup::SetStringValue( const std::string& WXUNUSED(value) )
 {
 }
 
-bool wxComboPopup::FindItem(const std::string& WXUNUSED(item),
+bool wxComboPopup::FindItem(std::string_view WXUNUSED(item),
                             std::string* WXUNUSED(trueItem))
 {
     return true;
@@ -947,12 +947,12 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxComboCtrlBase, wxControl);
 
 bool wxComboCtrlBase::Create(wxWindow *parent,
                              wxWindowID id,
-                             const std::string& value,
+                             std::string_view value,
                              const wxPoint& pos,
                              const wxSize& size,
                              unsigned int style,
                              const wxValidator& validator,
-                             const std::string& name)
+                             std::string_view name)
 {
     if ( !wxControl::Create(parent,
                             id,
@@ -963,7 +963,7 @@ bool wxComboCtrlBase::Create(wxWindow *parent,
                             name) )
         return false;
 
-    m_valueString = value;
+    m_valueString = {value.begin(), value.end()};
 
     // Get colours
     OnThemeChange();
@@ -2653,14 +2653,14 @@ std::string wxComboCtrlBase::DoGetValue() const
     return m_valueString;
 }
 
-void wxComboCtrlBase::OnSetValue(const std::string& value)
+void wxComboCtrlBase::OnSetValue(std::string_view value)
 {
     // Since wxComboPopup may want to paint the combo as well, we need
     // to set the string value here (as well as sometimes in ShowPopup).
     if ( m_valueString != value )
     {
         bool found = true;
-        std::string trueValue = value;
+        std::string trueValue = {value.begin(), value.end()};
 
         // Conform to wxComboBox behaviour: read-only control can only accept
         // valid list items and empty string
@@ -2758,7 +2758,7 @@ long wxComboCtrlBase::GetLastPosition() const
     return 0;
 }
 
-void wxComboCtrlBase::WriteText(const std::string& text)
+void wxComboCtrlBase::WriteText(std::string_view text)
 {
     if ( m_text )
     {
@@ -2771,7 +2771,7 @@ void wxComboCtrlBase::WriteText(const std::string& text)
     }
 }
 
-void wxComboCtrlBase::DoSetValue(const std::string& value, unsigned int flags)
+void wxComboCtrlBase::DoSetValue(std::string_view value, unsigned int flags)
 {
     if ( m_text )
     {

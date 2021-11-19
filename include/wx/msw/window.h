@@ -273,7 +273,7 @@ public:
     //
     // returns true if the window has been created, false if creation failed
     bool MSWCreate(const std::string& wclass,
-                   const std::string& title = {},
+                   std::string_view title = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    DWORD style = 0,
@@ -793,7 +793,7 @@ private:
 
 protected:
     WXHWND MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
-                                        const std::string& title, DWORD style,
+                                        std::string_view title, DWORD style,
                                         wxRect boundary,
                                         WXHWND parent, wxWindowID id);
 

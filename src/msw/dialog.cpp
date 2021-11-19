@@ -63,11 +63,11 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxDialogModalData)
 
 bool wxDialog::Create(wxWindow *parent,
                       wxWindowID id,
-                      const std::string& title,
+                      std::string_view title,
                       const wxPoint& pos,
                       const wxSize& size,
                       unsigned int style,
-                      const std::string& name)
+                      std::string_view name)
 {
     SetExtraStyle(GetExtraStyle() | wxTOPLEVEL_EX_DIALOG);
 

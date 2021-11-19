@@ -83,7 +83,7 @@ public:
                 const std::vector<wxString>& messages,
                 const std::vector<int>& severity,
                 const std::vector<long>& timess,
-                const wxString& caption,
+                std::string_view caption,
                 unsigned int style);
     ~wxLogDialog();
 
@@ -239,7 +239,7 @@ void
 wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                     const std::vector<int>& severities,
                                     const std::vector<long>& times,
-                                    const wxString& title,
+                                    std::string_view title,
                                     unsigned int style)
 {
 #if wxUSE_LOG_DIALOG
@@ -286,7 +286,7 @@ void wxLogGui::Flush()
         m_aMessages[nMsgCount - 1] << " (" << m_aMessages[nMsgCount - 2] << ")";
     }
 
-    const wxString title = GetTitle();
+    const std::string title = GetTitle();
     const unsigned int style = GetSeverityIcon();
 
     // avoid showing other log dialogs until we're done with the dialog we're
@@ -653,7 +653,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
                          const std::vector<wxString>& messages,
                          const std::vector<int>& severity,
                          const std::vector<long>& times,
-                         const wxString& caption,
+                         std::string_view caption,
                          unsigned int style)
            : wxDialog(parent, wxID_ANY, caption,
                       wxDefaultPosition, wxDefaultSize,
@@ -708,7 +708,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     }
 
     // create the text sizer with a minimal size so that we are sure it won't be too small
-    wxString message = EllipsizeString(messages.back());
+    std::string message = EllipsizeString(messages.back());
     wxSizer *szText = CreateTextSizer(message);
     szText->SetMinSize(wxSize{std::min(300, wxDisplay().GetGeometry().GetSize().x / 3), -1});
 

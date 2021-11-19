@@ -33,6 +33,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
 #include "wx/valnum.h"
 #include "wx/valtext.h"
 
+import <charconv>;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -53,7 +55,7 @@ constexpr int SPINCTRLBUT_MAX = 32000; // large to avoid wrap around trouble
 class wxSpinCtrlTextGeneric : public wxTextCtrl
 {
 public:
-    wxSpinCtrlTextGeneric(wxSpinCtrlGenericBase *spin, const wxString& value, unsigned int style=0)
+    wxSpinCtrlTextGeneric(wxSpinCtrlGenericBase *spin, std::string_view value, unsigned int style=0)
         : wxTextCtrl(spin, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
                      // This is tricky: we want to honour all alignment flags
                      // except wxALIGN_CENTER_VERTICAL because it's the same
@@ -180,12 +182,12 @@ wxEND_EVENT_TABLE()
 
 bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
                                    wxWindowID id,
-                                   const std::string& value,
+                                   std::string_view value,
                                    const wxPoint& pos, const wxSize& size,
                                    unsigned int style,
                                    double min, double max, double initial,
                                    double increment,
-                                   const std::string& name)
+                                   std::string_view name)
 {
     // don't use borders for this control itself, it wouldn't look good with
     // the text control borders (but we might want to use style border bits to
@@ -208,8 +210,9 @@ bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
     // parameter unspecified)
     if ( !value.empty() )
     {
-        double d;
-        if ( DoTextToValue(value, &d) )
+        double d{};
+        auto [p, ec] = std::from_chars(value.data(), value.data() + value.size(), d);
+        if ( ec == std::errc() )
             m_value = d;
     }
 
@@ -486,12 +489,15 @@ std::string wxSpinCtrlGenericBase::GetTextValue() const
     return m_textCtrl ? m_textCtrl->GetValue() : "";
 }
 
-void wxSpinCtrlGenericBase::SetValue(const wxString& text)
+void wxSpinCtrlGenericBase::SetValue(std::string_view text)
 {
     wxCHECK_RET( m_textCtrl, "invalid call to wxSpinCtrl::SetValue" );
 
-    double val;
-    if ( DoTextToValue(text, &val) && InRange(val) )
+    double val{};
+
+    auto [p, ec] = std::from_chars(text.data(), text.data() + text.size(), val);
+
+    if ( (ec == std::errc()) && InRange(val) )
     {
         DoSetValue(val, SendEvent::None);
     }
@@ -527,7 +533,7 @@ bool wxSpinCtrlGenericBase::DoSetValue(double val, SendEvent sendEvent)
         }
     }
 
-    wxString str(DoValueToText(val));
+    std::string str = DoValueToText(val);
 
     if ((val != m_value) || (str != m_textCtrl->GetValue()))
     {
@@ -648,7 +654,7 @@ void wxSpinCtrl::DoSendEvent()
     GetEventHandler()->ProcessEvent( event );
 }
 
-bool wxSpinCtrl::DoTextToValue(const wxString& text, double *val)
+bool wxSpinCtrl::DoTextToValue(std::string_view text, double *val)
 {
     long lval;
     if ( !text.ToLong(&lval, GetBase()) )
@@ -659,19 +665,19 @@ bool wxSpinCtrl::DoTextToValue(const wxString& text, double *val)
     return true;
 }
 
-wxString wxSpinCtrl::DoValueToText(double val)
+std::string wxSpinCtrl::DoValueToText(double val)
 {
     switch ( GetBase() )
     {
         case 16:
-            return wxSpinCtrlImpl::FormatAsHex(static_cast<long>(val), GetMax());
+            return wxSpinCtrlImpl::FormatAsHex(static_cast<long>(val), GetMax()).ToStdString();
 
         default:
             wxFAIL_MSG( "Unsupported spin control base" );
             [[fallthrough]];
 
         case 10:
-            return wxString::Format("%ld", static_cast<long>(val));
+            return wxString::Format("%ld", static_cast<long>(val)).ToStdString();
     }
 }
 
@@ -717,9 +723,9 @@ bool wxSpinCtrlDouble::DoTextToValue(const wxString& text, double *val)
     return text.ToDouble(val);
 }
 
-wxString wxSpinCtrlDouble::DoValueToText(double val)
+std::string wxSpinCtrlDouble::DoValueToText(double val)
 {
-    return wxString::Format(m_format, val);
+    return wxString::Format(m_format, val).ToStdString();
 }
 
 void wxSpinCtrlDouble::SetDigits(unsigned digits)

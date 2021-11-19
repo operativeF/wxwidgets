@@ -301,7 +301,7 @@ WXLRESULT wxTopLevelWindowMSW::MSWWindowProc(WXUINT message, WXWPARAM wParam, WX
 }
 
 bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
-                                       const std::string& title,
+                                       std::string_view title,
                                        const wxPoint& pos,
                                        const wxSize& size)
 {
@@ -372,7 +372,7 @@ bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
     return true;
 }
 
-bool wxTopLevelWindowMSW::CreateFrame(const std::string& title,
+bool wxTopLevelWindowMSW::CreateFrame(std::string_view title,
                                       const wxPoint& pos,
                                       const wxSize& size)
 {
@@ -389,11 +389,11 @@ bool wxTopLevelWindowMSW::CreateFrame(const std::string& title,
 
 bool wxTopLevelWindowMSW::Create(wxWindow *parent,
                                  wxWindowID id,
-                                 const std::string& title,
+                                 std::string_view title,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  unsigned int style,
-                                 const std::string& name)
+                                 std::string_view name)
 {
     wxSize sizeReal = size;
     if ( !sizeReal.IsFullySpecified() )

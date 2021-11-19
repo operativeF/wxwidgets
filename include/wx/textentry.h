@@ -38,14 +38,14 @@ public:
     // -------------------
 
     // SetValue() generates a text change event, ChangeValue() doesn't
-    virtual void SetValue(const std::string& value)
+    virtual void SetValue(std::string_view value)
         { DoSetValue(value, SetValue_SendEvent); }
-    virtual void ChangeValue(const std::string& value);
+    virtual void ChangeValue(std::string_view value);
 
     // writing text inserts it at the current position replacing any current
     // selection, appending always inserts it at the end and doesn't remove any
     // existing text (but it will reset the selection if there is any)
-    virtual void WriteText(const std::string& text) = 0;
+    virtual void WriteText(std::string_view text) = 0;
     virtual void AppendText(const std::string& text);
 
     virtual std::string GetValue() const;
@@ -229,7 +229,7 @@ protected:
         SetValue_SelectionOnly = 2
     };
 
-    virtual void DoSetValue(const std::string& value, unsigned int flags);
+    virtual void DoSetValue(std::string_view value, unsigned int flags);
     virtual std::string DoGetValue() const = 0;
 
     // override this to return the associated window, it will be used for event
@@ -377,9 +377,9 @@ public:
     // We call it ourselves when this change generates an event but it's also
     // necessary to call it explicitly from wxTextEntry::ChangeValue() as it,
     // by design, does not generate any events.
-    void HandleTextUpdate(const std::string& text)
+    void HandleTextUpdate(std::string_view text)
     {
-        m_text = text;
+        m_text = {text.begin(), text.end()};
 
         // If we're called because of a call to Set or ChangeValue(), the
         // control may still have the hint text colour, reset it in this case.

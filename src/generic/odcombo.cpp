@@ -619,7 +619,7 @@ void wxVListBoxComboPopup::Delete( unsigned int item )
         SetSelection(wxNOT_FOUND);
 }
 
-int wxVListBoxComboPopup::FindString(const std::string& s, bool bCase) const
+int wxVListBoxComboPopup::FindString(std::string_view s, bool bCase) const
 {
     // FIXME: Stupid.
     const auto possibleMatch = std::find_if(m_strings.cbegin(), m_strings.cend(),
@@ -646,7 +646,7 @@ int wxVListBoxComboPopup::FindString(const std::string& s, bool bCase) const
 
 // TODO: Make test explicitly for this.
 // item.IsSameAs(str, false)
-bool wxVListBoxComboPopup::FindItem(const std::string& item, std::string* trueItem)
+bool wxVListBoxComboPopup::FindItem(std::string_view item, std::string* trueItem)
 {
     int idx = std::find_if(m_strings.cbegin(), m_strings.cend(),
         [item](const auto& str){
@@ -1040,12 +1040,12 @@ void wxOwnerDrawnComboBox::SetString(unsigned int n, const std::string& s)
     GetVListBoxComboPopup()->SetString(n,s);
 }
 
-int wxOwnerDrawnComboBox::FindString(const std::string& s, bool bCase) const
+int wxOwnerDrawnComboBox::FindString(std::string_view s, bool bCase) const
 {
     // TODO: OOB?
     if ( !m_popupInterface )
         return std::find_if(m_initChs.cbegin(), m_initChs.cend(),
-            [=](const auto& str){
+            [=](std::string_view str){
                 return wxItemContainerImmutable::FindString(str, bCase);
         }) - m_initChs.cbegin();
 
@@ -1060,7 +1060,7 @@ void wxOwnerDrawnComboBox::Select(int n)
 
     GetVListBoxComboPopup()->SetSelection(n);
 
-    wxString str;
+    std::string str;
     if ( n >= 0 )
         str = GetVListBoxComboPopup()->GetString(n);
 

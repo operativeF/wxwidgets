@@ -92,7 +92,7 @@ public:
     void OnComboCharEvent( wxKeyEvent& event ) override;
     void OnComboDoubleClick() override;
     bool LazyCreate() override;
-    bool FindItem(const std::string& item, std::string* trueItem) override;
+    bool FindItem(std::string_view item, std::string* trueItem) override;
     virtual void OnDPIChanged(wxDPIChangedEvent& event);
 
     // Item management
@@ -106,7 +106,7 @@ public:
     void SetString( int item, const std::string& str );
     std::string GetString( int item ) const;
     unsigned int GetCount() const;
-    int FindString(const std::string& s, bool bCase = false) const;
+    int FindString(std::string_view s, bool bCase = false) const;
     int GetSelection() const;
 
     //void Populate( int n, const wxString choices[] );
@@ -313,7 +313,7 @@ public:
     size_t GetCount() const override;
     std::string GetString(unsigned int n) const override;
     void SetString(unsigned int n, const std::string& s) override;
-    int FindString(const std::string& s, bool bCase = false) const override;
+    int FindString(std::string_view s, bool bCase = false) const override;
     virtual void Select(int n);
     int GetSelection() const override;
 

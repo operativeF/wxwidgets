@@ -49,7 +49,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
-               const std::string& name = wxTreeCtrlNameStr)
+               std::string_view name = wxTreeCtrlNameStr)
         : 
           wxScrollHelper(this)
     {
@@ -67,7 +67,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTR_DEFAULT_STYLE,
                 const wxValidator &validator = wxDefaultValidator,
-                const std::string& name = wxTreeCtrlNameStr);
+                std::string_view name = wxTreeCtrlNameStr);
 
     
     // ----------------------------------

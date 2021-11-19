@@ -52,7 +52,7 @@ bool wxCommandLinkButton::Create(wxWindow *parent,
                                  const wxSize& size,
                                  unsigned int style,
                                  const wxValidator& validator,
-                                 const std::string& name)
+                                 std::string_view name)
 {
     if ( ! wxGenericCommandLinkButton::Create(parent,
                                               id,

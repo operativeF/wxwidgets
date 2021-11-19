@@ -34,9 +34,9 @@ public:
     wxPrintPaperType() = default;
 
     // platformId is a platform-specific id, such as in Windows, DMPAPER_...
-    wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h);
+    wxPrintPaperType(wxPaperSize paperId, int platformId, std::string_view name, int w, int h);
 
-    wxString GetName() const { return wxGetTranslation(m_paperName); }
+    std::string GetName() const { return wxGetTranslation(m_paperName).ToStdString(); }
     wxPaperSize GetId() const { return m_paperId; }
     int GetPlatformId() const { return m_platformId; }
 
@@ -54,7 +54,7 @@ public:
     wxSize GetSizeDeviceUnits() const ;
 
 public:
-    wxString    m_paperName;
+    std::string m_paperName;
 
     int         m_platformId{0};
     int         m_width{0};  // In tenths of a millimetre
@@ -63,7 +63,18 @@ public:
     wxPaperSize m_paperId{wxPaperSize::None};
 };
 
-WX_DECLARE_STRING_HASH_MAP(wxPrintPaperType*, wxStringToPrintPaperTypeHashMap);
+// FIXME: Move to string_hash file.
+struct string_hash
+{
+    using hash_type = std::hash<std::string_view>;
+    using is_transparent = void;
+ 
+    size_t operator()(const char* str) const        { return hash_type{}(str); }
+    size_t operator()(std::string_view str) const   { return hash_type{}(str); }
+    size_t operator()(std::string const& str) const { return hash_type{}(str); }
+};
+
+using wxStringToPrintPaperTypeHashMap = std::unordered_map<std::string, wxPrintPaperType*, string_hash, std::equal_to<>>;
 
 class wxPrintPaperTypeList;
 
@@ -76,11 +87,11 @@ public:
     void CreateDatabase();
     void ClearDatabase();
 
-    void AddPaperType(wxPaperSize paperId, const wxString& name, int w, int h);
-    void AddPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h);
+    void AddPaperType(wxPaperSize paperId, std::string name, int w, int h);
+    void AddPaperType(wxPaperSize paperId, int platformId, std::string name, int w, int h);
 
     // Find by name
-    wxPrintPaperType *FindPaperType(const wxString& name) const;
+    wxPrintPaperType *FindPaperType(std::string_view name) const;
 
     // Find by size id
     wxPrintPaperType *FindPaperType(wxPaperSize id) const;
@@ -92,7 +103,7 @@ public:
     wxPrintPaperType *FindPaperType(const wxSize& size) const;
 
     // Convert name to size id
-    wxPaperSize ConvertNameToId(const wxString& name) const;
+    wxPaperSize ConvertNameToId(std::string_view name) const;
 
     // Convert size id to name
     wxString ConvertIdToName(wxPaperSize paperId) const;

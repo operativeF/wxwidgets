@@ -34,15 +34,15 @@ std::string wxTextBuffer::GetEOL(wxTextFileType type)
     }
 }
 
-std::string wxTextBuffer::Translate(const std::string& text, wxTextFileType type)
+std::string wxTextBuffer::Translate(std::string_view text, wxTextFileType type)
 {
     // don't do anything if there is nothing to do
     if ( type == wxTextFileType::None )
-        return text;
+        return {text.begin(), text.end()};
 
     // nor if it is empty
     if ( text.empty() )
-        return text;
+        return {};
 
     std::string eol = GetEOL(type);
     std::string result;

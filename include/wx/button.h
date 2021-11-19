@@ -19,7 +19,7 @@ import Utils.Geometry;
 
 #include "wx/anybutton.h"
 
-inline constexpr char wxButtonNameStr[] = "button";
+inline constexpr std::string_view wxButtonNameStr = "button";
 
 // ----------------------------------------------------------------------------
 // wxButton: a push button

@@ -32,15 +32,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxGenericDirButton, wxButton);
 
 bool wxGenericFileDirButton::Create(wxWindow *parent,
                                     wxWindowID id,
-                                    const std::string& label,
+                                    std::string_view label,
                                     const std::string& path,
-                                    const std::string& message,
+                                    std::string_view message,
                                     const std::string& wildcard,
                                     const wxPoint& pos,
                                     const wxSize& size,
                                     unsigned int style,
                                     const wxValidator& validator,
-                                    const std::string& name)
+                                    std::string_view name)
 {
     m_pickerStyle = style;
 

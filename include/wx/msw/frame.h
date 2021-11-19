@@ -27,7 +27,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxDEFAULT_FRAME_STYLE,
-            const std::string& name = wxFrameNameStr)
+            std::string_view name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
     }
@@ -38,7 +38,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr);
+                std::string_view name = wxFrameNameStr);
     
     bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) override;
 
@@ -49,7 +49,7 @@ public:
 #if wxUSE_TOOLBAR
     wxToolBar* CreateToolBar(unsigned int style = -1,
                              wxWindowID id = wxID_ANY,
-                             const std::string& name = "toolbar") override;
+                             std::string_view name = std::string_view{"toolbar"}) override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar
@@ -57,7 +57,7 @@ public:
     wxStatusBar* OnCreateStatusBar(int number = 1,
                                    unsigned int style = wxSTB_DEFAULT_STYLE,
                                    wxWindowID id = 0,
-                                   const std::string& name = wxStatusLineNameStr) override;
+                                   std::string_view name = wxStatusLineNameStr) override;
 
     // Hint to tell framework which status bar to use: the default is to use
     // native one for the platforms which support it (Win32), the generic one

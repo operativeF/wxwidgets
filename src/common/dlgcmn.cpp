@@ -163,14 +163,14 @@ wxDialogBase::GetParentForModalDialog(wxWindow *parent, unsigned int style) cons
 
 #if wxUSE_STATTEXT
 
-wxSizer *wxDialogBase::CreateTextSizer(const std::string& message, int widthMax)
+wxSizer *wxDialogBase::CreateTextSizer(std::string_view message, int widthMax)
 {
     wxTextSizerWrapper wrapper(this);
 
     return CreateTextSizer(message, wrapper, widthMax);
 }
 
-wxSizer *wxDialogBase::CreateTextSizer(const std::string& message,
+wxSizer *wxDialogBase::CreateTextSizer(std::string_view message,
                                        wxTextSizerWrapper& wrapper,
                                        int widthMax)
 {

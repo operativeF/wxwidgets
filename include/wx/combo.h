@@ -163,12 +163,12 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const std::string& value,
+                std::string_view value,
                 const wxPoint& pos,
                 const wxSize& size,
                 unsigned int style,
                 const wxValidator& validator,
-                const std::string& name);
+                std::string_view name);
 
     ~wxComboCtrlBase();
 
@@ -227,12 +227,12 @@ public:
     // NB: We basically need to override all of them because there is
     //     no guarantee how platform-specific wxTextEntry is implemented.
     //
-    void SetValue(const std::string& value) override
+    void SetValue(std::string_view value) override
         { wxTextEntryBase::SetValue(value); }
-    void ChangeValue(const std::string& value) override
+    void ChangeValue(std::string_view value) override
         { wxTextEntryBase::ChangeValue(value); }
 
-    void WriteText(const std::string& text) override;
+    void WriteText(std::string_view text) override;
     void AppendText(const std::string& text) override
         { wxTextEntryBase::AppendText(text); }
 
@@ -502,7 +502,7 @@ protected:
 
     // Called when text was changed programmatically
     // (e.g. from WriteText())
-    void OnSetValue(const std::string& value);
+    void OnSetValue(std::string_view value);
 
     // Installs standard input handler to combo (and optionally to the textctrl)
     void InstallInputHandlers();
@@ -598,7 +598,7 @@ protected:
 #endif
 
     // protected wxTextEntry methods
-    void DoSetValue(const std::string& value, unsigned int flags) override;
+    void DoSetValue(std::string_view value, unsigned int flags) override;
     std::string DoGetValue() const override;
     wxWindow *GetEditableWindow() override { return this; }
 
@@ -787,7 +787,7 @@ public:
     // implementation. If the found item matched the string, but is
     // different, it should be written back to pItem. Default implementation
     // always return true and does not alter trueItem.
-    virtual bool FindItem(const std::string& item, std::string* trueItem = nullptr);
+    virtual bool FindItem(std::string_view item, std::string* trueItem = nullptr);
 
     // This is called to custom paint in the combo control itself (ie. not the popup).
     // Default implementation draws value as string.

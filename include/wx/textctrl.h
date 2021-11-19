@@ -613,7 +613,7 @@ public:
                                             wxTextCoord *col,
                                             wxTextCoord *row) const;
     virtual std::string GetValue() const = 0;
-    virtual void SetValue(const std::string& value) = 0;
+    virtual void SetValue(std::string_view value) = 0;
 
 protected:
     // implementation of loading/saving
@@ -652,7 +652,7 @@ public:
     {
        return wxTextEntryBase::GetValue();
     }
-    void SetValue(const std::string& value) override
+    void SetValue(std::string_view value) override
     {
        wxTextEntryBase::SetValue(value);
     }
@@ -727,7 +727,9 @@ public:
     {
        return wxTextEntry::GetValue();
     }
-    void SetValue(const std::string& value) override
+
+    // FIXME: Use rvalue range template?
+    void SetValue(std::string_view value) override
     {
        wxTextEntry::SetValue(value);
     }

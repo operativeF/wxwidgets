@@ -323,13 +323,13 @@ void wxGenericDirCtrl::ExpandRoot()
 
 bool wxGenericDirCtrl::Create(wxWindow *parent,
                               wxWindowID treeid,
-                              const std::string& dir,
+                              std::string_view dir,
                               const wxPoint& pos,
                               const wxSize& size,
                               unsigned int style,
                               const std::string& filter,
                               int defaultFilter,
-                              const std::string& name)
+                              std::string_view name)
 {
     if (!wxControl::Create(parent, treeid, pos, size, style, wxDefaultValidator, name))
         return false;

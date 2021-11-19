@@ -28,7 +28,7 @@ public:
     wxStatusBar(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 unsigned int style = wxSTB_DEFAULT_STYLE,
-                const std::string& name = wxStatusBarNameStr)
+                std::string_view name = wxStatusBarNameStr)
     {
         Create(parent, id, style, name);
     }
@@ -36,7 +36,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 unsigned int style = wxSTB_DEFAULT_STYLE,
-                const std::string& name = wxStatusBarNameStr);
+                std::string_view name = wxStatusBarNameStr);
 
     ~wxStatusBar();
 

@@ -490,8 +490,8 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
                                        const wxPoint& pos,
                                        const wxSize& size,
                                        unsigned int style,
-                                       const wxString& name)
-    : wxDialog(parent, wxID_ANY, _("Printing"), pos, size, style, name)
+                                       std::string_view name)
+    : wxDialog(parent, wxID_ANY, _("Printing").ToStdString(), pos, size, style, name) // FIXME: Use std::string
 {
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
     mainSizer->Add(new wxStaticText(this, wxID_ANY, _("Please wait while printing...")),
@@ -1100,7 +1100,7 @@ public:
     explicit wxPrintPageTextCtrl(wxPreviewControlBar *preview)
         : wxTextCtrl(preview,
                      wxID_PREVIEW_GOTO,
-                     wxString(),
+                     "",
                      wxDefaultPosition,
                      // We use hardcoded maximal page number for the width
                      // instead of fitting it to the values we can show because
@@ -1645,7 +1645,7 @@ wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview,
                                const wxPoint& pos,
                                const wxSize& size,
                                unsigned int style,
-                               const std::string& name)
+                               std::string_view name)
     : wxFrame(parent, wxID_ANY, title, pos, size, style, name),
       m_printPreview(preview)
 {

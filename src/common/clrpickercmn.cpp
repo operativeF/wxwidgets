@@ -37,9 +37,9 @@ bool wxColourPickerCtrl::Create( wxWindow *parent,
                         const wxSize &size,
                         unsigned int style,
                         const wxValidator& validator,
-                        const std::string& name )
+                        std::string_view name )
 {
-    if (!wxPickerBase::CreateBase(parent, id, col.GetAsString(), pos, size,
+    if (!wxPickerBase::CreateBase(parent, id, col.GetAsString().ToStdString(), pos, size,
                                   style, validator, name))
         return false;
 
@@ -101,7 +101,7 @@ void wxColourPickerCtrl::UpdateTextCtrlFromPicker()
 
     // Take care to use ChangeValue() here and not SetValue() to avoid
     // infinite recursion.
-    m_text->ChangeValue(M_PICKER->GetColour().GetAsString());
+    m_text->ChangeValue(M_PICKER->GetColour().GetAsString().ToStdString());
 }
 
 

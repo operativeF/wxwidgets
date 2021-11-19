@@ -69,7 +69,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxDEFAULT_FRAME_STYLE,
-                 const std::string& name = wxFrameNameStr);
+                 std::string_view name = wxFrameNameStr);
 
     // frame state
     // -----------
@@ -112,12 +112,12 @@ public:
     virtual wxStatusBar* CreateStatusBar(int number = 1,
                                          unsigned int style = wxSTB_DEFAULT_STYLE,
                                          wxWindowID winid = 0,
-                                         const std::string& name = wxStatusLineNameStr);
+                                         std::string_view name = wxStatusLineNameStr);
     // return a new status bar
     virtual wxStatusBar *OnCreateStatusBar(int number,
                                            unsigned int style,
                                            wxWindowID winid,
-                                           const std::string& name);
+                                           std::string_view name);
     // get the main status bar
     virtual wxStatusBar *GetStatusBar() const { return m_frameStatusBar.get(); }
 
@@ -142,11 +142,11 @@ public:
     // create main toolbar bycalling OnCreateToolBar()
     virtual wxToolBar* CreateToolBar(unsigned int style = -1,
                                      wxWindowID winid = wxID_ANY,
-                                     const std::string& name = "toolbar");
+                                     std::string_view name = std::string_view{"toolbar"});
     // return a new toolbar
     virtual wxToolBar *OnCreateToolBar(unsigned int style,
                                        wxWindowID winid,
-                                       const std::string& name );
+                                       std::string_view name );
 
     // get/set the main toolbar
     virtual wxToolBar *GetToolBar() const { return m_frameToolBar.get(); }

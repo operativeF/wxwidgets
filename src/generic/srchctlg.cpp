@@ -44,7 +44,7 @@ constexpr int CANCEL_BITMAP_LIGHTNESS = 160; // a bit more lighter
 class wxSearchTextCtrl : public wxTextCtrl
 {
 public:
-    wxSearchTextCtrl(wxSearchCtrl *search, const std::string& value, int style)
+    wxSearchTextCtrl(wxSearchCtrl *search, std::string_view value, int style)
         : wxTextCtrl(search, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
                      (style & ~wxBORDER_MASK) | wxNO_BORDER | wxTE_PROCESS_ENTER),
           m_search(search)
@@ -63,7 +63,7 @@ public:
 
     // provide access to the base class protected methods to wxSearchCtrl which
     // needs to forward to them
-    void DoSetValue(const std::string& value, unsigned int flags) override
+    void DoSetValue(std::string_view value, unsigned int flags) override
     {
         wxTextCtrl::DoSetValue(value, flags);
     }
@@ -266,12 +266,12 @@ wxSearchCtrl::wxSearchCtrl()
 }
 
 wxSearchCtrl::wxSearchCtrl(wxWindow *parent, wxWindowID id,
-           const std::string& value,
+           std::string_view value,
            const wxPoint& pos,
            const wxSize& size,
            unsigned int style,
            const wxValidator& validator,
-           const std::string& name)
+           std::string_view name)
 {
     Init();
 
@@ -295,12 +295,12 @@ void wxSearchCtrl::Init()
 }
 
 bool wxSearchCtrl::Create(wxWindow *parent, wxWindowID id,
-            const std::string& value,
+            std::string_view value,
             const wxPoint& pos,
             const wxSize& size,
             unsigned int style,
             const wxValidator& validator,
-            const std::string& name)
+            std::string_view name)
 {
     if ( !wxSearchCtrlBaseBaseClass::Create(parent, id, pos, size,
                                             style, validator, name) )
@@ -646,7 +646,7 @@ void wxSearchCtrl::SetMaxLength(unsigned long len)
 
 // writing text inserts it at the current position, appending always
 // inserts it at the end
-void wxSearchCtrl::WriteText(const std::string& text)
+void wxSearchCtrl::WriteText(std::string_view text)
 {
     m_text->WriteText(text);
 }
@@ -895,12 +895,12 @@ void wxSearchCtrl::SetCancelBitmap( const wxBitmap& bitmap )
 // Note that overriding DoSetValue() is currently insufficient because the base
 // class ChangeValue() only updates m_hintData of this object (which is null
 // anyhow), instead of updating m_text->m_hintData, see #16998.
-void wxSearchCtrl::ChangeValue(const std::string& value)
+void wxSearchCtrl::ChangeValue(std::string_view value)
 {
     m_text->ChangeValue(value);
 }
 
-void wxSearchCtrl::DoSetValue(const std::string& value, unsigned int flags)
+void wxSearchCtrl::DoSetValue(std::string_view value, unsigned int flags)
 {
     m_text->DoSetValue(value, flags);
 }

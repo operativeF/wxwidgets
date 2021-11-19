@@ -32,15 +32,15 @@ public:
 
     wxGenericFileDirButton(wxWindow *parent,
                            wxWindowID id,
-                           const std::string& label = wxFilePickerWidgetLabel,
+                           std::string_view label = wxFilePickerWidgetLabel,
                            const std::string& path = {},
-                           const std::string& message = wxFileSelectorPromptStr,
+                           std::string_view message = wxFileSelectorPromptStr,
                            const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
                            unsigned int style = 0,
                            const wxValidator& validator = wxDefaultValidator,
-                           const std::string& name = wxFilePickerWidgetNameStr)
+                           std::string_view name = wxFilePickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, wildcard,
                pos, size, style, validator, name);
@@ -62,15 +62,15 @@ public:     // overridable
 public:
 
     bool Create(wxWindow *parent, wxWindowID id,
-           const std::string& label = wxFilePickerWidgetLabel,
+           std::string_view label = wxFilePickerWidgetLabel,
            const std::string& path = {},
-           const std::string &message = wxFileSelectorPromptStr,
+           std::string_view message = wxFileSelectorPromptStr,
            const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
            unsigned int style = 0,
            const wxValidator& validator = wxDefaultValidator,
-           const std::string& name = wxFilePickerWidgetNameStr);
+           std::string_view name = wxFilePickerWidgetNameStr);
 
     // event handler for the click
     void OnButtonClick(wxCommandEvent &);
@@ -101,15 +101,15 @@ public:
     wxGenericFileButton() = default;
     wxGenericFileButton(wxWindow *parent,
                         wxWindowID id,
-                        const std::string& label = wxFilePickerWidgetLabel,
+                        std::string_view label = wxFilePickerWidgetLabel,
                         const std::string& path = {},
-                        const std::string &message = wxFileSelectorPromptStr,
+                        std::string_view message = wxFileSelectorPromptStr,
                         const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxFILEBTN_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
-                        const std::string& name = wxFilePickerWidgetNameStr)
+                        std::string_view name = wxFilePickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, wildcard,
                pos, size, style, validator, name);
@@ -169,14 +169,14 @@ public:
     wxGenericDirButton() = default;
     wxGenericDirButton(wxWindow *parent,
                        wxWindowID id,
-                       const std::string& label = wxDirPickerWidgetLabel,
+                       std::string_view label = wxDirPickerWidgetLabel,
                        const std::string& path = {},
-                       const std::string &message = wxDirSelectorPromptStr,
+                       std::string_view message = wxDirSelectorPromptStr,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDIRBTN_DEFAULT_STYLE,
                        const wxValidator& validator = wxDefaultValidator,
-                       const std::string& name = wxDirPickerWidgetNameStr)
+                       std::string_view name = wxDirPickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, {},
                pos, size, style, validator, name);

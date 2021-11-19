@@ -68,14 +68,13 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
-                   const std::string& name = wxBannerWindowNameStr)
+                   std::string_view name = wxBannerWindowNameStr)
     {
         
-    m_direction = wxLEFT;
+        m_direction = wxLEFT;
 
-    m_colStart = *wxWHITE;
-    m_colEnd = *wxBLUE;
-
+        m_colStart = *wxWHITE;
+        m_colEnd = *wxBLUE;
 
         Create(parent, winid, dir, pos, size, style, name);
     }
@@ -89,7 +88,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxBannerWindowNameStr);
+                std::string_view name = wxBannerWindowNameStr);
 
 
     // Provide an existing bitmap to show. For wxLEFT orientation the bitmap is

@@ -31,7 +31,7 @@ public:
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = 0,
                         const wxValidator& validator = wxDefaultValidator,
-                        const std::string& name = wxButtonNameStr)
+                        std::string_view name = wxButtonNameStr)
          
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
@@ -47,7 +47,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxButtonNameStr);
+                std::string_view name = wxButtonNameStr);
 
     // do the same thing as in the generic case here
     void SetLabel(const std::string& label) override

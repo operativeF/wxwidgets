@@ -156,13 +156,13 @@ protected:
     bool CreateBase(wxWindow *parent,
                     wxWindowID id,
                     const std::string& path,
-                    const std::string& message,
+                    std::string_view message,
                     const std::string& wildcard,
                     const wxPoint& pos,
                     const wxSize& size,
                     unsigned int style,
                     const wxValidator& validator,
-                    const std::string& name);
+                    std::string_view name);
 
 public:         // public API
 
@@ -199,7 +199,7 @@ protected:
     virtual
     std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
-                                            const std::string& message,
+                                            std::string_view message,
                                             const std::string& wildcard) = 0;
 
 protected:
@@ -236,7 +236,7 @@ public:
     wxFilePickerCtrl(wxWindow *parent,
                      wxWindowID id,
                      const std::string& path = {},
-                     const std::string& message = wxFileSelectorPromptStr,
+                     std::string_view message = wxFileSelectorPromptStr,
                      const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
@@ -251,13 +251,13 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const std::string& path = {},
-                const std::string& message = wxFileSelectorPromptStr,
+                std::string_view message = wxFileSelectorPromptStr,
                 const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxFLP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxFilePickerCtrlNameStr);
+                std::string_view name = wxFilePickerCtrlNameStr);
 
     void SetFileName(const wxFileName &filename)
         { SetPath(filename.GetFullPath()); }
@@ -287,7 +287,7 @@ protected:
     
     std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
-                                            const std::string& message,
+                                            std::string_view message,
                                             const std::string& wildcard) override
     {
         return std::make_unique<wxFilePickerWidget>(parent, wxID_ANY,
@@ -340,24 +340,24 @@ public:
 
     wxDirPickerCtrl(wxWindow *parent, wxWindowID id,
                     const std::string& path = {},
-                    const std::string& message = wxDirSelectorPromptStr,
+                    std::string_view message = wxDirSelectorPromptStr,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = wxDIRP_DEFAULT_STYLE,
                     const wxValidator& validator = wxDefaultValidator,
-                    const std::string& name = wxDirPickerCtrlNameStr)
+                    std::string_view name = wxDirPickerCtrlNameStr)
     {
         Create(parent, id, path, message, pos, size, style, validator, name);
     }
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const std::string& path = {},
-                const std::string& message = wxDirSelectorPromptStr,
+                std::string_view message = wxDirSelectorPromptStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDIRP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxDirPickerCtrlNameStr);
+                std::string_view name = wxDirPickerCtrlNameStr);
 
     void SetDirName(const wxFileName &dirname)
         { SetPath(dirname.GetPath()); }
@@ -386,11 +386,11 @@ protected:
     
     std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
-                                            const std::string& message,
+                                            std::string_view message,
                                             const std::string& WXUNUSED(wildcard)) override
     {
         return std::make_unique<wxDirPickerWidget>(parent, wxID_ANY,
-                                     wxGetTranslation(wxDirPickerWidgetLabel),
+                                     wxGetTranslation(wxDirPickerWidgetLabel).ToStdString(),
                                      path, message,
                                      wxDefaultPosition, wxDefaultSize,
                                      GetPickerStyle(wxGetWindowStyle()));

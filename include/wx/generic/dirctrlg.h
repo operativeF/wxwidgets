@@ -81,13 +81,13 @@ class wxGenericDirCtrl: public wxControl
 public:
     wxGenericDirCtrl() = default;
     wxGenericDirCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
-              const std::string& dir = wxDirDialogDefaultFolderStr,
+              std::string_view dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = wxDIRCTRL_DEFAULT_STYLE,
               const std::string& filter = {},
               int defaultFilter = 0,
-              const std::string& name = wxTreeCtrlNameStr)
+              std::string_view name = wxTreeCtrlNameStr)
     {
         Create(parent, id, dir, pos, size, style, filter, defaultFilter, name);
     }
@@ -96,13 +96,13 @@ public:
 	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
-              const std::string& dir = wxDirDialogDefaultFolderStr,
+              std::string_view dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = wxDIRCTRL_DEFAULT_STYLE,
               const std::string& filter = {},
               int defaultFilter = 0,
-              const std::string& name = wxTreeCtrlNameStr);
+              std::string_view name = wxTreeCtrlNameStr);
 
     void OnExpandItem(wxTreeEvent &event );
     void OnCollapseItem(wxTreeEvent &event );

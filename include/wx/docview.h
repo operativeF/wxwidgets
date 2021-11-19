@@ -679,7 +679,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDEFAULT_FRAME_STYLE,
-                       const std::string& name = wxFrameNameStr)
+                       std::string_view name = wxFrameNameStr)
     {
         Create(doc, view, parent, id, title, pos, size, style, name);
     }
@@ -694,7 +694,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr)
+                std::string_view name = wxFrameNameStr)
     {
         if ( !wxDocChildFrameAnyBase::Create(doc, view, this) )
             return false;
@@ -752,7 +752,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = wxDEFAULT_FRAME_STYLE,
-                    const std::string& name = wxFrameNameStr)
+                    std::string_view name = wxFrameNameStr)
         : wxDocChildFrameBase(doc, view,
                               parent, id, title, pos, size, style, name)
     {
@@ -768,7 +768,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr)
+                std::string_view name = wxFrameNameStr)
     {
         return wxDocChildFrameBase::Create
                (
@@ -831,7 +831,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxDEFAULT_FRAME_STYLE,
-                        const std::string& name = wxFrameNameStr)
+                        std::string_view name = wxFrameNameStr)
         : wxDocParentFrameAnyBase(this)
     {
         Create(manager, frame, id, title, pos, size, style, name);
@@ -846,7 +846,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr)
+                std::string_view name = wxFrameNameStr)
     {
         m_docManager = manager;
 
@@ -905,7 +905,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxDEFAULT_FRAME_STYLE,
-                     const std::string& name = wxFrameNameStr)
+                     std::string_view name = wxFrameNameStr)
         : wxDocParentFrameBase(manager,
                                parent, id, title, pos, size, style, name)
     {
@@ -920,7 +920,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr)
+                std::string_view name = wxFrameNameStr)
     {
         return wxDocParentFrameBase::Create(manager,
                                             parent, id, title,

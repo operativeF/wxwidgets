@@ -57,7 +57,7 @@ public:
     // but never both so fall back to this base version for not
     // supported search type
     // FIXME: Remove this and split into two functions.
-    virtual int FindString(const std::string& s, bool bCase = false) const
+    virtual int FindString(std::string_view s, bool bCase = false) const
     {
         const std::size_t count = GetCount();
 
@@ -89,7 +89,7 @@ public:
     virtual int GetSelection() const = 0;
 
     // set selection to the specified string, return false if not found
-    bool SetStringSelection(const std::string& s);
+    bool SetStringSelection(std::string_view s);
 
     // return the selected string or empty string if none
     virtual std::string GetStringSelection() const;

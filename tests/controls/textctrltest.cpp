@@ -96,7 +96,7 @@ static void DoPositionToCoordsTestWithStyle(unsigned int style)
 
 
     // Add enough contents to the control to make sure it has a scrollbar.
-    m_entry->SetValue("First line" + wxString(50, '\n') + "Last line");
+    std::string longStr = fmt::format("First line{}Last line", std::string{50, '\n'});
     m_entry->SetInsertionPoint(0);
     wxYield(); // Let GTK layout the control correctly.
 
@@ -153,12 +153,12 @@ static void DoPositionToXYMultiLine(unsigned int style)
 
     typedef struct { long x, y; } XYPos;
     bool ok;
-    wxString text;
+    std::string text;
 
     // empty field
     m_entry->Clear();
     const long numChars_0 = 0;
-    wxASSERT(numChars_0 == text.Length());
+    wxASSERT(numChars_0 == text.length());
     XYPos coords_0[numChars_0 + 1] =
     { { 0, 0 } };
 
@@ -175,10 +175,10 @@ static void DoPositionToXYMultiLine(unsigned int style)
     CHECK_EQ(false, ok);
 
     // one line
-    text = wxS("1234");
+    text = "1234";
     m_entry->SetValue(text);
     const long numChars_1 = 4;
-    wxASSERT(numChars_1 == text.Length());
+    wxASSERT(numChars_1 == text.length());
     XYPos coords_1[numChars_1 + 1] =
     { { 0, 0 }, { 1, 0 }, { 2, 0}, { 3, 0 }, { 4, 0 } };
 
@@ -195,7 +195,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
     CHECK_EQ(false, ok);
 
     // few lines
-    text = wxS("123\nab\nX");
+    text = "123\nab\nX";
     m_entry->SetValue(text);
 
 #if defined(__WXMSW__)
@@ -210,7 +210,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
 #endif // WXMSW
 
     const long numChars_2 = 8;
-    wxASSERT(numChars_2 == text.Length());
+    wxASSERT(numChars_2 == text.length());
     XYPos coords_2[numChars_2 + 1] =
     { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 },
       { 0, 1 }, { 1, 1 }, { 2, 1 },
@@ -243,7 +243,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
     CHECK_EQ(false, ok);
 
     // only empty lines
-    text = wxS("\n\n\n");
+    text = "\n\n\n";
     m_entry->SetValue(text);
 
 #if defined(__WXMSW__)
@@ -259,7 +259,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
 #endif // WXMSW
 
     const long numChars_3 = 3;
-    wxASSERT(numChars_3 == text.Length());
+    wxASSERT(numChars_3 == text.length());
     XYPos coords_3[numChars_3 + 1] =
     { { 0, 0 },
       { 0, 1 },
@@ -293,7 +293,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
     CHECK_EQ(false, ok);
 
     // mixed empty/non-empty lines
-    text = wxS("123\na\n\nX\n\n");
+    text = "123\na\n\nX\n\n";
     m_entry->SetValue(text);
 
 #if defined(__WXMSW__)
@@ -311,7 +311,7 @@ static void DoPositionToXYMultiLine(unsigned int style)
 #endif // WXMSW
 
     const long numChars_4 = 10;
-    wxASSERT(numChars_4 == text.Length());
+    wxASSERT(numChars_4 == text.length());
     XYPos coords_4[numChars_4 + 1] =
     { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 },
       { 0, 1 }, { 1, 1 },
@@ -355,7 +355,7 @@ static void DoXYToPositionMultiLine(unsigned int style)
     const bool isRichEdit = (style & (wxTE_RICH | wxTE_RICH2)) != 0;
 #endif
 
-    wxString text;
+    std::string text;
     // empty field
     m_entry->Clear();
     const long maxLineLength_0 = 0 + 1;
@@ -373,7 +373,7 @@ static void DoXYToPositionMultiLine(unsigned int style)
         }
 
     // one line
-    text = wxS("1234");
+    text = "1234";
     m_entry->SetValue(text);
     const long maxLineLength_1 = 4 + 1;
     const long numLines_1 = 1;
@@ -390,7 +390,7 @@ static void DoXYToPositionMultiLine(unsigned int style)
         }
 
     // few lines
-    text = wxS("123\nab\nX");
+    text = "123\nab\nX";
     m_entry->SetValue(text);
     const long maxLineLength_2 = 4;
     const long numLines_2 = 3;
@@ -425,7 +425,7 @@ static void DoXYToPositionMultiLine(unsigned int style)
         }
 
     // only empty lines
-    text = wxS("\n\n\n");
+    text = "\n\n\n";
     m_entry->SetValue(text);
     const long maxLineLength_3 = 1;
     const long numLines_3 = 4;
@@ -462,7 +462,7 @@ static void DoXYToPositionMultiLine(unsigned int style)
         }
 
     // mixed empty/non-empty lines
-    text = wxS("123\na\n\nX\n\n");
+    text = "123\na\n\nX\n\n";
     m_entry->SetValue(text);
     const long maxLineLength_4 = 4;
     const long numLines_4 = 6;
@@ -712,7 +712,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // position as used above.
             SUBCASE("Scrolled")
             {
-                m_entry->ChangeValue(wxString(200, 'X'));
+                m_entry->ChangeValue(std::string(200, 'X'));
                 m_entry->SetInsertionPointEnd();
 
 #ifdef __WXGTK__
@@ -739,7 +739,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             m_entry = CreateText(wxTE_DONTWRAP);
 
             bool ok;
-            wxString text;
+            std::string text;
             // empty field
             m_entry->Clear();
             const long numChars_0 = 0;
@@ -756,9 +756,9 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             CHECK_EQ(false, ok);
 
             // pure one line
-            text = wxS("1234");
+            text = "1234";
             m_entry->SetValue(text);
-            const std::size_t numChars_1 = text.Length();
+            const std::size_t numChars_1 = text.length();
             CHECK_EQ(numChars_1, m_entry->GetLastPosition());
             for (long i = 0; i <= numChars_1; i++)
             {
@@ -772,9 +772,9 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             CHECK_EQ(false, ok);
 
             // with new line characters
-            text = wxS("123\nab\nX");
+            text = "123\nab\nX";
             m_entry->SetValue(text);
-            const std::size_t numChars_2 = text.Length();
+            const std::size_t numChars_2 = text.length();
             CHECK_EQ(numChars_2, m_entry->GetLastPosition());
             for (long i = 0; i <= numChars_2; i++)
             {
@@ -792,7 +792,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
         {
             m_entry = CreateText(wxTE_DONTWRAP);
 
-            wxString text;
+            std::string text;
             // empty field
             m_entry->Clear();
             CHECK_EQ(1, m_entry->GetNumberOfLines());
@@ -809,7 +809,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             }
 
             // pure one line
-            text = wxS("1234");
+            text = "1234";
             m_entry->SetValue(text);
             CHECK_EQ(1, m_entry->GetNumberOfLines());
             for (long x = 0; x < m_entry->GetLastPosition() + 2; x++)
@@ -825,7 +825,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             }
 
             // with new line characters
-            text = wxS("123\nab\nX");
+            text = "123\nab\nX";
             m_entry->SetValue(text);
             CHECK_EQ(1, m_entry->GetNumberOfLines());
             for (long x = 0; x < m_entry->GetLastPosition() + 2; x++)
@@ -1225,7 +1225,7 @@ TEST_CASE("wxTextCtrl::ProcessEnter")
 
         wxControl* Create(wxWindow* parent, int style) const override
         {
-            return new wxTextCtrl(parent, wxID_ANY, wxString(),
+            return new wxTextCtrl(parent, wxID_ANY, std::string{},
                                   wxDefaultPosition, wxDefaultSize,
                                   style | m_styleToAdd);
         }
@@ -1246,7 +1246,7 @@ TEST_CASE("wxTextCtrl::GetBestSize")
 {
     struct GetBestSizeFor
     {
-        wxSize operator()(const wxString& text) const
+        wxSize operator()(std::string_view text) const
         {
             std::unique_ptr<wxTextCtrl>
                 t(new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY, text,
@@ -1256,7 +1256,7 @@ TEST_CASE("wxTextCtrl::GetBestSize")
         }
     } getBestSizeFor;
 
-    wxString s;
+    std::string s;
     const wxSize sizeEmpty = getBestSizeFor(s);
 
     // Empty control should have some reasonable vertical size.

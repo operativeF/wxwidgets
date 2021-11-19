@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_COLOURPICKERCTRL
 
 #include "wx/clrpicker.h"
@@ -39,7 +36,7 @@ bool wxGenericColourButton::Create( wxWindow *parent,
                                     const wxSize &size,
                                     unsigned int style,
                                     const wxValidator& validator,
-                                    const std::string &name)
+                                    std::string_view name)
 {
     // create this button
     if (!wxBitmapButton::Create( parent, id, m_bitmap, pos,

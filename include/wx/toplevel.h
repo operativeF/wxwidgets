@@ -26,7 +26,7 @@ import Utils.Geometry;
 import <string>;
 
 // the default names for various classes
-inline constexpr char wxFrameNameStr[] = "frame";
+inline constexpr std::string_view wxFrameNameStr = "frame";
 
 // ----------------------------------------------------------------------------
 // constants
@@ -382,11 +382,11 @@ protected:
         wxTopLevelWindow() = default;
         wxTopLevelWindow(wxWindow *parent,
                    wxWindowID winid,
-                   const std::string& title,
+                   std::string_view title,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = wxDEFAULT_FRAME_STYLE,
-                   const std::string& name = wxFrameNameStr)
+                   std::string_view name = wxFrameNameStr)
             : wxTopLevelWindowNative(parent, winid, title,
                                      pos, size, style, name)
         {

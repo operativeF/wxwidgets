@@ -41,12 +41,12 @@ public:
     // The 3rd argument is the initial std::string to display in the text control
     bool CreateBase(wxWindow *parent,
                     wxWindowID id,
-                    const std::string& text = {},
+                    std::string_view text = {},
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
-                    const std::string& name = wxPickerNameStr);
+                    std::string_view name = wxPickerNameStr);
 
     // margin between the text control and the picker
     void SetInternalMargin(int newmargin)

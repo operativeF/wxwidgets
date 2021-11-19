@@ -134,7 +134,7 @@ wxFrame *wxFrameBase::New(wxWindow *parent,
                           const wxPoint& pos,
                           const wxSize& size,
                           unsigned int style,
-                          const std::string& name)
+                          std::string_view name)
 {
     return new wxFrame(parent, id, title, pos, size, style, name);
 }
@@ -323,7 +323,7 @@ void wxFrameBase::OnInternalIdle()
 wxStatusBar* wxFrameBase::CreateStatusBar(int number,
                                           unsigned int style,
                                           wxWindowID id,
-                                          const std::string& name)
+                                          std::string_view name)
 {
     // the main status bar can only be created once (or else it should be
     // deleted before calling CreateStatusBar() again)
@@ -338,7 +338,7 @@ wxStatusBar* wxFrameBase::CreateStatusBar(int number,
 wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
                                             unsigned int style,
                                             wxWindowID id,
-                                            const std::string& name)
+                                            std::string_view name)
 {
     wxStatusBar *statusBar = new wxStatusBar(this, id, style, name);
 
@@ -496,7 +496,7 @@ void wxFrameBase::DoGiveHelp(const std::string& help, bool show)
 
 wxToolBar* wxFrameBase::CreateToolBar(unsigned int style,
                                       wxWindowID id,
-                                      const std::string& name)
+                                      std::string_view name)
 {
     // the main toolbar can't be recreated (unless it was explicitly deleted
     // before)
@@ -522,7 +522,7 @@ wxToolBar* wxFrameBase::CreateToolBar(unsigned int style,
 
 wxToolBar* wxFrameBase::OnCreateToolBar(unsigned int style,
                                         wxWindowID id,
-                                        const std::string& name)
+                                        std::string_view name)
 {
     return new wxToolBar(this, id,
                          wxDefaultPosition, wxDefaultSize,

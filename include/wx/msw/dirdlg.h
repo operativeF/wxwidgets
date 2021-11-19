@@ -17,12 +17,12 @@ class wxDirDialog : public wxDirDialogBase
 {
 public:
     wxDirDialog(wxWindow *parent,
-                const std::string& message = wxDirSelectorPromptStr,
+                std::string_view message = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},
                 unsigned int style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                const std::string& name = wxDirDialogNameStr);
+                std::string_view name = wxDirDialogNameStr);
 
     wxDirDialog& operator=(wxDirDialog&&) = delete;
 

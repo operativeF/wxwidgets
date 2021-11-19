@@ -341,12 +341,12 @@ wxTextCtrl::~wxTextCtrl()
 
 bool wxTextCtrl::Create(wxWindow *parent,
                         wxWindowID id,
-                        const std::string& value,
+                        std::string_view value,
                         const wxPoint& pos,
                         const wxSize& size,
                         unsigned int style,
                         const wxValidator& validator,
-                        const std::string& name)
+                        std::string_view name)
 {
     // base initialization
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
@@ -379,7 +379,7 @@ bool wxTextCtrl::CanApplyThemeBorder() const
     return ((wxGetWindowStyle() & (wxTE_RICH|wxTE_RICH2)) != 0);
 }
 
-bool wxTextCtrl::MSWCreateText(const std::string& value,
+bool wxTextCtrl::MSWCreateText(std::string_view value,
                                const wxPoint& pos,
                                const wxSize& size)
 {
@@ -487,14 +487,15 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
 #endif // wxUSE_RICHEDIT
 
     // we need to turn '\n's into "\r\n"s for the multiline controls
-    wxString valueWin;
+    std::string valueWin;
+
     if ( m_windowStyle & wxTE_MULTILINE )
     {
         valueWin = wxTextFile::Translate(value, wxTextFileType::Dos);
     }
     else // single line
     {
-        valueWin = value;
+        valueWin = {value.begin(), value.end()};
     }
 
     // suppress events sent during control creation: we're called either from
@@ -789,7 +790,7 @@ void wxTextCtrl::SetWindowStyleFlag(unsigned int style)
         const long alignMask = wxTE_LEFT | wxTE_CENTRE | wxTE_RIGHT;
         if ( (style & alignMask) != (wxGetWindowStyle() & alignMask) )
         {
-            const wxString value = GetValue();
+            const std::string value = GetValue();
             const wxPoint pos = GetPosition();
             const wxSize size = GetSize();
 
@@ -948,7 +949,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
     return str;
 }
 
-void wxTextCtrl::DoSetValue(const std::string& value, unsigned int flags)
+void wxTextCtrl::DoSetValue(std::string_view value, unsigned int flags)
 {
     // if the text is long enough, it's faster to just set it instead of first
     // comparing it with the old one (chances are that it will be different
@@ -979,12 +980,12 @@ void wxTextCtrl::DoSetValue(const std::string& value, unsigned int flags)
     }
 }
 
-void wxTextCtrl::WriteText(const std::string& value)
+void wxTextCtrl::WriteText(std::string_view value)
 {
     DoWriteText(value);
 }
 
-void wxTextCtrl::DoWriteText(const std::string& value, unsigned int flags)
+void wxTextCtrl::DoWriteText(std::string_view value, unsigned int flags)
 {
     bool selectionOnly = (flags & SetValue_SelectionOnly) != 0;
     std::string valueDos;

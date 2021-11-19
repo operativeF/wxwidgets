@@ -199,7 +199,7 @@ public:
             if ( !control )
                 return false;
 
-            control->SetValue(NormalizeValue(static_cast<LongestValueType>(*m_value)));
+            control->SetValue(NormalizeValue(static_cast<LongestValueType>(*m_value)).ToStdString());
         }
 
         return true;

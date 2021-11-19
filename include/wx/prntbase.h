@@ -401,7 +401,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
-                   const std::string& name = wxFrameNameStr);
+                   std::string_view name = wxFrameNameStr);
     ~wxPreviewFrame();
 
     wxPreviewFrame& operator=(wxPreviewFrame&&) = delete;
@@ -738,7 +738,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDEFAULT_DIALOG_STYLE,
-                       const wxString& name = "dialog");
+                       std::string_view name = std::string_view{"dialog"});
 
     wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = delete;
 

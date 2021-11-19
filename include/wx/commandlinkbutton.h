@@ -44,7 +44,7 @@ public:
                             unsigned int style = 0,
                             const wxValidator& validator =
                                 wxDefaultValidator,
-                            const std::string& name = wxButtonNameStr)
+                            std::string_view name = wxButtonNameStr)
         : wxButton(parent,
                    id,
                    mainLabel + '\n' + note,
@@ -105,7 +105,7 @@ public:
                                const wxSize& size = wxDefaultSize,
                                unsigned int style = 0,
                                const wxValidator& validator = wxDefaultValidator,
-                               const std::string& name = wxButtonNameStr)
+                               std::string_view name = wxButtonNameStr)
          
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
@@ -121,7 +121,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxButtonNameStr);
+                std::string_view name = wxButtonNameStr);
 
     void SetMainLabelAndNote(const std::string& mainLabel,
                              const std::string& note) override

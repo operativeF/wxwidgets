@@ -25,9 +25,9 @@ import <vector>;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxDirDialogNameStr[] = "wxDirCtrl";
-inline constexpr char wxDirDialogDefaultFolderStr[] = "/";
-inline constexpr char wxDirSelectorPromptStr[] = "Select a directory";
+inline constexpr std::string_view wxDirDialogNameStr = "wxDirCtrl";
+inline constexpr std::string_view wxDirDialogDefaultFolderStr = "/";
+inline constexpr std::string_view wxDirSelectorPromptStr = "Select a directory";
 
 
 /*
@@ -57,23 +57,23 @@ class wxDirDialogBase : public wxDialog
 public:
     wxDirDialogBase() = default;
     wxDirDialogBase(wxWindow *parent,
-                    const std::string& title = wxDirSelectorPromptStr,
+                    std::string_view title = wxDirSelectorPromptStr,
                     const std::string& defaultPath = {},
                     unsigned int style = wxDD_DEFAULT_STYLE,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& sz = wxDefaultSize,
-                    const std::string& name = wxDirDialogNameStr)
+                    std::string_view name = wxDirDialogNameStr)
     {
         Create(parent, title, defaultPath, style, pos, sz, name);
     }
 
     [[maybe_unused]] bool Create(wxWindow *parent,
-                const std::string& title = wxDirSelectorPromptStr,
+                std::string_view title = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},
                 unsigned int style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& sz = wxDefaultSize,
-                const std::string& name = wxDirDialogNameStr)
+                std::string_view name = wxDirDialogNameStr)
     {
         if (!wxDialog::Create(parent, wxID_ANY, title, pos, sz, style, name))
             return false;
@@ -135,7 +135,7 @@ protected:
 // ----------------------------------------------------------------------------
 
 wxString
-wxDirSelector(const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
+wxDirSelector(std::string_view message = wxDirSelectorPromptStr,
               const wxString& defaultPath = {},
               unsigned int style = wxDD_DEFAULT_STYLE,
               const wxPoint& pos = wxDefaultPosition,

@@ -522,7 +522,7 @@ std::string wxComboBox::GetValue() const
                                   : wxTextEntry::GetValue();
 }
 
-void wxComboBox::SetValue(const std::string& value)
+void wxComboBox::SetValue(std::string_view value)
 {
     if ( HasFlag(wxCB_READONLY) )
         SetStringSelection(value);

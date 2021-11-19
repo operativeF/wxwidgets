@@ -99,12 +99,12 @@ static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp,
 // ----------------------------------------------------------------------------
 
 wxDirDialog::wxDirDialog(wxWindow *parent,
-                         const std::string& message,
+                         std::string_view message,
                          const std::string& defaultPath,
                          unsigned int style,
                          const wxPoint& WXUNUSED(pos),
                          const wxSize& WXUNUSED(size),
-                         const std::string& WXUNUSED(name))
+                         std::string_view WXUNUSED(name))
 {
     m_message = message;
     m_parent = parent;

@@ -174,7 +174,7 @@ inline constexpr unsigned int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON
                                                 wxTREE_HITTEST_ONITEMLABEL;
 
 // tree ctrl default name
-inline constexpr char wxTreeCtrlNameStr[] = "treeCtrl";
+inline constexpr std::string_view wxTreeCtrlNameStr = "treeCtrl";
 
 // ----------------------------------------------------------------------------
 // wxTreeEvent is a special class for all events associated with tree controls

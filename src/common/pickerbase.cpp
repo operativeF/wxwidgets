@@ -33,12 +33,12 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPickerBase, wxControl);
 
 bool wxPickerBase::CreateBase(wxWindow *parent,
                          wxWindowID id,
-                         const std::string& text,
+                         std::string_view text,
                          const wxPoint& pos,
                          const wxSize& size,
                          unsigned int style,
                          const wxValidator& validator,
-                         const std::string& name)
+                         std::string_view name)
 {
     // remove any border style from our style as wxPickerBase's window must be
     // invisible (user styles must be set on the textctrl or the platform-dependent picker)

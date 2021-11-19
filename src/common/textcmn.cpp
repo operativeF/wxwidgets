@@ -890,7 +890,7 @@ bool wxTextAreaBase::DoLoadFile(const std::string& filename, int WXUNUSED(fileTy
         wxString text;
         if ( file.ReadAll(&text) )
         {
-            SetValue(text);
+            SetValue(text.ToStdString());
 
             DiscardEdits();
             m_filename = filename;

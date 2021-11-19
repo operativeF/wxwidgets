@@ -27,7 +27,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
-              const std::string& name = wxFrameNameStr)
+              std::string_view name = wxFrameNameStr)
   {
       Create(parent, id, title, pos, size, style, name);
   }
@@ -38,7 +38,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
-              const std::string& name = wxFrameNameStr)
+              std::string_view name = wxFrameNameStr)
   {
       return wxFrame::Create(parent, id, title, pos, size,
                              style |

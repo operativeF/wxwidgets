@@ -151,7 +151,7 @@ bool wxTextValidator::TransferToWindow()
         if ( !text )
             return false;
 
-        text->SetValue(*m_stringValue);
+        text->SetValue(m_stringValue->ToStdString());
     }
 
     return true;

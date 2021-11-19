@@ -49,7 +49,7 @@ wxAuiMDIParentFrame::wxAuiMDIParentFrame(wxWindow *parent,
                                          const wxPoint& pos,
                                          const wxSize& size,
                                          unsigned int style,
-                                         const std::string& name)
+                                         std::string_view name)
 {
     Create(parent, id, title, pos, size, style, name);
 }
@@ -74,7 +74,7 @@ bool wxAuiMDIParentFrame::Create(wxWindow *parent,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  unsigned int style,
-                                 const std::string& name)
+                                 std::string_view name)
 {
 #if wxUSE_MENUS
     // this style can be used to prevent a window from having the standard MDI
@@ -418,7 +418,7 @@ wxAuiMDIChildFrame::wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                                        const wxPoint& WXUNUSED(pos),
                                        const wxSize& size,
                                        unsigned int style,
-                                       const std::string& name)
+                                       std::string_view name)
 {
     // There are two ways to create an tabbed mdi child fram without
     // making it the active document.  Either Show(false) can be called
@@ -463,7 +463,7 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
                                 const wxPoint& WXUNUSED(pos),
                                 const wxSize& size,
                                 unsigned int style,
-                                const std::string& name)
+                                std::string_view name)
 {
     wxAuiMDIClientWindow* pClientWindow = parent->GetClientWindow();
     wxASSERT_MSG((pClientWindow != nullptr), "Missing MDI client window.");

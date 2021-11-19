@@ -48,9 +48,9 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_CLASS(wxTextEntryDialog, wxDialog);
 
 bool wxTextEntryDialog::Create(wxWindow *parent,
-                                     const std::string& message,
-                                     const std::string& caption,
-                                     const std::string& value,
+                                     std::string_view message,
+                                     std::string_view caption,
+                                     std::string_view value,
                                      unsigned int style,
                                      const wxPoint& pos)
 {
@@ -193,9 +193,9 @@ void wxTextEntryDialog::SetTextValidator( const wxTextValidator& validator )
 wxIMPLEMENT_CLASS(wxPasswordEntryDialog, wxTextEntryDialog);
 
 bool wxPasswordEntryDialog::Create(wxWindow *parent,
-                                   const std::string& message,
-                                   const std::string& caption,
-                                   const std::string& value,
+                                   std::string_view message,
+                                   std::string_view caption,
+                                   std::string_view value,
                                    unsigned int style,
                                    const wxPoint& pos)
 {

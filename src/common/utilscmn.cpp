@@ -1353,11 +1353,11 @@ void wxInfoMessageBox(wxWindow* parent)
 
 #if wxUSE_TEXTDLG
 
-wxString wxGetTextFromUser(const wxString& message, const wxString& caption,
-                        const wxString& defaultValue, wxWindow *parent,
-                        wxCoord x, wxCoord y, bool centre )
+std::string wxGetTextFromUser(std::string_view message,
+                              std::string_view caption,
+                              std::string_view defaultValue, wxWindow *parent,
+                              wxCoord x, wxCoord y, bool centre )
 {
-    wxString str;
     unsigned int style = wxTextEntryDialogStyle;
 
     if (centre)
@@ -1369,19 +1369,18 @@ wxString wxGetTextFromUser(const wxString& message, const wxString& caption,
 
     if (dialog.ShowModal() == wxID_OK)
     {
-        str = dialog.GetValue();
+        return dialog.GetValue();
     }
 
-    return str;
+    return {};
 }
 
-wxString wxGetPasswordFromUser(const wxString& message,
-                               const wxString& caption,
-                               const wxString& defaultValue,
-                               wxWindow *parent,
-                               wxCoord x, wxCoord y, bool centre )
+std::string wxGetPasswordFromUser(std::string_view message,
+                                  std::string_view caption,
+                                  std::string_view defaultValue,
+                                  wxWindow *parent,
+                                  wxCoord x, wxCoord y, bool centre )
 {
-    wxString str;
     unsigned int style = wxTextEntryDialogStyle;
 
     if (centre)
@@ -1393,10 +1392,10 @@ wxString wxGetPasswordFromUser(const wxString& message,
                              style, wxPoint(x, y));
     if ( dialog.ShowModal() == wxID_OK )
     {
-        str = dialog.GetValue();
+        return dialog.GetValue();
     }
 
-    return str;
+    return {};
 }
 
 #endif // wxUSE_TEXTDLG
