@@ -30,10 +30,11 @@ import Utils.Geometry;
 
 import <string>;
 
-class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;
 class wxWindow;
 class wxDC;
+
+struct wxAuiNotebookPage;
 
 // tab art class
 

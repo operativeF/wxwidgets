@@ -127,11 +127,12 @@ enum wxAuiPaneInsertLevel
 
 
 // forwards and array declarations
-class wxAuiDockUIPart;
 class wxAuiPaneInfo;
 class wxAuiDockInfo;
 class wxAuiDockArt;
 class wxAuiManagerEvent;
+
+struct wxAuiDockUIPart;
 
 #ifndef SWIG
 WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiDockInfo, wxAuiDockInfoArray, WXDLLIMPEXP_AUI);
