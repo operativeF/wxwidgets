@@ -25,7 +25,7 @@ class wxRichMessageDialogBase : public wxGenericMessageDialog
 public:
     wxRichMessageDialogBase( wxWindow *parent,
                              const std::string& message,
-                             const std::string& caption,
+                             std::string_view caption,
                              unsigned int style )
         : wxGenericMessageDialog( parent, message, caption, style ),
           m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),

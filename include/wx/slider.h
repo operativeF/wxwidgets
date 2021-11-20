@@ -43,7 +43,7 @@ inline constexpr unsigned int wxSL_MIN_MAX_LABELS  = 0x2000;
 inline constexpr unsigned int wxSL_VALUE_LABEL     = 0x4000;
 inline constexpr unsigned int wxSL_LABELS          = wxSL_MIN_MAX_LABELS | wxSL_VALUE_LABEL;
 
-inline constexpr char wxSliderNameStr[] = "slider";
+inline constexpr std::string_view wxSliderNameStr = "slider";
 
 // ----------------------------------------------------------------------------
 // wxSliderBase: define wxSlider interface
@@ -61,7 +61,7 @@ public:
              const wxSize& size = wxDefaultSize,
              unsigned int style = wxSL_HORIZONTAL,
              const wxValidator& validator = wxDefaultValidator,
-             const std::string& name = wxSliderNameStr);
+             std::string_view name = wxSliderNameStr);
     */
     wxSliderBase& operator=(wxSliderBase&&) = delete;
 

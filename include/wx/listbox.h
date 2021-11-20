@@ -23,7 +23,7 @@ import <vector>;
 // global data
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxListBoxNameStr[] = "listBox";
+inline constexpr std::string_view wxListBoxNameStr = "listBox";
 
 /*
  * Styles for wxListBox

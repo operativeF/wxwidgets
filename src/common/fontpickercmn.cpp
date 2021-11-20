@@ -44,7 +44,7 @@ bool wxFontPickerCtrl::Create( wxWindow *parent,
                                const wxSize &size,
                                unsigned int style,
                                const wxValidator& validator,
-                               const std::string& name )
+                               std::string_view name )
 {
     if (!wxPickerBase::CreateBase(parent, id,
                                   Font2String(initial.IsOk() ? initial

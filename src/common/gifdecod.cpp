@@ -203,7 +203,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
         *(dst++) = pal[3 * (*src) + 2];
     }
 
-    wxString comment = GetFrame(frame)->comment;
+    std::string comment = GetFrame(frame)->comment.ToStdString();
     if ( !comment.empty() )
     {
         image->SetOption(wxIMAGE_OPTION_GIF_COMMENT, comment);

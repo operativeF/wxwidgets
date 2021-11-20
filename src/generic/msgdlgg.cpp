@@ -76,7 +76,7 @@ wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
 
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
                                                 const std::string& message,
-                                                const std::string& caption,
+                                                std::string_view caption,
                                                 unsigned int style,
                                                 const wxPoint& pos)
                       : wxMessageDialogBase(GetParentForModalDialog(parent, style),

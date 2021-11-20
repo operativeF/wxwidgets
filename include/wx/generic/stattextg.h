@@ -33,7 +33,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = 0,
-                 const std::string& name = wxStaticTextNameStr)
+                 std::string_view name = wxStaticTextNameStr)
     {
         
 #if wxUSE_MARKUP
@@ -53,7 +53,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxStaticTextNameStr);
+                std::string_view name = wxStaticTextNameStr);
 
     ~wxGenericStaticText();
 

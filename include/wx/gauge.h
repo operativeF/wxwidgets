@@ -44,7 +44,7 @@ inline constexpr unsigned int wxGA_TEXT = 0x0040;
     #define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
 #endif
 
-inline constexpr char wxGaugeNameStr[] = "gauge";
+inline constexpr std::string_view wxGaugeNameStr = "gauge";
 
 // ----------------------------------------------------------------------------
 // wxGauge: a progress bar
@@ -60,7 +60,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxGA_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxGaugeNameStr);
+                std::string_view name = wxGaugeNameStr);
 
     // determinate mode API
 

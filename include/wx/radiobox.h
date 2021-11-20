@@ -28,7 +28,7 @@ using wxToolTipArray = std::vector<wxToolTip*>;
 
 #endif // wxUSE_TOOLTIPS
 
-inline constexpr char wxRadioBoxNameStr[] = "radioBox";
+inline constexpr std::string_view wxRadioBoxNameStr = "radioBox";
 
 // ----------------------------------------------------------------------------
 // wxRadioBoxBase is not a normal base class, but rather a mix-in because the

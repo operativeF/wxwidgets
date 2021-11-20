@@ -17,7 +17,7 @@ class wxRichMessageDialog : public wxGenericRichMessageDialog
 public:
     wxRichMessageDialog(wxWindow *parent,
                         const std::string& message,
-                        const std::string& caption = wxMessageBoxCaptionStr,
+                        std::string_view caption = wxMessageBoxCaptionStr,
                         unsigned int style = wxOK | wxCENTRE)
         : wxGenericRichMessageDialog(parent, message, caption, style)
     {}

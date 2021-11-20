@@ -29,7 +29,7 @@ inline constexpr unsigned int wxHL_ALIGN_RIGHT        = 0x0004;
 inline constexpr unsigned int wxHL_ALIGN_CENTRE       = 0x0008;
 inline constexpr unsigned int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
 
-inline constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
+inline constexpr std::string_view wxHyperlinkCtrlNameStr = "hyperlink";
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrl

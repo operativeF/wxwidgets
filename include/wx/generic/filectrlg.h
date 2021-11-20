@@ -200,7 +200,7 @@ public:
                         unsigned int style = wxFC_DEFAULT_STYLE,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        const std::string& name = wxFileCtrlNameStr)
+                        std::string_view name = wxFileCtrlNameStr)
     {
         m_ignoreChanges = false;
         Create(parent, id, defaultDirectory, defaultFilename, wildCard,
@@ -215,7 +215,7 @@ public:
                  unsigned int style = wxFC_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 const std::string& name = wxFileCtrlNameStr);
+                 std::string_view name = wxFileCtrlNameStr);
 
     void SetWildcard( const std::string& wildCard ) override;
     void SetFilterIndex( int filterindex ) override;

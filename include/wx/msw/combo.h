@@ -46,7 +46,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
-                   const std::string& name = wxComboCtrlNameStr)
+                   std::string_view name = wxComboCtrlNameStr)
          
     {
         Create(parent, id, value, pos, size, style, validator, name);
@@ -59,7 +59,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxComboCtrlNameStr);
+                std::string_view name = wxComboCtrlNameStr);
 
     void PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const override;
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;

@@ -40,7 +40,7 @@ public:
             const std::vector<std::string>& choices = {},
             unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
-            const std::string& name = wxListBoxNameStr)
+            std::string_view name = wxListBoxNameStr)
     {
         Create(parent, id, pos, size, choices, style, validator, name);
     }
@@ -51,7 +51,7 @@ public:
                 const std::vector<std::string>& choices = {},
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxListBoxNameStr);
+                std::string_view name = wxListBoxNameStr);
 
     ~wxListBox();
 

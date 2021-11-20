@@ -15,8 +15,8 @@
 
 #if wxUSE_GRID
 
-inline constexpr char wxGRID_VALUE_CHOICEINT[]    = "choiceint";
-inline constexpr char wxGRID_VALUE_DATETIME[]     = "datetime";
+inline constexpr std::string_view wxGRID_VALUE_CHOICEINT    = "choiceint";
+inline constexpr std::string_view wxGRID_VALUE_DATETIME     = "datetime";
 
 
 // the default renderer for the cells containing string data

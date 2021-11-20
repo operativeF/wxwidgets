@@ -28,7 +28,7 @@ bool wxGenericStaticText::Create(wxWindow *parent,
                                  const wxPoint &pos,
                                  const wxSize &size,
                                  unsigned int style,
-                                 const std::string &name)
+                                 std::string_view name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name) )

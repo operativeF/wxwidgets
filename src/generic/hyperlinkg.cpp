@@ -49,7 +49,7 @@ bool wxGenericHyperlinkCtrl::Create(wxWindow *parent,
                                     const wxPoint& pos,
                                     const wxSize& size,
                                     unsigned int style,
-                                    const std::string& name)
+                                    std::string_view name)
 {
     // do validation checks:
     CheckParams(label, url, style);

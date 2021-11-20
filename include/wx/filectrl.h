@@ -30,7 +30,7 @@ enum
 
 inline constexpr unsigned int wxFC_DEFAULT_STYLE = wxFC_OPEN;
 
-inline constexpr char wxFileCtrlNameStr[] = "wxfilectrl";
+inline constexpr std::string_view wxFileCtrlNameStr = "wxfilectrl";
 
 class wxFileCtrlBase
 {

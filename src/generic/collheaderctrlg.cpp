@@ -41,7 +41,7 @@ bool wxGenericCollapsibleHeaderCtrl::Create(wxWindow *parent,
     const wxSize& size,
     unsigned int style,
     const wxValidator& validator,
-    const std::string& name)
+    std::string_view name)
 {
     if ( !wxCollapsibleHeaderCtrlBase::Create(parent, id, label, pos, size,
                                               style, validator, name) )

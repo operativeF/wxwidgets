@@ -379,13 +379,14 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 #if wxUSE_FONTDLG
     if ( interactive )
     {
-        wxString title(m_titleDialog);
-        if ( !title )
-            title << wxTheApp->GetAppDisplayName() << _(": unknown encoding");
+        std::string title{m_titleDialog};
+
+        if ( title.empty() )
+            title = fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown encoding").ToStdString());
 
         // built the message
-        wxString encDesc = GetEncodingDescription(encoding),
-                 msg;
+        std::string encDesc = GetEncodingDescription(encoding);
+        wxString msg;
         if ( foundEquivEncoding )
         {
             // ask the user if he wants to override found alternative encoding

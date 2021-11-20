@@ -25,7 +25,7 @@ public:
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
+        std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -40,7 +40,7 @@ public:
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxCollapsibleHeaderCtrlNameStr);
+        std::string_view name = wxCollapsibleHeaderCtrlNameStr);
 
     void SetCollapsed(bool collapsed = true) override;
 

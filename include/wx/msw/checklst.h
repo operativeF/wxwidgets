@@ -33,7 +33,7 @@ public:
                    const std::vector<std::string>& choices = {},
                    unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
-                   const std::string& name = wxListBoxNameStr);
+                   std::string_view name = wxListBoxNameStr);
 
     wxCheckListBox& operator=(wxCheckListBox&&) = delete;
 
@@ -43,7 +43,7 @@ public:
                 const std::vector<std::string>& choices = {},
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxListBoxNameStr);
+                std::string_view name = wxListBoxNameStr);
 
     // items may be checked
     bool IsChecked(unsigned int uiIndex) const override;

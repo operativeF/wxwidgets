@@ -52,7 +52,7 @@ bool wxSlider::Create(wxWindow *parent,
                       const wxSize& size,
                       unsigned int style,
                       const wxValidator& validator,
-                      const std::string& name)
+                      std::string_view name)
 {
     wxCHECK_MSG( minValue < maxValue, false,
         "Slider minimum must be strictly less than the maximum." );

@@ -23,7 +23,7 @@
 import <string>;
 
 // the default names for various classes
-inline constexpr char wxStatusLineNameStr[] = "status_line";
+inline constexpr std::string_view wxStatusLineNameStr = "status_line";
 
 #if wxUSE_MENUBAR
     #include <wx/menu.h>

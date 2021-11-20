@@ -18,7 +18,7 @@ class wxGenericMessageDialog : public wxMessageDialogBase
 public:
     wxGenericMessageDialog(wxWindow *parent,
                            const std::string& message,
-                           const std::string& caption = wxMessageBoxCaptionStr,
+                           std::string_view caption = wxMessageBoxCaptionStr,
                            unsigned int style = wxOK|wxCENTRE,
                            const wxPoint& pos = wxDefaultPosition);
 

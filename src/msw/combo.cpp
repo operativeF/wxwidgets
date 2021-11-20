@@ -61,7 +61,7 @@ bool wxComboCtrl::Create(wxWindow *parent,
                             const wxSize& size,
                             unsigned int style,
                             const wxValidator& validator,
-                            const std::string& name)
+                            std::string_view name)
 {
 
     // Set border

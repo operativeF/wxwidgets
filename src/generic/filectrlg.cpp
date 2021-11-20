@@ -606,7 +606,7 @@ void wxFileListCtrl::MakeDir()
     wxLogNull log;
     if (!wxMkdir(path))
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error").ToStdString(), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         return;
     }
@@ -720,7 +720,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
         (event.GetLabel() == "..") ||
         (event.GetLabel().find( wxFILE_SEP_PATH ) != std::string::npos))
     {
-        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error").ToStdString(), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
         return;
@@ -734,7 +734,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
 
     if (wxFileExists(new_name))
     {
-        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("File name exists already."), _("Error").ToStdString(), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -750,7 +750,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     }
     else
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error").ToStdString(), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -859,7 +859,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
                                 unsigned int style,
                                 const wxPoint& pos,
                                 const wxSize& size,
-                                const std::string& name )
+                                std::string_view name )
 {
     this->m_style = style;
     m_inSelected = false;
@@ -1329,7 +1329,7 @@ void wxGenericFileCtrl::HandleAction( const std::string &fn )
             if ( filename.find( wxFILE_SEP_PATH ) != std::string::npos )
             {
                 wxMessageBox( _( "Illegal file specification." ),
-                              _( "Error" ), wxOK | wxICON_ERROR, this );
+                              _( "Error" ).ToStdString(), wxOK | wxICON_ERROR, this );
                 return;
             }
             m_list->SetWild( filename );
@@ -1360,7 +1360,7 @@ void wxGenericFileCtrl::HandleAction( const std::string &fn )
     // they really wanted a dir, but it doesn't exist
     if ( want_dir )
     {
-        wxMessageBox( _( "Directory doesn't exist." ), _( "Error" ),
+        wxMessageBox( _( "Directory doesn't exist." ), _( "Error" ).ToStdString(),
                       wxOK | wxICON_ERROR, this );
         return;
     }

@@ -22,7 +22,7 @@ import <string>;
 
 #include <fmt/core.h>
 
-inline constexpr char wxMessageBoxCaptionStr[] = "Message";
+inline constexpr std::string_view wxMessageBoxCaptionStr = "Message";
 
 // ----------------------------------------------------------------------------
 // wxMessageDialogBase: base class defining wxMessageDialog interface
@@ -80,10 +80,10 @@ public:
     wxMessageDialogBase() = default;
     wxMessageDialogBase(wxWindow *parent,
                         const std::string& message,
-                        const std::string& caption,
+                        std::string_view caption,
                         unsigned int style)
         : m_message(message),
-          m_caption(caption)
+          m_caption{caption.begin(), caption.end()}
     {
         m_parent = GetParentForModalDialog(parent, style);
         SetMessageDialogStyle(style);
@@ -308,10 +308,10 @@ private:
 // ----------------------------------------------------------------------------
 
 int wxMessageBox(const std::string& message,
-                             const std::string& caption = wxMessageBoxCaptionStr,
-                             unsigned int style = wxOK | wxCENTRE,
-                             wxWindow *parent = nullptr,
-                             int x = wxDefaultCoord, int y = wxDefaultCoord);
+                 std::string_view caption = wxMessageBoxCaptionStr,
+                 unsigned int style = wxOK | wxCENTRE,
+                 wxWindow *parent = nullptr,
+                 int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 #endif // wxUSE_MSGDLG
 

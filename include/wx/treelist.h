@@ -30,7 +30,7 @@ import <vector>;
 class wxDataViewCtrl;
 class wxDataViewEvent;
 
-inline constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
+inline constexpr std::string_view wxTreeListCtrlNameStr = "wxTreeListCtrl";
 
 class wxTreeListCtrl;
 class wxTreeListModel;
@@ -131,7 +131,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = wxTL_DEFAULT_STYLE,
-                   const std::string& name = wxTreeListCtrlNameStr)
+                   std::string_view name = wxTreeListCtrlNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -144,7 +144,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTL_DEFAULT_STYLE,
-                const std::string& name = wxTreeListCtrlNameStr);
+                std::string_view name = wxTreeListCtrlNameStr);
 
 
     // Columns methods

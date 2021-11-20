@@ -23,7 +23,7 @@
 #include "wx/event.h"
 #include "wx/range.h"
 
-inline constexpr char wxSPIN_BUTTON_NAME[] = "wxSpinButton";
+inline constexpr std::string_view wxSPIN_BUTTON_NAME = "wxSpinButton";
 
 // ----------------------------------------------------------------------------
 //  The wxSpinButton is like a small scrollbar than is often placed next

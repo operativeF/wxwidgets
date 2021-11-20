@@ -22,7 +22,7 @@ class wxGenericRichMessageDialog
 public:
     wxGenericRichMessageDialog(wxWindow *parent,
                                const std::string& message,
-                               const std::string& caption = wxMessageBoxCaptionStr,
+                               std::string_view caption = wxMessageBoxCaptionStr,
                                unsigned int style = wxOK | wxCENTRE)
         : wxRichMessageDialogBase( parent, message, caption, style ),
           m_checkBox(nullptr),

@@ -24,7 +24,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = 0,
-                 const std::string& name = wxStaticTextNameStr)
+                 std::string_view name = wxStaticTextNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -37,7 +37,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxStaticTextNameStr);
+                std::string_view name = wxStaticTextNameStr);
 
     // override some methods to resize the window properly
     void SetLabel(const std::string& label) override;

@@ -23,7 +23,7 @@
 
 #if wxUSE_EVENTLOOP_SOURCE
 
-inline constexpr char wxTRACE_EVT_SOURCE[] = "EventSource";
+inline constexpr std::string_view wxTRACE_EVT_SOURCE = "EventSource";
 
 // handler used to process events on event loop sources
 class wxEventLoopSourceHandler

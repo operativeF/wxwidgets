@@ -21,7 +21,7 @@ import Utils.Geometry;
 import <string>;
 
 // class name
-inline constexpr char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
+inline constexpr std::string_view wxCollapsibleHeaderCtrlNameStr = "collapsibleHeader";
 
 //
 // wxGenericCollapsibleHeaderCtrl
@@ -39,7 +39,7 @@ public:
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
+        std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -53,7 +53,7 @@ public:
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
+        std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
             return false;
@@ -93,7 +93,7 @@ public:
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
+        std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }

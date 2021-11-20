@@ -17,7 +17,7 @@ enum class StringTokenizerMode
     StrTok          // behave exactly like strtok(3)
 };
 
-inline constexpr char DEFAULT_DELIMITERS[] = "\t\r\n";
+inline constexpr std::string_view DEFAULT_DELIMITERS[] = "\t\r\n";
 
 class StringTokenizer
 {
@@ -27,7 +27,7 @@ public:
     constexpr StringTokenizer() {}
 
     constexpr StringTokenizer(std::string_view str,
-                              const std::string& delims = DEFAULT_DELIMITERS,
+                              std::string_view delims = DEFAULT_DELIMITERS,
                               StringTokenizerMode mode = StringTokenizerMode::Default)
         : m_delims{delims}
     {

@@ -1641,12 +1641,12 @@ std::string wxGridTableBase::GetTypeName( int WXUNUSED(row), int WXUNUSED(col) )
 }
 
 bool wxGridTableBase::CanGetValueAs( int WXUNUSED(row), int WXUNUSED(col),
-                                     const std::string& typeName )
+                                     std::string_view typeName )
 {
     return typeName == wxGRID_VALUE_STRING;
 }
 
-bool wxGridTableBase::CanSetValueAs( int row, int col, const std::string& typeName )
+bool wxGridTableBase::CanSetValueAs( int row, int col, std::string_view typeName )
 {
     return CanGetValueAs(row, col, typeName);
 }
@@ -1682,13 +1682,13 @@ void wxGridTableBase::SetValueAsBool( int WXUNUSED(row), int WXUNUSED(col),
 }
 
 void* wxGridTableBase::GetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         const std::string& WXUNUSED(typeName) )
+                                         std::string_view WXUNUSED(typeName) )
 {
     return nullptr;
 }
 
 void  wxGridTableBase::SetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         const std::string& WXUNUSED(typeName),
+                                         std::string_view WXUNUSED(typeName),
                                          void* WXUNUSED(value) )
 {
 }

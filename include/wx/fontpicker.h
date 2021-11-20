@@ -23,8 +23,8 @@ import <string>;
 
 class wxFontPickerEvent;
 
-inline constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
-inline constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
+inline constexpr std::string_view wxFontPickerCtrlNameStr = "fontpicker";
+inline constexpr std::string_view wxFontPickerWidgetNameStr = "fontpickerwidget";
 
 // ----------------------------------------------------------------------------
 // wxFontPickerWidgetBase: a generic abstract interface which must be
@@ -111,7 +111,7 @@ public:
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxFNTP_DEFAULT_STYLE,
                      const wxValidator& validator = wxDefaultValidator,
-                     const std::string& name = wxFontPickerCtrlNameStr)
+                     std::string_view name = wxFontPickerCtrlNameStr)
         : m_nMinPointSize(wxFNTP_MINPOINT_SIZE), m_nMaxPointSize(wxFNTP_MAXPOINT_SIZE)
     {
         Create(parent, id, initial, pos, size, style, validator, name);
@@ -124,7 +124,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxFNTP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxFontPickerCtrlNameStr);
+                std::string_view name = wxFontPickerCtrlNameStr);
 
 
     // get the font chosen

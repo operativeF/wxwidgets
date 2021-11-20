@@ -151,7 +151,7 @@ struct wxComboCtrlFeatures
     };
 };
 
-inline constexpr char wxComboCtrlNameStr[] = "comboCtrl";
+inline constexpr std::string_view wxComboCtrlNameStr = "comboCtrl";
 
 class wxComboCtrlBase : public wxControl, public wxTextEntry
 {

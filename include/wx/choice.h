@@ -25,7 +25,7 @@
 // global data
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxChoiceNameStr[] = "choice";
+inline std::string_view wxChoiceNameStr = "choice";
 
 // ----------------------------------------------------------------------------
 // wxChoice allows to select one of a non-modifiable list of strings

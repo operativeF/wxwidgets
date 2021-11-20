@@ -232,7 +232,7 @@ wxLogGui::DoShowSingleLogMessage(const wxString& message,
                                  const wxString& title,
                                  unsigned int style)
 {
-    wxMessageBox(message, title, wxOK | style);
+    wxMessageBox(message, title.ToStdString(), wxOK | style);
 }
 
 void
@@ -999,7 +999,7 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
         wxString strMsg;
         strMsg.Printf(_("Append log to file '%s' (choosing [No] will overwrite it)?"),
                       filename.c_str());
-        switch ( wxMessageBox(strMsg, _("Question"),
+        switch ( wxMessageBox(strMsg, _("Question").ToStdString(),
                               wxICON_QUESTION | wxYES_NO | wxCANCEL) ) {
             case wxYES:
                 bAppend = true;

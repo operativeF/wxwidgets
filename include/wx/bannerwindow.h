@@ -26,7 +26,7 @@ class wxBitmap;
 class wxColour;
 class wxDC;
 
-inline constexpr char wxBannerWindowNameStr[] = "bannerwindow";
+inline constexpr std::string_view wxBannerWindowNameStr = "bannerwindow";
 
 // ----------------------------------------------------------------------------
 // A simple banner window showing either a bitmap or text.

@@ -27,7 +27,7 @@ public:
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
                   unsigned int style = wxLI_HORIZONTAL,
-                  const std::string &name = wxStaticLineNameStr)
+                  std::string_view name = wxStaticLineNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -39,7 +39,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxLI_HORIZONTAL,
-                 const std::string& name = wxStaticLineNameStr);
+                 std::string_view name = wxStaticLineNameStr);
 
     // overridden base class virtuals
     bool AcceptsFocus() const override { return false; }

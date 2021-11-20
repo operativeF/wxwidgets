@@ -133,7 +133,7 @@ bool wxRadioBox::Create(wxWindow *parent,
                         int majorDim,
                         unsigned int style,
                         const wxValidator& val,
-                        const std::string& name)
+                        std::string_view name)
 {
     // common initialization
     if ( !wxStaticBox::Create(parent, id, title, pos, size, style, name) )

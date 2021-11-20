@@ -29,7 +29,7 @@ public:
                   const wxPoint &pos = wxDefaultPosition,
                   const wxSize &size = wxDefaultSize,
                   unsigned int style = wxLI_HORIZONTAL,
-                  const std::string &name = wxStaticLineNameStr)
+                  std::string_view name = wxStaticLineNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -41,7 +41,7 @@ public:
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
                  unsigned int style = wxLI_HORIZONTAL,
-                 const std::string &name = wxStaticLineNameStr);
+                 std::string_view name = wxStaticLineNameStr);
 
     // it's necessary to override this wxWindow function because we
     // will want to return the main widget for m_statbox

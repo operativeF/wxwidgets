@@ -136,7 +136,7 @@ TEST_CASE("Button test")
 
         // Check that resetting the button label doesn't result in problems when
         // updating the bitmap later, as it used to be the case in wxGTK (#18898).
-        m_button->SetLabel(wxString());
+        m_button->SetLabel("");
         CHECK_NOTHROW( m_button->Disable() );
     }
 }

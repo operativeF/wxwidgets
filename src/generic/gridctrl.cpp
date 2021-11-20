@@ -121,7 +121,7 @@ wxGridPrivate::TryGetValueAsDate(wxDateTime& result,
 
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_DATETIME) )
     {
-        void * tempval = table->GetValueAsCustom(row, col,wxGRID_VALUE_DATETIME);
+        void * tempval = table->GetValueAsCustom(row, col, wxGRID_VALUE_DATETIME);
 
         if (tempval)
         {

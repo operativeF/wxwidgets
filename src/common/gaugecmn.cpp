@@ -97,7 +97,7 @@ bool wxGaugeBase::Create(wxWindow *parent,
                          const wxSize& size,
                          unsigned int style,
                          const wxValidator& validator,
-                         const std::string& name)
+                         std::string_view name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
         return false;

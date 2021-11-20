@@ -1159,8 +1159,8 @@ public:
 
     // Data type determination and value access
     virtual std::string GetTypeName( int row, int col );
-    virtual bool CanGetValueAs( int row, int col, const std::string& typeName );
-    virtual bool CanSetValueAs( int row, int col, const std::string& typeName );
+    virtual bool CanGetValueAs( int row, int col, std::string_view typeName );
+    virtual bool CanSetValueAs( int row, int col, std::string_view typeName );
 
     virtual long GetValueAsLong( int row, int col );
     virtual double GetValueAsDouble( int row, int col );
@@ -1171,8 +1171,8 @@ public:
     virtual void SetValueAsBool( int row, int col, bool value );
 
     // For user defined types
-    virtual void* GetValueAsCustom( int row, int col, const std::string& typeName );
-    virtual void  SetValueAsCustom( int row, int col, const std::string& typeName, void* value );
+    virtual void* GetValueAsCustom( int row, int col, std::string_view typeName );
+    virtual void  SetValueAsCustom( int row, int col, std::string_view typeName, void* value );
 
     // Overriding these is optional
     //

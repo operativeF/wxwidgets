@@ -31,7 +31,7 @@ inline constexpr unsigned int wxST_ELLIPSIZE_END         = 0x0010;
 inline constexpr unsigned int wxST_ELLIPSIZE_MASK =
     wxST_ELLIPSIZE_START | wxST_ELLIPSIZE_MIDDLE | wxST_ELLIPSIZE_END;
 
-inline constexpr char wxStaticTextNameStr[] = "staticText";
+inline constexpr std::string_view wxStaticTextNameStr = "staticText";
 
 class wxStaticTextBase : public wxControl
 {

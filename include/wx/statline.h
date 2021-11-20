@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 
 // the default name for objects of class wxStaticLine
-inline constexpr char wxStaticLineNameStr[] = "staticLine";
+inline constexpr std::string_view wxStaticLineNameStr = "staticLine";
 
 // ----------------------------------------------------------------------------
 // wxStaticLine - a line in a dialog

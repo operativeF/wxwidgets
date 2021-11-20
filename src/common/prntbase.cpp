@@ -309,7 +309,7 @@ wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintou
 
 void wxPrinterBase::ReportError(wxWindow *parent, wxPrintout *WXUNUSED(printout), const wxString& message)
 {
-    wxMessageBox(message, _("Printing Error"), wxOK, parent);
+    wxMessageBox(message, _("Printing Error").ToStdString(), wxOK, parent);
 }
 
 wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
@@ -1953,7 +1953,7 @@ bool wxPrintPreviewBase::RenderPageIntoDC(wxDC& dc, int pageNum)
 
     if (!m_previewPrintout->OnBeginDocument(m_printDialogData.GetFromPage(), m_printDialogData.GetToPage()))
     {
-        wxMessageBox(_("Could not start document preview."), _("Print Preview Failure"), wxOK);
+        wxMessageBox(_("Could not start document preview."), _("Print Preview Failure").ToStdString(), wxOK);
         return false;
     }
 
@@ -1995,7 +1995,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
         if (!m_previewBitmap || !m_previewBitmap->IsOk())
         {
             InvalidatePreviewBitmap();
-            wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
+            wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure").ToStdString(), wxOK);
             return false;
         }
     }
@@ -2003,7 +2003,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
     if ( !RenderPageIntoBitmap(*m_previewBitmap, pageNum) )
     {
         InvalidatePreviewBitmap();
-        wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
+        wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure").ToStdString(), wxOK);
         return false;
     }
 
