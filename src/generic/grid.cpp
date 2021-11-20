@@ -2599,7 +2599,7 @@ wxEND_EVENT_TABLE()
 
 bool wxGrid::Create(wxWindow *parent, wxWindowID id,
                           const wxPoint& pos, const wxSize& size,
-                          unsigned int style, const std::string& name)
+                          unsigned int style, std::string_view name)
 {
     if (!wxScrolledCanvas::Create(parent, id, pos, size,
                                   style | wxWANTS_CHARS, name))

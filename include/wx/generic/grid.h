@@ -30,7 +30,7 @@ import <iterator>;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxGridNameStr[] = "grid";
+inline constexpr std::string_view wxGridNameStr = "grid";
 
 // Various constants used in wxGrid code.
 //
@@ -1448,7 +1448,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxWANTS_CHARS,
-            const std::string& name = wxGridNameStr)
+            std::string_view name = wxGridNameStr)
     {
         m_labelFont = GetFont();
         m_labelFont.SetWeight( wxFONTWEIGHT_BOLD );
@@ -1475,7 +1475,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxWANTS_CHARS,
-                const std::string& name = wxGridNameStr);
+                std::string_view name = wxGridNameStr);
 
     ~wxGrid();
 
