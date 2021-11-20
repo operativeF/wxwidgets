@@ -810,7 +810,7 @@ static void TestBox(wxGraphicsContext* gc)
     {
         gc->PushState();
         gc->Translate(5, 15);
-        gc->Rotate(10.0 * std::numbers::pi_v<float> / 180.0);
+        gc->Rotate(10.0F * std::numbers::pi_v<float> / 180.0F);
         wxGraphicsPath path = gc->CreatePath();
         path.MoveToPoint(50, 60);
         const double x = 100;
