@@ -19,6 +19,7 @@
 #include "wx/control.h"
 
 import <string>;
+import <string_view>;
 
 class wxToolBarBase;
 
@@ -26,7 +27,7 @@ class wxToolBarBase;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxToolBarNameStr[] = "toolbar";
+inline constexpr std::string_view wxToolBarNameStr = "toolbar";
 
 enum class wxToolBarToolStyle
 {

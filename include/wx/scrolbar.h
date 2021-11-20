@@ -18,8 +18,9 @@
 #include "wx/control.h"
 
 import <string>;
+import <string_view>;
 
-inline constexpr char wxScrollBarNameStr[] = "scrollBar";
+inline constexpr std::string_view wxScrollBarNameStr = "scrollBar";
 
 // ----------------------------------------------------------------------------
 // wxScrollBar: a scroll bar control

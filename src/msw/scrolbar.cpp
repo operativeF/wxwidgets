@@ -24,7 +24,7 @@ bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
            const wxPoint& pos,
            const wxSize& size, unsigned int style,
            const wxValidator& validator,
-           const std::string& name)
+           std::string_view name)
 {
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;

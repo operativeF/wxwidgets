@@ -20,7 +20,7 @@
 
 class wxBitmap;
 
-inline constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
+inline constexpr std::string_view wxStaticBitmapNameStr = "staticBitmap";
 
 // a control showing an icon or a bitmap
 class wxStaticBitmapBase : public wxControl

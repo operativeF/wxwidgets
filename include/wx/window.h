@@ -106,7 +106,7 @@ enum class wxWindowVariant
 };
 
 #if wxUSE_SYSTEM_OPTIONS
-    inline constexpr char wxWINDOW_DEFAULT_VARIANT[] = "window-default-variant";
+    inline constexpr std::string_view wxWINDOW_DEFAULT_VARIANT = "window-default-variant";
 #endif
 
 // valid values for Show/HideWithEffect()

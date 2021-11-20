@@ -20,7 +20,7 @@ import <string>;
 class wxTextCtrl;
 class wxToolTip;
 
-inline constexpr char wxPickerNameStr[] = "picker";
+inline constexpr std::string_view wxPickerNameStr = "picker";
 
 // ----------------------------------------------------------------------------
 // wxPickerBase is the base class for the picker controls which support

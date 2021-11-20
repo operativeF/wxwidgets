@@ -27,6 +27,7 @@ import Utils.Geometry;
 import <iostream>;
 import <streambuf>;
 import <string>;
+import <string_view>;
 import <vector>;
 
 #define wxHAS_TEXT_WINDOW_STREAM 1
@@ -46,7 +47,7 @@ using wxTextCoord = long;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxTextCtrlNameStr[] = "text";
+inline constexpr std::string_view wxTextCtrlNameStr = "text";
 
 // this is intentionally not enum to avoid warning fixes with
 // typecasting from enum type to wxTextCoord

@@ -28,7 +28,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
-                   const std::string& name = wxToggleButtonNameStr)
+                   std::string_view name = wxToggleButtonNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -42,7 +42,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxToggleButtonNameStr);
+                std::string_view name = wxToggleButtonNameStr);
 
     void SetValue(bool value) override;
     bool GetValue() const override;
@@ -87,7 +87,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
-                   const std::string& name = wxToggleButtonNameStr)
+                   std::string_view name = wxToggleButtonNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -99,7 +99,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxToggleButtonNameStr);
+                std::string_view name = wxToggleButtonNameStr);
 
     // prevent virtual function hiding
     void SetLabel(const std::string& label) override { wxToggleButton::SetLabel(label); }

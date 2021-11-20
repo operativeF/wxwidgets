@@ -48,7 +48,7 @@ protected:
                                  const wxSize& size,
                                  unsigned int style,
                                  const wxValidator& validator,
-                                 const std::string& name);
+                                 std::string_view name);
 
 #if wxUSE_INTL
     // Override to return the date/time format used by this control.

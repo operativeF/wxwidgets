@@ -82,7 +82,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 unsigned int style,
-                const std::string& name);
+                std::string_view name);
 
     // Override to implement colours support via custom drawing.
     bool SetBackgroundColour(const wxColour& colour) override;
@@ -199,7 +199,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
                              const wxPoint& pos,
                              const wxSize& size,
                              unsigned int style,
-                             const std::string& name)
+                             std::string_view name)
 {
     // notice that we don't need InitCommonControlsEx(ICC_LISTVIEW_CLASSES)
     // here as we already call InitCommonControls() in wxApp initialization
@@ -994,7 +994,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
                           const wxPoint& pos,
                           const wxSize& size,
                           unsigned int style,
-                          const std::string& name)
+                          std::string_view name)
 {
     long newStyle = style | wxCLIP_CHILDREN | wxTAB_TRAVERSAL;
     if ( !wxWindow::Create(parent, id, pos, size, newStyle, name) )

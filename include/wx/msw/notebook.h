@@ -37,14 +37,14 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              unsigned int style = 0,
-             const std::string& name = wxNotebookNameStr);
+             std::string_view name = wxNotebookNameStr);
     // Create() function
   [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = 0,
-              const std::string& name = wxNotebookNameStr);
+              std::string_view name = wxNotebookNameStr);
 
   wxNotebook& operator=(wxNotebook&&) = delete;
 

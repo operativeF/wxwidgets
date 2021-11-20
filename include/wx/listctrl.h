@@ -17,11 +17,13 @@
 
 #include "wx/listbase.h"
 
+import <string_view>;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxListCtrlNameStr[] = "listCtrl";
+inline constexpr std::string_view wxListCtrlNameStr = "listCtrl";
 
 // ----------------------------------------------------------------------------
 // include the wxListCtrl class declaration
@@ -51,7 +53,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxLC_REPORT,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxListCtrlNameStr)
+                std::string_view name = wxListCtrlNameStr)
     {
         Create(parent, winid, pos, size, style, validator, name);
     }

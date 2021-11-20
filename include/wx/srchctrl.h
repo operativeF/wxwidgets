@@ -52,7 +52,7 @@ import <string>;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxSearchCtrlNameStr[] = "searchCtrl";
+inline constexpr std::string_view wxSearchCtrlNameStr = "searchCtrl";
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH_CANCEL, wxCommandEvent);
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH, wxCommandEvent);

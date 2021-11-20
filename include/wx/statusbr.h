@@ -22,7 +22,7 @@ import Utils.Geometry;
 import <string>;
 import <vector>;
 
-inline constexpr char wxStatusBarNameStr[] = "statusBar";
+inline constexpr std::string_view wxStatusBarNameStr = "statusBar";
 
 // ----------------------------------------------------------------------------
 // wxStatusBar constants

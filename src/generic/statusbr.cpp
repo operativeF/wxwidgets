@@ -102,7 +102,7 @@ void wxStatusBarGeneric::Init()
 bool wxStatusBarGeneric::Create(wxWindow *parent,
                                 wxWindowID id,
                                 unsigned int style,
-                                const std::string& name)
+                                std::string_view name)
 {
     style |= wxTAB_TRAVERSAL | wxFULL_REPAINT_ON_RESIZE;
     if ( !wxWindow::Create(parent, id,

@@ -53,7 +53,7 @@ inline constexpr unsigned int wxNB_NOPAGETHEME = 0x0400;
 
 using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
-inline constexpr char wxNotebookNameStr[] = "notebook";
+inline constexpr std::string_view wxNotebookNameStr = "notebook";
 
 #if wxUSE_EXTENDED_RTTI
 

@@ -21,7 +21,7 @@
 import <string>;
 
 // class name
-inline constexpr char wxCollapsiblePaneNameStr[] = "collapsiblePane";
+inline constexpr std::string_view wxCollapsiblePaneNameStr = "collapsiblePane";
 
 // ----------------------------------------------------------------------------
 // wxCollapsiblePaneBase: interface for wxCollapsiblePane

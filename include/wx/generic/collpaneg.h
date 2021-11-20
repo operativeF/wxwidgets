@@ -35,7 +35,7 @@ public:
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxCP_DEFAULT_STYLE,
                         const wxValidator& val = wxDefaultValidator,
-                        const std::string& name = wxCollapsiblePaneNameStr)
+                        std::string_view name = wxCollapsiblePaneNameStr)
     {
         Create(parent, winid, label, pos, size, style, val, name);
     }
@@ -49,7 +49,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxCP_DEFAULT_STYLE,
                 const wxValidator& val = wxDefaultValidator,
-                const std::string& name = wxCollapsiblePaneNameStr);
+                std::string_view name = wxCollapsiblePaneNameStr);
 
     // public wxCollapsiblePane API
     void Collapse(bool collapse = true) override;

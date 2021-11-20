@@ -19,7 +19,7 @@ import Utils.Geometry;
 
 import <string>;
 
-inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
+inline constexpr std::string_view wxVListBoxNameStr = "wxVListBox";
 
 // ----------------------------------------------------------------------------
 // wxVListBox
@@ -45,7 +45,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const std::string& name = wxVListBoxNameStr)
+               std::string_view name = wxVListBoxNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -63,7 +63,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxVListBoxNameStr);
+                std::string_view name = wxVListBoxNameStr);
 
     // get the number of items in the control
     size_t GetItemCount() const { return GetRowCount(); }

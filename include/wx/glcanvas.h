@@ -20,6 +20,7 @@
 #include "wx/window.h"
 
 import <string>;
+import <string_view>;
 import <vector>;
 
 class wxGLCanvas;
@@ -69,7 +70,7 @@ enum
     WX_GL_RELEASE_NONE     // on context release, pending commands are not flushed
 };
 
-inline constexpr char wxGLCanvasName[] = "GLCanvas";
+inline constexpr std::string_view wxGLCanvasName = "GLCanvas";
 
 // ----------------------------------------------------------------------------
 // wxGLAttribsBase: OpenGL rendering attributes

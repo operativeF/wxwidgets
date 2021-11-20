@@ -53,14 +53,14 @@ void wxSystemOptions::SetOption(const wxString& name, int value)
     SetOption(name, wxString::Format("%d", value));
 }
 
-wxString wxSystemOptions::GetOption(const wxString& name)
+wxString wxSystemOptions::GetOption(std::string_view name)
 {
     wxString val;
 
     const auto match_iter = std::find_if(gs_optionNames.cbegin(), gs_optionNames.cend(),
         [name](const auto& optName)
         {
-            return name.IsSameAs(optName, false);
+            return wx::utils::IsSameAsNoCase(name, optName.ToStdString());
         });
     if ( match_iter != std::cend(gs_optionNames) )
     {
@@ -71,7 +71,7 @@ wxString wxSystemOptions::GetOption(const wxString& name)
         // look in the environment: first for a variable named "wx_appname_name"
         // which can be set to affect the behaviour or just this application
         // and then for "wx_name" which can be set to change the option globally
-        std::string var = name;
+        std::string var = {name.begin(), name.end()};
 
         wx::utils::ReplaceAll(var, ".", "_"); // '.'s not allowed in env var names
         wx::utils::ReplaceAll(var, "-", "_"); // and neither are '-'s
@@ -90,12 +90,12 @@ wxString wxSystemOptions::GetOption(const wxString& name)
     return val;
 }
 
-int wxSystemOptions::GetOptionInt(const wxString& name)
+int wxSystemOptions::GetOptionInt(std::string_view name)
 {
     return wxAtoi (GetOption(name));
 }
 
-bool wxSystemOptions::HasOption(const wxString& name)
+bool wxSystemOptions::HasOption(std::string_view name)
 {
     return !GetOption(name).empty();
 }

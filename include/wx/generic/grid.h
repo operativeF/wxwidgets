@@ -48,15 +48,15 @@ inline constexpr int GRID_SCROLL_LINE_X = 15;
 inline constexpr int GRID_SCROLL_LINE_Y = GRID_SCROLL_LINE_X;
 
 // type names for grid table values
-inline constexpr char wxGRID_VALUE_STRING[]     = "string";
-inline constexpr char wxGRID_VALUE_BOOL[]       = "bool";
-inline constexpr char wxGRID_VALUE_NUMBER[]     = "long";
-inline constexpr char wxGRID_VALUE_FLOAT[]      = "double";
-inline constexpr char wxGRID_VALUE_CHOICE[]     = "choice";
-inline constexpr char wxGRID_VALUE_DATE[]       = "date";
+inline constexpr std::string_view wxGRID_VALUE_STRING     = "string";
+inline constexpr std::string_view wxGRID_VALUE_BOOL       = "bool";
+inline constexpr std::string_view wxGRID_VALUE_NUMBER     = "long";
+inline constexpr std::string_view wxGRID_VALUE_FLOAT      = "double";
+inline constexpr std::string_view wxGRID_VALUE_CHOICE     = "choice";
+inline constexpr std::string_view wxGRID_VALUE_DATE       = "date";
 
-inline constexpr auto wxGRID_VALUE_TEXT         = wxGRID_VALUE_STRING;
-inline constexpr auto wxGRID_VALUE_LONG         = wxGRID_VALUE_NUMBER;
+inline constexpr std::string_view wxGRID_VALUE_TEXT       = wxGRID_VALUE_STRING;
+inline constexpr std::string_view wxGRID_VALUE_LONG       = wxGRID_VALUE_NUMBER;
 
 // magic constant which tells (to some functions) to automatically calculate
 // the appropriate size
@@ -1953,7 +1953,7 @@ public:
     void     SetColFormatNumber(int col);
     void     SetColFormatFloat(int col, int width = -1, int precision = -1);
     void     SetColFormatDate(int col, const std::string& format = {});
-    void     SetColFormatCustom(int col, const std::string& typeName);
+    void     SetColFormatCustom(int col, std::string_view typeName);
 
     // ------ row and col formatting
     //
@@ -2242,7 +2242,7 @@ public:
 
 
     // Methods for a registry for mapping data types to Renderers/Editors
-    void RegisterDataType(const std::string& typeName,
+    void RegisterDataType(std::string_view typeName,
                           wxGridCellRenderer* renderer,
                           wxGridCellEditor* editor);
     // DJC MAPTEK
@@ -2250,8 +2250,8 @@ public:
     wxGridCellEditor* GetDefaultEditorForCell(const wxGridCellCoords& c) const
         { return GetDefaultEditorForCell(c.GetRow(), c.GetCol()); }
     virtual wxGridCellRenderer* GetDefaultRendererForCell(int row, int col) const;
-    virtual wxGridCellEditor* GetDefaultEditorForType(const std::string& typeName) const;
-    virtual wxGridCellRenderer* GetDefaultRendererForType(const std::string& typeName) const;
+    virtual wxGridCellEditor* GetDefaultEditorForType(std::string_view typeName) const;
+    virtual wxGridCellRenderer* GetDefaultRendererForType(std::string_view typeName) const;
 
     // grid may occupy more space than needed for its rows/columns, this
     // function allows to set how big this extra space is

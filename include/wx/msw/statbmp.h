@@ -29,7 +29,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
-                   const std::string& name = wxStaticBitmapNameStr)
+                   std::string_view name = wxStaticBitmapNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -42,7 +42,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxStaticBitmapNameStr);
+                std::string_view name = wxStaticBitmapNameStr);
 
     ~wxStaticBitmap() { Free(); }
 

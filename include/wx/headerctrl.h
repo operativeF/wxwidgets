@@ -50,7 +50,7 @@ enum
     wxHD_DEFAULT_STYLE = wxHD_ALLOW_REORDER
 };
 
-inline constexpr char wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
+inline constexpr std::string_view wxHeaderCtrlNameStr = "wxHeaderCtrl";
 
 // ----------------------------------------------------------------------------
 // wxHeaderCtrlBase defines the interface of a header control
@@ -68,14 +68,14 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxHD_DEFAULT_STYLE,
-                 const std::string& name = wxHeaderCtrlNameStr);
+                 std::string_view name = wxHeaderCtrlNameStr);
 
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxHD_DEFAULT_STYLE,
-                const std::string& name = wxHeaderCtrlNameStr);
+                std::string_view name = wxHeaderCtrlNameStr);
      */
 
     // column-related methods
@@ -291,7 +291,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxHD_DEFAULT_STYLE,
-                       const std::string& name = wxHeaderCtrlNameStr)
+                       std::string_view name = wxHeaderCtrlNameStr)
     {
         
         m_sortKey = wxNO_COLUMN;

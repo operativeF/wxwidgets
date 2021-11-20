@@ -31,7 +31,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxHD_DEFAULT_STYLE,
-                 const std::string& name = wxHeaderCtrlNameStr)
+                 std::string_view name = wxHeaderCtrlNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxHD_DEFAULT_STYLE,
-                const std::string& name = wxHeaderCtrlNameStr);
+                std::string_view name = wxHeaderCtrlNameStr);
 
     // Window style handling.
     void SetWindowStyleFlag(unsigned int style) override;

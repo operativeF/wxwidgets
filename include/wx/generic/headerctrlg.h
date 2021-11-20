@@ -31,7 +31,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxHD_DEFAULT_STYLE,
-                 const std::string& name = wxHeaderCtrlNameStr)
+                 std::string_view name = wxHeaderCtrlNameStr)
     {
         Init();
 
@@ -46,7 +46,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxHD_DEFAULT_STYLE,
-                const std::string& name = wxHeaderCtrlNameStr);
+                std::string_view name = wxHeaderCtrlNameStr);
 
     ~wxHeaderCtrl();
 

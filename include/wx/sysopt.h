@@ -32,11 +32,11 @@ public:
     static void SetOption(const wxString& name, const wxString& value);
     static void SetOption(const wxString& name, int value);
 #endif // wxUSE_SYSTEM_OPTIONS
-    static wxString GetOption(const wxString& name);
-    static int GetOptionInt(const wxString& name);
-    static bool HasOption(const wxString& name);
+    static wxString GetOption(std::string_view name);
+    static int GetOptionInt(std::string_view name);
+    static bool HasOption(std::string_view name);
 
-    static bool IsFalse(const wxString& name)
+    static bool IsFalse(std::string_view name)
     {
         return HasOption(name) && GetOptionInt(name) == 0;
     }

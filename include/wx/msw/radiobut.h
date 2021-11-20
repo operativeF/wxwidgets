@@ -31,7 +31,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   unsigned int style = 0,
                   const wxValidator& validator = wxDefaultValidator,
-                  const std::string& name = wxRadioButtonNameStr)
+                  std::string_view name = wxRadioButtonNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -45,7 +45,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxRadioButtonNameStr);
+                std::string_view name = wxRadioButtonNameStr);
 
     // implement the radio button interface
     void SetValue(bool value) override;

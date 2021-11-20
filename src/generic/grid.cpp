@@ -1637,7 +1637,7 @@ std::string wxGridTableBase::GetCornerLabelValue() const
 
 std::string wxGridTableBase::GetTypeName( int WXUNUSED(row), int WXUNUSED(col) )
 {
-    return wxGRID_VALUE_STRING;
+    return {wxGRID_VALUE_STRING.begin(), wxGRID_VALUE_STRING.end()};
 }
 
 bool wxGridTableBase::CanGetValueAs( int WXUNUSED(row), int WXUNUSED(col),
@@ -9219,7 +9219,7 @@ void wxGrid::SetColFormatNumber(int col)
 
 void wxGrid::SetColFormatFloat(int col, int width, int precision)
 {
-    std::string typeName = wxGRID_VALUE_FLOAT;
+    std::string typeName = {wxGRID_VALUE_FLOAT.begin(), wxGRID_VALUE_FLOAT.end()};
     if ( (width != -1) || (precision != -1) )
     {
         typeName += fmt::format(":{},{}", width, precision);
@@ -9230,7 +9230,7 @@ void wxGrid::SetColFormatFloat(int col, int width, int precision)
 
 void wxGrid::SetColFormatDate(int col, const std::string& format)
 {
-    std::string typeName = wxGRID_VALUE_DATE;
+    std::string typeName = {wxGRID_VALUE_DATE.begin(), wxGRID_VALUE_DATE.end()};
     if ( !format.empty() )
     {
         typeName += ':' + format;
@@ -9238,7 +9238,7 @@ void wxGrid::SetColFormatDate(int col, const std::string& format)
     SetColFormatCustom(col, typeName);
 }
 
-void wxGrid::SetColFormatCustom(int col, const std::string& typeName)
+void wxGrid::SetColFormatCustom(int col, std::string_view typeName)
 {
     wxGridCellAttr *attr = m_table->GetAttr(-1, col, wxGridCellAttr::Col );
     if (!attr)
@@ -9415,7 +9415,7 @@ void wxGrid::SetReadOnly(int row, int col, bool isReadOnly)
 // Data type registration
 // ----------------------------------------------------------------------------
 
-void wxGrid::RegisterDataType(const std::string& typeName,
+void wxGrid::RegisterDataType(std::string_view typeName,
                               wxGridCellRenderer* renderer,
                               wxGridCellEditor* editor)
 {
@@ -9439,12 +9439,12 @@ wxGridCellRenderer* wxGrid::GetDefaultRendererForCell(int row, int col) const
     return GetDefaultRendererForType(m_table->GetTypeName(row, col));
 }
 
-wxGridCellEditor* wxGrid::GetDefaultEditorForType(const std::string& typeName) const
+wxGridCellEditor* wxGrid::GetDefaultEditorForType(std::string_view typeName) const
 {
     int index = m_typeRegistry->FindOrCloneDataType(typeName);
     if ( index == wxNOT_FOUND )
     {
-        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName.c_str()));
+        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName));
 
         return nullptr;
     }
@@ -9452,12 +9452,12 @@ wxGridCellEditor* wxGrid::GetDefaultEditorForType(const std::string& typeName) c
     return m_typeRegistry->GetEditor(index);
 }
 
-wxGridCellRenderer * wxGrid::GetDefaultRendererForType(const std::string& typeName) const
+wxGridCellRenderer * wxGrid::GetDefaultRendererForType(std::string_view typeName) const
 {
     int index = m_typeRegistry->FindOrCloneDataType(typeName);
     if ( index == wxNOT_FOUND )
     {
-        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName.c_str()));
+        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName));
 
         return nullptr;
     }
@@ -10933,7 +10933,7 @@ wxGridTypeRegistry::~wxGridTypeRegistry()
         delete m_typeinfo[i];
 }
 
-void wxGridTypeRegistry::RegisterDataType(const std::string& typeName,
+void wxGridTypeRegistry::RegisterDataType(std::string_view typeName,
                                           wxGridCellRenderer* renderer,
                                           wxGridCellEditor* editor)
 {
@@ -10952,7 +10952,7 @@ void wxGridTypeRegistry::RegisterDataType(const std::string& typeName,
     }
 }
 
-int wxGridTypeRegistry::FindRegisteredDataType(const std::string& typeName)
+int wxGridTypeRegistry::FindRegisteredDataType(std::string_view typeName)
 {
     size_t count = m_typeinfo.GetCount();
     for ( size_t i = 0; i < count; i++ )
@@ -10966,7 +10966,7 @@ int wxGridTypeRegistry::FindRegisteredDataType(const std::string& typeName)
     return wxNOT_FOUND;
 }
 
-int wxGridTypeRegistry::FindDataType(const std::string& typeName)
+int wxGridTypeRegistry::FindDataType(std::string_view typeName)
 {
     int index = FindRegisteredDataType(typeName);
     if ( index == wxNOT_FOUND )
@@ -11036,7 +11036,7 @@ int wxGridTypeRegistry::FindDataType(const std::string& typeName)
     return index;
 }
 
-int wxGridTypeRegistry::FindOrCloneDataType(const std::string& typeName)
+int wxGridTypeRegistry::FindOrCloneDataType(std::string_view typeName)
 {
     int index = FindDataType(typeName);
     if ( index == wxNOT_FOUND )
