@@ -13,6 +13,8 @@
 
 #include "wx/bitmap.h"
 
+import <string_view>;
+
 struct wxPanel : public wxPanelBase
 {
     wxPanel() = default;
@@ -23,7 +25,7 @@ struct wxPanel : public wxPanelBase
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxTAB_TRAVERSAL | wxNO_BORDER,
-            const std::string& name = wxPanelNameStr)
+            std::string_view name = wxPanelNameStr)
     {
         Create(parent, winid, pos, size, style, name);
     }

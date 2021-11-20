@@ -36,7 +36,7 @@ wxDEFINE_EVENT(wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
 
 bool wxGenericCollapsibleHeaderCtrl::Create(wxWindow *parent,
     wxWindowID id,
-    const std::string& label,
+    std::string_view label,
     const wxPoint& pos,
     const wxSize& size,
     unsigned int style,

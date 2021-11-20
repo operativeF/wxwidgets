@@ -11,12 +11,13 @@
 #define _WX_MSW_RICHMSGDLG_H_
 
 import <string>;
+import <string_view>;
 
 class wxRichMessageDialog : public wxGenericRichMessageDialog
 {
 public:
     wxRichMessageDialog(wxWindow *parent,
-                        const std::string& message,
+                        std::string_view message,
                         std::string_view caption = wxMessageBoxCaptionStr,
                         unsigned int style = wxOK | wxCENTRE)
         : wxGenericRichMessageDialog(parent, message, caption, style)

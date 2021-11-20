@@ -44,7 +44,7 @@ public:
     
     wxAnyButton& operator=(wxAnyButton&&) = delete;
 
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
     bool SetBackgroundColour(const wxColour &colour) override;
     bool SetForegroundColour(const wxColour &colour) override;
 

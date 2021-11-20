@@ -141,13 +141,13 @@ wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMe
     // Create title and message sizers
     wxSizer* textSizer = new wxBoxSizer(wxVERTICAL);
     
-    m_messageTitle = new wxStaticText(m_messagePanel, wxID_ANY, wxString());
+    m_messageTitle = new wxStaticText(m_messagePanel, wxID_ANY, "");
     m_messageTitle->SetFont(m_messageTitle->GetFont().MakeBold());
     textSizer->Add(m_messageTitle, wxSizerFlags(0).Border());
     m_messageTitle->Hide();
     PrepareNotificationControl(m_messageTitle);
 
-    m_messageText = new wxStaticText(m_messagePanel, wxID_ANY, wxString());
+    m_messageText = new wxStaticText(m_messagePanel, wxID_ANY, "");
     textSizer->Add(m_messageText, wxSizerFlags(0).Border(wxLEFT | wxRIGHT | wxBOTTOM));
     PrepareNotificationControl(m_messageText);
 

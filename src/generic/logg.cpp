@@ -135,7 +135,7 @@ private:
     wxListCtrl *m_listctrl;
 
     // the translated "Details" string
-    static wxString ms_details;
+    static std::string ms_details;
 
     // the maximum length of the log message
     static size_t ms_maxLength;
@@ -646,7 +646,7 @@ wxLogWindow::~wxLogWindow()
 
 #if wxUSE_LOG_DIALOG
 
-wxString wxLogDialog::ms_details;
+std::string wxLogDialog::ms_details;
 size_t wxLogDialog::ms_maxLength = 0;
 
 wxLogDialog::wxLogDialog(wxWindow *parent,
@@ -666,7 +666,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
         // ensure that we won't loop here if wxGetTranslation()
         // happens to pop up a Log message while translating this :-)
         ms_details = wxTRANSLATE("&Details");
-        ms_details = wxGetTranslation(ms_details);
+        ms_details = wxGetTranslation(ms_details).ToStdString();
     }
 
     if ( ms_maxLength == 0 )

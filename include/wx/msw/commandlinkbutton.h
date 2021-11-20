@@ -50,7 +50,7 @@ public:
                 std::string_view name = wxButtonNameStr);
 
     // do the same thing as in the generic case here
-    void SetLabel(const std::string& label) override
+    void SetLabel(std::string_view label) override
     {
         SetMainLabelAndNote(wx::utils::BeforeFirst(label, '\n'), wx::utils::AfterFirst(label, '\n'));
     }

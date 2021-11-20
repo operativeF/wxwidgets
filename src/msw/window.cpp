@@ -4297,9 +4297,9 @@ bool wxWindowMSW::HandleKillFocus(WXHWND hwnd)
 // labels
 // ---------------------------------------------------------------------------
 
-void wxWindowMSW::SetLabel( const std::string& label)
+void wxWindowMSW::SetLabel( std::string_view label)
 {
-    SetWindowTextW(GetHwnd(), boost::nowide::widen(label).c_str());
+    ::SetWindowTextW(GetHwnd(), boost::nowide::widen(label).c_str());
 }
 
 std::string wxWindowMSW::GetLabel() const

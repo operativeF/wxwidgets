@@ -20,7 +20,7 @@ public:
 
     wxStaticText(wxWindow *parent,
                  wxWindowID id,
-                 const std::string& label,
+                 std::string_view label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = 0,
@@ -33,14 +33,14 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const std::string& label,
+                std::string_view label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 std::string_view name = wxStaticTextNameStr);
 
     // override some methods to resize the window properly
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
     bool SetFont( const wxFont &font ) override;
 
     DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;

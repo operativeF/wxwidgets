@@ -8,13 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_MSGDLG
-
-#ifndef WX_PRECOMP
-    import <string>;
-#endif
 
 #include "wx/utils.h"
 #include "wx/dialog.h"
@@ -37,6 +31,9 @@
 #if wxUSE_STATLINE
     #include "wx/statline.h"
 #endif
+
+import <string>;
+import <string_view>;
 
 // ----------------------------------------------------------------------------
 // wxTitleTextWrapper: simple class to create wrapped text in "title font"
@@ -75,7 +72,7 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
 
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
-                                                const std::string& message,
+                                                std::string_view message,
                                                 std::string_view caption,
                                                 unsigned int style,
                                                 const wxPoint& pos)

@@ -15,7 +15,7 @@
 
 import <string>;
 
-static std::string GetLabelForSysLink(const std::string& text, const std::string& url)
+static std::string GetLabelForSysLink(std::string_view text, const std::string& url)
 {
     // Any "&"s in the text should appear on the screen and not be (mis)
     // interpreted as mnemonics.
@@ -67,7 +67,7 @@ public:
 
     void SetURL(const std::string& url) override;
 
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
 
 protected:
     DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;

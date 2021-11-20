@@ -76,7 +76,7 @@ public:
                              std::string_view name = wxPanelNameStr);
 
     
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
     std::string GetLabel() const override;
 
     void Raise() override;

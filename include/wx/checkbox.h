@@ -17,6 +17,7 @@
 
 #include "wx/control.h"
 
+import <string_view>;
 
 /*
  * wxCheckBox style flags
@@ -40,7 +41,7 @@ inline constexpr unsigned int wxCHK_3STATE = 0x1000;
  */
 inline unsigned int wxCHK_ALLOW_3RD_STATE_FOR_USER = 0x2000;
 
-inline char wxCheckBoxNameStr[] = "check";
+inline constexpr std::string_view wxCheckBoxNameStr = "check";
 
 /*
  * The possible states of a 3-state checkbox (Compatible

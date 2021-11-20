@@ -904,7 +904,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 
     wxBoxSizer *staticsizer = new wxBoxSizer( wxHORIZONTAL );
     if ( is_pda )
-        staticsizer->Add( new wxStaticText( this, wxID_ANY, _( "Current directory:" ) ),
+        staticsizer->Add( new wxStaticText( this, wxID_ANY, _( "Current directory:" ).ToStdString()),
                           wxSizerFlags().DoubleBorder(wxRIGHT) );
     m_static = new wxStaticText( this, wxID_ANY, m_dir );
     staticsizer->Add( m_static, 1 );

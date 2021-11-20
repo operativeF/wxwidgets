@@ -30,7 +30,7 @@ public:
 
     wxGenericCollapsiblePane(wxWindow *parent,
                         wxWindowID winid,
-                        const std::string& label,
+                        std::string_view label,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxCP_DEFAULT_STYLE,
@@ -44,7 +44,7 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,
-                const std::string& label,
+                std::string_view label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxCP_DEFAULT_STYLE,
@@ -53,7 +53,7 @@ public:
 
     // public wxCollapsiblePane API
     void Collapse(bool collapse = true) override;
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
 
     bool IsCollapsed() const override
         { return m_pPane==nullptr || !m_pPane->IsShown(); }

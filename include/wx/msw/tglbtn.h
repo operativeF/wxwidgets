@@ -102,7 +102,7 @@ public:
                 std::string_view name = wxToggleButtonNameStr);
 
     // prevent virtual function hiding
-    void SetLabel(const std::string& label) override { wxToggleButton::SetLabel(label); }
+    void SetLabel(std::string_view label) override { wxToggleButton::SetLabel(label); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxBitmapToggleButton);

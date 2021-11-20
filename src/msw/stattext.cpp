@@ -23,7 +23,7 @@ import Utils.Strings;
 
 bool wxStaticText::Create(wxWindow *parent,
                           wxWindowID id,
-                          const std::string& label,
+                          std::string_view label,
                           const wxPoint& pos,
                           const wxSize& size,
                           unsigned int style,
@@ -140,7 +140,7 @@ void wxStaticText::DoSetSize(wxRect boundary, unsigned int sizeFlags)
     Refresh();
 }
 
-void wxStaticText::SetLabel(const std::string& label)
+void wxStaticText::SetLabel(std::string_view label)
 {
     // If the label doesn't really change, avoid flicker by not doing anything.
     if ( label == m_labelOrig )

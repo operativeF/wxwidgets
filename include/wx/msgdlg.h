@@ -18,9 +18,10 @@
 #include "wx/dialog.h"
 #include "wx/stockitem.h"
 
-import <string>;
-
 #include <fmt/core.h>
+
+import <string>;
+import <string_view>;
 
 inline constexpr std::string_view wxMessageBoxCaptionStr = "Message";
 
@@ -79,10 +80,10 @@ public:
 
     wxMessageDialogBase() = default;
     wxMessageDialogBase(wxWindow *parent,
-                        const std::string& message,
+                        std::string_view message,
                         std::string_view caption,
                         unsigned int style)
-        : m_message(message),
+        : m_message{message.begin(), message.end()},
           m_caption{caption.begin(), caption.end()}
     {
         m_parent = GetParentForModalDialog(parent, style);

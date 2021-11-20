@@ -304,7 +304,7 @@ wxPrinterBase::wxPrinterBase(wxPrintDialogData *data)
 
 wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintout * printout)
 {
-    return new wxPrintAbortDialog(parent, printout->GetTitle());
+    return new wxPrintAbortDialog(parent, printout->GetTitle().ToStdString());
 }
 
 void wxPrinterBase::ReportError(wxWindow *parent, wxPrintout *WXUNUSED(printout), const wxString& message)
@@ -486,7 +486,7 @@ wxBEGIN_EVENT_TABLE(wxPrintAbortDialog, wxDialog)
 wxEND_EVENT_TABLE()
 
 wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
-                                       const wxString& documentTitle,
+                                       std::string_view documentTitle,
                                        const wxPoint& pos,
                                        const wxSize& size,
                                        unsigned int style,
@@ -494,15 +494,15 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
     : wxDialog(parent, wxID_ANY, _("Printing").ToStdString(), pos, size, style, name) // FIXME: Use std::string
 {
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
-    mainSizer->Add(new wxStaticText(this, wxID_ANY, _("Please wait while printing...")),
+    mainSizer->Add(new wxStaticText(this, wxID_ANY, _("Please wait while printing...").ToStdString()),
                    wxSizerFlags().Expand().DoubleBorder());
 
     wxFlexGridSizer *gridSizer = new wxFlexGridSizer(2, wxSize(20, 0));
-    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Document:")));
+    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Document:").ToStdString()));
     gridSizer->AddGrowableCol(1);
     gridSizer->Add(new wxStaticText(this, wxID_ANY, documentTitle));
-    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Progress:")));
-    m_progress = new wxStaticText(this, wxID_ANY, _("Preparing"));
+    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Progress:").ToStdString()));
+    m_progress = new wxStaticText(this, wxID_ANY, _("Preparing").ToStdString());
     m_progress->SetMinSize(wxSize(250, -1));
     gridSizer->Add(m_progress);
     mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxLEFT | wxRIGHT));
@@ -516,20 +516,22 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
 void wxPrintAbortDialog::SetProgress(int currentPage, int totalPages,
                                      int currentCopy, int totalCopies)
 {
-  wxString text;
+  std::string text;
   if ( totalPages == DEFAULT_MAX_PAGES )
   {
     // This means that the user has not supplied a total number of pages so it
     // is better not to show this value.
-    text.Printf(_("Printing page %d"), currentPage);
+    // FIXME: Removed translation for fmt lib
+    text = fmt::format("Printing page {:d}", currentPage);
   }
   else
   {
+    // FIXME: Removed translation for fmt lib
     // We have a valid total number of pages so we show it.
-    text.Printf(_("Printing page %d of %d"), currentPage, totalPages);
+    text = fmt::format("Printing page {:d} of {:d}", currentPage, totalPages);
   }
-  if ( totalCopies > 1 )
-      text += wxString::Format(_(" (copy %d of %d)"), currentCopy, totalCopies);
+  if ( totalCopies > 1 ) // FIXME: Removed translation for fmt lib
+      text += fmt::format(" (copy {:d} of {:d})", currentCopy, totalCopies);
   m_progress->SetLabel(text);
 }
 

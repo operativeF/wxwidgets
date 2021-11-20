@@ -82,7 +82,7 @@ bool wxToolBarToolBase::SetToggle(bool toggle)
     return true;
 }
 
-bool wxToolBarToolBase::SetShortHelp(const std::string& help)
+bool wxToolBarToolBase::SetShortHelp(std::string_view help)
 {
     if ( m_shortHelpString == help )
         return false;
@@ -92,7 +92,7 @@ bool wxToolBarToolBase::SetShortHelp(const std::string& help)
     return true;
 }
 
-bool wxToolBarToolBase::SetLongHelp(const std::string& help)
+bool wxToolBarToolBase::SetLongHelp(std::string_view help)
 {
     if ( m_longHelpString == help )
         return false;

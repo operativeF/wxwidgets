@@ -89,7 +89,7 @@ wxSize wxGenericStaticText::DoGetBestClientSize() const
     return dc.GetMultiLineTextExtent(GetLabel());
 }
 
-void wxGenericStaticText::SetLabel(const std::string& label)
+void wxGenericStaticText::SetLabel(std::string_view label)
 {
     wxControl::SetLabel(label);
     WXSetVisibleLabel(GetEllipsizedLabel());

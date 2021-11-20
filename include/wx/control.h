@@ -47,9 +47,9 @@ public:
     int GetAlignment() const { return m_windowStyle & wxALIGN_MASK; }
 
     // set label with mnemonics
-    void SetLabel(const std::string& label) override
+    void SetLabel(std::string_view label) override
     {
-        m_labelOrig = label;
+        m_labelOrig = {label.begin(), label.end()};
 
         InvalidateBestSize();
 
@@ -132,7 +132,7 @@ public:
     static std::string RemoveMnemonics(const std::string& str);
 
     // escapes (by doubling them) the mnemonics
-    static std::string EscapeMnemonics(const std::string& str);
+    static std::string EscapeMnemonics(std::string_view str);
 
 
     // miscellaneous static utilities

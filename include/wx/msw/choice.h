@@ -55,7 +55,7 @@ public:
 
     bool Show(bool show = true) override;
 
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
 
     size_t GetCount() const override;
     int GetSelection() const override;

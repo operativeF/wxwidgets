@@ -69,7 +69,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
     return true;
 }
 
-void wxChoice::SetLabel(const std::string& label)
+void wxChoice::SetLabel(std::string_view label)
 {
     if ( FindString(label) == wxNOT_FOUND )
     {

@@ -49,7 +49,7 @@ wxEND_EVENT_TABLE()
 
 bool wxGenericCollapsiblePane::Create(wxWindow *parent,
                                       wxWindowID id,
-                                      const std::string& label,
+                                      std::string_view label,
                                       const wxPoint& pos,
                                       const wxSize& size,
                                       unsigned int style,
@@ -157,7 +157,7 @@ void wxGenericCollapsiblePane::Collapse(bool collapse)
     OnStateChange(GetBestSize());
 }
 
-void wxGenericCollapsiblePane::SetLabel(const std::string& label)
+void wxGenericCollapsiblePane::SetLabel(std::string_view label)
 {
     m_pButton->SetLabel(label);
     m_pButton->SetInitialSize();

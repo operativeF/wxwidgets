@@ -167,11 +167,11 @@ bool wxGenericCalendarCtrl::Create(wxWindow *parent,
     if ( !HasFlag(wxCAL_SEQUENTIAL_MONTH_SELECTION) )
     {
         CreateYearSpinCtrl();
-        m_staticYear = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%Y"),
+        m_staticYear = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%Y").ToStdString(),
                                         wxDefaultPosition, wxDefaultSize,
                                         wxALIGN_CENTRE);
         CreateMonthComboBox();
-        m_staticMonth = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%B"),
+        m_staticMonth = new wxStaticText(GetParent(), wxID_ANY, m_date.Format("%B").ToStdString(),
                                          wxDefaultPosition, wxDefaultSize,
                                          wxALIGN_CENTRE);
     }

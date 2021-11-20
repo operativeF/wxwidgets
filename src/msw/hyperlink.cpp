@@ -55,9 +55,9 @@ void wxHyperlinkCtrl::SetURL(const std::string& url)
     wxWindow::SetLabel( GetLabelForSysLink(m_labelOrig, url) );
 }
 
-void wxHyperlinkCtrl::SetLabel(const std::string& label)
+void wxHyperlinkCtrl::SetLabel(std::string_view label)
 {
-    m_labelOrig = label;
+    m_labelOrig = {label.begin(), label.end()};
     wxWindow::SetLabel( GetLabelForSysLink(label, GetURL()) );
     InvalidateBestSize();
 }

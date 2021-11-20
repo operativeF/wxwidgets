@@ -16,6 +16,7 @@
 import Utils.Geometry;
 
 import <string>;
+import <string_view>;
 
 // Checkbox item (single checkbox)
 class wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
@@ -29,7 +30,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const std::string& name = wxCheckBoxNameStr)
+               std::string_view name = wxCheckBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -43,13 +44,13 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxCheckBoxNameStr);
+                std::string_view name = wxCheckBoxNameStr);
 
     void SetValue(bool value) override;
     bool GetValue() const override;
 
     // override some base class virtuals
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
 
     void SetTransparentPartColour(const wxColour& col) override
     {

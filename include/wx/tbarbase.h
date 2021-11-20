@@ -54,7 +54,7 @@ public:
     // generic ctor for any kind of tool
     wxToolBarToolBase(wxToolBarBase *tbar = nullptr,
                       int toolid = wxID_SEPARATOR,
-                      const std::string& label = {},
+                      std::string_view label = {},
                       const wxBitmap& bmpNormal = wxNullBitmap,
                       const wxBitmap& bmpDisabled = wxNullBitmap,
                       wxItemKind kind = wxITEM_NORMAL,
@@ -62,7 +62,7 @@ public:
                       const std::string& shortHelpString = {},
                       const std::string& longHelpString = {})
         : m_tbar(tbar),
-          m_label(label),
+          m_label{label.begin(), label.end()},
           m_shortHelpString(shortHelpString),
           m_longHelpString(longHelpString),
           m_bmpNormal(bmpNormal),
@@ -77,7 +77,7 @@ public:
     // ctor for controls only
     wxToolBarToolBase(wxToolBarBase *tbar,
                       wxControl *control,
-                      const std::string& label)
+                      std::string_view label)
         : m_label(label),
           m_control(control),
           m_tbar(tbar),
@@ -158,15 +158,15 @@ public:
     virtual bool Enable(bool enable);
     virtual bool Toggle(bool toggle);
     virtual bool SetToggle(bool toggle);
-    virtual bool SetShortHelp(const std::string& help);
-    virtual bool SetLongHelp(const std::string& help);
+    virtual bool SetShortHelp(std::string_view help);
+    virtual bool SetLongHelp(std::string_view help);
 
     void Toggle() { Toggle(!IsToggled()); }
 
     void SetNormalBitmap(const wxBitmap& bmp) { m_bmpNormal = bmp; }
     void SetDisabledBitmap(const wxBitmap& bmp) { m_bmpDisabled = bmp; }
 
-    virtual void SetLabel(const std::string& label) { m_label = label; }
+    virtual void SetLabel(std::string_view label) { m_label = {label.begin(), label.end()}; }
 
     void SetClientData(wxObject *clientData)
     {

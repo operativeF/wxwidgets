@@ -429,7 +429,7 @@ wxAnyButton::~wxAnyButton()
 #endif // wxUSE_MARKUP
 }
 
-void wxAnyButton::SetLabel(const std::string& label)
+void wxAnyButton::SetLabel(std::string_view label)
 {
     wxMSWButton::UpdateMultilineStyle(GetHwnd(), label);
 

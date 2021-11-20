@@ -11,7 +11,9 @@
 #define _WX_GENERIC_RICHMSGDLGG_H_
 
 #include "wx/collpane.h"
+
 import <string>;
+import <string_view>;
 
 class wxCheckBox;
 class wxCollapsiblePaneEvent;
@@ -21,7 +23,7 @@ class wxGenericRichMessageDialog
 {
 public:
     wxGenericRichMessageDialog(wxWindow *parent,
-                               const std::string& message,
+                               std::string_view message,
                                std::string_view caption = wxMessageBoxCaptionStr,
                                unsigned int style = wxOK | wxCENTRE)
         : wxRichMessageDialogBase( parent, message, caption, style ),

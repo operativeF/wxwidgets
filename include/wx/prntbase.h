@@ -734,7 +734,7 @@ class wxPrintAbortDialog: public wxDialog
 {
 public:
     wxPrintAbortDialog(wxWindow *parent,
-                       const wxString& documentTitle,
+                       std::string_view documentTitle,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDEFAULT_DIALOG_STYLE,

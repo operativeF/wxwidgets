@@ -155,9 +155,9 @@ std::string wxControlBase::RemoveMnemonics(const std::string& str)
 }
 
 /* static */
-std::string wxControlBase::EscapeMnemonics(const std::string& text)
+std::string wxControlBase::EscapeMnemonics(std::string_view text)
 {
-    std::string label{text};
+    std::string label{text.begin(), text.end()};
     wx::utils::ReplaceAll(label, "&", "&&");
 
     return label;

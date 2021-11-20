@@ -59,7 +59,7 @@ public:
 
 
     // overridden base class virtual methods
-    void SetLabel(const std::string& label) override;
+    void SetLabel(std::string_view label) override;
     bool SetFont(const wxFont &font) override;
 
 protected:

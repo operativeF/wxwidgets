@@ -125,9 +125,9 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
         return false;
 
     m_sizerText = new wxBoxSizer(wxVERTICAL);
-    wxString nameAndVersion = info.GetName();
+    std::string nameAndVersion = info.GetName();
     if ( info.HasVersion() )
-        nameAndVersion << wxT(' ') << info.GetVersion();
+        nameAndVersion += fmt::format(" {}", info.GetVersion().ToStdString());
     wxStaticText *label = new wxStaticText(this, wxID_ANY, nameAndVersion);
     wxFont fontBig(*wxNORMAL_FONT);
     fontBig.SetFractionalPointSize(fontBig.GetFractionalPointSize() + 2.0);

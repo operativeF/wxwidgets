@@ -24,9 +24,10 @@
     #include "wx/print.h"
 #endif
 
+#include <memory>
+
 import <filesystem>;
 import <iosfwd>;
-#include <memory>
 import <string>;
 import <vector>;
 

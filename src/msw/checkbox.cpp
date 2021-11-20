@@ -20,13 +20,16 @@
 
 #include <cassert>
 
+import <string>;
+import <string_view>;
+
 bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,
                         const std::string& label,
                         const wxPoint& pos,
                         const wxSize& size, unsigned int style,
                         const wxValidator& validator,
-                        const std::string& name)
+                        std::string_view name)
 {
     m_state = wxCheckBoxState::Unchecked;
 
@@ -116,7 +119,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
 // wxCheckBox operations
 // ----------------------------------------------------------------------------
 
-void wxCheckBox::SetLabel(const std::string& label)
+void wxCheckBox::SetLabel(std::string_view label)
 {
     wxMSWButton::UpdateMultilineStyle(GetHwnd(), label);
 

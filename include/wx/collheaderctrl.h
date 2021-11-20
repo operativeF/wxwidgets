@@ -34,7 +34,7 @@ public:
 
     wxCollapsibleHeaderCtrlBase(wxWindow *parent,
         wxWindowID id,
-        const std::string& label,
+        std::string_view label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
@@ -48,7 +48,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
         wxWindowID id,
-        const std::string& label,
+        std::string_view label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
@@ -88,7 +88,7 @@ public:
 
     wxCollapsibleHeaderCtrl(wxWindow *parent,
         wxWindowID id,
-        const std::string& label,
+        std::string_view label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,

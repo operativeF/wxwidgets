@@ -11,13 +11,15 @@
 #ifndef _WX_GENERIC_MSGDLGG_H_
 #define _WX_GENERIC_MSGDLGG_H_
 
+import <string_view>;
+
 class wxSizer;
 
 class wxGenericMessageDialog : public wxMessageDialogBase
 {
 public:
     wxGenericMessageDialog(wxWindow *parent,
-                           const std::string& message,
+                           std::string_view message,
                            std::string_view caption = wxMessageBoxCaptionStr,
                            unsigned int style = wxOK|wxCENTRE,
                            const wxPoint& pos = wxDefaultPosition);

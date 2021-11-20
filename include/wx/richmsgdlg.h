@@ -17,6 +17,7 @@
 #include "wx/msgdlg.h"
 
 import <string>;
+import <string_view>;
 
 // Extends a message dialog with an optional checkbox and user-expandable
 // detailed text.
@@ -24,7 +25,7 @@ class wxRichMessageDialogBase : public wxGenericMessageDialog
 {
 public:
     wxRichMessageDialogBase( wxWindow *parent,
-                             const std::string& message,
+                             std::string_view message,
                              std::string_view caption,
                              unsigned int style )
         : wxGenericMessageDialog( parent, message, caption, style ),
@@ -58,8 +59,8 @@ public:
     int GetFooterIcon() const { return m_footerIcon; }
 
 protected:
-    const wxString m_detailsExpanderCollapsedLabel;
-    const wxString m_detailsExpanderExpandedLabel;
+    const std::string m_detailsExpanderCollapsedLabel;
+    const std::string m_detailsExpanderExpandedLabel;
 
     std::string m_checkBoxText;
     std::string m_detailedText;

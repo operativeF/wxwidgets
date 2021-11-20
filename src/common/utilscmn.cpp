@@ -65,8 +65,6 @@
 #include "wx/config.h"
 #include "wx/versioninfo.h"
 
-import <ctime>;
-
 #include "wx/vector.h"
 
 #if wxUSE_GUI
@@ -98,6 +96,7 @@ import <ctime>;
 #include <fmt/core.h>
 
 import <algorithm>;
+import <ctime>;
 #include <memory>
 import <string>;
 import <vector>;
@@ -177,9 +176,7 @@ std::string wxGetInstallPrefix()
 
 std::string wxGetDataDir()
 {
-    std::string dir = wxGetInstallPrefix();
-    dir += fmt::format("{}share{}wx", wxFILE_SEP_PATH);
-    return dir;
+    return fmt::format("{0}{1}share{1}wx", wxGetInstallPrefix(), wxFILE_SEP_PATH);
 }
 
 bool wxIsPlatformLittleEndian()

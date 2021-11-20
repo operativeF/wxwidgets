@@ -134,7 +134,7 @@ class wxToolBarTool : public wxToolBarToolBase
 public:
     wxToolBarTool(wxToolBar *tbar,
                   int id,
-                  const std::string& label,
+                  std::string_view label,
                   const wxBitmap& bmpNormal,
                   const wxBitmap& bmpDisabled,
                   wxItemKind kind,
@@ -146,7 +146,7 @@ public:
     {
     }
 
-    wxToolBarTool(wxToolBar *tbar, wxControl *control, const std::string& label)
+    wxToolBarTool(wxToolBar *tbar, wxControl *control, std::string_view label)
         : wxToolBarToolBase(tbar, control, label)
     {
         if ( IsControl() && !m_label.empty() )
@@ -162,7 +162,7 @@ public:
     wxToolBarTool(const wxToolBarTool&) = delete;
 	wxToolBarTool& operator=(const wxToolBarTool&) = delete;
 
-    void SetLabel(const std::string& label) override
+    void SetLabel(std::string_view label) override
     {
         wxASSERT_MSG( IsControl() || IsButton(),
            "Label can be set for control or button tool only" );
