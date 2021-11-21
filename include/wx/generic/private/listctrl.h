@@ -362,7 +362,7 @@ public:
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
                  unsigned int style = 0,
-                 const std::string& name = "wxlistctrlcolumntitles");
+                 std::string_view name = "wxlistctrlcolumntitles");
 
     ~wxListHeaderWindow();
 

@@ -46,7 +46,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const std::string& name = wxFrameNameStr);
+                std::string_view name = wxFrameNameStr);
      */
 
     // Get or change the active MDI child window
@@ -141,7 +141,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
-                const std::string& name = wxFrameNameStr);
+                std::string_view name = wxFrameNameStr);
 
         And setting m_mdiParent to parent parameter.
      */

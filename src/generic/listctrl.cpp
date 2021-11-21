@@ -975,7 +975,7 @@ bool wxListHeaderWindow::Create( wxWindow *win,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  unsigned int style,
-                                 const wxString &name )
+                                 std::string_view name )
 {
     if ( !wxWindow::Create(win, id, pos, size, style, name) )
         return false;

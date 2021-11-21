@@ -10,10 +10,6 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
 #include "wx/accel.h"
 
 

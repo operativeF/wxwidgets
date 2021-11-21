@@ -33,7 +33,7 @@ public:
     // -----------------------------------
 
     // name of the program, if not used defaults to wxApp::GetAppDisplayName()
-    void SetName(const std::string& name) { m_name = name; }
+    void SetName(std::string name) { m_name = name; }
     std::string GetName() const
         { return m_name.empty() ? wxTheApp->GetAppDisplayName() : m_name; }
 

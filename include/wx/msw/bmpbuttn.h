@@ -46,7 +46,7 @@ public:
 
     bool CreateCloseButton(wxWindow* parent,
                            wxWindowID winid,
-                           const std::string& name = {});
+                           std::string_view name = {});
 protected:
     wxDECLARE_EVENT_TABLE();
 

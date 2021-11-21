@@ -56,7 +56,7 @@ public:
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
                   unsigned int style = 0,
-                  const std::string& name = wxHtmlListBoxNameStr);
+                  std::string_view name = wxHtmlListBoxNameStr);
 
     ~wxHtmlListBox();
 
@@ -73,7 +73,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxHtmlListBoxNameStr);
+                std::string_view name = wxHtmlListBoxNameStr);
 
     // override some base class virtuals
     void RefreshRow(size_t line) override;

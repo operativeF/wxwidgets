@@ -81,7 +81,7 @@ public:
     void SetTitle(const std::string& title) { m_documentTitle = title; }
     std::string GetTitle() const { return m_documentTitle; }
 
-    void SetDocumentName(const std::string& name) { m_documentTypeName = name; }
+    void SetDocumentName(std::string name) { m_documentTypeName = name; }
     std::string GetDocumentName() const { return m_documentTypeName; }
 
     // access the flag indicating whether this document had been already saved,
@@ -224,7 +224,7 @@ public:
     virtual void SetDocument(wxDocument *doc);
 
     std::string GetViewName() const { return m_viewTypeName; }
-    void SetViewName(const std::string& name) { m_viewTypeName = name; }
+    void SetViewName(std::string name) { m_viewTypeName = name; }
 
     wxWindow *GetFrame() const { return m_viewFrame ; }
     void SetFrame(wxWindow *frame) { m_viewFrame = frame; }

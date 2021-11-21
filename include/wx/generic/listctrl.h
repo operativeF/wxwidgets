@@ -46,7 +46,7 @@ public:
                 const wxSize &size = wxDefaultSize,
                 unsigned int style = wxLC_ICON,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string &name = wxListCtrlNameStr)
+                std::string_view name = wxListCtrlNameStr)
             : wxScrollHelper(this)
     {
         Create(parent, winid, pos, size, style, validator, name);
@@ -62,7 +62,7 @@ public:
                  const wxSize &size = wxDefaultSize,
                  unsigned int style = wxLC_ICON,
                  const wxValidator& validator = wxDefaultValidator,
-                 const std::string &name = wxListCtrlNameStr);
+                 std::string_view name = wxListCtrlNameStr);
 
     bool GetColumn( int col, wxListItem& item ) const override;
     bool SetColumn( int col, const wxListItem& item ) override;

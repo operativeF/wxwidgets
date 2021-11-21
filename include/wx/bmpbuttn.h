@@ -68,7 +68,7 @@ public:
 
     bool CreateCloseButton(wxWindow* parent,
                            wxWindowID winid,
-                           const std::string& name = {});
+                           std::string_view name = {});
 
         which is used used by NewCloseButton(), and, as Create(), must be
         called on default-constructed wxBitmapButton object.
@@ -80,7 +80,7 @@ public:
     static wxBitmapButton*
     NewCloseButton(wxWindow* parent,
                    wxWindowID winid,
-                   const std::string& name = {});
+                   std::string_view name = {});
 
     // set/get the margins around the button
     virtual void SetMargins(int x, int y)

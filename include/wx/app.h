@@ -141,7 +141,7 @@ public:
 
         // set/get the application name
     std::string GetAppName() const;
-    void SetAppName(const std::string& name) { m_appName = name; }
+    void SetAppName(std::string name) { m_appName = name; }
 
         // set/get the application display name: the display name is the name
         // shown to the user in titles, reports, etc while the app name is
@@ -152,15 +152,15 @@ public:
         // usually better to set it explicitly to something nicer
     std::string GetAppDisplayName() const;
 
-    void SetAppDisplayName(const std::string& name) { m_appDisplayName = name; }
+    void SetAppDisplayName(std::string name) { m_appDisplayName = name; }
 
         // set/get the app class name
     const std::string& wxGetClassName() const { return m_className; }
-    void SetClassName(const std::string& name) { m_className = name; }
+    void SetClassName(std::string name) { m_className = name; }
 
         // set/get the vendor name
     const std::string& GetVendorName() const { return m_vendorName; }
-    void SetVendorName(const std::string& name) { m_vendorName = name; }
+    void SetVendorName(std::string name) { m_vendorName = name; }
 
         // set/get the vendor display name:  the display name is shown
         // in titles/reports/dialogs to the user, while the vendor name
@@ -170,7 +170,7 @@ public:
         return m_vendorDisplayName.empty() ? GetVendorName()
                                            : m_vendorDisplayName;
     }
-    void SetVendorDisplayName(const std::string& name)
+    void SetVendorDisplayName(std::string name)
     {
         m_vendorDisplayName = name;
     }

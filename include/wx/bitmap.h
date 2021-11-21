@@ -137,8 +137,8 @@ public:
                            wxBitmapType WXUNUSED(type), const wxPalette *WXUNUSED(palette) = NULL) const
         { return false; }
 
-    void SetName(const std::string& name)      { m_name = name; }
-    void SetExtension(const std::string& ext)  { m_extension = ext; }
+    void SetName(std::string name)      { m_name = name; }
+    void SetExtension(std::string ext)  { m_extension = ext; }
     void SetType(wxBitmapType type)         { m_type = type; }
     const std::string& GetName() const         { return m_name; }
     const std::string& GetExtension() const    { return m_extension; }

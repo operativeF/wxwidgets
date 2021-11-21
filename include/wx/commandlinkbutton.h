@@ -149,7 +149,7 @@ private:
                             const wxSize& size = wxDefaultSize,
                             unsigned int style = 0,
                             const wxValidator& validator = wxDefaultValidator,
-                            const std::string& name = wxButtonNameStr)
+                            std::string_view name = wxButtonNameStr)
             : wxGenericCommandLinkButton(parent,
                                          id,
                                          mainLabel,
