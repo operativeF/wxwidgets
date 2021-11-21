@@ -15,9 +15,9 @@
 #ifndef _WX_SCKIPC_H
 #define _WX_SCKIPC_H
 
-#include "wx/defs.h"
-
 #if wxUSE_SOCKETS && wxUSE_IPC
+
+#include "wx/defs.h"
 
 #include "wx/ipcbase.h"
 #include "wx/socket.h"

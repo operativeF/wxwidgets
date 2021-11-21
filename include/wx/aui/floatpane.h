@@ -11,12 +11,12 @@
 #ifndef _WX_FLOATPANE_H_
 #define _WX_FLOATPANE_H_
 
+#if wxUSE_AUI
+
 #include "wx/defs.h"
 #include "wx/weakref.h"
 
 import Utils.Geometry;
-
-#if wxUSE_AUI
 
 #if wxUSE_MINIFRAME
     #include "wx/minifram.h"

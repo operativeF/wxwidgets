@@ -10,9 +10,9 @@
 #ifndef _WX_FSWATCHER_BASE_H_
 #define _WX_FSWATCHER_BASE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FSWATCHER
+
+#include "wx/defs.h"
 
 #include "wx/log.h"
 #include "wx/event.h"

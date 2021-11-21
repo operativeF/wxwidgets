@@ -11,9 +11,9 @@
 #ifndef _WX_MSW_CRASHRPT_H_
 #define _WX_MSW_CRASHRPT_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_CRASHREPORT
+
+#include "wx/defs.h"
 
 import <cstdint>;
 

@@ -10,9 +10,9 @@
 #ifndef _WX_CREDDLGG_H_BASE
 #define _WX_CREDDLGG_H_BASE
 
-#include "wx/defs.h"
-
 #if wxUSE_CREDENTIALDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 #include "wx/webrequest.h"

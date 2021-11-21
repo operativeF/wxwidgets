@@ -11,9 +11,9 @@
 #ifndef _WX_HELPFRM_H_
 #define _WX_HELPFRM_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_WXHTML_HELP
+
+#include "wx/defs.h"
 
 #include "wx/helpbase.h"
 #include "wx/html/helpdata.h"

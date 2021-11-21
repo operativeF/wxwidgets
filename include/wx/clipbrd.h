@@ -11,10 +11,9 @@
 #ifndef _WX_CLIPBRD_H_BASE_
 #define _WX_CLIPBRD_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_CLIPBOARD
 
+#include "wx/defs.h"
 
 #include "wx/event.h"
 #include "wx/chartype.h"

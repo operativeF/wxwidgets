@@ -11,9 +11,9 @@
 #ifndef _WX_DOCKART_H_
 #define _WX_DOCKART_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_AUI
+
+#include "wx/defs.h"
 
 #include "wx/pen.h"
 #include "wx/brush.h"

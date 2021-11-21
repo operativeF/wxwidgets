@@ -12,14 +12,9 @@
 #ifndef _WX_THREAD_H_
 #define _WX_THREAD_H_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
-// get the value of wxUSE_THREADS configuration flag
-#include "wx/defs.h"
-
 #if wxUSE_THREADS
+
+#include "wx/defs.h"
 
 // ----------------------------------------------------------------------------
 // constants

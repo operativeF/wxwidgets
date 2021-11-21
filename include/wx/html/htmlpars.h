@@ -9,8 +9,9 @@
 #ifndef _WX_HTMLPARS_H_
 #define _WX_HTMLPARS_H_
 
-#include "wx/defs.h"
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/html/htmltag.h"
 #include "wx/filesys.h"

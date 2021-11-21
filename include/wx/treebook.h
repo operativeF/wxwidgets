@@ -11,9 +11,9 @@
 #ifndef _WX_TREEBOOK_H_
 #define _WX_TREEBOOK_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TREEBOOK
+
+#include "wx/defs.h"
 
 #include "wx/bookctrl.h"
 #include "wx/containr.h"

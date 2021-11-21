@@ -11,9 +11,9 @@
 #ifndef _WX_POPUPWIN_H_BASE_
 #define _WX_POPUPWIN_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_POPUPWIN
+
+#include "wx/defs.h"
 
 // ----------------------------------------------------------------------------
 // wxPopupWindow specific flags

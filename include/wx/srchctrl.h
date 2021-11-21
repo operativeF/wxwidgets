@@ -10,9 +10,9 @@
 #ifndef _WX_SEARCHCTRL_H_BASE_
 #define _WX_SEARCHCTRL_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_SEARCHCTRL
+
+#include "wx/defs.h"
 
 #include "wx/textctrl.h"
 

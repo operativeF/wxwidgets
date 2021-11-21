@@ -11,9 +11,9 @@
 #ifndef _WX_STATTEXT_H_BASE_
 #define _WX_STATTEXT_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_STATTEXT
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

@@ -11,9 +11,9 @@
 #ifndef _WX_SOUND_H_BASE_
 #define _WX_SOUND_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_SOUND
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 

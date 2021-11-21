@@ -11,7 +11,6 @@
 #ifndef _WX_DIRDLG_H_BASE_
 #define _WX_DIRDLG_H_BASE_
 
-
 #if wxUSE_DIRDLG
 
 #include "wx/defs.h"

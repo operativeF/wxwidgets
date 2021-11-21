@@ -11,9 +11,9 @@
 #ifndef _WX_MDI_H_BASE_
 #define _WX_MDI_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MDI
+
+#include "wx/defs.h"
 
 #include "wx/frame.h"
 #include "wx/menu.h"

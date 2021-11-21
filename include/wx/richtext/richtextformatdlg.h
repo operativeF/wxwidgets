@@ -15,9 +15,9 @@
  * Includes
  */
 
-#include "wx/defs.h"
-
 #if wxUSE_RICHTEXT
+
+#include "wx/defs.h"
 
 #include "wx/propdlg.h"
 #include "wx/bookctrl.h"

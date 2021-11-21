@@ -10,9 +10,9 @@
 #ifndef _WX_INFOBAR_H_
 #define _WX_INFOBAR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_INFOBAR
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

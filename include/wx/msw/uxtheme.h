@@ -11,9 +11,9 @@
 #ifndef _WX_UXTHEME_H_
 #define _WX_UXTHEME_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_UXTHEME
+
+#include "wx/defs.h"
 
 #include "wx/msw/private.h"     // we use GetHwndOf()
 #include <uxtheme.h>

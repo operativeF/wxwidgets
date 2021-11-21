@@ -11,11 +11,10 @@
 #ifndef _WX_DATAVIEW_H_BASE_
 #define _WX_DATAVIEW_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_DATAVIEWCTRL
 
-#include "wx/geometry/rect.h"
+#include "wx/defs.h"
+
 #include "wx/headercol.h"
 #include "wx/variant.h"
 #include "wx/dnd.h"             // For wxDragResult declaration only.
@@ -25,6 +24,8 @@
 #include "wx/dataobj.h"
 #include "wx/withimages.h"
 #include "wx/systhemectrl.h"
+
+import Utils.Geometry;
 
 import <string>;
 import <vector>;

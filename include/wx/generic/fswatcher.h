@@ -10,9 +10,9 @@
 #ifndef _WX_FSWATCHER_GENERIC_H_
 #define _WX_FSWATCHER_GENERIC_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FSWATCHER
+
+#include "wx/defs.h"
 
 class wxPollingFileSystemWatcher : public wxFileSystemWatcherBase
 {

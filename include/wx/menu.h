@@ -11,9 +11,9 @@
 #ifndef _WX_MENU_H_BASE_
 #define _WX_MENU_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MENUS
+
+#include "wx/defs.h"
 
 #include "wx/list.h"        // for "template" list classes
 #include "wx/window.h"      // base class for wxMenuBar

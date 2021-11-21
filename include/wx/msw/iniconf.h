@@ -11,9 +11,9 @@
 #ifndef   _WX_MSW_INICONF_H_
 #define   _WX_MSW_INICONF_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_CONFIG && wxUSE_INICONF
+
+#include "wx/defs.h"
 
 import <string>;
 

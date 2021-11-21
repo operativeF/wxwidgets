@@ -11,9 +11,9 @@
 #ifndef _WX_RIBBON_PAGE_H_
 #define _WX_RIBBON_PAGE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/panel.h"

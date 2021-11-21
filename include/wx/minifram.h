@@ -11,9 +11,9 @@
 #ifndef _WX_MINIFRAM_H_BASE_
 #define _WX_MINIFRAM_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MINIFRAME
+
+#include "wx/defs.h"
 
 #if defined(__WXMSW__)
 #include "wx/msw/minifram.h"

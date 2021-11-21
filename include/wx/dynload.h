@@ -12,13 +12,9 @@
 #ifndef _WX_DYNAMICLOADER_H__
 #define _WX_DYNAMICLOADER_H__
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+#if wxUSE_DYNAMIC_LOADER
 
 #include "wx/defs.h"
-
-#if wxUSE_DYNAMIC_LOADER
 
 #include "wx/dynlib.h"
 #include "wx/hashmap.h"

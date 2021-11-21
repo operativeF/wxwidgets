@@ -10,9 +10,9 @@
 #ifndef _WX_HTMPRINT_H_
 #define _WX_HTMPRINT_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML & wxUSE_PRINTING_ARCHITECTURE
+
+#include "wx/defs.h"
 
 #include "wx/html/htmlcell.h"
 #include "wx/html/winpars.h"

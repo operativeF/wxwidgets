@@ -11,9 +11,9 @@
 #ifndef _WX_FINDREPLACEDLG_H_
 #define _WX_FINDREPLACEDLG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FINDREPLDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 

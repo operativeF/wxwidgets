@@ -11,9 +11,9 @@
 #ifndef _WX_ANY_H_
 #define _WX_ANY_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ANY
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/meta/if.h"

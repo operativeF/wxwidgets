@@ -11,9 +11,9 @@
 #ifndef _WX_PROPGRID_MANAGER_H_
 #define _WX_PROPGRID_MANAGER_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_PROPGRID
+
+#include "wx/defs.h"
 
 #include "wx/propgrid/propgrid.h"
 

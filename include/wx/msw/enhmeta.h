@@ -11,9 +11,9 @@
 #ifndef _WX_MSW_ENHMETA_H_
 #define _WX_MSW_ENHMETA_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ENH_METAFILE
+
+#include "wx/defs.h"
 
 #include "wx/dc.h"
 #include "wx/gdiobj.h"

@@ -11,9 +11,9 @@
 #ifndef _WX_PROPGRID_PROPGRIDDEFS_H_
 #define _WX_PROPGRID_PROPGRIDDEFS_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_PROPGRID
+
+#include "wx/defs.h"
 
 #include "wx/colour.h"
 #include "wx/hashset.h"

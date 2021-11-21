@@ -11,9 +11,9 @@
 #ifndef __WX_PROPGRID_PROPGRIDIFACE_H__
 #define __WX_PROPGRID_PROPGRIDIFACE_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_PROPGRID
+
+#include "wx/defs.h"
 
 #include "wx/propgrid/property.h"
 #include "wx/propgrid/propgridpagestate.h"

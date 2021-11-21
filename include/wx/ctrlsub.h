@@ -11,9 +11,9 @@
 #ifndef _WX_CTRLSUB_H_BASE_
 #define _WX_CTRLSUB_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_CONTROLS
+
+#include "wx/defs.h"
 
 #include "wx/control.h"      // base class
 

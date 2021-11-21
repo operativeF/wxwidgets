@@ -9,9 +9,9 @@
 #ifndef _WX_FILEBACK_H__
 #define _WX_FILEBACK_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_FILESYSTEM
+
+#include "wx/defs.h"
 
 #include "wx/stream.h"
 

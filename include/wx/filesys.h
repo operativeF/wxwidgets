@@ -9,9 +9,9 @@
 #ifndef __FILESYS_H__
 #define __FILESYS_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_FILESYSTEM
+
+#include "wx/defs.h"
 
 #include "wx/datetime.h"
 #include "wx/filename.h"

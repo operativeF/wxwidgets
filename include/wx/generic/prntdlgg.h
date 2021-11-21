@@ -12,9 +12,9 @@
 #ifndef __PRINTDLGH_G_
 #define __PRINTDLGH_G_
 
-#include "wx/defs.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 #include "wx/cmndata.h"

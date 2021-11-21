@@ -11,9 +11,9 @@
 #ifndef _WX_DYNLIB_H__
 #define _WX_DYNLIB_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_DYNLIB_CLASS
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/dynarray.h"

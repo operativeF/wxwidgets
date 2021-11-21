@@ -12,9 +12,9 @@
 #ifndef _WX_SCKADDR_H_
 #define _WX_SCKADDR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_SOCKETS
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 

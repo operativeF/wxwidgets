@@ -9,9 +9,9 @@
 #ifndef _WX_WXZIPSTREAM_H__
 #define _WX_WXZIPSTREAM_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_ZIPSTREAM
+
+#include "wx/defs.h"
 
 #include "wx/archive.h"
 #include "wx/filename.h"

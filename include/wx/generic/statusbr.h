@@ -11,9 +11,9 @@
 #ifndef _WX_GENERIC_STATUSBR_H_
 #define _WX_GENERIC_STATUSBR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_STATUSBAR
+
+#include "wx/defs.h"
 
 #include "wx/pen.h"
 

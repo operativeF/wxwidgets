@@ -10,9 +10,9 @@
 #ifndef _WX_TIMECTRL_H_
 #define _WX_TIMECTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TIMEPICKCTRL
+
+#include "wx/defs.h"
 
 #include "wx/datetimectrl.h"
 

@@ -11,9 +11,9 @@
 #ifndef _WX_RIBBON_CONTROL_H_
 #define _WX_RIBBON_CONTROL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/dynarray.h"

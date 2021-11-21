@@ -11,9 +11,9 @@
 #ifndef _WX_NUMDLGDLG_H_BASE_
 #define _WX_NUMDLGDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_NUMBERDLG
+
+#include "wx/defs.h"
 
 #include "wx/generic/numdlgg.h"
 

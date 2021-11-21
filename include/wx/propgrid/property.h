@@ -11,9 +11,9 @@
 #ifndef _WX_PROPGRID_PROPERTY_H_
 #define _WX_PROPGRID_PROPERTY_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_PROPGRID
+
+#include "wx/defs.h"
 
 #include "wx/propgrid/propgriddefs.h"
 #include "wx/bitmap.h"

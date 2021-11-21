@@ -10,9 +10,9 @@
 #ifndef _WX_GENERIC_LISTCTRL_PRIVATE_H_
 #define _WX_GENERIC_LISTCTRL_PRIVATE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_LISTCTRL
+
+#include "wx/defs.h"
 
 #include "wx/listctrl.h"
 #include "wx/selstore.h"

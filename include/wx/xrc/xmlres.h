@@ -10,9 +10,9 @@
 #ifndef _WX_XMLRES_H_
 #define _WX_XMLRES_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_XRC
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/dynarray.h"

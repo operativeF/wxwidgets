@@ -11,9 +11,9 @@
 #ifndef _WX_MSGDLG_H_BASE_
 #define _WX_MSGDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MSGDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 #include "wx/stockitem.h"

@@ -11,9 +11,9 @@
 #ifndef _WX_URL_H
 #define _WX_URL_H
 
-#include "wx/defs.h"
-
 #if wxUSE_URL
+
+#include "wx/defs.h"
 
 #include "wx/uri.h"
 #include "wx/protocol/protocol.h"

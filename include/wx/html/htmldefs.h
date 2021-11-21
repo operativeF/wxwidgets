@@ -10,9 +10,9 @@
 #ifndef _WX_HTMLDEFS_H_
 #define _WX_HTMLDEFS_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 //--------------------------------------------------------------------------------
 // ALIGNMENTS

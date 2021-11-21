@@ -9,9 +9,9 @@
 #ifndef _WX_HTMLFILT_H_
 #define _WX_HTMLFILT_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/filesys.h"
 

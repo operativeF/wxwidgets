@@ -26,9 +26,9 @@
 #ifndef _WX_XLOCALE_H_
 #define _WX_XLOCALE_H_
 
-#include "wx/defs.h"    // wxUSE_XLOCALE
-
 #if wxUSE_XLOCALE
+
+#include "wx/defs.h"    // wxUSE_XLOCALE
 
 #include "wx/crt.h"     // Includes wx/chartype.h, wx/wxcrt.h(wx/string.h)
 #include "wx/intl.h"    // wxLanguage

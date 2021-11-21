@@ -11,9 +11,9 @@
 #ifndef _WX_HELPDLG_H_
 #define _WX_HELPDLG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_WXHTML_HELP
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 #include "wx/string.h"

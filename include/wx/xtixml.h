@@ -11,9 +11,9 @@
 #ifndef _WX_XTIXMLH__
 #define _WX_XTIXMLH__
 
-#include "wx/defs.h"
-
 #if wxUSE_EXTENDED_RTTI
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/xtistrm.h"

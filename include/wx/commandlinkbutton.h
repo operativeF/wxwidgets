@@ -10,9 +10,9 @@
 #ifndef _WX_COMMANDLINKBUTTON_H_
 #define _WX_COMMANDLINKBUTTON_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_COMMANDLINKBUTTON
+
+#include "wx/defs.h"
 
 #include "wx/button.h"
 

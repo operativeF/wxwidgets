@@ -10,9 +10,9 @@
 #ifndef _WX_RIBBON_TOOLBAR_H_
 #define _WX_RIBBON_TOOLBAR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/art.h"

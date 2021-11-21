@@ -11,9 +11,9 @@
 #ifndef _WX_HTMLLBOX_H_
 #define _WX_HTMLLBOX_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/listbox.h"
 #include "wx/vlbox.h"               // base class

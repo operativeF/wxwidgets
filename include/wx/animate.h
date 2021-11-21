@@ -11,9 +11,9 @@
 #ifndef _WX_ANIMATE_H_
 #define _WX_ANIMATE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ANIMATIONCTRL
+
+#include "wx/defs.h"
 
 #include "wx/animdecod.h"
 #include "wx/control.h"

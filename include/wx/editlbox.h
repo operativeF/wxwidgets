@@ -10,9 +10,9 @@
 #ifndef __WX_EDITLBOX_H__
 #define __WX_EDITLBOX_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_EDITABLELISTBOX
+
+#include "wx/defs.h"
 
 #include "wx/panel.h"
 

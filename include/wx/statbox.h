@@ -11,9 +11,9 @@
 #ifndef _WX_STATBOX_H_BASE_
 #define _WX_STATBOX_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_STATBOX
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/containr.h"

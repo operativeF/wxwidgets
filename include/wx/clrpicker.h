@@ -11,10 +11,9 @@
 #ifndef _WX_CLRPICKER_H_BASE_
 #define _WX_CLRPICKER_H_BASE_
 
-#include "wx/defs.h"
-
-
 #if wxUSE_COLOURPICKERCTRL
+
+#include "wx/defs.h"
 
 #include "wx/colour.h"
 #include "wx/pickerbase.h"

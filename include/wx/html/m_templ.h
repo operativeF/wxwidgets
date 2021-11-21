@@ -21,9 +21,9 @@ I STRONGLY recommend reading and understanding these macros!!
 #ifndef _WX_M_TEMPL_H_
 #define _WX_M_TEMPL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/html/winpars.h"
 

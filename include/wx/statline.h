@@ -14,10 +14,10 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#if wxUSE_STATLINE
+
 // this defines wxUSE_STATLINE
 #include "wx/defs.h"
-
-#if wxUSE_STATLINE
 
 // the base class declaration
 #include "wx/control.h"

@@ -10,15 +10,14 @@
 #ifndef _WX_PRIVATE_ICONDIR_H_
 #define _WX_PRIVATE_ICONDIR_H_
 
-#include "wx/defs.h"          // wxUint* declarations
-
-
 // Structs declared here are used for loading group icons from
 // .ICO files or MS Windows resources.
 // Icon entry and directory structs for .ICO files and
 // MS Windows resources are very similar but not identical.
 
 #if wxUSE_ICO_CUR
+
+#include "wx/defs.h"          // wxUint* declarations
 
 #if wxUSE_STREAMS
 

@@ -15,9 +15,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_TREECTRL
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/treebase.h"

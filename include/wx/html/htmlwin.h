@@ -9,8 +9,9 @@
 #ifndef _WX_HTMLWIN_H_
 #define _WX_HTMLWIN_H_
 
-#include "wx/defs.h"
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/scrolwin.h"
 #include "wx/config.h"

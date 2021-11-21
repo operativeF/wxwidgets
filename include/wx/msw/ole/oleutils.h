@@ -11,9 +11,9 @@
 #ifndef   _WX_OLEUTILS_H
 #define   _WX_OLEUTILS_H
 
-#include "wx/defs.h"
-
 #if wxUSE_OLE
+
+#include "wx/defs.h"
 
 #include "wx/intl.h"
 #include "wx/log.h"

@@ -11,9 +11,9 @@
 #ifndef _WX_COMBOBOX_H_BASE_
 #define _WX_COMBOBOX_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_COMBOBOX
+
+#include "wx/defs.h"
 
 inline constexpr std::string_view wxComboBoxNameStr = "comboBox";
 

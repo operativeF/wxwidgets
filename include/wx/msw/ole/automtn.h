@@ -11,9 +11,9 @@
 #ifndef _WX_AUTOMTN_H_
 #define _WX_AUTOMTN_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_OLE_AUTOMATION
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 #include "wx/variant.h"

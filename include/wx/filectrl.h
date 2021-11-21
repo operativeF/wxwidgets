@@ -12,9 +12,9 @@
 #ifndef _WX_FILECTRL_H_BASE_
 #define _WX_FILECTRL_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_FILECTRL
+
+#include "wx/defs.h"
 
 #include "wx/event.h"
 

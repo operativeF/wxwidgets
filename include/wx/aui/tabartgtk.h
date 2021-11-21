@@ -16,9 +16,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_AUI
+
+#include "wx/defs.h"
 
 #include "wx/aui/tabart.h"
 

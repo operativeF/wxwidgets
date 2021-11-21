@@ -10,9 +10,9 @@
 #ifndef _WX_TREELIST_H_
 #define _WX_TREELIST_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TREELISTCTRL
+
+#include "wx/defs.h"
 
 #include "wx/checkbox.h"
 #include "wx/compositewin.h"

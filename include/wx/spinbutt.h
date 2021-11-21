@@ -15,9 +15,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_SPINBTN
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/event.h"

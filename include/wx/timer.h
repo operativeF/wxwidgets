@@ -12,9 +12,9 @@
 #ifndef _WX_TIMER_H_BASE_
 #define _WX_TIMER_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_TIMER
+
+#include "wx/defs.h"
 
 #include <chrono>
 

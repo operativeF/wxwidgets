@@ -11,9 +11,9 @@
 #ifndef _WX_CSHELP_H_
 #define _WX_CSHELP_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HELP
+
+#include "wx/defs.h"
 
 #include "wx/help.h"
 

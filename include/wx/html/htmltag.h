@@ -9,9 +9,9 @@
 #ifndef _WX_HTMLTAG_H_
 #define _WX_HTMLTAG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 

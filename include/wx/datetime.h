@@ -12,9 +12,9 @@
 #ifndef _WX_DATETIME_H
 #define _WX_DATETIME_H
 
-#include "wx/defs.h"
-
 #if wxUSE_DATETIME
+
+#include "wx/defs.h"
 
 #include "wx/longlong.h"
 #include "wx/anystr.h"

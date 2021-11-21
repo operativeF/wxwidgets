@@ -11,9 +11,9 @@
 #ifndef _WX_COLORDLG_H_BASE_
 #define _WX_COLORDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_COLOURDLG
+
+#include "wx/defs.h"
 
 #include "wx/colourdata.h"
 

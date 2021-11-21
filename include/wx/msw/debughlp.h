@@ -10,9 +10,9 @@
 #ifndef _WX_MSW_DEBUGHLPH_H_
 #define _WX_MSW_DEBUGHLPH_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_DBGHELP
+
+#include "wx/defs.h"
 
 #include "wx/dynlib.h"
 

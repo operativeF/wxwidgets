@@ -11,9 +11,9 @@
 #ifndef _WX_RIBBON_ART_INTERNAL_H_
 #define _WX_RIBBON_ART_INTERNAL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 WXDLLIMPEXP_RIBBON wxColour wxRibbonInterpolateColour(
                                 const wxColour& start_colour,

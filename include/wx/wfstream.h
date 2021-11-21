@@ -11,9 +11,9 @@
 #ifndef _WX_WXFSTREAM_H__
 #define _WX_WXFSTREAM_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_STREAMS
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 #include "wx/string.h"

@@ -11,9 +11,9 @@
 #ifndef _WX_AUIBAR_H_
 #define _WX_AUIBAR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_AUI
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/sizer.h"

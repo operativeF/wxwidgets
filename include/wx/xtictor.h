@@ -12,9 +12,9 @@
 #ifndef _XTICTOR_H_
 #define _XTICTOR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_EXTENDED_RTTI
+
+#include "wx/defs.h"
 
 #include "wx/xti.h"
 

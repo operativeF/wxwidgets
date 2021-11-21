@@ -9,9 +9,9 @@
 #ifndef _WX_FS_FILTER_H_
 #define _WX_FS_FILTER_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FILESYSTEM
+
+#include "wx/defs.h"
 
 #include "wx/filesys.h"
 

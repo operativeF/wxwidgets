@@ -11,9 +11,9 @@
 #ifndef _WX_METAFILE_H_BASE_
 #define _WX_METAFILE_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_METAFILE
+
+#include "wx/defs.h"
 
 // provide synonyms for all metafile classes
 using wxMetaFile = wxMetafile;

@@ -12,6 +12,7 @@
 #define _WX_CMDPROC_H_
 
 #include "wx/defs.h"
+
 #include "wx/object.h"
 #include "wx/list.h"
 #include "wx/string.h"

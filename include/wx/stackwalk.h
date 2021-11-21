@@ -11,9 +11,9 @@
 #ifndef _WX_STACKWALK_H_
 #define _WX_STACKWALK_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_STACKWALKER
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 

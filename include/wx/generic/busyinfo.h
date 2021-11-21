@@ -9,9 +9,9 @@
 #ifndef _WX_BUSYINFO_H_
 #define _WX_BUSYINFO_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_BUSYINFO
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 

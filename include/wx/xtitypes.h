@@ -12,9 +12,9 @@
 #ifndef _XTITYPES_H_
 #define _XTITYPES_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_EXTENDED_RTTI
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/hashmap.h"

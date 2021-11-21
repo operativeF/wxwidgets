@@ -10,9 +10,9 @@
 #ifndef _WX_RICHMSGDLG_H_BASE_
 #define _WX_RICHMSGDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_RICHMSGDLG
+
+#include "wx/defs.h"
 
 #include "wx/msgdlg.h"
 

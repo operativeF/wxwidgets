@@ -11,9 +11,9 @@
 #ifndef _WX_MSW_REGISTRY_H_
 #define _WX_MSW_REGISTRY_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_REGKEY
+
+#include "wx/defs.h"
 
 class wxOutputStream;
 

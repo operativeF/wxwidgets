@@ -11,9 +11,9 @@
 #ifndef _WX_VALTEXT_H_
 #define _WX_VALTEXT_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_VALIDATORS && (wxUSE_TEXTCTRL || wxUSE_COMBOBOX)
+
+#include "wx/defs.h"
 
 class wxTextEntry;
 

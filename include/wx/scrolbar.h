@@ -11,9 +11,9 @@
 #ifndef _WX_SCROLBAR_H_BASE_
 #define _WX_SCROLBAR_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_SCROLLBAR
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

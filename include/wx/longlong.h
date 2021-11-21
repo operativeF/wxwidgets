@@ -12,9 +12,9 @@
 #ifndef _WX_LONGLONG_H
 #define _WX_LONGLONG_H
 
-#include "wx/defs.h"
-
 #if wxUSE_LONGLONG
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 

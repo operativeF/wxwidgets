@@ -11,9 +11,9 @@
 #ifndef __NUMDLGH_G__
 #define __NUMDLGH_G__
 
-#include "wx/defs.h"
-
 #if wxUSE_NUMBERDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 

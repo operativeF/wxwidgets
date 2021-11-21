@@ -11,9 +11,9 @@
 #ifndef _WX_JOYSTICK_H_BASE_
 #define _WX_JOYSTICK_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_JOYSTICK
+
+#include "wx/defs.h"
 
 #if defined(WX_WINDOWS)
 #include "wx/msw/joystick.h"

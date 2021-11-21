@@ -15,13 +15,13 @@
 #ifndef _WX_FSVOLUME_H_
 #define _WX_FSVOLUME_H_
 
+#if wxUSE_FSVOLUME
+
 #include "wx/defs.h"
 
 #include "wx/string.h"
 
 import <vector>;
-
-#if wxUSE_FSVOLUME
 
 // the volume flags
 enum wxFSVolumeFlags

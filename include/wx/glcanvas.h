@@ -11,9 +11,9 @@
 #ifndef _WX_GLCANVAS_H_BASE_
 #define _WX_GLCANVAS_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_GLCANVAS
+
+#include "wx/defs.h"
 
 #include "wx/app.h"
 #include "wx/palette.h"

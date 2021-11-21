@@ -11,9 +11,9 @@
 #ifndef _WX_PALETTE_H_BASE_
 #define _WX_PALETTE_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_PALETTE
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 #include "wx/gdiobj.h"

@@ -11,9 +11,9 @@
 #ifndef _WX_PRNTBASEH__
 #define _WX_PRNTBASEH__
 
-#include "wx/defs.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE
+
+#include "wx/defs.h"
 
 #include "wx/event.h"
 #include "wx/cmndata.h"

@@ -11,13 +11,9 @@
 #ifndef _WX_SLIDER_H_BASE_
 #define _WX_SLIDER_H_BASE_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+#if wxUSE_SLIDER
 
 #include "wx/defs.h"
-
-#if wxUSE_SLIDER
 
 #include "wx/control.h"
 

@@ -11,9 +11,9 @@
 #ifndef _WX_HELPDATA_H_
 #define _WX_HELPDATA_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 #include "wx/string.h"

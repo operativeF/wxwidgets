@@ -12,9 +12,9 @@
 #ifndef _WX_FONTENUM_H_
 #define _WX_FONTENUM_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FONTENUM
+
+#include "wx/defs.h"
 
 #include "wx/fontenc.h"
 

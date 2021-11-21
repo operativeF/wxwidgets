@@ -11,9 +11,9 @@
 #ifndef _WX_TEXTDLGG_H_
 #define _WX_TEXTDLGG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TEXTDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 

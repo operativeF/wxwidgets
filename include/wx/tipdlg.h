@@ -15,9 +15,9 @@
 // headers which we must include here
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_STARTUP_TIPS
+
+#include "wx/defs.h"
 
 #include "wx/textfile.h"
 

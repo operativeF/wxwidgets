@@ -12,9 +12,9 @@
 #ifndef _WX_UIACTIONSIMULATOR_H_
 #define _WX_UIACTIONSIMULATOR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_UIACTIONSIMULATOR
+
+#include "wx/defs.h"
 
 #include "wx/mousestate.h"  // for wxMOUSE_BTN_XXX constants
 

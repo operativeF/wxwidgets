@@ -11,9 +11,9 @@
 #ifndef _WX_TASKBARBUTTON_H_
 #define _WX_TASKBARBUTTON_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TASKBARBUTTON
+
+#include "wx/defs.h"
 
 #include "wx/icon.h"
 

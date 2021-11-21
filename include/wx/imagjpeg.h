@@ -9,13 +9,13 @@
 #ifndef _WX_IMAGJPEG_H_
 #define _WX_IMAGJPEG_H_
 
-#include "wx/defs.h"
-
 //-----------------------------------------------------------------------------
 // wxJPEGHandler
 //-----------------------------------------------------------------------------
 
 #if wxUSE_LIBJPEG
+
+#include "wx/defs.h"
 
 #include "wx/image.h"
 #include "wx/versioninfo.h"

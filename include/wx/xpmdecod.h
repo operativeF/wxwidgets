@@ -9,9 +9,9 @@
 #ifndef _WX_XPMDECOD_H_
 #define _WX_XPMDECOD_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_IMAGE && wxUSE_XPM
+
+#include "wx/defs.h"
 
 class wxImage;
 class wxInputStream;

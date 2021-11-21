@@ -11,9 +11,9 @@
 #ifndef _WX_VALNUM_H_
 #define _WX_VALNUM_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_VALIDATORS
+
+#include "wx/defs.h"
 
 #include "wx/textentry.h"
 #include "wx/validate.h"

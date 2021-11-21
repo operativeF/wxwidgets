@@ -11,9 +11,9 @@
 #ifndef _WX_PROTOCOL_PROTOCOL_H
 #define _WX_PROTOCOL_PROTOCOL_H
 
-#include "wx/defs.h"
-
 #if wxUSE_PROTOCOL
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 #include "wx/string.h"

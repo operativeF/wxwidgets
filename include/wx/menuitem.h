@@ -11,9 +11,9 @@
 #ifndef _WX_MENUITEM_H_BASE_
 #define _WX_MENUITEM_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MENUS
+
+#include "wx/defs.h"
 
 // ----------------------------------------------------------------------------
 // headers

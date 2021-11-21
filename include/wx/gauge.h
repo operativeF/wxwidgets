@@ -11,9 +11,9 @@
 #ifndef _WX_GAUGE_H_BASE_
 #define _WX_GAUGE_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_GAUGE
+
+#include "wx/defs.h"
 
 #include "wx/appprogress.h"
 #include "wx/control.h"

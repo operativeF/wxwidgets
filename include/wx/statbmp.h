@@ -11,9 +11,9 @@
 #ifndef _WX_STATBMP_H_BASE_
 #define _WX_STATBMP_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_STATBMP
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/icon.h"

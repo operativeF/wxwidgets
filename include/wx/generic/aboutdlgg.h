@@ -10,9 +10,9 @@
 #ifndef _WX_GENERIC_ABOUTDLGG_H_
 #define _WX_GENERIC_ABOUTDLGG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ABOUTDLG
+
+#include "wx/defs.h"
 
 #include "wx/dialog.h"
 

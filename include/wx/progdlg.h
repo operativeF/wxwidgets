@@ -11,9 +11,9 @@
 #ifndef _WX_PROGDLG_H_BASE_
 #define _WX_PROGDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_PROGRESSDLG
+
+#include "wx/defs.h"
 
 /*
  * wxProgressDialog flags

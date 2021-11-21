@@ -10,9 +10,9 @@
 #ifndef _WX_PRIVATE_SELECTDISPATCHER_H_
 #define _WX_PRIVATE_SELECTDISPATCHER_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_SELECT_DISPATCHER
+
+#include "wx/defs.h"
 
 #if defined(HAVE_SYS_SELECT_H)
     #include <sys/time.h>

@@ -15,9 +15,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_TREECTRL
+
+#include "wx/defs.h"
 
 #include "wx/clntdata.h"
 #include "wx/event.h"

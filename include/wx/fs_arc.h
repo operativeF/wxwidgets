@@ -9,9 +9,9 @@
 #ifndef _WX_FS_ARC_H_
 #define _WX_FS_ARC_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FS_ARCHIVE
+
+#include "wx/defs.h"
 
 #include "wx/filesys.h"
 #include "wx/hashmap.h"

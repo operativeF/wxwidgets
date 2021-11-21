@@ -11,10 +11,9 @@
 #ifndef _WX_FONTPICKER_H_BASE_
 #define _WX_FONTPICKER_H_BASE_
 
-#include "wx/defs.h"
-
-
 #if wxUSE_FONTPICKERCTRL
+
+#include "wx/defs.h"
 
 #include "wx/pickerbase.h"
 

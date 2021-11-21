@@ -12,9 +12,9 @@
 #ifndef __WX_FTP_H__
 #define __WX_FTP_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_PROTOCOL_FTP
+
+#include "wx/defs.h"
 
 #include "wx/sckaddr.h"
 #include "wx/protocol/protocol.h"

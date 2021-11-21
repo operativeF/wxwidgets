@@ -11,9 +11,9 @@
 #ifndef _WX_HYPERLINK_H_
 #define _WX_HYPERLINK_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HYPERLINKCTRL
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

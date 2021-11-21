@@ -16,9 +16,9 @@
 // headers and such
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_MIMETYPE
+
+#include "wx/defs.h"
 
 // the things we really need
 #include "wx/string.h"

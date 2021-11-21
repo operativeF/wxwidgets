@@ -11,9 +11,9 @@
 #ifndef _WX_REGEX_H_
 #define _WX_REGEX_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_REGEX
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 

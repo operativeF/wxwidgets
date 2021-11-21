@@ -11,9 +11,9 @@
 #ifndef _WX_TOOLTIP_H_BASE_
 #define _WX_TOOLTIP_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_TOOLTIPS
+
+#include "wx/defs.h"
 
 #if defined(__WXMSW__)
 #include "wx/msw/tooltip.h"

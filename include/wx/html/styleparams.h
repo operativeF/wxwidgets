@@ -9,9 +9,9 @@
 #ifndef _WX_HTML_STYLEPARAMS_H_
 #define _WX_HTML_STYLEPARAMS_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 import Utils.Strings;
 

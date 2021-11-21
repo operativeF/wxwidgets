@@ -10,9 +10,9 @@
 #ifndef _WX_GIFDECOD_H_
 #define _WX_GIFDECOD_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_STREAMS && wxUSE_GIF
+
+#include "wx/defs.h"
 
 #include "wx/stream.h"
 #include "wx/animdecod.h"

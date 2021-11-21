@@ -11,9 +11,9 @@
 #ifndef _WX_FILEDIRPICKER_H_BASE_
 #define _WX_FILEDIRPICKER_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
+
+#include "wx/defs.h"
 
 #include "wx/pickerbase.h"
 #include "wx/filename.h"

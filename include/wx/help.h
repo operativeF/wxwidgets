@@ -11,9 +11,9 @@
 #ifndef _WX_HELP_H_BASE_
 #define _WX_HELP_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_HELP
+
+#include "wx/defs.h"
 
 #include "wx/helpbase.h"
 

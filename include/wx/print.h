@@ -11,9 +11,9 @@
 #ifndef _WX_PRINT_H_BASE_
 #define _WX_PRINT_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE
+
+#include "wx/defs.h"
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
 

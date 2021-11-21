@@ -11,9 +11,9 @@
 #ifndef _WX_VALIDATE_H_
 #define _WX_VALIDATE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_VALIDATORS
+
+#include "wx/defs.h"
 
 #include "wx/event.h"
 

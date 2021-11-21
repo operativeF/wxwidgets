@@ -10,9 +10,9 @@
 #ifndef   _WX_MSW_RTUTILS_H
 #define   _WX_MSW_RTUTILS_H
 
-#include "wx/defs.h"
-
 #if wxUSE_WINRT
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 

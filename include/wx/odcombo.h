@@ -11,9 +11,9 @@
 #ifndef _WX_ODCOMBO_H_
 #define _WX_ODCOMBO_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ODCOMBOBOX
+
+#include "wx/defs.h"
 
 #include "wx/combo.h"
 #include "wx/ctrlsub.h"

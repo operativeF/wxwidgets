@@ -11,9 +11,9 @@
 #ifndef _WX_FONTDLG_H_BASE_
 #define _WX_FONTDLG_H_BASE_
 
-#include "wx/defs.h"            // for wxUSE_FONTDLG
-
 #if wxUSE_FONTDLG
+
+#include "wx/defs.h"            // for wxUSE_FONTDLG
 
 #include "wx/dialog.h"          // the base class
 #include "wx/fontdata.h"

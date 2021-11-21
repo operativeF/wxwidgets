@@ -11,9 +11,9 @@
 #ifndef _WX_SPINCTRL_H_
 #define _WX_SPINCTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_SPINCTRL
+
+#include "wx/defs.h"
 
 #include "wx/spinbutt.h"        // should make wxSpinEvent visible to the app
 

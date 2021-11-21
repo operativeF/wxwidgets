@@ -11,9 +11,9 @@
 #ifndef _WX_XTISTRMH__
 #define _WX_XTISTRMH__
 
-#include "wx/defs.h"
-
 #if wxUSE_EXTENDED_RTTI
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 

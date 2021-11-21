@@ -11,9 +11,9 @@
 #ifndef _WX_RIBBON_BAR_H_
 #define _WX_RIBBON_BAR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 class wxImageList;
 

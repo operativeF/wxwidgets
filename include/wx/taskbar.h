@@ -11,9 +11,9 @@
 #ifndef _WX_TASKBAR_H_BASE_
 #define _WX_TASKBAR_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_TASKBARICON
+
+#include "wx/defs.h"
 
 #include "wx/event.h"
 

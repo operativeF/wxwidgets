@@ -11,9 +11,9 @@
 #ifndef _WX_RAWBMP_H_
 #define _WX_RAWBMP_H_
 
-#include "wx/defs.h"
-
 #ifdef wxHAS_RAW_BITMAP
+
+#include "wx/defs.h"
 
 #include "wx/image.h"
 #include "wx/bitmap.h"

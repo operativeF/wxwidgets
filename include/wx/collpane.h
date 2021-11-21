@@ -11,10 +11,9 @@
 #ifndef _WX_COLLAPSABLE_PANE_H_BASE_
 #define _WX_COLLAPSABLE_PANE_H_BASE_
 
-#include "wx/defs.h"
-
-
 #if wxUSE_COLLPANE
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

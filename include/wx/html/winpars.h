@@ -9,8 +9,9 @@
 #ifndef _WX_WINPARS_H_
 #define _WX_WINPARS_H_
 
-#include "wx/defs.h"
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/module.h"
 #include "wx/font.h"

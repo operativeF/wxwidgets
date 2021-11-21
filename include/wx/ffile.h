@@ -11,9 +11,9 @@
 #ifndef   _WX_FFILE_H_
 #define   _WX_FFILE_H_
 
-#include "wx/defs.h"        // for wxUSE_FFILE
-
 #if wxUSE_FFILE
+
+#include "wx/defs.h"        // for wxUSE_FFILE
 
 #include  "wx/string.h"
 #include  "wx/filefn.h"

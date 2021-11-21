@@ -11,9 +11,9 @@
 #ifndef _WX_MEDIACTRL_H_
 #define _WX_MEDIACTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_MEDIACTRL
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 #include "wx/geometry/rect.h"

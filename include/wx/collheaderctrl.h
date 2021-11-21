@@ -10,9 +10,9 @@
 #ifndef _WX_COLLAPSIBLEHEADER_CTRL_H_
 #define _WX_COLLAPSIBLEHEADER_CTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_COLLPANE
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

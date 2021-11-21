@@ -10,9 +10,9 @@
 #ifndef _WX_HTTP_H
 #define _WX_HTTP_H
 
-#include "wx/defs.h"
-
 #if wxUSE_PROTOCOL_HTTP
+
+#include "wx/defs.h"
 
 #include "wx/hashmap.h"
 #include "wx/protocol/protocol.h"

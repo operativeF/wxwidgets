@@ -10,9 +10,9 @@
 #ifndef _WX_RIBBON_BUTTON_BAR_H_
 #define _WX_RIBBON_BUTTON_BAR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
+
+#include "wx/defs.h"
 
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/control.h"

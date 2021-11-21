@@ -11,9 +11,9 @@
 #ifndef _WX_GENERIC_GRID_H_
 #define _WX_GENERIC_GRID_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_GRID
+
+#include "wx/defs.h"
 
 #include "wx/generic/gridcoord.h"
 #include "wx/generic/gridevt.h"

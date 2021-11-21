@@ -10,9 +10,9 @@
 #ifndef _WX_HTMLCELL_H_
 #define _WX_HTMLCELL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_HTML
+
+#include "wx/defs.h"
 
 #include "wx/html/htmltag.h"
 #include "wx/html/htmldefs.h"

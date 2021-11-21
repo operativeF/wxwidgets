@@ -11,9 +11,9 @@
 #ifndef _WX_SOCKET_H_
 #define _WX_SOCKET_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_SOCKETS
+
+#include "wx/defs.h"
 
 // ---------------------------------------------------------------------------
 // wxSocket headers

@@ -12,9 +12,9 @@
 #ifndef _WX_TOGGLEBUTTON_H_BASE_
 #define _WX_TOGGLEBUTTON_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_TOGGLEBTN
+
+#include "wx/defs.h"
 
 #include "wx/app.h"
 #include "wx/event.h"
