@@ -633,7 +633,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        unsigned int style,
-                       const std::string& name,
+                       std::string_view name,
                        const wxPalette& palette)
 {
     Create(parent, dispAttrs, id, pos, size, style, name, palette);
@@ -645,7 +645,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        unsigned int style,
-                       const std::string& name,
+                       std::string_view name,
                        const wxPalette& palette)
 {
     Create(parent, id, pos, size, style, name, attribList, palette);
@@ -663,7 +663,7 @@ bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
                               const wxPoint& pos,
                               const wxSize& size,
                               unsigned int style,
-                              const std::string& name)
+                              std::string_view name)
 {
     wxCHECK_MSG( parent, false, "can't create wxWindow without parent" );
 
@@ -695,7 +695,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         const wxPoint& pos,
                         const wxSize& size,
                         unsigned int style,
-                        const std::string& name,
+                        std::string_view name,
                         const int *attribList,
                         const wxPalette& palette)
 {
@@ -714,7 +714,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         const wxPoint& pos,
                         const wxSize& size,
                         unsigned int style,
-                        const std::string& name,
+                        std::string_view name,
                         const wxPalette& palette)
 {
     if ( !wxCreateWindow(parent, id, pos, size, style, name) )

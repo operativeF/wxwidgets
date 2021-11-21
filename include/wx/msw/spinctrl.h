@@ -43,7 +43,7 @@ public:
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
-               const std::string& name = "wxSpinCtrl")
+               std::string_view name = "wxSpinCtrl")
     {
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
@@ -54,16 +54,16 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
-                const std::string& name = "wxSpinCtrl");
+                std::string_view name = "wxSpinCtrl");
 
     // a wxTextCtrl-like method (but we can't have GetValue returning std::string
     // because the base class already has one returning int!)
-    void SetValue(const std::string& text);
+    void SetValue(std::string_view text);
 
     // another wxTextCtrl-like method
     void SetSelection(long from, long to);

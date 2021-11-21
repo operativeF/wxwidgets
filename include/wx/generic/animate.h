@@ -28,7 +28,7 @@ public:
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
                            unsigned int style = wxAC_DEFAULT_STYLE,
-                           const std::string& name = wxAnimationCtrlNameStr)
+                           std::string_view name = wxAnimationCtrlNameStr)
     {
         Create(parent, id, anim, pos, size, style, name);
     }
@@ -38,7 +38,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxAC_DEFAULT_STYLE,
-                const std::string& name = wxAnimationCtrlNameStr);
+                std::string_view name = wxAnimationCtrlNameStr);
 
     ~wxGenericAnimationCtrl();
 

@@ -56,7 +56,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const std::string& name = wxGLCanvasName,
+               std::string_view name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
     explicit
@@ -66,7 +66,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const std::string& name = wxGLCanvasName,
+               std::string_view name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
@@ -75,7 +75,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxGLCanvasName,
+                std::string_view name = wxGLCanvasName,
                 const wxPalette& palette = wxNullPalette);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
@@ -83,7 +83,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxGLCanvasName,
+                std::string_view name = wxGLCanvasName,
                 const int *attribList = nullptr,
                 const wxPalette& palette = wxNullPalette);
 

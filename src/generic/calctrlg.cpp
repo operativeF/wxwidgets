@@ -435,7 +435,7 @@ bool wxGenericCalendarCtrl::SetDate(const wxDateTime& date)
                     if ( AllowYearChange() )
                     {
                         if ( !m_userChangedYear )
-                            m_spinYear->SetValue(m_date.Format("%Y"));
+                            m_spinYear->SetValue(m_date.Format("%Y").ToStdString());
                     }
                 }
 

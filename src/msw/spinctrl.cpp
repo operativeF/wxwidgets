@@ -255,12 +255,12 @@ void wxSpinCtrl::NormalizeValue()
 
 bool wxSpinCtrl::Create(wxWindow *parent,
                         wxWindowID id,
-                        const std::string& value,
+                        std::string_view value,
                         const wxPoint& pos,
                         const wxSize& size,
                         unsigned int style,
                         int min, int max, int initial,
-                        const std::string& name)
+                        std::string_view name)
 {
     // set style for the base class
     style |= wxSP_VERTICAL;
@@ -354,12 +354,14 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     // UDM_SETBUDDY changes its size using some unknown algorithm, so setting
     // the sizes earlier is useless. Do it after setting the range and the base
     // because GetBestSize() uses them.
-    if ( size.x > 0 && size.x < GetBestSize().x )
-    {
-        wxLogDebug("wxSpinCtrl \"%s\": initial width %d is too small, "
-                   "at least %d pixels needed.",
-                   name, size.x, GetBestSize().x);
-    }
+
+    // FIXME: wxLogDebug isn't compatible with std::string
+    //if ( size.x > 0 && size.x < GetBestSize().x )
+    //{
+    //    auto debugStr = fmt::format("wxSpinCtrl \"{:s}\": initial width {:d} is too small, "
+    //                                "at least {:d} pixels needed.", name, size.x, GetBestSize().x);
+    //    wxLogDebug(debugStr);
+    //}
 
     SetInitialSize(size);
 
@@ -430,7 +432,7 @@ std::string wxSpinCtrl::GetTextValue() const
     return wxGetWindowText(m_hwndBuddy);
 }
 
-void wxSpinCtrl::SetValue(const std::string& text)
+void wxSpinCtrl::SetValue(std::string_view text)
 {
     m_blockEvent = true;
     wxON_BLOCK_EXIT_SET(m_blockEvent, false);

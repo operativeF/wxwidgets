@@ -53,7 +53,7 @@ wxTreebook::Create(wxWindow *parent,
                    const wxPoint& pos,
                    const wxSize& size,
                    unsigned int style,
-                   const std::string& name)
+                   std::string_view name)
 {
     // Check the style flag to have either wxTBK_RIGHT or wxTBK_LEFT
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )

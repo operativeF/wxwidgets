@@ -35,7 +35,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               unsigned int style = 0,
-              const std::string& name = wxToolBarNameStr)
+              std::string_view name = wxToolBarNameStr)
     {
         Init();
 
@@ -47,7 +47,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = 0,
-                 const std::string& name = wxToolBarNameStr);
+                 std::string_view name = wxToolBarNameStr);
 
     bool Realize() override;
 

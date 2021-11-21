@@ -57,12 +57,12 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = {},
+                std::string_view value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxComboBoxNameStr);
+                std::string_view name = wxComboBoxNameStr);
 
     void SetCustomPaintWidth( int width );
 

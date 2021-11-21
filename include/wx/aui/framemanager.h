@@ -415,7 +415,7 @@ public:
     wxAuiDockArt* GetArtProvider() const;
 
     wxAuiPaneInfo& GetPane(wxWindow* window);
-    wxAuiPaneInfo& GetPane(const std::string& name);
+    wxAuiPaneInfo& GetPane(std::string_view name);
     wxAuiPaneInfoArray& GetAllPanes();
 
     bool AddPane(wxWindow* window,

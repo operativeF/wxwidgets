@@ -662,7 +662,7 @@ wxAuiPaneInfo& wxAuiManager::GetPane(wxWindow* window)
 
 // this version of GetPane() looks up a pane based on a
 // 'pane name', see above comment for more info
-wxAuiPaneInfo& wxAuiManager::GetPane(const std::string& name)
+wxAuiPaneInfo& wxAuiManager::GetPane(std::string_view name)
 {
     for (size_t i = 0; i < m_panes.GetCount(); ++i)
     {

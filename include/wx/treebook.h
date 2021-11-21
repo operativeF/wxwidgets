@@ -46,7 +46,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = wxBK_DEFAULT,
-               const std::string& name = {})
+               std::string_view name = {})
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -59,7 +59,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxBK_DEFAULT,
-                const std::string& name = {});
+                std::string_view name = {});
 
 
     // Page insertion operations
