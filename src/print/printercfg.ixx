@@ -8,8 +8,10 @@
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_PRINTERCFG_H_BASE_
-#define _WX_PRINTERCFG_H_BASE_
+export module WX.Print.Cfg;
+
+export
+{
 
 /*
  * wxPrintData
@@ -202,4 +204,4 @@ inline constexpr int wxPRINT_QUALITY_DRAFT   = -4;
 
 using wxPrintQuality = int;
 
-#endif
+} // export namespace wx::print

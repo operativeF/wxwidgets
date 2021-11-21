@@ -133,7 +133,7 @@ bool wxTextValidator::Validate(wxWindow *parent)
     if ( !errormsg.empty() )
     {
         m_validatorWindow->SetFocus();
-        wxMessageBox(errormsg, _("Validation conflict").ToStdString(),
+        wxMessageBox(errormsg.ToStdString(), _("Validation conflict").ToStdString(),
                      wxOK | wxICON_EXCLAMATION, parent);
 
         return false;

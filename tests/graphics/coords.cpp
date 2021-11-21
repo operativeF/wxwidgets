@@ -20,9 +20,14 @@ import Utils.Geometry;
 // test class
 // ----------------------------------------------------------------------------
 
+namespace
+{
+
 constexpr wxSize s_dcSize(100, 100);
 constexpr wxPoint s_posDev(24, 57);
 constexpr wxSize s_dimDev(40, 15);
+
+} // namespace anonymous
 
 // ====================
 // wxDC / wxGCDC tests

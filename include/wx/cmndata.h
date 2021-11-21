@@ -13,8 +13,7 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/printercfg.h"
-
+import WX.Print;
 import Utils.Geometry;
 
 import <string>;

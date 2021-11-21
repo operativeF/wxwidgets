@@ -347,7 +347,7 @@ wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
     return statusBar;
 }
 
-void wxFrameBase::SetStatusText(const std::string& text, int number)
+void wxFrameBase::SetStatusText(std::string_view text, int number)
 {
     wxCHECK_RET( m_frameStatusBar != nullptr, "no statusbar to set text for" );
 

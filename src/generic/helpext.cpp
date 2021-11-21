@@ -424,7 +424,7 @@ bool wxExtHelpController::KeywordSearch(const std::string& k,
     switch (idx)
     {
     case 0:
-        wxMessageBox(_("No entries found."));
+        wxMessageBox(_("No entries found.").ToStdString());
         break;
 
     case 1:

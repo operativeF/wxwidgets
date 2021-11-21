@@ -265,9 +265,12 @@ elseif(UNIX)
 endif()
 
 target_link_libraries(wxbase
-    PRIVATE
+    PUBLIC
         wxsharedcmn
         wxalgorithm
+        wxprint
+
+    PRIVATE
         stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL

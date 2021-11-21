@@ -386,16 +386,18 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 
         // built the message
         std::string encDesc = GetEncodingDescription(encoding);
-        wxString msg;
+        std::string msg;
         if ( foundEquivEncoding )
         {
             // ask the user if he wants to override found alternative encoding
-            msg.Printf(_("No font for displaying text in encoding '%s' found,\nbut an alternative encoding '%s' is available.\nDo you want to use this encoding (otherwise you will have to choose another one)?"),
+            // FIXME: Translation removed for fmt lib
+            msg = fmt::format("No font for displaying text in encoding '%s' found,\nbut an alternative encoding '%s' is available.\nDo you want to use this encoding (otherwise you will have to choose another one)?",
                        encDesc, GetEncodingDescription(equivEncoding));
         }
         else
         {
-            msg.Printf(_("No font for displaying text in encoding '%s' found.\nWould you like to select a font to be used for this encoding\n(otherwise the text in this encoding will not be shown correctly)?"),
+            // FIXME: Translation removed for fmt lib
+            msg = fmt::format("No font for displaying text in encoding '%s' found.\nWould you like to select a font to be used for this encoding\n(otherwise the text in this encoding will not be shown correctly)?",
                        encDesc);
         }
 

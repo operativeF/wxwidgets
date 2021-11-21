@@ -125,7 +125,7 @@ public:
     virtual void SetStatusBar(wxStatusBar *statBar);
 
     // forward these to status bar
-    virtual void SetStatusText(const std::string& text, int number = 0);
+    virtual void SetStatusText(std::string_view text, int number = 0);
     virtual void SetStatusWidths(int n, const int widths_field[]);
     void PushStatusText(const std::string& text, int number = 0);
     void PopStatusText(int number = 0);

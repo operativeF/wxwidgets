@@ -232,7 +232,7 @@ wxLogGui::DoShowSingleLogMessage(const wxString& message,
                                  const wxString& title,
                                  unsigned int style)
 {
-    wxMessageBox(message, title.ToStdString(), wxOK | style);
+    wxMessageBox(message.ToStdString(), title.ToStdString(), wxOK | style);
 }
 
 void
@@ -359,7 +359,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 }
 
                 if ( pFrame && pFrame->GetStatusBar() )
-                    pFrame->SetStatusText(msg);
+                    pFrame->SetStatusText(msg.ToStdString());
             }
 #endif // wxUSE_STATUSBAR
             break;
@@ -895,7 +895,7 @@ void wxLogDialog::OnListItemActivated(wxListEvent& event)
 
     // wxMessageBox will nicely handle the '\n' in the string (if any)
     // and supports long strings
-    wxMessageBox(str, "Log message", wxOK, this);
+    wxMessageBox(str.ToStdString(), "Log message", wxOK, this);
 }
 
 void wxLogDialog::OnOk(wxCommandEvent& WXUNUSED(event))
@@ -999,7 +999,7 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
         wxString strMsg;
         strMsg.Printf(_("Append log to file '%s' (choosing [No] will overwrite it)?"),
                       filename.c_str());
-        switch ( wxMessageBox(strMsg, _("Question").ToStdString(),
+        switch ( wxMessageBox(strMsg.ToStdString(), _("Question").ToStdString(),
                               wxICON_QUESTION | wxYES_NO | wxCANCEL) ) {
             case wxYES:
                 bAppend = true;

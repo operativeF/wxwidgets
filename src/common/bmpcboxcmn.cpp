@@ -180,7 +180,7 @@ void wxBitmapComboBoxBase::DrawBackground(wxDC& dc,
 void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
                                     const wxRect& rect,
                                     int item,
-                                    const std::string& text,
+                                    std::string_view text,
                                     unsigned int WXUNUSED(flags)) const
 {
     const wxBitmap& bmp = *GetBitmapPtr(item);

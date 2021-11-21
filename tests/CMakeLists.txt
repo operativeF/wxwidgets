@@ -150,6 +150,7 @@ target_link_libraries(test_gui
         stdlibcore
         wxtype
         doctest::doctest
+        wxprint
         ${JPEG_LIBRARIES}
     # Windows libraries
         mswutils

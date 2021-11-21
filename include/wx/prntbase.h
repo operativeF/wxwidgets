@@ -109,10 +109,10 @@ public:
     virtual bool HasOwnPrintToFile() = 0;
     // c) Show current printer
     virtual bool HasPrinterLine() = 0;
-    virtual wxString CreatePrinterLine() = 0;
+    virtual std::string CreatePrinterLine() = 0;
     // d) Show Status line for current printer?
     virtual bool HasStatusLine() = 0;
-    virtual wxString CreateStatusLine() = 0;
+    virtual std::string CreateStatusLine() = 0;
 
 
     virtual wxPrintNativeDataBase *CreatePrintNativeData() = 0;
@@ -149,9 +149,9 @@ public:
     wxDialog *CreatePrintSetupDialog( wxWindow *parent, wxPrintData *data ) override;
     bool HasOwnPrintToFile() override;
     bool HasPrinterLine() override;
-    wxString CreatePrinterLine() override;
+    std::string CreatePrinterLine() override;
     bool HasStatusLine() override;
-    wxString CreateStatusLine() override;
+    std::string CreateStatusLine() override;
 
     wxPrintNativeDataBase *CreatePrintNativeData() override;
 };
@@ -195,7 +195,7 @@ public:
     wxPrinterBase& operator=(wxPrinterBase&&) = delete;
 
     virtual wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout);
-    virtual void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message);
+    virtual void ReportError(wxWindow *parent, wxPrintout *printout, std::string_view message);
 
     virtual wxPrintDialogData& GetPrintDialogData() const;
     bool GetAbort() const { return sm_abortIt; }
@@ -233,7 +233,7 @@ public:
     wxPrinter& operator=(wxPrinter&&) = delete;
 
     wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout) override;
-    void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message) override;
+    void ReportError(wxWindow *parent, wxPrintout *printout, std::string_view message) override;
 
     bool Setup(wxWindow *parent) override;
     bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) override;
@@ -259,7 +259,7 @@ protected:
 class wxPrintout
 {
 public:
-    wxPrintout(const wxString& title = wxGetTranslation("Printout")) :
+    wxPrintout(std::string_view title = wxGetTranslation("Printout").ToStdString()) :
         m_printoutTitle(title)    
     {
     }
@@ -280,7 +280,7 @@ public:
     virtual bool OnPrintPage(int page) = 0;
     virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo);
 
-    virtual wxString GetTitle() const { return m_printoutTitle; }
+    virtual std::string GetTitle() const { return m_printoutTitle; }
 
     // Port-specific code should call this function to initialize this object
     // with everything it needs, instead of using individual accessors below.
@@ -327,7 +327,7 @@ public:
     virtual bool IsPreview() const { return GetPreview() != nullptr; }
 
 private:
-    wxString         m_printoutTitle;
+    std::string      m_printoutTitle;
     wxDC*            m_printoutDC{nullptr};
     wxPrintPreview  *m_preview{nullptr};
 

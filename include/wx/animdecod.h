@@ -11,8 +11,6 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/defs.h"
-
 #include "wx/colour.h"
 #include "wx/log.h"
 #include "wx/stream.h"

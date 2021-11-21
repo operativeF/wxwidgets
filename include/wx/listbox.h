@@ -13,8 +13,9 @@
 
 #if wxUSE_LISTBOX
 
-#include "wx/ctrlsub.h"         // base class
 #include "wx/defs.h"
+
+#include "wx/ctrlsub.h"         // base class
 
 import <string>;
 import <vector>;
@@ -52,8 +53,8 @@ public:
     void Deselect(int n) { DoSetSelection(n, false); }
     void DeselectAll(int itemToLeaveSelected = -1);
 
-    virtual bool SetStringSelection(const std::string& s, bool select);
-    virtual bool SetStringSelection(const std::string& s)
+    virtual bool SetStringSelection(std::string_view s, bool select);
+    virtual bool SetStringSelection(std::string_view s)
     {
         return SetStringSelection(s, true);
     }
@@ -65,7 +66,7 @@ public:
     // set the specified item at the first visible item or scroll to max
     // range.
     void SetFirstItem(int n) { DoSetFirstItem(n); }
-    void SetFirstItem(const std::string& s);
+    void SetFirstItem(std::string_view s);
 
     // ensures that the given item is visible scrolling the listbox if
     // necessary

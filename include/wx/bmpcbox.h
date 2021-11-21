@@ -79,7 +79,7 @@ protected:
     void DoSetItemBitmap(unsigned int n, const wxBitmap& bitmap);
 
     void DrawBackground(wxDC& dc, const wxRect& rect, int item, unsigned int flags) const;
-    void DrawItem(wxDC& dc, const wxRect& rect, int item, const std::string& text,
+    void DrawItem(wxDC& dc, const wxRect& rect, int item, std::string_view text,
                   unsigned int flags) const;
     wxCoord MeasureItem(size_t item) const;
 

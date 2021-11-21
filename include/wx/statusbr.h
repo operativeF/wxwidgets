@@ -73,7 +73,7 @@ public:
 
     // set text, return true if it changed or false if it was already set to
     // this value
-    bool SetText(const std::string& text);
+    bool SetText(std::string_view text);
 
     // save the existing text on top of our stack and make the new text
     // current; return true if the text really changed
@@ -126,7 +126,7 @@ public:
     // ----------
 
     // just change or get the currently shown text
-    void SetStatusText(const std::string& text, int number = 0);
+    void SetStatusText(std::string_view text, int number = 0);
     std::string GetStatusText(int number = 0) const;
 
     // change the currently shown text to the new one and save the current

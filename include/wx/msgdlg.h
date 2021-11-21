@@ -308,7 +308,7 @@ private:
 // wxMessageBox: the simplest way to use wxMessageDialog
 // ----------------------------------------------------------------------------
 
-int wxMessageBox(const std::string& message,
+int wxMessageBox(std::string_view message,
                  std::string_view caption = wxMessageBoxCaptionStr,
                  unsigned int style = wxOK | wxCENTRE,
                  wxWindow *parent = nullptr,

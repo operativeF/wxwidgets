@@ -20,7 +20,7 @@
 // wxStatusBarPane implementation
 // ============================================================================
 
-bool wxStatusBarPane::SetText(const std::string& text)
+bool wxStatusBarPane::SetText(std::string_view text)
 {
     if ( text == m_text )
         return false;
@@ -47,10 +47,10 @@ bool wxStatusBarPane::SetText(const std::string& text)
      */
     if ( !m_arrStack.empty() )
     {
-        m_arrStack.back() = text;
+        m_arrStack.back() = {text.begin(), text.end()};
     }
 
-    m_text = text;
+    m_text = {text.begin(), text.end()};
 
     return true;
 }
@@ -233,7 +233,7 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
 // setting/getting status text
 // ----------------------------------------------------------------------------
 
-void wxStatusBarBase::SetStatusText(const std::string& text, int number)
+void wxStatusBarBase::SetStatusText(std::string_view text, int number)
 {
     wxCHECK_RET( (unsigned)number < m_panes.size(),
                     "invalid status bar field index" );
