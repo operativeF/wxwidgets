@@ -24,8 +24,8 @@
 
 class wxTextCtrl;
 
-inline constexpr char wxGetTextFromUserPromptStr[] = "Input Text";
-inline constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
+inline constexpr std::string_view wxGetTextFromUserPromptStr = "Input Text";
+inline constexpr std::string_view wxGetPasswordFromUserPromptStr = "Enter Password";
 
 #define wxTextEntryDialogStyle (wxOK | wxCANCEL | wxCENTRE)
 

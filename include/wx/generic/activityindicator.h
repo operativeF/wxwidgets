@@ -30,7 +30,7 @@ public:
                                const wxPoint& pos = wxDefaultPosition,
                                const wxSize& size = wxDefaultSize,
                                unsigned int style = 0,
-                               const std::string& name = wxActivityIndicatorNameStr)
+                               std::string_view name = wxActivityIndicatorNameStr)
     {
         Create(parent, winid, pos, size, style, name);
     }
@@ -40,7 +40,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const std::string& name = wxActivityIndicatorNameStr);
+                std::string_view name = wxActivityIndicatorNameStr);
 
     ~wxActivityIndicatorGeneric();
 
