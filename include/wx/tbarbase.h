@@ -87,7 +87,7 @@ public:
     {
     }
 
-    ~wxToolBarToolBase();
+    virtual ~wxToolBarToolBase();
 
     wxToolBarToolBase& operator=(wxToolBarToolBase&&) = delete;
 

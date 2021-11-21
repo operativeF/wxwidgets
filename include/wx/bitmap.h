@@ -48,6 +48,8 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap)
 class wxMaskBase
 {
 public:
+    virtual ~wxMaskBase() = default;
+
     // create the mask from bitmap pixels of the given colour
     bool Create(const wxBitmap& bitmap, const wxColour& colour);
 
