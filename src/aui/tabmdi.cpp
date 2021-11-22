@@ -8,7 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/aui/tabmdi.h"
+module;
+
 #include "wx/aui/events.h"
 
 #include "wx/panel.h"
@@ -17,6 +18,9 @@
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/stockitem.h"
+#include "wx/toplevel.h"
+
+module WX.AUI.TabMDI;
 
 import WX.AUI.DockArt;
 

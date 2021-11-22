@@ -12,14 +12,14 @@ module;
 
 #include "wx/aui/events.h"
 #include "wx/aui/framemanager.h"
+#include "wx/aui/tabart.h"
 
 #include "wx/app.h"
+#include "wx/bookctrl.h"
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/frame.h"
-
-#include "wx/aui/tabmdi.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -27,7 +27,11 @@ module;
 
 #include "wx/arrimpl.cpp"
 
+#include <memory>
+
 module WX.AUI.Book;
+
+import WX.AUI.TabMDI;
 
 WX_DEFINE_OBJARRAY(wxAuiNotebookPageArray)
 WX_DEFINE_OBJARRAY(wxAuiTabContainerButtonArray)

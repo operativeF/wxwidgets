@@ -12,7 +12,6 @@
 
 #include "wx/aui/framemanager.h"
 #include "wx/aui/floatpane.h"
-#include "wx/aui/tabmdi.h"
 #include "wx/aui/auibar.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
@@ -31,6 +30,7 @@ WX_CHECK_BUILD_OPTIONS("wxAUI")
 #include "wx/arrimpl.cpp"
 
 import WX.AUI.DockArt;
+import WX.AUI.TabMDI;
 
 WX_DECLARE_OBJARRAY(wxRect, wxAuiRectArray);
 WX_DEFINE_OBJARRAY(wxAuiRectArray)

@@ -8,12 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_AUITABMDI_H_
-#define _WX_AUITABMDI_H_
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+module;
 
 #include "wx/aui/tabart.h"
 
@@ -23,13 +18,11 @@
 #include "wx/icon.h"
 #include "wx/mdi.h"
 
+export module WX.AUI.TabMDI;
+
 import WX.AUI.Book;
 
 import Utils.Geometry;
-
-//-----------------------------------------------------------------------------
-// classes
-//-----------------------------------------------------------------------------
 
 class wxAuiMDIParentFrame;
 class wxAuiMDIClientWindow;
@@ -38,6 +31,9 @@ class wxAuiMDIChildFrame;
 //-----------------------------------------------------------------------------
 // wxAuiMDIParentFrame
 //-----------------------------------------------------------------------------
+
+export
+{
 
 class wxAuiMDIParentFrame : public wxFrame
 {
@@ -213,4 +209,4 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-#endif // _WX_AUITABMDI_H_
+} // export
