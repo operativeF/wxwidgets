@@ -12,7 +12,13 @@ set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/book.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/dockart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/floatpane.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/page.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/tabart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx
+)
+
+set(AUI_MSW_INF
+    ${CMAKE_SOURCE_DIR}/modules/aui/msw/tabartmsw.ixx
 )
 
 if(wxUSE_MDI)
@@ -39,7 +45,7 @@ set(AUI_GTK_SRC
 set(AUI_FILES ${AUI_CMN_SRC})
 
 if(WIN32)
-    list(APPEND AUI_FILES ${AUI_MSW_SRC} ${AUI_BAR_ART_SRC} ${AUI_CMN_INF})
+    list(APPEND AUI_FILES ${AUI_MSW_SRC} ${AUI_BAR_ART_SRC} ${AUI_CMN_INF} ${AUI_MSW_INF})
 elseif(WXGTK2)
     list(APPEND AUI_FILES ${AUI_GTK_SRC})
 endif()

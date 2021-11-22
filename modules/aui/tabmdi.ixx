@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/aui/tabart.h"
-
 #include "wx/frame.h"
 #include "wx/panel.h"
 #include "wx/notebook.h"
@@ -21,6 +19,7 @@ module;
 export module WX.AUI.TabMDI;
 
 import WX.AUI.Book;
+import WX.AUI.TabArt;
 
 import Utils.Geometry;
 

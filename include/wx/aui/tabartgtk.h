@@ -52,5 +52,6 @@ public:
                               int close_button_state, int* x_extent) override;
 };
 
+using wxAuiDefaultTabArt = wxAuiGtkTabArt;
 
 #endif // _WX_AUI_TABARTGTK_H_

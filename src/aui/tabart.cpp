@@ -8,6 +8,8 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/control.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
@@ -17,11 +19,12 @@
 
 #include "wx/renderer.h"
 #include "wx/aui/framemanager.h"
-#include "wx/aui/tabart.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
+
+module WX.AUI.TabArt;
 
 import WX.AUI.Book;
 import WX.AUI.DockArt;
@@ -155,11 +158,6 @@ static constexpr unsigned char list_bits[] = {
    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
    0x0f, 0xf8, 0xff, 0xff, 0x0f, 0xf8, 0x1f, 0xfc, 0x3f, 0xfe, 0x7f, 0xff,
    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-
-
-
-
-
 
 // -- wxAuiGenericTabArt class implementation --
 
@@ -1356,4 +1354,3 @@ void wxAuiSimpleTabArt::SetMeasuringFont(const wxFont& font)
 {
     m_measuringFont = font;
 }
-

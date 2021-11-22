@@ -8,33 +8,30 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-
-#ifndef _WX_AUI_TABART_H_
-#define _WX_AUI_TABART_H_
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+module;
 
 #include "wx/defs.h"
 
+#include "wx/dc.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/pen.h"
 #include "wx/brush.h"
 #include "wx/bitmap.h"
+#include "wx/window.h"
+
+export module WX.AUI.TabArt.Base;
+
+import WX.AUI.Page;
 
 import Utils.Geometry;
 
 import <string>;
 
-class wxAuiNotebookPageArray;
-class wxWindow;
-class wxDC;
-
-struct wxAuiNotebookPage;
-
 // tab art class
+
+export
+{
 
 class wxAuiTabArt
 {
@@ -316,18 +313,13 @@ protected:
 #ifndef __WXUNIVERSAL__
     #if defined(__WXGTK20__) && !defined(__WXGTK3__)
         #define wxHAS_NATIVE_TABART
-        #include "wx/aui/tabartgtk.h"
-        #define wxAuiDefaultTabArt wxAuiGtkTabArt
     #elif defined(__WXMSW__) && wxUSE_UXTHEME
         #define wxHAS_NATIVE_TABART
-        #include "wx/aui/tabartmsw.h"
-        #define wxAuiDefaultTabArt wxAuiMSWTabArt
     #endif
 #endif // !__WXUNIVERSAL__
 
 #ifndef wxHAS_NATIVE_TABART
-    #define wxAuiDefaultTabArt wxAuiGenericTabArt
+    using wxAuiDefaultTabArt = wxAuiGenericTabArt;
 #endif
 
-
-#endif  // _WX_AUI_TABART_H_
+} // export

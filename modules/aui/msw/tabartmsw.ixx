@@ -7,12 +7,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_AUI_TABARTMSW_H_
-#define _WX_AUI_TABARTMSW_H_
+module;
+
+#include "wx/window.h"
+
+export module WX.AUI.TabArt;
+
+export import WX.AUI.TabArt.Base;
 
 import Utils.Geometry;
 
 import <string>;
+
+export
+{
 
 class wxAuiMSWTabArt : public wxAuiGenericTabArt
 {
@@ -91,4 +99,6 @@ private:
     bool IsThemed() const;
 };
 
-#endif // _WX_AUI_TABARTMSW_H_
+using wxAuiDefaultTabArt = wxAuiMSWTabArt;
+
+} // export

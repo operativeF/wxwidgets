@@ -11,7 +11,6 @@
 module;
 
 #include "wx/aui/framemanager.h"
-#include "wx/aui/tabart.h"
 
 #include "wx/settings.h"
 #include "wx/dcclient.h"
@@ -40,6 +39,7 @@ module;
 module WX.AUI.DockArt;
 
 import WX.AUI.Book;
+import WX.AUI.TabArt;
 
 import <cmath>;
 
