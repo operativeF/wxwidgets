@@ -8,14 +8,18 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/aui/framemanager.h"
-#include "wx/aui/floatpane.h"
+module;
 
-import WX.AUI.DockArt;
+#include "wx/aui/framemanager.h"
+#include "wx/toplevel.h"
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #endif
+
+module WX.AUI.FloatPane;
+
+import WX.AUI.DockArt;
 
 import Utils.Geometry;
 
@@ -362,5 +366,3 @@ wxBEGIN_EVENT_TABLE(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass)
     EVT_IDLE(wxAuiFloatingFrame::OnIdle)
     EVT_ACTIVATE(wxAuiFloatingFrame::OnActivate)
 wxEND_EVENT_TABLE()
-
-

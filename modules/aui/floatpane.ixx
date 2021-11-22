@@ -8,20 +8,29 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FLOATPANE_H_
-#define _WX_FLOATPANE_H_
+module;
 
 #include "wx/defs.h"
 #include "wx/weakref.h"
-
-import Utils.Geometry;
+#include "wx/aui/framemanager.h"
 
 #if wxUSE_MINIFRAME
     #include "wx/minifram.h"
-    #define wxAuiFloatingFrameBaseClass wxMiniFrame
 #else
     #include "wx/frame.h"
-    #define wxAuiFloatingFrameBaseClass wxFrame
+#endif
+
+export module WX.AUI.FloatPane;
+
+import Utils.Geometry;
+
+export
+{
+
+#if wxUSE_MINIFRAME
+using wxAuiFloatingFrameBaseClass = wxMiniFrame;
+#else
+using wxAuiFloatingFrameBaseClass = wxFrame;
 #endif
 
 class wxAuiFloatingFrame : public wxAuiFloatingFrameBaseClass
@@ -80,5 +89,4 @@ private:
 #endif // SWIG
 };
 
-#endif //_WX_FLOATPANE_H_
-
+} // export
