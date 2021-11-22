@@ -677,18 +677,15 @@ struct wxAuiDockUIPart
     wxRect rect;                      // client coord rectangle of the part itself
 };
 
-
-
-
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_PANE_BUTTON, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_PANE_CLOSE, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_PANE_MAXIMIZE, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_PANE_RESTORE, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_PANE_ACTIVATED, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_RENDER, wxAuiManagerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_AUI, wxEVT_AUI_FIND_MANAGER, wxAuiManagerEvent );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_PANE_BUTTON( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_PANE_CLOSE( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_PANE_MAXIMIZE( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_PANE_RESTORE( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_PANE_ACTIVATED( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_RENDER( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_FIND_MANAGER( wxNewEventType() );
 
 typedef void (wxEvtHandler::*wxAuiManagerEventFunction)(wxAuiManagerEvent&);
 
