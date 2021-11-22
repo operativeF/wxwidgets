@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/aui/framemanager.h"
-
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/image.h"
@@ -39,6 +37,7 @@ module;
 module WX.AUI.DockArt;
 
 import WX.AUI.Book;
+import WX.AUI.FrameManager;
 import WX.AUI.TabArt;
 
 import <cmath>;

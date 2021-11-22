@@ -12,6 +12,7 @@ set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/book.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/dockart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/floatpane.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/framemanager.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/page.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx

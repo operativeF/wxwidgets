@@ -12,7 +12,6 @@ module;
 
 #include "wx/defs.h"
 #include "wx/weakref.h"
-#include "wx/aui/framemanager.h"
 
 #if wxUSE_MINIFRAME
     #include "wx/minifram.h"
@@ -21,6 +20,8 @@ module;
 #endif
 
 export module WX.AUI.FloatPane;
+
+import WX.AUI.FrameManager;
 
 import Utils.Geometry;
 

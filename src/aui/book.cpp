@@ -11,7 +11,6 @@
 module;
 
 #include "wx/aui/events.h"
-#include "wx/aui/framemanager.h"
 
 #include "wx/app.h"
 #include "wx/bookctrl.h"
@@ -30,6 +29,7 @@ module;
 
 module WX.AUI.Book;
 
+import WX.AUI.FrameManager;
 import WX.AUI.Page;
 import WX.AUI.TabArt;
 import WX.AUI.TabMDI;

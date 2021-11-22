@@ -8,10 +8,12 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/msw/private.h"
 
-#include "wx/aui/framemanager.h"
 #include "wx/aui/auibar.h"
+#include "wx/aui/events.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
 #include "wx/panel.h"
@@ -23,23 +25,7 @@
 #include "wx/toolbar.h"
 #include "wx/image.h"
 #include "wx/statusbr.h"
-
-WX_CHECK_BUILD_OPTIONS("wxAUI")
-
-#include "wx/arrimpl.cpp"
-
-import WX.AUI.DockArt;
-import WX.AUI.FloatPane;
-import WX.AUI.TabMDI;
-
-WX_DECLARE_OBJARRAY(wxRect, wxAuiRectArray);
-WX_DEFINE_OBJARRAY(wxAuiRectArray)
-WX_DEFINE_OBJARRAY(wxAuiDockUIPartArray)
-WX_DEFINE_OBJARRAY(wxAuiDockInfoArray)
-WX_DEFINE_OBJARRAY(wxAuiPaneInfoArray)
-
-wxAuiPaneInfo wxAuiNullPaneInfo;
-wxAuiDockInfo wxAuiNullDockInfo;
+#include "wx/timer.h"
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes
@@ -52,15 +38,31 @@ wxAuiDockInfo wxAuiNullDockInfo;
     #include "wx/msw/dc.h"
 #endif
 
+#include "wx/arrimpl.cpp"
+
+module WX.AUI.FrameManager;
+
+import WX.AUI.DockArt;
+import WX.AUI.FloatPane;
+import WX.AUI.TabMDI;
+
+import <charconv>;
+
+WX_DECLARE_OBJARRAY(wxRect, wxAuiRectArray);
+WX_DEFINE_OBJARRAY(wxAuiRectArray)
+WX_DEFINE_OBJARRAY(wxAuiDockUIPartArray)
+WX_DEFINE_OBJARRAY(wxAuiDockInfoArray)
+WX_DEFINE_OBJARRAY(wxAuiPaneInfoArray)
+
+wxAuiPaneInfo wxAuiNullPaneInfo;
+wxAuiDockInfo wxAuiNullDockInfo;
+
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiManagerEvent, wxEvent);
 wxIMPLEMENT_CLASS(wxAuiManager, wxEvtHandler);
-
-
 
 constexpr int auiToolBarLayer = 10;
 
 #ifndef __WXGTK20__
-
 
 class wxPseudoTransparentFrame : public wxFrame
 {
@@ -268,11 +270,12 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPseudoTransparentFrame, wxFrame);
 #endif
  // __WXGTK20__
 
+// -- internal utility functions --
 
+namespace
+{
 
-// -- static utility functions --
-
-static wxBitmap wxPaneCreateStippleBitmap()
+wxBitmap wxPaneCreateStippleBitmap()
 {
     // TODO: Provide x1.5 and x2.0 versions.
     unsigned char data[] = { 0,0,0,192,192,192, 192,192,192,0,0,0 };
@@ -280,7 +283,7 @@ static wxBitmap wxPaneCreateStippleBitmap()
     return {img};
 }
 
-static void DrawResizeHint(wxDC& dc, const wxRect& rect)
+void DrawResizeHint(wxDC& dc, const wxRect& rect)
 {
     wxBitmap stipple = wxPaneCreateStippleBitmap();
     wxBrush brush(stipple);
@@ -303,7 +306,7 @@ static void DrawResizeHint(wxDC& dc, const wxRect& rect)
 // to wxAuiPaneInfo classes, thus this function is necessary to reliably
 // reconstruct that relationship in the new dock info and pane info arrays
 
-static void CopyDocksAndPanes(wxAuiDockInfoArray& dest_docks,
+void CopyDocksAndPanes(wxAuiDockInfoArray& dest_docks,
                               wxAuiPaneInfoArray& dest_panes,
                               const wxAuiDockInfoArray& src_docks,
                               const wxAuiPaneInfoArray& src_panes)
@@ -323,7 +326,7 @@ static void CopyDocksAndPanes(wxAuiDockInfoArray& dest_docks,
 
 // GetMaxLayer() is an internal function which returns
 // the highest layer inside the specified dock
-static int GetMaxLayer(const wxAuiDockInfoArray& docks,
+int GetMaxLayer(const wxAuiDockInfoArray& docks,
                        int dock_direction)
 {
     int max_layer = 0;
@@ -341,7 +344,7 @@ static int GetMaxLayer(const wxAuiDockInfoArray& docks,
 
 // GetMaxRow() is an internal function which returns
 // the highest layer inside the specified dock
-static int GetMaxRow(const wxAuiPaneInfoArray& panes, int direction, int layer)
+int GetMaxRow(const wxAuiPaneInfoArray& panes, int direction, int layer)
 {
     int max_row = 0;
 
@@ -361,7 +364,7 @@ static int GetMaxRow(const wxAuiPaneInfoArray& panes, int direction, int layer)
 
 // DoInsertDockLayer() is an internal function that inserts a new dock
 // layer by incrementing all existing dock layer values by one
-static void DoInsertDockLayer(wxAuiPaneInfoArray& panes,
+void DoInsertDockLayer(wxAuiPaneInfoArray& panes,
                               int dock_direction,
                               int dock_layer)
 {
@@ -377,7 +380,7 @@ static void DoInsertDockLayer(wxAuiPaneInfoArray& panes,
 
 // DoInsertDockLayer() is an internal function that inserts a new dock
 // row by incrementing all existing dock row values by one
-static void DoInsertDockRow(wxAuiPaneInfoArray& panes,
+void DoInsertDockRow(wxAuiPaneInfoArray& panes,
                             int dock_direction,
                             int dock_layer,
                             int dock_row)
@@ -395,7 +398,7 @@ static void DoInsertDockRow(wxAuiPaneInfoArray& panes,
 
 // DoInsertDockLayer() is an internal function that inserts a space for
 // another dock pane by incrementing all existing dock row values by one
-static void DoInsertPane(wxAuiPaneInfoArray& panes,
+void DoInsertPane(wxAuiPaneInfoArray& panes,
                          int dock_direction,
                          int dock_layer,
                          int dock_row,
@@ -416,7 +419,7 @@ static void DoInsertPane(wxAuiPaneInfoArray& panes,
 // FindDocks() is an internal function that returns a list of docks which meet
 // the specified conditions in the parameters and returns a sorted array
 // (sorted by layer and then row)
-static void FindDocks(wxAuiDockInfoArray& docks,
+void FindDocks(wxAuiDockInfoArray& docks,
                       int dock_direction,
                       int dock_layer,
                       int dock_row,
@@ -467,7 +470,7 @@ static void FindDocks(wxAuiDockInfoArray& docks,
 
 // FindPaneInDock() looks up a specified window pointer inside a dock.
 // If found, the corresponding wxAuiPaneInfo pointer is returned, otherwise NULL.
-static wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window)
+wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window)
 {
     for (size_t i = 0; i < dock.panes.GetCount(); ++i)
     {
@@ -480,7 +483,7 @@ static wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window
 
 // RemovePaneFromDocks() removes a pane window from all docks
 // with a possible exception specified by parameter "ex_cept"
-static void RemovePaneFromDocks(wxAuiDockInfoArray& docks,
+void RemovePaneFromDocks(wxAuiDockInfoArray& docks,
                                 wxAuiPaneInfo& pane,
                                 wxAuiDockInfo* ex_cept  = nullptr  )
 {
@@ -516,6 +519,13 @@ static void RenumberDockRows(wxAuiDockInfoPtrArray& docks)
 }
 */
 
+// this function is used to sort panes by dock position
+int PaneSortFunc(wxAuiPaneInfo** p1, wxAuiPaneInfo** p2)
+{
+    return ((*p1)->dock_pos < (*p2)->dock_pos) ? -1 : 1;
+}
+
+} // namespace anonymous
 
 // SetActivePane() sets the active pane, as well as cycles through
 // every other pane and makes sure that all others' active flags
@@ -544,14 +554,6 @@ void wxAuiManager::SetActivePane(wxWindow* active_pane)
         ProcessMgrEvent(evt);
     }
 }
-
-
-// this function is used to sort panes by dock position
-static int PaneSortFunc(wxAuiPaneInfo** p1, wxAuiPaneInfo** p2)
-{
-    return ((*p1)->dock_pos < (*p2)->dock_pos) ? -1 : 1;
-}
-
 
 bool wxAuiPaneInfo::IsValid() const
 {

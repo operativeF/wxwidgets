@@ -18,7 +18,6 @@ module;
 #include "wx/menu.h"
 
 #include "wx/renderer.h"
-#include "wx/aui/framemanager.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -28,6 +27,7 @@ module WX.AUI.TabArt;
 
 import WX.AUI.Book;
 import WX.AUI.DockArt;
+import WX.AUI.FrameManager;
 
 import <array>;
 

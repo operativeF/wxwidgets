@@ -8,12 +8,7 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FRAMEMANAGER_H_
-#define _WX_FRAMEMANAGER_H_
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+module;
 
 #include "wx/defs.h"
 
@@ -22,12 +17,16 @@
 #include "wx/timer.h"
 #include "wx/sizer.h"
 #include "wx/bitmap.h"
+#include "wx/window.h"
+
+export module WX.AUI.FrameManager;
 
 import Utils.Geometry;
 
 import <vector>;
 
-class wxWindow;
+export
+{
 
 enum wxAuiManagerDock
 {
@@ -689,44 +688,6 @@ inline const wxEventTypeTag<wxAuiManagerEvent> wxEVT_AUI_FIND_MANAGER( wxNewEven
 
 typedef void (wxEvtHandler::*wxAuiManagerEventFunction)(wxAuiManagerEvent&);
 
-#define wxAuiManagerEventHandler(func) \
-    wxEVENT_HANDLER_CAST(wxAuiManagerEventFunction, func)
+#endif
 
-#define EVT_AUI_PANE_BUTTON(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_PANE_BUTTON, wxAuiManagerEventHandler(func))
-#define EVT_AUI_PANE_CLOSE(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_PANE_CLOSE, wxAuiManagerEventHandler(func))
-#define EVT_AUI_PANE_MAXIMIZE(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_PANE_MAXIMIZE, wxAuiManagerEventHandler(func))
-#define EVT_AUI_PANE_RESTORE(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_PANE_RESTORE, wxAuiManagerEventHandler(func))
-#define EVT_AUI_PANE_ACTIVATED(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_PANE_ACTIVATED, wxAuiManagerEventHandler(func))
-#define EVT_AUI_RENDER(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_RENDER, wxAuiManagerEventHandler(func))
-#define EVT_AUI_FIND_MANAGER(func) \
-   wx__DECLARE_EVT0(wxEVT_AUI_FIND_MANAGER, wxAuiManagerEventHandler(func))
-
-#else
-
-%constant wxEventType wxEVT_AUI_PANE_BUTTON;
-%constant wxEventType wxEVT_AUI_PANE_CLOSE;
-%constant wxEventType wxEVT_AUI_PANE_MAXIMIZE;
-%constant wxEventType wxEVT_AUI_PANE_RESTORE;
-%constant wxEventType wxEVT_AUI_PANE_ACTIVATED;
-%constant wxEventType wxEVT_AUI_RENDER;
-%constant wxEventType wxEVT_AUI_FIND_MANAGER;
-
-%pythoncode {
-    EVT_AUI_PANE_BUTTON = wx.PyEventBinder( wxEVT_AUI_PANE_BUTTON )
-    EVT_AUI_PANE_CLOSE = wx.PyEventBinder( wxEVT_AUI_PANE_CLOSE )
-    EVT_AUI_PANE_MAXIMIZE = wx.PyEventBinder( wxEVT_AUI_PANE_MAXIMIZE )
-    EVT_AUI_PANE_RESTORE = wx.PyEventBinder( wxEVT_AUI_PANE_RESTORE )
-    EVT_AUI_PANE_ACTIVATED = wx.PyEventBinder( wxEVT_AUI_PANE_ACTIVATED )
-    EVT_AUI_RENDER = wx.PyEventBinder( wxEVT_AUI_RENDER )
-    EVT_AUI_FIND_MANAGER = wx.PyEventBinder( wxEVT_AUI_FIND_MANAGER )
-}
-#endif // SWIG
-
-#endif //_WX_FRAMEMANAGER_H_
-
+} // export

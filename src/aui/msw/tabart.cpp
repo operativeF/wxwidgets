@@ -14,11 +14,11 @@
 #include "wx/dc.h"
 #include "wx/settings.h"
 
-#include "wx/aui/framemanager.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/renderer.h"
 
 import WX.AUI.Book;
+import WX.AUI.FrameManager;
 import WX.AUI.TabArt;
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()

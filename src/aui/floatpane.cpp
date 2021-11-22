@@ -10,7 +10,6 @@
 
 module;
 
-#include "wx/aui/framemanager.h"
 #include "wx/toplevel.h"
 
 #ifdef __WXMSW__
@@ -20,6 +19,7 @@ module;
 module WX.AUI.FloatPane;
 
 import WX.AUI.DockArt;
+import WX.AUI.FrameManager;
 
 import Utils.Geometry;
 

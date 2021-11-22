@@ -17,7 +17,6 @@
 #include "wx/settings.h"
 
 #include "wx/aui/auibar.h"
-#include "wx/aui/framemanager.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -27,6 +26,8 @@
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
 #include <gsl/gsl>
+
+import WX.AUI.FrameManager;
 
 wxIMPLEMENT_CLASS(wxAuiToolBar, wxControl);
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarEvent, wxEvent);

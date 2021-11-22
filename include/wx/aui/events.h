@@ -38,6 +38,26 @@
     wx__DECLARE_EVT1(wxEVT_AUINOTEBOOK_TAB_RIGHT_UP, winid, wxAuiNotebookEventHandler(fn))
 #define EVT_AUINOTEBOOK_BG_DCLICK(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_AUINOTEBOOK_BG_DCLICK, winid, wxAuiNotebookEventHandler(fn))
+
+// FIXME: Replace with direct template functions.
+#define wxAuiManagerEventHandler(func) \
+    wxEVENT_HANDLER_CAST(wxAuiManagerEventFunction, func)
+
+#define EVT_AUI_PANE_BUTTON(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_PANE_BUTTON, wxAuiManagerEventHandler(func))
+#define EVT_AUI_PANE_CLOSE(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_PANE_CLOSE, wxAuiManagerEventHandler(func))
+#define EVT_AUI_PANE_MAXIMIZE(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_PANE_MAXIMIZE, wxAuiManagerEventHandler(func))
+#define EVT_AUI_PANE_RESTORE(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_PANE_RESTORE, wxAuiManagerEventHandler(func))
+#define EVT_AUI_PANE_ACTIVATED(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_PANE_ACTIVATED, wxAuiManagerEventHandler(func))
+#define EVT_AUI_RENDER(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_RENDER, wxAuiManagerEventHandler(func))
+#define EVT_AUI_FIND_MANAGER(func) \
+   wx__DECLARE_EVT0(wxEVT_AUI_FIND_MANAGER, wxAuiManagerEventHandler(func))
+
 #else
 
 // wxpython/swig event work
@@ -73,6 +93,24 @@
     EVT__AUINOTEBOOK_TAB_RIGHT_DOWN = wx.PyEventBinder( wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN, 1 )
     EVT__AUINOTEBOOK_TAB_RIGHT_UP = wx.PyEventBinder( wxEVT_AUINOTEBOOK_TAB_RIGHT_UP, 1 )
     EVT_AUINOTEBOOK_BG_DCLICK = wx.PyEventBinder( wxEVT_AUINOTEBOOK_BG_DCLICK, 1 )
+}
+
+%constant wxEventType wxEVT_AUI_PANE_BUTTON;
+%constant wxEventType wxEVT_AUI_PANE_CLOSE;
+%constant wxEventType wxEVT_AUI_PANE_MAXIMIZE;
+%constant wxEventType wxEVT_AUI_PANE_RESTORE;
+%constant wxEventType wxEVT_AUI_PANE_ACTIVATED;
+%constant wxEventType wxEVT_AUI_RENDER;
+%constant wxEventType wxEVT_AUI_FIND_MANAGER;
+
+%pythoncode {
+    EVT_AUI_PANE_BUTTON = wx.PyEventBinder( wxEVT_AUI_PANE_BUTTON )
+    EVT_AUI_PANE_CLOSE = wx.PyEventBinder( wxEVT_AUI_PANE_CLOSE )
+    EVT_AUI_PANE_MAXIMIZE = wx.PyEventBinder( wxEVT_AUI_PANE_MAXIMIZE )
+    EVT_AUI_PANE_RESTORE = wx.PyEventBinder( wxEVT_AUI_PANE_RESTORE )
+    EVT_AUI_PANE_ACTIVATED = wx.PyEventBinder( wxEVT_AUI_PANE_ACTIVATED )
+    EVT_AUI_RENDER = wx.PyEventBinder( wxEVT_AUI_RENDER )
+    EVT_AUI_FIND_MANAGER = wx.PyEventBinder( wxEVT_AUI_FIND_MANAGER )
 }
 #endif
 

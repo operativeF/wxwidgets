@@ -12,12 +12,12 @@ module;
 
 #include "wx/defs.h"
 
-#include "wx/aui/framemanager.h"
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 
 export module WX.AUI.Book;
 
+import WX.AUI.FrameManager;
 import WX.AUI.Page;
 import WX.AUI.TabArt;
 import Utils.Geometry;

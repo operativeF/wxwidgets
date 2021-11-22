@@ -16,8 +16,9 @@
 #include "wx/settings.h"
 
 #include "wx/aui/auibar.h"
-#include "wx/aui/framemanager.h"
 #include "wx/msw/uxtheme.h"
+
+import WX.AUI.FrameManager;
 
 wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
 {

@@ -12,8 +12,6 @@ module;
 
 #include "wx/defs.h"
 
-#include "wx/aui/framemanager.h"
-
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"
@@ -21,6 +19,8 @@ module;
 #include "wx/window.h"
 
 export module WX.AUI.DockArt;
+
+import WX.AUI.FrameManager;
 
 import Utils.Geometry;
 
