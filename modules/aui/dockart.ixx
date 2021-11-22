@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
-
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"

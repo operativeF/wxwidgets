@@ -817,5 +817,3 @@ void wxAuiDefaultDockArt::DrawPaneButton(wxDC& dc,
     // draw the button itself
     dc.DrawBitmap(bmp, rect.x, rect.y, true);
 }
-
-

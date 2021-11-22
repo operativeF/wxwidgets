@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
-
 #include "wx/dc.h"
 #include "wx/colour.h"
 #include "wx/font.h"

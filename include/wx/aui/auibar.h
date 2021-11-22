@@ -100,7 +100,6 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-
 inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_TOOL_DROPDOWN( wxNewEventType() );
 inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_OVERFLOW_CLICK( wxNewEventType() );
 inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_RIGHT_CLICK( wxNewEventType() );
@@ -214,9 +213,6 @@ private:
 WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray, WXDLLIMPEXP_AUI);
 #endif
 
-
-
-
 // tab art class
 
 class wxAuiToolBarArt
@@ -305,8 +301,6 @@ public:
     virtual void UpdateColoursFromSystem() {}
 
 };
-
-
 
 class wxAuiGenericToolBarArt : public wxAuiToolBarArt
 {
@@ -676,9 +670,6 @@ private:
     wxDECLARE_CLASS(wxAuiToolBar);
 };
 
-
-
-
 // wx event machinery
 
 #ifndef SWIG
@@ -724,4 +715,3 @@ typedef void (wxEvtHandler::*wxAuiToolBarEventFunction)(wxAuiToolBarEvent&);
 #endif  // SWIG
 
 #endif  // _WX_AUIBAR_H_
-

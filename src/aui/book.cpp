@@ -34,6 +34,8 @@ import WX.AUI.Page;
 import WX.AUI.TabArt;
 import WX.AUI.TabMDI;
 
+import <utility>;
+
 WX_DEFINE_OBJARRAY(wxAuiTabContainerButtonArray);
 
 wxIMPLEMENT_CLASS(wxAuiNotebook, wxControl);

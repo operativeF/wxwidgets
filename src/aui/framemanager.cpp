@@ -54,9 +54,6 @@ WX_DEFINE_OBJARRAY(wxAuiDockUIPartArray)
 WX_DEFINE_OBJARRAY(wxAuiDockInfoArray)
 WX_DEFINE_OBJARRAY(wxAuiPaneInfoArray)
 
-wxAuiPaneInfo wxAuiNullPaneInfo;
-wxAuiDockInfo wxAuiNullDockInfo;
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiManagerEvent, wxEvent);
 wxIMPLEMENT_CLASS(wxAuiManager, wxEvtHandler);
 
@@ -267,8 +264,7 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPseudoTransparentFrame, wxFrame);
 
-#endif
- // __WXGTK20__
+#endif // __WXGTK20__
 
 // -- internal utility functions --
 
@@ -298,8 +294,6 @@ void DrawResizeHint(wxDC& dc, const wxRect& rect)
     dc.DrawRectangle(rect);
 #endif
 }
-
-
 
 // CopyDocksAndPanes() - this utility function creates copies of
 // the dock and pane info.  wxAuiDockInfo's usually contain pointers

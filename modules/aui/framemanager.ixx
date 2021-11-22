@@ -98,9 +98,6 @@ enum wxAuiPaneInsertLevel
     wxAUI_INSERT_DOCK = 2
 };
 
-
-
-
 // forwards and array declarations
 class wxAuiPaneInfo;
 class wxAuiDockInfo;
@@ -116,11 +113,6 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiPaneInfo, wxAuiPaneInfoArray, WXDLLIMPEXP
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiPaneInfo*, wxAuiPaneInfoPtrArray, class WXDLLIMPEXP_AUI);
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiDockInfo*, wxAuiDockInfoPtrArray, class WXDLLIMPEXP_AUI);
 #endif // SWIG
-
-extern wxAuiDockInfo wxAuiNullDockInfo;
-extern wxAuiPaneInfo wxAuiNullPaneInfo;
-
-
 
 class wxAuiPaneInfo
 {
@@ -360,8 +352,6 @@ public:
     bool IsValid() const;
 };
 
-
-
 class wxAuiFloatingFrame;
 
 class wxAuiManager : public wxEvtHandler
@@ -574,8 +564,6 @@ protected:
 #endif // SWIG
 };
 
-
-
 // event declarations/classes
 
 class wxAuiManagerEvent : public wxEvent
@@ -622,7 +610,6 @@ public:
 #endif
 };
 
-
 class wxAuiDockInfo
 {
 public:
@@ -650,6 +637,8 @@ public:
     bool reserved1{false};
 };
 
+inline wxAuiPaneInfo wxAuiNullPaneInfo;
+inline wxAuiDockInfo wxAuiNullDockInfo;
 
 struct wxAuiDockUIPart
 {
