@@ -101,6 +101,12 @@ public:
 };
 
 
+inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_TOOL_DROPDOWN( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_OVERFLOW_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_RIGHT_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_MIDDLE_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_BEGIN_DRAG( wxNewEventType() );
+
 class wxAuiToolBarItem
 {
     friend class wxAuiToolBar;
