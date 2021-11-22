@@ -8,8 +8,9 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/aui/framemanager.h"
-#include "wx/aui/dockart.h"
 #include "wx/aui/tabart.h"
 
 #include "wx/settings.h"
@@ -35,6 +36,8 @@
     #include "wx/gtk/private.h"
 #endif
 #endif
+
+module WX.AUI.DockArt;
 
 import WX.AUI.Book;
 

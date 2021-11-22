@@ -9,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/aui/tabmdi.h"
-#include "wx/aui/dockart.h"
 #include "wx/aui/events.h"
 
 #include "wx/panel.h"
@@ -18,6 +17,8 @@
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/stockitem.h"
+
+import WX.AUI.DockArt;
 
 enum MDI_MENU_ID
 {

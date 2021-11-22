@@ -11,7 +11,6 @@
 #include "wx/msw/private.h"
 
 #include "wx/aui/framemanager.h"
-#include "wx/aui/dockart.h"
 #include "wx/aui/floatpane.h"
 #include "wx/aui/tabmdi.h"
 #include "wx/aui/auibar.h"
@@ -30,6 +29,9 @@
 WX_CHECK_BUILD_OPTIONS("wxAUI")
 
 #include "wx/arrimpl.cpp"
+
+import WX.AUI.DockArt;
+
 WX_DECLARE_OBJARRAY(wxRect, wxAuiRectArray);
 WX_DEFINE_OBJARRAY(wxAuiRectArray)
 WX_DEFINE_OBJARRAY(wxAuiDockUIPartArray)

@@ -10,6 +10,7 @@ set(AUI_CMN_SRC
 
 set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/book.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/dockart.ixx
 )
 
 if(wxUSE_MDI)

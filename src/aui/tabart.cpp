@@ -18,13 +18,13 @@
 #include "wx/renderer.h"
 #include "wx/aui/framemanager.h"
 #include "wx/aui/tabart.h"
-#include "wx/aui/dockart.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
 
 import WX.AUI.Book;
+import WX.AUI.DockArt;
 
 import <array>;
 

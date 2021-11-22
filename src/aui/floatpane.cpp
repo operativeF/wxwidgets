@@ -10,7 +10,8 @@
 
 #include "wx/aui/framemanager.h"
 #include "wx/aui/floatpane.h"
-#include "wx/aui/dockart.h"
+
+import WX.AUI.DockArt;
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"

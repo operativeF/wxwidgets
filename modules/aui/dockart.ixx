@@ -8,17 +8,24 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_DOCKART_H_
-#define _WX_DOCKART_H_
+module;
 
 #include "wx/defs.h"
 
-#include "wx/pen.h"
+#include "wx/aui/framemanager.h"
+
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"
+#include "wx/pen.h"
+#include "wx/window.h"
+
+export module WX.AUI.DockArt;
 
 import Utils.Geometry;
+
+export
+{
 
 enum wxAuiPaneDockArtSetting
 {
@@ -197,6 +204,4 @@ protected:
     int m_gradientType;
 };
 
-
-
-#endif //_WX_DOCKART_H_
+} // export
