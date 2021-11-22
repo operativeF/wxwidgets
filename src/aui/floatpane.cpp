@@ -8,8 +8,6 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI
-
 #include "wx/aui/framemanager.h"
 #include "wx/aui/floatpane.h"
 #include "wx/aui/dockart.h"
@@ -365,4 +363,3 @@ wxBEGIN_EVENT_TABLE(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass)
 wxEND_EVENT_TABLE()
 
 
-#endif // wxUSE_AUI

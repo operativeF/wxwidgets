@@ -11,8 +11,6 @@
 #ifndef _WX_DOCKART_H_
 #define _WX_DOCKART_H_
 
-#if wxUSE_AUI
-
 #include "wx/defs.h"
 
 #include "wx/pen.h"
@@ -21,6 +19,27 @@
 #include "wx/colour.h"
 
 import Utils.Geometry;
+
+enum wxAuiPaneDockArtSetting
+{
+    wxAUI_DOCKART_SASH_SIZE = 0,
+    wxAUI_DOCKART_CAPTION_SIZE = 1,
+    wxAUI_DOCKART_GRIPPER_SIZE = 2,
+    wxAUI_DOCKART_PANE_BORDER_SIZE = 3,
+    wxAUI_DOCKART_PANE_BUTTON_SIZE = 4,
+    wxAUI_DOCKART_BACKGROUND_COLOUR = 5,
+    wxAUI_DOCKART_SASH_COLOUR = 6,
+    wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR = 7,
+    wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR = 8,
+    wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR = 9,
+    wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR = 10,
+    wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR = 11,
+    wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR = 12,
+    wxAUI_DOCKART_BORDER_COLOUR = 13,
+    wxAUI_DOCKART_GRIPPER_COLOUR = 14,
+    wxAUI_DOCKART_CAPTION_FONT = 15,
+    wxAUI_DOCKART_GRADIENT_TYPE = 16
+};
 
 // dock art provider code - a dock provider provides all drawing
 // functionality to the wxAui dock manager.  This allows the dock
@@ -180,5 +199,4 @@ protected:
 
 
 
-#endif // wxUSE_AUI
 #endif //_WX_DOCKART_H_

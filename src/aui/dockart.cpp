@@ -8,11 +8,8 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI
-
 #include "wx/aui/framemanager.h"
 #include "wx/aui/dockart.h"
-#include "wx/aui/auibook.h"
 #include "wx/aui/tabart.h"
 
 #include "wx/settings.h"
@@ -38,6 +35,8 @@
     #include "wx/gtk/private.h"
 #endif
 #endif
+
+import WX.AUI.Book;
 
 import <cmath>;
 
@@ -818,4 +817,3 @@ void wxAuiDefaultDockArt::DrawPaneButton(wxDC& dc,
 }
 
 
-#endif // wxUSE_AUI

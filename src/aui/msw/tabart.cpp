@@ -1,13 +1,13 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        src/aui/tabartmsw.cpp
-// Purpose:     wxAuiMSWTabArt implementation
+// Name:        src/aui/msw/tabart.cpp
+// Purpose:     wxAuiTabArt implementation for Windows
 // Author:      Tobias Taschner
 // Created:     2015-09-26
 // Copyright:   (c) 2015 wxWidgets development team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
+#if !defined(__WXUNIVERSAL__)
 
 #include "wx/msw/private.h"
 
@@ -15,9 +15,11 @@
 #include "wx/settings.h"
 
 #include "wx/aui/tabart.h"
-#include "wx/aui/auibook.h"
+#include "wx/aui/framemanager.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/renderer.h"
+
+import WX.AUI.Book;
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()
 {
@@ -457,4 +459,4 @@ bool wxAuiMSWTabArt::IsThemed() const
 }
 
 
-#endif // wxUSE_AUI && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
+#endif // !defined(__WXUNIVERSAL__)

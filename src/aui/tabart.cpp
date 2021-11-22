@@ -8,8 +8,7 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI
-
+#include "wx/control.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
@@ -17,13 +16,15 @@
 #include "wx/menu.h"
 
 #include "wx/renderer.h"
-#include "wx/aui/auibook.h"
 #include "wx/aui/framemanager.h"
+#include "wx/aui/tabart.h"
 #include "wx/aui/dockart.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
+
+import WX.AUI.Book;
 
 import <array>;
 
@@ -1356,4 +1357,3 @@ void wxAuiSimpleTabArt::SetMeasuringFont(const wxFont& font)
     m_measuringFont = font;
 }
 
-#endif // wxUSE_AUI

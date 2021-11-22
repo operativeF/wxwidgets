@@ -6,7 +6,11 @@
 # xrc
 
 add_subdirectory(algorithm)
+
+if(wxUSE_AUI)
 add_subdirectory(aui)
+endif()
+
 add_subdirectory(base)
 add_subdirectory(core)
 #add_subdirectory(html)

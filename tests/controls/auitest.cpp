@@ -14,9 +14,10 @@
 
 #include "wx/app.h"
 #include "wx/panel.h"
-#include "wx/aui/auibook.h"
 
 #include "asserthelper.h"
+
+import WX.AUI.Book;
 
 // ----------------------------------------------------------------------------
 // test class

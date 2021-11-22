@@ -1,5 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////
-
 // Name:        src/aui/auibar.cpp
 // Purpose:     wxaui: wx advanced user interface - docking window manager
 // Author:      Benjamin I. Williams
@@ -8,8 +7,6 @@
 // Copyright:   (C) Copyright 2005-2006, Kirix Corporation, All Rights Reserved
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
-
-#if wxUSE_AUI
 
 #include "wx/image.h"
 #include "wx/menu.h"
@@ -2869,4 +2866,3 @@ void wxAuiToolBar::OnSetCursor(wxSetCursorEvent& evt)
     evt.SetCursor(cursor);
 }
 
-#endif // wxUSE_AUI

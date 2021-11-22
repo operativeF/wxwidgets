@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        src/aui/tabartgtk.cpp
-// Purpose:     implementation of the wxAuiGTKTabArt
+// Name:        src/aui/gtk/tabart.cpp
+// Purpose:     implementation of the wxAuiTabArt
 // Author:      Jens Lody and Teodor Petrov
 // Modified by:
 // Created:     2012-03-23
@@ -8,8 +8,6 @@
 //                  and Teodor Petrov
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
-
-#if wxUSE_AUI
 
 #include "wx/dc.h"
 #include "wx/dcclient.h"
@@ -485,4 +483,3 @@ wxSize wxAuiGtkTabArt::GetTabSize(wxDC& dc,
     *x_extent -= overlap;
     return s;
 }
-#endif  // wxUSE_AUI

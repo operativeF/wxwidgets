@@ -1,13 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        src/aui/barartmsw.cpp
-// Purpose:     Implementation of wxAuiMSWToolBarArt
+// Name:        src/aui/msw/barart.cpp
+// Purpose:     Implementation of wxAuiToolBarArt for Windows
 // Author:      Tobias Taschner
 // Created:     2015-09-22
 // Copyright:   (c) 2015 wxWidgets development team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
-
-#if wxUSE_AUI && wxUSE_UXTHEME
 
 #include "wx/msw/private.h"
 
@@ -459,5 +457,3 @@ int wxAuiMSWToolBarArt::ShowDropDown(wxWindow* wnd,
 {
     return wxAuiGenericToolBarArt::ShowDropDown(wnd, items);
 }
-
-#endif // wxUSE_AUI && wxUSE_UXTHEME

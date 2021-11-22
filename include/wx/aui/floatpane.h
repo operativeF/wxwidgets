@@ -11,8 +11,6 @@
 #ifndef _WX_FLOATPANE_H_
 #define _WX_FLOATPANE_H_
 
-#if wxUSE_AUI
-
 #include "wx/defs.h"
 #include "wx/weakref.h"
 
@@ -82,6 +80,5 @@ private:
 #endif // SWIG
 };
 
-#endif // wxUSE_AUI
 #endif //_WX_FLOATPANE_H_
 

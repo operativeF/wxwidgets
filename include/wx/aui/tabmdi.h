@@ -11,18 +11,19 @@
 #ifndef _WX_AUITABMDI_H_
 #define _WX_AUITABMDI_H_
 
-#if wxUSE_AUI && wxUSE_MDI
-
 // ----------------------------------------------------------------------------
 // headers
 // ----------------------------------------------------------------------------
+
+#include "wx/aui/tabart.h"
 
 #include "wx/frame.h"
 #include "wx/panel.h"
 #include "wx/notebook.h"
 #include "wx/icon.h"
 #include "wx/mdi.h"
-#include "wx/aui/auibook.h"
+
+import WX.AUI.Book;
 
 import Utils.Geometry;
 
@@ -211,6 +212,5 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxAuiMDIClientWindow);
     wxDECLARE_EVENT_TABLE();
 };
-#endif // wxUSE_AUI && wxUSE_MDI
 
 #endif // _WX_AUITABMDI_H_

@@ -16,14 +16,13 @@
 
 #include "wx/defs.h"
 
-#include <chrono>
-
 #include "wx/object.h"
 #include "wx/longlong.h"
 #include "wx/event.h"
 #include "wx/stopwatch.h" // for backwards compatibility
 #include "wx/utils.h"
 
+#include <chrono>
 
 // more readable flags for Start():
 

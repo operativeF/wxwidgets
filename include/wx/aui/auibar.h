@@ -11,8 +11,6 @@
 #ifndef _WX_AUIBAR_H_
 #define _WX_AUIBAR_H_
 
-#if wxUSE_AUI
-
 #include "wx/defs.h"
 
 #include "wx/control.h"
@@ -719,6 +717,5 @@ typedef void (wxEvtHandler::*wxAuiToolBarEventFunction)(wxAuiToolBarEvent&);
 }
 #endif  // SWIG
 
-#endif  // wxUSE_AUI
 #endif  // _WX_AUIBAR_H_
 

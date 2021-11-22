@@ -16,8 +16,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#if wxUSE_AUI
-
 #include "wx/defs.h"
 
 #include "wx/colour.h"
@@ -331,6 +329,5 @@ protected:
     #define wxAuiDefaultTabArt wxAuiGenericTabArt
 #endif
 
-#endif  // wxUSE_AUI
 
 #endif  // _WX_AUI_TABART_H_

@@ -8,10 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI
-#if wxUSE_MDI
-
 #include "wx/aui/tabmdi.h"
+#include "wx/aui/dockart.h"
+#include "wx/aui/events.h"
 
 #include "wx/panel.h"
 #include "wx/menu.h"
@@ -19,7 +18,6 @@
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/stockitem.h"
-#include "wx/aui/dockart.h"
 
 enum MDI_MENU_ID
 {
@@ -776,5 +774,3 @@ void wxAuiMDIClientWindow::OnPageChanged(wxAuiNotebookEvent& evt)
     PageChanged(evt.GetOldSelection(), evt.GetSelection());
 }
 
-#endif //wxUSE_AUI
-#endif // wxUSE_MDI

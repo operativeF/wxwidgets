@@ -38,6 +38,7 @@ import <optional>;
 import <ostream>;
 import <queue>;
 import <ranges>;
+import <ratio>;
 import <span>;
 import <sstream>;
 import <stack>;

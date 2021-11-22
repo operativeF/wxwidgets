@@ -16,8 +16,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#if wxUSE_AUI
-
 #include "wx/defs.h"
 
 #include "wx/aui/tabart.h"
@@ -54,6 +52,5 @@ public:
                               int close_button_state, int* x_extent) override;
 };
 
-#endif  // wxUSE_AUI
 
 #endif // _WX_AUI_TABARTGTK_H_

@@ -8,8 +8,6 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_AUI
-
 #include "wx/msw/private.h"
 
 #include "wx/aui/framemanager.h"
@@ -4810,4 +4808,3 @@ void wxAuiManager::OnPaneButton(wxAuiManagerEvent& evt)
     }
 }
 
-#endif // wxUSE_AUI
