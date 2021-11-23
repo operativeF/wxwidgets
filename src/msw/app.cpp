@@ -110,7 +110,7 @@ std::vector<ClassRegInfo> gs_regClassesInfo;
 // private functions
 // ----------------------------------------------------------------------------
 
-LRESULT APIENTRY wxWndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT APIENTRY wxWndProc(WXHWND, UINT, WPARAM, LPARAM);
 
 // ----------------------------------------------------------------------------
 // Module for OLE initialization and cleanup
@@ -636,7 +636,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
                                                                IMAGE_CURSOR,
                                                                0, 0,
                                                                LR_SHARED | LR_DEFAULTSIZE));
-    wndclass.hbrBackground = (HBRUSH)wxUIntToPtr(bgBrushCol + 1);
+    wndclass.hbrBackground = (WXHBRUSH)wxUIntToPtr(bgBrushCol + 1);
     wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | extraStyles;
 
 
@@ -780,7 +780,7 @@ void wxApp::OnEndSession(wxCloseEvent& WXUNUSED(event))
     // at least execute our cleanup code before
 
     // prevent the window from being destroyed when the corresponding wxTLW is
-    // destroyed: this will result in a leak of a HWND, of course, but who
+    // destroyed: this will result in a leak of a WXHWND, of course, but who
     // cares when the process is being killed anyhow
     if ( !wxTopLevelWindows.empty() )
         wxTopLevelWindows[0]->SetHWND(nullptr);

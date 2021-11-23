@@ -162,7 +162,7 @@ wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file)
     // Actual Windows mapping mode, for future reference.
     m_windowsMappingMode = wxMappingMode::Text;
 
-    SetMapMode(wxMappingMode::Text); // NOTE: does not set HDC mapmode (this is correct)
+    SetMapMode(wxMappingMode::Text); // NOTE: does not set WXHDC mapmode (this is correct)
 }
 
 // New constructor that takes origin and extent. If you use this, don't
@@ -181,13 +181,13 @@ wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file,
 
     m_ok = true;
 
-    ::SetWindowOrgEx((HDC) m_hDC,xorg,yorg, NULL);
-    ::SetWindowExtEx((HDC) m_hDC,xext,yext, NULL);
+    ::SetWindowOrgEx((WXHDC) m_hDC,xorg,yorg, NULL);
+    ::SetWindowExtEx((WXHDC) m_hDC,xext,yext, NULL);
 
     // Actual Windows mapping mode, for future reference.
     m_windowsMappingMode = MM_ANISOTROPIC;
 
-    SetMapMode(wxMappingMode::Text); // NOTE: does not set HDC mapmode (this is correct)
+    SetMapMode(wxMappingMode::Text); // NOTE: does not set WXHDC mapmode (this is correct)
 }
 
 wxMetafileDCImpl::~wxMetafileDCImpl()
@@ -235,7 +235,7 @@ void wxMetafileDCImpl::DoGetSize(int *width, int *height) const
 wxMetafile *wxMetafileDCImpl::Close()
 {
     SelectOldObjects(m_hDC);
-    HANDLE mf = CloseMetaFile((HDC) m_hDC);
+    HANDLE mf = CloseMetaFile((WXHDC) m_hDC);
     m_hDC = 0;
     if (mf)
     {

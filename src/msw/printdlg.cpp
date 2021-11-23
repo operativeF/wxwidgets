@@ -916,9 +916,9 @@ int wxWindowsPageSetupDialog::ShowModal()
 
     PAGESETUPDLG *pd = (PAGESETUPDLG *) m_pageDlg;
     if (m_dialogParent)
-        pd->hwndOwner = (HWND) m_dialogParent->GetHWND();
+        pd->hwndOwner = (WXHWND) m_dialogParent->GetHWND();
     else if (wxTheApp->GetTopWindow())
-        pd->hwndOwner = (HWND) wxTheApp->GetTopWindow()->GetHWND();
+        pd->hwndOwner = (WXHWND) wxTheApp->GetTopWindow()->GetHWND();
     else
         pd->hwndOwner = nullptr;
     BOOL retVal = PageSetupDlg( pd ) ;

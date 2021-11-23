@@ -135,7 +135,7 @@ void RestoreExceptionPolicy()
 // ----------------------------------------------------------------------------
 
 UINT_PTR APIENTRY
-wxFileDialogHookFunction(HWND      hDlg,
+wxFileDialogHookFunction(WXHWND      hDlg,
                          UINT      iMsg,
                          WPARAM    WXUNUSED(wParam),
                          LPARAM    lParam)
@@ -265,9 +265,9 @@ void wxFileDialog::DoMoveWindow(wxRect boundary)
     gs_rectDialog.x = boundary.x;
     gs_rectDialog.y = boundary.y;
 
-    // our HWND is only set when we're called from MSWOnInitDone(), test if
+    // our WXHWND is only set when we're called from MSWOnInitDone(), test if
     // this is the case
-    HWND hwnd = GetHwnd();
+    WXHWND hwnd = GetHwnd();
     if ( hwnd )
     {
         // size of the dialog can't be changed because the controls are not
@@ -297,9 +297,9 @@ void wxFileDialog::MSWOnInitDone(WXHWND hDlg)
 {
     // note the dialog is the parent window: hDlg is a child of it when
     // OFN_EXPLORER is used
-    HWND hFileDlg = ::GetParent((HWND)hDlg);
+    WXHWND hFileDlg = ::GetParent((WXHWND)hDlg);
 
-    // set HWND so that our DoMoveWindow() works correctly
+    // set WXHWND so that our DoMoveWindow() works correctly
     TempHWNDSetter set(this, (WXHWND)hFileDlg);
 
     if ( m_centreDir )
@@ -503,7 +503,7 @@ int wxFileDialog::ShowModal()
         // after the DLGTEMPLATE there are 3 additional WORDs for dialog menu,
         // class and title, all three set to zeros.
 
-        of.hInstance = (HINSTANCE)lpdt;
+        of.hInstance = (WXHINSTANCE)lpdt;
     }
 
     // Convert forward slashes to backslashes (file selector doesn't like

@@ -310,7 +310,7 @@ void wxFrame::AttachMenuBar(wxMenuBar *menubar)
         {
             m_hMenu = menubar->GetHMenu();
         }
-        else // no HMENU yet
+        else // no WXHMENU yet
         {
             m_hMenu = menubar->Create();
 
@@ -326,7 +326,7 @@ void wxFrame::AttachMenuBar(wxMenuBar *menubar)
 
 void wxFrame::InternalSetMenuBar()
 {
-    if ( !::SetMenu(GetHwnd(), (HMENU)m_hMenu) )
+    if ( !::SetMenu(GetHwnd(), (WXHMENU)m_hMenu) )
     {
         wxLogLastError("SetMenu");
     }
@@ -447,7 +447,7 @@ bool wxFrame::ShowFullScreen(bool show, unsigned int style)
 #endif // wxUSE_TOOLBAR
 
         if (style & wxFULLSCREEN_NOMENUBAR)
-            ::SetMenu((HWND)GetHWND(), (HMENU) nullptr);
+            ::SetMenu((WXHWND)GetHWND(), (WXHMENU) nullptr);
 
 #if wxUSE_STATUSBAR
         wxStatusBar *theStatusBar = GetStatusBar();
@@ -479,7 +479,7 @@ bool wxFrame::ShowFullScreen(bool show, unsigned int style)
         {
             const WXHMENU hmenu = MSWGetActiveMenu();
             if ( hmenu )
-                ::SetMenu(GetHwnd(), (HMENU)hmenu);
+                ::SetMenu(GetHwnd(), (WXHMENU)hmenu);
         }
 #endif // wxUSE_MENUS
 

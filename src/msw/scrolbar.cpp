@@ -141,7 +141,7 @@ void wxScrollBar::SetThumbPosition(int viewStart)
         info.fMask = SIF_POS
     };
 
-    ::SetScrollInfo((HWND) GetHWND(), SB_CTL, &info, TRUE);
+    ::SetScrollInfo((WXHWND) GetHWND(), SB_CTL, &info, TRUE);
 }
 
 int wxScrollBar::GetThumbPosition() const
@@ -183,7 +183,7 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
         .nPos = position
     };
 
-    ::SetScrollInfo((HWND) GetHWND(), SB_CTL, &info, refresh);
+    ::SetScrollInfo((WXHWND) GetHWND(), SB_CTL, &info, refresh);
 }
 
 void wxScrollBar::Command(wxCommandEvent& event)

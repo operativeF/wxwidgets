@@ -14,7 +14,7 @@
 // implementation
 // ============================================================================
 
-LPARAM wxMSWImpl::CustomDraw::HandleItemPrepaint(const wxItemAttr& attr, HDC hdc)
+LPARAM wxMSWImpl::CustomDraw::HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc)
 {
     if ( attr.HasTextColour() )
         ::SetTextColor(hdc, wxColourToRGB(attr.GetTextColour()));

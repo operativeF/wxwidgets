@@ -179,7 +179,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
         // Unfortunately, resetting this style doesn't work neither, so we have
         // to create a whole new window just for this, which is pretty wasteful
         // but seems unavoidable.
-        HWND hwnd;
+        WXHWND hwnd;
         if ( MSWAllowsNone() )
         {
             hwnd = ::CreateWindowW

@@ -69,7 +69,7 @@ struct wxProgressDialogSharedData
     wxPoint m_winPosition;
 
     wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
-    HWND m_hwnd{nullptr};            // Task dialog handler
+    WXHWND m_hwnd{nullptr};            // Task dialog handler
 
     unsigned long m_timeStop{};
     unsigned int m_style{};           // wxProgressDialog style
@@ -142,7 +142,7 @@ private:
 
     void* Entry() override;
 
-    static HRESULT CALLBACK TaskDialogCallbackProc(HWND hwnd,
+    static HRESULT CALLBACK TaskDialogCallbackProc(WXHWND hwnd,
                                                    UINT uNotification,
                                                    WPARAM wParam,
                                                    LPARAM lParam,
@@ -178,7 +178,7 @@ protected:
 // Helper functions
 // ============================================================================
 
-BOOL CALLBACK DisplayCloseButton(HWND hwnd, LPARAM lParam)
+BOOL CALLBACK DisplayCloseButton(WXHWND hwnd, LPARAM lParam)
 {
     wxProgressDialogSharedData *sharedData =
         (wxProgressDialogSharedData *) lParam;
@@ -198,14 +198,14 @@ BOOL CALLBACK DisplayCloseButton(HWND hwnd, LPARAM lParam)
 // This function enables or disables both the cancel button in the task dialog
 // and the close button in its title bar, as they perform the same function and
 // so should be kept in the same state.
-void EnableCloseButtons(HWND hwnd, bool enable)
+void EnableCloseButtons(WXHWND hwnd, bool enable)
 {
     ::SendMessageW(hwnd, TDM_ENABLE_BUTTON, IDCANCEL, enable ? TRUE : FALSE);
 
     wxTopLevelWindow::MSWEnableCloseButton(hwnd, enable);
 }
 
-void PerformNotificationUpdates(HWND hwnd,
+void PerformNotificationUpdates(WXHWND hwnd,
                                 wxProgressDialogSharedData *sharedData)
 {
     // Update the appropriate dialog fields.
@@ -613,7 +613,7 @@ void wxProgressDialog::Resume()
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
     {
-        HWND hwnd;
+        WXHWND hwnd;
 
         {
             wxCriticalSectionLocker locker(m_sharedData->m_cs);
@@ -1083,7 +1083,7 @@ void* wxProgressDialogTaskRunner::Entry()
 HRESULT CALLBACK
 wxProgressDialogTaskRunner::TaskDialogCallbackProc
                             (
-                                HWND hwnd,
+                                WXHWND hwnd,
                                 UINT uNotification,
                                 WPARAM wParam,
                                 LPARAM WXUNUSED(lParam),
@@ -1102,7 +1102,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
     switch ( uNotification )
     {
         case TDN_CREATED:
-            // Store the HWND for the main thread use.
+            // Store the WXHWND for the main thread use.
             sharedData->m_hwnd = hwnd;
 
             // The main thread is sitting in an event dispatching loop waiting

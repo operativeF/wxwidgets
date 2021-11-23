@@ -261,7 +261,7 @@ wxPoint wxCursor::GetHotSpot() const
 namespace
 {
 
-wxSize ScaleAndReverseBitmap(HBITMAP& bitmap, float scale)
+wxSize ScaleAndReverseBitmap(WXHBITMAP& bitmap, float scale)
 {
     BITMAP bmp;
     if ( !::GetObjectW(bitmap, sizeof(bmp), &bmp) )

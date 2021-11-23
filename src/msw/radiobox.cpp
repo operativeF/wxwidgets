@@ -87,7 +87,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRadioBox, wxControl);
 
 // wnd proc for radio buttons
 LRESULT APIENTRY
-wxRadioBtnWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxRadioBtnWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // ---------------------------------------------------------------------------
 // global vars
@@ -100,9 +100,9 @@ namespace
 WXWNDPROC s_wndprocRadioBtn = nullptr;
 
 // Hash allowing to find wxRadioBox containing the given radio button by its
-// HWND. This is used by (subclassed) radio button window proc to find the
+// WXHWND. This is used by (subclassed) radio button window proc to find the
 // radio box it belongs to.
-using RadioBoxFromButton = std::unordered_map< HWND, wxRadioBox *, wxPointerHash, wxPointerEqual >;
+using RadioBoxFromButton = std::unordered_map< WXHWND, wxRadioBox *, wxPointerHash, wxPointerEqual >;
 
 
 RadioBoxFromButton gs_boxFromButton;
@@ -167,12 +167,12 @@ bool wxRadioBox::Create(wxWindow *parent,
 
         wxWindowIDRef subid = NewControlId();
 
-        HWND hwndBtn = ::CreateWindowW(L"BUTTON",
+        WXHWND hwndBtn = ::CreateWindowW(L"BUTTON",
                                       boost::nowide::widen(choice).c_str(),
                                       styleBtn,
                                       0, 0, 0, 0,   // will be set in SetSize()
                                       GetHwndOf(parent),
-                                      (HMENU)wxUIntToPtr(subid.GetValue()),
+                                      (WXHMENU)wxUIntToPtr(subid.GetValue()),
                                       wxGetInstance(),
                                       nullptr);
 
@@ -201,7 +201,7 @@ bool wxRadioBox::Create(wxWindow *parent,
                          L"",
                          WS_GROUP | BS_AUTORADIOBUTTON | WS_CHILD,
                          0, 0, 0, 0, GetHwndOf(parent),
-                         (HMENU)wxUIntToPtr(m_dummyId.GetValue()),
+                         (WXHMENU)wxUIntToPtr(m_dummyId.GetValue()),
                          wxGetInstance(), nullptr);
 
 
@@ -239,7 +239,7 @@ wxRadioBox::~wxRadioBox()
     // being deleted to handle the messages generated during their destruction.
     for ( size_t item = 0; item < m_radioButtons->GetCount(); item++ )
     {
-        HWND hwnd = m_radioButtons->Get(item);
+        WXHWND hwnd = m_radioButtons->Get(item);
 
         wxSetWindowProc(hwnd, reinterpret_cast<WNDPROC>(s_wndprocRadioBtn));
         gs_boxFromButton.erase(hwnd);
@@ -248,14 +248,14 @@ wxRadioBox::~wxRadioBox()
     delete m_radioButtons;
 
     if ( m_dummyHwnd )
-        DestroyWindow((HWND)m_dummyHwnd);
+        DestroyWindow((WXHWND)m_dummyHwnd);
 }
 
 // NB: if this code is changed, wxGetWindowForHWND() which relies on having the
 //     radiobox pointer in GWL_USERDATA for radio buttons must be updated too!
 void wxRadioBox::SubclassRadioButton(WXHWND hWndBtn)
 {
-    HWND hwndBtn = (HWND)hWndBtn;
+    WXHWND hwndBtn = (WXHWND)hWndBtn;
 
     if ( !s_wndprocRadioBtn )
         s_wndprocRadioBtn = wxGetWindowProc(hwndBtn);
@@ -282,7 +282,7 @@ bool wxRadioBox::MSWCommand(WXUINT cmd, WXWORD id_)
 
         for ( unsigned int i = 0; i < GetCount(); i++ )
         {
-            const HWND hwndBtn = (*m_radioButtons)[i];
+            const WXHWND hwndBtn = (*m_radioButtons)[i];
             if ( id == wxGetWindowId(hwndBtn) )
             {
                 // we can get BN_CLICKED for a button which just became focused
@@ -462,7 +462,7 @@ bool wxRadioBox::HasToolTips() const
 void wxRadioBox::DoSetItemToolTip(unsigned int item, wxToolTip *tooltip)
 {
     // we have already checked for the item to be valid in wxRadioBoxBase
-    const HWND hwndRbtn = (*m_radioButtons)[item];
+    const WXHWND hwndRbtn = (*m_radioButtons)[item];
     if ( tooltip != nullptr )
         tooltip->AddOtherWindow(hwndRbtn);
     else // unset the tooltip
@@ -480,7 +480,7 @@ bool wxRadioBox::Reparent(wxWindowBase *newParent)
         return false;
     }
 
-    HWND hwndParent = GetHwndOf(GetParent());
+    WXHWND hwndParent = GetHwndOf(GetParent());
     for ( size_t item = 0; item < m_radioButtons->GetCount(); item++ )
     {
         ::SetParent((*m_radioButtons)[item], hwndParent);
@@ -721,7 +721,7 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
 {
     RECT rc;
     ::GetWindowRect(GetHwnd(), &rc);
-    HRGN hrgn = ::CreateRectRgn(rc.left, rc.top, rc.right + 1, rc.bottom + 1);
+    WXHRGN hrgn = ::CreateRectRgn(rc.left, rc.top, rc.right + 1, rc.bottom + 1);
 
     using msw::utils::unique_region;
 
@@ -744,7 +744,7 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
 // ---------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxRadioBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxRadioBtnWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 
     wxRadioBox * const radiobox = wxRadioBox::GetFromRadioButtonHWND(hwnd);

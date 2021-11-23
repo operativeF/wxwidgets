@@ -66,7 +66,7 @@ static WNDPROC gs_wndprocToolTip = (WNDPROC)NULL;
 // private classes
 // ----------------------------------------------------------------------------
 
-// This is simply a wrapper for vector<HWND> but defined as a class to hide the
+// This is simply a wrapper for vector<WXHWND> but defined as a class to hide the
 // details from the public header.
 class wxToolTipOtherWindows : public std::vector<WXHWND>
 {
@@ -75,7 +75,7 @@ class wxToolTipOtherWindows : public std::vector<WXHWND>
 class wxToolInfo : public TOOLINFO
 {
 public:
-    wxToolInfo(HWND hwndOwner, unsigned int id, const wxRect& rc)
+    wxToolInfo(WXHWND hwndOwner, unsigned int id, const wxRect& rc)
     {
         // initialize all members
         ::ZeroMemory(this, sizeof(TOOLINFO));
@@ -103,7 +103,7 @@ public:
             rect.bottom = rc.GetBottom();
 
             // note that not setting TTF_IDISHWND from the uFlags member means that the
-            // ti.uId field should not contain the HWND but rather as MSDN says an
+            // ti.uId field should not contain the WXHWND but rather as MSDN says an
             // "Application-defined identifier of the tool"; this is used internally by
             // Windows to distinguish the different tooltips attached to the same window
             uId = id;
@@ -148,7 +148,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToolTipModule, wxModule);
 // NB: wParam is always 0 for the TTM_XXX messages we use
 static inline LRESULT SendTooltipMessage(WXHWND hwnd, UINT msg, void *lParam)
 {
-    return hwnd ? ::SendMessageW((HWND)hwnd, msg, 0, (LPARAM)lParam) : 0;
+    return hwnd ? ::SendMessageW((WXHWND)hwnd, msg, 0, (LPARAM)lParam) : 0;
 }
 
 // send a message to all existing tooltip controls
@@ -156,7 +156,7 @@ static inline void
 SendTooltipMessageToAll(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if ( hwnd )
-        ::SendMessageW((HWND)hwnd, msg, wParam, lParam);
+        ::SendMessageW((WXHWND)hwnd, msg, wParam, lParam);
 }
 
 // ============================================================================
@@ -169,7 +169,7 @@ SendTooltipMessageToAll(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 // window proc for our tooltip control
 // ----------------------------------------------------------------------------
 
-LRESULT APIENTRY wxToolTipWndProc(HWND hwndTT,
+LRESULT APIENTRY wxToolTipWndProc(WXHWND hwndTT,
                                   UINT msg,
                                   WPARAM wParam,
                                   LPARAM lParam)
@@ -179,12 +179,12 @@ LRESULT APIENTRY wxToolTipWndProc(HWND hwndTT,
         LPPOINT ppt = (LPPOINT)lParam;
 
         // the window on which event occurred
-        HWND hwnd = ::WindowFromPoint(*ppt);
+        WXHWND hwnd = ::WindowFromPoint(*ppt);
 
         OutputDebugString("TTM_WINDOWFROMPOINT: ");
         OutputDebugString(fmt::format("0x{:08x} => ", hwnd));
 
-        // return a HWND corresponding to a wxWindow because only wxWidgets are
+        // return a WXHWND corresponding to a wxWindow because only wxWidgets are
         // associated with tooltips using TTM_ADDTOOL
         wxWindow *win = wxGetWindowFromHWND((WXHWND)hwnd);
 
@@ -258,7 +258,7 @@ void wxToolTip::DeleteToolTipCtrl()
 {
     if ( ms_hwndTT )
     {
-        ::DestroyWindow((HWND)ms_hwndTT);
+        ::DestroyWindow((WXHWND)ms_hwndTT);
         ms_hwndTT = (WXHWND)nullptr;
     }
 }
@@ -287,12 +287,12 @@ WXHWND wxToolTip::GetToolTipCtrl()
                                              TTS_ALWAYSTIP | TTS_NOPREFIX,
                                              CW_USEDEFAULT, CW_USEDEFAULT,
                                              CW_USEDEFAULT, CW_USEDEFAULT,
-                                             nullptr, (HMENU)nullptr,
+                                             nullptr, (WXHMENU)nullptr,
                                              wxGetInstance(),
                                              nullptr);
        if ( ms_hwndTT )
        {
-           HWND hwnd = (HWND)ms_hwndTT;
+           WXHWND hwnd = (WXHWND)ms_hwndTT;
            ::SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
                           SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 
@@ -380,7 +380,7 @@ wxToolTip::~wxToolTip()
 /* static */
 void wxToolTip::Remove(WXHWND hWnd, unsigned int id, const wxRect& rc)
 {
-    wxToolInfo ti((HWND)hWnd, id, rc);
+    wxToolInfo ti((WXHWND)hWnd, id, rc);
 
     SendTooltipMessage(GetToolTipCtrl(), TTM_DELTOOL, &ti);
 }
@@ -416,7 +416,7 @@ void wxToolTip::AddOtherWindow(WXHWND hWnd)
 
 void wxToolTip::DoAddHWND(WXHWND hWnd)
 {
-    HWND hwnd = (HWND)hWnd;
+    WXHWND hwnd = (WXHWND)hWnd;
 
     wxToolInfo ti(hwnd, m_id, m_rect);
 
@@ -473,7 +473,7 @@ void wxToolTip::SetWindow(wxWindow *win)
     {
         for ( const auto id : control->GetSubcontrols() )
         {
-            HWND hwnd = ::GetDlgItem(GetHwndOf(m_window), id);
+            WXHWND hwnd = ::GetDlgItem(GetHwndOf(m_window), id);
             if ( !hwnd )
             {
                 // maybe it's a child of parent of the control, in fact?
@@ -521,7 +521,7 @@ void wxToolTip::SetTip(const std::string& tip)
 void wxToolTip::DoSetTip(WXHWND hWnd)
 {
     // update the tip text shown by the control
-    wxToolInfo ti((HWND)hWnd, m_id, m_rect);
+    wxToolInfo ti((WXHWND)hWnd, m_id, m_rect);
 
     // for some reason, changing the tooltip text directly results in
     // repaint of the controls under it, see #10520 -- but this doesn't

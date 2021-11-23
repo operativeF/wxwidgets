@@ -44,28 +44,28 @@ import <string>;
 // ---------------------------------------------------------------------------
 
 // hide the ugly cast
-#define GetHMenuOf(menu)    ((HMENU)menu->GetHMenu())
+#define GetHMenuOf(menu)    ((WXHMENU)menu->GetHMenu())
 
 // ----------------------------------------------------------------------------
-// helper classes for temporarily changing HDC parameters
+// helper classes for temporarily changing WXHDC parameters
 // ----------------------------------------------------------------------------
 
 namespace
 {
 
-// This class just stores an HDC.
+// This class just stores an WXHDC.
 class HDCHandler
 {
 protected:
-    explicit HDCHandler(HDC hdc) : m_hdc(hdc) { }
+    explicit HDCHandler(WXHDC hdc) : m_hdc(hdc) { }
 
-    const HDC m_hdc;
+    const WXHDC m_hdc;
 };
 
 class HDCTextColChanger : HDCHandler
 {
 public:
-    HDCTextColChanger(HDC hdc, COLORREF col)
+    HDCTextColChanger(WXHDC hdc, COLORREF col)
         : HDCHandler(hdc),
           m_colOld(::SetTextColor(hdc, col))
     {
@@ -83,7 +83,7 @@ private:
 class HDCBgColChanger : HDCHandler
 {
 public:
-    HDCBgColChanger(HDC hdc, COLORREF col)
+    HDCBgColChanger(WXHDC hdc, COLORREF col)
         : HDCHandler(hdc),
           m_colOld(::SetBkColor(hdc, col))
     {
@@ -101,7 +101,7 @@ private:
 class HDCBgModeChanger : HDCHandler
 {
 public:
-    HDCBgModeChanger(HDC hdc, int mode)
+    HDCBgModeChanger(WXHDC hdc, int mode)
         : HDCHandler(hdc),
           m_modeOld(::SetBkMode(hdc, mode))
     {
@@ -481,7 +481,7 @@ bool wxMenuItem::IsChecked() const
     if ( !m_parentMenu )
         return wxMenuItemBase::IsChecked();
 
-    HMENU hmenu = GetHMenuOf(m_parentMenu);
+    WXHMENU hmenu = GetHMenuOf(m_parentMenu);
     int flag = ::GetMenuState(hmenu, GetMSWId(), MF_BYCOMMAND);
 
     return (flag & MF_CHECKED) != 0;
@@ -522,7 +522,7 @@ void wxMenuItem::Check(bool check)
     if ( m_parentMenu )
     {
         unsigned int flags = check ? MF_CHECKED : MF_UNCHECKED;
-        HMENU hmenu = GetHMenuOf(m_parentMenu);
+        WXHMENU hmenu = GetHMenuOf(m_parentMenu);
 
         if ( GetKind() == wxITEM_RADIO )
         {
@@ -610,7 +610,7 @@ void wxMenuItem::SetItemLabel(const std::string& txt)
     if ( itemPos == -1 )
         return;
 
-    HMENU hMenu = GetHMenuOf(m_parentMenu);
+    WXHMENU hMenu = GetHMenuOf(m_parentMenu);
 
     // update the text of the native menu item
     WinStruct<MENUITEMINFOW> info;
@@ -856,7 +856,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     const MenuDrawData* data = MenuDrawData::Get(GetMenu());
 
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HDC hdc = GetHdcOf(*impl);
+    WXHDC hdc = GetHdcOf(*impl);
 
     RECT rect;
     wxCopyRectToRECT(rc, rect);
@@ -1103,7 +1103,7 @@ namespace
 {
 
 // helper function for draw coloured check mark
-void DrawColorCheckMark(HDC hdc, int x, int y, int cx, int cy, HDC hdcCheckMask, int idxColor)
+void DrawColorCheckMark(WXHDC hdc, int x, int y, int cx, int cy, WXHDC hdcCheckMask, int idxColor)
 {
     const COLORREF colBlack = RGB(0, 0, 0);
     const COLORREF colWhite = RGB(255, 255, 255);
@@ -1147,7 +1147,7 @@ void DrawColorCheckMark(HDC hdc, int x, int y, int cx, int cy, HDC hdcCheckMask,
 
 void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
 {
-    HDC hdc = (HDC)hdc_;
+    WXHDC hdc = (WXHDC)hdc_;
 
 #if wxUSE_UXTHEME
     if ( MenuDrawData::IsUxThemeActive() )
@@ -1299,10 +1299,10 @@ bool wxMenuItem::MSWMustUseOwnerDrawn()
 
 #endif // wxUSE_OWNER_DRAWN
 
-// returns the HBITMAP to use in MENUITEMINFOW
-HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
+// returns the WXHBITMAP to use in MENUITEMINFOW
+WXHBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
 {
-    // Under versions of Windows older than Vista we can't pass HBITMAP
+    // Under versions of Windows older than Vista we can't pass WXHBITMAP
     // directly as hbmpItem for 2 reasons:
     //  1. We can't draw it with transparency then (this is not
     //     very important now but would be with themed menu bg)
@@ -1338,7 +1338,7 @@ int wxMenuItem::MSGetMenuItemPos() const
     if ( !m_parentMenu )
         return -1;
 
-    const HMENU hMenu = GetHMenuOf(m_parentMenu);
+    const WXHMENU hMenu = GetHMenuOf(m_parentMenu);
     if ( !hMenu )
         return -1;
 
@@ -1356,7 +1356,7 @@ int wxMenuItem::MSGetMenuItemPos() const
 
         if ( state & MF_POPUP )
         {
-            if ( ::GetSubMenu(hMenu, i) == (HMENU)id )
+            if ( ::GetSubMenu(hMenu, i) == (WXHMENU)id )
                 return i;
         }
         else if ( !(state & MF_SEPARATOR) )

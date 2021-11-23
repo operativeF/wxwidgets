@@ -48,7 +48,7 @@ bool wxGUIEventLoop::IsChildOfCriticalWindow(wxWindowMSW *win)
 
 bool wxGUIEventLoop::PreProcessMessage(WXMSG *msg)
 {
-    HWND hwnd = msg->hwnd;
+    WXHWND hwnd = msg->hwnd;
     wxWindow *wndThis = wxGetWindowFromHWND((WXHWND)hwnd);
     wxWindow *wnd;
 
@@ -244,7 +244,7 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
     // the main event loop in order to stop it
     MSG msg;
     int nPaintsReceived = 0;
-    while ( ::PeekMessageW(&msg, (HWND)nullptr, 0, 0, PM_NOREMOVE) &&
+    while ( ::PeekMessageW(&msg, (WXHWND)nullptr, 0, 0, PM_NOREMOVE) &&
             msg.message != WM_QUIT )
     {
 #if wxUSE_THREADS

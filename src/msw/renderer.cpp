@@ -26,7 +26,7 @@
 import <string>;
 
 // These Vista+ only types used by DrawThemeTextEx may not be available in older SDK headers
-using WXDTT_CALLBACK_PROC = int(__stdcall*)(HDC hdc, const wchar_t * pszText,
+using WXDTT_CALLBACK_PROC = int(__stdcall*)(WXHDC hdc, const wchar_t * pszText,
     int cchText, RECT * prc, unsigned int dwFlags, WXLPARAM lParam);
 
 // FIXME: Figure out what is redundant with new SDKs.
@@ -556,7 +556,7 @@ int wxRendererMSW::GetHeaderButtonHeight(wxWindow * win)
 
 
     // create a temporary header window just to get its geometry
-    HWND hwndHeader = ::CreateWindowW(WC_HEADER, nullptr, 0,
+    WXHWND hwndHeader = ::CreateWindowW(WC_HEADER, nullptr, 0,
                                      0, 0, 0, 0, nullptr, nullptr, nullptr, nullptr);
     if ( !hwndHeader )
         return DEFAULT_HEIGHT;
@@ -1034,7 +1034,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
 
     const int itemState = GetListItemState(flags);
 
-    using DrawThemeTextEx_t = HRESULT(__stdcall*)(HTHEME, HDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
+    using DrawThemeTextEx_t = HRESULT(__stdcall*)(HTHEME, WXHDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
     static DrawThemeTextEx_t s_DrawThemeTextEx = nullptr;
     static bool s_initDone = false;
 

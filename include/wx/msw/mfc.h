@@ -136,7 +136,7 @@ protected:
         BaseApp::m_pMainWnd = new wxMFCWnd(w);
 
         // We also need to reset m_pMainWnd when this window will be destroyed
-        // to prevent MFC from using an invalid HWND, which is probably not
+        // to prevent MFC from using an invalid WXHWND, which is probably not
         // fatal but can result in at least asserts failures.
         w->Bind(wxEVT_DESTROY, &wxMFCApp::OnMainWindowDestroyed, this);
 

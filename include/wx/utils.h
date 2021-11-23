@@ -39,6 +39,8 @@
     #include <unistd.h>
 #endif
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;

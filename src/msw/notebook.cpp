@@ -74,7 +74,7 @@ static WXWNDPROC gs_wndprocNotebookSpinBtn = nullptr;
 static WXWNDPROC gs_wndprocNotebook = nullptr;
 
 LRESULT APIENTRY
-wxNotebookWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxNotebookWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 #endif // USE_NOTEBOOK_ANTIFLICKER
 
@@ -732,7 +732,7 @@ int wxNotebook::HitTest(const wxPoint& pt, unsigned int* flags) const
 
 // wnd proc for the spin button
 LRESULT APIENTRY
-wxNotebookSpinBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxNotebookSpinBtnWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     if ( message == WM_ERASEBKGND )
         return 0;
@@ -742,7 +742,7 @@ wxNotebookSpinBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 LRESULT APIENTRY
-wxNotebookWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxNotebookWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return ::CallWindowProcW(CASTWNDPROC gs_wndprocNotebook,
                             hwnd, message, wParam, lParam);
@@ -767,7 +767,7 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
     const wxLayoutDirection dir = dc.GetLayoutDirection();
     memdc.SetLayoutDirection(dir);
 
-    const HDC hdc = GetHdcOf(memdc);
+    const WXHDC hdc = GetHdcOf(memdc);
 
     // The drawing logic of the native tab control is absolutely impenetrable
     // but observation shows that in the current Windows versions (XP and 7),
@@ -957,7 +957,7 @@ void wxNotebook::OnSize(wxSizeEvent& event)
     if ( !m_hasSubclassedUpdown )
     {
         // iterate over all child windows to find spin button
-        for ( HWND child = ::GetWindow(GetHwnd(), GW_CHILD);
+        for ( WXHWND child = ::GetWindow(GetHwnd(), GW_CHILD);
               child;
               child = ::GetWindow(child, GW_HWNDNEXT) )
         {
@@ -1082,7 +1082,7 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
 
     RECT rcBg;
     ::GetThemeBackgroundContentRect(theme,
-                                    (HDC) hDC,
+                                    (WXHDC) hDC,
                                     9, /* TABP_PANE */
                                     0,
                                     &rc,
@@ -1094,7 +1094,7 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
     ::GetThemeBackgroundExtent
                             (
                                 theme,
-                                (HDC) hDC,
+                                (WXHDC) hDC,
                                 9 /* TABP_PANE */,
                                 0,
                                 &rcBg,
@@ -1118,7 +1118,7 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
                                     &rc,
                                     nullptr
                                 );
-    } // deselect bitmap from the memory HDC before using it
+    } // deselect bitmap from the memory WXHDC before using it
 
     return (WXHBRUSH)::CreatePatternBrush(hBmp.get());
 }
@@ -1153,9 +1153,9 @@ bool wxNotebook::MSWPrintChild(WXHDC hDC, wxWindow *child)
     if (UseBgCol())
     {
         wxBrush brush(GetBackgroundColour());
-        HBRUSH hbr = GetHbrushOf(brush);
+        WXHBRUSH hbr = GetHbrushOf(brush);
 
-        ::FillRect((HDC) hDC, &rc, hbr);
+        ::FillRect((WXHDC) hDC, &rc, hbr);
 
         return true;
     }
@@ -1169,7 +1169,7 @@ bool wxNotebook::MSWPrintChild(WXHDC hDC, wxWindow *child)
             ::GetThemeBackgroundExtent
                                     (
                                         theme,
-                                        (HDC) hDC,
+                                        (WXHDC) hDC,
                                         9 /* TABP_PANE */,
                                         0,
                                         &rc,
@@ -1178,7 +1178,7 @@ bool wxNotebook::MSWPrintChild(WXHDC hDC, wxWindow *child)
             ::DrawThemeBackground
                                     (
                                         theme,
-                                        (HDC) hDC,
+                                        (WXHDC) hDC,
                                         9 /* TABP_PANE */,
                                         0,
                                         &rc,

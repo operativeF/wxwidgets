@@ -103,7 +103,7 @@ public:
     // implementation only from now on
     // -------------------------------
 
-    // This function can be used to check if the given radio button HWND
+    // This function can be used to check if the given radio button WXHWND
     // belongs to one of our radio boxes. If it doesn't, NULL is returned.
     static wxRadioBox *GetFromRadioButtonHWND(WXHWND hwnd);
 

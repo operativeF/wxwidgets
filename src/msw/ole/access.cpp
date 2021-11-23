@@ -1859,7 +1859,7 @@ IAccessible *wxAccessible::GetIAccessibleStd()
 
     if (GetWindow())
     {
-        HRESULT retCode = ::CreateStdAccessibleObject((HWND) GetWindow()->GetHWND(),
+        HRESULT retCode = ::CreateStdAccessibleObject((WXHWND) GetWindow()->GetHWND(),
                 OBJID_CLIENT, IID_IAccessible, (void**) & m_pIAccessibleStd);
         if (retCode == S_OK)
             return m_pIAccessibleStd;
@@ -1877,7 +1877,7 @@ namespace
 
 struct SendNotification
 {
-    SendNotification(DWORD eventType_, HWND hwnd_, LONG idObject_, LONG idChild_)
+    SendNotification(DWORD eventType_, WXHWND hwnd_, LONG idObject_, LONG idChild_)
         : eventType(eventType_), hwnd(hwnd_), idObject(idObject_), idChild(idChild_)
     {}
 
@@ -1886,7 +1886,7 @@ struct SendNotification
         ::NotifyWinEvent(eventType, hwnd, idObject, idChild);
     }
 
-    HWND hwnd;
+    WXHWND hwnd;
     DWORD eventType;
     LONG idObject, idChild;
 };
@@ -1899,7 +1899,7 @@ void wxAccessible::NotifyEvent(int eventType, wxWindow* window, wxAccObject obje
 {
     // send the notification in idle time to be sure it is sent after the change
     // was fully done in wx code
-    const HWND hwnd = (HWND)window->GetHWND();
+    const WXHWND hwnd = (WXHWND)window->GetHWND();
     SendNotification delayed((DWORD)eventType, hwnd, (LONG)objectType, (LONG)objectId);
     wxTheApp->CallAfter(delayed);
 }

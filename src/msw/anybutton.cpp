@@ -306,7 +306,7 @@ private:
     BUTTON_IMAGELIST m_data;
 
     // the button we're associated with
-    const HWND m_hwndBtn;
+    const WXHWND m_hwndBtn;
 };
 
 #endif // wxUSE_UXTHEME
@@ -334,7 +334,7 @@ static inline bool NeedsOwnerDrawnForImageLayout(wxDirection dir, int margH, int
 // helper functions from wx/msw/private/button.h
 // ----------------------------------------------------------------------------
 
-void wxMSWButton::UpdateMultilineStyle(HWND hwnd, std::string_view label)
+void wxMSWButton::UpdateMultilineStyle(WXHWND hwnd, std::string_view label)
 {
     // update BS_MULTILINE style depending on the new label (resetting it
     // doesn't seem to do anything very useful but it shouldn't hurt and we do
@@ -828,7 +828,7 @@ wxAnyButton::State GetButtonState(wxAnyButton *btn, UINT state)
     return btnState;
 }
 
-void DrawButtonText(HDC hdc,
+void DrawButtonText(WXHDC hdc,
                     RECT *pRect,
                     wxAnyButton *btn,
                     unsigned int flags)
@@ -1008,7 +1008,7 @@ void DrawButtonText(HDC hdc,
     }
 }
 
-void DrawRect(HDC hdc, const RECT& r, COLORREF color)
+void DrawRect(WXHDC hdc, const RECT& r, COLORREF color)
 {
     wxDrawHVLine(hdc, r.left, r.top, r.right, r.top, color, 1);
     wxDrawHVLine(hdc, r.right, r.top, r.right, r.bottom, color, 1);
@@ -1051,7 +1051,7 @@ void DrawRect(HDC hdc, const RECT& r, COLORREF color)
    BGGGGGGGGGGGGGGGGGB
    BBBBBBBBBBBBBBBBBBB
 */
-void DrawButtonFrame(HDC hdc, RECT& rectBtn,
+void DrawButtonFrame(WXHDC hdc, RECT& rectBtn,
                      bool selected, bool pushed)
 {
     RECT r;
@@ -1099,7 +1099,7 @@ void DrawButtonFrame(HDC hdc, RECT& rectBtn,
 }
 
 #if wxUSE_UXTHEME
-void DrawXPBackground(wxAnyButton *button, HDC hdc, RECT& rectBtn, UINT state)
+void DrawXPBackground(wxAnyButton *button, WXHDC hdc, RECT& rectBtn, UINT state)
 {
     wxUxThemeHandle theme(button, L"BUTTON");
 
@@ -1233,7 +1233,7 @@ bool wxAnyButton::MSWIsPushed() const
 }
 
 #ifdef __WXDEBUG__
-static inline bool IsNonTransformedDC(HDC hdc)
+static inline bool IsNonTransformedDC(WXHDC hdc)
 {
     if ( ::GetGraphicsMode(hdc) == GM_ADVANCED )
         return false;
@@ -1249,7 +1249,7 @@ static inline bool IsNonTransformedDC(HDC hdc)
 bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
 {
     LPDRAWITEMSTRUCT lpDIS = (LPDRAWITEMSTRUCT)wxdis;
-    HDC hdc = lpDIS->hDC;
+    WXHDC hdc = lpDIS->hDC;
     // We expect here a DC with default settings (in GM_COMPATIBLE mode
     // with non-scaled coordinates system) but will check this because
     // our line drawing function wxDrawHVLine() works effectively only

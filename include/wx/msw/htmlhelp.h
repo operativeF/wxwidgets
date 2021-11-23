@@ -156,7 +156,7 @@ typedef struct tagHH_NOTIFY {
 
 typedef struct tagHH_POPUPA {
     int       cbStruct;
-    HINSTANCE hinst;
+    WXHINSTANCE hinst;
     UINT      idString;
     LPCSTR    pszText;
     POINT     pt;
@@ -168,7 +168,7 @@ typedef struct tagHH_POPUPA {
 
 typedef struct tagHH_POPUPW {
     int       cbStruct;
-    HINSTANCE hinst;
+    WXHINSTANCE hinst;
     UINT      idString;
     LPCWSTR   pszText;
     POINT     pt;

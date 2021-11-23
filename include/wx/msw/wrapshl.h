@@ -70,12 +70,12 @@ private:
     LPITEMIDLIST m_pidl;
 };
 
-// enable autocompleting filenames in the text control with given HWND
+// enable autocompleting filenames in the text control with given WXHWND
 //
 // this only works on systems with shlwapi.dll 5.0 or later
 //
 // implemented in src/msw/utilsgui.cpp
-extern bool wxEnableFileNameAutoComplete(HWND hwnd);
+extern bool wxEnableFileNameAutoComplete(WXHWND hwnd);
 
 #endif // _WX_MSW_WRAPSHL_H_
 

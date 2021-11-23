@@ -37,7 +37,7 @@ public:
         wxASSERT_MSG( !m_hwnds, "Create() called twice?" );
 
         m_count = n;
-        m_hwnds = (HWND *)calloc(n, sizeof(HWND));
+        m_hwnds = (WXHWND *)calloc(n, sizeof(WXHWND));
         m_ids = new wxWindowIDRef[n];
     }
 
@@ -57,21 +57,21 @@ public:
     size_t GetCount() const { return m_count; }
 
     // access a given window
-    HWND& Get(size_t n)
+    WXHWND& Get(size_t n)
     {
         wxASSERT_MSG( n < m_count, "subwindow index out of range" );
 
         return m_hwnds[n];
     }
 
-    HWND operator[](size_t n) const
+    WXHWND operator[](size_t n) const
     {
         return const_cast<wxSubwindows *>(this)->Get(n);
     }
 
     // initialize the given window: id will be stored in wxWindowIDRef ensuring
     // that it is not reused while this object exists
-    void Set(size_t n, HWND hwnd, wxWindowID id)
+    void Set(size_t n, WXHWND hwnd, wxWindowID id)
     {
         wxASSERT_MSG( n < m_count, "subwindow index out of range" );
 
@@ -80,7 +80,7 @@ public:
     }
 
     // check if we have this window
-    bool HasWindow(HWND hwnd)
+    bool HasWindow(WXHWND hwnd)
     {
         for ( size_t n = 0; n < m_count; n++ )
         {
@@ -167,7 +167,7 @@ private:
     size_t m_count{0};
 
     // the HWNDs we contain
-    HWND *m_hwnds{nullptr};
+    WXHWND *m_hwnds{nullptr};
 
     // the IDs of the windows
     wxWindowIDRef *m_ids{nullptr};
@@ -183,7 +183,7 @@ private:
 #define WX_FORWARD_STD_METHODS_TO_SUBWINDOWS(cname, base, subwins)            \
     bool cname::ContainsHWND(WXHWND hWnd) const                               \
     {                                                                         \
-        return subwins && subwins->HasWindow((HWND)hWnd);                     \
+        return subwins && subwins->HasWindow((WXHWND)hWnd);                     \
     }                                                                         \
                                                                               \
     bool cname::Show(bool show)                                               \

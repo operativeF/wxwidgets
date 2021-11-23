@@ -69,12 +69,12 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
                                    const wxListItem& info, LV_ITEM& lvItem);
 
 // convert LV_ITEM to wxListItem
-static void wxConvertFromMSWListItem(HWND hwndListCtrl,
+static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
                                      wxListItem& info,
                                      /* const */ LV_ITEM& lvItem);
 
 // convert our wxListItem to LV_COLUMN
-static void wxConvertToMSWListCol(HWND hwndList,
+static void wxConvertToMSWListCol(WXHWND hwndList,
                                   int col,
                                   const wxListItem& item,
                                   LV_COLUMN& lvCol);
@@ -91,7 +91,7 @@ namespace
 // rectangle of the first subitem using this function, in particular notice
 // that the index is *not* 1-based, in spite of what MSDN says
 inline bool
-wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, unsigned int flags, RECT& rect)
+wxGetListCtrlSubItemRect(WXHWND hwnd, int item, int subitem, unsigned int flags, RECT& rect)
 {
     rect.top = subitem;
     rect.left = flags;
@@ -99,7 +99,7 @@ wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, unsigned int flags, R
 }
 
 inline bool
-wxGetListCtrlItemRect(HWND hwnd, int item, unsigned int flags, RECT& rect)
+wxGetListCtrlItemRect(WXHWND hwnd, int item, unsigned int flags, RECT& rect)
 {
     return wxGetListCtrlSubItemRect(hwnd, item, 0, flags, rect);
 }
@@ -576,7 +576,7 @@ bool wxListCtrl::SetHeaderAttr(const wxItemAttr& attr)
         m_headerCustomDraw->m_attr = attr;
     }
 
-    if ( HWND hwndHdr = ListView_GetHeader(GetHwnd()) )
+    if ( WXHWND hwndHdr = ListView_GetHeader(GetHwnd()) )
     {
         if ( fontChanged )
         {
@@ -780,11 +780,11 @@ wxTextCtrl* wxListCtrl::GetEditControl() const
     // by user and hence m_textCtrl wasn't created by EditLabel() at all, while
     // the second case corresponds to us being called from inside EditLabel()
     // (e.g. from a user wxEVT_LIST_BEGIN_LABEL_EDIT handler): in this
-    // case EditLabel() did create the control but it didn't have an HWND to
+    // case EditLabel() did create the control but it didn't have an WXHWND to
     // initialize it with yet
     if ( !m_textCtrl || !m_textCtrl->GetHWND() )
     {
-        HWND hwndEdit = ListView_GetEditControl(GetHwnd());
+        WXHWND hwndEdit = ListView_GetEditControl(GetHwnd());
         if ( hwndEdit )
         {
             wxListCtrl * const self = const_cast<wxListCtrl *>(this);
@@ -834,7 +834,7 @@ bool wxListCtrl::GetItem(wxListItem& info) const
         wxConvertToMSWFlags(ListStateFlags{}, info.m_stateMask, lvItem);
     }
 
-    bool success = ListView_GetItem((HWND)GetHWND(), &lvItem) != 0;
+    bool success = ListView_GetItem((WXHWND)GetHWND(), &lvItem) != 0;
     if ( !success )
     {
         wxLogError(_("Couldn't retrieve information about list control item %d."),
@@ -858,7 +858,7 @@ bool wxListCtrl::IsVisible(long item) const
     bool result = ::SendMessageW( GetHwnd(), LVM_ISITEMVISIBLE, (WPARAM) item, 0 ) != 0;
     if ( result )
     {
-        HWND hwndHdr = ListView_GetHeader(GetHwnd());
+        WXHWND hwndHdr = ListView_GetHeader(GetHwnd());
         wxRect itemRect;
         RECT headerRect;
         if ( Header_GetItemRect( hwndHdr, 0, &headerRect ) )
@@ -1675,7 +1675,7 @@ wxTextCtrl* wxListCtrl::EditLabel(long item, wxClassInfo* textControlClass)
 bool wxListCtrl::EndEditLabel(bool cancel)
 {
     // m_textCtrl is not always ready, ie. in EVT_LIST_BEGIN_LABEL_EDIT
-    HWND hwnd = ListView_GetEditControl(GetHwnd());
+    WXHWND hwnd = ListView_GetEditControl(GetHwnd());
     if ( !hwnd )
         return false;
 
@@ -2144,7 +2144,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
     NMHDR *nmhdr = (NMHDR *)lParam;
 
     // check for messages from the header (in report view)
-    HWND hwndHdr = ListView_GetHeader(GetHwnd());
+    WXHWND hwndHdr = ListView_GetHeader(GetHwnd());
 
     // is it a message from the header?
     if ( nmhdr->hwndFrom == hwndHdr )
@@ -2874,8 +2874,8 @@ bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont, int colCount)
 {
     NMCUSTOMDRAW& nmcd = pLVCD->nmcd;
 
-    HDC hdc = nmcd.hdc;
-    HWND hwndList = nmcd.hdr.hwndFrom;
+    WXHDC hdc = nmcd.hdc;
+    WXHWND hwndList = nmcd.hdr.hwndFrom;
     const int col = pLVCD->iSubItem;
     const DWORD item = nmcd.dwItemSpec;
 
@@ -2975,7 +2975,7 @@ static void HandleItemPostpaint(NMCUSTOMDRAW nmcd)
     {
         RECT rc = GetCustomDrawnItemRect(nmcd);
 
-        // don't use the provided HDC, it's in some strange state by now
+        // don't use the provided WXHDC, it's in some strange state by now
         ::DrawFocusRect(WindowHDC(nmcd.hdr.hwndFrom), &rc);
     }
 }
@@ -2985,7 +2985,7 @@ static void HandleItemPaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont)
 {
     NMCUSTOMDRAW& nmcd = pLVCD->nmcd; // just a shortcut
 
-    const HWND hwndList = nmcd.hdr.hwndFrom;
+    const WXHWND hwndList = nmcd.hdr.hwndFrom;
     const int item = nmcd.dwItemSpec;
 
     // unfortunately we can't trust CDIS_SELECTED, it is often set even when
@@ -3042,7 +3042,7 @@ static void HandleItemPaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont)
     }
     //else: not selected, use normal colours from pLVCD
 
-    HDC hdc = nmcd.hdc;
+    WXHDC hdc = nmcd.hdc;
     RECT rc = GetCustomDrawnItemRect(nmcd);
 
     ::SetTextColor(hdc, pLVCD->clrText);
@@ -3299,7 +3299,7 @@ wxListCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
             // this is confusing in wx as right clicking there already
             // generates a separate wxEVT_LIST_COL_RIGHT_CLICK event
             // so just ignore them
-            if ( (HWND)wParam == ListView_GetHeader(GetHwnd()) )
+            if ( (WXHWND)wParam == ListView_GetHeader(GetHwnd()) )
                 return 0;
             //else: break
     }
@@ -3346,7 +3346,7 @@ void wxListCtrl::RefreshItems(long itemFrom, long itemTo)
 // wxWin <-> MSW items conversions
 // ----------------------------------------------------------------------------
 
-static void wxConvertFromMSWListItem(HWND hwndListCtrl,
+static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
                                      wxListItem& info,
                                      LV_ITEM& lvItem)
 {
@@ -3509,7 +3509,7 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
         lvItem.mask |= LVIF_IMAGE;
 }
 
-static void wxConvertToMSWListCol(HWND hwndList,
+static void wxConvertToMSWListCol(WXHWND hwndList,
                                   int col,
                                   const wxListItem& item,
                                   LV_COLUMN& lvCol)

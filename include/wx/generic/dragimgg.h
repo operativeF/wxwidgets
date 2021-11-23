@@ -28,7 +28,7 @@ import Utils.Geometry;
   void MyTreeCtrl::OnBeginDrag(wxTreeEvent& event)
   {
 #ifdef __WXMSW__
-    ::UpdateWindow((HWND) GetHWND()); // We need to implement this in wxWidgets
+    ::UpdateWindow((WXHWND) GetHWND()); // We need to implement this in wxWidgets
 #endif
 
     CaptureMouse();
@@ -60,7 +60,7 @@ import Utils.Geometry;
 
 #ifdef __WXMSW__
     if (updateWindow)
-        ::UpdateWindow((HWND) GetHWND());
+        ::UpdateWindow((WXHWND) GetHWND());
 #endif
 
     // Move and show the image again

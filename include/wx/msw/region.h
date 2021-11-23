@@ -13,6 +13,8 @@
 
 #include "wx/gdicmn.h"
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 #include <memory>

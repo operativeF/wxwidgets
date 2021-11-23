@@ -20,12 +20,12 @@
     
 import <ctime>;
 
-static HWND GetSuitableHWND(wxWinHelpController* controller)
+static WXHWND GetSuitableHWND(wxWinHelpController* controller)
 {
     if (controller->GetParentWindow())
-        return (HWND) controller->GetParentWindow()->GetHWND();
+        return (WXHWND) controller->GetParentWindow()->GetHWND();
     else if (wxTheApp->GetTopWindow())
-        return (HWND) wxTheApp->GetTopWindow()->GetHWND();
+        return (WXHWND) wxTheApp->GetTopWindow()->GetHWND();
     else
         return ::GetDesktopWindow();
 }

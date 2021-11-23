@@ -61,7 +61,7 @@ struct COLORINFO
     LPCHOOSECOLOR  pCC;
     HANDLE         hLocal;
     HANDLE         hDialog;
-    HPALETTE       hPal;
+    WXHPALETTE       hPal;
     DWORD          currentRGB;
     WORD           currentHue;
     WORD           currentSat;
@@ -93,7 +93,7 @@ struct COLORINFO
 // ----------------------------------------------------------------------------
 
 UINT_PTR CALLBACK
-wxColourDialogHookProc(HWND hwnd,
+wxColourDialogHookProc(WXHWND hwnd,
                        UINT uiMsg,
                        WPARAM WXUNUSED(wParam),
                        LPARAM WXUNUSED(lParam))
@@ -238,9 +238,9 @@ void wxColourDialog::DoMoveWindow(wxRect boundary)
 {
     s_rectDialog.SetPosition(boundary.GetPosition());
 
-    // our HWND is only set when we're called from MSWOnInitDone(), test if
+    // our WXHWND is only set when we're called from MSWOnInitDone(), test if
     // this is the case
-    HWND hwnd = GetHwnd();
+    WXHWND hwnd = GetHwnd();
     if ( hwnd )
     {
         // size of the dialog can't be changed because the controls are not
@@ -269,14 +269,14 @@ wxSize wxColourDialog::DoGetClientSize() const
 
 void wxColourDialog::MSWOnInitDone(WXHWND hDlg)
 {
-    // set HWND so that our DoMoveWindow() works correctly
+    // set WXHWND so that our DoMoveWindow() works correctly
     TempHWNDSetter set(this, hDlg);
 
     if ( m_centreDir )
     {
         // now we have the real dialog size, remember it
         RECT rect;
-        ::GetWindowRect((HWND)hDlg, &rect);
+        ::GetWindowRect((WXHWND)hDlg, &rect);
         s_rectDialog = wxRectFromRECT(rect);
 
         // and position the window correctly: notice that we must use the base

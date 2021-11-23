@@ -35,7 +35,7 @@ import <string>;
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
 //     is not included by wxUniv build which does need wxDlgProc
 INT_PTR APIENTRY
-wxDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+wxDlgProc(WXHWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 // ----------------------------------------------------------------------------
 // wxTLWHiddenParentModule: used to manage the hidden parent window (we need a
@@ -50,11 +50,11 @@ public:
     void OnExit() override;
 
     // get the hidden window (creates on demand)
-    static HWND GetHWND();
+    static WXHWND GetHWND();
 
 private:
-    // the HWND of the hidden parent
-    static HWND ms_hwnd;
+    // the WXHWND of the hidden parent
+    static WXHWND ms_hwnd;
 
     // the class used to create it
     static const wxChar *ms_className;
@@ -185,10 +185,10 @@ DWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, DWORD *exflags) const
 WXHWND wxTopLevelWindowMSW::MSWGetParent() const
 {
     // for the frames without wxFRAME_FLOAT_ON_PARENT style we should use NULL
-    // parent HWND or it would be always on top of its parent which is not what
+    // parent WXHWND or it would be always on top of its parent which is not what
     // we usually want (in fact, we only want it for frames with the
     // wxFRAME_FLOAT_ON_PARENT flag)
-    HWND hwndParent = nullptr;
+    WXHWND hwndParent = nullptr;
     if ( HasFlag(wxFRAME_FLOAT_ON_PARENT) )
     {
         const wxWindow *parent = GetParent();
@@ -1022,7 +1022,7 @@ void wxTopLevelWindowMSW::SetIcons(const wxIconBundle& icons)
 bool wxTopLevelWindowMSW::MSWEnableCloseButton(WXHWND hwnd, bool enable)
 {
     // get system (a.k.a. window) menu
-    HMENU hmenu = GetSystemMenu(hwnd, FALSE /* get it */);
+    WXHMENU hmenu = GetSystemMenu(hwnd, FALSE /* get it */);
     if ( !hmenu )
     {
         // no system menu at all -- ok if we want to remove the close button
@@ -1135,7 +1135,7 @@ wxMenu *wxTopLevelWindowMSW::MSWGetSystemMenu() const
 #ifndef __WXUNIVERSAL__
     if ( !m_menuSystem )
     {
-        HMENU hmenu = ::GetSystemMenu(GetHwnd(), FALSE);
+        WXHMENU hmenu = ::GetSystemMenu(GetHwnd(), FALSE);
         if ( !hmenu )
         {
             wxLogLastError("GetSystemMenu()");
@@ -1271,7 +1271,7 @@ void wxTopLevelWindowMSW::OnActivate(wxActivateEvent& event)
 
 // the DialogProc for all wxWidgets dialogs
 INT_PTR APIENTRY
-wxDlgProc(HWND WXUNUSED(hDlg),
+wxDlgProc(WXHWND WXUNUSED(hDlg),
           UINT message,
           WPARAM WXUNUSED(wParam),
           LPARAM WXUNUSED(lParam))
@@ -1296,7 +1296,7 @@ wxDlgProc(HWND WXUNUSED(hDlg),
 // wxTLWHiddenParentModule implementation
 // ============================================================================
 
-HWND wxTLWHiddenParentModule::ms_hwnd = nullptr;
+WXHWND wxTLWHiddenParentModule::ms_hwnd = nullptr;
 
 const wxChar *wxTLWHiddenParentModule::ms_className = nullptr;
 
@@ -1332,7 +1332,7 @@ void wxTLWHiddenParentModule::OnExit()
 }
 
 /* static */
-HWND wxTLWHiddenParentModule::GetHWND()
+WXHWND wxTLWHiddenParentModule::GetHWND()
 {
     if ( !ms_hwnd )
     {
@@ -1358,7 +1358,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
         }
 
         ms_hwnd = ::CreateWindowW(ms_className, L"", 0, 0, 0, 0, 0, nullptr,
-                                 (HMENU)nullptr, wxGetInstance(), nullptr);
+                                 (WXHMENU)nullptr, wxGetInstance(), nullptr);
         if ( !ms_hwnd )
         {
             wxLogLastError("CreateWindow(hidden TLW parent)");

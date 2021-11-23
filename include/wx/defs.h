@@ -1907,21 +1907,10 @@ typedef WX_UIPasteboard WXOSXPasteboard;
     #define WX_MSW_DECLARE_HANDLE(type) typedef void * WX##type
 #endif
 
-typedef void* WXHANDLE;
-WX_MSW_DECLARE_HANDLE(HWND);
-WX_MSW_DECLARE_HANDLE(HMENU);
-WX_MSW_DECLARE_HANDLE(HBRUSH);
-WX_MSW_DECLARE_HANDLE(HPALETTE);
-WX_MSW_DECLARE_HANDLE(HRGN);
 WX_MSW_DECLARE_HANDLE(RECTPTR);
-WX_MSW_DECLARE_HANDLE(HACCEL);
-WX_MSW_DECLARE_HANDLE(HINSTANCE);
-WX_MSW_DECLARE_HANDLE(HBITMAP);
 WX_MSW_DECLARE_HANDLE(HIMAGELIST);
 WX_MSW_DECLARE_HANDLE(HGLOBAL);
-WX_MSW_DECLARE_HANDLE(HDC);
 WX_MSW_DECLARE_HANDLE(DPI_AWARENESS_CONTEXT);
-typedef WXHINSTANCE WXHMODULE;
 
 #undef WX_MSW_DECLARE_HANDLE
 
@@ -1939,15 +1928,7 @@ typedef void *          WXDRAWITEMSTRUCT;
 typedef void *          WXMEASUREITEMSTRUCT;
 typedef void *          WXLPCREATESTRUCT;
 
-#ifdef __WXMSW__
-typedef WXHWND          WXWidget;
-#endif
-
-#ifdef __WIN64__
-typedef wxUint64           WXWPARAM;
-typedef wxInt64            WXLPARAM;
-typedef wxInt64            WXLRESULT;
-#else
+#ifndef __WIN64__
 typedef wxW64 unsigned int WXWPARAM;
 typedef wxW64 long         WXLPARAM;
 typedef wxW64 long         WXLRESULT;
@@ -1962,8 +1943,6 @@ typedef int             (*WXFARPROC)();
 #else
 typedef int             (__stdcall *WXFARPROC)();
 #endif
-
-typedef WXLRESULT (wxSTDCALL *WXWNDPROC)(WXHWND, WXUINT, WXWPARAM, WXLPARAM);
 
 #endif /*  __WIN32__ */
 

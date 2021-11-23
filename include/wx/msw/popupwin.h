@@ -35,7 +35,7 @@ public:
     // return the style to be used for the popup windows
     DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const override;
 
-    // get the HWND to be used as parent of this window with CreateWindow()
+    // get the WXHWND to be used as parent of this window with CreateWindow()
     WXHWND MSWGetParent() const override;
 
 

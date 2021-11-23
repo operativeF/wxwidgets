@@ -182,12 +182,12 @@
 #elif defined(__WXMSW__)
 #define wxCAIRO_PLATFORM_METHODS(m) \
     m( cairo_surface_t*, cairo_win32_surface_create, \
-        (HDC hdc), (hdc), NULL ) \
+        (WXHDC hdc), (hdc), NULL ) \
     m( cairo_surface_t*, cairo_win32_surface_create_with_format, \
-        (HDC hdc, cairo_format_t format), (hdc, format), NULL ) \
+        (WXHDC hdc, cairo_format_t format), (hdc, format), NULL ) \
     m( cairo_surface_t*, cairo_win32_printing_surface_create, \
-        (HDC hdc), (hdc), NULL ) \
-    m( HDC, cairo_win32_surface_get_dc, \
+        (WXHDC hdc), (hdc), NULL ) \
+    m( WXHDC, cairo_win32_surface_get_dc, \
        (cairo_surface_t *surface), (surface), NULL )
 #else
 #define wxCAIRO_PLATFORM_METHODS(m)

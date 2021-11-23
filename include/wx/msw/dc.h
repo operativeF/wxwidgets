@@ -250,7 +250,7 @@ public:
 
 
 #if wxUSE_PALETTE
-    // MSW specific, select a logical palette into the HDC
+    // MSW specific, select a logical palette into the WXHDC
     // (tell windows to translate pixel from other palettes to our custom one
     // and vice versa)
     // Realize tells it to also reset the system palette to this one.
@@ -283,7 +283,7 @@ protected:
 
     wxBitmap          m_selectedBitmap;
 
-    // our HDC
+    // our WXHDC
     WXHDC             m_hDC{nullptr};
 
     // Store all old GDI objects when do a SelectObject, so we can select them
@@ -313,15 +313,15 @@ protected:
 };
 
 // ----------------------------------------------------------------------------
-// wxDCTemp: a wxDC which doesn't free the given HDC (used by wxWidgets
+// wxDCTemp: a wxDC which doesn't free the given WXHDC (used by wxWidgets
 // only/mainly)
 // ----------------------------------------------------------------------------
 
 class wxDCTempImpl : public wxMSWDCImpl
 {
 public:
-    // construct a temporary DC with the specified HDC and size (it should be
-    // specified whenever we know it for this HDC)
+    // construct a temporary DC with the specified WXHDC and size (it should be
+    // specified whenever we know it for this WXHDC)
     wxDCTempImpl(wxDC *owner, WXHDC hdc, const wxSize& size )
         : wxMSWDCImpl( owner, hdc ),
           m_size(size)

@@ -38,7 +38,7 @@ public:
     wxBrushStyle GetStyle() const override;
     wxBitmap *GetStipple() const override;
 
-    // return the HBRUSH for this brush
+    // return the WXHBRUSH for this brush
     WXHANDLE GetResourceHandle() const override;
 
 protected:

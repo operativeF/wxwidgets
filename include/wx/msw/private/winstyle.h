@@ -93,7 +93,7 @@ protected:
     //
     // Ctor is protected, this class can only be used as wxMSWWinStyleUpdater
     // or wxMSWWinExStyleUpdater.
-    wxMSWWinLongUpdater(HWND hwnd, int gwlSlot)
+    wxMSWWinLongUpdater(WXHWND hwnd, int gwlSlot)
         : m_hwnd(hwnd),
           m_gwlSlot(gwlSlot),
           m_styleCurrent(::GetWindowLongPtrW(hwnd, gwlSlot)),
@@ -102,7 +102,7 @@ protected:
     }
 
 private:
-    const HWND m_hwnd;
+    const WXHWND m_hwnd;
 
     LONG_PTR m_styleCurrent;
     LONG_PTR m_style;
@@ -114,7 +114,7 @@ private:
 class wxMSWWinStyleUpdater : public wxMSWWinLongUpdater
 {
 public:
-    explicit wxMSWWinStyleUpdater(HWND hwnd)
+    explicit wxMSWWinStyleUpdater(WXHWND hwnd)
         : wxMSWWinLongUpdater(hwnd, GWL_STYLE)
     {
     }
@@ -124,7 +124,7 @@ public:
 class wxMSWWinExStyleUpdater : public wxMSWWinLongUpdater
 {
 public:
-    explicit wxMSWWinExStyleUpdater(HWND hwnd)
+    explicit wxMSWWinExStyleUpdater(WXHWND hwnd)
         : wxMSWWinLongUpdater(hwnd, GWL_EXSTYLE)
     {
     }

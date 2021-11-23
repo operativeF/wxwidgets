@@ -151,7 +151,7 @@ static void PixelsToHimetric(SIZEL &sz)
     if (logY == 0)
     {
         // initaliase
-        HDC dc = GetDC(nullptr);
+        WXHDC dc = GetDC(nullptr);
         logX = GetDeviceCaps(dc, LOGPIXELSX);
         logY = GetDeviceCaps(dc, LOGPIXELSY);
         ReleaseDC(nullptr, dc);
@@ -207,7 +207,7 @@ public:
         m_bAmbientAppearance = true;
 
         m_hDCBuffer = nullptr;
-        m_hWndParent = (HWND)win->GetHWND();
+        m_hWndParent = (WXHWND)win->GetHWND();
     }
     virtual ~FrameSite()= default;
     //***************************IDispatch*****************************
@@ -294,7 +294,7 @@ public:
     }
 
     //**************************IOleWindow***************************
-    HRESULT STDMETHODCALLTYPE GetWindow(HWND * phwnd) override
+    HRESULT STDMETHODCALLTYPE GetWindow(WXHWND * phwnd) override
     {
         if (phwnd == nullptr)
             return E_INVALIDARG;
@@ -330,9 +330,9 @@ public:
 
     //********************IOleInPlaceFrame************************
 
-    STDMETHOD(InsertMenus)(HMENU, LPOLEMENUGROUPWIDTHS) override {return S_OK;}
-    STDMETHOD(SetMenu)(HMENU, HOLEMENU, HWND) override {return S_OK;}
-    STDMETHOD(RemoveMenus)(HMENU) override {return S_OK;}
+    STDMETHOD(InsertMenus)(WXHMENU, LPOLEMENUGROUPWIDTHS) override {return S_OK;}
+    STDMETHOD(SetMenu)(WXHMENU, HOLEMENU, WXHWND) override {return S_OK;}
+    STDMETHOD(RemoveMenus)(WXHMENU) override {return S_OK;}
     STDMETHOD(SetStatusText)(LPCOLESTR) override {return S_OK;}
     HRESULT STDMETHODCALLTYPE EnableModeless(BOOL) override {return S_OK;}
     HRESULT STDMETHODCALLTYPE TranslateAccelerator(LPMSG lpmsg, WORD) override
@@ -601,8 +601,8 @@ public:
     }
 
 protected:
-    HDC m_hDCBuffer;
-    HWND m_hWndParent;
+    WXHDC m_hDCBuffer;
+    WXHWND m_hWndParent;
 
     LCID m_nAmbientLocale;
     COLORREF m_clrAmbientForeColor;
@@ -851,7 +851,7 @@ wxActiveXContainer::~wxActiveXContainer()
             m_oleObject->Unadvise(m_docAdviseCookie);
 
         m_oleObject->DoVerb(
-            OLEIVERB_HIDE, nullptr, m_clientSite, 0, (HWND) GetHWND(), nullptr);
+            OLEIVERB_HIDE, nullptr, m_clientSite, 0, (WXHWND) GetHWND(), nullptr);
         m_oleObject->Close(OLECLOSE_NOSAVE);
         m_oleObject->SetClientSite(nullptr);
     }
@@ -1072,7 +1072,7 @@ void wxActiveXContainer::CreateActiveX(REFIID iid, IUnknown* pUnk)
         wxCopyRectToRECT(m_realparent->GetClientSize(), posRect);
 
         hret = m_oleObject->DoVerb(OLEIVERB_INPLACEACTIVATE, nullptr,
-            m_clientSite, 0, (HWND)m_realparent->GetHWND(), &posRect);
+            m_clientSite, 0, (WXHWND)m_realparent->GetHWND(), &posRect);
         CHECK_HR(hret);
 
         if (m_oleInPlaceObject.IsOk())
@@ -1089,7 +1089,7 @@ void wxActiveXContainer::CreateActiveX(REFIID iid, IUnknown* pUnk)
         }
 
         hret = m_oleObject->DoVerb(OLEIVERB_SHOW, nullptr, m_clientSite, 0,
-            (HWND)m_realparent->GetHWND(), &posRect);
+            (WXHWND)m_realparent->GetHWND(), &posRect);
         CHECK_HR(hret);
     }
 
@@ -1178,7 +1178,7 @@ void wxActiveXContainer::OnPaint(wxPaintEvent& WXUNUSED(event))
         RECTL *prcBounds = (RECTL *) &posRect;
         wxMSWDCImpl *msw = wxDynamicCast( dc.GetImpl() , wxMSWDCImpl );
         m_viewObject->Draw(DVASPECT_CONTENT, -1, nullptr, nullptr, nullptr,
-            (HDC)msw->GetHDC(), prcBounds, nullptr, nullptr, 0);
+            (WXHDC)msw->GetHDC(), prcBounds, nullptr, nullptr, 0);
     }
 }
 

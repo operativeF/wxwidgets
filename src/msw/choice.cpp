@@ -55,7 +55,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    // now create the real HWND
+    // now create the real WXHWND
     if ( !MSWCreateControl("COMBOBOX", "", pos, size) )
         return false;
 
@@ -599,7 +599,7 @@ void wxChoice::MSWDoPopupOrDismiss(bool show)
                   "can't popup/dismiss the list for simple combo box" );
 
     // we *must* set focus to the combobox before showing or hiding the drop
-    // down as without this we get WM_LBUTTONDOWN messages with invalid HWND
+    // down as without this we get WM_LBUTTONDOWN messages with invalid WXHWND
     // when hiding it (whether programmatically or manually) resulting in a
     // crash when we pass them to IsDialogMessage()
     //

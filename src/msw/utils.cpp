@@ -534,8 +534,8 @@ struct wxFindByPidParams
     wxFindByPidParams(const wxFindByPidParams&) = delete;
     wxFindByPidParams& operator=(const wxFindByPidParams&) = delete;
 
-    // the HWND used to return the result
-    HWND hwnd{nullptr};
+    // the WXHWND used to return the result
+    WXHWND hwnd{nullptr};
 
     // the PID we're looking from
     DWORD pid{0};
@@ -543,7 +543,7 @@ struct wxFindByPidParams
 
 // wxKill helper: EnumWindows() callback which is used to find the first (top
 // level) window belonging to the given process
-BOOL CALLBACK wxEnumFindByPidProc(HWND hwnd, LPARAM lParam)
+BOOL CALLBACK wxEnumFindByPidProc(WXHWND hwnd, LPARAM lParam)
 {
     DWORD pid;
     std::ignore = ::GetWindowThreadProcessId(hwnd, &pid);
@@ -1516,7 +1516,7 @@ extern long wxCharsetToCodepage(const char *name)
 
 #endif // wxUSE_FONTMAP/!wxUSE_FONTMAP
 
-extern "C" HWND
+extern "C" WXHWND
 wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 {
     wxCHECK_MSG( classname && pclassname && wndproc, nullptr,
@@ -1543,14 +1543,14 @@ wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
     }
 
     // next create the window
-    HWND hwnd = ::CreateWindowW
+    WXHWND hwnd = ::CreateWindowW
                   (
                     *pclassname,
                     nullptr,
                     0, 0, 0, 0,
                     0,
-                    (HWND) nullptr,
-                    (HMENU)nullptr,
+                    (WXHWND) nullptr,
+                    (WXHMENU)nullptr,
                     wxGetInstance(),
                     (LPVOID) nullptr
                   );

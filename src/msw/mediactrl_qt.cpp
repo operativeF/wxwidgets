@@ -28,11 +28,11 @@
 //---------------------------------------------------------------------------
 // Externals (somewhere in src/msw/app.cpp and src/msw/window.cpp)
 //---------------------------------------------------------------------------
-extern "C" HINSTANCE wxGetInstance(void);
+extern "C" WXHINSTANCE wxGetInstance(void);
 extern const wxChar *wxCanvasClassName;
 
 LRESULT APIENTRY
-wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 //---------------------------------------------------------------------------
 //  wxQTMediaBackend
@@ -369,7 +369,7 @@ public:
     static Boolean MCFilterProc(MovieController theController,
         short action, void *params, LONG_PTR refCon);
 
-    static LRESULT CALLBACK QTWndProc(HWND, UINT, WPARAM, LPARAM);
+    static LRESULT CALLBACK QTWndProc(WXHWND, UINT, WPARAM, LPARAM);
 
     bool ShowPlayerControls(wxMediaCtrlPlayerControls flags) override;
 
@@ -528,7 +528,7 @@ protected:
 // Forwards events to the Movie Controller so that it can
 // redraw itself/process messages etc..
 //---------------------------------------------------------------------------
-LRESULT CALLBACK wxQTMediaBackend::QTWndProc(HWND hWnd, UINT nMsg,
+LRESULT CALLBACK wxQTMediaBackend::QTWndProc(WXHWND hWnd, UINT nMsg,
                                              WPARAM wParam, LPARAM lParam)
 {
     wxQTMediaBackend* pThis = (wxQTMediaBackend*)wxGetWindowUserData(hWnd);
@@ -1058,7 +1058,7 @@ bool wxQTMediaBackend::ShowPlayerControls(wxMediaCtrlPlayerControls flags)
     if (m_pMC)
     {
         // restore old wndproc
-        wxSetWindowProc((HWND)m_ctrl->GetHWND(), wxWndProc);
+        wxSetWindowProc((WXHWND)m_ctrl->GetHWND(), wxWndProc);
         m_lib.DisposeMovieController(m_pMC);
         m_pMC = nullptr;
 
@@ -1111,10 +1111,10 @@ bool wxQTMediaBackend::ShowPlayerControls(wxMediaCtrlPlayerControls flags)
             m_lib.MCDoAction(m_pMC, 38/*mcActionSetFlags*/, wxUIntToPtr(mcFlags));
 
             // intercept the wndproc of our control window
-            wxSetWindowProc((HWND)m_ctrl->GetHWND(), wxQTMediaBackend::QTWndProc);
+            wxSetWindowProc((WXHWND)m_ctrl->GetHWND(), wxQTMediaBackend::QTWndProc);
 
             // set the user data of our window
-            wxSetWindowUserData((HWND)m_ctrl->GetHWND(), this);
+            wxSetWindowUserData((WXHWND)m_ctrl->GetHWND(), this);
         }
     }
 

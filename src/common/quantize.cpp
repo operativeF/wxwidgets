@@ -1550,7 +1550,7 @@ bool wxQuantize::Quantize(const wxImage& src, wxImage& dest,
         // Fill the first 20 entries with Windows system colours
         if (flags & wxQUANTIZE_INCLUDE_WINDOWS_COLOURS)
         {
-            HDC hDC = ::GetDC(nullptr);
+            WXHDC hDC = ::GetDC(nullptr);
             PALETTEENTRY* entries = new PALETTEENTRY[windowsSystemColourCount];
             ::GetSystemPaletteEntries(hDC, 0, windowsSystemColourCount, entries);
             ::ReleaseDC(nullptr, hDC);

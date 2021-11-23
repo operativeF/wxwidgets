@@ -15,6 +15,8 @@
 
 #include <chrono>
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
@@ -97,7 +99,7 @@ private:
     // but use GetToolTipCtrl() which will create it when needed
     static WXHWND ms_hwndTT;
 
-    // create the tooltip ctrl if it doesn't exist yet and return its HWND
+    // create the tooltip ctrl if it doesn't exist yet and return its WXHWND
     [[maybe_unused]] static WXHWND GetToolTipCtrl();
 
     // to be used in wxModule for deleting tooltip ctrl window when exiting mainloop

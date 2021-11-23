@@ -10,24 +10,24 @@
 namespace msw::wrap
 {
 
-void winInvalidateRect(HWND hWnd, RECT* rect, bool eraseBgToo)
+void winInvalidateRect(WXHWND hWnd, RECT* rect, bool eraseBgToo)
 {
     ::InvalidateRect(hWnd, rect, static_cast<BOOL>(eraseBgToo));
 }
 
-void winSetWindowPos(HWND hWnd, HWND hWndInsertAfter, wxPoint pos, wxSize sz, UINT uFlags)
+void winSetWindowPos(WXHWND hWnd, WXHWND hWndInsertAfter, wxPoint pos, wxSize sz, UINT uFlags)
 {
     ::SetWindowPos(hWnd, hWndInsertAfter, pos.x, pos.y, sz.x, sz.y, uFlags);
 }
 
-HWND winCreateWindow(long exStyle,
+WXHWND winCreateWindow(long exStyle,
                      const std::string& className,
                      const std::string& wndClass,
                      unsigned int style,
                      wxRect wndExtents,
-                     HWND hParent,
-                     HMENU hMenu,
-                     HINSTANCE hInstance,
+                     WXHWND hParent,
+                     WXHMENU hMenu,
+                     WXHINSTANCE hInstance,
                      void* lpParam)
 {
     boost::nowide::wstackstring stackClassName{className.c_str()};

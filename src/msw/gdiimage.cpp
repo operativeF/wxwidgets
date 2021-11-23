@@ -310,7 +310,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
                                     wxSize WXUNUSED(desiredSz))
 {
     // TODO: load colourmap.
-    HBITMAP hbmp = ::LoadBitmapW(wxGetInstance(), boost::nowide::widen(name).c_str());
+    WXHBITMAP hbmp = ::LoadBitmapW(wxGetInstance(), boost::nowide::widen(name).c_str());
     if ( hbmp == nullptr )
     {
         // it's probably not found
@@ -330,7 +330,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
     }
     else
     {
-        wxLogLastError("GetObject(HBITMAP)");
+        wxLogLastError("GetObject(WXHBITMAP)");
         w = h = d = 0;
     }
 
@@ -547,7 +547,7 @@ bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
         {
             if ( name == stdIcons[nIcon].name )
             {
-                hicon = ::LoadIconW((HINSTANCE)nullptr, stdIcons[nIcon].id);
+                hicon = ::LoadIconW((WXHINSTANCE)nullptr, stdIcons[nIcon].id);
                 break;
             }
         }
@@ -618,7 +618,7 @@ wxSize wxGetHiconSize(WXHICON hicon)
         AutoIconInfo info;
         if ( info.GetFrom(hicon) )
         {
-            HBITMAP hbmp = info.hbmMask;
+            WXHBITMAP hbmp = info.hbmMask;
             if ( hbmp )
             {
                 BITMAP bm;

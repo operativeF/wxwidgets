@@ -48,9 +48,9 @@ protected:
 
 
 
-    // We use either the HDC of the provided wxDC or an HDC created for our
+    // We use either the WXHDC of the provided wxDC or an WXHDC created for our
     // window.
-    HDC m_hdc{nullptr};
+    WXHDC m_hdc{nullptr};
 
     // If we change the font in BeginMeasuring(), we restore it to the old one
     // in EndMeasuring().

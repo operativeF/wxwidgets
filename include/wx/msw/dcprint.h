@@ -63,7 +63,7 @@ private:
     wxDECLARE_CLASS(wxPrinterDCImpl);
 };
 
-// Gets an HDC for the specified printer configuration
+// Gets an WXHDC for the specified printer configuration
 WXHDC wxGetPrinterDC(const wxPrintData& data);
 
 // ------------------------------------------------------------------------

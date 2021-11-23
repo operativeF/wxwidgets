@@ -87,7 +87,7 @@ struct wxExecuteData
         }
     }
 
-    HWND       hWnd{};          // window to send wxWM_PROC_TERMINATED to
+    WXHWND       hWnd{};          // window to send wxWM_PROC_TERMINATED to
     HANDLE     hProcess{};      // handle of the process
     
     // The rest is initialized in the code creating the objects of this
@@ -301,7 +301,7 @@ static DWORD __stdcall wxExecuteThread(void *arg)
 // window procedure of a hidden window which is created just to receive
 // the notification message when a process exits
 LRESULT APIENTRY
-wxExecuteWindowCbk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxExecuteWindowCbk(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     if ( message == wxWM_PROC_TERMINATED )
     {
@@ -868,7 +868,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 
     // create a hidden window to receive notification about process
     // termination
-    HWND hwnd = wxCreateHiddenWindow
+    WXHWND hwnd = wxCreateHiddenWindow
                 (
                     &gs_classForHiddenWindow,
                     wxMSWEXEC_WNDCLASSNAME,

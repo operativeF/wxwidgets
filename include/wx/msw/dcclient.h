@@ -92,7 +92,7 @@ protected:
 
 /*
  * wxPaintDCEx
- * This struct is used when an application sends an HDC with the WM_PAINT
+ * This struct is used when an application sends an WXHDC with the WM_PAINT
  * message. It is used in HandlePaint and need not be used by an application.
  */
 

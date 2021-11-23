@@ -37,7 +37,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontDialog, wxDialog);
 
 static
 UINT_PTR CALLBACK
-wxFontDialogHookProc(HWND hwnd,
+wxFontDialogHookProc(WXHWND hwnd,
                      UINT uiMsg,
                      WPARAM WXUNUSED(wParam),
                      LPARAM lParam)

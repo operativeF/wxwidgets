@@ -31,7 +31,7 @@ import <string>;
 // ---------------------------------------------------------------------------
 
 extern INT_PTR APIENTRY
-wxDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxDlgProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // ===========================================================================
 // implementation
@@ -42,9 +42,9 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, wxWindowID id)
     m_windowId = id;
 
     wxWindowCreationHook hook(this);
-    m_hWnd = (WXHWND)::CreateDialogW((HINSTANCE)wxGetInstance(),
+    m_hWnd = (WXHWND)::CreateDialogW((WXHINSTANCE)wxGetInstance(),
                                     MAKEINTRESOURCEW(id),
-                                    parent ? (HWND)parent->GetHWND() : nullptr,
+                                    parent ? (WXHWND)parent->GetHWND() : nullptr,
                                     (DLGPROC) wxDlgProc);
 
     if ( !m_hWnd )
@@ -58,13 +58,13 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, wxWindowID id)
         wxTopLevelWindows.Append(this);
 
     // Enumerate all children
-    HWND hWndNext;
-    hWndNext = ::GetWindow((HWND) m_hWnd, GW_CHILD);
+    WXHWND hWndNext;
+    hWndNext = ::GetWindow((WXHWND) m_hWnd, GW_CHILD);
 
     if (hWndNext)
         CreateWindowFromHWND(this, (WXHWND) hWndNext);
 
-    while (hWndNext != (HWND) nullptr)
+    while (hWndNext != (WXHWND) nullptr)
     {
         hWndNext = ::GetWindow(hWndNext, GW_HWNDNEXT);
         if (hWndNext)
@@ -79,9 +79,9 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, const std::string& name)
     SetName(name);
 
     wxWindowCreationHook hook(this);
-    m_hWnd = (WXHWND)::CreateDialogW((HINSTANCE) wxGetInstance(),
+    m_hWnd = (WXHWND)::CreateDialogW((WXHINSTANCE) wxGetInstance(),
                                     boost::nowide::widen(name).c_str(),
-                                    parent ? (HWND)parent->GetHWND() : nullptr,
+                                    parent ? (WXHWND)parent->GetHWND() : nullptr,
                                     (DLGPROC)wxDlgProc);
 
     if ( !m_hWnd )
@@ -95,13 +95,13 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, const std::string& name)
         wxTopLevelWindows.Append(this);
 
     // Enumerate all children
-    HWND hWndNext;
-    hWndNext = ::GetWindow((HWND) m_hWnd, GW_CHILD);
+    WXHWND hWndNext;
+    hWndNext = ::GetWindow((WXHWND) m_hWnd, GW_CHILD);
 
     if (hWndNext)
         CreateWindowFromHWND(this, (WXHWND) hWndNext);
 
-    while (hWndNext != (HWND) nullptr)
+    while (hWndNext != (WXHWND) nullptr)
     {
         hWndNext = ::GetWindow(hWndNext, GW_HWNDNEXT);
         if (hWndNext)
@@ -139,7 +139,7 @@ wxWindow* wxWindow::GetWindowChild(wxWindowID id)
     wxWindow* win = GetWindowChild1(id);
     if ( !win )
     {
-        HWND hwnd = ::GetDlgItem(GetHwnd(), id);
+        WXHWND hwnd = ::GetDlgItem(GetHwnd(), id);
         if ( hwnd )
         {
             win = CreateWindowFromHWND(this, (WXHWND) hwnd);
@@ -150,7 +150,7 @@ wxWindow* wxWindow::GetWindowChild(wxWindowID id)
 }
 
 // ---------------------------------------------------------------------------
-// create wxWin window from a native HWND
+// create wxWin window from a native WXHWND
 // ---------------------------------------------------------------------------
 
 wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
@@ -161,7 +161,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
     wx::utils::ToUpper(str);
 
     long id = wxGetWindowId(hWnd);
-    unsigned int style = ::GetWindowLongPtrW((HWND) hWnd, GWL_STYLE);
+    unsigned int style = ::GetWindowLongPtrW((WXHWND) hWnd, GWL_STYLE);
 
     wxWindow* win = nullptr;
 
@@ -301,7 +301,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
     return win;
 }
 
-// Make sure the window style (etc.) reflects the HWND style (roughly)
+// Make sure the window style (etc.) reflects the WXHWND style (roughly)
 void wxWindow::AdoptAttributesFromHWND()
 {
     SetId(wxGetWindowId(m_hWnd));

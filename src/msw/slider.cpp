@@ -105,19 +105,19 @@ bool wxSlider::Create(wxWindow *parent,
     {
         m_labels = new wxSubwindows(SliderLabel_Last);
 
-        HWND hwndParent = GetHwndOf(parent);
+        WXHWND hwndParent = GetHwndOf(parent);
         for ( size_t n = 0; n < SliderLabel_Last; n++ )
         {
             wxWindowIDRef lblid = NewControlId();
 
-            HWND wnd = ::CreateWindowW
+            WXHWND wnd = ::CreateWindowW
                          (
                             L"STATIC",
                             nullptr,
                             WS_CHILD | WS_VISIBLE | SS_CENTER,
                             0, 0, 0, 0,
                             hwndParent,
-                            (HMENU)wxUIntToPtr(lblid.GetValue()),
+                            (WXHMENU)wxUIntToPtr(lblid.GetValue()),
                             wxGetInstance(),
                             nullptr
                          );
@@ -264,7 +264,7 @@ bool wxSlider::MSWOnScroll(int WXUNUSED(orientation),
             return false;
     }
 
-    int newPos = ValueInvertOrNot((int) ::SendMessageW((HWND) control, TBM_GETPOS, 0, 0));
+    int newPos = ValueInvertOrNot((int) ::SendMessageW((WXHWND) control, TBM_GETPOS, 0, 0));
     if ( (newPos < GetMin()) || (newPos > GetMax()) )
     {
         // out of range - but we did process it
@@ -432,11 +432,11 @@ void wxSlider::DoMoveWindow(wxRect boundary)
                     holdBottomX = 0;
             }
 
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Min], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Min], wxRect{
                 boundary.x + holdTopX,
                 boundary.y,
                 minLabelWidth, labelHeight});
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Max], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Max], wxRect{
                 boundary.x + holdBottomX,
                 boundary.y + boundary.height - labelHeight,
                 maxLabelWidth, labelHeight});
@@ -446,7 +446,7 @@ void wxSlider::DoMoveWindow(wxRect boundary)
 
         if ( HasFlag(wxSL_VALUE_LABEL) )
         {
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Value], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Value], wxRect{
                 boundary.x + ( HasFlag(wxSL_LEFT) ? thumbSize + tickOffset + HGAP : 0 ),
                 boundary.y + (boundary.height - labelHeight) / 2,
                 longestLabelWidth, labelHeight});
@@ -474,7 +474,7 @@ void wxSlider::DoMoveWindow(wxRect boundary)
 
         if ( HasFlag(wxSL_VALUE_LABEL) )
         {
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Value], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Value], wxRect{
                 boundary.x + xLabelValue,
                 boundary.y + (HasFlag(wxSL_BOTTOM) ? 0 : thumbSize + tickOffset),
                 longestLabelWidth, labelHeight});
@@ -488,11 +488,11 @@ void wxSlider::DoMoveWindow(wxRect boundary)
 
         if ( HasFlag(wxSL_MIN_MAX_LABELS) )
         {
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Min], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Min], wxRect{
                 boundary.x,
                 boundary.y + yLabelMinMax,
                 minLabelWidth, labelHeight});
-            DoMoveSibling((HWND)(*m_labels)[SliderLabel_Max], wxRect{
+            DoMoveSibling((WXHWND)(*m_labels)[SliderLabel_Max], wxRect{
                 boundary.x + boundary.width - maxLabelWidth,
                 boundary.y + yLabelMinMax,
                 maxLabelWidth, labelHeight});

@@ -36,9 +36,9 @@ inline int GetMultilineStyle(std::string_view label)
     return label.find('\n') == std::string_view::npos ? 0 : BS_MULTILINE;
 }
 
-// update the style of the specified HWND to include or exclude BS_MULTILINE
+// update the style of the specified WXHWND to include or exclude BS_MULTILINE
 // depending on whether the label contains the new lines
-void UpdateMultilineStyle(HWND hwnd, std::string_view label);
+void UpdateMultilineStyle(WXHWND hwnd, std::string_view label);
 
 // flags for ComputeBestSize() and GetFittingSize()
 enum

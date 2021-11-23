@@ -51,7 +51,7 @@ void wxTextMeasure::BeginMeasuring()
     }
 
     // We need to set the font if it's explicitly specified, of course, but
-    // also if we're associated with a window because the window HDC created
+    // also if we're associated with a window because the window WXHDC created
     // above has the default font selected into it and not the font of the
     // window.
     if ( m_font || m_win )
@@ -68,7 +68,7 @@ void wxTextMeasure::EndMeasuring()
 
     if ( m_win )
         ::ReleaseDC(GetHwndOf(m_win), m_hdc);
-    //else: our HDC belongs to m_dc, don't touch it
+    //else: our WXHDC belongs to m_dc, don't touch it
 
     m_hdc = nullptr;
 }

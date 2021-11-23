@@ -178,7 +178,7 @@ public:
     void DissociateHandle() override;
 
     // returns the handle of the native window to focus when this wxWindow gets
-    // focus  (i.e. in composite windows: by default, this is just the HWND for
+    // focus  (i.e. in composite windows: by default, this is just the WXHWND for
     // this window itself, but it can be overridden to return something
     // different for composite controls
     virtual WXHWND MSWGetFocusHWND() const { return GetHWND(); }
@@ -261,7 +261,7 @@ public:
     // created yet)
     void MSWUpdateStyle(long flagsOld, long exflagsOld);
 
-    // get the HWND to be used as parent of this window with CreateWindow()
+    // get the WXHWND to be used as parent of this window with CreateWindow()
     virtual WXHWND MSWGetParent() const;
 
     // Return the name of the Win32 class that should be used by this wxWindow
@@ -284,10 +284,10 @@ public:
     virtual bool MSWCommand(WXUINT param, WXWORD id);
 
 #ifndef __WXUNIVERSAL__
-    // Create an appropriate wxWindow from a HWND
+    // Create an appropriate wxWindow from a WXHWND
     virtual wxWindow* CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd);
 
-    // Make sure the window style reflects the HWND style (roughly)
+    // Make sure the window style reflects the WXHWND style (roughly)
     virtual void AdoptAttributesFromHWND();
 #endif // __WXUNIVERSAL__
 
@@ -686,7 +686,7 @@ protected:
     void DoFreeze() override;
     void DoThaw() override;
 
-    // this simply moves/resizes the given HWND which is supposed to be our
+    // this simply moves/resizes the given WXHWND which is supposed to be our
     // sibling (this is useful for controls which are composite at MSW level
     // and for which DoMoveWindow() is not enough)
     //
@@ -757,7 +757,7 @@ protected:
     bool MSWEnableHWND(WXHWND hWnd, bool enable);
 
     // Return the pointer to this window or one of its sub-controls if this ID
-    // and HWND combination belongs to one of them.
+    // and WXHWND combination belongs to one of them.
     //
     // This is used by FindItem() and is overridden in wxControl, see there.
     virtual wxWindow* MSWFindItem(long WXUNUSED(id), WXHWND WXUNUSED(hWnd)) const
@@ -806,7 +806,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-// window creation helper class: before creating a new HWND, instantiate an
+// window creation helper class: before creating a new WXHWND, instantiate an
 // object of this class on stack - this allows to process the messages sent to
 // the window even before CreateWindow() returns
 class wxWindowCreationHook

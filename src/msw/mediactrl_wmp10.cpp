@@ -808,8 +808,8 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
 
     HRESULT hr;
     RECT rcClient;
-    ::GetClientRect((HWND)ctrl->GetHandle(), &rcClient);
-    m_wndView.Create((HWND)ctrl->GetHandle(), rcClient, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, WS_EX_CLIENTEDGE);
+    ::GetClientRect((WXHWND)ctrl->GetHandle(), &rcClient);
+    m_wndView.Create((WXHWND)ctrl->GetHandle(), rcClient, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, WS_EX_CLIENTEDGE);
     hr = m_wndView.QueryHost(&spHost);
     hr = spHost->CreateControl(CComBSTR("{6BF52A52-394A-11d3-B153-00C04F79FAA6}"), m_wndView, 0);
     hr = m_wndView.QueryControl(&m_pWMPPlayer);

@@ -422,7 +422,7 @@ public:
     virtual double GetContentScaleFactor() const { return m_contentScaleFactor; }
 
 #ifdef __WXMSW__
-    // Native Windows functions using the underlying HDC don't honour GDI+
+    // Native Windows functions using the underlying WXHDC don't honour GDI+
     // transformations which may be applied to it. Using this function we can
     // transform the coordinates manually before passing them to such functions
     // (as in e.g. wxRendererMSW code). It doesn't do anything if this is not a
@@ -1136,9 +1136,9 @@ public:
 #endif // wxUSE_SPLINES
 
 #ifdef WX_WINDOWS
-    // GetHDC() is the simplest way to retrieve an HDC From a wxDC but only
+    // GetHDC() is the simplest way to retrieve an WXHDC From a wxDC but only
     // works if this wxDC is GDI-based and fails for GDI+ contexts (and
-    // anything else without HDC, e.g. wxPostScriptDC)
+    // anything else without WXHDC, e.g. wxPostScriptDC)
     WXHDC GetHDC() const;
 
     // don't use these methods manually, use GetTempHDC() instead

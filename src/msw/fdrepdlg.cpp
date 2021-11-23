@@ -21,7 +21,7 @@
 // functions prototypes
 // ----------------------------------------------------------------------------
 
-UINT_PTR CALLBACK wxFindReplaceDialogHookProc(HWND hwnd,
+UINT_PTR CALLBACK wxFindReplaceDialogHookProc(WXHWND hwnd,
                                               UINT uiMsg,
                                               WPARAM wParam,
                                               LPARAM lParam);
@@ -250,7 +250,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
 // ----------------------------------------------------------------------------
 
 UINT_PTR CALLBACK
-wxFindReplaceDialogHookProc(HWND hwnd,
+wxFindReplaceDialogHookProc(WXHWND hwnd,
                             UINT uiMsg,
                             WPARAM WXUNUSED(wParam),
                             LPARAM lParam)
@@ -369,7 +369,7 @@ bool wxFindReplaceDialog::Show(bool show)
 
     // call the right function to show the dialog which does what we want
     FINDREPLACE *pFR = m_impl->GetPtrFindReplace();
-    HWND hwnd;
+    WXHWND hwnd;
     if ( replace )
         hwnd = ::ReplaceTextW(pFR);
     else

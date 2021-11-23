@@ -26,7 +26,7 @@ import WX.Win.UniqueHnd;
 namespace
 {
 
-int wxGetHDCDepth(HDC hdc)
+int wxGetHDCDepth(WXHDC hdc)
 {
     return ::GetDeviceCaps(hdc, PLANES) * GetDeviceCaps(hdc, BITSPIXEL);
 }
@@ -196,7 +196,7 @@ public:
 private:
     // EnumDisplayMonitors() callback
     static BOOL CALLBACK MultimonEnumProc(HMONITOR hMonitor,
-                                          HDC hdcMonitor,
+                                          WXHDC hdcMonitor,
                                           LPRECT lprcMonitor,
                                           LPARAM dwData);
 
@@ -252,7 +252,7 @@ private:
 
     // The hidden window we use for receiving WM_SETTINGCHANGE and its class
     // name.
-    HWND m_hiddenHwnd{nullptr};
+    WXHWND m_hiddenHwnd{nullptr};
     const wchar_t* m_hiddenClass{nullptr}; // FIXME: Use narrow string.
 };
 
@@ -478,7 +478,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxDisplayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+wxDisplayWndProc(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if ( (msg == WM_SETTINGCHANGE && wParam == SPI_SETWORKAREA) ||
             msg == WM_DISPLAYCHANGE )
@@ -548,7 +548,7 @@ void wxDisplayFactoryMSW::DoRefreshMonitors()
 {
     m_displays.clear();
 
-    // Note that we pass NULL as first parameter here because using screen HDC
+    // Note that we pass NULL as first parameter here because using screen WXHDC
     // doesn't work reliably: notably, it doesn't enumerate any displays if
     // this code is executed while a UAC prompt is shown or during log-off.
     if ( !::EnumDisplayMonitors(nullptr, nullptr, MultimonEnumProc, (LPARAM)this) )
@@ -561,7 +561,7 @@ void wxDisplayFactoryMSW::DoRefreshMonitors()
 BOOL CALLBACK
 wxDisplayFactoryMSW::MultimonEnumProc(
     HMONITOR hMonitor,              // handle to display monitor
-    HDC /* hdcMonitor */,           // handle to monitor-appropriate device context:
+    WXHDC /* hdcMonitor */,           // handle to monitor-appropriate device context:
                                     // not set due to our use of EnumDisplayMonitors(NULL, ...)
     LPRECT WXUNUSED(lprcMonitor),   // pointer to monitor intersection rectangle
     LPARAM dwData)                  // data passed from EnumDisplayMonitors (this)
@@ -574,7 +574,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
         wxLogLastError("GetMonitorInfo");
     }
 
-    HDC hdcMonitor = ::CreateDCW(nullptr, monInfo.szDevice, nullptr, nullptr);
+    WXHDC hdcMonitor = ::CreateDCW(nullptr, monInfo.szDevice, nullptr, nullptr);
     const int hdcDepth = wxGetHDCDepth(hdcMonitor);
     ::DeleteDC(hdcMonitor);
 

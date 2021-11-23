@@ -96,7 +96,7 @@ wxDynamicLibraryDetailsCreator::EnumModulesProc(const wxChar* name,
     details->m_length = size;
 
     // to get the version, we first need the full path
-    const HMODULE hmod = wxDynamicLibrary::MSWGetModuleHandle
+    const WXHMODULE hmod = wxDynamicLibrary::MSWGetModuleHandle
                          (
                             details->m_name,
                             details->m_address
@@ -227,9 +227,9 @@ namespace
 // to get the module handle from the given address. Returns NULL if it fails to
 // either resolve the function (which can only happen on pre-Vista systems
 // normally) or if the function itself failed.
-HMODULE CallGetModuleHandleEx(const void* addr)
+WXHMODULE CallGetModuleHandleEx(const void* addr)
 {
-    using GetModuleHandleEx_t = BOOL (WINAPI*)(DWORD, LPCTSTR, HMODULE *);
+    using GetModuleHandleEx_t = BOOL (WINAPI*)(DWORD, LPCTSTR, WXHMODULE *);
 
     static const GetModuleHandleEx_t INVALID_FUNC_PTR = (GetModuleHandleEx_t)-1;
 
@@ -248,7 +248,7 @@ HMODULE CallGetModuleHandleEx(const void* addr)
 
     // flags are GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT |
     //           GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS
-    HMODULE hmod;
+    WXHMODULE hmod;
     if ( !s_pfnGetModuleHandleEx(6, (LPCTSTR)addr, &hmod) )
         return nullptr;
 
@@ -260,7 +260,7 @@ HMODULE CallGetModuleHandleEx(const void* addr)
 /* static */
 void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 {
-    HMODULE hmod = CallGetModuleHandleEx(addr);
+    WXHMODULE hmod = CallGetModuleHandleEx(addr);
     if ( !hmod )
     {
         wxLogLastError("GetModuleHandleEx");
@@ -285,7 +285,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
         *path = libname;
     }
 
-    // In Windows HMODULE is actually the base address of the module so we
+    // In Windows WXHMODULE is actually the base address of the module so we
     // can just cast it to the address.
     return hmod;
 }
@@ -297,7 +297,7 @@ WXHMODULE wxDynamicLibrary::MSWGetModuleHandle(const wxString& name, void *addr)
     // because the former works correctly for comctl32.dll while the latter
     // returns NULL when comctl32.dll version 6 is used under XP (note that
     // GetModuleHandleEx() is only available under XP and later, coincidence?)
-    HMODULE hmod = CallGetModuleHandleEx(addr);
+    WXHMODULE hmod = CallGetModuleHandleEx(addr);
 
     return hmod ? hmod : ::GetModuleHandleW(name.t_str());
 }

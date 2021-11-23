@@ -35,7 +35,7 @@ public:
 
     bool operator==(const wxBrushRefData& data) const;
 
-    HBRUSH GetHBRUSH();
+    WXHBRUSH GetHBRUSH();
 
     const wxColour& GetColour() const { return m_colour; }
     wxBrushStyle GetStyle() const { return m_style; }
@@ -85,7 +85,7 @@ wxBrushRefData::wxBrushRefData(const wxBrushRefData& data)
 {
     m_style = data.m_style;
 
-    // we can't share HBRUSH, we'd need to create another one ourselves
+    // we can't share WXHBRUSH, we'd need to create another one ourselves
     m_hBrush.reset();
 }
 
@@ -126,7 +126,7 @@ static int TranslateHatchStyle(wxBrushStyle style)
     }
 }
 
-HBRUSH wxBrushRefData::GetHBRUSH()
+WXHBRUSH wxBrushRefData::GetHBRUSH()
 {
     if ( !m_hBrush )
     {
@@ -137,7 +137,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
             switch ( m_style )
             {
                 case wxBrushStyle::Transparent:
-                    m_hBrush = unique_brush(static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH)));
+                    m_hBrush = unique_brush(static_cast<WXHBRUSH>(::GetStockObject(NULL_BRUSH)));
                     break;
 
                 case wxBrushStyle::Stipple:
@@ -145,7 +145,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
                     break;
 
                 case wxBrushStyle::StippleMaskOpaque:
-                    m_hBrush = unique_brush(::CreatePatternBrush((HBITMAP)m_stipple.GetMask()
+                    m_hBrush = unique_brush(::CreatePatternBrush((WXHBITMAP)m_stipple.GetMask()
                                                         ->GetMaskBitmap()));
                     break;
 

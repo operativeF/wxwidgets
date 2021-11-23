@@ -32,6 +32,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 import Utils.Strings;
 
 // ----------------------------------------------------------------------------
@@ -53,7 +55,7 @@ namespace
 {
 
 // make the given menu item default
-void SetDefaultMenuItem(HMENU hmenu, UINT id)
+void SetDefaultMenuItem(WXHMENU hmenu, UINT id)
 {
     WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_STATE;
@@ -66,7 +68,7 @@ void SetDefaultMenuItem(HMENU hmenu, UINT id)
 }
 
 // make the given menu item owner-drawn
-void SetOwnerDrawnMenuItem(HMENU hmenu,
+void SetOwnerDrawnMenuItem(WXHMENU hmenu,
                            UINT id,
                            ULONG_PTR data,
                            BOOL byPositon = FALSE)
@@ -277,7 +279,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
         flags |= MF_SEPARATOR;
     }
 
-    // id is the numeric id for normal menu items and HMENU for submenus as
+    // id is the numeric id for normal menu items and WXHMENU for submenus as
     // required by ::AppendMenu() API
     UINT_PTR id;
     wxMenu *submenu = pItem->GetSubMenu();
@@ -666,7 +668,7 @@ void wxMenu::SetTitle(const std::string& label)
     bool hasNoTitle = m_title.empty();
     m_title = label;
 
-    HMENU hMenu = GetHmenu();
+    WXHMENU hMenu = GetHmenu();
 
     if ( hasNoTitle )
     {
@@ -816,7 +818,7 @@ wxMenuBar::~wxMenuBar()
     // which happens if we're attached to a frame
     if (m_hMenu && !IsAttached())
     {
-        ::DestroyMenu((HMENU)m_hMenu);
+        ::DestroyMenu((WXHMENU)m_hMenu);
         m_hMenu = (WXHMENU)nullptr;
     }
 }
@@ -852,7 +854,7 @@ WXHMENU wxMenuBar::Create()
               it != m_menus.end();
               ++it )
         {
-            if ( !::AppendMenuW((HMENU)m_hMenu, MF_POPUP | MF_STRING,
+            if ( !::AppendMenuW((WXHMENU)m_hMenu, MF_POPUP | MF_STRING,
                                (UINT_PTR)(*it)->GetHMenu(),
                                boost::nowide::widen((*it)->GetTitle()).c_str()) )
             {
@@ -870,17 +872,17 @@ int wxMenuBar::MSWPositionForWxMenu(wxMenu *menu, int wxpos)
     wxASSERT(menu->GetHMenu());
     wxASSERT(m_hMenu);
 
-    int totalMSWItems = GetMenuItemCount((HMENU)m_hMenu);
+    int totalMSWItems = GetMenuItemCount((WXHMENU)m_hMenu);
 
     int i; // For old C++ compatibility
     for(i=wxpos; i<totalMSWItems; i++)
     {
-        if(GetSubMenu((HMENU)m_hMenu,i)==(HMENU)menu->GetHMenu())
+        if(GetSubMenu((WXHMENU)m_hMenu,i)==(WXHMENU)menu->GetHMenu())
             return i;
     }
     for(i=0; i<wxpos; i++)
     {
-        if(GetSubMenu((HMENU)m_hMenu,i)==(HMENU)menu->GetHMenu())
+        if(GetSubMenu((WXHMENU)m_hMenu,i)==(WXHMENU)menu->GetHMenu())
             return i;
     }
     wxFAIL;
@@ -901,7 +903,7 @@ void wxMenuBar::EnableTop(size_t pos, bool enable)
 
     int flag = enable ? MF_ENABLED : MF_GRAYED;
 
-    ::EnableMenuItem((HMENU)m_hMenu, MSWPositionForWxMenu(GetMenu(pos),pos), MF_BYPOSITION | flag);
+    ::EnableMenuItem((WXHMENU)m_hMenu, MSWPositionForWxMenu(GetMenu(pos),pos), MF_BYPOSITION | flag);
 
     Refresh();
 }
@@ -934,7 +936,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
     int mswpos = MSWPositionForWxMenu(GetMenu(pos),pos);
 
     UINT_PTR id;
-    UINT flagsOld = ::GetMenuState((HMENU)m_hMenu, mswpos, MF_BYPOSITION);
+    UINT flagsOld = ::GetMenuState((WXHMENU)m_hMenu, mswpos, MF_BYPOSITION);
     if ( flagsOld == 0xFFFFFFFF )
     {
         wxLogLastError("GetMenuState");
@@ -946,7 +948,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
     {
         // HIBYTE contains the number of items in the submenu in this case
         flagsOld &= 0xff;
-        id = (UINT_PTR)::GetSubMenu((HMENU)m_hMenu, mswpos);
+        id = (UINT_PTR)::GetSubMenu((WXHMENU)m_hMenu, mswpos);
     }
     else
     {

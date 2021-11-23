@@ -987,7 +987,7 @@ unsigned long wxSysErrorCode()
 
 #if defined(WX_WINDOWS)
 
-wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
+wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
 {
     DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER |
                   FORMAT_MESSAGE_FROM_SYSTEM |

@@ -164,7 +164,7 @@ public:
 
 private:
     // the handles to richedit 1.0 and 2.0 (or 3.0) DLLs
-    static HINSTANCE ms_hRichEdit[Version_Max];
+    static WXHINSTANCE ms_hRichEdit[Version_Max];
 
 #if wxUSE_INKEDIT
     static wxDynamicLibrary ms_inkEditLib;
@@ -174,7 +174,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxRichEditModule);
 };
 
-HINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { nullptr, nullptr, nullptr };
+WXHINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { nullptr, nullptr, nullptr };
 
 #if wxUSE_INKEDIT
 wxDynamicLibrary wxRichEditModule::ms_inkEditLib;
@@ -204,7 +204,7 @@ public:
     wxSTDMETHODIMP QueryInsertObject(LPCLSID WXUNUSED(clsid), LPSTORAGE WXUNUSED(stg), LONG WXUNUSED(cp)) override { return E_NOTIMPL; }
     wxSTDMETHODIMP ShowContainerUI(BOOL WXUNUSED(show)) override { return E_NOTIMPL; }
 
-    wxSTDMETHODIMP GetContextMenu(WORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), HMENU *menu) override
+    wxSTDMETHODIMP GetContextMenu(WORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), WXHMENU *menu) override
     {
         // 'menu' will be shown and destroyed by the caller. We need to keep
         // its wx counterpart, the wxMenu instance, around until it is
@@ -670,12 +670,12 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
     return true;
 }
 
-// Make sure the window style (etc.) reflects the HWND style (roughly)
+// Make sure the window style (etc.) reflects the WXHWND style (roughly)
 void wxTextCtrl::AdoptAttributesFromHWND()
 {
     wxWindow::AdoptAttributesFromHWND();
 
-    HWND hWnd = GetHwnd();
+    WXHWND hWnd = GetHwnd();
     unsigned int style = ::GetWindowLongPtrW(hWnd, GWL_STYLE);
 
     // retrieve the style to see whether this is an edit or richedit ctrl
@@ -795,7 +795,7 @@ void wxTextCtrl::SetWindowStyleFlag(unsigned int style)
             const wxSize size = GetSize();
 
             // delete the old window
-            HWND hwnd = GetHwnd();
+            WXHWND hwnd = GetHwnd();
             DissociateHandle();
             ::DestroyWindow(hwnd);
 
@@ -1184,7 +1184,7 @@ void wxTextCtrl::GetSelection(long *from, long *to) const
 
 void wxTextCtrl::DoSetSelection(long from, long to, unsigned int flags)
 {
-    HWND hWnd = GetHwnd();
+    WXHWND hWnd = GetHwnd();
 
 #if wxUSE_RICHEDIT
     if ( IsRich() )
@@ -1320,7 +1320,7 @@ long wxTextCtrl::XYToPosition(long x, long y) const
 
 bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
 {
-    HWND hWnd = GetHwnd();
+    WXHWND hWnd = GetHwnd();
 
     // This gets the line number containing the character
     LRESULT lineNo;
@@ -1580,7 +1580,7 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
 
 void wxTextCtrl::ShowPosition(long pos)
 {
-    HWND hWnd = GetHwnd();
+    WXHWND hWnd = GetHwnd();
 
     // To scroll to a position, we pass the number of lines and characters
     // to scroll *by*. This means that we need to:
@@ -3384,7 +3384,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
 // wxRichEditModule
 // ----------------------------------------------------------------------------
 
-static const HINSTANCE INVALID_HINSTANCE = (HINSTANCE)-1;
+static const WXHINSTANCE INVALID_HINSTANCE = (WXHINSTANCE)-1;
 
 bool wxRichEditModule::OnInit()
 {

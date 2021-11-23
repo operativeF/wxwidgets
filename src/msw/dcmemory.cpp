@@ -68,7 +68,7 @@ void wxMemoryDCImpl::DoSelect( const wxBitmap& bitmap )
     // select old bitmap out of the device context
     if ( m_oldBitmap )
     {
-        ::SelectObject(GetHdc(), (HBITMAP) m_oldBitmap);
+        ::SelectObject(GetHdc(), (WXHBITMAP) m_oldBitmap);
         if ( m_selectedBitmap.IsOk() )
         {
             m_selectedBitmap.SetSelectedInto(nullptr);
@@ -87,7 +87,7 @@ void wxMemoryDCImpl::DoSelect( const wxBitmap& bitmap )
         return;
 
     m_selectedBitmap.SetSelectedInto(GetOwner());
-    hBmp = (WXHBITMAP)::SelectObject(GetHdc(), (HBITMAP)hBmp);
+    hBmp = (WXHBITMAP)::SelectObject(GetHdc(), (WXHBITMAP)hBmp);
 
     if ( !hBmp )
     {
@@ -128,14 +128,14 @@ static void wxDrawRectangle(wxDC& dc, wxCoord x, wxCoord y, wxCoord width, wxCoo
     wxPen pen(dc.GetPen());
     if (brush.IsOk() && brush.GetStyle() != wxBrushStyle::Transparent)
     {
-        HBRUSH hBrush = (HBRUSH) brush.GetResourceHandle() ;
+        WXHBRUSH hBrush = (WXHBRUSH) brush.GetResourceHandle() ;
         if (hBrush)
         {
             RECT rect;
             rect.left = x; rect.top = y;
             rect.right = x + width - 1;
             rect.bottom = y + height - 1;
-            ::FillRect((HDC) dc.GetHDC(), &rect, hBrush);
+            ::FillRect((WXHDC) dc.GetHDC(), &rect, hBrush);
         }
     }
     width --; height --;

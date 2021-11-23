@@ -49,7 +49,7 @@ public:
 #endif // __WXMSW__
 
     // create a DIB from the Windows DDB
-    wxDIB(HBITMAP hbmp)
+    wxDIB(WXHBITMAP hbmp)
     {
         Create(hbmp);
     }
@@ -71,7 +71,7 @@ public:
 #ifdef __WXMSW__
     [[maybe_unused]] bool Create(const wxBitmap& bmp, int depth = -1) { return Create(GetHbitmapOf(bmp), depth); }
 #endif
-    [[maybe_unused]] bool Create(HBITMAP hbmp, int depth = -1);
+    [[maybe_unused]] bool Create(WXHBITMAP hbmp, int depth = -1);
     bool Load(const std::string& filename);
 
     ~wxDIB();
@@ -79,14 +79,14 @@ public:
     // operations
     // ----------
 
-    // create a bitmap compatible with the given HDC (or screen by default) and
+    // create a bitmap compatible with the given WXHDC (or screen by default) and
     // return its handle, the caller is responsible for freeing it (using
     // DeleteObject())
-    HBITMAP CreateDDB(HDC hdc = nullptr) const;
+    WXHBITMAP CreateDDB(WXHDC hdc = nullptr) const;
 
     // get the handle from the DIB and reset it, i.e. this object won't destroy
     // the DIB after this (but the caller should do it)
-    HBITMAP Detach() { HBITMAP hbmp = m_handle; m_handle = nullptr; return hbmp; }
+    WXHBITMAP Detach() { WXHBITMAP hbmp = m_handle; m_handle = nullptr; return hbmp; }
 
 #if defined(__WXMSW__) && wxUSE_PALETTE
     // create a palette for this DIB (always a trivial/default one for 24bpp)
@@ -108,7 +108,7 @@ public:
     int GetDepth() const { DoGetObject(); return m_depth; }
 
     // get the DIB handle
-    HBITMAP GetHandle() const { return m_handle; }
+    WXHBITMAP GetHandle() const { return m_handle; }
 
     // get raw pointer to bitmap bits, you should know what you do if you
     // decide to use it
@@ -116,7 +116,7 @@ public:
         { DoGetObject(); return (unsigned char *)m_data; }
 
 
-    // HBITMAP conversion
+    // WXHBITMAP conversion
     // ------------------
 
     // these functions are only used by wxWidgets internally right now, please
@@ -125,20 +125,20 @@ public:
     // creates a DDB compatible with the given (or screen) DC from either
     // a plain DIB or a DIB section (in which case the last parameter must be
     // non NULL)
-    static HBITMAP ConvertToBitmap(const BITMAPINFO *pbi,
-                                   HDC hdc = nullptr,
+    static WXHBITMAP ConvertToBitmap(const BITMAPINFO *pbi,
+                                   WXHDC hdc = nullptr,
                                    const void *bits = nullptr);
 
     // create a plain DIB (not a DIB section) from a DDB, the caller is
     // responsible for freeing it using ::GlobalFree()
-    static HGLOBAL ConvertFromBitmap(HBITMAP hbmp);
+    static HGLOBAL ConvertFromBitmap(WXHBITMAP hbmp);
 
     // creates a DIB from the given DDB or calculates the space needed by it:
     // if pbi is NULL, only the space is calculated, otherwise pbi is supposed
     // to point at BITMAPINFO of the correct size which is filled by this
     // function (this overload is needed for wxBitmapDataObject code in
     // src/msw/ole/dataobj.cpp)
-    static size_t ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp);
+    static size_t ConvertFromBitmap(BITMAPINFO *pbi, WXHBITMAP hbmp);
 
 
     // wxImage conversion
@@ -200,11 +200,11 @@ private:
 
     // initialize the contents from the provided DDB (Create() must have been
     // already called)
-    bool CopyFromDDB(HBITMAP hbmp);
+    bool CopyFromDDB(WXHBITMAP hbmp);
 
 
     // the DIB section handle, 0 if invalid
-    HBITMAP m_handle{nullptr};
+    WXHBITMAP m_handle{nullptr};
 
     // NB: we could store only m_handle and not any of the other fields as
     //     we may always retrieve them from it using GetObjectW(), but we

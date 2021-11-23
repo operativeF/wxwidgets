@@ -35,7 +35,7 @@ class wxAcceleratorRefData: public wxObjectRefData
 {
     friend class wxAcceleratorTable;
 public:
-    inline HACCEL GetHACCEL() const { return m_hAccel.get(); }
+    inline WXHACCEL GetHACCEL() const { return m_hAccel.get(); }
 
 protected:
     unique_accel m_hAccel;

@@ -195,7 +195,7 @@ public:
     static DWriteCreateFactory_t DWriteCreateFactory;
 
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
-    using D3D11CreateDevice_t = HRESULT (WINAPI*)(IDXGIAdapter*, D3D_DRIVER_TYPE, HMODULE, UINT, CONST D3D_FEATURE_LEVEL*, UINT, UINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
+    using D3D11CreateDevice_t = HRESULT (WINAPI*)(IDXGIAdapter*, D3D_DRIVER_TYPE, WXHMODULE, UINT, CONST D3D_FEATURE_LEVEL*, UINT, UINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
     static D3D11CreateDevice_t D3D11CreateDevice;
 #endif
 
@@ -316,7 +316,7 @@ BOOL WINAPI wxD2D1InvertMatrix(
 HRESULT WINAPI wxD3D11CreateDevice(
     IDXGIAdapter* pAdapter,
     D3D_DRIVER_TYPE DriverType,
-    HMODULE Software,
+    WXHMODULE Software,
     UINT Flags,
     CONST D3D_FEATURE_LEVEL* pFeatureLevels,
     UINT FeatureLevels,
@@ -3438,7 +3438,7 @@ class wxD2DHwndRenderTargetResourceHolder : public wxD2DRenderTargetResourceHold
 public:
     using ImplementationType = ID2D1HwndRenderTarget*;
 
-    wxD2DHwndRenderTargetResourceHolder(HWND hwnd, ID2D1Factory* factory) :
+    wxD2DHwndRenderTargetResourceHolder(WXHWND hwnd, ID2D1Factory* factory) :
         m_hwnd(hwnd), m_factory(factory)
     {
     }
@@ -3493,7 +3493,7 @@ private:
         return dynamic_cast<ImplementationType>(GetD2DResource().get());
     }
 
-    HWND m_hwnd;
+    WXHWND m_hwnd;
     ID2D1Factory* m_factory;
 };
 
@@ -3501,7 +3501,7 @@ private:
 class wxD2DDeviceContextResourceHolder : public wxD2DRenderTargetResourceHolder
 {
 public:
-    wxD2DDeviceContextResourceHolder(ID2D1Factory* factory, HWND hwnd) :
+    wxD2DDeviceContextResourceHolder(ID2D1Factory* factory, WXHWND hwnd) :
         m_hwnd(hwnd)
     {
         HRESULT hr = factory->QueryInterface(IID_ID2D1Factory1, reinterpret_cast<void**>(&m_factory));
@@ -3674,7 +3674,7 @@ private:
 private:
     wxCOMPtr<ID2D1Factory1> m_factory;
 
-    HWND m_hwnd;
+    WXHWND m_hwnd;
 
     D3D_FEATURE_LEVEL m_featureLevel;
     wxCOMPtr<IDXGIDevice1> m_dxgiDevice;
@@ -3688,7 +3688,7 @@ private:
 class wxD2DDCRenderTargetResourceHolder : public wxD2DRenderTargetResourceHolder
 {
 public:
-    wxD2DDCRenderTargetResourceHolder(ID2D1Factory* factory, HDC hdc, D2D1_ALPHA_MODE alphaMode) :
+    wxD2DDCRenderTargetResourceHolder(ID2D1Factory* factory, WXHDC hdc, D2D1_ALPHA_MODE alphaMode) :
         m_factory(factory), m_hdc(hdc), m_alphaMode(alphaMode)
     {
     }
@@ -3722,7 +3722,7 @@ protected:
     }
 
 private:
-    HDC m_hdc;
+    WXHDC m_hdc;
     ID2D1Factory* m_factory;
 
     D2D1_ALPHA_MODE m_alphaMode;
@@ -3826,18 +3826,18 @@ public:
 class wxD2DContext : public wxGraphicsContext, wxD2DResourceManager
 {
 public:
-    // Create the context for the given HWND, which may be associated (if it's
+    // Create the context for the given WXHWND, which may be associated (if it's
     // non-null) with the given wxWindow.
     wxD2DContext(wxGraphicsRenderer* renderer,
                  ID2D1Factory* direct2dFactory,
-                 HWND hwnd,
+                 WXHWND hwnd,
                  wxWindow* window = nullptr);
 
-    // Create the context for the given HDC which may be associated (if it's
+    // Create the context for the given WXHDC which may be associated (if it's
     // non-null) with the given wxDC.
     wxD2DContext(wxGraphicsRenderer* renderer,
                  ID2D1Factory* direct2dFactory,
-                 HDC hdc,
+                 WXHDC hdc,
                  const wxDC* dc = nullptr,
                  D2D1_ALPHA_MODE alphaMode = D2D1_ALPHA_MODE_IGNORE);
 
@@ -3993,7 +3993,7 @@ private:
 
 wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
                            ID2D1Factory* direct2dFactory,
-                           HWND hwnd,
+                           WXHWND hwnd,
                            wxWindow* window) :
     wxGraphicsContext(renderer, window), m_direct2dFactory(direct2dFactory),
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
@@ -4012,7 +4012,7 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
 
 wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
                            ID2D1Factory* direct2dFactory,
-                           HDC hdc,
+                           WXHDC hdc,
                            const wxDC* dc,
                            D2D1_ALPHA_MODE alphaMode) :
     wxGraphicsContext(renderer, dc->GetWindow()), m_direct2dFactory(direct2dFactory),
@@ -5082,17 +5082,17 @@ std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeContext
 
 std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeWindow(void* window)
 {
-    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HWND)window);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (WXHWND)window);
 }
 
 std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeHDC(WXHDC dc)
 {
-    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HDC)dc);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (WXHDC)dc);
 }
 
 std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(wxWindow* window)
 {
-    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HWND)window->GetHWND(), window);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (WXHWND)window->GetHWND(), window);
 }
 
 #if wxUSE_IMAGE

@@ -92,7 +92,7 @@ protected:
     bool ClickDefaultButtonIfPossible();
 
 private:
-    // implement this to return the HWND of the EDIT control
+    // implement this to return the WXHWND of the EDIT control
     virtual WXHWND GetEditHWND() const = 0;
 
 #if wxUSE_OLE

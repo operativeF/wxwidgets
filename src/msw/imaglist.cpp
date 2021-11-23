@@ -41,7 +41,7 @@ using msw::utils::unique_bitmap;
 
 // returns the mask if it's valid, otherwise the bitmap mask and, if it's not
 // valid neither, a "solid" mask (no transparent zones at all)
-static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask);
+static WXHBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask);
 
 // Creates an image list
 bool wxImageList::Create(int width, int height, bool mask, int initial)
@@ -109,7 +109,7 @@ bool wxImageList::GetSize(int WXUNUSED(index), int &width, int &height) const
 namespace
 {
 void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useMask,
-                         unique_bitmap& hbmpRelease, unique_bitmap& hbmpMask, HBITMAP& hbmp)
+                         unique_bitmap& hbmpRelease, unique_bitmap& hbmpMask, WXHBITMAP& hbmp)
 {
 #if wxUSE_WXDIB && wxUSE_IMAGE
     // wxBitmap normally stores alpha in pre-multiplied format but
@@ -186,7 +186,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
 // 'bitmap' and 'mask'.
 int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 {
-    HBITMAP hbmp = nullptr;
+    WXHBITMAP hbmp = nullptr;
     unique_bitmap hbmpRelease;
     unique_bitmap hbmpMask;
 
@@ -206,7 +206,7 @@ int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 // 'bitmap'.
 int wxImageList::Add(const wxBitmap& bitmap, const wxColour& maskColour)
 {
-    HBITMAP hbmp = nullptr;
+    WXHBITMAP hbmp = nullptr;
     unique_bitmap hbmpRelease;
     unique_bitmap hbmpMask;
 
@@ -243,7 +243,7 @@ bool wxImageList::Replace(int index,
                           const wxBitmap& bitmap,
                           const wxBitmap& mask)
 {
-    HBITMAP hbmp = nullptr;
+    WXHBITMAP hbmp = nullptr;
     unique_bitmap hbmpRelease;
     unique_bitmap hbmpMask;
     GetImageListBitmaps(bitmap, mask, m_useMask, hbmpRelease, hbmpMask, hbmp);
@@ -309,7 +309,7 @@ bool wxImageList::Draw(int index,
     if (!msw_impl)
        return false;
 
-    HDC hDC = GetHdcOf(*msw_impl);
+    WXHDC hDC = GetHdcOf(*msw_impl);
     wxCHECK_MSG( hDC, false, "invalid wxDC in wxImageList::Draw" );
 
     COLORREF clr = CLR_NONE;    // transparent by default
@@ -430,13 +430,13 @@ wxIcon wxImageList::GetIcon(int index) const
 // helpers
 // ----------------------------------------------------------------------------
 
-static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask)
+static WXHBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask)
 {
 #if wxUSE_IMAGE
     wxBitmap bitmapWithMask;
 #endif // wxUSE_IMAGE
 
-    HBITMAP hbmpMask;
+    WXHBITMAP hbmpMask;
     wxMask *pMask{nullptr};
     bool deleteMask = false;
 
@@ -478,11 +478,11 @@ static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask)
             deleteMask = true;
         }
 
-        hbmpMask = (HBITMAP)pMask->GetMaskBitmap();
+        hbmpMask = (WXHBITMAP)pMask->GetMaskBitmap();
     }
 
     // windows mask convention is opposite to the wxWidgets one
-    HBITMAP hbmpMaskInv = wxInvertMask(hbmpMask);
+    WXHBITMAP hbmpMaskInv = wxInvertMask(hbmpMask);
 
     if ( deleteMask )
     {

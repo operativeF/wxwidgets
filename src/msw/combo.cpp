@@ -139,7 +139,7 @@ static void wxMSWDrawFocusRect( wxDC& dc, const wxRect& rect )
     mswRect.top = rect.y;
     mswRect.right = rect.x + rect.width;
     mswRect.bottom = rect.y + rect.height;
-    HDC hdc = (HDC) dc.GetHDC();
+    WXHDC hdc = (WXHDC) dc.GetHDC();
     SetMapMode(hdc,MM_TEXT); // Just in case...
     DrawFocusRect(hdc,&mswRect);
     */
@@ -319,8 +319,8 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
     const bool isEnabled = IsThisEnabled();
 
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HDC hDc = GetHdcOf(*impl);
-    HWND hWnd = GetHwndOf(this);
+    WXHDC hDc = GetHdcOf(*impl);
+    WXHWND hWnd = GetHwndOf(this);
 
     wxUxThemeHandle hTheme(this, L"COMBOBOX");
 #endif // wxUSE_UXTHEME

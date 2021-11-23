@@ -114,15 +114,15 @@ DEFINE_GUID(wxIID_IShellLink,
 struct wxITaskbarList : public IUnknown
 {
     virtual HRESULT wxSTDCALL HrInit() = 0;
-    virtual HRESULT wxSTDCALL AddTab(HWND) = 0;
-    virtual HRESULT wxSTDCALL DeleteTab(HWND) = 0;
-    virtual HRESULT wxSTDCALL ActivateTab(HWND) = 0;
-    virtual HRESULT wxSTDCALL SetActiveAlt(HWND) = 0;
+    virtual HRESULT wxSTDCALL AddTab(WXHWND) = 0;
+    virtual HRESULT wxSTDCALL DeleteTab(WXHWND) = 0;
+    virtual HRESULT wxSTDCALL ActivateTab(WXHWND) = 0;
+    virtual HRESULT wxSTDCALL SetActiveAlt(WXHWND) = 0;
 };
 
 struct wxITaskbarList2 : public wxITaskbarList
 {
-    virtual HRESULT wxSTDCALL MarkFullscreenWindow(HWND, BOOL) = 0;
+    virtual HRESULT wxSTDCALL MarkFullscreenWindow(WXHWND, BOOL) = 0;
 };
 
 struct wxIShellLinkA : public IUnknown
@@ -143,7 +143,7 @@ struct wxIShellLinkA : public IUnknown
     virtual HRESULT wxSTDCALL GetIconLocation(LPSTR, int, int*) = 0;
     virtual HRESULT wxSTDCALL SetIconLocation(LPCSTR, int) = 0;
     virtual HRESULT wxSTDCALL SetRelativePath(LPCSTR, DWORD) = 0;
-    virtual HRESULT wxSTDCALL Resolve(HWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL Resolve(WXHWND, DWORD) = 0;
     virtual HRESULT wxSTDCALL SetPath(LPCSTR) = 0;
 };
 
@@ -165,7 +165,7 @@ struct wxIShellLinkW : public IUnknown
     virtual HRESULT wxSTDCALL GetIconLocation(LPWSTR, int, int*) = 0;
     virtual HRESULT wxSTDCALL SetIconLocation(LPCWSTR, int) = 0;
     virtual HRESULT wxSTDCALL SetRelativePath(LPCWSTR, DWORD) = 0;
-    virtual HRESULT wxSTDCALL Resolve(HWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL Resolve(WXHWND, DWORD) = 0;
     virtual HRESULT wxSTDCALL SetPath(LPCWSTR) = 0;
 };
 
@@ -388,19 +388,19 @@ IObjectCollection* CreateObjectCollection()
 class wxITaskbarList3 : public wxITaskbarList2
 {
 public:
-    virtual HRESULT wxSTDCALL SetProgressValue(HWND, ULONGLONG, ULONGLONG) = 0;
-    virtual HRESULT wxSTDCALL SetProgressState(HWND, TBPFLAG) = 0;
-    virtual HRESULT wxSTDCALL RegisterTab(HWND, HWND) = 0;
-    virtual HRESULT wxSTDCALL UnregisterTab(HWND) = 0;
-    virtual HRESULT wxSTDCALL SetTabOrder(HWND, HWND) = 0;
-    virtual HRESULT wxSTDCALL SetTabActive(HWND, HWND, DWORD) = 0;
-    virtual HRESULT wxSTDCALL ThumbBarAddButtons(HWND, UINT, LPTHUMBBUTTON) = 0;
+    virtual HRESULT wxSTDCALL SetProgressValue(WXHWND, ULONGLONG, ULONGLONG) = 0;
+    virtual HRESULT wxSTDCALL SetProgressState(WXHWND, TBPFLAG) = 0;
+    virtual HRESULT wxSTDCALL RegisterTab(WXHWND, WXHWND) = 0;
+    virtual HRESULT wxSTDCALL UnregisterTab(WXHWND) = 0;
+    virtual HRESULT wxSTDCALL SetTabOrder(WXHWND, WXHWND) = 0;
+    virtual HRESULT wxSTDCALL SetTabActive(WXHWND, WXHWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL ThumbBarAddButtons(WXHWND, UINT, LPTHUMBBUTTON) = 0;
     virtual
-        HRESULT wxSTDCALL ThumbBarUpdateButtons(HWND, UINT, LPTHUMBBUTTON) = 0;
-    virtual HRESULT wxSTDCALL ThumbBarSetImageList(HWND, ::HIMAGELIST) = 0;
-    virtual HRESULT wxSTDCALL SetOverlayIcon(HWND, WXHICON, LPCWSTR) = 0;
-    virtual HRESULT wxSTDCALL SetThumbnailTooltip(HWND, LPCWSTR pszTip) = 0;
-    virtual HRESULT wxSTDCALL SetThumbnailClip(HWND, RECT *) = 0;
+        HRESULT wxSTDCALL ThumbBarUpdateButtons(WXHWND, UINT, LPTHUMBBUTTON) = 0;
+    virtual HRESULT wxSTDCALL ThumbBarSetImageList(WXHWND, ::HIMAGELIST) = 0;
+    virtual HRESULT wxSTDCALL SetOverlayIcon(WXHWND, WXHICON, LPCWSTR) = 0;
+    virtual HRESULT wxSTDCALL SetThumbnailTooltip(WXHWND, LPCWSTR pszTip) = 0;
+    virtual HRESULT wxSTDCALL SetThumbnailClip(WXHWND, RECT *) = 0;
 };
 
 // ----------------------------------------------------------------------------

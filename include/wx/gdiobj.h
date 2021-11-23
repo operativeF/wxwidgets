@@ -13,6 +13,10 @@
 
 #include "wx/object.h"
 
+#if WX_WINDOWS
+import WX.WinDef;
+#endif
+
 // ----------------------------------------------------------------------------
 // wxGDIRefData is the base class for wxXXXData structures which contain the
 // real data for the GDI object and are shared among all wxWin objects sharing

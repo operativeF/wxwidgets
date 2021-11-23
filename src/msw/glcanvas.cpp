@@ -20,7 +20,7 @@
 
 // from src/msw/window.cpp
 LRESULT APIENTRY
-wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 #ifdef GL_EXT_vertex_array
     #define WXUNUSED_WITHOUT_GL_EXT_vertex_array(name) name
@@ -563,7 +563,7 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
     ::wglMakeCurrent(win->GetHDC(), tempContext.get());
 
     using wglCreateContextAttribsARB_t = HGLRC(WINAPI*)
-        (HDC hDC, HGLRC hShareContext, const int *attribList);
+        (WXHDC hDC, HGLRC hShareContext, const int *attribList);
 
     wxDEFINE_WGL_FUNC(wglCreateContextAttribsARB);
     wglMakeCurrent(win->GetHDC(), nullptr);
@@ -775,7 +775,7 @@ bool wxGLCanvasBase::IsExtensionSupported(const char *extension)
     static const char *s_extensionsList = (char *)wxUIntPtr(-1);
     if ( s_extensionsList == (char *)wxUIntPtr(-1) )
     {
-        using wglGetExtensionsStringARB_t = const char* (WINAPI*)(HDC hdc);
+        using wglGetExtensionsStringARB_t = const char* (WINAPI*)(WXHDC hdc);
 
         wxDEFINE_WGL_FUNC(wglGetExtensionsStringARB);
         if ( wglGetExtensionsStringARB )
@@ -824,7 +824,7 @@ public:
         if ( hdc )
             ::ReleaseDC(GetHwnd(), hdc);
     }
-    HDC hdc{nullptr};
+    WXHDC hdc{nullptr};
 };
 
 // Fills PIXELFORMATDESCRIPTOR struct
@@ -1013,7 +1013,7 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
     // Having this dummy window allows also calling IsDisplaySupported()
     // without creating a wxGLCanvas.
     wxGLdummyWin* dummyWin = new wxGLdummyWin();
-    HDC dummyHDC = dummyWin->hdc;
+    WXHDC dummyHDC = dummyWin->hdc;
     if ( !dummyHDC )
     {
         dummyWin->Destroy();
@@ -1035,7 +1035,7 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
     ::wglMakeCurrent(dummyHDC, dumctx);
 
     using wglChoosePixelFormatARB_t = BOOL (WINAPI*)
-                 (HDC hdc,
+                 (WXHDC hdc,
                   const int *piAttribIList,
                   const FLOAT *pfAttribFList,
                   UINT nMaxFormats,
@@ -1115,7 +1115,7 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
 
 /* static */
 int
-wxGLCanvas::ChooseMatchingPixelFormat(HDC hdc,
+wxGLCanvas::ChooseMatchingPixelFormat(WXHDC hdc,
                                       const int *attribList,
                                       PIXELFORMATDESCRIPTOR *ppfd)
 {
@@ -1232,7 +1232,7 @@ wxPalette wxGLCanvas::CreateDefaultPalette()
         pPal->palPalEntry[i].peFlags = 0;
     }
 
-    HPALETTE hPalette = CreatePalette(pPal);
+    WXHPALETTE hPalette = CreatePalette(pPal);
     free(pPal);
 
     wxPalette palette;
@@ -1245,8 +1245,8 @@ void wxGLCanvas::OnQueryNewPalette(wxQueryNewPaletteEvent& event)
 {
   /* realize palette if this is the current window */
   if ( GetPalette()->IsOk() ) {
-    ::UnrealizeObject((HPALETTE) GetPalette()->GetHPALETTE());
-    ::SelectPalette(GetHDC(), (HPALETTE) GetPalette()->GetHPALETTE(), FALSE);
+    ::UnrealizeObject((WXHPALETTE) GetPalette()->GetHPALETTE());
+    ::SelectPalette(GetHDC(), (WXHPALETTE) GetPalette()->GetHPALETTE(), FALSE);
     ::RealizePalette(GetHDC());
     Refresh();
     event.SetPaletteRealized(true);
@@ -1261,8 +1261,8 @@ void wxGLCanvas::OnPaletteChanged(wxPaletteChangedEvent& event)
   if ( GetPalette() &&
        GetPalette()->IsOk() && (this != event.GetChangedWindow()) )
   {
-    ::UnrealizeObject((HPALETTE) GetPalette()->GetHPALETTE());
-    ::SelectPalette(GetHDC(), (HPALETTE) GetPalette()->GetHPALETTE(), FALSE);
+    ::UnrealizeObject((WXHPALETTE) GetPalette()->GetHPALETTE());
+    ::SelectPalette(GetHDC(), (WXHPALETTE) GetPalette()->GetHPALETTE(), FALSE);
     ::RealizePalette(GetHDC());
     Refresh();
   }

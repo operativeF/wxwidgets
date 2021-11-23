@@ -33,20 +33,20 @@ using wxCmdLineArgType = char *;
 // Windows-only overloads of wxEntry() and wxEntryStart() which take the
 // parameters passed to WinMain() instead of those passed to main()
 extern bool
-    wxEntryStart(HINSTANCE hInstance,
-                HINSTANCE hPrevInstance = nullptr,
+    wxEntryStart(WXHINSTANCE hInstance,
+                WXHINSTANCE hPrevInstance = nullptr,
                 wxCmdLineArgType pCmdLine = nullptr,
                 int nCmdShow = SW_SHOWNORMAL);
 
 extern int
-    wxEntry(HINSTANCE hInstance,
-            HINSTANCE hPrevInstance = nullptr,
+    wxEntry(WXHINSTANCE hInstance,
+            WXHINSTANCE hPrevInstance = nullptr,
             wxCmdLineArgType pCmdLine = nullptr,
             int nCmdShow = SW_SHOWNORMAL);
 
 #define wxIMPLEMENT_WXWIN_MAIN                                              \
-    extern "C" int WINAPI WinMain(HINSTANCE hInstance,                      \
-                                  HINSTANCE hPrevInstance,                  \
+    extern "C" int WINAPI WinMain(WXHINSTANCE hInstance,                      \
+                                  WXHINSTANCE hPrevInstance,                  \
                                   wxCmdLineArgType lpCmdLine,               \
                                   int nCmdShow)                             \
     {                                                                       \

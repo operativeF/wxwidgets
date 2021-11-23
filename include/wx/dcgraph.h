@@ -302,7 +302,7 @@ public:
     wxGCDC& operator=(wxGCDC&&) = delete;
 
 #ifdef WX_WINDOWS
-    // override wxDC virtual functions to provide access to HDC associated with
+    // override wxDC virtual functions to provide access to WXHDC associated with
     // this Graphics object (implemented in src/msw/graphics.cpp)
     WXHDC AcquireHDC() override;
     void ReleaseHDC(WXHDC hdc) override;

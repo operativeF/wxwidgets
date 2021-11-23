@@ -159,7 +159,7 @@ import WX.WinDef;
     m(CreateRegionRectI, (GDIPCONST GpRect *rect, GpRegion **region), (rect, region)) \
     m(CreateRegionPath, (GpPath *path, GpRegion **region), (path, region)) \
     m(CreateRegionRgnData, (GDIPCONST BYTE *regionData, INT size, GpRegion **region), (regionData, size, region)) \
-    m(CreateRegionHrgn, (HRGN hRgn, GpRegion **region), (hRgn, region)) \
+    m(CreateRegionHrgn, (WXHRGN hRgn, GpRegion **region), (hRgn, region)) \
     m(CloneRegion, (GpRegion *region, GpRegion **cloneRegion), (region, cloneRegion)) \
     m(DeleteRegion, (GpRegion *region), (region)) \
     m(SetInfinite, (GpRegion *region), (region)) \
@@ -173,7 +173,7 @@ import WX.WinDef;
     m(TransformRegion, (GpRegion *region, GpMatrix *matrix), (region, matrix)) \
     m(GetRegionBounds, (GpRegion *region, GpGraphics *graphics, GpRectF *rect), (region, graphics, rect)) \
     m(GetRegionBoundsI, (GpRegion *region, GpGraphics *graphics, GpRect *rect), (region, graphics, rect)) \
-    m(GetRegionHRgn, (GpRegion *region, GpGraphics *graphics, HRGN *hRgn), (region, graphics, hRgn)) \
+    m(GetRegionHRgn, (GpRegion *region, GpGraphics *graphics, WXHRGN *hRgn), (region, graphics, hRgn)) \
     m(IsEmptyRegion, (GpRegion *region, GpGraphics *graphics, BOOL *result), (region, graphics, result)) \
     m(IsInfiniteRegion, (GpRegion *region, GpGraphics *graphics, BOOL *result), (region, graphics, result)) \
     m(IsEqualRegion, (GpRegion *region, GpRegion *region2, GpGraphics *graphics, BOOL *result), (region, region2, graphics, result)) \
@@ -397,11 +397,11 @@ import WX.WinDef;
     m(CreateBitmapFromGraphics, (INT width, INT height, GpGraphics* target, GpBitmap** bitmap), (width, height, target, bitmap)) \
     m(CreateBitmapFromDirectDrawSurface, (IDirectDrawSurface7* surface, GpBitmap** bitmap), (surface, bitmap)) \
     m(CreateBitmapFromGdiDib, (GDIPCONST BITMAPINFO* gdiBitmapInfo, VOID* gdiBitmapData, GpBitmap** bitmap), (gdiBitmapInfo, gdiBitmapData, bitmap)) \
-    m(CreateBitmapFromHBITMAP, (HBITMAP hbm, HPALETTE hpal, GpBitmap** bitmap), (hbm, hpal, bitmap)) \
-    m(CreateHBITMAPFromBitmap, (GpBitmap* bitmap, HBITMAP* hbmReturn, ARGB background), (bitmap, hbmReturn, background)) \
+    m(CreateBitmapFromHBITMAP, (WXHBITMAP hbm, WXHPALETTE hpal, GpBitmap** bitmap), (hbm, hpal, bitmap)) \
+    m(CreateHBITMAPFromBitmap, (GpBitmap* bitmap, WXHBITMAP* hbmReturn, ARGB background), (bitmap, hbmReturn, background)) \
     m(CreateBitmapFromHICON, (WXHICON hicon, GpBitmap** bitmap), (hicon, bitmap)) \
     m(CreateHICONFromBitmap, (GpBitmap* bitmap, WXHICON* hbmReturn), (bitmap, hbmReturn)) \
-    m(CreateBitmapFromResource, (HINSTANCE hInstance, GDIPCONST WCHAR* lpBitmapName, GpBitmap** bitmap), (hInstance, lpBitmapName, bitmap)) \
+    m(CreateBitmapFromResource, (WXHINSTANCE hInstance, GDIPCONST WCHAR* lpBitmapName, GpBitmap** bitmap), (hInstance, lpBitmapName, bitmap)) \
     m(CloneBitmapArea, (REAL x, REAL y, REAL width, REAL height, PixelFormat format, GpBitmap *srcBitmap, GpBitmap **dstBitmap), (x, y, width, height, format, srcBitmap, dstBitmap)) \
     m(CloneBitmapAreaI, (INT x, INT y, INT width, INT height, PixelFormat format, GpBitmap *srcBitmap, GpBitmap **dstBitmap), (x, y, width, height, format, srcBitmap, dstBitmap)) \
     m(BitmapLockBits, (GpBitmap* bitmap, GDIPCONST GpRect* rect, UINT flags, PixelFormat format, BitmapData* lockedBitmapData), (bitmap, rect, flags, format, lockedBitmapData)) \
@@ -425,13 +425,13 @@ import WX.WinDef;
     m(SetImageAttributesWrapMode, (GpImageAttributes *imageAttr, WrapMode wrap, ARGB argb, BOOL clamp), (imageAttr, wrap, argb, clamp)) \
     m(GetImageAttributesAdjustedPalette, (GpImageAttributes *imageAttr, ColorPalette *colorPalette, ColorAdjustType colorAdjustType), (imageAttr, colorPalette, colorAdjustType)) \
     m(Flush, (GpGraphics *graphics, GpFlushIntention intention), (graphics, intention)) \
-    m(CreateFromHDC, (HDC hdc, GpGraphics **graphics), (hdc, graphics)) \
-    m(CreateFromHDC2, (HDC hdc, HANDLE hDevice, GpGraphics **graphics), (hdc, hDevice, graphics)) \
-    m(CreateFromHWND, (HWND hwnd, GpGraphics **graphics), (hwnd, graphics)) \
-    m(CreateFromHWNDICM, (HWND hwnd, GpGraphics **graphics), (hwnd, graphics)) \
+    m(CreateFromHDC, (WXHDC hdc, GpGraphics **graphics), (hdc, graphics)) \
+    m(CreateFromHDC2, (WXHDC hdc, HANDLE hDevice, GpGraphics **graphics), (hdc, hDevice, graphics)) \
+    m(CreateFromHWND, (WXHWND hwnd, GpGraphics **graphics), (hwnd, graphics)) \
+    m(CreateFromHWNDICM, (WXHWND hwnd, GpGraphics **graphics), (hwnd, graphics)) \
     m(DeleteGraphics, (GpGraphics *graphics), (graphics)) \
-    m(GetDC, (GpGraphics* graphics, HDC *hdc), (graphics, hdc)) \
-    m(ReleaseDC, (GpGraphics* graphics, HDC hdc), (graphics, hdc)) \
+    m(GetDC, (GpGraphics* graphics, WXHDC *hdc), (graphics, hdc)) \
+    m(ReleaseDC, (GpGraphics* graphics, WXHDC hdc), (graphics, hdc)) \
     m(SetCompositingMode, (GpGraphics *graphics, CompositingMode compositingMode), (graphics, compositingMode)) \
     m(GetCompositingMode, (GpGraphics *graphics, CompositingMode *compositingMode), (graphics, compositingMode)) \
     m(SetRenderingOrigin, (GpGraphics *graphics, INT x, INT y), (graphics, x, y)) \
@@ -545,7 +545,7 @@ import WX.WinDef;
     m(SetClipRectI, (GpGraphics *graphics, INT x, INT y, INT width, INT height, CombineMode combineMode), (graphics, x, y, width, height, combineMode)) \
     m(SetClipPath, (GpGraphics *graphics, GpPath *path, CombineMode combineMode), (graphics, path, combineMode)) \
     m(SetClipRegion, (GpGraphics *graphics, GpRegion *region, CombineMode combineMode), (graphics, region, combineMode)) \
-    m(SetClipHrgn, (GpGraphics *graphics, HRGN hRgn, CombineMode combineMode), (graphics, hRgn, combineMode)) \
+    m(SetClipHrgn, (GpGraphics *graphics, WXHRGN hRgn, CombineMode combineMode), (graphics, hRgn, combineMode)) \
     m(ResetClip, (GpGraphics *graphics), (graphics)) \
     m(TranslateClip, (GpGraphics *graphics, REAL dx, REAL dy), (graphics, dx, dy)) \
     m(TranslateClipI, (GpGraphics *graphics, INT dx, INT dy), (graphics, dx, dy)) \
@@ -577,12 +577,12 @@ import WX.WinDef;
     m(CreateMetafileFromFile, (GDIPCONST WCHAR* file, GpMetafile **metafile), (file, metafile)) \
     m(CreateMetafileFromWmfFile, (GDIPCONST WCHAR* file, GDIPCONST WmfPlaceableFileHeader *wmfPlaceableFileHeader, GpMetafile **metafile), (file, wmfPlaceableFileHeader, metafile)) \
     m(CreateMetafileFromStream, (IStream *stream, GpMetafile **metafile), (stream, metafile)) \
-    m(RecordMetafile, (HDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (referenceHdc, type, frameRect, frameUnit, description, metafile)) \
-    m(RecordMetafileI, (HDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (referenceHdc, type, frameRect, frameUnit, description, metafile)) \
-    m(RecordMetafileFileName, (GDIPCONST WCHAR* fileName, HDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (fileName, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
-    m(RecordMetafileFileNameI, (GDIPCONST WCHAR* fileName, HDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (fileName, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
-    m(RecordMetafileStream, (IStream *stream, HDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (stream, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
-    m(RecordMetafileStreamI, (IStream *stream, HDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (stream, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafile, (WXHDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafileI, (WXHDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafileFileName, (GDIPCONST WCHAR* fileName, WXHDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (fileName, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafileFileNameI, (GDIPCONST WCHAR* fileName, WXHDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (fileName, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafileStream, (IStream *stream, WXHDC referenceHdc, EmfType type, GDIPCONST GpRectF *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (stream, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
+    m(RecordMetafileStreamI, (IStream *stream, WXHDC referenceHdc, EmfType type, GDIPCONST GpRect *frameRect, MetafileFrameUnit frameUnit, GDIPCONST WCHAR *description, GpMetafile ** metafile), (stream, referenceHdc, type, frameRect, frameUnit, description, metafile)) \
     m(SetMetafileDownLevelRasterizationLimit, (GpMetafile *metafile, UINT metafileRasterizationLimitDpi), (metafile, metafileRasterizationLimitDpi)) \
     m(GetMetafileDownLevelRasterizationLimit, (GDIPCONST GpMetafile *metafile, UINT *metafileRasterizationLimitDpi), (metafile, metafileRasterizationLimitDpi)) \
     m(GetImageDecodersSize, (UINT *numDecoders, UINT *size), (numDecoders, size)) \
@@ -602,9 +602,9 @@ import WX.WinDef;
     m(GetCellAscent, (GDIPCONST GpFontFamily *family, INT style, UINT16 *CellAscent), (family, style, CellAscent)) \
     m(GetCellDescent, (GDIPCONST GpFontFamily *family, INT style, UINT16 *CellDescent), (family, style, CellDescent)) \
     m(GetLineSpacing, (GDIPCONST GpFontFamily *family, INT style, UINT16 *LineSpacing), (family, style, LineSpacing)) \
-    m(CreateFontFromDC, (HDC hdc, GpFont **font), (hdc, font)) \
-    m(CreateFontFromLogfontA, (HDC hdc, GDIPCONST LOGFONTA *logfont, GpFont **font), (hdc, logfont, font)) \
-    m(CreateFontFromLogfontW, (HDC hdc, GDIPCONST LOGFONTW *logfont, GpFont **font), (hdc, logfont, font)) \
+    m(CreateFontFromDC, (WXHDC hdc, GpFont **font), (hdc, font)) \
+    m(CreateFontFromLogfontA, (WXHDC hdc, GDIPCONST LOGFONTA *logfont, GpFont **font), (hdc, logfont, font)) \
+    m(CreateFontFromLogfontW, (WXHDC hdc, GDIPCONST LOGFONTW *logfont, GpFont **font), (hdc, logfont, font)) \
     m(CreateFont, (GDIPCONST GpFontFamily *fontFamily, REAL emSize, INT style, Unit unit, GpFont **font), (fontFamily, emSize, style, unit, font)) \
     m(CloneFont, (GpFont* font, GpFont** cloneFont), (font, cloneFont)) \
     m(DeleteFont, (GpFont* font), (font)) \
@@ -670,7 +670,7 @@ GdipGetMetafileHeaderFromWmf(
     GDIPCONST WmfPlaceableFileHeader *     wmfPlaceableFileHeader,
     MetafileHeader *    header
     );
-HPALETTE WINGDIPAPI
+WXHPALETTE WINGDIPAPI
 GdipCreateHalftonePalette();
 
 UINT WINGDIPAPI

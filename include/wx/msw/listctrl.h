@@ -433,7 +433,7 @@ private:
     // UpdateStyle()), only should be called if InReportView()
     void MSWSetExListStyles();
 
-    // initialize the (already created) m_textCtrl with the associated HWND
+    // initialize the (already created) m_textCtrl with the associated WXHWND
     void InitEditControl(WXHWND hWnd);
 
     // destroy m_textCtrl if it's currently valid and reset it to NULL

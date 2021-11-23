@@ -703,7 +703,7 @@ bool wxListBox::RefreshItem(size_t n)
     RECT rc;
     wxCopyRectToRECT(rect, rc);
 
-    return ::InvalidateRect((HWND)GetHWND(), &rc, FALSE) == TRUE;
+    return ::InvalidateRect((WXHWND)GetHWND(), &rc, FALSE) == TRUE;
 }
 
 // the height is the same for all items
@@ -718,7 +718,7 @@ bool wxListBox::MSWOnMeasure(WXMEASUREITEMSTRUCT *item)
 
     MEASUREITEMSTRUCT *pStruct = (MEASUREITEMSTRUCT *)item;
 
-    HDC hdc = ::CreateIC(L"DISPLAY", nullptr, nullptr, nullptr);
+    WXHDC hdc = ::CreateIC(L"DISPLAY", nullptr, nullptr, nullptr);
 
     {
         wxDCTemp dc((WXHDC)hdc);

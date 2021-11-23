@@ -23,19 +23,19 @@ namespace wxMSWImpl
 class wxTextColoursChanger
 {
 public:
-    wxTextColoursChanger(HDC hdc, const wxMSWDCImpl& dc)
+    wxTextColoursChanger(WXHDC hdc, const wxMSWDCImpl& dc)
         : m_hdc(hdc)
     {
         Change(dc.GetTextForeground(), dc.GetTextBackground());
     }
 
-    wxTextColoursChanger(HDC hdc, const wxColour& colFg, const wxColour& colBg)
+    wxTextColoursChanger(WXHDC hdc, const wxColour& colFg, const wxColour& colBg)
         : m_hdc(hdc)
     {
         Change(colFg, colBg);
     }
 
-    wxTextColoursChanger(HDC hdc, COLORREF colFg, COLORREF colBg)
+    wxTextColoursChanger(WXHDC hdc, COLORREF colFg, COLORREF colBg)
         : m_hdc(hdc)
     {
         Change(colFg, colBg);
@@ -52,7 +52,7 @@ public:
 protected:
     // this ctor doesn't change mode immediately, call Change() later to do it
     // only if needed
-    wxTextColoursChanger(HDC hdc)
+    wxTextColoursChanger(WXHDC hdc)
         : m_hdc(hdc)
     {
         m_oldColFg =
@@ -95,7 +95,7 @@ protected:
     }
 
 private:
-    const HDC m_hdc;
+    const WXHDC m_hdc;
     COLORREF m_oldColFg,
              m_oldColBg;
 };
@@ -105,7 +105,7 @@ class wxBkModeChanger
 {
 public:
     // set background mode to opaque if mode != wxBrushStyle::Transparent
-    wxBkModeChanger(HDC hdc, wxBrushStyle mode)
+    wxBkModeChanger(WXHDC hdc, wxBrushStyle mode)
         : m_hdc(hdc)
     {
         Change(mode);
@@ -120,7 +120,7 @@ public:
 protected:
     // this ctor doesn't change mode immediately, call Change() later to do it
     // only if needed
-    wxBkModeChanger(HDC hdc) : m_hdc(hdc) { m_oldMode = 0; }
+    wxBkModeChanger(WXHDC hdc) : m_hdc(hdc) { m_oldMode = 0; }
 
     void Change(wxBrushStyle mode)
     {
@@ -134,7 +134,7 @@ protected:
     }
 
 private:
-    const HDC m_hdc;
+    const WXHDC m_hdc;
     int m_oldMode;
 };
 

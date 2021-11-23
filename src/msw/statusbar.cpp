@@ -614,7 +614,7 @@ bool wxStatusBar::MSWProcessMessage(WXMSG* pMsg)
         // for a tooltip to be shown, we need to relay mouse events to it;
         // this is typically done by wxWindowMSW::MSWProcessMessage but only
         // if wxWindow::m_tooltip pointer is non-NULL.
-        // Since wxStatusBar has multiple tooltips for a single HWND, it keeps
+        // Since wxStatusBar has multiple tooltips for a single WXHWND, it keeps
         // wxWindow::m_tooltip == NULL and then relays mouse events here:
         MSG *msg = (MSG *)pMsg;
         if ( msg->message == WM_MOUSEMOVE )

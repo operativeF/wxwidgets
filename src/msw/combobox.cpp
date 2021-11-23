@@ -60,7 +60,7 @@ wxEND_EVENT_TABLE()
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxComboEditWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // ============================================================================
 // implementation
@@ -104,9 +104,9 @@ bool ShouldForwardFromEditToCombo(UINT message)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxComboEditWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    HWND hwndCombo = ::GetParent(hWnd);
+    WXHWND hwndCombo = ::GetParent(hWnd);
     wxWindow *win = wxFindWinFromHandle((WXHWND)hwndCombo);
 
     if ( ShouldForwardFromEditToCombo(message) )
@@ -269,7 +269,7 @@ bool wxComboBox::MSWProcessEditMsg(WXUINT msg, WXWPARAM wParam, WXLPARAM lParam)
     {
         // Here we reproduce what MSWDefWindowProc() does for this window
         // itself, but for the EDIT window.
-        ::CallWindowProcW(CASTWNDPROC gs_wndprocEdit, (HWND)GetEditHWND(),
+        ::CallWindowProcW(CASTWNDPROC gs_wndprocEdit, (WXHWND)GetEditHWND(),
                          msg, wParam, lParam);
 
         // Send the event allowing completion code to do its thing.
@@ -472,7 +472,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     // edit control, we must subclass it as well
     if ( !(style & wxCB_READONLY) )
     {
-        gs_wndprocEdit = wxSetWindowProc((HWND)GetEditHWND(), wxComboEditWndProc);
+        gs_wndprocEdit = wxSetWindowProc((WXHWND)GetEditHWND(), wxComboEditWndProc);
     }
 
     // and finally, show the control
@@ -688,7 +688,7 @@ wxWindow *wxComboBox::MSWFindItem(long id, WXHWND hWnd) const
     // this one must be this window itself, but this is not the case for the
     // comboboxes where the native control seems to always use the ID of 1000
     // for the popup listbox that it creates -- and this ID may be the same as
-    // our own one. So we must explicitly check the HWND value too here and
+    // our own one. So we must explicitly check the WXHWND value too here and
     // avoid eating the events from the listbox as otherwise it is rendered
     // inoperative, see #15647.
     if ( id == GetId() && hWnd && hWnd != GetHWND() )

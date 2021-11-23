@@ -274,7 +274,7 @@ bool wxControl::MSWOnNotify(int idCtrl,
 
 WXHBRUSH wxControl::DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd)
 {
-    HDC hdc = (HDC)pDC;
+    WXHDC hdc = (WXHDC)pDC;
 
     WXHBRUSH hbr = nullptr;
     if ( !colBg.IsOk() )
@@ -282,7 +282,7 @@ WXHBRUSH wxControl::DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd)
         wxWindow *win = wxFindWinFromHandle( hWnd );
         if ( !win )
         {
-            // If this HWND doesn't correspond to a wxWindow, it still might be
+            // If this WXHWND doesn't correspond to a wxWindow, it still might be
             // one of its children for which we need to set the background
             // brush, e.g. this is the case for the EDIT control that is part
             // of wxComboBox but also e.g. of wxSlider label HWNDs which are
@@ -297,7 +297,7 @@ WXHBRUSH wxControl::DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd)
             }
             else // Or maybe a child sub-window of this one.
             {
-                HWND parent = ::GetParent(hWnd);
+                WXHWND parent = ::GetParent(hWnd);
                 if ( parent )
                 {
                     wxWindow *winParent = wxFindWinFromHandle( parent );
@@ -352,7 +352,7 @@ WXHBRUSH wxControl::DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd)
 WXHBRUSH wxControl::MSWControlColor(WXHDC pDC, WXHWND hWnd)
 {
     if ( HasTransparentBackground() )
-        ::SetBkMode((HDC)pDC, TRANSPARENT);
+        ::SetBkMode((WXHDC)pDC, TRANSPARENT);
 
     // don't pass any background colour to DoMSWControlColor(), our own
     // background colour will be used by it only if it is set, otherwise the
@@ -503,7 +503,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
 
 
     // calculate the rectangles for the button itself and the label
-    HDC hdc = dis->hDC;
+    WXHDC hdc = dis->hDC;
     const RECT& rect = dis->rcItem;
 
     // calculate the rectangles for the button itself and the label
@@ -623,7 +623,7 @@ void wxControlWithItems::MSWAllocStorage(const std::vector<std::string>& items,
         totalTextLength += items[i].length();
     }
 
-    if ( ::SendMessageW((HWND)MSWGetItemsHWND(), wm, numItems,
+    if ( ::SendMessageW((WXHWND)MSWGetItemsHWND(), wm, numItems,
                      (LPARAM)totalTextLength*sizeof(wxChar)) == LB_ERRSPACE )
     {
         wxLogLastError("SendMessage(XX_INITSTORAGE)");
@@ -634,7 +634,7 @@ int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
                                               const std::string& item,
                                               unsigned wm)
 {
-    LRESULT n = ::SendMessageW((HWND)MSWGetItemsHWND(), wm, pos,
+    LRESULT n = ::SendMessageW((WXHWND)MSWGetItemsHWND(), wm, pos,
                             reinterpret_cast<LPARAM>(boost::nowide::widen(item).c_str()));
     if ( n == CB_ERR || n == CB_ERRSPACE )
     {

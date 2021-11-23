@@ -24,7 +24,7 @@
   NULL. classname is the desired wndclass classname. If function successfully
   registers the class, pclassname will be set to classname.
  */
-extern "C" HWND
+extern "C" WXHWND
 wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc);
 
 #endif // _WX_MSW_PRIVATE_HIDDENWIN_H_

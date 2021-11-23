@@ -172,7 +172,7 @@ protected:
     wxAutoIOleInPlaceActiveObject m_oleInPlaceActiveObject;
     wxAutoIOleDocumentView    m_docView;
     wxAutoIViewObject            m_viewObject;
-    HWND m_oleObjectHWND;
+    WXHWND m_oleObjectHWND;
     bool m_bAmbientUserMode;
     DWORD m_docAdviseCookie;
     wxWindow* m_realparent;

@@ -21,6 +21,8 @@
     using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 #include <memory>
@@ -86,11 +88,11 @@ public:
     // MSW-only methods
     // ----------------
 
-    // Create a new menu from the given native HMENU. Takes ownership of the
+    // Create a new menu from the given native WXHMENU. Takes ownership of the
     // menu handle and will delete it when this object is destroyed.
     static wxMenu *MSWNewFromHMENU(WXHMENU hMenu) { return new wxMenu(hMenu); }
 
-    // Detaches HMENU so that it isn't deleted when this object is destroyed.
+    // Detaches WXHMENU so that it isn't deleted when this object is destroyed.
     // Don't use this object after calling this method.
     WXHMENU MSWDetachHMENU() { WXHMENU m = m_hMenu; m_hMenu = nullptr; return m; }
 
@@ -158,7 +160,7 @@ private:
     // This constructor is private, use MSWNewFromHMENU() to use it.
     wxMenu(WXHMENU hMenu);
 
-    // Common part of all ctors, it doesn't create a new HMENU.
+    // Common part of all ctors, it doesn't create a new WXHMENU.
     void InitNoCreate();
 
     // Common part of all ctors except of the one above taking a native menu

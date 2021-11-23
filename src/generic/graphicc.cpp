@@ -426,8 +426,8 @@ public:
 #if wxUSE_ENH_METAFILE
     wxCairoContext(wxGraphicsRenderer* renderer, const wxEnhMetaFileDC& dc);
 #endif // wxUSE_ENH_METAFILE
-    wxCairoContext( wxGraphicsRenderer* renderer, HDC context );
-    wxCairoContext(wxGraphicsRenderer* renderer, HWND hWnd);
+    wxCairoContext( wxGraphicsRenderer* renderer, WXHDC context );
+    wxCairoContext(wxGraphicsRenderer* renderer, WXHWND hWnd);
 #endif
     wxCairoContext( wxGraphicsRenderer* renderer, cairo_t *context );
     wxCairoContext( wxGraphicsRenderer* renderer, wxWindow *window);
@@ -627,7 +627,7 @@ public:
     }
 
 private:
-    HDC m_hdc;
+    WXHDC m_hdc;
 };
 #endif // __WXMSW__
 
@@ -1950,7 +1950,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxPrinterDC&
     // wxMSW contexts always use MM_ANISOTROPIC, which messes up
     // text rendering when printing using Cairo. Switch it to MM_TEXT
     // map mode to avoid this problem.
-    HDC hdc = (HDC)dc.GetHDC();
+    WXHDC hdc = (WXHDC)dc.GetHDC();
     m_mswStateSavedDC = ::SaveDC(hdc);
     ::SetMapMode(hdc, MM_TEXT);
     m_mswSurface = cairo_win32_printing_surface_create(hdc);
@@ -1991,7 +1991,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& 
     EnableOffset();
 
 #ifdef __WXMSW__
-    HDC hdc = (HDC)dc.GetHDC();
+    WXHDC hdc = (WXHDC)dc.GetHDC();
     m_mswStateSavedDC = ::SaveDC(hdc);
     m_mswSurface = cairo_win32_surface_create(hdc);
     Init( cairo_create(m_mswSurface) );
@@ -2047,7 +2047,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
     wxASSERT_MSG(bmp.IsOk(),
                  "Should select a bitmap before creating wxCairoContext");
 
-    HDC hdc = (HDC)dc.GetHDC();
+    WXHDC hdc = (WXHDC)dc.GetHDC();
     m_mswStateSavedDC = ::SaveDC(hdc);
     bool hasBitmap = false;      // To signal that Cairo context is created
                                  // from raw bitmap and not from DC.
@@ -2055,7 +2055,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
                                         // transformation settings from source
                                         // wxDC to Cairo context on our own.
 
-    // Prior to 1.15.4 creating surface from HDC could be done only with
+    // Prior to 1.15.4 creating surface from WXHDC could be done only with
     // cairo_win32_surface_create() supporting only 24 bpp RGB surface.
     // So, in case of a 32 bpp ARGB bitmap, it was necessary to create
     // a 32 bpp surface directly from bitmap data with cairo_image_surface_create_for_data().
@@ -2274,7 +2274,7 @@ wxCairoContext::wxCairoContext(wxGraphicsRenderer* renderer, const wxEnhMetaFile
     // wxMSW contexts always use MM_ANISOTROPIC, which messes up
     // text rendering when printing using Cairo. Switch it to MM_TEXT
     // map mode to avoid this problem.
-    HDC hdc = (HDC)dc.GetHDC();
+    WXHDC hdc = (WXHDC)dc.GetHDC();
     m_mswStateSavedDC = ::SaveDC(hdc);
     ::SetMapMode(hdc, MM_TEXT);
     m_mswSurface = cairo_win32_printing_surface_create(hdc);
@@ -2290,7 +2290,7 @@ wxCairoContext::wxCairoContext(wxGraphicsRenderer* renderer, const wxEnhMetaFile
 }
 #endif // wxUSE_ENH_METAFILE
 
-wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, HDC handle )
+wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, WXHDC handle )
 : wxGraphicsContext(renderer)
 {
     m_mswStateSavedDC = ::SaveDC(handle);
@@ -2357,16 +2357,16 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, HDC handle )
     }
 }
 
-wxCairoContext::wxCairoContext(wxGraphicsRenderer* renderer, HWND hWnd)
+wxCairoContext::wxCairoContext(wxGraphicsRenderer* renderer, WXHWND hWnd)
     : wxGraphicsContext(renderer)
     , m_mswWindowHDC(hWnd)
 {
     // See remarks for wxWindowBase::GetContentScaleFactor
-    double scaleY = ::GetDeviceCaps((HDC)m_mswWindowHDC, LOGPIXELSY) / 96.0f;
+    double scaleY = ::GetDeviceCaps((WXHDC)m_mswWindowHDC, LOGPIXELSY) / 96.0f;
     SetContentScaleFactor(scaleY);
 
     m_mswStateSavedDC = 0;
-    m_mswSurface = cairo_win32_surface_create((HDC)m_mswWindowHDC);
+    m_mswSurface = cairo_win32_surface_create((WXHDC)m_mswWindowHDC);
 
     Init(cairo_create(m_mswSurface));
     m_width = 0;
@@ -2427,7 +2427,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, wxWindow *window)
 
 #ifdef __WXMSW__
     m_mswStateSavedDC = 0;
-    m_mswSurface = cairo_win32_surface_create((HDC)m_mswWindowHDC);
+    m_mswSurface = cairo_win32_surface_create((WXHDC)m_mswWindowHDC);
     Init(cairo_create(m_mswSurface));
 
     wxSize sz = window->GetSize();
@@ -2468,7 +2468,7 @@ wxCairoContext::~wxCairoContext()
 #ifdef __WXMSW__
     if ( m_mswSurface )
     {
-        HDC hdc = cairo_win32_surface_get_dc(m_mswSurface);
+        WXHDC hdc = cairo_win32_surface_get_dc(m_mswSurface);
 
         cairo_surface_destroy(m_mswSurface);
 
@@ -3227,7 +3227,7 @@ wxGraphicsContext * wxCairoRenderer::CreateContextFromNativeContext(void * conte
         return new wxCairoContext(this, (cairo_t*)context);
 
     if (objType == OBJ_DC || objType == OBJ_MEMDC)
-        return new wxCairoContext(this, (HDC)context);
+        return new wxCairoContext(this, (WXHDC)context);
 
     return NULL;
 #else
@@ -3242,7 +3242,7 @@ wxGraphicsContext * wxCairoRenderer::CreateContextFromNativeWindow( void * windo
 #ifdef __WXGTK__
     return new wxCairoContext(this, static_cast<GdkWindow*>(window));
 #elif defined(__WXMSW__)
-    return new wxCairoContext(this, static_cast<HWND>(window));
+    return new wxCairoContext(this, static_cast<WXHWND>(window));
 #else
     wxUnusedVar(window);
     return NULL;
@@ -3253,7 +3253,7 @@ wxGraphicsContext * wxCairoRenderer::CreateContextFromNativeWindow( void * windo
 wxGraphicsContext * wxCairoRenderer::CreateContextFromNativeHDC(WXHDC dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxCairoContext(this, (HDC)dc);
+    return new wxCairoContext(this, (WXHDC)dc);
 }
 #endif
 

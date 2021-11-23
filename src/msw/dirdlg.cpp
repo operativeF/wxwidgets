@@ -86,7 +86,7 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path);
 #endif // #if wxUSE_IFILEOPENDIALOG
 
 // callback used in wxDirDialog::ShowSHBrowseForFolder()
-static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp,
+static int CALLBACK BrowseCallbackProc(WXHWND hwnd, UINT uMsg, LPARAM lp,
                                        LPARAM pData);
 
 
@@ -455,7 +455,7 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path)
 
 // callback used in wxDirDialog::ShowSHBrowseForFolder()
 static int CALLBACK
-BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
+BrowseCallbackProc(WXHWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
 {
     switch(uMsg)
     {

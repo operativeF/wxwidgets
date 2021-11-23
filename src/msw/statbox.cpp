@@ -308,7 +308,7 @@ using msw::utils::unique_region;
 
 // MSWGetRegionWithoutSelf helper: removes the given rectangle from region
 static inline void
-SubtractRectFromRgn(HRGN hrgn, int left, int top, int right, int bottom)
+SubtractRectFromRgn(WXHRGN hrgn, int left, int top, int right, int bottom)
 {    
     auto hrgnRect = unique_region(::CreateRectRgn(left, top, right, bottom));
 
@@ -323,7 +323,7 @@ SubtractRectFromRgn(HRGN hrgn, int left, int top, int right, int bottom)
 
 void wxStaticBox::MSWGetRegionWithoutSelf(WXHRGN hRgn, int w, int h)
 {
-    HRGN hrgn = (HRGN)hRgn;
+    WXHRGN hrgn = (WXHRGN)hRgn;
 
     // remove the area occupied by the static box borders from the region
     int borderTop, border;
@@ -375,7 +375,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
 {
     RECT boxRc;
     ::GetWindowRect(GetHwnd(), &boxRc);
-    HRGN hrgn = ::CreateRectRgn(boxRc.left, boxRc.top, boxRc.right + 1, boxRc.bottom + 1);
+    WXHRGN hrgn = ::CreateRectRgn(boxRc.left, boxRc.top, boxRc.right + 1, boxRc.bottom + 1);
     bool foundThis = false;
 
     // Iterate over all sibling windows as in the old wxWidgets API the
@@ -384,7 +384,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
     //
     // Also notice that we must iterate over all windows, not just all
     // wxWindows, as there may be composite windows etc.
-    HWND child;
+    WXHWND child;
     for ( child = ::GetWindow(GetHwndOf(GetParent()), GW_CHILD);
           child;
           child = ::GetWindow(child, GW_HWNDNEXT) )
@@ -466,7 +466,7 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
 void wxStaticBox::PaintBackground(wxDC& dc, const RECT& rc)
 {
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HBRUSH hbr = MSWGetBgBrush(impl->GetHDC());
+    WXHBRUSH hbr = MSWGetBgBrush(impl->GetHDC());
 
     // if there is no special brush for painting this control, just use the
     // solid background colour
@@ -493,7 +493,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
     if ( m_hasFgCol && wxUxThemeIsActive() && !m_labelWin )
     {
         // draw over the text in default colour in our colour
-        HDC hdc = GetHdcOf(*impl);
+        WXHDC hdc = GetHdcOf(*impl);
         ::SetTextColor(hdc, GetForegroundColour().GetPixel());
 
         // Get dimensions of the label
@@ -658,7 +658,7 @@ void wxStaticBox::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 
     // create the region excluding box children
-    auto hrgn = unique_region((HRGN)MSWGetRegionWithoutChildren());
+    auto hrgn = unique_region((WXHRGN)MSWGetRegionWithoutChildren());
     RECT rcWin;
     ::GetWindowRect(GetHwnd(), &rcWin);
     ::OffsetRgn(hrgn.get(), -rcWin.left, -rcWin.top);

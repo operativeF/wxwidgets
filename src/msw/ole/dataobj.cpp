@@ -1049,7 +1049,7 @@ bool wxBitmapDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 #if wxUSE_WXDIB
     const BITMAPINFO * const pbmi = (const BITMAPINFO *)buf;
 
-    HBITMAP hbmp = wxDIB::ConvertToBitmap(pbmi);
+    WXHBITMAP hbmp = wxDIB::ConvertToBitmap(pbmi);
 
     wxCHECK_MSG( hbmp, FALSE, "pasting/dropping invalid bitmap" );
 
@@ -1092,12 +1092,12 @@ bool wxBitmapDataObject2::GetDataHere(void *pBuf) const
 
 bool wxBitmapDataObject2::SetData(size_t WXUNUSED(len), const void *pBuf)
 {
-    HBITMAP hbmp = *static_cast<const HBITMAP*>(pBuf);
+    WXHBITMAP hbmp = *static_cast<const WXHBITMAP*>(pBuf);
 
     BITMAP bmp;
     if ( !GetObject(hbmp, sizeof(BITMAP), &bmp) )
     {
-        wxLogLastError("GetObject(HBITMAP)");
+        wxLogLastError("GetObject(WXHBITMAP)");
     }
 
     wxBitmap bitmap;
@@ -1128,7 +1128,7 @@ size_t wxBitmapDataObject::GetDataSize(const wxDataFormat& format) const
 
         // first get the info
         BITMAPINFO bi;
-        if ( !GetDIBits(hdc, (HBITMAP)m_bitmap.GetHBITMAP(), 0, 0,
+        if ( !GetDIBits(hdc, (WXHBITMAP)m_bitmap.GetHBITMAP(), 0, 0,
                         NULL, &bi, DIB_RGB_COLORS) )
         {
             wxLogLastError("GetDIBits(NULL)");
@@ -1140,7 +1140,7 @@ size_t wxBitmapDataObject::GetDataSize(const wxDataFormat& format) const
     }
     else // CF_BITMAP
     {
-        // no data to copy - we don't pass HBITMAP via global memory
+        // no data to copy - we don't pass WXHBITMAP via global memory
         return 0;
     }
 }
@@ -1150,7 +1150,7 @@ bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
 {
     wxASSERT_MSG( m_bitmap.IsOk(), "copying invalid bitmap" );
 
-    HBITMAP hbmp = (HBITMAP)m_bitmap.GetHBITMAP();
+    WXHBITMAP hbmp = (WXHBITMAP)m_bitmap.GetHBITMAP();
     if ( format.GetFormatId() == CF_DIB )
     {
         // create the DIB
@@ -1181,7 +1181,7 @@ bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
     else // CF_BITMAP
     {
         // we put a bitmap handle into pBuf
-        *(HBITMAP *)pBuf = hbmp;
+        *(WXHBITMAP *)pBuf = hbmp;
     }
 
     return true;
@@ -1190,7 +1190,7 @@ bool wxBitmapDataObject::GetDataHere(const wxDataFormat& format,
 bool wxBitmapDataObject::SetData(const wxDataFormat& format,
                                  size_t size, const void *pBuf)
 {
-    HBITMAP hbmp;
+    WXHBITMAP hbmp;
     int w, h, d;
     if ( format.GetFormatId() == CF_DIB )
     {
@@ -1214,12 +1214,12 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
     else // CF_BITMAP
     {
         // it's easy with bitmaps: we pass them by handle
-        hbmp = *(HBITMAP *)pBuf;
+        hbmp = *(WXHBITMAP *)pBuf;
 
         BITMAP bmp;
         if ( !GetObject(hbmp, sizeof(BITMAP), &bmp) )
         {
-            wxLogLastError("GetObject(HBITMAP)");
+            wxLogLastError("GetObject(WXHBITMAP)");
         }
 
         w = bmp.bmWidth;

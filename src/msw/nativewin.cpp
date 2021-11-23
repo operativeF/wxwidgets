@@ -23,14 +23,14 @@ wxNativeWindow::Create(wxWindow* parent,
                        wxWindowID winid,
                        wxNativeWindowHandle hwnd)
 {
-    wxCHECK_MSG( hwnd, false, "Invalid null HWND" );
+    wxCHECK_MSG( hwnd, false, "Invalid null WXHWND" );
     wxCHECK_MSG( parent, false, "Must have a valid parent" );
     wxASSERT_MSG( ::GetParent(hwnd) == GetHwndOf(parent),
                   "The native window has incorrect parent" );
 
     const wxRect r = wxRectFromRECT(wxGetWindowRect(hwnd));
 
-    // Skip wxWindow::Create() which would try to create a new HWND, we don't
+    // Skip wxWindow::Create() which would try to create a new WXHWND, we don't
     // want this as we already have one.
     if ( !CreateBase(parent, winid,
                      r.GetPosition(), r.GetSize(),
@@ -51,7 +51,7 @@ wxNativeWindow::Create(wxWindow* parent,
     else // We used a fixed ID.
     {
         // For the same reason as above, check that it's the same as the one
-        // used by the native HWND.
+        // used by the native WXHWND.
         wxASSERT_MSG( ::GetWindowLongPtrW(hwnd, GWL_ID) == winid,
                       "Mismatch between wx and native IDs" );
     }
@@ -68,7 +68,7 @@ void wxNativeWindow::DoDisown()
 
 wxNativeWindow::~wxNativeWindow()
 {
-    // Restore the original window proc and reset HWND to 0 to prevent it from
+    // Restore the original window proc and reset WXHWND to 0 to prevent it from
     // being destroyed in the base class dtor if it's owned by user code.
     if ( m_ownedByUser )
         UnsubclassWin();
@@ -90,10 +90,10 @@ bool wxNativeContainerWindow::Create(wxNativeContainerWindowHandle hwnd)
         return false;
     }
 
-    // make this HWND really a wxWindow
+    // make this WXHWND really a wxWindow
     SubclassWin(hwnd);
 
-    // inherit the other attributes we can from the native HWND
+    // inherit the other attributes we can from the native WXHWND
     AdoptAttributesFromHWND();
 
     return true;
@@ -101,13 +101,13 @@ bool wxNativeContainerWindow::Create(wxNativeContainerWindowHandle hwnd)
 
 bool wxNativeContainerWindow::IsShown() const
 {
-    return (::IsWindowVisible(static_cast<HWND>(m_hWnd)) != 0);
+    return (::IsWindowVisible(static_cast<WXHWND>(m_hWnd)) != 0);
 }
 
 void wxNativeContainerWindow::OnNativeDestroyed()
 {
     // don't use Close() or even Destroy() here, we really don't want to keep
-    // an object using a no more existing HWND around for longer than necessary
+    // an object using a no more existing WXHWND around for longer than necessary
     delete this;
 }
 

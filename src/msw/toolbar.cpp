@@ -251,7 +251,7 @@ private:
 //
 // Returns an empty (0, 0, 0, 0) rectangle if fails so the caller may compare
 // r.right or r.bottom with 0 to check for this.
-static RECT wxGetTBItemRect(HWND hwnd, int index, int id = wxID_NONE)
+static RECT wxGetTBItemRect(WXHWND hwnd, int index, int id = wxID_NONE)
 {
     RECT r;
 
@@ -403,7 +403,7 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
     // (officially in order to allow using the same string as the menu item and
     // a toolbar item tip), but we don't want this, so force TTS_NOPREFIX to be
     // on to preserve all ampersands.
-    HWND hwndTTip = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
+    WXHWND hwndTTip = (WXHWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
     if ( hwndTTip )
     {
         auto styleTTip = ::GetWindowLongPtrW(hwndTTip, GWL_STYLE);
@@ -417,7 +417,7 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
 
 void wxToolBar::Recreate()
 {
-    const HWND hwndOld = GetHwnd();
+    const WXHWND hwndOld = GetHwnd();
     if ( !hwndOld )
     {
         // we haven't been created yet, no need to recreate
@@ -440,7 +440,7 @@ void wxToolBar::Recreate()
     // to account for its size, e.g. to offset the position of the new toolbar
     // being created by the size of this toolbar itself. This wouldn't work
     // anyhow, because we can't query for the size of a window without any
-    // valid HWND, but would result in debug warning messages and is just a
+    // valid WXHWND, but would result in debug warning messages and is just a
     // wrong thing to do anyhow.
     Hide();
 
@@ -476,7 +476,7 @@ void wxToolBar::Recreate()
     // it is for the old bitmap control and can't be used with the new one
     if ( m_hBitmap )
     {
-        ::DeleteObject((HBITMAP) m_hBitmap);
+        ::DeleteObject((WXHBITMAP) m_hBitmap);
         m_hBitmap = nullptr;
     }
 
@@ -501,7 +501,7 @@ wxToolBar::~wxToolBar()
     SendSizeEventToParent();
 
     if ( m_hBitmap )
-        ::DeleteObject((HBITMAP) m_hBitmap);
+        ::DeleteObject((WXHBITMAP) m_hBitmap);
 
     delete m_disabledImgList;
 }
@@ -798,7 +798,7 @@ bool wxToolBar::Realize()
     {
         // if we already have a bitmap, we'll replace the existing one --
         // otherwise we'll install a new one
-        HBITMAP oldToolBarBitmap = (HBITMAP)m_hBitmap;
+        WXHBITMAP oldToolBarBitmap = (WXHBITMAP)m_hBitmap;
 
         const wxCoord totalBitmapWidth  = m_defaultWidth * gsl::narrow_cast<wxCoord>(nTools),
                       totalBitmapHeight = m_defaultHeight;
@@ -848,7 +848,7 @@ bool wxToolBar::Realize()
             dcAllButtons.Clear();
         }
 
-        HBITMAP hBitmap = GetHbitmapOf(bitmap);
+        WXHBITMAP hBitmap = GetHbitmapOf(bitmap);
 
         if ( remapValue == Remap_Bg )
         {
@@ -856,7 +856,7 @@ bool wxToolBar::Realize()
 
             // Even if we're not remapping the bitmap
             // content, we still have to remap the background.
-            hBitmap = (HBITMAP)MapBitmap((WXHBITMAP) hBitmap,
+            hBitmap = (WXHBITMAP)MapBitmap((WXHBITMAP) hBitmap,
                 totalBitmapWidth, totalBitmapHeight);
 
             dcAllButtons.SelectObject(bitmap);
@@ -973,14 +973,14 @@ bool wxToolBar::Realize()
 #endif
         {
             hBitmap = GetHbitmapOf(bitmap);
-            // don't delete this HBITMAP!
+            // don't delete this WXHBITMAP!
             bitmap.ResetHBITMAP();
         }
 
         if ( remapValue == Remap_Buttons )
         {
             // Map to system colours
-            hBitmap = (HBITMAP)MapBitmap((WXHBITMAP) hBitmap,
+            hBitmap = (WXHBITMAP)MapBitmap((WXHBITMAP) hBitmap,
                                          totalBitmapWidth, totalBitmapHeight);
         }
 
@@ -1599,7 +1599,7 @@ bool wxToolBar::MSWOnNotify(int WXUNUSED(idCtrl),
         if ( (code != (UINT) TTN_NEEDTEXTA) && (code != (UINT) TTN_NEEDTEXTW) )
             return false;
 
-        HWND toolTipWnd = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
+        WXHWND toolTipWnd = (WXHWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
         if ( toolTipWnd != hdr->hwndFrom )
             return false;
 
@@ -2093,7 +2093,7 @@ WXHBRUSH wxToolBar::MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child)
 
 void wxToolBar::MSWDoEraseBackground(WXHDC hDC)
 {
-    wxFillRect(GetHwnd(), (HDC)hDC, (HBRUSH)MSWGetToolbarBgBrush());
+    wxFillRect(GetHwnd(), (WXHDC)hDC, (WXHBRUSH)MSWGetToolbarBgBrush());
 }
 
 bool wxToolBar::MSWEraseBgHook(WXHDC hDC)
@@ -2101,7 +2101,7 @@ bool wxToolBar::MSWEraseBgHook(WXHDC hDC)
     // toolbar WM_PAINT handler offsets the DC origin before sending
     // WM_ERASEBKGND to the parent but as we handle it in the toolbar itself,
     // we need to reset it back
-    HDC hdc = (HDC)hDC;
+    WXHDC hdc = (WXHDC)hDC;
     POINT ptOldOrg;
     if ( !::SetWindowOrgEx(hdc, 0, 0, &ptOldOrg) )
     {
@@ -2155,7 +2155,7 @@ WXLRESULT wxToolBar::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
         case WM_PRINTCLIENT:
-            wxFillRect(GetHwnd(), (HDC)wParam, MSWGetToolbarBgBrush());
+            wxFillRect(GetHwnd(), (WXHDC)wParam, MSWGetToolbarBgBrush());
             return 1;
     }
 
@@ -2177,7 +2177,7 @@ WXHBITMAP wxToolBar::MapBitmap(WXHBITMAP bitmap, int width, int height)
         return bitmap;
     }
 
-    SelectInHDC bmpInHDC(hdcMem, (HBITMAP)bitmap);
+    SelectInHDC bmpInHDC(hdcMem, (WXHBITMAP)bitmap);
 
     if ( !bmpInHDC )
     {

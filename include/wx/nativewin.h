@@ -24,18 +24,18 @@
 // windows wrapping:
 //
 //  - wxNativeContainerWindowHandle is the toolkit-level handle of the native
-//    window, i.e. HWND/GdkWindow*/NSWindow
+//    window, i.e. WXHWND/GdkWindow*/NSWindow
 //
 //  - wxNativeContainerWindowId is the lowest level identifier of the native
-//    window, i.e. HWND/GdkNativeWindow/NSWindow (so it's the same as above for
+//    window, i.e. WXHWND/GdkNativeWindow/NSWindow (so it's the same as above for
 //    all platforms except GTK where we also can work with Window/XID)
 //
-//  - wxNativeWindowHandle for child windows, i.e. HWND/GtkWidget*/NSControl
+//  - wxNativeWindowHandle for child windows, i.e. WXHWND/GtkWidget*/NSControl
 #if defined(__WXMSW__)
 
-    using wxNativeContainerWindowId = HWND;
-    using wxNativeContainerWindowHandle = HWND;
-    using wxNativeWindowHandle = HWND;
+    using wxNativeContainerWindowId = WXHWND;
+    using wxNativeContainerWindowHandle = WXHWND;
+    using wxNativeWindowHandle = WXHWND;
 #elif defined(__WXGTK__)
     // GdkNativeWindow is guint32 under GDK/X11 and gpointer under GDK/WIN32
     #ifdef __UNIX__
@@ -145,7 +145,7 @@ public:
     // only the GdkWindow objects
     //
     // wxNativeContainerWindowId is Window (i.e. an XID, i.e. an int) under X11
-    // (when GDK_WINDOWING_X11 is defined) or HWND under Win32
+    // (when GDK_WINDOWING_X11 is defined) or WXHWND under Win32
     wxNativeContainerWindow(wxNativeContainerWindowId winid) { Create(winid); }
 
     [[maybe_unused]] bool Create(wxNativeContainerWindowId winid);

@@ -106,7 +106,7 @@ void wxBitmapComboBox::RecreateControl()
 
     wxComboBox::DoClear();
 
-    HWND hwnd = GetHwnd();
+    WXHWND hwnd = GetHwnd();
     DissociateHandle();
     ::DestroyWindow(hwnd);
 

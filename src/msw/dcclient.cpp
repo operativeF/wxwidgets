@@ -23,13 +23,13 @@ import <unordered_map>;
 // local data structures
 // ----------------------------------------------------------------------------
 
-// This is a base class for two concrete subclasses below and contains HDC
+// This is a base class for two concrete subclasses below and contains WXHDC
 // cached for the duration of the WM_PAINT processing together with some
 // bookkeeping information.
 class wxPaintDCInfo
 {
 public:
-    explicit wxPaintDCInfo(HDC hdc)
+    explicit wxPaintDCInfo(WXHDC hdc)
         : m_hdc(hdc)
     {
     }
@@ -43,7 +43,7 @@ public:
     WXHDC GetHDC() const { return (WXHDC)m_hdc; }
 
 protected:
-    const HDC m_hdc;
+    const WXHDC m_hdc;
 };
 
 namespace
@@ -77,7 +77,7 @@ private:
         return &ps;
     }
 
-    const HWND m_hwnd;
+    const WXHWND m_hwnd;
     PAINTSTRUCT m_ps;
 };
 
@@ -86,7 +86,7 @@ private:
 class wxPaintDCInfoExternal : public wxPaintDCInfo
 {
 public:
-    explicit wxPaintDCInfoExternal(HDC hdc)
+    explicit wxPaintDCInfoExternal(WXHDC hdc)
         : wxPaintDCInfo(hdc),
           m_state(::SaveDC(hdc))
     {
@@ -104,16 +104,16 @@ private:
     const int m_state;
 };
 
-// The global map containing HDC to use for the given window. The entries in
+// The global map containing WXHDC to use for the given window. The entries in
 // this map only exist during WM_PAINT processing and are destroyed when it is
 // over.
 //
 // It is needed because in some circumstances it can happen that more than one
 // wxPaintDC is created for the same window during its WM_PAINT handling (and
 // as this can happen implicitly, e.g. by calling a function in some library,
-// this can be quite difficult to find) but we need to reuse the same HDC for
+// this can be quite difficult to find) but we need to reuse the same WXHDC for
 // all of them because we can't call BeginPaint() more than once. So we cache
-// the first HDC created for the window in this map and then reuse it later if
+// the first WXHDC created for the window in this map and then reuse it later if
 // needed. And, of course, remove it from the map when the painting is done.
 using PaintDCInfos = std::unordered_map< wxWindow *, wxPaintDCInfo *, wxPointerHash, wxPointerEqual >;
 
@@ -265,7 +265,7 @@ wxPaintDCImpl::wxPaintDCImpl( wxDC *owner, wxWindow *window ) :
     // (re)set the DC parameters.
     InitDC();
 
-    // the HDC can have a clipping box (which we didn't set), make sure our
+    // the WXHDC can have a clipping box (which we didn't set), make sure our
     // DoGetClippingRect() checks for it
     m_clipping = true;
 }

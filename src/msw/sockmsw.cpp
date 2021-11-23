@@ -53,11 +53,11 @@ constexpr int MAXSOCKETS = 1024;
 #error "MAXSOCKETS is too big!"
 #endif
 
-LRESULT CALLBACK wxSocket_Internal_WinProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND, UINT, WPARAM, LPARAM);
 
 /* Global variables */
 
-static HWND hWin;
+static WXHWND hWin;
 wxCRIT_SECT_DECLARE_MEMBER(gs_critical);
 static std::array<wxSocketImplMSW*, MAXSOCKETS> socketList{};
 static int firstAvailable;
@@ -153,7 +153,7 @@ wxSocketImplMSW::~wxSocketImplMSW()
 
 /* Windows proc for asynchronous event handling */
 
-LRESULT CALLBACK wxSocket_Internal_WinProc(HWND hWnd,
+LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND hWnd,
                                            UINT uMsg,
                                            WPARAM wParam,
                                            LPARAM lParam)

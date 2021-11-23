@@ -11,8 +11,10 @@
 #ifndef _WX_MSW_WRAPCCTL_H_
 #define _WX_MSW_WRAPCCTL_H_
 
+import WX.WinDef;
+
 // Set Unicode format for a common control
-inline void wxSetCCUnicodeFormat(HWND hwnd)
+inline void wxSetCCUnicodeFormat(WXHWND hwnd)
 {
     ::SendMessageW(hwnd, CCM_SETUNICODEFORMAT, 1, 0);
 }

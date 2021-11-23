@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Name:        wx/msw/private/dcdynwrap.h
-// Purpose:     Private dynamically loaded HDC-related functions
+// Purpose:     Private dynamically loaded WXHDC-related functions
 // Author:      Vadim Zeitlin
 // Created:     2016-05-26 (extracted from src/msw/dc.cpp)
 // Copyright:   (c) 2016 Vadim Zeitlin <vadim@wxwidgets.org>
@@ -22,14 +22,14 @@
 namespace wxDynLoadWrappers
 {
 
-DWORD GetLayout(HDC hdc);
-DWORD SetLayout(HDC hdc, DWORD dwLayout);
+DWORD GetLayout(WXHDC hdc);
+DWORD SetLayout(WXHDC hdc, DWORD dwLayout);
 
-BOOL AlphaBlend(HDC hdcDest, int xDest, int yDest, int wDest, int hDest,
-                HDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
+BOOL AlphaBlend(WXHDC hdcDest, int xDest, int yDest, int wDest, int hDest,
+                WXHDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
                 BLENDFUNCTION bf);
 
-BOOL GradientFill(HDC hdc, PTRIVERTEX pVert, ULONG numVert,
+BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
                   PVOID pMesh, ULONG numMesh, ULONG mode);
 
 } // namespace wxDynLoadWrappers

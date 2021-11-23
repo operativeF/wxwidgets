@@ -48,7 +48,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTaskBarIcon, wxEvtHandler);
 // ----------------------------------------------------------------------------
 
 // NB: this class serves two purposes:
-//     1. win32 needs a HWND associated with taskbar icon, this provides it
+//     1. win32 needs a WXHWND associated with taskbar icon, this provides it
 //     2. we need wxTopLevelWindow so that the app doesn't exit when
 //        last frame is closed but there still is a taskbar icon
 class wxTaskBarIconWindow : public wxFrame
@@ -95,7 +95,7 @@ struct NotifyIconData : public NOTIFYICONDATA
                     ? sizeof(NOTIFYICONDATA)
                     : NOTIFYICONDATA_V2_SIZE;
 
-        hWnd = (HWND) hwnd;
+        hWnd = (WXHWND) hwnd;
         uCallbackMessage = gs_msgTaskbar;
         uFlags = NIF_MESSAGE;
 
@@ -216,7 +216,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     wxCHECK_MSG( m_iconAdded, false,
                     "can't be used before the icon is created" );
 
-    const HWND hwnd = GetHwndOf(m_win.get());
+    const WXHWND hwnd = GetHwndOf(m_win.get());
 
     // we need to enable version 5.0 behaviour to receive notifications about
     // the balloon disappearance

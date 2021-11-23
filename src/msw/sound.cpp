@@ -156,7 +156,7 @@ bool wxSound::DoPlay(unsigned flags) const
         return false;
 
     DWORD flagsMSW = m_data->GetSoundFlag();
-    HMODULE hmod = flagsMSW == SND_RESOURCE ? wxGetInstance() : nullptr;
+    WXHMODULE hmod = flagsMSW == SND_RESOURCE ? wxGetInstance() : nullptr;
 
     // we don't want replacement default sound
     flagsMSW |= SND_NODEFAULT;

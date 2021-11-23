@@ -11,6 +11,8 @@ module;
 
 export module WX.Win.UniqueHnd;
 
+import WX.WinDef;
+
 namespace msw::utils
 {
 
@@ -19,16 +21,16 @@ namespace msw::utils
 // Must satisfy construction from other handle types.
 struct WndHandleDeleter
 {
-    using pointer = HANDLE;
+    using pointer = WXHANDLE;
 
-    void operator()(HANDLE h) noexcept { ::CloseHandle(h); }
+    void operator()(WXHANDLE h) noexcept { ::CloseHandle(h); }
 };
 
 struct WndWindowDeleter
 {
-    using pointer = HWND;
+    using pointer = WXHWND;
 
-    void operator()(HWND h) noexcept { ::DestroyWindow(h); }
+    void operator()(WXHWND h) noexcept { ::DestroyWindow(h); }
 };
 
 template<typename GDIObjT>
@@ -41,7 +43,7 @@ struct WndGDIObjDeleter
 
 struct WndConsoleDeleter
 {
-    using pointer = HANDLE;
+    using pointer = WXHANDLE;
     
     // TODO: Mark variable unused?
     void operator()() noexcept { ::FreeConsole(); }
@@ -49,92 +51,92 @@ struct WndConsoleDeleter
 
 struct WndMenuDeleter
 {
-    using pointer = HMENU;
+    using pointer = WXHMENU;
 
-    void operator()(HMENU h) noexcept { ::DestroyMenu(h); }
+    void operator()(WXHMENU h) noexcept { ::DestroyMenu(h); }
 };
 
 struct WndCursorDeleter
 {
-    using pointer = HCURSOR;
+    using pointer = WXHCURSOR;
 
-    void operator()(HCURSOR h) noexcept { ::DestroyCursor(h); }
+    void operator()(WXHCURSOR h) noexcept { ::DestroyCursor(h); }
 };
 
 struct WndDCDeleter
 {
-    using pointer = HDC;
+    using pointer = WXHDC;
 
     void operator()(HDC h) noexcept { ::DeleteDC(h); }
 };
 
 struct WndGLRCDeleter
 {
-    using pointer = HGLRC;
+    using pointer = WXHGLRC;
 
-    void operator()(HGLRC h) noexcept { ::wglDeleteContext(h); }
+    void operator()(WXHGLRC h) noexcept { ::wglDeleteContext(h); }
 };
 
 struct WndAccelDeleter
 {
-    using pointer = HACCEL;
+    using pointer = WXHACCEL;
 
-    void operator()(HACCEL h) noexcept { ::DestroyAcceleratorTable(h); }
+    void operator()(WXHACCEL h) noexcept { ::DestroyAcceleratorTable(h); }
 };
 
 struct WndIconDeleter
 {
-    using pointer = HICON;
+    using pointer = WXHICON;
 
-    void operator()(HICON h) noexcept { ::DestroyIcon(h); }
+    void operator()(WXHICON h) noexcept { ::DestroyIcon(h); }
 };
 
 struct WndEnhMetafileDeleter
 {
-    using pointer = HENHMETAFILE;
+    using pointer = WXHENHMETAFILE;
 
-    void operator()(HENHMETAFILE h) noexcept { ::DeleteEnhMetaFile(h); }
+    void operator()(WXHENHMETAFILE h) noexcept { ::DeleteEnhMetaFile(h); }
 };
 
 struct WndHdcWndDeleter
 {
-    using pointer = HDC;
+    using pointer = WXHDC;
 
-    void operator()(HDC hDC) noexcept { ::ReleaseDC(nullptr, hDC); };
+    void operator()(WXHDC hDC) noexcept { ::ReleaseDC(nullptr, hDC); };
 };
 
 struct WndHdcPaintDeleter
 {
-    using pointer = HDC;
+    using pointer = WXHDC;
 
-    void operator()(HWND hWnd, const PAINTSTRUCT* lpPaint) noexcept { ::EndPaint(hWnd, lpPaint); };
+    void operator()(WXHWND hWnd, const PAINTSTRUCT* lpPaint) noexcept { ::EndPaint(hWnd, lpPaint); };
 };
 
 export
 {
 
-using unique_handle      = std::unique_ptr<HANDLE, WndHandleDeleter>;
-using unique_wnd         = std::unique_ptr<HWND, WndWindowDeleter>;
-using unique_console     = std::unique_ptr<HANDLE, WndConsoleDeleter>;
-using unique_menu        = std::unique_ptr<HMENU, WndMenuDeleter>;
-using unique_cursor      = std::unique_ptr<HCURSOR, WndCursorDeleter>;
-using unique_dc          = std::unique_ptr<HDC, WndDCDeleter>;
-using unique_glrc        = std::unique_ptr<HGLRC, WndGLRCDeleter>;
-using unique_accel       = std::unique_ptr<HACCEL, WndAccelDeleter>;
-using unique_icon        = std::unique_ptr<HICON, WndIconDeleter>;
-using unique_enhmetafile = std::unique_ptr<HENHMETAFILE, WndEnhMetafileDeleter>;
-using unique_dcwnd       = std::unique_ptr<HDC, WndHdcWndDeleter>;
-using unique_dcpaint     = std::unique_ptr<HDC, WndHdcPaintDeleter>;
+using unique_handle      = std::unique_ptr<WXHANDLE, WndHandleDeleter>;
+using unique_wnd         = std::unique_ptr<WXHWND, WndWindowDeleter>;
+using unique_console     = std::unique_ptr<WXHANDLE, WndConsoleDeleter>;
+using unique_menu        = std::unique_ptr<WXHMENU, WndMenuDeleter>;
+using unique_cursor      = std::unique_ptr<WXHCURSOR, WndCursorDeleter>;
+using unique_dc          = std::unique_ptr<WXHDC, WndDCDeleter>;
+using unique_glrc        = std::unique_ptr<WXHGLRC, WndGLRCDeleter>;
+using unique_accel       = std::unique_ptr<WXHACCEL, WndAccelDeleter>;
+using unique_icon        = std::unique_ptr<WXHICON, WndIconDeleter>;
+using unique_enhmetafile = std::unique_ptr<WXHENHMETAFILE, WndEnhMetafileDeleter>;
+using unique_dcwnd       = std::unique_ptr<WXHDC, WndHdcWndDeleter>;
+using unique_dcpaint     = std::unique_ptr<WXHDC, WndHdcPaintDeleter>;
 
 template<typename GDIObjT>
 using unique_gdiobj  = std::unique_ptr<GDIObjT, WndGDIObjDeleter<GDIObjT>>;
 
-using unique_palette  = unique_gdiobj<HPALETTE>;
-using unique_brush    = unique_gdiobj<HBRUSH>;
-using unique_bitmap   = unique_gdiobj<HBITMAP>;
-using unique_font     = unique_gdiobj<HFONT>;
-using unique_pen      = unique_gdiobj<HPEN>;
-using unique_region   = unique_gdiobj<HRGN>;
+using unique_palette  = unique_gdiobj<WXHPALETTE>;
+using unique_brush    = unique_gdiobj<WXHBRUSH>;
+using unique_bitmap   = unique_gdiobj<WXHBITMAP>;
+using unique_font     = unique_gdiobj<WXHFONT>;
+using unique_pen      = unique_gdiobj<WXHPEN>;
+using unique_region   = unique_gdiobj<WXHRGN>;
 
 } // export
 

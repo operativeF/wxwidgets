@@ -26,7 +26,7 @@
 // version of it here.
 struct wxIDropTargetHelper : public IUnknown
 {
-    virtual HRESULT STDMETHODCALLTYPE DragEnter(HWND hwndTarget,
+    virtual HRESULT STDMETHODCALLTYPE DragEnter(WXHWND hwndTarget,
                                                 IDataObject *pDataObject,
                                                 POINT *ppt,
                                                 DWORD dwEffect) = 0;
@@ -63,8 +63,8 @@ public:
 	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
 
     // accessors for wxDropTarget
-    HWND GetHWND() const { return m_hwnd; }
-    void SetHwnd(HWND hwnd) { m_hwnd = hwnd; }
+    WXHWND GetHWND() const { return m_hwnd; }
+    void SetHwnd(WXHWND hwnd) { m_hwnd = hwnd; }
 
     // IDropTarget methods
     STDMETHODIMP DragEnter(LPDATAOBJECT, DWORD, POINTL, LPDWORD) override;
@@ -80,7 +80,7 @@ protected:
 
     wxDropTarget *m_pTarget;      // the real target (we're just a proxy)
 
-    HWND          m_hwnd{};         // window we're associated with
+    WXHWND          m_hwnd{};         // window we're associated with
 
     // get default drop effect for given keyboard flags
     static DWORD GetDropEffect(DWORD flags, wxDragResult defaultAction, DWORD pdwEffect);
@@ -442,7 +442,7 @@ bool wxDropTarget::Register(WXHWND hwnd)
         return false;
     }
 
-    hr = ::RegisterDragDrop((HWND) hwnd, m_pIDropTarget);
+    hr = ::RegisterDragDrop((WXHWND) hwnd, m_pIDropTarget);
     if ( FAILED(hr) ) {
         ::CoLockObjectExternal(m_pIDropTarget, FALSE, FALSE);
         wxLogApiError("RegisterDragDrop", hr);
@@ -450,7 +450,7 @@ bool wxDropTarget::Register(WXHWND hwnd)
     }
 
     // we will need the window handle for coords transformation later
-    m_pIDropTarget->SetHwnd((HWND)hwnd);
+    m_pIDropTarget->SetHwnd((WXHWND)hwnd);
 
     MSWInitDragImageSupport();
 
@@ -459,7 +459,7 @@ bool wxDropTarget::Register(WXHWND hwnd)
 
 void wxDropTarget::Revoke(WXHWND hwnd)
 {
-    HRESULT hr = ::RevokeDragDrop((HWND) hwnd);
+    HRESULT hr = ::RevokeDragDrop((WXHWND) hwnd);
 
     if ( FAILED(hr) ) {
         wxLogApiError("RevokeDragDrop", hr);

@@ -34,7 +34,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         return true;
 
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HDC hdc = GetHdcOf(*impl);
+    WXHDC hdc = GetHdcOf(*impl);
 
     RECT rect;
     wxCopyRectToRECT(rc, rect);
@@ -91,7 +91,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
 // global helper functions implemented here
 // ----------------------------------------------------------------------------
 
-BOOL wxDrawStateBitmap(HDC hDC, HBITMAP hBitmap, int x, int y, UINT uState)
+BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, UINT uState)
 {
     // determine size of bitmap image
     BITMAP bmp;

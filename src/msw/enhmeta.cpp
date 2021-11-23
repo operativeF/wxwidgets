@@ -218,7 +218,7 @@ protected:
     wxSize DoGetSize() const override;
 
 private:
-    void Create(HDC hdcRef,
+    void Create(WXHDC hdcRef,
                 const std::string& filename, int width, int height,
                 const std::string& description);
 
@@ -247,7 +247,7 @@ wxEnhMetaFileDCImpl::wxEnhMetaFileDCImpl( wxEnhMetaFileDC* owner,
     Create(GetHdcOf(referenceDC), filename, width, height, description);
 }
 
-void wxEnhMetaFileDCImpl::Create(HDC hdcRef,
+void wxEnhMetaFileDCImpl::Create(WXHDC hdcRef,
                                  const std::string& filename,
                                  int width, int height,
                                  const std::string& description)

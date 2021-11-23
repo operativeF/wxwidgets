@@ -114,11 +114,11 @@ std::string wxGetWindowText(WXHWND hWnd)
     {
         std::wstring windowText;
 
-        const int len = ::GetWindowTextLengthW((HWND)hWnd) + 1;
+        const int len = ::GetWindowTextLengthW((WXHWND)hWnd) + 1;
 
         windowText.resize(len);
 
-        ::GetWindowTextW((HWND)hWnd, &windowText[0], len);
+        ::GetWindowTextW((WXHWND)hWnd, &windowText[0], len);
 
         // Avoid bogus double-NUL termination
         windowText.resize(len - 1);
@@ -139,7 +139,7 @@ wxString wxGetWindowClass(WXHWND hWnd)
 
         for ( ;; )
         {
-            int count = ::GetClassNameW((HWND)hWnd, wxStringBuffer(str, len), len);
+            int count = ::GetClassNameW((WXHWND)hWnd, wxStringBuffer(str, len), len);
 
             if ( count == len )
             {
@@ -159,14 +159,14 @@ wxString wxGetWindowClass(WXHWND hWnd)
 
 int wxGetWindowId(WXHWND hWnd)
 {
-    return ::GetWindowLongPtrW((HWND)hWnd, GWL_ID);
+    return ::GetWindowLongPtrW((WXHWND)hWnd, GWL_ID);
 }
 
 // ----------------------------------------------------------------------------
 // Metafile helpers
 // ----------------------------------------------------------------------------
 
-void PixelToHIMETRIC(LONG *x, LONG *y, HDC hdcRef)
+void PixelToHIMETRIC(LONG *x, LONG *y, WXHDC hdcRef)
 {
     int iWidthMM = GetDeviceCaps(hdcRef, HORZSIZE),
         iHeightMM = GetDeviceCaps(hdcRef, VERTSIZE),
@@ -178,7 +178,7 @@ void PixelToHIMETRIC(LONG *x, LONG *y, HDC hdcRef)
     *y = ::MulDiv(*y, iHeightMM * 100, iHeightPels);
 }
 
-void HIMETRICToPixel(LONG *x, LONG *y, HDC hdcRef)
+void HIMETRICToPixel(LONG *x, LONG *y, WXHDC hdcRef)
 {
     int iWidthMM = GetDeviceCaps(hdcRef, HORZSIZE),
         iHeightMM = GetDeviceCaps(hdcRef, VERTSIZE),
@@ -205,7 +205,7 @@ void PixelToHIMETRIC(LONG *x, LONG *y)
     PixelToHIMETRIC(x, y, screenDC.get());
 }
 
-void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2)
+void wxDrawLine(WXHDC hdc, int x1, int y1, int x2, int y2)
 {
     MoveToEx(hdc, x1, y1, nullptr); LineTo(hdc, x2, y2);
 }
@@ -214,7 +214,7 @@ void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2)
 // It fills rectangle representing the line with ::ExtTextOut() API which
 // apparently is faster than ::MoveTo()/::LineTo() on DC with a non-rotated
 // coordinate system.
-void wxDrawHVLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width)
+void wxDrawHVLine(WXHDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width)
 {
     wxASSERT(x1 == x2 || y1 == y2);
 
@@ -244,7 +244,7 @@ void wxDrawHVLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int w
 // Shell API wrappers
 // ----------------------------------------------------------------------------
 
-extern bool wxEnableFileNameAutoComplete(HWND hwnd)
+extern bool wxEnableFileNameAutoComplete(WXHWND hwnd)
 {
     HRESULT hr = ::SHAutoComplete(hwnd, 0x10 /* SHACF_FILESYS_ONLY */);
     if ( FAILED(hr) )

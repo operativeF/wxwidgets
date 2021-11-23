@@ -47,7 +47,7 @@ inline WORD GetNumberOfColours(WORD bitsPerPixel)
 }
 
 // wrapper around ::GetObjectW() for DIB sections
-inline bool GetDIBSection(HBITMAP hbmp, DIBSECTION *ds)
+inline bool GetDIBSection(WXHBITMAP hbmp, DIBSECTION *ds)
 {
     // note that GetObject() may return sizeof(DIBSECTION) for a bitmap
     // which is *not* a DIB section and the way to check for it is
@@ -132,7 +132,7 @@ bool wxDIB::Create(wxSize sz, int depth)
     return true;
 }
 
-bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
+bool wxDIB::Create(WXHBITMAP hbmp, int depth /* = -1 */)
 {
     wxCHECK_MSG( hbmp, false, "wxDIB::Create(): invalid bitmap" );
 
@@ -177,7 +177,7 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
     return true;
 }
 
-bool wxDIB::CopyFromDDB(HBITMAP hbmp)
+bool wxDIB::CopyFromDDB(WXHBITMAP hbmp)
 {
     DIBSECTION ds;
     if ( !GetDIBSection(m_handle, &ds) )
@@ -215,7 +215,7 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
 
 bool wxDIB::Load(const std::string& filename)
 {
-    m_handle = (HBITMAP)::LoadImageW
+    m_handle = (WXHBITMAP)::LoadImageW
                          (
                             wxGetInstance(),
                             boost::nowide::widen(filename).c_str(),
@@ -336,7 +336,7 @@ void wxDIB::DoGetObject() const
 // DDB <-> DIB conversions
 // ----------------------------------------------------------------------------
 
-HBITMAP wxDIB::CreateDDB(HDC hdc) const
+WXHBITMAP wxDIB::CreateDDB(WXHDC hdc) const
 {
     wxCHECK_MSG( m_handle, nullptr, "wxDIB::CreateDDB(): invalid object" );
 
@@ -376,7 +376,7 @@ HBITMAP wxDIB::CreateDDB(HDC hdc) const
 }
 
 /* static */
-HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits)
+WXHBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, WXHDC hdc, const void *bits)
 {
     wxCHECK_MSG( pbmi, nullptr, "invalid DIB in ConvertToBitmap" );
 
@@ -422,12 +422,12 @@ HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits
 
     unique_dcwnd screenDC{::GetDC(nullptr)};
 
-    HBITMAP hbmp = ::CreateDIBitmap
+    WXHBITMAP hbmp = ::CreateDIBitmap
                      (
                         hdc
                             ? hdc           // create bitmap compatible
                             : pbmih->biBitCount == 1
-                                ? (HDC) MemoryHDC()
+                                ? (WXHDC) MemoryHDC()
                                 : screenDC.get(),  //  with this DC
                         pbmih,              // used to get size &c
                         CBM_INIT,           // initialize bitmap bits too
@@ -445,7 +445,7 @@ HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits
 }
 
 /* static */
-size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
+size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, WXHBITMAP hbmp)
 {
     wxASSERT_MSG( hbmp, "invalid bmp can't be converted to DIB" );
 
@@ -506,7 +506,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
 }
 
 /* static */
-HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
+HGLOBAL wxDIB::ConvertFromBitmap(WXHBITMAP hbmp)
 {
     // first calculate the size needed
     const size_t size = ConvertFromBitmap(nullptr, hbmp);
@@ -599,7 +599,7 @@ wxPalette *wxDIB::CreatePalette() const
         pPalette->palPalEntry[i].peFlags = 0;
     }
 
-    HPALETTE hPalette = ::CreatePalette(pPalette);
+    WXHPALETTE hPalette = ::CreatePalette(pPalette);
 
     free(pPalette);
 

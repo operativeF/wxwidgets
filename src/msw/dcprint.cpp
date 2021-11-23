@@ -121,29 +121,29 @@ bool wxPrinterDCImpl::wxStartDoc(const std::string& message)
 
 void wxPrinterDCImpl::EndDoc()
 {
-    if (m_hDC) ::EndDoc((HDC) m_hDC);
+    if (m_hDC) ::EndDoc((WXHDC) m_hDC);
 }
 
 void wxPrinterDCImpl::StartPage()
 {
     if (m_hDC)
-        ::StartPage((HDC) m_hDC);
+        ::StartPage((WXHDC) m_hDC);
 }
 
 void wxPrinterDCImpl::EndPage()
 {
     if (m_hDC)
-        ::EndPage((HDC) m_hDC);
+        ::EndPage((WXHDC) m_hDC);
 }
 
 
 wxRect wxPrinterDCImpl::GetPaperRect() const
 {
     if (!IsOk()) return wxRect(0, 0, 0, 0);
-    int w = ::GetDeviceCaps((HDC) m_hDC, PHYSICALWIDTH);
-    int h = ::GetDeviceCaps((HDC) m_hDC, PHYSICALHEIGHT);
-    int x = -::GetDeviceCaps((HDC) m_hDC, PHYSICALOFFSETX);
-    int y = -::GetDeviceCaps((HDC) m_hDC, PHYSICALOFFSETY);
+    int w = ::GetDeviceCaps((WXHDC) m_hDC, PHYSICALWIDTH);
+    int h = ::GetDeviceCaps((WXHDC) m_hDC, PHYSICALHEIGHT);
+    int x = -::GetDeviceCaps((WXHDC) m_hDC, PHYSICALOFFSETX);
+    int y = -::GetDeviceCaps((WXHDC) m_hDC, PHYSICALOFFSETY);
     return {x, y, w, h};
 }
 
@@ -162,7 +162,7 @@ static bool wxGetDefaultDeviceName(std::string& deviceName, std::string& portNam
     PRINTDLG    pd;
     memset(&pd, 0, sizeof(PRINTDLG));
     pd.lStructSize    = sizeof(PRINTDLG);
-    pd.hwndOwner      = (HWND)nullptr;
+    pd.hwndOwner      = (WXHWND)nullptr;
     pd.hDevMode       = nullptr; // Will be created by PrintDlg
     pd.hDevNames      = nullptr; // Ditto
     pd.Flags          = PD_RETURNDEFAULT;
@@ -205,7 +205,7 @@ static bool wxGetDefaultDeviceName(std::string& deviceName, std::string& portNam
 
 #endif // !wxUSE_PS_PRINTING
 
-// Gets an HDC for the specified printer configuration
+// Gets an WXHDC for the specified printer configuration
 WXHDC wxGetPrinterDC(const wxPrintData& printDataConst)
 {
 #if wxUSE_PS_PRINTING
@@ -235,7 +235,7 @@ WXHDC wxGetPrinterDC(const wxPrintData& printDataConst)
     if ( devMode )
         lockDevMode.Init(devMode);
 
-    HDC hDC = ::CreateDCW
+    WXHDC hDC = ::CreateDCW
                 (
                     nullptr,               // no driver name as we use device name
                     boost::nowide::widen(deviceName).c_str(),
@@ -257,7 +257,7 @@ WXHDC wxGetPrinterDC(const wxPrintData& printDataConst)
 
 // helper of DoDrawBitmap() and DoBlit()
 static
-bool DrawBitmapUsingStretchDIBits(HDC hdc,
+bool DrawBitmapUsingStretchDIBits(WXHDC hdc,
                                   const wxBitmap& bmp,
                                   wxCoord x, wxCoord y)
 {
@@ -345,9 +345,9 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
         // If we are printing source colours are screen colours not printer
         // colours and so we need copy the bitmap pixel by pixel.
         RECT rect;
-        HDC dcSrc = GetHdcOf(*msw_impl);
+        WXHDC dcSrc = GetHdcOf(*msw_impl);
         MemoryHDC dcMask(dcSrc);
-        SelectInHDC selectMask(dcMask, (HBITMAP)mask->GetMaskBitmap());
+        SelectInHDC selectMask(dcMask, (WXHBITMAP)mask->GetMaskBitmap());
 
         for (int x = 0; x < width; x++)
         {
@@ -375,7 +375,7 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
 
             // as we are printing, source colours are screen colours not
             // printer colours and so we need copy the bitmap pixel by pixel.
-            HDC dcSrc = GetHdcOf(*msw_impl);
+            WXHDC dcSrc = GetHdcOf(*msw_impl);
             RECT rect;
             for (int y = 0; y < height; y++)
             {
@@ -395,7 +395,7 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
 
                     rect.right = xdest + x + 1;
                     rect.bottom = rect.top + 1;
-                    ::FillRect((HDC) m_hDC, &rect, brush.get());
+                    ::FillRect((WXHDC) m_hDC, &rect, brush.get());
                 }
             }
         }

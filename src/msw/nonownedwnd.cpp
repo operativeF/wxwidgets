@@ -44,7 +44,7 @@ bool wxNonOwnedWindow::DoSetRegionShape(const wxRegion& region)
     DWORD noBytes = ::GetRegionData(region.GetHRGN(), 0, nullptr);
     RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
     ::GetRegionData(region.GetHRGN(), noBytes, rgnData);
-    HRGN hrgn = ::ExtCreateRegion(nullptr, noBytes, rgnData);
+    WXHRGN hrgn = ::ExtCreateRegion(nullptr, noBytes, rgnData);
     delete[] (char*) rgnData;
 
     // SetWindowRgn expects the region to be in coordinates
@@ -141,7 +141,7 @@ bool wxNonOwnedWindow::Reparent(wxWindowBase* newParent)
     if ( !wxWindowBase::Reparent(newParent) )
         return false;
 
-    const HWND hwndOwner = GetParent() ? GetHwndOf(GetParent()) : nullptr;
+    const WXHWND hwndOwner = GetParent() ? GetHwndOf(GetParent()) : nullptr;
 
     ::SetWindowLongPtrW(GetHwnd(), GWLP_HWNDPARENT, (LONG_PTR)hwndOwner);
 
@@ -151,7 +151,7 @@ bool wxNonOwnedWindow::Reparent(wxWindowBase* newParent)
 namespace
 {
 
-static bool IsPerMonitorDPIAware(HWND hwnd)
+static bool IsPerMonitorDPIAware(WXHWND hwnd)
 {
     bool dpiAware = false;
 
@@ -159,7 +159,7 @@ static bool IsPerMonitorDPIAware(HWND hwnd)
     // applications manifest.
 #if wxUSE_DYNLIB_CLASS
     #define WXDPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 ((WXDPI_AWARENESS_CONTEXT)-4)
-    using GetWindowDpiAwarenessContext_t = WXDPI_AWARENESS_CONTEXT(WINAPI*)(HWND hwnd);
+    using GetWindowDpiAwarenessContext_t = WXDPI_AWARENESS_CONTEXT(WINAPI*)(WXHWND hwnd);
     using AreDpiAwarenessContextsEqual_t = BOOL(WINAPI*)(WXDPI_AWARENESS_CONTEXT dpiContextA, WXDPI_AWARENESS_CONTEXT dpiContextB);
     static GetWindowDpiAwarenessContext_t s_pfnGetWindowDpiAwarenessContext = nullptr;
     static AreDpiAwarenessContextsEqual_t s_pfnAreDpiAwarenessContextsEqual = nullptr;

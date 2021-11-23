@@ -141,7 +141,7 @@ union TVGetItemRectParam
 };
 
 inline bool
-wxTreeView_GetItemRect(HWND hwnd,
+wxTreeView_GetItemRect(WXHWND hwnd,
                        HTREEITEM hItem,
                        TVGetItemRectParam& param,
                        BOOL fItemRect)
@@ -154,7 +154,7 @@ wxTreeView_GetItemRect(HWND hwnd,
 } // anonymous namespace
 
 // wrappers for TreeView_GetItem/TreeView_SetItem
-static bool IsItemSelected(HWND hwndTV, HTREEITEM hItem)
+static bool IsItemSelected(WXHWND hwndTV, HTREEITEM hItem)
 {
     TV_ITEM tvi;
     tvi.mask = TVIF_STATE | TVIF_HANDLE;
@@ -171,7 +171,7 @@ static bool IsItemSelected(HWND hwndTV, HTREEITEM hItem)
     return (tvi.state & TVIS_SELECTED) != 0;
 }
 
-static bool SelectItem(HWND hwndTV, HTREEITEM hItem, bool select = true)
+static bool SelectItem(WXHWND hwndTV, HTREEITEM hItem, bool select = true)
 {
     TV_ITEM tvi;
     tvi.mask = TVIF_STATE | TVIF_HANDLE;
@@ -190,12 +190,12 @@ static bool SelectItem(HWND hwndTV, HTREEITEM hItem, bool select = true)
     return true;
 }
 
-static inline void UnselectItem(HWND hwndTV, HTREEITEM htItem)
+static inline void UnselectItem(WXHWND hwndTV, HTREEITEM htItem)
 {
     SelectItem(hwndTV, htItem, false);
 }
 
-static inline void ToggleItemSelection(HWND hwndTV, HTREEITEM htItem)
+static inline void ToggleItemSelection(WXHWND hwndTV, HTREEITEM htItem)
 {
     SelectItem(hwndTV, htItem, !IsItemSelected(hwndTV, htItem));
 }
@@ -212,7 +212,7 @@ enum
     SR_UNSELECT_OTHERS = 2  // deselect the items not in range
 };
 
-static bool SelectRange(HWND hwndTV,
+static bool SelectRange(WXHWND hwndTV,
                         HTREEITEM htFirst,
                         HTREEITEM htLast,
                         unsigned int flags)
@@ -309,7 +309,7 @@ static bool SelectRange(HWND hwndTV,
 //
 // returns true if the focus was changed, false if the given item was already
 // the focused one
-static bool SetFocus(HWND hwndTV, HTREEITEM htItem)
+static bool SetFocus(WXHWND hwndTV, HTREEITEM htItem)
 {
     // the current focus
     HTREEITEM htFocus = (HTREEITEM)TreeView_GetSelection(hwndTV);
@@ -950,7 +950,7 @@ void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const std::string& text)
     // SetItemText() in the OnBeginLabelEdit() handler doesn't have any effect
     //
     // don't use GetEditControl() here because m_textCtrl is not set yet
-    HWND hwndEdit = TreeView_GetEditControl(GetHwnd());
+    WXHWND hwndEdit = TreeView_GetEditControl(GetHwnd());
     if ( hwndEdit )
     {
         if ( item == m_idEdited )
@@ -1966,7 +1966,7 @@ void wxTreeCtrl::DeleteTextCtrl()
 {
     if ( m_textCtrl )
     {
-        // the HWND corresponding to this control is deleted by the tree
+        // the WXHWND corresponding to this control is deleted by the tree
         // control itself and we don't know when exactly this happens, so check
         // if the window still exists before calling UnsubclassWin()
         if ( !::IsWindow(GetHwndOf(m_textCtrl)) )
@@ -1991,7 +1991,7 @@ wxTextCtrl *wxTreeCtrl::EditLabel(const wxTreeItemId& item,
 
     m_idEdited = item;
     m_textCtrl = (wxTextCtrl *)textControlClass->CreateObject();
-    HWND hWnd = (HWND) TreeView_EditLabel(GetHwnd(), HITEM(item));
+    WXHWND hWnd = (WXHWND) TreeView_EditLabel(GetHwnd(), HITEM(item));
 
     // this is not an error - the TVN_BEGINLABELEDIT handler might have
     // returned false
@@ -3726,10 +3726,10 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             // set ES_WANTRETURN ( like we do in BeginLabelEdit )
             if ( event.IsAllowed() )
             {
-                HWND hText = TreeView_GetEditControl(GetHwnd());
+                WXHWND hText = TreeView_GetEditControl(GetHwnd());
                 if ( hText )
                 {
-                    // MBN: if m_textCtrl already has an HWND, it is a stale
+                    // MBN: if m_textCtrl already has an WXHWND, it is a stale
                     // pointer from a previous edit (because the user
                     // didn't modify the label before dismissing the control,
                     // and TVN_ENDLABELEDIT was not sent), so delete it

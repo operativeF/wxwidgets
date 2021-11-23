@@ -29,7 +29,7 @@
 #include <boost/nowide/convert.hpp>
 
 
-#define GetEditHwnd() ((HWND)(GetEditHWND()))
+#define GetEditHwnd() ((WXHWND)(GetEditHWND()))
 
 // ----------------------------------------------------------------------------
 // Classes used by auto-completion implementation.

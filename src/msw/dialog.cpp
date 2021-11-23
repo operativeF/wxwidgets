@@ -224,9 +224,9 @@ void wxDialog::DestroyGripper()
         // we're not shown at all as in this case ResizeGripper() might not
         // have been called yet)
         wxASSERT_MSG( !IsShown() ||
-                      ::GetWindow((HWND)m_hGripper, GW_HWNDNEXT) == nullptr,
+                      ::GetWindow((WXHWND)m_hGripper, GW_HWNDNEXT) == nullptr,
             "Bug in wxWidgets: gripper should be at the bottom of Z-order" );
-        ::DestroyWindow((HWND) m_hGripper);
+        ::DestroyWindow((WXHWND) m_hGripper);
         m_hGripper = nullptr;
     }
 }
@@ -238,14 +238,14 @@ void wxDialog::ShowGripper(bool show)
     if ( show )
         ResizeGripper();
 
-    ::ShowWindow((HWND)m_hGripper, show ? SW_SHOW : SW_HIDE);
+    ::ShowWindow((WXHWND)m_hGripper, show ? SW_SHOW : SW_HIDE);
 }
 
 void wxDialog::ResizeGripper()
 {
     wxASSERT_MSG( m_hGripper, "shouldn't be called if we have no gripper" );
 
-    HWND hwndGripper = (HWND)m_hGripper;
+    WXHWND hwndGripper = (WXHWND)m_hGripper;
 
     const wxRect rectGripper = wxRectFromRECT(wxGetWindowRect(hwndGripper));
     const wxSize size = GetClientSize() - rectGripper.GetSize();
@@ -262,7 +262,7 @@ void wxDialog::OnWindowCreate(wxWindowCreateEvent& event)
             event.GetWindow() && event.GetWindow()->GetParent() == this )
     {
         // Put gripper below the newly created child window
-        ::SetWindowPos((HWND)m_hGripper, HWND_BOTTOM, 0, 0, 0, 0,
+        ::SetWindowPos((WXHWND)m_hGripper, HWND_BOTTOM, 0, 0, 0, 0,
                        SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
     }
 

@@ -61,7 +61,7 @@ bool wxOpenClipboard()
     wxWindow *win = wxTheApp->GetTopWindow();
     if ( win )
     {
-        gs_wxClipboardIsOpen = ::OpenClipboard((HWND)win->GetHWND()) != 0;
+        gs_wxClipboardIsOpen = ::OpenClipboard((WXHWND)win->GetHWND()) != 0;
 
         if ( !gs_wxClipboardIsOpen )
         {
@@ -165,11 +165,11 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
             {
                 wxBitmap *bitmap = (wxBitmap *)data;
 
-                HDC hdcMem = CreateCompatibleDC((HDC) NULL);
-                HDC hdcSrc = CreateCompatibleDC((HDC) NULL);
-                HBITMAP old = (HBITMAP)
-                    ::SelectObject(hdcSrc, (HBITMAP)bitmap->GetHBITMAP());
-                HBITMAP hBitmap = CreateCompatibleBitmap(hdcSrc,
+                WXHDC hdcMem = CreateCompatibleDC((WXHDC) NULL);
+                WXHDC hdcSrc = CreateCompatibleDC((WXHDC) NULL);
+                WXHBITMAP old = (WXHBITMAP)
+                    ::SelectObject(hdcSrc, (WXHBITMAP)bitmap->GetHBITMAP());
+                WXHBITMAP hBitmap = CreateCompatibleBitmap(hdcSrc,
                                                          bitmap->GetWidth(),
                                                          bitmap->GetHeight());
                 if (!hBitmap)
@@ -180,7 +180,7 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
                     return false;
                 }
 
-                HBITMAP old1 = (HBITMAP) SelectObject(hdcMem, hBitmap);
+                WXHBITMAP old1 = (WXHBITMAP) SelectObject(hdcMem, hBitmap);
                 BitBlt(hdcMem, 0, 0, bitmap->GetWidth(), bitmap->GetHeight(),
                        hdcSrc, 0, 0, SRCCOPY);
 

@@ -45,7 +45,7 @@ wxBEGIN_EVENT_TABLE(wxSpinCtrl, wxSpinButton)
     EVT_KILL_FOCUS(wxSpinCtrl::OnKillFocus)
 wxEND_EVENT_TABLE()
 
-#define GetBuddyHwnd()      (HWND)(m_hwndBuddy)
+#define GetBuddyHwnd()      (WXHWND)(m_hwndBuddy)
 
 
 // ---------------------------------------------------------------------------
@@ -56,8 +56,8 @@ namespace
 {
 
 // Global hash used to find the spin control corresponding to the given buddy
-// text control HWND.
-using SpinForTextCtrl = std::unordered_map< HWND, wxSpinCtrl *, wxPointerHash, wxPointerEqual >;
+// text control WXHWND.
+using SpinForTextCtrl = std::unordered_map< WXHWND, wxSpinCtrl *, wxPointerHash, wxPointerEqual >;
 
 
 SpinForTextCtrl gs_spinForTextCtrl;
@@ -73,7 +73,7 @@ SpinForTextCtrl gs_spinForTextCtrl;
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxBuddyTextWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxBuddyTextWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     wxSpinCtrl * const spin = wxSpinCtrl::GetSpinForTextCtrl(hwnd);
 
@@ -147,7 +147,7 @@ wxSpinCtrl *wxSpinCtrl::GetSpinForTextCtrl(WXHWND hwndBuddy)
 
     // sanity check
     wxASSERT_MSG( spin->m_hwndBuddy == hwndBuddy,
-                  "wxSpinCtrl has incorrect buddy HWND!" );
+                  "wxSpinCtrl has incorrect buddy WXHWND!" );
 
     return spin;
 }
@@ -225,7 +225,7 @@ void wxSpinCtrl::OnSetFocus(wxFocusEvent& event)
 {
     // when we get focus, give it to our buddy window as it needs it more than
     // we do
-    ::SetFocus((HWND)m_hwndBuddy);
+    ::SetFocus((WXHWND)m_hwndBuddy);
 
     event.Skip();
 }
@@ -621,7 +621,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
 
     // destroy the old spin button after detaching it from this wxWindow object
     // (notice that m_hWnd will be reset by UnsubclassWin() so save it first)
-    const HWND hwndOld = GetHwnd();
+    const WXHWND hwndOld = GetHwnd();
     UnsubclassWin();
     if ( !::DestroyWindow(hwndOld) )
     {
@@ -741,7 +741,7 @@ wxSize wxSpinCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
 {
     wxSize sizeBtn = wxSpinButton::DoGetBestSize();
 
-    // Create a temporary wxTextCtrl wrapping our existing HWND in order to be
+    // Create a temporary wxTextCtrl wrapping our existing WXHWND in order to be
     // able to reuse its GetSizeFromTextSize() implementation.
     wxTextCtrl text;
     TempHWNDSetter set(&text, m_hwndBuddy);
@@ -835,7 +835,7 @@ wxPoint wxSpinCtrl::DoGetPosition() const
     // our layout == parent layout  =>  x(Text) < x(Button)
     // our layout != parent layout  =>  x(Button) < x(Text)
 
-    // hack: pretend that our HWND is the text control just for a moment
+    // hack: pretend that our WXHWND is the text control just for a moment
     WXHWND hWnd = GetHWND();
     const_cast<wxSpinCtrl *>(this)->m_hWnd = m_hwndBuddy;
     wxPoint xBuddy = wxSpinButton::DoGetPosition();

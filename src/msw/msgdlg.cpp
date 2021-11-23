@@ -77,7 +77,7 @@ wxMessageDialogMap& HookMap()
  */
 
 // convert the given RECT from screen to client coordinates in place
-void ScreenRectToClient(HWND hwnd, RECT& rc)
+void ScreenRectToClient(WXHWND hwnd, RECT& rc)
 {
     // map from desktop (i.e. screen) coordinates to ones of this window
     //
@@ -87,7 +87,7 @@ void ScreenRectToClient(HWND hwnd, RECT& rc)
 }
 
 // set window position to the given rect
-inline void SetWindowRect(HWND hwnd, const RECT& rc)
+inline void SetWindowRect(WXHWND hwnd, const RECT& rc)
 {
     ::MoveWindow(hwnd,
                  rc.left, rc.top,
@@ -97,7 +97,7 @@ inline void SetWindowRect(HWND hwnd, const RECT& rc)
 
 // set window position expressed in screen coordinates, whether the window is
 // child or top level
-void MoveWindowToScreenRect(HWND hwnd, RECT rc)
+void MoveWindowToScreenRect(WXHWND hwnd, RECT rc)
 {
     ScreenRectToClient(::GetParent(hwnd), rc);
 
@@ -163,7 +163,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // find the static control to replace: normally there are two of them, the
     // icon and the text itself so search for all of them and ignore the icon
     // ones
-    HWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, L"STATIC", nullptr);
+    WXHWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, L"STATIC", nullptr);
     if ( ::GetWindowLongPtrW(hwndStatic, GWL_STYLE) & SS_ICON )
         hwndStatic = ::FindWindowExW(GetHwnd(), hwndStatic, L"STATIC", nullptr);
 
@@ -221,7 +221,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     }
 
     // do create the new control
-    HWND hwndEdit = ::CreateWindowW
+    WXHWND hwndEdit = ::CreateWindowW
                       (
                         L"EDIT",
                         boost::nowide::widen(wxTextBuffer::Translate(text)).c_str(),
@@ -262,7 +262,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // and adjust all the buttons positions
     for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
+        const WXHWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;   // it's ok, not all buttons are always present
 
@@ -296,7 +296,7 @@ void wxMessageDialog::AdjustButtonLabels()
     unsigned numButtons = 0;    // total number of buttons in the message box
     for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
+        const WXHWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;   // it's ok, not all buttons are always present
 
@@ -373,7 +373,7 @@ void wxMessageDialog::AdjustButtonLabels()
 
     for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
+        const WXHWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;
 
@@ -408,7 +408,7 @@ int wxMessageDialog::ShowMessageBox()
 
     // use the top level window as parent if none specified
     m_parent = GetParentForModalDialog();
-    HWND hWnd = m_parent ? GetHwndOf(m_parent) : nullptr;
+    WXHWND hWnd = m_parent ? GetHwndOf(m_parent) : nullptr;
 
 #if wxUSE_INTL
     // native message box always uses the current user locale but the program
@@ -584,7 +584,7 @@ void wxMessageDialog::DoCentre(unsigned int dir)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     // Task dialog is always centered on its parent window and trying to center
-    // it manually doesn't work because its HWND is not created yet so don't
+    // it manually doesn't work because its WXHWND is not created yet so don't
     // even try as this would only result in (debug) error messages.
     if ( HasNativeTaskDialog() )
         return;

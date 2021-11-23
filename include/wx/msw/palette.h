@@ -13,6 +13,8 @@
 
 #include "wx/gdiobj.h"
 
+import WX.WinDef;
+
 class wxPalette : public wxPaletteBase
 {
 public:

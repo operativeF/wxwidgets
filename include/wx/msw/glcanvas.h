@@ -96,16 +96,16 @@ public:
     // MSW-specific helpers
     // --------------------
 
-    // get the HDC used for OpenGL rendering
-    HDC GetHDC() const { return m_hDC; }
+    // get the WXHDC used for OpenGL rendering
+    WXHDC GetHDC() const { return m_hDC; }
 
     // Try to find pixel format matching the given attributes list for the
-    // specified HDC, return 0 on error, otherwise ppfd is filled in with the
+    // specified WXHDC, return 0 on error, otherwise ppfd is filled in with the
     // information from dispAttrs
     static int FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
                                        PIXELFORMATDESCRIPTOR* ppfd = nullptr);
     // Same as FindMatchingPixelFormat
-    static int ChooseMatchingPixelFormat(HDC hdc, const int *attribList,
+    static int ChooseMatchingPixelFormat(WXHDC hdc, const int *attribList,
                                          PIXELFORMATDESCRIPTOR *pfd = nullptr);
 
 #if wxUSE_PALETTE
@@ -131,8 +131,8 @@ protected:
     int DoSetup(PIXELFORMATDESCRIPTOR &pfd, const int *attribList);
 
 
-    // HDC for this window, we keep it all the time
-    HDC m_hDC {nullptr};
+    // WXHDC for this window, we keep it all the time
+    WXHDC m_hDC {nullptr};
 
 private:
     wxDECLARE_EVENT_TABLE();

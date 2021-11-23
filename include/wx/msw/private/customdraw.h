@@ -45,9 +45,9 @@ private:
     virtual const wxItemAttr* GetItemAttr(DWORD_PTR dwItemSpec) const = 0;
 
 
-    // Set the colours and font for the specified HDC, return CDRF_NEWFONT if
+    // Set the colours and font for the specified WXHDC, return CDRF_NEWFONT if
     // the font was changed.
-    LPARAM HandleItemPrepaint(const wxItemAttr& attr, HDC hdc);
+    LPARAM HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc);
 
     CustomDraw(const CustomDraw&) = delete;
 	CustomDraw& operator=(const CustomDraw&) = delete;

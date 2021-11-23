@@ -814,7 +814,7 @@ void wxStandardDialogLayoutAdapter::DoReparentControls(wxWindow* parent, wxWindo
             win->Reparent(reparentTo);
 #ifdef __WXMSW__
             // Restore correct tab order
-            ::SetWindowPos((HWND) win->GetHWND(), HWND_BOTTOM, -1, -1, -1, -1, SWP_NOMOVE|SWP_NOSIZE);
+            ::SetWindowPos((WXHWND) win->GetHWND(), HWND_BOTTOM, -1, -1, -1, -1, SWP_NOMOVE|SWP_NOSIZE);
 #endif
         }
 

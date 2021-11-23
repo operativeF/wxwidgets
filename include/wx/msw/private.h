@@ -50,14 +50,14 @@ class wxWindowBase;
 // global data
 // ---------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_BASE(HINSTANCE) wxhInstance;
+extern WXDLLIMPEXP_DATA_BASE(WXHINSTANCE) wxhInstance;
 
 extern "C"
 {
-    HINSTANCE wxGetInstance();
+    WXHINSTANCE wxGetInstance();
 }
 
-void wxSetInstance(HINSTANCE hInst);
+void wxSetInstance(WXHINSTANCE hInst);
 
 // ---------------------------------------------------------------------------
 // define things missing from some compilers' headers
@@ -285,13 +285,13 @@ inline void wxCopyRectToRECT(const wxRect& rect, RECT& rc)
 // translations between HIMETRIC units (which OLE likes) and pixels (which are
 // liked by all the others) - implemented in msw/utilsexc.cpp
 extern void HIMETRICToPixel(LONG *x, LONG *y);
-extern void HIMETRICToPixel(LONG *x, LONG *y, HDC hdcRef);
+extern void HIMETRICToPixel(LONG *x, LONG *y, WXHDC hdcRef);
 extern void PixelToHIMETRIC(LONG *x, LONG *y);
-extern void PixelToHIMETRIC(LONG *x, LONG *y, HDC hdcRef);
+extern void PixelToHIMETRIC(LONG *x, LONG *y, WXHDC hdcRef);
 
 // Windows convention of the mask is opposed to the wxWidgets one, so we need
 // to invert the mask each time we pass one/get one to/from Windows
-extern HBITMAP wxInvertMask(HBITMAP hbmpMask, int w = 0, int h = 0);
+extern WXHBITMAP wxInvertMask(WXHBITMAP hbmpMask, int w = 0, int h = 0);
 
 // Creates an icon or cursor depending from a bitmap
 //
@@ -321,7 +321,7 @@ enum wxDSBStates
 };
 
 extern
-BOOL wxDrawStateBitmap(HDC hDC, HBITMAP hBitmap, int x, int y, UINT uState);
+BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, UINT uState);
 
 #endif // wxUSE_OWNER_DRAWN
 
@@ -355,7 +355,7 @@ inline bool wxIsAnyModifierDown()
 
 // wrapper around GetWindowRect() and GetClientRect() APIs doing error checking
 // for Win32
-inline RECT wxGetWindowRect(HWND hwnd)
+inline RECT wxGetWindowRect(WXHWND hwnd)
 {
     RECT rect;
 
@@ -367,7 +367,7 @@ inline RECT wxGetWindowRect(HWND hwnd)
     return rect;
 }
 
-inline RECT wxGetClientRect(HWND hwnd)
+inline RECT wxGetClientRect(WXHWND hwnd)
 {
     RECT rect;
 
@@ -384,12 +384,12 @@ inline RECT wxGetClientRect(HWND hwnd)
 // ---------------------------------------------------------------------------
 
 // This class can only be used with wxMSW wxWindow, as it doesn't have
-// {Set,Get}HWND() methods in the other ports, but this file is currently
+// {Set,Get}WXHWND() methods in the other ports, but this file is currently
 // included for wxQt/MSW too. It's not clear whether it should be, really, but
 // for now allow it to compile in this port too.
 #ifdef __WXMSW__
 
-// Temporarily assign the given HWND to the window in ctor and unset it back to
+// Temporarily assign the given WXHWND to the window in ctor and unset it back to
 // the original value (usually 0) in dtor.
 class TempHWNDSetter
 {
@@ -414,7 +414,7 @@ private:
 
 #endif // __WXMSW__
 
-// create an instance of this class and use it as the HDC for screen, will
+// create an instance of this class and use it as the WXHDC for screen, will
 // automatically release the DC going out of scope
 class ScreenHDC
 {
@@ -424,10 +424,10 @@ public:
 
 	ScreenHDC& operator=(ScreenHDC&&) = delete;
 
-    operator HDC() const { return m_hdc; }
+    operator WXHDC() const { return m_hdc; }
 
 private:
-    HDC m_hdc;
+    WXHDC m_hdc;
 };
 
 // the same as ScreenHDC but for window DCs
@@ -435,32 +435,32 @@ class WindowHDC
 {
 public:
     WindowHDC()  = default;
-    WindowHDC(HWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
+    WindowHDC(WXHWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
    ~WindowHDC() { if ( m_hwnd && m_hdc ) { ::ReleaseDC(m_hwnd, m_hdc); } }
 	
     WindowHDC& operator=(WindowHDC&&) = delete;
 
-    operator HDC() const { return m_hdc; }
+    operator WXHDC() const { return m_hdc; }
 
 private:
-   HWND m_hwnd{nullptr};
-   HDC m_hdc{nullptr};
+   WXHWND m_hwnd{nullptr};
+   WXHDC m_hdc{nullptr};
 };
 
-// the same as ScreenHDC but for memory DCs: creates the HDC compatible with
+// the same as ScreenHDC but for memory DCs: creates the WXHDC compatible with
 // the given one (screen by default) in ctor and destroys it in dtor
 class MemoryHDC
 {
 public:
-    MemoryHDC(HDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
+    MemoryHDC(WXHDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
    ~MemoryHDC() { ::DeleteDC(m_hdc); }
 
 	MemoryHDC& operator=(MemoryHDC&&) = delete;
 
-    operator HDC() const { return m_hdc; }
+    operator WXHDC() const { return m_hdc; }
 
 private:
-    HDC m_hdc;
+    WXHDC m_hdc;
 };
 
 // a class which selects a GDI object into a DC in its ctor and deselects in
@@ -472,9 +472,9 @@ private:
 
 public:
     SelectInHDC()  = default;
-    SelectInHDC(HDC hdc, HGDIOBJ hgdiobj) : m_hdc(hdc) { DoInit(hgdiobj); }
+    SelectInHDC(WXHDC hdc, HGDIOBJ hgdiobj) : m_hdc(hdc) { DoInit(hgdiobj); }
 
-    void Init(HDC hdc, HGDIOBJ hgdiobj)
+    void Init(WXHDC hdc, HGDIOBJ hgdiobj)
     {
         wxASSERT_MSG( !m_hdc, "initializing twice?" );
 
@@ -491,7 +491,7 @@ public:
     operator bool() const { return m_hgdiobj != nullptr; }
 
 private:
-    HDC m_hdc{nullptr};
+    WXHDC m_hdc{nullptr};
     HGDIOBJ m_hgdiobj{nullptr};
 };
 
@@ -526,7 +526,7 @@ public:
 class HDCClipper
 {
 public:
-    HDCClipper(HDC hdc, HRGN hrgn)
+    HDCClipper(WXHDC hdc, WXHRGN hrgn)
         : m_hdc(hdc)
     {
         if ( !::SelectClipRgn(hdc, hrgn) )
@@ -543,14 +543,14 @@ public:
 	HDCClipper& operator=(HDCClipper&&) = delete;
 
 private:
-    HDC m_hdc;
+    WXHDC m_hdc;
 };
 
 // set the given map mode for the life time of this object
     class HDCMapModeChanger
     {
     public:
-        HDCMapModeChanger(HDC hdc, int mm)
+        HDCMapModeChanger(WXHDC hdc, int mm)
             : m_hdc(hdc)
         {
             m_modeOld = ::SetMapMode(hdc, mm);
@@ -569,7 +569,7 @@ private:
     	HDCMapModeChanger& operator=(HDCMapModeChanger&&) = delete;
 
     private:
-        HDC m_hdc;
+        WXHDC m_hdc;
         int m_modeOld;
     };
 
@@ -743,26 +743,26 @@ private:
 // corresponding class (this depends on the macro)
 // ---------------------------------------------------------------------------
 
-#define GetHwnd()               ((HWND)GetHWND())
-#define GetHwndOf(win)          ((HWND)((win)->GetHWND()))
+#define GetHwnd()               ((WXHWND)GetHWND())
+#define GetHwndOf(win)          ((WXHWND)((win)->GetHWND()))
 
-#define GetHdc()                ((HDC)GetHDC())
-#define GetHdcOf(dc)            ((HDC)(dc).GetHDC())
+#define GetHdc()                ((WXHDC)GetHDC())
+#define GetHdcOf(dc)            ((WXHDC)(dc).GetHDC())
 
-#define GetHbitmap()            ((HBITMAP)GetHBITMAP())
-#define GetHbitmapOf(bmp)       ((HBITMAP)(bmp).GetHBITMAP())
+#define GetHbitmap()            ((WXHBITMAP)GetHBITMAP())
+#define GetHbitmapOf(bmp)       ((WXHBITMAP)(bmp).GetHBITMAP())
 
 #define GetHicon()              ((WXHICON)GetHICON())
 #define GetHiconOf(icon)        ((WXHICON)(icon).GetHICON())
 
-#define GetHaccel()             ((HACCEL)GetHACCEL())
-#define GetHaccelOf(table)      ((HACCEL)((table).GetHACCEL()))
+#define GetHaccel()             ((WXHACCEL)GetHACCEL())
+#define GetHaccelOf(table)      ((WXHACCEL)((table).GetHACCEL()))
 
-#define GetHbrush()             ((HBRUSH)GetResourceHandle())
-#define GetHbrushOf(brush)      ((HBRUSH)(brush).GetResourceHandle())
+#define GetHbrush()             ((WXHBRUSH)GetResourceHandle())
+#define GetHbrushOf(brush)      ((WXHBRUSH)(brush).GetResourceHandle())
 
-#define GetHmenu()              ((HMENU)GetHMenu())
-#define GetHmenuOf(menu)        ((HMENU)(menu)->GetHMenu())
+#define GetHmenu()              ((WXHMENU)GetHMenu())
+#define GetHmenuOf(menu)        ((WXHMENU)(menu)->GetHMenu())
 
 #define GetHcursor()            ((WXHCURSOR)GetHCURSOR())
 #define GetHcursorOf(cursor)    ((WXHCURSOR)(cursor).GetHCURSOR())
@@ -773,8 +773,8 @@ private:
 #define GetHimagelist()         ((HIMAGELIST)GetHIMAGELIST())
 #define GetHimagelistOf(imgl)   ((HIMAGELIST)(imgl)->GetHIMAGELIST())
 
-#define GetHpalette()           ((HPALETTE)GetHPALETTE())
-#define GetHpaletteOf(pal)      ((HPALETTE)(pal).GetHPALETTE())
+#define GetHpalette()           ((WXHPALETTE)GetHPALETTE())
+#define GetHpaletteOf(pal)      ((WXHPALETTE)(pal).GetHPALETTE())
 
 #define GetHpen()               ((WXHPEN)GetResourceHandle())
 #define GetHpenOf(pen)          ((WXHPEN)(pen).GetResourceHandle())
@@ -786,7 +786,7 @@ private:
 // ---------------------------------------------------------------------------
 
 // return the full path of the given module
-inline std::string wxGetFullModuleName(HMODULE hmod)
+inline std::string wxGetFullModuleName(WXHMODULE hmod)
 {
     std::wstring fullname;
 
@@ -808,7 +808,7 @@ inline std::string wxGetFullModuleName(HMODULE hmod)
 // return the full path of the program file
 inline std::string wxGetFullModuleName()
 {
-    return wxGetFullModuleName((HMODULE)wxGetInstance());
+    return wxGetFullModuleName((WXHMODULE)wxGetInstance());
 }
 
 // return the run-time version of the OS in a format similar to
@@ -860,9 +860,9 @@ enum wxWinVersion
 
 wxWinVersion wxGetWinVersion();
 
-// This is similar to wxSysErrorMsgStr(), but takes an extra HMODULE parameter
+// This is similar to wxSysErrorMsgStr(), but takes an extra WXHMODULE parameter
 // specific to wxMSW.
-wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = nullptr);
+wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 
@@ -876,7 +876,7 @@ void wxGetCursorPosMSW(POINT* pt);
 wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font);
 wxFontEncoding wxGetFontEncFromCharSet(int charset);
 
-inline void wxSetWindowFont(HWND hwnd, const wxFont& font)
+inline void wxSetWindowFont(WXHWND hwnd, const wxFont& font)
 {
     ::SendMessageW(hwnd, WM_SETFONT,
                   (WPARAM)GetHfontOf(font), MAKELPARAM(TRUE, 0));
@@ -988,29 +988,29 @@ inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
 }
 
 // ----------------------------------------------------------------------------
-// functions mapping HWND to wxWindow
+// functions mapping WXHWND to wxWindow
 // ----------------------------------------------------------------------------
 
 // this function simply checks whether the given hwnd corresponds to a wxWindow
 // and returns either that window if it does or NULL otherwise
-extern wxWindow* wxFindWinFromHandle(HWND hwnd);
+extern wxWindow* wxFindWinFromHandle(WXHWND hwnd);
 
-// find the window for HWND which is part of some wxWindow, i.e. unlike
+// find the window for WXHWND which is part of some wxWindow, i.e. unlike
 // wxFindWinFromHandle() above it will also work for "sub controls" of a
 // wxWindow.
 //
-// returns the wxWindow corresponding to the given HWND or NULL.
+// returns the wxWindow corresponding to the given WXHWND or NULL.
 extern wxWindow *wxGetWindowFromHWND(WXHWND hwnd);
 
 // Get the size of an icon
 extern wxSize wxGetHiconSize(WXHICON hicon);
 
-void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2);
+void wxDrawLine(WXHDC hdc, int x1, int y1, int x2, int y2);
 
-void wxDrawHVLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width);
+void wxDrawHVLine(WXHDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width);
 
 // fill the client rect of the given window on the provided dc using this brush
-inline void wxFillRect(HWND hwnd, HDC hdc, HBRUSH hbr)
+inline void wxFillRect(WXHWND hwnd, WXHDC hdc, WXHBRUSH hbr)
 {
     RECT rc;
     ::GetClientRect(hwnd, &rc);
@@ -1023,22 +1023,22 @@ inline void wxFillRect(HWND hwnd, HDC hdc, HBRUSH hbr)
 
 // note that the casts to LONG_PTR here are required even on 32-bit machines
 // for the 64-bit warning mode of later versions of MSVC (C4311/4312)
-inline WNDPROC wxGetWindowProc(HWND hwnd)
+inline WNDPROC wxGetWindowProc(WXHWND hwnd)
 {
     return (WNDPROC)(LONG_PTR)::GetWindowLongPtrW(hwnd, GWLP_WNDPROC);
 }
 
-inline void *wxGetWindowUserData(HWND hwnd)
+inline void *wxGetWindowUserData(WXHWND hwnd)
 {
     return (void *)(LONG_PTR)::GetWindowLongPtrW(hwnd, GWLP_USERDATA);
 }
 
-inline WNDPROC wxSetWindowProc(HWND hwnd, WNDPROC func)
+inline WNDPROC wxSetWindowProc(WXHWND hwnd, WNDPROC func)
 {
     return (WNDPROC)(LONG_PTR)::SetWindowLongPtrW(hwnd, GWLP_WNDPROC, (LONG_PTR)func);
 }
 
-inline void *wxSetWindowUserData(HWND hwnd, void *data)
+inline void *wxSetWindowUserData(WXHWND hwnd, void *data)
 {
     return (void *)(LONG_PTR)::SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)data);
 }

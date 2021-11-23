@@ -111,7 +111,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
     // now draw the check mark part
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HDC hdc = GetHdcOf(*impl);
+    WXHDC hdc = GetHdcOf(*impl);
 
     wxSize size = wxRendererNative::Get().GetCheckBoxSize(GetParent());
 

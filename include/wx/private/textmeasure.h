@@ -137,7 +137,7 @@ protected:
     // CallGetTextExtent() instead of calling our own DoGetTextExtent().
     //
     // We need this because our DoGetTextExtent() typically only works with
-    // native DCs, i.e. those having an HDC under Windows or using Pango under
+    // native DCs, i.e. those having an WXHDC under Windows or using Pango under
     // GTK+. However wxTextMeasure object can be constructed for any wxDC, not
     // necessarily a native one and in this case we must call back into the DC
     // implementation of text measuring itself.

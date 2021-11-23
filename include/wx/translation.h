@@ -23,6 +23,8 @@
 #include "wx/strconv.h"
 #include "wx/scopedptr.h"
 
+import WX.WinDef;
+
 import <unordered_map>;
 import <vector>;
 

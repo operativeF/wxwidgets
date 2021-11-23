@@ -498,7 +498,7 @@ public:
     void ResumePolling(wxSOCKET_T) override;
 
 private:
-    static LRESULT CALLBACK MsgProc(HWND hwnd, WXUINT uMsg, WXWPARAM wParam,
+    static LRESULT CALLBACK MsgProc(WXHWND hwnd, WXUINT uMsg, WXWPARAM wParam,
                                     WXLPARAM lParam);
     static const WXUINT SOCKET_MESSAGE;
 
@@ -527,9 +527,9 @@ WinSock1SocketPoller::WinSock1SocketPoller(wxEvtHandler* hndlr)
         0,              //int       Y,
         0,              //int       nWidth,
         0,              //int       nHeight,
-        HWND_MESSAGE,   //HWND      hWndParent,
-        NULL,           //HMENU     hMenu,
-        NULL,           //HINSTANCE hInstance,
+        HWND_MESSAGE,   //WXHWND      hWndParent,
+        NULL,           //WXHMENU     hMenu,
+        NULL,           //WXHINSTANCE hInstance,
         NULL            //LPVOID    lpParam
     );
 

@@ -198,7 +198,7 @@ static wxMSWCommandLineArguments wxArgs;
 
 // common part of wxMSW-specific wxEntryStart() and wxEntry() overloads
 static bool
-wxMSWEntryCommon(HINSTANCE hInstance, int nCmdShow)
+wxMSWEntryCommon(WXHINSTANCE hInstance, int nCmdShow)
 {
     // remember the parameters Windows gave us
     wxSetInstance(hInstance);
@@ -211,8 +211,8 @@ wxMSWEntryCommon(HINSTANCE hInstance, int nCmdShow)
     return true;
 }
 
-bool wxEntryStart(HINSTANCE hInstance,
-                              HINSTANCE WXUNUSED(hPrevInstance),
+bool wxEntryStart(WXHINSTANCE hInstance,
+                              WXHINSTANCE WXUNUSED(hPrevInstance),
                               wxCmdLineArgType WXUNUSED(pCmdLine),
                               int nCmdShow)
 {
@@ -222,8 +222,8 @@ bool wxEntryStart(HINSTANCE hInstance,
     return wxEntryStart(wxArgs.argc, wxArgs.argv);
 }
 
-int wxEntry(HINSTANCE hInstance,
-                        HINSTANCE WXUNUSED(hPrevInstance),
+int wxEntry(WXHINSTANCE hInstance,
+                        WXHINSTANCE WXUNUSED(hPrevInstance),
                         wxCmdLineArgType WXUNUSED(pCmdLine),
                         int nCmdShow)
 {
@@ -236,7 +236,7 @@ int wxEntry(HINSTANCE hInstance,
 #endif // wxUSE_GUI
 
 // ----------------------------------------------------------------------------
-// global HINSTANCE
+// global WXHINSTANCE
 // ----------------------------------------------------------------------------
 
 #if wxUSE_BASE
@@ -248,14 +248,14 @@ int wxEntry()
     return wxEntry(wxArgs.argc, wxArgs.argv);
 }
 
-HINSTANCE wxhInstance = nullptr;
+WXHINSTANCE wxhInstance = nullptr;
 
-extern "C" HINSTANCE wxGetInstance()
+extern "C" WXHINSTANCE wxGetInstance()
 {
     return wxhInstance;
 }
 
-void wxSetInstance(HINSTANCE hInst)
+void wxSetInstance(WXHINSTANCE hInst)
 {
     wxhInstance = hInst;
 }

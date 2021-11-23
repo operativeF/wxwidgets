@@ -57,7 +57,7 @@ private:
 
     // adjust the button labels
     //
-    // this is called from HookFunction() and our HWND is valid at this moment
+    // this is called from HookFunction() and our WXHWND is valid at this moment
     void AdjustButtonLabels();
 
     // offset all buttons starting from the first one given by dx to the right

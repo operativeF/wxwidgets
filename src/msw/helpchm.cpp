@@ -30,7 +30,7 @@
 // of hhctrl.ocx
 // ----------------------------------------------------------------------------
 
-using HTMLHELP = HWND ( WINAPI*)( HWND, LPCWSTR, UINT, ULONG_PTR );
+using HTMLHELP = WXHWND ( WINAPI*)( WXHWND, LPCWSTR, UINT, ULONG_PTR );
 constexpr char HTMLHELP_NAME[] = "HtmlHelpW";
 
 HTMLHELP GetHtmlHelpFunction()
@@ -60,7 +60,7 @@ HTMLHELP GetHtmlHelpFunction()
 
 // find the window to use in HtmlHelp() call: use the given one by default but
 // fall back to the top level app window and then the desktop if it's NULL
-static HWND GetSuitableHWND(wxWindow *win)
+static WXHWND GetSuitableHWND(wxWindow *win)
 {
     if ( !win )
         win = wxApp::GetMainTopWindow();
@@ -146,7 +146,7 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
 
     HH_POPUP popup = {
         .cbStruct{sizeof(popup)},
-        .hinst{(HINSTANCE) wxGetInstance()},
+        .hinst{(WXHINSTANCE) wxGetInstance()},
         .idString{gsl::narrow_cast<UINT>(contextId)},
         .pszText{stackText.get()},
         .pt{pos.x, pos.y},

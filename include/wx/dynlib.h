@@ -18,6 +18,8 @@
 #include "wx/string.h"
 #include "wx/dynarray.h"
 
+import WX.WinDef;
+
 class lsCreator;
 
 // ----------------------------------------------------------------------------
@@ -341,7 +343,7 @@ public:
     static void* GetModuleFromAddress(const void* addr, wxString* path = nullptr);
 
 #ifdef WX_WINDOWS
-    // return the handle (HMODULE/HINSTANCE) of the DLL with the given name
+    // return the handle (WXHMODULE/WXHINSTANCE) of the DLL with the given name
     // and/or containing the specified address: for XP and later systems only
     // the address is used and the name is ignored but for the previous systems
     // only the name (which may be either a full path to the DLL or just its

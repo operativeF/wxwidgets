@@ -63,7 +63,7 @@ wxRegion::wxRegion(WXHRGN hRegion)
     M_REGION.reset(hRegion);
 }
 
-static HRGN CreateRectRgnMSW(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
+static WXHRGN CreateRectRgnMSW(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
 {
     // (x,y) has to represent the left-top corner of the region
     // so if size values are negative we need to recalculate

@@ -237,7 +237,7 @@ static bool DoCommonPreInit()
 #endif // wxUSE_LOG
 
 #ifdef WX_WINDOWS
-    // GUI applications obtain HINSTANCE in their WinMain() but we also need to
+    // GUI applications obtain WXHINSTANCE in their WinMain() but we also need to
     // initialize the global wxhInstance variable for the console programs as
     // they may need it too, so set it here if it wasn't done yet
     if ( !wxGetInstance() )

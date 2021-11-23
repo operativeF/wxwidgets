@@ -169,21 +169,21 @@ static wxOnceOnlyDLLLoader wxGDI32DLL("gdi32.dll");
 // ending up at different base addresses due to address space layout
 // randomization.
 #ifdef USE_DYNAMIC_GDI_FUNCS
-typedef BOOL (WINAPI *AlphaBlend_t)(HDC,int,int,int,int,
-                                    HDC,int,int,int,int,
+typedef BOOL (WINAPI *AlphaBlend_t)(WXHDC,int,int,int,int,
+                                    WXHDC,int,int,int,int,
                                     BLENDFUNCTION);
 static AlphaBlend_t gs_pfnAlphaBlend = NULL;
 static bool gs_triedToLoadAlphaBlend = false;
 
-typedef BOOL (WINAPI *GradientFill_t)(HDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG);
+typedef BOOL (WINAPI *GradientFill_t)(WXHDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG);
 static GradientFill_t gs_pfnGradientFill = NULL;
 static bool gs_triedToLoadGradientFill = false;
 
-typedef DWORD (WINAPI *GetLayout_t)(HDC);
+typedef DWORD (WINAPI *GetLayout_t)(WXHDC);
 static GetLayout_t gs_pfnGetLayout = NULL;
 static bool gs_triedToLoadGetLayout = false;
 
-typedef DWORD (WINAPI *SetLayout_t)(HDC, DWORD);
+typedef DWORD (WINAPI *SetLayout_t)(WXHDC, DWORD);
 static SetLayout_t gs_pfnSetLayout = NULL;
 static bool gs_triedToLoadSetLayout = false;
 #endif // USE_DYNAMIC_GDI_FUNCS
@@ -232,7 +232,7 @@ namespace wxDynLoadWrappers
 
 // This is unfortunately necessary because GetLayout() is missing in MinGW
 // libgdi32.a import library (at least up to w32api 4.0.3).
-DWORD GetLayout(HDC hdc)
+DWORD GetLayout(WXHDC hdc)
 {
     if ( !gs_triedToLoadGetLayout )
     {
@@ -246,7 +246,7 @@ DWORD GetLayout(HDC hdc)
 // SetLayout is present in newer w32api versions but in older one (e.g. the one
 // used by mingw32 4.2 Debian package), so load it dynamically too while we're
 // at it.
-DWORD SetLayout(HDC hdc, DWORD dwLayout)
+DWORD SetLayout(WXHDC hdc, DWORD dwLayout)
 {
     if ( !gs_triedToLoadSetLayout )
     {
@@ -259,8 +259,8 @@ DWORD SetLayout(HDC hdc, DWORD dwLayout)
 
 // AlphaBlend() requires linking with libmsimg32.a and we want to avoid this as
 // it would break all the existing make/project files.
-BOOL AlphaBlend(HDC hdcDest, int xDest, int yDest, int wDest, int hDest,
-                HDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
+BOOL AlphaBlend(WXHDC hdcDest, int xDest, int yDest, int wDest, int hDest,
+                WXHDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
                 BLENDFUNCTION bf)
 {
     if ( !gs_triedToLoadAlphaBlend )
@@ -278,7 +278,7 @@ BOOL AlphaBlend(HDC hdcDest, int xDest, int yDest, int wDest, int hDest,
 }
 
 // Just as AlphaBlend(), this one lives in msimg32.dll.
-BOOL GradientFill(HDC hdc, PTRIVERTEX pVert, ULONG numVert,
+BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
                   PVOID pMesh, ULONG numMesh, ULONG mode)
 {
     if ( !gs_triedToLoadGradientFill )
@@ -295,18 +295,18 @@ BOOL GradientFill(HDC hdc, PTRIVERTEX pVert, ULONG numVert,
 
 #elif defined(USE_STATIC_GDI_FUNCS)
 
-DWORD GetLayout(HDC hdc)
+DWORD GetLayout(WXHDC hdc)
 {
     return ::GetLayout(hdc);
 }
 
-DWORD SetLayout(HDC hdc, DWORD dwLayout)
+DWORD SetLayout(WXHDC hdc, DWORD dwLayout)
 {
     return ::SetLayout(hdc, dwLayout);
 }
 
-BOOL AlphaBlend(HDC hdcDest, int xDest, int yDest, int wDest, int hDest,
-                HDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
+BOOL AlphaBlend(WXHDC hdcDest, int xDest, int yDest, int wDest, int hDest,
+                WXHDC hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc,
                 BLENDFUNCTION bf)
 {
     return ::AlphaBlend(hdcDest, xDest, yDest, wDest, hDest,
@@ -314,7 +314,7 @@ BOOL AlphaBlend(HDC hdcDest, int xDest, int yDest, int wDest, int hDest,
                         bf);
 }
 
-BOOL GradientFill(HDC hdc, PTRIVERTEX pVert, ULONG numVert,
+BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
                   PVOID pMesh, ULONG numMesh, ULONG mode)
 {
     return ::GradientFill(hdc, pVert, numVert, pMesh, numMesh, mode);
@@ -323,27 +323,27 @@ BOOL GradientFill(HDC hdc, PTRIVERTEX pVert, ULONG numVert,
 #else // Can't use the functions neither statically nor dynamically.
 
 inline
-DWORD GetLayout(HDC WXUNUSED(hdc))
+DWORD GetLayout(WXHDC WXUNUSED(hdc))
 {
     return GDI_ERROR;
 }
 
 inline
-DWORD SetLayout(HDC WXUNUSED(hdc), DWORD WXUNUSED(dwLayout))
+DWORD SetLayout(WXHDC WXUNUSED(hdc), DWORD WXUNUSED(dwLayout))
 {
     return GDI_ERROR;
 }
 
 inline
-BOOL AlphaBlend(HDC,int,int,int,int,
-                HDC,int,int,int,int,
+BOOL AlphaBlend(WXHDC,int,int,int,int,
+                WXHDC,int,int,int,int,
                 BLENDFUNCTION)
 {
     return FALSE;
 }
 
 inline
-BOOL GradientFill(HDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG)
+BOOL GradientFill(WXHDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG)
 {
     return FALSE;
 }
@@ -369,16 +369,16 @@ static bool AlphaBlt(wxMSWDCImpl* dcSrc,
                      wxPoint src,
                      int srcWidth, 
                      int srcHeight,
-                     HDC hdcSrc,
+                     WXHDC hdcSrc,
                      const wxBitmap& bmpSrc);
 
 namespace wxMSWImpl
 {
 
-// Create a compatible HDC and copy the layout of the source DC to it. This is
+// Create a compatible WXHDC and copy the layout of the source DC to it. This is
 // necessary in order to draw bitmaps (which are usually blitted from a
 // temporary compatible memory DC to the real target DC) using the same layout.
-HDC CreateCompatibleDCWithLayout(HDC hdc);
+WXHDC CreateCompatibleDCWithLayout(WXHDC hdc);
 
 } // namespace wxMSWImpl
 
@@ -406,7 +406,7 @@ public:
 class StretchBltModeChanger
 {
 public:
-    explicit StretchBltModeChanger(HDC hdc)
+    explicit StretchBltModeChanger(WXHDC hdc)
         : m_hdc(hdc),
           m_modeOld(::SetStretchBltMode(m_hdc, COLORONCOLOR))
     {
@@ -425,7 +425,7 @@ public:
     }
 
 private:
-    const HDC m_hdc;
+    const WXHDC m_hdc;
     int m_modeOld;
 };
 
@@ -479,13 +479,13 @@ wxMSWDCImpl::~wxMSWDCImpl()
     {
         SelectOldObjects(m_hDC);
 
-        // if we own the HDC, we delete it, otherwise we just release it
+        // if we own the WXHDC, we delete it, otherwise we just release it
 
         if ( m_bOwnsDC )
         {
             ::DeleteDC(GetHdc());
         }
-        else // we don't own our HDC
+        else // we don't own our WXHDC
         {
             if (m_window)
             {
@@ -494,7 +494,7 @@ wxMSWDCImpl::~wxMSWDCImpl()
             else
             {
                 // Must have been a wxScreenDC
-                ::ReleaseDC((HWND) nullptr, GetHdc());
+                ::ReleaseDC((WXHWND) nullptr, GetHdc());
             }
         }
     }
@@ -509,7 +509,7 @@ void wxMSWDCImpl::SelectOldObjects(WXHDC dc)
     {
         if (m_oldBitmap)
         {
-            ::SelectObject((HDC) dc, (HBITMAP) m_oldBitmap);
+            ::SelectObject((WXHDC) dc, (WXHBITMAP) m_oldBitmap);
             if (m_selectedBitmap.IsOk())
             {
                 m_selectedBitmap.SetSelectedInto(nullptr);
@@ -518,24 +518,24 @@ void wxMSWDCImpl::SelectOldObjects(WXHDC dc)
         m_oldBitmap = nullptr;
         if (m_oldPen)
         {
-            ::SelectObject((HDC) dc, (WXHPEN) m_oldPen);
+            ::SelectObject((WXHDC) dc, (WXHPEN) m_oldPen);
         }
         m_oldPen = nullptr;
         if (m_oldBrush)
         {
-            ::SelectObject((HDC) dc, (HBRUSH) m_oldBrush);
+            ::SelectObject((WXHDC) dc, (WXHBRUSH) m_oldBrush);
         }
         m_oldBrush = nullptr;
         if (m_oldFont)
         {
-            ::SelectObject((HDC) dc, (WXHFONT) m_oldFont);
+            ::SelectObject((WXHDC) dc, (WXHFONT) m_oldFont);
         }
         m_oldFont = nullptr;
 
 #if wxUSE_PALETTE
         if (m_oldPalette)
         {
-            ::SelectPalette((HDC) dc, (HPALETTE) m_oldPalette, FALSE);
+            ::SelectPalette((WXHDC) dc, (WXHPALETTE) m_oldPalette, FALSE);
         }
         m_oldPalette = nullptr;
 #endif // wxUSE_PALETTE
@@ -571,7 +571,7 @@ bool wxMSWDCImpl::DoGetClippingRect(wxRect& rect) const
 {
     // check if we should try to retrieve the clipping region possibly not set
     // by our SetClippingRegion() but preset or modified by Windows: this
-    // can happen when we're associated with an existing HDC using SetHDC() or
+    // can happen when we're associated with an existing WXHDC using SetHDC() or
     // when wxDC logical coordinates are transformed with SetDeviceOrigin(),
     // SetLogicalOrigin(), SetUserScale(), SetLogicalScale(),
     // SetTransformMatrix(), ResetTransformMatrix().
@@ -607,7 +607,7 @@ void wxMSWDCImpl::SetClippingHrgn(WXHRGN hrgn)
     // note that we combine the new clipping region with the existing one: this
     // is compatible with what the other ports do and is the documented
     // behaviour now (starting with 2.3.3)
-    if ( ::ExtSelectClipRgn(GetHdc(), (HRGN)hrgn, RGN_AND) == ERROR )
+    if ( ::ExtSelectClipRgn(GetHdc(), (WXHRGN)hrgn, RGN_AND) == ERROR )
     {
         wxLogLastError("ExtSelectClipRgn");
 
@@ -674,7 +674,7 @@ void wxMSWDCImpl::DestroyClippingRegion()
         //       so that OnPaint processing works correctly, and the update
         //       clipping region doesn't get destroyed after the first
         //       DestroyClippingRegion.
-        HRGN rgn = CreateRectRgn(0, 0, 32000, 32000);
+        WXHRGN rgn = CreateRectRgn(0, 0, 32000, 32000);
         ::SelectClipRgn(GetHdc(), rgn);
         ::DeleteObject(rgn);
 #endif
@@ -721,7 +721,7 @@ void wxMSWDCImpl::Clear()
             return;
     }
 
-    HBRUSH hbr;
+    WXHBRUSH hbr;
     if ( !m_backgroundBrush.IsOk() )
     {
         // By default, use the stock white brush for compatibility with the
@@ -794,7 +794,7 @@ bool wxMSWDCImpl::DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const
 }
 
 // Check whether DC is not rotated and not scaled
-static bool IsNonTransformedDC(HDC hdc)
+static bool IsNonTransformedDC(WXHDC hdc)
 {
     // Ensure DC is not rotated
     if ( ::GetGraphicsMode(hdc) == GM_ADVANCED )
@@ -1281,7 +1281,7 @@ void wxMSWDCImpl::DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y)
     wxCHECK_RET( icon.IsOk(), "invalid icon in DrawIcon" );
 
     // Check if we are printing: notice that it's not enough to just check for
-    // DT_RASPRINTER as this is also the kind of print preview HDC, but its
+    // DT_RASPRINTER as this is also the kind of print preview WXHDC, but its
     // type is OBJ_ENHMETADC while the type of the "real" printer DC is OBJ_DC.
     if ( ::GetDeviceCaps(GetHdc(), TECHNOLOGY) == DT_RASPRINTER &&
             ::GetObjectType(GetHdc()) == OBJ_DC )
@@ -1308,10 +1308,10 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     int width = bmp.GetWidth();
     int height = bmp.GetHeight();
 
-    HBITMAP hbmpMask = nullptr;
+    WXHBITMAP hbmpMask = nullptr;
 
 #if wxUSE_PALETTE
-    HPALETTE oldPal = nullptr;
+    WXHPALETTE oldPal = nullptr;
 #endif // wxUSE_PALETTE
 
     if ( bmp.HasAlpha() )
@@ -1354,7 +1354,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     {
         wxMask *mask = bmp.GetMask();
         if ( mask )
-            hbmpMask = (HBITMAP)mask->GetMaskBitmap();
+            hbmpMask = (WXHBITMAP)mask->GetMaskBitmap();
 
         if ( !hbmpMask )
         {
@@ -1382,8 +1382,8 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
         if ( s_maskBltAllowed )
 #endif // wxUSE_SYSTEM_OPTIONS
         {
-            HDC cdc = GetHdc();
-            HDC hdcMem = wxMSWImpl::CreateCompatibleDCWithLayout(cdc);
+            WXHDC cdc = GetHdc();
+            WXHDC hdcMem = wxMSWImpl::CreateCompatibleDCWithLayout(cdc);
             HGDIOBJ hOldBitmap = ::SelectObject(hdcMem, GetHbitmapOf(bmp));
 #if wxUSE_PALETTE
             wxPalette *pal = bmp.GetPalette();
@@ -1422,11 +1422,11 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     }
     else // no mask, just use BitBlt()
     {
-        HDC cdc = GetHdc();
-        HDC memdc = wxMSWImpl::CreateCompatibleDCWithLayout( cdc );
-        HBITMAP hbitmap = (HBITMAP) bmp.GetHBITMAP( );
+        WXHDC cdc = GetHdc();
+        WXHDC memdc = wxMSWImpl::CreateCompatibleDCWithLayout( cdc );
+        WXHBITMAP hbitmap = (WXHBITMAP) bmp.GetHBITMAP( );
 
-        wxASSERT_MSG( hbitmap, "bitmap is ok but HBITMAP is NULL?" );
+        wxASSERT_MSG( hbitmap, "bitmap is ok but WXHBITMAP is NULL?" );
 
         wxTextColoursChanger textCol(GetHdc(), *this);
 
@@ -1599,13 +1599,13 @@ void wxMSWDCImpl::DoSelectPalette(bool realize)
     // that's not yet selected out.
     if (m_oldPalette)
     {
-        ::SelectPalette(GetHdc(), (HPALETTE) m_oldPalette, FALSE);
+        ::SelectPalette(GetHdc(), (WXHPALETTE) m_oldPalette, FALSE);
         m_oldPalette = nullptr;
     }
 
     if ( m_palette.IsOk() )
     {
-        HPALETTE oldPal = ::SelectPalette(GetHdc(),
+        WXHPALETTE oldPal = ::SelectPalette(GetHdc(),
                                           GetHpaletteOf(m_palette),
                                           false);
         if (!m_oldPalette)
@@ -2228,7 +2228,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
         return false;
     }
 
-    HDC hdcSrc = GetHdcOf(*implSrc);
+    WXHDC hdcSrc = GetHdcOf(*implSrc);
 
     // if either the source or destination has alpha channel, we must use
     // AlphaBlt() as other function don't handle it correctly
@@ -2291,7 +2291,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 
     // Most of the operations involve the source or the pattern, but a few of
     // them (and only those few, no other are possible) only use destination
-    // HDC. For them we must not give a valid source HDC to MaskBlt() as it
+    // WXHDC. For them we must not give a valid source WXHDC to MaskBlt() as it
     // still uses it, somehow, and the result is garbage.
     if ( dwRop == BLACKNESS || dwRop == WHITENESS ||
             dwRop == DSTINVERT || dwRop == DSTCOPY )
@@ -2324,7 +2324,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                             xdest, ydest, dstWidth, dstHeight,
                             hdcSrc,
                             src.x, src.y,
-                            (HBITMAP)mask->GetMaskBitmap(),
+                            (WXHBITMAP)mask->GetMaskBitmap(),
                             srcMask.x, srcMask.y,
                             MAKEROP4(dwRop, DSTCOPY)
                             ) != 0;
@@ -2334,9 +2334,9 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
         if ( !success )
         {
             // Blit bitmap with mask
-            HDC dc_mask ;
-            HDC  dc_buffer ;
-            HBITMAP buffer_bmap ;
+            WXHDC dc_mask ;
+            WXHDC  dc_buffer ;
+            WXHBITMAP buffer_bmap ;
 
 #if wxUSE_DC_CACHEING
             // create a temp buffer bitmap and DCs to access it and the mask
@@ -2356,7 +2356,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
             dc_buffer = wxMSWImpl::CreateCompatibleDCWithLayout(GetHdc());
             buffer_bmap = ::CreateCompatibleBitmap(GetHdc(), dstWidth, dstHeight);
 #endif // wxUSE_DC_CACHEING/!wxUSE_DC_CACHEING
-            HGDIOBJ hOldMaskBitmap = ::SelectObject(dc_mask, (HBITMAP) mask->GetMaskBitmap());
+            HGDIOBJ hOldMaskBitmap = ::SelectObject(dc_mask, (WXHBITMAP) mask->GetMaskBitmap());
             HGDIOBJ hOldBufferBitmap = ::SelectObject(dc_buffer, buffer_bmap);
 
             // copy dest to buffer
@@ -2439,7 +2439,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                 // Unlike all the other functions used here (i.e. AlphaBlt(),
                 // MaskBlt(), BitBlt() and StretchBlt()), StretchDIBits() does
                 // not take into account the source DC logical coordinates
-                // automatically as it doesn't even work with the source HDC.
+                // automatically as it doesn't even work with the source WXHDC.
                 // So do this manually to ensure that the coordinates are
                 // interpreted in the same way here as in all the other cases.
                 src.x = source->LogicalToDeviceX(src.x);
@@ -2602,7 +2602,7 @@ wxDCCacheEntry::wxDCCacheEntry(WXHDC hDC, int depth)
 
 wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
 {
-    const int depth = ::GetDeviceCaps((HDC) dc, PLANES) * ::GetDeviceCaps((HDC) dc, BITSPIXEL);
+    const int depth = ::GetDeviceCaps((WXHDC) dc, PLANES) * ::GetDeviceCaps((WXHDC) dc, BITSPIXEL);
     wxList::compatibility_iterator node = sm_bitmapCache.GetFirst();
     while (node)
     {
@@ -2612,7 +2612,7 @@ wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
         {
             if (entry->m_width < w || entry->m_height < h)
             {
-                entry->m_bitmap.reset(::CreateCompatibleBitmap((HDC) dc, w, h));
+                entry->m_bitmap.reset(::CreateCompatibleBitmap((WXHDC) dc, w, h));
 
                 if ( !entry->m_bitmap)
                 {
@@ -2629,7 +2629,7 @@ wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
 
         node = node->GetNext();
     }
-    WXHBITMAP hBitmap = (WXHBITMAP) ::CreateCompatibleBitmap((HDC) dc, w, h);
+    WXHBITMAP hBitmap = (WXHBITMAP) ::CreateCompatibleBitmap((WXHDC) dc, w, h);
     if ( !hBitmap)
     {
         wxLogLastError("CreateCompatibleBitmap");
@@ -2641,7 +2641,7 @@ wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
 
 wxDCCacheEntry* wxMSWDCImpl::FindDCInCache(wxDCCacheEntry* notThis, WXHDC dc)
 {
-    int depth = ::GetDeviceCaps((HDC) dc, PLANES) * ::GetDeviceCaps((HDC) dc, BITSPIXEL);
+    int depth = ::GetDeviceCaps((WXHDC) dc, PLANES) * ::GetDeviceCaps((WXHDC) dc, BITSPIXEL);
     wxList::compatibility_iterator node = sm_dcCache.GetFirst();
     while (node)
     {
@@ -2658,7 +2658,7 @@ wxDCCacheEntry* wxMSWDCImpl::FindDCInCache(wxDCCacheEntry* notThis, WXHDC dc)
 
         node = node->GetNext();
     }
-    WXHDC hDC = (WXHDC) wxMSWImpl::CreateCompatibleDCWithLayout((HDC) dc);
+    WXHDC hDC = (WXHDC) wxMSWImpl::CreateCompatibleDCWithLayout((WXHDC) dc);
     if ( !hDC)
     {
         wxLogLastError("CreateCompatibleDC");
@@ -2711,12 +2711,12 @@ static bool AlphaBlt(wxMSWDCImpl* dcDst,
                      wxPoint src,
                      int srcWidth,
                      int srcHeight,
-                     HDC hdcSrc,
+                     WXHDC hdcSrc,
                      const wxBitmap& WXUNUSED_UNLESS_DEBUG(bmpSrc))
 {
     wxASSERT_MSG( bmpSrc.IsOk() && bmpSrc.HasAlpha(),
                     "AlphaBlt(): invalid bitmap" );
-    wxASSERT_MSG( dcDst && hdcSrc, "AlphaBlt(): invalid HDC" );
+    wxASSERT_MSG( dcDst && hdcSrc, "AlphaBlt(): invalid WXHDC" );
 
     BLENDFUNCTION bf;
     bf.BlendOp = AC_SRC_OVER;
@@ -2857,9 +2857,9 @@ void wxMSWDCImpl::DoGradientFillLinear (const wxRect& rect,
 namespace wxMSWImpl
 {
 
-HDC CreateCompatibleDCWithLayout(HDC hdc)
+WXHDC CreateCompatibleDCWithLayout(WXHDC hdc)
 {
-    HDC hdcNew = ::CreateCompatibleDC(hdc);
+    WXHDC hdcNew = ::CreateCompatibleDC(hdc);
     if ( hdcNew )
     {
         const DWORD dwLayout = wxDynLoadWrappers::GetLayout(hdc);

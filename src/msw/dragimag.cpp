@@ -95,14 +95,14 @@ bool wxDragImage::Create(const wxBitmap& image, const wxCursor& cursor)
     int index;
     if (!mask)
     {
-        HBITMAP hBitmap1 = (HBITMAP) image.GetHBITMAP();
+        WXHBITMAP hBitmap1 = (WXHBITMAP) image.GetHBITMAP();
         index = ImageList_Add(GetHimageList(), hBitmap1, nullptr);
     }
     else
     {
-        HBITMAP hBitmap1 = (HBITMAP) image.GetHBITMAP();
-        HBITMAP hBitmap2 = (HBITMAP) image.GetMask()->GetMaskBitmap();
-        HBITMAP hbmpMask = wxInvertMask(hBitmap2);
+        WXHBITMAP hBitmap1 = (WXHBITMAP) image.GetHBITMAP();
+        WXHBITMAP hBitmap2 = (WXHBITMAP) image.GetMask()->GetMaskBitmap();
+        WXHBITMAP hbmpMask = wxInvertMask(hBitmap2);
 
         index = ImageList_Add(GetHimageList(), hBitmap1, hbmpMask);
         ::DeleteObject(hbmpMask);
@@ -375,8 +375,8 @@ bool wxDragImage::Move(const wxPoint& pt)
             .bottom = 0
         };
 
-        DWORD style = ::GetWindowLongPtrW((HWND) m_window->GetHWND(), GWL_STYLE);
-        DWORD exStyle = ::GetWindowLongPtrW((HWND) m_window->GetHWND(), GWL_EXSTYLE);
+        DWORD style = ::GetWindowLongPtrW((WXHWND) m_window->GetHWND(), GWL_STYLE);
+        DWORD exStyle = ::GetWindowLongPtrW((WXHWND) m_window->GetHWND(), GWL_EXSTYLE);
         ::AdjustWindowRectEx(& rect, style, FALSE, exStyle);
         // Subtract the (negative) values, i.e. add a small increment
         pt2.x -= rect.left; pt2.y -= rect.top;
@@ -397,9 +397,9 @@ bool wxDragImage::Show()
 {
     wxASSERT_MSG( (m_hImageList != nullptr), "Image list must not be null in Show.");
 
-    HWND hWnd = nullptr;
+    WXHWND hWnd = nullptr;
     if (m_window && !m_fullScreen)
-        hWnd = (HWND) m_window->GetHWND();
+        hWnd = (WXHWND) m_window->GetHWND();
 
     bool ret = (ImageList_DragEnter( hWnd, m_position.x, m_position.y ) != 0);
 
@@ -410,9 +410,9 @@ bool wxDragImage::Hide()
 {
     wxASSERT_MSG( (m_hImageList != nullptr), "Image list must not be null in Hide.");
 
-    HWND hWnd = nullptr;
+    WXHWND hWnd = nullptr;
     if (m_window && !m_fullScreen)
-        hWnd = (HWND) m_window->GetHWND();
+        hWnd = (WXHWND) m_window->GetHWND();
 
     return (ImageList_DragLeave(hWnd) != 0);
 }

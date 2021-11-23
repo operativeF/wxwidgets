@@ -34,7 +34,7 @@
 // private functions
 // ---------------------------------------------------------------------------
 
-BOOL CALLBACK wxAbortProc(HDC hdc, int error);
+BOOL CALLBACK wxAbortProc(WXHDC hdc, int error);
 
 // ---------------------------------------------------------------------------
 // Printer
@@ -298,7 +298,7 @@ void wxWindowsPrintPreview::DetermineScaling()
     if ( printerDC.IsOk() )
     {
         wxPrinterDCImpl *impl = (wxPrinterDCImpl*) printerDC.GetImpl();
-        HDC hdc = GetHdcOf(*impl);
+        WXHDC hdc = GetHdcOf(*impl);
         printerWidthMM = ::GetDeviceCaps(hdc, HORZSIZE);
         printerHeightMM = ::GetDeviceCaps(hdc, VERTSIZE);
         printerXRes = ::GetDeviceCaps(hdc, HORZRES);
@@ -391,7 +391,7 @@ bool wxWindowsPrintPreview::RenderPageIntoBitmap(wxBitmap& bmp, int pageNum)
 }
 #endif // wxUSE_ENH_METAFILE
 
-BOOL CALLBACK wxAbortProc(HDC WXUNUSED(hdc), int WXUNUSED(error))
+BOOL CALLBACK wxAbortProc(WXHDC WXUNUSED(hdc), int WXUNUSED(error))
 {
     MSG msg;
 
@@ -401,7 +401,7 @@ BOOL CALLBACK wxAbortProc(HDC WXUNUSED(hdc), int WXUNUSED(error))
     /* Process messages intended for the abort dialog box */
 
     while (!wxPrinterBase::sm_abortIt && ::PeekMessageW(&msg, nullptr, 0, 0, TRUE))
-        if (!::IsDialogMessageW((HWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
+        if (!::IsDialogMessageW((WXHWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
             TranslateMessage(&msg);
             ::DispatchMessageW(&msg);
         }
