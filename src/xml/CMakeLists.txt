@@ -24,4 +24,4 @@ target_include_directories(wxxml
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
-target_precompile_headers(wxxml REUSE_FROM wxaui)
+target_precompile_headers(wxxml REUSE_FROM wxsharedcmn)

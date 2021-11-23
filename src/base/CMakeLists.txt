@@ -293,5 +293,5 @@ target_link_libraries(wxbase
         wininet
 )
 
-target_precompile_headers(wxbase REUSE_FROM wxaui)
-target_precompile_headers(wxsharedcmn REUSE_FROM wxaui)
+target_precompile_headers(wxsharedcmn PRIVATE ${CMAKE_SOURCE_DIR}/include/wx/msw/winprecomp.h)
+target_precompile_headers(wxbase REUSE_FROM wxsharedcmn)

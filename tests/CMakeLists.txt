@@ -199,4 +199,4 @@ endif()
 #     target_link_libraries(test_gui PRIVATE wxwebview)
 # endif()
 
-target_precompile_headers(test_gui REUSE_FROM wxaui)
+target_precompile_headers(test_gui REUSE_FROM wxsharedcmn)
