@@ -25,6 +25,8 @@
 
 #include <cassert>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
@@ -250,7 +252,7 @@ wxPoint wxCursor::GetHotSpot() const
         return wxDefaultPosition;
 
     AutoIconInfo ii;
-    if ( !ii.GetFrom((HICON)GetGDIImageData()->m_hCursor) )
+    if ( !ii.GetFrom((WXHICON)GetGDIImageData()->m_hCursor) )
         return wxDefaultPosition;
 
     return {gsl::narrow_cast<int>(ii.xHotspot), gsl::narrow_cast<int>(ii.yHotspot)};

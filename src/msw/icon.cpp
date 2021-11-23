@@ -17,6 +17,7 @@
 
 #include <fmt/core.h>
 
+import WX.WinDef;
 
 // ----------------------------------------------------------------------------
 // wxWin macros
@@ -36,7 +37,7 @@ void wxIconRefData::Free()
 {
     if ( m_hIcon )
     {
-        ::DestroyIcon((HICON) m_hIcon);
+        ::DestroyIcon((WXHICON) m_hIcon);
 
         m_hIcon = nullptr;
     }
@@ -89,7 +90,7 @@ wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
 
 void wxIcon::CopyFromBitmap(const wxBitmap& bmp)
 {
-    HICON hicon = wxBitmapToHICON(bmp);
+    WXHICON hicon = wxBitmapToHICON(bmp);
     if ( !hicon )
     {
         wxLogLastError("CreateIconIndirect");

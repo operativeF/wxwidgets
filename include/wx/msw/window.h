@@ -12,6 +12,8 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string_view>;

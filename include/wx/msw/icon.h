@@ -17,6 +17,8 @@
 
 #include "wx/msw/gdiimage.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // ---------------------------------------------------------------------------

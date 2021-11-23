@@ -87,7 +87,7 @@ private:
     bool m_ownsCurrentHandle{false};
 
     // Replace the image at the native control level with the given HBITMAP or
-    // HICON (which can be 0) and destroy the previous image if necessary.
+    // WXHICON (which can be 0) and destroy the previous image if necessary.
     void MSWReplaceImageHandle(WXLPARAM handle);
 
     // Delete the current handle only if we own it.

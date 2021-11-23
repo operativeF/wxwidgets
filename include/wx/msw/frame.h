@@ -11,6 +11,8 @@
 #ifndef _WX_FRAME_H_
 #define _WX_FRAME_H_
 
+import WX.WinDef;
+
 import <string>;
 
 #if wxUSE_TASKBARBUTTON

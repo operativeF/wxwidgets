@@ -26,6 +26,8 @@
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxIconArray)
 
+import WX.WinDef;
+
 wxIMPLEMENT_DYNAMIC_CLASS(wxIconBundle, wxGDIObject);
 
 #define M_ICONBUNDLEDATA static_cast<wxIconBundleRefData*>(m_refData)
@@ -220,7 +222,7 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
 
         if ( wxLoadUserResource(&data, &outLen, wxString::Format(wxS("#%u"), iconID), RT_ICON, module) )
         {
-            HICON hIcon = ::CreateIconFromResourceEx(static_cast<PBYTE>(const_cast<void*>(data)),
+            WXHICON hIcon = ::CreateIconFromResourceEx(static_cast<PBYTE>(const_cast<void*>(data)),
                                 static_cast<DWORD>(outLen), TRUE, 0x00030000, 0, 0, LR_DEFAULTCOLOR);
             wxIcon icon;
 

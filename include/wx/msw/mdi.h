@@ -12,9 +12,12 @@
 #ifndef _WX_MSW_MDI_H_
 #define _WX_MSW_MDI_H_
 
+#include <memory>
+
+import WX.WinDef;
+
 import Utils.Geometry;
 
-#include <memory>
 import <string>;
 
 class wxAcceleratorTable;

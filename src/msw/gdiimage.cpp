@@ -26,11 +26,13 @@
 
 #include "wx/msw/private.h"
 
+#include <boost/nowide/convert.hpp>
+
+import WX.WinDef;
+
 import Utils.Strings;
 
 import <string>;
-
-#include <boost/nowide/convert.hpp>
 
 // By default, use PNG resource handler if we can, i.e. have support for
 // loading PNG images in the library. This symbol could be predefined as 0 to
@@ -396,7 +398,7 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
 {
     icon->UnRef();
 
-    HICON hicon = nullptr;
+    WXHICON hicon = nullptr;
 
     // Parse the filename: it may be of the form "filename;n" in order to
     // specify the nth icon in the file.
@@ -511,10 +513,10 @@ bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
 
     // note that we can't just always call LoadImage() because it seems to do
     // some icon rescaling internally which results in very ugly 16x16 icons
-    HICON hicon = [=]() {
+    WXHICON hicon = [=]() {
         if ( hasSize )
         {
-            return (HICON)::LoadImageW(wxGetInstance(), boost::nowide::widen(name).c_str(),
+            return (WXHICON)::LoadImageW(wxGetInstance(), boost::nowide::widen(name).c_str(),
                                        IMAGE_ICON,
                                        desiredSz.x,
                                        desiredSz.y,
@@ -607,7 +609,7 @@ bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
 // private functions
 // ----------------------------------------------------------------------------
 
-wxSize wxGetHiconSize(HICON hicon)
+wxSize wxGetHiconSize(WXHICON hicon)
 {
     wxSize size;
 

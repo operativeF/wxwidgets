@@ -31,6 +31,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // Redefine the interfaces: ITaskbarList3, IObjectCollection,
 // ICustomDestinationList, IShellLink, IShellItem, IApplicationDocumentLists
@@ -396,7 +398,7 @@ public:
     virtual
         HRESULT wxSTDCALL ThumbBarUpdateButtons(HWND, UINT, LPTHUMBBUTTON) = 0;
     virtual HRESULT wxSTDCALL ThumbBarSetImageList(HWND, ::HIMAGELIST) = 0;
-    virtual HRESULT wxSTDCALL SetOverlayIcon(HWND, HICON, LPCWSTR) = 0;
+    virtual HRESULT wxSTDCALL SetOverlayIcon(HWND, WXHICON, LPCWSTR) = 0;
     virtual HRESULT wxSTDCALL SetThumbnailTooltip(HWND, LPCWSTR pszTip) = 0;
     virtual HRESULT wxSTDCALL SetThumbnailClip(HWND, RECT *) = 0;
 };

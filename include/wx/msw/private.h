@@ -297,7 +297,7 @@ extern HBITMAP wxInvertMask(HBITMAP hbmpMask, int w = 0, int h = 0);
 //
 // The bitmap must be valid and it should have a mask. If it doesn't, a default
 // mask is created using light grey as the transparent colour.
-extern HICON wxBitmapToHICON(const wxBitmap& bmp);
+extern WXHICON wxBitmapToHICON(const wxBitmap& bmp);
 
 // Same requirements as above apply and the bitmap must also have the correct
 // size.
@@ -502,7 +502,7 @@ class AutoIconInfo : public ICONINFO
 public:
     AutoIconInfo() { wxZeroMemory(*this); }
 
-    bool GetFrom(HICON hIcon)
+    bool GetFrom(WXHICON hIcon)
     {
         if ( !::GetIconInfo(hIcon, this) )
         {
@@ -752,8 +752,8 @@ private:
 #define GetHbitmap()            ((HBITMAP)GetHBITMAP())
 #define GetHbitmapOf(bmp)       ((HBITMAP)(bmp).GetHBITMAP())
 
-#define GetHicon()              ((HICON)GetHICON())
-#define GetHiconOf(icon)        ((HICON)(icon).GetHICON())
+#define GetHicon()              ((WXHICON)GetHICON())
+#define GetHiconOf(icon)        ((WXHICON)(icon).GetHICON())
 
 #define GetHaccel()             ((HACCEL)GetHACCEL())
 #define GetHaccelOf(table)      ((HACCEL)((table).GetHACCEL()))
@@ -1003,7 +1003,7 @@ extern wxWindow* wxFindWinFromHandle(HWND hwnd);
 extern wxWindow *wxGetWindowFromHWND(WXHWND hwnd);
 
 // Get the size of an icon
-extern wxSize wxGetHiconSize(HICON hicon);
+extern wxSize wxGetHiconSize(WXHICON hicon);
 
 void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2);
 

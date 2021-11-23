@@ -11,6 +11,7 @@ add_library(wxxml
 
 target_link_libraries(wxxml
     PRIVATE
+        wxwinwrap
         stdlibcore
         Microsoft.GSL::GSL
         expat::expat

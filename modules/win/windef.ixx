@@ -8,5 +8,6 @@ export
 {
 
 using WXHFONT = HFONT;
+using WXHICON = HICON;
 
 } // export

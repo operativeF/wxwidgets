@@ -23,6 +23,8 @@
 
 #include <gsl/gsl>
 
+import WX.WinDef;
+
 import Utils.Strings;
 
 import <algorithm>;
@@ -2587,7 +2589,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
     }
     else if ( type == wxBitmapType::ICO_Resource )
     {
-        const HICON hIcon = ::LoadIconW(wxGetInstance(), boost::nowide::widen(name).c_str());
+        const WXHICON hIcon = ::LoadIconW(wxGetInstance(), boost::nowide::widen(name).c_str());
 
         if ( !hIcon )
         {

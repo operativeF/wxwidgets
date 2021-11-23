@@ -19,6 +19,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 #ifdef SHGSI_ICON
     #define wxHAS_SHGetStockIconInfo
 #endif
@@ -34,10 +36,10 @@ namespace
 // define it ourselves.
 HRESULT
 MSW_SHDefExtractIcon(LPCTSTR pszIconFile, int iIndex, UINT uFlags,
-                     HICON *phiconLarge, HICON *phiconSmall, UINT nIconSize)
+                     WXHICON *phiconLarge, WXHICON *phiconSmall, UINT nIconSize)
 {
     typedef HRESULT
-    (WINAPI *SHDefExtractIcon_t)(LPCTSTR, int, UINT, HICON*, HICON*, UINT);
+    (WINAPI *SHDefExtractIcon_t)(LPCTSTR, int, UINT, WXHICON*, WXHICON*, UINT);
 
     static SHDefExtractIcon_t s_SHDefExtractIcon = NULL;
     if ( !s_SHDefExtractIcon )
@@ -114,7 +116,7 @@ MSW_SHGetStockIconInfo(SHSTOCKICONID siid,
 wxBitmap
 MSWGetBitmapFromIconLocation(const WCHAR* path, int index, const wxSize& size)
 {
-    HICON hIcon = nullptr;
+    WXHICON hIcon = nullptr;
     if ( MSW_SHDefExtractIconW(path, index, 0, &hIcon, nullptr, size.x) != S_OK )
         return wxNullBitmap;
 

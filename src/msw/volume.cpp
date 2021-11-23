@@ -32,6 +32,8 @@
 
 import Utils.Strings;
 
+import WX.WinDef;
+
 #if wxUSE_BASE
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -601,7 +603,7 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
 
     return m_icons[type];
 #else
-    wxFAIL_MSG("Can't convert HICON to wxIcon in this port.");
+    wxFAIL_MSG("Can't convert WXHICON to wxIcon in this port.");
     return wxNullIcon;
 #endif
 } // GetIcon

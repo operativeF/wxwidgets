@@ -24,6 +24,8 @@
 
 #include "wx/msw/wrapgdip.h"
 
+import WX.WinDef;
+
 // w32api headers used by both MinGW and Cygwin wrongly define UINT16 inside
 // Gdiplus namespace in gdiplus.h which results in ambiguity errors when using
 // this type as UINT16 is also defined in global scope by windows.h (or rather
@@ -397,8 +399,8 @@
     m(CreateBitmapFromGdiDib, (GDIPCONST BITMAPINFO* gdiBitmapInfo, VOID* gdiBitmapData, GpBitmap** bitmap), (gdiBitmapInfo, gdiBitmapData, bitmap)) \
     m(CreateBitmapFromHBITMAP, (HBITMAP hbm, HPALETTE hpal, GpBitmap** bitmap), (hbm, hpal, bitmap)) \
     m(CreateHBITMAPFromBitmap, (GpBitmap* bitmap, HBITMAP* hbmReturn, ARGB background), (bitmap, hbmReturn, background)) \
-    m(CreateBitmapFromHICON, (HICON hicon, GpBitmap** bitmap), (hicon, bitmap)) \
-    m(CreateHICONFromBitmap, (GpBitmap* bitmap, HICON* hbmReturn), (bitmap, hbmReturn)) \
+    m(CreateBitmapFromHICON, (WXHICON hicon, GpBitmap** bitmap), (hicon, bitmap)) \
+    m(CreateHICONFromBitmap, (GpBitmap* bitmap, WXHICON* hbmReturn), (bitmap, hbmReturn)) \
     m(CreateBitmapFromResource, (HINSTANCE hInstance, GDIPCONST WCHAR* lpBitmapName, GpBitmap** bitmap), (hInstance, lpBitmapName, bitmap)) \
     m(CloneBitmapArea, (REAL x, REAL y, REAL width, REAL height, PixelFormat format, GpBitmap *srcBitmap, GpBitmap **dstBitmap), (x, y, width, height, format, srcBitmap, dstBitmap)) \
     m(CloneBitmapAreaI, (INT x, INT y, INT width, INT height, PixelFormat format, GpBitmap *srcBitmap, GpBitmap **dstBitmap), (x, y, width, height, format, srcBitmap, dstBitmap)) \

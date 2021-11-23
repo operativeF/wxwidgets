@@ -22,6 +22,8 @@
 #include "wx/window.h"
 #include "wx/msw/dragimag.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // Wine doesn't have this yet
@@ -137,7 +139,7 @@ bool wxDragImage::Create(const wxIcon& image, const wxCursor& cursor)
 
     m_hImageList = (WXHIMAGELIST) ImageList_Create(image.GetWidth(), image.GetHeight(), flags, 1, 1);
 
-    HICON hIcon = (HICON) image.GetHICON();
+    WXHICON hIcon = (WXHICON) image.GetHICON();
 
     int index = ImageList_AddIcon(GetHimageList(), hIcon);
     if ( index == -1 )
@@ -274,7 +276,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, bool fullS
         // How do we stop the cursor jumping right and below of where it should be?
 #if 0
         ICONINFO iconInfo;
-        if (::GetIconInfo((HICON) (HCURSOR) m_cursor.GetHCURSOR(), & iconInfo) != 0)
+        if (::GetIconInfo((WXHICON) (HCURSOR) m_cursor.GetHCURSOR(), & iconInfo) != 0)
         {
             curHotSpot.x -= iconInfo.xHotspot;
             curHotSpot.y -= iconInfo.yHotspot;
@@ -286,7 +288,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, bool fullS
 
         // First add the cursor to the image list
         HCURSOR hCursor = (HCURSOR) m_cursor.GetHCURSOR();
-        int cursorIndex = ImageList_AddIcon((HIMAGELIST) m_hCursorImageList, (HICON) hCursor);
+        int cursorIndex = ImageList_AddIcon((HIMAGELIST) m_hCursorImageList, (WXHICON) hCursor);
 
         wxASSERT_MSG( (cursorIndex != -1), "ImageList_AddIcon failed in BeginDrag.");
 

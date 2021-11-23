@@ -32,6 +32,7 @@
 #include <memory>
 
 import WX.Win.UniqueHnd;
+import WX.WinDef;
 
 import <string>;
 
@@ -464,8 +465,8 @@ static HBITMAP CreatePremultipliedDIBIfNeeded(HBITMAP hbmp)
 bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
                                     wxBitmapTransparency transp)
 {
-    // it may be either HICON or HCURSOR
-    HICON hicon = (HICON)icon.GetHandle();
+    // it may be either WXHICON or HCURSOR
+    WXHICON hicon = (WXHICON)icon.GetHandle();
 
     AutoIconInfo iconInfo;
     if ( !iconInfo.GetFrom(hicon) )
@@ -1712,7 +1713,7 @@ bool wxBitmapHandler::SaveFile(const wxBitmap *WXUNUSED(bitmap),
 
 // helper of wxBitmapToHICON/HCURSOR
 static
-HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
+WXHICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
                              bool iconWanted,
                              int hotSpotX,
                              int hotSpotY)
@@ -1810,7 +1811,7 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
         }
     }
 
-    HICON hicon = ::CreateIconIndirect(&iconInfo);
+    WXHICON hicon = ::CreateIconIndirect(&iconInfo);
 
     if ( !bmp.GetMask() && !bmp.HasAlpha() )
     {
@@ -1821,7 +1822,7 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
     return hicon;
 }
 
-HICON wxBitmapToHICON(const wxBitmap& bmp)
+WXHICON wxBitmapToHICON(const wxBitmap& bmp)
 {
     return wxBitmapToIconOrCursor(bmp, true, 0, 0);
 }

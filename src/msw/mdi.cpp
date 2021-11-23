@@ -31,6 +31,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 import <algorithm>;
 
 // ---------------------------------------------------------------------------

@@ -38,6 +38,8 @@
     constexpr unsigned int wxMSGFLT_ADD =   0x01;
 #endif  // wxUSE_TASKBARBUTTON
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // event tables
 // ----------------------------------------------------------------------------
@@ -819,8 +821,8 @@ WXLRESULT wxFrame::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lPara
         case WM_QUERYDRAGICON:
             {
                 const wxIcon& icon = GetIcon();
-                HICON hIcon = icon.IsOk() ? GetHiconOf(icon)
-                                        : (HICON)GetDefaultIcon();
+                WXHICON hIcon = icon.IsOk() ? GetHiconOf(icon)
+                                        : (WXHICON)GetDefaultIcon();
                 rc = (WXLRESULT)hIcon;
                 processed = rc != 0;
             }

@@ -26,6 +26,7 @@
 #include "wx/msw/private.h"
 
 import WX.Win.UniqueHnd;
+import WX.WinDef;
 
 import <algorithm>;
 
@@ -409,7 +410,7 @@ wxBitmap wxImageList::GetBitmap(int index) const
 // Get the icon
 wxIcon wxImageList::GetIcon(int index) const
 {
-    HICON hIcon = ImageList_ExtractIcon(0, GetHImageList(), index);
+    WXHICON hIcon = ImageList_ExtractIcon(0, GetHImageList(), index);
     if (hIcon)
     {
         wxIcon icon;

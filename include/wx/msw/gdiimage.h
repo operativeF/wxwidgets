@@ -19,6 +19,8 @@
 #include "wx/gdicmn.h"          // wxBitmapType::Invalid
 #include "wx/list.h"
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
