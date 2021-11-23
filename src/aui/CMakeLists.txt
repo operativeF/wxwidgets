@@ -9,6 +9,7 @@ set(AUI_CMN_SRC
 )
 
 set(AUI_CMN_INF
+    ${CMAKE_SOURCE_DIR}/modules/aui/auibar.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/book.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/dockart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/floatpane.ixx
@@ -16,9 +17,12 @@ set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/page.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/toolbarart.ixx
+    ${CMAKE_SOURCE_DIR}/modules/aui/toolbaritem.ixx
 )
 
 set(AUI_MSW_INF
+    ${CMAKE_SOURCE_DIR}/modules/aui/msw/barartmsw.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/msw/tabartmsw.ixx
 )
 

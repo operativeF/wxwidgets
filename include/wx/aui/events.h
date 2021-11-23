@@ -5,6 +5,20 @@
 
 #ifndef SWIG
 
+#define wxAuiToolBarEventHandler(func) \
+    wxEVENT_HANDLER_CAST(wxAuiToolBarEventFunction, func)
+
+#define EVT_AUITOOLBAR_TOOL_DROPDOWN(winid, fn) \
+    wx__DECLARE_EVT1(wxEVT_AUITOOLBAR_TOOL_DROPDOWN, winid, wxAuiToolBarEventHandler(fn))
+#define EVT_AUITOOLBAR_OVERFLOW_CLICK(winid, fn) \
+    wx__DECLARE_EVT1(wxEVT_AUITOOLBAR_OVERFLOW_CLICK, winid, wxAuiToolBarEventHandler(fn))
+#define EVT_AUITOOLBAR_RIGHT_CLICK(winid, fn) \
+    wx__DECLARE_EVT1(wxEVT_AUITOOLBAR_RIGHT_CLICK, winid, wxAuiToolBarEventHandler(fn))
+#define EVT_AUITOOLBAR_MIDDLE_CLICK(winid, fn) \
+    wx__DECLARE_EVT1(wxEVT_AUITOOLBAR_MIDDLE_CLICK, winid, wxAuiToolBarEventHandler(fn))
+#define EVT_AUITOOLBAR_BEGIN_DRAG(winid, fn) \
+    wx__DECLARE_EVT1(wxEVT_AUITOOLBAR_BEGIN_DRAG, winid, wxAuiToolBarEventHandler(fn))
+
 #define wxAuiNotebookEventHandler(func) \
     wxEVENT_HANDLER_CAST(wxAuiNotebookEventFunction, func)
 
@@ -112,6 +126,22 @@
     EVT_AUI_RENDER = wx.PyEventBinder( wxEVT_AUI_RENDER )
     EVT_AUI_FIND_MANAGER = wx.PyEventBinder( wxEVT_AUI_FIND_MANAGER )
 }
+
+// wxpython/swig event work
+%constant wxEventType wxEVT_AUITOOLBAR_TOOL_DROPDOWN;
+%constant wxEventType wxEVT_AUITOOLBAR_OVERFLOW_CLICK;
+%constant wxEventType wxEVT_AUITOOLBAR_RIGHT_CLICK;
+%constant wxEventType wxEVT_AUITOOLBAR_MIDDLE_CLICK;
+%constant wxEventType wxEVT_AUITOOLBAR_BEGIN_DRAG;
+
+%pythoncode {
+    EVT_AUITOOLBAR_TOOL_DROPDOWN = wx.PyEventBinder( wxEVT_AUITOOLBAR_TOOL_DROPDOWN, 1 )
+    EVT_AUITOOLBAR_OVERFLOW_CLICK = wx.PyEventBinder( wxEVT_AUITOOLBAR_OVERFLOW_CLICK, 1 )
+    EVT_AUITOOLBAR_RIGHT_CLICK = wx.PyEventBinder( wxEVT_AUITOOLBAR_RIGHT_CLICK, 1 )
+    EVT_AUITOOLBAR_MIDDLE_CLICK = wx.PyEventBinder( wxEVT_AUITOOLBAR_MIDDLE_CLICK, 1 )
+    EVT_AUITOOLBAR_BEGIN_DRAG = wx.PyEventBinder( wxEVT_AUITOOLBAR_BEGIN_DRAG, 1 )
+}
+
 #endif
 
 #endif // WX_AUI_EVENTS_H

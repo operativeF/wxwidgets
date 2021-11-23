@@ -12,7 +12,6 @@ module;
 
 #include "wx/msw/private.h"
 
-#include "wx/aui/auibar.h"
 #include "wx/aui/events.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
@@ -26,6 +25,7 @@ module;
 #include "wx/image.h"
 #include "wx/statusbr.h"
 #include "wx/timer.h"
+#include "wx/sizer.h"
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes
@@ -42,6 +42,7 @@ module;
 
 module WX.AUI.FrameManager;
 
+import WX.AUI.AUIBar;
 import WX.AUI.DockArt;
 import WX.AUI.FloatPane;
 import WX.AUI.TabMDI;

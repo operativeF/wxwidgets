@@ -7,10 +7,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_AUI_BARART_MSW_H_
-#define _WX_AUI_BARART_MSW_H_
+module;
+
+export module WX.AUI.ToolBarArt;
+
+export import WX.AUI.ToolBarArt.Base;
 
 import Utils.Geometry;
+
+export
+{
 
 class wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 {
@@ -85,4 +91,6 @@ private:
     bool m_themed;
 };
 
-#endif // _WX_AUI_BARART_MSW_H_
+using wxAuiDefaultToolBarArt = wxAuiMSWToolBarArt;
+
+} // export

@@ -8,24 +8,26 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/image.h"
 #include "wx/menu.h"
-
+#include "wx/dc.h"
+#include "wx/dcclient.h"
 #include "wx/statline.h"
 #include "wx/dcbuffer.h"
 #include "wx/sizer.h"
 #include "wx/settings.h"
-
-#include "wx/aui/auibar.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
 
 #include "wx/arrimpl.cpp"
-WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
 #include <gsl/gsl>
+
+module WX.AUI.AUIBar;
 
 import WX.AUI.FrameManager;
 

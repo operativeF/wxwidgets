@@ -7,6 +7,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/msw/private.h"
 
 #include "wx/bitmap.h"
@@ -15,10 +17,13 @@
 #include "wx/dc.h"
 #include "wx/settings.h"
 
-#include "wx/aui/auibar.h"
 #include "wx/msw/uxtheme.h"
 
+module WX.AUI.ToolBarArt;
+
+import WX.AUI.AUIBar;
 import WX.AUI.FrameManager;
+import Utils.Geometry;
 
 wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
 {
