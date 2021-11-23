@@ -107,7 +107,6 @@ public:
     virtual void UpdateColoursFromSystem() {}
 };
 
-
 class wxAuiGenericTabArt : public wxAuiTabArt
 {
 public:
@@ -209,7 +208,6 @@ protected:
     
     unsigned int m_flags;
 };
-
 
 class wxAuiSimpleTabArt : public wxAuiTabArt
 {

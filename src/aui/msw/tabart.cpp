@@ -7,7 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if !defined(__WXUNIVERSAL__)
+module;
 
 #include "wx/msw/private.h"
 
@@ -17,9 +17,10 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/renderer.h"
 
+module WX.AUI.TabArt;
+
 import WX.AUI.Book;
 import WX.AUI.FrameManager;
-import WX.AUI.TabArt;
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()
 {
@@ -457,6 +458,3 @@ bool wxAuiMSWTabArt::IsThemed() const
         m_themed &&
         !(m_flags & wxAUI_NB_BOTTOM); // Native theme does not support bottom tabs
 }
-
-
-#endif // !defined(__WXUNIVERSAL__)
