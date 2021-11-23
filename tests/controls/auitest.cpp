@@ -17,7 +17,7 @@
 
 #include "asserthelper.h"
 
-import WX.AUI.Book;
+import WX.AUI;
 
 // ----------------------------------------------------------------------------
 // test class
