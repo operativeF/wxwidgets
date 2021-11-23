@@ -31,6 +31,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
@@ -629,7 +631,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;
     wndclass.hInstance     = wxGetInstance();
-    wndclass.hCursor       = static_cast<HCURSOR>(::LoadImageW(nullptr,
+    wndclass.hCursor       = static_cast<WXHCURSOR>(::LoadImageW(nullptr,
                                                                MAKEINTRESOURCEW(OCR_NORMAL),
                                                                IMAGE_CURSOR,
                                                                0, 0,

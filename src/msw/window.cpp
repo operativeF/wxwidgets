@@ -95,6 +95,8 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
+import WX.WinDef;
+
 import <array>;
 import <numbers>;
 import <vector>;
@@ -4381,7 +4383,7 @@ bool wxWindowMSW::HandleSetCursor(WXHWND WXUNUSED(hWnd),
     //  2. ask user EVT_SET_CURSOR handler for the cursor
     //  3. if still no cursor but we're in a TLW, set the global cursor
 
-    HCURSOR hcursor = nullptr;
+    WXHCURSOR hcursor = nullptr;
 
     // Check for "business" is complicated by the fact that modal dialogs shown
     // while busy cursor is in effect shouldn't show it as they are active and

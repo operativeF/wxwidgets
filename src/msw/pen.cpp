@@ -15,12 +15,13 @@
 #include "wx/bitmap.h"
 #include "wx/utils.h"
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 #define M_PENDATA ((wxPenRefData*)m_refData)
 
 // ----------------------------------------------------------------------------
-// wxPenRefData: contains information about an HPEN and its handle
+// wxPenRefData: contains information about an WXHPEN and its handle
 // ----------------------------------------------------------------------------
 
 using namespace msw::utils;
@@ -86,16 +87,16 @@ public:
     void SetQuality(wxPenQuality quality) { m_hPen.reset(); m_quality = quality; }
 
 
-    // HPEN management
+    // WXHPEN management
     // ---------------
 
-    // create the HPEN if we don't have it yet
+    // create the WXHPEN if we don't have it yet
     bool Alloc();
 
-    // get the HPEN creating it on demand
+    // get the WXHPEN creating it on demand
     WXHPEN GetHPEN() const;
 
-    // return true if we have a valid HPEN
+    // return true if we have a valid WXHPEN
     bool HasHPEN() const { return m_hPen != nullptr; }
 
     void Free();
@@ -177,7 +178,7 @@ wxPenRefData::wxPenRefData(const wxPenInfo& info)
 }
 
 // ----------------------------------------------------------------------------
-// wxPenRefData HPEN management
+// wxPenRefData WXHPEN management
 // ----------------------------------------------------------------------------
 
 static int ConvertPenStyle(wxPenStyle style)
@@ -262,7 +263,7 @@ bool wxPenRefData::Alloc()
 
    if ( m_style == wxPenStyle::Transparent )
    {
-       m_hPen = unique_pen(static_cast<HPEN>(::GetStockObject(NULL_PEN)));
+       m_hPen = unique_pen(static_cast<WXHPEN>(::GetStockObject(NULL_PEN)));
        return true;
    }
 

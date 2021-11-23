@@ -465,7 +465,7 @@ static HBITMAP CreatePremultipliedDIBIfNeeded(HBITMAP hbmp)
 bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
                                     wxBitmapTransparency transp)
 {
-    // it may be either WXHICON or HCURSOR
+    // it may be either WXHICON or WXHCURSOR
     WXHICON hicon = (WXHICON)icon.GetHandle();
 
     AutoIconInfo iconInfo;
@@ -1711,7 +1711,7 @@ bool wxBitmapHandler::SaveFile(const wxBitmap *WXUNUSED(bitmap),
 // global helper functions implemented here
 // ----------------------------------------------------------------------------
 
-// helper of wxBitmapToHICON/HCURSOR
+// helper of wxBitmapToHICON/WXHCURSOR
 static
 WXHICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
                              bool iconWanted,
@@ -1827,9 +1827,9 @@ WXHICON wxBitmapToHICON(const wxBitmap& bmp)
     return wxBitmapToIconOrCursor(bmp, true, 0, 0);
 }
 
-HCURSOR wxBitmapToHCURSOR(const wxBitmap& bmp, int hotSpotX, int hotSpotY)
+WXHCURSOR wxBitmapToHCURSOR(const wxBitmap& bmp, int hotSpotX, int hotSpotY)
 {
-    return (HCURSOR)wxBitmapToIconOrCursor(bmp, false, hotSpotX, hotSpotY);
+    return (WXHCURSOR)wxBitmapToIconOrCursor(bmp, false, hotSpotX, hotSpotY);
 }
 
 HBITMAP wxInvertMask(HBITMAP hbmpMask, int w, int h)

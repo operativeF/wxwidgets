@@ -17,6 +17,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 // ============================================================================
@@ -33,11 +34,11 @@ void wxBell()
 // helper functions for showing a "busy" cursor
 // ---------------------------------------------------------------------------
 
-static HCURSOR gs_wxBusyCursor = nullptr;     // new, busy cursor
-static HCURSOR gs_wxBusyCursorOld = nullptr;  // old cursor
+static WXHCURSOR gs_wxBusyCursor = nullptr;     // new, busy cursor
+static WXHCURSOR gs_wxBusyCursorOld = nullptr;  // old cursor
 static int gs_wxBusyCursorCount = 0;
 
-extern HCURSOR wxGetCurrentBusyCursor()
+extern WXHCURSOR wxGetCurrentBusyCursor()
 {
     return gs_wxBusyCursor;
 }
@@ -47,7 +48,7 @@ void wxBeginBusyCursor(const wxCursor *cursor)
 {
     if ( gs_wxBusyCursorCount++ == 0 )
     {
-        gs_wxBusyCursor = (HCURSOR)cursor->GetHCURSOR();
+        gs_wxBusyCursor = (WXHCURSOR)cursor->GetHCURSOR();
         gs_wxBusyCursorOld = ::SetCursor(gs_wxBusyCursor);
     }
     //else: nothing to do, already set

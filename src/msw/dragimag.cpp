@@ -276,7 +276,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, bool fullS
         // How do we stop the cursor jumping right and below of where it should be?
 #if 0
         ICONINFO iconInfo;
-        if (::GetIconInfo((WXHICON) (HCURSOR) m_cursor.GetHCURSOR(), & iconInfo) != 0)
+        if (::GetIconInfo((WXHICON) (WXHCURSOR) m_cursor.GetHCURSOR(), & iconInfo) != 0)
         {
             curHotSpot.x -= iconInfo.xHotspot;
             curHotSpot.y -= iconInfo.yHotspot;
@@ -287,7 +287,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, bool fullS
         //wxLogDebug(msg);
 
         // First add the cursor to the image list
-        HCURSOR hCursor = (HCURSOR) m_cursor.GetHCURSOR();
+        WXHCURSOR hCursor = (WXHCURSOR) m_cursor.GetHCURSOR();
         int cursorIndex = ImageList_AddIcon((HIMAGELIST) m_hCursorImageList, (WXHICON) hCursor);
 
         wxASSERT_MSG( (cursorIndex != -1), "ImageList_AddIcon failed in BeginDrag.");

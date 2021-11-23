@@ -11,6 +11,8 @@
 #ifndef _WX_CURSOR_H_
 #define _WX_CURSOR_H_
 
+import WX.WinDef;
+
 import <string>;
 
 class wxImage;

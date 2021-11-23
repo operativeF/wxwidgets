@@ -37,7 +37,7 @@ public:
     // the second parameter is used to tell us to delete the cursor when we're
     // done with it (normally we shouldn't call DestroyCursor() this is why it
     // doesn't happen by default)
-    explicit wxCursorRefData(HCURSOR hcursor = nullptr, bool takeOwnership = false);
+    explicit wxCursorRefData(WXHCURSOR hcursor = nullptr, bool takeOwnership = false);
 
     ~wxCursorRefData() { Free(); }
 
@@ -116,7 +116,7 @@ wxCoord wxCursorRefData::GetStandardHeight()
     return wxSystemSettings::GetMetric(wxSYS_CURSOR_Y, win);
 }
 
-wxCursorRefData::wxCursorRefData(HCURSOR hcursor, bool destroy)
+wxCursorRefData::wxCursorRefData(WXHCURSOR hcursor, bool destroy)
 {
     m_hCursor = (WXHCURSOR)hcursor;
 
@@ -133,7 +133,7 @@ void wxCursorRefData::Free()
     if ( m_hCursor )
     {
         if ( m_destroyCursor )
-            ::DestroyCursor((HCURSOR)m_hCursor);
+            ::DestroyCursor((WXHCURSOR)m_hCursor);
 
         m_hCursor = nullptr;
     }
@@ -189,7 +189,7 @@ void wxCursor::InitFromImage(const wxImage& image)
         imageSized = image.Scale(w, h);
     }
 
-    HCURSOR hcursor = wxBitmapToHCURSOR( wxBitmap(imageSized),
+    WXHCURSOR hcursor = wxBitmapToHCURSOR( wxBitmap(imageSized),
                                          hotSpotX, hotSpotY );
 
     if ( !hcursor )
@@ -207,7 +207,7 @@ wxCursor::wxCursor(const std::string& filename,
                    int hotSpotX,
                    int hotSpotY)
 {
-    HCURSOR hcursor = [=]() {
+    WXHCURSOR hcursor = [=]() {
         switch ( kind )
         {
             case wxBitmapType::CUR_Resource:
@@ -236,7 +236,7 @@ wxCursor::wxCursor(const std::string& filename,
             default:
                 wxLogError( "unknown cursor resource type '%d'", kind );
 
-                return static_cast<HCURSOR>(nullptr);
+                return static_cast<WXHCURSOR>(nullptr);
         }
     }();
 
@@ -277,7 +277,7 @@ wxSize ScaleAndReverseBitmap(HBITMAP& bitmap, float scale)
     return cs;
 }
 
-HCURSOR CreateReverseCursor(HCURSOR cursor)
+WXHCURSOR CreateReverseCursor(WXHCURSOR cursor)
 {
     AutoIconInfo info;
     if ( !info.GetFrom(cursor) )
@@ -351,7 +351,7 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
     const StdCursor& stdCursor = stdCursors[idCursor];
     bool deleteLater = !stdCursor.isStd;
 
-    HCURSOR hcursor = ::LoadCursorW(stdCursor.isStd ? nullptr : wxGetInstance(),
+    WXHCURSOR hcursor = ::LoadCursorW(stdCursor.isStd ? nullptr : wxGetInstance(),
                                    stdCursor.name);
 
     // IDC_HAND may not be available on some versions of Windows.

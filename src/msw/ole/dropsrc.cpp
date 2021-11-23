@@ -19,6 +19,8 @@
 
 #include "wx/msw/ole/oleutils.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxIDropSource implementation of IDropSource interface
 // ----------------------------------------------------------------------------
@@ -205,7 +207,7 @@ bool wxDropSource::GiveFeedback(wxDragResult effect)
     const wxCursor& cursor = GetCursor(effect);
     if ( cursor.IsOk() )
     {
-        ::SetCursor((HCURSOR)cursor.GetHCURSOR());
+        ::SetCursor((WXHCURSOR)cursor.GetHCURSOR());
 
         return true;
     }

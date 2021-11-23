@@ -7,7 +7,9 @@ export module WX.WinDef;
 export
 {
 
-using WXHFONT = HFONT;
-using WXHICON = HICON;
+using WXHCURSOR = HCURSOR;
+using WXHFONT   = HFONT;
+using WXHICON   = HICON;
+using WXHPEN    = HPEN;
 
 } // export

@@ -302,7 +302,7 @@ extern WXHICON wxBitmapToHICON(const wxBitmap& bmp);
 // Same requirements as above apply and the bitmap must also have the correct
 // size.
 extern
-HCURSOR wxBitmapToHCURSOR(const wxBitmap& bmp, int hotSpotX, int hotSpotY);
+WXHCURSOR wxBitmapToHCURSOR(const wxBitmap& bmp, int hotSpotX, int hotSpotY);
 
 extern int wxGetSystemMetrics(int nIndex, const wxWindow* win);
 
@@ -764,8 +764,8 @@ private:
 #define GetHmenu()              ((HMENU)GetHMenu())
 #define GetHmenuOf(menu)        ((HMENU)(menu)->GetHMenu())
 
-#define GetHcursor()            ((HCURSOR)GetHCURSOR())
-#define GetHcursorOf(cursor)    ((HCURSOR)(cursor).GetHCURSOR())
+#define GetHcursor()            ((WXHCURSOR)GetHCURSOR())
+#define GetHcursorOf(cursor)    ((WXHCURSOR)(cursor).GetHCURSOR())
 
 #define GetHfont()              ((WXHFONT)GetHFONT())
 #define GetHfontOf(font)        ((WXHFONT)(font).GetHFONT())
@@ -776,8 +776,8 @@ private:
 #define GetHpalette()           ((HPALETTE)GetHPALETTE())
 #define GetHpaletteOf(pal)      ((HPALETTE)(pal).GetHPALETTE())
 
-#define GetHpen()               ((HPEN)GetResourceHandle())
-#define GetHpenOf(pen)          ((HPEN)(pen).GetResourceHandle())
+#define GetHpen()               ((WXHPEN)GetResourceHandle())
+#define GetHpenOf(pen)          ((WXHPEN)(pen).GetResourceHandle())
 
 #endif // wxUSE_GUI
 
@@ -867,7 +867,7 @@ wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = nullptr);
 #if wxUSE_GUI && defined(__WXMSW__)
 
 // cursor stuff
-extern HCURSOR wxGetCurrentBusyCursor();    // from msw/utils.cpp
+extern WXHCURSOR wxGetCurrentBusyCursor();    // from msw/utils.cpp
 extern const wxCursor *wxGetGlobalCursor(); // from msw/cursor.cpp
 
 // GetCursorPos can fail without populating the POINT. This falls back to GetMessagePos.

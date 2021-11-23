@@ -15,6 +15,8 @@
 #include "wx/msw/debughlp.h"
 #include "wx/msw/crashrpt.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // classes
 // ----------------------------------------------------------------------------
@@ -29,7 +31,7 @@ class BusyCursor
 public:
     BusyCursor()
     {
-        m_hcursorOld = ::SetCursor(static_cast<HCURSOR>(::LoadImageW(nullptr,
+        m_hcursorOld = ::SetCursor(static_cast<WXHCURSOR>(::LoadImageW(nullptr,
                                                                      MAKEINTRESOURCEW(OCR_WAIT),
                                                                      IMAGE_CURSOR,
                                                                      0, 0,
@@ -45,7 +47,7 @@ public:
     }
 
 private:
-    HCURSOR m_hcursorOld;
+    WXHCURSOR m_hcursorOld;
 };
 
 // the real crash report generator

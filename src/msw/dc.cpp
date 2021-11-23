@@ -518,7 +518,7 @@ void wxMSWDCImpl::SelectOldObjects(WXHDC dc)
         m_oldBitmap = nullptr;
         if (m_oldPen)
         {
-            ::SelectObject((HDC) dc, (HPEN) m_oldPen);
+            ::SelectObject((HDC) dc, (WXHPEN) m_oldPen);
         }
         m_oldPen = nullptr;
         if (m_oldBrush)
@@ -1255,7 +1255,7 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
 
     // draw pie with NULL_PEN first and then outline otherwise a line is
     // drawn from the start and end points to the centre
-    HPEN hpenOld = (HPEN) ::SelectObject(GetHdc(), (HPEN) ::GetStockObject(NULL_PEN));
+    WXHPEN hpenOld = (WXHPEN) ::SelectObject(GetHdc(), (WXHPEN) ::GetStockObject(NULL_PEN));
     if (m_signY > 0)
     {
         ::Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2)+1, YLOG2DEV(y2)+1,
@@ -1674,7 +1674,7 @@ void wxMSWDCImpl::SetFont(const wxFont& font)
     {
         if ( m_oldFont )
         {
-            if ( ::SelectObject(GetHdc(), (HPEN) m_oldFont) == HGDI_ERROR )
+            if ( ::SelectObject(GetHdc(), (WXHPEN) m_oldFont) == HGDI_ERROR )
             {
                 wxLogLastError("SelectObject(old font)");
             }
@@ -1710,7 +1710,7 @@ void wxMSWDCImpl::SetPen(const wxPen& pen)
     {
         if ( m_oldPen )
         {
-            if ( ::SelectObject(GetHdc(), (HPEN) m_oldPen) == HGDI_ERROR )
+            if ( ::SelectObject(GetHdc(), (WXHPEN) m_oldPen) == HGDI_ERROR )
             {
                 wxLogLastError("SelectObject(old pen)");
             }
@@ -1770,7 +1770,7 @@ void wxMSWDCImpl::SetBrush(const wxBrush& brush)
     {
         if ( m_oldBrush )
         {
-            if ( ::SelectObject(GetHdc(), (HPEN) m_oldBrush) == HGDI_ERROR )
+            if ( ::SelectObject(GetHdc(), (WXHPEN) m_oldBrush) == HGDI_ERROR )
             {
                 wxLogLastError("SelectObject(old brush)");
             }
