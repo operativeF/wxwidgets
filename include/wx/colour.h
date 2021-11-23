@@ -80,6 +80,8 @@ inline constexpr unsigned char wxALPHA_OPAQUE = 0xff;
 DECLARE_VARIANT_OBJECT_EXPORTED(wxColour)
 #endif
 
+/*
+
 namespace wx::color
 {
 
@@ -806,6 +808,7 @@ struct fmt::formatter<wx::color::ColorRGBA>
             rgba.red(), rgba.green(), rgba.blue(), rgba.alpha());
     }
 };
+*/
 
 //-----------------------------------------------------------------------------
 // wxColourBase: this class has no data members, just some functions to avoid

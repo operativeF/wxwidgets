@@ -62,9 +62,6 @@ private:
 // these functions live in dockart.cpp -- they'll eventually
 // be moved to a new utility cpp file
 
-wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], wxSize sz,
-                             const wxColour& color);
-
 // This function is defined in dockart.cpp.
 void wxAuiScaleBitmap(wxBitmap& bmp, double scale);
 float wxAuiGetColourContrast(const wxColour& c1, const wxColour& c2);

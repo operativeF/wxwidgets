@@ -46,6 +46,9 @@ enum wxAuiPaneDockArtSetting
     wxAUI_DOCKART_GRADIENT_TYPE = 16
 };
 
+wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], wxSize sz,
+                             const wxColour& color);
+
 // dock art provider code - a dock provider provides all drawing
 // functionality to the wxAui dock manager.  This allows the dock
 // manager to have pluggable look-and-feels

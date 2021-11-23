@@ -9,9 +9,14 @@
 
 module;
 
+#include "wx/dc.h"
+#include "wx/font.h"
+#include "wx/window.h"
+
 export module WX.AUI.ToolBarArt;
 
-export import WX.AUI.ToolBarArt.Base;
+export import WX.AUI.ToolBarArt.Generic;
+import WX.AUI.ToolBar.Item;
 
 import Utils.Geometry;
 
