@@ -538,12 +538,12 @@ bool wxToolTip::AdjustMaxWidth()
 {
     // use TTM_SETMAXTIPWIDTH to make tooltip multiline using the
     // extent of its first line as max value
-    HFONT hfont = (HFONT)
-        SendTooltipMessage(GetToolTipCtrl(), WM_GETFONT, nullptr);
+    WXHFONT hfont = (WXHFONT)
+        ::SendTooltipMessage(GetToolTipCtrl(), WM_GETFONT, nullptr);
 
     if ( !hfont )
     {
-        hfont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
+        hfont = (WXHFONT)::GetStockObject(DEFAULT_GUI_FONT);
         if ( !hfont )
         {
             wxLogLastError("GetStockObject(DEFAULT_GUI_FONT)");

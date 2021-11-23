@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_PRIVATE_TEXTMEASURE_H_
 #define _WX_MSW_PRIVATE_TEXTMEASURE_H_
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxTextMeasure for MSW.
 // ----------------------------------------------------------------------------
@@ -52,7 +54,7 @@ protected:
 
     // If we change the font in BeginMeasuring(), we restore it to the old one
     // in EndMeasuring().
-    HFONT m_hfontOld{nullptr};
+    WXHFONT m_hfontOld{nullptr};
 };
 
 #endif // _WX_MSW_PRIVATE_TEXTMEASURE_H_

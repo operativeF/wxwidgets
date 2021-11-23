@@ -19,12 +19,14 @@
     #include "wx/window.h"
 #endif // wxUSE_GUI
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
-
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 class wxFont;
 class wxWindow;
@@ -765,8 +767,8 @@ private:
 #define GetHcursor()            ((HCURSOR)GetHCURSOR())
 #define GetHcursorOf(cursor)    ((HCURSOR)(cursor).GetHCURSOR())
 
-#define GetHfont()              ((HFONT)GetHFONT())
-#define GetHfontOf(font)        ((HFONT)(font).GetHFONT())
+#define GetHfont()              ((WXHFONT)GetHFONT())
+#define GetHfontOf(font)        ((WXHFONT)(font).GetHFONT())
 
 #define GetHimagelist()         ((HIMAGELIST)GetHIMAGELIST())
 #define GetHimagelistOf(imgl)   ((HIMAGELIST)(imgl)->GetHIMAGELIST())

@@ -30,7 +30,7 @@
 
 #include <windowsx.h>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 namespace
 {

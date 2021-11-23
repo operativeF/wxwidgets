@@ -11,7 +11,7 @@
 #include "wx/msw/private.h"
 #include "wx/region.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);

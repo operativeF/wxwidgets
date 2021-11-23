@@ -4801,7 +4801,7 @@ void wxWindowMSW::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
     {
         m_font.WXAdjustToPPI(newDPI);
 
-        // WXAdjustToPPI() changes the HFONT, so reassociate it with the window.
+        // WXAdjustToPPI() changes the WXHFONT, so reassociate it with the window.
         wxSetWindowFont(GetHwnd(), m_font);
     }
 }
@@ -6511,13 +6511,13 @@ wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font)
 {
     TEXTMETRICW tm;
     HDC dc = ::GetDC((HWND) wnd);
-    HFONT was = nullptr;
+    WXHFONT was = nullptr;
 
     //    the_font.UseResource();
     //    the_font.RealizeResource();
-    HFONT fnt = (HFONT)the_font.GetResourceHandle(); // const_cast
+    WXHFONT fnt = (WXHFONT)the_font.GetResourceHandle(); // const_cast
     if ( fnt )
-        was = (HFONT) SelectObject(dc,fnt);
+        was = (WXHFONT) SelectObject(dc,fnt);
 
     ::GetTextMetricsW(dc, &tm);
     if ( fnt && was )
@@ -7615,13 +7615,13 @@ static TEXTMETRICW wxGetTextMetrics(const wxWindowMSW *win)
     // and select the current font into it
 
     // Note that it's important to extend the lifetime of the possibly
-    // temporary wxFont returned by GetFont() to ensure that its HFONT remains
+    // temporary wxFont returned by GetFont() to ensure that its WXHFONT remains
     // valid.
     const wxFont& f(win->GetFont());
-    HFONT hfont = GetHfontOf(f);
+    WXHFONT hfont = GetHfontOf(f);
     if ( hfont )
     {
-        hfont = (HFONT)::SelectObject(hdc, hfont);
+        hfont = (WXHFONT)::SelectObject(hdc, hfont);
     }
 #endif
 

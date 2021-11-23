@@ -9,7 +9,7 @@ module;
 
 #include <memory>
 
-export module Utils.MSW.Wrap;
+export module WX.Win.UniqueHnd;
 
 namespace msw::utils
 {

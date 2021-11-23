@@ -2658,7 +2658,7 @@ void wxTextCtrl::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
 {
     // Don't use MSWUpdateFontOnDPIChange for the rich edit controls, they
     // (somehow?) update their appearance on their own and changing their
-    // HFONT, as the base class version does, would reset all the styles used
+    // WXHFONT, as the base class version does, would reset all the styles used
     // by them when the DPI changes, which is unwanted.
     if ( !IsRich() )
     {

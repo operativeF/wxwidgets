@@ -15,7 +15,7 @@
 #include "wx/bitmap.h"
 #include "wx/utils.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 #define M_PENDATA ((wxPenRefData*)m_refData)
 

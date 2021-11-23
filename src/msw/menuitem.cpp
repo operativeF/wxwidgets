@@ -34,7 +34,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 import Utils.Strings;
 
 import <string>;

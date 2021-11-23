@@ -28,7 +28,9 @@
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
-import Utils.MSW.Wrap;
+import WX.WinDef;
+
+import WX.Win.UniqueHnd;
 
 #include <cassert>
 import <vector>;
@@ -587,7 +589,7 @@ bool wxListCtrl::SetHeaderAttr(const wxItemAttr& attr)
             }
             else
             {
-                // make sure m_font is valid before using its HFONT reference
+                // make sure m_font is valid before using its WXHFONT reference
                 SetFont(GetFont());
                 wxSetWindowFont(hwndHdr, m_font);
             }
@@ -2868,7 +2870,7 @@ static RECT GetCustomDrawnItemRect(const NMCUSTOMDRAW& nmcd)
 }
 
 static
-bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, HFONT hfont, int colCount)
+bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont, int colCount)
 {
     NMCUSTOMDRAW& nmcd = pLVCD->nmcd;
 
@@ -2979,7 +2981,7 @@ static void HandleItemPostpaint(NMCUSTOMDRAW nmcd)
 }
 
 // pLVCD->clrText and clrTextBk should contain the colours to use
-static void HandleItemPaint(LPNMLVCUSTOMDRAW pLVCD, HFONT hfont)
+static void HandleItemPaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont)
 {
     NMCUSTOMDRAW& nmcd = pLVCD->nmcd; // just a shortcut
 

@@ -36,7 +36,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 using namespace wxMSWImpl;
 

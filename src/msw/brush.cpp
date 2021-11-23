@@ -14,7 +14,7 @@
 #include "wx/utils.h"
 #include "wx/bitmap.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // ----------------------------------------------------------------------------
 // private classes

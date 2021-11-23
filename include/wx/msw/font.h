@@ -11,6 +11,8 @@
 #ifndef _WX_FONT_H_
 #define _WX_FONT_H_
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;

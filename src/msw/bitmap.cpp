@@ -31,7 +31,7 @@
 
 #include <memory>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 import <string>;
 

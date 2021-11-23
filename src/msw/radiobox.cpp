@@ -24,7 +24,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // TODO: wxCONSTRUCTOR
 #if 0 // wxUSE_EXTENDED_RTTI

@@ -17,7 +17,7 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/dc.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // ============================================================================
 // implementation of wxOwnerDrawn class

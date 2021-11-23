@@ -153,7 +153,7 @@ target_link_libraries(test_gui
         wxprint
         ${JPEG_LIBRARIES}
     # Windows libraries
-        mswutils
+        wxwinwrap
 
         kernel32
         user32

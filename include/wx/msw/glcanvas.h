@@ -13,7 +13,7 @@
 
 #include <GL/gl.h>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 import <string>;
 
 class wxPalette;

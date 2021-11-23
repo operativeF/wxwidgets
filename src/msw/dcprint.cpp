@@ -27,7 +27,7 @@
 
 #include <boost/nowide/stackstring.hpp>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)

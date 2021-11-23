@@ -14,7 +14,7 @@
 
 #include "wx/palette.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // ============================================================================
 // wxPaletteRefData

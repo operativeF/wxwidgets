@@ -25,7 +25,7 @@
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 import <algorithm>;
 

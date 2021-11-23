@@ -119,7 +119,7 @@ wxFont wxCreateFontFromStockObject(int index)
 {
     wxFont font;
 
-    HFONT hFont = (HFONT) ::GetStockObject(index);
+    WXHFONT hFont = (WXHFONT) ::GetStockObject(index);
     if ( hFont )
     {
         LOGFONTW lf;

@@ -14,7 +14,9 @@
 #include "wx/defs.h"
 #include "wx/dc.h"
 
-import Utils.MSW.Wrap;
+import WX.WinDef;
+
+import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
 import <string>;

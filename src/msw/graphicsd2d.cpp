@@ -63,7 +63,7 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 import <algorithm>;
 import <limits>;

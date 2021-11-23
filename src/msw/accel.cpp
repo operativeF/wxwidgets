@@ -21,7 +21,7 @@
 
 #include <gsl/gsl>
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 

@@ -33,7 +33,9 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
-import Utils.MSW.Wrap;
+import WX.WinDef;
+
+import WX.Win.UniqueHnd;
 import Utils.Strings;
 
 import <cmath>;
@@ -526,7 +528,7 @@ void wxMSWDCImpl::SelectOldObjects(WXHDC dc)
         m_oldBrush = nullptr;
         if (m_oldFont)
         {
-            ::SelectObject((HDC) dc, (HFONT) m_oldFont);
+            ::SelectObject((HDC) dc, (WXHFONT) m_oldFont);
         }
         m_oldFont = nullptr;
 

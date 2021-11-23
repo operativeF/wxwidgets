@@ -21,7 +21,7 @@
 #include "wx/fontmap.h"
 #include "wx/tokenzr.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // convert to/from the string representation: format is
 //      encodingid;facename[;charset]

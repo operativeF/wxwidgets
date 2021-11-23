@@ -2567,7 +2567,7 @@ unsigned int wxImage::GetLoadFlags() const
 
 #include "wx/msw/private.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 {

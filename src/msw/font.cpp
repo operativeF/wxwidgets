@@ -26,7 +26,9 @@
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
 
-import Utils.MSW.Wrap;
+import WX.WinDef;
+
+import WX.Win.UniqueHnd;
 
 import <charconv>;
 
@@ -117,7 +119,7 @@ public:
             {
                 // cache the face name, it shouldn't change unless the family
                 // does and wxNativeFontInfo::SetFamily() resets the face name
-                // Don't call this->SetFaceName(), because it deletes the HFONT.
+                // Don't call this->SetFaceName(), because it deletes the WXHFONT.
                 const_cast<wxNativeFontInfo &>(m_nativeFontInfo).SetFaceName(facename);
             }
         }
@@ -154,7 +156,7 @@ public:
     }
 
     // ... and setters: notice that all of them invalidate the currently
-    // allocated HFONT, if any, so that the next call to GetHFONT() recreates a
+    // allocated WXHFONT, if any, so that the next call to GetHFONT() recreates a
     // new one
     void SetFractionalPointSize(double pointSize)
     {
@@ -238,7 +240,7 @@ public:
         AllocIfNeeded();
 
         // ensure that we have a valid face name in our font information:
-        // GetFaceName() will try to retrieve it from our HFONT and save it if
+        // GetFaceName() will try to retrieve it from our WXHFONT and save it if
         // it was successful
         (void)GetFaceName();
 
@@ -270,7 +272,7 @@ protected:
 
         unique_dcwnd screenDC{::GetDC(nullptr)};
 
-        SelectInHDC selectFont(screenDC.get(), (HFONT)GetHFONT());
+        SelectInHDC selectFont(screenDC.get(), (WXHFONT)GetHFONT());
 
         UINT otmSize = ::GetOutlineTextMetricsW(screenDC.get(), 0, nullptr);
         if ( !otmSize )
@@ -352,8 +354,8 @@ void wxFontRefData::Init(const wxNativeFontInfo& info, WXHFONT hFont)
 {
     // hFont may be zero, or it be passed in case we really want to
     // use the exact font created in the underlying system
-    // (for example where we can't guarantee conversion from HFONT
-    // to LOGFONTW back to HFONT)
+    // (for example where we can't guarantee conversion from WXHFONT
+    // to LOGFONTW back to WXHFONT)
     m_hFont.reset(hFont);
     m_nativeFontInfo = info;
 
@@ -856,7 +858,7 @@ wxGDIRefData *wxFont::CloneGDIRefData(const wxGDIRefData *data) const
 bool wxFont::RealizeResource()
 {
     // NOTE: the GetHFONT() call automatically triggers a reallocation of
-    //       the HFONT if necessary (will do nothing if we already have the resource);
+    //       the WXHFONT if necessary (will do nothing if we already have the resource);
     //       it returns NULL only if there is a failure in wxFontRefData::Alloc()...
     return GetHFONT() != nullptr;
 }

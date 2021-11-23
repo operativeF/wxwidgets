@@ -3583,7 +3583,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                             if ( attr->HasFont() )
                             {
-                                HFONT hFont = GetHfontOf(attr->GetFont());
+                                WXHFONT hFont = GetHfontOf(attr->GetFont());
 
                                 ::SelectObject(nmcd.hdc, hFont);
 

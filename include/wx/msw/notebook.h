@@ -14,7 +14,7 @@
 
 #include "wx/control.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
 import <string>;

@@ -447,7 +447,7 @@ if(WIN32)
     target_link_libraries(wxcore
         PRIVATE
             winmm
-            mswutils
+            wxwinwrap
     )
 endif()
 

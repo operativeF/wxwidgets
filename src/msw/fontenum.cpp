@@ -21,7 +21,7 @@
 #include "wx/fontutil.h"
 #include "wx/fontmap.h"
 
-import Utils.MSW.Wrap;
+import WX.Win.UniqueHnd;
 
 // ----------------------------------------------------------------------------
 // private classes

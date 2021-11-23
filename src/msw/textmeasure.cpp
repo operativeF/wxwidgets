@@ -55,7 +55,7 @@ void wxTextMeasure::BeginMeasuring()
     // above has the default font selected into it and not the font of the
     // window.
     if ( m_font || m_win )
-        m_hfontOld = (HFONT)::SelectObject(m_hdc, GetHfontOf(GetFont()));
+        m_hfontOld = (WXHFONT)::SelectObject(m_hdc, GetHfontOf(GetFont()));
 }
 
 void wxTextMeasure::EndMeasuring()
