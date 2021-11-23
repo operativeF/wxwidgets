@@ -13,8 +13,6 @@
 
 #if wxUSE_REGKEY
 
-#include "wx/defs.h"
-
 class wxOutputStream;
 
 // ----------------------------------------------------------------------------

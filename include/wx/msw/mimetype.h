@@ -13,8 +13,6 @@
 
 #if wxUSE_MIMETYPE
 
-#include "wx/defs.h"
-
 #include "wx/mimetype.h"
 
 import <vector>;

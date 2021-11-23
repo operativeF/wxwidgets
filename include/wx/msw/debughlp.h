@@ -12,8 +12,6 @@
 
 #if wxUSE_DBGHELP
 
-#include "wx/defs.h"
-
 #include "wx/dynlib.h"
 
 #include <imagehlp.h>

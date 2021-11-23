@@ -13,8 +13,6 @@
 
 #if wxUSE_CONFIG && wxUSE_INICONF
 
-#include "wx/defs.h"
-
 import <string>;
 
 // ----------------------------------------------------------------------------

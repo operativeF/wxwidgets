@@ -13,8 +13,6 @@
 
 #if wxUSE_CONFIG && wxUSE_REGKEY
 
-#include "wx/defs.h"
-
 #include "wx/msw/registry.h"
 #include "wx/object.h"
 #include "wx/confbase.h"

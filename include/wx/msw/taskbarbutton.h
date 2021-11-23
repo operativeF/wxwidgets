@@ -12,8 +12,6 @@
 
 #if wxUSE_TASKBARBUTTON
 
-#include "wx/defs.h"
-
 import Utils.Geometry;
 
 import <vector>;

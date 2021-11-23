@@ -13,8 +13,6 @@
 
 #if wxUSE_OLE
 
-#include "wx/defs.h"
-
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/variant.h"

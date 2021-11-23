@@ -11,8 +11,6 @@
 #ifndef _WX_MSW_WRAPCDLG_H_
 #define _WX_MSW_WRAPCDLG_H_
 
-#include "wx/defs.h"
-
 #include "wx/msw/private.h"
 
 #endif // _WX_MSW_WRAPCDLG_H_

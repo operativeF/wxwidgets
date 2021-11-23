@@ -13,8 +13,6 @@
 
 #if wxUSE_CRASHREPORT
 
-#include "wx/defs.h"
-
 import <cstdint>;
 
 struct _EXCEPTION_POINTERS;

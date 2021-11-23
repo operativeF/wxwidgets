@@ -12,8 +12,6 @@
 
 #if wxUSE_FSWATCHER
 
-#include "wx/defs.h"
-
 class wxMSWFileSystemWatcher : public wxFileSystemWatcherBase
 {
 public:

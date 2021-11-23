@@ -11,7 +11,6 @@
 #ifndef _WX_MSW_DC_H_
 #define _WX_MSW_DC_H_
 
-#include "wx/defs.h"
 #include "wx/dc.h"
 
 import WX.WinDef;

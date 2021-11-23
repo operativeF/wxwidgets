@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_APPTRAIT_H_
 #define _WX_MSW_APPTRAIT_H_
 
-#include "wx/defs.h"
+import WX.WinDef;
 
 import <string>;
 

@@ -13,8 +13,6 @@
 
 #if wxUSE_UXTHEME
 
-#include "wx/defs.h"
-
 #include "wx/msw/private.h"     // we use GetHwndOf()
 #include <uxtheme.h>
 

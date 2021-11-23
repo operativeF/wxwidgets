@@ -13,8 +13,6 @@
 
 #if wxUSE_ENH_METAFILE
 
-#include "wx/defs.h"
-
 #include "wx/dc.h"
 #include "wx/gdiobj.h"
 #include "wx/geometry/rect.h"

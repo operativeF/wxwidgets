@@ -12,8 +12,6 @@
 
 #if wxUSE_WINRT
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 #include <winstring.h>

@@ -10,8 +10,6 @@
 #ifndef _WX_MSW_PRIVATE_KEYBOARD_H_
 #define _WX_MSW_PRIVATE_KEYBOARD_H_
 
-#include "wx/defs.h"
-
 namespace wxMSWKeyboard
 {
 
