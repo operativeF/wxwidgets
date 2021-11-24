@@ -35,6 +35,8 @@
 #include "wx/stringops.h"
 #include "wx/unichar.h"
 
+import WX.Cfg.Flags;
+
 import <iterator>;
 import <string>;
 import <utility>;

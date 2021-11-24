@@ -24,5 +24,6 @@ target_include_directories(wxtype
 
 target_link_libraries(wxtype
     PRIVATE
+        wxconfigflags
         Microsoft.GSL::GSL
 )

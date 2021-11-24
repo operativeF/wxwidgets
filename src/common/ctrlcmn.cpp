@@ -24,6 +24,8 @@
 
 #include "wx/private/markupparser.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Strings;
 
 // ============================================================================

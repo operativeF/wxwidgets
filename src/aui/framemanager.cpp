@@ -47,6 +47,8 @@ import WX.AUI.DockArt;
 import WX.AUI.FloatPane;
 import WX.AUI.TabMDI;
 
+import WX.Cfg.Flags;
+
 import <charconv>;
 
 WX_DECLARE_OBJARRAY(wxRect, wxAuiRectArray);

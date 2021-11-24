@@ -16,6 +16,8 @@
 #include "wx/filename.h"
 #include "wx/dc.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 #include <memory>

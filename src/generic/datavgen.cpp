@@ -59,6 +59,8 @@
 #include "wx/private/markupparser.h"
 #endif // wxUSE_ACCESSIBILITY
 
+import WX.Cfg.Flags;
+
 
 //-----------------------------------------------------------------------------
 // classes

@@ -12,6 +12,8 @@
 #ifndef _WX_TOGGLEBUTTON_H_
 #define _WX_TOGGLEBUTTON_H_
 
+import WX.Cfg.Flags;
+
 import <string>;
 
 class wxBitmap;

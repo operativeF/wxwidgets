@@ -17,6 +17,8 @@
 #include "wx/control.h"
 #include "wx/dynarray.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

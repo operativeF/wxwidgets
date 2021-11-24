@@ -17,6 +17,8 @@
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/control.h"
 
+import WX.Cfg.Flags;
+
 class wxRibbonGalleryItem;
 
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem, class WXDLLIMPEXP_RIBBON);

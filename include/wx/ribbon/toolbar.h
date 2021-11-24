@@ -17,6 +17,8 @@
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/art.h"
 
+import WX.Cfg.Flags;
+
 struct wxRibbonToolBarToolBase;
 class wxRibbonToolBarToolGroup;
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonToolBarToolGroup*, wxArrayRibbonToolBarToolGroup, class WXDLLIMPEXP_RIBBON);

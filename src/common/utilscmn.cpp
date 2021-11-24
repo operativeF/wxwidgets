@@ -102,6 +102,8 @@ import <string>;
 import <vector>;
 import <utility>;
 
+import WX.Cfg.Flags;
+
 #if wxUSE_BASE
 
 // ============================================================================

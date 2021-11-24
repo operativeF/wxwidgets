@@ -23,6 +23,8 @@
     #include "wx/private/markupparser.h"
 #endif
 
+import WX.Cfg.Flags;
+
 import Utils.Strings;
 
 import <cmath>;

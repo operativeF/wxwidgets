@@ -26,6 +26,8 @@
 #include "wx/palette.h"
 #include "wx/region.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 #include <memory>

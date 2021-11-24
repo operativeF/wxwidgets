@@ -147,6 +147,7 @@ target_link_libraries(test_gui
     PRIVATE
         wxcore
         wxbase
+        wxconfigflags
         stdlibcore
         wxtype
         doctest::doctest

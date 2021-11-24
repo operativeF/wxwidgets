@@ -21,6 +21,8 @@ module;
 
 export module WX.AUI.FrameManager;
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <vector>;

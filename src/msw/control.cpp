@@ -27,6 +27,7 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.Cfg.Flags;
 import WX.WinDef;
 
 // ----------------------------------------------------------------------------

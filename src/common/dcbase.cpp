@@ -69,6 +69,8 @@
     #include "wx/qt/dcscreen.h"
 #endif
 
+import WX.Cfg.Flags;
+
 import <array>;
 import <cmath>;
 

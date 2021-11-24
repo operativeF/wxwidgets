@@ -18,6 +18,8 @@
 #include "wx/control.h"
 #include "wx/containr.h"
 
+import WX.Cfg.Flags;
+
 inline constexpr std::string_view wxStaticBoxNameStr = "groupBox";
 
 // ----------------------------------------------------------------------------

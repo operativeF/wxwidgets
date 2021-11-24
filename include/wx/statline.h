@@ -22,6 +22,8 @@
 // the base class declaration
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 /*
  * wxStaticLine flags
  */

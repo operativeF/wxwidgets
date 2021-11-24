@@ -21,6 +21,8 @@ module;
 
 export module WX.AUI.FloatPane;
 
+import WX.Cfg.Flags;
+
 import WX.AUI.FrameManager;
 
 import Utils.Geometry;

@@ -18,6 +18,8 @@
 #include "wx/list.h"
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 import <string>;
 import <string_view>;
 

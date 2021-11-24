@@ -48,6 +48,8 @@
 #include "wx/spinctrl.h"
 #include "wx/wupdlock.h"
 
+import WX.Cfg.Flags;
+
 // what is considered "small index"?
 constexpr int INDEX_IS_SMALL = 1000;
 

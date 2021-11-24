@@ -17,6 +17,8 @@
 
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 import <string_view>;
 
 /*

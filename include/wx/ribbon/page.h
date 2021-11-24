@@ -19,6 +19,8 @@
 #include "wx/ribbon/panel.h"
 #include "wx/bitmap.h"
 
+import WX.Cfg.Flags;
+
 class wxRibbonBar;
 class wxRibbonPageScrollButton;
 

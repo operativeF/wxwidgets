@@ -20,6 +20,8 @@ class wxImageList;
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/page.h"
 
+import WX.Cfg.Flags;
+
 import <vector>;
 
 enum wxRibbonBarOption

@@ -16,6 +16,8 @@
 
 #if wxUSE_MEMORY_TRACING || wxUSE_DEBUG_CONTEXT
 
+import WX.Cfg.Flags;
+
 import <cstddef>;
 
 void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool isVect = false);

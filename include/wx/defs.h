@@ -714,107 +714,15 @@ inline void *wxUIntToPtr(wxUIntPtr p)
     #define wxALLOW_COMBINING_ENUMS(en1, en2)
 #endif /* C++ 20 */
 
-enum wxGeometryCentre
-{
-    wxCENTRE                  = 0x0001,
-    wxCENTER                  = wxCENTRE
-};
-
 /*  centering into frame rather than screen (obsolete) */
 #define wxCENTER_FRAME          0x0000
 /*  centre on screen rather than parent */
 #define wxCENTRE_ON_SCREEN      0x0002
 #define wxCENTER_ON_SCREEN      wxCENTRE_ON_SCREEN
 
-enum wxOrientation
-{
-    /* don't change the values of these elements, they are used elsewhere */
-    wxHORIZONTAL              = 0x0004,
-    wxVERTICAL                = 0x0008,
-
-    wxBOTH                    = wxVERTICAL | wxHORIZONTAL,
-
-    /*  a mask to extract orientation from the combination of flags */
-    wxORIENTATION_MASK        = wxBOTH
-};
-
-enum wxDirection
-{
-    wxLEFT                    = 0x0010,
-    wxRIGHT                   = 0x0020,
-    wxUP                      = 0x0040,
-    wxDOWN                    = 0x0080,
-
-    wxTOP                     = wxUP,
-    wxBOTTOM                  = wxDOWN,
-
-    wxNORTH                   = wxUP,
-    wxSOUTH                   = wxDOWN,
-    wxWEST                    = wxLEFT,
-    wxEAST                    = wxRIGHT,
-
-    wxALL                     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
-
-    /*  a mask to extract direction from the combination of flags */
-    wxDIRECTION_MASK           = wxALL
-};
-
-enum wxAlignment
-{
-    /*
-        0 is a valid wxAlignment value (both wxALIGN_LEFT and wxALIGN_TOP
-        use it) so define a symbolic name for an invalid alignment value
-        which can be assumed to be different from anything else
-     */
-    wxALIGN_INVALID           = -1,
-
-    wxALIGN_NOT               = 0x0000,
-    wxALIGN_CENTER_HORIZONTAL = 0x0100,
-    wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
-    wxALIGN_LEFT              = wxALIGN_NOT,
-    wxALIGN_TOP               = wxALIGN_NOT,
-    wxALIGN_RIGHT             = 0x0200,
-    wxALIGN_BOTTOM            = 0x0400,
-    wxALIGN_CENTER_VERTICAL   = 0x0800,
-    wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
-
-    wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
-    wxALIGN_CENTRE            = wxALIGN_CENTER,
-
-    /*  a mask to extract alignment from the combination of flags */
-    wxALIGN_MASK              = 0x0f00
-};
-
-/*  border flags: the values are chosen for backwards compatibility */
-enum wxBorder
-{
-    /*  this is different from wxBORDER_NONE as by default the controls do have */
-    /*  border */
-    wxBORDER_DEFAULT = 0,
-
-    wxBORDER_NONE   = 0x00200000,
-    wxBORDER_STATIC = 0x01000000,
-    wxBORDER_SIMPLE = 0x02000000,
-    wxBORDER_RAISED = 0x04000000,
-    wxBORDER_SUNKEN = 0x08000000,
-    wxBORDER_DOUBLE = 0x10000000, /* deprecated */
-    wxBORDER_THEME  = wxBORDER_DOUBLE,
-
-    /*  a mask to extract border style from the combination of flags */
-    wxBORDER_MASK   = 0x1f200000
-};
-
 /* This makes it easier to specify a 'normal' border for a control */
 #define wxDEFAULT_CONTROL_BORDER    wxBORDER_SUNKEN
 
-/*
-    Elements of these enums can be combined with each other when using
-    wxSizer::Add() overload not using wxSizerFlags.
- */
-wxALLOW_COMBINING_ENUMS(wxAlignment, wxDirection)
-wxALLOW_COMBINING_ENUMS(wxAlignment, wxGeometryCentre)
-
-wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 
 /*  ---------------------------------------------------------------------------- */
 /*  Window style flags */

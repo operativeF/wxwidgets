@@ -21,6 +21,8 @@ module WX.AUI.FloatPane;
 import WX.AUI.DockArt;
 import WX.AUI.FrameManager;
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 wxIMPLEMENT_CLASS(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass);

@@ -11,6 +11,8 @@
 #ifndef _WX_CHOICE_H_
 #define _WX_CHOICE_H_
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

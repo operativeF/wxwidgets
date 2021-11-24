@@ -13,6 +13,8 @@
 
 #include "wx/dc.h"
 
+import WX.Cfg.Flags;
+
 import WX.WinDef;
 
 import WX.Win.UniqueHnd;

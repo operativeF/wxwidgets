@@ -95,6 +95,8 @@
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
 
+import WX.Cfg.Flags;
+
 import WX.WinDef;
 
 import <array>;

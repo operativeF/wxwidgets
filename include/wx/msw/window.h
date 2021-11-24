@@ -13,6 +13,7 @@
 #define _WX_WINDOW_H_
 
 import WX.WinDef;
+import WX.Cfg.Flags;
 
 import Utils.Geometry;
 

@@ -12,6 +12,8 @@
 
 #include "wx/intl.h"
 
+import WX.Cfg.Flags;
+
 import <string>;
 
 // Forward declare a struct from Platform SDK.

@@ -13,6 +13,8 @@
 
 #include "wx/msw/ownerdrawnbutton.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

@@ -14,6 +14,8 @@
 #include "wx/scrolwin.h"
 #include "wx/textctrl.h"
 
+import WX.Cfg.Flags;
+
 #if wxUSE_DRAG_AND_DROP
 class wxDropTarget;
 #endif

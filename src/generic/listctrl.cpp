@@ -34,6 +34,8 @@
     #include "wx/osx/private.h"
 #endif
 
+import WX.Cfg.Flags;
+
 // NOTE: If using the wxListBox visual attributes works everywhere then this can
 // be removed, as well as the #else case below.
 #define _USE_VISATTR 0

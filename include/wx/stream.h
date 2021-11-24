@@ -19,6 +19,8 @@
 #include "wx/object.h"
 #include "wx/string.h"
 
+import WX.Cfg.Flags;
+
 class wxStreamBase;
 class wxInputStream;
 class wxOutputStream;

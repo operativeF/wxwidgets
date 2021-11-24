@@ -15,6 +15,8 @@
 #include "wx/selstore.h"
 #include "wx/bitmap.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

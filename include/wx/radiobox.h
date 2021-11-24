@@ -17,6 +17,8 @@
 
 #include "wx/ctrlsub.h"
 
+import WX.Cfg.Flags;
+
 #if wxUSE_TOOLTIPS
 
 import <string>;

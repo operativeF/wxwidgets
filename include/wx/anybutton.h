@@ -16,6 +16,8 @@
 #include "wx/bitmap.h"
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 // ----------------------------------------------------------------------------

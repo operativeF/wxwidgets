@@ -16,6 +16,8 @@
 
 #include "wx/headercol.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

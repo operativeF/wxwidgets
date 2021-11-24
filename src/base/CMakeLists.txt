@@ -209,6 +209,7 @@ target_include_directories(wxsharedcmn
 target_link_libraries(wxsharedcmn
     PRIVATE
         wxalgorithm
+        wxconfigflags
         wxwinwrap
         wxtype
         Microsoft.GSL::GSL
@@ -268,6 +269,7 @@ target_link_libraries(wxbase
     PUBLIC
         wxsharedcmn
         wxalgorithm
+        wxconfigflags
         wxprint
 
     PRIVATE

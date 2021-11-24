@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RICHTEXT
 
 #include "wx/richtext/richtextstyles.h"
@@ -24,6 +21,8 @@
 #include "wx/dcclient.h"
 
 #include "wx/richtext/richtextctrl.h"
+
+import WX.Cfg.Flags;
 
 wxIMPLEMENT_CLASS(wxRichTextStyleDefinition, wxObject);
 wxIMPLEMENT_CLASS(wxRichTextCharacterStyleDefinition, wxRichTextStyleDefinition);

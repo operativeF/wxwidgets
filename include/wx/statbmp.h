@@ -18,6 +18,8 @@
 #include "wx/control.h"
 #include "wx/icon.h"
 
+import WX.Cfg.Flags;
+
 class wxBitmap;
 
 inline constexpr std::string_view wxStaticBitmapNameStr = "staticBitmap";

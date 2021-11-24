@@ -17,6 +17,8 @@
 #include "wx/bitmap.h"
 #include "wx/ribbon/control.h"
 
+import WX.Cfg.Flags;
+
 enum wxRibbonPanelOption
 {
     wxRIBBON_PANEL_NO_AUTO_MINIMISE = 1 << 0,

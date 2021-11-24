@@ -19,6 +19,8 @@
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
 
+import WX.Cfg.Flags;
+
 import <string>;
 import <vector>;
 

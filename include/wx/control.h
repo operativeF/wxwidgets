@@ -18,6 +18,8 @@
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

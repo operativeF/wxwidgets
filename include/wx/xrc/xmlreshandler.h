@@ -21,6 +21,8 @@
 #include "wx/font.h"
 #include "wx/imaglist.h"
 
+import WX.Cfg.Flags;
+
 class wxAnimation;
 class wxAnimationCtrlBase;
 

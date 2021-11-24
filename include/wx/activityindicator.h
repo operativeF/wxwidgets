@@ -16,6 +16,8 @@
 
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 inline constexpr std::string_view wxActivityIndicatorNameStr = "activityindicator";
 
 // ----------------------------------------------------------------------------

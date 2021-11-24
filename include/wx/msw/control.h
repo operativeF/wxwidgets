@@ -12,6 +12,7 @@
 #define _WX_CONTROL_H_
 
 import WX.WinDef;
+import WX.Cfg.Flags;
 
 import <string>;
 import <vector>;

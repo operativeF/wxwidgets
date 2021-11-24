@@ -60,6 +60,8 @@
 #include "wx/recguard.h"
 #include "wx/private/window.h"
 
+import WX.Cfg.Flags;
+
 namespace wxMouseCapture
 {
 

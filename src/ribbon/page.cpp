@@ -19,6 +19,8 @@
 #include "wx/msw/private.h"
 #endif
 
+import WX.Cfg.Flags;
+
 static int GetSizeInOrientation(wxSize size, wxOrientation orientation);
 
 // As scroll buttons need to be rendered on top of a page's child windows, the

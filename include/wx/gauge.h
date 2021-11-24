@@ -18,6 +18,8 @@
 #include "wx/appprogress.h"
 #include "wx/control.h"
 
+import WX.Cfg.Flags;
+
 #include <memory>
 import <string>;
 

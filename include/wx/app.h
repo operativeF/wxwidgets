@@ -24,6 +24,8 @@
 #include "wx/intl.h"        // for wxLayoutDirection
 #include "wx/log.h"         // for wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD()
 
+import WX.Cfg.Flags;
+
 import <string>;
 
 class wxAppConsole;

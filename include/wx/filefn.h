@@ -33,6 +33,8 @@ import <ctime>;
 
 #include  <fcntl.h>       // O_RDONLY &c
 
+import WX.Cfg.Flags;
+
 import <vector>;
 
 // ----------------------------------------------------------------------------

@@ -18,6 +18,8 @@
 #include "wx/control.h"
 #include "wx/withimages.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

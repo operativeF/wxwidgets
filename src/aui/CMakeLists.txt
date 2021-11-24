@@ -74,6 +74,7 @@ target_include_directories(wxaui
 target_link_libraries(wxaui
     PRIVATE
         wxalgorithm
+        wxconfigflags
         wxwinwrap
         stdlibcore
         wxtype

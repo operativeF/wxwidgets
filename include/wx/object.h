@@ -14,6 +14,8 @@
 
 #include "wx/memory.h"
 
+import WX.Cfg.Flags;
+
 /*  menu and toolbar item kinds */
 enum wxItemKind
 {

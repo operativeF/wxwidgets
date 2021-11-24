@@ -29,6 +29,8 @@ import <vector>;
 
 #include "wx/xrc/xmlreshandler.h"
 
+import WX.Cfg.Flags;
+
 class wxFileName;
 
 class wxIconBundle;

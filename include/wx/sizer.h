@@ -14,6 +14,8 @@
 #include "wx/defs.h"
 #include "wx/window.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

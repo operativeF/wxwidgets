@@ -21,6 +21,8 @@ import WX.AUI.FrameManager;
 import WX.AUI.Page;
 import WX.AUI.TabArt;
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

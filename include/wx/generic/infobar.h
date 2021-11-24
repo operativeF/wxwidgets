@@ -10,6 +10,8 @@
 #ifndef _WX_GENERIC_INFOBAR_H_
 #define _WX_GENERIC_INFOBAR_H_
 
+import WX.Cfg.Flags;
+
 class wxBitmapButton;
 class wxStaticBitmap;
 class wxStaticText;

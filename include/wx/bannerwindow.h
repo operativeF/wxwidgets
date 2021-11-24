@@ -18,6 +18,8 @@
 #include "wx/event.h"
 #include "wx/window.h"
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <string>;

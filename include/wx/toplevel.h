@@ -21,6 +21,7 @@
 #include "wx/iconbndl.h"
 #include "wx/weakref.h"
 
+import WX.Cfg.Flags;
 import Utils.Geometry;
 
 import <string>;

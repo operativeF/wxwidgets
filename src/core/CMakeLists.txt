@@ -412,7 +412,7 @@ target_include_directories(wxcore
 target_link_libraries(wxcore
     PUBLIC
         wxprint
-    
+        wxconfigflags
     PRIVATE
         wxsharedcmn
         wxbase

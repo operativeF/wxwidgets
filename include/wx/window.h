@@ -41,6 +41,8 @@
 #include "wx/access.h"
 #endif
 
+import WX.Cfg.Flags;
+
 import Utils.Geometry;
 
 import <algorithm>;

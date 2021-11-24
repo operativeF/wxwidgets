@@ -22,6 +22,8 @@
 #include "wx/bitmap.h"
 #include "wx/ribbon/bar.h"
 
+import WX.Cfg.Flags;
+
 class wxDC;
 class wxWindow;
 

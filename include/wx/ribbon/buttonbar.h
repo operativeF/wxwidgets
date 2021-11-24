@@ -18,6 +18,8 @@
 #include "wx/ribbon/control.h"
 #include "wx/dynarray.h"
 
+import WX.Cfg.Flags;
+
 class wxRibbonButtonBarButtonBase;
 class wxRibbonButtonBarLayout;
 struct wxRibbonButtonBarButtonInstance;
