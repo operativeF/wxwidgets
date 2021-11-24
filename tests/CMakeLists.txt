@@ -130,8 +130,13 @@ set(TEST_GUI_SRC
     xml/xrctest.cpp
 )
 
+set(MSW_MANIFEST
+    ${CMAKE_SOURCE_DIR}/include/wx/msw/amd64_dpi_aware_pmv2.manifest
+)
+
 add_executable(test_gui
     ${TEST_GUI_SRC}
+    ${MSW_MANIFEST}
 )
 
 target_compile_features(test_gui PRIVATE cxx_std_23)
