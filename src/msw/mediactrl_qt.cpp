@@ -32,7 +32,7 @@ extern "C" WXHINSTANCE wxGetInstance(void);
 extern const wxChar *wxCanvasClassName;
 
 LRESULT APIENTRY
-wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 //---------------------------------------------------------------------------
 //  wxQTMediaBackend
@@ -369,7 +369,7 @@ public:
     static Boolean MCFilterProc(MovieController theController,
         short action, void *params, LONG_PTR refCon);
 
-    static LRESULT CALLBACK QTWndProc(WXHWND, UINT, WPARAM, LPARAM);
+    static LRESULT CALLBACK QTWndProc(WXHWND, WXUINT, WXWPARAM, WXLPARAM);
 
     bool ShowPlayerControls(wxMediaCtrlPlayerControls flags) override;
 
@@ -528,8 +528,8 @@ protected:
 // Forwards events to the Movie Controller so that it can
 // redraw itself/process messages etc..
 //---------------------------------------------------------------------------
-LRESULT CALLBACK wxQTMediaBackend::QTWndProc(WXHWND hWnd, UINT nMsg,
-                                             WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK wxQTMediaBackend::QTWndProc(WXHWND hWnd, WXUINT nMsg,
+                                             WXWPARAM wParam, WXLPARAM lParam)
 {
     wxQTMediaBackend* pThis = (wxQTMediaBackend*)wxGetWindowUserData(hWnd);
 

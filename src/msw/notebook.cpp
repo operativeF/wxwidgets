@@ -74,7 +74,7 @@ static WXWNDPROC gs_wndprocNotebookSpinBtn = nullptr;
 static WXWNDPROC gs_wndprocNotebook = nullptr;
 
 LRESULT APIENTRY
-wxNotebookWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxNotebookWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 #endif // USE_NOTEBOOK_ANTIFLICKER
 
@@ -732,7 +732,7 @@ int wxNotebook::HitTest(const wxPoint& pt, unsigned int* flags) const
 
 // wnd proc for the spin button
 LRESULT APIENTRY
-wxNotebookSpinBtnWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxNotebookSpinBtnWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     if ( message == WM_ERASEBKGND )
         return 0;
@@ -742,7 +742,7 @@ wxNotebookSpinBtnWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam
 }
 
 LRESULT APIENTRY
-wxNotebookWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxNotebookWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     return ::CallWindowProcW(CASTWNDPROC gs_wndprocNotebook,
                             hwnd, message, wParam, lParam);
@@ -796,7 +796,7 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     ::FillRect(hdc, &rc, hbr.get());
 
-    MSWDefWindowProc(WM_PAINT, (WPARAM)hdc, 0);
+    MSWDefWindowProc(WM_PAINT, (WXWPARAM)hdc, 0);
 
     // At least for the top-aligned tabs, our background colour was overwritten
     // and so we now replace the default background with our colour. This is

@@ -161,8 +161,8 @@ public:
 
 private:
     // wrapper of DrawFrameControl()
-    void DoDrawFrameControl(UINT type,
-                            UINT kind,
+    void DoDrawFrameControl(WXUINT type,
+                            WXUINT kind,
                             wxWindow *win,
                             wxDC& dc,
                             const wxRect& rect,
@@ -170,7 +170,7 @@ private:
 
     // common part of Draw{PushButton,CheckBox,RadioBitmap}(): wraps
     // DrawFrameControl(DFC_BUTTON)
-    void DoDrawButton(UINT kind,
+    void DoDrawButton(WXUINT kind,
                       wxWindow *win,
                       wxDC& dc,
                       const wxRect& rect,
@@ -449,8 +449,8 @@ wxRendererMSW::DrawComboBoxDropButton(wxWindow * WXUNUSED(win),
 }
 
 void
-wxRendererMSW::DoDrawFrameControl(UINT type,
-                                  UINT kind,
+wxRendererMSW::DoDrawFrameControl(WXUINT type,
+                                  WXUINT kind,
                                   wxWindow * WXUNUSED(win),
                                   wxDC& dc,
                                   const wxRect& rect,
@@ -507,7 +507,7 @@ wxRendererMSW::DrawTitleBarBitmap(wxWindow *win,
                                   wxTitleBarButton button,
                                   unsigned int flags)
 {
-    UINT kind;
+    WXUINT kind;
     switch ( button )
     {
         case wxTitleBarButton::Close:

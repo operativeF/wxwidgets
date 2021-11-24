@@ -627,7 +627,7 @@ int wxSlider::GetValue() const
 
 void wxSlider::SetValue(int value)
 {
-    ::SendMessageW(GetHwnd(), TBM_SETPOS, (WPARAM)TRUE, (LPARAM)ValueInvertOrNot(value));
+    ::SendMessageW(GetHwnd(), TBM_SETPOS, (WXWPARAM)TRUE, (WXLPARAM)ValueInvertOrNot(value));
 
     if ( m_labels )
     {
@@ -676,12 +676,12 @@ void wxSlider::SetRange(int minValue, int maxValue)
 void wxSlider::DoSetTickFreq(int n)
 {
     m_tickFreq = n;
-    ::SendMessageW( GetHwnd(), TBM_SETTICFREQ, (WPARAM) n, (LPARAM) 0 );
+    ::SendMessageW( GetHwnd(), TBM_SETTICFREQ, (WXWPARAM) n, (WXLPARAM) 0 );
 }
 
 void wxSlider::SetPageSize(int pageSize)
 {
-    ::SendMessageW( GetHwnd(), TBM_SETPAGESIZE, (WPARAM) 0, (LPARAM) pageSize );
+    ::SendMessageW( GetHwnd(), TBM_SETPAGESIZE, (WXWPARAM) 0, (WXLPARAM) pageSize );
     m_pageSize = pageSize;
 }
 
@@ -692,18 +692,18 @@ int wxSlider::GetPageSize() const
 
 void wxSlider::ClearSel()
 {
-    ::SendMessageW(GetHwnd(), TBM_CLEARSEL, (WPARAM) TRUE, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_CLEARSEL, (WXWPARAM) TRUE, (WXLPARAM) 0);
 }
 
 void wxSlider::ClearTicks()
 {
-    ::SendMessageW(GetHwnd(), TBM_CLEARTICS, (WPARAM) TRUE, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_CLEARTICS, (WXWPARAM) TRUE, (WXLPARAM) 0);
 }
 
 void wxSlider::SetLineSize(int lineSize)
 {
     m_lineSize = lineSize;
-    ::SendMessageW(GetHwnd(), TBM_SETLINESIZE, (WPARAM) 0, (LPARAM) lineSize);
+    ::SendMessageW(GetHwnd(), TBM_SETLINESIZE, (WXWPARAM) 0, (WXLPARAM) lineSize);
 }
 
 int wxSlider::GetLineSize() const
@@ -724,13 +724,13 @@ int wxSlider::GetSelStart() const
 void wxSlider::SetSelection(int minPos, int maxPos)
 {
     ::SendMessageW(GetHwnd(), TBM_SETSEL,
-                  (WPARAM) TRUE /* redraw */,
-                  (LPARAM) MAKELONG( minPos, maxPos) );
+                  (WXWPARAM) TRUE /* redraw */,
+                  (WXLPARAM) MAKELONG( minPos, maxPos) );
 }
 
 void wxSlider::SetThumbLength(int len)
 {
-    ::SendMessageW(GetHwnd(), TBM_SETTHUMBLENGTH, (WPARAM) len, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_SETTHUMBLENGTH, (WXWPARAM) len, (WXLPARAM) 0);
 
     InvalidateBestSize();
 }
@@ -742,7 +742,7 @@ int wxSlider::GetThumbLength() const
 
 void wxSlider::SetTick(int tickPos)
 {
-    ::SendMessageW( GetHwnd(), TBM_SETTIC, (WPARAM) 0, (LPARAM) tickPos );
+    ::SendMessageW( GetHwnd(), TBM_SETTIC, (WXWPARAM) 0, (WXLPARAM) tickPos );
 }
 
 // ----------------------------------------------------------------------------

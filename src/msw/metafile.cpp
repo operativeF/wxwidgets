@@ -306,9 +306,9 @@ struct mfPLACEABLEHEADER {
     DWORD    key;
     short    hmf;
     RECT32    bbox;
-    WORD    inch;
+    WXWORD    inch;
     DWORD    reserved;
-    WORD    checksum;
+    WXWORD    checksum;
 };
 
 /*
@@ -340,10 +340,10 @@ bool wxMakeMetafilePlaceable(const wxString& filename, int x1, int y1, int x2, i
     header.reserved = 0;
 
     // Calculate checksum
-    WORD *p;
+    WXWORD *p;
     mfPLACEABLEHEADER *pMFHead = &header;
-    for (p =(WORD *)pMFHead,pMFHead -> checksum = 0;
-            p < (WORD *)&pMFHead ->checksum; ++p)
+    for (p =(WXWORD *)pMFHead,pMFHead -> checksum = 0;
+            p < (WXWORD *)&pMFHead ->checksum; ++p)
         pMFHead ->checksum ^= *p;
 
     FILE *fd = wxFopen(filename.fn_str(), "rb");

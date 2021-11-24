@@ -34,7 +34,7 @@ public:
 
     // Implementation of NM_CUSTOMDRAW handler, returns one of CDRF_XXX
     // constants, possibly CDRF_DODEFAULT if custom drawing is not necessary.
-    LPARAM HandleCustomDraw(LPARAM lParam);
+    WXLPARAM HandleCustomDraw(WXLPARAM lParam);
 
 private:
     // Return true if we need custom drawing at all.
@@ -47,7 +47,7 @@ private:
 
     // Set the colours and font for the specified WXHDC, return CDRF_NEWFONT if
     // the font was changed.
-    LPARAM HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc);
+    WXLPARAM HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc);
 
     CustomDraw(const CustomDraw&) = delete;
 	CustomDraw& operator=(const CustomDraw&) = delete;

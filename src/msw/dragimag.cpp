@@ -29,7 +29,7 @@ import <string>;
 // Wine doesn't have this yet
 #ifndef ListView_CreateDragImage
 #define ListView_CreateDragImage(hwnd, i, lpptUpLeft) \
-    (HIMAGELIST)SNDMSG((hwnd), LVM_CREATEDRAGIMAGE, (WPARAM)(int)(i), (LPARAM)(LPPOINT)(lpptUpLeft))
+    (HIMAGELIST)SNDMSG((hwnd), LVM_CREATEDRAGIMAGE, (WXWPARAM)(int)(i), (WXLPARAM)(LPPOINT)(lpptUpLeft))
 #endif
 
 // ----------------------------------------------------------------------------
@@ -70,7 +70,7 @@ bool wxDragImage::Create(const wxBitmap& image, const wxCursor& cursor)
         ImageList_Destroy(GetHimageList());
     m_hImageList = nullptr;
 
-    UINT flags wxDUMMY_INITIALIZE(0) ;
+    WXUINT flags wxDUMMY_INITIALIZE(0) ;
     if (image.GetDepth() <= 4)
         flags = ILC_COLOR4;
     else if (image.GetDepth() <= 8)
@@ -123,7 +123,7 @@ bool wxDragImage::Create(const wxIcon& image, const wxCursor& cursor)
         ImageList_Destroy(GetHimageList());
     m_hImageList = nullptr;
 
-    UINT flags wxDUMMY_INITIALIZE(0) ;
+    WXUINT flags wxDUMMY_INITIALIZE(0) ;
     if (image.GetDepth() <= 4)
         flags = ILC_COLOR4;
     else if (image.GetDepth() <= 8)

@@ -14,6 +14,8 @@
 // button image data
 // ----------------------------------------------------------------------------
 
+import WX.WinDef;
+
 // we use different data classes for owner drawn buttons and for themed XP ones
 
 class wxButtonImageData

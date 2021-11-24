@@ -379,7 +379,7 @@ public:
         // Invoke
 
     STDMETHODIMP Invoke(DISPID dispIdMember, REFIID riid, LCID lcid,
-                        WORD wFlags, DISPPARAMS *pDispParams,
+                        WXWORD wFlags, DISPPARAMS *pDispParams,
                         VARIANT *pVarResult, EXCEPINFO *pExcepInfo,
                         unsigned int *puArgErr ) override;
 
@@ -1711,7 +1711,7 @@ STDMETHODIMP wxIAccessible::GetIDsOfNames(REFIID WXUNUSED(riid), OLECHAR** WXUNU
 // Invoke
 
 STDMETHODIMP wxIAccessible::Invoke(DISPID WXUNUSED(dispIdMember), REFIID WXUNUSED(riid), LCID WXUNUSED(lcid),
-                        WORD WXUNUSED(wFlags), DISPPARAMS *WXUNUSED(pDispParams),
+                        WXWORD WXUNUSED(wFlags), DISPPARAMS *WXUNUSED(pDispParams),
                         VARIANT *WXUNUSED(pVarResult), EXCEPINFO *WXUNUSED(pExcepInfo),
                         unsigned int *WXUNUSED(puArgErr) )
 {

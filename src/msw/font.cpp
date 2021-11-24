@@ -274,7 +274,7 @@ protected:
 
         SelectInHDC selectFont(screenDC.get(), (WXHFONT)GetHFONT());
 
-        UINT otmSize = ::GetOutlineTextMetricsW(screenDC.get(), 0, nullptr);
+        WXUINT otmSize = ::GetOutlineTextMetricsW(screenDC.get(), 0, nullptr);
         if ( !otmSize )
         {
             wxLogLastError("GetOutlineTextMetrics(NULL)");

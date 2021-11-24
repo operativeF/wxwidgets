@@ -281,7 +281,7 @@ int wxChoice::FindString(std::string_view s, bool bCase) const
    else
    {
        int pos = (int)::SendMessageW(GetHwnd(), CB_FINDSTRINGEXACT,
-                                  (WPARAM)-1, reinterpret_cast<LPARAM>(boost::nowide::widen(s).c_str()));
+                                  (WXWPARAM)-1, reinterpret_cast<WXLPARAM>(boost::nowide::widen(s).c_str()));
 
        return pos == LB_ERR ? wxNOT_FOUND : pos;
    }
@@ -308,7 +308,7 @@ void wxChoice::SetString(unsigned int n, const std::string& s)
 
     // TODO: Correct?
     ::SendMessageW(GetHwnd(), CB_DELETESTRING, n, 0);
-    ::SendMessageW(GetHwnd(), CB_INSERTSTRING, n, reinterpret_cast<LPARAM>(boost::nowide::widen(s).c_str()) );
+    ::SendMessageW(GetHwnd(), CB_INSERTSTRING, n, reinterpret_cast<WXLPARAM>(boost::nowide::widen(s).c_str()) );
 
     // restore the client data
     if ( oldData )
@@ -342,7 +342,7 @@ std::string wxChoice::GetString(unsigned int n) const
                 GetHwnd(),
                 CB_GETLBTEXT,
                 n,
-                reinterpret_cast<LPARAM>(&str[0])
+                reinterpret_cast<WXLPARAM>(&str[0])
                ) == CB_ERR )
         {
             wxLogLastError("SendMessage(CB_GETLBTEXT)");
@@ -359,7 +359,7 @@ std::string wxChoice::GetString(unsigned int n) const
 void wxChoice::DoSetItemClientData(unsigned int n, void* clientData)
 {
     if ( ::SendMessageW(GetHwnd(), CB_SETITEMDATA,
-                       n, (LPARAM)clientData) == CB_ERR )
+                       n, (WXLPARAM)clientData) == CB_ERR )
     {
         wxLogLastError("CB_SETITEMDATA");
     }
@@ -372,7 +372,7 @@ void* wxChoice::DoGetItemClientData(unsigned int n) const
     // in case of success, it only sets it if an error occurs.
     SetLastError(ERROR_SUCCESS);
 
-    LPARAM rc = SendMessageW(GetHwnd(), CB_GETITEMDATA, n, 0);
+    WXLPARAM rc = SendMessageW(GetHwnd(), CB_GETITEMDATA, n, 0);
 
     // Notice that we must call GetLastError() to distinguish between a real
     // error and successfully retrieving a previously stored client data value
@@ -382,7 +382,7 @@ void* wxChoice::DoGetItemClientData(unsigned int n) const
         wxLogLastError("CB_GETITEMDATA");
 
         // unfortunately, there is no way to return an error code to the user
-        rc = (LPARAM) NULL;
+        rc = (WXLPARAM) NULL;
     }
 
     return (void *)rc;
@@ -408,7 +408,7 @@ void wxChoice::MSWUpdateVisibleHeight()
     if ( m_heightOwn != wxDefaultCoord )
     {
         ::SendMessageW(GetHwnd(), CB_SETITEMHEIGHT,
-                      (WPARAM)-1, m_heightOwn - COMBO_HEIGHT_ADJ);
+                      (WXWPARAM)-1, m_heightOwn - COMBO_HEIGHT_ADJ);
     }
 }
 
@@ -553,7 +553,7 @@ wxSize wxChoice::DoGetBestSize() const
 int wxChoice::SetHeightSimpleComboBox(int nItems) const
 {
     wxSize ch_size = wxGetCharSize( GetHWND(), GetFont() );
-    auto hItem = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, (WPARAM)-1, 0);
+    auto hItem = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, (WXWPARAM)-1, 0);
     return EDIT_HEIGHT_FROM_CHAR_HEIGHT( ch_size.y ) * std::min( std::max( nItems, 3 ), 6 ) + hItem - 1;
 }
 

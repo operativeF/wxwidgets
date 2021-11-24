@@ -670,7 +670,7 @@ wxTextEntry::~wxTextEntry()
 
 void wxTextEntry::WriteText(std::string_view text)
 {
-    ::SendMessageW(GetEditHwnd(), EM_REPLACESEL, 0, reinterpret_cast<LPARAM>(boost::nowide::widen(text).c_str()));
+    ::SendMessageW(GetEditHwnd(), EM_REPLACESEL, 0, reinterpret_cast<WXLPARAM>(boost::nowide::widen(text).c_str()));
 }
 
 std::string wxTextEntry::DoGetValue() const
@@ -773,7 +773,7 @@ void wxTextEntry::DoSetSelection(long from, long to, unsigned int WXUNUSED(flags
 void wxTextEntry::GetSelection(long *from, long *to) const
 {
     DWORD dwStart, dwEnd;
-    ::SendMessageW(GetEditHwnd(), EM_GETSEL, (WPARAM)&dwStart, (LPARAM)&dwEnd);
+    ::SendMessageW(GetEditHwnd(), EM_GETSEL, (WXWPARAM)&dwStart, (WXLPARAM)&dwEnd);
 
     if ( from )
         *from = dwStart;
@@ -979,7 +979,7 @@ bool wxTextEntry::SetHint(const std::string& hint)
         // has focus, otherwise there would be no way to show the hint for the
         // initially focused window
         if ( ::SendMessageW(GetEditHwnd(), EM_SETCUEBANNER,
-                             TRUE, (LPARAM)boost::nowide::widen(hint).c_str()) )
+                             TRUE, (WXLPARAM)boost::nowide::widen(hint).c_str()) )
             return true;
     }
 
@@ -995,7 +995,7 @@ std::string wxTextEntry::GetHint() const
         buf.resize(256);
 
         if ( ::SendMessageW(GetEditHwnd(), EM_GETCUEBANNER,
-                            (WPARAM)&buf[0], buf.size()) )
+                            (WXWPARAM)&buf[0], buf.size()) )
             return boost::nowide::narrow(buf);
     }
 

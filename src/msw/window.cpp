@@ -215,7 +215,7 @@ public:
         return ms_pfnCloseGestureInfoHandle;
     }
 
-    using SetGestureConfig_t = BOOL (WINAPI*)(WXHWND, DWORD, UINT, PGESTURECONFIG, UINT);
+    using SetGestureConfig_t = BOOL (WINAPI*)(WXHWND, DWORD, WXUINT, PGESTURECONFIG, WXUINT);
 
     static SetGestureConfig_t SetGestureConfig()
     {
@@ -249,13 +249,13 @@ private:
 
 // the window proc for all our windows
 LRESULT APIENTRY
-wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 #if wxDEBUG_LEVEL >= 2
 const wxChar *wxGetMessageName(int message);
 
 inline
-void wxTraceMSWMessage(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void wxTraceMSWMessage(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     // The casts to size_t allow to avoid having different code for Win32 and
     // Win64 as size_t is of the right size in both cases, unlike int or long.
@@ -828,7 +828,7 @@ bool wxWindowMSW::SetCursor(const wxCursor& cursor)
 
         ::SendMessageW(GetHwndOf(win),
                        WM_SETCURSOR,
-                       (WPARAM)GetHwndOf(win),
+                       (WXWPARAM)GetHwndOf(win),
                        MAKELPARAM(HTCLIENT, WM_MOUSEMOVE));
     }
 
@@ -854,7 +854,7 @@ bool wxWindowMSW::EnableTouchEvents(int eventsMask)
         GESTURECONFIG config = {0, 0, 0};
 
         GESTURECONFIG* ptrConfigs = &config;
-        UINT numConfigs = 1;
+        WXUINT numConfigs = 1;
 
         // This is used only if we need to allocate the configurations
         // dynamically.
@@ -986,7 +986,7 @@ inline int GetScrollPosition(WXHWND hWnd, int wOrient)
     return scrollInfo.nPos;
 }
 
-inline UINT WXOrientToSB(int orient)
+inline WXUINT WXOrientToSB(int orient)
 {
     return orient == wxHORIZONTAL ? SB_HORZ : SB_VERT;
 }
@@ -1608,7 +1608,7 @@ bool wxWindowMSW::Reparent(wxWindowBase *parent)
 
 static inline void SendSetRedraw(WXHWND hwnd, bool on)
 {
-    ::SendMessageW(hwnd, WM_SETREDRAW, (WPARAM)on, 0);
+    ::SendMessageW(hwnd, WM_SETREDRAW, (WXWPARAM)on, 0);
 }
 
 void wxWindowMSW::DoFreeze()
@@ -1648,7 +1648,7 @@ void wxWindowMSW::Refresh(bool eraseBack, const wxRect *rect)
             pRect = nullptr;
         }
 
-        UINT flags = RDW_INVALIDATE | RDW_ALLCHILDREN;
+        WXUINT flags = RDW_INVALIDATE | RDW_ALLCHILDREN;
         if ( eraseBack )
             flags |= RDW_ERASE;
 
@@ -1814,7 +1814,7 @@ wxSize wxWindowMSW::DoGetClientSize() const
             .bottom = m_pendingPosition.y + m_pendingSize.y 
         };
 
-        ::SendMessageW(GetHwnd(), WM_NCCALCSIZE, FALSE, (LPARAM)&rect);
+        ::SendMessageW(GetHwnd(), WM_NCCALCSIZE, FALSE, (WXLPARAM)&rect);
 
         client_size = {rect.right - rect.left, rect.bottom - rect.top};
     }
@@ -2303,7 +2303,7 @@ bool wxWindowMSW::DoPopupMenu(wxMenu *menu, int x, int y)
     // using TPM_RECURSE allows us to show a popup menu while another menu
     // is opened which can be useful and is supported by the other
     // platforms, so allow it under Windows too
-    UINT flags = TPM_RIGHTBUTTON | TPM_RECURSE;
+    WXUINT flags = TPM_RIGHTBUTTON | TPM_RECURSE;
 
     ::TrackPopupMenu(GetHmenuOf(menu), flags, pt.x, pt.y, 0, GetHwnd(), nullptr);
 
@@ -2764,7 +2764,7 @@ bool wxWindowMSW::MSWClickButtonIfPossible(wxButton* btn)
 // ---------------------------------------------------------------------------
 
 void wxWindowMSW::UnpackCommand(WXWPARAM wParam, WXLPARAM lParam,
-                             WORD *id, WXHWND *hwnd, WORD *cmd)
+                             WXWORD *id, WXHWND *hwnd, WXWORD *cmd)
 {
     *id = LOWORD(wParam);
     *hwnd = (WXHWND)lParam;
@@ -2824,7 +2824,7 @@ wxWindowCreationHook::~wxWindowCreationHook()
 
 // Main window proc
 LRESULT APIENTRY
-wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     // trace all messages: useful for the debugging but noticeably slows down
     // the code so don't do it by default
@@ -3121,7 +3121,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
 
         case WM_COMMAND:
             {
-                WORD id, cmd;
+                WXWORD id, cmd;
                 WXHWND hwnd;
                 UnpackCommand(wParam, lParam, &id, &hwnd, &cmd);
 
@@ -3173,7 +3173,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
         case WM_SYSKEYDOWN:
         case WM_KEYDOWN:
             // Generate the key down event in any case.
-            m_lastKeydownProcessed = HandleKeyDown((WORD) wParam, lParam);
+            m_lastKeydownProcessed = HandleKeyDown((WXWORD) wParam, lParam);
             if ( m_lastKeydownProcessed )
             {
                 // If it was processed by an event handler, we stop here,
@@ -3270,7 +3270,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
 
         case WM_SYSKEYUP:
         case WM_KEYUP:
-            processed = HandleKeyUp((WORD) wParam, lParam);
+            processed = HandleKeyUp((WXWORD) wParam, lParam);
             break;
 
         case WM_SYSCHAR:
@@ -3285,7 +3285,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
             }
             else
             {
-                processed = HandleChar((WORD)wParam, lParam);
+                processed = HandleChar((WXWORD)wParam, lParam);
             }
             break;
 
@@ -3508,10 +3508,10 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
 #if wxUSE_ACCESSIBILITY
         case WM_GETOBJECT:
             {
-                //WPARAM dwFlags = (WPARAM) (DWORD) wParam;
-                LPARAM dwObjId = (LPARAM) (DWORD) lParam;
+                //WXWPARAM dwFlags = (WXWPARAM) (DWORD) wParam;
+                WXLPARAM dwObjId = (WXLPARAM) (DWORD) lParam;
 
-                if (dwObjId == (LPARAM)OBJID_CLIENT && GetOrCreateAccessible())
+                if (dwObjId == (WXLPARAM)OBJID_CLIENT && GetOrCreateAccessible())
                 {
                     processed = true;
                     rc.result = LresultFromObject(IID_IAccessible, wParam, (IUnknown*) GetAccessible()->GetIAccessible());
@@ -4334,17 +4334,17 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
     HDROP hFilesInfo = (HDROP) wParam;
 
     // Get the total number of files dropped
-    UINT gwFilesDropped = ::DragQueryFileW
+    WXUINT gwFilesDropped = ::DragQueryFileW
                             (
                                 (HDROP)hFilesInfo,
-                                (UINT)-1,
+                                (WXUINT)-1,
                                 (LPTSTR)nullptr,
-                                (UINT)0
+                                (WXUINT)0
                             );
 
     std::vector<std::string> files(gwFilesDropped);
 
-    for ( UINT wIndex = 0; wIndex < gwFilesDropped; wIndex++ )
+    for ( WXUINT wIndex = 0; wIndex < gwFilesDropped; wIndex++ )
     {
         // first get the needed buffer length (+1 for terminating NUL)
         size_t len = ::DragQueryFileW(hFilesInfo, wIndex, nullptr, 0) + 1;
@@ -4663,7 +4663,7 @@ namespace
 static wxSize GetWindowDPI(WXHWND hwnd)
 {
 #if wxUSE_DYNLIB_CLASS
-    using GetDpiForWindow_t = UINT (WINAPI*)(WXHWND hwnd);
+    using GetDpiForWindow_t = WXUINT (WINAPI*)(WXHWND hwnd);
 
     static GetDpiForWindow_t s_pfnGetDpiForWindow = nullptr;
     static bool s_initDone = false;
@@ -4696,7 +4696,7 @@ int wxGetSystemMetrics(int nIndex, const wxWindow* window)
 
     if ( window )
     {
-        using GetSystemMetricsForDpi_t = int (WINAPI*)(int nIndex, UINT dpi);
+        using GetSystemMetricsForDpi_t = int (WINAPI*)(int nIndex, WXUINT dpi);
 
         static GetSystemMetricsForDpi_t s_pfnGetSystemMetricsForDpi = nullptr;
         static bool s_initDone = false;
@@ -4711,7 +4711,7 @@ int wxGetSystemMetrics(int nIndex, const wxWindow* window)
         if ( s_pfnGetSystemMetricsForDpi )
         {
             const int dpi = window->GetDPI().y;
-            return s_pfnGetSystemMetricsForDpi(nIndex, (UINT)dpi);
+            return s_pfnGetSystemMetricsForDpi(nIndex, (WXUINT)dpi);
         }
     }
 #else
@@ -4722,7 +4722,7 @@ int wxGetSystemMetrics(int nIndex, const wxWindow* window)
 }
 
 /*extern*/
-bool wxSystemParametersInfo(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni, const wxWindow* window)
+bool wxSystemParametersInfo(WXUINT uiAction, WXUINT uiParam, PVOID pvParam, WXUINT fWinIni, const wxWindow* window)
 {
     // Note that we can't use SystemParametersInfoForDpi() in non-Unicode build
     // because it always works with wide strings and we'd have to check for all
@@ -4735,7 +4735,7 @@ bool wxSystemParametersInfo(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWi
 
     if ( window )
     {
-        using SystemParametersInfoForDpi_t = int (WINAPI*)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni, UINT dpi);
+        using SystemParametersInfoForDpi_t = int (WINAPI*)(WXUINT uiAction, WXUINT uiParam, PVOID pvParam, WXUINT fWinIni, WXUINT dpi);
         static SystemParametersInfoForDpi_t s_pfnSystemParametersInfoForDpi = nullptr;
         static bool s_initDone = false;
 
@@ -4749,7 +4749,7 @@ bool wxSystemParametersInfo(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWi
         if ( s_pfnSystemParametersInfoForDpi )
         {
             const int dpi = window->GetDPI().y;
-            if ( s_pfnSystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, (UINT)dpi) == TRUE )
+            if ( s_pfnSystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, (WXUINT)dpi) == TRUE )
             {
                 return true;
             }
@@ -5295,7 +5295,7 @@ void wxWindowMSW::OnPaint(wxPaintEvent& event)
     WXHDC hDC = (WXHDC) wxPaintDCImpl::FindDCInCache((wxWindow*) event.GetEventObject());
     if (hDC != nullptr)
     {
-        MSWDefWindowProc(WM_PAINT, (WPARAM) hDC, 0);
+        MSWDefWindowProc(WM_PAINT, (WXWPARAM) hDC, 0);
     }
 #endif
 }
@@ -7697,7 +7697,7 @@ wxPoint wxGetMousePosition()
 
 bool wxWindowMSW::RegisterHotKey(int hotkeyId, int modifiers, int keycode)
 {
-    UINT win_modifiers=0;
+    WXUINT win_modifiers=0;
     if ( modifiers & wxMOD_ALT )
         win_modifiers |= MOD_ALT;
     if ( modifiers & wxMOD_SHIFT )
@@ -7792,7 +7792,7 @@ public:
         ::UnhookWindowsHookEx(wxIdleWakeUpModule::ms_hMsgHookProc);
     }
 
-    static LRESULT CALLBACK MsgHookProc(int nCode, WPARAM wParam, LPARAM lParam)
+    static LRESULT CALLBACK MsgHookProc(int nCode, WXWPARAM wParam, WXLPARAM lParam)
     {
         // Don't process idle events unless the message is going to be really
         // handled, i.e. removed from the queue, as it seems wrong to do it

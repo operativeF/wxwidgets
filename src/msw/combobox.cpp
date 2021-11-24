@@ -60,7 +60,7 @@ wxEND_EVENT_TABLE()
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxComboEditWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxComboEditWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 // ============================================================================
 // implementation
@@ -76,7 +76,7 @@ WNDPROC gs_wndprocEdit = (WNDPROC)nullptr;
 // is part of the combobox to wxComboBox itself. All messages generating the
 // events that the code using wxComboBox could be interested in must be
 // forwarded.
-bool ShouldForwardFromEditToCombo(UINT message)
+bool ShouldForwardFromEditToCombo(WXUINT message)
 {
     switch ( message )
     {
@@ -104,7 +104,7 @@ bool ShouldForwardFromEditToCombo(UINT message)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxComboEditWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxComboEditWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     WXHWND hwndCombo = ::GetParent(hWnd);
     wxWindow *win = wxFindWinFromHandle((WXHWND)hwndCombo);
@@ -369,7 +369,7 @@ bool wxComboBox::MSWShouldPreProcessMessage(WXMSG *pMsg)
     // hotkeys when we have the focus
     if (wxIsCtrlDown())
     {
-        WPARAM vkey = pMsg->wParam;
+        WXWPARAM vkey = pMsg->wParam;
 
         switch (vkey)
         {

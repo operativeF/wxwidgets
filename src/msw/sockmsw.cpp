@@ -53,7 +53,7 @@ constexpr int MAXSOCKETS = 1024;
 #error "MAXSOCKETS is too big!"
 #endif
 
-LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND, WXUINT, WXWPARAM, WXLPARAM);
 
 /* Global variables */
 
@@ -154,9 +154,9 @@ wxSocketImplMSW::~wxSocketImplMSW()
 /* Windows proc for asynchronous event handling */
 
 LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND hWnd,
-                                           UINT uMsg,
-                                           WPARAM wParam,
-                                           LPARAM lParam)
+                                           WXUINT uMsg,
+                                           WXWPARAM wParam,
+                                           WXLPARAM lParam)
 {
     if ( uMsg < WM_USER || uMsg > (WM_USER + MAXSOCKETS - 1))
         return DefWindowProc(hWnd, uMsg, wParam, lParam);

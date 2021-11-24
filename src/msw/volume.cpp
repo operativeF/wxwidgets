@@ -565,7 +565,7 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
     // Load on demand.
     if (m_icons[type].IsNull())
     {
-        UINT flags = SHGFI_ICON;
+        WXUINT flags = SHGFI_ICON;
         switch (type)
         {
         case wxFS_VOL_ICO_SMALL:

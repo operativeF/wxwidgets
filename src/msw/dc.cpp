@@ -1486,7 +1486,7 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxPoint pt)
 void wxMSWDCImpl::DrawAnyText(std::string_view text, wxPoint pt)
 {
     if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(pt.x), YLOG2DEV(pt.y), 0, nullptr,
-                   boost::nowide::widen(text).c_str(), gsl::narrow_cast<UINT>(text.length()), nullptr) == 0 )
+                   boost::nowide::widen(text).c_str(), gsl::narrow_cast<WXUINT>(text.length()), nullptr) == 0 )
     {
         wxLogLastError("TextOut");
     }

@@ -204,7 +204,7 @@ public:
     wxSTDMETHODIMP QueryInsertObject(LPCLSID WXUNUSED(clsid), LPSTORAGE WXUNUSED(stg), LONG WXUNUSED(cp)) override { return E_NOTIMPL; }
     wxSTDMETHODIMP ShowContainerUI(BOOL WXUNUSED(show)) override { return E_NOTIMPL; }
 
-    wxSTDMETHODIMP GetContextMenu(WORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), WXHMENU *menu) override
+    wxSTDMETHODIMP GetContextMenu(WXWORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), WXHMENU *menu) override
     {
         // 'menu' will be shown and destroyed by the caller. We need to keep
         // its wx counterpart, the wxMenu instance, around until it is
@@ -528,7 +528,7 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
 
         // enable the events we're interested in: we want to get EN_CHANGE as
         // for the normal controls
-        LPARAM mask = ENM_CHANGE;
+        WXLPARAM mask = ENM_CHANGE;
 
         if (GetRichVersion() == 1 && !IsInkEdit())
         {
@@ -561,7 +561,7 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
         if ( m_verRichEdit >= 4 )
         {
             wxTextCtrlOleCallback *cb = new wxTextCtrlOleCallback(this);
-            if ( ::SendMessageW(GetHwnd(), EM_SETOLECALLBACK, 0, (LPARAM)cb) )
+            if ( ::SendMessageW(GetHwnd(), EM_SETOLECALLBACK, 0, (WXLPARAM)cb) )
             {
                 // If we succeeded in setting up the callback, we don't need to
                 // connect to wxEVT_CONTEXT_MENU to show the menu ourselves,
@@ -623,8 +623,8 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
         //
         // Finally, notice that EC_USEFONTINFO is used differently for plain
         // and rich text controls.
-        WPARAM wParam;
-        LPARAM lParam;
+        WXWPARAM wParam;
+        WXLPARAM lParam;
         if ( IsRich() )
         {
             wParam = EC_USEFONTINFO;
@@ -650,7 +650,7 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
     {
         wxCOMPtr<IRichEditOle> pRichEditOle;
         if ( SendMessageW(GetHwnd(), EM_GETOLEINTERFACE,
-                         0, (LPARAM)&pRichEditOle) && pRichEditOle )
+                         0, (WXLPARAM)&pRichEditOle) && pRichEditOle )
         {
             wxCOMPtr<ITextDocument> pDoc;
             HRESULT hr = pRichEditOle->QueryInterface
@@ -892,7 +892,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
             if ( to == -1 )
                 to = len;
             {
-                // alloc one extra WORD as needed by the control
+                // alloc one extra WXWORD as needed by the control
                 str.resize(++len);
 
                 std::wstring tmp;
@@ -904,7 +904,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
                 textRange.lpstrText = p;
 
                 (void)::SendMessageW(GetHwnd(), EM_GETTEXTRANGE,
-                                    0, (LPARAM)&textRange);
+                                    0, (WXLPARAM)&textRange);
 
                 if ( m_verRichEdit > 1 )
                 {
@@ -1030,7 +1030,7 @@ void wxTextCtrl::DoWriteText(std::string_view value, unsigned int flags)
 
         ::SendMessageW(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
                       // EM_REPLACESEL takes 1 to indicate the operation should be redoable
-                      selectionOnly ? 1 : 0, reinterpret_cast<LPARAM>(boost::nowide::widen(valueDos).c_str()));
+                      selectionOnly ? 1 : 0, reinterpret_cast<WXLPARAM>(boost::nowide::widen(valueDos).c_str()));
 
         const int lenActuallyInserted = gs_lenOfInsertedText.top();
         gs_lenOfInsertedText.pop();
@@ -1045,7 +1045,7 @@ void wxTextCtrl::DoWriteText(std::string_view value, unsigned int flags)
                 Undo();
 
             ::SendMessageW(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
-                          selectionOnly ? 1 : 0, reinterpret_cast<LPARAM>(boost::nowide::widen(valueDos).c_str()));
+                          selectionOnly ? 1 : 0, reinterpret_cast<WXLPARAM>(boost::nowide::widen(valueDos).c_str()));
         }
 
         if ( !ucf.GotUpdate() && (flags & SetValue_SendEvent) )
@@ -1063,7 +1063,7 @@ void wxTextCtrl::AppendText(const std::string& text)
     // don't do this if we're frozen, saves some time
     if ( !IsFrozen() && IsMultiLine() && GetRichVersion() > 1 )
     {
-        ::SendMessageW(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (LPARAM)NULL);
+        ::SendMessageW(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (WXLPARAM)NULL);
     }
 #endif // wxUSE_RICHEDIT
 }
@@ -1127,7 +1127,7 @@ long wxTextCtrl::GetInsertionPoint() const
             .cpMax = 0
         };
 
-        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &range);
+        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (WXLPARAM) &range);
 
         return range.cpMin;
     }
@@ -1146,7 +1146,7 @@ wxTextPos wxTextCtrl::GetLastPosition() const
             GETTEXTLENGTHEX gtl;
             gtl.flags = GTL_NUMCHARS | GTL_PRECISE;
             gtl.codepage = GetRichVersion() > 1 ? 1200 : CP_ACP;
-            return ::SendMessageW(GetHwnd(), EM_GETTEXTLENGTHEX, (WPARAM)&gtl, 0);
+            return ::SendMessageW(GetHwnd(), EM_GETTEXTLENGTHEX, (WXWPARAM)&gtl, 0);
         }
         else
 #endif // wxUSE_RICHEDIT
@@ -1166,7 +1166,7 @@ void wxTextCtrl::GetSelection(long *from, long *to) const
     if ( IsRich() )
     {
         CHARRANGE charRange;
-        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &charRange);
+        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (WXLPARAM) &charRange);
 
         *from = charRange.cpMin;
         *to = charRange.cpMax;
@@ -1202,7 +1202,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, unsigned int flags)
             .cpMax = to
         };
 
-        ::SendMessageW(hWnd, EM_EXSETSEL, 0, (LPARAM)&range);
+        ::SendMessageW(hWnd, EM_EXSETSEL, 0, (WXLPARAM)&range);
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1244,7 +1244,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, unsigned int flags)
         }
 #endif // wxUSE_RICHEDIT
 
-        ::SendMessageW(hWnd, EM_SCROLLCARET, 0, (LPARAM)0);
+        ::SendMessageW(hWnd, EM_SCROLLCARET, 0, (WXLPARAM)0);
 
 #if wxUSE_RICHEDIT
         // restore ECO_NOHIDESEL if we changed it
@@ -1405,7 +1405,7 @@ wxTextCtrlHitTestResult
 wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
 {
     // first get the position from Windows
-    LPARAM lParam;
+    WXLPARAM lParam;
 
 #if wxUSE_RICHEDIT
     POINTL ptl;
@@ -1414,7 +1414,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
         // for rich edit controls the position is passed iva the struct fields
         ptl.x = pt.x;
         ptl.y = pt.y;
-        lParam = (LPARAM)&ptl;
+        lParam = (WXLPARAM)&ptl;
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1451,7 +1451,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
     //        we don't know how to do it
     if ( IsRich() )
     {
-        ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&ptReal, pos);
+        ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WXWPARAM)&ptReal, pos);
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1491,14 +1491,14 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
 {
     // FIXME: This code is broken for rich edit version 2.0 as it uses the same
     // API as plain edit i.e. the coordinates are returned directly instead of
-    // filling the POINT passed as WPARAM with them but we can't distinguish
+    // filling the POINT passed as WXWPARAM with them but we can't distinguish
     // between 2.0 and 3.0 unfortunately (see also the use of EM_POSFROMCHAR
     // above).
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
         POINT pt;
-        LRESULT rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&pt, pos);
+        LRESULT rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WXWPARAM)&pt, pos);
         if ( rc != -1 )
             return {pt.x, pt.y};
     }
@@ -1562,7 +1562,7 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
             }
         }
 
-        // Notice that {LO,HI}WORD macros return WORDs, i.e. unsigned shorts,
+        // Notice that {LO,HI}WXWORD macros return WORDs, i.e. unsigned shorts,
         // while we want to have signed values here (the y coordinate of any
         // position above the first currently visible line is negative, for
         // example), hence the need for casts.
@@ -1622,17 +1622,17 @@ std::string wxTextCtrl::GetLineText(int lineNo) const
 {
     size_t len = (size_t)GetLineLength(lineNo) + 1;
 
-    // there must be at least enough place for the length WORD in the
+    // there must be at least enough place for the length WXWORD in the
     // buffer
-    len += sizeof(WORD);
+    len += sizeof(WXWORD);
 
     wxString str;
     {
         wxStringBufferLength tmp(str, len);
         wxChar *buf = tmp;
 
-        *(WORD *)buf = (WORD)len;
-        len = (size_t)::SendMessageW(GetHwnd(), EM_GETLINE, lineNo, (LPARAM)buf);
+        *(WXWORD *)buf = (WXWORD)len;
+        len = (size_t)::SendMessageW(GetHwnd(), EM_GETLINE, lineNo, (WXLPARAM)buf);
 
 #if wxUSE_RICHEDIT
         if ( IsRich() )
@@ -1791,7 +1791,7 @@ bool wxTextCtrl::MSWShouldPreProcessMessage(WXMSG* msg)
     // usual preprocessing for them
     if ( msg->message == WM_KEYDOWN )
     {
-        const WPARAM vkey = msg->wParam;
+        const WXWPARAM vkey = msg->wParam;
         if ( HIWORD(msg->lParam) & KF_ALTDOWN )
         {
             // Alt-Backspace is accelerator for "Undo"
@@ -2638,9 +2638,9 @@ void wxTextCtrl::MSWSetRichZoom()
         return;
 
     // get the current zoom ratio
-    UINT num = 1;
-    UINT denom = 1;
-    ::SendMessageW(GetHWND(), EM_GETZOOM, (WPARAM)&num, (LPARAM)&denom);
+    WXUINT num = 1;
+    WXUINT denom = 1;
+    ::SendMessageW(GetHWND(), EM_GETZOOM, (WXWPARAM)&num, (WXLPARAM)&denom);
 
     // combine the zoom ratio with the DPI scale factor
     float ratio = m_richDPIscale;
@@ -2651,7 +2651,7 @@ void wxTextCtrl::MSWSetRichZoom()
     // do it here as well
     num = 100 * ratio;
     denom = 100;
-    ::SendMessageW(GetHWND(), EM_SETZOOM, (WPARAM)num, (LPARAM)denom);
+    ::SendMessageW(GetHWND(), EM_SETZOOM, (WXWPARAM)num, (WXLPARAM)denom);
 }
 
 void wxTextCtrl::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
@@ -2688,7 +2688,7 @@ bool wxTextCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
        case EN_MSGFILTER:
             {
                 const MSGFILTER *msgf = (MSGFILTER *)lParam;
-                UINT msg = msgf->msg;
+                WXUINT msg = msgf->msg;
 
                 // this is a bit crazy but richedit 1.0 sends us all mouse
                 // events _except_ WM_LBUTTONUP (don't ask me why) so we have
@@ -2829,7 +2829,7 @@ bool wxTextCtrl::SetForegroundColour(const wxColour& colour)
 
         cf.dwMask = CFM_COLOR;
         cf.crTextColor = wxColourToRGB(colour);
-        ::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
+        ::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, SCF_ALL, (WXLPARAM)&cf);
     }
 
     return true;
@@ -3008,7 +3008,7 @@ bool wxTextCtrl::MSWSetCharFormat(const wxTextAttr& style, long start, long end)
 #endif // wxUSE_RICHEDIT2
 
     // Apply the style either to the selection or to the entire control.
-    WPARAM selMode;
+    WXWPARAM selMode;
     if ( start != -1 || end != -1 )
     {
         DoSetSelection(start, end, SetSel_NoScroll);
@@ -3019,7 +3019,7 @@ bool wxTextCtrl::MSWSetCharFormat(const wxTextAttr& style, long start, long end)
         selMode = SCF_ALL;
     }
 
-    if ( !::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, selMode, (LPARAM)&cf) )
+    if ( !::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, selMode, (WXLPARAM)&cf) )
     {
         wxLogLastError("SendMessage(EM_SETCHARFORMAT)");
         return false;
@@ -3132,7 +3132,7 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
         // Do format the selection.
         DoSetSelection(start, end, SetSel_NoScroll);
 
-        if ( !::SendMessageW(GetHwnd(), EM_SETPARAFORMAT, 0, (LPARAM) &pf) )
+        if ( !::SendMessageW(GetHwnd(), EM_SETPARAFORMAT, 0, (WXLPARAM) &pf) )
         {
             wxLogLastError("SendMessage(EM_SETPARAFORMAT)");
 
@@ -3247,7 +3247,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
 
     // get the selection formatting
     (void) ::SendMessageW(GetHwnd(), EM_GETCHARFORMAT,
-                            SCF_SELECTION, (LPARAM)&cf) ;
+                            SCF_SELECTION, (WXLPARAM)&cf) ;
 
 
     LOGFONTW lf;
@@ -3351,7 +3351,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     }
 
     // do format the selection
-    (void) ::SendMessageW(GetHwnd(), EM_GETPARAFORMAT, 0, (LPARAM) &pf) ;
+    (void) ::SendMessageW(GetHwnd(), EM_GETPARAFORMAT, 0, (WXLPARAM) &pf) ;
 
     style.SetLeftIndent( (int) ((double) pf.dxStartIndent * twips2mm * 10.0), (int) ((double) pf.dxOffset * twips2mm * 10.0) );
     style.SetRightIndent( (int) ((double) pf.dxRightIndent * twips2mm * 10.0) );

@@ -188,14 +188,14 @@ struct wxActiveXEventNativeMSW
     DISPID  dispIdMember;
     REFIID  riid;
     LCID    lcid;
-    WORD    wFlags;
+    WXWORD    wFlags;
     DISPPARAMS  *pDispParams;
     VARIANT     *pVarResult;
     EXCEPINFO   *pExcepInfo;
     unsigned int *puArgErr;
 
     wxActiveXEventNativeMSW
-        (DISPID a_dispIdMember, REFIID a_riid, LCID a_lcid, WORD a_wFlags, DISPPARAMS  *a_pDispParams,
+        (DISPID a_dispIdMember, REFIID a_riid, LCID a_lcid, WXWORD a_wFlags, DISPPARAMS  *a_pDispParams,
         VARIANT *a_pVarResult, EXCEPINFO *a_pExcepInfo, unsigned int *a_puArgErr)
         :dispIdMember(a_dispIdMember), riid(a_riid), lcid(a_lcid), wFlags(a_wFlags), pDispParams(a_pDispParams),
         pVarResult(a_pVarResult), pExcepInfo(a_pExcepInfo), puArgErr(a_puArgErr)

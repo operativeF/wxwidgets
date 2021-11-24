@@ -36,6 +36,8 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
+
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 using namespace wxMSWImpl;
@@ -61,7 +63,7 @@ using msw::utils::unique_brush;
         {
             HIMAGELIST himl;
             RECT margin;
-            UINT uAlign;
+            WXUINT uAlign;
         };
     #endif
 #endif // wxUSE_UXTHEME
@@ -258,7 +260,7 @@ public:
 
     void SetBitmapPosition(wxDirection dir) override
     {
-        UINT alignNew;
+        WXUINT alignNew;
         switch ( dir )
         {
             default:
@@ -292,7 +294,7 @@ public:
 private:
     void UpdateImageInfo()
     {
-        if ( !::SendMessageW(m_hwndBtn, BCM_SETIMAGELIST, 0, (LPARAM)&m_data) )
+        if ( !::SendMessageW(m_hwndBtn, BCM_SETIMAGELIST, 0, (WXLPARAM)&m_data) )
         {
             wxLogDebug("SendMessage(BCM_SETIMAGELIST) failed");
         }
@@ -541,7 +543,7 @@ wxSize wxAnyButton::DoGetBestSize() const
     if ( !IsOwnerDrawn() && ShowsLabel() )
     {
         SIZE idealSize = { 0, 0 };
-        ::SendMessageW(GetHwnd(), BCM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
+        ::SendMessageW(GetHwnd(), BCM_GETIDEALSIZE, 0, (WXLPARAM)&idealSize);
         size.Set(idealSize.cx, idealSize.cy);
 
         if ( m_imageData )
@@ -806,7 +808,7 @@ namespace
 
 // return the button state using both the ODS_XXX flags specified in state
 // parameter and the current button state
-wxAnyButton::State GetButtonState(wxAnyButton *btn, UINT state)
+wxAnyButton::State GetButtonState(wxAnyButton *btn, WXUINT state)
 {
     if ( state & ODS_DISABLED )
         return wxAnyButton::State_Disabled;
@@ -875,7 +877,7 @@ void DrawButtonText(WXHDC hdc,
             y0 = pRect->top;
         }
 
-        UINT dsFlags = DSS_DISABLED;
+        WXUINT dsFlags = DSS_DISABLED;
         if( flags & DT_HIDEPREFIX )
             dsFlags |= (DSS_HIDEPREFIX | DST_PREFIXTEXT);
         else
@@ -916,7 +918,7 @@ void DrawButtonText(WXHDC hdc,
 
             ::OffsetRect(&rc, 0, y0 + lineNum * hLine);
 
-            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(boost::nowide::widen(line).c_str()),
+            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<WXLPARAM>(boost::nowide::widen(line).c_str()),
                         line.length(),
                         rc.left, rc.top, rc.right, rc.bottom, dsFlags);
             ++lineNum;
@@ -1099,7 +1101,7 @@ void DrawButtonFrame(WXHDC hdc, RECT& rectBtn,
 }
 
 #if wxUSE_UXTHEME
-void DrawXPBackground(wxAnyButton *button, WXHDC hdc, RECT& rectBtn, UINT state)
+void DrawXPBackground(wxAnyButton *button, WXHDC hdc, RECT& rectBtn, WXUINT state)
 {
     wxUxThemeHandle theme(button, L"BUTTON");
 
@@ -1256,7 +1258,7 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
     // on a non-transformed DC.
     wxASSERT(IsNonTransformedDC(hdc));
 
-    UINT state = lpDIS->itemState;
+    WXUINT state = lpDIS->itemState;
     switch ( GetButtonState(this, state) )
     {
         case State_Disabled:

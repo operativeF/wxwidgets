@@ -815,7 +815,7 @@ wxString wxLocale::GetSystemEncodingName()
 
 #if defined(__WIN32__)
     // FIXME: what is the error return value for GetACP()?
-    const UINT codepage = ::GetACP();
+    const WXUINT codepage = ::GetACP();
     switch ( codepage )
     {
         case 65001:
@@ -875,7 +875,7 @@ wxString wxLocale::GetSystemEncodingName()
 wxFontEncoding wxLocale::GetSystemEncoding()
 {
 #if defined(__WIN32__)
-    const UINT codepage = ::GetACP();
+    const WXUINT codepage = ::GetACP();
 
     switch ( codepage )
     {

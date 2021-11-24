@@ -49,11 +49,11 @@ import <array>;
 typedef struct tagNMTVITEMCHANGE
 {
     NMHDR hdr;
-    UINT uChanged;
+    WXUINT uChanged;
     HTREEITEM hItem;
-    UINT uStateNew;
-    UINT uStateOld;
-    LPARAM lParam;
+    WXUINT uStateNew;
+    WXUINT uStateOld;
+    WXLPARAM lParam;
 } NMTVITEMCHANGE;
 
 #endif
@@ -148,7 +148,7 @@ wxTreeView_GetItemRect(WXHWND hwnd,
 {
     param.hItem = hItem;
     return ::SendMessageW(hwnd, TVM_GETITEMRECT, fItemRect,
-                        (LPARAM)&param) == TRUE;
+                        (WXLPARAM)&param) == TRUE;
 }
 
 } // anonymous namespace
@@ -365,8 +365,8 @@ static bool SetFocus(WXHWND hwndTV, HTREEITEM htItem)
 struct wxTreeViewItem : public TV_ITEM
 {
     wxTreeViewItem(const wxTreeItemId& item,    // the item handle
-                   UINT mask_,                  // fields which are valid
-                   UINT stateMask_ = 0)         // for TVIF_STATE only
+                   WXUINT mask_,                  // fields which are valid
+                   WXUINT stateMask_ = 0)         // for TVIF_STATE only
     {
         wxZeroMemory(*this);
 
@@ -1457,7 +1457,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
         tvIns.hInsertAfter = TVI_FIRST;
     }
 
-    UINT mask = 0;
+    WXUINT mask = 0;
     if ( !text.empty() )
     {
         mask |= TVIF_TEXT;
@@ -1482,7 +1482,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
     param->SetImage(selectedImage, wxTreeItemIcon_Selected);
 
     mask |= TVIF_PARAM;
-    tvIns.item.lParam = (LPARAM)param;
+    tvIns.item.lParam = (WXLPARAM)param;
     tvIns.item.mask = mask;
 
     // apparently some Windows versions (2000 and XP are reported to do this)
@@ -2113,18 +2113,18 @@ void wxTreeCtrl::DoToggleItemSelection(const wxTreeItemId& item)
 class wxTreeSortHelper
 {
 public:
-    static int CALLBACK Compare(LPARAM data1, LPARAM data2, LPARAM tree);
+    static int CALLBACK Compare(WXLPARAM data1, WXLPARAM data2, WXLPARAM tree);
 
 private:
-    static wxTreeItemId GetIdFromData(LPARAM lParam)
+    static wxTreeItemId GetIdFromData(WXLPARAM lParam)
     {
         return ((wxTreeItemParam*)lParam)->GetItem();
         }
 };
 
-int CALLBACK wxTreeSortHelper::Compare(LPARAM pItem1,
-                                       LPARAM pItem2,
-                                       LPARAM htree)
+int CALLBACK wxTreeSortHelper::Compare(WXLPARAM pItem1,
+                                       WXLPARAM pItem2,
+                                       WXLPARAM htree)
 {
     wxCHECK_MSG( pItem1 && pItem2, 0,
                  "sorting tree without data doesn't make sense" );
@@ -2156,7 +2156,7 @@ void wxTreeCtrl::SortChildren(const wxTreeItemId& item)
         TV_SORTCB tvSort;
         tvSort.hParent = HITEM(item);
         tvSort.lpfnCompare = wxTreeSortHelper::Compare;
-        tvSort.lParam = (LPARAM)this;
+        tvSort.lParam = (WXLPARAM)this;
         if ( !TreeView_SortChildrenCB(GetHwnd(), &tvSort, wxRESERVED_PARAM) )
             wxLogLastError("TreeView_SortChildrenCB()");
     }
@@ -3000,7 +3000,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                             m_htClickedItem.Unset();
 
                             ::SendMessageW(GetHwndOf(GetParent()), WM_NOTIFY,
-                                          tv.hdr.idFrom, (LPARAM)&tv );
+                                          tv.hdr.idFrom, (WXLPARAM)&tv );
 
                             // don't pass it to the default window proc, it would
                             // start dragging again
@@ -3104,7 +3104,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                     nmhdr.idFrom = ::GetWindowLongPtrW(GetHwnd(), GWL_ID);
                     nmhdr.code = NM_RCLICK;
                     ::SendMessageW(::GetParent(GetHwnd()), WM_NOTIFY,
-                                  nmhdr.idFrom, (LPARAM)&nmhdr);
+                                  nmhdr.idFrom, (WXLPARAM)&nmhdr);
                     processed = true;
                 }
 
@@ -3180,7 +3180,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
     {
         // if we receive a EN_KILLFOCUS command from the in-place edit control
         // used for label editing, make sure to end editing
-        WORD id, cmd;
+        WXWORD id, cmd;
         WXHWND hwnd;
         UnpackCommand(wParam, lParam, &id, &hwnd, &cmd);
 
@@ -3550,7 +3550,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                             wxTreeViewItem tvItem((void *)nmcd.dwItemSpec,
                                                   TVIF_STATE, TVIS_DROPHILITED);
                             DoGetItem(&tvItem);
-                            const UINT tvItemState = tvItem.state;
+                            const WXUINT tvItemState = tvItem.state;
 
                             // selection colours should override ours,
                             // otherwise it is too confusing to the user
@@ -3641,7 +3641,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                         // Cast is needed for the very old (gcc 3.4.5) MinGW
                         // headers which didn't define NM_DBLCLK as unsigned,
                         // resulting in signed/unsigned comparison warning.
-                        eventType = hdr->code == (UINT)NM_DBLCLK
+                        eventType = hdr->code == (WXUINT)NM_DBLCLK
                                     ? wxEVT_TREE_ITEM_ACTIVATED
                                     : wxEVT_TREE_ITEM_RIGHT_CLICK;
 
@@ -3682,7 +3682,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             processed = true;
 
             ::SendMessageW(GetHwnd(), WM_CONTEXTMENU,
-                          (WPARAM)GetHwnd(), ::GetMessagePos());
+                          (WXWPARAM)GetHwnd(), ::GetMessagePos());
             break;
 
         case TVN_BEGINDRAG:

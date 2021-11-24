@@ -45,14 +45,14 @@ import <vector>;
     #define NMLVFINDITEM NM_FINDITEM
 #endif
 
-// MinGW headers lack casts to WPARAM inside several ListView_XXX() macros, so
+// MinGW headers lack casts to WXWPARAM inside several ListView_XXX() macros, so
 // add them to suppress the warnings about implicit conversions/truncation.
-// However do not add them for MSVC as it has casts not only to WPARAM but
-// actually to int first, and then to WPARAM, and casting to WPARAM here would
-// result in warnings when casting 64 bit WPARAM to 32 bit int inside the
+// However do not add them for MSVC as it has casts not only to WXWPARAM but
+// actually to int first, and then to WXWPARAM, and casting to WXWPARAM here would
+// result in warnings when casting 64 bit WXWPARAM to 32 bit int inside the
 // macros in Win64 builds.
 #ifdef __MINGW32__
-    #define NO_ITEM (static_cast<WPARAM>(-1))
+    #define NO_ITEM (static_cast<WXWPARAM>(-1))
 #else
     #define NO_ITEM (-1)
 #endif
@@ -95,7 +95,7 @@ wxGetListCtrlSubItemRect(WXHWND hwnd, int item, int subitem, unsigned int flags,
 {
     rect.top = subitem;
     rect.left = flags;
-    return ::SendMessageW(hwnd, LVM_GETSUBITEMRECT, item, (LPARAM)&rect) != 0;
+    return ::SendMessageW(hwnd, LVM_GETSUBITEMRECT, item, (WXLPARAM)&rect) != 0;
 }
 
 inline bool
@@ -205,7 +205,7 @@ struct wxMSWListItemData
 	wxMSWListItemData& operator=(const wxMSWListItemData&) = delete;
 
     wxItemAttr *attr{nullptr};
-    LPARAM lParam{0}; // real user data
+    WXLPARAM lParam{0}; // real user data
 };
 
 // wxMSWListHeaderCustomDraw: custom draw helper for the header
@@ -855,7 +855,7 @@ bool wxListCtrl::GetItem(wxListItem& info) const
 // Check if the item is visible
 bool wxListCtrl::IsVisible(long item) const
 {
-    bool result = ::SendMessageW( GetHwnd(), LVM_ISITEMVISIBLE, (WPARAM) item, 0 ) != 0;
+    bool result = ::SendMessageW( GetHwnd(), LVM_ISITEMVISIBLE, (WXWPARAM) item, 0 ) != 0;
     if ( result )
     {
         WXHWND hwndHdr = ListView_GetHeader(GetHwnd());
@@ -896,7 +896,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
             // need to allocate the internal data object
             data = new wxMSWListItemData;
             m_internalData.push_back(data);
-            item.lParam = (LPARAM) data;
+            item.lParam = (WXLPARAM) data;
             item.mask |= LVIF_PARAM;
         }
 
@@ -1014,7 +1014,7 @@ bool wxListCtrl::SetItemState(long item, ListStateFlags state, ListStateFlags st
     }
 
     if ( !::SendMessageW(GetHwnd(), LVM_SETITEMSTATE,
-                        (WPARAM)item, (LPARAM)&lvItem) )
+                        (WXWPARAM)item, (WXLPARAM)&lvItem) )
     {
         wxLogLastError("ListView_SetItemState");
 
@@ -1345,12 +1345,12 @@ bool wxListCtrl::EnableCheckBoxes(bool enable)
 
 void wxListCtrl::CheckItem(long item, bool state)
 {
-    ListView_SetCheckState(GetHwnd(), (UINT)item, (BOOL)state);
+    ListView_SetCheckState(GetHwnd(), (WXUINT)item, (BOOL)state);
 }
 
 bool wxListCtrl::IsItemChecked(long item) const
 {
-    return ListView_GetCheckState(GetHwnd(), (UINT)item) != 0;
+    return ListView_GetCheckState(GetHwnd(), (WXUINT)item) != 0;
 }
 
 // Gets the number of selected items in the list control
@@ -1479,11 +1479,11 @@ void wxListCtrl::AssignImageList(wxImageList *imageList, int which)
 wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
 {
     // FIXME: Remove this.
-    // Older Platform SDKs lack a cast to WPARAM inside the
+    // Older Platform SDKs lack a cast to WXWPARAM inside the
     // ListView_ApproximateViewRect macro, so cast -1 to
-    // WPARAM here to suppress a warning about signed/unsigned mismatch.
+    // WXWPARAM here to suppress a warning about signed/unsigned mismatch.
     const DWORD rc = ListView_ApproximateViewRect(GetHwnd(), x, y,
-        static_cast<WPARAM>(-1));
+        static_cast<WXWPARAM>(-1));
 
     wxSize size(LOWORD(rc), HIWORD(rc));
 
@@ -1512,7 +1512,7 @@ bool wxListCtrl::Arrange(wxListAlignment flag)
 {
     using enum wxListAlignment;
 
-    UINT code{};
+    WXUINT code{};
 
     switch(flag)
     {
@@ -1731,11 +1731,11 @@ long wxListCtrl::FindItem(long start, wxUIntPtr data)
 
     for ( unsigned n = 0; n < m_internalData.size(); n++ )
     {
-        if ( m_internalData[n]->lParam == (LPARAM)data )
+        if ( m_internalData[n]->lParam == (WXLPARAM)data )
         {
             LV_FINDINFO findInfo;
             findInfo.flags = LVFI_PARAM;
-            findInfo.lParam = (LPARAM)wxPtrToUInt(m_internalData[n]);
+            findInfo.lParam = (WXLPARAM)wxPtrToUInt(m_internalData[n]);
 
             int rc = ListView_FindItem(GetHwnd(), start, &findInfo);
             if ( rc != -1 )
@@ -1891,7 +1891,7 @@ long wxListCtrl::InsertItem(const wxListItem& info)
 
         wxMSWListItemData * const data = new wxMSWListItemData;
         m_internalData.push_back(data);
-        item.lParam = (LPARAM)data;
+        item.lParam = (WXLPARAM)data;
 
         if ( info.m_mask & ListMasks::Data )
             data->lParam = info.m_data;
@@ -2017,7 +2017,7 @@ struct wxInternalDataSort
     wxIntPtr data;
 };
 
-int CALLBACK wxInternalDataCompareFunc(LPARAM lParam1, LPARAM lParam2,  LPARAM lParamSort)
+int CALLBACK wxInternalDataCompareFunc(WXLPARAM lParam1, WXLPARAM lParam2,  WXLPARAM lParamSort)
 {
     wxInternalDataSort * const internalData = (wxInternalDataSort *) lParamSort;
 
@@ -2037,10 +2037,10 @@ bool wxListCtrl::SortItems(wxListCtrlCompare fn, wxIntPtr data)
     internalData.user_fn = fn;
     internalData.data = data;
 
-    // WPARAM cast is needed for mingw/cygwin
+    // WXWPARAM cast is needed for mingw/cygwin
     if ( !ListView_SortItems(GetHwnd(),
                              wxInternalDataCompareFunc,
-                             (WPARAM) &internalData) )
+                             (WXWPARAM) &internalData) )
     {
         wxLogDebug("ListView_SortItems() failed");
 
@@ -2376,8 +2376,8 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 // (and more easy to process) wxWidgets events
                 {
                     // temp vars for readability
-                    const UINT stOld = nmLV->uOldState;
-                    const UINT stNew = nmLV->uNewState;
+                    const WXUINT stOld = nmLV->uOldState;
+                    const WXUINT stNew = nmLV->uNewState;
 
                     // first of all, we deal with the state change events only and
                     // only for valid items (item == -1 for the virtual list
@@ -2460,7 +2460,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             case LVN_KEYDOWN:
                 {
                     LV_KEYDOWN *info = (LV_KEYDOWN *)lParam;
-                    WORD wVKey = info->wVKey;
+                    WXWORD wVKey = info->wVKey;
 
                     // get the current selection
                     long lItem = GetNextItem(-1,
@@ -2937,7 +2937,7 @@ bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont, int colCount)
 
     ::SetBkMode(hdc, TRANSPARENT);
 
-    UINT fmt = DT_SINGLELINE |
+    WXUINT fmt = DT_SINGLELINE |
                DT_WORD_ELLIPSIS |
                DT_NOPREFIX |
                DT_VCENTER;
@@ -3324,7 +3324,7 @@ void wxListCtrl::SetItemCount(long count)
 {
     wxASSERT_MSG( IsVirtual(), "this is for virtual controls only" );
 
-    if ( !::SendMessageW(GetHwnd(), LVM_SETITEMCOUNT, (WPARAM)count,
+    if ( !::SendMessageW(GetHwnd(), LVM_SETITEMCOUNT, (WXWPARAM)count,
                         LVSICF_NOSCROLL | LVSICF_NOINVALIDATEALL) )
     {
         wxLogLastError("ListView_SetItemCount");
@@ -3374,7 +3374,7 @@ static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
             lvItem.cchTextMax = 512;
         }
         lvItem.mask |= LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
-        ::SendMessageW(hwndListCtrl, LVM_GETITEM, 0, (LPARAM)& lvItem);
+        ::SendMessageW(hwndListCtrl, LVM_GETITEM, 0, (WXLPARAM)& lvItem);
     }
 
     if ( lvItem.mask & LVIF_STATE )

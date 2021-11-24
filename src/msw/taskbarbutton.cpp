@@ -136,8 +136,8 @@ struct wxIShellLinkA : public IUnknown
     virtual HRESULT wxSTDCALL SetWorkingDirectory(LPCSTR) = 0;
     virtual HRESULT wxSTDCALL GetArguments(LPSTR, int) = 0;
     virtual HRESULT wxSTDCALL SetArguments(LPCSTR) = 0;
-    virtual HRESULT wxSTDCALL GetHotkey(WORD*) = 0;
-    virtual HRESULT wxSTDCALL SetHotkey(WORD) = 0;
+    virtual HRESULT wxSTDCALL GetHotkey(WXWORD*) = 0;
+    virtual HRESULT wxSTDCALL SetHotkey(WXWORD) = 0;
     virtual HRESULT wxSTDCALL GetShowCmd(int*) = 0;
     virtual HRESULT wxSTDCALL SetShowCmd(int) = 0;
     virtual HRESULT wxSTDCALL GetIconLocation(LPSTR, int, int*) = 0;
@@ -158,8 +158,8 @@ struct wxIShellLinkW : public IUnknown
     virtual HRESULT wxSTDCALL SetWorkingDirectory(LPCWSTR) = 0;
     virtual HRESULT wxSTDCALL GetArguments(LPWSTR, int) = 0;
     virtual HRESULT wxSTDCALL SetArguments(LPCWSTR) = 0;
-    virtual HRESULT wxSTDCALL GetHotkey(WORD*) = 0;
-    virtual HRESULT wxSTDCALL SetHotkey(WORD) = 0;
+    virtual HRESULT wxSTDCALL GetHotkey(WXWORD*) = 0;
+    virtual HRESULT wxSTDCALL SetHotkey(WXWORD) = 0;
     virtual HRESULT wxSTDCALL GetShowCmd(int*) = 0;
     virtual HRESULT wxSTDCALL SetShowCmd(int) = 0;
     virtual HRESULT wxSTDCALL GetIconLocation(LPWSTR, int, int*) = 0;
@@ -394,9 +394,9 @@ public:
     virtual HRESULT wxSTDCALL UnregisterTab(WXHWND) = 0;
     virtual HRESULT wxSTDCALL SetTabOrder(WXHWND, WXHWND) = 0;
     virtual HRESULT wxSTDCALL SetTabActive(WXHWND, WXHWND, DWORD) = 0;
-    virtual HRESULT wxSTDCALL ThumbBarAddButtons(WXHWND, UINT, LPTHUMBBUTTON) = 0;
+    virtual HRESULT wxSTDCALL ThumbBarAddButtons(WXHWND, WXUINT, LPTHUMBBUTTON) = 0;
     virtual
-        HRESULT wxSTDCALL ThumbBarUpdateButtons(WXHWND, UINT, LPTHUMBBUTTON) = 0;
+        HRESULT wxSTDCALL ThumbBarUpdateButtons(WXHWND, WXUINT, LPTHUMBBUTTON) = 0;
     virtual HRESULT wxSTDCALL ThumbBarSetImageList(WXHWND, ::HIMAGELIST) = 0;
     virtual HRESULT wxSTDCALL SetOverlayIcon(WXHWND, WXHICON, LPCWSTR) = 0;
     virtual HRESULT wxSTDCALL SetThumbnailTooltip(WXHWND, LPCWSTR pszTip) = 0;
@@ -1353,9 +1353,9 @@ void wxTaskBarJumpListImpl::LoadKnownCategory(const std::string& title)
         return;
     }
 
-    UINT count = 0;
+    WXUINT count = 0;
     array->GetCount(&count);
-    for (UINT i = 0; i < count; ++i)
+    for (WXUINT i = 0; i < count; ++i)
     {
         wxCOMPtr<IUnknown> collectionItem;
         hr = array->GetAt(i, wxIID_IUnknown,

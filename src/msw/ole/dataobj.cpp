@@ -1254,18 +1254,18 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     HDROP hdrop = static_cast<HDROP>(const_cast<void*>(pData));   // NB: it works, but I'm not sure about it
 
     // get number of files (magic value -1)
-    UINT nFiles = ::DragQueryFileW(hdrop, (unsigned)-1, nullptr, 0u);
+    WXUINT nFiles = ::DragQueryFileW(hdrop, (unsigned)-1, nullptr, 0u);
 
-    wxCHECK_MSG ( nFiles != (UINT)-1, FALSE, "wrong HDROP handle" );
+    wxCHECK_MSG ( nFiles != (WXUINT)-1, FALSE, "wrong HDROP handle" );
 
     // for each file get the length, allocate memory and then get the name
     wxString str;
-    UINT len, n;
+    WXUINT len, n;
     for ( n = 0; n < nFiles; n++ ) {
         // +1 for terminating NUL
         len = ::DragQueryFileW(hdrop, n, nullptr, 0) + 1;
 
-        UINT len2 = ::DragQueryFileW(hdrop, n, wxStringBuffer(str, len), len);
+        WXUINT len2 = ::DragQueryFileW(hdrop, n, wxStringBuffer(str, len), len);
         m_filenames.push_back(str);
 
         if ( len2 != len - 1 ) {

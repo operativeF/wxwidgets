@@ -34,7 +34,7 @@
 
 #ifndef Header_SetBitmapMargin
     #define Header_SetBitmapMargin(hwnd, margin) \
-            ::SendMessageW((hwnd), HDM_SETBITMAPMARGIN, (WPARAM)(margin), 0)
+            ::SendMessageW((hwnd), HDM_SETBITMAPMARGIN, (WXWPARAM)(margin), 0)
 #endif
 
 // from src/msw/listctrl.cpp
@@ -476,7 +476,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
     hdi.iOrder = MSWToNativeOrder(std::distance(std::begin(m_colIndices), std::find(m_colIndices.begin(), m_colIndices.end(), idx)));
 
     if ( ::SendMessageW(GetHwnd(), HDM_INSERTITEM,
-                       MSWToNativeIdx(idx), (LPARAM)&hdi) == -1)
+                       MSWToNativeIdx(idx), (WXLPARAM)&hdi) == -1)
     {
         wxLogLastError("Header_InsertItem()");
     }
@@ -722,7 +722,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
     int width = 0;
     int order = -1;
     bool veto = false;
-    const UINT code = nmhdr->hdr.code;
+    const WXUINT code = nmhdr->hdr.code;
 
     // we don't have the index for all events, e.g. not for NM_RELEASEDCAPTURE
     // so only access for header control events (and yes, the direction of
@@ -765,7 +765,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     // there so we need a cast to avoid warnings about signed/
                     // unsigned comparison
                     evtType = GetClickEventType(
-                                code == static_cast<UINT>(NM_RDBLCLK), 1);
+                                code == static_cast<WXUINT>(NM_RDBLCLK), 1);
                 }
                 //else: ignore clicks outside any column
             }

@@ -35,7 +35,7 @@ import <string>;
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
 //     is not included by wxUniv build which does need wxDlgProc
 INT_PTR APIENTRY
-wxDlgProc(WXHWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+wxDlgProc(WXHWND hDlg, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 // ----------------------------------------------------------------------------
 // wxTLWHiddenParentModule: used to manage the hidden parent window (we need a
@@ -337,8 +337,8 @@ bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
             if ( icon.IsOk() )
             {
                 ::SendMessageW(GetHwnd(), WM_SETICON,
-                              (WPARAM)TRUE,
-                              (LPARAM)GetHiconOf(icon));
+                              (WXWPARAM)TRUE,
+                              (WXLPARAM)GetHiconOf(icon));
             }
         }
     }
@@ -420,8 +420,8 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
         // strange)
 
         // we need 3 additional WORDs for dialog menu, class and title (as we
-        // don't use DS_SETFONT we don't need the fourth WORD for the font)
-        static constexpr int dlgsize = sizeof(DLGTEMPLATE) + (sizeof(WORD) * 3);
+        // don't use DS_SETFONT we don't need the fourth WXWORD for the font)
+        static constexpr int dlgsize = sizeof(DLGTEMPLATE) + (sizeof(WXWORD) * 3);
         DLGTEMPLATE *dlgTemplate = (DLGTEMPLATE *)malloc(dlgsize);
         wxON_BLOCK_EXIT1(free, dlgTemplate);
 
@@ -684,7 +684,7 @@ void wxTopLevelWindowMSW::Iconize(bool iconize)
     // Note that we can't change m_showCmd yet as wxFrame WM_SIZE handler uses
     // its value to determine whether the frame had been iconized before or not
     // and this handler will be called from inside DoShowWindow() below.
-    const UINT showCmd = iconize ? SW_MINIMIZE : SW_RESTORE;
+    const WXUINT showCmd = iconize ? SW_MINIMIZE : SW_RESTORE;
 
     // We can't actually iconize the window if it's currently hidden, as this
     // would also show it unexpectedly.
@@ -998,7 +998,7 @@ bool wxTopLevelWindowMSW::DoSelectAndSetIcon(const wxIconBundle& icons,
     if ( !icon.IsOk() )
         return false;
 
-    ::SendMessageW(GetHwnd(), WM_SETICON, i, (LPARAM)GetHiconOf(icon));
+    ::SendMessageW(GetHwnd(), WM_SETICON, i, (WXLPARAM)GetHiconOf(icon));
     return true;
 }
 
@@ -1272,9 +1272,9 @@ void wxTopLevelWindowMSW::OnActivate(wxActivateEvent& event)
 // the DialogProc for all wxWidgets dialogs
 INT_PTR APIENTRY
 wxDlgProc(WXHWND WXUNUSED(hDlg),
-          UINT message,
-          WPARAM WXUNUSED(wParam),
-          LPARAM WXUNUSED(lParam))
+          WXUINT message,
+          WXWPARAM WXUNUSED(wParam),
+          WXLPARAM WXUNUSED(lParam))
 {
     switch ( message )
     {

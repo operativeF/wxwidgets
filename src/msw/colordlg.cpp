@@ -57,24 +57,24 @@ wxColourDialog* gs_activeDialog = nullptr;
 // See https://social.msdn.microsoft.com/Forums/en-US/c5fcfd9f-6b27-4848-bb9d-94bec105eabd/get-the-current-clicked-color-from-choosecolor-dialog?forum=windowsgeneraldevelopmentissues
 struct COLORINFO
 {
-    UINT           ApiType;
+    WXUINT           ApiType;
     LPCHOOSECOLOR  pCC;
     HANDLE         hLocal;
     HANDLE         hDialog;
     WXHPALETTE       hPal;
     DWORD          currentRGB;
-    WORD           currentHue;
-    WORD           currentSat;
-    WORD           currentLum;
-    WORD           nHueWidth;
-    WORD           nSatHeight;
-    WORD           nLumHeight;
-    WORD           nCurMix;
-    WORD           nCurDsp;
-    WORD           nCurBox;
-    WORD           nHuePos;
-    WORD           nSatPos;
-    WORD           nLumPos;
+    WXWORD           currentHue;
+    WXWORD           currentSat;
+    WXWORD           currentLum;
+    WXWORD           nHueWidth;
+    WXWORD           nSatHeight;
+    WXWORD           nLumHeight;
+    WXWORD           nCurMix;
+    WXWORD           nCurDsp;
+    WXWORD           nCurBox;
+    WXWORD           nHuePos;
+    WXWORD           nSatPos;
+    WXWORD           nLumPos;
     RECT           rOriginal;
     RECT           rRainbow;
     RECT           rLumScroll;
@@ -94,9 +94,9 @@ struct COLORINFO
 
 UINT_PTR CALLBACK
 wxColourDialogHookProc(WXHWND hwnd,
-                       UINT uiMsg,
-                       WPARAM WXUNUSED(wParam),
-                       LPARAM WXUNUSED(lParam))
+                       WXUINT uiMsg,
+                       WXWPARAM WXUNUSED(wParam),
+                       WXLPARAM WXUNUSED(lParam))
 {
     switch ( uiMsg )
     {
@@ -158,7 +158,7 @@ int wxColourDialog::ShowModal()
         .rgbResult = m_currentCol,
         .lpCustColors = custColours.data(),
         .Flags = CC_RGBINIT | CC_ENABLEHOOK,
-        .lCustData = (LPARAM)this,
+        .lCustData = (WXLPARAM)this,
         .lpfnHook = wxColourDialogHookProc,
         .lpTemplateName = {} // Ignored
     };

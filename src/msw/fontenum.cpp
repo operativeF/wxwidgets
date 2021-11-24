@@ -80,7 +80,7 @@ private:
 // ----------------------------------------------------------------------------
 
 int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
-                                  DWORD dwStyle, LPARAM lParam);
+                                  DWORD dwStyle, WXLPARAM lParam);
 
 // ============================================================================
 // implementation
@@ -137,7 +137,7 @@ void wxFontEnumeratorHelper::DoEnumerate()
     auto wideFaceName = boost::nowide::widen(m_facename);
     wxStrlcpy(lf.lfFaceName, wideFaceName.c_str(), WXSIZEOF(lf.lfFaceName));
     ::EnumFontFamiliesExW(hDC.get(), &lf, (FONTENUMPROC)wxFontEnumeratorProc,
-                         (LPARAM)this, wxRESERVED_PARAM) ;
+                         (WXLPARAM)this, wxRESERVED_PARAM) ;
 }
 
 bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
@@ -241,7 +241,7 @@ bool wxFontEnumerator::EnumerateEncodings(const std::string& facename)
 // ----------------------------------------------------------------------------
 
 int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
-                                  DWORD WXUNUSED(dwStyle), LPARAM lParam)
+                                  DWORD WXUNUSED(dwStyle), WXLPARAM lParam)
 {
 
     // we used to process TrueType fonts only, but there doesn't seem to be any

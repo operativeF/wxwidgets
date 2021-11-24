@@ -22,6 +22,8 @@
 
 #include <ddeml.h>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // macros and constants
 // ----------------------------------------------------------------------------
@@ -42,8 +44,8 @@ static void DDEDeleteConnection(HCONV hConv);
 static wxDDEServer *DDEFindServer(const wxString& s);
 
 extern "C" HDDEDATA EXPENTRY
-_DDECallback(UINT wType,
-             UINT wFmt,
+_DDECallback(WXUINT wType,
+             WXUINT wFmt,
              HCONV hConv,
              HSZ hsz1,
              HSZ hsz2,
@@ -61,8 +63,8 @@ static wxString DDEStringFromAtom(HSZ hsz);
 static void DDEFreeString(HSZ hsz);
 
 // error handling
-static wxString DDEGetErrorMsg(UINT error);
-static void DDELogError(const wxString& s, UINT error = DMLERR_NO_ERROR);
+static wxString DDEGetErrorMsg(WXUINT error);
+static void DDELogError(const wxString& s, WXUINT error = DMLERR_NO_ERROR);
 
 // ----------------------------------------------------------------------------
 // global variables
@@ -121,7 +123,7 @@ extern void wxDDEInitialize()
     if ( !DDEInitialized )
     {
         // Should insert filter flags
-        const UINT rc = DdeInitialize(&DDEIdInst, _DDECallback, APPCLASS_STANDARD, 0L);
+        const WXUINT rc = DdeInitialize(&DDEIdInst, _DDECallback, APPCLASS_STANDARD, 0L);
         if ( rc != DMLERR_NO_ERROR )
         {
             DDELogError("Failed to initialize DDE", rc);
@@ -743,8 +745,8 @@ bool wxDDEConnection::DoAdvise(const wxString& item,
 using DDERETURN = HDDEDATA;
 
 HDDEDATA EXPENTRY
-_DDECallback(UINT wType,
-             UINT wFmt,
+_DDECallback(WXUINT wType,
+             WXUINT wFmt,
              HCONV hConv,
              HSZ hsz1,
              HSZ hsz2,
@@ -1079,7 +1081,7 @@ static void DDEFreeString(HSZ hsz)
 // error handling
 // ----------------------------------------------------------------------------
 
-static void DDELogError(const wxString& s, UINT error)
+static void DDELogError(const wxString& s, WXUINT error)
 {
     if ( !error )
     {
@@ -1089,7 +1091,7 @@ static void DDELogError(const wxString& s, UINT error)
     wxLogError(s + ": " + DDEGetErrorMsg(error));
 }
 
-static wxString DDEGetErrorMsg(UINT error)
+static wxString DDEGetErrorMsg(WXUINT error)
 {
     wxString err;
     switch ( error )

@@ -38,9 +38,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontDialog, wxDialog);
 static
 UINT_PTR CALLBACK
 wxFontDialogHookProc(WXHWND hwnd,
-                     UINT uiMsg,
-                     WPARAM WXUNUSED(wParam),
-                     LPARAM lParam)
+                     WXUINT uiMsg,
+                     WXWPARAM WXUNUSED(wParam),
+                     WXLPARAM lParam)
 {
     if ( uiMsg == WM_INITDIALOG )
     {
@@ -93,7 +93,7 @@ int wxFontDialog::ShowModal()
     if ( !m_title.empty() )
     {
         flags |= CF_ENABLEHOOK;
-        chooseFontStruct.lCustData = (LPARAM)this;
+        chooseFontStruct.lCustData = (WXLPARAM)this;
         chooseFontStruct.lpfnHook = wxFontDialogHookProc;
     }
 

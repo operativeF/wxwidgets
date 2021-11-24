@@ -191,7 +191,7 @@ int setdrive(int drive)
 bool wxIsDriveAvailable(const std::string& dirName)
 {
 #ifdef __WIN32__
-    UINT errorMode = SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
+    WXUINT errorMode = SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 #endif
     bool success = true;
 

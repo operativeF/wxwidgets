@@ -31,7 +31,7 @@ import <string>;
 // ---------------------------------------------------------------------------
 
 extern INT_PTR APIENTRY
-wxDlgProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxDlgProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 // ===========================================================================
 // implementation

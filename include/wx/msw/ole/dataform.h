@@ -18,7 +18,7 @@
 class wxDataFormat
 {
 public:
-    // the clipboard formats under Win32 are WORD's
+    // the clipboard formats under Win32 are WXWORD's
     using NativeFormat = unsigned short;
 
     wxDataFormat(NativeFormat format = wxDF_INVALID) : m_format{format} {}

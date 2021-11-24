@@ -35,11 +35,11 @@ namespace
 // MinGW doesn't provide SHDefExtractIcon() up to at least the 5.3 version, so
 // define it ourselves.
 HRESULT
-MSW_SHDefExtractIcon(LPCTSTR pszIconFile, int iIndex, UINT uFlags,
-                     WXHICON *phiconLarge, WXHICON *phiconSmall, UINT nIconSize)
+MSW_SHDefExtractIcon(LPCTSTR pszIconFile, int iIndex, WXUINT uFlags,
+                     WXHICON *phiconLarge, WXHICON *phiconSmall, WXUINT nIconSize)
 {
     typedef HRESULT
-    (WINAPI *SHDefExtractIcon_t)(LPCTSTR, int, UINT, WXHICON*, WXHICON*, UINT);
+    (WINAPI *SHDefExtractIcon_t)(LPCTSTR, int, WXUINT, WXHICON*, WXHICON*, WXUINT);
 
     static SHDefExtractIcon_t s_SHDefExtractIcon = NULL;
     if ( !s_SHDefExtractIcon )
@@ -91,10 +91,10 @@ SHSTOCKICONID MSWGetStockIconIdForArtProviderId(const wxArtID& art_id)
 // even on pre-Vista Windows versions
 HRESULT
 MSW_SHGetStockIconInfo(SHSTOCKICONID siid,
-                       UINT uFlags,
+                       WXUINT uFlags,
                        SHSTOCKICONINFO *psii)
 {
-    using PSHGETSTOCKICONINFO = HRESULT (WINAPI*)(SHSTOCKICONID, UINT, SHSTOCKICONINFO *);
+    using PSHGETSTOCKICONINFO = HRESULT (WINAPI*)(SHSTOCKICONID, WXUINT, SHSTOCKICONINFO *);
     static PSHGETSTOCKICONINFO pSHGetStockIconInfo = (PSHGETSTOCKICONINFO)-1;
 
     if ( pSHGetStockIconInfo == (PSHGETSTOCKICONINFO)-1 )
@@ -218,7 +218,7 @@ wxBitmap wxWindowsArtProvider::CreateBitmap(const wxArtID& id,
     {
         WinStruct<SHSTOCKICONINFO> sii;
 
-        UINT uFlags = SHGSI_ICONLOCATION | SHGSI_SYSICONINDEX;
+        WXUINT uFlags = SHGSI_ICONLOCATION | SHGSI_SYSICONINDEX;
 
         HRESULT res = MSW_SHGetStockIconInfo(stockIconId, uFlags, &sii);
         if ( res == S_OK )

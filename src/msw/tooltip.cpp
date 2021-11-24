@@ -146,14 +146,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToolTipModule, wxModule);
 // send a message to the tooltip control if it exists
 //
 // NB: wParam is always 0 for the TTM_XXX messages we use
-static inline LRESULT SendTooltipMessage(WXHWND hwnd, UINT msg, void *lParam)
+static inline LRESULT SendTooltipMessage(WXHWND hwnd, WXUINT msg, void *lParam)
 {
-    return hwnd ? ::SendMessageW((WXHWND)hwnd, msg, 0, (LPARAM)lParam) : 0;
+    return hwnd ? ::SendMessageW((WXHWND)hwnd, msg, 0, (WXLPARAM)lParam) : 0;
 }
 
 // send a message to all existing tooltip controls
 static inline void
-SendTooltipMessageToAll(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+SendTooltipMessageToAll(WXHWND hwnd, WXUINT msg, WXWPARAM wParam, WXLPARAM lParam)
 {
     if ( hwnd )
         ::SendMessageW((WXHWND)hwnd, msg, wParam, lParam);
@@ -170,9 +170,9 @@ SendTooltipMessageToAll(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY wxToolTipWndProc(WXHWND hwndTT,
-                                  UINT msg,
-                                  WPARAM wParam,
-                                  LPARAM lParam)
+                                  WXUINT msg,
+                                  WXWPARAM wParam,
+                                  WXLPARAM lParam)
 {
     if ( msg == TTM_WINDOWFROMPOINT )
     {

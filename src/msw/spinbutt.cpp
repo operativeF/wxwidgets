@@ -185,7 +185,7 @@ void wxSpinButton::SetRange(int minVal, int maxVal)
 #else
     // we're limited to 16 bit
     ::SendMessageW(GetHwnd(), UDM_SETRANGE, 0,
-                  (LPARAM) MAKELONG((short)maxVal, (short)minVal));
+                  (WXLPARAM) MAKELONG((short)maxVal, (short)minVal));
 #endif // UDM_SETRANGE32
 
     // the current value might be out of the new range, force it to be in it

@@ -306,8 +306,8 @@ WXHCURSOR wxBitmapToHCURSOR(const wxBitmap& bmp, int hotSpotX, int hotSpotY);
 
 extern int wxGetSystemMetrics(int nIndex, const wxWindow* win);
 
-extern bool wxSystemParametersInfo(UINT uiAction, UINT uiParam,
-                                   PVOID pvParam, UINT fWinIni,
+extern bool wxSystemParametersInfo(WXUINT uiAction, WXUINT uiParam,
+                                   PVOID pvParam, WXUINT fWinIni,
                                    const wxWindow* win);
 
 #if wxUSE_OWNER_DRAWN
@@ -321,7 +321,7 @@ enum wxDSBStates
 };
 
 extern
-BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, UINT uState);
+BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, WXUINT uState);
 
 #endif // wxUSE_OWNER_DRAWN
 
@@ -879,7 +879,7 @@ wxFontEncoding wxGetFontEncFromCharSet(int charset);
 inline void wxSetWindowFont(WXHWND hwnd, const wxFont& font)
 {
     ::SendMessageW(hwnd, WM_SETFONT,
-                  (WPARAM)GetHfontOf(font), MAKELPARAM(TRUE, 0));
+                  (WXWPARAM)GetHfontOf(font), MAKELPARAM(TRUE, 0));
 }
 
 void wxSliderEvent(WXHWND control, WXWORD wParam, WXWORD pos);

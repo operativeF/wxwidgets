@@ -220,7 +220,7 @@ public:
     HRESULT STDMETHODCALLTYPE GetTypeInfoCount(unsigned int *) override
     {   return E_NOTIMPL;   }
     HRESULT STDMETHODCALLTYPE Invoke(DISPID dispIdMember, REFIID, LCID,
-                            WORD wFlags, DISPPARAMS *,
+                            WXWORD wFlags, DISPPARAMS *,
                             VARIANT * pVarResult, EXCEPINFO *,
                             unsigned int *) override
     {
@@ -335,7 +335,7 @@ public:
     STDMETHOD(RemoveMenus)(WXHMENU) override {return S_OK;}
     STDMETHOD(SetStatusText)(LPCOLESTR) override {return S_OK;}
     HRESULT STDMETHODCALLTYPE EnableModeless(BOOL) override {return S_OK;}
-    HRESULT STDMETHODCALLTYPE TranslateAccelerator(LPMSG lpmsg, WORD) override
+    HRESULT STDMETHODCALLTYPE TranslateAccelerator(LPMSG lpmsg, WXWORD) override
     {
         // TODO: send an event with this id
         if (m_window->m_oleInPlaceActiveObject.IsOk())
@@ -690,7 +690,7 @@ public:
 
     STDMETHODIMP Invoke(DISPID dispIdMember, REFIID riid,
                         LCID lcid,
-                          WORD wFlags, DISPPARAMS * pDispParams,
+                          WXWORD wFlags, DISPPARAMS * pDispParams,
                           VARIANT * pVarResult, EXCEPINFO * pExcepInfo,
                           unsigned int * puArgErr) override
     {

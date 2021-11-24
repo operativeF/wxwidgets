@@ -33,8 +33,8 @@
 #endif
 
 // initialized on demand
-static UINT gs_msgTaskbar = 0;
-static UINT gs_msgRestartTaskbar = 0;
+static WXUINT gs_msgTaskbar = 0;
+static WXUINT gs_msgRestartTaskbar = 0;
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTaskBarIcon, wxEvtHandler);

@@ -21,6 +21,8 @@
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
 
+import WX.WinDef;
+
 import <vector>;
 
 // ============================================================================

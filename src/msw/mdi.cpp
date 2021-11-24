@@ -858,7 +858,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
   wxWindowCreationHook hook(this);
 
   m_hWnd = (WXHWND)::SendMessageW(GetHwndOf(parent->GetClientWindow()),
-                                 WM_MDICREATE, 0, (LPARAM)&mcs);
+                                 WM_MDICREATE, 0, (WXLPARAM)&mcs);
 
   if ( !m_hWnd )
   {
@@ -1051,7 +1051,7 @@ void wxMDIChildFrame::Maximize(bool maximize)
 
         ::SendMessageW(GetHwndOf(parent->GetClientWindow()),
                       maximize ? WM_MDIMAXIMIZE : WM_MDIRESTORE,
-                      (WPARAM)GetHwnd(), 0);
+                      (WXWPARAM)GetHwnd(), 0);
 
         if ( !IsShown() )
         {
@@ -1071,7 +1071,7 @@ void wxMDIChildFrame::Restore()
     if ( parent && parent->GetClientWindow() )
     {
         ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIRESTORE,
-                      (WPARAM) GetHwnd(), 0);
+                      (WXWPARAM) GetHwnd(), 0);
     }
 }
 
@@ -1086,7 +1086,7 @@ void wxMDIChildFrame::Activate()
             Restore();
 
         ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIACTIVATE,
-                      (WPARAM) GetHwnd(), 0);
+                      (WXWPARAM) GetHwnd(), 0);
     }
 }
 
@@ -1220,7 +1220,7 @@ bool wxMDIChildFrame::HandleGetMinMaxInfo(void *mmInfo)
 {
     // Get the window max size from DefMDIChildProc() as it calculates it
     // correctly from the size of the MDI parent frame.
-    MSWDefWindowProc(WM_GETMINMAXINFO, 0, (LPARAM)mmInfo);
+    MSWDefWindowProc(WM_GETMINMAXINFO, 0, (WXLPARAM)mmInfo);
 
     // But then handle the message as usual at the base class level to allow
     // overriding min/max frame size as for the normal frames.
@@ -1234,7 +1234,7 @@ bool wxMDIChildFrame::HandleGetMinMaxInfo(void *mmInfo)
 WXLRESULT wxMDIChildFrame::MSWDefWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     return ::DefMDIChildProcW(GetHwnd(),
-                           (UINT)message, (WPARAM)wParam, (LPARAM)lParam);
+                           (WXUINT)message, (WXWPARAM)wParam, (WXLPARAM)lParam);
 }
 
 bool wxMDIChildFrame::MSWTranslateMessage(WXMSG* msg)
@@ -1258,7 +1258,7 @@ void wxMDIChildFrame::MSWDestroyWindow()
 
     WXHWND oldHandle = (WXHWND)GetHWND();
     ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIDESTROY,
-                (WPARAM)oldHandle, 0);
+                (WXWPARAM)oldHandle, 0);
 
     if (parent->GetActiveChild() == nullptr)
         ResetWindowStyle(nullptr);
@@ -1448,8 +1448,8 @@ void MDISetMenu(wxWindow *win, WXHMENU hmenuFrame, WXHMENU hmenuWindow)
 
         if ( !::SendMessageW(GetHwndOf(win),
                             WM_MDISETMENU,
-                            (WPARAM)hmenuFrame,
-                            (LPARAM)hmenuWindow) )
+                            (WXWPARAM)hmenuFrame,
+                            (WXLPARAM)hmenuWindow) )
         {
             const DWORD err = ::GetLastError();
             if ( err != ERROR_SUCCESS )

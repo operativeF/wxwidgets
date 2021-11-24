@@ -126,21 +126,21 @@ wxCreateDevNames(const wxString& driverName,
     }
     else
     {
-        hDev = GlobalAlloc(GPTR, 4*sizeof(WORD)+
+        hDev = GlobalAlloc(GPTR, 4*sizeof(WXWORD)+
                            ( driverName.length() + 1 +
             printerName.length() + 1 +
                              portName.length()+1 ) * sizeof(wxChar) );
 
         GlobalPtrLock ptr(hDev);
         LPDEVNAMES lpDev = (LPDEVNAMES)ptr.Get();
-        lpDev->wDriverOffset = sizeof(WORD) * 4 / sizeof(wxChar);
+        lpDev->wDriverOffset = sizeof(WXWORD) * 4 / sizeof(wxChar);
         wxStrcpy((wxChar*)lpDev + lpDev->wDriverOffset, driverName);
 
-        lpDev->wDeviceOffset = (WORD)( lpDev->wDriverOffset +
+        lpDev->wDeviceOffset = (WXWORD)( lpDev->wDriverOffset +
                                        driverName.length() + 1 );
         wxStrcpy((wxChar*)lpDev + lpDev->wDeviceOffset, printerName);
 
-        lpDev->wOutputOffset = (WORD)( lpDev->wDeviceOffset +
+        lpDev->wOutputOffset = (WXWORD)( lpDev->wDeviceOffset +
                                        printerName.length() + 1 );
         wxStrcpy((wxChar*)lpDev + lpDev->wOutputOffset, portName);
 
@@ -781,11 +781,11 @@ bool wxWindowsPrintDialog::ConvertToNative( wxPrintDialogData &data )
 
 
     pd->hDC = nullptr;
-    pd->nFromPage = (WORD)data.GetFromPage();
-    pd->nToPage = (WORD)data.GetToPage();
-    pd->nMinPage = (WORD)data.GetMinPage();
-    pd->nMaxPage = (WORD)data.GetMaxPage();
-    pd->nCopies = (WORD)data.GetNoCopies();
+    pd->nFromPage = (WXWORD)data.GetFromPage();
+    pd->nToPage = (WXWORD)data.GetToPage();
+    pd->nMinPage = (WXWORD)data.GetMinPage();
+    pd->nMaxPage = (WXWORD)data.GetMaxPage();
+    pd->nCopies = (WXWORD)data.GetNoCopies();
 
     pd->Flags = PD_RETURNDC;
     pd->lStructSize = sizeof( PRINTDLG );

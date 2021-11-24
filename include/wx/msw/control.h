@@ -11,6 +11,8 @@
 #ifndef _WX_CONTROL_H_
 #define _WX_CONTROL_H_
 
+import WX.WinDef;
+
 import <string>;
 import <vector>;
 

@@ -296,7 +296,7 @@ public:
 
     // ------------------------------------------------------------------------
     // helpers for message handlers: these perform the same function as the
-    // message crackers from <windowsx.h> - they unpack WPARAM and LPARAM into
+    // message crackers from <windowsx.h> - they unpack WXWPARAM and WXLPARAM into
     // the correct parameters
     // ------------------------------------------------------------------------
 

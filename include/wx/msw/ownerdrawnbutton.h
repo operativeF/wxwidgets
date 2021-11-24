@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_OWNERDRAWNBUTTON_H_
 #define _WX_MSW_OWNERDRAWNBUTTON_H_
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 // ----------------------------------------------------------------------------

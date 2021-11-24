@@ -195,7 +195,7 @@ public:
     static DWriteCreateFactory_t DWriteCreateFactory;
 
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
-    using D3D11CreateDevice_t = HRESULT (WINAPI*)(IDXGIAdapter*, D3D_DRIVER_TYPE, WXHMODULE, UINT, CONST D3D_FEATURE_LEVEL*, UINT, UINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
+    using D3D11CreateDevice_t = HRESULT (WINAPI*)(IDXGIAdapter*, D3D_DRIVER_TYPE, WXHMODULE, WXUINT, CONST D3D_FEATURE_LEVEL*, WXUINT, WXUINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
     static D3D11CreateDevice_t D3D11CreateDevice;
 #endif
 
@@ -317,10 +317,10 @@ HRESULT WINAPI wxD3D11CreateDevice(
     IDXGIAdapter* pAdapter,
     D3D_DRIVER_TYPE DriverType,
     WXHMODULE Software,
-    UINT Flags,
+    WXUINT Flags,
     CONST D3D_FEATURE_LEVEL* pFeatureLevels,
-    UINT FeatureLevels,
-    UINT SDKVersion,
+    WXUINT FeatureLevels,
+    WXUINT SDKVersion,
     ID3D11Device** ppDevice,
     D3D_FEATURE_LEVEL* pFeatureLevel,
     ID3D11DeviceContext** ppImmediateContext)
@@ -2155,11 +2155,11 @@ void CreateWICBitmapFromImage(const wxImage& img, bool forceAlpha, IWICBitmap** 
     hr = (*ppBmp)->Lock(&rcLock, WICBitmapLockWrite, &pLock);
     wxCHECK_HRESULT_RET(hr);
 
-    UINT rowStride = 0;
+    WXUINT rowStride = 0;
     hr = pLock->GetStride(&rowStride);
     wxCHECK_HRESULT_RET(hr);
 
-    UINT bufferSize = 0;
+    WXUINT bufferSize = 0;
     BYTE* pBuffer = nullptr;
     hr = pLock->GetDataPointer(&bufferSize, &pBuffer);
     wxCHECK_HRESULT_RET(hr);
@@ -2225,7 +2225,7 @@ void CreateWICBitmapFromImage(const wxImage& img, bool forceAlpha, IWICBitmap** 
 
 void CreateImageFromWICBitmap(IWICBitmap* pBmp, wxImage* pImg)
 {
-    UINT width, height;
+    WXUINT width, height;
     HRESULT hr = pBmp->GetSize(&width, &height);
     wxCHECK_HRESULT_RET(hr);
 
@@ -2234,11 +2234,11 @@ void CreateImageFromWICBitmap(IWICBitmap* pBmp, wxImage* pImg)
     hr = pBmp->Lock(&rcLock, WICBitmapLockRead, &pLock);
     wxCHECK_HRESULT_RET(hr);
 
-    UINT rowStride = 0;
+    WXUINT rowStride = 0;
     hr = pLock->GetStride(&rowStride);
     wxCHECK_HRESULT_RET(hr);
 
-    UINT bufferSize = 0;
+    WXUINT bufferSize = 0;
     BYTE* pBmpBuffer = nullptr;
     hr = pLock->GetDataPointer(&bufferSize, &pBmpBuffer);
     wxCHECK_HRESULT_RET(hr);
@@ -2271,10 +2271,10 @@ void CreateImageFromWICBitmap(IWICBitmap* pBmp, wxImage* pImg)
 
     unsigned char* destRGB = pImg->GetData();
     unsigned char* destAlpha = pImg->GetAlpha();
-    for ( UINT y = 0; y < height; y++ )
+    for ( WXUINT y = 0; y < height; y++ )
     {
         BYTE* pPixByte = pBmpBuffer;
-        for ( UINT x = 0; x < width; x++ )
+        for ( WXUINT x = 0; x < width; x++ )
         {
             wxPBGRAColor color = wxPBGRAColor(pPixByte);
             unsigned char a = hasAlpha ? color.a : wxIMAGE_ALPHA_OPAQUE;
@@ -2303,7 +2303,7 @@ public:
     {
     }
 
-    HRESULT STDMETHODCALLTYPE GetSize(__RPC__out UINT *width, __RPC__out UINT *height) override
+    HRESULT STDMETHODCALLTYPE GetSize(__RPC__out WXUINT *width, __RPC__out WXUINT *height) override
     {
         if (width != nullptr) *width = 8;
         if (height != nullptr) *height = 8;
@@ -2330,8 +2330,8 @@ public:
 
     HRESULT STDMETHODCALLTYPE CopyPixels(
         const WICRect* WXUNUSED(prc),
-        UINT WXUNUSED(stride),
-        UINT WXUNUSED(bufferSize),
+        WXUINT WXUNUSED(stride),
+        WXUINT WXUNUSED(bufferSize),
         BYTE *buffer) override
     {
         // patterns are encoded in a bit map of size 8 x 8
@@ -2447,7 +2447,7 @@ public:
     explicit wxBitmapPixelWriteLock(IWICBitmap* bitmap)
     {
         // Retrieve the size of the bitmap
-        UINT w, h;
+        WXUINT w, h;
         bitmap->GetSize(&w, &h);
         WICRect lockSize = {0, 0, (INT)w, (INT)h};
 
@@ -2491,7 +2491,7 @@ public:
             {
                 wxBitmapPixelWriteLock lock(m_srcBitmap);
 
-                UINT bufferSize = 0;
+                WXUINT bufferSize = 0;
                 hr = lock.GetLock()->GetDataPointer(&bufferSize, &resultBuffer);
 
                 static const wxPBGRAColor transparentColor(wxTransparentColour);
@@ -2528,7 +2528,7 @@ public:
 
     wxSize GetSize() const
     {
-        UINT w, h;
+        WXUINT w, h;
         HRESULT hr = m_srcBitmap->GetSize(&w, &h);
         wxCHECK2_HRESULT_RET(hr, wxSize());
 
@@ -3536,7 +3536,7 @@ protected:
     {
         // This flag adds support for surfaces with a different color channel ordering than the API default.
         // You need it for compatibility with Direct2D.
-        UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+        WXUINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 
         // This array defines the set of DirectX hardware feature levels this app  supports.
         // The ordering is important and you should  preserve it.

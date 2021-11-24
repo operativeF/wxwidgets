@@ -51,7 +51,7 @@ public:
 
     wxPaletteRefData(const wxPaletteRefData& data)
     {
-        const UINT n = data.GetEntries();
+        const WXUINT n = data.GetEntries();
         if ( !n )
             return;
 
@@ -67,14 +67,14 @@ public:
 
     bool IsOk() const override { return m_hPalette.get() != nullptr; }
 
-    UINT GetEntries() const
+    WXUINT GetEntries() const
     {
         return ::GetPaletteEntries(m_hPalette.get(), 0, 0, nullptr);
     }
 
 private:
     // caller must free() the pointer
-    static LOGPALETTE *Alloc(UINT numEntries)
+    static LOGPALETTE *Alloc(WXUINT numEntries)
     {
         LOGPALETTE *pPal = (LOGPALETTE *)
             malloc(sizeof(LOGPALETTE) + numEntries*sizeof(PALETTEENTRY));

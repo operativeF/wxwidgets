@@ -14,7 +14,7 @@
 // implementation
 // ============================================================================
 
-LPARAM wxMSWImpl::CustomDraw::HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc)
+WXLPARAM wxMSWImpl::CustomDraw::HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc)
 {
     if ( attr.HasTextColour() )
         ::SetTextColor(hdc, wxColourToRGB(attr.GetTextColour()));
@@ -32,7 +32,7 @@ LPARAM wxMSWImpl::CustomDraw::HandleItemPrepaint(const wxItemAttr& attr, WXHDC h
     return CDRF_DODEFAULT;
 }
 
-LPARAM wxMSWImpl::CustomDraw::HandleCustomDraw(LPARAM lParam)
+WXLPARAM wxMSWImpl::CustomDraw::HandleCustomDraw(WXLPARAM lParam)
 {
     NMCUSTOMDRAW* nmcd = reinterpret_cast<NMCUSTOMDRAW*>(lParam);
     switch ( nmcd->dwDrawStage )

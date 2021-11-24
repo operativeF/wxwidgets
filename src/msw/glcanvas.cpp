@@ -20,7 +20,7 @@
 
 // from src/msw/window.cpp
 LRESULT APIENTRY
-wxWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 #ifdef GL_EXT_vertex_array
     #define WXUNUSED_WITHOUT_GL_EXT_vertex_array(name) name
@@ -1038,9 +1038,9 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
                  (WXHDC hdc,
                   const int *piAttribIList,
                   const FLOAT *pfAttribFList,
-                  UINT nMaxFormats,
+                  WXUINT nMaxFormats,
                   int *piFormats,
-                  UINT *nNumFormats
+                  WXUINT *nNumFormats
                  );
 
     wxDEFINE_WGL_FUNC(wglChoosePixelFormatARB); // get a pointer to it
@@ -1086,7 +1086,7 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
         if ( ppfd )
             SetPFDForAttributes(*ppfd, attrsListWGL);
 
-        UINT numFormats = 0;
+        WXUINT numFormats = 0;
 
         // Get the first good match
         if ( !wglChoosePixelFormatARB(dummyHDC, attrsListWGL, nullptr,
@@ -1214,7 +1214,7 @@ wxPalette wxGLCanvas::CreateDefaultPalette()
     LOGPALETTE* pPal =
      (LOGPALETTE*) malloc(sizeof(LOGPALETTE) + paletteSize * sizeof(PALETTEENTRY));
     pPal->palVersion = 0x300;
-    pPal->palNumEntries = (WORD)paletteSize;
+    pPal->palNumEntries = (WXWORD)paletteSize;
 
     /* build a simple RGB color palette */
     int redMask = (1 << pfd.cRedBits) - 1;

@@ -253,7 +253,7 @@ int wxSystemSettingsNative::GetMetric(wxSystemMetric index, const wxWindow* win)
     // wxSYS_CARET_ON_MSEC and wxSYS_CARET_OFF_MSEC
     if ( index == wxSYS_CARET_ON_MSEC || index == wxSYS_CARET_OFF_MSEC )
     {
-        const UINT blinkTime = ::GetCaretBlinkTime();
+        const WXUINT blinkTime = ::GetCaretBlinkTime();
 
         if ( blinkTime == 0 ) // error
         {

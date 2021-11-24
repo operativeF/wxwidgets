@@ -292,7 +292,7 @@ protected:
         return !HandleTreeEvent(event) || event.IsAllowed();
     }
 
-    // generate a wxEVT_KEY_DOWN event from the specified WPARAM/LPARAM values
+    // generate a wxEVT_KEY_DOWN event from the specified WXWPARAM/WXLPARAM values
     // having the same meaning as for WM_KEYDOWN, return true if it was
     // processed
     bool MSWHandleTreeKeyDownEvent(WXWPARAM wParam, WXLPARAM lParam);

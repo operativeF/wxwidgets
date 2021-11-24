@@ -2,6 +2,8 @@ module;
 
 #include <windows.h>
 
+#include <CommCtrl.h>
+
 export module WX.WinDef;
 
 export
@@ -25,12 +27,24 @@ using WXHPEN         = HPEN;
 using WXHRGN         = HRGN;
 using WXHWND         = HWND;
 
+using WXHIMAGELIST   = HIMAGELIST;
+using WXHGLOBAL      = HGLOBAL;
+
+using WXDPI_AWARENESS_CONTEXT = DPI_AWARENESS_CONTEXT;
+
 using WXWidget    = WXHWND;
 
 using WXLPARAM    = LPARAM;
 using WXWPARAM    = WPARAM;
 using WXLRESULT   = LRESULT;
 
-typedef WXLRESULT (_stdcall *WXWNDPROC)(WXHWND, UINT, WXWPARAM, WXLPARAM);
+using WXUINT      = UINT;
+using WXWORD      = WORD;
+
+using WXDRAWITEMSTRUCT    = void*;
+using WXMEASUREITEMSTRUCT = void*;
+using WXLPCREATESTRUCT    = void*;
+
+typedef WXLRESULT (_stdcall *WXWNDPROC)(WXHWND, WXUINT, WXWPARAM, WXLPARAM);
 
 } // export

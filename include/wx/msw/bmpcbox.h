@@ -10,8 +10,9 @@
 #ifndef _WX_MSW_BMPCBOX_H_
 #define _WX_MSW_BMPCBOX_H_
 
-
 #include "wx/combobox.h"
+
+import WX.WinDef;
 
 import <string>;
 import <vector>;

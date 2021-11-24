@@ -55,7 +55,7 @@ namespace
 {
 
 // make the given menu item default
-void SetDefaultMenuItem(WXHMENU hmenu, UINT id)
+void SetDefaultMenuItem(WXHMENU hmenu, WXUINT id)
 {
     WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_STATE;
@@ -69,7 +69,7 @@ void SetDefaultMenuItem(WXHMENU hmenu, UINT id)
 
 // make the given menu item owner-drawn
 void SetOwnerDrawnMenuItem(WXHMENU hmenu,
-                           UINT id,
+                           WXUINT id,
                            ULONG_PTR data,
                            BOOL byPositon = FALSE)
 {
@@ -266,7 +266,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
 #endif // wxUSE_ACCEL
 
     // we should support disabling the item even prior to adding it to the menu
-    UINT flags = pItem->IsEnabled() ? MF_ENABLED : MF_GRAYED;
+    WXUINT flags = pItem->IsEnabled() ? MF_ENABLED : MF_GRAYED;
 
     // if "Break" has just been called, insert a menu break before this item
     // (and don't forget to reset the flag)
@@ -595,7 +595,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
     }
 
     // remove the item from the menu
-    if ( !::RemoveMenu(GetHmenu(), gsl::narrow_cast<UINT>(pos), MF_BYPOSITION) )
+    if ( !::RemoveMenu(GetHmenu(), gsl::narrow_cast<WXUINT>(pos), MF_BYPOSITION) )
     {
         wxLogLastError("RemoveMenu");
     }
@@ -708,7 +708,7 @@ void wxMenu::SetTitle(const std::string& label)
     // put the title string in bold face
     if ( !m_title.empty() )
     {
-        SetDefaultMenuItem(GetHmenu(), (UINT)idMenuTitle);
+        SetDefaultMenuItem(GetHmenu(), (WXUINT)idMenuTitle);
     }
 }
 
@@ -742,7 +742,7 @@ bool wxMenu::MSWCommand(WXUINT WXUNUSED(param), WXWORD id_)
                 //
                 // Also notice that we must pass unsigned id_ and not sign-extended id
                 // to ::GetMenuState() as this is what it expects.
-                UINT menuState = ::GetMenuState(GetHmenu(), id_, MF_BYCOMMAND);
+                WXUINT menuState = ::GetMenuState(GetHmenu(), id_, MF_BYCOMMAND);
                 checked = (menuState & MF_CHECKED) != 0;
             }
 
@@ -936,7 +936,7 @@ void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
     int mswpos = MSWPositionForWxMenu(GetMenu(pos),pos);
 
     UINT_PTR id;
-    UINT flagsOld = ::GetMenuState((WXHMENU)m_hMenu, mswpos, MF_BYPOSITION);
+    WXUINT flagsOld = ::GetMenuState((WXHMENU)m_hMenu, mswpos, MF_BYPOSITION);
     if ( flagsOld == 0xFFFFFFFF )
     {
         wxLogLastError("GetMenuState");
@@ -989,12 +989,12 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const std::string& title)
         int mswpos = MSWPositionForWxMenu(menuOld,pos);
 
         // can't use ModifyMenu() because it deletes the submenu it replaces
-        if ( !::RemoveMenu(GetHmenu(), (UINT)mswpos, MF_BYPOSITION) )
+        if ( !::RemoveMenu(GetHmenu(), (WXUINT)mswpos, MF_BYPOSITION) )
         {
             wxLogLastError("RemoveMenu");
         }
 
-        if ( !::InsertMenuW(GetHmenu(), (UINT)mswpos,
+        if ( !::InsertMenuW(GetHmenu(), (WXUINT)mswpos,
                            MF_BYPOSITION | MF_POPUP | MF_STRING,
                            (UINT_PTR)GetHmenuOf(menu),
                            boost::nowide::widen(title).c_str()) )
@@ -1122,7 +1122,7 @@ wxMenu *wxMenuBar::Remove(size_t pos)
 
     if (GetHmenu())
     {
-        if ( !::RemoveMenu(GetHmenu(), (UINT)MSWPositionForWxMenu(menu,pos), MF_BYPOSITION) )
+        if ( !::RemoveMenu(GetHmenu(), (WXUINT)MSWPositionForWxMenu(menu,pos), MF_BYPOSITION) )
         {
             wxLogLastError("RemoveMenu");
         }

@@ -48,7 +48,7 @@ bool wxImageList::Create(int width, int height, bool mask, int initial)
 {
     // Prevent from storing negative dimensions
     m_size = wxSize(std::max(width, 0), std::max(height, 0));
-    UINT flags = 0;
+    WXUINT flags = 0;
 
     // as we want to be able to use 32bpp bitmaps in the image lists, we always
     // use ILC_COLOR32, even if the display resolution is less -- the system
@@ -324,7 +324,7 @@ bool wxImageList::Draw(int index,
 
     ImageList_SetBkColor(GetHImageList(), clr);
 
-    UINT style = 0;
+    WXUINT style = 0;
     if ( flags & wxIMAGELIST_DRAW_NORMAL )
         style |= ILD_NORMAL;
     if ( flags & wxIMAGELIST_DRAW_TRANSPARENT )

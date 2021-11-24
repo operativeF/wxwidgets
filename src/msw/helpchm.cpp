@@ -30,7 +30,7 @@
 // of hhctrl.ocx
 // ----------------------------------------------------------------------------
 
-using HTMLHELP = WXHWND ( WINAPI*)( WXHWND, LPCWSTR, UINT, ULONG_PTR );
+using HTMLHELP = WXHWND ( WINAPI*)( WXHWND, LPCWSTR, WXUINT, ULONG_PTR );
 constexpr char HTMLHELP_NAME[] = "HtmlHelpW";
 
 HTMLHELP GetHtmlHelpFunction()
@@ -147,7 +147,7 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
     HH_POPUP popup = {
         .cbStruct{sizeof(popup)},
         .hinst{(WXHINSTANCE) wxGetInstance()},
-        .idString{gsl::narrow_cast<UINT>(contextId)},
+        .idString{gsl::narrow_cast<WXUINT>(contextId)},
         .pszText{stackText.get()},
         .pt{pos.x, pos.y},
         .clrForeground{::GetSysColor(COLOR_INFOTEXT)},

@@ -277,7 +277,7 @@ static DWORD __stdcall wxExecuteThread(void *arg)
                           "process should have terminated" );
 
             // send a message indicating process termination to the window
-            ::SendMessageW(data->hWnd, wxWM_PROC_TERMINATED, 0, (LPARAM)data);
+            ::SendMessageW(data->hWnd, wxWM_PROC_TERMINATED, 0, (WXLPARAM)data);
             break;
 
         case WAIT_OBJECT_0 + 1:
@@ -301,7 +301,7 @@ static DWORD __stdcall wxExecuteThread(void *arg)
 // window procedure of a hidden window which is created just to receive
 // the notification message when a process exits
 LRESULT APIENTRY
-wxExecuteWindowCbk(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxExecuteWindowCbk(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     if ( message == wxWM_PROC_TERMINATED )
     {

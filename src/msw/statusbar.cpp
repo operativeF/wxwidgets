@@ -44,10 +44,10 @@ constexpr int DEFAULT_FIELD_WIDTH = 25;
 // ----------------------------------------------------------------------------
 
 // windowsx.h and commctrl.h don't define those, so we do it here
-#define StatusBar_SetParts(h, n, w) ::SendMessageW(h, SB_SETPARTS, (WPARAM)n, (LPARAM)w)
-#define StatusBar_SetText(h, n, t)  ::SendMessageW(h, SB_SETTEXT, (WPARAM)n, (LPARAM)(LPCTSTR)t)
-#define StatusBar_GetTextLen(h, n)  LOWORD(::SendMessageW(h, SB_GETTEXTLENGTH, (WPARAM)n, 0))
-#define StatusBar_GetText(h, n, s)  LOWORD(::SendMessageW(h, SB_GETTEXT, (WPARAM)n, (LPARAM)(LPTSTR)s))
+#define StatusBar_SetParts(h, n, w) ::SendMessageW(h, SB_SETPARTS, (WXWPARAM)n, (WXLPARAM)w)
+#define StatusBar_SetText(h, n, t)  ::SendMessageW(h, SB_SETTEXT, (WXWPARAM)n, (WXLPARAM)(LPCTSTR)t)
+#define StatusBar_GetTextLen(h, n)  LOWORD(::SendMessageW(h, SB_GETTEXTLENGTH, (WXWPARAM)n, 0))
+#define StatusBar_GetText(h, n, s)  LOWORD(::SendMessageW(h, SB_GETTEXT, (WXWPARAM)n, (WXLPARAM)(LPTSTR)s))
 
 wxStatusBar::wxStatusBar()
 {
@@ -331,7 +331,7 @@ void wxStatusBar::DoUpdateStatusText(int nField)
 wxStatusBar::MSWBorders wxStatusBar::MSWGetBorders() const
 {
     int aBorders[3];
-    ::SendMessageW(GetHwnd(), SB_GETBORDERS, 0, (LPARAM)aBorders);
+    ::SendMessageW(GetHwnd(), SB_GETBORDERS, 0, (WXLPARAM)aBorders);
 
     MSWBorders borders;
     borders.horz = aBorders[0];
@@ -413,7 +413,7 @@ bool wxStatusBar::GetFieldRect(int i, wxRect& rect) const
                  "invalid statusbar field index" );
 
     RECT r;
-    if ( !::SendMessageW(GetHwnd(), SB_GETRECT, i, (LPARAM)&r) )
+    if ( !::SendMessageW(GetHwnd(), SB_GETRECT, i, (WXLPARAM)&r) )
     {
         wxLogLastError("SendMessage(SB_GETRECT)");
     }

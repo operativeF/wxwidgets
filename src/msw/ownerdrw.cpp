@@ -91,7 +91,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
 // global helper functions implemented here
 // ----------------------------------------------------------------------------
 
-BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, UINT uState)
+BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, WXUINT uState)
 {
     // determine size of bitmap image
     BITMAP bmp;
@@ -113,14 +113,14 @@ BOOL wxDrawStateBitmap(WXHDC hDC, WXHBITMAP hBitmap, int x, int y, UINT uState)
                 HIMAGELIST hIml = ::ImageList_Create(bmp.bmWidth, bmp.bmHeight,
                                                      ILC_COLOR32 | ILC_MASK, 1, 1);
                 ::ImageList_Add(hIml, hBitmap, nullptr);
-                UINT fStyle = uState == wxDSB_SELECTED ? ILD_SELECTED : ILD_NORMAL;
+                WXUINT fStyle = uState == wxDSB_SELECTED ? ILD_SELECTED : ILD_NORMAL;
                 result = ::ImageList_Draw(hIml, 0, hDC, x, y, fStyle);
                 ::ImageList_Destroy(hIml);
             }
             break;
 
         case wxDSB_DISABLED:
-            result = ::DrawStateW(hDC, nullptr, nullptr, (LPARAM)hBitmap, 0, x, y,
+            result = ::DrawStateW(hDC, nullptr, nullptr, (WXLPARAM)hBitmap, 0, x, y,
                                  bmp.bmWidth, bmp.bmHeight,
                                  DST_BITMAP | DSS_DISABLED);
             break;

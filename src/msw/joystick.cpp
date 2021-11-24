@@ -96,9 +96,9 @@ void* wxJoystickThread::Entry()
 
         joyGetPos(m_joystick, &m_joyInfo);
         m_buttons = m_joyInfo.wButtons;
-        UINT delta = m_buttons ^ m_lastJoyInfo.wButtons;
-        UINT deltaUp = delta & ~m_buttons;
-        UINT deltaDown = delta & m_buttons;
+        WXUINT delta = m_buttons ^ m_lastJoyInfo.wButtons;
+        WXUINT deltaUp = delta & ~m_buttons;
+        WXUINT deltaDown = delta & m_buttons;
 
         // Use count trailing zeros to determine which button changed.
         // Was using JOYINFOEX.dwButtons, because the docs state this is
@@ -348,7 +348,7 @@ int wxJoystick::GetVPosition() const
 
 int wxJoystick::GetMovementThreshold() const
 {
-    UINT thresh = 0;
+    WXUINT thresh = 0;
     MMRESULT res = joyGetThreshold(m_joystick, & thresh);
     if (res == JOYERR_NOERROR )
     {
@@ -360,7 +360,7 @@ int wxJoystick::GetMovementThreshold() const
 
 void wxJoystick::SetMovementThreshold(int threshold)
 {
-    joySetThreshold(m_joystick, (UINT)threshold);
+    joySetThreshold(m_joystick, (WXUINT)threshold);
 }
 
 // Capabilities

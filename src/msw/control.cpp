@@ -27,6 +27,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -553,7 +555,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     const std::string& label = m_win->GetLabel();
 
     // first we need to measure it
-    UINT fmt = DT_NOCLIP;
+    WXUINT fmt = DT_NOCLIP;
 
     // drawing underlying doesn't look well with focus rect (and the native
     // control doesn't do it)
@@ -624,7 +626,7 @@ void wxControlWithItems::MSWAllocStorage(const std::vector<std::string>& items,
     }
 
     if ( ::SendMessageW((WXHWND)MSWGetItemsHWND(), wm, numItems,
-                     (LPARAM)totalTextLength*sizeof(wxChar)) == LB_ERRSPACE )
+                     (WXLPARAM)totalTextLength*sizeof(wxChar)) == LB_ERRSPACE )
     {
         wxLogLastError("SendMessage(XX_INITSTORAGE)");
     }
@@ -635,7 +637,7 @@ int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
                                               unsigned wm)
 {
     LRESULT n = ::SendMessageW((WXHWND)MSWGetItemsHWND(), wm, pos,
-                            reinterpret_cast<LPARAM>(boost::nowide::widen(item).c_str()));
+                            reinterpret_cast<WXLPARAM>(boost::nowide::widen(item).c_str()));
     if ( n == CB_ERR || n == CB_ERRSPACE )
     {
         wxLogLastError("SendMessage(XX_ADD/INSERTSTRING)");

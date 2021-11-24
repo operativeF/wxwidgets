@@ -86,8 +86,8 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path);
 #endif // #if wxUSE_IFILEOPENDIALOG
 
 // callback used in wxDirDialog::ShowSHBrowseForFolder()
-static int CALLBACK BrowseCallbackProc(WXHWND hwnd, UINT uMsg, LPARAM lp,
-                                       LPARAM pData);
+static int CALLBACK BrowseCallbackProc(WXHWND hwnd, WXUINT uMsg, WXLPARAM lp,
+                                       WXLPARAM pData);
 
 
 // ============================================================================
@@ -187,7 +187,7 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
         .lpszTitle      = stackMessage.get(),
         .ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT,
         .lpfn           = BrowseCallbackProc,
-        .lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()) // param for the callback
+        .lParam         = reinterpret_cast<WXLPARAM>(boost::nowide::widen(m_path).c_str()) // param for the callback
     };
 
     // we always add the edit box (it doesn't hurt anybody, does it?)
@@ -455,7 +455,7 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path)
 
 // callback used in wxDirDialog::ShowSHBrowseForFolder()
 static int CALLBACK
-BrowseCallbackProc(WXHWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
+BrowseCallbackProc(WXHWND hwnd, WXUINT uMsg, WXLPARAM lp, WXLPARAM pData)
 {
     switch(uMsg)
     {

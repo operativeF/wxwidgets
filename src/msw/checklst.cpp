@@ -140,7 +140,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     int x = rc.GetX() + CHECKMARK_EXTRA_SPACE;
     int y = rc.GetY() + (rc.GetHeight() - size.y) / 2;
 
-    UINT uState = stat & wxOwnerDrawn::wxODSelected ? wxDSB_SELECTED : wxDSB_NORMAL;
+    WXUINT uState = stat & wxOwnerDrawn::wxODSelected ? wxDSB_SELECTED : wxDSB_NORMAL;
 
     // checkmarks should not be mirrored in RTL layout
     DWORD oldLayout = wxDynLoadWrappers::GetLayout(hdc);

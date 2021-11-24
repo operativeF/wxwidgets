@@ -129,7 +129,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
     wxDynamicLibrary dllWinsock("ws2_32.dll", wxDL_VERBATIM);
     if ( dllWinsock.IsLoaded() )
     {
-        using WSAStartup_t = int (PASCAL*)(WORD, WSADATA *);
+        using WSAStartup_t = int (PASCAL*)(WXWORD, WSADATA *);
         using gethostname_t = int (PASCAL*)(char *, int);
         using gethostbyname_t = hostent* (PASCAL*)(const char *);
         using gethostbyaddr_t = hostent* (PASCAL*)(const char *, int , int);
@@ -543,7 +543,7 @@ struct wxFindByPidParams
 
 // wxKill helper: EnumWindows() callback which is used to find the first (top
 // level) window belonging to the given process
-BOOL CALLBACK wxEnumFindByPidProc(WXHWND hwnd, LPARAM lParam)
+BOOL CALLBACK wxEnumFindByPidProc(WXHWND hwnd, WXLPARAM lParam)
 {
     DWORD pid;
     std::ignore = ::GetWindowThreadProcessId(hwnd, &pid);
@@ -603,7 +603,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, unsigned int flags)
     {
         case wxSIGKILL:
             // kill the process forcefully returning -1 as error code
-            if ( !::TerminateProcess(hProcess, (UINT)-1) )
+            if ( !::TerminateProcess(hProcess, (WXUINT)-1) )
             {
                 wxLogSysError(_("Failed to kill process %d"), pid);
 
@@ -637,7 +637,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, unsigned int flags)
                 // EnumWindows() has nice semantics: it returns 0 if it found
                 // something or if an error occurred and non zero if it
                 // enumerated all the window
-                if ( !::EnumWindows(wxEnumFindByPidProc, (LPARAM)&params) )
+                if ( !::EnumWindows(wxEnumFindByPidProc, (WXLPARAM)&params) )
                 {
                     // did we find any window?
                     if ( params.hwnd )
@@ -731,7 +731,7 @@ bool wxMSWActivatePID(long pid)
     wxFindByPidParams params;
     params.pid = (DWORD)pid;
 
-    if ( ::EnumWindows(wxEnumFindByPidProc, (LPARAM)&params) != 0 )
+    if ( ::EnumWindows(wxEnumFindByPidProc, (WXLPARAM)&params) != 0 )
     {
         // No windows corresponding to this PID were found.
         return false;
@@ -843,7 +843,7 @@ bool wxShutdown(unsigned int flags)
 
     if ( bOK )
     {
-        UINT wFlags = 0;
+        WXUINT wFlags = 0;
         if ( flags & wxSHUTDOWN_FORCE )
         {
             wFlags = EWX_FORCE;

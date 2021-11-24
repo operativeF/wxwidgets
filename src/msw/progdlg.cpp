@@ -143,9 +143,9 @@ private:
     void* Entry() override;
 
     static HRESULT CALLBACK TaskDialogCallbackProc(WXHWND hwnd,
-                                                   UINT uNotification,
-                                                   WPARAM wParam,
-                                                   LPARAM lParam,
+                                                   WXUINT uNotification,
+                                                   WXWPARAM wParam,
+                                                   WXLPARAM lParam,
                                                    LONG_PTR dwRefData);
 };
 
@@ -178,7 +178,7 @@ protected:
 // Helper functions
 // ============================================================================
 
-BOOL CALLBACK DisplayCloseButton(WXHWND hwnd, LPARAM lParam)
+BOOL CALLBACK DisplayCloseButton(WXHWND hwnd, WXLPARAM lParam)
 {
     wxProgressDialogSharedData *sharedData =
         (wxProgressDialogSharedData *) lParam;
@@ -187,7 +187,7 @@ BOOL CALLBACK DisplayCloseButton(WXHWND hwnd, LPARAM lParam)
     {
         sharedData->m_labelCancel = _("Close").ToStdString();
         ::SendMessageW( hwnd, WM_SETTEXT, 0,
-                     reinterpret_cast<LPARAM>(boost::nowide::widen(sharedData->m_labelCancel).c_str()));
+                     reinterpret_cast<WXLPARAM>(boost::nowide::widen(sharedData->m_labelCancel).c_str()));
 
         return FALSE;
     }
@@ -270,8 +270,8 @@ void PerformNotificationUpdates(WXHWND hwnd,
 
     if ( sharedData->m_notifications & wxSPDD_ICON_CHANGED )
     {
-        ::SendMessageW(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)GetHiconOf(sharedData->m_iconSmall));
-        ::SendMessageW(hwnd, WM_SETICON, ICON_BIG, (LPARAM)GetHiconOf(sharedData->m_iconBig));
+        ::SendMessageW(hwnd, WM_SETICON, ICON_SMALL, (WXLPARAM)GetHiconOf(sharedData->m_iconSmall));
+        ::SendMessageW(hwnd, WM_SETICON, ICON_BIG, (WXLPARAM)GetHiconOf(sharedData->m_iconBig));
     }
 
     if ( sharedData->m_notifications & wxSPDD_WINDOW_MOVED )
@@ -291,12 +291,12 @@ void PerformNotificationUpdates(WXHWND hwnd,
         ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_MAIN_INSTRUCTION,
-                       reinterpret_cast<LPARAM>(boost::nowide::widen(title).c_str()) );
+                       reinterpret_cast<WXLPARAM>(boost::nowide::widen(title).c_str()) );
 
         ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_CONTENT,
-                       reinterpret_cast<LPARAM>(boost::nowide::widen(body).c_str()) );
+                       reinterpret_cast<WXLPARAM>(boost::nowide::widen(body).c_str()) );
 
         // After using TDM_SET_ELEMENT_TEXT once, we don't want to use it for
         // the subsequent updates as it could result in dialog size changing
@@ -328,7 +328,7 @@ void PerformNotificationUpdates(WXHWND hwnd,
             ::SendMessageW( hwnd,
                            TDM_UPDATE_ELEMENT_TEXT,
                            TDE_EXPANDED_INFORMATION,
-                           reinterpret_cast<LPARAM>(boost::nowide::widen(expandedInformation).c_str()) );
+                           reinterpret_cast<WXLPARAM>(boost::nowide::widen(expandedInformation).c_str()) );
         }
     }
 
@@ -352,7 +352,7 @@ void PerformNotificationUpdates(WXHWND hwnd,
             ::SendMessageW( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE );
             EnableCloseButtons(hwnd, true);
             ::EnumChildWindows( hwnd, DisplayCloseButton,
-                                (LPARAM) sharedData );
+                                (WXLPARAM) sharedData );
         }
     }
 }
@@ -1084,9 +1084,9 @@ HRESULT CALLBACK
 wxProgressDialogTaskRunner::TaskDialogCallbackProc
                             (
                                 WXHWND hwnd,
-                                UINT uNotification,
-                                WPARAM wParam,
-                                LPARAM WXUNUSED(lParam),
+                                WXUINT uNotification,
+                                WXWPARAM wParam,
+                                WXLPARAM WXUNUSED(lParam),
                                 LONG_PTR dwRefData
                             )
 {

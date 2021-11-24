@@ -46,7 +46,7 @@ public:
             return false;
 
         // Maximized/minimized state.
-        UINT show = m_placement.showCmd;
+        WXUINT show = m_placement.showCmd;
         if ( !ser.SaveField(wxPERSIST_TLW_MAXIMIZED, show == SW_SHOWMAXIMIZED) )
             return false;
 
@@ -88,7 +88,7 @@ public:
         // Just to confuse matters further, note that SW_MAXIMIZE is exactly
         // the same thing as SW_SHOWMAXIMIZED.
         int tmp;
-        UINT& show = m_placement.showCmd;
+        WXUINT& show = m_placement.showCmd;
         if ( ser.RestoreField(wxPERSIST_TLW_MAXIMIZED, &tmp) && tmp )
             show = SW_MAXIMIZE;
         else if ( ser.RestoreField(wxPERSIST_TLW_ICONIZED, &tmp) && tmp )

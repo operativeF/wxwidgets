@@ -136,9 +136,9 @@ void RestoreExceptionPolicy()
 
 UINT_PTR APIENTRY
 wxFileDialogHookFunction(WXHWND      hDlg,
-                         UINT      iMsg,
-                         WPARAM    WXUNUSED(wParam),
-                         LPARAM    lParam)
+                         WXUINT      iMsg,
+                         WXWPARAM    WXUNUSED(wParam),
+                         WXLPARAM    lParam)
 {
     switch ( iMsg )
     {
@@ -328,7 +328,7 @@ void wxFileDialog::MSWOnSelChange(WXHWND hDlg)
     boost::nowide::wstackstring buf;
 
     LRESULT len = ::SendMessageW(::GetParent(hDlg), CDM_GETFILEPATH,
-                              MAX_PATH, reinterpret_cast<LPARAM>(buf.get()));
+                              MAX_PATH, reinterpret_cast<WXLPARAM>(buf.get()));
 
     if ( len > 0 )
         m_currentlySelectedFilename = boost::nowide::narrow(buf.get());
@@ -548,7 +548,7 @@ int wxFileDialog::ShowModal()
 
     of.Flags             = msw_flags;
     of.lpfnHook          = wxFileDialogHookFunction;
-    of.lCustData         = (LPARAM)this;
+    of.lCustData         = (WXLPARAM)this;
 
     std::vector<std::string> wildDescriptions;
     std::vector<std::string> wildFilters;

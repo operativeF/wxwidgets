@@ -187,7 +187,7 @@ public:
 
     // Declare the second argument as int to avoid problems with older SDKs not
     // declaring MONITOR_DPI_TYPE enum.
-    using GetDpiForMonitor_t = HRESULT (WINAPI*)(HMONITOR, int, UINT*, UINT*);
+    using GetDpiForMonitor_t = HRESULT (WINAPI*)(HMONITOR, int, WXUINT*, WXUINT*);
 
     // Return the pointer to GetDpiForMonitor() function which may be null if
     // not running under new enough Windows version.
@@ -198,7 +198,7 @@ private:
     static BOOL CALLBACK MultimonEnumProc(HMONITOR hMonitor,
                                           WXHDC hdcMonitor,
                                           LPRECT lprcMonitor,
-                                          LPARAM dwData);
+                                          WXLPARAM dwData);
 
     // find the monitor corresponding to the given handle,
     // return wxNOT_FOUND if not found
@@ -297,7 +297,7 @@ wxSize wxDisplayMSW::GetPPI() const
     if ( const wxDisplayFactoryMSW::GetDpiForMonitor_t
             getFunc = wxDisplayFactoryMSW::GetDpiForMonitorPtr() )
     {
-        UINT dpiX = 0,
+        WXUINT dpiX = 0,
              dpiY = 0;
         const HRESULT
             hr = (*getFunc)(m_info.hmon, MDT_EFFECTIVE_DPI, &dpiX, &dpiY);
@@ -478,7 +478,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxDisplayWndProc(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+wxDisplayWndProc(WXHWND hwnd, WXUINT msg, WXWPARAM wParam, WXLPARAM lParam)
 {
     if ( (msg == WM_SETTINGCHANGE && wParam == SPI_SETWORKAREA) ||
             msg == WM_DISPLAYCHANGE )
@@ -551,7 +551,7 @@ void wxDisplayFactoryMSW::DoRefreshMonitors()
     // Note that we pass NULL as first parameter here because using screen WXHDC
     // doesn't work reliably: notably, it doesn't enumerate any displays if
     // this code is executed while a UAC prompt is shown or during log-off.
-    if ( !::EnumDisplayMonitors(nullptr, nullptr, MultimonEnumProc, (LPARAM)this) )
+    if ( !::EnumDisplayMonitors(nullptr, nullptr, MultimonEnumProc, (WXLPARAM)this) )
     {
         wxLogLastError("EnumDisplayMonitors");
     }
@@ -564,7 +564,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
     WXHDC /* hdcMonitor */,           // handle to monitor-appropriate device context:
                                     // not set due to our use of EnumDisplayMonitors(NULL, ...)
     LPRECT WXUNUSED(lprcMonitor),   // pointer to monitor intersection rectangle
-    LPARAM dwData)                  // data passed from EnumDisplayMonitors (this)
+    WXLPARAM dwData)                  // data passed from EnumDisplayMonitors (this)
 {
     wxDisplayFactoryMSW *const self = (wxDisplayFactoryMSW *)dwData;
 

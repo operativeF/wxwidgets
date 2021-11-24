@@ -175,7 +175,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     wxZeroMemory(excep);
 
     hr = ((IDispatch*)m_dispatchPtr)->Invoke(dispIds[0], IID_NULL, m_lcid,
-                        (WORD)action, &dispparams, vReturnPtr, &excep, &uiArgErr);
+                        (WXWORD)action, &dispparams, vReturnPtr, &excep, &uiArgErr);
 
     if (FAILED(hr))
     {

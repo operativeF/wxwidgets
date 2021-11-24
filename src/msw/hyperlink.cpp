@@ -65,7 +65,7 @@ void wxHyperlinkCtrl::SetLabel(std::string_view label)
 wxSize wxHyperlinkCtrl::DoGetBestClientSize() const
 {
     SIZE idealSize;
-    ::SendMessageW(m_hWnd, LM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
+    ::SendMessageW(m_hWnd, LM_GETIDEALSIZE, 0, (WXLPARAM)&idealSize);
 
     return {idealSize.cx, idealSize.cy};
 }

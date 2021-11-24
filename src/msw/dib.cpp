@@ -39,11 +39,11 @@ namespace
 
 // calculate the number of palette entries needed for the bitmap with this
 // number of bits per pixel
-inline WORD GetNumberOfColours(WORD bitsPerPixel)
+inline WXWORD GetNumberOfColours(WXWORD bitsPerPixel)
 {
     // only 1, 4 and 8bpp bitmaps use palettes (well, they could be used with
     // 24bpp ones too but we don't support this as I think it's quite uncommon)
-    return (WORD)(bitsPerPixel <= 8 ? 1 << bitsPerPixel : 0);
+    return (WXWORD)(bitsPerPixel <= 8 ? 1 << bitsPerPixel : 0);
 }
 
 // wrapper around ::GetObjectW() for DIB sections
@@ -106,7 +106,7 @@ bool wxDIB::Create(wxSize sz, int depth)
     info.bmiHeader.biHeight = sz.y;
 
     info.bmiHeader.biPlanes = 1;
-    info.bmiHeader.biBitCount = (WORD)depth;
+    info.bmiHeader.biBitCount = (WXWORD)depth;
     info.bmiHeader.biSizeImage = GetLineSize(sz.x, depth) * sz.y;
 
     m_handle = ::CreateDIBSection
@@ -259,7 +259,7 @@ bool wxDIB::Save(const std::string& filename)
             // provide extra space so we can verify that
             // monochrome DIB's color table is size 2
             RGBQUAD monoBmiColors[3];
-            UINT nColors = 0;
+            WXUINT nColors = 0;
             if ( ds.dsBmih.biBitCount == 1 )
             {
                 MemoryHDC hDC;
@@ -584,7 +584,7 @@ wxPalette *wxDIB::CreatePalette() const
 
     // initialize the palette header
     pPalette->palVersion = 0x300;  // magic number, not in docs but works
-    pPalette->palNumEntries = (WORD)biClrUsed;
+    pPalette->palNumEntries = (WXWORD)biClrUsed;
 
     // and the colour table
     wxCharBuffer rgb(sizeof(RGBQUAD) * biClrUsed);
@@ -669,7 +669,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         MemoryHDC hDC;
         SelectInHDC sDC(hDC, m_handle);
         RGBQUAD colorTable[2];
-        for ( UINT i = 0; i < WXSIZEOF(colorTable); ++i )
+        for ( WXUINT i = 0; i < WXSIZEOF(colorTable); ++i )
         {
             if ( !palette->GetRGB(i,
                                     &colorTable[i].rgbRed,
@@ -680,7 +680,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
             }
             colorTable[i].rgbReserved = 0;
         }
-        UINT rc = SetDIBColorTable(hDC, 0, WXSIZEOF(colorTable), colorTable);
+        WXUINT rc = SetDIBColorTable(hDC, 0, WXSIZEOF(colorTable), colorTable);
         if ( rc != WXSIZEOF(colorTable))
         {
             wxLogLastError("SetDIBColorTable");

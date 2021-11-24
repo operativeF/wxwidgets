@@ -87,7 +87,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRadioBox, wxControl);
 
 // wnd proc for radio buttons
 LRESULT APIENTRY
-wxRadioBtnWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxRadioBtnWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 // ---------------------------------------------------------------------------
 // global vars
@@ -744,7 +744,7 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
 // ---------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxRadioBtnWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxRadioBtnWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
 
     wxRadioBox * const radiobox = wxRadioBox::GetFromRadioButtonHWND(hwnd);

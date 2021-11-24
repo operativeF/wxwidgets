@@ -81,7 +81,7 @@ bool wxFrame::Create(wxWindow *parent,
         // TaskbarButtonCreated and WM_COMMAND messages through.
 #if wxUSE_DYNLIB_CLASS
         // FIXME: Change to use ChangeWindowMessageFilterEx instead.
-        using ChangeWindowMessageFilter_t = BOOL (WINAPI*)(UINT message,
+        using ChangeWindowMessageFilter_t = BOOL (WINAPI*)(WXUINT message,
                                                            DWORD dwFlag);
         wxDynamicLibrary dllUser32("user32.dll");
 
@@ -786,7 +786,7 @@ WXLRESULT wxFrame::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lPara
 
         case WM_COMMAND:
             {
-                WORD id, cmd;
+                WXWORD id, cmd;
                 WXHWND hwnd;
                 UnpackCommand((WXWPARAM)wParam, (WXLPARAM)lParam,
                               &id, &hwnd, &cmd);

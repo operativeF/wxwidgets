@@ -179,7 +179,7 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
         .fMask = SIF_PAGE | SIF_RANGE | SIF_POS,
         .nMin = 0,
         .nMax = range1,
-        .nPage = gsl::narrow_cast<UINT>(m_pageSize),
+        .nPage = gsl::narrow_cast<WXUINT>(m_pageSize),
         .nPos = position
     };
 

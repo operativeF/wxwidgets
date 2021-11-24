@@ -989,7 +989,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         int x = rcText.left;
         int y = rcText.top + (rcText.bottom - rcText.top - textSize.cy) / 2;
 
-        ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(boost::nowide::widen(text).c_str()),
+        ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<WXLPARAM>(boost::nowide::widen(text).c_str()),
                     text.length(), x, y, 0, 0, flags);
 
         // ::SetTextAlign(hdc, TA_RIGHT) doesn't work with DSS_DISABLED or DSS_MONO
@@ -1022,7 +1022,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
             y = rcText.top + (rcText.bottom - rcText.top - accelSize.cy) / 2;
 
             boost::nowide::wstackstring stackAccel(accel.c_str());
-            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(stackAccel.get()),
+            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<WXLPARAM>(stackAccel.get()),
                         stackAccel.buffer_size, x, y, 0, 0, flags);
         }
     }
@@ -1198,7 +1198,7 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
         SelectInHDC selMask(hdcMask, hbmpMask.get());
 
         // then draw a check mark into it
-        const UINT stateCheck = (GetKind() == wxITEM_CHECK) ? DFCS_MENUCHECK
+        const WXUINT stateCheck = (GetKind() == wxITEM_CHECK) ? DFCS_MENUCHECK
                                                       : DFCS_MENUBULLET;
         RECT rect = { 0, 0, cx, cy };
         ::DrawFrameControl(hdcMask, &rect, DFC_MENU, stateCheck);
@@ -1346,8 +1346,8 @@ int wxMenuItem::MSGetMenuItemPos() const
 
     for ( int i = 0; i < ::GetMenuItemCount(hMenu); i++ )
     {
-        const UINT state = ::GetMenuState(hMenu, i, MF_BYPOSITION);
-        if ( state == (UINT)-1 )
+        const WXUINT state = ::GetMenuState(hMenu, i, MF_BYPOSITION);
+        if ( state == (WXUINT)-1 )
         {
             // This indicates that the item at this position and is not
             // supposed to happen here, but test for it just in case.

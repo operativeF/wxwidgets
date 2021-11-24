@@ -73,7 +73,7 @@ SpinForTextCtrl gs_spinForTextCtrl;
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxBuddyTextWndProc(WXHWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxBuddyTextWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     wxSpinCtrl * const spin = wxSpinCtrl::GetSpinForTextCtrl(hwnd);
 
@@ -324,7 +324,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     m_wndProcBuddy = wxSetWindowProc(GetBuddyHwnd(), wxBuddyTextWndProc);
 
     // associate the text window with the spin button
-    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WPARAM)m_hwndBuddy, 0);
+    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WXWPARAM)m_hwndBuddy, 0);
 
     // set up fonts and colours  (This is nomally done in MSWCreateControl)
     InheritAttributes();
@@ -383,7 +383,7 @@ void wxSpinCtrl::Refresh(bool eraseBackground, const wxRect *rect)
 {
     wxControl::Refresh(eraseBackground, rect);
 
-    UINT flags = RDW_INVALIDATE;
+    WXUINT flags = RDW_INVALIDATE;
     if ( eraseBackground )
         flags |= RDW_ERASE;
 
@@ -502,7 +502,7 @@ void wxSpinCtrl::SetSelection(long from, long to)
         from = 0;
     }
 
-    ::SendMessageW(GetBuddyHwnd(), EM_SETSEL, (WPARAM)from, (LPARAM)to);
+    ::SendMessageW(GetBuddyHwnd(), EM_SETSEL, (WXWPARAM)from, (WXLPARAM)to);
 }
 
 void wxSpinCtrl::SetLayoutDirection(wxLayoutDirection dir)
@@ -640,7 +640,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
 
     // associate it with the buddy control again
     ::SetParent(GetBuddyHwnd(), GetHwndOf(GetParent()));
-    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WPARAM)GetBuddyHwnd(), 0);
+    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WXWPARAM)GetBuddyHwnd(), 0);
 
     // also set the size again with wxSIZE_ALLOW_MINUS_ONE flag: this is
     // necessary if our original position used -1 for either x or y

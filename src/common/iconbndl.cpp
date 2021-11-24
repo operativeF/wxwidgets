@@ -216,9 +216,9 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
     // load the individual icons referred from the icon directory
     const GRPICONDIR* grpIconDir = static_cast<const GRPICONDIR*>(data);
 
-    for ( WORD i = 0; i < grpIconDir->idCount; i++ )
+    for ( WXWORD i = 0; i < grpIconDir->idCount; i++ )
     {
-        const WORD iconID = grpIconDir->idEntries[i].nID;
+        const WXWORD iconID = grpIconDir->idEntries[i].nID;
 
         if ( wxLoadUserResource(&data, &outLen, wxString::Format(wxS("#%u"), iconID), RT_ICON, module) )
         {

@@ -1908,14 +1908,8 @@ typedef WX_UIPasteboard WXOSXPasteboard;
 #endif
 
 WX_MSW_DECLARE_HANDLE(RECTPTR);
-WX_MSW_DECLARE_HANDLE(HIMAGELIST);
-WX_MSW_DECLARE_HANDLE(HGLOBAL);
-WX_MSW_DECLARE_HANDLE(DPI_AWARENESS_CONTEXT);
 
 #undef WX_MSW_DECLARE_HANDLE
-
-typedef unsigned int    WXUINT;
-typedef unsigned short  WXWORD;
 
 typedef unsigned long   WXCOLORREF;
 typedef void *          WXRGNDATA;
@@ -1923,10 +1917,6 @@ typedef struct tagMSG   WXMSG;
 typedef void *          WXHCONV;
 typedef void *          WXHKEY;
 typedef void *          WXHTREEITEM;
-
-typedef void *          WXDRAWITEMSTRUCT;
-typedef void *          WXMEASUREITEMSTRUCT;
-typedef void *          WXLPCREATESTRUCT;
 
 #ifndef __WIN64__
 typedef wxW64 unsigned int WXWPARAM;

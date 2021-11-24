@@ -483,7 +483,7 @@ void wxStaticBox::PaintBackground(wxDC& dc, const RECT& rc)
 void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
 {
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    MSWDefWindowProc(WM_PAINT, (WPARAM)GetHdcOf(*impl), 0);
+    MSWDefWindowProc(WM_PAINT, (WXWPARAM)GetHdcOf(*impl), 0);
 
 #if wxUSE_UXTHEME
     // when using XP themes, neither setting the text colour nor transparent
@@ -561,7 +561,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
             PaintBackground(dc, dimensions);
         }
 
-        UINT drawTextFlags = DT_SINGLELINE | DT_VCENTER;
+        WXUINT drawTextFlags = DT_SINGLELINE | DT_VCENTER;
 
         // determine the state of UI queues to draw the text correctly under XP
         // and later systems

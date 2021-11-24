@@ -26,7 +26,7 @@
 
 // define a hash containing all the timers: it is indexed by timer id and
 // contains the corresponding timer
-using wxTimerMap = std::unordered_map< WPARAM, wxMSWTimerImpl *, wxIntegerHash, wxIntegerEqual >;
+using wxTimerMap = std::unordered_map< WXWPARAM, wxMSWTimerImpl *, wxIntegerHash, wxIntegerEqual >;
 
 
 // instead of using a global here, wrap it in a static function as otherwise it
@@ -62,7 +62,7 @@ UINT_PTR GetNewTimerId(wxMSWTimerImpl *t)
 // ----------------------------------------------------------------------------
 
 LRESULT APIENTRY
-wxTimerWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+wxTimerWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
 // ----------------------------------------------------------------------------
 // wxTimerHiddenWindowModule: used to manage the hidden window used for
@@ -109,7 +109,7 @@ bool wxMSWTimerImpl::Start(std::chrono::milliseconds startTime, bool oneShot)
              (
               wxTimerHiddenWindowModule::GetHWND(),  // window for WM_TIMER
               m_id,                                  // timer ID to create
-              (UINT)startTime.count(),                         // delay
+              (WXUINT)startTime.count(),                         // delay
               nullptr                                   // timer proc (unused)
              );
 
@@ -146,7 +146,7 @@ void wxProcessTimer(wxMSWTimerImpl& timer)
 
 
 LRESULT APIENTRY
-wxTimerWndProc(WXHWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+wxTimerWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
     if ( message == WM_TIMER )
     {

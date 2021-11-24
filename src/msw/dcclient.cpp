@@ -82,7 +82,7 @@ private:
 };
 
 // This subclass contains information for the HDCs we receive from outside, as
-// WPARAM of WM_PAINT itself.
+// WXWPARAM of WM_PAINT itself.
 class wxPaintDCInfoExternal : public wxPaintDCInfo
 {
 public:

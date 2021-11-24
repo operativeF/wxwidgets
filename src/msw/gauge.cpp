@@ -123,7 +123,7 @@ bool wxGauge::SetForegroundColour(const wxColour& col)
     if ( !wxControl::SetForegroundColour(col) )
         return false;
 
-    ::SendMessageW(GetHwnd(), PBM_SETBARCOLOR, 0, (LPARAM)wxColourToRGB(col));
+    ::SendMessageW(GetHwnd(), PBM_SETBARCOLOR, 0, (WXLPARAM)wxColourToRGB(col));
 
     return true;
 }
@@ -133,7 +133,7 @@ bool wxGauge::SetBackgroundColour(const wxColour& col)
     if ( !wxControl::SetBackgroundColour(col) )
         return false;
 
-    ::SendMessageW(GetHwnd(), PBM_SETBKCOLOR, 0, (LPARAM)wxColourToRGB(col));
+    ::SendMessageW(GetHwnd(), PBM_SETBKCOLOR, 0, (WXLPARAM)wxColourToRGB(col));
 
     return true;
 }

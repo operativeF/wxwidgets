@@ -27,7 +27,7 @@ import WX.Win.UniqueHnd;
 // Emit a beeeeeep
 void wxBell()
 {
-    ::MessageBeep((UINT)-1);        // default sound
+    ::MessageBeep((WXUINT)-1);        // default sound
 }
 
 // ---------------------------------------------------------------------------

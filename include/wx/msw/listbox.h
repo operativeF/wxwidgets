@@ -13,6 +13,8 @@
 
 #if wxUSE_LISTBOX
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 #include <memory>

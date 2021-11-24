@@ -513,7 +513,7 @@ const WXUINT WinSock1SocketPoller::SOCKET_MESSAGE = WM_USER + 1;
 WinSock1SocketPoller::WinSock1SocketPoller(wxEvtHandler* hndlr)
 {
     // Initialize winsock in case it's not already done.
-    WORD wVersionRequested = MAKEWORD(1,1);
+    WXWORD wVersionRequested = MAKEWORD(1,1);
     WSADATA wsaData;
     WSAStartup(wVersionRequested, &wsaData);
 

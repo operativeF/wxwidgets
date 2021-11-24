@@ -22,9 +22,9 @@
 // ----------------------------------------------------------------------------
 
 UINT_PTR CALLBACK wxFindReplaceDialogHookProc(WXHWND hwnd,
-                                              UINT uiMsg,
-                                              WPARAM wParam,
-                                              LPARAM lParam);
+                                              WXUINT uiMsg,
+                                              WXWPARAM wParam,
+                                              WXLPARAM lParam);
 
 // ----------------------------------------------------------------------------
 // wxWin macros
@@ -59,11 +59,11 @@ private:
     // called from window procedure for ms_msgFindDialog
     static bool FindMessageHandler(wxWindow *win,
                                    WXUINT nMsg,
-                                   WPARAM wParam,
-                                   LPARAM lParam);
+                                   WXWPARAM wParam,
+                                   WXLPARAM lParam);
 
     // copy string str contents to ppStr and fill pLen with its length
-    void InitString(const std::string& str, LPTSTR *ppStr, WORD *pLen);
+    void InitString(const std::string& str, LPTSTR *ppStr, WXWORD *pLen);
 
 
     // the find replace data used by the dialog
@@ -73,7 +73,7 @@ private:
     bool m_wasClosedByUser{false};
 
     // registered Message for Dialog
-    inline static UINT ms_msgFindDialog{0};
+    inline static WXUINT ms_msgFindDialog{0};
 };
 
 // ============================================================================
@@ -131,12 +131,12 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     m_findReplace.hwndOwner = GetHwndOf(dialog->GetParent());
     m_findReplace.Flags = flags;
 
-    m_findReplace.lCustData = (LPARAM)dialog;
+    m_findReplace.lCustData = (WXLPARAM)dialog;
     m_findReplace.lpfnHook = wxFindReplaceDialogHookProc;
 }
 
 void wxFindReplaceDialogImpl::InitString(const std::string& str,
-                                         LPTSTR *ppStr, WORD *pLen)
+                                         LPTSTR *ppStr, WXWORD *pLen)
 {
     size_t len = str.length() + 1;
     if ( len < 80 )
@@ -147,7 +147,7 @@ void wxFindReplaceDialogImpl::InitString(const std::string& str,
 
     *ppStr = new wxChar[len];
     wxStrcpy(*ppStr, str);
-    *pLen = (WORD)len;
+    *pLen = (WXWORD)len;
 }
 
 void wxFindReplaceDialogImpl::InitFindWhat(const std::string& str)
@@ -175,8 +175,8 @@ wxFindReplaceDialogImpl::~wxFindReplaceDialogImpl()
 bool
 wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
                                             WXUINT WXUNUSED_UNLESS_DEBUG(nMsg),
-                                            WPARAM WXUNUSED(wParam),
-                                            LPARAM lParam)
+                                            WXWPARAM WXUNUSED(wParam),
+                                            WXLPARAM lParam)
 {
     wxASSERT_MSG( nMsg == ms_msgFindDialog, "unexpected message received" );
 
@@ -251,9 +251,9 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
 
 UINT_PTR CALLBACK
 wxFindReplaceDialogHookProc(WXHWND hwnd,
-                            UINT uiMsg,
-                            WPARAM WXUNUSED(wParam),
-                            LPARAM lParam)
+                            WXUINT uiMsg,
+                            WXWPARAM WXUNUSED(wParam),
+                            WXLPARAM lParam)
 {
     if ( uiMsg == WM_INITDIALOG )
     {

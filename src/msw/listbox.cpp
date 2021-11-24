@@ -44,6 +44,8 @@
     } // anonymous namespace
 #endif // wxUSE_OWNER_DRAWN
 
+import WX.WinDef;
+
 #if wxUSE_OWNER_DRAWN
 
 class wxListBoxItem : public wxOwnerDrawn
@@ -246,7 +248,7 @@ void wxListBox::DoSetFirstItem(int N)
     wxCHECK_RET( IsValid(N),
                  "invalid index in wxListBox::SetFirstItem" );
 
-    ::SendMessageW(GetHwnd(), LB_SETTOPINDEX, (WPARAM)N, (LPARAM)0);
+    ::SendMessageW(GetHwnd(), LB_SETTOPINDEX, (WXWPARAM)N, (WXLPARAM)0);
 }
 
 void wxListBox::DoDeleteOneItem(unsigned int n)
@@ -574,8 +576,8 @@ void wxListBox::SetHorizontalExtent(const std::string& s)
 
 bool wxListBox::MSWSetTabStops(const std::vector<int>& tabStops)
 {
-    return ::SendMessageW(GetHwnd(), LB_SETTABSTOPS, (WPARAM)tabStops.size(),
-                       (LPARAM)(tabStops.empty() ? nullptr : &tabStops[0])) == TRUE;
+    return ::SendMessageW(GetHwnd(), LB_SETTABSTOPS, (WXWPARAM)tabStops.size(),
+                       (WXLPARAM)(tabStops.empty() ? nullptr : &tabStops[0])) == TRUE;
 }
 
 wxSize wxListBox::DoGetBestClientSize() const
@@ -742,7 +744,7 @@ bool wxListBox::MSWOnDraw(WXDRAWITEMSTRUCT *item)
     DRAWITEMSTRUCT *pStruct = (DRAWITEMSTRUCT *)item;
 
     // the item may be -1 for an empty listbox
-    if ( pStruct->itemID == (UINT)-1 )
+    if ( pStruct->itemID == (WXUINT)-1 )
         return false;
 
     wxOwnerDrawn *pItem = m_aItems[pStruct->itemID].get();
