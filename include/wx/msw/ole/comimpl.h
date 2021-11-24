@@ -11,6 +11,8 @@
 #ifndef WX_COMIMPL_H
 #define WX_COMIMPL_H
 
+#include "wx/defs.h"
+
 // get IUnknown, REFIID &c
 #include <objbase.h>
 
