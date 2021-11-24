@@ -1471,8 +1471,6 @@ wxGridBlockCoords::SymDifference(const wxGridBlockCoords& other) const
 // wxGridTableBase
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxGridTableBase, wxObject);
-
 wxGridTableBase::~wxGridTableBase()
 {
     delete m_attrProvider;
@@ -1713,10 +1711,6 @@ wxGridTableMessage::wxGridTableMessage( wxGridTableBase *table, int id,
 // A basic grid table for string data. An object of this class will
 // created by wxGrid if you don't specify an alternative table class.
 //
-
-WX_DEFINE_OBJARRAY(wxGridStringArray)
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGridStringTable, wxGridTableBase);
 
 wxGridStringTable::wxGridStringTable( int numRows, int numCols )
     : m_numCols{numCols}        

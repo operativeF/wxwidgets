@@ -1115,8 +1115,7 @@ WX_DECLARE_OBJARRAY_WITH_DECL(wxGridCellCoords, wxGridCellCoordsArray,
 // ----------------------------------------------------------------------------
 
 // the abstract base class
-class wxGridTableBase : public wxObject,
-                                        public wxClientDataContainer
+class wxGridTableBase : public wxClientDataContainer
 {
 public:
     wxGridTableBase() = default;
@@ -1234,8 +1233,6 @@ public:
 private:
     wxGrid * m_view{nullptr};
     wxGridCellAttrProvider *m_attrProvider{nullptr};
-
-    wxDECLARE_ABSTRACT_CLASS(wxGridTableBase);
 };
 
 
@@ -1348,11 +1345,6 @@ private:
     // of our columns as we can't retrieve it from m_data when the number of
     // rows is 0 (see #10818)
     int m_numCols{};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 
