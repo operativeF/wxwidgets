@@ -14,8 +14,6 @@
 
 #if wxUSE_PROTOCOL_FTP
 
-#include "wx/defs.h"
-
 #include "wx/sckaddr.h"
 #include "wx/protocol/protocol.h"
 #include "wx/url.h"

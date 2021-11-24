@@ -13,8 +13,6 @@
 
 #if wxUSE_TREEBOOK
 
-#include "wx/defs.h"
-
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 #include "wx/treebase.h"        // for wxTreeItemId

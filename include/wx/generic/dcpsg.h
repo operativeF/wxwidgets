@@ -12,8 +12,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
 
-#include "wx/defs.h"
-
 #include "wx/dc.h"
 #include "wx/dcprint.h"
 #include "wx/dialog.h"

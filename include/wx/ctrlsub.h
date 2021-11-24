@@ -13,8 +13,6 @@
 
 #if wxUSE_CONTROLS
 
-#include "wx/defs.h"
-
 #include "wx/control.h"      // base class
 
 #include <gsl/gsl>

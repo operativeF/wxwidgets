@@ -12,8 +12,6 @@
 
 #if wxUSE_SEARCHCTRL
 
-#include "wx/defs.h"
-
 #include "wx/textctrl.h"
 
 import <string>;

@@ -11,8 +11,6 @@
 
 #if wxUSE_BUSYINFO
 
-#include "wx/defs.h"
-
 #include "wx/colour.h"
 #include "wx/icon.h"
 

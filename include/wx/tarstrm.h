@@ -11,8 +11,6 @@
 
 #if wxUSE_TARSTREAM
 
-#include "wx/defs.h"
-
 #include "wx/archive.h"
 #include "wx/hashmap.h"
 

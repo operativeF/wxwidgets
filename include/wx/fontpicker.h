@@ -13,8 +13,6 @@
 
 #if wxUSE_FONTPICKERCTRL
 
-#include "wx/defs.h"
-
 #include "wx/pickerbase.h"
 
 import <string>;

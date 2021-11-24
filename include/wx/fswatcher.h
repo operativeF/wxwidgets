@@ -12,8 +12,6 @@
 
 #if wxUSE_FSWATCHER
 
-#include "wx/defs.h"
-
 #include "wx/log.h"
 #include "wx/event.h"
 #include "wx/evtloop.h"

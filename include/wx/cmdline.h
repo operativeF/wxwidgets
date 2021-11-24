@@ -12,8 +12,6 @@
 #ifndef _WX_CMDLINE_H_
 #define _WX_CMDLINE_H_
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/cmdargs.h"
 

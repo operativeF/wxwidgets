@@ -10,8 +10,6 @@
 #ifndef _WX_GENERIC_PRIVATE_MARKUPTEXT_H_
 #define _WX_GENERIC_PRIVATE_MARKUPTEXT_H_
 
-#include "wx/defs.h"
-
 import Utils.Geometry;
 
 enum class wxEllipsizeMode;

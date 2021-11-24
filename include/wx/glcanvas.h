@@ -13,8 +13,6 @@
 
 #if wxUSE_GLCANVAS
 
-#include "wx/defs.h"
-
 #include "wx/app.h"
 #include "wx/palette.h"
 #include "wx/window.h"

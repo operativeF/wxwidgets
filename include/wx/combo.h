@@ -38,8 +38,6 @@
 
 #if wxUSE_COMBOCTRL
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/renderer.h" // this is needed for wxCONTROL_XXX flags
 #include "wx/bitmap.h" // wxBitmap used by-value

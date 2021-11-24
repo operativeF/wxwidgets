@@ -14,8 +14,6 @@
 
 #if wxUSE_FILECTRL
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 
 import <vector>;

@@ -10,8 +10,6 @@
 #ifndef _WX_TIMERIMPL_H_BASE_
 #define _WX_TIMERIMPL_H_BASE_
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 #include "wx/timer.h"
 

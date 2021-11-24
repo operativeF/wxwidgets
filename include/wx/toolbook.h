@@ -13,8 +13,6 @@
 
 #if wxUSE_TOOLBOOK
 
-#include "wx/defs.h"
-
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 

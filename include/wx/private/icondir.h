@@ -17,8 +17,6 @@
 
 #if wxUSE_ICO_CUR
 
-#include "wx/defs.h"          // wxUint* declarations
-
 #if wxUSE_STREAMS
 
 // icon entry in .ICO files

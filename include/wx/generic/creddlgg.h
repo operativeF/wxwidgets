@@ -12,8 +12,6 @@
 
 #if wxUSE_CREDENTIALDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 #include "wx/webrequest.h"
 

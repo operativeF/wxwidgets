@@ -10,8 +10,6 @@
 #ifndef _WX_WEBREQUEST_H
 #define _WX_WEBREQUEST_H
 
-#include "wx/defs.h"
-
 #include "wx/secretstore.h"
 
 // Note that this class is intentionally defined outside of wxUSE_WEBREQUEST

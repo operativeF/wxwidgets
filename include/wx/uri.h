@@ -12,7 +12,6 @@
 #ifndef _WX_URI_H_
 #define _WX_URI_H_
 
-#include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/string.h"
 

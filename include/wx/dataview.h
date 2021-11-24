@@ -13,8 +13,6 @@
 
 #if wxUSE_DATAVIEWCTRL
 
-#include "wx/defs.h"
-
 #include "wx/headercol.h"
 #include "wx/variant.h"
 #include "wx/dnd.h"             // For wxDragResult declaration only.

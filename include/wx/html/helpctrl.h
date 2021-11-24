@@ -13,8 +13,6 @@
 
 #if wxUSE_WXHTML_HELP
 
-#include "wx/defs.h"
-
 #include "wx/helpbase.h"
 #include "wx/html/helpfrm.h"
 

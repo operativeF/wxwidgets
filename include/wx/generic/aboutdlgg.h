@@ -12,8 +12,6 @@
 
 #if wxUSE_ABOUTDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 
 class wxAboutDialogInfo;

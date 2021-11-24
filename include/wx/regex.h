@@ -13,8 +13,6 @@
 
 #if wxUSE_REGEX
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 import <tuple>;

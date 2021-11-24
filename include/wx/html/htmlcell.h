@@ -12,8 +12,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/html/htmltag.h"
 #include "wx/html/htmldefs.h"
 #include "wx/brush.h"

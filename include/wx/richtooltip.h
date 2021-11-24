@@ -12,8 +12,6 @@
 
 #if wxUSE_RICHTOOLTIP
 
-#include "wx/defs.h"
-
 #include "wx/colour.h"
 
 import Utils.Geometry;

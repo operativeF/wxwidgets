@@ -13,8 +13,6 @@
 
 #if wxUSE_CHOICEBOOK
 
-#include "wx/defs.h"
-
 #include "wx/bookctrl.h"
 #include "wx/choice.h"
 #include "wx/containr.h"

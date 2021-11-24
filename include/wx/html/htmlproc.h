@@ -11,8 +11,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 // Priority of preprocessor in the chain. The higher, the earlier it is used

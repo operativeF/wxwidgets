@@ -13,8 +13,6 @@
 
 #if wxUSE_BUTTON
 
-#include "wx/defs.h"
-
 import Utils.Geometry;
 
 #include "wx/anybutton.h"

@@ -13,8 +13,6 @@
 
 #if wxUSE_VARIANT
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/cpp.h"
 

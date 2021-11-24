@@ -11,8 +11,6 @@
 
 #if wxUSE_IMAGE
 
-#include "wx/defs.h"
-
 #include "wx/gdicmn.h"
 #include "wx/object.h"
 #include "wx/hashmap.h"

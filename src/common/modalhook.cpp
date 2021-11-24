@@ -7,11 +7,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/defs.h"
+#include "wx/debug.h"
 #include "wx/modalhook.h"
 
-import <algorithm>;
+import WX.Cfg.Flags;
 
+import <algorithm>;
 
 wxModalDialogHook::Hooks wxModalDialogHook::ms_hooks;
 

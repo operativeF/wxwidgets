@@ -11,8 +11,6 @@
 
 #if wxUSE_ZIPSTREAM
 
-#include "wx/defs.h"
-
 #include "wx/archive.h"
 #include "wx/filename.h"
 

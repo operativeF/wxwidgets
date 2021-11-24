@@ -13,8 +13,6 @@
 
 #if wxUSE_BOOKCTRL
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/withimages.h"
 

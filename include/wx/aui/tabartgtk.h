@@ -16,8 +16,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #include "wx/aui/tabart.h"
 
 import Utils.Geometry;

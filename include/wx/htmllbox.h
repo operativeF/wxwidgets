@@ -13,8 +13,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/listbox.h"
 #include "wx/vlbox.h"               // base class
 #include "wx/html/htmlwin.h"

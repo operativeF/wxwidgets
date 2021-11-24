@@ -14,13 +14,12 @@
 
 #if wxUSE_EXTENDED_RTTI
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/hashmap.h"
 #include "wx/flags.h"
 #include "wx/intl.h"
 #include "wx/log.h"
+
 import <typeinfo>;
 
 class wxClassInfo;

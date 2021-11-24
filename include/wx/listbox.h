@@ -13,8 +13,6 @@
 
 #if wxUSE_LISTBOX
 
-#include "wx/defs.h"
-
 #include "wx/ctrlsub.h"         // base class
 
 import <string>;

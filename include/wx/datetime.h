@@ -14,8 +14,6 @@
 
 #if wxUSE_DATETIME
 
-#include "wx/defs.h"
-
 #include "wx/longlong.h"
 #include "wx/anystr.h"
 

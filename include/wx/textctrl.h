@@ -17,8 +17,6 @@
 
 #if wxUSE_TEXTCTRL
 
-#include "wx/defs.h"
-
 #include "wx/control.h"         // the base class
 #include "wx/textentry.h"       // single-line text entry interface
 

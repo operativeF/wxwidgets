@@ -13,8 +13,6 @@
 
 #if wxUSE_PROGRESSDLG
 
-#include "wx/defs.h"
-
 /*
  * wxProgressDialog flags
  */

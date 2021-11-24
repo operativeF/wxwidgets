@@ -15,7 +15,6 @@
 
 #if wxUSE_SASH
 
-#include "wx/defs.h"
 #include "wx/window.h"
 
 #include <memory>

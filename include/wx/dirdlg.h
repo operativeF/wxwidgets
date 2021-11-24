@@ -13,8 +13,6 @@
 
 #if wxUSE_DIRDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 
 import <string>;

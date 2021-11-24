@@ -13,8 +13,6 @@
 
 #if wxUSE_PROTOCOL
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 #include "wx/string.h"
 #include "wx/stream.h"

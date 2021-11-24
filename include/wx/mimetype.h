@@ -18,8 +18,6 @@
 
 #if wxUSE_MIMETYPE
 
-#include "wx/defs.h"
-
 // the things we really need
 #include "wx/string.h"
 

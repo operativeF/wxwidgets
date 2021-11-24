@@ -17,8 +17,6 @@
 
 #if wxUSE_STARTUP_TIPS
 
-#include "wx/defs.h"
-
 #include "wx/textfile.h"
 
 import <string>;

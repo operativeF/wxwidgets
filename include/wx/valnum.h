@@ -13,8 +13,6 @@
 
 #if wxUSE_VALIDATORS
 
-#include "wx/defs.h"
-
 #include "wx/textentry.h"
 #include "wx/validate.h"
 

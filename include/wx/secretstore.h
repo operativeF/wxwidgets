@@ -10,8 +10,6 @@
 #ifndef _WX_SECRETSTORE_H_
 #define _WX_SECRETSTORE_H_
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 #if wxUSE_SECRETSTORE

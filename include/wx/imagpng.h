@@ -15,8 +15,6 @@
 
 #if wxUSE_LIBPNG
 
-#include "wx/defs.h"
-
 #include "wx/image.h"
 #include "wx/versioninfo.h"
 

@@ -13,12 +13,9 @@
 
 #if wxUSE_MEDIACTRL
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/geometry/rect.h"
 #include "wx/uri.h"
-
 
 enum class wxMediaState
 {

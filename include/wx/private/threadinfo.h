@@ -10,8 +10,6 @@
 #ifndef _WX_PRIVATE_THREADINFO_H_
 #define _WX_PRIVATE_THREADINFO_H_
 
-#include "wx/defs.h"
-
 class wxLog;
 
 #if wxUSE_INTL

@@ -12,8 +12,6 @@
 
 #if wxUSE_ACTIVITYINDICATOR
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 
 import WX.Cfg.Flags;

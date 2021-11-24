@@ -12,8 +12,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/control.h"
 

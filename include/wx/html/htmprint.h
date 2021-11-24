@@ -12,14 +12,13 @@
 
 #if wxUSE_HTML & wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/html/htmlcell.h"
 #include "wx/html/winpars.h"
 #include "wx/html/htmlfilt.h"
 
 #include "wx/print.h"
 #include "wx/printdlg.h"
+
 import <vector>;
 
 //--------------------------------------------------------------------------------

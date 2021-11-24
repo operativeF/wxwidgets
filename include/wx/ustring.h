@@ -9,7 +9,6 @@
 #ifndef _WX_USTRING_H_
 #define _WX_USTRING_H_
 
-#include "wx/defs.h"
 #include "wx/string.h"
 
 import <string>;

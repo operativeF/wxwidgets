@@ -13,8 +13,6 @@
 
 #if wxUSE_COLOURDLG
 
-#include "wx/defs.h"
-
 #include "wx/colourdata.h"
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)

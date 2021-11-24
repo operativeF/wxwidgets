@@ -13,8 +13,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 #include "wx/brush.h"
 #include "wx/colour.h"
 #include "wx/font.h"

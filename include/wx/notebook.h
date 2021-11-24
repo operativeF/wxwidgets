@@ -17,7 +17,6 @@
 
 #if wxUSE_NOTEBOOK
 
-#include "wx/defs.h"
 #include "wx/bookctrl.h"
 
 import <string>;

@@ -12,8 +12,6 @@
 
 #if wxUSE_SELECT_DISPATCHER
 
-#include "wx/defs.h"
-
 #if defined(HAVE_SYS_SELECT_H)
     #include <sys/time.h>
     #include <sys/select.h>

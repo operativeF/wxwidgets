@@ -13,8 +13,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/panel.h"
 #include "wx/bitmap.h"

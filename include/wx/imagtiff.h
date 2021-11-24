@@ -15,8 +15,6 @@
 
 #if wxUSE_LIBTIFF
 
-#include "wx/defs.h"
-
 #include "wx/image.h"
 #include "wx/versioninfo.h"
 

@@ -12,8 +12,6 @@
 
 #if wxUSE_LISTCTRL
 
-#include "wx/defs.h"
-
 #include "wx/listctrl.h"
 #include "wx/selstore.h"
 #include "wx/timer.h"

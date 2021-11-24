@@ -12,8 +12,6 @@
 
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
-#include "wx/defs.h"
-
 #include "wx/stream.h"
 #include "wx/versioninfo.h"
 

@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
-
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 

@@ -13,8 +13,6 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/defs.h"
-
 #include "wx/filefn.h"  // for wxFileOffset, wxInvalidOffset and wxSeekMode
 #include "wx/object.h"
 #include "wx/string.h"

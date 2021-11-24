@@ -11,8 +11,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 
 class wxColour;

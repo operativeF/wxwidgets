@@ -13,8 +13,6 @@
 
 #if wxUSE_CHECKLISTBOX
 
-#include "wx/defs.h"
-
 #include "wx/listbox.h"
 
 import <cstdint>;

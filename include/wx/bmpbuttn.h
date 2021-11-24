@@ -13,7 +13,6 @@
 
 #if wxUSE_BMPBUTTON
 
-#include "wx/defs.h"
 #include "wx/button.h"
 
 import Utils.Geometry;

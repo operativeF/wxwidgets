@@ -10,6 +10,8 @@
 #ifndef _WX_WEAKREF_H_
 #define _WX_WEAKREF_H_
 
+#include "wx/debug.h"
+
 #include "wx/tracker.h"
 #include "wx/meta/convertible.h"
 #include "wx/meta/int2type.h"

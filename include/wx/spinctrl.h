@@ -13,8 +13,6 @@
 
 #if wxUSE_SPINCTRL
 
-#include "wx/defs.h"
-
 #include "wx/spinbutt.h"        // should make wxSpinEvent visible to the app
 
 import <string>;

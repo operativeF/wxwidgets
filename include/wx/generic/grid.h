@@ -13,8 +13,6 @@
 
 #if wxUSE_GRID
 
-#include "wx/defs.h"
-
 #include "wx/generic/gridcoord.h"
 #include "wx/generic/gridevt.h"
 

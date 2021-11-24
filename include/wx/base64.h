@@ -11,8 +11,6 @@
 
 #if wxUSE_BASE64
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/buffer.h"
 

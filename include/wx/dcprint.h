@@ -13,8 +13,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/dc.h"
 
 import Utils.Geometry;

@@ -10,8 +10,6 @@
 
 #if wxUSE_GRID
 
-#include "wx/defs.h"
-
 #include "wx/grid.h"
 #include "wx/utils.h"
 #include "wx/settings.h"

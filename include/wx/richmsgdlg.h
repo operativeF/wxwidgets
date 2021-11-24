@@ -12,8 +12,6 @@
 
 #if wxUSE_RICHMSGDLG
 
-#include "wx/defs.h"
-
 #include "wx/msgdlg.h"
 
 import <string>;

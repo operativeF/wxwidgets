@@ -13,8 +13,6 @@
 
 #if wxUSE_PROTOCOL_FILE
 
-#include "wx/defs.h"
-
 #include "wx/protocol/protocol.h"
 
 class WXDLLIMPEXP_NET wxFileProto: public wxProtocol

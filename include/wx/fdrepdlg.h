@@ -13,8 +13,6 @@
 
 #if wxUSE_FINDREPLDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 
 import Utils.Bitfield;

@@ -13,8 +13,6 @@
 
 #if wxUSE_FFILE
 
-#include "wx/defs.h"        // for wxUSE_FFILE
-
 #include  "wx/string.h"
 #include  "wx/filefn.h"
 #include  "wx/convauto.h"

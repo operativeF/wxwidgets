@@ -13,8 +13,6 @@
 
 #if wxUSE_STATBMP
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/icon.h"
 

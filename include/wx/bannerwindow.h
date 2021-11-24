@@ -12,8 +12,6 @@
 
 #if wxUSE_BANNERWINDOW
 
-#include "wx/defs.h"
-
 #include "wx/bitmap.h"
 #include "wx/event.h"
 #include "wx/window.h"

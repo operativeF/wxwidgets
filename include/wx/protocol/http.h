@@ -12,8 +12,6 @@
 
 #if wxUSE_PROTOCOL_HTTP
 
-#include "wx/defs.h"
-
 #include "wx/hashmap.h"
 #include "wx/protocol/protocol.h"
 #include "wx/buffer.h"

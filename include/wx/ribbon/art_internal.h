@@ -13,8 +13,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 WXDLLIMPEXP_RIBBON wxColour wxRibbonInterpolateColour(
                                 const wxColour& start_colour,
                                 const wxColour& end_colour,

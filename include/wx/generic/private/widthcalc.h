@@ -11,8 +11,6 @@
 
 #if wxUSE_DATAVIEWCTRL || wxUSE_LISTCTRL
 
-#include "wx/defs.h"
-
 #include "wx/log.h"
 #include "wx/timer.h"
 

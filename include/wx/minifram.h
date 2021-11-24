@@ -13,8 +13,6 @@
 
 #if wxUSE_MINIFRAME
 
-#include "wx/defs.h"
-
 #if defined(__WXMSW__)
 #include "wx/msw/minifram.h"
 #elif defined(__WXMOTIF__)

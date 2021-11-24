@@ -13,8 +13,6 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/defs.h"
-
 #include "wx/stream.h"
 
 class wxMemoryOutputStream;

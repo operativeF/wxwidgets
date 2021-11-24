@@ -13,8 +13,6 @@
 
 #if wxUSE_ODCOMBOBOX
 
-#include "wx/defs.h"
-
 #include "wx/combo.h"
 #include "wx/ctrlsub.h"
 #include "wx/vlbox.h"

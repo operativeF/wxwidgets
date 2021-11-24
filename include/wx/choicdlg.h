@@ -13,8 +13,6 @@
 
 #if wxUSE_CHOICEDLG
 
-#include "wx/defs.h"
-
 #include "wx/generic/choicdgg.h"
 
 #endif

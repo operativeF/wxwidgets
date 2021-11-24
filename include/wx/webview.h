@@ -9,8 +9,6 @@
 #ifndef _WX_WEBVIEW_H_
 #define _WX_WEBVIEW_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_WEBVIEW
 
 #include "wx/control.h"

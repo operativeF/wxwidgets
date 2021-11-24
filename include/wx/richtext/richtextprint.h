@@ -12,8 +12,6 @@
 
 #if wxUSE_RICHTEXT & wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/richtext/richtextbuffer.h"
 
 #include "wx/print.h"

@@ -14,8 +14,6 @@
 
 #if wxUSE_DYNAMIC_LOADER
 
-#include "wx/defs.h"
-
 #include "wx/dynlib.h"
 #include "wx/hashmap.h"
 #include "wx/module.h"

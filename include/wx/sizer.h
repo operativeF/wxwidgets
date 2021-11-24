@@ -11,7 +11,6 @@
 #ifndef __WXSIZER_H__
 #define __WXSIZER_H__
 
-#include "wx/defs.h"
 #include "wx/window.h"
 
 import WX.Cfg.Flags;

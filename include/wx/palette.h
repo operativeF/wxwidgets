@@ -13,8 +13,6 @@
 
 #if wxUSE_PALETTE
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 #include "wx/gdiobj.h"
 

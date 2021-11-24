@@ -14,8 +14,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 #include "wx/cmndata.h"
 #include "wx/prntbase.h"

@@ -13,8 +13,6 @@
 
 #if wxUSE_SCROLLBAR
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 
 import <string>;

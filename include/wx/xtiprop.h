@@ -14,8 +14,6 @@
 
 #if wxUSE_EXTENDED_RTTI
 
-#include "wx/defs.h"
-
 #include "wx/xti.h"
 #include "wx/any.h"
 

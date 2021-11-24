@@ -13,8 +13,6 @@
 
 #ifdef wxHAS_RAW_BITMAP
 
-#include "wx/defs.h"
-
 #include "wx/image.h"
 #include "wx/bitmap.h"
 

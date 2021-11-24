@@ -10,7 +10,6 @@
 #ifndef _WX_DFB_BRUSH_H_
 #define _WX_DFB_BRUSH_H_
 
-#include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/gdiobj.h"
 #include "wx/bitmap.h"

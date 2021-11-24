@@ -13,8 +13,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 #include "wx/dialog.h"
 #include "wx/intl.h"

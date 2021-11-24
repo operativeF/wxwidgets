@@ -13,8 +13,6 @@
 
 #if wxUSE_GRID
 
-#include "wx/defs.h"
-
 #include <fmt/core.h>
 
 class wxGridCellEditorEvtHandler : public wxEvtHandler

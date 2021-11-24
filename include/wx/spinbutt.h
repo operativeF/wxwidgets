@@ -17,8 +17,6 @@
 
 #if wxUSE_SPINBTN
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/range.h"

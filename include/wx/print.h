@@ -13,8 +13,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
 
 #include "wx/msw/printwin.h"

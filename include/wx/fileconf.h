@@ -14,8 +14,6 @@
 
 #if wxUSE_CONFIG
 
-#include "wx/defs.h"
-
 #include "wx/textfile.h"
 #include "wx/confbase.h"
 #include "wx/filename.h"

@@ -12,8 +12,6 @@
 
 #if wxUSE_STREAMS && wxUSE_GIF
 
-#include "wx/defs.h"
-
 #include "wx/stream.h"
 #include "wx/animdecod.h"
 

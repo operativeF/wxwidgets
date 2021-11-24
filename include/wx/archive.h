@@ -11,8 +11,6 @@
 
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
 
-#include "wx/defs.h"
-
 #include "wx/stream.h"
 #include "wx/filename.h"
 

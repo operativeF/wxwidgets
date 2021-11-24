@@ -17,8 +17,6 @@
 
 #if wxUSE_SOCKETS && wxUSE_IPC
 
-#include "wx/defs.h"
-
 #include "wx/ipcbase.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"

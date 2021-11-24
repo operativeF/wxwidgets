@@ -11,8 +11,6 @@
 
 #if wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
 
-#include "wx/defs.h"
-
 #include "wx/image.h"
 #include "wx/animdecod.h"
 #include "wx/dynarray.h"

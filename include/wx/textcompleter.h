@@ -10,8 +10,6 @@
 #ifndef _WX_TEXTCOMPLETER_H_
 #define _WX_TEXTCOMPLETER_H_
 
-#include "wx/defs.h"
-
 import <string>;
 import <vector>;
 

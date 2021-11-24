@@ -13,8 +13,6 @@
 
 #if wxUSE_URL
 
-#include "wx/defs.h"
-
 #include "wx/uri.h"
 #include "wx/protocol/protocol.h"
 

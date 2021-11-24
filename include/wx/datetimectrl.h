@@ -12,8 +12,6 @@
 
 #if wxUSE_DATEPICKCTRL || wxUSE_TIMEPICKCTRL
 
-#include "wx/defs.h"
-
 #define wxNEEDS_DATETIMEPICKCTRL
 
 #include "wx/control.h"         // the base class

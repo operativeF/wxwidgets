@@ -10,7 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
 #include "wx/weakref.h"
 
 #if wxUSE_MINIFRAME

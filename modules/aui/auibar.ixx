@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
-
 #include "wx/dcclient.h"
 #include "wx/control.h"
 #include "wx/sizer.h"

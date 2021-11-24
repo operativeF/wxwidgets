@@ -13,8 +13,6 @@
 
 #if wxUSE_WXHTML_HELP
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 #include "wx/string.h"
 

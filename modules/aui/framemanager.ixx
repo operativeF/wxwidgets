@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/defs.h"
-
 #include "wx/dynarray.h"
 
 #include "wx/timer.h"

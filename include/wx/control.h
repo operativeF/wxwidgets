@@ -13,8 +13,6 @@
 
 #if wxUSE_CONTROLS
 
-#include "wx/defs.h"
-
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
 

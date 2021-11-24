@@ -13,8 +13,6 @@
 
 #if wxUSE_STACKWALKER
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 class wxStackFrame;

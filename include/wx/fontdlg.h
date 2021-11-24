@@ -13,8 +13,6 @@
 
 #if wxUSE_FONTDLG
 
-#include "wx/defs.h"            // for wxUSE_FONTDLG
-
 #include "wx/dialog.h"          // the base class
 #include "wx/fontdata.h"
 

@@ -13,8 +13,6 @@
 
 #if wxUSE_NUMBERDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 
 import <string>;

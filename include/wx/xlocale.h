@@ -28,8 +28,6 @@
 
 #if wxUSE_XLOCALE
 
-#include "wx/defs.h"    // wxUSE_XLOCALE
-
 #include "wx/crt.h"     // Includes wx/chartype.h, wx/wxcrt.h(wx/string.h)
 #include "wx/intl.h"    // wxLanguage
 

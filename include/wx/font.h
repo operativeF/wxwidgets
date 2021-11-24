@@ -15,8 +15,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"        // for wxDEFAULT &c
-
 #include "wx/fontenc.h"     // the font encoding constants
 #include "wx/gdiobj.h"      // the base class
 #include "wx/gdicmn.h"      // for wxGDIObjListBase

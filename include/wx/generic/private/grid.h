@@ -13,8 +13,6 @@
 
 #if wxUSE_GRID
 
-#include "wx/defs.h"
-
 #include "wx/headerctrl.h"
 
 import Utils.Geometry;

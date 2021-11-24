@@ -12,7 +12,6 @@
 #ifndef _WX_STRCONV_H_
 #define _WX_STRCONV_H_
 
-#include "wx/defs.h"
 #include "wx/chartype.h"
 #include "wx/buffer.h"
 

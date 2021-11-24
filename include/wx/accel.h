@@ -13,8 +13,6 @@
 
 #if wxUSE_ACCEL
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 
 import <optional>;

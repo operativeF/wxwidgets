@@ -14,8 +14,6 @@
 
 #if wxUSE_TIMER
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 #include "wx/longlong.h"
 #include "wx/event.h"

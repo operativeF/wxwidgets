@@ -13,8 +13,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
-
 #include "wx/propgrid/property.h"
 #include "wx/propgrid/propgridpagestate.h"
 

@@ -10,7 +10,6 @@
 #ifndef _WX_DFB_DC_H_
 #define _WX_DFB_DC_H_
 
-#include "wx/defs.h"
 #include "wx/region.h"
 #include "wx/dc.h"
 #include "wx/dfb/dfbptr.h"

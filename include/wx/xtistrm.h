@@ -13,8 +13,6 @@
 
 #if wxUSE_EXTENDED_RTTI
 
-#include "wx/defs.h"
-
 #include "wx/object.h"
 
 inline constexpr unsigned int wxInvalidObjectID = -2;

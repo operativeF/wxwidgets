@@ -13,8 +13,6 @@
 
 #if wxUSE_MDI_ARCHITECTURE
 
-#include "wx/defs.h"
-
 #include "wx/docview.h"
 #include "wx/mdi.h"
 

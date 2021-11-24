@@ -12,8 +12,6 @@
 
 #if wxUSE_COLLPANE
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 
 import Utils.Geometry;

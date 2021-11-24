@@ -14,8 +14,6 @@
 
 #if wxUSE_SOCKETS
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 class wxSockAddressImpl;

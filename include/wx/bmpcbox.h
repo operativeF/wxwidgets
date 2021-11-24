@@ -13,8 +13,6 @@
 
 #if wxUSE_BITMAPCOMBOBOX
 
-#include "wx/defs.h"
-
 import Utils.Geometry;
 
 import <string>;

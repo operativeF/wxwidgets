@@ -13,8 +13,6 @@
 
 #if wxUSE_RADIOBOX
 
-#include "wx/defs.h"
-
 #include "wx/ctrlsub.h"
 
 import WX.Cfg.Flags;

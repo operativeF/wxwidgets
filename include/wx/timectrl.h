@@ -12,8 +12,6 @@
 
 #if wxUSE_TIMEPICKCTRL
 
-#include "wx/defs.h"
-
 #include "wx/datetimectrl.h"
 
 import <string>;

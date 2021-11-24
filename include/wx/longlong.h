@@ -14,8 +14,6 @@
 
 #if wxUSE_LONGLONG
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 import <climits>;     // for LONG_MAX

@@ -10,6 +10,8 @@ import <cmath>;
 export
 {
 
+using wxCoord = int;
+
 inline constexpr int wxDefaultCoord{-1};
 
 template<typename NumericalT>

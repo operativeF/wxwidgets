@@ -13,8 +13,6 @@
 
 #if wxUSE_CALENDARCTRL
 
-#include "wx/defs.h"
-
 #include "wx/dateevt.h"
 #include "wx/colour.h"
 #include "wx/font.h"

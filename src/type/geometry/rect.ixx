@@ -1,13 +1,13 @@
 module;
 
-#include "wx/defs.h"
-
 export module Utils.Geometry.Rect;
 
 import WX.Cfg.Flags;
 
 import Utils.Geometry.Point;
 import Utils.Geometry.Size;
+
+import <algorithm>;
 
 export
 {

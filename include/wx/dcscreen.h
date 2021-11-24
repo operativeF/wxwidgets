@@ -11,7 +11,6 @@
 #ifndef _WX_DCSCREEN_H_BASE_
 #define _WX_DCSCREEN_H_BASE_
 
-#include "wx/defs.h"
 #include "wx/dc.h"
 
 import Utils.Geometry;

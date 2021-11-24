@@ -13,8 +13,6 @@
 
 #if wxUSE_OWNER_DRAWN
 
-#include "wx/defs.h"
-
 #include "wx/font.h"
 #include "wx/colour.h"
 

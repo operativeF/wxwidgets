@@ -12,8 +12,6 @@
 
 #if wxUSE_PREFERENCES_EDITOR
 
-#include "wx/defs.h"
-
 #include "wx/bitmap.h"
 import <vector>;
 

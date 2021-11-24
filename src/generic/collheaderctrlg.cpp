@@ -9,8 +9,6 @@
 
 #if wxUSE_COLLPANE
 
-#include "wx/defs.h"
-
 #include "wx/collheaderctrl.h"
 #include "wx/dcclient.h"
 #include "wx/sizer.h"

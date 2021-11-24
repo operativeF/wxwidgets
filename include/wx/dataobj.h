@@ -13,8 +13,6 @@
 
 #if wxUSE_DATAOBJ
 
-#include "wx/defs.h"
-
 #include "wx/gdicmn.h"
 #include "wx/image.h"
 #include "wx/string.h"

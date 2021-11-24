@@ -13,16 +13,14 @@
 
 #if wxUSE_COMBOBOX
 
-#include "wx/defs.h"
-
-inline constexpr std::string_view wxComboBoxNameStr = "comboBox";
-
 // ----------------------------------------------------------------------------
 // wxComboBoxBase: this interface defines the methods wxComboBox must implement
 // ----------------------------------------------------------------------------
 
 #include "wx/ctrlsub.h"
 #include "wx/textentry.h"
+
+inline constexpr std::string_view wxComboBoxNameStr = "comboBox";
 
 class wxComboBoxBase : public wxItemContainer,
                                         public wxTextEntry

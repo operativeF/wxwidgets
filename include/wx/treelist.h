@@ -12,8 +12,6 @@
 
 #if wxUSE_TREELISTCTRL
 
-#include "wx/defs.h"
-
 #include "wx/checkbox.h"
 #include "wx/compositewin.h"
 #include "wx/containr.h"

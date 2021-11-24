@@ -11,8 +11,6 @@
 
 #if wxUSE_FILESYSTEM
 
-#include "wx/defs.h"
-
 #include "wx/datetime.h"
 #include "wx/filename.h"
 #include "wx/hashmap.h"

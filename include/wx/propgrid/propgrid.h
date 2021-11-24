@@ -13,8 +13,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
-
 #include "wx/geometry/point.h"
 #include "wx/scrolwin.h"
 #include "wx/recguard.h"

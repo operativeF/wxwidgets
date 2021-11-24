@@ -17,8 +17,6 @@
 
 #if wxUSE_FSVOLUME
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 
 import <vector>;

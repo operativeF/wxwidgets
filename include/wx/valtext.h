@@ -13,8 +13,6 @@
 
 #if wxUSE_VALIDATORS && (wxUSE_TEXTCTRL || wxUSE_COMBOBOX)
 
-#include "wx/defs.h"
-
 class wxTextEntry;
 
 #include "wx/validate.h"

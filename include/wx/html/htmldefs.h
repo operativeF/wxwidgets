@@ -12,8 +12,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 //--------------------------------------------------------------------------------
 // ALIGNMENTS
 //                  Describes alignment of text etc. in containers

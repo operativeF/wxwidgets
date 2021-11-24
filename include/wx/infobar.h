@@ -12,8 +12,6 @@
 
 #if wxUSE_INFOBAR
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 
 import <string>;

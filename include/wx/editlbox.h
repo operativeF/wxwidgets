@@ -12,8 +12,6 @@
 
 #if wxUSE_EDITABLELISTBOX
 
-#include "wx/defs.h"
-
 #include "wx/panel.h"
 
 import <string>;

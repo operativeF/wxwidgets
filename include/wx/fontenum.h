@@ -14,8 +14,6 @@
 
 #if wxUSE_FONTENUM
 
-#include "wx/defs.h"
-
 #include "wx/fontenc.h"
 
 import <string>;

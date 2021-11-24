@@ -23,8 +23,6 @@ I STRONGLY recommend reading and understanding these macros!!
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/html/winpars.h"
 
 #define TAG_HANDLER_BEGIN(name,tags)                                      \

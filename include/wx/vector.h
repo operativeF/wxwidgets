@@ -12,8 +12,6 @@
 #ifndef _WX_VECTOR_H_
 #define _WX_VECTOR_H_
 
-#include "wx/defs.h"
-
 import <vector>;
 import <algorithm>;
 

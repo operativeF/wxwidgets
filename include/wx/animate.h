@@ -13,8 +13,6 @@
 
 #if wxUSE_ANIMATIONCTRL
 
-#include "wx/defs.h"
-
 #include "wx/animdecod.h"
 #include "wx/control.h"
 #include "wx/bitmap.h"

@@ -17,8 +17,6 @@
 
 #if wxUSE_RICHTEXT
 
-#include "wx/defs.h"
-
 #include "wx/richtext/richtextbuffer.h"
 
 #if wxUSE_HTML

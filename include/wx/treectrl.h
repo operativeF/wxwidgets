@@ -17,8 +17,6 @@
 
 #if wxUSE_TREECTRL
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/treebase.h"
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through wxCLASSINFO macro

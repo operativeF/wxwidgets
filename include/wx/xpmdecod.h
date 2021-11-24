@@ -11,8 +11,6 @@
 
 #if wxUSE_IMAGE && wxUSE_XPM
 
-#include "wx/defs.h"
-
 class wxImage;
 class wxInputStream;
 

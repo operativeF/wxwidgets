@@ -13,8 +13,6 @@
 
 #if wxUSE_METAFILE
 
-#include "wx/defs.h"
-
 // provide synonyms for all metafile classes
 using wxMetaFile = wxMetafile;
 using wxMetaFileDC = wxMetafileDC;

@@ -13,8 +13,6 @@
 
 #if wxUSE_NUMBERDLG
 
-#include "wx/defs.h"
-
 #include "wx/generic/numdlgg.h"
 
 #endif // wxUSE_NUMBERDLG

@@ -13,8 +13,6 @@
 
 #if wxUSE_DATEPICKCTRL
 
-#include "wx/defs.h"
-
 #include "wx/datetimectrl.h"    // the base class
 
 import <string>;

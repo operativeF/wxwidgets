@@ -13,8 +13,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/dynarray.h"
 

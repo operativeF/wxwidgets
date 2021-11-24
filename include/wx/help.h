@@ -13,8 +13,6 @@
 
 #if wxUSE_HELP
 
-#include "wx/defs.h"
-
 #include "wx/helpbase.h"
 
 #if defined(__WXMSW__)

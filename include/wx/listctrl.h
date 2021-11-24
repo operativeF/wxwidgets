@@ -13,8 +13,6 @@
 
 #if wxUSE_LISTCTRL
 
-#include "wx/defs.h" // headers should include this before first wxUSE_XXX check
-
 #include "wx/listbase.h"
 
 import <string_view>;

@@ -13,8 +13,6 @@
 
 #if wxUSE_STATBOX
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 #include "wx/containr.h"
 

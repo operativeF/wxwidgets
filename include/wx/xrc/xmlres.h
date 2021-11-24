@@ -12,8 +12,6 @@
 
 #if wxUSE_XRC
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/dynarray.h"
 #include "wx/datetime.h"

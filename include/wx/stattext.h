@@ -13,8 +13,6 @@
 
 #if wxUSE_STATTEXT
 
-#include "wx/defs.h"
-
 #include "wx/control.h"
 
 import WX.Cfg.Flags;

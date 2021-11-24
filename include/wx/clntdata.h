@@ -11,7 +11,6 @@
 #ifndef _WX_CLNTDATAH__
 #define _WX_CLNTDATAH__
 
-#include "wx/defs.h"
 #include "wx/string.h"
 #include "wx/hashmap.h"
 

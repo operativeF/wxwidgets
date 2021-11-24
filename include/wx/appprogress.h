@@ -10,8 +10,6 @@
 #ifndef _WX_APPPROG_H_
 #define _WX_APPPROG_H_
 
-#include "wx/defs.h"
-
 class wxAppProgressIndicatorBase
 {
 public:

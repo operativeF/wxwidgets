@@ -12,8 +12,6 @@
 
 #if wxUSE_XRC
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"

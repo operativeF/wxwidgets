@@ -13,8 +13,6 @@
 
 #if wxUSE_ANY
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/meta/if.h"
 #include "wx/typeinfo.h"

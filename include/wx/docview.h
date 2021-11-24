@@ -11,8 +11,6 @@
 #ifndef _WX_DOCH__
 #define _WX_DOCH__
 
-#include "wx/defs.h"
-
 #if wxUSE_DOC_VIEW_ARCHITECTURE
 
 #include "wx/list.h"

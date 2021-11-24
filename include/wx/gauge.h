@@ -13,8 +13,6 @@
 
 #if wxUSE_GAUGE
 
-#include "wx/defs.h"
-
 #include "wx/appprogress.h"
 #include "wx/control.h"
 

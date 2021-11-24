@@ -13,8 +13,6 @@
 
 #if wxUSE_TEXTDLG
 
-#include "wx/defs.h"
-
 #include "wx/dialog.h"
 
 #if wxUSE_VALIDATORS

@@ -17,8 +17,6 @@
 
 #if wxUSE_RICHTEXT
 
-#include "wx/defs.h"
-
 #include "wx/propdlg.h"
 #include "wx/bookctrl.h"
 #include "wx/withimages.h"

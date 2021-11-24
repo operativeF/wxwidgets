@@ -13,8 +13,6 @@
 
 #define _USE_MATH_DEFINES
 
-#include "wx/defs.h"
-
 import <cmath>;
 import <cstdlib>;
 import <numbers>;

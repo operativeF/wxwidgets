@@ -13,8 +13,6 @@
 
 #if wxUSE_RIBBON
 
-#include "wx/defs.h"
-
 class wxImageList;
 
 #include "wx/ribbon/control.h"

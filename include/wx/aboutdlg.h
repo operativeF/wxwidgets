@@ -12,8 +12,6 @@
 
 #if wxUSE_ABOUTDLG
 
-#include "wx/defs.h"
-
 #include "wx/app.h"
 #include "wx/icon.h"
 

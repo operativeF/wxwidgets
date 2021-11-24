@@ -21,8 +21,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"        // everybody should include this
-
 #if defined(__WXMAC__)
     #include <ctype.h>
 #endif

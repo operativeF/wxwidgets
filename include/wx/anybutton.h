@@ -12,7 +12,6 @@
 
 #ifdef wxHAS_ANY_BUTTON
 
-#include "wx/defs.h"
 #include "wx/bitmap.h"
 #include "wx/control.h"
 

@@ -13,8 +13,6 @@
 
 #if wxUSE_JOYSTICK
 
-#include "wx/defs.h"
-
 #if defined(WX_WINDOWS)
 #include "wx/msw/joystick.h"
 #elif defined(__WXMOTIF__)

@@ -13,8 +13,6 @@
 
 #if wxUSE_DRAG_AND_DROP
 
-#include "wx/defs.h"
-
 #include "wx/dataobj.h"
 #include "wx/cursor.h"
 

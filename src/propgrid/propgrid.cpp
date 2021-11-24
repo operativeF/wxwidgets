@@ -10,7 +10,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
 #include "wx/app.h"
 #include "wx/object.h"
 #include "wx/hash.h"

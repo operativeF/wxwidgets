@@ -11,8 +11,6 @@
 
 #if wxUSE_FS_ZIP
 
-#include "wx/defs.h"
-
 #include "wx/fs_arc.h"
 
 using wxZipFSHandler = wxArchiveFSHandler;

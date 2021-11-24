@@ -13,7 +13,6 @@
 
 #if wxUSE_TOOLBAR
 
-#include "wx/defs.h"
 #include "wx/bitmap.h"
 #include "wx/list.h"
 #include "wx/control.h"

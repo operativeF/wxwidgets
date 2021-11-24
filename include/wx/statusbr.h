@@ -13,7 +13,6 @@
 
 #if wxUSE_STATUSBAR
 
-#include "wx/defs.h"
 #include "wx/control.h"
 #include "wx/dynarray.h"
 

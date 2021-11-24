@@ -11,7 +11,6 @@
 #ifndef _WX_ARRSTR_H
 #define _WX_ARRSTR_H
 
-#include "wx/defs.h"
 #include "wx/string.h"
 #include "wx/dynarray.h"
 

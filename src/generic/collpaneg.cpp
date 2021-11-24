@@ -8,12 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-#include "wx/defs.h"
-
 #if wxUSE_COLLPANE && wxUSE_BUTTON && wxUSE_STATLINE
 
 #include "wx/collpane.h"

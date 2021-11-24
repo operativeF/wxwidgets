@@ -11,8 +11,6 @@
 
 #if wxUSE_FS_ARCHIVE
 
-#include "wx/defs.h"
-
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
 

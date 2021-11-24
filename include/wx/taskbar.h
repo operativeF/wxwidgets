@@ -13,8 +13,6 @@
 
 #if wxUSE_TASKBARICON
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 
 import <string>;

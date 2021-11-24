@@ -11,7 +11,6 @@
 #ifndef _WX_HASH_H__
 #define _WX_HASH_H__
 
-#include "wx/defs.h"
 #include "wx/string.h"
 
 class wxObject;

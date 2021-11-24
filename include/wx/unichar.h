@@ -10,7 +10,6 @@
 #ifndef _WX_UNICHAR_H_
 #define _WX_UNICHAR_H_
 
-#include "wx/defs.h"
 #include "wx/chartype.h"
 #include "wx/stringimpl.h"
 

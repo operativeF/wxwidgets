@@ -13,8 +13,6 @@
 
 #if wxUSE_CLIPBOARD
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 #include "wx/chartype.h"
 #include "wx/dataobj.h"     // for wxDataFormat

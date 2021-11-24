@@ -14,8 +14,6 @@
 
 #if wxUSE_EXTENDED_RTTI
 
-#include "wx/defs.h"
-
 #include "wx/xti.h"
 
 // copied from event.h which cannot be included at this place

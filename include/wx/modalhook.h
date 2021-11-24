@@ -57,7 +57,7 @@ protected:
 
     // Called by wxWidgets after dismissing the modal dialog. Notice that it
     // won't be called if Enter() hadn't been.
-    virtual void Exit(wxDialog* WXUNUSED(dialog)) { }
+    virtual void Exit([[maybe_unused]] wxDialog* dialog) { }
 
 private:
     // Unregister the given hook, return true if it was done or false if the

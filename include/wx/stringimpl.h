@@ -19,7 +19,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"        // everybody should include this
 #include "wx/chartype.h"    // for wxChar
 #include "wx/wxcrtbase.h"   // for wxStrlen() etc.
 

@@ -12,8 +12,6 @@
 
 #if wxUSE_COMMANDLINKBUTTON
 
-#include "wx/defs.h"
-
 #include "wx/button.h"
 
 import Utils.Strings;

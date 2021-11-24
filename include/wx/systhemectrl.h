@@ -10,8 +10,6 @@
 #ifndef _WX_SYSTHEMECTRL_H
 #define _WX_SYSTHEMECTRL_H
 
-#include "wx/defs.h"
-
 #if defined(__WXMSW__) && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
     #define wxHAS_SYSTEM_THEMED_CONTROL
 #endif

@@ -11,8 +11,6 @@
 #ifndef _WX_STDPATHS_H_
 #define _WX_STDPATHS_H_
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/filefn.h"
 

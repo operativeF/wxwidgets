@@ -13,8 +13,6 @@
 
 #if wxUSE_COLOURPICKERCTRL
 
-#include "wx/defs.h"
-
 #include "wx/colour.h"
 #include "wx/pickerbase.h"
 

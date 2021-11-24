@@ -17,8 +17,6 @@
 
 #if wxUSE_CHOICE
 
-#include "wx/defs.h"
-
 #include "wx/ctrlsub.h"     // the base class
 
 // ----------------------------------------------------------------------------

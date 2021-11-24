@@ -13,8 +13,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
-
 #include "wx/colour.h"
 #include "wx/hashset.h"
 

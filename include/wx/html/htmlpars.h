@@ -11,14 +11,13 @@
 
 #if wxUSE_HTML
 
-#include "wx/defs.h"
-
 #include "wx/html/htmltag.h"
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-import <vector>;
 #include "wx/fontenc.h"
+
+import <vector>;
 
 class wxMBConv;
 class wxHtmlParser;

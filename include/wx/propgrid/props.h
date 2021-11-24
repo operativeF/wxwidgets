@@ -13,8 +13,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
-
 // -----------------------------------------------------------------------
 
 class wxPGArrayEditorDialog;

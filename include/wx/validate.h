@@ -13,8 +13,6 @@
 
 #if wxUSE_VALIDATORS
 
-#include "wx/defs.h"
-
 #include "wx/event.h"
 
 class wxWindow;

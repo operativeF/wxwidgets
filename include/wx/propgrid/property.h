@@ -13,8 +13,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/defs.h"
-
 #include "wx/propgrid/propgriddefs.h"
 #include "wx/bitmap.h"
 #include "wx/font.h"

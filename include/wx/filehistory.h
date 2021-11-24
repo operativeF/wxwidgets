@@ -12,8 +12,6 @@
 
 #if wxUSE_FILE_HISTORY
 
-#include "wx/defs.h"
-
 #include "wx/windowid.h"
 #include "wx/object.h"
 #include "wx/list.h"

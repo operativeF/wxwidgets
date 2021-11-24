@@ -13,8 +13,6 @@
 
 #if wxUSE_TOOLTIPS
 
-#include "wx/defs.h"
-
 #if defined(__WXMSW__)
 #include "wx/msw/tooltip.h"
 #elif defined(__WXMOTIF__)

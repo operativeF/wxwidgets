@@ -28,14 +28,13 @@
 // headers
 // -----------------------------------------------------------------------------
 
-#include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/string.h"
-import <vector>;
 
 import <algorithm>;
 import <iterator>;
 import <list>;
+import <vector>;
 
 /* ---------------------------------------------------------------------------- */
 /* wxList types */

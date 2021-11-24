@@ -15,8 +15,6 @@
 // headers
 // ---------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #include "wx/list.h"
 #include "wx/string.h"
 #include "wx/fontenc.h"

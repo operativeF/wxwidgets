@@ -13,7 +13,6 @@
 
 #if wxUSE_RADIOBTN
 
-#include "wx/defs.h"
 #include "wx/control.h"
 
 class wxRadioButton;

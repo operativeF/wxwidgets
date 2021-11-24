@@ -13,8 +13,6 @@
 
 #if wxUSE_XML
 
-#include "wx/defs.h"
-
 #include "wx/string.h"
 #include "wx/object.h"
 #include "wx/textbuf.h"

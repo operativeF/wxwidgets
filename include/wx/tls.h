@@ -10,8 +10,6 @@
 #ifndef _WX_TLS_H_
 #define _WX_TLS_H_
 
-#include "wx/defs.h"
-
 // ----------------------------------------------------------------------------
 // check for compiler support of thread-specific variables
 // ----------------------------------------------------------------------------
