@@ -154,7 +154,7 @@ wxAppConsoleBase::~wxAppConsoleBase()
 // initialization/cleanup
 // ----------------------------------------------------------------------------
 
-bool wxAppConsoleBase::Initialize([[maybe_unused]] int& argc, wxChar **WXUNUSED(argv))
+bool wxAppConsoleBase::Initialize([[maybe_unused]] int& argc, [[maybe_unused]] wxChar** argv)
 {
 #if defined(WX_WINDOWS)
     ::SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);

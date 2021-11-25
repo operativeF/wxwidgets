@@ -94,16 +94,16 @@ public:
                                       [[maybe_unused]] const wxObject *object,
                                       [[maybe_unused]] const wxClassInfo* classInfo,
                                       [[maybe_unused]] const wxPropertyInfo *propInfo,
-                                      const wxObject *&WXUNUSED(eventSink),
-                                      const wxHandlerInfo* &WXUNUSED(handlerInfo) )
+                                      [[maybe_unused]] const wxObject*& eventSink,
+                                      [[maybe_unused]] const wxHandlerInfo*& handlerInfo )
         { return true; }
 
     virtual void AfterWriteDelegate( [[maybe_unused]] wxObjectWriter *writer,
                                      [[maybe_unused]] const wxObject *object,
                                      [[maybe_unused]] const wxClassInfo* classInfo,
                                      [[maybe_unused]] const wxPropertyInfo *propInfo,
-                                     const wxObject *&WXUNUSED(eventSink),
-                                     const wxHandlerInfo* &WXUNUSED(handlerInfo) )
+                                     [[maybe_unused]] const wxObject*& eventSink,
+                                     [[maybe_unused]] const wxHandlerInfo*& handlerInfo )
         { }
 };
 

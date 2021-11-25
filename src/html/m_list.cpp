@@ -47,7 +47,7 @@ wxHtmlListmarkCell::wxHtmlListmarkCell(wxDC* dc, const wxColour& clr) :  m_Brush
 
 
 void wxHtmlListmarkCell::Draw(wxDC& dc, int x, int y,
-                              int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                              [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                               [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     dc.SetBrush(m_Brush);

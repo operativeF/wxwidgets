@@ -148,7 +148,7 @@ void wxOverlayImpl::Reset()
     m_bmpSaved = wxBitmap();
 }
 
-void wxOverlayImpl::BeginDrawing(wxDC*  WXUNUSED(dc))
+void wxOverlayImpl::BeginDrawing([[maybe_unused]] wxDC* dc)
 {
 }
 

@@ -211,7 +211,7 @@ protected:
     // at once and should be implemented for controls using wxHD_ALLOW_REORDER
     // style (there is no need to call SetColumnsOrder() from here, this is
     // done by the control itself)
-    virtual void UpdateColumnsOrder(const std::vector<int>& WXUNUSED(order))
+    virtual void UpdateColumnsOrder([[maybe_unused]] const std::vector<int>& order)
     {
         wxFAIL_MSG( "must be overridden if called" );
     }

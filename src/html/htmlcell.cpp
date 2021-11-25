@@ -433,7 +433,8 @@ static void SwitchSelState(wxDC& dc, wxHtmlRenderingInfo& info,
 
 
 void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
-                          int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                          [[maybe_unused]] int view_y1,
+                          [[maybe_unused]] int view_y2,
                           wxHtmlRenderingInfo& info)
 {
 #if 0 // useful for debugging
@@ -1468,7 +1469,8 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlColourCell, wxHtmlCell);
 
 void wxHtmlColourCell::Draw(wxDC& dc,
                             int x, int y,
-                            int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                            [[maybe_unused]] int view_y1,
+                            [[maybe_unused]] int view_y2,
                             wxHtmlRenderingInfo& info)
 {
     DrawInvisible(dc, x, y, info);
@@ -1526,7 +1528,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlFontCell, wxHtmlCell);
 
 void wxHtmlFontCell::Draw(wxDC& dc,
                           [[maybe_unused]] int x, [[maybe_unused]] int y,
-                          int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                          [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                           [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     dc.SetFont(m_Font);
@@ -1566,7 +1568,7 @@ wxHtmlWidgetCell::wxHtmlWidgetCell(wxWindow *wnd, int w)
 
 void wxHtmlWidgetCell::Draw([[maybe_unused]] wxDC& dc,
                             [[maybe_unused]] int x, [[maybe_unused]] int y,
-                            int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                            [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                             [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     int absx = 0, absy = 0;

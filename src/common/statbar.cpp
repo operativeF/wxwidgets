@@ -135,7 +135,7 @@ void wxStatusBarBase::SetFieldsCount(int number, const int *widths)
     SetStatusWidths(number, widths);
 }
 
-void wxStatusBarBase::SetStatusWidths(int WXUNUSED_UNLESS_DEBUG(n),
+void wxStatusBarBase::SetStatusWidths([[maybe_unused]] int n,
                                     const int widths[])
 {
     wxASSERT_MSG( (size_t)n == m_panes.GetCount(), "field number mismatch" );
@@ -158,7 +158,7 @@ void wxStatusBarBase::SetStatusWidths(int WXUNUSED_UNLESS_DEBUG(n),
     Refresh();
 }
 
-void wxStatusBarBase::SetStatusStyles(int WXUNUSED_UNLESS_DEBUG(n),
+void wxStatusBarBase::SetStatusStyles([[maybe_unused]] int n,
                                     const int styles[])
 {
     wxCHECK_RET( styles, "NULL pointer in SetStatusStyles" );

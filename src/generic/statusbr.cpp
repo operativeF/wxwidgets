@@ -53,10 +53,10 @@ constexpr int wxFIELD_TEXT_MARGIN = 2;
 #if GTK_CHECK_VERSION(2,12,0)
 extern "C" {
 static
-gboolean statusbar_query_tooltip(GtkWidget*   WXUNUSED(widget),
+gboolean statusbar_query_tooltip([[maybe_unused]] GtkWidget*  widget,
                                  gint        x,
                                  gint        y,
-                                 gboolean     WXUNUSED(keyboard_mode),
+                                 [[maybe_unused]] gboolean    keyboard_mode,
                                  GtkTooltip *tooltip,
                                  wxStatusBar* statbar)
 {

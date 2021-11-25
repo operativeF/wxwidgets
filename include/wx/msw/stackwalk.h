@@ -87,7 +87,7 @@ class wxStackWalker : public wxStackWalkerBase
 public:
     // we don't use ctor argument, it is for compatibility with Unix version
     // only
-    wxStackWalker(const char * WXUNUSED(argv0) = nullptr) { }
+    wxStackWalker([[maybe_unused]] const char* argv0) {}
 
     void Walk(size_t skip = 1, size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
 #if wxUSE_ON_FATAL_EXCEPTION

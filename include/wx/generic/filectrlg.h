@@ -263,8 +263,8 @@ private:
     void OnChoiceFilter( wxCommandEvent &event );
     void OnCheck( wxCommandEvent &event );
     void OnActivated( wxListEvent &event );
-    void OnTextEnter( wxCommandEvent &WXUNUSED( event ) );
-    void OnTextChange( wxCommandEvent &WXUNUSED( event ) );
+    void OnTextEnter( [[maybe_unused]] wxCommandEvent& event );
+    void OnTextChange( [[maybe_unused]] wxCommandEvent& event );
     void OnSelected( wxListEvent &event );
     void HandleAction( const std::string &fn );
 

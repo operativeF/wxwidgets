@@ -2463,7 +2463,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 }
 
 /// Get/set the size for the given range.
-bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* WXUNUSED(partialExtents)) const
+bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, [[maybe_unused]] std::vector<int>* partialExtents) const
 {
     wxSize sz;
 

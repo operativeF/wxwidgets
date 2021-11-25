@@ -63,8 +63,8 @@ wxBEGIN_EVENT_TABLE(wxHeaderCtrlBase, wxControl)
 wxEND_EVENT_TABLE()
 
 void wxHeaderCtrlBase::ScrollWindow(int dx,
-                                    int WXUNUSED_UNLESS_DEBUG(dy),
-                                    const wxRect * WXUNUSED_UNLESS_DEBUG(rect))
+                                    [[maybe_unused]] int dy,
+                                    [[maybe_unused]] const wxRect* rect)
 
 {
     // this doesn't make sense at all

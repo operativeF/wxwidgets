@@ -254,7 +254,7 @@ wxCmdLineArgImpl::wxCmdLineArgImpl(wxCmdLineEntryType k,
     Reset();
 }
 
-void wxCmdLineArgImpl::Check(wxCmdLineParamType WXUNUSED_UNLESS_DEBUG(typ)) const
+void wxCmdLineArgImpl::Check([[maybe_unused]] wxCmdLineParamType typ) const
 {
     // NB: Type is always wxCmdLineParamType::None for booleans, so mismatch between
     //  switches / options / params is well checked by this test

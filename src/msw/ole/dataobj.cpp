@@ -903,10 +903,10 @@ STDMETHODIMP wxIDataObject::EnumFormatEtc(DWORD dwDir,
 // advise sink functions (not implemented)
 // ----------------------------------------------------------------------------
 
-STDMETHODIMP wxIDataObject::DAdvise(FORMATETC   *WXUNUSED(pformatetc),
-                                    DWORD        WXUNUSED(advf),
+STDMETHODIMP wxIDataObject::DAdvise([[maybe_unused]] FORMATETC   *pformatetc,
+                                    [[maybe_unused]] DWORD        advf,
                                     [[maybe_unused]] IAdviseSink *pAdvSink,
-                                    DWORD       *WXUNUSED(pdwConnection))
+                                    [[maybe_unused]] DWORD       *pdwConnection)
 {
   return OLE_E_ADVISENOTSUPPORTED;
 }
@@ -916,7 +916,7 @@ STDMETHODIMP wxIDataObject::DUnadvise([[maybe_unused]] DWORD dwConnection)
   return OLE_E_ADVISENOTSUPPORTED;
 }
 
-STDMETHODIMP wxIDataObject::EnumDAdvise(IEnumSTATDATA **WXUNUSED(ppenumAdvise))
+STDMETHODIMP wxIDataObject::EnumDAdvise([[maybe_unused]] IEnumSTATDATA** ppenumAdvise)
 {
   return OLE_E_ADVISENOTSUPPORTED;
 }

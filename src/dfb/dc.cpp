@@ -200,8 +200,8 @@ void wxDFBDCImpl::DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
 
 // Draws an arc of a circle, centred on (xc, yc), with starting point (x1, y1)
 // and ending at (x2, y2)
-void wxDFBDCImpl::DoDrawArc(wxCoord WXUNUSED(x1), wxCoord WXUNUSED(y1),
-                            wxCoord WXUNUSED(x2), wxCoord WXUNUSED(y2),
+void wxDFBDCImpl::DoDrawArc([[maybe_unused]] wxCoord x1, [[maybe_unused]] wxCoord y1,
+                            [[maybe_unused]] wxCoord x2, [[maybe_unused]] wxCoord y2,
                             [[maybe_unused]] wxCoord xc, [[maybe_unused]] wxCoord yc)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );

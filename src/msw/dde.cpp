@@ -751,8 +751,8 @@ _DDECallback(WXUINT wType,
              HSZ hsz1,
              HSZ hsz2,
              HDDEDATA hData,
-             ULONG_PTR WXUNUSED(lData1),
-             ULONG_PTR WXUNUSED(lData2))
+             [[maybe_unused]] ULONG_PTR lData1,
+             [[maybe_unused]] ULONG_PTR lData2)
 {
     switch (wType)
     {

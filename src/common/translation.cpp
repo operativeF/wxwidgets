@@ -99,7 +99,7 @@ void LogTraceLargeArray(const std::string& prefix, const std::vector<std::string
 #endif // wxUSE_LOG_TRACE/!wxUSE_LOG_TRACE
 
 // Use locale-based detection as a fallback
-std::string GetPreferredUILanguageFallback(const std::vector<std::string>& WXUNUSED(available))
+std::string GetPreferredUILanguageFallback([[maybe_unused]] const std::vector<std::string>& available)
 {
     std::string lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
     wxLogTrace(TRACE_I18N, " - obtained best language from locale: %s", lang);

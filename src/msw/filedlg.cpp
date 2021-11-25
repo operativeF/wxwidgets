@@ -137,7 +137,7 @@ void RestoreExceptionPolicy()
 UINT_PTR APIENTRY
 wxFileDialogHookFunction(WXHWND      hDlg,
                          WXUINT      iMsg,
-                         WXWPARAM    WXUNUSED(wParam),
+                         [[maybe_unused]] WXWPARAM    wParam,
                          WXLPARAM    lParam)
 {
     switch ( iMsg )

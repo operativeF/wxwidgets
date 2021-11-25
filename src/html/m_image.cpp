@@ -54,7 +54,7 @@ class wxHtmlImageMapAreaCell : public wxHtmlCell
         wxHtmlLinkInfo *GetLink( int x = 0, int y = 0 ) const override;
         void Draw([[maybe_unused]] wxDC& dc,
                   [[maybe_unused]] int x, [[maybe_unused]] int y,
-                  int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                  [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                   [[maybe_unused]] wxHtmlRenderingInfo& info) override {}
 
 
@@ -225,7 +225,7 @@ class wxHtmlImageMapCell : public wxHtmlCell
         const wxHtmlCell *Find( int cond, const void *param ) const override;
         void Draw([[maybe_unused]] wxDC& dc,
                   [[maybe_unused]] int x, [[maybe_unused]] int y,
-                  int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                  [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                   [[maybe_unused]] wxHtmlRenderingInfo& info) override {}
 
     wxHtmlImageMapCell(const wxHtmlImageMapCell&) = delete;
@@ -572,7 +572,7 @@ wxHtmlImageCell::~wxHtmlImageCell()
 
 
 void wxHtmlImageCell::Draw(wxDC& dc, int x, int y,
-                           int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+                           [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
                            [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     if ( m_showFrame )

@@ -31,11 +31,6 @@
 #include "wx/stopwatch.h"
 #include "wx/xml/xml.h"
 
-// For use with earlier versions of wxWidgets
-#ifndef WXUNUSED_IN_UNICODE
-#define WXUNUSED_IN_UNICODE(x) WXUNUSED(x)
-#endif
-
 // Set to 1 for slower wxXmlDocument method, 0 for faster direct method.
 // If we make wxXmlDocument::Save more efficient, we might switch to this
 // method.
@@ -1865,7 +1860,7 @@ bool wxRichTextXMLHelper::ImportProperties(wxRichTextProperties& properties, wxX
 #if wxRICHTEXT_HAVE_DIRECT_OUTPUT
 // write string to output
 void wxRichTextXMLHelper::OutputString(wxOutputStream& stream, const wxString& str,
-                                wxMBConv *WXUNUSED_IN_UNICODE(convMem), wxMBConv *convFile)
+                                [[maybe_unused]] wxMBConv* convMem, wxMBConv *convFile)
 {
     if (str.empty()) return;
 

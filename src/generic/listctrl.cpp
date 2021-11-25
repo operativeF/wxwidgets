@@ -5165,7 +5165,7 @@ std::vector<int> wxGenericListCtrl::GetColumnsOrder() const
     return std::vector<int>();
 }
 
-bool wxGenericListCtrl::SetColumnsOrder(const std::vector<int>& WXUNUSED(orders))
+bool wxGenericListCtrl::SetColumnsOrder([[maybe_unused]] const std::vector<int>& orders)
 {
     // TODO: Implement this on generic port
     return false;

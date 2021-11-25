@@ -210,7 +210,7 @@ wxString wxNotebook::GetPageText(size_t nPage) const
         return {};
 }
 
-int wxNotebook::GetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage)) const
+int wxNotebook::GetPageImage([[maybe_unused]] size_t nPage) const
 {
     wxASSERT( IS_VALID_PAGE(nPage) );
 
@@ -218,7 +218,7 @@ int wxNotebook::GetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage)) const
     return 0;
 }
 
-bool wxNotebook::SetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage),
+bool wxNotebook::SetPageImage([[maybe_unused]] size_t nPage,
                               [[maybe_unused]] int nImage)
 {
     wxASSERT( IS_VALID_PAGE(nPage) );

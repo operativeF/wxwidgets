@@ -173,7 +173,7 @@ void wxWebViewEdgeImpl::UpdateBounds()
         m_webViewController->put_Bounds(r);
 }
 
-HRESULT wxWebViewEdgeImpl::OnNavigationStarting(ICoreWebView2* WXUNUSED(sender), ICoreWebView2NavigationStartingEventArgs* args)
+HRESULT wxWebViewEdgeImpl::OnNavigationStarting([[maybe_unused]] ICoreWebView2* sender, ICoreWebView2NavigationStartingEventArgs* args)
 {
     m_isBusy = true;
     wxString evtURL;
@@ -191,7 +191,7 @@ HRESULT wxWebViewEdgeImpl::OnNavigationStarting(ICoreWebView2* WXUNUSED(sender),
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnSourceChanged(ICoreWebView2 * WXUNUSED(sender), ICoreWebView2SourceChangedEventArgs * args)
+HRESULT wxWebViewEdgeImpl::OnSourceChanged([[maybe_unused]] ICoreWebView2* sender, ICoreWebView2SourceChangedEventArgs * args)
 {
     BOOL isNewDocument;
     if (SUCCEEDED(args->get_IsNewDocument(&isNewDocument)) && !isNewDocument)
@@ -206,7 +206,7 @@ HRESULT wxWebViewEdgeImpl::OnSourceChanged(ICoreWebView2 * WXUNUSED(sender), ICo
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnNavigationCompleted(ICoreWebView2* WXUNUSED(sender), ICoreWebView2NavigationCompletedEventArgs* args)
+HRESULT wxWebViewEdgeImpl::OnNavigationCompleted([[maybe_unused]] ICoreWebView2* sender, ICoreWebView2NavigationCompletedEventArgs* args)
 {
     BOOL isSuccess;
     if (!args)
@@ -279,7 +279,7 @@ HRESULT wxWebViewEdgeImpl::OnNavigationCompleted(ICoreWebView2* WXUNUSED(sender)
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnNewWindowRequested(ICoreWebView2* WXUNUSED(sender), ICoreWebView2NewWindowRequestedEventArgs* args)
+HRESULT wxWebViewEdgeImpl::OnNewWindowRequested([[maybe_unused]] ICoreWebView2* sender, ICoreWebView2NewWindowRequestedEventArgs* args)
 {
     wxCoTaskMemPtr<wchar_t> uri;
     wxString evtURL;
@@ -297,7 +297,7 @@ HRESULT wxWebViewEdgeImpl::OnNewWindowRequested(ICoreWebView2* WXUNUSED(sender),
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged(ICoreWebView2* WXUNUSED(sender), [[maybe_unused]] IUnknown* args)
+HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged([[maybe_unused]] ICoreWebView2* sender, [[maybe_unused]] IUnknown* args)
 {
     wxWebViewEvent event(wxEVT_WEBVIEW_TITLE_CHANGED,
         m_ctrl->GetId(), m_ctrl->GetCurrentURL(), "");
@@ -307,7 +307,7 @@ HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged(ICoreWebView2* WXUNUSED(sender
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnContentLoading(ICoreWebView2* WXUNUSED(sender), ICoreWebView2[[maybe_unused]] ContentLoadingEventArgs* args)
+HRESULT wxWebViewEdgeImpl::OnContentLoading([[maybe_unused]] ICoreWebView2* sender, ICoreWebView2[[maybe_unused]] ContentLoadingEventArgs* args)
 {
     wxWebViewEvent event(wxEVT_WEBVIEW_LOADED, m_ctrl->GetId(),
         m_ctrl->GetCurrentURL(), "");
@@ -316,7 +316,7 @@ HRESULT wxWebViewEdgeImpl::OnContentLoading(ICoreWebView2* WXUNUSED(sender), ICo
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnContainsFullScreenElementChanged(ICoreWebView2* WXUNUSED(sender), [[maybe_unused]] IUnknown* args)
+HRESULT wxWebViewEdgeImpl::OnContainsFullScreenElementChanged([[maybe_unused]] ICoreWebView2* sender, [[maybe_unused]] IUnknown* args)
 {
     BOOL containsFullscreenEvent;
     HRESULT hr = m_webView->get_ContainsFullScreenElement(&containsFullscreenEvent);
@@ -333,7 +333,7 @@ HRESULT wxWebViewEdgeImpl::OnContainsFullScreenElementChanged(ICoreWebView2* WXU
 }
 
 HRESULT
-wxWebViewEdgeImpl::OnWebMessageReceived(ICoreWebView2* WXUNUSED(sender),
+wxWebViewEdgeImpl::OnWebMessageReceived([[maybe_unused]] ICoreWebView2* sender,
                                         ICoreWebView2WebMessageReceivedEventArgs* args)
 {
     wxCoTaskMemPtr<wchar_t> msgContent;
@@ -942,7 +942,7 @@ void wxWebViewEdge::RemoveAllUserScripts()
     m_impl->m_userScriptIds.clear();
 }
 
-void wxWebViewEdge::RegisterHandler(std::shared_ptr<wxWebViewHandler> WXUNUSED(handler))
+void wxWebViewEdge::RegisterHandler([[maybe_unused]] std::shared_ptr<wxWebViewHandler> handler)
 {
     // TODO: could maybe be implemented via IWebView2WebView5::add_WebResourceRequested
     wxLogDebug("Registering handlers is not supported");

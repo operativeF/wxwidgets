@@ -148,7 +148,7 @@ void wxPGEditor::DeleteItem( wxWindow*, int ) const
 {
 }
 
-void wxPGEditor::SetItems([[maybe_unused]] wxWindow* ctrl, const std::vector<std::string>& WXUNUSED(labels)) const
+void wxPGEditor::SetItems([[maybe_unused]] wxWindow* ctrl, [[maybe_unused]] const std::vector<std::string>& labels) const
 {
 }
 

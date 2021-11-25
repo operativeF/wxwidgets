@@ -17,7 +17,7 @@ FORCE_LINK_ME(m_style)
 TAG_HANDLER_BEGIN(STYLE, "STYLE")
     TAG_HANDLER_CONSTR(STYLE) { }
 
-    TAG_HANDLER_PROC(WXUNUSED(tag))
+    TAG_HANDLER_PROC([[maybe_unused]] tag)
     {
         // VS: Ignore styles for now. We must have this handler present,
         //     because CSS style text would be rendered verbatim otherwise

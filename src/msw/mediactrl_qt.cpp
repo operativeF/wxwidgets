@@ -705,7 +705,7 @@ bool wxQTMediaBackend::Load(const wxString& fileName)
 // Anyway we set up the loading timer here to tell us when the movie is done
 //---------------------------------------------------------------------------
 void wxQTMediaBackend::PPRMProc (Movie theMovie,
-                                 OSErr WXUNUSED_UNLESS_DEBUG(theErr),
+                                 [[maybe_unused]] OSErr theErr,
                                  void* theRefCon)
 {
     wxASSERT( theMovie );

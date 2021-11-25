@@ -257,13 +257,13 @@ GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
 
 void
 GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
-    SaveBuiltContext (wxGraphicsContext *&WXUNUSED(gc))
+    SaveBuiltContext ([[maybe_unused]] wxGraphicsContext*& gc)
 {
 }
 
 void
 GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
-    CleanUp ([[maybe_unused]] wxGraphicsContext *gc)
+    CleanUp ([[maybe_unused]] wxGraphicsContext* gc)
 {
     wxDELETE (m_svgFileDc);
 }

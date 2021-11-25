@@ -929,7 +929,7 @@ template<> struct wxStrtoxCharType<wchar_t**>
 template<> struct wxStrtoxCharType<int>
 {
     using Type = const char*; /* this one is never used */
-    static char** AsPointer(int WXUNUSED_UNLESS_DEBUG(p))
+    static char** AsPointer([[maybe_unused]] int p)
     {
         wxASSERT_MSG( p == 0, "passing non-NULL int is invalid" );
         return nullptr;

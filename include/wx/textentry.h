@@ -244,7 +244,7 @@ protected:
     // auto-completion, they do the same thing as their public counterparts but
     // have different names to allow overriding just one of them without hiding
     // the other one(s)
-    virtual bool DoAutoCompleteStrings(const std::vector<std::string>& WXUNUSED(choices))
+    virtual bool DoAutoCompleteStrings([[maybe_unused]] const std::vector<std::string>& choices)
         { return false; }
     virtual bool DoAutoCompleteFileNames([[maybe_unused]] unsigned int flags) // wxFILE | wxDIR
         { return false; }

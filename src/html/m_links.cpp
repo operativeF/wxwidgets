@@ -24,7 +24,7 @@ public:
          m_AnchorName(name) { }
     void Draw([[maybe_unused]] wxDC& dc,
               [[maybe_unused]] int x, [[maybe_unused]] int y,
-              int WXUNUSED(view_y1), int WXUNUSED(view_y2),
+              [[maybe_unused]] int view_y1, [[maybe_unused]] int view_y2,
               [[maybe_unused]] wxHtmlRenderingInfo& info) override {}
 
     const wxHtmlCell* Find(int condition, const void* param) const override

@@ -1493,7 +1493,7 @@ public:
     }
 
 protected:
-    void DoSetSize(wxRect boundary, unsigned int WXUNUSED(sizeFlags = wxSIZE_AUTO)) override
+    void DoSetSize(wxRect boundary, [[maybe_unused]] unsigned int sizeFlags) override
     {
         m_rect = boundary;
         DoSizing();
@@ -1505,7 +1505,7 @@ protected:
     }
 
 public:
-    bool Show( bool WXUNUSED(show = true) ) override { return false; }
+    bool Show( [[maybe_unused]] bool show ) override { return false; }
 
     void DoSizing()
     {

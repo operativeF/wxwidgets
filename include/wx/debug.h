@@ -125,9 +125,7 @@ extern void wxSetDefaultAssertHandler();
 
 // provide empty stubs in case assertions are completely disabled
 //
-// NB: can't use WXUNUSED() here as we're included from wx/defs.h before it is
-//     defined
-inline wxAssertHandler_t wxSetAssertHandler(wxAssertHandler_t /* handler */)
+inline wxAssertHandler_t wxSetAssertHandler([[maybe_unused]] wxAssertHandler_t handler)
 {
     return NULL;
 }
@@ -398,14 +396,5 @@ extern void wxAbort();
 inline constexpr bool wxFalse = false;
 
 #define wxAssertFailure wxFalse
-
-// This is similar to WXUNUSED() and useful for parameters which are only used
-// in assertions.
-#if wxDEBUG_LEVEL
-    #define WXUNUSED_UNLESS_DEBUG(param)  param
-#else
-    #define WXUNUSED_UNLESS_DEBUG(param)  WXUNUSED(param)
-#endif
-
 
 #endif // _WX_DEBUG_H_

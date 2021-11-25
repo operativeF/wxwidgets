@@ -22,12 +22,6 @@
 LRESULT APIENTRY
 wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 
-#ifdef GL_EXT_vertex_array
-    #define WXUNUSED_WITHOUT_GL_EXT_vertex_array(name) name
-#else
-    #define WXUNUSED_WITHOUT_GL_EXT_vertex_array(name) WXUNUSED(name)
-#endif
-
 // ----------------------------------------------------------------------------
 // define possibly missing WGL constants and types
 // ----------------------------------------------------------------------------

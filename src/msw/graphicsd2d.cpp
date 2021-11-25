@@ -2323,7 +2323,7 @@ public:
         return S_OK;
     }
 
-    HRESULT STDMETHODCALLTYPE CopyPalette(__RPC__in_opt IWICPalette*  WXUNUSED(palette)) override
+    HRESULT STDMETHODCALLTYPE CopyPalette([[maybe_unused]] __RPC__in_opt IWICPalette*  palette) override
     {
         return WINCODEC_ERR_PALETTEUNAVAILABLE;
     }

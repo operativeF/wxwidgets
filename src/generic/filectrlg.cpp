@@ -1203,12 +1203,12 @@ void wxGenericFileCtrl::OnActivated( wxListEvent &event )
     HandleAction( event.m_item.m_text );
 }
 
-void wxGenericFileCtrl::OnTextEnter( wxCommandEvent &WXUNUSED( event ) )
+void wxGenericFileCtrl::OnTextEnter( [[maybe_unused]] wxCommandEvent& event )
 {
     HandleAction( m_text->GetValue() );
 }
 
-void wxGenericFileCtrl::OnTextChange( wxCommandEvent &WXUNUSED( event ) )
+void wxGenericFileCtrl::OnTextChange( [[maybe_unused]] wxCommandEvent& event )
 {
     if ( !m_ignoreChanges )
     {

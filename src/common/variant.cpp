@@ -1400,7 +1400,7 @@ wxVariant::wxVariant(const std::vector<wxString>& val, const wxString& name) // 
     m_name = name;
 }
 
-bool wxVariant::operator==(const std::vector<wxString>& WXUNUSED(value)) const
+bool wxVariant::operator==([[maybe_unused]] const std::vector<wxString>& value) const
 {
     wxFAIL_MSG( "TODO" );
 
