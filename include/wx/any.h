@@ -14,12 +14,12 @@
 #if wxUSE_ANY
 
 #include "wx/string.h"
-#include "wx/meta/if.h"
 #include "wx/typeinfo.h"
 #include "wx/list.h"
 
 import <cstdint>;
 import <new>; // for placement new
+import <type_traits>;
 
 // Size of the wxAny value buffer.
 enum
@@ -270,7 +270,7 @@ struct wxAnyAsImpl;
 template<typename T>
 class wxAnyValueTypeImplBase : public wxAnyValueType
 {
-    using Ops = typename wxIf<sizeof(T) <= WX_ANY_VALUE_BUFFER_SIZE, wxPrivate::wxAnyValueTypeOpsInplace<T>, wxPrivate::wxAnyValueTypeOpsGeneric<T>>::value;
+    using Ops = std::conditional_t<(sizeof(T) <= WX_ANY_VALUE_BUFFER_SIZE), wxPrivate::wxAnyValueTypeOpsInplace<T>, wxPrivate::wxAnyValueTypeOpsGeneric<T>>;
 
 public:
     void DeleteValue(wxAnyValueBuffer& buf) const override

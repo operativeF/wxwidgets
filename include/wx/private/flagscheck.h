@@ -15,7 +15,7 @@
 // IBM xlC 8 can't parse the template syntax
 #if !defined(__IBMCPP__)
 
-#include "wx/meta/if.h"
+import <type_traits>;
 
 namespace wxPrivate
 {
@@ -60,12 +60,12 @@ template<int all, int add> struct SafelyAddToMask
 {
     // This typedefs ensures that no flags in the list conflict. If there's
     // any overlap between the already constructed part of the mask ('all')
-    // and the value being added to it ('add'), the test that is wxIf<>'s
+    // and the value being added to it ('add'), the test that is std::conditional_t<>'s
     // first parameter will be non-zero and so Added value will be
     // FlagsHaveConflictingValues<add>. The next statement will try to use
     // AddedValue::value, but there's no such thing in
     // FlagsHaveConflictingValues<> and so compilation will fail.
-    using AddedValue = typename wxIf<(all & add) == 0, FlagValue<add>, FlagsHaveConflictingValues<add>>::value;
+    using AddedValue = std::conditional_t<(all & add) == 0, FlagValue<add>, FlagsHaveConflictingValues<add>>;
 
     enum { value = all | AddedValue::value };
 };

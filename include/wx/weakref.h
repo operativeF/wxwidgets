@@ -13,17 +13,9 @@
 #include "wx/debug.h"
 
 #include "wx/tracker.h"
-#include "wx/meta/convertible.h"
-#include "wx/meta/int2type.h"
 
 #include <cassert>
-
-template <class T>
-struct wxIsStaticTrackable
-{
-    enum { value = wxIsPubliclyDerived<T, wxTrackable>::value };
-};
-
+import <concepts>;
 
 // A weak reference to an object of type T (which must inherit from wxTrackable)
 template <class T>
@@ -98,8 +90,7 @@ protected:
     template <class TDerived>
     void Assign( TDerived* pobj )
     {
-        // FIXME: Use concepts
-        static_assert( wxIsStaticTrackable<TDerived>::value,
+        static_assert( std::derived_from<TDerived, wxTrackable>,
             "Tracked class should inherit from wxTrackable" );
 
         wxTrackable *ptbase = pobj;
