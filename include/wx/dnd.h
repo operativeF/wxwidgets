@@ -99,7 +99,7 @@ public:
     // override to give feedback depending on the current operation result
     // "effect" and return true if you did something, false to let the library
     // give the default feedback
-    virtual bool GiveFeedback(wxDragResult WXUNUSED(effect)) { return false; }
+    virtual bool GiveFeedback([[maybe_unused]] wxDragResult effect) { return false; }
 
 protected:
     const wxCursor& GetCursor(wxDragResult res) const
@@ -168,7 +168,7 @@ public:
 
     // called when the mouse moves in the window - shouldn't take long to
     // execute or otherwise mouse movement would be too slow
-    virtual wxDragResult OnDragOver(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
+    virtual wxDragResult OnDragOver([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y,
                                     wxDragResult def)
         { return def; }
 

@@ -1701,7 +1701,7 @@ static void AdjustStaticBoxZOrder(wxWindow *parent)
 
 #else // !wxUSE_STATBOX
 
-static inline void AdjustStaticBoxZOrder(wxWindow * WXUNUSED(parent))
+static inline void AdjustStaticBoxZOrder([[maybe_unused]] wxWindow * parent)
 {
 }
 
@@ -5060,7 +5060,7 @@ bool wxWindowMSW::HandleQueryNewPalette()
 }
 
 // Responds to colour changes: passes event on to children.
-void wxWindowMSW::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
+void wxWindowMSW::OnSysColourChanged([[maybe_unused]] wxSysColourChangedEvent& event)
 {
     // the top level window also reset the standard colour map as it might have
     // changed (there is no need to do it for the non top level windows as we

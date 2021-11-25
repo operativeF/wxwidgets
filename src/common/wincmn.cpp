@@ -1355,14 +1355,14 @@ void wxWindowBase::SetEventHandler(wxEvtHandler *handler)
     m_eventHandler = handler;
 }
 
-void wxWindowBase::SetNextHandler(wxEvtHandler *WXUNUSED(handler))
+void wxWindowBase::SetNextHandler([[maybe_unused]] wxEvtHandler *handler)
 {
     // disable wxEvtHandler chain mechanism for wxWindows:
     // wxWindow uses its own stack mechanism which doesn't mix well with wxEvtHandler's one
 
     wxFAIL_MSG("wxWindow cannot be part of a wxEvtHandler chain");
 }
-void wxWindowBase::SetPreviousHandler(wxEvtHandler *WXUNUSED(handler))
+void wxWindowBase::SetPreviousHandler([[maybe_unused]] wxEvtHandler *handler)
 {
     // we can't simply wxFAIL here as in SetNextHandler: in fact the last
     // handler of our stack when is destroyed will be Unlink()ed and thus
@@ -2129,7 +2129,7 @@ void wxWindowBase::SetHelpText(const wxString& text)
 // get the help string associated with this window (may be empty)
 // default implementation forwards calls to the help provider
 std::string
-wxWindowBase::GetHelpTextAtPoint(const wxPoint & WXUNUSED(pt),
+wxWindowBase::GetHelpTextAtPoint(const [[maybe_unused]] wxPoint & pt,
                                  [[maybe_unused]] wxHelpEvent::Origin origin) const
 {
     wxHelpProvider *helpProvider = wxHelpProvider::Get();
@@ -2885,7 +2885,7 @@ wxPoint wxWindowBase::ConvertDialogToPixels(const wxPoint& pt) const
 // ----------------------------------------------------------------------------
 
 // propagate the colour change event to the subwindows
-void wxWindowBase::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
+void wxWindowBase::OnSysColourChanged([[maybe_unused]] wxSysColourChangedEvent& event)
 {
     wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
     while ( node )
@@ -2908,7 +2908,7 @@ void wxWindowBase::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
 // the default action is to populate dialog with data when it's created,
 // and nudge the UI into displaying itself correctly in case
 // we've turned the wxUpdateUIEvents frequency down low.
-void wxWindowBase::OnInitDialog( wxInitDialogEvent &WXUNUSED(event) )
+void wxWindowBase::OnInitDialog( [[maybe_unused]] wxInitDialogEvent &event )
 {
     TransferDataToWindow();
 
@@ -2949,7 +2949,7 @@ void wxWindowBase::InternalOnPopupMenu(wxCommandEvent& event)
     gs_popupMenuSelection = event.GetId();
 }
 
-void wxWindowBase::InternalOnPopupMenuUpdate(wxUpdateUIEvent& WXUNUSED(event))
+void wxWindowBase::InternalOnPopupMenuUpdate([[maybe_unused]] wxUpdateUIEvent& event)
 {
     // nothing to do but do not skip it
 }
@@ -3571,7 +3571,7 @@ wxWindow* wxGetTopLevelParent(wxWindowBase *win_)
 
 // Can return either a child object, or an integer
 // representing the child element, starting from 1.
-wxAccStatus wxWindowAccessible::HitTest([[maybe_unused]] const wxPoint& pt, [[maybe_unused]] int* childId, wxAccessible** WXUNUSED(childObject))
+wxAccStatus wxWindowAccessible::HitTest([[maybe_unused]] const wxPoint& pt, [[maybe_unused]] int* childId, [[maybe_unused]] wxAccessible** childObject)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3937,7 +3937,7 @@ wxAccStatus wxWindowAccessible::Select([[maybe_unused]] int childId, [[maybe_unu
 // If childId is 0 and child is NULL, no object in
 // this subhierarchy has the focus.
 // If this object has the focus, child should be 'this'.
-wxAccStatus wxWindowAccessible::GetFocus([[maybe_unused]] int* childId, wxAccessible** WXUNUSED(child))
+wxAccStatus wxWindowAccessible::GetFocus([[maybe_unused]] int* childId, [[maybe_unused]] wxAccessible** child)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 

@@ -95,7 +95,7 @@ public:
     }
 
     // creating and saving icons is not supported
-    bool Create(wxGDIImage *WXUNUSED(image),
+    bool Create([[maybe_unused]] wxGDIImage *image,
                         [[maybe_unused]] const void* data,
                         [[maybe_unused]] wxBitmapType flags,
                         [[maybe_unused]] wxSize sz,
@@ -104,7 +104,7 @@ public:
         return false;
     }
 
-    bool Save(const wxGDIImage *WXUNUSED(image),
+    bool Save([[maybe_unused]] const wxGDIImage *image,
                       [[maybe_unused]] const std::string& name,
                       [[maybe_unused]] wxBitmapType type) const override
     {
@@ -374,7 +374,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
 bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
                                 const std::string& name,
                                 [[maybe_unused]] wxBitmapType type,
-                                const wxPalette * WXUNUSED(pal)) const
+                                const [[maybe_unused]] wxPalette * pal) const
 {
 #if wxUSE_WXDIB
     wxCHECK_MSG( bitmap, false, "NULL bitmap in SaveFile" );

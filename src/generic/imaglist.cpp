@@ -43,7 +43,7 @@ int wxGenericImageList::GetImageCount() const
     return static_cast<int>(m_images.size());
 }
 
-bool wxGenericImageList::Create( int width, int height, bool mask, int WXUNUSED(initialCount) )
+bool wxGenericImageList::Create( int width, int height, bool mask, [[maybe_unused]] int initialCount )
 {
     // Prevent from storing negative dimensions
     m_size = wxSize(std::max(width, 0), std::max(height, 0));
@@ -277,7 +277,7 @@ bool wxGenericImageList::RemoveAll()
     return true;
 }
 
-bool wxGenericImageList::GetSize( int WXUNUSED(index), int &width, int &height ) const
+bool wxGenericImageList::GetSize( [[maybe_unused]] int index, int &width, int &height ) const
 {
     width = m_size.x;
     height = m_size.y;
@@ -288,7 +288,7 @@ bool wxGenericImageList::GetSize( int WXUNUSED(index), int &width, int &height )
 }
 
 bool wxGenericImageList::Draw( int index, wxDC &dc, int x, int y,
-                        int flags, bool WXUNUSED(solidBackground) )
+                        int flags, [[maybe_unused]] bool solidBackground )
 {
     const wxBitmap* bmp = DoGetPtr(index);
     if ( !bmp )

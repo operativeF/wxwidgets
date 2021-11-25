@@ -466,7 +466,7 @@ bool wxTopLevelWindowBase::Layout()
 }
 
 // The default implementation for the close window event.
-void wxTopLevelWindowBase::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxTopLevelWindowBase::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     Destroy();
 }

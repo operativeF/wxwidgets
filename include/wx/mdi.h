@@ -84,7 +84,7 @@ public:
     // ----------------------------------------
 
     virtual void Cascade() { }
-    virtual void Tile(wxOrientation WXUNUSED(orient) = wxHORIZONTAL) { }
+    virtual void Tile([[maybe_unused]] wxOrientation orient = wxHORIZONTAL) { }
     virtual void ArrangeIcons() { }
     virtual void ActivateNext() = 0;
     virtual void ActivatePrevious() = 0;
@@ -202,19 +202,19 @@ public:
     // no status bars
     //
     // TODO: MDI children should have their own status bars, why not?
-    wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
-                                 unsigned int WXUNUSED(style) = 1,
-                                 wxWindowID WXUNUSED(id) = 1,
-                                 std::string_view WXUNUSED(name) = {}) override
+    wxStatusBar* CreateStatusBar([[maybe_unused]] int number = 1,
+                                 [[maybe_unused]] unsigned int style = 1,
+                                 [[maybe_unused]] wxWindowID id = 1,
+                                 [[maybe_unused]] std::string_view name = {}) override
       { return nullptr; }
 
     wxStatusBar *GetStatusBar() const override
         { return nullptr; }
-    void SetStatusText(std::string_view WXUNUSED(text),
-                       int WXUNUSED(number)=0) override
+    void SetStatusText([[maybe_unused]] std::string_view text,
+                       [[maybe_unused]] int number=0) override
         { }
-    void SetStatusWidths(int WXUNUSED(n),
-                         const int WXUNUSED(widths)[]) override
+    void SetStatusWidths([[maybe_unused]] int n,
+                         const [[maybe_unused]] int widths[]) override
         { }
 #endif // wxUSE_STATUSBAR
 
@@ -222,9 +222,9 @@ public:
     // no toolbar
     //
     // TODO: again, it should be possible to have tool bars
-    wxToolBar *CreateToolBar(unsigned int WXUNUSED(style),
-                             wxWindowID WXUNUSED(id),
-                             std::string_view WXUNUSED(name)) override
+    wxToolBar *CreateToolBar([[maybe_unused]] unsigned int style,
+                             [[maybe_unused]] wxWindowID id,
+                             [[maybe_unused]] std::string_view name) override
         { return nullptr; }
     wxToolBar *GetToolBar() const override { return nullptr; }
 #endif // wxUSE_TOOLBAR
@@ -237,15 +237,15 @@ public:
     void SetTitle(const std::string& title) override = 0;
 
     // no maximize etc
-    void Maximize(bool WXUNUSED(maximize) = true) override { }
+    void Maximize([[maybe_unused]] bool maximize = true) override { }
     bool wxIsMaximized() const override { return true; }
     bool IsAlwaysMaximized() const override { return true; }
-    void Iconize(bool WXUNUSED(iconize) = true) override { }
+    void Iconize([[maybe_unused]] bool iconize = true) override { }
     bool IsIconized() const override { return false; }
     void Restore() override { }
 
-    bool ShowFullScreen(bool WXUNUSED(show),
-                        unsigned int WXUNUSED(style)) override { return false; }
+    bool ShowFullScreen([[maybe_unused]] bool show,
+                        [[maybe_unused]] unsigned int style) override { return false; }
     bool IsFullScreen() const override { return false; }
 
 
@@ -308,9 +308,9 @@ protected:
     }
 
     // no size hints
-    void DoSetSizeHints(int WXUNUSED(minW), int WXUNUSED(minH),
-                        int WXUNUSED(maxW), int WXUNUSED(maxH),
-                        int WXUNUSED(incW), int WXUNUSED(incH)) override { }
+    void DoSetSizeHints([[maybe_unused]] int minW, [[maybe_unused]] int minH,
+                        [[maybe_unused]] int maxW, [[maybe_unused]] int maxH,
+                        [[maybe_unused]] int incW, [[maybe_unused]] int incH) override { }
 
     std::string m_title;
 };

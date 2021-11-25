@@ -492,7 +492,7 @@ wxBEGIN_EVENT_TABLE(wxHeaderCtrl, wxHeaderCtrlBase)
     EVT_KEY_DOWN(wxHeaderCtrl::OnKeyDown)
 wxEND_EVENT_TABLE()
 
-void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxHeaderCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxSize cli_size = GetClientSize();
 
@@ -572,7 +572,7 @@ void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     }
 }
 
-void wxHeaderCtrl::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxHeaderCtrl::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     if ( IsDragging() )
         CancelDragging();

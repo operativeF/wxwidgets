@@ -912,12 +912,12 @@ void wxRibbonButtonBar::UpdateWindowUI(unsigned int flags)
         Realize();
 }
 
-void wxRibbonButtonBar::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonButtonBar::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // All painting done in main paint handler to minimise flicker
 }
 
-void wxRibbonButtonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonButtonBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     m_art->DrawButtonBarBackground(dc, this, GetSize());
@@ -966,7 +966,7 @@ void wxRibbonButtonBar::OnSize(wxSizeEvent& evt)
     Refresh();
 }
 
-void wxRibbonButtonBar::CommonInit(unsigned int WXUNUSED(style))
+void wxRibbonButtonBar::CommonInit([[maybe_unused]] unsigned int style)
 {
     m_bitmap_size_large = wxSize(32, 32);
     m_bitmap_size_small = wxSize(16, 16);
@@ -1446,7 +1446,7 @@ void wxRibbonButtonBar::OnMouseEnter(wxMouseEvent& evt)
     }
 }
 
-void wxRibbonButtonBar::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonButtonBar::OnMouseLeave([[maybe_unused]] wxMouseEvent& evt)
 {
     bool repaint = false;
     if(m_hovered_button != nullptr)

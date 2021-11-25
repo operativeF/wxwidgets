@@ -67,7 +67,7 @@ public:
     // release events. Currently we handle presses and releases in the same
     // way, so we don't use the "depressed" parameter, but it conveniently
     // allows us to distinguish this ctor from the one above, so still keep it.
-    wxXSync(wxX11Display& display, bool WXUNUSED(depressed))
+    wxXSync(wxX11Display& display, [[maybe_unused]] bool depressed)
         : m_display(display), m_isMotion(false)
     {
         WaitIfNecessary();
@@ -397,7 +397,7 @@ bool wxUIActionSimulatorXTestImpl::DoX11MouseMove(long x, long y)
 
 bool
 wxUIActionSimulatorXTestImpl::DoX11Key(KeyCode xkeycode,
-                                       int WXUNUSED(modifiers),
+                                       [[maybe_unused]] int modifiers,
                                        bool isDown)
 {
     wxXSync sync(m_display, isDown);

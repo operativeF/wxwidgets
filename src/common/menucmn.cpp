@@ -81,7 +81,7 @@ wxEND_FLAGS( wxMenuBarStyle )
 #if wxUSE_EXTENDED_RTTI
 // the negative id would lead the window (its superclass !) to
 // vetoe streaming out otherwise
-bool wxMenuBarStreamingCallback( const wxObject *WXUNUSED(object), wxObjectWriter *,
+bool wxMenuBarStreamingCallback( [[maybe_unused]] const wxObject *object, wxObjectWriter *,
                                 wxObjectWriterCallback *, const wxStringToAnyHashMap & )
 {
     return true;

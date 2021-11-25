@@ -163,8 +163,8 @@ wxHtmlTableCell::~wxHtmlTableCell()
 }
 
 
-void wxHtmlTableCell::RemoveExtraSpacing(bool WXUNUSED(top),
-                                         bool WXUNUSED(bottom))
+void wxHtmlTableCell::RemoveExtraSpacing([[maybe_unused]] bool top,
+                                         [[maybe_unused]] bool bottom)
 {
     // Don't remove any spacing in the table -- it's always desirable,
     // because it's part of table's definition.

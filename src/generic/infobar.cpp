@@ -402,7 +402,7 @@ void wxInfoBarGeneric::RemoveButton(wxWindowID btnid)
     }
 }
 
-void wxInfoBarGeneric::OnButton(wxCommandEvent& WXUNUSED(event))
+void wxInfoBarGeneric::OnButton([[maybe_unused]] wxCommandEvent& event)
 {
     DoHide();
 }

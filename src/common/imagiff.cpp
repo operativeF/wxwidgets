@@ -751,8 +751,8 @@ bool wxIFFHandler::LoadFile(wxImage *image, wxInputStream& stream,
     return ok;
 }
 
-bool wxIFFHandler::SaveFile(wxImage * WXUNUSED(image),
-                            wxOutputStream& WXUNUSED(stream), bool verbose)
+bool wxIFFHandler::SaveFile([[maybe_unused]] wxImage * image,
+                            [[maybe_unused]] wxOutputStream& stream, bool verbose)
 {
     if (verbose)
     {

@@ -1232,13 +1232,13 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
 #define wxDEFINE_EMPTY_LOG_FUNCTION(level)                                  \
     WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 1, (const wxFormatString&))     \
     inline void wxVLog##level([[maybe_unused]] const wxFormatString& format,       \
-                              va_list WXUNUSED(argptr)) { }                 \
+                              [[maybe_unused]] va_list argptr) { }                 \
 
 #define wxDEFINE_EMPTY_LOG_FUNCTION2(level, argclass)                       \
     WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 2, (argclass, const wxFormatString&)) \
-    inline void wxVLog##level(argclass WXUNUSED(arg),                       \
+    inline void wxVLog##level([[maybe_unused]] argclass arg,                       \
                               [[maybe_unused]] const wxFormatString& format,       \
-                              va_list WXUNUSED(argptr)) {}
+                              [[maybe_unused]] va_list argptr) {}
 
 wxDEFINE_EMPTY_LOG_FUNCTION(FatalError);
 wxDEFINE_EMPTY_LOG_FUNCTION(Error);

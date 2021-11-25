@@ -492,7 +492,7 @@ bool wxDocument::OnSaveModified()
     return true;
 }
 
-bool wxDocument::Draw(wxDC& WXUNUSED(context))
+bool wxDocument::Draw([[maybe_unused]] wxDC& context)
 {
     return true;
 }
@@ -516,7 +516,7 @@ bool wxDocument::RemoveView(wxView *view)
     return true;
 }
 
-bool wxDocument::OnCreate(const fs::path& WXUNUSED(path), unsigned int flags)
+bool wxDocument::OnCreate([[maybe_unused]] const fs::path& path, unsigned int flags)
 {
     return GetDocumentTemplate()->CreateView(this, flags) != nullptr;
 }
@@ -660,17 +660,17 @@ bool wxView::TryBefore(wxEvent& event)
 }
 
 void wxView::OnActivateView([[maybe_unused]] bool activate,
-                            wxView *WXUNUSED(activeView),
-                            wxView *WXUNUSED(deactiveView))
+                            [[maybe_unused]] wxView *activeView,
+                            [[maybe_unused]] wxView *deactiveView)
 {
 }
 
-void wxView::OnPrint(wxDC *dc, wxObject *WXUNUSED(info))
+void wxView::OnPrint(wxDC *dc, [[maybe_unused]] wxObject *info)
 {
     OnDraw(dc);
 }
 
-void wxView::OnUpdate(wxView *WXUNUSED(sender), wxObject *WXUNUSED(hint))
+void wxView::OnUpdate([[maybe_unused]] wxView *sender, [[maybe_unused]] wxObject *hint)
 {
 }
 
@@ -1015,24 +1015,24 @@ wxFileHistory *wxDocManager::OnCreateFileHistory()
     return new wxFileHistory;
 }
 
-void wxDocManager::OnFileClose(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileClose([[maybe_unused]] wxCommandEvent& event)
 {
     wxDocument *doc = GetCurrentDocument();
     if (doc)
         CloseDocument(doc);
 }
 
-void wxDocManager::OnFileCloseAll(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileCloseAll([[maybe_unused]] wxCommandEvent& event)
 {
     CloseDocuments(false);
 }
 
-void wxDocManager::OnFileNew(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileNew([[maybe_unused]] wxCommandEvent& event)
 {
     CreateNewDocument();
 }
 
-void wxDocManager::OnFileOpen(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileOpen([[maybe_unused]] wxCommandEvent& event)
 {
     if ( !CreateDocument("") )
     {
@@ -1040,7 +1040,7 @@ void wxDocManager::OnFileOpen(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void wxDocManager::OnFileRevert(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileRevert([[maybe_unused]] wxCommandEvent& event)
 {
     wxDocument *doc = GetCurrentDocument();
     if (!doc)
@@ -1048,7 +1048,7 @@ void wxDocManager::OnFileRevert(wxCommandEvent& WXUNUSED(event))
     doc->Revert();
 }
 
-void wxDocManager::OnFileSave(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileSave([[maybe_unused]] wxCommandEvent& event)
 {
     wxDocument *doc = GetCurrentDocument();
     if (!doc)
@@ -1056,7 +1056,7 @@ void wxDocManager::OnFileSave(wxCommandEvent& WXUNUSED(event))
     doc->Save();
 }
 
-void wxDocManager::OnFileSaveAs(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnFileSaveAs([[maybe_unused]] wxCommandEvent& event)
 {
     wxDocument *doc = GetCurrentDocument();
     if (!doc)
@@ -1118,7 +1118,7 @@ void wxDocManager::OnMRUFileNotExist(unsigned n, const fs::path& filename)
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-void wxDocManager::OnPrint(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnPrint([[maybe_unused]] wxCommandEvent& event)
 {
     wxView *view = GetAnyUsableView();
     if (!view)
@@ -1135,7 +1135,7 @@ void wxDocManager::OnPrint(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void wxDocManager::OnPageSetup(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnPageSetup([[maybe_unused]] wxCommandEvent& event)
 {
     wxPageSetupDialog dlg(wxTheApp->GetTopWindow(), &m_pageSetupDialogData);
     if ( dlg.ShowModal() == wxID_OK )
@@ -1151,7 +1151,7 @@ wxPreviewFrame* wxDocManager::CreatePreviewFrame(wxPrintPreviewBase* preview,
     return new wxPreviewFrame(preview, parent, title);
 }
 
-void wxDocManager::OnPreview(wxCommandEvent& WXUNUSED(event))
+void wxDocManager::OnPreview([[maybe_unused]] wxCommandEvent& event)
 {
     wxBusyCursor busy;
     wxView *view = GetAnyUsableView();
@@ -1493,12 +1493,12 @@ wxView *wxDocManager::CreateView(wxDocument *doc, unsigned int flags)
 
 // Not yet implemented
 void
-wxDocManager::DeleteTemplate(wxDocTemplate *WXUNUSED(temp), [[maybe_unused]] unsigned int flags)
+wxDocManager::DeleteTemplate([[maybe_unused]] wxDocTemplate *temp, [[maybe_unused]] unsigned int flags)
 {
 }
 
 // Not yet implemented
-bool wxDocManager::FlushDoc(wxDocument *WXUNUSED(doc))
+bool wxDocManager::FlushDoc([[maybe_unused]] wxDocument *doc)
 {
     return false;
 }
@@ -1544,7 +1544,7 @@ std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
 
 
 // Not yet implemented
-wxDocTemplate *wxDocManager::MatchTemplate(const fs::path& WXUNUSED(path))
+wxDocTemplate *wxDocManager::MatchTemplate([[maybe_unused]] const fs::path& path)
 {
     return nullptr;
 }

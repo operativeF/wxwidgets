@@ -2990,7 +2990,7 @@ void wxGenericTreeCtrl::OnSize( wxSizeEvent &event )
     event.Skip(true);
 }
 
-void wxGenericTreeCtrl::OnPaint( wxPaintEvent &WXUNUSED(event) )
+void wxGenericTreeCtrl::OnPaint( [[maybe_unused]] wxPaintEvent &event )
 {
     wxPaintDC dc(this);
     PrepareDC( dc );
@@ -3478,7 +3478,7 @@ bool wxGenericTreeCtrl::GetBoundingRect(const wxTreeItemId& item,
 }
 
 wxTextCtrl *wxGenericTreeCtrl::EditLabel(const wxTreeItemId& item,
-                                  wxClassInfo * WXUNUSED(textCtrlClass))
+                                  [[maybe_unused]] wxClassInfo * textCtrlClass)
 {
     wxCHECK_MSG( item.IsOk(), nullptr, "can't edit an invalid item" );
 

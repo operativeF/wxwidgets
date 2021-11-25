@@ -418,7 +418,7 @@ bool wxRichTextFormattingDialogFactory::CreateButtons(wxRichTextFormattingDialog
 }
 
 // Invoke help for the dialog
-bool wxRichTextFormattingDialogFactory::ShowHelp(int WXUNUSED(page), wxRichTextFormattingDialog* dialog)
+bool wxRichTextFormattingDialogFactory::ShowHelp([[maybe_unused]] int page, wxRichTextFormattingDialog* dialog)
 {
     wxRichTextDialogPage* window = nullptr;
     int sel = dialog->GetBookCtrl()->GetSelection();
@@ -472,7 +472,7 @@ wxRichTextFontPreviewCtrl::wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowI
     m_textEffects = 0;
 }
 
-void wxRichTextFontPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxRichTextFontPreviewCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

@@ -42,11 +42,11 @@ public:
     // Must call this to set the filename and server name.
     // server is only required when implementing TCP/IP-based
     // help controllers.
-    virtual bool Initialize(const std::string& WXUNUSED(file), int WXUNUSED(server) ) { return false; }
-    virtual bool Initialize(const std::string& WXUNUSED(file)) { return false; }
+    virtual bool Initialize([[maybe_unused]] const std::string& file, [[maybe_unused]] int server ) { return false; }
+    virtual bool Initialize([[maybe_unused]] const std::string& file) { return false; }
 
     // Set viewer: only relevant to some kinds of controller
-    virtual void SetViewer(const std::string& WXUNUSED(viewer), unsigned int WXUNUSED(flags) = 0) {}
+    virtual void SetViewer([[maybe_unused]] const std::string& viewer, [[maybe_unused]] unsigned int flags = 0) {}
 
     // If file is "", reloads file given  in Initialize
     virtual bool LoadFile(const std::string& file = {}) = 0;
@@ -58,10 +58,10 @@ public:
     virtual bool DisplaySection(int sectionNo) = 0;
 
     // Display the section using a context id
-    virtual bool DisplayContextPopup(int WXUNUSED(contextId)) { return false; }
+    virtual bool DisplayContextPopup([[maybe_unused]] int contextId) { return false; }
 
     // Display the text in a popup, if possible
-    virtual bool DisplayTextPopup(const std::string& WXUNUSED(text), [[maybe_unused]] const wxPoint& pos) { return false; }
+    virtual bool DisplayTextPopup([[maybe_unused]] const std::string& text, [[maybe_unused]] const wxPoint& pos) { return false; }
 
     // By default, uses KeywordSection to display a topic. Implementations
     // may override this for more specific behaviour.
@@ -70,18 +70,18 @@ public:
     virtual bool KeywordSearch(const std::string& k,
                                wxHelpSearchMode mode = wxHelpSearchMode::All) = 0;
     /// Allows one to override the default settings for the help frame.
-    virtual void SetFrameParameters(const std::string& WXUNUSED(title),
+    virtual void SetFrameParameters([[maybe_unused]] const std::string& title,
         [[maybe_unused]] const wxSize& size,
         [[maybe_unused]] const wxPoint& pos = wxDefaultPosition,
-        bool WXUNUSED(newFrameEachTime) = false)
+        [[maybe_unused]] bool newFrameEachTime = false)
     {
         // does nothing by default
     }
     /// Obtains the latest settings used by the help frame and the help
     /// frame.
-    virtual wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = nullptr,
-        wxPoint *WXUNUSED(pos) = nullptr,
-        bool *WXUNUSED(newFrameEachTime) = nullptr)
+    virtual wxFrame *GetFrameParameters([[maybe_unused]] wxSize *size = nullptr,
+        [[maybe_unused]] wxPoint *pos = nullptr,
+        [[maybe_unused]] bool *newFrameEachTime = nullptr)
     {
         return nullptr; // does nothing by default
     }

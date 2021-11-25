@@ -104,7 +104,7 @@ bool wxInternetFSHandler::CanOpen(const wxString& location)
 }
 
 
-wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
+wxFSFile* wxInternetFSHandler::OpenFile([[maybe_unused]] wxFileSystem& fs,
                                         const wxString& location)
 {
 #if !wxUSE_URL

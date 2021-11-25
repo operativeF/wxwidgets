@@ -276,7 +276,7 @@ bool wxLocalFSHandler::CanOpen(const std::string& location)
     return GetProtocol(location) == "file";
 }
 
-wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const std::string& location)
+wxFSFile* wxLocalFSHandler::OpenFile([[maybe_unused]] wxFileSystem& fs, const std::string& location)
 {
     // location has Unix path separators
     std::string right = GetRightLocation(location);

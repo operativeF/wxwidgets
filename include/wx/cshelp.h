@@ -158,7 +158,7 @@ public:
     }
 
     // show help for the given window, see ShowHelpAtPoint() above
-    virtual bool ShowHelp(wxWindowBase * WXUNUSED(window)) { return false; }
+    virtual bool ShowHelp([[maybe_unused]] wxWindowBase * window) { return false; }
 
     // associate the text with the given window or id: although all help
     // providers have these functions to allow making wxWindow::SetHelpText()

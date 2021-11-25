@@ -431,26 +431,26 @@ public:
     bool IsVirtual() const { return HasFlag(wxLC_VIRTUAL); }
 
     // Check if the item is visible
-    virtual bool IsVisible(long WXUNUSED(item)) const { return false; }
+    virtual bool IsVisible([[maybe_unused]] long item) const { return false; }
 
     // Enable or disable beep when incremental match doesn't find any item.
     // Only implemented in the generic version currently.
-    virtual void EnableBellOnNoMatch(bool WXUNUSED(on) = true) { }
+    virtual void EnableBellOnNoMatch([[maybe_unused]] bool on = true) { }
 
     void EnableAlternateRowColours(bool enable = true);
     void SetAlternateRowColour(const wxColour& colour);
     wxColour GetAlternateRowColour() const { return m_alternateRowColour.GetBackgroundColour(); }
 
-    virtual void ExtendRulesAndAlternateColour(bool WXUNUSED(extend) = true) { }
+    virtual void ExtendRulesAndAlternateColour([[maybe_unused]] bool extend = true) { }
 
     // Header attributes support: only implemented in wxMSW currently.
     virtual bool SetHeaderAttr([[maybe_unused]] const wxItemAttr& attr) { return false; }
 
     // Checkboxes support.
     virtual bool HasCheckBoxes() const { return false; }
-    virtual bool EnableCheckBoxes(bool WXUNUSED(enable) = true) { return false; }
-    virtual bool IsItemChecked(long WXUNUSED(item)) const { return false; }
-    virtual void CheckItem(long WXUNUSED(item), bool WXUNUSED(check)) { }
+    virtual bool EnableCheckBoxes([[maybe_unused]] bool enable = true) { return false; }
+    virtual bool IsItemChecked([[maybe_unused]] long item) const { return false; }
+    virtual void CheckItem([[maybe_unused]] long item, [[maybe_unused]] bool check) { }
 
 protected:
     // Real implementations methods to which our public forwards.

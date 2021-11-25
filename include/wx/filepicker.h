@@ -385,7 +385,7 @@ protected:
     std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
                                             std::string_view message,
-                                            const std::string& WXUNUSED(wildcard)) override
+                                            [[maybe_unused]] const std::string& wildcard) override
     {
         return std::make_unique<wxDirPickerWidget>(parent, wxID_ANY,
                                      wxGetTranslation(wxDirPickerWidgetLabel).ToStdString(),

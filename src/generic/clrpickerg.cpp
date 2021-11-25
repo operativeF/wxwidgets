@@ -72,7 +72,7 @@ void wxGenericColourButton::InitColourData()
     }
 }
 
-void wxGenericColourButton::OnButtonClick(wxCommandEvent& WXUNUSED(ev))
+void wxGenericColourButton::OnButtonClick([[maybe_unused]] wxCommandEvent& ev)
 {
     // update the wxColouData to be shown in the dialog
     ms_data.SetColour(m_colour);
@@ -111,7 +111,7 @@ void wxGenericColourButton::OnColourChanged(wxColourDialogEvent& ev)
     parent->ProcessWindowEvent(event);
 }
 
-void wxGenericColourButton::OnDPIChanged(wxDPIChangedEvent&WXUNUSED(event))
+void wxGenericColourButton::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent& event)
 {
     m_bitmap = wxBitmap(FromDIP(defaultBitmapSize));
     UpdateColour();

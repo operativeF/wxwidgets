@@ -75,7 +75,7 @@ public:
 
     void ComputeScaleAndOrigin() override;
 
-    void SetBackgroundMode(wxBrushStyle WXUNUSED(mode)) override { }
+    void SetBackgroundMode([[maybe_unused]] wxBrushStyle mode) override { }
 #if wxUSE_PALETTE
     void SetPalette([[maybe_unused]] const wxPalette& palette) override { }
 #endif
@@ -125,7 +125,7 @@ protected:
     void DoDrawText(const wxString& text, const wxPoint& pt) override;
     void DoDrawRotatedText(const wxString& text, const wxPoint& pt, double angle) override;
     void DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
-    void DoSetDeviceClippingRegion( const wxRegion &WXUNUSED(clip)) override
+    void DoSetDeviceClippingRegion( [[maybe_unused]] const wxRegion &clip) override
     {
         wxFAIL_MSG( "not implemented" );
     }

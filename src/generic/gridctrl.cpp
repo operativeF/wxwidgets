@@ -219,7 +219,7 @@ wxSize wxGridCellDateRenderer::GetBestSize(wxGrid& grid,
     return DoGetBestSize(attr, dc, GetString(grid, row, col));
 }
 
-wxSize wxGridCellDateRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
+wxSize wxGridCellDateRenderer::GetMaxBestSize([[maybe_unused]] wxGrid& grid,
                                               wxGridCellAttr& attr,
                                               wxDC& dc)
 {
@@ -269,7 +269,7 @@ wxGridCellDateTimeRenderer::GetDateParseParams(DateParseParams& params) const
 // wxGridCellChoiceRenderer
 // ----------------------------------------------------------------------------
 
-wxSize wxGridCellChoiceRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
+wxSize wxGridCellChoiceRenderer::GetMaxBestSize([[maybe_unused]] wxGrid& grid,
                                                 wxGridCellAttr& attr,
                                                 wxDC& dc)
 {
@@ -762,7 +762,7 @@ wxSize wxGridCellNumberRenderer::GetBestSize(wxGrid& grid,
     return DoGetBestSize(attr, dc, GetString(grid, row, col));
 }
 
-wxSize wxGridCellNumberRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
+wxSize wxGridCellNumberRenderer::GetMaxBestSize([[maybe_unused]] wxGrid& grid,
                                                 wxGridCellAttr& attr,
                                                 wxDC& dc)
 {
@@ -984,8 +984,8 @@ wxSize wxGridCellBoolRenderer::GetBestSize(wxGrid& grid,
 }
 
 wxSize wxGridCellBoolRenderer::GetMaxBestSize(wxGrid& grid,
-                                              wxGridCellAttr& WXUNUSED(attr),
-                                              wxDC& WXUNUSED(dc))
+                                              [[maybe_unused]] wxGridCellAttr& attr,
+                                              [[maybe_unused]] wxDC& dc)
 {
     static wxPrivate::DpiDependentValue<wxSize> s_sizeCheckMark;
 

@@ -786,7 +786,7 @@ bool wxChmFSHandler::CanOpen(const wxString& location)
            (GetProtocol(GetLeftLocation(location)) == "file");
 }
 
-wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
+wxFSFile* wxChmFSHandler::OpenFile([[maybe_unused]] wxFileSystem& fs,
                                    const wxString& location)
 {
     wxString right = GetRightLocation(location);
@@ -849,7 +849,7 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 /**
  * Doku see wxFileSystemHandler
  */
-wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(flags))
+wxString wxChmFSHandler::FindFirst(const wxString& spec, [[maybe_unused]] unsigned int flags)
 {
     wxString right = GetRightLocation(spec);
     wxString left = GetLeftLocation(spec);

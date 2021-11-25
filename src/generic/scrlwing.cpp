@@ -773,7 +773,7 @@ wxSize wxScrollHelperBase::ScrollGetBestVirtualSize() const
 // ----------------------------------------------------------------------------
 
 // Default OnSize resets scrollbars, if any
-void wxScrollHelperBase::HandleOnSize(wxSizeEvent& WXUNUSED(event))
+void wxScrollHelperBase::HandleOnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if ( m_targetWindow->GetAutoLayout() )
     {
@@ -790,7 +790,7 @@ void wxScrollHelperBase::HandleOnSize(wxSizeEvent& WXUNUSED(event))
 
 // This calls OnDraw, having adjusted the origin according to the current
 // scroll position
-void wxAnyScrollHelperBase::HandleOnPaint(wxPaintEvent& WXUNUSED(event))
+void wxAnyScrollHelperBase::HandleOnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     // don't use m_targetWindow here, this is always called for ourselves
     wxPaintDC dc(m_win);

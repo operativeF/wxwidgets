@@ -93,7 +93,7 @@ public:
     void SetTipText() { m_text->SetValue(m_tipProvider->GetTip()); }
 
     // "Next" button handler
-    void OnNextTip(wxCommandEvent& WXUNUSED(event)) { SetTipText(); }
+    void OnNextTip([[maybe_unused]] wxCommandEvent& event) { SetTipText(); }
 
 private:
     wxTipProvider *m_tipProvider;

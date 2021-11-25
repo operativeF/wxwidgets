@@ -110,7 +110,7 @@ bool wxRichTextXMLHandler::DoLoadFile(wxRichTextBuffer *buffer, wxInputStream& s
 }
 
 /// Creates an object given an XML element name
-wxRichTextObject* wxRichTextXMLHandler::CreateObjectForXMLName(wxRichTextObject* WXUNUSED(parent), const wxString& name) const
+wxRichTextObject* wxRichTextXMLHandler::CreateObjectForXMLName([[maybe_unused]] wxRichTextObject* parent, const wxString& name) const
 {
     // The standard node to class mappings are added in wxRichTextModule::OnInit in richtextbuffer.cpp
     wxStringToStringHashMap::const_iterator it = sm_nodeNameToClassMap.find(name);
@@ -326,7 +326,7 @@ bool wxRichTextXMLHandler::ExportXML(wxXmlNode* parent, wxRichTextObject& obj)
     // wxUSE_STREAMS
 
 // Import this object from XML
-bool wxRichTextObject::ImportFromXML(wxRichTextBuffer* WXUNUSED(buffer), wxXmlNode* node, wxRichTextXMLHandler* handler, bool* recurse)
+bool wxRichTextObject::ImportFromXML([[maybe_unused]] wxRichTextBuffer* buffer, wxXmlNode* node, wxRichTextXMLHandler* handler, bool* recurse)
 {
     handler->GetHelper().ImportProperties(GetProperties(), node);
     handler->GetHelper().ImportStyle(GetAttributes(), node, UsesParagraphAttributes());

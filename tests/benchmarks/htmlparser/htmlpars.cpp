@@ -817,7 +817,7 @@ wxChar wx28HtmlEntitiesParser::GetEntityChar(const wxString& entity)
         return GetCharForCode(code);
 }
 
-wxFSFile *wx28HtmlParser::OpenURL(wx28HtmlURLType WXUNUSED(type),
+wxFSFile *wx28HtmlParser::OpenURL(wx28[[maybe_unused]] HtmlURLType type,
                                 const wxString& url) const
 {
     return m_FS ? m_FS->OpenFile(url) : NULL;

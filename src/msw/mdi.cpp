@@ -246,7 +246,7 @@ int wxMDIParentFrame::GetChildFramesCount() const
 
 #if wxUSE_MENUS
 
-void wxMDIParentFrame::AddMDIChild(wxMDIChildFrame * WXUNUSED(child))
+void wxMDIParentFrame::AddMDIChild([[maybe_unused]] wxMDIChildFrame * child)
 {
     switch ( GetChildFramesCount() )
     {
@@ -268,7 +268,7 @@ void wxMDIParentFrame::AddMDIChild(wxMDIChildFrame * WXUNUSED(child))
     }
 }
 
-void wxMDIParentFrame::RemoveMDIChild(wxMDIChildFrame * WXUNUSED(child))
+void wxMDIParentFrame::RemoveMDIChild([[maybe_unused]] wxMDIChildFrame * child)
 {
     switch ( GetChildFramesCount() )
     {
@@ -468,7 +468,7 @@ void wxMDIParentFrame::UpdateClientSize()
     }
 }
 
-void wxMDIParentFrame::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxMDIParentFrame::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     UpdateClientSize();
 
@@ -598,7 +598,7 @@ WXLRESULT wxMDIParentFrame::MSWWindowProc(WXUINT message,
     return rc;
 }
 
-void wxMDIParentFrame::OnActivate(wxActivateEvent& WXUNUSED(event))
+void wxMDIParentFrame::OnActivate([[maybe_unused]] wxActivateEvent& event)
 {
     // The base class version saves the current focus when we are being
     // deactivated and restores it when the window is activated again, but this

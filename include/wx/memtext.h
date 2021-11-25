@@ -27,8 +27,8 @@ protected:
     bool OnExists() const override
         { return false; }
 
-    bool OnOpen(const std::string& WXUNUSED(strBufferName),
-                        wxTextBufferOpenMode WXUNUSED(OpenMode)) override
+    bool OnOpen([[maybe_unused]] const std::string& strBufferName,
+                        [[maybe_unused]] wxTextBufferOpenMode OpenMode) override
         { return true; }
 
     bool OnClose() override
@@ -37,7 +37,7 @@ protected:
     bool OnRead([[maybe_unused]] const wxMBConv& conv) override
         { return true; }
 
-    bool OnWrite(wxTextFileType WXUNUSED(typeNew),
+    bool OnWrite([[maybe_unused]] wxTextFileType typeNew,
                          [[maybe_unused]] const wxMBConv& conv = wxMBConvUTF8()) override
         { return true; }
 };

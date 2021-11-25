@@ -67,7 +67,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 {
     virtual wxEventLoopBase *CreateEventLoop();
     virtual void *BeforeChildWaitLoop() { return NULL; }
-    virtual void AfterChildWaitLoop(void *WXUNUSED(data)) { }
+    virtual void AfterChildWaitLoop([[maybe_unused]] void *data) { }
 #if wxUSE_TIMER
     virtual wxTimerImpl *CreateTimerImpl(wxTimer *timer);
 #endif
@@ -79,7 +79,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 #if wxUSE_THREADS
     virtual bool DoMessageFromThreadWait() { return true; }
-    virtual DWORD WaitForThread(WXHANDLE hThread, int WXUNUSED(flags))
+    virtual DWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
         { return DoSimpleWaitForThread(hThread); }
 #endif // wxUSE_THREADS
     virtual wxPortId GetToolkitVersion(int *majVer = NULL,
@@ -104,7 +104,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 #if wxUSE_THREADS
     virtual bool DoMessageFromThreadWait() { return true; }
-    virtual DWORD WaitForThread(WXHANDLE hThread, int WXUNUSED(flags))
+    virtual DWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
         { return DoSimpleWaitForThread(hThread); }
 #endif // wxUSE_THREADS
     virtual wxPortId GetToolkitVersion(int *majVer = NULL,

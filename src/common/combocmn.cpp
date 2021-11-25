@@ -539,7 +539,7 @@ wxBEGIN_EVENT_TABLE(wxComboPopupWindowEvtHandler, wxEvtHandler)
 wxEND_EVENT_TABLE()
 
 
-void wxComboPopupWindowEvtHandler::OnSizeEvent( wxSizeEvent& WXUNUSED(event) )
+void wxComboPopupWindowEvtHandler::OnSizeEvent( [[maybe_unused]] wxSizeEvent& event )
 {
     // Block the event so that the popup control does not get auto-resized.
 }
@@ -2018,7 +2018,7 @@ void wxComboCtrlBase::OnFocusEvent( wxFocusEvent& event )
     Refresh();
 }
 
-void wxComboCtrlBase::OnIdleEvent( wxIdleEvent& WXUNUSED(event) )
+void wxComboCtrlBase::OnIdleEvent( [[maybe_unused]] wxIdleEvent& event )
 {
     if ( m_resetFocus )
     {
@@ -2028,7 +2028,7 @@ void wxComboCtrlBase::OnIdleEvent( wxIdleEvent& WXUNUSED(event) )
     }
 }
 
-void wxComboCtrlBase::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
+void wxComboCtrlBase::OnSysColourChanged([[maybe_unused]] wxSysColourChangedEvent& event)
 {
     OnThemeChange();
     // left margin may also have changed

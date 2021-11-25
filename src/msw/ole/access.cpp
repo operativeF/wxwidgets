@@ -1699,7 +1699,7 @@ STDMETHODIMP wxIAccessible::GetTypeInfoCount(unsigned int* typeInfoCount)
 
 // Get ids of names
 
-STDMETHODIMP wxIAccessible::GetIDsOfNames([[maybe_unused]] REFIID riid, OLECHAR** WXUNUSED(names), [[maybe_unused]] unsigned int cNames,
+STDMETHODIMP wxIAccessible::GetIDsOfNames([[maybe_unused]] REFIID riid, [[maybe_unused]] OLECHAR** names, [[maybe_unused]] unsigned int cNames,
         [[maybe_unused]] LCID lcid, [[maybe_unused]] DISPID* dispId)
 {
     return E_NOTIMPL;
@@ -1708,9 +1708,9 @@ STDMETHODIMP wxIAccessible::GetIDsOfNames([[maybe_unused]] REFIID riid, OLECHAR*
 // Invoke
 
 STDMETHODIMP wxIAccessible::Invoke([[maybe_unused]] DISPID dispIdMember, [[maybe_unused]] REFIID riid, [[maybe_unused]] LCID lcid,
-                        [[maybe_unused]] WXWORD wFlags, DISPPARAMS *WXUNUSED(pDispParams),
-                        VARIANT *WXUNUSED(pVarResult), EXCEPINFO *WXUNUSED(pExcepInfo),
-                        unsigned int *WXUNUSED(puArgErr) )
+                        [[maybe_unused]] WXWORD wFlags, [[maybe_unused]] DISPPARAMS *pDispParams,
+                        [[maybe_unused]] VARIANT *pVarResult, [[maybe_unused]] EXCEPINFO *pExcepInfo,
+                        unsigned [[maybe_unused]] int *puArgErr )
 {
     return E_NOTIMPL;
 }

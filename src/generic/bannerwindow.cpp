@@ -124,7 +124,7 @@ void wxBannerWindow::OnSize(wxSizeEvent& event)
     event.Skip();
 }
 
-void wxBannerWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxBannerWindow::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     if ( m_bitmap.IsOk() && m_title.empty() && m_message.empty() )
     {

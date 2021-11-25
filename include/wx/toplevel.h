@@ -163,7 +163,7 @@ public:
     // set the frame icons
     virtual void SetIcons(const wxIconBundle& icons) { m_icons = icons; }
 
-    virtual bool EnableFullScreenView(bool WXUNUSED(enable) = true)
+    virtual bool EnableFullScreenView([[maybe_unused]] bool enable = true)
     {
         return false;
     }
@@ -186,9 +186,9 @@ public:
     virtual std::string GetTitle() const = 0;
 
     // enable/disable close button [x]
-    virtual bool EnableCloseButton(bool WXUNUSED(enable) = true) { return false; }
-    virtual bool EnableMaximizeButton(bool WXUNUSED(enable) = true) { return false; }
-    virtual bool EnableMinimizeButton(bool WXUNUSED(enable) = true) { return false; }
+    virtual bool EnableCloseButton([[maybe_unused]] bool enable = true) { return false; }
+    virtual bool EnableMaximizeButton([[maybe_unused]] bool enable = true) { return false; }
+    virtual bool EnableMinimizeButton([[maybe_unused]] bool enable = true) { return false; }
 
     // Attracts the users attention to this window if the application is
     // inactive (should be called when a background event occurs)
@@ -281,14 +281,14 @@ public:
 
     // event handlers
     void OnCloseWindow(wxCloseEvent& event);
-    void OnSize(wxSizeEvent& WXUNUSED(event)) { Layout(); }
+    void OnSize([[maybe_unused]] wxSizeEvent& event) { Layout(); }
 
     // Get rect to be used to center top-level children
     virtual void GetRectForTopLevelChildren(int *x, int *y, int *w, int *h);
 
     // this should go away, but for now it's called from docview.cpp,
     // so should be there for all platforms
-    void OnActivate(wxActivateEvent &WXUNUSED(event)) { }
+    void OnActivate([[maybe_unused]] wxActivateEvent &event) { }
 
     // do the window-specific processing after processing the update event
     void DoUpdateWindowUI(wxUpdateUIEvent& event) override ;
@@ -320,7 +320,7 @@ protected:
 
     // test whether this window makes part of the frame
     // (menubar, toolbar and statusbar are excluded from automatic layout)
-    virtual bool IsOneOfBars(const wxWindow *WXUNUSED(win)) const
+    virtual bool IsOneOfBars([[maybe_unused]] const wxWindow *win) const
         { return false; }
 
     // check if we should exit the program after deleting this window

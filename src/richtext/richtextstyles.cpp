@@ -1088,7 +1088,7 @@ void wxRichTextStyleListCtrl::OnChooseType(wxCommandEvent& event)
 }
 
 /// Lay out the controls
-void wxRichTextStyleListCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxRichTextStyleListCtrl::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if (GetAutoLayout())
         Layout();
@@ -1258,7 +1258,7 @@ void wxRichTextStyleComboPopup::OnMouseMove(wxMouseEvent& event)
 }
 
 // On mouse left, set the value and close the popup
-void wxRichTextStyleComboPopup::OnMouseClick(wxMouseEvent& WXUNUSED(event))
+void wxRichTextStyleComboPopup::OnMouseClick([[maybe_unused]] wxMouseEvent& event)
 {
     if (m_itemHere >= 0)
         m_value = m_itemHere;

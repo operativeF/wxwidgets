@@ -381,7 +381,7 @@ CppUnit::Test* GetlargeFileSuite()
 #else // WX_WINDOWS
 
 bool IsFAT([[maybe_unused]] const wxString& path) { return false; }
-void MakeSparse([[maybe_unused]] const wxString& path, int WXUNUSED(fd)) { }
+void MakeSparse([[maybe_unused]] const wxString& path, [[maybe_unused]] int fd) { }
 
 // return the suite if sparse files are supported, otherwise return NULL
 //

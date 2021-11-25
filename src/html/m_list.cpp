@@ -48,7 +48,7 @@ wxHtmlListmarkCell::wxHtmlListmarkCell(wxDC* dc, const wxColour& clr) :  m_Brush
 
 void wxHtmlListmarkCell::Draw(wxDC& dc, int x, int y,
                               int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                              wxHtmlRenderingInfo& WXUNUSED(info))
+                              [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     dc.SetBrush(m_Brush);
     dc.DrawEllipse(x + m_PosX + m_Width / 3, y + m_PosY + m_Height / 3,

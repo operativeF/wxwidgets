@@ -857,7 +857,7 @@ bool wxTextCtrlBase::SetStyle([[maybe_unused]] long start, [[maybe_unused]] long
 }
 
 // get the styling at the given position
-bool wxTextCtrlBase::GetStyle([[maybe_unused]] long position, wxTextAttr& WXUNUSED(style))
+bool wxTextCtrlBase::GetStyle([[maybe_unused]] long position, [[maybe_unused]] wxTextAttr& style)
 {
     // to be implemented in derived classes
     return false;
@@ -1183,7 +1183,7 @@ wxTextAreaBase::HitTest(const wxPoint& pt, wxTextCoord *x, wxTextCoord *y) const
 }
 
 wxTextCtrlHitTestResult
-wxTextAreaBase::HitTest([[maybe_unused]] const wxPoint& pt, long * WXUNUSED(pos)) const
+wxTextAreaBase::HitTest([[maybe_unused]] const wxPoint& pt, [[maybe_unused]] long * pos) const
 {
     // not implemented
     return wxTextCtrlHitTestResult::Unknown;

@@ -104,7 +104,7 @@ private:
         wxActivityIndicatorImpl* const m_owner;
     };
 
-    void OnPaint(wxPaintEvent& WXUNUSED(event))
+    void OnPaint([[maybe_unused]] wxPaintEvent& event)
     {
         wxPaintDC pdc(m_win);
 

@@ -560,7 +560,7 @@ wxIcon wxRichTextIndentsSpacingPage::GetIconResource( const wxString& name )
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTINDENTSSPACINGPAGE_ALIGNMENT_LEFT
  */
 
-void wxRichTextIndentsSpacingPage::OnAlignmentLeftSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnAlignmentLeftSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -571,7 +571,7 @@ void wxRichTextIndentsSpacingPage::OnAlignmentLeftSelected( wxCommandEvent& WXUN
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTINDENTSSPACINGPAGE_ALIGNMENT_RIGHT
  */
 
-void wxRichTextIndentsSpacingPage::OnAlignmentRightSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnAlignmentRightSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -582,7 +582,7 @@ void wxRichTextIndentsSpacingPage::OnAlignmentRightSelected( wxCommandEvent& WXU
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTINDENTSSPACINGPAGE_ALIGNMENT_JUSTIFIED
  */
 
-void wxRichTextIndentsSpacingPage::OnAlignmentJustifiedSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnAlignmentJustifiedSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -593,7 +593,7 @@ void wxRichTextIndentsSpacingPage::OnAlignmentJustifiedSelected( wxCommandEvent&
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTINDENTSSPACINGPAGE_ALIGNMENT_CENTRED
  */
 
-void wxRichTextIndentsSpacingPage::OnAlignmentCentredSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnAlignmentCentredSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -604,7 +604,7 @@ void wxRichTextIndentsSpacingPage::OnAlignmentCentredSelected( wxCommandEvent& W
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTINDENTSSPACINGPAGE_ALIGNMENT_INDETERMINATE
  */
 
-void wxRichTextIndentsSpacingPage::OnAlignmentIndeterminateSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnAlignmentIndeterminateSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -615,7 +615,7 @@ void wxRichTextIndentsSpacingPage::OnAlignmentIndeterminateSelected( wxCommandEv
  * wxEVT_TEXT event handler for ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT
  */
 
-void wxRichTextIndentsSpacingPage::OnIndentLeftUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnIndentLeftUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -626,7 +626,7 @@ void wxRichTextIndentsSpacingPage::OnIndentLeftUpdated( wxCommandEvent& WXUNUSED
  * wxEVT_TEXT event handler for ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT_FIRST
  */
 
-void wxRichTextIndentsSpacingPage::OnIndentLeftFirstUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnIndentLeftFirstUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -637,7 +637,7 @@ void wxRichTextIndentsSpacingPage::OnIndentLeftFirstUpdated( wxCommandEvent& WXU
  * wxEVT_TEXT event handler for ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_RIGHT
  */
 
-void wxRichTextIndentsSpacingPage::OnIndentRightUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnIndentRightUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -648,7 +648,7 @@ void wxRichTextIndentsSpacingPage::OnIndentRightUpdated( wxCommandEvent& WXUNUSE
  * wxEVT_TEXT event handler for ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_BEFORE
  */
 
-void wxRichTextIndentsSpacingPage::OnSpacingBeforeUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnSpacingBeforeUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -659,7 +659,7 @@ void wxRichTextIndentsSpacingPage::OnSpacingBeforeUpdated( wxCommandEvent& WXUNU
  * wxEVT_TEXT event handler for ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_AFTER
  */
 
-void wxRichTextIndentsSpacingPage::OnSpacingAfterUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnSpacingAfterUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -669,7 +669,7 @@ void wxRichTextIndentsSpacingPage::OnSpacingAfterUpdated( wxCommandEvent& WXUNUS
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_LINE
  */
 
-void wxRichTextIndentsSpacingPage::OnSpacingLineSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnSpacingLineSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();
@@ -679,7 +679,7 @@ void wxRichTextIndentsSpacingPage::OnSpacingLineSelected( wxCommandEvent& WXUNUS
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTINDENTSSPACINGPAGE_OUTLINELEVEL
  */
 
-void wxRichTextIndentsSpacingPage::OnRichtextOutlinelevelSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextIndentsSpacingPage::OnRichtextOutlinelevelSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
         UpdatePreview();

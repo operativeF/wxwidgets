@@ -107,7 +107,7 @@ public:
     // Note that this function is called whenever an event loop is activated;
     // you may want to use wxEventLoopBase::IsMain() to perform initialization
     // specific for the app's main event loop.
-    virtual void OnEventLoopEnter(wxEventLoopBase* WXUNUSED(loop)) {}
+    virtual void OnEventLoopEnter([[maybe_unused]] wxEventLoopBase* loop) {}
 
     // This is only called if OnInit() returned true so it's a good place to do
     // any cleanup matching the initializations done there.
@@ -115,7 +115,7 @@ public:
 
     // This is called by wxEventLoopBase::OnExit() for each event loop which
     // is exited.
-    virtual void OnEventLoopExit(wxEventLoopBase* WXUNUSED(loop)) {}
+    virtual void OnEventLoopExit([[maybe_unused]] wxEventLoopBase* loop) {}
 
     // This is the very last function called on wxApp object before it is
     // destroyed. If you override it (instead of overriding OnExit() as usual)
@@ -642,7 +642,7 @@ public:
         //
         // default behaviour is the normal one for Unix: always use PostScript
         // printing.
-    virtual void SetPrintMode(int WXUNUSED(mode)) { }
+    virtual void SetPrintMode([[maybe_unused]] int mode) { }
     int GetPrintMode() const { return wxPRINT_POSTSCRIPT; }
 
     // Return the layout direction for the current locale or wxLayoutDirection::Default
@@ -650,7 +650,7 @@ public:
     virtual wxLayoutDirection GetLayoutDirection() const;
 
     // Change the theme used by the application, return true on success.
-    virtual bool SetNativeTheme(const std::string& WXUNUSED(theme)) { return false; }
+    virtual bool SetNativeTheme([[maybe_unused]] const std::string& theme) { return false; }
 
 
     // command line parsing (GUI-specific)

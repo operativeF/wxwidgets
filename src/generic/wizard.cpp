@@ -718,7 +718,7 @@ void wxWizard::SetBorder(int border)
     m_border = border;
 }
 
-void wxWizard::OnCancel(wxCommandEvent& WXUNUSED(eventUnused))
+void wxWizard::OnCancel([[maybe_unused]] wxCommandEvent& eventUnused)
 {
     // this function probably can never be called when we don't have an active
     // page, but a small extra check won't hurt
@@ -783,7 +783,7 @@ void wxWizard::OnBackOrNext(wxCommandEvent& event)
     std::ignore = ShowPage(page, forward);
 }
 
-void wxWizard::OnHelp(wxCommandEvent& WXUNUSED(event))
+void wxWizard::OnHelp([[maybe_unused]] wxCommandEvent& event)
 {
     // this function probably can never be called when we don't have an active
     // page, but a small extra check won't hurt

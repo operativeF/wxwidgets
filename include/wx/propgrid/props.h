@@ -875,7 +875,7 @@ protected:
     virtual bool ArraySet( size_t index, const wxString& str ) = 0;
     virtual void ArrayRemoveAt( int index ) = 0;
     virtual void ArraySwap( size_t first, size_t second ) = 0;
-    virtual bool OnCustomNewAction(wxString* WXUNUSED(resString))
+    virtual bool OnCustomNewAction([[maybe_unused]] wxString* resString)
     {
         return false;
     }

@@ -281,7 +281,7 @@ public:
     void UpdateWindowUI(unsigned int flags = wxUPDATE_UI_NONE) override;
 
 protected:
-    virtual void OnCustomRender(wxDC& WXUNUSED(dc),
+    virtual void OnCustomRender([[maybe_unused]] wxDC& dc,
                                 [[maybe_unused]] const wxAuiToolBarItem& item,
                                 [[maybe_unused]] const wxRect& rect) { }
 

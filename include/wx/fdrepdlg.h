@@ -96,10 +96,10 @@ class wxFindReplaceDialogBase : public wxDialog
 public:
     
     wxFindReplaceDialogBase() = default;
-    wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
+    wxFindReplaceDialogBase([[maybe_unused]] wxWindow * parent,
                             wxFindReplaceData *data,
-                            const std::string& WXUNUSED(title),
-                            int WXUNUSED(style) = 0)
+                            [[maybe_unused]] const std::string& title,
+                            [[maybe_unused]] int style = 0)
         : m_FindReplaceData{data}
     {
     }

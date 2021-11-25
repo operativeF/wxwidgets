@@ -192,12 +192,12 @@ public:
 
     // Right-To-Left (RTL) modes
 
-    virtual void SetLayoutDirection(wxLayoutDirection WXUNUSED(dir)) { }
+    virtual void SetLayoutDirection([[maybe_unused]] wxLayoutDirection dir) { }
     virtual wxLayoutDirection GetLayoutDirection() const  { return wxLayoutDirection::Default; }
 
     // page and document
 
-    virtual bool wxStartDoc(const std::string& WXUNUSED(message)) { return true; }
+    virtual bool wxStartDoc([[maybe_unused]] const std::string& message) { return true; }
     virtual void EndDoc() { }
 
     virtual void StartPage() { }
@@ -406,7 +406,7 @@ public:
     // default.
     virtual bool CanUseTransformMatrix() const
         { return false; }
-    virtual bool SetTransformMatrix(const wxAffineMatrix2D& WXUNUSED(matrix))
+    virtual bool SetTransformMatrix([[maybe_unused]] const wxAffineMatrix2D& matrix)
         { return false; }
     virtual wxAffineMatrix2D GetTransformMatrix() const
         { return wxAffineMatrix2D(); }
@@ -499,7 +499,7 @@ public:
                                bool useMask = false,
                                wxPoint srcMask = wxDefaultPosition);
 
-    virtual wxBitmap DoGetAsBitmap(const wxRect *WXUNUSED(subrect)) const
+    virtual wxBitmap DoGetAsBitmap([[maybe_unused]] const wxRect *subrect) const
         { return wxNullBitmap; }
 
 
@@ -552,7 +552,7 @@ public:
 #if wxUSE_GRAPHICS_CONTEXT
     virtual wxGraphicsContext* GetGraphicsContext() const
         { return nullptr; }
-    virtual void SetGraphicsContext( std::unique_ptr<wxGraphicsContext> WXUNUSED(ctx) )
+    virtual void SetGraphicsContext( [[maybe_unused]] std::unique_ptr<wxGraphicsContext> ctx )
         {}
 #endif
 
@@ -1145,7 +1145,7 @@ public:
 
     // don't use these methods manually, use GetTempHDC() instead
     virtual WXHDC AcquireHDC() { return GetHDC(); }
-    virtual void ReleaseHDC(WXHDC WXUNUSED(hdc)) { }
+    virtual void ReleaseHDC([[maybe_unused]] WXHDC hdc) { }
 
     // helper class holding the result of GetTempHDC() with std::auto_ptr<>-like
     // semantics, i.e. it is moved when copied

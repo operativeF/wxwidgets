@@ -277,7 +277,7 @@ public:
 
     // Sets encoding of output string.
     // Has no effect.
-    void SetEncoding(wxFontEncoding WXUNUSED(encoding)) {}
+    void SetEncoding([[maybe_unused]] wxFontEncoding encoding) {}
 
     // Parses entities in input and replaces them with respective characters
     // (with respect to output encoding)

@@ -45,7 +45,7 @@ public:
         // should)
         return wxIcon();
     }
-    virtual void SetScaleMode(ScaleMode WXUNUSED(scaleMode)) { }
+    virtual void SetScaleMode([[maybe_unused]] ScaleMode scaleMode) { }
     virtual ScaleMode GetScaleMode() const { return ScaleMode::None; }
 
     // overridden base class virtuals

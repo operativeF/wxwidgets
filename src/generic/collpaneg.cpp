@@ -221,7 +221,7 @@ void wxGenericCollapsiblePane::OnButton(wxCommandEvent& event)
     GetEventHandler()->ProcessEvent(ev);
 }
 
-void wxGenericCollapsiblePane::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxGenericCollapsiblePane::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
 #if 0       // for debug only
     wxClientDC dc(this);

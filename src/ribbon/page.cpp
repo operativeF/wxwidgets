@@ -80,12 +80,12 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
     SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
-void wxRibbonPageScrollButton::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // Do nothing - all painting done in main paint handler
 }
 
-void wxRibbonPageScrollButton::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     if(m_art)
@@ -94,26 +94,26 @@ void wxRibbonPageScrollButton::OnPaint(wxPaintEvent& WXUNUSED(evt))
     }
 }
 
-void wxRibbonPageScrollButton::OnMouseEnter(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnMouseEnter([[maybe_unused]] wxMouseEvent& evt)
 {
     m_flags |= wxRIBBON_SCROLL_BTN_HOVERED;
     Refresh(false);
 }
 
-void wxRibbonPageScrollButton::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnMouseLeave([[maybe_unused]] wxMouseEvent& evt)
 {
     m_flags &= ~wxRIBBON_SCROLL_BTN_HOVERED;
     m_flags &= ~wxRIBBON_SCROLL_BTN_ACTIVE;
     Refresh(false);
 }
 
-void wxRibbonPageScrollButton::OnMouseDown(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnMouseDown([[maybe_unused]] wxMouseEvent& evt)
 {
     m_flags |= wxRIBBON_SCROLL_BTN_ACTIVE;
     Refresh(false);
 }
 
-void wxRibbonPageScrollButton::OnMouseUp(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonPageScrollButton::OnMouseUp([[maybe_unused]] wxMouseEvent& evt)
 {
     if(m_flags & wxRIBBON_SCROLL_BTN_ACTIVE)
     {
@@ -147,7 +147,7 @@ wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,
                    wxWindowID id,
                    const wxString& label,
                    const wxBitmap& icon,
-                   unsigned int WXUNUSED(style))
+                   [[maybe_unused]] unsigned int style)
     : wxRibbonControl(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 {
     CommonInit(label, icon);
@@ -164,7 +164,7 @@ bool wxRibbonPage::Create(wxRibbonBar* parent,
                 wxWindowID id,
                 const wxString& label,
                 const wxBitmap& icon,
-                unsigned int WXUNUSED(style))
+                [[maybe_unused]] unsigned int style)
 {
     if(!wxRibbonControl::Create(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE))
         return false;
@@ -253,12 +253,12 @@ void wxRibbonPage::AdjustRectToIncludeScrollButtons(wxRect* rect) const
     }
 }
 
-void wxRibbonPage::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonPage::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // All painting done in main paint handler to minimise flicker
 }
 
-void wxRibbonPage::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonPage::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     // No foreground painting done by the page itself, but a paint DC
     // must be created anyway.

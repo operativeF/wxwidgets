@@ -365,7 +365,7 @@ protected:
     wxSize DoGetBestSize() const override;
 
 private:
-    void OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
+    void OnSysColourChanged([[maybe_unused]] wxSysColourChangedEvent& event)
     {
         InitVisualAttributes();
     }

@@ -2042,7 +2042,7 @@ wxBEGIN_EVENT_TABLE(wxGridSubwindow, wxWindow)
     EVT_MOUSE_CAPTURE_LOST(wxGridSubwindow::OnMouseCaptureLost)
 wxEND_EVENT_TABLE()
 
-void wxGridSubwindow::OnMouseCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxGridSubwindow::OnMouseCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     m_owner->CancelMouseCapture();
 }
@@ -2053,7 +2053,7 @@ wxBEGIN_EVENT_TABLE( wxGridRowLabelWindow, wxGridSubwindow )
     EVT_MOUSE_EVENTS( wxGridRowLabelWindow::OnMouseEvent )
 wxEND_EVENT_TABLE()
 
-void wxGridRowLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxGridRowLabelWindow::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
 
@@ -2098,7 +2098,7 @@ wxBEGIN_EVENT_TABLE( wxGridColLabelWindow, wxGridSubwindow )
     EVT_MOUSE_EVENTS( wxGridColLabelWindow::OnMouseEvent )
 wxEND_EVENT_TABLE()
 
-void wxGridColLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxGridColLabelWindow::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
 
@@ -2148,7 +2148,7 @@ wxBEGIN_EVENT_TABLE( wxGridCornerLabelWindow, wxGridSubwindow )
     EVT_PAINT( wxGridCornerLabelWindow::OnPaint )
 wxEND_EVENT_TABLE()
 
-void wxGridCornerLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxGridCornerLabelWindow::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
 
@@ -2179,7 +2179,7 @@ wxBEGIN_EVENT_TABLE( wxGridWindow, wxGridSubwindow )
     EVT_KILL_FOCUS( wxGridWindow::OnFocus )
 wxEND_EVENT_TABLE()
 
-void wxGridWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
+void wxGridWindow::OnPaint( [[maybe_unused]] wxPaintEvent &event )
 {
     wxAutoBufferedPaintDC dc( this );
     m_owner->PrepareDCFor( dc, this );
@@ -4659,7 +4659,7 @@ wxGrid::DoGridCellLeftUp(wxMouseEvent& event,
 }
 
 void
-wxGrid::DoGridMouseMoveEvent(wxMouseEvent& WXUNUSED(event),
+wxGrid::DoGridMouseMoveEvent([[maybe_unused]] wxMouseEvent& event,
                              const wxGridCellCoords& coords,
                              const wxPoint& pos,
                              wxGridWindow* gridWindow)
@@ -5529,7 +5529,7 @@ void wxGrid::RefreshBlock(int topRow, int leftCol,
     }
 }
 
-void wxGrid::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxGrid::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if (m_targetWindow != this) // check whether initialisation has been done
     {
@@ -5915,7 +5915,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
     }
 }
 
-void wxGrid::OnKeyUp( wxKeyEvent& WXUNUSED(event) )
+void wxGrid::OnKeyUp( [[maybe_unused]] wxKeyEvent& event )
 {
     // try local handlers
 }
@@ -6525,7 +6525,7 @@ wxGrid::DrawRangeGridLines(wxDC& dc,
 // This is used to redraw all grid lines e.g. when the grid line colour
 // has been changed
 //
-void wxGrid::DrawAllGridWindowLines(wxDC& dc, const wxRegion & WXUNUSED(reg), wxGridWindow *gridWindow)
+void wxGrid::DrawAllGridWindowLines(wxDC& dc, const [[maybe_unused]] wxRegion & reg, wxGridWindow *gridWindow)
 {
     if ( !m_gridLinesEnabled || !gridWindow )
          return;

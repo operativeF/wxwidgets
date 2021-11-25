@@ -45,7 +45,7 @@ public:
 
     // set/get the number of columns in the control (as they're not supported on
     // most platforms, they do nothing by default)
-    virtual void SetColumns(int WXUNUSED(n) = 1 ) { }
+    virtual void SetColumns([[maybe_unused]] int n = 1 ) { }
     virtual int GetColumns() const { return 1 ; }
 
     // emulate selecting the item event.GetInt()

@@ -215,7 +215,7 @@ public:
 
     // hit test: returns which page is hit and, optionally, where (icon, label)
     virtual int HitTest([[maybe_unused]] const wxPoint& pt,
-                        unsigned int* WXUNUSED(flags) = nullptr) const
+                        unsigned [[maybe_unused]] int* flags = nullptr) const
     {
         return wxNOT_FOUND;
     }
@@ -263,7 +263,7 @@ protected:
     // use it, these functions are not pure virtual
 
     // called to notify the control about a new current page
-    virtual void UpdateSelectedPage(size_t WXUNUSED(newsel))
+    virtual void UpdateSelectedPage([[maybe_unused]] size_t newsel)
         { wxFAIL_MSG("Override this function!"); }
 
     // create a new "page changing" event
@@ -272,7 +272,7 @@ protected:
 
     // modify the event created by CreatePageChangingEvent() to "page changed"
     // event, usually by just calling SetEventType() on it
-    virtual void MakeChangedEvent(wxBookCtrlEvent& WXUNUSED(event))
+    virtual void MakeChangedEvent([[maybe_unused]] wxBookCtrlEvent& event)
         { wxFAIL_MSG("Override this function!"); }
 
 

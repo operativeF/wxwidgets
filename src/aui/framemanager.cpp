@@ -119,7 +119,7 @@ public:
         return true;
     }
 
-    void OnPaint(wxPaintEvent& WXUNUSED(event))
+    void OnPaint([[maybe_unused]] wxPaintEvent& event)
     {
         wxPaintDC dc(this);
 
@@ -145,7 +145,7 @@ public:
     }
 
 #ifdef __WXGTK__
-    void OnWindowCreate(wxWindowCreateEvent& WXUNUSED(event))
+    void OnWindowCreate([[maybe_unused]] wxWindowCreateEvent& event)
     {
         m_canSetShape=true;
         SetTransparent(0);
@@ -203,7 +203,7 @@ wxEND_EVENT_TABLE()
 #include "wx/gtk/private/wrapgtk.h"
 
 static void
-gtk_pseudo_window_realized_callback( GtkWidget *m_widget, void *WXUNUSED(win) )
+gtk_pseudo_window_realized_callback( GtkWidget *m_widget, [[maybe_unused]] void *win )
 {
         auto disp = wxDisplay().GetGeometry().GetSize();
         int amount = 128;
@@ -626,7 +626,7 @@ wxAuiFloatingFrame* wxAuiManager::CreateFloatingFrame(wxWindow* parent,
     return new wxAuiFloatingFrame(parent, this, paneInfo);
 }
 
-bool wxAuiManager::CanDockPanel(const wxAuiPaneInfo & WXUNUSED(p))
+bool wxAuiManager::CanDockPanel(const [[maybe_unused]] wxAuiPaneInfo & p)
 {
     // if a key modifier is pressed while dragging the frame,
     // don't dock the window
@@ -3229,7 +3229,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
 }
 
 
-void wxAuiManager::OnHintFadeTimer(wxTimerEvent& WXUNUSED(event))
+void wxAuiManager::OnHintFadeTimer([[maybe_unused]] wxTimerEvent& event)
 {
     if (!m_hintWnd || m_hintFadeAmt >= m_hintFadeMax)
     {
@@ -3366,7 +3366,7 @@ void wxAuiManager::HideHint()
     }
 }
 
-void wxAuiManager::OnHintActivate(wxActivateEvent& WXUNUSED(event))
+void wxAuiManager::OnHintActivate([[maybe_unused]] wxActivateEvent& event)
 {
     // Do nothing so this event isn't handled in the base handlers.
 
@@ -3899,7 +3899,7 @@ void wxAuiManager::OnDestroy(wxWindowDestroyEvent& event)
     }
 }
 
-void wxAuiManager::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxAuiManager::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(m_frame);
 
@@ -4679,7 +4679,7 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
     }
 }
 
-void wxAuiManager::OnLeaveWindow(wxMouseEvent& WXUNUSED(event))
+void wxAuiManager::OnLeaveWindow([[maybe_unused]] wxMouseEvent& event)
 {
     if (m_hoverButton)
     {
@@ -4688,7 +4688,7 @@ void wxAuiManager::OnLeaveWindow(wxMouseEvent& WXUNUSED(event))
     }
 }
 
-void wxAuiManager::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxAuiManager::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     // cancel the operation in progress, if any
     if ( m_action != actionNone )

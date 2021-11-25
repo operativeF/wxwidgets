@@ -304,7 +304,7 @@ wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintou
     return new wxPrintAbortDialog(parent, printout->GetTitle());
 }
 
-void wxPrinterBase::ReportError(wxWindow *parent, wxPrintout *WXUNUSED(printout), std::string_view message)
+void wxPrinterBase::ReportError(wxWindow *parent, [[maybe_unused]] wxPrintout *printout, std::string_view message)
 {
     wxMessageBox(message, _("Printing Error").ToStdString(), wxOK, parent);
 }
@@ -532,7 +532,7 @@ void wxPrintAbortDialog::SetProgress(int currentPage, int totalPages,
   m_progress->SetLabel(text);
 }
 
-void wxPrintAbortDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
+void wxPrintAbortDialog::OnCancel([[maybe_unused]] wxCommandEvent& event)
 {
     wxCHECK_RET( wxPrinterBase::sm_abortWindow != nullptr, "OnCancel called twice" );
     wxPrinterBase::sm_abortIt = true;
@@ -899,7 +899,7 @@ wxPreviewCanvas::wxPreviewCanvas(wxPrintPreviewBase *preview, wxWindow *parent,
     SetScrollbars(10, 10, 100, 100);
 }
 
-void wxPreviewCanvas::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxPreviewCanvas::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     PrepareDC( dc );
@@ -1202,7 +1202,7 @@ private:
         event.Skip();
     }
 
-    void OnTextEnter(wxCommandEvent& WXUNUSED(event))
+    void OnTextEnter([[maybe_unused]] wxCommandEvent& event)
     {
         DoChangePage();
     }
@@ -1255,7 +1255,7 @@ wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, unsigned i
 {
 }
 
-void wxPreviewControlBar::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxPreviewControlBar::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 
@@ -1265,7 +1265,7 @@ void wxPreviewControlBar::OnPaint(wxPaintEvent& WXUNUSED(event))
     dc.DrawLine( 0, sz.y - 1, sz.x, sz.y - 1 );
 }
 
-void wxPreviewControlBar::OnWindowClose(wxCommandEvent& WXUNUSED(event))
+void wxPreviewControlBar::OnWindowClose([[maybe_unused]] wxCommandEvent& event)
 {
     wxPreviewFrame *frame = (wxPreviewFrame *)GetParent();
     frame->Close(true);
@@ -1671,7 +1671,7 @@ wxPreviewFrame::~wxPreviewFrame()
     delete m_printPreview;
 }
 
-void wxPreviewFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxPreviewFrame::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     // Reenable any windows we disabled by undoing whatever we did in our
     // Initialize().

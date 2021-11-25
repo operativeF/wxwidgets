@@ -170,7 +170,7 @@ public:
     // get data from the buffer of specified length (in the given format),
     // return true if the data was read successfully, false otherwise
     virtual bool SetData([[maybe_unused]] const wxDataFormat& format,
-                         size_t WXUNUSED(len), const void * WXUNUSED(buf))
+                         [[maybe_unused]] size_t len, const [[maybe_unused]] void * buf)
     {
         return false;
     }
@@ -240,21 +240,21 @@ public:
         { return 0; }
 
     // copy our data to the buffer
-    virtual bool GetDataHere(void *WXUNUSED(buf)) const
+    virtual bool GetDataHere([[maybe_unused]] void *buf) const
         { return false; }
 
     // copy data from buffer to our data
-    virtual bool SetData(size_t WXUNUSED(len), const void *WXUNUSED(buf))
+    virtual bool SetData([[maybe_unused]] size_t len, [[maybe_unused]] const void *buf)
         { return false; }
 
     
     // ----------------------------------
-    wxDataFormat GetPreferredFormat(wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
+    wxDataFormat GetPreferredFormat([[maybe_unused]] wxDataObjectBase::Direction dir = Get) const override
         { return m_format; }
-    size_t GetFormatCount(wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
+    size_t GetFormatCount([[maybe_unused]] wxDataObjectBase::Direction dir = Get) const override
         { return 1; }
     void GetAllFormats(wxDataFormat *formats,
-                               wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
+                               [[maybe_unused]] wxDataObjectBase::Direction dir = Get) const override
         { *formats = m_format; }
     size_t GetDataSize([[maybe_unused]] const wxDataFormat& format) const override
         { return GetDataSize(); }
@@ -414,9 +414,9 @@ public:
 
     // some platforms have 2 and not 1 format for text data
 #if defined(wxNEEDS_UTF8_FOR_TEXT_DATAOBJ) || defined(wxNEEDS_UTF16_FOR_TEXT_DATAOBJ)
-    size_t GetFormatCount(Direction WXUNUSED(dir) = Get) const override { return 2; }
+    size_t GetFormatCount([[maybe_unused]] Direction dir = Get) const override { return 2; }
     virtual void GetAllFormats(wxDataFormat *formats,
-                               wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override;
+                               [[maybe_unused]] wxDataObjectBase::Direction dir = Get) const override;
 
     size_t GetDataSize() const override { return GetDataSize(GetPreferredFormat()); }
     bool GetDataHere(void *buf) const override { return GetDataHere(GetPreferredFormat(), buf); }

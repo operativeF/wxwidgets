@@ -271,7 +271,7 @@ void wxRadioBoxBase::SetItemToolTip(unsigned int item, const std::string& text)
 
 void
 wxRadioBoxBase::DoSetItemToolTip([[maybe_unused]] unsigned int item,
-                                 wxToolTip * WXUNUSED(tooltip))
+                                 [[maybe_unused]] wxToolTip * tooltip)
 {
     // per-item tooltips not implemented by default
 }

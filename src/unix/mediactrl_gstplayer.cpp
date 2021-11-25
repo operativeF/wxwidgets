@@ -200,17 +200,17 @@ wxGStreamerMediaBackend::~wxGStreamerMediaBackend()
 }
 
 extern "C" {
-static void video_dimensions_changed_callback(GstPlayer * WXUNUSED(player), gint width, gint height, wxGStreamerMediaBackend* be)
+static void video_dimensions_changed_callback([[maybe_unused]] GstPlayer * player, gint width, gint height, wxGStreamerMediaBackend* be)
 {
     be->VideoDimensionsChanged(width, height);
 }
 
-static void state_changed_callback(GstPlayer * WXUNUSED(player), GstPlayerState state, wxGStreamerMediaBackend* be)
+static void state_changed_callback([[maybe_unused]] GstPlayer * player, GstPlayerState state, wxGStreamerMediaBackend* be)
 {
     be->StateChanged(state);
 }
 
-static void end_of_stream_callback(GstPlayer * WXUNUSED(player), wxGStreamerMediaBackend* be)
+static void end_of_stream_callback([[maybe_unused]] GstPlayer * player, wxGStreamerMediaBackend* be)
 {
     be->EndOfStream();
 }
@@ -441,7 +441,7 @@ wxLongLong wxGStreamerMediaBackend()
     return GST_CLOCK_TIME_IS_VALID(duration) ? duration / GST_MSECOND : 0;
 }
 
-void wxGStreamerMediaBackend(int WXUNUSED(x), int WXUNUSED(y), int WXUNUSED(w), int WXUNUSED(h))
+void wxGStreamerMediaBackend([[maybe_unused]] int x, [[maybe_unused]] int y, [[maybe_unused]] int w, [[maybe_unused]] int h)
 {
     /* Nothing to be done here, at least for GTK+. For other toolkits we might
      * have to call

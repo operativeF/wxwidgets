@@ -140,7 +140,7 @@ wxGenericColourDialog::wxGenericColourDialog(wxWindow *parent,
     Create(parent, data);
 }
 
-void wxGenericColourDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     EndModal(wxID_CANCEL);
 }
@@ -260,7 +260,7 @@ void wxGenericColourDialog::CreateCustomBitmaps()
 }
 #endif // wxCLRDLGG_USE_PREVIEW_WITH_ALPHA
 
-void wxGenericColourDialog::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 
@@ -273,7 +273,7 @@ void wxGenericColourDialog::OnPaint(wxPaintEvent& WXUNUSED(event))
     PaintHighlight(dc, true);
 }
 
-void wxGenericColourDialog::OnDPIChanged(wxDPIChangedEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent& event)
 {
     CalculateMeasurements();
 
@@ -626,7 +626,7 @@ void wxGenericColourDialog::OnCancel(void)
 }
 */
 
-void wxGenericColourDialog::OnAddCustom(wxCommandEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnAddCustom([[maybe_unused]] wxCommandEvent& event)
 {
   wxClientDC dc(this);
   if (m_whichKind != 2)
@@ -653,7 +653,7 @@ void wxGenericColourDialog::OnAddCustom(wxCommandEvent& WXUNUSED(event))
 
 #if wxUSE_SLIDER
 
-void wxGenericColourDialog::OnRedSlider(wxCommandEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnRedSlider([[maybe_unused]] wxCommandEvent& event)
 {
   if (!m_redSlider)
     return;
@@ -664,7 +664,7 @@ void wxGenericColourDialog::OnRedSlider(wxCommandEvent& WXUNUSED(event))
   PaintCustomColour(dc);
 }
 
-void wxGenericColourDialog::OnGreenSlider(wxCommandEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnGreenSlider([[maybe_unused]] wxCommandEvent& event)
 {
   if (!m_greenSlider)
     return;
@@ -675,7 +675,7 @@ void wxGenericColourDialog::OnGreenSlider(wxCommandEvent& WXUNUSED(event))
   PaintCustomColour(dc);
 }
 
-void wxGenericColourDialog::OnBlueSlider(wxCommandEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnBlueSlider([[maybe_unused]] wxCommandEvent& event)
 {
   if (!m_blueSlider)
     return;
@@ -686,7 +686,7 @@ void wxGenericColourDialog::OnBlueSlider(wxCommandEvent& WXUNUSED(event))
   PaintCustomColour(dc);
 }
 
-void wxGenericColourDialog::OnAlphaSlider(wxCommandEvent& WXUNUSED(event))
+void wxGenericColourDialog::OnAlphaSlider([[maybe_unused]] wxCommandEvent& event)
 {
     wxColour c = m_colourData.GetColour();
     m_colourData.SetColour(wxColour(c.Red(), c.Green(), c.Blue(), (unsigned char)m_alphaSlider->GetValue()));

@@ -277,7 +277,7 @@ bool wxHTTP::Connect(const wxString& host, unsigned short port)
     return true;
 }
 
-bool wxHTTP::Connect(const wxSockAddress& addr, bool WXUNUSED(wait))
+bool wxHTTP::Connect(const wxSockAddress& addr, [[maybe_unused]] bool wait)
 {
     if (m_addr) {
         delete m_addr;

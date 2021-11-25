@@ -62,7 +62,7 @@ public:
 #if wxUSE_SOCKETS
     bool Reconnect();
     virtual bool Connect( [[maybe_unused]] const wxString& host ) { return false; }
-    bool Connect( const wxSockAddress& addr, bool WXUNUSED(wait) = true) override
+    bool Connect( const wxSockAddress& addr, [[maybe_unused]] bool wait = true) override
         { return wxSocketClient::Connect(addr); }
 
     // read a '\r\n' terminated line from the given socket and put it in

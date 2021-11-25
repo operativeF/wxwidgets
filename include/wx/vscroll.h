@@ -186,8 +186,8 @@ protected:
     //
     // finally note that unitMin is inclusive, while unitMax is exclusive, as
     // usual
-    virtual void OnGetUnitsSizeHint(size_t WXUNUSED(unitMin),
-                                    size_t WXUNUSED(unitMax)) const
+    virtual void OnGetUnitsSizeHint([[maybe_unused]] size_t unitMin,
+                                    [[maybe_unused]] size_t unitMax) const
         { }
 
     // when the number of units changes, we try to estimate the total size
@@ -337,8 +337,8 @@ protected:
     virtual wxCoord OnGetRowHeight(size_t n) const = 0;
     wxCoord OnGetUnitSize(size_t n) const override       { return OnGetRowHeight(n); }
 
-    virtual void OnGetRowsHeightHint(size_t WXUNUSED(rowMin),
-                                     size_t WXUNUSED(rowMax)) const { }
+    virtual void OnGetRowsHeightHint([[maybe_unused]] size_t rowMin,
+                                     [[maybe_unused]] size_t rowMax) const { }
 
     // forward calls to OnGetRowsHeightHint()
     void OnGetUnitsSizeHint(size_t unitMin, size_t unitMax) const override
@@ -415,8 +415,8 @@ protected:
     virtual wxCoord OnGetColumnWidth(size_t n) const = 0;
     wxCoord OnGetUnitSize(size_t n) const override { return OnGetColumnWidth(n); }
 
-    virtual void OnGetColumnsWidthHint(size_t WXUNUSED(columnMin),
-                                        size_t WXUNUSED(columnMax)) const
+    virtual void OnGetColumnsWidthHint([[maybe_unused]] size_t columnMin,
+                                        [[maybe_unused]] size_t columnMax) const
         { }
 
     // forward calls to OnGetColumnsWidthHint()

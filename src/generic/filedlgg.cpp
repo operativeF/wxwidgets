@@ -311,7 +311,7 @@ bool wxGenericFileDialog::Show( bool show )
     return wxDialog::Show( show );
 }
 
-void wxGenericFileDialog::OnOk( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnOk( [[maybe_unused]] wxCommandEvent &event )
 {
     std::vector<wxString> selectedFiles = m_filectrl->GetPaths();
 
@@ -352,38 +352,38 @@ void wxGenericFileDialog::OnOk( wxCommandEvent &WXUNUSED(event) )
     EndModal(wxID_OK);
 }
 
-void wxGenericFileDialog::OnList( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnList( [[maybe_unused]] wxCommandEvent &event )
 {
     m_filectrl->ChangeToListMode();
     ms_lastViewStyle = wxLC_LIST;
     m_filectrl->GetFileList()->SetFocus();
 }
 
-void wxGenericFileDialog::OnReport( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnReport( [[maybe_unused]] wxCommandEvent &event )
 {
     m_filectrl->ChangeToReportMode();
     ms_lastViewStyle = wxLC_REPORT;
     m_filectrl->GetFileList()->SetFocus();
 }
 
-void wxGenericFileDialog::OnUp( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnUp( [[maybe_unused]] wxCommandEvent &event )
 {
     m_filectrl->GoToParentDir();
     m_filectrl->GetFileList()->SetFocus();
 }
 
-void wxGenericFileDialog::OnHome( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnHome( [[maybe_unused]] wxCommandEvent &event )
 {
     m_filectrl->GoToHomeDir();
     m_filectrl->SetFocus();
 }
 
-void wxGenericFileDialog::OnNew( wxCommandEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnNew( [[maybe_unused]] wxCommandEvent &event )
 {
     m_filectrl->GetFileList()->MakeDir();
 }
 
-void wxGenericFileDialog::OnFileActivated( wxFileCtrlEvent &WXUNUSED(event) )
+void wxGenericFileDialog::OnFileActivated( [[maybe_unused]] wxFileCtrlEvent &event )
 {
     wxCommandEvent dummy;
     OnOk( dummy );

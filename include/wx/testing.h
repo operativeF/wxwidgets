@@ -215,7 +215,7 @@ public:
     }
 
 protected:
-    int OnInvoked(T *WXUNUSED(dlg)) const override
+    int OnInvoked([[maybe_unused]] T *dlg) const override
     {
         return m_id;
     }

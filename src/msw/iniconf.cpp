@@ -175,28 +175,28 @@ wxString wxIniConfig::GetKeyName(const wxString& szKey) const
 // ----------------------------------------------------------------------------
 
 // not implemented
-bool wxIniConfig::GetFirstGroup(wxString& WXUNUSED(str), long& WXUNUSED(lIndex)) const
+bool wxIniConfig::GetFirstGroup([[maybe_unused]] wxString& str, [[maybe_unused]] long& lIndex) const
 {
     wxFAIL_MSG("not implemented");
 
     return false;
 }
 
-bool wxIniConfig::GetNextGroup (wxString& WXUNUSED(str), long& WXUNUSED(lIndex)) const
+bool wxIniConfig::GetNextGroup ([[maybe_unused]] wxString& str, [[maybe_unused]] long& lIndex) const
 {
     wxFAIL_MSG("not implemented");
 
     return false;
 }
 
-bool wxIniConfig::GetFirstEntry(wxString& WXUNUSED(str), long& WXUNUSED(lIndex)) const
+bool wxIniConfig::GetFirstEntry([[maybe_unused]] wxString& str, [[maybe_unused]] long& lIndex) const
 {
     wxFAIL_MSG("not implemented");
 
     return false;
 }
 
-bool wxIniConfig::GetNextEntry (wxString& WXUNUSED(str), long& WXUNUSED(lIndex)) const
+bool wxIniConfig::GetNextEntry ([[maybe_unused]] wxString& str, [[maybe_unused]] long& lIndex) const
 {
     wxFAIL_MSG("not implemented");
 
@@ -344,7 +344,7 @@ bool wxIniConfig::DoWriteLong(const wxString& szKey, long lValue)
 }
 
 bool wxIniConfig::DoReadBinary([[maybe_unused]] const wxString& key,
-                               wxMemoryBuffer * WXUNUSED(buf)) const
+                               [[maybe_unused]] wxMemoryBuffer * buf) const
 {
     wxFAIL_MSG("not implemented");
 

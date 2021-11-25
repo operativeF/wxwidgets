@@ -410,7 +410,7 @@ inline int wxLstat(const wxString& path, wxStructStat *buf)
 inline int wxRmDir(const wxString& path)
     { return wxCRT_RmDir(path.fn_str()); }
 #if (defined(WX_WINDOWS) && !defined(__CYGWIN__))
-inline int wxMkDir(const wxString& path, mode_t WXUNUSED(mode) = 0)
+inline int wxMkDir(const wxString& path, [[maybe_unused]] mode_t mode = 0)
     { return wxCRT_MkDir(path.fn_str()); }
 #else
 inline int wxMkDir(const wxString& path, mode_t mode)

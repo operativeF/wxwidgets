@@ -562,7 +562,7 @@ WX_PG_IMPLEMENT_VARIANT_DATA_EXPORTED(classname, wxEMPTY_PARAMETER_VALUE)
 WX_PG_IMPLEMENT_VARIANT_DATA_EXPORTED_NO_EQ_NO_GETTER(classname,wxEMPTY_PARAMETER_VALUE expdecl) \
 WX_PG_IMPLEMENT_VARIANT_DATA_GETTER(classname,wxEMPTY_PARAMETER_VALUE expdecl) \
 \
-bool classname##VariantData::Eq(wxVariantData& WXUNUSED(data)) const \
+bool classname##VariantData::Eq([[maybe_unused]] wxVariantData& data) const \
 {\
     return false; \
 }

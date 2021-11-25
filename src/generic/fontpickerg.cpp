@@ -61,7 +61,7 @@ void wxGenericFontButton::InitFontData()
     m_data.EnableEffects(true);
 }
 
-void wxGenericFontButton::OnButtonClick(wxCommandEvent& WXUNUSED(ev))
+void wxGenericFontButton::OnButtonClick([[maybe_unused]] wxCommandEvent& ev)
 {
     // update the wxFontData to be shown in the dialog
     m_data.SetInitialFont(m_selectedFont);

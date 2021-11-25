@@ -181,7 +181,7 @@ wxDirData::~wxDirData()
 {
 }
 
-bool wxDirData::Read(wxString * WXUNUSED(filename))
+bool wxDirData::Read([[maybe_unused]] wxString * filename)
 {
     return false;
 }

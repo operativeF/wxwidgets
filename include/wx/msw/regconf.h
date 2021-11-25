@@ -59,7 +59,7 @@ public:
   size_t GetNumberOfEntries(bool bRecursive = false) const override;
   size_t GetNumberOfGroups(bool bRecursive = false) const override;
 
-  bool Flush(bool WXUNUSED(bCurrentOnly) = false) override { return true; }
+  bool Flush([[maybe_unused]] bool bCurrentOnly = false) override { return true; }
 
   // rename
   bool RenameEntry(const std::string& oldName, const std::string& newName) override;

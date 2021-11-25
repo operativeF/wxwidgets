@@ -91,10 +91,10 @@ public:
     DECLARE_IUNKNOWN_METHODS;
 
     //IInternetProtocolRoot
-    HRESULT STDMETHODCALLTYPE Abort(HRESULT WXUNUSED(hrReason),
-                                    DWORD WXUNUSED(dwOptions)) override
+    HRESULT STDMETHODCALLTYPE Abort([[maybe_unused]] HRESULT hrReason,
+                                    [[maybe_unused]] DWORD dwOptions) override
                                    { return E_NOTIMPL; }
-    HRESULT STDMETHODCALLTYPE Continue(wxPROTOCOLDATA *WXUNUSED(pProtocolData)) override
+    HRESULT STDMETHODCALLTYPE Continue([[maybe_unused]] wxPROTOCOLDATA *pProtocolData) override
                                        { return S_OK; }
     HRESULT STDMETHODCALLTYPE Resume() override { return S_OK; }
     HRESULT STDMETHODCALLTYPE Start(LPCWSTR szUrl,
@@ -103,15 +103,15 @@ public:
                                     DWORD grfPI,
                                     HANDLE_PTR dwReserved) override;
     HRESULT STDMETHODCALLTYPE Suspend() override { return S_OK; }
-    HRESULT STDMETHODCALLTYPE Terminate(DWORD WXUNUSED(dwOptions)) override { return S_OK; }
+    HRESULT STDMETHODCALLTYPE Terminate([[maybe_unused]] DWORD dwOptions) override { return S_OK; }
 
     //IInternetProtocol
-    HRESULT STDMETHODCALLTYPE LockRequest(DWORD WXUNUSED(dwOptions)) override
+    HRESULT STDMETHODCALLTYPE LockRequest([[maybe_unused]] DWORD dwOptions) override
                                           { return S_OK; }
     HRESULT STDMETHODCALLTYPE Read(void *pv, ULONG cb, ULONG *pcbRead) override;
-    HRESULT STDMETHODCALLTYPE Seek(LARGE_INTEGER WXUNUSED(dlibMove),
-                                   DWORD WXUNUSED(dwOrigin),
-                                   ULARGE_INTEGER* WXUNUSED(plibNewPosition)) override
+    HRESULT STDMETHODCALLTYPE Seek([[maybe_unused]] LARGE_INTEGER dlibMove,
+                                   [[maybe_unused]] DWORD dwOrigin,
+                                   [[maybe_unused]] ULARGE_INTEGER* plibNewPosition) override
                                    { return E_FAIL; }
     HRESULT STDMETHODCALLTYPE UnlockRequest() override { return S_OK; }
 

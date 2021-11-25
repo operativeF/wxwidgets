@@ -484,7 +484,7 @@ public:
         m_value = value;
     }
 
-    bool Eq(wxVariantData& WXUNUSED(data)) const override
+    bool Eq([[maybe_unused]] wxVariantData& data) const override
     {
         return false;
     }

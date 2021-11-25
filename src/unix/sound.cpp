@@ -78,8 +78,8 @@ public:
     int GetPriority() const override { return 0; }
     bool IsAvailable() const override { return true; }
     bool HasNativeAsyncPlayback() const override { return true; }
-    bool Play(wxSoundData *WXUNUSED(data), unsigned WXUNUSED(flags),
-              volatile wxSoundPlaybackStatus *WXUNUSED(status)) override
+    bool Play([[maybe_unused]] wxSoundData *data, [[maybe_unused]] unsigned flags,
+              volatile [[maybe_unused]] wxSoundPlaybackStatus *status) override
         { return true; }
     void Stop() override {}
     bool IsPlaying() const override { return false; }

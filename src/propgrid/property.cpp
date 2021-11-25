@@ -50,8 +50,8 @@ static void wxPGDrawFocusRect(wxWindow *win, wxDC& dc,
 // -----------------------------------------------------------------------
 
 wxSize wxPGCellRenderer::GetImageSize( [[maybe_unused]] const wxPGProperty* property,
-                                       int WXUNUSED(column),
-                                       int WXUNUSED(item) ) const
+                                       [[maybe_unused]] int column,
+                                       [[maybe_unused]] int item ) const
 {
      return {0, 0};
 }
@@ -150,7 +150,7 @@ int wxPGCellRenderer::PreDrawCell( wxDC& dc, const wxRect& rect, const wxPGCell&
 void wxPGCellRenderer::PostDrawCell( wxDC& dc,
                                      const wxPropertyGrid* propGrid,
                                      const wxPGCell& cell,
-                                     int WXUNUSED(flags) ) const
+                                     [[maybe_unused]] int flags ) const
 {
     // Revert font
     const wxFont& font = cell.GetFont();
@@ -572,7 +572,7 @@ void wxPGProperty::InitAfterAdded( wxPropertyGridPageState* pageState,
     }
 }
 
-void wxPGProperty::OnDetached(wxPropertyGridPageState* WXUNUSED(state),
+void wxPGProperty::OnDetached([[maybe_unused]] wxPropertyGridPageState* state,
                               wxPropertyGrid* propgrid)
 {
     if ( propgrid )
@@ -678,7 +678,7 @@ int wxPGProperty::Index( const wxPGProperty* p ) const
     return wxPGItemIndexInVector<wxPGProperty*>(m_children, const_cast<wxPGProperty*>(p));
 }
 
-bool wxPGProperty::ValidateValue( wxVariant& WXUNUSED(value), wxPGValidationInfo& WXUNUSED(validationInfo) ) const
+bool wxPGProperty::ValidateValue( [[maybe_unused]] wxVariant& value, [[maybe_unused]] wxPGValidationInfo& validationInfo ) const
 {
     return true;
 }
@@ -691,7 +691,7 @@ void wxPGProperty::RefreshChildren ()
 {
 }
 
-void wxPGProperty::OnValidationFailure( wxVariant& WXUNUSED(pendingValue) )
+void wxPGProperty::OnValidationFailure( [[maybe_unused]] wxVariant& pendingValue )
 {
 }
 
@@ -917,7 +917,7 @@ void wxPGProperty::DoGenerateComposedValue( wxString& text,
     }
 }
 
-wxString wxPGProperty::ValueToString( wxVariant& WXUNUSED(value),
+wxString wxPGProperty::ValueToString( [[maybe_unused]] wxVariant& value,
                                       int argFlags ) const
 {
     wxCHECK_MSG( GetChildCount() > 0,
@@ -968,7 +968,7 @@ wxString wxPGProperty::GetValueAsString( int argFlags ) const
     }
 }
 
-bool wxPGProperty::IntToValue( wxVariant& variant, int number, int WXUNUSED(argFlags) ) const
+bool wxPGProperty::IntToValue( wxVariant& variant, int number, [[maybe_unused]] int argFlags ) const
 {
     variant = (long)number;
     return true;
@@ -1203,7 +1203,7 @@ bool wxPGProperty::SetValueFromInt( long number, int argFlags )
     return res;
 }
 
-wxSize wxPGProperty::OnMeasureImage( int WXUNUSED(item) ) const
+wxSize wxPGProperty::OnMeasureImage( [[maybe_unused]] int item ) const
 {
     if ( m_valueBitmap )
     {
@@ -1240,7 +1240,7 @@ int wxPGProperty::GetImageOffset( int imageWidth ) const
     return imageOffset;
 }
 
-wxPGCellRenderer* wxPGProperty::GetCellRenderer( int WXUNUSED(column) ) const
+wxPGCellRenderer* wxPGProperty::GetCellRenderer( [[maybe_unused]] int column ) const
 {
     return wxPGGlobalVars->m_defaultRenderer;
 }
@@ -1731,7 +1731,7 @@ wxPGEditorDialogAdapter* wxPGProperty::GetEditorDialog() const
     return nullptr;
 }
 
-bool wxPGProperty::DoSetAttribute( [[maybe_unused]] const wxString& name, wxVariant& WXUNUSED(value) )
+bool wxPGProperty::DoSetAttribute( [[maybe_unused]] const wxString& name, [[maybe_unused]] wxVariant& value )
 {
     return false;
 }
@@ -2553,9 +2553,9 @@ bool wxPGProperty::IsChildSelected( bool recursive ) const
     return false;
 }
 
-wxVariant wxPGProperty::ChildChanged( wxVariant& WXUNUSED(thisValue),
-                                      int WXUNUSED(childIndex),
-                                      wxVariant& WXUNUSED(childValue) ) const
+wxVariant wxPGProperty::ChildChanged( [[maybe_unused]] wxVariant& thisValue,
+                                      [[maybe_unused]] int childIndex,
+                                      [[maybe_unused]] wxVariant& childValue ) const
 {
     return wxNullVariant;
 }
@@ -2754,8 +2754,8 @@ wxPropertyCategory::wxPropertyCategory( const wxString &label, const wxString& n
     SetParentalType(wxPG_PROP_CATEGORY);
 }
 
-wxString wxPropertyCategory::ValueToString( wxVariant& WXUNUSED(value),
-                                            int WXUNUSED(argFlags) ) const
+wxString wxPropertyCategory::ValueToString( [[maybe_unused]] wxVariant& value,
+                                            [[maybe_unused]] int argFlags ) const
 {
     if ( m_value.IsType(wxPG_VARIANT_TYPE_STRING) )
         return m_value.GetString();

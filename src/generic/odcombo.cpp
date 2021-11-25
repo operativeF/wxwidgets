@@ -89,7 +89,7 @@ void wxVListBoxComboPopup::SetFocus()
 #endif
 }
 
-void wxVListBoxComboPopup::OnDPIChanged(wxDPIChangedEvent& WXUNUSED(event))
+void wxVListBoxComboPopup::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent& event)
 {
     m_itemHeight = m_combo->GetCharHeight();
 }
@@ -445,7 +445,7 @@ void wxVListBoxComboPopup::OnMouseMove(wxMouseEvent& event)
     }
 }
 
-void wxVListBoxComboPopup::OnLeftClick(wxMouseEvent& WXUNUSED(event))
+void wxVListBoxComboPopup::OnLeftClick([[maybe_unused]] wxMouseEvent& event)
 {
     DismissWithEvent();
 }

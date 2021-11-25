@@ -190,7 +190,7 @@ void wxTaskBarIconArea::SetLegacyWMProperties()
                     PropModeReplace, (unsigned char*)data, 1);
 }
 
-void wxTaskBarIconArea::OnSizeChange(wxSizeEvent& WXUNUSED(event))
+void wxTaskBarIconArea::OnSizeChange([[maybe_unused]] wxSizeEvent& event)
 {
     wxLogTrace("systray"), wxT("icon size changed to %i x %i",
                GetSize().x, GetSize().y);
@@ -199,7 +199,7 @@ void wxTaskBarIconArea::OnSizeChange(wxSizeEvent& WXUNUSED(event))
     SetTrayIcon(bmp);
 }
 
-void wxTaskBarIconArea::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxTaskBarIconArea::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     dc.DrawBitmap(m_bmp, m_pos.x, m_pos.y, true);

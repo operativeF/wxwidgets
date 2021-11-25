@@ -111,7 +111,7 @@ protected:
     virtual bool DoAddSystemInfo(wxXmlNode *nodeSystemInfo);
     virtual bool DoAddLoadedModules(wxXmlNode *nodeModules);
     virtual bool DoAddExceptionInfo(wxXmlNode *nodeContext);
-    virtual void DoAddCustomContext(wxXmlNode * WXUNUSED(nodeRoot)) { }
+    virtual void DoAddCustomContext([[maybe_unused]] wxXmlNode * nodeRoot) { }
 #endif
 
     // used by Process()
@@ -191,7 +191,7 @@ protected:
     // returned
     //
     // return value becomes the return value of Process()
-    virtual bool OnServerReply(const std::vector<wxString>& WXUNUSED(reply))
+    virtual bool OnServerReply([[maybe_unused]] const std::vector<wxString>& reply)
     {
         return true;
     }

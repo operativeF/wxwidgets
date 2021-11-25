@@ -229,12 +229,12 @@ void wxSingleChoiceDialog::SetSelection(int sel)
     m_selection = sel;
 }
 
-void wxSingleChoiceDialog::OnOK(wxCommandEvent& WXUNUSED(event))
+void wxSingleChoiceDialog::OnOK([[maybe_unused]] wxCommandEvent& event)
 {
     DoChoice();
 }
 
-void wxSingleChoiceDialog::OnListBoxDClick(wxCommandEvent& WXUNUSED(event))
+void wxSingleChoiceDialog::OnListBoxDClick([[maybe_unused]] wxCommandEvent& event)
 {
     DoChoice();
 }

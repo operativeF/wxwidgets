@@ -177,7 +177,7 @@ public:
     {
         m_showMenu = enable;
     }
-    virtual void EnableAccessToDevTools(bool WXUNUSED(enable) = true) { }
+    virtual void EnableAccessToDevTools([[maybe_unused]] bool enable = true) { }
     virtual wxString GetCurrentTitle() const = 0;
     virtual wxString GetCurrentURL() const = 0;
     // TODO: handle choosing a frame when calling GetPageSource()?

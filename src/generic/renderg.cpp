@@ -495,7 +495,7 @@ int wxRendererGeneric::GetHeaderButtonHeight(wxWindow *win)
     return defaultHeight + d + 2 * HEADER_OFFSET_Y + EXTRA_HEIGHT;
 }
 
-int wxRendererGeneric::GetHeaderButtonMargin(wxWindow *WXUNUSED(win))
+int wxRendererGeneric::GetHeaderButtonMargin([[maybe_unused]] wxWindow *win)
 {
     return 5;
 }
@@ -503,7 +503,7 @@ int wxRendererGeneric::GetHeaderButtonMargin(wxWindow *WXUNUSED(win))
 
 // draw the plus or minus sign
 void
-wxRendererGeneric::DrawTreeItemButton(wxWindow * WXUNUSED(win),
+wxRendererGeneric::DrawTreeItemButton([[maybe_unused]] wxWindow * win,
                                       wxDC& dc,
                                       const wxRect& rect,
                                       unsigned int flags)
@@ -682,7 +682,7 @@ wxRendererGeneric::DrawDropArrow(wxWindow *win,
 }
 
 void
-wxRendererGeneric::DrawCheckBox(wxWindow *WXUNUSED(win),
+wxRendererGeneric::DrawCheckBox([[maybe_unused]] wxWindow *win,
                                 wxDC& dc,
                                 const wxRect& rect,
                                 unsigned int flags)
@@ -698,7 +698,7 @@ wxRendererGeneric::DrawCheckBox(wxWindow *WXUNUSED(win),
 }
 
 void
-wxRendererGeneric::DrawCheckMark(wxWindow *WXUNUSED(win),
+wxRendererGeneric::DrawCheckMark([[maybe_unused]] wxWindow *win,
                                  wxDC& dc,
                                  const wxRect& rect,
                                  unsigned int flags)
@@ -773,13 +773,13 @@ wxRendererGeneric::DrawCollapseButton(wxWindow *win,
     dc.DrawPolygon(WXSIZEOF(pt), pt, rect.x, rect.y);
 }
 
-wxSize wxRendererGeneric::GetCollapseButtonSize(wxWindow *WXUNUSED(win), wxDC& WXUNUSED(dc))
+wxSize wxRendererGeneric::GetCollapseButtonSize([[maybe_unused]] wxWindow *win, [[maybe_unused]] wxDC& dc)
 {
     return {18, 18};
 }
 
 void
-wxRendererGeneric::DrawItemSelectionRect(wxWindow * WXUNUSED(win),
+wxRendererGeneric::DrawItemSelectionRect([[maybe_unused]] wxWindow * win,
                                          wxDC& dc,
                                          const wxRect& rect,
                                          unsigned int flags)
@@ -862,19 +862,19 @@ wxRendererGeneric::DrawFocusRect([[maybe_unused]] wxWindow* win, wxDC& dc, const
     dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
-void wxRendererGeneric::DrawChoice([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+void wxRendererGeneric::DrawChoice([[maybe_unused]] wxWindow* win, [[maybe_unused]] wxDC& dc,
                            [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawChoice");
 }
 
-void wxRendererGeneric::DrawComboBox([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+void wxRendererGeneric::DrawComboBox([[maybe_unused]] wxWindow* win, [[maybe_unused]] wxDC& dc,
                            [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawComboBox");
 }
 
-void wxRendererGeneric::DrawRadioBitmap([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+void wxRendererGeneric::DrawRadioBitmap([[maybe_unused]] wxWindow* win, [[maybe_unused]] wxDC& dc,
                            [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawRadioBitmap");
@@ -899,8 +899,8 @@ void wxRendererGeneric::DrawTextCtrl([[maybe_unused]] wxWindow* win,
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP
 
-void wxRendererGeneric::DrawTitleBarBitmap(wxWindow * WXUNUSED(win),
-                                           wxDC& WXUNUSED(dc),
+void wxRendererGeneric::DrawTitleBarBitmap([[maybe_unused]] wxWindow * win,
+                                           [[maybe_unused]] wxDC& dc,
                                            [[maybe_unused]] const wxRect& rect,
                                            [[maybe_unused]] wxTitleBarButton button,
                                            [[maybe_unused]] unsigned int flags)

@@ -33,7 +33,7 @@ public:
     bool PlatformIndependent() const override { return false; }
 
     virtual wxGraphicsContext *BuildNewContext (wxSize expectedSize,
-        double WXUNUSED(pointsPerInch), const wxFileName &targetFileName) override {
+        [[maybe_unused]] double pointsPerInch, const wxFileName &targetFileName) override {
         m_image = new wxImage (expectedSize);
         m_image->InitAlpha();
 

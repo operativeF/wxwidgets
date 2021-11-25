@@ -587,7 +587,7 @@ public:
     // bring the selected item into view, scrolling to it if necessary
     void MoveToItem(size_t item);
 
-    bool ScrollList( int WXUNUSED(dx), int dy );
+    bool ScrollList( [[maybe_unused]] int dx, int dy );
 
     // bring the current item into view
     void MoveToFocus() { MoveToItem(m_current); }

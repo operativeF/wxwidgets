@@ -536,7 +536,7 @@ wxIcon wxRichTextStyleOrganiserDialog::GetIconResource( const wxString& name )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_APPLY
  */
 
-void wxRichTextStyleOrganiserDialog::OnApplyClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnApplyClick( [[maybe_unused]] wxCommandEvent& event )
 {
     ApplyStyle();
 }
@@ -555,7 +555,7 @@ void wxRichTextStyleOrganiserDialog::OnApplyUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_CHAR
  */
 
-void wxRichTextStyleOrganiserDialog::OnNewCharClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnNewCharClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString styleName = wxGetTextFromUser(_("Enter a character style name"), _("New Style"));
     if (!styleName.IsEmpty())
@@ -603,7 +603,7 @@ void wxRichTextStyleOrganiserDialog::OnNewCharUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_PARA
  */
 
-void wxRichTextStyleOrganiserDialog::OnNewParaClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnNewParaClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString styleName = wxGetTextFromUser(_("Enter a paragraph style name"), _("New Style"));
     if (!styleName.IsEmpty())
@@ -651,7 +651,7 @@ void wxRichTextStyleOrganiserDialog::OnNewParaUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_EDIT
  */
 
-void wxRichTextStyleOrganiserDialog::OnEditClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnEditClick( [[maybe_unused]] wxCommandEvent& event )
 {
     int sel = m_stylesListBox->GetStyleListBox()->GetSelection();
     if (sel != wxNOT_FOUND)
@@ -726,7 +726,7 @@ void wxRichTextStyleOrganiserDialog::OnEditUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_DELETE
  */
 
-void wxRichTextStyleOrganiserDialog::OnDeleteClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnDeleteClick( [[maybe_unused]] wxCommandEvent& event )
 {
     int sel = m_stylesListBox->GetStyleListBox()->GetSelection();
     if (sel != wxNOT_FOUND)
@@ -769,7 +769,7 @@ void wxRichTextStyleOrganiserDialog::OnDeleteUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_LIST
  */
 
-void wxRichTextStyleOrganiserDialog::OnNewListClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnNewListClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString styleName = wxGetTextFromUser(_("Enter a list style name"), _("New Style"));
     if (!styleName.IsEmpty())
@@ -835,7 +835,7 @@ void wxRichTextStyleOrganiserDialog::OnNewListUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_RENAME
  */
 
-void wxRichTextStyleOrganiserDialog::OnRenameClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnRenameClick( [[maybe_unused]] wxCommandEvent& event )
 {
     int sel = m_stylesListBox->GetStyleListBox()->GetSelection();
     if (sel == -1)
@@ -883,7 +883,7 @@ void wxRichTextStyleOrganiserDialog::OnListSelection(wxCommandEvent& event)
  * wxEVT_BUTTON event handler for ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_BOX
  */
 
-void wxRichTextStyleOrganiserDialog::OnNewBoxClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnNewBoxClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString styleName = wxGetTextFromUser(_("Enter a box style name"), _("New Style"));
     if (!styleName.IsEmpty())
@@ -930,7 +930,7 @@ void wxRichTextStyleOrganiserDialog::OnNewBoxUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for wxID_HELP
  */
 
-void wxRichTextStyleOrganiserDialog::OnHelpClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextStyleOrganiserDialog::OnHelpClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if ((GetHelpId() != -1) && GetUICustomization())
         ShowHelp(this);

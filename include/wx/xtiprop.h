@@ -247,15 +247,15 @@ public:
     virtual void GetProperty(const wxObject *object, wxAny &value) const;
 
     // Adding an element to a collection property
-    virtual void AddToPropertyCollection(wxObject *WXUNUSED(object),
-                                         const wxAny &WXUNUSED(value)) const
+    virtual void AddToPropertyCollection([[maybe_unused]] wxObject *object,
+                                         [[maybe_unused]] const wxAny &value) const
     {
         wxLogError( wxGetTranslation("AddToPropertyCollection called on a generic accessor") );
     }
 
     // Getting a collection property
-    virtual void GetPropertyCollection( const wxObject *WXUNUSED(obj),
-                                        wxAnyList &WXUNUSED(result)) const
+    virtual void GetPropertyCollection( [[maybe_unused]] const wxObject *obj,
+                                        [[maybe_unused]] wxAnyList &result) const
     {
         wxLogError ( wxGetTranslation("GetPropertyCollection called on a generic accessor") );
     }

@@ -416,7 +416,7 @@ bool wxBitmap::CreateWithFormat(int width, int height, int dfbFormat)
 }
 
 #if wxUSE_IMAGE
-wxBitmap::wxBitmap(const wxImage& imageOrig, int depth, double WXUNUSED(scale))
+wxBitmap::wxBitmap(const wxImage& imageOrig, int depth, [[maybe_unused]] double scale)
 {
     wxCHECK_RET( imageOrig.IsOk(), "invalid image" );
 
@@ -531,7 +531,7 @@ void *wxBitmap::GetRawData(wxPixelDataBase& data, int bpp)
     return bits;
 }
 
-void wxBitmap::UngetRawData(wxPixelDataBase& WXUNUSED(data))
+void wxBitmap::UngetRawData([[maybe_unused]] wxPixelDataBase& data)
 {
     M_BITMAP->m_surface->Unlock();
 }

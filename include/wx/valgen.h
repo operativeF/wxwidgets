@@ -65,7 +65,7 @@ public:
 
     // Called when the value in the window must be validated: this is not used
     // by this class
-    bool Validate(wxWindow * WXUNUSED(parent)) override { return true; }
+    bool Validate([[maybe_unused]] wxWindow * parent) override { return true; }
 
     // Called to transfer data to the window
     bool TransferToWindow() override;

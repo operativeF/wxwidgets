@@ -296,7 +296,7 @@ wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags
     dc.SetClippingRegion(clipRect);
 }
 
-void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
+void wxComboCtrl::OnPaintEvent( [[maybe_unused]] wxPaintEvent& event )
 {
     // TODO: Convert drawing in this function to Windows API Code
 

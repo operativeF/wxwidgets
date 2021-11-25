@@ -154,23 +154,23 @@ protected:
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-    virtual wxBitmap DoGetBitmap(State WXUNUSED(which)) const
+    virtual wxBitmap DoGetBitmap([[maybe_unused]] State which) const
         { return wxBitmap(); }
     virtual void DoSetBitmap([[maybe_unused]] const wxBitmap& bitmap,
-                             State WXUNUSED(which))
+                             [[maybe_unused]] State which)
         { }
 
     virtual wxSize DoGetBitmapMargins() const
         { return {0, 0}; }
 
-    virtual void DoSetBitmapMargins(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y))
+    virtual void DoSetBitmapMargins([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y)
         { }
 
-    virtual void DoSetBitmapPosition(wxDirection WXUNUSED(dir))
+    virtual void DoSetBitmapPosition([[maybe_unused]] wxDirection dir)
         { }
 
     virtual bool DoGetAuthNeeded() const { return false; }
-    virtual void DoSetAuthNeeded(bool WXUNUSED(show)) { }
+    virtual void DoSetAuthNeeded([[maybe_unused]] bool show) { }
 };
 
 #if defined(__WXUNIVERSAL__)

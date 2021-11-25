@@ -555,7 +555,7 @@ bool wxVariantDataBool::Write(wxString& str) const
     return true;
 }
 
-bool wxVariantDataBool::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataBool::Read([[maybe_unused]] std::istream& str)
 {
     wxFAIL_MSG("Unimplemented");
 //    str >> (long) m_value;
@@ -687,7 +687,7 @@ bool wxVariantDataChar::Write(wxString& str) const
     return true;
 }
 
-bool wxVariantDataChar::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataChar::Read([[maybe_unused]] std::istream& str)
 {
     wxFAIL_MSG("Unimplemented");
 
@@ -798,7 +798,7 @@ public:
     bool Write(std::ostream& str) const override;
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
-    bool Read(std::istream& WXUNUSED(str)) override { return false; }
+    bool Read([[maybe_unused]] std::istream& str) override { return false; }
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream& str) const;
@@ -1043,13 +1043,13 @@ bool wxVariantDataWxObjectPtr::Write(wxString& str) const
     return true;
 }
 
-bool wxVariantDataWxObjectPtr::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataWxObjectPtr::Read([[maybe_unused]] std::istream& str)
 {
     // Not implemented
     return false;
 }
 
-bool wxVariantDataWxObjectPtr::Read(wxString& WXUNUSED(str))
+bool wxVariantDataWxObjectPtr::Read([[maybe_unused]] wxString& str)
 {
     // Not implemented
     return false;
@@ -1135,13 +1135,13 @@ bool wxVariantDataVoidPtr::Write(wxString& str) const
     return true;
 }
 
-bool wxVariantDataVoidPtr::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataVoidPtr::Read([[maybe_unused]] std::istream& str)
 {
     // Not implemented
     return false;
 }
 
-bool wxVariantDataVoidPtr::Read(wxString& WXUNUSED(str))
+bool wxVariantDataVoidPtr::Read([[maybe_unused]] wxString& str)
 {
     // Not implemented
     return false;
@@ -1248,7 +1248,7 @@ bool wxVariantDataDateTime::Write(wxString& str) const
 }
 
 
-bool wxVariantDataDateTime::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataDateTime::Read([[maybe_unused]] std::istream& str)
 {
     // Not implemented
     return false;
@@ -1353,7 +1353,7 @@ bool wxVariantDataArrayString::Eq(wxVariantData& data) const
     return otherData.m_value == m_value;
 }
 
-bool wxVariantDataArrayString::Write(std::ostream& WXUNUSED(str)) const
+bool wxVariantDataArrayString::Write([[maybe_unused]] std::ostream& str) const
 {
     // Not implemented
     return false;
@@ -1374,7 +1374,7 @@ bool wxVariantDataArrayString::Write(wxString& str) const
 }
 
 
-bool wxVariantDataArrayString::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataArrayString::Read([[maybe_unused]] std::istream& str)
 {
     // Not implemented
     return false;
@@ -1537,7 +1537,7 @@ bool wxVariantDataLongLong::Write(wxString& str) const
 #endif
 }
 
-bool wxVariantDataLongLong::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataLongLong::Read([[maybe_unused]] std::istream& str)
 {
     wxFAIL_MSG("Unimplemented");
     return false;
@@ -1731,7 +1731,7 @@ bool wxVariantDataULongLong::Write(wxString& str) const
 #endif
 }
 
-bool wxVariantDataULongLong::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataULongLong::Read([[maybe_unused]] std::istream& str)
 {
     wxFAIL_MSG("Unimplemented");
     return false;
@@ -1970,14 +1970,14 @@ bool wxVariantDataList::Write(wxString& str) const
     return true;
 }
 
-bool wxVariantDataList::Read(std::istream& WXUNUSED(str))
+bool wxVariantDataList::Read([[maybe_unused]] std::istream& str)
 {
     wxFAIL_MSG("Unimplemented");
     // TODO
     return false;
 }
 
-bool wxVariantDataList::Read(wxString& WXUNUSED(str))
+bool wxVariantDataList::Read([[maybe_unused]] wxString& str)
 {
     wxFAIL_MSG("Unimplemented");
     // TODO

@@ -143,7 +143,7 @@ public:
 
 
 #if wxUSE_STREAMS
-    bool SaveFile( wxImage *WXUNUSED(image), wxOutputStream& WXUNUSED(stream), bool WXUNUSED(verbose=true) ) override{return false ;}
+    bool SaveFile( [[maybe_unused]] wxImage *image, [[maybe_unused]] wxOutputStream& stream, [[maybe_unused]] bool verbose ) override{return false ;}
     bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
 
 protected:

@@ -97,7 +97,7 @@ public:
 
     // set the max number of characters which may be entered in a single line
     // text control
-    void SetMaxLength(unsigned long WXUNUSED(len)) override;
+    void SetMaxLength(unsigned [[maybe_unused]] long len) override;
 
     // writing text inserts it at the current position, appending always
     // inserts it at the end

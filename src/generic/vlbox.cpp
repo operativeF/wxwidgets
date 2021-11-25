@@ -355,8 +355,8 @@ wxCoord wxVListBox::OnGetRowHeight(size_t line) const
     return OnMeasureItem(line) + 2*m_ptMargins.y;
 }
 
-void wxVListBox::OnDrawSeparator(wxDC& WXUNUSED(dc),
-                                 wxRect& WXUNUSED(rect),
+void wxVListBox::OnDrawSeparator([[maybe_unused]] wxDC& dc,
+                                 [[maybe_unused]] wxRect& rect,
                                  [[maybe_unused]] size_t n) const
 {
 }
@@ -409,7 +409,7 @@ void wxVListBox::OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const
     }
 }
 
-void wxVListBox::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxVListBox::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxSize clientSize = GetClientSize();
 
@@ -463,7 +463,7 @@ void wxVListBox::OnPaint(wxPaintEvent& WXUNUSED(event))
     }
 }
 
-void wxVListBox::OnSetOrKillFocus(wxFocusEvent& WXUNUSED(event))
+void wxVListBox::OnSetOrKillFocus([[maybe_unused]] wxFocusEvent& event)
 {
     // we need to repaint the selection when we get the focus since
     // wxRendererNative in general draws the focused selection differently

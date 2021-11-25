@@ -192,8 +192,8 @@ protected:
     // this method is called from the default EVT_HEADER_SEPARATOR_DCLICK
     // handler to update the fitting column width of the given column, it
     // should return true if the width was really updated
-    virtual bool UpdateColumnWidthToFit(unsigned int WXUNUSED(idx),
-                                        int WXUNUSED(widthTitle))
+    virtual bool UpdateColumnWidthToFit([[maybe_unused]] unsigned int idx,
+                                        [[maybe_unused]] int widthTitle)
     {
         return false;
     }
@@ -201,8 +201,8 @@ protected:
     // this method is called from ShowColumnsMenu() and must be overridden to
     // update the internal column visibility (there is no need to call
     // UpdateColumn() from here, this will be done internally)
-    virtual void UpdateColumnVisibility(unsigned int WXUNUSED(idx),
-                                        bool WXUNUSED(show))
+    virtual void UpdateColumnVisibility([[maybe_unused]] unsigned int idx,
+                                        [[maybe_unused]] bool show)
     {
         wxFAIL_MSG( "must be overridden if called" );
     }
@@ -219,7 +219,7 @@ protected:
     // this method can be overridden in the derived classes to do something
     // (e.g. update/resize some internal data structures) before the number of
     // columns in the control changes
-    virtual void OnColumnCountChanging(unsigned int WXUNUSED(count)) { }
+    virtual void OnColumnCountChanging([[maybe_unused]] unsigned int count) { }
 
 
     // helper function for the derived classes: update the array of column
@@ -368,7 +368,7 @@ protected:
     // and define another one to be overridden in the derived classes: it
     // should return the best width for the given column contents or -1 if not
     // implemented, we use it to implement UpdateColumnWidthToFit()
-    virtual int GetBestFittingWidth(unsigned int WXUNUSED(idx)) const
+    virtual int GetBestFittingWidth([[maybe_unused]] unsigned int idx) const
     {
         return -1;
     }

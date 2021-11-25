@@ -119,7 +119,7 @@ public:
     }
 #endif
 
-    void SetLogicalFunction(wxRasterOperationMode WXUNUSED(function)) override
+    void SetLogicalFunction([[maybe_unused]] wxRasterOperationMode function) override
     {
         wxFAIL_MSG("wxSVGFILEDC::SetLogicalFunction Call not implemented");
     }
@@ -161,8 +161,8 @@ public:
     void SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode);
 
 private:
-    bool DoGetPixel(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
-                            wxColour* WXUNUSED(col)) const override
+    bool DoGetPixel([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y,
+                            [[maybe_unused]] wxColour* col) const override
     {
         wxFAIL_MSG("wxSVGFILEDC::DoGetPixel Call not implemented");
         return true;
@@ -176,7 +176,7 @@ private:
                         bool useMask = false,
                         wxPoint srcMask = wxDefaultPosition) override;
 
-    void DoCrossHair(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y)) override
+    void DoCrossHair([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y) override
     {
         wxFAIL_MSG("wxSVGFILEDC::CrossHair Call not implemented");
     }
@@ -221,9 +221,9 @@ private:
 
     void DoDrawText(std::string_view text, wxPoint pt) override;
 
-    bool DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
+    bool DoFloodFill([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y,
                              [[maybe_unused]] const wxColour& col,
-                             wxFloodFillStyle WXUNUSED(style)) override
+                             [[maybe_unused]] wxFloodFillStyle style) override
     {
         wxFAIL_MSG("wxSVGFILEDC::DoFloodFill Call not implemented");
         return false;

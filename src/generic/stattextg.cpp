@@ -57,7 +57,7 @@ void wxGenericStaticText::DoDrawLabel(wxDC& dc, const wxRect& rect)
         dc.DrawLabel(m_label, rect, GetAlignment(), m_mnemonic);
 }
 
-void wxGenericStaticText::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericStaticText::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

@@ -57,7 +57,7 @@ public:
     // implement base class (pure) virtual methods
     // -------------------------------------------
 
-    virtual void SetLabel( const wxString &WXUNUSED(label) ) {}
+    virtual void SetLabel( [[maybe_unused]] const wxString &label ) {}
     virtual wxString GetLabel() const { return {}; }
 
     virtual void Raise();

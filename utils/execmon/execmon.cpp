@@ -39,7 +39,7 @@ public:
     MonitoredProcess()
         { Redirect(); m_crashed=false; m_exitCode=0; }
 
-    void OnTerminate(int WXUNUSED(pid), int status)
+    void OnTerminate([[maybe_unused]] int pid, int status)
     {
         wxStringOutputStream out, err;
         if (GetInputStream()) out.Write(*GetInputStream());

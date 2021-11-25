@@ -69,7 +69,7 @@ public:
         m_strings = strings;
     }
 
-    const std::vector<std::string>& GetCompletions(const std::string& WXUNUSED(prefix)) override
+    const std::vector<std::string>& GetCompletions([[maybe_unused]] const std::string& prefix) override
     {
         return m_strings;
     }

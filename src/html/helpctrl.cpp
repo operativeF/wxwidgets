@@ -285,7 +285,7 @@ bool wxHtmlHelpController::Initialize(const std::string& file)
     return AddBook(wxFileName(actualFilename));
 }
 
-bool wxHtmlHelpController::LoadFile(const std::string& WXUNUSED(file))
+bool wxHtmlHelpController::LoadFile([[maybe_unused]] const std::string& file)
 {
     // Don't reload the file or we'll have it appear again, presumably.
     return true;
@@ -333,7 +333,7 @@ void wxHtmlHelpController::SetHelpWindow(wxHtmlHelpWindow* helpWindow)
 void wxHtmlHelpController::SetFrameParameters(const std::string& titleFormat,
                                    const wxSize& size,
                                    const wxPoint& pos,
-                                   bool WXUNUSED(newFrameEachTime))
+                                   [[maybe_unused]] bool newFrameEachTime)
 {
     SetTitleFormat(titleFormat);
     wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);

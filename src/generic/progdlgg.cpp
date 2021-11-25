@@ -599,7 +599,7 @@ void wxGenericProgressDialog::OnCancel(wxCommandEvent& event)
     }
 }
 
-void wxGenericProgressDialog::OnSkip(wxCommandEvent& WXUNUSED(event))
+void wxGenericProgressDialog::OnSkip([[maybe_unused]] wxCommandEvent& event)
 {
     DisableSkip();
     m_skip = true;

@@ -154,7 +154,7 @@ wxAppConsoleBase::~wxAppConsoleBase()
 // initialization/cleanup
 // ----------------------------------------------------------------------------
 
-bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
+bool wxAppConsoleBase::Initialize([[maybe_unused]] int& argc, wxChar **WXUNUSED(argv))
 {
 #if defined(WX_WINDOWS)
     ::SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
@@ -413,7 +413,7 @@ bool wxAppConsoleBase::IsMainLoopRunning()
     return app && app->m_mainLoop != nullptr;
 }
 
-int wxAppConsoleBase::FilterEvent(wxEvent& WXUNUSED(event))
+int wxAppConsoleBase::FilterEvent([[maybe_unused]] wxEvent& event)
 {
     // process the events normally by default
     return Event_Skip;

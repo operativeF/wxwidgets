@@ -396,7 +396,7 @@ public:
     // We don't implement bases support for floating point numbers, this is not
     // very useful in practice.
     int GetBase() const override { return 10; }
-    bool SetBase(int WXUNUSED(base)) override { return false; }
+    bool SetBase([[maybe_unused]] int base) override { return false; }
 
 private:
     wxString m_format{"%0.0f"};

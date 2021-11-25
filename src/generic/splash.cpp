@@ -101,12 +101,12 @@ int wxSplashScreen::FilterEvent(wxEvent& event)
     return -1;
 }
 
-void wxSplashScreen::OnNotify(wxTimerEvent& WXUNUSED(event))
+void wxSplashScreen::OnNotify([[maybe_unused]] wxTimerEvent& event)
 {
     Close(true);
 }
 
-void wxSplashScreen::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxSplashScreen::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     m_timer.Stop();
     this->Destroy();
@@ -171,7 +171,7 @@ static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, [[maybe_unused]
 #endif // USE_PALETTE_IN_SPLASH
 }
 
-void wxSplashScreenWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxSplashScreenWindow::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     if (m_bitmap.IsOk())

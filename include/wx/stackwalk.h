@@ -78,10 +78,10 @@ public:
     // any pointer may be NULL
     //
     // return true if at least some values could be retrieved
-    virtual bool GetParam(size_t WXUNUSED(n),
-                          wxString * WXUNUSED(type),
-                          wxString * WXUNUSED(name),
-                          wxString * WXUNUSED(value)) const
+    virtual bool GetParam([[maybe_unused]] size_t n,
+                          [[maybe_unused]] wxString * type,
+                          [[maybe_unused]] wxString * name,
+                          [[maybe_unused]] wxString * value) const
     {
         return false;
     }

@@ -236,7 +236,7 @@ public:
     wxWindow *FindItemByHWND(WXHWND hWnd, bool controlOnly = false) const;
 
     // MSW only: true if this control is part of the main control
-    virtual bool ContainsHWND(WXHWND WXUNUSED(hWnd)) const { return false; }
+    virtual bool ContainsHWND([[maybe_unused]] WXHWND hWnd) const { return false; }
 
 #if wxUSE_TOOLTIPS
     // MSW only: true if this window or any of its children have a tooltip
@@ -455,8 +455,8 @@ public:
     // scrolling of their associated DC is taken into account.
     //
     // Both parameters must be non-NULL.
-    virtual void MSWAdjustBrushOrg(int* WXUNUSED(xOrg),
-                                   int* WXUNUSED(yOrg)) const
+    virtual void MSWAdjustBrushOrg([[maybe_unused]] int* xOrg,
+                                   [[maybe_unused]] int* yOrg) const
     {
     }
 
@@ -502,7 +502,7 @@ public:
     // this is used by wxNotebook to do it using DrawThemeBackground()
     //
     // return true if background was drawn, false otherwise
-    virtual bool MSWPrintChild(WXHDC WXUNUSED(hDC), wxWindow * WXUNUSED(child))
+    virtual bool MSWPrintChild([[maybe_unused]] WXHDC hDC, [[maybe_unused]] wxWindow * child)
     {
         return false;
     }
@@ -544,7 +544,7 @@ public:
 
     // called when the window on which MSWSetEraseBgHook() had been called
     // receives WM_ERASEBKGND
-    virtual bool MSWEraseBgHook(WXHDC WXUNUSED(hDC)) { return false; }
+    virtual bool MSWEraseBgHook([[maybe_unused]] WXHDC hDC) { return false; }
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
     // common part of Show/HideWithEffect()
@@ -599,7 +599,7 @@ public:
     //
     // It should be overridden by all classes storing the "last focused"
     // window to avoid focusing an unset radio button when regaining focus.
-    virtual void WXSetPendingFocus(wxWindow* WXUNUSED(win)) {}
+    virtual void WXSetPendingFocus([[maybe_unused]] wxWindow* win) {}
 
     // Called from WM_DPICHANGED handler for all windows to let them update
     // any sizes and fonts used internally when the DPI changes and generate
@@ -761,7 +761,7 @@ protected:
     // and WXHWND combination belongs to one of them.
     //
     // This is used by FindItem() and is overridden in wxControl, see there.
-    virtual wxWindow* MSWFindItem(long WXUNUSED(id), WXHWND WXUNUSED(hWnd)) const
+    virtual wxWindow* MSWFindItem([[maybe_unused]] long id, [[maybe_unused]] WXHWND hWnd) const
     {
         return nullptr;
     }

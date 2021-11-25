@@ -548,7 +548,7 @@ private:
     }
 
     // Timer event handler hides the tooltip when the timeout expires.
-    void OnTimer(wxTimerEvent& WXUNUSED(event))
+    void OnTimer([[maybe_unused]] wxTimerEvent& event)
     {
         if ( !m_delayShow )
         {

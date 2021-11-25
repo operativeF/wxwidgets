@@ -406,7 +406,7 @@ bool wxFileTypeImpl::GetExtensions(wxArrayString& extensions)
 bool
 wxFileTypeImpl::SetCommand(const wxString& cmd,
                            const wxString& verb,
-                           bool WXUNUSED(overwriteprompt))
+                           [[maybe_unused]] bool overwriteprompt)
 {
     wxArrayString strExtensions;
     wxString strDesc, strIcon;
@@ -444,7 +444,7 @@ wxFileTypeImpl::SetCommand(const wxString& cmd,
 }
 
 // ignore index on the grounds that we only have one icon in a Unix file
-bool wxFileTypeImpl::SetDefaultIcon(const wxString& strIcon, int WXUNUSED(index))
+bool wxFileTypeImpl::SetDefaultIcon(const wxString& strIcon, [[maybe_unused]] int index)
 {
     if (strIcon.empty())
         return false;

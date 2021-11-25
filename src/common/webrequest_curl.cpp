@@ -59,9 +59,9 @@ static size_t wxCURLHeader(char *buffer, size_t size, size_t nitems, void *userd
 }
 
 static int wxCURLXferInfo(void* clientp, curl_off_t dltotal,
-                          curl_off_t WXUNUSED(dlnow),
-                          curl_off_t WXUNUSED(ultotal),
-                          curl_off_t WXUNUSED(ulnow))
+                          [[maybe_unused]] curl_off_t dlnow,
+                          [[maybe_unused]] curl_off_t ultotal,
+                          [[maybe_unused]] curl_off_t ulnow)
 {
     wxCHECK_MSG( clientp, 0, "invalid curl progress callback data" );
 
@@ -602,7 +602,7 @@ void WinSock1SocketPoller::StopPolling(wxSOCKET_T sock)
     }
 }
 
-void WinSock1SocketPoller::ResumePolling(wxSOCKET_T WXUNUSED(sock))
+void WinSock1SocketPoller::ResumePolling([[maybe_unused]] wxSOCKET_T sock)
 {
 }
 
@@ -841,7 +841,7 @@ void SourceSocketPoller::StopPolling(wxSOCKET_T sock)
     }
 }
 
-void SourceSocketPoller::ResumePolling(wxSOCKET_T WXUNUSED(sock))
+void SourceSocketPoller::ResumePolling([[maybe_unused]] wxSOCKET_T sock)
 {
 }
 
@@ -1004,7 +1004,7 @@ bool wxWebSessionCURL::CurlRuntimeAtLeastVersion(unsigned int major,
 // the system's network services. Consequently we call this function when a
 // timeout occurs or when activity is detected on a socket.
 
-int wxWebSessionCURL::TimerCallback(CURLM* WXUNUSED(multi), long timeoutms,
+int wxWebSessionCURL::TimerCallback([[maybe_unused]] CURLM* multi, long timeoutms,
                                     void *userp)
 {
     wxWebSessionCURL* session = reinterpret_cast<wxWebSessionCURL*>(userp);
@@ -1013,7 +1013,7 @@ int wxWebSessionCURL::TimerCallback(CURLM* WXUNUSED(multi), long timeoutms,
 }
 
 int wxWebSessionCURL::SocketCallback(CURL* curl, curl_socket_t sock, int what,
-                                     void* userp, void* WXUNUSED(sp))
+                                     void* userp, [[maybe_unused]] void* sp)
 {
     wxWebSessionCURL* session = reinterpret_cast<wxWebSessionCURL*>(userp);
     session->ProcessSocketCallback(curl, sock, what);
@@ -1047,7 +1047,7 @@ void wxWebSessionCURL::ProcessTimerCallback(long timeoutms)
     }
 }
 
-void wxWebSessionCURL::TimeoutNotification(wxTimerEvent& WXUNUSED(event))
+void wxWebSessionCURL::TimeoutNotification([[maybe_unused]] wxTimerEvent& event)
 {
     ProcessTimeoutNotification();
 }

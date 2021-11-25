@@ -142,7 +142,7 @@ public:
 
     wxDataViewRendererBase& operator=(wxDataViewRendererBase&&) = delete;
 
-    virtual bool Validate( wxVariant& WXUNUSED(value) )
+    virtual bool Validate( [[maybe_unused]] wxVariant& value )
         { return true; }
 
     void SetOwner( wxDataViewColumn *owner )    { m_owner = owner; }
@@ -193,12 +193,12 @@ public:
     // in-place editing
     virtual bool HasEditorCtrl() const
         { return false; }
-    virtual wxWindow* CreateEditorCtrl(wxWindow * WXUNUSED(parent),
-                                       wxRect WXUNUSED(labelRect),
+    virtual wxWindow* CreateEditorCtrl([[maybe_unused]] wxWindow * parent,
+                                       [[maybe_unused]] wxRect labelRect,
                                        [[maybe_unused]] const wxVariant& value)
         { return nullptr; }
-    virtual bool GetValueFromEditorCtrl(wxWindow * WXUNUSED(editor),
-                                        wxVariant& WXUNUSED(value))
+    virtual bool GetValueFromEditorCtrl([[maybe_unused]] wxWindow * editor,
+                                        [[maybe_unused]] wxVariant& value)
         { return false; }
 
     virtual bool StartEditing( const wxDataViewItem &item, wxRect labelRect );
@@ -338,9 +338,9 @@ public:
 
     virtual bool StartDrag([[maybe_unused]] const wxPoint& cursor,
                            [[maybe_unused]] const wxRect& cell,
-                           wxDataViewModel *WXUNUSED(model),
-                           const wxDataViewItem & WXUNUSED(item),
-                           unsigned int WXUNUSED(col) )
+                           [[maybe_unused]] wxDataViewModel *model,
+                           const [[maybe_unused]] wxDataViewItem & item,
+                           [[maybe_unused]] unsigned int col )
         { return false; }
 
 

@@ -25,7 +25,7 @@ public:
     //
     // Takes ownership of the adaptor pointer.
     explicit wxAddRemoveImplBase(wxAddRemoveAdaptor* adaptor,
-                                 wxAddRemoveCtrl* WXUNUSED(parent),
+                                 [[maybe_unused]] wxAddRemoveCtrl* parent,
                                  wxWindow* ctrlItems)
         : m_adaptor(adaptor)
     {
@@ -57,12 +57,12 @@ public:
         event.Enable( m_adaptor->CanRemove() );
     }
 
-    void OnAdd(wxCommandEvent& WXUNUSED(event))
+    void OnAdd([[maybe_unused]] wxCommandEvent& event)
     {
         m_adaptor->OnAdd();
     }
 
-    void OnRemove(wxCommandEvent& WXUNUSED(event))
+    void OnRemove([[maybe_unused]] wxCommandEvent& event)
     {
         m_adaptor->OnRemove();
     }

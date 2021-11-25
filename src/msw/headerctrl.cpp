@@ -1019,7 +1019,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
 // wxHeaderCtrl events
 // ----------------------------------------------------------------------------
 
-void wxHeaderCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxHeaderCtrl::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if (m_nativeControl != nullptr) // check whether initialisation has been done
     {

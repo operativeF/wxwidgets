@@ -102,7 +102,7 @@ public:
     wxSoundBackendSDLEvtHandler(wxSoundBackendSDL *bk) : m_backend(bk) {}
 
 private:
-    void OnNotify(wxSoundBackendSDLNotification& WXUNUSED(event))
+    void OnNotify([[maybe_unused]] wxSoundBackendSDLNotification& event)
     {
         wxLogTrace("sound",
                    "received playback status change notification");
@@ -240,7 +240,7 @@ void wxSoundBackendSDL::CloseAudio()
 }
 
 bool wxSoundBackendSDL::Play(wxSoundData *data, unsigned flags,
-                             volatile wxSoundPlaybackStatus *WXUNUSED(status))
+                             volatile [[maybe_unused]] wxSoundPlaybackStatus *status)
 {
     Stop();
 

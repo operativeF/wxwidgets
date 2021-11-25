@@ -202,7 +202,7 @@ void wxDFBDCImpl::DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
 // and ending at (x2, y2)
 void wxDFBDCImpl::DoDrawArc(wxCoord WXUNUSED(x1), wxCoord WXUNUSED(y1),
                             wxCoord WXUNUSED(x2), wxCoord WXUNUSED(y2),
-                            wxCoord WXUNUSED(xc), wxCoord WXUNUSED(yc))
+                            [[maybe_unused]] wxCoord xc, [[maybe_unused]] wxCoord yc)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
@@ -221,17 +221,17 @@ void wxDFBDCImpl::DoDrawPoint(wxCoord x, wxCoord y)
     // FIXME_DFB: implement special cases for common formats (RGB24,RGBA/RGB32)
 }
 
-void wxDFBDCImpl::DoDrawPolygon(int WXUNUSED(n), const wxPoint WXUNUSED(points)[],
-                                wxCoord WXUNUSED(xoffset), wxCoord WXUNUSED(yoffset),
-                                wxPolygonFillMode WXUNUSED(fillStyle))
+void wxDFBDCImpl::DoDrawPolygon([[maybe_unused]] int n, const wxPo[[maybe_unused]] int points[],
+                                [[maybe_unused]] wxCoord xoffset, [[maybe_unused]] wxCoord yoffset,
+                                [[maybe_unused]] wxPolygonFillMode fillStyle)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
     wxFAIL_MSG( "DrawPolygon not implemented" );
 }
 
-void wxDFBDCImpl::DoDrawLines(int WXUNUSED(n), const wxPoint WXUNUSED(points)[],
-                              wxCoord WXUNUSED(xoffset), wxCoord WXUNUSED(yoffset))
+void wxDFBDCImpl::DoDrawLines([[maybe_unused]] int n, const wxPo[[maybe_unused]] int points[],
+                              [[maybe_unused]] wxCoord xoffset, [[maybe_unused]] wxCoord yoffset)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
@@ -279,33 +279,33 @@ void wxDFBDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
     CalcBoundingBox(x + width, y + height);
 }
 
-void wxDFBDCImpl::DoDrawRoundedRectangle(wxCoord WXUNUSED(x),
-                                         wxCoord WXUNUSED(y),
-                                         wxCoord WXUNUSED(width),
-                                         wxCoord WXUNUSED(height),
-                                         double WXUNUSED(radius))
+void wxDFBDCImpl::DoDrawRoundedRectangle([[maybe_unused]] wxCoord x,
+                                         [[maybe_unused]] wxCoord y,
+                                         [[maybe_unused]] wxCoord width,
+                                         [[maybe_unused]] wxCoord height,
+                                         [[maybe_unused]] double radius)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
     wxFAIL_MSG( "DrawRoundedRectangle not implemented" );
 }
 
-void wxDFBDCImpl::DoDrawEllipse(wxCoord WXUNUSED(x),
-                                wxCoord WXUNUSED(y),
-                                wxCoord WXUNUSED(width),
-                                wxCoord WXUNUSED(height))
+void wxDFBDCImpl::DoDrawEllipse([[maybe_unused]] wxCoord x,
+                                [[maybe_unused]] wxCoord y,
+                                [[maybe_unused]] wxCoord width,
+                                [[maybe_unused]] wxCoord height)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
     wxFAIL_MSG( "DrawElipse not implemented" );
 }
 
-void wxDFBDCImpl::DoDrawEllipticArc(wxCoord WXUNUSED(x),
-                                    wxCoord WXUNUSED(y),
-                                    wxCoord WXUNUSED(w),
-                                    wxCoord WXUNUSED(h),
-                                    double WXUNUSED(sa),
-                                    double WXUNUSED(ea))
+void wxDFBDCImpl::DoDrawEllipticArc([[maybe_unused]] wxCoord x,
+                                    [[maybe_unused]] wxCoord y,
+                                    [[maybe_unused]] wxCoord w,
+                                    [[maybe_unused]] wxCoord h,
+                                    [[maybe_unused]] double sa,
+                                    [[maybe_unused]] double ea)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
@@ -347,8 +347,8 @@ void wxDFBDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
 }
 
 void wxDFBDCImpl::DoDrawRotatedText([[maybe_unused]] const wxString& text,
-                                    wxPoint WXUNUSED(pt),
-                                    double WXUNUSED(angle))
+                                    wxPo[[maybe_unused]] int pt,
+                                    [[maybe_unused]] double angle)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 

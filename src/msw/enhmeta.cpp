@@ -61,7 +61,7 @@ wxGDIRefData *wxEnhMetaFile::CreateGDIRefData() const
 }
 
 wxGDIRefData *
-wxEnhMetaFile::CloneGDIRefData(const wxGDIRefData *WXUNUSED(data)) const
+wxEnhMetaFile::CloneGDIRefData([[maybe_unused]] const wxGDIRefData *data) const
 {
     wxFAIL_MSG( "must be implemented if used" );
 

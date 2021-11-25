@@ -242,7 +242,7 @@ void wxNotificationMessageWindow::Set(int timeout)
     }
 }
 
-void wxNotificationMessageWindow::OnClose(wxCloseEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnClose([[maybe_unused]] wxCloseEvent& event)
 {
     wxCommandEvent evt(wxEVT_NOTIFICATION_MESSAGE_DISMISSED);
     m_notificationImpl->ProcessNotificationEvent(evt);
@@ -253,7 +253,7 @@ void wxNotificationMessageWindow::OnClose(wxCloseEvent& WXUNUSED(event))
     m_notificationImpl->Close();
 }
 
-void wxNotificationMessageWindow::OnTimer(wxTimerEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnTimer([[maybe_unused]] wxTimerEvent& event)
 {
     if ( m_mouseActiveCount > 0 )
     {
@@ -266,7 +266,7 @@ void wxNotificationMessageWindow::OnTimer(wxTimerEvent& WXUNUSED(event))
     }
 }
 
-void wxNotificationMessageWindow::OnNotificationClicked(wxMouseEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnNotificationClicked([[maybe_unused]] wxMouseEvent& event)
 {
     wxCommandEvent evt(wxEVT_NOTIFICATION_MESSAGE_CLICK);
     m_notificationImpl->ProcessNotificationEvent(evt);
@@ -274,17 +274,17 @@ void wxNotificationMessageWindow::OnNotificationClicked(wxMouseEvent& WXUNUSED(e
     m_notificationImpl->Close();
 }
 
-void wxNotificationMessageWindow::OnNotificationMouseEnter(wxMouseEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnNotificationMouseEnter([[maybe_unused]] wxMouseEvent& event)
 {
     m_mouseActiveCount++;
 }
 
-void wxNotificationMessageWindow::OnNotificationMouseLeave(wxMouseEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnNotificationMouseLeave([[maybe_unused]] wxMouseEvent& event)
 {
     m_mouseActiveCount--;
 }
 
-void wxNotificationMessageWindow::OnCloseClicked(wxCommandEvent& WXUNUSED(event))
+void wxNotificationMessageWindow::OnCloseClicked([[maybe_unused]] wxCommandEvent& event)
 {
     wxCommandEvent evt(wxEVT_NOTIFICATION_MESSAGE_DISMISSED);
     m_notificationImpl->ProcessNotificationEvent(evt);
@@ -465,7 +465,7 @@ void wxGenericNotificationMessageImpl::SetMessage(const std::string& message)
     m_window->SetMessage(message);
 }
 
-void wxGenericNotificationMessageImpl::SetParent(wxWindow *WXUNUSED(parent))
+void wxGenericNotificationMessageImpl::SetParent([[maybe_unused]] wxWindow *parent)
 {
 
 }

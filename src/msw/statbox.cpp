@@ -583,7 +583,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
 #endif // wxUSE_UXTHEME
 }
 
-void wxStaticBox::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxStaticBox::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     RECT rc;
     ::GetClientRect(GetHwnd(), &rc);

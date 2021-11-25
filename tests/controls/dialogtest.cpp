@@ -121,7 +121,7 @@ public:
         Bind( wxEVT_INIT_DIALOG, &MyModalDialog::OnInit, this );
     }
 
-    void OnInit(wxInitDialogEvent& WXUNUSED(event))
+    void OnInit([[maybe_unused]] wxInitDialogEvent& event)
     {
         m_wasModal = IsModal();
         CallAfter( &MyModalDialog::EndModal, wxID_OK );

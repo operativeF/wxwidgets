@@ -691,7 +691,7 @@ void wxFileListCtrl::OnListDeleteItem( wxListEvent &event )
     FreeItemData(event.m_item);
 }
 
-void wxFileListCtrl::OnListDeleteAllItems( wxListEvent & WXUNUSED(event) )
+void wxFileListCtrl::OnListDeleteAllItems( [[maybe_unused]] wxListEvent & event )
 {
     FreeAllItemsData();
 }

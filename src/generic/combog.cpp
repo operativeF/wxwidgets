@@ -212,7 +212,7 @@ void wxGenericComboCtrl::OnResize()
     PositionTextCtrl( TEXTCTRLXADJUST );
 }
 
-void wxGenericComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
+void wxGenericComboCtrl::OnPaintEvent( [[maybe_unused]] wxPaintEvent& event )
 {
     // Determine wxDC to use based on need to double-buffer or
     // use system-generated transparent background portions

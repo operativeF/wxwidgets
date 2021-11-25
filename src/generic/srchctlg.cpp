@@ -88,7 +88,7 @@ protected:
         m_search->GetEventHandler()->ProcessEvent(event);
     }
 
-    void OnTextEnter(wxCommandEvent& WXUNUSED(event))
+    void OnTextEnter([[maybe_unused]] wxCommandEvent& event)
     {
         if ( !IsEmpty() )
         {
@@ -1215,12 +1215,12 @@ void wxSearchCtrl::OnCancelButton( wxCommandEvent& event )
     event.Skip();
 }
 
-void wxSearchCtrl::OnSize( wxSizeEvent& WXUNUSED(event) )
+void wxSearchCtrl::OnSize( [[maybe_unused]] wxSizeEvent& event )
 {
     LayoutControls();
 }
 
-void wxSearchCtrl::OnDPIChanged(wxDPIChangedEvent &WXUNUSED(event))
+void wxSearchCtrl::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent &event)
 {
     RecalcBitmaps();
 }

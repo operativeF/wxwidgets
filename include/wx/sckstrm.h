@@ -30,7 +30,7 @@ protected:
     // socket streams are both un-seekable and size-less streams:
     wxFileOffset OnSysTell() const override
         { return wxInvalidOffset; }
-    wxFileOffset OnSysSeek(wxFileOffset WXUNUSED(pos), wxSeekMode WXUNUSED(mode)) override
+    wxFileOffset OnSysSeek([[maybe_unused]] wxFileOffset pos, [[maybe_unused]] wxSeekMode mode) override
         { return wxInvalidOffset; }
 };
 
@@ -49,7 +49,7 @@ protected:
 
     wxFileOffset OnSysTell() const override
         { return wxInvalidOffset; }
-    wxFileOffset OnSysSeek(wxFileOffset WXUNUSED(pos), wxSeekMode WXUNUSED(mode)) override
+    wxFileOffset OnSysSeek([[maybe_unused]] wxFileOffset pos, [[maybe_unused]] wxSeekMode mode) override
         { return wxInvalidOffset; }
 };
 

@@ -1558,7 +1558,7 @@ bool wxToolBar::MSWCommand([[maybe_unused]] WXUINT cmd, WXWORD id_)
 
 bool wxToolBar::MSWOnNotify([[maybe_unused]] int idCtrl,
                             WXLPARAM lParam,
-                            WXLPARAM *WXUNUSED(result))
+                            [[maybe_unused]] WXLPARAM *result)
 {
     LPNMHDR hdr = (LPNMHDR)lParam;
     if ( hdr->code == TBN_DROPDOWN )
@@ -1787,7 +1787,7 @@ void wxToolBar::DoToggleTool(wxToolBarToolBase *tool,
                   (WXLPARAM)MAKELONG(MSWShouldBeChecked(tool), 0));
 }
 
-void wxToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
+void wxToolBar::DoSetToggle([[maybe_unused]] wxToolBarToolBase *tool, [[maybe_unused]] bool toggle)
 {
     // VZ: AFAIK, the button has to be created either with TBSTYLE_CHECK or
     //     without, so we really need to delete the button and recreate it here

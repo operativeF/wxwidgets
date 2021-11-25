@@ -1010,7 +1010,7 @@ void wxHtmlWindow::DoEraseBackground(wxDC& dc)
     }
 }
 
-void wxHtmlWindow::OnEraseBackground(wxEraseEvent& WXUNUSED(event))
+void wxHtmlWindow::OnEraseBackground([[maybe_unused]] wxEraseEvent& event)
 {
     // We never get real erase background events as we changed our background
     // style to wxBackgroundStyle::Paint in our ctor so the only time when we get here
@@ -1023,7 +1023,7 @@ void wxHtmlWindow::OnEraseBackground(wxEraseEvent& WXUNUSED(event))
     m_isBgReallyErased = false;
 }
 
-void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxHtmlWindow::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dcPaint(this);
 
@@ -1259,12 +1259,12 @@ void wxHtmlWindow::OnSize(wxSizeEvent& event)
     Refresh();
 }
 
-void wxHtmlWindow::OnDPIChanged(wxDPIChangedEvent& WXUNUSED(event))
+void wxHtmlWindow::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent& event)
 {
     DoSetPage(*(m_Parser->GetSource()));
 }
 
-void wxHtmlWindow::OnMouseMove(wxMouseEvent& WXUNUSED(event))
+void wxHtmlWindow::OnMouseMove([[maybe_unused]] wxMouseEvent& event)
 {
     wxHtmlWindowMouseHelper::HandleMouseMoved();
 }
@@ -1330,7 +1330,7 @@ void wxHtmlWindow::OnMouseUp(wxMouseEvent& event)
 }
 
 #if wxUSE_CLIPBOARD
-void wxHtmlWindow::OnMouseCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxHtmlWindow::OnMouseCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     if ( !m_makingSelection )
         return;
@@ -1572,12 +1572,12 @@ void wxHtmlWindow::OnKeyUp(wxKeyEvent& event)
     }
 }
 
-void wxHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
+void wxHtmlWindow::OnCopy([[maybe_unused]] wxCommandEvent& event)
 {
     std::ignore = CopySelection();
 }
 
-void wxHtmlWindow::OnClipboardEvent(wxClipboardTextEvent& WXUNUSED(event))
+void wxHtmlWindow::OnClipboardEvent([[maybe_unused]] wxClipboardTextEvent& event)
 {
     std::ignore = CopySelection();
 }
@@ -1746,7 +1746,7 @@ wxHtmlOpeningStatus wxHtmlWindow::OnHTMLOpeningURL(wxHtmlURLType type,
     return OnOpeningURL(type, url, redirect);
 }
 
-wxPoint wxHtmlWindow::HTMLCoordsToWindow(wxHtmlCell *WXUNUSED(cell),
+wxPoint wxHtmlWindow::HTMLCoordsToWindow([[maybe_unused]] wxHtmlCell *cell,
                                          const wxPoint& pos) const
 {
     return CalcScrolledPosition(pos);

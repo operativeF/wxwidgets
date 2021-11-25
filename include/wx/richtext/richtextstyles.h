@@ -627,7 +627,7 @@ public:
     void OnMouseMove(wxMouseEvent& event);
 
     // On mouse left, set the value and close the popup
-    void OnMouseClick(wxMouseEvent& WXUNUSED(event));
+    void OnMouseClick([[maybe_unused]] wxMouseEvent& event);
 
 protected:
 

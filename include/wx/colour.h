@@ -937,7 +937,7 @@ protected:
         return NULL;
     }
 
-    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *WXUNUSED(data)) const override
+    wxGDIRefData *CloneGDIRefData([[maybe_unused]] const wxGDIRefData *data) const override
     {
         wxFAIL_MSG( "must be overridden if used" );
 

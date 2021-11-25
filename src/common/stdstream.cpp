@@ -62,7 +62,7 @@ wxStdInputStreamBuffer::wxStdInputStreamBuffer(wxInputStream& stream) :
 }
 
 std::streambuf *
-wxStdInputStreamBuffer::setbuf(char *WXUNUSED(s),
+wxStdInputStreamBuffer::setbuf([[maybe_unused]] char *s,
                                [[maybe_unused]] std::streamsize n)
 {
     return nullptr;
@@ -182,7 +182,7 @@ wxStdOutputStreamBuffer::wxStdOutputStreamBuffer(wxOutputStream& stream) :
 }
 
 std::streambuf *
-wxStdOutputStreamBuffer::setbuf(char *WXUNUSED(s),
+wxStdOutputStreamBuffer::setbuf([[maybe_unused]] char *s,
                                 [[maybe_unused]] std::streamsize n)
 {
     return nullptr;

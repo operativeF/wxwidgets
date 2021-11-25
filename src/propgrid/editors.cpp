@@ -117,7 +117,7 @@ wxString wxPGEditor::GetName() const
 }
 
 void wxPGEditor::DrawValue( wxDC& dc, const wxRect& rect,
-                            wxPGProperty* WXUNUSED(property),
+                            [[maybe_unused]] wxPGProperty* property,
                             const std::string& text ) const
 {
     dc.wxDrawText( text, wxPoint{rect.x + wxPG_XBEFORETEXT, rect.y} );
@@ -128,12 +128,12 @@ bool wxPGEditor::GetValueFromControl( wxVariant&, wxPGProperty*, wxWindow* ) con
     return false;
 }
 
-void wxPGEditor::SetControlStringValue( wxPGProperty* WXUNUSED(property), wxWindow*, const wxString& ) const
+void wxPGEditor::SetControlStringValue( [[maybe_unused]] wxPGProperty* property, wxWindow*, const wxString& ) const
 {
 }
 
 
-void wxPGEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxWindow*, int ) const
+void wxPGEditor::SetControlIntValue( [[maybe_unused]] wxPGProperty* property, wxWindow*, int ) const
 {
 }
 
@@ -148,7 +148,7 @@ void wxPGEditor::DeleteItem( wxWindow*, int ) const
 {
 }
 
-void wxPGEditor::SetItems(wxWindow* WXUNUSED(ctrl), const std::vector<std::string>& WXUNUSED(labels)) const
+void wxPGEditor::SetItems([[maybe_unused]] wxWindow* ctrl, const std::vector<std::string>& WXUNUSED(labels)) const
 {
 }
 
@@ -254,8 +254,8 @@ void wxPGEditor::SetControlAppearance( wxPropertyGrid* pg,
         SetValueToUnspecified(property, ctrl);
 }
 
-void wxPGEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property),
-                                        wxWindow* WXUNUSED(ctrl) ) const
+void wxPGEditor::SetValueToUnspecified( [[maybe_unused]] wxPGProperty* property,
+                                        [[maybe_unused]] wxWindow* ctrl ) const
 {
 }
 
@@ -348,7 +348,7 @@ void wxPGTextCtrlEditor::UpdateControl( wxPGProperty* property, wxWindow* ctrl )
 // Provided so that, for example, ComboBox editor can use the same code
 // (multiple inheritance would get way too messy).
 bool wxPGTextCtrlEditor::OnTextCtrlEvent( wxPropertyGrid* propGrid,
-                                          wxPGProperty* WXUNUSED(property),
+                                          [[maybe_unused]] wxPGProperty* property,
                                           wxWindow* ctrl,
                                           wxEvent& event )
 {
@@ -666,7 +666,7 @@ public:
 #endif
 
     void PositionTextCtrl( int textCtrlXAdjust,
-                                   int WXUNUSED(textCtrlYAdjust) ) override
+                                   [[maybe_unused]] int textCtrlYAdjust ) override
     {
     #ifdef wxPG_TEXTCTRLXADJUST
         textCtrlXAdjust = wxPG_TEXTCTRLXADJUST -
@@ -1158,7 +1158,7 @@ void wxPGChoiceEditor::SetControlStringValue( wxPGProperty* property,
 }
 
 
-void wxPGChoiceEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxWindow* ctrl, int value ) const
+void wxPGChoiceEditor::SetControlIntValue( [[maybe_unused]] wxPGProperty* property, wxWindow* ctrl, int value ) const
 {
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
     wxASSERT( cb );
@@ -1166,7 +1166,7 @@ void wxPGChoiceEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxW
 }
 
 
-void wxPGChoiceEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property),
+void wxPGChoiceEditor::SetValueToUnspecified( [[maybe_unused]] wxPGProperty* property,
                                               wxWindow* ctrl ) const
 {
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
@@ -1528,7 +1528,7 @@ wxBEGIN_EVENT_TABLE(wxSimpleCheckBox, wxControl)
     EVT_COMMAND(wxID_ANY, wxEVT_CB_LEFT_CLICK_ACTIVATE, wxSimpleCheckBox::OnLeftClickActivate)
 wxEND_EVENT_TABLE()
 
-void wxSimpleCheckBox::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxSimpleCheckBox::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxAutoBufferedPaintDC dc(this);
 
@@ -1633,7 +1633,7 @@ wxPGWindowList wxPGCheckBoxEditor::CreateControls( wxPropertyGrid* propGrid,
 
 void wxPGCheckBoxEditor::DrawValue( wxDC& dc, const wxRect& rect,
                                     wxPGProperty* property,
-                                    const std::string& WXUNUSED(text) ) const
+                                    [[maybe_unused]] const std::string& text ) const
 {
     int state = wxSCB_STATE_UNCHECKED;
 
@@ -1670,8 +1670,8 @@ void wxPGCheckBoxEditor::UpdateControl( wxPGProperty* property,
     cb->Refresh();
 }
 
-bool wxPGCheckBoxEditor::OnEvent( wxPropertyGrid* WXUNUSED(propGrid), wxPGProperty* WXUNUSED(property),
-    wxWindow* WXUNUSED(ctrl), wxEvent& event ) const
+bool wxPGCheckBoxEditor::OnEvent( [[maybe_unused]] wxPropertyGrid* propGrid, [[maybe_unused]] wxPGProperty* property,
+    [[maybe_unused]] wxWindow* ctrl, wxEvent& event ) const
 {
     return event.GetEventType() == wxEVT_CHECKBOX;
 }
@@ -1695,7 +1695,7 @@ bool wxPGCheckBoxEditor::GetValueFromControl( wxVariant& variant, wxPGProperty* 
 }
 
 
-void wxPGCheckBoxEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), wxWindow* ctrl, int value ) const
+void wxPGCheckBoxEditor::SetControlIntValue( [[maybe_unused]] wxPGProperty* property, wxWindow* ctrl, int value ) const
 {
     if ( value != 0 ) value = 1;
     ((wxSimpleCheckBox*)ctrl)->m_state = value;
@@ -1703,7 +1703,7 @@ void wxPGCheckBoxEditor::SetControlIntValue( wxPGProperty* WXUNUSED(property), w
 }
 
 
-void wxPGCheckBoxEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property), wxWindow* ctrl ) const
+void wxPGCheckBoxEditor::SetValueToUnspecified( [[maybe_unused]] wxPGProperty* property, wxWindow* ctrl ) const
 {
     ((wxSimpleCheckBox*)ctrl)->m_state = wxSCB_STATE_UNSPECIFIED;
     ctrl->Refresh();
@@ -1819,7 +1819,7 @@ void wxPropertyGrid::CorrectEditorWidgetPosY()
 #endif // !wxPG_TEXTCTRLXADJUST
 
 void wxPropertyGrid::FixPosForTextCtrl( wxWindow* ctrl,
-                                        unsigned int WXUNUSED(forColumn),
+                                        [[maybe_unused]] unsigned int forColumn,
                                         const wxPoint& offset )
 {
     // Center the control vertically
@@ -2119,7 +2119,7 @@ wxPGMultiButton::wxPGMultiButton( wxPropertyGrid* pg, const wxSize& sz )
     SetFont(pg->GetFont().GetBaseFont().Smaller());
 }
 
-void wxPGMultiButton::Finalize( wxPropertyGrid* WXUNUSED(propGrid),
+void wxPGMultiButton::Finalize( [[maybe_unused]] wxPropertyGrid* propGrid,
                                 const wxPoint& pos )
 {
     Move(wxPoint{pos.x + m_fullEditorSize.x - m_buttonsWidth, pos.y - wxPG_BUTTON_BORDER_WIDTH}, wxSIZE_ALLOW_MINUS_ONE);

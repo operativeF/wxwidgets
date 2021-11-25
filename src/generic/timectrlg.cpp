@@ -291,13 +291,13 @@ private:
         CallAfter(&wxTimePickerGenericImpl::HighlightCurrentField);
     }
 
-    void OnArrowUp(wxSpinEvent& WXUNUSED(event))
+    void OnArrowUp([[maybe_unused]] wxSpinEvent& event)
     {
         m_text->SetFocus();
         ChangeCurrentFieldBy1(Dir_Up);
     }
 
-    void OnArrowDown(wxSpinEvent& WXUNUSED(event))
+    void OnArrowDown([[maybe_unused]] wxSpinEvent& event)
     {
         m_text->SetFocus();
         ChangeCurrentFieldBy1(Dir_Down);

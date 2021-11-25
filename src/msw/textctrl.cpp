@@ -199,7 +199,7 @@ public:
     wxSTDMETHODIMP GetClipboardData([[maybe_unused]] CHARRANGE* chrg, [[maybe_unused]] DWORD reco, [[maybe_unused]] LPDATAOBJECT* dataobj) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetDragDropEffect([[maybe_unused]] BOOL drag, [[maybe_unused]] DWORD grfKeyState, [[maybe_unused]] LPDWORD effect) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetInPlaceContext([[maybe_unused]] LPOLEINPLACEFRAME* frame, [[maybe_unused]] LPOLEINPLACEUIWINDOW* doc, [[maybe_unused]] LPOLEINPLACEFRAMEINFO frameInfo) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetNewStorage(LPSTORAGE *WXUNUSED(stg)) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetNewStorage([[maybe_unused]] LPSTORAGE *stg) override { return E_NOTIMPL; }
     wxSTDMETHODIMP QueryAcceptData([[maybe_unused]] LPDATAOBJECT dataobj, [[maybe_unused]] CLIPFORMAT* format, [[maybe_unused]] DWORD reco, [[maybe_unused]] BOOL really, [[maybe_unused]] HGLOBAL hMetaPict) override { return E_NOTIMPL; }
     wxSTDMETHODIMP QueryInsertObject([[maybe_unused]] LPCLSID clsid, [[maybe_unused]] LPSTORAGE stg, [[maybe_unused]] LONG cp) override { return E_NOTIMPL; }
     wxSTDMETHODIMP ShowContainerUI([[maybe_unused]] BOOL show) override { return E_NOTIMPL; }
@@ -2508,37 +2508,37 @@ void wxTextCtrl::DoMoveWindow(wxRect boundary)
 // standard handlers for standard edit menu events
 // ----------------------------------------------------------------------------
 
-void wxTextCtrl::OnCut(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnCut([[maybe_unused]] wxCommandEvent& event)
 {
     Cut();
 }
 
-void wxTextCtrl::OnCopy(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnCopy([[maybe_unused]] wxCommandEvent& event)
 {
     Copy();
 }
 
-void wxTextCtrl::OnPaste(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnPaste([[maybe_unused]] wxCommandEvent& event)
 {
     Paste();
 }
 
-void wxTextCtrl::OnUndo(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnUndo([[maybe_unused]] wxCommandEvent& event)
 {
     Undo();
 }
 
-void wxTextCtrl::OnRedo(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnRedo([[maybe_unused]] wxCommandEvent& event)
 {
     Redo();
 }
 
-void wxTextCtrl::OnDelete(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnDelete([[maybe_unused]] wxCommandEvent& event)
 {
     RemoveSelection();
 }
 
-void wxTextCtrl::OnSelectAll(wxCommandEvent& WXUNUSED(event))
+void wxTextCtrl::OnSelectAll([[maybe_unused]] wxCommandEvent& event)
 {
     SelectAll();
 }

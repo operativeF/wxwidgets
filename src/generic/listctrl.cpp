@@ -1044,7 +1044,7 @@ void wxListHeaderWindow::AdjustDC(wxDC& dc)
         dc.SetDeviceOrigin( org_x - (view_start * xpix), org_y );
 }
 
-void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
+void wxListHeaderWindow::OnPaint( [[maybe_unused]] wxPaintEvent &event )
 {
     wxGenericListCtrl *parent = m_owner->GetListCtrl();
 
@@ -2033,7 +2033,7 @@ void wxListMainWindow::RefreshSelected()
     }
 }
 
-void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
+void wxListMainWindow::OnPaint( [[maybe_unused]] wxPaintEvent &event )
 {
     // Note: a wxPaintDC must be constructed even if no drawing is
     // done (a Windows requirement).
@@ -2280,7 +2280,7 @@ void wxListMainWindow::HighlightOnly( size_t line, size_t oldLine )
     RefreshLine(line);
 }
 
-void wxListMainWindow::OnChildFocus(wxChildFocusEvent& WXUNUSED(event))
+void wxListMainWindow::OnChildFocus([[maybe_unused]] wxChildFocusEvent& event)
 {
     // Do nothing here.  This prevents the default handler in wxScrolledWindow
     // from needlessly scrolling the window when the edit control is
@@ -2806,7 +2806,7 @@ void wxListMainWindow::MoveToItem(size_t item)
     }
 }
 
-bool wxListMainWindow::ScrollList(int WXUNUSED(dx), int dy)
+bool wxListMainWindow::ScrollList([[maybe_unused]] int dx, int dy)
 {
     if ( !InReportView() )
     {
@@ -3226,7 +3226,7 @@ void wxListMainWindow::OnChar( wxKeyEvent &event )
 // focus handling
 // ----------------------------------------------------------------------------
 
-void wxListMainWindow::OnSetFocus( wxFocusEvent &WXUNUSED(event) )
+void wxListMainWindow::OnSetFocus( [[maybe_unused]] wxFocusEvent &event )
 {
     if ( GetParent() )
     {
@@ -3249,7 +3249,7 @@ void wxListMainWindow::OnSetFocus( wxFocusEvent &WXUNUSED(event) )
     }
 }
 
-void wxListMainWindow::OnKillFocus( wxFocusEvent &WXUNUSED(event) )
+void wxListMainWindow::OnKillFocus( [[maybe_unused]] wxFocusEvent &event )
 {
     if ( GetParent() )
     {
@@ -4221,7 +4221,7 @@ void wxListMainWindow::UpdateCurrent()
 }
 
 long wxListMainWindow::GetNextItem( long item,
-                                    int WXUNUSED(geometry),
+                                    [[maybe_unused]] int geometry,
                                     int state ) const
 {
     long ret = item,
@@ -5217,7 +5217,7 @@ bool wxGenericListCtrl::SetItemState( long item, long state, long stateMask )
 }
 
 bool
-wxGenericListCtrl::SetItemImage( long item, int image, int WXUNUSED(selImage) )
+wxGenericListCtrl::SetItemImage( long item, int image, [[maybe_unused]] int selImage )
 {
     return SetItemColumnImage(item, 0, image);
 }
@@ -5293,7 +5293,7 @@ bool wxGenericListCtrl::GetItemPosition( long item, wxPoint& pos ) const
     return true;
 }
 
-bool wxGenericListCtrl::SetItemPosition( long WXUNUSED(item), [[maybe_unused]] const wxPoint& pos )
+bool wxGenericListCtrl::SetItemPosition( [[maybe_unused]] long item, [[maybe_unused]] const wxPoint& pos )
 {
     return false;
 }
@@ -5445,7 +5445,7 @@ void wxGenericListCtrl::AssignImageList(wxImageList *imageList, int which)
         m_ownsImageListState = true;
 }
 
-bool wxGenericListCtrl::Arrange( int WXUNUSED(flag) )
+bool wxGenericListCtrl::Arrange( [[maybe_unused]] int flag )
 {
     return 0;
 }
@@ -5521,8 +5521,8 @@ long wxGenericListCtrl::FindItem( long start, wxUIntPtr data )
     return m_mainWin->FindItem( start, data );
 }
 
-long wxGenericListCtrl::FindItem( long WXUNUSED(start), const wxPoint& pt,
-                           int WXUNUSED(direction))
+long wxGenericListCtrl::FindItem( [[maybe_unused]] long start, const wxPoint& pt,
+                           [[maybe_unused]] int direction)
 {
     return m_mainWin->FindItem( pt );
 }
@@ -5608,7 +5608,7 @@ bool wxGenericListCtrl::SortItems( wxListCtrlCompare fn, wxIntPtr data )
 // event handlers
 // ----------------------------------------------------------------------------
 
-void wxGenericListCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxGenericListCtrl::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if (!m_mainWin) return;
 

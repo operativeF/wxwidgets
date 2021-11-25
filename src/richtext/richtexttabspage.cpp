@@ -241,7 +241,7 @@ wxIcon wxRichTextTabsPage::GetIconResource( const wxString& name )
  * wxEVT_BUTTON event handler for ID_RICHTEXTTABSPAGE_NEW_TAB
  */
 
-void wxRichTextTabsPage::OnNewTabClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextTabsPage::OnNewTabClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString str = m_tabEditCtrl->GetValue();
     if (!str.empty() && str.IsNumber())
@@ -278,7 +278,7 @@ void wxRichTextTabsPage::OnNewTabUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTTABSPAGE_DELETE_TAB
  */
 
-void wxRichTextTabsPage::OnDeleteTabClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextTabsPage::OnDeleteTabClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_tabsPresent && m_tabListCtrl->GetCount() > 0 && m_tabListCtrl->GetSelection() != wxNOT_FOUND)
     {
@@ -300,7 +300,7 @@ void wxRichTextTabsPage::OnDeleteTabUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTTABSPAGE_DELETE_ALL_TABS
  */
 
-void wxRichTextTabsPage::OnDeleteAllTabsClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextTabsPage::OnDeleteAllTabsClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_tabsPresent && m_tabListCtrl->GetCount() > 0)
     {
@@ -323,7 +323,7 @@ void wxRichTextTabsPage::OnDeleteAllTabsUpdate( wxUpdateUIEvent& event )
  * wxEVT_LISTBOX event handler for ID_RICHTEXTTABSPAGE_TABLIST
  */
 
-void wxRichTextTabsPage::OnTablistSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextTabsPage::OnTablistSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     wxString str = m_tabListCtrl->GetStringSelection();
     if (!str.empty())

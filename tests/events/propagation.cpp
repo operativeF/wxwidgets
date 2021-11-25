@@ -182,7 +182,7 @@ public:
         Update();
     }
 
-    void OnDraw(wxDC& WXUNUSED(dc)) override
+    void OnDraw([[maybe_unused]] wxDC& dc) override
     {
         g_str += 'D';   // draw
     }

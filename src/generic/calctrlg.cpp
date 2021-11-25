@@ -763,7 +763,7 @@ void wxGenericCalendarCtrl::RecalcGeometry()
 // drawing
 // ----------------------------------------------------------------------------
 
-void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericCalendarCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

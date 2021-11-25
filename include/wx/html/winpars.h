@@ -280,7 +280,7 @@ public:
     // This is called by wxHtmlWinParser.
     // The method must simply call parser->AddTagHandler(new
     // <handler_class_name>); for each handler
-    virtual void FillHandlersTable(wxHtmlWinParser * WXUNUSED(parser)) { }
+    virtual void FillHandlersTable([[maybe_unused]] wxHtmlWinParser * parser) { }
 };
 
 

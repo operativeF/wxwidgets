@@ -163,7 +163,7 @@ wxTipWindow::~wxTipWindow()
     #endif
 }
 
-void wxTipWindow::OnMouseClick(wxMouseEvent& WXUNUSED(event))
+void wxTipWindow::OnMouseClick([[maybe_unused]] wxMouseEvent& event)
 {
     Close();
 }
@@ -272,7 +272,7 @@ void wxTipWindowView::Adjust(std::string_view text, wxCoord maxLength)
     SetSize(wxRect{0, 0, width, height});
 }
 
-void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxTipWindowView::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 
@@ -303,7 +303,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     }
 }
 
-void wxTipWindowView::OnMouseClick(wxMouseEvent& WXUNUSED(event))
+void wxTipWindowView::OnMouseClick([[maybe_unused]] wxMouseEvent& event)
 {
     m_parent->Close();
 }

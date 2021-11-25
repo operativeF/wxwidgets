@@ -413,7 +413,7 @@ wxCoord wxHtmlListBox::OnMeasureItem(size_t n) const
 // wxHtmlListBox implementation of wxHtmlListBoxWinInterface
 // ----------------------------------------------------------------------------
 
-void wxHtmlListBox::SetHTMLWindowTitle(const std::string& WXUNUSED(title))
+void wxHtmlListBox::SetHTMLWindowTitle([[maybe_unused]] const std::string& title)
 {
     // nothing to do
 }
@@ -423,7 +423,7 @@ void wxHtmlListBox::OnHTMLLinkClicked(const wxHtmlLinkInfo& link)
     OnLinkClicked(GetItemForCell(link.GetHtmlCell()), link);
 }
 
-void wxHtmlListBox::OnLinkClicked(size_t WXUNUSED(n),
+void wxHtmlListBox::OnLinkClicked([[maybe_unused]] size_t n,
                                   const wxHtmlLinkInfo& link)
 {
     wxHtmlLinkEvent event(GetId(), link);
@@ -431,9 +431,9 @@ void wxHtmlListBox::OnLinkClicked(size_t WXUNUSED(n),
 }
 
 wxHtmlOpeningStatus
-wxHtmlListBox::OnHTMLOpeningURL(wxHtmlURLType WXUNUSED(type),
-                                const std::string& WXUNUSED(url),
-                                std::string *WXUNUSED(redirect)) const
+wxHtmlListBox::OnHTMLOpeningURL([[maybe_unused]] wxHtmlURLType type,
+                                [[maybe_unused]] const std::string& url,
+                                [[maybe_unused]] std::string *redirect) const
 {
     return wxHtmlOpeningStatus::Open;
 }
@@ -461,7 +461,7 @@ void wxHtmlListBox::SetHTMLBackgroundImage([[maybe_unused]] const wxBitmap& bmpB
     // nothing to do
 }
 
-void wxHtmlListBox::SetHTMLStatusText(const std::string& WXUNUSED(text))
+void wxHtmlListBox::SetHTMLStatusText([[maybe_unused]] const std::string& text)
 {
     // nothing to do
 }

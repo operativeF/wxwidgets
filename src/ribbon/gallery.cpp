@@ -195,7 +195,7 @@ bool wxRibbonGallery::TestButtonHover(const wxRect& rect, wxPoint pos,
     }
 }
 
-void wxRibbonGallery::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonGallery::OnMouseLeave([[maybe_unused]] wxMouseEvent& evt)
 {
     m_hovered = false;
     m_active_item = nullptr;
@@ -449,12 +449,12 @@ bool wxRibbonGallery::IsHovered() const
     return m_hovered;
 }
 
-void wxRibbonGallery::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonGallery::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // All painting done in main paint handler to minimise flicker
 }
 
-void wxRibbonGallery::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonGallery::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     if(m_art == nullptr)
@@ -490,7 +490,7 @@ void wxRibbonGallery::OnPaint(wxPaintEvent& WXUNUSED(evt))
     }
 }
 
-void wxRibbonGallery::OnSize(wxSizeEvent& WXUNUSED(evt))
+void wxRibbonGallery::OnSize([[maybe_unused]] wxSizeEvent& evt)
 {
     Layout();
 }

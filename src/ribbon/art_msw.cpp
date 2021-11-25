@@ -1316,7 +1316,7 @@ void wxRibbonMSWArtProvider::SetColour(int id, const wxColor& colour)
 
 void wxRibbonMSWArtProvider::DrawTabCtrlBackground(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect)
 {
     dc.SetPen(*wxTRANSPARENT_PEN);
@@ -1336,7 +1336,7 @@ void wxRibbonMSWArtProvider::DrawTabCtrlBackground(
 
 void wxRibbonMSWArtProvider::DrawTab(
                  wxDC& dc,
-                 wxWindow* WXUNUSED(wnd),
+                 [[maybe_unused]] wxWindow* wnd,
                  const wxRibbonPageTabInfo& tab)
 {
     if(tab.rect.height <= 2)
@@ -1641,7 +1641,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(wxDC& dc,
 
 void wxRibbonMSWArtProvider::DrawPageBackground(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect)
 {
     dc.SetPen(*wxTRANSPARENT_PEN);
@@ -1696,7 +1696,7 @@ void wxRibbonMSWArtProvider::DrawPageBackground(
 
 void wxRibbonMSWArtProvider::DrawScrollButton(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect_,
                         unsigned int style)
 {
@@ -1980,7 +1980,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         DrawPanelBorder(dc, true_rect, m_panel_hover_border_pen, m_panel_hover_border_gradient_pen);
 }
 
-wxRect wxRibbonMSWArtProvider::GetPanelExtButtonArea(wxDC& WXUNUSED(dc),
+wxRect wxRibbonMSWArtProvider::GetPanelExtButtonArea([[maybe_unused]] wxDC& dc,
                         [[maybe_unused]] const wxRibbonPanel* wnd,
                         wxRect rect)
 {
@@ -2457,7 +2457,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
 
 void wxRibbonMSWArtProvider::DrawButtonBarButton(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         unsigned int state,
@@ -2686,7 +2686,7 @@ void wxRibbonMSWArtProvider::DrawToolBarBackground(
 
 void wxRibbonMSWArtProvider::DrawToolGroupBackground(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect)
 {
     dc.SetPen(m_toolbar_border_pen);
@@ -2706,7 +2706,7 @@ void wxRibbonMSWArtProvider::DrawToolGroupBackground(
 
 void wxRibbonMSWArtProvider::DrawTool(
                 wxDC& dc,
-                wxWindow* WXUNUSED(wnd),
+                [[maybe_unused]] wxWindow* wnd,
                 const wxRect& rect,
                 const wxBitmap& bitmap,
                 wxRibbonButtonKind kind,
@@ -2861,7 +2861,7 @@ void wxRibbonMSWArtProvider::DrawHelpButton(wxDC& dc,
 
 void wxRibbonMSWArtProvider::GetBarTabWidth(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
@@ -2909,7 +2909,7 @@ void wxRibbonMSWArtProvider::GetBarTabWidth(
 
 int wxRibbonMSWArtProvider::GetTabCtrlHeight(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRibbonPageTabInfoArray& pages)
 {
     int text_height = 0;
@@ -2944,9 +2944,9 @@ int wxRibbonMSWArtProvider::GetTabCtrlHeight(
 }
 
 wxSize wxRibbonMSWArtProvider::GetScrollButtonMinimumSize(
-                        wxDC& WXUNUSED(dc),
-                        wxWindow* WXUNUSED(wnd),
-                        unsigned int WXUNUSED(style))
+                        [[maybe_unused]] wxDC& dc,
+                        [[maybe_unused]] wxWindow* wnd,
+                        [[maybe_unused]] unsigned int style)
 {
     return {12, 12};
 }
@@ -3006,7 +3006,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelClientSize(
 }
 
 wxSize wxRibbonMSWArtProvider::GetGallerySize(
-                        wxDC& WXUNUSED(dc),
+                        [[maybe_unused]] wxDC& dc,
                         [[maybe_unused]] const wxRibbonGallery* wnd,
                         wxSize client_size)
 {
@@ -3019,7 +3019,7 @@ wxSize wxRibbonMSWArtProvider::GetGallerySize(
 }
 
 wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
-                        wxDC& WXUNUSED(dc),
+                        [[maybe_unused]] wxDC& dc,
                         [[maybe_unused]] const wxRibbonGallery* wnd,
                         wxSize size,
                         wxPoint* client_offset,
@@ -3080,7 +3080,7 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
 }
 
 wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
-                        wxDC& WXUNUSED(dc),
+                        [[maybe_unused]] wxDC& dc,
                         [[maybe_unused]] const wxRibbonPage* wnd,
                         wxSize page_old_size,
                         wxSize page_new_size)
@@ -3331,11 +3331,11 @@ wxSize wxRibbonMSWArtProvider::GetMinimisedPanelMinimumSize(
 }
 
 wxSize wxRibbonMSWArtProvider::GetToolSize(
-                        wxDC& WXUNUSED(dc),
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxDC& dc,
+                        [[maybe_unused]] wxWindow* wnd,
                         wxSize bitmap_size,
                         wxRibbonButtonKind kind,
-                        bool WXUNUSED(is_first),
+                        [[maybe_unused]] bool is_first,
                         bool is_last,
                         wxRect* dropdown_region)
 {

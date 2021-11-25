@@ -135,7 +135,7 @@ bool wxTextEntryDialog::TransferDataFromWindow()
     return wxDialog::TransferDataFromWindow();
 }
 
-void wxTextEntryDialog::OnOK(wxCommandEvent& WXUNUSED(event) )
+void wxTextEntryDialog::OnOK([[maybe_unused]] wxCommandEvent& event )
 {
     if ( Validate() && TransferDataFromWindow() )
     {

@@ -998,7 +998,7 @@ void wxAuiTabCtrl::OnSysColourChanged(wxSysColourChangedEvent &event)
     }
 }
 
-void wxAuiTabCtrl::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxAuiTabCtrl::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
 }
 
@@ -1050,7 +1050,7 @@ void wxAuiTabCtrl::OnLeftDown(wxMouseEvent& evt)
     }
 }
 
-void wxAuiTabCtrl::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxAuiTabCtrl::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     if (m_isDragging)
     {
@@ -1266,7 +1266,7 @@ void wxAuiTabCtrl::OnMotion(wxMouseEvent& evt)
     }
 }
 
-void wxAuiTabCtrl::OnLeaveWindow(wxMouseEvent& WXUNUSED(event))
+void wxAuiTabCtrl::OnLeaveWindow([[maybe_unused]] wxMouseEvent& event)
 {
     if (m_hoverButton)
     {
@@ -1320,12 +1320,12 @@ void wxAuiTabCtrl::OnButton(wxAuiNotebookEvent& event)
     }
 }
 
-void wxAuiTabCtrl::OnSetFocus(wxFocusEvent& WXUNUSED(event))
+void wxAuiTabCtrl::OnSetFocus([[maybe_unused]] wxFocusEvent& event)
 {
     Refresh();
 }
 
-void wxAuiTabCtrl::OnKillFocus(wxFocusEvent& WXUNUSED(event))
+void wxAuiTabCtrl::OnKillFocus([[maybe_unused]] wxFocusEvent& event)
 {
     Refresh();
 }

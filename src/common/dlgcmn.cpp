@@ -479,7 +479,7 @@ wxDialogModality wxDialogBase::GetModality() const
 // other event handlers
 // ----------------------------------------------------------------------------
 
-void wxDialogBase::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxDialogBase::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     // We'll send a Cancel message by default, which may close the dialog.
 

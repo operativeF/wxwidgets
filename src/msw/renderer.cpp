@@ -334,7 +334,7 @@ private:
 // wxRendererMSWBase implementation
 // ============================================================================
 
-void wxRendererMSWBase::DrawFocusRect(wxWindow * WXUNUSED(win),
+void wxRendererMSWBase::DrawFocusRect([[maybe_unused]] wxWindow * win,
                                       wxDC& dc,
                                       const wxRect& rect,
                                       [[maybe_unused]] unsigned int flags)
@@ -430,7 +430,7 @@ wxRendererNative& wxRendererMSW::Get()
 }
 
 void
-wxRendererMSW::DrawComboBoxDropButton(wxWindow * WXUNUSED(win),
+wxRendererMSW::DrawComboBoxDropButton([[maybe_unused]] wxWindow * win,
                                       wxDC& dc,
                                       const wxRect& rect,
                                       unsigned int flags)
@@ -451,7 +451,7 @@ wxRendererMSW::DrawComboBoxDropButton(wxWindow * WXUNUSED(win),
 void
 wxRendererMSW::DoDrawFrameControl(WXUINT type,
                                   WXUINT kind,
-                                  wxWindow * WXUNUSED(win),
+                                  [[maybe_unused]] wxWindow * win,
                                   wxDC& dc,
                                   const wxRect& rect,
                                   unsigned int flags)

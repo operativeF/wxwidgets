@@ -229,8 +229,8 @@ public:
 
     // returns the link associated with this cell. The position is position
     // within the cell so it varies from 0 to m_Width, from 0 to m_Height
-    virtual wxHtmlLinkInfo* GetLink(int WXUNUSED(x) = 0,
-                                    int WXUNUSED(y) = 0) const
+    virtual wxHtmlLinkInfo* GetLink([[maybe_unused]] int x = 0,
+                                    [[maybe_unused]] int y = 0) const
         { return m_Link; }
 
     // Returns cursor to be used when mouse is over the cell, can be
@@ -262,16 +262,16 @@ public:
     virtual void Layout(int w);
 
     // renders the cell
-    virtual void Draw(wxDC& WXUNUSED(dc),
-                      int WXUNUSED(x), int WXUNUSED(y),
+    virtual void Draw([[maybe_unused]] wxDC& dc,
+                      [[maybe_unused]] int x, [[maybe_unused]] int y,
                       int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                      wxHtmlRenderingInfo& WXUNUSED(info)) {}
+                      [[maybe_unused]] wxHtmlRenderingInfo& info) {}
 
     // proceed drawing actions in case the cell is not visible (scrolled out of
     // screen).  This is needed to change fonts, colors and so on.
-    virtual void DrawInvisible(wxDC& WXUNUSED(dc),
-                               int WXUNUSED(x), int WXUNUSED(y),
-                               wxHtmlRenderingInfo& WXUNUSED(info)) {}
+    virtual void DrawInvisible([[maybe_unused]] wxDC& dc,
+                               [[maybe_unused]] int x, [[maybe_unused]] int y,
+                               [[maybe_unused]] wxHtmlRenderingInfo& info) {}
 
     // This method returns pointer to the FIRST cell for that
     // the condition
@@ -366,7 +366,7 @@ public:
 
     // Converts the cell into text representation. If sel != NULL then
     // only part of the cell inside the selection is converted.
-    virtual std::string ConvertToText(wxHtmlSelection *WXUNUSED(sel)) const
+    virtual std::string ConvertToText([[maybe_unused]] wxHtmlSelection *sel) const
         { return ""; }
 
     // This method is useful for debugging, to customize it for particular cell

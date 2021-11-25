@@ -149,7 +149,7 @@ void wxGenericCollapsibleHeaderCtrl::OnLeftDown(wxMouseEvent& event)
     event.Skip();
 }
 
-void wxGenericCollapsibleHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericCollapsibleHeaderCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

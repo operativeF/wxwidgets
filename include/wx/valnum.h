@@ -50,7 +50,7 @@ public:
 
     // Override base class method to not do anything but always return success:
     // we don't need this as we do our validation on the fly here.
-    bool Validate(wxWindow * WXUNUSED(parent)) override { return true; }
+    bool Validate([[maybe_unused]] wxWindow * parent) override { return true; }
 
     // Override base class method to check that the window is a text control or
     // combobox.

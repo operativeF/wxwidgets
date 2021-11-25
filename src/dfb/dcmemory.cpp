@@ -46,7 +46,7 @@ wxMemoryDCImpl::wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap)
     DoSelect(bitmap);
 }
 
-wxMemoryDCImpl::wxMemoryDCImpl(wxMemoryDC *owner, wxDC *WXUNUSED(dc))
+wxMemoryDCImpl::wxMemoryDCImpl(wxMemoryDC *owner, [[maybe_unused]] wxDC *dc)
               : wxDFBDCImpl(owner)
 {
 }

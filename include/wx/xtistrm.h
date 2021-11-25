@@ -52,56 +52,56 @@ public:
     virtual ~wxObjectWriterCallback() = default;
 
     // will be called before an object is written, may veto by returning false
-    virtual bool BeforeWriteObject( wxObjectWriter *WXUNUSED(writer),
-                                    const wxObject *WXUNUSED(object),
-                                    const wxClassInfo *WXUNUSED(classInfo),
-                                    const wxStringToAnyHashMap &WXUNUSED(metadata))
+    virtual bool BeforeWriteObject( [[maybe_unused]] wxObjectWriter *writer,
+                                    [[maybe_unused]] const wxObject *object,
+                                    [[maybe_unused]] const wxClassInfo *classInfo,
+                                    [[maybe_unused]] const wxStringToAnyHashMap &metadata)
         { return true; }
 
     // will be called after this object has been written, may be
     // needed for adjusting stacks
-    virtual void AfterWriteObject( wxObjectWriter *WXUNUSED(writer),
-                                   const wxObject *WXUNUSED(object),
-                                   const wxClassInfo *WXUNUSED(classInfo) )
+    virtual void AfterWriteObject( [[maybe_unused]] wxObjectWriter *writer,
+                                   [[maybe_unused]] const wxObject *object,
+                                   [[maybe_unused]] const wxClassInfo *classInfo )
         {}
 
     // will be called before a property gets written, may change the value,
     // eg replace a concrete wxSize by wxSize( wxDefaultCoord, wxDefaultCoord )
     // or veto writing that property at all by returning false
-    virtual bool BeforeWriteProperty( wxObjectWriter *WXUNUSED(writer),
-                                      const wxObject *WXUNUSED(object),
-                                      const wxPropertyInfo *WXUNUSED(propInfo),
-                                      const wxAny &WXUNUSED(value) )
+    virtual bool BeforeWriteProperty( [[maybe_unused]] wxObjectWriter *writer,
+                                      [[maybe_unused]] const wxObject *object,
+                                      [[maybe_unused]] const wxPropertyInfo *propInfo,
+                                      [[maybe_unused]] const wxAny &value )
         { return true; }
 
     // will be called before a property gets written, may change the value,
     // eg replace a concrete wxSize by wxSize( wxDefaultCoord, wxDefaultCoord )
     // or veto writing that property at all by returning false
-    virtual bool BeforeWriteProperty( wxObjectWriter *WXUNUSED(writer),
-                                      const wxObject *WXUNUSED(object),
-                                      const wxPropertyInfo *WXUNUSED(propInfo),
-                                      const wxAnyList &WXUNUSED(value) )
+    virtual bool BeforeWriteProperty( [[maybe_unused]] wxObjectWriter *writer,
+                                      [[maybe_unused]] const wxObject *object,
+                                      [[maybe_unused]] const wxPropertyInfo *propInfo,
+                                      [[maybe_unused]] const wxAnyList &value )
         { return true; }
 
     // will be called after a property has been written out, may be needed
     // for adjusting stacks
-    virtual void AfterWriteProperty( wxObjectWriter *WXUNUSED(writer),
-                                     const wxPropertyInfo *WXUNUSED(propInfo) )
+    virtual void AfterWriteProperty( [[maybe_unused]] wxObjectWriter *writer,
+                                     [[maybe_unused]] const wxPropertyInfo *propInfo )
         {}
 
     // will be called before this delegate gets written
-    virtual bool BeforeWriteDelegate( wxObjectWriter *WXUNUSED(writer),
-                                      const wxObject *WXUNUSED(object),
+    virtual bool BeforeWriteDelegate( [[maybe_unused]] wxObjectWriter *writer,
+                                      [[maybe_unused]] const wxObject *object,
                                       [[maybe_unused]] const wxClassInfo* classInfo,
-                                      const wxPropertyInfo *WXUNUSED(propInfo),
+                                      [[maybe_unused]] const wxPropertyInfo *propInfo,
                                       const wxObject *&WXUNUSED(eventSink),
                                       const wxHandlerInfo* &WXUNUSED(handlerInfo) )
         { return true; }
 
-    virtual void AfterWriteDelegate( wxObjectWriter *WXUNUSED(writer),
-                                     const wxObject *WXUNUSED(object),
+    virtual void AfterWriteDelegate( [[maybe_unused]] wxObjectWriter *writer,
+                                     [[maybe_unused]] const wxObject *object,
                                      [[maybe_unused]] const wxClassInfo* classInfo,
-                                     const wxPropertyInfo *WXUNUSED(propInfo),
+                                     [[maybe_unused]] const wxPropertyInfo *propInfo,
                                      const wxObject *&WXUNUSED(eventSink),
                                      const wxHandlerInfo* &WXUNUSED(handlerInfo) )
         { }

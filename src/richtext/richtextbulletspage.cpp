@@ -581,7 +581,7 @@ wxIcon wxRichTextBulletsPage::GetIconResource( const std::string& name )
  * wxEVT_LISTBOX event handler for ID_RICHTEXTBULLETSPAGE_STYLELISTBOX
  */
 
-void wxRichTextBulletsPage::OnStylelistboxSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnStylelistboxSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -598,7 +598,7 @@ void wxRichTextBulletsPage::OnStylelistboxSelected( wxCommandEvent& WXUNUSED(eve
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL
  */
 
-void wxRichTextBulletsPage::OnSymbolctrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnSymbolctrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -611,7 +611,7 @@ void wxRichTextBulletsPage::OnSymbolctrlSelected( wxCommandEvent& WXUNUSED(event
  * wxEVT_TEXT event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL
  */
 
-void wxRichTextBulletsPage::OnSymbolctrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnSymbolctrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -633,7 +633,7 @@ void wxRichTextBulletsPage::OnSymbolctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_SPINCTRL event handler for ID_RICHTEXTBULLETSPAGE_NUMBERCTRL
  */
 
-void wxRichTextBulletsPage::OnNumberctrlUpdated( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNumberctrlUpdated( [[maybe_unused]] wxSpinEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -646,7 +646,7 @@ void wxRichTextBulletsPage::OnNumberctrlUpdated( wxSpinEvent& WXUNUSED(event) )
  * wxEVT_SCROLL_LINEUP event handler for ID_RICHTEXTBULLETSPAGE_NUMBERCTRL
  */
 
-void wxRichTextBulletsPage::OnNumberctrlUp( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNumberctrlUp( [[maybe_unused]] wxSpinEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -659,7 +659,7 @@ void wxRichTextBulletsPage::OnNumberctrlUp( wxSpinEvent& WXUNUSED(event) )
  * wxEVT_SCROLL_LINEDOWN event handler for ID_RICHTEXTBULLETSPAGE_NUMBERCTRL
  */
 
-void wxRichTextBulletsPage::OnNumberctrlDown( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNumberctrlDown( [[maybe_unused]] wxSpinEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -672,7 +672,7 @@ void wxRichTextBulletsPage::OnNumberctrlDown( wxSpinEvent& WXUNUSED(event) )
  * wxEVT_TEXT event handler for ID_RICHTEXTBULLETSPAGE_NUMBERCTRL
  */
 
-void wxRichTextBulletsPage::OnNumberctrlTextUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNumberctrlTextUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -694,7 +694,7 @@ void wxRichTextBulletsPage::OnNumberctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTBULLETSPAGE_PARENTHESESCTRL
  */
 
-void wxRichTextBulletsPage::OnParenthesesctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnParenthesesctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -719,7 +719,7 @@ void wxRichTextBulletsPage::OnParenthesesctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTBULLETSPAGE_PERIODCTRL
  */
 
-void wxRichTextBulletsPage::OnPeriodctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnPeriodctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -744,7 +744,7 @@ void wxRichTextBulletsPage::OnPeriodctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTBULLETSPAGE_CHOOSE_SYMBOL
  */
 
-void wxRichTextBulletsPage::OnChooseSymbolClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnChooseSymbolClick( [[maybe_unused]] wxCommandEvent& event )
 {
     int sel = m_styleListBox->GetSelection();
     if (m_hasBulletStyle && sel == wxRICHTEXT_BULLETINDEX_SYMBOL)
@@ -779,7 +779,7 @@ void wxRichTextBulletsPage::OnChooseSymbolUpdate( wxUpdateUIEvent& event )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLFONTCTRL
  */
 
-void wxRichTextBulletsPage::OnSymbolfontctrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnSymbolfontctrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -790,7 +790,7 @@ void wxRichTextBulletsPage::OnSymbolfontctrlSelected( wxCommandEvent& WXUNUSED(e
  * wxEVT_TEXT event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLFONTCTRL
  */
 
-void wxRichTextBulletsPage::OnSymbolfontctrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnSymbolfontctrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -865,7 +865,7 @@ void wxRichTextBulletsPage::OnNamestaticUpdate( wxUpdateUIEvent& event )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTBULLETSPAGE_NAMECTRL
  */
 
-void wxRichTextBulletsPage::OnNamectrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNamectrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -876,7 +876,7 @@ void wxRichTextBulletsPage::OnNamectrlSelected( wxCommandEvent& WXUNUSED(event) 
  * wxEVT_TEXT event handler for ID_RICHTEXTBULLETSPAGE_NAMECTRL
  */
 
-void wxRichTextBulletsPage::OnNamectrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnNamectrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -897,7 +897,7 @@ void wxRichTextBulletsPage::OnNamectrlUIUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTBULLETSPAGE_RIGHT_PARENTHESIS_CTRL
  */
 
-void wxRichTextBulletsPage::OnRightParenthesisCtrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnRightParenthesisCtrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -922,7 +922,7 @@ void wxRichTextBulletsPage::OnRightParenthesisCtrlUpdate( wxUpdateUIEvent& event
  * wxEVT_COMBOBOX event handler for ID_COMBOBOX
  */
 
-void wxRichTextBulletsPage::OnBulletAlignmentCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBulletsPage::OnBulletAlignmentCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;

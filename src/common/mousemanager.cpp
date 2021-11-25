@@ -47,7 +47,7 @@ wxMouseEventsManager::~wxMouseEventsManager()
         m_win->RemoveEventHandler(this);
 }
 
-void wxMouseEventsManager::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxMouseEventsManager::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     switch ( m_state )
     {

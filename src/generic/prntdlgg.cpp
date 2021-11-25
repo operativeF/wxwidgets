@@ -91,12 +91,12 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
     m_printerTranslateY = 0;
 }
 
-bool wxPostScriptPrintNativeData::TransferTo( wxPrintData &WXUNUSED(data) )
+bool wxPostScriptPrintNativeData::TransferTo( [[maybe_unused]] wxPrintData &data )
 {
     return true;
 }
 
-bool wxPostScriptPrintNativeData::TransferFrom( const wxPrintData &WXUNUSED(data) )
+bool wxPostScriptPrintNativeData::TransferFrom( [[maybe_unused]] const wxPrintData &data )
 {
     return true;
 }
@@ -141,7 +141,7 @@ wxGenericPrintDialog::wxGenericPrintDialog(wxWindow *parent,
     Init(parent);
 }
 
-void wxGenericPrintDialog::Init(wxWindow * WXUNUSED(parent))
+void wxGenericPrintDialog::Init([[maybe_unused]] wxWindow * parent)
 {
   //    wxDialog::Create(parent, wxID_ANY, _("Print"), wxPoint(0,0), wxSize(600, 600),
   //                     wxDEFAULT_DIALOG_STYLE | wxTAB_TRAVERSAL);
@@ -249,7 +249,7 @@ int wxGenericPrintDialog::ShowModal()
     return wxDialog::ShowModal();
 }
 
-void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
+void wxGenericPrintDialog::OnOK([[maybe_unused]] wxCommandEvent& event)
 {
     TransferDataFromWindow();
 
@@ -298,7 +298,7 @@ void wxGenericPrintDialog::OnRange(wxCommandEvent& event)
     }
 }
 
-void wxGenericPrintDialog::OnSetup(wxCommandEvent& WXUNUSED(event))
+void wxGenericPrintDialog::OnSetup([[maybe_unused]] wxCommandEvent& event)
 {
     wxPrintFactory* factory = wxPrintFactory::GetFactory();
 
@@ -1027,7 +1027,7 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
     return choice;
 }
 
-void wxGenericPageSetupDialog::OnPrinter(wxCommandEvent& WXUNUSED(event))
+void wxGenericPageSetupDialog::OnPrinter([[maybe_unused]] wxCommandEvent& event)
 {
     // We no longer query GetPrintMode, so we can eliminate the need
     // to call SetPrintMode.

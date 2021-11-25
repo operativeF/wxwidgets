@@ -129,7 +129,7 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
     return true;
 }
 
-void wxNumberEntryDialog::OnOK(wxCommandEvent& WXUNUSED(event))
+void wxNumberEntryDialog::OnOK([[maybe_unused]] wxCommandEvent& event)
 {
 #if !wxUSE_SPINCTRL
     wxString tmp = m_spinctrl->GetValue();
@@ -149,7 +149,7 @@ void wxNumberEntryDialog::OnOK(wxCommandEvent& WXUNUSED(event))
     EndModal(wxID_OK);
 }
 
-void wxNumberEntryDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
+void wxNumberEntryDialog::OnCancel([[maybe_unused]] wxCommandEvent& event)
 {
     EndModal(wxID_CANCEL);
 }

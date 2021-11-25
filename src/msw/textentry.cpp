@@ -825,7 +825,7 @@ bool wxTextEntry::DoAutoCompleteFileNames(unsigned int flags)
 
 #endif // wxUSE_DYNLIB_CLASS
 
-void wxTextEntry::MSWProcessSpecialKey(wxKeyEvent& WXUNUSED(event))
+void wxTextEntry::MSWProcessSpecialKey([[maybe_unused]] wxKeyEvent& event)
 {
     wxFAIL_MSG("Must be overridden if can be called");
 }

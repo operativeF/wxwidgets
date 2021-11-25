@@ -125,18 +125,18 @@ public:
     //       because otherwise almost all ports would have to implement
     //       them as "return false"...
 
-    virtual bool Create(wxBitmap *WXUNUSED(bitmap), [[maybe_unused]] const void* data,
-                         wxBitmapType WXUNUSED(type), int WXUNUSED(width), int WXUNUSED(height),
-                         int WXUNUSED(depth) = 1)
+    virtual bool Create([[maybe_unused]] wxBitmap *bitmap, [[maybe_unused]] const void* data,
+                         [[maybe_unused]] wxBitmapType type, [[maybe_unused]] int width, [[maybe_unused]] int height,
+                         [[maybe_unused]] int depth = 1)
         { return false; }
 
-    virtual bool LoadFile(wxBitmap *WXUNUSED(bitmap), const std::string& WXUNUSED(name),
-                           wxBitmapType WXUNUSED(type), int WXUNUSED(desiredWidth),
-                           int WXUNUSED(desiredHeight))
+    virtual bool LoadFile([[maybe_unused]] wxBitmap *bitmap, [[maybe_unused]] const std::string& name,
+                           [[maybe_unused]] wxBitmapType type, [[maybe_unused]] int desiredWidth,
+                           [[maybe_unused]] int desiredHeight)
         { return false; }
 
-    virtual bool SaveFile(const wxBitmap *WXUNUSED(bitmap), const std::string& WXUNUSED(name),
-                           wxBitmapType WXUNUSED(type), const wxPalette *WXUNUSED(palette) = NULL) const
+    virtual bool SaveFile([[maybe_unused]] const wxBitmap *bitmap, [[maybe_unused]] const std::string& name,
+                           [[maybe_unused]] wxBitmapType type, [[maybe_unused]] const wxPalette *palette = NULL) const
         { return false; }
 
     void SetName(std::string name)      { m_name = name; }

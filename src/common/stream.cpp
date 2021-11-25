@@ -995,7 +995,7 @@ wxFileOffset wxInputStream::TellI() const
 // wxOutputStream
 // ----------------------------------------------------------------------------
 
-size_t wxOutputStream::OnSysWrite(const void * WXUNUSED(buffer),
+size_t wxOutputStream::OnSysWrite(const [[maybe_unused]] void * buffer,
                                   [[maybe_unused]] size_t bufsize)
 {
     return 0;
@@ -1080,7 +1080,7 @@ wxFileOffset wxCountingOutputStream::GetLength() const
     return m_lastPos;
 }
 
-size_t wxCountingOutputStream::OnSysWrite(const void *WXUNUSED(buffer),
+size_t wxCountingOutputStream::OnSysWrite([[maybe_unused]] const void *buffer,
                                           size_t size)
 {
     m_currentPos += size;

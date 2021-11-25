@@ -67,7 +67,7 @@ public:
     static int GetFeatures() { return wxComboCtrlFeatures::All; }
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
-    void OnTimerEvent(wxTimerEvent& WXUNUSED(event)) { DoTimerEvent(); }
+    void OnTimerEvent([[maybe_unused]] wxTimerEvent& event) { DoTimerEvent(); }
 
 protected:
     void DoTimerEvent();

@@ -20,9 +20,9 @@ class wxScreenDC : public wxDC
 public:
     wxScreenDC();
 
-    static bool StartDrawingOnTop(wxWindow * WXUNUSED(window))
+    static bool StartDrawingOnTop([[maybe_unused]] wxWindow * window)
         { return true; }
-    static bool StartDrawingOnTop(wxRect * WXUNUSED(rect) =  nullptr)
+    static bool StartDrawingOnTop([[maybe_unused]] wxRect * rect =  nullptr)
         { return true; }
     static bool EndDrawingOnTop()
         { return true; }

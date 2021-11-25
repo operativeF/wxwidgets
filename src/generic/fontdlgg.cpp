@@ -57,7 +57,7 @@ wxBEGIN_EVENT_TABLE(wxFontPreviewer, wxWindow)
     EVT_PAINT(wxFontPreviewer::OnPaint)
 wxEND_EVENT_TABLE()
 
-void wxFontPreviewer::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxFontPreviewer::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 
@@ -262,7 +262,7 @@ void wxGenericFontDialog::Init()
     Create( m_parent ) ;
 }
 
-void wxGenericFontDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxGenericFontDialog::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     EndModal(wxID_CANCEL);
 }
@@ -546,7 +546,7 @@ void wxGenericFontDialog::InitializeFont()
         m_previewer->SetFont(m_dialogFont);
 }
 
-void wxGenericFontDialog::OnChangeFont(wxCommandEvent& WXUNUSED(event))
+void wxGenericFontDialog::OnChangeFont([[maybe_unused]] wxCommandEvent& event)
 {
     DoChangeFont();
 }
@@ -596,7 +596,7 @@ void wxGenericFontDialog::DoChangeFont()
 }
 
 #if USE_SPINCTRL_FOR_POINT_SIZE
-void wxGenericFontDialog::OnChangeSize(wxSpinEvent& WXUNUSED(event))
+void wxGenericFontDialog::OnChangeSize([[maybe_unused]] wxSpinEvent& event)
 {
     DoChangeFont();
 }

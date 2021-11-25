@@ -98,7 +98,7 @@ public:
     void AddGrabIfNeeded();
 
     // Override to add custom buttons to the toolbar
-    virtual void AddToolbarButtons(wxToolBar* WXUNUSED(toolBar), unsigned int WXUNUSED(style)) {}
+    virtual void AddToolbarButtons([[maybe_unused]] wxToolBar* toolBar, [[maybe_unused]] unsigned int style) {}
 
     void SetShouldPreventAppExit(bool enable);
 

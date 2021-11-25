@@ -510,11 +510,11 @@ public:
     void OnGotoPage();
     void OnPrint();
 
-    void OnPrintButton(wxCommandEvent& WXUNUSED(event)) { OnPrint(); }
-    void OnNextButton(wxCommandEvent & WXUNUSED(event)) { OnNext(); }
-    void OnPreviousButton(wxCommandEvent & WXUNUSED(event)) { OnPrevious(); }
-    void OnFirstButton(wxCommandEvent & WXUNUSED(event)) { OnFirst(); }
-    void OnLastButton(wxCommandEvent & WXUNUSED(event)) { OnLast(); }
+    void OnPrintButton([[maybe_unused]] wxCommandEvent& event) { OnPrint(); }
+    void OnNextButton([[maybe_unused]] wxCommandEvent & event) { OnNext(); }
+    void OnPreviousButton([[maybe_unused]] wxCommandEvent & event) { OnPrevious(); }
+    void OnFirstButton([[maybe_unused]] wxCommandEvent & event) { OnFirst(); }
+    void OnLastButton([[maybe_unused]] wxCommandEvent & event) { OnLast(); }
     void OnPaint(wxPaintEvent& event);
 
     void OnUpdateNextButton(wxUpdateUIEvent& event)
@@ -555,9 +555,9 @@ private:
     bool IsZoomInEnabled() const;
     bool IsZoomOutEnabled() const;
 
-    void OnZoomInButton(wxCommandEvent & WXUNUSED(event)) { DoZoomIn(); }
-    void OnZoomOutButton(wxCommandEvent & WXUNUSED(event)) { DoZoomOut(); }
-    void OnZoomChoice(wxCommandEvent& WXUNUSED(event)) { DoZoom(); }
+    void OnZoomInButton([[maybe_unused]] wxCommandEvent & event) { DoZoomIn(); }
+    void OnZoomOutButton([[maybe_unused]] wxCommandEvent & event) { DoZoomOut(); }
+    void OnZoomChoice([[maybe_unused]] wxCommandEvent& event) { DoZoom(); }
 
     wxDECLARE_EVENT_TABLE();
 };

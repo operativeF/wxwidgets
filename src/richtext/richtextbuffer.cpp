@@ -432,7 +432,7 @@ void wxRichTextFloatCollector::Draw(wxDC& dc, wxRichTextDrawingContext& context,
         DrawFloat(m_right, dc, context, range, selection, rect, descent, style);
 }
 
-int wxRichTextFloatCollector::HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int WXUNUSED(flags))
+int wxRichTextFloatCollector::HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, [[maybe_unused]] unsigned int flags)
 {
     int i;
     if (array.GetCount() == 0)
@@ -814,7 +814,7 @@ bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, con
 }
 
 // Draw a border
-bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, unsigned int WXUNUSED(flags))
+bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     int borderLeft = 0, borderRight = 0, borderTop = 0, borderBottom = 0;
     wxTextAttrDimensionConverter converter(dc, buffer ? buffer->GetScale() : 1.0);
@@ -1218,7 +1218,7 @@ wxPoint wxRichTextObject::GetAbsolutePosition() const
 
 // Hit-testing: returns a flag indicating hit test details, plus
 // information about position
-int wxRichTextObject::HitTest(wxDC& WXUNUSED(dc), wxRichTextDrawingContext& WXUNUSED(context), const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int WXUNUSED(flags))
+int wxRichTextObject::HitTest([[maybe_unused]] wxDC& dc, [[maybe_unused]] wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, [[maybe_unused]] unsigned int flags)
 {
     if (!IsShown())
         return wxRICHTEXT_HITTEST_NONE;
@@ -4768,7 +4768,7 @@ wxRichTextParagraph::~wxRichTextParagraph()
 }
 
 /// Draw the item
-bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int style)
+bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, [[maybe_unused]] int descent, unsigned int style)
 {
     if (!IsShown())
         return true;
@@ -5536,7 +5536,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
 /// Apply paragraph styles, such as centering, to wrapped lines
 /// TODO: take into account box attributes, possibly
-void wxRichTextParagraph::ApplyParagraphStyle(wxRichTextLine* line, const wxRichTextAttr& attr, const wxRect& rect, wxDC& WXUNUSED(dc))
+void wxRichTextParagraph::ApplyParagraphStyle(wxRichTextLine* line, const wxRichTextAttr& attr, const wxRect& rect, [[maybe_unused]] wxDC& dc)
 {
     if (!attr.HasAlignment())
         return;
@@ -6747,7 +6747,7 @@ wxRichTextPlainText::wxRichTextPlainText(const wxString& text, wxRichTextObject*
 #define WIDTH_FOR_DEFAULT_TABS 50
 
 /// Draw the item
-bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
+bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, [[maybe_unused]] unsigned int style)
 {
     wxRichTextParagraph* para = wxDynamicCast(GetParent(), wxRichTextParagraph);
     wxASSERT (para != nullptr);
@@ -7084,7 +7084,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
 }
 
 /// Lay the item out
-bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRect& rect, [[maybe_unused]] const wxRect& parentRect, unsigned int WXUNUSED(style))
+bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRect& rect, [[maybe_unused]] const wxRect& parentRect, [[maybe_unused]] unsigned int style)
 {
     // Only lay out if we haven't already cached the size
     if (m_size.x == -1)
@@ -7122,7 +7122,7 @@ void wxRichTextPlainText::Copy(const wxRichTextPlainText& obj)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& position, [[maybe_unused]] const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] unsigned int flags, const wxPoint& position, [[maybe_unused]] const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -7423,7 +7423,7 @@ bool wxRichTextPlainText::CanMerge(wxRichTextObject* object, wxRichTextDrawingCo
 
 /// Returns true if this object merged itself with the given one.
 /// The calling code will then delete the given object.
-bool wxRichTextPlainText::Merge(wxRichTextObject* object, wxRichTextDrawingContext& WXUNUSED(context))
+bool wxRichTextPlainText::Merge(wxRichTextObject* object, [[maybe_unused]] wxRichTextDrawingContext& context)
 {
     wxRichTextPlainText* textObject = wxDynamicCast(object, wxRichTextPlainText);
     wxASSERT( textObject != nullptr );
@@ -7747,7 +7747,7 @@ bool wxRichTextBuffer::InsertParagraphsWithUndo(long pos, const wxRichTextParagr
 }
 
 /// Submit command to insert paragraphs
-bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, unsigned int WXUNUSED(flags))
+bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, [[maybe_unused]] unsigned int flags)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Text"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -9214,7 +9214,7 @@ void wxRichTextStdRenderer::SetFontForBullet(wxRichTextBuffer& buffer, wxDC& dc,
     }
 }
 
-bool wxRichTextStdRenderer::DrawBitmapBullet(wxRichTextParagraph* WXUNUSED(paragraph), wxDC& WXUNUSED(dc), [[maybe_unused]] const wxRichTextAttr& attr, [[maybe_unused]] const wxRect& rect)
+bool wxRichTextStdRenderer::DrawBitmapBullet([[maybe_unused]] wxRichTextParagraph* paragraph, [[maybe_unused]] wxDC& dc, [[maybe_unused]] const wxRichTextAttr& attr, [[maybe_unused]] const wxRect& rect)
 {
     // Currently unimplemented. The intention is to store bitmaps by name in a media store associated
     // with the buffer. The store will allow retrieval from memory, disk or other means.
@@ -9468,7 +9468,7 @@ void wxRichTextFieldTypeStandard::Copy(const wxRichTextFieldTypeStandard& field)
     m_bitmap = field.m_bitmap;
 }
 
-bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
+bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, [[maybe_unused]] wxRichTextDrawingContext& context, [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, [[maybe_unused]] unsigned int style)
 {
     if (m_displayStyle == wxRICHTEXT_FIELD_STYLE_COMPOSITE)
         return false; // USe default composite drawing
@@ -9609,7 +9609,7 @@ bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRic
     }
 }
 
-wxSize wxRichTextFieldTypeStandard::GetSize(wxRichTextField* WXUNUSED(obj), wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), unsigned int WXUNUSED(style)) const
+wxSize wxRichTextFieldTypeStandard::GetSize([[maybe_unused]] wxRichTextField* obj, wxDC& dc, [[maybe_unused]] wxRichTextDrawingContext& context, [[maybe_unused]] unsigned int style) const
 {
     int borderSize = 1;
     int maxDescent = 0;
@@ -12650,7 +12650,7 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
 }
 
 /// Draw the item
-bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int WXUNUSED(style))
+bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, [[maybe_unused]] int descent, [[maybe_unused]] unsigned int style)
 {
     if (!IsShown())
         return true;
@@ -12712,7 +12712,7 @@ bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_
 }
 
 /// Lay the item out
-bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int WXUNUSED(style))
+bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, [[maybe_unused]] unsigned int style)
 {
     wxSize imageSize;
     if (!LoadImageCache(dc, context, imageSize, false, parentRect.GetSize()))
@@ -12738,7 +12738,7 @@ bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), [[maybe_unused]] const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, [[maybe_unused]] int& descent, wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] unsigned int flags, [[maybe_unused]] const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -13316,7 +13316,7 @@ std::unique_ptr<wxRichTextBuffer> wxRichTextBufferDataObject::GetRichTextBuffer(
     return std::move(m_richTextBuffer);
 }
 
-wxDataFormat wxRichTextBufferDataObject::GetPreferredFormat(Direction WXUNUSED(dir)) const
+wxDataFormat wxRichTextBufferDataObject::GetPreferredFormat([[maybe_unused]] Direction dir) const
 {
     return m_formatRichTextBuffer;
 }
@@ -13367,7 +13367,7 @@ bool wxRichTextBufferDataObject::GetDataHere(void *pBuf) const
     return true;
 }
 
-bool wxRichTextBufferDataObject::SetData(size_t WXUNUSED(len), const void *buf)
+bool wxRichTextBufferDataObject::SetData([[maybe_unused]] size_t len, const void *buf)
 {
     wxString bufXML((const char*) buf, wxConvUTF8);
 

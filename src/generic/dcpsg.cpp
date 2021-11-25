@@ -376,13 +376,13 @@ void wxPostScriptDCImpl::Clear()
     //    wxFAIL_MSG( "wxPostScriptDCImpl::Clear not implemented." );
 }
 
-bool wxPostScriptDCImpl::DoFloodFill ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, const wxColour &WXUNUSED(col), [[maybe_unused]] wxFloodFillStyle style)
+bool wxPostScriptDCImpl::DoFloodFill ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, [[maybe_unused]] const wxColour &col, [[maybe_unused]] wxFloodFillStyle style)
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::FloodFill not implemented." );
     return false;
 }
 
-bool wxPostScriptDCImpl::DoGetPixel ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxColour * WXUNUSED(col)) const
+bool wxPostScriptDCImpl::DoGetPixel ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, [[maybe_unused]] wxColour * col) const
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::GetPixel not implemented." );
     return false;

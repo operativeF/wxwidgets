@@ -102,7 +102,7 @@ public:
     // called when a mouse is pressed while the popup is shown: return true
     // from here to prevent its normal processing by the popup (which consists
     // in dismissing it if the mouse is clicked outside it)
-    virtual bool ProcessLeftDown(wxMouseEvent& WXUNUSED(event))
+    virtual bool ProcessLeftDown([[maybe_unused]] wxMouseEvent& event)
         { return false; }
 
     // Override to implement delayed destruction of this window.

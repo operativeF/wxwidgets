@@ -523,7 +523,7 @@ wxTCPConnection::~wxTCPConnection()
     delete m_streams;
 }
 
-void wxTCPConnection::Compress(bool WXUNUSED(on))
+void wxTCPConnection::Compress([[maybe_unused]] bool on)
 {
     // TODO
 }

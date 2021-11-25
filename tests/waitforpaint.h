@@ -88,11 +88,11 @@ private:
 class WaitForPaint
 {
 public:
-    explicit WaitForPaint(wxWindow* WXUNUSED(win))
+    explicit WaitForPaint([[maybe_unused]] wxWindow* win)
     {
     }
 
-    void YieldUntilPainted(int WXUNUSED(timeoutInMS) = 250)
+    void YieldUntilPainted([[maybe_unused]] int timeoutInMS = 250)
     {
     }
 };

@@ -487,7 +487,7 @@ public:
         CheckHandlerArgument(static_cast<EventClass *>(NULL));
     }
 
-    void operator()(wxEvtHandler *WXUNUSED(handler), wxEvent& event) override
+    void operator()([[maybe_unused]] wxEvtHandler *handler, wxEvent& event) override
     {
         // If you get an error here like "must use .* or ->* to call
         // pointer-to-member function" then you probably tried to call
@@ -532,7 +532,7 @@ public:
         : m_handler(handler), m_handlerAddr(&handler)
         { }
 
-    void operator()(wxEvtHandler *WXUNUSED(handler), wxEvent& event) override
+    void operator()([[maybe_unused]] wxEvtHandler *handler, wxEvent& event) override
     {
         // If you get an error here like "must use '.*' or '->*' to call
         // pointer-to-member function" then you probably tried to call
@@ -4023,7 +4023,7 @@ protected:
     // connected to this object. If this method returns false, the handler is
     // not connected at all. If it returns true, it is connected using the
     // possibly modified fields of the given entry.
-    virtual bool OnDynamicBind(wxDynamicEventTableEntry& WXUNUSED(entry))
+    virtual bool OnDynamicBind([[maybe_unused]] wxDynamicEventTableEntry& entry)
     {
         return true;
     }

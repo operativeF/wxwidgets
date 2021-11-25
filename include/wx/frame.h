@@ -102,7 +102,7 @@ public:
     // returns true if processed
     bool ProcessCommand(int winid);
 #else
-    bool ProcessCommand(int WXUNUSED(winid)) { return false; }
+    bool ProcessCommand([[maybe_unused]] int winid) { return false; }
 #endif // wxUSE_MENUS
 
     // status bar functions

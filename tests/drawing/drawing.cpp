@@ -209,7 +209,7 @@ wxString GraphicsContextDrawingTestCase::GetPlatformTag() const
 
 wxGraphicsContext *
 GraphicsContextDrawingTestCase::ImageGraphicsContextLifeCycle::
-    BuildNewContext (wxSize expectedSize, double WXUNUSED(pointsPerInch),
+    BuildNewContext (wxSize expectedSize, [[maybe_unused]] double pointsPerInch,
     const wxFileName &targetFileName)
 {
     m_image = new wxImage (expectedSize);
@@ -243,9 +243,9 @@ GraphicsContextDrawingTestCase::ImageGraphicsContextLifeCycle::
 #if wxUSE_SVG
 wxGraphicsContext *
 GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
-    BuildNewContext (wxSize WXUNUSED(expectedSize),
-    double WXUNUSED(pointsPerInch),
-    const wxFileName &WXUNUSED(targetFileName))
+    BuildNewContext ([[maybe_unused]] wxSize expectedSize,
+    [[maybe_unused]] double pointsPerInch,
+    [[maybe_unused]] const wxFileName &targetFileName)
 {
     m_svgFileDc = NULL;
     //m_svg_file_dc = new wxSVGFileDC (target_file_name.GetFullPath(),
@@ -263,7 +263,7 @@ GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
 
 void
 GraphicsContextDrawingTestCase::SvgGraphicsContextLifeCycle::
-    CleanUp (wxGraphicsContext *WXUNUSED(gc))
+    CleanUp ([[maybe_unused]] wxGraphicsContext *gc)
 {
     wxDELETE (m_svgFileDc);
 }

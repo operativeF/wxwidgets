@@ -389,9 +389,9 @@ public:
     // loading a page or loading an image). The data are downloaded if and only if
     // OnOpeningURL returns true. If OnOpeningURL returns wxHtmlOpeningStatus::Redirect,
     // it must set *redirect to the new URL
-    virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType WXUNUSED(type),
-                                             const std::string& WXUNUSED(url),
-                                             std::string *WXUNUSED(redirect)) const
+    virtual wxHtmlOpeningStatus OnOpeningURL([[maybe_unused]] wxHtmlURLType type,
+                                             [[maybe_unused]] const std::string& url,
+                                             [[maybe_unused]] std::string *redirect) const
         { return wxHtmlOpeningStatus::Open; }
 
 #if wxUSE_CLIPBOARD

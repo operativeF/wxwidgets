@@ -28,7 +28,7 @@ public:
     // distinguish between multiple icons in a resource.
     wxIcon( const std::string& filename,
             wxBitmapType type = wxICON_DEFAULT_TYPE,
-            int WXUNUSED(desiredWidth)=-1, int WXUNUSED(desiredHeight)=-1 ) :
+            [[maybe_unused]] int desiredWidth=-1, [[maybe_unused]] int desiredHeight=-1 ) :
         wxBitmap(filename, type)
     {
     }
@@ -39,7 +39,7 @@ public:
     }
 
     bool LoadFile(const std::string& name, wxBitmapType flags,
-                  int WXUNUSED(desiredWidth), int WXUNUSED(desiredHeight))
+                  [[maybe_unused]] int desiredWidth, [[maybe_unused]] int desiredHeight)
         { return wxBitmap::LoadFile(name, flags); }
 
     // unhide the base class version

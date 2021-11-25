@@ -1643,7 +1643,7 @@ std::string wxGridCellChoiceEditor::GetValue() const
   return Combo()->GetValue();
 }
 
-void wxGridCellChoiceEditor::OnComboCloseUp(wxCommandEvent& WXUNUSED(evt))
+void wxGridCellChoiceEditor::OnComboCloseUp([[maybe_unused]] wxCommandEvent& evt)
 {
     wxGridCellEditorEvtHandler* evtHandler = wxDynamicCast(m_control->GetEventHandler(),
                                                            wxGridCellEditorEvtHandler);

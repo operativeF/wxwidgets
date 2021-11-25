@@ -274,7 +274,7 @@ void wxRibbonBar::OnMouseMove(wxMouseEvent& evt)
         HitTestRibbonButton(m_help_button_rect, evt.GetPosition(), m_help_button_hovered);
 }
 
-void wxRibbonBar::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonBar::OnMouseLeave([[maybe_unused]] wxMouseEvent& evt)
 {
     // The ribbon bar is (usually) at the top of a window, and at least on MSW, the mouse
     // can leave the window quickly and leave a tab in the hovered state.
@@ -823,7 +823,7 @@ void wxRibbonBar::SetArtProvider(wxRibbonArtProvider* art)
     delete old;
 }
 
-void wxRibbonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
 
@@ -924,7 +924,7 @@ void wxRibbonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
 
 }
 
-void wxRibbonBar::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonBar::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // Background painting done in main paint handler to reduce screen flicker
 }
@@ -1062,7 +1062,7 @@ void wxRibbonBar::OnMouseLeftDown(wxMouseEvent& evt)
     }
 }
 
-void wxRibbonBar::OnMouseLeftUp(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonBar::OnMouseLeftUp([[maybe_unused]] wxMouseEvent& evt)
 {
     if(!m_tab_scroll_buttons_shown)
     {
@@ -1285,7 +1285,7 @@ void wxRibbonBar::HideIfExpanded()
         HidePanels();
 }
 
-void wxRibbonBar::OnKillFocus(wxFocusEvent& WXUNUSED(evt))
+void wxRibbonBar::OnKillFocus([[maybe_unused]] wxFocusEvent& evt)
 {
     HideIfExpanded();
 }

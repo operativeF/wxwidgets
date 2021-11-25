@@ -56,7 +56,7 @@ public:
     virtual bool RealizeResource() { return false; }
 
     // Frees the resource
-    virtual bool FreeResource(bool WXUNUSED(force) = false) { return false; }
+    virtual bool FreeResource([[maybe_unused]] bool force = false) { return false; }
 
     virtual bool IsFree() const { return false; }
 

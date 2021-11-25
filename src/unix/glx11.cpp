@@ -442,7 +442,7 @@ static bool MakeCurrent(GLXDrawable drawable, GLXContext context);
 
 // Need this X error handler for the case context creation fails
 static bool g_ctxErrorOccurred = false;
-static int CTXErrorHandler( Display* WXUNUSED(dpy), XErrorEvent* WXUNUSED(ev) )
+static int CTXErrorHandler( [[maybe_unused]] Display* dpy, [[maybe_unused]] XErrorEvent* ev )
 {
     g_ctxErrorOccurred = true;
     return 0;

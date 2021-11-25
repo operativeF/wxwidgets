@@ -33,15 +33,15 @@ public:
     class wxAppProgressIndicator : public wxAppProgressIndicatorBase
     {
     public:
-        wxAppProgressIndicator(wxWindow* WXUNUSED(parent) = NULL,
-                               int WXUNUSED(maxValue) = 100)
+        wxAppProgressIndicator([[maybe_unused]] wxWindow* parent = NULL,
+                               [[maybe_unused]] int maxValue = 100)
         {
         }
 
         bool IsAvailable() const override { return false; }
 
-        void SetValue(int WXUNUSED(value)) override { }
-        void SetRange(int WXUNUSED(range)) override { }
+        void SetValue([[maybe_unused]] int value) override { }
+        void SetRange([[maybe_unused]] int range) override { }
         void Pulse() override { }
         void Reset() override { }
     };

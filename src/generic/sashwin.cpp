@@ -48,7 +48,7 @@ bool wxSashWindow::Create(wxWindow *parent,
     return wxWindow::Create(parent, id, pos, size, style, name);
 }
 
-void wxSashWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxSashWindow::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 
@@ -327,7 +327,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
     }
 }
 
-void wxSashWindow::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxSashWindow::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     SizeWindows();
 }

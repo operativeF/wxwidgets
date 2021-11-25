@@ -210,16 +210,16 @@ public:
     }
 
     // Get text attribute, return false of default attributes should be used
-    virtual bool GetAttr(const wxDataViewItem &WXUNUSED(item),
-                         unsigned int WXUNUSED(col),
-                         wxDataViewItemAttr &WXUNUSED(attr)) const
+    virtual bool GetAttr([[maybe_unused]] const wxDataViewItem &item,
+                         [[maybe_unused]] unsigned int col,
+                         [[maybe_unused]] wxDataViewItemAttr &attr) const
     {
         return false;
     }
 
     // Override this if you want to disable specific items
-    virtual bool IsEnabled(const wxDataViewItem &WXUNUSED(item),
-                           unsigned int WXUNUSED(col)) const
+    virtual bool IsEnabled([[maybe_unused]] const wxDataViewItem &item,
+                           [[maybe_unused]] unsigned int col) const
     {
         return true;
     }
@@ -270,8 +270,8 @@ protected:
     // Helper function used by the default Compare() implementation to compare
     // values of types it is not aware about. Can be overridden in the derived
     // classes that use columns of custom types.
-    virtual int DoCompareValues(const wxVariant& WXUNUSED(value1),
-                                const wxVariant& WXUNUSED(value2)) const
+    virtual int DoCompareValues([[maybe_unused]] const wxVariant& value1,
+                                [[maybe_unused]] const wxVariant& value2) const
     {
         return 0;
     }
@@ -299,14 +299,14 @@ public:
                                unsigned row, unsigned col) = 0;
 
     virtual bool
-    GetAttrByRow(unsigned WXUNUSED(row), unsigned WXUNUSED(col),
-                 wxDataViewItemAttr &WXUNUSED(attr)) const
+    GetAttrByRow([[maybe_unused]] unsigned row, [[maybe_unused]] unsigned col,
+                 [[maybe_unused]] wxDataViewItemAttr &attr) const
     {
         return false;
     }
 
-    virtual bool IsEnabledByRow(unsigned int WXUNUSED(row),
-                                unsigned int WXUNUSED(col)) const
+    virtual bool IsEnabledByRow([[maybe_unused]] unsigned int row,
+                                [[maybe_unused]] unsigned int col) const
     {
         return true;
     }
@@ -320,7 +320,7 @@ public:
 
     // implement some base class pure virtual directly
     wxDataViewItem
-    GetParent( const wxDataViewItem & WXUNUSED(item) ) const override
+    GetParent( const [[maybe_unused]] wxDataViewItem & item ) const override
     {
         // items never have valid parent in this model
         return wxDataViewItem();
@@ -681,7 +681,7 @@ public:
 
     // This should also be overridden to actually use the specified column for
     // sorting if using multiple columns is supported.
-    virtual void ToggleSortByColumn(int WXUNUSED(column)) { }
+    virtual void ToggleSortByColumn([[maybe_unused]] int column) { }
 
 
     // items management
@@ -733,7 +733,7 @@ public:
     virtual void HitTest( const wxPoint & point, wxDataViewItem &item, wxDataViewColumn* &column ) const = 0;
     virtual wxRect GetItemRect( const wxDataViewItem & item, const wxDataViewColumn *column = nullptr ) const = 0;
 
-    virtual bool SetRowHeight( int WXUNUSED(rowHeight) ) { return false; }
+    virtual bool SetRowHeight( [[maybe_unused]] int rowHeight ) { return false; }
 
     virtual void EditItem(const wxDataViewItem& item, const wxDataViewColumn *column) = 0;
 
@@ -1306,7 +1306,7 @@ public:
         { return true; }
     unsigned int GetColumnCount() const override
         { return 1; }
-    std::string GetColumnType( unsigned int WXUNUSED(col) ) const override
+    std::string GetColumnType( [[maybe_unused]] unsigned int col ) const override
         { return "wxDataViewIconText"; }
 
     wxDataViewTreeStoreNode *FindNode( const wxDataViewItem &item ) const;

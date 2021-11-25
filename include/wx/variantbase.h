@@ -63,11 +63,11 @@ public:
         : m_count(1)
     { }
 
-    virtual bool Write(std::ostream& WXUNUSED(str)) const { return false; }
-    virtual bool Read(std::istream& WXUNUSED(str)) { return false; }
+    virtual bool Write([[maybe_unused]] std::ostream& str) const { return false; }
+    virtual bool Read([[maybe_unused]] std::istream& str) { return false; }
 
-    virtual bool Write(wxString& WXUNUSED(str)) const { return false; }
-    virtual bool Read(wxString& WXUNUSED(str)) { return false; }
+    virtual bool Write([[maybe_unused]] wxString& str) const { return false; }
+    virtual bool Read([[maybe_unused]] wxString& str) { return false; }
 
     // Override these to provide common functionality
     virtual bool Eq(wxVariantData& data) const = 0;
@@ -116,7 +116,7 @@ public:
     void Set(const T& d) { m_data =  d; }
 
     // Override these to provide common functionality
-    virtual bool Eq(wxVariantData& WXUNUSED(data)) const
+    virtual bool Eq([[maybe_unused]] wxVariantData& data) const
         { return false; /* FIXME!! */    }
 
     // What type is it? Return a string name.

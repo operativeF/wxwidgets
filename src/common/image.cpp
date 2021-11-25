@@ -1854,7 +1854,7 @@ wxImage wxImage::ConvertToGreyscale(double weight_r, double weight_g, double wei
 }
 
 // TODO-C++11: Replace with a lambda function.
-static void DoMakeMono(wxImage *WXUNUSED(image), unsigned char *rgb, RGBValue rgbValue)
+static void DoMakeMono([[maybe_unused]] wxImage *image, unsigned char *rgb, RGBValue rgbValue)
 {
     const bool on = (rgb[0] == rgbValue.red) && (rgb[1] == rgbValue.green) && (rgb[2] == rgbValue.blue);
     wxColour::MakeMono(rgb, rgb + 1, rgb + 2, on);
@@ -3318,7 +3318,7 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
 }
 
 // TODO-C++11: Replace with a lambda function.
-static void DoRotateHue(wxImage *WXUNUSED(image), unsigned char *rgb, double angle)
+static void DoRotateHue([[maybe_unused]] wxImage *image, unsigned char *rgb, double angle)
 {
     RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
@@ -3350,7 +3350,7 @@ void wxImage::RotateHue(double angle)
 }
 
 // TODO-C++11: Replace with a lambda function.
-static void DoChangeSaturation(wxImage *WXUNUSED(image), unsigned char *rgb, double factor)
+static void DoChangeSaturation([[maybe_unused]] wxImage *image, unsigned char *rgb, double factor)
 {
     RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
@@ -3382,7 +3382,7 @@ void wxImage::ChangeSaturation(double factor)
 }
 
 // TODO-C++11: Replace with a lambda function.
-static void DoChangeBrightness(wxImage *WXUNUSED(image), unsigned char *rgb, double factor)
+static void DoChangeBrightness([[maybe_unused]] wxImage *image, unsigned char *rgb, double factor)
 {
     RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);

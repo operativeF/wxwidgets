@@ -517,7 +517,7 @@ bool wxGCDCImpl::DoFloodFill([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoor
     return false;
 }
 
-bool wxGCDCImpl::DoGetPixel( [[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxColour *WXUNUSED(col) ) const
+bool wxGCDCImpl::DoGetPixel( [[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, [[maybe_unused]] wxColour *col ) const
 {
     //  wxCHECK_MSG( 0 , false, "wxGCDC(cg)::DoGetPixel - not implemented" );
     return false;

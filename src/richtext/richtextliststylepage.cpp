@@ -862,7 +862,7 @@ void wxRichTextListStylePage::TransferAndPreview()
  * wxEVT_SPINCTRL event handler for ID_RICHTEXTLISTSTYLEPAGE_LEVEL
  */
 
-void wxRichTextListStylePage::OnLevelUpdated( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnLevelUpdated( [[maybe_unused]] wxSpinEvent& event )
 {
     if (!m_dontUpdate)
     {
@@ -901,7 +901,7 @@ void wxRichTextListStylePage::OnLevelDown( wxSpinEvent& event )
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_LEVEL
  */
 
-void wxRichTextListStylePage::OnLevelTextUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnLevelTextUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     // Can cause problems
 #if 0
@@ -929,7 +929,7 @@ void wxRichTextListStylePage::OnLevelUIUpdate( wxUpdateUIEvent& event )
  * wxEVT_LISTBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_STYLELISTBOX
  */
 
-void wxRichTextListStylePage::OnStylelistboxSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnStylelistboxSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -947,7 +947,7 @@ void wxRichTextListStylePage::OnSymbolstaticUpdate( wxUpdateUIEvent& event )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL
  */
 
-void wxRichTextListStylePage::OnSymbolctrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSymbolctrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -956,7 +956,7 @@ void wxRichTextListStylePage::OnSymbolctrlSelected( wxCommandEvent& WXUNUSED(eve
  * wxEVT_TEXT event handler for ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL
  */
 
-void wxRichTextListStylePage::OnSymbolctrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSymbolctrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -974,7 +974,7 @@ void wxRichTextListStylePage::OnSymbolctrlUIUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTBULLETSPAGE_CHOOSE_SYMBOL
  */
 
-void wxRichTextListStylePage::OnChooseSymbolClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnChooseSymbolClick( [[maybe_unused]] wxCommandEvent& event )
 {
     int sel = m_styleListBox->GetSelection();
     if (sel == wxRICHTEXT_BULLETINDEX_SYMBOL)
@@ -1010,7 +1010,7 @@ void wxRichTextListStylePage::OnChooseSymbolUpdate( wxUpdateUIEvent& event )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_SYMBOLFONTCTRL
  */
 
-void wxRichTextListStylePage::OnSymbolfontctrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSymbolfontctrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1019,7 +1019,7 @@ void wxRichTextListStylePage::OnSymbolfontctrlSelected( wxCommandEvent& WXUNUSED
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_SYMBOLFONTCTRL
  */
 
-void wxRichTextListStylePage::OnSymbolfontctrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSymbolfontctrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1037,7 +1037,7 @@ void wxRichTextListStylePage::OnSymbolfontctrlUIUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTLISTSTYLEPAGE__PARENTHESESCTRL
  */
 
-void wxRichTextListStylePage::OnParenthesesctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnParenthesesctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1058,7 +1058,7 @@ void wxRichTextListStylePage::OnParenthesesctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_PERIODCTRL
  */
 
-void wxRichTextListStylePage::OnPeriodctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnPeriodctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1079,7 +1079,7 @@ void wxRichTextListStylePage::OnPeriodctrlUpdate( wxUpdateUIEvent& event )
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_ALIGNLEFT
  */
 
-void wxRichTextListStylePage::OnRichtextliststylepageAlignleftSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRichtextliststylepageAlignleftSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1088,7 +1088,7 @@ void wxRichTextListStylePage::OnRichtextliststylepageAlignleftSelected( wxComman
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_ALIGNRIGHT
  */
 
-void wxRichTextListStylePage::OnRichtextliststylepageAlignrightSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRichtextliststylepageAlignrightSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1097,7 +1097,7 @@ void wxRichTextListStylePage::OnRichtextliststylepageAlignrightSelected( wxComma
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_JUSTIFIED
  */
 
-void wxRichTextListStylePage::OnRichtextliststylepageJustifiedSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRichtextliststylepageJustifiedSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1106,7 +1106,7 @@ void wxRichTextListStylePage::OnRichtextliststylepageJustifiedSelected( wxComman
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_CENTERED
  */
 
-void wxRichTextListStylePage::OnRichtextliststylepageCenteredSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRichtextliststylepageCenteredSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1115,7 +1115,7 @@ void wxRichTextListStylePage::OnRichtextliststylepageCenteredSelected( wxCommand
  * wxEVT_RADIOBUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_ALIGNINDETERMINATE
  */
 
-void wxRichTextListStylePage::OnRichtextliststylepageAlignindeterminateSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRichtextliststylepageAlignindeterminateSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1124,7 +1124,7 @@ void wxRichTextListStylePage::OnRichtextliststylepageAlignindeterminateSelected(
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_INDENTLEFT
  */
 
-void wxRichTextListStylePage::OnIndentLeftUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnIndentLeftUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1133,7 +1133,7 @@ void wxRichTextListStylePage::OnIndentLeftUpdated( wxCommandEvent& WXUNUSED(even
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_INDENTFIRSTLINE
  */
 
-void wxRichTextListStylePage::OnIndentFirstLineUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnIndentFirstLineUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1142,7 +1142,7 @@ void wxRichTextListStylePage::OnIndentFirstLineUpdated( wxCommandEvent& WXUNUSED
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_INDENTRIGHT
  */
 
-void wxRichTextListStylePage::OnIndentRightUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnIndentRightUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1151,7 +1151,7 @@ void wxRichTextListStylePage::OnIndentRightUpdated( wxCommandEvent& WXUNUSED(eve
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_SPACINGBEFORE
  */
 
-void wxRichTextListStylePage::OnSpacingBeforeUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSpacingBeforeUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1160,7 +1160,7 @@ void wxRichTextListStylePage::OnSpacingBeforeUpdated( wxCommandEvent& WXUNUSED(e
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_SPACINGAFTER
  */
 
-void wxRichTextListStylePage::OnSpacingAfterUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnSpacingAfterUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1169,7 +1169,7 @@ void wxRichTextListStylePage::OnSpacingAfterUpdated( wxCommandEvent& WXUNUSED(ev
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_LINESPACING
  */
 
-void wxRichTextListStylePage::OnLineSpacingSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnLineSpacingSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1237,7 +1237,7 @@ void wxRichTextListStylePage::OnStandardBulletUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXTLISTSTYLEPAGE_CHOOSE_FONT
  */
 
-void wxRichTextListStylePage::OnChooseFontClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnChooseFontClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxRichTextAttr* attr = GetAttributesForSelection();
 
@@ -1265,7 +1265,7 @@ void wxRichTextListStylePage::OnNamestaticUpdate( wxUpdateUIEvent& event )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_NAMECTRL
  */
 
-void wxRichTextListStylePage::OnNamectrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnNamectrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1274,7 +1274,7 @@ void wxRichTextListStylePage::OnNamectrlSelected( wxCommandEvent& WXUNUSED(event
  * wxEVT_TEXT event handler for ID_RICHTEXTLISTSTYLEPAGE_NAMECTRL
  */
 
-void wxRichTextListStylePage::OnNamectrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnNamectrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1291,7 +1291,7 @@ void wxRichTextListStylePage::OnNamectrlUIUpdate( wxUpdateUIEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_RIGHTPARENTHESISCTRL
  */
 
-void wxRichTextListStylePage::OnRightParenthesisCtrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnRightParenthesisCtrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }
@@ -1312,7 +1312,7 @@ void wxRichTextListStylePage::OnRightParenthesisCtrlUpdate( wxUpdateUIEvent& eve
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTLISTSTYLEPAGE_BULLETALIGNMENTCTRL
  */
 
-void wxRichTextListStylePage::OnBulletAlignmentCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextListStylePage::OnBulletAlignmentCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     TransferAndPreview();
 }

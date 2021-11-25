@@ -47,7 +47,7 @@ protected:
     // Only __WXMSW__ has a non-trivial implementation currently.
     (bool enable, wxWindow* window);
 #else
-    (bool WXUNUSED(enable), wxWindow* WXUNUSED(window)) { }
+    ([[maybe_unused]] bool enable, [[maybe_unused]] wxWindow* window) { }
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
 
 private:

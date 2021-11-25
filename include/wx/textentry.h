@@ -144,7 +144,7 @@ public:
 
     // set the max number of characters which may be entered in a single line
     // text control
-    virtual void SetMaxLength(unsigned long WXUNUSED(len)) { }
+    virtual void SetMaxLength(unsigned [[maybe_unused]] long len) { }
 
     // convert any lower-case characters to upper-case on the fly in this entry
     virtual void ForceUpper();
@@ -246,7 +246,7 @@ protected:
     // the other one(s)
     virtual bool DoAutoCompleteStrings(const std::vector<std::string>& WXUNUSED(choices))
         { return false; }
-    virtual bool DoAutoCompleteFileNames(unsigned int WXUNUSED(flags)) // wxFILE | wxDIR
+    virtual bool DoAutoCompleteFileNames([[maybe_unused]] unsigned int flags) // wxFILE | wxDIR
         { return false; }
     virtual bool DoAutoCompleteCustom(wxTextCompleter *completer);
 
@@ -299,7 +299,7 @@ private:
     // of the text changed events
     //
     // initially the generation of the events is enabled
-    virtual void EnableTextChangedEvents(bool WXUNUSED(enable)) { }
+    virtual void EnableTextChangedEvents([[maybe_unused]] bool enable) { }
 
     // return true if the events are currently not suppressed
     bool EventsAllowed() const { return m_eventsBlock == 0; }

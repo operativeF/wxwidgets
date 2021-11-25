@@ -205,7 +205,7 @@ void wxStaticBitmap::WXHandleSize(wxSizeEvent& event)
     event.Skip();
 }
 
-void wxStaticBitmap::DoPaintManually(wxPaintEvent& WXUNUSED(event))
+void wxStaticBitmap::DoPaintManually([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

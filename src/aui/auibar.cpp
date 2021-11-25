@@ -1446,7 +1446,7 @@ void wxAuiToolBar::DoIdleUpdate()
     }
 }
 
-void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
+void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
 {
     wxSize client_size = GetClientSize();
 
@@ -1580,7 +1580,7 @@ void wxAuiToolBar::OnSysColourChanged(wxSysColourChangedEvent& event)
     Refresh();
 }
 
-void wxAuiToolBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxAuiToolBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     wxRect cli_rect(wxPoint(0,0), GetClientSize());
@@ -1678,7 +1678,7 @@ void wxAuiToolBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
     }
 }
 
-void wxAuiToolBar::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxAuiToolBar::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // empty
 }
@@ -2109,7 +2109,7 @@ void wxAuiToolBar::OnLeaveWindow(wxMouseEvent& evt)
     DoResetMouseState();
 }
 
-void wxAuiToolBar::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(evt))
+void wxAuiToolBar::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& evt)
 {
     m_dragging = false;
 

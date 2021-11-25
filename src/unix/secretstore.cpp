@@ -134,8 +134,8 @@ public:
     }
 
     virtual bool Load([[maybe_unused]] const wxString& service,
-                      wxString* WXUNUSED(user),
-                      wxSecretValueImpl** WXUNUSED(secret),
+                      [[maybe_unused]] wxString* user,
+                      [[maybe_unused]] wxSecretValueImpl** secret,
                       wxString& errmsg) const override
     {
         errmsg = m_error;

@@ -119,7 +119,7 @@ bool wxWebViewEdgeImpl::Create()
 }
 
 HRESULT wxWebViewEdgeImpl::OnEnvironmentCreated(
-    HRESULT WXUNUSED(result), ICoreWebView2Environment* environment)
+    [[maybe_unused]] HRESULT result, ICoreWebView2Environment* environment)
 {
     environment->QueryInterface(IID_PPV_ARGS(&m_webViewEnvironment));
     m_webViewEnvironment->CreateCoreWebView2Controller(
@@ -297,7 +297,7 @@ HRESULT wxWebViewEdgeImpl::OnNewWindowRequested(ICoreWebView2* WXUNUSED(sender),
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged(ICoreWebView2* WXUNUSED(sender), IUnknown* WXUNUSED(args))
+HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged(ICoreWebView2* WXUNUSED(sender), [[maybe_unused]] IUnknown* args)
 {
     wxWebViewEvent event(wxEVT_WEBVIEW_TITLE_CHANGED,
         m_ctrl->GetId(), m_ctrl->GetCurrentURL(), "");
@@ -307,7 +307,7 @@ HRESULT wxWebViewEdgeImpl::OnDocumentTitleChanged(ICoreWebView2* WXUNUSED(sender
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnContentLoading(ICoreWebView2* WXUNUSED(sender), ICoreWebView2ContentLoadingEventArgs* WXUNUSED(args))
+HRESULT wxWebViewEdgeImpl::OnContentLoading(ICoreWebView2* WXUNUSED(sender), ICoreWebView2[[maybe_unused]] ContentLoadingEventArgs* args)
 {
     wxWebViewEvent event(wxEVT_WEBVIEW_LOADED, m_ctrl->GetId(),
         m_ctrl->GetCurrentURL(), "");
@@ -316,7 +316,7 @@ HRESULT wxWebViewEdgeImpl::OnContentLoading(ICoreWebView2* WXUNUSED(sender), ICo
     return S_OK;
 }
 
-HRESULT wxWebViewEdgeImpl::OnContainsFullScreenElementChanged(ICoreWebView2* WXUNUSED(sender), IUnknown* WXUNUSED(args))
+HRESULT wxWebViewEdgeImpl::OnContainsFullScreenElementChanged(ICoreWebView2* WXUNUSED(sender), [[maybe_unused]] IUnknown* args)
 {
     BOOL containsFullscreenEvent;
     HRESULT hr = m_webView->get_ContainsFullScreenElement(&containsFullscreenEvent);
@@ -650,7 +650,7 @@ void wxWebViewEdge::Stop()
         m_impl->m_webView->Stop();
 }
 
-void wxWebViewEdge::Reload(wxWebViewReloadFlags WXUNUSED(flags))
+void wxWebViewEdge::Reload([[maybe_unused]] wxWebViewReloadFlags flags)
 {
     if (m_impl->m_webView)
         m_impl->m_webView->Reload();
@@ -732,7 +732,7 @@ void wxWebViewEdge::Redo()
 }
 
 //Editing functions
-void wxWebViewEdge::SetEditable(bool WXUNUSED(enable))
+void wxWebViewEdge::SetEditable([[maybe_unused]] bool enable)
 {
     wxLogError("Not available");
 }

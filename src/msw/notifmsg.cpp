@@ -72,7 +72,7 @@ public:
         m_icon = icon;
     }
 
-    bool AddAction([[maybe_unused]] wxWindowID actionid, const std::string &WXUNUSED(label)) override
+    bool AddAction([[maybe_unused]] wxWindowID actionid, [[maybe_unused]] const std::string &label) override
     {
         // Actions are not supported in balloon notifications
         return false;
@@ -178,7 +178,7 @@ void wxBalloonNotifMsgImpl::OnIconHidden()
         wxBalloonNotifMsgImpl::ReleaseIcon();
 }
 
-void wxBalloonNotifMsgImpl::OnTimeout(wxTaskBarIconEvent& WXUNUSED(event))
+void wxBalloonNotifMsgImpl::OnTimeout([[maybe_unused]] wxTaskBarIconEvent& event)
 {
     wxCommandEvent evt(wxEVT_NOTIFICATION_MESSAGE_DISMISSED);
     ProcessNotificationEvent(evt);
@@ -186,7 +186,7 @@ void wxBalloonNotifMsgImpl::OnTimeout(wxTaskBarIconEvent& WXUNUSED(event))
     OnIconHidden();
 }
 
-void wxBalloonNotifMsgImpl::OnClick(wxTaskBarIconEvent& WXUNUSED(event))
+void wxBalloonNotifMsgImpl::OnClick([[maybe_unused]] wxTaskBarIconEvent& event)
 {
     wxCommandEvent evt(wxEVT_NOTIFICATION_MESSAGE_CLICK);
     ProcessNotificationEvent(evt);

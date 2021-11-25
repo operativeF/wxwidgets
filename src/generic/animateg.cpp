@@ -519,7 +519,7 @@ void wxGenericAnimationCtrl::DisposeToBackground(wxDC& dc, const wxPoint &pos, c
 // wxAnimationCtrl - event handlers
 // ----------------------------------------------------------------------------
 
-void wxGenericAnimationCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericAnimationCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     // VERY IMPORTANT: the wxPaintDC *must* be created in any case
     wxPaintDC dc(this);
@@ -539,7 +539,7 @@ void wxGenericAnimationCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     }
 }
 
-void wxGenericAnimationCtrl::OnTimer(wxTimerEvent &WXUNUSED(event))
+void wxGenericAnimationCtrl::OnTimer([[maybe_unused]] wxTimerEvent &event)
 {
     m_currentFrame++;
     if (m_currentFrame == m_animation.GetFrameCount())
@@ -571,7 +571,7 @@ void wxGenericAnimationCtrl::OnTimer(wxTimerEvent &WXUNUSED(event))
     m_timer.Start(delay, true);
 }
 
-void wxGenericAnimationCtrl::OnSize(wxSizeEvent &WXUNUSED(event))
+void wxGenericAnimationCtrl::OnSize([[maybe_unused]] wxSizeEvent &event)
 {
     // NB: resizing an animation control may take a lot of time
     //     for big animations as the backing store must be

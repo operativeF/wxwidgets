@@ -19,7 +19,7 @@
 #endif
 
 
-wxColour wxSystemSettingsNative::GetColour(wxSystemColour WXUNUSED(index))
+wxColour wxSystemSettingsNative::GetColour([[maybe_unused]] wxSystemColour index)
 {
     // overridden by wxSystemSettings::GetColour in wxUniversal
     return wxColour(0,0,0);

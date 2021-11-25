@@ -211,7 +211,7 @@ void wxEditableListBox::OnItemSelected(wxListEvent& event)
         m_bDel->Enable(m_selection < m_listCtrl->GetItemCount()-1);
 }
 
-void wxEditableListBox::OnNewItem(wxCommandEvent& WXUNUSED(event))
+void wxEditableListBox::OnNewItem([[maybe_unused]] wxCommandEvent& event)
 {
     m_listCtrl->SetItemState(m_listCtrl->GetItemCount()-1,
                              ListStates::Selected, ListStates::Selected);
@@ -236,14 +236,14 @@ void wxEditableListBox::OnEndLabelEdit(wxListEvent& event)
     }
 }
 
-void wxEditableListBox::OnDelItem(wxCommandEvent& WXUNUSED(event))
+void wxEditableListBox::OnDelItem([[maybe_unused]] wxCommandEvent& event)
 {
     m_listCtrl->DeleteItem(m_selection);
     m_listCtrl->SetItemState(m_selection,
                              ListStates::Selected, ListStates::Selected);
 }
 
-void wxEditableListBox::OnEditItem(wxCommandEvent& WXUNUSED(event))
+void wxEditableListBox::OnEditItem([[maybe_unused]] wxCommandEvent& event)
 {
     m_listCtrl->EditLabel(m_selection);
 }
@@ -264,14 +264,14 @@ void wxEditableListBox::SwapItems(long i1, long i2)
 }
 
 
-void wxEditableListBox::OnUpItem(wxCommandEvent& WXUNUSED(event))
+void wxEditableListBox::OnUpItem([[maybe_unused]] wxCommandEvent& event)
 {
     SwapItems(m_selection - 1, m_selection);
     m_listCtrl->SetItemState(m_selection - 1,
                              ListStates::Selected, ListStates::Selected);
 }
 
-void wxEditableListBox::OnDownItem(wxCommandEvent& WXUNUSED(event))
+void wxEditableListBox::OnDownItem([[maybe_unused]] wxCommandEvent& event)
 {
     SwapItems(m_selection + 1, m_selection);
     m_listCtrl->SetItemState(m_selection + 1,

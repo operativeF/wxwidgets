@@ -851,7 +851,7 @@ STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
     return S_OK;
 }
 
-STDMETHODIMP wxIDataObject::GetCanonicalFormatEtc(FORMATETC *WXUNUSED(pFormatetcIn),
+STDMETHODIMP wxIDataObject::GetCanonicalFormatEtc([[maybe_unused]] FORMATETC *pFormatetcIn,
                                                   FORMATETC *pFormatetcOut)
 {
     wxLogTrace(wxTRACE_OleCalls, "wxIDataObject::GetCanonicalFormatEtc");
@@ -905,7 +905,7 @@ STDMETHODIMP wxIDataObject::EnumFormatEtc(DWORD dwDir,
 
 STDMETHODIMP wxIDataObject::DAdvise(FORMATETC   *WXUNUSED(pformatetc),
                                     DWORD        WXUNUSED(advf),
-                                    IAdviseSink *WXUNUSED(pAdvSink),
+                                    [[maybe_unused]] IAdviseSink *pAdvSink,
                                     DWORD       *WXUNUSED(pdwConnection))
 {
   return OLE_E_ADVISENOTSUPPORTED;

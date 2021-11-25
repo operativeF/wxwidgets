@@ -193,7 +193,7 @@ void wxWinHTTPCloseHandle(HINTERNET hInternet)
 }
 
 static void CALLBACK wxRequestStatusCallback(
-    HINTERNET WXUNUSED(hInternet),
+    [[maybe_unused]] HINTERNET hInternet,
     DWORD_PTR dwContext,
     DWORD dwInternetStatus,
     LPVOID lpvStatusInformation,

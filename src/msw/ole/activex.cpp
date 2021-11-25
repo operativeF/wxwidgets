@@ -1159,7 +1159,7 @@ void wxActiveXContainer::OnSize(wxSizeEvent& event)
 //
 // Called when the parent is resized - repaints the ActiveX control
 //---------------------------------------------------------------------------
-void wxActiveXContainer::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxActiveXContainer::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     // Draw only when control is windowless or deactivated

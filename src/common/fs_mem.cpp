@@ -85,7 +85,7 @@ bool wxMemoryFSHandlerBase::CanOpen(const std::string& location)
     return GetProtocol(location) == "memory";
 }
 
-wxFSFile * wxMemoryFSHandlerBase::OpenFile(wxFileSystem& WXUNUSED(fs),
+wxFSFile * wxMemoryFSHandlerBase::OpenFile([[maybe_unused]] wxFileSystem& fs,
                                            const std::string& location)
 {
     wxMemoryFSHash::const_iterator i = m_Hash.find(GetRightLocation(location));

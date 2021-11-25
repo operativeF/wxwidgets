@@ -51,9 +51,9 @@ public:
     // uses this one for all of them, including the standard ones.
 
     virtual bool WXActivateCell([[maybe_unused]] const wxRect& cell,
-                                wxDataViewModel *WXUNUSED(model),
-                                const wxDataViewItem & WXUNUSED(item),
-                                unsigned int WXUNUSED(col),
+                                [[maybe_unused]] wxDataViewModel *model,
+                                const [[maybe_unused]] wxDataViewItem & item,
+                                [[maybe_unused]] unsigned int col,
                                 [[maybe_unused]] const wxMouseEvent* mouseEvent)
         { return false; }
 

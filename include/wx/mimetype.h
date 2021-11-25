@@ -292,7 +292,7 @@ public:
         const std::string& GetMimeType() const { return m_mimetype; }
 
         // override this function in derived class
-        virtual std::string GetParamValue(const std::string& WXUNUSED(name)) const
+        virtual std::string GetParamValue([[maybe_unused]] const std::string& name) const
             { return {}; }
 
         // virtual dtor as in any base class

@@ -88,12 +88,12 @@ void wxObjectXmlWriter::DoBeginWriteTopLevelEntry( const wxString &name )
     m_data->Push( pnode );
 }
 
-void wxObjectXmlWriter::DoEndWriteTopLevelEntry( const wxString &WXUNUSED(name) )
+void wxObjectXmlWriter::DoEndWriteTopLevelEntry( [[maybe_unused]] const wxString &name )
 {
     m_data->Pop();
 }
 
-void wxObjectXmlWriter::DoBeginWriteObject(const wxObject *WXUNUSED(object),
+void wxObjectXmlWriter::DoBeginWriteObject([[maybe_unused]] const wxObject *object,
                                      const wxClassInfo *classInfo,
                                      int objectID, const wxStringToAnyHashMap &metadata   )
 {
@@ -112,8 +112,8 @@ void wxObjectXmlWriter::DoBeginWriteObject(const wxObject *WXUNUSED(object),
     m_data->Push( pnode );
 }
 
-void wxObjectXmlWriter::DoEndWriteObject(const wxObject *WXUNUSED(object),
-                                   const wxClassInfo *WXUNUSED(classInfo),
+void wxObjectXmlWriter::DoEndWriteObject([[maybe_unused]] const wxObject *object,
+                                   [[maybe_unused]] const wxClassInfo *classInfo,
                                    [[maybe_unused]] int objectID )
 {
     m_data->Pop();
@@ -146,7 +146,7 @@ void wxObjectXmlWriter::DoBeginWriteProperty(const wxPropertyInfo *pi )
     m_data->Push( pnode );
 }
 
-void wxObjectXmlWriter::DoEndWriteProperty(const wxPropertyInfo *WXUNUSED(propInfo) )
+void wxObjectXmlWriter::DoEndWriteProperty([[maybe_unused]] const wxPropertyInfo *propInfo )
 {
     m_data->Pop();
 }
@@ -166,9 +166,9 @@ void wxObjectXmlWriter::DoWriteNullObject()
     m_data->m_current->AddChild(pnode);
 }
 
-void wxObjectXmlWriter::DoWriteDelegate( const wxObject *WXUNUSED(object),
+void wxObjectXmlWriter::DoWriteDelegate( [[maybe_unused]] const wxObject *object,
                                    [[maybe_unused]] const wxClassInfo* classInfo,
-                                   const wxPropertyInfo *WXUNUSED(pi),
+                                   [[maybe_unused]] const wxPropertyInfo *pi,
                                    const wxObject *eventSink, int sinkObjectID,
                                    [[maybe_unused]] const wxClassInfo* eventSinkClassInfo,
                                    const wxHandlerInfo* handlerInfo )

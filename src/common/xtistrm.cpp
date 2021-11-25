@@ -199,7 +199,7 @@ private:
 
 void wxObjectWriter::WriteOneProperty( const wxObject *obj, const wxClassInfo* ci,
                                  const wxPropertyInfo* pi, wxObjectWriterCallback *writercallback,
-                                 wxObjectWriterInternalPropertiesData *WXUNUSED(data) )
+                                 [[maybe_unused]] wxObjectWriterInternalPropertiesData *data )
 {
     if ( pi->GetFlags() & wxPROP_DONT_STREAM )
         return;
@@ -478,7 +478,7 @@ wxObjectRuntimeReaderCallback::~wxObjectRuntimeReaderCallback()
 }
 
 void wxObjectRuntimeReaderCallback::AllocateObject(int objectID, wxClassInfo *classInfo,
-                                          wxStringToAnyHashMap &WXUNUSED(metadata))
+                                          [[maybe_unused]] wxStringToAnyHashMap &metadata)
 {
     wxObject *O;
     O = classInfo->CreateObject();
@@ -491,7 +491,7 @@ void wxObjectRuntimeReaderCallback::CreateObject(int objectID,
                                         wxAny *params,
                                         int *objectIdValues,
                                         const wxClassInfo **objectClassInfos,
-                                        wxStringToAnyHashMap &WXUNUSED(metadata))
+                                        [[maybe_unused]] wxStringToAnyHashMap &metadata)
 {
     wxObject *o;
     o = m_data->wxGetObject(objectID);
@@ -520,7 +520,7 @@ void wxObjectRuntimeReaderCallback::ConstructObject(int objectID,
                                         wxAny *params,
                                         int *objectIdValues,
                                         const wxClassInfo **objectClassInfos,
-                                        wxStringToAnyHashMap &WXUNUSED(metadata))
+                                        [[maybe_unused]] wxStringToAnyHashMap &metadata)
 {
     wxObject *o;
     for ( int i = 0; i < paramCount; ++i )
@@ -544,7 +544,7 @@ void wxObjectRuntimeReaderCallback::ConstructObject(int objectID,
 }
 
 
-void wxObjectRuntimeReaderCallback::DestroyObject(int objectID, wxClassInfo *WXUNUSED(classInfo))
+void wxObjectRuntimeReaderCallback::DestroyObject(int objectID, [[maybe_unused]] wxClassInfo *classInfo)
 {
     wxObject *o;
     o = m_data->wxGetObject(objectID);
@@ -585,9 +585,9 @@ void wxObjectRuntimeReaderCallback::SetPropertyAsObject(int objectID,
 }
 
 void wxObjectRuntimeReaderCallback::SetConnect(int eventSourceObjectID,
-                                      const wxClassInfo *WXUNUSED(eventSourceClassInfo),
+                                      [[maybe_unused]] const wxClassInfo *eventSourceClassInfo,
                                       const wxPropertyInfo *delegateInfo,
-                                      const wxClassInfo *WXUNUSED(eventSinkClassInfo),
+                                      [[maybe_unused]] const wxClassInfo *eventSinkClassInfo,
                                       const wxHandlerInfo* handlerInfo,
                                       int eventSinkObjectID )
 {

@@ -651,7 +651,7 @@ public:
     // Note that while this method doesn't do anything by default, it should
     // almost always be overridden in the derived classes and should have been
     // pure virtual if not for backwards compatibility constraints.
-    virtual bool InformFirstDirection( int WXUNUSED(direction), int WXUNUSED(size), int WXUNUSED(availableOtherDir) )
+    virtual bool InformFirstDirection( [[maybe_unused]] int direction, [[maybe_unused]] int size, [[maybe_unused]] int availableOtherDir )
         { return false; }
 
     void SetMinSize( wxSize size )
@@ -684,7 +684,7 @@ public:
 
     // This method should be overridden but isn't pure virtual for backwards
     // compatibility.
-    virtual void RepositionChildren(wxSize WXUNUSED(minSize))
+    virtual void RepositionChildren([[maybe_unused]] wxSize minSize)
     {
         RecalcSizes();
     }

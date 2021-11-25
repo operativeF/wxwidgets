@@ -861,7 +861,7 @@ void wxRichTextSizePage::OnRichtextHeightUpdate( wxUpdateUIEvent& event )
  * wxEVT_BUTTON event handler for ID_RICHTEXT_PARA_UP
  */
 
-void wxRichTextSizePage::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextSizePage::OnRichtextParaUpClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxRichTextFormattingDialog* dialog = wxRichTextFormattingDialog::GetDialog(this);
     if (!dialog || !dialog->wxGetObject())
@@ -909,7 +909,7 @@ void wxRichTextSizePage::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event) 
  * wxEVT_BUTTON event handler for ID_RICHTEXT_DOWN
  */
 
-void wxRichTextSizePage::OnRichtextParaDownClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextSizePage::OnRichtextParaDownClick( [[maybe_unused]] wxCommandEvent& event )
 {
     wxRichTextFormattingDialog* dialog = wxRichTextFormattingDialog::GetDialog(this);
     if (!dialog || !dialog->wxGetObject())

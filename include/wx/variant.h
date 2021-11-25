@@ -61,10 +61,10 @@ public:
     // Override these to provide common functionality
     virtual bool Eq(wxVariantData& data) const = 0;
 
-    virtual bool Write(std::ostream& WXUNUSED(str)) const { return false; }
-    virtual bool Write(wxString& WXUNUSED(str)) const { return false; }
-    virtual bool Read(std::istream& WXUNUSED(str)) { return false; }
-    virtual bool Read(wxString& WXUNUSED(str)) { return false; }
+    virtual bool Write([[maybe_unused]] std::ostream& str) const { return false; }
+    virtual bool Write([[maybe_unused]] wxString& str) const { return false; }
+    virtual bool Read([[maybe_unused]] std::istream& str) { return false; }
+    virtual bool Read([[maybe_unused]] wxString& str) { return false; }
     // What type is it? Return a string name.
     virtual wxString GetType() const = 0;
     // If it based on wxObject return the ClassInfo.
@@ -76,7 +76,7 @@ public:
 
 #if wxUSE_ANY
     // Converts value to wxAny, if possible. Return true if successful.
-    virtual bool GetAsAny(wxAny* WXUNUSED(any)) const { return false; }
+    virtual bool GetAsAny([[maybe_unused]] wxAny* any) const { return false; }
 #endif
 
 protected:

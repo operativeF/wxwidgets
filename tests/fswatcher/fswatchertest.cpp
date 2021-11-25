@@ -240,7 +240,7 @@ public:
         Bind(wxEVT_IDLE, &FSWTesterBase::OnIdleCheckResult, this);
     }
 
-    void OnIdleCheckResult(wxIdleEvent& WXUNUSED(event))
+    void OnIdleCheckResult([[maybe_unused]] wxIdleEvent& event)
     {
         Unbind(wxEVT_IDLE, &FSWTesterBase::OnIdleCheckResult, this);
 

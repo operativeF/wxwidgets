@@ -55,7 +55,7 @@ bool wxRichTextHTMLHandler::CanHandle(const std::string& filename) const
 
 
 #if wxUSE_STREAMS
-bool wxRichTextHTMLHandler::DoLoadFile(wxRichTextBuffer *WXUNUSED(buffer), wxInputStream& WXUNUSED(stream))
+bool wxRichTextHTMLHandler::DoLoadFile([[maybe_unused]] wxRichTextBuffer *buffer, [[maybe_unused]] wxInputStream& stream)
 {
     return false;
 }

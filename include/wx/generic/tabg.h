@@ -129,7 +129,7 @@ public:
   // Called when a tab is activated
   virtual void OnTabActivate(int activateId, int deactivateId);
   // Allows vetoing
-  virtual bool OnTabPreActivate(int WXUNUSED(activateId), int WXUNUSED(deactivateId) ) { return true; }
+  virtual bool OnTabPreActivate([[maybe_unused]] int activateId, [[maybe_unused]] int deactivateId ) { return true; }
 
   // Allows use of application-supplied wxTabControl classes.
   virtual wxTabControl *OnCreateTabControl(void) { return new wxTabControl(this); }

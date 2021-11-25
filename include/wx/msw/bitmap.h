@@ -79,7 +79,7 @@ public:
 
 #if wxUSE_IMAGE
     // Convert from wxImage
-    wxBitmap(const wxImage& image, int depth = -1, double WXUNUSED(scale) = 1.0)
+    wxBitmap(const wxImage& image, int depth = -1, [[maybe_unused]] double scale = 1.0)
         { CreateFromImage(image, depth); }
 
     // Create a DDB compatible with the given DC from wxImage

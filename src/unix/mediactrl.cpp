@@ -330,7 +330,7 @@ static gint gtk_window_realize_callback(GtkWidget* widget,
 // Called by gstreamer when the media is done playing ("end of stream")
 //-----------------------------------------------------------------------------
 extern "C" {
-static void gst_finish_callback(GstElement *WXUNUSED(play),
+static void gst_finish_callback([[maybe_unused]] GstElement *play,
                                 wxGStreamerMediaBackend* be)
 {
     wxLogTrace(wxTRACE_GStreamer, "gst_finish_callback");
@@ -347,8 +347,8 @@ static void gst_finish_callback(GstElement *WXUNUSED(play),
 // on the command line as well for those who want extra traces.
 //-----------------------------------------------------------------------------
 extern "C" {
-static void gst_error_callback(GstElement *WXUNUSED(play),
-                               GstElement *WXUNUSED(src),
+static void gst_error_callback([[maybe_unused]] GstElement *play,
+                               [[maybe_unused]] GstElement *src,
                                GError     *err,
                                gchar      *debug,
                                wxGStreamerMediaBackend* be)
@@ -368,7 +368,7 @@ static void gst_error_callback(GstElement *WXUNUSED(play),
 //-----------------------------------------------------------------------------
 extern "C" {
 static void gst_notify_caps_callback(GstPad* pad,
-                                     GParamSpec* WXUNUSED(pspec),
+                                     [[maybe_unused]] GParamSpec* pspec,
                                      wxGStreamerMediaBackend* be)
 {
     wxLogTrace(wxTRACE_GStreamer, "gst_notify_caps_callback");
@@ -390,8 +390,8 @@ static void gst_notify_caps_callback(GstPad* pad,
 // (Undocumented?)
 //-----------------------------------------------------------------------------
 extern "C" {
-static void gst_notify_stream_info_callback(GstElement* WXUNUSED(element),
-                                            GParamSpec* WXUNUSED(pspec),
+static void gst_notify_stream_info_callback([[maybe_unused]] GstElement* element,
+                                            [[maybe_unused]] GParamSpec* pspec,
                                             wxGStreamerMediaBackend* be)
 {
     wxLogTrace(wxTRACE_GStreamer, "gst_notify_stream_info_callback");
@@ -414,7 +414,7 @@ static void gst_notify_stream_info_callback(GstElement* WXUNUSED(element),
 // XOverlay (NB: This isn't currently used - see CreateControl()).
 //-----------------------------------------------------------------------------
 extern "C" {
-static gboolean gst_bus_async_callback(GstBus* WXUNUSED(bus),
+static gboolean gst_bus_async_callback([[maybe_unused]] GstBus* bus,
                                        GstMessage* message,
                                        wxGStreamerMediaBackend* be)
 {
@@ -873,7 +873,7 @@ bool wxGStreamerMediaBackend::TryVideoSink(GstElement* videosink)
 //
 // Called when the media is about to stop
 //-----------------------------------------------------------------------------
-void wxGStreamerMediaEventHandler::OnMediaFinish(wxMediaEvent& WXUNUSED(event))
+void wxGStreamerMediaEventHandler::OnMediaFinish([[maybe_unused]] wxMediaEvent& event)
 {
     // (RN - I have no idea why I thought this was good behaviour....
     // maybe it made sense for streaming/nonseeking data but
@@ -1450,10 +1450,10 @@ wxLongLong wxGStreamerMediaBackend::GetDuration()
 // Called when the window is moved - GStreamer takes care of this
 // for us so nothing is needed
 //-----------------------------------------------------------------------------
-void wxGStreamerMediaBackend::Move(int WXUNUSED(x),
-                                   int WXUNUSED(y),
-                                   int WXUNUSED(w),
-                                   int WXUNUSED(h))
+void wxGStreamerMediaBackend::Move([[maybe_unused]] int x,
+                                   [[maybe_unused]] int y,
+                                   [[maybe_unused]] int w,
+                                   [[maybe_unused]] int h)
 {
 }
 

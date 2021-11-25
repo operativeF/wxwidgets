@@ -395,7 +395,7 @@ void wxRichTextCtrl::Clear()
 }
 
 /// Painting
-void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
 #if !wxRICHTEXT_USE_OWN_CARET
     if (GetCaret() && !IsFrozen())
@@ -492,11 +492,11 @@ void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 }
 
 // Empty implementation, to prevent flicker
-void wxRichTextCtrl::OnEraseBackground(wxEraseEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnEraseBackground([[maybe_unused]] wxEraseEvent& event)
 {
 }
 
-void wxRichTextCtrl::OnSetFocus(wxFocusEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnSetFocus([[maybe_unused]] wxFocusEvent& event)
 {
     if (GetCaret())
     {
@@ -516,7 +516,7 @@ void wxRichTextCtrl::OnSetFocus(wxFocusEvent& WXUNUSED(event))
 #endif
 }
 
-void wxRichTextCtrl::OnKillFocus(wxFocusEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnKillFocus([[maybe_unused]] wxFocusEvent& event)
 {
     if (GetCaret() && GetCaret()->IsVisible())
         GetCaret()->Hide();
@@ -530,7 +530,7 @@ void wxRichTextCtrl::OnKillFocus(wxFocusEvent& WXUNUSED(event))
 #endif
 }
 
-void wxRichTextCtrl::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     m_dragging = false;
 }
@@ -1474,7 +1474,7 @@ void wxRichTextCtrl::OnChar(wxKeyEvent& event)
     }
 }
 
-bool wxRichTextCtrl::ProcessMouseMovement(wxRichTextParagraphLayoutBox* container, wxRichTextObject* WXUNUSED(obj), long position, [[maybe_unused]] const wxPoint& pos)
+bool wxRichTextCtrl::ProcessMouseMovement(wxRichTextParagraphLayoutBox* container, [[maybe_unused]] wxRichTextObject* obj, long position, [[maybe_unused]] const wxPoint& pos)
 {
     wxRichTextAttr attr;
     if (container && GetStyle(position, attr, container))
@@ -2746,7 +2746,7 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
 }
 
 /// Move n words left
-bool wxRichTextCtrl::WordLeft(int WXUNUSED(n), int flags)
+bool wxRichTextCtrl::WordLeft([[maybe_unused]] int n, int flags)
 {
     long pos = FindNextWordPosition(-1);
     if (pos != m_caretPosition)
@@ -2768,7 +2768,7 @@ bool wxRichTextCtrl::WordLeft(int WXUNUSED(n), int flags)
 }
 
 /// Move n words right
-bool wxRichTextCtrl::WordRight(int WXUNUSED(n), int flags)
+bool wxRichTextCtrl::WordRight([[maybe_unused]] int n, int flags)
 {
     long pos = FindNextWordPosition(1);
 
@@ -3744,32 +3744,32 @@ wxSize wxRichTextCtrl::DoGetBestSize() const
 // standard handlers for standard edit menu events
 // ----------------------------------------------------------------------------
 
-void wxRichTextCtrl::OnCut(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnCut([[maybe_unused]] wxCommandEvent& event)
 {
     Cut();
 }
 
-void wxRichTextCtrl::OnClear(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnClear([[maybe_unused]] wxCommandEvent& event)
 {
     DeleteSelection();
 }
 
-void wxRichTextCtrl::OnCopy(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnCopy([[maybe_unused]] wxCommandEvent& event)
 {
     Copy();
 }
 
-void wxRichTextCtrl::OnPaste(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnPaste([[maybe_unused]] wxCommandEvent& event)
 {
     Paste();
 }
 
-void wxRichTextCtrl::OnUndo(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnUndo([[maybe_unused]] wxCommandEvent& event)
 {
     Undo();
 }
 
-void wxRichTextCtrl::OnRedo(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnRedo([[maybe_unused]] wxCommandEvent& event)
 {
     Redo();
 }
@@ -3806,7 +3806,7 @@ void wxRichTextCtrl::OnUpdateRedo(wxUpdateUIEvent& event)
     event.SetText( GetCommandProcessor()->GetRedoMenuLabel() );
 }
 
-void wxRichTextCtrl::OnSelectAll(wxCommandEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnSelectAll([[maybe_unused]] wxCommandEvent& event)
 {
     if (GetLastPosition() > 0)
         SelectAll();
@@ -4795,7 +4795,7 @@ void wxRichTextCtrl::ClearAvailableFontNames()
     sm_availableFontNames.clear();
 }
 
-void wxRichTextCtrl::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
+void wxRichTextCtrl::OnSysColourChanged([[maybe_unused]] wxSysColourChangedEvent& event)
 {
     //wxLogDebug("wxRichTextCtrl::OnSysColourChanged");
 
@@ -4982,7 +4982,7 @@ static bool wxRichTextCtrlIsContainedIn(wxRichTextParagraphLayoutBox* source, wx
     return false;
 }
 
-void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResult def, wxDataObject* DataObj)
+void wxRichTextCtrl::OnDrop([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxDragResult def, wxDataObject* DataObj)
 {
     m_preDrag = false;
 
@@ -5039,7 +5039,7 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
 
 
 #if wxUSE_DRAG_AND_DROP
-bool wxRichTextDropSource::GiveFeedback(wxDragResult WXUNUSED(effect))
+bool wxRichTextDropSource::GiveFeedback([[maybe_unused]] wxDragResult effect)
 {
     wxCHECK_MSG(m_rtc, false, "NULL m_rtc");
 
@@ -5058,12 +5058,12 @@ bool wxRichTextDropSource::GiveFeedback(wxDragResult WXUNUSED(effect))
 }
 #endif // wxUSE_DRAG_AND_DROP
 
-bool wxRichTextCtrl::CanDeleteRange(wxRichTextParagraphLayoutBox& WXUNUSED(container), [[maybe_unused]] const wxRichTextRange& range) const
+bool wxRichTextCtrl::CanDeleteRange([[maybe_unused]] wxRichTextParagraphLayoutBox& container, [[maybe_unused]] const wxRichTextRange& range) const
 {
     return true;
 }
 
-bool wxRichTextCtrl::CanInsertContent(wxRichTextParagraphLayoutBox& WXUNUSED(container), long WXUNUSED(pos)) const
+bool wxRichTextCtrl::CanInsertContent([[maybe_unused]] wxRichTextParagraphLayoutBox& container, [[maybe_unused]] long pos) const
 {
     return true;
 }

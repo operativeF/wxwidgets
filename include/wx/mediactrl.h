@@ -186,12 +186,12 @@ protected:
 class WXDLLIMPEXP_MEDIA wxMediaBackend : public wxObject
 {
 public:
-    virtual bool CreateControl(wxControl* WXUNUSED(ctrl),
-                               wxWindow* WXUNUSED(parent),
-                               wxWindowID WXUNUSED(winid),
+    virtual bool CreateControl([[maybe_unused]] wxControl* ctrl,
+                               [[maybe_unused]] wxWindow* parent,
+                               [[maybe_unused]] wxWindowID winid,
                                [[maybe_unused]] const wxPoint& pos,
                                [[maybe_unused]] const wxSize& size,
-                               unsigned int WXUNUSED(style),
+                               [[maybe_unused]] unsigned int style,
                                [[maybe_unused]] const wxValidator& validator,
                                [[maybe_unused]] const wxString& name)
     {   return false;                   }
@@ -208,7 +208,7 @@ public:
     virtual bool Load([[maybe_unused]] const wxURI& location)
     {   return false;                   }
 
-    virtual bool SetPosition(wxLongLong WXUNUSED(where))
+    virtual bool SetPosition([[maybe_unused]] wxLongLong where)
     {   return 0;                       }
     virtual wxLongLong GetPosition()
     {   return 0;                       }
@@ -222,7 +222,7 @@ public:
 
     virtual double GetPlaybackRate()
     {   return 0.0;                     }
-    virtual bool SetPlaybackRate(double WXUNUSED(dRate))
+    virtual bool SetPlaybackRate([[maybe_unused]] double dRate)
     {   return false;                   }
 
     virtual wxMediaState GetState()
@@ -230,7 +230,7 @@ public:
 
     virtual double GetVolume()
     {   return 0.0;                     }
-    virtual bool SetVolume(double WXUNUSED(dVolume))
+    virtual bool SetVolume([[maybe_unused]] double dVolume)
     {   return false;                   }
 
     virtual bool Load([[maybe_unused]] const wxURI& location,
@@ -238,7 +238,7 @@ public:
     {   return false;                   }
 
     virtual bool   ShowPlayerControls(
-                    wxMediaCtrlPlayerControls WXUNUSED(flags))
+                    [[maybe_unused]] wxMediaCtrlPlayerControls flags)
     {   return false;                   }
     virtual bool   IsInterfaceShown()
     {   return false;                   }

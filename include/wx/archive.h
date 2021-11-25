@@ -160,13 +160,13 @@ import <utility>;
 
 template <class X, class Y> inline
 void _wxSetArchiveIteratorValue(
-    X& val, Y entry, void *WXUNUSED(d))
+    X& val, Y entry, [[maybe_unused]] void *d)
 {
     val = X(entry);
 }
 template <class X, class Y, class Z> inline
 void _wxSetArchiveIteratorValue(
-    std::pair<X, Y>& val, Z entry, Z WXUNUSED(d))
+    std::pair<X, Y>& val, Z entry, [[maybe_unused]] Z d)
 {
     val = std::make_pair(X(entry->GetInternalName()), Y(entry));
 }

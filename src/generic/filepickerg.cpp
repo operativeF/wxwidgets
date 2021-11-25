@@ -78,7 +78,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
     return true;
 }
 
-void wxGenericFileDirButton::OnButtonClick(wxCommandEvent& WXUNUSED(ev))
+void wxGenericFileDirButton::OnButtonClick([[maybe_unused]] wxCommandEvent& ev)
 {
     std::unique_ptr<wxDialog> p(wxCreateDialog());
     if (p->ShowModal() == wxID_OK)

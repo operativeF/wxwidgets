@@ -1224,7 +1224,7 @@ bool wxDataViewTextRenderer::SetValue( const wxVariant &value )
     return true;
 }
 
-bool wxDataViewTextRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
+bool wxDataViewTextRenderer::GetValue( [[maybe_unused]] wxVariant& value ) const
 {
     return false;
 }
@@ -1328,7 +1328,7 @@ bool wxDataViewBitmapRenderer::SetValue( const wxVariant &value )
     return true;
 }
 
-bool wxDataViewBitmapRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
+bool wxDataViewBitmapRenderer::GetValue( [[maybe_unused]] wxVariant& value ) const
 {
     return false;
 }
@@ -1381,7 +1381,7 @@ bool wxDataViewToggleRenderer::SetValue( const wxVariant &value )
     return true;
 }
 
-bool wxDataViewToggleRenderer::GetValue( wxVariant &WXUNUSED(value) ) const
+bool wxDataViewToggleRenderer::GetValue( [[maybe_unused]] wxVariant &value ) const
 {
     return false;
 }
@@ -1536,7 +1536,7 @@ bool wxDataViewIconTextRenderer::SetValue( const wxVariant &value )
     return true;
 }
 
-bool wxDataViewIconTextRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
+bool wxDataViewIconTextRenderer::GetValue( [[maybe_unused]] wxVariant& value ) const
 {
     return false;
 }
@@ -1630,7 +1630,7 @@ public:
         Bind(wxEVT_PAINT, &wxBitmapCanvas::OnPaint, this);
     }
 
-    void OnPaint( wxPaintEvent &WXUNUSED(event) )
+    void OnPaint( [[maybe_unused]] wxPaintEvent &event )
     {
         wxPaintDC dc(this);
         dc.DrawBitmap( m_bitmap, 0, 0);
@@ -2482,7 +2482,7 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
 
 #endif // wxUSE_DRAG_AND_DROP
 
-void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
+void wxDataViewMainWindow::OnPaint( [[maybe_unused]] wxPaintEvent &event )
 {
     wxDataViewModel *model = GetModel();
     wxAutoBufferedPaintDC dc( this );
@@ -5613,7 +5613,7 @@ wxSize wxDataViewCtrl::GetSizeAvailableForScrollTarget(const wxSize& size)
     return newsize;
 }
 
-void wxDataViewCtrl::OnSize( wxSizeEvent &WXUNUSED(event) )
+void wxDataViewCtrl::OnSize( [[maybe_unused]] wxSizeEvent &event )
 {
     // We need to override OnSize so that our scrolled
     // window a) does call Layout() to use sizers for

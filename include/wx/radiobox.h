@@ -74,8 +74,8 @@ public:
 #else // wxUSE_HELP
     // just silently ignore the help text, it's better than requiring using
     // conditional compilation in all code using this function
-    void SetItemHelpText(unsigned int WXUNUSED(n),
-                         const std::string& WXUNUSED(helpText))
+    void SetItemHelpText([[maybe_unused]] unsigned int n,
+                         [[maybe_unused]] const std::string& helpText)
     {
     }
 #endif // wxUSE_HELP

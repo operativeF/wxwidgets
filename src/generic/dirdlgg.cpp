@@ -171,12 +171,12 @@ void wxGenericDirDialog::EndModal(int retCode)
     wxDialog::EndModal(retCode);
 }
 
-void wxGenericDirDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxGenericDirDialog::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     EndModal(wxID_CANCEL);
 }
 
-void wxGenericDirDialog::OnOK(wxCommandEvent& WXUNUSED(event))
+void wxGenericDirDialog::OnOK([[maybe_unused]] wxCommandEvent& event)
 {
     m_path = m_input->GetValue();
 
@@ -251,7 +251,7 @@ void wxGenericDirDialog::OnTreeSelected( wxTreeEvent &event )
        m_input->SetValue( data->m_path );
 }
 
-void wxGenericDirDialog::OnTreeKeyDown( wxTreeEvent &WXUNUSED(event) )
+void wxGenericDirDialog::OnTreeKeyDown( [[maybe_unused]] wxTreeEvent &event )
 {
     if (!m_dirCtrl)
         return;
@@ -269,7 +269,7 @@ void wxGenericDirDialog::OnShowHidden( wxCommandEvent& event )
     m_dirCtrl->ShowHidden( event.GetInt() != 0 );
 }
 
-void wxGenericDirDialog::OnNew( wxCommandEvent& WXUNUSED(event) )
+void wxGenericDirDialog::OnNew( [[maybe_unused]] wxCommandEvent& event )
 {
     wxTreeItemId id = m_dirCtrl->GetTreeCtrl()->GetSelection();
     if ((id == m_dirCtrl->GetTreeCtrl()->GetRootItem()) ||
@@ -325,7 +325,7 @@ void wxGenericDirDialog::OnNew( wxCommandEvent& WXUNUSED(event) )
     m_dirCtrl->GetTreeCtrl()->EditLabel( new_id );
 }
 
-void wxGenericDirDialog::OnGoHome(wxCommandEvent& WXUNUSED(event))
+void wxGenericDirDialog::OnGoHome([[maybe_unused]] wxCommandEvent& event)
 {
     SetPath(wxGetUserHome());
 }

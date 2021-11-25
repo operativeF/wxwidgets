@@ -234,7 +234,7 @@ LRESULT CALLBACK wxSocket_Internal_WinProc(WXHWND hWnd,
  *  when an appropriate callback function has been installed.
  */
 void wxSocketMSWManager::Install_Callback(wxSocketImpl *socket_,
-                                         wxSocketNotify WXUNUSED(event))
+                                         [[maybe_unused]] wxSocketNotify event)
 {
     auto* const socket = dynamic_cast<wxSocketImplMSW *>(socket_);
 
@@ -250,7 +250,7 @@ void wxSocketMSWManager::Install_Callback(wxSocketImpl *socket_,
  *  Disable event notifications (used when shutting down the socket)
  */
 void wxSocketMSWManager::Uninstall_Callback(wxSocketImpl *socket_,
-                                            wxSocketNotify WXUNUSED(event))
+                                            [[maybe_unused]] wxSocketNotify event)
 {
     auto* const socket = dynamic_cast<wxSocketImplMSW *>(socket_);
 

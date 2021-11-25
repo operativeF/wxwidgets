@@ -396,7 +396,7 @@ wxRect wxStatusBarGeneric::GetSizeGripRect() const
 // wxStatusBarGeneric - event handlers
 // ----------------------------------------------------------------------------
 
-void wxStatusBarGeneric::OnPaint(wxPaintEvent& WXUNUSED(event) )
+void wxStatusBarGeneric::OnPaint([[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
 

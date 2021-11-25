@@ -68,7 +68,7 @@ wxCursor::wxCursor(const char* const* xpmData)
 
 wxCursor::wxCursor(const wxString& cursor_file,
                    wxBitmapType type,
-                   int WXUNUSED(hotSpotX), int WXUNUSED(hotSpotY))
+                   [[maybe_unused]] int hotSpotX, [[maybe_unused]] int hotSpotY)
 {
 #warning "FIXME"
 }

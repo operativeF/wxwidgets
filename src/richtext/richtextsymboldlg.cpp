@@ -564,7 +564,7 @@ void wxSymbolPickerDialog::ShowAtSubset()
 }
 
 // Handle font selection
-void wxSymbolPickerDialog::OnFontCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxSymbolPickerDialog::OnFontCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_fontCtrl->GetSelection() == 0)
         m_fontName.clear();
@@ -608,7 +608,7 @@ void wxSymbolPickerDialog::OnSymbolSelected( wxCommandEvent& event )
 
 #if defined(__UNICODE__)
 // Handle Unicode/ASCII selection
-void wxSymbolPickerDialog::OnFromUnicodeSelected( wxCommandEvent& WXUNUSED(event) )
+void wxSymbolPickerDialog::OnFromUnicodeSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -619,7 +619,7 @@ void wxSymbolPickerDialog::OnFromUnicodeSelected( wxCommandEvent& WXUNUSED(event
 }
 
 // Handle subset selection
-void wxSymbolPickerDialog::OnSubsetSelected( wxCommandEvent& WXUNUSED(event) )
+void wxSymbolPickerDialog::OnSubsetSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -853,7 +853,7 @@ void wxSymbolListCtrl::SetSelectionBackground(const wxColour& col)
 // wxSymbolListCtrl painting
 // ----------------------------------------------------------------------------
 
-wxCoord wxSymbolListCtrl::OnGetRowHeight(size_t WXUNUSED(line)) const
+wxCoord wxSymbolListCtrl::OnGetRowHeight([[maybe_unused]] size_t line) const
 {
     return m_cellSize.y + 2*m_ptMargins.y + 1 /* for divider */ ;
 }
@@ -908,7 +908,7 @@ void wxSymbolListCtrl::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
     dc.DrawLine(rect.x, rect.y+rect.height-1, rect.x+rect.width, rect.y+rect.height-1);
 }
 
-void wxSymbolListCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxSymbolListCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     // If size is larger, recalculate double buffer bitmap
     wxSize clientSize = GetClientSize();
@@ -977,7 +977,7 @@ void wxSymbolListCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 // wxSymbolListCtrl keyboard/mouse handling
 // ============================================================================
 
-void wxSymbolListCtrl::DoHandleItemClick(int item, int WXUNUSED(flags))
+void wxSymbolListCtrl::DoHandleItemClick(int item, [[maybe_unused]] int flags)
 {
     if (m_current != item)
     {
@@ -1247,7 +1247,7 @@ wxSymbolListCtrl::GetClassDefaultAttributes(wxWindowVariant variant)
  * wxEVT_BUTTON event handler for wxID_HELP
  */
 
-void wxSymbolPickerDialog::OnHelpClick( wxCommandEvent& WXUNUSED(event) )
+void wxSymbolPickerDialog::OnHelpClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if ((GetHelpInfo().GetHelpId() != -1) && GetHelpInfo().GetUICustomization())
         ShowHelp(this);

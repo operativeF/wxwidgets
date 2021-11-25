@@ -274,13 +274,13 @@ wxEmulatorFrame::wxEmulatorFrame(const wxString& title,
 
 // event handlers
 
-void wxEmulatorFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void wxEmulatorFrame::OnQuit([[maybe_unused]] wxCommandEvent& event)
 {
     // true is to force the frame to close
     Close(true);
 }
 
-void wxEmulatorFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+void wxEmulatorFrame::OnAbout([[maybe_unused]] wxCommandEvent& event)
 {
     wxString msg;
     msg.Printf( "wxEmulator is an environment for testing embedded X11 apps.\n");
@@ -288,7 +288,7 @@ void wxEmulatorFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
     wxMessageBox(msg, "About wxEmulator", wxOK | wxICON_INFORMATION, this);
 }
 
-void wxEmulatorFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxEmulatorFrame::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
 #ifdef __WXX11__
     if (wxGetApp().m_xnestWindow)
@@ -317,7 +317,7 @@ wxEmulatorContainer::wxEmulatorContainer(wxWindow* parent, wxWindowID id):
 {
 }
 
-void wxEmulatorContainer::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxEmulatorContainer::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     DoResize();
 }
@@ -345,7 +345,7 @@ void wxEmulatorContainer::DoResize()
     Refresh();
 }
 
-void wxEmulatorContainer::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxEmulatorContainer::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

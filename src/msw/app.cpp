@@ -734,7 +734,7 @@ void wxApp::CleanUp()
 // wxApp idle handling
 // ----------------------------------------------------------------------------
 
-void wxApp::OnIdle(wxIdleEvent& WXUNUSED(event))
+void wxApp::OnIdle([[maybe_unused]] wxIdleEvent& event)
 {
 #if wxUSE_DC_CACHEING
     // automated DC cache management: clear the cached DCs and bitmap
@@ -773,7 +773,7 @@ void wxApp::MSWProcessPendingEventsIfNeeded()
 // other wxApp event handlers
 // ----------------------------------------------------------------------------
 
-void wxApp::OnEndSession(wxCloseEvent& WXUNUSED(event))
+void wxApp::OnEndSession([[maybe_unused]] wxCloseEvent& event)
 {
     // Windows will terminate the process soon after we return from
     // WM_ENDSESSION handler or when we delete our last window, so make sure we

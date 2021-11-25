@@ -227,8 +227,8 @@ public:
     // notice that this is not implemented in all versions
     virtual wxCalendarHitTestResult
     HitTest([[maybe_unused]] const wxPoint& pos,
-            wxDateTime* WXUNUSED(date) = nullptr,
-            wxDateTime::WeekDay* WXUNUSED(wd) = nullptr)
+            [[maybe_unused]] wxDateTime* date = nullptr,
+            [[maybe_unused]] wxDateTime::WeekDay* wd = nullptr)
     {
         return wxCalendarHitTestResult::Nowhere;
     }
@@ -256,11 +256,11 @@ public:
 
     virtual void Mark(size_t day, bool mark) = 0;
 
-    virtual wxCalendarDateAttr *GetAttr(size_t WXUNUSED(day)) const
+    virtual wxCalendarDateAttr *GetAttr([[maybe_unused]] size_t day) const
         { return nullptr; }
-    virtual void SetAttr(size_t WXUNUSED(day), wxCalendarDateAttr *attr)
+    virtual void SetAttr([[maybe_unused]] size_t day, wxCalendarDateAttr *attr)
         { delete attr; }
-    virtual void ResetAttr(size_t WXUNUSED(day)) { }
+    virtual void ResetAttr([[maybe_unused]] size_t day) { }
 
 
     // holidays support
@@ -281,7 +281,7 @@ public:
     virtual const wxColour& GetHolidayColourBg() const { return wxNullColour; }
 
     // mark the given day of the current month as being a holiday
-    virtual void SetHoliday(size_t WXUNUSED(day)) { }
+    virtual void SetHoliday([[maybe_unused]] size_t day) { }
 
 
     // customizing the colours of the controls

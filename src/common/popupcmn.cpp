@@ -619,7 +619,7 @@ void wxPopupWindowHandler::OnLeftDown(wxMouseEvent& event)
 }
 
 void
-wxPopupWindowHandler::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+wxPopupWindowHandler::OnCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     m_popup->DismissAndNotify();
 

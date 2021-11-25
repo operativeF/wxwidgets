@@ -974,7 +974,7 @@ void wxPropertyGrid::DoBeginLabelEdit( unsigned int colIndex,
 // -----------------------------------------------------------------------
 
 void
-wxPropertyGrid::OnLabelEditorEnterPress( wxCommandEvent& WXUNUSED(event) )
+wxPropertyGrid::OnLabelEditorEnterPress( [[maybe_unused]] wxCommandEvent& event )
 {
     DoEndLabelEdit(true);
 }
@@ -1295,7 +1295,7 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::OnSysColourChanged( wxSysColourChangedEvent &WXUNUSED(event) )
+void wxPropertyGrid::OnSysColourChanged( [[maybe_unused]] wxSysColourChangedEvent &event )
 {
     if ((m_iFlags & wxPG_FL_INITIALIZED)!=0) {
         RegainColours();
@@ -1303,7 +1303,7 @@ void wxPropertyGrid::OnSysColourChanged( wxSysColourChangedEvent &WXUNUSED(event
     }
 }
 
-void wxPropertyGrid::OnDPIChanged(wxDPIChangedEvent &WXUNUSED(event))
+void wxPropertyGrid::OnDPIChanged([[maybe_unused]] wxDPIChangedEvent &event)
 {
     m_vspacing = FromDIP(wxPG_DEFAULT_VSPACING);
     CalculateFontAndBitmapStuff(m_vspacing);
@@ -1829,7 +1829,7 @@ wxPGProperty* wxPropertyGrid::DoGetItemAtY( int y ) const
 // wxPropertyGrid graphics related methods
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxPropertyGrid::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxDC* dcPtr = nullptr;
     if ( !HasExtraStyle(wxPG_EX_NATIVE_DOUBLE_BUFFERING) )
@@ -2589,7 +2589,7 @@ void wxPropertyGrid::DrawItemAndChildren( wxPGProperty* p )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::Refresh( bool WXUNUSED(eraseBackground),
+void wxPropertyGrid::Refresh( [[maybe_unused]] bool eraseBackground,
                               const wxRect *rect )
 {
     PrepareAfterItemsAdded();
@@ -3080,7 +3080,7 @@ wxStatusBar* wxPropertyGrid::GetStatusBar()
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::DoShowPropertyError( wxPGProperty* WXUNUSED(property), const wxString& msg )
+void wxPropertyGrid::DoShowPropertyError( [[maybe_unused]] wxPGProperty* property, const wxString& msg )
 {
     if ( msg.empty() )
         return;
@@ -3103,7 +3103,7 @@ void wxPropertyGrid::DoShowPropertyError( wxPGProperty* WXUNUSED(property), cons
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::DoHidePropertyError( wxPGProperty* WXUNUSED(property) )
+void wxPropertyGrid::DoHidePropertyError( [[maybe_unused]] wxPGProperty* property )
 {
 #if wxUSE_STATUSBAR
     if ( !wxPGGlobalVars->m_offline )
@@ -3163,7 +3163,7 @@ bool wxPropertyGrid::OnValidationFailure( wxPGProperty* property,
     return res;
 }
 
-bool wxPropertyGrid::DoOnValidationFailure( wxPGProperty* property, wxVariant& WXUNUSED(invalidValue) )
+bool wxPropertyGrid::DoOnValidationFailure( wxPGProperty* property, [[maybe_unused]] wxVariant& invalidValue )
 {
     int vfb = m_validationInfo.m_failureBehavior;
 
@@ -4863,8 +4863,8 @@ bool wxPropertyGrid::HandleMouseClick( int x, unsigned int y, wxMouseEvent &even
 
 // -----------------------------------------------------------------------
 
-bool wxPropertyGrid::HandleMouseRightClick( int WXUNUSED(x),
-                                            unsigned int WXUNUSED(y),
+bool wxPropertyGrid::HandleMouseRightClick( [[maybe_unused]] int x,
+                                            [[maybe_unused]] unsigned int y,
                                             wxMouseEvent& event )
 {
     if ( m_propHover )
@@ -4883,8 +4883,8 @@ bool wxPropertyGrid::HandleMouseRightClick( int WXUNUSED(x),
 
 // -----------------------------------------------------------------------
 
-bool wxPropertyGrid::HandleMouseDoubleClick( int WXUNUSED(x),
-                                             unsigned int WXUNUSED(y),
+bool wxPropertyGrid::HandleMouseDoubleClick( [[maybe_unused]] int x,
+                                             [[maybe_unused]] unsigned int y,
                                              wxMouseEvent& event )
 {
     if ( m_propHover )
@@ -5132,8 +5132,8 @@ bool wxPropertyGrid::HandleMouseMove( int x, unsigned int y,
 // -----------------------------------------------------------------------
 
 // Also handles Leaving event
-bool wxPropertyGrid::HandleMouseUp( int x, unsigned int WXUNUSED(y),
-                                    wxMouseEvent &WXUNUSED(event) )
+bool wxPropertyGrid::HandleMouseUp( int x, [[maybe_unused]] unsigned int y,
+                                    [[maybe_unused]] wxMouseEvent &event )
 {
     wxPropertyGridPageState* state = m_pState;
     bool res = false;
@@ -5783,7 +5783,7 @@ void wxPropertyGrid::OnChildKeyDown( wxKeyEvent &event )
 // wxPropertyGrid miscellaneous event handling
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::OnIdle( wxIdleEvent& WXUNUSED(event) )
+void wxPropertyGrid::OnIdle( [[maybe_unused]] wxIdleEvent& event )
 {
     // Skip fake idle events generated e.g. by calling
     // wxYield from within event handler.
@@ -5994,7 +5994,7 @@ void wxPropertyGrid::OnScrollEvent( wxScrollWinEvent &event )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::OnCaptureChange( wxMouseCaptureChangedEvent& WXUNUSED(event) )
+void wxPropertyGrid::OnCaptureChange( [[maybe_unused]] wxMouseCaptureChangedEvent& event )
 {
     if ( m_iFlags & wxPG_FL_MOUSE_CAPTURED )
     {

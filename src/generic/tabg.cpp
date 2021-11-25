@@ -1153,7 +1153,7 @@ wxTabbedDialog::~wxTabbedDialog(void)
     delete m_tabView;
 }
 
-void wxTabbedDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event) )
+void wxTabbedDialog::OnCloseWindow([[maybe_unused]] wxCloseEvent& event )
 {
   Destroy();
 }
@@ -1164,7 +1164,7 @@ void wxTabbedDialog::OnMouseEvent(wxMouseEvent& event )
     m_tabView->OnEvent(event);
 }
 
-void wxTabbedDialog::OnPaint(wxPaintEvent& WXUNUSED(event) )
+void wxTabbedDialog::OnPaint([[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
     if (m_tabView)
@@ -1200,7 +1200,7 @@ void wxTabbedPanel::OnMouseEvent(wxMouseEvent& event)
     m_tabView->OnEvent(event);
 }
 
-void wxTabbedPanel::OnPaint(wxPaintEvent& WXUNUSED(event) )
+void wxTabbedPanel::OnPaint([[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
     if (m_tabView)

@@ -284,8 +284,8 @@ static void wxWinHintsSetLayer(Display *display, Window rootWnd,
 
 
 #ifdef __WXGTK20__
-static bool wxQueryWMspecSupport(Display* WXUNUSED(display),
-                                 Window WXUNUSED(rootWnd),
+static bool wxQueryWMspecSupport([[maybe_unused]] Display* display,
+                                 [[maybe_unused]] Window rootWnd,
                                  Atom feature)
 {
     GdkAtom gatom = gdk_x11_xatom_to_atom(feature);

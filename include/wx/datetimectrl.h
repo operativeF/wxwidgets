@@ -36,7 +36,7 @@ public:
     // actually used under MSW, where it can be used to override the previous
     // value which is still displayed by the control in this case, and ignored
     // elsewhere.
-    virtual void SetNullText(const std::string& WXUNUSED(text)) { }
+    virtual void SetNullText([[maybe_unused]] const std::string& text) { }
 };
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)

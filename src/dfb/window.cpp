@@ -563,7 +563,7 @@ void wxWindowDFB::DoGetTextExtent(const wxString& string,
 // painting
 // ---------------------------------------------------------------------------
 
-void wxWindowDFB::Refresh(bool WXUNUSED(eraseBack), const wxRect *rect)
+void wxWindowDFB::Refresh([[maybe_unused]] bool eraseBack, const wxRect *rect)
 {
     if ( !IsShown() || IsFrozen() )
         return;

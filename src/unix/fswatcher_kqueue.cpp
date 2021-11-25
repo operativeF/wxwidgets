@@ -383,7 +383,7 @@ protected:
         m_watcher->GetOwner()->ProcessEvent(evt);
     }
 
-    static int Watcher2NativeFlags(int WXUNUSED(flags))
+    static int Watcher2NativeFlags([[maybe_unused]] int flags)
     {
         // TODO: it would be better to only subscribe to what we need
         return NOTE_DELETE | NOTE_WRITE | NOTE_EXTEND |

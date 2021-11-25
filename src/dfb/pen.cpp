@@ -63,7 +63,7 @@ wxPen::wxPen(const wxColour &colour, int width, wxPenStyle style)
     m_refData = new wxPenRefData(colour, style);
 }
 
-wxPen::wxPen([[maybe_unused]] const wxBitmap& stipple, int WXUNUSED(width))
+wxPen::wxPen([[maybe_unused]] const wxBitmap& stipple, [[maybe_unused]] int width)
 {
     wxFAIL_MSG( "stipple pens not supported" );
 
@@ -87,7 +87,7 @@ void wxPen::SetColour(const wxColour &colour)
     M_PENDATA->m_colour = colour;
 }
 
-void wxPen::SetDashes(int WXUNUSED(number_of_dashes), const wxDash *WXUNUSED(dash))
+void wxPen::SetDashes([[maybe_unused]] int number_of_dashes, [[maybe_unused]] const wxDash *dash)
 {
     wxFAIL_MSG( "SetDashes not implemented" );
 }
@@ -98,12 +98,12 @@ void wxPen::SetColour(unsigned char red, unsigned char green, unsigned char blue
     M_PENDATA->m_colour.Set(red, green, blue);
 }
 
-void wxPen::SetCap(wxPenCap WXUNUSED(capStyle))
+void wxPen::SetCap([[maybe_unused]] wxPenCap capStyle)
 {
     wxFAIL_MSG( "SetCap not implemented" );
 }
 
-void wxPen::SetJoin(wxPenJoin WXUNUSED(joinStyle))
+void wxPen::SetJoin([[maybe_unused]] wxPenJoin joinStyle)
 {
     wxFAIL_MSG( "SetJoin not implemented" );
 }

@@ -136,7 +136,7 @@ public:
         m_message = message;
     }
 
-    void SetParent(wxWindow *WXUNUSED(parent)) override
+    void SetParent([[maybe_unused]] wxWindow *parent) override
     {
 
     }
@@ -152,7 +152,7 @@ public:
         // to be used as a file:// url in the notifications XML
     }
 
-    bool AddAction([[maybe_unused]] wxWindowID actionid, const std::string &WXUNUSED(label)) override
+    bool AddAction([[maybe_unused]] wxWindowID actionid, [[maybe_unused]] const std::string &label) override
     {
         return false;
     }
@@ -420,8 +420,8 @@ std::string wxToastNotifMsgImpl::ms_appId;
 wxCOMPtr<IToastNotificationManagerStatics> wxToastNotifMsgImpl::ms_toastMgr;
 
 HRESULT wxToastEventHandler::Invoke(
-    IToastNotification *WXUNUSED(sender),
-    IInspectable *WXUNUSED(args))
+    [[maybe_unused]] IToastNotification *sender,
+    [[maybe_unused]] IInspectable *args)
 {
     if ( m_impl )
     {
@@ -433,8 +433,8 @@ HRESULT wxToastEventHandler::Invoke(
 }
 
 HRESULT wxToastEventHandler::Invoke(
-    IToastNotification *WXUNUSED(sender),
-    IToastDismissedEventArgs *WXUNUSED(e))
+    [[maybe_unused]] IToastNotification *sender,
+    [[maybe_unused]] IToastDismissedEventArgs *e)
 {
     if ( m_impl )
     {
@@ -445,8 +445,8 @@ HRESULT wxToastEventHandler::Invoke(
     return S_OK;
 }
 
-HRESULT wxToastEventHandler::Invoke(IToastNotification *WXUNUSED(sender),
-    IToastFailedEventArgs *WXUNUSED(e))
+HRESULT wxToastEventHandler::Invoke([[maybe_unused]] IToastNotification *sender,
+    [[maybe_unused]] IToastFailedEventArgs *e)
 {
     //TODO: Handle toast failed event
     return S_OK;

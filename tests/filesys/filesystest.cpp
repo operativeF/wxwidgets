@@ -34,7 +34,7 @@ public:
     wxString Anchor(const wxString& p) { return GetAnchor(p); }
 
     bool CanOpen([[maybe_unused]] const wxString& url) override { return false; }
-    wxFSFile *OpenFile(wxFileSystem& WXUNUSED(fs),
+    wxFSFile *OpenFile([[maybe_unused]] wxFileSystem& fs,
                        [[maybe_unused]] const wxString& url) override { return NULL; }
 
 

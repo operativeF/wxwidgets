@@ -143,7 +143,7 @@ public:
     // prefix/share/locale/lang/LC_MESSAGES)
     virtual wxString
     GetLocalizedResourcesDir(const wxString& lang,
-                             ResourceCat WXUNUSED(category)
+                             [[maybe_unused]] ResourceCat category
                                 = ResourceCat_None) const
     {
         return GetResourcesDir() + wxFILE_SEP_PATH + lang;
@@ -249,10 +249,10 @@ public:
     virtual wxString GetLocalDataDir() const { return m_prefix; }
     virtual wxString GetUserDataDir() const { return m_prefix; }
     virtual wxString GetPluginsDir() const { return m_prefix; }
-    virtual wxString GetUserDir(Dir WXUNUSED(userDir)) const { return m_prefix; }
+    virtual wxString GetUserDir([[maybe_unused]] Dir userDir) const { return m_prefix; }
     virtual wxString
     MakeConfigFileName(const wxString& basename,
-                       ConfigFileConv WXUNUSED(conv) = ConfigFileConv_Ext) const
+                       [[maybe_unused]] ConfigFileConv conv = ConfigFileConv_Ext) const
     {
         return m_prefix + "/" + basename;
     }

@@ -358,7 +358,7 @@ wxIntProperty::wxIntProperty( const wxString& label, const wxString& name,
 #endif
 
 wxString wxIntProperty::ValueToString( wxVariant& value,
-                                       int WXUNUSED(argFlags) ) const
+                                       [[maybe_unused]] int argFlags ) const
 {
     const wxString valType(value.GetType());
     if ( valType == wxPG_VARIANT_TYPE_LONG )
@@ -447,7 +447,7 @@ bool wxIntProperty::StringToValue( wxVariant& variant, const wxString& text, int
     return false;
 }
 
-bool wxIntProperty::IntToValue( wxVariant& variant, int value, int WXUNUSED(argFlags) ) const
+bool wxIntProperty::IntToValue( wxVariant& variant, int value, [[maybe_unused]] int argFlags ) const
 {
     if ( !variant.IsType(wxPG_VARIANT_TYPE_LONG) || variant != (long)value )
     {
@@ -701,7 +701,7 @@ bool wxUIntProperty::StringToValue(wxVariant& variant, const wxString& text, int
     return false;
 }
 
-bool wxUIntProperty::IntToValue( wxVariant& variant, int number, int WXUNUSED(argFlags) ) const
+bool wxUIntProperty::IntToValue( wxVariant& variant, int number, [[maybe_unused]] int argFlags ) const
 {
     if ( variant != (long)number )
     {
@@ -1010,7 +1010,7 @@ wxString wxBoolProperty::ValueToString( wxVariant& value,
     return boolValue ? "true" : "false";
 }
 
-bool wxBoolProperty::StringToValue( wxVariant& variant, const wxString& text, int WXUNUSED(argFlags) ) const
+bool wxBoolProperty::StringToValue( wxVariant& variant, const wxString& text, [[maybe_unused]] int argFlags ) const
 {
     bool boolValue = false;
     if ( text.CmpNoCase(wxPGGlobalVars->m_boolChoices[1].GetText()) == 0 ||
@@ -1169,7 +1169,7 @@ void wxEnumProperty::OnSetValue()
     m_index = index;
 }
 
-bool wxEnumProperty::ValidateValue( wxVariant& value, wxPGValidationInfo& WXUNUSED(validationInfo) ) const
+bool wxEnumProperty::ValidateValue( wxVariant& value, [[maybe_unused]] wxPGValidationInfo& validationInfo ) const
 {
     // Make sure string value is in the list,
     // unless property has string as preferred value type
@@ -1181,7 +1181,7 @@ bool wxEnumProperty::ValidateValue( wxVariant& value, wxPGValidationInfo& WXUNUS
 }
 
 wxString wxEnumProperty::ValueToString( wxVariant& value,
-                                            int WXUNUSED(argFlags) ) const
+                                            [[maybe_unused]] int argFlags ) const
 {
     if ( value.IsType(wxPG_VARIANT_TYPE_STRING) )
         return value.GetString();
@@ -1203,7 +1203,7 @@ bool wxEnumProperty::IntToValue( wxVariant& variant, int intVal, int argFlags ) 
     return ValueFromInt_(variant, nullptr, intVal, argFlags);
 }
 
-bool wxEnumProperty::ValueFromString_(wxVariant& value, int* pIndex, const wxString& text, int WXUNUSED(argFlags)) const
+bool wxEnumProperty::ValueFromString_(wxVariant& value, int* pIndex, const wxString& text, [[maybe_unused]] int argFlags) const
 {
     int useIndex = -1;
     long useValue = 0;
@@ -1367,8 +1367,8 @@ bool wxEditEnumProperty::StringToValue(wxVariant& variant,
 }
 
 bool wxEditEnumProperty::ValidateValue(
-                          wxVariant& WXUNUSED(value),
-                          wxPGValidationInfo& WXUNUSED(validationInfo)) const
+                          [[maybe_unused]] wxVariant& value,
+                          [[maybe_unused]] wxPGValidationInfo& validationInfo) const
 {
     return true;
 }
@@ -1571,7 +1571,7 @@ void wxFlagsProperty::OnSetValue()
 }
 
 wxString wxFlagsProperty::ValueToString( wxVariant& value,
-                                         int WXUNUSED(argFlags) ) const
+                                         [[maybe_unused]] int argFlags ) const
 {
     wxString text;
 
@@ -1726,7 +1726,7 @@ wxDirProperty::wxDirProperty( const wxString& label, const wxString& name, const
     SetValue(value);
 }
 
-wxString wxDirProperty::ValueToString(wxVariant& value, int WXUNUSED(argFlags)) const
+wxString wxDirProperty::ValueToString(wxVariant& value, [[maybe_unused]] int argFlags) const
 {
     return value;
 }
@@ -2060,7 +2060,7 @@ wxLongStringProperty::wxLongStringProperty( const wxString& label, const wxStrin
 }
 
 wxString wxLongStringProperty::ValueToString( wxVariant& value,
-                                              int WXUNUSED(argFlags) ) const
+                                              [[maybe_unused]] int argFlags ) const
 {
     return value;
 }
@@ -2533,7 +2533,7 @@ wxArrayStringProperty::ConvertArrayToString(const std::vector<wxString>& arr,
     }
 }
 
-wxString wxArrayStringProperty::ValueToString( wxVariant& WXUNUSED(value),
+wxString wxArrayStringProperty::ValueToString( [[maybe_unused]] wxVariant& value,
                                                int argFlags ) const
 {
     //
@@ -2760,8 +2760,8 @@ bool wxPGInDialogValidator::DoValidate( wxPropertyGrid* propGrid,
     return res;
 }
 #else
-bool wxPGInDialogValidator::DoValidate( wxPropertyGrid* WXUNUSED(propGrid),
-                                        wxValidator* WXUNUSED(validator),
+bool wxPGInDialogValidator::DoValidate( [[maybe_unused]] wxPropertyGrid* propGrid,
+                                        [[maybe_unused]] wxValidator* validator,
                                         [[maybe_unused]] const wxString& value )
 {
     return true;

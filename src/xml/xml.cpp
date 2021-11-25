@@ -783,7 +783,7 @@ static void StartDoctypeHnd(void *userData, const char *doctypeName,
                                  CharToString(ctx->conv, pubid));
 }
 
-static void EndDoctypeHnd(void *WXUNUSED(userData))
+static void EndDoctypeHnd([[maybe_unused]] void *userData)
 {
 }
 
@@ -805,7 +805,7 @@ static void DefaultHnd(void *userData, const char *s, int len)
     }
 }
 
-static int UnknownEncodingHnd(void * WXUNUSED(encodingHandlerData),
+static int UnknownEncodingHnd([[maybe_unused]] void * encodingHandlerData,
                               const XML_Char *name, XML_Encoding *info)
 {
     // We must build conversion table for expat. The easiest way to do so

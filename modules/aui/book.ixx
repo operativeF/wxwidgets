@@ -326,7 +326,7 @@ protected:
     virtual wxSize CalculateNewSplitSize();
 
     // remove the page and return a pointer to it
-    wxWindow *DoRemovePage(size_t WXUNUSED(page)) override { return nullptr; }
+    wxWindow *DoRemovePage([[maybe_unused]] size_t page) override { return nullptr; }
 
     //A general selection function
     virtual int DoModifySelection(size_t n, bool events);

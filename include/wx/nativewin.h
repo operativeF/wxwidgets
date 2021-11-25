@@ -158,7 +158,7 @@ public:
     wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = delete;
 
     // provide (trivial) implementation of the base class pure virtuals
-    void SetTitle(const std::string& WXUNUSED(title)) override
+    void SetTitle([[maybe_unused]] const std::string& title) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
@@ -170,7 +170,7 @@ public:
         return {};
     }
 
-    void Maximize(bool WXUNUSED(maximize) = true) override
+    void Maximize([[maybe_unused]] bool maximize = true) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
@@ -182,7 +182,7 @@ public:
         return false;
     }
 
-    void Iconize(bool WXUNUSED(iconize) = true) override
+    void Iconize([[maybe_unused]] bool iconize = true) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
@@ -198,8 +198,8 @@ public:
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    bool ShowFullScreen(bool WXUNUSED(show),
-                        unsigned int WXUNUSED(style) = wxFULLSCREEN_ALL) override
+    bool ShowFullScreen([[maybe_unused]] bool show,
+                        [[maybe_unused]] unsigned int style = wxFULLSCREEN_ALL) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 

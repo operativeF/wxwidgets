@@ -121,7 +121,7 @@ public:
 
     void Attach(HINTERNET hFile);
 
-    wxFileOffset SeekI( wxFileOffset WXUNUSED(pos), wxSeekMode WXUNUSED(mode) )
+    wxFileOffset SeekI( [[maybe_unused]] wxFileOffset pos, [[maybe_unused]] wxSeekMode mode )
         { return -1; }
     wxFileOffset TellI() const
         { return -1; }

@@ -242,43 +242,43 @@ public:
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.
         // pt is in screen coordinates.
-    virtual wxAccStatus HitTest([[maybe_unused]] const wxPoint& pt, int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
+    virtual wxAccStatus HitTest([[maybe_unused]] const wxPoint& pt, [[maybe_unused]] int* childId, [[maybe_unused]] wxAccessible** childObject)
          { return wxAccStatus::NotImplemented; }
 
         // Returns the rectangle for this object (id = 0) or a child element (id > 0).
         // rect is in screen coordinates.
-    virtual wxAccStatus GetLocation(wxRect& WXUNUSED(rect), int WXUNUSED(elementId))
+    virtual wxAccStatus GetLocation([[maybe_unused]] wxRect& rect, [[maybe_unused]] int elementId)
          { return wxAccStatus::NotImplemented; }
 
         // Navigates from fromId to toId/toObject.
-    virtual wxAccStatus Navigate(wxNavDir WXUNUSED(navDir), int WXUNUSED(fromId),
-                int* WXUNUSED(toId), wxAccessible** WXUNUSED(toObject))
+    virtual wxAccStatus Navigate([[maybe_unused]] wxNavDir navDir, [[maybe_unused]] int fromId,
+                [[maybe_unused]] int* toId, [[maybe_unused]] wxAccessible** toObject)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the name of the specified object.
-    virtual wxAccStatus GetName(int WXUNUSED(childId), std::string* WXUNUSED(name))
+    virtual wxAccStatus GetName([[maybe_unused]] int childId, [[maybe_unused]] std::string* name)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the number of children.
-    virtual wxAccStatus GetChildCount(int* WXUNUSED(childCount))
+    virtual wxAccStatus GetChildCount([[maybe_unused]] int* childCount)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the specified child (starting from 1).
         // If *child is NULL and return value is wxAccStatus::Ok,
         // this means that the child is a simple element and
         // not an accessible object.
-    virtual wxAccStatus GetChild(int WXUNUSED(childId), wxAccessible** WXUNUSED(child))
+    virtual wxAccStatus GetChild([[maybe_unused]] int childId, [[maybe_unused]] wxAccessible** child)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the parent, or NULL.
-    virtual wxAccStatus GetParent(wxAccessible** WXUNUSED(parent))
+    virtual wxAccStatus GetParent([[maybe_unused]] wxAccessible** parent)
          { return wxAccStatus::NotImplemented; }
 
         // Performs the default action. childId is 0 (the action for this object)
         // or > 0 (the action for a child).
         // Return wxAccStatus::NotSupported if there is no default action for this
         // window (e.g. an edit control).
-    virtual wxAccStatus DoDefaultAction(int WXUNUSED(childId))
+    virtual wxAccStatus DoDefaultAction([[maybe_unused]] int childId)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the default action for this object (0) or > 0 (the action for a child).
@@ -287,44 +287,44 @@ public:
         // The retrieved string describes the action that is performed on an object,
         // not what the object does as a result. For example, a toolbar button that prints
         // a document has a default action of "Press" rather than "Prints the current document."
-    virtual wxAccStatus GetDefaultAction(int WXUNUSED(childId), std::string* WXUNUSED(actionName))
+    virtual wxAccStatus GetDefaultAction([[maybe_unused]] int childId, [[maybe_unused]] std::string* actionName)
          { return wxAccStatus::NotImplemented; }
 
         // Returns the description for this object or a child.
-    virtual wxAccStatus GetDescription(int WXUNUSED(childId), std::string* WXUNUSED(description))
+    virtual wxAccStatus GetDescription([[maybe_unused]] int childId, [[maybe_unused]] std::string* description)
          { return wxAccStatus::NotImplemented; }
 
         // Returns help text for this object or a child, similar to tooltip text.
-    virtual wxAccStatus GetHelpText(int WXUNUSED(childId), std::string* WXUNUSED(helpText))
+    virtual wxAccStatus GetHelpText([[maybe_unused]] int childId, [[maybe_unused]] std::string* helpText)
          { return wxAccStatus::NotImplemented; }
 
         // Returns the keyboard shortcut for this object or child.
         // Return e.g. ALT+K
-    virtual wxAccStatus GetKeyboardShortcut(int WXUNUSED(childId), std::string* WXUNUSED(shortcut))
+    virtual wxAccStatus GetKeyboardShortcut([[maybe_unused]] int childId, [[maybe_unused]] std::string* shortcut)
          { return wxAccStatus::NotImplemented; }
 
         // Returns a role constant.
-    virtual wxAccStatus GetRole(int WXUNUSED(childId), wxAccSystemRole* WXUNUSED(role))
+    virtual wxAccStatus GetRole([[maybe_unused]] int childId, [[maybe_unused]] wxAccSystemRole* role)
          { return wxAccStatus::NotImplemented; }
 
         // Returns a state constant.
-    virtual wxAccStatus GetState(int WXUNUSED(childId), unsigned int* WXUNUSED(state))
+    virtual wxAccStatus GetState([[maybe_unused]] int childId, unsigned [[maybe_unused]] int* state)
          { return wxAccStatus::NotImplemented; }
 
         // Returns a localized string representing the value for the object
         // or child.
-    virtual wxAccStatus GetValue(int WXUNUSED(childId), std::string* WXUNUSED(strValue))
+    virtual wxAccStatus GetValue([[maybe_unused]] int childId, [[maybe_unused]] std::string* strValue)
          { return wxAccStatus::NotImplemented; }
 
         // Selects the object or child.
-    virtual wxAccStatus Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
+    virtual wxAccStatus Select([[maybe_unused]] int childId, [[maybe_unused]] wxAccSelectionFlags selectFlags)
          { return wxAccStatus::NotImplemented; }
 
         // Gets the window with the keyboard focus.
         // If childId is 0 and child is NULL, no object in
         // this subhierarchy has the focus.
         // If this object has the focus, child should be 'this'.
-    virtual wxAccStatus GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
+    virtual wxAccStatus GetFocus([[maybe_unused]] int* childId, [[maybe_unused]] wxAccessible** child)
          { return wxAccStatus::NotImplemented; }
 
 #if wxUSE_VARIANT
@@ -336,7 +336,7 @@ public:
         // - an integer representing the selected child element,
         //   or 0 if this object is selected (GetType() == "long")
         // - a "void*" pointer to a wxAccessible child object
-    virtual wxAccStatus GetSelections(wxVariant* WXUNUSED(selections))
+    virtual wxAccStatus GetSelections([[maybe_unused]] wxVariant* selections)
          { return wxAccStatus::NotImplemented; }
 #endif // wxUSE_VARIANT
 

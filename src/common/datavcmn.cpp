@@ -638,7 +638,7 @@ int wxDataViewVirtualListModel::Compare(const wxDataViewItem& item1,
        return pos2 - pos1;
 }
 
-unsigned int wxDataViewVirtualListModel::GetChildren( const wxDataViewItem &WXUNUSED(item), wxDataViewItemArray &WXUNUSED(children) ) const
+unsigned int wxDataViewVirtualListModel::GetChildren( [[maybe_unused]] const wxDataViewItem &item, [[maybe_unused]] wxDataViewItemArray &children ) const
 {
     return 0;  // should we report an error ?
 }
@@ -1089,7 +1089,7 @@ void wxDataViewEditorCtrlEvtHandler::OnIdle( wxIdleEvent &event )
     event.Skip();
 }
 
-void wxDataViewEditorCtrlEvtHandler::OnTextEnter( wxCommandEvent &WXUNUSED(event) )
+void wxDataViewEditorCtrlEvtHandler::OnTextEnter( [[maybe_unused]] wxCommandEvent &event )
 {
     m_finished = true;
     m_owner->FinishEditing();

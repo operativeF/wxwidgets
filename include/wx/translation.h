@@ -341,11 +341,11 @@ inline TString wxGetTranslation(TString str)
     { return str; }
 
 template<typename TString, typename TDomain>
-inline TString wxGetTranslation(TString str, TDomain WXUNUSED(domain))
+inline TString wxGetTranslation(TString str, [[maybe_unused]] TDomain domain)
     { return str; }
 
 template<typename TString, typename TDomain, typename TContext>
-inline TString wxGetTranslation(TString str, TDomain WXUNUSED(domain), TContext WXUNUSED(context))
+inline TString wxGetTranslation(TString str, [[maybe_unused]] TDomain domain, [[maybe_unused]] TContext context)
     { return str; }
 
 template<typename TString, typename TDomain>
@@ -354,13 +354,13 @@ inline TString wxGetTranslation(TString str1, TString str2, size_t n)
 
 template<typename TString, typename TDomain>
 inline TString wxGetTranslation(TString str1, TString str2, size_t n,
-                                TDomain WXUNUSED(domain))
+                                [[maybe_unused]] TDomain domain)
     { return n == 1 ? str1 : str2; }
 
 template<typename TString, typename TDomain, typename TContext>
 inline TString wxGetTranslation(TString str1, TString str2, size_t n,
-                                TDomain WXUNUSED(domain),
-                                TContext WXUNUSED(context))
+                                [[maybe_unused]] TDomain domain,
+                                [[maybe_unused]] TContext context)
     { return n == 1 ? str1 : str2; }
 
 #endif // wxUSE_INTL/!wxUSE_INTL

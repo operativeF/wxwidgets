@@ -109,7 +109,7 @@ public:
 private:
     // Special ctor for the "C" locale, it's only used internally as the user
     // code is supposed to use GetCLocale()
-    wxXLocale(struct wxXLocaleCTag * WXUNUSED(dummy)) { Init("C"); }
+    wxXLocale(struct [[maybe_unused]] wxXLocaleCTag * dummy) { Init("C"); }
 
     // Create from the given language string (called from ctors)
     void Init(const char *loc);
@@ -167,7 +167,7 @@ public:
 private:
     // Special ctor for the "C" locale, it's only used internally as the user
     // code is supposed to use GetCLocale()
-    wxXLocale(struct wxXLocaleCTag * WXUNUSED(dummy)) { m_isC = true; }
+    wxXLocale(struct [[maybe_unused]] wxXLocaleCTag * dummy) { m_isC = true; }
 
     // Without xlocale support this class can only represent "C" locale, if
     // this is false the object is invalid

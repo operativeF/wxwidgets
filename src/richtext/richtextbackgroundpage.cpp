@@ -475,7 +475,7 @@ void wxRichTextBackgroundPage::OnRichtextShadowUpdate( wxUpdateUIEvent& event )
  * wxEVT_UPDATE_UI event handler for ID_RICHTEXTSHADOWCOLOURSWATCHCTRL
  */
 
-void wxRichTextBackgroundPage::OnRichtextshadowcolourswatchctrlUpdate( wxUpdateUIEvent& WXUNUSED(event) )
+void wxRichTextBackgroundPage::OnRichtextshadowcolourswatchctrlUpdate( [[maybe_unused]] wxUpdateUIEvent& event )
 {
     // For now don't disable because of ugly disabled border on Windows
 }

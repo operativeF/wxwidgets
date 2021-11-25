@@ -609,7 +609,7 @@ public:
         Sets the maximum number of characters that may be entered in a single line
         text control. For compatibility only; currently does nothing.
     */
-    void SetMaxLength(unsigned long WXUNUSED(len)) override { }
+    void SetMaxLength(unsigned [[maybe_unused]] long len) override { }
 
     /**
         Writes text at the current position.
@@ -879,7 +879,7 @@ public:
     /**
         Does the 'drop' of Drag'n'Drop.
     */
-    void OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResult def, wxDataObject* DataObj);
+    void OnDrop([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxDragResult def, wxDataObject* DataObj);
 #endif
 
 // Clipboard operations
@@ -1648,7 +1648,7 @@ public:
         Prepares the content just before insertion (or after buffer reset). Called by the same function in wxRichTextBuffer.
         Currently is only called if undo mode is on.
     */
-    virtual void PrepareContent(wxRichTextParagraphLayoutBox& WXUNUSED(container)) {}
+    virtual void PrepareContent([[maybe_unused]] wxRichTextParagraphLayoutBox& container) {}
 
     /**
         Can we delete this range?
@@ -1917,7 +1917,7 @@ public:
 
         @since 2.9.1
     */
-    virtual void PaintAboveContent(wxDC& WXUNUSED(dc)) {}
+    virtual void PaintAboveContent([[maybe_unused]] wxDC& dc) {}
 
 #if wxRICHTEXT_BUFFERED_PAINTING
     /**

@@ -145,7 +145,7 @@ public:
 #ifdef __UNIX__
   void SetUmask(int mode) { m_umask = mode; }
 #else // !__UNIX__
-  void SetUmask(int WXUNUSED(mode)) { }
+  void SetUmask([[maybe_unused]] int mode) { }
 #endif // __UNIX__/!__UNIX__
 
   // implement inherited pure virtual functions

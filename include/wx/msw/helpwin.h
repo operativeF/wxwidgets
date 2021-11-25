@@ -26,7 +26,7 @@ public:
 
     // Must call this to set the filename
     bool Initialize(const std::string& file) override;
-    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const std::string& file, [[maybe_unused]] int server ) override { return Initialize( file ); }
 
     // If file is empty, reloads file given in Initialize
     bool LoadFile(const std::string& file = {}) override;

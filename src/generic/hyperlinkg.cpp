@@ -166,7 +166,7 @@ wxRect wxGenericHyperlinkCtrl::GetLabelRect() const
 // wxGenericHyperlinkCtrl - event handlers
 // ----------------------------------------------------------------------------
 
-void wxGenericHyperlinkCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericHyperlinkCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     dc.SetFont(GetFont());
@@ -249,7 +249,7 @@ void wxGenericHyperlinkCtrl::OnMotion(wxMouseEvent& event)
     }
 }
 
-void wxGenericHyperlinkCtrl::OnLeaveWindow(wxMouseEvent& WXUNUSED(event) )
+void wxGenericHyperlinkCtrl::OnLeaveWindow([[maybe_unused]] wxMouseEvent& event )
 {
     // NB: when the label rect and the client size rect have the same
     //     height this function is indispensable to remove the "rollover"
@@ -265,7 +265,7 @@ void wxGenericHyperlinkCtrl::OnLeaveWindow(wxMouseEvent& WXUNUSED(event) )
     }
 }
 
-void wxGenericHyperlinkCtrl::OnPopUpCopy( wxCommandEvent& WXUNUSED(event) )
+void wxGenericHyperlinkCtrl::OnPopUpCopy( [[maybe_unused]] wxCommandEvent& event )
 {
 #if wxUSE_CLIPBOARD
     if (!wxTheClipboard->Open())

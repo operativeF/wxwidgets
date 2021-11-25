@@ -157,7 +157,7 @@ private:
     }
 
     // override to implement column auto sizing
-    bool UpdateColumnWidthToFit(unsigned int idx, int WXUNUSED(widthTitle)) override
+    bool UpdateColumnWidthToFit(unsigned int idx, [[maybe_unused]] int widthTitle) override
     {
         GetOwner()->HandleColumnAutosize(idx, GetDummyMouseEvent());
 
@@ -671,9 +671,9 @@ public:
     void SetDefaultLineSize(wxGrid *grid, int size, bool resizeExisting) const override
         {  grid->SetDefaultRowSize(size, resizeExisting); }
 
-    int GetLineAt(const wxGrid * WXUNUSED(grid), int pos) const override
+    int GetLineAt(const [[maybe_unused]] wxGrid * grid, int pos) const override
         { return pos; } // TODO: implement row reordering
-    int GetLinePos(const wxGrid * WXUNUSED(grid), int line) const override
+    int GetLinePos(const [[maybe_unused]] wxGrid * grid, int line) const override
         { return line; } // TODO: implement row reordering
 
     int GetLineBefore([[maybe_unused]] const wxGrid* grid, int line) const override

@@ -52,10 +52,10 @@ class wxHtmlImageMapAreaCell : public wxHtmlCell
     public:
         wxHtmlImageMapAreaCell( celltype t, wxString &coords, double pixel_scale = 1.0);
         wxHtmlLinkInfo *GetLink( int x = 0, int y = 0 ) const override;
-        void Draw(wxDC& WXUNUSED(dc),
-                  int WXUNUSED(x), int WXUNUSED(y),
+        void Draw([[maybe_unused]] wxDC& dc,
+                  [[maybe_unused]] int x, [[maybe_unused]] int y,
                   int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                  wxHtmlRenderingInfo& WXUNUSED(info)) override {}
+                  [[maybe_unused]] wxHtmlRenderingInfo& info) override {}
 
 
     wxHtmlImageMapAreaCell(const wxHtmlImageMapAreaCell&) = delete;
@@ -223,10 +223,10 @@ class wxHtmlImageMapCell : public wxHtmlCell
     public:
         wxHtmlLinkInfo *GetLink( int x = 0, int y = 0 ) const override;
         const wxHtmlCell *Find( int cond, const void *param ) const override;
-        void Draw(wxDC& WXUNUSED(dc),
-                  int WXUNUSED(x), int WXUNUSED(y),
+        void Draw([[maybe_unused]] wxDC& dc,
+                  [[maybe_unused]] int x, [[maybe_unused]] int y,
                   int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                  wxHtmlRenderingInfo& WXUNUSED(info)) override {}
+                  [[maybe_unused]] wxHtmlRenderingInfo& info) override {}
 
     wxHtmlImageMapCell(const wxHtmlImageMapCell&) = delete;
 	wxHtmlImageMapCell& operator=(const wxHtmlImageMapCell&) = delete;
@@ -468,7 +468,7 @@ void wxHtmlImageCell::SetAlt(const wxString& alt)
     m_alt = alt;
 }
 
-std::string wxHtmlImageCell::ConvertToText(wxHtmlSelection* WXUNUSED(sel)) const
+std::string wxHtmlImageCell::ConvertToText([[maybe_unused]] wxHtmlSelection* sel) const
 {
     return m_alt;
 }
@@ -573,7 +573,7 @@ wxHtmlImageCell::~wxHtmlImageCell()
 
 void wxHtmlImageCell::Draw(wxDC& dc, int x, int y,
                            int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                           wxHtmlRenderingInfo& WXUNUSED(info))
+                           [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     if ( m_showFrame )
     {

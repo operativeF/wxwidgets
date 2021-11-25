@@ -190,7 +190,7 @@ public:
                               wxGridCellAttr& attr,
                               wxDC& dc,
                               int row, int col,
-                              int WXUNUSED(width))
+                              [[maybe_unused]] int width)
     {
         return GetBestSize(grid, attr, dc, row, col).y;
     }
@@ -201,7 +201,7 @@ public:
                              wxGridCellAttr& attr,
                              wxDC& dc,
                              int row, int col,
-                             int WXUNUSED(height))
+                             [[maybe_unused]] int height)
     {
         return GetBestSize(grid, attr, dc, row, col).x;
     }
@@ -213,9 +213,9 @@ public:
     //
     // If it isn't, return wxDefaultSize as the base class version does by
     // default.
-    virtual wxSize GetMaxBestSize(wxGrid& WXUNUSED(grid),
-                                  wxGridCellAttr& WXUNUSED(attr),
-                                  wxDC& WXUNUSED(dc))
+    virtual wxSize GetMaxBestSize([[maybe_unused]] wxGrid& grid,
+                                  [[maybe_unused]] wxGridCellAttr& attr,
+                                  [[maybe_unused]] wxDC& dc)
     {
         return wxDefaultSize;
     }
@@ -475,8 +475,8 @@ public:
     // the cell changing event is not vetoed.
     virtual
     wxGridActivationResult
-    TryActivate(int WXUNUSED(row), int WXUNUSED(col),
-                wxGrid* WXUNUSED(grid),
+    TryActivate([[maybe_unused]] int row, [[maybe_unused]] int col,
+                [[maybe_unused]] wxGrid* grid,
                 [[maybe_unused]] const wxGridActivationSource& actSource)
     {
         return wxGridActivationResult::DoEdit();
@@ -484,7 +484,7 @@ public:
 
     virtual
     void
-    DoActivate(int WXUNUSED(row), int WXUNUSED(col), wxGrid* WXUNUSED(grid))
+    DoActivate([[maybe_unused]] int row, [[maybe_unused]] int col, [[maybe_unused]] wxGrid* grid)
     {
         wxFAIL_MSG( "Must be overridden if TryActivate() is overridden" );
     }
@@ -1187,8 +1187,8 @@ public:
     virtual std::string GetRowLabelValue( int row );
     virtual std::string GetColLabelValue( int col );
     virtual std::string GetCornerLabelValue() const;
-    virtual void SetRowLabelValue( int WXUNUSED(row), const std::string& ) = 0;
-    virtual void SetColLabelValue( int WXUNUSED(col), const std::string& ) = 0;
+    virtual void SetRowLabelValue( [[maybe_unused]] int row, const std::string& ) = 0;
+    virtual void SetColLabelValue( [[maybe_unused]] int col, const std::string& ) = 0;
     virtual void SetCornerLabelValue( const std::string& ) = 0;
 
     // Attribute handling
@@ -1220,7 +1220,7 @@ public:
     // the cells in this column. Override this to return true (possibly for
     // some columns only) to speed up AutoSizeColumns() for the grids using
     // this table.
-    virtual bool CanMeasureColUsingSameAttr(int WXUNUSED(col)) const
+    virtual bool CanMeasureColUsingSameAttr([[maybe_unused]] int col) const
     {
         return false;
     }
@@ -2617,7 +2617,7 @@ protected:
         { return SetCurrentCell( wxGridCellCoords(row, col) ); }
 
 
-    bool ShouldScrollToChildOnFocus(wxWindow* WXUNUSED(win)) override
+    bool ShouldScrollToChildOnFocus([[maybe_unused]] wxWindow* win) override
         { return false; }
 
     friend class wxGridSelection;

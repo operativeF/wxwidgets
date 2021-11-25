@@ -268,7 +268,7 @@ public:
         // wxLayoutDirection::Default is returned if layout direction is not supported
     virtual wxLayoutDirection GetLayoutDirection() const
         { return wxLayoutDirection::Default; }
-    virtual void SetLayoutDirection(wxLayoutDirection WXUNUSED(dir))
+    virtual void SetLayoutDirection([[maybe_unused]] wxLayoutDirection dir)
         { }
 
         // mirror coordinates for RTL layout if this window uses it and if the
@@ -615,14 +615,14 @@ public:
         //
         // timeout specifies how long the animation should take, in ms, the
         // default value of 0 means to use the default (system-dependent) value
-    virtual bool ShowWithEffect(wxShowEffect WXUNUSED(effect),
-                                unsigned WXUNUSED(timeout) = 0)
+    virtual bool ShowWithEffect([[maybe_unused]] wxShowEffect effect,
+                                [[maybe_unused]] unsigned timeout = 0)
     {
         return Show();
     }
 
-    virtual bool HideWithEffect(wxShowEffect WXUNUSED(effect),
-                                unsigned WXUNUSED(timeout) = 0)
+    virtual bool HideWithEffect([[maybe_unused]] wxShowEffect effect,
+                                [[maybe_unused]] unsigned timeout = 0)
     {
         return Hide();
     }
@@ -751,10 +751,10 @@ public:
         { return AcceptsFocusFromKeyboard() && CanBeFocused(); }
 
         // call this when the return value of AcceptsFocus() changes
-    virtual void SetCanFocus(bool WXUNUSED(canFocus)) { }
+    virtual void SetCanFocus([[maybe_unused]] bool canFocus) { }
 
         // call to customize visible focus indicator if possible in the port
-    virtual void EnableVisibleFocus(bool WXUNUSED(enabled)) { }
+    virtual void EnableVisibleFocus([[maybe_unused]] bool enabled) { }
 
         // navigates inside this window
     bool NavigateIn(unsigned int flags = wxNavigationKeyEvent::IsForward)
@@ -816,7 +816,7 @@ public:
 
     // returns true if the child is in the client area of the window, i.e. is
     // not scrollbar, toolbar etc.
-    virtual bool IsClientAreaChild(const wxWindow *WXUNUSED(child)) const
+    virtual bool IsClientAreaChild([[maybe_unused]] const wxWindow *child) const
         { return true; }
 
     // looking for windows
@@ -958,7 +958,7 @@ public:
     //
     // Currently it is only used in wxMSW and is not considered to be part of
     // wxWidgets public API.
-    virtual void WXAdjustFontToOwnPPI(wxFont& WXUNUSED(font)) const { }
+    virtual void WXAdjustFontToOwnPPI([[maybe_unused]] wxFont& font) const { }
 
         // DPI-independent pixels, or DIPs, are pixel values for the standard
         // 96 DPI display, they are scaled to take the current resolution into
@@ -1043,7 +1043,7 @@ public:
 
         // enable the specified touch events for this window, return false if
         // the requested events are not supported
-    virtual bool EnableTouchEvents(int WXUNUSED(eventsMask))
+    virtual bool EnableTouchEvents([[maybe_unused]] int eventsMask)
     {
         return false;
     }
@@ -1078,10 +1078,10 @@ public:
     bool IsFrozen() const { return m_freezeCount != 0; }
 
         // adjust DC for drawing on this window
-    virtual void PrepareDC( wxDC & WXUNUSED(dc) ) { }
+    virtual void PrepareDC( [[maybe_unused]] wxDC & dc ) { }
 
         // enable or disable double buffering
-    virtual void SetDoubleBuffered(bool WXUNUSED(on)) { }
+    virtual void SetDoubleBuffered([[maybe_unused]] bool on) { }
 
         // return true if the window contents is double buffered by the system
     virtual bool IsDoubleBuffered() const { return false; }
@@ -1316,8 +1316,8 @@ public:
         // scrolls window by line/page: note that not all controls support this
         //
         // return true if the position changed, false otherwise
-    virtual bool ScrollLines(int WXUNUSED(lines)) { return false; }
-    virtual bool ScrollPages(int WXUNUSED(pages)) { return false; }
+    virtual bool ScrollLines([[maybe_unused]] int lines) { return false; }
+    virtual bool ScrollPages([[maybe_unused]] int pages) { return false; }
 
         // convenient wrappers for ScrollLines/Pages
     bool LineUp() { return ScrollLines(-1); }
@@ -1327,14 +1327,14 @@ public:
 
         // call this to always show one or both scrollbars, even if the window
         // is big enough to not require them
-    virtual void AlwaysShowScrollbars(bool WXUNUSED(horz) = true,
-                                      bool WXUNUSED(vert) = true)
+    virtual void AlwaysShowScrollbars([[maybe_unused]] bool horz = true,
+                                      [[maybe_unused]] bool vert = true)
     {
     }
 
         // return true if AlwaysShowScrollbars() had been called before for the
         // corresponding orientation
-    virtual bool IsScrollbarAlwaysShown(int WXUNUSED(orient)) const
+    virtual bool IsScrollbarAlwaysShown([[maybe_unused]] int orient) const
     {
         return false;
     }
@@ -1392,7 +1392,7 @@ public:
 #else // !wxUSE_TOOLTIPS
         // make it much easier to compile apps in an environment
         // that doesn't support tooltips
-    void SetToolTip(const wxString & WXUNUSED(tip)) { }
+    void SetToolTip(const [[maybe_unused]] wxString & tip) { }
     void UnsetToolTip() { }
 #endif // wxUSE_TOOLTIPS/!wxUSE_TOOLTIPS
 
@@ -1483,7 +1483,7 @@ public:
 
 
     // Set window transparency if the platform supports it
-    virtual bool SetTransparent(wxByte WXUNUSED(alpha)) { return false; }
+    virtual bool SetTransparent([[maybe_unused]] wxByte alpha) { return false; }
     virtual bool CanSetTransparent() { return false; }
 
 
@@ -1524,7 +1524,7 @@ public:
         // platform-specific APIs
     virtual WXWidget GetHandle() const = 0;
         // associate the window with a new native handle
-    virtual void AssociateHandle(WXWidget WXUNUSED(handle)) { }
+    virtual void AssociateHandle([[maybe_unused]] WXWidget handle) { }
         // dissociate the current native handle from the window
     virtual void DissociateHandle() { }
 
@@ -1583,7 +1583,7 @@ public:
     // children frames are not top level windows (and their IsTopLevel()
     // returns false) but still are self-contained navigation domains for the
     // purposes of TAB navigation -- but not for the accelerators.
-    virtual bool IsTopNavigationDomain(NavigationKind WXUNUSED(kind)) const
+    virtual bool IsTopNavigationDomain([[maybe_unused]] NavigationKind kind) const
     {
         return false;
     }
@@ -1642,7 +1642,7 @@ protected:
     // to really enable/disable the widget, it will only be called when we
     // really need to enable/disable window and so no additional checks on the
     // widgets state are necessary
-    virtual void DoEnable(bool WXUNUSED(enable)) { }
+    virtual void DoEnable([[maybe_unused]] bool enable) { }
 
     std::string          m_windowName;
 
@@ -1832,9 +1832,9 @@ protected:
     // These two methods can be overridden to implement intelligent
     // width-for-height and/or height-for-width best size determination for the
     // window. By default the fixed best size is used.
-    virtual int DoGetBestClientHeight(int WXUNUSED(width)) const
+    virtual int DoGetBestClientHeight([[maybe_unused]] int width) const
         { return wxDefaultCoord; }
-    virtual int DoGetBestClientWidth(int WXUNUSED(height)) const
+    virtual int DoGetBestClientWidth([[maybe_unused]] int height) const
         { return wxDefaultCoord; }
 
     // this is the virtual function to be overridden in any derived class which

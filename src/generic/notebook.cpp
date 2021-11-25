@@ -219,7 +219,7 @@ int wxNotebook::GetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage)) const
 }
 
 bool wxNotebook::SetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage),
-                              int WXUNUSED(nImage))
+                              [[maybe_unused]] int nImage)
 {
     wxASSERT( IS_VALID_PAGE(nPage) );
 
@@ -385,7 +385,7 @@ bool wxNotebook::InsertPage(size_t nPage,
                             wxNotebookPage *pPage,
                             const wxString& strText,
                             bool bSelect,
-                            int WXUNUSED(imageId))
+                            [[maybe_unused]] int imageId)
 {
     wxASSERT( pPage != NULL );
     wxCHECK( IS_VALID_PAGE(nPage) || nPage == GetPageCount(), false );
@@ -577,7 +577,7 @@ bool wxNotebook::DoPhase(int /* nPhase */)
     return true;
 }
 
-void wxNotebook::Command(wxCommandEvent& WXUNUSED(event))
+void wxNotebook::Command([[maybe_unused]] wxCommandEvent& event)
 {
     wxFAIL_MSG("wxNotebook::Command not implemented");
 }
@@ -617,7 +617,7 @@ void wxNotebook::OnMouseEvent(wxMouseEvent& event)
     m_tabView->OnEvent(event);
 }
 
-void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event) )
+void wxNotebook::OnPaint([[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
     if (m_tabView)

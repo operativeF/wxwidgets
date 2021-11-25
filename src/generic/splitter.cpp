@@ -159,7 +159,7 @@ void wxSplitterWindow::SetResizeCursor()
 // other event handlers
 // ----------------------------------------------------------------------------
 
-void wxSplitterWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxSplitterWindow::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 #ifdef __WXOSX__
@@ -379,7 +379,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
     }
 }
 
-void wxSplitterWindow::OnMouseCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+void wxSplitterWindow::OnMouseCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
 {
     if (m_dragMode != wxSplitDragMode::Dragging)
         return;

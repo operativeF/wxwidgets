@@ -1588,7 +1588,7 @@ bool CheckForChildExit(int pid, int* exitcodeOut)
 wxExecuteData::ChildProcessesData wxExecuteData::ms_childProcesses;
 
 /* static */
-void wxExecuteData::OnSomeChildExited(int WXUNUSED(sig))
+void wxExecuteData::OnSomeChildExited([[maybe_unused]] int sig)
 {
     // We know that some child process has terminated, but we don't know which
     // one, so check all of them (notice that more than one could have exited).

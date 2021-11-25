@@ -748,12 +748,12 @@ wxNotebookWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
                             hwnd, message, wParam, lParam);
 }
 
-void wxNotebook::OnEraseBackground(wxEraseEvent& WXUNUSED(event))
+void wxNotebook::OnEraseBackground([[maybe_unused]] wxEraseEvent& event)
 {
     // do nothing here
 }
 
-void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxNotebook::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     RECT rc;

@@ -402,7 +402,7 @@ bool wxGenericMDIChildFrame::Create(wxGenericMDIParentFrame *parent,
                                     const wxString& title,
                                     [[maybe_unused]] const wxPoint& pos,
                                     const wxSize& size,
-                                    long WXUNUSED(style),
+                                    [[maybe_unused]] long style,
                                     const wxString& name)
 {
     // unfortunately we can't use the base class m_mdiParent field unless
@@ -491,7 +491,7 @@ void wxGenericMDIChildFrame::OnMenuHighlight(wxMenuEvent& event)
 }
 #endif // wxUSE_MENUS
 
-void wxGenericMDIChildFrame::OnClose(wxCloseEvent& WXUNUSED(event))
+void wxGenericMDIChildFrame::OnClose([[maybe_unused]] wxCloseEvent& event)
 {
     // we're not a TLW so don't delay the destruction of this window
     delete this;
@@ -618,7 +618,7 @@ void wxGenericMDIClientWindow::OnPageChanged(wxBookCtrlEvent& event)
     event.Skip();
 }
 
-void wxGenericMDIClientWindow::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxGenericMDIClientWindow::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     m_notebook->SetSize(GetClientSize());
 }

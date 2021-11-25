@@ -82,9 +82,9 @@ public:
 
     //// Backward compatibility with wxHelpController API
 
-    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize(file); }
+    bool Initialize(const std::string& file, [[maybe_unused]] int server ) override { return Initialize(file); }
     bool Initialize(const std::string& file) override;
-    void SetViewer(const std::string& WXUNUSED(viewer), unsigned int WXUNUSED(flags) = 0) override {}
+    void SetViewer([[maybe_unused]] const std::string& viewer, [[maybe_unused]] unsigned int flags = 0) override {}
     bool LoadFile(const std::string& file = {}) override;
     bool DisplaySection(int sectionNo) override;
     bool DisplaySection(const std::string& section) override { return Display(section); }

@@ -226,22 +226,22 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     Centre( wxBOTH | wxCENTER_FRAME);
 }
 
-void wxGenericMessageDialog::OnYes(wxCommandEvent& WXUNUSED(event))
+void wxGenericMessageDialog::OnYes([[maybe_unused]] wxCommandEvent& event)
 {
     EndModal( wxID_YES );
 }
 
-void wxGenericMessageDialog::OnNo(wxCommandEvent& WXUNUSED(event))
+void wxGenericMessageDialog::OnNo([[maybe_unused]] wxCommandEvent& event)
 {
     EndModal( wxID_NO );
 }
 
-void wxGenericMessageDialog::OnHelp(wxCommandEvent& WXUNUSED(event))
+void wxGenericMessageDialog::OnHelp([[maybe_unused]] wxCommandEvent& event)
 {
     EndModal( wxID_HELP );
 }
 
-void wxGenericMessageDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
+void wxGenericMessageDialog::OnCancel([[maybe_unused]] wxCommandEvent& event)
 {
     // Allow cancellation via ESC/Close button except if
     // only YES and NO are specified.

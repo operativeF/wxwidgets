@@ -2568,7 +2568,7 @@ public:
     /**
         Finds the absolute position and row height for the given character position.
     */
-    virtual bool FindPosition(wxDC& WXUNUSED(dc), wxRichTextDrawingContext& WXUNUSED(context), long WXUNUSED(index), wxPoint& WXUNUSED(pt), int* WXUNUSED(height), bool WXUNUSED(forceLineStart)) { return false; }
+    virtual bool FindPosition([[maybe_unused]] wxDC& dc, [[maybe_unused]] wxRichTextDrawingContext& context, [[maybe_unused]] long index, [[maybe_unused]] wxPoint& pt, [[maybe_unused]] int* height, [[maybe_unused]] bool forceLineStart) { return false; }
 
     /**
         Returns the best size, i.e. the ideal starting size for this object irrespective
@@ -2588,7 +2588,7 @@ public:
         Do a split from @a pos, returning an object containing the second part, and setting
         the first part in 'this'.
     */
-    virtual wxRichTextObject* DoSplit(long WXUNUSED(pos)) { return nullptr; }
+    virtual wxRichTextObject* DoSplit([[maybe_unused]] long pos) { return nullptr; }
 
     /**
         Calculates the range of the object. By default, guess that the object is 1 unit long.
@@ -2628,25 +2628,25 @@ public:
     /**
         Returns @true if this object can merge itself with the given one.
     */
-    virtual bool CanMerge(wxRichTextObject* WXUNUSED(object), wxRichTextDrawingContext& WXUNUSED(context)) const { return false; }
+    virtual bool CanMerge([[maybe_unused]] wxRichTextObject* object, [[maybe_unused]] wxRichTextDrawingContext& context) const { return false; }
 
     /**
         Returns @true if this object merged itself with the given one.
         The calling code will then delete the given object.
     */
-    virtual bool Merge(wxRichTextObject* WXUNUSED(object), wxRichTextDrawingContext& WXUNUSED(context)) { return false; }
+    virtual bool Merge([[maybe_unused]] wxRichTextObject* object, [[maybe_unused]] wxRichTextDrawingContext& context) { return false; }
 
     /**
         Returns @true if this object can potentially be split, by virtue of having
         different virtual attributes for individual sub-objects.
     */
-    virtual bool CanSplit(wxRichTextDrawingContext& WXUNUSED(context)) const { return false; }
+    virtual bool CanSplit([[maybe_unused]] wxRichTextDrawingContext& context) const { return false; }
 
     /**
         Returns the final object in the split objects if this object was split due to differences between sub-object virtual attributes.
         Returns itself if it was not split.
     */
-    virtual wxRichTextObject* Split(wxRichTextDrawingContext& WXUNUSED(context)) { return this; }
+    virtual wxRichTextObject* Split([[maybe_unused]] wxRichTextDrawingContext& context) { return this; }
 
     /**
         Dump object data to the given output stream for debugging.
@@ -2661,7 +2661,7 @@ public:
     /**
         Edits the object's properties via a GUI.
     */
-    virtual bool EditProperties(wxWindow* WXUNUSED(parent), wxRichTextBuffer* WXUNUSED(buffer)) { return false; }
+    virtual bool EditProperties([[maybe_unused]] wxWindow* parent, [[maybe_unused]] wxRichTextBuffer* buffer) { return false; }
 
     /**
         Returns the label to be used for the properties context menu item.
@@ -2727,7 +2727,7 @@ public:
         Returns a selection object specifying the selections between start and end character positions.
         For example, a table would deduce what cells (of range length 1) are selected when dragging across the table.
     */
-    virtual wxRichTextSelection GetSelection(long WXUNUSED(start), long WXUNUSED(end)) const { return wxRichTextSelection(); }
+    virtual wxRichTextSelection GetSelection([[maybe_unused]] long start, [[maybe_unused]] long end) const { return wxRichTextSelection(); }
 
 // Accessors
 
@@ -4035,28 +4035,28 @@ public:
     /**
         Returns @true if we can edit the object's properties via a GUI.
     */
-    virtual bool CanEditProperties(wxRichTextField* WXUNUSED(obj)) const { return false; }
+    virtual bool CanEditProperties([[maybe_unused]] wxRichTextField* obj) const { return false; }
 
     /**
         Edits the object's properties via a GUI.
     */
-    virtual bool EditProperties(wxRichTextField* WXUNUSED(obj), wxWindow* WXUNUSED(parent), wxRichTextBuffer* WXUNUSED(buffer)) { return false; }
+    virtual bool EditProperties([[maybe_unused]] wxRichTextField* obj, [[maybe_unused]] wxWindow* parent, [[maybe_unused]] wxRichTextBuffer* buffer) { return false; }
 
     /**
         Returns the label to be used for the properties context menu item.
     */
-    virtual wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const { return {}; }
+    virtual wxString GetPropertiesMenuLabel([[maybe_unused]] wxRichTextField* obj) const { return {}; }
 
     /**
         Update the field. This would typically expand the field to its value,
         if this is a dynamically changing and/or composite field.
      */
-    virtual bool UpdateField(wxRichTextBuffer* WXUNUSED(buffer), wxRichTextField* WXUNUSED(obj)) { return false; }
+    virtual bool UpdateField([[maybe_unused]] wxRichTextBuffer* buffer, [[maybe_unused]] wxRichTextField* obj) { return false; }
 
     /**
         Returns @true if this object is top-level, i.e. contains its own paragraphs, such as a text box.
     */
-    virtual bool IsTopLevel(wxRichTextField* WXUNUSED(obj)) const { return true; }
+    virtual bool IsTopLevel([[maybe_unused]] wxRichTextField* obj) const { return true; }
 
     /**
         Sets the field type name. There should be a unique name per field type object.
@@ -4199,7 +4199,7 @@ public:
     /**
         Returns @true if the display type is wxRICHTEXT_FIELD_STYLE_COMPOSITE, @false otherwise.
     */
-    bool IsTopLevel(wxRichTextField* WXUNUSED(obj)) const override { return (GetDisplayStyle() & wxRICHTEXT_FIELD_STYLE_COMPOSITE) != 0; }
+    bool IsTopLevel([[maybe_unused]] wxRichTextField* obj) const override { return (GetDisplayStyle() & wxRICHTEXT_FIELD_STYLE_COMPOSITE) != 0; }
 
     /**
         Sets the text label for fields of this type.

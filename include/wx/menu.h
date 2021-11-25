@@ -475,7 +475,7 @@ public:
     virtual void EnableTop(size_t pos, bool enable) = 0;
 
     // is the menu enabled?
-    virtual bool IsEnabledTop(size_t WXUNUSED(pos)) const { return true; }
+    virtual bool IsEnabledTop([[maybe_unused]] size_t pos) const { return true; }
 
     // get or change the label of the menu at given position
     virtual void SetMenuLabel(size_t pos, const std::string& label) = 0;

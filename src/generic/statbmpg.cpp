@@ -38,7 +38,7 @@ bool wxGenericStaticBitmap::Create(wxWindow *parent,
     return true;
 }
 
-void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxGenericStaticBitmap::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     if ( !m_bitmap.IsOk() )
         return;

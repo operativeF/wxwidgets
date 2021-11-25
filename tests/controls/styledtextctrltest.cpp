@@ -47,12 +47,12 @@ public:
         delete m_stc;
     }
 
-    void OnKillSTCFocus(wxFocusEvent& WXUNUSED(event))
+    void OnKillSTCFocus([[maybe_unused]] wxFocusEvent& event)
     {
         m_focusAlwaysRetained=false;
     }
 
-    void OnCallTipClick(wxStyledTextEvent& WXUNUSED(event))
+    void OnCallTipClick([[maybe_unused]] wxStyledTextEvent& event)
     {
         m_calltipClickReceived=true;
     }

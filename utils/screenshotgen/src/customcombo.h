@@ -29,7 +29,7 @@ public:
 
     virtual wxCoord OnMeasureItem( size_t item ) const;
 
-    virtual wxCoord OnMeasureItemWidth( size_t WXUNUSED(item) ) const;
+    virtual wxCoord OnMeasureItemWidth( [[maybe_unused]] size_t item ) const;
 
     static PenStyleComboBox* CreateSample(wxWindow* parent);
 };
@@ -96,7 +96,7 @@ public:
     }
 
     // On mouse left, set the value and close the popup
-    void OnMouseClick(wxMouseEvent& WXUNUSED(event))
+    void OnMouseClick([[maybe_unused]] wxMouseEvent& event)
     {
         m_value = m_itemHere;
         // TODO: Send event
@@ -152,7 +152,7 @@ public:
     }
 
     virtual wxSize GetAdjustedSize( int minWidth,
-                                    int WXUNUSED(prefHeight),
+                                    [[maybe_unused]] int prefHeight,
                                     int maxHeight )
     {
         return wxSize(minWidth, std::min(80, maxHeight));

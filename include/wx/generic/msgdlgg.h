@@ -37,8 +37,8 @@ protected:
     void OnCancel(wxCommandEvent& event);
 
     // can be overridden to provide more contents to the dialog
-    virtual void AddMessageDialogCheckBox(wxSizer *WXUNUSED(sizer)) { }
-    virtual void AddMessageDialogDetails(wxSizer *WXUNUSED(sizer)) { }
+    virtual void AddMessageDialogCheckBox([[maybe_unused]] wxSizer *sizer) { }
+    virtual void AddMessageDialogDetails([[maybe_unused]] wxSizer *sizer) { }
 
 private:
     // Creates and returns a standard button sizer using the style of this

@@ -47,7 +47,7 @@ public:
 
     wxSocketError GetLastError() const override;
 
-    void ReenableEvents(wxSocketEventFlags WXUNUSED(flags)) override
+    void ReenableEvents([[maybe_unused]] wxSocketEventFlags flags) override
     {
         // notifications are never disabled in this implementation, there is no
         // need for this as WSAAsyncSelect() only sends notification once when

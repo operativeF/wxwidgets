@@ -49,7 +49,7 @@ class wxHtmlLineCell : public wxHtmlCell
 
 void wxHtmlLineCell::Draw(wxDC& dc, int x, int y,
                           int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                          wxHtmlRenderingInfo& WXUNUSED(info))
+                          [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     wxBrush mybrush("GREY", (m_HasShading) ? wxBrushStyle::Transparent : wxBrushStyle::Solid);
     wxPen mypen("GREY", 1, wxPenStyle::Solid);

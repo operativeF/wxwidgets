@@ -868,7 +868,7 @@ wxIcon wxRichTextFontPage::GetIconResource( const std::string& name )
  * wxEVT_TEXT event handler for ID_RICHTEXTFONTPAGE_FACETEXTCTRL
  */
 
-void wxRichTextFontPage::OnFaceTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnFaceTextCtrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -907,7 +907,7 @@ void wxRichTextFontPage::OnFaceTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) 
  * wxEVT_TEXT event handler for ID_RICHTEXTFONTPAGE_SIZETEXTCTRL
  */
 
-void wxRichTextFontPage::OnSizeTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnSizeTextCtrlUpdated( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -951,7 +951,7 @@ void wxRichTextFontPage::OnSizeListBoxSelected( wxCommandEvent& event )
  * wxEVT_LISTBOX event handler for ID_RICHTEXTFONTPAGE_FACELISTBOX
  */
 
-void wxRichTextFontPage::OnFaceListBoxSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnFaceListBoxSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     bool oldDontUpdate = m_dontUpdate;
     m_dontUpdate = true;
@@ -970,7 +970,7 @@ void wxRichTextFontPage::OnFaceListBoxSelected( wxCommandEvent& WXUNUSED(event) 
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTFONTPAGE_STYLECTRL
  */
 
-void wxRichTextFontPage::OnStyleCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnStyleCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -983,7 +983,7 @@ void wxRichTextFontPage::OnStyleCtrlSelected( wxCommandEvent& WXUNUSED(event) )
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTFONTPAGE_UNDERLINING_CTRL
  */
 
-void wxRichTextFontPage::OnUnderliningCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnUnderliningCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -996,7 +996,7 @@ void wxRichTextFontPage::OnUnderliningCtrlSelected( wxCommandEvent& WXUNUSED(eve
  * wxEVT_COMBOBOX event handler for ID_RICHTEXTFONTPAGE_WEIGHTCTRL
  */
 
-void wxRichTextFontPage::OnWeightCtrlSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnWeightCtrlSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1030,7 +1030,7 @@ void wxRichTextFontPage::OnColourClicked( wxCommandEvent& event )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTFONTPAGE_STRIKETHROUGHCTRL
  */
 
-void wxRichTextFontPage::OnStrikethroughctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnStrikethroughctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1042,7 +1042,7 @@ void wxRichTextFontPage::OnStrikethroughctrlClick( wxCommandEvent& WXUNUSED(even
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTFONTPAGE_CAPSCTRL
  */
 
-void wxRichTextFontPage::OnCapsctrlClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnCapsctrlClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1054,7 +1054,7 @@ void wxRichTextFontPage::OnCapsctrlClick( wxCommandEvent& WXUNUSED(event) )
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTFONTPAGE_SUPERSCRIPT
  */
 
-void wxRichTextFontPage::OnRichtextfontpageSuperscriptClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnRichtextfontpageSuperscriptClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1069,7 +1069,7 @@ void wxRichTextFontPage::OnRichtextfontpageSuperscriptClick( wxCommandEvent& WXU
  * wxEVT_CHECKBOX event handler for ID_RICHTEXTFONTPAGE_SUBSCRIPT
  */
 
-void wxRichTextFontPage::OnRichtextfontpageSubscriptClick( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnRichtextfontpageSubscriptClick( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1084,7 +1084,7 @@ void wxRichTextFontPage::OnRichtextfontpageSubscriptClick( wxCommandEvent& WXUNU
  * wxEVT_CHOICE event handler for ID_RICHTEXTFONTPAGE_SIZE_UNITS
  */
 
-void wxRichTextFontPage::OnRichtextfontpageSizeUnitsSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnRichtextfontpageSizeUnitsSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1096,7 +1096,7 @@ void wxRichTextFontPage::OnRichtextfontpageSizeUnitsSelected( wxCommandEvent& WX
  * wxEVT_SPINCTRL event handler for ID_RICHTEXTFONTPAGE_SPINBUTTONS
  */
 
-void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( [[maybe_unused]] wxSpinEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1131,7 +1131,7 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( wxSpinEvent& WXUNUSED(
  * wxEVT_SCROLL_LINEDOWN event handler for ID_RICHTEXTFONTPAGE_SPINBUTTONS
  */
 
-void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( wxSpinEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( [[maybe_unused]] wxSpinEvent& event )
 {
     if (m_dontUpdate)
         return;
@@ -1167,7 +1167,7 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( wxSpinEvent& WXUNUSE
  * wxEVT_IDLE event handler for ID_RICHTEXTFONTPAGE
  */
 
-void wxRichTextFontPage::OnIdle( wxIdleEvent& WXUNUSED(event) )
+void wxRichTextFontPage::OnIdle( [[maybe_unused]] wxIdleEvent& event )
 {
     if (!m_sizeUnitsCtrl)
         return;

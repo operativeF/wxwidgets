@@ -90,16 +90,16 @@ public:
     void SetTickFreq(int freq) { DoSetTickFreq(freq); }
     virtual int GetTickFreq() const { return 0; }
     virtual void ClearTicks() { }
-    virtual void SetTick(int WXUNUSED(tickPos)) { }
+    virtual void SetTick([[maybe_unused]] int tickPos) { }
 
     virtual void ClearSel() { }
     virtual int GetSelEnd() const { return GetMin(); }
     virtual int GetSelStart() const { return GetMax(); }
-    virtual void SetSelection(int WXUNUSED(min), int WXUNUSED(max)) { }
+    virtual void SetSelection([[maybe_unused]] int min, [[maybe_unused]] int max) { }
 
 protected:
     // Platform-specific implementation of SetTickFreq
-    virtual void DoSetTickFreq(int WXUNUSED(freq)) { /* unsupported by default */ }
+    virtual void DoSetTickFreq([[maybe_unused]] int freq) { /* unsupported by default */ }
 
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }

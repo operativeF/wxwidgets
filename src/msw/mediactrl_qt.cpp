@@ -1128,9 +1128,9 @@ bool wxQTMediaBackend::ShowPlayerControls(wxMediaCtrlPlayerControls flags)
 //
 // Callback for when the movie controller receives a message
 //---------------------------------------------------------------------------
-Boolean wxQTMediaBackend::MCFilterProc(MovieController WXUNUSED(theController),
+Boolean wxQTMediaBackend::MCFilterProc([[maybe_unused]] MovieController theController,
                                short action,
-                               void * WXUNUSED(params),
+                               [[maybe_unused]] void * params,
                                LONG_PTR refCon)
 {
 // NB: potential optimisation

@@ -565,37 +565,37 @@ bool wxComboBox::IsEditable() const
 // standard event handling
 // ----------------------------------------------------------------------------
 
-void wxComboBox::OnCut(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnCut([[maybe_unused]] wxCommandEvent& event)
 {
     Cut();
 }
 
-void wxComboBox::OnCopy(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnCopy([[maybe_unused]] wxCommandEvent& event)
 {
     Copy();
 }
 
-void wxComboBox::OnPaste(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnPaste([[maybe_unused]] wxCommandEvent& event)
 {
     Paste();
 }
 
-void wxComboBox::OnUndo(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnUndo([[maybe_unused]] wxCommandEvent& event)
 {
     Undo();
 }
 
-void wxComboBox::OnRedo(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnRedo([[maybe_unused]] wxCommandEvent& event)
 {
     Redo();
 }
 
-void wxComboBox::OnDelete(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnDelete([[maybe_unused]] wxCommandEvent& event)
 {
     RemoveSelection();
 }
 
-void wxComboBox::OnSelectAll(wxCommandEvent& WXUNUSED(event))
+void wxComboBox::OnSelectAll([[maybe_unused]] wxCommandEvent& event)
 {
     SelectAll();
 }

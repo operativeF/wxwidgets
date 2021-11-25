@@ -519,18 +519,18 @@ void wxLogFrame::DoClose()
     }
 }
 
-void wxLogFrame::OnClose(wxCommandEvent& WXUNUSED(event))
+void wxLogFrame::OnClose([[maybe_unused]] wxCommandEvent& event)
 {
     DoClose();
 }
 
-void wxLogFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void wxLogFrame::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 {
     DoClose();
 }
 
 #if CAN_SAVE_FILES
-void wxLogFrame::OnSave(wxCommandEvent& WXUNUSED(event))
+void wxLogFrame::OnSave([[maybe_unused]] wxCommandEvent& event)
 {
     wxString filename;
     wxFile file;
@@ -563,7 +563,7 @@ void wxLogFrame::OnSave(wxCommandEvent& WXUNUSED(event))
 }
 #endif // CAN_SAVE_FILES
 
-void wxLogFrame::OnClear(wxCommandEvent& WXUNUSED(event))
+void wxLogFrame::OnClear([[maybe_unused]] wxCommandEvent& event)
 {
     m_pTextCtrl->Clear();
 }
@@ -621,13 +621,13 @@ wxFrame *wxLogWindow::GetFrame() const
     return m_pLogFrame;
 }
 
-bool wxLogWindow::OnFrameClose(wxFrame * WXUNUSED(frame))
+bool wxLogWindow::OnFrameClose([[maybe_unused]] wxFrame * frame)
 {
     // allow to close
     return true;
 }
 
-void wxLogWindow::OnFrameDelete(wxFrame * WXUNUSED(frame))
+void wxLogWindow::OnFrameDelete([[maybe_unused]] wxFrame * frame)
 {
     m_pLogFrame = nullptr;
 }
@@ -898,7 +898,7 @@ void wxLogDialog::OnListItemActivated(wxListEvent& event)
     wxMessageBox(str.ToStdString(), "Log message", wxOK, this);
 }
 
-void wxLogDialog::OnOk(wxCommandEvent& WXUNUSED(event))
+void wxLogDialog::OnOk([[maybe_unused]] wxCommandEvent& event)
 {
     EndModal(wxID_OK);
 }
@@ -933,7 +933,7 @@ wxString wxLogDialog::GetLogMessages() const
 
 #if wxUSE_CLIPBOARD
 
-void wxLogDialog::OnCopy(wxCommandEvent& WXUNUSED(event))
+void wxLogDialog::OnCopy([[maybe_unused]] wxCommandEvent& event)
 {
     wxClipboardLocker clip;
     if ( !clip ||
@@ -947,7 +947,7 @@ void wxLogDialog::OnCopy(wxCommandEvent& WXUNUSED(event))
 
 #if CAN_SAVE_FILES
 
-void wxLogDialog::OnSave(wxCommandEvent& WXUNUSED(event))
+void wxLogDialog::OnSave([[maybe_unused]] wxCommandEvent& event)
 {
     wxFile file;
     int rc = OpenLogFile(file, nullptr, this);

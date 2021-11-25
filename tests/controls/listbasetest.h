@@ -594,7 +594,7 @@ struct ListBaseTest
 
     //From the sample but fixed so it actually inverts
     static int wxCALLBACK
-        MyCompareFunction(wxIntPtr item1, wxIntPtr item2, wxIntPtr WXUNUSED(sortData))
+        MyCompareFunction(wxIntPtr item1, wxIntPtr item2, [[maybe_unused]] wxIntPtr sortData)
     {
         // inverse the order
         if (item1 < item2)

@@ -1528,9 +1528,9 @@ public:
     wxZipStreamLink *AddRef() { m_ref++; return this; }
     wxZipOutputStream *GetOutputStream() const { return m_stream; }
 
-    void Release(class wxZipInputStream *WXUNUSED(s))
+    void Release(class [[maybe_unused]] wxZipInputStream *s)
         { if (--m_ref == 0) delete this; }
-    void Release(class wxZipOutputStream *WXUNUSED(s))
+    void Release(class [[maybe_unused]] wxZipOutputStream *s)
         { m_stream = nullptr; if (--m_ref == 0) delete this; }
 
 private:

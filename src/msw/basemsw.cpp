@@ -69,7 +69,7 @@ void *wxConsoleAppTraits::BeforeChildWaitLoop()
     return nullptr;
 }
 
-void wxConsoleAppTraits::AfterChildWaitLoop(void * WXUNUSED(data))
+void wxConsoleAppTraits::AfterChildWaitLoop([[maybe_unused]] void * data)
 {
     // nothing to do here
 }

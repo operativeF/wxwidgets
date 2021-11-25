@@ -198,7 +198,7 @@ private:
         evt.Skip();
     }
 
-    void OnMouseCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
+    void OnMouseCaptureLost([[maybe_unused]] wxMouseCaptureLostEvent& event)
     {
         Release();
     }
@@ -361,7 +361,7 @@ public:
     bool OnEvent( wxPropertyGrid* propgrid, wxPGProperty* property,
         wxWindow* wnd, wxEvent& event ) const override;
     bool GetValueFromControl( wxVariant& variant, wxPGProperty* property, wxWindow* wnd ) const override;
-    void SetValueToUnspecified( wxPGProperty* WXUNUSED(property), wxWindow* wnd ) const override;
+    void SetValueToUnspecified( [[maybe_unused]] wxPGProperty* property, wxWindow* wnd ) const override;
 };
 
 
@@ -432,15 +432,15 @@ void wxPGDatePickerCtrlEditor::UpdateControl( wxPGProperty* property,
 }
 
 // Control's events are redirected here
-bool wxPGDatePickerCtrlEditor::OnEvent( wxPropertyGrid* WXUNUSED(propgrid),
-                                        wxPGProperty* WXUNUSED(property),
-                                        wxWindow* WXUNUSED(wnd),
+bool wxPGDatePickerCtrlEditor::OnEvent( [[maybe_unused]] wxPropertyGrid* propgrid,
+                                        [[maybe_unused]] wxPGProperty* property,
+                                        [[maybe_unused]] wxWindow* wnd,
                                         wxEvent& event ) const
 {
     return event.GetEventType() == wxEVT_DATE_CHANGED;
 }
 
-bool wxPGDatePickerCtrlEditor::GetValueFromControl( wxVariant& variant, wxPGProperty* WXUNUSED(property), wxWindow* wnd ) const
+bool wxPGDatePickerCtrlEditor::GetValueFromControl( wxVariant& variant, [[maybe_unused]] wxPGProperty* property, wxWindow* wnd ) const
 {
     wxDatePickerCtrl* ctrl = (wxDatePickerCtrl*) wnd;
     wxASSERT( wxDynamicCast(ctrl, wxDatePickerCtrl) );
@@ -1202,7 +1202,7 @@ bool wxSystemColourProperty::IntToValue( wxVariant& variant, int number, int arg
 
 // Need to do some extra event handling.
 bool wxSystemColourProperty::OnEvent( wxPropertyGrid* propgrid,
-                                      wxWindow* WXUNUSED(primary),
+                                      [[maybe_unused]] wxWindow* primary,
                                       wxEvent& event )
 {
     bool askColour = false;
@@ -1243,7 +1243,7 @@ bool wxSystemColourProperty::OnEvent( wxPropertyGrid* propgrid,
 public:
     virtual void Render( wxDC& dc, const wxRect& rect,
                          const wxPropertyGrid* propertyGrid, wxPGProperty* property,
-                         int WXUNUSED(column), int item, int WXUNUSED(flags) ) const
+                         [[maybe_unused]] int column, int item, [[maybe_unused]] int flags ) const
     {
         wxASSERT( wxDynamicCast(property, wxSystemColourProperty) );
         wxSystemColourProperty* prop = wxStaticCast(property, wxSystemColourProperty);
@@ -2146,7 +2146,7 @@ void wxDateProperty::OnSetValue()
 }
 
 bool wxDateProperty::StringToValue( wxVariant& variant, const wxString& text,
-                                    int WXUNUSED(argFlags) ) const
+                                    [[maybe_unused]] int argFlags ) const
 {
     wxDateTime dt;
 

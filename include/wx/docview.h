@@ -238,7 +238,7 @@ public:
 
     // Called by framework if created automatically by the default document
     // manager class: gives view a chance to initialise
-    virtual bool OnCreate(wxDocument *WXUNUSED(doc), unsigned int WXUNUSED(flags))
+    virtual bool OnCreate([[maybe_unused]] wxDocument *doc, [[maybe_unused]] unsigned int flags)
         { return true; }
 
     // Checks if the view is the last one for the document; if so, asks user
@@ -870,7 +870,7 @@ protected:
     }
 
 private:
-    void OnExit(wxCommandEvent& WXUNUSED(event))
+    void OnExit([[maybe_unused]] wxCommandEvent& event)
     {
         this->Close();
     }

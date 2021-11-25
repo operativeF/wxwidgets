@@ -330,7 +330,7 @@ wxAppTraits *wxAppBase::CreateTraits()
 // misc
 // ----------------------------------------------------------------------------
 
-void wxAppBase::SetActive(bool active, wxWindow * WXUNUSED(lastFocus))
+void wxAppBase::SetActive(bool active, [[maybe_unused]] wxWindow * lastFocus)
 {
     if ( active == m_isActive )
         return;

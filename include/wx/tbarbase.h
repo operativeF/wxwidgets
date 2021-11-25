@@ -387,9 +387,9 @@ public:
     virtual void SetToolLongHelp(int toolid, const std::string& helpString);
     virtual std::string GetToolLongHelp(int toolid) const;
 
-    virtual void SetToolNormalBitmap(int WXUNUSED(id),
+    virtual void SetToolNormalBitmap([[maybe_unused]] int id,
                                      [[maybe_unused]] const wxBitmap& bitmap) {}
-    virtual void SetToolDisabledBitmap(int WXUNUSED(id),
+    virtual void SetToolDisabledBitmap([[maybe_unused]] int id,
                                        [[maybe_unused]] const wxBitmap& bitmap) {}
 
 

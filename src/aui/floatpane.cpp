@@ -173,7 +173,7 @@ bool wxAuiFloatingFrame::IsTopNavigationDomain(NavigationKind kind) const
     return wxAuiFloatingFrameBaseClass::IsTopNavigationDomain(kind);
 }
 
-void wxAuiFloatingFrame::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxAuiFloatingFrame::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     if (m_ownerMgr)
     {

@@ -37,17 +37,17 @@ ScreenshotFrame::ScreenshotFrame(wxFrame *frame) : GUIFrame(frame)
 // ScreenshotFrame - event handlers
 // ----------------------------------------------------------------------------
 
-void ScreenshotFrame::OnClose(wxCloseEvent& WXUNUSED(event))
+void ScreenshotFrame::OnClose([[maybe_unused]] wxCloseEvent& event)
 {
     Destroy();
 }
 
-void ScreenshotFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void ScreenshotFrame::OnQuit([[maybe_unused]] wxCommandEvent& event)
 {
     Destroy();
 }
 
-void ScreenshotFrame::OnSeeScreenshots(wxCommandEvent& WXUNUSED(event))
+void ScreenshotFrame::OnSeeScreenshots([[maybe_unused]] wxCommandEvent& event)
 {
     wxString defaultDir = AutoCaptureMechanism::GetDefaultDirectoryAbsPath();
 
@@ -57,7 +57,7 @@ void ScreenshotFrame::OnSeeScreenshots(wxCommandEvent& WXUNUSED(event))
         wxMessageBox(_("There isn't any screenshots yet."));
 }
 
-void ScreenshotFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+void ScreenshotFrame::OnAbout([[maybe_unused]] wxCommandEvent& event)
 {
     wxAboutDialogInfo info;
     info.SetName(_("Automatic Screenshot Generator"));
@@ -68,7 +68,7 @@ void ScreenshotFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
     wxAboutBox(info);
 }
 
-void ScreenshotFrame::OnCaptureFullScreen(wxCommandEvent& WXUNUSED(event))
+void ScreenshotFrame::OnCaptureFullScreen([[maybe_unused]] wxCommandEvent& event)
 {
     // Create a DC for the whole screen area
     wxScreenDC dcScreen;
@@ -87,7 +87,7 @@ void ScreenshotFrame::OnCaptureFullScreen(wxCommandEvent& WXUNUSED(event))
                  _("Full screen capture"), wxICON_INFORMATION|wxOK, this);
 }
 
-void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
+void ScreenshotFrame::OnCaptureAllControls([[maybe_unused]] wxCommandEvent& event)
 {
     wxString dir = AutoCaptureMechanism::GetDefaultDirectoryAbsPath();
 

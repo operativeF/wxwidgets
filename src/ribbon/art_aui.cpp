@@ -320,7 +320,7 @@ void wxRibbonAUIArtProvider::SetColourScheme(
 
 void wxRibbonAUIArtProvider::DrawTabCtrlBackground(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect)
 {
     wxRect gradient_rect(rect);
@@ -333,7 +333,7 @@ void wxRibbonAUIArtProvider::DrawTabCtrlBackground(
 
 int wxRibbonAUIArtProvider::GetTabCtrlHeight(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRibbonPageTabInfoArray& pages)
 {
     int text_height = 0;
@@ -367,7 +367,7 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
 }
 
 void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
-                 wxWindow* WXUNUSED(wnd),
+                 [[maybe_unused]] wxWindow* wnd,
                  const wxRibbonPageTabInfo& tab)
 {
     if(tab.rect.height <= 1)
@@ -513,7 +513,7 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
 
 void wxRibbonAUIArtProvider::GetBarTabWidth(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
@@ -560,17 +560,17 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
 }
 
 void wxRibbonAUIArtProvider::DrawTabSeparator(
-                    wxDC& WXUNUSED(dc),
-                    wxWindow* WXUNUSED(wnd),
+                    [[maybe_unused]] wxDC& dc,
+                    [[maybe_unused]] wxWindow* wnd,
                     [[maybe_unused]] const wxRect& rect,
-                    double WXUNUSED(visibility))
+                    [[maybe_unused]] double visibility)
 {
     // No explicit separators between tabs
 }
 
 void wxRibbonAUIArtProvider::DrawPageBackground(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect)
 {
     dc.SetPen(*wxTRANSPARENT_PEN);
@@ -584,16 +584,16 @@ void wxRibbonAUIArtProvider::DrawPageBackground(
 }
 
 wxSize wxRibbonAUIArtProvider::GetScrollButtonMinimumSize(
-                        wxDC& WXUNUSED(dc),
-                        wxWindow* WXUNUSED(wnd),
-                        unsigned int WXUNUSED(style))
+                        [[maybe_unused]] wxDC& dc,
+                        [[maybe_unused]] wxWindow* wnd,
+                        [[maybe_unused]] unsigned int style)
 {
     return {11, 11};
 }
 
 void wxRibbonAUIArtProvider::DrawScrollButton(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect,
                         unsigned int style)
 {
@@ -1055,7 +1055,7 @@ void wxRibbonAUIArtProvider::DrawButtonBarBackground(
 
 void wxRibbonAUIArtProvider::DrawButtonBarButton(
                         wxDC& dc,
-                        wxWindow* WXUNUSED(wnd),
+                        [[maybe_unused]] wxWindow* wnd,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         unsigned int state,
@@ -1153,7 +1153,7 @@ void wxRibbonAUIArtProvider::DrawToolBarBackground(
 
 void wxRibbonAUIArtProvider::DrawToolGroupBackground(
                     wxDC& dc,
-                    wxWindow* WXUNUSED(wnd),
+                    [[maybe_unused]] wxWindow* wnd,
                     const wxRect& rect)
 {
     dc.SetPen(m_toolbar_border_pen);
@@ -1167,7 +1167,7 @@ void wxRibbonAUIArtProvider::DrawToolGroupBackground(
 
 void wxRibbonAUIArtProvider::DrawTool(
             wxDC& dc,
-            wxWindow* WXUNUSED(wnd),
+            [[maybe_unused]] wxWindow* wnd,
             const wxRect& rect,
             const wxBitmap& bitmap,
             wxRibbonButtonKind kind,

@@ -39,7 +39,7 @@ wxBEGIN_EVENT_TABLE(wxTaskBarIconBase, wxEvtHandler)
     EVT_TASKBAR_CLICK(wxTaskBarIconBase::OnRightButtonDown)
 wxEND_EVENT_TABLE()
 
-void wxTaskBarIconBase::OnRightButtonDown(wxTaskBarIconEvent& WXUNUSED(event))
+void wxTaskBarIconBase::OnRightButtonDown([[maybe_unused]] wxTaskBarIconEvent& event)
 {
     std::unique_ptr<wxMenu> menuDeleter;
     wxMenu *menu = GetPopupMenu();

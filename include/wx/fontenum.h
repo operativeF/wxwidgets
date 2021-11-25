@@ -52,12 +52,12 @@ public:
     // true to continue with it
 
     // called by EnumerateFacenames
-    virtual bool OnFacename(const std::string& WXUNUSED(facename))
+    virtual bool OnFacename([[maybe_unused]] const std::string& facename)
         { return true; }
 
     // called by EnumerateEncodings
-    virtual bool OnFontEncoding(const std::string& WXUNUSED(facename),
-                                const std::string& WXUNUSED(encoding))
+    virtual bool OnFontEncoding([[maybe_unused]] const std::string& facename,
+                                [[maybe_unused]] const std::string& encoding)
         { return true; }
 
 

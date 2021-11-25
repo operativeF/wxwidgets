@@ -39,7 +39,7 @@ public:
         m_flags = id.m_flags;
     }
     // This is only needed for wxPython bindings.
-    wxPGPropArgCls( wxString* str, bool WXUNUSED(deallocPtr) )
+    wxPGPropArgCls( wxString* str, [[maybe_unused]] bool deallocPtr )
     {
         m_ptr.stringName = str;
         m_flags = IsWxString | OwnsWxString;
@@ -1113,7 +1113,7 @@ protected:
         return nullptr;
     }
 
-    virtual bool DoSelectPage( int WXUNUSED(index) ) { return true; }
+    virtual bool DoSelectPage( [[maybe_unused]] int index ) { return true; }
 
     // Default call's m_pState's BaseGetPropertyByName
     virtual wxPGProperty* DoGetPropertyByName( const wxString& name ) const;

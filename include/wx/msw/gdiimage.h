@@ -126,7 +126,7 @@ protected:
 
     // we can't [efficiently] clone objects of this class
     wxGDIRefData *
-    CloneGDIRefData(const wxGDIRefData *WXUNUSED(data)) const override
+    CloneGDIRefData([[maybe_unused]] const wxGDIRefData *data) const override
     {
         wxFAIL_MSG( "must be implemented if used" );
 

@@ -1406,7 +1406,7 @@ int wxPropertyGridManager::GetDescBoxHeight() const
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridManager::OnPaint( wxPaintEvent& WXUNUSED(event) )
+void wxPropertyGridManager::OnPaint( [[maybe_unused]] wxPaintEvent& event )
 {
     wxPaintDC dc(this);
 
@@ -1947,7 +1947,7 @@ void wxPropertyGridManager::OnPGScrollH(wxPropertyGridEvent& evt)
 #endif // wxUSE_HEADERCTRL
 }
 
-void wxPropertyGridManager::OnColWidthsChanged(wxPropertyGridEvent& WXUNUSED(evt))
+void wxPropertyGridManager::OnColWidthsChanged([[maybe_unused]] wxPropertyGridEvent& evt)
 {
 #if wxUSE_HEADERCTRL
     if ( m_pHeaderCtrl )
@@ -1957,7 +1957,7 @@ void wxPropertyGridManager::OnColWidthsChanged(wxPropertyGridEvent& WXUNUSED(evt
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridManager::OnResize( wxSizeEvent& WXUNUSED(event) )
+void wxPropertyGridManager::OnResize( [[maybe_unused]] wxSizeEvent& event )
 {
     wxSize client_size = GetClientSize();
 
@@ -1991,7 +1991,7 @@ void wxPropertyGridManager::OnResize( wxSizeEvent& WXUNUSED(event) )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridManager::OnMouseEntry( wxMouseEvent& WXUNUSED(event) )
+void wxPropertyGridManager::OnMouseEntry( [[maybe_unused]] wxMouseEvent& event )
 {
     // Correct cursor. This is required at least for wxGTK, for which
     // setting button's cursor to *wxSTANDARD_CURSOR does not work.

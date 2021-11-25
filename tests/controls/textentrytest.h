@@ -509,7 +509,7 @@ namespace
             }
         }
 
-        void OnText(wxCommandEvent& WXUNUSED(e))
+        void OnText([[maybe_unused]] wxCommandEvent& e)
         {
             // This should only happen for the multiline text controls.
             switch (m_processEnter)

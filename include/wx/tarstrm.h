@@ -113,7 +113,7 @@ public:
 
     wxTarEntry *Clone() const { return new wxTarEntry(*this); }
 
-    void SetNotifier(wxTarNotifier& WXUNUSED(notifier)) { }
+    void SetNotifier([[maybe_unused]] wxTarNotifier& notifier) { }
 
 private:
     void SetOffset(wxFileOffset offset) override         { m_Offset = offset; }
@@ -224,7 +224,7 @@ public:
                          const wxDateTime& dt = wxDateTime::Now()) override;
 
     bool CopyEntry(wxTarEntry *entry, wxTarInputStream& inputStream);
-    bool CopyArchiveMetaData(wxTarInputStream& WXUNUSED(s)) { return true; }
+    bool CopyArchiveMetaData([[maybe_unused]] wxTarInputStream& s) { return true; }
 
     void Sync() override;
     bool CloseEntry() override;
@@ -245,7 +245,7 @@ private:
 
     bool PutNextEntry(wxArchiveEntry *entry) override;
     bool CopyEntry(wxArchiveEntry *entry, wxArchiveInputStream& stream) override;
-    bool CopyArchiveMetaData(wxArchiveInputStream& WXUNUSED(s)) override { return true; }
+    bool CopyArchiveMetaData([[maybe_unused]] wxArchiveInputStream& s) override { return true; }
     bool IsOpened() const               { return m_pos != wxInvalidOffset; }
 
     bool WriteHeaders(wxTarEntry& entry);

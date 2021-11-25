@@ -1047,7 +1047,7 @@ void wxRichTextBordersPage::OnRichtextBorderSynchronizeClick( wxCommandEvent& ev
  * wxEVT_UPDATE_UI event handler for ID_RICHTEXT_BORDER_SYNCHRONIZE
  */
 
-void wxRichTextBordersPage::OnRichtextBorderSynchronizeUpdate( wxUpdateUIEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextBorderSynchronizeUpdate( [[maybe_unused]] wxUpdateUIEvent& event )
 {
 }
 
@@ -1090,7 +1090,7 @@ void wxRichTextBordersPage::OnRichtextBorderLeftValueTextUpdated( wxCommandEvent
  * wxEVT_COMMAND_COMBOBOX_SELECTED event handler for ID_RICHTEXT_BORDER_LEFT_UNITS
  */
 
-void wxRichTextBordersPage::OnRichtextBorderLeftUnitsSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextBorderLeftUnitsSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_ignoreUpdates)
         return;
@@ -1115,7 +1115,7 @@ void wxRichTextBordersPage::OnRichtextBorderLeftUnitsSelected( wxCommandEvent& W
  * wxEVT_COMMAND_COMBOBOX_SELECTED event handler for ID_RICHTEXT_BORDER_LEFT_STYLE
  */
 
-void wxRichTextBordersPage::OnRichtextBorderLeftStyleSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextBorderLeftStyleSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_ignoreUpdates)
         return;
@@ -1167,7 +1167,7 @@ void wxRichTextBordersPage::OnRichtextOutlineSynchronizeClick( wxCommandEvent& e
  * wxEVT_UPDATE_UI event handler for ID_RICHTEXT_OUTLINE_SYNCHRONIZE
  */
 
-void wxRichTextBordersPage::OnRichtextOutlineSynchronizeUpdate( wxUpdateUIEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextOutlineSynchronizeUpdate( [[maybe_unused]] wxUpdateUIEvent& event )
 {
 }
 
@@ -1210,7 +1210,7 @@ void wxRichTextBordersPage::OnRichtextOutlineLeftTextUpdated( wxCommandEvent& ev
  * wxEVT_COMMAND_COMBOBOX_SELECTED event handler for ID_RICHTEXT_OUTLINE_LEFT_UNITS
  */
 
-void wxRichTextBordersPage::OnRichtextOutlineLeftUnitsSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextOutlineLeftUnitsSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_ignoreUpdates)
         return;
@@ -1235,7 +1235,7 @@ void wxRichTextBordersPage::OnRichtextOutlineLeftUnitsSelected( wxCommandEvent& 
  * wxEVT_COMMAND_COMBOBOX_SELECTED event handler for ID_RICHTEXT_OUTLINE_LEFT_STYLE
  */
 
-void wxRichTextBordersPage::OnRichtextOutlineLeftStyleSelected( wxCommandEvent& WXUNUSED(event) )
+void wxRichTextBordersPage::OnRichtextOutlineLeftStyleSelected( [[maybe_unused]] wxCommandEvent& event )
 {
     if (m_ignoreUpdates)
         return;
@@ -1271,7 +1271,7 @@ wxRichTextBorderPreviewCtrl::wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWin
     SetBackgroundColour(*wxWHITE);
 }
 
-void wxRichTextBorderPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxRichTextBorderPreviewCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

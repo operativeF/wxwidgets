@@ -75,12 +75,12 @@ protected:
 
     // called when the item is becomes pressed, can be used to change its
     // appearance
-    virtual void MouseClickBegin(int WXUNUSED(item)) { }
+    virtual void MouseClickBegin([[maybe_unused]] int item) { }
 
     // called if the mouse capture was lost while the item was pressed, can be
     // used to restore the default item appearance if it was changed in
     // MouseClickBegin()
-    virtual void MouseClickCancelled(int WXUNUSED(item)) { }
+    virtual void MouseClickCancelled([[maybe_unused]] int item) { }
 
 private:
     /*

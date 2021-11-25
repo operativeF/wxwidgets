@@ -144,12 +144,12 @@ public:
         return m_pageTexts[n];
     }
 
-    bool SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId)) override
+    bool SetPageImage([[maybe_unused]] size_t n, [[maybe_unused]] int imageId) override
     {
         return false;
     }
 
-    int GetPageImage(size_t WXUNUSED(n)) const override
+    int GetPageImage([[maybe_unused]] size_t n) const override
     {
         return NO_IMAGE;
     }
@@ -163,7 +163,7 @@ public:
     }
 
 protected:
-    void UpdateSelectedPage(size_t WXUNUSED(newsel)) override
+    void UpdateSelectedPage([[maybe_unused]] size_t newsel) override
     {
         // Nothing to do here, but must be overridden to avoid the assert in
         // the base class version.

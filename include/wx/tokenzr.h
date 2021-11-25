@@ -99,7 +99,7 @@ public:
     // compatibility only, don't use
     void SetString(const std::string& to_tokenize,
                    const std::string& delims,
-                   bool WXUNUSED(ret_delim))
+                   [[maybe_unused]] bool ret_delim)
     {
         SetString(to_tokenize, delims, wxStringTokenizerMode::RetDelims);
     }

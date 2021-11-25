@@ -406,7 +406,7 @@ public:
     virtual void SetNumericWeight( int weight ) = 0;
 
     virtual void SetUnderlined( bool underlined ) = 0;
-    virtual void SetStrikethrough( bool WXUNUSED(strikethrough) ) {}
+    virtual void SetStrikethrough( [[maybe_unused]] bool strikethrough ) {}
     virtual void SetEncoding(wxFontEncoding encoding) = 0;
     virtual bool SetFaceName( const std::string& faceName );
     void SetNativeFontInfo(const wxNativeFontInfo& info)

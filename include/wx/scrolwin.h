@@ -88,7 +88,7 @@ public:
     void DisableKeyboardScrolling() { m_kbdScrollingEnabled = false; }
 
     // Override this function to draw the graphic (or just process EVT_PAINT)
-    virtual void OnDraw(wxDC& WXUNUSED(dc)) { }
+    virtual void OnDraw([[maybe_unused]] wxDC& dc) { }
 
     // change the DC origin according to the scroll position.
     virtual void DoPrepareDC(wxDC& dc) = 0;

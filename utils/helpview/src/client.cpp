@@ -220,7 +220,7 @@ void MyFrame::OnExit(wxCommandEvent& event)
     Close();
 }
 
-void MyFrame::ModalDlg(wxCommandEvent& WXUNUSED(event))
+void MyFrame::ModalDlg([[maybe_unused]] wxCommandEvent& event)
 {
     MyModalDialog dlg(this);
     dlg.ShowModal();

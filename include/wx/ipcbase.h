@@ -150,14 +150,14 @@ public:
   virtual const void *OnRequest([[maybe_unused]] const wxString& topic,
                                 [[maybe_unused]] const wxString& item,
                                 size_t *size,
-                                wxIPCFormat WXUNUSED(format))
+                                [[maybe_unused]] wxIPCFormat format)
       { *size = 0; return nullptr; }
 
   virtual bool OnPoke([[maybe_unused]] const wxString& topic,
                       [[maybe_unused]] const wxString& item,
-                      const void *WXUNUSED(data),
-                      size_t WXUNUSED(size),
-                      wxIPCFormat WXUNUSED(format))
+                      [[maybe_unused]] const void *data,
+                      [[maybe_unused]] size_t size,
+                      [[maybe_unused]] wxIPCFormat format)
       { return false; }
 
   virtual bool OnStartAdvise([[maybe_unused]] const wxString& topic,
@@ -171,9 +171,9 @@ public:
   // Callbacks to CLIENT - override at will
   virtual bool OnAdvise([[maybe_unused]] const wxString& topic,
                         [[maybe_unused]] const wxString& item,
-                        const void *WXUNUSED(data),
-                        size_t WXUNUSED(size),
-                        wxIPCFormat WXUNUSED(format))
+                        [[maybe_unused]] const void *data,
+                        [[maybe_unused]] size_t size,
+                        [[maybe_unused]] wxIPCFormat format)
       { return false; }
 
   // Callbacks to BOTH

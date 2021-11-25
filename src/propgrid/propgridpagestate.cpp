@@ -290,7 +290,7 @@ void wxPropertyGridPageState::DoClear()
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridPageState::CalculateFontAndBitmapStuff( int WXUNUSED(vspacing) )
+void wxPropertyGridPageState::CalculateFontAndBitmapStuff( [[maybe_unused]] int vspacing )
 {
     wxPropertyGrid* propGrid = GetGrid();
 
@@ -760,7 +760,7 @@ int wxPropertyGridPageState::DoGetSplitterPosition( int splitterColumn ) const
     return n;
 }
 
-int wxPropertyGridPageState::GetColumnMinWidth( int WXUNUSED(column) ) const
+int wxPropertyGridPageState::GetColumnMinWidth( [[maybe_unused]] int column ) const
 {
     return wxPG_DRAG_MARGIN;
 }
@@ -857,7 +857,7 @@ void wxPropertyGridPageState::SetSplitterLeft( bool subProps )
     m_dontCenterSplitter = true;
 }
 
-wxSize wxPropertyGridPageState::DoFitColumns( bool WXUNUSED(allowGridResize) )
+wxSize wxPropertyGridPageState::DoFitColumns( [[maybe_unused]] bool allowGridResize )
 {
     wxPropertyGrid* pg = GetGrid();
     wxClientDC dc(pg);

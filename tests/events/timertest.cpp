@@ -36,7 +36,7 @@ public:
     int GetNumEvents() const { return m_events; }
 
 private:
-    void OnTimer(wxTimerEvent& WXUNUSED(event))
+    void OnTimer([[maybe_unused]] wxTimerEvent& event)
     {
         m_events++;
 

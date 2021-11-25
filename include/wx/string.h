@@ -917,7 +917,7 @@ public:
   private:
       // for internal wxString use only:
       iterator(underlying_iterator ptr) : m_cur(ptr) {}
-      iterator(wxString *WXUNUSED(str), underlying_iterator ptr) : m_cur(ptr) {}
+      iterator([[maybe_unused]] wxString *str, underlying_iterator ptr) : m_cur(ptr) {}
 
       friend class const_iterator;
   };
@@ -951,7 +951,7 @@ public:
   private:
       // for internal wxString use only:
       const_iterator(underlying_iterator ptr) : m_cur(ptr) {}
-      const_iterator(const wxString *WXUNUSED(str), underlying_iterator ptr)
+      const_iterator([[maybe_unused]] const wxString *str, underlying_iterator ptr)
           : m_cur(ptr) {}
   };
 
@@ -1066,7 +1066,7 @@ private:
 #if wxUSE_UNICODE_UTF8
   struct CtorFromStringImplTag {};
 
-  wxString(CtorFromStringImplTag* WXUNUSED(dummy), const wxStringImpl& src)
+  wxString([[maybe_unused]] CtorFromStringImplTag* dummy, const wxStringImpl& src)
       : m_impl(src) {}
 
   static wxString FromImpl(const wxStringImpl& src)

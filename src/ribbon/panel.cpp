@@ -293,12 +293,12 @@ bool wxRibbonPanel::IsMinimised(wxSize at_size) const
         at_size.GetY() < m_smallest_unminimised_size.GetY();
 }
 
-void wxRibbonPanel::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonPanel::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // All painting done in main paint handler to minimise flicker
 }
 
-void wxRibbonPanel::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonPanel::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
 
@@ -752,7 +752,7 @@ bool wxRibbonPanel::Layout()
     return true;
 }
 
-void wxRibbonPanel::OnMouseClick(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonPanel::OnMouseClick([[maybe_unused]] wxMouseEvent& evt)
 {
     if(IsMinimised())
     {

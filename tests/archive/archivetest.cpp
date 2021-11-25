@@ -1168,7 +1168,7 @@ template <class NotifierT, class EntryT>
 class ArchiveNotifier : public NotifierT
 {
 public:
-    void OnEntryUpdated(EntryT& WXUNUSED(entry)) override { }
+    void OnEntryUpdated([[maybe_unused]] EntryT& entry) override { }
 };
 
 template <class ClassFactoryT>
@@ -1357,9 +1357,9 @@ void ArchiveTestSuite::DoRunTest()
 }
 
 CppUnit::Test *ArchiveTestSuite::makeTest(
-    string WXUNUSED(descr),
-    int WXUNUSED(options),
-    bool WXUNUSED(genericInterface),
+    [[maybe_unused]] string descr,
+    [[maybe_unused]] int options,
+    [[maybe_unused]] bool genericInterface,
     [[maybe_unused]] const wxString& archiver,
     [[maybe_unused]] const wxString& unarchiver)
 {

@@ -1170,7 +1170,7 @@ void wxGenericDirCtrl::DoResize()
 }
 
 
-void wxGenericDirCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxGenericDirCtrl::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     DoResize();
 }
@@ -1215,7 +1215,7 @@ bool wxDirFilterListCtrl::Create(wxGenericDirCtrl* parent,
     return wxChoice::Create(parent, treeid, pos, size, {}, style);
 }
 
-void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
+void wxDirFilterListCtrl::OnSelFilter([[maybe_unused]] wxCommandEvent& event)
 {
     int sel = GetSelection();
 

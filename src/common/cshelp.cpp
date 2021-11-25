@@ -268,7 +268,7 @@ bool wxContextHelpButton::Create(wxWindow* parent,
                                   pos, size, style);
 }
 
-void wxContextHelpButton::OnContextHelp(wxCommandEvent& WXUNUSED(event))
+void wxContextHelpButton::OnContextHelp([[maybe_unused]] wxCommandEvent& event)
 {
     wxContextHelp contextHelp(GetParent());
 }
@@ -280,7 +280,7 @@ void wxContextHelpButton::OnContextHelp(wxCommandEvent& WXUNUSED(event))
 // trivial implementation of some methods which we don't want to make pure
 // virtual for convenience
 
-void wxHelpProvider::AddHelp(wxWindowBase * WXUNUSED(window),
+void wxHelpProvider::AddHelp([[maybe_unused]] wxWindowBase * window,
                              [[maybe_unused]] const std::string& text)
 {
 }

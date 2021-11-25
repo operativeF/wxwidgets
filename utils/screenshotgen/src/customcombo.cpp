@@ -127,7 +127,7 @@ inline wxCoord PenStyleComboBox::OnMeasureItem( size_t item ) const
         return 24;
 }
 
-inline wxCoord PenStyleComboBox::OnMeasureItemWidth( size_t WXUNUSED(item) ) const
+inline wxCoord PenStyleComboBox::OnMeasureItemWidth( [[maybe_unused]] size_t item ) const
 {
     return -1; // default - will be measured from text width
 }

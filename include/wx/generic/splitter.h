@@ -134,7 +134,7 @@ public:
     bool IsSplit() const { return (m_windowTwo != nullptr); }
 
     // Sets the border size
-    void SetBorderSize(int WXUNUSED(width)) { }
+    void SetBorderSize([[maybe_unused]] int width) { }
 
     // Hide or show the sash and test whether it's currently hidden.
     void SetSashInvisible(bool invisible = true);

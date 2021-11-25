@@ -196,7 +196,7 @@ wxDC* wxPostScriptPrinter::PrintDialog(wxWindow *parent)
     return dc;
 }
 
-bool wxPostScriptPrinter::Setup(wxWindow *WXUNUSED(parent))
+bool wxPostScriptPrinter::Setup([[maybe_unused]] wxWindow *parent)
 {
 #if 0
     wxGenericPrintDialog* dialog = new wxGenericPrintDialog(parent, & m_printDialogData);
@@ -221,8 +221,8 @@ bool wxPostScriptPrinter::Setup(wxWindow *WXUNUSED(parent))
 // Print preview
 // ----------------------------------------------------------------------------
 
-void wxPostScriptPrintPreview::Init(wxPrintout * WXUNUSED(printout),
-                                    wxPrintout * WXUNUSED(printoutForPrinting))
+void wxPostScriptPrintPreview::Init([[maybe_unused]] wxPrintout * printout,
+                                    [[maybe_unused]] wxPrintout * printoutForPrinting)
 {
     // Have to call it here since base constructor can't call it
     DetermineScaling();

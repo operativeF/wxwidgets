@@ -1274,11 +1274,11 @@ public:
         TestWin->SetPage( content );
     }
 
-    void OnUpdate(wxCommandEvent& WXUNUSED(event))
+    void OnUpdate([[maybe_unused]] wxCommandEvent& event)
     {
         UpdateTestWin();
     }
-    void OnUpdateSpin(wxSpinEvent& WXUNUSED(event))
+    void OnUpdateSpin([[maybe_unused]] wxSpinEvent& event)
     {
         UpdateTestWin();
     }
@@ -1595,7 +1595,7 @@ void wxHtmlHelpWindow::OnContentsSel(wxTreeEvent& event)
     }
 }
 
-void wxHtmlHelpWindow::OnIndexSel(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnIndexSel([[maybe_unused]] wxCommandEvent& event)
 {
     wxHtmlHelpMergedIndexItem *it = (wxHtmlHelpMergedIndexItem*)
         m_IndexList->GetClientData(m_IndexList->GetSelection());
@@ -1603,7 +1603,7 @@ void wxHtmlHelpWindow::OnIndexSel(wxCommandEvent& WXUNUSED(event))
         DisplayIndexItem(it);
 }
 
-void wxHtmlHelpWindow::OnIndexFind(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnIndexFind([[maybe_unused]] wxCommandEvent& event)
 {
     DoIndexFind();
 }
@@ -1683,7 +1683,7 @@ void wxHtmlHelpWindow::DoIndexFind()
     }
 }
 
-void wxHtmlHelpWindow::OnIndexAll(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnIndexAll([[maybe_unused]] wxCommandEvent& event)
 {
     DoIndexAll();
 }
@@ -1717,7 +1717,7 @@ void wxHtmlHelpWindow::DoIndexAll()
     m_IndexCountInfo->SetLabel(cnttext);
 }
 
-void wxHtmlHelpWindow::OnSearchSel(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnSearchSel([[maybe_unused]] wxCommandEvent& event)
 {
     wxHtmlHelpDataItem *it = (wxHtmlHelpDataItem*) m_SearchList->GetClientData(m_SearchList->GetSelection());
     if (it)
@@ -1727,7 +1727,7 @@ void wxHtmlHelpWindow::OnSearchSel(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void wxHtmlHelpWindow::OnSearch(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnSearch([[maybe_unused]] wxCommandEvent& event)
 {
     wxString sr = m_SearchText->GetLineText(0);
 
@@ -1735,7 +1735,7 @@ void wxHtmlHelpWindow::OnSearch(wxCommandEvent& WXUNUSED(event))
         KeywordSearch(sr, wxHelpSearchMode::All);
 }
 
-void wxHtmlHelpWindow::OnBookmarksSel(wxCommandEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnBookmarksSel([[maybe_unused]] wxCommandEvent& event)
 {
     wxString str = m_Bookmarks->GetStringSelection();
     int idx = m_BookmarksNames.Index(str);
@@ -1745,7 +1745,7 @@ void wxHtmlHelpWindow::OnBookmarksSel(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void wxHtmlHelpWindow::OnSize(wxSizeEvent& WXUNUSED(event))
+void wxHtmlHelpWindow::OnSize([[maybe_unused]] wxSizeEvent& event)
 {
     Layout();
 }

@@ -58,8 +58,8 @@ public:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
     // For ownerdraw items
-    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *WXUNUSED(item)) { return false; }
-    virtual bool MSWOnMeasure(WXMEASUREITEMSTRUCT *WXUNUSED(item)) { return false; }
+    virtual bool MSWOnDraw([[maybe_unused]] WXDRAWITEMSTRUCT *item) { return false; }
+    virtual bool MSWOnMeasure([[maybe_unused]] WXMEASUREITEMSTRUCT *item) { return false; }
 
     const std::vector<long>& GetSubcontrols() const { return m_subControls; }
 

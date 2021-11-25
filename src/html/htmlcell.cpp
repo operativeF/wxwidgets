@@ -115,7 +115,7 @@ bool wxHtmlCell::ProcessMouseClick(wxHtmlWindowInterface *window,
 }
 
 wxCursor
-wxHtmlCell::GetMouseCursor(wxHtmlWindowInterface* WXUNUSED(window)) const
+wxHtmlCell::GetMouseCursor([[maybe_unused]] wxHtmlWindowInterface* window) const
 {
     // This is never called directly, only from GetMouseCursorAt() and we
     // return an invalid cursor by default to let it delegate to the window.
@@ -167,14 +167,14 @@ void wxHtmlCell::SetLink(const wxHtmlLinkInfo& link)
 }
 
 
-void wxHtmlCell::Layout(int WXUNUSED(w))
+void wxHtmlCell::Layout([[maybe_unused]] int w)
 {
     SetPos(0, 0);
 }
 
 
 
-const wxHtmlCell* wxHtmlCell::Find(int WXUNUSED(condition), [[maybe_unused]] const void* param) const
+const wxHtmlCell* wxHtmlCell::Find([[maybe_unused]] int condition, [[maybe_unused]] const void* param) const
 {
     return nullptr;
 }
@@ -1475,7 +1475,7 @@ void wxHtmlColourCell::Draw(wxDC& dc,
 }
 
 void wxHtmlColourCell::DrawInvisible(wxDC& dc,
-                                     int WXUNUSED(x), int WXUNUSED(y),
+                                     [[maybe_unused]] int x, [[maybe_unused]] int y,
                                      wxHtmlRenderingInfo& info)
 {
     wxHtmlRenderingState& state = info.GetState();
@@ -1525,15 +1525,15 @@ wxString wxHtmlColourCell::GetDescription() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlFontCell, wxHtmlCell);
 
 void wxHtmlFontCell::Draw(wxDC& dc,
-                          int WXUNUSED(x), int WXUNUSED(y),
+                          [[maybe_unused]] int x, [[maybe_unused]] int y,
                           int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                          wxHtmlRenderingInfo& WXUNUSED(info))
+                          [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     dc.SetFont(m_Font);
 }
 
-void wxHtmlFontCell::DrawInvisible(wxDC& dc, int WXUNUSED(x), int WXUNUSED(y),
-                                   wxHtmlRenderingInfo& WXUNUSED(info))
+void wxHtmlFontCell::DrawInvisible(wxDC& dc, [[maybe_unused]] int x, [[maybe_unused]] int y,
+                                   [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     dc.SetFont(m_Font);
 }
@@ -1564,10 +1564,10 @@ wxHtmlWidgetCell::wxHtmlWidgetCell(wxWindow *wnd, int w)
 }
 
 
-void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
-                            int WXUNUSED(x), int WXUNUSED(y),
+void wxHtmlWidgetCell::Draw([[maybe_unused]] wxDC& dc,
+                            [[maybe_unused]] int x, [[maybe_unused]] int y,
                             int WXUNUSED(view_y1), int WXUNUSED(view_y2),
-                            wxHtmlRenderingInfo& WXUNUSED(info))
+                            [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     int absx = 0, absy = 0;
     wxHtmlCell *c = this;
@@ -1593,9 +1593,9 @@ void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
 
 
 
-void wxHtmlWidgetCell::DrawInvisible(wxDC& WXUNUSED(dc),
-                                     int WXUNUSED(x), int WXUNUSED(y),
-                                     wxHtmlRenderingInfo& WXUNUSED(info))
+void wxHtmlWidgetCell::DrawInvisible([[maybe_unused]] wxDC& dc,
+                                     [[maybe_unused]] int x, [[maybe_unused]] int y,
+                                     [[maybe_unused]] wxHtmlRenderingInfo& info)
 {
     int absx = 0, absy = 0;
     wxHtmlCell *c = this;

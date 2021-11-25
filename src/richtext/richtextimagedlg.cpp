@@ -123,7 +123,7 @@ wxIcon wxRichTextObjectPropertiesDialog::GetIconResource( const std::string& nam
 /*!
  * wxEVT_BUTTON event handler for ID_BUTTON_PARA_UP
  */
-void wxRichTextObjectPropertiesDialog::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event))
+void wxRichTextObjectPropertiesDialog::OnRichtextParaUpClick( [[maybe_unused]] wxCommandEvent& event)
 {
     // Before editing this code, remove the block markers.
     wxRichTextRange range = m_object->GetRange();
@@ -157,7 +157,7 @@ void wxRichTextObjectPropertiesDialog::OnRichtextParaUpClick( wxCommandEvent& WX
  * wxEVT_BUTTON event handler for ID_BUTTON_PARA_DOWN
  */
 
-void wxRichTextObjectPropertiesDialog::OnRichtextDownClick( wxCommandEvent& WXUNUSED(event))
+void wxRichTextObjectPropertiesDialog::OnRichtextDownClick( [[maybe_unused]] wxCommandEvent& event)
 {
     // Before editing this code, remove the block markers.
     wxRichTextRange range = m_object->GetRange();

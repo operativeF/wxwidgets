@@ -35,7 +35,7 @@ public:
     void SetViewer(const std::string& viewer = {},
                    unsigned int flags = wxHELP_NETSCAPE) override;
 
-    bool Initialize(const std::string& dir, int WXUNUSED(server)) override
+    bool Initialize(const std::string& dir, [[maybe_unused]] int server) override
         { return Initialize(dir); }
 
     bool Initialize(const std::string& dir) override;
@@ -52,17 +52,17 @@ public:
 
     virtual bool DisplayHelp(const std::string &) ;
 
-    void SetFrameParameters(const std::string& WXUNUSED(title),
+    void SetFrameParameters([[maybe_unused]] const std::string& title,
                                     [[maybe_unused]] const wxSize& size,
                                     [[maybe_unused]] const wxPoint& pos = wxDefaultPosition,
-                                    bool WXUNUSED(newFrameEachTime) = false) override
+                                    [[maybe_unused]] bool newFrameEachTime = false) override
         {
             // does nothing by default
         }
 
-    wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = nullptr,
-                                    wxPoint *WXUNUSED(pos) = nullptr,
-                                    bool *WXUNUSED(newFrameEachTime) = nullptr) override
+    wxFrame *GetFrameParameters([[maybe_unused]] wxSize *size = nullptr,
+                                    [[maybe_unused]] wxPoint *pos = nullptr,
+                                    [[maybe_unused]] bool *newFrameEachTime = nullptr) override
         {
             return nullptr; // does nothing by default
         }

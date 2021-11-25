@@ -219,29 +219,29 @@ void wxButtonToolBar::SetToolShortHelp(int id, const std::string& help)
 }
 
 bool wxButtonToolBar::DoInsertTool([[maybe_unused]] size_t pos,
-                             wxToolBarToolBase * WXUNUSED(tool))
+                             [[maybe_unused]] wxToolBarToolBase * tool)
 {
     return true;
 }
 
 bool wxButtonToolBar::DoDeleteTool([[maybe_unused]] size_t pos,
-                             wxToolBarToolBase * WXUNUSED(tool))
+                             [[maybe_unused]] wxToolBarToolBase * tool)
 {
     // TODO
     return true;
 }
 
-void wxButtonToolBar::DoEnableTool(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool enable)
+void wxButtonToolBar::DoEnableTool([[maybe_unused]] wxToolBarToolBase *tool, [[maybe_unused]] bool enable)
 {
     // TODO
 }
 
-void wxButtonToolBar::DoToggleTool(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
+void wxButtonToolBar::DoToggleTool([[maybe_unused]] wxToolBarToolBase *tool, [[maybe_unused]] bool toggle)
 {
     // TODO
 }
 
-void wxButtonToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
+void wxButtonToolBar::DoSetToggle([[maybe_unused]] wxToolBarToolBase *tool, [[maybe_unused]] bool toggle)
 {
     // TODO
 }
@@ -479,7 +479,7 @@ void wxButtonToolBar::OnCommand(wxCommandEvent& event)
 }
 
 // paints a border
-void wxButtonToolBar::OnPaint(wxPaintEvent& WXUNUSED(event))
+void wxButtonToolBar::OnPaint([[maybe_unused]] wxPaintEvent& event)
 {
     wxPaintDC dc(this);
 

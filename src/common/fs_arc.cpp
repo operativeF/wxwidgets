@@ -311,7 +311,7 @@ bool wxArchiveFSHandler::CanOpen(const std::string& location)
 }
 
 wxFSFile* wxArchiveFSHandler::OpenFile(
-        wxFileSystem& WXUNUSED(fs),
+        [[maybe_unused]] wxFileSystem& fs,
         const std::string& location)
 {
     std::string right = GetRightLocation(location);

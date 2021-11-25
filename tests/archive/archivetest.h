@@ -204,17 +204,17 @@ protected:
     void ReadSimultaneous(TestInputStream& in);
 
     // overridables
-    virtual void OnCreateArchive(OutputStreamT& WXUNUSED(arc)) { }
+    virtual void OnCreateArchive([[maybe_unused]] OutputStreamT& arc) { }
     virtual void OnSetNotifier(EntryT& entry);
 
-    virtual void OnArchiveExtracted(InputStreamT& WXUNUSED(arc),
-                                    int WXUNUSED(expectedTotal)) { }
+    virtual void OnArchiveExtracted([[maybe_unused]] InputStreamT& arc,
+                                    [[maybe_unused]] int expectedTotal) { }
 
-    virtual void OnCreateEntry(     OutputStreamT& WXUNUSED(arc),
-                                    TestEntry& WXUNUSED(testEntry),
+    virtual void OnCreateEntry(     [[maybe_unused]] OutputStreamT& arc,
+                                    [[maybe_unused]] TestEntry& testEntry,
                                     EntryT *entry = NULL) { (void)entry; }
 
-    virtual void OnEntryExtracted(  EntryT& WXUNUSED(entry),
+    virtual void OnEntryExtracted(  [[maybe_unused]] EntryT& entry,
                                     [[maybe_unused]] const TestEntry& testEntry,
                                     InputStreamT *arc = NULL) { (void)arc; }
 

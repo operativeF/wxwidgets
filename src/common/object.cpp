@@ -107,7 +107,7 @@ void wxObject::operator delete ( void *buf, const char *_fname, size_t _line )
 #endif
 
 #ifdef _WX_WANT_DELETE_VOID_WXCHAR_INT
-void wxObject::operator delete ( void *buf, const wxChar *WXUNUSED(fileName), [[maybe_unused]] int lineNum )
+void wxObject::operator delete ( void *buf, [[maybe_unused]] const wxChar *fileName, [[maybe_unused]] int lineNum )
 {
      wxDebugFree(buf);
 }
@@ -128,7 +128,7 @@ void wxObject::operator delete[] ( void *buf )
 #endif
 
 #ifdef _WX_WANT_ARRAY_DELETE_VOID_WXCHAR_INT
-void wxObject::operator delete[] (void * buf, const wxChar*  WXUNUSED(fileName), [[maybe_unused]] int lineNum )
+void wxObject::operator delete[] (void * buf, [[maybe_unused]] const wxChar* fileName, [[maybe_unused]] int lineNum )
 {
     wxDebugFree(buf, true);
 }
@@ -391,7 +391,7 @@ wxObjectRefData *wxObject::CreateRefData() const
 }
 
 wxObjectRefData *
-wxObject::CloneRefData(const wxObjectRefData * WXUNUSED(data)) const
+wxObject::CloneRefData(const [[maybe_unused]] wxObjectRefData * data) const
 {
     // if you use AllocExclusive() you must override this method
     wxFAIL_MSG( "CloneRefData() must be overridden if called!" );

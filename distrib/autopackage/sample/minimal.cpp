@@ -154,13 +154,13 @@ MyFrame::MyFrame(const wxString& title)
 
 // event handlers
 
-void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void MyFrame::OnQuit([[maybe_unused]] wxCommandEvent& event)
 {
     // true is to force the frame to close
     Close(true);
 }
 
-void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+void MyFrame::OnAbout([[maybe_unused]] wxCommandEvent& event)
 {
     wxString msg;
     msg.Printf( wxT("This is the About dialog of the minimal sample.\n")

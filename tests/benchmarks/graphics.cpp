@@ -237,7 +237,7 @@ private:
     }
 
 #if wxUSE_GLCANVAS
-    void OnGLRender(wxPaintEvent& WXUNUSED(event))
+    void OnGLRender([[maybe_unused]] wxPaintEvent& event)
     {
         m_glContext->SetCurrent(*m_glCanvas);
         glEnable(GL_TEXTURE_2D);
@@ -283,7 +283,7 @@ private:
     }
 #endif // wxUSE_GLCANVAS
 
-    void OnPaint(wxPaintEvent& WXUNUSED(event))
+    void OnPaint([[maybe_unused]] wxPaintEvent& event)
     {
         if ( opts.usePaint )
         {

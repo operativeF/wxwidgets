@@ -330,7 +330,7 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
     SetFaceName(facename);
 }
 
-void wxNativeFontInfo::SetEncoding(wxFontEncoding WXUNUSED(encoding))
+void wxNativeFontInfo::SetEncoding([[maybe_unused]] wxFontEncoding encoding)
 {
     wxFAIL_MSG( "not implemented: Pango encoding is always UTF8" );
 }
@@ -864,12 +864,12 @@ void wxNativeFontInfo::SetNumericWeight(int weight)
     SetXFontComponent(wxXLFD_WEIGHT, s);
 }
 
-void wxNativeFontInfo::SetUnderlined(bool WXUNUSED(underlined))
+void wxNativeFontInfo::SetUnderlined([[maybe_unused]] bool underlined)
 {
     // can't do this under X
 }
 
-void wxNativeFontInfo::SetStrikethrough(bool WXUNUSED(strikethrough))
+void wxNativeFontInfo::SetStrikethrough([[maybe_unused]] bool strikethrough)
 {
     // this is not supported by Pango fonts neither
 }
@@ -1244,7 +1244,7 @@ static wxNativeFont wxLoadQueryFont(double pointSize,
                                     wxFontFamily family,
                                     wxFontStyle style,
                                     int weight,
-                                    bool WXUNUSED(underlined),
+                                    [[maybe_unused]] bool underlined,
                                     const wxString& facename,
                                     const wxString& xregistry,
                                     const wxString& xencoding,

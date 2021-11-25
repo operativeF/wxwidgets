@@ -226,22 +226,22 @@ void wxGenericFindReplaceDialog::SendEvent(const wxEventType& evtType)
 // event handlers
 // ----------------------------------------------------------------------------
 
-void wxGenericFindReplaceDialog::OnFind(wxCommandEvent& WXUNUSED(event))
+void wxGenericFindReplaceDialog::OnFind([[maybe_unused]] wxCommandEvent& event)
 {
     SendEvent(wxEVT_FIND_NEXT);
 }
 
-void wxGenericFindReplaceDialog::OnReplace(wxCommandEvent& WXUNUSED(event))
+void wxGenericFindReplaceDialog::OnReplace([[maybe_unused]] wxCommandEvent& event)
 {
     SendEvent(wxEVT_FIND_REPLACE);
 }
 
-void wxGenericFindReplaceDialog::OnReplaceAll(wxCommandEvent& WXUNUSED(event))
+void wxGenericFindReplaceDialog::OnReplaceAll([[maybe_unused]] wxCommandEvent& event)
 {
     SendEvent(wxEVT_FIND_REPLACE_ALL);
 }
 
-void wxGenericFindReplaceDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
+void wxGenericFindReplaceDialog::OnCancel([[maybe_unused]] wxCommandEvent& event)
 {
     SendEvent(wxEVT_FIND_CLOSE);
 

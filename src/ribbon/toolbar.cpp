@@ -89,7 +89,7 @@ bool wxRibbonToolBar::Create(wxWindow* parent,
     return true;
 }
 
-void wxRibbonToolBar::CommonInit(unsigned int WXUNUSED(style))
+void wxRibbonToolBar::CommonInit([[maybe_unused]] unsigned int style)
 {
     AppendGroup();
     m_hover_tool = nullptr;
@@ -995,12 +995,12 @@ wxSize wxRibbonToolBar::DoGetBestSize() const
     return GetMinSize();
 }
 
-void wxRibbonToolBar::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
+void wxRibbonToolBar::OnEraseBackground([[maybe_unused]] wxEraseEvent& evt)
 {
     // All painting done in main paint handler to minimise flicker
 }
 
-void wxRibbonToolBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
+void wxRibbonToolBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     if(m_art == nullptr)
@@ -1138,7 +1138,7 @@ void wxRibbonToolBar::OnMouseDown(wxMouseEvent& evt)
     }
 }
 
-void wxRibbonToolBar::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonToolBar::OnMouseLeave([[maybe_unused]] wxMouseEvent& evt)
 {
     if(m_hover_tool)
     {
@@ -1148,7 +1148,7 @@ void wxRibbonToolBar::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
     }
 }
 
-void wxRibbonToolBar::OnMouseUp(wxMouseEvent& WXUNUSED(evt))
+void wxRibbonToolBar::OnMouseUp([[maybe_unused]] wxMouseEvent& evt)
 {
     if(m_active_tool)
     {

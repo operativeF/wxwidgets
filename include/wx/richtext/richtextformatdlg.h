@@ -96,7 +96,7 @@ public:
     virtual int GetPageIdCount() const;
 
     /// Get the image index for the given page identifier
-    virtual int GetPageImage(int WXUNUSED(id)) const { return -1; }
+    virtual int GetPageImage([[maybe_unused]] int id) const { return -1; }
 
     /// Invoke help for the dialog
     virtual bool ShowHelp(int page, wxRichTextFormattingDialog* dialog);

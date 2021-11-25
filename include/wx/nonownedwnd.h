@@ -61,8 +61,8 @@ public:
     // Overridden base class methods.
     // ------------------------------
 
-    void AdjustForParentClientOrigin(int& WXUNUSED(x), int& WXUNUSED(y),
-                                     unsigned int WXUNUSED(sizeFlags) = 0) const override
+    void AdjustForParentClientOrigin([[maybe_unused]] int& x, [[maybe_unused]] int& y,
+                                     [[maybe_unused]] unsigned int sizeFlags = 0) const override
     {
         // Non owned windows positions don't need to be adjusted for parent
         // client area origin so simply do nothing here.

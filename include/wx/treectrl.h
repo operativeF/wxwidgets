@@ -353,7 +353,7 @@ public:
 
         // Enable or disable beep when incremental match doesn't find any item.
         // Only implemented in the generic version currently.
-    virtual void EnableBellOnNoMatch(bool WXUNUSED(on) = true) { }
+    virtual void EnableBellOnNoMatch([[maybe_unused]] bool on = true) { }
 
     // sorting
     // -------
