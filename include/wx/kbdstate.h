@@ -10,7 +10,24 @@
 #ifndef _WX_KBDSTATE_H_
 #define _WX_KBDSTATE_H_
 
-#include "wx/defs.h"
+/* This enum contains bit mask constants used in wxKeyEvent */
+enum wxKeyModifier
+{
+    wxMOD_NONE      = 0x0000,
+    wxMOD_ALT       = 0x0001,
+    wxMOD_CONTROL   = 0x0002,
+    wxMOD_ALTGR     = wxMOD_ALT | wxMOD_CONTROL,
+    wxMOD_SHIFT     = 0x0004,
+    wxMOD_META      = 0x0008,
+    wxMOD_WIN       = wxMOD_META,
+#if defined(__WXMAC__)
+    wxMOD_RAW_CONTROL = 0x0010,
+#else
+    wxMOD_RAW_CONTROL = wxMOD_CONTROL,
+#endif
+    wxMOD_CMD       = wxMOD_CONTROL,
+    wxMOD_ALL       = 0xffff
+};
 
 // ----------------------------------------------------------------------------
 // wxKeyboardState stores the state of the keyboard modifier keys

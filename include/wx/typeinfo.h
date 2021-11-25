@@ -22,20 +22,7 @@
 // classes.
 //
 
-#include "wx/defs.h"
-
 #ifndef wxNO_RTTI
-
-//
-// Let's trust that Visual C++ versions 9.0 and later implement C++
-// RTTI well enough, so we can use it and work around harmless memory
-// leaks reported by the static run-time libraries.
-//
-#if wxCHECK_VISUALC_VERSION(9)
-    #define wxTRUST_CPP_RTTI    1
-#else
-    #define wxTRUST_CPP_RTTI    0
-#endif
 
 import <typeinfo>;
 

@@ -900,24 +900,10 @@ inline void *wxUIntToPtr(wxUIntPtr p)
 #define wxMB_DOCKABLE       0x0001
 
 /*
- * wxMenu style flags
- */
-#define wxMENU_TEAROFF      0x0001
-
-/*
  * Apply to all panel items
  */
 #define wxCOLOURED          0x0800
 #define wxFIXED_LENGTH      0x0400
-
-/*  wxLB_OWNERDRAW is Windows-only */
-#define wxLB_NEEDED_SB      0x0000
-#define wxLB_OWNERDRAW      0x0100
-#define wxLB_ALWAYS_SB      0x0200
-#define wxLB_NO_SB          0x0400
-#define wxLB_HSCROLL        wxHSCROLL
-/*  always show an entire number of rows */
-#define wxLB_INT_HEIGHT     0x0800
 
 /*
  * wxComboBox style flags
@@ -1260,25 +1246,6 @@ enum wxKeyCode
     WXK_LAUNCH_MAIL,
     WXK_LAUNCH_APP1,
     WXK_LAUNCH_APP2
-};
-
-/* This enum contains bit mask constants used in wxKeyEvent */
-enum wxKeyModifier
-{
-    wxMOD_NONE      = 0x0000,
-    wxMOD_ALT       = 0x0001,
-    wxMOD_CONTROL   = 0x0002,
-    wxMOD_ALTGR     = wxMOD_ALT | wxMOD_CONTROL,
-    wxMOD_SHIFT     = 0x0004,
-    wxMOD_META      = 0x0008,
-    wxMOD_WIN       = wxMOD_META,
-#if defined(__WXMAC__)
-    wxMOD_RAW_CONTROL = 0x0010,
-#else
-    wxMOD_RAW_CONTROL = wxMOD_CONTROL,
-#endif
-    wxMOD_CMD       = wxMOD_CONTROL,
-    wxMOD_ALL       = 0xffff
 };
 
 /* Shortcut for easier dialog-unit-to-pixel conversion */

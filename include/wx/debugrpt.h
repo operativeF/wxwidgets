@@ -12,7 +12,7 @@
 
 #if wxUSE_DEBUGREPORT && wxUSE_XML
 
-#include "wx/defs.h"
+#include "wx/debug.h"
 
 #include "wx/string.h"
 #include "wx/filename.h"

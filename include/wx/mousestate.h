@@ -10,7 +10,7 @@
 #ifndef _WX_MOUSESTATE_H_
 #define _WX_MOUSESTATE_H_
 
-#include "wx/defs.h"
+#include "wx/debug.h"
 #include "wx/kbdstate.h"
 
 import Utils.Geometry;
