@@ -26,7 +26,6 @@ module;
 #include "wx/statusbr.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
-#include "wx/window.h"
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes

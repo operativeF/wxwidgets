@@ -10,8 +10,11 @@
 
 module;
 
-#include "wx/sizer.h"
 #include "wx/toplevel.h"
+
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
+#endif
 
 module WX.AUI.FloatPane;
 

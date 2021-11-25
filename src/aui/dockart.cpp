@@ -11,10 +11,8 @@
 module;
 
 #include "wx/settings.h"
-#include "wx/colour.h"
-#include "wx/dc.h"
+#include "wx/dcclient.h"
 #include "wx/image.h"
-#include "wx/window.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
