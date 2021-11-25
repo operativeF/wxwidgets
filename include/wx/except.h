@@ -11,12 +11,6 @@
 #ifndef _WX_EXCEPT_H_
 #define _WX_EXCEPT_H_
 
-#include "wx/defs.h"
-
-// ----------------------------------------------------------------------------
-// macros working whether wxUSE_EXCEPTIONS is 0 or 1
-// ----------------------------------------------------------------------------
-
 // even if the library itself was compiled with exceptions support, the user
 // code using it might be compiling with a compiler switch disabling them in
 // which cases we shouldn't use try/catch in the headers -- this results in

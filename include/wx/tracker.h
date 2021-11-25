@@ -10,7 +10,6 @@
 #ifndef _WX_TRACKER_H_
 #define _WX_TRACKER_H_
 
-#include "wx/defs.h"
 #include "wx/debug.h"
 
 class wxEventConnectionRef;

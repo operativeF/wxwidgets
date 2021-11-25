@@ -17,8 +17,6 @@
 
 #if wxUSE_ACCESSIBILITY
 
-#include "wx/defs.h"
-
 #include "wx/variant.h"
 
 import Utils.Geometry;
