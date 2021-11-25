@@ -10,11 +10,9 @@
 
 module;
 
-#include "wx/image.h"
-#include "wx/menu.h"
+#include "wx/bitmap.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
-#include "wx/statline.h"
 #include "wx/dcbuffer.h"
 #include "wx/sizer.h"
 #include "wx/settings.h"

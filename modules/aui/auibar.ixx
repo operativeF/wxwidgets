@@ -10,10 +10,8 @@
 
 module;
 
-#include "wx/dcclient.h"
 #include "wx/control.h"
 #include "wx/sizer.h"
-#include "wx/pen.h"
 
 export module WX.AUI.AUIBar;
 
@@ -25,6 +23,8 @@ import Utils.Geometry;
 
 export
 {
+
+class wxClientDC;
 
 enum wxAuiToolBarStyle
 {

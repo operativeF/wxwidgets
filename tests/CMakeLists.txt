@@ -29,36 +29,36 @@ set(TEST_GUI_SRC
     test.cpp
     testableframe.cpp
     geometry/rect.cpp
-    geometry/size.cpp
-    geometry/point.cpp
+    geometry/size.ixx
+    geometry/point.ixx
     geometry/region.cpp
-    graphics/bitmap.cpp
+    graphics/bitmap.ixx
     #graphics/colour.cpp # Doesn't work yet.
     graphics/ellipsization.cpp
-    graphics/measuring.cpp
+    graphics/measuring.ixx
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
-    graphics/boundingbox.cpp
+    graphics/boundingbox.ixx
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
-    graphics/coords.cpp
+    graphics/coords.ixx
     #graphics/graphbitmap.cpp # FIXME: Works but doesn't test with matchers yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
     graphics/graphpath.cpp
     graphics/imagelist.cpp
     #config/config.cpp # FIXME: Use a more robust system for writing to file. Currently very fragile.
-    controls/auitest.cpp
-    controls/bitmapcomboboxtest.cpp
-    controls/bitmaptogglebuttontest.cpp
-    controls/buttontest.cpp
-    controls/checkboxtest.cpp
-    controls/checklistboxtest.cpp
-    controls/choicebooktest.cpp
-    controls/choicetest.cpp
-    controls/comboboxtest.cpp
+    controls/auitest.ixx
+    controls/bitmapcomboboxtest.ixx
+    controls/bitmaptogglebuttontest.ixx
+    controls/buttontest.ixx
+    controls/checkboxtest.ixx
+    controls/checklistboxtest.ixx
+    controls/choicebooktest.ixx
+    controls/choicetest.ixx
+    controls/comboboxtest.ixx
     controls/dataviewctrltest.cpp
     controls/datepickerctrltest.cpp
-    controls/frametest.cpp
-    controls/gaugetest.cpp
-    controls/gridtest.cpp
+    controls/frametest.ixx
+    controls/gaugetest.ixx
+    controls/gridtest.ixx
     controls/headerctrltest.cpp
     #controls/htmllboxtest.cpp # FIXME: Need to get rid of wxArrayString
     controls/hyperlinkctrltest.cpp
@@ -67,31 +67,31 @@ set(TEST_GUI_SRC
     controls/listboxtest.cpp
     controls/listctrltest.cpp
     controls/listviewtest.cpp
-    controls/markuptest.cpp
-    controls/notebooktest.cpp
-    controls/ownerdrawncomboboxtest.cpp
+    controls/markuptest.ixx
+    controls/notebooktest.ixx
+    controls/ownerdrawncomboboxtest.ixx
     controls/pickertest.cpp
-    controls/radioboxtest.cpp
+    controls/radioboxtest.ixx
     controls/radiobuttontest.cpp
     controls/rearrangelisttest.cpp
     #controls/richtextctrltest.cpp # FIXME: Need to get rid of wxArrayString
     controls/searchctrltest.cpp
     controls/simplebooktest.cpp
-    controls/slidertest.cpp
+    controls/slidertest.ixx
     controls/spinctrldbltest.cpp
     controls/spinctrltest.cpp
     controls/styledtextctrltest.cpp
-    controls/textctrltest.cpp
+    controls/textctrltest.ixx
     controls/togglebuttontest.cpp
-    controls/toolbooktest.cpp
+    controls/toolbooktest.ixx
     controls/treebooktest.cpp
     controls/treectrltest.cpp
     controls/treelistctrltest.cpp
-    controls/virtlistctrltest.cpp
+    controls/virtlistctrltest.ixx
     #controls/webtest.cpp # FIXME
-    controls/windowtest.cpp
+    controls/windowtest.ixx
     #controls/dialogtest.cpp
-    events/clone.cpp
+    events/clone.ixx
     # Duplicate this file here to test GUI event loops too.
     events/evtlooptest.cpp
     #events/propagation.cpp # Needs some fixes.
@@ -99,14 +99,14 @@ set(TEST_GUI_SRC
     # And duplicate this one too as wxExecute behaves differently in
     # console and GUI applications.
     exec/exec.cpp
-    font/fonttest.cpp
-    image/image.cpp
+    font/fonttest.ixx
+    image/image.ixx
     image/rawbmp.cpp
     #html/htmlparser.cpp # FIXME: Need to get rid of wxArrayString.
     #html/htmlwindow.cpp
     #html/htmprint.cpp
-    menu/accelentry.cpp
-    menu/menu.cpp
+    menu/accelentry.ixx
+    menu/menu.ixx
     misc/guifuncs.cpp
     misc/selstoretest.cpp
     #misc/garbage.cpp
@@ -119,13 +119,13 @@ set(TEST_GUI_SRC
     #persistence/tlw.cpp # FIXME: Relies on config to work correctly.
     persistence/dataview.cpp
     rowheightcache/rowheightcachetest.cpp
-    sizers/boxsizer.cpp
-    sizers/gridsizer.cpp
+    sizers/boxsizer.ixx
+    sizers/gridsizer.ixx
     sizers/wrapsizer.cpp
     toplevel/toplevel.cpp
     validators/valnum.cpp
-    validators/valtext.cpp
-    window/clientsize.cpp
+    validators/valtext.ixx
+    window/clientsize.ixx
     window/setsize.cpp
     xml/xrctest.cpp
 )
