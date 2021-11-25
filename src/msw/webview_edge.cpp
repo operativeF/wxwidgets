@@ -895,7 +895,7 @@ bool wxWebViewEdge::AddScriptMessageHandler(const wxString& name)
     return true;
 }
 
-bool wxWebViewEdge::RemoveScriptMessageHandler(const wxString& WXUNUSED(name))
+bool wxWebViewEdge::RemoveScriptMessageHandler([[maybe_unused]] const wxString& name)
 {
     m_impl->m_scriptMsgHandlerName.clear();
     m_impl->UpdateWebMessageHandler();
@@ -948,7 +948,7 @@ void wxWebViewEdge::RegisterHandler(std::shared_ptr<wxWebViewHandler> WXUNUSED(h
     wxLogDebug("Registering handlers is not supported");
 }
 
-void wxWebViewEdge::DoSetPage(const wxString& html, const wxString& WXUNUSED(baseUrl))
+void wxWebViewEdge::DoSetPage(const wxString& html, [[maybe_unused]] const wxString& baseUrl)
 {
     if (m_impl->m_webView)
         m_impl->m_webView->NavigateToString(html.wc_str());

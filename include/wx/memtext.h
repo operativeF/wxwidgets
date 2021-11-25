@@ -34,11 +34,11 @@ protected:
     bool OnClose() override
         { return true; }
 
-    bool OnRead(const wxMBConv& WXUNUSED(conv)) override
+    bool OnRead([[maybe_unused]] const wxMBConv& conv) override
         { return true; }
 
     bool OnWrite(wxTextFileType WXUNUSED(typeNew),
-                         const wxMBConv& WXUNUSED(conv) = wxMBConvUTF8()) override
+                         [[maybe_unused]] const wxMBConv& conv = wxMBConvUTF8()) override
         { return true; }
 };
 

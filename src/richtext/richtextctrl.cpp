@@ -1474,7 +1474,7 @@ void wxRichTextCtrl::OnChar(wxKeyEvent& event)
     }
 }
 
-bool wxRichTextCtrl::ProcessMouseMovement(wxRichTextParagraphLayoutBox* container, wxRichTextObject* WXUNUSED(obj), long position, const wxPoint& WXUNUSED(pos))
+bool wxRichTextCtrl::ProcessMouseMovement(wxRichTextParagraphLayoutBox* container, wxRichTextObject* WXUNUSED(obj), long position, [[maybe_unused]] const wxPoint& pos)
 {
     wxRichTextAttr attr;
     if (container && GetStyle(position, attr, container))
@@ -5058,7 +5058,7 @@ bool wxRichTextDropSource::GiveFeedback(wxDragResult WXUNUSED(effect))
 }
 #endif // wxUSE_DRAG_AND_DROP
 
-bool wxRichTextCtrl::CanDeleteRange(wxRichTextParagraphLayoutBox& WXUNUSED(container), const wxRichTextRange& WXUNUSED(range)) const
+bool wxRichTextCtrl::CanDeleteRange(wxRichTextParagraphLayoutBox& WXUNUSED(container), [[maybe_unused]] const wxRichTextRange& range) const
 {
     return true;
 }

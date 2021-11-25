@@ -2598,7 +2598,7 @@ public:
     /**
         Deletes the given range.
     */
-    virtual bool DeleteRange(const wxRichTextRange& WXUNUSED(range)) { return false; }
+    virtual bool DeleteRange([[maybe_unused]] const wxRichTextRange& range) { return false; }
 
     /**
         Returns @true if the object is empty.
@@ -2623,7 +2623,7 @@ public:
     /**
         Returns any text in this object for the given range.
     */
-    virtual wxString GetTextForRange(const wxRichTextRange& WXUNUSED(range)) const { return {}; }
+    virtual wxString GetTextForRange([[maybe_unused]] const wxRichTextRange& range) const { return {}; }
 
     /**
         Returns @true if this object can merge itself with the given one.

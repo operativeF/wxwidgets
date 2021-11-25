@@ -230,7 +230,7 @@ public:
 #endif // wxUSE_TOOLBAR
 
     // no icon
-    void SetIcons(const wxIconBundle& WXUNUSED(icons)) override { }
+    void SetIcons([[maybe_unused]] const wxIconBundle& icons) override { }
 
     // title is used as the tab label
     std::string GetTitle() const override { return m_title; }

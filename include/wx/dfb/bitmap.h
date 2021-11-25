@@ -38,7 +38,7 @@ public:
     bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
     bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
         { return Create(sz.GetWidth(), sz.GetHeight(), depth); }
-    bool Create(int width, int height, const wxDC& WXUNUSED(dc))
+    bool Create(int width, int height, [[maybe_unused]] const wxDC& dc)
         { return Create(width,height); }
 
     virtual int GetHeight() const;

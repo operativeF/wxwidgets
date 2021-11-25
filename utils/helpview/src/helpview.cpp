@@ -345,7 +345,7 @@ if ( id == artId ) return wxBitmap(xpmRc##_xpm);
 
 wxBitmap AlternateArtProvider::CreateBitmap(const wxArtID& id,
                                             const wxArtClient& client,
-                                            const wxSize& WXUNUSED(size))
+                                            [[maybe_unused]] const wxSize& size)
 {
     ART(wxART_HELP_SIDE_PANEL,                     helpsidepanel)
         ART(wxART_HELP_SETTINGS,                       helpoptions)
@@ -398,7 +398,7 @@ hvConnection::~hvConnection()
     wxGetApp().GetConnections().DeleteObject(this);
 }
 
-bool hvConnection::OnExec(const wxString& WXUNUSED(topic),
+bool hvConnection::OnExec([[maybe_unused]] const wxString& topic,
                           const wxString& data)
 {
     //    wxLogStatus("Execute command: %s", data);
@@ -425,7 +425,7 @@ bool hvConnection::OnExec(const wxString& WXUNUSED(topic),
     return true;
 }
 
-bool hvConnection::OnPoke(const wxString& WXUNUSED(topic),
+bool hvConnection::OnPoke([[maybe_unused]] const wxString& topic,
                           const wxString& item,
                           const void *buf,
                           size_t size,

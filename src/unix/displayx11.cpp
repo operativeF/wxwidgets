@@ -243,7 +243,7 @@ wxVideoMode wxDisplayImplX11::GetCurrentMode() const
     return wxVideoMode();
 }
 
-bool wxDisplayImplX11::ChangeMode(const wxVideoMode& WXUNUSED(mode))
+bool wxDisplayImplX11::ChangeMode([[maybe_unused]] const wxVideoMode& mode)
 {
     // Not implemented
     return false;

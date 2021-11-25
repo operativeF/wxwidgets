@@ -444,7 +444,7 @@ public:
     virtual void ExtendRulesAndAlternateColour(bool WXUNUSED(extend) = true) { }
 
     // Header attributes support: only implemented in wxMSW currently.
-    virtual bool SetHeaderAttr(const wxItemAttr& WXUNUSED(attr)) { return false; }
+    virtual bool SetHeaderAttr([[maybe_unused]] const wxItemAttr& attr) { return false; }
 
     // Checkboxes support.
     virtual bool HasCheckBoxes() const { return false; }

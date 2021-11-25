@@ -22,7 +22,7 @@ TEST_CASE("wxHtmlParser::ParseInvalid")
     class NullParser : public wxHtmlWinParser
     {
     protected:
-        void AddText(const wxString& WXUNUSED(txt)) override { }
+        void AddText([[maybe_unused]] const wxString& txt) override { }
     };
 
     NullParser p;

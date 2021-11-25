@@ -676,7 +676,7 @@ public:
     int GetLinePos(const wxGrid * WXUNUSED(grid), int line) const override
         { return line; } // TODO: implement row reordering
 
-    int GetLineBefore(const wxGrid* WXUNUSED(grid), int line) const override
+    int GetLineBefore([[maybe_unused]] const wxGrid* grid, int line) const override
         { return line - 1; }
 
     wxWindow *GetHeaderWindow(wxGrid *grid) const override

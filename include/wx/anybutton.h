@@ -156,7 +156,7 @@ protected:
 
     virtual wxBitmap DoGetBitmap(State WXUNUSED(which)) const
         { return wxBitmap(); }
-    virtual void DoSetBitmap(const wxBitmap& WXUNUSED(bitmap),
+    virtual void DoSetBitmap([[maybe_unused]] const wxBitmap& bitmap,
                              State WXUNUSED(which))
         { }
 

@@ -61,7 +61,7 @@ public:
     virtual bool DisplayContextPopup(int WXUNUSED(contextId)) { return false; }
 
     // Display the text in a popup, if possible
-    virtual bool DisplayTextPopup(const std::string& WXUNUSED(text), const wxPoint& WXUNUSED(pos)) { return false; }
+    virtual bool DisplayTextPopup(const std::string& WXUNUSED(text), [[maybe_unused]] const wxPoint& pos) { return false; }
 
     // By default, uses KeywordSection to display a topic. Implementations
     // may override this for more specific behaviour.
@@ -71,8 +71,8 @@ public:
                                wxHelpSearchMode mode = wxHelpSearchMode::All) = 0;
     /// Allows one to override the default settings for the help frame.
     virtual void SetFrameParameters(const std::string& WXUNUSED(title),
-        const wxSize& WXUNUSED(size),
-        const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
+        [[maybe_unused]] const wxSize& size,
+        [[maybe_unused]] const wxPoint& pos = wxDefaultPosition,
         bool WXUNUSED(newFrameEachTime) = false)
     {
         // does nothing by default

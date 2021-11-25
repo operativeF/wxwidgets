@@ -35,7 +35,7 @@ public:
 
     virtual bool Abort() { return true; }
 
-    wxInputStream *GetInputStream(const wxString& WXUNUSED(path))
+    wxInputStream *GetInputStream([[maybe_unused]] const wxString& path)
     {
         return 0;   // input stream is returned by wxURLNativeImp
     }

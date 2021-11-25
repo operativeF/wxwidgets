@@ -282,8 +282,8 @@ public:
 
 protected:
     virtual void OnCustomRender(wxDC& WXUNUSED(dc),
-                                const wxAuiToolBarItem& WXUNUSED(item),
-                                const wxRect& WXUNUSED(rect)) { }
+                                [[maybe_unused]] const wxAuiToolBarItem& item,
+                                [[maybe_unused]] const wxRect& rect) { }
 
 protected:
 

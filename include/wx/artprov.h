@@ -214,15 +214,15 @@ protected:
     // Derived classes must override CreateBitmap or CreateIconBundle
     // (or both) to create requested art resource. This method is called
     // only once per instance's lifetime for each requested wxArtID.
-    virtual wxBitmap CreateBitmap(const wxArtID& WXUNUSED(id),
-                                  const wxArtClient& WXUNUSED(client),
-                                  const wxSize& WXUNUSED(size))
+    virtual wxBitmap CreateBitmap([[maybe_unused]] const wxArtID& id,
+                                  [[maybe_unused]] const wxArtClient& client,
+                                  [[maybe_unused]] const wxSize& size)
     {
         return wxNullBitmap;
     }
 
-    virtual wxIconBundle CreateIconBundle(const wxArtID& WXUNUSED(id),
-                                          const wxArtClient& WXUNUSED(client))
+    virtual wxIconBundle CreateIconBundle([[maybe_unused]] const wxArtID& id,
+                                          [[maybe_unused]] const wxArtClient& client)
     {
         return wxNullIconBundle;
     }

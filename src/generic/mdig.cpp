@@ -400,7 +400,7 @@ wxGenericMDIChildFrame::~wxGenericMDIChildFrame()
 bool wxGenericMDIChildFrame::Create(wxGenericMDIParentFrame *parent,
                                     wxWindowID id,
                                     const wxString& title,
-                                    const wxPoint& WXUNUSED(pos),
+                                    [[maybe_unused]] const wxPoint& pos,
                                     const wxSize& size,
                                     long WXUNUSED(style),
                                     const wxString& name)

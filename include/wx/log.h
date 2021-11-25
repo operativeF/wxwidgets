@@ -1231,13 +1231,13 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
 // define macros for defining log functions which do nothing at all
 #define wxDEFINE_EMPTY_LOG_FUNCTION(level)                                  \
     WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 1, (const wxFormatString&))     \
-    inline void wxVLog##level(const wxFormatString& WXUNUSED(format),       \
+    inline void wxVLog##level([[maybe_unused]] const wxFormatString& format,       \
                               va_list WXUNUSED(argptr)) { }                 \
 
 #define wxDEFINE_EMPTY_LOG_FUNCTION2(level, argclass)                       \
     WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 2, (argclass, const wxFormatString&)) \
     inline void wxVLog##level(argclass WXUNUSED(arg),                       \
-                              const wxFormatString& WXUNUSED(format),       \
+                              [[maybe_unused]] const wxFormatString& format,       \
                               va_list WXUNUSED(argptr)) {}
 
 wxDEFINE_EMPTY_LOG_FUNCTION(FatalError);

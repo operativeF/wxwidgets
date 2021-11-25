@@ -124,16 +124,16 @@ public:
         return false;
     }
 
-    virtual bool Save(const wxString& WXUNUSED(service),
-                      const wxString& WXUNUSED(user),
-                      const wxSecretValueImpl& WXUNUSED(secret),
+    virtual bool Save([[maybe_unused]] const wxString& service,
+                      [[maybe_unused]] const wxString& user,
+                      [[maybe_unused]] const wxSecretValueImpl& secret,
                       wxString& errmsg) override
     {
         errmsg = m_error;
         return false;
     }
 
-    virtual bool Load(const wxString& WXUNUSED(service),
+    virtual bool Load([[maybe_unused]] const wxString& service,
                       wxString* WXUNUSED(user),
                       wxSecretValueImpl** WXUNUSED(secret),
                       wxString& errmsg) const override
@@ -142,7 +142,7 @@ public:
         return false;
     }
 
-    virtual bool Delete(const wxString& WXUNUSED(service),
+    virtual bool Delete([[maybe_unused]] const wxString& service,
                         wxString& errmsg) override
     {
         errmsg = m_error;

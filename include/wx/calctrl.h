@@ -201,8 +201,8 @@ public:
     // returned; if none are set, the existing restrictions are removed and
     // false is returned
     virtual bool
-    SetDateRange(const wxDateTime& WXUNUSED(lowerdate) = wxDefaultDateTime,
-                 const wxDateTime& WXUNUSED(upperdate) = wxDefaultDateTime)
+    SetDateRange([[maybe_unused]] const wxDateTime& lowerdate = wxDefaultDateTime,
+                 [[maybe_unused]] const wxDateTime& upperdate = wxDefaultDateTime)
     {
         return false;
     }
@@ -226,7 +226,7 @@ public:
     //
     // notice that this is not implemented in all versions
     virtual wxCalendarHitTestResult
-    HitTest(const wxPoint& WXUNUSED(pos),
+    HitTest([[maybe_unused]] const wxPoint& pos,
             wxDateTime* WXUNUSED(date) = nullptr,
             wxDateTime::WeekDay* WXUNUSED(wd) = nullptr)
     {
@@ -274,8 +274,8 @@ public:
     virtual void EnableHolidayDisplay(bool display = true);
 
     // set/get the colours to use for holidays (if they're enabled)
-    virtual void SetHolidayColours(const wxColour& WXUNUSED(colFg),
-                                   const wxColour& WXUNUSED(colBg)) { }
+    virtual void SetHolidayColours([[maybe_unused]] const wxColour& colFg,
+                                   [[maybe_unused]] const wxColour& colBg) { }
 
     virtual const wxColour& GetHolidayColourFg() const { return wxNullColour; }
     virtual const wxColour& GetHolidayColourBg() const { return wxNullColour; }
@@ -291,15 +291,15 @@ public:
 
     // set/get the colours to use for the display of the week day names at the
     // top of the controls
-    virtual void SetHeaderColours(const wxColour& WXUNUSED(colFg),
-                                  const wxColour& WXUNUSED(colBg)) { }
+    virtual void SetHeaderColours([[maybe_unused]] const wxColour& colFg,
+                                  [[maybe_unused]] const wxColour& colBg) { }
 
     virtual const wxColour& GetHeaderColourFg() const { return wxNullColour; }
     virtual const wxColour& GetHeaderColourBg() const { return wxNullColour; }
 
     // set/get the colours used for the currently selected date
-    virtual void SetHighlightColours(const wxColour& WXUNUSED(colFg),
-                                     const wxColour& WXUNUSED(colBg)) { }
+    virtual void SetHighlightColours([[maybe_unused]] const wxColour& colFg,
+                                     [[maybe_unused]] const wxColour& colBg) { }
 
     virtual const wxColour& GetHighlightColourFg() const { return wxNullColour; }
     virtual const wxColour& GetHighlightColourBg() const { return wxNullColour; }

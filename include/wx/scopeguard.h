@@ -45,7 +45,7 @@ namespace wxPrivate
 
     // just to avoid the warning about unused variables
     template <class T>
-    void Use(const T& WXUNUSED(t))
+    void Use([[maybe_unused]] const T& t)
     {
     }
 } // namespace wxPrivate

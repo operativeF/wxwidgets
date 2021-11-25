@@ -56,7 +56,7 @@ public:
     virtual wxRibbonBar* GetAncestorRibbonBar()const;
 
     // Finds the best width and height given the parent's width and height
-    virtual wxSize GetBestSizeForParentSize(const wxSize& WXUNUSED(parentSize)) const { return GetBestSize(); }
+    virtual wxSize GetBestSizeForParentSize([[maybe_unused]] const wxSize& parentSize) const { return GetBestSize(); }
 
 protected:
     wxRibbonArtProvider* m_art;

@@ -296,7 +296,7 @@ bool wxHtmlHelpController::DisplaySection(int sectionNo)
     return Display(sectionNo);
 }
 
-bool wxHtmlHelpController::DisplayTextPopup(const std::string& text, const wxPoint& WXUNUSED(pos))
+bool wxHtmlHelpController::DisplayTextPopup(const std::string& text, [[maybe_unused]] const wxPoint& pos)
 {
 #if wxUSE_TIPWINDOW
     static wxTipWindow* s_tipWindow = nullptr;

@@ -93,7 +93,7 @@ protected:
 
     // overridden in wxTopLevelWindowDFB, there's no common handling for wxTLW
     // and wxPopupWindow to be done here
-    virtual void HandleFocusEvent(const wxDFBWindowEvent& WXUNUSED(event_)) {}
+    virtual void HandleFocusEvent([[maybe_unused]] const wxDFBWindowEvent& event_) {}
 
 private:
     // do queued painting in idle time

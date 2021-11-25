@@ -816,7 +816,7 @@ public:
     }
 
     // Set value modified by dialog.
-    virtual void SetDialogValue( const wxVariant& WXUNUSED(value) )
+    virtual void SetDialogValue( [[maybe_unused]] const wxVariant& value )
     {
         wxFAIL_MSG("re-implement this member function in derived class");
     }

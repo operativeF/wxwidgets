@@ -113,7 +113,7 @@ public:
     wxCoord wxGetCharWidth() const override;
 
 #if wxUSE_PALETTE
-    void SetPalette(const wxPalette& WXUNUSED(palette)) override
+    void SetPalette([[maybe_unused]] const wxPalette& palette) override
     {
         wxFAIL_MSG("wxSVGFILEDC::SetPalette not implemented");
     }
@@ -222,7 +222,7 @@ private:
     void DoDrawText(std::string_view text, wxPoint pt) override;
 
     bool DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
-                             const wxColour& WXUNUSED(col),
+                             [[maybe_unused]] const wxColour& col,
                              wxFloodFillStyle WXUNUSED(style)) override
     {
         wxFAIL_MSG("wxSVGFILEDC::DoFloodFill Call not implemented");

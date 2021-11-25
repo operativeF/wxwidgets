@@ -87,7 +87,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
                                        int *microVer = NULL) const;
 
     virtual bool CanUseStderr() { return false; }
-    virtual bool WriteToStderr(const wxString& WXUNUSED(text)) { return false; }
+    virtual bool WriteToStderr([[maybe_unused]] const wxString& text) { return false; }
     WXHWND GetMainHWND() const override { return NULL; }
 };
 

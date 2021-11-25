@@ -48,7 +48,7 @@ public:
     // if returns true, then this wxDataObject will be copied to the clipboard
     // without any additional information and ::HeapSize() function will be used
     // to get the size of that data
-    virtual bool NeedsVerbatimData(const wxDataFormat& WXUNUSED(format)) const
+    virtual bool NeedsVerbatimData([[maybe_unused]] const wxDataFormat& format) const
     {
         // return false from here only for compatibility with earlier wx versions
         return true;

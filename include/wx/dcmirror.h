@@ -246,7 +246,7 @@ protected:
         delete[] points_alloc;
     }
 
-    void DoSetDeviceClippingRegion(const wxRegion& WXUNUSED(region)) override
+    void DoSetDeviceClippingRegion([[maybe_unused]] const wxRegion& region) override
     {
         wxFAIL_MSG( "not implemented" );
     }

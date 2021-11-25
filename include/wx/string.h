@@ -1146,11 +1146,11 @@ public:
     // ctors from wchar_t* strings:
   wxString(const wchar_t *pwz)
     : m_impl(ImplStr(pwz)) {}
-  wxString(const wchar_t *pwz, const wxMBConv& WXUNUSED(conv))
+  wxString(const wchar_t *pwz, [[maybe_unused]] const wxMBConv& conv)
     : m_impl(ImplStr(pwz)) {}
   wxString(const wchar_t *pwz, size_t nLength)
     { assign(pwz, nLength); }
-  wxString(const wchar_t *pwz, const wxMBConv& WXUNUSED(conv), size_t nLength)
+  wxString(const wchar_t *pwz, [[maybe_unused]] const wxMBConv& conv, size_t nLength)
     { assign(pwz, nLength); }
 
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
@@ -1236,7 +1236,7 @@ public:
     // wxStringImpl is std::string in the encoding we want
     #define wxStringToStdStringRetType const std::string&
     const std::string& ToStdString() const { return m_impl; }
-    std::string ToStdString(const wxMBConv& WXUNUSED(conv)) const
+    std::string ToStdString([[maybe_unused]] const wxMBConv& conv) const
     {
         // No conversions are done when not using Unicode as everything is
         // supposed to be in 7 bit ASCII anyhow, this method is provided just
@@ -1718,7 +1718,7 @@ public:
         { return AsWCharBuf(wxMBConvStrictUTF8()); }
 #endif
     // for compatibility with !wxUSE_UNICODE version
-    const wxWX2WCbuf wc_str(const wxMBConv& WXUNUSED(conv)) const
+    const wxWX2WCbuf wc_str([[maybe_unused]] const wxMBConv& conv) const
       { return wc_str(); }
 
 #if wxMBFILES

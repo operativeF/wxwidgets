@@ -115,7 +115,7 @@ void wxBrush::SetStyle(wxBrushStyle style)
     M_BRUSHDATA->SetStyle(style);
 }
 
-void wxBrush::SetStipple(const wxBitmap& WXUNUSED(stipple))
+void wxBrush::SetStipple([[maybe_unused]] const wxBitmap& stipple)
 {
     wxFAIL_MSG( "brushes with stipple bitmaps not implemented" );
 }

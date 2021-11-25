@@ -228,19 +228,19 @@ bool wxNotebook::SetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage),
 }
 
 // set the size (the same for all pages)
-void wxNotebook::SetPageSize(const wxSize& WXUNUSED(size))
+void wxNotebook::SetPageSize([[maybe_unused]] const wxSize& size)
 {
     // TODO
 }
 
 // set the padding between tabs (in pixels)
-void wxNotebook::SetPadding(const wxSize& WXUNUSED(padding))
+void wxNotebook::SetPadding([[maybe_unused]] const wxSize& padding)
 {
     // TODO
 }
 
 // set the size of the tabs for wxNB_FIXEDWIDTH controls
-void wxNotebook::SetTabSize(const wxSize& WXUNUSED(sz))
+void wxNotebook::SetTabSize([[maybe_unused]] const wxSize& sz)
 {
     // TODO
 }

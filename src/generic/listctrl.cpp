@@ -5293,7 +5293,7 @@ bool wxGenericListCtrl::GetItemPosition( long item, wxPoint& pos ) const
     return true;
 }
 
-bool wxGenericListCtrl::SetItemPosition( long WXUNUSED(item), const wxPoint& WXUNUSED(pos) )
+bool wxGenericListCtrl::SetItemPosition( long WXUNUSED(item), [[maybe_unused]] const wxPoint& pos )
 {
     return false;
 }

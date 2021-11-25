@@ -407,7 +407,7 @@ WX_PG_DECLARE_EDITOR_WITH_DECL(ChoiceAndButton,WXDLLIMPEXP_PROPGRID)
 // wxWidgets internally, and of all types created using
 // WX_PG_DECLARE_VARIANT_DATA.
 template<class T>
-wxVariant WXVARIANT( const T& WXUNUSED(value) )
+wxVariant WXVARIANT( [[maybe_unused]] const T& value )
 {
     wxFAIL_MSG("Code should always call specializations of this template");
     return wxVariant();

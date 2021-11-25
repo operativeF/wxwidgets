@@ -88,7 +88,7 @@ void wxSetInstance(WXHINSTANCE hInst);
 // character height (as returned by GetCharHeight() or wxGetCharSize()).
 //
 // The wxWindow parameter is currently not used but should still be valid.
-inline int wxGetEditHeightFromCharHeight(int cy, const wxWindow* WXUNUSED(w))
+inline int wxGetEditHeightFromCharHeight(int cy, [[maybe_unused]] const wxWindow* w)
 {
     // The value 8 here is empiric, i.e. it's not necessarily correct, but
     // seems to work relatively well.

@@ -562,7 +562,7 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
 void wxRibbonAUIArtProvider::DrawTabSeparator(
                     wxDC& WXUNUSED(dc),
                     wxWindow* WXUNUSED(wnd),
-                    const wxRect& WXUNUSED(rect),
+                    [[maybe_unused]] const wxRect& rect,
                     double WXUNUSED(visibility))
 {
     // No explicit separators between tabs

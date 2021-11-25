@@ -402,7 +402,7 @@ int wxRichTextFloatCollector::GetLastRectBottom()
     return ret;
 }
 
-void wxRichTextFloatCollector::DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
+void wxRichTextFloatCollector::DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     int start = rect.y;
     int end = rect.y + rect.height;
@@ -1135,7 +1135,7 @@ bool wxRichTextObject::GetTotalMargin(wxDC& dc, wxRichTextBuffer* buffer, const 
 // child attribute, e.g. 50% width of the parent, 400 pixels, x position 20% of the parent, etc.
 // availableContainerSpace might be a parent that the cell has to compute its width relative to.
 // E.g. a cell that's 50% of its parent.
-wxRect wxRichTextObject::AdjustAvailableSpace(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& WXUNUSED(parentAttr), const wxRichTextAttr& childAttr, const wxRect& availableParentSpace, const wxRect& availableContainerSpace)
+wxRect wxRichTextObject::AdjustAvailableSpace(wxDC& dc, wxRichTextBuffer* buffer, [[maybe_unused]] const wxRichTextAttr& parentAttr, const wxRichTextAttr& childAttr, const wxRect& availableParentSpace, const wxRect& availableContainerSpace)
 {
     wxRect rect = availableParentSpace;
     double scale = 1.0;
@@ -7084,7 +7084,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
 }
 
 /// Lay the item out
-bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), unsigned int WXUNUSED(style))
+bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRect& rect, [[maybe_unused]] const wxRect& parentRect, unsigned int WXUNUSED(style))
 {
     // Only lay out if we haven't already cached the size
     if (m_size.x == -1)
@@ -7122,7 +7122,7 @@ void wxRichTextPlainText::Copy(const wxRichTextPlainText& obj)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& position, const wxSize& WXUNUSED(parentSize), std::vector<int>* partialExtents) const
+bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& position, [[maybe_unused]] const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -9214,7 +9214,7 @@ void wxRichTextStdRenderer::SetFontForBullet(wxRichTextBuffer& buffer, wxDC& dc,
     }
 }
 
-bool wxRichTextStdRenderer::DrawBitmapBullet(wxRichTextParagraph* WXUNUSED(paragraph), wxDC& WXUNUSED(dc), const wxRichTextAttr& WXUNUSED(attr), const wxRect& WXUNUSED(rect))
+bool wxRichTextStdRenderer::DrawBitmapBullet(wxRichTextParagraph* WXUNUSED(paragraph), wxDC& WXUNUSED(dc), [[maybe_unused]] const wxRichTextAttr& attr, [[maybe_unused]] const wxRect& rect)
 {
     // Currently unimplemented. The intention is to store bitmaps by name in a media store associated
     // with the buffer. The store will allow retrieval from memory, disk or other means.
@@ -9468,7 +9468,7 @@ void wxRichTextFieldTypeStandard::Copy(const wxRichTextFieldTypeStandard& field)
     m_bitmap = field.m_bitmap;
 }
 
-bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
+bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
 {
     if (m_displayStyle == wxRICHTEXT_FIELD_STYLE_COMPOSITE)
         return false; // USe default composite drawing
@@ -9576,7 +9576,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
     return true;
 }
 
-bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), unsigned int style)
+bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRect& rect, [[maybe_unused]] const wxRect& parentRect, unsigned int style)
 {
     if (m_displayStyle == wxRICHTEXT_FIELD_STYLE_COMPOSITE)
         return false; // USe default composite layout
@@ -10449,7 +10449,7 @@ void wxRichTextTable::completeSpanningWidth(
 // layout to a particular size, or it could be the total space available in the
 // parent. rect is the overall size, so we must subtract margins and padding.
 // to get the actual available space.
-bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& WXUNUSED(parentRect), unsigned int style)
+bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, [[maybe_unused]] const wxRect& parentRect, unsigned int style)
 {
     SetPosition(rect.GetPosition());
 
@@ -10980,7 +10980,7 @@ bool wxRichTextTable::GetRangeSize(const wxRichTextRange& range, wxSize& size, i
 }
 
 // Deletes content in the given range.
-bool wxRichTextTable::DeleteRange(const wxRichTextRange& WXUNUSED(range))
+bool wxRichTextTable::DeleteRange([[maybe_unused]] const wxRichTextRange& range)
 {
     // TODO: implement deletion of cells
     return true;
@@ -12650,7 +12650,7 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
 }
 
 /// Draw the item
-bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int WXUNUSED(style))
+bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, [[maybe_unused]] const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int WXUNUSED(style))
 {
     if (!IsShown())
         return true;
@@ -12738,7 +12738,7 @@ bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& WXUNUSED(position), const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), [[maybe_unused]] const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;

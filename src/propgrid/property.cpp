@@ -49,7 +49,7 @@ static void wxPGDrawFocusRect(wxWindow *win, wxDC& dc,
 // wxPGCellRenderer
 // -----------------------------------------------------------------------
 
-wxSize wxPGCellRenderer::GetImageSize( const wxPGProperty* WXUNUSED(property),
+wxSize wxPGCellRenderer::GetImageSize( [[maybe_unused]] const wxPGProperty* property,
                                        int WXUNUSED(column),
                                        int WXUNUSED(item) ) const
 {
@@ -1731,7 +1731,7 @@ wxPGEditorDialogAdapter* wxPGProperty::GetEditorDialog() const
     return nullptr;
 }
 
-bool wxPGProperty::DoSetAttribute( const wxString& WXUNUSED(name), wxVariant& WXUNUSED(value) )
+bool wxPGProperty::DoSetAttribute( [[maybe_unused]] const wxString& name, wxVariant& WXUNUSED(value) )
 {
     return false;
 }
@@ -1762,7 +1762,7 @@ void wxPGProperty::SetAttributes( const wxPGAttributeStorage& attributes )
         SetAttribute( variant.GetName(), variant );
 }
 
-wxVariant wxPGProperty::DoGetAttribute( const wxString& WXUNUSED(name) ) const
+wxVariant wxPGProperty::DoGetAttribute( [[maybe_unused]] const wxString& name ) const
 {
     return wxVariant();
 }

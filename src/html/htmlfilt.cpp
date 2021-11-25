@@ -40,7 +40,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlFilter, wxObject);
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlFilterPlainText, wxHtmlFilter);
 
-bool wxHtmlFilterPlainText::CanRead(const wxFSFile& WXUNUSED(file)) const
+bool wxHtmlFilterPlainText::CanRead([[maybe_unused]] const wxFSFile& file) const
 {
     return true;
 }

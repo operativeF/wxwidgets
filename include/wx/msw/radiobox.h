@@ -98,7 +98,7 @@ public:
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }
 
-    void SetLabelFont(const wxFont& WXUNUSED(font)) {}
+    void SetLabelFont([[maybe_unused]] const wxFont& font) {}
     void SetButtonFont(const wxFont& font) { SetFont(font); }
 
 

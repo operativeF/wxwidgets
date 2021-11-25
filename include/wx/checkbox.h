@@ -114,7 +114,7 @@ public:
     // This semi-private function is currently used to allow wxMSW checkbox to
     // blend in with its parent background colour without changing the
     // background colour of the checkbox itself under the other platforms.
-    virtual void SetTransparentPartColour(const wxColour& WXUNUSED(col)) { }
+    virtual void SetTransparentPartColour([[maybe_unused]] const wxColour& col) { }
 
     // wxCheckBox-specific processing after processing the update event
     void DoUpdateWindowUI(wxUpdateUIEvent& event) override

@@ -242,7 +242,7 @@ public:
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.
         // pt is in screen coordinates.
-    virtual wxAccStatus HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
+    virtual wxAccStatus HitTest([[maybe_unused]] const wxPoint& pt, int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
          { return wxAccStatus::NotImplemented; }
 
         // Returns the rectangle for this object (id = 0) or a child element (id > 0).

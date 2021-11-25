@@ -125,7 +125,7 @@ public:
     //       because otherwise almost all ports would have to implement
     //       them as "return false"...
 
-    virtual bool Create(wxBitmap *WXUNUSED(bitmap), const void* WXUNUSED(data),
+    virtual bool Create(wxBitmap *WXUNUSED(bitmap), [[maybe_unused]] const void* data,
                          wxBitmapType WXUNUSED(type), int WXUNUSED(width), int WXUNUSED(height),
                          int WXUNUSED(depth) = 1)
         { return false; }

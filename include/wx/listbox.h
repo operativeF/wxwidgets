@@ -101,7 +101,7 @@ protected:
     virtual void DoSetSelection(int n, bool select) = 0;
 
     // there is already wxWindow::DoHitTest() so call this one differently
-    virtual int DoListHitTest(const wxPoint& WXUNUSED(point)) const
+    virtual int DoListHitTest([[maybe_unused]] const wxPoint& point) const
         { return wxNOT_FOUND; }
 
     // Helper for the code generating events in single selection mode: updates

@@ -50,11 +50,11 @@ public:
     // be overridable for the custom renderers while the generic implementation
     // uses this one for all of them, including the standard ones.
 
-    virtual bool WXActivateCell(const wxRect& WXUNUSED(cell),
+    virtual bool WXActivateCell([[maybe_unused]] const wxRect& cell,
                                 wxDataViewModel *WXUNUSED(model),
                                 const wxDataViewItem & WXUNUSED(item),
                                 unsigned int WXUNUSED(col),
-                                const wxMouseEvent* WXUNUSED(mouseEvent))
+                                [[maybe_unused]] const wxMouseEvent* mouseEvent)
         { return false; }
 
     void SetState(int state) { m_state = state; }

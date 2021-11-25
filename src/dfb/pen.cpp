@@ -63,7 +63,7 @@ wxPen::wxPen(const wxColour &colour, int width, wxPenStyle style)
     m_refData = new wxPenRefData(colour, style);
 }
 
-wxPen::wxPen(const wxBitmap& WXUNUSED(stipple), int WXUNUSED(width))
+wxPen::wxPen([[maybe_unused]] const wxBitmap& stipple, int WXUNUSED(width))
 {
     wxFAIL_MSG( "stipple pens not supported" );
 
@@ -114,7 +114,7 @@ void wxPen::SetStyle(wxPenStyle style)
     M_PENDATA->SetStyle(style);
 }
 
-void wxPen::SetStipple(const wxBitmap& WXUNUSED(stipple))
+void wxPen::SetStipple([[maybe_unused]] const wxBitmap& stipple)
 {
     wxFAIL_MSG( "SetStipple not implemented" );
 }

@@ -67,8 +67,8 @@ protected:
 
     // copy ctor and assignment operator intentionally do not copy m_first: the
     // objects which track the original trackable shouldn't track the new copy
-    wxTrackable(const wxTrackable& WXUNUSED(other)) : m_first(nullptr) { }
-    wxTrackable& operator=(const wxTrackable& WXUNUSED(other)) { return *this; }
+    wxTrackable([[maybe_unused]] const wxTrackable& other) : m_first(nullptr) { }
+    wxTrackable& operator=([[maybe_unused]] const wxTrackable& other) { return *this; }
 
     // dtor is not virtual: this class is not supposed to be used
     // polymorphically and adding a virtual table to it would add unwanted

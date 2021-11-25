@@ -185,12 +185,12 @@ public:
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;
 
-    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize([[maybe_unused]] const wxDataFormat& format) const override
         { return GetDataSize(); }
-    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere([[maybe_unused]] const wxDataFormat& format,
                              void *buf) const override
         { return GetDataHere(buf); }
-    bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData([[maybe_unused]] const wxDataFormat& format,
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 

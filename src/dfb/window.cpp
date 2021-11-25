@@ -1034,7 +1034,7 @@ wxWindow* wxFindWindowAtPointer(wxPoint& pt)
     return wxFindWindowAtPoint(pt = wxGetMousePosition());
 }
 
-wxWindow* wxFindWindowAtPoint(const wxPoint& WXUNUSED(pt))
+wxWindow* wxFindWindowAtPoint([[maybe_unused]] const wxPoint& pt)
 {
     wxFAIL_MSG( "wxFindWindowAtPoint not implemented" );
     return NULL;

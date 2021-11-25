@@ -33,9 +33,9 @@ public:
     wxString RightLocation(const wxString& p) { return GetRightLocation(p); }
     wxString Anchor(const wxString& p) { return GetAnchor(p); }
 
-    bool CanOpen(const wxString& WXUNUSED(url)) override { return false; }
+    bool CanOpen([[maybe_unused]] const wxString& url) override { return false; }
     wxFSFile *OpenFile(wxFileSystem& WXUNUSED(fs),
-                       const wxString& WXUNUSED(url)) override { return NULL; }
+                       [[maybe_unused]] const wxString& url) override { return NULL; }
 
 
 };

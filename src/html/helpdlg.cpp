@@ -50,7 +50,7 @@ void wxHtmlHelpDialog::Init(wxHtmlHelpData* data)
 
 // Create: builds the GUI components.
 bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
-                             const wxString& WXUNUSED(title), unsigned int style)
+                             [[maybe_unused]] const wxString& title, unsigned int style)
 {
     m_HtmlHelpWin = new wxHtmlHelpWindow(m_Data);
 

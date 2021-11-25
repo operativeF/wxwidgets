@@ -115,7 +115,7 @@ TEST_CASE("ParseSwitches")
     class NoMessageOutput : public wxMessageOutput
     {
     public:
-        void Output(const wxString& WXUNUSED(str)) override { }
+        void Output([[maybe_unused]] const wxString& str) override { }
     } noMessages;
 
     wxMessageOutput * const old = wxMessageOutput::Set(&noMessages);

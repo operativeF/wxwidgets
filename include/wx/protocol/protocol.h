@@ -61,7 +61,7 @@ public:
 
 #if wxUSE_SOCKETS
     bool Reconnect();
-    virtual bool Connect( const wxString& WXUNUSED(host) ) { return false; }
+    virtual bool Connect( [[maybe_unused]] const wxString& host ) { return false; }
     bool Connect( const wxSockAddress& addr, bool WXUNUSED(wait) = true) override
         { return wxSocketClient::Connect(addr); }
 

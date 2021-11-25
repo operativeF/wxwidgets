@@ -514,7 +514,7 @@ void wxRichTextStyleSheet::Copy(const wxRichTextStyleSheet& sheet)
 }
 
 /// Equality
-bool wxRichTextStyleSheet::operator==(const wxRichTextStyleSheet& WXUNUSED(sheet)) const
+bool wxRichTextStyleSheet::operator==([[maybe_unused]] const wxRichTextStyleSheet& sheet) const
 {
     // TODO
     return false;

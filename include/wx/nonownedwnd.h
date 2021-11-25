@@ -81,13 +81,13 @@ protected:
         return false;
     }
 
-    virtual bool DoSetRegionShape(const wxRegion& WXUNUSED(region))
+    virtual bool DoSetRegionShape([[maybe_unused]] const wxRegion& region)
     {
         return false;
     }
 
 #if wxUSE_GRAPHICS_CONTEXT
-    virtual bool DoSetPathShape(const wxGraphicsPath& WXUNUSED(path))
+    virtual bool DoSetPathShape([[maybe_unused]] const wxGraphicsPath& path)
     {
         return false;
     }

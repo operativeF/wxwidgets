@@ -501,7 +501,7 @@ wxTCPServer::~wxTCPServer()
 }
 
 wxConnectionBase *
-wxTCPServer::OnAcceptConnection(const wxString& WXUNUSED(topic))
+wxTCPServer::OnAcceptConnection([[maybe_unused]] const wxString& topic)
 {
     return new wxTCPConnection();
 }

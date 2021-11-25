@@ -239,13 +239,13 @@ wxHtmlListBox::~wxHtmlListBox()
 // ----------------------------------------------------------------------------
 
 wxColour
-wxHtmlListBox::GetSelectedTextColour(const wxColour& WXUNUSED(colFg)) const
+wxHtmlListBox::GetSelectedTextColour([[maybe_unused]] const wxColour& colFg) const
 {
     return wxNullColour;
 }
 
 wxColour
-wxHtmlListBox::GetSelectedTextBgColour(const wxColour& WXUNUSED(colBg)) const
+wxHtmlListBox::GetSelectedTextBgColour([[maybe_unused]] const wxColour& colBg) const
 {
     return GetSelectionBackground();
 }
@@ -451,12 +451,12 @@ wxColour wxHtmlListBox::GetHTMLBackgroundColour() const
     return GetBackgroundColour();
 }
 
-void wxHtmlListBox::SetHTMLBackgroundColour(const wxColour& WXUNUSED(clr))
+void wxHtmlListBox::SetHTMLBackgroundColour([[maybe_unused]] const wxColour& clr)
 {
     // nothing to do
 }
 
-void wxHtmlListBox::SetHTMLBackgroundImage(const wxBitmap& WXUNUSED(bmpBg))
+void wxHtmlListBox::SetHTMLBackgroundImage([[maybe_unused]] const wxBitmap& bmpBg)
 {
     // nothing to do
 }

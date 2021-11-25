@@ -477,7 +477,7 @@ public:
     wxGridActivationResult
     TryActivate(int WXUNUSED(row), int WXUNUSED(col),
                 wxGrid* WXUNUSED(grid),
-                const wxGridActivationSource& WXUNUSED(actSource))
+                [[maybe_unused]] const wxGridActivationSource& actSource)
     {
         return wxGridActivationResult::DoEdit();
     }

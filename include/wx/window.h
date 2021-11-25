@@ -1362,8 +1362,8 @@ public:
 
 #else // !wxUSE_HELP
     // silently ignore SetHelpText() calls
-    void SetHelpText(const wxString& WXUNUSED(text)) { }
-    void SetHelpTextForId(const wxString& WXUNUSED(text)) { }
+    void SetHelpText([[maybe_unused]] const wxString& text) { }
+    void SetHelpTextForId([[maybe_unused]] const wxString& text) { }
 #endif // wxUSE_HELP
 
     // tooltips
@@ -2012,14 +2012,14 @@ inline wxWindow *wxWindowBase::GetGrandParent() const
 
 /* static */
 inline wxSize
-wxWindowBase::FromDIP(const wxSize& sz, const wxWindowBase* WXUNUSED(w))
+wxWindowBase::FromDIP(const wxSize& sz, [[maybe_unused]] const wxWindowBase* w)
 {
     return sz;
 }
 
 /* static */
 inline wxSize
-wxWindowBase::ToDIP(const wxSize& sz, const wxWindowBase* WXUNUSED(w))
+wxWindowBase::ToDIP(const wxSize& sz, [[maybe_unused]] const wxWindowBase* w)
 {
     return sz;
 }

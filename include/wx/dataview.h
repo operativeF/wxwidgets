@@ -228,7 +228,7 @@ public:
     virtual wxDataViewItem GetParent( const wxDataViewItem &item ) const = 0;
     virtual bool IsContainer( const wxDataViewItem &item ) const = 0;
     // Is the container just a header or an item with all columns
-    virtual bool HasContainerColumns(const wxDataViewItem& WXUNUSED(item)) const
+    virtual bool HasContainerColumns([[maybe_unused]] const wxDataViewItem& item) const
         { return false; }
     virtual unsigned int GetChildren( const wxDataViewItem &item, wxDataViewItemArray &children ) const = 0;
 
@@ -738,9 +738,9 @@ public:
     virtual void EditItem(const wxDataViewItem& item, const wxDataViewColumn *column) = 0;
 
 #if wxUSE_DRAG_AND_DROP
-    virtual bool EnableDragSource(const wxDataFormat& WXUNUSED(format))
+    virtual bool EnableDragSource([[maybe_unused]] const wxDataFormat& format)
         { return false; }
-    virtual bool EnableDropTarget(const wxDataFormat& WXUNUSED(format))
+    virtual bool EnableDropTarget([[maybe_unused]] const wxDataFormat& format)
         { return false; }
 #endif // wxUSE_DRAG_AND_DROP
 
@@ -748,13 +748,13 @@ public:
     // --------------------------------
 
     // Header attributes: only implemented in the generic version currently.
-    virtual bool SetHeaderAttr(const wxItemAttr& WXUNUSED(attr))
+    virtual bool SetHeaderAttr([[maybe_unused]] const wxItemAttr& attr)
         { return false; }
 
     // Set the colour used for the "alternate" rows when wxDV_ROW_LINES is on.
     // Also only supported in the generic version, which returns true to
     // indicate it.
-    virtual bool SetAlternateRowColour(const wxColour& WXUNUSED(colour))
+    virtual bool SetAlternateRowColour([[maybe_unused]] const wxColour& colour)
         { return false; }
 
     wxVisualAttributes GetDefaultAttributes() const override

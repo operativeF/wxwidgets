@@ -2762,7 +2762,7 @@ bool wxPGInDialogValidator::DoValidate( wxPropertyGrid* propGrid,
 #else
 bool wxPGInDialogValidator::DoValidate( wxPropertyGrid* WXUNUSED(propGrid),
                                         wxValidator* WXUNUSED(validator),
-                                        const wxString& WXUNUSED(value) )
+                                        [[maybe_unused]] const wxString& value )
 {
     return true;
 }

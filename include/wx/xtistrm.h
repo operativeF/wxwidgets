@@ -92,7 +92,7 @@ public:
     // will be called before this delegate gets written
     virtual bool BeforeWriteDelegate( wxObjectWriter *WXUNUSED(writer),
                                       const wxObject *WXUNUSED(object),
-                                      const wxClassInfo* WXUNUSED(classInfo),
+                                      [[maybe_unused]] const wxClassInfo* classInfo,
                                       const wxPropertyInfo *WXUNUSED(propInfo),
                                       const wxObject *&WXUNUSED(eventSink),
                                       const wxHandlerInfo* &WXUNUSED(handlerInfo) )
@@ -100,7 +100,7 @@ public:
 
     virtual void AfterWriteDelegate( wxObjectWriter *WXUNUSED(writer),
                                      const wxObject *WXUNUSED(object),
-                                     const wxClassInfo* WXUNUSED(classInfo),
+                                     [[maybe_unused]] const wxClassInfo* classInfo,
                                      const wxPropertyInfo *WXUNUSED(propInfo),
                                      const wxObject *&WXUNUSED(eventSink),
                                      const wxHandlerInfo* &WXUNUSED(handlerInfo) )

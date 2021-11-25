@@ -215,7 +215,7 @@ protected:
                                     EntryT *entry = NULL) { (void)entry; }
 
     virtual void OnEntryExtracted(  EntryT& WXUNUSED(entry),
-                                    const TestEntry& WXUNUSED(testEntry),
+                                    [[maybe_unused]] const TestEntry& testEntry,
                                     InputStreamT *arc = NULL) { (void)arc; }
 
     typedef std::map<wxString, TestEntry*> TestEntries;

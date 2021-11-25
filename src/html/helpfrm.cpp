@@ -84,7 +84,7 @@ void wxHtmlHelpFrame::SetController(wxHtmlHelpController* controller)
 
 // Create: builds the GUI components.
 bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
-                             const wxString& WXUNUSED(title), unsigned int style
+                             [[maybe_unused]] const wxString& title, unsigned int style
 #if wxUSE_CONFIG
                              , wxConfigBase *config, const wxString& rootpath
 #endif // wxUSE_CONFIG

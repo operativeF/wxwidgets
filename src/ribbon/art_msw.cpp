@@ -1981,7 +1981,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
 }
 
 wxRect wxRibbonMSWArtProvider::GetPanelExtButtonArea(wxDC& WXUNUSED(dc),
-                        const wxRibbonPanel* WXUNUSED(wnd),
+                        [[maybe_unused]] const wxRibbonPanel* wnd,
                         wxRect rect)
 {
     RemovePanelPadding(&rect);
@@ -3007,7 +3007,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelClientSize(
 
 wxSize wxRibbonMSWArtProvider::GetGallerySize(
                         wxDC& WXUNUSED(dc),
-                        const wxRibbonGallery* WXUNUSED(wnd),
+                        [[maybe_unused]] const wxRibbonGallery* wnd,
                         wxSize client_size)
 {
     client_size.IncBy( 2, 1); // Left / top padding
@@ -3020,7 +3020,7 @@ wxSize wxRibbonMSWArtProvider::GetGallerySize(
 
 wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
                         wxDC& WXUNUSED(dc),
-                        const wxRibbonGallery* WXUNUSED(wnd),
+                        [[maybe_unused]] const wxRibbonGallery* wnd,
                         wxSize size,
                         wxPoint* client_offset,
                         wxRect* scroll_up_button,
@@ -3081,7 +3081,7 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
 
 wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
                         wxDC& WXUNUSED(dc),
-                        const wxRibbonPage* WXUNUSED(wnd),
+                        [[maybe_unused]] const wxRibbonPage* wnd,
                         wxSize page_old_size,
                         wxSize page_new_size)
 {

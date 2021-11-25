@@ -172,7 +172,7 @@ bool wxDirData::Read(wxString *filename)
 
 #else // old VMS (TODO)
 
-wxDirData::wxDirData(const wxString& WXUNUSED(dirname))
+wxDirData::wxDirData([[maybe_unused]] const wxString& dirname)
 {
     wxFAIL_MSG("not implemented");
 }

@@ -206,7 +206,7 @@ public:
     wxTextCtrl *EditLabel(const wxTreeItemId& item,
                           wxClassInfo* textCtrlClass = wxCLASSINFO(wxTextCtrl)) override;
     wxTextCtrl *GetEditControl() const override;
-    void EndEditLabel(const wxTreeItemId& WXUNUSED(item),
+    void EndEditLabel([[maybe_unused]] const wxTreeItemId& item,
                               bool discardChanges = false) override
     {
         DoEndEditLabel(discardChanges);

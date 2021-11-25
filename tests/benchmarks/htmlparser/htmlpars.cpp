@@ -837,7 +837,7 @@ public:
     wxObject* GetProduct() { return NULL; }
 
 protected:
-    virtual void AddText(const wxChar* WXUNUSED(txt)) {}
+    virtual void AddText([[maybe_unused]] const wxChar* txt) {}
 
     wxMetaTagParser(const wxMetaTagParser&) = delete;
 	wxMetaTagParser& operator=(const wxMetaTagParser&) = delete;

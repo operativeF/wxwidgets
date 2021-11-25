@@ -1241,7 +1241,7 @@ wxString wxRichTextXMLHelper::MakeStringFromProperty(const wxVariant& var)
 }
 
 // Create a proprty from the string read from the XML file.
-wxVariant wxRichTextXMLHelper::MakePropertyFromString(const wxString& name, const wxString& value, const wxString& WXUNUSED(type))
+wxVariant wxRichTextXMLHelper::MakePropertyFromString(const wxString& name, const wxString& value, [[maybe_unused]] const wxString& type)
 {
     wxVariant var(value, name);
     // TODO: use type to create using common types

@@ -20,7 +20,7 @@ public:
                     std::string_view message,
                     std::string_view caption = wxMessageBoxCaptionStr,
                     unsigned int style = wxOK|wxCENTRE,
-                    const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
+                    [[maybe_unused]] const wxPoint& pos = wxDefaultPosition)
         : wxMessageDialogBase(parent, message, caption, style)
     {
     }

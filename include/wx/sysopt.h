@@ -48,19 +48,19 @@ public:
 // in the library itself without checking for wxUSE_SYSTEM_OPTIONS all the time
 
 /* static */ inline
-wxString wxSystemOptions::GetOption(const wxString& WXUNUSED(name))
+wxString wxSystemOptions::GetOption([[maybe_unused]] const wxString& name)
 {
     return {};
 }
 
 /* static */ inline
-int wxSystemOptions::GetOptionInt(const wxString& WXUNUSED(name))
+int wxSystemOptions::GetOptionInt([[maybe_unused]] const wxString& name)
 {
     return 0;
 }
 
 /* static */ inline
-bool wxSystemOptions::HasOption(const wxString& WXUNUSED(name))
+bool wxSystemOptions::HasOption([[maybe_unused]] const wxString& name)
 {
     return false;
 }

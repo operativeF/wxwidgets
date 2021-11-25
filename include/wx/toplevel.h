@@ -300,7 +300,7 @@ public:
     virtual void OSXSetModified(bool modified) { m_modified = modified; }
     virtual bool OSXIsModified() const { return m_modified; }
 
-    virtual void SetRepresentedFilename(const wxString& WXUNUSED(filename)) { }
+    virtual void SetRepresentedFilename([[maybe_unused]] const wxString& filename) { }
 
 protected:
     // the frame client to screen translation should take account of the

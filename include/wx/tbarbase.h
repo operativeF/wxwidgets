@@ -388,9 +388,9 @@ public:
     virtual std::string GetToolLongHelp(int toolid) const;
 
     virtual void SetToolNormalBitmap(int WXUNUSED(id),
-                                     const wxBitmap& WXUNUSED(bitmap)) {}
+                                     [[maybe_unused]] const wxBitmap& bitmap) {}
     virtual void SetToolDisabledBitmap(int WXUNUSED(id),
-                                       const wxBitmap& WXUNUSED(bitmap)) {}
+                                       [[maybe_unused]] const wxBitmap& bitmap) {}
 
 
     // margins/packing/separation

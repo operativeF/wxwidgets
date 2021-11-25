@@ -47,14 +47,14 @@ void wxHtmlSelection::Set(const wxHtmlCell *fromCell, const wxHtmlCell *toCell)
 
 wxColour
 wxDefaultHtmlRenderingStyle::
-GetSelectedTextColour(const wxColour& WXUNUSED(clr))
+GetSelectedTextColour([[maybe_unused]] const wxColour& clr)
 {
     return wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT);
 }
 
 wxColour
 wxDefaultHtmlRenderingStyle::
-GetSelectedTextBgColour(const wxColour& WXUNUSED(clr))
+GetSelectedTextBgColour([[maybe_unused]] const wxColour& clr)
 {
     // By default we use the fixed standard selection colour, but if we're
     // associated with a window use the colour appropriate for the window
@@ -174,7 +174,7 @@ void wxHtmlCell::Layout(int WXUNUSED(w))
 
 
 
-const wxHtmlCell* wxHtmlCell::Find(int WXUNUSED(condition), const void* WXUNUSED(param)) const
+const wxHtmlCell* wxHtmlCell::Find(int WXUNUSED(condition), [[maybe_unused]] const void* param) const
 {
     return nullptr;
 }

@@ -169,7 +169,7 @@ public:
 
     // get data from the buffer of specified length (in the given format),
     // return true if the data was read successfully, false otherwise
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    virtual bool SetData([[maybe_unused]] const wxDataFormat& format,
                          size_t WXUNUSED(len), const void * WXUNUSED(buf))
     {
         return false;
@@ -256,12 +256,12 @@ public:
     void GetAllFormats(wxDataFormat *formats,
                                wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
         { *formats = m_format; }
-    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize([[maybe_unused]] const wxDataFormat& format) const override
         { return GetDataSize(); }
-    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere([[maybe_unused]] const wxDataFormat& format,
                              void *buf) const override
         { return GetDataHere(buf); }
-    bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData([[maybe_unused]] const wxDataFormat& format,
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 

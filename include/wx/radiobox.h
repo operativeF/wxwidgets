@@ -82,7 +82,7 @@ public:
 
     // returns the radio item at the given position or wxNOT_FOUND if none
     // (currently implemented only under MSW and GTK)
-    virtual int GetItemFromPoint(const wxPoint& WXUNUSED(pt)) const
+    virtual int GetItemFromPoint([[maybe_unused]] const wxPoint& pt) const
     {
         return wxNOT_FOUND;
     }

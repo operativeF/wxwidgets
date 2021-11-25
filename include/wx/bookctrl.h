@@ -214,7 +214,7 @@ public:
     int FindPage(const wxWindow* page) const;
 
     // hit test: returns which page is hit and, optionally, where (icon, label)
-    virtual int HitTest(const wxPoint& WXUNUSED(pt),
+    virtual int HitTest([[maybe_unused]] const wxPoint& pt,
                         unsigned int* WXUNUSED(flags) = nullptr) const
     {
         return wxNOT_FOUND;

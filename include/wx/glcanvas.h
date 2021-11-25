@@ -257,7 +257,7 @@ public:
 protected:
     // override this to implement SetColour() in GL_INDEX_MODE
     // (currently only implemented in wxX11 and wxMotif ports)
-    virtual int GetColourIndex(const wxColour& WXUNUSED(col)) { return -1; }
+    virtual int GetColourIndex([[maybe_unused]] const wxColour& col) { return -1; }
 
     // check if the given extension name is present in the space-separated list
     // of extensions supported by the current implementation such as returned

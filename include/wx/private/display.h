@@ -165,7 +165,7 @@ public:
 #if wxUSE_DISPLAY
     // no video modes support for us, provide just the stubs
     wxArrayVideoModes
-    GetModes(const wxVideoMode& WXUNUSED(mode)) const override
+    GetModes([[maybe_unused]] const wxVideoMode& mode) const override
     {
         return wxArrayVideoModes();
     }
@@ -175,7 +175,7 @@ public:
         return wxVideoMode();
     }
 
-    bool ChangeMode(const wxVideoMode& WXUNUSED(mode)) override
+    bool ChangeMode([[maybe_unused]] const wxVideoMode& mode) override
     {
         return false;
     }

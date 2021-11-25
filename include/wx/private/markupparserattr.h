@@ -172,7 +172,7 @@ public:
         m_attrs.push(attr);
     }
 
-    void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(spanAttr)) override
+    void OnSpanEnd([[maybe_unused]] const wxMarkupSpanAttributes& spanAttr) override
     {
         DoEndAttr();
     }

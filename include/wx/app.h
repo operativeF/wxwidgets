@@ -631,7 +631,7 @@ public:
         // Set display mode to use. This is only used in framebuffer wxWin
         // ports such as wxDFB. This method should be called from
         // wxApp::OnInitGui
-    virtual bool SetDisplayMode(const wxVideoMode& WXUNUSED(info)) { return true; }
+    virtual bool SetDisplayMode([[maybe_unused]] const wxVideoMode& info) { return true; }
 
         // set use of best visual flag (see below)
     void SetUseBestVisual( bool flag, bool forceTrueColour = false )

@@ -195,7 +195,7 @@ public:
         { return false; }
     virtual wxWindow* CreateEditorCtrl(wxWindow * WXUNUSED(parent),
                                        wxRect WXUNUSED(labelRect),
-                                       const wxVariant& WXUNUSED(value))
+                                       [[maybe_unused]] const wxVariant& value)
         { return nullptr; }
     virtual bool GetValueFromEditorCtrl(wxWindow * WXUNUSED(editor),
                                         wxVariant& WXUNUSED(value))
@@ -336,8 +336,8 @@ public:
                               [[maybe_unused]] unsigned int col,
                               [[maybe_unused]] const wxMouseEvent* mouseEvent) { return false; };
 
-    virtual bool StartDrag(const wxPoint& WXUNUSED(cursor),
-                           const wxRect& WXUNUSED(cell),
+    virtual bool StartDrag([[maybe_unused]] const wxPoint& cursor,
+                           [[maybe_unused]] const wxRect& cell,
                            wxDataViewModel *WXUNUSED(model),
                            const wxDataViewItem & WXUNUSED(item),
                            unsigned int WXUNUSED(col) )

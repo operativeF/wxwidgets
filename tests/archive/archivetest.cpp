@@ -1360,8 +1360,8 @@ CppUnit::Test *ArchiveTestSuite::makeTest(
     string WXUNUSED(descr),
     int WXUNUSED(options),
     bool WXUNUSED(genericInterface),
-    const wxString& WXUNUSED(archiver),
-    const wxString& WXUNUSED(unarchiver))
+    [[maybe_unused]] const wxString& archiver,
+    [[maybe_unused]] const wxString& unarchiver)
 {
     return NULL;
 }

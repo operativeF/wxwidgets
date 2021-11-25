@@ -349,7 +349,7 @@ protected:
     virtual wxArchiveOutputStream *DoNewStream(wxOutputStream *stream) const = 0;
 
     wxArchiveClassFactory() :  m_next(this) { }
-    wxArchiveClassFactory& operator=(const wxArchiveClassFactory& WXUNUSED(f))
+    wxArchiveClassFactory& operator=([[maybe_unused]] const wxArchiveClassFactory& f)
         { return *this; }
 
 private:

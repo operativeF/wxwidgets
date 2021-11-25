@@ -222,7 +222,7 @@ bool wxRemoteHtmlHelpController::DoConnection()
     return true;
 }
 
-bool wxRemoteHtmlHelpController::LoadFile(const wxString& WXUNUSED(file))
+bool wxRemoteHtmlHelpController::LoadFile([[maybe_unused]] const wxString& file)
 {
     return true;
 }

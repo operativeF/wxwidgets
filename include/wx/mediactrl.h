@@ -189,11 +189,11 @@ public:
     virtual bool CreateControl(wxControl* WXUNUSED(ctrl),
                                wxWindow* WXUNUSED(parent),
                                wxWindowID WXUNUSED(winid),
-                               const wxPoint& WXUNUSED(pos),
-                               const wxSize& WXUNUSED(size),
+                               [[maybe_unused]] const wxPoint& pos,
+                               [[maybe_unused]] const wxSize& size,
                                unsigned int WXUNUSED(style),
-                               const wxValidator& WXUNUSED(validator),
-                               const wxString& WXUNUSED(name))
+                               [[maybe_unused]] const wxValidator& validator,
+                               [[maybe_unused]] const wxString& name)
     {   return false;                   }
 
     virtual bool Play()
@@ -203,9 +203,9 @@ public:
     virtual bool Stop()
     {   return false;                   }
 
-    virtual bool Load(const wxString& WXUNUSED(fileName))
+    virtual bool Load([[maybe_unused]] const wxString& fileName)
     {   return false;                   }
-    virtual bool Load(const wxURI& WXUNUSED(location))
+    virtual bool Load([[maybe_unused]] const wxURI& location)
     {   return false;                   }
 
     virtual bool SetPosition(wxLongLong WXUNUSED(where))
@@ -233,8 +233,8 @@ public:
     virtual bool SetVolume(double WXUNUSED(dVolume))
     {   return false;                   }
 
-    virtual bool Load(const wxURI& WXUNUSED(location),
-                      const wxURI& WXUNUSED(proxy))
+    virtual bool Load([[maybe_unused]] const wxURI& location,
+                      [[maybe_unused]] const wxURI& proxy)
     {   return false;                   }
 
     virtual bool   ShowPlayerControls(

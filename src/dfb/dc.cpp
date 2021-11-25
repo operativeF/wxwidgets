@@ -346,7 +346,7 @@ void wxDFBDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     SelectColour(m_pen.GetColour());
 }
 
-void wxDFBDCImpl::DoDrawRotatedText(const wxString& WXUNUSED(text),
+void wxDFBDCImpl::DoDrawRotatedText([[maybe_unused]] const wxString& text,
                                     wxPoint WXUNUSED(pt),
                                     double WXUNUSED(angle))
 {
@@ -378,7 +378,7 @@ void wxDFBDCImpl::SelectColour(const wxColour& clr)
 }
 
 #if wxUSE_PALETTE
-void wxDFBDCImpl::SetPalette(const wxPalette& WXUNUSED(palette))
+void wxDFBDCImpl::SetPalette([[maybe_unused]] const wxPalette& palette)
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
@@ -435,7 +435,7 @@ void wxDFBDCImpl::SetLogicalFunction(wxRasterOperationMode function)
     m_logicalFunction = function;
 }
 
-bool wxDFBDCImpl::wxStartDoc(const wxString& WXUNUSED(message))
+bool wxDFBDCImpl::wxStartDoc([[maybe_unused]] const wxString& message)
 {
     // We might be previewing, so return true to let it continue.
     return true;

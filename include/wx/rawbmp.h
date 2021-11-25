@@ -393,7 +393,7 @@ struct wxPixelDataOut<wxImage>
             }
 
             // move x pixels to the right (again, no row wrapping)
-            void OffsetX(const PixelData& WXUNUSED(data), int x)
+            void OffsetX([[maybe_unused]] const PixelData& data, int x)
             {
                 m_pRGB += PixelFormat::SizePixel*x;
                 if ( m_pAlpha )
@@ -586,7 +586,7 @@ struct wxPixelDataOut<wxBitmap>
             }
 
             // move x pixels to the right (again, no row wrapping)
-            void OffsetX(const PixelData& WXUNUSED(data), int x)
+            void OffsetX([[maybe_unused]] const PixelData& data, int x)
             {
                 m_ptr += PixelFormat::SizePixel*x;
             }
@@ -817,7 +817,7 @@ struct wxPixelDataOut<wxBitmap>
                 }
 
                 // move x pixels to the right (again, no row wrapping)
-                void OffsetX(const PixelData& WXUNUSED(data), int x)
+                void OffsetX([[maybe_unused]] const PixelData& data, int x)
                 {
                     x += 7 - m_bit;
                     m_ptr += x >> 3;

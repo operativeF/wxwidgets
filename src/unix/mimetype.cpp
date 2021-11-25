@@ -710,7 +710,7 @@ wxFileType * wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
     return GetFileTypeFromMimeType(strType);
 }
 
-wxString wxMimeTypesManagerImpl::GetIconFromMimeType(const wxString& WXUNUSED(mime))
+wxString wxMimeTypesManagerImpl::GetIconFromMimeType([[maybe_unused]] const wxString& mime)
 {
     return {};
 }

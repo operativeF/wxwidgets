@@ -631,7 +631,7 @@ inline void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 
 #else // !wxUSE_UIACTIONSIMULATOR
 
-inline void TestProcessEnter(const TextLikeControlCreator& WXUNUSED(controlCreator))
+inline void TestProcessEnter([[maybe_unused]] const TextLikeControlCreator& controlCreator)
 {
     WARN("Skipping wxTE_PROCESS_ENTER tests: wxUIActionSimulator not available");
 }

@@ -77,7 +77,7 @@ public:
 
     void SetBackgroundMode(wxBrushStyle WXUNUSED(mode)) override { }
 #if wxUSE_PALETTE
-    void SetPalette(const wxPalette& WXUNUSED(palette)) override { }
+    void SetPalette([[maybe_unused]] const wxPalette& palette) override { }
 #endif
 
     void SetPrintData(const wxPrintData& data);

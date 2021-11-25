@@ -105,7 +105,7 @@ TEST_CASE("Directory Tests")
     public:
         std::vector<wxString> dirs;
 
-        wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile([[maybe_unused]] const wxString& filename) override
         {
             return wxDirTraverseResult::Continue;
         }

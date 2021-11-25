@@ -53,8 +53,8 @@ public:
     virtual bool DisplayHelp(const std::string &) ;
 
     void SetFrameParameters(const std::string& WXUNUSED(title),
-                                    const wxSize& WXUNUSED(size),
-                                    const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
+                                    [[maybe_unused]] const wxSize& size,
+                                    [[maybe_unused]] const wxPoint& pos = wxDefaultPosition,
                                     bool WXUNUSED(newFrameEachTime) = false) override
         {
             // does nothing by default

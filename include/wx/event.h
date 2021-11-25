@@ -295,7 +295,7 @@ private:
 
 // Create a functor for the legacy events: used by Connect()
 inline wxObjectEventFunctor *
-wxNewEventFunctor(const wxEventType& WXUNUSED(evtType),
+wxNewEventFunctor([[maybe_unused]] const wxEventType& evtType,
                   wxObjectEventFunction method,
                   wxEvtHandler *handler)
 {
@@ -304,14 +304,14 @@ wxNewEventFunctor(const wxEventType& WXUNUSED(evtType),
 
 // This version is used by wxDECLARE_EVENT_TABLE_ENTRY()
 inline wxObjectEventFunctor *
-wxNewEventTableFunctor(const wxEventType& WXUNUSED(evtType),
+wxNewEventTableFunctor([[maybe_unused]] const wxEventType& evtType,
                        wxObjectEventFunction method)
 {
     return new wxObjectEventFunctor(method, nullptr);
 }
 
 inline wxObjectEventFunctor
-wxMakeEventFunctor(const wxEventType& WXUNUSED(evtType),
+wxMakeEventFunctor([[maybe_unused]] const wxEventType& evtType,
                         wxObjectEventFunction method,
                         wxEvtHandler *handler)
 {

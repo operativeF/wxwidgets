@@ -127,8 +127,8 @@ public:
 
 
   // Callbacks to SERVER - override at will
-  virtual bool OnExec(const wxString& WXUNUSED(topic),
-                      const wxString& WXUNUSED(data))
+  virtual bool OnExec([[maybe_unused]] const wxString& topic,
+                      [[maybe_unused]] const wxString& data)
   {
       wxFAIL_MSG( "This method shouldn't be called, if it is, it probably "
                   "means that you didn't update your old code overriding "
@@ -147,30 +147,30 @@ public:
                          wxIPCFormat format)
       { return OnExec(topic, GetTextFromData(data, size, format)); }
 
-  virtual const void *OnRequest(const wxString& WXUNUSED(topic),
-                                const wxString& WXUNUSED(item),
+  virtual const void *OnRequest([[maybe_unused]] const wxString& topic,
+                                [[maybe_unused]] const wxString& item,
                                 size_t *size,
                                 wxIPCFormat WXUNUSED(format))
       { *size = 0; return nullptr; }
 
-  virtual bool OnPoke(const wxString& WXUNUSED(topic),
-                      const wxString& WXUNUSED(item),
+  virtual bool OnPoke([[maybe_unused]] const wxString& topic,
+                      [[maybe_unused]] const wxString& item,
                       const void *WXUNUSED(data),
                       size_t WXUNUSED(size),
                       wxIPCFormat WXUNUSED(format))
       { return false; }
 
-  virtual bool OnStartAdvise(const wxString& WXUNUSED(topic),
-                             const wxString& WXUNUSED(item))
+  virtual bool OnStartAdvise([[maybe_unused]] const wxString& topic,
+                             [[maybe_unused]] const wxString& item)
       { return false; }
 
-  virtual bool OnStopAdvise(const wxString& WXUNUSED(topic),
-                            const wxString& WXUNUSED(item))
+  virtual bool OnStopAdvise([[maybe_unused]] const wxString& topic,
+                            [[maybe_unused]] const wxString& item)
       { return false; }
 
   // Callbacks to CLIENT - override at will
-  virtual bool OnAdvise(const wxString& WXUNUSED(topic),
-                        const wxString& WXUNUSED(item),
+  virtual bool OnAdvise([[maybe_unused]] const wxString& topic,
+                        [[maybe_unused]] const wxString& item,
                         const void *WXUNUSED(data),
                         size_t WXUNUSED(size),
                         wxIPCFormat WXUNUSED(format))

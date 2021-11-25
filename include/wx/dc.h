@@ -532,7 +532,7 @@ public:
     // ---------------------------------------------------------
     // wxMemoryDC Impl API
 
-    virtual void DoSelect(const wxBitmap& WXUNUSED(bmp))
+    virtual void DoSelect([[maybe_unused]] const wxBitmap& bmp)
        { }
 
     virtual const wxBitmap& GetSelectedBitmap() const
