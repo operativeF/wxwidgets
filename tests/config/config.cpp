@@ -18,12 +18,7 @@
 
 #if wxUSE_CONFIG
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif // WX_PRECOMP
-
 #include "wx/config.h"
-
 
 // Tests using wxColour can only be done when using GUI library and they
 // require template functions that are not supported by some ancient compilers.

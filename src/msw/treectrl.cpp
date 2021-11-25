@@ -17,7 +17,6 @@
 
 #include "wx/dynarray.h"
 #include "wx/log.h"
-#include "wx/app.h"
 #include "wx/settings.h"
 
 #include "wx/msw/private/winstyle.h"

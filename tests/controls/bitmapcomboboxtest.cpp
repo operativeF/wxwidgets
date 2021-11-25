@@ -12,13 +12,11 @@
 
 #if wxUSE_BITMAPCOMBOBOX
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/bmpcbox.h"
 #include "wx/artprov.h"
+
 #include "textentrytest.h"
 #include "itemcontainertest.h"
 #include "asserthelper.h"

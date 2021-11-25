@@ -14,9 +14,6 @@
     connectivity).
  */
 
-// For compilers that support precompilation, includes "wx/wx.h".
-// and "wx/cppunit.h"
-
 #include "doctest.h"
 
 #include "testprec.h"

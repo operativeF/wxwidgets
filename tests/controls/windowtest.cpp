@@ -15,16 +15,16 @@
 #include "wx/button.h"
 #include "wx/sizer.h"
 
-#include "asserthelper.h"
-#include "testableframe.h"
-#include "testwindow.h"
-
 #include "wx/uiaction.h"
 #include "wx/caret.h"
 #include "wx/cshelp.h"
 
 #include "wx/stopwatch.h"
 #include "wx/tooltip.h"
+
+#include "asserthelper.h"
+#include "testableframe.h"
+#include "testwindow.h"
 
 class WindowTestCase
 {

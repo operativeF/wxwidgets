@@ -12,13 +12,10 @@
 
 #if wxUSE_TREEBOOK
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/panel.h"
 #include "wx/treebook.h"
+
 #include "bookctrlbasetest.h"
 
 using wxTreebookTest = BookCtrlBaseT<wxTreebook>;

@@ -11,9 +11,7 @@
 module;
 
 #include "wx/frame.h"
-#include "wx/panel.h"
-#include "wx/notebook.h"
-#include "wx/icon.h"
+#include "wx/iconbndl.h"
 #include "wx/mdi.h"
 
 export module WX.AUI.TabMDI;

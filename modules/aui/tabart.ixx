@@ -10,13 +10,11 @@
 
 module;
 
-#include "wx/dc.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/pen.h"
 #include "wx/brush.h"
 #include "wx/bitmap.h"
-#include "wx/window.h"
 
 export module WX.AUI.TabArt.Base;
 
@@ -30,6 +28,9 @@ import <string>;
 
 export
 {
+
+class wxDC;
+class wxWindow;
 
 class wxAuiTabArt
 {

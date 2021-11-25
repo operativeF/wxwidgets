@@ -17,11 +17,7 @@
 
 #if wxUSE_WXVSNPRINTF
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-    #include "wx/wxchar.h"
-#endif // WX_PRECOMP
-
+#include "wx/wxchar.h"
 
 // NOTE: for more info about the specification of wxVsnprintf() behaviour you can
 //       refer to the following page of the GNU libc manual:

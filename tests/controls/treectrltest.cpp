@@ -14,11 +14,11 @@
 #if wxUSE_TREECTRL
 
 #include "wx/app.h"
-
 #include "wx/artprov.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
 #include "wx/uiaction.h"
+
 #include "testableframe.h"
 
 // ----------------------------------------------------------------------------

@@ -17,7 +17,6 @@
 #include "wx/dynlib.h"
 
 #include "wx/intl.h"
-#include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/filefn.h"
 #include "wx/filename.h"        // for SplitPath()

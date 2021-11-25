@@ -11,7 +11,7 @@
 module;
 
 #include "wx/settings.h"
-#include "wx/dcclient.h"
+#include "wx/dc.h"
 #include "wx/image.h"
 
 #ifdef __WXMAC__

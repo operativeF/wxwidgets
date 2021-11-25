@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_OLE && wxUSE_ACCESSIBILITY
 
 #include "wx/access.h"

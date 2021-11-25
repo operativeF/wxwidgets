@@ -14,7 +14,6 @@
 #include "wx/app.h"
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
-
 #include "wx/uiaction.h"
 
 class TextValidatorTestCase

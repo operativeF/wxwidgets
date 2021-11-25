@@ -17,7 +17,6 @@
 
 #include "itemcontainertest.h"
 
-
 using ChoiceControlTest = ItemContainerTest<wxChoice>;
 
 TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")

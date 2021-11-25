@@ -10,8 +10,8 @@
 
 #include "wx/evtloop.h"
 #include "wx/app.h"
-#include "wx/scopeguard.h"
 #include "wx/apptrait.h"
+#include "wx/scopeguard.h"
 #include "wx/private/eventloopsourcesmanager.h"
 
 // Counts currently existing event loops.

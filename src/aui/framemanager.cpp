@@ -13,11 +13,12 @@ module;
 #include "wx/msw/private.h"
 
 #include "wx/aui/events.h"
+
+#include "wx/app.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
 #include "wx/panel.h"
 #include "wx/settings.h"
-#include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
 #include "wx/display.h"

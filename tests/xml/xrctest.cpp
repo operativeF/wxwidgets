@@ -10,9 +10,6 @@
 
 #include "testprec.h"
 
-// FIXME: Mass include
-#include "wx/wx.h"
-
 #if wxUSE_XRC
 
 #include "wx/fs_inet.h"
@@ -24,9 +21,9 @@
 #include "wx/xrc/xmlres.h"
 #include "wx/xrc/xh_bmp.h"
 
-import <cstdarg>;
-
 #include "testfile.h"
+
+import <cstdarg>;
 
 // ----------------------------------------------------------------------------
 // helpers to create/save some xrc

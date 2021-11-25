@@ -10,17 +10,12 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/gdicmn.h"
-    
-    import <algorithm>;
-    import <array>;
-#endif // WX_PRECOMP
+#include "wx/gdicmn.h"
 
 #include "asserthelper.h"
 
-
+import <algorithm>;
+import <array>;
 
 TEST_CASE("CentreIn")
 {

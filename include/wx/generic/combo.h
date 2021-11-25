@@ -14,7 +14,7 @@
 #if wxUSE_COMBOCTRL
 
 // Only define generic if native doesn't have all the features
-#if !defined(wxCOMBOCONTROL_FULLY_FEATURED)
+#ifndef wxCOMBOCONTROL_FULLY_FEATURED
 
 #include "wx/containr.h"
 

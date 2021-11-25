@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #include "wx/bitmap.h"
 #include "wx/graphics.h"
 #include "wx/icon.h"

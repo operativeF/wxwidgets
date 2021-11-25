@@ -10,14 +10,8 @@
 
 #include "testprec.h"
 
-
-#include "wx/defs.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/gdicmn.h"
-    #include "wx/filefn.h"
-#endif // !PCH
-
+#include "wx/gdicmn.h"
+#include "wx/filefn.h"
 #include "wx/app.h"
 #include "wx/button.h"
 #include "wx/clipbrd.h"

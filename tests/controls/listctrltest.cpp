@@ -18,10 +18,10 @@
 #include "wx/listctrl.h"
 #include "wx/artprov.h"
 #include "wx/imaglist.h"
-#include "listbasetest.h"
-#include "testableframe.h"
 #include "wx/uiaction.h"
 
+#include "listbasetest.h"
+#include "testableframe.h"
 
 using ListCtrlTest = ListBaseTest<wxListCtrl>;
 

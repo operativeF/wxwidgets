@@ -12,10 +12,8 @@
 
 #if wxUSE_TREELISTCTRL
 
-
-#include "wx/treelist.h"
-
 #include "wx/app.h"
+#include "wx/treelist.h"
 
 struct TreeListCtrlTest
 {

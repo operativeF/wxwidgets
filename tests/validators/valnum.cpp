@@ -14,14 +14,12 @@
 #include "wx/intl.h"
 #include "wx/textctrl.h"
 #include "wx/validate.h"
-
 #include "wx/valnum.h"
+#include "wx/scopeguard.h"
+#include "wx/uiaction.h"
 
 #include "asserthelper.h"
 #include "testableframe.h"
-
-#include "wx/scopeguard.h"
-#include "wx/uiaction.h"
 
 class NumValidatorTestCase
 {

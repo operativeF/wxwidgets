@@ -12,14 +12,11 @@
 
 #if wxUSE_LISTBOOK
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/panel.h"
 #include "wx/listbook.h"
 #include "wx/listctrl.h"
+
 #include "bookctrlbasetest.h"
 
 using wxListbookTest = BookCtrlBaseT<wxListbook>;

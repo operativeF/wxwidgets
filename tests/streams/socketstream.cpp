@@ -6,17 +6,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
-// and "wx/cppunit.h"
-#include "testprec.h"
-
 #if wxUSE_NOSOCKSTREAM
 
 // for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif
 
+#include "wx/log.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"
 #include "wx/thread.h"

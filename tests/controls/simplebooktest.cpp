@@ -12,13 +12,9 @@
 
 #if wxUSE_BOOKCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/simplebook.h"
+
 #include "bookctrlbasetest.h"
 
 using wxSimplebookTest = BookCtrlBaseT<wxSimplebook>;

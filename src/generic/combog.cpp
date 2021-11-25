@@ -12,7 +12,6 @@
 
 #include "wx/combo.h"
 
-#include "wx/log.h"
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"

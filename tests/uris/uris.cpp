@@ -8,10 +8,6 @@
 
 #include "doctest.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif // WX_PRECOMP
-
 #include "wx/uri.h"
 #include "wx/url.h"
 

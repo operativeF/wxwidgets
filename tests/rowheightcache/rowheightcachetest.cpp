@@ -11,10 +11,6 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-#endif
-
 #include "wx/generic/private/rowheightcache.h"
 
 // ----------------------------------------------------------------------------

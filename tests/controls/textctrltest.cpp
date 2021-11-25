@@ -12,15 +12,8 @@
 
 #if wxUSE_TEXTCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/textctrl.h"
-
-    #include <fmt/core.h>
-#endif // WX_PRECOMP
-
-
+#include "wx/app.h"
+#include "wx/textctrl.h"
 #include "wx/uiaction.h"
 
 #if wxUSE_CLIPBOARD
@@ -35,6 +28,8 @@
 #include "textentrytest.h"
 #include "testableframe.h"
 #include "asserthelper.h"
+
+#include <fmt/core.h>
 
 constexpr int TEXT_HEIGHT = 200;
 

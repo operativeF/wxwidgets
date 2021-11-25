@@ -6,10 +6,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
-// and "wx/cppunit.h"
 #include "testprec.h"
-
 
 // FIXME: this tests currently sometimes hangs in Connect() for unknown reason
 //        and this prevents buildbot builds from working so disabling it, but

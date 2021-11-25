@@ -19,17 +19,9 @@
 // Streams subsuite so that they run by default.
 //
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "testprec.h"
 
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #include "wx/filename.h"
-
 #include "wx/wfstream.h"
 
 #ifdef WX_WINDOWS

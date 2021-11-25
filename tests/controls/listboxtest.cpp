@@ -12,13 +12,12 @@
 
 #if wxUSE_LISTBOX
 
-
 #include "wx/app.h"
 #include "wx/listbox.h"
+#include "wx/uiaction.h"
 
 #include "itemcontainertest.h"
 #include "testableframe.h"
-#include "wx/uiaction.h"
 
 using ListBoxTest = ItemContainerTest<wxListBox>;
 

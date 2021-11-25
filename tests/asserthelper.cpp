@@ -8,7 +8,6 @@
 
 #include "testprec.h"
 
-
 #include "asserthelper.h"
 
 namespace wxTestPrivate

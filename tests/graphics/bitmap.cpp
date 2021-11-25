@@ -12,7 +12,6 @@
 
 #ifdef wxHAS_RAW_BITMAP
 
-
 #include "wx/bitmap.h"
 #include "wx/rawbmp.h"
 #include "wx/dcmemory.h"

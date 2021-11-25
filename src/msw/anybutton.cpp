@@ -14,7 +14,6 @@
 #include "wx/brush.h"
 #include "wx/bmpbuttn.h"
 #include "wx/settings.h"
-#include "wx/dcscreen.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
 

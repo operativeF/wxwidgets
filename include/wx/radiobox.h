@@ -17,10 +17,11 @@
 
 import WX.Cfg.Flags;
 
-#if wxUSE_TOOLTIPS
-
 import <string>;
+import <string_view>;
 import <vector>;
+
+#if wxUSE_TOOLTIPS
 
 class wxToolTip;
 

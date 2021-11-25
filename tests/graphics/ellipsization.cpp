@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #include "wx/control.h"
 #include "wx/dcmemory.h"
 

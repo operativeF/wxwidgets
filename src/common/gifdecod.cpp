@@ -14,14 +14,14 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/gifdecod.h"
-#include "wx/scopedarray.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
 
 #include <gsl/gsl>
 
-import <array>;
 #include <chrono>
+
+import <array>;
 import <vector>;
 import <tuple>;
 

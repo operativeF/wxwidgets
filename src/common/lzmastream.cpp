@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
 #include "wx/lzmastream.h"

@@ -8,16 +8,12 @@
 
 #include "testprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    import <string>;
-#endif
-
 #if wxUSE_REGEX
 
 #include "wx/regex.h"
 #include "wx/tokenzr.h"
+
+import <string>;
 
 using std::string;
 

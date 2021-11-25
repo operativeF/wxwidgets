@@ -13,9 +13,9 @@
 #if wxUSE_LISTCTRL
 
 #include "wx/app.h"
-
 #include "wx/uiaction.h"
 #include "wx/listctrl.h"
+
 #include "listbasetest.h"
 #include "testableframe.h"
 

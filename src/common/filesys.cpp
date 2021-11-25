@@ -9,7 +9,6 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/filesys.h"
-#include "wx/log.h"
 #include "wx/module.h"
 #include "wx/sysopt.h"
 #include "wx/wfstream.h"

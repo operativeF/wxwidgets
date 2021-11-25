@@ -11,7 +11,6 @@
 #include "wx/fs_arc.h"
 
 #include "wx/intl.h"
-#include "wx/log.h"
 #include "wx/archive.h"
 #include "wx/private/fileback.h"
 

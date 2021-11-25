@@ -9,11 +9,6 @@
 
 #include "doctest.h"
 
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #if wxUSE_STREAMS
 
 #ifdef __UNIX__

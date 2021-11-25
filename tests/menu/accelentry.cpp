@@ -12,7 +12,6 @@
 
 #include "wx/accel.h"
 
-
 namespace
 {
 

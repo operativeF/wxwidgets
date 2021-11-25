@@ -13,11 +13,11 @@
 #if wxUSE_SPINCTRL
 
 #include "wx/app.h"
-
-#include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/spinctrl.h"
 #include "wx/textctrl.h"
+
+#include "testableframe.h"
 
 #include <memory>
 

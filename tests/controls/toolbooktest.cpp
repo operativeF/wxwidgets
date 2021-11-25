@@ -12,14 +12,10 @@
 
 #if wxUSE_TOOLBOOK
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
-#include "wx/toolbook.h"
+#include "wx/app.h"
 #include "wx/toolbar.h"
+#include "wx/toolbook.h"
+
 #include "bookctrlbasetest.h"
 
 using wxToolbookTest = BookCtrlBaseT<wxToolbook>;

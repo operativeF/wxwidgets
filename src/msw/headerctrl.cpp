@@ -9,7 +9,6 @@
 
 #if wxUSE_HEADERCTRL
 
-#include "wx/app.h"
 #include "wx/log.h"
     
 #include "wx/headerctrl.h"

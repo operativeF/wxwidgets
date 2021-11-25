@@ -11,11 +11,10 @@
 #include "testprec.h"
 
 #include "wx/app.h"
+#include "wx/headerctrl.h"
 
 import <algorithm>;
 import <array>;
-
-#include "wx/headerctrl.h"
 
 // ----------------------------------------------------------------------------
 // test class

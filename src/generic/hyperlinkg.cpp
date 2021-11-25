@@ -8,13 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-//---------------------------------------------------------------------------
-// Pre-compiled header stuff
-//---------------------------------------------------------------------------
-
-
-
-
 #if wxUSE_HYPERLINKCTRL
 
 //---------------------------------------------------------------------------
@@ -26,8 +19,6 @@
 #include "wx/utils.h" // for wxLaunchDefaultBrowser
 #include "wx/dcclient.h"
 #include "wx/menu.h"
-#include "wx/log.h"
-#include "wx/dataobj.h"
 #include "wx/clipbrd.h"
 #include "wx/renderer.h"
 

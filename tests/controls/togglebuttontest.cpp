@@ -14,10 +14,10 @@
 
 #include "wx/app.h"
 
-#include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/tglbtn.h"
 
+#include "testableframe.h"
 
 TEST_CASE("Toggle button test")
 {

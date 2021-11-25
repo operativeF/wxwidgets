@@ -12,18 +12,14 @@
 
 #if wxUSE_COMBOBOX
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/combobox.h"
-
-    import <array>;
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/combobox.h"
 
 #include "textentrytest.h"
 #include "itemcontainertest.h"
 #include "testableframe.h"
 
+import <array>;
 
 // ----------------------------------------------------------------------------
 // test class

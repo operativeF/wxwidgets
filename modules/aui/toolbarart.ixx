@@ -1,16 +1,19 @@
 module;
 
-#include "wx/dc.h"
-#include "wx/font.h"
-#include "wx/window.h"
-
 export module WX.AUI.ToolBarArt.Base;
 
 import WX.AUI.ToolBar.Item;
 
 import Utils.Geometry;
 
-export class wxAuiToolBarArt
+export
+{
+
+class wxDC;
+class wxFont;
+class wxWindow;
+
+class wxAuiToolBarArt
 {
 public:
     virtual ~wxAuiToolBarArt() = default;
@@ -95,3 +98,5 @@ public:
     // Provide opportunity for subclasses to recalculate colours
     virtual void UpdateColoursFromSystem() {}
 }; // export wxAuiToolBarArt
+
+} // export

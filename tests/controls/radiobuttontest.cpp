@@ -18,8 +18,8 @@
 #include "wx/radiobut.h"
 #include "wx/sizer.h"
 #include "wx/stattext.h"
-
 #include "wx/uiaction.h"
+
 #include "testableframe.h"
 #include "testwindow.h"
 

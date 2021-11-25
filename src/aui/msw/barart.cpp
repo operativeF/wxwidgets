@@ -16,6 +16,7 @@ module;
 #include "wx/app.h"
 #include "wx/dc.h"
 #include "wx/settings.h"
+#include "wx/window.h"
 
 #include "wx/msw/uxtheme.h"
 

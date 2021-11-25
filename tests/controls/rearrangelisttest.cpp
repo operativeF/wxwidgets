@@ -13,8 +13,8 @@
 #ifndef __WXOSX_IPHONE__
 
 #include "wx/app.h"
-
 #include "wx/rearrangectrl.h"
+
 #include "itemcontainertest.h"
 #include "testableframe.h"
 

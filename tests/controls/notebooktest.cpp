@@ -12,14 +12,9 @@
 
 #if wxUSE_NOTEBOOK
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/panel.h"
 #include "wx/notebook.h"
-
 
 #include "bookctrlbasetest.h"
 #include "testableframe.h"

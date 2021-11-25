@@ -13,7 +13,6 @@
 
 #include "testprec.h"
 
-
 #include "wx/utils.h"
 #include "wx/process.h"
 #include "wx/sstream.h"

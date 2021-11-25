@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #if wxUSE_UIACTIONSIMULATOR
 
 #include "wx/app.h"

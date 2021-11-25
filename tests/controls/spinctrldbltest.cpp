@@ -13,11 +13,10 @@
 #if wxUSE_SPINCTRL
 
 #include "wx/app.h"
-
-#include "testableframe.h"
+#include "wx/spinctrl.h"
 #include "wx/uiaction.h"
 
-#include "wx/spinctrl.h"
+#include "testableframe.h"
 
 class SpinCtrlDoubleTestCase
 {

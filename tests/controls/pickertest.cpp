@@ -20,6 +20,7 @@
 #include "wx/clrpicker.h"
 #include "wx/filepicker.h"
 #include "wx/fontpicker.h"
+
 #include "pickerbasetest.h"
 #include "asserthelper.h"
 

@@ -12,16 +12,13 @@
 
 #if wxUSE_DATAVIEWCTRL
 
-
 #include "testpersistence.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dataview.h"
+#include "wx/dataview.h"
 
-    #ifdef __WXGTK__
-        #include "wx/stopwatch.h"
-    #endif // __WXGTK__
-#endif // WX_PRECOMP
+#ifdef __WXGTK__
+    #include "wx/stopwatch.h"
+#endif // __WXGTK__
 
 #include "wx/persist/dataview.h"
 

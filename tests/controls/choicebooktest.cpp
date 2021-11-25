@@ -12,13 +12,9 @@
 
 #if wxUSE_CHOICEBOOK
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/panel.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/choicebk.h"
+
 #include "bookctrlbasetest.h"
 
 using wxChoicebookTest = BookCtrlBaseT<wxChoicebook>;

@@ -10,19 +10,12 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    import <vector>;
-#endif // WX_PRECOMP
-
-
 #include "wx/datstrm.h"
 #include "wx/wfstream.h"
 
 #include "testfile.h"
 
+import <vector>;
 
 static bool ms_useBigEndianFormat = false;
 

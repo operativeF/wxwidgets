@@ -18,12 +18,8 @@
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
 #include "wx/string.h"
-#include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/stopwatch.h"           // for wxGetLocalTimeMillis()
 #include "wx/crt.h"
-
-#include "wx/thread.h"
 
 #ifdef WX_WINDOWS
     import <clocale>;

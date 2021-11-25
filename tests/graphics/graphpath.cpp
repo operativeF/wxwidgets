@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/bitmap.h"
@@ -18,7 +17,6 @@
 #include "wx/dcgraph.h"
 
 import <numbers>;
-
 
 // For MSW we have individual test cases for each graphics renderer
 // so we don't need to execute tests with default renderer.

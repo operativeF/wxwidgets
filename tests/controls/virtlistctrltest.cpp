@@ -13,10 +13,10 @@
 #if wxUSE_LISTCTRL
 
 #include "wx/app.h"
-
 #include "wx/listctrl.h"
-#include "testableframe.h"
 #include "wx/uiaction.h"
+
+#include "testableframe.h"
 
 TEST_CASE("Virtual list control test.")
 {

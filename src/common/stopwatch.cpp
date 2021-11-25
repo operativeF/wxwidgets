@@ -16,7 +16,6 @@
 
 #include "wx/stopwatch.h"
 
-#include "wx/log.h"
 #include "wx/thread.h"
 
 // ============================================================================

@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #include "wx/app.h"
 #include "wx/window.h"
 #include "wx/wrapsizer.h"

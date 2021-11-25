@@ -11,15 +11,14 @@
 
 #include "wx/bmpcbox.h"
 
-#include "wx/log.h"
 #include "wx/dc.h"
+#include "wx/debug.h"
 #include "wx/ctrlsub.h"
 
 #include "wx/settings.h"
 
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
-
 
 #if defined(wxBITMAPCOMBOBOX_OWNERDRAWN_BASED)
 

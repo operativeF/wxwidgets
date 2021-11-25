@@ -11,7 +11,6 @@
 #if wxUSE_RADIOBOX
 
 #include "wx/radiobox.h"
-#include "wx/hashmap.h"
 #include "wx/settings.h"
 #include "wx/log.h"
 

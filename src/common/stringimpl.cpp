@@ -19,9 +19,9 @@
 #include "wx/stringimpl.h"
 #include "wx/wxcrt.h"
 
-import <cctype>;
 #include <cerrno>
 
+import <cctype>;
 import <cstdlib>;
 import <cstring>;
 

@@ -16,7 +16,6 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/hashmap.h"
 #include "wx/module.h"
 
 #ifdef HAVE_LANGINFO_H
@@ -42,7 +41,6 @@
 
 #include "wx/apptrait.h"
 #include "wx/stdpaths.h"
-#include "wx/hashset.h"
 
 #if defined(__WXOSX__)
     #include "wx/osx/core/cfref.h"

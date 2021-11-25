@@ -17,7 +17,6 @@
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
 #include "wx/icon.h"
-#include "wx/colour.h"
 #include "wx/gdicmn.h"
 
 import Utils.Geometry;

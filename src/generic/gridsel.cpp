@@ -13,7 +13,6 @@
 #include "wx/generic/gridsel.h"
 #include "wx/dynarray.h"
 
-
 namespace
 {
 

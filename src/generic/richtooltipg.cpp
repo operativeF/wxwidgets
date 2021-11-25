@@ -7,19 +7,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_RICHTOOLTIP
 
 #include "wx/dcmemory.h"
 #include "wx/icon.h"
-#include "wx/region.h"
 #include "wx/settings.h"
 #include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/timer.h"
-#include "wx/utils.h"
 
 #include "wx/private/richtooltip.h"
 #include "wx/generic/private/richtooltip.h"
@@ -264,14 +260,9 @@ protected:
 
 private:
 #ifdef HAVE_MSW_THEME
-    // Returns non-NULL theme only if we're using Win7-style tooltips.
     static bool UseTooltipTheme()
     {
-        // Even themed applications under XP still use "classic" tooltips.
-        if ( wxGetWinVersion() <= wxWinVersion_XP )
-            return false;
-        else
-            return wxUxThemeIsActive();
+        return wxUxThemeIsActive();
     }
 #endif // HAVE_MSW_THEME
 

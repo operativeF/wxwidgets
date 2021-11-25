@@ -7,13 +7,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-import <clocale>; // for setlocale and LC_ALL
-
-#include <fmt/core.h>
-
 #include "wx/numformatter.h"
 #include "wx/intl.h"
 
+#include <fmt/core.h>
+
+import <clocale>; // for setlocale and LC_ALL
 
 // ----------------------------------------------------------------------------
 // local helpers

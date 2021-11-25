@@ -10,9 +10,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SASH
 
 #include "wx/sashwin.h"
@@ -22,12 +19,9 @@
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
-
-#ifndef WX_PRECOMP
-    import <string>;
-#endif
-
 #include "wx/laywin.h"
+
+import <string>;
 
 wxDEFINE_EVENT( wxEVT_SASH_DRAGGED, wxSashEvent );
 

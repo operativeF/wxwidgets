@@ -10,7 +10,6 @@
 #include "wx/ustring.h"
 #include "wx/private/unicode.h"
 #include "wx/crt.h"
-#include "wx/log.h"
 
 wxUString &wxUString::assignFromAscii( const char *str )
 {

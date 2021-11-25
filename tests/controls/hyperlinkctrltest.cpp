@@ -12,13 +12,10 @@
 
 #if wxUSE_HYPERLINKCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/hyperlink.h"
 #include "wx/uiaction.h"
+
 #include "testableframe.h"
 #include "asserthelper.h"
 

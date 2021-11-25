@@ -8,25 +8,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_PROGRESSDLG
 
 #include "wx/utils.h"
-#include "wx/frame.h"
 #include "wx/button.h"
 #include "wx/stattext.h"
 #include "wx/sizer.h"
 #include "wx/event.h"
 #include "wx/gauge.h"
 #include "wx/intl.h"
-#include "wx/dcclient.h"
-#include "wx/timer.h"
 #include "wx/settings.h"
-#include "wx/app.h"
 #include "wx/progdlg.h"
 #include "wx/evtloop.h"
+#include "wx/timer.h"
 
 // ----------------------------------------------------------------------------
 // constants

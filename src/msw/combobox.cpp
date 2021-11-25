@@ -12,7 +12,6 @@
 
 #include "wx/combobox.h"
 #include "wx/settings.h"
-#include "wx/log.h"
 // for wxEVT_TEXT_ENTER
 #include "wx/textctrl.h"
 

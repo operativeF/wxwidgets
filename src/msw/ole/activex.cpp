@@ -15,8 +15,6 @@
 #include "wx/dcclient.h"
 #include "wx/math.h"
 
-#include "wx/msw/dc.h"
-
 #include "wx/msw/ole/activex.h"
 
 // autointerfaces that we only use here

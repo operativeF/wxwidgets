@@ -18,6 +18,7 @@
 
 #include <chrono>
 
+import Utils.Geometry;
 
 /*
  * A window for displaying a splash screen

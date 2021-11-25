@@ -12,11 +12,7 @@
 
 #if wxUSE_ODCOMBOBOX
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/odcombo.h"
 
 #include "textentrytest.h"

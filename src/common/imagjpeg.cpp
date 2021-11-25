@@ -12,7 +12,6 @@
 #include "wx/versioninfo.h"
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/module.h"
 
 import <cstring>; // For memcpy
 

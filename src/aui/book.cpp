@@ -23,9 +23,9 @@ module;
 #include "wx/osx/private.h"
 #endif
 
-#include <memory>
-
 #include "wx/arrimpl.cpp"
+
+#include <memory>
 
 module WX.AUI.Book;
 

@@ -12,7 +12,6 @@
 #include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
-#include "wx/button.h"
 #include "wx/display.h"
 
 #include "wx/aboutdlg.h"

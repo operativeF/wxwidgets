@@ -13,8 +13,8 @@ module;
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"
+#include "wx/font.h"
 #include "wx/pen.h"
-#include "wx/window.h"
 
 export module WX.AUI.DockArt;
 
@@ -24,6 +24,8 @@ import Utils.Geometry;
 
 export
 {
+
+class wxWindow;
 
 enum wxAuiPaneDockArtSetting
 {

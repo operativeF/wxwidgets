@@ -9,8 +9,6 @@
 
 module;
 
-#include "wx/window.h"
-
 export module WX.AUI.TabArt;
 
 export import WX.AUI.TabArt.Base;
@@ -21,6 +19,8 @@ import <string>;
 
 export
 {
+
+class wxWindow;
 
 class wxAuiMSWTabArt : public wxAuiGenericTabArt
 {

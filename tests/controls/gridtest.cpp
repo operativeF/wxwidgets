@@ -12,7 +12,6 @@
 
 #if wxUSE_GRID
 
-
 #include "wx/app.h"
 #include "wx/dcclient.h"
 

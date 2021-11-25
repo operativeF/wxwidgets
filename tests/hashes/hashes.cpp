@@ -10,16 +10,11 @@
 
 #include "doctest.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    import <array>;
-#endif // WX_PRECOMP
-
 #include "wx/hash.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
 
+import <array>;
 
 #if defined wxLongLong_t && !defined wxLongLongIsLong
     #define TEST_LONGLONG

@@ -10,10 +10,7 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/region.h"
-#endif // WX_PRECOMP
+#include "wx/region.h"
 
 // ----------------------------------------------------------------------------
 // helper functions

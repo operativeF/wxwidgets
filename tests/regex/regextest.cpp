@@ -28,20 +28,12 @@
 // include file 'regex.inc' (included below) using a script 'regex.pl'.
 //
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "testprec.h"
-
 
 #if wxUSE_REGEX
 
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    import <string>;
-    import <vector>;
-#endif
-
+import <string>;
+import <vector>;
 
 // many of the tests are specific to the builtin regex lib, so only attempts
 // to do them when using the builtin regex lib.

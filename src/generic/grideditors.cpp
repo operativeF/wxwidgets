@@ -13,20 +13,17 @@
 #include "wx/grid.h"
 
 #include "wx/utils.h"
-#include "wx/dcclient.h"
+#include "wx/dc.h"
 #include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/textctrl.h"
 #include "wx/checkbox.h"
 #include "wx/combobox.h"
 #include "wx/intl.h"
-#include "wx/listbox.h"
 
 #include "wx/valnum.h"
-#include "wx/textfile.h"
 #include "wx/spinctrl.h"
 #include "wx/tokenzr.h"
-#include "wx/renderer.h"
 #include "wx/datectrl.h"
 
 #include "wx/generic/gridsel.h"
