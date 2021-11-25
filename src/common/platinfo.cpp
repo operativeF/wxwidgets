@@ -78,13 +78,6 @@ const char* const wxBitnessNames[] =
     "64 bit"
 };
 
-const char* const wxEndiannessNames[] =
-{
-    "Big endian",
-    "Little endian",
-    "PDP endian"
-};
-
 // ----------------------------------------------------------------------------
 // local functions
 // ----------------------------------------------------------------------------
@@ -122,7 +115,7 @@ wxPlatformInfo::wxPlatformInfo()
 wxPlatformInfo::wxPlatformInfo(wxPortId pid, int tkMajor, int tkMinor,
                                wxOperatingSystemId id, int osMajor, int osMinor,
                                wxBitness bitness,
-                               wxEndianness endian,
+                               std::endian endian,
                                bool usingUniversal)
     : m_tkVersionMajor(tkMajor),
       m_tkVersionMinor(tkMinor),
@@ -131,7 +124,7 @@ wxPlatformInfo::wxPlatformInfo(wxPortId pid, int tkMajor, int tkMinor,
       m_os(id),
       m_osVersionMajor(osMajor),
       m_osVersionMinor(osMinor),
-      m_endian(endian),
+      m_endian{endian},
       m_bitness(bitness)
 {
 }
@@ -180,7 +173,7 @@ void wxPlatformInfo::InitForCurrentPlatform()
 
     m_os = wxGetOsVersion(&m_osVersionMajor, &m_osVersionMinor, &m_osVersionMicro);
     m_osDesc = wxGetOsDescription();
-    m_endian = wxIsPlatformLittleEndian() ? wxENDIAN_LITTLE : wxENDIAN_BIG;
+    m_endian = std::endian::native;
     m_bitness = wxIsPlatform64Bit() ? wxBITNESS_64 : wxBITNESS_32;
     m_cpuArch = wxGetCpuArchitectureName();
 
@@ -281,12 +274,14 @@ wxString wxPlatformInfo::GetBitnessName(wxBitness bitness)
     return wxBitnessNames[bitness];
 }
 
-wxString wxPlatformInfo::GetEndiannessName(wxEndianness end)
+wxString wxPlatformInfo::GetEndiannessName(std::endian end)
 {
-    static_assert(WXSIZEOF(wxEndiannessNames) == wxENDIAN_MAX,
-                  "EndianNames Mismatch (size)");
-
-    return wxEndiannessNames[end];
+    if(end == std::endian::little)
+        return "Little endian";
+    else if(end == std::endian::big)
+        return "Big endian";
+    else // Native; which could be of mixed endian type.
+        return "Native endian";
 }
 
 bool wxPlatformInfo::CheckOSVersion(int major, int minor, int micro) const
@@ -336,14 +331,14 @@ wxPortId wxPlatformInfo::GetPortId(const wxString &str)
     return wxPORT_UNKNOWN;
 }
 
-wxEndianness wxPlatformInfo::GetEndianness(const wxString& end)
+std::endian wxPlatformInfo::GetEndianness(const wxString& end)
 {
-    const wxString endl(end.Lower());
+    const wxString endl = end.Lower();
+
     if ( endl.StartsWith("little") )
-        return wxENDIAN_LITTLE;
-
-    if ( endl.StartsWith("big") )
-        return wxENDIAN_BIG;
-
-    return wxENDIAN_INVALID;
+        return std::endian::little;
+    else if( endl.StartsWith("big") )
+        return std::endian::big;
+    else
+        return std::endian::native;
 }

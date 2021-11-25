@@ -181,20 +181,6 @@ std::string wxGetDataDir()
     return fmt::format("{0}{1}share{1}wx", wxGetInstallPrefix(), wxFILE_SEP_PATH);
 }
 
-bool wxIsPlatformLittleEndian()
-{
-    // Are we little or big endian? This method is from Harbison & Steele.
-    union
-    {
-        long l;
-        char c[sizeof(long)];
-    } u;
-    u.l = 1;
-
-    return u.c[0] == 1;
-}
-
-
 // ----------------------------------------------------------------------------
 // wxPlatform
 // ----------------------------------------------------------------------------

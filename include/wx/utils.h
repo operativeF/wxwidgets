@@ -96,9 +96,6 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj = nullptr,
 // Check is OS version is at least the specified major and minor version
 bool wxCheckOsVersion(int majorVsn, int minorVsn = 0, int microVsn = 0);
 
-// Get platform endianness
-bool wxIsPlatformLittleEndian();
-
 // Get platform architecture bitness
 bool wxIsPlatform64Bit();
 

@@ -13,6 +13,7 @@
 
 #include "wx/string.h"
 
+import <bit>;
 import <string>;
 
 // ----------------------------------------------------------------------------
@@ -106,19 +107,6 @@ const wxArchitecture
     wxARCH_64 = wxBITNESS_64,
     wxARCH_MAX = wxBITNESS_MAX;
 
-
-// endian-ness of the machine
-enum wxEndianness
-{
-    wxENDIAN_INVALID = -1,      // returned on error
-
-    wxENDIAN_BIG,               // 4321
-    wxENDIAN_LITTLE,            // 1234
-    wxENDIAN_PDP,               // 3412
-
-    wxENDIAN_MAX
-};
-
 // information about a linux distro returned by the lsb_release utility
 struct wxLinuxDistributionInfo
 {
@@ -189,7 +177,7 @@ public:
                    wxOperatingSystemId id = wxOS_UNKNOWN,
                    int osMajor = -1, int osMinor = -1,
                    wxBitness bitness = wxBITNESS_INVALID,
-                   wxEndianness endian = wxENDIAN_INVALID,
+                   std::endian end = std::endian::native,
                    bool usingUniversal = false);
 
     // default copy ctor, assignment operator and dtor are ok
@@ -212,7 +200,7 @@ public:
     static wxPortId GetPortId(const wxString &portname);
 
     static wxBitness GetBitness(const wxString &bitness);
-    static wxEndianness GetEndianness(const wxString &end);
+    static std::endian GetEndianness(const wxString &end);
 
     // enum -> string conversions
     // ---------------------------------
@@ -223,7 +211,7 @@ public:
     static wxString GetPortIdShortName(wxPortId port, bool usingUniversal);
 
     static wxString GetBitnessName(wxBitness bitness);
-    static wxString GetEndiannessName(wxEndianness end);
+    static wxString GetEndiannessName(std::endian end);
 
 
     // getters
@@ -267,7 +255,7 @@ public:
         { return m_port; }
     wxBitness GetBitness() const
         { return m_bitness; }
-    wxEndianness GetEndianness() const
+    std::endian GetEndianness() const
         { return m_endian; }
 
 
@@ -324,7 +312,7 @@ public:
         { m_port = n; }
     void SetBitness(wxBitness n)
         { m_bitness = n; }
-    void SetEndianness(wxEndianness n)
+    void SetEndianness(std::endian n)
         { m_endian = n; }
     void SetCpuArchitectureName(const wxString& cpuArch)
         { m_cpuArch = cpuArch; }
@@ -347,8 +335,7 @@ public:
                m_tkVersionMajor != -1 && m_tkVersionMinor != -1 &&
                m_tkVersionMicro != -1 &&
                m_port != wxPORT_UNKNOWN &&
-               m_bitness != wxBITNESS_INVALID &&
-               m_endian != wxENDIAN_INVALID;
+               m_bitness != wxBITNESS_INVALID;
 
                // do not check linux-specific info; it's ok to have them empty
     }
@@ -412,7 +399,7 @@ protected:
     wxBitness m_bitness;
 
     // endianness of the machine
-    wxEndianness m_endian;
+    std::endian m_endian;
 
     // CPU architecture family name, possibly empty if unknown
     wxString m_cpuArch;
