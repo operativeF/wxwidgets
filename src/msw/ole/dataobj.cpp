@@ -911,7 +911,7 @@ STDMETHODIMP wxIDataObject::DAdvise(FORMATETC   *WXUNUSED(pformatetc),
   return OLE_E_ADVISENOTSUPPORTED;
 }
 
-STDMETHODIMP wxIDataObject::DUnadvise(DWORD WXUNUSED(dwConnection))
+STDMETHODIMP wxIDataObject::DUnadvise([[maybe_unused]] DWORD dwConnection)
 {
   return OLE_E_ADVISENOTSUPPORTED;
 }
@@ -953,7 +953,7 @@ size_t wxDataObject::GetBufferOffset(const wxDataFormat& format )
 
 const void *wxDataObject::GetSizeFromBuffer(const void *buffer,
                                             size_t *size,
-                                            const wxDataFormat& WXUNUSED(format))
+                                            [[maybe_unused]] const wxDataFormat& format)
 {
     const size_t realsz = ::GlobalSize(::GlobalHandle(buffer));
     if ( !realsz )
@@ -1044,7 +1044,7 @@ bool wxBitmapDataObject::GetDataHere(void *buf) const
 #endif
 }
 
-bool wxBitmapDataObject::SetData(size_t WXUNUSED(len), const void *buf)
+bool wxBitmapDataObject::SetData([[maybe_unused]] size_t len, const void *buf)
 {
 #if wxUSE_WXDIB
     const BITMAPINFO * const pbmi = (const BITMAPINFO *)buf;
@@ -1090,7 +1090,7 @@ bool wxBitmapDataObject2::GetDataHere(void *pBuf) const
     return true;
 }
 
-bool wxBitmapDataObject2::SetData(size_t WXUNUSED(len), const void *pBuf)
+bool wxBitmapDataObject2::SetData([[maybe_unused]] size_t len, const void *pBuf)
 {
     WXHBITMAP hbmp = *static_cast<const WXHBITMAP*>(pBuf);
 
@@ -1240,7 +1240,7 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
 // wxFileDataObject
 // ----------------------------------------------------------------------------
 
-bool wxFileDataObject::SetData(size_t WXUNUSED(size),
+bool wxFileDataObject::SetData([[maybe_unused]] size_t size,
                                const void *pData)
 {
     m_filenames.clear();
@@ -1367,13 +1367,13 @@ class CFSTR_SHELLURLDataObject : public wxCustomDataObject
 public:
     CFSTR_SHELLURLDataObject() : wxCustomDataObject(boost::nowide::narrow(CFSTR_SHELLURL)) {}
 
-    size_t GetBufferOffset( const wxDataFormat& WXUNUSED(format) ) override
+    size_t GetBufferOffset( [[maybe_unused]] const wxDataFormat& format ) override
     {
         return 0;
     }
 
     const void* GetSizeFromBuffer( const void* buffer, size_t* size,
-                                           const wxDataFormat& WXUNUSED(format) ) override
+                                           [[maybe_unused]] const wxDataFormat& format ) override
     {
         // CFSTR_SHELLURL is _always_ ANSI text
         *size = strlen( (const char*)buffer );
@@ -1381,8 +1381,8 @@ public:
         return buffer;
     }
 
-    void* SetSizeInBuffer( void* buffer, size_t WXUNUSED(size),
-                                   const wxDataFormat& WXUNUSED(format) ) override
+    void* SetSizeInBuffer( void* buffer, [[maybe_unused]] size_t size,
+                                   [[maybe_unused]] const wxDataFormat& format ) override
     {
         return buffer;
     }
@@ -1507,25 +1507,25 @@ void wxDataObject::SetAutoDelete()
 {
 }
 
-const wxChar *wxDataObject::GetFormatName(wxDataFormat WXUNUSED(format))
+const wxChar *wxDataObject::GetFormatName([[maybe_unused]] wxDataFormat format)
 {
     return NULL;
 }
 
-const void* wxDataObject::GetSizeFromBuffer(const void* WXUNUSED(buffer),
-    size_t* size, const wxDataFormat& WXUNUSED(format))
+const void* wxDataObject::GetSizeFromBuffer([[maybe_unused]] const void* buffer,
+    size_t* size, [[maybe_unused]] const wxDataFormat& format)
 {
     *size = 0;
     return NULL;
 }
 
-void* wxDataObject::SetSizeInBuffer(void* buffer, size_t WXUNUSED(size),
-    const wxDataFormat& WXUNUSED(format))
+void* wxDataObject::SetSizeInBuffer(void* buffer, [[maybe_unused]] size_t size,
+    [[maybe_unused]] const wxDataFormat& format)
 {
     return buffer;
 }
 
-size_t wxDataObject::GetBufferOffset(const wxDataFormat& WXUNUSED(format))
+size_t wxDataObject::GetBufferOffset([[maybe_unused]] const wxDataFormat& format)
 {
     return 0;
 }

@@ -933,7 +933,7 @@ void wxQsort(void* pbase, size_t total_elems,
 // (GTK2 sets detectable auto-repeat automatically anyhow)
 #if !(defined(__WXX11__) || defined(__WXMOTIF__) || \
         (defined(__WXGTK__) && !defined(__WXGTK20__)))
-bool wxSetDetectableAutoRepeat( bool WXUNUSED(flag) )
+bool wxSetDetectableAutoRepeat( [[maybe_unused]] bool flag )
 {
     return true;
 }
@@ -1243,7 +1243,7 @@ wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
 #if wxUSE_MSGDLG
 
 int wxMessageBox(std::string_view message, std::string_view caption, unsigned int style,
-                 wxWindow *parent, int WXUNUSED(x), int WXUNUSED(y) )
+                 wxWindow *parent, [[maybe_unused]] int x, [[maybe_unused]] int y )
 {
     // add the appropriate icon unless this was explicitly disabled by use of
     // wxICON_NONE

@@ -109,7 +109,7 @@ struct NotifyIconData : public NOTIFYICONDATA
 // wxTaskBarIcon
 // ----------------------------------------------------------------------------
 
-wxTaskBarIcon::wxTaskBarIcon(wxTaskBarIconType WXUNUSED(iconType))
+wxTaskBarIcon::wxTaskBarIcon([[maybe_unused]] wxTaskBarIconType iconType)
 {
     RegisterWindowMessages();
 }
@@ -343,7 +343,7 @@ void wxTaskBarIcon::RegisterWindowMessages()
 // ----------------------------------------------------------------------------
 
 long wxTaskBarIcon::WindowProc(unsigned int msg,
-                               unsigned int WXUNUSED(wParam),
+                               [[maybe_unused]] unsigned int wParam,
                                long lParam)
 {
     if ( msg == gs_msgRestartTaskbar )   // does the icon need to be redrawn?

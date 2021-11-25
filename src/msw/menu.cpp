@@ -716,7 +716,7 @@ void wxMenu::SetTitle(const std::string& label)
 // event processing
 // ---------------------------------------------------------------------------
 
-bool wxMenu::MSWCommand(WXUINT WXUNUSED(param), WXWORD id_)
+bool wxMenu::MSWCommand([[maybe_unused]] WXUINT param, WXWORD id_)
 {
     const int id = (signed short)id_;
 
@@ -790,12 +790,12 @@ wxMenuBar::wxMenuBar()
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar( unsigned int WXUNUSED(style) )
+wxMenuBar::wxMenuBar( [[maybe_unused]] unsigned int style )
 {
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], unsigned int WXUNUSED(style))
+wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], [[maybe_unused]] unsigned int style)
 {
     m_eventHandler = this;
 

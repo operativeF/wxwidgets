@@ -106,7 +106,7 @@ bool wxUIActionSimulatorMSWImpl::MouseUp(int button)
 }
 
 bool
-wxUIActionSimulatorMSWImpl::DoKey(int keycode, int WXUNUSED(modifiers), bool isDown)
+wxUIActionSimulatorMSWImpl::DoKey(int keycode, [[maybe_unused]] int modifiers, bool isDown)
 {
     bool isExtended;
     DWORD vkkeycode = wxMSWKeyboard::WXToVK(keycode, &isExtended);

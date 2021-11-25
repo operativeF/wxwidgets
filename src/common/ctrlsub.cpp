@@ -98,8 +98,8 @@ void wxItemContainer::Delete(unsigned int pos)
 //
 // ----------------------------------------------------------------------------
 
-int wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
-                                 unsigned int WXUNUSED(pos))
+int wxItemContainer::DoInsertOneItem([[maybe_unused]] const std::string& item,
+                                 [[maybe_unused]] unsigned int pos)
 {
     wxFAIL_MSG( "Must be overridden if DoInsertItemsInLoop() is used" );
 

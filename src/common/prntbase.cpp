@@ -544,7 +544,7 @@ void wxPrintAbortDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 // wxPrintout
 //----------------------------------------------------------------------------
 
-bool wxPrintout::OnBeginDocument(int WXUNUSED(startPage), int WXUNUSED(endPage))
+bool wxPrintout::OnBeginDocument([[maybe_unused]] int startPage, [[maybe_unused]] int endPage)
 {
     return GetDC()->wxStartDoc(_("Printing ") + m_printoutTitle);
 }

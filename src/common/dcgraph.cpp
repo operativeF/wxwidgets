@@ -385,7 +385,7 @@ void* wxGCDCImpl::GetHandle() const
 }
 
 #if wxUSE_PALETTE
-void wxGCDCImpl::SetPalette( const wxPalette& WXUNUSED(palette) )
+void wxGCDCImpl::SetPalette( [[maybe_unused]] const wxPalette& palette )
 {
 
 }
@@ -510,14 +510,14 @@ wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
     return {std::lround(dx), std::lround(dy)};
 }
 
-bool wxGCDCImpl::DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
-                             const wxColour& WXUNUSED(col),
-                             wxFloodFillStyle WXUNUSED(style))
+bool wxGCDCImpl::DoFloodFill([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y,
+                             [[maybe_unused]] const wxColour& col,
+                             [[maybe_unused]] wxFloodFillStyle style)
 {
     return false;
 }
 
-bool wxGCDCImpl::DoGetPixel( wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxColour *WXUNUSED(col) ) const
+bool wxGCDCImpl::DoGetPixel( [[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxColour *WXUNUSED(col) ) const
 {
     //  wxCHECK_MSG( 0 , false, "wxGCDC(cg)::DoGetPixel - not implemented" );
     return false;

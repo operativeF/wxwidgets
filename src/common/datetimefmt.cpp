@@ -2191,7 +2191,7 @@ const wchar_t* wxDateTime::ParseTime(const wchar_t* date)
 // Workdays and holidays support
 // ----------------------------------------------------------------------------
 
-bool wxDateTime::IsWorkDay(Country WXUNUSED(country)) const
+bool wxDateTime::IsWorkDay([[maybe_unused]] Country country) const
 {
     return !wxDateTimeHolidayAuthority::IsHoliday(*this);
 }

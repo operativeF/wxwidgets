@@ -2998,7 +2998,7 @@ bool wxCairoContext::SetAntialiasMode(wxAntialiasMode antialias)
     return true;
 }
 
-bool wxCairoContext::SetInterpolationQuality(wxInterpolationQuality WXUNUSED(interpolation))
+bool wxCairoContext::SetInterpolationQuality([[maybe_unused]] wxInterpolationQuality interpolation)
 {
     // placeholder
     return false;
@@ -3385,7 +3385,7 @@ wxCairoRenderer::wxCreateFont(double sizeInPixels,
 
 wxGraphicsFont
 wxCairoRenderer::CreateFontAtDPI(const wxFont& font,
-                                 const wxRealPoint& WXUNUSED(dpi),
+                                 [[maybe_unused]] const wxRealPoint& dpi,
                                  const wxColour& col)
 {
     return wxCreateFont(font, col);

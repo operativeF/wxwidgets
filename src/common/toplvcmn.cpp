@@ -495,7 +495,7 @@ void wxTopLevelWindowBase::DoUpdateWindowUI(wxUpdateUIEvent& event)
     }
 }
 
-void wxTopLevelWindowBase::RequestUserAttention(unsigned int WXUNUSED(flags))
+void wxTopLevelWindowBase::RequestUserAttention([[maybe_unused]] unsigned int flags)
 {
     // it's probably better than do nothing, isn't it?
     Raise();

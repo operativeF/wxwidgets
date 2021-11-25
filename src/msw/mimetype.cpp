@@ -680,7 +680,7 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
 
 bool wxFileTypeImpl::SetCommand(const std::string& cmd,
                                 const std::string& verb,
-                                bool WXUNUSED(overwriteprompt))
+                                [[maybe_unused]] bool overwriteprompt)
 {
     wxCHECK_MSG( !m_ext.empty() && !verb.empty(), false,
                  "SetCommand() needs an extension and a verb" );

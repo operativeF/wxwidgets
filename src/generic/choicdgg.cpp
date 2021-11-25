@@ -51,9 +51,9 @@ std::string wxGetSingleChoice( const std::string& message,
                             const std::string& caption,
                             const std::vector<std::string>& choices,
                             wxWindow *parent,
-                            int WXUNUSED(x), int WXUNUSED(y),
-                            bool WXUNUSED(centre),
-                            int WXUNUSED(width), int WXUNUSED(height),
+                            [[maybe_unused]] int x, [[maybe_unused]] int y,
+                            [[maybe_unused]] bool centre,
+                            [[maybe_unused]] int width, [[maybe_unused]] int height,
                             int initialSelection)
 {
     wxSingleChoiceDialog dialog(parent, message, caption, choices);
@@ -66,9 +66,9 @@ int wxGetSingleChoiceIndex( const std::string& message,
                             const std::string& caption,
                             const std::vector<std::string>& choices,
                             wxWindow *parent,
-                            int WXUNUSED(x), int WXUNUSED(y),
-                            bool WXUNUSED(centre),
-                            int WXUNUSED(width), int WXUNUSED(height),
+                            [[maybe_unused]] int x, [[maybe_unused]] int y,
+                            [[maybe_unused]] bool centre,
+                            [[maybe_unused]] int width, [[maybe_unused]] int height,
                             int initialSelection)
 {
     wxSingleChoiceDialog dialog(parent, message, caption, choices);
@@ -82,9 +82,9 @@ void *wxGetSingleChoiceData( const std::string& message,
                              const std::vector<std::string>& choices,
                              void **client_data,
                              wxWindow *parent,
-                             int WXUNUSED(x), int WXUNUSED(y),
-                             bool WXUNUSED(centre),
-                             int WXUNUSED(width), int WXUNUSED(height),
+                             [[maybe_unused]] int x, [[maybe_unused]] int y,
+                             [[maybe_unused]] bool centre,
+                             [[maybe_unused]] int width, [[maybe_unused]] int height,
                              int initialSelection)
 {
     wxSingleChoiceDialog dialog(parent, message, caption, choices,
@@ -99,9 +99,9 @@ int wxGetSelectedChoices(std::vector<int>& selections,
                          const std::string& caption,
                          const std::vector<std::string>& choices,
                          wxWindow *parent,
-                         int WXUNUSED(x), int WXUNUSED(y),
-                         bool WXUNUSED(centre),
-                         int WXUNUSED(width), int WXUNUSED(height))
+                         [[maybe_unused]] int x, [[maybe_unused]] int y,
+                         [[maybe_unused]] bool centre,
+                         [[maybe_unused]] int width, [[maybe_unused]] int height)
 {
     wxMultiChoiceDialog dialog(parent, message, caption, choices);
 

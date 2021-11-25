@@ -127,7 +127,7 @@ DWORD wxChoice::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 #endif
 
 wxVisualAttributes
-wxChoice::GetClassDefaultAttributes(wxWindowVariant WXUNUSED(variant))
+wxChoice::GetClassDefaultAttributes([[maybe_unused]] wxWindowVariant variant)
 {
     // it is important to return valid values for all attributes from here,
     // GetXXX() below rely on this
@@ -665,7 +665,7 @@ WXLRESULT wxChoice::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
     return wxWindow::MSWWindowProc(nMsg, wParam, lParam);
 }
 
-bool wxChoice::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxChoice::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     /*
         The native control provides a great variety in the events it sends in

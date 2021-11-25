@@ -1271,10 +1271,10 @@ void wxTopLevelWindowMSW::OnActivate(wxActivateEvent& event)
 
 // the DialogProc for all wxWidgets dialogs
 INT_PTR APIENTRY
-wxDlgProc(WXHWND WXUNUSED(hDlg),
+wxDlgProc([[maybe_unused]] WXHWND hDlg,
           WXUINT message,
-          WXWPARAM WXUNUSED(wParam),
-          WXLPARAM WXUNUSED(lParam))
+          [[maybe_unused]] WXWPARAM wParam,
+          [[maybe_unused]] WXLPARAM lParam)
 {
     switch ( message )
     {

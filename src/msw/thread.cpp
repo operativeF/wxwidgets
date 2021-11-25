@@ -116,7 +116,7 @@ static bool gs_waitingForThread = false;
 // wxCriticalSection
 // ----------------------------------------------------------------------------
 
-wxCriticalSection::wxCriticalSection( wxCriticalSectionType WXUNUSED(critSecType) )
+wxCriticalSection::wxCriticalSection( [[maybe_unused]] wxCriticalSectionType critSecType )
 {
     static_assert(sizeof(CRITICAL_SECTION) <= sizeof(wxCritSectBuffer),
                   "Critical section buffer too small.");

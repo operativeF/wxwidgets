@@ -407,7 +407,7 @@ wxWindow *wxWindowMSW::FindItemByHWND(WXHWND hWnd, bool controlOnly) const
 }
 
 // Default command handler
-bool wxWindowMSW::MSWCommand(WXUINT WXUNUSED(param), WXWORD WXUNUSED(id))
+bool wxWindowMSW::MSWCommand([[maybe_unused]] WXUINT param, [[maybe_unused]] WXWORD id)
 {
     return false;
 }
@@ -1212,8 +1212,8 @@ wxLayoutDirection wxWindowMSW::GetLayoutDirection() const
 
 wxCoord
 wxWindowMSW::AdjustForLayoutDirection(wxCoord x,
-                                      wxCoord WXUNUSED(width),
-                                      wxCoord WXUNUSED(widthTotal)) const
+                                      [[maybe_unused]] wxCoord width,
+                                      [[maybe_unused]] wxCoord widthTotal) const
 {
     // Win32 mirrors the coordinates of RTL windows automatically, so don't
     // redo it ourselves
@@ -1309,7 +1309,7 @@ void wxWindowMSW::DissociateHandle()
 }
 
 
-bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC WXUNUSED(wndProc))
+bool wxCheckWindowWndProc(WXHWND hWnd, [[maybe_unused]] WXWNDPROC wndProc)
 {
     const std::string str(wxGetWindowClass(hWnd));
 
@@ -2641,7 +2641,7 @@ bool wxWindowMSW::MSWTranslateMessage(WXMSG* pMsg)
 #endif // wxUSE_ACCEL
 }
 
-bool wxWindowMSW::MSWShouldPreProcessMessage(WXMSG* WXUNUSED(msg))
+bool wxWindowMSW::MSWShouldPreProcessMessage([[maybe_unused]] WXMSG* msg)
 {
     // We don't have any reason to not preprocess messages at this level.
     return true;
@@ -4095,9 +4095,9 @@ bool wxWindowMSW::HandleTooltipNotify(WXUINT code,
 
 #endif // wxUSE_TOOLTIPS
 
-bool wxWindowMSW::MSWOnNotify(int WXUNUSED(idCtrl),
+bool wxWindowMSW::MSWOnNotify([[maybe_unused]] int idCtrl,
                               WXLPARAM lParam,
-                              WXLPARAM* WXUNUSED(result))
+                              [[maybe_unused]] WXLPARAM* result)
 {
 #if wxUSE_TOOLTIPS
     if ( m_tooltip )
@@ -4194,7 +4194,7 @@ bool wxWindowMSW::HandleDestroy()
 
 bool wxWindowMSW::HandleActivate(int state,
                                  bool minimized,
-                                 WXHWND WXUNUSED(activate))
+                                 [[maybe_unused]] WXHWND activate)
 {
     if ( minimized )
     {
@@ -4315,7 +4315,7 @@ std::string wxWindowMSW::GetLabel() const
 // miscellaneous
 // ---------------------------------------------------------------------------
 
-bool wxWindowMSW::HandleShow(bool show, int WXUNUSED(status))
+bool wxWindowMSW::HandleShow(bool show, [[maybe_unused]] int status)
 {
     wxShowEvent event(GetId(), show);
     event.SetEventObject(this);
@@ -4323,7 +4323,7 @@ bool wxWindowMSW::HandleShow(bool show, int WXUNUSED(status))
     return HandleWindowEvent(event);
 }
 
-bool wxWindowMSW::HandleInitDialog(WXHWND WXUNUSED(hWndFocus))
+bool wxWindowMSW::HandleInitDialog([[maybe_unused]] WXHWND hWndFocus)
 {
     wxInitDialogEvent event(GetId());
     event.SetEventObject(this);
@@ -4375,9 +4375,9 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
 }
 
 
-bool wxWindowMSW::HandleSetCursor(WXHWND WXUNUSED(hWnd),
+bool wxWindowMSW::HandleSetCursor([[maybe_unused]] WXHWND hWnd,
                                   short nHitTest,
-                                  int WXUNUSED(mouseMsg))
+                                  [[maybe_unused]] int mouseMsg)
 {
     // the logic is as follows:
     //  0. if we're busy, set the busy cursor (even for non client elements)
@@ -4462,7 +4462,7 @@ bool wxWindowMSW::HandleSetCursor(WXHWND WXUNUSED(hWnd),
 }
 
 bool wxWindowMSW::HandlePower(WXWPARAM wParam,
-                              WXLPARAM WXUNUSED(lParam),
+                              [[maybe_unused]] WXLPARAM lParam,
                               bool *vetoed)
 {
     wxEventType evtType;
@@ -5635,7 +5635,7 @@ void wxWindowMSW::EndRepositioningChildren()
 
 #endif // wxUSE_DEFERRED_SIZING
 
-bool wxWindowMSW::HandleSize(int WXUNUSED(w), int WXUNUSED(h), WXUINT wParam)
+bool wxWindowMSW::HandleSize([[maybe_unused]] int w, [[maybe_unused]] int h, WXUINT wParam)
 {
     // when we resize this window, its children are probably going to be
     // repositioned as well, prepare to use DeferWindowPos() for them

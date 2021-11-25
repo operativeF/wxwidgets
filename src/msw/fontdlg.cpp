@@ -39,7 +39,7 @@ static
 UINT_PTR CALLBACK
 wxFontDialogHookProc(WXHWND hwnd,
                      WXUINT uiMsg,
-                     WXWPARAM WXUNUSED(wParam),
+                     [[maybe_unused]] WXWPARAM wParam,
                      WXLPARAM lParam)
 {
     if ( uiMsg == WM_INITDIALOG )

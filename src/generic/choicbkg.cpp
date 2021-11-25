@@ -104,12 +104,12 @@ std::string wxChoicebook::GetPageText(size_t n) const
     return GetChoiceCtrl()->GetString(n);
 }
 
-int wxChoicebook::GetPageImage(size_t WXUNUSED(n)) const
+int wxChoicebook::GetPageImage([[maybe_unused]] size_t n) const
 {
     return wxNOT_FOUND;
 }
 
-bool wxChoicebook::SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId))
+bool wxChoicebook::SetPageImage([[maybe_unused]] size_t n, [[maybe_unused]] int imageId)
 {
     // fail silently, the code may be written to use one of several book
     // classes and call SetPageImage() unconditionally, it's better to just

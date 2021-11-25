@@ -407,16 +407,16 @@ private:
 // on Windows, we should use %s and %c regardless of the build:
 class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
 {
-    void HandleString(CharType WXUNUSED(conv),
-                              SizeModifier WXUNUSED(size),
+    void HandleString([[maybe_unused]] CharType conv,
+                              [[maybe_unused]] SizeModifier size,
                               CharType& outConv, SizeModifier& outSize) override
     {
         outConv = 's';
         outSize = Size_Default;
     }
 
-    void HandleChar(CharType WXUNUSED(conv),
-                            SizeModifier WXUNUSED(size),
+    void HandleChar([[maybe_unused]] CharType conv,
+                            [[maybe_unused]] SizeModifier size,
                             CharType& outConv, SizeModifier& outSize) override
     {
         outConv = 'c';
@@ -431,16 +431,16 @@ class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
 #if !wxUSE_UTF8_LOCALE_ONLY
 class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
 {
-    virtual void HandleString(CharType WXUNUSED(conv),
-                              SizeModifier WXUNUSED(size),
+    virtual void HandleString([[maybe_unused]] CharType conv,
+                              [[maybe_unused]] SizeModifier size,
                               CharType& outConv, SizeModifier& outSize) override
     {
         outConv = 's';
         outSize = Size_Long;
     }
 
-    virtual void HandleChar(CharType WXUNUSED(conv),
-                            SizeModifier WXUNUSED(size),
+    virtual void HandleChar([[maybe_unused]] CharType conv,
+                            [[maybe_unused]] SizeModifier size,
                             CharType& outConv, SizeModifier& outSize) override
     {
         outConv = 'c';
@@ -454,16 +454,16 @@ class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
 #if wxUSE_UNICODE_UTF8
 class wxPrintfFormatConverterUtf8 : public wxFormatConverterBase<char>
 {
-    virtual void HandleString(CharType WXUNUSED(conv),
-                              SizeModifier WXUNUSED(size),
+    virtual void HandleString([[maybe_unused]] CharType conv,
+                              [[maybe_unused]] SizeModifier size,
                               CharType& outConv, SizeModifier& outSize) override
     {
         outConv = 's';
         outSize = Size_Default;
     }
 
-    virtual void HandleChar(CharType WXUNUSED(conv),
-                            SizeModifier WXUNUSED(size),
+    virtual void HandleChar([[maybe_unused]] CharType conv,
+                            [[maybe_unused]] SizeModifier size,
                             CharType& outConv, SizeModifier& outSize) override
     {
         // chars are represented using wchar_t in both builds, so this is

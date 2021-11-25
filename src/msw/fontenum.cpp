@@ -241,7 +241,7 @@ bool wxFontEnumerator::EnumerateEncodings(const std::string& facename)
 // ----------------------------------------------------------------------------
 
 int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
-                                  DWORD WXUNUSED(dwStyle), WXLPARAM lParam)
+                                  [[maybe_unused]] DWORD dwStyle, WXLPARAM lParam)
 {
 
     // we used to process TrueType fonts only, but there doesn't seem to be any

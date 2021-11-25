@@ -69,7 +69,7 @@ wxFSFile* wxFilterFSHandler::OpenFile(
                        );
 }
 
-std::string wxFilterFSHandler::FindFirst(const std::string& WXUNUSED(spec), unsigned int WXUNUSED(flags))
+std::string wxFilterFSHandler::FindFirst([[maybe_unused]] const std::string& spec, [[maybe_unused]] unsigned int flags)
 {
     return {};
 }

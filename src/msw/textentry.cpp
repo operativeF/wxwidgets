@@ -758,7 +758,7 @@ long wxTextEntry::GetLastPosition() const
     return ::SendMessageW(GetEditHwnd(), EM_LINELENGTH, 0, 0);
 }
 
-void wxTextEntry::DoSetSelection(long from, long to, unsigned int WXUNUSED(flags))
+void wxTextEntry::DoSetSelection(long from, long to, [[maybe_unused]] unsigned int flags)
 {
     // if from and to are both -1, it means (in wxWidgets) that all text should
     // be selected, translate this into Windows convention

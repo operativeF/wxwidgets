@@ -1203,7 +1203,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
 }
 
 bool wxBMPHandler::LoadFile(wxImage *image, wxInputStream& stream,
-                            bool verbose, int WXUNUSED(index))
+                            bool verbose, [[maybe_unused]] int index)
 {
     // Read a single DIB fom the file:
     return LoadDib(image, stream, verbose, true/*isBmp*/);
@@ -1712,7 +1712,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxANIHandler, wxCURHandler);
 #if wxUSE_STREAMS
 
 bool wxANIHandler::LoadFile(wxImage *image, wxInputStream& stream,
-                            bool WXUNUSED(verbose), int index)
+                            [[maybe_unused]] bool verbose, int index)
 {
     wxANIDecoder decoder;
     if (!decoder.Load(stream))

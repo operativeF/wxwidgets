@@ -58,7 +58,7 @@ private:
     }
 
     const wxItemAttr*
-    GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const override
+    GetItemAttr([[maybe_unused]] DWORD_PTR dwItemSpec) const override
     {
         // We use the same attribute for all items for now.
         return &m_attr;

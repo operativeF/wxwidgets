@@ -152,7 +152,7 @@ int wxAuiGenericToolBarArt::GetTextOrientation()
 
 void wxAuiGenericToolBarArt::DrawBackground(
                                     wxDC& dc,
-                                    wxWindow* WXUNUSED(wnd),
+                                    [[maybe_unused]] wxWindow* wnd,
                                     const wxRect& _rect)
 {
     wxRect rect = _rect;
@@ -176,7 +176,7 @@ void wxAuiGenericToolBarArt::DrawBackground(
 }
 
 void wxAuiGenericToolBarArt::DrawPlainBackground(wxDC& dc,
-                                                   wxWindow* WXUNUSED(wnd),
+                                                   [[maybe_unused]] wxWindow* wnd,
                                                    const wxRect& rect)
 {
     dc.SetBrush(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE));
@@ -187,7 +187,7 @@ void wxAuiGenericToolBarArt::DrawPlainBackground(wxDC& dc,
 
 void wxAuiGenericToolBarArt::DrawLabel(
                                     wxDC& dc,
-                                    wxWindow* WXUNUSED(wnd),
+                                    [[maybe_unused]] wxWindow* wnd,
                                     const wxAuiToolBarItem& item,
                                     const wxRect& rect)
 {
@@ -446,7 +446,7 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
 
 void wxAuiGenericToolBarArt::DrawControlLabel(
                                     wxDC& dc,
-                                    wxWindow* WXUNUSED(wnd),
+                                    [[maybe_unused]] wxWindow* wnd,
                                     const wxAuiToolBarItem& item,
                                     const wxRect& rect)
 {
@@ -488,7 +488,7 @@ void wxAuiGenericToolBarArt::DrawControlLabel(
 
 wxSize wxAuiGenericToolBarArt::GetLabelSize(
                                         wxDC& dc,
-                                        wxWindow* WXUNUSED(wnd),
+                                        [[maybe_unused]] wxWindow* wnd,
                                         const wxAuiToolBarItem& item)
 {
     dc.SetFont(m_font);
@@ -636,7 +636,7 @@ void wxAuiGenericToolBarArt::DrawGripper(wxDC& dc,
 }
 
 void wxAuiGenericToolBarArt::DrawOverflowButton(wxDC& dc,
-                                          wxWindow* WXUNUSED(wnd),
+                                          [[maybe_unused]] wxWindow* wnd,
                                           const wxRect& rect,
                                           int state)
 {

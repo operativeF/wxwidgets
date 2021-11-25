@@ -1307,7 +1307,7 @@ public :
     void* GetNativePath() const override;
 
     // give the native path returned by GetNativePath() back (there might be some deallocations necessary)
-    void UnGetNativePath(void* WXUNUSED(p)) const override {}
+    void UnGetNativePath([[maybe_unused]] void* p) const override {}
 
     // transforms each point of this path by the matrix
     void Transform(const wxGraphicsMatrixData* matrix) override;
@@ -2329,9 +2329,9 @@ public:
     }
 
     HRESULT STDMETHODCALLTYPE CopyPixels(
-        const WICRect* WXUNUSED(prc),
-        WXUINT WXUNUSED(stride),
-        WXUINT WXUNUSED(bufferSize),
+        [[maybe_unused]] const WICRect* prc,
+        [[maybe_unused]] WXUINT stride,
+        [[maybe_unused]] WXUINT bufferSize,
         BYTE *buffer) override
     {
         // patterns are encoded in a bit map of size 8 x 8
@@ -3353,7 +3353,7 @@ public:
     virtual void DrawBitmap(ID2D1Bitmap* bitmap,
         const D2D1_RECT_F& srcRect, const D2D1_RECT_F& destRect,
         wxInterpolationQuality interpolationQuality,
-        wxCompositionMode WXUNUSED(compositionMode))
+        [[maybe_unused]] wxCompositionMode compositionMode)
     {
         m_nativeResource->DrawBitmap(
             bitmap,
@@ -5060,7 +5060,7 @@ std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxMemoryDC
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxPrinterDC& WXUNUSED(dc))
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext([[maybe_unused]] const wxPrinterDC& dc)
 {
     wxFAIL_MSG("not implemented");
     return nullptr;
@@ -5068,7 +5068,7 @@ std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxPrinterD
 #endif
 
 #if wxUSE_ENH_METAFILE
-std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxEnhMetaFileDC& WXUNUSED(dc))
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext([[maybe_unused]] const wxEnhMetaFileDC& dc)
 {
     wxFAIL_MSG("not implemented");
     return nullptr;

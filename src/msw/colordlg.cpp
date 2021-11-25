@@ -95,8 +95,8 @@ struct COLORINFO
 UINT_PTR CALLBACK
 wxColourDialogHookProc(WXHWND hwnd,
                        WXUINT uiMsg,
-                       WXWPARAM WXUNUSED(wParam),
-                       WXLPARAM WXUNUSED(lParam))
+                       [[maybe_unused]] WXWPARAM wParam,
+                       [[maybe_unused]] WXLPARAM lParam)
 {
     switch ( uiMsg )
     {

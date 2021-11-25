@@ -282,7 +282,7 @@ wxString wxStandardPaths::GetPluginsDir() const
 
 wxString
 wxStandardPaths::MakeConfigFileName(const wxString& basename,
-                                    ConfigFileConv WXUNUSED(conv)) const
+                                    [[maybe_unused]] ConfigFileConv conv) const
 {
     wxFileName fn({}, basename);
     fn.SetExt("ini");

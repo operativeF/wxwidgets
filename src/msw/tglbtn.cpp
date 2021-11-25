@@ -153,7 +153,7 @@ void wxToggleButton::Command(wxCommandEvent& event)
     ProcessCommand(event);
 }
 
-bool wxToggleButton::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxToggleButton::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     if ( param != BN_CLICKED && param != BN_DBLCLK )
         return false;

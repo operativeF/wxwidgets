@@ -334,9 +334,9 @@ void wxBookCtrlBase::OnHelp(wxHelpEvent& event)
 bool
 wxBookCtrlBase::InsertPage(size_t nPage,
                            wxWindow *page,
-                           const std::string& WXUNUSED(text),
-                           bool WXUNUSED(bSelect),
-                           int WXUNUSED(imageId))
+                           [[maybe_unused]] const std::string& text,
+                           [[maybe_unused]] bool bSelect,
+                           [[maybe_unused]] int imageId)
 {
     wxCHECK_MSG( page || AllowNullPage(), false,
                  "NULL page in wxBookCtrlBase::InsertPage()" );

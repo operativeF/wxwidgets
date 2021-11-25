@@ -450,7 +450,7 @@ WXHANDLE wxPen::GetResourceHandle() const
     return M_PENDATA ? M_PENDATA->GetHPEN() : nullptr;
 }
 
-bool wxPen::FreeResource(bool WXUNUSED(force))
+bool wxPen::FreeResource([[maybe_unused]] bool force)
 {
     if(M_PENDATA)
     {

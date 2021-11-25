@@ -599,7 +599,7 @@ wxComboCtrl* wxComboPopup::GetComboCtrl() const
 
 wxSize wxComboPopup::GetAdjustedSize( int minWidth,
                                       int prefHeight,
-                                      int WXUNUSED(maxHeight) )
+                                      [[maybe_unused]] int maxHeight )
 {
     return {minWidth, prefHeight};
 }
@@ -636,12 +636,12 @@ void wxComboPopup::OnComboDoubleClick()
 {
 }
 
-void wxComboPopup::SetStringValue( const std::string& WXUNUSED(value) )
+void wxComboPopup::SetStringValue( [[maybe_unused]] const std::string& value )
 {
 }
 
-bool wxComboPopup::FindItem(std::string_view WXUNUSED(item),
-                            std::string* WXUNUSED(trueItem))
+bool wxComboPopup::FindItem([[maybe_unused]] std::string_view item,
+                            [[maybe_unused]] std::string* trueItem)
 {
     return true;
 }
@@ -1841,7 +1841,7 @@ bool wxComboCtrlBase::HandleButtonMouseEvent( wxMouseEvent& event,
 
 // returns true if event was consumed or filtered
 bool wxComboCtrlBase::PreprocessMouseEvent( wxMouseEvent& event,
-                                            unsigned int WXUNUSED(flags) )
+                                            [[maybe_unused]] unsigned int flags )
 {
     const wxMilliClock_t t = ::wxGetLocalTimeMillis();
     const int evtType = event.GetEventType();
@@ -2369,7 +2369,7 @@ void wxComboCtrlBase::ShowPopup()
 
 
 #ifdef __WXMAC__
-bool wxComboCtrlBase::AnimateShow( const wxRect& rect, int WXUNUSED(flags) )
+bool wxComboCtrlBase::AnimateShow( const wxRect& rect, [[maybe_unused]] int flags )
 {
     // Overridden AnimateShow() will call Raise() and ShowWithEffect() so do
     // here to avoid duplication. Raise and Show are needed for some contained
@@ -2384,13 +2384,13 @@ bool wxComboCtrlBase::AnimateShow( const wxRect& rect, int WXUNUSED(flags) )
     return true;
 }
 #else
-bool wxComboCtrlBase::AnimateShow( const wxRect& WXUNUSED(rect), unsigned int WXUNUSED(flags) )
+bool wxComboCtrlBase::AnimateShow( [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags )
 {
     return true;
 }
 #endif
 
-void wxComboCtrlBase::DoShowPopup( const wxRect& rect, unsigned int WXUNUSED(flags) )
+void wxComboCtrlBase::DoShowPopup( const wxRect& rect, [[maybe_unused]] unsigned int flags )
 {
     wxWindow* winPopup = m_winPopup;
 

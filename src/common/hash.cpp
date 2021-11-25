@@ -312,7 +312,7 @@ const wxHashTable& wxHashTable::operator=( const wxHashTable& table )
     return *this;
 }
 
-void wxHashTable::DoCopy( const wxHashTable& WXUNUSED(table) )
+void wxHashTable::DoCopy( [[maybe_unused]] const wxHashTable& table )
 {
     Create( m_keyType, m_size );
 

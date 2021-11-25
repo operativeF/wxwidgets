@@ -122,7 +122,7 @@ STDMETHODIMP wxIDropSource::GiveFeedback(DWORD dwEffect)
 
 // ctors
 
-wxDropSource::wxDropSource(wxWindow* WXUNUSED(win),
+wxDropSource::wxDropSource([[maybe_unused]] wxWindow* win,
                            const wxCursor &cursorCopy,
                            const wxCursor &cursorMove,
                            const wxCursor &cursorStop)
@@ -133,7 +133,7 @@ wxDropSource::wxDropSource(wxWindow* WXUNUSED(win),
 }
 
 wxDropSource::wxDropSource(wxDataObject& data,
-                           wxWindow* WXUNUSED(win),
+                           [[maybe_unused]] wxWindow* win,
                            const wxCursor &cursorCopy,
                            const wxCursor &cursorMove,
                            const wxCursor &cursorStop)

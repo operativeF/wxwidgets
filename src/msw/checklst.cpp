@@ -195,7 +195,7 @@ bool wxCheckListBox::Create(wxWindow *parent,
 // --------------------
 
 // create a check list box item
-std::unique_ptr<wxOwnerDrawn> wxCheckListBox::CreateLboxItem(size_t WXUNUSED(n))
+std::unique_ptr<wxOwnerDrawn> wxCheckListBox::CreateLboxItem([[maybe_unused]] size_t n)
 {
     return std::make_unique<wxCheckListBoxItem>(this);
 }

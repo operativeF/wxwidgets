@@ -338,7 +338,7 @@ void wxFileDialog::MSWOnSelChange(WXHWND hDlg)
     UpdateExtraControlUI();
 }
 
-void wxFileDialog::MSWOnTypeChange(WXHWND WXUNUSED(hDlg), int nFilterIndex)
+void wxFileDialog::MSWOnTypeChange([[maybe_unused]] WXHWND hDlg, int nFilterIndex)
 {
     // Filter indices are 1-based, while we want to use 0-based index, as
     // usual. However the input index can apparently also be 0 in some

@@ -466,7 +466,7 @@ void wxWrapSizer::FinishRow(size_t n,
     AdjustLastRowItemProp(n, itemLast);
 }
 
-void wxWrapSizer::RepositionChildren(wxSize WXUNUSED(minSize))
+void wxWrapSizer::RepositionChildren([[maybe_unused]] wxSize minSize)
 {
     // First restore any proportions we may have changed and remove the old rows
     ClearRows();

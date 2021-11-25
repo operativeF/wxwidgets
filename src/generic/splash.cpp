@@ -145,7 +145,7 @@ wxSplashScreenWindow::wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* par
     #define USE_PALETTE_IN_SPLASH
 #endif
 
-static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, int WXUNUSED(x), int WXUNUSED(y))
+static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, [[maybe_unused]] int x, [[maybe_unused]] int y)
 {
     wxMemoryDC dcMem;
 

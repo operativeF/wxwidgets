@@ -851,7 +851,7 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
 }
 
 bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
-                            wxODAction WXUNUSED(act), wxODStatus stat)
+                            [[maybe_unused]] wxODAction act, wxODStatus stat)
 {
     const MenuDrawData* data = MenuDrawData::Get(GetMenu());
 

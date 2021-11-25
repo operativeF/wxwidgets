@@ -77,7 +77,7 @@ using wx_src_ptr = wx_source_mgr*;
 extern "C"
 {
 
-CPP_METHODDEF(void) wx_init_source ( j_decompress_ptr WXUNUSED(cinfo) )
+CPP_METHODDEF(void) wx_init_source ( [[maybe_unused]] j_decompress_ptr cinfo )
 {
 }
 
@@ -155,7 +155,7 @@ CPP_METHODDEF(void) wx_error_exit (j_common_ptr cinfo)
  * simply using NULL for cinfo->err->output_message because it's called
  * unconditionally from within libjpeg when there's "garbage input".
  */
-CPP_METHODDEF(void) wx_ignore_message (j_common_ptr WXUNUSED(cinfo))
+CPP_METHODDEF(void) wx_ignore_message ([[maybe_unused]] j_common_ptr cinfo)
 {
 }
 
@@ -198,7 +198,7 @@ static inline void wx_cmyk_to_rgb(unsigned char* rgb, const unsigned char* cmyk)
     rgb[2] = (unsigned char)((c > 255) ? 0 : (255 - c));
 }
 
-bool wxJPEGHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int WXUNUSED(index) )
+bool wxJPEGHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, [[maybe_unused]] int index )
 {
     wxCHECK_MSG( image, false, "NULL image pointer" );
 

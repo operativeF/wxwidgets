@@ -618,7 +618,7 @@ bool wxMkdir(const std::string& dir, int perm)
     return true;
 }
 
-bool wxRmdir(const std::string& dir, unsigned int WXUNUSED(flags))
+bool wxRmdir(const std::string& dir, [[maybe_unused]] unsigned int flags)
 {
 #if defined(__VMS__)
     return false; //to be changed since rmdir exists in VMS7.x

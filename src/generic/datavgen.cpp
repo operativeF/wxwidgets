@@ -1340,7 +1340,7 @@ std::string wxDataViewBitmapRenderer::GetAccessibleDescription() const
 }
 #endif // wxUSE_ACCESSIBILITY
 
-bool wxDataViewBitmapRenderer::Render( wxRect cell, wxDC *dc, int WXUNUSED(state) )
+bool wxDataViewBitmapRenderer::Render( wxRect cell, wxDC *dc, [[maybe_unused]] int state )
 {
     if (m_bitmap.IsOk())
         dc->DrawBitmap( m_bitmap, cell.x, cell.y, true /* use mask */ );
@@ -1396,7 +1396,7 @@ std::string wxDataViewToggleRenderer::GetAccessibleDescription() const
 }
 #endif // wxUSE_ACCESSIBILITY
 
-bool wxDataViewToggleRenderer::Render( wxRect cell, wxDC *dc, int WXUNUSED(state) )
+bool wxDataViewToggleRenderer::Render( wxRect cell, wxDC *dc, [[maybe_unused]] int state )
 {
     int flags = 0;
     if (m_toggle)
@@ -1423,7 +1423,7 @@ bool wxDataViewToggleRenderer::Render( wxRect cell, wxDC *dc, int WXUNUSED(state
     return true;
 }
 
-bool wxDataViewToggleRenderer::WXActivateCell(const wxRect& WXUNUSED(cellRect),
+bool wxDataViewToggleRenderer::WXActivateCell([[maybe_unused]] const wxRect& cellRect,
                                               wxDataViewModel *model,
                                               const wxDataViewItem& item,
                                               unsigned int col,
@@ -1484,7 +1484,7 @@ std::string wxDataViewProgressRenderer::GetAccessibleDescription() const
 #endif // wxUSE_ACCESSIBILITY
 
 bool
-wxDataViewProgressRenderer::Render(wxRect rect, wxDC *dc, int WXUNUSED(state))
+wxDataViewProgressRenderer::Render(wxRect rect, wxDC *dc, [[maybe_unused]] int state)
 {
     const wxDataViewItemAttr& attr = GetAttr();
     if ( attr.HasColour() )
@@ -1655,7 +1655,7 @@ public:
         delete m_hint;
     }
 
-    bool GiveFeedback( wxDragResult WXUNUSED(effect) ) override
+    bool GiveFeedback( [[maybe_unused]] wxDragResult effect ) override
     {
         wxPoint pos = wxGetMousePosition();
 

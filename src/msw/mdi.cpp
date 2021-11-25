@@ -1140,7 +1140,7 @@ WXLRESULT wxMDIChildFrame::MSWWindowProc(WXUINT message,
     return rc;
 }
 
-bool wxMDIChildFrame::HandleMDIActivate(long WXUNUSED(activate),
+bool wxMDIChildFrame::HandleMDIActivate([[maybe_unused]] long activate,
                                         WXHWND hwndAct,
                                         WXHWND hwndDeact)
 {

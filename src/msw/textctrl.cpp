@@ -194,17 +194,17 @@ public:
     wxTextCtrlOleCallback(const wxTextCtrlOleCallback&) = delete;
 	wxTextCtrlOleCallback& operator=(const wxTextCtrlOleCallback&) = delete;
 
-    wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP DeleteObject(LPOLEOBJECT WXUNUSED(oleobj)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetClipboardData(CHARRANGE* WXUNUSED(chrg), DWORD WXUNUSED(reco), LPDATAOBJECT* WXUNUSED(dataobj)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetDragDropEffect(BOOL WXUNUSED(drag), DWORD WXUNUSED(grfKeyState), LPDWORD WXUNUSED(effect)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetInPlaceContext(LPOLEINPLACEFRAME* WXUNUSED(frame), LPOLEINPLACEUIWINDOW* WXUNUSED(doc), LPOLEINPLACEFRAMEINFO WXUNUSED(frameInfo)) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP ContextSensitiveHelp([[maybe_unused]] BOOL enterMode) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP DeleteObject([[maybe_unused]] LPOLEOBJECT oleobj) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetClipboardData([[maybe_unused]] CHARRANGE* chrg, [[maybe_unused]] DWORD reco, [[maybe_unused]] LPDATAOBJECT* dataobj) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetDragDropEffect([[maybe_unused]] BOOL drag, [[maybe_unused]] DWORD grfKeyState, [[maybe_unused]] LPDWORD effect) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetInPlaceContext([[maybe_unused]] LPOLEINPLACEFRAME* frame, [[maybe_unused]] LPOLEINPLACEUIWINDOW* doc, [[maybe_unused]] LPOLEINPLACEFRAMEINFO frameInfo) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetNewStorage(LPSTORAGE *WXUNUSED(stg)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP QueryAcceptData(LPDATAOBJECT WXUNUSED(dataobj), CLIPFORMAT* WXUNUSED(format), DWORD WXUNUSED(reco), BOOL WXUNUSED(really), HGLOBAL WXUNUSED(hMetaPict)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP QueryInsertObject(LPCLSID WXUNUSED(clsid), LPSTORAGE WXUNUSED(stg), LONG WXUNUSED(cp)) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP ShowContainerUI(BOOL WXUNUSED(show)) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP QueryAcceptData([[maybe_unused]] LPDATAOBJECT dataobj, [[maybe_unused]] CLIPFORMAT* format, [[maybe_unused]] DWORD reco, [[maybe_unused]] BOOL really, [[maybe_unused]] HGLOBAL hMetaPict) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP QueryInsertObject([[maybe_unused]] LPCLSID clsid, [[maybe_unused]] LPSTORAGE stg, [[maybe_unused]] LONG cp) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP ShowContainerUI([[maybe_unused]] BOOL show) override { return E_NOTIMPL; }
 
-    wxSTDMETHODIMP GetContextMenu(WXWORD WXUNUSED(seltype), LPOLEOBJECT WXUNUSED(oleobj), CHARRANGE* WXUNUSED(chrg), WXHMENU *menu) override
+    wxSTDMETHODIMP GetContextMenu([[maybe_unused]] WXWORD seltype, [[maybe_unused]] LPOLEOBJECT oleobj, [[maybe_unused]] CHARRANGE* chrg, WXHMENU *menu) override
     {
         // 'menu' will be shown and destroyed by the caller. We need to keep
         // its wx counterpart, the wxMenu instance, around until it is
@@ -2271,7 +2271,7 @@ bool wxTextCtrl::SendUpdateEvent()
     return SendTextUpdatedEvent();
 }
 
-bool wxTextCtrl::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxTextCtrl::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     switch ( param )
     {

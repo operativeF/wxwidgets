@@ -75,7 +75,7 @@ public:
         m_dc.SetFont(attr.font);
     }
 
-    void OnAttrEnd(const Attr& WXUNUSED(attr)) override
+    void OnAttrEnd([[maybe_unused]] const Attr& attr) override
     {
         m_dc.SetFont(GetFont());
     }

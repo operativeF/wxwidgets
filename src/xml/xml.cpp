@@ -677,7 +677,7 @@ static void StartElementHnd(void *userData, const char *name, const char **atts)
     ctx->node = node;
 }
 
-static void EndElementHnd(void *userData, const char* WXUNUSED(name))
+static void EndElementHnd(void *userData, [[maybe_unused]] const char* name)
 {
     wxXmlParsingContext *ctx = (wxXmlParsingContext*)userData;
 
@@ -774,7 +774,7 @@ static void PIHnd(void *userData, const char *target, const char *data)
 
 static void StartDoctypeHnd(void *userData, const char *doctypeName,
                             const char *sysid, const char *pubid,
-                            int WXUNUSED(has_internal_subset))
+                            [[maybe_unused]] int has_internal_subset)
 {
     wxXmlParsingContext *ctx = (wxXmlParsingContext*)userData;
 

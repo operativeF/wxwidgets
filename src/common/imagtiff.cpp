@@ -135,9 +135,9 @@ extern "C"
 {
 
 static tsize_t TIFFLINKAGEMODE
-wxTIFFNullProc(thandle_t WXUNUSED(handle),
-          tdata_t WXUNUSED(buf),
-          tsize_t WXUNUSED(size))
+wxTIFFNullProc([[maybe_unused]] thandle_t handle,
+          [[maybe_unused]] tdata_t buf,
+          [[maybe_unused]] tsize_t size)
 {
     return (tsize_t) -1;
 }
@@ -211,7 +211,7 @@ wxTIFFSeekOProc(thandle_t handle, toff_t off, int whence)
 }
 
 static int TIFFLINKAGEMODE
-wxTIFFCloseIProc(thandle_t WXUNUSED(handle))
+wxTIFFCloseIProc([[maybe_unused]] thandle_t handle)
 {
     // there is no need to close the input stream
     return 0;
@@ -233,17 +233,17 @@ wxTIFFSizeProc(thandle_t handle)
 }
 
 static int TIFFLINKAGEMODE
-wxTIFFMapProc(thandle_t WXUNUSED(handle),
-             tdata_t* WXUNUSED(pbase),
-             toff_t* WXUNUSED(psize))
+wxTIFFMapProc([[maybe_unused]] thandle_t handle,
+             [[maybe_unused]] tdata_t* pbase,
+             [[maybe_unused]] toff_t* psize)
 {
     return 0;
 }
 
 static void TIFFLINKAGEMODE
-wxTIFFUnmapProc(thandle_t WXUNUSED(handle),
-               tdata_t WXUNUSED(base),
-               toff_t WXUNUSED(size))
+wxTIFFUnmapProc([[maybe_unused]] thandle_t handle,
+               [[maybe_unused]] tdata_t base,
+               [[maybe_unused]] toff_t size)
 {
 }
 

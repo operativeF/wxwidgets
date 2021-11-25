@@ -183,7 +183,7 @@ wxSize wxEnhMetaFile::GetSize() const
     return size;
 }
 
-bool wxEnhMetaFile::SetClipboard(int WXUNUSED(width), int WXUNUSED(height))
+bool wxEnhMetaFile::SetClipboard([[maybe_unused]] int width, [[maybe_unused]] int height)
 {
 #if wxUSE_DRAG_AND_DROP && wxUSE_CLIPBOARD
     wxCHECK_MSG( m_hMF, false, "can't copy invalid metafile to clipboard" );
@@ -354,19 +354,19 @@ wxEnhMetaFile *wxEnhMetaFileDC::Close()
 // ----------------------------------------------------------------------------
 
 wxDataFormat
-wxEnhMetaFileDataObject::GetPreferredFormat(Direction WXUNUSED(dir)) const
+wxEnhMetaFileDataObject::GetPreferredFormat([[maybe_unused]] Direction dir) const
 {
     return wxDF_ENHMETAFILE;
 }
 
-size_t wxEnhMetaFileDataObject::GetFormatCount(Direction WXUNUSED(dir)) const
+size_t wxEnhMetaFileDataObject::GetFormatCount([[maybe_unused]] Direction dir) const
 {
     // wxDF_ENHMETAFILE and wxDF_METAFILE
     return 2;
 }
 
 void wxEnhMetaFileDataObject::GetAllFormats(wxDataFormat *formats,
-                                            Direction WXUNUSED(dir)) const
+                                            [[maybe_unused]] Direction dir) const
 {
     formats[0] = wxDF_ENHMETAFILE;
     formats[1] = wxDF_METAFILE;
@@ -452,7 +452,7 @@ bool wxEnhMetaFileDataObject::GetDataHere(const wxDataFormat& format, void *buf)
 }
 
 bool wxEnhMetaFileDataObject::SetData(const wxDataFormat& format,
-                                      size_t WXUNUSED(len),
+                                      [[maybe_unused]] size_t len,
                                       const void *buf)
 {
     HENHMETAFILE hEMF;
@@ -530,7 +530,7 @@ bool wxEnhMetaFileSimpleDataObject::GetDataHere(void *buf) const
     return true;
 }
 
-bool wxEnhMetaFileSimpleDataObject::SetData(size_t WXUNUSED(len),
+bool wxEnhMetaFileSimpleDataObject::SetData([[maybe_unused]] size_t len,
                                             const void *buf)
 {
     HENHMETAFILE hEMF = *static_cast<const HENHMETAFILE*>(buf);

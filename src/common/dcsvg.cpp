@@ -1261,7 +1261,7 @@ bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                              wxPoint src,
                              wxRasterOperationMode rop,
                              bool useMask,
-                             wxPoint WXUNUSED(srcMask))
+                             [[maybe_unused]] wxPoint srcMask)
 {
     if (rop != wxRasterOperationMode::Copy)
     {
@@ -1293,7 +1293,7 @@ void wxSVGFileDCImpl::DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y)
 }
 
 void wxSVGFileDCImpl::DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
-                                   bool WXUNUSED(useMask))
+                                   [[maybe_unused]] bool useMask)
 {
     NewGraphicsIfNeeded();
 

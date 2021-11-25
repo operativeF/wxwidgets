@@ -272,7 +272,7 @@ bool wxDirItemData::HasSubDirs() const
     return dir.HasSubDirs();
 }
 
-bool wxDirItemData::HasFiles(const std::string& WXUNUSED(spec)) const
+bool wxDirItemData::HasFiles([[maybe_unused]] const std::string& spec) const
 {
     if (m_path.empty())
         return false;

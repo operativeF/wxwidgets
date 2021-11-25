@@ -247,7 +247,7 @@ public:
         GTKApplyWidgetStyle();
     }
 
-    bool SetTransparent(wxByte WXUNUSED(alpha)) override
+    bool SetTransparent([[maybe_unused]] wxByte alpha) override
     {
         return true;
     }

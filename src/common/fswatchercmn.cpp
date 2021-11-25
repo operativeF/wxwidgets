@@ -184,7 +184,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
         {
         }
 
-        wxDirTraverseResult OnFile(const std::string& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile([[maybe_unused]] const std::string& filename) override
         {
             // There is no need to watch individual files as we watch the
             // parent directory which will notify us about any changes in them.
@@ -242,7 +242,7 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
         {
         }
 
-        wxDirTraverseResult OnFile(const std::string& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile([[maybe_unused]] const std::string& filename) override
         {
             // We never watch the individual files when watching the tree, so
             // nothing to do here.

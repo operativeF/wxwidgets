@@ -565,7 +565,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
 {
 }
 
-bool wxGraphicsContext::wxStartDoc(const std::string& WXUNUSED(message))
+bool wxGraphicsContext::wxStartDoc([[maybe_unused]] const std::string& message)
 {
     return true;
 }
@@ -574,8 +574,8 @@ void wxGraphicsContext::EndDoc()
 {
 }
 
-void wxGraphicsContext::StartPage(float WXUNUSED(width),
-                                  float WXUNUSED(height))
+void wxGraphicsContext::StartPage([[maybe_unused]] float width,
+                                  [[maybe_unused]] float height)
 {
 }
 
@@ -599,7 +599,7 @@ void wxGraphicsContext::SetContentScaleFactor(float contentScaleFactor)
 }
 
 #if 0
-void wxGraphicsContext::SetAlpha( float WXUNUSED(alpha) )
+void wxGraphicsContext::SetAlpha( [[maybe_unused]] float alpha )
 {
 }
 
@@ -764,7 +764,7 @@ void wxGraphicsContext::DrawRectangle( float x, float y, float w, float h)
     DrawPath( path );
 }
 
-void wxGraphicsContext::ClearRectangle( float WXUNUSED(x), float WXUNUSED(y), float WXUNUSED(w), float WXUNUSED(h))
+void wxGraphicsContext::ClearRectangle( [[maybe_unused]] float x, [[maybe_unused]] float y, [[maybe_unused]] float w, [[maybe_unused]] float h)
 {
 
 }

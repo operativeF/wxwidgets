@@ -237,7 +237,7 @@ int wxGridColumnOperations::GetFirstLine(const wxGrid *grid, wxGridWindow *gridW
 // wxGridCellRenderer and wxGridCellEditor managing ref counting
 // ----------------------------------------------------------------------------
 
-void wxGridCellWorker::SetParameters(const std::string& WXUNUSED(params))
+void wxGridCellWorker::SetParameters([[maybe_unused]] const std::string& params)
 {
     // nothing to do
 }
@@ -1249,13 +1249,13 @@ void wxGridCellAttrProvider::UpdateAttrCols( size_t pos, int numCols )
 }
 
 const wxGridColumnHeaderRenderer&
-wxGridCellAttrProvider::GetColumnHeaderRenderer(int WXUNUSED(col))
+wxGridCellAttrProvider::GetColumnHeaderRenderer([[maybe_unused]] int col)
 {
     return gs_defaultHeaderRenderers.colRenderer;
 }
 
 const wxGridRowHeaderRenderer&
-wxGridCellAttrProvider::GetRowHeaderRenderer(int WXUNUSED(row))
+wxGridCellAttrProvider::GetRowHeaderRenderer([[maybe_unused]] int row)
 {
     return gs_defaultHeaderRenderers.rowRenderer;
 }
@@ -1546,46 +1546,46 @@ void wxGridTableBase::SetColAttr(wxGridCellAttr *attr, int col)
     }
 }
 
-bool wxGridTableBase::InsertRows( size_t WXUNUSED(pos),
-                                  size_t WXUNUSED(numRows) )
+bool wxGridTableBase::InsertRows( [[maybe_unused]] size_t pos,
+                                  [[maybe_unused]] size_t numRows )
 {
     wxFAIL_MSG( "Called grid table class function InsertRows\nbut your derived table class does not override this function" );
 
     return false;
 }
 
-bool wxGridTableBase::AppendRows( size_t WXUNUSED(numRows) )
+bool wxGridTableBase::AppendRows( [[maybe_unused]] size_t numRows )
 {
     wxFAIL_MSG( "Called grid table class function AppendRows\nbut your derived table class does not override this function");
 
     return false;
 }
 
-bool wxGridTableBase::DeleteRows( size_t WXUNUSED(pos),
-                                  size_t WXUNUSED(numRows) )
+bool wxGridTableBase::DeleteRows( [[maybe_unused]] size_t pos,
+                                  [[maybe_unused]] size_t numRows )
 {
     wxFAIL_MSG( "Called grid table class function DeleteRows\nbut your derived table class does not override this function");
 
     return false;
 }
 
-bool wxGridTableBase::InsertCols( size_t WXUNUSED(pos),
-                                  size_t WXUNUSED(numCols) )
+bool wxGridTableBase::InsertCols( [[maybe_unused]] size_t pos,
+                                  [[maybe_unused]] size_t numCols )
 {
     wxFAIL_MSG( "Called grid table class function InsertCols\nbut your derived table class does not override this function");
 
     return false;
 }
 
-bool wxGridTableBase::AppendCols( size_t WXUNUSED(numCols) )
+bool wxGridTableBase::AppendCols( [[maybe_unused]] size_t numCols )
 {
     wxFAIL_MSG("Called grid table class function AppendCols\nbut your derived table class does not override this function");
 
     return false;
 }
 
-bool wxGridTableBase::DeleteCols( size_t WXUNUSED(pos),
-                                  size_t WXUNUSED(numCols) )
+bool wxGridTableBase::DeleteCols( [[maybe_unused]] size_t pos,
+                                  [[maybe_unused]] size_t numCols )
 {
     wxFAIL_MSG( "Called grid table class function DeleteCols\nbut your derived table class does not override this function");
 
@@ -1630,12 +1630,12 @@ std::string wxGridTableBase::GetCornerLabelValue() const
     return {};
 }
 
-std::string wxGridTableBase::GetTypeName( int WXUNUSED(row), int WXUNUSED(col) )
+std::string wxGridTableBase::GetTypeName( [[maybe_unused]] int row, [[maybe_unused]] int col )
 {
     return {wxGRID_VALUE_STRING.begin(), wxGRID_VALUE_STRING.end()};
 }
 
-bool wxGridTableBase::CanGetValueAs( int WXUNUSED(row), int WXUNUSED(col),
+bool wxGridTableBase::CanGetValueAs( [[maybe_unused]] int row, [[maybe_unused]] int col,
                                      std::string_view typeName )
 {
     return typeName == wxGRID_VALUE_STRING;
@@ -1646,45 +1646,46 @@ bool wxGridTableBase::CanSetValueAs( int row, int col, std::string_view typeName
     return CanGetValueAs(row, col, typeName);
 }
 
-long wxGridTableBase::GetValueAsLong( int WXUNUSED(row), int WXUNUSED(col) )
+long wxGridTableBase::GetValueAsLong( [[maybe_unused]] int row, [[maybe_unused]] int col )
 {
     return 0;
 }
 
-double wxGridTableBase::GetValueAsDouble( int WXUNUSED(row), int WXUNUSED(col) )
+double wxGridTableBase::GetValueAsDouble( [[maybe_unused]] int row, [[maybe_unused]] int col )
 {
     return 0.0;
 }
 
-bool wxGridTableBase::GetValueAsBool( int WXUNUSED(row), int WXUNUSED(col) )
+bool wxGridTableBase::GetValueAsBool( [[maybe_unused]] int row, [[maybe_unused]] int col )
 {
     return false;
 }
 
-void wxGridTableBase::SetValueAsLong( int WXUNUSED(row), int WXUNUSED(col),
-                                      long WXUNUSED(value) )
+void wxGridTableBase::SetValueAsLong( [[maybe_unused]] int row, [[maybe_unused]] int col,
+                                      [[maybe_unused]] long value )
 {
 }
 
-void wxGridTableBase::SetValueAsDouble( int WXUNUSED(row), int WXUNUSED(col),
-                                        double WXUNUSED(value) )
+void wxGridTableBase::SetValueAsDouble( [[maybe_unused]] int row, [[maybe_unused]] int col,
+                                        [[maybe_unused]] double value )
 {
 }
 
-void wxGridTableBase::SetValueAsBool( int WXUNUSED(row), int WXUNUSED(col),
-                                      bool WXUNUSED(value) )
+void wxGridTableBase::SetValueAsBool( [[maybe_unused]] int row, [[maybe_unused]] int col,
+                                      [[maybe_unused]] bool value )
 {
 }
 
-void* wxGridTableBase::GetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         std::string_view WXUNUSED(typeName) )
+void* wxGridTableBase::GetValueAsCustom( [[maybe_unused]] int row, [[maybe_unused]] int col,
+                                         [[maybe_unused]] std::string_view typeName )
 {
     return nullptr;
 }
 
-void  wxGridTableBase::SetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         std::string_view WXUNUSED(typeName),
-                                         void* WXUNUSED(value) )
+void  wxGridTableBase::SetValueAsCustom( [[maybe_unused]] int row,
+                                         [[maybe_unused]] int col,
+                                         [[maybe_unused]] std::string_view typeName,
+                                         [[maybe_unused]] void* value )
 {
 }
 
@@ -5207,7 +5208,7 @@ void wxGrid::ClearGrid()
 
 bool
 wxGrid::DoModifyLines(bool (wxGridTableBase::*funcModify)(size_t, size_t),
-                      int pos, int num, bool WXUNUSED(updateLabels) )
+                      int pos, int num, [[maybe_unused]] bool updateLabels )
 {
     wxCHECK_MSG( m_created, false, "must finish creating the grid first" );
 
@@ -5224,7 +5225,7 @@ wxGrid::DoModifyLines(bool (wxGridTableBase::*funcModify)(size_t, size_t),
 
 bool
 wxGrid::DoAppendLines(bool (wxGridTableBase::*funcAppend)(size_t),
-                      int num, bool WXUNUSED(updateLabels))
+                      int num, [[maybe_unused]] bool updateLabels)
 {
     wxCHECK_MSG( m_created, false, "must finish creating the grid first" );
 
@@ -6324,12 +6325,12 @@ wxPen wxGrid::GetDefaultGridLinePen()
     return {GetGridLineColour()};
 }
 
-wxPen wxGrid::GetRowGridLinePen(int WXUNUSED(row))
+wxPen wxGrid::GetRowGridLinePen([[maybe_unused]] int row)
 {
     return GetDefaultGridLinePen();
 }
 
-wxPen wxGrid::GetColGridLinePen(int WXUNUSED(col))
+wxPen wxGrid::GetColGridLinePen([[maybe_unused]] int col)
 {
     return GetDefaultGridLinePen();
 }

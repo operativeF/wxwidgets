@@ -591,7 +591,7 @@ public:
     TraverseCounter(const TraverseCounter&) = delete;
 	TraverseCounter& operator=(const TraverseCounter&) = delete;
 
-    bool OnVisit(const wxTreeItemId& WXUNUSED(item)) override
+    bool OnVisit([[maybe_unused]] const wxTreeItemId& item) override
     {
         m_count++;
 
@@ -1337,7 +1337,7 @@ wxTreeItemId wxTreeCtrl::wxGetFirstChild(const wxTreeItemId& item,
     return {cookie};
 }
 
-wxTreeItemId wxTreeCtrl::GetNextChild(const wxTreeItemId& WXUNUSED(item),
+wxTreeItemId wxTreeCtrl::GetNextChild([[maybe_unused]] const wxTreeItemId& item,
                                       wxTreeItemIdValue& cookie) const
 {
     wxTreeItemId fromCookie(cookie);
@@ -1346,11 +1346,11 @@ wxTreeItemId wxTreeCtrl::GetNextChild(const wxTreeItemId& WXUNUSED(item),
 
     hitem = TreeView_GetNextSibling(GetHwnd(), hitem);
 
-    wxTreeItemId item{hitem};
+    wxTreeItemId titem{hitem};
 
-    cookie = item.m_pItem;
+    cookie = titem.m_pItem;
 
-    return item;
+    return titem;
 }
 
 wxTreeItemId wxTreeCtrl::GetLastChild(const wxTreeItemId& item) const

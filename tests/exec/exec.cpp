@@ -111,7 +111,7 @@ public:
     }
 
     // may be overridden to be notified about process termination
-    void OnTerminate(int WXUNUSED(pid), int WXUNUSED(status)) override
+    void OnTerminate([[maybe_unused]] int pid, [[maybe_unused]] int status) override
     {
         wxEventLoop::GetActive()->ScheduleExit();
     }

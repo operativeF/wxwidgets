@@ -116,7 +116,7 @@ void wxStackFrame::OnParam(wxSYMBOL_INFO *pSymInfo)
 }
 
 BOOL CALLBACK
-EnumSymbolsProc(wxPSYMBOL_INFO pSymInfo, ULONG WXUNUSED(SymSize), PVOID data)
+EnumSymbolsProc(wxPSYMBOL_INFO pSymInfo, [[maybe_unused]] ULONG SymSize, PVOID data)
 {
     wxStackFrame *frame = static_cast<wxStackFrame *>(data);
 

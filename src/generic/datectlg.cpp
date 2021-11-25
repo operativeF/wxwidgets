@@ -64,9 +64,9 @@ public:
         return true;
     }
 
-    wxSize GetAdjustedSize(int WXUNUSED(minWidth),
-                           int WXUNUSED(prefHeight),
-                           int WXUNUSED(maxHeight)) override
+    wxSize GetAdjustedSize([[maybe_unused]] int minWidth,
+                           [[maybe_unused]] int prefHeight,
+                           [[maybe_unused]] int maxHeight) override
     {
         return m_useSize;
     }

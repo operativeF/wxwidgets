@@ -57,7 +57,7 @@ void wxArchiveEntry::SetNotifier(wxArchiveNotifier& notifier)
     m_notifier->OnEntryUpdated(*this);
 }
 
-wxArchiveEntry& wxArchiveEntry::operator=(const wxArchiveEntry& WXUNUSED(e))
+wxArchiveEntry& wxArchiveEntry::operator=([[maybe_unused]] const wxArchiveEntry& e)
 {
     m_notifier = nullptr;
     return *this;

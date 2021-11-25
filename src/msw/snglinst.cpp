@@ -77,7 +77,7 @@ private:
 // ============================================================================
 
 bool wxSingleInstanceChecker::Create(const wxString& name,
-                                     const wxString& WXUNUSED(path))
+                                     [[maybe_unused]] const wxString& path)
 {
     wxASSERT_MSG( !m_impl,
                   "calling wxSingleInstanceChecker::Create() twice?" );

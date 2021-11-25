@@ -357,7 +357,7 @@ wxCoord wxVListBox::OnGetRowHeight(size_t line) const
 
 void wxVListBox::OnDrawSeparator(wxDC& WXUNUSED(dc),
                                  wxRect& WXUNUSED(rect),
-                                 size_t WXUNUSED(n)) const
+                                 [[maybe_unused]] size_t n) const
 {
 }
 

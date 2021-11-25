@@ -3513,7 +3513,7 @@ wxTextCtrl* wxGenericTreeCtrl::GetEditControl() const
     return m_textCtrl;
 }
 
-void wxGenericTreeCtrl::EndEditLabel(const wxTreeItemId& WXUNUSED(item),
+void wxGenericTreeCtrl::EndEditLabel([[maybe_unused]] const wxTreeItemId& item,
                                      bool discardChanges)
 {
     if (m_textCtrl)
@@ -4130,7 +4130,7 @@ wxVisualAttributes
 #if _USE_VISATTR
 wxGenericTreeCtrl::GetClassDefaultAttributes(wxWindowVariant variant)
 #else
-wxGenericTreeCtrl::GetClassDefaultAttributes(wxWindowVariant WXUNUSED(variant))
+wxGenericTreeCtrl::GetClassDefaultAttributes([[maybe_unused]] wxWindowVariant variant)
 #endif
 {
 #if _USE_VISATTR

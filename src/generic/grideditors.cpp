@@ -221,8 +221,8 @@ wxGridCellEditor::~wxGridCellEditor()
     Destroy();
 }
 
-void wxGridCellEditor::Create(wxWindow* WXUNUSED(parent),
-                              wxWindowID WXUNUSED(id),
+void wxGridCellEditor::Create([[maybe_unused]] wxWindow* parent,
+                              [[maybe_unused]] wxWindowID id,
                               wxEvtHandler* evtHandler)
 {
     if ( evtHandler )
@@ -501,10 +501,10 @@ void wxGridCellTextEditor::DoBeginEdit(const std::string& startValue)
     Text()->SetFocus();
 }
 
-bool wxGridCellTextEditor::EndEdit(int WXUNUSED(row),
-                                   int WXUNUSED(col),
-                                   const wxGrid* WXUNUSED(grid),
-                                   const std::string& WXUNUSED(oldval),
+bool wxGridCellTextEditor::EndEdit([[maybe_unused]] int row,
+                                   [[maybe_unused]] int col,
+                                   [[maybe_unused]] const wxGrid* grid,
+                                   [[maybe_unused]] const std::string& oldval,
                                    std::string *newval)
 {
     wxCHECK_MSG( m_control, false,
@@ -770,9 +770,9 @@ void wxGridCellNumberEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
 }
 
-bool wxGridCellNumberEditor::EndEdit(int WXUNUSED(row),
-                                     int WXUNUSED(col),
-                                     const wxGrid* WXUNUSED(grid),
+bool wxGridCellNumberEditor::EndEdit([[maybe_unused]] int row,
+                                     [[maybe_unused]] int col,
+                                     [[maybe_unused]] const wxGrid* grid,
                                      const std::string& oldval,
                                      std::string *newval)
 {
@@ -1004,9 +1004,9 @@ void wxGridCellFloatEditor::BeginEdit(int row, int col, wxGrid* grid)
     DoBeginEdit(GetString());
 }
 
-bool wxGridCellFloatEditor::EndEdit(int WXUNUSED(row),
-                                    int WXUNUSED(col),
-                                    const wxGrid* WXUNUSED(grid),
+bool wxGridCellFloatEditor::EndEdit([[maybe_unused]] int row,
+                                    [[maybe_unused]] int col,
+                                    [[maybe_unused]] const wxGrid* grid,
                                     const std::string& oldval, std::string *newval)
 {
     const std::string text(Text()->GetValue());
@@ -1350,10 +1350,10 @@ void wxGridCellBoolEditor::BeginEdit(int row, int col, wxGrid* grid)
     CBox()->SetFocus();
 }
 
-bool wxGridCellBoolEditor::EndEdit(int WXUNUSED(row),
-                                   int WXUNUSED(col),
-                                   const wxGrid* WXUNUSED(grid),
-                                   const std::string& WXUNUSED(oldval),
+bool wxGridCellBoolEditor::EndEdit([[maybe_unused]] int row,
+                                   [[maybe_unused]] int col,
+                                   [[maybe_unused]] const wxGrid* grid,
+                                   [[maybe_unused]] const std::string& oldval,
                                    std::string* newval)
 {
     bool value = CBox()->GetValue();
@@ -1574,10 +1574,10 @@ void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
 }
 
-bool wxGridCellChoiceEditor::EndEdit(int WXUNUSED(row),
-                                     int WXUNUSED(col),
-                                     const wxGrid* WXUNUSED(grid),
-                                     const std::string& WXUNUSED(oldval),
+bool wxGridCellChoiceEditor::EndEdit([[maybe_unused]] int row,
+                                     [[maybe_unused]] int col,
+                                     [[maybe_unused]] const wxGrid* grid,
+                                     [[maybe_unused]] const std::string& oldval,
                                      std::string *newval)
 {
     const std::string value = Combo()->GetValue();
@@ -1733,10 +1733,10 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
 }
 
-bool wxGridCellEnumEditor::EndEdit(int WXUNUSED(row),
-                                   int WXUNUSED(col),
-                                   const wxGrid* WXUNUSED(grid),
-                                   const std::string& WXUNUSED(oldval),
+bool wxGridCellEnumEditor::EndEdit([[maybe_unused]] int row,
+                                   [[maybe_unused]] int col,
+                                   [[maybe_unused]] const wxGrid* grid,
+                                   [[maybe_unused]] const std::string& oldval,
                                    std::string *newval)
 {
     long idx = Combo()->GetSelection();
@@ -1902,9 +1902,9 @@ void wxGridCellDateEditor::BeginEdit(int row, int col, wxGrid* grid)
     DatePicker()->SetFocus();
 }
 
-bool wxGridCellDateEditor::EndEdit(int WXUNUSED(row), int WXUNUSED(col),
-                                   const wxGrid* WXUNUSED(grid),
-                                   const std::string& WXUNUSED(oldval),
+bool wxGridCellDateEditor::EndEdit([[maybe_unused]] int row, [[maybe_unused]] int col,
+                                   [[maybe_unused]] const wxGrid* grid,
+                                   [[maybe_unused]] const std::string& oldval,
                                    std::string *newval)
 {
     wxASSERT_MSG(m_control, "The wxGridCellDateEditor must be created first!");

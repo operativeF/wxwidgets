@@ -102,7 +102,7 @@ public:
             m_toastEventHandler->Detach();
     }
 
-    bool Show(int WXUNUSED(timeout)) override
+    bool Show([[maybe_unused]] int timeout) override
     {
         wxCOMPtr<IXmlDocument> toastXml;
         HRESULT hr = CreateToastXML(&toastXml);
@@ -141,18 +141,18 @@ public:
 
     }
 
-    void SetFlags(unsigned int WXUNUSED(flags)) override
+    void SetFlags([[maybe_unused]] unsigned int flags) override
     {
 
     }
 
-    void SetIcon(const wxIcon& WXUNUSED(icon)) override
+    void SetIcon([[maybe_unused]] const wxIcon& icon) override
     {
         // Icon would have to be saved to disk (temporarily?)
         // to be used as a file:// url in the notifications XML
     }
 
-    bool AddAction(wxWindowID WXUNUSED(actionid), const std::string &WXUNUSED(label)) override
+    bool AddAction([[maybe_unused]] wxWindowID actionid, const std::string &WXUNUSED(label)) override
     {
         return false;
     }

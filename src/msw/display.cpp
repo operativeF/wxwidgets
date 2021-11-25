@@ -563,7 +563,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
     HMONITOR hMonitor,              // handle to display monitor
     WXHDC /* hdcMonitor */,           // handle to monitor-appropriate device context:
                                     // not set due to our use of EnumDisplayMonitors(NULL, ...)
-    LPRECT WXUNUSED(lprcMonitor),   // pointer to monitor intersection rectangle
+    [[maybe_unused]] LPRECT lprcMonitor,   // pointer to monitor intersection rectangle
     WXLPARAM dwData)                  // data passed from EnumDisplayMonitors (this)
 {
     wxDisplayFactoryMSW *const self = (wxDisplayFactoryMSW *)dwData;

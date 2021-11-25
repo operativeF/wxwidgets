@@ -152,7 +152,7 @@ void wxOverlayImpl::BeginDrawing(wxDC*  WXUNUSED(dc))
 {
 }
 
-void wxOverlayImpl::EndDrawing(wxDC* WXUNUSED(dc))
+void wxOverlayImpl::EndDrawing([[maybe_unused]] wxDC* dc)
 {
 }
 

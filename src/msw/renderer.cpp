@@ -337,7 +337,7 @@ private:
 void wxRendererMSWBase::DrawFocusRect(wxWindow * WXUNUSED(win),
                                       wxDC& dc,
                                       const wxRect& rect,
-                                      unsigned int WXUNUSED(flags))
+                                      [[maybe_unused]] unsigned int flags)
 {
     RECT rc = ConvertToRECT(dc, rect);
 
@@ -538,7 +538,7 @@ wxRendererMSW::DrawTitleBarBitmap(wxWindow *win,
     DoDrawFrameControl(DFC_CAPTION, kind, win, dc, rect, flags);
 }
 
-wxSize wxRendererMSW::GetCheckBoxSize(wxWindow* win, unsigned int WXUNUSED(flags))
+wxSize wxRendererMSW::GetCheckBoxSize(wxWindow* win, [[maybe_unused]] unsigned int flags)
 {
     // We must have a valid window in order to return the size which is correct
     // for the display this window is on.

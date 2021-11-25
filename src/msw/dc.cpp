@@ -323,13 +323,13 @@ BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
 #else // Can't use the functions neither statically nor dynamically.
 
 inline
-DWORD GetLayout(WXHDC WXUNUSED(hdc))
+DWORD GetLayout([[maybe_unused]] WXHDC hdc)
 {
     return GDI_ERROR;
 }
 
 inline
-DWORD SetLayout(WXHDC WXUNUSED(hdc), DWORD WXUNUSED(dwLayout))
+DWORD SetLayout([[maybe_unused]] WXHDC hdc, [[maybe_unused]] DWORD dwLayout)
 {
     return GDI_ERROR;
 }
@@ -1840,7 +1840,7 @@ void wxMSWDCImpl::SetRop(WXHDC dc)
     SetROP2(GetHdc(), rop);
 }
 
-bool wxMSWDCImpl::wxStartDoc(const std::string& WXUNUSED(message))
+bool wxMSWDCImpl::wxStartDoc([[maybe_unused]] const std::string& message)
 {
     // We might be previewing, so return true to let it continue.
     return true;

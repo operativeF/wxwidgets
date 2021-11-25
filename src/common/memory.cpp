@@ -893,7 +893,7 @@ void operator delete[] (void * buf)
 #endif // !(defined(WX_WINDOWS) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE)))
 
 // TODO: store whether this is a vector or not.
-void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool WXUNUSED(isVect) )
+void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, [[maybe_unused]] bool isVect )
 {
 #if USE_THREADSAFE_MEMORY_ALLOCATION
   MemoryCriticalSectionLocker lock(memLocker);
@@ -949,7 +949,7 @@ void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, 
 }
 
 // TODO: check whether was allocated as a vector
-void wxDebugFree(void * buf, bool WXUNUSED(isVect) )
+void wxDebugFree(void * buf, [[maybe_unused]] bool isVect )
 {
 #if USE_THREADSAFE_MEMORY_ALLOCATION
   MemoryCriticalSectionLocker lock(memLocker);

@@ -218,30 +218,30 @@ void wxButtonToolBar::SetToolShortHelp(int id, const std::string& help)
     tool->SetShortHelp(help);
 }
 
-bool wxButtonToolBar::DoInsertTool(size_t WXUNUSED(pos),
+bool wxButtonToolBar::DoInsertTool([[maybe_unused]] size_t pos,
                              wxToolBarToolBase * WXUNUSED(tool))
 {
     return true;
 }
 
-bool wxButtonToolBar::DoDeleteTool(size_t WXUNUSED(pos),
+bool wxButtonToolBar::DoDeleteTool([[maybe_unused]] size_t pos,
                              wxToolBarToolBase * WXUNUSED(tool))
 {
     // TODO
     return true;
 }
 
-void wxButtonToolBar::DoEnableTool(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(enable))
+void wxButtonToolBar::DoEnableTool(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool enable)
 {
     // TODO
 }
 
-void wxButtonToolBar::DoToggleTool(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(toggle))
+void wxButtonToolBar::DoToggleTool(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
 {
     // TODO
 }
 
-void wxButtonToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(toggle))
+void wxButtonToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
 {
     // TODO
 }

@@ -357,7 +357,7 @@ bool wxExtHelpController::DisplayBlock(long blockNo)
 }
 
 bool wxExtHelpController::KeywordSearch(const std::string& k,
-                                   wxHelpSearchMode WXUNUSED(mode))
+                                   [[maybe_unused]] wxHelpSearchMode mode)
 {
    if (! m_NumOfEntries)
       return false;

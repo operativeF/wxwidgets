@@ -891,7 +891,7 @@ bool wxMenuBarBase::Insert(size_t pos, wxMenu *menu,
 }
 
 wxMenu *wxMenuBarBase::Replace(size_t pos, wxMenu *menu,
-                               const std::string& WXUNUSED(title))
+                               [[maybe_unused]] const std::string& title)
 {
     wxCHECK_MSG( menu, nullptr, "can't insert NULL menu" );
 

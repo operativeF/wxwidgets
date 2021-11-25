@@ -1960,8 +1960,8 @@ struct EnumCallbackData
     std::vector<std::string> langs;
 };
 
-BOOL CALLBACK EnumTranslations(WXHMODULE WXUNUSED(hModule),
-                               LPCWSTR WXUNUSED(lpszType),
+BOOL CALLBACK EnumTranslations([[maybe_unused]] WXHMODULE hModule,
+                               [[maybe_unused]] LPCWSTR lpszType,
                                LPWSTR lpszName,
                                LONG_PTR lParam)
 {

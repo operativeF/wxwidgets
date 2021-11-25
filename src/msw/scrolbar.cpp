@@ -37,8 +37,8 @@ bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-bool wxScrollBar::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
-                              WXWORD WXUNUSED(pos), WXHWND WXUNUSED(control))
+bool wxScrollBar::MSWOnScroll([[maybe_unused]] int orientation, WXWORD wParam,
+                              [[maybe_unused]] WXWORD pos, [[maybe_unused]] WXHWND control)
 {
     // don't use pos parameter because it is limited to 16 bits, get the full
     // 32 bit position from the control itself instead

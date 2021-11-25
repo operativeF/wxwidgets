@@ -667,7 +667,7 @@ size_t wxStreamBase::GetSize() const
     return len;
 }
 
-wxFileOffset wxStreamBase::OnSysSeek(wxFileOffset WXUNUSED(seek), wxSeekMode WXUNUSED(mode))
+wxFileOffset wxStreamBase::OnSysSeek([[maybe_unused]] wxFileOffset seek, [[maybe_unused]] wxSeekMode mode)
 {
     return wxInvalidOffset;
 }
@@ -996,7 +996,7 @@ wxFileOffset wxInputStream::TellI() const
 // ----------------------------------------------------------------------------
 
 size_t wxOutputStream::OnSysWrite(const void * WXUNUSED(buffer),
-                                  size_t WXUNUSED(bufsize))
+                                  [[maybe_unused]] size_t bufsize)
 {
     return 0;
 }

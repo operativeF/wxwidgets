@@ -224,7 +224,7 @@ private:
     }
 
     const wxItemAttr*
-    GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const override
+    GetItemAttr([[maybe_unused]] DWORD_PTR dwItemSpec) const override
     {
         // We use the same attribute for all items for now.
         return &m_attr;
@@ -402,7 +402,7 @@ bool wxListCtrl::IsDoubleBuffered() const
     return true;
 }
 
-void wxListCtrl::SetDoubleBuffered(bool WXUNUSED(on))
+void wxListCtrl::SetDoubleBuffered([[maybe_unused]] bool on)
 {
     // Nothing to do, it's always enabled if supported.
 }
@@ -1046,7 +1046,7 @@ bool wxListCtrl::SetItemState(long item, ListStateFlags state, ListStateFlags st
 }
 
 // Sets the item image
-bool wxListCtrl::SetItemImage(long item, int image, int WXUNUSED(selImage))
+bool wxListCtrl::SetItemImage(long item, int image, [[maybe_unused]] int selImage)
 {
     return SetItemColumnImage(item, 0, image);
 }

@@ -257,7 +257,7 @@ void wxAuiGenericTabArt::DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect)
 }
 
 void wxAuiGenericTabArt::DrawBackground(wxDC& dc,
-                                        wxWindow* WXUNUSED(wnd),
+                                        [[maybe_unused]] wxWindow* wnd,
                                         const wxRect& rect)
 {
     // draw background using arbitrary hard-coded, but at least adapted to dark
@@ -638,7 +638,7 @@ int wxAuiGenericTabArt::GetBorderWidth(wxWindow* wnd)
     return 1;
 }
 
-int wxAuiGenericTabArt::GetAdditionalBorderSpace(wxWindow* WXUNUSED(wnd))
+int wxAuiGenericTabArt::GetAdditionalBorderSpace([[maybe_unused]] wxWindow* wnd)
 {
     return 0;
 }
@@ -647,7 +647,7 @@ wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
                                       wxWindow* wnd,
                                       const std::string& caption,
                                       const wxBitmap& bitmap,
-                                      bool WXUNUSED(active),
+                                      [[maybe_unused]] bool active,
                                       int close_button_state,
                                       int* x_extent)
 {
@@ -978,7 +978,7 @@ void wxAuiSimpleTabArt::DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect)
 }
 
 void wxAuiSimpleTabArt::DrawBackground(wxDC& dc,
-                                       wxWindow* WXUNUSED(wnd),
+                                       [[maybe_unused]] wxWindow* wnd,
                                        const wxRect& rect)
 {
     // draw background
@@ -1171,7 +1171,7 @@ int wxAuiSimpleTabArt::GetBorderWidth(wxWindow* wnd)
     return 1;
 }
 
-int wxAuiSimpleTabArt::GetAdditionalBorderSpace(wxWindow* WXUNUSED(wnd))
+int wxAuiSimpleTabArt::GetAdditionalBorderSpace([[maybe_unused]] wxWindow* wnd)
 {
     return 0;
 }
@@ -1179,8 +1179,8 @@ int wxAuiSimpleTabArt::GetAdditionalBorderSpace(wxWindow* WXUNUSED(wnd))
 wxSize wxAuiSimpleTabArt::GetTabSize(wxDC& dc,
                                      wxWindow* wnd,
                                      const std::string& caption,
-                                     const wxBitmap& WXUNUSED(bitmap),
-                                     bool WXUNUSED(active),
+                                     [[maybe_unused]] const wxBitmap& bitmap,
+                                     [[maybe_unused]] bool active,
                                      int close_button_state,
                                      int* x_extent)
 {
@@ -1321,8 +1321,8 @@ int wxAuiSimpleTabArt::ShowDropDown(wxWindow* wnd,
 }
 
 int wxAuiSimpleTabArt::GetBestTabCtrlSize(wxWindow* wnd,
-                                          const wxAuiNotebookPageArray& WXUNUSED(pages),
-                                          const wxSize& WXUNUSED(requiredBmp_size))
+                                          [[maybe_unused]] const wxAuiNotebookPageArray& pages,
+                                          [[maybe_unused]] const wxSize& requiredBmp_size)
 {
     wxClientDC dc(wnd);
     dc.SetFont(m_measuringFont);

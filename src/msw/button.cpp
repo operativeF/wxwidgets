@@ -395,7 +395,7 @@ void wxButton::OnCharHook(wxKeyEvent& event)
     }
 }
 
-bool wxButton::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxButton::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     bool processed = false;
     switch ( param )

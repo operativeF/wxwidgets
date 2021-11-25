@@ -395,7 +395,7 @@ bool
 wxPNGHandler::LoadFile(wxImage *image,
                        wxInputStream& stream,
                        bool verbose,
-                       int WXUNUSED(index))
+                       [[maybe_unused]] int index)
 {
     wxPNGInfoStruct wxinfo;
     wxinfo.verbose = verbose;

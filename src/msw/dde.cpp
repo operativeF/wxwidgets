@@ -375,7 +375,7 @@ bool wxDDEClient::ValidHost(const wxString& /* host */)
     return true;
 }
 
-wxConnectionBase *wxDDEClient::MakeConnection(const wxString& WXUNUSED(host),
+wxConnectionBase *wxDDEClient::MakeConnection([[maybe_unused]] const wxString& host,
                                               const wxString& server,
                                               const wxString& topic)
 {

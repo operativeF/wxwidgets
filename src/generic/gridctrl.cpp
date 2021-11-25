@@ -37,7 +37,7 @@ void wxGridCellRenderer::Draw(wxGrid& grid,
                               wxGridCellAttr& attr,
                               wxDC& dc,
                               const wxRect& rect,
-                              int WXUNUSED(row), int WXUNUSED(col),
+                              [[maybe_unused]] int row, [[maybe_unused]] int col,
                               bool isSelected)
 {
     dc.SetBackgroundMode( wxBrushStyle::Solid );
@@ -977,8 +977,8 @@ void wxGridCellFloatRenderer::SetParameters(const std::string& params)
 wxSize wxGridCellBoolRenderer::GetBestSize(wxGrid& grid,
                                            wxGridCellAttr& attr,
                                            wxDC& dc,
-                                           int WXUNUSED(row),
-                                           int WXUNUSED(col))
+                                           [[maybe_unused]] int row,
+                                           [[maybe_unused]] int col)
 {
     return GetMaxBestSize(grid, attr, dc);
 }

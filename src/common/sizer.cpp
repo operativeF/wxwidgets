@@ -1459,7 +1459,7 @@ int wxGridSizer::CalcRowsCols(int& nrows, int& ncols) const
     return nitems;
 }
 
-void wxGridSizer::RepositionChildren(wxSize WXUNUSED(minSize))
+void wxGridSizer::RepositionChildren([[maybe_unused]] wxSize minSize)
 {
     int nitems, nrows, ncols;
     if ( (nitems = CalcRowsCols(nrows, ncols)) == 0 )
@@ -1697,7 +1697,7 @@ static int SumArraySizes(const std::vector<int>& sizes, int gap)
     return total;
 }
 
-wxSize wxFlexGridSizer::FindWidthsAndHeights(int WXUNUSED(nrows), int ncols)
+wxSize wxFlexGridSizer::FindWidthsAndHeights([[maybe_unused]] int nrows, int ncols)
 {
     // n is the index of the item in left-to-right top-to-bottom order
     size_t n = 0;

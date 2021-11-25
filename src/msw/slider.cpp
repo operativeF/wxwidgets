@@ -200,9 +200,9 @@ wxSlider::~wxSlider()
 // event handling
 // ----------------------------------------------------------------------------
 
-bool wxSlider::MSWOnScroll(int WXUNUSED(orientation),
+bool wxSlider::MSWOnScroll([[maybe_unused]] int orientation,
                            WXWORD wParam,
-                           WXWORD WXUNUSED(pos),
+                           [[maybe_unused]] WXWORD pos,
                            WXHWND control)
 {
     wxEventType scrollEvent;

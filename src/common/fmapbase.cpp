@@ -234,7 +234,7 @@ void wxFontMapperBase::RestorePath(const wxString& pathOld)
 
 wxFontEncoding
 wxFontMapperBase::CharsetToEncoding(const std::string& charset,
-                                    bool WXUNUSED(interactive))
+                                    [[maybe_unused]] bool interactive)
 {
     int enc = NonInteractiveCharsetToEncoding(charset);
     if ( enc == wxFONTENCODING_UNKNOWN )

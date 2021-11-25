@@ -479,7 +479,7 @@ void wxDropTarget::Revoke(WXHWND hwnd)
 
 // OnDrop() is called only if we previously returned true from
 // IsAcceptedData(), so no need to check anything here
-bool wxDropTarget::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y))
+bool wxDropTarget::OnDrop([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y)
 {
     return true;
 }

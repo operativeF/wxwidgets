@@ -332,7 +332,7 @@ void wxSashWindow::OnSize(wxSizeEvent& WXUNUSED(event))
     SizeWindows();
 }
 
-wxSashEdgePosition wxSashWindow::SashHitTest(int x, int y, int WXUNUSED(tolerance))
+wxSashEdgePosition wxSashWindow::SashHitTest(int x, int y, [[maybe_unused]] int tolerance)
 {
     wxSize client_size = GetClientSize();
 

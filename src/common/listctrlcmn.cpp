@@ -242,7 +242,7 @@ wxItemAttr *wxListCtrlBase::OnGetItemAttr(long item) const
         : nullptr; // no attributes by default
 }
 
-wxString wxListCtrlBase::OnGetItemText(long WXUNUSED(item), long WXUNUSED(col)) const
+wxString wxListCtrlBase::OnGetItemText([[maybe_unused]] long item, [[maybe_unused]] long col) const
 {
     // this is a pure virtual function, in fact - which is not really pure
     // because the controls which are not virtual don't need to implement it
@@ -251,7 +251,7 @@ wxString wxListCtrlBase::OnGetItemText(long WXUNUSED(item), long WXUNUSED(col)) 
     return {};
 }
 
-bool wxListCtrlBase::OnGetItemIsChecked(long WXUNUSED(item)) const
+bool wxListCtrlBase::OnGetItemIsChecked([[maybe_unused]] long item) const
 {
     // this is a pure virtual function, in fact - which is not really pure
     // because the controls which are not virtual don't need to implement it
@@ -260,7 +260,7 @@ bool wxListCtrlBase::OnGetItemIsChecked(long WXUNUSED(item)) const
     return false;
 }
 
-int wxListCtrlBase::OnGetItemImage(long WXUNUSED(item)) const
+int wxListCtrlBase::OnGetItemImage([[maybe_unused]] long item) const
 {
     wxCHECK_MSG(!GetImageList(wxIMAGE_LIST_SMALL),
                 -1,
@@ -276,7 +276,7 @@ int wxListCtrlBase::OnGetItemColumnImage(long item, long column) const
     return -1;
 }
 
-wxItemAttr* wxListCtrlBase::OnGetItemColumnAttr(long item, long WXUNUSED(column)) const
+wxItemAttr* wxListCtrlBase::OnGetItemColumnAttr(long item, [[maybe_unused]] long column) const
 {
     return OnGetItemAttr(item);
 }

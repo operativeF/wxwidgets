@@ -1086,7 +1086,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
                                 WXHWND hwnd,
                                 WXUINT uNotification,
                                 WXWPARAM wParam,
-                                WXLPARAM WXUNUSED(lParam),
+                                [[maybe_unused]] WXLPARAM lParam,
                                 LONG_PTR dwRefData
                             )
 {

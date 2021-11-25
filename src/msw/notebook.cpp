@@ -1276,13 +1276,13 @@ wxColour wxNotebook::GetThemeBackgroundColour() const
 
 // override these 2 functions to do nothing: everything is done in OnSize
 
-void wxNotebook::SetConstraintSizes(bool WXUNUSED(recurse))
+void wxNotebook::SetConstraintSizes([[maybe_unused]] bool recurse)
 {
   // don't set the sizes of the pages - their correct size is not yet known
   wxControl::SetConstraintSizes(false);
 }
 
-bool wxNotebook::DoPhase(int WXUNUSED(nPhase))
+bool wxNotebook::DoPhase([[maybe_unused]] int nPhase)
 {
   return true;
 }

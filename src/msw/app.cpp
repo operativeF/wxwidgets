@@ -550,7 +550,7 @@ bool wxGUIAppTraits::CanUseStderr()
     return false;
 }
 
-bool wxGUIAppTraits::WriteToStderr(const std::string& WXUNUSED(text))
+bool wxGUIAppTraits::WriteToStderr([[maybe_unused]] const std::string& text)
 {
     return false;
 }

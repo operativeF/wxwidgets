@@ -96,17 +96,17 @@ public:
 
     // creating and saving icons is not supported
     bool Create(wxGDIImage *WXUNUSED(image),
-                        const void* WXUNUSED(data),
-                        wxBitmapType WXUNUSED(flags),
-                        wxSize WXUNUSED(sz),
-                        int WXUNUSED(depth) = 1) override
+                        [[maybe_unused]] const void* data,
+                        [[maybe_unused]] wxBitmapType flags,
+                        [[maybe_unused]] wxSize sz,
+                        [[maybe_unused]] int depth = 1) override
     {
         return false;
     }
 
     bool Save(const wxGDIImage *WXUNUSED(image),
-                      const std::string& WXUNUSED(name),
-                      wxBitmapType WXUNUSED(type)) const override
+                      [[maybe_unused]] const std::string& name,
+                      [[maybe_unused]] wxBitmapType type) const override
     {
         return false;
     }
@@ -186,7 +186,7 @@ wxGDIImageHandlerList wxGDIImage::ms_handlers;
 // wxGDIImage functions forwarded to wxGDIImageRefData
 // ----------------------------------------------------------------------------
 
-bool wxGDIImage::FreeResource(bool WXUNUSED(force))
+bool wxGDIImage::FreeResource([[maybe_unused]] bool force)
 {
     if ( !IsNull() )
     {
@@ -306,8 +306,8 @@ void wxGDIImage::InitStandardHandlers()
 // ----------------------------------------------------------------------------
 
 bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
-                                    const std::string& name, wxBitmapType WXUNUSED(flags),
-                                    wxSize WXUNUSED(desiredSz))
+                                    const std::string& name, [[maybe_unused]] wxBitmapType flags,
+                                    [[maybe_unused]] wxSize desiredSz)
 {
     // TODO: load colourmap.
     WXHBITMAP hbmp = ::LoadBitmapW(wxGetInstance(), boost::nowide::widen(name).c_str());
@@ -344,8 +344,8 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
 
 bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
                                 const std::string& name,
-                                wxBitmapType WXUNUSED(flags),
-                                wxSize WXUNUSED(desiredSz))
+                                [[maybe_unused]] wxBitmapType flags,
+                                [[maybe_unused]] wxSize desiredSz)
 {
     wxCHECK_MSG( bitmap, false, "NULL bitmap in LoadFile" );
 
@@ -373,7 +373,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
 
 bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
                                 const std::string& name,
-                                wxBitmapType WXUNUSED(type),
+                                [[maybe_unused]] wxBitmapType type,
                                 const wxPalette * WXUNUSED(pal)) const
 {
 #if wxUSE_WXDIB
@@ -393,7 +393,7 @@ bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
 
 bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
                                 const std::string& name,
-                                wxBitmapType WXUNUSED(flags),
+                                [[maybe_unused]] wxBitmapType flags,
                                 wxSize desiredSz)
 {
     icon->UnRef();
@@ -497,7 +497,7 @@ bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
 
 bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
                                     const std::string& name,
-                                    wxBitmapType WXUNUSED(flags),
+                                    [[maybe_unused]] wxBitmapType flags,
                                     wxSize desiredSz)
 {
     // do we need the icon of the specific size or would any icon do?
@@ -564,8 +564,8 @@ bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
 
 bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
                                     const std::string& name,
-                                    wxBitmapType WXUNUSED(flags),
-                                    wxSize WXUNUSED(desiredSz))
+                                    [[maybe_unused]] wxBitmapType flags,
+                                    [[maybe_unused]] wxSize desiredSz)
 {
     const void* pngData = nullptr;
     size_t pngSize = 0;

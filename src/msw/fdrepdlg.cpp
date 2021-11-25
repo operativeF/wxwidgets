@@ -175,7 +175,7 @@ wxFindReplaceDialogImpl::~wxFindReplaceDialogImpl()
 bool
 wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
                                             WXUINT WXUNUSED_UNLESS_DEBUG(nMsg),
-                                            WXWPARAM WXUNUSED(wParam),
+                                            [[maybe_unused]] WXWPARAM wParam,
                                             WXLPARAM lParam)
 {
     wxASSERT_MSG( nMsg == ms_msgFindDialog, "unexpected message received" );
@@ -252,7 +252,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
 UINT_PTR CALLBACK
 wxFindReplaceDialogHookProc(WXHWND hwnd,
                             WXUINT uiMsg,
-                            WXWPARAM WXUNUSED(wParam),
+                            [[maybe_unused]] WXWPARAM wParam,
                             WXLPARAM lParam)
 {
     if ( uiMsg == WM_INITDIALOG )
@@ -416,7 +416,7 @@ std::string wxFindReplaceDialog::GetTitle() const
 // wxFindReplaceDialog position/size
 // ----------------------------------------------------------------------------
 
-void wxFindReplaceDialog::DoSetSize([[maybe_unused]] wxRect boundary, unsigned int WXUNUSED(sizeFlags))
+void wxFindReplaceDialog::DoSetSize([[maybe_unused]] wxRect boundary, [[maybe_unused]] unsigned int sizeFlags)
 {
     // ignore - we can't change the size of this standard dialog
     return;

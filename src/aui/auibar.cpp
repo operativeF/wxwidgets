@@ -182,7 +182,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
                            wxItemKind kind,
                            const std::string& shortHelpString,
                            const std::string& longHelpString,
-                           wxObject* WXUNUSED(client_data))
+                           [[maybe_unused]] wxObject* client_data)
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
@@ -461,7 +461,7 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByIndex(int idx) const
     return &(m_items[idx]);
 }
 
-void wxAuiToolBar::SetToolBitmapSize(const wxSize& WXUNUSED(size))
+void wxAuiToolBar::SetToolBitmapSize([[maybe_unused]] const wxSize& size)
 {
     // TODO: wxToolBar compatibility
 }

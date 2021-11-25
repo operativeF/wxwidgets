@@ -442,8 +442,8 @@ std::string wxMarkupParser::Strip(const std::string& text)
         void OnTeletypeStart() override { }
         void OnTeletypeEnd() override { }
 
-        void OnSpanStart(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
-        void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
+        void OnSpanStart([[maybe_unused]] const wxMarkupSpanAttributes& a) override { }
+        void OnSpanEnd([[maybe_unused]] const wxMarkupSpanAttributes& a) override { }
 
     private:
         std::string m_text;

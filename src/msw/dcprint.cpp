@@ -326,9 +326,9 @@ void wxPrinterDCImpl::DoDrawBitmap(const wxBitmap& bmp,
 bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                          wxCoord width, wxCoord height,
                          wxDC *source,
-                         wxPoint WXUNUSED(src),
-                         wxRasterOperationMode WXUNUSED(rop), bool useMask,
-                         wxPoint WXUNUSED(srcMask))
+                         [[maybe_unused]] wxPoint src,
+                         [[maybe_unused]] wxRasterOperationMode rop, bool useMask,
+                         [[maybe_unused]] wxPoint srcMask)
 {
     wxDCImpl *impl = source->GetImpl();
     wxMSWDCImpl *msw_impl = wxDynamicCast(impl, wxMSWDCImpl);

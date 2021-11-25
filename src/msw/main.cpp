@@ -73,7 +73,7 @@ unsigned long wxGlobalSEHandler(EXCEPTION_POINTERS *pExcPtrs)
 
 #ifdef __VISUALC__
 
-void wxSETranslator(unsigned int WXUNUSED(code), EXCEPTION_POINTERS *ep)
+void wxSETranslator([[maybe_unused]] unsigned int code, EXCEPTION_POINTERS *ep)
 {
     switch ( wxGlobalSEHandler(ep) )
     {
@@ -212,8 +212,8 @@ wxMSWEntryCommon(WXHINSTANCE hInstance, int nCmdShow)
 }
 
 bool wxEntryStart(WXHINSTANCE hInstance,
-                              WXHINSTANCE WXUNUSED(hPrevInstance),
-                              wxCmdLineArgType WXUNUSED(pCmdLine),
+                              [[maybe_unused]] WXHINSTANCE hPrevInstance,
+                              [[maybe_unused]] wxCmdLineArgType pCmdLine,
                               int nCmdShow)
 {
     if ( !wxMSWEntryCommon(hInstance, nCmdShow) )
@@ -223,8 +223,8 @@ bool wxEntryStart(WXHINSTANCE hInstance,
 }
 
 int wxEntry(WXHINSTANCE hInstance,
-                        WXHINSTANCE WXUNUSED(hPrevInstance),
-                        wxCmdLineArgType WXUNUSED(pCmdLine),
+                        [[maybe_unused]] WXHINSTANCE hPrevInstance,
+                        [[maybe_unused]] wxCmdLineArgType pCmdLine,
                         int nCmdShow)
 {
     if ( !wxMSWEntryCommon(hInstance, nCmdShow) )

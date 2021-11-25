@@ -563,7 +563,7 @@ void
 wxRendererGeneric::DrawSplitterBorder(wxWindow *win,
                                       wxDC& dc,
                                       const wxRect& rectOrig,
-                                      unsigned int WXUNUSED(falgs))
+                                      [[maybe_unused]] unsigned int falgs)
 {
     if ( win->HasFlag(wxSP_3DBORDER) )
     {
@@ -579,7 +579,7 @@ wxRendererGeneric::DrawSplitterSash(wxWindow *win,
                                     const wxSize& sizeReal,
                                     wxCoord position,
                                     wxOrientation orient,
-                                    unsigned int WXUNUSED(flags))
+                                    [[maybe_unused]] unsigned int flags)
 {
     // to avoid duplicating the same code for horizontal and vertical sashes,
     // simply mirror the DC instead if needed (i.e. if horz splitter)
@@ -660,7 +660,7 @@ void
 wxRendererGeneric::DrawDropArrow(wxWindow *win,
                                  wxDC& dc,
                                  const wxRect& rect,
-                                 unsigned int WXUNUSED(flags))
+                                 [[maybe_unused]] unsigned int flags)
 {
     // This generic implementation should be good
     // enough for Windows platforms (including XP).
@@ -707,7 +707,7 @@ wxRendererGeneric::DrawCheckMark(wxWindow *WXUNUSED(win),
     dc.DrawCheckMark(rect);
 }
 
-wxSize wxRendererGeneric::GetCheckBoxSize(wxWindow *win, unsigned int WXUNUSED(flags))
+wxSize wxRendererGeneric::GetCheckBoxSize(wxWindow *win, [[maybe_unused]] unsigned int flags)
 {
     wxCHECK_MSG( win, wxSize(0, 0), "Must have a valid window" );
 
@@ -821,7 +821,7 @@ wxRendererGeneric::DrawItemSelectionRect(wxWindow * WXUNUSED(win),
 }
 
 void
-wxRendererGeneric::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect& rect, unsigned int WXUNUSED(flags))
+wxRendererGeneric::DrawFocusRect([[maybe_unused]] wxWindow* win, wxDC& dc, const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     // draw the pixels manually because the "dots" in wxPen with wxPenStyle::Dot style
     // may be short traits and not really dots
@@ -862,28 +862,28 @@ wxRendererGeneric::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect
     dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
-void wxRendererGeneric::DrawChoice(wxWindow* WXUNUSED(win), wxDC& WXUNUSED(dc),
-                           const wxRect& WXUNUSED(rect), unsigned int WXUNUSED(flags))
+void wxRendererGeneric::DrawChoice([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+                           [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawChoice");
 }
 
-void wxRendererGeneric::DrawComboBox(wxWindow* WXUNUSED(win), wxDC& WXUNUSED(dc),
-                           const wxRect& WXUNUSED(rect), unsigned int WXUNUSED(flags))
+void wxRendererGeneric::DrawComboBox([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+                           [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawComboBox");
 }
 
-void wxRendererGeneric::DrawRadioBitmap(wxWindow* WXUNUSED(win), wxDC& WXUNUSED(dc),
-                           const wxRect& WXUNUSED(rect), unsigned int WXUNUSED(flags))
+void wxRendererGeneric::DrawRadioBitmap([[maybe_unused]] wxWindow* win, wxDC& WXUNUSED(dc),
+                           [[maybe_unused]] const wxRect& rect, [[maybe_unused]] unsigned int flags)
 {
     wxFAIL_MSG("UNIMPLEMENTED: wxRendererGeneric::DrawRadioBitmap");
 }
 
-void wxRendererGeneric::DrawTextCtrl(wxWindow* WXUNUSED(win),
+void wxRendererGeneric::DrawTextCtrl([[maybe_unused]] wxWindow* win,
                                      wxDC& dc,
                                      const wxRect& rect,
-                                     unsigned int WXUNUSED(flags))
+                                     [[maybe_unused]] unsigned int flags)
 {
     wxColour fill;
     wxColour bdr;
@@ -901,9 +901,9 @@ void wxRendererGeneric::DrawTextCtrl(wxWindow* WXUNUSED(win),
 
 void wxRendererGeneric::DrawTitleBarBitmap(wxWindow * WXUNUSED(win),
                                            wxDC& WXUNUSED(dc),
-                                           const wxRect& WXUNUSED(rect),
-                                           wxTitleBarButton WXUNUSED(button),
-                                           unsigned int WXUNUSED(flags))
+                                           [[maybe_unused]] const wxRect& rect,
+                                           [[maybe_unused]] wxTitleBarButton button,
+                                           [[maybe_unused]] unsigned int flags)
 {
     // no need to fail here, if wxHAS_DRAW_TITLE_BAR_BITMAP is defined this
     // will be implemented in the native renderer and this version is never
@@ -956,7 +956,7 @@ void wxRendererGeneric::DrawGauge(wxWindow* win,
 }
 
 void
-wxRendererGeneric::DrawItemText(wxWindow* WXUNUSED(win),
+wxRendererGeneric::DrawItemText([[maybe_unused]] wxWindow* win,
                                 wxDC& dc,
                                 const std::string& text,
                                 const wxRect& rect,

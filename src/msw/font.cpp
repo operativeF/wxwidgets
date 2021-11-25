@@ -863,7 +863,7 @@ bool wxFont::RealizeResource()
     return GetHFONT() != nullptr;
 }
 
-bool wxFont::FreeResource(bool WXUNUSED(force))
+bool wxFont::FreeResource([[maybe_unused]] bool force)
 {
     if ( !M_FONTDATA )
         return false;

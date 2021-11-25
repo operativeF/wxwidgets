@@ -84,7 +84,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxXPMHandler,wxImageHandler);
 
 bool wxXPMHandler::LoadFile(wxImage *image,
                             wxInputStream& stream,
-                            bool WXUNUSED(verbose), int WXUNUSED(index))
+                            [[maybe_unused]] bool verbose, [[maybe_unused]] int index)
 {
     wxXPMDecoder decoder;
 
@@ -135,7 +135,7 @@ MakeValidCIdent(wxString* str)
 } // anonymous namespace
 
 bool wxXPMHandler::SaveFile(wxImage * image,
-                            wxOutputStream& stream, bool WXUNUSED(verbose))
+                            wxOutputStream& stream, [[maybe_unused]] bool verbose)
 {
     // 1. count colours:
     #define MaxCixels  92

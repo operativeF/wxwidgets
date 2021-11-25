@@ -371,7 +371,7 @@ wxSize wxArtProvider::GetSizeHint(const wxArtClient& client,
 
 #ifndef wxHAS_NATIVE_ART_PROVIDER_IMPL
 /*static*/
-wxSize wxArtProvider::GetNativeSizeHint(const wxArtClient& WXUNUSED(client))
+wxSize wxArtProvider::GetNativeSizeHint([[maybe_unused]] const wxArtClient& client)
 {
     // rather than returning some arbitrary value that doesn't make much
     // sense (as 2.8 used to do), tell the caller that we don't have a clue:

@@ -15,7 +15,7 @@
 WX_DEFINE_LIST(wxObjectList)
 
 // wxStringList contains wxString objects, not pointers
-void _WX_LIST_HELPER_wxStringListBase::DeleteFunction( wxString WXUNUSED(X) )
+void _WX_LIST_HELPER_wxStringListBase::DeleteFunction( [[maybe_unused]] wxString X )
 {
 }
 

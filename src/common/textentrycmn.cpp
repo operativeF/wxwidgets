@@ -254,7 +254,7 @@ std::string wxTextEntryBase::GetHint() const
 // margins support
 // ----------------------------------------------------------------------------
 
-bool wxTextEntryBase::DoSetMargins(const wxPoint& WXUNUSED(pt))
+bool wxTextEntryBase::DoSetMargins([[maybe_unused]] const wxPoint& pt)
 {
     return false;
 }

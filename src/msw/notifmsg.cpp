@@ -72,7 +72,7 @@ public:
         m_icon = icon;
     }
 
-    bool AddAction(wxWindowID WXUNUSED(actionid), const std::string &WXUNUSED(label)) override
+    bool AddAction([[maybe_unused]] wxWindowID actionid, const std::string &WXUNUSED(label)) override
     {
         // Actions are not supported in balloon notifications
         return false;

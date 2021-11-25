@@ -136,8 +136,8 @@ void wxControlBase::DoUpdateWindowUI(wxUpdateUIEvent& event)
 #endif // wxUSE_RADIOBTN
 }
 
-wxSize wxControlBase::DoGetSizeFromTextSize(int WXUNUSED(xlen),
-                                            int WXUNUSED(ylen)) const
+wxSize wxControlBase::DoGetSizeFromTextSize([[maybe_unused]] int xlen,
+                                            [[maybe_unused]] int ylen) const
 {
     return {-1, -1};
 }
@@ -220,7 +220,7 @@ wxBorder wxControlBase::GetDefaultBorder() const
 }
 
 /* static */ wxVisualAttributes
-wxControlBase::GetCompositeControlsDefaultAttributes(wxWindowVariant WXUNUSED(variant))
+wxControlBase::GetCompositeControlsDefaultAttributes([[maybe_unused]] wxWindowVariant variant)
 {
     wxVisualAttributes attrs;
     attrs.font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);

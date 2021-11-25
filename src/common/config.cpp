@@ -52,8 +52,8 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxConfigBase, wxObject);
 // in each class ensures compatibility.
 wxConfigBase::wxConfigBase(const std::string& appName,
                            const std::string& vendorName,
-                           const std::string& WXUNUSED(localFilename),
-                           const std::string& WXUNUSED(globalFilename),
+                           [[maybe_unused]] const std::string& localFilename,
+                           [[maybe_unused]] const std::string& globalFilename,
                            unsigned int style)
             : m_appName(appName), m_vendorName(vendorName), m_style(style)
 {

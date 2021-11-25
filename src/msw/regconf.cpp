@@ -487,7 +487,7 @@ bool wxRegConfig::GetNextEntry(std::string& str, long& lIndex) const
   return bOk;
 }
 
-size_t wxRegConfig::GetNumberOfEntries(bool WXUNUSED(bRecursive)) const
+size_t wxRegConfig::GetNumberOfEntries([[maybe_unused]] bool bRecursive) const
 {
   size_t nEntries = 0;
 
@@ -504,7 +504,7 @@ size_t wxRegConfig::GetNumberOfEntries(bool WXUNUSED(bRecursive)) const
   return nEntries;
 }
 
-size_t wxRegConfig::GetNumberOfGroups(bool WXUNUSED(bRecursive)) const
+size_t wxRegConfig::GetNumberOfGroups([[maybe_unused]] bool bRecursive) const
 {
   size_t nGroups = 0;
 

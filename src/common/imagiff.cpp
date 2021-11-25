@@ -709,7 +709,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxIFFHandler, wxImageHandler);
 #if wxUSE_STREAMS
 
 bool wxIFFHandler::LoadFile(wxImage *image, wxInputStream& stream,
-                            bool verbose, int WXUNUSED(index))
+                            bool verbose, [[maybe_unused]] int index)
 {
     wxIFFDecoder *decod;
     int error;

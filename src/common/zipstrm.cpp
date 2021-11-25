@@ -676,7 +676,7 @@ class wxZipWeakLinks
 public:
     wxZipWeakLinks()  = default;
 
-    void Release(const wxZipInputStream* WXUNUSED(x))
+    void Release([[maybe_unused]] const wxZipInputStream* x)
         { if (--m_ref == 0) delete this; }
     void Release(wxFileOffset key)
         { RemoveEntry(key); if (--m_ref == 0) delete this; }

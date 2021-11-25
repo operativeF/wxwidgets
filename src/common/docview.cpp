@@ -659,7 +659,7 @@ bool wxView::TryBefore(wxEvent& event)
     return doc && doc->ProcessEventLocally(event);
 }
 
-void wxView::OnActivateView(bool WXUNUSED(activate),
+void wxView::OnActivateView([[maybe_unused]] bool activate,
                             wxView *WXUNUSED(activeView),
                             wxView *WXUNUSED(deactiveView))
 {
@@ -714,7 +714,7 @@ void wxView::Activate(bool activate)
     }
 }
 
-bool wxView::OnClose(bool WXUNUSED(deleteWindow))
+bool wxView::OnClose([[maybe_unused]] bool deleteWindow)
 {
     return GetDocument() ? GetDocument()->Close() : true;
 }
@@ -895,7 +895,7 @@ wxBEGIN_EVENT_TABLE(wxDocManager, wxEvtHandler)
 #endif // wxUSE_PRINTING_ARCHITECTURE
 wxEND_EVENT_TABLE()
 
-wxDocManager::wxDocManager(unsigned int WXUNUSED(flags), bool initialize)
+wxDocManager::wxDocManager([[maybe_unused]] unsigned int flags, bool initialize)
 {
     sm_docManager = this;
 
@@ -1493,7 +1493,7 @@ wxView *wxDocManager::CreateView(wxDocument *doc, unsigned int flags)
 
 // Not yet implemented
 void
-wxDocManager::DeleteTemplate(wxDocTemplate *WXUNUSED(temp), unsigned int WXUNUSED(flags))
+wxDocManager::DeleteTemplate(wxDocTemplate *WXUNUSED(temp), [[maybe_unused]] unsigned int flags)
 {
 }
 
@@ -1643,8 +1643,8 @@ wxDocTemplate *wxDocManager::FindTemplateForPath(const fs::path& path)
 wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                                                 int noTemplates,
                                                 fs::path& path,
-                                                unsigned int WXUNUSED(flags),
-                                                bool WXUNUSED(save))
+                                                [[maybe_unused]] unsigned int flags,
+                                                [[maybe_unused]] bool save)
 {
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
     wxString descrBuf;
@@ -2052,7 +2052,7 @@ wxDocPrintout::wxDocPrintout(wxView *view, const std::string& title)
 {
 }
 
-bool wxDocPrintout::OnPrintPage(int WXUNUSED(page))
+bool wxDocPrintout::OnPrintPage([[maybe_unused]] int page)
 {
     wxDC *dc = GetDC();
 

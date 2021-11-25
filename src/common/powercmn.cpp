@@ -27,13 +27,13 @@
 #if !defined(WX_WINDOWS) && !defined(__APPLE__)
 
 bool
-wxPowerResource::Acquire(wxPowerResourceKind WXUNUSED(kind),
-                         const wxString& WXUNUSED(reason))
+wxPowerResource::Acquire([[maybe_unused]] wxPowerResourceKind kind,
+                         [[maybe_unused]] const wxString& reason)
 {
     return false;
 }
 
-void wxPowerResource::Release(wxPowerResourceKind WXUNUSED(kind))
+void wxPowerResource::Release([[maybe_unused]] wxPowerResourceKind kind)
 {
 }
 

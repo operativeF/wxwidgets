@@ -662,7 +662,7 @@ DWORD wxToolBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 // adding/removing tools
 // ----------------------------------------------------------------------------
 
-bool wxToolBar::DoInsertTool(size_t WXUNUSED(pos),
+bool wxToolBar::DoInsertTool([[maybe_unused]] size_t pos,
                              wxToolBarToolBase *tool)
 {
     // We might be inserting back a tool previously removed from the toolbar,
@@ -1459,7 +1459,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
 // message handlers
 // ----------------------------------------------------------------------------
 
-bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
+bool wxToolBar::MSWCommand([[maybe_unused]] WXUINT cmd, WXWORD id_)
 {
     // cast to signed is important as we compare this id with (signed) ints in
     // FindById() and without the cast we'd get a positive int from a
@@ -1556,7 +1556,7 @@ bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
     return true;
 }
 
-bool wxToolBar::MSWOnNotify(int WXUNUSED(idCtrl),
+bool wxToolBar::MSWOnNotify([[maybe_unused]] int idCtrl,
                             WXLPARAM lParam,
                             WXLPARAM *WXUNUSED(result))
 {
@@ -1787,7 +1787,7 @@ void wxToolBar::DoToggleTool(wxToolBarToolBase *tool,
                   (WXLPARAM)MAKELONG(MSWShouldBeChecked(tool), 0));
 }
 
-void wxToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(toggle))
+void wxToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), [[maybe_unused]] bool toggle)
 {
     // VZ: AFAIK, the button has to be created either with TBSTYLE_CHECK or
     //     without, so we really need to delete the button and recreate it here
@@ -1944,7 +1944,7 @@ void wxToolBar::OnDPIChanged(wxDPIChangedEvent& event)
     CallAfter(&wxToolBar::RealizeHelper);
 }
 
-bool wxToolBar::HandleSize(WXWPARAM WXUNUSED(wParam), WXLPARAM WXUNUSED(lParam))
+bool wxToolBar::HandleSize([[maybe_unused]] WXWPARAM wParam, [[maybe_unused]] WXLPARAM lParam)
 {
     // wait until we have some tools
     if ( !GetToolsCount() )
@@ -2118,7 +2118,7 @@ bool wxToolBar::MSWEraseBgHook(WXHDC hDC)
 
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
-void wxToolBar::HandleMouseMove(WXWPARAM WXUNUSED(wParam), WXLPARAM lParam)
+void wxToolBar::HandleMouseMove([[maybe_unused]] WXWPARAM wParam, WXLPARAM lParam)
 {
     wxCoord x = GET_X_LPARAM(lParam),
             y = GET_Y_LPARAM(lParam);

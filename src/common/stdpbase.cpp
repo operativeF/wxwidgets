@@ -106,7 +106,7 @@ wxString wxStandardPathsBase::GetTempDir() const
     return wxFileName::GetTempDir();
 }
 
-wxString wxStandardPathsBase::GetUserDir(Dir WXUNUSED(userDir)) const
+wxString wxStandardPathsBase::GetUserDir([[maybe_unused]] Dir userDir) const
 {
     return wxFileName::GetHomeDir();
 }

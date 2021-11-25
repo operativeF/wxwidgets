@@ -148,7 +148,7 @@ int wxBitmapComboBoxBase::DetermineIndent()
 
 void wxBitmapComboBoxBase::DrawBackground(wxDC& dc,
                                           const wxRect& rect,
-                                          int WXUNUSED(item),
+                                          [[maybe_unused]] int item,
                                           unsigned int flags) const
 {
     if ( flags & wxODCB_PAINTING_SELECTED )
@@ -180,7 +180,7 @@ void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
                                     const wxRect& rect,
                                     int item,
                                     std::string_view text,
-                                    unsigned int WXUNUSED(flags)) const
+                                    [[maybe_unused]] unsigned int flags) const
 {
     const wxBitmap& bmp = *GetBitmapPtr(item);
     if ( bmp.IsOk() )
@@ -204,7 +204,7 @@ void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
                               rect.y + (rect.height-dc.GetCharHeight())/2});
 }
 
-wxCoord wxBitmapComboBoxBase::MeasureItem(size_t WXUNUSED(item)) const
+wxCoord wxBitmapComboBoxBase::MeasureItem([[maybe_unused]] size_t item) const
 {
     if ( m_usedImgSize.y >= 0 )
     {

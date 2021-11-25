@@ -201,7 +201,7 @@ wxBorder wxControl::GetDefaultBorder() const
 }
 
 /* static */ wxVisualAttributes
-wxControl::GetClassDefaultAttributes(wxWindowVariant WXUNUSED(variant))
+wxControl::GetClassDefaultAttributes([[maybe_unused]] wxWindowVariant variant)
 {
     wxVisualAttributes attrs;
 

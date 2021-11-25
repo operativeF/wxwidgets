@@ -138,8 +138,8 @@ wxToolBarToolBase *wxToolBarBase::DoAddTool(int toolid,
                                             const std::string& shortHelp,
                                             const std::string& longHelp,
                                             wxObject *clientData,
-                                            wxCoord WXUNUSED(xPos),
-                                            wxCoord WXUNUSED(yPos))
+                                            [[maybe_unused]] wxCoord xPos,
+                                            [[maybe_unused]] wxCoord yPos)
 {
     InvalidateBestSize();
     return InsertTool(GetToolsCount(), toolid, label, bitmap, bmpDisabled,
@@ -591,7 +591,7 @@ void wxToolBarBase::SetMargins(int x, int y)
     m_yMargin = y;
 }
 
-void wxToolBarBase::SetRows(int WXUNUSED(nRows))
+void wxToolBarBase::SetRows([[maybe_unused]] int nRows)
 {
     // nothing
 }
@@ -644,8 +644,8 @@ bool wxToolBarBase::OnLeftClick(int toolid, bool toggleDown)
 
 // Call when right button down.
 void wxToolBarBase::OnRightClick(int toolid,
-                                 long WXUNUSED(x),
-                                 long WXUNUSED(y))
+                                 [[maybe_unused]] long x,
+                                 [[maybe_unused]] long y)
 {
     wxCommandEvent event(wxEVT_TOOL_RCLICKED, toolid);
     event.SetEventObject(this);

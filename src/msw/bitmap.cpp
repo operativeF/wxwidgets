@@ -1001,9 +1001,9 @@ wxImage wxBitmap::ConvertToImage() const
 #else // !wxUSE_WXDIB
 
 bool
-wxBitmap::CreateFromImage(const wxImage& WXUNUSED(image),
-                          int WXUNUSED(depth),
-                          WXHDC WXUNUSED(hdc))
+wxBitmap::CreateFromImage([[maybe_unused]] const wxImage& image,
+                          [[maybe_unused]] int depth,
+                          [[maybe_unused]] WXHDC hdc)
 {
     return false;
 }
@@ -1683,25 +1683,25 @@ bool wxBitmapHandler::Save(const wxGDIImage *image,
 }
 
 bool wxBitmapHandler::Create(wxBitmap *WXUNUSED(bitmap),
-                             const void* WXUNUSED(data),
-                             wxBitmapType WXUNUSED(type),
-                             wxSize WXUNUSED(sz),
-                             int WXUNUSED(depth))
+                             [[maybe_unused]] const void* data,
+                             [[maybe_unused]] wxBitmapType type,
+                             [[maybe_unused]] wxSize sz,
+                             [[maybe_unused]] int depth)
 {
     return false;
 }
 
 bool wxBitmapHandler::LoadFile(wxBitmap *WXUNUSED(bitmap),
-                               const std::string& WXUNUSED(name),
-                               wxBitmapType WXUNUSED(type),
-                               wxSize WXUNUSED(desiredSz))
+                               [[maybe_unused]] const std::string& name,
+                               [[maybe_unused]] wxBitmapType type,
+                               [[maybe_unused]] wxSize desiredSz)
 {
     return false;
 }
 
 bool wxBitmapHandler::SaveFile(const wxBitmap *WXUNUSED(bitmap),
-                               const std::string& WXUNUSED(name),
-                               wxBitmapType WXUNUSED(type),
+                               [[maybe_unused]] const std::string& name,
+                               [[maybe_unused]] wxBitmapType type,
                                const wxPalette *WXUNUSED(palette)) const
 {
     return false;

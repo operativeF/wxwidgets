@@ -201,8 +201,8 @@ void wxSpinButton::SetRange(int minVal, int maxVal)
     }
 }
 
-bool wxSpinButton::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
-                               WXWORD WXUNUSED(pos), WXHWND control)
+bool wxSpinButton::MSWOnScroll([[maybe_unused]] int orientation, WXWORD wParam,
+                               [[maybe_unused]] WXWORD pos, WXHWND control)
 {
     wxCHECK_MSG( control, false, "scrolling what?" );
 
@@ -221,7 +221,7 @@ bool wxSpinButton::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
     return HandleWindowEvent(event);
 }
 
-bool wxSpinButton::MSWOnNotify(int WXUNUSED(idCtrl), WXLPARAM lParam, WXLPARAM *result)
+bool wxSpinButton::MSWOnNotify([[maybe_unused]] int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 {
     NM_UPDOWN *lpnmud = (NM_UPDOWN *)lParam;
 
@@ -259,7 +259,7 @@ bool wxSpinButton::MSWOnNotify(int WXUNUSED(idCtrl), WXLPARAM lParam, WXLPARAM *
     return processed;
 }
 
-bool wxSpinButton::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD WXUNUSED(id))
+bool wxSpinButton::MSWCommand([[maybe_unused]] WXUINT cmd, [[maybe_unused]] WXWORD id)
 {
     // No command messages
     return false;

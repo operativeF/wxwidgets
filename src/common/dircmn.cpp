@@ -25,7 +25,7 @@ import <string>;
 // ----------------------------------------------------------------------------
 
 wxDirTraverseResult
-wxDirTraverser::OnOpenError(const std::string& WXUNUSED(dirname))
+wxDirTraverser::OnOpenError([[maybe_unused]] const std::string& dirname)
 {
     return wxDirTraverseResult::Ignore;
 }
@@ -213,7 +213,7 @@ public:
         return wxDirTraverseResult::Continue;
     }
 
-    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir([[maybe_unused]] const std::string& dirname) override
     {
         return wxDirTraverseResult::Continue;
     }
@@ -258,7 +258,7 @@ public:
         return wxDirTraverseResult::Stop;
     }
 
-    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir([[maybe_unused]] const std::string& dirname) override
     {
         return wxDirTraverseResult::Continue;
     }
@@ -321,7 +321,7 @@ public:
         return wxDirTraverseResult::Continue;
     }
 
-    wxDirTraverseResult OnDir(const std::string& WXUNUSED(dirname)) override
+    wxDirTraverseResult OnDir([[maybe_unused]] const std::string& dirname) override
     {
         return wxDirTraverseResult::Continue;
     }

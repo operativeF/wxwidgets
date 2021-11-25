@@ -1714,7 +1714,7 @@ wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
 #elif defined(__WXOSX__)
 
 /* static */
-wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory WXUNUSED(cat))
+wxString wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory cat)
 {
     CFLocaleRef userLocaleRefRaw;
     if ( wxGetLocale() )

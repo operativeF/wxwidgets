@@ -207,7 +207,7 @@ void wxRadioButton::Command (wxCommandEvent& event)
     ProcessCommand(event);
 }
 
-bool wxRadioButton::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxRadioButton::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     if ( param != BN_CLICKED )
         return false;

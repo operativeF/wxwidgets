@@ -680,7 +680,7 @@ bool wxFrame::MSWDoTranslateMessage(wxFrame *frame, WXMSG *pMsg)
 // our private (non virtual) message handlers
 // ---------------------------------------------------------------------------
 
-bool wxFrame::HandleSize(int WXUNUSED(x), int WXUNUSED(y), WXUINT id)
+bool wxFrame::HandleSize([[maybe_unused]] int x, [[maybe_unused]] int y, WXUINT id)
 {
     // We can get a WM_SIZE when restoring a hidden window using
     // SetWindowPlacement(), don't do anything here in this case as our state

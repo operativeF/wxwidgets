@@ -21,7 +21,7 @@
 // wxNativeEncodingInfo
 // ----------------------------------------------------------------------------
 
-bool wxNativeEncodingInfo::FromString(const wxString& WXUNUSED(s))
+bool wxNativeEncodingInfo::FromString([[maybe_unused]] const wxString& s)
 {
     return false;
 }
@@ -31,7 +31,7 @@ wxString wxNativeEncodingInfo::ToString() const
     return {};
 }
 
-bool wxTestFontEncoding(const wxNativeEncodingInfo& WXUNUSED(info))
+bool wxTestFontEncoding([[maybe_unused]] const wxNativeEncodingInfo& info)
 {
     return true;
 }

@@ -104,7 +104,7 @@ wxDataFormat wxDataObjectComposite::GetReceivedFormat() const
 }
 
 wxDataFormat
-wxDataObjectComposite::GetPreferredFormat(Direction WXUNUSED(dir)) const
+wxDataObjectComposite::GetPreferredFormat([[maybe_unused]] Direction dir) const
 {
     wxSimpleDataObjectList::compatibility_iterator node = m_dataObjects.Item( m_preferred );
 
@@ -504,7 +504,7 @@ bool wxHTMLDataObject::GetDataHere(void *buf) const
     return true;
 }
 
-bool wxHTMLDataObject::SetData(size_t WXUNUSED(len), const void *buf)
+bool wxHTMLDataObject::SetData([[maybe_unused]] size_t len, const void *buf)
 {
     if ( buf == nullptr )
         return false;

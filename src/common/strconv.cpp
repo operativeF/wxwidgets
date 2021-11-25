@@ -2686,7 +2686,7 @@ public:
     wxMBConv_wxwin(const wxMBConv_wxwin&) = delete;
 	wxMBConv_wxwin& operator=(const wxMBConv_wxwin&) = delete;
 
-    size_t MB2WC(wchar_t *buf, const char *psz, size_t WXUNUSED(n)) const override
+    size_t MB2WC(wchar_t *buf, const char *psz, [[maybe_unused]] size_t n) const override
     {
         const size_t inbuf = strlen(psz);
         if (buf)
@@ -2697,7 +2697,7 @@ public:
         return inbuf;
     }
 
-    size_t WC2MB(char *buf, const wchar_t *psz, size_t WXUNUSED(n)) const override
+    size_t WC2MB(char *buf, const wchar_t *psz, [[maybe_unused]] size_t n) const override
     {
         const size_t inbuf = wxWcslen(psz);
         if (buf)

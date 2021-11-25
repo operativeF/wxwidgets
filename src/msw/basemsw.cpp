@@ -81,7 +81,7 @@ bool wxConsoleAppTraits::DoMessageFromThreadWait()
     return true;
 }
 
-DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, wxThreadWait WXUNUSED(flags))
+DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, [[maybe_unused]] wxThreadWait flags)
 {
     return DoSimpleWaitForThread(hThread);
 }

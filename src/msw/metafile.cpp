@@ -456,7 +456,7 @@ bool wxMetafileDataObject::GetDataHere(void *buf) const
     return true;
 }
 
-bool wxMetafileDataObject::SetData(size_t WXUNUSED(len), const void *buf)
+bool wxMetafileDataObject::SetData([[maybe_unused]] size_t len, const void *buf)
 {
     const METAFILEPICT *mfpict = (const METAFILEPICT *)buf;
 

@@ -175,7 +175,7 @@ int wxGIFHandler::DoGetImageCount( wxInputStream& stream )
 }
 
 bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
-    bool WXUNUSED(verbose), bool first, int delayMilliSecs, bool loop,
+    [[maybe_unused]] bool verbose, bool first, int delayMilliSecs, bool loop,
     const wxRGB *pal, int palCount, int maskIndex)
 {
     const unsigned long colorcount = image.CountColours(256+1);

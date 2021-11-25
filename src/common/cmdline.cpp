@@ -440,7 +440,7 @@ void wxCmdLineParserData::SetArguments(int argc, wxChar **argv)
     }
 }
 
-void wxCmdLineParserData::SetArguments(int WXUNUSED(argc),
+void wxCmdLineParserData::SetArguments([[maybe_unused]] int argc,
                                        const wxCmdLineArgsArray& argv)
 {
     m_arguments = argv.GetArguments();

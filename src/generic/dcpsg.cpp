@@ -376,19 +376,19 @@ void wxPostScriptDCImpl::Clear()
     //    wxFAIL_MSG( "wxPostScriptDCImpl::Clear not implemented." );
 }
 
-bool wxPostScriptDCImpl::DoFloodFill (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), const wxColour &WXUNUSED(col), wxFloodFillStyle WXUNUSED(style))
+bool wxPostScriptDCImpl::DoFloodFill ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, const wxColour &WXUNUSED(col), [[maybe_unused]] wxFloodFillStyle style)
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::FloodFill not implemented." );
     return false;
 }
 
-bool wxPostScriptDCImpl::DoGetPixel (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxColour * WXUNUSED(col)) const
+bool wxPostScriptDCImpl::DoGetPixel ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y, wxColour * WXUNUSED(col)) const
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::GetPixel not implemented." );
     return false;
 }
 
-void wxPostScriptDCImpl::DoCrossHair (wxCoord WXUNUSED(x), wxCoord WXUNUSED(y))
+void wxPostScriptDCImpl::DoCrossHair ([[maybe_unused]] wxCoord x, [[maybe_unused]] wxCoord y)
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::CrossHair not implemented." );
 }
@@ -938,7 +938,7 @@ void wxPostScriptDCImpl::DoDrawIcon( const wxIcon& icon, wxCoord x, wxCoord y )
     DoDrawBitmap( icon, x, y, true );
 }
 
-void wxPostScriptDCImpl::DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoord y, bool WXUNUSED(useMask) )
+void wxPostScriptDCImpl::DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoord y, [[maybe_unused]] bool useMask )
 {
     wxCHECK_RET( m_ok, "invalid postscript dc" );
 
@@ -1432,7 +1432,7 @@ void wxPostScriptDCImpl::SetBackground (const wxBrush& brush)
     m_backgroundBrush = brush;
 }
 
-void wxPostScriptDCImpl::SetLogicalFunction(wxRasterOperationMode WXUNUSED(function))
+void wxPostScriptDCImpl::SetLogicalFunction([[maybe_unused]] wxRasterOperationMode function)
 {
     wxFAIL_MSG( "wxPostScriptDCImpl::SetLogicalFunction not implemented." );
 }
@@ -1608,7 +1608,7 @@ wxSize wxPostScriptDCImpl::GetPPI() const
 }
 
 
-bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
+bool wxPostScriptDCImpl::wxStartDoc( [[maybe_unused]] const wxString& message )
 {
     wxCHECK_MSG( m_ok, false, "invalid postscript dc" );
 
@@ -1854,7 +1854,7 @@ bool wxPostScriptDCImpl::DoBlit( wxCoord xdest, wxCoord ydest,
                            wxDC *source,
                            wxCoord xsrc, wxCoord ysrc,
                            wxRasterOperationMode rop,
-                           bool WXUNUSED(useMask), wxCoord WXUNUSED(xsrcMask), wxCoord WXUNUSED(ysrcMask) )
+                           [[maybe_unused]] bool useMask, [[maybe_unused]] wxCoord xsrcMask, [[maybe_unused]] wxCoord ysrcMask )
 {
     wxCHECK_MSG( m_ok, false, "invalid postscript dc" );
 

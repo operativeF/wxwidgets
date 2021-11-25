@@ -114,7 +114,7 @@ void wxObjectXmlWriter::DoBeginWriteObject(const wxObject *WXUNUSED(object),
 
 void wxObjectXmlWriter::DoEndWriteObject(const wxObject *WXUNUSED(object),
                                    const wxClassInfo *WXUNUSED(classInfo),
-                                   int WXUNUSED(objectID) )
+                                   [[maybe_unused]] int objectID )
 {
     m_data->Pop();
 }
@@ -167,10 +167,10 @@ void wxObjectXmlWriter::DoWriteNullObject()
 }
 
 void wxObjectXmlWriter::DoWriteDelegate( const wxObject *WXUNUSED(object),
-                                   const wxClassInfo* WXUNUSED(classInfo),
+                                   [[maybe_unused]] const wxClassInfo* classInfo,
                                    const wxPropertyInfo *WXUNUSED(pi),
                                    const wxObject *eventSink, int sinkObjectID,
-                                   const wxClassInfo* WXUNUSED(eventSinkClassInfo),
+                                   [[maybe_unused]] const wxClassInfo* eventSinkClassInfo,
                                    const wxHandlerInfo* handlerInfo )
 {
     if ( eventSink != NULL && handlerInfo != NULL )

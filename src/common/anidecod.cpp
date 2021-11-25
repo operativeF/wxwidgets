@@ -54,19 +54,19 @@ bool wxANIDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 // Data accessors
 //---------------------------------------------------------------------------
 
-wxSize wxANIDecoder::GetFrameSize(unsigned int WXUNUSED(frame)) const
+wxSize wxANIDecoder::GetFrameSize([[maybe_unused]] unsigned int frame) const
 {
     // all frames are of the same size...
     return m_szAnimation;
 }
 
-wxPoint wxANIDecoder::GetFramePosition(unsigned int WXUNUSED(frame)) const
+wxPoint wxANIDecoder::GetFramePosition([[maybe_unused]] unsigned int frame) const
 {
     // all frames are of the same size...
     return {0, 0};
 }
 
-wxAnimationDisposal wxANIDecoder::GetDisposalMethod(unsigned int WXUNUSED(frame)) const
+wxAnimationDisposal wxANIDecoder::GetDisposalMethod([[maybe_unused]] unsigned int frame) const
 {
     // this disposal is implicit for all frames inside an ANI file
     return wxANIM_TOBACKGROUND;

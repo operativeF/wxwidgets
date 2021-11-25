@@ -834,7 +834,7 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
 bool wxTGAHandler::LoadFile(wxImage* image,
                             wxInputStream& stream,
                             bool verbose,
-                            int WXUNUSED(index))
+                            [[maybe_unused]] int index)
 {
     if ( !CanRead(stream) )
     {

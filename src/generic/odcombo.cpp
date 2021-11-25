@@ -1170,12 +1170,12 @@ void wxOwnerDrawnComboBox::OnDrawItem( wxDC& dc,
     }
 }
 
-wxCoord wxOwnerDrawnComboBox::OnMeasureItem( size_t WXUNUSED(item) ) const
+wxCoord wxOwnerDrawnComboBox::OnMeasureItem( [[maybe_unused]] size_t item ) const
 {
     return -1;
 }
 
-wxCoord wxOwnerDrawnComboBox::OnMeasureItemWidth( size_t WXUNUSED(item) ) const
+wxCoord wxOwnerDrawnComboBox::OnMeasureItemWidth( [[maybe_unused]] size_t item ) const
 {
     return -1;
 }
@@ -1194,7 +1194,7 @@ wxSize wxOwnerDrawnComboBox::DoGetBestSize() const
 
 void wxOwnerDrawnComboBox::OnDrawBackground(wxDC& dc,
                                             const wxRect& rect,
-                                            int WXUNUSED(item),
+                                            [[maybe_unused]] int item,
                                             unsigned int flags) const
 {
     // We need only to explicitly draw background for items

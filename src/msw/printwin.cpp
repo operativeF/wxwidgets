@@ -391,7 +391,7 @@ bool wxWindowsPrintPreview::RenderPageIntoBitmap(wxBitmap& bmp, int pageNum)
 }
 #endif // wxUSE_ENH_METAFILE
 
-BOOL CALLBACK wxAbortProc(WXHDC WXUNUSED(hdc), int WXUNUSED(error))
+BOOL CALLBACK wxAbortProc([[maybe_unused]] WXHDC hdc, [[maybe_unused]] int error)
 {
     MSG msg;
 

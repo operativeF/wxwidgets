@@ -107,7 +107,7 @@ void wxObject::operator delete ( void *buf, const char *_fname, size_t _line )
 #endif
 
 #ifdef _WX_WANT_DELETE_VOID_WXCHAR_INT
-void wxObject::operator delete ( void *buf, const wxChar *WXUNUSED(fileName), int WXUNUSED(lineNum) )
+void wxObject::operator delete ( void *buf, const wxChar *WXUNUSED(fileName), [[maybe_unused]] int lineNum )
 {
      wxDebugFree(buf);
 }
@@ -128,7 +128,7 @@ void wxObject::operator delete[] ( void *buf )
 #endif
 
 #ifdef _WX_WANT_ARRAY_DELETE_VOID_WXCHAR_INT
-void wxObject::operator delete[] (void * buf, const wxChar*  WXUNUSED(fileName), int WXUNUSED(lineNum) )
+void wxObject::operator delete[] (void * buf, const wxChar*  WXUNUSED(fileName), [[maybe_unused]] int lineNum )
 {
     wxDebugFree(buf, true);
 }

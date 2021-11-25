@@ -102,9 +102,9 @@ wxDirDialog::wxDirDialog(wxWindow *parent,
                          std::string_view message,
                          const std::string& defaultPath,
                          unsigned int style,
-                         const wxPoint& WXUNUSED(pos),
-                         const wxSize& WXUNUSED(size),
-                         std::string_view WXUNUSED(name))
+                         [[maybe_unused]] const wxPoint& pos,
+                         [[maybe_unused]] const wxSize& size,
+                         [[maybe_unused]] std::string_view name)
 {
     m_message = message;
     m_parent = parent;

@@ -281,17 +281,17 @@ void wxContextHelpButton::OnContextHelp(wxCommandEvent& WXUNUSED(event))
 // virtual for convenience
 
 void wxHelpProvider::AddHelp(wxWindowBase * WXUNUSED(window),
-                             const std::string& WXUNUSED(text))
+                             [[maybe_unused]] const std::string& text)
 {
 }
 
-void wxHelpProvider::AddHelp(wxWindowID WXUNUSED(id),
-                             const std::string& WXUNUSED(text))
+void wxHelpProvider::AddHelp([[maybe_unused]] wxWindowID id,
+                             [[maybe_unused]] const std::string& text)
 {
 }
 
 // removes the association
-void wxHelpProvider::RemoveHelp(wxWindowBase* WXUNUSED(window))
+void wxHelpProvider::RemoveHelp([[maybe_unused]] wxWindowBase* window)
 {
 }
 

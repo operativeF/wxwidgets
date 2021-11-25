@@ -78,7 +78,7 @@ bool wxWinHelpController::DisplayBlock(long block)
 }
 
 bool wxWinHelpController::KeywordSearch(const std::string& k,
-                                        wxHelpSearchMode WXUNUSED(mode))
+                                        [[maybe_unused]] wxHelpSearchMode mode)
 {
     if (m_helpFile.empty()) return false;
 

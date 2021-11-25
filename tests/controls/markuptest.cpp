@@ -103,7 +103,7 @@ TEST_CASE("Markup tests")
                 m_text << ">";
             }
 
-            void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(attrs)) override
+            void OnSpanEnd([[maybe_unused]] const wxMarkupSpanAttributes& attrs) override
             {
                 m_text += "</span>";
             }

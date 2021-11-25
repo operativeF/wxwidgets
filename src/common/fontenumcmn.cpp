@@ -57,7 +57,7 @@ public:
     }
 
     // called by EnumerateEncodings
-    bool OnFontEncoding(const std::string& WXUNUSED(facename),
+    bool OnFontEncoding([[maybe_unused]] const std::string& facename,
                         const std::string& encoding) override
     {
         m_arrEncodings.push_back(encoding);

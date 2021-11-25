@@ -36,7 +36,7 @@ void Skip_Comment(wxInputStream &stream)
     }
 }
 
-bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int WXUNUSED(index) )
+bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, [[maybe_unused]] int index )
 {
     std::uint32_t  width, height;
     std::uint16_t  maxval;
@@ -171,7 +171,7 @@ bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose
     return err == wxSTREAM_NO_ERROR || err == wxSTREAM_EOF;
 }
 
-bool wxPNMHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool WXUNUSED(verbose) )
+bool wxPNMHandler::SaveFile( wxImage *image, wxOutputStream& stream, [[maybe_unused]] bool verbose )
 {
     wxTextOutputStream text_stream(stream);
 

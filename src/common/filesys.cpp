@@ -256,8 +256,8 @@ std::string wxFileSystemHandler::GetAnchor(const std::string& location)
 }
 
 
-std::string wxFileSystemHandler::FindFirst(const std::string& WXUNUSED(spec),
-                                        unsigned int WXUNUSED(flags))
+std::string wxFileSystemHandler::FindFirst([[maybe_unused]] const std::string& spec,
+                                        [[maybe_unused]] unsigned int flags)
 {
     return {};
 }

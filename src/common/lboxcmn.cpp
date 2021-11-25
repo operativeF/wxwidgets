@@ -309,7 +309,7 @@ void wxListBoxBase::AppendAndEnsureVisible(const std::string& s)
     EnsureVisible(GetCount() - 1);
 }
 
-void wxListBoxBase::EnsureVisible(int WXUNUSED(n))
+void wxListBoxBase::EnsureVisible([[maybe_unused]] int n)
 {
     // the base class version does nothing (the only alternative would be to
     // call SetFirstItem() but this is probably even more stupid)

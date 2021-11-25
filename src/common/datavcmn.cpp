@@ -626,7 +626,7 @@ bool wxDataViewVirtualListModel::HasDefaultCompare() const
 
 int wxDataViewVirtualListModel::Compare(const wxDataViewItem& item1,
                                       const wxDataViewItem& item2,
-                                      unsigned int WXUNUSED(column),
+                                      [[maybe_unused]] unsigned int column,
                                       bool ascending) const
 {
     const unsigned int pos1 = wxPtrToUInt(item1.GetID());  // -1 not needed here
@@ -660,8 +660,8 @@ IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxDataViewIconText, WXDLLIMPEXP_CORE)
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewRendererBase, wxObject);
 
 wxDataViewRendererBase::wxDataViewRendererBase( const std::string &varianttype,
-                                                wxDataViewCellMode WXUNUSED(mode),
-                                                int WXUNUSED(align) )
+                                                [[maybe_unused]] wxDataViewCellMode mode,
+                                                [[maybe_unused]] int align )
     : m_variantType(varianttype)
 {
 }
@@ -1609,7 +1609,7 @@ wxDataViewCtrlBase::PrependColumn( wxDataViewColumn *col )
 }
 
 bool
-wxDataViewCtrlBase::InsertColumn( unsigned int WXUNUSED(pos), wxDataViewColumn *col )
+wxDataViewCtrlBase::InsertColumn( [[maybe_unused]] unsigned int pos, wxDataViewColumn *col )
 {
     col->SetOwner( (wxDataViewCtrl*) this );
     return true;
@@ -2113,7 +2113,7 @@ bool wxDataViewCheckIconTextRenderer::Render(wxRect cell, wxDC* dc, int state)
 }
 
 bool
-wxDataViewCheckIconTextRenderer::ActivateCell(const wxRect& WXUNUSED(cell),
+wxDataViewCheckIconTextRenderer::ActivateCell([[maybe_unused]] const wxRect& cell,
                                               wxDataViewModel *model,
                                               const wxDataViewItem & item,
                                               unsigned int col,
@@ -2721,7 +2721,7 @@ void wxDataViewTreeStore::DeleteAllItems()
 void
 wxDataViewTreeStore::GetValue(wxVariant &variant,
                               const wxDataViewItem &item,
-                              unsigned int WXUNUSED(col)) const
+                              [[maybe_unused]] unsigned int col) const
 {
     // if (col != 0) return;
 
@@ -2744,7 +2744,7 @@ wxDataViewTreeStore::GetValue(wxVariant &variant,
 bool
 wxDataViewTreeStore::SetValue(const wxVariant& variant,
                               const wxDataViewItem& item,
-                              unsigned int WXUNUSED(col))
+                              [[maybe_unused]] unsigned int col)
 {
     // if (col != 0) return false;
 
@@ -2789,7 +2789,7 @@ unsigned int wxDataViewTreeStore::GetChildren( const wxDataViewItem &item, wxDat
 }
 
 int wxDataViewTreeStore::Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
-                         unsigned int WXUNUSED(column), bool WXUNUSED(ascending) ) const
+                         [[maybe_unused]] unsigned int column, [[maybe_unused]] bool ascending ) const
 {
     wxDataViewTreeStoreNode *node1 = FindNode( item1 );
     wxDataViewTreeStoreNode *node2 = FindNode( item2 );

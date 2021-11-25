@@ -355,8 +355,8 @@ public:
 
 // Obsolete
 
-    STDMETHODIMP put_accName(VARIANT WXUNUSED(varChild), BSTR WXUNUSED(szName)) override { return E_FAIL; }
-    STDMETHODIMP put_accValue(VARIANT WXUNUSED(varChild), BSTR WXUNUSED(szName)) override { return E_FAIL; }
+    STDMETHODIMP put_accName([[maybe_unused]] VARIANT varChild, [[maybe_unused]] BSTR szName) override { return E_FAIL; }
+    STDMETHODIMP put_accValue([[maybe_unused]] VARIANT varChild, [[maybe_unused]] BSTR szName) override { return E_FAIL; }
 
 // IDispatch
 
@@ -1683,7 +1683,7 @@ STDMETHODIMP wxIAccessible::get_accSelection ( VARIANT * pVarChildren)
 
 // Get type info
 
-STDMETHODIMP wxIAccessible::GetTypeInfo(unsigned int WXUNUSED(typeInfo), LCID WXUNUSED(lcid), ITypeInfo** ppTypeInfo)
+STDMETHODIMP wxIAccessible::GetTypeInfo([[maybe_unused]] unsigned int typeInfo, [[maybe_unused]] LCID lcid, ITypeInfo** ppTypeInfo)
 {
     *ppTypeInfo = nullptr;
     return E_NOTIMPL;
@@ -1699,16 +1699,16 @@ STDMETHODIMP wxIAccessible::GetTypeInfoCount(unsigned int* typeInfoCount)
 
 // Get ids of names
 
-STDMETHODIMP wxIAccessible::GetIDsOfNames(REFIID WXUNUSED(riid), OLECHAR** WXUNUSED(names), unsigned int WXUNUSED(cNames),
-        LCID WXUNUSED(lcid), DISPID* WXUNUSED(dispId))
+STDMETHODIMP wxIAccessible::GetIDsOfNames([[maybe_unused]] REFIID riid, OLECHAR** WXUNUSED(names), [[maybe_unused]] unsigned int cNames,
+        [[maybe_unused]] LCID lcid, [[maybe_unused]] DISPID* dispId)
 {
     return E_NOTIMPL;
 }
 
 // Invoke
 
-STDMETHODIMP wxIAccessible::Invoke(DISPID WXUNUSED(dispIdMember), REFIID WXUNUSED(riid), LCID WXUNUSED(lcid),
-                        WXWORD WXUNUSED(wFlags), DISPPARAMS *WXUNUSED(pDispParams),
+STDMETHODIMP wxIAccessible::Invoke([[maybe_unused]] DISPID dispIdMember, [[maybe_unused]] REFIID riid, [[maybe_unused]] LCID lcid,
+                        [[maybe_unused]] WXWORD wFlags, DISPPARAMS *WXUNUSED(pDispParams),
                         VARIANT *WXUNUSED(pVarResult), EXCEPINFO *WXUNUSED(pExcepInfo),
                         unsigned int *WXUNUSED(puArgErr) )
 {

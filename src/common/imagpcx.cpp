@@ -424,7 +424,7 @@ int SavePCX(wxImage *image, wxOutputStream& stream)
 // wxPCXHandler
 //-----------------------------------------------------------------------------
 
-bool wxPCXHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int WXUNUSED(index) )
+bool wxPCXHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, [[maybe_unused]] int index )
 {
     int error;
 

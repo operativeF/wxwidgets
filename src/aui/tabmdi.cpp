@@ -416,7 +416,7 @@ wxEND_EVENT_TABLE()
 wxAuiMDIChildFrame::wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                                        wxWindowID id,
                                        const std::string& title,
-                                       const wxPoint& WXUNUSED(pos),
+                                       [[maybe_unused]] const wxPoint& pos,
                                        const wxSize& size,
                                        unsigned int style,
                                        std::string_view name)
@@ -461,7 +461,7 @@ wxAuiMDIChildFrame::~wxAuiMDIChildFrame()
 bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
                                 wxWindowID id,
                                 const std::string& title,
-                                const wxPoint& WXUNUSED(pos),
+                                [[maybe_unused]] const wxPoint& pos,
                                 const wxSize& size,
                                 unsigned int style,
                                 std::string_view name)

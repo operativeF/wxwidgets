@@ -435,7 +435,7 @@ void wxLog::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
     }
 }
 
-void wxLog::DoLogText(const wxString& WXUNUSED(msg))
+void wxLog::DoLogText([[maybe_unused]] const wxString& msg)
 {
     // in 2.8-compatible build the derived class might override DoLog() or
     // DoLogString() instead so we can't have this assert there

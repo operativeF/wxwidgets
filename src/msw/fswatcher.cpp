@@ -164,7 +164,7 @@ bool wxFSWatcherImplMSW::DoSetUpWatch(wxFSWatchEntryMSW& watch)
 
 // TODO we should only specify those flags, which interest us
 // this needs a bit of thinking, quick impl for now
-int wxFSWatcherImplMSW::Watcher2NativeFlags(int WXUNUSED(flags))
+int wxFSWatcherImplMSW::Watcher2NativeFlags([[maybe_unused]] int flags)
 {
     static DWORD all_events = FILE_NOTIFY_CHANGE_FILE_NAME |
             FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_ATTRIBUTES |

@@ -68,7 +68,7 @@ private:
     wxListBox *m_parent;
 };
 
-std::unique_ptr<wxOwnerDrawn> wxListBox::CreateLboxItem(size_t WXUNUSED(n))
+std::unique_ptr<wxOwnerDrawn> wxListBox::CreateLboxItem([[maybe_unused]] size_t n)
 {
     return std::make_unique<wxListBoxItem>(this);
 }
@@ -611,7 +611,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     return {wListbox, gsl::narrow_cast<int>(hListbox)};
 }
 
-bool wxListBox::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
+bool wxListBox::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
 {
     wxEventType evtType{};
     if ( param == LBN_SELCHANGE )

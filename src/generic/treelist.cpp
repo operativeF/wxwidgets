@@ -678,7 +678,7 @@ wxTreeListModel::GetValue(wxVariant& variant,
 bool
 wxTreeListModel::SetValue(const wxVariant& variant,
                           const wxDataViewItem& item,
-                          unsigned WXUNUSED(col))
+                          [[maybe_unused]] unsigned col)
 {
     Node* const node = FromDVI(item);
 
@@ -727,7 +727,7 @@ bool wxTreeListModel::IsContainer(const wxDataViewItem& item) const
 }
 
 bool
-wxTreeListModel::HasContainerColumns(const wxDataViewItem& WXUNUSED(item)) const
+wxTreeListModel::HasContainerColumns([[maybe_unused]] const wxDataViewItem& item) const
 {
     return true;
 }

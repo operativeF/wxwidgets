@@ -323,7 +323,7 @@ void wxAuiFloatingFrame::OnMoveStart()
     }
 }
 
-void wxAuiFloatingFrame::OnMoving(const wxRect& WXUNUSED(window_rect), wxDirection dir)
+void wxAuiFloatingFrame::OnMoving([[maybe_unused]] const wxRect& window_rect, wxDirection dir)
 {
     // notify the owner manager that the pane is moving
     if (m_ownerMgr)

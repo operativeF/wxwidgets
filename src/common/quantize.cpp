@@ -293,7 +293,7 @@ using my_cquantize_ptr = my_cquantizer*;
 
 void
 prescan_quantize (j_decompress_ptr cinfo, JSAMPARRAY input_buf,
-          JSAMPARRAY WXUNUSED(output_buf), int num_rows)
+          [[maybe_unused]] JSAMPARRAY output_buf, int num_rows)
 {
   my_cquantize_ptr cquantize = (my_cquantize_ptr) cinfo->cquantize;
   JSAMPROW ptr;
@@ -1247,7 +1247,7 @@ finish_pass1 (j_decompress_ptr cinfo)
 
 
 void
-finish_pass2 (j_decompress_ptr WXUNUSED(cinfo))
+finish_pass2 ([[maybe_unused]] j_decompress_ptr cinfo)
 {
   /* no work */
 }

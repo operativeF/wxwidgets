@@ -161,7 +161,7 @@ wxCheckBoxState wxCheckBox::DoGet3StateValue() const
     return m_state;
 }
 
-bool wxCheckBox::MSWCommand(WXUINT cmd, WXWORD WXUNUSED(id))
+bool wxCheckBox::MSWCommand(WXUINT cmd, [[maybe_unused]] WXWORD id)
 {
     if ( cmd != BN_CLICKED && cmd != BN_DBLCLK )
         return false;

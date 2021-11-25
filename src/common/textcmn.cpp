@@ -849,15 +849,15 @@ bool wxTextAttr::SplitParaCharStyles(const wxTextAttr& style, wxTextAttr& parSty
 }
 
 // apply styling to text range
-bool wxTextCtrlBase::SetStyle(long WXUNUSED(start), long WXUNUSED(end),
-                              const wxTextAttr& WXUNUSED(style))
+bool wxTextCtrlBase::SetStyle([[maybe_unused]] long start, [[maybe_unused]] long end,
+                              [[maybe_unused]] const wxTextAttr& style)
 {
     // to be implemented in derived classes
     return false;
 }
 
 // get the styling at the given position
-bool wxTextCtrlBase::GetStyle(long WXUNUSED(position), wxTextAttr& WXUNUSED(style))
+bool wxTextCtrlBase::GetStyle([[maybe_unused]] long position, wxTextAttr& WXUNUSED(style))
 {
     // to be implemented in derived classes
     return false;
@@ -881,7 +881,7 @@ bool wxTextCtrlBase::SetDefaultStyle(const wxTextAttr& style)
 // file IO functions
 // ----------------------------------------------------------------------------
 
-bool wxTextAreaBase::DoLoadFile(const std::string& filename, int WXUNUSED(fileType))
+bool wxTextAreaBase::DoLoadFile(const std::string& filename, [[maybe_unused]] int fileType)
 {
 #if wxUSE_FFILE
     wxFFile file(filename);
@@ -907,7 +907,7 @@ bool wxTextAreaBase::DoLoadFile(const std::string& filename, int WXUNUSED(fileTy
     return false;
 }
 
-bool wxTextAreaBase::DoSaveFile(const std::string& filename, int WXUNUSED(fileType))
+bool wxTextAreaBase::DoSaveFile(const std::string& filename, [[maybe_unused]] int fileType)
 {
 #if wxUSE_FFILE
     wxFFile file(filename, "w");
@@ -1183,7 +1183,7 @@ wxTextAreaBase::HitTest(const wxPoint& pt, wxTextCoord *x, wxTextCoord *y) const
 }
 
 wxTextCtrlHitTestResult
-wxTextAreaBase::HitTest(const wxPoint& WXUNUSED(pt), long * WXUNUSED(pos)) const
+wxTextAreaBase::HitTest([[maybe_unused]] const wxPoint& pt, long * WXUNUSED(pos)) const
 {
     // not implemented
     return wxTextCtrlHitTestResult::Unknown;
@@ -1197,7 +1197,7 @@ wxPoint wxTextAreaBase::PositionToCoords(long pos) const
     return DoPositionToCoords(pos);
 }
 
-wxPoint wxTextAreaBase::DoPositionToCoords(long WXUNUSED(pos)) const
+wxPoint wxTextAreaBase::DoPositionToCoords([[maybe_unused]] long pos) const
 {
     return wxDefaultPosition;
 }

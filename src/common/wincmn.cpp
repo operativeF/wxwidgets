@@ -310,7 +310,7 @@ wxWindowBase::wxWindowBase()
 // common part of window creation process
 bool wxWindowBase::CreateBase(wxWindowBase *parent,
                               wxWindowID id,
-                              const wxPoint& WXUNUSED(pos),
+                              [[maybe_unused]] const wxPoint& pos,
                               const wxSize& size,
                               unsigned int style,
                               std::string_view name)
@@ -1009,7 +1009,7 @@ void wxWindowBase::DoSetWindowVariant( wxWindowVariant variant )
 
 void wxWindowBase::DoSetSizeHints( int minW, int minH,
                                    int maxW, int maxH,
-                                   int WXUNUSED(incW), int WXUNUSED(incH) )
+                                   [[maybe_unused]] int incW, [[maybe_unused]] int incH )
 {
     wxCHECK_RET( (minW == wxDefaultCoord || maxW == wxDefaultCoord || minW <= maxW) &&
                     (minH == wxDefaultCoord || maxH == wxDefaultCoord || minH <= maxH),
@@ -1520,7 +1520,7 @@ void wxWindowBase::InheritAttributes()
 }
 
 /* static */ wxVisualAttributes
-wxWindowBase::GetClassDefaultAttributes(wxWindowVariant WXUNUSED(variant))
+wxWindowBase::GetClassDefaultAttributes([[maybe_unused]] wxWindowVariant variant)
 {
     // it is important to return valid values for all attributes from here,
     // GetXXX() below rely on this
@@ -1833,20 +1833,20 @@ using wxFindWindowCmp = bool (*)(const wxWindow *win,
 
 static
 bool wxFindWindowCmpLabels(const wxWindow *win, const wxString& label,
-                           long WXUNUSED(id))
+                           [[maybe_unused]] long id)
 {
     return win->GetLabel() == label;
 }
 
 static
 bool wxFindWindowCmpNames(const wxWindow *win, const wxString& label,
-                          long WXUNUSED(id))
+                          [[maybe_unused]] long id)
 {
     return win->GetName() == label;
 }
 
 static
-bool wxFindWindowCmpIds(const wxWindow *win, const wxString& WXUNUSED(label),
+bool wxFindWindowCmpIds(const wxWindow *win, [[maybe_unused]] const wxString& label,
                         long id)
 {
     return win->GetId() == id;
@@ -2130,7 +2130,7 @@ void wxWindowBase::SetHelpText(const wxString& text)
 // default implementation forwards calls to the help provider
 std::string
 wxWindowBase::GetHelpTextAtPoint(const wxPoint & WXUNUSED(pt),
-                                 wxHelpEvent::Origin WXUNUSED(origin)) const
+                                 [[maybe_unused]] wxHelpEvent::Origin origin) const
 {
     wxHelpProvider *helpProvider = wxHelpProvider::Get();
     if ( helpProvider )
@@ -3319,15 +3319,15 @@ void wxWindowBase::NotifyCaptureLost()
 #if wxUSE_HOTKEY
 
 bool
-wxWindowBase::RegisterHotKey(int WXUNUSED(hotkeyId),
-                             int WXUNUSED(modifiers),
-                             int WXUNUSED(keycode))
+wxWindowBase::RegisterHotKey([[maybe_unused]] int hotkeyId,
+                             [[maybe_unused]] int modifiers,
+                             [[maybe_unused]] int keycode)
 {
     // not implemented
     return false;
 }
 
-bool wxWindowBase::UnregisterHotKey(int WXUNUSED(hotkeyId))
+bool wxWindowBase::UnregisterHotKey([[maybe_unused]] int hotkeyId)
 {
     // not implemented
     return false;
@@ -3571,7 +3571,7 @@ wxWindow* wxGetTopLevelParent(wxWindowBase *win_)
 
 // Can return either a child object, or an integer
 // representing the child element, starting from 1.
-wxAccStatus wxWindowAccessible::HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
+wxAccStatus wxWindowAccessible::HitTest([[maybe_unused]] const wxPoint& pt, [[maybe_unused]] int* childId, wxAccessible** WXUNUSED(childObject))
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3610,7 +3610,7 @@ wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
 
 // Navigates from fromId to toId/toObject.
 wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
-                             int* WXUNUSED(toId), wxAccessible** toObject)
+                             [[maybe_unused]] int* toId, wxAccessible** toObject)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3789,7 +3789,7 @@ wxAccStatus wxWindowAccessible::GetParent(wxAccessible** parent)
 // or > 0 (the action for a child).
 // Return wxAccStatus::NotSupported if there is no default action for this
 // window (e.g. an edit control).
-wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
+wxAccStatus wxWindowAccessible::DoDefaultAction([[maybe_unused]] int childId)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3802,7 +3802,7 @@ wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
 // The retrieved string describes the action that is performed on an object,
 // not what the object does as a result. For example, a toolbar button that prints
 // a document has a default action of "Press" rather than "Prints the current document."
-wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), std::string* WXUNUSED(actionName))
+wxAccStatus wxWindowAccessible::GetDefaultAction([[maybe_unused]] int childId, [[maybe_unused]] std::string* actionName)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3810,7 +3810,7 @@ wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), std::str
 }
 
 // Returns the description for this object or a child.
-wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::string* description)
+wxAccStatus wxWindowAccessible::GetDescription([[maybe_unused]] int childId, std::string* description)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3830,7 +3830,7 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::strin
 
 // Returns help text for this object or a child, similar to tooltip text.
 // FIXME: Change this to be more optional.
-wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* helpText)
+wxAccStatus wxWindowAccessible::GetHelpText([[maybe_unused]] int childId, std::string* helpText)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3849,7 +3849,7 @@ wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* 
 
 // Returns the keyboard shortcut for this object or child.
 // Return e.g. ALT+K
-wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), std::string* WXUNUSED(shortcut))
+wxAccStatus wxWindowAccessible::GetKeyboardShortcut([[maybe_unused]] int childId, [[maybe_unused]] std::string* shortcut)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3918,7 +3918,7 @@ wxAccStatus wxWindowAccessible::GetState(int childId, unsigned int* state)
 
 // Returns a localized string representing the value for the object
 // or child.
-wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), std::string* WXUNUSED(strValue))
+wxAccStatus wxWindowAccessible::GetValue([[maybe_unused]] int childId, [[maybe_unused]] std::string* strValue)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3926,7 +3926,7 @@ wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), std::string* WXU
 }
 
 // Selects the object or child.
-wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
+wxAccStatus wxWindowAccessible::Select([[maybe_unused]] int childId, [[maybe_unused]] wxAccSelectionFlags selectFlags)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3937,7 +3937,7 @@ wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlag
 // If childId is 0 and child is NULL, no object in
 // this subhierarchy has the focus.
 // If this object has the focus, child should be 'this'.
-wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
+wxAccStatus wxWindowAccessible::GetFocus([[maybe_unused]] int* childId, wxAccessible** WXUNUSED(child))
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3953,7 +3953,7 @@ wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** 
 // - an integer representing the selected child element,
 //   or 0 if this object is selected (GetType() == "long"
 // - a "void*" pointer to a wxAccessible child object
-wxAccStatus wxWindowAccessible::GetSelections(wxVariant* WXUNUSED(selections))
+wxAccStatus wxWindowAccessible::GetSelections([[maybe_unused]] wxVariant* selections)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 

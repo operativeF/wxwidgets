@@ -3299,7 +3299,7 @@ void wxAuiNotebook::DoThaw()
     wxBookCtrlBase::DoThaw();
 }
 
-void wxAuiNotebook::SetPageSize (const wxSize& WXUNUSED(size))
+void wxAuiNotebook::SetPageSize ([[maybe_unused]] const wxSize& size)
 {
     wxFAIL_MSG("Not implemented for wxAuiNotebook");
 }
@@ -3337,7 +3337,7 @@ int wxAuiNotebook::HitTest (const wxPoint &pt, unsigned int* flags) const
     return w ? GetPageIndex(w) : wxNOT_FOUND;
 }
 
-int wxAuiNotebook::GetPageImage(size_t WXUNUSED(n)) const
+int wxAuiNotebook::GetPageImage([[maybe_unused]] size_t n) const
 {
     wxFAIL_MSG("Not implemented for wxAuiNotebook");
     return -1;

@@ -923,7 +923,7 @@ wxSize wxSplitterWindow::DoGetBestSize() const
 // wxSplitterWindow virtual functions: they now just generate the events
 // ---------------------------------------------------------------------------
 
-bool wxSplitterWindow::OnSashPositionChange(int WXUNUSED(newSashPosition))
+bool wxSplitterWindow::OnSashPositionChange([[maybe_unused]] int newSashPosition)
 {
     // always allow by default
     return true;
