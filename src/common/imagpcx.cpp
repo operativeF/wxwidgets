@@ -28,11 +28,25 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPCXHandler,wxImageHandler);
 
 #if wxUSE_STREAMS
 
+// PCX header
+#define HDR_MANUFACTURER    0
+#define HDR_VERSION         1
+#define HDR_ENCODING        2
+#define HDR_BITSPERPIXEL    3
+#define HDR_XMIN            4
+#define HDR_YMIN            6
+#define HDR_XMAX            8
+#define HDR_YMAX            10
+#define HDR_NPLANES         65
+#define HDR_BYTESPERLINE    66
+#define HDR_PALETTEINFO     68
+
 //-----------------------------------------------------------------------------
 // RLE encoding and decoding
 //-----------------------------------------------------------------------------
 
-static
+namespace
+{
 void RLEencode(unsigned char *p, unsigned int size, wxOutputStream& s)
 {
     unsigned int last, cont;
@@ -77,7 +91,6 @@ void RLEencode(unsigned char *p, unsigned int size, wxOutputStream& s)
     s.PutC((char) last);
 }
 
-static
 void RLEdecode(unsigned char *p, unsigned int size, wxInputStream& s)
 {
     // Read 'size' bytes. The PCX official specs say there will be
@@ -112,24 +125,6 @@ void RLEdecode(unsigned char *p, unsigned int size, wxInputStream& s)
     }
 }
 
-
-//-----------------------------------------------------------------------------
-// PCX reading and saving
-//-----------------------------------------------------------------------------
-
-// PCX header
-#define HDR_MANUFACTURER    0
-#define HDR_VERSION         1
-#define HDR_ENCODING        2
-#define HDR_BITSPERPIXEL    3
-#define HDR_XMIN            4
-#define HDR_YMIN            6
-#define HDR_XMAX            8
-#define HDR_YMAX            10
-#define HDR_NPLANES         65
-#define HDR_BYTESPERLINE    66
-#define HDR_PALETTEINFO     68
-
 // image formats
 enum {
     wxPCX_8BIT,             // 8 bpp, 1 plane (8 bit)
@@ -144,13 +139,16 @@ enum {
     wxPCX_VERERR = 3        // error in pcx version number
 };
 
+//-----------------------------------------------------------------------------
+// PCX reading and saving
+//-----------------------------------------------------------------------------
+
 
 // ReadPCX:
 //  Loads a PCX file into the wxImage object pointed by image.
 //  Returns wxPCX_OK on success, or an error code otherwise
 //  (see above for error codes)
 //
-static
 int ReadPCX(wxImage *image, wxInputStream& stream)
 {
     unsigned char hdr[128];         // PCX header
@@ -297,7 +295,6 @@ int ReadPCX(wxImage *image, wxInputStream& stream)
 //  PCX if possible, and then fall back to 24-bit if there
 //  are more than 256 different colours.
 //
-static
 int SavePCX(wxImage *image, wxOutputStream& stream)
 {
     unsigned char hdr[128];         // PCX header
@@ -419,6 +416,8 @@ int SavePCX(wxImage *image, wxOutputStream& stream)
 
     return wxPCX_OK;
 }
+
+} // namespace anonymous
 
 //-----------------------------------------------------------------------------
 // wxPCXHandler

@@ -24,7 +24,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPNMHandler,wxImageHandler);
 
 #if wxUSE_STREAMS
 
-static
+namespace
+{
+
 void Skip_Comment(wxInputStream &stream)
 {
     wxTextInputStream text_stream(stream);
@@ -35,6 +37,8 @@ void Skip_Comment(wxInputStream &stream)
         Skip_Comment(stream);
     }
 }
+
+} // namespace anonymous
 
 bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, [[maybe_unused]] int index )
 {

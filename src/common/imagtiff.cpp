@@ -44,8 +44,9 @@ import <cstdlib>;
 // TIFF library error/warning handlers
 // ----------------------------------------------------------------------------
 
-static wxString
-FormatTiffMessage(const char *module, const char *fmt, va_list ap)
+namespace
+{
+wxString FormatTiffMessage(const char *module, const char *fmt, va_list ap)
 {
     char buf[512];
     if ( wxCRT_VsnprintfA(buf, WXSIZEOF(buf), fmt, ap) <= 0 )
@@ -66,19 +67,19 @@ FormatTiffMessage(const char *module, const char *fmt, va_list ap)
 extern "C"
 {
 
-static void
-TIFFwxWarningHandler(const char* module, const char *fmt, va_list ap)
+void TIFFwxWarningHandler(const char* module, const char *fmt, va_list ap)
 {
     wxLogWarning("%s", FormatTiffMessage(module, fmt, ap));
 }
 
-static void
-TIFFwxErrorHandler(const char* module, const char *fmt, va_list ap)
+void TIFFwxErrorHandler(const char* module, const char *fmt, va_list ap)
 {
     wxLogError("%s", FormatTiffMessage(module, fmt, ap));
 }
 
 } // extern "C"
+
+} // namespace anonymous
 
 //-----------------------------------------------------------------------------
 // wxTIFFHandler
@@ -99,9 +100,12 @@ wxTIFFHandler::wxTIFFHandler()
 
 #if wxUSE_STREAMS
 
+namespace
+{
+
 // helper to translate our, possibly 64 bit, wxFileOffset to TIFF, always 32
 // bit, toff_t
-static toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
+toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
 {
     if ( ofs == wxInvalidOffset )
         return (toff_t)-1;
@@ -114,7 +118,7 @@ static toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
 }
 
 // another helper to convert standard seek mode to our
-static wxSeekMode wxSeekModeFromTIFF(int whence)
+wxSeekMode wxSeekModeFromTIFF(int whence)
 {
     switch ( whence )
     {
@@ -250,8 +254,7 @@ wxTIFFUnmapProc([[maybe_unused]] thandle_t handle,
 
 } // extern "C"
 
-static TIFF*
-TIFFwxOpen(wxInputStream &stream, const char* name, const char* mode)
+TIFF* TIFFwxOpen(wxInputStream &stream, const char* name, const char* mode)
 {
     TIFF* tif = TIFFClientOpen(name, mode,
         (thandle_t) &stream,
@@ -262,8 +265,7 @@ TIFFwxOpen(wxInputStream &stream, const char* name, const char* mode)
     return tif;
 }
 
-static TIFF*
-TIFFwxOpen(wxOutputStream &stream, const char* name, const char* mode)
+TIFF* TIFFwxOpen(wxOutputStream &stream, const char* name, const char* mode)
 {
     TIFF* tif = TIFFClientOpen(name, mode,
         (thandle_t) &stream,
@@ -273,6 +275,8 @@ TIFFwxOpen(wxOutputStream &stream, const char* name, const char* mode)
 
     return tif;
 }
+
+} // namespace anonymous
 
 bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int index )
 {

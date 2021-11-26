@@ -24,16 +24,6 @@ import <tuple>;
 
 #if wxUSE_IMAGE && wxUSE_LIBPNG
 
-// ----------------------------------------------------------------------------
-// local functions
-// ----------------------------------------------------------------------------
-
-// is the pixel with this value of alpha a fully opaque one?
-constexpr bool IsOpaque(unsigned char a)
-{
-    return a == 0xFF;
-}
-
 // ============================================================================
 // wxPNGHandler implementation
 // ============================================================================
@@ -50,8 +40,105 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPNGHandler,wxImageHandler);
     #endif
 #endif
 
-namespace
+namespace 
 {
+
+// is the pixel with this value of alpha a fully opaque one?
+constexpr bool IsOpaque(unsigned char a)
+{
+    return a == 0xFF;
+}
+
+// ----------------------------------------------------------------------------
+// LoadFile() helpers
+// ----------------------------------------------------------------------------
+
+// init the alpha channel for the image and fill it with 1s up to (x, y)
+unsigned char *InitAlpha(wxImage *image, png_uint_32 x, png_uint_32 y)
+{
+    // create alpha channel
+    image->SetAlpha();
+
+    unsigned char *alpha = image->GetAlpha();
+
+    // set alpha for the pixels we had so far
+    png_uint_32 end = y * image->GetWidth() + x;
+    // all the previous pixels were opaque
+    memset(alpha, 0xff, end);
+
+    return alpha + end;
+}
+
+// convert data from RGB to wxImage format
+void CopyDataFromPNG(wxImage *image,
+                     unsigned char **lines,
+                     png_uint_32 width,
+                     png_uint_32 height)
+{
+    // allocated on demand if we have any non-opaque pixels
+    unsigned char *alpha = nullptr;
+
+    unsigned char *ptrDst = image->GetData();
+    {
+        for ( png_uint_32 y = 0; y < height; y++ )
+        {
+            const unsigned char *ptrSrc = lines[y];
+            for ( png_uint_32 x = 0; x < width; x++ )
+            {
+                unsigned char r = *ptrSrc++;
+                unsigned char g = *ptrSrc++;
+                unsigned char b = *ptrSrc++;
+                unsigned char a = *ptrSrc++;
+
+                // the first time we encounter a transparent pixel we must
+                // allocate alpha channel for the image
+                if ( !IsOpaque(a) && !alpha )
+                    alpha = InitAlpha(image, x, y);
+
+                if ( alpha )
+                    *alpha++ = a;
+
+                *ptrDst++ = r;
+                *ptrDst++ = g;
+                *ptrDst++ = b;
+            }
+        }
+    }
+}
+
+using PaletteMap = std::unordered_map<long, long>;
+
+unsigned long PaletteMakeKey(const png_color_8& clr)
+{
+    return (wxImageHistogram::MakeKey(clr.red, clr.green, clr.blue) << 8) | clr.alpha;
+}
+
+long PaletteFind(const PaletteMap& palette, const png_color_8& clr)
+{
+    unsigned long value = PaletteMakeKey(clr);
+    PaletteMap::const_iterator it = palette.find(value);
+
+    return (it != palette.end()) ? it->second : wxNOT_FOUND;
+}
+
+long PaletteAdd(PaletteMap *palette, const png_color_8& clr)
+{
+    unsigned long value = PaletteMakeKey(clr);
+    PaletteMap::const_iterator it = palette->find(value);
+    size_t index;
+
+    if (it == palette->end())
+    {
+        index = palette->size();
+        (*palette)[value] = index;
+    }
+    else
+    {
+        index = it->second;
+    }
+
+    return index;
+}
 
 // VS: wxPNGInfoStruct declared below is a hack that needs some explanation.
 //     First, let me describe what's the problem: libpng uses jmp_buf in
@@ -189,27 +276,6 @@ PNGLINKAGEMODE wx_PNG_error(png_structp png_ptr, png_const_charp message)
 } // extern "C"
 
 // ----------------------------------------------------------------------------
-// LoadFile() helpers
-// ----------------------------------------------------------------------------
-
-// init the alpha channel for the image and fill it with 1s up to (x, y)
-static
-unsigned char *InitAlpha(wxImage *image, png_uint_32 x, png_uint_32 y)
-{
-    // create alpha channel
-    image->SetAlpha();
-
-    unsigned char *alpha = image->GetAlpha();
-
-    // set alpha for the pixels we had so far
-    png_uint_32 end = y * image->GetWidth() + x;
-    // all the previous pixels were opaque
-    memset(alpha, 0xff, end);
-
-    return alpha + end;
-}
-
-// ----------------------------------------------------------------------------
 // reading PNGs
 // ----------------------------------------------------------------------------
 
@@ -221,44 +287,6 @@ bool wxPNGHandler::DoCanRead( wxInputStream& stream )
         return false;
 
     return memcmp(hdr, "\211PNG", WXSIZEOF(hdr)) == 0;
-}
-
-// convert data from RGB to wxImage format
-static
-void CopyDataFromPNG(wxImage *image,
-                     unsigned char **lines,
-                     png_uint_32 width,
-                     png_uint_32 height)
-{
-    // allocated on demand if we have any non-opaque pixels
-    unsigned char *alpha = nullptr;
-
-    unsigned char *ptrDst = image->GetData();
-    {
-        for ( png_uint_32 y = 0; y < height; y++ )
-        {
-            const unsigned char *ptrSrc = lines[y];
-            for ( png_uint_32 x = 0; x < width; x++ )
-            {
-                unsigned char r = *ptrSrc++;
-                unsigned char g = *ptrSrc++;
-                unsigned char b = *ptrSrc++;
-                unsigned char a = *ptrSrc++;
-
-                // the first time we encounter a transparent pixel we must
-                // allocate alpha channel for the image
-                if ( !IsOpaque(a) && !alpha )
-                    alpha = InitAlpha(image, x, y);
-
-                if ( alpha )
-                    *alpha++ = a;
-
-                *ptrDst++ = r;
-                *ptrDst++ = g;
-                *ptrDst++ = b;
-            }
-        }
-    }
 }
 
 // This function uses wxPNGImageData to store some of its "local" variables in
@@ -423,44 +451,6 @@ wxPNGHandler::LoadFile(wxImage *image,
     }
 
     return true;
-}
-
-// ----------------------------------------------------------------------------
-// SaveFile() palette helpers
-// ----------------------------------------------------------------------------
-
-using PaletteMap = std::unordered_map<long, long>;
-
-static unsigned long PaletteMakeKey(const png_color_8& clr)
-{
-    return (wxImageHistogram::MakeKey(clr.red, clr.green, clr.blue) << 8) | clr.alpha;
-}
-
-static long PaletteFind(const PaletteMap& palette, const png_color_8& clr)
-{
-    unsigned long value = PaletteMakeKey(clr);
-    PaletteMap::const_iterator it = palette.find(value);
-
-    return (it != palette.end()) ? it->second : wxNOT_FOUND;
-}
-
-static long PaletteAdd(PaletteMap *palette, const png_color_8& clr)
-{
-    unsigned long value = PaletteMakeKey(clr);
-    PaletteMap::const_iterator it = palette->find(value);
-    size_t index;
-
-    if (it == palette->end())
-    {
-        index = palette->size();
-        (*palette)[value] = index;
-    }
-    else
-    {
-        index = it->second;
-    }
-
-    return index;
 }
 
 // ----------------------------------------------------------------------------

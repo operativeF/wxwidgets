@@ -35,14 +35,6 @@ inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL[]    = "PngZM";
 inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY[]     = "PngZS";
 inline constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE[]  = "PngZB";
 
-enum
-{
-    wxPNG_TYPE_COLOUR = 0,
-    wxPNG_TYPE_GREY = 2,
-    wxPNG_TYPE_GREY_RED = 3,
-    wxPNG_TYPE_PALETTE = 4
-};
-
 class wxPNGHandler: public wxImageHandler
 {
 public:

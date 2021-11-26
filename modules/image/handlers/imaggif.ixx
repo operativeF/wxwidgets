@@ -27,16 +27,16 @@ export
 
 class wxInputStream;
 class wxOutputStream;
+class wxImageArray; // anidecod.h
+
+struct wxRGB;
+struct GifHashTableType;
 
 inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 
 inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = "Transparency";
 inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = "Highlight";
 inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = "Unchanged";
-
-struct wxRGB;
-struct GifHashTableType;
-class wxImageArray; // anidecod.h
 
 class wxGIFHandler : public wxImageHandler
 {
@@ -72,19 +72,21 @@ protected:
 protected:
 
     // Declarations for saving
+    std::uint8_t m_LZBuf[256];   /* Compressed input is buffered here. */
+
+    struct GifHashTableType *m_hashTable;
 
     unsigned long m_crntShiftDWord;   /* For bytes decomposition into codes. */
+
     int m_pixelCount;
-    struct GifHashTableType *m_hashTable;
-    std::int16_t
-      m_EOFCode,     /* The EOF LZ code. */
-      m_clearCode,   /* The CLEAR LZ code. */
-      m_runningCode, /* The next code algorithm can generate. */
-      m_runningBits, /* The number of bits required to represent RunningCode. */
-      m_maxCode1,    /* 1 bigger than max. possible code, in RunningBits bits. */
-      m_crntCode,    /* Current algorithm code. */
-      m_crntShiftState;    /* Number of bits in CrntShiftDWord. */
-    std::uint8_t m_LZBuf[256];   /* Compressed input is buffered here. */
+
+    std::int16_t m_EOFCode;     /* The EOF LZ code. */
+    std::int16_t m_clearCode;   /* The CLEAR LZ code. */
+    std::int16_t m_runningCode; /* The next code algorithm can generate. */
+    std::int16_t m_runningBits; /* The number of bits required to represent RunningCode. */
+    std::int16_t m_maxCode1;    /* 1 bigger than max. possible code, in RunningBits bits. */
+    std::int16_t m_crntCode;    /* Current algorithm code. */
+    std::int16_t m_crntShiftState;    /* Number of bits in CrntShiftDWord. */
 
     bool InitHashTable();
     void ClearHashTable();

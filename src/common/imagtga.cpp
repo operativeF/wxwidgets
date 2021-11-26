@@ -69,7 +69,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTGAHandler, wxImageHandler);
 // worker functions
 // ----------------------------------------------------------------------------
 
-static
+namespace
+{
+
 void FlipTGA(unsigned char* imageData, int width, int height, short pixelSize)
 {
     int lineLength = width * pixelSize;
@@ -88,7 +90,6 @@ void FlipTGA(unsigned char* imageData, int width, int height, short pixelSize)
 }
 
 // return wxTGA_OK or wxTGA_IOERR
-static
 int DecodeRLE(unsigned char* imageData, unsigned long imageSize,
                short pixelSize, wxInputStream& stream)
 {
@@ -166,7 +167,6 @@ It might be better to check for palette index bounds and stop decoding if
 it's out of range (and add something like wxTGA_DATAERR to indicate unexpected
 pixel data).
 */
-static
 void Palette_GetRGB(const unsigned char *palette, unsigned int paletteCount,
     unsigned int index,
     unsigned char *red, unsigned char *green, unsigned char *blue)
@@ -181,7 +181,6 @@ void Palette_GetRGB(const unsigned char *palette, unsigned int paletteCount,
     *blue  = palette[(paletteCount * 2) + index];
 }
 
-static
 void Palette_GetRGBA(const unsigned char *palette, unsigned int paletteCount,
     unsigned int index,
     unsigned char *red, unsigned char *green, unsigned char *blue, unsigned char* alpha)
@@ -197,7 +196,6 @@ void Palette_GetRGBA(const unsigned char *palette, unsigned int paletteCount,
     *alpha = palette[(paletteCount * 3) + index];
 }
 
-static
 void Palette_SetRGB(unsigned char *palette, unsigned int paletteCount,
     unsigned int index,
     unsigned char red, unsigned char green, unsigned char blue)
@@ -207,7 +205,6 @@ void Palette_SetRGB(unsigned char *palette, unsigned int paletteCount,
     palette[(paletteCount * 2) + index] = blue;
 }
 
-static
 void Palette_SetRGBA(unsigned char *palette, unsigned int paletteCount,
     unsigned int index,
     unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
@@ -218,7 +215,6 @@ void Palette_SetRGBA(unsigned char *palette, unsigned int paletteCount,
     palette[(paletteCount * 3) + index] = alpha;
 }
 
-static
 int ReadTGA(wxImage* image, wxInputStream& stream)
 {
     // Read in the TGA header
@@ -761,7 +757,6 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
     return wxTGA_OK;
 }
 
-static
 int SaveTGA(const wxImage& image, wxOutputStream *stream)
 {
     bool hasAlpha = image.HasAlpha();
@@ -830,6 +825,8 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
 
     return wxTGA_OK;
 }
+
+} // namespace anonymous
 
 // ----------------------------------------------------------------------------
 // wxTGAHandler
