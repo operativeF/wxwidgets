@@ -659,12 +659,8 @@ private:
 
 WX_DECLARE_USER_EXPORTED_BASEARRAY(const void *, wxBaseArrayPtrVoid,
                                    WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_BASEARRAY(char, wxBaseArrayChar, WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_BASEARRAY(short, wxBaseArrayShort, WXDLLIMPEXP_BASE);
 WX_DECLARE_USER_EXPORTED_BASEARRAY(int, wxBaseArrayInt, WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_BASEARRAY(long, wxBaseArrayLong, WXDLLIMPEXP_BASE);
 WX_DECLARE_USER_EXPORTED_BASEARRAY(size_t, wxBaseArraySizeT, WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_BASEARRAY(double, wxBaseArrayDouble, WXDLLIMPEXP_BASE);
 
 // ----------------------------------------------------------------------------
 // Convenience macros to define arrays from base arrays
@@ -682,12 +678,6 @@ WX_DECLARE_USER_EXPORTED_BASEARRAY(double, wxBaseArrayDouble, WXDLLIMPEXP_BASE);
 
 #define WX_DEFINE_USER_EXPORTED_ARRAY_PTR(T, name, expmode)         \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, wxBaseArrayPtrVoid, wxARRAY_EMPTY expmode)
-
-#define WX_DEFINE_ARRAY_CHAR(T, name)                                 \
-    WX_DEFINE_TYPEARRAY_PTR(T, name, wxBaseArrayChar)
-
-#define WX_DEFINE_ARRAY_SHORT(T, name)                                 \
-    WX_DEFINE_TYPEARRAY_PTR(T, name, wxBaseArrayShort)
 
 #define WX_DEFINE_ARRAY_INT(T, name)                                   \
     WX_DEFINE_TYPEARRAY_PTR(T, name, wxBaseArrayInt)
@@ -708,21 +698,9 @@ WX_DECLARE_USER_EXPORTED_BASEARRAY(double, wxBaseArrayDouble, WXDLLIMPEXP_BASE);
 #define WX_DEFINE_SORTED_USER_EXPORTED_ARRAY(T, name, expmode)         \
     WX_DEFINE_SORTED_USER_EXPORTED_TYPEARRAY(T, name, wxBaseArrayPtrVoid, wxARRAY_EMPTY expmode)
 
-#define WX_DEFINE_SORTED_ARRAY_CHAR(T, name)                          \
-    WX_DEFINE_SORTED_TYPEARRAY(T, name, wxBaseArrayChar)
-
-#define WX_DEFINE_SORTED_ARRAY_SHORT(T, name)                          \
-    WX_DEFINE_SORTED_TYPEARRAY(T, name, wxBaseArrayShort)
-
 // ----------------------------------------------------------------------------
 // Convenience macros to define sorted arrays from base arrays
 // ----------------------------------------------------------------------------
-
-#define WX_DEFINE_SORTED_ARRAY_CMP_CHAR(T, cmpfunc, name)             \
-    WX_DEFINE_SORTED_TYPEARRAY_CMP(T, cmpfunc, name, wxBaseArrayChar)
-
-#define WX_DEFINE_SORTED_ARRAY_CMP_SHORT(T, cmpfunc, name)             \
-    WX_DEFINE_SORTED_TYPEARRAY_CMP(T, cmpfunc, name, wxBaseArrayShort)
 
 #define WX_DEFINE_SORTED_ARRAY_CMP_INT(T, cmpfunc, name)               \
     WX_DEFINE_SORTED_TYPEARRAY_CMP(T, cmpfunc, name, wxBaseArrayInt)

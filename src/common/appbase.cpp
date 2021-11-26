@@ -30,13 +30,13 @@
 
 #include <boost/nowide/convert.hpp>
 
-import <clocale>;
-
 #ifdef HAS_EXCEPTION_PTR
     import <exception>;        // for std::current_exception()
     import <utility>;          // for std::swap()
 #endif
 
+import <clocale>;
+import <ranges>;
 import <typeinfo>;
 
 #if wxUSE_EXCEPTIONS
@@ -425,10 +425,11 @@ void wxAppConsoleBase::DelayPendingEventHandler(wxEvtHandler* toDelay)
 
     // move the handler from the list of handlers with processable pending events
     // to the list of handlers with pending events which needs to be processed later
-    m_handlersWithPendingEvents.Remove(toDelay);
+    // FIXME: This could all be done more elegantly.
+    std::erase(m_handlersWithPendingEvents, toDelay);
 
-    if (m_handlersWithPendingDelayedEvents.Index(toDelay) == wxNOT_FOUND)
-        m_handlersWithPendingDelayedEvents.Add(toDelay);
+    if(std::ranges::find(m_handlersWithPendingDelayedEvents, toDelay) == m_handlersWithPendingDelayedEvents.end())
+        m_handlersWithPendingDelayedEvents.push_back(toDelay);
 
     wxLEAVE_CRIT_SECT(m_handlersWithPendingEventsLocker);
 }
@@ -437,22 +438,23 @@ void wxAppConsoleBase::RemovePendingEventHandler(wxEvtHandler* toRemove)
 {
     wxENTER_CRIT_SECT(m_handlersWithPendingEventsLocker);
 
-    if (m_handlersWithPendingEvents.Index(toRemove) != wxNOT_FOUND)
+    // FIXME: Could be done more elegantly.
+    if(std::ranges::find(m_handlersWithPendingEvents, toRemove) != m_handlersWithPendingEvents.end())
     {
-        m_handlersWithPendingEvents.Remove(toRemove);
+        std::erase(m_handlersWithPendingEvents, toRemove);
 
         // check that the handler was present only once in the list
-        wxASSERT_MSG( m_handlersWithPendingEvents.Index(toRemove) == wxNOT_FOUND,
+        wxASSERT_MSG( std::ranges::find(m_handlersWithPendingEvents, toRemove) == m_handlersWithPendingEvents.end(),
                         "Handler occurs twice in the m_handlersWithPendingEvents list!" );
     }
-    //else: it wasn't in this list at all, it's ok
 
-    if (m_handlersWithPendingDelayedEvents.Index(toRemove) != wxNOT_FOUND)
+    //else: it wasn't in this list at all, it's ok
+    if(std::ranges::find(m_handlersWithPendingDelayedEvents, toRemove) != m_handlersWithPendingDelayedEvents.end())
     {
-        m_handlersWithPendingDelayedEvents.Remove(toRemove);
+        std::erase(m_handlersWithPendingDelayedEvents, toRemove);
 
         // check that the handler was present only once in the list
-        wxASSERT_MSG( m_handlersWithPendingDelayedEvents.Index(toRemove) == wxNOT_FOUND,
+        wxASSERT_MSG( std::ranges::find(m_handlersWithPendingDelayedEvents, toRemove) == m_handlersWithPendingDelayedEvents.end(),
                         "Handler occurs twice in m_handlersWithPendingDelayedEvents list!" );
     }
     //else: it wasn't in this list at all, it's ok
@@ -464,8 +466,8 @@ void wxAppConsoleBase::AppendPendingEventHandler(wxEvtHandler* toAppend)
 {
     wxENTER_CRIT_SECT(m_handlersWithPendingEventsLocker);
 
-    if ( m_handlersWithPendingEvents.Index(toAppend) == wxNOT_FOUND )
-        m_handlersWithPendingEvents.Add(toAppend);
+    if(std::ranges::find(m_handlersWithPendingEvents, toAppend) == m_handlersWithPendingEvents.end())
+        m_handlersWithPendingEvents.push_back(toAppend);
 
     wxLEAVE_CRIT_SECT(m_handlersWithPendingEventsLocker);
 }
@@ -474,7 +476,7 @@ bool wxAppConsoleBase::HasPendingEvents() const
 {
     wxENTER_CRIT_SECT(const_cast<wxAppConsoleBase*>(this)->m_handlersWithPendingEventsLocker);
 
-    const bool has = !m_handlersWithPendingEvents.IsEmpty();
+    const bool has = !m_handlersWithPendingEvents.empty();
 
     wxLEAVE_CRIT_SECT(const_cast<wxAppConsoleBase*>(this)->m_handlersWithPendingEventsLocker);
 
@@ -497,12 +499,12 @@ void wxAppConsoleBase::ProcessPendingEvents()
     {
         wxENTER_CRIT_SECT(m_handlersWithPendingEventsLocker);
 
-        wxCHECK_RET( m_handlersWithPendingDelayedEvents.IsEmpty(),
+        wxCHECK_RET( m_handlersWithPendingDelayedEvents.empty(),
                      "this helper list should be empty" );
 
         // iterate until the list becomes empty: the handlers remove themselves
         // from it when they don't have any more pending events
-        while (!m_handlersWithPendingEvents.IsEmpty())
+        while (!m_handlersWithPendingEvents.empty())
         {
             // In ProcessPendingEvents(), new handlers might be added
             // and we can safely leave the critical section here.
@@ -522,10 +524,10 @@ void wxAppConsoleBase::ProcessPendingEvents()
         // because of a selective wxYield call in progress.
         // Now we need to move them back to wxHandlersWithPendingEvents so the next
         // call to this function has the chance of processing them:
-        if (!m_handlersWithPendingDelayedEvents.IsEmpty())
+        if (!m_handlersWithPendingDelayedEvents.empty())
         {
-            WX_APPEND_ARRAY(m_handlersWithPendingEvents, m_handlersWithPendingDelayedEvents);
-            m_handlersWithPendingDelayedEvents.Clear();
+            std::ranges::move(m_handlersWithPendingDelayedEvents, std::back_inserter(m_handlersWithPendingEvents));
+            m_handlersWithPendingDelayedEvents.clear();
         }
 
         wxLEAVE_CRIT_SECT(m_handlersWithPendingEventsLocker);
@@ -536,13 +538,13 @@ void wxAppConsoleBase::DeletePendingEvents()
 {
     wxENTER_CRIT_SECT(m_handlersWithPendingEventsLocker);
 
-    wxCHECK_RET( m_handlersWithPendingDelayedEvents.IsEmpty(),
+    wxCHECK_RET( m_handlersWithPendingDelayedEvents.empty(),
                  "this helper list should be empty" );
 
-    for (unsigned int i=0; i<m_handlersWithPendingEvents.GetCount(); i++)
-        m_handlersWithPendingEvents[i]->DeletePendingEvents();
+    // FIXME: Have events clear events on destruction instead.
+    std::ranges::for_each(m_handlersWithPendingEvents, [](auto* handler){ handler->DeletePendingEvents(); });
 
-    m_handlersWithPendingEvents.Clear();
+    m_handlersWithPendingEvents.clear();
 
     wxLEAVE_CRIT_SECT(m_handlersWithPendingEventsLocker);
 }

@@ -35,15 +35,11 @@ enum class wxTextFileType
 
 #if wxUSE_TEXTBUFFER
 
-#include "wx/dynarray.h"
-
 // ----------------------------------------------------------------------------
 // wxTextBuffer
 // ----------------------------------------------------------------------------
 
-WX_DEFINE_USER_EXPORTED_ARRAY_INT(wxTextFileType,
-                                  wxArrayLinesType,
-                                  class WXDLLIMPEXP_BASE);
+using wxArrayLinesType = std::vector<wxTextFileType>;
 
 #endif // wxUSE_TEXTBUFFER
 
@@ -145,9 +141,6 @@ public:
     // get the type of the line (see also GetEOL)
     wxTextFileType GetLineType(size_t n) const { return m_aTypes[n]; }
 
-    // guess the type of buffer
-    wxTextFileType GuessType() const;
-
     // get the name of the buffer
     const wxString& GetName() const { return m_strBufferName; }
 
@@ -163,7 +156,7 @@ public:
                   wxTextFileType type = typeDefault)
     {
         m_aLines.insert(m_aLines.begin() + n, str);
-        m_aTypes.insert(m_aTypes.begin()+n, type);
+        m_aTypes.insert(m_aTypes.begin() + n, type);
     }
 
     // delete one line

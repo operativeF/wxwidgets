@@ -4091,7 +4091,7 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-WX_DEFINE_ARRAY_WITH_DECL_PTR(wxEvtHandler *, wxEvtHandlerArray, class WXDLLIMPEXP_BASE);
+using wxEvtHandlerArray = std::vector<wxEvtHandler*>;
 
 
 // Define an inline method of wxObjectEventFunctor which couldn't be defined

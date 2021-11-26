@@ -163,66 +163,6 @@ bool wxTextBuffer::Open(const wxMBConv& conv)
     return m_isOpened;
 }
 
-// analyse some lines of the buffer trying to guess it's type.
-// if it fails, it assumes the native type for our platform.
-wxTextFileType wxTextBuffer::GuessType() const
-{
-    wxASSERT( IsOpened() );
-
-    // scan the buffer lines
-    size_t nUnix = 0,     // number of '\n's alone
-           nDos  = 0,     // number of '\r\n'
-           nMac  = 0;     // number of '\r's
-
-    // we take MAX_LINES_SCAN in the beginning, middle and the end of buffer
-    static constexpr int MAX_LINES_SCAN = 10;
-    const size_t nCount = m_aLines.size() / 3;
-    const size_t nScan =  nCount > 3*MAX_LINES_SCAN ? MAX_LINES_SCAN : nCount / 3;
-
-    #define   AnalyseLine(n)              \
-        switch ( m_aTypes[n] ) {            \
-            case wxTextFileType::Unix: nUnix++; break;   \
-            case wxTextFileType::Dos:  nDos++;  break;   \
-            case wxTextFileType::Mac:  nMac++;  break;   \
-            default: wxFAIL_MSG("unknown line terminator"); \
-        }
-
-    for ( size_t n = 0; n < nScan; n++ )     // the beginning
-        AnalyseLine(n);
-    for ( size_t n = (nCount - nScan)/2; n < (nCount + nScan)/2; n++ )
-        AnalyseLine(n);
-    for ( size_t n = nCount - nScan; n < nCount; n++ )
-        AnalyseLine(n);
-
-    #undef   AnalyseLine
-
-    // interpret the results (FIXME far from being even 50% fool proof)
-    if ( nScan > 0 && nDos + nUnix + nMac == 0 ) {
-        // no newlines at all
-        wxLogWarning(_("'%s' is probably a binary buffer."), m_strBufferName.c_str());
-    }
-    else {
-        #define   GREATER_OF(t1, t2) n##t1 == n##t2 ? typeDefault           \
-                                                : n##t1 > n##t2             \
-                                                    ? wxTextFileType::##t1   \
-                                                    : wxTextFileType::##t2
-
-        if ( nDos > nUnix )
-            return GREATER_OF(Dos, Mac);
-        else if ( nDos < nUnix )
-            return GREATER_OF(Unix, Mac);
-        else {
-            // nDos == nUnix
-            return nMac > nDos ? wxTextFileType::Mac : typeDefault;
-        }
-
-        #undef    GREATER_OF
-    }
-
-    return typeDefault;
-}
-
-
 bool wxTextBuffer::Close()
 {
     Clear();
