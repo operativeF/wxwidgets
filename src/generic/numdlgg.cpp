@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_NUMBERDLG
-
-#ifndef WX_PRECOMP
-    import <string>;
-#endif
 
 #include "wx/utils.h"
 #include "wx/dialog.h"
@@ -37,9 +30,11 @@
 // this is where wxGetNumberFromUser() is declared
 #include "wx/numdlg.h"
 
+import <string>;
+
 #if !wxUSE_SPINCTRL
     // wxTextCtrl will do instead of wxSpinCtrl if we don't have it
-    #define wxSpinCtrl wxTextCtrl
+    using wxSpinCtrl = wxTextCtrl;
 #endif
 
 // ============================================================================

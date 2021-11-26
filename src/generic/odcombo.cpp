@@ -12,12 +12,6 @@
 
 #include "wx/odcombo.h"
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-    import <utility>;
-#endif
-
-#include "wx/log.h"
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
@@ -26,6 +20,8 @@
 
 #include "wx/combo.h"
 
+#include <chrono>
+import <utility>;
 
 // ============================================================================
 // implementation
