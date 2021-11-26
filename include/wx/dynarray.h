@@ -673,8 +673,6 @@ WX_DECLARE_USER_EXPORTED_BASEARRAY(size_t, wxBaseArraySizeT, WXDLLIMPEXP_BASE);
 
 #define WX_DEFINE_EXPORTED_ARRAY_PTR(T, name)                       \
     WX_DEFINE_EXPORTED_TYPEARRAY_PTR(T, name, wxBaseArrayPtrVoid)
-#define WX_DEFINE_ARRAY_WITH_DECL_PTR(T, name, decl)                \
-    WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, wxBaseArrayPtrVoid, decl)
 
 #define WX_DEFINE_USER_EXPORTED_ARRAY_PTR(T, name, expmode)         \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, wxBaseArrayPtrVoid, wxARRAY_EMPTY expmode)

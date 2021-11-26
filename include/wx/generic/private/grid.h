@@ -24,8 +24,7 @@ import <vector>;
 // array classes
 // ----------------------------------------------------------------------------
 
-WX_DEFINE_ARRAY_WITH_DECL_PTR(wxGridCellAttr *, wxArrayAttrs,
-                                 class WXDLLIMPEXP_CORE);
+using wxArrayAttrs = std::vector<wxGridCellAttr*>;
 
 WX_DECLARE_HASH_MAP_WITH_DECL(wxLongLong_t, wxGridCellAttr*,
                               wxIntegerHash, wxIntegerEqual,

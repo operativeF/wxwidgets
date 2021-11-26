@@ -1002,7 +1002,7 @@ wxGridCellAttrData::FindIndex(int row, int col) const
 
 wxGridRowOrColAttrData::~wxGridRowOrColAttrData()
 {
-    size_t count = m_attrs.GetCount();
+    size_t count = m_attrs.size();
     for ( size_t n = 0; n < count; n++ )
     {
         m_attrs[n]->DecRef();
@@ -1034,7 +1034,7 @@ void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
         {
             // store the new attribute, taking its ownership
             m_rowsOrCols.push_back(rowOrCol);
-            m_attrs.Add(attr);
+            m_attrs.push_back(attr);
         }
         // nothing to remove
     }
@@ -1084,7 +1084,7 @@ void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols
                 {
                     m_rowsOrCols.erase(std::begin(m_rowsOrCols) + n);
                     m_attrs[n]->DecRef();
-                    m_attrs.RemoveAt(n);
+                    m_attrs.erase(m_attrs.begin() + n); // FIXME: use std::erase
                     n--;
                     count--;
                 }
