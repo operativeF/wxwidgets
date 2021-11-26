@@ -8,7 +8,8 @@
 
 module;
 
-#include "wx/stream.h"
+#include "wx/filefn.h"
+#include "wx/gdicmn.h"
 
 export module WX.Image.BMP;
 
@@ -16,6 +17,9 @@ import WX.Image.Base;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 // defines for saving the BMP file in different formats, Bits Per Pixel
 // USE: wximage.SetOption( wxIMAGE_OPTION_BMP_FORMAT, wxBMP_xBPP );

@@ -110,6 +110,5 @@ endif()
 
 enable_testing()
 
-add_subdirectory(modules)
 add_subdirectory(src)
 add_subdirectory(tests)

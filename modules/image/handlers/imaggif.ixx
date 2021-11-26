@@ -8,7 +8,7 @@
 
 module;
 
-#include "wx/stream.h"
+#include "wx/gdicmn.h"
 
 export module WX.Image.GIF;
 
@@ -24,6 +24,9 @@ import <cstdint>;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 

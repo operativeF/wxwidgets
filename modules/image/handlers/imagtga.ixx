@@ -8,7 +8,7 @@
 
 module;
 
-#include "wx/stream.h"
+#include "wx/gdicmn.h"
 
 export module WX.Image.TGA;
 
@@ -22,6 +22,9 @@ import WX.Image.Base;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 class wxTGAHandler : public wxImageHandler
 {

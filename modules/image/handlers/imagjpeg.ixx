@@ -8,7 +8,7 @@
 
 module;
 
-#include "wx/stream.h"
+#include "wx/gdicmn.h"
 #include "wx/versioninfo.h"
 
 export module WX.Image.JPEG;
@@ -23,6 +23,9 @@ import WX.Image.Base;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 class wxJPEGHandler: public wxImageHandler
 {

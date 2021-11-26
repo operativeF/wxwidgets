@@ -9,7 +9,6 @@
 module;
 
 #include "wx/gdicmn.h"
-#include "wx/stream.h"
 
 export module WX.Image.PCX;
 
@@ -19,6 +18,9 @@ import WX.Image.Base;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 //-----------------------------------------------------------------------------
 // wxPCXHandler

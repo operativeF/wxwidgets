@@ -9,7 +9,6 @@
 module;
 
 #include "wx/gdicmn.h"
-#include "wx/stream.h"
 
 export module WX.Image.PNM;
 
@@ -23,6 +22,9 @@ import WX.Image.Base;
 
 export
 {
+
+class wxInputStream;
+class wxOutputStream;
 
 class wxPNMHandler : public wxImageHandler
 {
