@@ -98,7 +98,6 @@ license is as follows:
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/hashmap.h"
 #include "wx/stream.h"
 #include "wx/image.h"
 #include "wx/palette.h"
@@ -734,7 +733,7 @@ wxImage wxXPMDecoder::ReadData(const char* const* xpm_data)
     // colour (which can be any colour not otherwise used in the image)
     if (!maskKey.empty())
     {
-        wxLongToLongHashMap rgb_table;
+        std::unordered_map<long, long> rgb_table;
         long rgb;
         const size_t n = clr_tbl.size();
         wxXPMColourMap::const_iterator iter = clr_tbl.begin();

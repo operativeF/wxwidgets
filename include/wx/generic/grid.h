@@ -16,13 +16,14 @@
 #include "wx/generic/gridcoord.h"
 #include "wx/generic/gridevt.h"
 
-#include "wx/hashmap.h"
 #include "wx/scrolwin.h"
 #include "wx/settings.h"
 
-import <iterator>;
-
 #include <gsl/gsl>
+
+import <iterator>;
+import <unordered_set>;
+import <unordered_map>;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -82,6 +83,9 @@ enum wxGridRenderStyle
                           wxGRID_DRAW_BOX_RECT
 };
 
+using wxGridFixedIndicesSet = std::unordered_set<int>;
+using wxLongToLongHashMap   = std::unordered_map<long, long>;
+
 // ----------------------------------------------------------------------------
 // forward declarations
 // ----------------------------------------------------------------------------
@@ -107,8 +111,6 @@ class wxSpinCtrl;
 #if wxUSE_DATEPICKCTRL
 class wxDatePickerCtrl;
 #endif
-
-class wxGridFixedIndicesSet;
 
 class wxGridOperations;
 class wxGridRowOperations;

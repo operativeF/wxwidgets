@@ -11,7 +11,6 @@
 
 
 #include "wx/frame.h"
-#include "wx/hashmap.h"
 #include "wx/event.h"
 
 class wxTestableFrame : public wxFrame
@@ -27,7 +26,7 @@ private:
     int GetEventCount(wxEventType type);
     void ClearEventCount(wxEventType type);
 
-    wxLongToLongHashMap m_count;
+    std::unordered_map<long, long> m_count;
 };
 
 class EventCounter

@@ -426,7 +426,7 @@ wxPNGHandler::LoadFile(wxImage *image,
 // SaveFile() palette helpers
 // ----------------------------------------------------------------------------
 
-using PaletteMap = wxLongToLongHashMap;
+using PaletteMap = std::unordered_map<long, long>;
 
 static unsigned long PaletteMakeKey(const png_color_8& clr)
 {

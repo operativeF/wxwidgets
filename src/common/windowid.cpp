@@ -9,7 +9,6 @@
 
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/hashmap.h"
 #include "wx/windowid.h"
 
 // initially no ids are in use and we allocate them consecutively, but after we
@@ -37,7 +36,7 @@ std::uint8_t gs_autoIdsRefCount[wxID_AUTO_HIGHEST - wxID_AUTO_LOWEST + 1] = { 0 
 // freed. The cell storing the count for an ID is freed only when its count
 // gets to zero (not when it goes below ID_COUNTTOOLARGE, so as to avoid
 // degenerate cases)
-wxLongToLongHashMap *gs_autoIdsLargeRefCount = nullptr;
+std::unordered_map<long, long> *gs_autoIdsLargeRefCount = nullptr;
 
 // this is an optimization used until we wrap around wxID_AUTO_HIGHEST: if this
 // value is < wxID_AUTO_HIGHEST we know that we haven't wrapped yet and so can
@@ -97,7 +96,7 @@ void IncIdRefCount(wxWindowID winid)
         {
             // we need to allocate a cell, and maybe the hash map itself
             if (!gs_autoIdsLargeRefCount)
-                gs_autoIdsLargeRefCount = new wxLongToLongHashMap;
+                gs_autoIdsLargeRefCount = new std::unordered_map<long, long>;
             (*gs_autoIdsLargeRefCount)[winid] = ID_COUNTTOOLARGE-1;
 
             gs_autoIdsRefCount[winid] = ID_COUNTTOOLARGE;

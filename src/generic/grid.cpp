@@ -35,7 +35,6 @@
 #include "wx/tokenzr.h"
 #include "wx/renderer.h"
 #include "wx/headerctrl.h"
-#include "wx/hashset.h"
 
 #if wxUSE_CLIPBOARD
     #include "wx/clipbrd.h"
@@ -53,10 +52,6 @@ import Utils.Strings;
 import <algorithm>;
 import <string>;
 import <vector>;
-
-WX_DECLARE_HASH_SET_WITH_DECL_PTR(int, wxIntegerHash, wxIntegerEqual,
-                                  wxGridFixedIndicesSet, class WXDLLIMPEXP_CORE);
-
 
 // ----------------------------------------------------------------------------
 // globals
@@ -10920,7 +10915,7 @@ wxGridEditorCreatedEvent::wxGridEditorCreatedEvent(int id, wxEventType type,
 
 wxGridTypeRegistry::~wxGridTypeRegistry()
 {
-    size_t count = m_typeinfo.GetCount();
+    size_t count = m_typeinfo.size();
     for ( size_t i = 0; i < count; i++ )
         delete m_typeinfo[i];
 }
@@ -10940,13 +10935,13 @@ void wxGridTypeRegistry::RegisterDataType(std::string_view typeName,
     }
     else
     {
-        m_typeinfo.Add(info);
+        m_typeinfo.push_back(info);
     }
 }
 
 int wxGridTypeRegistry::FindRegisteredDataType(std::string_view typeName)
 {
-    size_t count = m_typeinfo.GetCount();
+    size_t count = m_typeinfo.size();
     for ( size_t i = 0; i < count; i++ )
     {
         if ( typeName == m_typeinfo[i]->m_typeName )
@@ -11022,7 +11017,7 @@ int wxGridTypeRegistry::FindDataType(std::string_view typeName)
 
         // we get here only if just added the entry for this type, so return
         // the last index
-        index = m_typeinfo.GetCount() - 1;
+        index = m_typeinfo.size() - 1;
     }
 
     return index;
@@ -11056,7 +11051,7 @@ int wxGridTypeRegistry::FindOrCloneDataType(std::string_view typeName)
         RegisterDataType(typeName, renderer, editor);
 
         // we just registered it, it's the last one
-        index = m_typeinfo.GetCount() - 1;
+        index = m_typeinfo.size() - 1;
     }
 
     return index;

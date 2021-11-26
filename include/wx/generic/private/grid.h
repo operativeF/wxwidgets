@@ -1003,10 +1003,7 @@ struct wxGridDataTypeInfo
     wxGridCellEditor*   m_editor;
 };
 
-
-WX_DEFINE_ARRAY_WITH_DECL_PTR(wxGridDataTypeInfo*, wxGridDataTypeInfoArray,
-                                 class WXDLLIMPEXP_CORE);
-
+using wxGridDataTypeInfoArray = std::vector<wxGridDataTypeInfo*>;
 
 class wxGridTypeRegistry
 {
