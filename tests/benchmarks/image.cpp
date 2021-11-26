@@ -7,9 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/image.h"
-
 #include "bench.h"
+
+import WX.Image;
 
 BENCHMARK_FUNC(LoadBMP)
 {

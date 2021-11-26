@@ -28,7 +28,6 @@
 #include "wx/dialog.h"
 #include "wx/settings.h"
 #include "wx/bitmap.h"
-#include "wx/image.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
 #include "wx/wfstream.h"
@@ -45,6 +44,7 @@
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
+import WX.Image;
 import Utils.Strings;
 
 import <clocale>;

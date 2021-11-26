@@ -6,19 +6,24 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGGIF_H_
-#define _WX_IMAGGIF_H_
+module;
 
-#include "wx/image.h"
+#include "wx/stream.h"
+
+export module WX.Image.GIF;
+
+import WX.Image.Base;
 
 import <cstdint>;
-
 
 //-----------------------------------------------------------------------------
 // wxGIFHandler
 //-----------------------------------------------------------------------------
 
 #if wxUSE_GIF
+
+export
+{
 
 inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 
@@ -93,7 +98,6 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxGIFHandler);
 };
 
+} // export
+
 #endif // wxUSE_GIF
-
-#endif // _WX_IMAGGIF_H_
-

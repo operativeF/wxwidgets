@@ -10,9 +10,7 @@
 
 #include "testprec.h"
 
-
 #include "wx/filename.h"
-#include "wx/image.h"
 #include "wx/icon.h"
 #include "wx/animate.h"
 #include "wx/mstream.h"
@@ -20,6 +18,8 @@
 #include "wx/mediactrl.h"
 #include "wx/html/htmlwin.h"
 #include "wx/xrc/xmlres.h"
+
+import WX.Image;
 
 constexpr int GARBAGE_DATA_SIZE   = 1000000; // in bytes; ~ 1MB
 

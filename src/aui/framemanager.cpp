@@ -23,7 +23,6 @@ module;
 #include "wx/dcscreen.h"
 #include "wx/display.h"
 #include "wx/toolbar.h"
-#include "wx/image.h"
 #include "wx/statusbr.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
@@ -48,6 +47,7 @@ import WX.AUI.DockArt;
 import WX.AUI.FloatPane;
 import WX.AUI.TabMDI;
 
+import WX.Image;
 import WX.Cfg.Flags;
 
 import <charconv>;

@@ -10,13 +10,11 @@ add_library(wxxml
 )
 
 target_link_libraries(wxxml
+    PUBLIC
+        wxsharedcmn
     PRIVATE
-        wxwinwrap
-        wxconfigflags
-        stdlibcore
         Microsoft.GSL::GSL
         expat::expat
-        wxtype
 )
 
 target_include_directories(wxxml

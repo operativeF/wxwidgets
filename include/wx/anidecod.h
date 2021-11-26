@@ -11,11 +11,12 @@
 
 #if wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
 
-#include "wx/image.h"
 #include "wx/animdecod.h"
 #include "wx/dynarray.h"
 
 import Utils.Geometry;
+
+import WX.Image;
 
 class /*WXDLLIMPEXP_CORE*/ wxANIFrameInfo;      // private implementation detail
 class wxInputStream;

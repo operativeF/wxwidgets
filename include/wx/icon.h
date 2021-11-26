@@ -16,6 +16,8 @@
 
 #include <gsl/gsl>
 
+import WX.Image;
+
 // a more readable way to tell
 inline constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 

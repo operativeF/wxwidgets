@@ -15,8 +15,8 @@
 #if wxUSE_GRAPHICS_CONTEXT
     #include "wx/graphics.h"
 #else
-    #include "wx/image.h"
     #include "wx/math.h"
+    import WX.Image;
 #endif
 
 import <cmath>;

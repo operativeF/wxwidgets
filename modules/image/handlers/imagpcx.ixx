@@ -1,34 +1,38 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        wx/imagpnm.h
-// Purpose:     wxImage PNM handler
-// Author:      Sylvain Bougnoux
-// Copyright:   (c) Sylvain Bougnoux
+// Name:        wx/imagpcx.h
+// Purpose:     wxImage PCX handler
+// Author:      Guillermo Rodriguez Garcia <guille@iies.es>
+// Copyright:   (c) 1999 Guillermo Rodriguez Garcia
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGPNM_H_
-#define _WX_IMAGPNM_H_
+module;
 
 #include "wx/gdicmn.h"
-#include "wx/image.h"
+#include "wx/stream.h"
+
+export module WX.Image.PCX;
+
+import WX.Image.Base;
+
+#if wxUSE_PCX
+
+export
+{
 
 //-----------------------------------------------------------------------------
-// wxPNMHandler
+// wxPCXHandler
 //-----------------------------------------------------------------------------
 
-#if wxUSE_PNM
-class wxPNMHandler : public wxImageHandler
+class wxPCXHandler : public wxImageHandler
 {
 public:
-    wxPNMHandler()
+    wxPCXHandler()
     {
-        m_name = "PNM file";
-        m_extension = "pnm";
-        m_altExtensions.push_back("ppm");
-        m_altExtensions.push_back("pgm");
-        m_altExtensions.push_back("pbm");
-        m_type = wxBitmapType::PNM;
-        m_mime = "image/pnm";
+        m_name = "PCX file";
+        m_extension = "pcx";
+        m_type = wxBitmapType::PCX;
+        m_mime = "image/pcx";
     }
 
 #if wxUSE_STREAMS
@@ -36,14 +40,12 @@ public:
     bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) override;
 protected:
     bool DoCanRead( wxInputStream& stream ) override;
-#endif
+#endif // wxUSE_STREAMS
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPNMHandler);
+    wxDECLARE_DYNAMIC_CLASS(wxPCXHandler);
 };
-#endif
 
+} // export
 
-#endif
-  // _WX_IMAGPNM_H_
-
+#endif // wxUSE_PCX

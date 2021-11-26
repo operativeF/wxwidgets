@@ -15,13 +15,14 @@
 #include "wx/generic/private/animate.h"
 
 #include "wx/log.h"
-#include "wx/image.h"
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
 
 #include "wx/wfstream.h"
 
 #include <chrono>
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // wxAnimation

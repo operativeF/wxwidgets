@@ -16,8 +16,9 @@
 #include "wx/geometry.h"
 #include "wx/colour.h"
 #include "wx/font.h"
-#include "wx/image.h"
 #include "wx/peninfobase.h"
+
+import WX.Image;
 
 import Utils.Geometry;
 

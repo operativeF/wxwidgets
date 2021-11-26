@@ -14,7 +14,7 @@
 #include "wx/icon.h"
 
 #if wxUSE_PNG_RESOURCE_HANDLER
-    #include "wx/image.h"
+    import WX.Image;
     #include "wx/utils.h"       // For wxLoadUserResource()
 #endif
 

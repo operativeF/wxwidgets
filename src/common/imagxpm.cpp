@@ -61,18 +61,18 @@ license is as follows:
 %
 */
 
-
-
-
-#if wxUSE_XPM
+module;
 
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/utils.h"
-#include "wx/imagxpm.h"
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 #include "wx/filename.h"
+
+module WX.Image.XPM;
+
+#if wxUSE_XPM
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxXPMHandler,wxImageHandler);
 

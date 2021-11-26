@@ -6,14 +6,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE && wxUSE_TGA
+module;
 
 #include "wx/log.h"
 #include "wx/palette.h"
-#include "wx/imagtga.h"
 #include "wx/scopedarray.h"
+#include "wx/stream.h"
 
 #include <gsl/gsl>
+
+module WX.Image.TGA;
+
+#if wxUSE_IMAGE && wxUSE_TGA
 
 // ----------------------------------------------------------------------------
 // constants

@@ -17,8 +17,8 @@
 
 #include "wx/gdicmn.h"  // for wxBitmapType
 #include "wx/colour.h"
-#include "wx/image.h"
 
+import WX.Image;
 import Utils.Geometry;
 
 import <string>;

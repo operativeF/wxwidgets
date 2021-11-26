@@ -14,9 +14,10 @@
 
 #include "wx/bmpbuttn.h"
 #include "wx/log.h"
-#include "wx/image.h"
 
 #include "wx/msw/uxtheme.h"
+
+import WX.Image;
 
 #ifndef ODS_NOFOCUSRECT
     #define ODS_NOFOCUSRECT     0x0200

@@ -13,7 +13,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
-#include "wx/image.h"
 #include "wx/rawbmp.h"
 #include "wx/stopwatch.h"
 #include "wx/crt.h"
@@ -24,6 +23,8 @@
         #pragma comment(lib, "opengl32")
     #endif
 #endif // wxUSE_GLCANVAS
+
+import WX.Image;
 
 #if wxUSE_GLCANVAS
 

@@ -11,7 +11,6 @@
 #if wxUSE_ANIMATIONCTRL
 
 #include "wx/module.h"
-#include "wx/image.h"
 #include "wx/brush.h"
 #include "wx/dcmemory.h"
 #include "wx/bitmap.h"
@@ -23,6 +22,8 @@
 #include "wx/anidecod.h"
 
 #include "wx/private/animate.h"
+
+import WX.Image;
 
 // global objects
 wxAnimation wxNullAnimation;

@@ -6,8 +6,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGE_IFF_H_
-#define _WX_IMAGE_IFF_H_
+module;
+
+#include "wx/gdicmn.h"
+#include "wx/stream.h"
+
+export module WX.Image.IFF;
+
+import WX.Image.Base;
 
 //-----------------------------------------------------------------------------
 // wxIFFHandler
@@ -15,8 +21,8 @@
 
 #if wxUSE_IMAGE && wxUSE_IFF
 
-#include "wx/gdicmn.h"
-#include "wx/image.h"
+export
+{
 
 class wxIFFHandler : public wxImageHandler
 {
@@ -39,6 +45,6 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxIFFHandler);
 };
 
-#endif // wxUSE_IMAGE && wxUSE_IFF
+} // export
 
-#endif // _WX_IMAGE_IFF_H_
+#endif // wxUSE_IMAGE && wxUSE_IFF

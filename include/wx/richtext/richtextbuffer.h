@@ -61,7 +61,6 @@ import Utils.Position;
 #include "wx/list.h"
 #include "wx/textctrl.h"
 #include "wx/bitmap.h"
-#include "wx/image.h"
 #include "wx/cmdproc.h"
 #include "wx/txtstrm.h"
 #include "wx/variant.h"
@@ -72,6 +71,8 @@ import Utils.Position;
 #endif
 
 #include <gsl/gsl>
+
+import WX.Image;
 
 // Compatibility
 //#define wxRichTextAttr wxTextAttr

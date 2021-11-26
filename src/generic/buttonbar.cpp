@@ -17,15 +17,14 @@
 
 #include "wx/generic/buttonbar.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/frame.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/image.h"
-#endif
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/frame.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // wxButtonToolBarTool: our implementation of wxToolBarToolBase

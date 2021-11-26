@@ -38,7 +38,8 @@
 #endif 
 
 #include "wx/palette.h"
-#include "wx/image.h"
+
+import WX.Image;
 
 import <cstdlib>;
 import <cstring>;

@@ -15,9 +15,10 @@
 
 #include "wx/dc.h"
 #include "wx/icon.h"
-#include "wx/image.h"
 
 #include "wx/settings.h"
+
+import WX.Image;
 
 //-----------------------------------------------------------------------------
 //  wxImageList

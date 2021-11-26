@@ -48,10 +48,11 @@
 #if wxUSE_LOG_DIALOG
     #include "wx/listctrl.h"
     #include "wx/imaglist.h"
-    #include "wx/image.h"
 #endif // wxUSE_LOG_DIALOG/!wxUSE_LOG_DIALOG
 
 #include "wx/time.h"
+
+import WX.Image;
 
 #define CAN_SAVE_FILES (wxUSE_FILE && wxUSE_FILEDLG)
 

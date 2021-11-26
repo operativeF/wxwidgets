@@ -6,9 +6,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE
+module;
 
-#include "wx/image.h"
 #include "wx/log.h"
 #include "wx/hash.h"
 #include "wx/utils.h"
@@ -22,6 +21,20 @@
 
 #include <gsl/gsl>
 
+// Under Windows we can load wxImage not only from files but also from
+// resources.
+#if defined(WX_WINDOWS) && wxUSE_WXDIB && wxUSE_IMAGE \
+&& !defined(__WXQT__) // undefined reference to `wxDIB::ConvertToImage(wxDIB::ConversionFlags) const'
+    #define HAS_LOAD_FROM_RESOURCE
+#endif
+
+#ifdef HAS_LOAD_FROM_RESOURCE
+    #include "wx/msw/dib.h"
+    #include "wx/msw/private.h"
+#endif
+
+module WX.Image.Base;
+
 import WX.WinDef;
 
 import Utils.Strings;
@@ -30,6 +43,7 @@ import <algorithm>;
 import <cmath>;
 import <cstring>; // For memcpy
 
+#if wxUSE_IMAGE
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))
@@ -47,12 +61,6 @@ import <cstring>; // For memcpy
 #if wxUSE_VARIANT
 IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxImage,WXDLLEXPORT)
 #endif
-
-//-----------------------------------------------------------------------------
-// global data
-//-----------------------------------------------------------------------------
-
-wxImage wxNullImage;
 
 //-----------------------------------------------------------------------------
 // wxImageRefData
@@ -2555,20 +2563,7 @@ unsigned int wxImage::GetLoadFlags() const
     return M_IMGDATA ? M_IMGDATA->m_loadFlags : wxImageRefData::sm_defaultLoadFlags;
 }
 
-// Under Windows we can load wxImage not only from files but also from
-// resources.
-#if defined(WX_WINDOWS) && wxUSE_WXDIB && wxUSE_IMAGE \
-&& !defined(__WXQT__) // undefined reference to `wxDIB::ConvertToImage(wxDIB::ConversionFlags) const'
-    #define HAS_LOAD_FROM_RESOURCE
-#endif
-
 #ifdef HAS_LOAD_FROM_RESOURCE
-
-#include "wx/msw/dib.h"
-
-#include "wx/msw/private.h"
-
-import WX.Win.UniqueHnd;
 
 static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 {

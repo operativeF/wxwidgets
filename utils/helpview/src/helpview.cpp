@@ -14,7 +14,6 @@
 #include "wx/wx.h"
 
 #include "wx/filename.h"
-#include "wx/image.h"
 #include "wx/wxhtml.h"
 #include "wx/fs_zip.h"
 #include "wx/log.h"
@@ -22,6 +21,8 @@
 #include "wx/filedlg.h"
 
 #include "helpview.h"
+
+import WX.Image;
 
 class AlternateArtProvider : public wxArtProvider
 {

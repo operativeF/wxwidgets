@@ -15,7 +15,6 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/dcmemory.h"
-#include "wx/image.h"
 #include "wx/icon.h"
 #include "wx/font.h"
 #include "wx/prntbase.h"
@@ -23,6 +22,8 @@
 #include "wx/paper.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
+
+import WX.Image;
 
 import <cmath>;
 import <numbers>;

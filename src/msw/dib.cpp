@@ -19,11 +19,12 @@
 #include "wx/display.h"
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/image.h"
 #include "wx/file.h"
 #include "wx/quantize.h"
 
 #include "wx/msw/dib.h"
+
+import WX.Image;
 
 #include <memory>
 import <string>;

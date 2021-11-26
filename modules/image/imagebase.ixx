@@ -6,23 +6,28 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGE_H_
-#define _WX_IMAGE_H_
-
-#if wxUSE_IMAGE
+module;
 
 #include "wx/gdicmn.h"
 #include "wx/object.h"
 #include "wx/hashmap.h"
 
-#if wxUSE_STREAMS
-#  include "wx/stream.h"
-#endif
+#include "wx/stream.h"
+
+#include <gsl/gsl>
+
+export module WX.Image.Base;
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 import <vector>;
+
+#if wxUSE_IMAGE
+
+export
+{
 
 inline constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
 inline constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";
@@ -34,6 +39,12 @@ inline constexpr char wxIMAGE_OPTION_MAX_WIDTH[] =       "MaxWidth";
 inline constexpr char wxIMAGE_OPTION_MAX_HEIGHT[] =      "MaxHeight";
 inline constexpr char wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  "OriginalWidth";
 inline constexpr char wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = "OriginalHeight";
+
+// These two options are filled in upon reading CUR file and can (should) be
+// specified when saving a CUR file - they define the hotspot of the cursor:
+inline constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = "HotSpotX";
+inline constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = "HotSpotY";
+
 
 // constants used with wxIMAGE_OPTION_RESOLUTIONUNIT
 //
@@ -76,6 +87,49 @@ enum wxImageAlphaBlendMode
     wxIMAGE_ALPHA_BLEND_COMPOSE = 1
 };
 
+// Bitmap flags
+enum class wxBitmapType
+{
+    Invalid,          // should be == 0 for compatibility!
+    BMP,
+    BMP_Resource,
+    resource = BMP_Resource,
+    ICO,
+    ICO_Resource,
+    CUR,
+    CUR_Resource,
+    XBM,
+    XBM_Data,
+    XPM,
+    XPM_Data,
+    TIFF,
+    TIF = TIFF,
+    TIFF_Resource,
+    TIF_Resource = TIFF_Resource,
+    GIF,
+    GIF_Resource,
+    PNG,
+    PNG_Resource,
+    JPEG,
+    JPEG_Resource,
+    PNM,
+    PNM_Resource,
+    PCX,
+    PCX_Resource,
+    PICT,
+    PICT_Resource,
+    ICON,
+    ICON_Resource,
+    ANI,
+    IFF,
+    TGA,
+    MACCURSOR,
+    MACCURSOR_Resource,
+
+    Max,
+    Any = 50
+};
+
 // alpha channel values: fully transparent, default threshold separating
 // transparent pixels from opaque for a few functions dealing with alpha and
 // fully opaque
@@ -88,10 +142,8 @@ inline constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 // classes
 //-----------------------------------------------------------------------------
 
-class wxImageHandler;
 class wxImage;
 class wxPalette;
-
 
 //-----------------------------------------------------------------------------
 // wxVariant support
@@ -636,27 +688,8 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxImage);
 };
 
+inline wxImage wxNullImage;
 
-extern void wxInitAllImageHandlers();
-
-extern wxImage    wxNullImage;
-
-//-----------------------------------------------------------------------------
-// wxImage handlers
-//-----------------------------------------------------------------------------
-
-#include "wx/imagbmp.h"
-#include "wx/imagpng.h"
-#include "wx/imaggif.h"
-#include "wx/imagpcx.h"
-#include "wx/imagjpeg.h"
-#include "wx/imagtga.h"
-#include "wx/imagtiff.h"
-#include "wx/imagpnm.h"
-#include "wx/imagxpm.h"
-#include "wx/imagiff.h"
+} // export
 
 #endif // wxUSE_IMAGE
-
-#endif
-  // _WX_IMAGE_H_

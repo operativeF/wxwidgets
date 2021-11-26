@@ -99,8 +99,9 @@ license is as follows:
 #include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/stream.h"
-#include "wx/image.h"
 #include "wx/palette.h"
+
+import WX.Image;
 
 #if wxUSE_STREAMS
 bool wxXPMDecoder::CanRead(wxInputStream& stream)

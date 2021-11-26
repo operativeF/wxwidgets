@@ -11,7 +11,6 @@
 #include "wx/confbase.h"
 #include "wx/fileconf.h"
 #include "wx/cmdline.h"
-#include "wx/image.h"
 #include "wx/file.h"
 #include "wx/filename.h"
 
@@ -20,6 +19,8 @@
 #endif
 
 #include "emulator.h"
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // resources

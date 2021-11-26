@@ -6,9 +6,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE && wxUSE_LIBTIFF
+module;
 
-#include "wx/imagtiff.h"
 #include "wx/versioninfo.h"
 #include "wx/gdicmn.h"
 #include "wx/log.h"
@@ -16,20 +15,22 @@
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
 
-extern "C"
-{
-    #include "tiff.h"
-    #include "tiffio.h"
-}
+#include "tiff.h"
+#include "tiffio.h"
+
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 
 #include <gsl/gsl>
 
+module WX.Image.TIFF;
+
 import Utils.Strings;
 import Utils.Geometry;
 
 import <cstdlib>;
+
+#if wxUSE_IMAGE && wxUSE_LIBTIFF
 
 #ifndef TIFFLINKAGEMODE
     #define TIFFLINKAGEMODE

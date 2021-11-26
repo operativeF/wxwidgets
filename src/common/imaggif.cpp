@@ -6,17 +6,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE && wxUSE_GIF
+module;
 
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/utils.h"
-#include "wx/imaggif.h"
 #include "wx/gifdecod.h"
 #include "wx/stream.h"
 #include "wx/anidecod.h" // wxImageArray
 #include "wx/scopedarray.h"
+
+module WX.Image.GIF;
+
+#if wxUSE_IMAGE && wxUSE_GIF
 
 constexpr char GIF89_HDR[]     = "GIF89a";
 constexpr char NETSCAPE_LOOP[] = "NETSCAPE2.0";

@@ -11,8 +11,9 @@
 #include "wx/region.h"
 #include "wx/dcmemory.h"
 #include "wx/bitmap.h"
-#include "wx/image.h"
 #include "wx/utils.h"
+
+import WX.Image;
 
 // ============================================================================
 // wxRegionBase implementation

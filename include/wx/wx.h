@@ -51,7 +51,6 @@
 #include "wx/gdicmn.h"
 #include "wx/gdiobj.h"
 #include "wx/icon.h"
-#include "wx/image.h"
 #include "wx/menu.h"
 #include "wx/menuitem.h"
 #include "wx/msgdlg.h"

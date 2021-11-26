@@ -146,15 +146,10 @@ target_include_directories(test_gui
 target_link_libraries(test_gui
     PRIVATE
         wxcore
-        wxbase
-        wxconfigflags
-        stdlibcore
-        wxtype
+
         doctest::doctest
-        wxprint
         ${JPEG_LIBRARIES}
     # Windows libraries
-        wxwinwrap
 
         kernel32
         user32

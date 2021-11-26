@@ -6,14 +6,25 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE && wxUSE_LIBJPEG
+module;
 
-#include "wx/imagjpeg.h"
 #include "wx/versioninfo.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 
+#include "jpeglib.h"
+
+#include "wx/filefn.h"
+#include "wx/wfstream.h"
+
+// For JPEG library error handling
+#include <csetjmp>
+
+module WX.Image.JPEG;
+
 import <cstring>; // For memcpy
+
+#if wxUSE_IMAGE && wxUSE_LIBJPEG
 
 // A hack based on one from tif_jpeg.c to overcome the problem on Windows
 // of rpcndr.h defining boolean with a different type to the jpeg headers.
@@ -25,14 +36,6 @@ import <cstring>; // For memcpy
     #define HAVE_BOOLEAN
     #define boolean wxHACK_BOOLEAN
 #endif
-
-#include "jpeglib.h"
-
-#include "wx/filefn.h"
-#include "wx/wfstream.h"
-
-// For JPEG library error handling
-#include <csetjmp>
 
 // ----------------------------------------------------------------------------
 // types

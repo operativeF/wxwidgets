@@ -8,12 +8,12 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#include "wx/image.h"
-
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
 
 #include "wx/html/htmlwin.h"
+
+import WX.Image;
 
 import <cstdlib>;                     // bsearch()
 

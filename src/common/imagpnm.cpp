@@ -6,15 +6,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+module;
 
-
-
-#if wxUSE_IMAGE && wxUSE_PNM
-
-#include "wx/imagpnm.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/txtstrm.h"
+
+module WX.Image.PNM;
+
+#if wxUSE_IMAGE && wxUSE_PNM
 
 //-----------------------------------------------------------------------------
 // wxBMPHandler

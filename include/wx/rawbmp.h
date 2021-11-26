@@ -13,8 +13,9 @@
 
 #ifdef wxHAS_RAW_BITMAP
 
-#include "wx/image.h"
 #include "wx/bitmap.h"
+
+import WX.Image;
 
 import Utils.Geometry;
 

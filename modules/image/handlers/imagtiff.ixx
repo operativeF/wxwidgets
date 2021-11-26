@@ -6,8 +6,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGTIFF_H_
-#define _WX_IMAGTIFF_H_
+module;
+
+#include "wx/stream.h"
+#include "wx/versioninfo.h"
+
+export module WX.Image.TIFF;
+
+import WX.Image.Base;
 
 //-----------------------------------------------------------------------------
 // wxTIFFHandler
@@ -15,21 +21,21 @@
 
 #if wxUSE_LIBTIFF
 
-#include "wx/image.h"
-#include "wx/versioninfo.h"
+export
+{
 
 // defines for wxImage::SetOption
-#define wxIMAGE_OPTION_TIFF_BITSPERSAMPLE               wxString("BitsPerSample")
-#define wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL             wxString("SamplesPerPixel")
-#define wxIMAGE_OPTION_TIFF_COMPRESSION                 wxString("Compression")
-#define wxIMAGE_OPTION_TIFF_PHOTOMETRIC                 wxString("Photometric")
-#define wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR             wxString("ImageDescriptor")
+inline const wxString wxIMAGE_OPTION_TIFF_BITSPERSAMPLE   = "BitsPerSample";
+inline const wxString wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL = "SamplesPerPixel";
+inline const wxString wxIMAGE_OPTION_TIFF_COMPRESSION     = "Compression";
+inline const wxString wxIMAGE_OPTION_TIFF_PHOTOMETRIC     = "Photometric";
+inline const wxString wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR = "ImageDescriptor";
 
 // for backwards compatibility
-#define wxIMAGE_OPTION_BITSPERSAMPLE               wxIMAGE_OPTION_TIFF_BITSPERSAMPLE
-#define wxIMAGE_OPTION_SAMPLESPERPIXEL             wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL
-#define wxIMAGE_OPTION_COMPRESSION                 wxIMAGE_OPTION_TIFF_COMPRESSION
-#define wxIMAGE_OPTION_IMAGEDESCRIPTOR             wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR
+inline const wxString wxIMAGE_OPTION_BITSPERSAMPLE        = wxIMAGE_OPTION_TIFF_BITSPERSAMPLE;
+inline const wxString wxIMAGE_OPTION_SAMPLESPERPIXEL      = wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL;
+inline const wxString wxIMAGE_OPTION_COMPRESSION          = wxIMAGE_OPTION_TIFF_COMPRESSION;
+inline const wxString wxIMAGE_OPTION_IMAGEDESCRIPTOR      = wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR;
 
 class wxTIFFHandler: public wxImageHandler
 {
@@ -51,7 +57,6 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxTIFFHandler);
 };
 
+} // export
+
 #endif // wxUSE_LIBTIFF
-
-#endif // _WX_IMAGTIFF_H_
-

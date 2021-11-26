@@ -11,15 +11,11 @@
 
 #include "testprec.h"
 
-
 #ifdef wxHAS_RAW_BITMAP
 
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
-#include "wx/image.h"
 #include "wx/rawbmp.h"
 
+import WX.Image;
 
 constexpr int WIDTH = 10;
 constexpr int HEIGHT = 10;

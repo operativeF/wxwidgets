@@ -12,7 +12,6 @@
 #include "wx/dc.h"
 #include "wx/dcmemory.h"
 #include "wx/icon.h"
-#include "wx/image.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/window.h"
@@ -25,6 +24,7 @@
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
+import WX.Image;
 import WX.Win.UniqueHnd;
 import WX.WinDef;
 

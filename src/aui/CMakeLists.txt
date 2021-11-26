@@ -73,11 +73,8 @@ target_include_directories(wxaui
 
 target_link_libraries(wxaui
     PRIVATE
-        wxalgorithm
-        wxconfigflags
-        wxwinwrap
+        wximage
         stdlibcore
-        wxtype
         Microsoft.GSL::GSL
 )
 

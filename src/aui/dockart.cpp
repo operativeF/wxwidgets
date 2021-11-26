@@ -12,7 +12,6 @@ module;
 
 #include "wx/settings.h"
 #include "wx/dc.h"
-#include "wx/image.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -39,6 +38,8 @@ module WX.AUI.DockArt;
 import WX.AUI.Book;
 import WX.AUI.FrameManager;
 import WX.AUI.TabArt;
+
+import WX.Image;
 
 import <cmath>;
 

@@ -14,7 +14,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/bitmap.h"
-#include "wx/image.h"
 #include "wx/stream.h"
 #include "wx/utils.h"
 #include "wx/wfstream.h"
@@ -25,6 +24,8 @@
 
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxIconArray)
+
+import WX.Image;
 
 import WX.WinDef;
 

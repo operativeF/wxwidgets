@@ -6,9 +6,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_IMAGE && wxUSE_LIBPNG
+module;
 
-#include "wx/imagpng.h"
 #include "wx/versioninfo.h"
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -17,9 +16,13 @@
 
 #include <png.h>
 
+module WX.Image.PNG;
+
 import Utils.Strings;
 
 import <tuple>;
+
+#if wxUSE_IMAGE && wxUSE_LIBPNG
 
 // ----------------------------------------------------------------------------
 // local functions

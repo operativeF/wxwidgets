@@ -16,7 +16,6 @@
 #include "wx/timer.h"
 #include "wx/dcmemory.h"
 #include "wx/log.h"
-#include "wx/image.h"
 #include "wx/wxcrtvararg.h"
 
 #include "wx/html/forcelnk.h"
@@ -25,6 +24,8 @@
 
 #include "wx/gifdecod.h"
 #include "wx/artprov.h"
+
+import WX.Image;
 
 import <cmath>;
 import <vector>;

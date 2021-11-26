@@ -248,13 +248,13 @@ public:
     //
     // this is the function that should be overridden in the derived classes,
     // but you will mostly use MSWGetCreateWindowFlags() below
-    virtual DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const;
+    virtual WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const;
 
     // get the MSW window flags corresponding to wxWidgets ones
     //
     // the functions returns the flags (WS_XXX) directly and puts the ext
     // (WS_EX_XXX) flags into the provided pointer if not NULL
-    DWORD MSWGetCreateWindowFlags(DWORD *exflags = nullptr) const
+    WXDWORD MSWGetCreateWindowFlags(WXDWORD *exflags = nullptr) const
         { return MSWGetStyle(wxGetWindowStyle(), exflags); }
 
     // update the real underlying window style flags to correspond to the
@@ -279,8 +279,8 @@ public:
                    std::string_view title = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   DWORD style = 0,
-                   DWORD exendedStyle = 0);
+                   WXDWORD style = 0,
+                   WXDWORD exendedStyle = 0);
 
     virtual bool MSWCommand(WXUINT param, WXWORD id);
 
@@ -381,13 +381,13 @@ public:
 
     // Common gesture event initialization, returns true if it is the initial
     // event (GF_BEGIN set in flags), false otherwise.
-    bool InitGestureEvent(wxGestureEvent& event, const wxPoint& pt, DWORD flags);
+    bool InitGestureEvent(wxGestureEvent& event, const wxPoint& pt, WXDWORD flags);
 
-    bool HandlePanGesture(const wxPoint& pt, DWORD flags);
-    bool HandleZoomGesture(const wxPoint& pt, DWORD fingerDistance, DWORD flags);
-    bool HandleRotateGesture(const wxPoint& pt, DWORD angleArgument, DWORD flags);
-    bool HandleTwoFingerTap(const wxPoint& pt, DWORD flags);
-    bool HandlePressAndTap(const wxPoint& pt, DWORD flags);
+    bool HandlePanGesture(const wxPoint& pt, WXDWORD flags);
+    bool HandleZoomGesture(const wxPoint& pt, WXDWORD fingerDistance, WXDWORD flags);
+    bool HandleRotateGesture(const wxPoint& pt, WXDWORD angleArgument, WXDWORD flags);
+    bool HandleTwoFingerTap(const wxPoint& pt, WXDWORD flags);
+    bool HandlePressAndTap(const wxPoint& pt, WXDWORD flags);
 
     bool HandleChar(WXWPARAM wParam, WXLPARAM lParam);
     bool HandleKeyDown(WXWPARAM wParam, WXLPARAM lParam);
@@ -795,8 +795,8 @@ private:
     }
 
 protected:
-    WXHWND MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
-                                        std::string_view title, DWORD style,
+    WXHWND MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
+                                        std::string_view title, WXDWORD style,
                                         wxRect boundary,
                                         WXHWND parent, wxWindowID id);
 

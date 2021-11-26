@@ -9,8 +9,8 @@
 
 #if wxUSE_STREAMS && wxUSE_GIF
 
+#include "wx/gdicmn.h"
 #include "wx/palette.h"
-#include "wx/image.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/gifdecod.h"
@@ -20,6 +20,8 @@
 #include <gsl/gsl>
 
 #include <chrono>
+
+import WX.Image;
 
 import <array>;
 import <vector>;

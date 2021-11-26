@@ -47,7 +47,6 @@
 #include "wx/dc.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
-#include "wx/image.h"
 #include "wx/module.h"
 #include "wx/window.h"
 
@@ -63,6 +62,7 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
+import WX.Image;
 import WX.Win.UniqueHnd;
 
 import <algorithm>;

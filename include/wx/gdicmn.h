@@ -45,49 +45,6 @@ class wxIconBundle;
 // constants
 // ---------------------------------------------------------------------------
 
-// Bitmap flags
-enum class wxBitmapType
-{
-    Invalid,          // should be == 0 for compatibility!
-    BMP,
-    BMP_Resource,
-    resource = BMP_Resource,
-    ICO,
-    ICO_Resource,
-    CUR,
-    CUR_Resource,
-    XBM,
-    XBM_Data,
-    XPM,
-    XPM_Data,
-    TIFF,
-    TIF = TIFF,
-    TIFF_Resource,
-    TIF_Resource = TIFF_Resource,
-    GIF,
-    GIF_Resource,
-    PNG,
-    PNG_Resource,
-    JPEG,
-    JPEG_Resource,
-    PNM,
-    PNM_Resource,
-    PCX,
-    PCX_Resource,
-    PICT,
-    PICT_Resource,
-    ICON,
-    ICON_Resource,
-    ANI,
-    IFF,
-    TGA,
-    MACCURSOR,
-    MACCURSOR_Resource,
-
-    Max,
-    Any = 50
-};
-
 //  Polygon filling mode
 enum class wxPolygonFillMode
 {

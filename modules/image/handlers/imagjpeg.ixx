@@ -1,32 +1,43 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        wx/imagxpm.h
-// Purpose:     wxImage XPM handler
+// Name:        wx/imagjpeg.h
+// Purpose:     wxImage JPEG handler
 // Author:      Vaclav Slavik
-// Copyright:   (c) 2001 Vaclav Slavik
+// Copyright:   (c) Vaclav Slavik
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGXPM_H_
-#define _WX_IMAGXPM_H_
+module;
 
-#include "wx/image.h"
+#include "wx/stream.h"
+#include "wx/versioninfo.h"
 
-#if wxUSE_XPM
+export module WX.Image.JPEG;
+
+import WX.Image.Base;
 
 //-----------------------------------------------------------------------------
-// wxXPMHandler
+// wxJPEGHandler
 //-----------------------------------------------------------------------------
 
-class wxXPMHandler : public wxImageHandler
+#if wxUSE_LIBJPEG
+
+export
+{
+
+class wxJPEGHandler: public wxImageHandler
 {
 public:
-    wxXPMHandler()
+    wxJPEGHandler()
     {
-        m_name = "XPM file";
-        m_extension = "xpm";
-        m_type = wxBitmapType::XPM;
-        m_mime = "image/xpm";
+        m_name = "JPEG file";
+        m_extension = "jpg";
+        m_altExtensions.push_back("jpeg");
+        m_altExtensions.push_back("jpe");
+        m_type = wxBitmapType::JPEG;
+        m_mime = "image/jpeg";
     }
+
+    static wxVersionInfo GetLibraryVersionInfo();
 
 #if wxUSE_STREAMS
     bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
@@ -36,9 +47,10 @@ protected:
 #endif
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxXPMHandler);
+    wxDECLARE_DYNAMIC_CLASS(wxJPEGHandler);
 };
 
-#endif // wxUSE_XPM
+} // export
 
-#endif // _WX_IMAGXPM_H_
+#endif // wxUSE_LIBJPEG
+

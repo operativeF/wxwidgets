@@ -6,8 +6,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGPNG_H_
-#define _WX_IMAGPNG_H_
+module;
+
+#include "wx/stream.h"
+#include "wx/versioninfo.h"
+
+export module WX.Image.PNG;
+
+import WX.Image.Base;
 
 //-----------------------------------------------------------------------------
 // wxPNGHandler
@@ -15,8 +21,8 @@
 
 #if wxUSE_LIBPNG
 
-#include "wx/image.h"
-#include "wx/versioninfo.h"
+export
+{
 
 inline constexpr char wxIMAGE_OPTION_PNG_FORMAT[]                   = "PngFormat";
 inline constexpr char wxIMAGE_OPTION_PNG_BITDEPTH[]                 = "PngBitDepth";
@@ -58,9 +64,6 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxPNGHandler);
 };
 
-#endif
-  // wxUSE_LIBPNG
+} // export
 
-#endif
-  // _WX_IMAGPNG_H_
-
+#endif // wxUSE_LIBPNG

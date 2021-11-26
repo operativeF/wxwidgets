@@ -170,6 +170,37 @@ set(BASE_UNIX_SRC
     ${BASE_SRC_DIR}/unix/stdpaths.cpp
 )
 
+set(IMAGE_HANDLERS_IXX
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagbmp.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imaggif.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagiff.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagjpeg.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagpcx.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagpng.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagpnm.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagtga.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagtiff.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagxpm.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/image/imagebase.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/image/image.ixx
+)
+
+set(IMAGE_HANDLERS_SRC
+    ${CMAKE_SOURCE_DIR}/src/common/imagbmp.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imaggif.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagiff.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagjpeg.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpcx.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpng.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpnm.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagtga.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagtiff.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagxpm.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagebase.cpp
+)
+
 set(BASE_FILES ${BASE_CMN_SRC})
 set(SHARED_BASE_CMN ${SHARED_BASE_CMN_SRC})
 if(WIN32)
@@ -207,11 +238,15 @@ target_include_directories(wxsharedcmn
 )
 
 target_link_libraries(wxsharedcmn
-    PRIVATE
+    PUBLIC
+        wximage
         wxalgorithm
         wxconfigflags
         wxwinwrap
         wxtype
+        wxprint
+
+    PRIVATE
         Microsoft.GSL::GSL
         stdlibcore
 )
@@ -268,15 +303,11 @@ endif()
 target_link_libraries(wxbase
     PUBLIC
         wxsharedcmn
-        wxalgorithm
-        wxconfigflags
-        wxprint
 
     PRIVATE
         stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
-        wxtype
 
     # Windows libraries
         wxwinwrap

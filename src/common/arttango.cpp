@@ -9,11 +9,9 @@
 
 #if wxUSE_ARTPROVIDER_TANGO
 
-#include "wx/image.h"
 #include "wx/log.h"
 #include "wx/artprov.h"
 #include "wx/mstream.h"
-#include "wx/imagpng.h"
 
 // ----------------------------------------------------------------------------
 // image data
@@ -55,6 +53,8 @@
 #include "../../art/tango/text_x_generic.h"
 #include "../../art/tango/list_add.h"
 #include "../../art/tango/list_remove.h"
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // art provider class

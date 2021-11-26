@@ -21,6 +21,8 @@
     #include "wx/msw/crashrpt.h"
 #endif // wxUSE_ON_FATAL_EXCEPTION
 
+import WX.WinDef;
+
 // defined in common/init.cpp
 extern int wxEntryReal(int& argc, wxChar **argv);
 extern int wxEntryCleanupReal(int& argc, wxChar **argv);

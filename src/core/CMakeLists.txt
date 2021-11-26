@@ -61,19 +61,7 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/headerctrlcmn.cpp
     ${CORE_SRC_DIR}/common/helpbase.cpp
     ${CORE_SRC_DIR}/common/iconbndl.cpp
-    ${CORE_SRC_DIR}/common/imagall.cpp
-    ${CORE_SRC_DIR}/common/imagbmp.cpp
-    ${CORE_SRC_DIR}/common/image.cpp
     ${CORE_SRC_DIR}/common/imagfill.cpp
-    ${CORE_SRC_DIR}/common/imaggif.cpp
-    ${CORE_SRC_DIR}/common/imagiff.cpp
-    ${CORE_SRC_DIR}/common/imagjpeg.cpp
-    ${CORE_SRC_DIR}/common/imagpcx.cpp
-    ${CORE_SRC_DIR}/common/imagpng.cpp
-    ${CORE_SRC_DIR}/common/imagpnm.cpp
-    ${CORE_SRC_DIR}/common/imagtga.cpp
-    ${CORE_SRC_DIR}/common/imagtiff.cpp
-    ${CORE_SRC_DIR}/common/imagxpm.cpp
     ${CORE_SRC_DIR}/common/layout.cpp
     ${CORE_SRC_DIR}/common/lboxcmn.cpp
     ${CORE_SRC_DIR}/common/listctrlcmn.cpp
@@ -411,13 +399,10 @@ target_include_directories(wxcore
 
 target_link_libraries(wxcore
     PUBLIC
-        wxprint
-        wxconfigflags
-    PRIVATE
         wxsharedcmn
         wxbase
-        wxtype
-        wxalgorithm
+
+    PRIVATE
         stdlibcore
         Boost::nowide
         fmt::fmt

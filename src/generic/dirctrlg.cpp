@@ -41,7 +41,6 @@
 #include "wx/sizer.h"
 #include "wx/textdlg.h"
 #include "wx/gdicmn.h"
-#include "wx/image.h"
 #include "wx/module.h"
 #include "wx/filedlg.h"
 #include "wx/filename.h"
@@ -51,6 +50,8 @@
 #include "wx/dir.h"
 #include "wx/artprov.h"
 #include "wx/mimetype.h"
+
+import WX.Image;
 
 import Utils.Geometry;
 

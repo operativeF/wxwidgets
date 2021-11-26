@@ -14,18 +14,15 @@
 #include "wx/list.h"
 #include "wx/log.h"
 #include "wx/hashmap.h"
-#include "wx/image.h"
 #include "wx/module.h"
 
 #include <fmt/core.h>
 
-// ===========================================================================
-// implementation
-// ===========================================================================
-
 #include "wx/listimpl.cpp"
 WX_DECLARE_LIST(wxArtProvider, wxArtProvidersList);
 WX_DEFINE_LIST(wxArtProvidersList)
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // Cache class - stores already requested bitmaps

@@ -7,18 +7,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#if wxUSE_IMAGE && wxUSE_PCX
+module;
 
 #include "wx/object.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/palette.h"
 #include "wx/hash.h"
-#include "wx/imagpcx.h"
 #include "wx/wfstream.h"
+
+module WX.Image.PCX;
+
+#if wxUSE_IMAGE && wxUSE_PCX
 
 //-----------------------------------------------------------------------------
 // wxPCXHandler

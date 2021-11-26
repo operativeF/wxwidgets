@@ -17,12 +17,13 @@
 #include "wx/menu.h"
 #include "wx/dcmemory.h"
 
+import WX.Image;
+
 import <cmath>;
 import <numbers>;
 
 #if !wxUSE_NATIVE_SEARCH_CONTROL
 
-#include "wx/image.h"
 #include "wx/utils.h"
 
 // ----------------------------------------------------------------------------

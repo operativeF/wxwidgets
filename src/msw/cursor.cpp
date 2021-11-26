@@ -15,7 +15,6 @@
 #include "wx/icon.h"
 #include "wx/settings.h"
 #include "wx/intl.h"
-#include "wx/image.h"
 #include "wx/module.h"
 #include "wx/display.h"
 
@@ -25,6 +24,7 @@
 
 #include <cassert>
 
+import WX.Image;
 import WX.WinDef;
 
 // ----------------------------------------------------------------------------

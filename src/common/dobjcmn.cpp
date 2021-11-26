@@ -11,17 +11,14 @@
 #if wxUSE_DATAOBJ
 
 #include "wx/dataobj.h"
-#include "wx/image.h"
 #include "wx/mstream.h"
 #include "wx/textbuf.h"
-
-// ----------------------------------------------------------------------------
-// lists
-// ----------------------------------------------------------------------------
 
 #include "wx/listimpl.cpp"
 
 WX_DEFINE_LIST(wxSimpleDataObjectList)
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // globals

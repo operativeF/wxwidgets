@@ -17,10 +17,11 @@
 
 #include "wx/bitmap.h"
 #include "wx/colour.h"
-#include "wx/image.h"
 #include "wx/rawbmp.h"
 
 #include "wx/dfb/private.h"
+
+import WX.Image;
 
 //-----------------------------------------------------------------------------
 // helpers for translating between wx and DFB pixel formats

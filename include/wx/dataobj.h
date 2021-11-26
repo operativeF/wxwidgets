@@ -14,10 +14,11 @@
 #if wxUSE_DATAOBJ
 
 #include "wx/gdicmn.h"
-#include "wx/image.h"
 #include "wx/string.h"
 #include "wx/bitmap.h"
 #include "wx/list.h"
+
+import WX.Image;
 
 import <vector>;
 

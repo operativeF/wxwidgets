@@ -11,7 +11,7 @@
 // by the author of xv, John Bradley for using the iff loading part
 // in wxWidgets has been gratefully given.
 
-#if wxUSE_IMAGE && wxUSE_IFF
+module;
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -20,10 +20,13 @@
     #include "wx/palette.h"
 #endif // wxUSE_PALETTE
 
-#include "wx/imagiff.h"
 #include "wx/wfstream.h"
 
+module WX.Image.IFF;
+
 import <array>;
+
+#if wxUSE_IMAGE && wxUSE_IFF
 
 // --------------------------------------------------------------------------
 // Constants

@@ -17,7 +17,6 @@
 #include "wx/palette.h"
 #include "wx/icon.h"
 #include "wx/log.h"
-#include "wx/image.h"
 
 #include "wx/msw/dc.h"
 
@@ -30,6 +29,8 @@
 #endif
 
 #include <memory>
+
+import WX.Image;
 
 import WX.Win.UniqueHnd;
 import WX.WinDef;

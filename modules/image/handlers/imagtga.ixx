@@ -6,16 +6,22 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IMAGTGA_H_
-#define _WX_IMAGTGA_H_
+module;
 
-#include "wx/image.h"
+#include "wx/stream.h"
+
+export module WX.Image.TGA;
+
+import WX.Image.Base;
 
 //-----------------------------------------------------------------------------
 // wxTGAHandler
 //-----------------------------------------------------------------------------
 
 #if wxUSE_TGA
+
+export
+{
 
 class wxTGAHandler : public wxImageHandler
 {
@@ -41,6 +47,6 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxTGAHandler);
 };
 
-#endif // wxUSE_TGA
+} // export
 
-#endif // _WX_IMAGTGA_H_
+#endif // wxUSE_TGA

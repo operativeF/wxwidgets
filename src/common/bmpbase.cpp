@@ -10,13 +10,14 @@
 #include "wx/bitmap.h"
 #include "wx/colour.h"
 #include "wx/icon.h"
-#include "wx/image.h"
 
 #if wxUSE_IMAGE && wxUSE_LIBPNG && wxUSE_STREAMS
     #define wxHAS_PNG_LOAD
 
     #include "wx/mstream.h"
 #endif
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // wxVariant support

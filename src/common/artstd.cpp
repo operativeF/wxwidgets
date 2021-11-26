@@ -10,8 +10,9 @@
 
 #if wxUSE_ARTPROVIDER_STD
 
-#include "wx/image.h"
 #include "wx/artprov.h"
+
+import WX.Image;
 
 // ----------------------------------------------------------------------------
 // wxDefaultArtProvider

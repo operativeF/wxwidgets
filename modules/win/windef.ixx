@@ -40,6 +40,7 @@ using WXLRESULT   = LRESULT;
 
 using WXUINT      = UINT;
 using WXWORD      = WORD;
+using WXDWORD     = DWORD;
 
 using WXDRAWITEMSTRUCT    = void*;
 using WXMEASUREITEMSTRUCT = void*;

@@ -23,7 +23,7 @@
 #include "wx/dc.h"
 
 #if wxUSE_IMAGE
-    #include "wx/image.h"
+    import WX.Image;
 #endif
 
 

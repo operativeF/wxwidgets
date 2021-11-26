@@ -13,6 +13,8 @@
 
 #include <chrono>
 
+import WX.Image;
+
 using namespace std::chrono_literals;
 
 //---------------------------------------------------------------------------
