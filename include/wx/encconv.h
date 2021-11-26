@@ -12,7 +12,8 @@
 
 #include "wx/object.h"
 #include "wx/fontenc.h"
-#include "wx/dynarray.h"
+
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -38,7 +39,7 @@ enum
 // types
 // ----------------------------------------------------------------------------
 
-WX_DEFINE_ARRAY_INT(wxFontEncoding, wxFontEncodingArray);
+using wxFontEncodingArray = std::vector<wxFontEncoding>;
 
 //--------------------------------------------------------------------------------
 // wxEncodingConverter
@@ -136,7 +137,8 @@ class wxEncodingConverter
             // to convert in the other)
             static bool CanConvert(wxFontEncoding encIn, wxFontEncoding encOut)
             {
-                return GetAllEquivalents(encIn).Index(encOut) != wxNOT_FOUND;
+                auto equivalents = GetAllEquivalents(encIn);
+                return std::ranges::find(equivalents, encOut) != equivalents.end();
             }
 
     private:

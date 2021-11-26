@@ -70,7 +70,7 @@ protected:
     wxTreeItemId m_pItem;
 };
 
-using wxTreeItemIdValue = void *;
+using wxTreeItemIdValue = void*;
 
 WX_DEFINE_EXPORTED_ARRAY_PTR(wxTreeItemIdValue, wxArrayTreeItemIdsBase);
 

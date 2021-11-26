@@ -476,14 +476,8 @@ private:
 #define WX_DEFINE_TYPEARRAY_PTR(T, name, base)                        \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, base, class wxARRAY_DEFAULT_EXPORT)
 
-#define WX_DEFINE_EXPORTED_TYPEARRAY(T, name, base)               \
-    WX_DEFINE_TYPEARRAY_WITH_DECL(T, name, base, class WXDLLIMPEXP_CORE)
-
 #define WX_DEFINE_EXPORTED_TYPEARRAY_PTR(T, name, base)               \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, base, class WXDLLIMPEXP_CORE)
-
-#define WX_DEFINE_USER_EXPORTED_TYPEARRAY(T, name, base, expdecl) \
-    WX_DEFINE_TYPEARRAY_WITH_DECL(T, name, base, class expdecl)
 
 // This is the only non-trivial macro, which actually defines the array class
 // with the given name containing the elements of the specified type.
@@ -676,9 +670,6 @@ WX_DECLARE_USER_EXPORTED_BASEARRAY(size_t, wxBaseArraySizeT, WXDLLIMPEXP_BASE);
 
 #define WX_DEFINE_USER_EXPORTED_ARRAY_PTR(T, name, expmode)         \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, wxBaseArrayPtrVoid, wxARRAY_EMPTY expmode)
-
-#define WX_DEFINE_ARRAY_INT(T, name)                                   \
-    WX_DEFINE_TYPEARRAY_PTR(T, name, wxBaseArrayInt)
 
 #define WX_DEFINE_USER_EXPORTED_ARRAY_INT(T, name, expmode)            \
     WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(T, name, wxBaseArrayInt, wxARRAY_EMPTY expmode)

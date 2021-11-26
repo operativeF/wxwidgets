@@ -355,7 +355,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
     // now try to map this encoding to a compatible one which we have on this
     // system
     wxFontEncodingArray equiv = wxEncodingConverter::GetAllEquivalents(encoding);
-    const size_t count = equiv.GetCount();
+    const size_t count = equiv.size();
     bool foundEquivEncoding = false;
     wxFontEncoding equivEncoding = wxFONTENCODING_SYSTEM;
     if ( count )
