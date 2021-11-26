@@ -142,7 +142,7 @@ set(XRC_HDR
 
 add_library(wxxrc ${XRC_SRC})
 
-target_link_libraries(wxxrc PRIVATE wxhtml wxxml wxconfigflags)
+target_link_libraries(wxxrc PRIVATE wxhtml wxxml wxbase)
 
 target_include_directories(wxxrc
     PUBLIC

@@ -115,6 +115,16 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/lzmastream.cpp
 )
 
+set(BASE_CMN_IXX
+    ${CMAKE_SOURCE_DIR}/modules/base/bitfield.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/position.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/charutils.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/stringutils.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/nonmodifying.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/modifying.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
+)
+
 set(SHARED_BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/event.cpp
     ${BASE_SRC_DIR}/common/fs_mem.cpp
@@ -170,6 +180,24 @@ set(BASE_UNIX_SRC
     ${BASE_SRC_DIR}/unix/stdpaths.cpp
 )
 
+set(GEOMETRY_IXX
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/geometry.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/affinematrix2d.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/point.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/rect.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/rectaa.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/geometry/size.ixx
+)
+
+set(CONFIG_FLAGS_IXX
+    ${CMAKE_SOURCE_DIR}/modules/config/flags.ixx
+)
+
+set(WIN32_WRAP_IXX
+    ${CMAKE_SOURCE_DIR}/modules/win/windef.ixx
+    ${CMAKE_SOURCE_DIR}/modules/win/unique_hnd.ixx
+)
+
 set(IMAGE_HANDLERS_IXX
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagbmp.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imaggif.ixx
@@ -201,10 +229,15 @@ set(IMAGE_HANDLERS_SRC
     ${CMAKE_SOURCE_DIR}/src/common/imagebase.cpp
 )
 
-set(BASE_FILES ${BASE_CMN_SRC})
+set(PRINTER_IXX
+    ${CMAKE_SOURCE_DIR}/src/print/print.ixx
+    ${CMAKE_SOURCE_DIR}/src/print/printercfg.ixx
+)
+
+set(BASE_FILES ${BASE_CMN_SRC} ${CONFIG_FLAGS_IXX} ${BASE_CMN_IXX} ${GEOMETRY_IXX} ${PRINTER_IXX})
 set(SHARED_BASE_CMN ${SHARED_BASE_CMN_SRC})
 if(WIN32)
-    list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC})
+    list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC} ${WIN32_WRAP_IXX})
     list(APPEND SHARED_BASE_CMN ${SHARED_BASE_CMN} ${SHARED_BASE_WIN32_CMN})
 elseif(APPLE)
     set(BASE_FILES ${BASE_OSX_SHARED})
@@ -217,6 +250,9 @@ endif()
 
 add_library(wxbase
     ${BASE_FILES}
+    ${IMAGE_HANDLERS_IXX}
+    ${IMAGE_HANDLERS_SRC}
+    ${SHARED_BASE_CMN}
 )
 
 target_include_directories(wxbase
@@ -224,31 +260,6 @@ target_include_directories(wxbase
         ${CMAKE_SOURCE_DIR}/include
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
-)
-
-add_library(wxsharedcmn
-    OBJECT
-        ${SHARED_BASE_CMN}
-)
-
-target_include_directories(wxsharedcmn
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
-)
-
-target_link_libraries(wxsharedcmn
-    PUBLIC
-        wximage
-        wxalgorithm
-        wxconfigflags
-        wxwinwrap
-        wxtype
-        wxprint
-
-    PRIVATE
-        Microsoft.GSL::GSL
-        stdlibcore
 )
 
 if(wxUSE_ZLIB)
@@ -301,16 +312,13 @@ elseif(UNIX)
 endif()
 
 target_link_libraries(wxbase
-    PUBLIC
-        wxsharedcmn
-
     PRIVATE
         stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
 
     # Windows libraries
-        wxwinwrap
+        opengl32
         kernel32
         user32
         comdlg32
@@ -325,5 +333,4 @@ target_link_libraries(wxbase
         wininet
 )
 
-target_precompile_headers(wxsharedcmn PRIVATE ${CMAKE_SOURCE_DIR}/include/wx/msw/winprecomp.h)
-target_precompile_headers(wxbase REUSE_FROM wxsharedcmn)
+target_precompile_headers(wxbase PRIVATE ${CMAKE_SOURCE_DIR}/include/wx/msw/winprecomp.h)

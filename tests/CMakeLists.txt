@@ -145,6 +145,7 @@ target_include_directories(test_gui
 
 target_link_libraries(test_gui
     PRIVATE
+        wxbase
         wxcore
 
         doctest::doctest
@@ -195,4 +196,4 @@ endif()
 #     target_link_libraries(test_gui PRIVATE wxwebview)
 # endif()
 
-target_precompile_headers(test_gui REUSE_FROM wxsharedcmn)
+target_precompile_headers(test_gui REUSE_FROM wxbase)

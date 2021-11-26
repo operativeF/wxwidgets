@@ -399,7 +399,6 @@ target_include_directories(wxcore
 
 target_link_libraries(wxcore
     PUBLIC
-        wxsharedcmn
         wxbase
 
     PRIVATE
@@ -432,7 +431,6 @@ if(WIN32)
     target_link_libraries(wxcore
         PRIVATE
             winmm
-            wxwinwrap
     )
 endif()
 
@@ -473,4 +471,4 @@ if(wxUSE_LIBNOTIFY)
     wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})
 endif()
 
-target_precompile_headers(wxcore REUSE_FROM wxsharedcmn)
+target_precompile_headers(wxcore REUSE_FROM wxbase)

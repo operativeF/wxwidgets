@@ -73,7 +73,7 @@ target_include_directories(wxaui
 
 target_link_libraries(wxaui
     PRIVATE
-        wximage
+        wxbase
         stdlibcore
         Microsoft.GSL::GSL
 )

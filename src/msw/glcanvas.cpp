@@ -18,6 +18,8 @@
 
 #include "wx/glcanvas.h"
 
+import WX.Win.UniqueHnd;
+
 // from src/msw/window.cpp
 LRESULT APIENTRY
 wxWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
