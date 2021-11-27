@@ -36,7 +36,7 @@ TEST_CASE("ImageList:WithMask")
     REQUIRE(bmpRGB.IsOk());
 
     wxBitmap bmpRGBA;
-    bmpRGBA.LoadFile("image/wx.png", wxBitmapType::PNG);
+    bmpRGBA.LoadFile("image/data/wx.png", wxBitmapType::PNG);
     REQUIRE(bmpRGBA.IsOk());
 
     wxBitmap bmpMask(wxSize{32, 32}, 1);
@@ -62,7 +62,7 @@ TEST_CASE("ImageList:WithMask")
     REQUIRE(bmpRGBAWithMask.IsOk());
 
     wxIcon ico;
-    ico.LoadFile("image/wx.ico", wxBitmapType::ICO);
+    ico.LoadFile("image/data/wx.ico", wxBitmapType::ICO);
     REQUIRE(ico.IsOk());
 
     REQUIRE(bmpRGB.HasAlpha() == false);
@@ -446,7 +446,7 @@ TEST_CASE("ImageList:NoMask")
     REQUIRE(bmpRGB.IsOk());
 
     wxBitmap bmpRGBA;
-    bmpRGBA.LoadFile("image/wx.png", wxBitmapType::PNG);
+    bmpRGBA.LoadFile("image/data/wx.png", wxBitmapType::PNG);
     REQUIRE(bmpRGBA.IsOk());
 
     wxBitmap bmpMask(wxSize{32, 32}, 1);
@@ -472,7 +472,7 @@ TEST_CASE("ImageList:NoMask")
     REQUIRE(bmpRGBAWithMask.IsOk());
 
     wxIcon ico;
-    ico.LoadFile("image/wx.ico", wxBitmapType::ICO);
+    ico.LoadFile("image/data/wx.ico", wxBitmapType::ICO);
     REQUIRE(ico.IsOk());
 
     REQUIRE(bmpRGB.HasAlpha() == false);
