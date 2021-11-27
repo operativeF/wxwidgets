@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/textctrl.h"
@@ -20,6 +18,8 @@
 
 #include "asserthelper.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 class NumValidatorTestCase
 {

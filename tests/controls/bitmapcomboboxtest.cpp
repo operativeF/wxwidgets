@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_BITMAPCOMBOBOX
 
 #include "wx/app.h"
@@ -20,6 +18,8 @@
 #include "textentrytest.h"
 #include "itemcontainertest.h"
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 using BitmapComboBoxTest = ItemContainerTest<wxBitmapComboBox>;
 

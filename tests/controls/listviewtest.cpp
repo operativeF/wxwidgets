@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_LISTCTRL
 
 #include "wx/app.h"
@@ -18,6 +16,8 @@
 
 #include "listbasetest.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 using ListViewTest = ListBaseTest<wxListView>;
 

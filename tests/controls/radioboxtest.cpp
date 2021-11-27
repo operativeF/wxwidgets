@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_RADIOBOX
 
 #include "wx/app.h"
 #include "wx/radiobox.h"
 
 #include "wx/tooltip.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Radiobox test")
 {

@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/frame.h"
 #include "wx/window.h"
 
 #include "asserthelper.h"
 #include "waitforpaint.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // tests helpers

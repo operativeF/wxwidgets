@@ -8,13 +8,13 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/bitmap.h"
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
+
+import WX.Test.Prec;
 
 import <numbers>;
 

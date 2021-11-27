@@ -9,9 +9,9 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/generic/private/rowheightcache.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // TestRowRangesAdd

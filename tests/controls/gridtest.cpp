@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_GRID
 
 #include "wx/app.h"
@@ -27,6 +25,7 @@
 
 #include "waitforpaint.h"
 
+import WX.Test.Prec;
 
 namespace
 {

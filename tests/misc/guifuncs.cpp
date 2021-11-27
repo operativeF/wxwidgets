@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/gdicmn.h"
 #include "wx/filefn.h"
 #include "wx/app.h"
@@ -19,6 +17,8 @@
 #include "wx/panel.h"
 
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 import Utils.Geometry;
 

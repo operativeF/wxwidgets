@@ -9,8 +9,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_IMAGE
 
 #include "wx/bitmap.h"
@@ -26,6 +24,8 @@
 #include "wx/wfstream.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
+
+import WX.Test.Prec;
 
 import <numeric>;
 

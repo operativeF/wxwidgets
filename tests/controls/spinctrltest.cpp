@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_SPINCTRL
 
 #include "wx/app.h"
@@ -20,6 +18,8 @@
 #include "testableframe.h"
 
 #include <memory>
+
+import WX.Test.Prec;
 
 class SpinCtrlTestCase1
 {

@@ -8,7 +8,7 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
+import WX.Test.Prec;
 
 #include "wx/region.h"
 

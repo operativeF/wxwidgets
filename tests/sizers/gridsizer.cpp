@@ -8,14 +8,13 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/sizer.h"
-
 #include "wx/window.h"
 
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // test class

@@ -9,8 +9,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/bitmap.h"
@@ -18,6 +16,8 @@
 #include "wx/dcgraph.h"
 #include "wx/icon.h"
 #include "wx/gdicmn.h"
+
+import WX.Test.Prec;
 
 import Utils.Geometry;
 

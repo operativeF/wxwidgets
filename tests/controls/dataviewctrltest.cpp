@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_DATAVIEWCTRL
 
 #include "wx/app.h"
@@ -21,6 +19,8 @@
 
 #include "testableframe.h"
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 
 // ----------------------------------------------------------------------------

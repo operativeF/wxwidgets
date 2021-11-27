@@ -9,11 +9,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/font.h"
 #include "wx/window.h"
+
+import WX.Test.Prec;
 
 // wxCairoRenderer::CreateMeasuringContext() is not implement for wxX11
 #if wxUSE_GRAPHICS_CONTEXT && !defined(__WXX11__)

@@ -8,10 +8,10 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/evtloop.h"
 #include "wx/timer.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // constants

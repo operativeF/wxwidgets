@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TREEBOOK
 
 #include "wx/app.h"
@@ -17,6 +15,8 @@
 #include "wx/treebook.h"
 
 #include "bookctrlbasetest.h"
+
+import WX.Test.Prec;
 
 using wxTreebookTest = BookCtrlBaseT<wxTreebook>;
 

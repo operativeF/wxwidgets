@@ -11,8 +11,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/utils.h"
 #include "wx/process.h"
 #include "wx/sstream.h"
@@ -23,6 +21,8 @@
 #include "wx/scopeguard.h"
 #include "wx/txtstrm.h"
 #include "wx/timer.h"
+
+import WX.Test.Prec;
 
 #ifdef __UNIX__
     #define COMMAND "echo hi"

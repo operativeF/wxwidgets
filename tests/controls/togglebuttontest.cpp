@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TOGGLEBTN
 
 #include "wx/app.h"
@@ -18,6 +16,8 @@
 #include "wx/tglbtn.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Toggle button test")
 {

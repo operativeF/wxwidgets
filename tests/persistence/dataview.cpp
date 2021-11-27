@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_DATAVIEWCTRL
 
 #include "testpersistence.h"
@@ -21,6 +19,8 @@
 #endif // __WXGTK__
 
 #include "wx/persist/dataview.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // constants

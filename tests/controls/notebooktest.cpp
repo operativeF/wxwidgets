@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_NOTEBOOK
 
 #include "wx/app.h"
@@ -18,6 +16,8 @@
 
 #include "bookctrlbasetest.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 //void OnPageChanged(wxBookCtrlEvent&) { }
 

@@ -8,9 +8,9 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/accel.h"
+
+import WX.Test.Prec;
 
 namespace
 {

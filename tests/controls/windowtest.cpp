@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/window.h"
 #include "wx/button.h"
@@ -25,6 +23,8 @@
 #include "asserthelper.h"
 #include "testableframe.h"
 #include "testwindow.h"
+
+import WX.Test.Prec;
 
 class WindowTestCase
 {

@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TOGGLEBTN
 
 #include "wx/tglbtn.h"
@@ -21,6 +19,8 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/artprov.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Bitmap toggle button test")
 {

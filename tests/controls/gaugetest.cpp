@@ -8,12 +8,12 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_GAUGE
 
 #include "wx/app.h"
 #include "wx/gauge.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Gauge test")
 {

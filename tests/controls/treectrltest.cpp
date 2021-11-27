@@ -9,8 +9,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TREECTRL
 
 #include "wx/app.h"
@@ -20,6 +18,8 @@
 #include "wx/uiaction.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // test class

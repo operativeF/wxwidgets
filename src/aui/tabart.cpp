@@ -23,7 +23,7 @@ module;
 #include "wx/osx/private.h"
 #endif
 
-module WX.AUI.TabArt;
+module WX.AUI.TabArt.Base;
 
 import WX.AUI.Book;
 import WX.AUI.DockArt;

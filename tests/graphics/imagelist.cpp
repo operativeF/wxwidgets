@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/bitmap.h"
 #include "wx/graphics.h"
 #include "wx/icon.h"
 #include "wx/imaglist.h"
 
 #include "wx/dcmemory.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // tests

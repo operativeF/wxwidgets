@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_UIACTIONSIMULATOR
 
 #include "wx/app.h"
@@ -21,6 +19,8 @@
 #ifdef __WXGTK__
 #include "wx/stopwatch.h"
 #endif
+
+import WX.Test.Prec;
 
 import <ostream>;
 

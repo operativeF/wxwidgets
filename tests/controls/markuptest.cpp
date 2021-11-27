@@ -8,9 +8,9 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/private/markupparser.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Markup tests")
 {

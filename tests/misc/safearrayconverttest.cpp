@@ -8,15 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
-
 #ifdef WX_WINDOWS
 
 #if wxUSE_OLE && wxUSE_VARIANT
 
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/safearray.h"
+
+import WX.Test.Prec;
 
 // need this to be able to use CHECK_EQ with wxVariant objects
 inline std::ostream& operator<<(std::ostream& ostr, const wxVariant& v)

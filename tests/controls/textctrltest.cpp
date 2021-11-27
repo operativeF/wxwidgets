@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TEXTCTRL
 
 #include "wx/app.h"
@@ -30,6 +28,8 @@
 #include "asserthelper.h"
 
 #include <fmt/core.h>
+
+import WX.Test.Prec;
 
 constexpr int TEXT_HEIGHT = 200;
 

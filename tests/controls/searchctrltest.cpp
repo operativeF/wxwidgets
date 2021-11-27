@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_SEARCHCTRL
 
 #include "wx/app.h"
 #include "wx/srchctrl.h"
 
 #include "testwindow.h"
+
+import WX.Test.Prec;
 
 class SearchCtrlTestCase
 {

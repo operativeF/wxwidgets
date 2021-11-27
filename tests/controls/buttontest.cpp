@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_BUTTON
 
 #include "wx/app.h"
@@ -22,6 +20,8 @@
 //for those classes which do not have them by default we define them in
 //asserthelper.h so they can be reused
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Button test")
 {

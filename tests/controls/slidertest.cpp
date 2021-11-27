@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_SLIDER
 
 #include "wx/app.h"
@@ -18,6 +16,7 @@
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
+import WX.Test.Prec;
 
 TEST_CASE("Slider control test")
 {

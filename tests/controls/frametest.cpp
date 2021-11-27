@@ -8,11 +8,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/frame.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Frame test")
 {

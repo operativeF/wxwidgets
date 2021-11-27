@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_SPINCTRL
 
 #include "wx/app.h"
@@ -17,6 +15,8 @@
 #include "wx/uiaction.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 class SpinCtrlDoubleTestCase
 {

@@ -9,8 +9,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_STC
 
 #if defined(WXUSINGDLL)
@@ -24,6 +22,8 @@
 #include "wx/uiaction.h"
 
 #include "testwindow.h"
+
+import WX.Test.Prec;
 
 #if defined(__WXOSX_COCOA__) || defined(__WXMSW__) || defined(__WXGTK__)
 

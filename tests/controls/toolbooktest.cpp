@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TOOLBOOK
 
 #include "wx/app.h"
@@ -17,6 +15,8 @@
 #include "wx/toolbook.h"
 
 #include "bookctrlbasetest.h"
+
+import WX.Test.Prec;
 
 using wxToolbookTest = BookCtrlBaseT<wxToolbook>;
 

@@ -8,10 +8,10 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/control.h"
 #include "wx/dcmemory.h"
+
+import WX.Test.Prec;
 
 import Utils.Strings;
 

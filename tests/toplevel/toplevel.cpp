@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/dialog.h"
 #include "wx/frame.h"
@@ -17,6 +15,8 @@
 #include "wx/toplevel.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
 {

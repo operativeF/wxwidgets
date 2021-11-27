@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #ifndef __WXOSX_IPHONE__
 
 #include "wx/app.h"
@@ -17,6 +15,8 @@
 
 #include "itemcontainertest.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 using RearrangeListTest = ItemContainerTest<wxRearrangeList>;
 

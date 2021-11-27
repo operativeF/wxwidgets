@@ -8,10 +8,10 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/headerctrl.h"
+
+import WX.Test.Prec;
 
 import <algorithm>;
 import <array>;

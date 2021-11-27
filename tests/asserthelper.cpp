@@ -6,9 +6,9 @@
 // Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "testprec.h"
-
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 namespace wxTestPrivate
 {

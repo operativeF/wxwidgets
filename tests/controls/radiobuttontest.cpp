@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_RADIOBTN
 
 #include "wx/app.h"
@@ -22,6 +20,8 @@
 
 #include "testableframe.h"
 #include "testwindow.h"
+
+import WX.Test.Prec;
 
 class RadioButtonTestCase
 {

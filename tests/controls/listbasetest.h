@@ -10,10 +10,7 @@
 #ifndef _WX_TESTS_CONTROLS_LISTBASETEST_H_
 #define _WX_TESTS_CONTROLS_LISTBASETEST_H_
 
-#ifndef WX_PRECOMP
 #include "wx/app.h"
-#endif // WX_PRECOMP
-
 #include "wx/uiaction.h"
 #include "wx/artprov.h"
 #include "wx/listctrl.h"
@@ -21,6 +18,8 @@
 
 #include "listbasetest.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 template<typename ListCtrlT>
 struct ListBaseTest

@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_COLOURPICKERCTRL || \
     wxUSE_DIRPICKERCTRL    || \
     wxUSE_FILEPICKERCTRL   || \
@@ -23,6 +21,8 @@
 
 #include "pickerbasetest.h"
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 #if wxUSE_COLOURPICKERCTRL
 

@@ -8,12 +8,12 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/brush.h"
 #include "wx/pen.h"
 #include "wx/settings.h"
 #include "wx/fontenum.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Get colour")
 {

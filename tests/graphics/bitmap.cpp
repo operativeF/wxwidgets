@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #ifdef wxHAS_RAW_BITMAP
 
 #include "wx/bitmap.h"
@@ -21,6 +19,8 @@
 
 #include "testfile.h"
 //#include "testimage.h"
+
+import WX.Test.Prec;
 
 #define ASSERT_EQUAL_RGB(c, r, g, b) \
     CHECK( (int)r == (int)c.Red() ); \

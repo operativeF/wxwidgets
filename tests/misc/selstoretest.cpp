@@ -8,9 +8,9 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/selstore.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // test class

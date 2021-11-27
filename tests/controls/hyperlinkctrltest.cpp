@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_HYPERLINKCTRL
 
 #include "wx/app.h"
@@ -18,6 +16,8 @@
 
 #include "testableframe.h"
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 TEST_CASE("Hyperlink control test")
 {

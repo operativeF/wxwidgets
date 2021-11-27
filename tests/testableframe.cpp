@@ -8,10 +8,10 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 wxTestableFrame::wxTestableFrame() : wxFrame(nullptr, wxID_ANY, wxASCII_STR("Test Frame"))
 {

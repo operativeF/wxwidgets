@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_XRC
 
 #include "wx/fs_inet.h"
@@ -22,6 +20,8 @@
 #include "wx/xrc/xh_bmp.h"
 
 #include "testfile.h"
+
+import WX.Test.Prec;
 
 import <cstdarg>;
 

@@ -8,11 +8,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/gdicmn.h"
 
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 import <algorithm>;
 import <array>;

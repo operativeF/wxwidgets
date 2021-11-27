@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_MENUBAR
 
 #include "wx/app.h"
@@ -18,6 +16,8 @@
 #include "wx/textctrl.h"
 #include "wx/translation.h"
 #include "wx/uiaction.h"
+
+import WX.Test.Prec;
 
 import <cstdarg>;
 

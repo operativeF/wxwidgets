@@ -9,11 +9,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/font.h"
 
 #include "asserthelper.h"
+
+import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // local helpers

@@ -8,12 +8,12 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_TREELISTCTRL
 
 #include "wx/app.h"
 #include "wx/treelist.h"
+
+import WX.Test.Prec;
 
 struct TreeListCtrlTest
 {

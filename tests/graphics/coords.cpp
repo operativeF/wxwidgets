@@ -8,11 +8,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/bitmap.h"
 #include "wx/dcgraph.h"
 #include "wx/dcmemory.h"
+
+import WX.Test.Prec;
 
 import Utils.Geometry;
 

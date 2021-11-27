@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_DATEPICKCTRL
 
 #include "wx/app.h"
@@ -20,6 +18,8 @@
 
 #include "testableframe.h"
 #include "testdate.h"
+
+import WX.Test.Prec;
 
 #if wxUSE_UIACTIONSIMULATOR
 

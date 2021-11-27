@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/checkbox.h"
 
@@ -18,6 +16,8 @@
 #include "wx/stattext.h"
 
 #include "wx/generic/stattextg.h"
+
+import WX.Test.Prec;
 
 
 constexpr char ORIGINAL_LABEL[] = "origin label";

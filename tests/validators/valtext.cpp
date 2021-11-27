@@ -7,14 +7,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_VALIDATORS && wxUSE_UIACTIONSIMULATOR
 
 #include "wx/app.h"
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
 #include "wx/uiaction.h"
+
+import WX.Test.Prec;
 
 class TextValidatorTestCase
 {

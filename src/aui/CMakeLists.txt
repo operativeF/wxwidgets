@@ -43,7 +43,7 @@ if(wxUSE_XRC)
 endif()
 
 set(AUI_MSW_SRC
-    ${CMAKE_SOURCE_DIR}/src/aui/msw/tabart.cpp
+    ${CMAKE_SOURCE_DIR}/src/aui/msw/tabartmsw.cpp
 )
 
 set(AUI_GTK_SRC

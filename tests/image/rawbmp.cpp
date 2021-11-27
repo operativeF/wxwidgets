@@ -9,11 +9,11 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #ifdef wxHAS_RAW_BITMAP
 
 #include "wx/rawbmp.h"
+
+import WX.Test.Prec;
 
 import WX.Image;
 
