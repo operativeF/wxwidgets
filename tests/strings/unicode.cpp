@@ -256,9 +256,7 @@ TEST_CASE("ConversionUTF8")
 {
     static const StringConversionData utf8data[] =
     {
-#ifdef wxHAVE_U_ESCAPE
         StringConversionData("\xc2\xa3", L"\u00a3"),
-#endif
         StringConversionData("\xc2", nullptr),
     };
 
@@ -290,14 +288,12 @@ TEST_CASE("ConversionUTF16")
 {
     static const StringConversionData utf16data[] =
     {
-#ifdef wxHAVE_U_ESCAPE
         StringConversionData(
             "\x04\x1f\x04\x40\x04\x38\x04\x32\x04\x35\x04\x42\0\0",
             L"\u041f\u0440\u0438\u0432\u0435\u0442"),
         StringConversionData(
             "\x01\0\0b\x01\0\0a\x01\0\0r\0\0",
             L"\u0100b\u0100a\u0100r"),
-#endif
         StringConversionData("\0f\0o\0o\0\0", L"foo"),
     };
 
@@ -342,11 +338,9 @@ TEST_CASE("ConversionUTF32")
 {
     static const StringConversionData utf32data[] =
     {
-#ifdef wxHAVE_U_ESCAPE
         StringConversionData(
             "\0\0\x04\x1f\0\0\x04\x40\0\0\x04\x38\0\0\x04\x32\0\0\x04\x35\0\0\x04\x42\0\0\0\0",
           L"\u041f\u0440\u0438\u0432\u0435\u0442"),
-#endif
         StringConversionData("\0\0\0f\0\0\0o\0\0\0o\0\0\0\0", L"foo"),
     };
 

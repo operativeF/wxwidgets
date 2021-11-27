@@ -122,34 +122,26 @@ TEST_CASE("UTF16BE")
 
 TEST_CASE("UTF8")
 {
-#ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\xef\xbb\xbf\xd0\x9f", L'\u041f', wxNO_LEN, ConvState(wxBOM::UTF8, wxFONTENCODING_UTF8));
-#endif
 }
 
 TEST_CASE("UTF8NoBom")
 {
-#ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\xd0\x9f\xe3\x81\x82", L'\u041f', wxNO_LEN, ConvState(wxBOM::None, wxFONTENCODING_UTF8));
-#endif
 }
 
 TEST_CASE("Fallback")
 {
-#ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\xbf", L'\u041f', wxNO_LEN,
                   ConvState(wxBOM::None, wxFONTENCODING_ISO8859_5, true),
                   wxFONTENCODING_ISO8859_5);
-#endif
 }
 
 TEST_CASE("FallbackMultibyte")
 {
-#ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\x84\x50", L'\u041f', wxNO_LEN,
                   ConvState(wxBOM::None, wxFONTENCODING_CP932, true),
                   wxFONTENCODING_CP932);
-#endif
 }
 
 TEST_CASE("FallbackShort")

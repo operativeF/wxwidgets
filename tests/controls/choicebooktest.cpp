@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_CHOICEBOOK
 
 #include "wx/app.h"
 #include "wx/choicebk.h"
 
 #include "bookctrlbasetest.h"
+
+import WX.Test.Prec;
 
 using wxChoicebookTest = BookCtrlBaseT<wxChoicebook>;
 

@@ -8,8 +8,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_LISTBOOK
 
 #include "wx/app.h"
@@ -18,6 +16,12 @@
 #include "wx/listctrl.h"
 
 #include "bookctrlbasetest.h"
+
+#include <memory>
+
+import WX.Test.Prec;
+
+import Utils.Geometry;
 
 using wxListbookTest = BookCtrlBaseT<wxListbook>;
 

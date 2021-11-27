@@ -29,7 +29,7 @@ struct wxConsoleAppTraits : public wxConsoleAppTraitsBase
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
     bool DoMessageFromThreadWait() override;
-    DWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) override;
+    WXDWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) override;
 #endif // wxUSE_THREADS
     bool CanUseStderr() override { return true; }
     bool WriteToStderr(const std::string& text) override;
@@ -50,7 +50,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
     bool DoMessageFromThreadWait() override;
-    DWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) override;
+    WXDWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) override;
 #endif // wxUSE_THREADS
     wxPortId GetToolkitVersion(int *majVer = nullptr,
                                int *minVer = nullptr,
@@ -79,7 +79,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 #if wxUSE_THREADS
     virtual bool DoMessageFromThreadWait() { return true; }
-    virtual DWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
+    virtual WXDWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
         { return DoSimpleWaitForThread(hThread); }
 #endif // wxUSE_THREADS
     virtual wxPortId GetToolkitVersion(int *majVer = NULL,
@@ -104,7 +104,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 #if wxUSE_THREADS
     virtual bool DoMessageFromThreadWait() { return true; }
-    virtual DWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
+    virtual WXDWORD WaitForThread(WXHANDLE hThread, [[maybe_unused]] int flags)
         { return DoSimpleWaitForThread(hThread); }
 #endif // wxUSE_THREADS
     virtual wxPortId GetToolkitVersion(int *majVer = NULL,

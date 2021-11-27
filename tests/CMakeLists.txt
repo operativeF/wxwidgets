@@ -25,6 +25,7 @@
 # )
 
 set(TEST_GUI_SRC
+    testprec.ixx
     asserthelper.cpp
     test.cpp
     testableframe.cpp

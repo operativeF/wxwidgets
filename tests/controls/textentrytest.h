@@ -11,8 +11,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #include "wx/app.h"
 #include "wx/bmpcbox.h"
 #include "wx/dialog.h"
@@ -27,8 +25,9 @@
 #include "textentrytest.h"
 #include "testableframe.h"
 
-
 #include "wx/uiaction.h"
+
+import WX.Test.Prec;
 
 class wxTextEntry;
 

@@ -220,11 +220,9 @@ TEST_CASE("Text file tests")
         CHECK_EQ( (size_t)2, f.GetLineCount() );
         CHECK_EQ( wxTextFileType::Unix, f.GetLineType(0) );
         CHECK_EQ( wxTextFileType::None, f.GetLineType(1) );
-    #ifdef wxHAVE_U_ESCAPE
         CHECK_EQ( wxString(L"\u041f"), f.GetFirstLine() );
         CHECK_EQ( wxString(L"\u0440\u0438\u0432\u0435\u0442"),
                               f.GetLastLine() );
-    #endif // wxHAVE_U_ESCAPE
     }
 
     SUBCASE("ReadUTF16")
@@ -241,11 +239,9 @@ TEST_CASE("Text file tests")
         CHECK_EQ( wxTextFileType::Dos, f.GetLineType(0) );
         CHECK_EQ( wxTextFileType::None, f.GetLineType(1) );
 
-    #ifdef wxHAVE_U_ESCAPE
         CHECK_EQ( wxString(L"\u041f"), f.GetFirstLine() );
         CHECK_EQ( wxString(L"\u0440\u0438\u0432\u0435\u0442"),
                               f.GetLastLine() );
-    #endif // wxHAVE_U_ESCAPE
     }
 
     SUBCASE("ReadBig")

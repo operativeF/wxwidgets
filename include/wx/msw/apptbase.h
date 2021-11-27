@@ -15,6 +15,10 @@
 // wxAppTraits: the MSW version adds extra hooks needed by MSW-only code
 // ----------------------------------------------------------------------------
 
+#include "wx/thread.h"
+
+import WX.WinDef;
+
 class wxAppTraits : public wxAppTraitsBase
 {
 public:
@@ -40,7 +44,7 @@ public:
 
     // wait for the handle to be signaled, return WAIT_OBJECT_0 if it is or, in
     // the GUI code, WAIT_OBJECT_0 + 1 if a Windows message arrived
-    virtual DWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) = 0;
+    virtual WXDWORD WaitForThread(WXHANDLE hThread, wxThreadWait flags) = 0;
 #endif // wxUSE_THREADS
 
 
@@ -69,7 +73,7 @@ protected:
 #if wxUSE_THREADS
     // implementation of WaitForThread() for the console applications which is
     // also used by the GUI code if it doesn't [yet|already] dispatch events
-    DWORD DoSimpleWaitForThread(WXHANDLE hThread);
+    WXDWORD DoSimpleWaitForThread(WXHANDLE hThread);
 #endif // wxUSE_THREADS
 };
 

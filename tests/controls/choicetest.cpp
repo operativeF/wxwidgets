@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_CHOICE
 
 #include "wx/app.h"
 #include "wx/choice.h"
 
 #include "itemcontainertest.h"
+
+import WX.Test.Prec;
 
 using ChoiceControlTest = ItemContainerTest<wxChoice>;
 

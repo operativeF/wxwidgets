@@ -11,8 +11,6 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/ctrlsub.h"
@@ -23,6 +21,8 @@
 #include "wx/uiaction.h"
 
 #include <memory>
+
+import WX.Test.Prec;
 
 template<typename ItemContT>
 class ItemContainerTest

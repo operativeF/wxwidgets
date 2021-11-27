@@ -8,14 +8,14 @@
 
 #include "doctest.h"
 
-#include "testprec.h"
-
 #if wxUSE_CHECKBOX
 
 #include "wx/app.h"
 #include "wx/checkbox.h"
 
 #include "testableframe.h"
+
+import WX.Test.Prec;
 
 import <tuple>;
 
