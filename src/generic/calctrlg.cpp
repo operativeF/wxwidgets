@@ -23,6 +23,7 @@
 #include "wx/textctrl.h"
 
 #include <fmt/core.h>
+#include <fmt/compile.h>
 
 #define DEBUG_PAINT 0
 
@@ -750,7 +751,7 @@ void wxGenericCalendarCtrl::RecalcGeometry()
     }
 
     m_calendarWeekWidth = HasFlag( wxCAL_SHOW_WEEK_NUMBERS )
-        ? dc.GetTextExtent( fmt::format("{:d}", 42)).x + 4 : 0;
+        ? dc.GetTextExtent( fmt::format(FMT_COMPILE("{:d}"), 42)).x + 4 : 0;
 
     // leave some margins
     m_widthCol += 2;

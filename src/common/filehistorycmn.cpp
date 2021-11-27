@@ -17,6 +17,7 @@
 
 #include <boost/nowide/convert.hpp>
 #include <fmt/core.h>
+#include <fmt/compile.h>
 
 import Utils.Strings;
 
@@ -239,7 +240,7 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
 
     m_fileHistory.clear();
 
-    std::string buf = fmt::format("file{:d}", 1);
+    std::string buf = fmt::format(FMT_COMPILE("file{:d}"), 1);
 
     std::string historyFile; // TODO: Need to have config read filesystem paths.
     while ((m_fileHistory.size() < m_fileMaxFiles) &&
