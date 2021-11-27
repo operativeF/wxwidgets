@@ -493,17 +493,10 @@ TEST_CASE_METHOD(VsnprintfTestCase, "Vsnprintf::GlibcMisc1", "[vsnprintf]")
 {
     CMP("     ",    "%5.s", "xyz");
     CMP("   33",    "%5.f", 33.3);
-#if defined(wxDEFAULT_MANTISSA_SIZE_3)
-    CMP("  3e+008", "%8.e", 33.3e7);
-    CMP("  3E+008", "%8.E", 33.3e7);
-    CMP("3e+001",    "%.g",  33.3);
-    CMP("3E+001",    "%.G",  33.3);
-#else
     CMP("   3e+08", "%8.e", 33.3e7);
     CMP("   3E+08", "%8.E", 33.3e7);
     CMP("3e+01",    "%.g",  33.3);
     CMP("3E+01",    "%.G",  33.3);
-#endif
 }
 
 TEST_CASE_METHOD(VsnprintfTestCase, "Vsnprintf::GlibcMisc2", "[vsnprintf]")

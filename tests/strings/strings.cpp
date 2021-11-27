@@ -787,11 +787,7 @@ TEST_CASE("FromDouble")
     } testData[] =
     {
         { 1.23,             -1, "1.23" },
-#if defined(wxDEFAULT_MANTISSA_SIZE_3)
-        { -3e-10,           -1, "-3e-010" },
-#else
         { -3e-10,           -1, "-3e-10" },
-#endif
         { -0.45678,         -1, "-0.45678" },
         { 1.2345678,         0, "1" },
         { 1.2345678,         1, "1.2" },

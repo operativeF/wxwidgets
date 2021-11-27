@@ -22,6 +22,8 @@
 #include "wx/stopwatch.h"
 #endif
 
+import <ostream>;
+
 namespace
 {
 

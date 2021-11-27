@@ -87,9 +87,9 @@ TEST_CASE("wxHtmlCell::Detach")
 
     SUBCASE("invalid")
     {
-        WX_ASSERT_FAILS_WITH_ASSERT_MESSAGE
+        // Expected assertion for detaching non-child
+        CHECK_THROWS
         (
-            "Expected assertion for detaching non-child",
             top->Detach(cell1);
         );
     }

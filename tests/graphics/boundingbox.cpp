@@ -50,8 +50,6 @@ static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int he
     }
 }
 
-
-
 TEST_CASE("Bounding box tests.")
 {
 
@@ -276,5 +274,6 @@ TEST_CASE("Bounding box tests.")
     m_dc.SelectObject(wxNullBitmap);
     m_bmp = wxNullBitmap;
 
-} // end TEST_CASE("Bounding box tests.")
+} // TEST_CASE("Bounding box tests.")
+
 #endif // wxUSE_GRAPHICS_CONTEXT

@@ -10,6 +10,7 @@
 
 #include "testprec.h"
 
+#include "wx/evtloop.h"
 #include "wx/timer.h"
 
 // ----------------------------------------------------------------------------

@@ -91,7 +91,7 @@ protected:
     void CountTest()
     {
         CHECK(m_container->wxItemContainerImmutable::IsEmpty());
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(0) );
+        CHECK_THROWS( m_container->GetString(0) );
 
         std::vector<std::string> testitems;
         testitems.push_back("item 0");
@@ -116,7 +116,7 @@ protected:
         m_container->Insert(testitems, 1);
 
         CHECK_EQ(5, m_container->GetCount());
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(10) );
+        CHECK_THROWS( m_container->GetString(10) );
     }
 
     void ItemSelectionTest()
@@ -187,8 +187,8 @@ protected:
         CHECK_EQ(static_cast<wxClientData*>(item2data),
                             m_container->GetClientObject(2));
 
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->SetClientObject((unsigned)-1, item0data) );
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->SetClientObject(12345, item0data) );
+        CHECK_THROWS( m_container->SetClientObject((unsigned)-1, item0data) );
+        CHECK_THROWS( m_container->SetClientObject(12345, item0data) );
     }
 
     void VoidDataTest()
@@ -213,8 +213,8 @@ protected:
 
         CHECK_EQ(item2, m_container->GetClientData(2));
 
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->SetClientData((unsigned)-1, NULL) );
-        WX_ASSERT_FAILS_WITH_ASSERT( m_container->SetClientData(12345, NULL) );
+        CHECK_THROWS( m_container->SetClientData((unsigned)-1, nullptr) );
+        CHECK_THROWS( m_container->SetClientData(12345, nullptr) );
 
         // wxMSW used to hace problems retrieving the client data of -1 from a few
         // standard controls, especially if the last error was set before doing it,

@@ -42,7 +42,7 @@ TEST_CASE("Date picker control test")
         CHECK_EQ( dt, m_datepicker->GetValue() );
 
         // We don't use wxDP_ALLOWNONE currently, hence a value is required.
-        WX_ASSERT_FAILS_WITH_ASSERT( m_datepicker->SetValue(wxDateTime()) );
+        CHECK_THROWS( m_datepicker->SetValue(wxDateTime()) );
     }
 
     SUBCASE("Range")

@@ -68,7 +68,7 @@ TEST_CASE("Delete")
 }
 
 // helper function used just to avoid warnings about value computed not being
-// used in WX_ASSERT_FAILS_WITH_ASSERT() in StaticCast() below
+// used in CHECK_THROWS() in StaticCast() below
 static bool IsNull(void *p)
 {
     return p == nullptr;
