@@ -1,8 +1,11 @@
 export module WX.Image;
 
+export import WX.Image.ANI;
 export import WX.Image.BMP;
+export import WX.Image.CUR;
 export import WX.Image.GIF;
 export import WX.Image.IFF;
+export import WX.Image.ICO;
 export import WX.Image.JPEG;
 export import WX.Image.PCX;
 export import WX.Image.PNG;
@@ -12,6 +15,8 @@ export import WX.Image.TIFF;
 export import WX.Image.XPM;
 
 export import WX.Image.Base;
+
+export import WX.Image.Decoder.ANI;
 
 export
 {

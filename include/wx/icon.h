@@ -11,7 +11,6 @@
 #ifndef _WX_ICON_H_BASE_
 #define _WX_ICON_H_BASE_
 
-#include "wx/gdicmn.h"
 #include "wx/iconloc.h"
 
 #include <gsl/gsl>

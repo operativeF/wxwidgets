@@ -15,7 +15,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/gdicmn.h"  // for wxBitmapType
 #include "wx/colour.h"
 
 import WX.Image;

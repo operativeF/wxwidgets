@@ -19,7 +19,6 @@
 #include "wx/log.h"
 
 #include "wx/gifdecod.h"
-#include "wx/anidecod.h"
 
 #include "wx/private/animate.h"
 

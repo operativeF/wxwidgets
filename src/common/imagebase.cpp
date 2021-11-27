@@ -33,6 +33,8 @@ module;
     #include "wx/msw/private.h"
 #endif
 
+#include "wx/arrimpl.cpp"
+
 module WX.Image.Base;
 
 import WX.WinDef;
@@ -44,6 +46,8 @@ import <cmath>;
 import <cstring>; // For memcpy
 
 #if wxUSE_IMAGE
+
+WX_DEFINE_OBJARRAY(wxImageArray)
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))

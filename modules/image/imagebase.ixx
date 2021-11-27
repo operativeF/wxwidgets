@@ -8,6 +8,7 @@
 
 module;
 
+#include "wx/dynarray.h"
 #include "wx/gdicmn.h"
 #include "wx/object.h"
 #include "wx/hashmap.h"
@@ -695,6 +696,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxImage);
 };
+
+WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 
 inline wxImage wxNullImage;
 

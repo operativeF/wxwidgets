@@ -6,24 +6,47 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_ANIDECOD_H
-#define _WX_ANIDECOD_H
-
-#if wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
+module;
 
 #include "wx/animdecod.h"
 #include "wx/dynarray.h"
 
+#include <chrono>
+
+export module WX.Image.Decoder.ANI;
+
 import Utils.Geometry;
 
-import WX.Image;
+import WX.Image.Base;
+import WX.Image.BMP;
+import WX.Image.CUR;
 
-class /*WXDLLIMPEXP_CORE*/ wxANIFrameInfo;      // private implementation detail
+#if wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
+
+//---------------------------------------------------------------------------
+// wxANIFrameInfo
+//---------------------------------------------------------------------------
+
+using namespace std::chrono_literals;
+
+class wxANIFrameInfo
+{
+public:
+    explicit wxANIFrameInfo(std::chrono::milliseconds delay = 0ms, int idx = -1)
+        : m_delay(delay),
+          m_imageIndex(idx)
+    {}
+
+    std::chrono::milliseconds m_delay;
+    int m_imageIndex;
+};
+
+export
+{
+
 class wxInputStream;
 
-
 WX_DECLARE_EXPORTED_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);
-WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 
 // --------------------------------------------------------------------------
 // wxANIDecoder class
@@ -71,7 +94,6 @@ private:
     inline static wxCURHandler sm_handler;
 };
 
+} // export
 
 #endif  // wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
-
-#endif  // _WX_ANIDECOD_H

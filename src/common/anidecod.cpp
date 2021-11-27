@@ -6,39 +6,26 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS && wxUSE_ICO_CUR
+module;
 
-#include "wx/anidecod.h"
+#include "wx/dynarray.h"
 #include "wx/gdicmn.h"
+#include "wx/stream.h"
 
 #include <chrono>
 
-import WX.Image;
-
-using namespace std::chrono_literals;
-
-//---------------------------------------------------------------------------
-// wxANIFrameInfo
-//---------------------------------------------------------------------------
-
-class wxANIFrameInfo
-{
-public:
-    explicit wxANIFrameInfo(std::chrono::milliseconds delay = 0ms, int idx = -1)
-        : m_delay(delay),
-          m_imageIndex(idx)
-    {}
-
-    std::chrono::milliseconds m_delay;
-    int m_imageIndex;
-};
-
 #include "wx/arrimpl.cpp" // this is a magic incantation which must be done!
-WX_DEFINE_OBJARRAY(wxImageArray)
 
-#include "wx/arrimpl.cpp" // this is a magic incantation which must be done!
+module WX.Image.Decoder.ANI;
+
+import Utils.Geometry;
+import WX.Image.Base;
+
+#if wxUSE_STREAMS && wxUSE_ICO_CUR
+
 WX_DEFINE_OBJARRAY(wxANIFrameInfoArray)
 
+using namespace std::chrono_literals;
 
 //---------------------------------------------------------------------------
 // wxANIDecoder

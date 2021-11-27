@@ -15,6 +15,8 @@
 // Icon entry and directory structs for .ICO files and
 // MS Windows resources are very similar but not identical.
 
+import <cstdint>;
+
 #if wxUSE_ICO_CUR
 
 #if wxUSE_STREAMS

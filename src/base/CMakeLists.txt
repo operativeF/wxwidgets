@@ -199,9 +199,12 @@ set(WIN32_WRAP_IXX
 )
 
 set(IMAGE_HANDLERS_IXX
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagani.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagbmp.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagcur.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imaggif.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagiff.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagico.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagjpeg.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagpcx.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/handlers/imagpng.ixx
@@ -216,10 +219,13 @@ set(IMAGE_HANDLERS_IXX
 )
 
 set(IMAGE_HANDLERS_SRC
+    ${CMAKE_SOURCE_DIR}/src/common/imagani.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagbmp.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagcur.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imaggif.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagiff.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagjpeg.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagico.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagpcx.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagpng.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagpnm.cpp
@@ -229,12 +235,29 @@ set(IMAGE_HANDLERS_SRC
     ${CMAKE_SOURCE_DIR}/src/common/imagebase.cpp
 )
 
+set(IMAGE_DECODERS_IXX
+    ${CMAKE_SOURCE_DIR}/modules/image/decoders/anidecod.ixx
+)
+
+set(IMAGE_DECODERS_SRC
+    ${CMAKE_SOURCE_DIR}/modules/image/decoders/anidecod.ixx
+)
+
 set(PRINTER_IXX
     ${CMAKE_SOURCE_DIR}/src/print/print.ixx
     ${CMAKE_SOURCE_DIR}/src/print/printercfg.ixx
 )
 
-set(BASE_FILES ${BASE_CMN_SRC} ${CONFIG_FLAGS_IXX} ${BASE_CMN_IXX} ${GEOMETRY_IXX} ${PRINTER_IXX})
+set(BASE_FILES
+    ${BASE_CMN_SRC}
+    ${CONFIG_FLAGS_IXX}
+    ${BASE_CMN_IXX}
+    ${GEOMETRY_IXX}
+    ${PRINTER_IXX}
+    ${IMAGE_DECODERS_SRC}
+    ${IMAGE_DECODERS_IXX}
+)
+
 set(SHARED_BASE_CMN ${SHARED_BASE_CMN_SRC})
 if(WIN32)
     list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC} ${WIN32_WRAP_IXX})

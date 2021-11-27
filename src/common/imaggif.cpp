@@ -14,7 +14,6 @@ module;
 #include "wx/utils.h"
 #include "wx/gifdecod.h"
 #include "wx/stream.h"
-#include "wx/anidecod.h" // wxImageArray
 #include "wx/scopedarray.h"
 
 module WX.Image.GIF;

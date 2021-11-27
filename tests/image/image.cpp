@@ -9,15 +9,13 @@
 
 #include "doctest.h"
 
-#if wxUSE_IMAGE
-
+#include "wx/colour.h"
 #include "wx/bitmap.h"
 #include "wx/cursor.h"
 #include "wx/icon.h"
 #include "wx/palette.h"
 #include "wx/log.h"
 
-#include "wx/anidecod.h" // wxImageArray
 #include "wx/url.h"
 #include "wx/mstream.h"
 #include "wx/zstream.h"
@@ -25,9 +23,15 @@
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
+import WX.Image;
 import WX.Test.Prec;
 
+import <algorithm>;
+import <iostream>;
 import <numeric>;
+import <string>;
+
+#if wxUSE_IMAGE
 
 #define CHECK_EQUAL_COLOUR_RGB(c1, c2) \
     CHECK( (int)c1.Red()   == (int)c2.Red() ); \
@@ -1471,8 +1475,6 @@ TEST_CASE("Image test")
     }
 }
 
-#endif //wxUSE_IMAGE
-
 TEST_CASE("wxImage::Paste")
 {
     const static char* squares_xpm[] =
@@ -2233,3 +2235,5 @@ TEST_CASE("wxImage::ChangeColours")
 /*
     TODO: add lots of more tests to wxImage functions
 */
+
+#endif //wxUSE_IMAGE
