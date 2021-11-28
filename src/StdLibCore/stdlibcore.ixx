@@ -30,7 +30,6 @@ import <iterator>;
 import <limits>;
 import <list>;
 import <map>;
-import <new>;
 // import <memory>; // Incompatible, relies on static crt function.
 import <numbers>;
 import <numeric>;

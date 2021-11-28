@@ -17,8 +17,9 @@
 #include "wx/typeinfo.h"
 #include "wx/list.h"
 
+#include <new>
+
 import <cstdint>;
-import <new>; // for placement new
 import <type_traits>;
 
 // Size of the wxAny value buffer.

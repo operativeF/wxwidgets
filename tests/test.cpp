@@ -10,30 +10,8 @@
 
 #include "doctest.h"
 
-import WX.Test.Prec;
-
-// Also define our own global variables.
-namespace wxPrivate
-{
-std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
-}
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    import <iostream>;
-#endif
-
 #include "wx/apptrait.h"
 #include "wx/cmdline.h"
-import <exception>;
-
-#ifdef WX_WINDOWS
-    #include "wx/msw/msvcrt.h"
-#endif
-
-#ifdef __WXOSX__
-    #include "wx/osx/private.h"
-#endif
 
 #if wxUSE_GUI
     #include "testableframe.h"
@@ -50,6 +28,17 @@ import <exception>;
 #include "wx/evtloop.h"
 
 import Utils.Strings;
+import WX.Test.Prec;
+
+// for all others, include the necessary headers
+import <iostream>;
+import <exception>;
+
+// Also define our own global variables.
+namespace wxPrivate
+{
+    std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
+}
 
 using namespace std;
 
