@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_RICHTEXT
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCtrlXmlHandler : public wxXmlResourceHandler
+class wxRichTextCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextCtrlXmlHandler);
 

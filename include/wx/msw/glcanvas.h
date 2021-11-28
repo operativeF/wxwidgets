@@ -24,7 +24,7 @@ class wxPalette;
 
 using msw::utils::unique_glrc;
 
-class WXDLLIMPEXP_GL wxGLContext : public wxGLContextBase
+class wxGLContext : public wxGLContextBase
 {
 public:
     wxGLContext(wxGLCanvas *win,
@@ -46,7 +46,7 @@ private:
 // wxGLCanvas: OpenGL output window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasBase
+class wxGLCanvas : public wxGLCanvasBase
 {
 public:
     explicit // avoid implicitly converting a wxWindow* to wxGLCanvas

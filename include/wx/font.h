@@ -582,6 +582,6 @@ public:
                                   fontInfo.GetEncoding()); }
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxFontList*)    wxTheFontList;
+extern wxFontList*    wxTheFontList;
 
 #endif // _WX_FONT_H_BASE_

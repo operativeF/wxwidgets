@@ -17,7 +17,7 @@
 #include "wx/xtistrm.h"
 
 /*
-class WXDLLIMPEXP_XML wxXmlNode;
+class wxXmlNode;
 class wxPropertyInfo;
 class wxObject;
 class wxClassInfo;
@@ -26,7 +26,7 @@ class wxHandlerInfo;
 class wxObjectWriterCallback;
 */
 
-class WXDLLIMPEXP_XML wxObjectXmlWriter: public wxObjectWriter
+class wxObjectXmlWriter: public wxObjectWriter
 {
 public:
 
@@ -92,7 +92,7 @@ private:
 wxObjectXmlReader handles streaming in a class from XML
 */
 
-class WXDLLIMPEXP_XML wxObjectXmlReader: public wxObjectReader
+class wxObjectXmlReader: public wxObjectReader
 {
 public:
     wxObjectXmlReader(wxXmlNode *parent) { m_parent = parent; }

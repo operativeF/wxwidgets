@@ -57,7 +57,7 @@ public:
 //   you should still store editorPointer somewhere, so you can pass it to
 //   wxPGProperty::SetEditor(), or return it from
 //   wxPGEditor::DoGetEditorClass().
-class WXDLLIMPEXP_PROPGRID wxPGEditor : public wxObject
+class wxPGEditor : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxPGEditor);
 public:
@@ -186,7 +186,7 @@ wxPGEditor* wxPGEditor_##EDITOR = NULL;
 // Following are the built-in editor classes.
 //
 
-class WXDLLIMPEXP_PROPGRID wxPGTextCtrlEditor : public wxPGEditor
+class wxPGTextCtrlEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGTextCtrlEditor);
 public:
@@ -229,7 +229,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_PROPGRID wxPGChoiceEditor : public wxPGEditor
+class wxPGChoiceEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGChoiceEditor);
 public:
@@ -278,7 +278,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_PROPGRID wxPGComboBoxEditor : public wxPGChoiceEditor
+class wxPGComboBoxEditor : public wxPGChoiceEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGComboBoxEditor);
 public:
@@ -306,7 +306,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_PROPGRID wxPGChoiceAndButtonEditor : public wxPGChoiceEditor
+class wxPGChoiceAndButtonEditor : public wxPGChoiceEditor
 {
 public:
     wxPGChoiceAndButtonEditor() = default;
@@ -321,8 +321,7 @@ public:
     wxDECLARE_DYNAMIC_CLASS(wxPGChoiceAndButtonEditor);
 };
 
-class WXDLLIMPEXP_PROPGRID
-wxPGTextCtrlAndButtonEditor : public wxPGTextCtrlEditor
+class wxPGTextCtrlAndButtonEditor : public wxPGTextCtrlEditor
 {
 public:
     wxPGTextCtrlAndButtonEditor() = default;
@@ -344,7 +343,7 @@ public:
 // Use custom check box code instead of native control
 // for cleaner (i.e. more integrated) look.
 //
-class WXDLLIMPEXP_PROPGRID wxPGCheckBoxEditor : public wxPGEditor
+class wxPGCheckBoxEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGCheckBoxEditor);
 public:
@@ -399,7 +398,7 @@ public:
 // You only need to derive class and implement DoShowDialog() to create and
 // show the dialog, and finally submit the value returned by the dialog
 // via SetValue().
-class WXDLLIMPEXP_PROPGRID wxPGEditorDialogAdapter : public wxObject
+class wxPGEditorDialogAdapter : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxPGEditorDialogAdapter);
 public:
@@ -432,7 +431,7 @@ private:
 // You will need to create a new property editor class, override
 // CreateControls, and have it return wxPGMultiButton instance in
 // wxPGWindowList::SetSecondary().
-class WXDLLIMPEXP_PROPGRID wxPGMultiButton : public wxWindow
+class wxPGMultiButton : public wxWindow
 {
 public:
     wxPGMultiButton( wxPropertyGrid* pg, const wxSize& sz );

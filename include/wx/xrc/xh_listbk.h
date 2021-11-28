@@ -15,7 +15,7 @@
 
 class wxListbook;
 
-class WXDLLIMPEXP_XRC wxListbookXmlHandler : public wxXmlResourceHandler
+class wxListbookXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxListbookXmlHandler);
 

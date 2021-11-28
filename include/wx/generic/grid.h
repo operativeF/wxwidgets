@@ -1110,7 +1110,7 @@ extern wxRect            wxGridNoCellRect;
 // An array of cell coords...
 //
 WX_DECLARE_OBJARRAY_WITH_DECL(wxGridCellCoords, wxGridCellCoordsArray,
-                              class WXDLLIMPEXP_CORE);
+                              class);
 
 // ----------------------------------------------------------------------------
 // Grid table classes

@@ -42,7 +42,7 @@ class wxTextCtrl;
  * wxRichTextMarginsPage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextMarginsPage: public wxRichTextDialogPage
+class wxRichTextMarginsPage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextMarginsPage);
     wxDECLARE_EVENT_TABLE();

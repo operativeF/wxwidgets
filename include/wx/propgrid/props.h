@@ -73,7 +73,7 @@ wxPG_IMPLEMENT_PROPERTY_CLASS_PLAIN(NAME, EDITOR)
 
 // Creates and manages a temporary wxTextCtrl for validation purposes.
 // Uses wxPropertyGrid's current editor, if available.
-class WXDLLIMPEXP_PROPGRID wxPGInDialogValidator
+class wxPGInDialogValidator
 {
 public:
     wxPGInDialogValidator()
@@ -105,7 +105,7 @@ private:
 // Basic property with string value.
 // If value "<composed>" is set, then actual value is formed (or composed)
 // from values of child properties.
-class WXDLLIMPEXP_PROPGRID wxStringProperty : public wxPGProperty
+class wxStringProperty : public wxPGProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxStringProperty)
 public:
@@ -146,7 +146,7 @@ enum wxPGNumericValidationConstants
 #if wxUSE_VALIDATORS
 
 // A more comprehensive numeric validator class.
-class WXDLLIMPEXP_PROPGRID wxNumericPropertyValidator : public wxTextValidator
+class wxNumericPropertyValidator : public wxTextValidator
 {
 public:
     enum NumericType
@@ -165,7 +165,7 @@ public:
 
 // Base class for numeric properties.
 // Cannot be instantiated directly.
-class WXDLLIMPEXP_PROPGRID wxNumericProperty : public wxPGProperty
+class wxNumericProperty : public wxPGProperty
 {
     wxDECLARE_ABSTRACT_CLASS(wxNumericProperty);
 public:
@@ -192,7 +192,7 @@ protected:
 
 // Basic property with integer value.
 // Seamlessly supports 64-bit integer (wxLongLong) on overflow.
-class WXDLLIMPEXP_PROPGRID wxIntProperty : public wxNumericProperty
+class wxIntProperty : public wxNumericProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxIntProperty)
 public:
@@ -246,7 +246,7 @@ private:
 
 // Basic property with unsigned integer value.
 // Seamlessly supports 64-bit integer (wxULongLong) on overflow.
-class WXDLLIMPEXP_PROPGRID wxUIntProperty : public wxNumericProperty
+class wxUIntProperty : public wxNumericProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxUIntProperty)
 public:
@@ -301,7 +301,7 @@ private:
 // -----------------------------------------------------------------------
 
 // Basic property with double-precision floating point value.
-class WXDLLIMPEXP_PROPGRID wxFloatProperty : public wxNumericProperty
+class wxFloatProperty : public wxNumericProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxFloatProperty)
 public:
@@ -336,7 +336,7 @@ private:
 // -----------------------------------------------------------------------
 
 // Basic property with boolean value.
-class WXDLLIMPEXP_PROPGRID wxBoolProperty : public wxPGProperty
+class wxBoolProperty : public wxPGProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxBoolProperty)
 public:
@@ -365,7 +365,7 @@ public:
 // SetIndex() in IntToValue, and then letting wxBaseEnumProperty::OnSetValue
 // be called (by not implementing it, or by calling super class function in
 // it) -OR- you can just call SetIndex in OnSetValue.
-class WXDLLIMPEXP_PROPGRID wxEnumProperty : public wxPGProperty
+class wxEnumProperty : public wxPGProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxEnumProperty)
 public:
@@ -454,7 +454,7 @@ private:
 // wxEnumProperty with wxString value and writable combo box editor.
 // Uses int value, similar to wxEnumProperty, unless text entered by user is
 // is not in choices (in which case string value is used).
-class WXDLLIMPEXP_PROPGRID wxEditEnumProperty : public wxEnumProperty
+class wxEditEnumProperty : public wxEnumProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxEditEnumProperty)
 public:
@@ -501,7 +501,7 @@ protected:
 // Note: When changing "choices" (ie. flag labels) of wxFlagsProperty,
 // you will need to use SetPropertyChoices - otherwise they will not get
 //    updated properly.
-class WXDLLIMPEXP_PROPGRID wxFlagsProperty : public wxPGProperty
+class wxFlagsProperty : public wxPGProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxFlagsProperty)
 public:
@@ -558,7 +558,7 @@ protected:
 };
 
 // -----------------------------------------------------------------------
-class WXDLLIMPEXP_PROPGRID wxEditorDialogProperty : public wxPGProperty
+class wxEditorDialogProperty : public wxPGProperty
 {
     friend struct wxPGDialogAdapter;
     wxDECLARE_ABSTRACT_CLASS(wxEditorDialogProperty);
@@ -582,7 +582,7 @@ protected:
 #define wxPG_PROP_SHOW_FULL_FILENAME  wxPG_PROP_CLASS_SPECIFIC_1
 
 // Like wxLongStringProperty, but the button triggers file selector instead.
-class WXDLLIMPEXP_PROPGRID wxFileProperty : public wxEditorDialogProperty
+class wxFileProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxFileProperty)
 public:
@@ -621,7 +621,7 @@ protected:
 
 // Like wxStringProperty, but has a button that triggers a small text
 // editor dialog.
-class WXDLLIMPEXP_PROPGRID wxLongStringProperty : public wxEditorDialogProperty
+class wxLongStringProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxLongStringProperty)
 public:
@@ -643,7 +643,7 @@ protected:
 
 
 // Like wxLongStringProperty, but the button triggers dir selector instead.
-class WXDLLIMPEXP_PROPGRID wxDirProperty : public wxEditorDialogProperty
+class wxDirProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxDirProperty)
 public:
@@ -671,7 +671,7 @@ protected:
 // -----------------------------------------------------------------------
 
 // Property that manages a list of strings.
-class WXDLLIMPEXP_PROPGRID wxArrayStringProperty : public wxEditorDialogProperty
+class wxArrayStringProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxArrayStringProperty)
 public:
@@ -784,7 +784,7 @@ wxValidator* PROPNAME::DoGetValidator () const \
 #define wxAEDIALOG_STYLE \
     (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
 
-class WXDLLIMPEXP_PROPGRID wxPGArrayEditorDialog : public wxDialog
+class wxPGArrayEditorDialog : public wxDialog
 {
 public:
     wxPGArrayEditorDialog();
@@ -893,8 +893,7 @@ public:
 // wxPGArrayStringEditorDialog
 // -----------------------------------------------------------------------
 
-class WXDLLIMPEXP_PROPGRID
-    wxPGArrayStringEditorDialog : public wxPGArrayEditorDialog
+class wxPGArrayStringEditorDialog : public wxPGArrayEditorDialog
 {
 public:
     wxPGArrayStringEditorDialog();

@@ -18,7 +18,7 @@
 // wxEditableListBoxXmlHandler: XRC handler for wxEditableListBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_XRC wxEditableListBoxXmlHandler : public wxXmlResourceHandler
+class wxEditableListBoxXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxEditableListBoxXmlHandler();

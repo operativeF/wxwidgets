@@ -210,9 +210,6 @@
 /*  compatibility :-( */
 #define CMPFUNC_CONV wxCMPFUNC_CONV
 
-/*  DLL import/export declarations */
-#include "wx/dlimpexp.h"
-
 /*  ---------------------------------------------------------------------------- */
 /*  Very common macros */
 /*  ---------------------------------------------------------------------------- */

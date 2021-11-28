@@ -50,7 +50,7 @@ class wxWindowBase;
 // global data
 // ---------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_BASE(WXHINSTANCE) wxhInstance;
+extern WXHINSTANCE wxhInstance;
 
 extern "C"
 {
@@ -899,7 +899,7 @@ extern int wxGetWindowId(WXHWND hWnd);
 // different
 //
 // wndProc parameter is unused and only kept for compatibility
-extern WXDLLIMPEXP_CORE
+extern
 bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = nullptr);
 
 // Does this window style specify any border?

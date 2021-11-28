@@ -16,7 +16,7 @@
 #include "wx/wxcrtvararg.h"
 
 #if wxUSE_VARIANT
-IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLEXPORT)
+IMPLEMENT_VARIANT_OBJECT(wxColour,WXDLLEXPORT)
 #endif
 
 

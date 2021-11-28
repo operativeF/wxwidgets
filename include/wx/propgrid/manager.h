@@ -18,7 +18,7 @@
 // -----------------------------------------------------------------------
 
 #ifndef SWIG
-extern WXDLLIMPEXP_DATA_PROPGRID(const char) wxPropertyGridManagerNameStr[];
+extern const char wxPropertyGridManagerNameStr[];
 #endif
 
 // Holder of property grid page information. You can subclass this and
@@ -40,7 +40,7 @@ extern WXDLLIMPEXP_DATA_PROPGRID(const char) wxPropertyGridManagerNameStr[];
 // only those events that are specific to that page. If
 // wxPropertyGridPage::IsHandlingAllEvents returns false, then unhandled
 // events are sent to the manager's parent, as usual.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridPage : public wxEvtHandler,
+class wxPropertyGridPage : public wxEvtHandler,
                                                 public wxPropertyGridInterface,
                                                 public wxPropertyGridPageState
 {
@@ -154,8 +154,7 @@ class wxStaticText;
 // which can optionally have toolbar for mode and page selection, and help
 // text box.
 // Use window flags to select components to include.
-class WXDLLIMPEXP_PROPGRID
-    wxPropertyGridManager : public wxPanel, public wxPropertyGridInterface
+class wxPropertyGridManager : public wxPanel, public wxPropertyGridInterface
 {
     wxDECLARE_CLASS(wxPropertyGridManager);
     friend class wxPropertyGridPage;

@@ -105,7 +105,7 @@ wxWindow *wxDialogBase::CheckIfCanBeUsedAsParent(wxWindow *parent) const
     if ( !parent )
         return nullptr;
 
-    extern WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;
+    extern wxList wxPendingDelete;
     if ( wxPendingDelete.Member(parent) || parent->IsBeingDeleted() )
     {
         // this window is being deleted and we shouldn't create any children

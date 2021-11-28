@@ -25,10 +25,10 @@ import <string>;
 class wxAnimation;
 class wxAnimationImpl;
 
-extern WXDLLIMPEXP_DATA_CORE(wxAnimation) wxNullAnimation;
+extern wxAnimation wxNullAnimation;
 inline constexpr char wxAnimationCtrlNameStr[] = "animationctrl";
 
-WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class WXDLLIMPEXP_CORE);
+WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class);
 
 // ----------------------------------------------------------------------------
 // wxAnimation

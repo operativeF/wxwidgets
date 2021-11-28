@@ -206,7 +206,7 @@ wxString wxLanguageInfo::GetLocaleName() const
 // ----------------------------------------------------------------------------
 
 #include "wx/arrimpl.cpp"
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxLanguageInfo, wxLanguageInfoArray, WXDLLIMPEXP_BASE);
+WX_DECLARE_OBJARRAY(wxLanguageInfo, wxLanguageInfoArray);
 WX_DEFINE_OBJARRAY(wxLanguageInfoArray)
 
 wxLanguageInfoArray *wxLocale::ms_languagesDB = nullptr;
@@ -1195,7 +1195,6 @@ bool IsAtTwoSingleQuotes(const wxString& fmt, wxString::const_iterator p)
 
 // The function is only exported because it is used in the unit test, it is not
 // part of the public API.
-WXDLLIMPEXP_BASE
 wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
 {
     wxString fmtWX;

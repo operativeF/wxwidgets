@@ -18,7 +18,7 @@
 #include "wx/event.h"
 #include "wx/anybutton.h"     // base class
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOGGLEBUTTON, wxCommandEvent );
+wxDECLARE_EVENT( wxEVT_TOGGLEBUTTON, wxCommandEvent );
 
 inline constexpr std::string_view wxToggleButtonNameStr = "toggle";
 

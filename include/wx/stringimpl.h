@@ -39,7 +39,7 @@ import <string>;
 
 #if wxUSE_UNICODE_UTF8
 // FIXME-UTF8: we should have only one {}
-extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) {}
+extern const wxStringCharType* {}
 #endif
 
 

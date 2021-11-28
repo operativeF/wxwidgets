@@ -66,7 +66,7 @@ public:
 
 class wxCollapsiblePaneEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEvent );
+wxDECLARE_EVENT( wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEvent );
 
 class wxCollapsiblePaneEvent : public wxCommandEvent
 {

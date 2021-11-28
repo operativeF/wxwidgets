@@ -1711,8 +1711,8 @@ wxMBConvUTF16swap::FromWChar(char *dst, size_t dstLen,
 #endif
 
 
-WXDLLIMPEXP_DATA_BASE(wxMBConvUTF32LE) wxConvUTF32LE;
-WXDLLIMPEXP_DATA_BASE(wxMBConvUTF32BE) wxConvUTF32BE;
+wxMBConvUTF32LE wxConvUTF32LE;
+wxMBConvUTF32BE wxConvUTF32BE;
 
 /* static */
 size_t wxMBConvUTF32Base::GetLength(const char *src, size_t srcLen)
@@ -3200,7 +3200,7 @@ wxWhateverWorksConv::FromWChar(char *dst, size_t dstLen,
 #undef wxConvISO8859_1
 
 #define WX_DEFINE_GLOBAL_CONV2(klass, impl_klass, name, ctor_args)      \
-    WXDLLIMPEXP_DATA_BASE(klass*) name##Ptr = NULL;                     \
+    klass* name##Ptr = NULL;                     \
     klass* wxGet_##name##Ptr()                         \
     {                                                                   \
         static impl_klass name##Obj ctor_args;                          \
@@ -3236,8 +3236,8 @@ WX_DEFINE_GLOBAL_CONV(wxWhateverWorksConv, wxConvWhateverWorks, ;);
 WX_DEFINE_GLOBAL_CONV(wxCSConv, wxConvLocal, (wxFONTENCODING_SYSTEM));
 WX_DEFINE_GLOBAL_CONV(wxCSConv, wxConvISO8859_1, (wxFONTENCODING_ISO8859_1));
 
-WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvCurrent = wxGet_wxConvLibcPtr();
-WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvUI = wxGet_wxConvLocalPtr();
+wxMBConv* wxConvCurrent = wxGet_wxConvLibcPtr();
+wxMBConv* wxConvUI = wxGet_wxConvLocalPtr();
 
 #ifdef __DARWIN__
 // It is important to use this conversion object under Darwin as it ensures
@@ -3246,7 +3246,7 @@ WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvUI = wxGet_wxConvLocalPtr();
 static wxMBConvD_cf wxConvMacUTF8DObj(wxFONTENCODING_UTF8);
 #endif
 
-WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvFileName =
+wxMBConv* wxConvFileName =
 #ifdef __DARWIN__
                                     &wxConvMacUTF8DObj;
 #else // !__DARWIN__

@@ -83,7 +83,7 @@ enum wxXmlResourceFlags
 // This class holds XML resources from one or more .xml files
 // (or derived forms, either binary or zipped -- see manual for
 // details).
-class WXDLLIMPEXP_XRC wxXmlResource : public wxObject
+class wxXmlResource : public wxObject
 {
 public:
     // Constructor.
@@ -476,7 +476,7 @@ private:
 // library unlike wxXmlResourceHandler itself which is defined in "core" to
 // allow inheriting from it in the code from the other libraries too.
 
-class WXDLLIMPEXP_XRC wxXmlResourceHandlerImpl : public wxXmlResourceHandlerImplBase
+class wxXmlResourceHandlerImpl : public wxXmlResourceHandlerImplBase
 {
 public:
     // Constructor.
@@ -657,7 +657,7 @@ public:
 
 
 // FIXME -- remove this $%^#$%#$@# as soon as Ron checks his changes in!!
-WXDLLIMPEXP_XRC void wxXmlInitResourceModule();
+void wxXmlInitResourceModule();
 
 
 // This class is used to create instances of XRC "object" nodes with "subclass"
@@ -665,7 +665,7 @@ WXDLLIMPEXP_XRC void wxXmlInitResourceModule();
 // register your subclasses via wxWidgets' RTTI mechanism. This class is useful
 // only for language bindings developer who need a way to implement subclassing
 // in wxWidgets ports that don't support wxRTTI (e.g. wxPython).
-class WXDLLIMPEXP_XRC wxXmlSubclassFactory
+class wxXmlSubclassFactory
 {
 public:
     // Try to create instance of given class and return it, return NULL on

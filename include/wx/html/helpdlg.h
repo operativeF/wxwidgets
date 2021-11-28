@@ -26,7 +26,7 @@ class wxHtmlHelpWindow;
 
 class wxWindow;
 
-class WXDLLIMPEXP_HTML wxHtmlHelpDialog : public wxDialog
+class wxHtmlHelpDialog : public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpDialog);
 

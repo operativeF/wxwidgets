@@ -116,7 +116,7 @@ private:
 };
 
 #ifndef SWIG
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray, WXDLLIMPEXP_AUI);
+WX_DECLARE_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray);
 #endif
 
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)

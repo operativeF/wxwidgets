@@ -52,8 +52,8 @@ import <string>;
 
 inline constexpr std::string_view wxSearchCtrlNameStr = "searchCtrl";
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH_CANCEL, wxCommandEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH, wxCommandEvent);
+wxDECLARE_EVENT( wxEVT_SEARCH_CANCEL, wxCommandEvent);
+wxDECLARE_EVENT( wxEVT_SEARCH, wxCommandEvent);
 
 // ----------------------------------------------------------------------------
 // a search ctrl is a text control with a search button and a cancel button

@@ -73,15 +73,8 @@ static std::string FilterOutEntryName(const std::string& str);
 // "template" array types
 // ----------------------------------------------------------------------------
 
-#ifdef WXMAKINGDLL_BASE
-    WX_DEFINE_SORTED_USER_EXPORTED_ARRAY(wxFileConfigEntry *, ArrayEntries,
-                                         WXDLLIMPEXP_BASE);
-    WX_DEFINE_SORTED_USER_EXPORTED_ARRAY(wxFileConfigGroup *, ArrayGroups,
-                                         WXDLLIMPEXP_BASE);
-#else
-    WX_DEFINE_SORTED_ARRAY(wxFileConfigEntry *, ArrayEntries);
-    WX_DEFINE_SORTED_ARRAY(wxFileConfigGroup *, ArrayGroups);
-#endif
+WX_DEFINE_SORTED_ARRAY(wxFileConfigEntry *, ArrayEntries);
+WX_DEFINE_SORTED_ARRAY(wxFileConfigGroup *, ArrayGroups);
 
 // ----------------------------------------------------------------------------
 // wxFileConfigLineList

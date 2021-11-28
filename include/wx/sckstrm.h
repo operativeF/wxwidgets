@@ -14,9 +14,9 @@
 
 #if wxUSE_SOCKETS && wxUSE_STREAMS
 
-class WXDLLIMPEXP_NET wxSocketBase;
+class wxSocketBase;
 
-class WXDLLIMPEXP_NET wxSocketOutputStream : public wxOutputStream
+class wxSocketOutputStream : public wxOutputStream
 {
 public:
     wxSocketOutputStream(wxSocketBase& s);
@@ -34,7 +34,7 @@ protected:
         { return wxInvalidOffset; }
 };
 
-class WXDLLIMPEXP_NET wxSocketInputStream : public wxInputStream
+class wxSocketInputStream : public wxInputStream
 {
 public:
     explicit wxSocketInputStream(wxSocketBase& s);
@@ -53,7 +53,7 @@ protected:
         { return wxInvalidOffset; }
 };
 
-class WXDLLIMPEXP_NET wxSocketStream : public wxSocketInputStream,
+class wxSocketStream : public wxSocketInputStream,
                    public wxSocketOutputStream
 {
 public:

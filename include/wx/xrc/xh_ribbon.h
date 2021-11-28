@@ -16,7 +16,7 @@
 
 class wxRibbonControl;
 
-class WXDLLIMPEXP_RIBBON wxRibbonXmlHandler : public wxXmlResourceHandler
+class wxRibbonXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxRibbonXmlHandler();

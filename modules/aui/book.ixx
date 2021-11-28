@@ -69,7 +69,7 @@ struct wxAuiTabContainerButton
 };
 
 #ifndef SWIG
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiTabContainerButton, wxAuiTabContainerButtonArray, WXDLLIMPEXP_AUI);
+WX_DECLARE_OBJARRAY(wxAuiTabContainerButton, wxAuiTabContainerButtonArray);
 #endif
 
 class wxAuiTabContainer

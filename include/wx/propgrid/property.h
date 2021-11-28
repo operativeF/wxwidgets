@@ -53,7 +53,7 @@ struct wxPGPaintData
 
 
 // Base class for wxPropertyGrid cell renderers.
-class WXDLLIMPEXP_PROPGRID wxPGCellRenderer : public wxObjectRefData
+class wxPGCellRenderer : public wxObjectRefData
 {
 public:
     // Render flags
@@ -137,7 +137,7 @@ public:
 
 // Default cell renderer, that can handles the common
 // scenarios.
-class WXDLLIMPEXP_PROPGRID wxPGDefaultRenderer : public wxPGCellRenderer
+class wxPGDefaultRenderer : public wxPGCellRenderer
 {
 public:
     bool Render( wxDC& dc,
@@ -156,7 +156,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_PROPGRID wxPGCellData : public wxObjectRefData
+class wxPGCellData : public wxObjectRefData
 {
     friend class wxPGCell;
 public:
@@ -185,7 +185,7 @@ protected:
 
 
 // Base class for wxPropertyGrid cell information.
-class WXDLLIMPEXP_PROPGRID wxPGCell : public wxObject
+class wxPGCell : public wxObject
 {
 public:
     wxPGCell() = default;
@@ -269,7 +269,7 @@ private:
 
 // wxPGAttributeStorage is somewhat optimized storage for
 // key=variant pairs (ie. a map).
-class WXDLLIMPEXP_PROPGRID wxPGAttributeStorage
+class wxPGAttributeStorage
 {
 public:
     wxPGAttributeStorage() = default;
@@ -590,7 +590,7 @@ wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000
 // -----------------------------------------------------------------------
 
 // Data of a single wxPGChoices choice.
-class WXDLLIMPEXP_PROPGRID wxPGChoiceEntry : public wxPGCell
+class wxPGChoiceEntry : public wxPGCell
 {
 public:
     wxPGChoiceEntry();
@@ -626,7 +626,7 @@ protected:
 
 using wxPGChoicesId = void *;
 
-class WXDLLIMPEXP_PROPGRID wxPGChoicesData : public wxObjectRefData
+class wxPGChoicesData : public wxObjectRefData
 {
     friend class wxPGChoices;
 public:
@@ -675,7 +675,7 @@ protected:
 // reference and not the actual data. Use Copy() member function to create
 // a real copy.
 // If you do not specify value for entry, index is used.
-class WXDLLIMPEXP_PROPGRID wxPGChoices
+class wxPGChoices
 {
 public:
     using ValArrItem = long;
@@ -948,7 +948,7 @@ protected:
 // -----------------------------------------------------------------------
 
 // wxPGProperty is base class for all wxPropertyGrid properties.
-class WXDLLIMPEXP_PROPGRID wxPGProperty : public wxObject
+class wxPGProperty : public wxObject
 {
     friend class wxPropertyGrid;
     friend class wxPropertyGridInterface;
@@ -2027,7 +2027,7 @@ const wxPGEditor* PROPNAME::DoGetEditorClass() const \
 // -----------------------------------------------------------------------
 
 // Root parent property.
-class WXDLLIMPEXP_PROPGRID wxPGRootProperty : public wxPGProperty
+class wxPGRootProperty : public wxPGProperty
 {
 public:
     WX_PG_DECLARE_PROPERTY_CLASS(wxPGRootProperty)
@@ -2045,7 +2045,7 @@ protected:
 // -----------------------------------------------------------------------
 
 // Category (caption) property.
-class WXDLLIMPEXP_PROPGRID wxPropertyCategory : public wxPGProperty
+class wxPropertyCategory : public wxPGProperty
 {
     friend class wxPropertyGrid;
     friend class wxPropertyGridPageState;

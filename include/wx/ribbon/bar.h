@@ -75,7 +75,7 @@ enum wxRibbonScrollButtonStyle
     wxRIBBON_SCROLL_BTN_FOR_MASK = 48
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonBarEvent : public wxNotifyEvent
+class wxRibbonBarEvent : public wxNotifyEvent
 {
 public:
     wxRibbonBarEvent(wxEventType command_type = wxEVT_NULL,
@@ -103,7 +103,7 @@ private:
 #endif
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonPageTabInfo
+class wxRibbonPageTabInfo
 {
 public:
     wxRect rect;
@@ -119,10 +119,10 @@ public:
 };
 
 #ifndef SWIG
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfo, wxRibbonPageTabInfoArray, WXDLLIMPEXP_RIBBON);
+WX_DECLARE_OBJARRAY(wxRibbonPageTabInfo, wxRibbonPageTabInfoArray);
 #endif
 
-class WXDLLIMPEXP_RIBBON wxRibbonBar : public wxRibbonControl
+class wxRibbonBar : public wxRibbonControl
 {
 public:
     wxRibbonBar() = default;
@@ -252,15 +252,15 @@ protected:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_PAGE_CHANGED, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_PAGE_CHANGING, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TAB_MIDDLE_DOWN, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TAB_MIDDLE_UP, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TAB_RIGHT_DOWN, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TAB_RIGHT_UP, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TAB_LEFT_DCLICK, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_TOGGLED, wxRibbonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBAR_HELP_CLICK, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGED, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGING, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TAB_MIDDLE_DOWN, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TAB_MIDDLE_UP, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TAB_RIGHT_DOWN, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TAB_RIGHT_UP, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TAB_LEFT_DCLICK, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_TOGGLED, wxRibbonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBAR_HELP_CLICK, wxRibbonBarEvent);
 
 typedef void (wxEvtHandler::*wxRibbonBarEventFunction)(wxRibbonBarEvent&);
 

@@ -91,7 +91,7 @@ public:
 
 class wxHyperlinkEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_HYPERLINK, wxHyperlinkEvent );
+wxDECLARE_EVENT( wxEVT_HYPERLINK, wxHyperlinkEvent );
 
 //
 // An event fired when the user clicks on the label in a hyperlink control.

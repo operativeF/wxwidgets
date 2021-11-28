@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_SCROLLBAR
 
-class WXDLLIMPEXP_XRC wxScrollBarXmlHandler : public wxXmlResourceHandler
+class wxScrollBarXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxScrollBarXmlHandler();

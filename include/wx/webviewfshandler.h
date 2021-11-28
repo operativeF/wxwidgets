@@ -20,7 +20,7 @@ class wxFileSystem;
 
 //Loads from uris such as scheme:example.html
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewFSHandler : public wxWebViewHandler
+class wxWebViewFSHandler : public wxWebViewHandler
 {
 public:
     wxWebViewFSHandler(const wxString& scheme);

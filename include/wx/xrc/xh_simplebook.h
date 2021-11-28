@@ -16,7 +16,7 @@
 
 class wxSimplebook;
 
-class WXDLLIMPEXP_XRC wxSimplebookXmlHandler : public wxXmlResourceHandler
+class wxSimplebookXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxSimplebookXmlHandler();

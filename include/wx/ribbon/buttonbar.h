@@ -22,10 +22,10 @@ class wxRibbonButtonBarButtonBase;
 class wxRibbonButtonBarLayout;
 struct wxRibbonButtonBarButtonInstance;
 
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonButtonBarLayout*, wxArrayRibbonButtonBarLayout, class WXDLLIMPEXP_RIBBON);
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonButtonBarButtonBase*, wxArrayRibbonButtonBarButtonBase, class WXDLLIMPEXP_RIBBON);
+WX_DEFINE_ARRAY_PTR(wxRibbonButtonBarLayout*, wxArrayRibbonButtonBarLayout, class);
+WX_DEFINE_ARRAY_PTR(wxRibbonButtonBarButtonBase*, wxArrayRibbonButtonBarButtonBase, class);
 
-class WXDLLIMPEXP_RIBBON wxRibbonButtonBar : public wxRibbonControl
+class wxRibbonButtonBar : public wxRibbonControl
 {
 public:
     wxRibbonButtonBar();
@@ -213,7 +213,7 @@ protected:
 #endif
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonButtonBarEvent : public wxCommandEvent
+class wxRibbonButtonBarEvent : public wxCommandEvent
 {
 public:
     wxRibbonButtonBarEvent(wxEventType command_type = wxEVT_NULL,
@@ -248,8 +248,8 @@ private:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBUTTONBAR_CLICKED, wxRibbonButtonBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, wxRibbonButtonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBUTTONBAR_CLICKED, wxRibbonButtonBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED, wxRibbonButtonBarEvent);
 
 typedef void (wxEvtHandler::*wxRibbonButtonBarEventFunction)(wxRibbonButtonBarEvent&);
 

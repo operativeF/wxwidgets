@@ -160,7 +160,7 @@ class wxPalette;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxImage)
+DECLARE_VARIANT_OBJECT(wxImage)
 #endif
 
 //-----------------------------------------------------------------------------
@@ -243,7 +243,7 @@ struct wxImageHistogramEntry
     unsigned long value{0};
 };
 
-WX_DECLARE_EXPORTED_HASH_MAP(unsigned long, wxImageHistogramEntry,
+WX_DECLARE_HASH_MAP(unsigned long, wxImageHistogramEntry,
                              wxIntegerHash, wxIntegerEqual,
                              wxImageHistogramBase);
 
@@ -697,7 +697,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxImage);
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
+WX_DECLARE_OBJARRAY(wxImage, wxImageArray);
 
 inline wxImage wxNullImage;
 

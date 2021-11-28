@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_COMBOCTRL
 
-class WXDLLIMPEXP_XRC wxComboCtrlXmlHandler : public wxXmlResourceHandler
+class wxComboCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxComboCtrlXmlHandler);
 

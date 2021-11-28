@@ -277,14 +277,6 @@ private:
 #define WX_DECLARE_HASH(el, list, hash) \
     _WX_DECLARE_HASH(el, list, hash, class)
 
-// and this one does exactly the same thing but should be used inside the
-// library
-#define WX_DECLARE_EXPORTED_HASH(el, list, hash)  \
-    _WX_DECLARE_HASH(el, list, hash, class WXDLLIMPEXP_CORE)
-
-#define WX_DECLARE_USER_EXPORTED_HASH(el, list, hash, usergoo)  \
-    _WX_DECLARE_HASH(el, list, hash, class usergoo)
-
 // delete all hash elements
 //
 // NB: the class declaration of the hash elements must be visible from the

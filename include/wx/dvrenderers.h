@@ -75,7 +75,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewIconText);
 };
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewIconText)
+DECLARE_VARIANT_OBJECT(wxDataViewIconText)
 
 // ----------------------------------------------------------------------------
 // wxDataViewCheckIconText: value class used by wxDataViewCheckIconTextRenderer
@@ -101,7 +101,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewCheckIconText);
 };
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewCheckIconText)
+DECLARE_VARIANT_OBJECT(wxDataViewCheckIconText)
 
 // ----------------------------------------------------------------------------
 // wxDataViewRendererBase

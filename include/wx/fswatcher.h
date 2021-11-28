@@ -77,8 +77,7 @@ enum class wxFSWWarningType
  * Event containing information about file system change.
  */
 class wxFileSystemWatcherEvent;
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_BASE, wxEVT_FSWATCHER,
-                         wxFileSystemWatcherEvent);
+wxDECLARE_EVENT(wxEVT_FSWATCHER, wxFileSystemWatcherEvent);
 
 class wxFileSystemWatcherEvent: public wxEvent
 {

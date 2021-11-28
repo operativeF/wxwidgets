@@ -51,7 +51,7 @@ class wxTextCtrl;
  * wxRichTextSizePage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextSizePage: public wxRichTextDialogPage
+class wxRichTextSizePage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextSizePage);
     wxDECLARE_EVENT_TABLE();

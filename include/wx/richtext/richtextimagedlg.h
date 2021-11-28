@@ -43,7 +43,7 @@ class wxTextCtrl;
  * wxRichTextObjectPropertiesDialog class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextObjectPropertiesDialog: public wxRichTextFormattingDialog
+class wxRichTextObjectPropertiesDialog: public wxRichTextFormattingDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextObjectPropertiesDialog);
     wxDECLARE_EVENT_TABLE();

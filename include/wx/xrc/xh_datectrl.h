@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_DATEPICKCTRL
 
-class WXDLLIMPEXP_XRC wxDateCtrlXmlHandler : public wxXmlResourceHandler
+class wxDateCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxDateCtrlXmlHandler);
 

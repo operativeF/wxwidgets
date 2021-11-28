@@ -20,7 +20,7 @@
 
 // Most property grid functions have this type as their argument, as it can
 // convey a property by either a pointer or name.
-class WXDLLIMPEXP_PROPGRID wxPGPropArgCls
+class wxPGPropArgCls
 {
 public:
     wxPGPropArgCls( const wxPGProperty* property )
@@ -103,11 +103,10 @@ using wxPGPropArg = const wxPGPropArgCls &;
 
 // -----------------------------------------------------------------------
 
-WXDLLIMPEXP_PROPGRID
 void wxPGTypeOperationFailed( const wxPGProperty* p,
                               const wxString& typestr,
                               const wxString& op );
-WXDLLIMPEXP_PROPGRID
+
 void wxPGGetFailed( const wxPGProperty* p, const wxString& typestr );
 
 // -----------------------------------------------------------------------
@@ -144,7 +143,7 @@ void wxPGGetFailed( const wxPGProperty* p, const wxString& typestr );
 // wxPropertyGridInterface's property operation member functions all accept
 // a special wxPGPropArg id argument, using which you can refer to properties
 // either by their pointer (for performance) or by their name (for conveniency).
-class WXDLLIMPEXP_PROPGRID wxPropertyGridInterface
+class wxPropertyGridInterface
 {
 public:
     virtual ~wxPropertyGridInterface() = default;

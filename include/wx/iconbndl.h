@@ -22,7 +22,7 @@ import <string>;
 
 class wxInputStream;
 
-WX_DECLARE_EXPORTED_OBJARRAY(wxIcon, wxIconArray);
+WX_DECLARE_OBJARRAY(wxIcon, wxIconArray);
 
 // Load icons of multiple sizes from files or resources (MSW-only).
 class wxIconBundle : public wxGDIObject

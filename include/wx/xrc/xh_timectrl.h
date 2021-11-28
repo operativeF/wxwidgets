@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_TIMEPICKCTRL
 
-class WXDLLIMPEXP_XRC wxTimeCtrlXmlHandler : public wxXmlResourceHandler
+class wxTimeCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxTimeCtrlXmlHandler();

@@ -144,7 +144,7 @@ typedef Boolean (*MCFilterProcType)(MovieController theController,
 //  QT Library
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_MEDIA wxQuickTimeLibrary
+class wxQuickTimeLibrary
 {
 public:
     ~wxQuickTimeLibrary()
@@ -320,7 +320,7 @@ bool wxQuickTimeLibrary::Initialize()
     return m_ok;
 }
 
-class WXDLLIMPEXP_MEDIA wxQTMediaBackend : public wxMediaBackendCommonBase
+class wxQTMediaBackend : public wxMediaBackendCommonBase
 {
 public:
     wxQTMediaBackend() = default;
@@ -388,7 +388,7 @@ public:
 };
 
 // helper to hijack background erasing for the QT window
-class WXDLLIMPEXP_MEDIA wxQTMediaEvtHandler : public wxEvtHandler
+class wxQTMediaEvtHandler : public wxEvtHandler
 {
 public:
     wxQTMediaEvtHandler(wxQTMediaBackend *qtb, WXHWND hwnd) : m_qtb(qtb), m_hwnd(hwnd)

@@ -189,10 +189,8 @@ enum wxOleConvertVariantFlags
     wxOleConvertVariant_ReturnSafeArrays = 1
 };
 
-WXDLLIMPEXP_CORE
 bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant);
 
-WXDLLIMPEXP_CORE
 bool wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant,
                            long flags = wxOleConvertVariant_Default);
 

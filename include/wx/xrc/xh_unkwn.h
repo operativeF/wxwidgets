@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC
 
-class WXDLLIMPEXP_XRC wxUnknownWidgetXmlHandler : public wxXmlResourceHandler
+class wxUnknownWidgetXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxUnknownWidgetXmlHandler);
 

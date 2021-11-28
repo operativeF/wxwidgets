@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_LISTBOX
 
-class WXDLLIMPEXP_XRC wxListBoxXmlHandler : public wxXmlResourceHandler
+class wxListBoxXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxListBoxXmlHandler);
 

@@ -66,7 +66,7 @@ public:
     virtual bool IsCollapsed() const = 0;
 };
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
+wxDECLARE_EVENT(wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
 
 #define wxCollapsibleHeaderChangedHandler(func) \
     wxEVENT_HANDLER_CAST(wxCommandEventFunction, func)

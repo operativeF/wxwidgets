@@ -36,7 +36,7 @@ enum class wxURLError
 #if wxUSE_URL_NATIVE
 class wxURL;
 
-class WXDLLIMPEXP_NET wxURLNativeImp : public wxObject
+class wxURLNativeImp : public wxObject
 {
 public:
     virtual ~wxURLNativeImp() { }
@@ -44,7 +44,7 @@ public:
 };
 #endif // wxUSE_URL_NATIVE
 
-class WXDLLIMPEXP_NET wxURL : public wxURI
+class wxURL : public wxURI
 {
 public:
     wxURL(const std::string& sUrl = {});

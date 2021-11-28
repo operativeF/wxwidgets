@@ -370,16 +370,16 @@ inline constexpr char wxCalendarNameStr[] = "CalendarCtrl";
 // calendar event types and macros for handling them
 // ----------------------------------------------------------------------------
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_SEL_CHANGED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_PAGE_CHANGED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_DOUBLECLICKED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_WEEKDAY_CLICKED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_WEEK_CLICKED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_SEL_CHANGED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_PAGE_CHANGED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_DOUBLECLICKED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_WEEKDAY_CLICKED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_WEEK_CLICKED, wxCalendarEvent );
 
 // deprecated events
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_DAY_CHANGED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_MONTH_CHANGED, wxCalendarEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALENDAR_YEAR_CHANGED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_DAY_CHANGED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_MONTH_CHANGED, wxCalendarEvent );
+wxDECLARE_EVENT( wxEVT_CALENDAR_YEAR_CHANGED, wxCalendarEvent );
 
 typedef void (wxEvtHandler::*wxCalendarEventFunction)(wxCalendarEvent&);
 

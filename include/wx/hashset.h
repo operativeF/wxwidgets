@@ -79,10 +79,6 @@ public:                                                                       \
 #define WX_DECLARE_HASH_SET_WITH_DECL( KEY_T, HASH_T, KEY_EQ_T, CLASSNAME, DECL) \
     _WX_DECLARE_HASH_SET( KEY_T, HASH_T, KEY_EQ_T, wxPTROP_NORMAL, CLASSNAME, class )
 
-#define WX_DECLARE_EXPORTED_HASH_SET( KEY_T, HASH_T, KEY_EQ_T, CLASSNAME) \
-    WX_DECLARE_HASH_SET_WITH_DECL( KEY_T, HASH_T, KEY_EQ_T, \
-                                   CLASSNAME, class )
-
 // Finally these versions allow to define hash sets of non-objects (including
 // pointers, hence the confusing but wxArray-compatible name) without
 // operator->() which can't be used for them. This is mostly used inside the

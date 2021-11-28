@@ -11,7 +11,7 @@
 
 #if wxUSE_WEBVIEW && (wxUSE_WEBVIEW_IE || wxUSE_WEBVIEW_EDGE) && defined(__WXMSW__)
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewHistoryItem
+class wxWebViewHistoryItem
 {
 public:
     wxWebViewHistoryItem(const std::string& url, const std::string& title) :

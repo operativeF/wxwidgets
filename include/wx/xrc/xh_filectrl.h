@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_FILECTRL
 
-class WXDLLIMPEXP_XRC wxFileCtrlXmlHandler : public wxXmlResourceHandler
+class wxFileCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxFileCtrlXmlHandler();

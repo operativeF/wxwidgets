@@ -16,7 +16,7 @@
 
 class wxPropertySheetDialog;
 
-class WXDLLIMPEXP_XRC wxPropertySheetDialogXmlHandler : public wxXmlResourceHandler
+class wxPropertySheetDialogXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxPropertySheetDialogXmlHandler);
 

@@ -78,7 +78,7 @@ class wxHtmlHelpController;
  * Help window
  */
 
-class WXDLLIMPEXP_HTML wxHtmlHelpWindow : public wxWindow
+class wxHtmlHelpWindow : public wxWindow
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpWindow);
 

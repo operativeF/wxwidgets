@@ -331,7 +331,7 @@ int wxDoSprintfUtf8(char *str, const char *format, ...);
 WX_DEFINE_VARARG_FUNC(int, wxSprintf, 2, (char*, const wxFormatString&),
                       wxDoSprintfWchar, wxDoSprintfUtf8)
 
-int WXDLLIMPEXP_BASE
+int
 wxVsprintf(char *str, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
@@ -343,7 +343,7 @@ int wxDoSnprintfUtf8(char *str, size_t size, const char *format, ...);
 WX_DEFINE_VARARG_FUNC(int, wxSnprintf, 3, (char*, size_t, const wxFormatString&),
                       wxDoSnprintfWchar, wxDoSnprintfUtf8)
 
-int WXDLLIMPEXP_BASE
+int
 wxVsnprintf(char *str, size_t size, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
@@ -355,7 +355,7 @@ int wxDoSprintfUtf8(wchar_t *str, const char *format, ...);
 WX_DEFINE_VARARG_FUNC(int, wxSprintf, 2, (wchar_t*, const wxFormatString&),
                       wxDoSprintfWchar, wxDoSprintfUtf8)
 
-int WXDLLIMPEXP_BASE
+int
 wxVsprintf(wchar_t *str, const wxString& format, va_list argptr);
 
 #if !wxUSE_UTF8_LOCALE_ONLY
@@ -367,7 +367,7 @@ int wxDoSnprintfUtf8(wchar_t *str, size_t size, const char *format, ...);
 WX_DEFINE_VARARG_FUNC(int, wxSnprintf, 3, (wchar_t*, size_t, const wxFormatString&),
                       wxDoSnprintfWchar, wxDoSnprintfUtf8)
 
-int WXDLLIMPEXP_BASE
+int
 wxVsnprintf(wchar_t *str, size_t size, const wxString& format, va_list argptr);
 
 

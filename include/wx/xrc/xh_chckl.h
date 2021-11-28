@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_CHECKLISTBOX
 
-class WXDLLIMPEXP_XRC wxCheckListBoxXmlHandler : public wxXmlResourceHandler
+class wxCheckListBoxXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxCheckListBoxXmlHandler);
 

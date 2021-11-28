@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_SEARCHCTRL
 
-class WXDLLIMPEXP_XRC wxSearchCtrlXmlHandler : public wxXmlResourceHandler
+class wxSearchCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxSearchCtrlXmlHandler();

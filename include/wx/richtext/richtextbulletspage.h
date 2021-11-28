@@ -43,7 +43,7 @@ class wxRichTextCtrl;
  * wxRichTextBulletsPage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBulletsPage: public wxRichTextDialogPage
+class wxRichTextBulletsPage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBulletsPage);
     wxDECLARE_EVENT_TABLE();

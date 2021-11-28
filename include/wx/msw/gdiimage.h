@@ -30,7 +30,7 @@ struct wxGDIImageRefData;
 class wxGDIImageHandler;
 class wxGDIImage;
 
-WX_DECLARE_EXPORTED_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
+WX_DECLARE_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
 
 // ----------------------------------------------------------------------------
 // wxGDIImageRefData: common data fields for all derived classes

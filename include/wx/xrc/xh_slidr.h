@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_SLIDER
 
-class WXDLLIMPEXP_XRC wxSliderXmlHandler : public wxXmlResourceHandler
+class wxSliderXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxSliderXmlHandler();

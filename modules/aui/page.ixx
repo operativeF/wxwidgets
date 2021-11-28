@@ -25,7 +25,7 @@ export
         bool hover{false};             // true if mouse hovering over tab
     };
 
-    WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiNotebookPage, wxAuiNotebookPageArray, WXDLLIMPEXP_AUI);
+    WX_DECLARE_OBJARRAY(wxAuiNotebookPage, wxAuiNotebookPageArray);
 
     WX_DEFINE_OBJARRAY(wxAuiNotebookPageArray)
 }

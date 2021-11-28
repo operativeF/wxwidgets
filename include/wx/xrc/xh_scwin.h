@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC
 
-class WXDLLIMPEXP_XRC wxScrolledWindowXmlHandler : public wxXmlResourceHandler
+class wxScrolledWindowXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxScrolledWindowXmlHandler);
 

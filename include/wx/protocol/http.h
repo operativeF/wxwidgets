@@ -16,7 +16,7 @@
 #include "wx/protocol/protocol.h"
 #include "wx/buffer.h"
 
-class WXDLLIMPEXP_NET wxHTTP : public wxProtocol
+class wxHTTP : public wxProtocol
 {
 public:
     wxHTTP() = default;

@@ -24,7 +24,7 @@
  * wxRichTextHTMLHandler
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextHTMLHandler: public wxRichTextFileHandler
+class wxRichTextHTMLHandler: public wxRichTextFileHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextHTMLHandler);
 public:

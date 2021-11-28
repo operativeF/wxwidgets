@@ -29,8 +29,8 @@ class wxMenuBar;
 class wxMenuItem;
 
 // pseudo template list classes
-WX_DECLARE_EXPORTED_LIST(wxMenu, wxMenuList);
-WX_DECLARE_EXPORTED_LIST(wxMenuItem, wxMenuItemList);
+WX_DECLARE_LIST(wxMenu, wxMenuList);
+WX_DECLARE_LIST(wxMenuItem, wxMenuItemList);
 
 class wxMenuBase : public wxEvtHandler
 {
@@ -426,7 +426,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxMenuInfoHelper);
 };
 
-WX_DECLARE_EXPORTED_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
+WX_DECLARE_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
 
 #endif
 

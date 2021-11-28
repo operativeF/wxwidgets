@@ -16,7 +16,7 @@
 
 class wxWindowMSW;
 
-WX_DECLARE_EXPORTED_OBJARRAY(MSG, wxMSGArray);
+WX_DECLARE_OBJARRAY(MSG, wxMSGArray);
 
 class wxGUIEventLoop : public wxMSWEventLoopBase
 {

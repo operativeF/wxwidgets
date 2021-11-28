@@ -89,7 +89,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxNotebookPageInfo);
 };
 
-WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
+WX_DECLARE_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
 
 #endif
 
@@ -153,8 +153,8 @@ protected:
 using wxNotebookEventFunction = wxBookCtrlEventFunction;
 #define wxNotebookEventHandler(func) wxBookCtrlEventHandler(func)
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTEBOOK_PAGE_CHANGED, wxBookCtrlEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_NOTEBOOK_PAGE_CHANGED, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_NOTEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
 
 #define EVT_NOTEBOOK_PAGE_CHANGED(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_NOTEBOOK_PAGE_CHANGED, winid, wxBookCtrlEventHandler(fn))

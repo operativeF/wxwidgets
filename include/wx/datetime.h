@@ -105,7 +105,7 @@ class wxDateTime;
 inline constexpr char wxDefaultDateTimeFormat[] = "%c";
 inline constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
 
-extern WXDLLIMPEXP_DATA_BASE(const wxDateTime) wxDefaultDateTime;
+extern const wxDateTime wxDefaultDateTime;
 
 #define wxInvalidDateTime wxDefaultDateTime
 
@@ -1527,7 +1527,7 @@ private:
 // wxDateTimeArray: array of dates.
 // ----------------------------------------------------------------------------
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxDateTime, wxDateTimeArray, WXDLLIMPEXP_BASE);
+WX_DECLARE_OBJARRAY(wxDateTime, wxDateTimeArray);
 
 // ----------------------------------------------------------------------------
 // wxDateTimeHolidayAuthority: an object of this class will decide whether a
@@ -1539,9 +1539,8 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxDateTime, wxDateTimeArray, WXDLLIMPEXP_BASE)
 // ----------------------------------------------------------------------------
 
 class wxDateTimeHolidayAuthority;
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxDateTimeHolidayAuthority *,
-                              wxHolidayAuthoritiesArray,
-                              class WXDLLIMPEXP_BASE);
+WX_DEFINE_ARRAY_PTR(wxDateTimeHolidayAuthority *,
+                              wxHolidayAuthoritiesArray);
 
 class wxDateTimeHolidaysModule;
 class wxDateTimeHolidayAuthority

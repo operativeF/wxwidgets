@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_COMMANDLINKBUTTON
 
-class WXDLLIMPEXP_XRC wxCommandLinkButtonXmlHandler : public wxXmlResourceHandler
+class wxCommandLinkButtonXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxCommandLinkButtonXmlHandler();

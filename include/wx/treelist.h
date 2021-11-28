@@ -78,8 +78,8 @@ public:
 using wxTreeListItems = std::vector<wxTreeListItem>;
 
 // Some special "items" that can be used with InsertItem():
-extern WXDLLIMPEXP_DATA_CORE(const wxTreeListItem) wxTLI_FIRST;
-extern WXDLLIMPEXP_DATA_CORE(const wxTreeListItem) wxTLI_LAST;
+extern const wxTreeListItem wxTLI_FIRST;
+extern const wxTreeListItem wxTLI_LAST;
 
 // ----------------------------------------------------------------------------
 // wxTreeListItemComparator: defines order of wxTreeListCtrl items.
@@ -527,7 +527,7 @@ typedef void (wxEvtHandler::*wxTreeListEventFunction)(wxTreeListEvent&);
     wx__DECLARE_EVT1(wxEVT_TREELIST_##name, id, wxTreeListEventHandler(fn))
 
 #define wxDECLARE_TREELIST_EVENT(name) \
-    wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, \
+    wxDECLARE_EVENT( \
                               wxEVT_TREELIST_##name, \
                               wxTreeListEvent)
 

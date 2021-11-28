@@ -26,7 +26,7 @@ class wxHtmlHelpData;
 // helper classes & structs
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlBookRecord
+class wxHtmlBookRecord
 {
 public:
     wxHtmlBookRecord(const wxString& bookfile, const wxString& basepath,
@@ -71,10 +71,9 @@ protected:
 };
 
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlBookRecord, wxHtmlBookRecArray,
-                                  WXDLLIMPEXP_HTML);
+WX_DECLARE_OBJARRAY(wxHtmlBookRecord, wxHtmlBookRecArray);
 
-struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
+struct wxHtmlHelpDataItem
 {
     wxHtmlHelpDataItem()  = default;
 
@@ -92,8 +91,7 @@ struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
     wxString GetIndentedName() const;
 };
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems,
-                                  WXDLLIMPEXP_HTML);
+WX_DECLARE_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems);
 
 
 //------------------------------------------------------------------------------
@@ -102,7 +100,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems,
 //                  of keyword(s)
 //------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlSearchEngine
+class wxHtmlSearchEngine
 {
 public:
     wxHtmlSearchEngine()  = default;
@@ -129,7 +127,7 @@ private:
 // nested class inside wxHtmlHelpData, but that's against coding standards :-(
 // Never construct this class yourself, obtain a copy from
 // wxHtmlHelpData::PrepareKeywordSearch(const wxString& key)
-class WXDLLIMPEXP_HTML wxHtmlSearchStatus
+class wxHtmlSearchStatus
 {
 public:
     // constructor; supply wxHtmlHelpData ptr, the keyword and (optionally) the
@@ -161,7 +159,7 @@ private:
     // For progress bar: 100*curindex/maxindex = % complete
 };
 
-class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
+class wxHtmlHelpData : public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpData);
     friend class wxHtmlSearchStatus;

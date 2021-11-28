@@ -16,7 +16,7 @@
 
 class wxWindow;
 
-class WXDLLIMPEXP_XRC wxMdiXmlHandler : public wxXmlResourceHandler
+class wxMdiXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxMdiXmlHandler);
 

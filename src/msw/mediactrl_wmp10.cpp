@@ -606,7 +606,7 @@ public:
 //
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_MEDIA wxWMP10MediaBackend : public wxMediaBackendCommonBase
+class wxWMP10MediaBackend : public wxMediaBackendCommonBase
 {
 public:
     wxWMP10MediaBackend() = default;
@@ -672,7 +672,7 @@ public:
 };
 
 #ifndef WXTEST_ATL
-class WXDLLIMPEXP_MEDIA wxWMP10MediaEvtHandler : public wxEvtHandler
+class wxWMP10MediaEvtHandler : public wxEvtHandler
 {
 public:
     explicit wxWMP10MediaEvtHandler(wxWMP10MediaBackend *amb) :

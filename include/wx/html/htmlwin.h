@@ -54,7 +54,7 @@ enum class wxHtmlOpeningStatus
 //-----------------------------------------------------------------------------
 
 // item of history list
-class WXDLLIMPEXP_HTML wxHtmlHistoryItem
+class wxHtmlHistoryItem
 {
 public:
     wxHtmlHistoryItem(const std::string& p, const std::string& a) : m_Page(p), m_Anchor(a), m_Pos(0) { }
@@ -74,7 +74,7 @@ private:
     wxHtmlListBox) that is passed to wxHtmlWinParser. It encapsulates all
     communication from the parser to the window.
  */
-class WXDLLIMPEXP_HTML wxHtmlWindowInterface
+class wxHtmlWindowInterface
 {
 public:
     virtual ~wxHtmlWindowInterface() = default;
@@ -150,7 +150,7 @@ public:
     wxHtmlListBox. Cursor changes and clicking on links are handled, text
     selection is not.
  */
-class WXDLLIMPEXP_HTML wxHtmlWindowMouseHelper
+class wxHtmlWindowMouseHelper
 {
 protected:
     /**
@@ -250,7 +250,7 @@ using wxHtmlHistoryArray = std::vector<std::unique_ptr<wxHtmlHistoryItem>>;
 //                  SetPage(text) or LoadPage(filename).
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlWindow : public wxScrolledWindow,
+class wxHtmlWindow : public wxScrolledWindow,
                                       public wxHtmlWindowInterface,
                                       public wxHtmlWindowMouseHelper
 {
@@ -585,16 +585,16 @@ private:
 
 class wxHtmlCellEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_HTML, wxEVT_HTML_CELL_CLICKED, wxHtmlCellEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_HTML, wxEVT_HTML_CELL_HOVER, wxHtmlCellEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_HTML, wxEVT_HTML_LINK_CLICKED, wxHtmlLinkEvent );
+wxDECLARE_EVENT( wxEVT_HTML_CELL_CLICKED, wxHtmlCellEvent );
+wxDECLARE_EVENT( wxEVT_HTML_CELL_HOVER, wxHtmlCellEvent );
+wxDECLARE_EVENT( wxEVT_HTML_LINK_CLICKED, wxHtmlLinkEvent );
 
 
 /*!
  * Html cell window event
  */
 
-class WXDLLIMPEXP_HTML wxHtmlCellEvent : public wxCommandEvent
+class wxHtmlCellEvent : public wxCommandEvent
 {
 public:
     wxHtmlCellEvent() = default;
@@ -640,7 +640,7 @@ public:
  * Html link event
  */
 
-class WXDLLIMPEXP_HTML wxHtmlLinkEvent : public wxCommandEvent
+class wxHtmlLinkEvent : public wxCommandEvent
 {
 public:
     wxHtmlLinkEvent() = default;

@@ -23,7 +23,7 @@
 
 
 #ifndef SWIG
-extern WXDLLIMPEXP_DATA_PROPGRID(const char) wxPropertyGridNameStr[];
+extern const char wxPropertyGridNameStr[];
 #endif
 
 class wxPGComboBox;
@@ -37,7 +37,7 @@ class wxStatusBar;
 // -----------------------------------------------------------------------
 
 // This is required for sharing common global variables.
-class WXDLLIMPEXP_PROPGRID wxPGGlobalVarsClass
+class wxPGGlobalVarsClass
 {
 public:
 
@@ -101,7 +101,7 @@ public:
     int HasExtraStyle( int style ) const { return (m_extraStyle & style); }
 };
 
-extern WXDLLIMPEXP_DATA_PROPGRID(wxPGGlobalVarsClass*) wxPGGlobalVars;
+extern wxPGGlobalVarsClass* wxPGGlobalVars;
 
 #define wxPGVariant_EmptyString     (wxPGGlobalVars->m_vEmptyString)
 #define wxPGVariant_Zero            (wxPGGlobalVars->m_vZero)
@@ -113,7 +113,7 @@ extern WXDLLIMPEXP_DATA_PROPGRID(wxPGGlobalVarsClass*) wxPGGlobalVars;
 
 // When wxPG is loaded dynamically after the application is already running
 // then the built-in module system won't pick this one up.  Add it manually.
-WXDLLIMPEXP_PROPGRID void wxPGInitResourceModule();
+void wxPGInitResourceModule();
 
 // -----------------------------------------------------------------------
 
@@ -290,7 +290,7 @@ wxPG_EX_WINDOW_STYLE_MASK = wxPG_EX_WINDOW_PG_STYLE_MASK|wxPG_EX_WINDOW_PGMAN_ST
 // records.
 // NB: Common value feature is not complete, and thus not mentioned in
 // documentation.
-class WXDLLIMPEXP_PROPGRID wxPGCommonValue
+class wxPGCommonValue
 {
 public:
 
@@ -365,7 +365,7 @@ wxPG_VFB_UNDEFINED                  = 0x80
 // Used to convey validation information to and from functions that
 // actually perform validation. Mostly used in custom property
 // classes.
-class WXDLLIMPEXP_PROPGRID wxPGValidationInfo
+class wxPGValidationInfo
 {
     friend class wxPropertyGrid;
 public:
@@ -599,7 +599,7 @@ enum wxPG_INTERNAL_FLAGS
 // Use Freeze() and Thaw() respectively to disable and enable drawing. This
 // will also delay sorting etc. miscellaneous calculations to the last
 // possible moment.
-class WXDLLIMPEXP_PROPGRID wxPropertyGrid : public wxScrolled<wxControl>,
+class wxPropertyGrid : public wxScrolled<wxControl>,
                                             public wxPropertyGridInterface
 {
     friend class wxPropertyGridEvent;
@@ -1827,25 +1827,20 @@ private:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_SELECTED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_CHANGING, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_CHANGED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_HIGHLIGHTED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_RIGHT_CLICK, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_PAGE_CHANGED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_ITEM_COLLAPSED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_ITEM_EXPANDED, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID, wxEVT_PG_DOUBLE_CLICK, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID,
-                          wxEVT_PG_LABEL_EDIT_BEGIN, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID,
-                          wxEVT_PG_LABEL_EDIT_ENDING, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID,
-                          wxEVT_PG_COL_BEGIN_DRAG, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID,
-                          wxEVT_PG_COL_DRAGGING, wxPropertyGridEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_PROPGRID,
-                          wxEVT_PG_COL_END_DRAG, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_SELECTED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_CHANGING, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_CHANGED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_HIGHLIGHTED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_RIGHT_CLICK, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_PAGE_CHANGED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_ITEM_COLLAPSED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_ITEM_EXPANDED, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_DOUBLE_CLICK, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_LABEL_EDIT_BEGIN, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_LABEL_EDIT_ENDING, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_COL_BEGIN_DRAG, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_COL_DRAGGING, wxPropertyGridEvent );
+wxDECLARE_EVENT( wxEVT_PG_COL_END_DRAG, wxPropertyGridEvent );
 // Events used only internally
 wxDECLARE_EVENT(wxEVT_PG_HSCROLL, wxPropertyGridEvent);
 wxDECLARE_EVENT(wxEVT_PG_COLS_RESIZED, wxPropertyGridEvent);
@@ -1900,7 +1895,7 @@ typedef void (wxEvtHandler::*wxPropertyGridEventFunction)(wxPropertyGridEvent&);
 
 // A propertygrid event holds information about events associated with
 // wxPropertyGrid objects.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridEvent : public wxCommandEvent
+class wxPropertyGridEvent : public wxCommandEvent
 {
 public:
 
@@ -2062,7 +2057,7 @@ private:
 // -----------------------------------------------------------------------
 
 // Allows populating wxPropertyGrid from arbitrary text source.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridPopulator
+class wxPropertyGridPopulator
 {
 public:
     // Default constructor.

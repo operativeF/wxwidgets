@@ -319,16 +319,16 @@ public:
     void *asArray() const;
 
         // input/output
-    friend WXDLLIMPEXP_BASE
+    friend
     std::ostream& operator<<(std::ostream&, const wxLongLongNative&);
 
-    friend WXDLLIMPEXP_BASE
+    friend
     wxString& operator<<(wxString&, const wxLongLongNative&);
 
 #if wxUSE_STREAMS
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextOutputStream& operator<<(class wxTextOutputStream&, const wxLongLongNative&);
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextInputStream& operator>>(class wxTextInputStream&, wxLongLongNative&);
 #endif
 
@@ -533,16 +533,16 @@ public:
     void *asArray() const;
 
     // input/output
-    friend WXDLLIMPEXP_BASE
+    friend
     std::ostream& operator<<(std::ostream&, const wxULongLongNative&);
 
-    friend WXDLLIMPEXP_BASE
+    friend
     wxString& operator<<(wxString&, const wxULongLongNative&);
 
 #if wxUSE_STREAMS
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextOutputStream& operator<<(class wxTextOutputStream&, const wxULongLongNative&);
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextInputStream& operator>>(class wxTextInputStream&, wxULongLongNative&);
 #endif
 
@@ -770,16 +770,16 @@ public:
 
     void *asArray() const;
 
-    friend WXDLLIMPEXP_BASE
+    friend
     std::ostream& operator<<(std::ostream&, const wxLongLongWx&);
 
-    friend WXDLLIMPEXP_BASE
+    friend
     wxString& operator<<(wxString&, const wxLongLongWx&);
 
 #if wxUSE_STREAMS
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextOutputStream& operator<<(class wxTextOutputStream&, const wxLongLongWx&);
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextInputStream& operator>>(class wxTextInputStream&, wxLongLongWx&);
 #endif
 
@@ -983,16 +983,16 @@ public:
 
     void *asArray() const;
 
-    friend WXDLLIMPEXP_BASE
+    friend
     std::ostream& operator<<(std::ostream&, const wxULongLongWx&);
 
-    friend WXDLLIMPEXP_BASE
+    friend
     wxString& operator<<(wxString&, const wxULongLongWx&);
 
 #if wxUSE_STREAMS
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextOutputStream& operator<<(class wxTextOutputStream&, const wxULongLongWx&);
-    friend WXDLLIMPEXP_BASE
+    friend
     class wxTextInputStream& operator>>(class wxTextInputStream&, wxULongLongWx&);
 #endif
 

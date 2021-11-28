@@ -113,7 +113,7 @@ HINTERNET wxWinINetURL::GetSessionHandle()
 }
 
 // this class needn't be exported
-class /*WXDLLIMPEXP_NET */ wxWinINetInputStream : public wxInputStream
+class /**/ wxWinINetInputStream : public wxInputStream
 {
 public:
     wxWinINetInputStream(HINTERNET hFile=0);

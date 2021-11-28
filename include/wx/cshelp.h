@@ -196,8 +196,7 @@ private:
     inline static wxHelpProvider *ms_helpProvider{nullptr};
 };
 
-WX_DECLARE_EXPORTED_HASH_MAP( wxUIntPtr, std::string, wxIntegerHash,
-                              wxIntegerEqual, wxSimpleHelpProviderHashMap );
+WX_DECLARE_HASH_MAP( wxUIntPtr, std::string, wxIntegerHash, wxIntegerEqual, wxSimpleHelpProviderHashMap );
 
 // wxSimpleHelpProvider is an implementation of wxHelpProvider which supports
 // only plain text help strings and shows the string associated with the

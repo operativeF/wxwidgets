@@ -40,7 +40,7 @@ class wxTextCtrl;
 
 // hash storing attributes for our items
 class wxItemAttr;
-WX_DECLARE_EXPORTED_VOIDPTR_HASH_MAP(wxItemAttr *, wxMapTreeAttr);
+WX_DECLARE_VOIDPTR_HASH_MAP(wxItemAttr *, wxMapTreeAttr);
 
 // indices in gs_expandEvents table below
 enum

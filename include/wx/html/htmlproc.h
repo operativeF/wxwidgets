@@ -26,7 +26,7 @@ enum
 // processors before displaying it, thus allowing for on-the-fly
 // modifications of the markup.
 
-class WXDLLIMPEXP_HTML wxHtmlProcessor : public wxObject
+class wxHtmlProcessor : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxHtmlProcessor);
 

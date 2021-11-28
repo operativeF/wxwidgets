@@ -165,11 +165,11 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND, wxFindDialogEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND_NEXT, wxFindDialogEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND_REPLACE, wxFindDialogEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND_REPLACE_ALL, wxFindDialogEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND_CLOSE, wxFindDialogEvent );
+wxDECLARE_EVENT( wxEVT_FIND, wxFindDialogEvent );
+wxDECLARE_EVENT( wxEVT_FIND_NEXT, wxFindDialogEvent );
+wxDECLARE_EVENT( wxEVT_FIND_REPLACE, wxFindDialogEvent );
+wxDECLARE_EVENT( wxEVT_FIND_REPLACE_ALL, wxFindDialogEvent );
+wxDECLARE_EVENT( wxEVT_FIND_CLOSE, wxFindDialogEvent );
 
 typedef void (wxEvtHandler::*wxFindDialogEventFunction)(wxFindDialogEvent&);
 

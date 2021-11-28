@@ -51,7 +51,7 @@ class wxStdDialogButtonSizer;
  * wxSymbolPickerDialog class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxSymbolPickerDialog: public wxDialog
+class wxSymbolPickerDialog: public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxSymbolPickerDialog);
     wxDECLARE_EVENT_TABLE();
@@ -187,7 +187,7 @@ public:
  * The scrolling symbol list.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxSymbolListCtrl : public wxVScrolledWindow
+class wxSymbolListCtrl : public wxVScrolledWindow
 {
 public:
     wxSymbolListCtrl() = default;

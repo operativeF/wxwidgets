@@ -19,7 +19,7 @@
 class wxRibbonBar;
 class wxRibbonArtProvider;
 
-class WXDLLIMPEXP_RIBBON wxRibbonControl : public wxControl
+class wxRibbonControl : public wxControl
 {
 public:
     wxRibbonControl() {  m_art = nullptr;  }
@@ -74,7 +74,7 @@ private:
 #endif
 };
 
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonControl*, wxArrayRibbonControl, class WXDLLIMPEXP_RIBBON);
+WX_DEFINE_ARRAY_PTR(wxRibbonControl*, wxArrayRibbonControl, class);
 
 #endif // wxUSE_RIBBON
 

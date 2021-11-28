@@ -39,7 +39,7 @@ enum class wxRichTextPageLocation {
  * Header/footer data
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextHeaderFooterData: public wxObject
+class wxRichTextHeaderFooterData: public wxObject
 {
 public:
     wxRichTextHeaderFooterData() = default;
@@ -100,7 +100,7 @@ private:
  * wxRichTextPrintout
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextPrintout : public wxPrintout
+class wxRichTextPrintout : public wxPrintout
 {
 public:
     wxRichTextPrintout(const wxString& title = wxGetTranslation("Printout"));
@@ -154,7 +154,7 @@ private:
  * A simple interface to perform wxRichTextBuffer printing.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextPrinting : public wxObject
+class wxRichTextPrinting : public wxObject
 {
 public:
     wxRichTextPrinting(const wxString& name = wxGetTranslation("Printing"), wxWindow *parentWindow = nullptr);

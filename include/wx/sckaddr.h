@@ -24,7 +24,7 @@ class wxSockAddressImpl;
 struct sockaddr;
 
 // Any socket address kind
-class WXDLLIMPEXP_NET wxSockAddress
+class wxSockAddress
 {
 public:
     enum Family
@@ -61,7 +61,7 @@ protected:
 };
 
 // An IP address (either IPv4 or IPv6)
-class WXDLLIMPEXP_NET wxIPaddress : public wxSockAddress
+class wxIPaddress : public wxSockAddress
 {
 public:
     bool operator==(const wxIPaddress& addr) const;
@@ -103,7 +103,7 @@ private:
 };
 
 // An IPv4 address
-class WXDLLIMPEXP_NET wxIPV4address : public wxIPaddress
+class wxIPV4address : public wxIPaddress
 {
 public:
     // implement wxSockAddress pure virtuals:
@@ -135,7 +135,7 @@ private:
 #if wxUSE_IPV6
 
 // An IPv6 address
-class WXDLLIMPEXP_NET wxIPV6address : public wxIPaddress
+class wxIPV6address : public wxIPaddress
 {
 public:
     // implement wxSockAddress pure virtuals:
@@ -169,7 +169,7 @@ private:
 #ifdef wxHAS_UNIX_DOMAIN_SOCKETS
 
 // A Unix domain socket address
-class WXDLLIMPEXP_NET wxUNIXaddress : public wxSockAddress
+class wxUNIXaddress : public wxSockAddress
 {
 public:
     void Filename(const wxString& name);

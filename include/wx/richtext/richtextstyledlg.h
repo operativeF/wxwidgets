@@ -96,7 +96,7 @@ inline constexpr unsigned int wxRICHTEXT_ORGANISER_BROWSE_NUMBERING = (wxRICHTEX
  * wxRichTextStyleOrganiserDialog class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleOrganiserDialog: public wxDialog
+class wxRichTextStyleOrganiserDialog: public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextStyleOrganiserDialog);
     wxDECLARE_EVENT_TABLE();

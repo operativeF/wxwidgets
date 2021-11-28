@@ -24,7 +24,7 @@
 
 #include "wx/arrimpl.cpp"
 
-WX_DEFINE_USER_EXPORTED_OBJARRAY(wxDynamicLibraryDetailsArray)
+WX_DEFINE_OBJARRAY(wxDynamicLibraryDetailsArray)
 
 // ============================================================================
 // implementation

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_BMPBUTTON
 
-class WXDLLIMPEXP_XRC wxBitmapButtonXmlHandler : public wxXmlResourceHandler
+class wxBitmapButtonXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxBitmapButtonXmlHandler);
 

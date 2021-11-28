@@ -80,7 +80,7 @@ enum {
  * Factory for formatting dialog
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialogFactory: public wxObject
+class wxRichTextFormattingDialogFactory: public wxObject
 {
 public:
     /// Create all pages, under the dialog's book control, also calling AddPage
@@ -112,7 +112,7 @@ public:
  * Formatting dialog for a wxRichTextCtrl
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialog: public wxPropertySheetDialog,
+class wxRichTextFormattingDialog: public wxPropertySheetDialog,
                                                        public wxWithImages
 {
     wxDECLARE_CLASS(wxRichTextFormattingDialog);
@@ -270,7 +270,7 @@ protected:
 // helper class - wxRichTextFontPreviewCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFontPreviewCtrl : public wxWindow
+class wxRichTextFontPreviewCtrl : public wxWindow
 {
 public:
     wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, unsigned int style = 0);
@@ -289,7 +289,7 @@ private:
  * A control for displaying a small preview of a colour or bitmap
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextColourSwatchCtrl: public wxControl
+class wxRichTextColourSwatchCtrl: public wxControl
 {
     wxDECLARE_CLASS(wxRichTextColourSwatchCtrl);
 public:
@@ -314,7 +314,7 @@ protected:
  * A listbox to display fonts.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFontListBox: public wxHtmlListBox
+class wxRichTextFontListBox: public wxHtmlListBox
 {
     wxDECLARE_CLASS(wxRichTextFontListBox);
     wxDECLARE_EVENT_TABLE();

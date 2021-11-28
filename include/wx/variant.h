@@ -93,7 +93,7 @@ protected:
 
 class wxVariant;
 
-WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class WXDLLIMPEXP_BASE);
+WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class);
 
 class wxVariant: public wxObject
 {

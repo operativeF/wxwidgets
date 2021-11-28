@@ -31,7 +31,7 @@
     though the application set them for individual pages if it wants.
  **/
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextUICustomization
+class wxRichTextUICustomization
 {
 public:
     virtual ~wxRichTextUICustomization() = default;
@@ -46,7 +46,7 @@ public:
     and also the customization object that will allow help to be shown appropriately for the application.
  **/
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextHelpInfo
+class wxRichTextHelpInfo
 {
 public:
     virtual ~wxRichTextHelpInfo() = default;

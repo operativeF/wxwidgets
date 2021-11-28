@@ -102,7 +102,7 @@ private:
     bool m_bEllipsized{false};
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
+WX_DECLARE_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
 
 // ----------------------------------------------------------------------------
 // wxStatusBar: a window near the bottom of the frame used for status info

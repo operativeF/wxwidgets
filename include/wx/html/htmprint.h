@@ -27,7 +27,7 @@ import <vector>;
 //                  portion of DC
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlDCRenderer : public wxObject
+class wxHtmlDCRenderer : public wxObject
 {
 public:
     wxHtmlDCRenderer();
@@ -110,7 +110,7 @@ enum class wxHeaderFooterPaging
 //--------------------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_HTML wxHtmlPrintout : public wxPrintout
+class wxHtmlPrintout : public wxPrintout
 {
 public:
     wxHtmlPrintout(const wxString& title = "Printout");
@@ -228,7 +228,7 @@ private:
 //                         stores page&printer settings in it.
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlEasyPrinting : public wxObject
+class wxHtmlEasyPrinting : public wxObject
 {
 public:
     wxHtmlEasyPrinting(const wxString& name = "Printing", wxWindow *parentWindow = nullptr);

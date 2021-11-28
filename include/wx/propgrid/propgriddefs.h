@@ -247,15 +247,15 @@ typedef int (*wxPGSortCallback)(wxPropertyGrid* propGrid,
 
 WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(wxPGProperty*, wxArrayPGProperty,
                                   wxBaseArrayPtrVoid,
-                                  class WXDLLIMPEXP_PROPGRID);
+                                  class);
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(void*,
                                      wxPGHashMapS2P,
-                                     class WXDLLIMPEXP_PROPGRID);
+                                     class);
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxString,
                                      wxPGHashMapS2S,
-                                     class WXDLLIMPEXP_PROPGRID);
+                                     class);
 
 using wxPGHashMapP2P = std::unordered_map< void*, void*, wxPointerHash, wxPointerEqual >;
 
@@ -377,9 +377,9 @@ enum wxPG_SETVALUE_FLAGS
 // Macro for declaring editor class, with optional impexpdecl part.
 #ifndef WX_PG_DECLARE_EDITOR_WITH_DECL
 
-    #define WX_PG_DECLARE_EDITOR_WITH_DECL(EDITOR,DECL) \
-    extern DECL wxPGEditor* wxPGEditor_##EDITOR; \
-    extern DECL wxPGEditor* wxPGConstruct##EDITOR##EditorClass();
+    #define WX_PG_DECLARE_EDITOR_WITH_DECL(EDITOR) \
+    extern wxPGEditor* wxPGEditor_##EDITOR; \
+    extern wxPGEditor* wxPGConstruct##EDITOR##EditorClass();
 
 #endif
 
@@ -389,14 +389,14 @@ extern wxPGEditor* wxPGEditor_##EDITOR; \
 extern wxPGEditor* wxPGConstruct##EDITOR##EditorClass();
 
 // Declare built-in editor classes.
-WX_PG_DECLARE_EDITOR_WITH_DECL(TextCtrl,WXDLLIMPEXP_PROPGRID)
-WX_PG_DECLARE_EDITOR_WITH_DECL(Choice,WXDLLIMPEXP_PROPGRID)
-WX_PG_DECLARE_EDITOR_WITH_DECL(ComboBox,WXDLLIMPEXP_PROPGRID)
-WX_PG_DECLARE_EDITOR_WITH_DECL(TextCtrlAndButton,WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_EDITOR_WITH_DECL(TextCtrl)
+WX_PG_DECLARE_EDITOR_WITH_DECL(Choice)
+WX_PG_DECLARE_EDITOR_WITH_DECL(ComboBox)
+WX_PG_DECLARE_EDITOR_WITH_DECL(TextCtrlAndButton)
 #if wxPG_INCLUDE_CHECKBOX
-WX_PG_DECLARE_EDITOR_WITH_DECL(CheckBox,WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_EDITOR_WITH_DECL(CheckBox)
 #endif
-WX_PG_DECLARE_EDITOR_WITH_DECL(ChoiceAndButton,WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_EDITOR_WITH_DECL(ChoiceAndButton)
 
 // -----------------------------------------------------------------------
 
@@ -449,22 +449,18 @@ template<> inline wxVariant WXVARIANT( const wxDateTime& value )
 #define WX_PG_DECLARE_VARIANT_DATA(classname) \
     WX_PG_DECLARE_VARIANT_DATA_EXPORTED(classname, wxEMPTY_PARAMETER_VALUE)
 
-#define WX_PG_DECLARE_VARIANT_DATA_EXPORTED(classname,expdecl) \
-expdecl classname& operator << ( classname &object, const wxVariant &variant ); \
-expdecl wxVariant& operator << ( wxVariant &variant, const classname &object ); \
-expdecl const classname& classname##RefFromVariant( const wxVariant& variant ); \
-expdecl classname& classname##RefFromVariant( wxVariant& variant ); \
+#define WX_PG_DECLARE_VARIANT_DATA_EXPORTED(classname) \
+classname& operator << ( classname &object, const wxVariant &variant ); \
+wxVariant& operator << ( wxVariant &variant, const classname &object ); \
+const classname& classname##RefFromVariant( const wxVariant& variant ); \
+classname& classname##RefFromVariant( wxVariant& variant ); \
 template<> inline wxVariant WXVARIANT( const classname& value ) \
 { \
     wxVariant variant; \
     variant << value; \
     return variant; \
 } \
-extern expdecl const char* classname##_VariantType;
-
-
-#define WX_PG_IMPLEMENT_VARIANT_DATA(classname) \
-    WX_PG_IMPLEMENT_VARIANT_DATA_EXPORTED(classname, wxEMPTY_PARAMETER_VALUE)
+extern const char* classname##_VariantType;
 
 // Add getter (i.e. classname << variant) separately to allow
 // custom implementations.
@@ -570,9 +566,9 @@ bool classname##VariantData::Eq([[maybe_unused]] wxVariantData& data) const \
 #define WX_PG_IMPLEMENT_VARIANT_DATA_DUMMY_EQ(classname) \
 WX_PG_IMPLEMENT_VARIANT_DATA_EXPORTED_DUMMY_EQ(classname, wxEMPTY_PARAMETER_VALUE)
 
-WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxPoint, WXDLLIMPEXP_PROPGRID)
-WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxSize, WXDLLIMPEXP_PROPGRID)
-WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxArrayInt, WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxPoint)
+WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxSize)
+WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxArrayInt)
 DECLARE_VARIANT_OBJECT_EXPORTED(wxFont)
 template<> inline wxVariant WXVARIANT( const wxFont& value )
 {
@@ -637,7 +633,7 @@ template<> inline wxVariant WXVARIANT( const wxColour& value )
 // class implementation is in propgrid.cpp
 //
 
-class WXDLLIMPEXP_PROPGRID wxPGStringTokenizer
+class wxPGStringTokenizer
 {
 public:
     wxPGStringTokenizer( const wxString& str, wxChar delimiter );

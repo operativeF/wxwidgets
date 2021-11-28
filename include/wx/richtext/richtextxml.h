@@ -27,7 +27,7 @@
     saving a buffer if needed.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHelper: public wxObject
+class wxRichTextXMLHelper: public wxObject
 {
 public:
     wxRichTextXMLHelper() = default;
@@ -171,7 +171,7 @@ public:
 class wxXmlNode;
 class wxXmlDocument;
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHandler: public wxRichTextFileHandler
+class wxRichTextXMLHandler: public wxRichTextFileHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextXMLHandler);
 public:

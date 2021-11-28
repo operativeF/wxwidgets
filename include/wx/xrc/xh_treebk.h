@@ -17,8 +17,7 @@
 class  wxTreebook;
 #include "wx/dynarray.h"
 
-WX_DEFINE_USER_EXPORTED_ARRAY_SIZE_T(size_t, wxArrayTbkPageIndexes,
-                                     class WXDLLIMPEXP_XRC);
+WX_DEFINE_ARRAY_SIZE_T(size_t, wxArrayTbkPageIndexes, class);
 
 // ---------------------------------------------------------------------
 // wxTreebookXmlHandler class
@@ -28,7 +27,7 @@ WX_DEFINE_USER_EXPORTED_ARRAY_SIZE_T(size_t, wxArrayTbkPageIndexes,
 // which indicates the depth of the page in the tree.
 // There is only one logical constraint on this parameter :
 // it cannot be greater than the previous page depth plus one
-class WXDLLIMPEXP_XRC wxTreebookXmlHandler : public wxXmlResourceHandler
+class wxTreebookXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxTreebookXmlHandler);
 

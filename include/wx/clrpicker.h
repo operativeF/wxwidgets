@@ -149,9 +149,9 @@ private:
 // wxColourPickerEvent: used by wxColourPickerCtrl only
 // ----------------------------------------------------------------------------
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_CHANGED, wxColourPickerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_CURRENT_CHANGED, wxColourPickerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_DIALOG_CANCELLED, wxColourPickerEvent );
+wxDECLARE_EVENT( wxEVT_COLOURPICKER_CHANGED, wxColourPickerEvent );
+wxDECLARE_EVENT( wxEVT_COLOURPICKER_CURRENT_CHANGED, wxColourPickerEvent );
+wxDECLARE_EVENT( wxEVT_COLOURPICKER_DIALOG_CANCELLED, wxColourPickerEvent );
 
 class wxColourPickerEvent : public wxCommandEvent
 {

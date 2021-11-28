@@ -28,7 +28,7 @@
 import <algorithm>;
 import <vector>;
 
-WX_DEFINE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfoArray)
+WX_DEFINE_OBJARRAY(wxRibbonPageTabInfoArray)
 
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGED, wxRibbonBarEvent);
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGING, wxRibbonBarEvent);

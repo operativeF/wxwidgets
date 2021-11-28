@@ -24,7 +24,7 @@ inline int CMPFUNC_CONV wxUIntCmp(unsigned n1, unsigned n2)
     return (int)(n1 - n2);
 }
 
-WX_DEFINE_SORTED_EXPORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
+WX_DEFINE_SORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
 
 // ----------------------------------------------------------------------------
 // wxSelectionStore is used to store the selected items in the virtual

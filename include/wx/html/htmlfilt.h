@@ -22,7 +22,7 @@
 //                  kinds of files (HTPP, FTP, local, tar.gz etc..)
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlFilter : public wxObject
+class wxHtmlFilter : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxHtmlFilter);
 public:
@@ -44,7 +44,7 @@ public:
 //--------------------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_HTML wxHtmlFilterPlainText : public wxHtmlFilter
+class wxHtmlFilterPlainText : public wxHtmlFilter
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterPlainText);
 

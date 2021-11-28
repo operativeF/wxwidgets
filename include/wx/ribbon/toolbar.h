@@ -19,7 +19,7 @@ import WX.Cfg.Flags;
 
 struct wxRibbonToolBarToolBase;
 class wxRibbonToolBarToolGroup;
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonToolBarToolGroup*, wxArrayRibbonToolBarToolGroup, class WXDLLIMPEXP_RIBBON);
+WX_DEFINE_ARRAY_PTR(wxRibbonToolBarToolGroup*, wxArrayRibbonToolBarToolGroup, class);
 
 enum wxRibbonToolBarToolState
 {
@@ -39,7 +39,7 @@ enum wxRibbonToolBarToolState
 };
 
 
-class WXDLLIMPEXP_RIBBON wxRibbonToolBar : public wxRibbonControl
+class wxRibbonToolBar : public wxRibbonControl
 {
 public:
     wxRibbonToolBar();
@@ -199,7 +199,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_RIBBON wxRibbonToolBarEvent : public wxCommandEvent
+class wxRibbonToolBarEvent : public wxCommandEvent
 {
 public:
     wxRibbonToolBarEvent(wxEventType command_type = wxEVT_NULL,
@@ -230,8 +230,8 @@ private:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONTOOLBAR_CLICKED, wxRibbonToolBarEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONTOOLBAR_DROPDOWN_CLICKED, wxRibbonToolBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONTOOLBAR_CLICKED, wxRibbonToolBarEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONTOOLBAR_DROPDOWN_CLICKED, wxRibbonToolBarEvent);
 
 typedef void (wxEvtHandler::*wxRibbonToolBarEventFunction)(wxRibbonToolBarEvent&);
 

@@ -25,7 +25,7 @@ class wxXmlNode;
 // wxDebugReport: generate a debug report, processing is done in derived class
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_QA wxDebugReport
+class wxDebugReport
 {
     friend class wxDebugReportDialog;
 
@@ -135,7 +135,7 @@ private:
 // wxDebugReportCompress: compress all files of this debug report in a .ZIP
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_QA wxDebugReportCompress : public wxDebugReport
+class wxDebugReportCompress : public wxDebugReport
 {
 public:
     // you can optionally specify the directory and/or name of the file where
@@ -169,7 +169,7 @@ private:
 // wxDebugReportUploader: uploads compressed file using HTTP POST request
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_QA wxDebugReportUpload : public wxDebugReportCompress
+class wxDebugReportUpload : public wxDebugReportCompress
 {
 public:
     // this class will upload the compressed file created by its base class to
@@ -217,7 +217,7 @@ private:
 //                       to veto report entirely or remove some parts of it
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_QA wxDebugReportPreview
+class wxDebugReportPreview
 {
 public:
     // present the report to the user and allow him to modify it by removing
@@ -237,7 +237,7 @@ public:
 // wxDebugReportPreviewStd: standard debug report preview window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_QA wxDebugReportPreviewStd : public wxDebugReportPreview
+class wxDebugReportPreviewStd : public wxDebugReportPreview
 {
 public:
     bool Show(wxDebugReport& dbgrpt) const override;

@@ -74,7 +74,7 @@ inline constexpr std::string_view wxGLCanvasName = "GLCanvas";
 // wxGLAttribsBase: OpenGL rendering attributes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLAttribsBase
+class wxGLAttribsBase
 {
 public:
     wxGLAttribsBase() { Reset(); }
@@ -113,7 +113,7 @@ private:
 // wxGLContextAttrs: OpenGL rendering context attributes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLContextAttrs : public wxGLAttribsBase
+class wxGLContextAttrs : public wxGLAttribsBase
 {
 public:
     // Setters, allowing chained calls
@@ -143,7 +143,7 @@ public:
 // wxGLAttributes: canvas configuration
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLAttributes : public wxGLAttribsBase
+class wxGLAttributes : public wxGLAttribsBase
 {
 public:
     // Setters, allowing chained calls
@@ -174,7 +174,7 @@ public:
 // wxGLContextBase: OpenGL rendering context
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLContextBase : public wxObject
+class wxGLContextBase : public wxObject
 {
 public:
 
@@ -197,7 +197,7 @@ protected:
 // wxGLCanvasBase: window which can be used for OpenGL rendering
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLCanvasBase : public wxWindow
+class wxGLCanvasBase : public wxWindow
 {
 public:
     wxGLCanvasBase();
@@ -287,7 +287,7 @@ protected:
 //          to select a visual compatible with the given attributes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLAppBase : public wxApp
+class wxGLAppBase : public wxApp
 {
 public:
     wxGLAppBase()  = default;
@@ -317,7 +317,7 @@ public:
 // wxMac and wxMSW don't need anything extra in wxGLAppBase, so declare it here
 #ifndef wxGL_APP_DEFINED
 
-class WXDLLIMPEXP_GL wxGLApp : public wxGLAppBase
+class wxGLApp : public wxGLAppBase
 {
 public:
     wxGLApp()  = default;
@@ -340,7 +340,7 @@ private:
     #define wxUSE_OPENGL_EMULATION 0
 #endif
 
-class WXDLLIMPEXP_GL wxGLAPI : public wxObject
+class wxGLAPI : public wxObject
 {
 public:
     wxGLAPI();

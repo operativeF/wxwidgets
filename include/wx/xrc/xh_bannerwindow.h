@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_BANNERWINDOW
 
-class WXDLLIMPEXP_XRC wxBannerWindowXmlHandler : public wxXmlResourceHandler
+class wxBannerWindowXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxBannerWindowXmlHandler();

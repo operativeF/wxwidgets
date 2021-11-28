@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_TREECTRL
 
-class WXDLLIMPEXP_XRC wxTreeCtrlXmlHandler : public wxXmlResourceHandler
+class wxTreeCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxTreeCtrlXmlHandler);
 

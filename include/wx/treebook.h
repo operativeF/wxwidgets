@@ -224,10 +224,10 @@ public:
 // treebook event class and related stuff
 // ----------------------------------------------------------------------------
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_PAGE_CHANGED, wxBookCtrlEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_NODE_COLLAPSED, wxBookCtrlEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_NODE_EXPANDED, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_TREEBOOK_PAGE_CHANGED, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_TREEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_TREEBOOK_NODE_COLLAPSED, wxBookCtrlEvent );
+wxDECLARE_EVENT( wxEVT_TREEBOOK_NODE_EXPANDED, wxBookCtrlEvent );
 
 #define EVT_TREEBOOK_PAGE_CHANGED(winid, fn) \
     wx__DECLARE_EVT1(wxEVT_TREEBOOK_PAGE_CHANGED, winid, wxBookCtrlEventHandler(fn))

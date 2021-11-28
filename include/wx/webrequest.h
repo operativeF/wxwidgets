@@ -56,7 +56,7 @@ using wxWebRequestImplPtr = wxObjectDataPtr<wxWebRequestImpl>;
 using wxWebResponseImplPtr = wxObjectDataPtr<wxWebResponseImpl>;
 using wxWebSessionImplPtr = wxObjectDataPtr<wxWebSessionImpl>;
 
-class WXDLLIMPEXP_NET wxWebAuthChallenge
+class wxWebAuthChallenge
 {
 public:
     enum Source
@@ -84,7 +84,7 @@ private:
     wxWebAuthChallengeImplPtr m_impl;
 };
 
-class WXDLLIMPEXP_NET wxWebResponse
+class wxWebResponse
 {
 public:
     wxWebResponse();
@@ -123,7 +123,7 @@ protected:
     wxWebResponseImplPtr m_impl;
 };
 
-class WXDLLIMPEXP_NET wxWebRequest
+class wxWebRequest
 {
 public:
     enum State
@@ -198,11 +198,11 @@ private:
     wxWebRequestImplPtr m_impl;
 };
 
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendWinHTTP[];
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendURLSession[];
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendCURL[];
+extern const char wxWebSessionBackendWinHTTP[];
+extern const char wxWebSessionBackendURLSession[];
+extern const char wxWebSessionBackendCURL[];
 
-class WXDLLIMPEXP_NET wxWebSession
+class wxWebSession
 {
 public:
     // Default ctor creates an invalid session object, only IsOpened() can be
@@ -250,7 +250,7 @@ private:
     wxWebSessionImplPtr m_impl;
 };
 
-class WXDLLIMPEXP_NET wxWebRequestEvent : public wxEvent
+class wxWebRequestEvent : public wxEvent
 {
 public:
     wxWebRequestEvent(wxEventType type = wxEVT_NULL,
@@ -289,8 +289,8 @@ private:
     wxString m_errorDescription;
 };
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_NET, wxEVT_WEBREQUEST_STATE, wxWebRequestEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_NET, wxEVT_WEBREQUEST_DATA, wxWebRequestEvent);
+wxDECLARE_EVENT(wxEVT_WEBREQUEST_STATE, wxWebRequestEvent);
+wxDECLARE_EVENT(wxEVT_WEBREQUEST_DATA, wxWebRequestEvent);
 
 #endif // wxUSE_WEBREQUEST
 

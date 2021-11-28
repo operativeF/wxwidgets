@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC
 
-class WXDLLIMPEXP_XRC wxPanelXmlHandler : public wxXmlResourceHandler
+class wxPanelXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxPanelXmlHandler);
 

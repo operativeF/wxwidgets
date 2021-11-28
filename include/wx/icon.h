@@ -66,7 +66,7 @@ inline constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxIcon)
+DECLARE_VARIANT_OBJECT(wxIcon)
 #endif
 
 

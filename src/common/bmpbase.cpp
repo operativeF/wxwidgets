@@ -24,8 +24,8 @@ import WX.Image;
 // ----------------------------------------------------------------------------
 
 #if wxUSE_VARIANT
-IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxBitmap,WXDLLEXPORT)
-IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxIcon,WXDLLEXPORT)
+IMPLEMENT_VARIANT_SHALLOWCMP(wxBitmap)
+IMPLEMENT_VARIANT_SHALLOWCMP(wxIcon)
 #endif
 
 #if wxUSE_EXTENDED_RTTI

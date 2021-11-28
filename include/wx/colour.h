@@ -75,7 +75,7 @@ inline constexpr unsigned char wxALPHA_OPAQUE = 0xff;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxColour)
+DECLARE_VARIANT_OBJECT(wxColour)
 #endif
 
 /*

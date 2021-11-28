@@ -34,7 +34,7 @@ class wxTimerImpl;
 class wxTimerEvent;
 
 // timer event type
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_BASE, wxEVT_TIMER, wxTimerEvent);
+wxDECLARE_EVENT(wxEVT_TIMER, wxTimerEvent);
 
 using namespace std::chrono_literals;
 

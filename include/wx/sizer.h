@@ -526,7 +526,7 @@ private:
     wxDECLARE_CLASS(wxSizerItem);
 };
 
-WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
+WX_DECLARE_LIST( wxSizerItem, wxSizerItemList );
 
 
 //---------------------------------------------------------------------------

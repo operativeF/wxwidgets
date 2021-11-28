@@ -115,7 +115,7 @@ enum
 
 #if wxUSE_LONGLONG
 // error code of wxFileName::GetSize()
-extern WXDLLIMPEXP_DATA_BASE(const wxULongLong) wxInvalidSize;
+extern const wxULongLong wxInvalidSize;
 #endif // wxUSE_LONGLONG
 
 // ----------------------------------------------------------------------------

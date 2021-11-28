@@ -18,14 +18,6 @@
 #include "wx/textbuf.h"
 #include "wx/versioninfo.h"
 
-#ifdef WXMAKINGDLL_XML
-    #define WXDLLIMPEXP_XML WXEXPORT
-#elif defined(WXUSINGDLL)
-    #define WXDLLIMPEXP_XML WXIMPORT
-#else // not making nor using DLL
-    #define WXDLLIMPEXP_XML
-#endif
-
 class wxXmlNode;
 class wxXmlAttribute;
 class wxXmlDocument;
@@ -57,7 +49,7 @@ enum wxXmlNodeType
 // Example: in <img src="hello.gif" id="3"/> "src" is property with value
 //          "hello.gif" and "id" is prop. with value "3".
 
-class WXDLLIMPEXP_XML wxXmlAttribute
+class wxXmlAttribute
 {
 public:
     wxXmlAttribute()  = default;
@@ -85,7 +77,7 @@ private:
 // are irrelevant) and wxXML_ELEMENT_NODE (e.g. in <title>hi</title> there is
 // element with name="title", irrelevant content and one child (wxXML_TEXT_NODE
 // with content="hi").
-class WXDLLIMPEXP_XML wxXmlNode
+class wxXmlNode
 {
 public:
     wxXmlNode() = default;
@@ -177,7 +169,7 @@ private:
     void DoCopy(const wxXmlNode& node);
 };
 
-class WXDLLIMPEXP_XML wxXmlDoctype
+class wxXmlDoctype
 {
 public:
     explicit
@@ -221,7 +213,7 @@ enum wxXmlDocumentLoadFlag
 
 // This class holds XML data/document as parsed by XML parser.
 
-class WXDLLIMPEXP_XML wxXmlDocument : public wxObject
+class wxXmlDocument : public wxObject
 {
 public:
     wxXmlDocument();

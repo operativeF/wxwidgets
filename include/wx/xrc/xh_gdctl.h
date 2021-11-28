@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_DIRDLG
 
-class WXDLLIMPEXP_XRC wxGenericDirCtrlXmlHandler : public wxXmlResourceHandler
+class wxGenericDirCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxGenericDirCtrlXmlHandler);
 

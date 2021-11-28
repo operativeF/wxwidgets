@@ -247,7 +247,7 @@ protected:
 };
 
 #include "wx/dynarray.h"
-WX_DECLARE_OBJARRAY_WITH_DECL(wxVariantBase, wxVariantBaseArray, class WXDLLIMPEXP_BASE);
+WX_DECLARE_OBJARRAY_WITH_DECL(wxVariantBase, wxVariantBaseArray, class);
 
 
 // templated streaming, every type must have their specialization for these methods

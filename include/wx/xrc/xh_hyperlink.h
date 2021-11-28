@@ -15,7 +15,7 @@
 
 #if wxUSE_XRC && wxUSE_HYPERLINKCTRL
 
-class WXDLLIMPEXP_XRC wxHyperlinkCtrlXmlHandler : public wxXmlResourceHandler
+class wxHyperlinkCtrlXmlHandler : public wxXmlResourceHandler
 {
     // Register with wxWindows' dynamic class subsystem.
     wxDECLARE_DYNAMIC_CLASS(wxHyperlinkCtrlXmlHandler);

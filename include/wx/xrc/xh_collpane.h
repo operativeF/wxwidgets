@@ -16,7 +16,7 @@
 
 class wxCollapsiblePane;
 
-class WXDLLIMPEXP_XRC wxCollapsiblePaneXmlHandler : public wxXmlResourceHandler
+class wxCollapsiblePaneXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxCollapsiblePaneXmlHandler();

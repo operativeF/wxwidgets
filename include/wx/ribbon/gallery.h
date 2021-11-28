@@ -19,9 +19,9 @@ import WX.Cfg.Flags;
 
 class wxRibbonGalleryItem;
 
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem, class WXDLLIMPEXP_RIBBON);
+WX_DEFINE_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem, class);
 
-class WXDLLIMPEXP_RIBBON wxRibbonGallery : public wxRibbonControl
+class wxRibbonGallery : public wxRibbonControl
 {
 public:
     wxRibbonGallery() = default;
@@ -128,7 +128,7 @@ protected:
 #endif
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonGalleryEvent : public wxCommandEvent
+class wxRibbonGalleryEvent : public wxCommandEvent
 {
 public:
     wxRibbonGalleryEvent(wxEventType command_type = wxEVT_NULL,
@@ -169,9 +169,9 @@ private:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONGALLERY_HOVER_CHANGED, wxRibbonGalleryEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONGALLERY_SELECTED, wxRibbonGalleryEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONGALLERY_CLICKED, wxRibbonGalleryEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONGALLERY_HOVER_CHANGED, wxRibbonGalleryEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONGALLERY_SELECTED, wxRibbonGalleryEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONGALLERY_CLICKED, wxRibbonGalleryEvent);
 
 typedef void (wxEvtHandler::*wxRibbonGalleryEventFunction)(wxRibbonGalleryEvent&);
 

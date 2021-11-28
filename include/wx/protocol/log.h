@@ -16,7 +16,7 @@
 // wxProtocolLog: simple class for logging network requests and responses
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_NET wxProtocolLog
+class wxProtocolLog
 {
 public:
     // Create object doing the logging using wxLogTrace() with the specified

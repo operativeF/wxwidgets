@@ -480,7 +480,7 @@ WX_DECLARE_STRING_HASH_MAP(wxString, wxWebRequestHeaderMap);
 
 namespace wxPrivate
 {
-WXDLLIMPEXP_NET wxString
+wxString
 SplitParameters(const wxString& s, wxWebRequestHeaderMap& parameters);
 }
 

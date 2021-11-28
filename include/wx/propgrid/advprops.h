@@ -20,18 +20,17 @@
 //
 // Additional Value Type Handlers
 //
-bool WXDLLIMPEXP_PROPGRID
-operator==(const wxArrayInt& array1, const wxArrayInt& array2);
+bool operator==(const wxArrayInt& array1, const wxArrayInt& array2);
 
 //
 // Additional Property Editors
 //
 #if wxUSE_SPINBTN
-WX_PG_DECLARE_EDITOR_WITH_DECL(SpinCtrl,WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_EDITOR_WITH_DECL(SpinCtrl, )
 #endif
 
 #if wxUSE_DATEPICKCTRL
-WX_PG_DECLARE_EDITOR_WITH_DECL(DatePickerCtrl,WXDLLIMPEXP_PROPGRID)
+WX_PG_DECLARE_EDITOR_WITH_DECL(DatePickerCtrl, )
 #endif
 
 // -----------------------------------------------------------------------
@@ -49,7 +48,7 @@ WX_PG_DECLARE_EDITOR_WITH_DECL(DatePickerCtrl,WXDLLIMPEXP_PROPGRID)
 // platforms, wxSystemColourProperty must be able to select between system
 // colour and, when necessary, to pick a custom one. wxSystemColourProperty
 // value makes this possible.
-class WXDLLIMPEXP_PROPGRID wxColourPropertyValue : public wxObject
+class wxColourPropertyValue : public wxObject
 {
 public:
     // An integer value relating to the colour, and which exact
@@ -119,15 +118,14 @@ private:
 };
 
 
-bool WXDLLIMPEXP_PROPGRID
-operator==(const wxColourPropertyValue&, const wxColourPropertyValue&);
+bool operator==(const wxColourPropertyValue&, const wxColourPropertyValue&);
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxColourPropertyValue)
+DECLARE_VARIANT_OBJECT(wxColourPropertyValue)
 
 // -----------------------------------------------------------------------
 
 // Property representing wxFont.
-class WXDLLIMPEXP_PROPGRID wxFontProperty : public wxEditorDialogProperty
+class wxFontProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxFontProperty)
 public:
@@ -156,7 +154,7 @@ protected:
 
 // Has dropdown list of wxWidgets system colours. Value used is
 // of wxColourPropertyValue type.
-class WXDLLIMPEXP_PROPGRID wxSystemColourProperty : public wxEnumProperty
+class wxSystemColourProperty : public wxEnumProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxSystemColourProperty)
 public:
@@ -230,7 +228,7 @@ protected:
 
 // -----------------------------------------------------------------------
 
-class WXDLLIMPEXP_PROPGRID wxColourProperty : public wxSystemColourProperty
+class wxColourProperty : public wxSystemColourProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxColourProperty)
 public:
@@ -251,7 +249,7 @@ private:
 // -----------------------------------------------------------------------
 
 // Property representing wxCursor.
-class WXDLLIMPEXP_PROPGRID wxCursorProperty : public wxEnumProperty
+class wxCursorProperty : public wxEnumProperty
 {
     wxDECLARE_DYNAMIC_CLASS(wxCursorProperty);
 
@@ -268,12 +266,12 @@ class WXDLLIMPEXP_PROPGRID wxCursorProperty : public wxEnumProperty
 
 #if wxUSE_IMAGE
 
-WXDLLIMPEXP_PROPGRID const wxString& wxPGGetDefaultImageWildcard();
+const wxString& wxPGGetDefaultImageWildcard();
 class wxBitmap;
 class wxImage;
 
 // Property representing image file(name).
-class WXDLLIMPEXP_PROPGRID wxImageFileProperty : public wxFileProperty
+class wxImageFileProperty : public wxFileProperty
 {
     wxDECLARE_DYNAMIC_CLASS(wxImageFileProperty);
 public:
@@ -305,7 +303,7 @@ private:
 // Property that manages a value resulting from wxMultiChoiceDialog. Value is
 // array of strings. You can get value as array of choice values/indices by
 // calling wxMultiChoiceProperty::GetValueAsArrayInt().
-class WXDLLIMPEXP_PROPGRID wxMultiChoiceProperty : public wxEditorDialogProperty
+class wxMultiChoiceProperty : public wxEditorDialogProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxMultiChoiceProperty)
 public:
@@ -358,7 +356,7 @@ protected:
 #if wxUSE_DATETIME
 
 // Property representing wxDateTime.
-class WXDLLIMPEXP_PROPGRID wxDateProperty : public wxPGProperty
+class wxDateProperty : public wxPGProperty
 {
     WX_PG_DECLARE_PROPERTY_CLASS(wxDateProperty)
 public:
@@ -436,7 +434,7 @@ protected:
 // NOTE: Regardless that this class inherits from a working editor, it has
 //   all necessary methods to work independently. wxTextCtrl stuff is only
 //   used for event handling here.
-class WXDLLIMPEXP_PROPGRID wxPGSpinCtrlEditor : public wxPGTextCtrlEditor
+class wxPGSpinCtrlEditor : public wxPGTextCtrlEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGSpinCtrlEditor);
 public:

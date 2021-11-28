@@ -46,7 +46,7 @@ class wxRichTextBorderPreviewCtrl;
  * wxRichTextBordersPage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBordersPage: public wxRichTextDialogPage
+class wxRichTextBordersPage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBordersPage);
     wxDECLARE_EVENT_TABLE();
@@ -280,7 +280,7 @@ public:
     ////@end wxRichTextBordersPage member variables
 };
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBorderPreviewCtrl : public wxWindow
+class wxRichTextBorderPreviewCtrl : public wxWindow
 {
 public:
     wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, unsigned int style = 0);

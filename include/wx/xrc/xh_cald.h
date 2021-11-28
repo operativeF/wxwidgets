@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_CALENDARCTRL
 
-class WXDLLIMPEXP_XRC wxCalendarCtrlXmlHandler : public wxXmlResourceHandler
+class wxCalendarCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrlXmlHandler);
 

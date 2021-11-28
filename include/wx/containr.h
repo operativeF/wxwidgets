@@ -253,7 +253,6 @@ public:
         return m_container.HasTransparentBackground();
     }
 
-    WXDLLIMPEXP_INLINE_CORE
     void WXSetPendingFocus(wxWindow* win) override
     {
         return m_container.SetLastFocus(win);

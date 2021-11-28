@@ -23,7 +23,7 @@ class wxHtmlEntitiesParser;
 
 class wxHtmlTagsCacheData;
 
-class WXDLLIMPEXP_HTML wxHtmlTagsCache
+class wxHtmlTagsCache
 {
 private:
     wxHtmlTagsCacheData *m_Cache;
@@ -54,7 +54,7 @@ public:
 //                  by wxHtmlParser.
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlTag
+class wxHtmlTag
 {
 protected:
     // constructs wxHtmlTag object based on HTML tag.

@@ -296,22 +296,9 @@ private:
 #define WX_DECLARE_LIST_PTR(elementtype, listname)                          \
     WX_DECLARE_LIST(elementtype, listname)
 
-#define WX_DECLARE_EXPORTED_LIST(elementtype, listname)                     \
-    WX_DECLARE_LIST_WITH_DECL(elementtype, listname, class WXDLLIMPEXP_CORE)
-#define WX_DECLARE_EXPORTED_LIST_PTR(elementtype, listname)                 \
-    WX_DECLARE_EXPORTED_LIST(elementtype, listname)
-
-#define WX_DECLARE_USER_EXPORTED_LIST(elementtype, listname, usergoo)       \
-    WX_DECLARE_LIST_WITH_DECL(elementtype, listname, class usergoo)
-#define WX_DECLARE_USER_EXPORTED_LIST_PTR(elementtype, listname, usergoo)   \
-    WX_DECLARE_USER_EXPORTED_LIST(elementtype, listname, usergoo)
-
 // this macro must be inserted in your program after
 //      #include "wx/listimpl.cpp"
 #define WX_DEFINE_LIST(name)    "don't forget to include listimpl.cpp!"
-
-#define WX_DEFINE_EXPORTED_LIST(name)      WX_DEFINE_LIST(name)
-#define WX_DEFINE_USER_EXPORTED_LIST(name) WX_DEFINE_LIST(name)
 
 // ============================================================================
 // now we can define classes 100% compatible with the old ones
@@ -330,8 +317,7 @@ private:
 // wxList compatibility class: in fact, it's a list of wxObjects
 // ----------------------------------------------------------------------------
 
-WX_DECLARE_LIST_2(wxObject, wxObjectList, wxObjectListNode,
-                        class WXDLLIMPEXP_BASE);
+WX_DECLARE_LIST_2(wxObject, wxObjectList, wxObjectListNode, class);
 
 class wxList : public wxObjectList
 {
@@ -352,7 +338,7 @@ public:
 
 };
 
-WX_DECLARE_LIST_XO(wxString, wxStringListBase, class WXDLLIMPEXP_BASE);
+WX_DECLARE_LIST_XO(wxString, wxStringListBase, class);
 
 class wxStringList : public wxStringListBase
 {

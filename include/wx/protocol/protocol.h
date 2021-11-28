@@ -45,7 +45,7 @@ enum wxProtocolError
 // wxProtocol: abstract base class for all protocols
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_NET wxProtocol
+class wxProtocol
 #if wxUSE_SOCKETS
  : public wxSocketClient
 #else
@@ -154,7 +154,7 @@ bool wxProtocolUse##class = true;
         wxProtocolUserFor##class() { wxProtocolUse##class = true; } \
     } wxProtocolDoUse##class;
 
-class WXDLLIMPEXP_NET wxProtoInfo : public wxObject
+class wxProtoInfo : public wxObject
 {
 public:
     wxProtoInfo(const wxChar *name,

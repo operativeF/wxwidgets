@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_BUTTON
 
-class WXDLLIMPEXP_XRC wxButtonXmlHandler : public wxXmlResourceHandler
+class wxButtonXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxButtonXmlHandler);
 

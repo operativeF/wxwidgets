@@ -1474,7 +1474,6 @@ TEST_CASE("TestTranslateFromUnicodeFormat")
 #if defined(WX_WINDOWS) || defined(__WXOSX__)
     // This function is defined in src/common/intl.cpp and as it is not public we
     // need to declare it here explicitly.
-    WXDLLIMPEXP_BASE
     wxString wxTranslateFromUnicodeFormat(const wxString& fmt);
 
 

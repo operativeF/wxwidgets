@@ -17,7 +17,7 @@
 class wxWizard;
 class wxWizardPageSimple;
 
-class WXDLLIMPEXP_XRC wxWizardXmlHandler : public wxXmlResourceHandler
+class wxWizardXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxWizardXmlHandler);
 

@@ -35,7 +35,7 @@ class wxDC;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap)
+DECLARE_VARIANT_OBJECT(wxBitmap)
 #endif
 
 // ----------------------------------------------------------------------------

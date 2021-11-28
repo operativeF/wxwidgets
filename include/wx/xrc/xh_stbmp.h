@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_STATBMP
 
-class WXDLLIMPEXP_XRC wxStaticBitmapXmlHandler : public wxXmlResourceHandler
+class wxStaticBitmapXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxStaticBitmapXmlHandler);
 

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_TOGGLEBTN
 
-class WXDLLIMPEXP_XRC wxToggleButtonXmlHandler : public wxXmlResourceHandler
+class wxToggleButtonXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxToggleButtonXmlHandler);
 

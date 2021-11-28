@@ -361,7 +361,7 @@ wxALLOW_COMBINING_ENUMS(wxTextAttrUnits, wxTextAttrValueFlags)
     @see wxRichTextAttr, wxRichTextCtrl,  wxTextAttrDimensions
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrDimension
+class wxTextAttrDimension
 {
 public:
     /**
@@ -490,7 +490,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl, wxTextAttrDimension
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrDimensions
+class wxTextAttrDimensions
 {
 public:
     /**
@@ -584,7 +584,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl, wxTextAttrDimension
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrSize
+class wxTextAttrSize
 {
 public:
     /**
@@ -687,7 +687,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl, wxTextAttrDimension
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrDimensionConverter
+class wxTextAttrDimensionConverter
 {
 public:
     /**
@@ -850,7 +850,7 @@ enum wxTextBoxAttrWhitespaceMode
     @see wxRichTextAttr, wxRichTextCtrl, wxRichTextAttrBorders
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrBorder
+class wxTextAttrBorder
 {
 public:
     /**
@@ -1009,7 +1009,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl, wxRichTextAttrBorder
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrBorders
+class wxTextAttrBorders
 {
 public:
     /**
@@ -1128,7 +1128,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextAttrShadow
+class wxTextAttrShadow
 {
 public:
     /**
@@ -1309,7 +1309,7 @@ public:
     @see wxRichTextAttr, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxTextBoxAttr
+class wxTextBoxAttr
 {
 public:
     /**
@@ -1750,7 +1750,7 @@ public:
     @see wxRichTextAttr, wxTextBoxAttr, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextAttr: public wxTextAttr
+class wxRichTextAttr: public wxTextAttr
 {
 public:
     /**
@@ -1833,11 +1833,11 @@ public:
     wxTextBoxAttr    m_textBoxAttr;
 };
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRichTextAttr, wxRichTextAttrArray, WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_USER_OBJARRAY(wxRichTextAttr, wxRichTextAttrArray);
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxVariant, wxRichTextVariantArray, WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_USER_OBJARRAY(wxVariant, wxRichTextVariantArray);
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRect, wxRichTextRectArray, WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_USER_OBJARRAY(wxRect, wxRichTextRectArray);
 
 /**
     @class wxRichTextProperties
@@ -1850,7 +1850,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRect, wxRichTextRectArray, WXDLLIMPEXP_RICHT
     @see wxRichTextBuffer, wxRichTextObject, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextProperties: public wxObject
+class wxRichTextProperties: public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextProperties);
 public:
@@ -2025,7 +2025,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFontTable: public wxObject
+class wxRichTextFontTable: public wxObject
 {
 public:
     /**
@@ -2092,7 +2092,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextRange
+class wxRichTextRange
 {
 public:
 // Constructors
@@ -2213,7 +2213,7 @@ protected:
     long m_end;
 };
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRichTextRange, wxRichTextRangeArray, WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_USER_OBJARRAY(wxRichTextRange, wxRichTextRangeArray);
 
 #define wxRICHTEXT_ALL  wxRichTextRange(-2, -2)
 #define wxRICHTEXT_NONE  wxRichTextRange(-1, -1)
@@ -2236,7 +2236,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRichTextRange, wxRichTextRangeArray, WXDLLIM
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextSelection
+class wxRichTextSelection
 {
 public:
     /**
@@ -2392,7 +2392,7 @@ public:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextDrawingContext: public wxObject
+class wxRichTextDrawingContext: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextDrawingContext);
 public:
@@ -2520,7 +2520,7 @@ public:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextObject: public wxObject
+class wxRichTextObject: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextObject);
 public:
@@ -3094,7 +3094,7 @@ protected:
     wxRichTextProperties    m_properties;
 };
 
-WX_DECLARE_LIST_WITH_DECL( wxRichTextObject, wxRichTextObjectList, class WXDLLIMPEXP_RICHTEXT );
+WX_DECLARE_LIST_WITH_DECL( wxRichTextObject, wxRichTextObjectList, class );
 
 /**
     @class wxRichTextCompositeObject
@@ -3107,7 +3107,7 @@ WX_DECLARE_LIST_WITH_DECL( wxRichTextObject, wxRichTextObjectList, class WXDLLIM
     @see wxRichTextObject, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCompositeObject: public wxRichTextObject
+class wxRichTextCompositeObject: public wxRichTextObject
 {
     wxDECLARE_CLASS(wxRichTextCompositeObject);
 public:
@@ -3227,7 +3227,7 @@ protected:
     @see wxRichTextCompositeObject, wxRichTextObject, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextParagraphLayoutBox: public wxRichTextCompositeObject
+class wxRichTextParagraphLayoutBox: public wxRichTextCompositeObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextParagraphLayoutBox);
 public:
@@ -3831,7 +3831,7 @@ protected:
     @see wxRichTextParagraphLayoutBox, wxRichTextObject, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBox: public wxRichTextParagraphLayoutBox
+class wxRichTextBox: public wxRichTextParagraphLayoutBox
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBox);
 public:
@@ -3911,7 +3911,7 @@ public:
     @see wxRichTextFieldTypeStandard, wxRichTextFieldType, wxRichTextParagraphLayoutBox, wxRichTextProperties, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextField: public wxRichTextParagraphLayoutBox
+class wxRichTextField: public wxRichTextParagraphLayoutBox
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextField);
 public:
@@ -3993,7 +3993,7 @@ public:
     @see wxRichTextFieldTypeStandard, wxRichTextField, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFieldType: public wxObject
+class wxRichTextFieldType: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextFieldType);
 public:
@@ -4107,7 +4107,7 @@ WX_DECLARE_STRING_HASH_MAP(wxRichTextFieldType*, wxRichTextFieldTypeHashMap);
     @see wxRichTextFieldType, wxRichTextField, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFieldTypeStandard: public wxRichTextFieldType
+class wxRichTextFieldTypeStandard: public wxRichTextFieldType
 {
     wxDECLARE_CLASS(wxRichTextFieldTypeStandard);
 public:
@@ -4343,7 +4343,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextLine
+class wxRichTextLine
 {
 public:
 // Constructors
@@ -4464,7 +4464,7 @@ protected:
 #endif
 };
 
-WX_DECLARE_LIST_WITH_DECL( wxRichTextLine, wxRichTextLineList , class WXDLLIMPEXP_RICHTEXT );
+WX_DECLARE_LIST_WITH_DECL( wxRichTextLine, wxRichTextLineList , class );
 
 /**
     @class wxRichTextParagraph
@@ -4477,7 +4477,7 @@ WX_DECLARE_LIST_WITH_DECL( wxRichTextLine, wxRichTextLineList , class WXDLLIMPEX
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextParagraph: public wxRichTextCompositeObject
+class wxRichTextParagraph: public wxRichTextCompositeObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextParagraph);
 public:
@@ -4661,7 +4661,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextPlainText: public wxRichTextObject
+class wxRichTextPlainText: public wxRichTextObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextPlainText);
 public:
@@ -4767,7 +4767,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextImageBlock: public wxObject
+class wxRichTextImageBlock: public wxObject
 {
 public:
     wxRichTextImageBlock() = default;
@@ -4921,7 +4921,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl, wxRichTextImageBlock
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextImage: public wxRichTextObject
+class wxRichTextImage: public wxRichTextObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextImage);
 public:
@@ -5064,7 +5064,7 @@ class wxRichTextAction;
     @see wxRichTextParagraphLayoutBox, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBuffer: public wxRichTextParagraphLayoutBox
+class wxRichTextBuffer: public wxRichTextParagraphLayoutBox
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBuffer);
 public:
@@ -5864,7 +5864,7 @@ protected:
     wxRichTextCell is the cell in a table.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCell: public wxRichTextBox
+class wxRichTextCell: public wxRichTextBox
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextCell);
 public:
@@ -5939,9 +5939,9 @@ protected:
  */
 
 WX_DEFINE_ARRAY_PTR(wxRichTextObject*, wxRichTextObjectPtrArray);
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRichTextObjectPtrArray, wxRichTextObjectPtrArrayArray, WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_USER_OBJARRAY(wxRichTextObjectPtrArray, wxRichTextObjectPtrArrayArray);
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextTable: public wxRichTextBox
+class wxRichTextTable: public wxRichTextBox
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextTable);
 public:
@@ -6178,7 +6178,7 @@ private:
     Stores the coordinates for a block of cells.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextTableBlock
+class wxRichTextTableBlock
 {
 public:
     wxRichTextTableBlock() { Init(); }
@@ -6251,7 +6251,7 @@ enum wxRichTextCommandId
     @see wxRichTextCommand
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextObjectAddress
+class wxRichTextObjectAddress
 {
 public:
     /**
@@ -6321,7 +6321,7 @@ class wxRichTextAction;
     @see wxRichTextAction
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCommand: public wxCommand
+class wxRichTextCommand: public wxCommand
 {
 public:
     /**
@@ -6385,7 +6385,7 @@ protected:
     @see wxRichTextCommand
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextAction: public wxObject
+class wxRichTextAction: public wxObject
 {
 public:
     /**
@@ -6617,7 +6617,7 @@ inline constexpr unsigned int wxRICHTEXT_HANDLER_CONVERT_FACENAMES        = 0x01
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextFileHandler: public wxObject
+class wxRichTextFileHandler: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextFileHandler);
 public:
@@ -6772,7 +6772,7 @@ protected:
     @see wxRichTextFileHandler, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextPlainTextHandler: public wxRichTextFileHandler
+class wxRichTextPlainTextHandler: public wxRichTextFileHandler
 {
     wxDECLARE_CLASS(wxRichTextPlainTextHandler);
 public:
@@ -6809,7 +6809,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextDrawingHandler: public wxObject
+class wxRichTextDrawingHandler: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextDrawingHandler);
 public:
@@ -6932,7 +6932,7 @@ protected:
     @see wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextRenderer: public wxObject
+class wxRichTextRenderer: public wxObject
 {
 public:
 
@@ -6973,7 +6973,7 @@ public:
     @see wxRichTextRenderer, wxRichTextBuffer, wxRichTextCtrl
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStdRenderer: public wxRichTextRenderer
+class wxRichTextStdRenderer: public wxRichTextRenderer
 {
 public:
     /**
@@ -7011,35 +7011,35 @@ inline bool wxRichTextHasStyle(unsigned int flags, unsigned int style)
 }
 
 /// Compare two attribute objects
-WXDLLIMPEXP_RICHTEXT bool wxTextAttrEq(const wxRichTextAttr& attr1, const wxRichTextAttr& attr2);
-WXDLLIMPEXP_RICHTEXT bool wxTextAttrEq(const wxRichTextAttr& attr1, const wxRichTextAttr& attr2);
+bool wxTextAttrEq(const wxRichTextAttr& attr1, const wxRichTextAttr& attr2);
+bool wxTextAttrEq(const wxRichTextAttr& attr1, const wxRichTextAttr& attr2);
 
 /// Apply one style to another
-WXDLLIMPEXP_RICHTEXT bool wxRichTextApplyStyle(wxRichTextAttr& destStyle, const wxRichTextAttr& style, wxRichTextAttr* compareWith = nullptr);
+bool wxRichTextApplyStyle(wxRichTextAttr& destStyle, const wxRichTextAttr& style, wxRichTextAttr* compareWith = nullptr);
 
 // Remove attributes
-WXDLLIMPEXP_RICHTEXT bool wxRichTextRemoveStyle(wxRichTextAttr& destStyle, const wxRichTextAttr& style);
+bool wxRichTextRemoveStyle(wxRichTextAttr& destStyle, const wxRichTextAttr& style);
 
 /// Combine two bitlists
-WXDLLIMPEXP_RICHTEXT bool wxRichTextCombineBitlists(int& valueA, int valueB, int& flagsA, int flagsB);
+bool wxRichTextCombineBitlists(int& valueA, int valueB, int& flagsA, int flagsB);
 
 /// Compare two bitlists
-WXDLLIMPEXP_RICHTEXT bool wxRichTextBitlistsEqPartial(int valueA, int valueB, unsigned int flags);
+bool wxRichTextBitlistsEqPartial(int valueA, int valueB, unsigned int flags);
 
 /// Split into paragraph and character styles
-WXDLLIMPEXP_RICHTEXT bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& parStyle, wxRichTextAttr& charStyle);
+bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& parStyle, wxRichTextAttr& charStyle);
 
 /// Compare tabs
-WXDLLIMPEXP_RICHTEXT bool wxRichTextTabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2);
+bool wxRichTextTabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2);
 
 /// Convert a decimal to Roman numerals
-WXDLLIMPEXP_RICHTEXT wxString wxRichTextDecimalToRoman(long n);
+wxString wxRichTextDecimalToRoman(long n);
 
 // Collects the attributes that are common to a range of content, building up a note of
 // which attributes are absent in some objects and which clash in some objects.
-WXDLLIMPEXP_RICHTEXT void wxTextAttrCollectCommonAttributes(wxTextAttr& currentStyle, const wxTextAttr& attr, wxTextAttr& clashingAttr, wxTextAttr& absentAttr);
+void wxTextAttrCollectCommonAttributes(wxTextAttr& currentStyle, const wxTextAttr& attr, wxTextAttr& clashingAttr, wxTextAttr& absentAttr);
 
-WXDLLIMPEXP_RICHTEXT void wxRichTextModuleInit();
+void wxRichTextModuleInit();
 
 #endif
     // wxUSE_RICHTEXT

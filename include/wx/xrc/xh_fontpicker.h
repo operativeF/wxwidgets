@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_FONTPICKERCTRL
 
-class WXDLLIMPEXP_XRC wxFontPickerCtrlXmlHandler : public wxXmlResourceHandler
+class wxFontPickerCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxFontPickerCtrlXmlHandler);
 

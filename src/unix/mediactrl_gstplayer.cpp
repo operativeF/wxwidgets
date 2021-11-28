@@ -44,8 +44,7 @@ constexpr wxChar wxTRACE_GStreamer[] = "GStreamer";
 //  wxGStreamerMediaBackend
 //
 //-----------------------------------------------------------------------------
-class WXDLLIMPEXP_MEDIA
-    wxGStreamerMediaBackend : public wxMediaBackendCommonBase
+class wxGStreamerMediaBackend : public wxMediaBackendCommonBase
 {
 public:
 

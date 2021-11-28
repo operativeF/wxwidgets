@@ -17,7 +17,7 @@
 
 class wxWebViewEdgeImpl;
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewEdge : public wxWebView
+class wxWebViewEdge : public wxWebView
 {
 public:
 
@@ -114,7 +114,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxWebViewEdge);
 };
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewFactoryEdge : public wxWebViewFactory
+class wxWebViewFactoryEdge : public wxWebViewFactory
 {
 public:
     wxWebView* Create() override { return new wxWebViewEdge; }

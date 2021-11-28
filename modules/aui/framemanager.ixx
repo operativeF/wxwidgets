@@ -107,11 +107,11 @@ class wxAuiManagerEvent;
 struct wxAuiDockUIPart;
 
 #ifndef SWIG
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiDockInfo, wxAuiDockInfoArray, WXDLLIMPEXP_AUI);
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiDockUIPart, wxAuiDockUIPartArray, WXDLLIMPEXP_AUI);
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiPaneInfo, wxAuiPaneInfoArray, WXDLLIMPEXP_AUI);
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiPaneInfo*, wxAuiPaneInfoPtrArray, class WXDLLIMPEXP_AUI);
-WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiDockInfo*, wxAuiDockInfoPtrArray, class WXDLLIMPEXP_AUI);
+WX_DECLARE_OBJARRAY(wxAuiDockInfo, wxAuiDockInfoArray);
+WX_DECLARE_OBJARRAY(wxAuiDockUIPart, wxAuiDockUIPartArray);
+WX_DECLARE_OBJARRAY(wxAuiPaneInfo, wxAuiPaneInfoArray);
+WX_DEFINE_ARRAY_PTR(wxAuiPaneInfo*, wxAuiPaneInfoPtrArray);
+WX_DEFINE_ARRAY_PTR(wxAuiDockInfo*, wxAuiDockInfoPtrArray);
 #endif // SWIG
 
 class wxAuiPaneInfo

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_STATTEXT
 
-class WXDLLIMPEXP_XRC wxStaticTextXmlHandler : public wxXmlResourceHandler
+class wxStaticTextXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxStaticTextXmlHandler);
 

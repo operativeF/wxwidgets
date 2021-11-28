@@ -45,7 +45,7 @@ class wxRichTextColourSwatchCtrl;
  * wxRichTextBackgroundPage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBackgroundPage: public wxRichTextDialogPage
+class wxRichTextBackgroundPage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBackgroundPage);
     wxDECLARE_EVENT_TABLE();

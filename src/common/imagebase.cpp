@@ -63,7 +63,7 @@ WX_DEFINE_OBJARRAY(wxImageArray)
 #endif // HAS_FILE_STREAMS
 
 #if wxUSE_VARIANT
-IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxImage,WXDLLEXPORT)
+IMPLEMENT_VARIANT_SHALLOWCMP(wxImage,WXDLLEXPORT)
 #endif
 
 //-----------------------------------------------------------------------------

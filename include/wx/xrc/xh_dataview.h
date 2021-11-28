@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_DATAVIEWCTRL
 
-class WXDLLIMPEXP_XRC wxDataViewXmlHandler : public wxXmlResourceHandler
+class wxDataViewXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxDataViewXmlHandler);
 

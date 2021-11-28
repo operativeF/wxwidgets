@@ -152,7 +152,7 @@ protected:
 
 class wxProcessEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_BASE, wxEVT_END_PROCESS, wxProcessEvent );
+wxDECLARE_EVENT( wxEVT_END_PROCESS, wxProcessEvent );
 
 class wxProcessEvent : public wxEvent
 {

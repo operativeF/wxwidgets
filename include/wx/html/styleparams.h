@@ -18,7 +18,7 @@ class wxHtmlTag;
 // This is a private class used by wxHTML to parse "style" attributes of HTML
 // elements. Currently both parsing and support for the parsed values is pretty
 // trivial.
-class WXDLLIMPEXP_HTML wxHtmlStyleParams
+class wxHtmlStyleParams
 {
 public:
     // Construct a style parameters object corresponding to the style attribute

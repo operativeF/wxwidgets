@@ -39,7 +39,7 @@ inline constexpr char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";
 // wxHtmlListBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlListBox : public wxVListBox,
+class wxHtmlListBox : public wxVListBox,
                                        public wxHtmlWindowInterface,
                                        public wxHtmlWindowMouseHelper
 {
@@ -199,7 +199,7 @@ private:
 inline constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBORDER_SUNKEN;
 inline constexpr unsigned int wxHLB_MULTIPLE          = wxLB_MULTIPLE;
 
-class WXDLLIMPEXP_HTML wxSimpleHtmlListBox :
+class wxSimpleHtmlListBox :
     public wxWindowWithItems<wxHtmlListBox, wxItemContainer>
 {
     wxDECLARE_ABSTRACT_CLASS(wxSimpleHtmlListBox);

@@ -28,7 +28,7 @@ enum wxRibbonPanelOption
     wxRIBBON_PANEL_DEFAULT_STYLE    = 0
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonPanel : public wxRibbonControl
+class wxRibbonPanel : public wxRibbonControl
 {
 public:
     wxRibbonPanel();
@@ -140,7 +140,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_RIBBON wxRibbonPanelEvent : public wxCommandEvent
+class wxRibbonPanelEvent : public wxCommandEvent
 {
 public:
     wxRibbonPanelEvent(wxEventType command_type = wxEVT_NULL,
@@ -170,7 +170,7 @@ private:
 
 #ifndef SWIG
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_RIBBON, wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED, wxRibbonPanelEvent);
+wxDECLARE_EVENT(wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED, wxRibbonPanelEvent);
 
 typedef void (wxEvtHandler::*wxRibbonPanelEventFunction)(wxRibbonPanelEvent&);
 

@@ -651,7 +651,7 @@ unsigned int wxDataViewVirtualListModel::GetChildren( [[maybe_unused]] const wxD
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewIconText,wxObject);
 
-IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxDataViewIconText, WXDLLIMPEXP_CORE)
+IMPLEMENT_VARIANT_OBJECT(wxDataViewIconText, )
 
 // ---------------------------------------------------------
 // wxDataViewRendererBase
@@ -1963,7 +1963,7 @@ wxSize wxDataViewDateRenderer::GetSize() const
 
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL) || !defined(__WXOSX__)
 
-IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxDataViewCheckIconText, WXDLLIMPEXP_CORE)
+IMPLEMENT_VARIANT_OBJECT(wxDataViewCheckIconText)
 
 wxIMPLEMENT_CLASS(wxDataViewCheckIconText, wxDataViewIconText);
 

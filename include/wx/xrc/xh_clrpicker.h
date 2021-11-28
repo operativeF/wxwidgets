@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_COLOURPICKERCTRL
 
-class WXDLLIMPEXP_XRC wxColourPickerCtrlXmlHandler : public wxXmlResourceHandler
+class wxColourPickerCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxColourPickerCtrlXmlHandler);
 

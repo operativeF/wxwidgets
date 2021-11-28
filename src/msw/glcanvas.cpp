@@ -802,7 +802,7 @@ bool wxGLCanvasBase::IsExtensionSupported(const char *extension)
 // ----------------------------------------------------------------------------
 
 // A dummy window, needed at FindMatchingPixelFormat()
-class WXDLLIMPEXP_GL wxGLdummyWin : public wxWindow
+class wxGLdummyWin : public wxWindow
 {
 public:
     wxGLdummyWin()

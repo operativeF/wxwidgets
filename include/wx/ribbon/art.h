@@ -184,7 +184,7 @@ class wxRibbonGalleryItem;
 class wxRibbonPageTabInfo;
 class wxRibbonPageTabInfoArray;
 
-class WXDLLIMPEXP_RIBBON wxRibbonArtProvider
+class wxRibbonArtProvider
 {
 public:
     virtual ~wxRibbonArtProvider() = default;
@@ -394,7 +394,7 @@ public:
     virtual wxRect GetRibbonHelpButtonArea(const wxRect& rect) = 0;
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonMSWArtProvider : public wxRibbonArtProvider
+class wxRibbonMSWArtProvider : public wxRibbonArtProvider
 {
 public:
     wxRibbonMSWArtProvider(bool set_colour_scheme = true);
@@ -766,7 +766,7 @@ protected:
     int m_help_button_offset;
 };
 
-class WXDLLIMPEXP_RIBBON wxRibbonAUIArtProvider : public wxRibbonMSWArtProvider
+class wxRibbonAUIArtProvider : public wxRibbonMSWArtProvider
 {
 public:
     wxRibbonAUIArtProvider();

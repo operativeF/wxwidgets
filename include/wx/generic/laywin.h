@@ -23,8 +23,8 @@
 class wxQueryLayoutInfoEvent;
 class wxCalculateLayoutEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_QUERY_LAYOUT_INFO, wxQueryLayoutInfoEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CALCULATE_LAYOUT,  wxCalculateLayoutEvent );
+wxDECLARE_EVENT( wxEVT_QUERY_LAYOUT_INFO, wxQueryLayoutInfoEvent );
+wxDECLARE_EVENT( wxEVT_CALCULATE_LAYOUT,  wxCalculateLayoutEvent );
 
 enum wxLayoutOrientation
 {

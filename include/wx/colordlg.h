@@ -69,7 +69,7 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLOUR_CHANGED, wxColourDialogEvent);
+wxDECLARE_EVENT( wxEVT_COLOUR_CHANGED, wxColourDialogEvent);
 
 #define wxColourDialogEventHandler(func) \
     wxEVENT_HANDLER_CAST(wxColourDialogEventFunction, func)

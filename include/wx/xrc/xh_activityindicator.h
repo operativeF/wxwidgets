@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_ACTIVITYINDICATOR
 
-class WXDLLIMPEXP_XRC wxActivityIndicatorXmlHandler : public wxXmlResourceHandler
+class wxActivityIndicatorXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxActivityIndicatorXmlHandler();

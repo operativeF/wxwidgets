@@ -1780,7 +1780,7 @@ bool wxDirProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 // wxPGDialogAdapter
 // -----------------------------------------------------------------------
 
-struct WXDLLIMPEXP_PROPGRID wxPGDialogAdapter : public wxPGEditorDialogAdapter
+struct wxPGDialogAdapter : public wxPGEditorDialogAdapter
 {
     bool DoShowDialog(wxPropertyGrid* pg, wxPGProperty* prop) override
     {

@@ -94,8 +94,8 @@ public:
     wxTempFileOutputStream& operator=(wxTempFileOutputStream&&) = delete;
 
     bool Close() override { return Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual void Discard() { m_file->Discard(); }
+    virtual bool Commit() { return m_file->Commit(); }
+    virtual void Discard() { m_file->Discard(); }
 
     wxFileOffset GetLength() const override { return m_file->Length(); }
     bool IsSeekable() const override { return true; }
@@ -119,8 +119,8 @@ public:
     wxTempFFileOutputStream& operator=(wxTempFFileOutputStream&&) = delete;
 
     bool Close() override { return Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual void Discard() { m_file->Discard(); }
+    virtual bool Commit() { return m_file->Commit(); }
+    virtual void Discard() { m_file->Discard(); }
 
     wxFileOffset GetLength() const override { return m_file->Length(); }
     bool IsSeekable() const override { return true; }

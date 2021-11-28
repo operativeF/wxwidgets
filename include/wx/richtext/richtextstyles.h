@@ -41,7 +41,7 @@ class wxRichTextBuffer;
  * A base class for paragraph and character styles.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleDefinition: public wxObject
+class wxRichTextStyleDefinition: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextStyleDefinition);
 public:
@@ -122,7 +122,7 @@ protected:
  * wxRichTextCharacterStyleDefinition class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCharacterStyleDefinition: public wxRichTextStyleDefinition
+class wxRichTextCharacterStyleDefinition: public wxRichTextStyleDefinition
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextCharacterStyleDefinition);
 public:
@@ -141,7 +141,7 @@ protected:
  * wxRichTextParagraphStyleDefinition class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextParagraphStyleDefinition: public wxRichTextStyleDefinition
+class wxRichTextParagraphStyleDefinition: public wxRichTextStyleDefinition
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextParagraphStyleDefinition);
 public:
@@ -179,7 +179,7 @@ protected:
  * wxRichTextListStyleDefinition class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextListStyleDefinition: public wxRichTextParagraphStyleDefinition
+class wxRichTextListStyleDefinition: public wxRichTextParagraphStyleDefinition
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextListStyleDefinition);
 public:
@@ -242,7 +242,7 @@ protected:
  * wxRichTextBoxStyleDefinition class declaration, for box attributes in objects such as wxRichTextBox.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextBoxStyleDefinition: public wxRichTextStyleDefinition
+class wxRichTextBoxStyleDefinition: public wxRichTextStyleDefinition
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBoxStyleDefinition);
 public:
@@ -271,7 +271,7 @@ public:
  * The style sheet
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleSheet: public wxObject
+class wxRichTextStyleSheet: public wxObject
 {
     wxDECLARE_CLASS(wxRichTextStyleSheet);
 
@@ -439,7 +439,7 @@ protected:
  * A listbox to display styles.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListBox: public wxHtmlListBox
+class wxRichTextStyleListBox: public wxHtmlListBox
 {
     wxDECLARE_CLASS(wxRichTextStyleListBox);
     wxDECLARE_EVENT_TABLE();
@@ -541,7 +541,7 @@ private:
 
 inline constexpr unsigned int wxRICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR     = 0x1000;
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListCtrl: public wxControl
+class wxRichTextStyleListCtrl: public wxControl
 {
     wxDECLARE_CLASS(wxRichTextStyleListCtrl);
     wxDECLARE_EVENT_TABLE();
@@ -643,7 +643,7 @@ private:
  * A combo for applying styles.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStyleComboCtrl: public wxComboCtrl
+class wxRichTextStyleComboCtrl: public wxComboCtrl
 {
     wxDECLARE_CLASS(wxRichTextStyleComboCtrl);
     wxDECLARE_EVENT_TABLE();

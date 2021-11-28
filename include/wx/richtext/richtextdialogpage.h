@@ -21,7 +21,7 @@
     The base class for formatting dialog pages.
  **/
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextDialogPage: public wxPanel
+class wxRichTextDialogPage: public wxPanel
 {
 public:
     wxDECLARE_CLASS(wxRichTextDialogPage);

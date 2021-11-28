@@ -19,7 +19,7 @@ typedef struct __GLXFBConfigRec* GLXFBConfig;
 // wxGLContext
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLContext : public wxGLContextBase
+class wxGLContext : public wxGLContextBase
 {
 public:
     wxGLContext(wxGLCanvas *win,
@@ -39,7 +39,7 @@ private:
 // wxGLCanvasX11
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_GL wxGLCanvasX11 : public wxGLCanvasBase
+class wxGLCanvasX11 : public wxGLCanvasBase
 {
 public:
     // initialization and dtor
@@ -108,7 +108,7 @@ private:
 // this is used in wx/glcanvas.h, prevent it from defining a generic wxGLApp
 #define wxGL_APP_DEFINED
 
-class WXDLLIMPEXP_GL wxGLApp : public wxGLAppBase
+class wxGLApp : public wxGLAppBase
 {
 public:
     bool InitGLVisual(const int *attribList) override;

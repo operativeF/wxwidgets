@@ -87,7 +87,7 @@ public:
                                wxBrushStyle style = wxBrushStyle::Solid);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxBrushList*)   wxTheBrushList;
+extern wxBrushList*   wxTheBrushList;
 
 // provide comparison operators to allow code such as
 //

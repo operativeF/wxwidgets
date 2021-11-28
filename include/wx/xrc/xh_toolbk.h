@@ -16,7 +16,7 @@
 
 class wxToolbook;
 
-class WXDLLIMPEXP_XRC wxToolbookXmlHandler : public wxXmlResourceHandler
+class wxToolbookXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxToolbookXmlHandler();

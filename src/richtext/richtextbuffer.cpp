@@ -13395,7 +13395,7 @@ bool wxRichTextBufferDataObject::SetData([[maybe_unused]] size_t len, const void
  * Manages quick access to a pool of fonts for rendering rich text
  */
 
-WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxFont, wxRichTextFontTableHashMap, class WXDLLIMPEXP_RICHTEXT);
+WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxFont, wxRichTextFontTableHashMap, class);
 
 struct wxRichTextFontTableData : public wxObjectRefData
 {

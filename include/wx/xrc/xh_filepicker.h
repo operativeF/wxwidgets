@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_FILEPICKERCTRL
 
-class WXDLLIMPEXP_XRC wxFilePickerCtrlXmlHandler : public wxXmlResourceHandler
+class wxFilePickerCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxFilePickerCtrlXmlHandler);
 

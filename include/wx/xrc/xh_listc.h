@@ -17,7 +17,7 @@
 class wxListCtrl;
 class wxListItem;
 
-class WXDLLIMPEXP_XRC wxListCtrlXmlHandler : public wxXmlResourceHandler
+class wxListCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxListCtrlXmlHandler();

@@ -13,18 +13,18 @@
 
 #if wxUSE_RIBBON
 
-WXDLLIMPEXP_RIBBON wxColour wxRibbonInterpolateColour(
+wxColour wxRibbonInterpolateColour(
                                 const wxColour& start_colour,
                                 const wxColour& end_colour,
                                 int position,
                                 int start_position,
                                 int end_position);
 
-WXDLLIMPEXP_RIBBON bool wxRibbonCanLabelBreakAtPosition(
+bool wxRibbonCanLabelBreakAtPosition(
                                 const wxString& label,
                                 size_t pos);
 
-WXDLLIMPEXP_RIBBON void wxRibbonDrawParallelGradientLines(
+void wxRibbonDrawParallelGradientLines(
                                 wxDC& dc,
                                 int nlines,
                                 const wxPoint* line_origins,
@@ -36,7 +36,7 @@ WXDLLIMPEXP_RIBBON void wxRibbonDrawParallelGradientLines(
                                 const wxColour& start_colour,
                                 const wxColour& end_colour);
 
-WXDLLIMPEXP_RIBBON wxBitmap wxRibbonLoadPixmap(
+wxBitmap wxRibbonLoadPixmap(
                                 const char* const* bits,
                                 wxColour fore);
 
@@ -50,7 +50,7 @@ WXDLLIMPEXP_RIBBON wxBitmap wxRibbonLoadPixmap(
    0.0 <= Saturation <= 1.0
    0.0 <= Luminance <= 1.0
 */
-class WXDLLIMPEXP_RIBBON wxRibbonHSLColour
+class wxRibbonHSLColour
 {
 public:
    wxRibbonHSLColour()
@@ -71,7 +71,7 @@ public:
    float       hue{0.0}, saturation{0.0}, luminance{0.0};
 };
 
-WXDLLIMPEXP_RIBBON wxRibbonHSLColour wxRibbonShiftLuminance(
+wxRibbonHSLColour wxRibbonShiftLuminance(
                                 wxRibbonHSLColour colour, float amount);
 
 #endif // wxUSE_RIBBON

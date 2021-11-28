@@ -15,7 +15,7 @@
 
 #include "wx/protocol/protocol.h"
 
-class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
+class wxFileProto: public wxProtocol
 {
 public:
     wxFileProto& operator=(wxFileProto&&) = delete;

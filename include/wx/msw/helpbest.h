@@ -19,7 +19,7 @@
 
 import <string>;
 
-class WXDLLIMPEXP_HTML wxBestHelpController: public wxHelpControllerBase
+class wxBestHelpController: public wxHelpControllerBase
 {
 public:
     wxBestHelpController(wxWindow* parentWindow = nullptr,

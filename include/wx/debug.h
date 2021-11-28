@@ -12,7 +12,6 @@
 
 #include "wx/chartype.h"     // for __TFILE__ and wxChar
 #include "wx/cpp.h"          // for __WXFUNCTION__
-#include "wx/dlimpexp.h"     // for WXDLLIMPEXP_FWD_BASE
 
 #include <cassert>
 import <climits>;          // for CHAR_BIT used below
@@ -256,7 +255,7 @@ extern void wxOnAssert(const char *file,
     // Global flag used to indicate that assert macros should call wxTrap(): it
     // is set by the default assert handler if the user answers yes to the
     // question of whether to trap.
-    extern WXDLLIMPEXP_DATA_BASE(bool) wxTrapInAssert;
+    extern bool wxTrapInAssert;
 
     // This macro checks if the condition is true and calls the assert handler
     // with the provided message if it isn't and finally traps if the special

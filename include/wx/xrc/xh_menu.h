@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_MENUS
 
-class WXDLLIMPEXP_XRC wxMenuXmlHandler : public wxXmlResourceHandler
+class wxMenuXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxMenuXmlHandler);
 
@@ -27,7 +27,7 @@ private:
     bool m_insideMenu{false};
 };
 
-class WXDLLIMPEXP_XRC wxMenuBarXmlHandler : public wxXmlResourceHandler
+class wxMenuBarXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxMenuBarXmlHandler);
 

@@ -17,7 +17,7 @@
 #include "wx/sizer.h"
 #include "wx/gbsizer.h"
 
-class WXDLLIMPEXP_XRC wxSizerXmlHandler : public wxXmlResourceHandler
+class wxSizerXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxSizerXmlHandler);
 
@@ -62,7 +62,7 @@ private:
 
 #if wxUSE_BUTTON
 
-class WXDLLIMPEXP_XRC wxStdDialogButtonSizerXmlHandler
+class wxStdDialogButtonSizerXmlHandler
     : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler);

@@ -1206,13 +1206,11 @@ void *wxULongLongWx::asArray() const
 #endif
 
 // input/output
-WXDLLIMPEXP_BASE
 std::ostream& operator<< (std::ostream& o, const wxLongLong& ll)
 {
     return o << ll.ToString();
 }
 
-WXDLLIMPEXP_BASE
 std::ostream& operator<< (std::ostream& o, const wxULongLong& ll)
 {
     return o << ll.ToString();

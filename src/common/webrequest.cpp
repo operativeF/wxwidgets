@@ -34,9 +34,9 @@
 #include "wx/private/webrequest_curl.h"
 #endif
 
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendWinHTTP[] = "WinHTTP";
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendURLSession[] = "URLSession";
-extern WXDLLIMPEXP_DATA_NET(const char) wxWebSessionBackendCURL[] = "CURL";
+extern const char wxWebSessionBackendWinHTTP[] = "WinHTTP";
+extern const char wxWebSessionBackendURLSession[] = "URLSession";
+extern const char wxWebSessionBackendCURL[] = "CURL";
 
 wxDEFINE_EVENT(wxEVT_WEBREQUEST_STATE, wxWebRequestEvent);
 wxDEFINE_EVENT(wxEVT_WEBREQUEST_DATA, wxWebRequestEvent);
@@ -247,7 +247,7 @@ void wxWebRequestImpl::ReportDataReceived(size_t sizeReceived)
 namespace wxPrivate
 {
 
-WXDLLIMPEXP_NET wxString
+wxString
 SplitParameters(const wxString& s, wxWebRequestHeaderMap& parameters)
 {
     wxString value;

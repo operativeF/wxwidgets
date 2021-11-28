@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_SPLITTER
 
-class WXDLLIMPEXP_XRC wxSplitterWindowXmlHandler : public wxXmlResourceHandler
+class wxSplitterWindowXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxSplitterWindowXmlHandler);
 

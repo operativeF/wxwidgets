@@ -43,7 +43,7 @@
  * wxRichTextTabsPage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextTabsPage: public wxRichTextDialogPage
+class wxRichTextTabsPage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextTabsPage);
     wxDECLARE_EVENT_TABLE();

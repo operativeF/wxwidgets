@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_HTML
 
-class WXDLLIMPEXP_XRC wxSimpleHtmlListBoxXmlHandler : public wxXmlResourceHandler
+class wxSimpleHtmlListBoxXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxSimpleHtmlListBoxXmlHandler();

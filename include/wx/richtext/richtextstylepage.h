@@ -40,7 +40,7 @@ inline constexpr wxPoint SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION = wxDefaultPosition
  * wxRichTextStylePage class declaration
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextStylePage: public wxRichTextDialogPage
+class wxRichTextStylePage: public wxRichTextDialogPage
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextStylePage);
     wxDECLARE_EVENT_TABLE();

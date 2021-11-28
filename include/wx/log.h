@@ -71,7 +71,7 @@ import <ctime>;   // for time_t
 #ifndef wxLOG_COMPONENT
     // this is a variable and not a macro in order to allow the user code to
     // just #define wxLOG_COMPONENT without #undef'ining it first
-    extern WXDLLIMPEXP_DATA_BASE(const char *) wxLOG_COMPONENT;
+    extern const char* wxLOG_COMPONENT;
 
     #ifdef WXBUILDING
         #define wxLOG_COMPONENT "wx"
@@ -1317,8 +1317,7 @@ inline void wxLogNop() { }
 
 // wxLogFatalError helper: show the (fatal) error to the user in a safe way,
 // i.e. without using wxMessageBox() for example because it could crash
-bool WXDLLIMPEXP_BASE
-wxSafeShowMessage(const wxString& title, const wxString& text);
+bool wxSafeShowMessage(const wxString& title, const wxString& text);
 
 // ----------------------------------------------------------------------------
 // debug only logging functions: use them with API name and error code

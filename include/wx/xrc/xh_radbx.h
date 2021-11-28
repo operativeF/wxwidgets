@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_RADIOBOX
 
-class WXDLLIMPEXP_XRC wxRadioBoxXmlHandler : public wxXmlResourceHandler
+class wxRadioBoxXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxRadioBoxXmlHandler);
 

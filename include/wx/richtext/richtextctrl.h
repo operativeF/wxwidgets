@@ -110,7 +110,7 @@ enum wxRichTextCtrlSelectionState
     whose properties are available to be edited.
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextContextMenuPropertiesInfo
+class wxRichTextContextMenuPropertiesInfo
 {
 public:
     /**
@@ -220,7 +220,7 @@ public:
 
  */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextCtrl : public wxControl,
+class wxRichTextCtrl : public wxControl,
                                             public wxTextCtrlIface,
                                             public wxScrollHelper
 {
@@ -2390,7 +2390,7 @@ protected:
 };
 
 #if wxUSE_DRAG_AND_DROP
-class WXDLLIMPEXP_RICHTEXT wxRichTextDropSource : public wxDropSource
+class wxRichTextDropSource : public wxDropSource
 {
 public:
     wxRichTextDropSource(wxDataObject& data, wxRichTextCtrl* tc)
@@ -2402,7 +2402,7 @@ protected:
     wxRichTextCtrl* m_rtc;
 };
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextDropTarget : public wxDropTarget
+class wxRichTextDropTarget : public wxDropTarget
 {
 public:
   wxRichTextDropTarget(wxRichTextCtrl* tc)
@@ -2497,7 +2497,7 @@ protected:
     @category{events,richtext}
 */
 
-class WXDLLIMPEXP_RICHTEXT wxRichTextEvent : public wxNotifyEvent
+class wxRichTextEvent : public wxNotifyEvent
 {
 public:
     /**
@@ -2637,27 +2637,27 @@ private:
 /*!
  * wxRichTextCtrl events
  */
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_RIGHT_CLICK, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_MIDDLE_CLICK, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_LEFT_DCLICK, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_RETURN, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_CHARACTER, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_CONSUMING_CHARACTER, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_DELETE, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_RIGHT_CLICK, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_MIDDLE_CLICK, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_LEFT_DCLICK, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_RETURN, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_CHARACTER, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_CONSUMING_CHARACTER, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_DELETE, wxRichTextEvent );
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_STYLESHEET_CHANGING, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_STYLESHEET_CHANGED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_STYLESHEET_REPLACING, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_STYLESHEET_REPLACED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_STYLESHEET_CHANGING, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_STYLESHEET_CHANGED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_STYLESHEET_REPLACING, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_STYLESHEET_REPLACED, wxRichTextEvent );
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_CONTENT_INSERTED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_CONTENT_DELETED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_STYLE_CHANGED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_PROPERTIES_CHANGED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_SELECTION_CHANGED, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_BUFFER_RESET, wxRichTextEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_RICHTEXT, wxEVT_RICHTEXT_FOCUS_OBJECT_CHANGED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_CONTENT_INSERTED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_CONTENT_DELETED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_STYLE_CHANGED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_PROPERTIES_CHANGED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_SELECTION_CHANGED, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_BUFFER_RESET, wxRichTextEvent );
+wxDECLARE_EVENT( wxEVT_RICHTEXT_FOCUS_OBJECT_CHANGED, wxRichTextEvent );
 
 typedef void (wxEvtHandler::*wxRichTextEventFunction)(wxRichTextEvent&);
 

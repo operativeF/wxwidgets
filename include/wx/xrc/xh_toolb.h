@@ -16,7 +16,7 @@
 
 class wxToolBar;
 
-class WXDLLIMPEXP_XRC wxToolBarXmlHandler : public wxXmlResourceHandler
+class wxToolBarXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxToolBarXmlHandler);
 

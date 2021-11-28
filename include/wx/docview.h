@@ -961,14 +961,14 @@ private:
 
 // For compatibility with existing file formats:
 // converts from/to a stream to/from a temporary file.
-bool WXDLLIMPEXP_CORE
+bool
 wxTransferFileToStream(const std::string& filename, std::ostream& stream);
-bool WXDLLIMPEXP_CORE
+bool
 wxTransferStreamToFile(std::istream& stream, const std::string& filename);
 #else
-bool WXDLLIMPEXP_CORE
+bool
 wxTransferFileToStream(const std::string& filename, wxOutputStream& stream);
-bool WXDLLIMPEXP_CORE
+bool
 wxTransferStreamToFile(wxInputStream& stream, const std::string& filename);
 
 inline wxViewVector wxDocument::GetViewsVector() const

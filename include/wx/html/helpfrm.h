@@ -49,7 +49,7 @@ class wxHelpControllerBase;
 class wxHtmlHelpController;
 class wxHtmlHelpWindow;
 
-class WXDLLIMPEXP_HTML wxHtmlHelpFrame : public wxFrame
+class wxHtmlHelpFrame : public wxFrame
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpFrame);
 

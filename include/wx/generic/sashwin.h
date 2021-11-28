@@ -196,7 +196,7 @@ private:
 
 class wxSashEvent;
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_SASH_DRAGGED, wxSashEvent );
+wxDECLARE_EVENT( wxEVT_SASH_DRAGGED, wxSashEvent );
 
 enum class wxSashDragStatus
 {

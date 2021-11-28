@@ -17,11 +17,7 @@
 // Enables an application to influence the wxWidgets implementation
 // ----------------------------------------------------------------------------
 
-class
-#if wxUSE_SYSTEM_OPTIONS
-WXDLLIMPEXP_BASE
-#endif
-wxSystemOptions
+class wxSystemOptions
 {
 public:
     // User-customizable hints to wxWidgets or associated libraries

@@ -28,8 +28,8 @@ import WX.Image;
 // Cache class - stores already requested bitmaps
 // ----------------------------------------------------------------------------
 
-WX_DECLARE_EXPORTED_STRING_HASH_MAP(wxBitmap, wxArtProviderBitmapsHash);
-WX_DECLARE_EXPORTED_STRING_HASH_MAP(wxIconBundle, wxArtProviderIconBundlesHash);
+WX_DECLARE_STRING_HASH_MAP(wxBitmap, wxArtProviderBitmapsHash);
+WX_DECLARE_STRING_HASH_MAP(wxIconBundle, wxArtProviderIconBundlesHash);
 
 class wxArtProviderCache
 {

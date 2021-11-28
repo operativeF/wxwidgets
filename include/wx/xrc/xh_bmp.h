@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC
 
-class WXDLLIMPEXP_XRC wxBitmapXmlHandler : public wxXmlResourceHandler
+class wxBitmapXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxBitmapXmlHandler);
 
@@ -23,7 +23,7 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 };
 
-class WXDLLIMPEXP_XRC wxIconXmlHandler : public wxXmlResourceHandler
+class wxIconXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxIconXmlHandler);
 

@@ -15,7 +15,7 @@
 
 class wxNotebook;
 
-class WXDLLIMPEXP_XRC wxNotebookXmlHandler : public wxXmlResourceHandler
+class wxNotebookXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxNotebookXmlHandler);
 

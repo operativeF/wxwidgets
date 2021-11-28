@@ -20,8 +20,8 @@ import <string>;
 // Events
 class wxSpinDoubleEvent;
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRL, wxSpinEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);
+wxDECLARE_EVENT( wxEVT_SPINCTRL, wxSpinEvent);
+wxDECLARE_EVENT( wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);
 
 // ----------------------------------------------------------------------------
 // A spin ctrl is a text control with a spin button which is usually used to

@@ -17,9 +17,9 @@ class wxDDEClient;
 class wxDDEServer;
 class wxDDEConnection;
 
-WX_DECLARE_USER_EXPORTED_LIST(wxDDEClient, wxDDEClientList, WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_LIST(wxDDEServer, wxDDEServerList, WXDLLIMPEXP_BASE);
-WX_DECLARE_USER_EXPORTED_LIST(wxDDEConnection, wxDDEConnectionList, WXDLLIMPEXP_BASE);
+WX_DECLARE_LIST(wxDDEClient, wxDDEClientList);
+WX_DECLARE_LIST(wxDDEServer, wxDDEServerList);
+WX_DECLARE_LIST(wxDDEConnection, wxDDEConnectionList);
 
 #if defined(WX_WINDOWS)
     #include "wx/msw/dde.h"

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_INFOBAR
 
-class WXDLLIMPEXP_XRC wxInfoBarXmlHandler : public wxXmlResourceHandler
+class wxInfoBarXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxInfoBarXmlHandler);
 

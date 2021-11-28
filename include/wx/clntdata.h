@@ -18,12 +18,12 @@ typedef int (*wxShadowObjectMethod)(void*, void*);
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
     wxShadowObjectMethod,
     wxShadowObjectMethods,
-    class WXDLLIMPEXP_BASE
+    class
 );
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
     void *,
     wxShadowObjectFields,
-    class WXDLLIMPEXP_BASE
+    class
 );
 
 class wxShadowObject

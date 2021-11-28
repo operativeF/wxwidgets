@@ -22,7 +22,7 @@ import WX.Cfg.Flags;
 class wxRibbonBar;
 class wxRibbonPageScrollButton;
 
-class WXDLLIMPEXP_RIBBON wxRibbonPage : public wxRibbonControl
+class wxRibbonPage : public wxRibbonControl
 {
 public:
     wxRibbonPage() = default;

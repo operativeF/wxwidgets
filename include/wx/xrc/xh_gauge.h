@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_GAUGE
 
-class WXDLLIMPEXP_XRC wxGaugeXmlHandler : public wxXmlResourceHandler
+class wxGaugeXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxGaugeXmlHandler();

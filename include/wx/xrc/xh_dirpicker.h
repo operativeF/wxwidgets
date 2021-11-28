@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_DIRPICKERCTRL
 
-class WXDLLIMPEXP_XRC wxDirPickerCtrlXmlHandler : public wxXmlResourceHandler
+class wxDirPickerCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxDirPickerCtrlXmlHandler);
 

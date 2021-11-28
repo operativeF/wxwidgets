@@ -21,7 +21,7 @@ inline constexpr unsigned int wxPG_DEFAULT_SPLITTERX = 110;
 
 // A return value from wxPropertyGrid::HitTest(),
 // contains all you need to know about an arbitrary location on the grid.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridHitTestResult
+class wxPropertyGridHitTestResult
 {
     friend class wxPropertyGridPageState;
 public:
@@ -159,7 +159,7 @@ wxPG_ITERATE_DEFAULT = wxPG_ITERATE_NORMAL
 
 
 // Base for wxPropertyGridIterator classes.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridIteratorBase
+class wxPropertyGridIteratorBase
 {
 public:
     wxPropertyGridIteratorBase()
@@ -270,7 +270,7 @@ using wxPropertyGridConstIterator = wxPGIterator<const wxPGProperty, const wxPro
 // -----------------------------------------------------------------------
 
 // Base class to derive new viterators.
-class WXDLLIMPEXP_PROPGRID wxPGVIteratorBase : public wxObjectRefData
+class wxPGVIteratorBase : public wxObjectRefData
 {
     friend class wxPGVIterator;
 public:
@@ -284,7 +284,7 @@ protected:
 // to iterate in forward order, and only through the entire container.
 // Used to have functions dealing with all properties work with both
 // wxPropertyGrid and wxPropertyGridManager.
-class WXDLLIMPEXP_PROPGRID wxPGVIterator
+class wxPGVIterator
 {
 public:
     wxPGVIterator() { m_pIt = nullptr; }
@@ -321,7 +321,7 @@ protected:
 // wxPropertyGridInterface, wxPropertyGrid, wxPropertyGridPage, and
 // wxPropertyGridManager.
 // - Currently this class is not implemented in wxPython.
-class WXDLLIMPEXP_PROPGRID wxPropertyGridPageState
+class wxPropertyGridPageState
 {
     friend class wxPropertyGrid;
     friend class wxPropertyGridInterface;

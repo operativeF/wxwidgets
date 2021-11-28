@@ -46,7 +46,7 @@ export
 
 class wxInputStream;
 
-WX_DECLARE_EXPORTED_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);
+WX_DECLARE_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);
 
 // --------------------------------------------------------------------------
 // wxANIDecoder class

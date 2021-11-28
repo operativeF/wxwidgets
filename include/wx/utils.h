@@ -753,7 +753,7 @@ bool wxYieldIfNeeded();
 // Windows only: get user-defined resource from the .res file.
 #ifdef WX_WINDOWS
     // default resource type for wxLoadUserResource()
-    extern WXDLLIMPEXP_DATA_BASE(const wxChar*) wxUserResourceStr;
+    extern const wxChar* wxUserResourceStr;
 
     // Return the pointer to the resource data. This pointer is read-only, use
     // the overload below if you need to modify the data.

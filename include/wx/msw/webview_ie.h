@@ -41,7 +41,7 @@ enum wxWebViewIE_EmulationLevel
     wxWEBVIEWIE_EMU_IE11_FORCE = 11001
 };
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewIE : public wxWebView
+class wxWebViewIE : public wxWebView
 {
 public:
 
@@ -178,7 +178,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxWebViewIE);
 };
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewFactoryIE : public wxWebViewFactory
+class wxWebViewFactoryIE : public wxWebViewFactory
 {
 public:
     wxWebView* Create() override { return new wxWebViewIE; }

@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_ANIMATIONCTRL
 
-class WXDLLIMPEXP_XRC wxAnimationCtrlXmlHandler : public wxXmlResourceHandler
+class wxAnimationCtrlXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxAnimationCtrlXmlHandler);
 

@@ -800,10 +800,10 @@ protected:
 
 class wxTextUrlEvent;
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT, wxCommandEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_ENTER, wxCommandEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_URL, wxTextUrlEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_MAXLEN, wxCommandEvent);
+wxDECLARE_EVENT( wxEVT_TEXT, wxCommandEvent);
+wxDECLARE_EVENT( wxEVT_TEXT_ENTER, wxCommandEvent);
+wxDECLARE_EVENT( wxEVT_TEXT_URL, wxTextUrlEvent);
+wxDECLARE_EVENT( wxEVT_TEXT_MAXLEN, wxCommandEvent);
 
 class wxTextUrlEvent : public wxCommandEvent
 {

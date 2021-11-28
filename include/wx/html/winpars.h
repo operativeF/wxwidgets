@@ -31,7 +31,7 @@ class wxHtmlTagsModule;
 //                  wxHtmlWindow. It uses special wxHtmlWinTagHandler.
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlWinParser : public wxHtmlParser
+class wxHtmlWinParser : public wxHtmlParser
 {
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWinParser);
     friend class wxHtmlWindow;
@@ -239,7 +239,7 @@ private:
 
 class wxHtmlStyleParams;
 
-class WXDLLIMPEXP_HTML wxHtmlWinTagHandler : public wxHtmlTagHandler
+class wxHtmlWinTagHandler : public wxHtmlTagHandler
 {
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWinTagHandler);
 
@@ -267,7 +267,7 @@ protected:
 //                  (See documentation for details)
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlTagsModule : public wxModule
+class wxHtmlTagsModule : public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlTagsModule);
 

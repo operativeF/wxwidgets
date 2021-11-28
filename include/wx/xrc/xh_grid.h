@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_GRID
 
-class WXDLLIMPEXP_XRC wxGridXmlHandler : public wxXmlResourceHandler
+class wxGridXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxGridXmlHandler);
 

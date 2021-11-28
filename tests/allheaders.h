@@ -103,7 +103,6 @@
 #include <wx/dirdlg.h>
 #include <wx/dir.h>
 #include <wx/display.h>
-#include <wx/dlimpexp.h>
 #include <wx/dlist.h>
 #include <wx/dnd.h>
 #include <wx/docmdi.h>

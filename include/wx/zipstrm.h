@@ -24,7 +24,7 @@ import <cstdint>;
        || !defined __GNUC_MINOR__ \
        || !defined __GNUC_PATCHLEVEL__ \
        || __GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__ < 30402)
-#define WXZIPFIX WXDLLIMPEXP_BASE
+#define WXZIPFIX
 #else
 #define WXZIPFIX
 #endif
@@ -293,7 +293,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // wxZipOutputStream
 
-WX_DECLARE_LIST_WITH_DECL(wxZipEntry, wxZipEntryList_, class WXDLLIMPEXP_BASE);
+WX_DECLARE_LIST_WITH_DECL(wxZipEntry, wxZipEntryList_, class);
 
 class wxZipOutputStream : public wxArchiveOutputStream
 {

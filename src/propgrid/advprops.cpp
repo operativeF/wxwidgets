@@ -829,7 +829,7 @@ constexpr long gs_cp_es_syscolour_values[] = {
 };
 
 
-IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxColourPropertyValue, WXDLLIMPEXP_PROPGRID)
+IMPLEMENT_VARIANT_OBJECT_SHALLOWCMP(wxColourPropertyValue)
 
 template<> inline wxVariant WXVARIANT(const wxColourPropertyValue& value)
 {

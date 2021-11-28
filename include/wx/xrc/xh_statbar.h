@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_STATUSBAR
 
-class WXDLLIMPEXP_XRC wxStatusBarXmlHandler : public wxXmlResourceHandler
+class wxStatusBarXmlHandler : public wxXmlResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxStatusBarXmlHandler);
 

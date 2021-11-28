@@ -61,8 +61,8 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );
-wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIRPICKER_CHANGED, wxFileDirPickerEvent );
+wxDECLARE_EVENT( wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );
+wxDECLARE_EVENT( wxEVT_DIRPICKER_CHANGED, wxFileDirPickerEvent );
 
 // ----------------------------------------------------------------------------
 // event types and macros
