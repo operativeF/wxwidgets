@@ -41,6 +41,8 @@
 
 #include <fmt/core.h>
 
+import <charconv>;
+
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 
 wxGenericValidator::wxGenericValidator(bool *val)
@@ -605,8 +607,10 @@ bool wxGenericValidator::TransferFromWindow()
         }
         else if (m_pInt)
         {
-            *m_pInt = wxAtoi(pControl->GetValue());
-            return true;
+            auto [p, ec] = std::from_chars(pControl->GetValue().data(),
+                                pControl->GetValue().data() + pControl->GetValue().size(),
+                                *m_pInt );
+            return ec == std::errc();
         }
         else if (m_pFileName)
         {
@@ -615,13 +619,18 @@ bool wxGenericValidator::TransferFromWindow()
         }
         else if (m_pFloat)
         {
-            *m_pFloat = (float)wxAtof(pControl->GetValue());
-            return true;
+            auto [p, ec] = std::from_chars(pControl->GetValue().data(),
+                                           pControl->GetValue().data() + pControl->GetValue().size(),
+                                           *m_pFloat );
+            return ec == std::errc(); // FIXME: Return actual conversion success instead of just true?
         }
         else if (m_pDouble)
         {
-            *m_pDouble = wxAtof(pControl->GetValue());
-            return true;
+            auto [p, ec] = std::from_chars(pControl->GetValue().data(),
+                                pControl->GetValue().data() + pControl->GetValue().size(),
+                                *m_pDouble );
+
+            return ec == std::errc();
         }
     } else
 #endif

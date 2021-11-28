@@ -31,12 +31,6 @@ import <cstdarg>;
 /* checks whether the passed in pointer is NULL and if the string is empty */
 inline bool wxIsEmpty(const char *s) { return !s || !*s; }
 inline bool wxIsEmpty(const wchar_t *s) { return !s || !*s; }
-inline bool wxIsEmpty(const wxScopedCharBuffer& s) { return wxIsEmpty(s.data()); }
-inline bool wxIsEmpty(const wxScopedWCharBuffer& s) { return wxIsEmpty(s.data()); }
-inline bool wxIsEmpty(const wxString& s) { return s.empty(); }
-inline bool wxIsEmpty(const wxCStrData& s) { return s.AsString().empty(); }
-
-
 
 /* multibyte to wide char conversion functions and macros */
 
@@ -594,30 +588,6 @@ WX_STRCMP_FUNC(wxStrnicmp, wxCRT_StrnicmpA, wxCRT_StrnicmpW, wxStrnicmp_String)
 #undef WX_STR_FUNC
 #undef WX_STR_FUNC_NO_INVERT
 
-#if defined(wxCRT_StrxfrmA) && defined(wxCRT_StrxfrmW)
-
-inline size_t wxStrxfrm(char *dest, const char *src, size_t n)
-    { return wxCRT_StrxfrmA(dest, src, n); }
-inline size_t wxStrxfrm(wchar_t *dest, const wchar_t *src, size_t n)
-    { return wxCRT_StrxfrmW(dest, src, n); }
-template<typename T>
-inline size_t wxStrxfrm(T *dest, const wxScopedCharTypeBuffer<T>& src, size_t n)
-    { return wxStrxfrm(dest, src.data(), n); }
-#ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-inline size_t wxStrxfrm(char *dest, const wxString& src, size_t n)
-    { return wxCRT_StrxfrmA(dest, src.mb_str(), n); }
-#endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-inline size_t wxStrxfrm(wchar_t *dest, const wxString& src, size_t n)
-    { return wxCRT_StrxfrmW(dest, src.wc_str(), n); }
-#ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-inline size_t wxStrxfrm(char *dest, const wxCStrData& src, size_t n)
-    { return wxCRT_StrxfrmA(dest, src.AsCharBuf(), n); }
-#endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-inline size_t wxStrxfrm(wchar_t *dest, const wxCStrData& src, size_t n)
-    { return wxCRT_StrxfrmW(dest, src.AsWCharBuf(), n); }
-
-#endif // defined(wxCRT_Strxfrm[AW])
-
 inline char *wxStrtok(char *str, const char *delim, char **saveptr)
     { return wxCRT_StrtokA(str, delim, saveptr); }
 inline wchar_t *wxStrtok(wchar_t *str, const wchar_t *delim, wchar_t **saveptr)
@@ -891,12 +861,6 @@ inline int wxAtoi(const wxString& str) { return wxCRT_AtoiA(str.mb_str(wxConvLib
 inline long wxAtol(const wxString& str) { return wxCRT_AtolW(str.wc_str()); }
 #else
 inline long wxAtol(const wxString& str) { return wxCRT_AtolA(str.mb_str(wxConvLibc)); }
-#endif
-
-#ifdef wxCRT_AtofW
-inline double wxAtof(const wxString& str) { return wxCRT_AtofW(str.wc_str()); }
-#else
-inline double wxAtof(const wxString& str) { return wxCRT_AtofA(str.mb_str(wxConvLibc)); }
 #endif
 
 inline double wxStrtod(const char *nptr, char **endptr)

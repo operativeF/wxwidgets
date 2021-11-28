@@ -59,6 +59,8 @@
 
 #include "wx/datetime.h"
 
+#include <fmt/core.h>
+
 // ----------------------------------------------------------------------------
 // wxXTI
 // ----------------------------------------------------------------------------
@@ -174,16 +176,11 @@ wxDateTime::Country wxDateTime::ms_country = wxDateTime::Country_Unknown;
 
 // debugger helper: this function can be called from a debugger to show what
 // the date really is
-extern const char *wxDumpDate(const wxDateTime* dt)
+extern std::string wxDumpDate(const wxDateTime* dt)
 {
-    static char buf[128];
+    std::string fmtDate = dt->Format("%Y-%m-%d (%a) %H:%M:%S").ToStdString();
 
-    wxString fmt(dt->Format("%Y-%m-%d (%a) %H:%M:%S"));
-    wxStrlcpy(buf,
-              (fmt + " (" + dt->GetValue().ToString() + " ticks)").ToAscii(),
-              WXSIZEOF(buf));
-
-    return buf;
+    return fmt::format("{} ({} ticks)", fmtDate, dt->GetValue().ToString().ToStdString());
 }
 
 // get the number of days in the given month of the given year

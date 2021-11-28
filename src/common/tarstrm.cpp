@@ -817,8 +817,9 @@ wxDateTime wxTarInputStream::GetHeaderDate(const wxString& key) const
     // try extended header, stored as decimal seconds since the epoch
     if (!value.empty()) {
         wxLongLong ll;
-        ll.Assign(wxAtof(value) * 1000.0);
-        return ll;
+        auto [p, ec] = std::from_chars(value.data(), value.data() + value.size(), ll);
+        // FIXME: On error?
+        return ll * 1000.0;
     }
 
     if (key == "mtime")

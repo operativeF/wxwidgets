@@ -239,16 +239,19 @@ bool wxIniConfig::HasEntry([[maybe_unused]] const wxString& strName) const
 // is current group empty?
 bool wxIniConfig::IsEmpty() const
 {
-    wxChar szBuf[1024];
+    std::array<wchar_t, 1024> szBuf;
 
-    GetPrivateProfileString(m_strGroup.t_str(), nullptr, wxT(""),
-                            szBuf, WXSIZEOF(szBuf),
-                            m_strLocalFilename.t_str());
-    if ( !wxIsEmpty(szBuf) )
+    boost::nowide::wstackstring stackLocalFilename{m_strLocalFilename.c_str()};
+    ::GetPrivateProfileStringW(m_strGroup.t_str(), nullptr, L"",
+                            szBuf.data(), szBuf.size(),
+                            stackLocalFilename.get());
+    if ( !szBuf.empty() )
         return false;
 
-    GetProfileString(m_strGroup.t_str(), nullptr, wxT(""), szBuf, WXSIZEOF(szBuf));
-    return wxIsEmpty(szBuf);
+    boost::nowide::wstackstring stackStrGroup{m_strGroup.c_str()};
+    ::GetProfileStringW(m_strGroup.get(), nullptr, L"", szBuf.data(), szBuf.size());
+
+    return szBuf.empty();
 }
 
 // ----------------------------------------------------------------------------
@@ -260,22 +263,31 @@ bool wxIniConfig::DoReadString(const wxString& szKey, wxString *pstr) const
   wxConfigPathChanger path(this, szKey);
   wxString strKey = GetPrivateKeyName(path.Name());
 
-  wxChar szBuf[1024]; // FIXME: should dynamically allocate memory...
+  std::vector<wchar_t> szBuf;
+
+  szBuf.resize(1024);
 
   // first look in the private INI file
 
   // NB: the lpDefault param to GetPrivateProfileString can't be NULL
-  GetPrivateProfileString(m_strGroup.t_str(), strKey.t_str(), wxT(""),
-                          szBuf, WXSIZEOF(szBuf),
-                          m_strLocalFilename.t_str());
-  if ( wxIsEmpty(szBuf) ) {
+  boost::nowide::wstackstring stackLocalFilename{m_strLocalFilename.c_str()};
+  boost::nowide::wstackstring stackStrGroup{m_strGroup.c_str()};
+  boost::nowide::wstackstring stackStrKey{strKey.c_str()};
+
+  ::GetPrivateProfileString(stackStrGroup.get(), stackStrKey.get(), L"",
+                          szBuf.data(), szBuf.size(),
+                          stackLocalFilename.get());
+  if ( szBuf.empty() ) {
     // now look in win.ini
-    wxString strWinKey = GetKeyName(path.Name());
-    GetProfileString(m_strGroup.t_str(), strWinKey.t_str(),
-                     wxT(""), szBuf, WXSIZEOF(szBuf));
+    std::string strWinKey = GetKeyName(path.Name()).ToStdString();
+
+    boost::nowide::stackStrWinKey{strWinKey.c_str()};
+
+    ::GetProfileString(stackStrGroup.get(), stackStrWinKey.get(),
+                       L"", szBuf.data(), 1024);
   }
 
-  if ( wxIsEmpty(szBuf) )
+  if ( szBuf )
     return false;
 
   *pstr = szBuf;

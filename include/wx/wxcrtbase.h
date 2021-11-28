@@ -205,32 +205,16 @@ extern unsigned long android_wcstoul(const wchar_t *nptr, wchar_t **endptr, int 
     #endif /* HAVE_WCSTOULL */
 #endif
 
+#define wxCRT_StrnlenA  strnlen
+
 /*
-    Only VC8 and later provide strnlen() and wcsnlen() functions under Windows.
- */
-#if wxCHECK_VISUALC_VERSION(8)
-    #ifndef HAVE_STRNLEN
-        #define HAVE_STRNLEN
-    #endif
-    #ifndef HAVE_WCSNLEN
-        #define HAVE_WCSNLEN
-    #endif
-#endif
+    When using MinGW, wcsnlen() is not declared, but is still found by
+    configure -- just declare it in this case as it seems better to use it
+    if it's available (see https://sourceforge.net/p/mingw/bugs/2332/)
+    */
+wxDECL_FOR_MINGW32_ALWAYS(size_t, wcsnlen, (const wchar_t*, size_t))
 
-#ifdef HAVE_STRNLEN
-    #define wxCRT_StrnlenA  strnlen
-#endif
-
-#ifdef HAVE_WCSNLEN
-    /*
-        When using MinGW, wcsnlen() is not declared, but is still found by
-        configure -- just declare it in this case as it seems better to use it
-        if it's available (see https://sourceforge.net/p/mingw/bugs/2332/)
-     */
-    wxDECL_FOR_MINGW32_ALWAYS(size_t, wcsnlen, (const wchar_t*, size_t))
-
-    #define wxCRT_StrnlenW  wcsnlen
-#endif
+#define wxCRT_StrnlenW  wcsnlen
 
 /* define wxCRT_StricmpA/W and wxCRT_StrnicmpA/W for various compilers */
 #if defined(__VISUALC__) || defined(__MINGW32__)
