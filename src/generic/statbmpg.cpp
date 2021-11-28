@@ -15,7 +15,7 @@
 #if wxUSE_GRAPHICS_CONTEXT
     #include "wx/graphics.h"
 #else
-    #include "wx/math.h"
+    import Utils.Math;
     import WX.Image;
 #endif
 

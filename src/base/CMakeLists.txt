@@ -118,6 +118,7 @@ set(BASE_CMN_SRC
 set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/bitfield.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/position.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/math.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/charutils.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/stringutils.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/nonmodifying.ixx

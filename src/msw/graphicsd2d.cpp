@@ -62,12 +62,14 @@
 #include <fmt/core.h>
 #include <gsl/gsl>
 
+#include <memory>
+
 import WX.Image;
 import WX.Win.UniqueHnd;
 
 import <algorithm>;
 import <limits>;
-#include <memory>
+import <numbers>;
 import <stack>;
 
 // Generic error message for a failed direct2d operation

@@ -8,14 +8,14 @@
 * Licence:     wxWindows licence
 */
 
-#ifndef _WX_MATH_H_
-#define _WX_MATH_H_
-
-#define _USE_MATH_DEFINES
+export module Utils.Math;
 
 import <cmath>;
-import <cstdlib>;
+import <cstdint>;
 import <numbers>;
+
+export
+{
 
 /* Scaling factors for various unit conversions: 1 inch = 2.54 cm */
 // FIXME: Problematic, as double aren't commutative.
@@ -34,13 +34,12 @@ inline constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
 inline constexpr double pt2mm = 1 / mm2pt;
 
 // Convert between degrees and radians.
-static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
-static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
+inline constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
+inline constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
 
-#if defined(WX_WINDOWS)
-    #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )
-#else
-    #define wxMulDivInt32( a , b , c ) (std::lround((a)*(((double)b)/((double)c))))
-#endif
+inline std::int32_t wxMulDivInt32(std::int32_t a, std::int32_t b, std::int32_t c)
+{
+    return std::lround(a * static_cast<double>(b) / static_cast<double>(c));
+}
 
-#endif /* _WX_MATH_H_ */
+} // export

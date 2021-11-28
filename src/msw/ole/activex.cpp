@@ -13,9 +13,10 @@
 #include "wx/msw/private.h" // for wxCopyRectToRECT
 
 #include "wx/dcclient.h"
-#include "wx/math.h"
 
 #include "wx/msw/ole/activex.h"
+
+import Utils.Math;
 
 // autointerfaces that we only use here
 using wxAutoIOleInPlaceSite = wxAutoOleInterface<IOleInPlaceSite>;

@@ -19,10 +19,10 @@
 #include "wx/string.h"
 #include "wx/fontenc.h"
 #include "wx/hashmap.h"
-#include "wx/math.h"
 
 import Utils.Bitfield;
 import Utils.Geometry;
+import Utils.Math;
 
 import <cstdint>;
 

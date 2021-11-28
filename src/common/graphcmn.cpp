@@ -26,8 +26,10 @@
 
 #include "wx/private/graphics.h"
 
-import <cmath>;
 #include <memory>
+
+import <cmath>;
+import <numbers>;
 
 //-----------------------------------------------------------------------------
 

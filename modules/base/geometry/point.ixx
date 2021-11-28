@@ -1,9 +1,10 @@
 module;
 
 #include "wx/list.h"
-#include "wx/math.h"
 
 export module Utils.Geometry.Point;
+
+import Utils.Math;
 
 import <cmath>;
 

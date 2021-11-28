@@ -12,7 +12,6 @@ module;
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
-#include "wx/math.h"
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 #include "wx/quantize.h"
@@ -27,6 +26,8 @@ module WX.Image.BMP;
 
 import WX.Image.Base;
 import WX.Image.PNG;
+
+import Utils.Math;
 
 import <array>;
 

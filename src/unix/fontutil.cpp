@@ -23,9 +23,10 @@
 
 #include "wx/encinfo.h"
 #include "wx/fontmap.h"
-#include "wx/math.h"
 #include "wx/tokenzr.h"
 #include "wx/fontenum.h"
+
+import Utils.Math;
 
 #if wxUSE_PANGO
 
