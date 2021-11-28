@@ -15,7 +15,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/graphics.h"
-#include "wx/geometry.h"
 
 import WX.Cfg.Flags;
 

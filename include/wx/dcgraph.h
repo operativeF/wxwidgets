@@ -14,7 +14,6 @@
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/dc.h"
-#include "wx/geometry.h"
 #include "wx/graphics.h"
 
 import WX.Cfg.Flags;

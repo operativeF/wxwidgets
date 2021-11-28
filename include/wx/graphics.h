@@ -13,10 +13,10 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
 
-#include "wx/geometry.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/peninfobase.h"
+#include "wx/window.h"
 
 import WX.Image;
 

@@ -153,7 +153,6 @@
 #include <wx/gbsizer.h>
 #include <wx/gdicmn.h>
 #include <wx/gdiobj.h>
-#include <wx/geometry.h>
 #include <wx/gifdecod.h>
 #include <wx/glcanvas.h>
 #include <wx/graphics.h>

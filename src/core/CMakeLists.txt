@@ -54,7 +54,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/gaugecmn.cpp
     ${CORE_SRC_DIR}/common/gbsizer.cpp
     ${CORE_SRC_DIR}/common/gdicmn.cpp
-    ${CORE_SRC_DIR}/common/geometry.cpp
     ${CORE_SRC_DIR}/common/gifdecod.cpp
     ${CORE_SRC_DIR}/common/graphcmn.cpp
     ${CORE_SRC_DIR}/common/headercolcmn.cpp
