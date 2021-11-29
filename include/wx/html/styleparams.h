@@ -29,7 +29,8 @@ public:
     bool HasParam(const wxString& par) const
     {
         const auto parUpper = wx::utils::ToUpperCopy(par);
-        auto paramMatch = std::find_if(m_names.begin(), m_names.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+        auto paramMatch = std::ranges::find_if(m_names,
+            [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
 
         return paramMatch != m_names.end();
     }
@@ -38,7 +39,8 @@ public:
     wxString GetParam(const wxString& par) const
     {
         const auto parUpper = wx::utils::ToUpperCopy(par);
-        auto paramMatch = std::find_if(m_names.begin(), m_names.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+        auto paramMatch = std::ranges::find_if(m_names,
+            [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
 
         return paramMatch == m_names.end() ? wxString() : *paramMatch;
     }

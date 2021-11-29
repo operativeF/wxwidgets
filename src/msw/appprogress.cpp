@@ -13,6 +13,8 @@
 #include "wx/appprogress.h"
 #include "wx/msw/taskbarbutton.h"
 
+import <algorithm>;
+
 // ----------------------------------------------------------------------------
 // wxAppProgressIndicator Implementation.
 // ----------------------------------------------------------------------------
@@ -55,7 +57,7 @@ void wxAppProgressIndicator::SetValue(int value)
 {
     wxASSERT_MSG( value <= m_maxValue, "invalid progress value" );
 
-    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+    std::ranges::for_each(m_taskBarButtons,
             [value](auto& button){
                 button->SetProgressValue(value);
             });
@@ -65,7 +67,7 @@ void wxAppProgressIndicator::SetRange(int range)
 {
     m_maxValue = range;
 
-    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+    std::ranges::for_each(m_taskBarButtons,
             [range](auto& button){
                 button->SetProgressRange(range);
             });
@@ -73,7 +75,7 @@ void wxAppProgressIndicator::SetRange(int range)
 
 void wxAppProgressIndicator::Pulse()
 {
-    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+    std::ranges::for_each(m_taskBarButtons,
         [](auto& button){
             button->PulseProgress();
         });
@@ -81,7 +83,7 @@ void wxAppProgressIndicator::Pulse()
 
 void wxAppProgressIndicator::Reset()
 {
-    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+    std::ranges::for_each(m_taskBarButtons,
         [](auto& button){
             button->SetProgressState(wxTaskBarButtonState::NoProgress);
         });

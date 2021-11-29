@@ -2184,7 +2184,7 @@ wxDateTimeHolidayAuthority::GetHolidaysInRange(const wxDateTime& dtStart,
         holidays.insert(std::end(holidays), std::cbegin(holidaysInRange), std::cend(holidaysInRange));
     }
 
-    std::sort(holidays.begin(), holidays.end(),
+    std::ranges::sort(holidays,
         [](const auto dt1, const auto dt2) { return dt1 == dt2 ? 0 : dt1 < dt2 ? -1 : +1; });
 
     return holidays;

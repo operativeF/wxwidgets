@@ -95,7 +95,9 @@ public:
     // FIXME: Use iterators.
     gsl::index GetItemIndex(wxOwnerDrawn *item) const
     {
-        const auto index = std::distance(m_aItems.begin(), std::find_if(m_aItems.begin(), m_aItems.end(), [item](auto&& aItem){ return aItem.get() == item; }));
+        const auto index = std::distance(m_aItems.begin(),
+                                         std::ranges::find_if(m_aItems,
+                                            [item](auto&& aItem){ return aItem.get() == item; }));
 
         if(std::cmp_equal(index, m_aItems.size()))
         {

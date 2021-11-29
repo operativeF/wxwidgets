@@ -676,10 +676,10 @@ wxFont wxFont::Scaled(float x) const
 void wxNativeFontInfo::SetFaceName(const std::vector<std::string>& facenames)
 {
 #if wxUSE_FONTENUM
-    const auto possible_name = std::find_if(facenames.cbegin(), facenames.cend(),
+    auto possible_name = std::ranges::find_if(facenames,
         [](const auto& face){ return wxFontEnumerator::IsValidFacename(face); });
 
-    if(possible_name != facenames.cend())
+    if(possible_name != facenames.end())
     {
         SetFaceName(*possible_name);
         return;

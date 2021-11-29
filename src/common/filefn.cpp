@@ -93,7 +93,7 @@ bool wxPathList::Add(const std::string& path)
 
     std::string toadd = fn.GetPath();
 
-    if (std::find(m_paths.cbegin(), m_paths.cend(), toadd) == m_paths.cend())
+    if (std::ranges::find(m_paths, toadd) == m_paths.cend())
         m_paths.push_back(toadd);      // do not add duplicates
 
     return true;

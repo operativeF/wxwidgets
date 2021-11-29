@@ -2478,19 +2478,19 @@ void wxImage::SetOption(const std::string& name, const std::string& value)
 {
     AllocExclusive();
 
-    const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
+    const auto match = std::ranges::find_if(M_IMGDATA->m_optionNames,
     [name](const auto& optname){
         return wx::utils::IsSameAsNoCase(optname, name);
     });
 
-    if ( match == M_IMGDATA->m_optionNames.cend() )
+    if ( match == M_IMGDATA->m_optionNames.end() )
     {
         M_IMGDATA->m_optionNames.push_back(name);
         M_IMGDATA->m_optionValues.push_back(value);
     }
     else
     {
-        const auto idx = std::distance(std::cbegin(M_IMGDATA->m_optionNames), match);
+        const auto idx = std::distance(M_IMGDATA->m_optionNames.begin(), match);
         M_IMGDATA->m_optionNames[idx] = name;
         M_IMGDATA->m_optionValues[idx] = value;
     }
@@ -2507,16 +2507,16 @@ std::string wxImage::GetOption(const std::string& name) const
     if ( !M_IMGDATA )
         return {};
 
-    const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
+    const auto match = std::ranges::find_if(M_IMGDATA->m_optionNames,
     [name](const auto& optname){
         return wx::utils::IsSameAsNoCase(optname, name);
     });
 
-    if ( match == M_IMGDATA->m_optionNames.cend() )
+    if ( match == M_IMGDATA->m_optionNames.end() )
         return {};
     else
     {
-        const auto idx = std::distance(std::cbegin(M_IMGDATA->m_optionNames), match);
+        const auto idx = std::distance(M_IMGDATA->m_optionNames.begin(), match);
         return M_IMGDATA->m_optionValues[idx];
     }
 }
@@ -2530,7 +2530,7 @@ bool wxImage::HasOption(const std::string& name) const
 {
     if(M_IMGDATA)
     {
-        return M_IMGDATA->m_optionNames.cend() != std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(), 
+        return M_IMGDATA->m_optionNames.end() != std::ranges::find_if(M_IMGDATA->m_optionNames, 
         [name](const auto& optname){
             return wx::utils::IsSameAsNoCase(optname, name);
         });
@@ -3109,10 +3109,10 @@ wxImageHandler *wxImage::FindHandler( const std::string& extension, wxBitmapType
             if (handler->GetExtension() == extension)
                 return handler;
 
-            const auto ext_idx = std::find_if(handler->GetAltExtensions().cbegin(), handler->GetAltExtensions().cend(),
+            const auto ext_idx = std::ranges::find_if(handler->GetAltExtensions(),
                 [extension](const auto& alt_extension) { return wx::utils::IsSameAsNoCase(alt_extension, extension); });
 
-            if (ext_idx != handler->GetAltExtensions().cend())
+            if (ext_idx != handler->GetAltExtensions().end())
                 return handler;
         }
         node = node->GetNext();

@@ -36,7 +36,7 @@ public:
 
     void Set(const KeyT& key, const WriteType& val)
     {
-        auto it = std::find_if(m_data.begin(), m_data.end(), [key](const auto& datum){ return datum.first == key; });
+        auto it = std::ranges::find_if(m_data, [key](const auto& datum){ return datum.first == key; });
 
         if(it != m_data.end())
         {
@@ -46,7 +46,7 @@ public:
 
     auto Read(const KeyT& key) const -> typename std::optional<typename std::tuple_element<0, WriteT>::type>
     {
-        auto it = std::find_if(m_data.begin(), m_data.end(), [key](const auto& datum){ return datum.first == key; });
+        auto it = std::ranges::find_if(m_data, [key](const auto& datum){ return datum.first == key; });
     
         if(it != m_data.end())
         {

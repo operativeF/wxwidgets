@@ -367,7 +367,7 @@ bool wxGenericValidator::TransferToWindow()
                 pControl->Check(i, false);
 
             // select each item in our array
-            std::for_each(m_pArrayInt->begin(), m_pArrayInt->end(),
+            std::ranges::for_each(*m_pArrayInt,
                 [pControl](const auto& selection){
                     pControl->Check(selection);
                 });
@@ -389,7 +389,7 @@ bool wxGenericValidator::TransferToWindow()
                 pControl->Deselect(i);
 
             // select each item in our array
-            std::for_each(m_pArrayInt->begin(), m_pArrayInt->end(),
+            std::ranges::for_each(*m_pArrayInt,
                 [pControl](const auto& selection){
                     pControl->SetSelection(selection);
                 });

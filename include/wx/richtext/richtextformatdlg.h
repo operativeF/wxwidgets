@@ -344,7 +344,7 @@ public:
     // FIXME: Case sensitivity; does it matter here?
     bool HasFaceName(const std::string& faceName) const
     {
-        return std::find(m_faceNames.cbegin(), m_faceNames.cend(), faceName) != m_faceNames.cend();
+        return std::ranges::find(m_faceNames, faceName) != m_faceNames.cend();
     }
 
     /// Returns the array of face names

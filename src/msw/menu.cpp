@@ -153,7 +153,7 @@ void wxMenu::Break()
 
 std::vector<wxAcceleratorEntry>::const_iterator wxMenu::FindAccel(int id) const
 {
-    return std::find_if(m_accels.begin(), m_accels.end(),
+    return std::ranges::find_if(m_accels,
         [id](const auto& accel){
             return accel.m_command == id;
         });
@@ -1148,7 +1148,7 @@ void wxMenuBar::RebuildAccelTable()
 {
     std::vector<wxAcceleratorEntry> accelEntries;
 
-    std::for_each(m_menus.begin(), m_menus.end(),
+    std::ranges::for_each(m_menus,
         [&accelEntries](const auto& aMenu){
             aMenu->CopyAccels(accelEntries);
     });

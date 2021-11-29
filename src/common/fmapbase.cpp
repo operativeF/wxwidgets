@@ -456,7 +456,7 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
         return _("Default encoding");
     }
 
-    auto possibleMatch = std::find_if(gs_encodings.begin(), gs_encodings.end(),
+    auto possibleMatch = std::ranges::find_if(gs_encodings,
         [encoding](const auto& enc){
             return enc.encoding == encoding;
         }
@@ -481,7 +481,7 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
         return _("default");
     }
 
-    auto possibleMatch = std::find_if(gs_encodings.begin(), gs_encodings.end(),
+    auto possibleMatch = std::ranges::find_if(gs_encodings,
         [encoding](const auto& enc){
             return enc.encoding == encoding;
         }

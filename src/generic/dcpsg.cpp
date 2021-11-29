@@ -1137,7 +1137,7 @@ void wxPostScriptDCImpl::SetPSFont()
 
     wxString buffer;
     // Generate PS code to register the font only once.
-    if( std::find(m_definedPSFonts.begin(), m_definedPSFonts.end(), name) == m_definedPSFonts.end())
+    if( std::ranges::find(m_definedPSFonts, name) == m_definedPSFonts.end())
     {
         buffer.Printf( "%s reencodeISO def\n", name.c_str() );
         PsPrint( buffer );

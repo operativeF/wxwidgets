@@ -40,20 +40,20 @@
 void
 wxMimeTypeCommands::AddOrReplaceVerb(const std::string& verb, const std::string& cmd)
 {
-    const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
+    auto verb_iter = std::ranges::find_if(m_verbs,
     [verb](const auto& m_verb)
     {
         return wx::utils::IsSameAsNoCase(verb, m_verb);
     });
 
-    if ( verb_iter == m_verbs.cend() )
+    if ( verb_iter == m_verbs.end() )
     {
         m_verbs.push_back(verb);
         m_commands.push_back(cmd);
     }
     else
     {
-        const auto n = std::distance(std::cbegin(m_verbs), verb_iter);
+        const auto n = std::distance(m_verbs.begin(), verb_iter);
         m_commands[n] = cmd;
     }
 }

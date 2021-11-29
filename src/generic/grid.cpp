@@ -1014,10 +1014,10 @@ wxGridCellAttr *wxGridRowOrColAttrData::GetAttr(int rowOrCol) const
     wxGridCellAttr *attr = nullptr;
 
     // FIXME: Improve this.
-    auto n = std::find(m_rowsOrCols.cbegin(), m_rowsOrCols.cend(), rowOrCol);
-    if ( n != std::cend(m_rowsOrCols) )
+    auto n = std::ranges::find(m_rowsOrCols, rowOrCol);
+    if ( n != m_rowsOrCols.end() )
     {
-        attr = m_attrs[(size_t)std::distance(std::begin(m_rowsOrCols), n)];
+        attr = m_attrs[(size_t)std::distance(m_rowsOrCols.begin(), n)];
         attr->IncRef();
     }
 
@@ -1026,9 +1026,9 @@ wxGridCellAttr *wxGridRowOrColAttrData::GetAttr(int rowOrCol) const
 
 void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
 {
-    const auto i = std::find(m_rowsOrCols.cbegin(), m_rowsOrCols.cend(), rowOrCol);
+    auto i = std::ranges::find(m_rowsOrCols, rowOrCol);
 
-    if ( i == m_rowsOrCols.cend() )
+    if ( i == m_rowsOrCols.end() )
     {
         if ( attr )
         {
@@ -1040,7 +1040,7 @@ void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
     }
     else // we have an attribute for this row or column
     {
-        size_t n = (size_t)std::distance(std::cbegin(m_rowsOrCols), i);
+        size_t n = (size_t)std::distance(m_rowsOrCols.begin(), i);
 
         // notice that this code works correctly even when the old attribute is
         // the same as the new one: as we own of it, we must call DecRef() on
@@ -1056,8 +1056,8 @@ void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
         }
         else // remove the attribute
         {
-            m_rowsOrCols.erase(std::begin(m_rowsOrCols) + n);
-            m_attrs.erase(std::begin(m_attrs) + n);
+            m_rowsOrCols.erase(m_rowsOrCols.begin() + n);
+            m_attrs.erase(m_attrs.begin() + n);
         }
     }
 }

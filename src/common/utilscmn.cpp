@@ -346,7 +346,7 @@ bool wxPlatform::Is(int platform)
         return true;
 #endif
 
-    return std::find(sm_customPlatforms->cbegin(), sm_customPlatforms->cend(), platform)
+    return std::ranges::find(*sm_customPlatforms, platform)
         != sm_customPlatforms->cend();
 }
 

@@ -302,7 +302,7 @@ void wxNotificationMessageWindow::OnActionButtonClicked(wxCommandEvent& event)
 
 void wxNotificationMessageWindow::AddVisibleNotification(wxNotificationMessageWindow* notif)
 {
-    bool found = std::any_of(ms_visibleNotifications.begin(), ms_visibleNotifications.end(),
+    bool found = std::ranges::any_of(ms_visibleNotifications,
                              [notif](auto* it){ return it == notif; });
 
     if ( !found )

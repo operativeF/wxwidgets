@@ -87,7 +87,7 @@ TAG_HANDLER_BEGIN(FONT, "FONT" )
             while (tk.HasMoreTokens())
             {
                 // TODO: Verify this.
-                const auto possible_face = std::find_if(m_Faces.cbegin(), m_Faces.cend(), 
+                const auto possible_face = std::ranges::find_if(m_Faces, 
                     [&tk](const auto& face)
                     {
                         return wx::utils::IsSameAsNoCase(face, boost::nowide::narrow(tk.GetNextToken().ToStdWstring()));

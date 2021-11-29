@@ -3204,7 +3204,7 @@ wxRecursionGuardFlag changing;
 
 bool IsInCaptureStack(wxWindowBase* win)
 {
-    return cap_stack.cend() != std::find_if(cap_stack.cbegin(), cap_stack.cend(),
+    return cap_stack.end() != std::ranges::find_if(cap_stack,
         [win](const auto window){ return window == win; });
 }
 

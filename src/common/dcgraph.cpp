@@ -1169,8 +1169,9 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) cons
     std::vector<float> widthsD = m_graphicContext->GetPartialTextExtents(text);
 
     std::vector<int> widths(widthsD.size());
-    std::transform(widthsD.begin(), widthsD.end(), widths.begin(), [](auto width){ return std::lround(width); });
 
+    std::ranges::transform(widthsD, widths.begin(),
+        [](auto width){ return std::lround(width); });
 
     return widths;
 }

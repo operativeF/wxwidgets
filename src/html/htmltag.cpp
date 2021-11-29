@@ -479,7 +479,8 @@ wxHtmlTag::~wxHtmlTag()
 bool wxHtmlTag::HasParam(const wxString& par) const
 {        
     const auto parUpper = wx::utils::ToUpperCopy(par);
-    auto paramMatch = std::find_if(m_ParamNames.begin(), m_ParamNames.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+    auto paramMatch = std::ranges::find_if(m_ParamNames,
+        [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
 
     return paramMatch != m_ParamNames.end();
 }
@@ -487,7 +488,8 @@ bool wxHtmlTag::HasParam(const wxString& par) const
 wxString wxHtmlTag::GetParam(const wxString& par, bool with_quotes) const
 {
     const auto parUpper = wx::utils::ToUpperCopy(par);
-    auto paramMatch = std::find_if(m_ParamNames.begin(), m_ParamNames.end(), [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
+    auto paramMatch = std::ranges::find_if(m_ParamNames,
+        [parUpper](const auto& name){ return parUpper == wx::utils::ToUpperCopy(name); });
     
     if (paramMatch == m_ParamNames.end())
         return "";

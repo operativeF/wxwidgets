@@ -44,7 +44,7 @@ public:
         std::vector<std::wstring> wdata;
         wdata.reserve(data.size());
 
-        std::transform(data.begin(), data.end(), std::back_inserter(wdata),
+        std::ranges::transform(data, std::back_inserter(wdata),
             [](const auto& str){ return boost::nowide::widen(str); });
 
         m_basekey.SetMultiStringValue(boost::nowide::widen(value), wdata);

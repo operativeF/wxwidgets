@@ -54,7 +54,7 @@ private:
 public:
     wxHtmlListBoxCache()
     {
-        std::fill(m_items.begin(), m_items.end(), static_cast<size_t>(-1));
+        std::ranges::fill(m_items, static_cast<size_t>(-1));
     }
 
     ~wxHtmlListBoxCache()

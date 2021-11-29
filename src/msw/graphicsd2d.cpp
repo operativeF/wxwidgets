@@ -1047,7 +1047,7 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     wxFAILED_HRESULT_MSG(hr);
 
     // Cleanup temporaries
-    std::for_each(geometries.begin(), geometries.end(), [](auto&& geometry){ geometry->Release(); });
+    std::ranges::for_each(geometries, [](auto&& geometry){ geometry->Release(); });
 
     return wxCOMPtr<ID2D1Geometry>(resultGeometry);
 }
@@ -1400,8 +1400,7 @@ wxD2DPathData::~wxD2DPathData()
 {
     Flush();
 
-    std::for_each(m_pTransformedGeometries.begin(),
-                  m_pTransformedGeometries.end(),
+    std::ranges::for_each(m_pTransformedGeometries,
                   [](auto& transformedGeometry){ transformedGeometry->Release(); });
 }
 

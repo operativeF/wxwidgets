@@ -679,7 +679,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
         }
     }
     
-    std::sort(dirs.begin(), dirs.end(), wxDirCtrlStringCompareFunction);
+    std::ranges::sort(dirs, wxDirCtrlStringCompareFunction);
 
     // Now do the filenames -- but only if we're allowed to
     if (!HasFlag(wxDIRCTRL_DIR_ONLY))
@@ -711,7 +711,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
             }
         }
 
-        std::sort(filenames.begin(), filenames.end(), wxDirCtrlStringCompareFunction);
+        std::ranges::sort(filenames, wxDirCtrlStringCompareFunction);
     }
 
     // Now we really know whether we have any children so tell the tree control

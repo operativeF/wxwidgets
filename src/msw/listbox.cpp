@@ -97,7 +97,7 @@ bool wxListBox::Create(wxWindow *parent,
 
     // initialize the contents
 
-    std::for_each(choices.begin(), choices.end(), [this](const auto& choice){ Append(choice); });
+    std::ranges::for_each(choices, [this](const auto& choice){ Append(choice); });
 
     // now we can compute our best size correctly, so do it again
     SetInitialSize(size);
@@ -664,7 +664,7 @@ bool wxListBox::SetFont(const wxFont &font)
 
     if ( HasFlag(wxLB_OWNERDRAW) )
     {
-        std::for_each(m_aItems.begin(), m_aItems.end(), [this](auto& item){ item->SetFont(m_font); });
+        std::ranges::for_each(m_aItems, [this](auto& item){ item->SetFont(m_font); });
 
         // Non owner drawn list boxes update the item height on their own, but
         // we need to do it manually in the owner drawn case.

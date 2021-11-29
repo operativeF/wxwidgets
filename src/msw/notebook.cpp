@@ -933,7 +933,7 @@ void wxNotebook::OnSize(wxSizeEvent& event)
     int width = rc.right - rc.left;
     int height = rc.bottom - rc.top;
 
-    std::for_each(m_pages.begin(), m_pages.end(),
+    std::ranges::for_each(m_pages,
         [width, height, rc](auto* page){
             page->SetSize(wxRect{rc.left, rc.top, width, height});
         });

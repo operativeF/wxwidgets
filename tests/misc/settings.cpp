@@ -15,6 +15,8 @@
 
 import WX.Test.Prec;
 
+import <algorithm>;
+
 TEST_CASE("Get colour")
 {
     for (unsigned int i=wxSYS_COLOUR_SCROLLBAR; i < wxSYS_COLOUR_MAX; i++)
@@ -34,7 +36,7 @@ TEST_CASE("Get font")
         wxSYS_DEFAULT_GUI_FONT
     };
 
-    std::for_each(ids.cbegin(), ids.cend(),
+    std::ranges::for_each(ids,
         [](const auto& id) {
             const wxFont& font = wxSystemSettings::GetFont(id);
             CHECK(font.IsOk());
@@ -55,7 +57,7 @@ TEST_CASE("Get global colours")
         *wxWHITE
     };
 
-    std::for_each(cols.cbegin(), cols.cend(),
+    std::ranges::for_each(cols,
         [](const auto& col) {
             CHECK( col.IsOk() );
         });
@@ -71,7 +73,7 @@ TEST_CASE("Get global fonts")
         *wxSWISS_FONT
     };
 
-    std::for_each(fonts.cbegin(), fonts.cend(),
+    std::ranges::for_each(fonts,
         [](const auto& font) {
         CHECK( font.IsOk() );
 
@@ -102,7 +104,7 @@ TEST_CASE("Get global brushes")
         *wxWHITE_BRUSH
     };
 
-    std::for_each(brushes.cbegin(), brushes.cend(),
+    std::ranges::for_each(brushes,
         [](const auto& brush) {
             CHECK(brush.IsOk());
         });
@@ -125,7 +127,7 @@ TEST_CASE("Get global pens")
         *wxWHITE_PEN
     };
 
-    std::for_each(pens.cbegin(), pens.cend(),
+    std::ranges::for_each(pens,
         [](const auto& pen) {
             CHECK(pen.IsOk());
         });

@@ -239,7 +239,7 @@ bool wxListBoxBase::CalcAndSendEvent()
         {
             item = selections[idx];
             // FIXME: Improve this.
-            if (std::find(m_oldSelections.begin(), m_oldSelections.end(), item) == std::end(m_oldSelections))
+            if (std::ranges::find(m_oldSelections, item) == m_oldSelections.end())
             {
                 any_new_selected = true;
                 break;
@@ -253,7 +253,7 @@ bool wxListBoxBase::CalcAndSendEvent()
             for ( size_t idx = 0; idx < countSelOld; idx++ )
             {
                 item = m_oldSelections[idx];
-                if (std::find(selections.begin(), selections.end(), item) == std::end(selections))
+                if (std::ranges::find(selections, item) == selections.end())
                 {
                     any_new_deselected = true;
                     break;

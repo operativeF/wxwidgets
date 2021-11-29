@@ -850,7 +850,7 @@ void wxGenericTreeItem::RecursiveResetSize()
 {
     m_width = 0;
 
-    std::for_each(m_children.begin(), m_children.end(),
+    std::ranges::for_each(m_children,
         [](auto& child){
             child->RecursiveResetSize();
         });
@@ -861,7 +861,7 @@ void wxGenericTreeItem::RecursiveResetTextSize()
     m_width = 0;
     m_widthText = -1;
 
-    std::for_each(m_children.begin(), m_children.end(),
+    std::ranges::for_each(m_children,
         [](auto& child){
             child->RecursiveResetTextSize();
         });
@@ -1401,7 +1401,7 @@ wxTreeItemId wxGenericTreeCtrl::wxGetNextSibling(const wxTreeItemId& item) const
     }
 
     wxArrayGenericTreeItems& siblings = parent->GetChildren();
-    int index = std::distance(siblings.begin(), std::find(siblings.begin(), siblings.end(), i));
+    int index = std::distance(siblings.begin(), std::ranges::find(siblings, i));
 
     wxASSERT( index != siblings.size() ); // I'm not a child of my parent?
 
@@ -1423,7 +1423,7 @@ wxTreeItemId wxGenericTreeCtrl::wxGetPrevSibling(const wxTreeItemId& item) const
     }
 
     wxArrayGenericTreeItems& siblings = parent->GetChildren();
-    int index = std::distance(siblings.begin(), std::find(siblings.begin(), siblings.end(), i));
+    int index = std::distance(siblings.begin(), std::ranges::find(siblings, i));
 
     wxASSERT( index != siblings.size() ); // I'm not a child of my parent?
 
@@ -1680,7 +1680,7 @@ wxTreeItemId wxGenericTreeCtrl::DoInsertAfter(const wxTreeItemId& parentId,
     if (idPrevious.IsOk())
     {
         index = std::distance(parent->GetChildren().begin(),
-            std::find(parent->GetChildren().begin(), parent->GetChildren().end(),
+            std::ranges::find(parent->GetChildren(),
                 (wxGenericTreeItem*)idPrevious.m_pItem));
 
         wxASSERT_MSG( index != parent->GetChildren().size() || index == -1,
@@ -1757,7 +1757,7 @@ void wxGenericTreeCtrl::Delete(const wxTreeItemId& itemId)
     if (parent)
     {
         int pos = std::distance(parent->GetChildren().begin(),
-            std::find(parent->GetChildren().begin(), parent->GetChildren().end(), item));
+            std::ranges::find(parent->GetChildren(), item));
         // .. unless there is a next sibling like wxMSW does it
 
         if ((int)(parent->GetChildren().size()) > pos + 1)
@@ -1797,7 +1797,7 @@ void wxGenericTreeCtrl::Delete(const wxTreeItemId& itemId)
     if ( parent )
     {
         // remove by value
-        parent->GetChildren().erase(std::find(parent->GetChildren().begin(), parent->GetChildren().end(), item));
+        parent->GetChildren().erase(std::ranges::find(parent->GetChildren(), item));
     }
     else // deleting the root
     {
@@ -2036,7 +2036,7 @@ wxGenericTreeCtrl::TagNextChildren(wxGenericTreeItem *crt_item,
 
     // FIXME: This is dumb, use iterators.
     wxArrayGenericTreeItems& children = parent->GetChildren();
-    int index = std::distance(children.begin(), std::find(children.begin(), children.end(), crt_item));
+    int index = std::distance(children.begin(), std::ranges::find(children, crt_item));
 
     if(index == children.size())
     {

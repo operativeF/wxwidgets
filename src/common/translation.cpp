@@ -152,7 +152,7 @@ std::string GetPreferredUILanguage(const std::vector<std::string>& available)
                     std::string lang{j};
                     wx::utils::ReplaceAll(lang, "-", "_");
 
-                    const auto isLang = std::find_if(available.cbegin(), available.cend(),
+                    const auto isLang = std::ranges::find_if(available,
                         [lang](const auto& aLang){
                             return wx::utils::IsSameAsNoCase(lang, aLang);
                         });

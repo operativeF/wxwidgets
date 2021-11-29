@@ -472,7 +472,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
 
     hdi.mask |= HDI_ORDER;
     // FIXME: This needs to be checked for accuracy.
-    hdi.iOrder = MSWToNativeOrder(std::distance(std::begin(m_colIndices), std::find(m_colIndices.begin(), m_colIndices.end(), idx)));
+    hdi.iOrder = MSWToNativeOrder(std::distance(std::begin(m_colIndices), std::ranges::find(m_colIndices, idx)));
 
     if ( ::SendMessageW(GetHwnd(), HDM_INSERTITEM,
                        MSWToNativeIdx(idx), (WXLPARAM)&hdi) == -1)

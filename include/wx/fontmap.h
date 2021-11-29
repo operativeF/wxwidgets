@@ -200,7 +200,7 @@ constexpr wxFontEncoding GetEncodingFromName(std::string_view name)
 
 constexpr std::vector<std::string_view> GetAllEncodingNames(wxFontEncoding encoding)
 {
-    auto possibleMatch = std::find_if(gs_encodings.begin(), gs_encodings.end(),
+    auto possibleMatch = std::ranges::find_if(gs_encodings,
         [encoding](const auto& enc){
             return enc.encoding == encoding;
         }

@@ -30,7 +30,7 @@ static std::vector<wxString> gs_optionValues;
 // Option functions (arbitrary name/value mapping)
 void wxSystemOptions::SetOption(const wxString& name, const wxString& value)
 {
-    const auto& possible_name = std::find_if(gs_optionNames.cbegin(), gs_optionNames.cend(),
+    const auto& possible_name = std::ranges::find_if(gs_optionNames,
         [name](const auto& optName)
         {
             return name.IsSameAs(optName, false);
@@ -42,7 +42,7 @@ void wxSystemOptions::SetOption(const wxString& name, const wxString& value)
     }
     else
     {
-        const auto idx = std::distance(std::cbegin(gs_optionNames), possible_name);
+        const auto idx = std::distance(gs_optionNames.begin(), possible_name);
         gs_optionNames[idx] = name;
         gs_optionValues[idx] = value;
     }
@@ -57,7 +57,7 @@ wxString wxSystemOptions::GetOption(std::string_view name)
 {
     wxString val;
 
-    const auto match_iter = std::find_if(gs_optionNames.cbegin(), gs_optionNames.cend(),
+    const auto match_iter = std::ranges::find_if(gs_optionNames,
         [name](const auto& optName)
         {
             return wx::utils::IsSameAsNoCase(name, optName.ToStdString());

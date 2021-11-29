@@ -66,7 +66,7 @@ TEST_SUITE("Test auxilliary functions that work with strings")
     TEST_CASE("EraseIf: Remove all designated characters if the input functor is satisifed.")
     {
         constexpr std::array<char, 3> punctuationMarks {'?', '.', '!'};
-        auto isPunctuation = [=](auto&& c){ return std::find(punctuationMarks.begin(), punctuationMarks.end(), c) != punctuationMarks.end(); };
+        auto isPunctuation = [=](auto&& c){ return std::ranges::find(punctuationMarks, c) != punctuationMarks.end(); };
 
         std::string excessivePunctuation{"Not. A. Chance? Not a... Chance?! NOT. A. CHANCE!!!"};
 

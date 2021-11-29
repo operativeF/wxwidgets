@@ -515,7 +515,7 @@ unsigned int wxDataViewIndexListModel::GetRow( const wxDataViewItem &item ) cons
         return wxPtrToUInt(item.GetID())-1;
 
     // assert for not found
-    return std::distance(m_hash.begin(), std::find(m_hash.cbegin(), m_hash.cend(), item));
+    return std::distance(m_hash.begin(), std::ranges::find(m_hash, item));
 }
 
 wxDataViewItem wxDataViewIndexListModel::GetItem( unsigned int row ) const
@@ -1850,10 +1850,10 @@ bool wxDataViewChoiceByIndexRenderer::GetValueFromEditorCtrl( wxWindow* editor, 
     if (!wxDataViewChoiceRenderer::GetValueFromEditorCtrl( editor, string_value ))
         return false;
     // TODO: Verify this.
-    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+    auto iter_idx = std::ranges::find_if(GetChoices(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
 
-    value = gsl::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
+    value = gsl::narrow_cast<long>(std::distance(GetChoices().begin(), iter_idx));
     return true;
 }
 
@@ -1870,7 +1870,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValue( wxVariant &value ) const
     if (!wxDataViewChoiceRenderer::GetValue( string_value ))
         return false;
 
-    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+    const auto iter_idx = std::ranges::find_if(GetChoices(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
     // TODO: Verify this.
     value = gsl::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
@@ -1883,7 +1883,7 @@ std::string wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
     wxVariant strVal;
     if ( wxDataViewChoiceRenderer::GetValue(strVal) )
         return strVal;
-    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+    const auto iter_idx = std::ranges::find_if(GetChoices(),
         [strVal](const auto& choice) { return strVal.GetString().IsSameAs(choice); });
 
     return fmt::format("{:li}", static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx)));

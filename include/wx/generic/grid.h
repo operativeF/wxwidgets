@@ -2056,7 +2056,7 @@ public:
         if ( m_colAt.empty() )
             return idx;
 
-        auto pos = std::find(m_colAt.begin(), m_colAt.end(), idx);
+        auto pos = std::ranges::find(m_colAt, idx);
         wxASSERT_MSG( pos != std::end(m_colAt), "invalid column index" );
 
         return std::distance(std::begin(m_colAt), pos);

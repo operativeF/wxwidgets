@@ -172,7 +172,7 @@ public:
     // Is this id in the main button id array?
     bool IsMainButtonId(wxWindowID id) const
     {
-        return std::find(m_mainButtonIds.begin(), m_mainButtonIds.end(),
+        return std::ranges::find(m_mainButtonIds,
             ((int) id)) != std::end(m_mainButtonIds);
     }
 

@@ -4721,7 +4721,7 @@ void wxListMainWindow::SortItems( wxListCtrlCompare fn, wxIntPtr data )
     HighlightAll(false);
     ResetCurrent();
 
-    std::sort(m_lines.begin(), m_lines.end(), wxListLineComparator(fn, data));
+    std::ranges::sort(m_lines, wxListLineComparator(fn, data));
 
     m_dirty = true;
 }

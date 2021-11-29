@@ -71,7 +71,7 @@ TEST_CASE("Operators")
             { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
         }};
 
-        std::for_each(s_rects.cbegin(), s_rects.cend(),
+        std::ranges::for_each(s_rects,
             [](const auto& rect) {
                 CHECK(
                     rect.GetFirst() + rect.GetSecond() == rect.GetResult()
@@ -107,7 +107,7 @@ TEST_CASE("Operators")
             { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
         }};
 
-        std::for_each(s_rects.cbegin(), s_rects.cend(),
+        std::ranges::for_each(s_rects,
             [](const auto& rect) {
                 CHECK(
                     rect.GetFirst().Union(rect.GetSecond()) == rect.GetResult()

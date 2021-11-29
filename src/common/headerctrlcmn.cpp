@@ -184,7 +184,7 @@ unsigned int wxHeaderCtrlBase::GetColumnPos(unsigned int idx) const
     wxCHECK_MSG( idx < GetColumnCount(), wxNO_COLUMN, "invalid index" );
 
     const std::vector<int> order = GetColumnsOrder();
-    const auto pos = std::find(order.begin(), order.end(), idx);
+    const auto pos = std::ranges::find(order, idx);
     // TODO: This is impossible now, yeah?
     // wxCHECK_MSG( pos != std::end(order), wxNO_COLUMN, "column unexpectedly not displayed at all" );
 
@@ -197,7 +197,7 @@ void wxHeaderCtrlBase::MoveColumnInOrderArray(std::vector<int>& order,
                                               unsigned int idx,
                                               unsigned int pos)
 {
-    auto posOld = std::find(order.begin(), order.end(), idx);
+    auto posOld = std::ranges::find(order, idx);
     wxASSERT_MSG( posOld != std::end(order), "invalid index" );
 
     if ( pos != std::distance(std::begin(order), posOld) )

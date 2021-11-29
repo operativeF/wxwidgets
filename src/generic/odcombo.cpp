@@ -618,7 +618,7 @@ void wxVListBoxComboPopup::Delete( unsigned int item )
 int wxVListBoxComboPopup::FindString(std::string_view s, bool bCase) const
 {
     // FIXME: Stupid.
-    const auto possibleMatch = std::find_if(m_strings.cbegin(), m_strings.cend(),
+    const auto possibleMatch = std::ranges::find_if(m_strings.cbegin(), m_strings.cend(),
         [s, bCase](const auto& str){
             if(!bCase)
             {
@@ -644,7 +644,7 @@ int wxVListBoxComboPopup::FindString(std::string_view s, bool bCase) const
 // item.IsSameAs(str, false)
 bool wxVListBoxComboPopup::FindItem(std::string_view item, std::string* trueItem)
 {
-    int idx = std::find_if(m_strings.cbegin(), m_strings.cend(),
+    int idx = std::ranges::find_if(m_strings,
         [item](const auto& str){
             return wx::utils::IsSameAsNoCase(item, str);
     }) - m_strings.cbegin();
@@ -702,7 +702,7 @@ int wxVListBoxComboPopup::GetSelection() const
 
 void wxVListBoxComboPopup::SetStringValue( const std::string& value )
 {
-    const auto index = std::find(m_strings.cbegin(), m_strings.cend(), value);
+    const auto index = std::ranges::find(m_strings, value);
 
     m_stringValue = value;
 
@@ -863,12 +863,12 @@ void wxVListBoxComboPopup::Populate( const std::vector<std::string>& choices )
 
     // Sort the initial choices
     if ( m_combo->wxGetWindowStyle() & wxCB_SORT )
-        std::sort(m_strings.begin(), m_strings.end());
+        std::ranges::sort(m_strings);
     // Find initial selection
-    wxString strValue = m_combo->GetValue();
-    // TODO: Check for out of bounds?
+    auto strValue = m_combo->GetValue();
+
     if ( !strValue.empty() )
-        m_value = std::find(m_strings.cbegin(), m_strings.cend(), strValue) - m_strings.cbegin();
+        m_value = std::ranges::find(m_strings, strValue) - m_strings.cbegin();
 }
 
 // ----------------------------------------------------------------------------
@@ -1040,7 +1040,7 @@ int wxOwnerDrawnComboBox::FindString(std::string_view s, bool bCase) const
 {
     // TODO: OOB?
     if ( !m_popupInterface )
-        return std::find_if(m_initChs.cbegin(), m_initChs.cend(),
+        return std::ranges::find_if(m_initChs,
             [=](std::string_view str){
                 return wxItemContainerImmutable::FindString(str, bCase);
         }) - m_initChs.cbegin();
@@ -1073,7 +1073,7 @@ int wxOwnerDrawnComboBox::GetSelection() const
 {
     // TODO: OOB?
     if ( !m_popupInterface )
-        return std::find(m_initChs.cbegin(), m_initChs.cend(), m_valueString) - m_initChs.cbegin();
+        return std::ranges::find(m_initChs, m_valueString) - m_initChs.cbegin();
 
     return GetVListBoxComboPopup()->GetSelection();
 }

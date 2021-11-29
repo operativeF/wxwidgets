@@ -147,7 +147,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
     {
         // is this a new charset?
         int cs = lf->lfCharSet;
-        if (std::find(m_charsets.begin(), m_charsets.end(), cs) == std::end(m_charsets))
+        if (std::ranges::find(m_charsets, cs) == m_charsets.end())
         {
             const_cast<wxFontEnumeratorHelper *>(this)->m_charsets.push_back(cs);
 
@@ -195,7 +195,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
         // we can get the same facename twice or more in this case because it
         // may exist in several charsets but we only want to return one copy of
         // it (note that this can't happen for m_charset != DEFAULT_CHARSET)
-        if(std::find(m_facenames.cbegin(), m_facenames.cend(), boost::nowide::narrow(lf->lfFaceName)) != m_facenames.cend())
+        if(std::ranges::find(m_facenames, boost::nowide::narrow(lf->lfFaceName)) != m_facenames.cend())
         {
             // continue enumeration
             return true;

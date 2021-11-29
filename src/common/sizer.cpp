@@ -1774,7 +1774,7 @@ void wxFlexGridSizer::AdjustForFlexDirection()
         auto largest = *std::max_element(array.cbegin(), array.cend());
 
         // and now fill it with the largest value if not hidden (== -1)
-        std::replace_if(array.begin(), array.end(), [](auto val) { return val != -1; }, largest);
+        std::ranges::replace_if(array, [](auto val) { return val != -1; }, largest);
     }
 }
 
@@ -1948,12 +1948,12 @@ void wxFlexGridSizer::AdjustForGrowables(wxSize sz, wxSize minSize)
 
 bool wxFlexGridSizer::IsRowGrowable( size_t idx )
 {
-    return std::find(m_growableRows.cbegin(), m_growableRows.cend(), idx) != std::cend(m_growableRows);
+    return std::ranges::find(m_growableRows, idx) != m_growableRows.end();
 }
 
 bool wxFlexGridSizer::IsColGrowable( size_t idx )
 {
-    return std::find(m_growableCols.cbegin(), m_growableCols.cend(), idx) != std::cend(m_growableCols);
+    return std::ranges::find(m_growableCols, idx) != m_growableCols.end();
 }
 
 void wxFlexGridSizer::AddGrowableRow( size_t idx, int proportion )

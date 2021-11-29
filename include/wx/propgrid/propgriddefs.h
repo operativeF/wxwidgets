@@ -664,14 +664,14 @@ protected:
 template<typename T>
 inline bool wxPGItemExistsInVector(const std::vector<T>& vector, const T& item)
 {
-    return std::find(vector.begin(), vector.end(), item) != vector.end();
+    return std::ranges::find(vector, item) != vector.end();
 }
 
 // Utility to determine the index of the item in the vector.
 template<typename T>
 inline int wxPGItemIndexInVector(const std::vector<T>& vector, const T& item)
 {
-    typename std::vector<T>::const_iterator it = std::find(vector.begin(), vector.end(), item);
+    typename std::vector<T>::const_iterator it = std::ranges::find(vector, item);
     if ( it != vector.end() )
         return (int)(it - vector.begin());
 
@@ -682,7 +682,7 @@ inline int wxPGItemIndexInVector(const std::vector<T>& vector, const T& item)
 template<typename T>
 inline void wxPGRemoveItemFromVector(std::vector<T>& vector, const T& item)
 {
-    typename std::vector<T>::iterator it = std::find(vector.begin(), vector.end(), item);
+    typename std::vector<T>::iterator it = std::ranges::find(vector, item);
     if ( it != vector.end() )
     {
         vector.erase(it);

@@ -1770,7 +1770,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 
     if (sort)
     {
-        std::sort(strings.begin(), strings.end());
+        std::ranges::sort(strings);
 
         for (size_t i = 0; i < strings.size(); i++)
         {
@@ -1844,7 +1844,7 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
 
     if (sort)
     {
-        std::sort(strings.begin(), strings.end());
+        std::ranges::sort(strings);
         // Yes, this will be slow, but template lists
         // are typically short.
 
