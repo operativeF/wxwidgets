@@ -391,7 +391,7 @@ wxObjectRefData *wxObject::CreateRefData() const
 }
 
 wxObjectRefData *
-wxObject::CloneRefData(const [[maybe_unused]] wxObjectRefData * data) const
+wxObject::CloneRefData([[maybe_unused]] const wxObjectRefData * data) const
 {
     // if you use AllocExclusive() you must override this method
     wxFAIL_MSG( "CloneRefData() must be overridden if called!" );

@@ -995,7 +995,7 @@ wxFileOffset wxInputStream::TellI() const
 // wxOutputStream
 // ----------------------------------------------------------------------------
 
-size_t wxOutputStream::OnSysWrite(const [[maybe_unused]] void * buffer,
+size_t wxOutputStream::OnSysWrite([[maybe_unused]] const void * buffer,
                                   [[maybe_unused]] size_t bufsize)
 {
     return 0;
