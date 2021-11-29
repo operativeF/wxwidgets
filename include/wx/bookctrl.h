@@ -215,7 +215,7 @@ public:
 
     // hit test: returns which page is hit and, optionally, where (icon, label)
     virtual int HitTest([[maybe_unused]] const wxPoint& pt,
-                        unsigned [[maybe_unused]] int* flags = nullptr) const
+                        [[maybe_unused]]unsigned int* flags = nullptr) const
     {
         return wxNOT_FOUND;
     }

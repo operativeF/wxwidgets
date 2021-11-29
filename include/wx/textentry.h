@@ -144,7 +144,7 @@ public:
 
     // set the max number of characters which may be entered in a single line
     // text control
-    virtual void SetMaxLength(unsigned [[maybe_unused]] long len) { }
+    virtual void SetMaxLength([[maybe_unused]] unsigned long len) { }
 
     // convert any lower-case characters to upper-case on the fly in this entry
     virtual void ForceUpper();
