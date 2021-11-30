@@ -12,7 +12,7 @@
 
 #include "wx/itemattr.h"
 
-#include "wx/msw/wrapcctl.h"
+import WX.WinDef;
 
 namespace wxMSWImpl
 {
@@ -24,13 +24,10 @@ namespace wxMSWImpl
 class CustomDraw
 {
 public:
-    // Trivial default ctor needed for non-copyable class.
-    CustomDraw()
-    = default;
-
     // Virtual dtor for the base class.
-    virtual ~CustomDraw()
-    = default;
+    virtual ~CustomDraw() = default;
+
+    CustomDraw& operator=(CustomDraw&&) = delete;
 
     // Implementation of NM_CUSTOMDRAW handler, returns one of CDRF_XXX
     // constants, possibly CDRF_DODEFAULT if custom drawing is not necessary.
@@ -42,15 +39,12 @@ private:
 
     // Return the attribute to use for the given item, can return NULL if this
     // item doesn't need to be custom-drawn.
-    virtual const wxItemAttr* GetItemAttr(DWORD_PTR dwItemSpec) const = 0;
+    virtual const wxItemAttr* GetItemAttr(WXDWORD_PTR dwItemSpec) const = 0;
 
 
     // Set the colours and font for the specified WXHDC, return CDRF_NEWFONT if
     // the font was changed.
     WXLPARAM HandleItemPrepaint(const wxItemAttr& attr, WXHDC hdc);
-
-    CustomDraw(const CustomDraw&) = delete;
-	CustomDraw& operator=(const CustomDraw&) = delete;
 };
 
 } // namespace wxMSWImpl

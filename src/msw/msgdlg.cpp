@@ -535,13 +535,12 @@ int wxMessageDialog::ShowModal()
 {
     WX_HOOK_MODAL_DIALOG();
 
-#ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
     {
         TaskDialogIndirect_t taskDialogIndirect = GetTaskDialogIndirectFunc();
         wxCHECK_MSG( taskDialogIndirect, wxID_CANCEL, "no task dialog?" );
 
-        WinStruct<TASKDIALOGCONFIG> tdc;
+        WinStruct<WXTASKDIALOGCONFIG> tdc;
         wxMSWTaskDialogConfig wxTdc( *this );
         wxTdc.MSWCommonTaskDialogInit( tdc );
 
@@ -565,7 +564,6 @@ int wxMessageDialog::ShowModal()
 
         return MSWTranslateReturnCode( msAns );
     }
-#endif // wxHAS_MSW_TASKDIALOG
 
     return ShowMessageBox();
 }
@@ -584,13 +582,11 @@ unsigned int wxMessageDialog::GetEffectiveIcon() const
 
 void wxMessageDialog::DoCentre(unsigned int dir)
 {
-#ifdef wxHAS_MSW_TASKDIALOG
     // Task dialog is always centered on its parent window and trying to center
     // it manually doesn't work because its WXHWND is not created yet so don't
     // even try as this would only result in (debug) error messages.
     if ( HasNativeTaskDialog() )
         return;
-#endif // wxHAS_MSW_TASKDIALOG
 
     wxMessageDialogBase::DoCentre(dir);
 }
@@ -598,8 +594,6 @@ void wxMessageDialog::DoCentre(unsigned int dir)
 // ----------------------------------------------------------------------------
 // Helpers of the wxMSWMessageDialog namespace
 // ----------------------------------------------------------------------------
-
-#ifdef wxHAS_MSW_TASKDIALOG
 
 wxMSWTaskDialogConfig::wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg)
                      : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS])
@@ -640,7 +634,7 @@ wxMSWTaskDialogConfig::wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg)
     btnHelpLabel = dlg.GetHelpLabel();
 }
 
-void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
+void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(WXTASKDIALOGCONFIG &tdc)
 {
     // Use TDF_SIZE_TO_CONTENT to try to prevent Windows from truncating or
     // ellipsizing the message text. This doesn't always work as Windows will
@@ -755,7 +749,7 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     }
 }
 
-void wxMSWTaskDialogConfig::AddTaskDialogButton(TASKDIALOGCONFIG &tdc,
+void wxMSWTaskDialogConfig::AddTaskDialogButton(WXTASKDIALOGCONFIG &tdc,
                                                 int btnCustomId,
                                                 int btnCommonId,
                                                 const std::string& customLabel)
@@ -806,17 +800,11 @@ TaskDialogIndirect_t wxMSWMessageDialog::GetTaskDialogIndirectFunc()
     return s_TaskDialogIndirect;
 }
 
-#endif // wxHAS_MSW_TASKDIALOG
 
 bool wxMSWMessageDialog::HasNativeTaskDialog()
 {
-#ifdef wxHAS_MSW_TASKDIALOG
-    if ( wxGetWinVersion() >= wxWinVersion_6 )
-    {
-        if ( wxMSWMessageDialog::GetTaskDialogIndirectFunc() )
-            return true;
-    }
-#endif // wxHAS_MSW_TASKDIALOG
+    if ( wxMSWMessageDialog::GetTaskDialogIndirectFunc() )
+        return true;
 
     return false;
 }
