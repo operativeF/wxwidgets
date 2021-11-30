@@ -24,6 +24,8 @@
 #include <boost/nowide/stackstring.hpp>
 #include <gsl/gsl>
 
+import WX.WinDef;
+
 using namespace wxMSWMessageDialog;
 
 #ifdef wxHAS_MSW_TASKDIALOG
@@ -410,7 +412,7 @@ wxProgressDialog::~wxProgressDialog()
     const WXHANDLE hThread = m_taskDialogRunner->MSWGetHandle();
     for ( bool cont = true; cont; )
     {
-        DWORD rc = ::MsgWaitForMultipleObjects
+        WXDWORD rc = ::MsgWaitForMultipleObjects
                      (
                        1,                   // number of objects to wait for
                        &hThread,            // the objects

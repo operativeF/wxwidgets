@@ -44,9 +44,9 @@ import WX.WinDef;
 static wxDynamicLibrary s_mprLib;
 #endif
 
-using WNetOpenEnumPtr = DWORD(WINAPI*)(DWORD, DWORD, DWORD, LPNETRESOURCE, LPHANDLE);
-using WNetEnumResourcePtr = DWORD (WINAPI*)(HANDLE, LPDWORD, LPVOID, LPDWORD);
-using WNetCloseEnumPtr = DWORD (WINAPI*)(HANDLE);
+using WNetOpenEnumPtr = WXDWORD(WINAPI*)(WXDWORD, WXDWORD, WXDWORD, LPNETRESOURCE, LPHANDLE);
+using WNetEnumResourcePtr = WXDWORD (WINAPI*)(HANDLE, LPDWORD, LPVOID, LPDWORD);
+using WNetCloseEnumPtr = WXDWORD (WINAPI*)(HANDLE);
 
 static WNetOpenEnumPtr s_pWNetOpenEnum;
 static WNetEnumResourcePtr s_pWNetEnumResource;
@@ -233,8 +233,8 @@ static void BuildListFromNN(std::vector<std::string>& list, NETRESOURCEW* pResSr
     //----------------------------------------------------------------------
     if (rc = s_pWNetOpenEnum(scope, RESOURCETYPE_DISK, 0, pResSrc, &hEnum), rc == NO_ERROR)
     {
-        DWORD count = 1;
-        DWORD size = 256;
+        WXDWORD count = 1;
+        WXDWORD size = 256;
         NETRESOURCEW* pRes = (NETRESOURCEW*)malloc(size);
         memset(pRes, 0, sizeof(NETRESOURCEW));
         while (rc = s_pWNetEnumResource(hEnum, &count, pRes, &size), rc == NO_ERROR || rc == ERROR_MORE_DATA)
@@ -407,7 +407,7 @@ std::vector<std::string> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsig
     // Local and mapped drives first.
     //-------------------------------
     // Allocate the required space for the API call.
-    const DWORD chars = ::GetLogicalDriveStringsW(0, nullptr);
+    const WXDWORD chars = ::GetLogicalDriveStringsW(0, nullptr);
 
     std::vector<WCHAR> buf;
     buf.resize(chars + 1);

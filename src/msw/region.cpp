@@ -11,6 +11,7 @@
 #include "wx/msw/private.h"
 #include "wx/region.h"
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
@@ -29,7 +30,7 @@ struct wxRegionRefData : public wxGDIRefData
 
     wxRegionRefData(const wxRegionRefData& data)  
     {
-        DWORD noBytes = ::GetRegionData(data.m_region.get(), 0, nullptr);
+        WXDWORD noBytes = ::GetRegionData(data.m_region.get(), 0, nullptr);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
 
         ::GetRegionData(data.m_region.get(), noBytes, rgnData);
@@ -346,7 +347,7 @@ void wxRegionIterator::Reset(const wxRegion& region)
     }
     else
     {
-        DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region.get(), 0, nullptr);
+        WXDWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region.get(), 0, nullptr);
         
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region.get(), noBytes, rgnData);

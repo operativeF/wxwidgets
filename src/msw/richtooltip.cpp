@@ -21,6 +21,8 @@
 
 #include <memory>
 
+import WX.WinDef;
+
 // Provide definitions missing from some compilers SDK headers.
 
 #ifndef TTI_NONE
@@ -36,7 +38,7 @@ enum
 #ifndef Edit_ShowBalloonTip
 struct EDITBALLOONTIP
 {
-    DWORD cbStruct;
+    WXDWORD cbStruct;
     LPCWSTR pszTitle;
     LPCWSTR pszText;
     int ttiIcon;

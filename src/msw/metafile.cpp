@@ -15,6 +15,8 @@
 #include "wx/metafile.h"
 #include "wx/filename.h"
 
+import WX.WinDef;
+
 import <cstdio>;
 import <cstring>;
 
@@ -303,11 +305,11 @@ struct RECT32
 };
 
 struct mfPLACEABLEHEADER {
-    DWORD    key;
+    WXDWORD    key;
     short    hmf;
     RECT32    bbox;
     WXWORD    inch;
-    DWORD    reserved;
+    WXDWORD    reserved;
     WXWORD    checksum;
 };
 

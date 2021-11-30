@@ -18,15 +18,7 @@
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"
 
-// ============================================================================
-// wxRadioButton implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxRadioButton creation
-// ----------------------------------------------------------------------------
-
-
+import WX.WinDef;
 
 bool wxRadioButton::Create(wxWindow *parent,
                            wxWindowID id,
@@ -40,8 +32,8 @@ bool wxRadioButton::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    DWORD exstyle = 0;
-    DWORD msStyle = MSWGetStyle(style, &exstyle);
+    WXDWORD exstyle = 0;
+    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
 
     if ( !MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle) )
         return false;
@@ -264,9 +256,9 @@ wxSize wxRadioButton::DoGetBestSize() const
     return radioTextExtents;
 }
 
-DWORD wxRadioButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxRadioButton::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( HasFlag(wxRB_GROUP) )
         msStyle |= WS_GROUP;

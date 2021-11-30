@@ -16,6 +16,8 @@
 
 #include <mmsystem.h>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxSoundData
 // ----------------------------------------------------------------------------
@@ -29,7 +31,7 @@ struct wxSoundData
     virtual bool IsOk() const = 0;
 
     // get the flag corresponding to our content for PlaySound()
-    virtual DWORD GetSoundFlag() const = 0;
+    virtual WXDWORD GetSoundFlag() const = 0;
 
     // get the data to be passed to PlaySound()
     virtual LPCTSTR GetSoundData() const = 0;
@@ -48,7 +50,7 @@ public:
     void *GetPtr() const { return m_waveDataPtr; }
 
     bool IsOk() const override { return GetPtr() != nullptr; }
-    DWORD GetSoundFlag() const override { return SND_MEMORY; }
+    WXDWORD GetSoundFlag() const override { return SND_MEMORY; }
     LPCTSTR GetSoundData() const override { return (LPCTSTR)GetPtr(); }
 
 private:
@@ -66,7 +68,7 @@ public:
 	wxSoundDataFile& operator=(const wxSoundDataFile&) = delete;
 
     bool IsOk() const override { return !m_name.empty(); }
-    DWORD GetSoundFlag() const override
+    WXDWORD GetSoundFlag() const override
     {
         return m_isResource ? SND_RESOURCE : SND_FILENAME;
     }
@@ -155,7 +157,7 @@ bool wxSound::DoPlay(unsigned flags) const
     if ( !IsOk() || !m_data->IsOk() )
         return false;
 
-    DWORD flagsMSW = m_data->GetSoundFlag();
+    WXDWORD flagsMSW = m_data->GetSoundFlag();
     WXHMODULE hmod = flagsMSW == SND_RESOURCE ? wxGetInstance() : nullptr;
 
     // we don't want replacement default sound

@@ -24,6 +24,8 @@
 
 #include "wx/sysopt.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // ---------------------------------------------------------------------------
@@ -112,9 +114,9 @@ bool wxStaticBitmap::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxStaticBitmap::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxStaticBitmap::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // what kind of control are we?
     msStyle |= m_isIcon ? SS_ICON : SS_BITMAP;

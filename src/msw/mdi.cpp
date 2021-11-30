@@ -171,8 +171,8 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
   else
     m_windowId = NewControlId();
 
-  DWORD exflags;
-  DWORD msflags = MSWGetCreateWindowFlags(&exflags);
+  WXDWORD exflags;
+  WXDWORD msflags = MSWGetCreateWindowFlags(&exflags);
   msflags &= ~WS_VSCROLL;
   msflags &= ~WS_HSCROLL;
 
@@ -835,7 +835,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
   else
       mcs.cy = CW_USEDEFAULT;
 
-  DWORD msflags = WS_OVERLAPPED | WS_CLIPCHILDREN;
+  WXDWORD msflags = WS_OVERLAPPED | WS_CLIPCHILDREN;
   if (style & wxMINIMIZE_BOX)
     msflags |= WS_MINIMIZEBOX;
   if (style & wxMAXIMIZE_BOX)
@@ -1201,8 +1201,8 @@ bool wxMDIChildFrame::HandleWindowPosChanging(void *pos)
     if (!(lpPos->flags & SWP_NOSIZE))
     {
         RECT rectClient;
-        DWORD dwExStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_EXSTYLE);
-        DWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+        WXDWORD dwExStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_EXSTYLE);
+        WXDWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
         if (ResetWindowStyle((void *) & rectClient) && (dwStyle & WS_MAXIMIZE))
         {
             ::AdjustWindowRectEx(&rectClient, dwStyle, false, dwExStyle);
@@ -1288,7 +1288,7 @@ bool wxMDIChildFrame::ResetWindowStyle(void *vrect)
 
         // we want to test whether there is a maximized child, so just set
         // dwThisStyle to 0 if there is no child at all
-        DWORD dwThisStyle = pChild
+        WXDWORD dwThisStyle = pChild
             ? ::GetWindowLongPtrW(GetHwndOf(pChild), GWL_STYLE) : 0;
         updateStyle.TurnOnOrOff(!(dwThisStyle & WS_MAXIMIZE), WS_EX_CLIENTEDGE);
 
@@ -1327,7 +1327,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, unsigned int styl
     ccs.hWindowMenu = GetMDIWindowMenu(parent);
     ccs.idFirstChild = wxFIRST_MDI_CHILD;
 
-    DWORD msStyle = MDIS_ALLCHILDSTYLES | WS_VISIBLE | WS_CHILD |
+    WXDWORD msStyle = MDIS_ALLCHILDSTYLES | WS_VISIBLE | WS_CHILD |
                     WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 
     if ( style & wxHSCROLL )
@@ -1335,7 +1335,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, unsigned int styl
     if ( style & wxVSCROLL )
         msStyle |= WS_VSCROLL;
 
-    DWORD exStyle = WS_EX_CLIENTEDGE;
+    WXDWORD exStyle = WS_EX_CLIENTEDGE;
 
     wxWindowCreationHook hook(this);
     m_hWnd = (WXHWND)::CreateWindowExW
@@ -1451,7 +1451,7 @@ void MDISetMenu(wxWindow *win, WXHMENU hmenuFrame, WXHMENU hmenuWindow)
                             (WXWPARAM)hmenuFrame,
                             (WXLPARAM)hmenuWindow) )
         {
-            const DWORD err = ::GetLastError();
+            const WXDWORD err = ::GetLastError();
             if ( err != ERROR_SUCCESS )
             {
                 wxLogApiError("SendMessageW(WM_MDISETMENU)", err);

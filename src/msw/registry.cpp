@@ -33,6 +33,8 @@
 //#define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // some registry functions don't like signed chars
@@ -107,7 +109,7 @@ static std::string GetFullName(const wxRegKey *pKey, const std::string& szValue)
 static inline const char* RegValueStr(const std::string& szValue);
 
 // Return the user-readable name of the given REG_XXX type constant.
-static std::string GetTypeString(DWORD dwType)
+static std::string GetTypeString(WXDWORD dwType)
 {
 #define REG_TYPE_TO_STR(type) case REG_ ## type: return #type
 
@@ -351,7 +353,7 @@ bool wxRegKey::GetKeyInfo(size_t *pnSubKeys,
   // We need to use intermediate variables in 64 bit build as the function
   // parameters must be 32 bit DWORDs and not 64 bit size_t values.
 #ifdef __WIN64__
-  DWORD dwSubKeys = 0,
+  WXDWORD dwSubKeys = 0,
         dwMaxKeyLen = 0,
         dwValues = 0,
         dwMaxValueLen = 0;
@@ -451,7 +453,7 @@ bool wxRegKey::Create(bool bOkIfExists)
     return true;
 
   HKEY tmpKey;
-  DWORD disposition;
+  WXDWORD disposition;
   boost::nowide::wstackstring stackStrKey{m_strKey.c_str()};
   m_dwLastError = ::RegCreateKeyExW((HKEY) m_hRootKey, stackStrKey.get(),
       wxRESERVED_PARAM,
@@ -735,7 +737,7 @@ bool wxRegKey::DeleteSelf()
 #if wxUSE_DYNLIB_CLASS
   wxDynamicLibrary dllAdvapi32("advapi32");
   // Minimum supported OS for RegDeleteKeyEx: Vista, XP Pro x64, Win Server 2008, Win Server 2003 SP1
-  using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCTSTR, REGSAM, DWORD);
+  using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCTSTR, REGSAM, WXDWORD);
   RegDeleteKeyEx_t wxDL_INIT_FUNC_AW(pfn, RegDeleteKeyEx, dllAdvapi32);
   if (pfnRegDeleteKeyEx)
   {
@@ -852,7 +854,7 @@ wxRegKey::ValueType wxRegKey::GetValueType(const std::string& szValue) const
     if ( ! CONST_CAST Open(Read) )
       return Type_None;
 
-    DWORD dwType;
+    WXDWORD dwType;
     boost::nowide::wstackstring stackSzValue{szValue.c_str()};
     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, stackSzValue.get(), wxRESERVED_PARAM,
                                     &dwType, nullptr, nullptr);
@@ -884,7 +886,7 @@ bool wxRegKey::SetValue(const std::string& szValue, long lValue)
 bool wxRegKey::QueryValue(const std::string& szValue, long *plValue) const
 {
   if ( CONST_CAST Open(Read) ) {
-    DWORD dwType, dwSize = sizeof(DWORD);
+    WXDWORD dwType, dwSize = sizeof(WXDWORD);
     RegString pBuf = (RegString)plValue;
     boost::nowide::wstackstring stackSzValue{szValue.c_str()};
     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, stackSzValue.get(),
@@ -928,7 +930,7 @@ bool wxRegKey::SetValue64(const std::string& szValue, wxLongLong_t llValue)
 bool wxRegKey::QueryValue64(const std::string& szValue, wxLongLong_t *pllValue) const
 {
   if ( CONST_CAST Open(Read) ) {
-    DWORD dwType, dwSize = sizeof(wxLongLong_t); // QWORD doesn't exist.
+    WXDWORD dwType, dwSize = sizeof(wxLongLong_t); // QWORD doesn't exist.
     RegString pBuf = (RegString)pllValue;
     boost::nowide::wstackstring stackSzValue{szValue.c_str()};
     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, stackSzValue.get(),
@@ -979,7 +981,7 @@ bool wxRegKey::QueryValue(const std::string& szValue, wxMemoryBuffer& buffer) co
 {
   if ( CONST_CAST Open(Read) ) {
     // first get the type and size of the data
-    DWORD dwType, dwSize;
+    WXDWORD dwType, dwSize;
     boost::nowide::wstackstring stackRegValue{szValue.c_str()};
     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, stackRegValue.get(),
                                     wxRESERVED_PARAM,
@@ -1027,7 +1029,7 @@ bool wxRegKey::QueryValue(const std::string& szValue,
     {
 
         // first get the type and size of the data
-        DWORD dwType=REG_NONE, dwSize=0;
+        WXDWORD dwType=REG_NONE, dwSize=0;
         boost::nowide::wstackstring stackSzValue{szValue.c_str()};
         m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey,
                                         stackSzValue.get(),
@@ -1043,7 +1045,7 @@ bool wxRegKey::QueryValue(const std::string& szValue,
             }
 
             // We need length in characters, not bytes.
-            DWORD chars = dwSize / sizeof(wxChar);
+            WXDWORD chars = dwSize / sizeof(wxChar);
             if ( !chars )
             {
                 // must treat this case specially as GetWriteBuf() doesn't like
@@ -1079,7 +1081,7 @@ bool wxRegKey::QueryValue(const std::string& szValue,
                 if ( (dwType == REG_EXPAND_SZ) && !raw )
                 {   // FIXME: Okay to reuse stack buffer?
                     boost::nowide::wstackstring stackStrValue{strValue.c_str()};
-                    const DWORD dwExpSize = ::ExpandEnvironmentStringsW(stackStrValue.get(), nullptr, 0);
+                    const WXDWORD dwExpSize = ::ExpandEnvironmentStringsW(stackStrValue.get(), nullptr, 0);
                     bool ok = dwExpSize != 0;
                     if ( ok )
                     {
@@ -1160,7 +1162,7 @@ bool wxRegKey::GetNextValue(std::string& strValueName, long& lIndex) const
         return false;
 
     wxChar  szValueName[1024];                  // @@ use RegQueryInfoKey...
-    DWORD dwValueLen = WXSIZEOF(szValueName);
+    WXDWORD dwValueLen = WXSIZEOF(szValueName);
 
     m_dwLastError = ::RegEnumValueW((HKEY) m_hKey, lIndex++,
                                  szValueName, &dwValueLen,

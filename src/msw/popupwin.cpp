@@ -13,10 +13,6 @@
 #include "wx/msw/private.h"     // for GetDesktopWindow()
 #include "wx/popupwin.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxPopupWindow
 // ----------------------------------------------------------------------------
@@ -29,8 +25,10 @@ bool wxPopupWindow::Create(wxWindow *parent, unsigned int flags)
     m_owner = wxGetTopLevelParent(parent);
 
     return wxPopupWindowBase::Create(parent) &&
-               wxWindow::Create(parent, wxID_ANY,
-                                wxDefaultPosition, wxDefaultSize,
+               wxWindow::Create(parent,
+                                wxID_ANY,
+                                wxDefaultPosition,
+                                wxDefaultSize,
                                 flags);
 }
 
@@ -42,10 +40,10 @@ wxPopupWindow::~wxPopupWindow()
         wxCurrentPopupWindow = nullptr;
 }
 
-DWORD wxPopupWindow::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
+WXDWORD wxPopupWindow::MSWGetStyle(unsigned int flags, WXDWORD *exstyle) const
 {
     // we only honour the border flags, the others don't make sense for us
-    DWORD style = wxWindow::MSWGetStyle(flags & wxBORDER_MASK, exstyle);
+    WXDWORD style = wxWindow::MSWGetStyle(flags & wxBORDER_MASK, exstyle);
 
     // wxMSW uses 2 rather different implementations of wxPopupWindow
     // internally, each one with its own limitations, so we allow specifying

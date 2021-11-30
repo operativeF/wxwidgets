@@ -43,6 +43,7 @@
 #include <windowsx.h>
 
 import WX.Image;
+import WX.WinDef;
 
 import <stack>;
 
@@ -262,7 +263,7 @@ static RECT wxGetTBItemRect(WXHWND hwnd, int index, int id = wxID_NONE)
     {
         // This call can return false status even when there is no real error,
         // e.g. for a hidden button, so check for this to avoid spurious logs.
-        const DWORD err = ::GetLastError();
+        const WXDWORD err = ::GetLastError();
         if ( err != ERROR_SUCCESS )
         {
             bool reportError = true;
@@ -369,7 +370,7 @@ void wxToolBar::MSWSetPadding(WXWORD padding)
 {
     const auto curPadding = ::SendMessageW(GetHwnd(), TB_GETPADDING, 0, 0);
     // Preserve orthogonal padding
-    DWORD newPadding = IsVertical() ? MAKELPARAM(LOWORD(curPadding), padding)
+    WXDWORD newPadding = IsVertical() ? MAKELPARAM(LOWORD(curPadding), padding)
                                     : MAKELPARAM(padding, HIWORD(curPadding));
     ::SendMessageW(GetHwnd(), TB_SETPADDING, 0, newPadding);
 }
@@ -614,11 +615,11 @@ wxSize wxToolBar::DoGetBestSize() const
     return sizeBest;
 }
 
-DWORD wxToolBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxToolBar::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     // toolbars never have border, giving one to them results in broken
     // appearance
-    DWORD msStyle = wxControl::MSWGetStyle
+    WXDWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

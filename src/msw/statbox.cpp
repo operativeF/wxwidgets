@@ -30,6 +30,7 @@
 
 #include <windowsx.h>
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 namespace
@@ -124,9 +125,9 @@ wxWindowList wxStaticBox::GetCompositeWindowParts() const
     return parts;
 }
 
-DWORD wxStaticBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxStaticBox::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD styleWin = wxStaticBoxBase::MSWGetStyle(style, exstyle);
+    WXDWORD styleWin = wxStaticBoxBase::MSWGetStyle(style, exstyle);
 
     // no need for it anymore, must be removed for wxRadioBox child
     // buttons to be able to repaint themselves

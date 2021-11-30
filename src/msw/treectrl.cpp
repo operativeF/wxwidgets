@@ -30,6 +30,8 @@
 
 #include <windowsx.h>
 
+import WX.WinDef;
+
 import <array>;
 
 // macros to hide the cast ugliness
@@ -689,8 +691,8 @@ bool wxTreeCtrl::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    DWORD exStyle = 0;
-    DWORD wstyle = MSWGetStyle(m_windowStyle, & exStyle);
+    WXDWORD exStyle = 0;
+    WXDWORD wstyle = MSWGetStyle(m_windowStyle, & exStyle);
     wstyle |= WS_TABSTOP | TVS_SHOWSELALWAYS;
 
     if ( !(m_windowStyle & wxTR_NO_LINES) )
@@ -3606,7 +3608,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
         case NM_CLICK:
             {
-                DWORD pos = GetMessagePos();
+                WXDWORD pos = GetMessagePos();
                 POINT point
                 {
                     .x = GET_X_LPARAM(pos),

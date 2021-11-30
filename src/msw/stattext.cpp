@@ -19,6 +19,8 @@
 
 #include "wx/msw/private/winstyle.h"
 
+import WX.WinDef;
+
 import Utils.Strings;
 
 bool wxStaticText::Create(wxWindow *parent,
@@ -51,9 +53,9 @@ bool wxStaticText::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxStaticText::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxStaticText::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // translate the alignment flags to the Windows ones
     //

@@ -21,11 +21,13 @@
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/cotaskmemptr.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // types
 // ----------------------------------------------------------------------------
 
-using SHGetKnownFolderPath_t = HRESULT (WINAPI*)(const GUID&, DWORD, HANDLE, PWSTR *);
+using SHGetKnownFolderPath_t = HRESULT (WINAPI*)(const GUID&, WXDWORD, HANDLE, PWSTR *);
 
 // ----------------------------------------------------------------------------
 // constants

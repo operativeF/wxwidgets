@@ -32,13 +32,6 @@
 
 #include "wx/textfile.h"
 
-#include <sys/types.h>
-
-#include <boost/nowide/convert.hpp>
-
-#include <cassert>
-import <string>;
-
 #if wxUSE_RICHEDIT
     #include <richedit.h>
     #include <richole.h>
@@ -63,7 +56,16 @@ import <string>;
     #include <wx/dynlib.h>
 #endif
 
+#include <sys/types.h>
+
+#include <boost/nowide/convert.hpp>
+
+#include <cassert>
+
+import WX.WinDef;
+
 import <stack>;
+import <string>;
 
 
 #ifndef CFM_BACKCOLOR
@@ -196,11 +198,11 @@ public:
 
     wxSTDMETHODIMP ContextSensitiveHelp([[maybe_unused]] BOOL enterMode) override { return E_NOTIMPL; }
     wxSTDMETHODIMP DeleteObject([[maybe_unused]] LPOLEOBJECT oleobj) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetClipboardData([[maybe_unused]] CHARRANGE* chrg, [[maybe_unused]] DWORD reco, [[maybe_unused]] LPDATAOBJECT* dataobj) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP GetDragDropEffect([[maybe_unused]] BOOL drag, [[maybe_unused]] DWORD grfKeyState, [[maybe_unused]] LPDWORD effect) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetClipboardData([[maybe_unused]] CHARRANGE* chrg, [[maybe_unused]] WXDWORD reco, [[maybe_unused]] LPDATAOBJECT* dataobj) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP GetDragDropEffect([[maybe_unused]] BOOL drag, [[maybe_unused]] WXDWORD grfKeyState, [[maybe_unused]] LPDWORD effect) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetInPlaceContext([[maybe_unused]] LPOLEINPLACEFRAME* frame, [[maybe_unused]] LPOLEINPLACEUIWINDOW* doc, [[maybe_unused]] LPOLEINPLACEFRAMEINFO frameInfo) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetNewStorage([[maybe_unused]] LPSTORAGE *stg) override { return E_NOTIMPL; }
-    wxSTDMETHODIMP QueryAcceptData([[maybe_unused]] LPDATAOBJECT dataobj, [[maybe_unused]] CLIPFORMAT* format, [[maybe_unused]] DWORD reco, [[maybe_unused]] BOOL really, [[maybe_unused]] HGLOBAL hMetaPict) override { return E_NOTIMPL; }
+    wxSTDMETHODIMP QueryAcceptData([[maybe_unused]] LPDATAOBJECT dataobj, [[maybe_unused]] CLIPFORMAT* format, [[maybe_unused]] WXDWORD reco, [[maybe_unused]] BOOL really, [[maybe_unused]] HGLOBAL hMetaPict) override { return E_NOTIMPL; }
     wxSTDMETHODIMP QueryInsertObject([[maybe_unused]] LPCLSID clsid, [[maybe_unused]] LPSTORAGE stg, [[maybe_unused]] LONG cp) override { return E_NOTIMPL; }
     wxSTDMETHODIMP ShowContainerUI([[maybe_unused]] BOOL show) override { return E_NOTIMPL; }
 
@@ -384,7 +386,7 @@ bool wxTextCtrl::MSWCreateText(std::string_view value,
                                const wxSize& size)
 {
     // translate wxWin style flags to MSW ones
-    DWORD msStyle = MSWGetCreateWindowFlags();
+    WXDWORD msStyle = MSWGetCreateWindowFlags();
 
     // do create the control - either an EDIT or RICHEDIT
     std::string windowClass = "EDIT";
@@ -712,7 +714,7 @@ void wxTextCtrl::AdoptAttributesFromHWND()
         m_windowStyle |= wxTE_RIGHT;
 }
 
-DWORD wxTextCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxTextCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     long msStyle = wxControl::MSWGetStyle(style, exstyle);
 
@@ -2430,7 +2432,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     font.WXAdjustToPPI(GetDPI());
     int char_height = wxGetCharSize(GetHWND(), font).y;
 
-    DWORD wText = FromDIP(1);
+    WXDWORD wText = FromDIP(1);
     ::SystemParametersInfoW(SPI_GETCARETWIDTH, 0, &wText, 0);
     wText += xlen;
 

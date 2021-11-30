@@ -39,6 +39,8 @@
 
 #include <fmt/core.h>
 
+import WX.WinDef;
+
 import <cctype>;
 import <string>;
 
@@ -248,7 +250,7 @@ std::string wxAssocQueryString(ASSOCSTR assoc,
                             std::string ext,
                             const std::string& verb = {})
 {
-    DWORD dwSize = MAX_PATH;
+    WXDWORD dwSize = MAX_PATH;
     wchar_t bufOut[MAX_PATH] = { 0 };
 
     if ( ext.empty() || ext[0] != '.' )

@@ -30,6 +30,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.
 #ifndef TDF_SIZE_TO_CONTENT
@@ -111,7 +113,7 @@ WXLRESULT wxCALLBACK
 wxMessageDialog::HookFunction(int code, WXWPARAM wParam, WXLPARAM lParam)
 {
     // Find the thread-local instance of wxMessageDialog
-    const DWORD tid = ::GetCurrentThreadId();
+    const WXDWORD tid = ::GetCurrentThreadId();
     wxMessageDialogMap::iterator node = HookMap().find(tid);
     wxCHECK_MSG( node != HookMap().end(), false,
                     "bogus thread id in wxMessageDialog::Hook" );
@@ -512,7 +514,7 @@ int wxMessageDialog::ShowMessageBox()
     // install the hook in any case as we don't know in advance if the message
     // box is not going to be too big (requiring the replacement of the static
     // control with an edit one)
-    const DWORD tid = ::GetCurrentThreadId();
+    const WXDWORD tid = ::GetCurrentThreadId();
     m_hook = ::SetWindowsHookExW(WH_CBT,
                                 &wxMessageDialog::HookFunction, nullptr, tid);
     HookMap()[tid] = this;

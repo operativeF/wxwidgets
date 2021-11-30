@@ -31,6 +31,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 import <algorithm>;
 import <charconv>;
 import <limits>;
@@ -270,8 +272,8 @@ bool wxSpinCtrl::Create(wxWindow *parent,
 
     SetWindowStyle(style);
 
-    DWORD exStyle = 0;
-    DWORD msStyle = MSWGetStyle(wxGetWindowStyle(), & exStyle) ;
+    WXDWORD exStyle = 0;
+    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), & exStyle) ;
 
     // Scroll text automatically if there is not enough space to show all of
     // it, this is better than not allowing to enter more digits at all.

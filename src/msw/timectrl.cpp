@@ -14,15 +14,17 @@
 #include "wx/timectrl.h"
 #include "wx/dateevt.h"
 
+import WX.WinDef;
+
 wxIMPLEMENT_DYNAMIC_CLASS(wxTimePickerCtrl, wxControl);
 
 // ============================================================================
 // wxTimePickerCtrl implementation
 // ============================================================================
 
-DWORD wxTimePickerCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxTimePickerCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD styleMSW = wxTimePickerCtrlBase::MSWGetStyle(style, exstyle);
+    WXDWORD styleMSW = wxTimePickerCtrlBase::MSWGetStyle(style, exstyle);
 
     styleMSW |= DTS_TIMEFORMAT;
 

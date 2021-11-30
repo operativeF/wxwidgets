@@ -44,6 +44,8 @@
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/private/event.h"
 
+import WX.WinDef;
+
 import <vector>;
 
 // ----------------------------------------------------------------------------
@@ -96,8 +98,8 @@ struct wxExecuteData
     HANDLE     hThread{nullptr};       // handle of the thread monitoring its termination
     wxProcess *handler{nullptr};
 
-    DWORD      dwExitCode{};    // the exit code of the process
-    DWORD      dwProcessId{};   // pid of the process
+    WXDWORD      dwExitCode{};    // the exit code of the process
+    WXDWORD      dwProcessId{};   // pid of the process
 
     bool       state{};         // set to false when the process finishes
 };
@@ -249,7 +251,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // thread function for the thread monitoring the process termination
-static DWORD __stdcall wxExecuteThread(void *arg)
+static WXDWORD __stdcall wxExecuteThread(void *arg)
 {
     wxExecuteData * const data = (wxExecuteData *)arg;
 
@@ -387,10 +389,10 @@ bool wxPipeInputStream::CanRead() const
         return false;
     }
 
-    DWORD nAvailable;
+    WXDWORD nAvailable;
 
     // function name is misleading, it works with anon pipes as well
-    DWORD rc = ::PeekNamedPipe
+    WXDWORD rc = ::PeekNamedPipe
                     (
                       m_hInput,     // handle
                       nullptr, 0,      // ptr to buffer and its size
@@ -429,7 +431,7 @@ size_t wxPipeInputStream::OnSysRead(void *buffer, size_t len)
         return 0;
     }
 
-    DWORD bytesRead;
+    WXDWORD bytesRead;
     if ( !::ReadFile(m_hInput, buffer, len, &bytesRead, nullptr) )
     {
         m_lasterror = ::GetLastError() == ERROR_BROKEN_PIPE
@@ -451,7 +453,7 @@ wxPipeOutputStream::wxPipeOutputStream(HANDLE hOutput)
     // unblock the pipe to prevent deadlocks when we're writing to the pipe
     // from which the child process can't read because it is writing in its own
     // end of it
-    DWORD mode = PIPE_READMODE_BYTE | PIPE_NOWAIT;
+    WXDWORD mode = PIPE_READMODE_BYTE | PIPE_NOWAIT;
     if ( !::SetNamedPipeHandleState
             (
                 m_hOutput,
@@ -474,10 +476,10 @@ size_t wxPipeOutputStream::OnSysWrite(const void *buffer, size_t len)
 {
     m_lasterror = wxSTREAM_NO_ERROR;
 
-    DWORD totalWritten = 0;
+    WXDWORD totalWritten = 0;
     while ( len > 0 )
     {
-        DWORD chunkWritten;
+        WXDWORD chunkWritten;
         if ( !::WriteFile(m_hOutput, buffer, len, &chunkWritten, nullptr) )
         {
             m_lasterror = ::GetLastError() == ERROR_BROKEN_PIPE
@@ -725,7 +727,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 
 
     PROCESS_INFORMATION pi;
-    DWORD dwFlags = CREATE_SUSPENDED;
+    WXDWORD dwFlags = CREATE_SUSPENDED;
 
     if ( (flags & wxEXEC_MAKE_GROUP_LEADER) )
         dwFlags |= CREATE_NEW_PROCESS_GROUP;
@@ -901,7 +903,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
         data->handler = handler;
     }
 
-    DWORD tid;
+    WXDWORD tid;
     HANDLE hThread = ::CreateThread(nullptr,
                                     0,
                                     wxExecuteThread,
@@ -911,7 +913,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 
     // resume process we created now - whether the thread creation succeeded or
     // not
-    if ( ::ResumeThread(pi.hThread) == (DWORD)-1 )
+    if ( ::ResumeThread(pi.hThread) == (WXDWORD)-1 )
     {
         // ignore it - what can we do?
         wxLogLastError("ResumeThread in wxExecute");
@@ -1029,7 +1031,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
         traits->AfterChildWaitLoop(cookie);
     }
 
-    const DWORD dwExitCode = data->dwExitCode;
+    const WXDWORD dwExitCode = data->dwExitCode;
     delete data;
 
     // return the exit code

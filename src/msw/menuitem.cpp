@@ -34,6 +34,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 import Utils.Strings;
 
@@ -578,7 +579,7 @@ void wxMenuItem::Check(bool check)
         {
             if ( ::CheckMenuItem(hmenu,
                                  GetMSWId(),
-                                 MF_BYCOMMAND | flags) == (DWORD)-1 )
+                                 MF_BYCOMMAND | flags) == (WXDWORD)-1 )
             {
                 wxFAIL_MSG("CheckMenuItem() failed, item not in the menu?");
             }
@@ -1134,7 +1135,7 @@ void DrawColorCheckMark(WXHDC hdc, int x, int y, int cx, int cy, WXHDC hdcCheckM
     {
         if ( colCheck != colBlack )
         {
-            static constexpr DWORD ROP_DSna = 0x00220326;  // dest = (NOT src) AND dest
+            static constexpr WXDWORD ROP_DSna = 0x00220326;  // dest = (NOT src) AND dest
             ::BitBlt(hdcMem, 0, 0, cx, cy, hdcCheckMask, 0, 0, ROP_DSna);
         }
 

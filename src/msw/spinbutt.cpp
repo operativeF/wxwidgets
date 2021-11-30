@@ -15,6 +15,8 @@
 
 #include "wx/spinbutt.h"
 
+import WX.WinDef;
+
 #ifndef UDM_SETRANGE32
     #define UDM_SETRANGE32 (WM_USER+111)
 #endif
@@ -71,7 +73,7 @@ bool wxSpinButton::Create(wxWindow *parent,
         pt.y = 0;
 
     // translate the styles
-    DWORD wstyle = WS_VISIBLE | WS_CHILD | WS_TABSTOP | /*  WS_CLIPSIBLINGS | */
+    WXDWORD wstyle = WS_VISIBLE | WS_CHILD | WS_TABSTOP | /*  WS_CLIPSIBLINGS | */
                    UDS_NOTHOUSANDS | // never useful, sometimes harmful
                    UDS_ALIGNRIGHT  | // these styles are effectively used only
                    UDS_SETBUDDYINT;  //  by wxSpinCtrl but do no harm otherwise

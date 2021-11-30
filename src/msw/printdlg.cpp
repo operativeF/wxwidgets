@@ -25,6 +25,8 @@
 
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
+
 import <cstdlib>;
 
 // smart pointer like class using OpenPrinter and ClosePrinter
@@ -80,7 +82,7 @@ private:
 
 static wxString wxGetPrintDlgError()
 {
-    DWORD err = CommDlgExtendedError();
+    WXDWORD err = CommDlgExtendedError();
     wxString msg = "Unknown";
     switch (err)
     {
@@ -376,7 +378,8 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
         // Open printer
         if ( printer && printer->Open( printerName ) == TRUE )
         {
-            DWORD dwNeeded, dwRet;
+            WXDWORD dwNeeded;
+            WXDWORD dwRet;
 
             // Step 1:
             // Allocate a buffer of the correct size.

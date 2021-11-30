@@ -30,6 +30,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 import <string>;
 
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
@@ -76,11 +78,11 @@ wxEND_EVENT_TABLE()
 // wxTopLevelWindowMSW creation
 // ----------------------------------------------------------------------------
 
-DWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, DWORD *exflags) const
+WXDWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, WXDWORD *exflags) const
 {
     // let the base class deal with the common styles but fix the ones which
     // don't make sense for us (we also deal with the borders ourselves)
-    DWORD msflags = wxWindow::MSWGetStyle
+    WXDWORD msflags = wxWindow::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exflags
                       ) & ~WS_CHILD & ~WS_VISIBLE;
@@ -376,8 +378,8 @@ bool wxTopLevelWindowMSW::CreateFrame(std::string_view title,
                                       const wxPoint& pos,
                                       const wxSize& size)
 {
-    DWORD exflags;
-    DWORD flags = MSWGetCreateWindowFlags(&exflags);
+    WXDWORD exflags;
+    WXDWORD flags = MSWGetCreateWindowFlags(&exflags);
 
     const wxSize sz = IsAlwaysMaximized() ? wxDefaultSize : size;
 
@@ -440,7 +442,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
         // NB: we need a temporary variable as we can't pass pointer to
         //     dwExtendedStyle directly, it's not aligned correctly for 64 bit
         //     architectures
-        DWORD dwExtendedStyle;
+        WXDWORD dwExtendedStyle;
         dlgTemplate->style = MSWGetStyle(style, &dwExtendedStyle);
         dlgTemplate->dwExtendedStyle = dwExtendedStyle;
 

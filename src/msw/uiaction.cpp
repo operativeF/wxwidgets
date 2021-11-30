@@ -20,6 +20,8 @@
 
 #include "wx/msw/private/keyboard.h"
 
+import WX.WinDef;
+
 import <cmath>;
 
 namespace
@@ -51,7 +53,7 @@ private:
     wxUIActionSimulatorMSWImpl() = default;
 };
 
-DWORD EventTypeForMouseButton(int button, bool isDown)
+WXDWORD EventTypeForMouseButton(int button, bool isDown)
 {
     switch (button)
     {
@@ -66,7 +68,7 @@ DWORD EventTypeForMouseButton(int button, bool isDown)
 
         default:
             wxFAIL_MSG("Unsupported button passed in.");
-            return (DWORD)-1;
+            return (WXDWORD)-1;
     }
 }
 
@@ -89,8 +91,8 @@ bool wxUIActionSimulatorMSWImpl::MouseMove(long x, long y)
 
     // Casts are safe because x and y are supposed to be less than the display
     // size, so there is no danger of overflow.
-    DWORD scaledx = static_cast<DWORD>(std::ceil(x * 65535.0 / (displaySize.x - 1)));
-    DWORD scaledy = static_cast<DWORD>(std::ceil(y * 65535.0 / (displaySize.y - 1)));
+    WXDWORD scaledx = static_cast<WXDWORD>(std::ceil(x * 65535.0 / (displaySize.x - 1)));
+    WXDWORD scaledy = static_cast<WXDWORD>(std::ceil(y * 65535.0 / (displaySize.y - 1)));
     ::mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, scaledx, scaledy, 0, 0);
 
     return true;
@@ -109,9 +111,9 @@ bool
 wxUIActionSimulatorMSWImpl::DoKey(int keycode, [[maybe_unused]] int modifiers, bool isDown)
 {
     bool isExtended;
-    DWORD vkkeycode = wxMSWKeyboard::WXToVK(keycode, &isExtended);
+    WXDWORD vkkeycode = wxMSWKeyboard::WXToVK(keycode, &isExtended);
 
-    DWORD flags = 0;
+    WXDWORD flags = 0;
     if ( isExtended )
         flags |= KEYEVENTF_EXTENDEDKEY;
     if ( !isDown )

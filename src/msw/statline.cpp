@@ -13,9 +13,7 @@
 
 #include "wx/msw/private.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
+import WX.WinDef;
 
 // ----------------------------------------------------------------------------
 // wxStaticLine
@@ -36,13 +34,13 @@ bool wxStaticLine::Create(wxWindow *parent,
     return MSWCreateControl("STATIC", "", pos, size);
 }
 
-DWORD wxStaticLine::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxStaticLine::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     // we never have border
     style &= ~wxBORDER_MASK;
     style |= wxBORDER_NONE;
 
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // add our default styles
     msStyle |= SS_SUNKEN | SS_NOTIFY | WS_CLIPSIBLINGS;

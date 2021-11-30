@@ -23,6 +23,8 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/dynlib.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // These Vista+ only types used by DrawThemeTextEx may not be available in older SDK headers
@@ -32,8 +34,8 @@ using WXDTT_CALLBACK_PROC = int(__stdcall*)(WXHDC hdc, const wchar_t * pszText,
 // FIXME: Figure out what is redundant with new SDKs.
 typedef struct _WXDTTOPTS
 {
-    DWORD             dwSize;
-    DWORD             dwFlags;
+    WXDWORD             dwSize;
+    WXDWORD             dwFlags;
     COLORREF          crText;
     COLORREF          crBorder;
     COLORREF          crShadow;
@@ -1034,7 +1036,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
 
     const int itemState = GetListItemState(flags);
 
-    using DrawThemeTextEx_t = HRESULT(__stdcall*)(HTHEME, WXHDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
+    using DrawThemeTextEx_t = HRESULT(__stdcall*)(HTHEME, WXHDC, int, int, const wchar_t *, int, WXDWORD, RECT *, const WXDTTOPTS *);
     static DrawThemeTextEx_t s_DrawThemeTextEx = nullptr;
     static bool s_initDone = false;
 
@@ -1074,7 +1076,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
             textOpts.crText = textColour.GetPixel();
         }
 
-        DWORD textFlags = DT_NOPREFIX;
+        WXDWORD textFlags = DT_NOPREFIX;
         if ( align & wxALIGN_CENTER_HORIZONTAL )
             textFlags |= DT_CENTER;
         else if ( align & wxALIGN_RIGHT )

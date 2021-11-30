@@ -23,6 +23,8 @@
 
 #include <fmt/core.h>
 
+import WX.WinDef;
+
 // Helper class used to dynamically load the required symbols from winhttp.dll
 class wxWinHTTP
 {
@@ -59,35 +61,35 @@ public:
         return result;
     }
 
-    using WinHttpQueryOption_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPVOID, LPDWORD);
+    using WinHttpQueryOption_t = BOOL(WINAPI*)(HINTERNET, WXDWORD, LPVOID, LPDWORD);
     static WinHttpQueryOption_t WinHttpQueryOption;
-    using WinHttpQueryHeaders_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPCWSTR, LPVOID, LPDWORD, LPDWORD);
+    using WinHttpQueryHeaders_t = BOOL(WINAPI*)(HINTERNET, WXDWORD, LPCWSTR, LPVOID, LPDWORD, LPDWORD);
     static WinHttpQueryHeaders_t WinHttpQueryHeaders;
-    using WinHttpSetOption_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPVOID, DWORD);
+    using WinHttpSetOption_t = BOOL(WINAPI*)(HINTERNET, WXDWORD, LPVOID, WXDWORD);
     static WinHttpSetOption_t WinHttpSetOption;
-    using WinHttpWriteData_t =  BOOL(WINAPI*)(HINTERNET, LPCVOID, DWORD, LPDWORD);
+    using WinHttpWriteData_t =  BOOL(WINAPI*)(HINTERNET, LPCVOID, WXDWORD, LPDWORD);
     static WinHttpWriteData_t WinHttpWriteData;
     using WinHttpCloseHandle_t = BOOL(WINAPI*)(HINTERNET);
     static WinHttpCloseHandle_t WinHttpCloseHandle;
     using WinHttpReceiveResponse_t = BOOL(WINAPI*)(HINTERNET, LPVOID);
     static WinHttpReceiveResponse_t WinHttpReceiveResponse;
-    using WinHttpCrackUrl_t = BOOL(WINAPI*)(LPCWSTR, DWORD, DWORD, LPURL_COMPONENTS);
+    using WinHttpCrackUrl_t = BOOL(WINAPI*)(LPCWSTR, WXDWORD, WXDWORD, LPURL_COMPONENTS);
     static WinHttpCrackUrl_t WinHttpCrackUrl;
-    using WinHttpConnect_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, INTERNET_PORT, DWORD);
+    using WinHttpConnect_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, INTERNET_PORT, WXDWORD);
     static WinHttpConnect_t WinHttpConnect;
-    using WinHttpOpenRequest_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR*, DWORD);
+    using WinHttpOpenRequest_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR*, WXDWORD);
     static WinHttpOpenRequest_t WinHttpOpenRequest;
-    using WinHttpSetStatusCallback_t = WINHTTP_STATUS_CALLBACK(WINAPI*)(HINTERNET, WINHTTP_STATUS_CALLBACK, DWORD, DWORD_PTR);
+    using WinHttpSetStatusCallback_t = WINHTTP_STATUS_CALLBACK(WINAPI*)(HINTERNET, WINHTTP_STATUS_CALLBACK, WXDWORD, DWORD_PTR);
     static WinHttpSetStatusCallback_t WinHttpSetStatusCallback;
-    using WinHttpSendRequest_t = BOOL(WINAPI*)(HINTERNET, LPCWSTR, DWORD, LPVOID, DWORD, DWORD, DWORD_PTR);
+    using WinHttpSendRequest_t = BOOL(WINAPI*)(HINTERNET, LPCWSTR, WXDWORD, LPVOID, WXDWORD, WXDWORD, DWORD_PTR);
     static WinHttpSendRequest_t WinHttpSendRequest;
-    using WinHttpReadData_t = BOOL(WINAPI*)(HINTERNET, LPVOID, DWORD, LPDWORD);
+    using WinHttpReadData_t = BOOL(WINAPI*)(HINTERNET, LPVOID, WXDWORD, LPDWORD);
     static WinHttpReadData_t WinHttpReadData;
     using WinHttpQueryAuthSchemes_t = BOOL(WINAPI*)(HINTERNET, LPDWORD, LPDWORD, LPDWORD);
     static WinHttpQueryAuthSchemes_t WinHttpQueryAuthSchemes;
-    using WinHttpSetCredentials_t = BOOL(WINAPI*)(HINTERNET, DWORD, DWORD, LPCWSTR, LPCWSTR, LPVOID);
+    using WinHttpSetCredentials_t = BOOL(WINAPI*)(HINTERNET, WXDWORD, WXDWORD, LPCWSTR, LPCWSTR, LPVOID);
     static WinHttpSetCredentials_t WinHttpSetCredentials;
-    using WinHttpOpen_t = HINTERNET(WINAPI*)(LPCWSTR, DWORD, LPCWSTR, LPCWSTR, DWORD);
+    using WinHttpOpen_t = HINTERNET(WINAPI*)(LPCWSTR, WXDWORD, LPCWSTR, LPCWSTR, WXDWORD);
     static WinHttpOpen_t WinHttpOpen;
 
 private:
@@ -141,11 +143,11 @@ wxWinHTTP::WinHttpOpen_t wxWinHTTP::WinHttpOpen;
 
 // Helper functions
 
-static wxString wxWinHTTPQueryHeaderString(HINTERNET hRequest, DWORD dwInfoLevel,
+static wxString wxWinHTTPQueryHeaderString(HINTERNET hRequest, WXDWORD dwInfoLevel,
     LPCWSTR pwszName = WINHTTP_HEADER_NAME_BY_INDEX)
 {
     wxString result;
-    DWORD bufferLen = 0;
+    WXDWORD bufferLen = 0;
     wxWinHTTP::WinHttpQueryHeaders(hRequest, dwInfoLevel, pwszName, nullptr, &bufferLen,
         WINHTTP_NO_HEADER_INDEX);
     if ( ::GetLastError() == ERROR_INSUFFICIENT_BUFFER )
@@ -162,10 +164,10 @@ static wxString wxWinHTTPQueryHeaderString(HINTERNET hRequest, DWORD dwInfoLevel
     return result;
 }
 
-static wxString wxWinHTTPQueryOptionString(HINTERNET hInternet, DWORD dwOption)
+static wxString wxWinHTTPQueryOptionString(HINTERNET hInternet, WXDWORD dwOption)
 {
     wxString result;
-    DWORD bufferLen = 0;
+    WXDWORD bufferLen = 0;
     wxWinHTTP::WinHttpQueryOption(hInternet, dwOption, nullptr, &bufferLen);
     if ( ::GetLastError() == ERROR_INSUFFICIENT_BUFFER )
     {
@@ -178,7 +180,7 @@ static wxString wxWinHTTPQueryOptionString(HINTERNET hInternet, DWORD dwOption)
 }
 
 static inline
-void wxWinHTTPSetOption(HINTERNET hInternet, DWORD dwOption, DWORD dwValue)
+void wxWinHTTPSetOption(HINTERNET hInternet, WXDWORD dwOption, WXDWORD dwValue)
 {
     wxWinHTTP::WinHttpSetOption(hInternet, dwOption, &dwValue, sizeof(dwValue));
 }
@@ -195,9 +197,9 @@ void wxWinHTTPCloseHandle(HINTERNET hInternet)
 static void CALLBACK wxRequestStatusCallback(
     [[maybe_unused]] HINTERNET hInternet,
     DWORD_PTR dwContext,
-    DWORD dwInternetStatus,
+    WXDWORD dwInternetStatus,
     LPVOID lpvStatusInformation,
-    DWORD dwStatusInformationLength
+    WXDWORD dwStatusInformationLength
 )
 {
     if ( dwContext )
@@ -236,9 +238,9 @@ wxWebRequestWinHTTP::~wxWebRequestWinHTTP()
 }
 
 void
-wxWebRequestWinHTTP::HandleCallback(DWORD dwInternetStatus,
+wxWebRequestWinHTTP::HandleCallback(WXDWORD dwInternetStatus,
                                     LPVOID lpvStatusInformation,
-                                    DWORD dwStatusInformationLength)
+                                    WXDWORD dwStatusInformationLength)
 {
     wxLogTrace(wxTRACE_WEBREQUEST, "Request %p: callback %08x, len=%lu",
                this, dwInternetStatus, dwStatusInformationLength);
@@ -267,7 +269,7 @@ wxWebRequestWinHTTP::HandleCallback(DWORD dwInternetStatus,
 
         case WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE:
         {
-            DWORD written = *(static_cast<LPDWORD>(lpvStatusInformation));
+            WXDWORD written = *(static_cast<LPDWORD>(lpvStatusInformation));
             m_dataWritten += written;
             WriteData();
             break;
@@ -359,7 +361,7 @@ void wxWebRequestWinHTTP::CreateResponse()
     }
 }
 
-void wxWebRequestWinHTTP::SetFailed(const wxString& operation, DWORD errorCode)
+void wxWebRequestWinHTTP::SetFailed(const wxString& operation, WXDWORD errorCode)
 {
     wxString failMessage = wxMSWFormatMessage(errorCode,
                                               GetModuleHandle(TEXT("WINHTTP")));
@@ -388,7 +390,7 @@ void wxWebRequestWinHTTP::Start()
     urlComps.dwSchemeLength =
     urlComps.dwHostNameLength =
     urlComps.dwUrlPathLength =
-    urlComps.dwExtraInfoLength = (DWORD)-1;
+    urlComps.dwExtraInfoLength = (WXDWORD)-1;
 
     if ( !wxWinHTTP::WinHttpCrackUrl(m_url.wc_str(), m_url.length(), 0, &urlComps) )
     {
@@ -532,8 +534,8 @@ wxString wxWebResponseWinHTTP::GetHeader(const wxString& name) const
 
 int wxWebResponseWinHTTP::GetStatus() const
 {
-    DWORD status = 0;
-    DWORD statusSize = sizeof(status);
+    WXDWORD status = 0;
+    WXDWORD statusSize = sizeof(status);
     if ( !wxWinHTTP::WinHttpQueryHeaders
             (
                 m_requestHandle,
@@ -568,7 +570,7 @@ bool wxWebResponseWinHTTP::ReadData()
              ) == TRUE;
 }
 
-bool wxWebResponseWinHTTP::ReportAvailableData(DWORD dataLen)
+bool wxWebResponseWinHTTP::ReportAvailableData(WXDWORD dataLen)
 {
     ReportDataReceived(dataLen);
     return ReadData();
@@ -589,8 +591,8 @@ wxWebAuthChallengeWinHTTP::wxWebAuthChallengeWinHTTP(wxWebAuthChallenge::Source 
 
 bool wxWebAuthChallengeWinHTTP::Init()
 {
-    DWORD supportedSchemes;
-    DWORD firstScheme;
+    WXDWORD supportedSchemes;
+    WXDWORD firstScheme;
 
     if ( !wxWinHTTP::WinHttpQueryAuthSchemes
             (
@@ -662,7 +664,7 @@ bool wxWebSessionWinHTTP::Initialize()
 
 bool wxWebSessionWinHTTP::Open()
 {
-    DWORD accessType;
+    WXDWORD accessType;
     if ( wxCheckOsVersion(6, 3) )
         accessType = WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY;
     else

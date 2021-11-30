@@ -24,6 +24,8 @@
 
 #include "wx/msw/private/button.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // macros
 // ----------------------------------------------------------------------------
@@ -92,16 +94,16 @@ bool wxToggleButton::Create(wxWindow *parent,
     //
     // NB: we do it here and not in MSWGetStyle() because we need the label
     //     value and the label is not set yet when MSWGetStyle() is called
-    DWORD exstyle;
-    DWORD msStyle = MSWGetStyle(style, &exstyle);
+    WXDWORD exstyle;
+    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
     return MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle);
 }
 
-DWORD wxToggleButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxToggleButton::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     msStyle |= BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP;
 

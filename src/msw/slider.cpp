@@ -19,6 +19,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -153,9 +155,9 @@ bool wxSlider::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxSlider::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxSlider::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // TBS_HORZ, TBS_RIGHT and TBS_BOTTOM are 0 but do include them for clarity
     msStyle |= style & wxSL_VERTICAL ? TBS_VERT : TBS_HORZ;

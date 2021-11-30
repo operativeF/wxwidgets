@@ -87,7 +87,7 @@ using HIMAGELIST = IUnknown*;
 typedef struct _tagpropertykey
 {
     GUID fmtid;
-    DWORD pid;
+    WXDWORD pid;
 } PROPERTYKEY;
 #endif // !PROPERTYKEY_DEFINED
 
@@ -127,7 +127,7 @@ struct wxITaskbarList2 : public wxITaskbarList
 
 struct wxIShellLinkA : public IUnknown
 {
-    virtual HRESULT wxSTDCALL GetPath(LPSTR, int, WIN32_FIND_DATAA*, DWORD) = 0;
+    virtual HRESULT wxSTDCALL GetPath(LPSTR, int, WIN32_FIND_DATAA*, WXDWORD) = 0;
     virtual HRESULT wxSTDCALL GetIDList(LPITEMIDLIST *ppidl) = 0;
     virtual HRESULT wxSTDCALL SetIDList(LPCITEMIDLIST pidl) = 0;
     virtual HRESULT wxSTDCALL GetDescription(LPSTR, int) = 0;
@@ -142,14 +142,14 @@ struct wxIShellLinkA : public IUnknown
     virtual HRESULT wxSTDCALL SetShowCmd(int) = 0;
     virtual HRESULT wxSTDCALL GetIconLocation(LPSTR, int, int*) = 0;
     virtual HRESULT wxSTDCALL SetIconLocation(LPCSTR, int) = 0;
-    virtual HRESULT wxSTDCALL SetRelativePath(LPCSTR, DWORD) = 0;
-    virtual HRESULT wxSTDCALL Resolve(WXHWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL SetRelativePath(LPCSTR, WXDWORD) = 0;
+    virtual HRESULT wxSTDCALL Resolve(WXHWND, WXDWORD) = 0;
     virtual HRESULT wxSTDCALL SetPath(LPCSTR) = 0;
 };
 
 struct wxIShellLinkW : public IUnknown
 {
-    virtual HRESULT wxSTDCALL GetPath(LPWSTR, int, WIN32_FIND_DATAW*, DWORD) = 0;
+    virtual HRESULT wxSTDCALL GetPath(LPWSTR, int, WIN32_FIND_DATAW*, WXDWORD) = 0;
     virtual HRESULT wxSTDCALL GetIDList(LPITEMIDLIST *ppidl) = 0;
     virtual HRESULT wxSTDCALL SetIDList(LPCITEMIDLIST pidl) = 0;
     virtual HRESULT wxSTDCALL GetDescription(LPWSTR, int) = 0;
@@ -164,8 +164,8 @@ struct wxIShellLinkW : public IUnknown
     virtual HRESULT wxSTDCALL SetShowCmd(int) = 0;
     virtual HRESULT wxSTDCALL GetIconLocation(LPWSTR, int, int*) = 0;
     virtual HRESULT wxSTDCALL SetIconLocation(LPCWSTR, int) = 0;
-    virtual HRESULT wxSTDCALL SetRelativePath(LPCWSTR, DWORD) = 0;
-    virtual HRESULT wxSTDCALL Resolve(WXHWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL SetRelativePath(LPCWSTR, WXDWORD) = 0;
+    virtual HRESULT wxSTDCALL Resolve(WXHWND, WXDWORD) = 0;
     virtual HRESULT wxSTDCALL SetPath(LPCWSTR) = 0;
 };
 
@@ -393,7 +393,7 @@ public:
     virtual HRESULT wxSTDCALL RegisterTab(WXHWND, WXHWND) = 0;
     virtual HRESULT wxSTDCALL UnregisterTab(WXHWND) = 0;
     virtual HRESULT wxSTDCALL SetTabOrder(WXHWND, WXHWND) = 0;
-    virtual HRESULT wxSTDCALL SetTabActive(WXHWND, WXHWND, DWORD) = 0;
+    virtual HRESULT wxSTDCALL SetTabActive(WXHWND, WXHWND, WXDWORD) = 0;
     virtual HRESULT wxSTDCALL ThumbBarAddButtons(WXHWND, WXUINT, LPTHUMBBUTTON) = 0;
     virtual
         HRESULT wxSTDCALL ThumbBarUpdateButtons(WXHWND, WXUINT, LPTHUMBBUTTON) = 0;

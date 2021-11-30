@@ -24,6 +24,8 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 
+import WX.WinDef;
+
 import <string>;
 
 // ---------------------------------------------------------------------------
@@ -95,8 +97,7 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, const std::string& name)
         wxTopLevelWindows.Append(this);
 
     // Enumerate all children
-    WXHWND hWndNext;
-    hWndNext = ::GetWindow((WXHWND) m_hWnd, GW_CHILD);
+    WXHWND hWndNext = ::GetWindow((WXHWND) m_hWnd, GW_CHILD);
 
     if (hWndNext)
         CreateWindowFromHWND(this, (WXHWND) hWndNext);
@@ -306,7 +307,7 @@ void wxWindow::AdoptAttributesFromHWND()
 {
     SetId(wxGetWindowId(m_hWnd));
 
-    unsigned int style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+    const auto style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
 
     if (style & WS_VSCROLL)
         m_windowStyle |= wxVSCROLL;

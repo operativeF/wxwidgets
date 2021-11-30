@@ -25,9 +25,11 @@
 #include <boost/nowide/stackstring.hpp>
 #include <fmt/core.h>
 
+#include <chrono>
+
+import WX.WinDef;
 import Utils.Strings;
 
-#include <chrono>
 import <vector>;
 
 #ifndef TTTOOLINFO_V1_SIZE
@@ -273,7 +275,7 @@ WXHWND wxToolTip::GetToolTipCtrl()
 {
     if ( !ms_hwndTT )
     {
-        DWORD exflags = 0;
+        WXDWORD exflags = 0;
         if ( wxApp::MSWGetDefaultLayout() == wxLayoutDirection::RightToLeft )
         {
             exflags |= WS_EX_LAYOUTRTL;

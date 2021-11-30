@@ -28,6 +28,7 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
 
 #define GetEditHwnd() ((WXHWND)(GetEditHWND()))
 
@@ -70,7 +71,7 @@
 class IAutoCompleteDropDown : public IUnknown
 {
 public:
-    virtual HRESULT wxSTDCALL GetDropDownStatus(DWORD *, LPWSTR *) = 0;
+    virtual HRESULT wxSTDCALL GetDropDownStatus(WXDWORD *, LPWSTR *) = 0;
     virtual HRESULT wxSTDCALL ResetEnumerator() = 0;
 };
 
@@ -578,7 +579,7 @@ private:
         if ( specialKey )
         {
             // Check if the drop down is currently open.
-            DWORD dwFlags = 0;
+            WXDWORD dwFlags = 0;
             if ( SUCCEEDED(m_autoCompleteDropDown->GetDropDownStatus(&dwFlags,
                                                                      nullptr))
                     && dwFlags == ACDD_VISIBLE )
@@ -772,7 +773,7 @@ void wxTextEntry::DoSetSelection(long from, long to, [[maybe_unused]] unsigned i
 
 void wxTextEntry::GetSelection(long *from, long *to) const
 {
-    DWORD dwStart, dwEnd;
+    WXDWORD dwStart, dwEnd;
     ::SendMessageW(GetEditHwnd(), EM_GETSEL, (WXWPARAM)&dwStart, (WXLPARAM)&dwEnd);
 
     if ( from )
@@ -793,7 +794,7 @@ void wxTextEntry::GetSelection(long *from, long *to) const
 
 bool wxTextEntry::DoAutoCompleteFileNames(unsigned int flags)
 {
-    DWORD dwFlags = 0;
+    WXDWORD dwFlags = 0;
     if ( flags & wxFILE )
         dwFlags |= SHACF_FILESYS_ONLY;
     else if ( flags & wxDIR )

@@ -217,7 +217,7 @@ public:
         return ms_pfnCloseGestureInfoHandle;
     }
 
-    using SetGestureConfig_t = BOOL (WINAPI*)(WXHWND, DWORD, WXUINT, PGESTURECONFIG, WXUINT);
+    using SetGestureConfig_t = BOOL (WINAPI*)(WXHWND, WXDWORD, WXUINT, PGESTURECONFIG, WXUINT);
 
     static SetGestureConfig_t SetGestureConfig()
     {
@@ -318,7 +318,7 @@ void wxGetCursorPosMSW(POINT* pt)
 {
     if (!GetCursorPos(pt))
     {
-        DWORD pos = GetMessagePos();
+        WXDWORD pos = GetMessagePos();
         // the coordinates may be negative in multi-monitor systems
         pt->x = GET_X_LPARAM(pos);
         pt->y = GET_Y_LPARAM(pos);
@@ -473,8 +473,8 @@ bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
 
     parent->AddChild(this);
 
-    DWORD exstyle;
-    DWORD msflags = MSWGetCreateWindowFlags(&exstyle);
+    WXDWORD exstyle;
+    WXDWORD msflags = MSWGetCreateWindowFlags(&exstyle);
 
 #ifdef __WXUNIVERSAL__
     // no borders, we draw them ourselves
@@ -511,7 +511,7 @@ void wxWindowMSW::SetId(wxWindowID winid)
 
         if ( !::SetWindowLongW(GetHwnd(), GWL_ID, winid) )
         {
-            const DWORD err = ::GetLastError();
+            const WXDWORD err = ::GetLastError();
             if ( err )
                 wxLogApiError("SetWindowLong(GWL_ID)", err);
         }
@@ -532,7 +532,7 @@ void wxWindowMSW::SetFocus()
     if ( !::SetFocus(hWnd) )
     {
         // was there really an error?
-        DWORD dwRes = ::GetLastError();
+        WXDWORD dwRes = ::GetLastError();
         if ( dwRes )
         {
             WXHWND hwndFocus = ::GetFocus();
@@ -650,7 +650,7 @@ wxWindowMSW::MSWShowWithEffect(bool show,
     if ( !timeout )
         timeout = 200; // this is the default animation timeout, per MSDN
 
-    DWORD dwFlags = show ? 0 : AW_HIDE;
+    WXDWORD dwFlags = show ? 0 : AW_HIDE;
 
     switch ( effect )
     {
@@ -1359,7 +1359,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     // we may need to call SetWindowPos() when we change some styles
     bool callSWP = false;
 
-    DWORD exstyle;
+    WXDWORD exstyle;
     unsigned int style = MSWGetStyle(GetWindowStyleFlag(), &exstyle);
 
     // this is quite a horrible hack but we need it because MSWGetStyle()
@@ -1369,7 +1369,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     long exflagsNew = GetExtraStyle();
     wxWindowBase::SetExtraStyle(exflagsOld);
 
-    DWORD exstyleOld;
+    WXDWORD exstyleOld;
     unsigned int styleOld = MSWGetStyle(flagsOld, &exstyleOld);
 
     wxWindowBase::SetExtraStyle(exflagsNew);
@@ -1456,13 +1456,13 @@ wxBorder wxWindowMSW::TranslateBorder(wxBorder border) const
 }
 
 
-DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
+WXDWORD wxWindowMSW::MSWGetStyle(unsigned int flags, WXDWORD *exstyle) const
 {
     // translate common wxWidgets styles to Windows ones
 
     // most of windows are child ones, those which are not (such as
     // wxTopLevelWindow) should remove WS_CHILD in their MSWGetStyle()
-    DWORD style = WS_CHILD;
+    WXDWORD style = WS_CHILD;
 
     if ( !IsThisEnabled() )
         style |= WS_DISABLED;
@@ -3368,7 +3368,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleZoomGesture
                                 (
                                     pt,
-                                    gsl::narrow_cast<DWORD>(gestureInfo.ullArguments),
+                                    gsl::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -3379,7 +3379,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleRotateGesture
                                 (
                                     pt,
-                                    gsl::narrow_cast<DWORD>(gestureInfo.ullArguments),
+                                    gsl::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -3510,8 +3510,8 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
 #if wxUSE_ACCESSIBILITY
         case WM_GETOBJECT:
             {
-                //WXWPARAM dwFlags = (WXWPARAM) (DWORD) wParam;
-                WXLPARAM dwObjId = (WXLPARAM) (DWORD) lParam;
+                //WXWPARAM dwFlags = (WXWPARAM) (WXDWORD) wParam;
+                WXLPARAM dwObjId = (WXLPARAM) (WXDWORD) lParam;
 
                 if (dwObjId == (WXLPARAM)OBJID_CLIENT && GetOrCreateAccessible())
                 {
@@ -3930,8 +3930,8 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
                             std::string_view title,
                             const wxPoint& pos,
                             const wxSize& size,
-                            DWORD style,
-                            DWORD extendedStyle)
+                            WXDWORD style,
+                            WXDWORD extendedStyle)
 {
     // check a common bug in the user code: if the window is created with a
     // non-default ctor and Create() is called too, we'd create 2 WXHWND for a
@@ -3976,8 +3976,8 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
     return true;
 }
 
-WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
-                                                 std::string_view title, DWORD style,
+WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
+                                                 std::string_view title, WXDWORD style,
                                                  wxRect boundary,
                                                  WXHWND parent, wxWindowID id)
 {
@@ -6058,7 +6058,7 @@ void wxWindowMSW::GenerateMouseLeave()
 
 bool wxWindowMSW::InitGestureEvent(wxGestureEvent& event,
                                    const wxPoint& pt,
-                                   DWORD flags)
+                                   WXDWORD flags)
 {
     event.SetEventObject(this);
     event.SetTimestamp(::GetMessageTime());
@@ -6073,7 +6073,7 @@ bool wxWindowMSW::InitGestureEvent(wxGestureEvent& event,
     return (flags & GF_BEGIN) != 0;
 }
 
-bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, DWORD flags)
+bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, WXDWORD flags)
 {
     // wxEVT_GESTURE_PAN
     wxPanGestureEvent event(GetId());
@@ -6098,8 +6098,8 @@ bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, DWORD flags)
 }
 
 bool wxWindowMSW::HandleZoomGesture(const wxPoint& pt,
-                                    DWORD fingerDistance,
-                                    DWORD flags)
+                                    WXDWORD fingerDistance,
+                                    WXDWORD flags)
 {
     // wxEVT_GESTURE_ZOOM
     wxZoomGestureEvent event(GetId());
@@ -6136,8 +6136,8 @@ bool wxWindowMSW::HandleZoomGesture(const wxPoint& pt,
 }
 
 bool wxWindowMSW::HandleRotateGesture(const wxPoint& pt,
-                                      DWORD angleArgument,
-                                      DWORD flags)
+                                      WXDWORD angleArgument,
+                                      WXDWORD flags)
 {
     // wxEVT_GESTURE_ROTATE
     wxRotateGestureEvent event(GetId());
@@ -6169,7 +6169,7 @@ bool wxWindowMSW::HandleRotateGesture(const wxPoint& pt,
     return HandleWindowEvent(event);
 }
 
-bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, DWORD flags)
+bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, WXDWORD flags)
 {
     // wxEVT_TWO_FINGER_TAP
     wxTwoFingerTapEvent event(GetId());
@@ -6179,7 +6179,7 @@ bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, DWORD flags)
     return HandleWindowEvent(event);
 }
 
-bool wxWindowMSW::HandlePressAndTap(const wxPoint& pt, DWORD flags)
+bool wxWindowMSW::HandlePressAndTap(const wxPoint& pt, WXDWORD flags)
 {
     wxPressAndTapEvent event(GetId());
 
@@ -7054,7 +7054,7 @@ static HHOOK wxTheKeyboardHook = nullptr;
 LRESULT APIENTRY
 wxKeyboardHook(int nCode, WXWPARAM wParam, WXLPARAM lParam)
 {
-    DWORD hiWord = HIWORD(lParam);
+    WXDWORD hiWord = HIWORD(lParam);
     if ( nCode != HC_NOREMOVE && ((hiWord & KF_UP) == 0) )
     {
         wchar_t uc = 0;

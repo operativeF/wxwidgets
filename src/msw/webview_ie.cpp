@@ -25,6 +25,7 @@
 #include <exdispid.h>
 #include <mshtml.h>
 
+import WX.WinDef;
 import Utils.Strings;
 
 
@@ -156,9 +157,9 @@ wxWebViewIEImpl::~wxWebViewIEImpl()
     wxDynamicLibrary urlMon("urlmon.dll");
     if(urlMon.HasSymbol("CoInternetGetSession"))
     {
-        using CoInternetGetSession_t = HRESULT (WINAPI*)(DWORD,
+        using CoInternetGetSession_t = HRESULT (WINAPI*)(WXDWORD,
                                                          wxIInternetSession**,
-                                                         DWORD);
+                                                         WXDWORD);
         wxDYNLIB_FUNCTION(CoInternetGetSession_t, CoInternetGetSession, urlMon);
 
         wxIInternetSession* session;
@@ -1081,7 +1082,7 @@ void wxWebViewIE::RegisterHandler(std::shared_ptr<wxWebViewHandler> handler)
     wxDynamicLibrary urlMon("urlmon.dll");
     if(urlMon.HasSymbol("CoInternetGetSession"))
     {
-        typedef HRESULT (WINAPI *CoInternetGetSession_t)(DWORD, wxIInternetSession**, DWORD);
+        typedef HRESULT (WINAPI *CoInternetGetSession_t)(WXDWORD, wxIInternetSession**, WXDWORD);
         wxDYNLIB_FUNCTION(CoInternetGetSession_t, CoInternetGetSession, urlMon);
 
         ClassFactory* cf = new ClassFactory(handler);
@@ -1379,8 +1380,8 @@ bool wxWebViewIEImpl::EnableControlFeature(long flag, bool enable)
         urlMon.HasSymbol("CoInternetSetFeatureEnabled") &&
         urlMon.HasSymbol("CoInternetIsFeatureEnabled"))
     {
-        typedef HRESULT (WINAPI *CoInternetSetFeatureEnabled_t)(DWORD, DWORD, BOOL);
-        typedef HRESULT (WINAPI *CoInternetIsFeatureEnabled_t)(DWORD, DWORD);
+        typedef HRESULT (WINAPI *CoInternetSetFeatureEnabled_t)(WXDWORD, WXDWORD, BOOL);
+        typedef HRESULT (WINAPI *CoInternetIsFeatureEnabled_t)(WXDWORD, WXDWORD);
 
         wxDYNLIB_FUNCTION(CoInternetSetFeatureEnabled_t, CoInternetSetFeatureEnabled, urlMon);
         wxDYNLIB_FUNCTION(CoInternetIsFeatureEnabled_t, CoInternetIsFeatureEnabled, urlMon);
@@ -1685,7 +1686,7 @@ STDMETHODIMP_(ULONG) VirtualProtocol::Release()
 }
 
 HRESULT STDMETHODCALLTYPE VirtualProtocol::Start(LPCWSTR szUrl, wxIInternetProtocolSink *pOIProtSink,
-                               wxIInternetBindInfo *pOIBindInfo, DWORD grfPI,
+                               wxIInternetBindInfo *pOIBindInfo, WXDWORD grfPI,
                                HANDLE_PTR dwReserved)
 {
     wxUnusedVar(szUrl);
@@ -1752,9 +1753,9 @@ HRESULT STDMETHODCALLTYPE VirtualProtocol::Read(void *pv, ULONG cb, ULONG *pcbRe
 
 HRESULT STDMETHODCALLTYPE VirtualProtocol::CombineUrl(
         LPCWSTR pwzBaseUrl, LPCWSTR pwzRelativeUrl,
-        DWORD dwCombineFlags, LPWSTR pwzResult,
-        DWORD cchResult, DWORD *pcchResult,
-        DWORD dwReserved)
+        WXDWORD dwCombineFlags, LPWSTR pwzResult,
+        WXDWORD cchResult, WXDWORD *pcchResult,
+        WXDWORD dwReserved)
 {
     wxUnusedVar(pwzBaseUrl);
     wxUnusedVar(pwzRelativeUrl);
@@ -1769,9 +1770,9 @@ HRESULT STDMETHODCALLTYPE VirtualProtocol::CombineUrl(
 
 HRESULT STDMETHODCALLTYPE VirtualProtocol::ParseUrl(
         LPCWSTR pwzUrl, wxPARSEACTION ParseAction,
-        DWORD dwParseFlags, LPWSTR pwzResult,
-        DWORD cchResult, DWORD *pcchResult,
-        DWORD dwReserved)
+        WXDWORD dwParseFlags, LPWSTR pwzResult,
+        WXDWORD cchResult, WXDWORD *pcchResult,
+        WXDWORD dwReserved)
 {
     wxUnusedVar(pwzUrl);
     wxUnusedVar(dwParseFlags);
@@ -1800,7 +1801,7 @@ HRESULT STDMETHODCALLTYPE VirtualProtocol::ParseUrl(
 HRESULT STDMETHODCALLTYPE VirtualProtocol::CompareUrl(
         LPCWSTR pwzUrl1,
         LPCWSTR pwzUrl2,
-        DWORD dwCompareFlags)
+        WXDWORD dwCompareFlags)
 {
     wxUnusedVar(pwzUrl1);
     wxUnusedVar(pwzUrl2);
@@ -1811,9 +1812,9 @@ HRESULT STDMETHODCALLTYPE VirtualProtocol::CompareUrl(
 
 HRESULT STDMETHODCALLTYPE VirtualProtocol::QueryInfo(
         LPCWSTR pwzUrl, wxQUERYOPTION OueryOption,
-        DWORD dwQueryFlags, LPVOID pBuffer,
-        DWORD cbBuffer, DWORD *pcbBuf,
-        DWORD dwReserved)
+        WXDWORD dwQueryFlags, LPVOID pBuffer,
+        WXDWORD cbBuffer, WXDWORD *pcbBuf,
+        WXDWORD dwReserved)
 {
     wxUnusedVar(pwzUrl);
     wxUnusedVar(OueryOption);
@@ -1871,7 +1872,7 @@ bool wxIEContainer::QueryClientSiteInterface(REFIID iid, void **_interface,
     return false;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::ShowContextMenu(DWORD dwID, POINT *ppt,
+HRESULT wxSTDCALL DocHostUIHandler::ShowContextMenu(WXDWORD dwID, POINT *ppt,
                                           IUnknown *pcmdtReserved,
                                           IDispatch *pdispReserved)
 {
@@ -1897,7 +1898,7 @@ HRESULT wxSTDCALL DocHostUIHandler::GetHostInfo(DOCHOSTUIINFO *pInfo)
     return S_OK;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::ShowUI(DWORD dwID,
+HRESULT wxSTDCALL DocHostUIHandler::ShowUI(WXDWORD dwID,
                                  IOleInPlaceActiveObject *pActiveObject,
                                  IOleCommandTarget *pCommandTarget,
                                  IOleInPlaceFrame *pFrame,
@@ -1951,7 +1952,7 @@ HRESULT wxSTDCALL DocHostUIHandler::ResizeBorder(LPCRECT prcBorder,
 
 HRESULT wxSTDCALL DocHostUIHandler::TranslateAccelerator(LPMSG lpMsg,
                                                const GUID *pguidCmdGroup,
-                                               DWORD nCmdID)
+                                               WXDWORD nCmdID)
 {
     if(lpMsg && lpMsg->message == WM_KEYDOWN)
     {
@@ -1983,7 +1984,7 @@ HRESULT wxSTDCALL DocHostUIHandler::TranslateAccelerator(LPMSG lpMsg,
     return E_NOTIMPL;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::GetOptionKeyPath(LPOLESTR *pchKey,DWORD dw)
+HRESULT wxSTDCALL DocHostUIHandler::GetOptionKeyPath(LPOLESTR *pchKey,WXDWORD dw)
 {
     wxUnusedVar(pchKey);
     wxUnusedVar(dw);
@@ -2004,7 +2005,7 @@ HRESULT wxSTDCALL DocHostUIHandler::GetExternal(IDispatch **ppDispatch)
     return E_NOTIMPL;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::TranslateUrl(DWORD dwTranslate,
+HRESULT wxSTDCALL DocHostUIHandler::TranslateUrl(WXDWORD dwTranslate,
                                        OLECHAR *pchURLIn,
                                        OLECHAR **ppchURLOut)
 {

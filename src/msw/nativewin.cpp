@@ -28,7 +28,7 @@ wxNativeWindow::Create(wxWindow* parent,
     wxASSERT_MSG( ::GetParent(hwnd) == GetHwndOf(parent),
                   "The native window has incorrect parent" );
 
-    const wxRect r = wxRectFromRECT(wxGetWindowRect(hwnd));
+    const auto r = wxRectFromRECT(wxGetWindowRect(hwnd));
 
     // Skip wxWindow::Create() which would try to create a new WXHWND, we don't
     // want this as we already have one.

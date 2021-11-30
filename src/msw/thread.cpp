@@ -31,6 +31,8 @@
 
 #include <cassert>
 
+import WX.WinDef;
+
 // must have this symbol defined to get _beginthread/_endthread declarations
 #ifndef _MT
     #define _MT
@@ -58,7 +60,7 @@
     #define THREAD_CALLCONV __stdcall
 #else
     // the settings for CreateThread()
-    using THREAD_RETVAL = DWORD;
+    using THREAD_RETVAL = WXDWORD;
     #define THREAD_CALLCONV WINAPI
 #endif
 
@@ -85,7 +87,7 @@ enum class wxThreadState
 
 // TLS index of the slot where we store the pointer to the current thread, the
 // initial value is special and means that it's not initialized yet
-static DWORD gs_tlsThisThread = TLS_OUT_OF_INDEXES;
+static WXDWORD gs_tlsThisThread = TLS_OUT_OF_INDEXES;
 
 // id of the main thread - the one which can call GUI functions without first
 // calling wxMutexGuiEnter()
@@ -165,7 +167,7 @@ public:
     wxMutexError Unlock();
 
 private:
-    wxMutexError LockTimeout(DWORD milliseconds);
+    wxMutexError LockTimeout(WXDWORD milliseconds);
 
     HANDLE m_mutex;
 
@@ -213,7 +215,7 @@ wxMutexError wxMutexInternal::TryLock()
     return rc == wxMutexError::Timeout ? wxMutexError::Busy : rc;
 }
 
-wxMutexError wxMutexInternal::LockTimeout(DWORD milliseconds)
+wxMutexError wxMutexInternal::LockTimeout(WXDWORD milliseconds)
 {
     if (m_type == wxMutexType::Default)
     {
@@ -225,7 +227,7 @@ wxMutexError wxMutexInternal::LockTimeout(DWORD milliseconds)
         }
     }
 
-    DWORD rc = ::WaitForSingleObject(m_mutex, milliseconds);
+    WXDWORD rc = ::WaitForSingleObject(m_mutex, milliseconds);
     switch ( rc )
     {
         case WAIT_ABANDONED:
@@ -343,7 +345,7 @@ wxSemaphoreInternal::~wxSemaphoreInternal()
 
 wxSemaError wxSemaphoreInternal::WaitTimeout(unsigned long milliseconds)
 {
-    DWORD rc = ::WaitForSingleObject( m_semaphore, milliseconds );
+    WXDWORD rc = ::WaitForSingleObject( m_semaphore, milliseconds );
 
     switch ( rc )
     {
@@ -442,7 +444,7 @@ public:
 
     // thread handle and id
     HANDLE GetHandle() const { return m_hThread; }
-    DWORD  GetId() const { return m_tid; }
+    WXDWORD  GetId() const { return m_tid; }
 
     // the thread function forwarding to DoThreadStart
     static THREAD_RETVAL THREAD_CALLCONV WinThreadStart(void *thread);
@@ -473,7 +475,7 @@ private:
     HANDLE        m_hThread{nullptr};    // handle of the thread
     wxThreadState m_state{wxThreadState::New};      // state, see wxThreadState enum
     unsigned int  m_priority{wxPRIORITY_DEFAULT};   // thread priority in "wx" units
-    DWORD         m_tid;        // thread id
+    WXDWORD         m_tid;        // thread id
 
     // number of threads which need this thread to remain alive, when the count
     // reaches 0 we kill the owning wxThread -- and die ourselves with it
@@ -689,7 +691,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
     // from Wait()) or ask it to terminate (when called from Delete())
     bool shouldDelete = threadToDelete != nullptr;
 
-    DWORD rc = 0;
+    WXDWORD rc = 0;
 
     // we might need to resume the thread if it's currently stopped
     bool shouldResume = false;
@@ -753,7 +755,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
     // process the Windows messages that result from these functions
     // (note that even in console applications we might have to process
     // messages if we use wxExecute() or timers or ...)
-    DWORD result wxDUMMY_INITIALIZE(0);
+    WXDWORD result wxDUMMY_INITIALIZE(0);
     do
     {
         if ( wxThread::IsMain() )
@@ -849,8 +851,8 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
 
 bool wxThreadInternal::Suspend()
 {
-    DWORD nSuspendCount = ::SuspendThread(m_hThread);
-    if ( nSuspendCount == (DWORD)-1 )
+    WXDWORD nSuspendCount = ::SuspendThread(m_hThread);
+    if ( nSuspendCount == (WXDWORD)-1 )
     {
         wxLogSysError(_("Cannot suspend thread %lx"),
                       gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
@@ -879,8 +881,8 @@ bool wxThreadInternal::Suspend()
 
 bool wxThreadInternal::Resume()
 {
-    const DWORD nSuspendCount = ::ResumeThread(m_hThread);
-    if ( nSuspendCount == (DWORD)-1 )
+    const WXDWORD nSuspendCount = ::ResumeThread(m_hThread);
+    if ( nSuspendCount == (WXDWORD)-1 )
     {
         wxLogSysError(_("Cannot resume thread %lx"),
                       gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
@@ -968,7 +970,7 @@ bool wxThread::SetConcurrency(size_t level)
     // calculate the process mask: it's a bit vector with one bit per
     // processor; we want to schedule the process to run on first level
     // CPUs
-    DWORD bit = 1;
+    WXDWORD bit = 1;
     while ( bit )
     {
         if ( dwSysMask & bit )

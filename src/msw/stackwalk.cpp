@@ -17,9 +17,7 @@
 #include "wx/msw/debughlp.h"
 #include "wx/msw/seh.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
+import WX.WinDef;
 
 // ----------------------------------------------------------------------------
 // wxStackFrame
@@ -202,7 +200,7 @@ void wxStackWalker::WalkFrom(const CONTEXT *pCtx, size_t skip, size_t maxDepth)
 
     CONTEXT ctx = *pCtx; // will be modified by StackWalk()
 
-    DWORD dwMachineType;
+    WXDWORD dwMachineType;
 
     // initialize the initial frame: currently we can do it for x86 only
     STACKFRAME sf;
@@ -314,7 +312,7 @@ void wxStackWalker::Walk(size_t skip, size_t maxDepth)
     ctx.ContextFlags = CONTEXT_CONTROL;
 
     #ifdef __GNUC__
-        DWORD regEip, regEsp, regEbp;
+        WXDWORD regEip, regEsp, regEbp;
 
         asm volatile ("call 1f\n\t" "1: pop %0" : "=g"(regEip));
         asm volatile ("movl %%esp, %0" : "=g"(regEsp));

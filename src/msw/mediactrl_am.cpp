@@ -49,6 +49,8 @@
 
 #include <gsl/gsl>
 
+import WX.WinDef;
+
 import <cmath>;
 
 //---------------------------------------------------------------------------
@@ -777,7 +779,7 @@ struct IMediaFilter : public IPersist
     STDMETHOD(Stop)( ) PURE;
     STDMETHOD(Pause)( ) PURE;
     STDMETHOD(Run)(REFERENCE_TIME tStart) PURE;
-    STDMETHOD(GetState)(DWORD dwMilliSecsTimeout,
+    STDMETHOD(GetState)(WXDWORD dwMilliSecsTimeout,
                        FILTER_STATE *State) PURE;
     STDMETHOD(SetSyncSource)(IReferenceClock *pClock) PURE;
     STDMETHOD(GetSyncSource)(IReferenceClock **pClock) PURE;
@@ -799,7 +801,7 @@ struct IBaseFilter : public IMediaFilter
 //
 //---------------------------------------------------------------------------
 
-using LPAMGETERRORTEXT = BOOL (WINAPI*)(HRESULT, wxChar *, DWORD);
+using LPAMGETERRORTEXT = BOOL (WINAPI*)(HRESULT, wxChar *, WXDWORD);
 
 class wxAMMediaBackend : public wxMediaBackendCommonBase
 {
