@@ -145,7 +145,7 @@ private:
 // wxHtmlHelpWindow::m_mergedIndex
 //---------------------------------------------------------------------------
 
-WX_DEFINE_ARRAY_PTR(const wxHtmlHelpDataItem*, wxHtmlHelpDataItemPtrArray);
+using wxHtmlHelpDataItemPtrArray = std::vector<const wxHtmlHelpDataItem*>;
 
 struct wxHtmlHelpMergedIndexItem
 {

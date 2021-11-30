@@ -17,7 +17,7 @@
 
 class wxMimeTypeCommands;
 
-WX_DEFINE_ARRAY_PTR(wxMimeTypeCommands *, wxMimeCommandsArray);
+using wxMimeCommandsArray = std::vector<wxMimeTypeCommands*>;
 
 // this is the real wxMimeTypesManager for Unix
 class wxMimeTypesManagerImpl

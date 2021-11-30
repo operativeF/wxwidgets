@@ -19,7 +19,8 @@ import WX.Cfg.Flags;
 
 struct wxRibbonToolBarToolBase;
 class wxRibbonToolBarToolGroup;
-WX_DEFINE_ARRAY_PTR(wxRibbonToolBarToolGroup*, wxArrayRibbonToolBarToolGroup, class);
+
+using wxArrayRibbonToolBarToolGroup = std::vector<wxRibbonToolBarToolGroup*>;
 
 enum wxRibbonToolBarToolState
 {

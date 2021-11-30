@@ -19,7 +19,7 @@ import WX.Cfg.Flags;
 
 class wxRibbonGalleryItem;
 
-WX_DEFINE_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem, class);
+using wxArrayRibbonGalleryItem = std::vector<wxRibbonGalleryItem*>;
 
 class wxRibbonGallery : public wxRibbonControl
 {

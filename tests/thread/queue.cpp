@@ -59,7 +59,7 @@ private:
     Queue        m_queue;
 };
 
-WX_DEFINE_ARRAY_PTR(MyThread*, ArrayThread);
+using ArrayThread = std::vector<MyThread*>;
 
 // this function creates the given number of threads and posts msgCount
 // messages to the last created thread which, in turn, posts all the messages

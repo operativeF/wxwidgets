@@ -47,7 +47,7 @@ static wxWindowDFB *gs_mouseCapture = NULL;
 // overlays support
 // ---------------------------------------------------------------------------
 
-WX_DEFINE_ARRAY_PTR(wxOverlayImpl*, wxDfbOverlaysList);
+using wxDfbOverlaysList = std::vector<wxOverlayImpl*>;
 
 // ---------------------------------------------------------------------------
 // event tables

@@ -22,8 +22,8 @@ class wxRibbonButtonBarButtonBase;
 class wxRibbonButtonBarLayout;
 struct wxRibbonButtonBarButtonInstance;
 
-WX_DEFINE_ARRAY_PTR(wxRibbonButtonBarLayout*, wxArrayRibbonButtonBarLayout, class);
-WX_DEFINE_ARRAY_PTR(wxRibbonButtonBarButtonBase*, wxArrayRibbonButtonBarButtonBase, class);
+using wxArrayRibbonButtonBarLayout = std::vector<wxRibbonButtonBarLayout*>;
+using wxArrayRibbonButtonBarButtonBase = std::vector<wxRibbonButtonBarButtonBase*>;
 
 class wxRibbonButtonBar : public wxRibbonControl
 {

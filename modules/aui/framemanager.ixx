@@ -110,8 +110,9 @@ struct wxAuiDockUIPart;
 WX_DECLARE_OBJARRAY(wxAuiDockInfo, wxAuiDockInfoArray);
 WX_DECLARE_OBJARRAY(wxAuiDockUIPart, wxAuiDockUIPartArray);
 WX_DECLARE_OBJARRAY(wxAuiPaneInfo, wxAuiPaneInfoArray);
-WX_DEFINE_ARRAY_PTR(wxAuiPaneInfo*, wxAuiPaneInfoPtrArray);
-WX_DEFINE_ARRAY_PTR(wxAuiDockInfo*, wxAuiDockInfoPtrArray);
+
+using wxAuiPaneInfoPtrArray = std::vector<wxAuiPaneInfo*>;
+using wxAuiDockInfoPtrArray = std::vector<wxAuiDockInfo*>;
 #endif // SWIG
 
 class wxAuiPaneInfo

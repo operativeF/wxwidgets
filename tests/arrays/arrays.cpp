@@ -140,7 +140,7 @@ struct Item
     int n;
 };
 
-WX_DEFINE_ARRAY_PTR(Item *, ItemPtrArray);
+using ItemPtrArray = std::vector<Item*>;
 
 std::ostream& operator<<(std::ostream& os, const std::vector<wxString>& arr)
 {

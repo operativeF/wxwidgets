@@ -33,7 +33,7 @@ struct wxRibbonToolBarToolBase
     long state{};
 };
 
-WX_DEFINE_ARRAY_PTR(wxRibbonToolBarToolBase*, wxArrayRibbonToolBarToolBase);
+using wxArrayRibbonToolBarToolBase = std::vector<wxRibbonToolBarToolBase*>;
 
 class wxRibbonToolBarToolGroup
 {

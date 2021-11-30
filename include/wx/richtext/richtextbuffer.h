@@ -5938,7 +5938,8 @@ protected:
     wxRichTextTable represents a table with arbitrary columns and rows.
  */
 
-WX_DEFINE_ARRAY_PTR(wxRichTextObject*, wxRichTextObjectPtrArray);
+using wxRichTextObjectPtrArray = std::vector<wxRichTextObject*>;
+
 WX_DECLARE_USER_OBJARRAY(wxRichTextObjectPtrArray, wxRichTextObjectPtrArrayArray);
 
 class wxRichTextTable: public wxRichTextBox

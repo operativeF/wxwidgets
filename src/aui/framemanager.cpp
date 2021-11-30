@@ -315,10 +315,10 @@ void CopyDocksAndPanes(wxAuiDockInfoArray& dest_docks,
     for (size_t i = 0; i < dest_docks.GetCount(); ++i)
     {
         wxAuiDockInfo& dock = dest_docks.Item(i);
-        for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+        for (size_t j = 0; j != dock.panes.size(); ++j)
             for (size_t k = 0; k < src_panes.GetCount(); ++k)
-                if (dock.panes.Item(j) == &src_panes.Item(k))
-                    dock.panes.Item(j) = &dest_panes.Item(k);
+                if (dock.panes[j] == &src_panes.Item(k))
+                    dock.panes[j] = &dest_panes.Item(k);
     }
 }
 
@@ -433,8 +433,8 @@ void FindDocks(wxAuiDockInfoArray& docks,
     // discover the maximum dock layer and the max row
     for (i = 0; i < dock_count; ++i)
     {
-        max_row = std::max(max_row, docks.Item(i).dock_row);
-        max_layer = std::max(max_layer, docks.Item(i).dock_layer);
+        max_row = std::max(max_row, docks[i].dock_row);
+        max_layer = std::max(max_layer, docks[i].dock_layer);
     }
 
     // if no dock layer was specified, search all dock layers
@@ -451,17 +451,17 @@ void FindDocks(wxAuiDockInfoArray& docks,
         end_row = max_row;
     }
 
-    arr.Clear();
+    arr.clear();
 
     for (layer = begin_layer; layer <= end_layer; ++layer)
         for (row = begin_row; row <= end_row; ++row)
             for (i = 0; i < dock_count; ++i)
             {
-                wxAuiDockInfo& d = docks.Item(i);
+                wxAuiDockInfo& d = docks[i];
                 if (dock_direction == -1 || dock_direction == d.dock_direction)
                 {
                     if (d.dock_layer == layer && d.dock_row == row)
-                        arr.Add(&d);
+                        arr.push_back(&d);
                 }
             }
 }
@@ -470,9 +470,9 @@ void FindDocks(wxAuiDockInfoArray& docks,
 // If found, the corresponding wxAuiPaneInfo pointer is returned, otherwise NULL.
 wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window)
 {
-    for (size_t i = 0; i < dock.panes.GetCount(); ++i)
+    for (size_t i = 0; i < dock.panes.size(); ++i)
     {
-        wxAuiPaneInfo* p = dock.panes.Item(i);
+        wxAuiPaneInfo* p = dock.panes[i];
         if (p->window == window)
             return p;
     }
@@ -492,7 +492,7 @@ void RemovePaneFromDocks(wxAuiDockInfoArray& docks,
             continue;
         wxAuiPaneInfo* pi = FindPaneInDock(d, pane.window);
         if (pi)
-            d.panes.Remove(pi);
+            std::erase(d.panes, pi); // FIXME: Delete memory too?
     }
 }
 
@@ -518,9 +518,9 @@ static void RenumberDockRows(wxAuiDockInfoPtrArray& docks)
 */
 
 // this function is used to sort panes by dock position
-int PaneSortFunc(wxAuiPaneInfo** p1, wxAuiPaneInfo** p2)
+int PaneSortFunc(wxAuiPaneInfo* p1, wxAuiPaneInfo* p2)
 {
-    return ((*p1)->dock_pos < (*p2)->dock_pos) ? -1 : 1;
+    return (p1->dock_pos < p2->dock_pos) ? -1 : 1;
 }
 
 } // namespace anonymous
@@ -1609,12 +1609,12 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
     sizes.clear();
 
     int action_pane = -1;
-    int pane_i, pane_count = dock.panes.GetCount();
+    int pane_i, pane_count = dock.panes.size();
 
     // find the pane marked as our action pane
     for (pane_i = 0; pane_i < pane_count; ++pane_i)
     {
-        wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
+        wxAuiPaneInfo& pane = *(dock.panes[pane_i]);
 
         if (pane.HasFlag(wxAuiPaneInfo::actionPane))
         {
@@ -1628,7 +1628,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
     // on the dock's orientation) of each pane
     for (pane_i = 0; pane_i < pane_count; ++pane_i)
     {
-        wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
+        wxAuiPaneInfo& pane = *(dock.panes[pane_i]);
         positions.push_back(pane.dock_pos);
         int size = 0;
 
@@ -1900,7 +1900,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
     // add each pane to the dock
     bool has_maximized_pane = false;
-    int pane_i, pane_count = dock.panes.GetCount();
+    int pane_i;
+    auto pane_count = dock.panes.size();
 
     if (dock.fixed)
     {
@@ -1914,7 +1915,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         int offset = 0;
         for (pane_i = 0; pane_i < pane_count; ++pane_i)
         {
-            wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
+            wxAuiPaneInfo& pane = *(dock.panes[pane_i]);
             int pane_pos = pane_positions[pane_i];
 
             if (pane.wxIsMaximized())
@@ -1962,7 +1963,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     {
         for (pane_i = 0; pane_i < pane_count; ++pane_i)
         {
-            wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
+            wxAuiPaneInfo& pane = *(dock.panes[pane_i]);
 
             if (pane.wxIsMaximized())
                 has_maximized_pane = true;
@@ -1975,7 +1976,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
                 part.type = wxAuiDockUIPart::typePaneSizer;
                 part.dock = &dock;
-                part.pane = dock.panes.Item(pane_i-1);
+                part.pane = dock.panes[pane_i - 1];
                 part.button = 0;
                 part.orientation = (orientation==wxHORIZONTAL) ? wxVERTICAL:wxHORIZONTAL;
                 part.cont_sizer = dock_sizer;
@@ -2042,7 +2043,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         wxAuiDockInfo& dock = docks.Item(i);
 
         // empty out all panes, as they will be readded below
-        dock.panes.Empty();
+        dock.panes.clear();
 
         if (dock.fixed)
         {
@@ -2066,10 +2067,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         wxAuiDockInfoPtrArray arr;
         FindDocks(docks, p.dock_direction, p.dock_layer, p.dock_row, arr);
 
-        if (arr.GetCount() > 0)
+        if (!arr.empty())
         {
             // found the right dock
-            dock = arr.Item(0);
+            dock = arr.front();
         }
         else
         {
@@ -2091,7 +2092,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             // pane needs to be added to the dock,
             // if it doesn't already exist
             if (!FindPaneInDock(*dock, p.window))
-                dock->panes.Add(&p);
+                dock->panes.push_back(&p);
         }
         else
         {
@@ -2105,27 +2106,27 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
     // FIXME: Underflow with size_t, just use an algorithm.
     for (int i = docks.GetCount() - 1; i >= 0; --i)
     {
-        if (docks.Item(i).panes.GetCount() == 0)
+        if (docks.Item(i).panes.size() == 0)
             docks.RemoveAt(i);
     }
 
     // configure the docks further
     for (size_t i = 0; i < docks.GetCount(); ++i)
     {
-        wxAuiDockInfo& dock = docks.Item(i);
+        wxAuiDockInfo& dock = docks[i];
 
         // sort the dock pane array by the pane's
         // dock position (dock_pos), in ascending order
-        dock.panes.Sort(PaneSortFunc);
+        std::sort(dock.panes.begin(), dock.panes.end(), PaneSortFunc);
 
         // for newly created docks, set up their initial size
         if (dock.size == 0)
         {
             int size = 0;
 
-            for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+            for (size_t j = 0; j != dock.panes.size(); ++j)
             {
-                wxAuiPaneInfo& pane = *dock.panes.Item(j);
+                wxAuiPaneInfo& pane = *dock.panes[j];
                 wxSize pane_size = pane.best_size;
                 if (pane_size == wxDefaultSize)
                     pane_size = pane.min_size;
@@ -2140,11 +2141,11 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
             // add space for the border (two times), but only
             // if at least one pane inside the dock has a pane border
-            for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+            for (size_t j = 0; j != dock.panes.size(); ++j)
             {
-                if (dock.panes.Item(j)->HasBorder())
+                if (dock.panes[j]->HasBorder())
                 {
-                    size += (pane_borderSize*2);
+                    size += (pane_borderSize * 2);
                     break;
                 }
             }
@@ -2153,9 +2154,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             // but only if at least one pane inside the dock has a caption
             if (dock.IsHorizontal())
             {
-                for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+                for (size_t j = 0; j != dock.panes.size(); ++j)
                 {
-                    if (dock.panes.Item(j)->HasCaption())
+                    if (dock.panes[j]->HasCaption())
                     {
                         size += caption_size;
                         break;
@@ -2187,9 +2188,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         bool plus_caption = false;
         int dock_min_size = 0;
 
-        for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+        for (size_t j = 0; j != dock.panes.size(); ++j)
         {
-            wxAuiPaneInfo& pane = *dock.panes.Item(j);
+            wxAuiPaneInfo& pane = *dock.panes[j];
             if (pane.min_size != wxDefaultSize)
             {
                 if (pane.HasBorder())
@@ -2229,9 +2230,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         dock.fixed = true;
         dock.toolbar = true;
 
-        for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+        for (size_t j = 0; j < dock.panes.size(); ++j)
         {
-            wxAuiPaneInfo& pane = *dock.panes.Item(j);
+            wxAuiPaneInfo& pane = *dock.panes[j];
             if (!pane.IsFixed())
                 dock.fixed = false;
             if (!pane.IsToolbar())
@@ -2248,9 +2249,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         // e.g. remove gaps like 1, 2, 30, 500
         if (!dock.fixed)
         {
-            for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+            for (size_t j = 0; j < dock.panes.size(); ++j)
             {
-                wxAuiPaneInfo& pane = *dock.panes.Item(j);
+                wxAuiPaneInfo& pane = *dock.panes[j];
                 pane.dock_pos = j;
             }
         }
@@ -2265,9 +2266,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             GetPanePositionsAndSizes(dock, pane_positions, pane_sizes);
 
             int offset = 0;
-            for (size_t j = 0; j < dock.panes.GetCount(); ++j)
+            for (size_t j = 0; j != dock.panes.size(); ++j)
             {
-                wxAuiPaneInfo& pane = *(dock.panes.Item(j));
+                wxAuiPaneInfo& pane = *(dock.panes[j]);
                 pane.dock_pos = pane_positions[j];
 
                 int amount = pane.dock_pos - offset;
@@ -2305,7 +2306,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         FindDocks(docks, -1, layer, -1, arr);
 
         // if there aren't any, skip to the next layer
-        if (arr.IsEmpty())
+        if (arr.empty())
             continue;
 
         wxSizer* old_cont = cont;
@@ -2317,10 +2318,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
         // find any top docks in this layer
         FindDocks(docks, wxAUI_DOCK_TOP, layer, -1, arr);
-        if (!arr.IsEmpty())
+        if (!arr.empty())
         {
-            for (row = 0, row_count = arr.GetCount(); row < row_count; ++row)
-                LayoutAddDock(cont, *arr.Item(row), uiparts, spacer_only);
+            for (row = 0, row_count = arr.size(); row < row_count; ++row)
+                LayoutAddDock(cont, *arr[row], uiparts, spacer_only);
         }
 
 
@@ -2331,10 +2332,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
         // find any left docks in this layer
         FindDocks(docks, wxAUI_DOCK_LEFT, layer, -1, arr);
-        if (!arr.IsEmpty())
+        if (!arr.empty())
         {
-            for (row = 0, row_count = arr.GetCount(); row < row_count; ++row)
-                LayoutAddDock(middle, *arr.Item(row), uiparts, spacer_only);
+            for (row = 0, row_count = arr.size(); row < row_count; ++row)
+                LayoutAddDock(middle, *arr[row], uiparts, spacer_only);
         }
 
         // add content dock (or previous layer's sizer
@@ -2343,10 +2344,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         {
             // find any center docks
             FindDocks(docks, wxAUI_DOCK_CENTER, -1, -1, arr);
-            if (!arr.IsEmpty())
+            if (!arr.empty())
             {
-                for (row = 0,row_count = arr.GetCount(); row<row_count; ++row)
-                   LayoutAddDock(middle, *arr.Item(row), uiparts, spacer_only);
+                for (row = 0,row_count = arr.size(); row<row_count; ++row)
+                   LayoutAddDock(middle, *arr[row], uiparts, spacer_only);
             }
             else if (!m_hasMaximized)
             {
@@ -2369,10 +2370,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
         // find any right docks in this layer
         FindDocks(docks, wxAUI_DOCK_RIGHT, layer, -1, arr);
-        if (!arr.IsEmpty())
+        if (!arr.empty())
         {
-            for (row = arr.GetCount()-1; row >= 0; --row)
-                LayoutAddDock(middle, *arr.Item(row), uiparts, spacer_only);
+            for (row = arr.size() - 1; row >= 0; --row)
+                LayoutAddDock(middle, *arr[row], uiparts, spacer_only);
         }
 
         if (middle->GetChildren().GetCount() > 0)
@@ -2384,10 +2385,10 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
         // find any bottom docks in this layer
         FindDocks(docks, wxAUI_DOCK_BOTTOM, layer, -1, arr);
-        if (!arr.IsEmpty())
+        if (!arr.empty())
         {
-            for (row = arr.GetCount()-1; row >= 0; --row)
-                LayoutAddDock(cont, *arr.Item(row), uiparts, spacer_only);
+            for (row = arr.size() - 1; row >= 0; --row)
+                LayoutAddDock(cont, *arr[row], uiparts, spacer_only);
         }
 
     }
@@ -2978,7 +2979,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
         if ((
             ((pt.y < part->dock->rect.y + 1) && part->dock->IsHorizontal()) ||
             ((pt.x < part->dock->rect.x + 1) && part->dock->IsVertical())
-            ) && part->dock->panes.GetCount() > 1)
+            ) && part->dock->panes.size() > 1)
         {
             if ((part->dock->dock_direction == wxAUI_DOCK_TOP) ||
                 (part->dock->dock_direction == wxAUI_DOCK_LEFT))
@@ -3001,7 +3002,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
         if ((
             ((pt.y > part->dock->rect.y + part->dock->rect.height - 2 ) && part->dock->IsHorizontal()) ||
             ((pt.x > part->dock->rect.x + part->dock->rect.width - 2 ) && part->dock->IsVertical())
-            ) && part->dock->panes.GetCount() > 1)
+            ) && part->dock->panes.size() > 1)
         {
             if ((part->dock->dock_direction == wxAUI_DOCK_TOP) ||
                 (part->dock->dock_direction == wxAUI_DOCK_LEFT))
@@ -3041,9 +3042,9 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
     {
         if (part->type == wxAuiDockUIPart::typeDockSizer)
         {
-            if (part->dock->panes.GetCount() != 1)
+            if (part->dock->panes.size() != 1)
                 return false;
-            part = GetPanePart(part->dock->panes.Item(0)->window);
+            part = GetPanePart(part->dock->panes[0]->window);
             if (!part)
                 return false;
         }
@@ -3976,8 +3977,8 @@ void wxAuiManager::OnSetCursor(wxSetCursorEvent& event)
             // a dock may not be resized if it has a single
             // pane which is not resizable
             if (part->type == wxAuiDockUIPart::typeDockSizer && part->dock &&
-                part->dock->panes.GetCount() == 1 &&
-                part->dock->panes.Item(0)->IsFixed())
+                part->dock->panes.size() == 1 &&
+                part->dock->panes[0]->IsFixed())
                     return;
 
             // panes that may not be resized do not get a sizing cursor
@@ -4058,8 +4059,8 @@ void wxAuiManager::OnLeftDown(wxMouseEvent& event)
             // a dock may not be resized if it has a single
             // pane which is not resizable
             if (part->type == wxAuiDockUIPart::typeDockSizer && part->dock &&
-                part->dock->panes.GetCount() == 1 &&
-                part->dock->panes.Item(0)->IsFixed())
+                part->dock->panes.size() == 1 &&
+                part->dock->panes[0]->IsFixed())
                     return;
 
             // panes that may not be resized should be ignored here
@@ -4263,9 +4264,9 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         // the fixed panes
         int pane_position = -1;
 
-        for (size_t i = 0; i < dock.panes.GetCount(); ++i)
+        for (size_t i = 0; i < dock.panes.size(); ++i)
         {
-            wxAuiPaneInfo& p = *dock.panes.Item(i);
+            wxAuiPaneInfo& p = *dock.panes[i];
             if (p.window == pane.window)
                 pane_position = i;
 
@@ -4301,9 +4302,9 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         // resized; the pane should usually be the first non-fixed pane
         // to the right of the action pane
         int borrow_pane = -1;
-        for (size_t i = pane_position+1; i < dock.panes.GetCount(); ++i)
+        for (size_t i = pane_position+1; i < dock.panes.size(); ++i)
         {
-            wxAuiPaneInfo& p = *dock.panes.Item(i);
+            wxAuiPaneInfo& p = *dock.panes[i];
             if (!p.IsFixed())
             {
                 borrow_pane = i;
@@ -4372,7 +4373,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         // borrow the space from our neighbor pane to the
         // right or bottom (depending on orientation);
         // also make sure we don't make the neighbor too small
-        int prop_borrow = dock.panes.Item(borrow_pane)->dock_proportion;
+        int prop_borrow = dock.panes[borrow_pane]->dock_proportion;
 
         if (prop_borrow - prop_diff < 0)
         {
@@ -4386,7 +4387,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         }
 
 
-        dock.panes.Item(borrow_pane)->dock_proportion = prop_borrow;
+        dock.panes[borrow_pane]->dock_proportion = prop_borrow;
         pane.dock_proportion = new_proportion;
 
         Update();
@@ -4455,15 +4456,15 @@ void wxAuiManager::OnLeftUp(wxMouseEvent& event)
         wxAuiDockInfoPtrArray docks;
         FindDocks(m_docks, pane.dock_direction,
                   pane.dock_layer, pane.dock_row, docks);
-        if (docks.GetCount() == 1)
+        if (docks.size() == 1)
         {
-            wxAuiDockInfo& dock = *docks.Item(0);
+            wxAuiDockInfo& dock = *docks[0];
 
             std::vector<int> pane_positions, pane_sizes;
             GetPanePositionsAndSizes(dock, pane_positions, pane_sizes);
 
-            for (size_t i = 0; i < dock.panes.GetCount(); ++i)
-                dock.panes.Item(i)->dock_pos = pane_positions[i];
+            for (size_t i = 0; i < dock.panes.size(); ++i)
+                dock.panes[i]->dock_pos = pane_positions[i];
         }
 
         pane.state &= ~wxAuiPaneInfo::actionPane;

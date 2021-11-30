@@ -74,7 +74,7 @@ private:
 #endif
 };
 
-WX_DEFINE_ARRAY_PTR(wxRibbonControl*, wxArrayRibbonControl, class);
+using wxArrayRibbonControl = std::vector<wxRibbonControl*>;
 
 #endif // wxUSE_RIBBON
 

@@ -1539,8 +1539,8 @@ WX_DECLARE_OBJARRAY(wxDateTime, wxDateTimeArray);
 // ----------------------------------------------------------------------------
 
 class wxDateTimeHolidayAuthority;
-WX_DEFINE_ARRAY_PTR(wxDateTimeHolidayAuthority *,
-                              wxHolidayAuthoritiesArray);
+
+using wxHolidayAuthoritiesArray = std::vector<wxDateTimeHolidayAuthority*>;
 
 class wxDateTimeHolidaysModule;
 class wxDateTimeHolidayAuthority

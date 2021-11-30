@@ -16,7 +16,7 @@
 
 import <atomic>;
 
-WX_DEFINE_ARRAY_PTR(wxThread *, wxArrayThread);
+using wxArrayThread = std::vector<wxThread*>;
 
 // ----------------------------------------------------------------------------
 // constants

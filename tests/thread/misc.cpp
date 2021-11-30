@@ -185,7 +185,7 @@ private:
     int m_i;
 };
 
-WX_DEFINE_ARRAY_PTR(wxThread *, ArrayThreads);
+using ArrayThreads = std::vector<wxThread*>;
 
 // ----------------------------------------------------------------------------
 // test class
