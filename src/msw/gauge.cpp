@@ -17,6 +17,8 @@
 #include "wx/appprogress.h"
 #include "wx/msw/private/winstyle.h"
 
+import WX.WinDef;
+
 #ifndef PBM_SETBARCOLOR
     #define PBM_SETBARCOLOR         (WM_USER+9)
 #endif
@@ -55,9 +57,9 @@ bool wxGauge::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxGauge::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxGauge::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( style & wxGA_VERTICAL )
         msStyle |= PBS_VERTICAL;

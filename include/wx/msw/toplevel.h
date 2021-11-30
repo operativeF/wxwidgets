@@ -13,6 +13,8 @@
 
 #include "wx/weakref.h"
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
@@ -111,7 +113,7 @@ public:
     }
 
     // translate wxWidgets flags to Windows ones
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle) const override;
 
     // choose the right parent to use with wxCreateWindow()
     WXHWND MSWGetParent() const override;

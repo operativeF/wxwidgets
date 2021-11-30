@@ -17,6 +17,8 @@
 
 #include <fmt/core.h>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // Definitions
 // ----------------------------------------------------------------------------
@@ -37,9 +39,9 @@
 // wxHyperlinkCtrl
 // ----------------------------------------------------------------------------
 
-DWORD wxHyperlinkCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxHyperlinkCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle( style, exstyle );
+    WXDWORD msStyle = wxControl::MSWGetStyle( style, exstyle );
 
     if ( style & wxHL_ALIGN_RIGHT )
         msStyle |= LWS_RIGHT;

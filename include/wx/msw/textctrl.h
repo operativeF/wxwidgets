@@ -12,6 +12,7 @@
 #define _WX_TEXTCTRL_H_
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 
@@ -196,7 +197,7 @@ public:
                                   WXLPARAM lParam) override;
 
     bool MSWShouldPreProcessMessage(WXMSG* pMsg) override;
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
     // creates the control of appropriate class (plain or rich edit) with the

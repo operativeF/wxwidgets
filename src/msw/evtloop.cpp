@@ -29,6 +29,8 @@
     WX_DEFINE_LIST(wxMsgList)
 #endif // wxUSE_THREADS
 
+import WX.WinDef;
+
 // ============================================================================
 // GUI wxEventLoop implementation
 // ============================================================================
@@ -388,7 +390,7 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
     wxEventLoopBase::DoYieldFor(eventsToProcess);
 
     // put back unprocessed events in the queue
-    DWORD id = GetCurrentThreadId();
+    WXDWORD id = GetCurrentThreadId();
     for (size_t i=0; i<m_arrMSG.GetCount(); i++)
     {
         ::PostThreadMessageW(id, m_arrMSG[i].message,

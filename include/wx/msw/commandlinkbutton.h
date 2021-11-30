@@ -11,6 +11,7 @@
 #define _WX_MSW_COMMANDLINKBUTTON_H_
 
 import Utils.Strings;
+import WX.WinDef;
 
 import <string>;
 
@@ -58,7 +59,7 @@ public:
     void SetMainLabelAndNote(const std::string& mainLabel,
                              const std::string& note) override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
     wxSize DoGetBestSize() const override;

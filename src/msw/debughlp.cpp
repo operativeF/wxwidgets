@@ -16,6 +16,8 @@
 
 #include <cassert>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -145,7 +147,7 @@ bool wxDbgHelpDLL::DoInit()
         if ( BindDbgHelpFunctions(dllDbgHelp) )
         {
             // turn on default options
-            DWORD options = wxDbgHelpDLL::SymGetOptions();
+            WXDWORD options = wxDbgHelpDLL::SymGetOptions();
 
             options |= SYMOPT_DEFERRED_LOADS | SYMOPT_UNDNAME | SYMOPT_DEBUG;
 
@@ -325,7 +327,7 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
 
         if ( !handled )
         {
-            // treat just as an opaque DWORD
+            // treat just as an opaque WXDWORD
             s.Printf("%#x", *(PDWORD)pAddress);
         }
     }
@@ -384,7 +386,7 @@ wxDbgHelpDLL::DumpField(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
                 }
 
                 // get the offset of the child member, relative to its parent
-                DWORD ofs = 0;
+                WXDWORD ofs = 0;
                 if ( !DoGetTypeInfo(pSym, TI_GET_OFFSET, &ofs) )
                     break;
 
@@ -457,7 +459,7 @@ wxDbgHelpDLL::DumpUDT(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
     s = GetSymbolName(pSym);
 
     // Determine how many children this type has.
-    DWORD dwChildrenCount = 0;
+    WXDWORD dwChildrenCount = 0;
     DoGetTypeInfo(pSym, TI_GET_CHILDRENCOUNT, &dwChildrenCount);
 
     // Prepare to get an array of "TypeIds", representing each of the children.
@@ -490,7 +492,7 @@ wxDbgHelpDLL::DumpUDT(wxPSYMBOL_INFO pSym, void *pVariable, unsigned level)
         // children here are in lexicographic sense, i.e. we get all our nested
         // classes and not only our member fields, but we can't get the values
         // for the members of the nested classes, of course!
-        DWORD nested;
+        WXDWORD nested;
         if ( DoGetTypeInfo(&sym, TI_GET_NESTED, &nested) && nested )
             continue;
 
@@ -758,7 +760,7 @@ wxDbgHelpDLL::CallSymGetLineFromAddr(HANDLE hProcess,
                                      wxString* fileName,
                                      size_t* line)
 {
-    DWORD dwDisplacement;
+    WXDWORD dwDisplacement;
 
     if ( SymGetLineFromAddrW64 )
     {
@@ -1038,7 +1040,7 @@ extern "C" void DumpTI(ULONG ti)
         OutputDebugString(wxString::Format("name=\"%s\", ", name.c_str()));
     }
 
-    DWORD nested;
+    WXDWORD nested;
     if ( !DoGetTypeInfo(&sym, TI_GET_NESTED, &nested) )
     {
         nested = FALSE;
@@ -1063,7 +1065,7 @@ extern "C" void DumpTI(ULONG ti)
             ", kind=%s", KindString(kind).c_str()));
         if ( kind == wxDbgHelpDLL::DATA_MEMBER )
         {
-            DWORD ofs = 0;
+            WXDWORD ofs = 0;
             if ( DoGetTypeInfo(&sym, TI_GET_OFFSET, &ofs) )
             {
                 OutputDebugString(wxString::Format(" (ofs=0x%x)", ofs));

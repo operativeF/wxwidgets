@@ -116,7 +116,7 @@ void wxCrashReportImpl::Output(const wxChar* format, ...)
     va_list argptr;
     va_start(argptr, format);
 
-    DWORD cbWritten;
+    WXDWORD cbWritten;
 
     wxString s = wxString::FormatV(format, argptr);
 
@@ -147,7 +147,7 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
     // user-specified crash report flags override those specified by the
     // programmer
     TCHAR envFlags[64];
-    const DWORD dwLen = ::GetEnvironmentVariableW
+    const WXDWORD dwLen = ::GetEnvironmentVariableW
                     (
                         "WX_CRASH_FLAGS",
                         envFlags,

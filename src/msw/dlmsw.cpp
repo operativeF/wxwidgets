@@ -15,6 +15,8 @@
 #include "wx/msw/debughlp.h"
 #include "wx/filename.h"
 
+import WX.WinDef;
+
 // For MSVC we can link in the required library explicitly, for the other
 // compilers (e.g. MinGW) this needs to be done at makefiles level.
 #ifdef __VISUALC__
@@ -48,8 +50,8 @@ static wxString GetFileVersion(const wxString& filename)
     wxString ver;
     const wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
 
-    DWORD dummy;
-    const DWORD sizeVerInfo = ::GetFileVersionInfoSizeW(pc, &dummy);
+    WXDWORD dummy;
+    const WXDWORD sizeVerInfo = ::GetFileVersionInfoSizeW(pc, &dummy);
     if ( sizeVerInfo )
     {
         wxCharBuffer buf(sizeVerInfo);
@@ -229,7 +231,7 @@ namespace
 // normally) or if the function itself failed.
 WXHMODULE CallGetModuleHandleEx(const void* addr)
 {
-    using GetModuleHandleEx_t = BOOL (WINAPI*)(DWORD, LPCTSTR, WXHMODULE *);
+    using GetModuleHandleEx_t = BOOL (WINAPI*)(WXDWORD, LPCTSTR, WXHMODULE *);
 
     static const GetModuleHandleEx_t INVALID_FUNC_PTR = (GetModuleHandleEx_t)-1;
 

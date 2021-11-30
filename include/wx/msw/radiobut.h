@@ -14,6 +14,7 @@
 #include "wx/msw/ownerdrawnbutton.h"
 
 import WX.Cfg.Flags;
+import WX.WinDef;
 
 import Utils.Geometry;
 
@@ -59,7 +60,7 @@ public:
 
     bool HasTransparentBackground() override { return true; }
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }

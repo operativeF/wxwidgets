@@ -27,6 +27,7 @@
 
 #include <memory>
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 import <string>;
@@ -143,7 +144,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     WXUINT uState = stat & wxOwnerDrawn::wxODSelected ? wxDSB_SELECTED : wxDSB_NORMAL;
 
     // checkmarks should not be mirrored in RTL layout
-    DWORD oldLayout = wxDynLoadWrappers::GetLayout(hdc);
+    WXDWORD oldLayout = wxDynLoadWrappers::GetLayout(hdc);
     if ( oldLayout & LAYOUT_RTL )
         ::SetLayout(hdc, oldLayout | LAYOUT_BITMAPORIENTATIONPRESERVED);
     wxDrawStateBitmap(hdc, hBmpCheck.get(), x, y, uState);

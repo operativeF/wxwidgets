@@ -11,11 +11,12 @@
 #ifndef _WX_SLIDER_H_
 #define _WX_SLIDER_H_
 
+#include <fmt/core.h>
+
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
-
-#include <fmt/core.h>
 
 class wxSubwindows;
 
@@ -99,7 +100,7 @@ public:
     bool SetForegroundColour(const wxColour& colour) override;
     bool SetBackgroundColour(const wxColour& colour) override;
 
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     // format an integer value as string

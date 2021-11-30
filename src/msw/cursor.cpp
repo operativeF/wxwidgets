@@ -290,8 +290,8 @@ WXHCURSOR CreateReverseCursor(WXHCURSOR cursor)
     wxSize cursorSize = ScaleAndReverseBitmap(info.hbmMask, scale);
     if ( info.hbmColor )
         ScaleAndReverseBitmap(info.hbmColor, scale);
-    info.xHotspot = (DWORD)(cursorSize.x - 1 - info.xHotspot * scale);
-    info.yHotspot = (DWORD)(info.yHotspot * scale);
+    info.xHotspot = (WXDWORD)(cursorSize.x - 1 - info.xHotspot * scale);
+    info.yHotspot = (WXDWORD)(info.yHotspot * scale);
 
     return ::CreateIconIndirect(&info);
 }

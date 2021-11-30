@@ -12,6 +12,8 @@
 
 #include "wx/thread.h"
 
+import WX.WinDef;
+
 import <vector>;
 
 // ----------------------------------------------------------------------------
@@ -39,7 +41,7 @@ public:
         // Exceptionally, TlsGetValue() calls SetLastError() even on success
         // which means it overwrites the previous value. This is undesirable
         // here, so explicitly preserve the last error here.
-        const DWORD dwLastError = ::GetLastError();
+        const WXDWORD dwLastError = ::GetLastError();
         void* const value = ::TlsGetValue(m_slot);
         if ( dwLastError )
             ::SetLastError(dwLastError);
@@ -113,7 +115,7 @@ public:
 
 private:
     wxTlsDestructorFunction m_destructor;
-    DWORD m_slot;
+    WXDWORD m_slot;
 
     std::vector<void*> m_allValues;
     wxCriticalSection m_csAllValues;

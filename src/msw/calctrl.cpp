@@ -16,6 +16,8 @@
 
 #include "wx/msw/private/datecontrols.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -105,9 +107,9 @@ wxCalendarCtrl::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxCalendarCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxCalendarCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD styleMSW = wxCalendarCtrlBase::MSWGetStyle(style, exstyle);
+    WXDWORD styleMSW = wxCalendarCtrlBase::MSWGetStyle(style, exstyle);
 
     // right now we don't support all native styles but we should add wx styles
     // corresponding to MCS_NOTODAY and MCS_NOTODAYCIRCLE probably (TODO)
@@ -276,7 +278,7 @@ bool wxCalendarCtrl::SetDateRange(const wxDateTime& dt1, const wxDateTime& dt2)
 {
     SYSTEMTIME st[2];
 
-    DWORD flags = 0;
+    WXDWORD flags = 0;
     if ( dt1.IsValid() )
     {
         dt1.GetAsMSWSysTime(st + 0);
@@ -301,7 +303,7 @@ bool wxCalendarCtrl::GetDateRange(wxDateTime *dt1, wxDateTime *dt2) const
 {
     SYSTEMTIME st[2];
 
-    DWORD flags = MonthCal_GetRange(GetHwnd(), st);
+    WXDWORD flags = MonthCal_GetRange(GetHwnd(), st);
     if ( dt1 )
     {
         if ( flags & GDTR_MIN )
@@ -374,7 +376,7 @@ void wxCalendarCtrl::UpdateMarks()
     // possibility that we can display several of them: one before the current
     // one and up to 12 after it.
     MONTHDAYSTATE states[14] = { 0 };
-    const DWORD nMonths = MonthCal_GetMonthRange(GetHwnd(), GMR_DAYSTATE, NULL);
+    const WXDWORD nMonths = MonthCal_GetMonthRange(GetHwnd(), GMR_DAYSTATE, NULL);
 
     // although in principle the calendar might not show any days from the
     // preceding months, it seems like it always does, consider e.g. Feb 2010

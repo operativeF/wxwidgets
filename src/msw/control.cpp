@@ -67,21 +67,21 @@ bool wxControl::MSWCreateControl(const std::string& classname,
                                  const wxPoint& pos,
                                  const wxSize& size)
 {
-    DWORD exstyle;
-    DWORD msStyle = MSWGetStyle(wxGetWindowStyle(), &exstyle);
+    WXDWORD exstyle;
+    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), &exstyle);
 
     return MSWCreateControl(classname, msStyle, pos, size, label, exstyle);
 }
 
 bool wxControl::MSWCreateControl(const std::string& classname,
-                                 DWORD style,
+                                 WXDWORD style,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  const std::string& label,
-                                 DWORD exstyle)
+                                 WXDWORD exstyle)
 {
     // if no extended style given, determine it ourselves
-    if ( exstyle == (DWORD)-1 )
+    if ( exstyle == (WXDWORD)-1 )
     {
         exstyle = 0;
         (void) MSWGetStyle(wxGetWindowStyle(), &exstyle);
@@ -175,7 +175,7 @@ bool wxControl::MSWCreateControl(const std::string& classname,
 // various accessors
 // ----------------------------------------------------------------------------
 
-DWORD wxControl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxControl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     long msStyle = wxWindow::MSWGetStyle(style, exstyle);
 

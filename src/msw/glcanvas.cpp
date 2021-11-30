@@ -18,6 +18,7 @@
 
 #include "wx/glcanvas.h"
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 // from src/msw/window.cpp
@@ -674,8 +675,8 @@ bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
        You can find references about this within the knowledge base and most OpenGL
        books that contain the wgl function descriptions.
      */
-    DWORD exStyle = 0;
-    DWORD msflags = WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+    WXDWORD exStyle = 0;
+    WXDWORD msflags = WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
     msflags |= MSWGetStyle(style, &exStyle);
 
     if ( !MSWCreate(wxApp::GetRegisteredClassName("wxGLCanvas", -1, CS_OWNDC),
@@ -808,7 +809,7 @@ public:
     wxGLdummyWin()
     {
         CreateBase(nullptr, wxID_ANY);
-        DWORD msflags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+        WXDWORD msflags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
         if( MSWCreate(wxApp::GetRegisteredClassName("wxGLCanvas", -1, CS_OWNDC),
                       "", wxDefaultPosition, wxDefaultSize, msflags, 0) )
         {

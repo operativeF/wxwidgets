@@ -13,6 +13,8 @@
 #include "wx/log.h"
 #include "wx/dir.h"
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // define the types and functions used for file searching
 // ----------------------------------------------------------------------------
@@ -22,7 +24,7 @@ namespace
 
 using FIND_STRUCT = WIN32_FIND_DATA;
 using FIND_DATA = HANDLE;
-using FIND_ATTR = DWORD;
+using FIND_ATTR = WXDWORD;
 
 inline FIND_DATA InitFindData()
 {
@@ -229,7 +231,7 @@ bool wxDirData::Read(std::string *filename)
 
     if ( !IsFindDataOk(m_finddata) )
     {
-        const DWORD err = ::GetLastError();
+        const WXDWORD err = ::GetLastError();
 
         if ( err != ERROR_FILE_NOT_FOUND && err != ERROR_NO_MORE_FILES )
         {
@@ -254,7 +256,7 @@ bool wxDirData::Read(std::string *filename)
         {
             if ( !FindNext(m_finddata, m_filespec, PTR_TO_FINDDATA) )
             {
-                const DWORD err = ::GetLastError();
+                const WXDWORD err = ::GetLastError();
 
                 if ( err != ERROR_NO_MORE_FILES )
                 {

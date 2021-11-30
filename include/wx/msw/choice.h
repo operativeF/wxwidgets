@@ -12,6 +12,7 @@
 #define _WX_CHOICE_H_
 
 import WX.Cfg.Flags;
+import WX.WinDef;
 
 import Utils.Geometry;
 
@@ -81,7 +82,7 @@ public:
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
     WXHBRUSH MSWControlColor(WXHDC hDC, WXHWND hWnd) override;
     bool MSWShouldPreProcessMessage(WXMSG *pMsg) override;
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

@@ -27,6 +27,8 @@
 
 #include <memory>
 
+import WX.WinDef;
+
 #ifndef HDM_SETBITMAPMARGIN
     #define HDM_SETBITMAPMARGIN 0x1234
 #endif
@@ -106,7 +108,7 @@ protected:
 
 private:
     // override MSW-specific methods needed for new control
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;    
 
     // wrapper around Header_InsertItem(): insert the item using information
@@ -221,9 +223,9 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxMSWHeaderCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxMSWHeaderCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( style & wxHD_ALLOW_REORDER )
         msStyle |= HDS_DRAGDROP;

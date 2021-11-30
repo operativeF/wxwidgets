@@ -18,6 +18,8 @@
 
 #include "wx/msw/private.h"
 
+import WX.WinDef;
+
 /*
 
 The table below shows which functions are exported by dbghelp.dll.

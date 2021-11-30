@@ -12,13 +12,7 @@
 #include "wx/log.h"
 #include "wx/evtloop.h"
 
-// ============================================================================
-// wxMSWEventLoopBase implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// ctor/dtor
-// ----------------------------------------------------------------------------
+import WX.WinDef;
 
 wxMSWEventLoopBase::wxMSWEventLoopBase()
     : m_heventWake(::CreateEventW(nullptr, FALSE, FALSE, nullptr))
@@ -57,7 +51,7 @@ bool wxMSWEventLoopBase::MSWIsWakeUpRequested()
 
 #if wxUSE_THREADS
 
-DWORD wxMSWEventLoopBase::MSWWaitForThread(WXHANDLE hThread)
+WXDWORD wxMSWEventLoopBase::MSWWaitForThread(WXHANDLE hThread)
 {
     // The order is important here, the code using this function assumes that
     // WAIT_OBJECT_0 indicates the thread termination and anything else -- the
@@ -88,7 +82,7 @@ int wxMSWEventLoopBase::GetNextMessageTimeout(WXMSG *msg, unsigned long timeout)
     // so we need to remove any immediately messages manually
     while ( !::PeekMessageW(msg, nullptr, 0, 0, PM_REMOVE) )
     {
-        const DWORD rc = ::MsgWaitForMultipleObjects
+        const WXDWORD rc = ::MsgWaitForMultipleObjects
                      (
                         1, &m_heventWake,
                         FALSE,

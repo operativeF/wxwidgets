@@ -13,6 +13,8 @@
 #include "wx/generic/hyperlink.h"
 #include "wx/app.h"
 
+import WX.WinDef;
+
 import <string>;
 
 static std::string GetLabelForSysLink(std::string_view text, const std::string& url)
@@ -49,8 +51,8 @@ public:
         SetURL( url );
         SetVisited( false );
 
-        DWORD exstyle;
-        DWORD msStyle = MSWGetStyle(style, &exstyle);
+        WXDWORD exstyle;
+        WXDWORD msStyle = MSWGetStyle(style, &exstyle);
 
         // "SysLink" would be WC_LINK but it's a wide-string
         MSWCreateControl("SysLink", msStyle, pos, size, GetLabelForSysLink( label, url ), exstyle);
@@ -70,7 +72,7 @@ public:
     void SetLabel(std::string_view label) override;
 
 protected:
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
     wxSize DoGetBestClientSize() const override;
 
 private:

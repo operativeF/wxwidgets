@@ -15,6 +15,8 @@
 #include <winhttp.h>
 #include "wx/buffer.h"
 
+import WX.WinDef;
+
 class wxWebSessionWinHTTP;
 class wxWebRequestWinHTTP;
 
@@ -35,7 +37,7 @@ public:
 
     bool ReadData();
 
-    bool ReportAvailableData(DWORD dataLen);
+    bool ReportAvailableData(WXDWORD dataLen);
 
 private:
     HINTERNET m_requestHandle;
@@ -57,8 +59,8 @@ public:
 
 private:
     wxWebRequestWinHTTP& m_request;
-    DWORD m_target;
-    DWORD m_selectedScheme;
+    WXDWORD m_target;
+    WXDWORD m_selectedScheme;
 };
 
 class wxWebRequestWinHTTP : public wxWebRequestImpl
@@ -84,8 +86,8 @@ public:
 
     wxFileOffset GetBytesExpectedToSend() const override { return m_dataSize; }
 
-    void HandleCallback(DWORD dwInternetStatus, LPVOID lpvStatusInformation,
-        DWORD dwStatusInformationLength);
+    void HandleCallback(WXDWORD dwInternetStatus, LPVOID lpvStatusInformation,
+        WXDWORD dwStatusInformationLength);
 
     HINTERNET GetHandle() const { return m_request; }
 
@@ -115,7 +117,7 @@ private:
     // Set the state to State_Failed with the error string including the
     // provided description of the operation and the error message for this
     // error code.
-    void SetFailed(const wxString& operation, DWORD errorCode);
+    void SetFailed(const wxString& operation, WXDWORD errorCode);
 
     void SetFailedWithLastError(const wxString& operation)
     {

@@ -13,6 +13,8 @@
 
 #if wxUSE_GAUGE
 
+import WX.WinDef;
+
 import <string>;
 
 // Group box
@@ -54,7 +56,7 @@ public:
 
     void Pulse() override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

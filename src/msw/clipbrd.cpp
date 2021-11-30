@@ -34,6 +34,8 @@
     #include "wx/msw/dib.h"
 #endif
 
+import WX.WinDef;
+
 #if wxUSE_OLE
     // use OLE clipboard
     #define wxUSE_OLE_CLIPBOARD 1
@@ -315,7 +317,7 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
 
                 width = strlen(s) + 1;
                 height = 1;
-                DWORD l = (width * height);
+                WXDWORD l = (width * height);
                 HANDLE hGlobalMemory = GlobalAlloc(GHND, l);
                 if ( hGlobalMemory )
                 {
@@ -329,7 +331,7 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
         case wxDF_UNICODETEXT:
             {
                 LPWSTR s = (LPWSTR)data;
-                DWORD size = sizeof(WCHAR) * (lstrlenW(s) + 1);
+                WXDWORD size = sizeof(WCHAR) * (lstrlenW(s) + 1);
                 HANDLE hGlobalMemory = ::GlobalAlloc(GHND, size);
                 if ( hGlobalMemory )
                 {

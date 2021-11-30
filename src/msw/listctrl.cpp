@@ -302,9 +302,9 @@ void wxListCtrl::MSWSetExListStyles()
     ::SendMessageW(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
 }
 
-DWORD wxListCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxListCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD wstyle = wxListCtrlBase::MSWGetStyle(style, exstyle);
+    WXDWORD wstyle = wxListCtrlBase::MSWGetStyle(style, exstyle);
 
     wstyle |= LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS;
 
@@ -478,7 +478,7 @@ void wxListCtrl::SetWindowStyleFlag(unsigned int flag)
 
         // we don't have wxVSCROLL style, but the list control may have it,
         // don't change it then in the call to parent's SetWindowStyleFlags()
-        DWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+        WXDWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
         flag &= ~(wxHSCROLL | wxVSCROLL);
         if ( dwStyle & WS_HSCROLL )
             flag |= wxHSCROLL;
@@ -1331,7 +1331,7 @@ wxFont wxListCtrl::GetItemFont( long item ) const
 
 bool wxListCtrl::HasCheckBoxes() const
 {
-    const DWORD currStyle = ListView_GetExtendedListViewStyle(GetHwnd());
+    const WXDWORD currStyle = ListView_GetExtendedListViewStyle(GetHwnd());
     return (currStyle & LVS_EX_CHECKBOXES) != 0;
 }
 
@@ -1482,7 +1482,7 @@ wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
     // Older Platform SDKs lack a cast to WXWPARAM inside the
     // ListView_ApproximateViewRect macro, so cast -1 to
     // WXWPARAM here to suppress a warning about signed/unsigned mismatch.
-    const DWORD rc = ListView_ApproximateViewRect(GetHwnd(), x, y,
+    const WXDWORD rc = ListView_ApproximateViewRect(GetHwnd(), x, y,
         static_cast<WXWPARAM>(-1));
 
     wxSize size(LOWORD(rc), HIWORD(rc));
@@ -1490,7 +1490,7 @@ wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
     // We have to add space for the scrollbars ourselves, they're not taken
     // into account by ListView_ApproximateViewRect(), at least not with
     // commctrl32.dll v6.
-    const DWORD mswStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+    const WXDWORD mswStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
 
     if ( mswStyle & WS_HSCROLL )
         size.y += wxSystemSettings::GetMetric(wxSYS_HSCROLL_Y, m_parent);
@@ -2877,7 +2877,7 @@ bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont, int colCount)
     WXHDC hdc = nmcd.hdc;
     WXHWND hwndList = nmcd.hdr.hwndFrom;
     const int col = pLVCD->iSubItem;
-    const DWORD item = nmcd.dwItemSpec;
+    const WXDWORD item = nmcd.dwItemSpec;
 
     SelectInHDC selFont;
     if ( hfont )

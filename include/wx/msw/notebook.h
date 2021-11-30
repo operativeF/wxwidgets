@@ -14,6 +14,7 @@
 
 #include "wx/control.h"
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
@@ -151,7 +152,7 @@ public:
 #endif // wxUSE_UXTHEME
 
   // translate wxWin styles to the Windows ones
-  DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+  WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
   // hides the currently shown page and shows the given one (if not -1) and

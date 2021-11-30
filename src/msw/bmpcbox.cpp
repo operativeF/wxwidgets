@@ -61,7 +61,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
     return true;
 }
 
-DWORD wxBitmapComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxBitmapComboBox::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     return wxComboBox::MSWGetStyle(style, exstyle) | CBS_OWNERDRAWFIXED | CBS_HASSTRINGS;
 }

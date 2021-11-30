@@ -26,6 +26,8 @@
 #include "wx/window.h"
 #include "wx/variant.h"
 
+import WX.WinDef;
+
 class FrameSite;
 
 //---------------------------------------------------------------------------
@@ -174,7 +176,7 @@ protected:
     wxAutoIViewObject            m_viewObject;
     WXHWND m_oleObjectHWND;
     bool m_bAmbientUserMode;
-    DWORD m_docAdviseCookie;
+    WXDWORD m_docAdviseCookie;
     wxWindow* m_realparent;
 
     void CreateActiveX(REFIID, IUnknown*);

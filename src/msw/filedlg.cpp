@@ -26,11 +26,13 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
-import Utils.Strings;
+#include <memory>
 
+import WX.WinDef;
+
+import Utils.Strings;
 import Utils.Geometry;
 
-#include <memory>
 import <string>;
 import <tuple>;
 import <vector>;
@@ -66,7 +68,7 @@ namespace
 #if wxUSE_DYNLIB_CLASS
 
 using GetProcessUserModeExceptionPolicy_t = BOOL (WINAPI*)(LPDWORD);
-using SetProcessUserModeExceptionPolicy_t = BOOL (WINAPI*)(DWORD);
+using SetProcessUserModeExceptionPolicy_t = BOOL (WINAPI*)(WXDWORD);
 
 GetProcessUserModeExceptionPolicy_t gs_pfnGetProcessUserModeExceptionPolicy =
     (GetProcessUserModeExceptionPolicy_t) -1;
@@ -74,7 +76,7 @@ GetProcessUserModeExceptionPolicy_t gs_pfnGetProcessUserModeExceptionPolicy =
 SetProcessUserModeExceptionPolicy_t gs_pfnSetProcessUserModeExceptionPolicy =
     (SetProcessUserModeExceptionPolicy_t) -1;
 
-DWORD gs_oldExceptionPolicyFlags = 0;
+WXDWORD gs_oldExceptionPolicyFlags = 0;
 
 bool gs_changedPolicy = false;
 
@@ -352,7 +354,7 @@ void wxFileDialog::MSWOnTypeChange([[maybe_unused]] WXHWND hDlg, int nFilterInde
 // whether to show the "Save file" dialog (if it contains wxFD_SAVE bit) or
 // "Open file" one; returns true on success or false on failure in which case
 // err is filled with the CDERR_XXX constant
-static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, DWORD *err)
+static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, WXDWORD *err)
 {
     // Extra controls do not handle per-monitor DPI, fall back to system DPI
     // so entire file-dialog is resized.
@@ -373,7 +375,7 @@ static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, DWORD *er
 
 static bool ShowCommFileDialog(OPENFILENAME *of, unsigned int style)
 {
-    DWORD errCode;
+    WXDWORD errCode;
     bool success = DoShowCommFileDialog(of, style, &errCode);
 
     if ( !success &&

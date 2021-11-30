@@ -110,9 +110,9 @@ wxListBox::~wxListBox()
     Clear();
 }
 
-DWORD wxListBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxListBox::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // we always want to get the notifications
     msStyle |= LBS_NOTIFY;
@@ -626,7 +626,7 @@ bool wxListBox::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)
         // Clicking under the last item in the listbox generates double click
         // event for the currently selected item which is rather surprising.
         // Avoid the surprise by checking that we do have an item under mouse.
-        const DWORD pos = ::GetMessagePos();
+        const WXDWORD pos = ::GetMessagePos();
         const wxPoint pt(GET_X_LPARAM(pos), GET_Y_LPARAM(pos));
         if ( HitTest(ScreenToClient(pt)) == wxNOT_FOUND )
             return false;

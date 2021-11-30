@@ -17,6 +17,8 @@
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #endif
+
+import WX.WinDef;
     
 import <ctime>;
 
@@ -59,7 +61,7 @@ bool wxWinHelpController::DisplaySection(int section)
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXT, (DWORD)section) != 0);
+    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXT, (WXDWORD)section) != 0);
 }
 
 bool wxWinHelpController::DisplayContextPopup(int contextId)
@@ -68,7 +70,7 @@ bool wxWinHelpController::DisplayContextPopup(int contextId)
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXTPOPUP, (DWORD) contextId) != 0);
+    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXTPOPUP, (WXDWORD) contextId) != 0);
 }
 
 bool wxWinHelpController::DisplayBlock(long block)

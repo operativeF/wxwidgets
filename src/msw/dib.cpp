@@ -24,6 +24,7 @@
 
 #include "wx/msw/dib.h"
 
+import WX.WinDef;
 import WX.Image;
 
 #include <memory>
@@ -350,7 +351,7 @@ WXHBITMAP wxDIB::CreateDDB(WXHDC hdc) const
     }
 
     // how many colours are we going to have in the palette?
-    DWORD biClrUsed = ds.dsBmih.biClrUsed;
+    WXDWORD biClrUsed = ds.dsBmih.biClrUsed;
     if ( !biClrUsed )
     {
         // biClrUsed field might not be set
@@ -480,7 +481,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, WXHBITMAP hbmp)
     bi.biBitCount = bm.bmBitsPixel;
 
     // memory we need for BITMAPINFO only
-    DWORD dwLen = bi.biSize + GetNumberOfColours(bm.bmBitsPixel) * sizeof(RGBQUAD);
+    WXDWORD dwLen = bi.biSize + GetNumberOfColours(bm.bmBitsPixel) * sizeof(RGBQUAD);
 
     unique_dcwnd screenDC{::GetDC(nullptr)};
 
@@ -559,7 +560,7 @@ wxPalette *wxDIB::CreatePalette() const
     }
 
     // how many colours are we going to have in the palette?
-    DWORD biClrUsed = ds.dsBmih.biClrUsed;
+    WXDWORD biClrUsed = ds.dsBmih.biClrUsed;
     if ( !biClrUsed )
     {
         // biClrUsed field might not be set
@@ -592,7 +593,7 @@ wxPalette *wxDIB::CreatePalette() const
     RGBQUAD *pRGB = (RGBQUAD*)rgb.data();
     SelectInHDC selectHandle(hDC, m_handle);
     ::GetDIBColorTable(hDC, 0, biClrUsed, pRGB);
-    for ( DWORD i = 0; i < biClrUsed; i++, pRGB++ )
+    for ( WXDWORD i = 0; i < biClrUsed; i++, pRGB++ )
     {
         pPalette->palPalEntry[i].peRed = pRGB->rgbRed;
         pPalette->palPalEntry[i].peGreen = pRGB->rgbGreen;

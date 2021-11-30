@@ -18,6 +18,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 #ifndef BCM_SETNOTE
 constexpr unsigned int BCM_SETNOTE = 0x1609;
 #endif
@@ -92,9 +94,9 @@ wxCommandLinkButton::SetMainLabelAndNote(const std::string& mainLabel,
     }
 }
 
-DWORD wxCommandLinkButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxCommandLinkButton::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD ret = wxButton::MSWGetStyle(style, exstyle);
+    WXDWORD ret = wxButton::MSWGetStyle(style, exstyle);
     if ( HasNativeCommandLinkButton() )
         ret |= BS_COMMANDLINK;
 

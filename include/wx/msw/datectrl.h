@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_DATECTRL_H_
 #define _WX_MSW_DATECTRL_H_
 
+import WX.WinDef;
+
 import <string>;
 
 class wxDatePickerCtrl : public wxDatePickerCtrlBase
@@ -50,7 +52,7 @@ public:
     bool GetRange(wxDateTime *dt1, wxDateTime *dt2) const override;
 
     // Override MSW-specific functions used during control creation.
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
 #if wxUSE_INTL

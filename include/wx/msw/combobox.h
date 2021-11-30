@@ -16,6 +16,8 @@
 #include "wx/choice.h"
 #include "wx/textentry.h"
 
+import WX.WinDef;
+
 import Utils.Geometry;
 
 import <string>;
@@ -96,7 +98,7 @@ public:
     void OnUpdateDelete(wxUpdateUIEvent& event);
     void OnUpdateSelectAll(wxUpdateUIEvent& event);
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 #if wxUSE_UXTHEME
     // override wxTextEntry method to work around Windows bug

@@ -19,6 +19,8 @@
 #include <boost/nowide/convert.hpp>
 #include <fmt/printf.h>
 
+import WX.WinDef;
+
 // ============================================================================
 // wxAppTraits implementation
 // ============================================================================
@@ -53,7 +55,7 @@ bool wxAppTraits::SafeMessageBox(const std::string& text,
 }
 
 #if wxUSE_THREADS
-DWORD wxAppTraits::DoSimpleWaitForThread(WXHANDLE hThread)
+WXDWORD wxAppTraits::DoSimpleWaitForThread(WXHANDLE hThread)
 {
     return ::WaitForSingleObject((HANDLE)hThread, INFINITE);
 }
@@ -81,7 +83,7 @@ bool wxConsoleAppTraits::DoMessageFromThreadWait()
     return true;
 }
 
-DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, [[maybe_unused]] wxThreadWait flags)
+WXDWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, [[maybe_unused]] wxThreadWait flags)
 {
     return DoSimpleWaitForThread(hThread);
 }

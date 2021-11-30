@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_POPUPWIN_H_
 #define _WX_MSW_POPUPWIN_H_
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxPopupWindow
 // ----------------------------------------------------------------------------
@@ -33,7 +35,7 @@ public:
     bool Show(bool show = true) override;
 
     // return the style to be used for the popup windows
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle) const override;
 
     // get the WXHWND to be used as parent of this window with CreateWindow()
     WXHWND MSWGetParent() const override;

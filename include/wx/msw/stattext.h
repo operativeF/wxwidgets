@@ -12,6 +12,7 @@
 #define _WX_STATTEXT_H_
 
 import Utils.Geometry;
+import WX.WinDef;
 
 class wxStaticText : public wxStaticTextBase
 {
@@ -43,7 +44,7 @@ public:
     void SetLabel(std::string_view label) override;
     bool SetFont( const wxFont &font ) override;
 
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     // implement/override some base class virtuals

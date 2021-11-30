@@ -24,6 +24,7 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
 import Utils.Geometry;
 
 import <string>;
@@ -62,7 +63,7 @@ struct COLORINFO
     HANDLE         hLocal;
     HANDLE         hDialog;
     WXHPALETTE       hPal;
-    DWORD          currentRGB;
+    WXDWORD          currentRGB;
     WXWORD           currentHue;
     WXWORD           currentSat;
     WXWORD           currentLum;
@@ -83,7 +84,7 @@ struct COLORINFO
     RECT           rNearestPure;
     RECT           rColorSamples;
     BOOL           bFoldOut;
-    DWORD          rgbBoxColor[COLORBOXES];
+    WXDWORD          rgbBoxColor[COLORBOXES];
 };
 
 } // anonymous namespace
@@ -177,7 +178,7 @@ int wxColourDialog::ShowModal()
     {
         // 0 error means the dialog was simply cancelled, i.e. no real error
         // occurred
-        const DWORD err = CommDlgExtendedError();
+        const WXDWORD err = CommDlgExtendedError();
         if ( err )
         {
             wxLogError(_("Colour selection dialog failed with error %0lx."), err);

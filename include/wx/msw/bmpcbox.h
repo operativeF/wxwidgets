@@ -77,7 +77,7 @@ public:
 
 protected:
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
     bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
     bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;

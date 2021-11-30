@@ -14,6 +14,7 @@
 #include "wx/textctrl.h"
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 import <vector>;
@@ -362,7 +363,7 @@ public:
     GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
     // convert our styles to Windows
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     // special Windows message handling
     WXLRESULT MSWWindowProc(WXUINT nMsg,

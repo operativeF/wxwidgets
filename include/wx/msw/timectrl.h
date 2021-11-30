@@ -11,6 +11,7 @@
 #define _WX_MSW_TIMECTRL_H_
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 
@@ -53,7 +54,7 @@ public:
     }
 
     // Override MSW-specific functions used during control creation.
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
 #if wxUSE_INTL

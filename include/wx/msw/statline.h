@@ -12,6 +12,8 @@
 
 import Utils.Geometry;
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxStaticLine
 // ----------------------------------------------------------------------------
@@ -45,7 +47,7 @@ public:
     bool AcceptsFocus() const override { return false; }
 
     // usually overridden base class virtuals
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

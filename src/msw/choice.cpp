@@ -21,6 +21,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxPoint& pos,
@@ -101,10 +103,10 @@ bool wxChoice::MSWShouldPreProcessMessage(WXMSG *pMsg)
     return wxControl::MSWShouldPreProcessMessage(pMsg);
 }
 
-DWORD wxChoice::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxChoice::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     // we never have an external border
-    DWORD msStyle = wxControl::MSWGetStyle
+    WXDWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

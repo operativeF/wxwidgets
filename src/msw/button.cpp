@@ -30,6 +30,8 @@
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
 
+import WX.WinDef;
+
 // set the value for BCM_SETSHIELD (for the UAC shield) if it's not defined in
 // the header
 #ifndef BCM_SETSHIELD
@@ -81,8 +83,8 @@ bool wxButton::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    DWORD exstyle;
-    DWORD msStyle = MSWGetStyle(style, &exstyle);
+    WXDWORD exstyle;
+    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
 
     // if the label contains several lines we must explicitly tell the button
     // about it or it wouldn't draw it correctly ("\n"s would just appear as
@@ -108,10 +110,10 @@ wxButton::~wxButton()
 // flags
 // ----------------------------------------------------------------------------
 
-DWORD wxButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxButton::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     // buttons never have an external border, they draw their own one
-    DWORD msStyle = wxControl::MSWGetStyle
+    WXDWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

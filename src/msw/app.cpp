@@ -49,11 +49,11 @@ import <vector>;
     // correctly aligned
     struct DLLVERSIONINFO
     {
-        DWORD cbSize;
-        DWORD dwMajorVersion;                   // Major version
-        DWORD dwMinorVersion;                   // Minor version
-        DWORD dwBuildNumber;                    // Build number
-        DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
+        WXDWORD cbSize;
+        WXDWORD dwMajorVersion;                   // Major version
+        WXDWORD dwMinorVersion;                   // Minor version
+        WXDWORD dwBuildNumber;                    // Build number
+        WXDWORD dwPlatformID;                     // DLLVER_PLATFORM_*
     };
 
     using DLLGETVERSIONPROC = HRESULT (CALLBACK*)(DLLVERSIONINFO *);
@@ -231,7 +231,7 @@ bool wxGUIAppTraits::DoMessageFromThreadWait()
     return evtLoop->Dispatch();
 }
 
-DWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, wxThreadWait flags)
+WXDWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, wxThreadWait flags)
 {
     // We only ever dispatch messages from the main thread and, additionally,
     // even from the main thread we shouldn't wait for the message if we don't
@@ -367,10 +367,10 @@ private:
     int m_dataLen{0};              // length data buffer
     int m_dataLine{0};             // line offset
 
-    using GetConsoleCommandHistory_t = DWORD (WINAPI*)(LPTSTR sCommands,
-                                                       DWORD nBufferLength,
+    using GetConsoleCommandHistory_t = WXDWORD (WINAPI*)(LPTSTR sCommands,
+                                                       WXDWORD nBufferLength,
                                                        LPCTSTR sExeName);
-    using GetConsoleCommandHistoryLength_t = DWORD (WINAPI*)(LPCTSTR sExeName);
+    using GetConsoleCommandHistoryLength_t = WXDWORD (WINAPI*)(LPCTSTR sExeName);
 
     GetConsoleCommandHistory_t m_pfnGetConsoleCommandHistory;
     GetConsoleCommandHistoryLength_t m_pfnGetConsoleCommandHistoryLength;
@@ -422,7 +422,7 @@ bool wxConsoleStderr::DoInit()
     pos.Y = csbi.dwCursorPosition.Y + 1;
 
     // we decide that a line is empty if first 4 characters are spaces
-    DWORD ret;
+    WXDWORD ret;
     wchar_t buf[4];
     do
     {
@@ -510,7 +510,7 @@ bool wxConsoleStderr::Write(const std::string& text)
         return false;
     }
 
-    DWORD ret;
+    WXDWORD ret;
     if ( !::FillConsoleOutputCharacterW(m_hStderr, ' ', m_dataLen,
                                        csbi.dwCursorPosition, &ret) )
     {
@@ -979,7 +979,7 @@ wxLayoutDirection wxApp::MSWGetDefaultLayout(wxWindow* parent)
 
     if ( dir == wxLayoutDirection::Default )
     {
-        DWORD dwLayout;
+        WXDWORD dwLayout;
         if ( ::GetProcessDefaultLayout(&dwLayout) )
         {
             dir = dwLayout == LAYOUT_RTL ? wxLayoutDirection::RightToLeft

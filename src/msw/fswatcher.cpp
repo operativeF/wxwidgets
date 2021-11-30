@@ -17,6 +17,8 @@
 
 #include <memory>
 
+import WX.WinDef;
+
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {
 public:
@@ -166,7 +168,7 @@ bool wxFSWatcherImplMSW::DoSetUpWatch(wxFSWatchEntryMSW& watch)
 // this needs a bit of thinking, quick impl for now
 int wxFSWatcherImplMSW::Watcher2NativeFlags([[maybe_unused]] int flags)
 {
-    static DWORD all_events = FILE_NOTIFY_CHANGE_FILE_NAME |
+    static WXDWORD all_events = FILE_NOTIFY_CHANGE_FILE_NAME |
             FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_ATTRIBUTES |
             FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE |
             FILE_NOTIFY_CHANGE_LAST_ACCESS | FILE_NOTIFY_CHANGE_CREATION |
@@ -211,7 +213,7 @@ wxThread::ExitCode wxIOCPThread::Entry()
 //         true otherwise
 bool wxIOCPThread::ReadEvents()
 {
-    DWORD count = 0;
+    WXDWORD count = 0;
     wxFSWatchEntryMSW* watch = nullptr;
     OVERLAPPED* overlapped = nullptr;
     switch ( m_iocp->GetStatus(&count, &watch, &overlapped) )

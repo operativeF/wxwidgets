@@ -11,9 +11,7 @@
 #ifndef _WX_MSW_EVTLOOPCONSOLE_H_
 #define _WX_MSW_EVTLOOPCONSOLE_H_
 
-// FIXME: Just have it to where we don't have to deal with DWORDs at all; at least not in the
-// interface.
-using DWORD = unsigned long;
+import WX.WinDef;
 
 class wxMSWEventLoopBase : public wxEventLoopManual
 {
@@ -30,7 +28,7 @@ public:
     //
     // Return value is WAIT_OBJECT_0 if the thread terminated, WAIT_OBJECT_0+1
     // if a message arrived with anything else indicating an error.
-    DWORD MSWWaitForThread(WXHANDLE hThread);
+    WXDWORD MSWWaitForThread(WXHANDLE hThread);
 #endif // wxUSE_THREADS
 
     // Return true if wake up was requested and not handled yet, i.e. if

@@ -12,6 +12,7 @@
 #define _WX_SCROLBAR_H_
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 
@@ -61,7 +62,7 @@ public:
     // override wxControl version to not use solid background here
     WXHBRUSH MSWControlColor(WXHDC pDC, WXHWND hWnd) override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

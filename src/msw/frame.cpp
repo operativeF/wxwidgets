@@ -82,7 +82,7 @@ bool wxFrame::Create(wxWindow *parent,
 #if wxUSE_DYNLIB_CLASS
         // FIXME: Change to use ChangeWindowMessageFilterEx instead.
         using ChangeWindowMessageFilter_t = BOOL (WINAPI*)(WXUINT message,
-                                                           DWORD dwFlag);
+                                                           WXDWORD dwFlag);
         wxDynamicLibrary dllUser32("user32.dll");
 
         ChangeWindowMessageFilter_t pfnChangeWindowMessageFilter = nullptr;

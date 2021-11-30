@@ -19,6 +19,8 @@
 #include "wx/datectrl.h"
 #include "wx/dateevt.h"
 
+import WX.WinDef;
+
 wxIMPLEMENT_DYNAMIC_CLASS(wxDatePickerCtrl, wxControl);
 
 // ============================================================================
@@ -48,9 +50,9 @@ wxDatePickerCtrl::Create(wxWindow *parent,
                                    validator, name);
 }
 
-DWORD wxDatePickerCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxDatePickerCtrl::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
-    DWORD styleMSW = wxDatePickerCtrlBase::MSWGetStyle(style, exstyle);
+    WXDWORD styleMSW = wxDatePickerCtrlBase::MSWGetStyle(style, exstyle);
 
     if ( style & wxDP_SPIN )
         styleMSW |= DTS_UPDOWN;
@@ -145,7 +147,7 @@ void wxDatePickerCtrl::SetRange(const wxDateTime& dt1, const wxDateTime& dt2)
 {
     SYSTEMTIME st[2];
 
-    DWORD flags = 0;
+    WXDWORD flags = 0;
     if ( dt1.IsValid() )
     {
         dt1.GetAsMSWSysTime(st + 0);
@@ -173,7 +175,7 @@ bool wxDatePickerCtrl::GetRange(wxDateTime *dt1, wxDateTime *dt2) const
 {
     SYSTEMTIME st[2];
 
-    DWORD flags = DateTime_GetRange(GetHwnd(), st);
+    WXDWORD flags = DateTime_GetRange(GetHwnd(), st);
     if ( dt1 )
     {
         // Workaround for https://bugs.winehq.org/show_bug.cgi?id=40301: WINE

@@ -15,6 +15,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 import <vector>;
 
 // ============================================================================
@@ -240,7 +242,7 @@ public:
     // This function can block forever in it's wait for completion status.
     // Use PostEmptyStatus() to wake it up (and end the worker thread)
     Status
-    GetStatus(DWORD* count, wxFSWatchEntryMSW** watch,
+    GetStatus(WXDWORD* count, wxFSWatchEntryMSW** watch,
               OVERLAPPED** overlapped)
     {
         wxCHECK_MSG( m_iocp != INVALID_HANDLE_VALUE, Status_Error,

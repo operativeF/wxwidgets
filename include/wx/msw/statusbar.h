@@ -13,6 +13,7 @@
 
 #if wxUSE_NATIVE_STATUSBAR
 
+import WX.WinDef;
 import Utils.Geometry;
 
 import <vector>;
@@ -64,7 +65,7 @@ protected:
     void DoUpdateStatusText(int number) override;
 
     // override some base class virtuals
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
     wxSize DoGetBestSize() const override;
     void DoMoveWindow(wxRect boundary) override;
 #if wxUSE_TOOLTIPS

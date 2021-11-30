@@ -14,6 +14,7 @@
 #include "wx/msw/ownerdrawnbutton.h"
 
 import Utils.Geometry;
+import WX.WinDef;
 
 import <string>;
 import <string_view>;
@@ -64,7 +65,7 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
     // implementation only from now on
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     wxSize DoGetBestClientSize() const override;

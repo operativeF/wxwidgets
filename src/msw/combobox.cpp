@@ -32,6 +32,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import WX.WinDef;
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -480,10 +482,10 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-DWORD wxComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
+WXDWORD wxComboBox::MSWGetStyle(unsigned int style, WXDWORD *exstyle) const
 {
     // we never have an external border
-    DWORD msStyle = wxChoice::MSWGetStyle
+    WXDWORD msStyle = wxChoice::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

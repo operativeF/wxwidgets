@@ -653,7 +653,7 @@ public:
         if ( m_hGlobal && !GlobalUnlock(m_hGlobal) )
         {
             // this might happen simply because the block became unlocked
-            const DWORD dwLastError = ::GetLastError();
+            const WXDWORD dwLastError = ::GetLastError();
             if ( dwLastError != NO_ERROR )
             {
                 wxLogApiError("GlobalUnlock", dwLastError);
@@ -862,7 +862,7 @@ wxWinVersion wxGetWinVersion();
 
 // This is similar to wxSysErrorMsgStr(), but takes an extra WXHMODULE parameter
 // specific to wxMSW.
-wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule = nullptr);
+wxString wxMSWFormatMessage(WXDWORD nErrCode, WXHMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 

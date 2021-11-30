@@ -34,8 +34,8 @@
 #include <gsl/gsl>
 
 import WX.WinDef;
-
 import WX.Win.UniqueHnd;
+
 import Utils.Strings;
 
 import <cmath>;
@@ -73,7 +73,7 @@ using msw::utils::unique_region;
 
 /* Quaternary raster codes */
 #ifndef MAKEROP4
-#define MAKEROP4(fore,back) (DWORD)((((back) << 8) & 0xFF000000) | (fore))
+#define MAKEROP4(fore,back) (WXDWORD)((((back) << 8) & 0xFF000000) | (fore))
 #endif
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxMSWDCImpl, wxDCImpl);
@@ -179,11 +179,11 @@ typedef BOOL (WINAPI *GradientFill_t)(WXHDC, PTRIVERTEX, ULONG, PVOID, ULONG, UL
 static GradientFill_t gs_pfnGradientFill = NULL;
 static bool gs_triedToLoadGradientFill = false;
 
-typedef DWORD (WINAPI *GetLayout_t)(WXHDC);
+typedef WXDWORD (WINAPI *GetLayout_t)(WXHDC);
 static GetLayout_t gs_pfnGetLayout = NULL;
 static bool gs_triedToLoadGetLayout = false;
 
-typedef DWORD (WINAPI *SetLayout_t)(WXHDC, DWORD);
+typedef WXDWORD (WINAPI *SetLayout_t)(WXHDC, WXDWORD);
 static SetLayout_t gs_pfnSetLayout = NULL;
 static bool gs_triedToLoadSetLayout = false;
 #endif // USE_DYNAMIC_GDI_FUNCS
@@ -232,7 +232,7 @@ namespace wxDynLoadWrappers
 
 // This is unfortunately necessary because GetLayout() is missing in MinGW
 // libgdi32.a import library (at least up to w32api 4.0.3).
-DWORD GetLayout(WXHDC hdc)
+WXDWORD GetLayout(WXHDC hdc)
 {
     if ( !gs_triedToLoadGetLayout )
     {
@@ -246,7 +246,7 @@ DWORD GetLayout(WXHDC hdc)
 // SetLayout is present in newer w32api versions but in older one (e.g. the one
 // used by mingw32 4.2 Debian package), so load it dynamically too while we're
 // at it.
-DWORD SetLayout(WXHDC hdc, DWORD dwLayout)
+WXDWORD SetLayout(WXHDC hdc, WXDWORD dwLayout)
 {
     if ( !gs_triedToLoadSetLayout )
     {
@@ -295,12 +295,12 @@ BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
 
 #elif defined(USE_STATIC_GDI_FUNCS)
 
-DWORD GetLayout(WXHDC hdc)
+WXDWORD GetLayout(WXHDC hdc)
 {
     return ::GetLayout(hdc);
 }
 
-DWORD SetLayout(WXHDC hdc, DWORD dwLayout)
+WXDWORD SetLayout(WXHDC hdc, WXDWORD dwLayout)
 {
     return ::SetLayout(hdc, dwLayout);
 }
@@ -323,13 +323,13 @@ BOOL GradientFill(WXHDC hdc, PTRIVERTEX pVert, ULONG numVert,
 #else // Can't use the functions neither statically nor dynamically.
 
 inline
-DWORD GetLayout([[maybe_unused]] WXHDC hdc)
+WXDWORD GetLayout([[maybe_unused]] WXHDC hdc)
 {
     return GDI_ERROR;
 }
 
 inline
-DWORD SetLayout([[maybe_unused]] WXHDC hdc, [[maybe_unused]] DWORD dwLayout)
+WXDWORD SetLayout([[maybe_unused]] WXHDC hdc, [[maybe_unused]] WXDWORD dwLayout)
 {
     return GDI_ERROR;
 }
@@ -1161,7 +1161,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
 
     std::vector<POINT> lppt(n_bezier_points);
 
-    DWORD bezier_pos{};
+    WXDWORD bezier_pos{};
 
     wxCoord x1{};
     wxCoord y1{};
@@ -1228,7 +1228,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     lppt[ bezier_pos ] = lppt[ bezier_pos-1 ];
     bezier_pos++;
 
-    ::PolyBezier( GetHdc(), lppt.data(), gsl::narrow_cast<DWORD>(bezier_pos) );
+    ::PolyBezier( GetHdc(), lppt.data(), gsl::narrow_cast<WXDWORD>(bezier_pos) );
 }
 #endif // wxUSE_SPLINES
 
@@ -2265,7 +2265,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 
     wxTextColoursChanger textCol(GetHdc(), *this);
 
-    DWORD dwRop;
+    WXDWORD dwRop;
     switch (rop)
     {
         case wxRasterOperationMode::Xor:          dwRop = SRCINVERT;        break;
@@ -2862,7 +2862,7 @@ WXHDC CreateCompatibleDCWithLayout(WXHDC hdc)
     WXHDC hdcNew = ::CreateCompatibleDC(hdc);
     if ( hdcNew )
     {
-        const DWORD dwLayout = wxDynLoadWrappers::GetLayout(hdc);
+        const WXDWORD dwLayout = wxDynLoadWrappers::GetLayout(hdc);
         if ( dwLayout != GDI_ERROR )
             wxDynLoadWrappers::SetLayout(hdcNew, dwLayout);
     }
@@ -2874,7 +2874,7 @@ WXHDC CreateCompatibleDCWithLayout(WXHDC hdc)
 
 wxLayoutDirection wxMSWDCImpl::GetLayoutDirection() const
 {
-    DWORD layout = wxDynLoadWrappers::GetLayout(GetHdc());
+    WXDWORD layout = wxDynLoadWrappers::GetLayout(GetHdc());
 
     if ( layout == GDI_ERROR )
         return wxLayoutDirection::Default;
@@ -2891,7 +2891,7 @@ void wxMSWDCImpl::SetLayoutDirection(wxLayoutDirection dir)
             return;
     }
 
-    DWORD layout = wxDynLoadWrappers::GetLayout(GetHdc());
+    WXDWORD layout = wxDynLoadWrappers::GetLayout(GetHdc());
     if ( layout == GDI_ERROR )
         return;
 

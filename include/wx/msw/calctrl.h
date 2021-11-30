@@ -9,6 +9,8 @@
 #ifndef _WX_MSW_CALCTRL_H_
 #define _WX_MSW_CALCTRL_H_
 
+import WX.WinDef;
+
 import <cstdint>;
 import <string>;
 
@@ -58,7 +60,7 @@ public:
 protected:
     wxSize DoGetBestSize() const override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 

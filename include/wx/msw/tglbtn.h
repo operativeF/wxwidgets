@@ -13,6 +13,7 @@
 #define _WX_TOGGLEBUTTON_H_
 
 import WX.Cfg.Flags;
+import WX.WinDef;
 
 import <string>;
 
@@ -58,7 +59,7 @@ public:
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
+    WXDWORD MSWGetStyle(unsigned int flags, WXDWORD *exstyle = nullptr) const override;
 
     bool MSWIsPushed() const override;
 

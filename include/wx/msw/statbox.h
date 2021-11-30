@@ -13,6 +13,8 @@
 
 #include "wx/compositewin.h"
 
+import WX.WinDef;
+
 // Group box
 class wxStaticBox : public wxCompositeWindowSettersOnly<wxStaticBoxBase>
 {
@@ -63,7 +65,7 @@ public:
     bool SetBackgroundColour(const wxColour& colour) override;
     bool SetFont(const wxFont& font) override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

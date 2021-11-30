@@ -28,6 +28,7 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+import WX.WinDef;
 import Utils.Strings;
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
@@ -373,7 +374,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             return false;
         }
 
-        DWORD count = 0;
+        WXDWORD count = 0;
 
         hr = itemArray->GetCount(&count);
         if ( FAILED(hr) )
@@ -382,7 +383,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             return false;
         }
 
-        for ( DWORD i = 0; i < count; ++i )
+        for ( WXDWORD i = 0; i < count; ++i )
         {
             wxCOMPtr<IShellItem> item;
 

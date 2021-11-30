@@ -21,6 +21,7 @@
 #include "wx/fontutil.h"
 #include "wx/fontmap.h"
 
+import WX.WinDef;
 import WX.Win.UniqueHnd;
 
 // ----------------------------------------------------------------------------
@@ -80,7 +81,7 @@ private:
 // ----------------------------------------------------------------------------
 
 int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
-                                  DWORD dwStyle, WXLPARAM lParam);
+                                  WXDWORD dwStyle, WXLPARAM lParam);
 
 // ============================================================================
 // implementation
@@ -241,7 +242,7 @@ bool wxFontEnumerator::EnumerateEncodings(const std::string& facename)
 // ----------------------------------------------------------------------------
 
 int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
-                                  [[maybe_unused]] DWORD dwStyle, WXLPARAM lParam)
+                                  [[maybe_unused]] WXDWORD dwStyle, WXLPARAM lParam)
 {
 
     // we used to process TrueType fonts only, but there doesn't seem to be any

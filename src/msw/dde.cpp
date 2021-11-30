@@ -72,7 +72,7 @@ static void DDELogError(const wxString& s, WXUINT error = DMLERR_NO_ERROR);
 
 WX_DECLARE_STRING_HASH_MAP( HSZ, wxAtomMap );
 
-static DWORD DDEIdInst = 0L;
+static WXDWORD DDEIdInst = 0L;
 static wxDDEConnection *DDECurrentlyConnecting = nullptr;
 static wxAtomMap wxAtomTable;
 
@@ -550,7 +550,7 @@ wxDDEConnection::DoExecute(const void *data, size_t size, wxIPCFormat format)
         realSize *= sizeof(wchar_t);
     }
 
-    DWORD result;
+    WXDWORD result;
     bool ok = DdeClientTransaction(realData,
                                    realSize,
                                    GetHConv(),
@@ -573,7 +573,7 @@ wxDDEConnection::DoExecute(const void *data, size_t size, wxIPCFormat format)
 
 const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFormat format)
 {
-    DWORD result;
+    WXDWORD result;
 
     HSZ atom = DDEGetAtom(item);
 
@@ -590,7 +590,7 @@ const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFo
         return nullptr;
     }
 
-    DWORD len = DdeGetData(returned_data, nullptr, 0, 0);
+    WXDWORD len = DdeGetData(returned_data, nullptr, 0, 0);
 
     void *data = GetBufferAtLeast(len);
     wxASSERT_MSG(data != nullptr,
@@ -607,7 +607,7 @@ const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFo
 
 bool wxDDEConnection::DoPoke(const wxString& item, const void *data, size_t size, wxIPCFormat format)
 {
-    DWORD result;
+    WXDWORD result;
 
     HSZ item_atom = DDEGetAtom(item);
     bool ok = DdeClientTransaction(const_cast<BYTE*>(static_cast<const BYTE*>(data)),
@@ -627,7 +627,7 @@ bool wxDDEConnection::DoPoke(const wxString& item, const void *data, size_t size
 
 bool wxDDEConnection::StartAdvise(const wxString& item)
 {
-    DWORD result;
+    WXDWORD result;
     HSZ atom = DDEGetAtom(item);
 
     const bool ok = DdeClientTransaction(nullptr, 0,
@@ -646,7 +646,7 @@ bool wxDDEConnection::StartAdvise(const wxString& item)
 
 bool wxDDEConnection::StopAdvise(const wxString& item)
 {
-    DWORD result;
+    WXDWORD result;
     HSZ atom = DDEGetAtom(item);
 
     const bool ok = DdeClientTransaction(nullptr, 0,
@@ -772,7 +772,7 @@ _DDECallback(WXUINT wType,
                         connection->m_hConv = nullptr;
                         connection->m_topicName = topic;
                         DDECurrentlyConnecting = connection;
-                        return (DDERETURN)(DWORD)true;
+                        return (DDERETURN)(WXDWORD)true;
                     }
                 }
                 break;
@@ -784,7 +784,7 @@ _DDECallback(WXUINT wType,
                 {
                     DDECurrentlyConnecting->m_hConv = (WXHCONV) hConv;
                     DDECurrentlyConnecting = nullptr;
-                    return (DDERETURN)(DWORD)true;
+                    return (DDERETURN)(WXDWORD)true;
                 }
                 break;
             }
@@ -798,7 +798,7 @@ _DDECallback(WXUINT wType,
                     if (connection->OnDisconnect())
                     {
                         DDEDeleteConnection(hConv);  // Delete mapping: hConv => connection
-                        return (DDERETURN)(DWORD)true;
+                        return (DDERETURN)(WXDWORD)true;
                     }
                 }
                 break;
@@ -810,7 +810,7 @@ _DDECallback(WXUINT wType,
 
                 if (connection)
                 {
-                    const DWORD len = DdeGetData(hData, nullptr, 0, 0);
+                    const WXDWORD len = DdeGetData(hData, nullptr, 0, 0);
 
                     void *data = connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
@@ -830,7 +830,7 @@ _DDECallback(WXUINT wType,
                                                (int)len,
                                                (wxIPCFormat)wFmt) )
                     {
-                        return (DDERETURN)(DWORD)DDE_FACK;
+                        return (DDERETURN)(WXDWORD)DDE_FACK;
                     }
                 }
 
@@ -889,7 +889,7 @@ _DDECallback(WXUINT wType,
                 {
                     wxString item_name = DDEStringFromAtom(hsz2);
 
-                    DWORD len = DdeGetData(hData, nullptr, 0, 0);
+                    WXDWORD len = DdeGetData(hData, nullptr, 0, 0);
 
                     void *data = connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
@@ -976,7 +976,7 @@ _DDECallback(WXUINT wType,
                 {
                     wxString item_name = DDEStringFromAtom(hsz2);
 
-                    DWORD len = DdeGetData(hData, nullptr, 0, 0);
+                    WXDWORD len = DdeGetData(hData, nullptr, 0, 0);
 
                     char* const data = (char *)connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,
@@ -1007,7 +1007,7 @@ _DDECallback(WXUINT wType,
                                               (int)len,
                                               format) )
                     {
-                        return (DDERETURN)(DWORD)DDE_FACK;
+                        return (DDERETURN)(WXDWORD)DDE_FACK;
                     }
                 }
 

@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_BUTTON_H_
 #define _WX_MSW_BUTTON_H_
 
+import WX.WinDef;
+
 import <string>;
 
 // ----------------------------------------------------------------------------
@@ -52,7 +54,7 @@ public:
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
     bool MSWCommand(WXUINT param, WXWORD id) override;
 
-    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
 
 protected:
     // send a notification event, return true if processed

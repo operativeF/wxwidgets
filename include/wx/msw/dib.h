@@ -21,6 +21,8 @@ class wxPalette;
     #include "wx/bitmap.h"
 #endif // __WXMSW__
 
+import WX.WinDef;
+
 import <string>;
 
 // ----------------------------------------------------------------------------
@@ -187,7 +189,7 @@ public:
     // ----------------
 
     // return the size of one line in a DIB with given width and depth: the
-    // point here is that as the scan lines need to be DWORD aligned so we may
+    // point here is that as the scan lines need to be WXDWORD aligned so we may
     // need to add some padding
     static unsigned long GetLineSize(int width, int depth)
     {
