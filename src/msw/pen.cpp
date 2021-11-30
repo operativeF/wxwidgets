@@ -32,7 +32,7 @@ public:
     // ctors and dtor
     // --------------
 
-    wxPenRefData();
+    wxPenRefData() = default;
     wxPenRefData(const wxPenRefData& data);
     explicit wxPenRefData(const wxPenInfo& info);
 
@@ -109,16 +109,16 @@ private:
 
     wxBitmap      m_stipple;
 
-    wxDash* m_dash; // FIXME: Use array
+    wxDash* m_dash{nullptr}; // FIXME: Use array
     unique_pen    m_hPen;
 
-    int           m_width;
-    int           m_nbDash;
+    int           m_width{1};
+    int           m_nbDash{0};
 
-    wxPenStyle    m_style;
-    wxPenJoin     m_join;
-    wxPenCap      m_cap;
-    wxPenQuality  m_quality;
+    wxPenStyle    m_style{wxPenStyle::Solid};
+    wxPenJoin     m_join{wxJOIN_ROUND};
+    wxPenCap      m_cap{wxCAP_ROUND};
+    wxPenQuality  m_quality{wxPenQuality::Default};
 };
 
 // ============================================================================
@@ -128,19 +128,6 @@ private:
 // ----------------------------------------------------------------------------
 // wxPenRefData ctors/dtor
 // ----------------------------------------------------------------------------
-
-wxPenRefData::wxPenRefData()
-{
-    
-    m_join = wxJOIN_ROUND;
-    m_cap = wxCAP_ROUND;
-    m_quality = wxPenQuality::Default;
-    m_nbDash = 0;
-    m_dash = nullptr;    
-
-    m_style = wxPenStyle::Solid;
-    m_width = 1;
-}
 
 wxPenRefData::wxPenRefData(const wxPenRefData& data)
              :
@@ -153,22 +140,12 @@ wxPenRefData::wxPenRefData(const wxPenRefData& data)
     m_quality = data.m_quality;
     m_nbDash = data.m_nbDash;
     m_dash = data.m_dash;
-    m_hPen.reset();
 }
 
 wxPenRefData::wxPenRefData(const wxPenInfo& info)
     : m_stipple(info.GetStipple())
     , m_colour(info.GetColour())
 {
-    
-    m_join = wxJOIN_ROUND;
-    m_cap = wxCAP_ROUND;
-    m_quality = wxPenQuality::Default;
-    m_nbDash = 0;
-    m_dash = nullptr;
-    m_hPen.reset();
-
-
     m_style = info.GetStyle();
     m_width = info.GetWidth();
     m_join = info.GetJoin();
