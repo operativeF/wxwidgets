@@ -36,8 +36,6 @@ import <array>;
 class wxAuiCommandCapture : public wxEvtHandler
 {
 public:
-
-    wxAuiCommandCapture() { m_lastId = 0; }
     int GetCommandId() const { return m_lastId; }
 
     bool ProcessEvent(wxEvent& evt) override
@@ -55,7 +53,7 @@ public:
     }
 
 private:
-    int m_lastId;
+    int m_lastId{0};
 };
 
 

@@ -82,7 +82,7 @@ private:
 
     wxDirection m_lastDirection;
 
-    bool m_solidDrag{false};          // true if system uses solid window drag
+    bool m_solidDrag{true};          // true if system uses solid window drag; assumed on non-msw systems
     bool m_moving{false};
 
 #ifndef SWIG

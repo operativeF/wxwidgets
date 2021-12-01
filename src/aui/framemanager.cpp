@@ -78,11 +78,6 @@ public:
                     : wxFrame(parent, id, title, pos, size, style | wxFRAME_SHAPED, name)
     {
         SetBackgroundStyle(wxBackgroundStyle::Paint);
-        m_amount=0;
-        m_maxWidth=0;
-        m_maxHeight=0;
-        m_lastWidth=0;
-        m_lastHeight=0;
 #ifdef __WXGTK__
         m_canSetShape = false; // have to wait for window create event on GTK
 #else
@@ -173,13 +168,16 @@ public:
     }
 
 private:
-    wxByte m_amount;
-    int m_maxWidth;
-    int m_maxHeight;
-    bool m_canSetShape;
-    int m_lastWidth,m_lastHeight;
-
     wxRegion m_region;
+
+    int m_maxWidth{0};
+    int m_maxHeight{0};
+    int m_lastWidth{0};
+    int m_lastHeight{0};
+
+    wxByte m_amount{0};
+
+    bool m_canSetShape;
 
     wxDECLARE_DYNAMIC_CLASS(wxPseudoTransparentFrame);
     wxDECLARE_EVENT_TABLE();
