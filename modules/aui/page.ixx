@@ -1,6 +1,7 @@
 module;
 
 #include "wx/bitmap.h"
+#include "wx/dynarray.h"
 #include "wx/window.h"
 
 #include "wx/arrimpl.cpp"

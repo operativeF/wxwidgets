@@ -13,6 +13,8 @@
 
 #if wxUSE_POPUPWIN
 
+#include "wx/nonownedwnd.h"
+
 // ----------------------------------------------------------------------------
 // wxPopupWindow specific flags
 // ----------------------------------------------------------------------------
@@ -20,9 +22,6 @@
 // This flag can be used in MSW if some controls are not working with the
 // default popup style.
 inline constexpr unsigned int wxPU_CONTAINS_CONTROLS = 0x0001;
-
-
-#include "wx/nonownedwnd.h"
 
 // ----------------------------------------------------------------------------
 // wxPopupWindow: a special kind of top level window used for popup menus,

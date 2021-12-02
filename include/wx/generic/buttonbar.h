@@ -14,7 +14,8 @@
 
 #include "wx/bmpbuttn.h"
 #include "wx/toolbar.h"
-#include "wx/geometry/rect.h"
+
+import Utils.Geometry;
 
 import <string>;
 

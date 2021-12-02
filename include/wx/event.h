@@ -20,7 +20,6 @@
     #include "wx/mousestate.h"
 #endif
 
-#include "wx/dynarray.h"
 #include "wx/thread.h"
 #include "wx/tracker.h"
 #include "wx/any.h"

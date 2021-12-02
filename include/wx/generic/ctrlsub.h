@@ -10,8 +10,6 @@
 #ifndef _WX_GENERIC_CTRLSUB_H_
 #define _WX_GENERIC_CTRLSUB_H_
 
-#include "wx/dynarray.h"
-
 import <vector>;
 
 // ----------------------------------------------------------------------------

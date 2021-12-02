@@ -12,7 +12,6 @@
 
 #include "wx/listbox.h"
 
-#include "wx/dynarray.h"
 #include "wx/settings.h"
 #include "wx/font.h"
 #include "wx/dc.h"
@@ -45,6 +44,8 @@
 #endif // wxUSE_OWNER_DRAWN
 
 import WX.WinDef;
+
+import <vector>;
 
 #if wxUSE_OWNER_DRAWN
 
