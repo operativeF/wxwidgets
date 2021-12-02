@@ -1073,9 +1073,9 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
         wxString newFontName;
 
         for(int i = 0; i < 8; i++)
-          newFontName += tokenizer.NextToken();
+          newFontName += tokenizer.GetNextToken();
 
-        (void) tokenizer.NextToken();
+        (void) tokenizer.GetNextToken();
 
         newFontName += wxString::Format("%d-", pointSize);
 

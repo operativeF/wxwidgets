@@ -28,7 +28,7 @@ import WX.Win.UniqueHnd;
 
 bool wxNativeEncodingInfo::FromString(const wxString& s)
 {
-    wxStringTokenizer tokenizer(s, ";");
+    wxStringTokenizer tokenizer{s.ToStdString(), ";"};
 
     wxString encid = tokenizer.GetNextToken();
 

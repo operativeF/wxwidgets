@@ -21,7 +21,7 @@ import <vector>;
 // ----------------------------------------------------------------------------
 
 // default: delimiters are usual white space characters
-inline constexpr char wxDEFAULT_DELIMITERS[] = " \t\r\n";
+inline constexpr std::string_view wxDEFAULT_DELIMITERS = " \t\r\n";
 
 // wxStringTokenizer mode flags which determine its behaviour
 enum class wxStringTokenizerMode
@@ -45,20 +45,20 @@ public:
         // default ctor, call SetString() later
     wxStringTokenizer() = default;
         // ctor which gives us the string
-    wxStringTokenizer(const std::string& str,
-                      const std::string& delims = wxDEFAULT_DELIMITERS,
+    wxStringTokenizer(std::string_view str,
+                      std::string_view delims = wxDEFAULT_DELIMITERS,
                       wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
         // copy ctor and assignment operator
     wxStringTokenizer(const wxStringTokenizer& src);
     wxStringTokenizer& operator=(const wxStringTokenizer& src);
 
         // args are same as for the non default ctor above
-    void SetString(const std::string& str,
-                   const std::string& delims = wxDEFAULT_DELIMITERS,
+    void SetString(std::string_view str,
+                   std::string_view delims = wxDEFAULT_DELIMITERS,
                    wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
         // reinitialize the tokenizer with the same delimiters/mode
-    void Reinit(const std::string& str);
+    void Reinit(std::string_view str);
 
     // tokens access
         // return the number of remaining tokens
@@ -88,28 +88,6 @@ public:
     wxStringTokenizerMode GetMode() const { return m_mode; }
         // do we return empty tokens?
     bool AllowEmpty() const { return m_mode != wxStringTokenizerMode::StrTok; }
-
-
-    // backwards compatibility section from now on
-    // -------------------------------------------
-
-    // for compatibility only, use GetNextToken() instead
-    std::string NextToken() { return GetNextToken(); }
-
-    // compatibility only, don't use
-    void SetString(const std::string& to_tokenize,
-                   const std::string& delims,
-                   [[maybe_unused]] bool ret_delim)
-    {
-        SetString(to_tokenize, delims, wxStringTokenizerMode::RetDelims);
-    }
-
-    wxStringTokenizer(const std::string& to_tokenize,
-                      const std::string& delims,
-                      bool ret_delim)
-    {
-        SetString(to_tokenize, delims, ret_delim);
-    }
 
 protected:
     bool IsOk() const { return m_mode != wxStringTokenizerMode::Invalid; }
@@ -149,8 +127,8 @@ protected:
 // the function takes the same parameters as wxStringTokenizer ctor and returns
 // the array containing all tokens
 std::vector<std::string>
-wxStringTokenize(const std::string& str,
-                 const std::string& delims = wxDEFAULT_DELIMITERS,
+wxStringTokenize(std::string_view str,
+                 std::string_view delims = wxDEFAULT_DELIMITERS,
                  wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
 #endif // _WX_TOKENZRH

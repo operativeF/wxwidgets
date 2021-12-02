@@ -363,8 +363,8 @@ bool wxHTTP::BuildRequest(const wxString& path, const wxString& method)
     wxString tmp_str2;
     bool ret_value;
 
-    token.NextToken();
-    tmp_str2 = token.NextToken();
+    token.GetNextToken();
+    tmp_str2 = token.GetNextToken();
 
     m_http_response = wxAtoi(tmp_str2);
 

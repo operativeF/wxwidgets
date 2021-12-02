@@ -11,6 +11,10 @@
 #include "wx/tokenzr.h"
 #include "wx/crt.h"
 
+import Utils.Chars;
+
+import <string>;
+import <string_view>;
 import <vector>;
 
 // ============================================================================
@@ -57,8 +61,8 @@ find_first_not_of(const char* delims, size_t len,
 // wxStringTokenizer construction
 // ----------------------------------------------------------------------------
 
-wxStringTokenizer::wxStringTokenizer(const std::string& str,
-                                     const std::string& delims,
+wxStringTokenizer::wxStringTokenizer(std::string_view str,
+                                     std::string_view delims,
                                      wxStringTokenizerMode mode)
 {
     SetString(str, delims, mode);
@@ -80,8 +84,8 @@ wxStringTokenizer& wxStringTokenizer::operator=(const wxStringTokenizer& src)
     return *this;
 }
 
-void wxStringTokenizer::SetString(const std::string& str,
-                                  const std::string& delims,
+void wxStringTokenizer::SetString(std::string_view str,
+                                  std::string_view delims,
                                   wxStringTokenizerMode mode)
 {
     if ( mode == wxStringTokenizerMode::Default )
@@ -90,10 +94,10 @@ void wxStringTokenizer::SetString(const std::string& str,
         // whitespace characters and as wxStringTokenizerMode::RetEmpty otherwise (for
         // whitespace delimiters, strtok() behaviour is better because we want
         // to count consecutive spaces as one delimiter)
-        std::string::const_iterator p;
+        std::string_view::const_iterator p;
         for ( p = delims.begin(); p != delims.end(); ++p )
         {
-            if ( !wxIsspace(*p) )
+            if ( !wx::utils::isWhitespace(*p) )
                 break;
         }
 
@@ -117,11 +121,11 @@ void wxStringTokenizer::SetString(const std::string& str,
     Reinit(str);
 }
 
-void wxStringTokenizer::Reinit(const std::string& str)
+void wxStringTokenizer::Reinit(std::string_view str)
 {
     wxASSERT_MSG( IsOk(), "you should call SetString() first" );
 
-    m_string = str;
+    m_string = {str.begin(), str.end()};
     m_stringEnd = m_string.end();
     m_pos = m_string.begin();
     m_lastDelim = '\0';
@@ -284,16 +288,16 @@ std::string wxStringTokenizer::GetNextToken()
 // public functions
 // ----------------------------------------------------------------------------
 
-std::vector<std::string> wxStringTokenize(const std::string& str,
-                               const std::string& delims,
-                               wxStringTokenizerMode mode)
+std::vector<std::string> wxStringTokenize(std::string_view str,
+                                          std::string_view delims,
+                                          wxStringTokenizerMode mode)
 {
     std::vector<std::string> tokens;
-    wxStringTokenizer tk(str, delims, mode);
+    wxStringTokenizer tk{str, delims, mode};
 
     while ( tk.HasMoreTokens() )
     {
-        tokens.push_back(tk.GetNextToken());
+        tokens.emplace_back(tk.GetNextToken());
     }
 
     return tokens;
