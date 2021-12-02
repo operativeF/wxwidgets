@@ -371,10 +371,7 @@ private:
 class wxGridCellEditor : public wxGridCellWorker
 {
 public:
-    wxGridCellEditor() = default;
-
-    wxGridCellEditor(const wxGridCellEditor&) = delete;
-    wxGridCellEditor& operator=(const wxGridCellEditor&) = delete;
+    wxGridCellEditor& operator=(wxGridCellEditor&&) = delete;
 
     bool IsCreated() const { return m_control != nullptr; }
 
@@ -732,8 +729,7 @@ public:
     }
 
     // use Clone() instead
-    wxGridCellAttr(const wxGridCellAttr&) = delete;
-    wxGridCellAttr& operator=(const wxGridCellAttr&) = delete;
+    wxGridCellAttr& operator=(wxGridCellAttr&&) = delete;
 
     // creates a new copy of this object
     wxGridCellAttr *Clone() const;
@@ -872,11 +868,9 @@ using wxGridCellAttrPtr = wxObjectDataPtr<wxGridCellAttr>;
 class wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
-    wxGridCellAttrProvider() = default;
     ~wxGridCellAttrProvider();
 
-    wxGridCellAttrProvider(const wxGridCellAttrProvider&) = delete;
-    wxGridCellAttrProvider& operator=(const wxGridCellAttrProvider&) = delete;
+    wxGridCellAttrProvider& operator=(wxGridCellAttrProvider&&) = delete;
 
     // DecRef() must be called on the returned pointer
     virtual wxGridCellAttr *GetAttr(int row, int col,
@@ -1120,11 +1114,9 @@ WX_DECLARE_OBJARRAY_WITH_DECL(wxGridCellCoords, wxGridCellCoordsArray,
 class wxGridTableBase : public wxClientDataContainer
 {
 public:
-    wxGridTableBase() = default;
     ~wxGridTableBase();
 
-    wxGridTableBase(const wxGridTableBase&) = delete;
-    wxGridTableBase& operator=(const wxGridTableBase&) = delete;
+    wxGridTableBase& operator=(wxGridTableBase&&) = delete;
 
     // You must override these functions in a derived table class
     //
@@ -1263,8 +1255,7 @@ public:
                         int comInt1 = -1,
                         int comInt2 = -1 );
 
-    wxGridTableMessage(const wxGridTableMessage&) = delete;
-    wxGridTableMessage& operator=(const wxGridTableMessage&) = delete;
+    wxGridTableMessage& operator=(wxGridTableMessage&&) = delete;
 
     void SetTableObject( wxGridTableBase *table ) { m_table = table; }
     wxGridTableBase * GetTableObject() const { return m_table; }
@@ -1304,8 +1295,7 @@ public:
     wxGridStringTable() = default;
     wxGridStringTable( int numRows, int numCols );
     
-	wxGridStringTable(const wxGridStringTable&) = delete;
-	wxGridStringTable& operator=(const wxGridStringTable&) = delete;
+	wxGridStringTable& operator=(wxGridStringTable&&) = delete;
 
     // these are pure virtual in wxGridTableBase
     //
@@ -1459,8 +1449,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxGrid(const wxGrid&) = delete;
-    wxGrid& operator=(const wxGrid&) = delete;
+    wxGrid& operator=(wxGrid&&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -2927,8 +2916,7 @@ public:
             m_grid->BeginBatch();
     }
 
-    wxGridUpdateLocker(const wxGridUpdateLocker&) = delete;
-    wxGridUpdateLocker& operator=(const wxGridUpdateLocker&) = delete;
+    wxGridUpdateLocker& operator=(wxGridUpdateLocker&&) = delete;
 
     // can be called if ctor was used with a NULL pointer, must not be called
     // more than once

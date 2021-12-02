@@ -17,7 +17,7 @@
 
 struct wxGridCellCoords
 {
-    constexpr wxGridCellCoords() {};
+    constexpr wxGridCellCoords() {}
     constexpr wxGridCellCoords( int r, int c ) : m_row{r}, m_col{c} {}
 
     constexpr int GetRow() const { return m_row; }

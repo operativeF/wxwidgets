@@ -11,9 +11,15 @@
 #ifndef _WX_GENERIC_GRIDCTRL_H_
 #define _WX_GENERIC_GRIDCTRL_H_
 
+#if wxUSE_GRID
+
 #include "wx/grid.h"
 
-#if wxUSE_GRID
+#if wxUSE_DATETIME
+    #include "wx/datetime.h"
+#endif
+
+import Utils.Geometry;
 
 inline constexpr std::string_view wxGRID_VALUE_CHOICEINT    = "choiceint";
 inline constexpr std::string_view wxGRID_VALUE_DATETIME     = "datetime";
@@ -126,12 +132,13 @@ protected:
     std::string GetString(const wxGrid& grid, int row, int col);
 
 private:
+    std::string m_format;
+
     // formatting parameters
-    int m_width,
-        m_precision;
+    int m_width;
+    int m_precision;
 
     unsigned int m_style;
-    std::string m_format;
 };
 
 // renderer for boolean fields
@@ -162,8 +169,6 @@ public:
 
 
 #if wxUSE_DATETIME
-
-#include "wx/datetime.h"
 
 namespace wxGridPrivate { class DateParseParams; }
 

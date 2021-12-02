@@ -25,8 +25,7 @@ public:
     {
     }
 
-    wxGridCellEditorEvtHandler(const wxGridCellEditorEvtHandler&) = delete;
-    wxGridCellEditorEvtHandler& operator=(const wxGridCellEditorEvtHandler&) = delete;
+    wxGridCellEditorEvtHandler& operator=(wxGridCellEditorEvtHandler&&) = delete;
 
     void DismissEditor();
 
@@ -47,7 +46,6 @@ private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGridCellEditorEvtHandler);
 };
-
 
 #if wxUSE_TEXTCTRL
 
@@ -238,7 +236,7 @@ private:
 class wxGridCellBoolEditor : public wxGridCellEditor
 {
 public:
-    wxGridCellBoolEditor() = default;
+	wxGridCellBoolEditor& operator=(wxGridCellBoolEditor&&) = delete;
 
     wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
@@ -294,9 +292,6 @@ private:
     bool m_value{};
 
     static std::string ms_stringValues[2];
-
-    wxGridCellBoolEditor(const wxGridCellBoolEditor&) = delete;
-	wxGridCellBoolEditor& operator=(const wxGridCellBoolEditor&) = delete;
 };
 
 #endif // wxUSE_CHECKBOX
@@ -311,8 +306,7 @@ public:
     wxGridCellChoiceEditor(const std::vector<std::string>& choices = {},
                            bool allowOthers = false);
 
-    wxGridCellChoiceEditor(const wxGridCellChoiceEditor&) = delete;
-	wxGridCellChoiceEditor& operator=(const wxGridCellChoiceEditor&) = delete;
+	wxGridCellChoiceEditor& operator=(wxGridCellChoiceEditor&&) = delete;
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -372,16 +366,14 @@ private:
 class wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
 {
 public:
-    wxGridCellAutoWrapStringEditor()  = default;
     void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
+	wxGridCellAutoWrapStringEditor& operator=(wxGridCellAutoWrapStringEditor&&) = delete;
+
     wxGridCellEditor *Clone() const override
         { return new wxGridCellAutoWrapStringEditor; }
-
-    wxGridCellAutoWrapStringEditor(const wxGridCellAutoWrapStringEditor&) = delete;
-	wxGridCellAutoWrapStringEditor& operator=(const wxGridCellAutoWrapStringEditor&) = delete;
 };
 
 #if wxUSE_DATEPICKCTRL
@@ -390,6 +382,8 @@ class wxGridCellDateEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellDateEditor(const std::string& format = {});
+
+	wxGridCellDateEditor& operator=(wxGridCellDateEditor&&) = delete;
 
     void SetParameters(const std::string& params) override;
 
@@ -416,9 +410,6 @@ protected:
 private:
     wxDateTime m_value;
     std::string m_format;
-
-    wxGridCellDateEditor(const wxGridCellDateEditor&) = delete;
-	wxGridCellDateEditor& operator=(const wxGridCellDateEditor&) = delete;
 };
 
 #endif // wxUSE_DATEPICKCTRL
