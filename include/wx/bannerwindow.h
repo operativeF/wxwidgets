@@ -36,12 +36,7 @@ class wxBannerWindow : public wxWindow
 {
 public:
     // Default constructor, use Create() later.
-    wxBannerWindow() { 
-    m_direction = wxLEFT;
-
-    m_colStart = *wxWHITE;
-    m_colEnd = *wxBLUE;
- }
+    wxBannerWindow() = default;
 
     // Convenient constructor that should be used in the majority of cases.
     //
@@ -51,13 +46,6 @@ public:
     // of in the usual way, e.g. using sizers.
     wxBannerWindow(wxWindow* parent, wxDirection dir = wxLEFT)
     {
-        
-    m_direction = wxLEFT;
-
-    m_colStart = *wxWHITE;
-    m_colEnd = *wxBLUE;
-
-
         Create(parent, wxID_ANY, dir);
     }
 
@@ -70,12 +58,6 @@ public:
                    unsigned int style = 0,
                    std::string_view name = wxBannerWindowNameStr)
     {
-        
-        m_direction = wxLEFT;
-
-        m_colStart = *wxWHITE;
-        m_colEnd = *wxBLUE;
-
         Create(parent, winid, dir, pos, size, style, name);
     }
 
@@ -129,8 +111,8 @@ private:
     wxFont GetTitleFont() const;
 
     // Start and stop gradient colours, only used when drawing text.
-    wxColour m_colStart,
-             m_colEnd;
+    wxColour m_colStart{*wxWHITE};
+    wxColour m_colEnd{*wxBLUE};
 
     // Return the colour to use for extending the bitmap. Non-const as it
     // updates m_colBitmapBg if needed.
@@ -148,7 +130,7 @@ private:
     wxBitmap m_bitmap;
 
     // The window side along which the banner is laid out.
-    wxDirection m_direction;
+    wxDirection m_direction{wxLEFT};
 
     wxDECLARE_EVENT_TABLE();
 };

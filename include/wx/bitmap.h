@@ -117,8 +117,7 @@ public:
 class wxBitmapHandler : public wxObject
 {
 public:
-    wxBitmapHandler() { m_type = wxBitmapType::Invalid; }
-    virtual ~wxBitmapHandler() { }
+    virtual ~wxBitmapHandler() = default;
 
     // NOTE: the following functions should be pure virtuals, but they aren't
     //       because otherwise almost all ports would have to implement
@@ -148,7 +147,8 @@ public:
 private:
     std::string      m_name;
     std::string      m_extension;
-    wxBitmapType  m_type;
+
+    wxBitmapType  m_type{wxBitmapType::Invalid};
 
     wxDECLARE_ABSTRACT_CLASS(wxBitmapHandler);
 };

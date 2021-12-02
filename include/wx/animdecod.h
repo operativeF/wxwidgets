@@ -88,11 +88,6 @@ enum wxAnimationType
 class wxAnimationDecoder : public wxObjectRefData
 {
 public:
-    wxAnimationDecoder()
-    {
-        m_nFrames = 0;
-    }
-
     virtual bool Load( wxInputStream& stream ) = 0;
 
     bool CanRead( wxInputStream& stream ) const
@@ -162,7 +157,7 @@ protected:
     wxColour m_background;
 
     wxSize m_szAnimation;
-    unsigned int m_nFrames;
+    unsigned int m_nFrames{0};
 };
 
 #endif  // wxUSE_STREAMS
