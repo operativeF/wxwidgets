@@ -8,9 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_GRID
+module;
 
-#include "wx/grid.h"
+#include "wx/generic/private/grid.h"
 
 #include "wx/utils.h"
 #include "wx/dc.h"
@@ -26,9 +26,17 @@
 #include "wx/tokenzr.h"
 #include "wx/datectrl.h"
 
-#include "wx/generic/gridsel.h"
-#include "wx/generic/grideditors.h"
-#include "wx/generic/private/grid.h"
+#ifdef __WXOSX__
+#include "wx/osx/private.h"
+#endif
+
+module WX.Grid.Editors;
+
+import WX.Grid.Selection;
+
+// Required for wxIs... functions
+import <cctype>;
+import <charconv>;
 
 #if defined(__WXMOTIF__)
     #define WXUNUSED_MOTIF(identifier)  WXUNUSED(identifier)
@@ -41,14 +49,6 @@
 #else
     #define WXUNUSED_GTK(identifier)    identifier
 #endif
-
-#ifdef __WXOSX__
-#include "wx/osx/private.h"
-#endif
-
-// Required for wxIs... functions
-import <cctype>;
-import <charconv>;
 
 // ============================================================================
 // implementation
@@ -1963,5 +1963,3 @@ wxDatePickerCtrl* wxGridCellDateEditor::DatePicker() const
 }
 
 #endif // wxUSE_DATEPICKCTRL
-
-#endif // wxUSE_GRID

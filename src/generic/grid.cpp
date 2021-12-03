@@ -16,10 +16,7 @@
     - Implement row reordering after dealing with the columns.
  */
 
-
-#if wxUSE_GRID
-
-#include "wx/grid.h"
+module;
 
 #include "wx/utils.h"
 #include "wx/dcclient.h"
@@ -35,17 +32,27 @@
 #include "wx/tokenzr.h"
 #include "wx/renderer.h"
 #include "wx/headerctrl.h"
+#include "wx/scrolwin.h"
 
 #if wxUSE_CLIPBOARD
     #include "wx/clipbrd.h"
 #endif // wxUSE_CLIPBOARD
 
-#include "wx/generic/gridsel.h"
-#include "wx/generic/gridctrl.h"
-#include "wx/generic/grideditors.h"
 #include "wx/generic/private/grid.h"
 
 #include <gsl/gsl>
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+#include "wx/arrimpl.cpp"
+
+module WX.Generic.Grid;
+
+import WX.Grid.Selection;
+import WX.Grid.Ctrl;
+import WX.Grid.Editors;
 
 import Utils.Strings;
 
@@ -56,6 +63,8 @@ import <vector>;
 // ----------------------------------------------------------------------------
 // globals
 // ----------------------------------------------------------------------------
+
+WX_DEFINE_OBJARRAY(wxGridCellCoordsArray)
 
 // the size of hash tables used a bit everywhere (the max number of elements
 // in these hash tables is the number of rows/columns)
@@ -92,42 +101,6 @@ struct DefaultHeaderRenderers
 } gs_defaultHeaderRenderers;
 
 } // anonymous namespace
-
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
-#include "wx/arrimpl.cpp"
-
-WX_DEFINE_OBJARRAY(wxGridCellCoordsArray)
-
-// ----------------------------------------------------------------------------
-// events
-// ----------------------------------------------------------------------------
-
-wxDEFINE_EVENT( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_RIGHT_CLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_RIGHT_DCLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_BEGIN_DRAG, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_LABEL_RIGHT_CLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_LABEL_LEFT_DCLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_LABEL_RIGHT_DCLICK, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_ROW_SIZE, wxGridSizeEvent );
-wxDEFINE_EVENT( wxEVT_GRID_COL_SIZE, wxGridSizeEvent );
-wxDEFINE_EVENT( wxEVT_GRID_COL_AUTO_SIZE, wxGridSizeEvent );
-wxDEFINE_EVENT( wxEVT_GRID_COL_MOVE, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_COL_SORT, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_RANGE_SELECTING, wxGridRangeSelectEvent );
-wxDEFINE_EVENT( wxEVT_GRID_RANGE_SELECTED, wxGridRangeSelectEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_CHANGING, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_CELL_CHANGED, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_SELECT_CELL, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_EDITOR_SHOWN, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_EDITOR_HIDDEN, wxGridEvent );
-wxDEFINE_EVENT( wxEVT_GRID_EDITOR_CREATED, wxGridEditorCreatedEvent );
-wxDEFINE_EVENT( wxEVT_GRID_TABBING, wxGridEvent );
 
 // ============================================================================
 // implementation
@@ -1507,7 +1480,8 @@ void wxGridTableBase::SetAttr(wxGridCellAttr* attr, int row, int col)
     {
         // as we take ownership of the pointer and don't store it, we must
         // free it now
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -1523,7 +1497,8 @@ void wxGridTableBase::SetRowAttr(wxGridCellAttr *attr, int row)
     {
         // as we take ownership of the pointer and don't store it, we must
         // free it now
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -1539,7 +1514,8 @@ void wxGridTableBase::SetColAttr(wxGridCellAttr *attr, int col)
     {
         // as we take ownership of the pointer and don't store it, we must
         // free it now
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -2627,7 +2603,9 @@ wxGrid::~wxGrid()
     // Must do this or ~wxScrollHelper will pop the wrong event handler
     SetTargetWindow(this);
     ClearAttrCache();
-    wxSafeDecRef(m_defaultCellAttr);
+    
+    if(m_defaultCellAttr)
+        m_defaultCellAttr->DecRef();
 
 #ifdef DEBUG_ATTR_CACHE
     size_t total = gs_nAttrCacheHits + gs_nAttrCacheMisses;
@@ -9152,8 +9130,9 @@ void wxGrid::ClearAttrCache()
         // wxSafeDecRec(...) might cause event processing that accesses
         // the cached attribute, if one exists (e.g. by deleting the
         // editor stored within the attribute). Therefore it is important
-        // to invalidate the cache  before calling wxSafeDecRef!
-        wxSafeDecRef(oldAttr);
+        // to invalidate the cache  before DecRef!
+        if (oldAttr)
+            oldAttr->DecRef();
     }
 }
 
@@ -9174,7 +9153,9 @@ void wxGrid::CacheAttr(int row, int col, wxGridCellAttr *attr) const
         self->m_attrCache.row = row;
         self->m_attrCache.col = col;
         self->m_attrCache.attr = attr;
-        wxSafeIncRef(attr);
+
+        if (attr)
+            attr->IncRef();
     }
 }
 
@@ -9183,7 +9164,9 @@ bool wxGrid::LookupAttr(int row, int col, wxGridCellAttr **attr) const
     if ( row == m_attrCache.row && col == m_attrCache.col )
     {
         *attr = m_attrCache.attr;
-        wxSafeIncRef(m_attrCache.attr);
+
+        if(m_attrCache.attr)
+            m_attrCache.attr->IncRef();
 
 #ifdef DEBUG_ATTR_CACHE
         gs_nAttrCacheHits++;
@@ -9312,7 +9295,8 @@ void wxGrid::SetAttr(int row, int col, wxGridCellAttr *attr)
     }
     else
     {
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -9325,7 +9309,8 @@ void wxGrid::SetRowAttr(int row, wxGridCellAttr *attr)
     }
     else
     {
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -9338,7 +9323,8 @@ void wxGrid::SetColAttr(int col, wxGridCellAttr *attr)
     }
     else
     {
-        wxSafeDecRef(attr);
+        if (attr)
+            attr->DecRef();
     }
 }
 
@@ -11185,4 +11171,3 @@ wxGetContentRect(wxSize contentSize,
     return contentRect;
 }
 
-#endif // wxUSE_GRID

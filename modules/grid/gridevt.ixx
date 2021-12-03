@@ -8,15 +8,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GRID_EVENT_
-#define _WX_GRID_EVENT_
+module;
 
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/kbdstate.h"
 #include "wx/object.h"
 
-#include "wx/generic/gridcoord.h"
+export module WX.Grid.Event;
+
+import WX.Grid.CellCoords;
+
+export
+{
 
 class wxGridEvent : public wxNotifyEvent,
                                     public wxKeyboardState
@@ -196,30 +200,32 @@ public:
 	static wxObject* wxCreateObject();
 };
 
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_LEFT_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_RIGHT_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_LEFT_DCLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_RIGHT_DCLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_BEGIN_DRAG( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_LABEL_LEFT_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_LABEL_RIGHT_CLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_LABEL_LEFT_DCLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_LABEL_RIGHT_DCLICK( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_COL_MOVE( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_COL_SORT( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_CHANGING( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_CHANGED( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_SELECT_CELL( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_EDITOR_SHOWN( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_EDITOR_HIDDEN( wxNewEventType() );
+inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_TABBING( wxNewEventType() );
 
-wxDECLARE_EVENT( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_RIGHT_CLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_LEFT_DCLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_RIGHT_DCLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_LABEL_RIGHT_CLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_LABEL_LEFT_DCLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_LABEL_RIGHT_DCLICK, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_ROW_SIZE, wxGridSizeEvent );
-wxDECLARE_EVENT( wxEVT_GRID_COL_SIZE, wxGridSizeEvent );
-wxDECLARE_EVENT( wxEVT_GRID_COL_AUTO_SIZE, wxGridSizeEvent );
-wxDECLARE_EVENT( wxEVT_GRID_RANGE_SELECTING, wxGridRangeSelectEvent );
-wxDECLARE_EVENT( wxEVT_GRID_RANGE_SELECTED, wxGridRangeSelectEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_CHANGING, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_CHANGED, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_SELECT_CELL, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_EDITOR_SHOWN, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_EDITOR_HIDDEN, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_EDITOR_CREATED, wxGridEditorCreatedEvent );
-wxDECLARE_EVENT( wxEVT_GRID_CELL_BEGIN_DRAG, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_COL_MOVE, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_COL_SORT, wxGridEvent );
-wxDECLARE_EVENT( wxEVT_GRID_TABBING, wxGridEvent );
+inline const wxEventTypeTag<wxGridSizeEvent> wxEVT_GRID_ROW_SIZE( wxNewEventType() );
+inline const wxEventTypeTag<wxGridSizeEvent> wxEVT_GRID_COL_SIZE( wxNewEventType() );
+inline const wxEventTypeTag<wxGridSizeEvent> wxEVT_GRID_COL_AUTO_SIZE( wxNewEventType() );
+
+inline const wxEventTypeTag<wxGridRangeSelectEvent> wxEVT_GRID_RANGE_SELECTING( wxNewEventType() );
+inline const wxEventTypeTag<wxGridRangeSelectEvent> wxEVT_GRID_RANGE_SELECTED( wxNewEventType() );
+
+inline const wxEventTypeTag<wxGridEditorCreatedEvent> wxEVT_GRID_EDITOR_CREATED( wxNewEventType() );
 
 typedef void (wxEvtHandler::*wxGridEventFunction)(wxGridEvent&);
 typedef void (wxEvtHandler::*wxGridSizeEventFunction)(wxGridSizeEvent&);
@@ -312,4 +318,4 @@ extern const int wxEVT_GRID_CHANGE_SEL_LABEL;
 
 #endif
 
-#endif // _WX_GRID_EVENT_
+} // export

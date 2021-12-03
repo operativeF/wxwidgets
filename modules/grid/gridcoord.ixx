@@ -8,12 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GRID_COORD
-#define _WX_GRID_COORD
+module;
+
+export module WX.Grid.CellCoords;
 
 // ----------------------------------------------------------------------------
 // wxGridCellCoords: location of a cell in the grid
 // ----------------------------------------------------------------------------
+
+export
+{
 
 struct wxGridCellCoords
 {
@@ -47,5 +51,4 @@ struct wxGridCellCoords
 
 inline constexpr wxGridCellCoords wxGridNoCellCoords{-1, -1};
 
-
-#endif // _WX_GRID_COORD
+} // export

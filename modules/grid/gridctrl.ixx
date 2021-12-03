@@ -8,22 +8,26 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GENERIC_GRIDCTRL_H_
-#define _WX_GENERIC_GRIDCTRL_H_
-
-#if wxUSE_GRID
-
-#include "wx/grid.h"
+module;
 
 #if wxUSE_DATETIME
     #include "wx/datetime.h"
 #endif
 
+export module WX.Grid.Ctrl;
+
+import WX.Generic.Grid;
+import WX.Grid.Editors;
+
 import Utils.Geometry;
+
+import <string_view>;
+
+export
+{
 
 inline constexpr std::string_view wxGRID_VALUE_CHOICEINT    = "choiceint";
 inline constexpr std::string_view wxGRID_VALUE_DATETIME     = "datetime";
-
 
 // the default renderer for the cells containing string data
 class wxGridCellStringRenderer : public wxGridCellRenderer
@@ -356,5 +360,4 @@ private:
 
 };
 
-#endif  // wxUSE_GRID
-#endif // _WX_GENERIC_GRIDCTRL_H_
+} // export

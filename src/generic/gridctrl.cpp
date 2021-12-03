@@ -8,10 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_GRID
-
-#include "wx/generic/gridctrl.h"
-#include "wx/generic/grideditors.h"
+module;
 
 #include "wx/textctrl.h"
 #include "wx/dc.h"
@@ -26,6 +23,10 @@
 #include "wx/private/window.h"
 
 #include <fmt/core.h>
+
+module WX.Grid.Ctrl;
+
+import WX.Grid.Editors;
 
 import <charconv>;
 
@@ -1037,6 +1038,3 @@ void wxGridCellBoolRenderer::Draw(wxGrid& grid,
 
     wxRendererNative::Get().DrawCheckBox( &grid, dc, checkBoxRect, flags );
 }
-
-#endif // wxUSE_GRID
-

@@ -8,12 +8,22 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GENERIC_GRID_EDITORS_H_
-#define _WX_GENERIC_GRID_EDITORS_H_
+module;
 
-#if wxUSE_GRID
+#include "wx/event.h"
 
 #include <fmt/core.h>
+
+#include <memory>
+
+export module WX.Grid.Editors;
+
+import WX.Generic.Grid;
+
+import <vector>;
+
+export
+{
 
 class wxGridCellEditorEvtHandler : public wxEvtHandler
 {
@@ -414,6 +424,4 @@ private:
 
 #endif // wxUSE_DATEPICKCTRL
 
-#endif // wxUSE_GRID
-
-#endif // _WX_GENERIC_GRID_EDITORS_H_
+} // export

@@ -13,7 +13,8 @@
 #if wxUSE_XRC && wxUSE_GRID
 
 #include "wx/xrc/xh_grid.h"
-#include "wx/grid.h"
+
+import WX.Grid;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridXmlHandler, wxXmlResourceHandler);
 

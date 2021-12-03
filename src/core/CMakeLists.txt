@@ -150,19 +150,14 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/generic/vscroll.cpp
     ${CORE_SRC_DIR}/xrc/xmlreshandler.cpp
     ${CORE_SRC_DIR}/common/bmpcboxcmn.cpp
-    ${CORE_SRC_DIR}/generic/grideditors.cpp
-    ${CORE_SRC_DIR}/generic/gridctrl.cpp
-    ${CORE_SRC_DIR}/generic/grid.cpp
     ${CORE_SRC_DIR}/generic/hyperlinkg.cpp
     ${CORE_SRC_DIR}/common/calctrlcmn.cpp
     ${CORE_SRC_DIR}/generic/notifmsgg.cpp
     ${CORE_SRC_DIR}/generic/odcombo.cpp
     ${CORE_SRC_DIR}/generic/splash.cpp
-    ${CORE_SRC_DIR}/common/gridcmn.cpp
     ${CORE_SRC_DIR}/common/addremovectrl.cpp
     ${CORE_SRC_DIR}/generic/tipdlg.cpp
     ${CORE_SRC_DIR}/generic/aboutdlgg.cpp
-    ${CORE_SRC_DIR}/generic/gridsel.cpp
     ${CORE_SRC_DIR}/generic/sashwin.cpp
     ${CORE_SRC_DIR}/generic/helpext.cpp
     ${CORE_SRC_DIR}/generic/richtooltipg.cpp
@@ -187,6 +182,24 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/generic/creddlgg.cpp
     ${CORE_SRC_DIR}/generic/rowheightcache.cpp
     ${CORE_SRC_DIR}/generic/animateg.cpp
+)
+
+set(CORE_GRID_SRC
+    ${CORE_SRC_DIR}/generic/grideditors.cpp
+    ${CORE_SRC_DIR}/generic/gridctrl.cpp
+    ${CORE_SRC_DIR}/generic/grid.cpp
+    ${CORE_SRC_DIR}/generic/gridsel.cpp
+    ${CORE_SRC_DIR}/common/gridcmn.cpp
+)
+
+set(CORE_GRID_IXX
+    ${CMAKE_SOURCE_DIR}/modules/grid/grid.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/gridcoord.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/gridctrl.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/grideditors.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/gridevt.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/gridinf.ixx
+    ${CMAKE_SOURCE_DIR}/modules/grid/gridsel.ixx
 )
 
 set(MSW_DESKTOP_LOWLEVEL_SRC
@@ -381,7 +394,13 @@ elseif(WXQT)
     endif()
 endif()
 
-add_library(wxcore 
+# if(wxUSE_GRID)
+#     list(APPEND CORE_SRC ${CORE_GRID_SRC} ${CORE_GRID_IXX})
+# endif()
+
+add_library(wxcore
+    ${CORE_GRID_SRC}
+    ${CORE_GRID_IXX}
     ${GUI_CMN_SRC}
     ${MSW_LOWLEVEL_SRC}
     ${MSW_DESKTOP_SRC}

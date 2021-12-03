@@ -13,7 +13,6 @@
 #include "wx/app.h"
 #include "wx/dcclient.h"
 
-#include "wx/grid.h"
 #include "wx/headerctrl.h"
 #include "testableframe.h"
 #include "asserthelper.h"
@@ -25,6 +24,7 @@
 
 #include "waitforpaint.h"
 
+import WX.Grid;
 import WX.Test.Prec;
 
 namespace

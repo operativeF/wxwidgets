@@ -13,8 +13,10 @@
 
 #if wxUSE_GRID
 
+#include "wx/dc.h"
 #include "wx/headerctrl.h"
 
+import WX.Grid;
 import Utils.Geometry;
 
 import <string>;
@@ -990,8 +992,10 @@ struct wxGridDataTypeInfo
 
     ~wxGridDataTypeInfo()
     {
-        wxSafeDecRef(m_renderer);
-        wxSafeDecRef(m_editor);
+        if (m_renderer)
+            m_renderer->DecRef();
+        if (m_editor)
+            m_editor->DecRef();
     }
 
     wxGridDataTypeInfo(const wxGridDataTypeInfo&) = delete;

@@ -8,24 +8,26 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GENERIC_GRID_H_
-#define _WX_GENERIC_GRID_H_
-
-#if wxUSE_GRID
-
-#include "wx/generic/gridcoord.h"
-#include "wx/generic/gridevt.h"
+module;
 
 #include "wx/scrolwin.h"
 #include "wx/settings.h"
 
 #include <gsl/gsl>
 
+export module WX.Generic.Grid;
+
+import WX.Grid.CellCoords;
+import WX.Grid.Event;
+
 import Utils.Geometry;
 
 import <iterator>;
 import <unordered_set>;
 import <unordered_map>;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // constants
@@ -61,7 +63,7 @@ inline constexpr std::string_view wxGRID_VALUE_LONG       = wxGRID_VALUE_NUMBER;
 
 // magic constant which tells (to some functions) to automatically calculate
 // the appropriate size
-#define wxGRID_AUTOSIZE (-1)
+inline constexpr auto wxGRID_AUTOSIZE = -1;
 
 // many wxGrid methods work either with columns or rows, this enum is used for
 // the parameter indicating which one should it be
@@ -118,14 +120,6 @@ class wxGridOperations;
 class wxGridRowOperations;
 class wxGridColumnOperations;
 class wxGridDirectionOperations;
-
-
-// ----------------------------------------------------------------------------
-// macros
-// ----------------------------------------------------------------------------
-
-#define wxSafeIncRef(p) if ( p ) (p)->IncRef()
-#define wxSafeDecRef(p) if ( p ) (p)->DecRef()
 
 // ----------------------------------------------------------------------------
 // wxGridCellWorker: common base class for wxGridCellRenderer and
@@ -754,9 +748,20 @@ public:
 
     // takes ownership of the pointer
     void SetRenderer(wxGridCellRenderer *renderer)
-        { wxSafeDecRef(m_renderer); m_renderer = renderer; }
+    { 
+        if (m_renderer)
+            m_renderer->DecRef();
+        
+        m_renderer = renderer; 
+    }
+
     void SetEditor(wxGridCellEditor* editor)
-        { wxSafeDecRef(m_editor); m_editor = editor; }
+    {
+        if (m_editor)
+            m_editor->DecRef();
+        
+        m_editor = editor;
+    }
 
     void SetKind(wxAttrKind kind) { m_attrkind = kind; }
 
@@ -815,8 +820,11 @@ protected:
     // the dtor is private because only DecRef() can delete us
     ~wxGridCellAttr()
     {
-        wxSafeDecRef(m_renderer);
-        wxSafeDecRef(m_editor);
+        if (m_renderer)
+            m_renderer->DecRef();
+
+        if (m_editor)
+            m_editor->DecRef();
     }
 
 private:
@@ -2939,5 +2947,4 @@ private:
     wxGrid *m_grid;
 };
 
-#endif // wxUSE_GRID
-#endif // _WX_GENERIC_GRID_H_
+} // export

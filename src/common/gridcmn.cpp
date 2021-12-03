@@ -8,13 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_GRID
+module;
 
-#include "wx/grid.h"
 #include "wx/utils.h"
 #include "wx/settings.h"
 #include "wx/valtext.h"
 #include "wx/intl.h"
+#include "wx/scrolwin.h"
+
+module WX.Generic.Grid;
 
 // ----------------------------------------------------------------------------
 // XTI
@@ -68,4 +70,3 @@ wxCONSTRUCTOR_5( wxGrid, wxWindow*, Parent, wxWindowID, Id, wxPoint, Position, \
  TODO : Expose more information of a list's layout, etc. via appropriate objects (e.g., NotebookPageInfo)
 */
 
-#endif // wxUSE_GRID

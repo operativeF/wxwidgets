@@ -8,14 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GENERIC_GRIDSEL_H_
-#define _WX_GENERIC_GRIDSEL_H_
+module;
 
-#if wxUSE_GRID
+#include "wx/event.h"
 
-#include "wx/grid.h"
+export module WX.Grid.Selection;
+
+import WX.Generic.Grid;
 
 import <vector>;
+
+export
+{
 
 using wxVectorGridBlockCoords = std::vector<wxGridBlockCoords>;
 
@@ -152,5 +156,4 @@ private:
     wxGrid::wxGridSelectionModes        m_selectionMode;
 };
 
-#endif  // wxUSE_GRID
-#endif  // _WX_GENERIC_GRIDSEL_H_
+} // export

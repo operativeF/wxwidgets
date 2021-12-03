@@ -8,10 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_GRID
+module;
 
-#include "wx/generic/gridsel.h"
 #include "wx/dynarray.h"
+
+module WX.Grid.Selection;
 
 namespace
 {
@@ -884,5 +885,3 @@ void wxGridSelection::MergeOrAddBlock(wxVectorGridBlockCoords& blocks,
 
     blocks.push_back(newBlock);
 }
-
-#endif
