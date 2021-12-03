@@ -21,6 +21,8 @@
 
 #include <gsl/gsl>
 
+import Utils.Geometry;
+
 import <iterator>;
 import <unordered_set>;
 import <unordered_map>;
@@ -136,8 +138,6 @@ class wxGridDirectionOperations;
 class wxGridCellWorker : public wxClientDataContainer, public wxRefCounter
 {
 public:
-    wxGridCellWorker() = default;
-
     // interpret renderer parameters: arbitrary string whose interpretation is
     // left to the derived classes
     virtual void SetParameters(const std::string& params);
@@ -512,8 +512,9 @@ protected:
     // if we change the colours/font of the control from the default ones, we
     // must restore the default later and we save them here between calls to
     // Show(true) and Show(false)
-    wxColour m_colFgOld,
-             m_colBgOld;
+    wxColour m_colFgOld;
+    wxColour m_colBgOld;
+    
     wxFont m_fontOld;
 
     // suppress the stupid gcc warning about the class having private dtor and
@@ -636,7 +637,7 @@ class wxGridFitMode
 {
 public:
     // Default ctor creates an object not specifying any particular behaviour.
-    wxGridFitMode()  = default;
+    wxGridFitMode() = default;
 
     // Static methods allowing to create objects actually specifying behaviour.
     static wxGridFitMode Clip() { return wxGridFitMode(Mode_Clip); }
@@ -914,6 +915,7 @@ private:
 
 struct wxGridBlockDiffResult;
 
+// FIXME: Make constexpr
 class wxGridBlockCoords
 {
 public:
@@ -1078,28 +1080,25 @@ public:
     }
 
 private:
-    wxGridBlocks() :
-        m_begin(),
-        m_end()
-    {
-    }
+    wxGridBlocks() = default;
 
     wxGridBlocks(iterator_impl ibegin, iterator_impl iend) :
-        m_begin(ibegin),
-        m_end(iend)
+        m_begin{ibegin},
+        m_end{iend}
     {
     }
 
-    const iterator m_begin;
-    const iterator m_end;
+    const iterator m_begin{};
+    const iterator m_end{};
 
     friend class wxGrid;
 };
 
 // For comparisons...
 //
-extern wxGridBlockCoords wxGridNoBlockCoords;
-extern wxRect            wxGridNoCellRect;
+inline const wxGridBlockCoords wxGridNoBlockCoords( -1, -1, -1, -1 );
+inline constexpr wxRect wxGridNoCellRect{ -1, -1, -1, -1 };
+
 
 // An array of cell coords...
 //
@@ -1365,11 +1364,8 @@ struct wxGridSizesInfo
     // ctor used by wxGrid::Get{Col,Row}Sizes()
     wxGridSizesInfo(int defSize, const std::vector<int>& allSizes);
 
-    // default copy ctor, assignment operator and dtor are ok
-
     // Get the size of the element with the given index
     int GetSize(unsigned pos) const;
-
 
     // default size
     int m_sizeDefault{};
@@ -2922,6 +2918,7 @@ public:
     // more than once
     // FIXME: Can be called with nullptr.
     // FIXME: This isn't a good way to lock a resource.
+    // FIXME: Make this part of constructor.
     void Create(wxGrid *grid)
     {
         wxASSERT_MSG( !m_grid, "shouldn't be called more than once" );

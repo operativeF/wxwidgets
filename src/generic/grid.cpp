@@ -97,9 +97,6 @@ struct DefaultHeaderRenderers
 // constants
 // ----------------------------------------------------------------------------
 
-wxGridBlockCoords wxGridNoBlockCoords( -1, -1, -1, -1 );
-wxRect wxGridNoCellRect( -1, -1, -1, -1 );
-
 #include "wx/arrimpl.cpp"
 
 WX_DEFINE_OBJARRAY(wxGridCellCoordsArray)
@@ -527,6 +524,7 @@ const wxFont& wxGridCellAttr::GetFont() const
     }
 }
 
+// FIXME: Return align pair
 void wxGridCellAttr::GetAlignment(int *hAlign, int *vAlign) const
 {
     if (HasAlignment())
@@ -546,6 +544,7 @@ void wxGridCellAttr::GetAlignment(int *hAlign, int *vAlign) const
     }
 }
 
+// FIXME: Return align pair
 void wxGridCellAttr::GetNonDefaultAlignment(int *hAlign, int *vAlign) const
 {
     // The logic here is tricky but necessary to handle all the cases: if we
@@ -584,6 +583,7 @@ void wxGridCellAttr::GetNonDefaultAlignment(int *hAlign, int *vAlign) const
     }
 }
 
+// FIXME: Return row/col pair
 void wxGridCellAttr::GetSize( int *num_rows, int *num_cols ) const
 {
     if ( num_rows )
@@ -1065,6 +1065,7 @@ void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
 void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols )
 {
     size_t count = m_attrs.size();
+    // FIXME: Increment / decrement in same loop.
     for ( size_t n = 0; n < count; n++ )
     {
         int & rowOrCol = m_rowsOrCols[n];
@@ -1102,6 +1103,7 @@ wxGridCellAttrProvider::~wxGridCellAttrProvider()
     delete m_data;
 }
 
+// FIXME: use unique_ptr
 void wxGridCellAttrProvider::InitData()
 {
     m_data = new wxGridCellAttrProviderData;
@@ -1541,6 +1543,7 @@ void wxGridTableBase::SetColAttr(wxGridCellAttr *attr, int col)
     }
 }
 
+// FIXME: Create immutable / mutable grids; don't just give a fail message.
 bool wxGridTableBase::InsertRows( [[maybe_unused]] size_t pos,
                                   [[maybe_unused]] size_t numRows )
 {
@@ -1589,13 +1592,9 @@ bool wxGridTableBase::DeleteCols( [[maybe_unused]] size_t pos,
 
 std::string wxGridTableBase::GetRowLabelValue( int row )
 {
-    std::string s;
-
     // RD: Starting the rows at zero confuses users,
     // no matter how much it makes sense to us geeks.
-    s += std::to_string(row + 1);
-
-    return s;
+    return fmt::format("{:d}", row + 1);
 }
 
 std::string wxGridTableBase::GetColLabelValue( int col )
@@ -1605,6 +1604,7 @@ std::string wxGridTableBase::GetColLabelValue( int col )
     //   cols 26 to 675 : AA-ZZ
     //   etc.
 
+    // FIXME: Use a reverse iter
     std::string s;
     unsigned int n;
     for ( n = 1; ; n++ )
@@ -1641,6 +1641,8 @@ bool wxGridTableBase::CanSetValueAs( int row, int col, std::string_view typeName
     return CanGetValueAs(row, col, typeName);
 }
 
+// FIXME: Don't make a bunch of unused param functions.
+// Use opt-in via mixins or attributes.
 long wxGridTableBase::GetValueAsLong( [[maybe_unused]] int row, [[maybe_unused]] int col )
 {
     return 0;
@@ -1768,6 +1770,7 @@ bool wxGridStringTable::AppendRows( size_t numRows )
     std::vector<std::string> sa(m_numCols, "");
 
     // TODO: What good does checking for zero do?
+    // FIXME: Create test.
     // if ( m_numCols > 0 )
     // {
     //     sa.reserve( m_numCols );
@@ -1896,6 +1899,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
     size_t curNumRows = m_data.size();
     size_t curNumCols = m_numCols;
 
+    // FIXME: Don't use a fail message for this type of error.
     if ( pos >= curNumCols )
     {
         wxFAIL_MSG( fmt::format
@@ -2113,6 +2117,7 @@ void wxGridColLabelWindow::OnPaint( [[maybe_unused]] wxPaintEvent& event )
     wxGridWindow *gridWindow = IsFrozen() ? m_owner->m_frozenColGridWin :
                                             m_owner->m_gridWin;
     m_owner->GetGridWindowOffset(gridWindow, x, y);
+    // FIXME: Return coords, not input / output params
     m_owner->CalcGridWindowUnscrolledPosition( x, y, &x, &y, gridWindow );
     wxPoint pt = dc.GetDeviceOrigin();
     dc.SetDeviceOrigin( {pt.x - x, pt.y} );
@@ -2352,7 +2357,8 @@ void wxGrid::Render( wxDC& dc,
 
 void
 wxGrid::SetRenderScale(wxDC& dc,
-                       const wxPoint& pos, const wxSize& size,
+                       const wxPoint& pos,
+                       const wxSize& size,
                        const wxSize& sizeGrid )
 {
     wxSize sizeTemp;
@@ -2373,6 +2379,8 @@ wxGrid::SetRenderScale(wxDC& dc,
     dc.SetUserScale(std::min(scaleX, scaleY));
 }
 
+// FIXME: This function does too much modification of input params.
+// Break it up.
 // get grid rendered size, origin offset and fill cell arrays
 void wxGrid::GetRenderSizes( const wxGridCellCoords& topLeft,
                              const wxGridCellCoords& bottomRight,
@@ -2571,6 +2579,7 @@ void wxGridWindow::OnFocus(wxFocusEvent& event)
 // Unlike XToCol() and YToRow() these macros always return a valid column/row,
 // so their results don't need to be checked, while the results of the public
 // functions always must be.
+// FIXME: Use actual functions.
 #define internalXToCol(x, gridWindowPtr) XToCol(x, true, gridWindowPtr)
 #define internalYToRow(y, gridWindowPtr) YToRow(y, true, gridWindowPtr)
 
@@ -2602,6 +2611,9 @@ bool wxGrid::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
+// FIXME: Calls functions that may throw (or at least aren't explicit about it).
+// Simplify by explicitly documenting sequence of destruction / using smart pointers
+// that respect dependencies.
 wxGrid::~wxGrid()
 {
     if ( m_winCapture )
@@ -2751,6 +2763,8 @@ void wxGrid::CreateColumnWindow()
     }
 }
 
+// FIXME: Do not rely on messages to warn for single call functions.
+// This should be in the constructor(s)
 bool wxGrid::CreateGrid( int numRows, int numCols,
                          wxGridSelectionModes selmode )
 {
@@ -2761,6 +2775,8 @@ bool wxGrid::CreateGrid( int numRows, int numCols,
     return SetTable(new wxGridStringTable(numRows, numCols), true, selmode);
 }
 
+// FIXME: Do not make objects that can have indeterminate / preconstructed state(s) and still call
+// functions on such states.
 void wxGrid::SetSelectionMode(wxGridSelectionModes selmode)
 {
     wxCHECK_RET( m_created,
@@ -2769,6 +2785,8 @@ void wxGrid::SetSelectionMode(wxGridSelectionModes selmode)
     m_selection->SetSelectionMode( selmode );
 }
 
+// FIXME: Do not make objects that can have indeterminate / preconstructed state(s) and still call
+// functions on such states.
 wxGrid::wxGridSelectionModes wxGrid::GetSelectionMode() const
 {
     wxCHECK_MSG( m_created, wxGridSelectCells,
@@ -2846,6 +2864,7 @@ wxGrid::SetTable(wxGridTableBase *table,
     return m_created;
 }
 
+// FIXME: Use references.
 void wxGrid::AssignTable(wxGridTableBase *table, wxGridSelectionModes selmode)
 {
     wxCHECK_RET( table, "Table pointer must be valid" );
@@ -2865,6 +2884,7 @@ void wxGrid::AssignTable(wxGridTableBase *table, wxGridSelectionModes selmode)
 // this is not done currently
 // ----------------------------------------------------------------------------
 
+// FIXME: Init functions shouldn't be a synonym for clear functions.
 void wxGrid::InitRowHeights()
 {
     m_rowHeights.clear();
@@ -2900,6 +2920,7 @@ void wxGrid::InitColWidths()
     }
 }
 
+// FIXME: Direct indexing.
 int wxGrid::GetColWidth(int col) const
 {
     if ( m_colWidths.empty() )
@@ -3013,7 +3034,8 @@ void wxGrid::CalcWindowSizes()
     wxSize client_size = GetClientSize();
 
     // frozen rows and cols windows size
-    int fgw = 0, fgh = 0;
+    int fgw{0};
+    int fgh{0};
 
     for ( int i = 0; i < m_numFrozenRows; i++ )
         fgh += GetRowHeight(i);
@@ -3392,7 +3414,8 @@ std::vector<int> wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow
 
     std::vector<int>  rowlabels;
 
-    int top, bottom;
+    int top;
+    int bottom;
     while ( iter )
     {
         r = iter.GetRect();
@@ -3443,7 +3466,8 @@ std::vector<int> wxGrid::CalcColLabelsExposed( const wxRegion& reg, wxGridWindow
 
     std::vector<int> colLabels;
 
-    int left, right;
+    int left;
+    int right;
     while ( iter )
     {
         r = iter.GetRect();
@@ -3498,7 +3522,10 @@ wxGridCellCoordsArray wxGrid::CalcCellsExposed( const wxRegion& reg,
 
     wxGridCellCoordsArray  cellsExposed;
 
-    int left, top, right, bottom;
+    int left;
+    int top;
+    int right;
+    int bottom;
     for ( wxRegionIterator iter(reg); iter; ++iter )
     {
         r = iter.GetRect();
@@ -4714,7 +4741,8 @@ void wxGrid::ProcessGridCellMouseEvent(wxMouseEvent& event, wxGridWindow *eventG
     // coordinates of the cell under mouse
     wxGridCellCoords coords = XYToCell(pos, gridWindow);
 
-    int cell_rows, cell_cols;
+    int cell_rows;
+    int cell_cols;
     if ( GetCellSize( coords.GetRow(), coords.GetCol(), &cell_rows, &cell_cols )
             == CellSpan_Inside )
     {
@@ -4957,6 +4985,7 @@ void wxGrid::RefreshAfterColPosChange()
     m_gridWin->Refresh();
 }
 
+// FIXME: Just take copy
 void wxGrid::SetColumnsOrder(const std::vector<int>& order)
 {
     m_colAt = order;
@@ -4966,6 +4995,7 @@ void wxGrid::SetColumnsOrder(const std::vector<int>& order)
 
 void wxGrid::SetColPos(int idx, int pos)
 {
+    // FIXME: Use std::fill_n
     // we're going to need m_colAt now, initialize it if needed
     if ( m_colAt.empty() )
     {
@@ -5079,6 +5109,7 @@ void wxGrid::InitializeFrozenWindows()
     }
 }
 
+// FIXME: Use iter
 bool wxGrid::FreezeTo(int row, int col)
 {
     wxCHECK_MSG( row >= 0 && col >= 0, false,
@@ -5236,8 +5267,9 @@ wxGrid::DoAppendLines(bool (wxGridTableBase::*funcAppend)(size_t),
 
 bool
 wxGrid::SendGridSizeEvent(wxEventType type,
-                      int row, int col,
-                      const wxMouseEvent& mouseEv)
+                          int row,
+                          int col,
+                          const wxMouseEvent& mouseEv)
 {
    int rowOrCol = row == -1 ? col : row;
 
@@ -5274,7 +5306,8 @@ wxGrid::EventResult wxGrid::DoSendEvent(wxGridEvent& gridEvt)
 // Generate a grid event based on a mouse event and call DoSendEvent() with it.
 wxGrid::EventResult
 wxGrid::SendEvent(wxEventType type,
-                  int row, int col,
+                  int row,
+                  int col,
                   const wxMouseEvent& mouseEv)
 {
 
@@ -6463,6 +6496,7 @@ wxGrid::DrawRangeGridLines(wxDC& dc,
          return;
 
     int top, left, width, height;
+    // FIXME: Return Rect
     reg.GetBox( left, top, width, height );
 
     // create a clipping region
@@ -6525,7 +6559,10 @@ void wxGrid::DrawAllGridWindowLines(wxDC& dc, const [[maybe_unused]] wxRegion & 
     if ( !m_gridLinesEnabled || !gridWindow )
          return;
 
-    int top, bottom, left, right;
+    int top;
+    int bottom;
+    int left;
+    int right;
 
     const wxPoint gridOffset = GetGridWindowOffset(gridWindow);
 
@@ -6686,6 +6723,7 @@ wxGrid::DoDrawGridLines(wxDC& dc,
     }
 }
 
+// FIXME: Use span
 void wxGrid::DrawRowLabels( wxDC& dc, const std::vector<int>& rows)
 {
     if ( !m_numRows )
@@ -6724,6 +6762,7 @@ void wxGrid::DrawRowLabel( wxDC& dc, int row )
                    rect, hAlign, vAlign, wxHORIZONTAL);
 }
 
+// FIXME: Break up into two functions.
 bool wxGrid::UseNativeColHeader(bool native)
 {
     if ( native == m_useNativeHeader )
@@ -6753,6 +6792,7 @@ bool wxGrid::UseNativeColHeader(bool native)
     return true;
 }
 
+// FIXME: Break up into two functions.
 void wxGrid::SetUseNativeColLabels( bool native )
 {
     wxASSERT_MSG( !m_useNativeHeader,
@@ -6768,7 +6808,8 @@ void wxGrid::SetUseNativeColLabels( bool native )
     m_cornerLabelWin->Refresh();
 }
 
-void wxGrid::DrawColLabels( wxDC& dc,const std::vector<int>& cols )
+// FIXME: Use span
+void wxGrid::DrawColLabels( wxDC& dc, const std::vector<int>& cols )
 {
     if ( !m_numCols )
         return;
@@ -6782,7 +6823,7 @@ void wxGrid::DrawColLabels( wxDC& dc,const std::vector<int>& cols )
 
 void wxGrid::DrawCornerLabel(wxDC& dc)
 {
-    wxRect rect(wxSize(m_rowLabelWidth, m_colLabelHeight));
+    wxRect rect{wxSize{m_rowLabelWidth, m_colLabelHeight}};
 
     wxGridCellAttrProvider * const
         attrProvider = m_table ? m_table->GetAttrProvider() : nullptr;
@@ -6984,6 +7025,8 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
                                int hAlign,
                                int vAlign) const
 {
+    // FIXME: Taking references of copy variables.
+    // Return alignments instead.
     attr.GetNonDefaultAlignment(&hAlign, &vAlign);
 
     // This does nothing if there is no need to ellipsize.
@@ -7003,6 +7046,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 // Any existing contents of the string array are preserved.
 //
 // TODO: refactor wxTextFile::Read() and reuse the same code from here
+// FIXME: Use span
 void wxGrid::StringToLines( const std::string& value, std::vector<std::string>& lines ) const
 {
     int startPos = 0;
@@ -7475,6 +7519,7 @@ void wxGrid::DoSaveEditControlValue()
     wxGridCellEditorPtr editor = GetCurrentCellEditorPtr();
 
     std::string newval;
+    // FIXME: return (optional?) string
     if ( !editor->EndEdit(row, col, this, oldval, &newval) )
         return;
 
@@ -7602,6 +7647,7 @@ wxGrid::PosToLine(int coord,
     return pos == wxNOT_FOUND ? wxNOT_FOUND : oper.GetLineAt(this, pos);
 }
 
+// FIXME: Vague bool params
 int wxGrid::YToRow(int y, bool clipToMinMax, wxGridWindow *gridWindow) const
 {
     return PosToLine(y, clipToMinMax, wxGridRowOperations(), gridWindow);
@@ -7721,6 +7767,7 @@ wxGridWindow* wxGrid::CellToGridWindow( int row, int col ) const
     return m_gridWin;
 }
 
+// FIXME: I/O params
 void wxGrid::GetGridWindowOffset(const wxGridWindow *gridWindow, int &x, int &y) const
 {
     wxPoint pt = GetGridWindowOffset(gridWindow);
@@ -7792,6 +7839,7 @@ wxPoint wxGrid::CalcGridWindowUnscrolledPosition(const wxPoint& pt,
     return pt2;
 }
 
+// FIXME: I/O params
 void wxGrid::CalcGridWindowScrolledPosition(int x, int y, int *xx, int *yy,
                                             const wxGridWindow *gridWindow) const
 {
@@ -7810,6 +7858,7 @@ wxPoint wxGrid::CalcGridWindowScrolledPosition(const wxPoint& pt,
                                                const wxGridWindow *gridWindow) const
 {
     wxPoint pt2;
+    // FIXME: I/O params
     CalcGridWindowScrolledPosition(pt.x, pt.y, &pt2.x, &pt2.y, gridWindow);
     return pt2;
 }
@@ -8377,6 +8426,7 @@ bool wxGrid::MoveCursorRightBlock( bool expandSelection )
 // ------ Label values and formatting
 //
 
+// FIXME: I/O params
 void wxGrid::GetRowLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
@@ -8385,6 +8435,7 @@ void wxGrid::GetRowLabelAlignment( int *horiz, int *vert ) const
         *vert  = m_rowLabelVertAlign;
 }
 
+// FIXME: I/O params
 void wxGrid::GetColLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
@@ -8398,6 +8449,7 @@ int wxGrid::GetColLabelTextOrientation() const
     return m_colLabelTextOrientation;
 }
 
+// FIXME: I/O params
 void wxGrid::GetCornerLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
@@ -8419,9 +8471,7 @@ std::string wxGrid::GetRowLabelValue( int row ) const
     }
     else
     {
-        std::string s;
-        s += row;
-        return s;
+        return fmt::format("{:d}", row);
     }
 }
 
@@ -8433,9 +8483,7 @@ std::string wxGrid::GetColLabelValue( int col ) const
     }
     else
     {
-        std::string s;
-        s += col;
-        return s;
+        return fmt::format("{:d}", col);
     }
 }
 
@@ -8573,6 +8621,7 @@ void wxGrid::SetLabelFont( const wxFont& font )
     }
 }
 
+// FIXME: Use enums
 void wxGrid::SetRowLabelAlignment( int horiz, int vert )
 {
     // allow old (incorrect) defs to be used
@@ -8606,6 +8655,7 @@ void wxGrid::SetRowLabelAlignment( int horiz, int vert )
     }
 }
 
+// FIXME: Use enums
 void wxGrid::SetColLabelAlignment( int horiz, int vert )
 {
     // allow old (incorrect) defs to be used
@@ -8639,6 +8689,7 @@ void wxGrid::SetColLabelAlignment( int horiz, int vert )
     }
 }
 
+// FIXME: Use enums
 void wxGrid::SetCornerLabelAlignment( int horiz, int vert )
 {
     // allow old (incorrect) defs to be used
@@ -8679,6 +8730,7 @@ void wxGrid::SetCornerLabelAlignment( int horiz, int vert )
 //      pGrid->SetLabelFont(wxFontInfo(9).Family(wxFontFamily::Swiss));
 //      pGrid->SetColLabelTextOrientation(wxVERTICAL);
 //
+// FIXME: Use enums
 void wxGrid::SetColLabelTextOrientation( int textOrientation )
 {
     if ( textOrientation == wxHORIZONTAL || textOrientation == wxVERTICAL )
@@ -8688,6 +8740,7 @@ void wxGrid::SetColLabelTextOrientation( int textOrientation )
         m_colLabelWin->Refresh();
 }
 
+// FIXME: Use enums
 void wxGrid::SetCornerLabelTextOrientation( int textOrientation )
 {
     if ( textOrientation == wxHORIZONTAL || textOrientation == wxVERTICAL )
@@ -8876,6 +8929,7 @@ void wxGrid::RedrawGridLines()
     }
 }
 
+// FIXME: Split into two functions
 void wxGrid::EnableGridLines( bool enable )
 {
     if ( enable != m_gridLinesEnabled )
@@ -8886,6 +8940,7 @@ void wxGrid::EnableGridLines( bool enable )
     }
 }
 
+// FIXME: bool I/O param
 void wxGrid::DoClipGridLines(bool& var, bool clip)
 {
     if ( clip != var )
@@ -8914,6 +8969,7 @@ int wxGrid::GetDefaultColSize() const
     return m_defaultColWidth;
 }
 
+// FIXME: Use iter
 int wxGrid::GetColSize( int col ) const
 {
     wxCHECK_MSG( col >= 0 && col < m_numCols, 0, "invalid column index" );
@@ -8943,6 +8999,7 @@ void wxGrid::SetDefaultCellTextColour( const wxColour& col )
     m_defaultCellAttr->SetTextColour(col);
 }
 
+// FIXME: Use enums
 void wxGrid::SetDefaultCellAlignment( int horiz, int vert )
 {
     m_defaultCellAttr->SetAlignment(horiz, vert);
@@ -9015,6 +9072,9 @@ wxGridCellEditor *wxGrid::GetDefaultEditor() const
 {
     return m_defaultCellAttr->GetEditor(nullptr, 0, 0);
 }
+
+// FIXME: Use module partition for cell attributes until they are sufficiently
+// refactored into their own class.
 
 // ----------------------------------------------------------------------------
 // access to cell attributes

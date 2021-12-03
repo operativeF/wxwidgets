@@ -603,7 +603,7 @@ void wxGridCellTextEditor::HandleReturn( wxKeyEvent&
 #if defined(__WXMOTIF__) || defined(__WXGTK__)
     // wxMotif needs a little extra help...
     size_t pos = (size_t)( Text()->GetInsertionPoint() );
-    std::string s( Text()->GetValue() );
+    std::string s = Text()->GetValue();
     s = s.Left(pos) + "\n" + s.Mid(pos);
     Text()->SetValue(s);
     Text()->SetInsertionPoint( pos );
@@ -900,7 +900,7 @@ void wxGridCellNumberEditor::SetParameters(const std::string& params)
     if ( params.empty() )
     {
         // reset to default
-        m_min =
+        m_min = -1;
         m_max = -1;
     }
     else
@@ -935,21 +935,17 @@ void wxGridCellNumberEditor::SetParameters(const std::string& params)
 // return the value in the spin control if it is there (the text control otherwise)
 std::string wxGridCellNumberEditor::GetValue() const
 {
-    std::string s;
-
 #if wxUSE_SPINCTRL
     if ( HasRange() )
     {
         long value = Spin()->GetValue();
-        s = fmt::format("{:ld}", value);
+        return fmt::format("{:ld}", value);
     }
     else
 #endif
     {
-        s = Text()->GetValue();
+        return Text()->GetValue();
     }
-
-    return s;
 }
 
 // ----------------------------------------------------------------------------
@@ -1009,7 +1005,7 @@ bool wxGridCellFloatEditor::EndEdit([[maybe_unused]] int row,
                                     [[maybe_unused]] const wxGrid* grid,
                                     const std::string& oldval, std::string *newval)
 {
-    const std::string text(Text()->GetValue());
+    const std::string text = Text()->GetValue();
 
     double value{0.0};
 
@@ -1088,7 +1084,7 @@ void wxGridCellFloatEditor::SetParameters(const std::string& params)
     if ( params.empty() )
     {
         // reset to default
-        m_width =
+        m_width = - 1;
         m_precision = -1;
         m_style = wxGRID_FLOAT_FORMAT_DEFAULT;
         m_format.clear();
@@ -1294,7 +1290,7 @@ void wxGridCellBoolEditor::SetSize(const wxRect& r)
 {
     int hAlign = wxALIGN_LEFT;
     int vAlign = wxALIGN_CENTRE_VERTICAL;
-    if (GetCellAttr())
+    if (GetCellAttr()) // FIXME: Return align pair
         GetCellAttr()->GetNonDefaultAlignment(&hAlign, &vAlign);
 
     const wxRect checkBoxRect =
@@ -1390,13 +1386,15 @@ bool wxGridCellBoolEditor::IsAcceptedKey(wxKeyEvent& event)
 {
     if ( wxGridCellEditor::IsAcceptedKey(event) )
     {
-        int keycode = event.GetKeyCode();
-        switch ( keycode )
+        switch ( event.GetKeyCode() )
         {
             case WXK_SPACE:
             case '+':
             case '-':
                 return true;
+
+            default:
+                return false;
         }
     }
 
@@ -1405,8 +1403,7 @@ bool wxGridCellBoolEditor::IsAcceptedKey(wxKeyEvent& event)
 
 void wxGridCellBoolEditor::StartingKey(wxKeyEvent& event)
 {
-    int keycode = event.GetKeyCode();
-    switch ( keycode )
+    switch ( event.GetKeyCode() )
     {
         case WXK_SPACE:
             CBox()->SetValue(!CBox()->GetValue());
@@ -1419,6 +1416,9 @@ void wxGridCellBoolEditor::StartingKey(wxKeyEvent& event)
         case '-':
             CBox()->SetValue(false);
             break;
+        
+        default:
+            return;
     }
 }
 
@@ -1431,6 +1431,7 @@ std::string wxGridCellBoolEditor::GetValue() const
 wxGridCellBoolEditor::UseStringValues(const std::string& valueTrue,
                                       const std::string& valueFalse)
 {
+    // FIXME: Indexing with bool
     ms_stringValues[false] = valueFalse;
     ms_stringValues[true] = valueTrue;
 }
@@ -1438,6 +1439,7 @@ wxGridCellBoolEditor::UseStringValues(const std::string& valueTrue,
 /* static */ bool
 wxGridCellBoolEditor::IsTrueValue(const std::string& value)
 {
+    // FIXME: Indexing with bool
     return value == ms_stringValues[true];
 }
 
@@ -1449,8 +1451,9 @@ void wxGridCellBoolEditor::SetValueFromGrid(int row, int col, wxGrid* grid)
     }
     else
     {
-        wxString cellval( grid->GetTable()->GetValue(row, col) );
+        std::string cellval = grid->GetTable()->GetValue(row, col);
 
+        // FIXME: Indexing with bool
         if ( cellval == ms_stringValues[false] )
             m_value = false;
         else if ( cellval == ms_stringValues[true] )
@@ -1472,6 +1475,7 @@ void wxGridCellBoolEditor::SetValueFromGrid(int row, int col, wxGrid* grid)
 void wxGridCellBoolEditor::SetGridFromValue(int row, int col, wxGrid* grid) const
 {
     wxGridTableBase * const table = grid->GetTable();
+
     if ( table->CanSetValueAs(row, col, wxGRID_VALUE_BOOL) )
         table->SetValueAsBool(row, col, m_value);
     else
@@ -1574,6 +1578,7 @@ void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
 }
 
+// FIXME: Return string
 bool wxGridCellChoiceEditor::EndEdit([[maybe_unused]] int row,
                                      [[maybe_unused]] int col,
                                      [[maybe_unused]] const wxGrid* grid,
@@ -1627,7 +1632,7 @@ void wxGridCellChoiceEditor::SetParameters(const std::string& params)
     wxStringTokenizer tk(params, ",");
     while ( tk.HasMoreTokens() )
     {
-        m_choices.push_back(tk.GetNextToken());
+        m_choices.emplace_back(tk.GetNextToken());
     }
 
     if ( m_control )
@@ -1733,6 +1738,7 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
 }
 
+// FIXME: Return string
 bool wxGridCellEnumEditor::EndEdit([[maybe_unused]] int row,
                                    [[maybe_unused]] int col,
                                    [[maybe_unused]] const wxGrid* grid,
@@ -1902,6 +1908,7 @@ void wxGridCellDateEditor::BeginEdit(int row, int col, wxGrid* grid)
     DatePicker()->SetFocus();
 }
 
+// FIXME: Return string
 bool wxGridCellDateEditor::EndEdit([[maybe_unused]] int row, [[maybe_unused]] int col,
                                    [[maybe_unused]] const wxGrid* grid,
                                    [[maybe_unused]] const std::string& oldval,

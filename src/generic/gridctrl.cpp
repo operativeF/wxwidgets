@@ -163,6 +163,7 @@ wxGridCellDateRenderer::wxGridCellDateRenderer(const std::string& outformat)
     {
         m_oformat = outformat;
     }
+
     m_tz = wxDateTime::Local;
 }
 
@@ -257,6 +258,7 @@ wxGridCellRenderer *wxGridCellDateTimeRenderer::Clone() const
     return new wxGridCellDateTimeRenderer(*this);
 }
 
+// FIXME: Return params.
 void
 wxGridCellDateTimeRenderer::GetDateParseParams(DateParseParams& params) const
 {
