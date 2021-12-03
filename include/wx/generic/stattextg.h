@@ -90,11 +90,6 @@ private:
 #endif // wxUSE_MARKUP
 
     int m_mnemonic{};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_STATTEXTG_H_

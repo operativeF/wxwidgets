@@ -126,7 +126,6 @@ protected:
     //  static bool colourDialogCancelled;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericColourDialog);
 };
 
 #endif // _WX_COLORDLGG_H_

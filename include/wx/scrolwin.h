@@ -504,10 +504,6 @@ public:
     {}
 
     wxScrolledWindow& operator=(wxScrolledWindow&&) = delete;
-
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 using wxScrolledCanvas = wxScrolled<wxWindow>;

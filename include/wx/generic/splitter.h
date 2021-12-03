@@ -303,7 +303,6 @@ protected:
     bool        m_isHot{false};
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxSplitterWindow);
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -386,11 +385,8 @@ private:
         int pos;            // position for SASH_POS_CHANGED event
     } m_data;
 
-    public:
+public:
 	wxSplitterEvent& operator=(const wxSplitterEvent&) = delete;
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxSplitterEventFunction)(wxSplitterEvent&);

@@ -127,7 +127,6 @@ private:
     wxBitmapButton* AddBitmapButton( wxWindowID winId, const wxArtID& artId,
                                      const wxString& tip, wxSizer *sizer );
 
-    wxDECLARE_DYNAMIC_CLASS(wxGenericFileDialog);
     wxDECLARE_EVENT_TABLE();
 
     // these variables are preserved between wxGenericFileDialog calls

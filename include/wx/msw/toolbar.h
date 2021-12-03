@@ -191,7 +191,6 @@ private:
     wxSize MSWGetFittingtSizeForControl(class wxToolBarTool* tool) const;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxToolBar);
 };
 
 #endif // wxUSE_TOOLBAR

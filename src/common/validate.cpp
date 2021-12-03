@@ -16,8 +16,6 @@
 #include "wx/validate.h"
 #include "wx/window.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxValidator, wxEvtHandler);
-
 const wxValidator wxDefaultValidator;
 
 #endif // wxUSE_VALIDATORS

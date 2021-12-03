@@ -175,7 +175,6 @@ private:
     // Calculate the best size for the number with the given number of digits.
     wxSize GetBestSizeFromDigitsCount(int digitsCount) const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
     wxDECLARE_EVENT_TABLE();
 };
 

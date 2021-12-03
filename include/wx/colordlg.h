@@ -62,11 +62,6 @@ public:
 
 private:
     wxColour m_colour;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_COLOUR_CHANGED, wxColourDialogEvent);

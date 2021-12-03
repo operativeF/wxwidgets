@@ -66,11 +66,6 @@ protected:
 private:
     // current state of the button (when owner-drawn)
     bool m_state{false};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------
@@ -106,9 +101,6 @@ public:
 
     // prevent virtual function hiding
     void SetLabel(std::string_view label) override { wxToggleButton::SetLabel(label); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxBitmapToggleButton);
 };
 
 #endif // _WX_TOGGLEBUTTON_H_

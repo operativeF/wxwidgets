@@ -31,7 +31,6 @@ wxDEFINE_EVENT( wxEVT_MEDIA_STATECHANGED, wxMediaEvent );
 wxDEFINE_EVENT( wxEVT_MEDIA_PLAY, wxMediaEvent );
 wxDEFINE_EVENT( wxEVT_MEDIA_PAUSE, wxMediaEvent );
 wxIMPLEMENT_CLASS(wxMediaBackend, wxObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxMediaEvent, wxEvent);
 wxDEFINE_EVENT( wxEVT_MEDIA_FINISHED, wxMediaEvent );
 wxDEFINE_EVENT( wxEVT_MEDIA_LOADED, wxMediaEvent );
 wxDEFINE_EVENT( wxEVT_MEDIA_STOP, wxMediaEvent );

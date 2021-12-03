@@ -69,8 +69,6 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
 // wxDC bridge class
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGCDC, wxDC);
-
 wxGCDC::wxGCDC(std::unique_ptr<wxGraphicsContext> context) :
     wxDC(std::make_unique<wxGCDCImpl>(this, std::move(context)))
 {

@@ -16,16 +16,6 @@
 #include "wx/filename.h"
 #include "wx/filepicker.h"
 
-
-
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericFileButton, wxButton);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericDirButton, wxButton);
-
 // ----------------------------------------------------------------------------
 // wxGenericFileButton
 // ----------------------------------------------------------------------------

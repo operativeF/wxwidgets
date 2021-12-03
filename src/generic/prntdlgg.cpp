@@ -412,8 +412,6 @@ wxDC *wxGenericPrintDialog::GetPrintDC()
 // Generic print setup dialog
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxGenericPrintSetupDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxGenericPrintSetupDialog, wxDialog)
     EVT_LIST_ITEM_ACTIVATED(wxPRINTID_PRINTER, wxGenericPrintSetupDialog::OnPrinter)
 wxEND_EVENT_TABLE()
@@ -783,8 +781,6 @@ wxComboBox *wxGenericPrintSetupDialog::CreatePaperTypeChoice()
 // ----------------------------------------------------------------------------
 // Generic page setup dialog
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_CLASS(wxGenericPageSetupDialog, wxPageSetupDialogBase);
 
 wxBEGIN_EVENT_TABLE(wxGenericPageSetupDialog, wxPageSetupDialogBase)
     EVT_BUTTON(wxPRINTID_SETUP, wxGenericPageSetupDialog::OnPrinter)

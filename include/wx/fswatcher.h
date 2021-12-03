@@ -204,11 +204,6 @@ protected:
     wxFileName m_path;
     wxFileName m_newPath;
     std::string m_errorMsg;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxFileSystemWatcherEventFunction)

@@ -1521,7 +1521,3 @@ wxSize wxScrolledT_Helper::FilterBestSize(const wxWindow *win,
 
     return best;
 }
-
-// NB: skipping wxScrolled<T> in wxRTTI information because being a template,
-//     it doesn't and can't implement wxRTTI support
-wxIMPLEMENT_DYNAMIC_CLASS(wxScrolledWindow, wxPanel);

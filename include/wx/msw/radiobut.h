@@ -77,11 +77,6 @@ private:
     // we need to store the state internally as the result of GetValue()
     // sometimes gets out of sync in WM_COMMAND handler
     bool m_isChecked{false};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_RADIOBUT_H_

@@ -135,8 +135,6 @@ private:
     unsigned int m_style{};
 
     wxSize m_area;
-
-    wxDECLARE_DYNAMIC_CLASS(wxBufferedDC);
 };
 
 
@@ -200,8 +198,6 @@ protected:
 
 private:
     wxPaintDC m_paintdc;
-
-    wxDECLARE_ABSTRACT_CLASS(wxBufferedPaintDC);
 };
 
 

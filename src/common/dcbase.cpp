@@ -194,8 +194,6 @@ wxClientDC::wxClientDC(wxWindow *win)
 // wxMemoryDC
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxMemoryDC, wxDC);
-
 wxMemoryDC::wxMemoryDC()
           : wxDC(wxDCFactory::Get()->CreateMemoryDC(this))
 {
@@ -259,8 +257,6 @@ wxPaintDC::wxPaintDC(wxWindow *win)
 // wxScreenDC
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxScreenDC, wxWindowDC);
-
 wxScreenDC::wxScreenDC()
           : wxDC(wxDCFactory::Get()->CreateScreenDC(this))
 {
@@ -271,8 +267,6 @@ wxScreenDC::wxScreenDC()
 //-----------------------------------------------------------------------------
 
 #if wxUSE_PRINTING_ARCHITECTURE
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxPrinterDC, wxDC);
 
 wxPrinterDC::wxPrinterDC()
            : wxDC(wxDCFactory::Get()->CreatePrinterDC(this, wxPrintData()))

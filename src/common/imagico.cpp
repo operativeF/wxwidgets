@@ -10,8 +10,6 @@ module WX.Image.ICO;
 import WX.Image.Base;
 import WX.Image.PNG;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxICOHandler, wxBMPHandler);
-
 #if wxUSE_STREAMS
 
 bool wxICOHandler::SaveFile(wxImage *image,

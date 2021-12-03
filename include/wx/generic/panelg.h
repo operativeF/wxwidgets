@@ -30,12 +30,7 @@ struct wxPanel : public wxPanelBase
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxPanel(const wxPanel&) = delete;
-	wxPanel& operator=(const wxPanel&) = delete;
-
-	wxClassInfo *wxGetClassInfo() const;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
+	wxPanel& operator=(wxPanel&&) = delete;
 };
 
 #endif // _WX_GENERIC_PANELG_H_

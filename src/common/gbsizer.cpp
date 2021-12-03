@@ -16,9 +16,6 @@ import <numeric>;
 
 //---------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGBSizerItem, wxSizerItem);
-wxIMPLEMENT_CLASS(wxGridBagSizer, wxFlexGridSizer);
-
 const wxGBSpan wxDefaultSpan;
 
 //---------------------------------------------------------------------------

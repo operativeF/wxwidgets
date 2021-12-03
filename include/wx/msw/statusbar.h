@@ -109,11 +109,6 @@ private:
 
     // return the various status bar metrics
     static const MSWMetrics& MSWGetMetrics();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif  // wxUSE_NATIVE_STATUSBAR

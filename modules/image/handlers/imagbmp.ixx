@@ -67,9 +67,6 @@ protected:
                    bool verbose, bool IsBmp, bool hasPalette, int colEntrySize = 4);
     bool LoadDib(wxImage *image, wxInputStream& stream, bool verbose, bool IsBmp);
 #endif // wxUSE_STREAMS
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxBMPHandler);
 };
 
 } // export

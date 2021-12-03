@@ -98,9 +98,6 @@ protected:
     bool SetupCompress(wxOutputStream *, int bpp);
     bool CompressLine(wxOutputStream *, const std::uint8_t *line, int lineLen);
 #endif
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGIFHandler);
 };
 
 } // export

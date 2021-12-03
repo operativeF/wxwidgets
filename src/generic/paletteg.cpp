@@ -58,8 +58,6 @@ wxPaletteRefData::~wxPaletteRefData()
 
 #define M_PALETTEDATA ((wxPaletteRefData *)m_refData)
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPalette,wxGDIObject);
-
 wxPalette::wxPalette()
 {
     m_refData = NULL;

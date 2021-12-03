@@ -456,7 +456,6 @@ private:
 // ----------------------------------------------------------------------------
 // wxThumbBarButton Implementation.
 // ----------------------------------------------------------------------------
-wxIMPLEMENT_DYNAMIC_CLASS(wxThumbBarButton, wxObject);
 
 wxThumbBarButton::wxThumbBarButton(int id,
                                    const wxIcon& icon,

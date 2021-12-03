@@ -43,8 +43,6 @@ public:
 protected:
     bool DoCanRead(wxInputStream& stream) override;
 #endif
-
-    wxDECLARE_DYNAMIC_CLASS(wxIFFHandler);
 };
 
 } // export

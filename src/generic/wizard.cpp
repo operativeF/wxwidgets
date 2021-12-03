@@ -86,23 +86,6 @@ wxBEGIN_EVENT_TABLE(wxWizard, wxDialog)
     EVT_WIZARD_HELP(wxID_ANY, wxWizard::OnWizEvent)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWizard, wxDialog);
-
-/*
-    TODO PROPERTIES :
-    wxWizard
-        extstyle
-        title
-*/
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxWizardPage, wxPanel);
-wxIMPLEMENT_DYNAMIC_CLASS(wxWizardPageSimple, wxWizardPage);
-wxIMPLEMENT_DYNAMIC_CLASS(wxWizardEvent, wxNotifyEvent);
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxWizardPage
 // ----------------------------------------------------------------------------

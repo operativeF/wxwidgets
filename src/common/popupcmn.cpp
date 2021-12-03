@@ -34,13 +34,6 @@
     #include "wx/x11/private.h"
 #endif
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPopupWindow, wxWindow);
-wxIMPLEMENT_DYNAMIC_CLASS(wxPopupTransientWindow, wxPopupWindow);
-
-#if wxUSE_COMBOBOX && defined(__WXUNIVERSAL__)
-wxIMPLEMENT_DYNAMIC_CLASS(wxPopupComboWindow, wxPopupTransientWindow);
-#endif
-
 #ifndef __WXMSW__
 
 // ----------------------------------------------------------------------------

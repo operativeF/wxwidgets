@@ -23,8 +23,6 @@
 
 import WX.Win.UniqueHnd;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
-
 // ----------------------------------------------------------------------------
 // data defining wxAcceleratorTable
 // ----------------------------------------------------------------------------

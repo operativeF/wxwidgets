@@ -61,32 +61,6 @@ wxFLAGS_MEMBER(wxCB_DROPDOWN)
 
 wxEND_FLAGS( wxComboBoxStyle )
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxComboBox, wxControl, "wx/combobox.h");
-
-wxBEGIN_PROPERTIES_TABLE(wxComboBox)
-wxEVENT_PROPERTY( Select, wxEVT_COMBOBOX, wxCommandEvent )
-wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
-
-// TODO DELEGATES
-wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, "Helpstring", "group")
-wxPROPERTY_COLLECTION( Choices, std::vector<wxString>, std::string, AppendString, \
-                      GetStrings, 0 /*flags*/, "Helpstring", "group")
-wxPROPERTY( Value,std::string, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, "Helpstring", "group")
-wxPROPERTY( Selection,int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, "Helpstring", "group")
-
-wxPROPERTY_FLAGS( WindowStyle, wxComboBoxStyle, long, SetWindowStyleFlag, \
-                 GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 "Helpstring", "group") // style
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxComboBox)
-
-wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
-                std::string, Value, wxPoint, Position, wxSize, Size )
-
 #endif // wxUSE_COMBOBOX
 
 #if wxUSE_COMBOCTRL

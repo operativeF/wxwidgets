@@ -55,9 +55,6 @@ protected:
     int DoGetImageCount( wxInputStream& stream ) override;
     bool DoCanRead( wxInputStream& stream ) override;
 #endif
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxTIFFHandler);
 };
 
 } // export

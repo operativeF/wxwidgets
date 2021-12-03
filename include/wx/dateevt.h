@@ -40,11 +40,6 @@ public:
 
 private:
     wxDateTime m_date;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

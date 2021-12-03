@@ -308,9 +308,6 @@ public:
     WXHDC AcquireHDC() override;
     void ReleaseHDC(WXHDC hdc) override;
 #endif // __WXMSW__
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGCDC);
 };
 
 #endif // wxUSE_GRAPHICS_CONTEXT

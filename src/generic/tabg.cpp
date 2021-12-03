@@ -30,10 +30,6 @@ WX_DEFINE_LIST(wxTabLayerList)
 // defined: use new, rounded tab implementation (doesn't colour in tabs)
 // #define wxUSE_NEW_METHOD
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxTabControl, wxObject);
-
-// wxIMPLEMENT_DYNAMIC_CLASS(wxTabLayer, wxList);
-
 wxTabControl::wxTabControl(wxTabView *v)
 {
   m_view = v;
@@ -495,8 +491,6 @@ bool wxTabControl::HitTest(int x, int y) const
   else
     return false;
 }
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxTabView, wxObject);
 
 wxTabView::wxTabView(unsigned int style)
 {

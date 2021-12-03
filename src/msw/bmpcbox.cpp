@@ -29,14 +29,9 @@ import <vector>;
 // implementation
 // ============================================================================
 
-
 wxBEGIN_EVENT_TABLE(wxBitmapComboBox, wxComboBox)
     EVT_SIZE(wxBitmapComboBox::OnSize)
 wxEND_EVENT_TABLE()
-
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBox, wxComboBox);
-
 
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox creation

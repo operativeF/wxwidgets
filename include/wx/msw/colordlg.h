@@ -82,11 +82,6 @@ protected:
     // this is ok if color dialog created with standard color
     // and "Define Custom Colors" extension not shown
     inline static wxRect s_rectDialog{ 0, 0, 222, 324 };
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_COLORDLG_H_

@@ -60,11 +60,6 @@ protected:
 
    // ensure that the control displays a value in the current range
    virtual void NormalizeValue();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_SPINBTN

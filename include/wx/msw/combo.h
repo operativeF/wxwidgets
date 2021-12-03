@@ -99,10 +99,7 @@ private:
     wxRect      m_animRect;
     int         m_animFlags{};
 #endif
-
     wxDECLARE_EVENT_TABLE();
-
-    wxDECLARE_DYNAMIC_CLASS(wxComboCtrl);
 };
 
 

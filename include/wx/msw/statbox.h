@@ -95,11 +95,6 @@ protected:
 
 private:
     void PositionLabelWindow();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // Indicate that we have the ctor overload taking wxWindow as label.

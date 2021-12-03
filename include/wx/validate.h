@@ -79,8 +79,6 @@ protected:
 
 private:
     inline static bool ms_isSilent{true};
-
-    wxDECLARE_DYNAMIC_CLASS(wxValidator);
 };
 
 #define wxVALIDATOR_PARAM(val) val

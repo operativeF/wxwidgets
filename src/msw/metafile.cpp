@@ -29,7 +29,6 @@ import <cstring>;
 // wxWin macros
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxMetafile, wxObject);
 wxIMPLEMENT_ABSTRACT_CLASS(wxMetafileDC, wxDC);
 
 // ============================================================================

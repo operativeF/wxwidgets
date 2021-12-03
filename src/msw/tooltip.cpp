@@ -470,7 +470,7 @@ void wxToolTip::SetWindow(wxWindow *win)
     }
 #if !defined(__WXUNIVERSAL__)
     // and all of its subcontrols (e.g. radio buttons in a radiobox) as well
-    wxControl *control = wxDynamicCast(m_window, wxControl);
+    auto* control = dynamic_cast<wxControl*>(m_window);
     if ( control )
     {
         for ( const auto id : control->GetSubcontrols() )

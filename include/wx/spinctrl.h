@@ -85,11 +85,6 @@ public:
 
 protected:
     double m_value;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

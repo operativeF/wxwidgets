@@ -32,8 +32,6 @@
 // implementation
 // ============================================================================
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericFindReplaceDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxGenericFindReplaceDialog, wxDialog)
     EVT_BUTTON(wxID_FIND, wxGenericFindReplaceDialog::OnFind)
     EVT_BUTTON(wxID_REPLACE, wxGenericFindReplaceDialog::OnReplace)

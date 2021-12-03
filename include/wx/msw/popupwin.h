@@ -52,11 +52,6 @@ public:
 
 private:
     wxWindow* m_owner{nullptr};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_POPUPWIN_H_

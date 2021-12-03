@@ -32,8 +32,6 @@ using namespace Microsoft::WRL;
 #include <wx/msw/wrl/event.h>
 #endif // !__VISUALC__
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWebViewEdge, wxWebView);
-
 #define WX_ERROR2_CASE(error, wxerror) \
         case error: \
             event.SetString(#error); \

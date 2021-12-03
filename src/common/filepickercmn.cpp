@@ -20,7 +20,6 @@
 
 wxDEFINE_EVENT( wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );
 wxDEFINE_EVENT( wxEVT_DIRPICKER_CHANGED,  wxFileDirPickerEvent );
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileDirPickerEvent, wxCommandEvent);
 
 // ----------------------------------------------------------------------------
 // wxFileDirPickerCtrlBase
@@ -150,8 +149,6 @@ void wxFileDirPickerCtrlBase::OnFileDirChange(wxFileDirPickerEvent &ev)
 
 #if wxUSE_FILEPICKERCTRL
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxFilePickerCtrl, wxPickerBase);
-
 bool wxFilePickerCtrl::Create(wxWindow *parent,
                               wxWindowID id,
                               const std::string& path,
@@ -191,7 +188,6 @@ wxString wxFilePickerCtrl::GetTextCtrlValue() const
 // ----------------------------------------------------------------------------
 
 #if wxUSE_DIRPICKERCTRL
-wxIMPLEMENT_DYNAMIC_CLASS(wxDirPickerCtrl, wxPickerBase);
 
 bool wxDirPickerCtrl::Create(wxWindow *parent,
                              wxWindowID id,

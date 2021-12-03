@@ -330,13 +330,9 @@ std::string wxLocalFSHandler::FindNext()
     return wxFileSystem::FileNameToURL(found);
 }
 
-
-
 //-----------------------------------------------------------------------------
 // wxFileSystem
 //-----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystem, wxObject);
 
 wxFileSystem::~wxFileSystem()
 {

@@ -28,9 +28,6 @@ module WX.AUI.AUIBar;
 
 import WX.AUI.FrameManager;
 
-wxIMPLEMENT_CLASS(wxAuiToolBar, wxControl);
-wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarEvent, wxEvent);
-
 namespace
 {
 

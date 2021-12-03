@@ -166,7 +166,6 @@ private:
     friend class wxMDIChildFrame;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
 };
 
 // ---------------------------------------------------------------------------
@@ -242,11 +241,6 @@ private:
     bool m_needsResize{true}; // flag which tells us to artificially resize the frame
 
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------------------------
@@ -273,11 +267,6 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_MDI_H_

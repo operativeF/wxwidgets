@@ -441,8 +441,6 @@ void wxDialogBase::OnButton(wxCommandEvent& event)
 
 wxDEFINE_EVENT( wxEVT_WINDOW_MODAL_DIALOG_CLOSED , wxWindowModalDialogEvent  );
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWindowModalDialogEvent, wxCommandEvent);
-
 void wxDialogBase::ShowWindowModal ()
 {
     // wxWindowModalDialogEvent relies on GetReturnCode() returning correct

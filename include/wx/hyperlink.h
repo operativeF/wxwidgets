@@ -122,11 +122,6 @@ private:
 
     // URL associated with the hyperlink control that the used clicked on.
     std::string m_url;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 
@@ -170,10 +165,6 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
         }
         
         wxHyperlinkCtrl& operator=(wxHyperlinkCtrl&&) = delete;
-
-        wxClassInfo *wxGetClassInfo() const;
-        static wxClassInfo ms_classInfo;
-        static wxObject* wxCreateObject();
     };
 #endif
 

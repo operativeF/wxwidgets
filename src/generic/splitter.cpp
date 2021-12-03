@@ -44,19 +44,6 @@ wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGING, wxSplitterEvent );
 wxDEFINE_EVENT( wxEVT_SPLITTER_DOUBLECLICKED, wxSplitterEvent );
 wxDEFINE_EVENT( wxEVT_SPLITTER_UNSPLIT, wxSplitterEvent );
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSplitterWindow, wxWindow);
-
-/*
-    TODO PROPERTIES
-        style wxSP_3D
-        sashpos (long , 0 )
-        minsize (long -1 )
-        object, object_ref
-        orientation
-*/
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxSplitterEvent, wxNotifyEvent);
-
 wxBEGIN_EVENT_TABLE(wxSplitterWindow, wxWindow)
     EVT_PAINT(wxSplitterWindow::OnPaint)
     EVT_SIZE(wxSplitterWindow::OnSize)

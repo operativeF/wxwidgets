@@ -20,8 +20,6 @@
 #include "wx/statline.h"
 #include "wx/artprov.h"
 
-wxIMPLEMENT_CLASS(wxRichMessageDialog, wxDialog)
-
 // ----------------------------------------------------------------------------
 // Events and handlers
 // ----------------------------------------------------------------------------

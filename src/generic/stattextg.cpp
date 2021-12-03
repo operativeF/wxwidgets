@@ -19,9 +19,6 @@
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericStaticText, wxStaticTextBase);
-
-
 bool wxGenericStaticText::Create(wxWindow *parent,
                                  wxWindowID id,
                                  const std::string &label,

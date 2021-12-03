@@ -34,9 +34,6 @@ protected:
 #if wxUSE_STREAMS
     bool DoCanRead( wxInputStream& stream ) override;
 #endif // wxUSE_STREAMS
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxCURHandler);
 };
 
 } // export

@@ -242,11 +242,6 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

@@ -136,32 +136,24 @@ public:
 protected:
     wxObjectRefData* CreateRefData() const override;
     wxObjectRefData* CloneRefData(const wxObjectRefData* data) const override;
-
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsObject);
 };
 
 
 
 class wxGraphicsPen : public wxGraphicsObject
 {
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsPen);
 };
 
 extern wxGraphicsPen wxNullGraphicsPen;
 
 class wxGraphicsBrush : public wxGraphicsObject
 {
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsBrush);
 };
 
 extern wxGraphicsBrush wxNullGraphicsBrush;
 
 class wxGraphicsFont : public wxGraphicsObject
 {
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsFont);
 };
 
 extern wxGraphicsFont wxNullGraphicsFont;
@@ -182,9 +174,6 @@ public:
     { return (const wxGraphicsBitmapData*) GetRefData(); }
     wxGraphicsBitmapData* GetBitmapData()
     { return (wxGraphicsBitmapData*) GetRefData(); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsBitmap);
 };
 
 extern wxGraphicsBitmap wxNullGraphicsBitmap;
@@ -244,9 +233,6 @@ public:
     { return (const wxGraphicsMatrixData*) GetRefData(); }
     wxGraphicsMatrixData* GetMatrixData()
     { return (wxGraphicsMatrixData*) GetRefData(); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsMatrix);
 };
 
 extern wxGraphicsMatrix wxNullGraphicsMatrix;
@@ -525,9 +511,6 @@ public:
     { return (const wxGraphicsPathData*) GetRefData(); }
     wxGraphicsPathData* GetPathData()
     { return (wxGraphicsPathData*) GetRefData(); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsPath);
 };
 
 extern wxGraphicsPath wxNullGraphicsPath;
@@ -885,9 +868,6 @@ protected:
                                          float x, float y,
                                          float angle,
                                          const wxGraphicsBrush& backgroundBrush);
-
-private:
-    wxDECLARE_ABSTRACT_CLASS(wxGraphicsContext);
 };
 
 #if 0
@@ -919,8 +899,6 @@ public:
 private:
     wxGraphicsMatrix* m_matrix;
     wxGraphicsPath* m_path;
-
-    wxDECLARE_DYNAMIC_CLASS(wxGraphicsFigure);
 };
 
 #endif
@@ -1033,9 +1011,6 @@ public:
     virtual std::string GetName() const = 0;
     virtual void
     GetVersion(int* major, int* minor = nullptr, int* micro = nullptr) const = 0;
-
-private:
-    wxDECLARE_ABSTRACT_CLASS(wxGraphicsRenderer);
 };
 
 

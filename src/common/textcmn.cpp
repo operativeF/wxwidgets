@@ -103,9 +103,6 @@ wxCONSTRUCTOR_6( wxTextCtrl, wxWindow*, Parent, wxWindowID, Id, \
                 std::string, Value, wxPoint, Position, wxSize, Size, \
                 long, WindowStyle)
 
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxTextUrlEvent, wxCommandEvent);
-
 wxDEFINE_EVENT( wxEVT_TEXT, wxCommandEvent );
 wxDEFINE_EVENT( wxEVT_TEXT_ENTER, wxCommandEvent );
 wxDEFINE_EVENT( wxEVT_TEXT_URL, wxTextUrlEvent );

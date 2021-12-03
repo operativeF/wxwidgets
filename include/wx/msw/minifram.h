@@ -45,11 +45,6 @@ public:
                              wxFRAME_TOOL_WINDOW |
                              (parent ? wxFRAME_FLOAT_ON_PARENT : 0), name);
   }
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

@@ -30,8 +30,6 @@ import <charconv>;
 #endif
 
 wxDEFINE_EVENT(wxEVT_FONTPICKER_CHANGED, wxFontPickerEvent);
-wxIMPLEMENT_DYNAMIC_CLASS(wxFontPickerCtrl, wxPickerBase);
-wxIMPLEMENT_DYNAMIC_CLASS(wxFontPickerEvent, wxCommandEvent);
 
 // ----------------------------------------------------------------------------
 // wxFontPickerCtrl

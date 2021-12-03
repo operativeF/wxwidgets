@@ -87,11 +87,6 @@ private:
     wxProgressDialogTaskRunner *m_taskDialogRunner{nullptr};
 
     wxProgressDialogSharedData *m_sharedData{nullptr};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_PROGDLG_H_

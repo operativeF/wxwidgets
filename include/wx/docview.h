@@ -551,7 +551,6 @@ protected:
 #endif // wxUSE_PRINTING_ARCHITECTURE
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxDocManager);
 };
 
 // ----------------------------------------------------------------------------

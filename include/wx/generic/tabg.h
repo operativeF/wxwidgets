@@ -27,7 +27,6 @@ class wxTabView;
 
 class wxTabControl: public wxObject
 {
-    wxDECLARE_DYNAMIC_CLASS(wxTabControl);
 public:
     wxTabControl(wxTabView *v = NULL);
     virtual ~wxTabControl(void);
@@ -95,7 +94,6 @@ WX_DECLARE_LIST(wxTabLayer, wxTabLayerList);
 
 class wxTabView: public wxObject
 {
-    wxDECLARE_DYNAMIC_CLASS(wxTabView);
 public:
   wxTabView(unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
   ~wxTabView();

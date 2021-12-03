@@ -82,11 +82,6 @@ private:
     bool DoSetIcon(const wxIcon& icon,
                    const std::string& tooltip,
                    Operation operation);
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_TASKBAR_H_

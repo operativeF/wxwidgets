@@ -119,8 +119,6 @@ protected:
 private:
     // delete all icons
     void DeleteIcons();
-
-    wxDECLARE_DYNAMIC_CLASS(wxIconBundle);
 };
 
 #endif // _WX_ICONBNDL_H_

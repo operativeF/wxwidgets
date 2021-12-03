@@ -96,14 +96,6 @@ inline WXHMENU GetMDIWindowMenu(wxMDIParentFrame *frame)
 // implementation
 // ===========================================================================
 
-// ---------------------------------------------------------------------------
-// wxWin macros
-// ---------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxMDIParentFrame, wxFrame);
-wxIMPLEMENT_DYNAMIC_CLASS(wxMDIChildFrame, wxFrame);
-wxIMPLEMENT_DYNAMIC_CLASS(wxMDIClientWindow, wxWindow);
-
 wxBEGIN_EVENT_TABLE(wxMDIParentFrame, wxFrame)
     EVT_ACTIVATE(wxMDIParentFrame::OnActivate)
     EVT_SIZE(wxMDIParentFrame::OnSize)

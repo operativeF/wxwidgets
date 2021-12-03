@@ -28,8 +28,6 @@ import <tuple>;
 // wxPNGHandler implementation
 // ============================================================================
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPNGHandler,wxImageHandler);
-
 #if wxUSE_STREAMS
 
 #ifndef PNGLINKAGEMODE

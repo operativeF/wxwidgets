@@ -1200,8 +1200,6 @@ wxTreeItemId wxGenericDirCtrl::AppendItem (const wxTreeItemId & parent,
 // wxDirFilterListCtrl
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxDirFilterListCtrl, wxChoice);
-
 wxBEGIN_EVENT_TABLE(wxDirFilterListCtrl, wxChoice)
     EVT_CHOICE(wxID_ANY, wxDirFilterListCtrl::OnSelFilter)
 wxEND_EVENT_TABLE()

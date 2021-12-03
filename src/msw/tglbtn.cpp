@@ -40,8 +40,6 @@ wxDEFINE_EVENT( wxEVT_TOGGLEBUTTON, wxCommandEvent );
 // wxBitmapToggleButton
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapToggleButton, wxToggleButton);
-
 bool wxBitmapToggleButton::Create(wxWindow *parent,
                                   wxWindowID id,
                                   const wxBitmap& label,
@@ -73,8 +71,6 @@ bool wxBitmapToggleButton::Create(wxWindow *parent,
 // ----------------------------------------------------------------------------
 // wxToggleButton
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxToggleButton, wxControl);
 
 // Single check box item
 bool wxToggleButton::Create(wxWindow *parent,

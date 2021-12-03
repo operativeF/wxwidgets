@@ -75,8 +75,6 @@ public:
 private:
     IDataObject *m_lastDataObject{nullptr};
     bool m_isOpened{false};
-
-    wxDECLARE_DYNAMIC_CLASS(wxClipboard);
 };
 
 #endif // wxUSE_CLIPBOARD

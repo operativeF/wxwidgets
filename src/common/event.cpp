@@ -43,7 +43,6 @@ import WX.Cfg.Flags;
 // ----------------------------------------------------------------------------
 
 #if wxUSE_BASE
-    wxIMPLEMENT_DYNAMIC_CLASS(wxEvtHandler, wxObject);
     wxIMPLEMENT_ABSTRACT_CLASS(wxEvent, wxObject);
     wxIMPLEMENT_DYNAMIC_CLASS(wxIdleEvent, wxEvent);
     wxIMPLEMENT_DYNAMIC_CLASS(wxThreadEvent, wxEvent);

@@ -198,11 +198,6 @@ private:
 
     // if true, insert a break before appending the next item
     bool m_doBreak;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
@@ -265,11 +260,6 @@ protected:
     // Return the MSW position for a wxMenu which is sometimes different from
     // the wxWidgets position.
     int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MENU_H_

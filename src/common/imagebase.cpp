@@ -133,8 +133,6 @@ wxImageRefData::~wxImageRefData()
 
 #define M_IMGDATA static_cast<wxImageRefData*>(m_refData)
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxImage, wxObject);
-
 bool wxImage::Create(const char* const* xpmData)
 {
 #if wxUSE_XPM

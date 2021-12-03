@@ -31,8 +31,6 @@
 //-----------------------------------------------------------------------------
 
 wxDEFINE_EVENT( wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEvent );
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericCollapsiblePane, wxControl);
-wxIMPLEMENT_DYNAMIC_CLASS(wxCollapsiblePaneEvent, wxCommandEvent);
 
 wxBEGIN_EVENT_TABLE(wxGenericCollapsiblePane, wxControl)
     EVT_COLLAPSIBLEHEADER_CHANGED(wxID_ANY, wxGenericCollapsiblePane::OnButton)

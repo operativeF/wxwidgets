@@ -26,9 +26,6 @@ public:
         { return true; }
     static bool EndDrawingOnTop()
         { return true; }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxScreenDC);
 };
 
 

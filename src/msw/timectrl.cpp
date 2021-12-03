@@ -16,8 +16,6 @@
 
 import WX.WinDef;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxTimePickerCtrl, wxControl);
-
 // ============================================================================
 // wxTimePickerCtrl implementation
 // ============================================================================

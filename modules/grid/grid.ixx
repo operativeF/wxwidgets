@@ -2901,7 +2901,6 @@ private:
     wxGridFixedIndicesSet *m_setFixedRows{nullptr};
     wxGridFixedIndicesSet *m_setFixedCols{nullptr};
 
-    wxDECLARE_DYNAMIC_CLASS(wxGrid);
     wxDECLARE_EVENT_TABLE();
 };
 

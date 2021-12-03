@@ -74,11 +74,6 @@ private:
     int m_pageSize{0};
     int m_viewSize{0};
     int m_objectSize{0};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

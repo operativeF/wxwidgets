@@ -43,9 +43,6 @@ public:
 protected:
     bool DoCanRead( wxInputStream& stream ) override;
 #endif
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxXPMHandler);
 };
 
 } // export

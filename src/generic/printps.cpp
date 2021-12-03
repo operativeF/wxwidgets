@@ -29,9 +29,6 @@
 #include "wx/progdlg.h"
 #include "wx/paper.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPostScriptPrinter, wxPrinterBase);
-wxIMPLEMENT_CLASS(wxPostScriptPrintPreview, wxPrintPreviewBase);
-
 bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {
     sm_abortIt = false;

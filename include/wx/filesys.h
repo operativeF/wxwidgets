@@ -238,8 +238,6 @@ protected:
             // handler that succeed in FindFirst query
     wxFSHandlerHash m_LocalHandlers;
             // Handlers local to this instance
-
-    wxDECLARE_DYNAMIC_CLASS(wxFileSystem);
 };
 
 

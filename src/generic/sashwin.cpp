@@ -26,7 +26,6 @@ import <string>;
 wxDEFINE_EVENT( wxEVT_SASH_DRAGGED, wxSashEvent );
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSashWindow, wxWindow);
-wxIMPLEMENT_DYNAMIC_CLASS(wxSashEvent, wxCommandEvent);
 
 wxBEGIN_EVENT_TABLE(wxSashWindow, wxWindow)
     EVT_PAINT(wxSashWindow::OnPaint)

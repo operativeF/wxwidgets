@@ -120,10 +120,6 @@ public:
     void SetPosition(int pos) { m_commandInt = pos; }
 
     wxEvent *Clone() const override { return new wxSpinEvent(*this); }
-
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxSpinEventFunction)(wxSpinEvent&);

@@ -165,10 +165,6 @@ private:
 // implementation
 // ============================================================================
 
-#ifndef wxHAS_NATIVE_ACTIVITYINDICATOR
-    wxIMPLEMENT_DYNAMIC_CLASS(wxActivityIndicator, wxControl);
-#endif
-
 bool
 wxActivityIndicatorGeneric::Create(wxWindow* parent,
                                    wxWindowID winid,

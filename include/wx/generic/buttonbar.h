@@ -117,7 +117,6 @@ private:
     int m_labelMargin;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxButtonToolBar);
     wxDECLARE_EVENT_TABLE();
 };
 

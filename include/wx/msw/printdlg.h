@@ -113,11 +113,6 @@ private:
 
     // holds MSW handle
     void*                   m_pageDlg{nullptr};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

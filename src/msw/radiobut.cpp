@@ -90,8 +90,8 @@ void wxRadioButton::SetValue(bool value)
               nodeBefore;
               nodeBefore = nodeBefore->GetPrevious() )
         {
-            wxRadioButton *btn = wxDynamicCast(nodeBefore->GetData(),
-                                               wxRadioButton);
+            auto* btn = dynamic_cast<wxRadioButton*>(nodeBefore->GetData());
+            
             if ( !btn )
             {
                 // don't stop on non radio buttons, we could have intermixed
@@ -124,8 +124,7 @@ void wxRadioButton::SetValue(bool value)
           nodeAfter;
           nodeAfter = nodeAfter->GetNext() )
     {
-        wxRadioButton *btn = wxDynamicCast(nodeAfter->GetData(),
-                                           wxRadioButton);
+        auto* btn = dynamic_cast<wxRadioButton*>(nodeAfter->GetData());
 
         if ( !btn )
             continue;

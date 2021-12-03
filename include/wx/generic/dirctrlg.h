@@ -208,7 +208,6 @@ private:
     bool            m_showHidden{false};
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericDirCtrl);
 };
 
 wxDECLARE_EVENT( wxEVT_DIRCTRL_SELECTIONCHANGED, wxTreeEvent );

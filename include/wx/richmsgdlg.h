@@ -89,10 +89,6 @@ private:
             { }
 
         wxRichMessageDialog& operator=(wxRichMessageDialog&&) = delete;
-
-        wxClassInfo *wxGetClassInfo() const;
-        static wxClassInfo ms_classInfo;
-        static wxObject* wxCreateObject();
     };
 #endif
 

@@ -62,11 +62,6 @@ protected:
 #endif // wxUSE_INTL
     bool MSWAllowsNone() const override { return false; }
     bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) override;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_TIMECTRL_H_

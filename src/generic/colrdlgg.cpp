@@ -47,8 +47,6 @@
     #define wxID_BLUE_SLIDER    3003
 #endif // wxUSE_SLIDER
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericColourDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxGenericColourDialog, wxDialog)
     EVT_BUTTON(wxID_ADD_CUSTOM, wxGenericColourDialog::OnAddCustom)
 #if wxUSE_SLIDER

@@ -59,7 +59,6 @@ import <vector>;
 wxIMPLEMENT_ABSTRACT_CLASS(wxDocument, wxEvtHandler);
 wxIMPLEMENT_ABSTRACT_CLASS(wxView, wxEvtHandler);
 wxIMPLEMENT_ABSTRACT_CLASS(wxDocTemplate, wxObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxDocManager, wxEvtHandler);
 wxIMPLEMENT_CLASS(wxDocChildFrame, wxFrame);
 wxIMPLEMENT_CLASS(wxDocParentFrame, wxFrame);
 

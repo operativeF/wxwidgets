@@ -10,8 +10,6 @@ import WX.Image.ICO;
 // wxCURHandler
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxCURHandler, wxICOHandler);
-
 #if wxUSE_STREAMS
 
 bool wxCURHandler::DoCanRead(wxInputStream& stream)

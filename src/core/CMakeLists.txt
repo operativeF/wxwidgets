@@ -189,7 +189,6 @@ set(CORE_GRID_SRC
     ${CORE_SRC_DIR}/generic/gridctrl.cpp
     ${CORE_SRC_DIR}/generic/grid.cpp
     ${CORE_SRC_DIR}/generic/gridsel.cpp
-    ${CORE_SRC_DIR}/common/gridcmn.cpp
 )
 
 set(CORE_GRID_IXX

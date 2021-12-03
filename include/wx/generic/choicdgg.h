@@ -49,6 +49,8 @@ public:
                      styleDlg, pos, styleLbox);
     }
 
+	wxAnyChoiceDialog& operator=(wxAnyChoiceDialog&&) = delete;
+
     bool Create(wxWindow *parent,
                 const std::string& message,
                 const std::string& caption,
@@ -61,9 +63,6 @@ protected:
     wxListBoxBase *m_listbox{nullptr};
 
     virtual wxListBoxBase *CreateList(const std::vector<std::string>& choices, long styleLbox);
-
-    wxAnyChoiceDialog(const wxAnyChoiceDialog&) = delete;
-	wxAnyChoiceDialog& operator=(const wxAnyChoiceDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -113,9 +112,6 @@ protected:
     void DoChoice();
 
 public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -138,6 +134,8 @@ public:
         Create(parent, message, caption, choices, style, pos);
     }
 
+    wxMultiChoiceDialog& operator=(wxMultiChoiceDialog&&) = delete;
+
     [[maybe_unused]] bool Create(wxWindow *parent,
                 const std::string& message,
                 const std::string& caption,
@@ -157,15 +155,6 @@ protected:
 #endif // wxUSE_CHECKLISTBOX
 
     std::vector<int> m_selections;
-
-private:
-public:
-	wxMultiChoiceDialog(const wxMultiChoiceDialog&) = delete;
-	wxMultiChoiceDialog& operator=(const wxMultiChoiceDialog&) = delete;
-
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

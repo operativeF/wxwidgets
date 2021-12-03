@@ -116,11 +116,6 @@ protected:
     std::string m_directory;
     std::vector<std::string> m_files;
     int m_filterIndex{};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void ( wxEvtHandler::*wxFileCtrlEventFunction )( wxFileCtrlEvent& );

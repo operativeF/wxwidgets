@@ -431,10 +431,6 @@ public:
 public:
     wxSocketNotify  m_event; // FIXME: Default value?
     void           *m_clientData{nullptr};
-
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 

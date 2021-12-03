@@ -199,8 +199,6 @@ protected:
 
 private:
     ExtraControlCreatorFunction m_extraControlCreator{nullptr};
-
-    wxDECLARE_DYNAMIC_CLASS(wxFileDialogBase);
 };
 
 

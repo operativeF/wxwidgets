@@ -174,8 +174,6 @@ protected:
 
 private:
     wxWebViewIEImpl* m_impl;
-
-    wxDECLARE_DYNAMIC_CLASS(wxWebViewIE);
 };
 
 class wxWebViewFactoryIE : public wxWebViewFactory

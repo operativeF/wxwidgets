@@ -49,11 +49,6 @@ public:
                            std::string_view name = {});
 protected:
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_BMPBUTTN_H_

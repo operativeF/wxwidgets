@@ -74,8 +74,6 @@ module WX.Image.XPM;
 
 #if wxUSE_XPM
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxXPMHandler,wxImageHandler);
-
 //-----------------------------------------------------------------------------
 // wxXPMHandler
 //-----------------------------------------------------------------------------

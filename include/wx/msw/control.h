@@ -129,11 +129,6 @@ protected:
     // for controls like radiobuttons which are really composite this array
     // holds the ids (not HWNDs!) of the sub controls
     std::vector<long> m_subControls;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_CONTROL_H_

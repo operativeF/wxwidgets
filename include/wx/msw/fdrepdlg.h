@@ -56,8 +56,6 @@ private:
     std::string                m_title;
 
     wxFindReplaceDialogImpl* m_impl{nullptr};
-
-    wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
 };
 
 #endif // _WX_MSW_FDREPDLG_H_

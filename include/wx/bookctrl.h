@@ -400,11 +400,6 @@ public:
 private:
     int m_nSel,     // currently selected page
         m_nOldSel;  // previously selected page
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);

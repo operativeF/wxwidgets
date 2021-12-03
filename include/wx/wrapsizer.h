@@ -97,11 +97,6 @@ protected:
     wxSize m_calculatedMinSize;
 
     wxBoxSizer m_rows;       // Sizer containing multiple rows of our items
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_WRAPSIZER_H_

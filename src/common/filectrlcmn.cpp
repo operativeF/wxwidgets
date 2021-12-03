@@ -18,8 +18,6 @@ wxDEFINE_EVENT( wxEVT_FILECTRL_FILEACTIVATED, wxFileCtrlEvent );
 wxDEFINE_EVENT( wxEVT_FILECTRL_FOLDERCHANGED, wxFileCtrlEvent );
 wxDEFINE_EVENT( wxEVT_FILECTRL_FILTERCHANGED, wxFileCtrlEvent );
 
-wxIMPLEMENT_DYNAMIC_CLASS( wxFileCtrlEvent, wxCommandEvent );
-
 // some helper functions
 
 void wxGenerateFilterChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd )

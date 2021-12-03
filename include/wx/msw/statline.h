@@ -48,11 +48,6 @@ public:
 
     // usually overridden base class virtuals
     WXDWORD MSWGetStyle(unsigned int style, WXDWORD *exstyle) const override;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_STATLINE_H_

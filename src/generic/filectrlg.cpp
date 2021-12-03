@@ -336,8 +336,6 @@ void wxFileData::MakeItem( wxListItem &item )
 //  wxFileListCtrl
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileListCtrl,wxListCtrl);
-
 wxBEGIN_EVENT_TABLE(wxFileListCtrl,wxListCtrl)
     EVT_LIST_DELETE_ITEM(wxID_ANY, wxFileListCtrl::OnListDeleteItem)
     EVT_LIST_DELETE_ALL_ITEMS(wxID_ANY, wxFileListCtrl::OnListDeleteAllItems)
@@ -839,8 +837,6 @@ wxFileListCtrl::~wxFileListCtrl()
 ///////////////////////////////////////////////////////////////////////////////
 // wxGenericFileCtrl implementation
 ///////////////////////////////////////////////////////////////////////////////
-
-wxIMPLEMENT_DYNAMIC_CLASS( wxGenericFileCtrl, wxNavigationEnabled<wxControl> );
 
 wxBEGIN_EVENT_TABLE( wxGenericFileCtrl, wxNavigationEnabled<wxControl> )
     EVT_LIST_ITEM_SELECTED( ID_FILELIST_CTRL, wxGenericFileCtrl::OnSelected )

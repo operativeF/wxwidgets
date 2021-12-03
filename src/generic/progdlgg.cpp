@@ -41,8 +41,6 @@ wxBEGIN_EVENT_TABLE(wxGenericProgressDialog, wxDialog)
     EVT_CLOSE(wxGenericProgressDialog::OnClose)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_CLASS(wxProgressDialog, wxDialog)
-
 wxGenericProgressDialog::wxGenericProgressDialog()                       
 {
     // we may disappear at any moment, let the others know about it

@@ -34,11 +34,6 @@ public:
 
 private:
     std::string m_title;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

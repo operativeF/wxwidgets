@@ -24,8 +24,6 @@ module WX.Image.PCX;
 // wxPCXHandler
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPCXHandler,wxImageHandler);
-
 #if wxUSE_STREAMS
 
 // PCX header

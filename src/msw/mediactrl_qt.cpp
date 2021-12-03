@@ -383,8 +383,6 @@ public:
     wxEvtHandler* m_evthandler{nullptr};
 
     friend class wxQTMediaEvtHandler;
-
-    wxDECLARE_DYNAMIC_CLASS(wxQTMediaBackend);
 };
 
 // helper to hijack background erasing for the QT window
@@ -421,8 +419,6 @@ private:
 // FIXME: Greg Hazel reports that sometimes files that cannot be played
 // with this backend are treated as playable anyway - not verified though.
 //---------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxQTMediaBackend, wxMediaBackend);
 
 using namespace std::chrono_literals;
 

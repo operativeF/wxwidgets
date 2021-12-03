@@ -124,7 +124,6 @@ wxIMPLEMENT_CLASS(wxSocketBase, wxObject);
 wxIMPLEMENT_CLASS(wxSocketServer, wxSocketBase);
 wxIMPLEMENT_CLASS(wxSocketClient, wxSocketBase);
 wxIMPLEMENT_CLASS(wxDatagramSocket, wxSocketBase);
-wxIMPLEMENT_DYNAMIC_CLASS(wxSocketEvent, wxEvent);
 
 // ----------------------------------------------------------------------------
 // private functions

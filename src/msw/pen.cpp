@@ -391,8 +391,6 @@ WXHPEN wxPenRefData::GetHPEN() const
 // wxPen
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPen, wxGDIObject);
-
 wxPen::wxPen(const wxColour& col, int width, wxPenStyle style)
 {
     m_refData = new wxPenRefData(wxPenInfo(col, width).Style(style));

@@ -145,8 +145,6 @@ public:
 
 private:
     void DismissOnDeactivate();
-
-    wxDECLARE_DYNAMIC_CLASS(wxPopupTransientWindow);
 };
 
 #else // !__WXMSW__
@@ -237,7 +235,6 @@ protected:
     wxComboCtrl *m_combo;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxPopupComboWindow);
 };
 
 #endif // wxUSE_COMBOBOX && defined(__WXUNIVERSAL__)

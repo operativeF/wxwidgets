@@ -38,8 +38,6 @@ public:
 private:
     bool     m_canUndo;
     wxString m_commandName;
-
-    wxDECLARE_CLASS(wxCommand);
 };
 
 // ----------------------------------------------------------------------------
@@ -130,9 +128,6 @@ protected:
 
     wxString      m_undoAccelerator;
     wxString      m_redoAccelerator;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxCommandProcessor);
 };
 
 #endif // _WX_CMDPROC_H_

@@ -54,11 +54,6 @@ public:
 
 private:
     wxString m_path;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );
@@ -306,9 +301,6 @@ protected:
                         wxFLP_USE_TEXTCTRL |
                         wxFLP_SMALL);
     }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxFilePickerCtrl);
 };
 
 #endif      // wxUSE_FILEPICKERCTRL
@@ -402,9 +394,6 @@ protected:
                         wxDIRP_USE_TEXTCTRL |
                         wxDIRP_SMALL);
     }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxDirPickerCtrl);
 };
 
 #endif      // wxUSE_DIRPICKERCTRL

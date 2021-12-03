@@ -77,11 +77,6 @@ private:
     void OnCharHook(wxKeyEvent& event);
 
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_BUTTON_H_

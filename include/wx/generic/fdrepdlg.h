@@ -61,8 +61,6 @@ protected:
     wxTextCtrl *m_textRepl{nullptr};
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxGenericFindReplaceDialog);
-
     wxDECLARE_EVENT_TABLE();
 };
 

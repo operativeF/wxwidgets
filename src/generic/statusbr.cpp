@@ -35,8 +35,6 @@
 #if defined(__WXMAC__) || \
     (defined(wxUSE_NATIVE_STATUSBAR) && wxUSE_NATIVE_STATUSBAR)
     #include "wx/generic/statusbr.h"
-
-    wxIMPLEMENT_DYNAMIC_CLASS(wxStatusBarGeneric, wxWindow);
 #endif // wxUSE_NATIVE_STATUSBAR
 
 // Default status border dimensions

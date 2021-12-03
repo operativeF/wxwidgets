@@ -7,8 +7,6 @@ module WX.Image.ANI;
 import WX.Image.Base;
 import WX.Image.Decoder.ANI;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxANIHandler, wxCURHandler);
-
 #ifdef wxUSE_STREAMS
 
 bool wxANIHandler::LoadFile(wxImage *image, wxInputStream& stream,

@@ -510,6 +510,4 @@ int wxBookCtrlBase::DoSetSelection(size_t n, unsigned int flags)
     return oldSel;
 }
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxBookCtrlEvent, wxNotifyEvent);
-
 #endif // wxUSE_BOOKCTRL

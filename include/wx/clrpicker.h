@@ -139,9 +139,6 @@ public:
 protected:
     unsigned int GetPickerStyle(unsigned int style) const override
         { return (style & (wxCLRP_SHOW_LABEL | wxCLRP_SHOW_ALPHA)); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxColourPickerCtrl);
 };
 
 
@@ -171,11 +168,6 @@ public:
 
 private:
     wxColour m_colour;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

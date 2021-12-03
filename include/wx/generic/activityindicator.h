@@ -53,10 +53,6 @@ protected:
 
 private:
     class wxActivityIndicatorImpl *m_impl{nullptr};
-
-#ifndef wxHAS_NATIVE_ACTIVITYINDICATOR
-    wxDECLARE_DYNAMIC_CLASS(wxActivityIndicator);
-#endif
 };
 
 #endif // _WX_GENERIC_ACTIVITYINDICATOR_H_

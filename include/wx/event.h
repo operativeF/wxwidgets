@@ -4083,11 +4083,6 @@ private:
 
     // Head of the event filter linked list.
     static wxEventFilter* ms_filterList;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 using wxEvtHandlerArray = std::vector<wxEvtHandler*>;

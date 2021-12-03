@@ -375,17 +375,12 @@ public:
 	wxWindowModalDialogEvent& operator=(const wxWindowModalDialogEvent&) = delete;
 
     wxDialog *GetDialog() const
-        { return wxStaticCast(GetEventObject(), wxDialog); }
+        { return dynamic_cast<wxDialog*>(GetEventObject()); }
 
     int GetReturnCode() const
         { return GetDialog()->GetReturnCode(); }
 
     wxEvent *Clone() const override { return new wxWindowModalDialogEvent (*this); }
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_WINDOW_MODAL_DIALOG_CLOSED , wxWindowModalDialogEvent );

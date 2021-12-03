@@ -206,9 +206,6 @@ protected:
 #endif // USE_NOTEBOOK_ANTIFLICKER
 
 public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
   wxDECLARE_EVENT_TABLE();
 };
 

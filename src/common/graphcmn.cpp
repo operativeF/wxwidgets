@@ -37,8 +37,6 @@ import <numbers>;
 // wxGraphicsObject
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsObject, wxObject);
-
 wxGraphicsObjectRefData::wxGraphicsObjectRefData( wxGraphicsRenderer* renderer )
     : m_renderer(renderer)
 {
@@ -95,11 +93,6 @@ wxObjectRefData* wxGraphicsObject::CloneRefData(const wxObjectRefData* data) con
 // pens etc.
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsPen, wxGraphicsObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsBrush, wxGraphicsObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsFont, wxGraphicsObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsBitmap, wxGraphicsObject);
-
 wxGraphicsPen wxNullGraphicsPen;
 wxGraphicsBrush wxNullGraphicsBrush;
 wxGraphicsFont wxNullGraphicsFont;
@@ -109,7 +102,6 @@ wxGraphicsBitmap wxNullGraphicsBitmap;
 // matrix
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsMatrix, wxGraphicsObject);
 wxGraphicsMatrix wxNullGraphicsMatrix;
 
 // concatenates the matrix
@@ -200,7 +192,6 @@ void * wxGraphicsMatrix::GetNativeMatrix() const
 // path
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsPath, wxGraphicsObject);
 wxGraphicsPath wxNullGraphicsPath;
 
 // convenience functions, for using wxPoint2DFloat etc
@@ -551,9 +542,6 @@ void * wxGraphicsBitmap::GetNativeBitmap() const
 //-----------------------------------------------------------------------------
 // wxGraphicsContext Convenience Methods
 //-----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxGraphicsContext, wxObject);
-
 
 wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
                                      wxWindow* window)
@@ -1033,8 +1021,6 @@ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create()
 //-----------------------------------------------------------------------------
 // wxGraphicsRenderer
 //-----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxGraphicsRenderer, wxObject);
 
 std::unique_ptr<wxGraphicsContext> wxGraphicsRenderer::CreateContextFromUnknownDC(const wxDC& dc)
 {

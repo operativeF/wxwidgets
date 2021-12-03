@@ -15,9 +15,6 @@ import WX.WinDef;
 import WX.Win.UniqueHnd;
 import Utils.Geometry;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);
-
 // ----------------------------------------------------------------------------
 // wxRegionRefData implementation
 // ----------------------------------------------------------------------------

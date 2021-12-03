@@ -423,7 +423,6 @@ private:
     WX_FORWARD_TO_SCROLL_HELPER()
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxDataViewCtrl);
     wxDECLARE_EVENT_TABLE();
 };
 

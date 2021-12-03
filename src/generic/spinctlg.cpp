@@ -20,8 +20,6 @@
 
 #include "wx/private/spinctrl.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
-
 // There are port-specific versions for the wxSpinCtrl, so exclude the
 // contents of this file in those cases
 #if !defined(wxHAS_NATIVE_SPINCTRL) || !defined(wxHAS_NATIVE_SPINCTRLDOUBLE)

@@ -151,9 +151,6 @@ protected:
         { wxStaticCast(p, wxFileDialog)->SetPath(m_path); }
     void UpdatePathFromDialog(wxDialog *p) override
         { m_path = wxStaticCast(p, wxFileDialog)->GetPath(); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGenericFileButton);
 };
 
 
@@ -206,9 +203,6 @@ protected:
         { wxStaticCast(p, wxDirDialog)->SetPath(m_path); }
     void UpdatePathFromDialog(wxDialog *p) override
         { m_path = wxStaticCast(p, wxDirDialog)->GetPath(); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGenericDirButton);
 };
 
 #endif // _WX_FILEDIRPICKER_H_

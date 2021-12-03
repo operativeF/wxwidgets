@@ -61,11 +61,6 @@ protected:
     int         m_y{-1};
 
     bool        m_selecting{false};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 class wxGridSizeEvent : public wxNotifyEvent,
@@ -99,11 +94,6 @@ protected:
     int         m_rowOrCol{-1};
     int         m_x{-1};
     int         m_y{-1};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 
@@ -157,11 +147,6 @@ protected:
     wxGridCellCoords  m_topLeft;
     wxGridCellCoords  m_bottomRight;
     bool              m_selecting;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 
@@ -181,11 +166,6 @@ public:
     void SetCol(int col)                { m_col = col; }
     void SetWindow(wxWindow* window)    { m_window = window; }
 
-    // These functions exist only for backward compatibility, use Get and
-    // SetWindow() instead in the new code.
-    wxControl* GetControl()             { return wxDynamicCast(m_window, wxControl); }
-    void SetControl(wxControl* ctrl)    { m_window = ctrl; }
-
     wxEvent *Clone() const override { return new wxGridEditorCreatedEvent(*this); }
 
 private:
@@ -193,11 +173,6 @@ private:
 
     int m_row{};
     int m_col{};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 inline const wxEventTypeTag<wxGridEvent> wxEVT_GRID_CELL_LEFT_CLICK( wxNewEventType() );

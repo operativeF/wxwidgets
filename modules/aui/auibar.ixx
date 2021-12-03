@@ -96,11 +96,6 @@ private:
     wxRect m_rect{-1, -1, 0, 0};
     int m_toolId{-1};
     bool m_isDropdownClicked{false};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 inline const wxEventTypeTag<wxAuiToolBarEvent> wxEVT_AUITOOLBAR_TOOL_DROPDOWN( wxNewEventType() );
@@ -358,7 +353,6 @@ private:
     void DoResetMouseState();
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_CLASS(wxAuiToolBar);
 };
 
 } // export

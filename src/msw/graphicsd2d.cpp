@@ -5004,18 +5004,11 @@ public :
 
 private:
     wxCOMPtr<ID2D1Factory> m_direct2dFactory;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------
 // wxD2DRenderer implementation
 //-----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxD2DRenderer,wxGraphicsRenderer);
 
 static wxD2DRenderer *gs_D2DRenderer = nullptr;
 

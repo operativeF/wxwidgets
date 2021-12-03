@@ -30,9 +30,6 @@ public:
     bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) override;
     wxDC* PrintDialog(wxWindow *parent) override;
     bool Setup(wxWindow *parent) override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPostScriptPrinter);
 };
 
 // ----------------------------------------------------------------------------
@@ -55,9 +52,6 @@ public:
 
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
-
-private:
-    wxDECLARE_CLASS(wxPostScriptPrintPreview);
 };
 
 #endif

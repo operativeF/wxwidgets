@@ -918,11 +918,6 @@ private:
     void Init(wxDataViewCtrlBase* dvc,
               wxDataViewColumn* column,
               const wxDataViewItem& item);
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_DATAVIEW_SELECTION_CHANGED, wxDataViewEvent );
@@ -1161,11 +1156,6 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------
@@ -1397,11 +1387,6 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_DATAVIEWCTRL

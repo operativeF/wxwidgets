@@ -24,10 +24,6 @@ import <string>;
 // wxFileDialogBase
 //----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileDialogBase, wxDialog);
-
-
-
 bool wxFileDialogBase::Create(wxWindow *parent,
                               const std::string& message,
                               const std::string& defaultDir,

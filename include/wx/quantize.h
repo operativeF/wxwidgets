@@ -36,7 +36,6 @@ inline constexpr unsigned int wxQUANTIZE_FILL_DESTINATION_IMAGE  = 0x04;
 class wxQuantize: public wxObject
 {
 public:
-    wxDECLARE_DYNAMIC_CLASS(wxQuantize);
 //// Operations
 
     // Reduce the colours in the source image and put the result into the

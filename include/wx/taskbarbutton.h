@@ -104,8 +104,6 @@ private:
     bool m_hasBackground{true};
     bool m_shown{true};
     bool m_interactive{true};
-
-    wxDECLARE_DYNAMIC_CLASS(wxThumbBarButton);
 };
 
 class wxTaskBarButton

@@ -101,11 +101,6 @@ public:
 
 protected:
     wxBitmap m_bitmap{wxNullBitmap};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
@@ -179,11 +174,6 @@ private:
     // just derive from wxWizardPage directly to implement different behaviour
     wxWizardPage *m_prev,
                  *m_next;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
@@ -286,11 +276,6 @@ public:
 private:
     bool m_direction;
     wxWizardPage*    m_page;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

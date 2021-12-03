@@ -219,9 +219,6 @@ private:
     bool
     CopyFromIconOrCursor(const wxGDIImage& icon,
                          wxBitmapTransparency transp = wxBitmapTransparency::Auto);
-
-
-    wxDECLARE_DYNAMIC_CLASS(wxBitmap);
 };
 
 // ----------------------------------------------------------------------------

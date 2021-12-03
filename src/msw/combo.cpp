@@ -49,11 +49,6 @@ wxBEGIN_EVENT_TABLE(wxComboCtrl, wxComboCtrlBase)
 #endif
 wxEND_EVENT_TABLE()
 
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxComboCtrl, wxComboCtrlBase);
-
-
-
 bool wxComboCtrl::Create(wxWindow *parent,
                             wxWindowID id,
                             const std::string& value,

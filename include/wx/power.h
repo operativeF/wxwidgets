@@ -68,11 +68,6 @@ public:
 
 private:
     bool m_veto{false};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_POWER_SUSPENDING, wxPowerEvent );

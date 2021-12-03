@@ -182,7 +182,6 @@ protected:
     bool m_sort_forward{true};
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxFileListCtrl);
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -294,7 +293,6 @@ private:
     bool    m_ignoreChanges{false};
     bool    m_noSelChgEvent{}; // suppress selection changed events.
 
-    wxDECLARE_DYNAMIC_CLASS(wxGenericFileCtrl);
     wxDECLARE_EVENT_TABLE();
 };
 

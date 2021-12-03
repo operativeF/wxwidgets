@@ -60,8 +60,6 @@ protected:
     bool DoCombine(const wxRegion& region, wxRegionOp op) override;
 
     friend class wxRegionIterator;
-
-    wxDECLARE_DYNAMIC_CLASS(wxRegion);
 };
 
 class wxRegionIterator : public wxObject
@@ -97,8 +95,6 @@ private:
     long     m_numRects {0};
     wxRegion m_region;
     std::unique_ptr<wxRect[]>  m_rects;
-
-    wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
 };
 
 #endif // _WX_MSW_REGION_H_

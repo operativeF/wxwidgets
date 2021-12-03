@@ -59,8 +59,6 @@ import <cstring>; // For memcpy
 // wxJPEGHandler
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxJPEGHandler,wxImageHandler);
-
 #if wxUSE_STREAMS
 
 //------------- JPEG Data Source Manager

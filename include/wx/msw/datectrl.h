@@ -63,11 +63,6 @@ protected:
 
 private:
     wxDateTime MSWGetControlValue() const;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_DATECTRL_H_

@@ -837,11 +837,6 @@ protected:
     long m_end{0};
 
 public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
-
-public:
     // for wxWin RTTI only, don't use
     wxTextUrlEvent()  = default;
 };

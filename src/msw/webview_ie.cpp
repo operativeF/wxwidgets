@@ -77,8 +77,6 @@ wxVersionInfo wxWebViewFactoryIE::GetVersionInfo()
             event.SetInt(static_cast<int>(wxerror)); \
             break;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWebViewIE, wxWebView);
-
 wxBEGIN_EVENT_TABLE(wxWebViewIE, wxControl)
     EVT_ACTIVEX(wxID_ANY, wxWebViewIE::onActiveXEvent)
     EVT_ERASE_BACKGROUND(wxWebViewIE::onEraseBg)

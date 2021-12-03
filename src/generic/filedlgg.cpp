@@ -82,8 +82,6 @@ import <ctime>;
 #define  ID_NEW_DIR       (wxID_FILEDLGG + 4)
 #define  ID_FILE_CTRL     (wxID_FILEDLGG + 5)
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericFileDialog, wxFileDialogBase);
-
 wxBEGIN_EVENT_TABLE(wxGenericFileDialog,wxDialog)
     EVT_BUTTON(ID_LIST_MODE, wxGenericFileDialog::OnList)
     EVT_BUTTON(ID_REPORT_MODE, wxGenericFileDialog::OnReport)
@@ -398,8 +396,6 @@ void wxGenericFileDialog::OnUpdateButtonsUI(wxUpdateUIEvent& event)
 }
 
 #ifdef wxHAS_GENERIC_FILEDIALOG
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileDialog, wxGenericFileDialog);
 
 #endif // wxHAS_GENERIC_FILEDIALOG
 

@@ -44,8 +44,6 @@ private:
 #if wxUSE_IMAGE
     void InitFromImage(const wxImage& image);
 #endif // wxUSE_IMAGE
-
-    wxDECLARE_DYNAMIC_CLASS(wxCursor);
 };
 
 #endif // _WX_CURSOR_H_

@@ -71,8 +71,6 @@ public:
 private:
     std::string    m_text;
     wxIcon      m_icon;
-
-    wxDECLARE_DYNAMIC_CLASS(wxDataViewIconText);
 };
 
 DECLARE_VARIANT_OBJECT(wxDataViewIconText)
@@ -269,11 +267,6 @@ protected:
 private:
     // Called from {Called,Finish}Editing() and dtor to cleanup m_editorCtrl
     void DestroyEditControl();
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // include the real wxDataViewRenderer declaration for the native ports

@@ -148,11 +148,6 @@ protected:
     // the height of the control itself if it was set explicitly or
     // wxDefaultCoord if it hadn't
     int m_heightOwn{wxDefaultCoord};
-
-public:
-    wxClassInfo *wxGetClassInfo() const override;
-    static wxClassInfo ms_classInfo;
-    static wxObject* wxCreateObject();
 };
 
 #endif // _WX_CHOICE_H_

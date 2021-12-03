@@ -54,7 +54,6 @@ private:
     bool                m_inSetFocus;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGridCellEditorEvtHandler);
 };
 
 #if wxUSE_TEXTCTRL

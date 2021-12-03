@@ -18,8 +18,6 @@
 // wxClipboardEvent
 // ---------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxClipboardEvent,wxEvent);
-
 wxDEFINE_EVENT( wxEVT_CLIPBOARD_CHANGED, wxClipboardEvent );
 
 bool wxClipboardEvent::SupportsFormat( const wxDataFormat &format ) const

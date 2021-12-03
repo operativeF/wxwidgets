@@ -43,7 +43,6 @@ wxBEGIN_FLAGS( wxMenuStyle )
 wxFLAGS_MEMBER(wxMENU_TEAROFF)
 wxEND_FLAGS( wxMenuStyle )
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxMenu, wxEvtHandler, "wx/menu.h");
 wxCOLLECTION_TYPE_INFO( wxMenuItem *, wxMenuItemList ) ;
 
 #if wxUSE_EXTENDED_RTTI
@@ -86,11 +85,6 @@ bool wxMenuBarStreamingCallback( [[maybe_unused]] const wxObject *object, wxObje
 {
     return true;
 }
-#endif
-
-#if wxUSE_MENUBAR
-wxIMPLEMENT_DYNAMIC_CLASS_XTI_CALLBACK(wxMenuBar, wxWindow, "wx/menu.h", \
-                                       wxMenuBarStreamingCallback)
 #endif
 
 #if wxUSE_EXTENDED_RTTI

@@ -116,24 +116,6 @@ const wxNotebookPageInfoList& wxNotebookBase::GetPageInfos() const
 
 #endif
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxNotebook, wxBookCtrlBase, "wx/notebook.h");
-wxBEGIN_PROPERTIES_TABLE(wxNotebook)
-wxEVENT_PROPERTY( PageChanging, wxEVT_NOTEBOOK_PAGE_CHANGING, wxNotebookEvent )
-wxEVENT_PROPERTY( PageChanged, wxEVT_NOTEBOOK_PAGE_CHANGED, wxNotebookEvent )
-
-wxPROPERTY_COLLECTION( PageInfos, wxNotebookPageInfoList, wxNotebookPageInfo*, \
-                      AddPageInfo, GetPageInfos, 0 /*flags*/, "Helpstring", \
-                      "group")
-wxPROPERTY_FLAGS( WindowStyle, wxNotebookStyle, long, SetWindowStyleFlag, \
-                 GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 "Helpstring", "group") // style
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxNotebook)
-
-wxCONSTRUCTOR_5( wxNotebook, wxWindow*, Parent, wxWindowID, Id, \
-                wxPoint, Position, wxSize, Size, long, WindowStyle)
-
 // ----------------------------------------------------------------------------
 // geometry
 // ----------------------------------------------------------------------------

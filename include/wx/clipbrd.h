@@ -119,11 +119,6 @@ public:
 
 private:
     std::vector<wxDataFormat> m_formats;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EVENT( wxEVT_CLIPBOARD_CHANGED, wxClipboardEvent );

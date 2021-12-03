@@ -83,8 +83,6 @@ protected:
 private:
     std::string m_filename;
     WXHANDLE m_hMF;
-
-    wxDECLARE_DYNAMIC_CLASS(wxEnhMetaFile);
 };
 
 // ----------------------------------------------------------------------------

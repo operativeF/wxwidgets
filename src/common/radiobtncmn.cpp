@@ -8,71 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RADIOBTN
 
 #include "wx/radiobut.h"
 #include "wx/settings.h"
 #include "wx/dcscreen.h"
-
-// ----------------------------------------------------------------------------
-// XTI
-// ----------------------------------------------------------------------------
-
-wxDEFINE_FLAGS( wxRadioButtonStyle )
-wxBEGIN_FLAGS( wxRadioButtonStyle )
-    // new style border flags, we put them first to
-    // use them for streaming out
-    wxFLAGS_MEMBER(wxBORDER_SIMPLE)
-    wxFLAGS_MEMBER(wxBORDER_SUNKEN)
-    wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-    wxFLAGS_MEMBER(wxBORDER_RAISED)
-    wxFLAGS_MEMBER(wxBORDER_STATIC)
-    wxFLAGS_MEMBER(wxBORDER_NONE)
-
-    // old style border flags
-    wxFLAGS_MEMBER(wxSIMPLE_BORDER)
-    wxFLAGS_MEMBER(wxSUNKEN_BORDER)
-    wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-    wxFLAGS_MEMBER(wxRAISED_BORDER)
-    wxFLAGS_MEMBER(wxSTATIC_BORDER)
-    wxFLAGS_MEMBER(wxBORDER)
-
-    // standard window styles
-    wxFLAGS_MEMBER(wxTAB_TRAVERSAL)
-    wxFLAGS_MEMBER(wxCLIP_CHILDREN)
-    wxFLAGS_MEMBER(wxTRANSPARENT_WINDOW)
-    wxFLAGS_MEMBER(wxWANTS_CHARS)
-    wxFLAGS_MEMBER(wxFULL_REPAINT_ON_RESIZE)
-    wxFLAGS_MEMBER(wxALWAYS_SHOW_SB )
-    wxFLAGS_MEMBER(wxVSCROLL)
-    wxFLAGS_MEMBER(wxHSCROLL)
-
-    wxFLAGS_MEMBER(wxRB_GROUP)
-wxEND_FLAGS( wxRadioButtonStyle )
-
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxRadioButton, wxControl, "wx/radiobut.h");
-
-wxBEGIN_PROPERTIES_TABLE(wxRadioButton)
-    wxEVENT_PROPERTY( Click, wxEVT_RADIOBUTTON, wxCommandEvent )
-    wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                "Helpstring", "group")
-    wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", 0 /*flags*/, \
-                "Helpstring", "group" )
-    wxPROPERTY( Value,bool, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                "Helpstring", "group")
-    wxPROPERTY_FLAGS( WindowStyle, wxRadioButtonStyle, long, SetWindowStyleFlag, \
-                      GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      "Helpstring", "group") // style
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxRadioButton)
-
-wxCONSTRUCTOR_6( wxRadioButton, wxWindow*, Parent, wxWindowID, Id, \
-                 std::string, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
-
 
 // ----------------------------------------------------------------------------
 // wxRadioButton group navigation
@@ -120,7 +60,7 @@ wxRadioButton* wxRadioButtonBase::GetPreviousInGroup() const
     wxRadioButton *prevBtn = nullptr;
     while (nodeBefore)
     {
-        prevBtn = wxDynamicCast(nodeBefore->GetData(), wxRadioButton);
+        prevBtn = dynamic_cast<wxRadioButton*>(nodeBefore->GetData());
         if (prevBtn)
             break;
 
@@ -150,7 +90,7 @@ wxRadioButton* wxRadioButtonBase::GetNextInGroup() const
     wxRadioButton *nextBtn = nullptr;
     while (nodeNext)
     {
-        nextBtn = wxDynamicCast(nodeNext->GetData(), wxRadioButton);
+        nextBtn = dynamic_cast<wxRadioButton*>(nodeNext->GetData());
         if (nextBtn)
             break;
 

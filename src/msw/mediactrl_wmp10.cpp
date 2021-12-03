@@ -668,7 +668,6 @@ public:
     wxEvtHandler* m_evthandler{nullptr};
 
     friend class wxWMP10MediaEvtHandler;
-    wxDECLARE_DYNAMIC_CLASS(wxWMP10MediaBackend);
 };
 
 #ifndef WXTEST_ATL
@@ -703,7 +702,6 @@ private:
 //
 //---------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWMP10MediaBackend, wxMediaBackend);
 
 //---------------------------------------------------------------------------
 // wxWMP10MediaBackend Destructor

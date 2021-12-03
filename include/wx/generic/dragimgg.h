@@ -256,7 +256,6 @@ protected:
     bool            m_isShown;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxGenericDragImage);
     wxGenericDragImage(const wxGenericDragImage&) = delete;
 	wxGenericDragImage& operator=(const wxGenericDragImage&) = delete;
 };

@@ -88,27 +88,6 @@ constexpr int MARGIN_CONTROL_LABEL = 3;
 // wxWin macros
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxToolBar, wxControl);
-
-/*
-    TOOLBAR PROPERTIES
-        tool
-            bitmap
-            bitmap2
-            tooltip
-            longhelp
-            radio (bool)
-            toggle (bool)
-        separator
-        style ( wxNO_BORDER | wxTB_HORIZONTAL)
-        bitmapsize
-        margins
-        packing
-        separation
-
-        dontattachtoframe
-*/
-
 wxBEGIN_EVENT_TABLE(wxToolBar, wxToolBarBase)
     EVT_MOUSE_EVENTS(wxToolBar::OnMouseEvent)
     EVT_SYS_COLOUR_CHANGED(wxToolBar::OnSysColourChanged)

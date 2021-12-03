@@ -85,8 +85,6 @@ void TIFFwxErrorHandler(const char* module, const char *fmt, va_list ap)
 // wxTIFFHandler
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxTIFFHandler,wxImageHandler);
-
 wxTIFFHandler::wxTIFFHandler()
 {
     m_name = "TIFF file";

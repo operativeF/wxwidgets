@@ -52,10 +52,6 @@ inline constexpr unsigned int wxPD_CAN_SKIP           = 0x0080;
         {}
 
 	    wxProgressDialog& operator=(wxProgressDialog&&) = delete;
-
-        wxClassInfo *wxGetClassInfo() const;
-        static wxClassInfo ms_classInfo;
-        static wxObject* wxCreateObject();
     };
 #endif // !wxHAS_NATIVE_PROGRESSDIALOG
 

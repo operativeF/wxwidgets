@@ -90,8 +90,6 @@ bool wxColourData::FromString(const std::string& str)
 
 #include "wx/colordlg.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxColourDialogEvent, wxCommandEvent);
-
 wxDEFINE_EVENT(wxEVT_COLOUR_CHANGED, wxColourDialogEvent);
 
 wxColour wxGetColourFromUser(wxWindow *parent,

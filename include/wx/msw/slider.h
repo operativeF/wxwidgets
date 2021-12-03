@@ -148,11 +148,6 @@ private:
 
     // Platform-specific implementation of SetTickFreq
     void DoSetTickFreq(int freq) override;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_SLIDER_H_

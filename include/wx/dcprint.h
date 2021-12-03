@@ -32,9 +32,6 @@ public:
 
 protected:
     wxPrinterDC(std::unique_ptr<wxDCImpl> impl) : wxDC(std::move(impl)) { }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrinterDC);
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

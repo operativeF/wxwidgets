@@ -567,8 +567,6 @@ WXHWND wxGUIAppTraits::GetMainHWND() const
 // wxWin macros
 // ---------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxApp, wxEvtHandler);
-
 wxBEGIN_EVENT_TABLE(wxApp, wxEvtHandler)
     EVT_IDLE(wxApp::OnIdle)
     EVT_END_SESSION(wxApp::OnEndSession)

@@ -439,8 +439,6 @@ void wxHeaderCtrlSimple::OnHeaderResizing(wxHeaderCtrlEvent& evt)
 // wxHeaderCtrlEvent implementation
 // ============================================================================
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxHeaderCtrlEvent, wxNotifyEvent);
-
 wxDEFINE_EVENT( wxEVT_HEADER_CLICK, wxHeaderCtrlEvent);
 wxDEFINE_EVENT( wxEVT_HEADER_RIGHT_CLICK, wxHeaderCtrlEvent);
 wxDEFINE_EVENT( wxEVT_HEADER_MIDDLE_CLICK, wxHeaderCtrlEvent);

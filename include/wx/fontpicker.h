@@ -174,8 +174,6 @@ private:
 
     wxFontPickerWidget* GetPickerWidget() const
         { return dynamic_cast<wxFontPickerWidget*>(m_picker); }
-
-    wxDECLARE_DYNAMIC_CLASS(wxFontPickerCtrl);
 };
 
 
@@ -206,11 +204,6 @@ public:
 
 private:
     wxFont m_font;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

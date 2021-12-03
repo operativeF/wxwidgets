@@ -37,8 +37,6 @@ import <array>;
 // wxBMPHandler
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxBMPHandler,wxImageHandler);
-
 #if wxUSE_STREAMS
 
 #ifndef BI_RGB

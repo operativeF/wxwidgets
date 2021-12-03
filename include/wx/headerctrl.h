@@ -442,11 +442,6 @@ private:
 
     // the new column position for end reorder event
     unsigned int m_order;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 

@@ -29,8 +29,6 @@ import WX.Image;
 
 import WX.WinDef;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxIconBundle, wxGDIObject);
-
 #define M_ICONBUNDLEDATA static_cast<wxIconBundleRefData*>(m_refData)
 
 // ----------------------------------------------------------------------------

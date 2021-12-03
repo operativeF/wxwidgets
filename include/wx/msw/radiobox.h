@@ -152,8 +152,6 @@ private:
 
     // currently selected button or wxNOT_FOUND if none
     int m_selectedButton {wxNOT_FOUND};
-
-    wxDECLARE_DYNAMIC_CLASS(wxRadioBox);
 };
 
 #endif

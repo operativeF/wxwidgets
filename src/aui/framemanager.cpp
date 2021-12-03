@@ -2791,7 +2791,7 @@ bool wxAuiManager::ProcessDockResult(wxAuiPaneInfo& target,
         // Should this RTTI and function call be rewritten as
         // sending a new event type to allow other window types
         // to vary size based on dock location?
-        wxAuiToolBar* toolbar = wxDynamicCast(target.window, wxAuiToolBar);
+        wxAuiToolBar* toolbar = dynamic_cast<wxAuiToolBar*>(target.window);
         if (toolbar)
         {
             wxSize hintSize = toolbar->GetHintSize(target.dock_direction);

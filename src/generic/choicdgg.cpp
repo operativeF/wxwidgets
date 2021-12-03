@@ -193,8 +193,6 @@ wxBEGIN_EVENT_TABLE(wxSingleChoiceDialog, wxDialog)
     EVT_LISTBOX_DCLICK(wxID_LISTBOX, wxSingleChoiceDialog::OnListBoxDClick)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSingleChoiceDialog, wxDialog);
-
 bool wxSingleChoiceDialog::Create( wxWindow *parent,
                                    const std::string& message,
                                    const std::string& caption,
@@ -253,8 +251,6 @@ void wxSingleChoiceDialog::DoChoice()
 // ----------------------------------------------------------------------------
 // wxMultiChoiceDialog
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxMultiChoiceDialog, wxDialog);
 
 bool wxMultiChoiceDialog::Create( wxWindow *parent,
                                   const std::string& message,

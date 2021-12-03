@@ -693,8 +693,6 @@ private:
     // if successful
     bool DoSave(wxImageHandler& handler, wxOutputStream& stream) const;
 #endif // wxUSE_STREAMS
-
-    wxDECLARE_DYNAMIC_CLASS(wxImage);
 };
 
 WX_DECLARE_OBJARRAY(wxImage, wxImageArray);

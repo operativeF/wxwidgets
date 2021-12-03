@@ -46,8 +46,6 @@ public:
 protected:
     bool DoCanRead(wxInputStream& stream) override;
 #endif // wxUSE_STREAMS
-
-    wxDECLARE_DYNAMIC_CLASS(wxTGAHandler);
 };
 
 } // export

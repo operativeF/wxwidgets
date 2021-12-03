@@ -21,7 +21,6 @@ class wxJoystickThread;
 
 class wxJoystick: public wxObject
 {
-  wxDECLARE_DYNAMIC_CLASS(wxJoystick);
 public:
   explicit wxJoystick(int joystick = wxJOYSTICK1);
   ~wxJoystick();

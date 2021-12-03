@@ -68,8 +68,6 @@ private:
     // treatment) was called
     bool m_bMovedWindow{false};
     unsigned int m_centreDir{};        // nothing to do if 0
-
-    wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 };
 
 #endif // _WX_FILEDLG_H_

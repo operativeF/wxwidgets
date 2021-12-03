@@ -55,8 +55,6 @@ std::string GetFSWEventChangeTypeName(int type)
 
 } // namespace anonymous
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemWatcherEvent, wxEvent);
-
 std::string wxFileSystemWatcherEvent::ToString() const
 {
     if (IsError())

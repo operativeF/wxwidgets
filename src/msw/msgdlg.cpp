@@ -40,8 +40,6 @@ import WX.WinDef;
 
 using namespace wxMSWMessageDialog;
 
-wxIMPLEMENT_CLASS(wxMessageDialog, wxDialog);
-
 // there can potentially be one message box per thread so we use a hash map
 // with thread ids as keys and (currently shown) message boxes as values
 //

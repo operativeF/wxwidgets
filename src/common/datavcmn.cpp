@@ -649,15 +649,11 @@ unsigned int wxDataViewVirtualListModel::GetChildren( [[maybe_unused]] const wxD
 // wxDataViewIconText
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewIconText,wxObject);
-
 IMPLEMENT_VARIANT_OBJECT(wxDataViewIconText, )
 
 // ---------------------------------------------------------
 // wxDataViewRendererBase
 // ---------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewRendererBase, wxObject);
 
 wxDataViewRendererBase::wxDataViewRendererBase( const std::string &varianttype,
                                                 [[maybe_unused]] wxDataViewCellMode mode,
@@ -1619,8 +1615,6 @@ wxDataViewCtrlBase::InsertColumn( [[maybe_unused]] unsigned int pos, wxDataViewC
 // wxDataViewEvent
 // ---------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewEvent,wxNotifyEvent);
-
 wxDEFINE_EVENT( wxEVT_DATAVIEW_SELECTION_CHANGED, wxDataViewEvent );
 
 wxDEFINE_EVENT( wxEVT_DATAVIEW_ITEM_ACTIVATED, wxDataViewEvent );
@@ -2298,8 +2292,6 @@ bool wxDataViewListStore::SetValueByRow( const wxVariant &value, unsigned int ro
 // wxDataViewListCtrl
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewListCtrl,wxDataViewCtrl);
-
 wxBEGIN_EVENT_TABLE(wxDataViewListCtrl,wxDataViewCtrl)
    EVT_SIZE( wxDataViewListCtrl::OnSize )
 wxEND_EVENT_TABLE()
@@ -2846,8 +2838,6 @@ wxDataViewTreeStoreContainerNode *wxDataViewTreeStore::FindContainerNode( const 
 //-----------------------------------------------------------------------------
 // wxDataViewTreeCtrl
 //-----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewTreeCtrl,wxDataViewCtrl);
 
 wxBEGIN_EVENT_TABLE(wxDataViewTreeCtrl,wxDataViewCtrl)
    EVT_DATAVIEW_ITEM_EXPANDED(-1, wxDataViewTreeCtrl::OnExpanded)

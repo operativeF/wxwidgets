@@ -183,8 +183,6 @@ private:
     wxGBPosition    m_pos;
     wxGBSpan        m_span;
     wxGridBagSizer* m_gbsizer{nullptr};  // so SetPos/SetSpan can check for intersects
-
-    wxDECLARE_DYNAMIC_CLASS(wxGBSizerItem);
 };
 
 
@@ -319,9 +317,6 @@ protected:
     void AdjustForOverflow();
 
     wxSize m_emptyCellSize;
-
-private:
-    wxDECLARE_CLASS(wxGridBagSizer);
 };
 
 //---------------------------------------------------------------------------

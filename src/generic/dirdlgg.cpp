@@ -39,8 +39,6 @@ constexpr int ID_GO_HOME = 1006;
 // wxGenericDirDialog
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericDirDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxGenericDirDialog, wxDialog)
     EVT_CLOSE                (wxGenericDirDialog::OnCloseWindow)
     EVT_BUTTON               (wxID_OK,        wxGenericDirDialog::OnOK)

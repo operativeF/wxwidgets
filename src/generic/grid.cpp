@@ -124,8 +124,6 @@ wxGrid::CellSpan GetCellSpan(int numRows, int numCols)
 
 } // anonymous namespace
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxGridCellEditorEvtHandler, wxEvtHandler);
-
 wxBEGIN_EVENT_TABLE( wxGridCellEditorEvtHandler, wxEvtHandler )
     EVT_KILL_FOCUS( wxGridCellEditorEvtHandler::OnKillFocus )
     EVT_KEY_DOWN( wxGridCellEditorEvtHandler::OnKeyDown )
@@ -10937,11 +10935,6 @@ void wxGrid::SetDropTarget(std::unique_ptr<wxDropTarget> dropTarget)
 // ----------------------------------------------------------------------------
 // grid event classes
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGridEvent, wxNotifyEvent);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGridSizeEvent, wxNotifyEvent);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGridRangeSelectEvent, wxNotifyEvent);
-wxIMPLEMENT_DYNAMIC_CLASS(wxGridEditorCreatedEvent, wxCommandEvent);
 
 wxGridEditorCreatedEvent::wxGridEditorCreatedEvent(int id, wxEventType type,
                                                    wxObject* obj, int row,
