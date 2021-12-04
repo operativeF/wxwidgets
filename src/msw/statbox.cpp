@@ -10,6 +10,8 @@
 
 #if wxUSE_STATBOX
 
+#include <windowsx.h>
+
 #include "wx/statbox.h"
 
 #include "wx/msw/private.h"
@@ -27,8 +29,6 @@
 #include "wx/msw/private/winstyle.h"
 
 #include <boost/nowide/convert.hpp>
-
-#include <windowsx.h>
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;

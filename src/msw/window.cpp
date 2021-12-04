@@ -8,8 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include <windowsx.h>
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
 #include "wx/window.h"

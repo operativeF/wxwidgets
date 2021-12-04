@@ -10,6 +10,8 @@
 
 #if wxUSE_TREECTRL
 
+#include <windowsx.h>
+
 #include "wx/treectrl.h"
 
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
@@ -27,8 +29,6 @@
 #include "wx/msw/uxtheme.h"
 
 #include <boost/nowide/stackstring.hpp>
-
-#include <windowsx.h>
 
 import WX.WinDef;
 

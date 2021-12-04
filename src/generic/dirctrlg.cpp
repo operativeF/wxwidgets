@@ -11,7 +11,6 @@
 #if wxUSE_DIRDLG || wxUSE_FILEDLG
 
 #ifdef WX_WINDOWS
-#include <windows.h>
 #include "wx/volume.h"
 
 // MinGW has _getdrive() and _chdrive(), Cygwin doesn't.

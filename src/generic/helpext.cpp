@@ -10,10 +10,6 @@
 
 #if wxUSE_HELP
 
-#ifdef __WXMSW__
-#include <windows.h>
-#endif
-
 #include "wx/list.h"
 #include "wx/string.h"
 #include "wx/utils.h"

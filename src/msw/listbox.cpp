@@ -10,6 +10,8 @@
 
 #if wxUSE_LISTBOX
 
+#include <windowsx.h>
+
 #include "wx/listbox.h"
 
 #include "wx/settings.h"
@@ -30,8 +32,6 @@
 #include <gsl/gsl>
 
 #include <memory>
-
-#include <windowsx.h>
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"

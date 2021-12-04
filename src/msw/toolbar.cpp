@@ -10,6 +10,8 @@
 
 #if wxUSE_TOOLBAR && wxUSE_TOOLBAR_NATIVE
 
+#include <windowsx.h>
+
 #include "wx/toolbar.h"
 
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
@@ -39,8 +41,6 @@
 
 #include <boost/nowide/convert.hpp>
 #include <gsl/gsl>
-
-#include <windowsx.h>
 
 import WX.Image;
 import WX.WinDef;
