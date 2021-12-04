@@ -14,7 +14,6 @@
 
 #if wxUSE_TIMER
 
-#include "wx/object.h"
 #include "wx/longlong.h"
 #include "wx/event.h"
 #include "wx/stopwatch.h" // for backwards compatibility

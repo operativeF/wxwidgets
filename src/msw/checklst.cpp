@@ -11,7 +11,6 @@
 #if wxUSE_CHECKLISTBOX && wxUSE_OWNER_DRAWN
 
 #include "wx/checklst.h"
-#include "wx/object.h"
 #include "wx/window.h"
 #include "wx/listbox.h"
 #include "wx/settings.h"

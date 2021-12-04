@@ -14,7 +14,6 @@
 
 #include "wx/clipbrd.h"
 
-#include "wx/object.h"
 #include "wx/event.h"
 #include "wx/app.h"
 #include "wx/bitmap.h"

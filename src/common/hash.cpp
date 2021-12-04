@@ -9,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/hash.h"
-#include "wx/object.h"
 
 wxHashTableBase_Node::wxHashTableBase_Node( long key, void* value,
                                             wxHashTableBase* table )

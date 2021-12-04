@@ -9,6 +9,7 @@
 #include "doctest.h"
 
 #include "wx/accel.h"
+#include "wx/defs.h"
 
 import WX.Test.Prec;
 

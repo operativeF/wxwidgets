@@ -15,8 +15,6 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/object.h"
-
 // X stupidly defines these in X.h
 #ifdef Above
     #undef Above

@@ -9,11 +9,9 @@
 
 module;
 
-#include "wx/object.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/palette.h"
-#include "wx/hash.h"
 #include "wx/wfstream.h"
 
 module WX.Image.PCX;

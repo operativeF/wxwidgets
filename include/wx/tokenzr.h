@@ -11,7 +11,6 @@
 #ifndef _WX_TOKENZRH
 #define _WX_TOKENZRH
 
-#include "wx/object.h"
 #include "wx/string.h"
 
 import <vector>;

@@ -13,7 +13,6 @@ module;
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/kbdstate.h"
-#include "wx/object.h"
 
 export module WX.Grid.Event;
 

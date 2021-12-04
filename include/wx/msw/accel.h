@@ -11,6 +11,8 @@
 #ifndef _WX_ACCEL_H_
 #define _WX_ACCEL_H_
 
+#include "wx/object.h"
+
 import WX.WinDef;
 
 import <span>;

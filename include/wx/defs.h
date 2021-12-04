@@ -1568,7 +1568,6 @@ WX_MSW_DECLARE_HANDLE(RECTPTR);
 
 typedef unsigned long   WXCOLORREF;
 typedef void *          WXRGNDATA;
-typedef struct tagMSG   WXMSG;
 typedef void *          WXHCONV;
 typedef void *          WXHKEY;
 typedef void *          WXHTREEITEM;

@@ -10,7 +10,6 @@
 
 #if wxUSE_WXHTML_HELP
 
-#include "wx/object.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 

@@ -13,7 +13,6 @@
 
 #if wxUSE_PALETTE
 
-#include "wx/object.h"
 #include "wx/gdiobj.h"
 
 // wxPaletteBase

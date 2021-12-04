@@ -17,8 +17,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/object.h"  // base class
-
+#include "wx/object.h"
 #include "wx/windowid.h"
 
 #include <memory>

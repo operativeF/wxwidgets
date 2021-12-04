@@ -11,8 +11,6 @@
 #ifndef _WX_MSW_TOOLTIP_H_
 #define _WX_MSW_TOOLTIP_H_
 
-#include "wx/object.h"
-
 #include <chrono>
 
 import WX.WinDef;

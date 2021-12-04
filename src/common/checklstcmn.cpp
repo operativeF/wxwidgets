@@ -8,18 +8,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_CHECKLISTBOX
 
 #include "wx/checklst.h"
-#include "wx/object.h"
-#include "wx/window.h"
-#include "wx/listbox.h"
-#include "wx/dcmemory.h"
-#include "wx/settings.h"
-#include "wx/log.h"
+
+import <vector>;
 
 std::size_t wxCheckListBoxBase::GetCheckedItemsCount(std::vector<int>& checkedItems)
 {

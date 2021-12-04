@@ -11,7 +11,9 @@
 #ifndef _WX_SYSOPT_H_
 #define _WX_SYSOPT_H_
 
-#include "wx/object.h"
+#include "wx/string.h"
+
+import <string_view>;
 
 // ----------------------------------------------------------------------------
 // Enables an application to influence the wxWidgets implementation
