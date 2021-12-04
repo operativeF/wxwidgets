@@ -149,7 +149,6 @@ protected:
     int             m_sheetInnerBorder{5};
     int             m_selectedPage{};
 
-    wxDECLARE_DYNAMIC_CLASS(wxPropertySheetDialog);
     wxDECLARE_EVENT_TABLE();
 };
 

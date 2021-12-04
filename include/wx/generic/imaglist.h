@@ -64,11 +64,6 @@ private:
     wxSize m_size;
     // Images in the list should have the same scale factor.
     double m_scaleFactor;
-
-public:
-	wxClassInfo *wxGetClassInfo(o() const;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #ifndef wxHAS_NATIVE_IMAGELIST

@@ -27,7 +27,6 @@ import Utils.Geometry;
 
 constexpr int wxSPLASH_TIMER_ID =       9999;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSplashScreen, wxFrame);
 wxBEGIN_EVENT_TABLE(wxSplashScreen, wxFrame)
     EVT_TIMER(wxSPLASH_TIMER_ID, wxSplashScreen::OnNotify)
     EVT_CLOSE(wxSplashScreen::OnCloseWindow)

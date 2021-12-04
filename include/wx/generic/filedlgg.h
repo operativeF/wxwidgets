@@ -155,9 +155,6 @@ public:
                                pos, size)
     {
     }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 };
 
 #endif // wxHAS_GENERIC_FILEDIALOG

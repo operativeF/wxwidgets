@@ -166,7 +166,6 @@ protected:
 
     friend class wxWizardSizer;
 
-    wxDECLARE_DYNAMIC_CLASS(wxWizard);
     wxDECLARE_EVENT_TABLE();
 };
 

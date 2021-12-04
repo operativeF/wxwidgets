@@ -45,8 +45,6 @@ private:
     virtual bool InitFromMonoBitmap(const wxBitmap& bitmap);
 
     wxBitmap m_bitmap;
-
-    wxDECLARE_DYNAMIC_CLASS(wxMask);
 };
 
 #endif // _WX_GENERIC_MASKG_H_

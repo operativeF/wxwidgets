@@ -150,7 +150,6 @@ protected:
 
   wxTabView*   m_tabView{nullptr};
 
-  wxDECLARE_DYNAMIC_CLASS(wxNotebook);
   wxDECLARE_EVENT_TABLE();
 };
 

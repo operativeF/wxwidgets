@@ -243,8 +243,6 @@ private:
 #endif // wxUSE_MENUS
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxSearchCtrl);
-
     wxDECLARE_EVENT_TABLE();
 };
 

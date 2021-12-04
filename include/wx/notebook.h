@@ -85,8 +85,6 @@ private:
     wxString m_text;
     bool m_selected{false};
     int m_imageId{-1};
-
-    wxDECLARE_DYNAMIC_CLASS(wxNotebookPageInfo);
 };
 
 WX_DECLARE_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
@@ -129,17 +127,6 @@ public:
     // sends the event about page change from old to new (or GetSelection() if
     // new is wxNOT_FOUND)
     void SendPageChangedEvent(int nPageOld, int nPageNew = wxNOT_FOUND);
-
-#if wxUSE_EXTENDED_RTTI
-    // XTI accessors
-    virtual void AddPageInfo( wxNotebookPageInfo* info );
-    virtual const wxNotebookPageInfoList& GetPageInfos() const;
-#endif
-
-protected:
-#if wxUSE_EXTENDED_RTTI
-    wxNotebookPageInfoList m_pageInfos;
-#endif
 };
 
 // ----------------------------------------------------------------------------

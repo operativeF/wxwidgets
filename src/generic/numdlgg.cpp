@@ -50,8 +50,6 @@ wxBEGIN_EVENT_TABLE(wxNumberEntryDialog, wxDialog)
     EVT_BUTTON(wxID_CANCEL, wxNumberEntryDialog::OnCancel)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_CLASS(wxNumberEntryDialog, wxDialog);
-
 bool wxNumberEntryDialog::Create(wxWindow *parent,
                                          const std::string& message,
                                          const std::string& prompt,

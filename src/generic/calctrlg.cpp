@@ -31,12 +31,6 @@
 // wxWin macros
 // ----------------------------------------------------------------------------
 
-#ifdef wxHAS_NATIVE_CALENDARCTRL
-
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxGenericCalendarCtrl, wxControl, "wx/calctrl.h");
-
-#endif
-
 wxBEGIN_EVENT_TABLE(wxGenericCalendarCtrl, wxControl)
     EVT_PAINT(wxGenericCalendarCtrl::OnPaint)
 

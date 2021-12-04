@@ -122,9 +122,6 @@ private:
 #if wxUSE_STREAMS
     wxOutputStream *m_outputStream;
 #endif
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPostScriptPrintNativeData);
 };
 
 // ----------------------------------------------------------------------------
@@ -172,7 +169,6 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericPrintDialog);
 };
 
 class wxGenericPrintSetupDialog : public wxDialog

@@ -48,23 +48,6 @@ wxBEGIN_FLAGS( wxPanelStyle )
     wxFLAGS_MEMBER(wxHSCROLL)
 wxEND_FLAGS( wxPanelStyle )
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxPanel, wxWindow, "wx/panel.h");
-
-wxBEGIN_PROPERTIES_TABLE(wxPanel)
-    wxPROPERTY_FLAGS( WindowStyle, wxPanelStyle, long, \
-                      SetWindowStyleFlag, GetWindowStyleFlag, \
-                      wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      "Helpstring", "group") // style
-    // style wxTAB_TRAVERSAL
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxPanel)
-
-wxCONSTRUCTOR_6( wxPanel, wxWindow*, Parent, wxWindowID, Id, \
-                 wxPoint, Position, wxSize, Size, long, WindowStyle, \
-                 wxString, Name)
-
-
 // ============================================================================
 // implementation
 // ============================================================================

@@ -46,8 +46,6 @@ public:
 
 class wxHtmlFilterPlainText : public wxHtmlFilter
 {
-    wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterPlainText);
-
 public:
     bool CanRead(const wxFSFile& file) const override;
     wxString ReadFile(const wxFSFile& file) const override;
@@ -60,11 +58,9 @@ public:
 
 class wxHtmlFilterHTML : public wxHtmlFilter
 {
-    wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterHTML);
-
-    public:
-        bool CanRead(const wxFSFile& file) const override;
-        wxString ReadFile(const wxFSFile& file) const override;
+public:
+    bool CanRead(const wxFSFile& file) const override;
+    wxString ReadFile(const wxFSFile& file) const override;
 };
 
 

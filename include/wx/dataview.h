@@ -788,11 +788,6 @@ private:
     wxDataViewModel        *m_model{nullptr};
     wxDataViewColumn       *m_expander_column{nullptr};
     int m_indent{8};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

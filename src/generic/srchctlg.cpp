@@ -248,12 +248,6 @@ wxBEGIN_EVENT_TABLE(wxSearchCtrl, wxSearchCtrlBase)
     EVT_DPI_CHANGED(wxSearchCtrl::OnDPIChanged)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSearchCtrl, wxSearchCtrlBase);
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxSearchCtrl creation
 // ----------------------------------------------------------------------------

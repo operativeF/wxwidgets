@@ -94,12 +94,5 @@ void wxGenericStaticBitmap::OnPaint([[maybe_unused]] wxPaintEvent& event)
 #endif
 }
 
-// under OSX_cocoa is a define, avoid duplicate info
-#ifndef wxGenericStaticBitmap
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericStaticBitmap, wxStaticBitmapBase);
-
-#endif
-
 #endif // wxUSE_STATBMP
 

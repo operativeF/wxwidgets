@@ -56,26 +56,7 @@ wxFLAGS_MEMBER(wxHL_ALIGN_RIGHT)
 wxFLAGS_MEMBER(wxHL_ALIGN_CENTRE)
 wxEND_FLAGS( wxHyperlinkStyle )
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI( wxHyperlinkCtrl, wxControl, "wx/hyperlink.h");
-
 wxDEFINE_EVENT( wxEVT_HYPERLINK, wxHyperlinkEvent );
-
-wxBEGIN_PROPERTIES_TABLE(wxHyperlinkCtrl)
-wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", \
-           0 /*flags*/, "The link label", "group")
-
-wxPROPERTY( URL, std::string, SetURL, GetURL, "", \
-           0 /*flags*/, "The link URL", "group")
-wxPROPERTY_FLAGS( WindowStyle, wxHyperlinkStyle, long, SetWindowStyleFlag, \
-                 GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/,     \
-                 "The link style", "group") // style
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxHyperlinkCtrl)
-
-wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, std::string, \
-                Label, std::string, URL, wxPoint, Position, wxSize, Size, long, WindowStyle )
-
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrlBase

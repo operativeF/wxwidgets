@@ -75,8 +75,6 @@ private:
 
     wxBitmap m_bitmap;
     ScaleMode m_scaleMode{};
-
-    wxDECLARE_DYNAMIC_CLASS(wxGenericStaticBitmap);
 };
 
 

@@ -41,8 +41,6 @@
 // wxPropertySheetDialog
 //-----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxPropertySheetDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxPropertySheetDialog, wxDialog)
     EVT_IDLE(wxPropertySheetDialog::OnIdle)
 wxEND_EVENT_TABLE()

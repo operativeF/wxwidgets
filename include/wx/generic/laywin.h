@@ -92,12 +92,8 @@ protected:
     wxLayoutOrientation     m_orientation{wxLAYOUT_HORIZONTAL};
     wxLayoutAlignment       m_alignment{wxLAYOUT_TOP};
 
-private:
-    public:
+public:
 	wxQueryLayoutInfoEvent& operator=(const wxQueryLayoutInfoEvent&) = delete;
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxQueryLayoutInfoEventFunction)(wxQueryLayoutInfoEvent&);
@@ -122,6 +118,8 @@ public:
         m_id = id;
     }
 
+    wxCalculateLayoutEvent& operator=(const wxCalculateLayoutEvent&) = delete;
+
     // Read by the app
     void SetFlags(unsigned int flags) { m_flags = flags; }
     unsigned int GetFlags() const { return m_flags; }
@@ -135,13 +133,6 @@ public:
 protected:
     unsigned int            m_flags;
     wxRect                  m_rect;
-
-private:
-    public:
-	wxCalculateLayoutEvent& operator=(const wxCalculateLayoutEvent&) = delete;
-	wxClassInfo *wxGetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxCalculateLayoutEventFunction)(wxCalculateLayoutEvent&);
@@ -202,16 +193,11 @@ public:
     void OnQueryLayoutInfo(wxQueryLayoutInfoEvent& event);
 
 private:
-    
-
     wxLayoutAlignment           m_alignment;
     wxLayoutOrientation         m_orientation;
     wxSize                      m_defaultSize;
 
 public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

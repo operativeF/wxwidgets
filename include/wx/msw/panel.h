@@ -33,10 +33,6 @@ struct wxPanel : public wxPanelBase
     }
 
     wxPanel& operator=(wxPanel&&) = delete;
-
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_PANEL_H_

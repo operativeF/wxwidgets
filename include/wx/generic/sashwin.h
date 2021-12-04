@@ -190,7 +190,6 @@ private:
     bool        m_mouseCaptured{false};
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxSashWindow);
     wxDECLARE_EVENT_TABLE();
 };
 

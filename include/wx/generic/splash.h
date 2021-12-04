@@ -72,7 +72,6 @@ protected:
     std::chrono::milliseconds m_displayTime{};
     wxTimer                 m_timer;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);
     wxDECLARE_EVENT_TABLE();
 };
 

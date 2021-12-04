@@ -107,8 +107,6 @@ private:
     void Init();
 
     wxDECLARE_EVENT_TABLE();
-
-    wxDECLARE_DYNAMIC_CLASS(wxGenericComboCtrl);
 };
 
 
@@ -120,7 +118,7 @@ private:
 class wxComboCtrl : public wxGenericComboCtrl
 {
 public:
-    wxComboCtrl() : wxGenericComboCtrl() {}
+    wxComboCtrl() = default;
 
     wxComboCtrl(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -132,15 +130,8 @@ public:
                 const std::string& name = wxComboBoxNameStr)
         : wxGenericComboCtrl()
     {
-        (void)Create(parent, id, value, pos, size, style, validator, name);
+        std::ignore = Create(parent, id, value, pos, size, style, validator, name);
     }
-
-    virtual ~wxComboCtrl() {}
-
-protected:
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxComboCtrl);
 };
 
 #endif // _WX_COMBOCONTROL_H_

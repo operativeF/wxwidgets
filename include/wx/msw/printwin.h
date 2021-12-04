@@ -19,8 +19,6 @@
 
 class wxWindowsPrinter : public wxPrinterBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxWindowsPrinter);
-
 public:
     wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 

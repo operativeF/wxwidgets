@@ -19,8 +19,6 @@ import <string>;
 
 class wxWinHelpController: public wxHelpControllerBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxWinHelpController);
-
 public:
     explicit wxWinHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) {}
 

@@ -42,11 +42,6 @@ public:
 #if wxUSE_ACCESSIBILITY
     std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 
@@ -93,11 +88,6 @@ private:
 #if wxUSE_MARKUP
     class wxItemMarkupText *m_markupText;
 #endif // wxUSE_MARKUP
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -128,11 +118,6 @@ public:
 private:
     wxIcon m_icon;
     wxBitmap m_bitmap;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -171,11 +156,6 @@ public:
 private:
     bool    m_toggle;
     bool    m_radio;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -207,11 +187,6 @@ public:
 private:
     std::string m_label;
     int         m_value;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -246,11 +221,6 @@ public:
 
 private:
     wxDataViewIconText   m_value;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_DVRENDERERS_H_

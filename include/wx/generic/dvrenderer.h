@@ -72,11 +72,6 @@ private:
     wxDataViewCellMode           m_mode;
 
     wxEllipsizeMode m_ellipsizeMode;
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_DVRENDERER_H_

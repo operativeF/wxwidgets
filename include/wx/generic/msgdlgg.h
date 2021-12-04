@@ -51,7 +51,6 @@ private:
     bool m_created{false};
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericMessageDialog);
 };
 
 #endif // _WX_GENERIC_MSGDLGG_H_

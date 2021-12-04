@@ -117,8 +117,6 @@ private:
     HelpControllerType m_helpControllerType{HelpControllerType::None};
     std::unique_ptr<wxHelpControllerBase> m_helpController{};
     unsigned int m_style;
-
-    wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);
 };
 
 #endif // wxUSE_HELP && wxUSE_MS_HTML_HELP && wxUSE_WXHTML_HELP

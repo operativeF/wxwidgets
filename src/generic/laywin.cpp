@@ -15,20 +15,15 @@
 #include "wx/laywin.h"
 #include "wx/mdi.h"
 
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxQueryLayoutInfoEvent, wxEvent);
-wxIMPLEMENT_DYNAMIC_CLASS(wxCalculateLayoutEvent, wxEvent);
-
 wxDEFINE_EVENT( wxEVT_QUERY_LAYOUT_INFO, wxQueryLayoutInfoEvent );
 wxDEFINE_EVENT( wxEVT_CALCULATE_LAYOUT, wxCalculateLayoutEvent );
-
 
 // ----------------------------------------------------------------------------
 // wxSashLayoutWindow
 // ----------------------------------------------------------------------------
 
 #if wxUSE_SASH
-wxIMPLEMENT_CLASS(wxSashLayoutWindow, wxSashWindow);
+
 wxBEGIN_EVENT_TABLE(wxSashLayoutWindow, wxSashWindow)
     EVT_CALCULATE_LAYOUT(wxSashLayoutWindow::OnCalculateLayout)
     EVT_QUERY_LAYOUT_INFO(wxSashLayoutWindow::OnQueryLayoutInfo)

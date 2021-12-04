@@ -77,8 +77,6 @@ protected:
 
 private:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-
-    wxDECLARE_DYNAMIC_CLASS( wxHyperlinkCtrl );
 };
 
 #endif // _WX_MSW_HYPERLINK_H_

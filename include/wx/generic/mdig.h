@@ -127,7 +127,6 @@ private:
     wxMDIChildFrameBase *m_childHandler;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericMDIParentFrame);
 };
 
 // ----------------------------------------------------------------------------
@@ -206,7 +205,6 @@ private:
 #endif // wxUSE_MENUS
     void OnClose(wxCloseEvent& event);
 
-    wxDECLARE_DYNAMIC_CLASS(wxGenericMDIChildFrame);
     wxDECLARE_EVENT_TABLE();
 
     friend class wxGenericMDIClientWindow;
@@ -246,8 +244,6 @@ private:
 
     // the notebook containing all MDI children as its pages
     wxNotebook *m_notebook;
-
-    wxDECLARE_DYNAMIC_CLASS(wxGenericMDIClientWindow);
 };
 
 // ----------------------------------------------------------------------------

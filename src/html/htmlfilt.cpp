@@ -73,31 +73,21 @@ wxString wxHtmlFilterPlainText::ReadFile(const wxFSFile& file) const
 
 class wxHtmlFilterImage : public wxHtmlFilter
 {
-    wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterImage);
-
-    public:
-        bool CanRead(const wxFSFile& file) const override;
-        wxString ReadFile(const wxFSFile& file) const override;
+public:
+    bool CanRead(const wxFSFile& file) const override;
+    wxString ReadFile(const wxFSFile& file) const override;
 };
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlFilterImage, wxHtmlFilter);
-
-
 
 bool wxHtmlFilterImage::CanRead(const wxFSFile& file) const
 {
     return (file.GetMimeType().Left(6) == "image/");
 }
 
-
-
 wxString wxHtmlFilterImage::ReadFile(const wxFSFile& file) const
 {
     wxString res = "<HTML><BODY><IMG SRC=\"" + file.GetLocation() + "\"></BODY></HTML>";
     return res;
 }
-
-
 
 
 //--------------------------------------------------------------------------------

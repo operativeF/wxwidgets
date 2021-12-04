@@ -348,7 +348,6 @@ bool wxPGSpinCtrlEditor::OnEvent(wxPropertyGrid* propgrid, wxPGProperty* propert
 
 class wxPGDatePickerCtrlEditor : public wxPGEditor
 {
-    wxDECLARE_DYNAMIC_CLASS(wxPGDatePickerCtrlEditor);
 public:
     ~wxPGDatePickerCtrlEditor();
 

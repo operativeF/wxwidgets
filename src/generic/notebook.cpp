@@ -57,7 +57,6 @@ WX_DECLARE_HASH_MAP(wxNotebookPage*, int, wxPointerHash, wxPointerEqual,
 // This reuses wxTabView to draw the tabs.
 class wxNotebookTabView: public wxTabView
 {
-    wxDECLARE_DYNAMIC_CLASS(wxNotebookTabView);
 public:
     wxNotebookTabView(wxNotebook* notebook, unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
     virtual ~wxNotebookTabView(void);

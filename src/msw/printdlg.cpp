@@ -673,8 +673,6 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
 // wxPrintDialog
 // ---------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxWindowsPrintDialog, wxPrintDialogBase);
-
 wxWindowsPrintDialog::wxWindowsPrintDialog(wxWindow *p, wxPrintDialogData* data)
 {
     Create(p, data);

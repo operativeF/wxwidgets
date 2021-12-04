@@ -110,10 +110,6 @@ using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
         }
 
         wxDatePickerCtrl& operator=(wxDatePickerCtrl&&) = delete;
-
-        wxClassInfo *wxGetClassInfo() const;
-        static wxClassInfo ms_classInfo;
-        static wxObject* wxCreateObject();
     };
 #endif
 

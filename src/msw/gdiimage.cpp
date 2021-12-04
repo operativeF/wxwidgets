@@ -81,9 +81,6 @@ public:
     bool LoadFile(wxBitmap *bitmap,
                           const std::string& name, wxBitmapType flags,
                           wxSize desiredSz) override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxBMPResourceHandler);
 };
 
 class wxIconHandler : public wxGDIImageHandler

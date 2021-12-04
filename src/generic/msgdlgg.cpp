@@ -69,8 +69,6 @@ wxBEGIN_EVENT_TABLE(wxGenericMessageDialog, wxDialog)
         EVT_BUTTON(wxID_CANCEL, wxGenericMessageDialog::OnCancel)
 wxEND_EVENT_TABLE()
 
-wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
-
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
                                                 std::string_view message,
                                                 std::string_view caption,

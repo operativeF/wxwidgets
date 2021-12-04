@@ -76,38 +76,6 @@ wxENUM_MEMBER( wxFONTWEIGHT_HEAVY )
 wxENUM_MEMBER( wxFONTWEIGHT_EXTRAHEAVY )
 wxEND_ENUM( wxFontWeight )
 
-wxIMPLEMENT_DYNAMIC_CLASS_WITH_COPY_XTI(wxFont, wxGDIObject, "wx/font.h");
-
-//WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxFont>)
-
-wxBEGIN_PROPERTIES_TABLE(wxFont)
-wxPROPERTY( Size,int, SetPointSize, GetPointSize, 12, 0 /*flags*/, \
-           "Helpstring", "group")
-wxPROPERTY( Family, wxFontFamily , SetFamily, GetFamily, (wxFontFamily)wxDEFAULT, \
-           0 /*flags*/, "Helpstring", "group") // wxFontFamily
-wxPROPERTY( Style, wxFontStyle, SetStyle, GetStyle, wxFontStyle::Normal, 0 /*flags*/, \
-           "Helpstring", "group") // wxFontStyle
-wxPROPERTY( Weight, wxFontWeight, SetWeight, GetWeight, wxFONTWEIGHT_NORMAL, 0 /*flags*/, \
-           "Helpstring", "group") // wxFontWeight
-wxPROPERTY( Underlined, bool, SetUnderlined, GetUnderlined, false, 0 /*flags*/, \
-           "Helpstring", "group")
-wxPROPERTY( Strikethrough, bool, SetStrikethrough, GetStrikethrough, false, 0, \
-                   "Helpstring", "group")
-wxPROPERTY( Face, std::string, SetFaceName, GetFaceName, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, "Helpstring", "group")
-wxPROPERTY( Encoding, wxFontEncoding, SetEncoding, GetEncoding, \
-           wxFONTENCODING_DEFAULT, 0 /*flags*/, "Helpstring", "group")
-wxEND_PROPERTIES_TABLE()
-
-wxCONSTRUCTOR_6( wxFont, int, Size, wxFontFamily, Family, wxFontStyle, Style, wxFontWeight, Weight, \
-                bool, Underlined, std::string, Face )
-
-wxEMPTY_HANDLERS_TABLE(wxFont)
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxFontBase
 // ----------------------------------------------------------------------------

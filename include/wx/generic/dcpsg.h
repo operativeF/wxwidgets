@@ -31,9 +31,6 @@ public:
 
     // Recommended constructor
     wxPostScriptDC(const wxPrintData& printData);
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPostScriptDC);
 };
 
 class wxPostScriptDCImpl : public wxDCImpl
@@ -155,9 +152,6 @@ protected:
     double            m_pageHeight{842 * PS2DEV};
     std::vector<wxString>     m_definedPSFonts;
     bool              m_isFontChanged;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPostScriptDCImpl);
 };
 
 #endif

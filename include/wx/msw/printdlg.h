@@ -45,9 +45,6 @@ private:
     void* m_devNames{nullptr};
 
     short m_customWindowsPaperId{0};
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxWindowsPrintNativeData);
 };
 
 // ---------------------------------------------------------------------------
@@ -83,8 +80,6 @@ private:
 
     bool ConvertToNative( wxPrintDialogData &data );
     bool ConvertFromNative( wxPrintDialogData &data );
-
-    wxDECLARE_CLASS(wxWindowsPrintDialog);
 };
 
 // ---------------------------------------------------------------------------

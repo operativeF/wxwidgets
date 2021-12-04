@@ -72,7 +72,6 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxNumberEntryDialog);
 };
 
 // ----------------------------------------------------------------------------

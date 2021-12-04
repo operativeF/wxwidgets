@@ -335,8 +335,6 @@ protected:
 
 private:
     int m_base{10};
-
-    wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
 };
 
 #endif // wxHAS_NATIVE_SPINCTRL
@@ -410,9 +408,6 @@ protected:
     void DetermineDigits(double inc);
 
     unsigned m_digits{0};
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDouble);
 };
 
 #endif // _WX_GENERIC_SPINCTRL_H_

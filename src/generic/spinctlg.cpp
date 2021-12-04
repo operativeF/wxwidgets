@@ -705,8 +705,6 @@ void wxSpinCtrl::ResetTextValidator()
 
 constexpr int SPINCTRLDBL_MAX_DIGITS = 20;
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlDouble, wxSpinCtrlGenericBase);
-
 void wxSpinCtrlDouble::DoSendEvent()
 {
     wxSpinDoubleEvent event( wxEVT_SPINCTRLDOUBLE, GetId());
