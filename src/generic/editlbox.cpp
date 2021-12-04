@@ -72,8 +72,6 @@ wxEND_EVENT_TABLE()
 // wxEditableListBox
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxEditableListBox, wxPanel);
-
 // NB: generate the IDs at runtime to avoid conflict with XRCID values,
 //     they could cause XRCCTRL() failures in XRC-based dialogs
 const wxWindowIDRef wxID_ELB_DELETE = wxWindow::NewControlId();

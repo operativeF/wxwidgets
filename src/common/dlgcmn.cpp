@@ -559,14 +559,6 @@ wxDialogLayoutAdapter* wxDialogBase::SetLayoutAdapter(wxDialogLayoutAdapter* ada
     return oldLayoutAdapter;
 }
 
-/*!
- * Standard adapter
- */
-
-wxIMPLEMENT_CLASS(wxDialogLayoutAdapter, wxObject);
-
-wxIMPLEMENT_CLASS(wxStandardDialogLayoutAdapter, wxDialogLayoutAdapter);
-
 // Allow for caption size on wxWidgets < 2.9
 #if defined(__WXGTK__) && !wxCHECK_VERSION(2,9,0)
 #define wxEXTRA_DIALOG_HEIGHT 30

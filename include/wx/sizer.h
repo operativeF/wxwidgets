@@ -521,9 +521,6 @@ protected:
     float        m_ratio;
     
     ItemKind m_kind{ItemKind::None};
-
-private:
-    wxDECLARE_CLASS(wxSizerItem);
 };
 
 WX_DECLARE_LIST( wxSizerItem, wxSizerItemList );
@@ -781,9 +778,6 @@ protected:
     // insert a new item into m_children at given index and return the item
     // itself
     virtual wxSizerItem* DoInsert(size_t index, wxSizerItem *item);
-
-private:
-    wxDECLARE_CLASS(wxSizer);
 };
 
 //---------------------------------------------------------------------------
@@ -868,9 +862,6 @@ protected:
 
         return int(m_children.GetCount() + m_cols - 1) / m_cols;
     }
-
-private:
-    wxDECLARE_CLASS(wxGridSizer);
 };
 
 //---------------------------------------------------------------------------
@@ -955,9 +946,6 @@ protected:
     // both directions or only one
     int m_flexDirection{wxBOTH};
     wxFlexSizerGrowMode m_growMode{wxFlexSizerGrowMode::Specified};
-
-private:
-    wxDECLARE_CLASS(wxFlexGridSizer);
 };
 
 //---------------------------------------------------------------------------
@@ -1047,9 +1035,6 @@ protected:
 
     // the sum of proportion of all of our elements
     int m_totalProportion;
-
-private:
-    wxDECLARE_CLASS(wxBoxSizer);
 };
 
 //---------------------------------------------------------------------------
@@ -1085,9 +1070,6 @@ public:
 
 protected:
     wxStaticBox   *m_staticBox;
-
-private:
-    wxDECLARE_CLASS(wxStaticBoxSizer);
 };
 
 #endif // wxUSE_STATBOX
@@ -1138,9 +1120,6 @@ protected:
     wxButton *m_buttonNegative;     // wxID_NO
     wxButton *m_buttonCancel;       // wxID_CANCEL, wxID_CLOSE
     wxButton *m_buttonHelp;         // wxID_HELP, wxID_CONTEXT_HELP
-
-private:
-    wxDECLARE_CLASS(wxStdDialogButtonSizer);
 };
 
 #endif // wxUSE_BUTTON

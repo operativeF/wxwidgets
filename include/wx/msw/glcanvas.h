@@ -37,9 +37,6 @@ public:
 
 protected:
     unique_glrc m_glContext;
-
-private:
-    wxDECLARE_CLASS(wxGLContext);
 };
 
 // ----------------------------------------------------------------------------
@@ -136,7 +133,6 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_CLASS(wxGLCanvas);
 };
 
 #endif // _WX_GLCANVAS_H_

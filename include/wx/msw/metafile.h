@@ -98,9 +98,6 @@ protected:
 
     int           m_windowsMappingMode;
     wxMetafile*   m_metaFile;
-
-private:
-    wxDECLARE_CLASS(wxMetafileDCImpl);
 };
 
 class wxMetafileDC: public wxDC
@@ -125,9 +122,6 @@ public:
 
     wxMetafile *Close()
        { return ((wxMetafileDCImpl*)m_pimpl.get())->Close(); }
-
-private:
-    wxDECLARE_CLASS(wxMetafileDC);
 };
 
 

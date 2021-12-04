@@ -287,7 +287,6 @@ private:
 
 class wxDialogLayoutAdapter
 {
-    wxDECLARE_CLASS(wxDialogLayoutAdapter);
 public:
     virtual ~wxDialogLayoutAdapter() = default;
 
@@ -305,7 +304,6 @@ public:
 
 class wxStandardDialogLayoutAdapter: public wxDialogLayoutAdapter
 {
-    wxDECLARE_CLASS(wxStandardDialogLayoutAdapter);
 public:
     // Indicate that adaptation should be done
     bool CanDoLayoutAdaptation(wxDialog* dialog) override;

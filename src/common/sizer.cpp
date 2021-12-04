@@ -29,18 +29,6 @@ import <vector>;
 
 //---------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxSizerItem, wxObject);
-wxIMPLEMENT_CLASS(wxSizer, wxObject);
-wxIMPLEMENT_CLASS(wxGridSizer, wxSizer);
-wxIMPLEMENT_CLASS(wxFlexGridSizer, wxGridSizer);
-wxIMPLEMENT_CLASS(wxBoxSizer, wxSizer);
-#if wxUSE_STATBOX
-wxIMPLEMENT_CLASS(wxStaticBoxSizer, wxBoxSizer);
-#endif
-#if wxUSE_BUTTON
-wxIMPLEMENT_CLASS(wxStdDialogButtonSizer, wxBoxSizer);
-#endif
-
 WX_DEFINE_LIST( wxSizerItemList )
 
 /*
