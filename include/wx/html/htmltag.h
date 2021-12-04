@@ -11,8 +11,6 @@
 
 #if wxUSE_HTML
 
-#include "wx/object.h"
-
 class wxColour;
 class wxHtmlEntitiesParser;
 

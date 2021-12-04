@@ -10,7 +10,6 @@
 #ifndef __GENERICDATAVIEWCTRLH__
 #define __GENERICDATAVIEWCTRLH__
 
-#include "wx/object.h"
 #include "wx/control.h"
 #include "wx/scrolwin.h"
 #include "wx/icon.h"

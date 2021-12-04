@@ -11,8 +11,6 @@
 #ifndef _WX_GENERIC_COLOUR_H_
 #define _WX_GENERIC_COLOUR_H_
 
-#include "wx/object.h"
-
 // Colour
 class wxColour: public wxColourBase
 {

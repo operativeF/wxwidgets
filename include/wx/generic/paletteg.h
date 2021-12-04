@@ -11,7 +11,6 @@
 #ifndef __WX_PALETTEG_H__
 #define __WX_PALETTEG_H__
 
-#include "wx/object.h"
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
 
