@@ -1,14 +1,10 @@
 module;
 
-#include <boost/tmp/algorithm/find_if.hpp>
-#include <boost/tmp/algorithm/contains.hpp>
-#include <boost/tmp/algorithm/range_math.hpp>
-#include <boost/tmp/sequence/take.hpp>
-#include <boost/tmp/sequence/unpack.hpp>
-#include <boost/tmp/vocabulary.hpp>
-
 export module Utils.Bitfield;
 
+import Boost.TMP;
+
+import <compare>;
 import <concepts>;
 
 template<typename Enum>

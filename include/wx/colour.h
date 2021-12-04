@@ -15,9 +15,10 @@
 #include "wx/colorspace.h"
 #include "wx/string.h"
 
-#include <boost/tmp.hpp>
 #include <fmt/core.h>
 #include <fmt/format.h>
+
+import Boost.TMP;
 
 import Utils.Strings;
 import Utils.Chars;

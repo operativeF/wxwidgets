@@ -340,7 +340,7 @@ target_link_libraries(wxbase
         stdlibcore
         Boost::nowide
         Microsoft.GSL::GSL
-
+        boost_tmp
     # Windows libraries
         opengl32
         kernel32

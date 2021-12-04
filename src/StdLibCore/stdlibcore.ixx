@@ -10,6 +10,7 @@ import <charconv>;
 import <climits>;
 import <clocale>;
 import <cmath>;
+import <compare>;
 import <concepts>;
 import <cstdarg>;
 import <cstddef>;
