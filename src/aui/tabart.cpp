@@ -764,10 +764,10 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
 {
     wxMenu menuPopup;
 
-    size_t count = pages.GetCount();
+    size_t count = pages.size();
     for (size_t i = 0; i < count; ++i)
     {
-        const wxAuiNotebookPage& page = pages.Item(i);
+        const wxAuiNotebookPage& page = pages[i];
 
         // Preserve ampersands possibly present in the caption string by
         // escaping them before passing the caption to wxMenuItem.
@@ -822,10 +822,10 @@ int wxAuiGenericTabArt::GetBestTabCtrlSize(wxWindow* wnd,
 
 
     int max_y = 0;
-    size_t page_count = pages.GetCount();
+    size_t page_count = pages.size();
     for (size_t i = 0; i < page_count; ++i)
     {
-        wxAuiNotebookPage& page = pages.Item(i);
+        const wxAuiNotebookPage& page = pages[i];
 
         wxBitmap bmp;
         if (measureBmp.IsOk())
@@ -1279,10 +1279,10 @@ int wxAuiSimpleTabArt::ShowDropDown(wxWindow* wnd,
 {
     wxMenu menuPopup;
 
-    size_t count = pages.GetCount();
+    size_t count = pages.size();
     for (size_t i = 0; i < count; ++i)
     {
-        const wxAuiNotebookPage& page = pages.Item(i);
+        const wxAuiNotebookPage& page = pages[i];
         menuPopup.AppendCheckItem(1000+i, page.caption);
     }
 

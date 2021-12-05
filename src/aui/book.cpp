@@ -18,6 +18,7 @@ module;
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/frame.h"
+#include "wx/window.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -149,7 +150,7 @@ void wxAuiTabContainer::SetRect(const wxRect& rect)
 
     if (m_art)
     {
-        m_art->SetSizingInfo(rect.GetSize(), m_pages.GetCount());
+        m_art->SetSizingInfo(rect.GetSize(), m_pages.size());
     }
 }
 
@@ -161,12 +162,12 @@ bool wxAuiTabContainer::AddPage(wxWindow* page,
     page_info.window = page;
     page_info.hover = false;
 
-    m_pages.Add(page_info);
+    m_pages.push_back(page_info);
 
     // let the art provider know how many pages we have
     if (m_art)
     {
-        m_art->SetSizingInfo(m_rect.GetSize(), m_pages.GetCount());
+        m_art->SetSizingInfo(m_rect.GetSize(), m_pages.size());
     }
 
     return true;
@@ -181,15 +182,15 @@ bool wxAuiTabContainer::InsertPage(wxWindow* page,
     page_info.window = page;
     page_info.hover = false;
 
-    if (idx >= m_pages.GetCount())
-        m_pages.Add(page_info);
+    if (idx >= m_pages.size())
+        m_pages.push_back(page_info);
     else
-        m_pages.Insert(page_info, idx);
+        m_pages.insert(m_pages.begin() + idx, page_info);
 
     // let the art provider know how many pages we have
     if (m_art)
     {
-        m_art->SetSizingInfo(m_rect.GetSize(), m_pages.GetCount());
+        m_art->SetSizingInfo(m_rect.GetSize(), m_pages.size());
     }
 
     return true;
@@ -216,18 +217,18 @@ bool wxAuiTabContainer::MovePage(wxWindow* page,
 
 bool wxAuiTabContainer::RemovePage(wxWindow* wnd)
 {
-    size_t i, page_count = m_pages.GetCount();
+    size_t i, page_count = m_pages.size();
     for (i = 0; i < page_count; ++i)
     {
         wxAuiNotebookPage& page = m_pages[i];
         if (page.window == wnd)
         {
-            m_pages.RemoveAt(i);
+            m_pages.erase(m_pages.begin() + i);
 
             // let the art provider know how many pages we have
             if (m_art)
             {
-                m_art->SetSizingInfo(m_rect.GetSize(), m_pages.GetCount());
+                m_art->SetSizingInfo(m_rect.GetSize(), m_pages.size());
             }
 
             return true;
@@ -241,7 +242,7 @@ bool wxAuiTabContainer::SetActivePage(wxWindow* wnd)
 {
     bool found = false;
 
-    size_t i, page_count = m_pages.GetCount();
+    size_t i, page_count = m_pages.size();
     for (i = 0; i < page_count; ++i)
     {
         wxAuiNotebookPage& page = m_pages[i];
@@ -261,7 +262,7 @@ bool wxAuiTabContainer::SetActivePage(wxWindow* wnd)
 
 void wxAuiTabContainer::SetNoneActive()
 {
-    size_t i, page_count = m_pages.GetCount();
+    size_t i, page_count = m_pages.size();
     for (i = 0; i < page_count; ++i)
     {
         wxAuiNotebookPage& page = m_pages[i];
@@ -271,18 +272,18 @@ void wxAuiTabContainer::SetNoneActive()
 
 bool wxAuiTabContainer::SetActivePage(size_t page)
 {
-    if (page >= m_pages.GetCount())
+    if (page >= m_pages.size())
         return false;
 
-    return SetActivePage(m_pages.Item(page).window);
+    return SetActivePage(m_pages[page].window);
 }
 
 int wxAuiTabContainer::GetActivePage() const
 {
-    size_t i, page_count = m_pages.GetCount();
+    size_t i, page_count = m_pages.size();
     for (i = 0; i < page_count; ++i)
     {
-        wxAuiNotebookPage& page = m_pages[i];
+        const wxAuiNotebookPage& page = m_pages[i];
         if (page.active)
             return i;
     }
@@ -292,7 +293,7 @@ int wxAuiTabContainer::GetActivePage() const
 
 wxWindow* wxAuiTabContainer::GetWindowFromIdx(size_t idx) const
 {
-    if (idx >= m_pages.GetCount())
+    if (idx >= m_pages.size())
         return nullptr;
 
     return m_pages[idx].window;
@@ -300,10 +301,10 @@ wxWindow* wxAuiTabContainer::GetWindowFromIdx(size_t idx) const
 
 int wxAuiTabContainer::GetIdxFromWindow(wxWindow* wnd) const
 {
-    const size_t page_count = m_pages.GetCount();
+    const size_t page_count = m_pages.size();
     for ( size_t i = 0; i < page_count; ++i )
     {
-        wxAuiNotebookPage& page = m_pages[i];
+        const wxAuiNotebookPage& page = m_pages[i];
         if (page.window == wnd)
             return i;
     }
@@ -312,14 +313,14 @@ int wxAuiTabContainer::GetIdxFromWindow(wxWindow* wnd) const
 
 wxAuiNotebookPage& wxAuiTabContainer::GetPage(size_t idx)
 {
-    wxASSERT_MSG(idx < m_pages.GetCount(), "Invalid Page index");
+    wxASSERT_MSG(idx < m_pages.size(), "Invalid Page index");
 
     return m_pages[idx];
 }
 
 const wxAuiNotebookPage& wxAuiTabContainer::GetPage(size_t idx) const
 {
-    wxASSERT_MSG(idx < m_pages.GetCount(), "Invalid Page index");
+    wxASSERT_MSG(idx < m_pages.size(), "Invalid Page index");
 
     return m_pages[idx];
 }
@@ -331,7 +332,7 @@ wxAuiNotebookPageArray& wxAuiTabContainer::GetPages()
 
 size_t wxAuiTabContainer::GetPageCount() const
 {
-    return m_pages.GetCount();
+    return m_pages.size();
 }
 
 void wxAuiTabContainer::AddButton(int id,
@@ -397,7 +398,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
     wxBitmap bmp;
     size_t i;
-    size_t page_count = m_pages.GetCount();
+    size_t page_count = m_pages.size();
     size_t button_count = m_buttons.GetCount();
 
     // create off-screen bitmap
@@ -664,9 +665,9 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
 
     // draw the active tab again so it stands in the foreground
-    if (active >= m_tabOffset && active < m_pages.GetCount())
+    if (active >= m_tabOffset && active < m_pages.size())
     {
-        wxAuiNotebookPage& page = m_pages.Item(active);
+        wxAuiNotebookPage& page = m_pages[active];
 
         wxAuiTabContainerButton& tab_button = m_tabCloseButtons.Item(active);
 
@@ -694,7 +695,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
         return false;
 
     size_t i;
-    size_t page_count = m_pages.GetCount();
+    size_t page_count = m_pages.size();
     size_t button_count = m_buttons.GetCount();
 
     // Hasn't been rendered yet; assume it's visible
@@ -807,7 +808,7 @@ void wxAuiTabContainer::MakeTabVisible(int tabPage, wxWindow* win)
     if (!IsTabVisible(tabPage, GetTabOffset(), & dc, win))
     {
         int i;
-        for (i = 0; i < (int) m_pages.GetCount(); i++)
+        for (i = 0; i < (int) m_pages.size(); i++)
         {
             if (IsTabVisible(tabPage, i, & dc, win))
             {
@@ -834,11 +835,11 @@ bool wxAuiTabContainer::TabHitTest(int x, int y, wxWindow** hit) const
             return false;
     }
 
-    size_t i, page_count = m_pages.GetCount();
+    size_t i, page_count = m_pages.size();
 
     for (i = m_tabOffset; i < page_count; ++i)
     {
-        wxAuiNotebookPage& page = m_pages[i];
+        const wxAuiNotebookPage& page = m_pages[i];
         if (page.rect.Contains(x,y))
         {
             if (hit)
@@ -920,7 +921,7 @@ void ShowWnd(wxWindow* wnd, bool show)
 void wxAuiTabContainer::DoShowHide()
 {
     wxAuiNotebookPageArray& pages = GetPages();
-    size_t i, page_count = pages.GetCount();
+    size_t i, page_count = pages.size();
 
     // show new active page first
     for (i = 0; i < page_count; ++i)
@@ -1397,7 +1398,7 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
         return;
     }
 
-    if (m_pages.GetCount() < 2)
+    if (m_pages.size() < 2)
     {
         event.Skip();
         return;
@@ -1419,20 +1420,20 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
 
     if (key == forwardKey)
     {
-        if (m_pages.GetCount() > 1)
+        if (m_pages.size() > 1)
         {
             if (GetActivePage() == -1)
                 newPage = 0;
-            else if (GetActivePage() < (int) (m_pages.GetCount() - 1))
+            else if (GetActivePage() < (int) (m_pages.size() - 1))
                 newPage = GetActivePage() + 1;
         }
     }
     else if (key == backwardKey)
     {
-        if (m_pages.GetCount() > 1)
+        if (m_pages.size() > 1)
         {
             if (GetActivePage() == -1)
-                newPage = (int) (m_pages.GetCount() - 1);
+                newPage = (int) (m_pages.size() - 1);
             else if (GetActivePage() > 0)
                 newPage = GetActivePage() - 1;
         }
@@ -1443,7 +1444,7 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
     }
     else if (key == WXK_END)
     {
-        newPage = (int) (m_pages.GetCount() - 1);
+        newPage = (int) (m_pages.size() - 1);
     }
     else
         event.Skip();
@@ -1535,7 +1536,7 @@ public:
         m_tabs->Update();
 
         wxAuiNotebookPageArray& pages = m_tabs->GetPages();
-        size_t i, page_count = pages.GetCount();
+        size_t i, page_count = pages.size();
 
         for (i = 0; i < page_count; ++i)
         {
@@ -3510,7 +3511,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
         const wxAuiNotebookPageArray &pages = tabframe->m_tabs->GetPages();
 
         wxSize bestPageSize;
-        for ( size_t pIdx = 0; pIdx < pages.GetCount(); pIdx++ )
+        for ( size_t pIdx = 0; pIdx < pages.size(); pIdx++ )
             bestPageSize.IncTo(pages[pIdx].window->GetBestSize());
 
         bestPageSize.y += tabHeight;
@@ -3638,7 +3639,7 @@ void wxAuiTabCtrl::SetHoverTab(wxWindow* wnd)
 {
     bool hoverChanged = false;
 
-    const size_t page_count = m_pages.GetCount();
+    const size_t page_count = m_pages.size();
     for ( size_t i = 0; i < page_count; ++i )
     {
         wxAuiNotebookPage& page = m_pages[i];

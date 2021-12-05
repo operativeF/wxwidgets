@@ -12,6 +12,7 @@ module;
 
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
+#include "wx/window.h"
 
 export module WX.AUI.Book;
 
