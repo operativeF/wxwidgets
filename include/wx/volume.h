@@ -121,7 +121,7 @@ public:
     wxFSVolume()  { InitIcons(); }
     wxFSVolume(const wxString& name) : wxFSVolumeBase(name) { InitIcons(); }
 
-    wxIcon GetIcon(wxFSIconType type) const;
+    wxIcon GetIcon(wxFSIconType type);
 
 private:
     void InitIcons();

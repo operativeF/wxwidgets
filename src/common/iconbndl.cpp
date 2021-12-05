@@ -22,9 +22,6 @@
     #include "wx/private/icondir.h"
 #endif
 
-#include "wx/arrimpl.cpp"
-WX_DEFINE_OBJARRAY(wxIconArray)
-
 import WX.Image;
 
 import WX.WinDef;
@@ -363,7 +360,7 @@ void wxIconBundle::AddIcon(const wxIcon& icon)
     }
 
     // if we don't, add an icon with new size
-    iconArray.Add(icon);
+    iconArray.push_back(icon);
 }
 
 size_t wxIconBundle::GetIconCount() const

@@ -14,15 +14,14 @@
 #include "wx/gdiobj.h"
 #include "wx/icon.h"
 
-#include "wx/dynarray.h"
-
 import Utils.Geometry;
 
 import <string>;
+import <vector>;
 
 class wxInputStream;
 
-WX_DECLARE_OBJARRAY(wxIcon, wxIconArray);
+using wxIconArray = std::vector<wxIcon>;
 
 // Load icons of multiple sizes from files or resources (MSW-only).
 class wxIconBundle : public wxGDIObject

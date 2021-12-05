@@ -17,7 +17,6 @@
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/msw/private.h"
 
-#include "wx/dynarray.h"
 #include "wx/log.h"
 #include "wx/settings.h"
 

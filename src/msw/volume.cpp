@@ -545,10 +545,7 @@ int wxFSVolumeBase::GetFlags() const
 
 void wxFSVolume::InitIcons()
 {
-    m_icons.Alloc(wxFS_VOL_ICO_MAX);
-    wxIcon null;
-    for (int idx = 0; idx < wxFS_VOL_ICO_MAX; idx++)
-        m_icons.Add(null);
+    m_icons.resize(wxFS_VOL_ICO_MAX);
 }
 
 //=============================================================================
@@ -556,9 +553,9 @@ void wxFSVolume::InitIcons()
 // Purpose: return the requested icon.
 //=============================================================================
 
-wxIcon wxFSVolume::GetIcon(wxFSIconType type) const
+wxIcon wxFSVolume::GetIcon(wxFSIconType type)
 {
-    wxCHECK_MSG( type >= 0 && (size_t)type < m_icons.GetCount(), wxNullIcon,
+    wxCHECK_MSG( type >= 0 && (size_t)type < m_icons.size(), wxNullIcon,
                  "wxFSIconType::GetIcon(): invalid icon index" );
 
 #ifdef __WXMSW__
