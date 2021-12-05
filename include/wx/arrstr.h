@@ -12,7 +12,6 @@
 #define _WX_ARRSTR_H
 
 #include "wx/string.h"
-#include "wx/dynarray.h"
 
 import <vector>;
 

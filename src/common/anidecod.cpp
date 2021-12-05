@@ -23,8 +23,6 @@ import WX.Image.Base;
 
 #if wxUSE_STREAMS && wxUSE_ICO_CUR
 
-WX_DEFINE_OBJARRAY(wxANIFrameInfoArray)
-
 using namespace std::chrono_literals;
 
 //---------------------------------------------------------------------------
@@ -211,7 +209,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
     m_szAnimation = wxDefaultSize;
 
     m_images.Clear();
-    m_info.Clear();
+    m_info.clear();
 
     // we have a riff file:
     while ( !stream.Eof() )
@@ -256,7 +254,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             globaldelay = std::chrono::milliseconds{header.JifRate * 1000 / 60};
 
             m_images.Alloc(header.cFrames);
-            m_info.Add(wxANIFrameInfo(), m_nFrames);
+            m_info.resize(m_nFrames);
         }
         else if ( FCC1 == rate32 )
         {
@@ -264,7 +262,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             if (m_nFrames == 0)
                 return false;       // rate chunks should always be placed after anih chunk
 
-            wxASSERT(m_info.GetCount() == m_nFrames);
+            wxASSERT(m_info.size() == m_nFrames);
             for (unsigned int i=0; i<m_nFrames; i++)
             {
                 if (!stream.Read(&FCC2, 4))
@@ -279,7 +277,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             if (m_nFrames == 0)
                 return false;       // seq chunks should always be placed after anih chunk
 
-            wxASSERT(m_info.GetCount() == m_nFrames);
+            wxASSERT(m_info.size() == m_nFrames);
             for (unsigned int i=0; i<m_nFrames; i++)
             {
                 if (!stream.Read(&FCC2, 4))

@@ -15,9 +15,9 @@
 #include "wx/log.h"
 #include "wx/stream.h"
 
-import Utils.Geometry;
-
 #include <chrono>
+
+import Utils.Geometry;
 
 class wxImage;
 

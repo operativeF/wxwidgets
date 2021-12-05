@@ -10,8 +10,6 @@
 
 module;
 
-#include "wx/dynarray.h"
-
 #include "wx/timer.h"
 #include "wx/sizer.h"
 #include "wx/bitmap.h"
@@ -106,14 +104,11 @@ class wxAuiManagerEvent;
 
 struct wxAuiDockUIPart;
 
-#ifndef SWIG
-WX_DECLARE_OBJARRAY(wxAuiDockInfo, wxAuiDockInfoArray);
-WX_DECLARE_OBJARRAY(wxAuiDockUIPart, wxAuiDockUIPartArray);
-WX_DECLARE_OBJARRAY(wxAuiPaneInfo, wxAuiPaneInfoArray);
-
+using wxAuiDockInfoArray    = std::vector<wxAuiDockInfo>;
+using wxAuiDockUIPartArray  = std::vector<wxAuiDockUIPart>;
+using wxAuiPaneInfoArray    = std::vector<wxAuiPaneInfo>;
 using wxAuiPaneInfoPtrArray = std::vector<wxAuiPaneInfo*>;
 using wxAuiDockInfoPtrArray = std::vector<wxAuiDockInfo*>;
-#endif // SWIG
 
 class wxAuiPaneInfo
 {
@@ -655,6 +650,8 @@ struct wxAuiDockUIPart
         typePaneBorder,
         typePaneButton
     };
+
+    bool operator==(const wxAuiDockUIPart&) const = default;
 
     int type{};                       // ui part type (see enum above)
     int orientation{};                // orientation (either wxHORIZONTAL or wxVERTICAL)

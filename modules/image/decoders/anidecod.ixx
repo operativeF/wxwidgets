@@ -9,7 +9,6 @@
 module;
 
 #include "wx/animdecod.h"
-#include "wx/dynarray.h"
 
 #include <chrono>
 
@@ -46,7 +45,7 @@ export
 
 class wxInputStream;
 
-WX_DECLARE_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);
+using wxANIFrameInfoArray = std::vector<wxANIFrameInfo>;
 
 // --------------------------------------------------------------------------
 // wxANIDecoder class
