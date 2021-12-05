@@ -20,8 +20,6 @@ module;
 #include "wx/osx/private.h"
 #endif
 
-#include "wx/arrimpl.cpp"
-
 #include <gsl/gsl>
 
 module WX.AUI.AUIBar;
@@ -211,8 +209,8 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
             item.m_disabledBitmap = item.m_bitmap.ConvertToDisabled();
         }
     }
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddControl(wxControl* control,
@@ -235,8 +233,8 @@ wxAuiToolBarItem* wxAuiToolBar::AddControl(wxControl* control,
     item.m_userData = 0;
     item.m_sticky = false;
 
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddLabel(int tool_id,
@@ -267,8 +265,8 @@ wxAuiToolBarItem* wxAuiToolBar::AddLabel(int tool_id,
     if (item.m_toolId == wxID_ANY)
         item.m_toolId = wxNewId();
 
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddSeparator()
@@ -289,8 +287,8 @@ wxAuiToolBarItem* wxAuiToolBar::AddSeparator()
     item.m_userData = 0;
     item.m_sticky = false;
 
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddSpacer(int pixels)
@@ -312,8 +310,8 @@ wxAuiToolBarItem* wxAuiToolBar::AddSpacer(int pixels)
     item.m_userData = 0;
     item.m_sticky = false;
 
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 wxAuiToolBarItem* wxAuiToolBar::AddStretchSpacer(int proportion)
@@ -335,13 +333,13 @@ wxAuiToolBarItem* wxAuiToolBar::AddStretchSpacer(int proportion)
     item.m_userData = 0;
     item.m_sticky = false;
 
-    m_items.Add(item);
-    return &m_items.Last();
+    m_items.push_back(item);
+    return &m_items.back();
 }
 
 void wxAuiToolBar::Clear()
 {
-    m_items.Clear();
+    m_items.clear();
     m_sizerElementCount = 0;
 }
 
@@ -352,9 +350,9 @@ bool wxAuiToolBar::DeleteTool(int tool_id)
 
 bool wxAuiToolBar::DeleteByIndex(int idx)
 {
-    if (idx >= 0 && idx < (int)m_items.GetCount())
+    if (idx >= 0 && idx < (int)m_items.size())
     {
-        m_items.RemoveAt(idx);
+        m_items.erase(m_items.begin() + idx);
         Realize();
         return true;
     }
@@ -369,7 +367,7 @@ bool wxAuiToolBar::DestroyTool(int tool_id)
 
 bool wxAuiToolBar::DestroyToolByIndex(int idx)
 {
-    if ( idx < 0 || gsl::narrow_cast<unsigned>(idx) >= m_items.GetCount() )
+    if ( idx < 0 || gsl::narrow_cast<unsigned>(idx) >= m_items.size() )
         return false;
 
     if ( wxWindow* window = m_items[idx].GetWindow() )
@@ -384,11 +382,11 @@ wxControl* wxAuiToolBar::FindControl(int id)
     return (wxControl*)wnd;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
+wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id)
 {
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         if (item.m_toolId == tool_id)
             return &item;
     }
@@ -396,11 +394,23 @@ wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
     return nullptr;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
+const wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
 {
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        const wxAuiToolBarItem& item = m_items[i];
+        if (item.m_toolId == tool_id)
+            return &item;
+    }
+
+    return nullptr;
+}
+
+wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y)
+{
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    {
+        wxAuiToolBarItem& item = m_items[i];
 
         if (!item.m_sizerItem)
             continue;
@@ -419,11 +429,11 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
     return nullptr;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord y) const
+wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord y)
 {
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
 
         if (!item.m_sizerItem)
             continue;
@@ -447,7 +457,7 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord
     return nullptr;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindToolByIndex(int idx) const
+wxAuiToolBarItem* wxAuiToolBar::FindToolByIndex(int idx)
 {
     if (idx < 0)
         return nullptr;
@@ -480,7 +490,7 @@ void wxAuiToolBar::SetToolProportion(int tool_id, int proportion)
 
 int wxAuiToolBar::GetToolProportion(int tool_id) const
 {
-    wxAuiToolBarItem* item = FindTool(tool_id);
+    const wxAuiToolBarItem* item = FindTool(tool_id);
     if (!item)
         return 0;
 
@@ -512,7 +522,7 @@ void wxAuiToolBar::SetToolDropDown(int tool_id, bool dropdown)
 
 bool wxAuiToolBar::GetToolDropDown(int tool_id) const
 {
-    wxAuiToolBarItem* item = FindTool(tool_id);
+    const wxAuiToolBarItem* item = FindTool(tool_id);
     if (!item)
         return false;
 
@@ -540,7 +550,7 @@ void wxAuiToolBar::SetToolSticky(int tool_id, bool sticky)
 
 bool wxAuiToolBar::GetToolSticky(int tool_id) const
 {
-    wxAuiToolBarItem* item = FindTool(tool_id);
+    const wxAuiToolBarItem* item = FindTool(tool_id);
     if (!item)
         return false;
 
@@ -656,9 +666,9 @@ void wxAuiToolBar::SetHoverItem(wxAuiToolBarItem* pitem)
 
     wxAuiToolBarItem* former_hover = nullptr;
 
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         if (item.m_state & wxAUI_BUTTON_STATE_HOVER)
             former_hover = &item;
         item.m_state &= ~wxAUI_BUTTON_STATE_HOVER;
@@ -680,9 +690,9 @@ void wxAuiToolBar::SetPressedItem(wxAuiToolBarItem* pitem)
 {
     wxAuiToolBarItem* former_item = nullptr;
 
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         if (item.m_state & wxAUI_BUTTON_STATE_PRESSED)
             former_item = &item;
         item.m_state &= ~wxAUI_BUTTON_STATE_PRESSED;
@@ -747,7 +757,7 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
         {
             int idx, count;
             idx = GetToolIndex(tool_id);
-            count = (int)m_items.GetCount();
+            count = (int)m_items.size();
 
             if (idx >= 0 && idx < count)
             {
@@ -779,7 +789,7 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
 
 bool wxAuiToolBar::GetToolToggled(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
 
     if ( tool && tool->CanBeToggled() )
         return (tool->m_state & wxAUI_BUTTON_STATE_CHECKED) != 0;
@@ -802,7 +812,7 @@ void wxAuiToolBar::EnableTool(int tool_id, bool state)
 
 bool wxAuiToolBar::GetToolEnabled(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
 
     if (tool)
         return (tool->m_state & wxAUI_BUTTON_STATE_DISABLED) == 0;
@@ -812,7 +822,7 @@ bool wxAuiToolBar::GetToolEnabled(int tool_id) const
 
 std::string wxAuiToolBar::GetToolLabel(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
@@ -831,7 +841,7 @@ void wxAuiToolBar::SetToolLabel(int tool_id, const std::string& label)
 
 wxBitmap wxAuiToolBar::GetToolBitmap(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return wxNullBitmap;
@@ -850,7 +860,7 @@ void wxAuiToolBar::SetToolBitmap(int tool_id, const wxBitmap& bitmap)
 
 std::string wxAuiToolBar::GetToolShortHelp(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
@@ -869,7 +879,7 @@ void wxAuiToolBar::SetToolShortHelp(int tool_id, const std::string& help_string)
 
 std::string wxAuiToolBar::GetToolLongHelp(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, "can't find tool in toolbar item array");
     if (!tool)
         return {};
@@ -966,9 +976,9 @@ int wxAuiToolBar::GetToolIndex(int tool_id) const
     if (tool_id == -1)
         return wxNOT_FOUND;
 
-    for (size_t i = 0; i < m_items.GetCount(); ++i)
+    for (size_t i = 0; i < m_items.size(); ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        const wxAuiToolBarItem& item = m_items[i];
         if (item.m_toolId == tool_id)
             return i;
     }
@@ -978,7 +988,7 @@ int wxAuiToolBar::GetToolIndex(int tool_id) const
 
 bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
 {
-    if (tool_idx < 0 || tool_idx >= (int)m_items.GetCount())
+    if (tool_idx < 0 || tool_idx >= (int)m_items.size())
         return false;
 
     if (!m_items[tool_idx].m_sizerItem)
@@ -1017,7 +1027,7 @@ bool wxAuiToolBar::GetToolFits(int tool_id) const
 
 wxRect wxAuiToolBar::GetToolRect(int tool_id) const
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    const wxAuiToolBarItem* tool = FindTool(tool_id);
     if (tool && tool->m_sizerItem)
     {
         return tool->m_sizerItem->GetRect();
@@ -1028,14 +1038,14 @@ wxRect wxAuiToolBar::GetToolRect(int tool_id) const
 
 bool wxAuiToolBar::GetToolBarFits() const
 {
-    if (m_items.GetCount() == 0)
+    if (m_items.size() == 0)
     {
         // empty toolbar always 'fits'
         return true;
     }
 
     // entire toolbar content fits if the last tool fits
-    return GetToolFitsByIndex(m_items.GetCount() - 1);
+    return GetToolFitsByIndex(m_items.size() - 1);
 }
 
 bool wxAuiToolBar::Realize()
@@ -1109,9 +1119,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             sizer->Add(1, m_leftPadding);
     }
 
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         wxSizerItem* sizerItem = nullptr;
 
         switch (item.m_kind)
@@ -1275,9 +1285,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_sizer = std::move(outside_sizer);
 
     // calculate the rock-bottom minimum size
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
             item.m_sizerItem->SetMinSize(wxSize{0, 0});
     }
@@ -1285,9 +1295,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_absoluteMinSize = m_sizer->GetMinSize();
 
     // reset the min sizes to what they were
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
             item.m_sizerItem->SetMinSize(item.m_minSize);
     }
@@ -1372,9 +1382,9 @@ void wxAuiToolBar::DoIdleUpdate()
 
     bool need_refresh = false;
 
-    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.size(); i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
 
         if (item.m_toolId == -1)
             continue;
@@ -1451,9 +1461,9 @@ void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
         ((client_size.y > client_size.x) && m_absoluteMinSize.y > client_size.y))
     {
         // hide all flexible items
-        for (size_t i = 0; i < m_items.GetCount(); ++i)
+        for (size_t i = 0; i < m_items.size(); ++i)
         {
-            wxAuiToolBarItem& item = m_items.Item(i);
+            wxAuiToolBarItem& item = m_items[i];
             if (item.m_sizerItem && item.m_proportion > 0 && item.m_sizerItem->IsShown())
             {
                 item.m_sizerItem->Show(false);
@@ -1464,9 +1474,9 @@ void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
     else
     {
         // show all flexible items
-        for (size_t i = 0; i < m_items.GetCount(); ++i)
+        for (size_t i = 0; i < m_items.size(); ++i)
         {
-            wxAuiToolBarItem& item = m_items.Item(i);
+            wxAuiToolBarItem& item = m_items[i];
             if (item.m_sizerItem && item.m_proportion > 0 && !item.m_sizerItem->IsShown())
             {
                 item.m_sizerItem->Show(true);
@@ -1614,10 +1624,10 @@ void wxAuiToolBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
         last_extent -= overflowSize;
 
     // paint each individual tool
-    size_t count = m_items.GetCount();
+    size_t count = m_items.size();
     for (size_t i = 0; i < count; ++i)
     {
-        wxAuiToolBarItem& item = m_items.Item(i);
+        wxAuiToolBarItem& item = m_items[i];
 
         if (!item.m_sizerItem)
             continue;
@@ -1724,22 +1734,22 @@ void wxAuiToolBar::OnLeftDown(wxMouseEvent& evt)
                 wxAuiToolBarItemArray overflow_items;
 
                 // add custom overflow prepend items, if any
-                size_t count = m_customOverflowPrepend.GetCount();
+                size_t count = m_customOverflowPrepend.size();
                 for (size_t i = 0; i < count; ++i)
-                    overflow_items.Add(m_customOverflowPrepend[i]);
+                    overflow_items.push_back(m_customOverflowPrepend[i]);
 
                 // only show items that don't fit in the dropdown
-                count = m_items.GetCount();
+                count = m_items.size();
                 for (size_t i = 0; i < count; ++i)
                 {
                     if (!GetToolFitsByIndex(i))
-                        overflow_items.Add(m_items[i]);
+                        overflow_items.push_back(m_items[i]);
                 }
 
                 // add custom overflow append items, if any
-                count = m_customOverflowAppend.GetCount();
+                count = m_customOverflowAppend.size();
                 for (size_t i = 0; i < count; ++i)
-                    overflow_items.Add(m_customOverflowAppend[i]);
+                    overflow_items.push_back(m_customOverflowAppend[i]);
 
                 int res = m_art->ShowDropDown(this, overflow_items);
                 m_overflowState = 0;

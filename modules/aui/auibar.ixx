@@ -190,9 +190,10 @@ public:
     bool Realize();
 
     wxControl* FindControl(int windowId);
-    wxAuiToolBarItem* FindToolByPosition(wxCoord x, wxCoord y) const;
-    wxAuiToolBarItem* FindToolByIndex(int idx) const;
-    wxAuiToolBarItem* FindTool(int toolId) const;
+    wxAuiToolBarItem* FindToolByPosition(wxCoord x, wxCoord y);
+    wxAuiToolBarItem* FindToolByIndex(int idx);
+    wxAuiToolBarItem* FindTool(int toolId);
+    const wxAuiToolBarItem* FindTool(int toolId) const;
 
     void ClearTools() { Clear() ; }
     void Clear();
@@ -291,7 +292,7 @@ protected:
     int GetOverflowState() const;
     wxRect GetOverflowRect() const;
     wxSize GetLabelSize(const std::string& label);
-    wxAuiToolBarItem* FindToolByPositionWithPacking(wxCoord x, wxCoord y) const;
+    wxAuiToolBarItem* FindToolByPositionWithPacking(wxCoord x, wxCoord y);
 
 protected: // handlers
 

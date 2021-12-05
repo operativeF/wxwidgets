@@ -1,11 +1,8 @@
 module;
 
 #include "wx/bitmap.h"
-#include "wx/dynarray.h"
 #include "wx/sizer.h"
 #include "wx/window.h"
-
-#include "wx/arrimpl.cpp"
 
 export module WX.AUI.ToolBar.Item;
 
@@ -116,10 +113,6 @@ private:
     bool m_sticky{true};               // overrides button states if true (always active)
 };
 
-#ifndef SWIG
-WX_DECLARE_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray);
-#endif
-
-WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
+using wxAuiToolBarItemArray = std::vector<wxAuiToolBarItem>;
 
 } // export

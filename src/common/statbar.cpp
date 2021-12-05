@@ -85,14 +85,6 @@ bool wxStatusBarPane::PopText()
     return true;
 }
 
-// ============================================================================
-// wxStatusBarBase implementation
-// ============================================================================
-
-#include "wx/arrimpl.cpp" // This is a magic incantation which must be done!
-WX_DEFINE_OBJARRAY(wxStatusBarPaneArray)
-
-
 // ----------------------------------------------------------------------------
 // ctor/dtor
 // ----------------------------------------------------------------------------
@@ -114,19 +106,19 @@ void wxStatusBarBase::SetFieldsCount(int number, const int *widths)
 {
     wxCHECK_RET( number > 0, "invalid field number in SetFieldsCount" );
 
-    if ( (size_t)number > m_panes.GetCount() )
+    if ( (size_t)number > m_panes.size() )
     {
         wxStatusBarPane newPane;
 
         // add more entries with the default style and zero width
         // (this will be set later)
-        for (size_t i = m_panes.GetCount(); i < (size_t)number; ++i)
-            m_panes.Add(newPane);
+        for (size_t i = m_panes.size(); i < (size_t)number; ++i)
+            m_panes.push_back(newPane);
     }
-    else if ( (size_t)number < m_panes.GetCount() )
+    else if ( (size_t)number < m_panes.size() )
     {
         // remove entries in excess
-        m_panes.RemoveAt(number, m_panes.GetCount()-number);
+        m_panes.erase(m_panes.begin() + number, m_panes.end());
     }
 
     // SetStatusWidths will automatically refresh
@@ -136,7 +128,7 @@ void wxStatusBarBase::SetFieldsCount(int number, const int *widths)
 void wxStatusBarBase::SetStatusWidths([[maybe_unused]] int n,
                                     const int widths[])
 {
-    wxASSERT_MSG( (size_t)n == m_panes.GetCount(), "field number mismatch" );
+    wxASSERT_MSG( (size_t)n == m_panes.size(), "field number mismatch" );
 
     if (widths == nullptr)
     {
@@ -146,7 +138,7 @@ void wxStatusBarBase::SetStatusWidths([[maybe_unused]] int n,
     }
     else
     {
-        for ( size_t i = 0; i < m_panes.GetCount(); i++ )
+        for ( size_t i = 0; i < m_panes.size(); i++ )
             m_panes[i].SetWidth(widths[i]);
 
         m_bSameWidthForAllPanes = false;
@@ -161,9 +153,9 @@ void wxStatusBarBase::SetStatusStyles([[maybe_unused]] int n,
 {
     wxCHECK_RET( styles, "NULL pointer in SetStatusStyles" );
 
-    wxASSERT_MSG( (size_t)n == m_panes.GetCount(), "field number mismatch" );
+    wxASSERT_MSG( (size_t)n == m_panes.size(), "field number mismatch" );
 
-    for ( size_t i = 0; i < m_panes.GetCount(); i++ )
+    for ( size_t i = 0; i < m_panes.size(); i++ )
         m_panes[i].SetStyle(styles[i]);
 
     // update the display after the widths changed
@@ -178,11 +170,11 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
     {
         // Default: all fields have the same width. This is not always
         // possible to do exactly (if widthTotal is not divisible by
-        // m_panes.GetCount()) - if that happens, we distribute the extra
+        // m_panes.size()) - if that happens, we distribute the extra
         // pixels among all fields:
         int widthToUse = widthTotal;
 
-        for ( size_t i = m_panes.GetCount(); i > 0; i-- )
+        for ( size_t i = m_panes.size(); i > 0; i-- )
         {
             // divide the unassigned width evently between the
             // not yet processed fields:
@@ -198,7 +190,7 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
         size_t nTotalWidth = 0;
         size_t nVarCount = 0;
 
-        for ( size_t i{0}; i < m_panes.GetCount(); i++ )
+        for ( size_t i{0}; i < m_panes.size(); i++ )
         {
             if ( m_panes[i].GetWidth() >= 0 )
                 nTotalWidth += m_panes[i].GetWidth();
@@ -210,7 +202,7 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
         int widthExtra = widthTotal - nTotalWidth;
 
         // do fill the array
-        for ( std::size_t i{0}; i < m_panes.GetCount(); i++ )
+        for ( std::size_t i{0}; i < m_panes.size(); i++ )
         {
             if ( m_panes[i].GetWidth() >= 0 )
                 widths.push_back(m_panes[i].GetWidth());

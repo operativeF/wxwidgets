@@ -11,12 +11,14 @@
 #ifndef _WX_MSW_EVTLOOP_H_
 #define _WX_MSW_EVTLOOP_H_
 
-#include "wx/dynarray.h"
 #include "wx/msw/evtloopconsole.h" // for wxMSWEventLoopBase
+
+import WX.WinDef;
+import <vector>;
 
 class wxWindowMSW;
 
-WX_DECLARE_OBJARRAY(MSG, wxMSGArray);
+using wxMSGArray = std::vector<WXMSG>;
 
 class wxGUIEventLoop : public wxMSWEventLoopBase
 {

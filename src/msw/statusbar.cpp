@@ -177,10 +177,10 @@ void wxStatusBar::SetStatusWidths(int n, const int widths[])
 
 void wxStatusBar::MSWUpdateFieldsWidths()
 {
-    if ( m_panes.IsEmpty() )
+    if ( m_panes.empty() )
         return;
 
-    const int count = m_panes.GetCount();
+    const int count = m_panes.size();
 
     const int extraWidth = MSWGetBorderWidth() + MSWGetMetrics().textMargin;
 
@@ -301,7 +301,7 @@ void wxStatusBar::DoUpdateStatusText(int nField)
 #if wxUSE_TOOLTIPS
     if (HasFlag(wxSTB_SHOW_TIPS))
     {
-        wxASSERT(m_tooltips.size() == m_panes.GetCount());
+        wxASSERT(m_tooltips.size() == m_panes.size());
 
         if (m_tooltips[nField])
         {
@@ -411,7 +411,7 @@ void wxStatusBar::SetMinHeight(int height)
 
 bool wxStatusBar::GetFieldRect(int i, wxRect& rect) const
 {
-    wxCHECK_MSG( (i >= 0) && ((size_t)i < m_panes.GetCount()), false,
+    wxCHECK_MSG( (i >= 0) && ((size_t)i < m_panes.size()), false,
                  "invalid statusbar field index" );
 
     RECT r;
@@ -448,7 +448,7 @@ wxSize wxStatusBar::DoGetBestSize() const
 
     // calculate width
     int width = 0;
-    for ( size_t i = 0; i < m_panes.GetCount(); ++i )
+    for ( size_t i = 0; i < m_panes.size(); ++i )
     {
         int widthField =
             m_bSameWidthForAllPanes ? DEFAULT_FIELD_WIDTH : m_panes[i].GetWidth();
@@ -514,7 +514,7 @@ void wxStatusBar::SetStatusStyles(int n, const int styles[])
 {
     wxStatusBarBase::SetStatusStyles(n, styles);
 
-    if (n != (int)m_panes.GetCount())
+    if (n != (int)m_panes.size())
         return;
 
     for (int i = 0; i < n; i++)

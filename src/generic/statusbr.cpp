@@ -164,7 +164,7 @@ void wxStatusBarGeneric::DoUpdateStatusText(int number)
 void wxStatusBarGeneric::SetStatusWidths(int n, const int widths_field[])
 {
     // only set status widths when n == number of statuswindows
-    wxCHECK_RET( (size_t)n == m_panes.GetCount(), "status bar field count mismatch" );
+    wxCHECK_RET( (size_t)n == m_panes.size(), "status bar field count mismatch" );
 
     wxStatusBarBase::SetStatusWidths(n, widths_field);
 
@@ -218,7 +218,7 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
         //       size grip itself, etc
         if ((GetLayoutDirection() == wxLayoutDirection::RightToLeft && i == 0) ||
             (GetLayoutDirection() != wxLayoutDirection::RightToLeft &&
-                 i == (int)m_panes.GetCount()-1))
+                 i == (int)m_panes.size()-1))
         {
             const wxRect& gripRc = GetSizeGripRect();
 
@@ -312,7 +312,7 @@ void wxStatusBarGeneric::DrawField(wxDC& dc, int i, int textHeight)
 
 bool wxStatusBarGeneric::GetFieldRect(int n, wxRect& rect) const
 {
-    wxCHECK_MSG( (n >= 0) && ((size_t)n < m_panes.GetCount()), false,
+    wxCHECK_MSG( (n >= 0) && ((size_t)n < m_panes.size()), false,
                  "invalid status bar field index" );
 
     // We can be called from the user-defined EVT_SIZE handler in which case
@@ -351,7 +351,7 @@ int wxStatusBarGeneric::GetFieldFromPoint(const wxPoint& pt) const
         return wxNOT_FOUND;
 
     int x = 0;
-    for ( size_t i = 0; i < m_panes.GetCount(); i++ )
+    for ( size_t i = 0; i < m_panes.size(); i++ )
     {
         if (pt.x > x && pt.x < x+m_widthsAbs[i])
             return i;
@@ -440,7 +440,7 @@ void wxStatusBarGeneric::OnPaint([[maybe_unused]] wxPaintEvent& event )
     int textHeight = dc.GetCharHeight();
 
     dc.SetBackgroundMode(wxBrushStyle::Transparent);
-    for (size_t i = 0; i < m_panes.GetCount(); i ++)
+    for (size_t i = 0; i < m_panes.size(); i ++)
         DrawField(dc, i, textHeight);
 }
 

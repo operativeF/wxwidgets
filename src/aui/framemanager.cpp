@@ -38,8 +38,6 @@ module;
     #include "wx/msw/dc.h"
 #endif
 
-#include "wx/arrimpl.cpp"
-
 module WX.AUI.FrameManager;
 
 import WX.AUI.AUIBar;

@@ -14,7 +14,6 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/control.h"
-#include "wx/dynarray.h"
 
 import WX.Cfg.Flags;
 
@@ -102,7 +101,7 @@ private:
     bool m_bEllipsized{false};
 };
 
-WX_DECLARE_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
+using wxStatusBarPaneArray = std::vector<wxStatusBarPane>;
 
 // ----------------------------------------------------------------------------
 // wxStatusBar: a window near the bottom of the frame used for status info
@@ -121,7 +120,7 @@ public:
     // set the number of fields and call SetStatusWidths(widths) if widths are
     // given
     virtual void SetFieldsCount(int number = 1, const int *widths = nullptr);
-    int GetFieldsCount() const { return (int)m_panes.GetCount(); }
+    int GetFieldsCount() const { return (int)m_panes.size(); }
 
     // field text
     // ----------

@@ -17,7 +17,6 @@
 
 #if wxUSE_TREECTRL
 
-#include "wx/dynarray.h"
 #include "wx/treebase.h"
 #include "wx/hashmap.h"
 
