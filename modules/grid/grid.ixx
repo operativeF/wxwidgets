@@ -1110,8 +1110,8 @@ inline constexpr wxRect wxGridNoCellRect{ -1, -1, -1, -1 };
 
 // An array of cell coords...
 //
-WX_DECLARE_OBJARRAY_WITH_DECL(wxGridCellCoords, wxGridCellCoordsArray,
-                              class);
+
+using wxGridCellCoordsArray = std::vector<wxGridCellCoords>;
 
 // ----------------------------------------------------------------------------
 // Grid table classes

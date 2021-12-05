@@ -64,8 +64,6 @@ import <vector>;
 // globals
 // ----------------------------------------------------------------------------
 
-WX_DEFINE_OBJARRAY(wxGridCellCoordsArray)
-
 // the size of hash tables used a bit everywhere (the max number of elements
 // in these hash tables is the number of rows/columns)
 constexpr int GRID_HASH_SIZE = 100;
@@ -2196,7 +2194,7 @@ void wxGrid::Render( wxDC& dc,
         selectedCells = GetSelectionBlockTopLeft();
         // non block selections may not have a bottom right
         if ( GetSelectionBlockBottomRight().size() )
-            selectedCells.Add( GetSelectionBlockBottomRight()[ 0 ] );
+            selectedCells.push_back( GetSelectionBlockBottomRight()[0] );
 
         ClearSelection();
     }
@@ -2308,7 +2306,7 @@ void wxGrid::Render( wxDC& dc,
         wxRegion regionClip( pointOffSet.x, pointOffSet.y,
                              sizeCells.x, sizeCells.y );
 
-        DrawRangeGridLines(dc, regionClip, renderCells[0], renderCells.Last());
+        DrawRangeGridLines(dc, regionClip, renderCells[0], renderCells.back());
     }
 
     // draw render rectangle bounding lines
@@ -2380,7 +2378,7 @@ void wxGrid::GetRenderSizes( const wxGridCellCoords& topLeft,
         {
             for ( row = topLeft.GetRow(); row <= bottomRight.GetRow(); row++ )
             {
-                renderCells.Add( wxGridCellCoords( row, col ));
+                renderCells.emplace_back( row, col );
                 arrayRows.push_back( row ); // column labels rendered in DrawColLabels
             }
             arrayCols.push_back( col ); // row labels rendered in DrawRowLabels
@@ -3560,7 +3558,7 @@ wxGridCellCoordsArray wxGrid::CalcCellsExposed( const wxRegion& reg,
 
             const size_t count = cols.size();
             for ( size_t n = 0; n < count; n++ )
-                cellsExposed.Add(wxGridCellCoords(row, cols[n]));
+                cellsExposed.emplace_back(row, cols[n]);
         }
     }
 
@@ -6102,7 +6100,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
     if ( !m_numRows || !m_numCols )
         return;
 
-    int i, numCells = cells.GetCount();
+    int i, numCells = cells.size();
     wxGridCellCoordsArray redrawCells;
 
     for ( i = numCells - 1; i >= 0; i-- )
@@ -6127,7 +6125,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
 
             if (!marked)
             {
-                int count = redrawCells.GetCount();
+                int count = redrawCells.size();
                 for (int j = 0; j < count; j++)
                 {
                     if ( cell == redrawCells[j] )
@@ -6138,7 +6136,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
                 }
 
                 if (!marked)
-                    redrawCells.Add( cell );
+                    redrawCells.push_back( cell );
             }
 
             // don't bother drawing this cell
@@ -6152,7 +6150,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
             {
                 // find a cell in this row to leave already marked for repaint
                 int left = col;
-                for (int k = 0; k < int(redrawCells.GetCount()); k++)
+                for (int k = 0; k < int(redrawCells.size()); k++)
                     if ((redrawCells[k].GetCol() < left) &&
                         (redrawCells[k].GetRow() == row))
                     {
@@ -6190,7 +6188,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
 
                             if (!marked)
                             {
-                                int count = redrawCells.GetCount();
+                                int count = redrawCells.size();
                                 for (int k = 0; k < count; k++)
                                 {
                                     if ( cell == redrawCells[k] )
@@ -6200,7 +6198,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
                                     }
                                 }
                                 if (!marked)
-                                    redrawCells.Add( cell );
+                                    redrawCells.push_back( cell );
                             }
                         }
                         break;
@@ -6212,7 +6210,7 @@ void wxGrid::DrawGridCellArea( wxDC& dc, const wxGridCellCoordsArray& cells )
         DrawCell( dc, cells[i] );
     }
 
-    numCells = redrawCells.GetCount();
+    numCells = redrawCells.size();
 
     for ( i = numCells - 1; i >= 0; i-- )
     {
@@ -6379,7 +6377,7 @@ void wxGrid::DrawHighlight(wxDC& dc, const wxGridCellCoordsArray& cells)
 
     // if the active cell was repainted, repaint its highlight too because it
     // might have been damaged by the grid lines
-    size_t count = cells.GetCount();
+    size_t count = cells.size();
     for ( size_t n = 0; n < count; n++ )
     {
         wxGridCellCoords cell = cells[n];

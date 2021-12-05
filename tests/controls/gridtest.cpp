@@ -767,13 +767,13 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::Selection")
     wxGridCellCoordsArray topleft = m_grid->GetSelectionBlockTopLeft();
     wxGridCellCoordsArray bottomright = m_grid->GetSelectionBlockBottomRight();
 
-    CHECK(topleft.Count() == 1);
-    CHECK(bottomright.Count() == 1);
+    CHECK(topleft.size() == 1);
+    CHECK(bottomright.size() == 1);
 
-    CHECK(topleft.Item(0).GetCol() == 0);
-    CHECK(topleft.Item(0).GetRow() == 1);
-    CHECK(bottomright.Item(0).GetCol() == 1);
-    CHECK(bottomright.Item(0).GetRow() == 3);
+    CHECK(topleft[0].GetCol() == 0);
+    CHECK(topleft[0].GetRow() == 1);
+    CHECK(bottomright[0].GetCol() == 1);
+    CHECK(bottomright[0].GetRow() == 3);
 
     m_grid->SelectCol(1);
 
@@ -866,9 +866,9 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectEmptyGrid")
         }
     }
 
-    CHECK( m_grid->GetSelectedCells().Count() == 0 );
-    CHECK( m_grid->GetSelectionBlockTopLeft().Count() == 0 );
-    CHECK( m_grid->GetSelectionBlockBottomRight().Count() == 0 );
+    CHECK( m_grid->GetSelectedCells().empty() );
+    CHECK( m_grid->GetSelectionBlockTopLeft().empty() );
+    CHECK( m_grid->GetSelectionBlockBottomRight().empty() );
     CHECK( m_grid->GetSelectedRows().empty());
     CHECK( m_grid->GetSelectedCols().empty());
 }
@@ -953,13 +953,13 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectUsingEndKey")
     wxGridCellCoordsArray topleft = m_grid->GetSelectionBlockTopLeft();
     wxGridCellCoordsArray bottomright = m_grid->GetSelectionBlockBottomRight();
 
-    CHECK( topleft.Count() == 1 );
-    CHECK( bottomright.Count() == 1 );
+    CHECK( topleft.size() == 1 );
+    CHECK( bottomright.size() == 1 );
 
-    CHECK( topleft.Item(0).GetCol() == 0 );
-    CHECK( topleft.Item(0).GetRow() == 0 );
-    CHECK( bottomright.Item(0).GetCol() == 11 );
-    CHECK( bottomright.Item(0).GetRow() == 9 );
+    CHECK( topleft[0].GetCol() == 0 );
+    CHECK( topleft[0].GetRow() == 0 );
+    CHECK( bottomright[0].GetCol() == 11 );
+    CHECK( bottomright[0].GetRow() == 9 );
 
     CHECK( m_grid->IsVisible(8, 9) );
 #endif
