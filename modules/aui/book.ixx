@@ -69,9 +69,7 @@ struct wxAuiTabContainerButton
     int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
-#ifndef SWIG
-WX_DECLARE_OBJARRAY(wxAuiTabContainerButton, wxAuiTabContainerButtonArray);
-#endif
+using wxAuiTabContainerButtonArray = std::vector<wxAuiTabContainerButton>;
 
 class wxAuiTabContainer
 {
@@ -93,8 +91,8 @@ public:
     bool SetActivePage(size_t page);
     void SetNoneActive();
     int GetActivePage() const;
-    bool TabHitTest(int x, int y, wxWindow** hit) const;
-    bool ButtonHitTest(int x, int y, wxAuiTabContainerButton** hit) const;
+    bool TabHitTest(int x, int y, wxWindow** hit);
+    bool ButtonHitTest(int x, int y, wxAuiTabContainerButton** hit);
     wxWindow* GetWindowFromIdx(size_t idx) const;
     int GetIdxFromWindow(wxWindow* page) const;
     size_t GetPageCount() const;
@@ -142,8 +140,7 @@ protected:
 
 class wxAuiNotebookEvent;
 
-class wxAuiTabCtrl : public wxControl,
-                                     public wxAuiTabContainer
+class wxAuiTabCtrl : public wxControl, public wxAuiTabContainer
 {
 public:
 
@@ -439,6 +436,5 @@ inline const wxEventTypeTag<wxAuiNotebookEvent> wxEVT_AUINOTEBOOK_TAB_RIGHT_UP( 
 inline const wxEventTypeTag<wxAuiNotebookEvent> wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN( wxNewEventType() );
 
 typedef void (wxEvtHandler::*wxAuiNotebookEventFunction)(wxAuiNotebookEvent&);
-
 
 } // export

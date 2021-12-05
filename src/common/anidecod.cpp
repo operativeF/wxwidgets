@@ -14,8 +14,6 @@ module;
 
 #include <chrono>
 
-#include "wx/arrimpl.cpp" // this is a magic incantation which must be done!
-
 module WX.Image.Decoder.ANI;
 
 import Utils.Geometry;

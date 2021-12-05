@@ -24,8 +24,6 @@ module;
 #include "wx/osx/private.h"
 #endif
 
-#include "wx/arrimpl.cpp"
-
 #include <memory>
 
 module WX.AUI.Book;
@@ -36,8 +34,6 @@ import WX.AUI.TabArt;
 import WX.AUI.TabMDI;
 
 import <utility>;
-
-WX_DEFINE_OBJARRAY(wxAuiTabContainerButtonArray);
 
 wxIMPLEMENT_CLASS(wxAuiNotebook, wxControl);
 wxIMPLEMENT_CLASS(wxAuiTabCtrl, wxControl);
@@ -347,18 +343,18 @@ void wxAuiTabContainer::AddButton(int id,
     button.location = location;
     button.curState = wxAUI_BUTTON_STATE_NORMAL;
 
-    m_buttons.Add(button);
+    m_buttons.push_back(button);
 }
 
 void wxAuiTabContainer::RemoveButton(int id)
 {
-    size_t i, button_count = m_buttons.GetCount();
+    size_t i, button_count = m_buttons.size();
 
     for (i = 0; i < button_count; ++i)
     {
         if (m_buttons[i].id == id)
         {
-            m_buttons.RemoveAt(i);
+            m_buttons.erase(m_buttons.begin() + i);
             return;
         }
     }
@@ -399,7 +395,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     wxBitmap bmp;
     size_t i;
     size_t page_count = m_pages.size();
-    size_t button_count = m_buttons.GetCount();
+    size_t button_count = m_buttons.size();
 
     // create off-screen bitmap
     bmp.Create(m_rect.GetSize(),*raw_dc);
@@ -496,7 +492,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
         {
             int button_width = 0;
             for (i = 0; i < button_count; ++i)
-                button_width += m_buttons.Item(button_count - i - 1).rect.GetWidth();
+                button_width += m_buttons[button_count - i - 1].rect.GetWidth();
 
             if (visible_width < m_rect.GetWidth() - button_width)
                 button.curState |= wxAUI_BUTTON_STATE_DISABLED;
@@ -518,7 +514,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     int offset = m_rect.x + m_rect.width;
     for (i = 0; i < button_count; ++i)
     {
-        wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
+        wxAuiTabContainerButton& button = m_buttons[button_count - i - 1];
 
         if (button.location != wxRIGHT)
             continue;
@@ -549,7 +545,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
     for (i = 0; i < button_count; ++i)
     {
-        wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
+        wxAuiTabContainerButton& button = m_buttons[button_count - i - 1];
 
         if (button.location != wxLEFT)
             continue;
@@ -578,17 +574,17 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
     // prepare the tab-close-button array
     // make sure tab button entries which aren't used are marked as hidden
-    for (i = page_count; i < m_tabCloseButtons.GetCount(); ++i)
+    for (i = page_count; i < m_tabCloseButtons.size(); ++i)
         m_tabCloseButtons[i].curState = wxAUI_BUTTON_STATE_HIDDEN;
 
     // make sure there are enough tab button entries to accommodate all tabs
-    while (m_tabCloseButtons.GetCount() < page_count)
+    while (m_tabCloseButtons.size() < page_count)
     {
         wxAuiTabContainerButton tempbtn;
         tempbtn.id = wxAUI_BUTTON_CLOSE;
         tempbtn.location = wxCENTER;
         tempbtn.curState = wxAUI_BUTTON_STATE_HIDDEN;
-        m_tabCloseButtons.Add(tempbtn);
+        m_tabCloseButtons.push_back(tempbtn);
     }
 
 
@@ -658,7 +654,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
 
     // make sure to deactivate buttons which are off the screen to the right
-    for (++i; i < m_tabCloseButtons.GetCount(); ++i)
+    for (++i; i < m_tabCloseButtons.size(); ++i)
     {
         m_tabCloseButtons[i].curState = wxAUI_BUTTON_STATE_HIDDEN;
     }
@@ -669,7 +665,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     {
         wxAuiNotebookPage& page = m_pages[active];
 
-        wxAuiTabContainerButton& tab_button = m_tabCloseButtons.Item(active);
+        wxAuiTabContainerButton& tab_button = m_tabCloseButtons[active];
 
         rect.x = active_offset;
         m_art->DrawTab(dc,
@@ -696,10 +692,10 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
 
     size_t i;
     size_t page_count = m_pages.size();
-    size_t button_count = m_buttons.GetCount();
+    size_t button_count = m_buttons.size();
 
     // Hasn't been rendered yet; assume it's visible
-    if (m_tabCloseButtons.GetCount() < page_count)
+    if (m_tabCloseButtons.size() < page_count)
         return true;
 
     // First check if both buttons are disabled - if so, there's no need to
@@ -732,7 +728,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     int offset = m_rect.x + m_rect.width;
     for (i = 0; i < button_count; ++i)
     {
-        wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
+        wxAuiTabContainerButton& button = m_buttons[button_count - i - 1];
 
         if (button.location != wxRIGHT)
             continue;
@@ -748,7 +744,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     // calculate size of the buttons on the left side
     for (i = 0; i < button_count; ++i)
     {
-        wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
+        wxAuiTabContainerButton& button = m_buttons[button_count - i - 1];
 
         if (button.location != wxLEFT)
             continue;
@@ -823,7 +819,7 @@ void wxAuiTabContainer::MakeTabVisible(int tabPage, wxWindow* win)
 // TabHitTest() tests if a tab was hit, passing the window pointer
 // back if that condition was fulfilled.  The function returns
 // true if a tab was hit, otherwise false
-bool wxAuiTabContainer::TabHitTest(int x, int y, wxWindow** hit) const
+bool wxAuiTabContainer::TabHitTest(int x, int y, wxWindow** hit)
 {
     if (!m_rect.Contains(x,y))
         return false;
@@ -831,7 +827,7 @@ bool wxAuiTabContainer::TabHitTest(int x, int y, wxWindow** hit) const
     wxAuiTabContainerButton* btn = nullptr;
     if (ButtonHitTest(x, y, &btn) && !(btn->curState & wxAUI_BUTTON_STATE_DISABLED))
     {
-        if (m_buttons.Index(*btn) != wxNOT_FOUND)
+        if(std::ranges::find_if(m_buttons, [btn](auto otherBtn){ return btn == &otherBtn; }) != m_buttons.end())
             return false;
     }
 
@@ -854,7 +850,7 @@ bool wxAuiTabContainer::TabHitTest(int x, int y, wxWindow** hit) const
 // ButtonHitTest() tests if a button was hit. The function returns
 // true if a button was hit, otherwise false
 bool wxAuiTabContainer::ButtonHitTest(int x, int y,
-                                      wxAuiTabContainerButton** hit) const
+                                      wxAuiTabContainerButton** hit)
 {
     if (!m_rect.Contains(x,y))
         return false;
@@ -862,7 +858,7 @@ bool wxAuiTabContainer::ButtonHitTest(int x, int y,
     size_t i, button_count;
 
 
-    button_count = m_buttons.GetCount();
+    button_count = m_buttons.size();
     for (i = 0; i < button_count; ++i)
     {
         wxAuiTabContainerButton& button = m_buttons[i];
@@ -875,7 +871,7 @@ bool wxAuiTabContainer::ButtonHitTest(int x, int y,
         }
     }
 
-    button_count = m_tabCloseButtons.GetCount();
+    button_count = m_tabCloseButtons.size();
     for (i = 0; i < button_count; ++i)
     {
         wxAuiTabContainerButton& button = m_tabCloseButtons[i];

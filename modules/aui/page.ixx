@@ -2,8 +2,6 @@ module;
 
 #include "wx/bitmap.h"
 
-#include "wx/arrimpl.cpp"
-
 export module WX.AUI.Page;
 
 import Utils.Geometry;
