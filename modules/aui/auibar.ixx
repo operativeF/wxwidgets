@@ -191,9 +191,16 @@ public:
 
     wxControl* FindControl(int windowId);
     wxAuiToolBarItem* FindToolByPosition(wxCoord x, wxCoord y);
-    wxAuiToolBarItem* FindToolByIndex(int idx);
-    wxAuiToolBarItem* FindTool(int toolId);
-    const wxAuiToolBarItem* FindTool(int toolId) const;
+
+    auto FindTool(int toolId)
+    {
+        return std::ranges::find_if(m_items, [toolId](auto item){ return item.m_toolId == toolId; });
+    }
+
+    const auto FindTool(int toolId) const
+    {
+        return std::ranges::find_if(m_items, [toolId](auto item) { return item.m_toolId == toolId; });
+    }
 
     void ClearTools() { Clear() ; }
     void Clear();

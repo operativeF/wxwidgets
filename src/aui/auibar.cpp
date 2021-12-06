@@ -382,30 +382,6 @@ wxControl* wxAuiToolBar::FindControl(int id)
     return (wxControl*)wnd;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id)
-{
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
-    {
-        wxAuiToolBarItem& item = m_items[i];
-        if (item.m_toolId == tool_id)
-            return &item;
-    }
-
-    return nullptr;
-}
-
-const wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
-{
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
-    {
-        const wxAuiToolBarItem& item = m_items[i];
-        if (item.m_toolId == tool_id)
-            return &item;
-    }
-
-    return nullptr;
-}
-
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y)
 {
     for (size_t i = 0, count = m_items.size(); i < count; ++i)
@@ -457,17 +433,6 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord
     return nullptr;
 }
 
-wxAuiToolBarItem* wxAuiToolBar::FindToolByIndex(int idx)
-{
-    if (idx < 0)
-        return nullptr;
-
-    if (idx >= (int)m_items.size())
-        return nullptr;
-
-    return &(m_items[idx]);
-}
-
 void wxAuiToolBar::SetToolBitmapSize([[maybe_unused]] const wxSize& size)
 {
     // TODO: wxToolBar compatibility
@@ -481,8 +446,8 @@ wxSize wxAuiToolBar::GetToolBitmapSize() const
 
 void wxAuiToolBar::SetToolProportion(int tool_id, int proportion)
 {
-    wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    auto item = FindTool(tool_id);
+    if (item == m_items.end())
         return;
 
     item->m_proportion = proportion;
@@ -490,8 +455,8 @@ void wxAuiToolBar::SetToolProportion(int tool_id, int proportion)
 
 int wxAuiToolBar::GetToolProportion(int tool_id) const
 {
-    const wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    const auto item = FindTool(tool_id);
+    if (item == m_items.end())
         return 0;
 
     return item->m_proportion;
@@ -513,8 +478,9 @@ int wxAuiToolBar::GetToolSeparation() const
 
 void wxAuiToolBar::SetToolDropDown(int tool_id, bool dropdown)
 {
-    wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    auto item = FindTool(tool_id);
+
+    if (item == m_items.end())
         return;
 
     item->SetHasDropDown(dropdown);
@@ -522,8 +488,8 @@ void wxAuiToolBar::SetToolDropDown(int tool_id, bool dropdown)
 
 bool wxAuiToolBar::GetToolDropDown(int tool_id) const
 {
-    const wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    const auto item = FindTool(tool_id);
+    if (item == m_items.end())
         return false;
 
     return item->HasDropDown();
@@ -535,8 +501,8 @@ void wxAuiToolBar::SetToolSticky(int tool_id, bool sticky)
     if (tool_id == -1)
         return;
 
-    wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    auto item = FindTool(tool_id);
+    if (item == m_items.end())
         return;
 
     if (item->m_sticky == sticky)
@@ -550,8 +516,8 @@ void wxAuiToolBar::SetToolSticky(int tool_id, bool sticky)
 
 bool wxAuiToolBar::GetToolSticky(int tool_id) const
 {
-    const wxAuiToolBarItem* item = FindTool(tool_id);
-    if (!item)
+    const auto item = FindTool(tool_id);
+    if (item == m_items.end())
         return false;
 
     return item->m_sticky;
@@ -749,9 +715,9 @@ void wxAuiToolBar::RefreshOverflowState()
 
 void wxAuiToolBar::ToggleTool(int tool_id, bool state)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    auto tool = FindTool(tool_id);
 
-    if ( tool && tool->CanBeToggled() )
+    if ( (tool != m_items.end()) && tool->CanBeToggled() )
     {
         if (tool->m_kind == wxITEM_RADIO)
         {
@@ -789,9 +755,9 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
 
 bool wxAuiToolBar::GetToolToggled(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
+    const auto tool = FindTool(tool_id);
 
-    if ( tool && tool->CanBeToggled() )
+    if ( (tool != m_items.end()) && tool->CanBeToggled() )
         return (tool->m_state & wxAUI_BUTTON_STATE_CHECKED) != 0;
 
     return false;
@@ -799,9 +765,9 @@ bool wxAuiToolBar::GetToolToggled(int tool_id) const
 
 void wxAuiToolBar::EnableTool(int tool_id, bool state)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
+    auto tool = FindTool(tool_id);
 
-    if (tool)
+    if (tool != m_items.end())
     {
         if (state)
             tool->m_state &= ~wxAUI_BUTTON_STATE_DISABLED;
@@ -812,9 +778,9 @@ void wxAuiToolBar::EnableTool(int tool_id, bool state)
 
 bool wxAuiToolBar::GetToolEnabled(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
+    const auto tool = FindTool(tool_id);
 
-    if (tool)
+    if (tool != m_items.end())
         return (tool->m_state & wxAUI_BUTTON_STATE_DISABLED) == 0;
 
     return false;
@@ -822,9 +788,9 @@ bool wxAuiToolBar::GetToolEnabled(int tool_id) const
 
 std::string wxAuiToolBar::GetToolLabel(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
-    if (!tool)
+    const auto tool = FindTool(tool_id);
+
+    if (tool == m_items.end())
         return {};
 
     return tool->m_label;
@@ -832,8 +798,8 @@ std::string wxAuiToolBar::GetToolLabel(int tool_id) const
 
 void wxAuiToolBar::SetToolLabel(int tool_id, const std::string& label)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
-    if (tool)
+    auto tool = FindTool(tool_id);
+    if (tool != m_items.end())
     {
         tool->m_label = label;
     }
@@ -841,9 +807,9 @@ void wxAuiToolBar::SetToolLabel(int tool_id, const std::string& label)
 
 wxBitmap wxAuiToolBar::GetToolBitmap(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
-    if (!tool)
+    const auto tool = FindTool(tool_id);
+
+    if (tool == m_items.end())
         return wxNullBitmap;
 
     return tool->m_bitmap;
@@ -851,8 +817,8 @@ wxBitmap wxAuiToolBar::GetToolBitmap(int tool_id) const
 
 void wxAuiToolBar::SetToolBitmap(int tool_id, const wxBitmap& bitmap)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
-    if (tool)
+    auto tool = FindTool(tool_id);
+    if (tool != m_items.end())
     {
         tool->m_bitmap = bitmap;
     }
@@ -860,9 +826,9 @@ void wxAuiToolBar::SetToolBitmap(int tool_id, const wxBitmap& bitmap)
 
 std::string wxAuiToolBar::GetToolShortHelp(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
-    if (!tool)
+    const auto tool = FindTool(tool_id);
+
+    if (tool == m_items.end())
         return {};
 
     return tool->m_shortHelp;
@@ -870,8 +836,8 @@ std::string wxAuiToolBar::GetToolShortHelp(int tool_id) const
 
 void wxAuiToolBar::SetToolShortHelp(int tool_id, const std::string& help_string)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
-    if (tool)
+    auto tool = FindTool(tool_id);
+    if (tool != m_items.end())
     {
         tool->m_shortHelp = help_string;
     }
@@ -879,9 +845,9 @@ void wxAuiToolBar::SetToolShortHelp(int tool_id, const std::string& help_string)
 
 std::string wxAuiToolBar::GetToolLongHelp(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
-    wxASSERT_MSG(tool, "can't find tool in toolbar item array");
-    if (!tool)
+    const auto tool = FindTool(tool_id);
+
+    if (tool == m_items.end())
         return {};
 
     return tool->m_longHelp;
@@ -889,8 +855,8 @@ std::string wxAuiToolBar::GetToolLongHelp(int tool_id) const
 
 void wxAuiToolBar::SetToolLongHelp(int tool_id, const std::string& help_string)
 {
-    wxAuiToolBarItem* tool = FindTool(tool_id);
-    if (tool)
+    auto tool = FindTool(tool_id);
+    if (tool != m_items.end())
     {
         tool->m_longHelp = help_string;
     }
@@ -1027,8 +993,8 @@ bool wxAuiToolBar::GetToolFits(int tool_id) const
 
 wxRect wxAuiToolBar::GetToolRect(int tool_id) const
 {
-    const wxAuiToolBarItem* tool = FindTool(tool_id);
-    if (tool && tool->m_sizerItem)
+    const auto tool = FindTool(tool_id);
+    if ((tool != m_items.end()) && tool->m_sizerItem)
     {
         return tool->m_sizerItem->GetRect();
     }
