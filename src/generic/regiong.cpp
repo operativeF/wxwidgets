@@ -8,15 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 #include "wx/region.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-#endif
+#include "wx/utils.h"
 
 // ========================================================================
 // Classes to interface with X.org code

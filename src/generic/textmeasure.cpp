@@ -7,12 +7,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#if wxUSE_GENERIC_TEXTMEASURE
+
 #include "wx/window.h"
 #include "wx/dc.h"
 
 #include "wx/private/textmeasure.h"
-
-#if wxUSE_GENERIC_TEXTMEASURE
 
 // ============================================================================
 // wxTextMeasure generic implementation

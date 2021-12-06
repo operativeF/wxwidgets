@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_COMMANDLINKBUTTON
 
 #include "wx/commandlinkbutton.h"

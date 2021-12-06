@@ -8,17 +8,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#if wxUSE_SPINCTRL
 
-
+#include "wx/private/spinctrl.h"
 
 #include "wx/textctrl.h"
 
 #include "wx/spinctrl.h"
 #include "wx/tooltip.h"
-
-#if wxUSE_SPINCTRL
-
-#include "wx/private/spinctrl.h"
 
 // There are port-specific versions for the wxSpinCtrl, so exclude the
 // contents of this file in those cases

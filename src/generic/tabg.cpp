@@ -8,21 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/intl.h"
-    #include "wx/dcclient.h"
-
-    import <cstdio>;
-    import <cstdlib>;
-    import <cstdarg>;
-#endif
+#include "wx/settings.h"
+#include "wx/intl.h"
+#include "wx/dcclient.h"
 
 #include "wx/generic/tabg.h"
 #include "wx/listimpl.cpp"
+
+import <cstdio>;
+import <cstdlib>;
+import <cstdarg>;
 
 WX_DEFINE_LIST(wxTabLayerList)
 

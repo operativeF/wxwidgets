@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATUSBAR
-
-#ifndef WX_PRECOMP
-    import <numeric>;
-#endif
 
 #include "wx/statusbr.h"
 #include "wx/settings.h"
@@ -27,7 +20,6 @@
     #include "wx/gtk/private.h"
 #endif
 
-
 // we only have to do it here when we use wxStatusBarGeneric in addition to the
 // standard wxStatusBar class, if wxStatusBarGeneric is the same as
 // wxStatusBar, then the corresponding wxIMPLEMENT_DYNAMIC_CLASS is already in
@@ -36,6 +28,8 @@
     (defined(wxUSE_NATIVE_STATUSBAR) && wxUSE_NATIVE_STATUSBAR)
     #include "wx/generic/statusbr.h"
 #endif // wxUSE_NATIVE_STATUSBAR
+
+import <numeric>;
 
 // Default status border dimensions
 constexpr int wxTHICK_LINE_BORDER = 2;

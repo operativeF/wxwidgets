@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_PREFERENCES_EDITOR
 
 #include "wx/private/preferences.h"

@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
 
 #include "wx/filename.h"

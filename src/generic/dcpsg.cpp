@@ -2285,5 +2285,3 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
 
 
 #endif // wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
-
-// vi:sts=4:sw=4:et

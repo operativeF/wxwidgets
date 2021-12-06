@@ -7,11 +7,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#if wxUSE_GENERIC_MASK
+
 #include "wx/bitmap.h"
 
 import WX.Image;
-
-#if wxUSE_GENERIC_MASK
 
 // ============================================================================
 // wxMask implementation

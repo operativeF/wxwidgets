@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 // ----------------------------------------------------------------------------
 // NB: when using generic wxTimer implementation in your port, you *must* call
 //     wxTimer::NotifyTimers() often enough. The ideal place for this
@@ -17,10 +14,8 @@
 
 #if wxUSE_TIMER
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/module.h"
-#endif
+#include "wx/log.h"
+#include "wx/module.h"
 
 #include "wx/apptrait.h"
 #include "wx/generic/private/timer.h"

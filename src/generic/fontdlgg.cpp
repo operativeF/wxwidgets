@@ -8,8 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_FONTDLG && (!defined(__WXGTK__) || defined(__WXGPE__) || defined(__WXUNIVERSAL__))
 
 #include "wx/crt.h"
@@ -600,5 +598,4 @@ void wxGenericFontDialog::OnChangeSize([[maybe_unused]] wxSpinEvent& event)
 }
 #endif
 
-#endif
-    // wxUSE_FONTDLG
+#endif // wxUSE_FONTDLG

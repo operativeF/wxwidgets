@@ -8,17 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SPLITTER
 
 #include "wx/splitter.h"
-
-#ifndef WX_PRECOMP
-    import <limits>;
-    import <string>;
-#endif
 
 #include "wx/utils.h"
 #include "wx/log.h"
@@ -38,6 +30,9 @@
 #endif
 
 #include "wx/renderer.h"
+
+import <limits>;
+import <string>;
 
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGED, wxSplitterEvent );
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGING, wxSplitterEvent );

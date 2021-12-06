@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FILEDLG
 
 // NOTE : it probably also supports MAC, untested

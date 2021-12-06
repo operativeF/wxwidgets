@@ -8,19 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXMSW__) || wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
 #include "wx/generic/prntdlgg.h"
-
-#ifndef WX_PRECOMP
-    import <array>;
-    import <string>;
-    import <vector>;
-
-    #include <fmt/core.h>
-#endif
 
 #include "wx/utils.h"
 #include "wx/dc.h"
@@ -59,6 +49,12 @@
 #endif
 
 #endif // !wxUniv
+
+#include <fmt/core.h>
+
+import <array>;
+import <string>;
+import <vector>;
 
 #if wxUSE_POSTSCRIPT
 

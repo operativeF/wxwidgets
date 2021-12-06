@@ -9,9 +9,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 // Currently, only for Mac as a toolbar replacement.
 #if defined(__WXMAC__) && wxUSE_TOOLBAR && wxUSE_BMPBUTTON
 

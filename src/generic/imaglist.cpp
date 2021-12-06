@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_IMAGLIST && !defined(wxHAS_NATIVE_IMAGELIST)
 
 #include "wx/imaglist.h"

@@ -224,8 +224,6 @@ bool wxIsDriveAvailable(const std::string& dirName)
 
 #endif // wxUSE_DIRDLG || wxUSE_FILEDLG
 
-
-
 #if wxUSE_DIRDLG
 
 // Function which is called by quick sort. We want to override the default std::vector<std::string> behaviour,

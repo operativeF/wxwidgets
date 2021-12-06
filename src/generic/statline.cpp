@@ -10,10 +10,7 @@
 #if wxUSE_STATLINE
 
 #include "wx/statline.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/statbox.h"
-#endif
+#include "wx/statbox.h"
 
 // ============================================================================
 // implementation
@@ -65,5 +62,4 @@ void wxStaticLine::DoMoveWindow(int x, int y, int width, int height)
     m_statbox->SetSize(x, y, width, height);
 }
 
-#endif
-  // wxUSE_STATLINE
+#endif // wxUSE_STATLINE

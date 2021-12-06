@@ -94,4 +94,4 @@ void wxGenericFontButton::UpdateFont()
     }
 }
 
-#endif      // wxUSE_FONTPICKERCTRL
+#endif // wxUSE_FONTPICKERCTRL

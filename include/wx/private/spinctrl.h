@@ -10,6 +10,9 @@
 #ifndef _WX_PRIVATE_SPINCTRL_H_
 #define _WX_PRIVATE_SPINCTRL_H_
 
+#include "wx/control.h"
+#include "wx/string.h"
+
 namespace wxSpinCtrlImpl
 {
 

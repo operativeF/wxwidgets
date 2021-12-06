@@ -20,7 +20,6 @@ import <string>;
 
 class wxVarScrollHelperEvtHandler;
 
-
 // Using the same techniques as the wxScrolledWindow class      |
 // hierarchy, the wx[V/H/HV]ScrolledWindow classes are slightly |
 // more complex (compare with the diagram outlined in           |
