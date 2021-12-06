@@ -42,8 +42,7 @@ public:
         Create(parent, message, prompt, caption, value, min, max, pos);
     }
 
-    wxNumberEntryDialog(const wxNumberEntryDialog&) = delete;
-    wxNumberEntryDialog& operator=(const wxNumberEntryDialog&) = delete;
+    wxNumberEntryDialog& operator=(wxNumberEntryDialog&&) = delete;
 
     bool Create(wxWindow *parent,
                 const std::string& message,

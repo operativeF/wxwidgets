@@ -140,18 +140,23 @@ protected:
     // Set PostScript color
     void SetPSColour(const wxColour& col);
 
+    std::vector<wxString>     m_definedPSFonts;
+
+    wxPrintData       m_printData;
+
     FILE*             m_pstream;    // PostScript output stream
+
+    double            m_pageHeight{842 * PS2DEV};
+    mutable double    m_underlinePosition;
+    mutable double    m_underlineThickness;
+
     unsigned char     m_currentRed;
     unsigned char     m_currentGreen;
     unsigned char     m_currentBlue;
     int               m_pageNumber;
-    bool              m_clipping;
-    mutable double    m_underlinePosition;
-    mutable double    m_underlineThickness;
-    wxPrintData       m_printData;
-    double            m_pageHeight{842 * PS2DEV};
-    std::vector<wxString>     m_definedPSFonts;
+
     bool              m_isFontChanged;
+    bool              m_clipping;
 };
 
 #endif

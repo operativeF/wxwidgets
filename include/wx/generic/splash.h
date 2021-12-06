@@ -48,8 +48,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
 
-    wxSplashScreen(const wxSplashScreen&) = delete;
-    wxSplashScreen& operator=(const wxSplashScreen&) = delete;
+    wxSplashScreen& operator=(wxSplashScreen&&) = delete;
 
     ~wxSplashScreen();
 

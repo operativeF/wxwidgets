@@ -22,7 +22,6 @@ import <string>;
 // types
 // ----------------------------------------------------------------------------
 
-// fwd declarations
 class wxImageList;
 class wxWindow;
 class wxTabView;

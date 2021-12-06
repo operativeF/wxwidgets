@@ -216,8 +216,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
     
-    wxDataViewCtrl(const wxDataViewCtrl&) = delete;
-	wxDataViewCtrl& operator=(const wxDataViewCtrl&) = delete;
+	wxDataViewCtrl& operator=(wxDataViewCtrl&&) = delete;
 
     ~wxDataViewCtrl();
 

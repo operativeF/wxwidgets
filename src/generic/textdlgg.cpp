@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TEXTDLG
 
 #include "wx/generic/textdlgg.h"
@@ -33,10 +30,6 @@
 
 constexpr int wxID_TEXT = 3000;
 
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxTextEntryDialog
 // ----------------------------------------------------------------------------
@@ -44,8 +37,6 @@ constexpr int wxID_TEXT = 3000;
 wxBEGIN_EVENT_TABLE(wxTextEntryDialog, wxDialog)
     EVT_BUTTON(wxID_OK, wxTextEntryDialog::OnOK)
 wxEND_EVENT_TABLE()
-
-wxIMPLEMENT_CLASS(wxTextEntryDialog, wxDialog);
 
 bool wxTextEntryDialog::Create(wxWindow *parent,
                                      std::string_view message,
@@ -189,8 +180,6 @@ void wxTextEntryDialog::SetTextValidator( const wxTextValidator& validator )
 // ----------------------------------------------------------------------------
 // wxPasswordEntryDialog
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_CLASS(wxPasswordEntryDialog, wxTextEntryDialog);
 
 bool wxPasswordEntryDialog::Create(wxWindow *parent,
                                    std::string_view message,

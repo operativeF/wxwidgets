@@ -21,8 +21,7 @@ class wxScrollHelper : public wxScrollHelperBase
 public:
     wxScrollHelper(wxWindow *winToScroll);
 
-    wxScrollHelper(const wxScrollHelper&) = delete;
-    wxScrollHelper& operator=(const wxScrollHelper&) = delete;
+    wxScrollHelper& operator=(wxScrollHelper&&) = delete;
     
     void AdjustScrollbars() override;
     bool IsScrollbarShown(int orient) const override;

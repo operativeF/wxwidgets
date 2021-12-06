@@ -73,6 +73,7 @@ public:
     long GetH() const;
     long GetHeight() const { return GetH(); }
     wxRect GetRect() const;
+    
 private:
     long     m_current;
     wxRegionGeneric m_region;

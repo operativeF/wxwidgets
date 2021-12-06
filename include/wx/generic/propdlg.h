@@ -138,9 +138,6 @@ public:
     // Resize dialog if necessary
     void OnIdle(wxIdleEvent& event);
 
-private:
-    
-
 protected:
     wxBookCtrlBase* m_bookCtrl{nullptr};
     wxSizer*        m_innerSizer{nullptr}; // sizer for extra space

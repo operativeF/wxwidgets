@@ -139,7 +139,7 @@ private:
 class wxFileDialog: public wxGenericFileDialog
 {
 public:
-    wxFileDialog() {}
+    wxFileDialog() = default;
 
     wxFileDialog(wxWindow *parent,
                  const std::string& message = wxFileSelectorPromptStr,

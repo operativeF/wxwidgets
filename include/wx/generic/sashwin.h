@@ -83,8 +83,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxSashWindow(const wxSashWindow&) = delete;
-    wxSashWindow& operator=(const wxSashWindow&) = delete;
+    wxSashWindow& operator=(wxSashWindow&&) = delete;
 
     ~wxSashWindow();
 

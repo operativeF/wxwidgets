@@ -235,8 +235,7 @@ public:
         Create(parent, id, pos, size, style);
     }
 
-    wxDirFilterListCtrl(const wxDirFilterListCtrl&) = delete;
-	wxDirFilterListCtrl& operator=(const wxDirFilterListCtrl&) = delete;
+	wxDirFilterListCtrl& operator=(wxDirFilterListCtrl&&) = delete;
 
     bool Create(wxGenericDirCtrl* parent, wxWindowID id = wxID_ANY,
               const wxPoint& pos = wxDefaultPosition,
@@ -253,7 +252,6 @@ protected:
     wxGenericDirCtrl*    m_dirCtrl{nullptr};
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_CLASS(wxDirFilterListCtrl);
 };
 
 #if !defined(__WXMSW__) && !defined(__WXMAC__)

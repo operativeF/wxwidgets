@@ -326,8 +326,6 @@ WX_DECLARE_HASH_MAP(int, wxWindow*, wxIntegerHash, wxIntegerEqual,
 
 class wxPanelTabView : public wxTabView
 {
-    wxDECLARE_DYNAMIC_CLASS(wxPanelTabView);
-
 public:
     wxPanelTabView(wxPanel *pan, unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
     virtual ~wxPanelTabView(void);

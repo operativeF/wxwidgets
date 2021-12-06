@@ -77,8 +77,6 @@ protected:
 
 private:
     void OnColourChanged(wxColourDialogEvent& event);
-
-    wxDECLARE_DYNAMIC_CLASS(wxGenericColourButton);
 };
 
 

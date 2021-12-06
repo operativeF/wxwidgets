@@ -166,9 +166,6 @@ protected:
     bool   m_snap_to_ticks{false};
 
 private:
-    // common part of all ctors
-    
-
     // Implement pure virtual function inherited from wxCompositeWindow.
     wxWindowList GetCompositeWindowParts() const override;
 

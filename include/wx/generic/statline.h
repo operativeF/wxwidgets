@@ -22,7 +22,7 @@ class wxStaticLine : public wxStaticLineBase
 
 public:
     // constructors and pseudo-constructors
-    wxStaticLine() { m_statbox = NULL; }
+    wxStaticLine() = default;
 
     wxStaticLine( wxWindow *parent,
                   wxWindowID id = wxID_ANY,
@@ -54,7 +54,7 @@ public:
     virtual void DoMoveWindow(int x, int y, int width, int height);
 protected:
     // we implement the static line using a static box
-    wxStaticBox *m_statbox;
+    wxStaticBox *m_statbox{nullptr};
 };
 
 #endif // _WX_GENERIC_STATLINE_H_

@@ -7,19 +7,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TIMEPICKCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-    #include "wx/utils.h"           // std::max()
-
-    #include <cassert>
-#endif // WX_PRECOMP
-
 #include "wx/timectrl.h"
+
+#include "wx/textctrl.h"
+#include "wx/utils.h"           // std::max()
+
+#include <cassert>
 
 // This class is only compiled if there is no native version or if we
 // explicitly want to use both the native and generic one (this is useful for
@@ -101,7 +96,6 @@ public:
 
         UpdateTextWithoutEvent();
     }
-
 
     // The text part of the control.
     wxTextCtrl* m_text;

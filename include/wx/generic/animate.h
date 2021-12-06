@@ -129,7 +129,6 @@ protected:
 
 private:
     using base_type = wxAnimationCtrlBase;
-    wxDECLARE_DYNAMIC_CLASS(wxGenericAnimationCtrl);
     wxDECLARE_EVENT_TABLE();
 };
 

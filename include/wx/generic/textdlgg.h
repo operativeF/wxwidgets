@@ -34,11 +34,7 @@ inline constexpr std::string_view wxGetPasswordFromUserPromptStr = "Enter Passwo
 class wxTextEntryDialog : public wxDialog
 {
 public:
-    wxTextEntryDialog()
-    {
-        m_textctrl = nullptr;
-        m_dialogStyle = 0;
-    }
+    wxTextEntryDialog() = default;
 
     wxTextEntryDialog(wxWindow *parent,
                       std::string_view message,
@@ -49,6 +45,8 @@ public:
     {
         Create(parent, message, caption, value, style, pos);
     }
+
+	wxTextEntryDialog& operator=(wxTextEntryDialog&&) = delete;
 
     bool Create(wxWindow *parent,
                 std::string_view message,
@@ -77,15 +75,12 @@ public:
     void OnOK(wxCommandEvent& event);
 
 protected:
-    wxTextCtrl *m_textctrl;
+    wxTextCtrl *m_textctrl{nullptr};
     std::string    m_value;
-    long        m_dialogStyle;
+    long        m_dialogStyle{0};
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxTextEntryDialog);
-    wxTextEntryDialog(const wxTextEntryDialog&) = delete;
-	wxTextEntryDialog& operator=(const wxTextEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -106,18 +101,14 @@ public:
         Create(parent, message, caption, value, style, pos);
     }
 
+	wxPasswordEntryDialog& operator=(wxPasswordEntryDialog&&) = delete;
+
     bool Create(wxWindow *parent,
                 std::string_view message,
                 std::string_view caption = wxGetPasswordFromUserPromptStr,
                 std::string_view value = {},
                 unsigned int style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
-
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPasswordEntryDialog);
-    wxPasswordEntryDialog(const wxPasswordEntryDialog&) = delete;
-	wxPasswordEntryDialog& operator=(const wxPasswordEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------

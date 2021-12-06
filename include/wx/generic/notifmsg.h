@@ -31,8 +31,7 @@ public:
         Create(title, message, parent, flags);
     }
 
-    wxGenericNotificationMessage(const wxGenericNotificationMessage&) = delete;
-    wxGenericNotificationMessage& operator=(const wxGenericNotificationMessage&) = delete;
+    wxGenericNotificationMessage& operator=(wxGenericNotificationMessage&&) = delete;
 
     // generic implementation-specific methods
 

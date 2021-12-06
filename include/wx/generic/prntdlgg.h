@@ -203,10 +203,9 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_CLASS(wxGenericPrintSetupDialog);
 };
-#endif
-    // wxUSE_POSTSCRIPT
+
+#endif // wxUSE_POSTSCRIPT
 
 class wxGenericPageSetupDialog : public wxPageSetupDialogBase
 {

@@ -14,16 +14,7 @@
 #include "wx/colordlg.h"
 #include "wx/dcmemory.h"
 
-namespace // anonymous namespace
-{
-const wxSize defaultBitmapSize(60, 13);
-}
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGenericColourButton, wxBitmapButton);
+constexpr wxSize defaultBitmapSize{60, 13};
 
 // ----------------------------------------------------------------------------
 // wxGenericColourButton

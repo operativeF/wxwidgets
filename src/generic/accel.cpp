@@ -7,19 +7,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_ACCEL
 
-#ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/event.h"
-
-    import <cctype>;
-#endif // WX_PRECOMP
-
 #include "wx/accel.h"
+
+#include "wx/list.h"
+#include "wx/event.h"
+
+import <cctype>;
 
 
 // ----------------------------------------------------------------------------
@@ -58,16 +53,9 @@ public:
 // macro which can be used to access wxAccelRefData from wxAcceleratorTable
 #define M_ACCELDATA ((wxAccelRefData *)m_refData)
 
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxAcceleratorTable ctors
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 
 wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[])
 {

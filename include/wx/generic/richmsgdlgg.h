@@ -31,8 +31,7 @@ public:
           m_detailsPane(nullptr)
     {}
 
-    wxGenericRichMessageDialog(const wxGenericRichMessageDialog&) = delete;
-    wxGenericRichMessageDialog& operator=(const wxGenericRichMessageDialog&) = delete;
+    wxGenericRichMessageDialog& operator=(wxGenericRichMessageDialog&&) = delete;
 
     bool IsCheckBoxChecked() const override;
 

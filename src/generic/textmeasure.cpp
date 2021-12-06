@@ -7,13 +7,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/window.h"
-    #include "wx/dc.h"
-#endif //WX_PRECOMP
+#include "wx/window.h"
+#include "wx/dc.h"
 
 #include "wx/private/textmeasure.h"
 

@@ -36,6 +36,8 @@ class wxLogTextCtrl : public wxLog
 public:
     wxLogTextCtrl(wxTextCtrl *pTextCtrl);
 
+	wxLogTextCtrl& operator=(wxLogTextCtrl&&) = delete;
+
 protected:
     // implement sink function
     void DoLogText(const wxString& msg) override;
@@ -43,9 +45,6 @@ protected:
 private:
     // the control we use
     wxTextCtrl *m_pTextCtrl;
-
-    wxLogTextCtrl(const wxLogTextCtrl&) = delete;
-	wxLogTextCtrl& operator=(const wxLogTextCtrl&) = delete;
 };
 
 #endif // wxUSE_TEXTCTRL

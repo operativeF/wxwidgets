@@ -38,6 +38,8 @@ public:
         (void)Create(parent, id, date, pos, size, style, validator, name);
     }
 
+    wxTimePickerCtrlGeneric& operator=(wxTimePickerCtrlGeneric&&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
@@ -64,9 +66,6 @@ private:
 
     // Implementation data.
     class wxTimePickerGenericImpl* m_impl;
-
-    wxTimePickerCtrlGeneric(const wxTimePickerCtrlGeneric&) = delete;
-	wxTimePickerCtrlGeneric& operator=(const wxTimePickerCtrlGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_TIMECTRL_H_

@@ -161,7 +161,6 @@ void wxAnimationGenericImpl::UnRef()
 // wxAnimationCtrl
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxGenericAnimationCtrl, wxAnimationCtrlBase);
 wxBEGIN_EVENT_TABLE(wxGenericAnimationCtrl, wxAnimationCtrlBase)
     EVT_PAINT(wxGenericAnimationCtrl::OnPaint)
     EVT_SIZE(wxGenericAnimationCtrl::OnSize)

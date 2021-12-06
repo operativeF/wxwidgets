@@ -1124,8 +1124,6 @@ int wxTabView::CalculateTabWidth(int noTabs, bool adjustView)
  * wxTabbedDialog
  */
 
-wxIMPLEMENT_CLASS(wxTabbedDialog, wxDialog);
-
 wxBEGIN_EVENT_TABLE(wxTabbedDialog, wxDialog)
     EVT_CLOSE(wxTabbedDialog::OnCloseWindow)
     EVT_MOUSE_EVENTS(wxTabbedDialog::OnMouseEvent)
@@ -1168,8 +1166,6 @@ void wxTabbedDialog::OnPaint([[maybe_unused]] wxPaintEvent& event )
 /*
  * wxTabbedPanel
  */
-
-wxIMPLEMENT_CLASS(wxTabbedPanel, wxPanel);
 
 wxBEGIN_EVENT_TABLE(wxTabbedPanel, wxPanel)
     EVT_MOUSE_EVENTS(wxTabbedPanel::OnMouseEvent)

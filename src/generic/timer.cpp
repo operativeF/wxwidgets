@@ -31,7 +31,7 @@
 
 #define GetMillisecondsTime wxGetLocalTimeMillis
 
-typedef wxLongLong wxTimerTick_t;
+using wxTimerTick_t = wxLongLong;
 
 #if wxUSE_LONGLONG_WX
     #define wxTimerTickFmtSpec wxLongLongFmtSpec "d"

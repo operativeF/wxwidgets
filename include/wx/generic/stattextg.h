@@ -21,11 +21,7 @@
 class wxGenericStaticText : public wxStaticTextBase
 {
 public:
-    wxGenericStaticText() { 
-#if wxUSE_MARKUP
-        m_markupText = nullptr;
-#endif // wxUSE_MARKUP
-     }
+    wxGenericStaticText() = default;
 
     wxGenericStaticText(wxWindow *parent,
                  wxWindowID id,
@@ -35,17 +31,10 @@ public:
                  unsigned int style = 0,
                  std::string_view name = wxStaticTextNameStr)
     {
-        
-#if wxUSE_MARKUP
-        m_markupText = nullptr;
-#endif // wxUSE_MARKUP
-    
-
         Create(parent, id, label, pos, size, style, name);
     }
 
-    wxGenericStaticText(const wxGenericStaticText&) = delete;
-	wxGenericStaticText& operator=(const wxGenericStaticText&) = delete;
+	wxGenericStaticText& operator=(wxGenericStaticText&&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -75,8 +64,6 @@ protected:
 #endif // wxUSE_MARKUP
 
 private:
-    
-
     void OnPaint(wxPaintEvent& event);
 
     void DoDrawLabel(wxDC& dc, const wxRect& rect);
@@ -86,7 +73,7 @@ private:
     std::string m_label;
 
 #if wxUSE_MARKUP
-    class wxMarkupText *m_markupText;
+    class wxMarkupText *m_markupText{nullptr};
 #endif // wxUSE_MARKUP
 
     int m_mnemonic{};

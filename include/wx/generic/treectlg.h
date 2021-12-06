@@ -59,8 +59,7 @@ public:
 
     ~wxGenericTreeCtrl();
 
-    wxGenericTreeCtrl(const wxGenericTreeCtrl&) = delete;
-	wxGenericTreeCtrl& operator=(const wxGenericTreeCtrl&) = delete;
+	wxGenericTreeCtrl& operator=(wxGenericTreeCtrl&&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
