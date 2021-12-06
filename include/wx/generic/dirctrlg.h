@@ -92,8 +92,7 @@ public:
         Create(parent, id, dir, pos, size, style, filter, defaultFilter, name);
     }
 
-    wxGenericDirCtrl(const wxGenericDirCtrl&) = delete;
-	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
+	wxGenericDirCtrl& operator=(wxGenericDirCtrl&&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
               std::string_view dir = wxDirDialogDefaultFolderStr,

@@ -42,7 +42,7 @@ class wxGenericTreeCtrl : public wxTreeCtrlBase,
                                       public wxScrollHelper
 {
 public:
-    wxGenericTreeCtrl() :  wxScrollHelper(this) { Init(); }
+    wxGenericTreeCtrl() : wxScrollHelper(this) { Init(); }
 
     wxGenericTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,

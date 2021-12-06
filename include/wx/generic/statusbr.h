@@ -33,8 +33,7 @@ public:
         Create(parent, winid, style, name);
     }
 
-	wxStatusBarGeneric(const wxStatusBarGeneric&) = delete;
-	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
+	wxStatusBarGeneric& operator=(wxStatusBarGeneric&&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
                 unsigned int style = wxSTB_DEFAULT_STYLE,

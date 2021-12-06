@@ -167,8 +167,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxSashLayoutWindow(const wxSashLayoutWindow&) = delete;
-	wxSashLayoutWindow& operator=(const wxSashLayoutWindow&) = delete;
+	wxSashLayoutWindow& operator=(wxSashLayoutWindow&&) = delete;
 
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
@@ -210,8 +209,6 @@ class wxFrame;
 class wxLayoutAlgorithm
 {
 public:
-    wxLayoutAlgorithm() = default;
-
 #if wxUSE_MDI_ARCHITECTURE
     // The MDI client window is sized to whatever's left over.
     bool LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* rect = nullptr);

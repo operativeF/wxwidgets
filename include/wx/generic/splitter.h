@@ -286,7 +286,6 @@ protected:
     
     double      m_sashGravity{0.0};
 
-    wxSplitDragMode m_dragMode{wxSplitDragMode::None};
     int         m_oldX{0};         // current tracker position if not live mode
     int         m_oldY{0};         // current tracker position if not live mode
     int         m_sashPosition{0}; // Number of pixels from left or top
@@ -295,6 +294,7 @@ protected:
     int         m_sashStart{0};    // sash position when dragging started
     int         m_minimumPaneSize{0};
 
+    wxSplitDragMode m_dragMode{wxSplitDragMode::None};
     wxSplitMode m_splitMode{wxSplitMode::Vertical};
 
     // when in live mode, set this to true to resize children in idle

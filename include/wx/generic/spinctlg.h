@@ -264,12 +264,14 @@ protected:
     }
     void DoSetIncrement(double inc) { m_increment = inc; } // Note: unused
 
+    wxString m_format;
+
     double m_value;
     double m_min;
     double m_max;
     double m_increment;
+    
     bool   m_snap_to_ticks;
-    wxString m_format;
 };
 
 #endif // wxUSE_SPINBTN/!wxUSE_SPINBTN

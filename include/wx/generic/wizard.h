@@ -35,8 +35,7 @@ public:
         Create(parent, id, title, bitmap, pos, style);
     }
 
-    wxWizard(const wxWizard&) = delete;
-	wxWizard& operator=(const wxWizard&) = delete;
+	wxWizard& operator=(wxWizard&&) = delete;
 
     bool Create(wxWindow *parent,
              int id = wxID_ANY,

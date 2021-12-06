@@ -35,8 +35,7 @@ public:
                             wxWindow *parent = nullptr,
                             unsigned int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-    wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
-    wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
+    wxGenericProgressDialog& operator=(wxGenericProgressDialog&&) = delete;
 
     ~wxGenericProgressDialog();
 

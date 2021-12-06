@@ -23,8 +23,7 @@ class wxColourDialogEvent;
 // wxGenericColourButton: a button which brings up a wxColourDialog
 //-----------------------------------------------------------------------------
 
-class wxGenericColourButton : public wxBitmapButton,
-                                               public wxColourPickerWidgetBase
+class wxGenericColourButton : public wxBitmapButton, public wxColourPickerWidgetBase
 {
 public:
     wxGenericColourButton() = default;

@@ -85,8 +85,7 @@ public:
         Create(parent, message, caption, choices, clientData, style, pos);
     }
 
-    wxSingleChoiceDialog(const wxSingleChoiceDialog&) = delete;
-	wxSingleChoiceDialog& operator=(const wxSingleChoiceDialog&) = delete;
+	wxSingleChoiceDialog& operator=(wxSingleChoiceDialog&&) = delete;
 
     bool Create(wxWindow *parent,
                 const std::string& message,

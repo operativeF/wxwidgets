@@ -25,8 +25,7 @@ public:
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
 
-	wxDataViewCustomRenderer(const wxDataViewCustomRenderer&) = delete;
-	wxDataViewCustomRenderer& operator=(const wxDataViewCustomRenderer&) = delete;
+	wxDataViewCustomRenderer& operator=(wxDataViewCustomRenderer&&) = delete;
 
     // see the explanation of the following WXOnXXX() methods in wx/generic/dvrenderer.h
 
@@ -59,8 +58,7 @@ public:
                             int align = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewTextRenderer();
 
-	wxDataViewTextRenderer(const wxDataViewTextRenderer&) = delete;
-	wxDataViewTextRenderer& operator=(const wxDataViewTextRenderer&) = delete;
+	wxDataViewTextRenderer& operator=(wxDataViewTextRenderer&&) = delete;
 
 #if wxUSE_MARKUP
     void EnableMarkup(bool enable = true);
@@ -103,8 +101,7 @@ public:
                               wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
-	wxDataViewBitmapRenderer(const wxDataViewBitmapRenderer&) = delete;
-	wxDataViewBitmapRenderer& operator=(const wxDataViewBitmapRenderer&) = delete;
+	wxDataViewBitmapRenderer& operator=(wxDataViewBitmapRenderer&&) = delete;
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
@@ -133,8 +130,7 @@ public:
                               wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
-	wxDataViewToggleRenderer(const wxDataViewToggleRenderer&) = delete;
-	wxDataViewToggleRenderer& operator=(const wxDataViewToggleRenderer&) = delete;
+	wxDataViewToggleRenderer& operator=(wxDataViewToggleRenderer&&) = delete;
 
     void ShowAsRadio() { m_radio = true; }
 
@@ -172,8 +168,7 @@ public:
                                 wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
-	wxDataViewProgressRenderer(const wxDataViewProgressRenderer&) = delete;
-	wxDataViewProgressRenderer& operator=(const wxDataViewProgressRenderer&) = delete;
+	wxDataViewProgressRenderer& operator=(wxDataViewProgressRenderer&&) = delete;
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant& value ) const override;
@@ -202,8 +197,7 @@ public:
                                 wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
-	wxDataViewIconTextRenderer(const wxDataViewIconTextRenderer&) = delete;
-	wxDataViewIconTextRenderer& operator=(const wxDataViewIconTextRenderer&) = delete;
+	wxDataViewIconTextRenderer& operator=(wxDataViewIconTextRenderer&&) = delete;
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;

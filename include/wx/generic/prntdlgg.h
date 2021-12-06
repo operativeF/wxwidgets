@@ -213,8 +213,7 @@ public:
     wxGenericPageSetupDialog(wxWindow *parent = nullptr,
                              wxPageSetupDialogData* data = nullptr);
 
-	wxGenericPageSetupDialog(const wxGenericPageSetupDialog&) = delete;
-	wxGenericPageSetupDialog& operator=(const wxGenericPageSetupDialog&) = delete;
+	wxGenericPageSetupDialog& operator=(wxGenericPageSetupDialog&&) = delete;
 
     bool TransferDataFromWindow() override;
     bool TransferDataToWindow() override;

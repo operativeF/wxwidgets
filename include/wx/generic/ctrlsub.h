@@ -19,10 +19,7 @@ import <vector>;
 class wxControlWithItemsGeneric : public wxControlWithItemsBase
 {
 public:
-    wxControlWithItemsGeneric() = default;
-
-    wxControlWithItemsGeneric(const wxControlWithItemsGeneric&) = delete;
-    wxControlWithItemsGeneric& operator=(const wxControlWithItemsGeneric&) = delete;
+    wxControlWithItemsGeneric(wxControlWithItemsGeneric&&) = delete;
 
     virtual void DoInitItemClientData()
     {

@@ -217,8 +217,6 @@ private:
 class wxGenericMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
-    wxGenericMDIClientWindow() { }
-
     // unfortunately we need to provide our own version of CreateClient()
     // because of the difference in the type of the first parameter and
     // implement the base class pure virtual method in terms of it

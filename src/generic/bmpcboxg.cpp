@@ -14,10 +14,7 @@
 
 #if defined(wxGENERIC_BITMAPCOMBOBOX)
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif
-
+#include "wx/log.h"
 #include "wx/odcombo.h"
 #include "wx/settings.h"
 #include "wx/dc.h"
@@ -43,9 +40,6 @@
 wxBEGIN_EVENT_TABLE(wxBitmapComboBox, wxOwnerDrawnComboBox)
     EVT_SIZE(wxBitmapComboBox::OnSize)
 wxEND_EVENT_TABLE()
-
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBox, wxOwnerDrawnComboBox);
 
 wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
                                   wxWindowID id,

@@ -30,8 +30,7 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxGenericCollapsibleHeaderCtrl(const wxGenericCollapsibleHeaderCtrl&) = delete;
-    wxGenericCollapsibleHeaderCtrl& operator=(const wxGenericCollapsibleHeaderCtrl&) = delete;
+    wxGenericCollapsibleHeaderCtrl& operator=(wxGenericCollapsibleHeaderCtrl&&) = delete;
 
     bool Create(wxWindow *parent,
         wxWindowID id,

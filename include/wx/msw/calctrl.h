@@ -92,9 +92,6 @@ private:
 
     // the same but indicating whether a day is a holiday or not
     std::uint32_t m_holidays {0};
-
-
-    wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrl);
 };
 
 #endif // _WX_MSW_CALCTRL_H_

@@ -27,8 +27,7 @@ public:
                                    const std::string& title,
                                    const wxWebCredentials& cred = wxWebCredentials());
 
-    wxGenericCredentialEntryDialog(const wxGenericCredentialEntryDialog&) = delete;
-	wxGenericCredentialEntryDialog& operator=(const wxGenericCredentialEntryDialog&) = delete;
+	wxGenericCredentialEntryDialog& operator=(wxGenericCredentialEntryDialog&&) = delete;
 
     bool Create(wxWindow* parent,
                 const std::string& message,

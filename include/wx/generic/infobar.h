@@ -32,8 +32,7 @@ public:
         Create(parent, winid);
     }
 
-    wxInfoBarGeneric(const wxInfoBarGeneric&) = delete;
-	wxInfoBarGeneric& operator=(const wxInfoBarGeneric&) = delete;
+	wxInfoBarGeneric& operator=(wxInfoBarGeneric&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY);
 

@@ -25,8 +25,7 @@ public:
                         int align = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewRenderer();
 
-    wxDataViewRenderer(const wxDataViewRenderer&) = delete;
-	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;
+	wxDataViewRenderer& operator=(wxDataViewRenderer&&) = delete;
 
     wxDC *GetDC() override;
 

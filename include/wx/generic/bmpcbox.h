@@ -23,12 +23,9 @@
 // in front of string items.
 // ----------------------------------------------------------------------------
 
-class wxBitmapComboBox : public wxOwnerDrawnComboBox,
-                                         public wxBitmapComboBoxBase
+class wxBitmapComboBox : public wxOwnerDrawnComboBox, public wxBitmapComboBoxBase
 {
 public:
-
-    
     wxBitmapComboBox()
     {
         Init();
@@ -133,8 +130,6 @@ private:
     void Init();
 
     wxDECLARE_EVENT_TABLE();
-
-    wxDECLARE_DYNAMIC_CLASS(wxBitmapComboBox);
 };
 
 #endif // _WX_GENERIC_BMPCBOX_H_

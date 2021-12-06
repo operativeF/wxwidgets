@@ -28,7 +28,7 @@ class wxTabView;
 class wxTabControl: public wxObject
 {
 public:
-    wxTabControl(wxTabView *v = NULL);
+    wxTabControl(wxTabView *v = nullptr);
     virtual ~wxTabControl(void);
 
     virtual void OnDraw(wxDC& dc, bool lastInRow);
@@ -60,9 +60,12 @@ public:
     virtual bool HitTest(int x, int y) const ;
 
 protected:
-    wxTabView*      m_view;
     std::string     m_controlLabel;
+    
     wxFont          m_labelFont;
+
+    wxTabView*      m_view;
+    
     int             m_offsetX; // Offsets from top-left of tab view area (the area below the tabs)
     int             m_offsetY;
     int             m_width;
@@ -70,6 +73,7 @@ protected:
     int             m_id;
     int             m_rowPosition; // Position in row from 0
     int             m_colPosition; // Position in col from 0
+
     bool            m_isSelected;
 
 };

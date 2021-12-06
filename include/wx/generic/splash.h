@@ -88,8 +88,7 @@ public:
                          const wxSize& size = wxDefaultSize,
                          unsigned int style = wxNO_BORDER);
     
-    wxSplashScreenWindow(const wxSplashScreenWindow&) = delete;
-    wxSplashScreenWindow& operator=(const wxSplashScreenWindow&) = delete;
+    wxSplashScreenWindow& operator=(wxSplashScreenWindow&&) = delete;
 
     void OnPaint(wxPaintEvent& event);
     void OnEraseBackground(wxEraseEvent& event);

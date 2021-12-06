@@ -124,8 +124,7 @@ public:
 
     ~wxLogWindow();
 
-    wxLogWindow(const wxLogWindow&) = delete;
-    wxLogWindow& operator=(const wxLogWindow&) = delete;
+    wxLogWindow& operator=(wxLogWindow&&) = delete;
 
     // window operations
         // show/hide the log window

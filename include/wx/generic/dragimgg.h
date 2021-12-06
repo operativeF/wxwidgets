@@ -141,6 +141,8 @@ public:
     }
 #endif
 
+	wxGenericDragImage& operator=(wxGenericDragImage&&) = delete;
+
     ~wxGenericDragImage();
 
     // Attributes
@@ -254,10 +256,6 @@ protected:
     bool            m_fullScreen;
     bool            m_isDirty;
     bool            m_isShown;
-
-private:
-    wxGenericDragImage(const wxGenericDragImage&) = delete;
-	wxGenericDragImage& operator=(const wxGenericDragImage&) = delete;
 };
 
 #endif

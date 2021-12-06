@@ -21,10 +21,7 @@ class wxWindow;
 class wxCustomBackgroundWindowGenericBase : public wxCustomBackgroundWindowBase
 {
 public:
-    wxCustomBackgroundWindowGenericBase() = default;
-
-    wxCustomBackgroundWindowGenericBase(const wxCustomBackgroundWindowGenericBase&) = delete;
-    wxCustomBackgroundWindowGenericBase& operator=(const wxCustomBackgroundWindowGenericBase&) = delete;
+    wxCustomBackgroundWindowGenericBase& operator=(wxCustomBackgroundWindowGenericBase&&) = delete;
 
 protected:
     void DoEraseBackground(wxEraseEvent& event, wxWindow* win)
@@ -59,10 +56,7 @@ class wxCustomBackgroundWindow : public W,
 public:
     using BaseWindowClass = W;
 
-    wxCustomBackgroundWindow() = default;
-
-    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
-    wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
+    wxCustomBackgroundWindow& operator=(wxCustomBackgroundWindow<W>&&) = delete;
 
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override
