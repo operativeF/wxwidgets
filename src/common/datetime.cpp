@@ -164,10 +164,6 @@ static const wxDateTime::wxDateTime_t gs_cumulatedDays[2][MONTHS_IN_YEAR] =
 // global data
 // ----------------------------------------------------------------------------
 
-// in the fine tradition of ANSI C we use our equivalent of (time_t)-1 to
-// indicate an invalid wxDateTime object
-const wxDateTime wxDefaultDateTime;
-
 wxDateTime::Country wxDateTime::ms_country = wxDateTime::Country_Unknown;
 
 // ----------------------------------------------------------------------------

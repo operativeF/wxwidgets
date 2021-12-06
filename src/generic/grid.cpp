@@ -42,12 +42,6 @@ module;
 
 #include <gsl/gsl>
 
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
-#include "wx/arrimpl.cpp"
-
 module WX.Generic.Grid;
 
 import WX.Grid.Selection;

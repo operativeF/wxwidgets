@@ -105,10 +105,6 @@ class wxDateTime;
 inline constexpr char wxDefaultDateTimeFormat[] = "%c";
 inline constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
 
-extern const wxDateTime wxDefaultDateTime;
-
-#define wxInvalidDateTime wxDefaultDateTime
-
 
 // ----------------------------------------------------------------------------
 // conditional compilation
@@ -955,13 +951,13 @@ public:
                      const wxString& format,
                      wxString::const_iterator *end)
     {
-        return ParseFormat(date, format, wxDefaultDateTime, end);
+        return ParseFormat(date, format, wxDateTime{}, end);
     }
 
     bool ParseFormat(const wxString& date,
                      wxString::const_iterator *end)
     {
-        return ParseFormat(date, wxDefaultDateTimeFormat, wxDefaultDateTime, end);
+        return ParseFormat(date, wxDefaultDateTimeFormat, wxDateTime{}, end);
     }
 
         // parse a string containing date, time or both in ISO 8601 format
@@ -1042,7 +1038,7 @@ public:
 
     wxAnyStrPtr ParseFormat(const wxString& date,
                             const wxString& format = wxDefaultDateTimeFormat,
-                            const wxDateTime& dateDef = wxDefaultDateTime)
+                            const wxDateTime& dateDef = {})
     {
         wxString::const_iterator end;
         return ParseFormat(date, format, dateDef, &end) ? wxAnyStrPtr(date, end)
@@ -1091,14 +1087,14 @@ public:
 
     void ParseFormat(const wxCStrData& date,
                      const wxString& format = wxDefaultDateTimeFormat,
-                     const wxDateTime& dateDef = wxDefaultDateTime)
+                     const wxDateTime& dateDef = {})
         { ParseFormat(wxString(date), format, dateDef); }
     const char* ParseFormat(const char* date,
                             const wxString& format = wxDefaultDateTimeFormat,
-                            const wxDateTime& dateDef = wxDefaultDateTime);
+                            const wxDateTime& dateDef = {});
     const wchar_t* ParseFormat(const wchar_t* date,
                                const wxString& format = wxDefaultDateTimeFormat,
-                               const wxDateTime& dateDef = wxDefaultDateTime);
+                               const wxDateTime& dateDef = {});
 
     void ParseDateTime(const wxCStrData& datetime)
         { ParseDateTime(wxString(datetime)); }
@@ -1161,6 +1157,13 @@ private:
     // value: the midnight of January 1, 1970 (UTC)
     wxLongLong m_time;
 };
+
+// in the fine tradition of ANSI C we use our equivalent of (time_t)-1 to
+// indicate an invalid wxDateTime object
+
+inline const wxDateTime wxDefaultDateTime;
+
+#define wxInvalidDateTime wxDefaultDateTime
 
 // ----------------------------------------------------------------------------
 // This class contains a difference between 2 wxDateTime values, so it makes

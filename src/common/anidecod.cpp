@@ -8,7 +8,6 @@
 
 module;
 
-#include "wx/dynarray.h"
 #include "wx/gdicmn.h"
 #include "wx/stream.h"
 
