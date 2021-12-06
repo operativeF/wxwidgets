@@ -10,7 +10,7 @@
 
 #include "wx/base64.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 size_t
 wxBase64Encode(char *dst, size_t dstLen, const void *src_, size_t srcLen)
@@ -117,7 +117,7 @@ wxBase64Decode(void *dst_, size_t dstLen,
     const char *p;
     for ( p = src; srcLen; p++, srcLen-- )
     {
-        const unsigned char c = decode[gsl::narrow_cast<unsigned char>(*p)];
+        const unsigned char c = decode[wx::narrow_cast<unsigned char>(*p)];
         switch ( c )
         {
             case WSP:

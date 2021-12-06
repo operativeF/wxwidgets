@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XRC && wxUSE_RICHTEXT
 
 #include "wx/xrc/xh_richtext.h"

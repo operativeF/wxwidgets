@@ -47,7 +47,7 @@
 
 #include "wx/msw/private.h" // user info and wndproc setting/getting
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import WX.WinDef;
 
@@ -1519,7 +1519,7 @@ void wxAMMediaEvtHandler::OnActiveX(wxActiveXEvent& event)
 {
     // cast to unsigned long to fix narrowing error with case 0xfffffd9f
     // when using clang
-    switch (gsl::narrow_cast<unsigned long>(event.GetDispatchId()))
+    switch (wx::narrow_cast<unsigned long>(event.GetDispatchId()))
     {
     case 0x00000001: // statechange in IActiveMovie
     case 0x00000bc4: // playstatechange in IMediaPlayer

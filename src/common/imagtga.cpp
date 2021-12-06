@@ -13,9 +13,9 @@ module;
 #include "wx/scopedarray.h"
 #include "wx/stream.h"
 
-#include <gsl/gsl>
-
 module WX.Image.TGA;
+
+import WX.Utils.Cast;
 
 #if wxUSE_IMAGE && wxUSE_TGA
 
@@ -242,7 +242,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
 
     const short pixelSize = bpp / 8;
 
-    const unsigned long imageSize = gsl::narrow_cast<unsigned long>(width) * height * pixelSize;
+    const unsigned long imageSize = wx::narrow_cast<unsigned long>(width) * height * pixelSize;
 
     auto imageData = std::make_unique<unsigned char[]>(imageSize);
 

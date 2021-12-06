@@ -95,7 +95,6 @@ set(CMAKE_CXX_SYSROOT_FLAG_CODE "list(APPEND CMAKE_CXX_SOURCE_FILE_EXTENSIONS ix
 
 project(wxWidgets VERSION ${wxVERSION})
 
-find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(doctest CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS nowide)

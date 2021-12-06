@@ -22,7 +22,7 @@
 
 #include "zlib.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // signatures for the various records (PKxx)
 enum {
@@ -88,7 +88,7 @@ static inline std::uint16_t LimitUint16(std::uint64_t value)
     if (value > 0xffff)
         return 0xffff;
     else
-        return gsl::narrow_cast<std::uint16_t>(value);
+        return wx::narrow_cast<std::uint16_t>(value);
 }
 
 static inline std::uint32_t LimitUint32(std::uint64_t value)
@@ -96,7 +96,7 @@ static inline std::uint32_t LimitUint32(std::uint64_t value)
     if (value > 0xffffffff)
         return 0xffffffff;
     else
-        return gsl::narrow_cast<std::uint32_t>(value);
+        return wx::narrow_cast<std::uint32_t>(value);
 }
 
 // Decode a little endian std::uint64_t number from a character array
@@ -289,7 +289,7 @@ wxStoredInputStream::wxStoredInputStream(wxInputStream& stream)
 
 size_t wxStoredInputStream::OnSysRead(void *buffer, size_t size)
 {
-    size_t count = gsl::narrow_cast<size_t>(
+    size_t count = wx::narrow_cast<size_t>(
         std::min(size + wxFileOffset{0}, m_len - m_pos + size_t{0}));
     count = m_parent_i_stream->Read(buffer, count).LastRead();
     m_pos += count;
@@ -683,7 +683,7 @@ public:
 
     wxZipWeakLinks *AddEntry(wxZipEntry *entry, wxFileOffset key);
     void RemoveEntry(wxFileOffset key)
-        { m_entries.erase(gsl::narrow_cast<key_type>(key)); }
+        { m_entries.erase(wx::narrow_cast<key_type>(key)); }
     wxZipEntry *GetEntry(wxFileOffset key) const;
     bool IsEmpty() const { return m_entries.empty(); }
 
@@ -700,7 +700,7 @@ private:
 
 wxZipWeakLinks *wxZipWeakLinks::AddEntry(wxZipEntry *entry, wxFileOffset key)
 {
-    m_entries[gsl::narrow_cast<key_type>(key)] = entry;
+    m_entries[wx::narrow_cast<key_type>(key)] = entry;
     m_ref++;
     return this;
 }
@@ -708,7 +708,7 @@ wxZipWeakLinks *wxZipWeakLinks::AddEntry(wxZipEntry *entry, wxFileOffset key)
 wxZipEntry *wxZipWeakLinks::GetEntry(wxFileOffset key) const
 {
     wxOffsetZipEntryMap_::const_iterator it =
-        m_entries.find(gsl::narrow_cast<key_type>(key));
+        m_entries.find(wx::narrow_cast<key_type>(key));
     return it != m_entries.end() ?  it->second : NULL;
 }
 
@@ -1100,7 +1100,7 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
     const wxWX2MBbuf name_buf = unixName.mb_str(conv);
     const char *name = name_buf;
     if (!name) name = "";
-    const auto nameLen = gsl::narrow_cast<std::uint16_t>(strlen(name));
+    const auto nameLen = wx::narrow_cast<std::uint16_t>(strlen(name));
 
     if ( (zipFormat == wxZIP_FORMAT_ZIP64) ||
         m_CompressedSize >= 0xffffffff || m_Size >= 0xffffffff )
@@ -1117,7 +1117,7 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
     WriteLocalFileSizes(ds);
 
     ds << nameLen;
-    auto extraLen = gsl::narrow_cast<std::uint16_t>(GetLocalExtraLen());
+    auto extraLen = wx::narrow_cast<std::uint16_t>(GetLocalExtraLen());
     if (m_z64infoOffset)
         extraLen += 20; // tag and 2x64bit file sizes
     ds.Write16(extraLen);
@@ -1193,14 +1193,14 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
     const wxWX2MBbuf name_buf = unixName.mb_str(conv);
     const char *name = name_buf;
     if (!name) name = "";
-    auto nameLen = gsl::narrow_cast<std::uint16_t>(strlen(name));
+    auto nameLen = wx::narrow_cast<std::uint16_t>(strlen(name));
 
     const wxWX2MBbuf comment_buf = m_Comment.mb_str(conv);
     const char *comment = comment_buf;
     if (!comment) comment = "";
-    auto commentLen = gsl::narrow_cast<std::uint16_t>(strlen(comment));
+    auto commentLen = wx::narrow_cast<std::uint16_t>(strlen(comment));
 
-    auto extraLen = gsl::narrow_cast<std::uint16_t>(GetExtraLen());
+    auto extraLen = wx::narrow_cast<std::uint16_t>(GetExtraLen());
     auto z64InfoLen = 0;
 
     bool z64Required = false;
@@ -1232,8 +1232,8 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
     ds << CENTRAL_MAGIC << m_VersionMadeBy << m_SystemMadeBy;
 
     ds.Write16(versionNeeded);
-    ds.Write16(gsl::narrow_cast<std::uint16_t>(GetInternalFlags(conv.IsUTF8())));
-    ds.Write16(gsl::narrow_cast<std::uint16_t>(GetMethod()));
+    ds.Write16(wx::narrow_cast<std::uint16_t>(GetInternalFlags(conv.IsUTF8())));
+    ds.Write16(wx::narrow_cast<std::uint16_t>(GetMethod()));
     ds.Write32(GetDateTime().GetAsDOS());
     ds.Write32(GetCrc());
     ds.Write32(LimitUint32(GetCompressedSize()));
@@ -1250,11 +1250,11 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
         ds.Write16(1); // tag
         ds.Write16(z64InfoLen); // record size
         if (m_Size > 0xffffffff)
-            ds.Write64(gsl::narrow_cast<std::int64_t>(m_Size));
+            ds.Write64(wx::narrow_cast<std::int64_t>(m_Size));
         if (m_CompressedSize > 0xffffffff)
-            ds.Write64(gsl::narrow_cast<std::int64_t>(m_CompressedSize));
+            ds.Write64(wx::narrow_cast<std::int64_t>(m_CompressedSize));
         if (m_Offset > 0xffffffff)
-            ds.Write64(gsl::narrow_cast<std::int64_t>(m_Offset));
+            ds.Write64(wx::narrow_cast<std::int64_t>(m_Offset));
     }
     if (GetExtraLen())
         stream.Write(GetExtra(), GetExtraLen());
@@ -1298,7 +1298,7 @@ size_t wxZipEntry::ReadDescriptor(wxInputStream& stream)
             // it's an info-zip record as expected
             if (buf.GetSize() > 4)
                 stream.Ungetch(buf.GetData() + 4, buf.GetSize() - 4);
-            m_Crc = gsl::narrow_cast<std::uint32_t>(m_CompressedSize);
+            m_Crc = wx::narrow_cast<std::uint32_t>(m_CompressedSize);
             m_CompressedSize = m_Size;
             m_Size = u1;
             return SUMS_SIZE + 4;
@@ -1335,9 +1335,9 @@ void wxZipEntry::WriteLocalFileSizes(wxDataOutputStream& ds) const
     else
     {
         compressedSize = m_CompressedSize != wxInvalidOffset ?
-             gsl::narrow_cast<std::uint32_t>(m_CompressedSize) : 0;
+             wx::narrow_cast<std::uint32_t>(m_CompressedSize) : 0;
         size = m_Size != wxInvalidOffset ?
-            gsl::narrow_cast<std::uint32_t>(m_Size) : 0;
+            wx::narrow_cast<std::uint32_t>(m_Size) : 0;
     }
     ds.Write32(compressedSize);
     ds.Write32(size);
@@ -1348,8 +1348,8 @@ void  wxZipEntry::WriteLocalZip64ExtraInfo(wxOutputStream& stream) const
     wxDataOutputStream ds(stream);
     ds.Write16(1);  // id
     ds.Write16(16); // record size
-    ds.Write64(gsl::narrow_cast<std::uint64_t>(m_Size));
-    ds.Write64(gsl::narrow_cast<std::uint64_t>(m_CompressedSize));
+    ds.Write64(wx::narrow_cast<std::uint64_t>(m_Size));
+    ds.Write64(wx::narrow_cast<std::uint64_t>(m_CompressedSize));
 }
 
 // Returns the flags as specified or including the UTF-8 flag if filename
@@ -1378,17 +1378,17 @@ public:
     wxString GetComment() const                 { return m_Comment; }
 
     void SetDiskNumber(int num)
-        { m_DiskNumber = gsl::narrow_cast<std::uint32_t>(num); }
+        { m_DiskNumber = wx::narrow_cast<std::uint32_t>(num); }
     void SetStartDisk(int num)
-        { m_StartDisk = gsl::narrow_cast<std::uint32_t>(num); }
+        { m_StartDisk = wx::narrow_cast<std::uint32_t>(num); }
     void SetEntriesHere(int num)
-        { m_EntriesHere = gsl::narrow_cast<std::uint32_t>(num); }
+        { m_EntriesHere = wx::narrow_cast<std::uint32_t>(num); }
     void SetTotalEntries(int num)
-        { m_TotalEntries = gsl::narrow_cast<std::uint32_t>(num); }
+        { m_TotalEntries = wx::narrow_cast<std::uint32_t>(num); }
     void SetSize(wxFileOffset size)
-        { m_Size = gsl::narrow_cast<std::uint64_t>(size); }
+        { m_Size = wx::narrow_cast<std::uint64_t>(size); }
     void SetOffset(wxFileOffset offset)
-        { m_Offset = gsl::narrow_cast<std::uint64_t>(offset); }
+        { m_Offset = wx::narrow_cast<std::uint64_t>(offset); }
     void SetComment(const wxString& comment)
         { m_Comment = comment; }
 
@@ -1435,7 +1435,7 @@ bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
         // Write zip64 end of central directory locator
         ds.Write32(Z64_LOC_MAGIC);
         ds.Write32(m_StartDisk);
-        ds.Write64(gsl::narrow_cast<std::int64_t>(z64endOffset));
+        ds.Write64(wx::narrow_cast<std::int64_t>(z64endOffset));
         ds.Write32(1); // total number of disks
     }
 
@@ -1757,7 +1757,7 @@ bool wxZipInputStream::FindEndRecord()
     wxFileOffset minpos = std::max(pos - 65535LL, 0LL);
 
     while (pos > minpos) {
-        size_t len = gsl::narrow_cast<size_t>(
+        size_t len = wx::narrow_cast<size_t>(
                         pos - std::max(pos - (BUFSIZE - 3), minpos));
         if ( len < 3 )
             break;

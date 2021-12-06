@@ -23,7 +23,8 @@
 #include "wx/msw/htmlhelp.h"
 
 #include <boost/nowide/stackstring.hpp>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 // ----------------------------------------------------------------------------
 // utility functions to manage the loading/unloading
@@ -147,7 +148,7 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
     HH_POPUP popup = {
         .cbStruct{sizeof(popup)},
         .hinst{(WXHINSTANCE) wxGetInstance()},
-        .idString{gsl::narrow_cast<WXUINT>(contextId)},
+        .idString{wx::narrow_cast<WXUINT>(contextId)},
         .pszText{stackText.get()},
         .pt{pos.x, pos.y},
         .clrForeground{::GetSysColor(COLOR_INFOTEXT)},

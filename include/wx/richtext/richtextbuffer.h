@@ -70,7 +70,7 @@ import Utils.Position;
 #include "wx/dataobj.h"
 #endif
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import WX.Image;
 
@@ -3444,7 +3444,7 @@ public:
     /**
         Returns the number of paragraphs.
     */
-    virtual int GetParagraphCount() const { return gsl::narrow_cast<int>(GetChildCount()); }
+    virtual int GetParagraphCount() const { return wx::narrow_cast<int>(GetChildCount()); }
 
     /**
         Returns the number of visible lines.

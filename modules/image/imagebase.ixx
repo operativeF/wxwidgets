@@ -15,10 +15,9 @@ module;
 
 #include "wx/stream.h"
 
-#include <gsl/gsl>
-
 export module WX.Image.Base;
 
+import WX.Utils.Cast;
 import Utils.Geometry;
 import WX.WinDef;
 

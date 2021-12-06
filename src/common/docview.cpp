@@ -42,7 +42,7 @@
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import Utils.Strings;
 
@@ -1070,7 +1070,7 @@ void wxDocManager::OnMRUFile(wxCommandEvent& event)
         // Check if the id is in the range assigned to MRU list entries.
         const int id = event.GetId();
         if ( id >= wxID_FILE1 &&
-                id < wxID_FILE1 + gsl::narrow_cast<int>(m_fileHistory->GetCount()) )
+                id < wxID_FILE1 + wx::narrow_cast<int>(m_fileHistory->GetCount()) )
         {
             DoOpenMRUFile(id - wxID_FILE1);
 

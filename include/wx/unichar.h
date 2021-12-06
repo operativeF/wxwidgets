@@ -21,7 +21,7 @@ import <algorithm>;        // std::swap() for C++98
 import <cstdint>;
 import <utility>;          // std::swap() for C++11
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 class wxUniCharRef;
 class wxString;
@@ -84,7 +84,7 @@ public:
             return false;
         }
 
-        *c = gsl::narrow_cast<char>(m_value);
+        *c = wx::narrow_cast<char>(m_value);
         return true;
     }
 
@@ -98,14 +98,14 @@ public:
     static std::uint16_t HighSurrogate(std::uint32_t value)
     {
         wxASSERT_MSG(IsSupplementary(value), "wxUniChar::HighSurrogate() must be called on a supplementary character");
-        return gsl::narrow_cast<std::uint16_t>(0xD800 | ((value - 0x10000) >> 10));
+        return wx::narrow_cast<std::uint16_t>(0xD800 | ((value - 0x10000) >> 10));
     }
 
     // Returns the low surrogate code unit for the supplementary character
     static std::uint16_t LowSurrogate(std::uint32_t value)
     {
         wxASSERT_MSG(IsSupplementary(value), "wxUniChar::LowSurrogate() must be called on a supplementary character");
-        return gsl::narrow_cast<std::uint16_t>(0xDC00 | ((value - 0x10000) & 0x03FF));
+        return wx::narrow_cast<std::uint16_t>(0xDC00 | ((value - 0x10000) & 0x03FF));
     }
 
     // Returns true if the character is a BMP character:
@@ -190,7 +190,7 @@ private:
     static char To8bit(value_type c)
     {
         if ( c < 0x80 )
-            return gsl::narrow_cast<char>(c);
+            return wx::narrow_cast<char>(c);
 
         return ToHi8bit(c);
     }

@@ -19,8 +19,6 @@ module;
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 
-#include <gsl/gsl>
-
 // Under Windows we can load wxImage not only from files but also from
 // resources.
 #if defined(WX_WINDOWS) && wxUSE_WXDIB && wxUSE_IMAGE \
@@ -40,6 +38,8 @@ module WX.Image.Base;
 import WX.WinDef;
 
 import Utils.Strings;
+
+import WX.Utils.Cast;
 
 import <algorithm>;
 import <cmath>;
@@ -3265,7 +3265,7 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
     else // not grey
     {
         const double hue = hsv.hue * 6.0;      // sector 0 to 5
-        const auto i = gsl::narrow_cast<int>(std::floor(hue));
+        const auto i = wx::narrow_cast<int>(std::floor(hue));
         const double f = hue - i;          // fractional part of h
         const double p = hsv.value * (1.0 - hsv.saturation);
 
@@ -3309,9 +3309,9 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
         }
     }
 
-    return {gsl::narrow_cast<unsigned char>(std::lround(red * 255.0)),
-            gsl::narrow_cast<unsigned char>(std::lround(green * 255.0)),
-            gsl::narrow_cast<unsigned char>(std::lround(blue * 255.0))};
+    return {wx::narrow_cast<unsigned char>(std::lround(red * 255.0)),
+            wx::narrow_cast<unsigned char>(std::lround(green * 255.0)),
+            wx::narrow_cast<unsigned char>(std::lround(blue * 255.0))};
 }
 
 // TODO-C++11: Replace with a lambda function.
@@ -3582,7 +3582,7 @@ unsigned long wxImage::CountColours( unsigned long stopafter ) const
     wxObject dummy;
     unsigned char *p = GetData();
 
-    auto size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
+    auto size = wx::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
     unsigned long nentries = 0;
 
     for (unsigned long j = 0; (j < size) && (nentries <= stopafter) ; j++)
@@ -3611,7 +3611,7 @@ unsigned long wxImage::ComputeHistogram( wxImageHistogram &h ) const
 
     h.clear();
 
-    const unsigned long size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
+    const unsigned long size = wx::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
 
     for ( unsigned long n = 0; n < size; n++ )
     {

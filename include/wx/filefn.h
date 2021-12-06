@@ -423,7 +423,7 @@ inline int wxMkDir(const wxString& path, mode_t mode)
     #define wxO_BINARY 0
 #endif
 
-inline constexpr auto wxInvalidOffset = gsl::narrow_cast<unsigned int>(-1);
+inline constexpr auto wxInvalidOffset = wx::narrow_cast<unsigned int>(-1);
 
 // ----------------------------------------------------------------------------
 // functions

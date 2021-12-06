@@ -422,7 +422,6 @@ target_link_libraries(wxcore
         stdlibcore
         Boost::nowide
         fmt::fmt
-        Microsoft.GSL::GSL
         png
         ${JPEG_LIBRARIES}
         TIFF::TIFF

@@ -60,7 +60,8 @@
 #endif // __WXMSW__
 
 #include <fmt/core.h>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import <cmath>;
 
@@ -1156,7 +1157,7 @@ public:
             return 0;
 
         // Cast is safe because the value is less than (int) m_maxPage.
-        return gsl::narrow_cast<int>(value);
+        return wx::narrow_cast<int>(value);
     }
 
 private:

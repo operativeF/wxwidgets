@@ -17,7 +17,7 @@
 #include "wx/utils.h"
 #include "wx/settings.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import WX.WinDef;
 
@@ -181,7 +181,7 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
         .fMask = SIF_PAGE | SIF_RANGE | SIF_POS,
         .nMin = 0,
         .nMax = range1,
-        .nPage = gsl::narrow_cast<WXUINT>(m_pageSize),
+        .nPage = wx::narrow_cast<WXUINT>(m_pageSize),
         .nPos = position
     };
 

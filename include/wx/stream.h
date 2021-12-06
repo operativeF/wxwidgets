@@ -39,7 +39,7 @@ enum wxStreamError
     wxSTREAM_READ_ERROR         // generic read error
 };
 
-inline constexpr auto wxEOF = gsl::narrow_cast<unsigned int>(-1);
+inline constexpr auto wxEOF = wx::narrow_cast<unsigned int>(-1);
 
 // ============================================================================
 // base stream classes: wxInputStream and wxOutputStream

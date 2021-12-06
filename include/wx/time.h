@@ -12,7 +12,7 @@
 
 #include "wx/longlong.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // Returns the difference between UTC and local time in seconds.
 int wxGetTimeZone();
@@ -28,7 +28,7 @@ extern long wxGetUTCTime();
     inline long wxMilliClockToLong(wxLongLong ll) { return ll.ToLong(); }
 #else
     using wxMilliClock_t = double;
-    inline long wxMilliClockToLong(double d) { return gsl::narrow_cast<long>(d); }
+    inline long wxMilliClockToLong(double d) { return wx::narrow_cast<long>(d); }
 #endif // wxUSE_LONGLONG
 
 // Get number of milliseconds since local time 00:00:00 Jan 1st 1970

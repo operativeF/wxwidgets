@@ -23,7 +23,7 @@
 #include "wx/arrimpl.cpp"
 #include "wx/imaglist.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <algorithm>;
 import <vector>;
@@ -370,7 +370,7 @@ void wxRibbonBar::DeletePage(size_t n)
 
         m_pages.RemoveAt(n);
 
-        if(m_current_page == gsl::narrow_cast<int>(n))
+        if(m_current_page == wx::narrow_cast<int>(n))
         {
             m_current_page = -1;
 
@@ -386,7 +386,7 @@ void wxRibbonBar::DeletePage(size_t n)
                 }
             }
         }
-        else if(m_current_page > gsl::narrow_cast<int>(n))
+        else if(m_current_page > wx::narrow_cast<int>(n))
         {
             m_current_page--;
         }

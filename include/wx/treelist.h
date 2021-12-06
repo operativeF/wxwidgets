@@ -23,7 +23,7 @@
 import <string>;
 import <vector>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 class wxDataViewCtrl;
 class wxDataViewEvent;
@@ -454,7 +454,7 @@ class wxTreeListEvent : public wxNotifyEvent
 public:
     // Default ctor is provided for wxRTTI needs only but should never be used.
     wxTreeListEvent() { 
-        m_column = gsl::narrow_cast<unsigned>(-1);
+        m_column = wx::narrow_cast<unsigned>(-1);
 
         m_oldCheckedState = wxCheckBoxState::Indeterminate;
      }
@@ -483,7 +483,7 @@ private:
         SetEventObject(treelist);
 
         
-        m_column = gsl::narrow_cast<unsigned>(-1);
+        m_column = wx::narrow_cast<unsigned>(-1);
 
         m_oldCheckedState = wxCheckBoxState::Indeterminate;
     

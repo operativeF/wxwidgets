@@ -60,11 +60,11 @@
 
 #include <boost/nowide/convert.hpp>
 #include <fmt/core.h>
-#include <gsl/gsl>
 
 #include <memory>
 
 import WX.Image;
+import WX.Utils.Cast;
 import WX.Win.UniqueHnd;
 
 import <algorithm>;
@@ -2533,7 +2533,7 @@ public:
         HRESULT hr = m_srcBitmap->GetSize(&w, &h);
         wxCHECK2_HRESULT_RET(hr, wxSize());
 
-        return {gsl::narrow_cast<int>(w), gsl::narrow_cast<int>(h)};
+        return {wx::narrow_cast<int>(w), wx::narrow_cast<int>(h)};
     }
 
 #if wxUSE_IMAGE

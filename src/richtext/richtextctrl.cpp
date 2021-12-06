@@ -41,9 +41,7 @@
 #include "wx/app.h"
 WX_CHECK_BUILD_OPTIONS("wxRichTextCtrl")
 
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
+import WX.Utils.Cast;
 
 wxDEFINE_EVENT( wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );
 wxDEFINE_EVENT( wxEVT_RICHTEXT_MIDDLE_CLICK, wxRichTextEvent );
@@ -2654,7 +2652,7 @@ bool wxRichTextCtrl::PageDown(int noPages, int flags)
 
 static bool wxRichTextCtrlIsWhitespace(const std::string& str)
 {
-    return str == " " || str == "\t" || (!str.empty() && (str.front() == gsl::narrow_cast<unsigned char>(160)));
+    return str == " " || str == "\t" || (!str.empty() && (str.front() == wx::narrow_cast<unsigned char>(160)));
 }
 
 // Finds the caret position for the next word

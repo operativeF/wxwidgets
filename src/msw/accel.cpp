@@ -19,7 +19,7 @@
 
 #include <boost/nowide/convert.hpp>
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import WX.Win.UniqueHnd;
 
@@ -90,7 +90,7 @@ wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
         arr[i].cmd = (WXWORD)entries[i].GetCommand();
     }
 
-    M_ACCELDATA->m_hAccel = unique_accel(::CreateAcceleratorTableW(arr.get(), gsl::narrow_cast<int>(entries.size())));
+    M_ACCELDATA->m_hAccel = unique_accel(::CreateAcceleratorTableW(arr.get(), wx::narrow_cast<int>(entries.size())));
 
     M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != nullptr);
 }

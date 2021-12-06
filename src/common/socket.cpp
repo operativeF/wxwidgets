@@ -41,7 +41,7 @@
 #include "wx/private/fd.h"
 #include "wx/private/socket.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <string>;
 

@@ -7,17 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XRC
-
-#ifndef WX_PRECOMP
-    import <vector>;
-
-    #include <boost/nowide/convert.hpp>
-    #include <gsl/gsl>
-#endif
 
 #include "wx/xrc/xmlres.h"
 
@@ -44,10 +34,14 @@
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
+#include <boost/nowide/convert.hpp>
+
 import WX.Image;
 import Utils.Strings;
+import WX.Utils.Cast;
 
 import <clocale>;
+import <vector>;
 
 namespace
 {
@@ -1701,7 +1695,7 @@ float wxXmlResourceHandlerImpl::GetFloat(const wxString& param, float defaultv)
         }
     }
 
-    return gsl::narrow_cast<float>(value);
+    return wx::narrow_cast<float>(value);
 }
 
 
@@ -2145,7 +2139,7 @@ bool XRCConvertFromAbsValue(const wxString& s, int& value)
     if ( l > INT_MAX )
         return false;
 
-    value = gsl::narrow_cast<int>(l);
+    value = wx::narrow_cast<int>(l);
     return true;
 }
 

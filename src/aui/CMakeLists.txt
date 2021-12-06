@@ -75,7 +75,6 @@ target_link_libraries(wxaui
     PRIVATE
         wxbase
         stdlibcore
-        Microsoft.GSL::GSL
 )
 
 target_precompile_headers(wxaui

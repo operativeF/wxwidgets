@@ -249,7 +249,7 @@ wxPoint wxCursor::GetHotSpot() const
     if ( !ii.GetFrom((WXHICON)GetGDIImageData()->m_hCursor) )
         return wxDefaultPosition;
 
-    return {gsl::narrow_cast<int>(ii.xHotspot), gsl::narrow_cast<int>(ii.yHotspot)};
+    return {wx::narrow_cast<int>(ii.xHotspot), wx::narrow_cast<int>(ii.yHotspot)};
 }
 
 namespace
@@ -260,7 +260,7 @@ wxSize ScaleAndReverseBitmap(WXHBITMAP& bitmap, float scale)
     BITMAP bmp;
     if ( !::GetObjectW(bitmap, sizeof(bmp), &bmp) )
         return {};
-    wxSize cs(gsl::narrow_cast<int>(bmp.bmWidth * scale), gsl::narrow_cast<int>(bmp.bmHeight * scale));
+    wxSize cs(wx::narrow_cast<int>(bmp.bmWidth * scale), wx::narrow_cast<int>(bmp.bmHeight * scale));
 
     MemoryHDC hdc;
     SelectInHDC selBitmap(hdc, bitmap);

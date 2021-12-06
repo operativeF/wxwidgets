@@ -20,7 +20,7 @@
     #include "wx/cshelp.h"
 #endif
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import WX.Cfg.Flags;
 
@@ -282,7 +282,7 @@ std::string wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
 
     if ( item != wxNOT_FOUND )
     {
-        std::string text = GetItemHelpText(gsl::narrow_cast<unsigned int>(item));
+        std::string text = GetItemHelpText(wx::narrow_cast<unsigned int>(item));
         if( !text.empty() )
             return text;
     }

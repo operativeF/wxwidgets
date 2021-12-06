@@ -144,10 +144,10 @@ protected:
         // note that dmDisplayFrequency may be 0 or 1 meaning "standard one"
         // and although 0 is ok for us we don't want to return modes with 1hz
         // refresh
-        return {gsl::narrow_cast<int>(dm.dmPelsWidth),
-                gsl::narrow_cast<int>(dm.dmPelsHeight),
-                gsl::narrow_cast<int>(dm.dmBitsPerPel),
-                gsl::narrow_cast<int>(dm.dmDisplayFrequency > 1 ? dm.dmDisplayFrequency : 0)};
+        return {wx::narrow_cast<int>(dm.dmPelsWidth),
+                wx::narrow_cast<int>(dm.dmPelsHeight),
+                wx::narrow_cast<int>(dm.dmBitsPerPel),
+                wx::narrow_cast<int>(dm.dmDisplayFrequency > 1 ? dm.dmDisplayFrequency : 0)};
     }
 
     wxDisplayInfo m_info;

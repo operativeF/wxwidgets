@@ -946,17 +946,17 @@ bool wxVarHVScrollHelper::ScrollLayout()
 
 wxSize wxVarHVScrollHelper::GetRowColumnCount() const
 {
-    return {gsl::narrow_cast<int>(GetColumnCount()), gsl::narrow_cast<int>(GetRowCount())};
+    return {wx::narrow_cast<int>(GetColumnCount()), wx::narrow_cast<int>(GetRowCount())};
 }
 
 wxPosition wxVarHVScrollHelper::GetVisibleBegin() const
 {
-    return {gsl::narrow_cast<int>(GetVisibleRowsBegin()), gsl::narrow_cast<int>(GetVisibleColumnsBegin())};
+    return {wx::narrow_cast<int>(GetVisibleRowsBegin()), wx::narrow_cast<int>(GetVisibleColumnsBegin())};
 }
 
 wxPosition wxVarHVScrollHelper::GetVisibleEnd() const
 {
-    return {gsl::narrow_cast<int>(GetVisibleRowsEnd()), gsl::narrow_cast<int>(GetVisibleColumnsEnd())};
+    return {wx::narrow_cast<int>(GetVisibleRowsEnd()), wx::narrow_cast<int>(GetVisibleColumnsEnd())};
 }
 
 bool wxVarHVScrollHelper::IsVisible(size_t row, size_t column) const

@@ -40,14 +40,13 @@ module;
 
 #include "wx/generic/private/grid.h"
 
-#include <gsl/gsl>
-
 module WX.Generic.Grid;
 
 import WX.Grid.Selection;
 import WX.Grid.Ctrl;
 import WX.Grid.Editors;
 
+import WX.Utils.Cast;
 import Utils.Strings;
 
 import <algorithm>;
@@ -695,7 +694,7 @@ wxGridCoordsToAttrMap::key_type CoordsToKey(int row, int col)
 {
     // Treat both row and col as unsigned to not cause havoc with (unsupported)
     // negative coords.
-    return (static_cast<wxULongLong_t>(row) << 32) + gsl::narrow_cast<std::uint32_t>(col);
+    return (static_cast<wxULongLong_t>(row) << 32) + wx::narrow_cast<std::uint32_t>(col);
 }
 
 void KeyToCoords(wxGridCoordsToAttrMap::key_type key, int *pRow, int *pCol)
@@ -945,12 +944,12 @@ void UpdateCellAttrRowsOrCols(wxGridCoordsToAttrMap& attrs, int editPos,
 
 void wxGridCellAttrData::UpdateAttrRows( size_t pos, int numRows )
 {
-    UpdateCellAttrRowsOrCols(m_attrs, gsl::narrow_cast<int>(pos), numRows, 0);
+    UpdateCellAttrRowsOrCols(m_attrs, wx::narrow_cast<int>(pos), numRows, 0);
 }
 
 void wxGridCellAttrData::UpdateAttrCols( size_t pos, int numCols )
 {
-    UpdateCellAttrRowsOrCols(m_attrs, gsl::narrow_cast<int>(pos), 0, numCols);
+    UpdateCellAttrRowsOrCols(m_attrs, wx::narrow_cast<int>(pos), 0, numCols);
 }
 
 wxGridCoordsToAttrMap::iterator

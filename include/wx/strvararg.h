@@ -22,7 +22,7 @@ import <cstddef>;
 import <string>;
 import <type_traits>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 class wxCStrData;
 class wxString;
@@ -793,7 +793,7 @@ struct wxArgNormalizer<const wxUniChar&> : public wxArgNormalizer<wchar_t>
 {
     wxArgNormalizer(const wxUniChar& s,
                     const wxFormatString *fmt, unsigned index)
-        : wxArgNormalizer<wchar_t>(gsl::narrow_cast<wchar_t>(s.GetValue()), fmt, index) {}
+        : wxArgNormalizer<wchar_t>(wx::narrow_cast<wchar_t>(s.GetValue()), fmt, index) {}
 };
 
 // for wchar_t, default handler does the right thing
@@ -815,7 +815,7 @@ struct wxArgNormalizerNarrowChar
         // FIXME-UTF8: which one is better default in absence of fmt string
         //             (i.e. when used like e.g. Foo("foo", "bar", 'c', NULL)?
         if ( !fmt || fmt->GetArgumentType(index) == wxFormatString::Arg_Char )
-            m_value = gsl::narrow_cast<T>(wxUniChar(value).GetValue());
+            m_value = wx::narrow_cast<T>(wxUniChar(value).GetValue());
         else
             m_value = value;
     }

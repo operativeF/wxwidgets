@@ -15,7 +15,7 @@
 #include "wx/utils.h"
 #include "wx/intl.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 {
@@ -746,9 +746,9 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     wxSize sz_constraint = other->GetClientSizeConstraint();
                     // FIXME: rounding?
                     if (which == wxEdge::CenterX)
-                        return gsl::narrow_cast<int>(sz_constraint.x / 2);
+                        return wx::narrow_cast<int>(sz_constraint.x / 2);
                     else
-                        return gsl::narrow_cast<int>(sz_constraint.y / 2);
+                        return wx::narrow_cast<int>(sz_constraint.y / 2);
                 }
             default:
                 return -1;

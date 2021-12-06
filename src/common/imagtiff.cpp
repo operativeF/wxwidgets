@@ -21,12 +21,11 @@ module;
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 
-#include <gsl/gsl>
-
 module WX.Image.TIFF;
 
 import Utils.Strings;
 import Utils.Geometry;
+import WX.Utils.Cast;
 
 import <cstdlib>;
 
@@ -108,7 +107,7 @@ toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
     if ( ofs == wxInvalidOffset )
         return (toff_t)-1;
 
-    toff_t tofs = gsl::narrow_cast<toff_t>(ofs);
+    toff_t tofs = wx::narrow_cast<toff_t>(ofs);
     wxCHECK_MSG( (wxFileOffset)tofs == ofs, (toff_t)-1,
                     "TIFF library doesn't support large files" );
 
@@ -150,7 +149,7 @@ wxTIFFReadProc(thandle_t handle, tdata_t buf, tsize_t size)
 {
     wxInputStream *stream = (wxInputStream*) handle;
     stream->Read( (void*) buf, (size_t) size );
-    return gsl::narrow_cast<tsize_t>(stream->LastRead());
+    return wx::narrow_cast<tsize_t>(stream->LastRead());
 }
 
 static tsize_t TIFFLINKAGEMODE
@@ -158,7 +157,7 @@ wxTIFFWriteProc(thandle_t handle, tdata_t buf, tsize_t size)
 {
     wxOutputStream *stream = (wxOutputStream*) handle;
     stream->Write( (void*) buf, (size_t) size );
-    return gsl::narrow_cast<tsize_t>(stream->LastWrite());
+    return wx::narrow_cast<tsize_t>(stream->LastWrite());
 }
 
 static toff_t TIFFLINKAGEMODE

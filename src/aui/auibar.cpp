@@ -20,9 +20,9 @@ module;
 #include "wx/osx/private.h"
 #endif
 
-#include <gsl/gsl>
-
 module WX.AUI.AUIBar;
+
+import WX.Utils.Cast;
 
 import WX.AUI.FrameManager;
 
@@ -367,7 +367,7 @@ bool wxAuiToolBar::DestroyTool(int tool_id)
 
 bool wxAuiToolBar::DestroyToolByIndex(int idx)
 {
-    if ( idx < 0 || gsl::narrow_cast<unsigned>(idx) >= m_items.size() )
+    if ( idx < 0 || wx::narrow_cast<unsigned>(idx) >= m_items.size() )
         return false;
 
     if ( wxWindow* window = m_items[idx].GetWindow() )

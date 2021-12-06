@@ -14,7 +14,7 @@
 #include "wx/sizer.h"
 #include "wx/rearrangectrl.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // ============================================================================
 // wxRearrangeList implementation
@@ -81,7 +81,7 @@ bool wxRearrangeList::CanMoveCurrentUp() const
 bool wxRearrangeList::CanMoveCurrentDown() const
 {
     const int sel = GetSelection();
-    return sel != wxNOT_FOUND && gsl::narrow_cast<unsigned>(sel) != GetCount() - 1;
+    return sel != wxNOT_FOUND && wx::narrow_cast<unsigned>(sel) != GetCount() - 1;
 }
 
 bool wxRearrangeList::MoveCurrentUp()
@@ -99,7 +99,7 @@ bool wxRearrangeList::MoveCurrentUp()
 bool wxRearrangeList::MoveCurrentDown()
 {
     const int sel = GetSelection();
-    if ( sel == wxNOT_FOUND || gsl::narrow_cast<unsigned>(sel) == GetCount() - 1 )
+    if ( sel == wxNOT_FOUND || wx::narrow_cast<unsigned>(sel) == GetCount() - 1 )
         return false;
 
     Swap(sel, sel + 1);

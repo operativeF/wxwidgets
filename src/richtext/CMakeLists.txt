@@ -36,5 +36,4 @@ target_link_libraries(wxrichtext
     PRIVATE
         wxhtml
         wxxml
-        Microsoft.GSL::GSL
 )

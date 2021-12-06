@@ -194,6 +194,10 @@ set(CONFIG_FLAGS_IXX
     ${CMAKE_SOURCE_DIR}/modules/config/flags.ixx
 )
 
+set(UNIVERSAL_UTILS_IXX
+    ${CMAKE_SOURCE_DIR}/modules/utils/cast.ixx
+)
+
 set(WIN32_WRAP_IXX
     ${CMAKE_SOURCE_DIR}/modules/win/windef.ixx
     ${CMAKE_SOURCE_DIR}/modules/win/unique_hnd.ixx
@@ -277,6 +281,7 @@ add_library(wxbase
     ${IMAGE_HANDLERS_IXX}
     ${IMAGE_HANDLERS_SRC}
     ${SHARED_BASE_CMN}
+    ${UNIVERSAL_UTILS_IXX}
 )
 
 target_include_directories(wxbase
@@ -339,7 +344,6 @@ target_link_libraries(wxbase
     PRIVATE
         stdlibcore
         Boost::nowide
-        Microsoft.GSL::GSL
         boost_tmp
     # Windows libraries
         opengl32

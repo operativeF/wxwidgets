@@ -28,7 +28,8 @@
 #endif // wxUSE_ACCESSIBILITY
 
 #include <fmt/core.h>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 namespace
 {
@@ -1847,7 +1848,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValueFromEditorCtrl( wxWindow* editor, 
     auto iter_idx = std::ranges::find_if(GetChoices(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
 
-    value = gsl::narrow_cast<long>(std::distance(GetChoices().begin(), iter_idx));
+    value = wx::narrow_cast<long>(std::distance(GetChoices().begin(), iter_idx));
     return true;
 }
 
@@ -1867,7 +1868,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValue( wxVariant &value ) const
     const auto iter_idx = std::ranges::find_if(GetChoices(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
     // TODO: Verify this.
-    value = gsl::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
+    value = wx::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
     return true;
 }
 

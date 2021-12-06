@@ -15,7 +15,7 @@
 #include "wx/app.h"
 #include "wx/utils.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import Utils.Strings;
 
@@ -166,7 +166,7 @@ bool wxConfigBase::Read(const std::string& key, size_t* val) const
     if ( !Read(key, &tmp) )
         return false;
 
-    *val = gsl::narrow_cast<size_t>(tmp);
+    *val = wx::narrow_cast<size_t>(tmp);
     return true;
 }
 

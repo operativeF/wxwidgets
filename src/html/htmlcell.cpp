@@ -480,7 +480,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         {
             SwitchSelState(dc, info, false);
             txt = m_Word.substr(part2);
-            dc.wxDrawText(txt, wxPoint{x + m_PosX + gsl::narrow_cast<int>(s->GetExtentBeforeSelectionEnd()), y + m_PosY});
+            dc.wxDrawText(txt, wxPoint{x + m_PosX + wx::narrow_cast<int>(s->GetExtentBeforeSelectionEnd()), y + m_PosY});
         }
         else
             drawSelectionAfterCell = true;

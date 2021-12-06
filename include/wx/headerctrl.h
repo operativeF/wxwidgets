@@ -23,7 +23,7 @@ import Utils.Geometry;
 import <string>;
 import <vector>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 
 // notice that the classes in this header are defined in the core library even
@@ -270,7 +270,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // FIXME: use max?
-inline constexpr unsigned int wxNO_COLUMN = gsl::narrow_cast<unsigned>(-1);
+inline constexpr unsigned int wxNO_COLUMN = wx::narrow_cast<unsigned>(-1);
 inline constexpr unsigned int wxID_COLUMNS_BASE = 1;
 
 // ----------------------------------------------------------------------------
@@ -388,7 +388,7 @@ private:
     // bring the column count in sync with the number of columns we store
     void UpdateColumnCount()
     {
-        SetColumnCount(gsl::narrow_cast<int>(m_cols.size()));
+        SetColumnCount(wx::narrow_cast<int>(m_cols.size()));
     }
 
 
@@ -412,7 +412,7 @@ public:
     wxHeaderCtrlEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid),
           // FIXME: use max?
-          m_order(gsl::narrow_cast<unsigned int>(-1))
+          m_order(wx::narrow_cast<unsigned int>(-1))
     {
     }
 

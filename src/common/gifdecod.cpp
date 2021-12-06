@@ -17,11 +17,11 @@
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
 
-#include <gsl/gsl>
-
 #include <chrono>
 
 import WX.Image;
+
+import WX.Utils.Cast;
 
 import <array>;
 import <vector>;
@@ -224,12 +224,12 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 wxSize wxGIFDecoder::GetFrameSize(unsigned int frame) const
 {
     // FIXME: Narrowing
-    return {gsl::narrow_cast<int>(GetFrame(frame)->w), gsl::narrow_cast<int>(GetFrame(frame)->h)};
+    return {wx::narrow_cast<int>(GetFrame(frame)->w), wx::narrow_cast<int>(GetFrame(frame)->h)};
 }
 
 wxPoint wxGIFDecoder::GetFramePosition(unsigned int frame) const
 {
-    return { gsl::narrow_cast<int>(GetFrame(frame)->left), gsl::narrow_cast<int>(GetFrame(frame)->top)};
+    return { wx::narrow_cast<int>(GetFrame(frame)->left), wx::narrow_cast<int>(GetFrame(frame)->top)};
 }
 
 wxAnimationDisposal wxGIFDecoder::GetDisposalMethod(unsigned int frame) const

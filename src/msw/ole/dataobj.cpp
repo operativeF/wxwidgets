@@ -27,7 +27,7 @@
 #include "wx/msw/ole/oleutils.h"
 #endif // wxUSE_OLE
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <vector>;
 
@@ -876,7 +876,7 @@ STDMETHODIMP wxIDataObject::EnumFormatEtc(DWORD dwDir,
     const size_t sysFormatCount = m_systemData.size();
 
     const ULONG
-        nFormatCount = gsl::narrow_cast<ULONG>(ourFormatCount + sysFormatCount);
+        nFormatCount = wx::narrow_cast<ULONG>(ourFormatCount + sysFormatCount);
 
     // fill format array with formats ...
     wxScopedArray<wxDataFormat> formats(nFormatCount);

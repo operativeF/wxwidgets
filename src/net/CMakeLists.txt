@@ -69,11 +69,6 @@ target_include_directories(wxnet
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
-target_link_libraries(wxnet
-    PRIVATE
-        Microsoft.GSL::GSL
-)
-
 if(WIN32)
     target_link_libraries(wxnet PRIVATE ws2_32)
 

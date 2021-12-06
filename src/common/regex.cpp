@@ -25,7 +25,7 @@
 
 #include <regex.h>
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // WXREGEX_USING_BUILTIN    defined when using the built-in regex lib
 // WXREGEX_USING_RE_SEARCH  defined when using re_search in the GNU regex lib
@@ -73,12 +73,12 @@ public:
     // absolutely impractical anyhow
     size_t Start(size_t n) const
     {
-        return gsl::narrow_cast<size_t>(m_matches[n].rm_so);
+        return wx::narrow_cast<size_t>(m_matches[n].rm_so);
     }
 
     size_t End(size_t n) const
     {
-        return gsl::narrow_cast<size_t>(m_matches[n].rm_eo);
+        return wx::narrow_cast<size_t>(m_matches[n].rm_eo);
     }
 
     regmatch_t *get() const         { return m_matches; }

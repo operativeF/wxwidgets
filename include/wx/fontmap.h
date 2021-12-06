@@ -27,6 +27,7 @@
 import Utils.Chars;
 import Utils.Strings;
 
+import <array>;
 import <string>;
 import <string_view>;
 import <vector>;

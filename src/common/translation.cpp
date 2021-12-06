@@ -40,12 +40,14 @@
     #include <CoreFoundation/CFLocale.h>
 #endif
 
+#include <memory>
+
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import <algorithm>;
-#include <memory>
 import <span>;
 import <vector>;
 
@@ -1101,7 +1103,7 @@ bool wxMsgCatalogFile::LoadFile(const wxString& filename,
     if ( lenFile == wxInvalidOffset )
         return false;
 
-    auto nSize = gsl::narrow_cast<size_t>(lenFile);
+    auto nSize = wx::narrow_cast<size_t>(lenFile);
     wxASSERT_MSG( nSize == lenFile + size_t(0), "message catalog bigger than 4GB?" );
 
     wxMemoryBuffer filedata;

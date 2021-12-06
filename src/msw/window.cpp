@@ -94,7 +94,8 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import WX.Cfg.Flags;
 
@@ -3369,7 +3370,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleZoomGesture
                                 (
                                     pt,
-                                    gsl::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
+                                    wx::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -3380,7 +3381,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleRotateGesture
                                 (
                                     pt,
-                                    gsl::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
+                                    wx::narrow_cast<WXDWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -4680,7 +4681,7 @@ static wxSize GetWindowDPI(WXHWND hwnd)
 
     if ( s_pfnGetDpiForWindow )
     {
-        const auto dpi = gsl::narrow_cast<int>(s_pfnGetDpiForWindow(hwnd));
+        const auto dpi = wx::narrow_cast<int>(s_pfnGetDpiForWindow(hwnd));
         return {dpi, dpi};
     }
 #endif // wxUSE_DYNLIB_CLASS
@@ -6289,7 +6290,7 @@ wxWindowMSW::CreateCharEvent(wxEventType evType,
         {
             // For compatibility continue to provide the key code in this field
             // even though using GetUnicodeKey() is recommended now.
-            event.m_keyCode = gsl::narrow_cast<unsigned char>(ch);
+            event.m_keyCode = wx::narrow_cast<unsigned char>(ch);
         }
         //else: Key can't be represented in the current locale, leave m_keyCode
         //      as WXK_NONE and use GetUnicodeKey() to access the character.

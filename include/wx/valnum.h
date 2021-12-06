@@ -18,7 +18,7 @@
 
 #include <cassert>
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // This header uses std::numeric_limits<>::min/max, but these symbols are,
 // unfortunately, often defined as macros and the code here wouldn't compile in
@@ -221,7 +221,7 @@ public:
             if ( !this->IsInRange(value) )
                 return false;
 
-            *m_value = gsl::narrow_cast<ValueType>(value);
+            *m_value = wx::narrow_cast<ValueType>(value);
         }
 
         return true;
@@ -346,7 +346,7 @@ public:
         // but we need to use the correct type for comparisons, notably for
         // comparing unsigned values correctly, so cast to this type and check
         // that we don't lose precision while doing it.
-        const ValueType valueT = gsl::narrow_cast<ValueType>(value);
+        const ValueType valueT = wx::narrow_cast<ValueType>(value);
         if ( static_cast<LongestValueType>(valueT) != value )
         {
             // The conversion wasn't lossless, so the value must not be exactly

@@ -31,11 +31,11 @@
 #include "wx/private/textmeasure.h"
 
 #include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;
 
+import WX.Utils.Cast;
 import Utils.Strings;
 
 import <cmath>;
@@ -1228,7 +1228,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     lppt[ bezier_pos ] = lppt[ bezier_pos-1 ];
     bezier_pos++;
 
-    ::PolyBezier( GetHdc(), lppt.data(), gsl::narrow_cast<WXDWORD>(bezier_pos) );
+    ::PolyBezier( GetHdc(), lppt.data(), wx::narrow_cast<WXDWORD>(bezier_pos) );
 }
 #endif // wxUSE_SPLINES
 
@@ -1248,10 +1248,10 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
     sa = wxDegToRad(sa);
     ea = wxDegToRad(ea);
 
-    rx1 += gsl::narrow_cast<int>(100.0 * std::abs(w) * std::cos(sa));
-    ry1 -= gsl::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(sa));
-    rx2 += gsl::narrow_cast<int>(100.0 * std::abs(w) * std::cos(ea));
-    ry2 -= gsl::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(ea));
+    rx1 += wx::narrow_cast<int>(100.0 * std::abs(w) * std::cos(sa));
+    ry1 -= wx::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(sa));
+    rx2 += wx::narrow_cast<int>(100.0 * std::abs(w) * std::cos(ea));
+    ry2 -= wx::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(ea));
 
     // draw pie with NULL_PEN first and then outline otherwise a line is
     // drawn from the start and end points to the centre
@@ -1486,7 +1486,7 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxPoint pt)
 void wxMSWDCImpl::DrawAnyText(std::string_view text, wxPoint pt)
 {
     if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(pt.x), YLOG2DEV(pt.y), 0, nullptr,
-                   boost::nowide::widen(text).c_str(), gsl::narrow_cast<WXUINT>(text.length()), nullptr) == 0 )
+                   boost::nowide::widen(text).c_str(), wx::narrow_cast<WXUINT>(text.length()), nullptr) == 0 )
     {
         wxLogLastError("TextOut");
     }

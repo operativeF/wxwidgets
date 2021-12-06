@@ -2479,7 +2479,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     if ( ylen > 0 )
         hText += ylen - GetCharHeight();
 
-    return {gsl::narrow_cast<int>(wText), gsl::narrow_cast<int>(hText)};
+    return {wx::narrow_cast<int>(wText), wx::narrow_cast<int>(hText)};
 }
 
 void wxTextCtrl::DoMoveWindow(wxRect boundary)

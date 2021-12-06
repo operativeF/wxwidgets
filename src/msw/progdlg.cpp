@@ -22,7 +22,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import WX.WinDef;
 
@@ -970,7 +971,7 @@ void wxProgressDialog::UpdateExpandedInformation(int value)
     if ( !value )
     {
         estimatedTime =
-        remainingTime = gsl::narrow_cast<unsigned long>(-1);
+        remainingTime = wx::narrow_cast<unsigned long>(-1);
     }
 
     std::string expandedInformation;

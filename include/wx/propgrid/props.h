@@ -28,7 +28,7 @@ class wxPGArrayEditorDialog;
 #include "wx/generic/choicdgg.h"
 
 #ifndef WX_PRECOMP
-    #include <gsl/gsl>
+    import WX.Utils.Cast;
 #endif
 
 
@@ -541,7 +541,7 @@ public:
     // helpers
     size_t GetItemCount() const { return m_choices.GetCount(); }
     const wxString& GetLabel( size_t ind ) const
-        { return m_choices.GetLabel(gsl::narrow_cast<unsigned int>(ind)); }
+        { return m_choices.GetLabel(wx::narrow_cast<unsigned int>(ind)); }
 
 protected:
     // Used to detect if choices have been changed

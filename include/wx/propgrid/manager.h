@@ -321,7 +321,7 @@ public:
 
     // Returns index for a page name.
     // If no match is found, wxNOT_FOUND is returned.
-    gsl::index GetPageByName( const wxString& name ) const;
+    std::ptrdiff_t GetPageByName( const wxString& name ) const;
 
     // Returns index for a relevant propertygrid state.
     // If no match is found, wxNOT_FOUND is returned.

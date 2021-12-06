@@ -27,9 +27,9 @@
 
 #include "wx/except.h"
 
-#include <gsl/gsl>
-
 #include <cassert>
+
+import WX.Utils.Cast;
 
 import WX.WinDef;
 
@@ -855,7 +855,7 @@ bool wxThreadInternal::Suspend()
     if ( nSuspendCount == (WXDWORD)-1 )
     {
         wxLogSysError(_("Cannot suspend thread %lx"),
-                      gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
+                      wx::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
 
         return false;
     }
@@ -885,7 +885,7 @@ bool wxThreadInternal::Resume()
     if ( nSuspendCount == (WXDWORD)-1 )
     {
         wxLogSysError(_("Cannot resume thread %lx"),
-                      gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
+                      wx::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
 
         return false;
     }

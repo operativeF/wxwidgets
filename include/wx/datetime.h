@@ -27,7 +27,7 @@ struct _SYSTEMTIME;
 #include "wx/dynarray.h"
 
 #include <fmt/core.h>
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <ctime>;
 import <vector>;
@@ -1981,7 +1981,7 @@ inline int wxTimeSpan::GetMinutes() const
 {
     // For compatibility, this method (and the other accessors) return int,
     // even though GetLo() actually returns unsigned long with greater range.
-    return gsl::narrow_cast<int>((GetSeconds() / 60l).GetLo());
+    return wx::narrow_cast<int>((GetSeconds() / 60l).GetLo());
 }
 
 inline int wxTimeSpan::GetHours() const

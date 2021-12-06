@@ -26,8 +26,3 @@ target_include_directories(wxribbon
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
-
-target_link_libraries(wxribbon
-    PRIVATE
-        Microsoft.GSL::GSL
-)

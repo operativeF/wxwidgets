@@ -595,7 +595,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
     }
 
     // remove the item from the menu
-    if ( !::RemoveMenu(GetHmenu(), gsl::narrow_cast<WXUINT>(pos), MF_BYPOSITION) )
+    if ( !::RemoveMenu(GetHmenu(), wx::narrow_cast<WXUINT>(pos), MF_BYPOSITION) )
     {
         wxLogLastError("RemoveMenu");
     }

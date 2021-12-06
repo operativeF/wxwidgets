@@ -172,7 +172,7 @@ wxPoint wxJoystick::GetPosition() const
     JOYINFO joyInfo;
     MMRESULT res = joyGetPos(m_joystick, & joyInfo);
     if (res == JOYERR_NOERROR )
-        return {gsl::narrow_cast<int>(joyInfo.wXpos), gsl::narrow_cast<int>(joyInfo.wYpos)};
+        return {wx::narrow_cast<int>(joyInfo.wXpos), wx::narrow_cast<int>(joyInfo.wYpos)};
     else
         return {0, 0};
 }

@@ -29,8 +29,6 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-#include <gsl/gsl>
-
 #include <memory>
 
 #if wxUSE_OWNER_DRAWN
@@ -44,6 +42,7 @@
 #endif // wxUSE_OWNER_DRAWN
 
 import WX.WinDef;
+import WX.Utils.Cast;
 
 import <vector>;
 
@@ -609,7 +608,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     auto hListbox = ::SendMessageW(GetHwnd(), LB_GETITEMHEIGHT, 0, 0)*
         std::min(std::max(m_noItems, std::size_t{3}), std::size_t{10});
 
-    return {wListbox, gsl::narrow_cast<int>(hListbox)};
+    return {wListbox, wx::narrow_cast<int>(hListbox)};
 }
 
 bool wxListBox::MSWCommand(WXUINT param, [[maybe_unused]] WXWORD id)

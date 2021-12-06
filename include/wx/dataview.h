@@ -28,7 +28,7 @@ import Utils.Geometry;
 import <string>;
 import <vector>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 class wxImageList;
 class wxItemAttr;
@@ -491,7 +491,7 @@ public:
         { m_owner = owner; }
 
     // getters:
-    unsigned int GetModelColumn() const { return gsl::narrow_cast<unsigned int>(m_model_column); }
+    unsigned int GetModelColumn() const { return wx::narrow_cast<unsigned int>(m_model_column); }
     wxDataViewCtrl *GetOwner() const        { return m_owner; }
     wxDataViewRenderer* GetRenderer() const { return m_renderer; }
 

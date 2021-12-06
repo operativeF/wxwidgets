@@ -14,7 +14,7 @@
 #include "wx/valnum.h"
 #include "wx/numformatter.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <cmath>;
 
@@ -215,7 +215,7 @@ wxString wxIntegerValidatorBase::ToString(LongestValueType value) const
     }
     else
     {
-        ULongestValueType uvalue = gsl::narrow_cast<ULongestValueType>(value);
+        ULongestValueType uvalue = wx::narrow_cast<ULongestValueType>(value);
         return wxNumberFormatter::ToString(uvalue, GetFormatFlags());
     }
 }
@@ -236,7 +236,7 @@ wxIntegerValidatorBase::FromString(const wxString& s,
             return false;
 
         // This cast is lossless.
-        *value = gsl::narrow_cast<LongestValueType>(uvalue);
+        *value = wx::narrow_cast<LongestValueType>(uvalue);
 
         return true;
     }

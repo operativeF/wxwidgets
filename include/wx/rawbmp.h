@@ -21,7 +21,7 @@ import Utils.Geometry;
 
 import <cstdint>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // ----------------------------------------------------------------------------
 // Abstract Pixel API
@@ -710,14 +710,14 @@ struct wxPixelDataOut<wxBitmap>
             public:
                 Reference& operator=(bool b)
                 {
-                    wxByte mask = gsl::narrow_cast<wxByte>(1 << m_bit);
-                    wxByte value = gsl::narrow_cast<wxByte>(b << m_bit);
+                    wxByte mask = wx::narrow_cast<wxByte>(1 << m_bit);
+                    wxByte value = wx::narrow_cast<wxByte>(b << m_bit);
                     (*m_ptr &= ~mask) |= value;
                     return *this;
                 }
                 operator bool() const
                 {
-                    wxByte mask = gsl::narrow_cast<wxByte>(1 << m_bit);
+                    wxByte mask = wx::narrow_cast<wxByte>(1 << m_bit);
                     return (*m_ptr & mask) != 0;
                 }
 

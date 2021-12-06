@@ -15,7 +15,7 @@
 
 #include "wx/control.h"      // base class
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import Utils.Strings;
 
@@ -64,7 +64,7 @@ public:
             for (std::size_t i = 0; i < count; ++i)
             {
                 if (wx::utils::IsSameAsNoCase(s, GetString(i)))
-                    return gsl::narrow_cast<int>(i);
+                    return wx::narrow_cast<int>(i);
             }
         }
         else
@@ -72,7 +72,7 @@ public:
             for (std::size_t i = 0; i < count; ++i)
             {
                 if (wx::utils::IsSameAsCase(s, GetString(i)))
-                    return gsl::narrow_cast<int>(i);
+                    return wx::narrow_cast<int>(i);
             }
         }
 

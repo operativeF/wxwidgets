@@ -19,8 +19,3 @@ target_include_directories(propgrid
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
-
-target_link_libraries(propgrid
-    PRIVATE
-        Microsoft.GSL::GSL
-)

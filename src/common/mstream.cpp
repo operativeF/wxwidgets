@@ -13,7 +13,7 @@
 #include "wx/mstream.h"
 #include "wx/stream.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // ----------------------------------------------------------------------------
 // wxMemoryInputStream
@@ -39,7 +39,7 @@ wxMemoryInputStream::wxMemoryInputStream(const wxMemoryOutputStream& stream)
     }
 
     // FIXME: how is this not large enough?
-    const auto len = gsl::narrow_cast<size_t>(lenFile);
+    const auto len = wx::narrow_cast<size_t>(lenFile);
     wxASSERT_MSG( len == lenFile + size_t(0), "huge files not supported" );
 
     m_i_streambuf = new wxStreamBuffer(wxStreamBuffer::read);
@@ -64,7 +64,7 @@ wxMemoryInputStream::InitFromStream(wxInputStream& stream, wxFileOffset lenFile)
     }
 
     // FIXME: how is this not large enough?
-    const auto len = gsl::narrow_cast<std::size_t>(lenFile);
+    const auto len = wx::narrow_cast<std::size_t>(lenFile);
     wxASSERT_MSG( (wxFileOffset)len == lenFile, "huge files not supported" );
 
     m_i_streambuf = new wxStreamBuffer(wxStreamBuffer::read);

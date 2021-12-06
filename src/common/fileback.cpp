@@ -69,7 +69,7 @@ wxBackingFileImpl::wxBackingFileImpl(wxInputStream *stream,
     const wxFileOffset len = m_stream->GetLength();
 
     if (len >= 0 && len + size_t{1} < m_bufsize)
-        m_bufsize = gsl::narrow_cast<size_t>(len + 1);
+        m_bufsize = wx::narrow_cast<size_t>(len + 1);
 
     if (m_bufsize)
         m_buf = new char[m_bufsize];

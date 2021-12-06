@@ -12,7 +12,7 @@
 
 #include "wx/sstream.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 // ============================================================================
 // wxStringInputStream implementation
@@ -66,18 +66,18 @@ wxFileOffset wxStringInputStream::OnSysSeek(wxFileOffset ofs, wxSeekMode mode)
             return wxInvalidOffset;
     }
 
-    if ( ofs < 0 || ofs > gsl::narrow_cast<wxFileOffset>(m_len) )
+    if ( ofs < 0 || ofs > wx::narrow_cast<wxFileOffset>(m_len) )
         return wxInvalidOffset;
 
     // FIXME: this can't be right
-    m_pos = gsl::narrow_cast<size_t>(ofs);
+    m_pos = wx::narrow_cast<size_t>(ofs);
 
     return ofs;
 }
 
 wxFileOffset wxStringInputStream::OnSysTell() const
 {
-    return gsl::narrow_cast<wxFileOffset>(m_pos);
+    return wx::narrow_cast<wxFileOffset>(m_pos);
 }
 
 // ----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ wxStringOutputStream::wxStringOutputStream(wxString *pString, wxMBConv& conv)
 
 wxFileOffset wxStringOutputStream::OnSysTell() const
 {
-    return gsl::narrow_cast<wxFileOffset>(m_pos);
+    return wx::narrow_cast<wxFileOffset>(m_pos);
 }
 
 // ----------------------------------------------------------------------------

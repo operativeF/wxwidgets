@@ -23,7 +23,7 @@ import <string_view>;
 import <utility>;
 import <vector>;
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 #if wxUSE_OWNER_DRAWN
   #include <wx/ownerdrw.h>
@@ -93,7 +93,7 @@ public:
 
     // get the index of the given item
     // FIXME: Use iterators.
-    gsl::index GetItemIndex(wxOwnerDrawn *item) const
+    std::ptrdiff_t GetItemIndex(wxOwnerDrawn *item) const
     {
         const auto index = std::distance(m_aItems.begin(),
                                          std::ranges::find_if(m_aItems,

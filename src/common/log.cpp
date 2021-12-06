@@ -30,7 +30,8 @@
 #include "wx/crt.h"
 
 #include <fmt/core.h>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import <algorithm>;
 import <iostream>;
@@ -394,7 +395,7 @@ wxLog::CallDoLogNow(wxLogLevel level,
     wxUIntPtr num = 0;
     if ( info.GetNumValue(wxLOG_KEY_SYS_ERROR_CODE, &num) )
     {
-        const long err = gsl::narrow_cast<long>(num);
+        const long err = wx::narrow_cast<long>(num);
 
         suffix.Printf(_(" (error %ld: %s)"), err, wxSysErrorMsgStr(err));
     }

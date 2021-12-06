@@ -53,8 +53,3 @@ target_include_directories(wxhtml
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
-
-target_link_libraries(wxhtml
-    PRIVATE
-        Microsoft.GSL::GSL
-)

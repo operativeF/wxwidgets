@@ -13,13 +13,12 @@ module;
 #include "wx/scrolwin.h"
 #include "wx/settings.h"
 
-#include <gsl/gsl>
-
 export module WX.Generic.Grid;
 
 import WX.Grid.CellCoords;
 import WX.Grid.Event;
 
+import WX.Utils.Cast;
 import Utils.Geometry;
 
 import <iterator>;
@@ -1306,7 +1305,7 @@ public:
 
     // these are pure virtual in wxGridTableBase
     //
-    int GetNumberRows() override { return gsl::narrow_cast<int>(m_data.size()); }
+    int GetNumberRows() override { return wx::narrow_cast<int>(m_data.size()); }
     int GetNumberCols() override { return m_numCols; }
     std::string GetValue( int row, int col ) override;
     void SetValue( int row, int col, const std::string& s ) override;
@@ -2042,7 +2041,7 @@ public:
     // return the position at which the column with the given index is
     // displayed: notice that this is a slow operation as we don't maintain the
     // reverse mapping currently
-    gsl::index GetColPos(int idx) const
+    std::ptrdiff_t GetColPos(int idx) const
     {
         wxASSERT_MSG( idx >= 0 && idx < m_numCols, "invalid column index" );
 

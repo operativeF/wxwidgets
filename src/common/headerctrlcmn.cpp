@@ -14,7 +14,7 @@
 #include "wx/rearrangectrl.h"
 #include "wx/renderer.h"
 
-#include <gsl/gsl>
+import WX.Utils.Cast;
 
 import <algorithm>;
 import <numeric>;
@@ -272,7 +272,7 @@ bool wxHeaderCtrlBase::ShowColumnsMenu(const wxPoint& pt, const std::string& tit
     if ( rc == wxID_NONE )
         return false;
 
-    if ( gsl::narrow_cast<unsigned>(rc) == idCustomize )
+    if ( wx::narrow_cast<unsigned>(rc) == idCustomize )
     {
         return ShowCustomizeDialog();
     }

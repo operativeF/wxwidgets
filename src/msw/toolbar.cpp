@@ -40,7 +40,8 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
+
+import WX.Utils.Cast;
 
 import WX.Image;
 import WX.WinDef;
@@ -781,7 +782,7 @@ bool wxToolBar::Realize()
         // otherwise we'll install a new one
         WXHBITMAP oldToolBarBitmap = (WXHBITMAP)m_hBitmap;
 
-        const wxCoord totalBitmapWidth  = m_defaultWidth * gsl::narrow_cast<wxCoord>(nTools),
+        const wxCoord totalBitmapWidth  = m_defaultWidth * wx::narrow_cast<wxCoord>(nTools),
                       totalBitmapHeight = m_defaultHeight;
 
         // Create a bitmap and copy all the tool bitmaps into it

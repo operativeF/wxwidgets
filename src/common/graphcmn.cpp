@@ -495,7 +495,7 @@ void wxGraphicsPathData::AddArcToPoint( float x1, float y1 , float x2, float y2,
     const double a2 = GetVectorAngle(nv2);
 
     AddLineToPoint(t1.x, t1.y);
-    AddArc(c.x, c.y, r, gsl::narrow_cast<float>(wxDegToRad(a1)), gsl::narrow_cast<float>(wxDegToRad(a2)), drawClockwiseArc);
+    AddArc(c.x, c.y, r, wx::narrow_cast<float>(wxDegToRad(a1)), wx::narrow_cast<float>(wxDegToRad(a2)), drawClockwiseArc);
 }
 
 //-----------------------------------------------------------------------------
@@ -551,7 +551,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
       m_interpolation(wxInterpolationQuality::Default),
       m_enableOffset(false),
       m_window(window),
-      m_contentScaleFactor(window ? gsl::narrow_cast<float>(window->GetContentScaleFactor()) : 1.0F)
+      m_contentScaleFactor(window ? wx::narrow_cast<float>(window->GetContentScaleFactor()) : 1.0F)
 {
 }
 
@@ -604,8 +604,8 @@ void wxGraphicsContext::GetDPI( float* dpiX, float* dpiY) const
     if ( m_window )
     {
         const wxSize ppi = m_window->GetDPI();
-        *dpiX = gsl::narrow_cast<float>(ppi.x);
-        *dpiY = gsl::narrow_cast<float>(ppi.y);
+        *dpiX = wx::narrow_cast<float>(ppi.x);
+        *dpiY = wx::narrow_cast<float>(ppi.y);
     }
     else
     {
@@ -824,7 +824,7 @@ wxGraphicsPen wxGraphicsContext::CreatePen(const wxPen& pen) const
 
     wxGraphicsPenInfo info = wxGraphicsPenInfo()
                                 .Colour(pen.GetColour())
-                                .Width(gsl::narrow_cast<float>(pen.GetWidth()))
+                                .Width(wx::narrow_cast<float>(pen.GetWidth()))
                                 .Style(pen.GetStyle())
                                 .Join(pen.GetJoin())
                                 .Cap(pen.GetCap())

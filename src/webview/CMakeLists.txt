@@ -88,11 +88,6 @@ target_include_directories(wxwebview
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
-target_link_libraries(wxwebview
-    PRIVATE
-        Microsoft.GSL::GSL
-)
-
 if(WXGTK AND wxUSE_WEBVIEW_WEBKIT2)
     if(wxVERSION_IS_DEV)
         set(WX_WEB_EXTENSIONS_DIRECTORY "lib/wx/${wxMAJOR_VERSION}.${wxMINOR_VERSION}.${wxRELEASE_NUMBER}/web-extensions")

@@ -557,7 +557,7 @@ bool wxWebViewIE::CanGoForward() const
 {
     if(m_impl->m_historyEnabled)
         return m_impl->m_historyPosition !=
-               gsl::narrow_cast<int>(m_impl->m_historyList.size()) - 1;
+               wx::narrow_cast<int>(m_impl->m_historyList.size()) - 1;
     else
         return false;
 }
@@ -595,7 +595,7 @@ std::vector<std::shared_ptr<wxWebViewHistoryItem> > wxWebViewIE::GetForwardHisto
     std::vector<std::shared_ptr<wxWebViewHistoryItem> > forwardhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
-    for(int i = m_impl->m_historyPosition + 1; i < gsl::narrow_cast<int>(m_impl->m_historyList.size()); i++)
+    for(int i = m_impl->m_historyPosition + 1; i < wx::narrow_cast<int>(m_impl->m_historyList.size()); i++)
     {
         forwardhist.push_back(m_impl->m_historyList[i]);
     }
@@ -1491,7 +1491,7 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
             {
                 //If we are not at the end of the list, then erase everything
                 //between us and the end before adding the new page
-                if(m_impl->m_historyPosition != gsl::narrow_cast<int>(m_impl->m_historyList.size()) - 1)
+                if(m_impl->m_historyPosition != wx::narrow_cast<int>(m_impl->m_historyList.size()) - 1)
                 {
                     m_impl->m_historyList.erase(m_impl->m_historyList.begin() + m_impl->m_historyPosition + 1,
                                                 m_impl->m_historyList.end());

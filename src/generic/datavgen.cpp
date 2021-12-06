@@ -23,7 +23,7 @@
     #endif
 
     #include <fmt/core.h>
-    #include <gsl/gsl>
+    import WX.Utils.Cast;
     
     import <vector>;
 #endif
@@ -905,7 +905,7 @@ public:
         DropHint            m_hint{ DropHint_None };
 
         DropItemInfo()
-        :   m_row(gsl::narrow_cast<unsigned int>(-1))
+        :   m_row(wx::narrow_cast<unsigned int>(-1))
         ,   
            m_item(nullptr)
            
@@ -3107,7 +3107,7 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
             GetModel()->GetChildren(parent, modelSiblings);
             const int modelSiblingsSize = modelSiblings.size();
 
-            gsl::index posInModel = std::distance(modelSiblings.cbegin(), std::find(modelSiblings.cbegin(), modelSiblings.cend(), item));
+            std::ptrdiff_t posInModel = std::distance(modelSiblings.cbegin(), std::find(modelSiblings.cbegin(), modelSiblings.cend(), item));
 
             if((posInModel + modelSiblings.cbegin()) == modelSiblings.cend())
             {
@@ -3121,7 +3121,7 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
             const wxDataViewTreeNodes& nodeSiblings = parentNode->GetChildNodes();
             const int nodeSiblingsSize = nodeSiblings.size();
 
-            gsl::index nodePos{};
+            std::ptrdiff_t nodePos{};
 
             if ( posInModel == modelSiblingsSize - 1 )
             {
@@ -3144,7 +3144,7 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
                 // append to the end if we won't find a better position:
                 nodePos = nodeSiblingsSize;
 
-                for ( gsl::index nextItemPos = posInModel + 1;
+                for ( std::ptrdiff_t nextItemPos = posInModel + 1;
                      nextItemPos < modelSiblingsSize;
                      nextItemPos++ )
                 {
@@ -3731,7 +3731,7 @@ int wxDataViewMainWindow::GetLineAt( unsigned int y ) const
     unsigned int rowCount = GetRowCount();
     if (rowCount == 0 ||
         (m_rowHeightCache->GetLineInfo(rowCount - 1, start, height) &&
-         y >= gsl::narrow_cast<unsigned int>(start + height)))
+         y >= wx::narrow_cast<unsigned int>(start + height)))
     {
         return rowCount;
     }
@@ -3868,7 +3868,7 @@ wxDataViewTreeNode * wxDataViewMainWindow::GetTreeNodeByRow(unsigned int row) co
     if ( row == (unsigned)-1 )
         return nullptr;
 
-    RowToTreeNodeJob job(gsl::narrow_cast<int>(row));
+    RowToTreeNodeJob job(wx::narrow_cast<int>(row));
     Walker( m_root , job );
     return job.GetResult();
 }
@@ -5268,7 +5268,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
                 unsigned int lineFrom = oldCurrentRow,
                     lineTo = current;
 
-                if ( lineFrom == gsl::narrow_cast<unsigned>(-1) )
+                if ( lineFrom == wx::narrow_cast<unsigned>(-1) )
                 {
                     // If we hadn't had any current row before, treat this as a
                     // simple click and select the new row only.
@@ -6155,7 +6155,7 @@ void wxDataViewCtrl::DoSetCurrentItem(const wxDataViewItem& item)
     const int row = m_clientArea->GetRowByItem(item);
 
     const unsigned oldCurrent = m_clientArea->GetCurrentRow();
-    if ( gsl::narrow_cast<unsigned int>(row) != oldCurrent )
+    if ( wx::narrow_cast<unsigned int>(row) != oldCurrent )
     {
         m_clientArea->ChangeCurrentRow(row);
         m_clientArea->RefreshRow(oldCurrent);
@@ -6229,7 +6229,7 @@ void wxDataViewCtrl::SetSelections( const wxDataViewItemArray & sel )
         last_parent = parent;
         int row = m_clientArea->GetRowByItem( item );
         if( row >= 0 )
-            m_clientArea->SelectRow(gsl::narrow_cast<unsigned int>(row), true);
+            m_clientArea->SelectRow(wx::narrow_cast<unsigned int>(row), true);
     }
 
     // Also make the last item as current item

@@ -13,7 +13,6 @@ target_link_libraries(wxxml
     PUBLIC
         wxbase
     PRIVATE
-        Microsoft.GSL::GSL
         expat::expat
 )
 
