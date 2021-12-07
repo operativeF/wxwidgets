@@ -203,8 +203,7 @@ private:
     friend class wxDynamicLibraryDetailsCreator;
 };
 
-WX_DECLARE_OBJARRAY(wxDynamicLibraryDetails,
-                                  wxDynamicLibraryDetailsArray);
+using wxDynamicLibraryDetailsArray = std::vector<wxDynamicLibraryDetails>;
 
 // ----------------------------------------------------------------------------
 // wxDynamicLibrary: represents a handle to a DLL/shared object

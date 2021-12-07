@@ -353,11 +353,11 @@ bool wxDebugReport::DoAddSystemInfo(wxXmlNode *nodeSystemInfo)
 bool wxDebugReport::DoAddLoadedModules(wxXmlNode *nodeModules)
 {
     wxDynamicLibraryDetailsArray modules(wxDynamicLibrary::ListLoaded());
-    const size_t count = modules.GetCount();
-    if ( !count )
+
+    if ( modules.empty() )
         return false;
 
-    for ( size_t n = 0; n < count; n++ )
+    for ( size_t n = 0; n != modules.size(); n++ )
     {
         const wxDynamicLibraryDetails& info = modules[n];
 

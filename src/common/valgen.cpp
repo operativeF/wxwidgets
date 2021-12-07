@@ -10,7 +10,6 @@
 
 #if wxUSE_VALIDATORS
 
-#include "wx/dynarray.h"
 #include "wx/utils.h"
 #include "wx/intl.h"
 #include "wx/choice.h"

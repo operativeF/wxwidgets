@@ -92,8 +92,8 @@ void InteractiveOutputTestCase::TestDllListLoaded()
 
     wxPuts("Loaded modules:");
     wxDynamicLibraryDetailsArray dlls = wxDynamicLibrary::ListLoaded();
-    const size_t count = dlls.GetCount();
-    for ( size_t n = 0; n < count; ++n )
+
+    for ( size_t n = 0; n != dlls.size(); ++n )
     {
         const wxDynamicLibraryDetails& details = dlls[n];
         wxPrintf("%-45s", details.GetPath());
