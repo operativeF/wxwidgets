@@ -1238,10 +1238,10 @@ TEST_CASE("Image test")
         CHECK(image.IsOk());
 
         wxImageArray images;
-        images.Add(image);
+        images.push_back(image);
         for (int i = 0; i < 4 - 1; ++i)
         {
-            images.Add(images[i].Rotate90());
+            images.push_back(images[i].Rotate90());
 
             images[i + 1].SetPalette(images[0].GetPalette());
         }
@@ -1296,12 +1296,12 @@ TEST_CASE("Image test")
         {
             if (i)
             {
-                images.Add(images[i - 1].Rotate90());
+                images.push_back(images[i - 1].Rotate90());
                 images[i].SetPalette(images[0].GetPalette());
             }
             else
             {
-                images.Add(image);
+                images.push_back(image);
             }
 
             images[i].SetOption(wxIMAGE_OPTION_GIF_COMMENT,

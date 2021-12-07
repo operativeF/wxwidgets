@@ -205,7 +205,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
     m_nFrames = 0;
     m_szAnimation = wxDefaultSize;
 
-    m_images.Clear();
+    m_images.clear();
     m_info.clear();
 
     // we have a riff file:
@@ -250,7 +250,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             // FIXME: Use better conversion. Not technically correct.
             globaldelay = std::chrono::milliseconds{header.JifRate * 1000 / 60};
 
-            m_images.Alloc(header.cFrames);
+            m_images.reserve(header.cFrames);
             m_info.resize(m_nFrames);
         }
         else if ( FCC1 == rate32 )
@@ -290,7 +290,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
                 return false;
 
             image.SetType(wxBitmapType::ANI);
-            m_images.Add(image);
+            m_images.push_back(image);
         }
         else
         {
@@ -311,7 +311,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
     if (m_nFrames==0)
         return false;
 
-    if (m_nFrames==m_images.GetCount())
+    if (m_nFrames==m_images.size())
     {
         // if no SEQ chunk is available, display the frames in the order
         // they were loaded

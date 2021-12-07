@@ -8,7 +8,6 @@
 
 module;
 
-#include "wx/dynarray.h"
 #include "wx/gdicmn.h"
 #include "wx/object.h"
 #include "wx/hashmap.h"
@@ -693,8 +692,6 @@ private:
     bool DoSave(wxImageHandler& handler, wxOutputStream& stream) const;
 #endif // wxUSE_STREAMS
 };
-
-WX_DECLARE_OBJARRAY(wxImage, wxImageArray);
 
 inline wxImage wxNullImage;
 

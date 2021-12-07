@@ -14,7 +14,6 @@
 
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/control.h"
-#include "wx/dynarray.h"
 
 import WX.Cfg.Flags;
 

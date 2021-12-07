@@ -168,7 +168,10 @@ public:
     {
         m_selection = wxNOT_FOUND;
         DoInvalidateBestSize();
-        WX_CLEAR_ARRAY(m_pages);
+
+        std::ranges::for_each(m_pages, [](auto page){ delete page; });
+        m_pages.clear();
+        
         return true;
     }
 

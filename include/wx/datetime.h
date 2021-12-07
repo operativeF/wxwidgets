@@ -24,8 +24,6 @@ class wxDateSpan;
 struct _SYSTEMTIME;
 #endif
 
-#include "wx/dynarray.h"
-
 #include <fmt/core.h>
 import WX.Utils.Cast;
 
@@ -1530,7 +1528,7 @@ private:
 // wxDateTimeArray: array of dates.
 // ----------------------------------------------------------------------------
 
-WX_DECLARE_OBJARRAY(wxDateTime, wxDateTimeArray);
+using wxDateTimeArray = std::vector<wxDateTime>;
 
 // ----------------------------------------------------------------------------
 // wxDateTimeHolidayAuthority: an object of this class will decide whether a
@@ -1543,7 +1541,7 @@ WX_DECLARE_OBJARRAY(wxDateTime, wxDateTimeArray);
 
 class wxDateTimeHolidayAuthority;
 
-using wxHolidayAuthoritiesArray = std::vector<wxDateTimeHolidayAuthority*>;
+using wxHolidayAuthoritiesArray = std::vector<std::unique_ptr<wxDateTimeHolidayAuthority>>;
 
 class wxDateTimeHolidaysModule;
 class wxDateTimeHolidayAuthority
@@ -1563,7 +1561,7 @@ public:
 
     // add a new holiday authority (the pointer will be deleted by
     // wxDateTimeHolidayAuthority)
-    static void AddAuthority(wxDateTimeHolidayAuthority *auth);
+    static void AddAuthority(std::unique_ptr<wxDateTimeHolidayAuthority> auth);
 
     // the base class must have a virtual dtor
     virtual ~wxDateTimeHolidayAuthority() = default;

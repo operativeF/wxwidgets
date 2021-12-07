@@ -10,23 +10,9 @@
 
 module;
 
-#include "wx/dynarray.h"
+#include "wx/debug.h"
 
 module WX.Grid.Selection;
-
-namespace
-{
-
-// The helper function to compare wxIntSortedArray elements.
-int CompareInts(int n1, int n2)
-{
-    return n1 - n2;
-}
-
-}
-
-WX_DEFINE_SORTED_ARRAY_CMP_INT(int, CompareInts, wxIntSortedArray);
-
 
 wxGridSelection::wxGridSelection( wxGrid * grid,
                                   wxGrid::wxGridSelectionModes sel )
@@ -776,8 +762,10 @@ std::vector<int> wxGridSelection::GetRowSelection() const
             m_selectionMode == wxGrid::wxGridSelectNone )
         return {};
 
-    wxIntSortedArray uniqueRows;
+    std::vector<int> uniqueRows;
+
     const size_t count = m_selection.size();
+
     for ( size_t n = 0; n < count; ++n )
     {
         const wxGridBlockCoords& block = m_selection[n];
@@ -786,19 +774,16 @@ std::vector<int> wxGridSelection::GetRowSelection() const
         {
             for ( int r = block.GetTopRow(); r <= block.GetBottomRow(); ++r )
             {
-                if ( uniqueRows.Index(r) == wxNOT_FOUND )
-                    uniqueRows.Add(r);
+                auto uniqueRow = std::ranges::find(uniqueRows, r);
+                if ( uniqueRow == uniqueRows.end() )
+                    uniqueRows.push_back(r);
             }
         }
     }
 
-    std::vector<int> result;
-    result.reserve(uniqueRows.size());
-    for( size_t i = 0; i < uniqueRows.size(); ++i )
-    {
-        result.push_back(uniqueRows[i]);
-    }
-    return result;
+    std::ranges::sort(uniqueRows);
+
+    return uniqueRows;
 }
 
 // See comments for GetRowSelection().
@@ -808,7 +793,7 @@ std::vector<int> wxGridSelection::GetColSelection() const
             m_selectionMode == wxGrid::wxGridSelectNone )
         return {};
 
-    wxIntSortedArray uniqueCols;
+    std::vector<int> uniqueCols;
     const size_t count = m_selection.size();
     for ( size_t n = 0; n < count; ++n )
     {
@@ -818,20 +803,16 @@ std::vector<int> wxGridSelection::GetColSelection() const
         {
             for ( int c = block.GetLeftCol(); c <= block.GetRightCol(); ++c )
             {
-                if ( uniqueCols.Index(c) == wxNOT_FOUND )
-                    uniqueCols.Add(c);
+                auto uniqueCol = std::ranges::find(uniqueCols, c);
+                if ( uniqueCol == uniqueCols.end() )
+                    uniqueCols.push_back(c);
             }
         }
     }
 
-    std::vector<int> result;
-    result.reserve(uniqueCols.size());
-    for( size_t i = 0; i < uniqueCols.size(); ++i )
-    {
-        result.push_back(uniqueCols[i]);
-    }
+    std::ranges::sort(uniqueCols);
 
-    return result;
+    return uniqueCols;
 }
 
 void

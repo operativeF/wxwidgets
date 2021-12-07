@@ -98,7 +98,7 @@ class wxDateTimeHolidaysModule : public wxModule
 public:
     bool OnInit() override
     {
-        wxDateTimeHolidayAuthority::AddAuthority(new wxDateTimeWorkDays);
+        wxDateTimeHolidayAuthority::AddAuthority(std::make_unique<wxDateTimeWorkDays>());
 
         return true;
     }
@@ -2141,10 +2141,6 @@ void wxDateTime::UseEffectiveWeekDayFlags(WeekFlags &flags) const
 // wxDateTimeHolidayAuthority and related classes
 // ============================================================================
 
-#include "wx/arrimpl.cpp"
-
-WX_DEFINE_OBJARRAY(wxDateTimeArray)
-
 // ----------------------------------------------------------------------------
 // wxDateTimeHolidayAuthority
 // ----------------------------------------------------------------------------
@@ -2189,13 +2185,13 @@ wxDateTimeHolidayAuthority::GetHolidaysInRange(const wxDateTime& dtStart,
 /* static */
 void wxDateTimeHolidayAuthority::ClearAllAuthorities()
 {
-    WX_CLEAR_ARRAY(ms_authorities);
+    ms_authorities.clear();
 }
 
 /* static */
-void wxDateTimeHolidayAuthority::AddAuthority(wxDateTimeHolidayAuthority *auth)
+void wxDateTimeHolidayAuthority::AddAuthority(std::unique_ptr<wxDateTimeHolidayAuthority> auth)
 {
-    ms_authorities.push_back(auth);
+    ms_authorities.push_back(std::move(auth));
 }
 
 // ----------------------------------------------------------------------------

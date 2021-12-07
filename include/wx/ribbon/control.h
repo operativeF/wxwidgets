@@ -14,7 +14,6 @@
 #if wxUSE_RIBBON
 
 #include "wx/control.h"
-#include "wx/dynarray.h"
 
 class wxRibbonBar;
 class wxRibbonArtProvider;

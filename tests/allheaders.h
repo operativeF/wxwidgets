@@ -108,7 +108,6 @@
 #include <wx/docmdi.h>
 #include <wx/docview.h>
 #include <wx/dragimag.h>
-#include <wx/dynarray.h>
 #include <wx/dynlib.h>
 #include <wx/dynload.h>
 #include <wx/editlbox.h>

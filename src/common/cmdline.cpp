@@ -8,15 +8,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/dynarray.h"
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/app.h"
 #include "wx/cmdline.h"
-
-import <vector>;
-import <charconv>;
-import <clocale>;             // for LC_ALL
 
 #if wxUSE_CMDLINE_PARSER
 
@@ -27,6 +22,10 @@ import <clocale>;             // for LC_ALL
 #include "wx/scopeguard.h"
 
 #include <boost/nowide/convert.hpp>
+
+import <charconv>;
+import <clocale>;             // for LC_ALL
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // private functions
@@ -165,15 +164,9 @@ struct wxCmdLineParam
     int flags;
 };
 
-WX_DECLARE_OBJARRAY(wxCmdLineOption, wxArrayOptions);
-WX_DECLARE_OBJARRAY(wxCmdLineParam, wxArrayParams);
-WX_DECLARE_OBJARRAY(wxCmdLineArgImpl, wxArrayArgs);
-
-#include "wx/arrimpl.cpp"
-
-WX_DEFINE_OBJARRAY(wxArrayOptions)
-WX_DEFINE_OBJARRAY(wxArrayParams)
-WX_DEFINE_OBJARRAY(wxArrayArgs)
+using wxArrayOptions = std::vector<wxCmdLineOption>;
+using wxArrayParams  = std::vector<wxCmdLineParam>;
+using wxArrayArgs    = std::vector<wxCmdLineArgImpl>;
 
 // the parser internal state
 struct wxCmdLineParserData
@@ -329,7 +322,7 @@ wxCmdLineArgImpl& wxCmdLineArgImpl::SetDateVal(const wxDateTime& val)
 
 size_t wxCmdLineArgs::size() const
 {
-    return m_parser.m_data->m_parsedArguments.GetCount();
+    return m_parser.m_data->m_parsedArguments.size();
 }
 
 // ----------------------------------------------------------------------------
@@ -464,7 +457,7 @@ int wxCmdLineParserData::FindOption(const wxString& name)
 {
     if ( !name.empty() )
     {
-        const size_t count = m_options.GetCount();
+        const size_t count = m_options.size();
         for ( size_t n = 0; n < count; n++ )
         {
             if ( m_options[n].shortName == name )
@@ -480,7 +473,7 @@ int wxCmdLineParserData::FindOption(const wxString& name)
 
 int wxCmdLineParserData::FindOptionByLongName(const wxString& name)
 {
-    const size_t count = m_options.GetCount();
+    const size_t count = m_options.size();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( m_options[n].longName == name )
@@ -618,11 +611,11 @@ void wxCmdLineParser::AddSwitch(const wxString& shortName,
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   "duplicate switch" );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::Switch,
+    wxCmdLineOption option = wxCmdLineOption(wxCmdLineEntryType::Switch,
                                                   shortName, longName, desc,
                                                   wxCmdLineParamType::None, flags);
 
-    m_data->m_options.Add(option);
+    m_data->m_options.push_back(option);
 }
 
 void wxCmdLineParser::AddOption(const wxString& shortName,
@@ -634,11 +627,11 @@ void wxCmdLineParser::AddOption(const wxString& shortName,
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   "duplicate option" );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::Option,
+    wxCmdLineOption option = wxCmdLineOption(wxCmdLineEntryType::Option,
                                                   shortName, longName, desc,
                                                   type, flags);
 
-    m_data->m_options.Add(option);
+    m_data->m_options.push_back(option);
 }
 
 void wxCmdLineParser::AddParam(const wxString& desc,
@@ -648,9 +641,9 @@ void wxCmdLineParser::AddParam(const wxString& desc,
     // do some consistency checks: a required parameter can't follow an
     // optional one and nothing should follow a parameter with MULTIPLE flag
 #if wxDEBUG_LEVEL
-    if ( !m_data->m_paramDesc.IsEmpty() )
+    if ( !m_data->m_paramDesc.empty() )
     {
-        wxCmdLineParam& param = m_data->m_paramDesc.Last();
+        wxCmdLineParam& param = m_data->m_paramDesc.back();
 
         wxASSERT_MSG( !(param.flags & wxCMD_LINE_PARAM_MULTIPLE),
                       "all parameters after the one with wxCMD_LINE_PARAM_MULTIPLE style will be ignored" );
@@ -663,20 +656,20 @@ void wxCmdLineParser::AddParam(const wxString& desc,
     }
 #endif // wxDEBUG_LEVEL
 
-    wxCmdLineParam *param = new wxCmdLineParam(desc, type, flags);
+    wxCmdLineParam param = wxCmdLineParam(desc, type, flags);
 
-    m_data->m_paramDesc.Add(param);
+    m_data->m_paramDesc.push_back(param);
 }
 
 void wxCmdLineParser::AddUsageText(const wxString& text)
 {
     wxASSERT_MSG( !text.empty(), "text can't be empty" );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::UsageText,
+    wxCmdLineOption option = wxCmdLineOption(wxCmdLineEntryType::UsageText,
                                                   {}, {},
                                                   text, wxCmdLineParamType::None, 0);
 
-    m_data->m_options.Add(option);
+    m_data->m_options.push_back(option);
 }
 
 // ----------------------------------------------------------------------------
@@ -773,12 +766,12 @@ wxString wxCmdLineParser::GetParam(size_t n) const
 // Resets switches and options
 void wxCmdLineParser::Reset()
 {
-    for ( size_t i = 0; i < m_data->m_options.GetCount(); i++ )
+    for ( size_t i = 0; i < m_data->m_options.size(); i++ )
     {
         m_data->m_options[i].Reset();
     }
 
-    m_data->m_parsedArguments.Empty();
+    m_data->m_parsedArguments.clear();
 }
 
 
@@ -795,7 +788,7 @@ int wxCmdLineParser::Parse(bool showUsage)
 
     size_t currentParam = 0;    // the index in m_paramDesc
 
-    size_t countParam = m_data->m_paramDesc.GetCount();
+    size_t countParam = m_data->m_paramDesc.size();
     wxString errorMsg;
 
     Reset();
@@ -1143,7 +1136,7 @@ int wxCmdLineParser::Parse(bool showUsage)
             }
 
             if (ok)
-                m_data->m_parsedArguments.push_back (opt);
+                m_data->m_parsedArguments.push_back(opt);
         }
         else // not an option, must be a parameter
         {
@@ -1184,7 +1177,7 @@ int wxCmdLineParser::Parse(bool showUsage)
     // verify that all mandatory options were given
     if ( ok )
     {
-        size_t countOpt = m_data->m_options.GetCount();
+        size_t countOpt = m_data->m_options.size();
         for ( size_t n = 0; ok && (n < countOpt); n++ )
         {
             wxCmdLineOption& opt = m_data->m_options[n];
@@ -1315,7 +1308,7 @@ wxString wxCmdLineParser::GetUsageString() const
                                              : m_data->m_switchChars[0u];
 
     bool areLongOptionsEnabled = AreLongOptionsEnabled();
-    size_t count = m_data->m_options.GetCount();
+    size_t count = m_data->m_options.size();
     for ( size_t n = 0; n < count; n++ )
     {
         wxCmdLineOption& opt = m_data->m_options[n];
@@ -1384,7 +1377,7 @@ wxString wxCmdLineParser::GetUsageString() const
         descOptions.push_back(opt.description);
     }
 
-    count = m_data->m_paramDesc.GetCount();
+    count = m_data->m_paramDesc.size();
     for ( size_t n = 0; n < count; n++ )
     {
         wxCmdLineParam& param = m_data->m_paramDesc[n];

@@ -1279,16 +1279,6 @@ private:
     int m_comInt2{-1};
 };
 
-
-
-// ------ wxGridStringArray
-// A 2-dimensional array of strings for data values
-//
-
-WX_DECLARE_OBJARRAY_WITH_DECL(std::vector<std::string>, wxGridStringArray, class);
-
-
-
 // ------ wxGridStringTable
 //
 // Simplest type of data table for a grid for small tables of strings

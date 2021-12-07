@@ -83,7 +83,7 @@ private:
     // frames stored as wxImage(s): ANI files are meant to be used mostly for animated
     // cursors and thus they do not use any optimization to encode differences between
     // two frames: they are just a list of images to display sequentially.
-    wxImageArray m_images;
+    std::vector<wxImage> m_images;
 
     // the info about each image stored in m_images.
     // NB: m_info.GetCount() may differ from m_images.GetCount()!

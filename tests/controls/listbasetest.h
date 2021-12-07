@@ -15,6 +15,7 @@
 #include "wx/artprov.h"
 #include "wx/listctrl.h"
 #include "wx/imaglist.h"
+#include "wx/dynarray.h"
 
 #include "listbasetest.h"
 #include "testableframe.h"

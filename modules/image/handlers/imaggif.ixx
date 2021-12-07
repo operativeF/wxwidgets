@@ -27,10 +27,11 @@ export
 
 class wxInputStream;
 class wxOutputStream;
-class wxImageArray; // anidecod.h
 
 struct wxRGB;
 struct GifHashTableType;
+
+using wxImageArray = std::vector<wxImage>;
 
 inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 

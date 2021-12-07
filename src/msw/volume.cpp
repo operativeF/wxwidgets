@@ -23,7 +23,6 @@
 
 #include "wx/dir.h"
 #include "wx/dynlib.h"
-#include "wx/arrimpl.cpp"
 
 #include "wx/msw/wrapshl.h"
 

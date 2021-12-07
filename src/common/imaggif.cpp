@@ -276,9 +276,9 @@ bool wxGIFHandler::SaveAnimation(const wxImageArray& images,
     size_t i;
 
     wxSize size(0,0);
-    for (i = 0; (i < images.GetCount()) && ok; i++)
+    for (i = 0; (i < images.size()) && ok; i++)
     {
-        const wxImage& image = images.Item(i);
+        const wxImage& image = images[i];
         wxSize temp(image.GetWidth(), image.GetHeight());
         ok = ok && image.HasPalette();
         if (i)
@@ -291,9 +291,9 @@ bool wxGIFHandler::SaveAnimation(const wxImageArray& images,
         }
     }
 
-    for (i = 0; (i < images.GetCount()) && ok; i++)
+    for (i = 0; (i < images.size()) && ok; i++)
     {
-        const wxImage& image = images.Item(i);
+        const wxImage& image = images[i];
 
         wxRGB pal[256];
         int palCount;
