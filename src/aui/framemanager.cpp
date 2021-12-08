@@ -418,10 +418,10 @@ void FindDocks(wxAuiDockInfoArray& docks,
     int layer, row, i, max_row = 0, max_layer = 0;
 
     // discover the maximum dock layer and the max row
-    for (i = 0; i < dock_count; ++i)
+    for (const auto& dock : docks)
     {
-        max_row = std::max(max_row, docks[i].dock_row);
-        max_layer = std::max(max_layer, docks[i].dock_layer);
+        max_row = std::max(max_row, dock.dock_row);
+        max_layer = std::max(max_layer, dock.dock_layer);
     }
 
     // if no dock layer was specified, search all dock layers
@@ -442,9 +442,8 @@ void FindDocks(wxAuiDockInfoArray& docks,
 
     for (layer = begin_layer; layer <= end_layer; ++layer)
         for (row = begin_row; row <= end_row; ++row)
-            for (i = 0; i < dock_count; ++i)
+            for (auto& d : docks)
             {
-                wxAuiDockInfo& d = docks[i];
                 if (dock_direction == -1 || dock_direction == d.dock_direction)
                 {
                     if (d.dock_layer == layer && d.dock_row == row)
@@ -457,12 +456,12 @@ void FindDocks(wxAuiDockInfoArray& docks,
 // If found, the corresponding wxAuiPaneInfo pointer is returned, otherwise NULL.
 wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window)
 {
-    for (size_t i = 0; i < dock.panes.size(); ++i)
+    for (auto* p : dock.panes)
     {
-        wxAuiPaneInfo* p = dock.panes[i];
         if (p->window == window)
             return p;
     }
+
     return nullptr;
 }
 
@@ -1848,7 +1847,6 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
                                  bool spacer_only)
 {
     wxSizerItem* sizer_item;
-    wxAuiDockUIPart part;
 
     int sashSize = m_art->GetMetric(wxAUI_DOCKART_SASH_SIZE);
     int orientation = dock.IsHorizontal() ? wxHORIZONTAL : wxVERTICAL;
@@ -1859,6 +1857,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     {
         sizer_item = cont->Add(sashSize, sashSize, 0, wxEXPAND);
 
+        wxAuiDockUIPart part;
+
         part.type = wxAuiDockUIPart::typeDockSizer;
         part.orientation = orientation;
         part.dock = &dock;
@@ -1866,6 +1866,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         part.button = 0;
         part.cont_sizer = cont;
         part.sizer_item = sizer_item;
+
         uiparts.push_back(part);
     }
 
@@ -1904,13 +1905,17 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
                 else
                     sizer_item = dock_sizer->Add(amount, 1, 0, wxEXPAND);
 
-                part.type = wxAuiDockUIPart::typeBackground;
-                part.dock = &dock;
-                part.pane = nullptr;
-                part.button = 0;
-                part.orientation = (orientation==wxHORIZONTAL) ? wxVERTICAL:wxHORIZONTAL;
-                part.cont_sizer = dock_sizer;
-                part.sizer_item = sizer_item;
+                wxAuiDockUIPart part
+                {
+                    .type = wxAuiDockUIPart::typeBackground,
+                    .orientation = (orientation == wxHORIZONTAL) ? wxVERTICAL : wxHORIZONTAL,
+                    .dock = &dock,
+                    .pane = nullptr,
+                    .button = 0,
+                    .cont_sizer = dock_sizer,
+                    .sizer_item = sizer_item
+                };
+
                 uiparts.push_back(part);
 
                 offset += amount;
@@ -1923,6 +1928,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
         // at the end add a very small stretchable background area
         sizer_item = dock_sizer->Add(0,0, 1, wxEXPAND);
+
+        wxAuiDockUIPart part;
 
         part.type = wxAuiDockUIPart::typeBackground;
         part.dock = &dock;
@@ -1948,6 +1955,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
             {
                 sizer_item = dock_sizer->Add(sashSize, sashSize, 0, wxEXPAND);
 
+                wxAuiDockUIPart part;
+
                 part.type = wxAuiDockUIPart::typePaneSizer;
                 part.dock = &dock;
                 part.pane = dock.panes[pane_i - 1];
@@ -1966,6 +1975,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         sizer_item = cont->Add(dock_sizer, 1, wxEXPAND);
     else
         sizer_item = cont->Add(dock_sizer, 0, wxEXPAND);
+
+    wxAuiDockUIPart part;
 
     part.type = wxAuiDockUIPart::typeDock;
     part.dock = &dock;
@@ -1989,14 +2000,18 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     {
         sizer_item = cont->Add(sashSize, sashSize, 0, wxEXPAND);
 
-        part.type = wxAuiDockUIPart::typeDockSizer;
-        part.dock = &dock;
-        part.pane = nullptr;
-        part.button = 0;
-        part.orientation = orientation;
-        part.cont_sizer = cont;
-        part.sizer_item = sizer_item;
-        uiparts.push_back(part);
+        wxAuiDockUIPart dockpart
+        {
+            .type = wxAuiDockUIPart::typeDockSizer,
+            .orientation = orientation,
+            .dock = &dock,
+            .pane = nullptr,
+            .button = 0,
+            .cont_sizer = cont,
+            .sizer_item = sizer_item
+        };
+
+        uiparts.push_back(dockpart);
     }
 }
 
