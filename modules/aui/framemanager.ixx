@@ -355,6 +355,7 @@ class wxAuiManager : public wxEvtHandler
     friend class wxAuiFloatingFrame;
 
 public:
+    using PaneInfoIter = wxAuiPaneInfoArray::iterator;
 
     wxAuiManager(wxWindow* managedWnd = nullptr,
                    unsigned int flags = wxAUI_MGR_DEFAULT);
@@ -375,8 +376,8 @@ public:
     void SetArtProvider(std::unique_ptr<wxAuiDockArt> artProvider);
     wxAuiDockArt* GetArtProvider() const;
 
-    wxAuiPaneInfo& GetPane(wxWindow* window);
-    wxAuiPaneInfo& GetPane(std::string_view name);
+    PaneInfoIter GetPane(wxWindow* window);
+    PaneInfoIter GetPane(std::string_view name);
     wxAuiPaneInfoArray& GetAllPanes();
 
     bool AddPane(wxWindow* window,

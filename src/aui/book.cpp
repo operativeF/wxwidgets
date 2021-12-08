@@ -297,13 +297,14 @@ wxWindow* wxAuiTabContainer::GetWindowFromIdx(size_t idx) const
 
 int wxAuiTabContainer::GetIdxFromWindow(wxWindow* wnd) const
 {
-    const size_t page_count = m_pages.size();
-    for ( size_t i = 0; i < page_count; ++i )
+    for(int idx{}; const auto& page : m_pages)
     {
-        const wxAuiNotebookPage& page = m_pages[i];
         if (page.window == wnd)
-            return i;
+            return idx;
+        
+        ++idx;
     }
+
     return wxNOT_FOUND;
 }
 
@@ -1810,11 +1811,11 @@ void wxAuiNotebook::UpdateHintWindowSize()
     wxSize size = CalculateNewSplitSize();
 
     // the placeholder hint window should be set to this size
-    wxAuiPaneInfo& info = m_mgr.GetPane("dummy");
-    if (info.IsOk())
+    auto info = m_mgr.GetPane("dummy");
+    if (info != m_mgr.GetAllPanes().end())
     {
-        info.MinSize(size);
-        info.BestSize(size);
+        info->MinSize(size);
+        info->BestSize(size);
         m_dummyWnd->SetSize(size);
     }
 }
@@ -2971,7 +2972,7 @@ void wxAuiNotebook::RemoveEmptyTabFrames()
 
     if (!center_found && first_good)
     {
-        m_mgr.GetPane(first_good).Centre();
+        m_mgr.GetPane(first_good)->Centre();
     }
 
     if (!m_isBeingDeleted)
@@ -3497,18 +3498,19 @@ wxSize wxAuiNotebook::DoGetBestSize() const
         const_cast<wxAuiManager&>(m_mgr).GetAllPanes();
     const size_t pane_count = all_panes.size();
     const int tabHeight = GetTabCtrlHeight();
-    for ( size_t n = 0; n < pane_count; ++n )
+
+    for(const auto& pInfo : all_panes)
     {
-        const wxAuiPaneInfo &pInfo = all_panes[n];
         if ( pInfo.name == "dummy" || pInfo.IsFloating() )
             continue;
 
-        const wxTabFrame* tabframe = (wxTabFrame*) all_panes[n].window;
+        const auto* tabframe = dynamic_cast<wxTabFrame*>(pInfo.window);
         const wxAuiNotebookPageArray &pages = tabframe->m_tabs->GetPages();
 
         wxSize bestPageSize;
-        for ( size_t pIdx = 0; pIdx < pages.size(); pIdx++ )
-            bestPageSize.IncTo(pages[pIdx].window->GetBestSize());
+
+        for(const auto& page : pages)
+            bestPageSize.IncTo(page.window->GetBestSize());
 
         bestPageSize.y += tabHeight;
         // Store the current pane with its largest window dimensions
@@ -3537,13 +3539,14 @@ wxSize wxAuiNotebook::DoGetBestSize() const
         }
         else
         {
-            layouts[0].MergeLayout(layouts[pos]);
+            layouts.front().MergeLayout(layouts[pos]);
             pos = n;
         }
     }
-    layouts[0].MergeLayout(layouts[pos]);
 
-    return layouts[0].m_size;
+    layouts.front().MergeLayout(layouts[pos]);
+
+    return layouts.front().m_size;
 }
 
 int wxAuiNotebook::DoModifySelection(size_t n, bool events)
@@ -3635,10 +3638,8 @@ void wxAuiTabCtrl::SetHoverTab(wxWindow* wnd)
 {
     bool hoverChanged = false;
 
-    const size_t page_count = m_pages.size();
-    for ( size_t i = 0; i < page_count; ++i )
+    for(auto& page : m_pages)
     {
-        wxAuiNotebookPage& page = m_pages[i];
         bool oldHover = page.hover;
         page.hover = (page.window == wnd);
         if ( oldHover != page.hover )

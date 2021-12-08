@@ -915,7 +915,7 @@ bool wxAuiToolBar::IsPaneValid(unsigned int style) const
     wxAuiManager* manager = wxAuiManager::GetManager(const_cast<wxAuiToolBar*>(this));
     if (manager)
     {
-        return IsPaneValid(style, manager->GetPane(const_cast<wxAuiToolBar*>(this)));
+        return IsPaneValid(style, *manager->GetPane(const_cast<wxAuiToolBar*>(this)));
     }
     return true;
 }
@@ -1468,18 +1468,18 @@ void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
     wxAuiManager* manager = wxAuiManager::GetManager(this);
     if (manager)
     {
-        wxAuiPaneInfo& pane = manager->GetPane(this);
+        auto pane = manager->GetPane(this);
         // pane state member is public, so it might have been changed
         // without going through wxPaneInfo::SetFlag() check
-        bool ok = pane.IsOk();
-        wxCHECK2_MSG(!ok || IsPaneValid(m_windowStyle, pane), ok = false,
+        bool ok = pane != manager->GetAllPanes().end();
+        wxCHECK2_MSG(!ok || IsPaneValid(m_windowStyle, *pane), ok = false,
                     "window settings and pane settings are incompatible");
         if (ok)
         {
             wxOrientation newOrientation = m_orientation;
-            if (pane.IsDocked())
+            if (pane->IsDocked())
             {
-                switch (pane.dock_direction)
+                switch (pane->dock_direction)
                 {
                     case wxAUI_DOCK_TOP:
                     case wxAUI_DOCK_BOTTOM:
@@ -1493,7 +1493,7 @@ void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
                         wxFAIL_MSG("invalid dock location value");
                 }
             }
-            else if (pane.IsResizable() &&
+            else if (pane->IsResizable() &&
                     GetOrientation(m_windowStyle) == wxBOTH)
             {
                 // changing orientation in OnSize causes havoc
@@ -1514,15 +1514,15 @@ void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
                 Realize();
                 if (newOrientation == wxHORIZONTAL)
                 {
-                    pane.best_size = GetHintSize(wxAUI_DOCK_TOP);
+                    pane->best_size = GetHintSize(wxAUI_DOCK_TOP);
                 }
                 else
                 {
-                    pane.best_size = GetHintSize(wxAUI_DOCK_LEFT);
+                    pane->best_size = GetHintSize(wxAUI_DOCK_LEFT);
                 }
-                if (pane.IsDocked())
+                if (pane->IsDocked())
                 {
-                    pane.floating_size = wxDefaultSize;
+                    pane->floating_size = wxDefaultSize;
                 }
                 else
                 {
