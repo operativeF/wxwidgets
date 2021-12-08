@@ -14,7 +14,6 @@
 #if wxUSE_DYNLIB_CLASS
 
 #include "wx/string.h"
-#include "wx/dynarray.h"
 
 import WX.WinDef;
 import WX.Cfg.Flags;
