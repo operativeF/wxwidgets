@@ -2216,7 +2216,7 @@ void wxGenericTreeCtrl::FillArray(wxGenericTreeItem *item,
                                   wxArrayTreeItemIds &array) const
 {
     if ( item->IsSelected() )
-        array.Add(wxTreeItemId(item));
+        array.push_back(wxTreeItemId(item).m_pItem);
 
     if ( item->HasChildren() )
     {
@@ -2229,7 +2229,7 @@ void wxGenericTreeCtrl::FillArray(wxGenericTreeItem *item,
 
 size_t wxGenericTreeCtrl::GetSelections(wxArrayTreeItemIds &array) const
 {
-    array.Empty();
+    array.clear();
     wxTreeItemId idRoot = GetRootItem();
     if ( idRoot.IsOk() )
     {
@@ -2237,7 +2237,7 @@ size_t wxGenericTreeCtrl::GetSelections(wxArrayTreeItemIds &array) const
     }
     //else: the tree is empty, so no selections
 
-    return array.GetCount();
+    return array.size();
 }
 
 void wxGenericTreeCtrl::EnsureVisible(const wxTreeItemId& item)

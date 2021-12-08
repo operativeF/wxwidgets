@@ -13,7 +13,6 @@
 #if wxUSE_XRC
 
 #include "wx/string.h"
-#include "wx/dynarray.h"
 #include "wx/datetime.h"
 #include "wx/list.h"
 #include "wx/gdicmn.h"
@@ -23,11 +22,12 @@
 #include "wx/icon.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"
-import <vector>;
 
 #include "wx/xrc/xmlreshandler.h"
 
 import WX.Cfg.Flags;
+
+import <vector>;
 
 class wxFileName;
 

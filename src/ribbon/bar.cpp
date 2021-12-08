@@ -20,7 +20,6 @@
 
 #include "wx/app.h"
 
-#include "wx/arrimpl.cpp"
 #include "wx/imaglist.h"
 
 import WX.Utils.Cast;

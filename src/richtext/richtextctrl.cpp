@@ -23,7 +23,6 @@
 #include "wx/ffile.h"
 #include "wx/filename.h"
 #include "wx/dcbuffer.h"
-#include "wx/arrimpl.cpp"
 #include "wx/fontenum.h"
 #include "wx/accel.h"
 

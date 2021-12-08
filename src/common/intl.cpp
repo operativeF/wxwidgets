@@ -11,7 +11,6 @@
 
 #if wxUSE_INTL
 
-#include "wx/dynarray.h"
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -204,12 +203,6 @@ wxString wxLanguageInfo::GetLocaleName() const
 // ----------------------------------------------------------------------------
 // wxLocale
 // ----------------------------------------------------------------------------
-
-#include "wx/arrimpl.cpp"
-WX_DECLARE_OBJARRAY(wxLanguageInfo, wxLanguageInfoArray);
-WX_DEFINE_OBJARRAY(wxLanguageInfoArray)
-
-wxLanguageInfoArray *wxLocale::ms_languagesDB = nullptr;
 
 /*static*/ void wxLocale::CreateLanguagesDB()
 {
@@ -610,7 +603,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     CreateLanguagesDB();
 
     size_t i = 0;
-    const size_t count = ms_languagesDB->GetCount();
+    const size_t count = ms_languagesDB->size();
 
 #if defined(__UNIX__)
     // first get the string identifying the language from the environment
@@ -714,7 +707,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
         wxString langFullWithModifier = langFull + modifier;
         for ( i = 0; i < count; i++ )
         {
-            if ( ms_languagesDB->Item(i).CanonicalName == langFullWithModifier )
+            if ( (*ms_languagesDB)[i].CanonicalName == langFullWithModifier )
                 break;
         }
     }
@@ -724,7 +717,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     {
         for ( i = 0; i < count; i++ )
         {
-            if ( ms_languagesDB->Item(i).CanonicalName == langFull )
+            if ( (*ms_languagesDB)[i].CanonicalName == langFull )
                 break;
         }
     }
@@ -734,7 +727,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     {
         for ( i = 0; i < count; i++ )
         {
-            if ( ExtractLang(ms_languagesDB->Item(i).CanonicalName) == lang )
+            if ( ExtractLang((*ms_languagesDB)[i].CanonicalName) == lang )
             {
                 break;
             }
@@ -746,7 +739,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     {
         for ( i = 0; i < count; i++ )
         {
-            if ( ExtractLang(ms_languagesDB->Item(i).CanonicalName)
+            if ( ExtractLang((*ms_languagesDB)[i].CanonicalName)
                     == langFull )
             {
                 break;
@@ -763,7 +756,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
         // find the name in verbose description.
         for ( i = 0; i < count; i++ )
         {
-            if (ms_languagesDB->Item(i).Description.CmpNoCase(langFull) == 0)
+            if ((*ms_languagesDB)[i].Description.CmpNoCase(langFull) == 0)
             {
                 break;
             }
@@ -778,8 +771,8 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
 
         for ( i = 0; i < count; i++ )
         {
-            if (ms_languagesDB->Item(i).WinLang == lang &&
-                ms_languagesDB->Item(i).WinSublang == sublang)
+            if ((*ms_languagesDB)[i].WinLang == lang &&
+                (*ms_languagesDB)[i].WinSublang == sublang)
             {
                 break;
             }
@@ -791,7 +784,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     if ( i < count )
     {
         // we did find a matching entry, use it
-        return ms_languagesDB->Item(i).Language;
+        return (*ms_languagesDB)[i].Language;
     }
 
     // no info about this language in the database
@@ -944,7 +937,7 @@ wxFontEncoding wxLocale::GetSystemEncoding()
 void wxLocale::AddLanguage(const wxLanguageInfo& info)
 {
     CreateLanguagesDB();
-    ms_languagesDB->Add(info);
+    ms_languagesDB->push_back(info);
 }
 
 /* static */
@@ -960,11 +953,11 @@ const wxLanguageInfo *wxLocale::GetLanguageInfo(int lang)
     if ( lang == wxLANGUAGE_UNKNOWN )
         return nullptr;
 
-    const size_t count = ms_languagesDB->GetCount();
+    const size_t count = ms_languagesDB->size();
     for ( size_t i = 0; i < count; i++ )
     {
-        if ( ms_languagesDB->Item(i).Language == lang )
-            return &ms_languagesDB->Item(i);
+        if ( (*ms_languagesDB)[i].Language == lang )
+            return &(*ms_languagesDB)[i];
     }
 
     return nullptr;
@@ -1005,10 +998,10 @@ const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
 
     const wxLanguageInfo *infoRet = nullptr;
 
-    const size_t count = ms_languagesDB->GetCount();
+    const size_t count = ms_languagesDB->size();
     for ( size_t i = 0; i < count; i++ )
     {
-        const wxLanguageInfo *info = &ms_languagesDB->Item(i);
+        const wxLanguageInfo *info = &(*ms_languagesDB)[i];
 
         if ( wxStricmp(locale, info->CanonicalName) == 0 ||
                 wxStricmp(locale, info->Description) == 0 )

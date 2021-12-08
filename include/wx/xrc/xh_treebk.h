@@ -15,7 +15,6 @@
 #if wxUSE_XRC && wxUSE_TREEBOOK
 
 class  wxTreebook;
-#include "wx/dynarray.h"
 
 WX_DEFINE_ARRAY_SIZE_T(size_t, wxArrayTbkPageIndexes, class);
 

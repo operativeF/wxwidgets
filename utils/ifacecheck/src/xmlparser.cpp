@@ -23,7 +23,6 @@
 #include "xmlparser.h"
 #include <errno.h>
 
-#include <wx/arrimpl.cpp>
 WX_DEFINE_OBJARRAY(wxTypeArray)
 WX_DEFINE_OBJARRAY(wxArgumentTypeArray)
 WX_DEFINE_OBJARRAY(wxMethodArray)

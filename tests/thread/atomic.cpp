@@ -11,7 +11,6 @@
 #include "testprec.h"
 
 #include "wx/thread.h"
-#include "wx/dynarray.h"
 #include "wx/log.h"
 
 import <atomic>;

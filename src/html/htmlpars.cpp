@@ -8,7 +8,6 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#include "wx/dynarray.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/app.h"

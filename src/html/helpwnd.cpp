@@ -11,7 +11,6 @@
 #if wxUSE_WXHTML_HELP
 
 #include "wx/object.h"
-#include "wx/dynarray.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 
@@ -155,7 +154,6 @@ struct wxHtmlHelpMergedIndexItem
 };
 
 WX_DECLARE_OBJARRAY(wxHtmlHelpMergedIndexItem, wxHtmlHelpMergedIndex);
-#include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxHtmlHelpMergedIndex)
 
 void wxHtmlHelpWindow::UpdateMergedIndex()

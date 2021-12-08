@@ -24,7 +24,6 @@
 #include "wx/clipbrd.h"
 #include "wx/recguard.h"
 
-#include "wx/arrimpl.cpp"
 #include "wx/listimpl.cpp"
 
 // uncomment this line to visually show the extent of the selection

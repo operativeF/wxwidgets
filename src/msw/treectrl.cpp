@@ -545,7 +545,7 @@ public:
                        wxArrayTreeItemIds& selections)
         : wxTreeTraversal(tree), m_selections(selections)
         {
-            m_selections.Empty();
+            m_selections.clear();
 
             if (tree->GetCount() > 0)
                 DoTraverse(tree->GetRootItem());
@@ -563,13 +563,13 @@ public:
 
         if ( ::IsItemSelected(GetHwndOf(tree), HITEM(item)) )
         {
-            m_selections.Add(item);
+            m_selections.push_back(item.m_pItem);
         }
 
         return true;
     }
 
-    size_t GetCount() const { return m_selections.GetCount(); }
+    size_t GetCount() const { return m_selections.size(); }
 
 private:
     wxArrayTreeItemIds& m_selections;
@@ -1644,12 +1644,12 @@ void wxTreeCtrl::DeleteChildren(const wxTreeItemId& item)
     wxTreeItemId child = wxGetFirstChild(item, cookie);
     while ( child.IsOk() )
     {
-        children.Add(child);
+        children.push_back(child.m_pItem);
 
         child = GetNextChild(item, cookie);
     }
 
-    size_t nCount = children.Count();
+    size_t nCount = children.size();
     for ( size_t n = 0; n < nCount; n++ )
     {
         Delete(children[n]);
@@ -2262,7 +2262,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                 wxArrayTreeItemIds selections;
                 size_t count = GetSelections(selections);
 
-                if ( count != 1 || HITEM(selections[0]) != htSel )
+                if ( count != 1 || static_cast<HTREEITEM>(selections[0]) != htSel )
                 {
                     wxTreeEvent changingEvent(wxEVT_TREE_SEL_CHANGING,
                                               this, htSel);
@@ -2849,7 +2849,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
 
                     if ( count == 0 ||
                          count > 1 ||
-                         HITEM(selections[0]) != htItem )
+                         static_cast<HTREEITEM>(selections[0]) != htItem )
                     {
                         if ( HandleMouseEvent(nMsg, x, y, wParam) )
                         {
@@ -3128,7 +3128,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
             {
                 // TreeView_GetItemRect() will return false if item is not
                 // visible, which may happen perfectly well
-                if ( wxTreeView_GetItemRect(GetHwnd(), HITEM(selections[n]),
+                if ( wxTreeView_GetItemRect(GetHwnd(), static_cast<HTREEITEM>(selections[n]),
                                             param, TRUE) )
                 {
                     ::InvalidateRect(GetHwnd(), &param.rect, FALSE);

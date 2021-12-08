@@ -15,7 +15,6 @@
 #include "wx/artprov.h"
 #include "wx/listctrl.h"
 #include "wx/imaglist.h"
-#include "wx/dynarray.h"
 
 #include "listbasetest.h"
 #include "testableframe.h"
@@ -58,10 +57,8 @@ struct ListBaseTest
 
         // then rearrange them: using { 2, 0, 1 } order means that column 2 is
         // shown first, then column 0 and finally column 1
-        wxArrayInt order(3);
-        order[0] = 2;
-        order[1] = 0;
-        order[2] = 1;
+        std::vector<int> order{2, 0, 1};
+
         list->SetColumnsOrder(order);
 
         // check that we get back the same order as we set

@@ -19,7 +19,6 @@
 
 #include "wx/clntdata.h"
 #include "wx/event.h"
-#include "wx/dynarray.h"
 #include "wx/itemid.h"
 
 // ----------------------------------------------------------------------------
@@ -72,22 +71,11 @@ protected:
 
 using wxTreeItemIdValue = void*;
 
-WX_DEFINE_ARRAY_PTR(wxTreeItemIdValue, wxArrayTreeItemIdsBase);
+using wxArrayTreeItemIds = std::vector<wxTreeItemIdValue>;
 
 // this is a wrapper around the array class defined above which allow to wok
 // with values of natural wxTreeItemId type instead of using wxTreeItemIdValue
 // and does it without any loss of efficiency
-class wxArrayTreeItemIds : public wxArrayTreeItemIdsBase
-{
-public:
-    void Add(const wxTreeItemId& id)
-        { wxArrayTreeItemIdsBase::Add(id.m_pItem); }
-    void Insert(const wxTreeItemId& id, size_t pos)
-        { wxArrayTreeItemIdsBase::Insert(id.m_pItem, pos); }
-    wxTreeItemId Item(size_t i) const
-        { return wxTreeItemId(wxArrayTreeItemIdsBase::Item(i)); }
-    wxTreeItemId operator[](size_t i) const { return Item(i); }
-};
 
 // ----------------------------------------------------------------------------
 // constants

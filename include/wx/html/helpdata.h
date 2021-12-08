@@ -16,7 +16,6 @@
 #include "wx/object.h"
 #include "wx/string.h"
 #include "wx/filesys.h"
-#include "wx/dynarray.h"
 #include "wx/font.h"
 #include "wx/stream.h"
 

@@ -32,20 +32,7 @@ enum class wxLayoutDirection
 #include "wx/fontenc.h"
 #include "wx/language.h"
 
-// ============================================================================
-// global decls
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// macros
-// ----------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
-// forward decls
-// ----------------------------------------------------------------------------
-
 class wxLocale;
-class wxLanguageInfoArray;
 
 // ============================================================================
 // locale support
@@ -84,6 +71,8 @@ struct wxLanguageInfo
     // do everything that needs to be done instead of calling this method.
     const char* TrySetLocale() const;
 };
+
+using wxLanguageInfoArray = std::vector<wxLanguageInfo>;
 
 // ----------------------------------------------------------------------------
 // wxLocaleCategory: the category of locale settings
@@ -361,7 +350,7 @@ private:
 
     wxTranslations m_translations;
 
-    static wxLanguageInfoArray *ms_languagesDB;
+    inline static wxLanguageInfoArray *ms_languagesDB;
 };
 
 // ----------------------------------------------------------------------------

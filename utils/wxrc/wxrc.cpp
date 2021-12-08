@@ -35,7 +35,6 @@ private:
     wxString m_name;
 };
 
-#include "wx/arrimpl.cpp"
 WX_DECLARE_OBJARRAY(XRCWidgetData,ArrayOfXRCWidgetData);
 WX_DEFINE_OBJARRAY(ArrayOfXRCWidgetData)
 

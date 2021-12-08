@@ -11,10 +11,7 @@
 
 #include "testprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/thread.h"
-#endif // WX_PRECOMP
+#include "wx/thread.h"
 
 #include "wx/msgqueue.h"
 
@@ -22,7 +19,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-typedef wxMessageQueue<int> Queue;
+using Queue = wxMessageQueue<int>;
 
 enum WaitTestType
 {

@@ -11,12 +11,9 @@
 
 #include "htmlpars.h"
 
-#ifndef WXPRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/app.h"
-#endif
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/app.h"
 
 #include "wx/crt.h"
 #include "wx/tokenzr.h"
@@ -24,7 +21,6 @@
 #include "wx/url.h"
 #include "wx/fontmap.h"
 #include "wx/html/htmldefs.h"
-#include "wx/arrimpl.cpp"
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")

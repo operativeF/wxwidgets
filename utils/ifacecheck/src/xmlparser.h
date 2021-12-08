@@ -12,7 +12,6 @@
 #define _XMLPARSER_H_
 
 #include <wx/txtstrm.h>
-#include <wx/dynarray.h>
 #include <wx/xml/xml.h>
 #include <wx/platinfo.h>
 #include <wx/log.h>

@@ -24,7 +24,6 @@
 #include "wx/html/htmlfilt.h"
 #include "wx/filename.h"
 
-#include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxHtmlBookRecArray)
 WX_DEFINE_OBJARRAY(wxHtmlHelpDataItems)
 

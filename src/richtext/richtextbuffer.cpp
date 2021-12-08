@@ -26,7 +26,6 @@
 #include "wx/sstream.h"
 #include "wx/textfile.h"
 #include "wx/hashmap.h"
-#include "wx/dynarray.h"
 
 #include "wx/richtext/richtextctrl.h"
 #include "wx/richtext/richtextstyles.h"
@@ -36,7 +35,6 @@
 #include "wx/richtext/bitmaps/image_placeholder24x24.xpm"
 
 #include "wx/listimpl.cpp"
-#include "wx/arrimpl.cpp"
 
 import Utils.Position;
 
