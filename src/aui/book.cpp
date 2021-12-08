@@ -213,13 +213,11 @@ bool wxAuiTabContainer::MovePage(wxWindow* page,
 
 bool wxAuiTabContainer::RemovePage(wxWindow* wnd)
 {
-    size_t i, page_count = m_pages.size();
-    for (i = 0; i < page_count; ++i)
+    for (auto page = m_pages.begin(); page != m_pages.end(); ++page)
     {
-        wxAuiNotebookPage& page = m_pages[i];
-        if (page.window == wnd)
+        if (page->window == wnd)
         {
-            m_pages.erase(m_pages.begin() + i);
+            m_pages.erase(page);
 
             // let the art provider know how many pages we have
             if (m_art)
@@ -238,10 +236,8 @@ bool wxAuiTabContainer::SetActivePage(wxWindow* wnd)
 {
     bool found = false;
 
-    size_t i, page_count = m_pages.size();
-    for (i = 0; i < page_count; ++i)
+    for(auto& page : m_pages)
     {
-        wxAuiNotebookPage& page = m_pages[i];
         if (page.window == wnd)
         {
             page.active = true;
@@ -258,12 +254,7 @@ bool wxAuiTabContainer::SetActivePage(wxWindow* wnd)
 
 void wxAuiTabContainer::SetNoneActive()
 {
-    size_t i, page_count = m_pages.size();
-    for (i = 0; i < page_count; ++i)
-    {
-        wxAuiNotebookPage& page = m_pages[i];
-        page.active = false;
-    }
+    std::ranges::for_each(m_pages, [](auto& page){ page.active = false; });
 }
 
 bool wxAuiTabContainer::SetActivePage(size_t page)
@@ -276,15 +267,15 @@ bool wxAuiTabContainer::SetActivePage(size_t page)
 
 int wxAuiTabContainer::GetActivePage() const
 {
-    size_t i, page_count = m_pages.size();
-    for (i = 0; i < page_count; ++i)
+    for (int i{}; const auto& page : m_pages)
     {
-        const wxAuiNotebookPage& page = m_pages[i];
         if (page.active)
             return i;
+
+        ++i;
     }
 
-    return -1;
+    return wxNOT_FOUND;
 }
 
 wxWindow* wxAuiTabContainer::GetWindowFromIdx(size_t idx) const
@@ -337,12 +328,14 @@ void wxAuiTabContainer::AddButton(int id,
                                   const wxBitmap& normalBitmap,
                                   const wxBitmap& disabledBitmap)
 {
-    wxAuiTabContainerButton button;
-    button.id = id;
-    button.bitmap = normalBitmap;
-    button.disBitmap = disabledBitmap;
-    button.location = location;
-    button.curState = wxAUI_BUTTON_STATE_NORMAL;
+    wxAuiTabContainerButton button
+    {
+        .bitmap = normalBitmap,
+        .disBitmap = disabledBitmap,
+        .curState = wxAUI_BUTTON_STATE_NORMAL,
+        .id = id,
+        .location = location
+    };
 
     m_buttons.push_back(button);
 }
@@ -413,10 +406,8 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     // afforded on screen
     int total_width = 0;
     int visible_width = 0;
-    for (i = 0; i < page_count; ++i)
+    for (int i{}; auto& page : m_pages)
     {
-        wxAuiNotebookPage& page = m_pages[i];
-
         // determine if a close button is on this tab
         bool close_button = false;
         if ((m_flags & wxAUI_NB_CLOSE_ON_ALL_TABS) != 0 ||
@@ -424,7 +415,6 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
         {
             close_button = true;
         }
-
 
         int x_extent = 0;
         wxSize size = m_art->GetTabSize(dc,
@@ -437,14 +427,14 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
                               wxAUI_BUTTON_STATE_HIDDEN,
                             &x_extent);
 
-        if (i+1 < page_count)
+        if (i+1 < m_pages.size())
             total_width += x_extent;
         else
             total_width += size.x;
 
         if (i >= m_tabOffset)
         {
-            if (i+1 < page_count)
+            if (i+1 < m_pages.size())
                 visible_width += x_extent;
             else
                 visible_width += size.x;
@@ -454,9 +444,8 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     if (total_width > m_rect.GetWidth() || m_tabOffset != 0)
     {
         // show left/right buttons
-        for (i = 0; i < button_count; ++i)
+        for (auto& button : m_buttons)
         {
-            wxAuiTabContainerButton& button = m_buttons[i];
             if (button.id == wxAUI_BUTTON_LEFT ||
                 button.id == wxAUI_BUTTON_RIGHT)
             {
@@ -467,9 +456,8 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     else
     {
         // hide left/right buttons
-        for (i = 0; i < button_count; ++i)
+        for (auto& button : m_buttons)
         {
-            wxAuiTabContainerButton& button = m_buttons[i];
             if (button.id == wxAUI_BUTTON_LEFT ||
                 button.id == wxAUI_BUTTON_RIGHT)
             {
@@ -479,9 +467,8 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     }
 
     // determine whether left button should be enabled
-    for (i = 0; i < button_count; ++i)
+    for (auto& button : m_buttons)
     {
-        wxAuiTabContainerButton& button = m_buttons[i];
         if (button.id == wxAUI_BUTTON_LEFT)
         {
             if (m_tabOffset == 0)
@@ -489,10 +476,11 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
             else
                 button.curState &= ~wxAUI_BUTTON_STATE_DISABLED;
         }
+
         if (button.id == wxAUI_BUTTON_RIGHT)
         {
             int button_width = 0;
-            for (i = 0; i < button_count; ++i)
+            for (i = 0; i != button_count; ++i)
                 button_width += m_buttons[button_count - i - 1].rect.GetWidth();
 
             if (visible_width < m_rect.GetWidth() - button_width)
@@ -702,9 +690,8 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     // First check if both buttons are disabled - if so, there's no need to
     // check further for visibility.
     int arrowButtonVisibleCount = 0;
-    for (i = 0; i < button_count; ++i)
+    for (auto& button : m_buttons)
     {
-        wxAuiTabContainerButton& button = m_buttons[i];
         if (button.id == wxAUI_BUTTON_LEFT ||
             button.id == wxAUI_BUTTON_RIGHT)
         {
@@ -856,13 +843,8 @@ bool wxAuiTabContainer::ButtonHitTest(int x, int y,
     if (!m_rect.Contains(x,y))
         return false;
 
-    size_t i, button_count;
-
-
-    button_count = m_buttons.size();
-    for (i = 0; i < button_count; ++i)
+    for (auto& button : m_buttons)
     {
-        wxAuiTabContainerButton& button = m_buttons[i];
         if (button.rect.Contains(x,y) &&
             !(button.curState & wxAUI_BUTTON_STATE_HIDDEN ))
         {
@@ -872,10 +854,8 @@ bool wxAuiTabContainer::ButtonHitTest(int x, int y,
         }
     }
 
-    button_count = m_tabCloseButtons.size();
-    for (i = 0; i < button_count; ++i)
+    for (auto& button : m_tabCloseButtons)
     {
-        wxAuiTabContainerButton& button = m_tabCloseButtons[i];
         if (button.rect.Contains(x,y) &&
             !(button.curState & (wxAUI_BUTTON_STATE_HIDDEN |
                                    wxAUI_BUTTON_STATE_DISABLED)))
@@ -918,12 +898,10 @@ void ShowWnd(wxWindow* wnd, bool show)
 void wxAuiTabContainer::DoShowHide()
 {
     wxAuiNotebookPageArray& pages = GetPages();
-    size_t i, page_count = pages.size();
 
     // show new active page first
-    for (i = 0; i < page_count; ++i)
+    for (auto& page : pages)
     {
-        wxAuiNotebookPage& page = pages[i];
         if (page.active)
         {
             ShowWnd(page.window, true);
@@ -932,9 +910,8 @@ void wxAuiTabContainer::DoShowHide()
     }
 
     // hide all other pages
-    for (i = 0; i < page_count; ++i)
+    for (auto& page : pages)
     {
-        wxAuiNotebookPage& page = pages[i];
         if (!page.active)
             ShowWnd(page.window, false);
     }
@@ -1532,12 +1509,8 @@ public:
         m_tabs->Refresh();
         m_tabs->Update();
 
-        wxAuiNotebookPageArray& pages = m_tabs->GetPages();
-        size_t i, page_count = pages.size();
-
-        for (i = 0; i < page_count; ++i)
+        for (auto& page : m_tabs->GetPages())
         {
-            wxAuiNotebookPage& page = pages[i];
             int border_space = m_tabs->GetArtProvider()->GetAdditionalBorderSpace(page.window);
 
             int height = m_rect.height - m_tabCtrlHeight - border_space;
@@ -1641,19 +1614,17 @@ void wxAuiNotebook::OnSysColourChanged(wxSysColourChangedEvent &event)
     wxAuiTabArt* art = m_tabs.GetArtProvider();
     art->UpdateColoursFromSystem();
 
-    wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-    size_t i;
-    size_t pane_count = all_panes.size();
-    for (i = 0; i < pane_count; ++i)
+    for (auto& pane : m_mgr.GetAllPanes())
     {
-        wxAuiPaneInfo& pane = all_panes[i];
         if (pane.name == "dummy")
             continue;
+
         wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
         wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
         tabctrl->GetArtProvider()->UpdateColoursFromSystem();
         tabctrl->Refresh();
     }
+
     Refresh();
 }
 
@@ -1722,13 +1693,11 @@ void wxAuiNotebook::SetArtProvider(std::unique_ptr<wxAuiTabArt> art)
     // need to manually set the art provider for all tabs ourselves.
     if ( !UpdateTabCtrlHeight() )
     {
-        wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-        const size_t pane_count = all_panes.size();
-        for (size_t i = 0; i < pane_count; ++i)
+        for (auto& pane : m_mgr.GetAllPanes())
         {
-            wxAuiPaneInfo& pane = all_panes[i];
             if (pane.name == "dummy")
                 continue;
+
             wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
             wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
             tabctrl->SetArtProvider(art->Clone());
@@ -1789,13 +1758,11 @@ bool wxAuiNotebook::UpdateTabCtrlHeight()
 
     m_tabCtrlHeight = height;
 
-    wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-    size_t i, pane_count = all_panes.size();
-    for (i = 0; i < pane_count; ++i)
+    for (auto& pane : m_mgr.GetAllPanes())
     {
-        wxAuiPaneInfo& pane = all_panes[i];
         if (pane.name == "dummy")
             continue;
+
         wxTabFrame* tab_frame = (wxTabFrame*)pane.window;
         wxAuiTabCtrl* tabctrl = tab_frame->m_tabs;
         tab_frame->SetTabCtrlHeight(m_tabCtrlHeight);
@@ -1826,13 +1793,11 @@ wxSize wxAuiNotebook::CalculateNewSplitSize()
 {
     // count number of tab controls
     int tab_ctrl_count = 0;
-    wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-    size_t i, pane_count = all_panes.size();
-    for (i = 0; i < pane_count; ++i)
+    for (auto& pane : m_mgr.GetAllPanes())
     {
-        wxAuiPaneInfo& pane = all_panes[i];
         if (pane.name == "dummy")
             continue;
+
         tab_ctrl_count++;
     }
 
@@ -1889,13 +1854,11 @@ void wxAuiNotebook::SetWindowStyleFlag(unsigned int style)
     {
         // let all of the tab children know about the new style
 
-        wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-        size_t i, pane_count = all_panes.size();
-        for (i = 0; i < pane_count; ++i)
+        for (auto& pane : m_mgr.GetAllPanes())
         {
-            wxAuiPaneInfo& pane = all_panes[i];
             if (pane.name == "dummy")
                 continue;
+
             wxTabFrame* tabframe = (wxTabFrame*)pane.window;
             wxAuiTabCtrl* tabctrl = tabframe->m_tabs;
             tabctrl->SetFlags(m_flags);
@@ -2268,14 +2231,12 @@ wxWindow* wxAuiNotebook::GetPage(size_t page_idx) const
 // DoSizing() performs all sizing operations in each tab control
 void wxAuiNotebook::DoSizing()
 {
-    wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-    size_t i, pane_count = all_panes.size();
-    for (i = 0; i < pane_count; ++i)
+    for (auto& pane : m_mgr.GetAllPanes())
     {
-        if (all_panes[i].name == "dummy")
+        if (pane.name == "dummy")
             continue;
 
-        wxTabFrame* tabframe = (wxTabFrame*)all_panes[i].window;
+        auto* tabframe = dynamic_cast<wxTabFrame*>(pane.window);
         tabframe->DoSizing();
     }
 }
@@ -2298,14 +2259,12 @@ wxAuiTabCtrl* wxAuiNotebook::GetActiveTabCtrl()
     }
 
     // no current page, just find the first tab ctrl
-    wxAuiPaneInfoArray& all_panes = m_mgr.GetAllPanes();
-    size_t i, pane_count = all_panes.size();
-    for (i = 0; i < pane_count; ++i)
+    for (auto& pane : m_mgr.GetAllPanes())
     {
-        if (all_panes[i].name == "dummy")
+        if (pane.name == "dummy")
             continue;
 
-        wxTabFrame* tabframe = (wxTabFrame*)all_panes[i].window;
+        auto* tabframe = dynamic_cast<wxTabFrame*>(pane.window);
         return tabframe->m_tabs;
     }
 

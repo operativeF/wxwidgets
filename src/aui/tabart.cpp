@@ -764,11 +764,8 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
 {
     wxMenu menuPopup;
 
-    size_t count = pages.size();
-    for (size_t i = 0; i < count; ++i)
+    for (int menuItemId{1000}; const auto& page : pages)
     {
-        const wxAuiNotebookPage& page = pages[i];
-
         // Preserve ampersands possibly present in the caption string by
         // escaping them before passing the caption to wxMenuItem.
         std::string caption = wxControl::EscapeMnemonics(page.caption);
@@ -778,10 +775,12 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
         if (caption.empty())
             caption = " ";
 
-        wxMenuItem* item = new wxMenuItem(nullptr, 1000+i, caption);
+        wxMenuItem* item = new wxMenuItem(nullptr, menuItemId, caption);
         if (page.bitmap.IsOk())
             item->SetBitmap(page.bitmap);
         menuPopup.Append(item);
+
+        ++menuItemId;
     }
 
     // find out where to put the popup menu of window items

@@ -384,9 +384,9 @@ wxControl* wxAuiToolBar::FindControl(int id)
 
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y)
 {
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (int i{-1}; auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
+        ++i;
 
         if (!item.m_sizerItem)
             continue;
@@ -632,9 +632,8 @@ void wxAuiToolBar::SetHoverItem(wxAuiToolBarItem* pitem)
 
     wxAuiToolBarItem* former_hover = nullptr;
 
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
         if (item.m_state & wxAUI_BUTTON_STATE_HOVER)
             former_hover = &item;
         item.m_state &= ~wxAUI_BUTTON_STATE_HOVER;
@@ -656,9 +655,8 @@ void wxAuiToolBar::SetPressedItem(wxAuiToolBarItem* pitem)
 {
     wxAuiToolBarItem* former_item = nullptr;
 
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
         if (item.m_state & wxAUI_BUTTON_STATE_PRESSED)
             former_item = &item;
         item.m_state &= ~wxAUI_BUTTON_STATE_PRESSED;
@@ -733,6 +731,7 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
                         break;
                     m_items[i].m_state &= ~wxAUI_BUTTON_STATE_CHECKED;
                 }
+                
                 for (int i = idx - 1; i >= 0; i--)
                 {
                     if (m_items[i].m_kind != wxITEM_RADIO)
@@ -942,11 +941,11 @@ int wxAuiToolBar::GetToolIndex(int tool_id) const
     if (tool_id == -1)
         return wxNOT_FOUND;
 
-    for (size_t i = 0; i < m_items.size(); ++i)
+    for (int i{}; const auto& item : m_items)
     {
-        const wxAuiToolBarItem& item = m_items[i];
         if (item.m_toolId == tool_id)
             return i;
+        ++i;
     }
 
     return wxNOT_FOUND;
@@ -1251,9 +1250,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_sizer = std::move(outside_sizer);
 
     // calculate the rock-bottom minimum size
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
             item.m_sizerItem->SetMinSize(wxSize{0, 0});
     }
@@ -1261,9 +1259,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_absoluteMinSize = m_sizer->GetMinSize();
 
     // reset the min sizes to what they were
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
             item.m_sizerItem->SetMinSize(item.m_minSize);
     }
@@ -1348,10 +1345,8 @@ void wxAuiToolBar::DoIdleUpdate()
 
     bool need_refresh = false;
 
-    for (size_t i = 0, count = m_items.size(); i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
-
         if (item.m_toolId == -1)
             continue;
 
@@ -1427,9 +1422,8 @@ void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
         ((client_size.y > client_size.x) && m_absoluteMinSize.y > client_size.y))
     {
         // hide all flexible items
-        for (size_t i = 0; i < m_items.size(); ++i)
+        for (auto& item : m_items)
         {
-            wxAuiToolBarItem& item = m_items[i];
             if (item.m_sizerItem && item.m_proportion > 0 && item.m_sizerItem->IsShown())
             {
                 item.m_sizerItem->Show(false);
@@ -1440,9 +1434,8 @@ void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
     else
     {
         // show all flexible items
-        for (size_t i = 0; i < m_items.size(); ++i)
+        for (auto& item : m_items)
         {
-            wxAuiToolBarItem& item = m_items[i];
             if (item.m_sizerItem && item.m_proportion > 0 && !item.m_sizerItem->IsShown())
             {
                 item.m_sizerItem->Show(true);
@@ -1590,16 +1583,12 @@ void wxAuiToolBar::OnPaint([[maybe_unused]] wxPaintEvent& evt)
         last_extent -= overflowSize;
 
     // paint each individual tool
-    size_t count = m_items.size();
-    for (size_t i = 0; i < count; ++i)
+    for (auto& item : m_items)
     {
-        wxAuiToolBarItem& item = m_items[i];
-
         if (!item.m_sizerItem)
             continue;
 
         wxRect item_rect = item.m_sizerItem->GetRect();
-
 
         if ((horizontal  && item_rect.x + item_rect.width >= last_extent) ||
             (!horizontal && item_rect.y + item_rect.height >= last_extent))
@@ -1700,22 +1689,19 @@ void wxAuiToolBar::OnLeftDown(wxMouseEvent& evt)
                 wxAuiToolBarItemArray overflow_items;
 
                 // add custom overflow prepend items, if any
-                size_t count = m_customOverflowPrepend.size();
-                for (size_t i = 0; i < count; ++i)
-                    overflow_items.push_back(m_customOverflowPrepend[i]);
+                for (const auto& ofItem : m_customOverflowPrepend)
+                    overflow_items.push_back(ofItem);
 
                 // only show items that don't fit in the dropdown
-                count = m_items.size();
-                for (size_t i = 0; i < count; ++i)
+                for (size_t i{}; i != m_items.size(); ++i)
                 {
                     if (!GetToolFitsByIndex(i))
                         overflow_items.push_back(m_items[i]);
                 }
 
                 // add custom overflow append items, if any
-                count = m_customOverflowAppend.size();
-                for (size_t i = 0; i < count; ++i)
-                    overflow_items.push_back(m_customOverflowAppend[i]);
+                for (const auto& customOfItem : m_customOverflowAppend)
+                    overflow_items.push_back(customOfItem);
 
                 int res = m_art->ShowDropDown(this, overflow_items);
                 m_overflowState = 0;

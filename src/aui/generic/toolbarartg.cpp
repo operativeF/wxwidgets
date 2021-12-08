@@ -698,11 +698,8 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
 
     size_t items_added = 0;
 
-    size_t count = items.size();
-    for (size_t i = 0; i < count; ++i)
+    for (const auto& item : items)
     {
-        const wxAuiToolBarItem& item = items[i];
-
         if (item.GetKind() == wxITEM_NORMAL)
         {
             auto text = item.GetShortHelp();
