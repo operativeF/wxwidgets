@@ -58,9 +58,7 @@ void wxTextWrapper::Wrap(wxWindow *win, std::string_view text, int widthMax)
 
             std::vector<int> widths = dc.GetPartialTextExtents(line);
 
-            const size_t posEnd = std::lower_bound(widths.begin(),
-                                                   widths.end(),
-                                                   widthMax) - widths.begin();
+            const size_t posEnd = std::ranges::lower_bound(widths, widthMax) - widths.begin();
 
             // Does the entire remaining line fit?
             if ( posEnd == line.length() )

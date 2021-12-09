@@ -1048,10 +1048,9 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxPoint pt,
     const double dy = heightLine * std::cos(rad);
 
     // Draw all text line by line
-    const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
 
     size_t lineNum{0};
-    for (auto line : lines )
+    for (auto&& line : wx::unsafe::StrViewSplit(text, '\n') )
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.

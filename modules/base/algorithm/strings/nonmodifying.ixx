@@ -166,8 +166,8 @@ int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
     std::string strA(nA, '0');
     std::string strB(nB, '0');
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
+    std::ranges::transform(strViewA, strA.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
+    std::ranges::transform(strViewB, strB.begin(), [](auto c) noexcept { return wx::utils::ToLowerCh(c); });
 
     return strA.compare(strB);
 }
