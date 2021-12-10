@@ -720,7 +720,7 @@ bool wxListBox::MSWOnMeasure(WXMEASUREITEMSTRUCT *item)
 
     MEASUREITEMSTRUCT *pStruct = (MEASUREITEMSTRUCT *)item;
 
-    WXHDC hdc = ::CreateIC(L"DISPLAY", nullptr, nullptr, nullptr);
+    WXHDC hdc = ::CreateICW(L"DISPLAY", nullptr, nullptr, nullptr);
 
     {
         wxDCTemp dc((WXHDC)hdc);

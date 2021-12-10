@@ -271,7 +271,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 
     if ( path )
     {
-        TCHAR libname[MAX_PATH];
+        WCHAR libname[MAX_PATH];
         if ( !::GetModuleFileNameW(hmod, libname, MAX_PATH) )
         {
             // GetModuleFileName could also return extended-length paths (paths

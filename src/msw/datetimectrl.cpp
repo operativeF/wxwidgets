@@ -184,8 +184,8 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
         {
             hwnd = ::CreateWindowW
                      (
-                        DATETIMEPICK_CLASS,
-                        wxT(""),
+                        DATETIMEPICK_CLASSW,
+                        L"",
                         ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
                         0, 0, 1, 1,
                         GetHwndOf(m_parent),

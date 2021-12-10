@@ -79,7 +79,7 @@ private:
 // NotifyIconData: wrapper around NOTIFYICONDATA
 // ----------------------------------------------------------------------------
 
-struct NotifyIconData : public NOTIFYICONDATA
+struct NotifyIconData : public NOTIFYICONDATAW
 {
     explicit NotifyIconData(WXHWND hwnd)
     {

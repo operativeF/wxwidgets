@@ -34,7 +34,7 @@ struct wxSoundData
     virtual WXDWORD GetSoundFlag() const = 0;
 
     // get the data to be passed to PlaySound()
-    virtual LPCTSTR GetSoundData() const = 0;
+    virtual LPCWSTR GetSoundData() const = 0;
 };
 
 // class for in-memory sound data
@@ -51,7 +51,7 @@ public:
 
     bool IsOk() const override { return GetPtr() != nullptr; }
     WXDWORD GetSoundFlag() const override { return SND_MEMORY; }
-    LPCTSTR GetSoundData() const override { return (LPCTSTR)GetPtr(); }
+    LPCWSTR GetSoundData() const override { return (LPCWSTR)GetPtr(); }
 
 private:
     GlobalPtr m_waveData;
@@ -72,7 +72,7 @@ public:
     {
         return m_isResource ? SND_RESOURCE : SND_FILENAME;
     }
-    LPCTSTR GetSoundData() const override { return m_name.c_str(); }
+    LPCWSTR GetSoundData() const override { return m_name.c_str(); }
 
 private:
     const wxString m_name;

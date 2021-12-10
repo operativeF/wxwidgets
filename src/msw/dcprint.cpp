@@ -89,7 +89,7 @@ wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, WXHDC dc ) :
 
 bool wxPrinterDCImpl::wxStartDoc(const std::string& message)
 {
-    DOCINFO docinfo;
+    DOCINFOW docinfo;
     docinfo.cbSize = sizeof(DOCINFO);
     boost::nowide::wstackstring stackMessage(message.c_str());
     docinfo.lpszDocName = stackMessage.get();
@@ -240,7 +240,7 @@ WXHDC wxGetPrinterDC(const wxPrintData& printDataConst)
                     nullptr,               // no driver name as we use device name
                     boost::nowide::widen(deviceName).c_str(),
                     nullptr,               // unused
-                    static_cast<DEVMODE *>(lockDevMode.Get())
+                    static_cast<DEVMODEW *>(lockDevMode.Get())
                 );
     if ( !hDC )
     {

@@ -74,13 +74,13 @@ class wxToolTipOtherWindows : public std::vector<WXHWND>
 {
 };
 
-class wxToolInfo : public TOOLINFO
+class wxToolInfo : public TOOLINFOW
 {
 public:
     wxToolInfo(WXHWND hwndOwner, unsigned int id, const wxRect& rc)
     {
         // initialize all members
-        ::ZeroMemory(this, sizeof(TOOLINFO));
+        ::ZeroMemory(this, sizeof(TOOLINFOW));
 
         // the structure TOOLINFO has been extended with a 4 byte field in
         // version 4.70 of comctl32.dll and another one in 5.01 but we don't
@@ -284,8 +284,8 @@ WXHWND wxToolTip::GetToolTipCtrl()
         // we want to show the tooltips always (even when the window is not
         // active) and we don't want to strip "&"s from them
         ms_hwndTT = (WXHWND)::CreateWindowExW(exflags,
-                                             TOOLTIPS_CLASS,
-                                             (LPCTSTR)nullptr,
+                                             TOOLTIPS_CLASSW,
+                                             (LPCWSTR)nullptr,
                                              TTS_ALWAYSTIP | TTS_NOPREFIX,
                                              CW_USEDEFAULT, CW_USEDEFAULT,
                                              CW_USEDEFAULT, CW_USEDEFAULT,

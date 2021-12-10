@@ -1048,7 +1048,7 @@ static HSZ DDEAtomFromString(const wxString& s)
 {
     wxASSERT_MSG( DDEIdInst, "DDE not initialized" );
 
-    HSZ hsz = DdeCreateStringHandle(DDEIdInst, wxMSW_CONV_LPTSTR(s), DDE_CP);
+    HSZ hsz = ::DdeCreateStringHandleW(DDEIdInst, wxMSW_CONV_LPTSTR(s), DDE_CP);
     if ( !hsz )
     {
         DDELogError(_("Failed to create DDE string"));
@@ -1063,7 +1063,7 @@ static wxString DDEStringFromAtom(HSZ hsz)
     static constexpr size_t len = 256;
 
     wxString s;
-    std::ignore = DdeQueryString(DDEIdInst, hsz, wxStringBuffer(s, len), len, DDE_CP);
+    std::ignore = ::DdeQueryString(DDEIdInst, hsz, wxStringBuffer(s, len), len, DDE_CP);
 
     return s;
 }

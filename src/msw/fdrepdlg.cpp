@@ -36,14 +36,13 @@ public:
     wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, FindReplaceFlags flagsWX);
     ~wxFindReplaceDialogImpl();
 
-    wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
-	wxFindReplaceDialogImpl& operator=(const wxFindReplaceDialogImpl&) = delete;
+	wxFindReplaceDialogImpl& operator=(wxFindReplaceDialogImpl&&) = delete;
 
     void InitFindWhat(const std::string& str);
     void InitReplaceWith(const std::string& str);
 
     // only for passing to ::FindText or ::ReplaceText
-    FINDREPLACE *GetPtrFindReplace() { return &m_findReplace; }
+    FINDREPLACEW *GetPtrFindReplace() { return &m_findReplace; }
 
     // set/query the "closed by user" flag
     void SetClosedByUser() { m_wasClosedByUser = true; }
@@ -57,11 +56,11 @@ private:
                                    WXLPARAM lParam);
 
     // copy string str contents to ppStr and fill pLen with its length
-    void InitString(const std::string& str, LPTSTR *ppStr, WXWORD *pLen);
+    void InitString(const std::string& str, LPWSTR *ppStr, WXWORD *pLen);
 
 
     // the find replace data used by the dialog
-    FINDREPLACE m_findReplace;
+    FINDREPLACEW m_findReplace;
 
     // true if the user closed us, false otherwise
     bool m_wasClosedByUser{false};
@@ -84,11 +83,11 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     // get the identifier for the find dialog message if we don't have it yet
     if ( !ms_msgFindDialog )
     {
-        ms_msgFindDialog = ::RegisterWindowMessageW(FINDMSGSTRING);
+        ms_msgFindDialog = ::RegisterWindowMessageW(FINDMSGSTRINGW);
 
         if ( !ms_msgFindDialog )
         {
-            wxLogLastError("RegisterWindowMessage(FINDMSGSTRING)");
+            wxLogLastError("RegisterWindowMessage(FINDMSGSTRINGW)");
         }
 
         wxWindow::MSWRegisterMessageHandler
@@ -130,7 +129,7 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
 }
 
 void wxFindReplaceDialogImpl::InitString(const std::string& str,
-                                         LPTSTR *ppStr, WXWORD *pLen)
+                                         LPWSTR *ppStr, WXWORD *pLen)
 {
     size_t len = str.length() + 1;
     if ( len < 80 )
@@ -362,7 +361,7 @@ bool wxFindReplaceDialog::Show(bool show)
     }
 
     // call the right function to show the dialog which does what we want
-    FINDREPLACE *pFR = m_impl->GetPtrFindReplace();
+    FINDREPLACEW *pFR = m_impl->GetPtrFindReplace();
     WXHWND hwnd;
     if ( replace )
         hwnd = ::ReplaceTextW(pFR);

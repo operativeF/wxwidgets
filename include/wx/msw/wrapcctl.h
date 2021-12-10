@@ -28,7 +28,7 @@ extern wxFont wxGetCCDefaultFont();
 
 // this is just a wrapper for HDITEM which we can't use in the public header
 // because we don't want to include commctrl.h (and hence windows.h) from there
-struct wxHDITEM : public HDITEM
+struct wxHDITEM : public HDITEMW
 {
     wxHDITEM()
     {

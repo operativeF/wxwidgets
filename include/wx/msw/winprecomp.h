@@ -3,8 +3,6 @@
 
 #define OEMRESOURCE
 
-#include "wx/platform.h"
-
 // before including windows.h, define version macros at (currently) maximal
 // values because we do all our checks at run-time anyhow
 #include "wx/msw/winver.h"

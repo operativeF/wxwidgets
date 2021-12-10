@@ -367,10 +367,10 @@ private:
     int m_dataLen{0};              // length data buffer
     int m_dataLine{0};             // line offset
 
-    using GetConsoleCommandHistory_t = WXDWORD (WINAPI*)(LPTSTR sCommands,
+    using GetConsoleCommandHistory_t = WXDWORD (WINAPI*)(LPWSTR sCommands,
                                                        WXDWORD nBufferLength,
-                                                       LPCTSTR sExeName);
-    using GetConsoleCommandHistoryLength_t = WXDWORD (WINAPI*)(LPCTSTR sExeName);
+                                                       LPCWSTR sExeName);
+    using GetConsoleCommandHistoryLength_t = WXDWORD (WINAPI*)(LPCWSTR sExeName);
 
     GetConsoleCommandHistory_t m_pfnGetConsoleCommandHistory;
     GetConsoleCommandHistoryLength_t m_pfnGetConsoleCommandHistoryLength;

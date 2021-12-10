@@ -71,13 +71,13 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
 // convert LV_ITEM to wxListItem
 static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
                                      wxListItem& info,
-                                     /* const */ LV_ITEM& lvItem);
+                                     /* const */ LV_ITEMW& lvItem);
 
 // convert our wxListItem to LV_COLUMN
 static void wxConvertToMSWListCol(WXHWND hwndList,
                                   int col,
                                   const wxListItem& item,
-                                  LV_COLUMN& lvCol);
+                                  LV_COLUMNW& lvCol);
 
 namespace
 {
@@ -609,7 +609,7 @@ bool wxListCtrl::SetHeaderAttr(const wxItemAttr& attr)
 // Gets information about this column
 bool wxListCtrl::GetColumn(int col, wxListItem& item) const
 {
-    LV_COLUMN lvCol;
+    LV_COLUMNW lvCol;
     wxZeroMemory(lvCol);
 
     lvCol.mask = LVCF_WIDTH;
@@ -801,7 +801,7 @@ wxTextCtrl* wxListCtrl::GetEditControl() const
 // Gets information about the item
 bool wxListCtrl::GetItem(wxListItem& info) const
 {
-    LV_ITEM lvItem;
+    LV_ITEMW lvItem;
     wxZeroMemory(lvItem);
 
     lvItem.iItem = info.m_itemId;
@@ -1702,7 +1702,7 @@ bool wxListCtrl::EnsureVisible(long item)
 // or the beginning if 'start' is -1.
 long wxListCtrl::FindItem(long start, const std::string& str, bool partial)
 {
-    LV_FINDINFO findInfo;
+    LV_FINDINFOW findInfo;
 
     findInfo.flags = LVFI_STRING;
     if ( partial )
@@ -2334,7 +2334,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     }
 
                     // was editing cancelled?
-                    const LV_ITEM& lvi = (LV_ITEM)item;
+                    const LV_ITEMW& lvi = (LV_ITEMW)item;
                     if ( !lvi.pszText || lvi.iItem == -1 )
                     {
                         // EDIT control will be deleted by the list control
@@ -2610,7 +2610,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 // Find an item in a (necessarily virtual) list control.
                 if ( IsVirtual() )
                 {
-                    NMLVFINDITEM* pFindInfo = (NMLVFINDITEM*)lParam;
+                    NMLVFINDITEMW* pFindInfo = (NMLVFINDITEMW*)lParam;
 
                     // no match by default
                     *result = -1;
@@ -2902,7 +2902,7 @@ bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, WXHFONT hfont, int colCount)
 
     // get the image and text to draw
     wxChar text[512];
-    LV_ITEM it;
+    LV_ITEMW it;
     wxZeroMemory(it);
     it.mask = LVIF_TEXT | LVIF_IMAGE;
     it.iItem = item;
@@ -3348,7 +3348,7 @@ void wxListCtrl::RefreshItems(long itemFrom, long itemTo)
 
 static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
                                      wxListItem& info,
-                                     LV_ITEM& lvItem)
+                                     LV_ITEMW& lvItem)
 {
     wxMSWListItemData *internaldata =
         (wxMSWListItemData *) lvItem.lParam;
@@ -3431,7 +3431,7 @@ static void wxConvertFromMSWListItem(WXHWND hwndListCtrl,
     lvItem.mask = oldMask;
 }
 
-static void wxConvertToMSWFlags(ListStateFlags state, ListStateFlags stateMask, LV_ITEM& lvItem)
+static void wxConvertToMSWFlags(ListStateFlags state, ListStateFlags stateMask, LV_ITEMW& lvItem)
 {
     if (stateMask & ListStates::Cut)
     {
@@ -3461,7 +3461,7 @@ static void wxConvertToMSWFlags(ListStateFlags state, ListStateFlags stateMask, 
 
 static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
                                    const wxListItem& info,
-                                   LV_ITEM& lvItem)
+                                   LV_ITEMW& lvItem)
 {
     if ( ctrl->InReportView() )
     {
@@ -3493,7 +3493,7 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
         lvItem.mask |= LVIF_TEXT;
         if ( ctrl->HasFlag(wxLC_USER_TEXT) )
         {
-            lvItem.pszText = LPSTR_TEXTCALLBACK;
+            lvItem.pszText = LPSTR_TEXTCALLBACKW;
         }
         else
         {
@@ -3512,7 +3512,7 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
 static void wxConvertToMSWListCol(WXHWND hwndList,
                                   int col,
                                   const wxListItem& item,
-                                  LV_COLUMN& lvCol)
+                                  LV_COLUMNW& lvCol)
 {
     wxZeroMemory(lvCol);
 

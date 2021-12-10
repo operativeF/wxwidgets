@@ -48,7 +48,7 @@ public:
         Close();
     }
 
-    BOOL Open( const std::string& printerName, LPPRINTER_DEFAULTS pDefault=(LPPRINTER_DEFAULTS)nullptr )
+    BOOL Open( const std::string& printerName, LPPRINTER_DEFAULTSW pDefault=(LPPRINTER_DEFAULTSW)nullptr )
     {
         Close();
         boost::nowide::wstackstring stackPrinterName(printerName.c_str());
@@ -367,7 +367,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
     if (m_devMode)
         return;
 
-    LPTSTR szPrinterName = wxMSW_CONV_LPTSTR(printerName);
+    LPWSTR szPrinterName = wxMSW_CONV_LPTSTR(printerName);
 
     // From MSDN: How To Modify Printer Settings with the DocumentProperties() Function
     // The purpose of this is to fill the DEVMODE with privdata from printer driver.
@@ -397,7 +397,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
             // is overwritten. So add a bit of extra memory to work around this.
             dwNeeded += 1024;
 
-            LPDEVMODE tempDevMode = static_cast<LPDEVMODE>( GlobalAlloc( GMEM_FIXED | GMEM_ZEROINIT, dwNeeded ) );
+            auto tempDevMode = static_cast<LPDEVMODEW>( GlobalAlloc( GMEM_FIXED | GMEM_ZEROINIT, dwNeeded ) );
 
             // Step 2:
             // Get the default DevMode for the printer
@@ -425,7 +425,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
     if ( !m_devMode )
     {
         // Use PRINTDLG as a way of creating a DEVMODE object
-        PRINTDLG pd = {
+        PRINTDLGW pd = {
             .lStructSize = sizeof(PRINTDLG),
             .hwndOwner   = nullptr,
             .hDevMode    = nullptr,

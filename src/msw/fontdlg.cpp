@@ -77,7 +77,7 @@ int wxFontDialog::ShowModal()
 
     LOGFONTW logFont;
 
-    CHOOSEFONT chooseFontStruct;
+    CHOOSEFONTW chooseFontStruct;
     wxZeroMemory(chooseFontStruct);
 
     chooseFontStruct.lStructSize = sizeof(CHOOSEFONT);

@@ -348,7 +348,7 @@ void wxFileDialog::MSWOnTypeChange([[maybe_unused]] WXHWND hDlg, int nFilterInde
 // whether to show the "Save file" dialog (if it contains wxFD_SAVE bit) or
 // "Open file" one; returns true on success or false on failure in which case
 // err is filled with the CDERR_XXX constant
-static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, WXDWORD *err)
+static bool DoShowCommFileDialog(OPENFILENAMEW *of, unsigned int style, WXDWORD *err)
 {
     // Extra controls do not handle per-monitor DPI, fall back to system DPI
     // so entire file-dialog is resized.
@@ -367,7 +367,7 @@ static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, WXDWORD *
     return false;
 }
 
-static bool ShowCommFileDialog(OPENFILENAME *of, unsigned int style)
+static bool ShowCommFileDialog(OPENFILENAMEW *of, unsigned int style)
 {
     WXDWORD errCode;
     bool success = DoShowCommFileDialog(of, style, &errCode);
@@ -620,7 +620,7 @@ int wxFileDialog::ShowModal()
 
     //== Execute FileDialog >>=================================================
 
-    if ( !ShowCommFileDialog(&of, m_windowStyle) )
+    if ( !::ShowCommFileDialog(&of, m_windowStyle) )
         return wxID_CANCEL;
 
     m_fileNames.clear();

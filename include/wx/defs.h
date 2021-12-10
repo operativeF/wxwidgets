@@ -18,30 +18,6 @@
 /*  compiler and OS identification */
 /*  ---------------------------------------------------------------------------- */
 
-#include "wx/platform.h"
-
-#ifdef __cplusplus
-/*  Make sure the environment is set correctly */
-#   if defined(__WXMSW__) && defined(__X__)
-#       error "Target can't be both X and MSW"
-#   elif !defined(__WXMOTIF__) && \
-         !defined(__WXMSW__)   && \
-         !defined(__WXGTK__)   && \
-         !defined(__WXOSX_COCOA__)   && \
-         !defined(__WXOSX_IPHONE__)   && \
-         !defined(__X__)       && \
-         !defined(__WXDFB__)   && \
-         !defined(__WXX11__)   && \
-         !defined(__WXQT__)    && \
-          wxUSE_GUI
-#       ifdef __UNIX__
-#           error "No Target! You should use wx-config program for compilation flags!"
-#       else /*  !Unix */
-#           error "No Target! You should use supplied makefiles for compilation!"
-#       endif /*  Unix/!Unix */
-#   endif
-#endif /*__cplusplus*/
-
 #ifndef wxUSE_BASE
     /*  by default consider that this is a monolithic build */
     #define wxUSE_BASE 1

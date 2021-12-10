@@ -180,7 +180,7 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
 {
     boost::nowide::wstackstring stackMessage(m_message.c_str());
 
-    BROWSEINFO bi
+    BROWSEINFOW bi
     {
         .hwndOwner      = owner,
         .pidlRoot       = nullptr,
@@ -209,7 +209,7 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
     }
 
     // do show the dialog
-    wxItemIdList pidl(SHBrowseForFolder(&bi));
+    wxItemIdList pidl(::SHBrowseForFolderW(&bi));
 
     wxItemIdList::Free(const_cast<LPITEMIDLIST>(bi.pidlRoot));
 

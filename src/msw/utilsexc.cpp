@@ -681,7 +681,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 #endif // wxUSE_STREAMS
 
     // create the process
-    STARTUPINFO si;
+    STARTUPINFOW si;
     wxZeroMemory(si);
     si.cb = sizeof(si);
 

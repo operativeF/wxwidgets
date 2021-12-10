@@ -40,7 +40,7 @@ import WX.WinDef;
 
 // define wxUSE_BEGIN_THREAD if the compiler has _beginthreadex() function
 // which should be used instead of Win32 ::CreateThread() if possible
-#if defined(__VISUALC__) || \
+#if defined(_MSC_VER) || \
     (defined(__GNUG__) && defined(__MSVCRT__))
 
     #undef wxUSE_BEGIN_THREAD

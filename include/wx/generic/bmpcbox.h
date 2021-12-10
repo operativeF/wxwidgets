@@ -16,7 +16,7 @@
 
 #include "wx/odcombo.h"
 
-#include "wx/geometry/rect.h"
+import Utils.Geometry;
 
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown

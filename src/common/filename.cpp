@@ -1324,7 +1324,7 @@ bool wxFileName::Rmdir(const std::string& dir, unsigned int flags)
         fileop.fFlags = FOF_SILENT | FOF_NOCONFIRMATION;
         fileop.fFlags |= FOF_NOERRORUI;
 
-        const int ret = SHFileOperation(&fileop);
+        const int ret = ::SHFileOperationW(&fileop);
         if ( ret != 0 )
         {
             // SHFileOperation may return non-Win32 error codes, so the error
@@ -1624,7 +1624,7 @@ bool wxFileName::GetShortcutTarget(const std::string& shortcutPath,
     std::string path, file, ext;
     wxFileName::SplitPath(shortcutPath, & path, & file, & ext);
 
-    wxCOMPtr<IShellLink> psl;
+    wxCOMPtr<IShellLinkW> psl;
     bool success = false;
 
     // Assume it's not a shortcut if it doesn't end with lnk

@@ -362,7 +362,7 @@ static bool SetFocus(WXHWND hwndTV, HTREEITEM htItem)
 // private classes
 // ----------------------------------------------------------------------------
 
-struct wxTreeViewItem : public TV_ITEM
+struct wxTreeViewItem : public TV_ITEMW
 {
     wxTreeViewItem(const wxTreeItemId& item,    // the item handle
                    WXUINT mask_,                  // fields which are valid
@@ -1446,7 +1446,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
                  wxTreeItemId(),
                  "can't have more than one root in the tree" );
 
-    TV_INSERTSTRUCT tvIns;
+    TV_INSERTSTRUCTW tvIns;
     tvIns.hParent = HITEM(parent);
     tvIns.hInsertAfter = HITEM(hInsertAfter);
 

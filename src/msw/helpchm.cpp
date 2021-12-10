@@ -197,12 +197,12 @@ bool wxCHMHelpController::KeywordSearch(const std::string& k,
         {
             .cbStruct{sizeof(HH_FTS_QUERY)},
             .fUniCodeStrings{0},
-            .pszSearchQuery{TEXT("")},
+            .pszSearchQuery{L""},
             .iProximity{0},
             .fStemmedSearch{0},
             .fTitleOnly{0},
             .fExecute{1},
-            .pszWindow{TEXT("")}
+            .pszWindow{L""}
         };
 
         return CallHtmlHelp(HH_DISPLAY_SEARCH, &oQuery);

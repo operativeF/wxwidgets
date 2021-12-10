@@ -4071,7 +4071,7 @@ bool wxWindowMSW::HandleTooltipNotify(WXUINT code,
         return false;
     }
 
-    LPTOOLTIPTEXT ttText = (LPTOOLTIPTEXT)lParam;
+    LPTOOLTIPTEXTW ttText = (LPTOOLTIPTEXTW)lParam;
 
     // We don't want to use the szText buffer because it has a limit of 80
     // bytes and this is not enough, especially for Unicode build where it
@@ -4342,7 +4342,7 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
                             (
                                 (HDROP)hFilesInfo,
                                 (WXUINT)-1,
-                                (LPTSTR)nullptr,
+                                (LPWSTR)nullptr,
                                 (WXUINT)0
                             );
 

@@ -43,7 +43,7 @@ import WX.WinDef;
 static wxDynamicLibrary s_mprLib;
 #endif
 
-using WNetOpenEnumPtr = WXDWORD(WINAPI*)(WXDWORD, WXDWORD, WXDWORD, LPNETRESOURCE, LPHANDLE);
+using WNetOpenEnumPtr = WXDWORD(WINAPI*)(WXDWORD, WXDWORD, WXDWORD, NETRESOURCEW*, LPHANDLE);
 using WNetEnumResourcePtr = WXDWORD (WINAPI*)(HANDLE, LPDWORD, LPVOID, LPDWORD);
 using WNetCloseEnumPtr = WXDWORD (WINAPI*)(HANDLE);
 
@@ -476,7 +476,8 @@ bool wxFSVolumeBase::Create(const wxString& name)
     m_volName = name;
 
     // Display name.
-    SHFILEINFO fi;
+    // FIXME: Use wstackstring
+    SHFILEINFOW fi;
     const auto rc = ::SHGetFileInfoW(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
     if (!rc)
     {
@@ -585,8 +586,9 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type)
             break;
         }
 
-        SHFILEINFO fi;
-        long rc = SHGetFileInfo(m_volName.t_str(), 0, &fi, sizeof(fi), flags);
+        // FIXME: Use wstackstring
+        SHFILEINFOW fi;
+        long rc = ::SHGetFileInfoW(m_volName.t_str(), 0, &fi, sizeof(fi), flags);
         if (!rc || !fi.hIcon)
         {
             wxLogError(_("Cannot load icon from '%s'."), m_volName.c_str());

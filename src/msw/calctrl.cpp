@@ -74,7 +74,7 @@ wxCalendarCtrl::Create(wxWindow *parent,
     {
         // get a copy of standard class and modify it
         WNDCLASSW wc;
-        if ( ::GetClassInfoW(nullptr, MONTHCAL_CLASS, &wc) )
+        if ( ::GetClassInfoW(nullptr, MONTHCAL_CLASSW, &wc) )
         {
             wc.lpszClassName = L"_wx_SysMonthCtl32";
             wc.style |= CS_DBLCLKS;

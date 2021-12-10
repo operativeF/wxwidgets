@@ -299,7 +299,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
 
     // prepare to insert the item in the menu
     std::string itemText = pItem->GetItemLabel();
-    LPCTSTR pData = nullptr;
+    LPCWSTR pData = nullptr;
     if ( pos == (size_t)-1 )
     {
         // append at the end (note that the item is already appended to
@@ -445,7 +445,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
         {
             // item draws itself, pass pointer to it in data parameter
             flags |= MF_OWNERDRAW;
-            pData = (LPCTSTR)pItem;
+            pData = (LPCWSTR)pItem;
 
             bool updateAllMargins = false;
 

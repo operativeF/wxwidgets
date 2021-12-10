@@ -1866,7 +1866,7 @@ wxCoord wxMSWDCImpl::GetCharHeight() const
 {
     TEXTMETRICW lpTextMetric;
 
-    GetTextMetrics(GetHdc(), &lpTextMetric);
+    ::GetTextMetricsW(GetHdc(), &lpTextMetric);
 
     return lpTextMetric.tmHeight;
 }
@@ -1875,7 +1875,7 @@ wxCoord wxMSWDCImpl::wxGetCharWidth() const
 {
     TEXTMETRICW lpTextMetric;
 
-    GetTextMetrics(GetHdc(), &lpTextMetric);
+    ::GetTextMetricsW(GetHdc(), &lpTextMetric);
 
     return lpTextMetric.tmAveCharWidth;
 }
@@ -1889,7 +1889,7 @@ void wxMSWDCImpl::DoGetFontMetrics(int *height,
 {
     TEXTMETRICW tm;
 
-    GetTextMetrics(GetHdc(), &tm);
+    ::GetTextMetricsW(GetHdc(), &tm);
 
     if ( height )
         *height = tm.tmHeight;

@@ -737,7 +737,7 @@ bool wxRegKey::DeleteSelf()
 #if wxUSE_DYNLIB_CLASS
   wxDynamicLibrary dllAdvapi32("advapi32");
   // Minimum supported OS for RegDeleteKeyEx: Vista, XP Pro x64, Win Server 2008, Win Server 2003 SP1
-  using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCTSTR, REGSAM, WXDWORD);
+  using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCWSTR, REGSAM, WXDWORD);
   RegDeleteKeyEx_t wxDL_INIT_FUNC_AW(pfn, RegDeleteKeyEx, dllAdvapi32);
   if (pfnRegDeleteKeyEx)
   {
@@ -750,7 +750,7 @@ bool wxRegKey::DeleteSelf()
 #endif // wxUSE_DYNLIB_CLASS
   {
     boost::nowide::wstackstring stackStrKey{m_strKey.c_str()};
-    m_dwLastError = ::RegDeleteKey((HKEY) m_hRootKey, stackStrKey.get());
+    m_dwLastError = ::RegDeleteKeyW((HKEY) m_hRootKey, stackStrKey.get());
   }
 
   if ( m_dwLastError != ERROR_SUCCESS &&

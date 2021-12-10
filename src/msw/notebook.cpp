@@ -164,7 +164,7 @@ bool wxNotebook::Create(wxWindow *parent,
             // get a copy of standard class and modify it
             WNDCLASSW wc;
 
-            if ( ::GetClassInfoW(nullptr, WC_TABCONTROL, &wc) )
+            if ( ::GetClassInfoW(nullptr, WC_TABCONTROLW, &wc) )
             {
                 gs_wndprocNotebook = wc.lpfnWndProc;
                 wc.lpszClassName = L"_wx_SysTabCtl32";
@@ -345,7 +345,7 @@ bool wxNotebook::SetPageText(size_t nPage, const std::string& strText)
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), false, "notebook page out of range" );
 
-    TC_ITEM tcItem;
+    TC_ITEMW tcItem;
     tcItem.mask = TCIF_TEXT;
     boost::nowide::wstackstring stackText(strText.c_str());
     tcItem.pszText = stackText.get();
@@ -611,7 +611,7 @@ bool wxNotebook::InsertPage(size_t nPage,
     // ----------------------------
 
     // init all fields to 0
-    TC_ITEM tcItem;
+    TC_ITEMW tcItem;
     wxZeroMemory(tcItem);
 
     // set the image, if any

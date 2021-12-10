@@ -12,8 +12,6 @@
 #ifndef _WX_PRIVATE_PIPESTREAM_H_
 #define _WX_PRIVATE_PIPESTREAM_H_
 
-#include "wx/platform.h"
-
 // wxPipeInputStream is a platform-dependent input stream class (i.e. deriving,
 // possible indirectly, from wxInputStream) for reading from a pipe, i.e. a
 // pipe FD under Unix or a pipe HANDLE under MSW. It provides a single extra

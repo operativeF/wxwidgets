@@ -134,7 +134,7 @@ MSWGetBitmapFromIconLocation(const WCHAR* path, int index, const wxSize& size)
 wxBitmap
 MSWGetBitmapForPath(const std::string& path, const wxSize& size, WXDWORD uFlags = 0)
 {
-    SHFILEINFO fi;
+    SHFILEINFOW fi;
     wxZeroMemory(fi);
 
     uFlags |= SHGFI_USEFILEATTRIBUTES | SHGFI_ICONLOCATION;

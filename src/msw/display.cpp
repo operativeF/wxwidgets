@@ -338,7 +338,7 @@ wxVideoMode wxDisplayMSW::GetCurrentMode() const
                                           ? (const wxChar*)nullptr
                                           : (const wxChar*)name.c_str();
 
-    DEVMODE dm;
+    DEVMODEW dm;
     dm.dmSize = sizeof(dm);
     dm.dmDriverExtra = 0;
 
@@ -366,7 +366,7 @@ wxArrayVideoModes wxDisplayMSW::GetModes(const wxVideoMode& modeMatch) const
                                             ? (const wxChar*)nullptr
                                             : (const wxChar*)name.c_str();
 
-    DEVMODE dm;
+    DEVMODEW dm;
     dm.dmSize = sizeof(dm);
     dm.dmDriverExtra = 0;
 
@@ -395,8 +395,8 @@ wxArrayVideoModes wxDisplayMSW::GetModes(const wxVideoMode& modeMatch) const
 bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
 {
     // prepare ChangeDisplaySettingsEx() parameters
-    DEVMODE dm;
-    DEVMODE *pDevMode;
+    DEVMODEW dm;
+    DEVMODEW *pDevMode;
 
     unsigned int flags{};
 

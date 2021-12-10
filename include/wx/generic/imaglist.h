@@ -12,7 +12,8 @@
 
 #include "wx/bitmap.h"
 #include "wx/gdicmn.h"
-#include "wx/geometry/size.h"
+
+import Utils.Geometry;
 
 import <vector>;
 

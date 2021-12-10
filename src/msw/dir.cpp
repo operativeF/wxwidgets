@@ -44,7 +44,7 @@ inline void FreeFindData(FIND_DATA fd)
     }
 }
 
-const wxChar *GetNameFromFindData(const FIND_STRUCT *finddata)
+const wxChar *GetNameFromFindData(const FIND_STRUCT* finddata)
 {
     return finddata->cFileName;
 }
@@ -208,7 +208,7 @@ bool wxDirData::Read(std::string *filename)
 {
     bool first = false;
 
-    WIN32_FIND_DATA finddata;
+    WIN32_FIND_DATAW finddata;
     #define PTR_TO_FINDDATA (&finddata)
 
     if ( !IsFindDataOk(m_finddata) )
