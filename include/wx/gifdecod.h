@@ -19,10 +19,33 @@
 import <vector>;
 
 // internal utility used to store a frame in 8bit-per-pixel format
-struct GIFImage;
 class wxImage;
 
+using namespace std::chrono_literals;
 
+// internal class for storing GIF image data
+struct GIFImage
+{
+    GIFImage& operator=(GIFImage&&) = delete;
+
+    wxString comment;
+
+    std::vector<unsigned char> p;      // bitmap
+
+    std::chrono::milliseconds delay{ -1ms };                 // delay in ms (-1 = unused)
+
+    unsigned char* pal{ nullptr };    // palette
+
+    unsigned int w{0};                 // width
+    unsigned int h{0};                 // height
+    unsigned int left{0};              // x coord (in logical screen)
+    unsigned int top{0};               // y coord (in logical screen
+    unsigned int ncolours{ 0 };       // number of colours
+
+    int transparent{0};                // transparent color index (-1 = none)
+
+    wxAnimationDisposal disposal{ wxANIM_DONOTREMOVE };   // disposal method
+};
 
 // --------------------------------------------------------------------------
 // Constants
@@ -49,8 +72,6 @@ enum class wxGIFErrorCode
 class wxGIFDecoder : public wxAnimationDecoder
 {
 public:
-    ~wxGIFDecoder();
-
     wxGIFDecoder& operator=(wxGIFDecoder&&) = delete;
 
     // get data of current frame
@@ -71,9 +92,6 @@ public:
 
     // load function which returns more info than just Load():
     wxGIFErrorCode LoadGIF( wxInputStream& stream );
-
-    // free all internal frames
-    void Destroy();
 
     // implementation of wxAnimationDecoder's pure virtuals
     bool Load( wxInputStream& stream ) override
@@ -99,7 +117,7 @@ private:
     unsigned char m_buffer[256];    // buffer for reading
 
     // array of all frames
-    std::vector<void*> m_frames;
+    std::vector<std::unique_ptr<GIFImage>> m_frames;
 
     unsigned char *m_bufp{nullptr};          // pointer to next byte in buffer
 

@@ -13,9 +13,6 @@
 #include "wx/palette.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/gifdecod.h"
-#include "wx/scopedptr.h"
-#include "wx/scopeguard.h"
 
 #include <chrono>
 
@@ -38,62 +35,7 @@ enum
     GIF_MARKER_EXT_APP              = 0xFF
 };
 
-#define GetFrame(n)     ((GIFImage*)m_frames[n])
-
-//---------------------------------------------------------------------------
-// GIFImage
-//---------------------------------------------------------------------------
-
-using namespace std::chrono_literals;
-
-// internal class for storing GIF image data
-struct GIFImage
-{
-    GIFImage() = default;
-    wxString comment;
-
-    std::vector<unsigned char> p;      // bitmap
-
-    std::chrono::milliseconds delay{ -1ms };                 // delay in ms (-1 = unused)
-
-    unsigned char* pal{ nullptr };    // palette
-
-    unsigned int w{0};                 // width
-    unsigned int h{0};                 // height
-    unsigned int left{0};              // x coord (in logical screen)
-    unsigned int top{0};               // y coord (in logical screen
-    unsigned int ncolours{ 0 };       // number of colours
-
-    int transparent{0};                // transparent color index (-1 = none)
-
-    wxAnimationDisposal disposal{ wxANIM_DONOTREMOVE };   // disposal method
-
-    GIFImage(const GIFImage&) = delete;
-	GIFImage& operator=(const GIFImage&) = delete;
-};
-
-wxDECLARE_SCOPED_PTR(GIFImage, GIFImagePtr)
-wxDEFINE_SCOPED_PTR(GIFImage, GIFImagePtr)
-
-wxGIFDecoder::~wxGIFDecoder()
-{
-    Destroy();
-}
-
-void wxGIFDecoder::Destroy()
-{
-    wxASSERT(m_nFrames==m_frames.size());
-    for(auto* frame : m_frames)
-    {
-        GIFImage *f = (GIFImage*)frame;
-        free(f->pal);
-        delete f;
-    }
-
-    m_frames.clear();
-    m_nFrames = 0;
-}
-
+#define GetFrame(n)     (m_frames[n].get())
 
 //---------------------------------------------------------------------------
 // Convert this image to a wxImage object
@@ -701,7 +643,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         stream.Read(buf, gceSize);
                         if (stream.LastRead() != gceSize)
                         {
-                            Destroy();
+                            m_frames.clear();
                             return wxGIFErrorCode::InvFormat;
                         }
 
@@ -759,9 +701,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
             case GIF_MARKER_SEP:
             {
                 // allocate memory for IMAGEN struct
-                GIFImagePtr pimg(new GIFImage());
-
-                wxScopeGuard guardDestroy = wxMakeObjGuard(*this, &wxGIFDecoder::Destroy);
+                auto pimg = std::make_unique<GIFImage>();
 
                 if ( !pimg.get() )
                     return wxGIFErrorCode::MemErr;
@@ -848,10 +788,8 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 if (result != wxGIFErrorCode::OK)
                     return result;
 
-                guardDestroy.Dismiss();
-
                 // add the image to our frame array
-                m_frames.push_back(pimg.release());
+                m_frames.push_back(std::move(pimg));
                 m_nFrames++;
 
                 // if this is not an animated GIF, exit after first image
@@ -864,7 +802,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
 
     if (m_nFrames == 0)
     {
-        Destroy();
+        m_frames.clear();
         return wxGIFErrorCode::InvFormat;
     }
 
@@ -888,7 +826,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     if (stream.Eof() || (stream.LastRead() == 0) ||
                         stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
-                        Destroy();
+                        m_frames.clear();
                         return wxGIFErrorCode::InvFormat;
                     }
                 }
@@ -900,7 +838,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 stream.Read(buf, idbSize);
                 if (stream.LastRead() != idbSize)
                 {
-                    Destroy();
+                    m_frames.clear();
                     return wxGIFErrorCode::InvFormat;
                 }
 
@@ -911,7 +849,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     wxFileOffset numBytes = 3 * local_ncolors;
                     if (stream.SeekI(numBytes, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
-                        Destroy();
+                        m_frames.clear();
                         return wxGIFErrorCode::InvFormat;
                     }
                 }
@@ -920,7 +858,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 std::ignore = stream.GetC();
                 if (stream.Eof() || (stream.LastRead() == 0))
                 {
-                    Destroy();
+                    m_frames.clear();
                     return wxGIFErrorCode::InvFormat;
                 }
 
@@ -930,7 +868,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     if (stream.Eof() || (stream.LastRead() == 0) ||
                         stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
-                        Destroy();
+                        m_frames.clear();
                         return wxGIFErrorCode::InvFormat;
                     }
                 }

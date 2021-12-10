@@ -8,12 +8,11 @@
 
 #if wxUSE_FILESYSTEM
 
+#include "wx/filesys.h"
 #include "wx/fs_filter.h"
-#include "wx/scopedptr.h"
 #include "wx/stream.h"
 
-wxDEFINE_SCOPED_PTR_TYPE(wxFSFile)
-wxDEFINE_SCOPED_PTR_TYPE(wxInputStream)
+#include <memory>
 
 //----------------------------------------------------------------------------
 // wxFilterFSHandler
@@ -38,15 +37,15 @@ wxFSFile* wxFilterFSHandler::OpenFile(
         return nullptr;
 
     std::string left = GetLeftLocation(location);
-    wxFSFilePtr leftFile(fs.OpenFile(left));
+    std::unique_ptr<wxFSFile> leftFile{fs.OpenFile(left)};
     if (!leftFile.get())
         return nullptr;
 
-    wxInputStreamPtr leftStream(leftFile->DetachStream());
+    std::unique_ptr<wxInputStream> leftStream{leftFile->DetachStream()};
     if (!leftStream.get() || !leftStream->IsOk())
         return nullptr;
 
-    wxInputStreamPtr stream(factory->NewStream(leftStream.release()));
+    std::unique_ptr<wxInputStream> stream{factory->NewStream(leftStream.release())};
 
     // The way compressed streams are supposed to be served is e.g.:
     //  Content-type: application/postscript
