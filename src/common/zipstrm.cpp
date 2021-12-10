@@ -1830,7 +1830,7 @@ wxStreamError wxZipInputStream::ReadCentral()
         // 32-bit value after adjustment. For now consider that it can't.
         wxFileOffset ofs = std::uint32_t(m_entry.GetOffset());
         ofs += m_offsetAdjustment;
-        if (ofs > wxUINT32_MAX) {
+        if (ofs > std::numeric_limits<std::uint32_t>::max()) {
             m_signature = 0;
             return wxSTREAM_READ_ERROR;
         }

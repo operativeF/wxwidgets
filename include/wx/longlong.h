@@ -110,7 +110,7 @@ public:
         // from long long
     wxLongLongNative(wxLongLong_t ll) : m_ll(ll) { }
         // from 2 longs
-    wxLongLongNative(wxInt32 hi, wxUint32 lo)
+    wxLongLongNative(std::uint32_t hi, std::uint32_t lo)
     {
         // cast to wxLongLong_t first to avoid precision loss!
         m_ll = ((wxLongLong_t) hi) << 32;
@@ -154,11 +154,11 @@ public:
         { m_ll = (wxLongLong_t)d; return *this; }
 
         // get high part
-    wxInt32 GetHi() const
-        { return wx::narrow_cast<wxInt32>(m_ll >> 32); }
+    std::int32_t GetHi() const
+        { return wx::narrow_cast<std::int32_t>(m_ll >> 32); }
         // get low part
-    wxUint32 GetLo() const
-        { return wx::narrow_cast<wxUint32>(m_ll); }
+    std::uint32_t GetLo() const
+        { return wx::narrow_cast<std::uint32_t>(m_ll); }
 
         // get absolute value
     wxLongLongNative Abs() const { return wxLongLongNative(*this).Abs(); }
@@ -346,7 +346,7 @@ public:
         // from long long
     wxULongLongNative(wxULongLong_t ll) : m_ll(ll) { }
         // from 2 longs
-    wxULongLongNative(wxUint32 hi, wxUint32 lo) : m_ll(0)
+    wxULongLongNative(std::uint32_t hi, std::uint32_t lo) : m_ll(0)
     {
         // cast to wxLongLong_t first to avoid precision loss!
         m_ll = ((wxULongLong_t) hi) << 32;
@@ -385,11 +385,11 @@ public:
 #endif
 
         // get high part
-    wxUint32 GetHi() const
-        { return wx::narrow_cast<wxUint32>(m_ll >> 32); }
+    std::uint32_t GetHi() const
+        { return wx::narrow_cast<std::uint32_t>(m_ll >> 32); }
         // get low part
-    wxUint32 GetLo() const
-        { return wx::narrow_cast<wxUint32>(m_ll); }
+    std::uint32_t GetLo() const
+        { return wx::narrow_cast<std::uint32_t>(m_ll); }
 
         // convert to native ulong long
     wxULongLong_t GetValue() const { return m_ll; }
@@ -1043,7 +1043,7 @@ inline wxULongLong operator+(unsigned long l, const wxULongLong& ull) { return u
 inline wxLongLong operator-(unsigned long l, const wxULongLong& ull)
 {
     const wxULongLong ret = wxULongLong(l) - ull;
-    return wxLongLong((wxInt32)ret.GetHi(),ret.GetLo());
+    return wxLongLong((std::int32_t)ret.GetHi(), ret.GetLo());
 }
 
 #if wxUSE_LONGLONG_NATIVE && wxUSE_STREAMS

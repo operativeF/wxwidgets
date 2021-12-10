@@ -445,14 +445,14 @@ inline void *wxUIntToPtr(wxUIntPtr p)
     #define wxWCHAR_T_IS_WXCHAR16
     typedef wchar_t wxChar16;
 #else
-    typedef wxUint16 wxChar16;
+    typedef uint16_t wxChar16;
 #endif
 
 #if SIZEOF_WCHAR_T == 4
     #define wxWCHAR_T_IS_WXCHAR32
     typedef wchar_t wxChar32;
 #else
-    typedef wxUint32 wxChar32;
+    typedef uint32_t wxChar32;
 #endif
 
 
@@ -532,55 +532,55 @@ inline void *wxUIntToPtr(wxUIntPtr p)
 /*  byte swapping */
 
 #define wxUINT16_SWAP_ALWAYS(val) \
-   ((wxUint16) ( \
-    (((wxUint16) (val) & (wxUint16) 0x00ffU) << 8) | \
-    (((wxUint16) (val) & (wxUint16) 0xff00U) >> 8)))
+   ((uint16_t) ( \
+    (((uint16_t) (val) & (uint16_t) 0x00ffU) << 8) | \
+    (((uint16_t) (val) & (uint16_t) 0xff00U) >> 8)))
 
 #define wxINT16_SWAP_ALWAYS(val) \
-   ((std::int16_t) ( \
-    (((wxUint16) (val) & (wxUint16) 0x00ffU) << 8) | \
-    (((wxUint16) (val) & (wxUint16) 0xff00U) >> 8)))
+   ((int16_t) ( \
+    (((uint16_t) (val) & (uint16_t) 0x00ffU) << 8) | \
+    (((uint16_t) (val) & (uint16_t) 0xff00U) >> 8)))
 
 #define wxUINT32_SWAP_ALWAYS(val) \
-   ((wxUint32) ( \
-    (((wxUint32) (val) & (wxUint32) 0x000000ffU) << 24) | \
-    (((wxUint32) (val) & (wxUint32) 0x0000ff00U) <<  8) | \
-    (((wxUint32) (val) & (wxUint32) 0x00ff0000U) >>  8) | \
-    (((wxUint32) (val) & (wxUint32) 0xff000000U) >> 24)))
+   ((uint32_t) ( \
+    (((uint32_t) (val) & (uint32_t) 0x000000ffU) << 24) | \
+    (((uint32_t) (val) & (uint32_t) 0x0000ff00U) <<  8) | \
+    (((uint32_t) (val) & (uint32_t) 0x00ff0000U) >>  8) | \
+    (((uint32_t) (val) & (uint32_t) 0xff000000U) >> 24)))
 
 #define wxINT32_SWAP_ALWAYS(val) \
-   ((wxInt32) ( \
-    (((wxUint32) (val) & (wxUint32) 0x000000ffU) << 24) | \
-    (((wxUint32) (val) & (wxUint32) 0x0000ff00U) <<  8) | \
-    (((wxUint32) (val) & (wxUint32) 0x00ff0000U) >>  8) | \
-    (((wxUint32) (val) & (wxUint32) 0xff000000U) >> 24)))
+   ((int32_t) ( \
+    (((uint32_t) (val) & (uint32_t) 0x000000ffU) << 24) | \
+    (((uint32_t) (val) & (uint32_t) 0x0000ff00U) <<  8) | \
+    (((uint32_t) (val) & (uint32_t) 0x00ff0000U) >>  8) | \
+    (((uint32_t) (val) & (uint32_t) 0xff000000U) >> 24)))
 /*  machine specific byte swapping */
 
 #ifdef wxLongLong_t
     #define wxUINT64_SWAP_ALWAYS(val) \
-       ((wxUint64) ( \
-        (((wxUint64) (val) & (wxUint64) 0x00000000000000ff) << 56) | \
-        (((wxUint64) (val) & (wxUint64) 0x000000000000ff00) << 40) | \
-        (((wxUint64) (val) & (wxUint64) 0x0000000000ff0000) << 24) | \
-        (((wxUint64) (val) & (wxUint64) 0x00000000ff000000) <<  8) | \
-        (((wxUint64) (val) & (wxUint64) 0x000000ff00000000) >>  8) | \
-        (((wxUint64) (val) & (wxUint64) 0x0000ff0000000000) >> 24) | \
-        (((wxUint64) (val) & (wxUint64) 0x00ff000000000000) >> 40) | \
-        (((wxUint64) (val) & (wxUint64) 0xff00000000000000) >> 56)))
+       ((uint64_t) ( \
+        (((uint64_t) (val) & (uint64_t) 0x00000000000000ff) << 56) | \
+        (((uint64_t) (val) & (uint64_t) 0x000000000000ff00) << 40) | \
+        (((uint64_t) (val) & (uint64_t) 0x0000000000ff0000) << 24) | \
+        (((uint64_t) (val) & (uint64_t) 0x00000000ff000000) <<  8) | \
+        (((uint64_t) (val) & (uint64_t) 0x000000ff00000000) >>  8) | \
+        (((uint64_t) (val) & (uint64_t) 0x0000ff0000000000) >> 24) | \
+        (((uint64_t) (val) & (uint64_t) 0x00ff000000000000) >> 40) | \
+        (((uint64_t) (val) & (uint64_t) 0xff00000000000000) >> 56)))
 
     #define wxINT64_SWAP_ALWAYS(val) \
-       ((wxInt64) ( \
-        (((wxUint64) (val) & (wxUint64) 0x00000000000000ff) << 56) | \
-        (((wxUint64) (val) & (wxUint64) 0x000000000000ff00) << 40) | \
-        (((wxUint64) (val) & (wxUint64) 0x0000000000ff0000) << 24) | \
-        (((wxUint64) (val) & (wxUint64) 0x00000000ff000000) <<  8) | \
-        (((wxUint64) (val) & (wxUint64) 0x000000ff00000000) >>  8) | \
-        (((wxUint64) (val) & (wxUint64) 0x0000ff0000000000) >> 24) | \
-        (((wxUint64) (val) & (wxUint64) 0x00ff000000000000) >> 40) | \
-        (((wxUint64) (val) & (wxUint64) 0xff00000000000000) >> 56)))
+       ((int64_t) ( \
+        (((uint64_t) (val) & (uint64_t) 0x00000000000000ff) << 56) | \
+        (((uint64_t) (val) & (uint64_t) 0x000000000000ff00) << 40) | \
+        (((uint64_t) (val) & (uint64_t) 0x0000000000ff0000) << 24) | \
+        (((uint64_t) (val) & (uint64_t) 0x00000000ff000000) <<  8) | \
+        (((uint64_t) (val) & (uint64_t) 0x000000ff00000000) >>  8) | \
+        (((uint64_t) (val) & (uint64_t) 0x0000ff0000000000) >> 24) | \
+        (((uint64_t) (val) & (uint64_t) 0x00ff000000000000) >> 40) | \
+        (((uint64_t) (val) & (uint64_t) 0xff00000000000000) >> 56)))
 #elif wxUSE_LONGLONG /*  !wxLongLong_t */
     #define wxUINT64_SWAP_ALWAYS(val) \
-       ((wxUint64) ( \
+       ((uint64_t) ( \
         ((wxULongLong(val) & wxULongLong(0L, 0x000000ffU)) << 56) | \
         ((wxULongLong(val) & wxULongLong(0L, 0x0000ff00U)) << 40) | \
         ((wxULongLong(val) & wxULongLong(0L, 0x00ff0000U)) << 24) | \
@@ -591,7 +591,7 @@ inline void *wxUIntToPtr(wxUIntPtr p)
         ((wxULongLong(val) & wxULongLong(0xff000000L, 0U)) >> 56)))
 
     #define wxINT64_SWAP_ALWAYS(val) \
-       ((wxInt64) ( \
+       ((int64_t) ( \
         ((wxLongLong(val) & wxLongLong(0L, 0x000000ffU)) << 56) | \
         ((wxLongLong(val) & wxLongLong(0L, 0x0000ff00U)) << 40) | \
         ((wxLongLong(val) & wxLongLong(0L, 0x00ff0000U)) << 24) | \

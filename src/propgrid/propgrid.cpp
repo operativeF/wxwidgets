@@ -2827,7 +2827,7 @@ wxPGProperty* wxPropertyGrid::GetNearestPaintVisible( wxPGProperty* p ) const
 // commits any changes in editor of selected property
 // return true if validation did not fail
 // flags are same as with DoSelectProperty
-bool wxPropertyGrid::CommitChangesFromEditor( wxUint32 flags )
+bool wxPropertyGrid::CommitChangesFromEditor( std::uint32_t flags )
 {
     // Committing already?
     if ( m_inCommitChangesFromEditor )

@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferUnsigned")
 
     m_text->ChangeValue("4294967295"); // == ULONG_MAX in 32 bits
     CHECK( valUnsigned.TransferFromWindow() );
-    CHECK( value == wxUINT32_MAX );
+    CHECK( value == std::numeric_limits<std::uint32_t>::max() );
     CHECK( valUnsigned.TransferToWindow() );
     CHECK( m_text->GetValue() == "4294967295" );
 

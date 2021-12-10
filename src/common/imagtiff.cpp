@@ -338,7 +338,7 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
     // guard against integer overflow during multiplication which could result
     // in allocating a too small buffer and then overflowing it
     const double bytesNeeded = (double)w * (double)h * sizeof(std::uint32_t);
-    if ( bytesNeeded >= wxUINT32_MAX )
+    if ( bytesNeeded >= std::numeric_limits<std::uint32_t>::max() )
     {
         if ( verbose )
         {

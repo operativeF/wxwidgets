@@ -1620,7 +1620,7 @@ inline bool wxDateTime::IsInStdRange() const
 {
     // currently we don't know what is the real type of time_t so prefer to err
     // on the safe side and limit it to 32 bit values which is safe everywhere
-    return m_time >= 0l && (m_time / TIME_T_FACTOR) < wxINT32_MAX;
+    return m_time >= 0l && (m_time / TIME_T_FACTOR) < std::numeric_limits<std::int32_t>::max();
 }
 
 /* static */

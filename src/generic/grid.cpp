@@ -700,7 +700,7 @@ wxGridCoordsToAttrMap::key_type CoordsToKey(int row, int col)
 void KeyToCoords(wxGridCoordsToAttrMap::key_type key, int *pRow, int *pCol)
 {
     *pRow = key >> 32;
-    *pCol = key & wxUINT32_MAX;
+    *pCol = key & std::numeric_limits<std::uint32_t>::max();
 }
 
 } // anonymous namespace
