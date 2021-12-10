@@ -83,7 +83,7 @@ private:
 
 #define wxVALIDATOR_PARAM(val) val
 
-extern const wxValidator wxDefaultValidator;
+inline const wxValidator wxDefaultValidator;
 
 #else // !wxUSE_VALIDATORS
     // wxWidgets is compiled without support for wxValidator, but we still

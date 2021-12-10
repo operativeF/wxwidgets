@@ -98,7 +98,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/treebase.cpp
     ${CORE_SRC_DIR}/common/uiactioncmn.cpp
     ${CORE_SRC_DIR}/common/valgen.cpp
-    ${CORE_SRC_DIR}/common/validate.cpp
     ${CORE_SRC_DIR}/common/valtext.cpp
     ${CORE_SRC_DIR}/common/valnum.cpp
     ${CORE_SRC_DIR}/common/wincmn.cpp
