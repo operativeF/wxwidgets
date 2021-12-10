@@ -75,21 +75,6 @@
 #    endif
 #endif
 
-/*
-    We use WX_WINDOWS as our main identification symbol for Microsoft Windows
-    but it's actually not predefined directly by any commonly used compilers
-    (only Watcom defines it itself and it's not supported any longer), so we
-    define it ourselves if any of the following macros is defined:
-
-    - MSVC _WIN32 (notice that this is also defined under Win64)
-    - Our __WXMSW__ which selects Windows as platform automatically
- */
-#if defined(_WIN32) || defined(__WIN32__) || defined(__WXMSW__)
-#    ifndef WX_WINDOWS
-#        define WX_WINDOWS
-#    endif /* !WX_WINDOWS */
-#endif /* Any standard symbol indicating Windows */
-
 #if defined(WX_WINDOWS)
     /* Select wxMSW under Windows if no other port is specified. */
 #   if !defined(__WXMSW__) && !defined(__WXMOTIF__) && !defined(__WXGTK__) && !defined(__WXX11__) && !defined(__WXQT__)
@@ -189,18 +174,6 @@
         #define __ALPHA__
     #endif
 #endif /* alpha */
-
-
-/* and vice versa: define UNICODE and _UNICODE if wxUSE_UNICODE is 1 */
-#ifndef _UNICODE
-#       define _UNICODE
-#endif
-
-#ifndef UNICODE
-#       define UNICODE
-#endif
-
-
 
 /*
    OS: then test for generic Unix defines, then for particular flavours and
