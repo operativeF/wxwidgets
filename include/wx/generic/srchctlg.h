@@ -33,7 +33,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const wxValidator& validator = wxDefaultValidator,
+               const wxValidator& validator = {},
                std::string_view name = wxSearchCtrlNameStr);
 
     ~wxSearchCtrl();
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxSearchCtrlNameStr);
 
 #if wxUSE_MENUS

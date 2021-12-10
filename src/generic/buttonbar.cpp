@@ -114,7 +114,7 @@ bool wxButtonToolBar::Create(wxWindow *parent,
                        std::string_view name)
 {
     if ( !wxToolBarBase::Create(parent, id, pos, size, style,
-                                wxDefaultValidator, name) )
+                                wxValidator{}, name) )
     {
         return false;
     }

@@ -30,7 +30,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const wxValidator& validator = wxDefaultValidator,
+               const wxValidator& validator = {},
                std::string_view name = wxCheckBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
@@ -44,7 +44,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxCheckBoxNameStr);
 
     void SetValue(bool value) override;

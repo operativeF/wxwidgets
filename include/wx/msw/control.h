@@ -25,7 +25,7 @@ public:
     wxControl(wxWindow *parent, wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize, unsigned int style = 0,
-              const wxValidator& validator = wxDefaultValidator,
+              const wxValidator& validator = {},
               std::string_view name = wxControlNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
@@ -36,7 +36,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize, unsigned int style = 0,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             std::string_view name = wxControlNameStr);
 
 

@@ -222,7 +222,7 @@ public:
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = "frame")
     {
-         if (!CreateBase( parent, id, pos, size, style, wxDefaultValidator, name ))
+         if (!CreateBase( parent, id, pos, size, style, wxValidator{}, name ))
             return;
 
         m_title = title;

@@ -75,7 +75,7 @@ void wxToggleButtonXmlHandler::DoCreateToggleButton(wxObject *control)
                    GetText("label"),
                    GetPosition(), GetSize(),
                    GetStyle(),
-                   wxDefaultValidator,
+                   wxValidator{},
                    GetName());
 
 #ifdef wxHAVE_BITMAPS_IN_BUTTON
@@ -99,7 +99,7 @@ void wxToggleButtonXmlHandler::DoCreateBitmapToggleButton(wxObject *control)
                    GetBitmap("bitmap", wxART_BUTTON),
                    GetPosition(), GetSize(),
                    GetStyle(),
-                   wxDefaultValidator,
+                   wxValidator{},
                    GetName());
 
     button->SetValue(GetBool( "checked"));

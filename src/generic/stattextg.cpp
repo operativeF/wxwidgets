@@ -28,7 +28,7 @@ bool wxGenericStaticText::Create(wxWindow *parent,
                                  std::string_view name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style,
-                            wxDefaultValidator, name) )
+                            wxValidator{}, name) )
         return false;
 
     SetLabel(label);

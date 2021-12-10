@@ -44,7 +44,7 @@ wxObject *wxTreeCtrlXmlHandler::DoCreateResource()
                 GetID(),
                 GetPosition(), GetSize(),
                 GetStyle("style", wxTR_DEFAULT_STYLE),
-                wxDefaultValidator,
+                wxValidator{},
                 GetName());
 
     wxImageList *imagelist = GetImageList();

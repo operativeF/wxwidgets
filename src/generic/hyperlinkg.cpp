@@ -48,7 +48,7 @@ bool wxGenericHyperlinkCtrl::Create(wxWindow *parent,
     if ((style & wxHL_ALIGN_LEFT) == 0)
         style |= wxFULL_REPAINT_ON_RESIZE;
 
-    if (!wxControl::Create(parent, id, pos, size, style, wxDefaultValidator, name))
+    if (!wxControl::Create(parent, id, pos, size, style, wxValidator{}, name))
         return false;
 
     // set to non-empty strings both the url and the label

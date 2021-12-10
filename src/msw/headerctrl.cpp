@@ -206,7 +206,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     // here as we already call InitCommonControls() in wxApp initialization
     // code which covers this
 
-    if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateControl(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     if ( !MSWCreateControl(WC_HEADERA, "", pos, size) )

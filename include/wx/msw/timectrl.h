@@ -31,7 +31,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxTP_DEFAULT,
-                     const wxValidator& validator = wxDefaultValidator,
+                     const wxValidator& validator = {},
                      std::string_view name = wxTimePickerCtrlNameStr)
     {
         Create(parent, id, dt, pos, size, style, validator, name);
@@ -45,7 +45,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxTP_DEFAULT,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxTimePickerCtrlNameStr)
     {
         return MSWCreateDateTimePicker(parent, id, dt,

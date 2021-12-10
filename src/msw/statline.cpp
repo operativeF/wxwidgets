@@ -28,7 +28,7 @@ bool wxStaticLine::Create(wxWindow *parent,
 {
     wxSize size = AdjustSize(sizeOrig);
 
-    if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateControl(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     return MSWCreateControl("STATIC", "", pos, size);

@@ -52,7 +52,7 @@ wxObject *wxCheckListBoxXmlHandler::DoCreateResource()
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle(),
-                        wxDefaultValidator,
+                        wxValidator{},
                         GetName());
 
         // step through children myself (again.)

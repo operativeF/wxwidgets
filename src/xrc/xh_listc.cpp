@@ -181,7 +181,7 @@ wxListCtrl *wxListCtrlXmlHandler::HandleListCtrl()
                  GetID(),
                  GetPosition(), GetSize(),
                  GetStyle(),
-                 wxDefaultValidator,
+                 wxValidator{},
                  GetName());
 
     // we can optionally have normal and/or small image lists

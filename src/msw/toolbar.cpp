@@ -326,7 +326,7 @@ bool wxToolBar::Create(wxWindow *parent,
                        std::string_view name)
 {
     // common initialisation
-    if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateControl(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     FixupStyle();

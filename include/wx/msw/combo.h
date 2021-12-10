@@ -45,7 +45,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
-                   const wxValidator& validator = wxDefaultValidator,
+                   const wxValidator& validator = {},
                    std::string_view name = wxComboCtrlNameStr)
          
     {
@@ -58,7 +58,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxComboCtrlNameStr);
 
     void PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const override;

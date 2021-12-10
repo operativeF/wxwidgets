@@ -1626,7 +1626,7 @@ protected:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     std::string_view name = wxPanelNameStr);
 
     bool CreateBase(wxWindowBase *parent,

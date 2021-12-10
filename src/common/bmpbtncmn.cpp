@@ -59,7 +59,7 @@ wxBitmapButton::CreateCloseButton(wxWindow* parent,
 
     if ( !Create(parent, winid, bmp,
                  wxDefaultPosition, wxDefaultSize,
-                 wxBORDER_NONE, wxDefaultValidator, name) )
+                 wxBORDER_NONE, wxValidator{}, name) )
         return false;
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP

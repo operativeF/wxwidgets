@@ -34,7 +34,7 @@ public:
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
                             unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
-                            const wxValidator& validator = wxDefaultValidator,
+                            const wxValidator& validator = {},
                             const std::string& name = wxDatePickerCtrlNameStr)
     {
         Create(parent, id, date, pos, size, style, validator, name);
@@ -48,7 +48,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 const std::string& name = wxDatePickerCtrlNameStr);
 
     // wxDatePickerCtrl methods

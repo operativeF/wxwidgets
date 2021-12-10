@@ -53,7 +53,7 @@ wxBookCtrlBase::Create(wxWindow *parent,
                         pos,
                         size,
                         style,
-                        wxDefaultValidator,
+                        wxValidator{},
                         name
                      );
 }

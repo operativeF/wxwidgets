@@ -26,7 +26,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxSB_HORIZONTAL,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             std::string_view name = wxScrollBarNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
@@ -38,7 +38,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxSB_HORIZONTAL,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             std::string_view name = wxScrollBarNameStr);
 
     int GetThumbPosition() const override;

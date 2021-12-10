@@ -153,7 +153,7 @@ void GUIFrame::AddPanel_1()
     m_bitmap1->SetToolTip( _("wxStaticBitmap") );
     fgSizer1->Add( m_bitmap1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 20 );
 
-    m_gauge1 = new wxGauge( m_panel1, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL, wxDefaultValidator, "_Gauge" );
+    m_gauge1 = new wxGauge( m_panel1, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL, wxValidator{}, "_Gauge" );
     m_gauge1->SetValue( 50 );
     m_gauge1->SetToolTip( _("wxGauge") );
     fgSizer1->Add(m_gauge1, m_commonExpandFlags);
@@ -336,7 +336,7 @@ void GUIFrame::AddPanel_4()
     m_fontPicker1->SetToolTip( _("wxFontPickerCtrl") );
     fgSizer5->Add( m_fontPicker1, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 20 );
 
-    m_filePicker1 = new wxFilePickerCtrl( m_panel4, wxID_ANY, {}, _("Select a file"), "*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE, wxDefaultValidator, wxT("_FilePickerCtrl" );
+    m_filePicker1 = new wxFilePickerCtrl( m_panel4, wxID_ANY, {}, _("Select a file"), "*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE, wxValidator{}, wxT("_FilePickerCtrl" );
     #if defined(__WXMSW__)
          const wxString a_file = "C:\\Windows\\explorer.exe";
     #else
@@ -362,7 +362,7 @@ void GUIFrame::AddPanel_4()
     m_genericDirCtrl1->SetMinSize( wxSize( -1,150 ) );
     fgSizer5->Add(m_genericDirCtrl1, m_commonExpandFlags);
 
-    m_dirPicker1 = new wxDirPickerCtrl( m_panel4, wxID_ANY, {}, _("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE, wxDefaultValidator, "_DirPickerCtrl" );
+    m_dirPicker1 = new wxDirPickerCtrl( m_panel4, wxID_ANY, {}, _("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE, wxValidator{}, "_DirPickerCtrl" );
     #if defined(__WXMSW__)
         const wxString a_dir = "C:\\Windows";
     #else

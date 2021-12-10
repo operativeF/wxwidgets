@@ -37,7 +37,7 @@ wxObject *wxGaugeXmlHandler::DoCreateResource()
                     GetLong("range", DEFAULT_RANGE),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     if( HasParam("value"))

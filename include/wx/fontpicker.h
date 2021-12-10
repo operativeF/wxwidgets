@@ -107,7 +107,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxFNTP_DEFAULT_STYLE,
-                     const wxValidator& validator = wxDefaultValidator,
+                     const wxValidator& validator = {},
                      std::string_view name = wxFontPickerCtrlNameStr)
         : m_nMinPointSize(wxFNTP_MINPOINT_SIZE), m_nMaxPointSize(wxFNTP_MAXPOINT_SIZE)
     {
@@ -120,7 +120,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxFNTP_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxFontPickerCtrlNameStr);
 
 

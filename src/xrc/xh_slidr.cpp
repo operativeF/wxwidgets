@@ -53,7 +53,7 @@ wxObject *wxSliderXmlHandler::DoCreateResource()
                     GetLong("max", DEFAULT_MAX),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     if( HasParam("tickfreq"))

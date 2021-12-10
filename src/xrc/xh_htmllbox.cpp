@@ -49,7 +49,7 @@ wxObject *wxSimpleHtmlListBoxXmlHandler::DoCreateResource()
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle("style", wxHLB_DEFAULT_STYLE),
-                        wxDefaultValidator,
+                        wxValidator{}
                         GetName());
 
         if (selection != -1)

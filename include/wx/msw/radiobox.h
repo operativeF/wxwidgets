@@ -39,7 +39,7 @@ public:
                const std::vector<std::string>& choices = {},
                int majorDim = 0,
                unsigned int style = wxRA_SPECIFY_COLS,
-               const wxValidator& val = wxDefaultValidator,
+               const wxValidator& val = {},
                std::string_view name = wxRadioBoxNameStr)
     {
         Create(parent, id, title, pos, size, choices, majorDim,
@@ -58,7 +58,7 @@ public:
                 const std::vector<std::string>& choices,
                 int majorDim = 0,
                 unsigned int style = wxRA_SPECIFY_COLS,
-                const wxValidator& val = wxDefaultValidator,
+                const wxValidator& val = {},
                 std::string_view name = wxRadioBoxNameStr);
 
     // implement the radiobox interface

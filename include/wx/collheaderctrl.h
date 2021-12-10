@@ -36,7 +36,7 @@ public:
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
+        const wxValidator& validator = {},
         std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
@@ -50,7 +50,7 @@ public:
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
+        const wxValidator& validator = {},
         std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
@@ -90,7 +90,7 @@ public:
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         unsigned int style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
+        const wxValidator& validator = {},
         std::string_view name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);

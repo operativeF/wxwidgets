@@ -231,12 +231,12 @@ public:
     wxRichTextCtrl( );
 
     wxRichTextCtrl( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
-        unsigned int style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr));
+        unsigned int style = wxRE_MULTILINE, const wxValidator& validator = {}, const std::string& name = wxASCII_STR(wxTextCtrlNameStr));
 
     ~wxRichTextCtrl();
 
     bool Create( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
-        unsigned int style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr) );
+        unsigned int style = wxRE_MULTILINE, const wxValidator& validator = {}, const std::string& name = wxASCII_STR(wxTextCtrlNameStr) );
 
 // Accessors
 

@@ -47,7 +47,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = 0,
-                       const wxValidator& validator = wxDefaultValidator,
+                       const wxValidator& validator = {},
                        const std::string& name = wxComboBoxNameStr)
     {
         Init();
@@ -61,7 +61,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxComboBoxNameStr);
 
     void SetCustomPaintWidth( int width );
@@ -126,7 +126,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 const std::string& name = wxComboBoxNameStr)
         : wxGenericComboCtrl()
     {

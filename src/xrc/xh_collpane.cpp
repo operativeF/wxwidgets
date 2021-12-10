@@ -69,7 +69,7 @@ wxObject *wxCollapsiblePaneXmlHandler::DoCreateResource()
                     label,
                     GetPosition(), GetSize(),
                     GetStyle("style", wxCP_DEFAULT_STYLE),
-                    wxDefaultValidator,
+                    wxValidator{}
                     GetName());
 
         ctrl->Collapse(GetBool("collapsed"));

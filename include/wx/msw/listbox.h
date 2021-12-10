@@ -41,7 +41,7 @@ public:
             const wxSize& size = wxDefaultSize,
             const std::vector<std::string>& choices = {},
             unsigned int style = 0,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             std::string_view name = wxListBoxNameStr)
     {
         Create(parent, id, pos, size, choices, style, validator, name);
@@ -52,7 +52,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 const std::vector<std::string>& choices = {},
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxListBoxNameStr);
 
     ~wxListBox();

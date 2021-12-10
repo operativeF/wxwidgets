@@ -29,7 +29,7 @@ public:
                   const wxPoint &pos = wxDefaultPosition,
                   const wxSize &size = wxDefaultSize,
                   unsigned int style = wxLC_ICON,
-                  const wxValidator& validator = wxDefaultValidator,
+                  const wxValidator& validator = {},
                   std::string_view name = wxListCtrlNameStr)
          : wxListCtrl(parent, id, pos, size, style, validator, name)
     {

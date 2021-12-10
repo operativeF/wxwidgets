@@ -104,7 +104,7 @@ public:
     wxColourPickerCtrl(wxWindow *parent, wxWindowID id,
         const wxColour& col = *wxBLACK, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, unsigned int style = wxCLRP_DEFAULT_STYLE,
-        const wxValidator& validator = wxDefaultValidator,
+        const wxValidator& validator = {},
         std::string_view name = wxColourPickerCtrlNameStr)
         { Create(parent, id, col, pos, size, style, validator, name); }
 
@@ -113,7 +113,7 @@ public:
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
            unsigned int style = wxCLRP_DEFAULT_STYLE,
-           const wxValidator& validator = wxDefaultValidator,
+           const wxValidator& validator = {},
            std::string_view name = wxColourPickerCtrlNameStr);
 
     // get the colour chosen

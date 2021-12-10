@@ -29,7 +29,7 @@ bool wxStaticLine::Create( wxWindow *parent,
 {
     m_statbox = NULL;
 
-    if ( !CreateBase(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateBase(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     // ok, this is ugly but it's better than nothing: use a thin static box to

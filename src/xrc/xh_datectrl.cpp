@@ -36,7 +36,7 @@ wxObject *wxDateCtrlXmlHandler::DoCreateResource()
                   wxDefaultDateTime,
                   GetPosition(), GetSize(),
                   GetStyle("style", wxDP_DEFAULT | wxDP_SHOWCENTURY),
-                  wxDefaultValidator,
+                  wxValidator{},
                   GetName());
 
     SetupWindow(picker);

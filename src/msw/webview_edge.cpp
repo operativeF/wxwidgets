@@ -523,7 +523,7 @@ bool wxWebViewEdge::Create(wxWindow* parent,
         return false;
 
     if (!wxControl::Create(parent, id, pos, size, style,
-        wxDefaultValidator, name))
+        wxValidator{}, name))
     {
         return false;
     }

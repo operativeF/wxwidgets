@@ -33,7 +33,7 @@ wxObject *wxScrollBarXmlHandler::DoCreateResource()
                     GetID(),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     control->SetScrollbar(GetLong( "value", 0),

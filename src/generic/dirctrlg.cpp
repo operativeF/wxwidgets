@@ -329,7 +329,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
                               int defaultFilter,
                               std::string_view name)
 {
-    if (!wxControl::Create(parent, treeid, pos, size, style, wxDefaultValidator, name))
+    if (!wxControl::Create(parent, treeid, pos, size, style, wxValidator{}, name))
         return false;
 
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE));

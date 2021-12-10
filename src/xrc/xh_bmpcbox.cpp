@@ -61,7 +61,7 @@ wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
                         GetPosition(), GetSize(),
                         {},
                         GetStyle(),
-                        wxDefaultValidator,
+                        wxValidator{},
                         GetName());
 
         m_isInside = true;

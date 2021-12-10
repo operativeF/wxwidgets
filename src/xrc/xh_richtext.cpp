@@ -34,7 +34,7 @@ wxObject *wxRichTextCtrlXmlHandler::DoCreateResource()
                  GetText("value"),
                  GetPosition(), GetSize(),
                  GetStyle(),
-                 wxDefaultValidator,
+                 wxValidator{},
                  GetName());
 
     SetupWindow(text);

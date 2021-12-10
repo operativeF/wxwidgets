@@ -575,7 +575,7 @@ public:
                 const wxSize& size,
                 const std::vector<std::string>& choices,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = wxValidator{},
                 const wxString& name = "wxOwnerDrawnComboBox")
     {
         if ( !wxOwnerDrawnComboBox::Create( parent,

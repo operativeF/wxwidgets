@@ -39,7 +39,7 @@ wxObject *wxFontPickerCtrlXmlHandler::DoCreateResource()
                   f,
                   GetPosition(), GetSize(),
                   GetStyle("style", wxFNTP_DEFAULT_STYLE),
-                  wxDefaultValidator,
+                  wxValidator{},
                   GetName());
 
     SetupWindow(picker);

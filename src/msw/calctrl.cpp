@@ -63,7 +63,7 @@ wxCalendarCtrl::Create(wxWindow *parent,
     style |= wxWANTS_CHARS;
 
     // initialize the base class
-    if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateControl(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     // create the native control: this is a bit tricky as we want to receive

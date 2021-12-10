@@ -872,7 +872,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
     wxNavigationEnabled<wxControl>::Create( parent, id,
                                             pos, size,
                                             wxTAB_TRAVERSAL,
-                                            wxDefaultValidator,
+                                            wxValidator{},
                                             name );
 
     m_dir = defaultDirectory;

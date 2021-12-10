@@ -46,7 +46,7 @@ public:
                     unsigned int style = wxHL_DEFAULT_STYLE,
                     std::string_view name = wxHyperlinkCtrlNameStr)
     {
-        CreateControl(parent, id, pos, size, style, wxDefaultValidator, name);
+        CreateControl(parent, id, pos, size, style, wxValidator{}, name);
 
         SetURL( url );
         SetVisited( false );

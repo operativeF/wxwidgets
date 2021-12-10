@@ -55,7 +55,7 @@ wxChoicebook::Create(wxWindow *parent,
     style |= wxBORDER_NONE;
 
     if ( !wxControl::Create(parent, id, pos, size, style,
-                            wxDefaultValidator, name) )
+                            wxValidator{}, name) )
         return false;
 
     m_bookctrl = new wxChoice

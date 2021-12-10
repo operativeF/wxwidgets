@@ -64,7 +64,7 @@ wxObject* wxDataViewXmlHandler::HandleCtrl()
         GetPosition(),
         GetSize(),
         GetStyle(),
-        wxDefaultValidator,
+        wxValidator{},
         GetName());
 
     SetupWindow(control);
@@ -81,7 +81,7 @@ wxObject* wxDataViewXmlHandler::HandleListCtrl()
         GetPosition(),
         GetSize(),
         GetStyle(),
-        wxDefaultValidator);
+        wxValidator{});
 
     SetupWindow(control);
 
@@ -97,7 +97,7 @@ wxObject* wxDataViewXmlHandler::HandleTreeCtrl()
         GetPosition(),
         GetSize(),
         GetStyle(),
-        wxDefaultValidator);
+        wxValidator{});
 
     wxImageList *imagelist = GetImageList();
     if (imagelist)

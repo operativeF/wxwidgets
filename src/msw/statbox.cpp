@@ -72,7 +72,7 @@ bool wxStaticBox::Create(wxWindow *parent,
                          unsigned int style,
                          std::string_view name)
 {
-    if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateControl(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     if ( !MSWCreateControl("BUTTON", label, pos, size) )

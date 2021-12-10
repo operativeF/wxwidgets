@@ -37,7 +37,7 @@ wxObject *wxDirPickerCtrlXmlHandler::DoCreateResource()
                   GetText("message"),
                   GetPosition(), GetSize(),
                   GetStyle("style", wxDIRP_DEFAULT_STYLE),
-                  wxDefaultValidator,
+                  wxValidator{},
                   GetName());
 
     SetupWindow(picker);

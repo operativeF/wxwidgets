@@ -39,7 +39,7 @@ public:
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
                            unsigned int style = 0,
-                           const wxValidator& validator = wxDefaultValidator,
+                           const wxValidator& validator = {},
                            std::string_view name = wxFilePickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, wildcard,
@@ -69,7 +69,7 @@ public:
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
            unsigned int style = 0,
-           const wxValidator& validator = wxDefaultValidator,
+           const wxValidator& validator = {},
            std::string_view name = wxFilePickerWidgetNameStr);
 
     // event handler for the click
@@ -108,7 +108,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxFILEBTN_DEFAULT_STYLE,
-                        const wxValidator& validator = wxDefaultValidator,
+                        const wxValidator& validator = {},
                         std::string_view name = wxFilePickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, wildcard,
@@ -172,7 +172,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        unsigned int style = wxDIRBTN_DEFAULT_STYLE,
-                       const wxValidator& validator = wxDefaultValidator,
+                       const wxValidator& validator = {},
                        std::string_view name = wxDirPickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, {},

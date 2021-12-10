@@ -269,7 +269,7 @@ bool wxPropertyGrid::Create( wxWindow *parent,
 
     wxControl::Create(parent, id, pos, size,
                       (style & wxWINDOW_STYLE_MASK) | wxScrolledWindowStyle,
-                      wxDefaultValidator,
+                      wxValidator{},
                       name);
 
     m_windowStyle |= (style & wxPG_WINDOW_STYLE_MASK);

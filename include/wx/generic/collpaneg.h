@@ -34,7 +34,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         unsigned int style = wxCP_DEFAULT_STYLE,
-                        const wxValidator& val = wxDefaultValidator,
+                        const wxValidator& val = {},
                         std::string_view name = wxCollapsiblePaneNameStr)
     {
         Create(parent, winid, label, pos, size, style, val, name);
@@ -48,7 +48,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxCP_DEFAULT_STYLE,
-                const wxValidator& val = wxDefaultValidator,
+                const wxValidator& val = {},
                 std::string_view name = wxCollapsiblePaneNameStr);
 
     // public wxCollapsiblePane API

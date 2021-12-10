@@ -41,7 +41,7 @@ wxObject *wxFilePickerCtrlXmlHandler::DoCreateResource()
                   GetParamValue("wildcard"),
                   GetPosition(), GetSize(),
                   GetStyle("style", wxFLP_DEFAULT_STYLE),
-                  wxDefaultValidator,
+                  wxValidator{},
                   GetName());
 
     SetupWindow(picker);

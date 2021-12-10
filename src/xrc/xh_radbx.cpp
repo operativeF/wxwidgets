@@ -46,7 +46,7 @@ wxObject *wxRadioBoxXmlHandler::DoCreateResource()
                         m_labels,
                         GetLong("dimension", 1),
                         GetStyle(),
-                        wxDefaultValidator,
+                        wxValidator{},
                         GetName());
 
         if (selection != -1)

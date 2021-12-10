@@ -94,7 +94,7 @@ bool wxStatusBar::Create(wxWindow *parent,
                          std::string_view name)
 {
     if ( !CreateControl(parent, id, wxDefaultPosition, wxDefaultSize,
-                        style, wxDefaultValidator, name) )
+                        style, wxValidator{}, name) )
         return false;
 
     if ( !MSWCreateControl(STATUSCLASSNAMEA, "",

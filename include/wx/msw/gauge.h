@@ -29,7 +29,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             unsigned int style = wxGA_HORIZONTAL,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             std::string_view name = wxGaugeNameStr)
     {
         Create(parent, id, range, pos, size, style, validator, name);
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxGA_HORIZONTAL,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxGaugeNameStr);
 
     // set gauge range/value

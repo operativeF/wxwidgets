@@ -56,7 +56,7 @@ wxObject *wxOwnerDrawnComboBoxXmlHandler::DoCreateResource()
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle(),
-                        wxDefaultValidator,
+                        wxValidator{},
                         GetName());
 
         wxSize sizeBtn=GetSize("buttonsize");

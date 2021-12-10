@@ -470,7 +470,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
 {
     wxCHECK_MSG( parent, false, "can't create wxWindow without parent" );
 
-    if ( !CreateBase(parent, id, pos, size, style, wxDefaultValidator, name) )
+    if ( !CreateBase(parent, id, pos, size, style, wxValidator{}, name) )
         return false;
 
     parent->AddChild(this);

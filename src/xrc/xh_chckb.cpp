@@ -36,7 +36,7 @@ wxObject *wxCheckBoxXmlHandler::DoCreateResource()
                     GetText("label"),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     control->SetValue(GetBool( "checked"));

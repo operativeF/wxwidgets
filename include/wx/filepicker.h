@@ -234,7 +234,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      unsigned int style = wxFLP_DEFAULT_STYLE,
-                     const wxValidator& validator = wxDefaultValidator,
+                     const wxValidator& validator = {},
                      const std::string& name = wxFilePickerCtrlNameStr)
     {
         Create(parent, id, path, message, wildcard, pos, size, style,
@@ -249,7 +249,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxFLP_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxFilePickerCtrlNameStr);
 
     void SetFileName(const wxFileName &filename)
@@ -334,7 +334,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = wxDIRP_DEFAULT_STYLE,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     std::string_view name = wxDirPickerCtrlNameStr)
     {
         Create(parent, id, path, message, pos, size, style, validator, name);
@@ -346,7 +346,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDIRP_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxDirPickerCtrlNameStr);
 
     void SetDirName(const wxFileName &dirname)

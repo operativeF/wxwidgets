@@ -209,7 +209,7 @@ public:
     wxDataViewCtrl( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, unsigned int style = 0,
-           const wxValidator& validator = wxDefaultValidator,
+           const wxValidator& validator = {},
            const std::string& name = wxDataViewCtrlNameStr)
              : wxScrollHelper(this)
     {
@@ -223,7 +223,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 const std::string& name = wxDataViewCtrlNameStr);
 
     bool AssociateModel( wxDataViewModel *model ) override;

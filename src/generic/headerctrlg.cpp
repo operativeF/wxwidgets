@@ -54,7 +54,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
                           const std::string& name)
 {
     if ( !wxHeaderCtrlBase::Create(parent, id, pos, size,
-                                   style, wxDefaultValidator, name) )
+                                   style, wxValidator{}, name) )
         return false;
 
     // tell the system to not paint the background at all to avoid flicker as

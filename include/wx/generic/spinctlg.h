@@ -205,7 +205,7 @@ public:
         m_increment = inc;
 
         bool ok = wxTextCtrl::Create(parent, id, value, pos, size, style,
-                                     wxDefaultValidator, name);
+                                     wxValidator{}, name);
         DoSetValue(initial, SendEvent::None);
 
         return ok;

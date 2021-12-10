@@ -40,7 +40,7 @@ wxObject *wxSearchCtrlXmlHandler::DoCreateResource()
                  GetPosition(),
                  GetSize(),
                  GetStyle("style", wxTE_LEFT),
-                 wxDefaultValidator,
+                 wxValidator{},
                  GetName());
 
     SetupWindow(ctrl);

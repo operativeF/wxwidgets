@@ -26,7 +26,7 @@ public:
     wxRibbonControl(wxWindow *parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize, unsigned int style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     const wxString& name = wxASCII_STR(wxControlNameStr))
     {
          m_art = nullptr; 
@@ -37,7 +37,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize, unsigned int style = 0,
-            const wxValidator& validator = wxDefaultValidator,
+            const wxValidator& validator = {},
             const wxString& name = wxASCII_STR(wxControlNameStr));
 
     virtual void SetArtProvider(wxRibbonArtProvider* art);

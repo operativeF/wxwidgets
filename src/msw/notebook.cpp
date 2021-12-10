@@ -191,7 +191,7 @@ bool wxNotebook::Create(wxWindow *parent,
 #endif // USE_NOTEBOOK_ANTIFLICKER
 
     if ( !CreateControl(parent, id, pos, size, style | wxTAB_TRAVERSAL,
-                        wxDefaultValidator, name) )
+                        wxValidator{}, name) )
         return false;
 
     if ( !MSWCreateControl(className, "", pos, size) )

@@ -33,7 +33,7 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              unsigned int style = wxSL_HORIZONTAL,
-             const wxValidator& validator = wxDefaultValidator,
+             const wxValidator& validator = {},
              std::string_view name = wxSliderNameStr)
     {
         Create(parent, id, value, minValue, maxValue,
@@ -49,7 +49,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxSL_HORIZONTAL,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxSliderNameStr);
 
     ~wxSlider();

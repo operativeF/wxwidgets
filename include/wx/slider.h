@@ -56,7 +56,7 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              unsigned int style = wxSL_HORIZONTAL,
-             const wxValidator& validator = wxDefaultValidator,
+             const wxValidator& validator = {},
              std::string_view name = wxSliderNameStr);
     */
     wxSliderBase& operator=(wxSliderBase&&) = delete;

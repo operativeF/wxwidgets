@@ -30,7 +30,7 @@ bool wxGenericStaticBitmap::Create(wxWindow *parent,
                                    std::string_view name)
 {
     if (! wxControl::Create(parent, id, pos, size, style,
-                            wxDefaultValidator, name))
+                            wxValidator{}, name))
         return false;
     m_scaleMode = ScaleMode::None;
     SetBitmap(bitmap);

@@ -32,7 +32,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    const std::vector<std::string>& choices = {},
                    unsigned int style = 0,
-                   const wxValidator& validator = wxDefaultValidator,
+                   const wxValidator& validator = {},
                    std::string_view name = wxListBoxNameStr);
 
     wxCheckListBox& operator=(wxCheckListBox&&) = delete;
@@ -42,7 +42,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 const std::vector<std::string>& choices = {},
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxListBoxNameStr);
 
     // items may be checked

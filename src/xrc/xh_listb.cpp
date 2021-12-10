@@ -52,7 +52,7 @@ wxObject *wxListBoxXmlHandler::DoCreateResource()
                         GetPosition(), GetSize(),
                         strList,
                         GetStyle(),
-                        wxDefaultValidator,
+                        wxValidator{},
                         GetName());
 
         if (selection != -1)

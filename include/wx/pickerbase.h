@@ -45,7 +45,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     std::string_view name = wxPickerNameStr);
 
     // margin between the text control and the picker

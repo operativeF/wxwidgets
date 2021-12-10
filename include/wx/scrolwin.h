@@ -416,7 +416,7 @@ inline bool wxCreateScrolled(wxControl* self,
                      const wxPoint& pos, const wxSize& size,
                      unsigned int style, const std::string& name)
 {
-     return self->Create(parent, winid, pos, size, style, wxDefaultValidator, name);
+     return self->Create(parent, winid, pos, size, style, wxValidator{}, name);
 }
 #endif // wxUSE_CONTROLS
 

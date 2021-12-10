@@ -56,7 +56,7 @@ public:
                     const std::vector<int>& order,
                     const std::vector<std::string>& items,
                     unsigned int style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     std::string_view name = wxRearrangeListNameStr)
     {
         Create(parent, id, pos, size, order, items, style, validator, name);
@@ -73,7 +73,7 @@ public:
                 const std::vector<int>& order,
                 const std::vector<std::string>& items,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxRearrangeListNameStr);
 
 
@@ -133,7 +133,7 @@ public:
                     const std::vector<int>& order,
                     const std::vector<std::string>& items,
                     unsigned int style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
+                    const wxValidator& validator = {},
                     std::string_view name = wxRearrangeListNameStr)
     {
         Create(parent, id, pos, size, order, items, style, validator, name);
@@ -148,7 +148,7 @@ public:
                 const std::vector<int>& order,
                 const std::vector<std::string>& items,
                 unsigned int style = 0,
-                const wxValidator& validator = wxDefaultValidator,
+                const wxValidator& validator = {},
                 std::string_view name = wxRearrangeListNameStr);
 
     // get the underlying listbox

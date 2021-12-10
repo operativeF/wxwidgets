@@ -34,7 +34,7 @@ wxNativeWindow::Create(wxWindow* parent,
     // want this as we already have one.
     if ( !CreateBase(parent, winid,
                      r.GetPosition(), r.GetSize(),
-                     0, wxDefaultValidator, "nativewindow") )
+                     0, wxValidator{}, "nativewindow") )
         return false;
 
     parent->AddChild(this);

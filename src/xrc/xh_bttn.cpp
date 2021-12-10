@@ -37,7 +37,7 @@ wxObject *wxButtonXmlHandler::DoCreateResource()
                     GetText("label"),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     if (GetBool("default", false))

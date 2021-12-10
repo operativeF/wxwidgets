@@ -39,7 +39,7 @@ wxObject *wxCommandLinkButtonXmlHandler::DoCreateResource()
                     GetText("note"),
                     GetPosition(), GetSize(),
                     GetStyle(),
-                    wxDefaultValidator,
+                    wxValidator{},
                     GetName());
 
     if (GetBool("default", false))
