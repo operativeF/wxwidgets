@@ -26,7 +26,6 @@
 #include "wx/tokenzr.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
-#include "wx/scopedptr.h"
 
 #include <boost/nowide/convert.hpp>
 
@@ -112,9 +111,6 @@ void ShowAssertDialog(const std::string& file,
 // ----------------------------------------------------------------------------
 // wxEventLoopPtr
 // ----------------------------------------------------------------------------
-
-// this defines wxEventLoopPtr
-wxDEFINE_TIED_SCOPED_PTR_TYPE(wxEventLoopBase)
 
 // ============================================================================
 // wxAppConsoleBase implementation
@@ -203,14 +199,13 @@ std::string wxAppConsoleBase::GetAppDisplayName() const
     return wx::utils::ToUpperCopy(GetAppName());
 }
 
-wxEventLoopBase *wxAppConsoleBase::CreateMainLoop()
+std::unique_ptr<wxEventLoopBase> wxAppConsoleBase::CreateMainLoop()
 {
     return GetTraits()->CreateEventLoop();
 }
 
 void wxAppConsoleBase::CleanUp()
 {
-    wxDELETE(m_mainLoop);
 }
 
 // ----------------------------------------------------------------------------
@@ -321,7 +316,7 @@ wxAppTraits& wxAppConsoleBase::GetValidTraits()
 
 int wxAppConsoleBase::MainLoop()
 {
-    wxEventLoopBaseTiedPtr mainLoop(&m_mainLoop, CreateMainLoop());
+    m_mainLoop = CreateMainLoop();
 
     if (wxTheApp)
         wxTheApp->OnLaunched();

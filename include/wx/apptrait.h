@@ -13,11 +13,12 @@
 
 #include "wx/platinfo.h"
 
+#include "wx/evtloop.h"
+
 import <string>;
 import <vector>;
 
 class wxConfigBase;
-class wxEventLoopBase;
 #if wxUSE_FONTMAP
     class wxFontMapper;
 #endif // wxUSE_FONTMAP
@@ -120,7 +121,7 @@ public:
 #endif
 
     // create a new, port specific, instance of the event loop used by wxApp
-    virtual wxEventLoopBase *CreateEventLoop() = 0;
+    virtual std::unique_ptr<wxEventLoopBase> CreateEventLoop() = 0;
 
 #if wxUSE_TIMER
     // return platform and toolkit dependent wxTimer implementation
@@ -198,7 +199,7 @@ class wxConsoleAppTraitsBase : public wxAppTraits
 {
 public:
 #if !wxUSE_CONSOLE_EVENTLOOP
-    wxEventLoopBase *CreateEventLoop() override { return NULL; }
+    std::unique_ptr<wxEventLoopBase> CreateEventLoop() override { return {}; }
 #endif // !wxUSE_CONSOLE_EVENTLOOP
 
 #if wxUSE_LOG

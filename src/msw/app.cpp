@@ -271,9 +271,9 @@ wxTimerImpl *wxGUIAppTraits::CreateTimerImpl(wxTimer *timer)
 
 #endif // wxUSE_TIMER
 
-wxEventLoopBase* wxGUIAppTraits::CreateEventLoop()
+std::unique_ptr<wxEventLoopBase> wxGUIAppTraits::CreateEventLoop()
 {
-    return new wxEventLoop;
+    return std::make_unique<wxEventLoop>();
 }
 
 // ---------------------------------------------------------------------------

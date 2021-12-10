@@ -17,6 +17,7 @@
 // ----------------------------------------------------------------------------
 
 #include "wx/event.h"       // for the base class
+#include "wx/evtloop.h"
 #include "wx/eventfilter.h" // (and another one)
 #include "wx/build.h"
 #include "wx/cmdargs.h"     // for wxCmdLineArgsArray used by wxApp::argv
@@ -31,7 +32,6 @@ import <string>;
 class wxAppConsole;
 class wxAppTraits;
 class wxCmdLineParser;
-class wxEventLoopBase;
 class wxMessageOutput;
 
 #if wxUSE_GUI
@@ -241,7 +241,7 @@ public:
     // The returned value maybe NULL. Put initialization code which needs a
     // non-NULL main event loop into OnEventLoopEnter().
     wxEventLoopBase* GetMainLoop() const
-        { return m_mainLoop; }
+        { return m_mainLoop.get(); }
 
     // This function sets the C locale to the default locale for the current
     // environment. It is advised to call this to ensure that the underlying
@@ -502,7 +502,7 @@ protected:
 
     // create main loop from AppTraits or return NULL if
     // there is no main loop implementation
-    wxEventLoopBase *CreateMainLoop();
+    std::unique_ptr<wxEventLoopBase> CreateMainLoop();
 
     // the class defining the application behaviour, NULL initially and created
     // by GetTraits() when first needed
@@ -510,7 +510,7 @@ protected:
 
     // the main event loop of the application (may be NULL if the loop hasn't
     // been started yet or has already terminated)
-    wxEventLoopBase *m_mainLoop{nullptr};
+    std::unique_ptr<wxEventLoopBase> m_mainLoop;
 
 public:
     // command line arguments (public for backwards compatibility)

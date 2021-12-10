@@ -28,13 +28,6 @@
 
 #include "wx/thread.h"
 
-#if wxUSE_BASE
-    #include "wx/scopedptr.h"
-
-    wxDECLARE_SCOPED_PTR(wxEvent, wxEventPtr)
-    wxDEFINE_SCOPED_PTR(wxEvent, wxEventPtr)
-#endif // wxUSE_BASE
-
 import WX.Cfg.Flags;
 
 
@@ -1278,7 +1271,7 @@ void wxEvtHandler::ProcessPendingEvents()
         }
     }
 
-    wxEventPtr event(pEvent);
+    auto& event = *pEvent;
 
     // it's important we remove event from list before processing it, else a
     // nested event loop, for example from a modal dialog, might process the
@@ -1294,7 +1287,7 @@ void wxEvtHandler::ProcessPendingEvents()
 
     wxLEAVE_CRIT_SECT( m_pendingEventsLock );
 
-    ProcessEvent(*event);
+    ProcessEvent(event);
 
     // careful: this object could have been deleted by the event handler
     // executed by the above ProcessEvent() call, so we can't access any fields

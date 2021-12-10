@@ -99,12 +99,12 @@ wxTimerImpl *wxConsoleAppTraits::CreateTimerImpl(wxTimer *timer)
 #endif // wxUSE_TIMER
 
 // Why can't this be disabled for __WXQT__ ??? There is an implementation in src/qt/apptraits.cpp
-wxEventLoopBase *wxConsoleAppTraits::CreateEventLoop()
+std::unique_ptr<wxEventLoopBase> wxConsoleAppTraits::CreateEventLoop()
 {
 #if wxUSE_CONSOLE_EVENTLOOP
-    return new wxEventLoop();
+    return std::make_unique<wxEventLoop>();
 #else // !wxUSE_CONSOLE_EVENTLOOP
-    return NULL;
+    return {};
 #endif // wxUSE_CONSOLE_EVENTLOOP/!wxUSE_CONSOLE_EVENTLOOP
 }
 

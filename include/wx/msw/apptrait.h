@@ -21,7 +21,7 @@ import <string>;
 
 struct wxConsoleAppTraits : public wxConsoleAppTraitsBase
 {
-    wxEventLoopBase *CreateEventLoop() override;
+    std::unique_ptr<wxEventLoopBase> CreateEventLoop() override;
     void *BeforeChildWaitLoop() override;
     void AfterChildWaitLoop(void *data) override;
 #if wxUSE_TIMER
@@ -42,7 +42,7 @@ struct wxConsoleAppTraits : public wxConsoleAppTraitsBase
 
 struct wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-    wxEventLoopBase *CreateEventLoop() override;
+    std::unique_ptr<wxEventLoopBase> CreateEventLoop() override;
     void *BeforeChildWaitLoop() override;
     void AfterChildWaitLoop(void *data) override;
 #if wxUSE_TIMER
@@ -65,7 +65,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 struct wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-    virtual wxEventLoopBase *CreateEventLoop();
+    virtual std::unique_ptr<wxEventLoopBase> CreateEventLoop();
     virtual void *BeforeChildWaitLoop() { return NULL; }
     virtual void AfterChildWaitLoop([[maybe_unused]] void *data) { }
 #if wxUSE_TIMER
@@ -95,7 +95,7 @@ struct wxGUIAppTraits : public wxGUIAppTraitsBase
 
 struct wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-    virtual wxEventLoopBase *CreateEventLoop();
+    virtual std::unique_ptr<wxEventLoopBase> CreateEventLoop();
     virtual void *BeforeChildWaitLoop() { return NULL; }
     virtual void AfterChildWaitLoop(void*) { }
 #if wxUSE_TIMER
