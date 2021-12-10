@@ -2,7 +2,6 @@ set(CORE_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 
 set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/accelcmn.cpp
-    ${CORE_SRC_DIR}/common/accesscmn.cpp
     ${CORE_SRC_DIR}/common/anidecod.cpp
     ${CORE_SRC_DIR}/common/appcmn.cpp
     ${CORE_SRC_DIR}/common/artprov.cpp
@@ -13,7 +12,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/bookctrl.cpp
     ${CORE_SRC_DIR}/common/btncmn.cpp
     ${CORE_SRC_DIR}/common/cairo.cpp
-    ${CORE_SRC_DIR}/common/checkboxcmn.cpp
     ${CORE_SRC_DIR}/common/checklstcmn.cpp
     ${CORE_SRC_DIR}/common/choiccmn.cpp
     ${CORE_SRC_DIR}/common/clipcmn.cpp
@@ -31,7 +29,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/dcbufcmn.cpp
     ${CORE_SRC_DIR}/common/dcgraph.cpp
     ${CORE_SRC_DIR}/common/dcsvg.cpp
-    ${CORE_SRC_DIR}/common/dirctrlcmn.cpp
     ${CORE_SRC_DIR}/common/dlgcmn.cpp
     ${CORE_SRC_DIR}/common/dobjcmn.cpp
     ${CORE_SRC_DIR}/common/docmdi.cpp
@@ -58,7 +55,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/graphcmn.cpp
     ${CORE_SRC_DIR}/common/headercolcmn.cpp
     ${CORE_SRC_DIR}/common/headerctrlcmn.cpp
-    ${CORE_SRC_DIR}/common/helpbase.cpp
     ${CORE_SRC_DIR}/common/iconbndl.cpp
     ${CORE_SRC_DIR}/common/imagfill.cpp
     ${CORE_SRC_DIR}/common/layout.cpp
@@ -84,17 +80,14 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/rearrangectrl.cpp
     ${CORE_SRC_DIR}/common/rendcmn.cpp
     ${CORE_SRC_DIR}/common/rgncmn.cpp
-    ${CORE_SRC_DIR}/common/scrolbarcmn.cpp
     ${CORE_SRC_DIR}/common/settcmn.cpp
     ${CORE_SRC_DIR}/common/sizer.cpp
     ${CORE_SRC_DIR}/common/slidercmn.cpp
-    ${CORE_SRC_DIR}/common/spinbtncmn.cpp
     ${CORE_SRC_DIR}/common/spinctrlcmn.cpp
     ${CORE_SRC_DIR}/common/srchcmn.cpp
     ${CORE_SRC_DIR}/common/statbar.cpp
     ${CORE_SRC_DIR}/common/statbmpcmn.cpp
     ${CORE_SRC_DIR}/common/statboxcmn.cpp
-    ${CORE_SRC_DIR}/common/statlinecmn.cpp
     ${CORE_SRC_DIR}/common/stattextcmn.cpp
     ${CORE_SRC_DIR}/common/stockitem.cpp
     ${CORE_SRC_DIR}/common/tbarbase.cpp
