@@ -1762,7 +1762,11 @@ class wxMouseEvent : public wxEvent,
                                       public wxMouseState
 {
 public:
-    wxMouseEvent(wxEventType mouseType = wxEVT_NULL);
+    wxMouseEvent(wxEventType mouseType = wxEVT_NULL)
+    {
+        m_eventType = mouseType;
+    }
+
     wxMouseEvent(const wxMouseEvent& event)
         : wxEvent(event),
           wxMouseState(event)
@@ -1879,17 +1883,17 @@ public:
     }
 
 public:
-    int           m_clickCount;
+    int           m_clickCount{-1};
 
-    int           m_wheelRotation;
-    int           m_wheelDelta;
-    int           m_linesPerAction;
-    int           m_columnsPerAction;
+    int           m_wheelRotation{0};
+    int           m_wheelDelta{0};
+    int           m_linesPerAction{0};
+    int           m_columnsPerAction{0};
 
-    float         m_magnification;
-    wxMouseWheelAxis m_wheelAxis;
+    float         m_magnification{0.0F};
+    wxMouseWheelAxis m_wheelAxis{wxMouseWheelAxis::Vertical};
 
-    bool          m_wheelInverted;
+    bool          m_wheelInverted{false};
 
 protected:
     void Assign(const wxMouseEvent& evt);

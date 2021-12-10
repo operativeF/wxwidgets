@@ -137,15 +137,6 @@
     #endif /* va_copy/!va_copy */
 #endif /* wxVaCopy */
 
-#ifndef HAVE_WOSTREAM
-    /*
-        Cygwin is the only platform which doesn't have std::wostream
-     */
-    #if !defined(__CYGWIN__)
-        #define HAVE_WOSTREAM
-    #endif
-#endif /* HAVE_WOSTREAM */
-
 /*  ---------------------------------------------------------------------------- */
 /*  portable calling conventions macros */
 /*  ---------------------------------------------------------------------------- */

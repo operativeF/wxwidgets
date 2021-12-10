@@ -177,8 +177,6 @@ std::ostream& operator<<(std::ostream& os, const wxScopedWCharBuffer& str)
     return os << wxConvWhateverWorks.cWC2MB(str.data());
 }
 
-#if defined(HAVE_WOSTREAM)
-
 std::wostream& operator<<(std::wostream& wos, const wxString& str)
 {
     return wos << str.wc_str();
@@ -193,8 +191,6 @@ std::wostream& operator<<(std::wostream& wos, const wxScopedWCharBuffer& str)
 {
     return wos << str.data();
 }
-
-#endif  // defined(HAVE_WOSTREAM)
 
 // ===========================================================================
 // wxString class core

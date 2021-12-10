@@ -518,30 +518,6 @@ wxScrollWinEvent::wxScrollWinEvent(wxEventType commandType,
 // wxMouseEvent
 // ----------------------------------------------------------------------------
 
-wxMouseEvent::wxMouseEvent(wxEventType commandType)
-{
-    m_eventType = commandType;
-
-    m_x = 0;
-    m_y = 0;
-
-    m_leftDown = false;
-    m_middleDown = false;
-    m_rightDown = false;
-    m_aux1Down = false;
-    m_aux2Down = false;
-
-    m_clickCount = -1;
-
-    m_wheelAxis = wxMouseWheelAxis::Vertical;
-    m_wheelRotation = 0;
-    m_wheelDelta = 0;
-    m_wheelInverted = false;
-    m_linesPerAction = 0;
-    m_columnsPerAction = 0;
-    m_magnification = 0.0f;
-}
-
 void wxMouseEvent::Assign(const wxMouseEvent& event)
 {
     wxEvent::operator=(event);

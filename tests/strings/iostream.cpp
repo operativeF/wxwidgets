@@ -31,9 +31,7 @@ TEST_CASE("Out")
     s << wxString("hello");
     ASSERT_OSTREAM_EQUAL("hello", s);
 
-#if defined(HAVE_WOSTREAM)
     std::wostringstream ws;
     ws << wxString("bye");
     ASSERT_WOSTREAM_EQUAL(L"bye", ws);
-#endif
 }

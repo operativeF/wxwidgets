@@ -3969,13 +3969,9 @@ std::ostream& operator<<(std::ostream&, const wxScopedCharBuffer&);
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
 std::ostream& operator<<(std::ostream&, const wxScopedWCharBuffer&);
 
-#if defined(HAVE_WOSTREAM)
-
 std::wostream& operator<<(std::wostream&, const wxString&);
 std::wostream& operator<<(std::wostream&, const wxCStrData&);
 std::wostream& operator<<(std::wostream&, const wxScopedWCharBuffer&);
-
-#endif  // defined(HAVE_WOSTREAM)
 
 // ---------------------------------------------------------------------------
 // wxCStrData implementation
