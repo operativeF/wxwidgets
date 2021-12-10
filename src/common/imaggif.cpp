@@ -12,11 +12,12 @@ module;
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/utils.h"
-#include "wx/gifdecod.h"
 #include "wx/stream.h"
 #include "wx/scopedarray.h"
 
 module WX.Image.GIF;
+
+import WX.Image.Decoder.GIF;
 
 #if wxUSE_IMAGE && wxUSE_GIF
 

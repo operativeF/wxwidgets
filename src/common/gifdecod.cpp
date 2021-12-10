@@ -7,14 +7,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS && wxUSE_GIF
+module;
 
+#include "wx/filefn.h"
 #include "wx/gdicmn.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 
 #include <chrono>
+
+module WX.Image.Decoder.GIF;
 
 import WX.Image;
 
@@ -23,6 +26,10 @@ import WX.Utils.Cast;
 import <array>;
 import <vector>;
 import <tuple>;
+
+using namespace std::chrono_literals;
+
+#if wxUSE_STREAMS && wxUSE_GIF
 
 enum
 {

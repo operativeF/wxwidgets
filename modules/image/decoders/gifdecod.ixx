@@ -7,21 +7,26 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_GIFDECOD_H_
-#define _WX_GIFDECOD_H_
-
-#if wxUSE_STREAMS && wxUSE_GIF
+module;
 
 #include "wx/stream.h"
 #include "wx/animdecod.h"
 
 #include <chrono>
+
+export module WX.Image.Decoder.GIF;
+
 import <vector>;
+
+#if wxUSE_STREAMS && wxUSE_GIF
+
+using namespace std::chrono_literals;
+
+export
+{
 
 // internal utility used to store a frame in 8bit-per-pixel format
 class wxImage;
-
-using namespace std::chrono_literals;
 
 // internal class for storing GIF image data
 struct GIFImage
@@ -127,6 +132,6 @@ private:
     unsigned int  m_lastbyte{};       // last byte read
 };
 
-#endif // wxUSE_STREAMS && wxUSE_GIF
+} // export
 
-#endif // _WX_GIFDECOD_H_
+#endif // wxUSE_STREAMS && wxUSE_GIF

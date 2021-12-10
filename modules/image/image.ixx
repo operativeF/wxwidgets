@@ -17,6 +17,7 @@ export import WX.Image.XPM;
 export import WX.Image.Base;
 
 export import WX.Image.Decoder.ANI;
+export import WX.Image.Decoder.GIF;
 
 export
 {

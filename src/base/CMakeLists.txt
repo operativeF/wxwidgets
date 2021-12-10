@@ -242,10 +242,12 @@ set(IMAGE_HANDLERS_SRC
 
 set(IMAGE_DECODERS_IXX
     ${CMAKE_SOURCE_DIR}/modules/image/decoders/anidecod.ixx
+    ${CMAKE_SOURCE_DIR}/modules/image/decoders/gifdecod.ixx
 )
 
 set(IMAGE_DECODERS_SRC
-    ${CMAKE_SOURCE_DIR}/modules/image/decoders/anidecod.ixx
+    ${CMAKE_SOURCE_DIR}/src/common/anidecod.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/gifdecod.cpp
 )
 
 set(PRINTER_IXX

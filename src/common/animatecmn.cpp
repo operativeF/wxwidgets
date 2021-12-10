@@ -18,8 +18,6 @@
 #include "wx/animate.h"
 #include "wx/log.h"
 
-#include "wx/gifdecod.h"
-
 #include "wx/private/animate.h"
 
 import WX.Image;
