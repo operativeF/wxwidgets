@@ -454,6 +454,28 @@ enum wxKeyType
     wxKEY_STRING
 };
 
+// Hatch styles used by both pen and brush styles.
+//
+// NB: Do not use these constants directly, they're for internal use only, use
+//     wxBRUSHSTYLE_XXX_HATCH and wxPENSTYLE_XXX_HATCH instead.
+enum wxHatchStyle
+{
+    wxHATCHSTYLE_INVALID = -1,
+
+    /*
+        The value of the first style is chosen to fit with
+        wxDeprecatedGUIConstants values below, don't change it.
+     */
+    wxHATCHSTYLE_FIRST = 111,
+    wxHATCHSTYLE_BDIAGONAL = wxHATCHSTYLE_FIRST,
+    wxHATCHSTYLE_CROSSDIAG,
+    wxHATCHSTYLE_FDIAGONAL,
+    wxHATCHSTYLE_CROSS,
+    wxHATCHSTYLE_HORIZONTAL,
+    wxHATCHSTYLE_VERTICAL,
+    wxHATCHSTYLE_LAST = wxHATCHSTYLE_VERTICAL
+};
+
 /*  ---------------------------------------------------------------------------- */
 /*  standard IDs */
 /*  ---------------------------------------------------------------------------- */
@@ -652,6 +674,39 @@ enum wxStandardID
 
     wxID_HIGHEST = 5999
 };
+
+/*  ---------------------------------------------------------------------------- */
+/*  UpdateWindowUI flags */
+/*  ---------------------------------------------------------------------------- */
+
+enum wxUpdateUI
+{
+    wxUPDATE_UI_NONE          = 0x0000,
+    wxUPDATE_UI_RECURSE       = 0x0001,
+    wxUPDATE_UI_FROMIDLE      = 0x0002 /*  Invoked from On(Internal)Idle */
+};
+
+/*  ---------------------------------------------------------------------------- */
+/*  Possible SetSize flags */
+/*  ---------------------------------------------------------------------------- */
+
+/*  Use internally-calculated width if -1 */
+inline constexpr auto wxSIZE_AUTO_WIDTH       = 0x0001;
+/*  Use internally-calculated height if -1 */
+inline constexpr auto wxSIZE_AUTO_HEIGHT      = 0x0002;
+/*  Use internally-calculated width and height if each is -1 */
+inline constexpr auto wxSIZE_AUTO             = (wxSIZE_AUTO_WIDTH|wxSIZE_AUTO_HEIGHT);
+/*  Ignore missing (-1) dimensions (use existing). */
+/*  For readability only: test for wxSIZE_AUTO_WIDTH/HEIGHT in code. */
+inline constexpr auto wxSIZE_USE_EXISTING     = 0x0000;
+/*  Allow -1 as a valid position */
+inline constexpr auto wxSIZE_ALLOW_MINUS_ONE  = 0x0004;
+/*  Don't do parent client adjustments (for implementation only) */
+inline constexpr auto wxSIZE_NO_ADJUSTMENTS   = 0x0008;
+/*  Change the window position even if it seems to be already correct */
+inline constexpr auto wxSIZE_FORCE            = 0x0010;
+/*  Emit size event even if size didn't change */
+inline constexpr auto wxSIZE_FORCE_EVENT      = 0x0020;
 
 /*  ---------------------------------------------------------------------------- */
 /*  wxWindowID type                                                              */
