@@ -11,8 +11,6 @@
 
 #include "testprec.h"
 
-#include "wx/defs.h"
-
 // just some classes using wxRTTI for wxStaticCast() test
 #include "wx/tarstrm.h"
 #include "wx/zipstrm.h"

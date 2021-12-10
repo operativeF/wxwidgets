@@ -12,8 +12,6 @@
 #ifndef _WX_FILEH__
 #define _WX_FILEH__
 
-#include  "wx/defs.h"
-
 #if wxUSE_FILE
 
 #include  "wx/string.h"
