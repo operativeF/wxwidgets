@@ -14,9 +14,6 @@
 #define _WX_TEXTFILE_H
 
 #include "wx/textbuf.h"
-
-#if wxUSE_TEXTFILE
-
 #include "wx/file.h"
 
 import <string>;
@@ -47,14 +44,6 @@ private:
     wxFile m_file;
 };
 
-#else // !wxUSE_TEXTFILE
-
-// old code relies on the static methods of wxTextFile being always available
-// and they still are available in wxTextBuffer (even if !wxUSE_TEXTBUFFER), so
-// make it possible to use them in a backwards compatible way
-using wxTextFile = wxTextBuffer;
-
-#endif // wxUSE_TEXTFILE/!wxUSE_TEXTFILE
 
 #endif // _WX_TEXTFILE_H
 
