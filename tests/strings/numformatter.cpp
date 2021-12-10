@@ -99,15 +99,15 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongToString")
     if ( !CanRunTest() )
         return;
 
-    CHECK( wxNumberFormatter::ToString(wxLL(         1)) ==           "1" );
-    CHECK( wxNumberFormatter::ToString(wxLL(        12)) ==          "12" );
-    CHECK( wxNumberFormatter::ToString(wxLL(       123)) ==         "123" );
-    CHECK( wxNumberFormatter::ToString(wxLL(      1234)) ==       "1,234" );
-    CHECK( wxNumberFormatter::ToString(wxLL(     12345)) ==      "12,345" );
-    CHECK( wxNumberFormatter::ToString(wxLL(    123456)) ==     "123,456" );
-    CHECK( wxNumberFormatter::ToString(wxLL(   1234567)) ==   "1,234,567" );
-    CHECK( wxNumberFormatter::ToString(wxLL(  12345678)) ==  "12,345,678" );
-    CHECK( wxNumberFormatter::ToString(wxLL( 123456789)) == "123,456,789" );
+    CHECK( wxNumberFormatter::ToString(        1LL ==           "1" );
+    CHECK( wxNumberFormatter::ToString(       12LL ==          "12" );
+    CHECK( wxNumberFormatter::ToString(      123LL ==         "123" );
+    CHECK( wxNumberFormatter::ToString(     1234LL ==       "1,234" );
+    CHECK( wxNumberFormatter::ToString(    12345LL ==      "12,345" );
+    CHECK( wxNumberFormatter::ToString(   123456LL ==     "123,456" );
+    CHECK( wxNumberFormatter::ToString(  1234567LL ==   "1,234,567" );
+    CHECK( wxNumberFormatter::ToString( 12345678LL ==  "12,345,678" );
+    CHECK( wxNumberFormatter::ToString(123456789LL == "123,456,789" );
 }
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
@@ -248,7 +248,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongFromString")
     CHECK( l == -123 );
 
     CHECK( wxNumberFormatter::FromString("9223372036854775807", &l) );
-    CHECK( l == wxINT64_MAX );
+    CHECK( l == std::numeric_limits<std::int64_t>::max()  );
 
     CHECK_FALSE( wxNumberFormatter::FromString("9223372036854775808", &l) );
 }
@@ -289,13 +289,13 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::ULongLongFromString")
     CHECK( u == 1234567 );
 
     CHECK( wxNumberFormatter::FromString("9223372036854775807", &u) );
-    CHECK( u == static_cast<wxULongLong_t>(wxINT64_MAX) );
+    CHECK( u == static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max()) );
 
     CHECK( wxNumberFormatter::FromString("9223372036854775808", &u) );
-    CHECK( u == static_cast<wxULongLong_t>(wxINT64_MAX) + 1 );
+    CHECK( u == static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max() ) + 1 );
 
     CHECK( wxNumberFormatter::FromString("18446744073709551615", &u) );
-    CHECK( u == wxUINT64_MAX );
+    CHECK( u == std::numeric_limits<std::uint64_t>::max() );
 
     CHECK_FALSE( wxNumberFormatter::FromString("18446744073709551616", &u) );
 }

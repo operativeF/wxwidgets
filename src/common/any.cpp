@@ -233,15 +233,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);
 
 //
 // Define integer minimum and maximum as helpers
-#ifdef wxLongLong_t
-    constexpr int64_t UseIntMin  = wxINT64_MIN;
-    constexpr int64_t UseIntMax  = wxINT64_MAX;
-    constexpr uint64_t UseUintMax = wxUINT64_MAX;
-#else
-    #define UseIntMin  (LONG_MIN)
-    #define UseIntMax  (LONG_MAX)
-    #define UseUintMax (ULONG_MAX)
-#endif
+constexpr std::int64_t UseIntMin  = std::numeric_limits<std::int64_t>::min();
+constexpr std::int64_t UseIntMax  = std::numeric_limits<std::int64_t>::max();
+constexpr std::uint64_t UseUintMax = std::numeric_limits<std::uint64_t>::max();
 
 
 constexpr double UseIntMinF  = static_cast<double>(UseIntMin);

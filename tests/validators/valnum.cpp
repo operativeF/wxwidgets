@@ -108,9 +108,9 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL")
 
     SUBCASE("LLONG_MAX")
     {
-        m_text->ChangeValue("9223372036854775807"); // == LLONG_MAX
+        m_text->ChangeValue("9223372036854775807"); // == int64_t max
         REQUIRE( valULL.TransferFromWindow() );
-        CHECK( value == static_cast<wxULongLong_t>(wxINT64_MAX) );
+        CHECK( value == static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max() ) );
 
         REQUIRE( valULL.TransferToWindow() );
         CHECK( m_text->GetValue() == "9223372036854775807" );
@@ -118,9 +118,9 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL")
 
     SUBCASE("LLONG_MAX+1")
     {
-        m_text->ChangeValue("9223372036854775808"); // == LLONG_MAX + 1
+        m_text->ChangeValue("9223372036854775808"); // == int64_t max + 1
         REQUIRE( valULL.TransferFromWindow() );
-        CHECK( value == static_cast<wxULongLong_t>(wxINT64_MAX) + 1 );
+        CHECK( value == static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max() ) + 1 );
 
         REQUIRE( valULL.TransferToWindow() );
         CHECK( m_text->GetValue() == "9223372036854775808" );
@@ -128,17 +128,17 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL")
 
     SUBCASE("ULLONG_MAX")
     {
-        m_text->ChangeValue("18446744073709551615"); // == ULLONG_MAX
+        m_text->ChangeValue("18446744073709551615"); // == uint64_t max
         REQUIRE( valULL.TransferFromWindow() );
-        CHECK( value == wxUINT64_MAX );
+        CHECK( value == std::numeric_limits<std::uint64_t>::max() );
 
         REQUIRE( valULL.TransferToWindow() );
         CHECK( m_text->GetValue() == "18446744073709551615" );
     }
 
-    SUBCASE("ULLONG_MAX+1")
+    SUBCASE("ULLONG_MAX + 1")
     {
-        m_text->ChangeValue("18446744073709551616"); // == ULLONG_MAX + 1
+        m_text->ChangeValue("18446744073709551616"); // == uint64_t max + 1
         CHECK( !valULL.TransferFromWindow() );
     }
 }

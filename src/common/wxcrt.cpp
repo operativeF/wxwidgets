@@ -952,7 +952,7 @@ static wxLongLong_t wxCRT_DoStrtoll(const T* nptr, T** endptr, int base)
 
     if ( sign == wxT('-') )
     {
-        if (uval <= (wxULongLong_t)wxINT64_MAX + 1)
+        if (uval <= (wxULongLong_t)std::numeric_limits<std::int64_t>::max() + 1)
         {
             val = -(wxLongLong_t)uval;
         }
@@ -961,7 +961,7 @@ static wxLongLong_t wxCRT_DoStrtoll(const T* nptr, T** endptr, int base)
             errno = ERANGE;
         }
     }
-    else if ( uval <= wxINT64_MAX )
+    else if ( uval <= std::numeric_limits<std::int64_t>::max()  )
     {
         val = uval;
     }

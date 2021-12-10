@@ -213,7 +213,7 @@ wxLongLong wxGetUTCTimeUSec()
     // 1970-01-01.
     wxLongLong t(ft.dwHighDateTime, ft.dwLowDateTime);
     t /= 10;
-    t -= wxLL(11644473600000000); // Unix - Windows epochs difference in us.
+    t -= 11644473600000000LL; // Unix - Windows epochs difference in us.
     return t;
 #else // non-MSW
 
@@ -246,7 +246,7 @@ wxLongLong wxGetUTCTimeMillis()
     // transform them to ms since 1970-01-01.
     wxLongLong t(ft.dwHighDateTime, ft.dwLowDateTime);
     t /= 10000;
-    t -= wxLL(11644473600000); // Unix - Windows epochs difference in ms.
+    t -= 11644473600000LL; // Unix - Windows epochs difference in ms.
     return t;
 #else // !WX_WINDOWS
     wxLongLong val = MILLISECONDS_PER_SECOND;

@@ -49,13 +49,13 @@ TEST_CASE("wxConfig::ReadWriteLocal")
     config->Write("bool1", true);
 
     // See comment in regconf.cpp.
-    const wxLongLong_t val64 = wxLL(0x8000000000000008);
+    const std::int64_t val64 = 0x8000000000000008;
     config->Write("ll", val64);
 
-    const wxULongLong_t uval64 = wxULL(0x9000000000000009);
+    const std::uint64_t uval64 = 0x9000000000000009;
     config->Write("ull", uval64);
 
-    config->Write("size", size_t(UINT_MAX));
+    config->Write("size", size_t(std::numerical_limits<unsigned int>::max()));
 #ifdef TEST_WXCOLOUR
     // FIXME: Add wxColour to stringable write
     //config->Write("color1", wxColour(11,22,33,44));

@@ -318,7 +318,7 @@ TEST_CASE_METHOD(VsnprintfTestCase, "Vsnprintf::LongLong", "[vsnprintf]")
 
 #ifdef WX_WINDOWS
     CMP("123456789", "%I64d", (wxLongLong_t)123456789);
-    CMP("123456789abcdef", "%I64x", wxLL(0x123456789abcdef));
+    CMP("123456789abcdef", "%I64x", 0x123456789abcdef);
 #endif
 }
 #endif

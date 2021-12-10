@@ -41,10 +41,10 @@ TEST_CASE("wxRegConfig::ReadWrite")
 
     CHECK( config->Write("int32", 1234567) );
 
-    // Note that type of wxLL(0x8000000000000008) literal is somehow unsigned
+    // Note that type of 0x8000000000000008 literal is somehow unsigned
     // long long with MinGW, not sure if it's a bug or not, but work around it
     // by specifying the type explicitly.
-    const wxLongLong_t val64 = wxLL(0x8000000000000008);
+    const wxLongLong_t val64 = 0x8000000000000008;
     CHECK( config->Write("int64", val64) );
 
     // test reading

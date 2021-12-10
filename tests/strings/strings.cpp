@@ -67,10 +67,10 @@ static constexpr struct ToLongData
     { wxT("922337203685477580711"), 0, Number_Invalid },
 
 #ifdef wxLongLong_t
-    { wxT("2147483648"), wxLL(2147483648), Number_LongLong },
-    { wxT("-2147483648"), wxLL(-2147483648), Number_LongLong | Number_Signed },
+    { wxT("2147483648"), 2147483648LL, Number_LongLong },
+    { wxT("-2147483648"), -2147483648LL, Number_LongLong | Number_Signed },
     { wxT("9223372036854775808"),
-      TestValue_t(wxULL(9223372036854775808)),
+      TestValue_t(9223372036854775808ULL),
       Number_LongLong | Number_Unsigned },
 #endif // wxLongLong_t
 

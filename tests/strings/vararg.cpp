@@ -116,7 +116,7 @@ TEST_CASE("LongLongPrintf")
 {
     const char * const llfmt = "%" wxLongLongFmtSpec "d";
 
-    CHECK( wxString::Format(llfmt, wxLL(17)) == "17" );
+    CHECK( wxString::Format(llfmt, 17LL) == "17" );
 
     wxLongLong ll = 1234567890;
     CHECK( wxString::Format(llfmt, ll) == "1234567890" );

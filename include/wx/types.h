@@ -180,13 +180,6 @@ typedef wxUint16 wxWord;
 #endif
 
 /* also define C99-like sized MIN/MAX constants */
-#define wxINT8_MIN CHAR_MIN
-#define wxINT8_MAX CHAR_MAX
-#define wxUINT8_MAX UCHAR_MAX
-
-#define wxINT16_MIN SHRT_MIN
-#define wxINT16_MAX SHRT_MAX
-#define wxUINT16_MAX USHRT_MAX
 
 #if SIZEOF_INT == 4
     #define wxINT32_MIN INT_MIN
@@ -198,16 +191,6 @@ typedef wxUint16 wxWord;
     #define wxUINT32_MAX ULONG_MAX
 #else
     #error "Unknown 32 bit type"
-#endif
-
-#ifdef LLONG_MAX
-    #define wxINT64_MIN LLONG_MIN
-    #define wxINT64_MAX LLONG_MAX
-    #define wxUINT64_MAX ULLONG_MAX
-#else
-    #define wxINT64_MIN (wxLL(-9223372036854775807)-1)
-    #define wxINT64_MAX wxLL(9223372036854775807)
-    #define wxUINT64_MAX wxULL(0xFFFFFFFFFFFFFFFF)
 #endif
 
 /*  64 bit */
@@ -261,9 +244,6 @@ typedef wxUint16 wxWord;
         wxLL() and wxULL() macros allow to define 64 bit constants in a
         portable way.
      */
-    #define wxLL(x) wxCONCAT(x, wxLongLongSuffix)
-    #define wxULL(x) wxCONCAT(x, wxCONCAT(u, wxLongLongSuffix))
-
     typedef wxLongLong_t wxInt64;
     typedef wxULongLong_t wxUint64;
 
@@ -274,9 +254,6 @@ typedef wxUint16 wxWord;
     #endif
 #elif wxUSE_LONGLONG
     /*  these macros allow to define 64 bit constants in a portable way */
-    #define wxLL(x) wxLongLong(x)
-    #define wxULL(x) wxULongLong(x)
-
     #define wxInt64 wxLongLong
     #define wxUint64 wxULongLong
 

@@ -158,15 +158,15 @@ static void DoTestRoundTrip(const T *values, size_t numValues)
 
 void TextStreamTestCase::TestLongLong()
 {
-    static const wxLongLong llvalues[] =
+    static const std::int64_t llvalues[] =
     {
         0,
         1,
         -1,
         0x12345678l,
         -0x12345678l,
-        wxLL(0x123456789abcdef0),
-        wxLL(-0x123456789abcdef0),
+        0x123456789abcdef0,
+        -0x123456789abcdef0,
     };
 
     DoTestRoundTrip(llvalues, WXSIZEOF(llvalues));
@@ -174,12 +174,12 @@ void TextStreamTestCase::TestLongLong()
 
 void TextStreamTestCase::TestULongLong()
 {
-    static const wxULongLong ullvalues[] =
+    static const std::uint64_t ullvalues[] =
     {
         0,
         1,
         0x12345678l,
-        wxULL(0x123456789abcdef0),
+        0x123456789abcdef0,
     };
 
     DoTestRoundTrip(ullvalues, WXSIZEOF(ullvalues));

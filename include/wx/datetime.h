@@ -464,7 +464,7 @@ public:
     // ------------------------------------------------------------------------
 
         // default ctor does not initialize the object, use Set()!
-    wxDateTime() noexcept : m_time(wxINT64_MIN) { }
+    wxDateTime() noexcept : m_time(std::numeric_limits<std::int64_t>::min()) { }
 
         // from time_t: seconds since the Epoch 00:00:00 UTC, Jan 1, 1970)
     inline wxDateTime(time_t timet);
@@ -718,7 +718,7 @@ public:
     // ------------------------------------------------------------------------
 
         // is the date valid?
-    inline bool IsValid() const { return m_time != wxLongLong(wxINT64_MIN); }
+    inline bool IsValid() const { return m_time != wxLongLong(std::numeric_limits<std::int64_t>::min()); }
 
         // get the broken down date/time representation in the given timezone
         //
