@@ -14,7 +14,6 @@
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/dynlib.h"
 
 #include "wx/msw/private.h"
@@ -22,6 +21,8 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.WinDef;
+
+import WX.Utils.Settings;
 
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,

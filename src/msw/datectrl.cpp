@@ -15,9 +15,10 @@
 
 #include "wx/intl.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/datectrl.h"
 #include "wx/dateevt.h"
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

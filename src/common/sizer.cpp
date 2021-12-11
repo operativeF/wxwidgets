@@ -14,7 +14,6 @@
 
 #include "wx/intl.h"
 #include "wx/utils.h"
-#include "wx/settings.h"
 #include "wx/button.h"
 #include "wx/statbox.h"
 #include "wx/toplevel.h"
@@ -24,6 +23,9 @@
 #include "wx/private/window.h"
 
 #include <memory>
+
+import WX.Utils.Settings;
+
 import <string>;
 import <vector>;
 

@@ -17,9 +17,10 @@
 #include "wx/msw/private.h"
 
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 
 #include "wx/msw/private/datecontrols.h"
+
+import WX.Utils.Settings;
 
 // apparently some versions of mingw define these macros erroneously
 #ifndef DateTime_GetSystemtime

@@ -17,7 +17,6 @@
 
 #include "wx/hash.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/msgdlg.h"
 #include "wx/bmpbuttn.h"
@@ -61,6 +60,8 @@
 #endif
 
 import <ctime>;
+
+import WX.Utils.Settings;
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

@@ -18,7 +18,6 @@ module;
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
 #include "wx/panel.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
 #include "wx/display.h"
@@ -45,6 +44,7 @@ import WX.AUI.DockArt;
 import WX.AUI.FloatPane;
 import WX.AUI.TabMDI;
 
+import WX.Utils.Settings;
 import WX.Image;
 import WX.Cfg.Flags;
 

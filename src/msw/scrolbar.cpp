@@ -15,9 +15,9 @@
 #include "wx/msw/private.h"
 
 #include "wx/utils.h"
-#include "wx/settings.h"
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

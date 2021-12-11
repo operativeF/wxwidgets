@@ -13,11 +13,11 @@
 #include "wx/tipwin.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 
 #include "wx/display.h"
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import <vector>;
 

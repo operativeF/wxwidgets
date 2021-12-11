@@ -18,7 +18,6 @@
 #include "wx/radiobut.h"
 #include "wx/statbox.h"
 #include "wx/textctrl.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/msgout.h"
 #include "wx/statusbr.h"
@@ -59,6 +58,8 @@
 #include "wx/platinfo.h"
 #include "wx/recguard.h"
 #include "wx/private/window.h"
+
+import WX.Utils.Settings;
 
 import WX.Cfg.Flags;
 

@@ -10,8 +10,6 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/settings.h"
-
 #include "wx/app.h"
 #include "wx/utils.h"
 #include "wx/gdicmn.h"
@@ -21,6 +19,8 @@
 
 #include "wx/fontutil.h"
 #include "wx/fontenum.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // private classes

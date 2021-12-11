@@ -18,7 +18,6 @@
 #include "wx/dataobj.h"
 #include "wx/module.h"
 
-#include "wx/settings.h"
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
@@ -37,6 +36,7 @@
 #include "wx/listimpl.cpp"
 
 import Utils.Position;
+import WX.Utils.Settings;
 
 import <cmath>;
 

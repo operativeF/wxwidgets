@@ -11,7 +11,6 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/statusbr.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
 #include "wx/control.h"
@@ -19,6 +18,8 @@
 #ifdef __WXGTK20__
     #include "wx/gtk/private.h"
 #endif
+
+import WX.Utils.Settings;
 
 // we only have to do it here when we use wxStatusBarGeneric in addition to the
 // standard wxStatusBar class, if wxStatusBarGeneric is the same as

@@ -11,12 +11,11 @@
 #if wxUSE_LISTBOOK
 
 #include "wx/listbook.h"
-
-#include "wx/settings.h"
-
 #include "wx/listctrl.h"
 #include "wx/statline.h"
 #include "wx/imaglist.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // event table

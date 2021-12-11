@@ -14,9 +14,10 @@
 
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/textctrl.h"
 #include "wx/dcbuffer.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // Some constant adjustments to make the generic more bearable

@@ -8,12 +8,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/settings.h"
 #include "wx/intl.h"
 #include "wx/dcclient.h"
 
 #include "wx/generic/tabg.h"
 #include "wx/listimpl.cpp"
+
+import WX.Utils.Settings;
 
 import <cstdio>;
 import <cstdlib>;

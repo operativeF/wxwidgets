@@ -10,10 +10,11 @@
 
 #include "wx/brush.h"
 #include "wx/pen.h"
-#include "wx/settings.h"
 #include "wx/fontenum.h"
 
 import WX.Test.Prec;
+
+import WX.Utils.Settings;
 
 import <algorithm>;
 

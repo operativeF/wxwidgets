@@ -12,13 +12,14 @@
 
 #include "wx/vlbox.h"
 
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/listbox.h"
 
 #include "wx/dcbuffer.h"
 #include "wx/selstore.h"
 #include "wx/renderer.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // event tables

@@ -15,7 +15,6 @@
 #include "wx/generic/calctrlg.h"
 
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/brush.h"
 #include "wx/combobox.h"
 #include "wx/listbox.h"
@@ -24,6 +23,8 @@
 
 #include <fmt/core.h>
 #include <fmt/compile.h>
+
+import WX.Utils.Settings;
 
 #define DEBUG_PAINT 0
 

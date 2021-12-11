@@ -15,7 +15,6 @@ module;
 #include "wx/dcclient.h"
 #include "wx/app.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/window.h"
 
 #include "wx/msw/uxtheme.h"
@@ -25,6 +24,8 @@ module WX.AUI.ToolBarArt;
 import WX.AUI.AUIBar;
 import WX.AUI.FrameManager;
 import Utils.Geometry;
+import WX.Utils.Settings;
+
 
 wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
 {

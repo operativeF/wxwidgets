@@ -19,9 +19,10 @@
 #include "wx/log.h"
 #include "wx/frame.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 
 import WX.Image;
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // wxButtonToolBarTool: our implementation of wxToolBarToolBase

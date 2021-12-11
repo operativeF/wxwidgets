@@ -11,7 +11,6 @@
 #if wxUSE_COLOURDLG
 
 #ifndef WX_PRECOMP
-    #include "wx/settings.h"
     #include "wx/utils.h"
     #include "wx/intl.h"
     #include "wx/dialog.h"
@@ -36,6 +35,8 @@
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
 #endif // wxCLRDLGG_USE_PREVIEW_WITH_ALPHA
+
+import WX.Utils.Settings;
 
 #define wxID_ADD_CUSTOM     3000
 #if wxUSE_SLIDER

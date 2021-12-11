@@ -8,17 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_OWNER_DRAWN
 
 #include "wx/ownerdrw.h"
 #include "wx/font.h"
 #include "wx/colour.h"
 #include "wx/dcmemory.h"
-#include "wx/settings.h"
 #include "wx/utils.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // constants for base class

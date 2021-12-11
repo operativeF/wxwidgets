@@ -11,13 +11,13 @@
 module;
 
 #include "wx/scrolwin.h"
-#include "wx/settings.h"
 
 export module WX.Generic.Grid;
 
 import WX.Grid.CellCoords;
 import WX.Grid.Event;
 
+import WX.Utils.Settings;
 import WX.Utils.Cast;
 import Utils.Geometry;
 

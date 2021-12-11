@@ -14,12 +14,13 @@
 #include "wx/msw/private.h"
 
 #include "wx/log.h"
-#include "wx/settings.h"
 
 #include "wx/msw/dcclient.h"
 
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

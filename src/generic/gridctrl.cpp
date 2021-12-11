@@ -12,7 +12,6 @@ module;
 
 #include "wx/textctrl.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/checkbox.h"
 
@@ -27,6 +26,8 @@ module;
 module WX.Grid.Ctrl;
 
 import WX.Grid.Editors;
+
+import WX.Utils.Settings;
 
 import <charconv>;
 

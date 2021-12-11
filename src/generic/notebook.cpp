@@ -15,10 +15,10 @@
 #include "wx/string.h"
 #include "wx/log.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
-
 #include  "wx/imaglist.h"
 #include  "wx/generic/tabg.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // macros

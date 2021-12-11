@@ -13,7 +13,6 @@ module;
 #include "wx/control.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/bitmap.h"
 #include "wx/menu.h"
 
@@ -28,6 +27,8 @@ module WX.AUI.TabArt.Base;
 import WX.AUI.Book;
 import WX.AUI.DockArt;
 import WX.AUI.FrameManager;
+
+import WX.Utils.Settings;
 
 import <array>;
 

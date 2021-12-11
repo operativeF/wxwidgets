@@ -7,12 +7,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#include "wx/settings.h"
 #include "wx/window.h"
 #include "wx/mousemanager.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // event tables

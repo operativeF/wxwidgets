@@ -12,10 +12,11 @@
 
 #include "wx/choicebk.h"
 
-#include "wx/settings.h"
 #include "wx/choice.h"
 #include "wx/sizer.h"
 #include "wx/imaglist.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // event table

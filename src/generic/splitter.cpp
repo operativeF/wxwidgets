@@ -22,14 +22,13 @@
 #include "wx/dialog.h"
 #include "wx/frame.h"
 
-#include "wx/settings.h"
-
-
 #ifdef __WXOSX__
     #include "wx/osx/private/available.h"
 #endif
 
 #include "wx/renderer.h"
+
+import WX.Utils.Settings;
 
 import <limits>;
 import <string>;

@@ -12,13 +12,14 @@
 
 #include "wx/msw/private.h"
 #include "wx/radiobut.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/private/window.h"
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"
 
 import WX.WinDef;
+
+import WX.Utils.Settings;
 
 bool wxRadioButton::Create(wxWindow *parent,
                            wxWindowID id,

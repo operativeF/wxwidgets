@@ -19,7 +19,6 @@
 
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/bitmap.h"
 #include "wx/region.h"
 #include "wx/dcmemory.h"
@@ -42,6 +41,7 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import WX.Image;
 import WX.WinDef;

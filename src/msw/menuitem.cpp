@@ -18,7 +18,6 @@
 #include "wx/dcmemory.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"
-#include "wx/settings.h"
 #include "wx/window.h"
 #include "wx/accel.h"
 #include "wx/log.h"
@@ -37,6 +36,7 @@
 import WX.WinDef;
 import WX.Win.UniqueHnd;
 import Utils.Strings;
+import WX.Utils.Settings;
 
 import <string>;
 

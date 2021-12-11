@@ -14,7 +14,6 @@ module;
 
 #include "wx/utils.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/textctrl.h"
 #include "wx/checkbox.h"
@@ -33,6 +32,8 @@ module;
 module WX.Grid.Editors;
 
 import WX.Grid.Selection;
+
+import WX.Utils.Settings;
 
 // Required for wxIs... functions
 import <cctype>;

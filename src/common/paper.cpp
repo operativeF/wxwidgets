@@ -15,7 +15,6 @@
 #endif // MSW
 
 #include "wx/utils.h"
-#include "wx/settings.h"
 #include "wx/intl.h"
 #include "wx/module.h"
 #include "wx/paper.h"
@@ -26,6 +25,8 @@
     #endif
 #endif
  // End WX_WINDOWS
+
+import WX.Utils.Settings;
 
 /*
  * Paper size database for all platforms

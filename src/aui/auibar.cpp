@@ -14,7 +14,6 @@ module;
 #include "wx/dcclient.h"
 #include "wx/dcbuffer.h"
 #include "wx/sizer.h"
-#include "wx/settings.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -23,6 +22,7 @@ module;
 module WX.AUI.AUIBar;
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import WX.AUI.FrameManager;
 

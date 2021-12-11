@@ -13,7 +13,6 @@
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/ctrlsub.h"
 
 #include "wx/renderer.h"
@@ -26,6 +25,8 @@
 #include "wx/msw/private.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Utils.Settings;
 
 import WX.Cfg.Flags;
 import WX.WinDef;

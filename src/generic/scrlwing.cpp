@@ -16,7 +16,6 @@
 #include "wx/dcclient.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
-#include "wx/settings.h"
 
 #ifdef __WXMAC__
 #include "wx/scrolbar.h"
@@ -35,6 +34,7 @@
 #endif
 
 import Utils.Position;
+import WX.Utils.Settings;
 
 /*
     TODO PROPERTIES

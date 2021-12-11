@@ -14,8 +14,9 @@
 #include "wx/log.h"
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/combo.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // XTI

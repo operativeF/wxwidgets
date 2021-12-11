@@ -15,10 +15,10 @@
 #include "wx/debug.h"
 #include "wx/ctrlsub.h"
 
-#include "wx/settings.h"
-
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
+
+import WX.Utils.Settings;
 
 #if defined(wxBITMAPCOMBOBOX_OWNERDRAWN_BASED)
 

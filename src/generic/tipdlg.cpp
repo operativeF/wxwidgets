@@ -20,10 +20,11 @@
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/sizer.h"
-#include "wx/settings.h"
 #include "wx/statline.h"
 #include "wx/artprov.h"
 #include "wx/tipdlg.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // constants

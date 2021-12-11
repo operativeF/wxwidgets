@@ -16,10 +16,11 @@
 
 #include "wx/dialog.h"
 #include "wx/frame.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
 #include "wx/laywin.h"
+
+import WX.Utils.Settings;
 
 import <string>;
 

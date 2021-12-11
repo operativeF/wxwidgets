@@ -12,7 +12,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/module.h"
 #include "wx/sizer.h"
@@ -23,6 +22,7 @@
 #include "wx/wfstream.h"
 #include "wx/infobar.h"
 
+import WX.Utils.Settings;
 
 // default font size of normal text (HTML font size 0) for printing, in points:
 #define DEFAULT_PRINT_FONT_SIZE   12

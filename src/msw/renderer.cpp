@@ -14,7 +14,6 @@
 #include "wx/window.h"
 #include "wx/control.h"     // for wxControl::Ellipsize()
 #include "wx/dc.h"
-#include "wx/settings.h"
 
 #include "wx/dcgraph.h"
 #include "wx/scopeguard.h"
@@ -22,6 +21,8 @@
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/dynlib.h"
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

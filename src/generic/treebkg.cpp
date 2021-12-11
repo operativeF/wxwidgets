@@ -11,9 +11,10 @@
 #if wxUSE_TREEBOOK
 
 #include "wx/treebook.h"
-#include "wx/settings.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // various wxWidgets macros

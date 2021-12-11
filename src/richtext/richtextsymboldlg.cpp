@@ -16,7 +16,6 @@
 #include "wx/stattext.h"
 #include "wx/combobox.h"
 #include "wx/button.h"
-#include "wx/settings.h"
 #include "wx/icon.h"
 #include "wx/listbox.h"
 
@@ -24,6 +23,8 @@
 
 // Only for cached font name
 #include "wx/richtext/richtextctrl.h"
+
+import WX.Utils.Settings;
 
 /* Microsoft Unicode subset numbering
  */

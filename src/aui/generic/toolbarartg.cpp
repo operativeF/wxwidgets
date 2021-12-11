@@ -3,7 +3,6 @@ module;
 #include "wx/font.h"
 #include "wx/menu.h"
 #include "wx/pen.h"
-#include "wx/settings.h"
 #include "wx/window.h"
 
 module WX.AUI.ToolBarArt.Generic;
@@ -12,6 +11,8 @@ import WX.AUI.AUIBar;
 import WX.AUI.DockArt; // FIXME: imported for wxAuiBitmapFromBits utility function
 import WX.AUI.FrameManager;
 import WX.AUI.ToolBarArt.Base;
+
+import WX.Utils.Settings;
 
 namespace
 {

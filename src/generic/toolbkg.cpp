@@ -11,7 +11,6 @@
 #if wxUSE_TOOLBOOK
 
 #include "wx/icon.h"
-#include "wx/settings.h"
 #include "wx/toolbar.h"
 #include "wx/imaglist.h"
 #include "wx/sysopt.h"
@@ -20,6 +19,8 @@
 #if defined(__WXMAC__) && wxUSE_TOOLBAR && wxUSE_BMPBUTTON
 #include "wx/generic/buttonbar.h"
 #endif
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // event table

@@ -28,7 +28,6 @@
 #include "wx/listbox.h"
 #include "wx/button.h"
 #include "wx/msgdlg.h"
-#include "wx/settings.h"
 #include "wx/statbox.h"
 #include "wx/sizer.h"
 #include "wx/intl.h"
@@ -96,6 +95,7 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import WX.Cfg.Flags;
 

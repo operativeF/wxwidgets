@@ -15,7 +15,6 @@
 #include "wx/frame.h"
 #include "wx/dcmemory.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 #include "wx/dataobj.h"
 #include "wx/statusbr.h"
 
@@ -25,6 +24,8 @@
 #include "wx/recguard.h"
 
 #include "wx/listimpl.cpp"
+
+import WX.Utils.Settings;
 
 // uncomment this line to visually show the extent of the selection
 //#define DEBUG_HTML_SELECTION

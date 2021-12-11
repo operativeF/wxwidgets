@@ -30,7 +30,6 @@
 #include "wx/log.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/dcscreen.h"
 #include "wx/frame.h"
@@ -58,6 +57,7 @@
 
 import WX.Cfg.Flags;
 
+import WX.Utils.Settings;
 
 //-----------------------------------------------------------------------------
 // classes

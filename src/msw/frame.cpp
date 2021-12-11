@@ -14,7 +14,6 @@
 #include "wx/frame.h"
 #include "wx/menu.h"
 #include "wx/utils.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/mdi.h"
 #include "wx/log.h"
@@ -37,6 +36,8 @@
     constexpr unsigned int wxTHBN_CLICKED = 0x1800;
     constexpr unsigned int wxMSGFLT_ADD =   0x01;
 #endif  // wxUSE_TASKBARBUTTON
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

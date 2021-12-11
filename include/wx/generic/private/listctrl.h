@@ -15,8 +15,8 @@
 #include "wx/listctrl.h"
 #include "wx/selstore.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 
+import WX.Utils.Settings;
 import Utils.Geometry;
 
 // ============================================================================

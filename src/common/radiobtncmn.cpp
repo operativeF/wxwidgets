@@ -11,8 +11,9 @@
 #if wxUSE_RADIOBTN
 
 #include "wx/radiobut.h"
-#include "wx/settings.h"
 #include "wx/dcscreen.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // wxRadioButton group navigation

@@ -10,7 +10,6 @@
 #if wxUSE_STATTEXT
 
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/validate.h"
 
 #include "wx/generic/stattextg.h"
@@ -18,6 +17,8 @@
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
+
+import WX.Utils.Settings;
 
 bool wxGenericStaticText::Create(wxWindow *parent,
                                  wxWindowID id,

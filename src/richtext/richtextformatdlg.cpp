@@ -32,7 +32,6 @@
 
 #include "wx/bookctrl.h"
 #include "wx/colordlg.h"
-#include "wx/settings.h"
 #include "wx/module.h"
 #include "wx/imaglist.h"
 
@@ -62,6 +61,8 @@
 #include "richtextliststylepage.cpp"
 #include "richtextstylepage.cpp"
 #endif
+
+import WX.Utils.Settings;
 
 #if 0 // def __WXMAC__
 #define wxRICHTEXT_USE_TOOLBOOK 1

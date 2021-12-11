@@ -15,12 +15,12 @@
 
 #include "wx/dialog.h"
 #include "wx/utils.h"
-#include "wx/settings.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 
 #include "wx/evtloop.h"
 
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

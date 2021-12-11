@@ -24,7 +24,6 @@
 #include "wx/choice.h"
 #include "wx/button.h"
 #include "wx/bmpbuttn.h"
-#include "wx/settings.h"
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
 #include "wx/stattext.h"
@@ -62,6 +61,7 @@
 #include <fmt/core.h>
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import <cmath>;
 

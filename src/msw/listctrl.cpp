@@ -15,7 +15,6 @@
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/stopwatch.h"
 #include "wx/dcclient.h"
 #include "wx/textctrl.h"
@@ -29,8 +28,9 @@
 #include "wx/msw/private.h"
 
 import WX.WinDef;
-
 import WX.Win.UniqueHnd;
+
+import WX.Utils.Settings;
 
 #include <cassert>
 import <vector>;

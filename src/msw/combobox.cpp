@@ -11,7 +11,6 @@
 #if wxUSE_COMBOBOX
 
 #include "wx/combobox.h"
-#include "wx/settings.h"
 // for wxEVT_TEXT_ENTER
 #include "wx/textctrl.h"
 
@@ -31,6 +30,8 @@
 #include "wx/msw/private.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

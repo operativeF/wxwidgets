@@ -13,7 +13,6 @@
 #include "wx/checklst.h"
 #include "wx/window.h"
 #include "wx/listbox.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/ownerdrw.h"
 
@@ -28,6 +27,8 @@
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;
+
+import WX.Utils.Settings;
 
 import <string>;
 import <vector>;

@@ -15,7 +15,6 @@
 #include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 #include "wx/listbox.h"
 #include "wx/textctrl.h"
 #include "wx/generic/treectlg.h"
@@ -27,6 +26,8 @@
 #ifdef __WXMAC__
     #include "wx/osx/private.h"
 #endif
+
+import WX.Utils.Settings;
 
 import <numeric>;
 

@@ -13,7 +13,6 @@
 
 #include "wx/app.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/crt.h"
 #include "wx/datectrl.h"
@@ -30,6 +29,7 @@
 #include <fmt/core.h>
 
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 namespace
 {

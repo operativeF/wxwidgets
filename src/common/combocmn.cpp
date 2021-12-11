@@ -68,11 +68,12 @@ wxEND_FLAGS( wxComboBoxStyle )
 #include "wx/app.h"
 #include "wx/log.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/timer.h"
 #include "wx/textctrl.h"
 
 #include "wx/tooltip.h"
+
+import WX.Utils.Settings;
 
 // constants
 // ----------------------------------------------------------------------------

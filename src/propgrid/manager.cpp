@@ -10,7 +10,6 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/settings.h"
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 #include "wx/toolbar.h"
@@ -22,6 +21,8 @@
 #define __wxPG_SOURCE_FILE__
 
 #include "wx/propgrid/manager.h"
+
+import WX.Utils.Settings;
 
 
 #define wxPG_MAN_ALTERNATE_BASE_ID          11249 // Needed for wxID_ANY madness

@@ -15,12 +15,13 @@
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
-#include "wx/settings.h"
 #include "wx/dc.h"
 #include "wx/sizer.h"
 #include "wx/dcclient.h"
 
 #include "wx/richtext/richtextctrl.h"
+
+import WX.Utils.Settings;
 
 import WX.Cfg.Flags;
 

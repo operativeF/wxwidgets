@@ -13,7 +13,6 @@
 #include "wx/statusbr.h"
 
 #include "wx/frame.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -29,6 +28,8 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

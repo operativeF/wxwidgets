@@ -21,7 +21,6 @@
 #include "wx/choice.h"
 #include "wx/checkbox.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/sizer.h"
 
 #include "wx/fontdlg.h"
@@ -30,6 +29,8 @@
 #if USE_SPINCTRL_FOR_POINT_SIZE
 #include "wx/spinctrl.h"
 #endif
+
+import WX.Utils.Settings;
 
 import <cstdio>;
 import <cstring>;

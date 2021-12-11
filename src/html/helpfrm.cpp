@@ -23,7 +23,6 @@
 #include "wx/statbox.h"
 #include "wx/radiobox.h"
 #include "wx/menu.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/textctrl.h"
 #include "wx/toolbar.h"
@@ -43,6 +42,8 @@
 #include "wx/fontenum.h"
 #include "wx/artprov.h"
 #include "wx/spinctrl.h"
+
+import WX.Utils.Settings;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlHelpFrame, wxFrame);
 

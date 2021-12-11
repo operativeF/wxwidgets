@@ -14,12 +14,12 @@
 #include "wx/dcclient.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/containr.h"
 #include "wx/textwrapper.h"
 
 #include "wx/private/markupparser.h"
 
+import WX.Utils.Settings;
 import Utils.Strings;
 
 import <algorithm>;

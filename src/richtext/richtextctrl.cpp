@@ -8,15 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RICHTEXT
 
 #include "wx/richtext/richtextctrl.h"
 #include "wx/richtext/richtextstyles.h"
 
-#include "wx/settings.h"
 #include "wx/menu.h"
 #include "wx/timer.h"
 #include "wx/textfile.h"
@@ -40,6 +36,7 @@
 #include "wx/app.h"
 WX_CHECK_BUILD_OPTIONS("wxRichTextCtrl")
 
+import WX.Utils.Settings;
 import WX.Utils.Cast;
 
 wxDEFINE_EVENT( wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );

@@ -11,7 +11,6 @@
 #include "wx/intl.h"
 #include "wx/dc.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/winpars.h"
 #include "wx/html/htmlwin.h"
@@ -19,6 +18,7 @@
 #include "wx/fontmap.h"
 #include "wx/uri.h"
 
+import WX.Utils.Settings;
 
 //-----------------------------------------------------------------------------
 // wxHtmlWinParser

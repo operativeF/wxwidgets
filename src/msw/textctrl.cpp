@@ -13,7 +13,6 @@
 #include "wx/msw/private.h"
 
 #include "wx/textctrl.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/utils.h"
 #include "wx/intl.h"
@@ -63,6 +62,8 @@
 #include <cassert>
 
 import WX.WinDef;
+
+import WX.Utils.Settings;
 
 import <stack>;
 import <string>;

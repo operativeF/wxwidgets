@@ -15,12 +15,12 @@
 #include "wx/stattext.h"
 
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 
 #include "wx/msw/private/winstyle.h"
 
 import WX.WinDef;
 
+import WX.Utils.Settings;
 import Utils.Strings;
 
 bool wxStaticText::Create(wxWindow *parent,

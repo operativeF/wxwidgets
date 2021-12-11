@@ -17,7 +17,6 @@
 #include "wx/frame.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/settings.h"
 #include "wx/window.h"
 
 #define wxUSE_IMAGE_IN_DRAGIMAGE 1
@@ -25,6 +24,8 @@
 #include "wx/generic/dragimgg.h"
 
 import WX.Image;
+
+import WX.Utils.Settings;
 
 import <cstdio>;
 

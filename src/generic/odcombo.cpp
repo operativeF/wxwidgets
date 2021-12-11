@@ -14,13 +14,15 @@
 
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/dialog.h"
 #include "wx/textctrl.h"
 
 #include "wx/combo.h"
 
 #include <chrono>
+
+import WX.Utils.Settings;
+
 import <utility>;
 
 // ============================================================================

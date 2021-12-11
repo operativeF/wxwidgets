@@ -13,7 +13,6 @@
 #include "wx/dcclient.h"
 #include "wx/dialog.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/stattext.h"
 #include "wx/sizer.h"
 #include "wx/containr.h"
@@ -26,6 +25,8 @@
 #include "wx/modalhook.h"
 
 #include "wx/display.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // XTI

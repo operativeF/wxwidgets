@@ -14,7 +14,6 @@
 
 #include "wx/listbox.h"
 
-#include "wx/settings.h"
 #include "wx/font.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
@@ -43,6 +42,7 @@
 
 import WX.WinDef;
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import <vector>;
 

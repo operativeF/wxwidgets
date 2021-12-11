@@ -13,7 +13,6 @@
 #include "wx/dc.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
-#include "wx/settings.h"
 #include "wx/textctrl.h"
 #include "wx/wxcrtvararg.h"
 
@@ -26,6 +25,9 @@
 #include "wx/propgrid/advprops.h"
 
 #include "wx/odcombo.h"
+
+import WX.Utils.Settings;
+
 
 // Drawing ARGB on standard DC is supported by OSX and GTK3
 #if defined(__WXOSX__) || defined(__WXGTK3__)

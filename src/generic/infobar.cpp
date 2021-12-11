@@ -14,7 +14,6 @@
 #include "wx/bmpbuttn.h"
 #include "wx/button.h"
 #include "wx/dcmemory.h"
-#include "wx/settings.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/sizer.h"
@@ -23,6 +22,8 @@
 #include "wx/scopeguard.h"
 
 #include <fmt/core.h>
+
+import WX.Utils.Settings;
 
 wxBEGIN_EVENT_TABLE(wxInfoBarGeneric, wxInfoBarBase)
     EVT_BUTTON(wxID_ANY, wxInfoBarGeneric::OnButton)

@@ -13,7 +13,7 @@
 #include "wx/dc.h"
 #include "wx/icon.h"
 
-#include "wx/settings.h"
+import WX.Utils.Settings;
 
 import WX.Image;
 

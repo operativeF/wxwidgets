@@ -78,7 +78,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/rearrangectrl.cpp
     ${CORE_SRC_DIR}/common/rendcmn.cpp
     ${CORE_SRC_DIR}/common/rgncmn.cpp
-    ${CORE_SRC_DIR}/common/settcmn.cpp
     ${CORE_SRC_DIR}/common/sizer.cpp
     ${CORE_SRC_DIR}/common/slidercmn.cpp
     ${CORE_SRC_DIR}/common/spinctrlcmn.cpp

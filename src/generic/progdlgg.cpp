@@ -17,10 +17,11 @@
 #include "wx/event.h"
 #include "wx/gauge.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/progdlg.h"
 #include "wx/evtloop.h"
 #include "wx/timer.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // constants

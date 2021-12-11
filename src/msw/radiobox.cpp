@@ -11,7 +11,6 @@
 #if wxUSE_RADIOBOX
 
 #include "wx/radiobox.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 
 #include "wx/msw/subwin.h"
@@ -22,6 +21,8 @@
 #endif // wxUSE_TOOLTIPS
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Utils.Settings;
 
 import WX.Win.UniqueHnd;
 

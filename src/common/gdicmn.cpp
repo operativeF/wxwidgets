@@ -21,8 +21,8 @@
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/pen.h"
-#include "wx/settings.h"
 
+import WX.Utils.Settings;
 import Utils.Geometry;
 
 import <cmath>;

@@ -21,7 +21,6 @@
 #include "wx/textctrl.h"
 #include "wx/sizer.h"
 #include "wx/statbmp.h"
-#include "wx/settings.h"
 #include "wx/wxcrtvararg.h"
 
 #if wxUSE_LOGGUI || wxUSE_LOGWINDOW
@@ -48,6 +47,8 @@
 #endif // wxUSE_LOG_DIALOG/!wxUSE_LOG_DIALOG
 
 #include "wx/time.h"
+
+import WX.Utils.Settings;
 
 import WX.Image;
 

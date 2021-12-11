@@ -16,8 +16,9 @@
 #include "wx/toolbar.h"
 #include "wx/control.h"
 #include "wx/frame.h"
-#include "wx/settings.h"
 #include "wx/menu.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros

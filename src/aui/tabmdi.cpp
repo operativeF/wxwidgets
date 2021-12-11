@@ -14,11 +14,12 @@ module;
 
 #include "wx/menu.h"
 #include "wx/intl.h"
-#include "wx/settings.h"
 #include "wx/stockitem.h" // FIXME: only included for enum value
 #include "wx/toplevel.h"
 
 module WX.AUI.TabMDI;
+
+import WX.Utils.Settings;
 
 import WX.AUI.DockArt;
 

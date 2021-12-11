@@ -18,7 +18,6 @@
 #include "wx/msw/private.h"
 
 #include "wx/log.h"
-#include "wx/settings.h"
 
 #include "wx/msw/private/winstyle.h"
 
@@ -28,6 +27,8 @@
 #include "wx/msw/uxtheme.h"
 
 #include <boost/nowide/stackstring.hpp>
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

@@ -17,12 +17,12 @@
 #include "wx/statbmp.h"
 #include "wx/bitmap.h"
 #include "wx/utils.h"       // for wxStripMenuCodes()
-#include "wx/settings.h"
 
 #include "wx/private/markupparser.h"
 
 import WX.Cfg.Flags;
 
+import WX.Utils.Settings;
 import Utils.Strings;
 
 // ============================================================================

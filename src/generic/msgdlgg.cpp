@@ -20,7 +20,6 @@
 #include "wx/icon.h"
 #include "wx/sizer.h"
 #include "wx/app.h"
-#include "wx/settings.h"
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
 #include "wx/msgdlg.h"
@@ -31,6 +30,8 @@
 #if wxUSE_STATLINE
     #include "wx/statline.h"
 #endif
+
+import WX.Utils.Settings;
 
 import <string>;
 import <string_view>;

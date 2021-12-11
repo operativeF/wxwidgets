@@ -13,7 +13,6 @@
 #include "wx/timer.h"
 #include "wx/sizer.h"
 #include "wx/statbmp.h"
-#include "wx/settings.h"
 #include "wx/panel.h"
 #include "wx/artprov.h"
 #include "wx/bmpbuttn.h"
@@ -29,6 +28,8 @@
 #include "wx/generic/private/notifmsg.h"
 #include "wx/display.h"
 #include "wx/textwrapper.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // wxNotificationMessageWindow

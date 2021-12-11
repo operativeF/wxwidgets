@@ -25,9 +25,9 @@
 #include "wx/utils.h"
 
 #include "wx/statline.h"
-#include "wx/settings.h"
 #include "wx/generic/choicdgg.h"
 
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // constants

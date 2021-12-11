@@ -16,13 +16,13 @@
 
 #include "wx/log.h"
 #include "wx/odcombo.h"
-#include "wx/settings.h"
 #include "wx/dc.h"
 
 #if wxUSE_IMAGE
     import WX.Image;
 #endif
 
+import WX.Utils.Settings;
 
 // Spacing used in control size calculation
 #ifdef __WXOSX__

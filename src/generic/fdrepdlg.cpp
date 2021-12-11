@@ -20,9 +20,10 @@
 #include "wx/radiobox.h"
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
-#include "wx/settings.h"
 
 #include "wx/fdrepdlg.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // constants

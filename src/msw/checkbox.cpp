@@ -12,7 +12,6 @@
 
 #include "wx/checkbox.h"
 #include "wx/dcclient.h"
-#include "wx/settings.h"
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/private/button.h"
@@ -21,6 +20,8 @@
 #include <cassert>
 
 import WX.WinDef;
+
+import WX.Utils.Settings;
 
 import <string>;
 import <string_view>;

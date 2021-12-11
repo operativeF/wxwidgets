@@ -11,7 +11,6 @@
 #include "wx/renderer.h"
 
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/module.h"
 #include "wx/control.h"
 #include "wx/dcmirror.h"
@@ -21,6 +20,7 @@
     #include "wx/osx/private.h"
 #endif
 
+import WX.Utils.Settings;
 import Utils.Geometry;
 
 // ----------------------------------------------------------------------------

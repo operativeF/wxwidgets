@@ -12,7 +12,6 @@
 
 #include "wx/dcbuffer.h"
 #include "wx/odcombo.h"
-#include "wx/settings.h"
 #include "wx/textctrl.h"
 
 // This define is necessary to prevent macro clearing
@@ -25,6 +24,8 @@
 #if wxPG_USE_RENDERER_NATIVE
     #include "wx/renderer.h"
 #endif
+
+import WX.Utils.Settings;
 
 // How many pixels between textctrl and button
 #ifdef __WXMAC__

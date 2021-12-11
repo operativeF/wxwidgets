@@ -32,7 +32,6 @@
 #include "wx/utils.h"
 #include "wx/button.h"
 #include "wx/icon.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/choice.h"
 #include "wx/textctrl.h"
@@ -52,6 +51,7 @@
 
 import WX.Image;
 
+import WX.Utils.Settings;
 import Utils.Geometry;
 
 #if wxUSE_STATLINE

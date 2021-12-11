@@ -21,7 +21,6 @@ module;
 #include "wx/utils.h"
 #include "wx/dcclient.h"
 #include "wx/dnd.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/valtext.h"
 #include "wx/intl.h"
@@ -48,6 +47,7 @@ import WX.Grid.Editors;
 
 import WX.Utils.Cast;
 import Utils.Strings;
+import WX.Utils.Settings;
 
 import <algorithm>;
 import <string>;

@@ -18,13 +18,14 @@
 #include "wx/ribbon/toolbar.h"
 
 #include "wx/dc.h"
-#include "wx/settings.h"
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #elif defined(__WXMAC__)
     #include "wx/osx/private.h"
 #endif
+
+import WX.Utils.Settings;
 
 wxRibbonAUIArtProvider::wxRibbonAUIArtProvider()
     : wxRibbonMSWArtProvider(false)

@@ -18,10 +18,8 @@
 
 #include "wx/scrolwin.h"
 #include "wx/timer.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
-#include "wx/settings.h"
 #include "wx/sizer.h"
 
 #include "wx/imaglist.h"
@@ -34,6 +32,8 @@
 #endif
 
 import WX.Cfg.Flags;
+
+import WX.Utils.Settings;
 
 // NOTE: If using the wxListBox visual attributes works everywhere then this can
 // be removed, as well as the #else case below.

@@ -18,11 +18,12 @@
 
 #include "wx/anybutton.h"
 #include "wx/dcscreen.h"
-#include "wx/settings.h"
 
 #include "wx/log.h"
 
 #include "wx/msw/private/button.h"
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

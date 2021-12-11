@@ -25,7 +25,6 @@
 #include "wx/brush.h"
 #include "wx/cursor.h"
 #include "wx/dialog.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/choice.h"
 #include "wx/stattext.h"
@@ -38,7 +37,6 @@
 #include "wx/intl.h"
 #include "wx/frame.h"
 #include "wx/textctrl.h"
-#include "wx/settings.h"
 
 // This define is necessary to prevent macro clearing
 #define __wxPG_SOURCE_FILE__
@@ -77,6 +75,7 @@
   #endif
 #endif
 
+import WX.Utils.Settings;
 
 constexpr int wxPG_GUTTER_DIV =                 3; // gutter is max(iconwidth/gutter_div,gutter_min)
 constexpr int wxPG_GUTTER_MIN =                 3; // gutter before and after image of [+] or [-]

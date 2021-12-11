@@ -13,7 +13,6 @@
 
 #include "wx/brush.h"
 #include "wx/bmpbuttn.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
 
@@ -35,6 +34,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
+import WX.Utils.Settings;
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;

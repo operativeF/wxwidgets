@@ -13,7 +13,6 @@
 #include "wx/app.h"
 #include "wx/bitmap.h"
 #include "wx/icon.h"
-#include "wx/settings.h"
 #include "wx/intl.h"
 #include "wx/module.h"
 #include "wx/display.h"
@@ -23,6 +22,8 @@
 #include <boost/nowide/convert.hpp>
 
 #include <cassert>
+
+import WX.Utils.Settings;
 
 import WX.Image;
 import WX.WinDef;

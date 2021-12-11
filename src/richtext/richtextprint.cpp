@@ -12,7 +12,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/dc.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/datetime.h"
 #include "wx/print.h"
@@ -21,6 +20,7 @@
 #include "wx/wfstream.h"
 
 import Utils.Strings;
+import WX.Utils.Settings;
 
 /*!
  * wxRichTextPrintout

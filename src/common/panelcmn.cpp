@@ -8,10 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/panel.h"
 #include "wx/containr.h"
+
+import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
 // XTI

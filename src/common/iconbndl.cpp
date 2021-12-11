@@ -10,7 +10,6 @@
 #include "wx/iconbndl.h"
 
 #include "wx/app.h"
-#include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/bitmap.h"
@@ -23,6 +22,7 @@
 #endif
 
 import WX.Image;
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

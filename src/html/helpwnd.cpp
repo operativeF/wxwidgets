@@ -24,7 +24,6 @@
 #include "wx/statbox.h"
 #include "wx/radiobox.h"
 #include "wx/menu.h"
-#include "wx/settings.h"
 #include "wx/msgdlg.h"
 #include "wx/textctrl.h"
 #include "wx/toolbar.h"
@@ -48,6 +47,8 @@
 #include "wx/wupdlock.h"
 
 import WX.Cfg.Flags;
+
+import WX.Utils.Settings;
 
 // what is considered "small index"?
 constexpr int INDEX_IS_SMALL = 1000;

@@ -16,7 +16,6 @@
 #include "wx/button.h"
 #include "wx/app.h"
 #include "wx/bmpbuttn.h"
-#include "wx/settings.h"
 #include "wx/dcscreen.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
@@ -29,6 +28,8 @@
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
+
+import WX.Utils.Settings;
 
 import WX.WinDef;
 

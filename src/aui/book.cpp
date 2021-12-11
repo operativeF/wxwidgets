@@ -14,7 +14,6 @@ module;
 
 #include "wx/app.h"
 #include "wx/bookctrl.h"
-#include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/frame.h"
@@ -32,6 +31,8 @@ import WX.AUI.FrameManager;
 import WX.AUI.Page;
 import WX.AUI.TabArt;
 import WX.AUI.TabMDI;
+
+import WX.Utils.Settings;
 
 import <numeric>;
 import <ranges>;

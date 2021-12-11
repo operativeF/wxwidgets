@@ -11,7 +11,6 @@
 
 #include "wx/generic/filectrlg.h"
 
-#include "wx/settings.h"
 #include "wx/sizer.h"
 #include "wx/stattext.h"
 #include "wx/checkbox.h"
@@ -26,6 +25,8 @@
 #include "wx/imaglist.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Utils.Settings;
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

@@ -16,7 +16,6 @@
 #include "wx/panel.h"
 #include "wx/frame.h"
 #include "wx/dialog.h"
-#include "wx/settings.h"
 #include "wx/bitmap.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
@@ -39,6 +38,7 @@
 import WX.Image;
 import Utils.Strings;
 import WX.Utils.Cast;
+import WX.Utils.Settings;
 
 import <clocale>;
 import <vector>;
