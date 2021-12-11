@@ -126,6 +126,9 @@ protected:
 #endif
 };
 
+} // export
+
+
 
 // --------------------------------------------------------------------------
 // Constants
@@ -802,8 +805,5 @@ bool wxIFFHandler::DoCanRead(wxInputStream& stream)
 }
 
 #endif // wxUSE_STREAMS
-
-
-} // export
 
 #endif // wxUSE_IMAGE && wxUSE_IFF

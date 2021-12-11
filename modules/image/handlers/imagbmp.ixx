@@ -84,6 +84,8 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
 //-----------------------------------------------------------------------------
 // wxBMPHandler
 //-----------------------------------------------------------------------------
@@ -1268,5 +1270,3 @@ bool wxBMPHandler::DoCanRead(wxInputStream& stream)
 }
 
 #endif // wxUSE_STREAMS
-
-} // export

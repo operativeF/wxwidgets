@@ -857,6 +857,9 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
+
 // ----------------------------------------------------------------------------
 // wxTGAHandler
 // ----------------------------------------------------------------------------
@@ -964,7 +967,5 @@ bool wxTGAHandler::DoCanRead(wxInputStream& stream)
 }
 
 #endif // wxUSE_STREAMS
-
-} // export
 
 #endif // wxUSE_TGA

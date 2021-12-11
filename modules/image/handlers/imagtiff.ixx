@@ -283,6 +283,8 @@ protected:
 #endif
 };
 
+} // export
+
 
 // ============================================================================
 // implementation
@@ -917,7 +919,5 @@ bool wxTIFFHandler::DoCanRead( wxInputStream& stream )
 
     return {"libtiff", versioning, desc, copyright};
 }
-
-} // export
 
 #endif // wxUSE_LIBTIFF

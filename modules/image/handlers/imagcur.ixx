@@ -36,11 +36,11 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
 bool wxCURHandler::DoCanRead(wxInputStream& stream)
 {
     return CanReadICOOrCUR(&stream, 2 /*for identifying a cursor*/);
 }
-
-} // export
 
 #endif // wxUSE_ICO_CUR

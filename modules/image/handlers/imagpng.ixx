@@ -305,6 +305,8 @@ protected:
 #endif
 };
 
+} // export
+
 
 // ============================================================================
 // wxPNGHandler implementation
@@ -858,7 +860,5 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
              PNG_LIBPNG_VER_RELEASE},
             str};
 }
-
-} // export
 
 #endif // wxUSE_LIBPNG

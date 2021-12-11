@@ -415,6 +415,9 @@ protected:
 #endif
 };
 
+} // export
+
+
 //-----------------------------------------------------------------------------
 // wxGIFHandler
 //-----------------------------------------------------------------------------
@@ -830,7 +833,5 @@ int wxGIFHandler::ExistsHashTable(unsigned long key)
     }
     return -1;
 }
-
-} // export
 
 #endif // wxUSE_GIF

@@ -40,6 +40,8 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
 #ifdef wxUSE_STREAMS
 
 bool wxANIHandler::LoadFile(wxImage *image, wxInputStream& stream,
@@ -69,7 +71,5 @@ int wxANIHandler::DoGetImageCount(wxInputStream& stream)
 }
 
 #endif // wxUSE_STREAMS
-
-} // export
 
 #endif // wxUSE_ICO_CUR;

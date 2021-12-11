@@ -89,6 +89,8 @@ protected:
 #endif
 };
 
+} // export
+
 
 #if wxUSE_STREAMS
 
@@ -224,8 +226,5 @@ bool wxXPMHandler::DoCanRead(wxInputStream& stream)
 }
 
 #endif  // wxUSE_STREAMS
-
-
-} // export
 
 #endif // wxUSE_XPM

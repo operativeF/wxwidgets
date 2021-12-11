@@ -65,6 +65,9 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
+
 bool wxICOHandler::SaveFile(wxImage *image,
                             wxOutputStream& stream,
                             bool verbose)
@@ -516,7 +519,5 @@ bool wxICOHandler::DoCanRead(wxInputStream& stream)
     return CanReadICOOrCUR(&stream, 1 /*for identifying an icon*/);
 
 }
-
-} // export
 
 #endif // wxUSE_ICO_CUR

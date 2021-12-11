@@ -277,6 +277,9 @@ protected:
 #endif
 };
 
+} // export
+
+
 // A hack based on one from tif_jpeg.c to overcome the problem on Windows
 // of rpcndr.h defining boolean with a different type to the jpeg headers.
 //
@@ -506,9 +509,6 @@ bool wxJPEGHandler::DoCanRead( wxInputStream& stream )
     return {"libjpeg", {JPEG_LIB_VERSION / 10, JPEG_LIB_VERSION % 10}};
 #endif
 }
-
-
-} // export
 
 #endif // wxUSE_LIBJPEG
 

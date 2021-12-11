@@ -441,6 +441,8 @@ protected:
 #endif // wxUSE_STREAMS
 };
 
+} // export
+
 
 //-----------------------------------------------------------------------------
 // wxPCXHandler
@@ -518,7 +520,5 @@ bool wxPCXHandler::DoCanRead( wxInputStream& stream )
 }
 
 #endif // wxUSE_STREAMS
-
-} // export
 
 #endif // wxUSE_PCX

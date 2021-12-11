@@ -65,6 +65,8 @@ protected:
 #endif
 };
 
+} // export
+
 
 #if wxUSE_STREAMS
 
@@ -238,7 +240,5 @@ bool wxPNMHandler::DoCanRead( wxInputStream& stream )
 
 
 #endif // wxUSE_STREAMS
-
-} // export
 
 #endif // wxUSE_PNM
