@@ -93,6 +93,7 @@ private:
     inline static wxCURHandler sm_handler;
 };
 
+} // export
 
 //---------------------------------------------------------------------------
 // wxANIDecoder
@@ -406,7 +407,5 @@ bool wxANIDecoder::Load( wxInputStream& stream )
 
     return m_szAnimation != wxDefaultSize;
 }
-
-} // export
 
 #endif  // wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)

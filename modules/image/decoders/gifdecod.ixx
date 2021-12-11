@@ -159,6 +159,8 @@ private:
     unsigned int  m_lastbyte{};       // last byte read
 };
 
+} // export
+
 // This function was designed by Vaclav Slavik
 
 bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage* image) const
@@ -1004,7 +1006,5 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
 
     return wxGIFErrorCode::OK;
 }
-
-} // export
 
 #endif // wxUSE_STREAMS && wxUSE_GIF
