@@ -6,6 +6,9 @@ export module WX.Image.ANI;
 
 import WX.Image.CUR;
 
+import WX.Image.Base;
+import WX.Image.Decoder.ANI;
+
 #ifdef wxUSE_ICO_CUR
 
 export
@@ -36,6 +39,36 @@ protected:
     bool DoCanRead( wxInputStream& stream ) override;
 #endif // wxUSE_STREAMS
 };
+
+#ifdef wxUSE_STREAMS
+
+bool wxANIHandler::LoadFile(wxImage *image, wxInputStream& stream,
+                            [[maybe_unused]] bool verbose, int index)
+{
+    wxANIDecoder decoder;
+    if (!decoder.Load(stream))
+        return false;
+
+    return decoder.ConvertToImage(index != -1 ? (size_t)index : 0, image);
+}
+
+bool wxANIHandler::DoCanRead(wxInputStream& stream)
+{
+    wxANIDecoder decod;
+    return decod.CanRead(stream);
+             // it's ok to modify the stream position here
+}
+
+int wxANIHandler::DoGetImageCount(wxInputStream& stream)
+{
+    wxANIDecoder decoder;
+    if (!decoder.Load(stream))  // it's ok to modify the stream position here
+        return wxNOT_FOUND;
+
+    return decoder.GetFrameCount();
+}
+
+#endif // wxUSE_STREAMS
 
 } // export
 

@@ -224,30 +224,12 @@ set(IMAGE_HANDLERS_IXX
 )
 
 set(IMAGE_HANDLERS_SRC
-    ${CMAKE_SOURCE_DIR}/src/common/imagani.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagbmp.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagcur.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imaggif.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagiff.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagjpeg.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagico.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagpcx.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagpng.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagpnm.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagtga.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagtiff.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/imagxpm.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagebase.cpp
 )
 
 set(IMAGE_DECODERS_IXX
     ${CMAKE_SOURCE_DIR}/modules/image/decoders/anidecod.ixx
     ${CMAKE_SOURCE_DIR}/modules/image/decoders/gifdecod.ixx
-)
-
-set(IMAGE_DECODERS_SRC
-    ${CMAKE_SOURCE_DIR}/src/common/anidecod.cpp
-    ${CMAKE_SOURCE_DIR}/src/common/gifdecod.cpp
 )
 
 set(PRINTER_IXX
@@ -261,7 +243,6 @@ set(BASE_FILES
     ${BASE_CMN_IXX}
     ${GEOMETRY_IXX}
     ${PRINTER_IXX}
-    ${IMAGE_DECODERS_SRC}
     ${IMAGE_DECODERS_IXX}
 )
 

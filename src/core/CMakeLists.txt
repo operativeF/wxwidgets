@@ -2,7 +2,6 @@ set(CORE_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 
 set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/accelcmn.cpp
-    ${CORE_SRC_DIR}/common/anidecod.cpp
     ${CORE_SRC_DIR}/common/appcmn.cpp
     ${CORE_SRC_DIR}/common/artprov.cpp
     ${CORE_SRC_DIR}/common/artstd.cpp
