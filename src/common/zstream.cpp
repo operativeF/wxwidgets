@@ -11,10 +11,11 @@
 #if wxUSE_ZLIB && wxUSE_STREAMS
 
 #include "wx/zstream.h"
-#include "wx/versioninfo.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
+
+import WX.Utils.VersionInfo;
 
 
 // normally, the compiler options should contain -I../zlib, but it is

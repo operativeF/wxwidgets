@@ -7,16 +7,21 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_VERSIONINFO_H_
-#define _WX_VERSIONINFO_H_
+module;
 
 #include <fmt/core.h>
 
+export module WX.Utils.VersionInfo;
+
 import <optional>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxVersionInfo: represents version information
 // ----------------------------------------------------------------------------
+
+export
+{
 
 struct VersionNumbering
 {
@@ -77,4 +82,4 @@ private:
     VersionNumbering m_versionNum;
 };
 
-#endif // _WX_VERSIONINFO_H_
+} // export

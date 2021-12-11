@@ -23,9 +23,9 @@
 #include "wx/zstream.h"
 #include "wx/strconv.h"
 
-#include "wx/versioninfo.h"
-
 #include "expat.h" // from Expat
+
+import WX.Utils.VersionInfo;
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxXML")

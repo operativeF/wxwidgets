@@ -13,7 +13,8 @@
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
 #include "wx/stream.h"
-#include "wx/versioninfo.h"
+
+import WX.Utils.VersionInfo;
 
 import <cstdint>;
 

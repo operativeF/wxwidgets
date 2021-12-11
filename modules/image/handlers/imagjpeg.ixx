@@ -9,7 +9,6 @@
 module;
 
 #include "wx/gdicmn.h"
-#include "wx/versioninfo.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 
@@ -22,6 +21,8 @@ module;
 #include <csetjmp>
 
 export module WX.Image.JPEG;
+
+import WX.Utils.VersionInfo;
 
 import WX.Image.Base;
 

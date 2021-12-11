@@ -19,7 +19,6 @@
 #include "wx/list.h"
 #include "wx/filefn.h"
 #include "wx/hashmap.h"
-#include "wx/versioninfo.h"
 
 #if wxUSE_GUI
     #include "wx/mousestate.h"
@@ -39,6 +38,7 @@
 #endif
 
 import WX.WinDef;
+import WX.Utils.VersionInfo;
 
 import Utils.Geometry;
 

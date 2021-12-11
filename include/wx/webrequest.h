@@ -37,7 +37,8 @@ private:
 #include "wx/event.h"
 #include "wx/object.h"
 #include "wx/stream.h"
-#include "wx/versioninfo.h"
+
+import WX.Utils.VersionInfo;
 
 class wxWebResponse;
 class wxWebSession;

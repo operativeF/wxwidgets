@@ -8,7 +8,6 @@
 
 module;
 
-#include "wx/versioninfo.h"
 #include "wx/gdicmn.h"
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -24,6 +23,8 @@ module;
 export module WX.Image.TIFF;
 
 import WX.Image.Base;
+import WX.Utils.VersionInfo;
+
 import Utils.Strings;
 import Utils.Geometry;
 import WX.Utils.Cast;

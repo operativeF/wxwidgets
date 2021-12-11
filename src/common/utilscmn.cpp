@@ -63,7 +63,6 @@
 #include "wx/uri.h"
 #include "wx/mimetype.h"
 #include "wx/config.h"
-#include "wx/versioninfo.h"
 
 #include "wx/vector.h"
 
@@ -95,12 +94,15 @@
 
 #include <fmt/core.h>
 
+#include <memory>
+
 import <algorithm>;
 import <ctime>;
-#include <memory>
 import <string>;
 import <vector>;
 import <utility>;
+
+import WX.Utils.VersionInfo;
 
 import WX.Cfg.Flags;
 

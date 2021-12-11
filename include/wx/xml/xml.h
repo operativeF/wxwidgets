@@ -16,7 +16,8 @@
 #include "wx/string.h"
 #include "wx/object.h"
 #include "wx/textbuf.h"
-#include "wx/versioninfo.h"
+
+import WX.Utils.VersionInfo;
 
 class wxXmlNode;
 class wxXmlAttribute;

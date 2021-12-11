@@ -14,7 +14,6 @@
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/sstream.h"
-#include "wx/versioninfo.h"
 
 #if defined(__WXOSX__)
     #include "wx/osx/webviewhistoryitem_webkit.h"
@@ -27,6 +26,9 @@
 #endif
 
 #include <memory>
+
+import WX.Utils.VersionInfo;
+
 import <string>;
 import <vector>;
 

@@ -9,7 +9,6 @@
 module;
 
 #include "wx/gdicmn.h"
-#include "wx/versioninfo.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/palette.h"
@@ -18,6 +17,8 @@ module;
 #include <png.h>
 
 export module WX.Image.PNG;
+
+import WX.Utils.VersionInfo;
 
 import WX.Image.Base;
 import Utils.Strings;
