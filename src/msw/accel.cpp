@@ -85,9 +85,9 @@ wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
 
         WXWORD key = wxMSWKeyboard::WXToVK(entries[i].GetKeyCode());
 
-        arr[i].fVirt = fVirt;
-        arr[i].key = key;
-        arr[i].cmd = (WXWORD)entries[i].GetCommand();
+        arr[i] = { .fVirt{fVirt},
+                   .key{key},
+                   .cmd{(WXWORD)entries[i].GetCommand()} };    
     }
 
     M_ACCELDATA->m_hAccel = unique_accel(::CreateAcceleratorTableW(arr.get(), wx::narrow_cast<int>(entries.size())));
