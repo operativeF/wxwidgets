@@ -10,9 +10,10 @@
 
 #include "testprec.h"
 
-
 #include "wx/colour.h"
 #include "asserthelper.h"
+
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // helpers for checking wxColour RGB[A] values
@@ -37,8 +38,8 @@ public:
 
     std::string describe() const override
     {
-        return wxString::Format("!= RGB(%#02x, %#02x, %#02x)",
-                                m_red, m_green, m_blue).ToStdString();
+        return fmt::format("!= RGB(%#02x, %#02x, %#02x)",
+                                m_red, m_green, m_blue);
     }
 
 protected:
@@ -62,8 +63,8 @@ public:
 
     std::string describe() const override
     {
-        return wxString::Format("!= RGBA(%#02x, %#02x, %#02x, %#02x)",
-                                m_red, m_green, m_blue, m_alpha).ToStdString();
+        return fmt::format("!= RGBA(%#02x, %#02x, %#02x, %#02x)",
+                                m_red, m_green, m_blue, m_alpha);
     }
 
 private:

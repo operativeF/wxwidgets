@@ -166,13 +166,13 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
         // prepare the dialog data
 
         // the dialog title
-        wxString title(m_titleDialog);
-        if ( !title )
-            title << wxTheApp->GetAppDisplayName() << _(": unknown charset");
+        std::string title{m_titleDialog};
+        if ( title.empty() )
+            title += fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown charset").ToStdString());
 
         // the message
-        wxString msg;
-        msg.Printf(_("The charset '%s' is unknown. You may select\nanother charset to replace it with or choose\n[Cancel] if it cannot be replaced"), charset);
+        // FIXME: Translation removed for fmt::print
+        std::string msg = fmt::format("The charset '%s' is unknown. You may select\nanother charset to replace it with or choose\n[Cancel] if it cannot be replaced", charset);
 
         // the list of choices
         const size_t count = GetSupportedEncodingsCount();
@@ -244,7 +244,7 @@ bool wxFontMapper::TestAltEncoding(const std::string& configEntry,
 
         if ( path.IsOk() )
         {
-            GetConfig()->Write(configEntry, info->ToString().ToStdString());
+            GetConfig()->Write(configEntry, info->ToString());
         }
 #else
         wxUnusedVar(configEntry);
@@ -298,17 +298,19 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
         // wxLogFatalError doesn't return
     }
 
-    wxString configEntry,
-             encName = GetEncodingName(encoding);
+    std::string configEntry;
+    std::string encName = GetEncodingName(encoding);
+
     if ( !facename.empty() )
     {
         configEntry = facename + "_";
     }
+    
     configEntry += encName;
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
     // do we have a font spec for this encoding?
-    wxString fontinfo;
+    std::string fontinfo;
     wxFontMapperPathChanger path(this, FONTMAPPER_FONT_FROM_ENCODING_PATH);
     if ( path.IsOk() )
     {
@@ -426,7 +428,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                               FONTMAPPER_FONT_FROM_ENCODING_PATH);
                 if ( path2.IsOk() )
                 {
-                    GetConfig()->Write(configEntry, info->ToString().ToStdString());
+                    GetConfig()->Write(configEntry, info->ToString());
                 }
 #endif // wxUSE_CONFIG
 

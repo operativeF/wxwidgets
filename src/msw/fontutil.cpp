@@ -13,7 +13,6 @@
 
 #include "wx/fontutil.h"
 
-#include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/wxcrtvararg.h"
 
@@ -23,19 +22,23 @@
 
 import WX.Win.UniqueHnd;
 
+import <charconv>;
+
 // convert to/from the string representation: format is
 //      encodingid;facename[;charset]
 
-bool wxNativeEncodingInfo::FromString(const wxString& s)
+bool wxNativeEncodingInfo::FromString(std::string_view s)
 {
-    wxStringTokenizer tokenizer{s.ToStdString(), ";"};
+    wxStringTokenizer tokenizer{s, ";"};
 
-    wxString encid = tokenizer.GetNextToken();
+    std::string encid = tokenizer.GetNextToken();
 
     // we support 2 formats: the old one (and still used if !wxUSE_FONTMAP)
     // used the raw encoding values but the new one uses the encoding names
     long enc;
-    if ( encid.ToLong(&enc) )
+    auto [p, ec] = std::from_chars(encid.data(), encid.data() + encid.size(), enc);
+    
+    if ( ec == std::errc() )
     {
         // old format, intepret as encoding -- but after minimal checks
         if ( enc < 0 || enc >= wxFONTENCODING_MAX )
@@ -46,7 +49,7 @@ bool wxNativeEncodingInfo::FromString(const wxString& s)
     else // not a number, interpret as an encoding name
     {
 #if wxUSE_FONTMAP
-        encoding = GetEncodingFromName(encid.ToStdString());
+        encoding = GetEncodingFromName(encid);
         if ( encoding == wxFONTENCODING_MAX )
 #endif // wxUSE_FONTMAP
         {
@@ -57,7 +60,7 @@ bool wxNativeEncodingInfo::FromString(const wxString& s)
 
     facename = tokenizer.GetNextToken();
 
-    wxString tmp = tokenizer.GetNextToken();
+    std::string tmp = tokenizer.GetNextToken();
     if ( tmp.empty() )
     {
         // default charset: but don't use DEFAULT_CHARSET here because it might
@@ -67,7 +70,8 @@ bool wxNativeEncodingInfo::FromString(const wxString& s)
     }
     else
     {
-        if ( wxSscanf(tmp, "%u", &charset) != 1 )
+        auto [p, ec] = std::from_chars(tmp.data(), tmp.data() + tmp.size(), charset);
+        if ( ec != std::errc() )
         {
             // should be a number!
             return false;
@@ -77,26 +81,24 @@ bool wxNativeEncodingInfo::FromString(const wxString& s)
     return true;
 }
 
-wxString wxNativeEncodingInfo::ToString() const
+std::string wxNativeEncodingInfo::ToString() const
 {
-    wxString s;
-
-    s
+    std::string s =
 #if wxUSE_FONTMAP
       // use the encoding names as this is safer than using the numerical
       // values which may change with time (because new encodings are
       // inserted...)
-      << wxFontMapper::GetEncodingName(encoding)
+    wxFontMapper::GetEncodingName(encoding)
 #else // !wxUSE_FONTMAP
       // we don't have any choice but to use the raw value
-      << (long)encoding
+      (long)encoding
 #endif // wxUSE_FONTMAP/!wxUSE_FONTMAP
-      << wxT(';') << facename;
+      + fmt::format(";{}", facename);
 
     // ANSI_CHARSET is assumed anyhow
     if ( charset != ANSI_CHARSET )
     {
-         s << wxT(';') << charset;
+         s += fmt::format(";{}", charset);
     }
 
     return s;
@@ -133,7 +135,8 @@ bool wxTestFontEncoding(const wxNativeEncodingInfo& info)
     wxZeroMemory(lf);       // all default values
 
     lf.lfCharSet = (BYTE)info.charset;
-    wxStrlcpy(lf.lfFaceName, info.facename.c_str(), WXSIZEOF(lf.lfFaceName));
+    boost::nowide::wstackstring stackFacename{info.facename.c_str()};
+    wxStrlcpy(lf.lfFaceName, stackFacename.get(), WXSIZEOF(lf.lfFaceName));
 
     using msw::utils::unique_font;
 

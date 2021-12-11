@@ -13,8 +13,6 @@
 #include "wx/aboutdlg.h"
 #include "wx/generic/aboutdlgg.h"
 
-#include "wx/string.h"
-
 // ============================================================================
 // implementation
 // ============================================================================
@@ -28,24 +26,24 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
     if ( info.IsSimple() )
     {
         // build the text to show in the box
-        const wxString name = info.GetName();
-        wxString msg;
-        msg << name;
+        const std::string name = info.GetName();
+        std::string msg{name};
+
         if ( info.HasVersion() )
         {
-            msg << wxT('\n');
-            msg << info.GetLongVersion();
+            msg += fmt::format("\n{}", info.GetLongVersion().ToStdString());
         }
 
-        msg << "\n\n";
+        msg += "\n\n";
 
         if ( info.HasCopyright() )
-            msg << info.GetCopyrightToDisplay() << wxT('\n');
+            msg += fmt::format("{}\n", info.GetCopyrightToDisplay().ToStdString());
 
         // add everything remaining
-        msg << info.GetDescriptionAndCredits();
+        msg += info.GetDescriptionAndCredits();
 
-        wxMessageBox(msg.ToStdString(), wxString::Format(_("About %s"), name).ToStdString(), wxOK | wxCENTRE, parent);
+        // FIXME: Translation removed for fmt
+        wxMessageBox(msg, fmt::format("About {:s}", name), wxOK | wxCENTRE, parent);
     }
     else // simple "native" version is not enough
     {

@@ -657,8 +657,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
 
     if ( !::RegisterClassW(&wndclass) )
     {
-        wxLogLastError(wxString::Format("RegisterClass(%s)",
-                       regClass.regname));
+        wxLogLastError(fmt::format("RegisterClass({:s})", regClass.regname));
         boost::nowide::wstackstring stackRegname(regClass.regname.c_str());
         ::UnregisterClassW(stackRegname.get(), wxGetInstance());
         return {};
@@ -696,14 +695,14 @@ void wxApp::UnregisterWindowClasses()
         {
             if ( !::UnregisterClassW(boost::nowide::widen(regClass.regname).c_str(), wxGetInstance()) )
             {
-                wxLogLastError(wxString::Format("UnregisterClass(%s)",
+                wxLogLastError(fmt::format("UnregisterClass({:s})",
                                regClass.regname));
             }
         }
 
         if ( !::UnregisterClassW(boost::nowide::widen(regClass.regnameNR).c_str(), wxGetInstance()) )
         {
-            wxLogLastError(wxString::Format("UnregisterClass(%s)",
+            wxLogLastError(fmt::format("UnregisterClass({:s})",
                            regClass.regnameNR));
         }
     }

@@ -502,31 +502,32 @@ void ClippingBoxTestCaseBase::CheckBoxPosition(int cur_x, int cur_y, int cur_w, 
                                                int x, int y, int w, int h,
                                                int posTolerance)
 {
-    wxString msgPos;
+    std::string msgPos;
     if ( !IsCoordEqual(x, cur_x, posTolerance) ||
          !IsCoordEqual(y, cur_y, posTolerance) )
     {
         msgPos =
-            wxString::Format(wxS("Invalid position: Actual: (%i, %i)  Expected: (%i, %i)"),
+            fmt::format("Invalid position: Actual: (%i, %i)  Expected: (%i, %i)",
                                 cur_x, cur_y, x, y);
     }
-    wxString msgDim;
+    
+    std::string msgDim;
     if ( !IsCoordEqual(w, cur_w, 2*posTolerance) ||
          !IsCoordEqual(h, cur_h, 2*posTolerance) )
     {
         msgDim =
-            wxString::Format(wxS("Invalid dimension: Actual: %i x %i  Expected: %i x %i"),
+            fmt::format("Invalid dimension: Actual: %i x %i  Expected: %i x %i",
                                 cur_w, cur_h, w, h);
     }
 
-    wxString msg;
+    std::string msg;
     if ( !msgPos.empty() )
     {
         msg = msgPos;
+
         if ( !msgDim.empty() )
         {
-            msg += wxS("\n- ");
-            msg += msgDim;
+            msg += fmt::format("\n- {}", msgDim);
         }
     }
     else if ( !msgDim.empty() )

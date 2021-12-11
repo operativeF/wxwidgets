@@ -161,7 +161,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
             return m_fontEnum->OnFontEncoding
                                (
                                 lf->lfFaceName,
-                                wxString::Format("Code page %d", cs)
+                                fmt::format("Code page {:d}", cs)
                                );
 #endif // wxUSE_FONTMAP/!wxUSE_FONTMAP
         }

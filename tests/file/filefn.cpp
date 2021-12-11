@@ -15,6 +15,8 @@
 
 #include "testfile.h"
 
+#include <fmt/core.h>
+
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
@@ -66,7 +68,7 @@ static void DoConcatFile(const wxString& filePath1,
 
 static void DoCreateFile(const wxString& filePath)
 {
-    const std::string msg = wxString::Format("File: %s", filePath).ToStdString();
+    const std::string msg = fmt::format("File: {:s}", filePath);
 
     // Create temporary file.
     wxTextFile file;
@@ -78,7 +80,7 @@ static void DoCreateFile(const wxString& filePath)
 
 static void DoFileExists(const wxString& filePath)
 {
-    const std::string msg = wxString::Format("File: %s", filePath).ToStdString();
+    const std::string msg = fmt::format("File: {:s}", filePath);
 
     // Create temporary file.
     wxTextFile file;
@@ -94,7 +96,7 @@ static void DoFileExists(const wxString& filePath)
 
 static void DoFindFile(const wxString& filePath)
 {
-    const std::string msg = wxString::Format("File: %s", filePath).ToStdString();
+    const std::string msg = fmt::format("File: {:s}", filePath);
 
     // Create temporary file.
     wxTextFile file;
@@ -117,7 +119,7 @@ static void DoFindFile(const wxString& filePath)
 
 static void DoRemoveFile(const wxString& filePath)
 {
-    const std::string msg = wxString::Format("File: %s", filePath).ToStdString();
+    const std::string msg = fmt::format("File: {:s}", filePath);
 
     // Create temporary file.
     wxTextFile file;

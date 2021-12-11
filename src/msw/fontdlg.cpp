@@ -135,7 +135,7 @@ int wxFontDialog::ShowModal()
     {
         wxRGBToColour(m_fontData.m_fontColour, chooseFontStruct.rgbColors);
         m_fontData.m_chosenFont = wxFont(wxNativeFontInfo(logFont, this));
-        m_fontData.EncodingInfo().facename = logFont.lfFaceName;
+        m_fontData.EncodingInfo().facename = boost::nowide::narrow(logFont.lfFaceName);
         m_fontData.EncodingInfo().charset = logFont.lfCharSet;
 
         return wxID_OK;

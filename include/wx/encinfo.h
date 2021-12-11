@@ -11,7 +11,7 @@
 #ifndef _WX_ENCINFO_H_
 #define _WX_ENCINFO_H_
 
-#include "wx/string.h"
+import <string>;
 
 // ----------------------------------------------------------------------------
 // wxNativeEncodingInfo contains all encoding parameters for this platform
@@ -33,7 +33,7 @@
 
 struct wxNativeEncodingInfo
 {
-    wxString facename;          // may be empty meaning "any"
+    std::string facename;          // may be empty meaning "any"
     wxFontEncoding encoding{wxFONTENCODING_SYSTEM};    // so that we know what this struct represents
 
 #if defined(__WXMSW__) || \
@@ -51,8 +51,8 @@ struct wxNativeEncodingInfo
 #endif
     // this struct is saved in config by wxFontMapper, so it should know to
     // serialise itself (implemented in platform-specific code)
-    bool FromString(const wxString& s);
-    wxString ToString() const;
+    bool FromString(std::string_view s);
+    std::string ToString() const;
 };
 
 #endif // _WX_ENCINFO_H_

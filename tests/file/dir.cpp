@@ -183,7 +183,7 @@ TEST_CASE("Directory Tests")
             dirname.Replace("$MSW_DRIVE", homedrive);
     #endif // WX_WINDOWS
 
-            std::string errDesc = wxString::Format("failed on directory '%s'", dirname).ToStdString();
+            std::string errDesc = fmt::format("failed on directory '{:s}'", dirname);
             CHECK_MESSAGE(testData[n].shouldExist == wxDir::Exists(dirname), errDesc);
 
             wxDir d(dirname);

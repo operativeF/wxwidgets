@@ -26,6 +26,7 @@ import WX.Image.Base;
 import WX.Utils.Cast;
 
 import <array>;
+import <string>;
 import <tuple>;
 import <vector>;
 
@@ -60,7 +61,7 @@ struct GIFImage
 {
     GIFImage& operator=(GIFImage&&) = delete;
 
-    wxString comment;
+    std::string comment;
 
     std::vector<unsigned char> p;      // bitmap
 
@@ -267,10 +268,9 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage* image) const
         *(dst++) = pal[3 * (*src) + 2];
     }
 
-    std::string comment = m_frames[frame]->comment.ToStdString();
-    if ( !comment.empty() )
+    if ( !m_frames[frame]->comment.empty() )
     {
-        image->SetOption(wxIMAGE_OPTION_GIF_COMMENT, comment);
+        image->SetOption(wxIMAGE_OPTION_GIF_COMMENT, m_frames[frame]->comment);
     }
 
     return true;
@@ -723,7 +723,8 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     int transparent = -1;
     disposal = wxANIM_UNSPECIFIED;
     delay = -1ms;
-    wxString comment;
+    
+    std::string comment;
 
     bool done = false;
     while (!done)
@@ -789,15 +790,17 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                                 break;
                             }
 
-                            wxCharBuffer charbuf(len);
+                            std::vector<char> charbuf(len);
+
                             stream.Read(charbuf.data(), len);
+
                             if ( (int) stream.LastRead() != len )
                             {
                                 done = true;
                                 break;
                             }
 
-                            comment += wxConvertMB2WX(charbuf.data());
+                            comment += std::string(charbuf.data(), len);
 
                             len = stream.GetC();
                         }
