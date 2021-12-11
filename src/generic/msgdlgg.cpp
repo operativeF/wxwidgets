@@ -15,7 +15,6 @@
 #include "wx/button.h"
 #include "wx/stattext.h"
 #include "wx/statbmp.h"
-#include "wx/layout.h"
 #include "wx/intl.h"
 #include "wx/icon.h"
 #include "wx/sizer.h"

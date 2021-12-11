@@ -418,11 +418,7 @@ bool wxTopLevelWindowBase::Layout()
 
     // if we're using sizers or constraints - do use them
     if ( GetAutoLayout()
-            || GetSizer()
-#if wxUSE_CONSTRAINTS
-                    || GetConstraints()
-#endif
-                                        )
+            || GetSizer() )
     {
         return wxNonOwnedWindow::Layout();
     }

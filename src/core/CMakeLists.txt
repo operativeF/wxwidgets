@@ -55,7 +55,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/headerctrlcmn.cpp
     ${CORE_SRC_DIR}/common/iconbndl.cpp
     ${CORE_SRC_DIR}/common/imagfill.cpp
-    ${CORE_SRC_DIR}/common/layout.cpp
     ${CORE_SRC_DIR}/common/lboxcmn.cpp
     ${CORE_SRC_DIR}/common/listctrlcmn.cpp
     ${CORE_SRC_DIR}/common/markupparser.cpp

@@ -20,7 +20,6 @@
 #include "wx/dc.h"
 #include "wx/app.h"
 #include "wx/msgdlg.h"
-#include "wx/layout.h"
 #include "wx/choice.h"
 #include "wx/button.h"
 #include "wx/bmpbuttn.h"

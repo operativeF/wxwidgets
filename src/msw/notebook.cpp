@@ -1273,23 +1273,6 @@ wxColour wxNotebook::GetThemeBackgroundColour() const
 // wxNotebook base class virtuals
 // ----------------------------------------------------------------------------
 
-#if wxUSE_CONSTRAINTS
-
-// override these 2 functions to do nothing: everything is done in OnSize
-
-void wxNotebook::SetConstraintSizes([[maybe_unused]] bool recurse)
-{
-  // don't set the sizes of the pages - their correct size is not yet known
-  wxControl::SetConstraintSizes(false);
-}
-
-bool wxNotebook::DoPhase([[maybe_unused]] int nPhase)
-{
-  return true;
-}
-
-#endif // wxUSE_CONSTRAINTS
-
 // ----------------------------------------------------------------------------
 // wxNotebook Windows message handlers
 // ----------------------------------------------------------------------------

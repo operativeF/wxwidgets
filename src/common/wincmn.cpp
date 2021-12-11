@@ -25,7 +25,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
 #include "wx/scrolbar.h"
-#include "wx/layout.h"
 #include "wx/sizer.h"
 #include "wx/menu.h"
 #include "wx/button.h"
@@ -255,12 +254,6 @@ wxWindowBase::wxWindowBase()
 
     m_backgroundStyle = wxBackgroundStyle::Erase;
 
-#if wxUSE_CONSTRAINTS
-    // no constraints whatsoever
-    m_constraints = nullptr;
-    m_constraintsInvolvedIn = nullptr;
-#endif // wxUSE_CONSTRAINTS
-
     m_windowSizer = nullptr;
     m_containingSizer = nullptr;
     m_autoLayout = false;
@@ -439,20 +432,6 @@ wxWindowBase::~wxWindowBase()
     delete m_windowValidator;
 #endif // wxUSE_VALIDATORS
 
-#if wxUSE_CONSTRAINTS
-    // Have to delete constraints/sizer FIRST otherwise sizers may try to look
-    // at deleted windows as they delete themselves.
-    DeleteRelatedConstraints();
-
-    if ( m_constraints )
-    {
-        // This removes any dangling pointers to this window in other windows'
-        // constraintsInvolvedIn lists.
-        UnsetConstraints(m_constraints);
-        wxDELETE(m_constraints);
-    }
-#endif // wxUSE_CONSTRAINTS
-
     if ( m_containingSizer )
         m_containingSizer->Detach( (wxWindow*)this );
 
@@ -619,43 +598,6 @@ wxSize wxWindowBase::DoGetBestSize() const
     {
         best = m_windowSizer->GetMinSize();
     }
-#if wxUSE_CONSTRAINTS
-    else if ( m_constraints )
-    {
-        const_cast<wxWindowBase *>(this)->SatisfyConstraints();
-
-        // our minimal acceptable size is such that all our windows fit inside
-        int maxX = 0,
-            maxY = 0;
-
-        for ( wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
-              node;
-              node = node->GetNext() )
-        {
-            wxLayoutConstraints *c = node->GetData()->GetConstraints();
-            if ( !c )
-            {
-                // it's not normal that we have an unconstrained child, but
-                // what can we do about it?
-                continue;
-            }
-
-            int x = c->right.GetValue(),
-                y = c->bottom.GetValue();
-
-            if ( x > maxX )
-                maxX = x;
-
-            if ( y > maxY )
-                maxY = y;
-
-            // TODO: we must calculate the overlaps somehow, otherwise we
-            //       will never return a size bigger than the current one :-(
-        }
-
-        best = wxSize(maxX, maxY);
-    }
-#endif // wxUSE_CONSTRAINTS
     else if ( !GetChildren().empty()
 #if defined( __WXMAC__ ) && !defined(__WXUNIVERSAL__)
               && wxHasRealChildren(this)
@@ -2231,115 +2173,6 @@ bool wxWindowBase::CopyToolTip(wxToolTip *tip)
 // constraints and sizers
 // ----------------------------------------------------------------------------
 
-#if wxUSE_CONSTRAINTS
-
-void wxWindowBase::SetConstraints( wxLayoutConstraints *constraints )
-{
-    if ( m_constraints )
-    {
-        UnsetConstraints(m_constraints);
-        delete m_constraints;
-    }
-    m_constraints = constraints;
-    if ( m_constraints )
-    {
-        // Make sure other windows know they're part of a 'meaningful relationship'
-        if ( m_constraints->left.GetOtherWindow() && (m_constraints->left.GetOtherWindow() != this) )
-            m_constraints->left.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->top.GetOtherWindow() && (m_constraints->top.GetOtherWindow() != this) )
-            m_constraints->top.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->right.GetOtherWindow() && (m_constraints->right.GetOtherWindow() != this) )
-            m_constraints->right.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->bottom.GetOtherWindow() && (m_constraints->bottom.GetOtherWindow() != this) )
-            m_constraints->bottom.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->width.GetOtherWindow() && (m_constraints->width.GetOtherWindow() != this) )
-            m_constraints->width.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->height.GetOtherWindow() && (m_constraints->height.GetOtherWindow() != this) )
-            m_constraints->height.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->centreX.GetOtherWindow() && (m_constraints->centreX.GetOtherWindow() != this) )
-            m_constraints->centreX.GetOtherWindow()->AddConstraintReference(this);
-        if ( m_constraints->centreY.GetOtherWindow() && (m_constraints->centreY.GetOtherWindow() != this) )
-            m_constraints->centreY.GetOtherWindow()->AddConstraintReference(this);
-    }
-}
-
-// This removes any dangling pointers to this window in other windows'
-// constraintsInvolvedIn lists.
-void wxWindowBase::UnsetConstraints(wxLayoutConstraints *c)
-{
-    if ( c )
-    {
-        if ( c->left.GetOtherWindow() && (c->left.GetOtherWindow() != this) )
-            c->left.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->top.GetOtherWindow() && (c->top.GetOtherWindow() != this) )
-            c->top.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->right.GetOtherWindow() && (c->right.GetOtherWindow() != this) )
-            c->right.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->bottom.GetOtherWindow() && (c->bottom.GetOtherWindow() != this) )
-            c->bottom.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->width.GetOtherWindow() && (c->width.GetOtherWindow() != this) )
-            c->width.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->height.GetOtherWindow() && (c->height.GetOtherWindow() != this) )
-            c->height.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->centreX.GetOtherWindow() && (c->centreX.GetOtherWindow() != this) )
-            c->centreX.GetOtherWindow()->RemoveConstraintReference(this);
-        if ( c->centreY.GetOtherWindow() && (c->centreY.GetOtherWindow() != this) )
-            c->centreY.GetOtherWindow()->RemoveConstraintReference(this);
-    }
-}
-
-// Back-pointer to other windows we're involved with, so if we delete this
-// window, we must delete any constraints we're involved with.
-void wxWindowBase::AddConstraintReference(wxWindowBase *otherWin)
-{
-    if ( !m_constraintsInvolvedIn )
-        m_constraintsInvolvedIn = new wxWindowList;
-    if ( !m_constraintsInvolvedIn->Find((wxWindow *)otherWin) )
-        m_constraintsInvolvedIn->Append((wxWindow *)otherWin);
-}
-
-// REMOVE back-pointer to other windows we're involved with.
-void wxWindowBase::RemoveConstraintReference(wxWindowBase *otherWin)
-{
-    if ( m_constraintsInvolvedIn )
-        m_constraintsInvolvedIn->DeleteObject((wxWindow *)otherWin);
-}
-
-// Reset any constraints that mention this window
-void wxWindowBase::DeleteRelatedConstraints()
-{
-    if ( m_constraintsInvolvedIn )
-    {
-        wxWindowList::compatibility_iterator node = m_constraintsInvolvedIn->GetFirst();
-        while (node)
-        {
-            wxWindow *win = node->GetData();
-            wxLayoutConstraints *constr = win->GetConstraints();
-
-            // Reset any constraints involving this window
-            if ( constr )
-            {
-                constr->left.ResetIfWin(this);
-                constr->top.ResetIfWin(this);
-                constr->right.ResetIfWin(this);
-                constr->bottom.ResetIfWin(this);
-                constr->width.ResetIfWin(this);
-                constr->height.ResetIfWin(this);
-                constr->centreX.ResetIfWin(this);
-                constr->centreY.ResetIfWin(this);
-            }
-
-            wxWindowList::compatibility_iterator next = node->GetNext();
-            m_constraintsInvolvedIn->Erase(node);
-            node = next;
-        }
-
-        wxDELETE(m_constraintsInvolvedIn);
-    }
-}
-
-#endif // wxUSE_CONSTRAINTS
-
 void wxWindowBase::SetSizer(wxSizer *sizer, bool deleteOld)
 {
     if ( sizer == m_windowSizer)
@@ -2390,33 +2223,6 @@ void wxWindowBase::SetContainingSizer(wxSizer* sizer)
     m_containingSizer = sizer;
 }
 
-#if wxUSE_CONSTRAINTS
-
-void wxWindowBase::SatisfyConstraints()
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    bool wasOk = constr && constr->AreSatisfied();
-
-    ResetConstraints();   // Mark all constraints as unevaluated
-
-    int noChanges = 1;
-
-    // if we're a top level panel (i.e. our parent is frame/dialog), our
-    // own constraints will never be satisfied any more unless we do it
-    // here
-    if ( wasOk )
-    {
-        while ( noChanges > 0 )
-        {
-            LayoutPhase1(&noChanges);
-        }
-    }
-
-    LayoutPhase2(&noChanges);
-}
-
-#endif // wxUSE_CONSTRAINTS
-
 bool wxWindowBase::Layout()
 {
     // If there is a sizer, use it instead of the constraints
@@ -2426,13 +2232,6 @@ bool wxWindowBase::Layout()
         GetVirtualSize(&w, &h);
         GetSizer()->SetDimension( 0, 0, w, h );
     }
-#if wxUSE_CONSTRAINTS
-    else
-    {
-        SatisfyConstraints(); // Find the right constraints values
-        SetConstraintSizes(); // Recursively set the real window sizes
-    }
-#endif
 
     return true;
 }
@@ -2444,239 +2243,6 @@ void wxWindowBase::InternalOnSize(wxSizeEvent& event)
 
     event.Skip();
 }
-
-#if wxUSE_CONSTRAINTS
-
-// first phase of the constraints evaluation: set our own constraints
-bool wxWindowBase::LayoutPhase1(int *noChanges)
-{
-    wxLayoutConstraints *constr = GetConstraints();
-
-    return !constr || constr->SatisfyConstraints(this, noChanges);
-}
-
-// second phase: set the constraints for our children
-bool wxWindowBase::LayoutPhase2(int *noChanges)
-{
-    *noChanges = 0;
-
-    // Layout children
-    DoPhase(1);
-
-    // Layout grand children
-    DoPhase(2);
-
-    return true;
-}
-
-// Do a phase of evaluating child constraints
-bool wxWindowBase::DoPhase(int phase)
-{
-    // the list containing the children for which the constraints are already
-    // set correctly
-    wxWindowList succeeded;
-
-    // the max number of iterations we loop before concluding that we can't set
-    // the constraints
-    static constexpr int maxIterations = 500;
-
-    for ( int noIterations = 0; noIterations < maxIterations; noIterations++ )
-    {
-        int noChanges = 0;
-
-        // loop over all children setting their constraints
-        for ( wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
-              node;
-              node = node->GetNext() )
-        {
-            wxWindow *child = node->GetData();
-            if ( child->IsTopLevel() )
-            {
-                // top level children are not inside our client area
-                continue;
-            }
-
-            if ( !child->GetConstraints() || succeeded.Find(child) )
-            {
-                // this one is either already ok or nothing we can do about it
-                continue;
-            }
-
-            int tempNoChanges = 0;
-            bool success = phase == 1 ? child->LayoutPhase1(&tempNoChanges)
-                                      : child->LayoutPhase2(&tempNoChanges);
-            noChanges += tempNoChanges;
-
-            if ( success )
-            {
-                succeeded.Append(child);
-            }
-        }
-
-        if ( !noChanges )
-        {
-            // constraints are set
-            break;
-        }
-    }
-
-    return true;
-}
-
-void wxWindowBase::ResetConstraints()
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr )
-    {
-        constr->left.SetDone(false);
-        constr->top.SetDone(false);
-        constr->right.SetDone(false);
-        constr->bottom.SetDone(false);
-        constr->width.SetDone(false);
-        constr->height.SetDone(false);
-        constr->centreX.SetDone(false);
-        constr->centreY.SetDone(false);
-    }
-
-    wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
-    while (node)
-    {
-        wxWindow *win = node->GetData();
-        if ( !win->IsTopLevel() )
-            win->ResetConstraints();
-        node = node->GetNext();
-    }
-}
-
-// Need to distinguish between setting the 'fake' size for windows and sizers,
-// and setting the real values.
-void wxWindowBase::SetConstraintSizes(bool recurse)
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr && constr->AreSatisfied() )
-    {
-        ChildrenRepositioningGuard repositionGuard(this);
-
-        int x = constr->left.GetValue();
-        int y = constr->top.GetValue();
-        int w = constr->width.GetValue();
-        int h = constr->height.GetValue();
-
-        if ( (constr->width.GetRelationship() != wxAsIs ) ||
-             (constr->height.GetRelationship() != wxAsIs) )
-        {
-            // We really shouldn't set negative sizes for the windows so make
-            // them at least of 1*1 size
-            SetSize(wxRect{x, y, w > 0 ? w : 1, h > 0 ? h : 1});
-        }
-        else
-        {
-            // If we don't want to resize this window, just move it...
-            Move(wxPoint{x, y});
-        }
-    }
-    else if ( constr )
-    {
-        wxLogDebug("Constraints not satisfied for %s named '%s'.",
-                   wxGetClassInfo()->wxGetClassName(),
-                   GetName().c_str());
-    }
-
-    if ( recurse )
-    {
-        wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
-        while (node)
-        {
-            wxWindow *win = node->GetData();
-            if ( !win->IsTopLevel() && win->GetConstraints() )
-                win->SetConstraintSizes();
-            node = node->GetNext();
-        }
-    }
-}
-
-// Only set the size/position of the constraint (if any)
-void wxWindowBase::SetSizeConstraint(int x, int y, int w, int h)
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr )
-    {
-        if ( x != wxDefaultCoord )
-        {
-            constr->left.SetValue(x);
-            constr->left.SetDone(true);
-        }
-        if ( y != wxDefaultCoord )
-        {
-            constr->top.SetValue(y);
-            constr->top.SetDone(true);
-        }
-        if ( w != wxDefaultCoord )
-        {
-            constr->width.SetValue(w);
-            constr->width.SetDone(true);
-        }
-        if ( h != wxDefaultCoord )
-        {
-            constr->height.SetValue(h);
-            constr->height.SetDone(true);
-        }
-    }
-}
-
-void wxWindowBase::MoveConstraint(int x, int y)
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr )
-    {
-        if ( x != wxDefaultCoord )
-        {
-            constr->left.SetValue(x);
-            constr->left.SetDone(true);
-        }
-        if ( y != wxDefaultCoord )
-        {
-            constr->top.SetValue(y);
-            constr->top.SetDone(true);
-        }
-    }
-}
-
-wxSize wxWindowBase::GetSizeConstraint() const
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr )
-    {
-        return { constr->width.GetValue(), constr->height.GetValue() };
-    }
-    else
-        return GetSize();
-}
-
-wxSize wxWindowBase::GetClientSizeConstraint() const
-{
-    wxLayoutConstraints *constr = GetConstraints();
-    if ( constr )
-    {
-        return { constr->width.GetValue(), constr->height.GetValue() };
-    }
-    else
-        return GetClientSize();
-}
-
-wxPoint wxWindowBase::GetPositionConstraint() const
-{
-    wxLayoutConstraints *constr = GetConstraints();
-
-    if ( constr )
-    {
-        return { constr->left.GetValue(), constr->top.GetValue() };
-    }
-    else
-        return GetPosition();
-}
-
-#endif // wxUSE_CONSTRAINTS
 
 void wxWindowBase::AdjustForParentClientOrigin(int& x, int& y, unsigned int sizeFlags) const
 {

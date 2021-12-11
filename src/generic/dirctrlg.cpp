@@ -35,7 +35,6 @@
 #include "wx/msgdlg.h"
 #include "wx/choice.h"
 #include "wx/textctrl.h"
-#include "wx/layout.h"
 #include "wx/sizer.h"
 #include "wx/textdlg.h"
 #include "wx/gdicmn.h"

@@ -22,7 +22,6 @@
 #include "wx/dialog.h"
 #include "wx/utils.h"
 #include "wx/app.h"
-#include "wx/layout.h"
 #include "wx/dialog.h"
 #include "wx/frame.h"
 #include "wx/listbox.h"
