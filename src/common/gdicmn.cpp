@@ -52,36 +52,6 @@ wxIconBundle wxNullIconBundle;
 WX_DEFINE_LIST(wxPointList)
 
 
-#if wxUSE_EXTENDED_RTTI
-
-// wxPoint
-
-template<> void wxStringReadValue(const wxString &s , wxPoint &data )
-{
-    wxSscanf(s, "%d,%d", &data.x , &data.y ) ;
-}
-
-template<> void wxStringWriteValue(wxString &s , const wxPoint &data )
-{
-    s = wxString::Format("%d,%d", data.x , data.y ) ;
-}
-
-wxCUSTOM_TYPE_INFO(wxPoint, wxToStringConverter<wxPoint> , wxFromStringConverter<wxPoint>)
-
-template<> void wxStringReadValue(const wxString &s , wxSize &data )
-{
-    wxSscanf(s, "%d,%d", &data.x , &data.y ) ;
-}
-
-template<> void wxStringWriteValue(wxString &s , const wxSize &data )
-{
-    s = wxString::Format("%d,%d", data.x , data.y ) ;
-}
-
-wxCUSTOM_TYPE_INFO(wxSize, wxToStringConverter<wxSize> , wxFromStringConverter<wxSize>)
-
-#endif
-
 // ============================================================================
 // wxColourDatabase
 // ============================================================================

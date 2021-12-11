@@ -397,39 +397,6 @@ protected:
     static bool DoProcessEvent(wxMenuBase* menu, wxEvent& event, wxWindow* win);
 };
 
-#if wxUSE_EXTENDED_RTTI
-
-// ----------------------------------------------------------------------------
-// XTI accessor
-// ----------------------------------------------------------------------------
-
-class wxMenuInfoHelper : public wxObject
-{
-public:
-    wxMenuInfoHelper() { m_menu = NULL; }
-    virtual ~wxMenuInfoHelper() { }
-
-    [[maybe_unused]] bool Create( wxMenu *menu, const std::string &title )
-    {
-        m_menu = menu;
-        m_title = title;
-        return true;
-    }
-
-    wxMenu* GetMenu() const { return m_menu; }
-    std::string GetTitle() const { return m_title; }
-
-private:
-    wxMenu *m_menu;
-    std::string m_title;
-
-    wxDECLARE_DYNAMIC_CLASS(wxMenuInfoHelper);
-};
-
-WX_DECLARE_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
-
-#endif
-
 // ----------------------------------------------------------------------------
 // wxMenuBar
 // ----------------------------------------------------------------------------
@@ -547,21 +514,9 @@ public:
 
     bool CanBeOutsideClientArea() const override { return true; }
 
-#if wxUSE_EXTENDED_RTTI
-    // XTI helpers:
-    bool AppendMenuInfo( const wxMenuInfoHelper *info )
-    { return Append( info->GetMenu(), info->GetTitle() ); }
-    const wxMenuInfoHelperList& GetMenuInfos() const;
-#endif
-
 protected:
     // the list of all our menus
     wxMenuList m_menus;
-
-#if wxUSE_EXTENDED_RTTI
-    // used by XTI
-    wxMenuInfoHelperList m_menuInfos;
-#endif
 
     // the frame we are attached to (may be nullptr)
     wxFrame *m_menuBarFrame{nullptr};

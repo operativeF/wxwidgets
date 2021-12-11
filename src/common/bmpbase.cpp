@@ -28,11 +28,6 @@ IMPLEMENT_VARIANT_SHALLOWCMP(wxBitmap)
 IMPLEMENT_VARIANT_SHALLOWCMP(wxIcon)
 #endif
 
-#if wxUSE_EXTENDED_RTTI
-//WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxBitmap>)
-//WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxIcon>)
-#endif
-
 // ----------------------------------------------------------------------------
 // wxBitmapHelpers
 // ----------------------------------------------------------------------------

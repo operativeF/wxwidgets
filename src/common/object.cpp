@@ -23,29 +23,10 @@ import <cstring>;
     #pragma optimize("", off)
 #endif
 
-#if wxUSE_EXTENDED_RTTI
-const wxClassInfo* wxObject::ms_classParents[] = { NULL } ;
-wxObject* wxVariantOfPtrToObjectConverterwxObject ( const wxAny &data )
-{ return data.As<wxObject*>(); }
- wxAny wxObjectToVariantConverterwxObject ( wxObject *data )
- { return wxAny( dynamic_cast<wxObject*> (data)  ) ; }
-
- wxClassInfo wxObject::ms_classInfo(ms_classParents , {} , "wxObject",
-            (int) sizeof(wxObject),                              \
-            (wxObjectConstructorFn) 0   ,
-            NULL,NULL,0 , 0 ,
-            0 , wxVariantOfPtrToObjectConverterwxObject , 0 , wxObjectToVariantConverterwxObject);
-
- template<> void wxStringWriteValue(wxString & , wxObject* const & ){ wxFAIL_MSG("unreachable"); }
- template<> void wxStringWriteValue(wxString & , wxObject const & ){ wxFAIL_MSG("unreachable"); }
-
- wxClassTypeInfo s_typeInfo(wxT_OBJECT_PTR , &wxObject::ms_classInfo , NULL , NULL , typeid(wxObject*).name() ) ;
- wxClassTypeInfo s_typeInfowxObject(wxT_OBJECT , &wxObject::ms_classInfo , NULL , NULL , typeid(wxObject).name() ) ;
-#else // FIXME: Change to narrow string.
+// FIXME: Change to narrow string.
 wxClassInfo wxObject::ms_classInfo( L"wxObject", nullptr, nullptr,
                                         (int) sizeof(wxObject),
                                         (wxObjectConstructorFn) nullptr );
-#endif
 
 // restore optimizations
 #if defined __VISUALC__

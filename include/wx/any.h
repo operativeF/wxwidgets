@@ -99,9 +99,6 @@ public:
     template <typename T>
     bool CheckType() const;
 
-#if wxUSE_EXTENDED_RTTI
-    virtual const wxTypeInfo* GetTypeInfo() const = 0;
-#endif
 private:
 };
 
@@ -303,12 +300,6 @@ public:
     {
         return Ops::GetValue(buf);
     }
-#if wxUSE_EXTENDED_RTTI
-    virtual const wxTypeInfo* GetTypeInfo() const
-    {
-        return wxGetTypeInfo((T*)NULL);
-    }
-#endif
 };
 
 
@@ -363,19 +354,9 @@ public: \
         return static_cast<T>(*sptr); \
     }
 
-#if wxUSE_EXTENDED_RTTI
-#define WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE) \
-_WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE)\
-    virtual const wxTypeInfo* GetTypeInfo() const  \
-    { \
-        return wxGetTypeInfo((T*)NULL); \
-    } \
-};
-#else
 #define WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE) \
 _WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE)\
 };
-#endif
 
 //
 //  Integer value types
@@ -930,12 +911,6 @@ public:
         return static_cast<T>(wxAnyValueTypeImpl<T>::GetValue(m_buffer));
     }
 
-#if wxUSE_EXTENDED_RTTI
-    const wxTypeInfo* GetTypeInfo() const
-    {
-        return m_type->GetTypeInfo();
-    }
-#endif
     /**
         Template function that retrieves and converts the value of this
         variant to the type that T* value is.

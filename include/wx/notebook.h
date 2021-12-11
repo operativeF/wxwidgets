@@ -54,43 +54,6 @@ using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
 inline constexpr std::string_view wxNotebookNameStr = "notebook";
 
-#if wxUSE_EXTENDED_RTTI
-
-// ----------------------------------------------------------------------------
-// XTI accessor
-// ----------------------------------------------------------------------------
-
-class wxNotebookPageInfo : public wxObject
-{
-public:
-    [[maybe_unused]] bool Create(wxNotebookPage *page,
-                const std::string& text,
-                bool selected,
-                int imageId)
-    {
-        m_page = page;
-        m_text = text;
-        m_selected = selected;
-        m_imageId = imageId;
-        return true;
-    }
-
-    wxNotebookPage* GetPage() const { return m_page; }
-    wxString GetText() const { return m_text; }
-    bool GetSelected() const { return m_selected; }
-    int GetImageId() const { return m_imageId; }
-
-private:
-    wxNotebookPage *m_page{nullptr};
-    wxString m_text;
-    bool m_selected{false};
-    int m_imageId{-1};
-};
-
-WX_DECLARE_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
-
-#endif
-
 // ----------------------------------------------------------------------------
 // wxNotebookBase: define wxNotebook interface
 // ----------------------------------------------------------------------------

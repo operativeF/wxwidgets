@@ -62,60 +62,6 @@ wxFLAGS_MEMBER(wxBK_BOTTOM)
 wxFLAGS_MEMBER(wxNB_NOPAGETHEME)
 wxEND_FLAGS( wxNotebookStyle )
 
-#if wxUSE_EXTENDED_RTTI
-
-WX_DEFINE_LIST( wxNotebookPageInfoList )
-
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxNotebookPageInfo, wxObject, "wx/notebook.h");
-
-wxCOLLECTION_TYPE_INFO( wxNotebookPageInfo *, wxNotebookPageInfoList );
-
-template<> void wxCollectionToVariantArray( wxNotebookPageInfoList const &theList,
-                                           wxAnyList &value)
-{
-    wxListCollectionToAnyList<wxNotebookPageInfoList::compatibility_iterator>( theList, value );
-}
-
-wxBEGIN_PROPERTIES_TABLE(wxNotebookPageInfo)
-wxREADONLY_PROPERTY( Page, wxNotebookPage*, GetPage, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, "Helpstring", "group")
-wxREADONLY_PROPERTY( Text, wxString, GetText, wxString(), 0 /*flags*/, \
-                    "Helpstring", "group")
-wxREADONLY_PROPERTY( Selected, bool, GetSelected, false, 0 /*flags*/, \
-                    "Helpstring", "group" )
-wxREADONLY_PROPERTY( ImageId, int, GetImageId, -1, 0 /*flags*/, \
-                    "Helpstring", "group")
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxNotebookPageInfo)
-
-wxCONSTRUCTOR_4( wxNotebookPageInfo, wxNotebookPage*, Page, \
-                wxString, Text, bool, Selected, int, ImageId )
-
-// WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxNotebookPageInfo**>)
-// XTI accessors:
-
-void wxNotebookBase::AddPageInfo( wxNotebookPageInfo* info )
-{
-    AddPage( info->GetPage(), info->GetText(), info->GetSelected(), info->GetImageId() );
-}
-
-const wxNotebookPageInfoList& wxNotebookBase::GetPageInfos() const
-{
-    wxNotebookPageInfoList* list = const_cast< wxNotebookPageInfoList* >( &m_pageInfos );
-    WX_CLEAR_LIST( wxNotebookPageInfoList, *list );
-    for( size_t i = 0; i < GetPageCount(); ++i )
-    {
-        wxNotebookPageInfo *info = new wxNotebookPageInfo();
-        info->Create( const_cast<wxNotebookBase*>(this)->GetPage(i), GetPageText(i),
-                     GetSelection() == int(i), GetPageImage(i) );
-        list->Append( info );
-    }
-    return m_pageInfos;
-}
-
-#endif
-
 // ----------------------------------------------------------------------------
 // geometry
 // ----------------------------------------------------------------------------

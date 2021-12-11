@@ -45,14 +45,6 @@ wxEND_FLAGS( wxMenuStyle )
 
 wxCOLLECTION_TYPE_INFO( wxMenuItem *, wxMenuItemList ) ;
 
-#if wxUSE_EXTENDED_RTTI
-template<> void wxCollectionToVariantArray( wxMenuItemList const &theList,
-                                           wxAnyList &value)
-{
-    wxListCollectionToAnyList<wxMenuItemList::compatibility_iterator>( theList, value ) ;
-}
-#endif
-
 wxBEGIN_PROPERTIES_TABLE(wxMenu)
 wxEVENT_PROPERTY( Select, wxEVT_MENU, wxCommandEvent)
 
@@ -77,43 +69,6 @@ wxBEGIN_FLAGS( wxMenuBarStyle )
 wxFLAGS_MEMBER(wxMB_DOCKABLE)
 wxEND_FLAGS( wxMenuBarStyle )
 
-#if wxUSE_EXTENDED_RTTI
-// the negative id would lead the window (its superclass !) to
-// vetoe streaming out otherwise
-bool wxMenuBarStreamingCallback( [[maybe_unused]] const wxObject *object, wxObjectWriter *,
-                                wxObjectWriterCallback *, const wxStringToAnyHashMap & )
-{
-    return true;
-}
-#endif
-
-#if wxUSE_EXTENDED_RTTI
-WX_DEFINE_LIST( wxMenuInfoHelperList )
-
-wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxMenuInfoHelper, wxObject, "wx/menu.h");
-
-wxBEGIN_PROPERTIES_TABLE(wxMenuInfoHelper)
-wxREADONLY_PROPERTY( Menu, wxMenu*, GetMenu, wxEMPTY_PARAMETER_VALUE, \
-                    0 /*flags*/, "Helpstring", "group")
-
-wxREADONLY_PROPERTY( Title, std::string, GetTitle, "", \
-                    0 /*flags*/, "Helpstring", "group")
-wxEND_PROPERTIES_TABLE()
-
-wxEMPTY_HANDLERS_TABLE(wxMenuInfoHelper)
-
-wxCONSTRUCTOR_2( wxMenuInfoHelper, wxMenu*, Menu, std::string, Title )
-
-wxCOLLECTION_TYPE_INFO( wxMenuInfoHelper *, wxMenuInfoHelperList ) ;
-
-template<> void wxCollectionToVariantArray( wxMenuInfoHelperList const &theList,
-                                           wxAnyList &value)
-{
-    wxListCollectionToAnyList<wxMenuInfoHelperList::compatibility_iterator>( theList, value ) ;
-}
-
-#endif
-
 wxBEGIN_PROPERTIES_TABLE(wxMenuBar)
 wxPROPERTY_COLLECTION( MenuInfos, wxMenuInfoHelperList, wxMenuInfoHelper*, AppendMenuInfo, \
                       GetMenuInfos, 0 /*flags*/, "Helpstring", "group")
@@ -122,46 +77,6 @@ wxEND_PROPERTIES_TABLE()
 wxEMPTY_HANDLERS_TABLE(wxMenuBar)
 
 wxCONSTRUCTOR_DUMMY( wxMenuBar )
-
-#if wxUSE_EXTENDED_RTTI
-
-const wxMenuInfoHelperList& wxMenuBarBase::GetMenuInfos() const
-{
-    wxMenuInfoHelperList* list = const_cast< wxMenuInfoHelperList* > (& m_menuInfos);
-    WX_CLEAR_LIST( wxMenuInfoHelperList, *list);
-    for (size_t i = 0 ; i < GetMenuCount(); ++i)
-    {
-        wxMenuInfoHelper* info = new wxMenuInfoHelper();
-        info->Create( GetMenu(i), GetMenuLabel(i));
-        list->Append(info);
-    }
-    return m_menuInfos;
-}
-
-#endif
-
-// ----------------------------------------------------------------------------
-// XTI for wxMenuItem
-// ----------------------------------------------------------------------------
-
-#if wxUSE_EXTENDED_RTTI
-
-bool wxMenuItemStreamingCallback( const wxObject *object, wxObjectWriter *,
-                                 wxObjectWriterCallback *, const wxStringToAnyHashMap & )
-{
-    const wxMenuItem * mitem = wx_dynamic_cast(const wxMenuItem*, object);
-    if ( mitem->GetMenu() && !mitem->GetMenu()->GetTitle().empty() )
-    {
-        // we don't stream out the first two items for menus with a title,
-        // they will be reconstructed
-        if ( mitem->GetMenu()->FindItemByPosition(0) == mitem ||
-            mitem->GetMenu()->FindItemByPosition(1) == mitem )
-            return false;
-    }
-    return true;
-}
-
-#endif
 
 wxBEGIN_ENUM( wxItemKind )
 wxENUM_MEMBER( wxITEM_SEPARATOR )
