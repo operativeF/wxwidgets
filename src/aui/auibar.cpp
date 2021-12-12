@@ -24,6 +24,7 @@ module WX.AUI.AUIBar;
 import WX.Utils.Cast;
 import WX.Utils.Settings;
 
+import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 
 namespace

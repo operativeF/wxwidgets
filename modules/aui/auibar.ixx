@@ -18,6 +18,7 @@ module;
 export module WX.AUI.AUIBar;
 
 import WX.AUI.FrameManager;
+import WX.AUI.PaneInfo;
 import WX.AUI.ToolBarArt;
 import WX.AUI.ToolBar.Item;
 

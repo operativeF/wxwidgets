@@ -19,6 +19,7 @@ module;
 export module WX.AUI.DockArt;
 
 import WX.AUI.FrameManager;
+import WX.AUI.PaneInfo;
 
 import Utils.Geometry;
 

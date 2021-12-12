@@ -27,6 +27,7 @@ module;
 
 module WX.AUI.Book;
 
+import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 import WX.AUI.Page;
 import WX.AUI.TabArt;

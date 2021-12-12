@@ -26,14 +26,14 @@ import WX.AUI.FrameManager;
 
 import Utils.Geometry;
 
-export
-{
-
 #if wxUSE_MINIFRAME
 using wxAuiFloatingFrameBaseClass = wxMiniFrame;
 #else
 using wxAuiFloatingFrameBaseClass = wxFrame;
 #endif
+
+export
+{
 
 class wxAuiFloatingFrame : public wxAuiFloatingFrameBaseClass
 {
