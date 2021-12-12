@@ -538,14 +538,14 @@ void wxAuiManager::SetActivePane(wxWindow* active_pane)
     }
 }
 
-bool wxAuiPaneInfo::IsValid() const
-{
-    // Should this RTTI and function call be rewritten as
-    // sending a new event type to allow other window types
-    // to check the pane settings?
-    wxAuiToolBar* toolbar = wxDynamicCast(window, wxAuiToolBar);
-    return !toolbar || toolbar->IsPaneValid(*this);
-}
+// bool wxAuiPaneInfo::IsValid() const
+// {
+//     // Should this RTTI and function call be rewritten as
+//     // sending a new event type to allow other window types
+//     // to check the pane settings?
+//     wxAuiToolBar* toolbar = wxDynamicCast(window, wxAuiToolBar);
+//     return !toolbar || toolbar->IsPaneValid(*this);
+// }
 
 // -- wxAuiManager class implementation --
 
@@ -974,8 +974,8 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
         {
             // see whether non-default docking flags are valid
             test.window = window;
-            wxCHECK_MSG(test.IsValid(), false,
-                        "toolbar style and pane docking flags are incompatible");
+            //wxCHECK_MSG(test.IsValid(), false,
+            //            "toolbar style and pane docking flags are incompatible");
         }
     }
 

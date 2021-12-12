@@ -41,8 +41,8 @@ public:
         // unsafe bits of "dest"
         source.window = window;
         source.frame = frame;
-        wxCHECK_RET(source.IsValid(),
-                    "window settings and pane settings are incompatible");
+        //wxCHECK_RET(source.IsValid(),
+        //            "window settings a  nd pane settings are incompatible");
         // now assign
         *this = source;
     }
@@ -83,8 +83,8 @@ public:
     {
         wxAuiPaneInfo test(*this);
         test.window = w;
-        wxCHECK_MSG(test.IsValid(), *this,
-                    "window settings and pane settings are incompatible");
+        //wxCHECK_MSG(test.IsValid(), *this,
+        //            "window settings and pane settings are incompatible");
         *this = test;
         return *this;
     }
@@ -148,8 +148,8 @@ public:
                  optionLeftDockable | optionRightDockable |
                  optionFloatable | optionMovable | optionResizable |
                  optionCaption | optionPaneBorder | buttonClose;
-        wxCHECK_MSG(test.IsValid(), *this,
-                    "window settings and pane settings are incompatible");
+        // wxCHECK_MSG(test.IsValid(), *this,
+        //             "window settings and pane settings are incompatible");
         *this = test;
         return *this;
     }
@@ -178,8 +178,8 @@ public:
             test.state |= flag;
         else
             test.state &= ~flag;
-        wxCHECK_MSG(test.IsValid(), *this,
-                    "window settings and pane settings are incompatible");
+        //wxCHECK_MSG(test.IsValid(), *this,
+        //            "window settings and pane settings are incompatible");
         *this = test;
         return *this;
     }
@@ -260,7 +260,8 @@ public:
     int dock_pos{0};         // position inside the row (0 = first position)
     int dock_proportion{0};  // proportion while docked
 
-    bool IsValid() const;
+    // FIXME: This is all detectable at compile-time.
+    //bool IsValid() const;
 };
 
 using wxAuiPaneInfoArray    = std::vector<wxAuiPaneInfo>;
