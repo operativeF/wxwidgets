@@ -19,6 +19,7 @@ module;
 module WX.AUI.TabArt;
 
 import WX.AUI.Book;
+import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 
 import WX.Utils.Settings;

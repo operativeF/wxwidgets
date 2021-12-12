@@ -19,8 +19,8 @@ export module WX.AUI.FrameManager;
 
 import WX.Cfg.Flags;
 
-import WX.AUI.Flags;
 import WX.AUI.DockInfo;
+import WX.AUI.Flags;
 import WX.AUI.PaneInfo;
 
 import Utils.Geometry;
@@ -63,23 +63,6 @@ enum wxAuiPaneButtonState
     wxAUI_BUTTON_STATE_DISABLED = 1 << 3,
     wxAUI_BUTTON_STATE_HIDDEN   = 1 << 4,
     wxAUI_BUTTON_STATE_CHECKED  = 1 << 5
-};
-
-enum wxAuiButtonId
-{
-    wxAUI_BUTTON_CLOSE = 101,
-    wxAUI_BUTTON_MAXIMIZE_RESTORE = 102,
-    wxAUI_BUTTON_MINIMIZE = 103,
-    wxAUI_BUTTON_PIN = 104,
-    wxAUI_BUTTON_OPTIONS = 105,
-    wxAUI_BUTTON_WINDOWLIST = 106,
-    wxAUI_BUTTON_LEFT = 107,
-    wxAUI_BUTTON_RIGHT = 108,
-    wxAUI_BUTTON_UP = 109,
-    wxAUI_BUTTON_DOWN = 110,
-    wxAUI_BUTTON_CUSTOM1 = 201,
-    wxAUI_BUTTON_CUSTOM2 = 202,
-    wxAUI_BUTTON_CUSTOM3 = 203
 };
 
 enum wxAuiPaneInsertLevel

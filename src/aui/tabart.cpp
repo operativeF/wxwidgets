@@ -26,6 +26,7 @@ module WX.AUI.TabArt.Base;
 
 import WX.AUI.Book;
 import WX.AUI.DockArt;
+import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 
 import WX.Utils.Settings;

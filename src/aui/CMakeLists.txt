@@ -1,7 +1,6 @@
 set(AUI_CMN_SRC
     ${CMAKE_SOURCE_DIR}/src/aui/framemanager.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/dockart.cpp
-    ${CMAKE_SOURCE_DIR}/src/aui/floatpane.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/book.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/auibar.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/tabmdi.cpp
