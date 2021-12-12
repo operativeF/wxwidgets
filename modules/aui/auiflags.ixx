@@ -105,4 +105,12 @@ enum wxAuiNotebookOption
 
 wxALLOW_COMBINING_ENUMS(wxAuiNotebookOption, wxBorder)
 
+enum wxAuiToolBarArtSetting
+{
+    wxAUI_TBART_SEPARATOR_SIZE = 0,
+    wxAUI_TBART_GRIPPER_SIZE = 1,
+    wxAUI_TBART_OVERFLOW_SIZE = 2,
+    wxAUI_TBART_DROPDOWN_SIZE = 3
+};
+
 } // export

@@ -2,7 +2,6 @@ set(AUI_CMN_SRC
     ${CMAKE_SOURCE_DIR}/src/aui/framemanager.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/book.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/tabart.cpp
-    ${CMAKE_SOURCE_DIR}/src/aui/generic/toolbarartg.cpp
 )
 
 set(AUI_CMN_INF

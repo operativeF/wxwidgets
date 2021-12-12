@@ -28,6 +28,7 @@ import WX.AUI.FrameManager;
 import WX.AUI.PaneInfo;
 import WX.AUI.ToolBarArt;
 import WX.AUI.ToolBar.Item;
+import WX.AUI.ToolBarArt.Base;
 
 import Utils.Geometry;
 
@@ -37,14 +38,6 @@ import WX.Utils.Settings;
 
 export
 {
-
-enum wxAuiToolBarArtSetting
-{
-    wxAUI_TBART_SEPARATOR_SIZE = 0,
-    wxAUI_TBART_GRIPPER_SIZE = 1,
-    wxAUI_TBART_OVERFLOW_SIZE = 2,
-    wxAUI_TBART_DROPDOWN_SIZE = 3
-};
 
 // aui toolbar event class
 
