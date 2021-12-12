@@ -3,7 +3,6 @@ set(AUI_CMN_SRC
     ${CMAKE_SOURCE_DIR}/src/aui/dockart.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/book.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/auibar.cpp
-    ${CMAKE_SOURCE_DIR}/src/aui/tabmdi.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/tabart.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/generic/toolbarartg.cpp
 )
@@ -20,7 +19,6 @@ set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/page.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/paneinfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/tabart.ixx
-    ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/toolbarart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/toolbaritem.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/generic/toolbarartg.ixx
@@ -32,7 +30,7 @@ set(AUI_MSW_INF
 )
 
 if(wxUSE_MDI)
-    set(AUI_MDI_SRC ${CMAKE_SOURCE_DIR}/src/aui/tabmdi.cpp)
+    set(AUI_MDI_SRC ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx)
 endif()
 
 if(wxUSE_UXTHEME AND WIN32)
