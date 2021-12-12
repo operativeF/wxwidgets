@@ -13,10 +13,10 @@ module;
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"
+#include "wx/dc.h"
 #include "wx/font.h"
 #include "wx/pen.h"
-
-#include "wx/dc.h"
+#include "wx/window.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
@@ -38,7 +38,6 @@ module;
 #endif
 #endif
 
-
 export module WX.AUI.DockArt;
 
 import WX.AUI.Book;
@@ -58,8 +57,6 @@ import Utils.Geometry;
 
 export
 {
-
-class wxWindow;
 
 enum wxAuiPaneDockArtSetting
 {

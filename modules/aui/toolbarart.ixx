@@ -1,5 +1,9 @@
 module;
 
+#include "wx/dc.h"
+#include "wx/font.h"
+#include "wx/window.h"
+
 export module WX.AUI.ToolBarArt.Base;
 
 import WX.AUI.ToolBar.Item;
@@ -8,10 +12,6 @@ import Utils.Geometry;
 
 export
 {
-
-class wxDC;
-class wxFont;
-class wxWindow;
 
 class wxAuiToolBarArt
 {

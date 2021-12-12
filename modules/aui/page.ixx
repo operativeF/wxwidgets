@@ -1,6 +1,7 @@
 module;
 
 #include "wx/bitmap.h"
+#include "wx/window.h"
 
 export module WX.AUI.Page;
 
@@ -10,8 +11,6 @@ import <string>;
 
 export
 {
-
-class wxWindow;
 
 struct wxAuiNotebookPage
 {

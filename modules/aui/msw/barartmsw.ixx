@@ -10,14 +10,13 @@
 module;
 
 #include "wx/msw/private.h"
-
-#include "wx/bitmap.h"
-#include "wx/dcclient.h"
-#include "wx/app.h"
-#include "wx/dc.h"
-#include "wx/window.h"
-
 #include "wx/msw/uxtheme.h"
+
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/window.h"
 
 export module WX.AUI.ToolBarArt;
 
@@ -35,9 +34,6 @@ import Utils.Geometry;
 
 export
 {
-
-class wxDC;
-class wxWindow;
 
 class wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 {

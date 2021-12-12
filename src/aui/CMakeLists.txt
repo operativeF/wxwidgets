@@ -39,10 +39,6 @@ if(wxUSE_XRC)
                     ${CMAKE_SOURCE_DIR}/src/xrc/xh_auitoolb.cpp)
 endif()
 
-set(AUI_MSW_SRC
-    ${CMAKE_SOURCE_DIR}/src/aui/msw/tabartmsw.cpp
-)
-
 set(AUI_GTK_SRC
     ${CMAKE_SOURCE_DIR}/src/aui/gtk/tabart.cpp
 )
@@ -50,7 +46,7 @@ set(AUI_GTK_SRC
 set(AUI_FILES ${AUI_CMN_SRC})
 
 if(WIN32)
-    list(APPEND AUI_FILES ${AUI_MSW_SRC} ${AUI_BAR_ART_SRC} ${AUI_CMN_INF} ${AUI_MSW_INF})
+    list(APPEND AUI_FILES ${AUI_BAR_ART_SRC} ${AUI_CMN_INF} ${AUI_MSW_INF})
 elseif(WXGTK2)
     list(APPEND AUI_FILES ${AUI_GTK_SRC})
 endif()

@@ -25,6 +25,7 @@ export module WX.AUI.TabMDI;
 
 import WX.AUI.DockArt;
 import WX.AUI.Book;
+import WX.AUI.Flags;
 import WX.AUI.TabArt;
 
 import Utils.Geometry;

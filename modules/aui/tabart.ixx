@@ -15,6 +15,7 @@ module;
 #include "wx/pen.h"
 #include "wx/brush.h"
 #include "wx/bitmap.h"
+#include "wx/window.h"
 
 export module WX.AUI.TabArt.Base;
 
@@ -30,7 +31,6 @@ export
 {
 
 class wxDC;
-class wxWindow;
 
 class wxAuiTabArt
 {
