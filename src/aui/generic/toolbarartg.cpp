@@ -9,6 +9,7 @@ module WX.AUI.ToolBarArt.Generic;
 
 import WX.AUI.AUIBar;
 import WX.AUI.DockArt; // FIXME: imported for wxAuiBitmapFromBits utility function
+import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 import WX.AUI.ToolBarArt.Base;
 

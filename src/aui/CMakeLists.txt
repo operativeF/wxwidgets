@@ -23,7 +23,6 @@ set(AUI_CMN_INF
 )
 
 set(AUI_MSW_INF
-    ${CMAKE_SOURCE_DIR}/modules/aui/msw/barartmsw.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/msw/tabartmsw.ixx
 )
 
@@ -32,7 +31,7 @@ if(wxUSE_MDI)
 endif()
 
 if(wxUSE_UXTHEME AND WIN32)
-    set(AUI_BAR_ART_SRC ${CMAKE_SOURCE_DIR}/src/aui/msw/barart.cpp)
+    set(AUI_BAR_ART_SRC ${CMAKE_SOURCE_DIR}/modules/aui/msw/barartmsw.ixx)
 endif()
 
 if(wxUSE_XRC)
