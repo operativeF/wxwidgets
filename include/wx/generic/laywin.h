@@ -83,7 +83,7 @@ public:
     void SetAlignment(wxLayoutAlignment align) { m_alignment = align; }
     wxLayoutAlignment GetAlignment() const { return m_alignment; }
 
-    wxEvent *Clone() const override { return new wxQueryLayoutInfoEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxQueryLayoutInfoEvent>(*this); }
 
 protected:
     int                     m_flags{0};
@@ -128,7 +128,7 @@ public:
     void SetRect(const wxRect& rect) { m_rect = rect; }
     wxRect GetRect() const { return m_rect; }
 
-    wxEvent *Clone() const override { return new wxCalculateLayoutEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxCalculateLayoutEvent>(*this); }
 
 protected:
     unsigned int            m_flags;

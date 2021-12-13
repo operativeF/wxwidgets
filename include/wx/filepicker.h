@@ -50,7 +50,8 @@ public:
     void SetPath(const wxString &p) { m_path = p; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxFileDirPickerEvent(*this); }
+    // FIXME: Are they really?
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFileDirPickerEvent>(*this); }
 
 private:
     wxString m_path;

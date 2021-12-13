@@ -64,7 +64,7 @@ public:
 
     // default copy ctor, assignment operator and dtor are ok
 
-    wxEvent *Clone() const override { return new wxPowerEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxPowerEvent>(*this); }
 
 private:
     bool m_veto{false};

@@ -369,7 +369,7 @@ public:
         return m_data.pt.y;
     }
 
-    wxEvent *Clone() const override { return new wxSplitterEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSplitterEvent>(*this); }
 
 private:
     friend class wxSplitterWindow;

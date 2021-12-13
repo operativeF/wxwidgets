@@ -146,7 +146,7 @@ public:
         m_item = e.m_item;
     }
 #endif
-    wxEvent *Clone() const override { return new wxRibbonGalleryEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRibbonGalleryEvent>(*this); }
 
     wxRibbonGallery* GetGallery() {return m_gallery;}
     wxRibbonGalleryItem* GetGalleryItem() {return m_item;}

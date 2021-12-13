@@ -108,7 +108,7 @@ public:
 
     wxTaskBarIconEvent& operator=(const wxTaskBarIconEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxTaskBarIconEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTaskBarIconEvent>(*this); }
 };
 
 typedef void (wxEvtHandler::*wxTaskBarIconEventFunction)(wxTaskBarIconEvent&);

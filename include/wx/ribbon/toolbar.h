@@ -210,7 +210,7 @@ public:
         , m_bar(bar)
     {
     }
-    wxEvent *Clone() const override { return new wxRibbonToolBarEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRibbonToolBarEvent>(*this); }
 
     wxRibbonToolBar* GetBar() {return m_bar;}
     void SetBar(wxRibbonToolBar* bar) {m_bar = bar;}

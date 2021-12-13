@@ -431,7 +431,7 @@ public:
     unsigned int GetNewOrder() const { return m_order; }
     void SetNewOrder(unsigned int order) { m_order = order; }
 
-    wxEvent *Clone() const override { return new wxHeaderCtrlEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxHeaderCtrlEvent>(*this); }
 
 private:
     // the column affected by the event

@@ -470,7 +470,7 @@ public:
     // COLUMN_SORTED event.
     unsigned GetColumn() const { return m_column; }
 
-    wxEvent* Clone() const override { return new wxTreeListEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTreeListEvent>(*this); }
 
 private:    
     // Ctor is private, only wxTreeListCtrl can create events of this type.

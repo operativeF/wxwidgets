@@ -619,7 +619,7 @@ public:
     bool GetLinkClicked() const { return m_bLinkWasClicked; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxHtmlCellEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxHtmlCellEvent>(*this); }
 
 private:
     wxHtmlCell *m_cell;
@@ -653,7 +653,7 @@ public:
     const wxHtmlLinkInfo &GetLinkInfo() const { return m_linkInfo; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxHtmlLinkEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxHtmlLinkEvent>(*this); }
 
 private:
     wxHtmlLinkInfo m_linkInfo;

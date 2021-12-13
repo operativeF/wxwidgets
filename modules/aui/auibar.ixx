@@ -52,7 +52,7 @@ public:
 
 	wxAuiToolBarEvent& operator=(const wxAuiToolBarEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxAuiToolBarEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxAuiToolBarEvent>(*this); }
 
     bool IsDropDownClicked() const  { return m_isDropdownClicked; }
     void SetDropDownClicked(bool c) { m_isDropdownClicked = c;    }
@@ -1767,7 +1767,7 @@ void wxAuiToolBar::OnSize([[maybe_unused]] wxSizeEvent& evt)
     // idle events aren't sent while user is resizing frame (why?),
     // but resizing toolbar here causes havoc,
     // so force idle handler to run after size handling complete
-    QueueEvent(new wxIdleEvent);
+    QueueEvent(std::make_unique<wxIdleEvent>());
 }
 
 void wxAuiToolBar::OnIdle(wxIdleEvent& evt)

@@ -85,7 +85,7 @@ public:
         , m_page(page)
     {
     }
-    wxEvent *Clone() const override { return new wxRibbonBarEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRibbonBarEvent>(*this); }
 
     wxRibbonPage* GetPage() {return m_page;}
     void SetPage(wxRibbonPage* page) {m_page = page;}

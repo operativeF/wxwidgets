@@ -58,8 +58,8 @@ public:
     // Allocates a copy of this object.
     // Required for wxEvtHandler::AddPendingEvent
     // ------------------------------------------------------------------------
-    wxEvent *Clone() const override
-    {   return new wxMediaEvent(*this);     }
+    std::unique_ptr<wxEvent> Clone() const override
+    {   return std::make_unique<wxMediaEvent>(*this);     }
 };
 
 class wxMediaCtrl : public wxControl

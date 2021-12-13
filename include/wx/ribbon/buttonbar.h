@@ -223,7 +223,7 @@ public:
         , m_bar(bar), m_button(button)
     {
     }
-    wxEvent *Clone() const override { return new wxRibbonButtonBarEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRibbonButtonBarEvent>(*this); }
 
     wxRibbonButtonBar* GetBar() {return m_bar;}
     wxRibbonButtonBarButtonBase *GetButton() { return m_button; }

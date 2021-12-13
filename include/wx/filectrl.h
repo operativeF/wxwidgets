@@ -100,7 +100,7 @@ public:
 	wxFileCtrlEvent& operator=(const wxFileCtrlEvent&) = delete;
 
     // no need for the copy constructor as the default one will be fine.
-    wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFileCtrlEvent>( *this ); }
 
     void SetFiles( const std::vector<std::string>& files ) { m_files = files; }
     void SetDirectory( const std::string &directory ) { m_directory = directory; }

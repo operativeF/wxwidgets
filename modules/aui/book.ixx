@@ -375,7 +375,7 @@ public:
 
 	wxAuiNotebookEvent& operator=(const wxAuiNotebookEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxAuiNotebookEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxAuiNotebookEvent>(*this); }
 
     void SetDragSource(wxAuiNotebook* s) { m_dragSource = s; }
     wxAuiNotebook* GetDragSource() const { return m_dragSource; }

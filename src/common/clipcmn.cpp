@@ -64,10 +64,10 @@ bool wxClipboardBase::IsSupportedAsync( wxEvtHandler *sink )
 {
     // We just imitate an asynchronous API on most platforms.
     // This method is overridden uner GTK.
-    wxClipboardEvent *event = new wxClipboardEvent(wxEVT_CLIPBOARD_CHANGED);
+    auto event = std::make_unique<wxClipboardEvent>(wxEVT_CLIPBOARD_CHANGED);
     event->SetEventObject( this );
 
-    sink->QueueEvent( event );
+    sink->QueueEvent( std::move(event) );
 
     return true;
 }

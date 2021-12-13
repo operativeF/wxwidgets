@@ -51,7 +51,7 @@ public:
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
     bool Selecting() const { return m_selecting; }
 
-    wxEvent *Clone() const override { return new wxGridEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxGridEvent>(*this); }
 
 protected:
     int         m_row{-1};
@@ -87,7 +87,7 @@ public:
     int GetRowOrCol() const { return m_rowOrCol; }
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
 
-    wxEvent *Clone() const override { return new wxGridSizeEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxGridSizeEvent>(*this); }
 
 protected:
     int         m_rowOrCol{-1};
@@ -131,7 +131,7 @@ public:
     int GetRightCol() const { return m_bottomRight.GetCol(); }
     bool Selecting() const { return m_selecting; }
 
-    wxEvent *Clone() const override { return new wxGridRangeSelectEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxGridRangeSelectEvent>(*this); }
 
 protected:
     void Init(const wxGridCellCoords& topLeft,
@@ -165,7 +165,7 @@ public:
     void SetCol(int col)                { m_col = col; }
     void SetWindow(wxWindow* window)    { m_window = window; }
 
-    wxEvent *Clone() const override { return new wxGridEditorCreatedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxGridEditorCreatedEvent>(*this); }
 
 private:
     wxWindow* m_window{ nullptr };

@@ -180,7 +180,7 @@ public:
                 const wxTreeItemId &item = wxTreeItemId());
     wxTreeEvent(const wxTreeEvent& event) = default;
 
-    wxEvent *Clone() const override { return new wxTreeEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTreeEvent>(*this); }
 
         // get the item on which the operation was performed or the newly
         // selected item for wxEVT_TREE_SEL_CHANGED/ING events

@@ -280,7 +280,7 @@ public:
 
     void SetDataBuffer(const wxMemoryBuffer& dataBuf) { m_dataBuf = dataBuf; }
 
-    wxEvent* Clone() const override { return new wxWebRequestEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWebRequestEvent>(*this); }
 
 private:
     wxWebRequest::State m_state;

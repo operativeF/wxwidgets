@@ -271,7 +271,7 @@ public:
 
     wxWizardPage*   GetPage() const { return m_page; }
 
-    wxEvent *Clone() const override { return new wxWizardEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWizardEvent>(*this); }
 
 private:
     bool m_direction;

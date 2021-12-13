@@ -1909,7 +1909,7 @@ public:
     ~wxPropertyGridEvent();
 
     // Copyer.
-    wxEvent* Clone() const override;
+    std::unique_ptr<wxEvent> Clone() const override;
 
     // Returns the column index associated with this event.
     // For the column dragging events, it is the column to the left

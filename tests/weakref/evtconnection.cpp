@@ -27,7 +27,7 @@ class wxTestEvent : public wxEvent
 {
 public:
     wxTestEvent(wxEventType type = wxEVT_TEST) : wxEvent(0, type) { }
-    wxEvent *Clone() const override { return new wxTestEvent(GetEventType()); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTestEvent>(GetEventType()); }
 };
 
 class wxTestSink : public wxEvtHandler

@@ -111,9 +111,9 @@ public:
     bool SupportsFormat(const wxDataFormat& format) const;
     void AddFormat(const wxDataFormat& format);
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxClipboardEvent(*this);
+        return std::make_unique<wxClipboardEvent>(*this);
     }
 
 

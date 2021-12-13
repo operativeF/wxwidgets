@@ -308,7 +308,7 @@ public:
     wxWebViewNavigationActionFlags GetNavigationAction() const { return m_actionFlags; }
     const wxString& GetMessageHandler() const { return m_messageHandler; }
 
-    wxEvent* Clone() const override { return new wxWebViewEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWebViewEvent>(*this); }
 private:
     wxString m_url;
     wxString m_target;

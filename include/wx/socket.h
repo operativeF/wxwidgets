@@ -425,7 +425,7 @@ public:
         { return (wxSocketBase *) GetEventObject(); }
     void *GetClientData() const { return m_clientData; }
 
-    wxEvent *Clone() const override { return new wxSocketEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSocketEvent>(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_SOCKET; }
 
 public:

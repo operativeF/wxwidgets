@@ -154,7 +154,7 @@ public:
     void SetFindString(const std::string& str) { SetString(str); }
     void SetReplaceString(const std::string& str) { m_strReplace = str; }
 
-    wxEvent *Clone() const override { return new wxFindDialogEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFindDialogEvent>(*this); }
 
 private:
     std::string m_strReplace;

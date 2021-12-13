@@ -24,7 +24,7 @@ class MyEvent : public wxEvent
 public:
     MyEvent() : wxEvent(0, MyEventType) { }
 
-    wxEvent *Clone() const override { return new MyEvent; }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<MyEvent>(); }
 };
 
 typedef void (wxEvtHandler::*MyEventFunction)(MyEvent&);

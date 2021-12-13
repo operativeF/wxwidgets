@@ -304,7 +304,7 @@ public:
 
 	wxAuiManagerEvent& operator=(const wxAuiManagerEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxAuiManagerEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxAuiManagerEvent>(*this); }
 
     void SetManager(wxAuiManager* mgr) { manager = mgr; }
     void SetPane(wxAuiPaneInfo* p) { pane = p; }

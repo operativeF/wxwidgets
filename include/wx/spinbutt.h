@@ -119,7 +119,7 @@ public:
     int GetPosition() const { return m_commandInt; }
     void SetPosition(int pos) { m_commandInt = pos; }
 
-    wxEvent *Clone() const override { return new wxSpinEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSpinEvent>(*this); }
 };
 
 typedef void (wxEvtHandler::*wxSpinEventFunction)(wxSpinEvent&);

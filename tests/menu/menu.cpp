@@ -85,45 +85,35 @@ public:
         : m_win(win)
     {
         m_win->Bind(wxEVT_MENU, &MenuEventHandler::OnMenu, this);
-
-        m_gotEvent = false;
-        m_event = nullptr;
     }
 
     virtual ~MenuEventHandler()
     {
         m_win->Unbind(wxEVT_MENU, &MenuEventHandler::OnMenu, this);
-
-        delete m_event;
     }
 
-    const wxCommandEvent& GetEvent()
+    std::unique_ptr<wxCommandEvent> GetEvent()
     {
-        CHECK(m_gotEvent);
+        CHECK(m_event);
 
-        m_gotEvent = false;
-
-        return *m_event;
+        return std::move(m_event);
     }
 
     bool GotEvent() const
     {
-        return m_gotEvent;
+        return m_event != nullptr;
     }
 
 private:
     void OnMenu(wxCommandEvent& event)
     {
-        CHECK(!m_gotEvent);
+        CHECK(m_event == nullptr);
 
-        delete m_event;
-        m_event = static_cast<wxCommandEvent*>(event.Clone());
-        m_gotEvent = true;
+        m_event.reset(dynamic_cast<wxCommandEvent*>(event.Clone().release()));
     }
 
     wxWindow* const m_win;
-    wxCommandEvent* m_event;
-    bool m_gotEvent;
+    std::unique_ptr<wxCommandEvent> m_event;
 };
 
 #endif // wxUSE_UIACTIONSIMULATOR
@@ -535,10 +525,10 @@ TEST_CASE("Menu tests.")
         sim.KeyUp(WXK_F1);
         wxYield();
 
-        const wxCommandEvent& ev = handler.GetEvent();
-        CHECK_EQ(static_cast<int>(MenuTestCase_Bar), ev.GetId());
+        const auto ev = handler.GetEvent();
+        CHECK_EQ(static_cast<int>(MenuTestCase_Bar), ev->GetId());
 
-        wxObject* const src = ev.GetEventObject();
+        wxObject* const src = ev->GetEventObject();
         CHECK(src);
 
         // FIXME: Use typeinfo
@@ -551,8 +541,8 @@ TEST_CASE("Menu tests.")
         sim.Char('A', wxMOD_CONTROL);
         wxYield();
 
-        const wxCommandEvent& ev2 = handler.GetEvent();
-        CHECK(ev2.GetId() == static_cast<int>(MenuTestCase_SelectAll));
+        const auto ev2 = handler.GetEvent();
+        CHECK(ev2->GetId() == static_cast<int>(MenuTestCase_SelectAll));
 
         // Now create a text control which uses the same accelerator for itself and
         // check that when the text control has focus, the accelerator does _not_

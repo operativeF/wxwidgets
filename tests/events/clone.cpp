@@ -37,7 +37,7 @@ TEST_CASE("EventClone")
         wxEvent* test;
         if ( ci->IsDynamic() )
         {
-            test = wxDynamicCast(ci->CreateObject(),wxEvent);
+            test = dynamic_cast<wxEvent*>(ci->CreateObject());
         }
         else if ( cn == "wxTimerEvent" )
         {
@@ -51,13 +51,11 @@ TEST_CASE("EventClone")
 
         REQUIRE( test );
 
-        wxEvent * const cloned = test->Clone();
+        auto cloned = test->Clone();
         delete test;
 
         REQUIRE( cloned );
         CHECK( cloned->wxGetClassInfo() == ci );
-
-        delete cloned;
     }
 }
 

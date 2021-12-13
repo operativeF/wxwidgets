@@ -159,9 +159,9 @@ public:
         return m_changeType;
     }
 
-    wxEvent* Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        wxFileSystemWatcherEvent* evt = new wxFileSystemWatcherEvent(*this);
+        auto evt = std::make_unique<wxFileSystemWatcherEvent>(*this);
         evt->m_errorMsg = m_errorMsg;
         evt->m_path = wxFileName(m_path.GetFullPath());
         evt->m_newPath = wxFileName(m_newPath.GetFullPath());

@@ -998,7 +998,7 @@ public:
     // This function is used to create a copy of the event polymorphically and
     // all derived classes must implement it because otherwise wxPostEvent()
     // for them wouldn't work (it needs to do a copy of the event)
-    virtual wxEvent *Clone() const = 0;
+    virtual std::unique_ptr<wxEvent> Clone() const = 0;
 
     // this function is used to selectively process events in wxEventLoopBase::YieldFor
     // NOTE: by default it returns wxEVT_CATEGORY_UI just because the major
@@ -1296,7 +1296,7 @@ public:
     void RequestMore(bool needMore = true) { m_requestMore = needMore; }
     bool MoreRequested() const { return m_requestMore; }
 
-    wxEvent *Clone() const override { return new wxIdleEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxIdleEvent>(*this); }
 
     // Specify how wxWidgets will send idle events: to
     // all windows, or only to those which specify that they
@@ -1336,9 +1336,9 @@ public:
 
 	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxThreadEvent(*this);
+        return std::make_unique<wxThreadEvent>(*this);
     }
 
     // this is important to avoid that calling wxEventLoopBase::YieldFor thread events
@@ -1397,9 +1397,9 @@ public:
     {
     }
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxAsyncMethodCallEvent0(*this);
+        return std::make_unique<wxAsyncMethodCallEvent0>(*this);
     }
 
     void Execute() override
@@ -1439,9 +1439,9 @@ public:
     {
     }
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxAsyncMethodCallEvent1(*this);
+        return std::make_unique<wxAsyncMethodCallEvent1>(*this);
     }
 
     void Execute() override
@@ -1486,9 +1486,9 @@ public:
     {
     }
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxAsyncMethodCallEvent2(*this);
+        return std::make_unique<wxAsyncMethodCallEvent2>(*this);
     }
 
     void Execute() override
@@ -1522,9 +1522,9 @@ public:
     {
     }
 
-    wxEvent *Clone() const override
+    std::unique_ptr<wxEvent> Clone() const override
     {
-        return new wxAsyncMethodCallEventFunctor(*this);
+        return std::make_unique<wxAsyncMethodCallEventFunctor>(*this);
     }
 
     void Execute() override
@@ -1608,7 +1608,7 @@ public:
     // true if the listbox event was a selection.
     bool IsSelection() const { return (m_extraLong != 0); }
 
-    wxEvent *Clone() const override { return new wxCommandEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxCommandEvent>(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_USER_INPUT; }
 
 protected:
@@ -1645,7 +1645,7 @@ public:
     // for implementation code only: is the operation allowed?
     bool IsAllowed() const { return m_bAllow; }
 
-    wxEvent *Clone() const override { return new wxNotifyEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxNotifyEvent>(*this); }
 
 private:
     bool m_bAllow;
@@ -1684,7 +1684,7 @@ public:
     void SetOrientation(int orient) { m_extraLong = (long) orient; }
     void SetPosition(int pos) { m_commandInt = pos; }
 
-    wxEvent *Clone() const override { return new wxScrollEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxScrollEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -1721,7 +1721,7 @@ public:
     void SetOrientation(int orient) { m_extraLong = (long) orient; }
     void SetPosition(int pos) { m_commandInt = pos; }
 
-    wxEvent *Clone() const override { return new wxScrollWinEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxScrollWinEvent>(*this); }
 
 protected:
     int               m_commandInt;
@@ -1872,7 +1872,7 @@ public:
     bool IsPageScroll() const { return ((unsigned int)m_linesPerAction == UINT_MAX); }
 
     float GetMagnification() const { return m_magnification; }
-    wxEvent *Clone() const override { return new wxMouseEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMouseEvent>(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_USER_INPUT; }
 
     wxMouseEvent& operator=(const wxMouseEvent& event)
@@ -1927,7 +1927,7 @@ public:
     const wxCursor& GetCursor() const { return m_cursor; }
     bool HasCursor() const { return m_cursor.IsOk(); }
 
-    wxEvent *Clone() const override { return new wxSetCursorEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSetCursorEvent>(*this); }
 
 private:
     wxCursor m_cursor;
@@ -1970,7 +1970,7 @@ public:
     bool IsGestureEnd() const { return m_isEnd; }
     void SetGestureEnd(bool isEnd = true) { m_isEnd = isEnd; }
 
-    wxEvent *Clone() const override { return new wxGestureEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxGestureEvent>(*this); }
 
 protected:
     wxPoint m_pos;
@@ -2004,7 +2004,7 @@ public:
     wxPoint GetDelta() const { return m_delta; }
     void SetDelta(const wxPoint& delta) { m_delta = delta; }
 
-    wxEvent *Clone() const override { return new wxPanGestureEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxPanGestureEvent>(*this); }
 
 private:
     wxPoint m_delta;
@@ -2038,7 +2038,7 @@ public:
     double GetZoomFactor() const { return m_zoomFactor; }
     void SetZoomFactor(double zoomFactor) { m_zoomFactor = zoomFactor; }
 
-    wxEvent *Clone() const override { return new wxZoomGestureEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxZoomGestureEvent>(*this); }
 
 private:
     double m_zoomFactor;
@@ -2072,7 +2072,7 @@ public:
     double GetRotationAngle() const { return m_rotationAngle; }
     void SetRotationAngle(double rotationAngle) { m_rotationAngle = rotationAngle; }
 
-    wxEvent *Clone() const override { return new wxRotateGestureEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRotateGestureEvent>(*this); }
 
 private:
     double m_rotationAngle;
@@ -2100,7 +2100,7 @@ public:
 
 	wxTwoFingerTapEvent& operator=(const wxTwoFingerTapEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxTwoFingerTapEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTwoFingerTapEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2125,7 +2125,7 @@ public:
 
 	wxLongPressEvent& operator=(const wxLongPressEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxLongPressEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxLongPressEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2150,7 +2150,7 @@ public:
 
 	wxPressAndTapEvent& operator=(const wxPressAndTapEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxPressAndTapEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxPressAndTapEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2241,7 +2241,7 @@ public:
     bool IsNextEventAllowed() const { return m_allowNext; }
 
 
-    wxEvent *Clone() const override { return new wxKeyEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxKeyEvent>(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_USER_INPUT; }
 
     // we do need to copy wxKeyEvent sometimes (in wxTreeCtrl code, for
@@ -2332,7 +2332,7 @@ public:
     wxRect GetRect() const { return m_rect; }
     void SetRect(const wxRect& rect) { m_rect = rect; }
 
-    wxEvent *Clone() const override { return new wxSizeEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSizeEvent>(*this); }
 
 private:
     wxRect m_rect; // Used for wxEVT_SIZING
@@ -2377,7 +2377,7 @@ public:
     wxRect GetRect() const { return m_rect; }
     void SetRect(const wxRect& rect) { m_rect = rect; }
 
-    wxEvent *Clone() const override { return new wxMoveEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMoveEvent>(*this); }
 
 protected:
     wxRect m_rect;
@@ -2407,7 +2407,7 @@ public:
 	
     wxPaintEvent& operator=(const wxPaintEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxPaintEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxPaintEvent>(*this); }
 
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
@@ -2425,7 +2425,7 @@ public:
 
 	wxNcPaintEvent& operator=(const wxNcPaintEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxNcPaintEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxNcPaintEvent>(*this); }
 
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
@@ -2451,7 +2451,7 @@ public:
 
     wxDC *GetDC() const { return m_dc; }
 
-    wxEvent *Clone() const override { return new wxEraseEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxEraseEvent>(*this); }
 
 protected:
     wxDC *m_dc;
@@ -2487,7 +2487,7 @@ public:
     wxWindow *GetWindow() const { return m_win; }
     void SetWindow(wxWindow *win) { m_win = win; }
 
-    wxEvent *Clone() const override { return new wxFocusEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFocusEvent>(*this); }
 
 private:
     wxWindow *m_win;
@@ -2509,7 +2509,7 @@ public:
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
-    wxEvent *Clone() const override { return new wxChildFocusEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxChildFocusEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2554,7 +2554,7 @@ public:
     bool GetActive() const { return m_active; }
     Reason GetActivationReason() const { return m_activationReason;}
 
-    wxEvent *Clone() const override { return new wxActivateEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxActivateEvent>(*this); }
 
 private:
     Reason m_activationReason;
@@ -2581,7 +2581,7 @@ public:
 
 	wxInitDialogEvent& operator=(const wxInitDialogEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxInitDialogEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxInitDialogEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2617,7 +2617,7 @@ public:
     // only for wxEVT_MENU_OPEN/CLOSE
     wxMenu* GetMenu() const { return m_menu; }
 
-    wxEvent *Clone() const override { return new wxMenuEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMenuEvent>(*this); }
 
 private:
     wxMenu* m_menu;
@@ -2671,7 +2671,7 @@ public:
     bool CanVeto() const { return m_canVeto; }
     bool GetVeto() const { return m_canVeto && m_veto; }
 
-    wxEvent *Clone() const override { return new wxCloseEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxCloseEvent>(*this); }
 
 protected:
     bool m_loggingOff{true},
@@ -2705,7 +2705,7 @@ public:
     // return true if the window was shown, false if hidden
     bool IsShown() const { return m_show; }
 
-    wxEvent *Clone() const override { return new wxShowEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxShowEvent>(*this); }
 
 protected:
     bool m_show;
@@ -2735,7 +2735,7 @@ public:
     // return true if the frame was iconized, false if restored
     bool IsIconized() const { return m_iconized; }
 
-    wxEvent *Clone() const override { return new wxIconizeEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxIconizeEvent>(*this); }
 
 protected:
     bool m_iconized;
@@ -2758,7 +2758,7 @@ public:
 
 	wxMaximizeEvent& operator=(const wxMaximizeEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxMaximizeEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMaximizeEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2783,7 +2783,7 @@ public:
 
     bool IsFullScreen() const { return m_fullscreen; }
 
-    wxEvent *Clone() const override { return new wxFullScreenEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFullScreenEvent>(*this); }
 
 protected:
     bool m_fullscreen;
@@ -2885,7 +2885,7 @@ public:
     { return (((but == wxJOY_BUTTON_ANY) && (m_buttonState != 0)) ||
             ((m_buttonState & but) == but)); }
 
-    wxEvent *Clone() const override { return new wxJoystickEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxJoystickEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2915,7 +2915,7 @@ public:
     int GetNumberOfFiles() const { return m_noFiles; }
     const std::vector<std::string>& GetFiles() const { return m_files; }
 
-    wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxDropFilesEvent>(*this); }
 
     std::vector<std::string> m_files;
     wxPoint   m_pos;
@@ -2998,7 +2998,7 @@ public:
     // Returns the UI update mode
     static wxUpdateUIMode GetMode() { return sm_updateMode; }
 
-    wxEvent *Clone() const override { return new wxUpdateUIEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxUpdateUIEvent>(*this); }
 
 protected:
     std::string   m_text;
@@ -3038,7 +3038,7 @@ public:
 
 	wxSysColourChangedEvent& operator=(const wxSysColourChangedEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxSysColourChangedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSysColourChangedEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -3064,7 +3064,7 @@ public:
 
 	wxMouseCaptureChangedEvent& operator=(const wxMouseCaptureChangedEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxMouseCaptureChangedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMouseCaptureChangedEvent>(*this); }
 
     wxWindow* GetCapturedWindow() const { return m_gainedCapture; }
 
@@ -3095,7 +3095,7 @@ public:
 
 	wxMouseCaptureLostEvent& operator=(const wxMouseCaptureLostEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxMouseCaptureLostEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxMouseCaptureLostEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -3115,7 +3115,7 @@ public:
 
 	wxDisplayChangedEvent& operator=(const wxDisplayChangedEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxDisplayChangedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxDisplayChangedEvent>(*this); }
 
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
@@ -3142,7 +3142,7 @@ public:
     wxSize GetOldDPI() const { return m_oldDPI; }
     wxSize GetNewDPI() const { return m_newDPI; }
 
-    wxEvent *Clone() const override { return new wxDPIChangedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxDPIChangedEvent>(*this); }
 
 private:
     wxSize m_oldDPI;
@@ -3173,7 +3173,7 @@ public:
     void SetChangedWindow(wxWindow* win) { m_changedWindow = win; }
     wxWindow* GetChangedWindow() const { return m_changedWindow; }
 
-    wxEvent *Clone() const override { return new wxPaletteChangedEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxPaletteChangedEvent>(*this); }
 
 protected:
     wxWindow*     m_changedWindow{nullptr};
@@ -3204,7 +3204,7 @@ public:
     void SetPaletteRealized(bool realized) { m_paletteRealized = realized; }
     bool GetPaletteRealized() const { return m_paletteRealized; }
 
-    wxEvent *Clone() const override { return new wxQueryNewPaletteEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxQueryNewPaletteEvent>(*this); }
 
 protected:
     bool m_paletteRealized{false};
@@ -3262,7 +3262,7 @@ public:
     // Set flags
     void SetFlags(unsigned int flags) { m_flags = flags; }
 
-    wxEvent *Clone() const override { return new wxNavigationKeyEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxNavigationKeyEvent>(*this); }
 
     enum wxNavigationKeyEventFlags
     {
@@ -3301,7 +3301,7 @@ public:
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
-    wxEvent *Clone() const override { return new wxWindowCreateEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWindowCreateEvent>(*this); }
 
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
@@ -3317,7 +3317,7 @@ public:
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
-    wxEvent *Clone() const override { return new wxWindowDestroyEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWindowDestroyEvent>(*this); }
 
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
@@ -3366,7 +3366,7 @@ public:
     const std::string& GetTarget() const { return m_target; }
     void SetTarget(const std::string& target) { m_target = target; }
 
-    wxEvent *Clone() const override { return new wxHelpEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxHelpEvent>(*this); }
 
     // optional indication of the event source
     Origin GetOrigin() const { return m_origin; }
@@ -3412,7 +3412,7 @@ public:
 
 	wxClipboardTextEvent& operator=(const wxClipboardTextEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxClipboardTextEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxClipboardTextEvent>(*this); }
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -3446,7 +3446,7 @@ public:
     const wxPoint& GetPosition() const { return m_pos; }
     void SetPosition(const wxPoint& pos) { m_pos = pos; }
 
-    wxEvent *Clone() const override { return new wxContextMenuEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxContextMenuEvent>(*this); }
 
 protected:
     wxPoint   m_pos;
@@ -3711,7 +3711,7 @@ public:
     // from multiple threads although you still need to ensure that std::string
     // fields of the event object are deep copies and not use the same string
     // buffer as other std::string objects in this thread.
-    virtual void QueueEvent(wxEvent *event);
+    virtual void QueueEvent(std::unique_ptr<wxEvent> event);
 
     // Add an event to be processed later: notice that this function is not
     // safe to call from threads other than main, use QueueEvent()
@@ -3760,7 +3760,7 @@ public:
     void CallAfter(void (T::*method)())
     {
         QueueEvent(
-            new wxAsyncMethodCallEvent0<T>(static_cast<T*>(this), method)
+            std::make_unique<wxAsyncMethodCallEvent0<T>>(static_cast<T*>(this), method)
         );
     }
 
@@ -3789,7 +3789,7 @@ public:
     template <typename T>
     void CallAfter(const T& fn)
     {
-        QueueEvent(new wxAsyncMethodCallEventFunctor<T>(this, fn));
+        QueueEvent(std::make_unique<wxAsyncMethodCallEventFunctor<T>>(this, fn));
     }
 
 
@@ -4049,7 +4049,7 @@ protected:
     using DynamicEvents = std::vector<wxDynamicEventTableEntry *>;
     DynamicEvents* m_dynamicEvents{nullptr};
 
-    wxList*             m_pendingEvents{nullptr};
+    std::vector<std::unique_ptr<wxEvent>> m_pendingEvents;
 
     // The user data: either an object which will be deleted by the container
     // when it's deleted or some raw pointer which we do nothing with - only
@@ -4165,11 +4165,11 @@ inline void wxPostEvent(wxEvtHandler *dest, const wxEvent& event)
 // Wrapper around wxEvtHandler::QueueEvent(): adds an event for later
 // processing, unlike wxPostEvent it is safe to use from different thread even
 // for events with std::string members
-inline void wxQueueEvent(wxEvtHandler *dest, wxEvent *event)
+inline void wxQueueEvent(wxEvtHandler *dest, std::unique_ptr<wxEvent> event)
 {
     wxCHECK_RET( dest, "need an object to queue event for" );
 
-    dest->QueueEvent(event);
+    dest->QueueEvent(std::move(event));
 }
 
 typedef void (wxEvtHandler::*wxEventFunction)(wxEvent&);

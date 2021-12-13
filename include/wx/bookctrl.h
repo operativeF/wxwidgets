@@ -391,7 +391,7 @@ public:
 
     wxBookCtrlEvent& operator=(const wxBookCtrlEvent&) = delete;
 
-    wxEvent *Clone() const override { return new wxBookCtrlEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxBookCtrlEvent>(*this); }
 
         // the currently selected page (wxNOT_FOUND if none)
     int GetSelection() const { return m_nSel; }

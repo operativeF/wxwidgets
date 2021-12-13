@@ -213,8 +213,8 @@ private:
     DISPID m_dispid;
 
 public:
-    wxEvent *Clone() const override
-    { return new wxActiveXEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override
+    { return std::make_unique<wxActiveXEvent>(*this); }
 
     size_t ParamCount() const;
 

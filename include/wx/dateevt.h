@@ -36,7 +36,8 @@ public:
     void SetDate(const wxDateTime &date) { m_date = date; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxDateEvent(*this); }
+    // FIXME: Are they really?
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxDateEvent>(*this); }
 
 private:
     wxDateTime m_date;

@@ -173,7 +173,7 @@ public:
     int GetExitCode() const { return m_exitcode; }
 
     // implement the base class pure virtual
-    wxEvent *Clone() const override { return new wxProcessEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxProcessEvent>(*this); }
 
     int m_pid,
         m_exitcode;

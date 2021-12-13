@@ -1174,7 +1174,7 @@ bool wxEvtHandler::ProcessThreadEvent(const wxEvent& event)
 
 #endif // wxUSE_THREADS
 
-void wxEvtHandler::QueueEvent(wxEvent *event)
+void wxEvtHandler::QueueEvent(std::unique_ptr<wxEvent> event)
 {
     wxCHECK_RET( event, "NULL event can't be posted" );
 
@@ -1185,7 +1185,7 @@ void wxEvtHandler::QueueEvent(wxEvent *event)
         wxLogDebug("No application object! Cannot queue this event!");
 
         // anyway delete the given event to avoid memory leaks
-        delete event;
+        event.reset();
 
         return;
     }
@@ -1193,10 +1193,7 @@ void wxEvtHandler::QueueEvent(wxEvent *event)
     // 1) Add this event to our list of pending events
     wxENTER_CRIT_SECT( m_pendingEventsLock );
 
-    if ( !m_pendingEvents )
-        m_pendingEvents = new wxList;
-
-    m_pendingEvents->Append(event);
+    m_pendingEvents.push_back(std::move(event));
 
     // 2) Add this event handler to list of event handlers that
     //    have pending events.
@@ -1218,9 +1215,7 @@ void wxEvtHandler::QueueEvent(wxEvent *event)
 
 void wxEvtHandler::DeletePendingEvents()
 {
-    if (m_pendingEvents)
-        m_pendingEvents->DeleteContents(true);
-    wxDELETE(m_pendingEvents);
+    m_pendingEvents.clear();
 }
 
 void wxEvtHandler::ProcessPendingEvents()
@@ -1241,23 +1236,23 @@ void wxEvtHandler::ProcessPendingEvents()
 
     // this method is only called by wxApp if this handler does have
     // pending events
-    wxCHECK_RET( m_pendingEvents && !m_pendingEvents->IsEmpty(),
+    wxCHECK_RET( !m_pendingEvents.empty(),
                  "should have pending events if called" );
 
-    wxList::compatibility_iterator node = m_pendingEvents->GetFirst();
-    auto* pEvent = dynamic_cast<wxEvent *>(node->GetData());
+    auto node = m_pendingEvents.begin();
+    auto* pEvent = static_cast<wxEvent*>((*node).get());
 
     // find the first event which can be processed now:
     wxEventLoopBase* evtLoop = wxEventLoopBase::GetActive();
     if (evtLoop && evtLoop->IsYielding())
     {
-        while (node && pEvent && !evtLoop->IsEventAllowedInsideYield(pEvent->GetEventCategory()))
+        while ((node != m_pendingEvents.end()) && pEvent && !evtLoop->IsEventAllowedInsideYield(pEvent->GetEventCategory()))
         {
-            node = node->GetNext();
-            pEvent = node ? static_cast<wxEvent *>(node->GetData()) : nullptr;
+            node = std::next(node);
+            pEvent = (node != m_pendingEvents.end()) ? static_cast<wxEvent*>((*node).get()) : nullptr;
         }
 
-        if (!node)
+        if (node == m_pendingEvents.end())
         {
             // all our events are NOT processable now... signal this:
             wxTheApp->DelayPendingEventHandler(this);
@@ -1271,14 +1266,14 @@ void wxEvtHandler::ProcessPendingEvents()
         }
     }
 
-    auto& event = *pEvent;
+    std::unique_ptr<wxEvent> event = std::move((*node));
 
     // it's important we remove event from list before processing it, else a
     // nested event loop, for example from a modal dialog, might process the
     // same event again.
-    m_pendingEvents->Erase(node);
+    m_pendingEvents.erase(node);
 
-    if ( m_pendingEvents->IsEmpty() )
+    if ( m_pendingEvents.empty() )
     {
         // if there are no more pending events left, we don't need to
         // stay in this list
@@ -1287,7 +1282,7 @@ void wxEvtHandler::ProcessPendingEvents()
 
     wxLEAVE_CRIT_SECT( m_pendingEventsLock );
 
-    ProcessEvent(event);
+    ProcessEvent(*event);
 
     // careful: this object could have been deleted by the event handler
     // executed by the above ProcessEvent() call, so we can't access any fields

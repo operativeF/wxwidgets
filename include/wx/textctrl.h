@@ -826,7 +826,7 @@ public:
     // get the end of the URL
     long GetURLEnd() const { return m_end; }
 
-    wxEvent *Clone() const override { return new wxTextUrlEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTextUrlEvent>(*this); }
 
 protected:
     // the corresponding mouse event

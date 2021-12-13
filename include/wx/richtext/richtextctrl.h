@@ -2614,7 +2614,7 @@ public:
     */
     void SetOldContainer(wxRichTextParagraphLayoutBox* container) { m_oldContainer = container; }
 
-    wxEvent *Clone() const override { return new wxRichTextEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRichTextEvent>(*this); }
 
 protected:
     int                             m_flags{0};

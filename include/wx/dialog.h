@@ -378,7 +378,7 @@ public:
     int GetReturnCode() const
         { return GetDialog()->GetReturnCode(); }
 
-    wxEvent *Clone() const override { return new wxWindowModalDialogEvent (*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxWindowModalDialogEvent>(*this); }
 };
 
 wxDECLARE_EVENT( wxEVT_WINDOW_MODAL_DIALOG_CLOSED , wxWindowModalDialogEvent );

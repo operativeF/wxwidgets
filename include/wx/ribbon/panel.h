@@ -150,7 +150,7 @@ public:
         , m_panel(panel)
     {
     }
-    wxEvent *Clone() const override { return new wxRibbonPanelEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxRibbonPanelEvent>(*this); }
 
     wxRibbonPanel* GetPanel() {return m_panel;}
     void SetPanel(wxRibbonPanel* panel) {m_panel = panel;}

@@ -168,7 +168,7 @@ public:
     void SetWeekDay(wxDateTime::WeekDay wd) { m_wday = wd; }
     wxDateTime::WeekDay GetWeekDay() const { return m_wday; }
 
-    wxEvent *Clone() const override { return new wxCalendarEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxCalendarEvent>(*this); }
 
 private:
     wxDateTime::WeekDay m_wday{wxDateTime::Inv_WeekDay};

@@ -84,7 +84,7 @@ public:
 
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxCollapsiblePaneEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxCollapsiblePaneEvent>(*this); }
 
 private:
     bool m_bCollapsed;

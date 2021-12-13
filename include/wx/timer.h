@@ -165,7 +165,7 @@ public:
     wxTimer& GetTimer() const { return *m_timer; }
 
     // implement the base class pure virtual
-    wxEvent *Clone() const override { return new wxTimerEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxTimerEvent>(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_TIMER; }
 
 private:

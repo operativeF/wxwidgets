@@ -81,7 +81,7 @@ public:
     double GetValue() const       { return m_value; }
     void   SetValue(double value) { m_value = value; }
 
-    wxEvent *Clone() const override { return new wxSpinDoubleEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSpinDoubleEvent>(*this); }
 
 protected:
     double m_value;

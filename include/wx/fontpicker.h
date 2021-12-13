@@ -200,7 +200,7 @@ public:
     void SetFont(const wxFont &c) { m_font = c; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxFontPickerEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFontPickerEvent>(*this); }
 
 private:
     wxFont m_font;

@@ -872,7 +872,7 @@ public:
     int GetProposedDropIndex() const { return m_proposedDropIndex;}
 #endif // wxUSE_DRAG_AND_DROP
 
-    wxEvent *Clone() const override { return new wxDataViewEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxDataViewEvent>(*this); }
 
     void SetColumn( int col ) { m_col = col; }
     void SetEditCancelled() { m_editCancelled = true; }

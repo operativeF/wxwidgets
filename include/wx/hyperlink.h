@@ -116,7 +116,7 @@ public:
     void SetURL(const std::string &url) { m_url = url; }
 
     // default copy ctor, assignment operator and dtor are ok
-    wxEvent *Clone() const override { return new wxHyperlinkEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxHyperlinkEvent>(*this); }
 
 private:
 

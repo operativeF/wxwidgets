@@ -164,7 +164,7 @@ public:
     wxColour GetColour() const { return m_colour; }
     void SetColour(const wxColour &c) { m_colour = c; }
 
-    wxEvent *Clone() const override { return new wxColourPickerEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxColourPickerEvent>(*this); }
 
 private:
     wxColour m_colour;

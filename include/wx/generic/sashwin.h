@@ -227,7 +227,7 @@ public:
     void SetDragStatus(wxSashDragStatus status) { m_dragStatus = status; }
     wxSashDragStatus GetDragStatus() const { return m_dragStatus; }
 
-    wxEvent *Clone() const override { return new wxSashEvent(*this); }
+    std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxSashEvent>(*this); }
 
 private:
     wxSashEdgePosition  m_edge;
