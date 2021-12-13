@@ -17,6 +17,8 @@
 
 import WX.WinDef;
 
+import <string>;
+
 // For MSVC we can link in the required library explicitly, for the other
 // compilers (e.g. MinGW) this needs to be done at makefiles level.
 #ifdef __VISUALC__
@@ -47,7 +49,7 @@ public:
 
 static wxString GetFileVersion(const wxString& filename)
 {
-    wxString ver;
+    std::string ver;
     const wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
 
     WXDWORD dummy;
@@ -65,7 +67,7 @@ static wxString GetFileVersion(const wxString& filename)
                                     &sizeInfo) )
             {
                 VS_FIXEDFILEINFO *info = (VS_FIXEDFILEINFO *)pVer;
-                ver.Printf("%d.%d.%d.%d",
+                ver = fmt::format("%d.%d.%d.%d",
                             HIWORD(info->dwFileVersionMS),
                             LOWORD(info->dwFileVersionMS),
                             HIWORD(info->dwFileVersionLS),

@@ -52,7 +52,7 @@ std::string wxColourData::ToString() const
 
         const wxColour& clr = m_custColours[i];
         if ( clr.IsOk() )
-            str += clr.GetAsString(wxC2S_HTML_SYNTAX).ToStdString();
+            str += clr.GetAsString(wxC2S_HTML_SYNTAX);
     }
 
     str.push_back(wxCOL_DATA_SEP);

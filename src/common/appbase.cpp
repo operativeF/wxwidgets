@@ -36,6 +36,7 @@
 
 import <clocale>;
 import <ranges>;
+import <string>;
 import <typeinfo>;
 
 #if wxUSE_EXCEPTIONS
@@ -621,7 +622,7 @@ void wxAppConsoleBase::OnUnhandledException()
 {
     // we're called from an exception handler so we can re-throw the exception
     // to recover its type
-    wxString what;
+    std::string what;
     try
     {
         throw;
@@ -629,9 +630,9 @@ void wxAppConsoleBase::OnUnhandledException()
     catch ( std::exception& e )
     {
 #ifdef wxNO_RTTI
-        what.Printf("standard exception with message \"%s\"", e.what());
+        what = fmt::format("standard exception with message \"{:s}\"", e.what());
 #else
-        what.Printf(R"(standard exception of type "%s" with message "%s")",
+        what = fmt::format("(standard exception of type \"{:s}\" with message \"{:s}\")",
                     typeid(e).name(), e.what());
 #endif
     }
@@ -639,12 +640,10 @@ void wxAppConsoleBase::OnUnhandledException()
     {
         what = "unknown exception";
     }
-
-    wxMessageOutputBest().Printf(
-        "Unhandled %s; terminating %s.\n",
-        what,
-        wxIsMainThread() ? "the application" : "the thread in which it happened"
-    );
+    
+    fmt::print(stderr, "Unhandled %s; terminating %s.\n",
+               what,
+               wxIsMainThread() ? "the application" : "the thread in which it happened");
 }
 
 // ----------------------------------------------------------------------------
@@ -779,19 +778,12 @@ bool wxAppConsoleBase::OnCmdLineError(wxCmdLineParser& parser)
 bool wxAppConsoleBase::CheckBuildOptions(const char *optionsSignature,
                                          const char *componentName)
 {
-#if 0 // can't use wxLogTrace, not up and running yet
-    printf("checking build options object '%s' (ptr %p) in '%s'\n",
-             optionsSignature, optionsSignature, componentName);
-#endif
-
     if ( strcmp(optionsSignature, WX_BUILD_OPTIONS_SIGNATURE) != 0 )
     {
         wxString lib = wxString::FromAscii(WX_BUILD_OPTIONS_SIGNATURE);
         wxString prog = wxString::FromAscii(optionsSignature);
         wxString progName = wxString::FromAscii(componentName);
-        wxString msg;
-
-        msg.Printf("Mismatch between the program and library build versions detected.\nThe library used %s,\nand %s used %s.",
+        std::string msg = fmt::format("Mismatch between the program and library build versions detected.\nThe library used %s,\nand %s used %s.",
                    lib.c_str(), progName.c_str(), prog.c_str());
 
         wxLogFatalError(msg.c_str());

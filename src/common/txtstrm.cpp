@@ -13,6 +13,10 @@
 #include "wx/txtstrm.h"
 #include "wx/crt.h"
 
+#include <fmt/core.h>
+
+import <string>;
+
 // ----------------------------------------------------------------------------
 // wxTextInputStream
 // ----------------------------------------------------------------------------
@@ -441,33 +445,28 @@ void wxTextOutputStream::Write64(std::uint64_t i)
 
 void wxTextOutputStream::Write32(std::uint32_t i)
 {
-    wxString str;
-    str.Printf("%u", i);
+    std::string str = fmt::format("%u", i);
 
     WriteString(str);
 }
 
 void wxTextOutputStream::Write16(std::uint16_t i)
 {
-    wxString str;
-    str.Printf("%u", (unsigned)i);
+    std::string str = fmt::format("%u", (unsigned)i);
 
     WriteString(str);
 }
 
 void wxTextOutputStream::Write8(std::uint8_t i)
 {
-    wxString str;
-    str.Printf("%u", (unsigned)i);
+    std::string str = fmt::format("%u", (unsigned)i);
 
     WriteString(str);
 }
 
 void wxTextOutputStream::WriteDouble(double d)
 {
-    wxString str;
-
-    str.Printf("%f", d);
+    std::string str = fmt::format("{:d}", d);
     WriteString(str);
 }
 

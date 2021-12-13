@@ -12,6 +12,8 @@
 
 #include "wx/string.h"
 
+import <string>;
+
 // ----------------------------------------------------------------------------
 // wxMarkupSpanAttributes: information about attributes for a markup span.
 // ----------------------------------------------------------------------------
@@ -29,9 +31,9 @@ struct wxMarkupSpanAttributes
 
     // If a string is empty, it means that the corresponding attribute is not
     // set.
-    wxString m_fgCol,
-             m_bgCol,
-             m_fontFace;
+    std::string m_fgCol;
+    std::string m_bgCol;
+    std::string m_fontFace;
 
     // There are many ways of specifying the size. First of all, the size may
     // be relative in which case m_fontSize is either -1 or +1 meaning that

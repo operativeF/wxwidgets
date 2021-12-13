@@ -11,7 +11,6 @@
 
 #if wxUSE_INTL
 
-#include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
@@ -50,6 +49,7 @@
 #endif
 
 import <clocale>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -73,19 +73,19 @@ namespace
 #if defined(__UNIX__)
 
 // get just the language part ("en" in "en_GB")
-inline wxString ExtractLang(const wxString& langFull)
+inline std::string ExtractLang(const std::string& langFull)
 {
     return langFull.BeforeFirst('_');
 }
 
 // get everything else (including the leading '_')
-inline wxString ExtractNotLang(const wxString& langFull)
+inline std::string ExtractNotLang(const std::string& langFull)
 {
     size_t pos = langFull.find('_');
-    if ( pos != wxString::npos )
+    if ( pos != std::string::npos )
         return langFull.substr(pos);
     else
-        return wxString();
+        return std::string();
 }
 
 #endif // __UNIX__
@@ -101,16 +101,16 @@ inline wxString ExtractNotLang(const wxString& langFull)
 // helper used by wxLanguageInfo::GetLocaleName() and elsewhere to determine
 // whether the locale is Unicode-only (it is if this function returns empty
 // string)
-static wxString wxGetANSICodePageForLocale(LCID lcid)
+static std::string wxGetANSICodePageForLocale(LCID lcid)
 {
-    wxString cp;
+    std::string cp;
 
-    wxChar buffer[16];
+    wchar_t buffer[16];
     if ( ::GetLocaleInfoW(lcid, LOCALE_IDEFAULTANSICODEPAGE,
                         buffer, WXSIZEOF(buffer)) > 0 )
     {
         if ( buffer[0] != wxT('0') || buffer[1] != wxT('\0') )
-            cp = buffer;
+            cp = boost::nowide::narrow(buffer);
         //else: this locale doesn't use ANSI code page
     }
 
@@ -124,7 +124,7 @@ std::uint32_t wxLanguageInfo::GetLCID() const
 
 const char* wxLanguageInfo::TrySetLocale() const
 {
-    wxString locale;
+    std::string locale;
 
     const LCID lcid = GetLCID();
 
@@ -138,7 +138,7 @@ const char* wxLanguageInfo::TrySetLocale() const
     {
         if ( ::GetLocaleInfoW(lcid, LOCALE_SNAME, buffer, WXSIZEOF(buffer)) )
         {
-            locale = buffer;
+            locale = boost::nowide::narrow(buffer);
         }
         else
         {
@@ -157,17 +157,17 @@ const char* wxLanguageInfo::TrySetLocale() const
         return nullptr;
     }
 
-    locale = buffer;
+    locale = boost::nowide::narrow(buffer);
     if ( ::GetLocaleInfoW(lcid, LOCALE_SENGCOUNTRY,
                         buffer, WXSIZEOF(buffer)) > 0 )
     {
-        locale << wxT('_') << buffer;
+        locale += fmt::format("_{}", boost::nowide::narrow(buffer));
     }
 
-    const wxString cp = wxGetANSICodePageForLocale(lcid);
+    const std::string cp = wxGetANSICodePageForLocale(lcid);
     if ( !cp.empty() )
     {
-        locale << wxT('.') << cp;
+        locale += fmt::format(".{}", cp);
     }
 
     return wxSetlocale(LC_ALL, locale);
@@ -182,12 +182,12 @@ const char* wxLanguageInfo::TrySetLocale() const
 
 #endif // WX_WINDOWS/!WX_WINDOWS
 
-wxString wxLanguageInfo::GetLocaleName() const
+std::string wxLanguageInfo::GetLocaleName() const
 {
     const char* const orig = wxSetlocale(LC_ALL, nullptr);
 
     const char* const ret = TrySetLocale();
-    wxString retval;
+    std::string retval;
     if ( ret )
     {
         // Note that we must copy the returned value before calling setlocale()
@@ -234,14 +234,14 @@ void wxLocale::DoCommonInit()
 }
 
 // NB: this function has (desired) side effect of changing current locale
-bool wxLocale::Init(const wxString& name,
-                    const wxString& shortName,
-                    const wxString& locale,
+bool wxLocale::Init(const std::string& name,
+                    const std::string& shortName,
+                    const std::string& locale,
                     bool            bLoadDefault
                     )
 {
     // change current locale (default: same as long name)
-    wxString szLocale(locale);
+    std::string szLocale(locale);
     if ( szLocale.empty() )
     {
         // the argument to setlocale()
@@ -261,7 +261,7 @@ bool wxLocale::Init(const wxString& name,
         // language, e.g. if we are called with something like ("French", "de")
         // to use French locale but German translations: this seems unlikely to
         // happen but, in principle, it could.
-        if ( langInfo->CanonicalName.StartsWith(shortName) )
+        if ( wx::utils::StartsWith(langInfo->CanonicalName, shortName) )
         {
             return Init(langInfo->Language,
                         bLoadDefault ? wxLOCALE_LOAD_DEFAULT : 0);
@@ -270,7 +270,7 @@ bool wxLocale::Init(const wxString& name,
 
     // the short name will be used to look for catalog files as well,
     // so we need something here
-    wxString strShort(shortName);
+    std::string strShort(shortName);
     if ( strShort.empty() ) {
         // FIXME I don't know how these 2 letter abbreviations are formed,
         //       this wild guess is surely wrong
@@ -289,8 +289,8 @@ bool wxLocale::Init(const wxString& name,
     return DoCommonPostInit(ret, szLocale, shortName, bLoadDefault);
 }
 
-void wxLocale::DoInit(const wxString& name,
-                      const wxString& shortName,
+void wxLocale::DoInit(const std::string& name,
+                      const std::string& shortName,
                       int language)
 {
     wxASSERT_MSG( !m_initialized,
@@ -332,8 +332,8 @@ void wxLocale::DoInit(const wxString& name,
 }
 
 bool wxLocale::DoCommonPostInit(bool success,
-                                const wxString& name,
-                                const wxString& shortName,
+                                const std::string& name,
+                                const std::string& shortName,
                                 bool bLoadDefault)
 {
     if ( !success )
@@ -365,7 +365,7 @@ bool wxLocale::DoCommonPostInit(bool success,
 
 // Helper of wxSetlocaleTryAll() below which tries setting the given locale
 // with and without UTF-8 suffix. Don't use this one directly.
-static const char *wxSetlocaleTryUTF8(int c, const wxString& lc)
+static const char *wxSetlocaleTryUTF8(int c, const std::string& lc)
 {
     const char *l = NULL;
 
@@ -376,8 +376,8 @@ static const char *wxSetlocaleTryUTF8(int c, const wxString& lc)
 #if !defined(__WXMAC__)
     if ( !lc.empty() )
     {
-        wxString buf(lc);
-        wxString buf2;
+        std::string buf(lc);
+        std::string buf2;
         buf2 = buf + ".UTF-8";
         l = wxSetlocale(c, buf2);
         if ( !l )
@@ -407,12 +407,12 @@ static const char *wxSetlocaleTryUTF8(int c, const wxString& lc)
 
 // Try setting all possible versions of the given locale, i.e. with and without
 // UTF-8 encoding, and with or without the "_territory" part.
-static const char *wxSetlocaleTryAll(int c, const wxString& lc)
+static const char *wxSetlocaleTryAll(int c, const std::string& lc)
 {
     const char* l = wxSetlocaleTryUTF8(c, lc);
     if ( !l )
     {
-        const wxString& lcOnlyLang = ExtractLang(lc);
+        const std::string& lcOnlyLang = ExtractLang(lc);
         if ( lcOnlyLang != lc )
             l = wxSetlocaleTryUTF8(c, lcOnlyLang);
     }
@@ -450,7 +450,7 @@ bool wxLocale::Init(int lang, unsigned int flags)
                  "Initializing unknown locale doesn't make sense, did you "
                  "mean to use wxLANGUAGE_DEFAULT perhaps?" );
 
-    wxString name, shortName;
+    std::string name, shortName;
 
     const wxLanguageInfo *info = GetLanguageInfo(lang);
 
@@ -496,8 +496,8 @@ bool wxLocale::Init(int lang, unsigned int flags)
     {
         // Some C libraries (namely glibc) still use old ISO 639,
         // so will translate the abbrev for them
-        wxString localeAlt;
-        const wxString& langOnly = ExtractLang(shortName);
+        std::string localeAlt;
+        const std::string& langOnly = ExtractLang(shortName);
         if ( langOnly == "he" )
             localeAlt = "iw" + ExtractNotLang(shortName);
         else if ( langOnly == "id" )
@@ -590,7 +590,7 @@ namespace
 #if defined(__UNIX__) && !defined(__WXOSX__)
 // Small helper function: get the value of the given environment variable and
 // return true only if the variable was found and has non-empty value.
-inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
+inline bool wxGetNonEmptyEnvVar(const std::string& name, std::string* value)
 {
     return wxGetEnv(name, value) && !value->empty();
 }
@@ -607,7 +607,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
 
 #if defined(__UNIX__)
     // first get the string identifying the language from the environment
-    wxString langFull;
+    std::string langFull;
 #ifdef __WXOSX__
     wxCFRef<CFLocaleRef> userLocaleRef(CFLocaleCopyCurrent());
 
@@ -651,13 +651,13 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     //
     // we need the modified for languages like Valencian: ca_ES@valencia
     // though, remember it
-    wxString modifier;
+    std::string modifier;
     size_t posModifier = langFull.find_first_of("@");
-    if ( posModifier != wxString::npos )
+    if ( posModifier != std::string::npos )
         modifier = langFull.Mid(posModifier);
 
     size_t posEndLang = langFull.find_first_of("@.");
-    if ( posEndLang != wxString::npos )
+    if ( posEndLang != std::string::npos )
     {
         langFull.Truncate(posEndLang);
     }
@@ -669,16 +669,16 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     }
 
     // do we have just the language (or sublang too)?
-    const bool justLang = langFull.find('_') == wxString::npos;
+    const bool justLang = langFull.find('_') == std::string::npos;
 
     // 0. Make sure the lang is according to latest ISO 639
     //    (this is necessary because glibc uses iw and in instead
     //    of he and id respectively).
 
     // the language itself (second part is the dialect/sublang)
-    wxString langOrig = ExtractLang(langFull);
+    std::string langOrig = ExtractLang(langFull);
 
-    wxString lang;
+    std::string lang;
     if ( langOrig == "iw")
         lang = "he";
     else if (langOrig == "in")
@@ -704,7 +704,7 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     // a) With modifier if set
     if ( !modifier.empty() )
     {
-        wxString langFullWithModifier = langFull + modifier;
+        std::string langFullWithModifier = langFull + modifier;
         for ( i = 0; i < count; i++ )
         {
             if ( (*ms_languagesDB)[i].CanonicalName == langFullWithModifier )
@@ -800,9 +800,9 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
 // reflects the way different systems provide the encoding info
 
 /* static */
-wxString wxLocale::GetSystemEncodingName()
+std::string wxLocale::GetSystemEncodingName()
 {
-    wxString encname;
+    std::string encname;
 
 #if defined(__WIN32__)
     // FIXME: what is the error return value for GetACP()?
@@ -814,7 +814,7 @@ wxString wxLocale::GetSystemEncodingName()
             break;
 
         default:
-            encname.Printf("windows-%u", codepage);
+            encname = fmt::format("windows-%u", codepage);
     }
 #elif defined(__WXMAC__)
     encname = wxCFStringRef::AsString(
@@ -827,7 +827,7 @@ wxString wxLocale::GetSystemEncodingName()
     // to Unix98)
     char *oldLocale = strdup(setlocale(LC_CTYPE, NULL));
     setlocale(LC_CTYPE, "");
-    encname = wxString::FromAscii(nl_langinfo(CODESET));
+    encname = nl_langinfo(CODESET);
     setlocale(LC_CTYPE, oldLocale);
     free(oldLocale);
 
@@ -854,7 +854,7 @@ wxString wxLocale::GetSystemEncodingName()
 
         if ( dot )
         {
-            encname = wxString::FromAscii( dot+1 );
+            encname = dot + 1;
         }
     }
 #endif // Win32/Unix
@@ -907,7 +907,7 @@ wxFontEncoding wxLocale::GetSystemEncoding()
     encoding = CFStringGetSystemEncoding() ;
     return wxMacGetFontEncFromSystemEnc( encoding ) ;
 #elif defined(__UNIX_LIKE__) && wxUSE_FONTMAP
-    const wxString encname = GetSystemEncodingName();
+    const std::string encname = GetSystemEncodingName();
     if ( !encname.empty() )
     {
         wxFontEncoding enc = wxFontMapperBase::GetEncodingFromName(encname);
@@ -964,9 +964,9 @@ const wxLanguageInfo *wxLocale::GetLanguageInfo(int lang)
 }
 
 /* static */
-wxString wxLocale::GetLanguageName(int lang)
+std::string wxLocale::GetLanguageName(int lang)
 {
-    wxString string;
+    std::string string;
 
     if ( lang == wxLANGUAGE_DEFAULT || lang == wxLANGUAGE_UNKNOWN )
         return string;
@@ -992,7 +992,7 @@ std::string wxLocale::GetLanguageCanonicalName(int lang)
 }
 
 /* static */
-const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
+const wxLanguageInfo *wxLocale::FindLanguageInfo(const std::string& locale)
 {
     CreateLanguagesDB();
 
@@ -1011,7 +1011,7 @@ const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
             break;
         }
 
-        if ( wxStricmp(locale, info->CanonicalName.BeforeFirst(wxS('_'))) == 0 )
+        if ( wxStricmp(locale, wx::utils::BeforeFirst(info->CanonicalName, '_')) == 0 )
         {
             // a match -- but maybe we'll find an exact one later, so continue
             // looking
@@ -1027,7 +1027,7 @@ const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
     return infoRet;
 }
 
-wxString wxLocale::GetSysName() const
+std::string wxLocale::GetSysName() const
 {
     return wxSetlocale(LC_ALL, nullptr);
 }
@@ -1108,7 +1108,7 @@ bool wxLocale::IsAvailable(int lang)
 }
 
 
-bool wxLocale::AddCatalog(const wxString& domain)
+bool wxLocale::AddCatalog(const std::string& domain)
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
@@ -1116,7 +1116,7 @@ bool wxLocale::AddCatalog(const wxString& domain)
     return t->AddCatalog(domain);
 }
 
-bool wxLocale::AddCatalog(const wxString& domain, wxLanguage msgIdLanguage)
+bool wxLocale::AddCatalog(const std::string& domain, wxLanguage msgIdLanguage)
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
@@ -1125,9 +1125,9 @@ bool wxLocale::AddCatalog(const wxString& domain, wxLanguage msgIdLanguage)
 }
 
 // add a catalog to our linked list
-bool wxLocale::AddCatalog(const wxString& szDomain,
+bool wxLocale::AddCatalog(const std::string& szDomain,
                         wxLanguage      msgIdLanguage,
-                        const wxString& msgIdCharset)
+                        const std::string& msgIdCharset)
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
@@ -1137,7 +1137,7 @@ bool wxLocale::AddCatalog(const wxString& szDomain,
     return t->AddCatalog(szDomain, msgIdLanguage);
 }
 
-bool wxLocale::IsLoaded(const wxString& domain) const
+bool wxLocale::IsLoaded(const std::string& domain) const
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
@@ -1145,8 +1145,8 @@ bool wxLocale::IsLoaded(const wxString& domain) const
     return t->IsLoaded(domain);
 }
 
-wxString wxLocale::GetHeaderValue(const wxString& header,
-                                  const wxString& domain) const
+std::string wxLocale::GetHeaderValue(const std::string& header,
+                                  const std::string& domain) const
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
@@ -1163,7 +1163,7 @@ wxString wxLocale::GetHeaderValue(const wxString& header,
 namespace
 {
 
-bool IsAtTwoSingleQuotes(const wxString& fmt, wxString::const_iterator p)
+bool IsAtTwoSingleQuotes(const std::string& fmt, std::string::const_iterator p)
 {
     if ( p != fmt.end() && *p == '\'')
     {
@@ -1188,9 +1188,9 @@ bool IsAtTwoSingleQuotes(const wxString& fmt, wxString::const_iterator p)
 
 // The function is only exported because it is used in the unit test, it is not
 // part of the public API.
-wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
+std::string wxTranslateFromUnicodeFormat(const std::string& fmt)
 {
-    wxString fmtWX;
+    std::string fmtWX;
     fmtWX.reserve(fmt.length());
 
     char chLast = '\0';
@@ -1204,7 +1204,7 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
         "EcLawD"
 #endif
         ;
-    for ( wxString::const_iterator p = fmt.begin(); /* end handled inside */; ++p )
+    for ( std::string::const_iterator p = fmt.begin(); /* end handled inside */; ++p )
     {
         if ( p != fmt.end() )
         {
@@ -1214,7 +1214,7 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
                 continue;
             }
 
-            const wxUniChar ch = (*p).GetValue();
+            const wxUniChar ch = *p;
             if ( ch.IsAscii() && strchr(formatchars, ch) )
             {
                 // these characters come in groups, start counting them
@@ -1563,21 +1563,21 @@ LCTYPE GetLCTYPEFormatFromLocalInfo(wxLocaleInfo index)
     return 0;
 }
 
-wxString
+std::string
 GetInfoFromLCID(LCID lcid,
                 wxLocaleInfo index,
                 wxLocaleCategory cat = wxLOCALE_CAT_DEFAULT)
 {
-    wxString str;
+    std::string str;
 
     wxChar buf[256];
-    buf[0] = wxT('\0');
+    buf[0] = L'\0';
 
     switch ( index )
     {
         case wxLOCALE_THOUSANDS_SEP:
             if ( ::GetLocaleInfoW(lcid, LOCALE_STHOUSAND, buf, WXSIZEOF(buf)) )
-                str = buf;
+                str = boost::nowide::narrow(buf);
             break;
 
         case wxLOCALE_DECIMAL_POINT:
@@ -1588,7 +1588,7 @@ GetInfoFromLCID(LCID lcid,
                                  buf,
                                  WXSIZEOF(buf)) )
             {
-                str = buf;
+                str = boost::nowide::narrow(buf);
 
                 // As we get our decimal point separator from Win32 and not the
                 // CRT there is a possibility of mismatch between them and this
@@ -1599,7 +1599,7 @@ GetInfoFromLCID(LCID lcid,
                 // separator actually fail, so check for it here.
                 wxASSERT_MSG
                 (
-                    wxString::Format("%.3f", 1.23).find(str) != wxString::npos,
+                    fmt::format("%.3f", 1.23).find(str) != std::string::npos,
                     "Decimal separator mismatch -- did you use setlocale()?"
                     "If so, use wxLocale to change the locale instead."
                 );
@@ -1612,7 +1612,7 @@ GetInfoFromLCID(LCID lcid,
             if (::GetLocaleInfoW(lcid, GetLCTYPEFormatFromLocalInfo(index),
                                  buf, WXSIZEOF(buf)) )
             {
-                return wxTranslateFromUnicodeFormat(buf);
+                return wxTranslateFromUnicodeFormat(boost::nowide::narrow(buf));
             }
             break;
 
@@ -1624,17 +1624,17 @@ GetInfoFromLCID(LCID lcid,
             // ("%#c" uses long date but we have no way to specify the
             // alternate representation here)
             {
-                const wxString
+                const auto
                     datefmt = GetInfoFromLCID(lcid, wxLOCALE_SHORT_DATE_FMT);
                 if ( datefmt.empty() )
                     break;
 
-                const wxString
+                const auto
                     timefmt = GetInfoFromLCID(lcid, wxLOCALE_TIME_FMT);
                 if ( timefmt.empty() )
                     break;
 
-                str << datefmt << ' ' << timefmt;
+                str += fmt::format("{} {}", datefmt, timefmt);
             }
             break;
 
@@ -1648,7 +1648,7 @@ GetInfoFromLCID(LCID lcid,
 } // anonymous namespace
 
 /* static */
-wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
+std::string wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 {
     if ( !wxGetLocale() )
     {
@@ -1698,7 +1698,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 }
 
 /* static */
-wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
+std::string wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
 {
     return GetInfoFromLCID(::GetThreadLocale(), index, cat);
 }
@@ -1706,7 +1706,7 @@ wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
 #elif defined(__WXOSX__)
 
 /* static */
-wxString wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory cat)
+std::string wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory cat)
 {
     CFLocaleRef userLocaleRefRaw;
     if ( wxGetLocale() )
@@ -1759,12 +1759,12 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory
                         break;
                     default:
                         wxFAIL_MSG( "unexpected time locale" );
-                        return wxString();
+                        return std::string();
                 }
                 wxCFRef<CFDateFormatterRef> dateFormatter( CFDateFormatterCreate
                     (NULL, userLocaleRef, dateStyle, timeStyle));
                 wxCFStringRef cfs = wxCFRetain( CFDateFormatterGetFormat(dateFormatter ));
-                wxString format = wxTranslateFromUnicodeFormat(cfs.AsString());
+                std::string format = wxTranslateFromUnicodeFormat(cfs.AsString());
                 // we always want full years
                 format.Replace("%y","%Y");
                 return format;
@@ -1772,7 +1772,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory
 
         default:
             wxFAIL_MSG( "Unknown locale info" );
-            return wxString();
+            return std::string();
     }
 
     wxCFStringRef str(wxCFRetain(cfstr));
@@ -1784,7 +1784,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, [[maybe_unused]] wxLocaleCategory
 namespace
 {
 
-wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
+std::string GetDateFormatFromLangInfo(wxLocaleInfo index)
 {
 #ifdef HAVE_LANGINFO_H
     // array containing parameters for nl_langinfo() indexes by offset of index
@@ -1798,10 +1798,10 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     if ( nlidx < 0 || nlidx >= (int)WXSIZEOF(items) )
     {
         wxFAIL_MSG( "logic error in GetInfo() code" );
-        return wxString();
+        return std::string();
     }
 
-    const wxString fmt(nl_langinfo(items[nlidx]));
+    const std::string fmt(nl_langinfo(items[nlidx]));
 
     // just return the format returned by nl_langinfo() except for long date
     // format which we need to recover from date/time format ourselves (but not
@@ -1816,10 +1816,10 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     static constexpr char timeFmtSpecs[] = "HIklMpPrRsSTXzZ";
     static constexpr char timeSep[] = " :./-";
 
-    wxString fmtDateOnly;
-    const wxString::const_iterator end = fmt.end();
-    wxString::const_iterator lastSep = end;
-    for ( wxString::const_iterator p = fmt.begin(); p != end; ++p )
+    std::string fmtDateOnly;
+    const std::string::const_iterator end = fmt.end();
+    std::string::const_iterator lastSep = end;
+    for ( std::string::const_iterator p = fmt.begin(); p != end; ++p )
     {
         if ( strchr(timeSep, *p) )
         {
@@ -1842,7 +1842,7 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
 
         if ( lastSep != end )
         {
-            fmtDateOnly += wxString(lastSep, p);
+            fmtDateOnly += std::string(lastSep, p);
             lastSep = end;
         }
 
@@ -1858,18 +1858,18 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     // could try to reverse engineer the format from strftime() output but this
     // looks like too much trouble considering the relatively small number of
     // systems without nl_langinfo() still in use)
-    return wxString();
+    return std::string();
 #endif // HAVE_LANGINFO_H/!HAVE_LANGINFO_H
 }
 
 } // anonymous namespace
 
 /* static */
-wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
+std::string wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 {
     lconv * const lc = localeconv();
     if ( !lc )
-        return wxString();
+        return std::string();
 
     switch ( index )
     {
@@ -1909,7 +1909,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
             wxFAIL_MSG( "unknown wxLocaleInfo value" );
     }
 
-    return wxString();
+    return std::string();
 }
 
 #endif // platform
@@ -1917,7 +1917,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 #ifndef WX_WINDOWS
 
 /* static */
-wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
+std::string wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
 {
     return GetInfo(index, cat);
 }

@@ -15,6 +15,8 @@
 #include "wx/gdicmn.h"
 #include "wx/wxcrtvararg.h"
 
+import <string>;
+
 #if wxUSE_VARIANT
 IMPLEMENT_VARIANT_OBJECT(wxColour,WXDLLEXPORT)
 #endif
@@ -30,7 +32,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColour, wxObject);
 // wxString <-> wxColour conversions
 // ============================================================================
 
-bool wxColourBase::FromString(const wxString& str)
+bool wxColourBase::FromString(const std::string& str)
 {
     if ( str.empty() )
         return false;       // invalid or empty string
@@ -46,7 +48,7 @@ bool wxColourBase::FromString(const wxString& str)
         int blue;
         int alpha = wxALPHA_OPAQUE;
 
-        if ( str.length() > 3 && (str[3] == wxT('a') || str[3] == wxT('A')) )
+        if ( str.length() > 3 && (str[3] == 'a' || str[3] == 'A') )
         {
             // We can't use sscanf() for the alpha value as sscanf() uses the
             // current locale while the floating point numbers in CSS always
@@ -65,8 +67,7 @@ bool wxColourBase::FromString(const wxString& str)
 
             // Construct the format string which ensures that the last argument
             // receives all the rest of the string.
-            wxString formatStr;
-            formatStr << "( %d , %d , %d , %" << len << "[^)] )";
+            std::string formatStr = fmt::format("( %d , %d , %d , %{:d}[^)] )", len);
 
             // Notice that we use sscanf() here because if the string is not
             // ASCII it can't represent a valid RGB colour specification anyhow
@@ -74,8 +75,8 @@ bool wxColourBase::FromString(const wxString& str)
             // while with wxSscanf() it depends on the type of the string
             // passed as first argument: if it is a wide string, then %c
             // expects "wchar_t *" matching parameter under MSW for example.
-            if ( sscanf(str.c_str() + 4,
-                        formatStr.mb_str(),
+            if ( std::sscanf(str.c_str() + 4,
+                        formatStr.c_str(),
                         &red, &green, &blue, alphaPtr) != 4 )
                 return false;
 
@@ -95,7 +96,7 @@ bool wxColourBase::FromString(const wxString& str)
         }
         else // no 'a' following "rgb"
         {
-            if ( wxSscanf(str.wx_str() + 3, "( %d , %d , %d )",
+            if ( wxSscanf(str.c_str() + 3, "( %d , %d , %d )",
                                                 &red, &green, &blue) != 3 )
                 return false;
         }
@@ -110,7 +111,7 @@ bool wxColourBase::FromString(const wxString& str)
         // hexadecimal prefixed with # ("HTML syntax")
         // see https://drafts.csswg.org/css-color/#hex-notation
         unsigned long tmp{0};
-        if (wxSscanf(str.wx_str() + 1, "%lx", &tmp) != 1)
+        if (wxSscanf(str.c_str() + 1, "%lx", &tmp) != 1)
             return false;
 
         switch (wxStrlen(str) - 1)
@@ -163,12 +164,12 @@ bool wxColourBase::FromString(const wxString& str)
     return true;
 }
 
-wxString wxColourBase::GetAsString(unsigned int flags) const
+std::string wxColourBase::GetAsString(unsigned int flags) const
 {
     if ( !IsOk() )
         return {};
 
-    wxString colName;
+    std::string colName;
 
     if ( IsSolid() )
     {
@@ -194,22 +195,22 @@ wxString wxColourBase::GetAsString(unsigned int flags) const
                 // no name for this colour; return it in CSS syntax
                 if ( isOpaque )
                 {
-                    colName.Printf("rgb(%d, %d, %d)", red, green, blue);
+                    colName = fmt::format("rgb(%d, %d, %d)", red, green, blue);
                 }
                 else // use rgba() form
                 {
-                    colName.Printf("rgba(%d, %d, %d, %s)",
+                    colName = fmt::format("rgba(%d, %d, %d, {:3d})",
                                    red, green, blue,
-                                   wxString::FromCDouble(alpha / 255., 3));
+                                   alpha / 255.0);
                 }
             }
             else if ( flags & wxC2S_HTML_SYNTAX )
             {
                 // no name for this colour; return it in HTML syntax
                 if ( isOpaque )
-                    colName.Printf("#%02X%02X%02X", red, green, blue);
+                    colName = fmt::format("#%02X%02X%02X", red, green, blue);
                 else
-                    colName.Printf("#%02X%02X%02X%02X", red, green, blue, alpha);
+                    colName = fmt::format("#%02X%02X%02X%02X", red, green, blue, alpha);
             }
         }
     }
@@ -338,13 +339,13 @@ wxColour wxColourBase::ChangeLightness(int ialpha) const
 }
 
 // wxColour <-> wxString utilities, used by wxConfig
-wxString wxToString(const wxColourBase& col)
+std::string wxToString(const wxColourBase& col)
 {
     return col.IsOk() ? col.GetAsString(wxC2S_CSS_SYNTAX)
-                      : wxString();
+                      : std::string{};
 }
 
-bool wxFromString(const wxString& str, wxColourBase *col)
+bool wxFromString(const std::string& str, wxColourBase *col)
 {
     wxCHECK_MSG( col, false, "NULL output parameter" );
 

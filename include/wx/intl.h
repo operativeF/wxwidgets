@@ -12,10 +12,10 @@
 #ifndef _WX_INTL_H_
 #define _WX_INTL_H_
 
-#include "wx/string.h"
 #include "wx/translation.h"
 
 import <cstdint>;
+import <string>;
 
 // Make wxLayoutDirection enum available without need for wxUSE_INTL so wxWindow, wxApp
 // and other classes are not distrubed by wxUSE_INTL
@@ -46,12 +46,12 @@ class wxLocale;
 struct wxLanguageInfo
 {
     int Language;                   // wxLanguage id
-    wxString CanonicalName;         // Canonical name, e.g. fr_FR
+    std::string CanonicalName;         // Canonical name, e.g. fr_FR
 #ifdef WX_WINDOWS
     std::uint32_t WinLang,               // Win32 language identifiers
              WinSublang;
 #endif // WX_WINDOWS
-    wxString Description;           // human-readable name of the language
+    std::string Description;           // human-readable name of the language
     wxLayoutDirection LayoutDirection;
 
 #ifdef WX_WINDOWS
@@ -62,7 +62,7 @@ struct wxLanguageInfo
     // return the locale name corresponding to this language usable with
     // setlocale() on the current system or empty string if this locale is not
     // supported
-    wxString GetLocaleName() const;
+    std::string GetLocaleName() const;
 
     // Call setlocale() and return non-null value if it works for this language.
     //
@@ -141,9 +141,9 @@ public:
     wxLocale() { DoCommonInit(); }
 
         // the ctor has a side effect of changing current locale
-    wxLocale(const wxString& name,                               // name (for messages)
-             const wxString& shortName = {},      // dir prefix (for msg files)
-             const wxString& locale = {},     // locale (for setlocale)
+    wxLocale(const std::string& name,                               // name (for messages)
+             const std::string& shortName = {},      // dir prefix (for msg files)
+             const std::string& locale = {},     // locale (for setlocale)
              bool bLoadDefault = true                            // preload wxstd.mo?
              )
         {
@@ -163,9 +163,9 @@ public:
     wxLocale& operator=(wxLocale&&) = delete;
 
         // the same as a function (returns true on success)
-    bool Init(const wxString& name,
-              const wxString& shortName = {},
-              const wxString& locale = {},
+    bool Init(const std::string& name,
+              const std::string& shortName = {},
+              const std::string& locale = {},
               bool bLoadDefault = true
               );
 
@@ -186,11 +186,11 @@ public:
 
     // get the string describing the system encoding, return empty string if
     // couldn't be determined
-    static wxString GetSystemEncodingName();
+    static std::string GetSystemEncodingName();
 
     // get the values of the given locale-dependent datum: the current locale
     // is used, the US default value is returned if everything else fails
-    static wxString GetInfo(wxLocaleInfo index,
+    static std::string GetInfo(wxLocaleInfo index,
                             wxLocaleCategory cat = wxLOCALE_CAT_DEFAULT);
 
     // Same as GetInfo() but uses current locale at the OS level to retrieve
@@ -201,32 +201,32 @@ public:
     // that some locales might not supported by the OS.
     //
     // Currently this is the same as GetInfo() under non-MSW platforms.
-    static wxString GetOSInfo(wxLocaleInfo index,
+    static std::string GetOSInfo(wxLocaleInfo index,
                               wxLocaleCategory cat = wxLOCALE_CAT_DEFAULT);
 
     // return true if the locale was set successfully
     bool IsOk() const { return m_pszOldLocale != nullptr; }
 
     // returns locale name
-    const wxString& GetLocale() const { return m_strLocale; }
+    const std::string& GetLocale() const { return m_strLocale; }
 
     // return current locale wxLanguage value
     int GetLanguage() const { return m_language; }
 
     // return locale name to be passed to setlocale()
-    wxString GetSysName() const;
+    std::string GetSysName() const;
 
     // return 'canonical' name, i.e. in the form of xx[_YY], where xx is
     // language code according to ISO 639 and YY is country name
     // as specified by ISO 3166.
-    wxString GetCanonicalName() const { return m_strShort; }
+    std::string GetCanonicalName() const { return m_strShort; }
 
     // add a prefix to the catalog lookup path: the message catalog files will be
     // looked up under prefix/<lang>/LC_MESSAGES, prefix/LC_MESSAGES and prefix
     // (in this order).
     //
     // This only applies to subsequent invocations of AddCatalog()!
-    static void AddCatalogLookupPathPrefix(const wxString& prefix)
+    static void AddCatalogLookupPathPrefix(const std::string& prefix)
         { wxFileTranslationsLoader::AddCatalogLookupPathPrefix(prefix); }
 
     // add a catalog: it's searched for in standard places (current directory
@@ -236,16 +236,16 @@ public:
     // The loaded catalog will be used for message lookup by GetString().
     //
     // Returns 'true' if it was successfully loaded
-    bool AddCatalog(const wxString& domain);
-    bool AddCatalog(const wxString& domain, wxLanguage msgIdLanguage);
-    bool AddCatalog(const wxString& domain,
-                    wxLanguage msgIdLanguage, const wxString& msgIdCharset);
+    bool AddCatalog(const std::string& domain);
+    bool AddCatalog(const std::string& domain, wxLanguage msgIdLanguage);
+    bool AddCatalog(const std::string& domain,
+                    wxLanguage msgIdLanguage, const std::string& msgIdCharset);
 
     // check if the given locale is provided by OS and C run time
     static bool IsAvailable(int lang);
 
     // check if the given catalog is loaded
-    bool IsLoaded(const wxString& domain) const;
+    bool IsLoaded(const std::string& domain) const;
 
     // Retrieve the language info struct for the given language
     //
@@ -254,7 +254,7 @@ public:
 
     // Returns language name in English or empty string if the language
     // is not in database
-    static wxString GetLanguageName(int lang);
+    static std::string GetLanguageName(int lang);
 
     // Returns ISO code ("canonical name") of language or empty string if the
     // language is not in database
@@ -265,7 +265,7 @@ public:
     // the country code ("xx_XX") or a Windows full language name ("Xxxxx...")
     //
     // Returns NULL if no info found, pointer must *not* be deleted by caller
-    static const wxLanguageInfo *FindLanguageInfo(const wxString& locale);
+    static const wxLanguageInfo *FindLanguageInfo(const std::string& locale);
 
     // Add custom language to the list of known languages.
     // Notes: 1) wxLanguageInfo contains platform-specific data
@@ -283,26 +283,26 @@ public:
     //
     // domains are searched in the last to first order, i.e. catalogs
     // added later override those added before.
-    const wxString& GetString(const wxString& origString,
-                              const wxString& domain = {}) const
+    const std::string& GetString(const std::string& origString,
+                              const std::string& domain = {}) const
     {
         return wxGetTranslation(origString, domain);
     }
     // plural form version of the same:
-    const wxString& GetString(const wxString& origString,
-                              const wxString& origString2,
+    const std::string& GetString(const std::string& origString,
+                              const std::string& origString2,
                               unsigned n,
-                              const wxString& domain = {}) const
+                              const std::string& domain = {}) const
     {
         return wxGetTranslation(origString, origString2, n, domain);
     }
 
     // Returns the current short name for the locale
-    const wxString& GetName() const { return m_strShort; }
+    const std::string& GetName() const { return m_strShort; }
 
     // return the contents of .po file header
-    wxString GetHeaderValue(const wxString& header,
-                            const wxString& domain = {}) const;
+    std::string GetHeaderValue(const std::string& header,
+                            const std::string& domain = {}) const;
 
     // These two methods are for internal use only. First one creates
     // ms_languagesDB if it doesn't already exist, second one destroys
@@ -313,8 +313,8 @@ public:
 private:
     // This method updates the member fields when this locale is actually set
     // as active.
-    void DoInit(const wxString& name,
-                const wxString& shortName,
+    void DoInit(const std::string& name,
+                const std::string& shortName,
                 int language);
 
     // copy default table of languages from global static array to
@@ -331,12 +331,12 @@ private:
     //
     // The return value is the same as "success" parameter.
     bool DoCommonPostInit(bool success,
-                          const wxString& name,
-                          const wxString& shortName,
+                          const std::string& name,
+                          const std::string& shortName,
                           bool bLoadDefault);
 
 
-    wxString       m_strLocale,       // this locale name
+    std::string       m_strLocale,       // this locale name
                    m_strShort;        // short name for the locale
     int            m_language;        // this locale wxLanguage value
 

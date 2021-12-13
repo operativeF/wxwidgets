@@ -532,9 +532,9 @@
 
 #define LNG(wxlang, canonical, winlang, winsublang, layout, desc) \
     info.Language = wxlang;                               \
-    info.CanonicalName = wxT(canonical);                  \
+    info.CanonicalName = canonical;                       \
     info.LayoutDirection = layout;                        \
-    info.Description = wxT(desc);                         \
+    info.Description = desc;                              \
     SETWINLANG(info, winlang, winsublang)                 \
     AddLanguage(info);
 

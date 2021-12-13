@@ -350,6 +350,18 @@ bool IsSameAs(std::string_view strViewA, std::string_view strViewB, bool bCase)
     return false;
 }
 
+[[nodiscard]] constexpr bool StartsWith(std::string_view strView, std::string_view prefix)
+{
+    auto pos = strView.rfind(prefix, 0);
+
+    if(pos != std::string::npos)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 // FIXME: Replace template with span
 template<typename... Cs>
 [[nodiscard]] constexpr bool ContainsAnyOf(std::string_view strView, Cs&&... cs) noexcept

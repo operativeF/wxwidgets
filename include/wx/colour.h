@@ -13,7 +13,6 @@
 
 #include "wx/gdiobj.h"
 #include "wx/colorspace.h"
-#include "wx/string.h"
 
 #include <fmt/core.h>
 #include <fmt/format.h>
@@ -30,6 +29,7 @@ import <cstdint>;
 import <optional>;
 import <ranges>;
 import <span>;
+import <string>;
 
 class wxColour;
 
@@ -51,9 +51,8 @@ class wxColour;
              ChannelType alpha = wxALPHA_OPAQUE)                              \
         { Init(); Set(red, green, blue, alpha); }                             \
     wxColour(unsigned long colRGB) { Init(); Set(colRGB    ); }               \
-    wxColour(const wxString& colourName) { Init(); Set(colourName); }         \
-    wxWXCOLOUR_CTOR_FROM_CHAR                                                 \
-    wxColour(const wchar_t *colourName) { Init(); Set(colourName); }
+    wxColour(const std::string& colourName) { Init(); Set(colourName); }      \
+    wxColour(const char* colourName) { Init(); Set(colourName); }
 
 
 // flags for wxColour -> wxString conversion (see wxColour::GetAsString)
@@ -847,7 +846,7 @@ public:
         { InitRGBA(red, green, blue, alpha); }
 
     // implemented in colourcmn.cpp
-    bool Set(const wxString &str)
+    bool Set(const std::string &str)
         { return FromString(str); }
 
     void Set(unsigned long colRGB)
@@ -869,7 +868,7 @@ public:
         { return true; }
 
     // implemented in colourcmn.cpp
-    virtual wxString GetAsString(unsigned int flags = wxC2S_NAME | wxC2S_CSS_SYNTAX) const;
+    virtual std::string GetAsString(unsigned int flags = wxC2S_NAME | wxC2S_CSS_SYNTAX) const;
 
     void SetRGB(std::uint32_t colRGB)
     {
@@ -925,7 +924,7 @@ protected:
     virtual void
     InitRGBA(ChannelType r, ChannelType g, ChannelType b, ChannelType a) = 0;
 
-    virtual bool FromString(const wxString& s);
+    virtual bool FromString(const std::string& s);
 
 #if wxCOLOUR_IS_GDIOBJECT
     // wxColour doesn't use reference counted data (at least not in all ports)
@@ -948,9 +947,9 @@ protected:
 };
 
 
-// wxColour <-> wxString utilities, used by wxConfig, defined in colourcmn.cpp
-wxString wxToString(const wxColourBase& col);
-bool wxFromString(const wxString& str, wxColourBase* col);
+// wxColour <-> std::string utilities, used by wxConfig, defined in colourcmn.cpp
+std::string wxToString(const wxColourBase& col);
+bool wxFromString(const std::string& str, wxColourBase* col);
 
 
 

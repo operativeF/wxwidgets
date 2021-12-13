@@ -140,14 +140,6 @@ bool wxContextHelp::BeginContextHelp(wxWindow* win)
         wxPoint pt;
         wxWindow* winAtPtr = wxFindWindowAtPointer(pt);
 
-#if 0
-        if (winAtPtr)
-        {
-            printf("Picked %s (%d)\n", winAtPtr->GetName().c_str(),
-                   winAtPtr->GetId());
-        }
-#endif
-
         if (winAtPtr)
             DispatchEvent(winAtPtr, pt);
     }
