@@ -6,6 +6,7 @@ module;
 #include <handleapi.h>
 #include <WinUser.h>
 #include <wingdi.h>
+#include <Uxtheme.h>
 
 #include <memory>
 
@@ -112,6 +113,13 @@ struct WndHdcPaintDeleter
     void operator()(WXHWND hWnd, const PAINTSTRUCT* lpPaint) noexcept { ::EndPaint(hWnd, lpPaint); };
 };
 
+struct WndThemeDeleter
+{
+    using pointer = WXHTHEME;
+
+    void operator()(WXHTHEME h) noexcept { ::CloseThemeData(h); }
+};
+
 export
 {
 
@@ -127,6 +135,7 @@ using unique_icon        = std::unique_ptr<WXHICON, WndIconDeleter>;
 using unique_enhmetafile = std::unique_ptr<WXHENHMETAFILE, WndEnhMetafileDeleter>;
 using unique_dcwnd       = std::unique_ptr<WXHDC, WndHdcWndDeleter>;
 using unique_dcpaint     = std::unique_ptr<WXHDC, WndHdcPaintDeleter>;
+using unique_theme       = std::unique_ptr<WXHTHEME, WndThemeDeleter>;
 
 template<typename GDIObjT>
 using unique_gdiobj  = std::unique_ptr<GDIObjT, WndGDIObjDeleter<GDIObjT>>;

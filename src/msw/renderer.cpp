@@ -633,7 +633,7 @@ wxRendererXP::DrawComboBoxDropButton(wxWindow * win,
                                       const wxRect& rect,
                                       unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"COMBOBOX");
+    wxUxThemeHandle hTheme(win, "COMBOBOX");
     if ( !hTheme )
     {
         m_rendererNative.DrawComboBoxDropButton(win, dc, rect, flags);
@@ -674,7 +674,7 @@ wxRendererXP::DrawHeaderButton(wxWindow *win,
                                wxHeaderSortIconType sortArrow,
                                wxHeaderButtonParams* params)
 {
-    wxUxThemeHandle hTheme(win, L"HEADER");
+    wxUxThemeHandle hTheme(win, "HEADER");
     if ( !hTheme )
     {
         return m_rendererNative.DrawHeaderButton(win, dc, rect, flags, sortArrow, params);
@@ -716,7 +716,7 @@ wxRendererXP::DrawTreeItemButton(wxWindow *win,
                                  const wxRect& rect,
                                  unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"TREEVIEW");
+    wxUxThemeHandle hTheme(win, "TREEVIEW");
     if ( !hTheme )
     {
         m_rendererNative.DrawTreeItemButton(win, dc, rect, flags);
@@ -746,7 +746,7 @@ wxRendererXP::DoDrawXPButton(int kind,
                              const wxRect& rect,
                              unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"BUTTON");
+    wxUxThemeHandle hTheme(win, "BUTTON");
     if ( !hTheme )
         return false;
 
@@ -762,7 +762,7 @@ wxRendererXP::DoDrawCheckMark(int kind,
                               const wxRect& rect,
                               unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"MENU");
+    wxUxThemeHandle hTheme(win, "MENU");
     if ( !hTheme )
         return false;
 
@@ -848,7 +848,7 @@ wxRendererXP::DrawTitleBarBitmap(wxWindow *win,
                                  wxTitleBarButton button,
                                  unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"WINDOW");
+    wxUxThemeHandle hTheme(win, "WINDOW");
     if ( !hTheme )
     {
         m_rendererNative.DrawTitleBarBitmap(win, dc, rect, button, flags);
@@ -890,7 +890,7 @@ wxSize wxRendererXP::GetCheckBoxSize(wxWindow* win, unsigned int flags)
 {
     wxCHECK_MSG( win, wxSize(0, 0), "Must have a valid window" );
 
-    wxUxThemeHandle hTheme(win, L"BUTTON");
+    wxUxThemeHandle hTheme(win, "BUTTON");
     if (hTheme)
     {
         if (::IsThemePartDefined(hTheme, BP_CHECKBOX, 0))
@@ -907,7 +907,7 @@ wxSize wxRendererXP::GetCheckMarkSize(wxWindow* win)
 {
     wxCHECK_MSG(win, wxSize(0, 0), "Must have a valid window");
 
-    wxUxThemeHandle hTheme(win, L"MENU");
+    wxUxThemeHandle hTheme(win, "MENU");
     if (hTheme)
     {
         if (::IsThemePartDefined(hTheme, MENU_POPUPCHECK, 0))
@@ -924,7 +924,7 @@ wxSize wxRendererXP::GetExpanderSize(wxWindow* win)
 {
     wxCHECK_MSG( win, wxSize(0, 0), "Must have a valid window" );
 
-    wxUxThemeHandle hTheme(win, L"TREEVIEW");
+    wxUxThemeHandle hTheme(win, "TREEVIEW");
     if ( hTheme )
     {
         if ( ::IsThemePartDefined(hTheme, TVP_GLYPH, 0) )
@@ -946,7 +946,7 @@ wxRendererXP::DrawCollapseButton(wxWindow *win,
                                  const wxRect& rect,
                                  unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"TASKDIALOG");
+    wxUxThemeHandle hTheme(win, "TASKDIALOG");
 
     if ( ::IsThemePartDefined(hTheme, TDLG_EXPANDOBUTTON, 0) )
     {
@@ -979,7 +979,7 @@ wxRendererXP::DrawCollapseButton(wxWindow *win,
 
 wxSize wxRendererXP::GetCollapseButtonSize(wxWindow *win, wxDC& dc)
 {
-    wxUxThemeHandle hTheme(win, L"TASKDIALOG");
+    wxUxThemeHandle hTheme(win, "TASKDIALOG");
 
     // EXPANDOBUTTON scales ugly if not using the correct size, get size from theme
 
@@ -1006,7 +1006,7 @@ wxRendererXP::DrawItemSelectionRect(wxWindow *win,
                                     const wxRect& rect,
                                     unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"LISTVIEW");
+    wxUxThemeHandle hTheme(win, "LISTVIEW");
 
     const int itemState = GetListItemState(flags);
 
@@ -1033,7 +1033,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
                                 unsigned int flags,
                                 wxEllipsizeMode ellipsizeMode)
 {
-    wxUxThemeHandle hTheme(win, L"LISTVIEW");
+    wxUxThemeHandle hTheme(win, "LISTVIEW");
 
     const int itemState = GetListItemState(flags);
 
@@ -1135,7 +1135,7 @@ void wxRendererXP::DrawTextCtrl(wxWindow* win,
                                 const wxRect& rect,
                                 unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"EDIT");
+    wxUxThemeHandle hTheme(win, "EDIT");
     if ( !hTheme )
     {
         m_rendererNative.DrawTextCtrl(win,dc,rect,flags);
@@ -1172,7 +1172,7 @@ void wxRendererXP::DrawGauge(wxWindow* win,
     int max,
     unsigned int flags)
 {
-    wxUxThemeHandle hTheme(win, L"PROGRESS");
+    wxUxThemeHandle hTheme(win, "PROGRESS");
     if ( !hTheme )
     {
         m_rendererNative.DrawGauge(win, dc, rect, value, max, flags);

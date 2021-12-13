@@ -26,6 +26,7 @@ using WXHPALETTE     = HPALETTE;
 using WXHPEN         = HPEN;
 using WXHRGN         = HRGN;
 using WXHWND         = HWND;
+using WXHTHEME       = HTHEME;
 
 using WXHIMAGELIST   = HIMAGELIST;
 using WXHGLOBAL      = HGLOBAL;

@@ -499,7 +499,7 @@ void wxAnyButton::AdjustForBitmapMargins(wxSize& size) const
 #if wxUSE_UXTHEME
         if ( wxUxThemeIsActive() )
         {
-            wxUxThemeHandle theme(const_cast<wxAnyButton *>(this), L"BUTTON");
+            wxUxThemeHandle theme(const_cast<wxAnyButton *>(this), "BUTTON");
 
             // Initialize margins with the default values (at least under
             // Windows 7) in case GetThemeMargins() fails.
@@ -1102,7 +1102,7 @@ void DrawButtonFrame(WXHDC hdc, RECT& rectBtn,
 #if wxUSE_UXTHEME
 void DrawXPBackground(wxAnyButton *button, WXHDC hdc, RECT& rectBtn, WXUINT state)
 {
-    wxUxThemeHandle theme(button, L"BUTTON");
+    wxUxThemeHandle theme(button, "BUTTON");
 
     // this array is indexed by wxAnyButton::State values and so must be kept in
     // sync with it

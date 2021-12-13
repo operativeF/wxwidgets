@@ -312,7 +312,7 @@ void MenuDrawData::Init(wxWindow const* window)
 #if wxUSE_UXTHEME
     if ( IsUxThemeActive() )
     {
-        wxUxThemeHandle hTheme(window, L"MENU");
+        wxUxThemeHandle hTheme(window, "MENU");
 
         ::GetThemeMargins(hTheme, nullptr, MENU_POPUPITEM, 0,
                                TMT_CONTENTMARGINS, nullptr,
@@ -917,7 +917,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
                 state = MPI_NORMAL;
             }
 
-            wxUxThemeHandle hTheme(GetMenu()->GetWindow(), L"MENU");
+            wxUxThemeHandle hTheme(GetMenu()->GetWindow(), "MENU");
 
             if ( ::IsThemeBackgroundPartiallyTransparent(hTheme,
                     MENU_POPUPITEM, state) )
@@ -1153,7 +1153,7 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
 #if wxUSE_UXTHEME
     if ( MenuDrawData::IsUxThemeActive() )
     {
-        wxUxThemeHandle hTheme(GetMenu()->GetWindow(), L"MENU");
+        wxUxThemeHandle hTheme(GetMenu()->GetWindow(), "MENU");
 
         const MenuDrawData* data = MenuDrawData::Get(GetMenu());
 
@@ -1235,7 +1235,7 @@ void wxMenuItem::GetColourToUse(wxODStatus stat, wxColour& colText, wxColour& co
 #if wxUSE_UXTHEME
     if ( MenuDrawData::IsUxThemeActive() )
     {
-        wxUxThemeHandle hTheme(GetMenu()->GetWindow(), L"MENU");
+        wxUxThemeHandle hTheme(GetMenu()->GetWindow(), "MENU");
 
         if ( stat & wxODDisabled)
         {

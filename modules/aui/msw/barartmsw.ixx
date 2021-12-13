@@ -121,7 +121,7 @@ wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
 
         // Determine sizes from theme
         wxWindow* window = dynamic_cast<wxApp*>(wxApp::GetInstance())->GetTopWindow();
-        wxUxThemeHandle hTheme(window, L"Rebar");
+        wxUxThemeHandle hTheme(window, "Rebar");
 
         SIZE overflowSize;
         ::GetThemePartSize(hTheme, nullptr, RP_CHEVRON, 0,
@@ -133,7 +133,7 @@ wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
             nullptr, TS_TRUE, &gripperSize);
         m_gripperSize = gripperSize.cx;
 
-        wxUxThemeHandle hThemeToolbar(window, L"Toolbar");
+        wxUxThemeHandle hThemeToolbar(window, "Toolbar");
 
         SIZE seperatorSize;
         ::GetThemePartSize(hThemeToolbar, nullptr, TP_SEPARATOR, 0,
@@ -168,7 +168,7 @@ void wxAuiMSWToolBarArt::DrawBackground(
         RECT r;
         wxCopyRectToRECT(rect, r);
 
-        wxUxThemeHandle hTheme(wnd, L"Rebar");
+        wxUxThemeHandle hTheme(wnd, "Rebar");
 
         ::DrawThemeBackground(
             hTheme,
@@ -202,7 +202,7 @@ void wxAuiMSWToolBarArt::DrawButton(
         RECT r;
         wxCopyRectToRECT(rect, r);
 
-        wxUxThemeHandle hTheme(wnd, L"Toolbar");
+        wxUxThemeHandle hTheme(wnd, "Toolbar");
 
         int btnState;
         if ( item.GetState() & wxAUI_BUTTON_STATE_DISABLED )
@@ -302,7 +302,7 @@ void wxAuiMSWToolBarArt::DrawDropDownButton(
 {
     if ( m_themed )
     {
-        wxUxThemeHandle hTheme(wnd, L"Toolbar");
+        wxUxThemeHandle hTheme(wnd, "Toolbar");
 
         int textWidth = 0, textHeight = 0, textX = 0, textY = 0;
         int bmpX = 0, bmpY = 0;
@@ -437,7 +437,7 @@ void wxAuiMSWToolBarArt::DrawSeparator(
         RECT r;
         wxCopyRectToRECT(rect, r);
 
-        wxUxThemeHandle hTheme(wnd, L"Toolbar");
+        wxUxThemeHandle hTheme(wnd, "Toolbar");
 
         ::DrawThemeBackground(
             hTheme,
@@ -461,7 +461,7 @@ void wxAuiMSWToolBarArt::DrawGripper(
         RECT r;
         wxCopyRectToRECT(rect, r);
 
-        wxUxThemeHandle hTheme(wnd, L"Rebar");
+        wxUxThemeHandle hTheme(wnd, "Rebar");
 
         ::DrawThemeBackground(
             hTheme,
@@ -486,7 +486,7 @@ void wxAuiMSWToolBarArt::DrawOverflowButton(
         RECT r;
         wxCopyRectToRECT(rect, r);
 
-        wxUxThemeHandle hTheme(wnd, L"Rebar");
+        wxUxThemeHandle hTheme(wnd, "Rebar");
 
         int chevState;
         if ( state & wxAUI_BUTTON_STATE_PRESSED )

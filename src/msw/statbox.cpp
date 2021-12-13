@@ -512,7 +512,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         }
         else // no font set, use the one set by the theme
         {
-            wxUxThemeHandle hTheme(this, L"BUTTON");
+            wxUxThemeHandle hTheme(this, "BUTTON");
             if ( hTheme )
             {
                 wxUxThemeFont themeFont;

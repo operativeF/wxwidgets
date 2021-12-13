@@ -492,7 +492,7 @@ public:
 
     // returns a specific theme colour, or if that is not possible then
     // wxSystemSettings::GetColour(fallback)
-    wxColour MSWGetThemeColour(const wchar_t *themeName,
+    wxColour MSWGetThemeColour(std::string_view themeName,
                                int themePart,
                                int themeState,
                                MSWThemeColour themeColour,

@@ -1075,7 +1075,7 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
     if ( ::IsRectEmpty(&rc) )
         return nullptr;
 
-    wxUxThemeHandle theme(this, L"TAB");
+    wxUxThemeHandle theme(this, "TAB");
     if ( !theme )
         return nullptr;
 
@@ -1162,7 +1162,7 @@ bool wxNotebook::MSWPrintChild(WXHDC hDC, wxWindow *child)
     }
     else // No solid background colour, try to use themed background.
     {
-        wxUxThemeHandle theme(child, L"TAB");
+        wxUxThemeHandle theme(child, "TAB");
         if ( theme )
         {
             // we have the content area (page size), but we need to draw all of the
@@ -1200,7 +1200,7 @@ wxColour wxNotebook::GetThemeBackgroundColour() const
 #if wxUSE_UXTHEME
     if (wxUxThemeIsActive())
     {
-        wxUxThemeHandle hTheme(this, L"TAB");
+        wxUxThemeHandle hTheme(this, "TAB");
         if (hTheme)
         {
             // This is total guesswork.

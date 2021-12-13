@@ -153,7 +153,7 @@ void wxAuiMSWTabArt::DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect)
     RECT r;
     wxCopyRectToRECT(drawRect, r);
 
-    wxUxThemeHandle hTheme(wnd, L"TAB");
+    wxUxThemeHandle hTheme(wnd, "TAB");
 
     ::DrawThemeBackground(
         hTheme,
@@ -193,7 +193,7 @@ void wxAuiMSWTabArt::DrawBackground(wxDC& dc,
     RECT r;
     wxCopyRectToRECT(drawRect, r);
 
-    wxUxThemeHandle hTheme(wnd, L"TAB");
+    wxUxThemeHandle hTheme(wnd, "TAB");
 
     ::DrawThemeBackground(
         hTheme,
@@ -265,7 +265,7 @@ void wxAuiMSWTabArt::DrawTab(wxDC& dc,
     else
         tabState = TIS_NORMAL;
 
-    wxUxThemeHandle hTabTheme(wnd, L"Tab");
+    wxUxThemeHandle hTabTheme(wnd, "TAB");
     RECT tabR;
     wxCopyRectToRECT(tabRect, tabR);
     ::DrawThemeBackground(hTabTheme, GetHdcOf(dc.GetTempHDC()), TABP_TABITEM,
@@ -310,7 +310,7 @@ void wxAuiMSWTabArt::DrawTab(wxDC& dc,
     // draw close button
     if ( close_button_state != wxAUI_BUTTON_STATE_HIDDEN )
     {
-        wxUxThemeHandle hToolTipTheme(wnd, L"TOOLTIP");
+        wxUxThemeHandle hToolTipTheme(wnd, "TOOLTIP");
 
         int btnState{};
         if ( close_button_state == wxAUI_BUTTON_STATE_HOVER )
@@ -440,25 +440,25 @@ void wxAuiMSWTabArt::DrawButton(wxDC& dc,
         return;
     }
 
-    const wchar_t* themeId = nullptr;
+    std::string themeId;
     int part = 0;
 
     switch (bitmap_id)
     {
     case wxAUI_BUTTON_CLOSE:
-        themeId = L"Window";
+        themeId = "Window";
         part = WP_CLOSEBUTTON;
         break;
     case wxAUI_BUTTON_LEFT:
-        themeId = L"Spin";
+        themeId = "Spin";
         part = SPNP_DOWNHORZ;
         break;
     case wxAUI_BUTTON_RIGHT:
-        themeId = L"Spin";
+        themeId = "Spin";
         part = SPNP_UPHORZ;
         break;
     case wxAUI_BUTTON_WINDOWLIST:
-        themeId = L"Combobox";
+        themeId = "Combobox";
         part = CP_DROPDOWNBUTTON;
         break;
     }
@@ -532,13 +532,13 @@ void wxAuiMSWTabArt::InitSizes(wxWindow* wnd, wxDC& dc)
     SIZE uxSize;
 
     // Borrow close button from tooltip (best fit on various backgrounds)
-    wxUxThemeHandle hTooltipTheme(wnd, L"Tooltip");
+    wxUxThemeHandle hTooltipTheme(wnd, "Tooltip");
 
     ::GetThemePartSize(hTooltipTheme, GetHdcOf(dc.GetTempHDC()),
         TTP_CLOSE, 0, nullptr, TS_TRUE, &uxSize);
     m_closeBtnSize.Set(uxSize.cx, uxSize.cy);
 
-    wxUxThemeHandle hTabTheme(wnd, L"Tab");
+    wxUxThemeHandle hTabTheme(wnd, "TAB");
     ::GetThemePartSize(hTabTheme, GetHdcOf(dc.GetTempHDC()),
         TABP_TABITEM, 0, nullptr, TS_TRUE, &uxSize);
     m_tabSize.Set(uxSize.cx, uxSize.cy);

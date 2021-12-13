@@ -28,6 +28,12 @@
 #include <tmschema.h>
 #endif
 
+#include <boost/nowide/stackstring.hpp>
+
+import WX.Win.UniqueHnd;
+
+import <string_view>;
+
 // ----------------------------------------------------------------------------
 // Definitions for legacy Windows SDKs
 // ----------------------------------------------------------------------------
@@ -191,25 +197,16 @@ bool wxUxThemeIsActive();
 class wxUxThemeHandle
 {
 public:
-    wxUxThemeHandle(const wxWindow *win, const wchar_t *classes)
+    wxUxThemeHandle(const wxWindow *win, std::string_view classes)
     {
-        m_hTheme = (HTHEME)::OpenThemeData(GetHwndOf(win), classes);
+        boost::nowide::wstackstring stackClasses{classes.data()};
+        m_hTheme = msw::utils::unique_theme{::OpenThemeData(GetHwndOf(win), stackClasses.get())};
     }
 
-    operator HTHEME() const { return m_hTheme; }
-
-    ~wxUxThemeHandle()
-    {
-        if ( m_hTheme )
-        {
-            ::CloseThemeData(m_hTheme);
-        }
-    }
-
-	wxUxThemeHandle& operator=(wxUxThemeHandle&&) = delete;
+    operator HTHEME() const { return m_hTheme.get(); }
 
 private:
-    HTHEME m_hTheme;
+    msw::utils::unique_theme m_hTheme;
 };
 
 #else // !wxUSE_UXTHEME

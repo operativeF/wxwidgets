@@ -160,7 +160,7 @@ void
 wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const
 {
 #if wxUSE_UXTHEME
-    wxUxThemeHandle hTheme(this, L"COMBOBOX");
+    wxUxThemeHandle hTheme(this, "COMBOBOX");
 #endif
 
     wxSize sz = GetClientSize();
@@ -318,7 +318,7 @@ void wxComboCtrl::OnPaintEvent( [[maybe_unused]] wxPaintEvent& event )
     WXHDC hDc = GetHdcOf(*impl);
     WXHWND hWnd = GetHwndOf(this);
 
-    wxUxThemeHandle hTheme(this, L"COMBOBOX");
+    wxUxThemeHandle hTheme(this, "COMBOBOX");
 #endif // wxUSE_UXTHEME
 
     wxRect borderRect(0,0,sz.x,sz.y);

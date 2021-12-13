@@ -3706,7 +3706,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                         rect = (RECT *)lParam;
                     }
 
-                    wxUxThemeHandle hTheme((const wxWindow *)this, L"EDIT");
+                    wxUxThemeHandle hTheme((const wxWindow *)this, "EDIT");
 
                     // There is no need to initialize rcClient: either it will
                     // be done by GetThemeBackgroundContentRect() or we'll do
@@ -3753,7 +3753,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     rc.result = MSWDefWindowProc(message, wParam, lParam);
                     processed = true;
 
-                    wxUxThemeHandle hTheme((const wxWindow *)this, L"EDIT");
+                    wxUxThemeHandle hTheme((const wxWindow *)this, "EDIT");
                     wxWindowDC dc((wxWindow *)this);
                     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
 
@@ -5163,7 +5163,7 @@ extern wxCOLORMAP *wxGetStdColourMap()
     #define TMT_BORDERCOLOR     3801
 #endif
 
-wxColour wxWindowMSW::MSWGetThemeColour(const wchar_t *themeName,
+wxColour wxWindowMSW::MSWGetThemeColour(std::string_view themeName,
                                         int themePart,
                                         int themeState,
                                         MSWThemeColour themeColour,
@@ -5207,7 +5207,7 @@ wxColour wxWindowMSW::MSWGetThemeColour(const wchar_t *themeName,
         wxLogApiError(
             wxString::Format(
                 "GetThemeColor(%s, %i, %i, %i)",
-                themeName, themePart, themeState, themeProperty),
+                std::string{themeName.begin(), themeName.end()}, themePart, themeState, themeProperty),
             hr);
     }
 #else

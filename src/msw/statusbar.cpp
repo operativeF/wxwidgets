@@ -422,7 +422,7 @@ bool wxStatusBar::GetFieldRect(int i, wxRect& rect) const
     }
 
 #if wxUSE_UXTHEME
-    wxUxThemeHandle theme(const_cast<wxStatusBar*>(this), L"Status");
+    wxUxThemeHandle theme(const_cast<wxStatusBar*>(this), "Status");
     if ( theme )
     {
         // by default Windows has a 2 pixel border to the right of the left

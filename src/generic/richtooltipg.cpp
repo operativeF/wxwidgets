@@ -83,7 +83,7 @@ public:
                 COLORREF c;
                 if ( FAILED(::GetThemeColor
                                    (
-                                        wxUxThemeHandle(parent, L"TOOLTIP"),
+                                        wxUxThemeHandle(parent, "TOOLTIP"),
                                         TTP_BALLOONTITLE,
                                         0,
                                         TMT_TEXTCOLOR,
@@ -160,7 +160,7 @@ public:
 #ifdef HAVE_MSW_THEME
             if ( UseTooltipTheme() )
             {
-                wxUxThemeHandle hTheme(GetParent(), L"TOOLTIP");
+                wxUxThemeHandle hTheme(GetParent(), "TOOLTIP");
 
                 COLORREF c1, c2;
                 if ( FAILED(::GetThemeColor
