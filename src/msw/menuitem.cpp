@@ -279,24 +279,19 @@ public:
     enum class MenuLayoutType
     {
         FullTheme,      // full menu themes (Vista or new)
-        PseudoTheme,    // pseudo menu themes (on XP)
         Classic
     };
 
     static MenuLayoutType MenuLayout()
     {
-        MenuLayoutType menu = MenuLayoutType::Classic;
     #if wxUSE_UXTHEME
         if ( wxUxThemeIsActive() )
         {
-            static wxWinVersion ver = wxGetWinVersion();
-            if ( ver >= wxWinVersion_Vista )
-                menu = MenuLayoutType::FullTheme;
-            else if ( ver == wxWinVersion_XP )
-                menu = MenuLayoutType::PseudoTheme;
+            return MenuLayoutType::FullTheme;
         }
     #endif // wxUSE_UXTHEME
-        return menu;
+
+        return MenuLayoutType::Classic;
     }
 
 private:
