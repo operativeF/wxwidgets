@@ -31,25 +31,25 @@ public:
           m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
     {}
 
-    void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
+    void ShowCheckBox(const std::string& checkBoxText, bool checked = false)
     {
         m_checkBoxText = checkBoxText;
         m_checkBoxValue = checked;
     }
 
-    wxString GetCheckBoxText() const { return m_checkBoxText; }
+    std::string GetCheckBoxText() const { return m_checkBoxText; }
 
-    void ShowDetailedText(const wxString& detailedText)
+    void ShowDetailedText(const std::string& detailedText)
         { m_detailedText = detailedText; }
 
-    wxString GetDetailedText() const { return m_detailedText; }
+    std::string GetDetailedText() const { return m_detailedText; }
 
     virtual bool IsCheckBoxChecked() const { return m_checkBoxValue; }
 
-    void SetFooterText(const wxString& footerText)
+    void SetFooterText(const std::string& footerText)
         { m_footerText = footerText; }
 
-    wxString GetFooterText() const { return m_footerText; }
+    std::string GetFooterText() const { return m_footerText; }
 
     void SetFooterIcon(int icon)
         { m_footerIcon = icon; }

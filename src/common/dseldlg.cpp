@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DIRDLG
 
 #include "wx/dirdlg.h"
@@ -19,13 +16,13 @@
 // implementation
 // ============================================================================
 
-wxString wxDirSelector(std::string_view message,
-                       const wxString& defaultPath,
+std::string wxDirSelector(std::string_view message,
+                       const std::string& defaultPath,
                        unsigned int style,
                        const wxPoint& pos,
                        wxWindow *parent)
 {
-    wxString path;
+    std::string path;
 
     wxDirDialog dirDialog(parent, message, defaultPath, style, pos);
     if ( dirDialog.ShowModal() == wxID_OK )

@@ -25,9 +25,9 @@ bool wxGenericFontButton::Create( wxWindow *parent, wxWindowID id,
                         const wxSize &size, unsigned int style,
                         const wxValidator& validator, std::string_view name)
 {
-    wxString label = (style & wxFNTP_FONTDESC_AS_LABEL) ?
-                        wxString() : // label will be updated by UpdateFont
-                        _("Choose font");
+    std::string label = (style & wxFNTP_FONTDESC_AS_LABEL) ?
+                        std::string{} : // label will be updated by UpdateFont
+                        _("Choose font").ToStdString();
 
     // create this button
     if (!wxButton::Create( parent, id, label, pos,

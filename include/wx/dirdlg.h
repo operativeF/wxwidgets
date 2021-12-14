@@ -131,9 +131,9 @@ protected:
 // common ::wxDirSelector() function
 // ----------------------------------------------------------------------------
 
-wxString
+std::string
 wxDirSelector(std::string_view message = wxDirSelectorPromptStr,
-              const wxString& defaultPath = {},
+              const std::string& defaultPath = {},
               unsigned int style = wxDD_DEFAULT_STYLE,
               const wxPoint& pos = wxDefaultPosition,
               wxWindow *parent = nullptr);

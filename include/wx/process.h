@@ -50,7 +50,7 @@ public:
     // on error NULL is returned, in any case the process object will be
     // deleted automatically when the process terminates and should *not* be
     // deleted by the caller
-    static wxProcess *Open(const wxString& cmd, unsigned int flags = wxEXEC_ASYNC);
+    static wxProcess *Open(const std::string& cmd, unsigned int flags = wxEXEC_ASYNC);
 
     wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY)
         { Init(parent, nId, wxPROCESS_DEFAULT); }

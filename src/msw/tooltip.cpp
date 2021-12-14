@@ -30,6 +30,7 @@
 import WX.WinDef;
 import Utils.Strings;
 
+import <string>;
 import <vector>;
 
 #ifndef TTTOOLINFO_V1_SIZE
@@ -568,10 +569,11 @@ bool wxToolTip::AdjustMaxWidth()
     wxStringTokenizer tokenizer(m_text, "\n");
     while ( tokenizer.HasMoreTokens() )
     {
-        const wxString token = tokenizer.GetNextToken();
+        const auto token = tokenizer.GetNextToken();
 
         SIZE sz;
-        if ( !::GetTextExtentPoint32W(hdc, token.t_str(),
+        boost::nowide::wstackstring stackToken{token.c_str()};
+        if ( !::GetTextExtentPoint32W(hdc, stackToken.get(),
                                      token.length(), &sz) )
         {
             wxLogLastError("GetTextExtentPoint32");

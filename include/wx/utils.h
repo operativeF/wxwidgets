@@ -331,15 +331,12 @@ struct wxExecuteEnv
 // If flags contain wxEXEC_SYNC, return -1 on failure and the exit code of the
 // process if everything was ok. Otherwise (i.e. if wxEXEC_ASYNC), return 0 on
 // failure and the PID of the launched process if ok.
-long wxExecute(const wxString& command,
-                                unsigned int flags = wxEXEC_ASYNC,
-                                wxProcess *process = nullptr,
-                                const wxExecuteEnv *env = nullptr);
+long wxExecute(const std::string& command,
+               unsigned int flags = wxEXEC_ASYNC,
+               wxProcess *process = nullptr,
+               const wxExecuteEnv *env = nullptr);
+
 long wxExecute(const char* const* argv,
-                                unsigned int flags = wxEXEC_ASYNC,
-                                wxProcess *process = nullptr,
-                                const wxExecuteEnv *env = nullptr);
-long wxExecute(const wchar_t* const* argv,
                                 unsigned int flags = wxEXEC_ASYNC,
                                 wxProcess *process = nullptr,
                                 const wxExecuteEnv *env = nullptr);
@@ -360,9 +357,9 @@ long wxExecute(const wxString& command,
 
 #if defined(WX_WINDOWS) && wxUSE_IPC
 // ask a DDE server to execute the DDE request with given parameters
-bool wxExecuteDDE(const wxString& ddeServer,
-                                   const wxString& ddeTopic,
-                                   const wxString& ddeCommand);
+bool wxExecuteDDE(const std::string& ddeServer,
+                                   const std::string& ddeTopic,
+                                   const std::string& ddeCommand);
 #endif // WX_WINDOWS && wxUSE_IPC
 
 enum wxSignal

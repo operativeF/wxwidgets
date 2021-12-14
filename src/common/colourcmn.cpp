@@ -15,6 +15,7 @@
 #include "wx/gdicmn.h"
 #include "wx/wxcrtvararg.h"
 
+import <charconv>;
 import <string>;
 
 #if wxUSE_VARIANT
@@ -29,7 +30,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColour, wxObject);
 #endif
 
 // ============================================================================
-// wxString <-> wxColour conversions
+// std::string <-> wxColour conversions
 // ============================================================================
 
 bool wxColourBase::FromString(const std::string& str)
@@ -82,21 +83,22 @@ bool wxColourBase::FromString(const std::string& str)
 
             // Notice that we must explicitly specify the length to get rid of
             // trailing NULs.
-            wxString alphaStr(alphaPtr, wxStrlen(alphaPtr));
+            std::string alphaStr(alphaPtr, wxStrlen(alphaPtr));
             if ( alphaStr.empty() )
                 return false;
 
-            alphaStr.Trim();
+            wx::utils::TrimAllSpace(alphaStr);
 
             double a{0.0};
-            if ( !alphaStr.ToCDouble(&a) )
+            auto [p, ec] = std::from_chars(alphaStr.data(), alphaStr.data() + alphaStr.size(), a);
+            if ( ec != std::errc() )
                 return false;
 
             alpha = std::lround(a * 255);
         }
         else // no 'a' following "rgb"
         {
-            if ( wxSscanf(str.c_str() + 3, "( %d , %d , %d )",
+            if ( std::sscanf(str.c_str() + 3, "( %d , %d , %d )",
                                                 &red, &green, &blue) != 3 )
                 return false;
         }
@@ -106,15 +108,15 @@ bool wxColourBase::FromString(const std::string& str)
             (unsigned char)std::clamp(blue, 0, 255),
             (unsigned char)std::clamp(alpha, 0, 255));
     }
-    else if ( str[0] == wxT('#') )
+    else if ( str[0] == '#' )
     {
         // hexadecimal prefixed with # ("HTML syntax")
         // see https://drafts.csswg.org/css-color/#hex-notation
         unsigned long tmp{0};
-        if (wxSscanf(str.c_str() + 1, "%lx", &tmp) != 1)
+        if (std::sscanf(str.c_str() + 1, "%lx", &tmp) != 1)
             return false;
 
-        switch (wxStrlen(str) - 1)
+        switch (str.size() - 1)
         {
             case 6: // #rrggbb
                 tmp = (tmp << 8) + wxALPHA_OPAQUE;

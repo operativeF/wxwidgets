@@ -509,9 +509,9 @@ size_t wxPipeOutputStream::OnSysWrite(const void *buffer, size_t len)
 
 // connect to the given server via DDE and ask it to execute the command
 bool
-wxExecuteDDE(const wxString& ddeServer,
-             const wxString& ddeTopic,
-             const wxString& ddeCommand)
+wxExecuteDDE(const std::string& ddeServer,
+             const std::string& ddeTopic,
+             const std::string& ddeCommand)
 {
     bool ok wxDUMMY_INITIALIZE(false);
 
@@ -550,7 +550,7 @@ wxExecuteDDE(const wxString& ddeServer,
 
 #endif // wxUSE_IPC
 
-long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
+long wxExecute(const std::string& cmd, unsigned int flags, wxProcess *handler,
                const wxExecuteEnv *env)
 {
     wxCHECK_MSG( !cmd.empty(), 0, "empty command in wxExecute" );
@@ -563,7 +563,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
                     "wxExecute() can be called only from the main thread" );
 #endif // wxUSE_THREADS
 
-    wxString command;
+    std::string command;
 
 #if wxUSE_IPC
     // DDE hack: this is really not pretty, but we need to allow this for
@@ -574,17 +574,19 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
     // keep all this well hidden from the application, we allow a special form
     // of command: WX_DDE#<command>#DDE_SERVER#DDE_TOPIC#DDE_COMMAND in which
     // case we execute just <command> and process the rest below
-    wxString ddeServer, ddeTopic, ddeCommand;
+    std::string ddeServer;
+    std::string ddeTopic;
+    std::string ddeCommand;
     static constexpr size_t lenDdePrefix = 7;   // strlen("WX_DDE:")
-    if ( cmd.Left(lenDdePrefix) == "WX_DDE#" )
+    if ( cmd.substr(0, lenDdePrefix) == "WX_DDE#" )
     {
         // speed up the concatenations below
         ddeServer.reserve(256);
         ddeTopic.reserve(256);
         ddeCommand.reserve(256);
 
-        const wxChar *p = cmd.c_str() + 7;
-        while ( *p && *p != wxT('#') )
+        const auto* p = cmd.c_str() + 7;
+        while ( *p && *p != '#' )
         {
             command += *p++;
         }
@@ -599,7 +601,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
             wxFAIL_MSG("invalid WX_DDE command in wxExecute");
         }
 
-        while ( *p && *p != wxT('#') )
+        while ( *p && *p != '#' )
         {
             ddeServer += *p++;
         }
@@ -614,7 +616,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
             wxFAIL_MSG("invalid WX_DDE command in wxExecute");
         }
 
-        while ( *p && *p != wxT('#') )
+        while ( *p && *p != '#' )
         {
             ddeTopic += *p++;
         }
@@ -734,7 +736,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 
     dwFlags |= CREATE_DEFAULT_ERROR_MODE ;
 
-    wxWxCharBuffer envBuffer;
+    std::string envBuffer;
     bool useCwd = false;
     if ( env )
     {
@@ -758,18 +760,18 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
                 envSz += it->first.length() + it->second.length() + 2;
             }
 
-            envBuffer.extend(envSz);
+            envBuffer.resize(envSz);
 
-            wxChar *p = envBuffer.data();
+            auto p = envBuffer.data();
             for ( auto it = env->env.begin(); it != env->env.end(); ++it )
             {
-                const wxString line = it->first + "=" + it->second;
+                const std::string line = it->first + "=" + it->second;
 
                 // Include the trailing NUL which will always terminate the
                 // buffer returned by t_str().
                 const size_t len = line.length() + 1;
 
-                wxTmemcpy(p, line.t_str(), len);
+                std::memcpy(p, line.c_str(), len);
 
                 p += len;
             }
@@ -802,10 +804,11 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
         }
     }
 
+    boost::nowide::wstackstring stackCommand{command.c_str()};
     const bool ok = ::CreateProcessW
                 (
                  nullptr,               // application name (use only cmd line)
-                 wxMSW_CONV_LPTSTR(command), // full command line
+                 stackCommand.get(), // full command line
                  nullptr,               // security attributes: defaults for both
                  nullptr,               //   the process and its main thread
                  redirect,           // inherit handles if we use pipes
@@ -1042,10 +1045,11 @@ template <typename CharType>
 long wxExecuteImpl(const CharType* const* argv, unsigned int flags, wxProcess* handler,
                    const wxExecuteEnv *env)
 {
-    wxString command;
+    std::string command;
     command.reserve(1024);
 
-    wxString arg;
+    std::string arg;
+
     for ( ;; )
     {
         arg = *argv++;
@@ -1061,11 +1065,11 @@ long wxExecuteImpl(const CharType* const* argv, unsigned int flags, wxProcess* h
         {
             // escape any quotes present in the string to avoid interfering
             // with the command line parsing in the child process
-            arg.Replace("\"", "\\\"", true /* replace all */);
+            wx::utils::ReplaceAll(arg, "\"", "\\\"");
 
             // and quote any arguments containing the spaces to prevent them from
             // being broken down
-            quote = arg.find_first_of(" \t") != wxString::npos;
+            quote = arg.find_first_of(" \t") != std::string::npos;
         }
 
         if ( quote )
@@ -1083,12 +1087,6 @@ long wxExecuteImpl(const CharType* const* argv, unsigned int flags, wxProcess* h
 }
 
 long wxExecute(const char* const* argv, unsigned int flags, wxProcess* handler,
-               const wxExecuteEnv *env)
-{
-    return wxExecuteImpl(argv, flags, handler, env);
-}
-
-long wxExecute(const wchar_t* const* argv, unsigned int flags, wxProcess* handler,
                const wxExecuteEnv *env)
 {
     return wxExecuteImpl(argv, flags, handler, env);

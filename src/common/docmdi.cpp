@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MDI_ARCHITECTURE
 
 #include "wx/docmdi.h"
@@ -19,4 +16,3 @@ wxIMPLEMENT_CLASS(wxDocMDIParentFrame, wxMDIParentFrame);
 wxIMPLEMENT_CLASS(wxDocMDIChildFrame, wxMDIChildFrame);
 
 #endif // wxUSE_DOC_VIEW_ARCHITECTURE
-

@@ -110,15 +110,15 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
 
     wxBoxSizer *chksizer = new wxBoxSizer( wxVERTICAL);
 
-    m_chkWord = new wxCheckBox(this, wxID_ANY, _("Whole word"));
+    m_chkWord = new wxCheckBox(this, wxID_ANY, _("Whole word").ToStdString());
     chksizer->Add(m_chkWord, 0, wxALL, 3);
 
-    m_chkCase = new wxCheckBox(this, wxID_ANY, _("Match case"));
+    m_chkCase = new wxCheckBox(this, wxID_ANY, _("Match case").ToStdString());
     chksizer->Add(m_chkCase, 0, wxALL, 3);
 
     optsizer->Add(chksizer, 0, wxALL, 10);
 
-    static const wxString searchDirections[] = {_("Up"), _("Down")};
+    static const std::string searchDirections[] = {_("Up").ToStdString(), _("Down").ToStdString()};
     int majorDimension = 0;
     int rbStyle ;
     if (isPda)
@@ -126,7 +126,7 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
     else
         rbStyle = wxRA_SPECIFY_COLS;
 
-    m_radioDir = new wxRadioBox(this, wxID_ANY, _("Search direction"),
+    m_radioDir = new wxRadioBox(this, wxID_ANY, _("Search direction").ToStdString(),
                                 wxDefaultPosition, wxDefaultSize,
                                 WXSIZEOF(searchDirections), searchDirections,
                                 majorDimension, rbStyle);
