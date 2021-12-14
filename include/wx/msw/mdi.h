@@ -95,7 +95,7 @@ public:
     // "Window" when using non-English translations and can also be different
     // from wxGetTranslation("Window") if the locale has changed since the
     // "Window" menu was added.
-    const wxString& MSWGetCurrentWindowMenuLabel() const
+    const std::string& MSWGetCurrentWindowMenuLabel() const
         { return m_currentWindowMenuLabel; }
 
     // handlers
@@ -135,7 +135,7 @@ protected:
 
 private:
     // holds the current translation for the window menu label
-    wxString m_currentWindowMenuLabel;
+    std::string m_currentWindowMenuLabel;
 
 #if wxUSE_MENUS
     // "Window" menu commands event handlers

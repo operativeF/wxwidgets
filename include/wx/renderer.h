@@ -27,7 +27,6 @@
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"
-#include "wx/string.h"
 
 import Utils.Geometry;
 
@@ -392,7 +391,7 @@ public:
 #if wxUSE_DYNLIB_CLASS
     // load the renderer from the specified DLL, the returned pointer must be
     // deleted by caller if not NULL when it is not used any more
-    static wxRendererNative *Load(const wxString& name);
+    static wxRendererNative *Load(const std::string& name);
 #endif // wxUSE_DYNLIB_CLASS
 
     // set the renderer to use, passing NULL reverts to using the default

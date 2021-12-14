@@ -376,16 +376,14 @@ void wxDataFormat::SetId(const std::string& format)
     }
 }
 
-wxString wxDataFormat::GetId() const
+std::string wxDataFormat::GetId() const
 {
-    static constexpr int max = 256;
+    std::array<WCHAR, 256> buf;
 
-    wxString s;
-
-    wxCHECK_MSG( !IsStandard(), s,
+    wxCHECK_MSG( !IsStandard(), {},
                  "name of predefined format cannot be retrieved" );
 
-    int len = ::GetClipboardFormatNameW(m_format, wxStringBuffer(s, max), max);
+    int len = ::GetClipboardFormatNameW(m_format, &buf[0], buf.size());
 
     if ( !len )
     {
@@ -393,7 +391,7 @@ wxString wxDataFormat::GetId() const
         return {};
     }
 
-    return s;
+    return boost::nowide::narrow(buf.data());
 }
 
 #if wxUSE_OLE
@@ -1338,7 +1336,8 @@ bool wxFileDataObject::GetDataHere(void *pData) const
     {
         // copy filename to pbuf and add null terminator
         size_t len = m_filenames[i].length();
-        std::memcpy(pbuf, m_filenames[i].t_str(), len*sizeOfChar);
+        boost::nowide::wstackstring stackFile{m_filenames[i].c_str()};
+        std::memcpy(pbuf, stackFile.get(), len*sizeOfChar);
 
         pbuf += len*sizeOfChar;
 

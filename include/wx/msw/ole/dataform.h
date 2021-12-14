@@ -56,7 +56,7 @@ public:
 
     // string ids are used for custom types - this SetId() must be used for
     // application-specific formats
-    wxString GetId() const;
+    std::string GetId() const;
     void SetId(const std::string& format);
 
     // returns true if the format is one of those defined in wxDataFormatId

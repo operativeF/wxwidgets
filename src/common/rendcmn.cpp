@@ -148,9 +148,9 @@ wxRendererNative *wxRendererNative::Set(wxRendererNative *rendererNew)
 #if wxUSE_DYNLIB_CLASS
 
 /* static */
-wxRendererNative *wxRendererNative::Load(const wxString& name)
+wxRendererNative *wxRendererNative::Load(const std::string& name)
 {
-    wxString fullname = wxDynamicLibrary::CanonicalizePluginName(name);
+    std::string fullname = wxDynamicLibrary::CanonicalizePluginName(name);
 
     wxDynamicLibrary dll(fullname);
     if ( !dll.IsLoaded() )

@@ -54,12 +54,12 @@ public:
     std::string GetKind() const override { return wxPERSIST_TLW_KIND; }
 
 private:
-    bool SaveField(const wxString& name, int value) const override
+    bool SaveField(const std::string& name, int value) const override
     {
         return SaveValue(name, value);
     }
 
-    bool RestoreField(const wxString& name, int* value) override
+    bool RestoreField(const std::string& name, int* value) override
     {
         return RestoreValue(name, value);
     }

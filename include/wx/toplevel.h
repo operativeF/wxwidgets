@@ -25,6 +25,7 @@ import WX.Cfg.Flags;
 import Utils.Geometry;
 
 import <string>;
+import <string_view>;
 
 // the default names for various classes
 inline constexpr std::string_view wxFrameNameStr = "frame";
@@ -252,12 +253,12 @@ public:
 
         // If saving a field returns false, it's fatal error and SaveGeometry()
         // will return false.
-        virtual bool SaveField(const wxString& name, int value) const = 0;
+        virtual bool SaveField(const std::string& name, int value) const = 0;
 
         // If restoring a field returns false, it just means that the field is
         // not present and RestoreToGeometry() still continues with restoring
         // the other values.
-        virtual bool RestoreField(const wxString& name, int* value) = 0;
+        virtual bool RestoreField(const std::string& name, int* value) = 0;
     };
 
     // Save the current window geometry using the provided serializer and
@@ -300,7 +301,7 @@ public:
     virtual void OSXSetModified(bool modified) { m_modified = modified; }
     virtual bool OSXIsModified() const { return m_modified; }
 
-    virtual void SetRepresentedFilename([[maybe_unused]] const wxString& filename) { }
+    virtual void SetRepresentedFilename([[maybe_unused]] const std::string& filename) { }
 
 protected:
     // the frame client to screen translation should take account of the

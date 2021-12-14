@@ -40,24 +40,24 @@ public:
     };
 
     static BOOL CALLBACK
-    EnumModulesProc(const wxChar* name, DWORD64 base, ULONG size, PVOID data);
+    EnumModulesProc(const std::string& name, DWORD64 base, ULONG size, PVOID data);
 };
 
 // ----------------------------------------------------------------------------
 // DLL version operations
 // ----------------------------------------------------------------------------
 
-static wxString GetFileVersion(const wxString& filename)
+static std::string GetFileVersion(const std::string& filename)
 {
     std::string ver;
-    const wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
+    boost::nowide::wstackstring stackFilename{filename.c_str()};
 
     WXDWORD dummy;
-    const WXDWORD sizeVerInfo = ::GetFileVersionInfoSizeW(pc, &dummy);
+    const WXDWORD sizeVerInfo = ::GetFileVersionInfoSizeW(stackFilename.get(), &dummy);
     if ( sizeVerInfo )
     {
         wxCharBuffer buf(sizeVerInfo);
-        if ( ::GetFileVersionInfoW(pc, 0, sizeVerInfo, buf.data()) )
+        if ( ::GetFileVersionInfoW(stackFilename.get(), 0, sizeVerInfo, buf.data()) )
         {
             void *pVer;
             WXUINT sizeInfo;
@@ -85,7 +85,7 @@ static wxString GetFileVersion(const wxString& filename)
 
 /* static */
 BOOL CALLBACK
-wxDynamicLibraryDetailsCreator::EnumModulesProc(const wxChar* name,
+wxDynamicLibraryDetailsCreator::EnumModulesProc(const std::string& name,
                                                 DWORD64 base,
                                                 ULONG size,
                                                 void *data)
@@ -107,7 +107,7 @@ wxDynamicLibraryDetailsCreator::EnumModulesProc(const wxChar* name,
                          );
     if ( hmod )
     {
-        wxString fullname = wxGetFullModuleName(hmod);
+        std::string fullname = wxGetFullModuleName(hmod);
         if ( !fullname.empty() )
         {
             details.m_path = fullname;
@@ -139,20 +139,23 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
 // ----------------------------------------------------------------------------
 
 /* static */
-void wxDynamicLibrary::ReportError(const wxString& message, const wxString& name)
+void wxDynamicLibrary::ReportError(const std::string& message, const std::string& name)
 {
-    wxString msg(message);
-    if ( name.IsEmpty() && msg.Find("%s") == wxNOT_FOUND )
+    std::string msg{message};
+    if ( name.empty() && msg.find("%s") == std::string::npos )
         msg += "%s";
     // msg needs a %s for the name
-    wxASSERT(msg.Find("%s") != wxNOT_FOUND);
+    wxASSERT(msg.find("%s") != std::string::npos);
 
     const unsigned long code = wxSysErrorCode();
-    wxString errMsg = wxSysErrorMsgStr(code);
+    std::string errMsg = wxSysErrorMsgStr(code);
 
     // The error message (specifically code==193) may contain a
     // placeholder '%1' which stands for the filename.
-    errMsg.Replace("%1", name, false);
+    auto subReplace = std::ranges::search(errMsg, "%1");
+
+    if(!subReplace.empty())
+        errMsg.replace(subReplace.begin(), subReplace.end(), name);
 
     // Mimic the output of wxLogSysError(), but use our pre-processed
     // errMsg.
@@ -165,12 +168,13 @@ void wxDynamicLibrary::ReportError(const wxString& message, const wxString& name
 
 /* static */
 wxDllType
-wxDynamicLibrary::RawLoad(const wxString& libname, unsigned int flags)
+wxDynamicLibrary::RawLoad(const std::string& libname, unsigned int flags)
 {
+    boost::nowide::wstackstring stackLibname{libname.c_str()};
     if (flags & wxDL_GET_LOADED)
-        return ::GetModuleHandleW(libname.t_str());
+        return ::GetModuleHandleW(stackLibname.get());
 
-    return ::LoadLibraryW(libname.t_str());
+    return ::LoadLibraryW(stackLibname.get());
 }
 
 /* static */
@@ -183,11 +187,9 @@ void wxDynamicLibrary::Unload(wxDllType handle)
 }
 
 /* static */
-void *wxDynamicLibrary::RawGetSymbol(wxDllType handle, const wxString& name)
+void *wxDynamicLibrary::RawGetSymbol(wxDllType handle, const std::string& name)
 {
-    return (void *)::GetProcAddress(handle,
-                                            name.ToAscii()
-                                   );
+    return (void *)::GetProcAddress(handle, name.c_str());
 }
 
 // ----------------------------------------------------------------------------
@@ -262,7 +264,7 @@ WXHMODULE CallGetModuleHandleEx(const void* addr)
 } // anonymous namespace
 
 /* static */
-void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
+void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, std::string* path)
 {
     WXHMODULE hmod = CallGetModuleHandleEx(addr);
     if ( !hmod )
@@ -286,7 +288,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 
         libname[MAX_PATH-1] = wxT('\0');
 
-        *path = libname;
+        *path = boost::nowide::narrow(libname);
     }
 
     // In Windows WXHMODULE is actually the base address of the module so we
@@ -295,7 +297,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 }
 
 /* static */
-WXHMODULE wxDynamicLibrary::MSWGetModuleHandle(const wxString& name, void *addr)
+WXHMODULE wxDynamicLibrary::MSWGetModuleHandle(const std::string& name, void *addr)
 {
     // we want to use GetModuleHandleEx() instead of usual GetModuleHandle()
     // because the former works correctly for comctl32.dll while the latter
@@ -303,7 +305,9 @@ WXHMODULE wxDynamicLibrary::MSWGetModuleHandle(const wxString& name, void *addr)
     // GetModuleHandleEx() is only available under XP and later, coincidence?)
     WXHMODULE hmod = CallGetModuleHandleEx(addr);
 
-    return hmod ? hmod : ::GetModuleHandleW(name.t_str());
+    boost::nowide::wstackstring stackName{name.c_str()};
+
+    return hmod ? hmod : ::GetModuleHandleW(stackName.get());
 }
 
 #endif // wxUSE_DYNLIB_CLASS

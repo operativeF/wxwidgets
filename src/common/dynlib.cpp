@@ -42,17 +42,17 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
 #endif // WX_WINDOWS || __UNIX__
 
 
-bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
+bool wxDynamicLibrary::Load(const std::string& libnameOrig, unsigned int flags)
 {
     wxASSERT_MSG(m_handle == nullptr, "Library already loaded.");
 
     // add the proper extension for the DLL ourselves unless told not to
-    wxString libname = libnameOrig;
+    std::string libname = libnameOrig;
     if ( !(flags & wxDL_VERBATIM) )
     {
         // and also check that the libname doesn't already have it
         std::string ext;
-        wxFileName::SplitPath(libname.ToStdString(), nullptr, nullptr, &ext);
+        wxFileName::SplitPath(libname, nullptr, nullptr, &ext);
         if ( ext.empty() )
         {
             libname += GetDllExt(wxDynamicLibraryCategory::Module);
@@ -69,7 +69,7 @@ bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
     return IsLoaded();
 }
 
-void *wxDynamicLibrary::DoGetSymbol(const wxString &name, bool *success) const
+void *wxDynamicLibrary::DoGetSymbol(const std::string &name, bool *success) const
 {
     wxCHECK_MSG( IsLoaded(), nullptr,
                  "Can't load symbol from unloaded library" );
@@ -82,7 +82,7 @@ void *wxDynamicLibrary::DoGetSymbol(const wxString &name, bool *success) const
     return symbol;
 }
 
-void *wxDynamicLibrary::GetSymbol(const wxString& name, bool *success) const
+void *wxDynamicLibrary::GetSymbol(const std::string& name, bool *success) const
 {
     void *symbol = DoGetSymbol(name, success);
     if ( !symbol )
@@ -98,7 +98,7 @@ void *wxDynamicLibrary::GetSymbol(const wxString& name, bool *success) const
 // ----------------------------------------------------------------------------
 
 /*static*/
-wxString wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
+std::string wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
 {
     wxUnusedVar(cat);
 #if defined(WX_WINDOWS)
@@ -121,11 +121,11 @@ wxString wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
 }
 
 /*static*/
-wxString
-wxDynamicLibrary::CanonicalizeName(const wxString& name,
+std::string
+wxDynamicLibrary::CanonicalizeName(const std::string& name,
                                    wxDynamicLibraryCategory cat)
 {
-    wxString nameCanonic;
+    std::string nameCanonic;
 
     // under Unix the library names usually start with "lib" prefix, add it
 #if defined(__UNIX__)
@@ -141,27 +141,27 @@ wxDynamicLibrary::CanonicalizeName(const wxString& name,
     }
 #endif
 
-    nameCanonic << name << GetDllExt(cat);
+    nameCanonic += fmt::format("{}{}", name, GetDllExt(cat));
 
     return nameCanonic;
 }
 
 /*static*/
-wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
+std::string wxDynamicLibrary::CanonicalizePluginName(const std::string& name,
                                                   wxPluginCategory cat)
 {
-    wxString suffix;
+    std::string suffix;
     if ( cat == wxPluginCategory::Gui )
     {
         suffix = wxPlatformInfo::Get().GetPortIdShortName();
     }
-    suffix << wxT('u');
+    suffix += 'u';
 #ifdef __WXDEBUG__
-    suffix << wxT('d');
+    suffix += 'd';
 #endif
 
     if ( !suffix.empty() )
-        suffix = wxString("_") + suffix;
+        suffix = "_" + suffix;
 
 #define WXSTRINGIZE(x)  #x
 #if defined(__UNIX__)
@@ -178,7 +178,7 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
     #endif
 #endif
 
-    suffix << wxString::FromAscii(wxDLLVER(wxMAJOR_VERSION, wxMINOR_VERSION,
+    suffix += wxString::FromAscii(wxDLLVER(wxMAJOR_VERSION, wxMINOR_VERSION,
                                            wxRELEASE_NUMBER));
 #undef wxDLLVER
 #undef WXSTRINGIZE
@@ -186,9 +186,9 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
 #ifdef WX_WINDOWS
     // Add compiler identification:
     #if defined(__GNUG__)
-        suffix << "_gcc";
+        suffix += "_gcc";
     #elif defined(__VISUALC__)
-        suffix << "_vc";
+        suffix += "_vc";
     #endif
 #endif
 
@@ -196,13 +196,13 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
 }
 
 /*static*/
-wxString wxDynamicLibrary::GetPluginsDirectory()
+std::string wxDynamicLibrary::GetPluginsDirectory()
 {
 #ifdef __UNIX__
-    wxString format = wxGetInstallPrefix();
+    std::string format = wxGetInstallPrefix();
     if ( format.empty() )
         return {};
-    wxString dir;
+    std::string dir;
     format << wxFILE_SEP_PATH
            << "lib" << wxFILE_SEP_PATH
            << "wx" << wxFILE_SEP_PATH

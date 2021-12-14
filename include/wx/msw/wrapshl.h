@@ -13,6 +13,8 @@
 
 #include "wx/log.h"
 
+#include <boost/nowide/convert.hpp>
+
 // ----------------------------------------------------------------------------
 // wxItemIdList implements RAII on top of ITEMIDLIST
 // ----------------------------------------------------------------------------
@@ -55,15 +57,18 @@ public:
     operator LPITEMIDLIST() const { return m_pidl; }
 
     // get the corresponding path, returns empty string on error
-    wxString GetPath() const
+    std::string GetPath() const
     {
-        wxString path;
-        if ( !::SHGetPathFromIDListW(m_pidl, wxStringBuffer(path, MAX_PATH)) )
+        std::wstring path;
+
+        path.resize(MAX_PATH);
+
+        if ( !::SHGetPathFromIDListW(m_pidl, &path[0]) )
         {
             wxLogLastError("SHGetPathFromIDList");
         }
 
-        return path;
+        return boost::nowide::narrow(path);
     }
 
 private:

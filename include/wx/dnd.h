@@ -243,7 +243,7 @@ public:
 
     wxTextDropTarget& operator=(wxTextDropTarget&&) = delete;
 
-    virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
+    virtual bool OnDropText(wxCoord x, wxCoord y, const std::string& text) = 0;
 
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 };
@@ -258,7 +258,7 @@ public:
 
     // parameters are the number of files and the array of file names
     virtual bool OnDropFiles(wxCoord x, wxCoord y,
-                             const std::vector<wxString>& filenames) = 0;
+                             const std::vector<std::string>& filenames) = 0;
 
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 };

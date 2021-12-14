@@ -824,14 +824,14 @@ bool wxGdiPlus::DoInit()
             return false;
 
     #define wxLOAD_GDIPLUS_FUNC(name, params, args)                           \
-        wxDO_LOAD_FUNC(name, "Gdiplus" wxSTRINGIZE_T(name))
+        wxDO_LOAD_FUNC(name, "Gdiplus" #name)
 
     wxFOR_ALL_GDIPLUS_FUNCNAMES(wxLOAD_GDIPLUS_FUNC)
 
     #undef wxLOAD_GDIPLUS_FUNC
 
     #define wxLOAD_GDIP_FUNC(name, params, args)                              \
-        wxDO_LOAD_FUNC(name, "Gdip" wxSTRINGIZE_T(name))
+        wxDO_LOAD_FUNC(name, "Gdip" #name)
 
     wxFOR_ALL_GDIP_FUNCNAMES(wxLOAD_GDIP_FUNC)
 

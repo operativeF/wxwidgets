@@ -13,10 +13,11 @@
 
 #if wxUSE_DYNLIB_CLASS
 
-#include "wx/string.h"
-
 import WX.WinDef;
 import WX.Cfg.Flags;
+
+import <string>;
+import <vector>;
 
 class lsCreator;
 
@@ -94,7 +95,7 @@ enum class wxPluginCategory
 // type only once, as the first parameter, and creating a variable of this type
 // called "pfn<name>" initialized with the "name" from the "dynlib"
 #define wxDYNLIB_FUNCTION(type, name, dynlib) \
-    type pfn ## name = (type)(dynlib).GetSymbol(wxT(#name))
+    type pfn ## name = (type)(dynlib).GetSymbol(#name)
 
 
 // a more convenient function replacing wxDYNLIB_FUNCTION above
@@ -165,10 +166,10 @@ public:
     wxDynamicLibraryDetails() { m_address = nullptr; m_length = 0; }
 
     // get the (base) name
-    wxString GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
 
     // get the full path of this object
-    wxString GetPath() const { return m_path; }
+    std::string GetPath() const { return m_path; }
 
     // get the load address and the extent, return true if this information is
     // available
@@ -186,15 +187,15 @@ public:
     }
 
     // return the version of the DLL (may be empty if no version info)
-    wxString GetVersion() const
+    std::string GetVersion() const
     {
         return m_version;
     }
 
 private:
-    wxString m_name,
-             m_path,
-             m_version;
+    std::string m_name;
+    std::string m_path;
+    std::string m_version;
 
     void *m_address;
     size_t m_length;
@@ -216,10 +217,10 @@ public:
     static wxDllType         GetProgramHandle();
 
     // return the platform standard DLL extension (with leading dot)
-    static wxString GetDllExt(wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
+    static std::string GetDllExt(wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
 
     wxDynamicLibrary()  = default;
-    wxDynamicLibrary(const wxString& libname, int flags = wxDL_DEFAULT)
+    wxDynamicLibrary(const std::string& libname, int flags = wxDL_DEFAULT)
         : m_handle(nullptr)
     {
         Load(libname, flags);
@@ -237,12 +238,12 @@ public:
     bool IsLoaded() const { return m_handle != nullptr; }
 
     // load the library with the given name (full or not), return true if ok
-    bool Load(const wxString& libname, unsigned int flags = wxDL_DEFAULT);
+    bool Load(const std::string& libname, unsigned int flags = wxDL_DEFAULT);
 
     // raw function for loading dynamic libs: always behaves as if
     // wxDL_VERBATIM were specified and doesn't log error message if the
     // library couldn't be loaded but simply returns NULL
-    static wxDllType RawLoad(const wxString& libname, unsigned int flags = wxDL_DEFAULT);
+    static wxDllType RawLoad(const std::string& libname, unsigned int flags = wxDL_DEFAULT);
 
     // attach to an existing handle
     void Attach(wxDllType h) { Unload(); m_handle = h; }
@@ -264,7 +265,7 @@ public:
     // check if the given symbol is present in the library, useful to verify if
     // a loadable module is our plugin, for example, without provoking error
     // messages from GetSymbol()
-    bool HasSymbol(const wxString& name) const
+    bool HasSymbol(const std::string& name) const
     {
         bool ok;
         DoGetSymbol(name, &ok);
@@ -282,11 +283,11 @@ public:
     //
     // Returns a pointer to the symbol on success, or NULL if an error occurred
     // or the symbol wasn't found.
-    void *GetSymbol(const wxString& name, bool *success = nullptr) const;
+    void *GetSymbol(const std::string& name, bool *success = nullptr) const;
 
     // low-level version of GetSymbol()
-    static void *RawGetSymbol(wxDllType handle, const wxString& name);
-    void *RawGetSymbol(const wxString& name) const
+    static void *RawGetSymbol(wxDllType handle, const std::string& name);
+    void *RawGetSymbol(const std::string& name) const
     {
         return RawGetSymbol(m_handle, name);
     }
@@ -295,17 +296,17 @@ public:
     // this function is useful for loading functions from the standard Windows
     // DLLs: such functions have an 'A' (in ANSI build) or 'W' (in Unicode, or
     // wide character build) suffix if they take string parameters
-    static void *RawGetSymbolAorW(wxDllType handle, const wxString& name)
+    static void *RawGetSymbolAorW(wxDllType handle, const std::string& name)
     {
         return RawGetSymbol
                (
                 handle,
                 name +
-                L'W'
+                'W'
                );
     }
 
-    void *GetSymbolAorW(const wxString& name) const
+    void *GetSymbolAorW(const std::string& name) const
     {
         return RawGetSymbolAorW(m_handle, name);
     }
@@ -318,25 +319,25 @@ public:
 
     // return platform-specific name of dynamic library with proper extension
     // and prefix (e.g. "foo.dll" on Windows or "libfoo.so" on Linux)
-    static wxString CanonicalizeName(const wxString& name,
+    static std::string CanonicalizeName(const std::string& name,
                                      wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
 
     // return name of wxWidgets plugin (adds compiler and version info
     // to the filename):
-    static wxString
-    CanonicalizePluginName(const wxString& name,
+    static std::string
+    CanonicalizePluginName(const std::string& name,
                            wxPluginCategory cat = wxPluginCategory::Gui);
 
     // return plugin directory on platforms where it makes sense and empty
     // string on others:
-    static wxString GetPluginsDirectory();
+    static std::string GetPluginsDirectory();
 
     // Return the load address of the module containing the given address or
     // NULL if not found.
     //
     // If path output parameter is non-NULL, fill it with the full path to this
     // module disk file on success.
-    static void* GetModuleFromAddress(const void* addr, wxString* path = nullptr);
+    static void* GetModuleFromAddress(const void* addr, std::string* path = nullptr);
 
 #ifdef WX_WINDOWS
     // return the handle (WXHMODULE/WXHINSTANCE) of the DLL with the given name
@@ -348,16 +349,16 @@ public:
     // the returned handle reference count is not incremented so it doesn't
     // need to be freed using FreeLibrary() but it also means that it can
     // become invalid if the DLL is unloaded
-    static WXHMODULE MSWGetModuleHandle(const wxString& name, void *addr);
+    static WXHMODULE MSWGetModuleHandle(const std::string& name, void *addr);
 #endif // WX_WINDOWS
 
 protected:
     // common part of GetSymbol() and HasSymbol()
-    void* DoGetSymbol(const wxString& name, bool* success = nullptr) const;
+    void* DoGetSymbol(const std::string& name, bool* success = nullptr) const;
 
     // log the error after an OS dynamic library function failure
-    static void ReportError(const wxString& msg,
-                            const wxString& name = {});
+    static void ReportError(const std::string& msg,
+                            const std::string& name = {});
 
     // the handle to DLL or NULL
     wxDllType m_handle{nullptr};
@@ -373,7 +374,7 @@ protected:
 class wxLoadedDLL : public wxDynamicLibrary
 {
 public:
-    wxLoadedDLL(const wxString& dllname)
+    wxLoadedDLL(const std::string& dllname)
         : wxDynamicLibrary(dllname, wxDL_GET_LOADED | wxDL_VERBATIM | wxDL_QUIET)
     {
     }
