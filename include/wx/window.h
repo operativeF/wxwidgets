@@ -851,13 +851,13 @@ public:
         // find window among the descendants of this one either by id or by
         // name (return NULL if not found)
     wxWindow *wxFindWindow(long winid) const;
-    wxWindow *wxFindWindow(const wxString& name) const;
+    wxWindow *wxFindWindow(const std::string& name) const;
 
         // Find a window among any window (all return NULL if not found)
     static wxWindow *FindWindowById( long winid, const wxWindow *parent = nullptr );
-    static wxWindow *FindWindowByName( const wxString& name,
+    static wxWindow *FindWindowByName( const std::string& name,
                                        const wxWindow *parent = nullptr );
-    static wxWindow *FindWindowByLabel( const wxString& label,
+    static wxWindow *FindWindowByLabel( const std::string& label,
                                         const wxWindow *parent = nullptr );
 
     // event handler stuff
@@ -1372,7 +1372,7 @@ public:
 
 #if wxUSE_HELP
         // associate this help text with this window
-    void SetHelpText(const wxString& text);
+    void SetHelpText(const std::string& text);
 
         // get the help string associated with the given position in this window
         //
@@ -1388,8 +1388,8 @@ public:
 
 #else // !wxUSE_HELP
     // silently ignore SetHelpText() calls
-    void SetHelpText([[maybe_unused]] const wxString& text) { }
-    void SetHelpTextForId([[maybe_unused]] const wxString& text) { }
+    void SetHelpText([[maybe_unused]] const std::string& text) { }
+    void SetHelpTextForId([[maybe_unused]] const std::string& text) { }
 #endif // wxUSE_HELP
 
     // tooltips
@@ -1418,7 +1418,7 @@ public:
 #else // !wxUSE_TOOLTIPS
         // make it much easier to compile apps in an environment
         // that doesn't support tooltips
-    void SetToolTip(const [[maybe_unused]] wxString & tip) { }
+    void SetToolTip([[maybe_unused]] const std::string & tip) { }
     void UnsetToolTip() { }
 #endif // wxUSE_TOOLTIPS/!wxUSE_TOOLTIPS
 

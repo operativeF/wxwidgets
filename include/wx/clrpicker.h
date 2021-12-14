@@ -47,7 +47,7 @@ public:
         { return m_colour; }
     virtual void SetColour(const wxColour &col)
         { m_colour = col; UpdateColour(); }
-    virtual void SetColour(const wxString &col)
+    virtual void SetColour(const std::string& col)
         { m_colour.Set(col); UpdateColour(); }
 
 protected:
@@ -125,7 +125,7 @@ public:
 
     // set colour using RGB(r,g,b) syntax or considering given text as a colour name;
     // returns true if the given text was successfully recognized.
-    bool SetColour(const wxString& text);
+    bool SetColour(const std::string& text);
 
     // update the button colour to match the text control contents
     void UpdatePickerFromTextCtrl() override;

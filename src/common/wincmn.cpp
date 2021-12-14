@@ -1618,7 +1618,7 @@ wxWindow *wxWindowBase::wxFindWindow(long id) const
     return dynamic_cast<wxWindow*>(res);
 }
 
-wxWindow *wxWindowBase::wxFindWindow(const wxString& name) const
+wxWindow *wxWindowBase::wxFindWindow(const std::string& name) const
 {
     if ( name == m_windowName )
         return const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
@@ -1648,24 +1648,24 @@ wxWindow *wxWindowBase::wxFindWindow(const wxString& name) const
 // different comparators
 
 using wxFindWindowCmp = bool (*)(const wxWindow *win,
-                                 const wxString& label, long id);
+                                 const std::string& label, long id);
 
 static
-bool wxFindWindowCmpLabels(const wxWindow *win, const wxString& label,
+bool wxFindWindowCmpLabels(const wxWindow *win, const std::string& label,
                            [[maybe_unused]] long id)
 {
     return win->GetLabel() == label;
 }
 
 static
-bool wxFindWindowCmpNames(const wxWindow *win, const wxString& label,
+bool wxFindWindowCmpNames(const wxWindow *win, const std::string& label,
                           [[maybe_unused]] long id)
 {
     return win->GetName() == label;
 }
 
 static
-bool wxFindWindowCmpIds(const wxWindow *win, [[maybe_unused]] const wxString& label,
+bool wxFindWindowCmpIds(const wxWindow *win, [[maybe_unused]] const std::string& label,
                         long id)
 {
     return win->GetId() == id;
@@ -1674,7 +1674,7 @@ bool wxFindWindowCmpIds(const wxWindow *win, [[maybe_unused]] const wxString& la
 // recursive helper for the FindWindowByXXX() functions
 static
 wxWindow *wxFindWindowRecursively(const wxWindow *parent,
-                                  const wxString& label,
+                                  const std::string& label,
                                   long id,
                                   wxFindWindowCmp cmp)
 {
@@ -1701,7 +1701,7 @@ wxWindow *wxFindWindowRecursively(const wxWindow *parent,
 // helper for FindWindowByXXX()
 static
 wxWindow *wxFindWindowHelper(const wxWindow *parent,
-                             const wxString& label,
+                             const std::string& label,
                              long id,
                              wxFindWindowCmp cmp)
 {
@@ -1728,14 +1728,14 @@ wxWindow *wxFindWindowHelper(const wxWindow *parent,
 
 /* static */
 wxWindow *
-wxWindowBase::FindWindowByLabel(const wxString& title, const wxWindow *parent)
+wxWindowBase::FindWindowByLabel(const std::string& title, const wxWindow *parent)
 {
     return wxFindWindowHelper(parent, title, 0, wxFindWindowCmpLabels);
 }
 
 /* static */
 wxWindow *
-wxWindowBase::FindWindowByName(const wxString& title, const wxWindow *parent)
+wxWindowBase::FindWindowByName(const std::string& title, const wxWindow *parent)
 {
     wxWindow *win = wxFindWindowHelper(parent, title, 0, wxFindWindowCmpNames);
 
@@ -1936,7 +1936,7 @@ void wxWindowBase::InitDialog()
 #if wxUSE_HELP
 
 // associate this help text with this window
-void wxWindowBase::SetHelpText(const wxString& text)
+void wxWindowBase::SetHelpText(const std::string& text)
 {
     wxHelpProvider *helpProvider = wxHelpProvider::Get();
     if ( helpProvider )
@@ -2685,10 +2685,14 @@ void wxWindowBase::ReleaseMouse()
     {
         wxFAIL_MSG
         (
-          wxString::Format
+          fmt::format
           (
-            "Releasing mouse in %p(%s) but it is not captured",
-            this, wxGetClassInfo()->wxGetClassName()
+            "Releasing mouse in (%s) but it is not captured",
+            std::string{wxGetClassInfo()->wxGetClassName()}
+            // FIXME: Non-void pointer used for formatting.
+            // "Releasing mouse in %p(%s) but it is not captured",
+            // static_cast<void*>(this),
+            // wxGetClassInfo()->wxGetClassName()
           )
         );
     }
@@ -2696,12 +2700,21 @@ void wxWindowBase::ReleaseMouse()
     {
         wxFAIL_MSG
         (
-          wxString::Format
+          fmt::format
           (
-            "Releasing mouse in %p(%s) but it is captured by %p(%s)",
-            this, wxGetClassInfo()->wxGetClassName(),
-            winCapture, winCapture->wxGetClassInfo()->wxGetClassName()
+            "Releasing mouse in (%s) but it is captured by (%s)",
+            std::string{wxGetClassInfo()->wxGetClassName()},
+            std::string{winCapture->wxGetClassInfo()->wxGetClassName()}
           )
+        // FIXME: non-void pointers used for formatting.
+        //   fmt::format
+        //   (
+        //     "Releasing mouse in %p(%s) but it is captured by %p(%s)",
+        //     this,
+        //     wxGetClassInfo()->wxGetClassName(),
+        //     winCapture,
+        //     winCapture->wxGetClassInfo()->wxGetClassName()
+        //   )
         );
     }
 #endif // wxDEBUG_LEVEL
@@ -2953,7 +2966,7 @@ public:
     DragAcceptFilesTarget(wxWindowBase *win) : m_win(win) {}
 
     virtual bool OnDropFiles(wxCoord x, wxCoord y,
-                             const std::vector<wxString>& filenames) override
+                             const std::vector<std::string>& filenames) override
     {
         wxDropFilesEvent event(wxEVT_DROP_FILES,
                                filenames.size(),
@@ -3147,7 +3160,7 @@ wxAccStatus wxWindowAccessible::GetName(int childId, std::string* name)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    wxString title;
+    std::string title;
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.

@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 
 class wxObject;
-class wxString;
 class wxClassInfo;
 class wxHashTable;
 class wxObject;
@@ -41,11 +40,11 @@ typedef wxObject *(*wxObjectConstructorFn)();
 class wxClassInfo
 {
     friend class wxObject;
-    friend wxObject *wxCreateDynamicObject(const wxString& name);
+    friend wxObject *wxCreateDynamicObject(const std::string& name);
 public:
-    wxClassInfo( const wxChar *className,
-                 const wxClassInfo *baseInfo1,
-                 const wxClassInfo *baseInfo2,
+    wxClassInfo( const char* className,
+                 const wxClassInfo* baseInfo1,
+                 const wxClassInfo* baseInfo2,
                  int size,
                  wxObjectConstructorFn ctor )
         : m_className(className)
@@ -67,10 +66,10 @@ public:
         { return m_objectConstructor ? (*m_objectConstructor)() : nullptr; }
     bool IsDynamic() const { return (nullptr != m_objectConstructor); }
 
-    const wxChar       *wxGetClassName() const { return m_className; }
-    const wxChar       *GetBaseClassName1() const
+    const char       *wxGetClassName() const { return m_className; }
+    const char       *GetBaseClassName1() const
         { return m_baseInfo1 ? m_baseInfo1->wxGetClassName() : nullptr; }
-    const wxChar       *GetBaseClassName2() const
+    const char       *GetBaseClassName2() const
         { return m_baseInfo2 ? m_baseInfo2->wxGetClassName() : nullptr; }
     const wxClassInfo  *GetBaseClass1() const { return m_baseInfo1; }
     const wxClassInfo  *GetBaseClass2() const { return m_baseInfo2; }
@@ -80,7 +79,7 @@ public:
         { return m_objectConstructor; }
     static const wxClassInfo  *GetFirst() { return sm_first; }
     const wxClassInfo         *GetNext() const { return m_next; }
-    static wxClassInfo        *FindClass(const wxString& className);
+    static wxClassInfo        *FindClass(const std::string& className);
 
         // Climb upwards through inheritance hierarchy.
         // Dual inheritance is catered for.
@@ -108,7 +107,7 @@ public:
     wxDECLARE_CLASS_INFO_ITERATORS();
 
 private:
-    const wxChar            *m_className;
+    const char              *m_className;
     int                      m_objectSize;
     wxObjectConstructorFn    m_objectConstructor;
 
@@ -131,7 +130,7 @@ protected:
     void Unregister();
 };
 
-wxObject *wxCreateDynamicObject(const wxString& name);
+wxObject *wxCreateDynamicObject(const std::string& name);
 
 // ----------------------------------------------------------------------------
 // Dynamic class macros
@@ -152,7 +151,7 @@ wxObject *wxCreateDynamicObject(const wxString& name);
 
 // common part of the macros below
 #define wxIMPLEMENT_CLASS_COMMON(name, basename, baseclsinfo2, func)          \
-    wxClassInfo name::ms_classInfo(wxT(#name),                                \
+    wxClassInfo name::ms_classInfo(#name,                                     \
             &basename::ms_classInfo,                                          \
             baseclsinfo2,                                                     \
             (int) sizeof(name),                                               \

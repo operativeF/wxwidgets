@@ -234,7 +234,7 @@ public:
 
     // call glcolor() for the colour with the given name, return false if
     // colour not found
-    bool SetColour(const wxString& colour);
+    bool SetColour(const std::string& colour);
 
     // return true if the extension with given name is supported
     //

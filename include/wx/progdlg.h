@@ -43,7 +43,8 @@ inline constexpr unsigned int wxPD_CAN_SKIP           = 0x0080;
                            : public wxGenericProgressDialog
     {
     public:
-        wxProgressDialog( const wxString& title, const wxString& message,
+        wxProgressDialog( const std::string& title,
+                          const std::string& message,
                           int maximum = 100,
                           wxWindow *parent = NULL,
                           unsigned int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE )

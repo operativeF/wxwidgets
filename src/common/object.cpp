@@ -14,6 +14,8 @@
 #include "wx/memory.h"
 #include "wx/crt.h"
 
+#include <fmt/core.h>
+
 import <cstring>;
 
 // we must disable optimizations for VC.NET because otherwise its too eager
@@ -23,8 +25,7 @@ import <cstring>;
     #pragma optimize("", off)
 #endif
 
-// FIXME: Change to narrow string.
-wxClassInfo wxObject::ms_classInfo( L"wxObject", nullptr, nullptr,
+wxClassInfo wxObject::ms_classInfo( "wxObject", nullptr, nullptr,
                                         (int) sizeof(wxObject),
                                         (wxObjectConstructorFn) nullptr );
 
@@ -146,7 +147,7 @@ wxClassInfo::~wxClassInfo()
     Unregister();
 }
 
-wxClassInfo *wxClassInfo::FindClass(const wxString& className)
+wxClassInfo *wxClassInfo::FindClass(const std::string& className)
 {
     if ( sm_classTable )
     {
@@ -203,11 +204,11 @@ void wxClassInfo::Register()
     // and eventually die with "out of memory" - as this is quite hard to
     // detect if you're unaware of this, try to do some checks here.
     wxASSERT_MSG( classTable->Get(m_className) == nullptr,
-        wxString::Format
+        fmt::format
         (
             "Class \"%s\" already in RTTI table - have you used wxIMPLEMENT_DYNAMIC_CLASS() multiple times or linked some object file twice)?",
             m_className
-        ).ToStdString()
+        )
     );
 
     classTable->Put(m_className, (wxObject *)this);
@@ -246,7 +247,7 @@ void wxClassInfo::Unregister()
     }
 }
 
-wxObject *wxCreateDynamicObject(const wxString& name)
+wxObject *wxCreateDynamicObject(const std::string& name)
 {
     if ( wxClassInfo::sm_classTable )
     {
@@ -259,7 +260,7 @@ wxObject *wxCreateDynamicObject(const wxString& name)
               info;
               info = info->m_next )
         {
-            if (info->m_className && wxStrcmp(info->m_className, name) == 0)
+            if (info->m_className && std::strcmp(info->m_className, name.c_str()) == 0)
                 return info->CreateObject();
         }
 

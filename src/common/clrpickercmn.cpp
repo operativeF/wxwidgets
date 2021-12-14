@@ -61,9 +61,9 @@ void wxColourPickerCtrl::SetColour(const wxColour &col)
     UpdateTextCtrlFromPicker();
 }
 
-bool wxColourPickerCtrl::SetColour(const wxString &text)
+bool wxColourPickerCtrl::SetColour(const std::string& text)
 {
-    wxColour col(text);     // smart wxString->wxColour conversion
+    wxColour col{text};     // smart wxString->wxColour conversion
     if ( !col.IsOk() )
         return false;
     M_PICKER->SetColour(col);
@@ -76,8 +76,8 @@ void wxColourPickerCtrl::UpdatePickerFromTextCtrl()
 {
     wxASSERT(m_text);
 
-    // wxString -> wxColour conversion
-    wxColour col(m_text->GetValue());
+    // std::string -> wxColour conversion
+    wxColour col = m_text->GetValue();
     if ( !col.IsOk() )
         return;     // invalid user input
 

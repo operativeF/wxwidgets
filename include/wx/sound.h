@@ -23,7 +23,7 @@
 
 // NB: We can't use enum with some compilers, because they keep reporting
 //     nonexistent ambiguities between Play(unsigned) and static Play(const
-//     wxString&, unsigned).
+//     std::string&, unsigned).
 inline constexpr unsigned int wxSOUND_SYNC  = 0;
 inline constexpr unsigned int wxSOUND_ASYNC = 1;
 inline constexpr unsigned int wxSOUND_LOOP  = 2;
@@ -42,7 +42,7 @@ public:
     }
 
     // Plays sound from filename:
-    static bool Play(const wxString& filename, unsigned flags = wxSOUND_ASYNC);
+    static bool Play(const std::string& filename, unsigned flags = wxSOUND_ASYNC);
 
 protected:
     virtual bool DoPlay(unsigned flags) const = 0;
@@ -64,9 +64,9 @@ protected:
 // wxSoundBase methods
 // ----------------------------------------------------------------------------
 
-inline bool wxSoundBase::Play(const wxString& filename, unsigned flags)
+inline bool wxSoundBase::Play(const std::string& filename, unsigned flags)
 {
-    wxSound snd(filename);
+    wxSound snd{filename};
     return snd.IsOk() ? snd.Play(flags) : false;
 }
 

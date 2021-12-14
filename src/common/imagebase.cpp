@@ -3161,7 +3161,7 @@ void wxImage::CleanUpHandlers()
 
 std::string wxImage::GetImageExtWildcard()
 {
-    wxString fmts;
+    std::string fmts;
 
     wxList& Handlers = wxImage::GetHandlers();
     wxList::compatibility_iterator Node = Handlers.GetFirst();
@@ -3175,7 +3175,7 @@ std::string wxImage::GetImageExtWildcard()
         if ( Node ) fmts += ";";
     }
 
-    return "(" + fmts + ")|" + fmts;
+    return fmt::format("({})|{}", fmts);
 }
 
 wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)
