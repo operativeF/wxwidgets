@@ -171,18 +171,18 @@ void wxColourDatabase::Initialize()
 // wxColourDatabase operations
 // ----------------------------------------------------------------------------
 
-void wxColourDatabase::AddColour(const wxString& name, const wxColour& colour)
+void wxColourDatabase::AddColour(const std::string& name, const wxColour& colour)
 {
     Initialize();
 
     // canonicalize the colour names before using them as keys: they should be
     // in upper case
-    wxString colName = name;
-    colName.MakeUpper();
+    std::string colName = wx::utils::ToUpperCopy(name);
 
     // ... and we also allow both grey/gray
-    wxString colNameAlt = colName;
-    if ( !colNameAlt.Replace(wxT("GRAY"), wxT("GREY")) )
+    std::string colNameAlt{colName};
+
+    if ( !wx::utils::ReplaceAll(colNameAlt, "GRAY", "GREY"))
     {
         // but in this case it is not necessary so avoid extra search below
         colNameAlt.clear();
@@ -201,16 +201,17 @@ void wxColourDatabase::AddColour(const wxString& name, const wxColour& colour)
     }
 }
 
-wxColour wxColourDatabase::Find(const wxString& colour) const
+wxColour wxColourDatabase::Find(const std::string& colour) const
 {
     wxColourDatabase * const self = const_cast<wxColourDatabase *>(this);
     self->Initialize();
 
     // make the comparaison case insensitive and also match both grey and gray
-    wxString colName = colour;
-    colName.MakeUpper();
-    wxString colNameAlt = colName;
-    if ( !colNameAlt.Replace(wxT("GRAY"), wxT("GREY")) )
+    std::string colName = wx::utils::ToUpperCopy(colour);
+
+    std::string colNameAlt{colName};
+
+    if ( wx::utils::ReplaceAll(colNameAlt, "GRAY", "GREY") )
         colNameAlt.clear();
 
     wxStringToColourHashMap::iterator it = m_map->find(colName);
@@ -227,7 +228,7 @@ wxColour wxColourDatabase::Find(const wxString& colour) const
     return wxNullColour;
 }
 
-wxString wxColourDatabase::FindName(const wxColour& colour) const
+std::string wxColourDatabase::FindName(const wxColour& colour) const
 {
     wxColourDatabase * const self = const_cast<wxColourDatabase *>(this);
     self->Initialize();

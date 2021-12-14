@@ -10,7 +10,6 @@
 #include "wx/msw/private.h"
 
 #include "wx/event.h"
-#include "wx/string.h"
 #include "wx/textctrl.h"    // Only for wxTE_PROCESS_XXX constants
 
 #if wxUSE_TEXTCTRL || wxUSE_COMBOBOX
@@ -148,7 +147,7 @@ public:
         m_completer = completer;
     }
 
-    bool UpdatePrefix(const wxString& prefix)
+    bool UpdatePrefix(const std::string& prefix)
     {
         CSLock lock(m_csRestart);
 
@@ -166,8 +165,8 @@ public:
     }
 
     HRESULT STDMETHODCALLTYPE Next(ULONG celt,
-                                           LPOLESTR *rgelt,
-                                           ULONG *pceltFetched) override
+                                   LPOLESTR *rgelt,
+                                   ULONG *pceltFetched) override
     {
         if ( !rgelt || (!pceltFetched && celt > 1) )
             return E_POINTER;
@@ -189,18 +188,18 @@ public:
             if ( m_restart )
                 return S_FALSE;
 
-            const wxString s = m_completer->GetNext();
+            const std::string s = m_completer->GetNext();
             if ( s.empty() )
                 return S_FALSE;
 
-            const wxWX2WCbuf wcbuf = s.wc_str();
-            const size_t size = (wcslen(wcbuf) + 1)*sizeof(wchar_t);
+            boost::nowide::wstackstring stackBuf{s.c_str()};
+            const size_t size = (stackBuf.buffer_size + 1) * sizeof(wchar_t);
             wxCoTaskMemPtr<wchar_t> olestr(size);
 
             if ( !olestr )
                 return E_OUTOFMEMORY;
 
-            memcpy(olestr, wcbuf, size);
+            std::memcpy(olestr, stackBuf.get(), size);
             *rgelt++ = olestr.release();
 
             ++(*pceltFetched);
@@ -280,7 +279,7 @@ private:
         bool rc = true;
         for ( ;; )
         {
-            wxString prefix;
+            std::string prefix;
             LONG restart;
             {
                 CSLock lock(m_csRestart);
@@ -320,7 +319,7 @@ private:
 
     // If m_restart is true, we need to call wxTextCompleter::Start() with the
     // given prefix to restart generating the completions.
-    wxString m_prefix;
+    std::string m_prefix;
 
     // Notice that we use LONG and not bool here to ensure that reading this
     // value is atomic (32 bit reads are atomic operations under all Windows
@@ -538,7 +537,7 @@ private:
         if ( to == from )
             from = m_entry->GetLastPosition(); // Take all if no selection.
 
-        const wxString prefix = m_entry->GetRange(0, from);
+        const std::string prefix = m_entry->GetRange(0, from);
 
         if ( m_enumStrings->UpdatePrefix(prefix) )
             DoRefresh();
@@ -908,7 +907,7 @@ bool wxTextEntry::DoAutoCompleteFileNames(unsigned int flags)
     return wxTextEntryBase::DoAutoCompleteFileNames(flags);
 }
 
-bool wxTextEntry::DoAutoCompleteStrings(const std::vector<wxString>& choices)
+bool wxTextEntry::DoAutoCompleteStrings(const std::vector<std::string>& choices)
 {
     return wxTextEntryBase::DoAutoCompleteStrings(choices);
 }

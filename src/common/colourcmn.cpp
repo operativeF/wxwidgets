@@ -180,8 +180,8 @@ std::string wxColourBase::GetAsString(unsigned int flags) const
         // information would be lost
         if ( (flags & wxC2S_NAME) && isOpaque )
         {
-            colName = wxTheColourDatabase->FindName(
-                        static_cast<const wxColour &>(*this)).MakeLower();
+            colName = wx::utils::ToLowerCopy(wxTheColourDatabase->FindName(
+                        static_cast<const wxColour &>(*this)));
         }
 
         if ( colName.empty() )

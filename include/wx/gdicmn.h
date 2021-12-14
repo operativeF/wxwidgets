@@ -16,7 +16,6 @@
 // ---------------------------------------------------------------------------
 
 #include "wx/list.h"
-#include "wx/string.h"
 #include "wx/fontenc.h"
 #include "wx/hashmap.h"
 
@@ -242,11 +241,11 @@ public:
     ~wxColourDatabase();
 
     // find colour by name or name for the given colour
-    wxColour Find(const wxString& name) const;
-    wxString FindName(const wxColour& colour) const;
+    wxColour Find(const std::string& name) const;
+    std::string FindName(const wxColour& colour) const;
 
     // add a new colour to the database
-    void AddColour(const wxString& name, const wxColour& colour);
+    void AddColour(const std::string& name, const wxColour& colour);
 
 private:
     // load the database with the built in colour values when called for the
