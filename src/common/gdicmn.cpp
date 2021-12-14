@@ -587,7 +587,7 @@ wxFont *wxFontList::FindOrCreateFont(int pointSize,
             // still better than never matching anything in the cache at all
             // in this case
             bool same;
-            const wxString fontFaceName(font->GetFaceName());
+            const std::string fontFaceName = font->GetFaceName();
 
             if (facename.empty() || fontFaceName.empty())
                 same = font->GetFamily() == family;

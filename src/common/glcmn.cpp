@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_GLCANVAS
 
 #include "wx/log.h"
@@ -71,7 +68,7 @@ bool wxGLCanvasBase::SetCurrent(const wxGLContext& context) const
     return context.SetCurrent(*dynamic_cast<const wxGLCanvas *>(this));
 }
 
-bool wxGLCanvasBase::SetColour(const wxString& colour)
+bool wxGLCanvasBase::SetColour(const std::string& colour)
 {
     wxColour col = wxTheColourDatabase->Find(colour);
     if ( !col.IsOk() )

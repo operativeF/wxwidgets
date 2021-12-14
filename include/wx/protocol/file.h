@@ -22,9 +22,9 @@ public:
 
 
     bool Abort() override { return true; }
-    wxString GetContentType() const override { return {}; }
+    std::string GetContentType() const override { return {}; }
 
-    wxInputStream *GetInputStream(const wxString& path) override;
+    wxInputStream *GetInputStream(const std::string& path) override;
 
 	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

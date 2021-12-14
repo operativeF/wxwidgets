@@ -37,7 +37,7 @@ class wxFileDirPickerEvent : public wxCommandEvent
 {
 public:
     wxFileDirPickerEvent() = default;
-    wxFileDirPickerEvent(wxEventType type, wxObject *generator, int id, const wxString &path)
+    wxFileDirPickerEvent(wxEventType type, wxObject *generator, int id, const std::string &path)
         : wxCommandEvent(type, id),
           m_path(path)
     {
@@ -46,15 +46,15 @@ public:
 
 	wxFileDirPickerEvent& operator=(const wxFileDirPickerEvent&) = delete;
 
-    wxString GetPath() const { return m_path; }
-    void SetPath(const wxString &p) { m_path = p; }
+    std::string GetPath() const { return m_path; }
+    void SetPath(const std::string &p) { m_path = p; }
 
     // default copy ctor, assignment operator and dtor are ok
     // FIXME: Are they really?
     std::unique_ptr<wxEvent> Clone() const override { return std::make_unique<wxFileDirPickerEvent>(*this); }
 
 private:
-    wxString m_path;
+    std::string m_path;
 };
 
 wxDECLARE_EVENT( wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );
@@ -160,8 +160,8 @@ protected:
 
 public:         // public API
 
-    wxString GetPath() const;
-    void SetPath(const wxString &str);
+    std::string GetPath() const;
+    void SetPath(const std::string &str);
 
     // Set the directory to open the file browse dialog at initially.
     void SetInitialDirectory(const std::string& dir)
@@ -186,7 +186,7 @@ public:        // internal functions
     virtual void DoConnect( wxControl *sender, wxFileDirPickerCtrlBase *eventSink ) = 0;
 
     // Returns the filtered value currently placed in the text control (if present).
-    virtual wxString GetTextCtrlValue() const = 0;
+    virtual std::string GetTextCtrlValue() const = 0;
 
 protected:
     // creates the picker control
@@ -262,7 +262,7 @@ public:
 public:     // overrides
 
     // return the text control value in canonical form
-    wxString GetTextCtrlValue() const override;
+    std::string GetTextCtrlValue() const override;
 
     bool IsCwdToUpdate() const override
         { return HasFlag(wxFLP_CHANGE_DIR); }
@@ -358,7 +358,7 @@ public:
 
 public:     // overrides
 
-    wxString GetTextCtrlValue() const override;
+    std::string GetTextCtrlValue() const override;
 
     bool IsCwdToUpdate() const override
         { return HasFlag(wxDIRP_CHANGE_DIR); }

@@ -70,8 +70,8 @@ public:
   int ChangeSelection(size_t nPage);
 
     // set/get the title of a page
-  bool SetPageText(size_t nPage, const wxString& strText);
-  wxString GetPageText(size_t nPage) const;
+  bool SetPageText(size_t nPage, const std::string& strText);
+  std::string GetPageText(size_t nPage) const;
 
   // get the number of rows for a control with wxNB_MULTILINE style (not all
   // versions support it - they will always return 1 then)
@@ -105,7 +105,7 @@ public:
     // the same as AddPage(), but adds it at the specified position
   bool InsertPage(size_t nPage,
                   wxNotebookPage *pPage,
-                  const wxString& strText,
+                  const std::string& strText,
                   bool bSelect = false,
                   int imageId = NO_IMAGE);
 

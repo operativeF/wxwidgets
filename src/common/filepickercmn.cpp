@@ -71,12 +71,12 @@ bool wxFileDirPickerCtrlBase::CreateBase(wxWindow *parent,
     return true;
 }
 
-wxString wxFileDirPickerCtrlBase::GetPath() const
+std::string wxFileDirPickerCtrlBase::GetPath() const
 {
     return m_pickerIface->GetPath();
 }
 
-void wxFileDirPickerCtrlBase::SetPath(const wxString &path)
+void wxFileDirPickerCtrlBase::SetPath(const std::string &path)
 {
     m_pickerIface->SetPath(path);
     UpdateTextCtrlFromPicker();
@@ -89,7 +89,7 @@ void wxFileDirPickerCtrlBase::UpdatePickerFromTextCtrl()
     // remove the eventually present path-separator from the end of the textctrl
     // string otherwise we would generate a wxFileDirPickerEvent when changing
     // from e.g. /home/user to /home/user/ and we want to avoid it !
-    wxString newpath(GetTextCtrlValue());
+    std::string newpath(GetTextCtrlValue());
 
     // Notice that we use to check here whether the current path is valid, i.e.
     // if the corresponding file or directory exists for the controls with
@@ -173,9 +173,9 @@ bool wxFilePickerCtrl::Create(wxWindow *parent,
     return true;
 }
 
-wxString wxFilePickerCtrl::GetTextCtrlValue() const
+std::string wxFilePickerCtrl::GetTextCtrlValue() const
 {
-    wxCHECK_MSG( m_text, wxString(), "Can't be used if no text control" );
+    wxCHECK_MSG( m_text, std::string(), "Can't be used if no text control" );
 
     // filter it through wxFileName to remove any spurious path separator
     return wxFileName(m_text->GetValue()).GetFullPath();
@@ -212,9 +212,9 @@ bool wxDirPickerCtrl::Create(wxWindow *parent,
     return true;
 }
 
-wxString wxDirPickerCtrl::GetTextCtrlValue() const
+std::string wxDirPickerCtrl::GetTextCtrlValue() const
 {
-    wxCHECK_MSG( m_text, wxString(), "Can't be used if no text control" );
+    wxCHECK_MSG( m_text, std::string(), "Can't be used if no text control" );
 
     // filter it through wxFileName to remove any spurious path separator
     return wxFileName::DirName(m_text->GetValue()).GetPath();

@@ -661,8 +661,8 @@ wxImage wxXPMDecoder::ReadData(const char* const* xpm_data)
     char key[64];
     wxXPMColourMap clr_tbl;
     wxXPMColourMap::iterator it;
-    wxString maskKey;
-    wxString keyString;
+    std::string maskKey;
+    std::string keyString;
 
     /*
      *  Read hints and initialize structures:

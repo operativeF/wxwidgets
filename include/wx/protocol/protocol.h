@@ -14,7 +14,6 @@
 #if wxUSE_PROTOCOL
 
 #include "wx/object.h"
-#include "wx/string.h"
 #include "wx/stream.h"
 
 #if wxUSE_SOCKETS

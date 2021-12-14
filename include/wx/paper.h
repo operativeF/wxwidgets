@@ -106,7 +106,7 @@ public:
     wxPaperSize ConvertNameToId(std::string_view name) const;
 
     // Convert size id to name
-    wxString ConvertIdToName(wxPaperSize paperId) const;
+    std::string ConvertIdToName(wxPaperSize paperId) const;
 
     // Get the paper size
     wxSize GetSize(wxPaperSize paperId) const;

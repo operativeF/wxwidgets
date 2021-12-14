@@ -711,14 +711,16 @@ void wxSpinCtrlDouble::DoSendEvent()
     GetEventHandler()->ProcessEvent( event );
 }
 
-bool wxSpinCtrlDouble::DoTextToValue(const wxString& text, double *val)
+bool wxSpinCtrlDouble::DoTextToValue(const std::string& text, double *val)
 {
-    return text.ToDouble(val);
+    auto [p, ec] = std::from_chars(text.data(), text.data() + text.size(), *val);
+
+    return ec == std::errc();
 }
 
 std::string wxSpinCtrlDouble::DoValueToText(double val)
 {
-    return wxString::Format(m_format, val).ToStdString();
+    return fmt::format("{:.{}f}", val, m_digits);
 }
 
 void wxSpinCtrlDouble::SetDigits(unsigned digits)
@@ -729,8 +731,6 @@ void wxSpinCtrlDouble::SetDigits(unsigned digits)
         return;
 
     m_digits = digits;
-
-    m_format.Printf("%%0.%ulf", digits);
 
     ResetTextValidator();
     m_textCtrl->InvalidateBestSize();
@@ -753,7 +753,6 @@ void wxSpinCtrlDouble::DetermineDigits(double inc)
     if ( inc > 0.0 && inc < 1.0 )
     {
         m_digits = std::min(SPINCTRLDBL_MAX_DIGITS, -static_cast<int>(std::floor(std::log10(inc))));
-        m_format.Printf("%%0.%ulf", m_digits);
     }
 }
 

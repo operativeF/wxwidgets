@@ -280,7 +280,7 @@ wxPaperSize wxPrintPaperDatabase::ConvertNameToId(std::string_view name) const
 }
 
 // Convert size id to name
-wxString wxPrintPaperDatabase::ConvertIdToName(wxPaperSize paperId) const
+std::string wxPrintPaperDatabase::ConvertIdToName(wxPaperSize paperId) const
 {
     wxPrintPaperType* type = FindPaperType(paperId);
     if (type)

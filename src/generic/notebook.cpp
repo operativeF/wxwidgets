@@ -107,7 +107,7 @@ wxNotebook::wxNotebook(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        unsigned int style,
-                       const wxString& name)
+                       const std::string& name)
 {
     Init();
 
@@ -120,7 +120,7 @@ bool wxNotebook::Create(wxWindow *parent,
                         const wxPoint& pos,
                         const wxSize& size,
                         unsigned int style,
-                        const wxString& name)
+                        const std::string& name)
 {
     // base init
     SetName(name);
@@ -183,7 +183,7 @@ void wxNotebook::AdvanceSelection(bool bForward)
 }
 #endif
 
-bool wxNotebook::SetPageText(size_t nPage, const wxString& strText)
+bool wxNotebook::SetPageText(size_t nPage, const std::string& strText)
 {
     wxASSERT( IS_VALID_PAGE(nPage) );
 
@@ -198,7 +198,7 @@ bool wxNotebook::SetPageText(size_t nPage, const wxString& strText)
     return false;
 }
 
-wxString wxNotebook::GetPageText(size_t nPage) const
+std::string wxNotebook::GetPageText(size_t nPage) const
 {
     wxASSERT( IS_VALID_PAGE(nPage) );
 
@@ -382,7 +382,7 @@ bool wxNotebook::DeleteAllPages()
 // same as AddPage() but does it at given position
 bool wxNotebook::InsertPage(size_t nPage,
                             wxNotebookPage *pPage,
-                            const wxString& strText,
+                            const std::string& strText,
                             bool bSelect,
                             [[maybe_unused]] int imageId)
 {

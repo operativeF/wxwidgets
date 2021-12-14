@@ -140,7 +140,7 @@ protected:
     virtual void DoSendEvent() = 0;
 
     // Convert the text to/from the corresponding value.
-    virtual bool DoTextToValue(const wxString& text, double *val) = 0;
+    virtual bool DoTextToValue(const std::string& text, double *val) = 0;
     virtual std::string DoValueToText(double val) = 0;
 
     // check if the value is in range
@@ -219,7 +219,7 @@ public:
     // unsigned GetDigits() const                   - wxSpinCtrlDouble only
 
     // operations
-    virtual void SetValue(const wxString& text) { wxTextCtrl::SetValue(text); }
+    virtual void SetValue(const std::string& text) { wxTextCtrl::SetValue(text); }
     // void SetValue(T val)
     // void SetRange(T minVal, T maxVal)
     // void SetIncrement(T inc)
@@ -235,7 +235,7 @@ protected:
     double DoGetValue() const
     {
         double n;
-        if ( (wxSscanf(wxTextCtrl::GetValue(), "%lf", &n) != 1) )
+        if ( (std::sscanf(wxTextCtrl::GetValue(), "%lf", &n) != 1) )
             n = std::numeric_limits<int>::min();
 
         return n;
@@ -243,7 +243,8 @@ protected:
 
     bool DoSetValue(double val, SendEvent sendEvent)
     {
-        wxString str(wxString::Format(m_format, val));
+        std::string str = fmt::format("{:.{}}", val, m_format);
+
         switch ( sendEvent )
         {
             case SendEvent::None:
@@ -264,7 +265,7 @@ protected:
     }
     void DoSetIncrement(double inc) { m_increment = inc; } // Note: unused
 
-    wxString m_format;
+    std::string m_format;
 
     double m_value;
     double m_min;
@@ -395,13 +396,10 @@ public:
     int GetBase() const override { return 10; }
     bool SetBase([[maybe_unused]] int base) override { return false; }
 
-private:
-    wxString m_format{"%0.0f"};
-
 protected:
     void DoSendEvent() override;
 
-    bool DoTextToValue(const wxString& text, double *val) override;
+    bool DoTextToValue(const std::string& text, double *val) override;
     std::string DoValueToText(double val) override;
     void ResetTextValidator() override;
     void DetermineDigits(double inc);

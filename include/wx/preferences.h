@@ -13,6 +13,7 @@
 #if wxUSE_PREFERENCES_EDITOR
 
 #include "wx/bitmap.h"
+
 import <vector>;
 
 class wxWindow;
@@ -45,7 +46,7 @@ public:
     wxPreferencesPage& operator=(wxPreferencesPage&&) = delete;
 
     // Name of the page, used e.g. for tabs
-    virtual wxString GetName() const = 0;
+    virtual std::string GetName() const = 0;
 
     // Return 32x32 icon used for the page. Currently only used on OS X, where
     // implementation is required; unused on other platforms. Because of this,
@@ -75,7 +76,7 @@ public:
     wxStockPreferencesPage(Kind kind) : m_kind{kind} {}
     Kind GetKind() const { return m_kind; }
 
-    wxString GetName() const override;
+    std::string GetName() const override;
 #ifdef __WXOSX_COCOA__
     wxBitmap GetLargeIcon() const override;
 #endif
@@ -90,7 +91,7 @@ class wxPreferencesEditor
 {
 public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
-    wxPreferencesEditor(const wxString& title = {});
+    wxPreferencesEditor(const std::string& title = {});
 
     wxPreferencesEditor& operator=(wxPreferencesEditor&&) = delete;
     

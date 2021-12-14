@@ -19,22 +19,20 @@
 // implementation
 // ============================================================================
 
-wxString wxStockPreferencesPage::GetName() const
+std::string wxStockPreferencesPage::GetName() const
 {
-    wxString name;
     switch ( m_kind )
     {
         case Kind::General:
-            name = _("General");
-            break;
+            return _("General").ToStdString();
         case Kind::Advanced:
-            name = _("Advanced");
-            break;
+            return _("Advanced").ToStdString();
     }
-    return name;
+
+    return {};
 }
 
-wxPreferencesEditor::wxPreferencesEditor(const wxString& title)
+wxPreferencesEditor::wxPreferencesEditor(const std::string& title)
     : m_impl(wxPreferencesEditorImpl::Create(title))
 {
 }

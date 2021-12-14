@@ -25,7 +25,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileProto, wxProtocol);
 IMPLEMENT_PROTOCOL(wxFileProto, "file", NULL, false)
 
-wxInputStream *wxFileProto::GetInputStream(const wxString& path)
+wxInputStream *wxFileProto::GetInputStream(const std::string& path)
 {
     wxFileInputStream *retval = new wxFileInputStream(wxURI::Unescape(path));
     if ( retval->IsOk() )
