@@ -45,7 +45,7 @@ bool UpdatePowerResourceExecutionState()
 
 bool
 wxPowerResource::Acquire(wxPowerResourceKind kind,
-                         [[maybe_unused]] const wxString& reason)
+                         [[maybe_unused]] const std::string& reason)
 {
     switch ( kind )
     {

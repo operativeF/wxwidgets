@@ -141,10 +141,8 @@ void wxFontMapperBase::Reset()
 static std::string gs_defaultConfigPath(FONTMAPPER_ROOT_PATH);
 
 /* static */
-const std::string& wxFontMapperBase::GetDefaultConfigPath()
+std::string wxFontMapperBase::GetDefaultConfigPath()
 {
-    // NB: we return const wxString& and not wxString for compatibility
-    //     with 2.8 that returned const wxChar*
     return gs_defaultConfigPath;
 }
 
@@ -196,7 +194,7 @@ const std::string& wxFontMapperBase::GetConfigPath()
 // config helpers
 // ----------------------------------------------------------------------------
 
-bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString* pathOld)
+bool wxFontMapperBase::ChangePath(const std::string& pathNew, std::string* pathOld)
 {
     wxConfigBase *config = GetConfig();
     if ( !config )
@@ -204,8 +202,8 @@ bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString* pathOld)
 
     *pathOld = config->GetPath();
 
-    wxString path = GetConfigPath();
-    if ( path.empty() || path.Last() != wxCONFIG_PATH_SEPARATOR )
+    std::string path = GetConfigPath();
+    if ( path.empty() || path.back() != wxCONFIG_PATH_SEPARATOR )
     {
         path += wxCONFIG_PATH_SEPARATOR;
     }
@@ -221,7 +219,7 @@ bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString* pathOld)
     return true;
 }
 
-void wxFontMapperBase::RestorePath(const wxString& pathOld)
+void wxFontMapperBase::RestorePath(const std::string& pathOld)
 {
     GetConfig()->SetPath(pathOld);
 }
@@ -467,10 +465,8 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
         return wxGetTranslation(std::string{possibleMatch->description});
     }
 
-    wxString str;
-    str.Printf(_("Unknown encoding (%d)"), encoding);
-
-    return str.ToStdString();
+    // FIXME: Removed translation for fmt lib
+    return fmt::format("Unknown encoding (%d)", encoding);
 }
 
 /* static */
@@ -492,10 +488,8 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
         return std::string{possibleMatch->names.substr(0, possibleMatch->names.find_first_of(','))};
     }
 
-    wxString str;
-    str.Printf(_("unknown-%d"), encoding);
-
-    return str.ToStdString();
+    // FIXME: Removed translation for fmt lib
+    return fmt::format("unknown-%d", encoding);
 }
 
 #endif // wxUSE_FONTMAP

@@ -48,7 +48,7 @@ import <cstdlib>;
 namespace
 {
 
-wxString FormatTiffMessage(const char *module, const char *fmt, va_list ap)
+std::string FormatTiffMessage(const char *module, const char *fmt, va_list ap)
 {
     char buf[512];
     if ( wxCRT_VsnprintfA(buf, WXSIZEOF(buf), fmt, ap) <= 0 )
@@ -63,7 +63,7 @@ wxString FormatTiffMessage(const char *module, const char *fmt, va_list ap)
     if ( module )
         msg += wxString::Format(_(" (in module \"%s\")"), module);
 
-    return msg;
+    return msg.ToStdString();
 }
 
 // helper to translate our, possibly 64 bit, wxFileOffset to TIFF, always 32

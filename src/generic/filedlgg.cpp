@@ -108,14 +108,14 @@ void wxGenericFileDialog::Init()
 }
 
 wxGenericFileDialog::wxGenericFileDialog(wxWindow *parent,
-                           const wxString& message,
-                           const wxString& defaultDir,
-                           const wxString& defaultFile,
-                           const wxString& wildCard,
+                           const std::string& message,
+                           const std::string& defaultDir,
+                           const std::string& defaultFile,
+                           const std::string& wildCard,
                            long  style,
                            const wxPoint& pos,
                            const wxSize& sz,
-                           const wxString& name,
+                           const std::string& name,
                            bool  bypassGenericImpl ) : wxFileDialogBase()
 {
     Init();
@@ -123,14 +123,14 @@ wxGenericFileDialog::wxGenericFileDialog(wxWindow *parent,
 }
 
 bool wxGenericFileDialog::Create( wxWindow *parent,
-                                  const wxString& message,
-                                  const wxString& defaultDir,
-                                  const wxString& defaultFile,
-                                  const wxString& wildCard,
+                                  const std::string& message,
+                                  const std::string& defaultDir,
+                                  const std::string& defaultFile,
+                                  const std::string& wildCard,
                                   long  style,
                                   const wxPoint& pos,
                                   const wxSize& sz,
-                                  const wxString& name,
+                                  const std::string& name,
                                   bool  bypassGenericImpl )
 {
     m_bypassGenericImpl = bypassGenericImpl;
@@ -267,7 +267,7 @@ wxGenericFileDialog::~wxGenericFileDialog()
 
 wxBitmapButton* wxGenericFileDialog::AddBitmapButton( wxWindowID winId,
                                                       const wxArtID& artId,
-                                                      const wxString& tip,
+                                                      const std::string& tip,
                                                       wxSizer *sizer)
 {
     wxBitmapButton *but = new wxBitmapButton(this, winId,
@@ -309,12 +309,12 @@ bool wxGenericFileDialog::Show( bool show )
 
 void wxGenericFileDialog::OnOk( [[maybe_unused]] wxCommandEvent &event )
 {
-    std::vector<wxString> selectedFiles = m_filectrl->GetPaths();
+    std::vector<std::string> selectedFiles = m_filectrl->GetPaths();
 
     if (selectedFiles.empty())
         return;
 
-    const wxString& path = selectedFiles[0];
+    const std::string& path = selectedFiles[0];
 
     if (selectedFiles.size() == 1)
     {
@@ -327,7 +327,7 @@ void wxGenericFileDialog::OnOk( [[maybe_unused]] wxCommandEvent &event )
     {
         if ( wxMessageBox
              (
-                wxString::Format
+                fmt::format
                 (
                     _("File '%s' already exists, do you really want to overwrite it?"),
                     path

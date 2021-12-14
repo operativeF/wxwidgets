@@ -107,7 +107,7 @@ class wxPowerResource
 {
 public:
     static bool Acquire(wxPowerResourceKind kind,
-                        const wxString& reason = {});
+                        const std::string& reason = {});
     static void Release(wxPowerResourceKind kind);
 };
 
@@ -115,7 +115,7 @@ class wxPowerResourceBlocker
 {
 public:
     explicit wxPowerResourceBlocker(wxPowerResourceKind kind,
-                                    const wxString& reason = {})
+                                    const std::string& reason = {})
         : m_kind(kind),
           m_acquired(wxPowerResource::Acquire(kind, reason))
     {

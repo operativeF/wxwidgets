@@ -296,9 +296,9 @@ static void BuildListFromNN(std::vector<std::string>& list, NETRESOURCEW* pResSr
 // Function: CompareFcn
 // Purpose: Used to sort the NN list alphabetically, case insensitive.
 //=============================================================================
-static int CompareFcn(const wxString& first, const wxString& second)
+static int CompareFcn(const std::string& first, const std::string& second)
 {
-    return wxStricmp(first.c_str(), second.c_str());
+    return std::strcmp(first.c_str(), second.c_str());
 } // CompareFcn
 
 //=============================================================================
@@ -462,12 +462,12 @@ void wxFSVolumeBase::CancelSearch()
     ::InterlockedExchange(&s_cancelSearch, TRUE);
 } // CancelSearch
 
-wxFSVolumeBase::wxFSVolumeBase(const wxString& name)
+wxFSVolumeBase::wxFSVolumeBase(const std::string& name)
 {
     Create(name);
 } // wxVolume
 
-bool wxFSVolumeBase::Create(const wxString& name)
+bool wxFSVolumeBase::Create(const std::string& name)
 {
     // assume fail.
     m_isOk = false;
@@ -478,13 +478,14 @@ bool wxFSVolumeBase::Create(const wxString& name)
     // Display name.
     // FIXME: Use wstackstring
     SHFILEINFOW fi;
-    const auto rc = ::SHGetFileInfoW(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
+    boost::nowide::wstackstring stackName{m_volName.c_str()};
+    const auto rc = ::SHGetFileInfoW(stackName.get(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
     if (!rc)
     {
         wxLogError(_("Cannot read typename from '%s'!"), m_volName.c_str());
         return false;
     }
-    m_dispName = fi.szDisplayName;
+    m_dispName = boost::nowide::narrow(fi.szDisplayName);
 
     // all tests passed.
     m_isOk = true;
@@ -588,7 +589,8 @@ wxIcon wxFSVolume::GetIcon(wxFSIconType type)
 
         // FIXME: Use wstackstring
         SHFILEINFOW fi;
-        long rc = ::SHGetFileInfoW(m_volName.t_str(), 0, &fi, sizeof(fi), flags);
+        boost::nowide::wstackstring stackName{m_volName.c_str()};
+        long rc = ::SHGetFileInfoW(stackName.get(), 0, &fi, sizeof(fi), flags);
         if (!rc || !fi.hIcon)
         {
             wxLogError(_("Cannot load icon from '%s'."), m_volName.c_str());

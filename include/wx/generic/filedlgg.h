@@ -60,35 +60,35 @@ public:
 
     ~wxGenericFileDialog();
 
-    void SetDirectory(const wxString& dir) override
+    void SetDirectory(const std::string& dir) override
         { m_filectrl->SetDirectory(dir); }
-    void SetFilename(const wxString& name) override
+    void SetFilename(const std::string& name) override
         { m_filectrl->SetFilename(name); }
-    void SetMessage(const wxString& message) override { SetTitle(message); }
-    void SetPath(const wxString& path) override
+    void SetMessage(const std::string& message) override { SetTitle(message); }
+    void SetPath(const std::string& path) override
         { m_filectrl->SetPath(path); }
     void SetFilterIndex(int filterIndex) override
         { m_filectrl->SetFilterIndex(filterIndex); }
-    void SetWildcard(const wxString& wildCard) override
+    void SetWildcard(const std::string& wildCard) override
         { m_filectrl->SetWildcard(wildCard); }
 
-    wxString GetPath() const override
+    std::string GetPath() const override
         {
-            wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );
+            wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), {}, "When using wxFD_MULTIPLE, must call GetPaths() instead" );
             return m_filectrl->GetPath();
         }
-    std::vector<wxString> GetPaths() const override
+    std::vector<std::string> GetPaths() const override
         { return m_filectrl->GetPaths(); }
-    wxString GetDirectory() const override
+    std::string GetDirectory() const override
         { return m_filectrl->GetDirectory(); }
-    wxString GetFilename() const override
+    std::string GetFilename() const override
         {
-            wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
+            wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), {}, "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
             return m_filectrl->GetFilename();
         }
-    void GetFilenames(std::vector<wxString>& files) const override
+    void GetFilenames(std::vector<std::string>& files) const override
         { m_filectrl->GetFilenames(files); }
-    wxString GetWildcard() const override
+    std::string GetWildcard() const override
         { return m_filectrl->GetWildcard(); }
     int GetFilterIndex() const override
         { return m_filectrl->GetFilterIndex(); }
@@ -117,7 +117,7 @@ protected:
     // currently selected directory
     void OnUpdateButtonsUI(wxUpdateUIEvent& event);
 
-    wxString               m_filterExtension;
+    std::string               m_filterExtension;
     wxGenericFileCtrl     *m_filectrl;
     wxBitmapButton        *m_upDirButton;
     wxBitmapButton        *m_newDirButton;
@@ -125,7 +125,7 @@ protected:
 private:
     void Init();
     wxBitmapButton* AddBitmapButton( wxWindowID winId, const wxArtID& artId,
-                                     const wxString& tip, wxSizer *sizer );
+                                     const std::string& tip, wxSizer *sizer );
 
     wxDECLARE_EVENT_TABLE();
 

@@ -12,7 +12,6 @@
 #define _WX_STOCKITEM_H_
 
 #include "wx/chartype.h"
-#include "wx/string.h"
 #include "wx/accel.h"
 
 import <string>;
@@ -26,7 +25,7 @@ bool wxIsStockID(wxWindowID id);
 
 // Returns true of the label is empty or label of a stock button with
 // given ID
-bool wxIsStockLabel(wxWindowID id, const wxString& label);
+bool wxIsStockLabel(wxWindowID id, const std::string& label);
 
 enum wxStockLabelQueryFlag
 {
@@ -67,7 +66,7 @@ enum wxStockHelpStringClient
 };
 
 // Returns an help string for the given stock UI element and for the given "context".
-wxString wxGetStockHelpString(wxWindowID id,
+std::string wxGetStockHelpString(wxWindowID id,
                                           wxStockHelpStringClient client = wxSTOCK_MENU);
 
 

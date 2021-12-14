@@ -237,9 +237,9 @@ std::string wxGetStockLabel(wxWindowID id, unsigned int flags)
     return stockLabel;
 }
 
-wxString wxGetStockHelpString(wxWindowID id, wxStockHelpStringClient client)
+std::string wxGetStockHelpString(wxWindowID id, wxStockHelpStringClient client)
 {
-    wxString stockHelp;
+    std::string stockHelp;
 
     #define STOCKITEM(stockid, ctx, helpstr)             \
         case stockid:                                    \
@@ -320,16 +320,17 @@ wxAcceleratorEntry wxGetStockAccelerator(wxWindowID id)
 
 #endif // wxUSE_ACCEL
 
-bool wxIsStockLabel(wxWindowID id, const wxString& label)
+bool wxIsStockLabel(wxWindowID id, const std::string& label)
 {
     if (label.empty())
         return true;
 
-    wxString stock = wxGetStockLabel(id);
+    std::string stock = wxGetStockLabel(id);
 
     if (label == stock)
         return true;
 
-    stock.Replace("&", {});
+    std::erase(stock, '&');
+
     return label == stock;
 }

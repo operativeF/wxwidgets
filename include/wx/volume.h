@@ -17,8 +17,7 @@
 
 #if wxUSE_FSVOLUME
 
-#include "wx/string.h"
-
+import <string>;
 import <vector>;
 
 // the volume flags
@@ -67,8 +66,8 @@ public:
     // create the volume object with this name (should be one of those returned
     // by GetVolumes()).
     wxFSVolumeBase() = default;
-    wxFSVolumeBase(const wxString& name);
-    [[maybe_unused]] bool Create(const wxString& name);
+    wxFSVolumeBase(const std::string& name);
+    [[maybe_unused]] bool Create(const std::string& name);
 
     // is this a valid volume?
     bool IsOk() const;
@@ -84,17 +83,17 @@ public:
 
     // get the name of the volume and the name which should be displayed to the
     // user
-    wxString GetName() const { return m_volName; }
-    wxString GetDisplayName() const { return m_dispName; }
+    std::string GetName() const { return m_volName; }
+    std::string GetDisplayName() const { return m_dispName; }
 
     // TODO: operatios (Mount(), Unmount(), Eject(), ...)?
 
 protected:
     // the internal volume name
-    wxString m_volName;
+    std::string m_volName;
 
     // the volume name as it is displayed to the user
-    wxString m_dispName;
+    std::string m_dispName;
 
     // have we been initialized correctly?
     bool m_isOk{false};
@@ -119,7 +118,7 @@ class wxFSVolume : public wxFSVolumeBase
 {
 public:
     wxFSVolume()  { InitIcons(); }
-    wxFSVolume(const wxString& name) : wxFSVolumeBase(name) { InitIcons(); }
+    wxFSVolume(const std::string& name) : wxFSVolumeBase(name) { InitIcons(); }
 
     wxIcon GetIcon(wxFSIconType type);
 

@@ -13,7 +13,6 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/string.h"
 #include "wx/log.h"
 #include "wx/snglinst.h"
 
@@ -24,14 +23,12 @@
 class wxSingleInstanceCheckerImpl
 {
 public:
-    wxSingleInstanceCheckerImpl() = default;
+	wxSingleInstanceCheckerImpl& operator=(wxSingleInstanceCheckerImpl&&) = delete;
 
-    wxSingleInstanceCheckerImpl(const wxSingleInstanceCheckerImpl&) = delete;
-	wxSingleInstanceCheckerImpl& operator=(const wxSingleInstanceCheckerImpl&) = delete;
-
-    bool Create(const wxString& name)
+    bool Create(const std::string& name)
     {
-        m_hMutex = ::CreateMutexW(nullptr, FALSE, name.t_str());
+        boost::nowide::wstackstring stackName{name.c_str()};
+        m_hMutex = ::CreateMutexW(nullptr, FALSE, stackName.get());
         if ( !m_hMutex )
         {
             wxLogLastError("CreateMutex");
@@ -76,8 +73,8 @@ private:
 // wxSingleInstanceChecker implementation
 // ============================================================================
 
-bool wxSingleInstanceChecker::Create(const wxString& name,
-                                     [[maybe_unused]] const wxString& path)
+bool wxSingleInstanceChecker::Create(const std::string& name,
+                                     [[maybe_unused]] const std::string& path)
 {
     wxASSERT_MSG( !m_impl,
                   "calling wxSingleInstanceChecker::Create() twice?" );

@@ -273,7 +273,7 @@ public:
     void SetConfigPath(const std::string& prefix);
 
     // return default config path
-    static const std::string& GetDefaultConfigPath();
+    static std::string GetDefaultConfigPath();
 #endif // wxUSE_CONFIG
 
 
@@ -297,10 +297,10 @@ protected:
     //
     // caller should provide a pointer to the string variable which should be
     // later passed to RestorePath()
-    bool ChangePath(const wxString& pathNew, wxString* pathOld);
+    bool ChangePath(const std::string& pathNew, std::string* pathOld);
 
     // restore the config path after use
-    void RestorePath(const wxString& pathOld);
+    void RestorePath(const std::string& pathOld);
 
     // config object and path (in it) to use
     wxConfigBase *m_configDummy{nullptr};
