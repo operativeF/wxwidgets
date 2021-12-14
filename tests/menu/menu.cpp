@@ -36,12 +36,12 @@ enum
     MenuTestCase_First
 };
 
-void PopulateMenu(wxMenu* menu, const wxString& name,  size_t& itemcount)
+void PopulateMenu(wxMenu* menu, const std::string& name,  size_t& itemcount)
 {
     // Start at item 1 to make it human-readable ;)
     for (int n=1; n<6; ++n, ++itemcount)
     {
-        wxString label = name; label << n;
+        std::string label = fmt::format("{}{:d}", name, n);
         menu->Append(MenuTestCase_First + itemcount, label, label + " help string");
     }
 }
@@ -132,7 +132,7 @@ TEST_CASE("Menu tests.")
     // and a sub-submenu item
     int m_subsubmenuItemId;
 
-    std::vector<wxString> m_menuLabels;
+    std::vector<std::string> m_menuLabels;
 
     // The menu containing the item with MenuTestCase_Bar id.
     wxMenu* m_menuWithBar;
@@ -203,10 +203,10 @@ TEST_CASE("Menu tests.")
         // and using the menu label
         int index = bar->FindMenu("&File");
         CHECK( index != wxNOT_FOUND );
-        wxString menulabel = bar->GetMenuLabel(index);
+        std::string menulabel = bar->GetMenuLabel(index);
         CHECK( bar->FindMenuItem(menulabel, "&Foo") != wxNOT_FOUND );
         // and title
-        wxString menutitle = bar->GetMenu(index)->GetTitle();
+        std::string menutitle = bar->GetMenu(index)->GetTitle();
         CHECK( bar->FindMenuItem(menutitle, "&Foo") != wxNOT_FOUND );
 
         // Find by position:
@@ -355,9 +355,9 @@ TEST_CASE("Menu tests.")
         CHECK(trans.AddCatalog("internat"));
 
         // Check the translation is being used:
-        CHECK(wxString("&File") != GetTranslatedString(trans, "&File"));
+        CHECK(std::string("&File") != GetTranslatedString(trans, "&File"));
 
-        wxString filemenu = m_frame->GetMenuBar()->GetMenuLabel(0);
+        std::string filemenu = m_frame->GetMenuBar()->GetMenuLabel(0);
         CHECK_EQ
         (
             wxStripMenuCodes(GetTranslatedString(trans, "&File"), wxStrip_Menu),
@@ -562,7 +562,7 @@ TEST_CASE("Menu tests.")
 namespace
 {
 
-void VerifyAccelAssigned( wxString labelText, int keycode )
+void VerifyAccelAssigned( std::string labelText, int keycode )
 {
     auto entry = wxAcceleratorEntry::Create( labelText );
 
@@ -573,7 +573,7 @@ void VerifyAccelAssigned( wxString labelText, int keycode )
 struct key
 {
     int      keycode;
-    wxString name;
+    std::string name;
     bool     skip;
 };
 key modKeys[] =
@@ -702,12 +702,12 @@ TEST_CASE("wxMenuItemAccelEntry")
         {
             const key& k = modKeys[i];
 
-            INFO( wxString::Format( "Modifier: %s",  k.name ) );
+            INFO( fmt::format( "Modifier: %s",  k.name ) );
             wxAcceleratorEntry accelEntry( k.keycode, 'A' , wxID_ANY, item );
             item->SetAccel( &accelEntry );
 
-            wxString labelText = item->GetItemLabel();
-            INFO( wxString::Format( "Label text: %s", labelText ) );
+            std::string labelText = item->GetItemLabel();
+            INFO( fmt::format( "Label text: %s", labelText ) );
 
             VerifyAccelAssigned( labelText, 'A' );
         }
@@ -722,12 +722,12 @@ TEST_CASE("wxMenuItemAccelEntry")
             if( k.skip )
                 continue;
 
-            INFO( wxString::Format( "Keycode: %s",  k.name ) );
+            INFO( fmt::format( "Keycode: %s",  k.name ) );
             wxAcceleratorEntry accelEntry( wxACCEL_CTRL, k.keycode, wxID_ANY, item );
             item->SetAccel( &accelEntry );
 
-            wxString labelText = item->GetItemLabel();
-            INFO( wxString::Format( "Label text: %s", labelText ) );
+            std::string labelText = item->GetItemLabel();
+            INFO( fmt::format( "Label text: %s", labelText ) );
 
             VerifyAccelAssigned( labelText, k.keycode );
         }

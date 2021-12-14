@@ -254,7 +254,7 @@ protected:
             m_win->Unbind(wxEVT_TEXT, &TextEventHandler::OnText, this);
         }
 
-        const wxString& GetLastString() const
+        const std::string& GetLastString() const
         {
             return m_string;
         }
@@ -267,7 +267,7 @@ protected:
 
         wxWindow* const m_win;
 
-        wxString m_string;
+        std::string m_string;
     };
 
     void Editable()
@@ -411,7 +411,7 @@ public:
         m_win->Unbind(wxEVT_TEXT, &TextEventHandler::OnText, this);
     }
 
-    const wxString& GetLastString() const
+    const std::string& GetLastString() const
     {
         return m_string;
     }
@@ -424,7 +424,7 @@ private:
 
     wxWindow* const m_win;
 
-    wxString m_string;
+    std::string m_string;
 };
 
 // Helper used for creating the control of the specific type (currently either

@@ -25,6 +25,8 @@
 
 import Utils.Geometry;
 
+import <string>;
+
 class wxSpinButton;
 class wxTextCtrl;
 
@@ -317,7 +319,7 @@ public:
     int GetMax() const { return int(m_max); }
     int GetIncrement() const { return int(m_increment); }
 
-    void SetValue(const wxString& value) override
+    void SetValue(const std::string& value) override
         { wxSpinCtrlGenericBase::SetValue(value); }
     void SetValue( int value )              { DoSetValue(value, SendEvent::None); }
     void SetRange( int minVal, int maxVal ) { DoSetRange(minVal, maxVal); }
@@ -329,7 +331,7 @@ public:
 protected:
     void DoSendEvent() override;
 
-    bool DoTextToValue(const wxString& text, double *val) override;
+    bool DoTextToValue(const std::string& text, double *val) override;
     std::string DoValueToText(double val) override;
     void ResetTextValidator() override;
 

@@ -122,7 +122,7 @@ TEST_CASE_METHOD(StcPopupWindowsTestCase,
     m_calltipClickReceived = false;
     m_focusAlwaysRetained = true;
 
-    wxString calltipText = "This is a calltip.";
+    std::string calltipText = "This is a calltip.";
     m_stc->CallTipShow(0,calltipText);
 
 #if wxUSE_UIACTIONSIMULATOR

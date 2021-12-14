@@ -1077,7 +1077,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // This currently doesn't work neither in wxGTK, wxUniv, or wxOSX/Cocoa, see
             // #12366, where GetNumberOfLines() always returns the number of logical,
             // not physical, lines.
-            m_entry->AppendText('\n' + wxString(50, '1') + ' ' + wxString(50, '2'));
+            m_entry->AppendText("\n" + std::string(50, '1') + " " + std::string(50, '2'));
 #if defined(__WXGTK__) || defined(__WXOSX_COCOA__) || defined(__WXUNIVERSAL__) || defined(__WXQT__)
             CHECK_EQ(6, m_entry->GetNumberOfLines());
 #else

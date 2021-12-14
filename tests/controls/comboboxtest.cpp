@@ -177,7 +177,7 @@ TEST_CASE("wxComboBox::ProcessEnter")
         {
             const std::vector<std::string> choices = { "foo", "bar", "baz" };
 
-            return new wxComboBox(parent, wxID_ANY, wxString(),
+            return new wxComboBox(parent, wxID_ANY, std::string{},
                                   wxDefaultPosition, wxDefaultSize,
                                   choices,
                                   style);

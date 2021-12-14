@@ -61,7 +61,7 @@ public:
     AsyncInEventLoop() { }
 
     long DoExecute(AsyncExecLoopExitEnum forceExitLoop_,
-        const wxString& command_,
+        const std::string& command_,
         int flags_ = wxEXEC_ASYNC,
         wxProcess* callback_ = nullptr)
     {
@@ -95,9 +95,9 @@ public:
 
 private:
     AsyncExecLoopExitEnum forceExitLoop;
-    wxString command;
-    int flags;
+    std::string command;
     wxProcess* callback;
+    int flags;
     long wxExecuteReturnCode;
 };
 
@@ -121,7 +121,7 @@ private:
     TestAsyncProcess& operator=(const TestAsyncProcess&) = delete;
 };
 
-static void DoTestAsyncRedirect(const wxString& command,
+static void DoTestAsyncRedirect(const std::string& command,
                                 CheckStream check,
                                 const char* expectedContaining)
 {
@@ -153,7 +153,7 @@ static void DoTestAsyncRedirect(const wxString& command,
     CHECK(tis.ReadLine().Contains(expectedContaining));
 }
 
-[[maybe_unused]] static wxString CreateSleepFile(const wxString& basename, int seconds)
+[[maybe_unused]] static std::string CreateSleepFile(const std::string& basename, int seconds)
 {
 #ifdef __UNIX__
     static const char* const scriptExt = ".sh";
@@ -176,7 +176,7 @@ static void DoTestAsyncRedirect(const wxString& command,
 #error "Need code to create sleep file for this platform"
 #endif
 
-    const wxString fnSleep = wxFileName(".", basename, scriptExt).GetFullPath();
+    const std::string fnSleep = wxFileName(".", basename, scriptExt).GetFullPath();
 
     wxFile fileSleep;
     CHECK
@@ -184,19 +184,19 @@ static void DoTestAsyncRedirect(const wxString& command,
         fileSleep.Create(fnSleep, true, wxS_IRUSR | wxS_IWUSR | wxS_IXUSR)
     );
 
-    fileSleep.Write(wxString::Format(scriptText, seconds));
+    fileSleep.Write(fmt::format(scriptText, seconds));
 
     return fnSleep;
 }
 
-[[maybe_unused]] static wxString MakeShellCommand(const wxString& filename)
+[[maybe_unused]] static std::string MakeShellCommand(const std::string& filename)
 {
-    wxString command;
+    std::string command;
 
 #ifdef __UNIX__
     command = "/bin/sh " + filename;
 #elif defined(WX_WINDOWS)
-    command = wxString::Format("cmd.exe /c \"%s\"", filename);
+    command = fmt::format("cmd.exe /c \"%s\"", filename);
 #else
 #error "Need to code to launch shell for this platform"
 #endif
@@ -266,13 +266,13 @@ TEST_CASE("TestExecute")
 
         // test running COMMAND again, but this time with redirection:
         // and the expected data is on stdout.
-        std::vector<wxString> stdout_arr;
+        std::vector<std::string> stdout_arr;
         CHECK_EQ( 0, wxExecute(COMMAND, stdout_arr, execFlags) );
         CHECK_EQ( "hi", stdout_arr[0] );
 
         // test running COMMAND_STDERR with redirection and the expected data
         // is on stderr.
-        std::vector<wxString> stderr_arr;
+        std::vector<std::string> stderr_arr;
         stdout_arr.clear();
         CHECK( wxExecute(COMMAND_STDERR, stdout_arr, stderr_arr, execFlags) != 0 );
 
@@ -402,7 +402,7 @@ TEST_CASE("TestOverlappedSyncExecute")
     class DelayedExecuteTimer : public wxTimer
     {
     public:
-        DelayedExecuteTimer(const wxString& command, std::vector<wxString>& outputArray)
+        DelayedExecuteTimer(const std::string& command, std::vector<std::string>& outputArray)
             : m_command(command),
               m_outputArray(outputArray)
         {
@@ -416,23 +416,23 @@ TEST_CASE("TestOverlappedSyncExecute")
         }
 
     private:
-        wxString m_command;
-        std::vector<wxString>& m_outputArray;
+        std::string m_command;
+        std::vector<std::string>& m_outputArray;
     };
 
     // Create two scripts with one of them taking longer than the other one to
     // execute.
-    const wxString shortSleepFile = CreateSleepFile("shortsleep", 1);
+    const std::string shortSleepFile = CreateSleepFile("shortsleep", 1);
     wxON_BLOCK_EXIT1( wxRemoveFile, shortSleepFile );
-    const wxString longSleepFile = CreateSleepFile("longsleep", 2);
+    const std::string longSleepFile = CreateSleepFile("longsleep", 2);
     wxON_BLOCK_EXIT1( wxRemoveFile, longSleepFile );
 
-    const wxString shortSleepCommand = MakeShellCommand(shortSleepFile);
-    const wxString longSleepCommand = MakeShellCommand(longSleepFile);
+    const std::string shortSleepCommand = MakeShellCommand(shortSleepFile);
+    const std::string longSleepCommand = MakeShellCommand(longSleepFile);
 
     // Collect the child process output
-    std::vector<wxString> shortSleepOutput;
-    std::vector<wxString> longSleepOutput;
+    std::vector<std::string> shortSleepOutput;
+    std::vector<std::string> longSleepOutput;
 
     // Test that launching a process taking a longer time to run while the
     // shorter process is running works, i.e. that our outer wxExecute()
@@ -465,7 +465,7 @@ TEST_CASE("TestOverlappedSyncExecute")
 // produces the expected output.
 TEST_CASE("wxExecute::RedirectUTF8", "[exec][unicode][.]")
 {
-    std::vector<wxString> output;
+    std::vector<std::string> output;
     REQUIRE( wxExecute("/bin/ls --version", output) == 0 );
 
     for ( size_t n = 0; n < output.size(); ++n )
@@ -473,7 +473,7 @@ TEST_CASE("wxExecute::RedirectUTF8", "[exec][unicode][.]")
         // It seems unlikely that this part of the output will change for GNU
         // ls, so check for its presence as a sign that the program output was
         // decoded correctly.
-        if ( output[n].find(wxString::FromUTF8("vous \xc3\xaates libre")) != wxString::npos )
+        if ( output[n].find(wxString::FromUTF8("vous \xc3\xaates libre")) != std::string::npos )
             return;
     }
 

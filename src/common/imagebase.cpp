@@ -2468,7 +2468,7 @@ void wxImage::SetPalette(const wxPalette& palette)
 // Option functions (arbitrary name/value mapping)
 // ----------------------------------------------------------------------------
 
-void wxImage::SetOption(const std::string& name, const std::string& value)
+void wxImage::SetOption(const std::string& name, std::string_view value)
 {
     AllocExclusive();
 
@@ -2480,13 +2480,13 @@ void wxImage::SetOption(const std::string& name, const std::string& value)
     if ( match == M_IMGDATA->m_optionNames.end() )
     {
         M_IMGDATA->m_optionNames.push_back(name);
-        M_IMGDATA->m_optionValues.push_back(value);
+        M_IMGDATA->m_optionValues.emplace_back(value.begin(), value.end());
     }
     else
     {
         const auto idx = std::distance(M_IMGDATA->m_optionNames.begin(), match);
         M_IMGDATA->m_optionNames[idx] = name;
-        M_IMGDATA->m_optionValues[idx] = value;
+        M_IMGDATA->m_optionValues[idx] = {value.begin(), value.end()};
     }
 }
 

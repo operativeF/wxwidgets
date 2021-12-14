@@ -585,13 +585,13 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
         If an app wants an int, GetOptionInt will convert and round down.
         */
         image->SetOption(wxIMAGE_OPTION_RESOLUTIONX,
-            wxString::FromCDouble((double) resX));
+            wxString::FromCDouble((double) resX).ToStdString());
     }
 
     if ( TIFFGetField(tif, TIFFTAG_YRESOLUTION, &resY) )
     {
         image->SetOption(wxIMAGE_OPTION_RESOLUTIONY,
-            wxString::FromCDouble((double) resY));
+            wxString::FromCDouble((double) resY).ToStdString());
     }
 
     _TIFFfree( raster );

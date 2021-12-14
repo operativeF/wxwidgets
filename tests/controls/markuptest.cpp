@@ -10,6 +10,8 @@
 
 #include "wx/private/markupparser.h"
 
+#include <fmt/core.h>
+
 import WX.Test.Prec;
 
 TEST_CASE("Markup tests")
@@ -26,7 +28,7 @@ TEST_CASE("Markup tests")
 
             void Reset() { m_text.clear(); }
 
-            const wxString& GetText() const { return m_text; }
+            const std::string& GetText() const { return m_text; }
 
 
             void OnText(const std::string& text) override { m_text += text; }
@@ -54,25 +56,25 @@ TEST_CASE("Markup tests")
 
             void OnSpanStart(const wxMarkupSpanAttributes& attrs) override
             {
-                m_text << "<span";
+                m_text += "<span";
 
                 if ( !attrs.m_fgCol.empty() )
-                    m_text << " foreground='" << attrs.m_fgCol << "'";
+                    m_text += fmt::format(" foreground='{}'", attrs.m_fgCol);
 
                 if ( !attrs.m_bgCol.empty() )
-                    m_text << " background='" << attrs.m_bgCol << "'";
+                    m_text += fmt::format(" background='{}'", attrs.m_bgCol);
 
                 if ( !attrs.m_fontFace.empty() )
-                    m_text << " face='" << attrs.m_fontFace << "'";
+                    m_text += fmt::format(" face='{}'", attrs.m_fontFace);
 
-                wxString size;
+                std::string size;
                 switch ( attrs.m_sizeKind )
                 {
                     case wxMarkupSpanAttributes::Size_Unspecified:
                         break;
 
                     case wxMarkupSpanAttributes::Size_Relative:
-                        size << (attrs.m_fontSize > 0 ? "larger" : "smaller");
+                        size += (attrs.m_fontSize > 0 ? "larger" : "smaller");
                         break;
 
                     case wxMarkupSpanAttributes::Size_Symbolic:
@@ -86,21 +88,21 @@ TEST_CASE("Markup tests")
                                 "large", "x-large", "xx-large",
                             };
 
-                            size << cssSizes[attrs.m_fontSize + 3];
+                            size += cssSizes[attrs.m_fontSize + 3];
                         }
                         break;
 
                     case wxMarkupSpanAttributes::Size_PointParts:
-                        size.Printf("%u", attrs.m_fontSize);
+                        size = fmt::format("{:d}", attrs.m_fontSize);
                         break;
                 }
 
                 if ( !size.empty() )
-                    m_text << " size='" << size << '\'';
+                    m_text += fmt::format(" size='{}'", size);
 
                 // TODO: Handle the rest of attributes.
 
-                m_text << ">";
+                m_text += ">";
             }
 
             void OnSpanEnd([[maybe_unused]] const wxMarkupSpanAttributes& attrs) override
@@ -109,7 +111,7 @@ TEST_CASE("Markup tests")
             }
 
         private:
-            wxString m_text;
+            std::string m_text;
         };
 
 

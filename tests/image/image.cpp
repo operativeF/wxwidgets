@@ -163,7 +163,7 @@ void CompareImage(const wxImageHandler& handler, const wxImage& image,
 }
 
 #if wxUSE_LIBTIFF
-static void TestTIFFImage(const wxString& option, int value,
+static void TestTIFFImage(const std::string& option, int value,
     const wxImage* compareImage = nullptr)
 {
     wxImage image;
@@ -200,7 +200,7 @@ static void TestTIFFImage(const wxString& option, int value,
 
 #if wxUSE_GIF
 
-static void TestGIFComment(const wxString& comment)
+static void TestGIFComment(std::string_view comment)
 {
     wxImage image("image/data/horse.gif");
 
@@ -217,7 +217,7 @@ static void TestGIFComment(const wxString& comment)
 
 #endif // wxUSE_GIF
 
-static void CompareBMPImage(const wxString& file1, const wxString& file2)
+static void CompareBMPImage(const std::string& file1, const std::string& file2)
 {
     wxImage image1(file1);
     CHECK(image1.IsOk());
@@ -1281,9 +1281,8 @@ TEST_CASE("Image test")
 
 
         // Test writing and reading a comment again but with a long comment.
-        TestGIFComment(wxString(wxT('a'), 256)
-            + wxString(wxT('b'), 256)
-            + wxString(wxT('c'), 256));
+        static constexpr std::string_view longStr("c", 768);
+        TestGIFComment(longStr);
 
 
         // Test writing comments in an animated GIF and reading them back.
@@ -1305,7 +1304,7 @@ TEST_CASE("Image test")
             }
 
             images[i].SetOption(wxIMAGE_OPTION_GIF_COMMENT,
-                wxString::Format("GIF comment for frame #%d", i + 1));
+                fmt::format("GIF comment for frame #%d", i + 1));
 
         }
 
@@ -1323,7 +1322,7 @@ TEST_CASE("Image test")
             CHECK(handler.LoadFile(&image, memIn, true /*verbose?*/, i));
 
             CHECK_EQ(
-                wxString::Format("GIF comment for frame #%d", i + 1),
+                fmt::format("GIF comment for frame #%d", i + 1),
                 image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
             memIn.SeekI(pos);
         }

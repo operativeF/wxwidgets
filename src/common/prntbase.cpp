@@ -1457,7 +1457,7 @@ public:
     // Add a button with the specified id, bitmap and tooltip.
     void AddButton(wxWindowID btnId,
                    const wxArtID& artId,
-                   const wxString& tooltip)
+                   const std::string& tooltip)
     {
         // We don't use (smaller) images inside a button with a text label but
         // rather toolbar-like bitmap buttons hence use wxART_TOOLBAR and not

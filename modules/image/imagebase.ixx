@@ -587,7 +587,7 @@ public:
 #endif // wxUSE_PALETTE
 
     // Option functions (arbitrary name/value mapping)
-    void SetOption(const std::string& name, const std::string& value);
+    void SetOption(const std::string& name, std::string_view value);
     void SetOption(const std::string& name, int value);
     std::string GetOption(const std::string& name) const;
     int GetOptionInt(const std::string& name) const;

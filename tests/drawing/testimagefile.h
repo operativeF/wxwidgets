@@ -11,7 +11,7 @@
 #ifndef _WX_TESTS_TESTIMAGEFILE_H_
 #define _WX_TESTS_TESTIMAGEFILE_H_
 
-bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename)
+bool AreFilesContentsEqual(const std::string& filename, const std::string& refFilename)
 {
     wxFileInputStream input(filename);
     wxFileInputStream refInput(refFilename);
@@ -20,7 +20,8 @@ bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename
     if (refLength != input.GetLength())
         return false;
 
-    std::uint8_t buffer[1024], refBuffer[sizeof(buffer)];
+    std::uint8_t buffer[1024];
+    std::uint8_t refBuffer[sizeof(buffer)];
 
     wxFileOffset remainingLength = refLength;
     while (remainingLength != 0)
@@ -32,7 +33,7 @@ bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename
         if (input.LastRead() != refLastRead)
             return false;
 
-        if (memcmp (buffer, refBuffer, refLastRead) != 0)
+        if (std::memcmp (buffer, refBuffer, refLastRead) != 0)
             return false;
 
         remainingLength -= refLastRead;
@@ -47,8 +48,8 @@ bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename
             filename1, filename2),\
         AreFilesContentsEqual(filename1, filename2))
 
-bool AreImagesFilesContentsEqual(const wxString &filename,
-                                 const wxString &refFilename)
+bool AreImagesFilesContentsEqual(const std::string &filename,
+                                 const std::string &refFilename)
 {
     wxImage input(filename);
     wxImage refInput(refFilename);
@@ -68,7 +69,7 @@ bool AreImagesFilesContentsEqual(const wxString &filename,
     long pixelsCount = input.GetSize().GetWidth() * input.GetSize().GetHeight();
     const unsigned char *data = input.GetData();
     const unsigned char *refData = refInput.GetData();
-    if (memcmp (data, refData, pixelsCount*3) != 0)
+    if (std::memcmp (data, refData, pixelsCount*3) != 0)
         return false;
 
     if (input.HasAlpha())

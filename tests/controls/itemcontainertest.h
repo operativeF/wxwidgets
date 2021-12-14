@@ -11,10 +11,8 @@
 
 #include "doctest.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/ctrlsub.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/ctrlsub.h"
 
 #include "wx/ctrlsub.h"
 #include "wx/scopeguard.h"
@@ -48,9 +46,7 @@ protected:
 
         CHECK_EQ("item 0", m_container->GetString(0));
 
-        std::vector<std::string> testitems;
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        std::vector<std::string> testitems = { "item 1", "item 2" };
 
         m_container->Append(testitems);
 
@@ -71,9 +67,7 @@ protected:
         CHECK_EQ( 0, pos_0 );
         CHECK_EQ("item 0", m_container->GetString(0));
 
-        std::vector<std::string> testitems;
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        std::vector<std::string> testitems = { "item 1", "item 2" };
 
         auto pos_1 = m_container->Insert(testitems, 0);
         CHECK_EQ( 1, pos_1 );
@@ -193,8 +187,9 @@ protected:
 
     void VoidDataTest()
     {
-        wxString item0data("item0data"), item1data("item0data"),
-                item2data("item0data");
+        std::string item0data("item0data");
+        std::string item1data("item0data");
+        std::string item2data("item0data");
 
         void* item0 = &item0data;
         void* item1 = &item1data;

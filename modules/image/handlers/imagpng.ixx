@@ -443,9 +443,9 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
                 down for them.
                 */
                 image->SetOption(wxIMAGE_OPTION_RESOLUTIONX,
-                    wxString::FromCDouble((double) resX / 100.0, 2));
+                    wxString::FromCDouble((double) resX / 100.0, 2).ToStdString());
                 image->SetOption(wxIMAGE_OPTION_RESOLUTIONY,
-                    wxString::FromCDouble((double) resY / 100.0, 2));
+                    wxString::FromCDouble((double) resY / 100.0, 2).ToStdString());
                 break;
         }
 

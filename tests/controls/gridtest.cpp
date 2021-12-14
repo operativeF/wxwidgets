@@ -30,14 +30,14 @@ import WX.Test.Prec;
 namespace
 {
 
-wxString CellCoordsToString(int row, int col)
+std::string CellCoordsToString(int row, int col)
 {
-    return wxString::Format("R%dC%d", col + 1, row + 1);
+    return fmt::format("R%dC%d", col + 1, row + 1);
 }
 
-wxString CellSizeToString(int rows, int cols)
+std::string CellSizeToString(int rows, int cols)
 {
-    return wxString::Format("%dx%d", rows, cols);
+    return fmt::format("%dx%d", rows, cols);
 }
 
 struct Multicell
@@ -47,13 +47,13 @@ struct Multicell
     Multicell(int row, int col, int rows, int cols)
         : row(row), col(col), rows(rows), cols(cols) { }
 
-    wxString Coords() const { return CellCoordsToString(row, col); }
+    std::string Coords() const { return CellCoordsToString(row, col); }
 
-    wxString Size() const { return CellSizeToString(rows, cols); }
+    std::string Size() const { return CellSizeToString(rows, cols); }
 
-    wxString ToString() const
+    std::string ToString() const
     {
-        wxString s;
+        std::string s;
 
         if ( rows == 1 && cols == 1 )
         {
@@ -68,7 +68,7 @@ struct Multicell
                 s += "inside cell";
         }
 
-        return wxString::Format("%s at %s", s, Coords());
+        return fmt::format("%s at %s", s, Coords());
     }
 };
 
@@ -135,13 +135,13 @@ public:
     void DoEdit(const EditInfo& edit);
 
     // Returns annotated grid represented as a string.
-    wxString ToString() const;
+    std::string ToString() const;
 
     // Used when drawing annotated grid to know what happens to it.
     EditInfo m_edit;
 
     // Grid as string before editing, with edit info annotated.
-    wxString m_beforeGridAnnotated;
+    std::string m_beforeGridAnnotated;
 };
 
 // Compares two grids, checking for differences with attribute presence and
@@ -158,8 +158,8 @@ public:
 private:
     const TestableGrid* m_grid;
 
-    mutable wxString m_diffDesc;
-    mutable wxString m_expectedGridDesc;
+    mutable std::string m_diffDesc;
+    mutable std::string m_expectedGridDesc;
 };
 
 // Helper function for recreating a grid to fit (only) a multicell.
@@ -195,7 +195,7 @@ template <> struct StringMaker<TestableGrid>
     static std::string convert(const TestableGrid& grid)
     {
         return ("Content before edit:\n" + grid.m_beforeGridAnnotated
-                + "\nContent after edit:\n" + grid.ToString()).ToStdString();
+                + "\nContent after edit:\n" + grid.ToString());
     }
 };
 
@@ -203,7 +203,7 @@ template <> struct StringMaker<Multicell>
 {
     static std::string convert(const Multicell& multi)
     {
-        return multi.ToString().ToStdString();
+        return multi.ToString();
     }
 };
 
@@ -1540,14 +1540,14 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::AutoSizeColumn")
     wxClientDC dcLabel(m_grid->GetGridWindow());
     dcLabel.SetFont(m_grid->GetLabelFont());
 
-    const wxString shortStr     = "W";
-    const wxString mediumStr    = "WWWW";
-    const wxString longStr      = "WWWWWWWW";
-    const wxString multilineStr = mediumStr + "\n" + longStr;
+    const std::string shortStr     = "W";
+    const std::string mediumStr    = "WWWW";
+    const std::string longStr      = "WWWWWWWW";
+    const std::string multilineStr = mediumStr + "\n" + longStr;
 
     SUBCASE("Empty column and label")
     {
-        m_grid->SetColLabelValue(0, wxString());
+        m_grid->SetColLabelValue(0, std::string{});
         CheckFirstColAutoSize( m_grid->GetDefaultColSize() );
     }
 
@@ -1559,7 +1559,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::AutoSizeColumn")
 
     SUBCASE("Column with empty label")
     {
-        m_grid->SetColLabelValue(0, wxString());
+        m_grid->SetColLabelValue(0, std::string{});
         m_grid->SetCellValue(0, 0, mediumStr);
         m_grid->SetCellValue(1, 0, shortStr);
         m_grid->SetCellValue(3, 0, longStr);
@@ -1631,7 +1631,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::DrawInvalidCell")
     // to have a value but this is merely done to check if inside cells are
     // drawn, which they shouldn't be.
     m_grid->SetCellSize(0, 0, 2, 1);
-    m_grid->SetCellValue( 1, 0, wxString('W', 42) );
+    m_grid->SetCellValue( 1, 0, std::string{'W', 42} );
 
     // Update()s, yields and sleep are needed to try to make the test fail with
     // macOS, GTK and MSW.
@@ -2240,23 +2240,23 @@ void TestableGrid::DoEdit(const EditInfo& edit)
     }
 }
 
-wxString TestableGrid::ToString() const
+std::string TestableGrid::ToString() const
 {
     const int numRows = GetNumberRows();
     const int numCols = GetNumberCols();
 
     const std::size_t colMargin = GetRowLabelValue(numRows - 1).length();
-    const wxString leftIndent = wxString(' ', colMargin + 1);
+    const auto leftIndent = std::string(' ', colMargin + 1);
 
     // String s contains the rendering of the grid, start with drawing
     // the header columns.
-    wxString s = leftIndent;
+    std::string s = leftIndent;
 
     const int base = 10;
     // Draw the multiples of 10.
     for ( int col = base; col <= numCols; col += base)
     {
-        s += wxString(' ', base - 1);
+        s += std::string(' ', base - 1);
         s += ('0' + (col / base));
     }
 
@@ -2269,22 +2269,21 @@ wxString TestableGrid::ToString() const
     s += "\n";
 
     // Draw horizontal divider.
-    s += wxString(' ', colMargin) + '+' + wxString('-', numCols) + "\n";
+    s += std::string(' ', colMargin) + '+' + std::string('-', numCols) + "\n";
 
     const int absEditCount = std::abs(m_edit.count);
-    wxString action;
-    action.Printf(" %s: %d",
-                  m_edit.count < 0 ? "deletions" : "insertions",
-                  absEditCount);
+    std::string action = fmt::format(" %s: %d",
+                                     m_edit.count < 0 ? "deletions" : "insertions",
+                                     absEditCount);
 
     // Will contain summary of grid (only multicells mentioned).
-    wxString content;
+    std::string content;
 
     // Draw grid content.
     for ( int row = 0; row < numRows; ++row )
     {
-        const wxString label = GetRowLabelValue(row);
-        s += wxString(' ', colMargin - label.length());
+        const std::string label = GetRowLabelValue(row);
+        s += std::string(' ', colMargin - label.length());
         s += label + '|';
 
         for ( int col = 0; col < numCols; ++col )
@@ -2370,7 +2369,7 @@ bool GridAttrMatcher::match(const TestableGrid& other) const
             const bool hasAttr = m_grid->HasAttr(row, col);
             if ( hasAttr != other.HasAttr(row, col) )
             {
-                m_diffDesc.Printf("%s: attribute presence (%d, expected %d)",
+                m_diffDesc = fmt::format("%s: attribute presence (%d, expected %d)",
                                   CellCoordsToString(row, col),
                                   !hasAttr, hasAttr);
 
@@ -2378,15 +2377,14 @@ bool GridAttrMatcher::match(const TestableGrid& other) const
             }
 
             int thisRows, thisCols;
-            const wxGrid::CellSpan thisSpan
-                = m_grid->GetCellSize(row, col, &thisRows, &thisCols);
+            const wxGrid::CellSpan thisSpan = m_grid->GetCellSize(row, col, &thisRows, &thisCols);
 
             int otherRows, otherCols;
             (void) other.GetCellSize(row, col, &otherRows, &otherCols);
 
             if ( thisRows != otherRows || thisCols != otherCols )
             {
-                wxString mismatchKind;
+                std::string mismatchKind;
                 switch ( thisSpan )
                 {
                 case wxGrid::CellSpan_None:
@@ -2402,7 +2400,7 @@ bool GridAttrMatcher::match(const TestableGrid& other) const
                     break;
                 }
 
-                m_diffDesc.Printf( "%s: %s (%s, expected %s)",
+                m_diffDesc = fmt::format("%s: %s (%s, expected %s)",
                                    CellCoordsToString(row, col),
                                    mismatchKind,
                                    CellSizeToString(otherRows, otherCols),
@@ -2420,10 +2418,10 @@ bool GridAttrMatcher::match(const TestableGrid& other) const
 std::string GridAttrMatcher::describe() const
 {
     std::string desc = (m_diffDesc.empty() ? "Matches" : "Doesn't match");
-    desc += " expected content:\n" + m_expectedGridDesc.ToStdString();
+    desc += " expected content:\n" + m_expectedGridDesc;
 
     if ( !m_diffDesc.empty() )
-        desc += + "first difference at " + m_diffDesc.ToStdString();
+        desc += + "first difference at " + m_diffDesc;
 
     return desc;
 }

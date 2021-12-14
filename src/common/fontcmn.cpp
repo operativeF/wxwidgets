@@ -750,7 +750,7 @@ std::string wxNativeFontInfo::ToString() const
 {
     return fmt::format("%d;%s;%d;%d;%d;%d;%d;%s;%d",
              1,                                 // version
-             wxString::FromCDouble(GetFractionalPointSize()),
+             GetFractionalPointSize(),
              family,
              (int)style,
              weight,
