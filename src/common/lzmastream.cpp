@@ -150,7 +150,7 @@ size_t wxLZMAInputStream::OnSysRead(void* outbuf, size_t size)
         // Do decompress.
         const lzma_ret rc = lzma_code(m_stream, LZMA_RUN);
 
-        wxString err;
+        std::string err;
         switch ( rc )
         {
             case LZMA_OK:
@@ -242,7 +242,7 @@ size_t wxLZMAOutputStream::OnSysWrite(const void *inbuf, size_t size)
 
         const lzma_ret rc = lzma_code(m_stream, LZMA_RUN);
 
-        wxString err;
+        std::string err;
         switch ( rc )
         {
             case LZMA_OK:
@@ -313,7 +313,7 @@ bool wxLZMAOutputStream::DoFlush(bool finish)
 
         const lzma_ret rc = lzma_code(m_stream, action);
 
-        wxString err;
+        std::string err;
         switch ( rc )
         {
             case LZMA_OK:

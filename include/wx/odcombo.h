@@ -95,8 +95,8 @@ public:
 
     // Item management
     void SetSelection( int item );
-    void Insert( const wxString& item, int pos );
-    int Append(const wxString& item);
+    void Insert( const std::string& item, int pos );
+    int Append(const std::string& item);
     void Clear();
     void Delete( unsigned int item );
     void SetItemClientData(unsigned int n, void* clientData, wxClientDataType clientDataItemsType);
@@ -107,7 +107,7 @@ public:
     int FindString(std::string_view s, bool bCase = false) const;
     int GetSelection() const;
 
-    //void Populate( int n, const wxString choices[] );
+    //void Populate( int n, const std::string choices[] );
     void Populate( const std::vector<std::string>& choices );
     void ClearClientDatas();
 
@@ -119,7 +119,7 @@ public:
 protected:
 
     // Called by OnComboDoubleClick and OnCombo{Key,Char}Event
-    bool HandleKey( int keycode, bool saturate, wxChar keychar = 0 );
+    bool HandleKey( int keycode, bool saturate, char keychar = 0 );
 
     // sends combobox select event from the parent combo control
     void SendComboBoxEvent( int selection );
@@ -181,7 +181,7 @@ protected:
 
     wxFont                  m_useFont;
 
-    //wxString                m_stringValue; // displayed text (may be different from m_strings[m_value])
+    //std::string                m_stringValue; // displayed text (may be different from m_strings[m_value])
     int                     m_value{-1}; // selection
     int                     m_itemHover{-1}; // on which item the cursor is
     int                     m_itemHeight{0}; // default item height (calculate from font size
@@ -212,9 +212,9 @@ private:
     void CalcWidths();
 
     // Partial completion string
-    wxString                m_partialCompletionString;
+    std::string                m_partialCompletionString;
 
-    wxString                m_stringValue;
+    std::string                m_stringValue;
 
 #if wxUSE_TIMER
     // Partial completion timer
@@ -243,11 +243,11 @@ public:
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
-                         const wxString& value,
+                         const std::string& value,
                          const wxPoint& pos,
                          const wxSize& size,
                          int n,
-                         const wxString choices[],
+                         const std::string choices[],
                          unsigned int style = 0,
                          const wxValidator& validator = {},
                          std::string_view name = wxComboCtrlNameStr)
@@ -261,7 +261,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value = {},
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
@@ -270,7 +270,7 @@ public:
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
-                         const wxString& value = {},
+                         const std::string& value = {},
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
                          const std::vector<std::string>& choices = {},
@@ -280,18 +280,18 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value,
+                const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
                 int n,
-                const wxString choices[],
+                const std::string choices[],
                 unsigned int style = 0,
                 const wxValidator& validator = {},
                 std::string_view name = wxComboCtrlNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value,
+                const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
@@ -383,14 +383,9 @@ protected:
     void DoSetItemClientData(unsigned int n, void* clientData) override;
     void* DoGetItemClientData(unsigned int n) const override;
 
-    // temporary storage for the initial choices
-    //const wxString*         m_baseChoices;
-    //int                     m_baseChoicesCount;
     std::vector<std::string>  m_initChs;
 
 private:
-    
-
     wxDECLARE_EVENT_TABLE();
 
     wxDECLARE_DYNAMIC_CLASS(wxOwnerDrawnComboBox);

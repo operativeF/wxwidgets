@@ -178,8 +178,8 @@ std::string wxDynamicLibrary::CanonicalizePluginName(const std::string& name,
     #endif
 #endif
 
-    suffix += wxString::FromAscii(wxDLLVER(wxMAJOR_VERSION, wxMINOR_VERSION,
-                                           wxRELEASE_NUMBER));
+    suffix += wxDLLVER(wxMAJOR_VERSION, wxMINOR_VERSION, wxRELEASE_NUMBER);
+
 #undef wxDLLVER
 #undef WXSTRINGIZE
 

@@ -43,7 +43,7 @@ public:
 
     inline static wxDLImports* ms_classes{nullptr};  // Static hash of all imported classes.
 
-    wxPluginLibrary( const wxString &libname, unsigned int flags = wxDL_DEFAULT );
+    wxPluginLibrary( const std::string &libname, unsigned int flags = wxDL_DEFAULT );
     ~wxPluginLibrary();
 
     wxPluginLibrary& operator=(wxPluginLibrary&&) = delete;
@@ -100,14 +100,14 @@ public:
 
         // Static accessors.
 
-    static wxPluginLibrary    *wxLoadLibrary( const wxString &libname,
+    static wxPluginLibrary    *wxLoadLibrary( const std::string &libname,
                                               unsigned int flags = wxDL_DEFAULT );
-    static bool                UnloadLibrary(const wxString &libname);
+    static bool                UnloadLibrary(const std::string &libname);
 
         // Instance methods.
 
     wxPluginManager()  = default;
-    wxPluginManager(const wxString &libname, unsigned int flags = wxDL_DEFAULT)
+    wxPluginManager(const std::string &libname, unsigned int flags = wxDL_DEFAULT)
     {
         Load(libname, flags);
     }
@@ -117,11 +117,11 @@ public:
     // wanted to, but not without modification.
     wxPluginManager& operator=(wxPluginManager&&) = delete;
 
-    bool   Load(const wxString &libname, unsigned int flags = wxDL_DEFAULT);
+    bool   Load(const std::string &libname, unsigned int flags = wxDL_DEFAULT);
     void   Unload();
 
     bool   IsLoaded() const { return m_entry && m_entry->IsLoaded(); }
-    void* GetSymbol(const wxString& symbol, bool* success = nullptr)
+    void* GetSymbol(const std::string& symbol, bool* success = nullptr)
     {
         return m_entry->GetSymbol( symbol, success );
     }
@@ -132,7 +132,7 @@ public:
 private:
     // return the pointer to the entry for the library with given name in
     // ms_manifest or NULL if none
-    static wxPluginLibrary *FindByName(const wxString& name)
+    static wxPluginLibrary *FindByName(const std::string& name)
     {
         const wxDLManifest::iterator i = ms_manifest->find(name);
 

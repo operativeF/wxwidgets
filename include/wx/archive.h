@@ -40,15 +40,15 @@ public:
     virtual wxFileOffset GetOffset() const = 0;
     virtual bool         IsDir() const = 0;
     virtual bool         IsReadOnly() const = 0;
-    virtual wxString     GetInternalName() const = 0;
+    virtual std::string     GetInternalName() const = 0;
     virtual wxPathFormat GetInternalFormat() const = 0;
-    virtual wxString     GetName(wxPathFormat format = wxPATH_NATIVE) const = 0;
+    virtual std::string     GetName(wxPathFormat format = wxPATH_NATIVE) const = 0;
 
     virtual void SetDateTime(const wxDateTime& dt) = 0;
     virtual void SetSize(wxFileOffset size) = 0;
     virtual void SetIsDir(bool isDir = true) = 0;
     virtual void SetIsReadOnly(bool isReadOnly = true) = 0;
-    virtual void SetName(const wxString& name,
+    virtual void SetName(const std::string& name,
                          wxPathFormat format = wxPATH_NATIVE) = 0;
 
     wxArchiveEntry *Clone() const { return DoClone(); }
@@ -123,11 +123,11 @@ class wxArchiveOutputStream : public wxFilterOutputStream
 public:
     virtual bool PutNextEntry(wxArchiveEntry *entry) = 0;
 
-    virtual bool PutNextEntry(const wxString& name,
+    virtual bool PutNextEntry(const std::string& name,
                               const wxDateTime& dt = wxDateTime::Now(),
                               wxFileOffset size = wxInvalidOffset) = 0;
 
-    virtual bool PutNextDirEntry(const wxString& name,
+    virtual bool PutNextDirEntry(const std::string& name,
                                  const wxDateTime& dt = wxDateTime::Now()) = 0;
 
     virtual bool CopyEntry(wxArchiveEntry *entry,
@@ -283,7 +283,7 @@ private:
 };
 
 using wxArchiveIter = wxArchiveIterator<wxArchiveInputStream>;
-using wxArchivePairIter = wxArchiveIterator<wxArchiveInputStream, std::pair<wxString, wxArchiveEntry *>>;
+using wxArchivePairIter = wxArchiveIterator<wxArchiveInputStream, std::pair<std::string, wxArchiveEntry *>>;
 
 #endif // defined WX_TEST_ARCHIVE_ITERATOR
 
@@ -319,8 +319,8 @@ public:
     wxArchiveOutputStream *NewStream(wxOutputStream *stream) const
         { return DoNewStream(stream); }
 
-    virtual wxString GetInternalName(
-        const wxString& name,
+    virtual std::string GetInternalName(
+        const std::string& name,
         wxPathFormat format = wxPATH_NATIVE) const = 0;
 
     // FIXME-UTF8: remove these from this file, they are used for ANSI
@@ -329,7 +329,7 @@ public:
     wxMBConv& GetConv() const
         { if (m_pConv) return *m_pConv; else return wxConvLocal; }
 
-    static const wxArchiveClassFactory *Find(const wxString& protocol,
+    static const wxArchiveClassFactory *Find(const std::string& protocol,
                                              wxStreamProtocolType type
                                              = wxSTREAM_PROTOCOL);
 

@@ -20,8 +20,8 @@
 class wxInternetFSHandler : public wxFileSystemHandler
 {
     public:
-        bool CanOpen(const wxString& location) override;
-        wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
+        bool CanOpen(const std::string& location) override;
+        wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) override;
 };
 
 #endif

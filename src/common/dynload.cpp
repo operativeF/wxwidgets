@@ -55,7 +55,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPluginLibraryModule, wxModule);
 // It is simple to know what is the first object in the linked list of
 // wxClassInfo that we registered (it's also the last one chronologically),
 // it's just the new head of the wxClassInfo list:
-wxPluginLibrary::wxPluginLibrary(const wxString &libname, unsigned int flags)
+wxPluginLibrary::wxPluginLibrary(const std::string &libname, unsigned int flags)
         : m_ourFirst(wxClassInfo::GetFirst())
 {
     const wxClassInfo* const oldFirst = wxClassInfo::GetFirst();
@@ -245,9 +245,9 @@ void wxPluginLibrary::UnregisterModules()
 }
 
 wxPluginLibrary *
-wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
+wxPluginManager::wxLoadLibrary(const std::string &libname, unsigned int flags)
 {
-    wxString realname(libname);
+    std::string realname(libname);
 
     if( !(flags & wxDL_VERBATIM) )
         realname += wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory::Module);
@@ -301,9 +301,9 @@ wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
     return entry;
 }
 
-bool wxPluginManager::UnloadLibrary(const wxString& libname)
+bool wxPluginManager::UnloadLibrary(const std::string& libname)
 {
-    wxString realname = libname;
+    std::string realname = libname;
 
     wxPluginLibrary *entry = FindByName(realname);
 
@@ -339,7 +339,7 @@ bool wxPluginManager::UnloadLibrary(const wxString& libname)
 // Class implementation
 // ------------------------
 
-bool wxPluginManager::Load(const wxString &libname, unsigned int flags)
+bool wxPluginManager::Load(const std::string &libname, unsigned int flags)
 {
     m_entry = wxPluginManager::wxLoadLibrary(libname, flags);
 

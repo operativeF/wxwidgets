@@ -245,7 +245,7 @@ void wxVListBoxComboPopup::SendComboBoxEvent( int selection )
 }
 
 // returns true if key was consumed
-bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar )
+bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, char keychar )
 {
     const int itemCount = GetCount();
 
@@ -304,10 +304,10 @@ bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar
         // find the new partial completion string
 #if wxUSE_TIMER
         if (m_partialCompletionTimer.IsRunning())
-            m_partialCompletionString+=wxString(keychar);
+            m_partialCompletionString += fmt::format("{}", keychar);
         else
 #endif // wxUSE_TIMER
-            m_partialCompletionString=wxString(keychar);
+            m_partialCompletionString = fmt::format("{}", keychar);
 
         // now search through the values to see if this is found
         int found = -1;
@@ -315,10 +315,10 @@ bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar
         int i;
         for (i=0; i<itemCount; i++)
         {
-            wxString item=GetString(i);
-            if (( item.length() >= length) && (!  m_partialCompletionString.CmpNoCase(item.Left(length))))
+            std::string item = GetString(i);
+            if (( item.length() >= length) && (!wx::utils::CmpNoCase(m_partialCompletionString, item.substr(0, length))))
             {
-                found=i;
+                found = i;
                 break;
             }
         }
@@ -494,7 +494,7 @@ void wxVListBoxComboPopup::OnChar(wxKeyEvent& event)
     event.Skip();
 }
 
-void wxVListBoxComboPopup::Insert( const wxString& item, int pos )
+void wxVListBoxComboPopup::Insert( const std::string& item, int pos )
 {
     // Need to change selection?
     if ( m_combo->GetValue() == item )
@@ -517,7 +517,7 @@ void wxVListBoxComboPopup::Insert( const wxString& item, int pos )
         wxVListBox::SetItemCount( wxVListBox::GetItemCount()+1 );
 }
 
-int wxVListBoxComboPopup::Append(const wxString& item)
+int wxVListBoxComboPopup::Append(const std::string& item)
 {
     int pos = (int)m_strings.size();
 
@@ -526,9 +526,9 @@ int wxVListBoxComboPopup::Append(const wxString& item)
         // Find position
         // TODO: Could be optimized with binary search
         const std::vector<std::string>& strings = m_strings;
-        for ( size_t i=0; i<strings.size(); i++ )
+        for ( size_t i=0; i < strings.size(); i++ )
         {
-            if ( item.CmpNoCase(strings[i]) <= 0 )
+            if ( wx::utils::CmpNoCase(item, strings[i]) <= 0 )
             {
                 pos = (int)i;
                 break;
@@ -846,7 +846,6 @@ wxSize wxVListBoxComboPopup::GetAdjustedSize( int minWidth, int prefHeight, int 
     return {minWidth > widestWidth ? minWidth : widestWidth, height + 2};
 }
 
-//void wxVListBoxComboPopup::Populate( int n, const wxString choices[] )
 void wxVListBoxComboPopup::Populate( const std::vector<std::string>& choices )
 {
     int n = choices.size();
@@ -885,7 +884,7 @@ wxEND_EVENT_TABLE()
 
 bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   wxWindowID id,
-                                  const wxString& value,
+                                  const std::string& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
                                   unsigned int style,
@@ -897,7 +896,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
 
 wxOwnerDrawnComboBox::wxOwnerDrawnComboBox(wxWindow *parent,
                                            wxWindowID id,
-                                           const wxString& value,
+                                           const std::string& value,
                                            const wxPoint& pos,
                                            const wxSize& size,
                                            const std::vector<std::string>& choices,
@@ -913,7 +912,7 @@ wxOwnerDrawnComboBox::wxOwnerDrawnComboBox(wxWindow *parent,
 
 bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   wxWindowID id,
-                                  const wxString& value,
+                                  const std::string& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
                                   const std::vector<std::string>& choices,
@@ -932,11 +931,11 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
 
 bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   wxWindowID id,
-                                  const wxString& value,
+                                  const std::string& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
                                   int n,
-                                  const wxString choices[],
+                                  const std::string choices[],
                                   unsigned int style,
                                   const wxValidator& validator,
                                   std::string_view name)

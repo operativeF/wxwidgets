@@ -248,7 +248,7 @@ void wxAppBase::OnInitCmdLine(wxCmdLineParser& parser)
 bool wxAppBase::OnCmdLineParsed(wxCmdLineParser& parser)
 {
 #ifdef __WXUNIVERSAL__
-    wxString themeName;
+    std::string themeName;
     if ( parser.Found(OPTION_THEME, &themeName) )
     {
         wxTheme *theme = wxTheme::Create(themeName);
@@ -265,7 +265,7 @@ bool wxAppBase::OnCmdLineParsed(wxCmdLineParser& parser)
 #endif // __WXUNIVERSAL__
 
 #if defined(__WXDFB__)
-    wxString modeDesc;
+    std::string modeDesc;
     if ( parser.Found(OPTION_MODE, &modeDesc) )
     {
         unsigned w, h, bpp;
@@ -558,8 +558,8 @@ bool wxGUIAppTraitsBase::HasStderr()
 
 #ifndef __WIN32__
 
-bool wxGUIAppTraitsBase::SafeMessageBox(const wxString& text,
-                                        const wxString& title)
+bool wxGUIAppTraitsBase::SafeMessageBox(const std::string& text,
+                                        const std::string& title)
 {
     // The modules are initialized only after a successful call to
     // wxApp::Initialize() in wxEntryStart, so it can be used as a proxy for
