@@ -132,7 +132,7 @@ public:
     wxGenericTreeItem() = default;
 
     wxGenericTreeItem( wxGenericTreeItem *parent,
-                       const wxString& text,
+                       const std::string& text,
                        int image,
                        int selImage,
                        wxTreeItemData *data );
@@ -155,7 +155,7 @@ public:
     // selected/expanded/whatever state)
     int GetCurrentImage() const;
 
-    void SetText(const wxString& text)
+    void SetText(const std::string& text)
     {
         m_text = text;
 
@@ -464,7 +464,7 @@ void wxTreeTextCtrl::EndEdit(bool discardChanges)
 
 bool wxTreeTextCtrl::AcceptChanges()
 {
-    const wxString value = GetValue();
+    const std::string value = GetValue();
 
     if ( value == m_startValue )
     {
@@ -564,7 +564,7 @@ void wxTreeTextCtrl::OnKillFocus( wxFocusEvent &event )
 // -----------------------------------------------------------------------------
 
 wxGenericTreeItem::wxGenericTreeItem(wxGenericTreeItem *parent,
-                                     const wxString& text,
+                                     const std::string& text,
                                      int image, int selImage,
                                      wxTreeItemData *data)
                  : m_text(text),
@@ -1075,7 +1075,7 @@ void wxGenericTreeCtrl::SetWindowStyleFlag(unsigned int styles)
 // functions to work with tree items
 // -----------------------------------------------------------------------------
 
-wxString wxGenericTreeCtrl::GetItemText(const wxTreeItemId& item) const
+std::string wxGenericTreeCtrl::GetItemText(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), {}, "invalid tree item" );
 
@@ -1543,12 +1543,12 @@ void wxGenericTreeCtrl::ResetFindState()
 
 // find the first item starting with the given prefix after the given item
 wxTreeItemId wxGenericTreeCtrl::FindItem(const wxTreeItemId& idParent,
-                                         const wxString& prefixOrig) const
+                                         const std::string& prefixOrig) const
 {
     // match is case insensitive as this is more convenient to the user: having
     // to press Shift-letter to go to the item starting with a capital letter
     // would be too bothersome
-    wxString prefix = prefixOrig.Lower();
+    std::string prefix = wx::utils::ToLowerCopy(prefixOrig);
 
     // determine the starting point: we shouldn't take the current item (this
     // allows to switch between two items starting with the same letter just by
@@ -1561,7 +1561,7 @@ wxTreeItemId wxGenericTreeCtrl::FindItem(const wxTreeItemId& idParent,
     }
 
     // look for the item starting with the given prefix after it
-    while ( itemid.IsOk() && !GetItemText(itemid).Lower().StartsWith(prefix) )
+    while ( itemid.IsOk() && !wx::utils::StartsWith(wx::utils::ToLowerCopy(GetItemText(itemid)), prefix) )
     {
         itemid = GetNext(itemid);
     }
@@ -1579,7 +1579,7 @@ wxTreeItemId wxGenericTreeCtrl::FindItem(const wxTreeItemId& idParent,
 
         // and try all the items (stop when we get to the one we started from)
         while ( itemid.IsOk() && itemid != idParent &&
-                    !GetItemText(itemid).Lower().StartsWith(prefix) )
+                    !wx::utils::StartsWith(wx::utils::ToLowerCopy(GetItemText(itemid)), prefix) )
         {
             itemid = GetNext(itemid);
         }
@@ -1600,7 +1600,7 @@ wxTreeItemId wxGenericTreeCtrl::FindItem(const wxTreeItemId& idParent,
 
 wxTreeItemId wxGenericTreeCtrl::DoInsertItem(const wxTreeItemId& parentId,
                                              size_t previous,
-                                             const wxString& text,
+                                             const std::string& text,
                                              int image,
                                              int selImage,
                                              wxTreeItemData *data)
@@ -1629,7 +1629,7 @@ wxTreeItemId wxGenericTreeCtrl::DoInsertItem(const wxTreeItemId& parentId,
     return item;
 }
 
-wxTreeItemId wxGenericTreeCtrl::AddRoot(const wxString& text,
+wxTreeItemId wxGenericTreeCtrl::AddRoot(const std::string& text,
                                         int image,
                                         int selImage,
                                         wxTreeItemData *data)
@@ -1666,7 +1666,7 @@ wxTreeItemId wxGenericTreeCtrl::AddRoot(const wxString& text,
 
 wxTreeItemId wxGenericTreeCtrl::DoInsertAfter(const wxTreeItemId& parentId,
                                               const wxTreeItemId& idPrevious,
-                                              const wxString& text,
+                                              const std::string& text,
                                               int image, int selImage,
                                               wxTreeItemData *data)
 {
@@ -3336,7 +3336,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                   (keyCode == '_')))
             {
                 // find the next item starting with the given prefix
-                wxChar ch = (wxChar)keyCode;
+                auto ch = char(keyCode);
                 wxTreeItemId id;
 
                 // if the same character is typed multiple times then go to the
@@ -3345,11 +3345,11 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                 // this is more useful and is how it works under Windows.
                 if ( m_findPrefix.length() == 1 && m_findPrefix[0] == ch )
                 {
-                    id = FindItem(m_current, ch);
+                    id = FindItem(m_current, std::string{ch});
                 }
                 else
                 {
-                    const wxString newPrefix(m_findPrefix + ch);
+                    const std::string newPrefix(m_findPrefix + ch);
                     id = FindItem(m_current, newPrefix);
                     if ( id.IsOk() )
                         m_findPrefix = newPrefix;
@@ -3524,7 +3524,7 @@ void wxGenericTreeCtrl::EndEditLabel([[maybe_unused]] const wxTreeItemId& item,
 }
 
 bool wxGenericTreeCtrl::OnRenameAccept(wxGenericTreeItem *item,
-                                       const wxString& value)
+                                       const std::string& value)
 {
     wxTreeEvent le(wxEVT_TREE_END_LABEL_EDIT, this, item);
     le.m_label = value;

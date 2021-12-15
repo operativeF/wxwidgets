@@ -74,7 +74,7 @@ void MDISetMenu(wxWindow *win, WXHMENU hmenuFrame, WXHMENU hmenuWindow);
 void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, WXHMENU subMenu, const std::string& windowMenuLabelTranslated);
 
 // Remove the window menu
-void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const wxString& windowMenuLabelTranslated);
+void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const std::string& windowMenuLabelTranslated);
 
 // unpack the parameters of WM_MDIACTIVATE message
 void UnpackMDIActivate(WXWPARAM wParam, WXLPARAM lParam,
@@ -1472,10 +1472,9 @@ public:
         m_mii.dwTypeData = m_buf;
     }
 
-    MenuIterator(const MenuIterator&) = delete;
-	MenuIterator& operator=(const MenuIterator&) = delete;
+	MenuIterator& operator=(MenuIterator&&) = delete;
 
-    bool GetNext(wxString& str)
+    bool GetNext(std::string& str)
     {
         // Loop until we get the label of the next menu item.
         for ( m_pos++; m_pos < m_numItems; m_pos++ )
@@ -1486,7 +1485,7 @@ public:
 
             if ( !::GetMenuItemInfoW(m_hmenu, m_pos, TRUE, &m_mii) )
             {
-                wxLogLastError(wxString::Format("GetMenuItemInfo(%d)", m_pos));
+                wxLogLastError(fmt::format("GetMenuItemInfo(%d)", m_pos));
                 continue;
             }
 
@@ -1496,7 +1495,7 @@ public:
                 continue;
             }
 
-            str = m_buf;
+            str = boost::nowide::narrow(m_buf);
             return true;
         }
 
@@ -1522,11 +1521,11 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, WXHMENU menuWin, const st
     {
         // Try to insert Window menu in front of Help, otherwise append it.
         bool inserted = false;
-        wxString buf;
+        std::string buf;
         MenuIterator it(hmenu);
         while ( it.GetNext(buf) )
         {
-            const wxString label = wxStripMenuCodes(buf, wxStrip_Menu);
+            const std::string label = wxStripMenuCodes(buf, wxStrip_Menu);
             if ( label == wxGetStockLabel(wxID_HELP, wxSTOCK_NOFLAGS) )
             {
                 inserted = true;
@@ -1549,13 +1548,13 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, WXHMENU menuWin, const st
     MDISetMenu(win, hmenu, menuWin);
 }
 
-void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const wxString& windowMenuLabelTranslated)
+void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const std::string& windowMenuLabelTranslated)
 {
     WXHMENU hmenu = (WXHMENU)hMenu;
 
     if ( hmenu )
     {
-        wxString buf;
+        std::string buf;
         MenuIterator it(hmenu);
         while ( it.GetNext(buf) )
         {

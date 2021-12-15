@@ -203,19 +203,19 @@ public:
     void SetKeyEvent(const wxKeyEvent& evt) { m_evtKey = evt; }
 
         // label (for EVT_TREE_{BEGIN|END}_LABEL_EDIT only)
-    const wxString& GetLabel() const { return m_label; }
-    void SetLabel(const wxString& label) { m_label = label; }
+    const std::string& GetLabel() const { return m_label; }
+    void SetLabel(const std::string& label) { m_label = label; }
 
         // edit cancel flag (for EVT_TREE_{BEGIN|END}_LABEL_EDIT only)
     bool IsEditCancelled() const { return m_editCancelled; }
     void SetEditCanceled(bool editCancelled) { m_editCancelled = editCancelled; }
 
         // Set the tooltip for the item (for EVT_TREE_ITEM_GETTOOLTIP events)
-    void SetToolTip(const wxString& toolTip) { m_label = toolTip; }
-    wxString GetToolTip() const { return m_label; }
+    void SetToolTip(const std::string& toolTip) { m_label = toolTip; }
+    std::string GetToolTip() const { return m_label; }
 
 private:
-    wxString      m_label;
+    std::string      m_label;
 
     // not all of the members are used (or initialized) for all events
     wxKeyEvent    m_evtKey;

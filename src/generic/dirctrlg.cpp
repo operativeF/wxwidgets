@@ -495,9 +495,9 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
     if ((event.GetLabel().empty()) ||
         (event.GetLabel() == ".") ||
         (event.GetLabel() == "..") ||
-        (event.GetLabel().Find(wxT('/')) != wxNOT_FOUND) ||
-        (event.GetLabel().Find(wxT('\\')) != wxNOT_FOUND) ||
-        (event.GetLabel().Find(wxT('|')) != wxNOT_FOUND))
+        (event.GetLabel().find('/') != std::string::npos) ||
+        (event.GetLabel().find('\\') != std::string::npos) ||
+        (event.GetLabel().find('|') != std::string::npos))
     {
         wxMessageDialog dialog(this, _("Illegal directory name.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
         dialog.ShowModal();

@@ -914,7 +914,7 @@ bool wxTreeCtrl::IsHiddenRoot(const wxTreeItemId& item) const
     return HITEM(item) == TVI_ROOT && HasFlag(wxTR_HIDE_ROOT);
 }
 
-wxString wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
+std::string wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), {}, "invalid tree item" );
 
@@ -929,7 +929,7 @@ wxString wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
         buf[0] = wxT('\0');
     }
 
-    return {buf};
+    return boost::nowide::narrow(buf);
 }
 
 void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const std::string& text)
@@ -1439,7 +1439,7 @@ size_t wxTreeCtrl::GetSelections(wxArrayTreeItemIds& selections) const
 
 wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
                                        const wxTreeItemId& hInsertAfter,
-                                       const wxString& text,
+                                       const std::string& text,
                                        int image, int selectedImage,
                                        wxTreeItemData *data)
 {
@@ -1461,8 +1461,9 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
     WXUINT mask = 0;
     if ( !text.empty() )
     {
+        boost::nowide::wstackstring stackText{text.c_str()};
         mask |= TVIF_TEXT;
-        tvIns.item.pszText = wxMSW_CONV_LPTSTR(text);
+        tvIns.item.pszText = stackText.get();
     }
     else
     {
@@ -1525,7 +1526,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
     return {id};
 }
 
-wxTreeItemId wxTreeCtrl::AddRoot(const wxString& text,
+wxTreeItemId wxTreeCtrl::AddRoot(const std::string& text,
                                  int image, int selectedImage,
                                  wxTreeItemData *data)
 {
@@ -1548,7 +1549,7 @@ wxTreeItemId wxTreeCtrl::AddRoot(const wxString& text,
 
 wxTreeItemId wxTreeCtrl::DoInsertItem(const wxTreeItemId& parent,
                                       size_t index,
-                                      const wxString& text,
+                                      const std::string& text,
                                       int image, int selectedImage,
                                       wxTreeItemData *data)
 {
@@ -3278,7 +3279,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 // the event handler would change the text controls contents
                 m_idEdited =
                 event.m_item = info->item.hItem;
-                event.m_label = info->item.pszText;
+                event.m_label = boost::nowide::narrow(info->item.pszText);
                 event.m_editCancelled = false;
             }
             break;
@@ -3308,7 +3309,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 NMTVDISPINFO *info = (NMTVDISPINFO *)lParam;
 
                 event.m_item = info->item.hItem;
-                event.m_label = info->item.pszText;
+                event.m_label = boost::nowide::narrow(info->item.pszText);
                 event.m_editCancelled = info->item.pszText == nullptr;
                 break;
             }

@@ -80,7 +80,7 @@ public:
     void SetImageList(wxImageList *imageList) override;
     void SetStateImageList(wxImageList *imageList) override;
 
-    wxString GetItemText(const wxTreeItemId& item) const override;
+    std::string GetItemText(const wxTreeItemId& item) const override;
     int GetItemImage(const wxTreeItemId& item,
                      wxTreeItemIcon which = wxTreeItemIcon_Normal) const override;
     wxTreeItemData *GetItemData(const wxTreeItemId& item) const override;
@@ -144,7 +144,7 @@ public:
     // operations
     // ----------
 
-    wxTreeItemId AddRoot(const wxString& text,
+    wxTreeItemId AddRoot(const std::string& text,
                          int image = -1, int selectedImage = -1,
                          wxTreeItemData *data = nullptr) override;
 
@@ -281,7 +281,7 @@ protected:
     wxTimer             *m_renameTimer;
 
     // incremental search data
-    wxString             m_findPrefix;
+    std::string             m_findPrefix;
     wxTimer             *m_findTimer;
     // This flag is set to 0 if the bell is disabled, 1 if it is enabled and -1
     // if it is globally enabled but has been temporarily disabled because we
@@ -312,13 +312,13 @@ protected:
 
     wxTreeItemId DoInsertItem(const wxTreeItemId& parent,
                                       size_t previous,
-                                      const wxString& text,
+                                      const std::string& text,
                                       int image,
                                       int selectedImage,
                                       wxTreeItemData *data) override;
     wxTreeItemId DoInsertAfter(const wxTreeItemId& parent,
                                        const wxTreeItemId& idPrevious,
-                                       const wxString& text,
+                                       const std::string& text,
                                        int image = -1, int selImage = -1,
                                        wxTreeItemData *data = nullptr) override;
     wxTreeItemId DoTreeHitTest(const wxPoint& point, unsigned int& flags) const override;
@@ -327,7 +327,7 @@ protected:
     void ResetTextControl();
 
     // find the first item starting with the given prefix after the given item
-    wxTreeItemId FindItem(const wxTreeItemId& id, const wxString& prefix) const;
+    wxTreeItemId FindItem(const wxTreeItemId& id, const std::string& prefix) const;
 
     bool HasButtons() const { return HasFlag(wxTR_HAS_BUTTONS); }
 
@@ -349,7 +349,7 @@ protected:
     void RefreshSelectedUnder(wxGenericTreeItem *item);
 
     void OnRenameTimer();
-    bool OnRenameAccept(wxGenericTreeItem *item, const wxString& value);
+    bool OnRenameAccept(wxGenericTreeItem *item, const std::string& value);
     void OnRenameCancelled(wxGenericTreeItem *item);
 
     void FillArray(wxGenericTreeItem*, wxArrayTreeItemIds&) const;

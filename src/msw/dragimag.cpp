@@ -204,7 +204,7 @@ bool wxDragImage::Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id)
     if ( !m_hImageList )
     {
         // fall back on just the item text if there is no image
-        return Create(treeCtrl.GetItemText(id).ToStdString());
+        return Create(treeCtrl.GetItemText(id));
     }
 
     return true;

@@ -118,7 +118,7 @@ public:
     void SetImageList(wxImageList *imageList) override;
     void SetStateImageList(wxImageList *imageList) override;
 
-    wxString GetItemText(const wxTreeItemId& item) const override;
+    std::string GetItemText(const wxTreeItemId& item) const override;
     int GetItemImage(const wxTreeItemId& item,
                         wxTreeItemIcon which = wxTreeItemIcon_Normal) const override;
     wxTreeItemData *GetItemData(const wxTreeItemId& item) const override;
@@ -181,7 +181,7 @@ public:
     // operations
     // ----------
 
-    wxTreeItemId AddRoot(const wxString& text,
+    wxTreeItemId AddRoot(const std::string& text,
                          int image = -1, int selectedImage = -1,
                          wxTreeItemData *data = nullptr) override;
 
@@ -266,12 +266,12 @@ protected:
 
     wxTreeItemId DoInsertItem(const wxTreeItemId& parent,
                                       size_t pos,
-                                      const wxString& text,
+                                      const std::string& text,
                                       int image, int selectedImage,
                                       wxTreeItemData *data) override;
     wxTreeItemId DoInsertAfter(const wxTreeItemId& parent,
                                        const wxTreeItemId& idPrevious,
-                                       const wxString& text,
+                                       const std::string& text,
                                        int image = -1, int selImage = -1,
                                        wxTreeItemData *data = nullptr) override;
     wxTreeItemId DoTreeHitTest(const wxPoint& point, unsigned int& flags) const override;
