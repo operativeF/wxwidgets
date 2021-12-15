@@ -18,6 +18,8 @@
 #include "wx/private/fileback.h"
 #include "wx/utils.h"
 
+import Utils.Chars;
+
 // ----------------------------------------------------------------------------
 // wxFSFile
 // ----------------------------------------------------------------------------
@@ -201,7 +203,7 @@ std::string wxFileSystemHandler::GetRightLocation(const std::string& location)
         // C: on Windows
         if (i == 1)
             continue;
-        if (i >= 2 && wxIsalpha(location[i-1]) && location[i-2] == '/')
+        if (i >= 2 && wx::utils::isAlpha(location[i-1]) && location[i-2] == '/')
             continue;
 
         // Could be the protocol

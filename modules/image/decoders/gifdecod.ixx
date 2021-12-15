@@ -172,7 +172,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage* image) const
 
     // Store the original value of the transparency option, before it is reset
     // by Create().
-    const wxString&
+    const std::string&
         transparency = image->GetOption(wxIMAGE_OPTION_GIF_TRANSPARENCY);
 
     // create the image

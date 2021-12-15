@@ -52,6 +52,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+import Utils.Chars;
+
 import <algorithm>;
 import <array>;
 import <filesystem>;
@@ -213,7 +215,7 @@ wxIsAbsolutePath (const std::string& filename)
 #if defined(WX_WINDOWS)
         // MSDOS like
         if (filename[0] == '\\' ||
-            (filename.size() > 1 && (wxIsalpha (filename[0]) && filename[1] == ':')))
+            (filename.size() > 1 && (wx::utils::isAlpha(filename[0]) && filename[1] == ':')))
             return true;
 #endif
     }
@@ -271,7 +273,7 @@ wxPathOnly (wxChar *path)
 
 #if defined(WX_WINDOWS)
         // Try Drive specifier
-        if (wxIsalpha (buf[0]) && buf[1] == ':')
+        if (wx::utils::isAlpha(buf[0]) && buf[1] == ':')
         {
             // A:junk --> A:. (since A:.\junk Not A:\junk)
             buf[2] = '.';
@@ -323,7 +325,7 @@ std::string wxPathOnly (const std::string& path)
 
 #if defined(WX_WINDOWS)
         // Try Drive specifier
-        if (wxIsalpha (buf[0]) && buf[1] == ':')
+        if (wx::utils::isAlpha(buf[0]) && buf[1] == ':')
         {
             // A:junk --> A:. (since A:.\junk Not A:\junk)
             buf[2] = '.';

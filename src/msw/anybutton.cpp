@@ -44,43 +44,6 @@ using namespace wxMSWImpl;
 using msw::utils::unique_brush;
 
 #if wxUSE_UXTHEME
-    // provide the necessary declarations ourselves if they're missing from
-    // headers
-    #ifndef BCM_SETIMAGELIST
-        #define BCM_SETIMAGELIST    0x1602
-        #define BCM_SETTEXTMARGIN   0x1604
-
-        enum
-        {
-            BUTTON_IMAGELIST_ALIGN_LEFT,
-            BUTTON_IMAGELIST_ALIGN_RIGHT,
-            BUTTON_IMAGELIST_ALIGN_TOP,
-            BUTTON_IMAGELIST_ALIGN_BOTTOM
-        };
-
-        struct BUTTON_IMAGELIST
-        {
-            HIMAGELIST himl;
-            RECT margin;
-            WXUINT uAlign;
-        };
-    #endif
-#endif // wxUSE_UXTHEME
-
-// BCM_GETIDEALSIZE is defined since XP
-#ifndef BCM_GETIDEALSIZE
-    #define BCM_GETIDEALSIZE    0x1601
-#endif // BCM_GETIDEALSIZE
-
-#ifndef ODS_NOACCEL
-    #define ODS_NOACCEL         0x0100
-#endif
-
-#ifndef ODS_NOFOCUSRECT
-    #define ODS_NOFOCUSRECT     0x0200
-#endif
-
-#if wxUSE_UXTHEME
 extern wxWindowMSW *wxWindowBeingErased; // From src/msw/window.cpp
 #endif // wxUSE_UXTHEME
 
@@ -109,8 +72,7 @@ public:
         }
     }
 
-    wxODButtonImageData(const wxODButtonImageData&) = delete;
-	wxODButtonImageData& operator=(const wxODButtonImageData&) = delete;
+	wxODButtonImageData& operator=(wxODButtonImageData&&) = delete;
 
     wxBitmap GetBitmap(wxAnyButton::State which) const override
     {

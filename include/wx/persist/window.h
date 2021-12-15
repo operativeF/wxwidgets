@@ -55,8 +55,7 @@ private:
         }
     }
 
-    wxPersistentWindowBase(const wxPersistentWindowBase&) = delete;
-	wxPersistentWindowBase& operator=(const wxPersistentWindowBase&) = delete;
+	wxPersistentWindowBase& operator=(wxPersistentWindowBase&&) = delete;
 };
 
 template <class T>

@@ -20,9 +20,9 @@
 // string constants used by wxPersistentBookCtrl
 // ----------------------------------------------------------------------------
 
-#define wxPERSIST_BOOK_KIND wxASCII_STR("Book")
+inline constexpr char wxPERSIST_BOOK_KIND[] = "Book";
 
-#define wxPERSIST_BOOK_SELECTION wxASCII_STR("Selection")
+inline constexpr char wxPERSIST_BOOK_SELECTION[] "Selection";
 
 // ----------------------------------------------------------------------------
 // wxPersistentBookCtrl: supports saving/restoring book control selection
@@ -57,7 +57,7 @@ public:
         return false;
     }
 
-    wxString GetKind() const override { return wxPERSIST_BOOK_KIND; }
+    std::string GetKind() const override { return wxPERSIST_BOOK_KIND; }
 };
 
 inline wxPersistentObject *wxCreatePersistentObject(wxBookCtrlBase *book)

@@ -31,13 +31,13 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
 
         if ( info.HasVersion() )
         {
-            msg += fmt::format("\n{}", info.GetLongVersion().ToStdString());
+            msg += fmt::format("\n{}", info.GetLongVersion());
         }
 
         msg += "\n\n";
 
         if ( info.HasCopyright() )
-            msg += fmt::format("{}\n", info.GetCopyrightToDisplay().ToStdString());
+            msg += fmt::format("{}\n", info.GetCopyrightToDisplay());
 
         // add everything remaining
         msg += info.GetDescriptionAndCredits();

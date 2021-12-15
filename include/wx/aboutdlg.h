@@ -15,13 +15,13 @@
 #include "wx/app.h"
 #include "wx/icon.h"
 
+import <string>;
 import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxAboutDialogInfo: information shown by the standard "About" dialog
 // ----------------------------------------------------------------------------
 
-// TODO: Can't convert into std::vector<wxString> until std::fmt
 class wxAboutDialogInfo
 {
 public:
@@ -43,28 +43,28 @@ public:
     //
     // generic and gtk native: use short version only, as a suffix to the
     // program name msw and osx native: use long version
-    void SetVersion(const wxString& version,
-                    const wxString& longVersion = {});
+    void SetVersion(const std::string& version,
+                    const std::string& longVersion = {});
 
     bool HasVersion() const { return !m_version.empty(); }
-    const wxString& GetVersion() const { return m_version; }
-    const wxString& GetLongVersion() const { return m_longVersion; }
+    const std::string& GetVersion() const { return m_version; }
+    const std::string& GetLongVersion() const { return m_longVersion; }
 
     // brief, but possibly multiline, description of the program
-    void SetDescription(const wxString& desc) { m_description = desc; }
+    void SetDescription(const std::string& desc) { m_description = desc; }
     bool HasDescription() const { return !m_description.empty(); }
-    const wxString& GetDescription() const { return m_description; }
+    const std::string& GetDescription() const { return m_description; }
 
     // short string containing the program copyright information
-    void SetCopyright(const wxString& copyright) { m_copyright = copyright; }
+    void SetCopyright(const std::string& copyright) { m_copyright = copyright; }
     bool HasCopyright() const { return !m_copyright.empty(); }
-    const wxString& GetCopyright() const { return m_copyright; }
+    const std::string& GetCopyright() const { return m_copyright; }
 
     // long, multiline string containing the text of the program licence
-    void SetLicence(const wxString& licence) { m_licence = licence; }
-    void SetLicense(const wxString& licence) { m_licence = licence; }
+    void SetLicence(const std::string& licence) { m_licence = licence; }
+    void SetLicense(const std::string& licence) { m_licence = licence; }
     bool HasLicence() const { return !m_licence.empty(); }
-    const wxString& GetLicence() const { return m_licence; }
+    const std::string& GetLicence() const { return m_licence; }
 
     // icon to be shown in the dialog, defaults to the main frame icon
     void SetIcon(const wxIcon& icon) { m_icon = icon; }
@@ -73,7 +73,7 @@ public:
 
     // web site for the program and its description (defaults to URL itself if
     // empty)
-    void SetWebSite(const wxString& url, const wxString& desc = {})
+    void SetWebSite(const std::string& url, const std::string& desc = {})
     {
         m_url = url;
         m_urlDesc = desc.empty() ? url : desc;
@@ -81,47 +81,47 @@ public:
 
     bool HasWebSite() const { return !m_url.empty(); }
 
-    const wxString& GetWebSiteURL() const { return m_url; }
-    const wxString& GetWebSiteDescription() const { return m_urlDesc; }
+    const std::string& GetWebSiteURL() const { return m_url; }
+    const std::string& GetWebSiteDescription() const { return m_urlDesc; }
 
     // accessors for the arrays
     // ------------------------
 
     // the list of developers of the program
-    void SetDevelopers(const std::vector<wxString>& developers)
+    void SetDevelopers(const std::vector<std::string>& developers)
         { m_developers = developers; }
-    void AddDeveloper(const wxString& developer)
+    void AddDeveloper(const std::string& developer)
         { m_developers.push_back(developer); }
 
     bool HasDevelopers() const { return !m_developers.empty(); }
-    const std::vector<wxString>& GetDevelopers() const { return m_developers; }
+    const std::vector<std::string>& GetDevelopers() const { return m_developers; }
 
     // the list of documentation writers
-    void SetDocWriters(const std::vector<wxString>& docwriters)
+    void SetDocWriters(const std::vector<std::string>& docwriters)
         { m_docwriters = docwriters; }
-    void AddDocWriter(const wxString& docwriter)
+    void AddDocWriter(const std::string& docwriter)
         { m_docwriters.push_back(docwriter); }
 
     bool HasDocWriters() const { return !m_docwriters.empty(); }
-    const std::vector<wxString>& GetDocWriters() const { return m_docwriters; }
+    const std::vector<std::string>& GetDocWriters() const { return m_docwriters; }
 
     // the list of artists for the program art
-    void SetArtists(const std::vector<wxString>& artists)
+    void SetArtists(const std::vector<std::string>& artists)
         { m_artists = artists; }
-    void AddArtist(const wxString& artist)
+    void AddArtist(const std::string& artist)
         { m_artists.push_back(artist); }
 
     bool HasArtists() const { return !m_artists.empty(); }
-    const std::vector<wxString>& GetArtists() const { return m_artists; }
+    const std::vector<std::string>& GetArtists() const { return m_artists; }
 
     // the list of translators
-    void SetTranslators(const std::vector<wxString>& translators)
+    void SetTranslators(const std::vector<std::string>& translators)
         { m_translators = translators; }
-    void AddTranslator(const wxString& translator)
+    void AddTranslator(const std::string& translator)
         { m_translators.push_back(translator); }
 
     bool HasTranslators() const { return !m_translators.empty(); }
-    const std::vector<wxString>& GetTranslators() const { return m_translators; }
+    const std::vector<std::string>& GetTranslators() const { return m_translators; }
 
 
     // implementation only
@@ -135,29 +135,29 @@ public:
 
     // get the description and credits (i.e. all of developers, doc writers,
     // artists and translators) as a one long multiline string
-    wxString GetDescriptionAndCredits() const;
+    std::string GetDescriptionAndCredits() const;
 
     // returns the copyright with the (C) string substituted by the Unicode
     // character U+00A9
-    wxString GetCopyrightToDisplay() const;
+    std::string GetCopyrightToDisplay() const;
 
 private:
+    std::vector<std::string> m_developers;
+    std::vector<std::string> m_docwriters;
+    std::vector<std::string> m_artists;
+    std::vector<std::string> m_translators;
+
     std::string m_name;
-    wxString m_version,
-             m_longVersion,
-             m_description,
-             m_copyright,
-             m_licence;
+    std::string m_version;
+    std::string m_longVersion;
+    std::string m_description;
+    std::string m_copyright;
+    std::string m_licence;
+
+    std::string m_url;
+    std::string m_urlDesc;
 
     wxIcon m_icon;
-
-    wxString m_url,
-             m_urlDesc;
-
-    std::vector<wxString> m_developers,
-                  m_docwriters,
-                  m_artists,
-                  m_translators;
 };
 
 // functions to show the about dialog box

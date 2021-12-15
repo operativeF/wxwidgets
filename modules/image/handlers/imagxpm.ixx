@@ -20,6 +20,8 @@ module;
 export module WX.Image.XPM;
 
 import WX.Image.Base;
+import Utils.Chars;
+import Utils.Strings;
 
 #if wxUSE_XPM
 
@@ -31,34 +33,31 @@ namespace
 //
 // All invalid characters are simply replaced by underscores and underscore is
 // also prepended in the beginning if the initial character is not alphabetic.
-void
-MakeValidCIdent(wxString* str)
+void MakeValidCIdent(std::string* str)
 {
-    static constexpr wxChar chUnderscore = wxT('_');
-
-    for ( wxString::iterator it = str->begin(); it != str->end(); ++it )
+    for ( auto it = str->begin(); it != str->end(); ++it )
     {
-        const wxChar ch = *it;
-        if ( wxIsdigit(ch) )
+        const char ch = *it;
+        if ( wx::utils::isDigit(ch) )
         {
             if ( it == str->begin() )
             {
                 // Identifiers can't start with a digit.
-                str->insert(0, chUnderscore); // prepend underscore
+                str->insert(0, "_"); // prepend underscore
                 it = str->begin(); // restart as string changed
                 continue;
             }
         }
-        else if ( !wxIsalpha(ch) && ch != chUnderscore )
+        else if ( !wx::utils::isAlpha(ch) && ch != '_' )
         {
             // Not a valid character in C identifiers.
-            *it = chUnderscore;
+            *it = '_';
         }
     }
 
     // Double underscores are not allowed in normal C identifiers and are
     // useless anyhow.
-    str->Replace("__", "_");
+    wx::utils::ReplaceAll(*str, "__", "_");
 }
 
 } // anonymous namespace
@@ -125,19 +124,19 @@ bool wxXPMHandler::SaveFile(wxImage * image,
         chars_per_pixel++;
 
     // 2. write the header:
-    wxString sName;
+    std::string sName;
     if ( image->HasOption(wxIMAGE_OPTION_FILENAME) )
     {
         sName = wxFileName(image->GetOption(wxIMAGE_OPTION_FILENAME)).GetName();
         MakeValidCIdent(&sName);
-        sName << "_xpm";
+        sName += "_xpm";
     }
 
     if ( !sName.empty() )
-        sName = wxString("/* XPM */\nstatic const char *") + sName;
+        sName = fmt::format("/* XPM */\nstatic const char* {}", sName);
     else
         sName = "/* XPM */\nstatic const char *xpm_data";
-    stream.Write( (const char*) sName.ToAscii(), sName.Len() );
+    stream.Write( sName.data(), sName.length() );
 
     char tmpbuf[200];
     // VS: 200b is safe upper bound for anything produced by sprintf below

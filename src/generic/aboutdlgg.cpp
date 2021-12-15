@@ -20,46 +20,49 @@
 #include "wx/hyperlink.h"
 #include "wx/collpane.h"
 
+#include <fmt/core.h>
+#include <fmt/format.h>
+
+import <span>;
+import <string>;
+
 // ============================================================================
 // implementation
 // ============================================================================
 
 // helper function: returns all array elements in a single comma-separated and
 // newline-terminated string
-static wxString AllAsString(const std::vector<wxString>& a)
+namespace
 {
-    wxString s;
-    const size_t count = a.size();
-    s.reserve(20*count);
-    for ( size_t n = 0; n < count; n++ )
-    {
-        s << a[n] << (n == count - 1 ? "\n" : ", ");
-    }
 
-    return s;
+std::string AllAsString(std::span<const std::string> allStrs)
+{
+    return fmt::format("{}", fmt::join(allStrs, ", ")) + "\n";
 }
+
+} // namespace anonymous
 
 // ----------------------------------------------------------------------------
 // wxAboutDialogInfo
 // ----------------------------------------------------------------------------
 
-wxString wxAboutDialogInfo::GetDescriptionAndCredits() const
+std::string wxAboutDialogInfo::GetDescriptionAndCredits() const
 {
-    wxString s = GetDescription();
+    std::string s = GetDescription();
     if ( !s.empty() )
-        s << wxT('\n');
+        s += '\n';
 
     if ( HasDevelopers() )
-        s << wxT('\n') << _("Developed by ") << AllAsString(GetDevelopers());
+        s += fmt::format("\n{}{}", _("Developed by ").ToStdString(), AllAsString(GetDevelopers()));
 
     if ( HasDocWriters() )
-        s << wxT('\n') << _("Documentation by ") << AllAsString(GetDocWriters());
+        s += fmt::format("\n{}{}", _("Documentation by ").ToStdString(), AllAsString(GetDocWriters()));
 
     if ( HasArtists() )
-        s << wxT('\n') << _("Graphics art by ") << AllAsString(GetArtists());
+        s += fmt::format("\n{}{}", _("Graphics art by ").ToStdString(), AllAsString(GetArtists()));
 
     if ( HasTranslators() )
-        s << wxT('\n') << _("Translations by ") << AllAsString(GetTranslators());
+        s += fmt::format("\n{}{}", _("Translations by ").ToStdString(), AllAsString(GetTranslators()));
 
     return s;
 }
@@ -78,19 +81,21 @@ wxIcon wxAboutDialogInfo::GetIcon() const
     return icon;
 }
 
-wxString wxAboutDialogInfo::GetCopyrightToDisplay() const
+std::string wxAboutDialogInfo::GetCopyrightToDisplay() const
 {
-    wxString ret = m_copyright;
+    std::string ret = m_copyright;
 
-    const wxString copyrightSign = wxString::FromUTF8("\xc2\xa9");
-    ret.Replace("(c)", copyrightSign);
-    ret.Replace("(C)", copyrightSign);
+    const std::string copyrightSign = "©";
+
+    // FIXME: Make a range compatible ReplaceAll
+    wx::utils::ReplaceAll(ret, "(c)", copyrightSign);
+    wx::utils::ReplaceAll(ret, "(C)", copyrightSign);
 
     return ret;
 }
 
-void wxAboutDialogInfo::SetVersion(const wxString& version,
-                                   const wxString& longVersion)
+void wxAboutDialogInfo::SetVersion(const std::string& version,
+                                   const std::string& longVersion)
 {
     if ( version.empty() )
     {
@@ -118,15 +123,15 @@ void wxAboutDialogInfo::SetVersion(const wxString& version,
 
 bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* parent)
 {
-    // FIXME: Use std::string
-    if ( !wxDialog::Create(parent, wxID_ANY, wxString::Format(_("About %s"), info.GetName()).ToStdString(),
+    // FIXME: Removed translation for fmt lib
+    if ( !wxDialog::Create(parent, wxID_ANY, fmt::format("About %s", info.GetName()),
                            wxDefaultPosition, wxDefaultSize, wxRESIZE_BORDER|wxDEFAULT_DIALOG_STYLE) )
         return false;
 
     m_sizerText = new wxBoxSizer(wxVERTICAL);
     std::string nameAndVersion = info.GetName();
     if ( info.HasVersion() )
-        nameAndVersion += fmt::format(" {}", info.GetVersion().ToStdString());
+        nameAndVersion += fmt::format(" {}", info.GetVersion());
     wxStaticText *label = new wxStaticText(this, wxID_ANY, nameAndVersion);
     wxFont fontBig(*wxNORMAL_FONT);
     fontBig.SetFractionalPointSize(fontBig.GetFractionalPointSize() + 2.0);
@@ -152,10 +157,10 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
 
 #if wxUSE_COLLPANE
     if ( info.HasLicence() )
-        AddCollapsiblePane(_("License"), info.GetLicence());
+        AddCollapsiblePane(_("License").ToStdString(), info.GetLicence());
 
     if ( info.HasDevelopers() )
-        AddCollapsiblePane(_("Developers"),
+        AddCollapsiblePane(_("Developers").ToStdString(),
                            AllAsString(info.GetDevelopers()));
 
     if ( info.HasDocWriters() )
@@ -163,11 +168,11 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
                            AllAsString(info.GetDocWriters()));
 
     if ( info.HasArtists() )
-        AddCollapsiblePane(_("Artists"),
+        AddCollapsiblePane(_("Artists").ToStdString(),
                            AllAsString(info.GetArtists()));
 
     if ( info.HasTranslators() )
-        AddCollapsiblePane(_("Translators"),
+        AddCollapsiblePane(_("Translators").ToStdString(),
                            AllAsString(info.GetTranslators()));
 #endif // wxUSE_COLLPANE
 

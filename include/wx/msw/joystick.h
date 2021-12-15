@@ -15,6 +15,8 @@
 
 #include <chrono>
 
+import <string>;
+
 using namespace std::chrono_literals;
 
 class wxJoystickThread;
@@ -43,7 +45,7 @@ public:
   bool IsOk() const; // Checks that the joystick is functioning
   int GetManufacturerId() const ;
   int GetProductId() const ;
-  wxString GetProductName() const ;
+  std::string GetProductName() const ;
   int GetXMin() const;
   int GetYMin() const;
   int GetZMin() const;

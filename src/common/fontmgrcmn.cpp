@@ -36,7 +36,6 @@ class wxFontBundleHash : public wxFontBundleHashBase
 } // namespace anonymous
 
 wxFontFaceBase::wxFontFaceBase()
-    : m_refCnt(0)
 {
     m_instances = new wxFontInstanceList;
     m_instances->DeleteContents(true);
@@ -175,9 +174,9 @@ void wxFontsManagerBase::CleanUp()
     wxDELETE(ms_instance);
 }
 
-wxFontBundle *wxFontsManagerBase::GetBundle(const wxString& name) const
+wxFontBundle *wxFontsManagerBase::GetBundle(const std::string& name) const
 {
-    return (*m_hash)[name.Lower()];
+    return (*m_hash)[wx::utils::ToLowerCopy(name)];
 }
 
 wxFontBundle *
@@ -185,7 +184,7 @@ wxFontsManagerBase::GetBundleForFont(const wxFontMgrFontRefData& font) const
 {
     wxFontBundle *bundle = NULL;
 
-    wxString facename = font.GetFaceName();
+    std::string facename = font.GetFaceName();
     if ( !facename.empty() )
         bundle = GetBundle(facename);
 
@@ -223,7 +222,7 @@ wxFontMgrFontRefData::wxFontMgrFontRefData(int size,
                                            wxFontStyle style,
                                            int weight,
                                            bool underlined,
-                                           const wxString& faceName,
+                                           const std::string& faceName,
                                            wxFontEncoding encoding)
 {
     if ( family == wxFontFamily::Default )
@@ -298,7 +297,7 @@ void wxFontMgrFontRefData::SetNumericWeight(int weight)
     m_fontValid = false;
 }
 
-void wxFontMgrFontRefData::SetFaceName(const wxString& faceName)
+void wxFontMgrFontRefData::SetFaceName(const std::string& faceName)
 {
     m_info.faceName = faceName;
     m_fontValid = false;

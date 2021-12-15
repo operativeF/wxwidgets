@@ -81,7 +81,7 @@ protected:
     virtual wxFontInstance *CreateFontInstance(float ptSize, bool aa) = 0;
 
 protected:
-    unsigned m_refCnt;
+    unsigned m_refCnt{0};
     wxFontInstanceList *m_instances;
 };
 
@@ -96,7 +96,7 @@ public:
     virtual ~wxFontBundleBase();
 
     /// Returns name of the bundle
-    virtual wxString GetName() const = 0;
+    virtual std::string GetName() const = 0;
 
     /// Returns true if the font is fixed-width
     virtual bool IsFixed() const = 0;
@@ -165,7 +165,7 @@ public:
 
         The returned object is owned by wxFontsManager, you must not delete it.
      */
-    wxFontBundle *GetBundle(const wxString& name) const;
+    wxFontBundle *GetBundle(const std::string& name) const;
 
     /**
         Returns object representing font bundle that can be used to render
@@ -179,7 +179,7 @@ public:
     void AddBundle(wxFontBundle *bundle);
 
     /// Returns default facename for given wxFont family
-    virtual wxString GetDefaultFacename(wxFontFamily family) const = 0;
+    virtual std::string GetDefaultFacename(wxFontFamily family) const = 0;
 
 private:
     wxFontBundleHash *m_hash;
@@ -206,7 +206,7 @@ public:
                   wxFontStyle style = wxFontStyle::Normal,
                   int weight = wxFONTWEIGHT_NORMAL,
                   bool underlined = false,
-                  const wxString& faceName = {},
+                  const std::string& faceName = {},
                   wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     wxFontMgrFontRefData(const wxFontMgrFontRefData& data);
     ~wxFontMgrFontRefData();
@@ -219,7 +219,7 @@ public:
     const wxNativeFontInfo *GetNativeFontInfo() const { return &m_info; }
 
     double GetFractionalPointSize() const { return m_info.pointSize; }
-    wxString GetFaceName() const { return m_info.faceName; }
+    std::string GetFaceName() const { return m_info.faceName; }
     wxFontFamily GetFamily() const { return m_info.family; }
     wxFontStyle GetStyle() const { return m_info.style; }
     int GetNumericWeight() const { return m_info.weight; }
@@ -230,7 +230,7 @@ public:
     void SetFamily(wxFontFamily family);
     void SetStyle(wxFontStyle style);
     void SetNumericWeight(int weight);
-    void SetFaceName(const wxString& faceName);
+    void SetFaceName(const std::string& faceName);
     void SetUnderlined(bool underlined);
     void SetEncoding(wxFontEncoding encoding);
 

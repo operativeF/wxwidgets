@@ -14,7 +14,6 @@
 
 #include "wx/joystick.h"
 
-#include "wx/string.h"
 #include "wx/window.h"
 #include "wx/msw/registry.h"
 
@@ -22,6 +21,8 @@
 #include <regstr.h>
 
 #include <chrono>
+
+import <string>;
 
 enum {
     wxJS_AXIS_X = 0,
@@ -413,9 +414,9 @@ int wxJoystick::GetProductId() const
         return joyCaps.wPid;
 }
 
-wxString wxJoystick::GetProductName() const
+std::string wxJoystick::GetProductName() const
 {
-    wxString str;
+    std::string str;
 #ifndef __WINE__
     JOYCAPS joyCaps;
     if (joyGetDevCaps(m_joystick, &joyCaps, sizeof(joyCaps)) != JOYERR_NOERROR)

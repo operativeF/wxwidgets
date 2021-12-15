@@ -117,8 +117,7 @@ WXHACCEL wxAcceleratorTable::GetHACCEL() const
 
 bool wxAcceleratorTable::Translate(wxWindow *window, WXMSG *wxmsg) const
 {
-    MSG *msg = (MSG *)wxmsg;
-    return IsOk() && ::TranslateAcceleratorW(GetHwndOf(window), GetHaccel(), msg);
+    return IsOk() && ::TranslateAcceleratorW(GetHwndOf(window), GetHaccel(), wxmsg);
 }
 
 #endif // wxUSE_ACCEL
