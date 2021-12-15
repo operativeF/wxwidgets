@@ -10,9 +10,9 @@
 
 #if wxUSE_BITMAPCOMBOBOX
 
-#include "wx/bmpcbox.h"
-
 #if defined(wxGENERIC_BITMAPCOMBOBOX)
+
+#include "wx/bmpcbox.h"
 
 #include "wx/log.h"
 #include "wx/odcombo.h"
@@ -43,13 +43,13 @@ wxEND_EVENT_TABLE()
 
 wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
                                   wxWindowID id,
-                                  const wxString& value,
+                                  const std::string& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
-                                  const std::vector<wxString>& choices,
+                                  const std::vector<std::string>& choices,
                                   unsigned int style,
                                   const wxValidator& validator,
-                                  const wxString& name)
+                                  const std::string& name)
     : wxOwnerDrawnComboBox(),
       wxBitmapComboBoxBase()
 {
@@ -58,13 +58,13 @@ wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
 
 bool wxBitmapComboBox::Create(wxWindow *parent,
                               wxWindowID id,
-                              const wxString& value,
+                              const std::string& value,
                               const wxPoint& pos,
                               const wxSize& size,
-                              const std::vector<wxString>& choices,
+                              const std::vector<std::string>& choices,
                               unsigned int style,
                               const wxValidator& validator,
-                              const wxString& name)
+                              const std::string& name)
 {
     if ( !wxOwnerDrawnComboBox::Create(parent, id, value,
                                        pos, size,
@@ -81,14 +81,14 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
 
 bool wxBitmapComboBox::Create(wxWindow *parent,
                               wxWindowID id,
-                              const wxString& value,
+                              const std::string& value,
                               const wxPoint& pos,
                               const wxSize& size,
                               int n,
-                              const wxString choices[],
+                              const std::string choices[],
                               unsigned int style,
                               const wxValidator& validator,
-                              const wxString& name)
+                              const std::string& name)
 {
     if ( !wxOwnerDrawnComboBox::Create(parent, id, value,
                                        pos, size, n,
@@ -108,7 +108,7 @@ wxBitmapComboBox::~wxBitmapComboBox()
     DoClear();
 }
 
-wxString wxBitmapComboBox::GetStringSelection() const
+std::string wxBitmapComboBox::GetStringSelection() const
 {
     return wxItemContainer::GetStringSelection();
 }
@@ -162,7 +162,7 @@ int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
     return index;
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap)
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap)
 {
     const int n = wxOwnerDrawnComboBox::Append(item);
     if(n != wxNOT_FOUND)
@@ -170,7 +170,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap)
     return n;
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap,
                              void *clientData)
 {
     const int n = wxOwnerDrawnComboBox::Append(item, clientData);
@@ -179,7 +179,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap,
                              wxClientData *clientData)
 {
     const int n = wxOwnerDrawnComboBox::Append(item, clientData);
@@ -188,7 +188,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item,
+int wxBitmapComboBox::Insert(const std::string& item,
                              const wxBitmap& bitmap,
                              unsigned int pos)
 {
@@ -198,7 +198,7 @@ int wxBitmapComboBox::Insert(const wxString& item,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Insert(const std::string& item, const wxBitmap& bitmap,
                              unsigned int pos, void *clientData)
 {
     const int n = wxOwnerDrawnComboBox::Insert(item, pos, clientData);
@@ -207,7 +207,7 @@ int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Insert(const std::string& item, const wxBitmap& bitmap,
                              unsigned int pos, wxClientData *clientData)
 {
     const int n = wxOwnerDrawnComboBox::Insert(item, pos, clientData);
@@ -298,7 +298,7 @@ void wxBitmapComboBox::OnDrawItem(wxDC& dc,
                                  int item,
                                  int flags) const
 {
-    wxString text;
+    std::string text;
     int imgAreaWidth = m_imgAreaWidth;
 
     if ( imgAreaWidth == 0 )

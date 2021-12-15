@@ -7,17 +7,6 @@
 // Licence:     wxWindows licence
 ////////////////////////////////////////////////////////////////////////////////
 
-// =============================================================================
-// declarations
-// =============================================================================
-
-// -----------------------------------------------------------------------------
-// headers
-// -----------------------------------------------------------------------------
-
-
-
-
 #if wxUSE_LISTCTRL
 
 #include "wx/listctrl.h"
@@ -129,7 +118,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxListEvent, wxNotifyEvent);
 // ----------------------------------------------------------------------------
 
 long
-wxListCtrlBase::AppendColumn(const wxString& heading,
+wxListCtrlBase::AppendColumn(const std::string& heading,
                              wxListColumnFormat format,
                              int width)
 {
@@ -138,13 +127,13 @@ wxListCtrlBase::AppendColumn(const wxString& heading,
 
 long
 wxListCtrlBase::InsertColumn(long col,
-                             const wxString& heading,
+                             const std::string& heading,
                              wxListColumnFormat format,
                              int width)
 {
     wxListItem item;
     item.m_mask = {ListMasks::Text, ListMasks::Format};
-    item.m_text = heading;
+    item.m_text = boost::nowide::widen(heading);
     if ( width >= 0
             || width == wxLIST_AUTOSIZE
                 || width == wxLIST_AUTOSIZE_USEHEADER )
@@ -242,7 +231,7 @@ wxItemAttr *wxListCtrlBase::OnGetItemAttr(long item) const
         : nullptr; // no attributes by default
 }
 
-wxString wxListCtrlBase::OnGetItemText([[maybe_unused]] long item, [[maybe_unused]] long col) const
+std::string wxListCtrlBase::OnGetItemText([[maybe_unused]] long item, [[maybe_unused]] long col) const
 {
     // this is a pure virtual function, in fact - which is not really pure
     // because the controls which are not virtual don't need to implement it

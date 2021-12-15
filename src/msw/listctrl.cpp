@@ -617,7 +617,7 @@ bool wxListCtrl::GetColumn(int col, wxListItem& item) const
     if ( item.m_mask & ListMasks::Text )
     {
         lvCol.mask |= LVCF_TEXT;
-        lvCol.pszText = new wxChar[513];
+        lvCol.pszText = new WCHAR[513];
         lvCol.cchTextMax = 512;
     }
 
@@ -952,10 +952,10 @@ bool wxListCtrl::SetItem(wxListItem& info)
     return true;
 }
 
-bool wxListCtrl::SetItem(long index, int col, const wxString& label, int imageId)
+bool wxListCtrl::SetItem(long index, int col, const std::string& label, int imageId)
 {
     wxListItem info;
-    info.m_text = label;
+    info.m_text = boost::nowide::widen(label);
     info.m_mask = ListMasks::Text;
     info.m_itemId = index;
     info.m_col = col;
@@ -1065,7 +1065,7 @@ bool wxListCtrl::SetItemColumnImage(long item, long column, int image)
 }
 
 // Gets the item text
-wxString wxListCtrl::GetItemText(long item, int col) const
+std::string wxListCtrl::GetItemText(long item, int col) const
 {
     wxListItem info;
 
@@ -1075,7 +1075,7 @@ wxString wxListCtrl::GetItemText(long item, int col) const
 
     if (!GetItem(info))
         return {};
-    return info.m_text;
+    return boost::nowide::narrow(info.m_text);
 }
 
 // Sets the item text
@@ -1085,7 +1085,7 @@ void wxListCtrl::SetItemText(long item, const std::string& str)
 
     info.m_mask = ListMasks::Text;
     info.m_itemId = item;
-    info.m_text = str;
+    info.m_text = boost::nowide::widen(str);
 
     SetItem(info);
 }
@@ -1708,7 +1708,7 @@ long wxListCtrl::FindItem(long start, const std::string& str, bool partial)
     if ( partial )
         findInfo.flags |= LVFI_PARTIAL;
     
-    boost::nowide::wstackstring stackStr(str.c_str());
+    boost::nowide::wstackstring stackStr{str.c_str()};
     findInfo.psz = stackStr.get();
 
     // ListView_FindItem() excludes the first item from search and to look
@@ -1910,10 +1910,10 @@ long wxListCtrl::InsertItem(const wxListItem& info)
     return ListView_InsertItem(GetHwnd(), &item);
 }
 
-long wxListCtrl::InsertItem(long index, const wxString& label)
+long wxListCtrl::InsertItem(long index, const std::string& label)
 {
     wxListItem info;
-    info.m_text = label;
+    info.m_text = boost::nowide::widen(label);
     info.m_mask = ListMasks::Text;
     info.m_itemId = index;
     return InsertItem(info);
@@ -1930,11 +1930,11 @@ long wxListCtrl::InsertItem(long index, int imageIndex)
 }
 
 // Inserts an image/string item
-long wxListCtrl::InsertItem(long index, const wxString& label, int imageIndex)
+long wxListCtrl::InsertItem(long index, const std::string& label, int imageIndex)
 {
     wxListItem info;
     info.m_image = imageIndex == -1 ? I_IMAGENONE : imageIndex;
-    info.m_text = label;
+    info.m_text = boost::nowide::widen(label);
     info.m_mask = ListMaskFlags{ListMasks::Text, ListMasks::Image};
     info.m_itemId = index;
     return InsertItem(info);
@@ -2497,7 +2497,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     if ( lItem != -1 )
                     {
                         // fill the other fields too
-                        event.m_item.m_text = GetItemText(lItem);
+                        event.m_item.m_text = boost::nowide::widen(GetItemText(lItem));
                         event.m_item.m_data = GetItemData(lItem);
                     }
                 }
@@ -2521,7 +2521,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                 eventType = wxEVT_LIST_ITEM_ACTIVATED;
                 event.m_itemIndex = iItem;
-                event.m_item.m_text = GetItemText(iItem);
+                event.m_item.m_text = boost::nowide::widen(GetItemText(iItem));
                 event.m_item.m_data = GetItemData(iItem);
                 break;
 
@@ -2728,8 +2728,9 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                     if ( lvi.mask & LVIF_TEXT )
                     {
-                        wxString text = OnGetItemText(item, lvi.iSubItem);
-                        wxStrlcpy(lvi.pszText, text.c_str(), lvi.cchTextMax);
+                        std::string text = OnGetItemText(item, lvi.iSubItem);
+                        boost::nowide::wstackstring stackText{text.c_str()};
+                        wxStrlcpy(lvi.pszText, stackText.get(), lvi.cchTextMax);
                     }
 
                     if ( lvi.mask & LVIF_IMAGE )
@@ -3498,7 +3499,7 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
         else
         {
             // pszText is not const, hence the cast
-            lvItem.pszText = wxMSW_CONV_LPTSTR(info.m_text);
+            lvItem.pszText = const_cast<wchar_t*>(info.m_text.data());
             if ( lvItem.pszText )
                 lvItem.cchTextMax = info.m_text.length();
             else
@@ -3519,7 +3520,7 @@ static void wxConvertToMSWListCol(WXHWND hwndList,
     if ( item.m_mask & ListMasks::Text )
     {
         lvCol.mask |= LVCF_TEXT;
-        lvCol.pszText = wxMSW_CONV_LPTSTR(item.m_text);
+        lvCol.pszText = const_cast<wchar_t*>(item.m_text.data());
     }
 
     if ( item.m_mask & ListMasks::Format )

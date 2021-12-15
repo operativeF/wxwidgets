@@ -31,6 +31,8 @@
 import WX.WinDef;
 import Utils.Strings;
 
+import <array>;
+
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available
 // only under Windows Vista and newer.
@@ -78,11 +80,11 @@ wxIMPLEMENT_CLASS(wxDirDialog, wxDialog);
 #if wxUSE_IFILEOPENDIALOG
 
 // helper functions for wxDirDialog::ShowIFileOpenDialog()
-bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
+bool InitIFileOpenDialog(const std::string& message, const std::string& defaultPath,
                          bool multipleSelection, bool showHidden, wxCOMPtr<IFileOpenDialog>& fileDialog);
 bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bool multipleSelection,
                                  std::vector<std::string>& paths);
-bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path);
+bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, std::string& path);
 
 #endif // #if wxUSE_IFILEOPENDIALOG
 
@@ -274,7 +276,7 @@ int wxDirDialog::ShowIFileOpenDialog(WXHWND owner)
 // ----------------------------------------------------------------------------
 
 // helper function for wxDirDialog::ShowIFileOpenDialog()
-bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
+bool InitIFileOpenDialog(const std::string& message, const std::string& defaultPath,
                          bool multipleSelection, bool showHidden,
                          wxCOMPtr<IFileOpenDialog>& fileDialog)
 {
@@ -303,7 +305,8 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
         return false;
     }
 
-    hr = dlg->SetTitle(message.wc_str());
+    boost::nowide::wstackstring stackMsg{message.c_str()};
+    hr = dlg->SetTitle(stackMsg.get());
     if ( FAILED(hr) )
     {
         // This error is not serious, let's just log it and continue even
@@ -335,7 +338,8 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
         }
 
         wxCOMPtr<IShellItem> folder;
-        hr = pfnSHCreateItemFromParsingName(defaultPath.wc_str(),
+        boost::nowide::wstackstring stackDefaultPath{defaultPath.c_str()};
+        hr = pfnSHCreateItemFromParsingName(stackDefaultPath.get(),
                                             nullptr,
                                             wxIID_PPV_ARGS(IShellItem,
                                                            &folder));
@@ -360,7 +364,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
                                  std::vector<std::string>& paths)
 {
     HRESULT hr = S_OK;
-    wxString path;
+    std::string path;
     std::vector<std::string> tempPaths;
 
     if ( multipleSelection )
@@ -405,7 +409,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             }
 
             // FIXME: provide better method of converting.
-            tempPaths.push_back(boost::nowide::narrow(path.ToStdWstring()));
+            tempPaths.push_back(path);
         }
 
     }
@@ -425,7 +429,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             return false;
         }
 
-        tempPaths.push_back(boost::nowide::narrow(path.ToStdWstring()));
+        tempPaths.push_back(path);
     }
 
     if ( tempPaths.empty() )
@@ -436,7 +440,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
 }
 
 // helper function for wxDirDialog::ShowIFileOpenDialog()
-bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path)
+bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, std::string& path)
 {
     wxCoTaskMemPtr<WCHAR> pOLEPath;
     const HRESULT hr = item->GetDisplayName(SIGDN_FILESYSPATH, &pOLEPath);
@@ -447,7 +451,8 @@ bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path)
         return false;
     }
 
-    path = pOLEPath;
+    std::wstring wPath{*pOLEPath};
+    path = boost::nowide::narrow(wPath);
 
     return true;
 }
@@ -475,9 +480,8 @@ BrowseCallbackProc(WXHWND hwnd, WXUINT uMsg, WXLPARAM lp, WXLPARAM pData)
             // "new new UI" (or would it be "NewUIEx" according to tradition?)
             {
                 // Set the status window to the currently selected path.
-                wxString strDir;
-                if ( ::SHGetPathFromIDListW((LPITEMIDLIST)lp,
-                                         wxStringBuffer(strDir, MAX_PATH)) )
+                std::array<WCHAR, MAX_PATH> wstrBuf;
+                if ( ::SHGetPathFromIDListW((LPITEMIDLIST)lp, &wstrBuf[0]) )
                 {
                     // NB: this shouldn't be necessary with the new style box
                     //     (which is resizable), but as for now it doesn't work
@@ -485,14 +489,16 @@ BrowseCallbackProc(WXHWND hwnd, WXUINT uMsg, WXLPARAM lp, WXLPARAM pData)
 
                     // need to truncate or it displays incorrectly
                     static constexpr size_t maxChars = 37;
+                    std::string strDir = boost::nowide::narrow(wstrBuf.data());
+
                     if ( strDir.length() > maxChars )
                     {
-                        strDir = strDir.Right(maxChars);
-                        strDir = wxString("...") + strDir;
+                        strDir = fmt::format("...{}", strDir.substr(maxChars));
                     }
 
+                    boost::nowide::wstackstring stackStrDir{strDir.c_str()};
                     ::SendMessageW(hwnd, BFFM_SETSTATUSTEXT,
-                                0, wxMSW_CONV_LPARAM(strDir));
+                                0, reinterpret_cast<LPARAM>(stackStrDir.get()));
                 }
             }
             break;

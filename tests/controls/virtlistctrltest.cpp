@@ -33,9 +33,9 @@ TEST_CASE("Virtual list control test.")
         }
 
     protected:
-        wxString OnGetItemText(long item, long column) const override
+        std::string OnGetItemText(long item, long column) const override
         {
-            return wxString::Format("Row %ld, col %ld", item, column);
+            return fmt::format("Row %ld, col %ld", item, column);
         }
     };
 

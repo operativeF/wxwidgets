@@ -158,7 +158,7 @@ public:
     bool SetItem(wxListItem& info);
 
     // Sets a string field at a particular column
-    bool SetItem(long index, int col, const wxString& label, int imageId = -1);
+    bool SetItem(long index, int col, const std::string& label, int imageId = -1);
 
     // Gets the item state
     ListStateFlags GetItemState(long item, ListStateFlags stateMask) const;
@@ -171,7 +171,7 @@ public:
     bool SetItemColumnImage(long item, long column, int image);
 
     // Gets the item text
-    wxString GetItemText(long item, int col = 0) const;
+    std::string GetItemText(long item, int col = 0) const;
 
     // Sets the item text
     void SetItemText(long item, const std::string& str);
@@ -307,13 +307,13 @@ public:
     long InsertItem(const wxListItem& info);
 
     // Insert a string item
-    long InsertItem(long index, const wxString& label);
+    long InsertItem(long index, const std::string& label);
 
     // Insert an image item
     long InsertItem(long index, int imageIndex);
 
     // Insert an image/string item
-    long InsertItem(long index, const wxString& label, int imageIndex);
+    long InsertItem(long index, const std::string& label, int imageIndex);
 
     // set the number of items in a virtual list control
     void SetItemCount(long count);

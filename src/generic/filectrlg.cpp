@@ -315,7 +315,7 @@ void wxFileData::SetNewName( const std::string &filePath, const std::string &fil
 
 void wxFileData::MakeItem( wxListItem &item )
 {
-    item.m_text = m_fileName;
+    item.m_text = boost::nowide::widen(m_fileName);
     item.ClearAttributes();
     if (IsExe())
         item.SetTextColour(*wxRED);
@@ -1014,7 +1014,7 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
         {
             m_list->GetItem(item);
 
-            fn.Assign(m_list->GetDir(), item.m_text);
+            fn.Assign(m_list->GetDir(), boost::nowide::narrow(item.m_text));
         }
     }
     else // user entered the value
@@ -1065,7 +1065,7 @@ std::vector<std::string> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
 
         m_list->GetItem(item);
 
-        const wxFileName fn(dir, item.m_text);
+        const wxFileName fn(dir, boost::nowide::narrow(item.m_text));
         // FIXME: We're checking this every time.
         filenames.push_back(fullPath ? fn.GetFullPath() : fn.GetFullName());
     }
@@ -1197,7 +1197,7 @@ void wxGenericFileCtrl::OnCheck( wxCommandEvent &event )
 
 void wxGenericFileCtrl::OnActivated( wxListEvent &event )
 {
-    HandleAction( event.m_item.m_text );
+    HandleAction( boost::nowide::narrow(event.m_item.m_text) );
 }
 
 void wxGenericFileCtrl::OnTextEnter( [[maybe_unused]] wxCommandEvent& event )
@@ -1233,7 +1233,7 @@ void wxGenericFileCtrl::OnSelected( wxListEvent &event )
         return;
 
     m_inSelected = true;
-    const std::string filename( event.m_item.m_text );
+    const std::string filename( boost::nowide::narrow(event.m_item.m_text) );
 
     if ( filename == wxT( ".." ) )
     {

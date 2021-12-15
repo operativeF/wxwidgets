@@ -18,6 +18,8 @@
 
 import Utils.Geometry;
 
+import <string>;
+
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown
 // in front of string items.
@@ -37,7 +39,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      int n = 0,
-                     const wxString choices[] = NULL,
+                     const std::string& choices[] = NULL,
                      unsigned int style = 0,
                      const wxValidator& validator = {},
                      const std::string& name = wxBitmapComboBoxNameStr)
@@ -55,7 +57,7 @@ public:
                      const std::string& value,
                      const wxPoint& pos,
                      const wxSize& size,
-                     const std::vector<wxString>& choices,
+                     const std::vector<std::string>& choices,
                      unsigned int style,
                      const wxValidator& validator = {},
                      const std::string& name = wxBitmapComboBoxNameStr);
@@ -66,7 +68,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 int n,
-                const wxString choices[],
+                const std::string choices[],
                 unsigned int style = 0,
                 const wxValidator& validator = {},
                 const std::string& name = wxBitmapComboBoxNameStr);
@@ -76,7 +78,7 @@ public:
                 const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 unsigned int style = 0,
                 const wxValidator& validator = {},
                 const std::string& name = wxASCII_STR(wxBitmapComboBoxNameStr));

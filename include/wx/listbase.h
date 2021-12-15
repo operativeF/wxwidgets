@@ -18,9 +18,12 @@
 #include "wx/itemattr.h"
 #include "wx/systhemectrl.h"
 
+#include <boost/nowide/convert.hpp>
+
 import Utils.Bitfield;
 import Utils.Geometry;
 
+import <string>;
 import <vector>;
 
 class wxImageList;
@@ -263,8 +266,8 @@ public:
         { m_mask |= ListMasks::State; m_state = state; m_stateMask |= state; }
     void SetStateMask(ListStateFlags stateMask)
         { m_stateMask = stateMask; }
-    void SetText(const wxString& text)
-        { m_mask |= ListMasks::Text; m_text = text; }
+    void SetText(const std::string& text)
+        { m_mask |= ListMasks::Text; m_text = boost::nowide::widen(text); }
     void SetImage(int image)
         { m_mask |= ListMasks::Image; m_image = image; }
     void SetData(long data)
@@ -288,7 +291,7 @@ public:
     long GetId() const { return m_itemId; }
     int GetColumn() const { return m_col; }
     ListStateFlags GetState() const { return m_state & m_stateMask; }
-    const wxString& GetText() const { return m_text; }
+    std::string GetText() const { return boost::nowide::narrow(m_text); }
     int GetImage() const { return m_image; }
     wxUIntPtr GetData() const { return m_data; }
 
@@ -311,7 +314,8 @@ public:
     operator long() const { return m_itemId; }
 
     // these members are public for compatibility
-    wxString        m_text;     // The label/header text
+    // FIXME: Change to std::string when UTF-8 windows is available.
+    std::wstring        m_text;     // The label/header text
 
     wxUIntPtr       m_data{0};     // App-defined data
 
@@ -377,7 +381,7 @@ public:
     // Appends a new column.
     //
     // Returns the index of the newly inserted column or -1 on error.
-    long AppendColumn(const wxString& heading,
+    long AppendColumn(const std::string& heading,
                       wxListColumnFormat format = wxListColumnFormat::Left,
                       int width = -1);
 
@@ -386,7 +390,7 @@ public:
     // Returns the index of the newly inserted column or -1 on error.
     long InsertColumn(long col, const wxListItem& info);
     long InsertColumn(long col,
-                      const wxString& heading,
+                      const std::string& heading,
                       wxListColumnFormat format = wxListColumnFormat::Left,
                       int width = wxLIST_AUTOSIZE);
 
@@ -466,7 +470,7 @@ protected:
     virtual wxItemAttr* OnGetItemAttr(long item) const;
 
     // return the text for the given column of the given item
-    virtual wxString OnGetItemText(long item, long column) const;
+    virtual std::string OnGetItemText(long item, long column) const;
 
     // return whether the given item is checked
     virtual bool OnGetItemIsChecked(long item) const;
@@ -505,8 +509,8 @@ public:
     long GetIndex() const { return m_itemIndex; }
     int GetColumn() const { return m_col; }
     wxPoint GetPoint() const { return m_pointDrag; }
-    const wxString& GetLabel() const { return m_item.m_text; }
-    const wxString& GetText() const { return m_item.m_text; }
+    std::string GetLabel() const { return boost::nowide::narrow(m_item.m_text); }
+    std::string GetText() const { return boost::nowide::narrow(m_item.m_text); }
     int GetImage() const { return m_item.m_image; }
     wxUIntPtr GetData() const { return m_item.m_data; }
     ListMaskFlags GetMask() const { return m_item.m_mask; }

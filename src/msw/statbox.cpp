@@ -397,8 +397,8 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
         }
 
         wxMSWWinStyleUpdater updateStyle(child);
-        wxString str(wxGetWindowClass(child));
-        str.UpperCase();
+        std::string str = wx::utils::ToUpperCopy(wxGetWindowClass(child).ToStdString());
+
         if ( str == "BUTTON" && updateStyle.IsOn(BS_GROUPBOX) )
         {
             if ( child == GetHwnd() )
