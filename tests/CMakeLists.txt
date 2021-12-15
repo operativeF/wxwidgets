@@ -133,6 +133,7 @@ set(TEST_GUI_SRC
 
 add_executable(test_gui
     ${TEST_GUI_SRC}
+    ${CMAKE_SOURCE_DIR}/include/wx/msw/amd64_dpi_aware_pmv2.manifest
 )
 
 target_compile_features(test_gui PRIVATE cxx_std_23)
