@@ -82,7 +82,7 @@ public:
 
     int GetDepth() const override { return 24; }
 
-    void PsPrint( const wxString& psdata );
+    void PsPrint( const std::string& psdata );
 
     // Overridden for wxPrinterDC Impl
 
@@ -119,14 +119,14 @@ protected:
                 wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
     void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override;
     void DoDrawBitmap(const wxBitmap& bitmap, wxCoord x, wxCoord y, bool useMask = false) override;
-    void DoDrawText(const wxString& text, const wxPoint& pt) override;
-    void DoDrawRotatedText(const wxString& text, const wxPoint& pt, double angle) override;
+    void DoDrawText(const std::string& text, const wxPoint& pt) override;
+    void DoDrawRotatedText(const std::string& text, const wxPoint& pt, double angle) override;
     void DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
     void DoSetDeviceClippingRegion( [[maybe_unused]] const wxRegion &clip) override
     {
         wxFAIL_MSG( "not implemented" );
     }
-    void DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y,
+    void DoGetTextExtent(const std::string& string, wxCoord *x, wxCoord *y,
                          wxCoord *descent = nullptr,
                          wxCoord *externalLeading = nullptr,
                          const wxFont *theFont = nullptr) const override;
@@ -140,7 +140,7 @@ protected:
     // Set PostScript color
     void SetPSColour(const wxColour& col);
 
-    std::vector<wxString>     m_definedPSFonts;
+    std::vector<std::string>     m_definedPSFonts;
 
     wxPrintData       m_printData;
 

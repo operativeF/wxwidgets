@@ -59,10 +59,11 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
 
         // using native API because it recognizes '&'
 
-        wxString text = GetName();
+        std::string text = GetName();
 
+        boost::nowide::wstackstring stackText{text.c_str()};
         SIZE sizeRect;
-        ::GetTextExtentPoint32W(hdc, text.c_str(), text.length(), &sizeRect);
+        ::GetTextExtentPoint32W(hdc, stackText.get(), stackText.buffer_size, &sizeRect);
 
         unsigned int flags = DST_PREFIXTEXT;
         if ( (stat & wxODDisabled) && !(stat & wxODSelected) )
@@ -76,7 +77,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         const int cx = rc.GetWidth() - GetMarginWidth();
         const int cy = sizeRect.cy;
 
-        ::DrawStateW(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
+        ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(stackText.get()),
                     text.length(), x, y, cx, cy, flags);
 
     } // reset to default the font, colors and brush

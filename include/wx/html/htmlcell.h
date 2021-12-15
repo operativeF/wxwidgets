@@ -371,11 +371,11 @@ public:
 
     // This method is useful for debugging, to customize it for particular cell
     // type, override GetDescription() and not this function itself.
-    virtual wxString Dump(int indent = 0) const;
+    virtual std::string Dump(int indent = 0) const;
 
 protected:
     // Return the description used by Dump().
-    virtual wxString GetDescription() const;
+    virtual std::string GetDescription() const;
 
 
     // pointer to the next cell
@@ -432,7 +432,7 @@ public:
     void SetPreviousWord(wxHtmlWordCell *cell);
 
 protected:
-    wxString GetDescription() const override;
+    std::string GetDescription() const override;
 
     virtual const std::string& GetAllAsText() const
         { return m_Word; }
@@ -568,7 +568,7 @@ public:
     // Call Layout at least once before using GetMaxTotalWidth()
     int GetMaxTotalWidth() const override { return m_MaxTotalWidth; }
 
-    wxString Dump(int indent = 0) const override;
+    std::string Dump(int indent = 0) const override;
 
 protected:
     void UpdateRenderingStatePre(wxHtmlRenderingInfo& info,
@@ -638,7 +638,7 @@ public:
     void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
 
-    wxString GetDescription() const override;
+    std::string GetDescription() const override;
 
 protected:
     wxColour m_Colour;
@@ -664,7 +664,7 @@ public:
     void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
 
-    wxString GetDescription() const override;
+    std::string GetDescription() const override;
 
 protected:
     wxFont m_Font;
@@ -723,7 +723,7 @@ class wxHtmlLinkInfo : public wxObject
 public:
     wxHtmlLinkInfo()
         { m_Event = nullptr; m_Cell = nullptr; }
-    wxHtmlLinkInfo(const wxString& href, const wxString& target = {})
+    wxHtmlLinkInfo(const std::string& href, const std::string& target = {})
         : m_Href(href)
         , m_Target(target)
         { m_Event = nullptr; m_Cell = nullptr; }
@@ -731,13 +731,14 @@ public:
     void SetEvent(const wxMouseEvent *e) { m_Event = e; }
     void SetHtmlCell(const wxHtmlCell *e) { m_Cell = e; }
 
-    wxString GetHref() const { return m_Href; }
-    wxString GetTarget() const { return m_Target; }
+    std::string GetHref() const { return m_Href; }
+    std::string GetTarget() const { return m_Target; }
     const wxMouseEvent* GetEvent() const { return m_Event; }
     const wxHtmlCell* GetHtmlCell() const { return m_Cell; }
 
 private:
-    wxString m_Href, m_Target;
+    std::string m_Href;
+    std::string m_Target;
     const wxMouseEvent *m_Event;
     const wxHtmlCell *m_Cell;
 };

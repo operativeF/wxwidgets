@@ -32,7 +32,7 @@ class wxHtmlProcessor : public wxObject
 
 public:
     // Process input text and return processed result
-    virtual wxString Process(const wxString& text) const = 0;
+    virtual std::string Process(const std::string& text) const = 0;
 
     // Return priority value of this processor. The higher, the sooner
     // is the processor applied to the text.

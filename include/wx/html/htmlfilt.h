@@ -31,7 +31,7 @@ public:
 
     // Reads given file and returns HTML document.
     // Returns empty string if opening failed
-    virtual wxString ReadFile(const wxFSFile& file) const = 0;
+    virtual std::string ReadFile(const wxFSFile& file) const = 0;
 };
 
 
@@ -48,7 +48,7 @@ class wxHtmlFilterPlainText : public wxHtmlFilter
 {
 public:
     bool CanRead(const wxFSFile& file) const override;
-    wxString ReadFile(const wxFSFile& file) const override;
+    std::string ReadFile(const wxFSFile& file) const override;
 };
 
 //--------------------------------------------------------------------------------
@@ -60,10 +60,8 @@ class wxHtmlFilterHTML : public wxHtmlFilter
 {
 public:
     bool CanRead(const wxFSFile& file) const override;
-    wxString ReadFile(const wxFSFile& file) const override;
+    std::string ReadFile(const wxFSFile& file) const override;
 };
-
-
 
 #endif // wxUSE_HTML
 

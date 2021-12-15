@@ -56,16 +56,16 @@ class wxHtmlHelpFrame : public wxFrame
 public:
     wxHtmlHelpFrame(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpFrame(wxWindow* parent, wxWindowID id,
-                    const wxString& title = {},
+                    const std::string& title = {},
                     unsigned int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr
 #if wxUSE_CONFIG
-                    , wxConfigBase *config=nullptr, const wxString& rootpath = {}
+                    , wxConfigBase *config=nullptr, const std::string& rootpath = {}
 #endif // wxUSE_CONFIG
                     );
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title = {},
+    bool Create(wxWindow* parent, wxWindowID id, const std::string& title = {},
                 unsigned int style = wxHF_DEFAULT_STYLE
 #if wxUSE_CONFIG
-                , wxConfigBase *config=nullptr, const wxString& rootpath = {}
+                , wxConfigBase *config=nullptr, const std::string& rootpath = {}
 #endif // wxUSE_CONFIG
                 );
 
@@ -86,11 +86,11 @@ public:
 
     // Sets format of title of the frame. Must contain exactly one "%s"
     // (for title of displayed HTML page)
-    void SetTitleFormat(const wxString& format);
+    void SetTitleFormat(const std::string& format);
 
 #if wxUSE_CONFIG
     // For compatibility
-    void UseConfig(wxConfigBase *config, const wxString& rootpath = {});
+    void UseConfig(wxConfigBase *config, const std::string& rootpath = {});
 #endif // wxUSE_CONFIG
 
     // Make the help controller's frame 'modal' if
@@ -122,7 +122,7 @@ protected:
 protected:
     wxHtmlHelpData* m_Data;
     bool m_DataCreated;  // m_Data created by frame, or supplied?
-    wxString m_TitleFormat;  // title of the help frame
+    std::string m_TitleFormat;  // title of the help frame
     wxHtmlHelpWindow *m_HtmlHelpWin;
     wxHtmlHelpController* m_helpController;
     bool m_shouldPreventAppExit;

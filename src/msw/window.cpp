@@ -3850,9 +3850,9 @@ void wxAssociateWinWithHandle(WXHWND hwnd, wxWindowMSW *win)
         if ( i->second != win )
         {
             wxFAIL_MSG(
-                wxString::Format(
+                fmt::format(
                     "WXHWND %p already associated with another window (%s)",
-                    hwnd, win->wxGetClassInfo()->wxGetClassName()
+                    static_cast<void*>(hwnd), win->wxGetClassInfo()->wxGetClassName()
                 )
             );
         }
@@ -3985,7 +3985,7 @@ WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::str
 
     if ( !hWnd )
     {
-        wxLogLastError(wxString::Format
+        wxLogLastError(fmt::format
         (
             "CreateWindowEx(\"%s\", flags=%08lx, ex=%08lx)",
             clName, style, exStyle

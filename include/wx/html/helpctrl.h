@@ -128,9 +128,9 @@ protected:
     wxHtmlHelpWindow*   m_helpWindow;
 #if wxUSE_CONFIG
     wxConfigBase *      m_Config;
-    wxString            m_ConfigRoot;
+    std::string            m_ConfigRoot;
 #endif // wxUSE_CONFIG
-    wxString            m_titleFormat;
+    std::string            m_titleFormat;
     unsigned int        m_FrameStyle;
     wxHtmlHelpFrame*    m_helpFrame;
     wxHtmlHelpDialog*   m_helpDialog;

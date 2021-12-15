@@ -19,7 +19,7 @@ static bool gs_wasInitialized = wxModule::AreInitialized();
 // test classes derived from wxModule
 // ----------------------------------------------------------------------------
 
-wxString g_strLoadOrder;
+std::string g_strLoadOrder;
 
 class Module : public wxModule
 {

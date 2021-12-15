@@ -19,7 +19,7 @@ class wxMemoryText : public wxTextBuffer
 {
 public:
     wxMemoryText() = default;
-    wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
+    wxMemoryText(const std::string& name) : wxTextBuffer(name) { }
 
     wxMemoryText& operator=(wxMemoryText&&) = delete;
 

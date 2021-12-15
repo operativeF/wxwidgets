@@ -33,13 +33,13 @@ class wxHtmlHelpDialog : public wxDialog
 public:
     wxHtmlHelpDialog(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpDialog(wxWindow* parent, wxWindowID wxWindowID,
-                    const wxString& title = {},
+                    const std::string& title = {},
                     unsigned int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
 
     wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
 	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;
 
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title = {},
+    bool Create(wxWindow* parent, wxWindowID id, const std::string& title = {},
                 unsigned int style = wxHF_DEFAULT_STYLE);
 
     /// Returns the data associated with this dialog.
@@ -56,7 +56,7 @@ public:
 
     // Sets format of title of the frame. Must contain exactly one "%s"
     // (for title of displayed HTML page)
-    void SetTitleFormat(const wxString& format);
+    void SetTitleFormat(const std::string& format);
 
     // Override to add custom buttons to the toolbar
     virtual void AddToolbarButtons([[maybe_unused]] wxToolBar* toolBar, [[maybe_unused]] int style) {}
@@ -69,7 +69,7 @@ protected:
 protected:
     // Temporary pointer to pass to window
     wxHtmlHelpData* m_Data;
-    wxString m_TitleFormat;  // title of the help frame
+    std::string m_TitleFormat;  // title of the help frame
     wxHtmlHelpWindow *m_HtmlHelpWin;
     wxHtmlHelpController* m_helpController;
 

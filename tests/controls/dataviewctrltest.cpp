@@ -114,9 +114,9 @@ MultiColumnsDataViewCtrlTestCase::MultiColumnsDataViewCtrlTestCase()
     m_dvc = std::make_unique<wxDataViewListCtrl>(wxTheApp->GetTopWindow(), wxID_ANY);
 
     m_firstColumn =
-        m_dvc->AppendTextColumn(wxString(), wxDataViewCellMode::Inert, m_firstColumnWidth);
+        m_dvc->AppendTextColumn(std::string{}, wxDataViewCellMode::Inert, m_firstColumnWidth);
     m_lastColumn =
-        m_dvc->AppendTextColumn(wxString(), wxDataViewCellMode::Inert);
+        m_dvc->AppendTextColumn(std::string{}, wxDataViewCellMode::Inert);
 
     // Set size after columns appending to extend size of the last column.
     m_dvc->SetSize(m_size);
@@ -156,7 +156,7 @@ TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
                  "wxDVC::DeleteSelected")
 {
 #ifdef __WXGTK__
-    wxString useASAN;
+    std::string useASAN;
     if ( wxGetEnv("wxUSE_ASAN", &useASAN) && useASAN == "1" )
     {
         WARN("Skipping test resulting in a memory leak report with wxGTK");
@@ -309,7 +309,7 @@ TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
 
     // Append enough items to make the window scrollable.
     for ( int i = 3; i < 100; ++i )
-        m_dvc->AppendItem(m_root, wxString::Format("child%d", i));
+        m_dvc->AppendItem(m_root, fmt::format("child%d", i));
 
     const wxDataViewItem last = m_dvc->AppendItem(m_root, "last");
 

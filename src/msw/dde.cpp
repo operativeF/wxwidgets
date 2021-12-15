@@ -630,7 +630,7 @@ bool wxDDEConnection::StartAdvise(const wxString& item)
     WXDWORD result;
     HSZ atom = DDEGetAtom(item);
 
-    const bool ok = DdeClientTransaction(nullptr, 0,
+    const bool ok = ::DdeClientTransaction(nullptr, 0,
                                          GetHConv(),
                                          atom, CF_TEXT,
                                          XTYP_ADVSTART,

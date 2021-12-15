@@ -42,7 +42,7 @@ class wxTimePickerGenericImpl : public wxEvtHandler
 public:
     wxTimePickerGenericImpl(wxTimePickerCtrlGeneric* ctrl)
     {
-        m_text = new wxTextCtrl(ctrl, wxID_ANY, wxString());
+        m_text = new wxTextCtrl(ctrl, wxID_ANY, std::string{});
 
         // As this text can't be edited, don't use the standard cursor for it
         // to avoid misleading the user. Ideally we'd also hide the caret but
@@ -568,7 +568,7 @@ wxTimePickerCtrlGeneric::Create(wxWindow *parent,
                                 const wxSize& size,
                                 unsigned int style,
                                 const wxValidator& validator,
-                                const wxString& name)
+                                const std::string& name)
 {
     // The text control we use already has a border, so we don't need one
     // ourselves.

@@ -50,8 +50,8 @@ public:
                 const std::string& name = wxDirDialogNameStr);
 
     //// Accessors
-    void SetPath(const wxString& path) override;
-    wxString GetPath() const override;
+    void SetPath(const std::string& path) override;
+    std::string GetPath() const override;
 
     //// Overrides
     int ShowModal() override;

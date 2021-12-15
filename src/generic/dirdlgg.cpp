@@ -216,13 +216,13 @@ void wxGenericDirDialog::OnOK([[maybe_unused]] wxCommandEvent& event)
     // User has answered NO to create dir.
 }
 
-void wxGenericDirDialog::SetPath(const wxString& path)
+void wxGenericDirDialog::SetPath(const std::string& path)
 {
     m_dirCtrl->SetPath(path);
     m_path = path;
 }
 
-wxString wxGenericDirDialog::GetPath(void) const
+std::string wxGenericDirDialog::GetPath(void) const
 {
     return m_path;
 }
