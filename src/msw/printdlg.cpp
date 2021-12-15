@@ -28,6 +28,7 @@
 import WX.WinDef;
 
 import <cstdlib>;
+import <string>;
 
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter
@@ -40,8 +41,7 @@ public:
         Open( printerName );
     }
 
-    WinPrinter(const WinPrinter&) = delete;
-	WinPrinter& operator=(const WinPrinter&) = delete;
+	WinPrinter& operator=(WinPrinter&&) = delete;
 
     ~WinPrinter()
     {
@@ -80,53 +80,51 @@ private:
 
 #if wxDEBUG_LEVEL
 
-static wxString wxGetPrintDlgError()
+static std::string wxGetPrintDlgError()
 {
     WXDWORD err = CommDlgExtendedError();
-    wxString msg = "Unknown";
+
     switch (err)
     {
-        case CDERR_FINDRESFAILURE: msg = "CDERR_FINDRESFAILURE"; break;
-        case CDERR_INITIALIZATION: msg = "CDERR_INITIALIZATION"; break;
-        case CDERR_LOADRESFAILURE: msg = "CDERR_LOADRESFAILURE"; break;
-        case CDERR_LOADSTRFAILURE: msg = "CDERR_LOADSTRFAILURE"; break;
-        case CDERR_LOCKRESFAILURE: msg = "CDERR_LOCKRESFAILURE"; break;
-        case CDERR_MEMALLOCFAILURE: msg = "CDERR_MEMALLOCFAILURE"; break;
-        case CDERR_MEMLOCKFAILURE: msg = "CDERR_MEMLOCKFAILURE"; break;
-        case CDERR_NOHINSTANCE: msg = "CDERR_NOHINSTANCE"; break;
-        case CDERR_NOHOOK: msg = "CDERR_NOHOOK"; break;
-        case CDERR_NOTEMPLATE: msg = "CDERR_NOTEMPLATE"; break;
-        case CDERR_STRUCTSIZE: msg = "CDERR_STRUCTSIZE"; break;
-        case  PDERR_RETDEFFAILURE: msg = "PDERR_RETDEFFAILURE"; break;
-        case  PDERR_PRINTERNOTFOUND: msg = "PDERR_PRINTERNOTFOUND"; break;
-        case  PDERR_PARSEFAILURE: msg = "PDERR_PARSEFAILURE"; break;
-        case  PDERR_NODEVICES: msg = "PDERR_NODEVICES"; break;
-        case  PDERR_NODEFAULTPRN: msg = "PDERR_NODEFAULTPRN"; break;
-        case  PDERR_LOADDRVFAILURE: msg = "PDERR_LOADDRVFAILURE"; break;
-        case  PDERR_INITFAILURE: msg = "PDERR_INITFAILURE"; break;
-        case  PDERR_GETDEVMODEFAIL: msg = "PDERR_GETDEVMODEFAIL"; break;
-        case  PDERR_DNDMMISMATCH: msg = "PDERR_DNDMMISMATCH"; break;
-        case  PDERR_DEFAULTDIFFERENT: msg = "PDERR_DEFAULTDIFFERENT"; break;
-        case  PDERR_CREATEICFAILURE: msg = "PDERR_CREATEICFAILURE"; break;
+        case  CDERR_FINDRESFAILURE:     return "CDERR_FINDRESFAILURE";
+        case  CDERR_INITIALIZATION:     return "CDERR_INITIALIZATION";
+        case  CDERR_LOADRESFAILURE:     return "CDERR_LOADRESFAILURE";
+        case  CDERR_LOADSTRFAILURE:     return "CDERR_LOADSTRFAILURE";
+        case  CDERR_LOCKRESFAILURE:     return "CDERR_LOCKRESFAILURE";
+        case  CDERR_MEMALLOCFAILURE:    return "CDERR_MEMALLOCFAILURE";
+        case  CDERR_MEMLOCKFAILURE:     return "CDERR_MEMLOCKFAILURE";
+        case  CDERR_NOHINSTANCE:        return "CDERR_NOHINSTANCE";
+        case  CDERR_NOHOOK:             return "CDERR_NOHOOK";
+        case  CDERR_NOTEMPLATE:         return "CDERR_NOTEMPLATE";
+        case  CDERR_STRUCTSIZE:         return "CDERR_STRUCTSIZE";
+        case  PDERR_RETDEFFAILURE:      return "PDERR_RETDEFFAILURE";
+        case  PDERR_PRINTERNOTFOUND:    return "PDERR_PRINTERNOTFOUND";
+        case  PDERR_PARSEFAILURE:       return "PDERR_PARSEFAILURE";
+        case  PDERR_NODEVICES:          return "PDERR_NODEVICES";
+        case  PDERR_NODEFAULTPRN:       return "PDERR_NODEFAULTPRN";
+        case  PDERR_LOADDRVFAILURE:     return "PDERR_LOADDRVFAILURE";
+        case  PDERR_INITFAILURE:        return "PDERR_INITFAILURE";
+        case  PDERR_GETDEVMODEFAIL:     return "PDERR_GETDEVMODEFAIL";
+        case  PDERR_DNDMMISMATCH:       return "PDERR_DNDMMISMATCH";
+        case  PDERR_DEFAULTDIFFERENT:   return "PDERR_DEFAULTDIFFERENT";
+        case  PDERR_CREATEICFAILURE:    return "PDERR_CREATEICFAILURE";
         default: break;
     }
-    return msg;
+
+    return "Unknown";
 }
 
 #endif // wxDEBUG_LEVEL
 
 
 static HGLOBAL
-wxCreateDevNames(const wxString& driverName,
-                 const wxString& printerName,
-                 const wxString& portName)
+wxCreateDevNames(const std::string& driverName,
+                 const std::string& printerName,
+                 const std::string& portName)
 {
     HGLOBAL hDev = nullptr;
-    // if (!driverName.empty() && !printerName.empty() && !portName.empty())
-    if (driverName.empty() && printerName.empty() && portName.empty())
-    {
-    }
-    else
+
+    if (!driverName.empty() && !printerName.empty() && !portName.empty())
     {
         hDev = GlobalAlloc(GPTR, 4*sizeof(WXWORD)+
                            ( driverName.length() + 1 +
@@ -136,15 +134,19 @@ wxCreateDevNames(const wxString& driverName,
         GlobalPtrLock ptr(hDev);
         LPDEVNAMES lpDev = (LPDEVNAMES)ptr.Get();
         lpDev->wDriverOffset = sizeof(WXWORD) * 4 / sizeof(wxChar);
-        wxStrcpy((wxChar*)lpDev + lpDev->wDriverOffset, driverName);
+
+        boost::nowide::wstackstring stackDriver{driverName.c_str()};
+        boost::nowide::wstackstring stackPrinter{printerName.c_str()};
+        boost::nowide::wstackstring stackPort{portName.c_str()};
+        wxStrcpy((WCHAR*)lpDev + lpDev->wDriverOffset, stackDriver.get());
 
         lpDev->wDeviceOffset = (WXWORD)( lpDev->wDriverOffset +
                                        driverName.length() + 1 );
-        wxStrcpy((wxChar*)lpDev + lpDev->wDeviceOffset, printerName);
+        wxStrcpy((WCHAR*)lpDev + lpDev->wDeviceOffset, stackPrinter.get());
 
         lpDev->wOutputOffset = (WXWORD)( lpDev->wDeviceOffset +
                                        printerName.length() + 1 );
-        wxStrcpy((wxChar*)lpDev + lpDev->wOutputOffset, portName);
+        wxStrcpy((WCHAR*)lpDev + lpDev->wOutputOffset, stackPort.get());
 
         lpDev->wDefault = 0;
     }
@@ -163,7 +165,7 @@ wxWindowsPrintNativeData::~wxWindowsPrintNativeData()
 
 bool wxWindowsPrintNativeData::IsOk() const
 {
-    return (m_devMode != nullptr) ;
+    return m_devMode != nullptr;
 }
 
 bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
@@ -228,7 +230,7 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
     //// Printer name
     if (devMode->dmDeviceName[0] != 0)
         // This syntax fixes a crash when using VS 7.1
-        data.SetPrinterName( wxString(devMode->dmDeviceName, CCHDEVICENAME) );
+        data.SetPrinterName( boost::nowide::narrow(devMode->dmDeviceName, CCHDEVICENAME) );
 
     //// Colour
     if (devMode->dmFields & DM_COLOR)
@@ -362,18 +364,18 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
     return true;
 }
 
-void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, WinPrinter* printer)
+void wxWindowsPrintNativeData::InitializeDevMode(const std::string& printerName, WinPrinter* printer)
 {
     if (m_devMode)
         return;
 
-    LPWSTR szPrinterName = wxMSW_CONV_LPTSTR(printerName);
+    boost::nowide::wstackstring stackPrinterName{printerName.c_str()};
 
     // From MSDN: How To Modify Printer Settings with the DocumentProperties() Function
     // The purpose of this is to fill the DEVMODE with privdata from printer driver.
     // If we have a printer name and OpenPrinter successfully returns
     // this replaces the PrintDlg function which creates the DEVMODE filled only with data from default printer.
-    if ( !m_devMode && !printerName.IsEmpty() )
+    if ( !m_devMode && !printerName.empty() )
     {
         // Open printer
         if ( printer && printer->Open( printerName ) == TRUE )
@@ -385,7 +387,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
             // Allocate a buffer of the correct size.
             dwNeeded = ::DocumentPropertiesW( nullptr,
                 *printer,        // Handle to our printer.
-                szPrinterName,   // Name of the printer.
+                stackPrinterName.get(),   // Name of the printer.
                 nullptr,            // Asking for size, so
                 nullptr,            // these are not used.
                 0 );             // Zero returns buffer size.
@@ -403,7 +405,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
             // Get the default DevMode for the printer
             dwRet = ::DocumentPropertiesW( nullptr,
                 *printer,
-                szPrinterName,
+                stackPrinterName.get(),
                 tempDevMode,     // The address of the buffer to fill.
                 nullptr,            // Not using the input buffer.
                 DM_OUT_BUFFER ); // Have the output buffer filled.
@@ -445,8 +447,8 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
             pd.hDevMode = nullptr;
             pd.hDevNames = nullptr;
 
-#if wxDEBUG_LEVEL
-            wxLogDebug("Printing error: " + wxGetPrintDlgError());
+#if (wxDEBUG_LEVEL == 2) // FIXME: stupid, just make logdebug accept strings
+            wxLogDebug(wxString{fmt::format("Printing error: {}", wxGetPrintDlgError())});
 #endif // wxDEBUG_LEVEL
         }
         else
@@ -496,13 +498,14 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
         devMode->dmFields |= DM_COPIES;
 
         //// Printer name
-        wxString name = data.GetPrinterName();
+        std::string name = data.GetPrinterName();
         if (!name.empty())
         {
             // NB: the cast is needed in the ANSI build, strangely enough
             //     dmDeviceName is BYTE[] and not char[] there
+            boost::nowide::wstackstring stackName{name.c_str()};
             wxStrlcpy(reinterpret_cast<wxChar *>(devMode->dmDeviceName),
-                      name.t_str(),
+                      stackName.get(),
                       WXSIZEOF(devMode->dmDeviceName));
         }
 

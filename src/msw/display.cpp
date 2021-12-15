@@ -333,16 +333,15 @@ wxVideoMode wxDisplayMSW::GetCurrentMode() const
     // The first parameter of EnumDisplaySettings() must be NULL according
     // to MSDN, in order to specify the current display on the computer
     // on which the calling thread is running.
-    const wxString name = GetName();
-    const wxChar * const deviceName = name.empty()
-                                          ? (const wxChar*)nullptr
-                                          : (const wxChar*)name.c_str();
+    const std::string name = GetName();
 
     DEVMODEW dm;
     dm.dmSize = sizeof(dm);
     dm.dmDriverExtra = 0;
 
-    if ( !::EnumDisplaySettingsW(deviceName, ENUM_CURRENT_SETTINGS, &dm) )
+    boost::nowide::wstackstring stackDeviceName{name.c_str()};
+
+    if ( !::EnumDisplaySettingsW(stackDeviceName.get(), ENUM_CURRENT_SETTINGS, &dm) )
     {
         wxLogLastError("EnumDisplaySettings(ENUM_CURRENT_SETTINGS)");
     }
@@ -361,17 +360,15 @@ wxArrayVideoModes wxDisplayMSW::GetModes(const wxVideoMode& modeMatch) const
     // The first parameter of EnumDisplaySettings() must be NULL according
     // to MSDN, in order to specify the current display on the computer
     // on which the calling thread is running.
-    const wxString name = GetName();
-    const wxChar * const deviceName = name.empty()
-                                            ? (const wxChar*)nullptr
-                                            : (const wxChar*)name.c_str();
+    const std::string name = GetName();
+    boost::nowide::wstackstring stackDeviceName{name.c_str()};
 
     DEVMODEW dm;
     dm.dmSize = sizeof(dm);
     dm.dmDriverExtra = 0;
 
     for ( int iModeNum = 0;
-          ::EnumDisplaySettingsW(deviceName, iModeNum, &dm);
+          ::EnumDisplaySettingsW(stackDeviceName.get(), iModeNum, &dm);
           iModeNum++ )
     {
         // Only care about the default display output, this prevents duplicate

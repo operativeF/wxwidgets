@@ -16,6 +16,8 @@
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 
+import <string>;
+
 class wxDC;
 class WinPrinter;
 
@@ -34,7 +36,7 @@ public:
 
     bool IsOk() const override;
 
-    void InitializeDevMode(const wxString &printerName = {}, WinPrinter* printer = nullptr);
+    void InitializeDevMode(const std::string &printerName = {}, WinPrinter* printer = nullptr);
     void* GetDevMode() const { return m_devMode; }
     void SetDevMode(void* data) { m_devMode = data; }
     void* GetDevNames() const { return m_devNames; }

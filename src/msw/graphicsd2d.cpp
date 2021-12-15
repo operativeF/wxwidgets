@@ -3202,7 +3202,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         const std::vector<std::string>& privateFonts = wxGetPrivateFontFileNames();
         if ( privateFonts.empty() )
         {
-            wxLogApiError(wxString::Format("IDWriteGdiInterop::CreateFontFromLOGFONT() for '%s'", logfont.lfFaceName), hr);
+            wxLogApiError(fmt::format("IDWriteGdiInterop::CreateFontFromLOGFONT() for '%s'", boost::nowide::narrow(logfont.lfFaceName)), hr);
             return;
         }
         // Update font collection if the list of private fonts has changed.
@@ -3226,7 +3226,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
 
         if ( !fontFound )
         {
-            wxFAIL_MSG(wxString::Format("Couldn't find custom font family '%s'", logfont.lfFaceName));
+            wxFAIL_MSG(fmt::format("Couldn't find custom font family '%s'", boost::nowide::narrow(logfont.lfFaceName)));
             return;
         }
 
@@ -3247,7 +3247,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
 
         hr = fontFamily->GetFirstMatchingFont(fWeight, fStretch, fStyle, &m_font);
         wxCHECK_RET(SUCCEEDED(hr),
-            wxString::Format("Failed to find custom font '%s' (HRESULT = %x)", logfont.lfFaceName, hr));
+            fmt::format("Failed to find custom font '%s' (HRESULT = %x)", boost::nowide::narrow(logfont.lfFaceName), hr));
 
         fontCollection = gs_pPrivateFontCollection;
 #else
@@ -3257,7 +3257,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     else
     {
         wxCHECK_RET(SUCCEEDED(hr),
-            wxString::Format("Failed to create font '%s' (HRESULT = %x)", logfont.lfFaceName, hr));
+            fmt::format("Failed to create font '%s' (HRESULT = %x)", boost::nowide::narrow(logfont.lfFaceName), hr));
 
         hr = m_font->GetFontFamily(&fontFamily);
         wxCHECK_HRESULT_RET(hr);

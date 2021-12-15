@@ -173,7 +173,7 @@ std::string wxAppConsoleBase::GetAppName() const
 #if wxUSE_STDPATHS
         else // fall back to the executable file name, if we can determine it
         {
-            const wxString pathExe = wxStandardPaths::Get().GetExecutablePath();
+            const std::string pathExe = wxStandardPaths::Get().GetExecutablePath();
             if ( !pathExe.empty() )
             {
                 wxFileName::SplitPath(pathExe, nullptr, &name, nullptr);
@@ -780,9 +780,9 @@ bool wxAppConsoleBase::CheckBuildOptions(const char *optionsSignature,
 {
     if ( strcmp(optionsSignature, WX_BUILD_OPTIONS_SIGNATURE) != 0 )
     {
-        wxString lib = wxString::FromAscii(WX_BUILD_OPTIONS_SIGNATURE);
-        wxString prog = wxString::FromAscii(optionsSignature);
-        wxString progName = wxString::FromAscii(componentName);
+        std::string lib = WX_BUILD_OPTIONS_SIGNATURE;
+        std::string prog = optionsSignature;
+        std::string progName = componentName;
         std::string msg = fmt::format("Mismatch between the program and library build versions detected.\nThe library used %s,\nand %s used %s.",
                    lib.c_str(), progName.c_str(), prog.c_str());
 

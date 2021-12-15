@@ -29,21 +29,21 @@ namespace
 // return the string used for the MRU list items in the menu
 //
 // NB: the index n is 0-based, as usual, but the strings start from 1
-wxString GetMRUEntryLabel(int n, const fs::path& path)
+std::string GetMRUEntryLabel(int n, const fs::path& path)
 {
     // we need to quote '&' characters which are used for mnemonics
-    auto pathInMenu = path.wstring();
-    wx::utils::ReplaceAll(pathInMenu, L"&", L"&&");
+    auto pathInMenu = path.string();
+    wx::utils::ReplaceAll(pathInMenu, "&", "&&");
 
 #ifdef __WXMSW__
     // absolute paths always start with Latin characters even in RTL
     // environments and should therefore be rendered as LTR text (possibly with
     // RTL chunks in it). Ensure this on Windows by prepending
     // LEFT-TO-RIGHT EMBEDDING (other platforms detect this automatically)
-    pathInMenu.insert(0, 1, wchar_t(0x202a));
+    pathInMenu.insert(0, 1, char(0x202a));
 #endif
 
-    return fmt::format("&{:d} {:s}", n + 1, boost::nowide::narrow(pathInMenu));
+    return fmt::format("&{:d} {:s}", n + 1, pathInMenu);
 }
 
 } // anonymous namespace
@@ -77,7 +77,7 @@ std::string wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
 void wxFileHistoryBase::AddFileToHistory(const fs::path& file)
 {
     // Check if we don't already have this file. Notice that we avoid
-    // wxFileName::operator==(wxString) here as it converts the string to
+    // wxFileName::operator==(std::string) here as it converts the string to
     // wxFileName and then normalizes it using all normalizations which is too
     // slow (see the comment above), so we use our own quick normalization
     // functions and a string comparison.

@@ -110,7 +110,7 @@ void wxFontPickerCtrl::UpdatePickerFromTextCtrl()
 {
     wxASSERT(m_text);
 
-    // NB: we don't use the wxFont::wxFont(const wxString &) constructor
+    // NB: we don't use the wxFont::wxFont(const std::string&) constructor
     //     since that constructor expects the native font description
     //     string returned by wxFont::GetNativeFontInfoDesc() and not
     //     the user-friendly one returned by wxFont::GetNativeFontInfoUserDesc()
