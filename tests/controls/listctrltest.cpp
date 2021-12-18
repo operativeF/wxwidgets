@@ -51,9 +51,9 @@ TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
         m_listctrl->InsertColumn(2, "Column 2");
         for ( int i = 0; i < 3; i++ )
         {
-            long index = m_listctrl->InsertItem(i, wxString::Format("This is item %d", i), 0);
-            m_listctrl->SetItem(index, 1, wxString::Format("Column 1 item %d", i));
-            m_listctrl->SetItem(index, 2, wxString::Format("Column 2 item %d", i));
+            long index = m_listctrl->InsertItem(i, fmt::format("This is item {:d}", i), 0);
+            m_listctrl->SetItem(index, 1, fmt::format("Column 1 item {:d}", i));
+            m_listctrl->SetItem(index, 2, fmt::format("Column 2 item {:d}", i));
         }
 
         wxRect rectLabel, rectIcon, rectItem;

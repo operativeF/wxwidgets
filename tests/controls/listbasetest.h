@@ -19,6 +19,8 @@
 #include "listbasetest.h"
 #include "testableframe.h"
 
+#include <fmt/core.h>
+
 import WX.Test.Prec;
 
 template<typename ListCtrlT>
@@ -192,7 +194,7 @@ struct ListBaseTest
         list->InsertColumn(0, "Header");
 
         for (int i = 0; i < 10; ++i)
-            list->InsertItem(i, wxString::Format("Item %d", i));
+            list->InsertItem(i, fmt::format("Item {:d}", i));
 
         wxUIActionSimulator sim;
 
@@ -451,7 +453,7 @@ struct ListBaseTest
 
         for (int i = 0; i < count + 10; i++)
         {
-            list->InsertItem(i, wxString::Format("string %d", i));
+            list->InsertItem(i, fmt::format("string {:d}", i));
         }
 
         CHECK_EQ(count + 10, list->GetItemCount());

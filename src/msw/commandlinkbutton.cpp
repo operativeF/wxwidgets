@@ -156,7 +156,7 @@ wxSize wxCommandLinkButton::DoGetBestSize() const
 
         // The height of a standard command link button is 25 and 35 DLUs for
         // single lines and two lines respectively. Width is not accounted for.
-        int heightDef = GetNote().AfterFirst('\n').empty() ? 25 : 35;
+        int heightDef = wx::utils::AfterFirst(GetNote(), '\n').empty() ? 25 : 35;
         wxSize sizeDef = thisButton->ConvertDialogToPixels(wxSize(50,
                                                                   heightDef));
 

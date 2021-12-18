@@ -63,7 +63,7 @@ void wxColourPickerCtrl::SetColour(const wxColour &col)
 
 bool wxColourPickerCtrl::SetColour(const std::string& text)
 {
-    wxColour col{text};     // smart wxString->wxColour conversion
+    wxColour col{text};
     if ( !col.IsOk() )
         return false;
     M_PICKER->SetColour(col);

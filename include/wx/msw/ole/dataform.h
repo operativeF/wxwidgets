@@ -24,7 +24,7 @@ public:
     wxDataFormat(NativeFormat format = wxDF_INVALID) : m_format{format} {}
 
     // we need constructors from all string types as implicit conversions to
-    // wxString don't apply when we already rely on implicit conversion of a,
+    // std::string don't apply when we already rely on implicit conversion of a,
     // for example, "char *" string to wxDataFormat, and existing code does it
     wxDataFormat(const std::string& format) { SetId(format); }
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING

@@ -30,7 +30,7 @@ TEST_CASE_FIXTURE(BitmapComboBoxTest, "Bitmap combobox test")
 
     SUBCASE("Bitmap")
     {
-        const std::vector<wxString> items = { "item 0", "item 1" };
+        const std::vector<std::string> items = { "item 0", "item 1" };
 
         for( const auto& item : items )
             m_container->Append(item);

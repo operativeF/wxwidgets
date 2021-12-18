@@ -285,9 +285,9 @@ bool wxDocument::SaveAs()
         return false;
 
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
-    wxString filter = docTemplate->GetDescription() + " (" +
-        docTemplate->GetFileFilter() + ")|" +
-        docTemplate->GetFileFilter();
+    std::string filter = fmt::format("{} ({})|{}", docTemplate->GetDescription(),
+                                                   docTemplate->GetFileFilter(),
+                                                   docTemplate->GetFileFilter());
 
     // Now see if there are some other template with identical view and document
     // classes, whose filters may also be used.
@@ -308,11 +308,9 @@ bool wxDocument::SaveAs()
                     filter += '|';
 
                 // FIXME: use fmt lib
-                filter += t->GetDescription()
-                       + " ("
-                       + t->GetFileFilter()
-                       + ") |"
-                       + t->GetFileFilter();
+                filter += fmt::format("{} ({}) |{}", t->GetDescription(),
+                                                     t->GetFileFilter(),
+                                                     t->GetFileFilter());
             }
 
             node = node->GetNext();
@@ -333,12 +331,12 @@ bool wxDocument::SaveAs()
 
     // TODO: Make wxFileSelector use paths
     std::string fileName = wxFileSelector(_("Save As").ToStdString(),
-            defaultDir.string(),
-            wxFileNameFromPath(GetFilename().string()),
-            docTemplate->GetDefaultExtension(),
-            filter,
-            wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
-            GetDocumentWindow());
+                                          defaultDir.string(),
+                                          wxFileNameFromPath(GetFilename().string()),
+                                          docTemplate->GetDefaultExtension(),
+                                          filter,
+                                          wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
+                                          GetDocumentWindow());
 
     if (fileName.empty())
         return false; // cancelled by user
@@ -823,11 +821,12 @@ bool wxDocTemplate::FileMatchesTemplate(const fs::path& path)
 {
     wxStringTokenizer parser (GetFileFilter(), ";");
     std::string anything = "*";
+
     while (parser.HasMoreTokens())
     {
-        wxString filter = parser.GetNextToken();
-        std::string filterExt = FindExtension(std::filesystem::path{filter.ToStdString()});
-        if ( filter.IsSameAs(anything)    ||
+        std::string filter = parser.GetNextToken();
+        std::string filterExt = FindExtension(std::filesystem::path{filter});
+        if ( (filter == anything) ||
              wx::utils::IsSameAsCase(filterExt, anything) ||
              wx::utils::IsSameAsCase(filterExt, FindExtension(path)) )
             return true;
@@ -1646,7 +1645,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                                                 [[maybe_unused]] bool save)
 {
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
-    wxString descrBuf;
+    std::string descrBuf;
 
     for (int i = 0; i < noTemplates; i++)
     {
@@ -1654,49 +1653,51 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
         {
             // add a '|' to separate this filter from the previous one
             if ( !descrBuf.empty() )
-                descrBuf << wxT('|');
+                descrBuf += '|';
 
-            descrBuf << templates[i]->GetDescription()
-                << " (" << templates[i]->GetFileFilter() << ") |"
-                << templates[i]->GetFileFilter();
+            descrBuf += fmt::format("{} ({}) |{}",
+                                    templates[i]->GetDescription(),
+                                    templates[i]->GetFileFilter(),
+                                    templates[i]->GetFileFilter());
         }
     }
 #else
-    wxString descrBuf = "*.*";
+    std::string descrBuf = "*.*";
     wxUnusedVar(noTemplates);
 #endif
 
     int FilterIndex = -1;
 
-    wxString pathTmp = wxFileSelectorEx(_("Open File"),
-                                        GetLastDirectory().string(),
-                                        "",
-                                        &FilterIndex,
-                                        descrBuf,
-                                        wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    std::string pathTmp = wxFileSelectorEx(_("Open File"),
+                                           GetLastDirectory().string(),
+                                           "",
+                                           &FilterIndex,
+                                           descrBuf,
+                                           wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
     wxDocTemplate *theTemplate = nullptr;
     if (!pathTmp.empty())
     {
         if (!wxFileExists(pathTmp))
         {
-            wxString msgTitle;
+            std::string msgTitle;
             if (!wxTheApp->GetAppDisplayName().empty())
                 msgTitle = wxTheApp->GetAppDisplayName();
             else
-                msgTitle = _("File error");
+                msgTitle = _("File error").ToStdString();
 
             wxMessageBox(_("Sorry, could not open this file.").ToStdString(),
-                         msgTitle.ToStdString(),
+                         msgTitle,
                          wxOK | wxICON_EXCLAMATION | wxCENTRE);
 
             path.clear();
+
             return nullptr;
         }
 
         SetLastDirectory(wxPathOnly(pathTmp));
 
-        path = pathTmp.ToStdString();
+        path = pathTmp;
 
         // first choose the template using the extension, if this fails (i.e.
         // wxFileSelectorEx() didn't fill it), then use the path

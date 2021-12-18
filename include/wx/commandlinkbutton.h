@@ -63,17 +63,17 @@ public:
         SetMainLabelAndNote(mainLabel, GetNote());
     }
 
-    virtual void SetNote(const wxString& note)
+    virtual void SetNote(const std::string& note)
     {
         SetMainLabelAndNote(GetMainLabel(), note);
     }
 
-    virtual wxString GetMainLabel() const
+    virtual std::string GetMainLabel() const
     {
         return wx::utils::BeforeFirst(GetLabel(), '\n');
     }
 
-    virtual wxString GetNote() const
+    virtual std::string GetNote() const
     {
         return wx::utils::AfterFirst(GetLabel(), '\n');
     }
