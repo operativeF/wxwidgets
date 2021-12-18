@@ -33,16 +33,16 @@ public:
 
     // show a message to the user
     // void Printf(const wxString& format, ...) = 0;
-    WX_DEFINE_VARARG_FUNC_VOID(Printf, 1, (const wxFormatString&),
+    WX_DEFINE_VARARG_FUNC_VOID(Printf, 1, (const char*),
                                DoPrintfWchar, DoPrintfUtf8)
 
     // called by DoPrintf() to output formatted string but can also be called
     // directly if no formatting is needed
-    virtual void Output(const std::string& str) = 0;
+    virtual void Output(std::string_view str) = 0;
 
 protected:
 #if !wxUSE_UTF8_LOCALE_ONLY
-    void DoPrintfWchar(const wxChar *format, ...);
+    void DoPrintfWchar(const char *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
     void DoPrintfUtf8(const char *format, ...);
@@ -71,12 +71,12 @@ protected:
 
     // return the string with "\n" appended if it doesn't already terminate
     // with it (in which case it's returned unchanged)
-    wxString AppendLineFeedIfNeeded(const wxString& str);
+    std::string AppendLineFeedIfNeeded(const std::string& str);
 
     // Prepare the given string for output by appending a new line to it, if
     // necessary, and converting it to a narrow string using our conversion
     // object.
-    wxCharBuffer PrepareForOutput(const wxString& str);
+    std::string PrepareForOutput(std::string_view str);
 
     const wxMBConv* const m_conv;
 };
@@ -94,7 +94,7 @@ public:
 
     wxMessageOutputStderr& operator=(wxMessageOutputStderr&&) = delete;
 
-    void Output(const std::string& str) override;
+    void Output(std::string_view str) override;
 
 protected:
     FILE *m_fp;
@@ -118,7 +118,7 @@ public:
     wxMessageOutputBest(wxMessageOutputFlags flags)
         : m_flags(flags) { }
 
-    void Output(const std::string& str) override;
+    void Output(std::string_view str) override;
 
 private:
     wxMessageOutputFlags m_flags{wxMessageOutputFlags::StdErr};
@@ -133,7 +133,7 @@ private:
 class wxMessageOutputMessageBox : public wxMessageOutput
 {
 public:
-    void Output(const std::string& str) override;
+    void Output(std::string_view str) override;
 };
 
 #endif // wxUSE_GUI && wxUSE_MSGDLG
@@ -145,7 +145,7 @@ public:
 class wxMessageOutputDebug : public wxMessageOutputStderr
 {
 public:
-    void Output(const std::string& str) override;
+    void Output(std::string_view str) override;
 };
 
 // ----------------------------------------------------------------------------
@@ -155,7 +155,7 @@ public:
 class wxMessageOutputLog : public wxMessageOutput
 {
 public:
-    void Output(const std::string& str) override;
+    void Output(std::string_view str) override;
 };
 
 #endif // _WX_MSGOUT_H_

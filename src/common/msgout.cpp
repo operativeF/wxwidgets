@@ -58,7 +58,7 @@ wxMessageOutput* wxMessageOutput::Set(wxMessageOutput* msgout)
 }
 
 #if !wxUSE_UTF8_LOCALE_ONLY
-void wxMessageOutput::DoPrintfWchar(const wxChar *format, ...)
+void wxMessageOutput::DoPrintfWchar(const char *format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -89,7 +89,7 @@ void wxMessageOutput::DoPrintfUtf8(const char *format, ...)
 // wxMessageOutputBest
 // ----------------------------------------------------------------------------
 
-void wxMessageOutputBest::Output(const std::string& str)
+void wxMessageOutputBest::Output(std::string_view str)
 {
 #ifdef WX_WINDOWS
     // decide whether to use console output or not
@@ -98,7 +98,7 @@ void wxMessageOutputBest::Output(const std::string& str)
 
     if ( !(m_flags == wxMessageOutputFlags::MsgBox) )
     {
-        if ( hasStderr && traits->WriteToStderr(AppendLineFeedIfNeeded(str).ToStdString()) )
+        if ( hasStderr && traits->WriteToStderr(AppendLineFeedIfNeeded(std::string{str.begin(), str.end()})) )
             return;
     }
 
@@ -106,7 +106,7 @@ void wxMessageOutputBest::Output(const std::string& str)
     if ( wxTheApp )
         title = wxTheApp->GetAppDisplayName();
     else // Use some title to avoid default "Error"
-        title = _("Message").ToStdString();
+        title = _("Message");
 
     ::MessageBoxW(nullptr, boost::nowide::widen(str).c_str(), boost::nowide::widen(title).c_str(), MB_ICONINFORMATION | MB_OK);
 #else // !WX_WINDOWS
@@ -121,18 +121,18 @@ void wxMessageOutputBest::Output(const std::string& str)
 // wxMessageOutputWithConv
 // ----------------------------------------------------------------------------
 
-wxString wxMessageOutputWithConv::AppendLineFeedIfNeeded(const wxString& str)
+std::string wxMessageOutputWithConv::AppendLineFeedIfNeeded(const std::string& str)
 {
-    wxString strLF(str);
+    std::string strLF{str};
     if ( strLF.empty() || *strLF.rbegin() != '\n' )
         strLF += '\n';
 
     return strLF;
 }
 
-wxCharBuffer wxMessageOutputWithConv::PrepareForOutput(const wxString& str)
+std::string wxMessageOutputWithConv::PrepareForOutput(std::string_view str)
 {
-    wxString strWithLF = AppendLineFeedIfNeeded(str);
+    std::string strWithLF = AppendLineFeedIfNeeded(std::string{str.begin(), str.end()});
 
 #if defined(WX_WINDOWS)
     // Determine whether the encoding is UTF-16. In that case, the file
@@ -140,11 +140,11 @@ wxCharBuffer wxMessageOutputWithConv::PrepareForOutput(const wxString& str)
     // here as it won't be done at stdio level.
     if ( m_conv->GetMBNulLen() == 2 )
     {
-        strWithLF.Replace("\n", "\r\n");
+        wx::utils::ReplaceAll(strWithLF, "\n", "\r\n");
     }
 #endif // WX_WINDOWS
 
-    return m_conv->cWX2MB(strWithLF.c_str());
+    return strWithLF;
 }
 
 // ----------------------------------------------------------------------------
@@ -157,10 +157,10 @@ wxMessageOutputStderr::wxMessageOutputStderr(FILE *fp, const wxMBConv& conv)
 {
 }
 
-void wxMessageOutputStderr::Output(const std::string& str)
+void wxMessageOutputStderr::Output(std::string_view str)
 {
-    const wxCharBuffer& buf = PrepareForOutput(str);
-    fwrite(buf, buf.length(), 1, m_fp);
+    const auto buf = PrepareForOutput(str);
+    fwrite(buf.data(), buf.length(), 1, m_fp);
     fflush(m_fp);
 }
 
@@ -168,10 +168,10 @@ void wxMessageOutputStderr::Output(const std::string& str)
 // wxMessageOutputDebug
 // ----------------------------------------------------------------------------
 
-void wxMessageOutputDebug::Output(const std::string& str)
+void wxMessageOutputDebug::Output(std::string_view str)
 {
 #if defined(WX_WINDOWS)
-    std::string out = AppendLineFeedIfNeeded(str).ToStdString();
+    std::string out = AppendLineFeedIfNeeded(std::string{str.begin(), str.end()});
 
     wx::utils::ReplaceAll(out, "\t", "        ");
     wx::utils::ReplaceAll(out, "\n", "\r\n");
@@ -187,9 +187,9 @@ void wxMessageOutputDebug::Output(const std::string& str)
 // wxMessageOutputLog
 // ----------------------------------------------------------------------------
 
-void wxMessageOutputLog::Output(const std::string& str)
+void wxMessageOutputLog::Output(std::string_view str)
 {
-    std::string out = str;
+    std::string out = {str.begin(), str.end()};
 
     wx::utils::ReplaceAll(out, "\t", "        ");
 
@@ -204,9 +204,9 @@ void wxMessageOutputLog::Output(const std::string& str)
 
 #if wxUSE_GUI && wxUSE_MSGDLG
 
-void wxMessageOutputMessageBox::Output(const std::string& str)
+void wxMessageOutputMessageBox::Output(std::string_view str)
 {
-    std::string out = str;
+    std::string out = {str.begin(), str.end()};
 
     // the native MSW msg box understands the TABs, others don't
 #ifndef WX_WINDOWS

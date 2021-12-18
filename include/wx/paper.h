@@ -36,7 +36,7 @@ public:
     // platformId is a platform-specific id, such as in Windows, DMPAPER_...
     wxPrintPaperType(wxPaperSize paperId, int platformId, std::string_view name, int w, int h);
 
-    std::string GetName() const { return wxGetTranslation(m_paperName).ToStdString(); }
+    std::string GetName() const { return wxGetTranslation(m_paperName); }
     wxPaperSize GetId() const { return m_paperId; }
     int GetPlatformId() const { return m_platformId; }
 

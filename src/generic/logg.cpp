@@ -52,6 +52,9 @@ import WX.Utils.Settings;
 
 import WX.Image;
 
+import <string>;
+import <string_view>;
+
 #define CAN_SAVE_FILES (wxUSE_FILE && wxUSE_FILEDLG)
 
 // ----------------------------------------------------------------------------
@@ -62,9 +65,9 @@ import WX.Image;
 
 // this function is a wrapper around strftime(3)
 // allows to exclude the usage of wxDateTime
-static wxString TimeStamp(const wxString& format, time_t t)
+static std::string TimeStamp(std::string_view format, time_t t)
 {
-    wxChar buf[4096];
+    char buf[4096];
     struct tm tm;
     if ( !wxStrftime(buf, WXSIZEOF(buf), format, wxLocaltime_r(&t, &tm)) )
     {
@@ -79,15 +82,14 @@ class wxLogDialog : public wxDialog
 {
 public:
     wxLogDialog(wxWindow *parent,
-                const std::vector<wxString>& messages,
+                const std::vector<std::string>& messages,
                 const std::vector<int>& severity,
                 const std::vector<long>& timess,
                 std::string_view caption,
                 unsigned int style);
     ~wxLogDialog();
 
-    wxLogDialog(const wxLogDialog&) = delete;
-	wxLogDialog& operator=(const wxLogDialog&) = delete;
+	wxLogDialog& operator=(wxLogDialog&&) = delete;
 
     // event handlers
     void OnOk(wxCommandEvent& event);
@@ -104,14 +106,13 @@ private:
     void CreateDetailsControls(wxWindow *);
 
     // if necessary truncates the given string and adds an ellipsis
-    wxString EllipsizeString(const wxString &text)
+    std::string EllipsizeString(std::string text)
     {
-        if (ms_maxLength > 0 &&
-            text.length() > ms_maxLength)
+        if (ms_maxLength > 0 && text.length() > ms_maxLength)
         {
-            wxString ret(text);
-            ret.Truncate(ms_maxLength);
-            ret << "...";
+            std::string ret{text};
+            ret.substr(0, ms_maxLength);
+            ret += "...";
             return ret;
         }
 
@@ -120,12 +121,12 @@ private:
 
 #if CAN_SAVE_FILES || wxUSE_CLIPBOARD
     // return the contents of the dialog as a multiline string
-    wxString GetLogMessages() const;
+    std::string GetLogMessages() const;
 #endif // CAN_SAVE_FILES || wxUSE_CLIPBOARD
 
 
     // the data for the listctrl
-    std::vector<wxString> m_messages;
+    std::vector<std::string> m_messages;
     std::vector<int> m_severity;
     std::vector<long> m_times;
 
@@ -165,7 +166,7 @@ wxEND_EVENT_TABLE()
 // filename and try to open it, returns true on success (file was opened),
 // false if file couldn't be opened/created and -1 if the file selection
 // dialog was cancelled
-static int OpenLogFile(wxFile& file, wxString *filename = nullptr, wxWindow *parent = nullptr);
+static int OpenLogFile(wxFile& file, std::string* filename = nullptr, wxWindow *parent = nullptr);
 
 #endif // CAN_SAVE_FILES
 
@@ -202,9 +203,9 @@ unsigned int wxLogGui::GetSeverityIcon() const
                                    : wxICON_INFORMATION;
 }
 
-wxString wxLogGui::GetTitle() const
+std::string wxLogGui::GetTitle() const
 {
-    wxString titleFormat;
+    std::string titleFormat;
     switch ( GetSeverityIcon() )
     {
         case wxICON_STOP:
@@ -223,19 +224,19 @@ wxString wxLogGui::GetTitle() const
             titleFormat = _("%s Information");
     }
 
-    return wxString::Format(titleFormat, wxTheApp ? wxTheApp->GetAppDisplayName() : _("Application").ToStdString());
+    return fmt::format("{{:s}:s}", titleFormat, wxTheApp ? wxTheApp->GetAppDisplayName() : _("Application"));
 }
 
 void
-wxLogGui::DoShowSingleLogMessage(const wxString& message,
-                                 const wxString& title,
+wxLogGui::DoShowSingleLogMessage(std::string_view message,
+                                 std::string_view title,
                                  unsigned int style)
 {
-    wxMessageBox(message.ToStdString(), title.ToStdString(), wxOK | style);
+    wxMessageBox(message, title, wxOK | style);
 }
 
 void
-wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
+wxLogGui::DoShowMultipleLogMessages(const std::vector<std::string>& messages,
                                     const std::vector<int>& severities,
                                     const std::vector<long>& times,
                                     std::string_view title,
@@ -253,7 +254,7 @@ wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
     std::ignore = dlg.ShowModal();
 #else // !wxUSE_LOG_DIALOG
     // start from the most recent message
-    wxString message;
+    std::string message;
     const size_t nMsgCount = messages.size();
     message.reserve(nMsgCount*100);
     for ( size_t n = nMsgCount; n > 0; n-- ) {
@@ -282,7 +283,7 @@ void wxLogGui::Flush()
 
     if ( repeatCount > 0 )
     {
-        m_aMessages[nMsgCount - 1] << " (" << m_aMessages[nMsgCount - 2] << ")";
+        m_aMessages[nMsgCount - 1] += fmt::format(" ({})", m_aMessages[nMsgCount - 2]);
     }
 
     const std::string title = GetTitle();
@@ -299,14 +300,14 @@ void wxLogGui::Flush()
     if ( nMsgCount == 1 )
     {
         // make a copy before calling Clear()
-        const wxString message(m_aMessages[0]);
+        const std::string message(m_aMessages[0]);
         Clear();
 
         DoShowSingleLogMessage(message, title, style);
     }
     else // more than one message
-    {
-        std::vector<wxString> messages;
+    { // FIXME: More efficient way to do this?
+        std::vector<std::string> messages;
         std::vector<int> severities;
         std::vector<long> times;
 
@@ -322,7 +323,7 @@ void wxLogGui::Flush()
 
 // log all kinds of messages
 void wxLogGui::DoLogRecord(wxLogLevel level,
-                           const wxString& msg,
+                           std::string_view msg,
                            const wxLogRecordInfo& info)
 {
     switch ( level )
@@ -330,7 +331,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
         case wxLOG_Info:
         case wxLOG_Message:
             {
-                m_aMessages.push_back(msg);
+                m_aMessages.emplace_back(msg.begin(), msg.end());
                 m_aSeverity.push_back(wxLOG_Message);
                 m_aTimes.push_back((long)(info.timestampMS / 1000));
                 m_bHasMessages = true;
@@ -358,7 +359,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 }
 
                 if ( pFrame && pFrame->GetStatusBar() )
-                    pFrame->SetStatusText(msg.ToStdString());
+                    pFrame->SetStatusText(msg);
             }
 #endif // wxUSE_STATUSBAR
             break;
@@ -383,7 +384,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 m_bWarnings = true;
             }
 
-            m_aMessages.push_back(msg);
+            m_aMessages.emplace_back(msg.begin(), msg.end());
             m_aSeverity.push_back((int)level);
             m_aTimes.push_back((long)(info.timestampMS / 1000));
             m_bHasMessages = true;
@@ -424,7 +425,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
 class wxLogFrame : public wxFrame
 {
 public:
-    wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle);
+    wxLogFrame(wxWindow *pParent, wxLogWindow *log, const std::string& szTitle);
     ~wxLogFrame();
 
     wxLogFrame(const wxLogFrame&) = delete;
@@ -442,9 +443,10 @@ public:
     void OnClear(wxCommandEvent& event);
 
     // do show the message in the text control
-    void ShowLogMessage(const wxString& message)
+    void ShowLogMessage(std::string_view message)
     {
-        m_pTextCtrl->AppendText(message + wxS('\n'));
+        auto msgWithBreak = fmt::format("{}\n", message);
+        m_pTextCtrl->AppendText(msgWithBreak);
     }
 
 private:
@@ -476,7 +478,7 @@ wxBEGIN_EVENT_TABLE(wxLogFrame, wxFrame)
     EVT_CLOSE(wxLogFrame::OnCloseWindow)
 wxEND_EVENT_TABLE()
 
-wxLogFrame::wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle)
+wxLogFrame::wxLogFrame(wxWindow *pParent, wxLogWindow *log, const std::string& szTitle)
           : wxFrame(pParent, wxID_ANY, szTitle),
             m_log(log)
 {
@@ -531,7 +533,7 @@ void wxLogFrame::OnCloseWindow([[maybe_unused]] wxCloseEvent& event)
 #if CAN_SAVE_FILES
 void wxLogFrame::OnSave([[maybe_unused]] wxCommandEvent& event)
 {
-    wxString filename;
+    std::string filename;
     wxFile file;
     int rc = OpenLogFile(file, &filename, this);
     if ( rc == -1 )
@@ -599,7 +601,7 @@ void wxLogWindow::Show(bool bShow)
     m_pLogFrame->Show(bShow);
 }
 
-void wxLogWindow::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
+void wxLogWindow::DoLogTextAtLevel(wxLogLevel level, std::string_view msg)
 {
     if ( !m_pLogFrame )
         return;
@@ -649,7 +651,7 @@ std::string wxLogDialog::ms_details;
 size_t wxLogDialog::ms_maxLength = 0;
 
 wxLogDialog::wxLogDialog(wxWindow *parent,
-                         const std::vector<wxString>& messages,
+                         const std::vector<std::string>& messages,
                          const std::vector<int>& severity,
                          const std::vector<long>& times,
                          std::string_view caption,
@@ -665,7 +667,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
         // ensure that we won't loop here if wxGetTranslation()
         // happens to pop up a Log message while translating this :-)
         ms_details = wxTRANSLATE("&Details");
-        ms_details = wxGetTranslation(ms_details).ToStdString();
+        ms_details = wxGetTranslation(ms_details);
     }
 
     if ( ms_maxLength == 0 )
@@ -770,8 +772,8 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
 
 void wxLogDialog::CreateDetailsControls(wxWindow *parent)
 {
-    wxString fmt = wxLog::GetTimestamp();
-    bool hasTimeStamp = !fmt.IsEmpty();
+    std::string fmt = wxLog::GetTimestamp();
+    bool hasTimeStamp = !fmt.empty();
 
     // create the list ctrl now
     m_listctrl = new wxListCtrl(parent, wxID_ANY,
@@ -793,7 +795,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
     wxImageList *imageList = new wxImageList(ICON_SIZE, ICON_SIZE);
 
     // order should be the same as in the switch below!
-    static wxString const icons[] =
+    static std::string const icons[] =
     {
         wxART_ERROR,
         wxART_WARNING,
@@ -848,8 +850,9 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
             image = -1;
         }
 
-        wxString msg = m_messages[n];
-        msg.Replace("\n", " ");
+        std::string msg = m_messages[n];
+        wx::utils::ReplaceAll(msg, "\n", " ");
+
         msg = EllipsizeString(msg);
 
         m_listctrl->InsertItem(n, msg, image);
@@ -888,13 +891,13 @@ void wxLogDialog::OnListItemActivated(wxListEvent& event)
     // newlines.
 
     // NB: don't do:
-    //    wxString str = m_listctrl->GetItemText(event.GetIndex());
+    //    std::string str = m_listctrl->GetItemText(event.GetIndex());
     // as there's a 260 chars limit on the items inside a wxListCtrl in wxMSW.
-    wxString str = m_messages[event.GetIndex()];
+    std::string str = m_messages[event.GetIndex()];
 
     // wxMessageBox will nicely handle the '\n' in the string (if any)
     // and supports long strings
-    wxMessageBox(str.ToStdString(), "Log message", wxOK, this);
+    wxMessageBox(str, "Log message", wxOK, this);
 }
 
 void wxLogDialog::OnOk([[maybe_unused]] wxCommandEvent& event)
@@ -904,9 +907,9 @@ void wxLogDialog::OnOk([[maybe_unused]] wxCommandEvent& event)
 
 #if CAN_SAVE_FILES || wxUSE_CLIPBOARD
 
-wxString wxLogDialog::GetLogMessages() const
+std::string wxLogDialog::GetLogMessages() const
 {
-    wxString fmt = wxLog::GetTimestamp();
+    std::string fmt = wxLog::GetTimestamp();
     if ( fmt.empty() )
     {
         // use the default format
@@ -915,14 +918,11 @@ wxString wxLogDialog::GetLogMessages() const
 
     const size_t count = m_messages.size();
 
-    wxString text;
+    std::string text;
     text.reserve(count*m_messages[0].length());
     for ( size_t n = 0; n < count; n++ )
     {
-        text << TimeStamp(fmt, (time_t)m_times[n])
-             << ": "
-             << m_messages[n]
-             << wxTextFile::GetEOL();
+        text += fmt::format("{}:{}{}", TimeStamp(fmt, (time_t)m_times[n]), m_messages[n], wxTextFile::GetEOL());
     }
 
     return text;
@@ -980,12 +980,12 @@ wxLogDialog::~wxLogDialog()
 // filename and try to open it, returns true on success (file was opened),
 // false if file couldn't be opened/created and -1 if the file selection
 // dialog was cancelled
-static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
+static int OpenLogFile(wxFile& file, std::string* pFilename, wxWindow *parent)
 {
     // get the file name
     // -----------------
-    wxString filename = wxSaveFileSelector("log", "txt", "log.txt", parent);
-    if ( !filename ) {
+    std::string filename = wxSaveFileSelector("log", "txt", "log.txt", parent);
+    if ( filename.empty() ) {
         // cancelled
         return -1;
     }
@@ -995,11 +995,9 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
     bool bOk = true; // suppress warning about it being possible uninitialized
     if ( wxFile::Exists(filename) ) {
         bool bAppend = false;
-        wxString strMsg;
-        strMsg.Printf(_("Append log to file '%s' (choosing [No] will overwrite it)?"),
-                      filename.c_str());
-        switch ( wxMessageBox(strMsg.ToStdString(), _("Question").ToStdString(),
-                              wxICON_QUESTION | wxYES_NO | wxCANCEL) ) {
+        std::string strMsg = fmt::format(_("Append log to file '{:s}' (choosing [No] will overwrite it)?"), filename);
+
+        switch ( wxMessageBox(strMsg, _("Question"), wxICON_QUESTION | wxYES_NO | wxCANCEL) ) {
             case wxYES:
                 bAppend = true;
                 break;
@@ -1047,9 +1045,10 @@ wxLogTextCtrl::wxLogTextCtrl(wxTextCtrl *pTextCtrl)
 {
 }
 
-void wxLogTextCtrl::DoLogText(const wxString& msg)
+void wxLogTextCtrl::DoLogText(std::string_view msg)
 {
-    m_pTextCtrl->AppendText(msg + wxS('\n'));
+    auto msgWithBreak = fmt::format("{}\n", msg);
+    m_pTextCtrl->AppendText(msgWithBreak);
 }
 
 #endif // wxUSE_LOG && wxUSE_TEXTCTRL

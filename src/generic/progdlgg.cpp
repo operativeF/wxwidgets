@@ -313,7 +313,7 @@ wxStaticText *
 wxGenericProgressDialog::CreateLabel(const std::string& text, wxSizer *sizer)
 {
     wxStaticText *label = new wxStaticText(this, wxID_ANY, text);
-    wxStaticText *value = new wxStaticText(this, wxID_ANY, _("unknown").ToStdString());
+    wxStaticText *value = new wxStaticText(this, wxID_ANY, _("unknown"));
 
     // select placement most native or nice on target GUI
 #if defined(__WXMSW__) || defined(__WXMAC__) || defined(__WXGTK20__)
@@ -387,7 +387,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
             if ( newmsg.empty() )
             {
                 // also provide the finishing message if the application didn't
-                m_msg->SetLabel(_("Done.").ToStdString());
+                m_msg->SetLabel(_("Done."));
             }
 
             // allow the window to repaint:
@@ -714,7 +714,7 @@ void wxGenericProgressDialog::EnableClose()
         if(m_btnAbort)
         {
             m_btnAbort->Enable();
-            m_btnAbort->SetLabel(_("Close").ToStdString());
+            m_btnAbort->SetLabel(_("Close"));
         }
     }
 }

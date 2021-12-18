@@ -42,7 +42,7 @@ import <vector>;
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
     #define _(s)                               wxGetTranslation((s))
 #else
-    #define _(s)                               wxGetTranslation(wxASCII_STR(s))
+    #define _(s)                               wxGetTranslation(s)
 #endif
     #define wxPLURAL(sing, plur, n)            wxGetTranslation((sing), (plur), n)
 #endif
@@ -53,13 +53,13 @@ import <vector>;
 // options to xgettext invocation.
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
 #define wxGETTEXT_IN_CONTEXT(c, s) \
-    wxGetTranslation((s), wxString(), c)
+    wxGetTranslation((s), std::string(), c)
 #else
 #define wxGETTEXT_IN_CONTEXT(c, s) \
-    wxGetTranslation(wxASCII_STR(s), wxString(), c)
+    wxGetTranslation(s, std::string(), c)
 #endif
 #define wxGETTEXT_IN_CONTEXT_PLURAL(c, sing, plur, n) \
-    wxGetTranslation((sing), (plur), n, wxString(), c)
+    wxGetTranslation((sing), (plur), n, std::string(), c)
 
 // another one which just marks the strings for extraction, but doesn't
 // perform the translation (use -kwxTRANSLATE with xgettext!)
@@ -87,17 +87,17 @@ public:
 
     // load the catalog from disk or from data; caller is responsible for
     // deleting them if not NULL
-    static wxMsgCatalog *CreateFromFile(const wxString& filename,
-                                        const wxString& domain);
+    static wxMsgCatalog *CreateFromFile(const std::string& filename,
+                                        const std::string& domain);
 
     static wxMsgCatalog *CreateFromData(const wxScopedCharBuffer& data,
-                                        const wxString& domain);
+                                        const std::string& domain);
 
     // get name of the catalog
     wxString GetDomain() const { return m_domain; }
 
-    // get the translated string: returns NULL if not found
-    const wxString *GetString(const wxString& sz, unsigned n = UINT_MAX, const wxString& ct = {}) const;
+    // get the translated string: returns nullptr if not found
+    const std::string* GetString(const std::string& sz, unsigned n = UINT_MAX, const std::string& ct = {}) const;
 
 protected:
     wxMsgCatalog(const wxString& domain)
@@ -110,7 +110,7 @@ private:
     friend class wxTranslations;
 
     wxStringToStringHashMap m_messages; // all messages in the catalog
-    wxString                m_domain;   // name of the domain
+    std::string             m_domain;   // name of the domain
 
     wxPluralFormsCalculatorPtr m_pluralFormsCalculator;
 };
@@ -135,7 +135,7 @@ public:
     void SetLoader(wxTranslationsLoader *loader);
 
     void SetLanguage(wxLanguage lang);
-    void SetLanguage(const wxString& lang);
+    void SetLanguage(const std::string& lang);
 
     // get languages available for this app
     std::vector<std::string> GetAvailableTranslations(const std::string& domain) const;
@@ -143,42 +143,42 @@ public:
     // find best translation language for given domain
     std::string GetBestTranslation(const std::string& domain, wxLanguage msgIdLanguage);
     std::string GetBestTranslation(const std::string& domain,
-                                const std::string& msgIdLanguage = wxASCII_STR("en"));
+                                   const std::string& msgIdLanguage = wxASCII_STR("en"));
 
     // add standard wxWidgets catalog ("wxstd")
     bool AddStdCatalog();
 
     // add catalog with given domain name and language, looking it up via
     // wxTranslationsLoader
-    bool AddCatalog(const wxString& domain,
+    bool AddCatalog(const std::string& domain,
                     wxLanguage msgIdLanguage = wxLANGUAGE_ENGLISH_US);
 
     // check if the given catalog is loaded
-    bool IsLoaded(const wxString& domain) const;
+    bool IsLoaded(const std::string& domain) const;
 
     // access to translations
-    const wxString *GetTranslatedString(const wxString& origString,
-                                        const wxString& domain = {},
-                                        const wxString& context = {}) const;
-    const wxString *GetTranslatedString(const wxString& origString,
+    const std::string *GetTranslatedString(const std::string& origString,
+                                        const std::string& domain = {},
+                                        const std::string& context = {}) const;
+    const std::string *GetTranslatedString(const std::string& origString,
                                         unsigned n,
-                                        const wxString& domain = {},
-                                        const wxString& context = {}) const;
+                                        const std::string& domain = {},
+                                        const std::string& context = {}) const;
 
-    wxString GetHeaderValue(const wxString& header,
-                            const wxString& domain = {}) const;
+    std::string GetHeaderValue(const std::string& header,
+                            const std::string& domain = {}) const;
 
     // this is hack to work around a problem with wxGetTranslation() which
-    // returns const wxString& and not wxString, so when it returns untranslated
+    // returns const std::string& and not std::string, so when it returns untranslated
     // string, it needs to have a copy of it somewhere
-    static const wxString& GetUntranslatedString(const wxString& str);
+    static const std::string& GetUntranslatedString(const std::string& str);
 
 private:
     // perform loading of the catalog via m_loader
-    bool LoadCatalog(const wxString& domain, const wxString& lang, const wxString& msgIdLang);
+    bool LoadCatalog(const std::string& domain, const std::string& lang, const std::string& msgIdLang);
 
     // find catalog by name in a linked list, return NULL if !found
-    wxMsgCatalog *FindCatalog(const wxString& domain) const;
+    wxMsgCatalog *FindCatalog(const std::string& domain) const;
 
     // same as Set(), without taking ownership; only for wxLocale
     static void SetNonOwned(wxTranslations *t);
@@ -193,7 +193,7 @@ private:
     // In addition to keeping all the catalogs in the linked list, we also
     // store them in a hash map indexed by the domain name to allow finding
     // them by name efficiently.
-    using wxMsgCatalogMap = std::unordered_map< wxString, wxMsgCatalog *, wxStringHash, wxStringEqual >;
+    using wxMsgCatalogMap = std::unordered_map< std::string, wxMsgCatalog *, wxStringHash, wxStringEqual >;
     wxMsgCatalogMap m_catalogMap;
 };
 
@@ -251,12 +251,12 @@ protected:
 // ----------------------------------------------------------------------------
 
 // get the translation of the string in the current locale
-inline const wxString& wxGetTranslation(const wxString& str,
-                                        const wxString& domain = {},
-                                        const wxString& context = {})
+inline const std::string& wxGetTranslation(const std::string& str,
+                                           const std::string& domain = {},
+                                           const std::string& context = {})
 {
-    wxTranslations *trans = wxTranslations::Get();
-    const wxString *transStr = trans ? trans->GetTranslatedString(str, domain, context)
+    wxTranslations* trans = wxTranslations::Get();
+    const std::string* transStr = trans ? trans->GetTranslatedString(str, domain, context)
                                      : nullptr;
     if ( transStr )
         return *transStr;
@@ -266,14 +266,14 @@ inline const wxString& wxGetTranslation(const wxString& str,
         return wxTranslations::GetUntranslatedString(str);
 }
 
-inline const wxString& wxGetTranslation(const wxString& str1,
-                                        const wxString& str2,
+inline const std::string& wxGetTranslation(const std::string& str1,
+                                        const std::string& str2,
                                         unsigned n,
-                                        const wxString& domain = {},
-                                        const wxString& context = {})
+                                        const std::string& domain = {},
+                                        const std::string& context = {})
 {
     wxTranslations *trans = wxTranslations::Get();
-    const wxString *transStr = trans ? trans->GetTranslatedString(str1, n, domain, context)
+    const std::string* transStr = trans ? trans->GetTranslatedString(str1, n, domain, context)
                                      : nullptr;
     if ( transStr )
         return *transStr;

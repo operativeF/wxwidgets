@@ -870,12 +870,12 @@ std::string wxNativeFontInfo::ToUserString() const
     // but what else can we do?
     if ( GetUnderlined() )
     {
-        desc += _("underlined").ToStdString();
+        desc += _("underlined");
     }
 
     if ( GetStrikethrough() )
     {
-        desc += _(" strikethrough").ToStdString();
+        desc += _(" strikethrough");
     }
 
     switch ( GetWeight() )
@@ -888,39 +888,39 @@ std::string wxNativeFontInfo::ToUserString() const
             break;
 
         case wxFONTWEIGHT_THIN:
-            desc += _(" thin").ToStdString();
+            desc += _(" thin");
             break;
 
         case wxFONTWEIGHT_EXTRALIGHT:
-            desc += _(" extra light").ToStdString();
+            desc += _(" extra light");
             break;
 
         case wxFONTWEIGHT_LIGHT:
-            desc += _(" light").ToStdString();
+            desc += _(" light");
             break;
 
         case wxFONTWEIGHT_MEDIUM:
-            desc += _(" medium").ToStdString();
+            desc += _(" medium");
             break;
 
         case wxFONTWEIGHT_SEMIBOLD:
-            desc += _(" semi bold").ToStdString();
+            desc += _(" semi bold");
             break;
 
         case wxFONTWEIGHT_BOLD:
-            desc += _(" bold").ToStdString();
+            desc += _(" bold");
             break;
 
         case wxFONTWEIGHT_EXTRABOLD:
-            desc += _(" extra bold").ToStdString();
+            desc += _(" extra bold");
             break;
 
         case wxFONTWEIGHT_HEAVY:
-            desc += _(" heavy").ToStdString();
+            desc += _(" heavy");
             break;
 
         case wxFONTWEIGHT_EXTRAHEAVY:
-            desc += _(" extra heavy").ToStdString();
+            desc += _(" extra heavy");
             break;
     }
 
@@ -936,7 +936,7 @@ std::string wxNativeFontInfo::ToUserString() const
             // we don't distinguish between the two for now anyhow...
         case wxFontStyle::Italic:
         case wxFontStyle::Slant:
-            desc += _(" italic").ToStdString();
+            desc += _(" italic");
             break;
     }
 
@@ -1080,11 +1080,11 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
 
         auto [p, ec] = std::from_chars(token.data(), token.data() + token.size(), size);
 
-        if ( token == "underlined" || token == _("underlined").ToStdString() )
+        if ( token == "underlined" || token == _("underlined") )
         {
             SetUnderlined(true);
         }
-        else if ( token == "strikethrough" || token == _("strikethrough").ToStdString() )
+        else if ( token == "strikethrough" || token == _("strikethrough") )
         {
             SetStrikethrough(true);
         }
@@ -1093,7 +1093,7 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
             SetUnderlined(true);
             SetStrikethrough(true);
         }
-        else if ( token == "thin" || token == _("thin").ToStdString() )
+        else if ( token == "thin" || token == _("thin") )
         {
             SetWeight(wxFONTWEIGHT_THIN);
             weightfound = true;
@@ -1106,12 +1106,12 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
         {
             semiQualifierFound = true;
         }
-       else if ( token == "extralight" || token == _("extralight").ToStdString() )
+       else if ( token == "extralight" || token == _("extralight") )
         {
             SetWeight(wxFONTWEIGHT_EXTRALIGHT);
             weightfound = true;
         }
-        else if ( token == "light" || token == _("light").ToStdString() )
+        else if ( token == "light" || token == _("light") )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRALIGHT);
@@ -1119,22 +1119,22 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
                 SetWeight(wxFONTWEIGHT_LIGHT);
             weightfound = true;
         }
-        else if ( token == "normal" || token == _("normal").ToStdString() )
+        else if ( token == "normal" || token == _("normal") )
         {
             SetWeight(wxFONTWEIGHT_NORMAL);
             weightfound = true;
         }
-        else if ( token == "medium" || token == _("medium").ToStdString() )
+        else if ( token == "medium" || token == _("medium") )
         {
             SetWeight(wxFONTWEIGHT_MEDIUM);
             weightfound = true;
         }
-        else if ( token == "semibold" || token == _("semibold").ToStdString() )
+        else if ( token == "semibold" || token == _("semibold") )
         {
             SetWeight(wxFONTWEIGHT_SEMIBOLD);
             weightfound = true;
         }
-        else if ( token == "bold" || token == _("bold").ToStdString() )
+        else if ( token == "bold" || token == _("bold") )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRABOLD);
@@ -1144,17 +1144,17 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
                 SetWeight(wxFONTWEIGHT_BOLD);
             weightfound = true;
         }
-        else if ( token == "extrabold" || token == _("extrabold").ToStdString() )
+        else if ( token == "extrabold" || token == _("extrabold") )
         {
             SetWeight(wxFONTWEIGHT_EXTRABOLD);
             weightfound = true;
         }
-        else if ( token == "semibold" || token == _("semibold").ToStdString() )
+        else if ( token == "semibold" || token == _("semibold") )
         {
             SetWeight(wxFONTWEIGHT_SEMIBOLD);
             weightfound = true;
         }
-        else if ( token == "heavy" || token == _("heavy").ToStdString() )
+        else if ( token == "heavy" || token == _("heavy") )
         {
             if ( extraQualifierFound )
                 SetWeight(wxFONTWEIGHT_EXTRAHEAVY);
@@ -1162,12 +1162,12 @@ bool wxNativeFontInfo::FromUserString(const std::string& s)
                 SetWeight(wxFONTWEIGHT_HEAVY);
             weightfound = true;
         }
-        else if ( token == "extraheavy" || token == _("extraheavy" ).ToStdString() )
+        else if ( token == "extraheavy" || token == _("extraheavy" ) )
         {
             SetWeight(wxFONTWEIGHT_EXTRAHEAVY);
             weightfound = true;
         }
-        else if ( token == "italic" || token == _("italic").ToStdString() )
+        else if ( token == "italic" || token == _("italic") )
         {
             SetStyle(wxFontStyle::Italic);
         }

@@ -372,8 +372,8 @@ void wxWizard::AddButtonRow(wxBoxSizer *mainColumn)
         btnHelp=new wxButton(this, wxID_HELP, {}, wxDefaultPosition, wxDefaultSize, buttonStyle);
 #endif
 
-    m_nextLabel = _("&Next >").ToStdString();
-    m_finishLabel = _("&Finish").ToStdString();
+    m_nextLabel = _("&Next >");
+    m_finishLabel = _("&Finish");
 
     m_btnNext = new wxButton(this, wxID_FORWARD, m_nextLabel);
     wxButton *btnCancel=new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, buttonStyle);

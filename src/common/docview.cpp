@@ -330,7 +330,7 @@ bool wxDocument::SaveAs()
     }
 
     // TODO: Make wxFileSelector use paths
-    std::string fileName = wxFileSelector(_("Save As").ToStdString(),
+    std::string fileName = wxFileSelector(_("Save As"),
                                           defaultDir.string(),
                                           wxFileNameFromPath(GetFilename().string()),
                                           docTemplate->GetDefaultExtension(),
@@ -413,7 +413,7 @@ bool wxDocument::Revert()
 {
     if ( wxMessageBox
          (
-            _("Discard changes and reload the last saved version?").ToStdString(),
+            _("Discard changes and reload the last saved version?"),
             wxTheApp->GetAppDisplayName(),
             wxYES_NO | wxCANCEL | wxICON_QUESTION,
             GetDocumentWindow()
@@ -442,7 +442,7 @@ std::string wxDocument::DoGetUserReadableName() const
     if ( !m_documentFile.empty() )
         return m_documentFile.filename().string();
 
-    return _("unnamed").ToStdString();
+    return _("unnamed");
 }
 
 wxWindow *wxDocument::GetDocumentWindow() const
@@ -464,11 +464,11 @@ bool wxDocument::OnSaveModified()
     {
         switch ( wxMessageBox
                  (
-                    wxString::Format
+                    fmt::format
                     (
                      _("Do you want to save changes to %s?"),
                      GetUserReadableName()
-                    ).ToStdString(),
+                    ),
                     wxTheApp->GetAppDisplayName(),
                     wxYES_NO | wxCANCEL | wxICON_QUESTION | wxCENTRE,
                     GetDocumentWindow()
@@ -1176,7 +1176,7 @@ void wxDocManager::OnPreview([[maybe_unused]] wxCommandEvent& event)
 
         wxPreviewFrame* frame = CreatePreviewFrame(preview,
                                                    wxTheApp->GetTopWindow(),
-                                                   _("Print Preview").ToStdString());
+                                                   _("Print Preview"));
         wxCHECK_RET( frame, "should create a print preview frame" );
 
         frame->Centre(wxBOTH);
@@ -1515,7 +1515,7 @@ wxCommandProcessor *wxDocManager::GetCurrentCommandProcessor() const
 
 std::string wxDocManager::MakeNewDocumentName()
 {
-    auto name = fmt::format("{}{:d}", _("unnamed").ToStdString(), m_defaultDocumentNameCounter);
+    auto name = fmt::format("{}{:d}", _("unnamed"), m_defaultDocumentNameCounter);
     m_defaultDocumentNameCounter++;
 
     return name;
@@ -1534,7 +1534,7 @@ std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
     else
     {
         std::string docName = doc->GetUserReadableName();
-        title = docName + _(" - ").ToStdString() + appName;
+        title = docName + _(" - ") + appName;
     }
     
     return title;
@@ -1684,9 +1684,9 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
             if (!wxTheApp->GetAppDisplayName().empty())
                 msgTitle = wxTheApp->GetAppDisplayName();
             else
-                msgTitle = _("File error").ToStdString();
+                msgTitle = _("File error");
 
-            wxMessageBox(_("Sorry, could not open this file.").ToStdString(),
+            wxMessageBox(_("Sorry, could not open this file."),
                          msgTitle,
                          wxOK | wxICON_EXCLAMATION | wxCENTRE);
 
@@ -1721,8 +1721,8 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
             // Since we do not add files with non-default extensions to the
             // file history this can only happen if the application changes the
             // allowed templates in runtime.
-            wxMessageBox(_("Sorry, the format for this file is unknown.").ToStdString(),
-                         _("Open File").ToStdString(),
+            wxMessageBox(_("Sorry, the format for this file is unknown."),
+                         _("Open File"),
                          wxOK | wxICON_EXCLAMATION | wxCENTRE);
         }
     }
@@ -2038,7 +2038,7 @@ std::string GetAppropriateTitle(const wxView *view, const std::string& titleGive
         if ( view && view->GetDocument() )
             title = view->GetDocument()->GetUserReadableName();
         else
-            title = _("Printout").ToStdString();
+            title = _("Printout");
     }
 
     return title;

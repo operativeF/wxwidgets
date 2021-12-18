@@ -209,7 +209,7 @@ public: \
     _WX_DECLARE_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME, class )
 
 #define WX_DECLARE_STRING_HASH_MAP( VALUE_T, CLASSNAME ) \
-    _WX_DECLARE_HASH_MAP( wxString, VALUE_T, wxStringHash, wxStringEqual, \
+    _WX_DECLARE_HASH_MAP( std::string, VALUE_T, wxStringHash, wxStringEqual, \
                           CLASSNAME, class )
 
 #define WX_DECLARE_VOIDPTR_HASH_MAP( VALUE_T, CLASSNAME ) \
@@ -224,7 +224,7 @@ public: \
 
 // note: DECL is not used since the class is inline
 #define WX_DECLARE_STRING_HASH_MAP_WITH_DECL( VALUE_T, CLASSNAME, DECL ) \
-    _WX_DECLARE_HASH_MAP( wxString, VALUE_T, wxStringHash, wxStringEqual, \
+    _WX_DECLARE_HASH_MAP( std::string, VALUE_T, wxStringHash, wxStringEqual, \
                           CLASSNAME, class )
 
 // note: DECL is not used since the class is inline
@@ -249,7 +249,7 @@ public: \
 //---------------------------------------------------------------------------
 // Declarations of common hashmap classes
 
-WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxString, wxStringToStringHashMap,
+WX_DECLARE_STRING_HASH_MAP_WITH_DECL( std::string, wxStringToStringHashMap,
                                       class );
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxUIntPtr, wxStringToNumHashMap,

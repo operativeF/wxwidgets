@@ -111,7 +111,7 @@ public:
     // --------------------
 
     // returns the error message if the contents of 'str' are invalid
-    virtual wxString IsValid(const wxString& str) const;
+    virtual std::string IsValid(std::string_view str) const;
 
 protected:
 
@@ -125,7 +125,7 @@ protected:
         return m_charExcludes.find(c) != wxString::npos;
     }
 
-    bool IsIncluded(const wxString& str) const
+    bool IsIncluded(const std::string& str) const
     {
         if ( HasFlag(wxFILTER_INCLUDE_LIST) )
             return m_includes.cend() != std::find(m_includes.cbegin(), m_includes.cend(), str);
@@ -135,7 +135,7 @@ protected:
         return true;
     }
 
-    bool IsExcluded(const wxString& str) const
+    bool IsExcluded(const std::string& str) const
     {
         return m_excludes.cend() != std::find(m_excludes.cbegin(), m_excludes.cend(), str);
     }

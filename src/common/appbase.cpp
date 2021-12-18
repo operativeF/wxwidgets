@@ -883,8 +883,8 @@ bool wxConsoleAppTraitsBase::HasStderr()
     return true;
 }
 
-bool wxConsoleAppTraitsBase::SafeMessageBox([[maybe_unused]] const std::string& text,
-                                            [[maybe_unused]] const std::string& title)
+bool wxConsoleAppTraitsBase::SafeMessageBox([[maybe_unused]] std::string_view text,
+                                            [[maybe_unused]] std::string_view title)
 {
     // console applications don't show message boxes by default, although this
     // can be done in platform-specific cases

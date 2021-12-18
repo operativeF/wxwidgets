@@ -24,9 +24,9 @@ std::string wxStockPreferencesPage::GetName() const
     switch ( m_kind )
     {
         case Kind::General:
-            return _("General").ToStdString();
+            return _("General");
         case Kind::Advanced:
-            return _("Advanced").ToStdString();
+            return _("Advanced");
     }
 
     return {};

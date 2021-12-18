@@ -53,16 +53,16 @@ std::string wxAboutDialogInfo::GetDescriptionAndCredits() const
         s += '\n';
 
     if ( HasDevelopers() )
-        s += fmt::format("\n{}{}", _("Developed by ").ToStdString(), AllAsString(GetDevelopers()));
+        s += fmt::format("\n{}{}", _("Developed by "), AllAsString(GetDevelopers()));
 
     if ( HasDocWriters() )
-        s += fmt::format("\n{}{}", _("Documentation by ").ToStdString(), AllAsString(GetDocWriters()));
+        s += fmt::format("\n{}{}", _("Documentation by "), AllAsString(GetDocWriters()));
 
     if ( HasArtists() )
-        s += fmt::format("\n{}{}", _("Graphics art by ").ToStdString(), AllAsString(GetArtists()));
+        s += fmt::format("\n{}{}", _("Graphics art by "), AllAsString(GetArtists()));
 
     if ( HasTranslators() )
-        s += fmt::format("\n{}{}", _("Translations by ").ToStdString(), AllAsString(GetTranslators()));
+        s += fmt::format("\n{}{}", _("Translations by "), AllAsString(GetTranslators()));
 
     return s;
 }
@@ -157,10 +157,10 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
 
 #if wxUSE_COLLPANE
     if ( info.HasLicence() )
-        AddCollapsiblePane(_("License").ToStdString(), info.GetLicence());
+        AddCollapsiblePane(_("License"), info.GetLicence());
 
     if ( info.HasDevelopers() )
-        AddCollapsiblePane(_("Developers").ToStdString(),
+        AddCollapsiblePane(_("Developers"),
                            AllAsString(info.GetDevelopers()));
 
     if ( info.HasDocWriters() )
@@ -168,11 +168,11 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
                            AllAsString(info.GetDocWriters()));
 
     if ( info.HasArtists() )
-        AddCollapsiblePane(_("Artists").ToStdString(),
+        AddCollapsiblePane(_("Artists"),
                            AllAsString(info.GetArtists()));
 
     if ( info.HasTranslators() )
-        AddCollapsiblePane(_("Translators").ToStdString(),
+        AddCollapsiblePane(_("Translators"),
                            AllAsString(info.GetTranslators()));
 #endif // wxUSE_COLLPANE
 

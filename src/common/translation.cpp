@@ -162,7 +162,7 @@ std::string GetPreferredUILanguage(const std::vector<std::string>& available)
 
                     size_t pos = lang.find('_');
 
-                    if ( pos != wxString::npos )
+                    if ( pos != std::string::npos )
                     {
                         lang = lang.substr(0, pos);
                         const auto isSubLang = std::find_if(available.cbegin(), available.cend(),
@@ -186,7 +186,7 @@ std::string GetPreferredUILanguage(const std::vector<std::string>& available)
 
 void LogTraceArray(const char *prefix, CFArrayRef arr)
 {
-    wxString s;
+    std::string s;
     const unsigned count = CFArrayGetCount(arr);
     if ( count )
     {
@@ -199,7 +199,7 @@ void LogTraceArray(const char *prefix, CFArrayRef arr)
 
 #endif // wxUSE_LOG_TRACE
 
-wxString GetPreferredUILanguage(const std::vector<wxString>& available)
+std::string GetPreferredUILanguage(const std::vector<std::string>& available)
 {
     wxStringToStringHashMap availableNormalized;
     wxCFRef<CFMutableArrayRef> availableArr(
@@ -209,7 +209,7 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
           i != available.end();
           ++i )
     {
-        wxString lang(*i);
+        std::string lang(*i);
         wxCFStringRef code_wx(*i);
         wxCFStringRef code_norm(
             CFLocaleCreateCanonicalLanguageIdentifierFromString(kCFAllocatorDefault, code_wx));
@@ -227,7 +227,7 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
     {
         // Lookup the name in 'available' by index -- we need to get the
         // original value corresponding to the normalized one chosen.
-        wxString lang(wxCFStringRef::AsString((CFStringRef)CFArrayGetValueAtIndex(prefArr, 0)));
+        std::string lang(wxCFStringRef::AsString((CFStringRef)CFArrayGetValueAtIndex(prefArr, 0)));
         wxStringToStringHashMap::const_iterator i = availableNormalized.find(lang);
         if ( i == availableNormalized.end() )
             return lang;
@@ -247,16 +247,16 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
 // The LANGUAGE variable may contain a colon separated list of language
 // codes in the order of preference.
 // http://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
-wxString GetPreferredUILanguage(const std::vector<wxString>& available)
+std::string GetPreferredUILanguage(const std::vector<std::string>& available)
 {
-    wxString languageFromEnv;
-    std::vector<wxString> preferred;
+    std::string languageFromEnv;
+    std::vector<std::string> preferred;
     if ( wxGetEnv("LANGUAGE", &languageFromEnv) )
     {
         wxStringTokenizer tknzr(languageFromEnv, ":");
         while ( tknzr.HasMoreTokens() )
         {
-            const wxString tok = tknzr.GetNextToken();
+            const std::string tok = tknzr.GetNextToken();
             if ( const wxLanguageInfo *li = wxLocale::FindLanguageInfo(tok) )
             {
                 preferred.push_back(li->CanonicalName);
@@ -273,11 +273,11 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
           j != preferred.end();
           ++j )
     {
-        wxString lang(*j);
+        std::string lang(*j);
         if ( available.Index(lang) != wxNOT_FOUND )
             return lang;
         size_t pos = lang.find('_');
-        if ( pos != wxString::npos )
+        if ( pos != std::string::npos )
         {
             lang = lang.substr(0, pos);
             if ( available.Index(lang) != wxNOT_FOUND )
@@ -1014,17 +1014,17 @@ public:
 	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;
 
     // load the catalog from disk
-    bool LoadFile(const wxString& filename,
+    bool LoadFile(const std::string& filename,
                   wxPluralFormsCalculatorPtr& rPluralFormsCalculator);
     bool LoadData(const DataBuffer& data,
                   wxPluralFormsCalculatorPtr& rPluralFormsCalculator);
 
     // fills the hash with string-translation pairs
-    bool FillHash(wxStringToStringHashMap& hash, const wxString& domain) const;
+    bool FillHash(wxStringToStringHashMap& hash, const std::string& domain) const;
 
     // return the charset of the strings in this catalog or empty string if
     // none/unknown
-    wxString GetCharset() const { return m_charset; }
+    std::string GetCharset() const { return m_charset; }
 
 private:
     // this implementation is binary compatible with GNU gettext() version 0.10
@@ -1057,7 +1057,7 @@ private:
     wxMsgTableEntry  *m_pOrigTable,   // pointer to original   strings
                      *m_pTransTable;  //            translated
 
-    wxString m_charset;               // from the message catalog header
+    std::string m_charset;               // from the message catalog header
 
 
     // swap the 2 halves of 32 bit integer if needed
@@ -1090,7 +1090,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // open disk file and read in it's contents
-bool wxMsgCatalogFile::LoadFile(const wxString& filename,
+bool wxMsgCatalogFile::LoadFile(const std::string& filename,
                                 wxPluralFormsCalculatorPtr& rPluralFormsCalculator)
 {
     wxFile fileMsg(filename);
@@ -1175,7 +1175,7 @@ bool wxMsgCatalogFile::LoadData(const DataBuffer& data,
             const char * const csetEnd = strchr(cset, '\n');
             if ( csetEnd )
             {
-                m_charset = wxString(cset, csetEnd - cset);
+                m_charset = std::string(cset, csetEnd - cset);
                 if ( m_charset == "CHARSET" )
                 {
                     // "CHARSET" is not valid charset, but lazy translator
@@ -1219,7 +1219,7 @@ bool wxMsgCatalogFile::LoadData(const DataBuffer& data,
 }
 
 bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
-                                const wxString& domain) const
+                                const std::string& domain) const
 {
     wxUnusedVar(domain); // silence warning in Unicode build
 
@@ -1251,7 +1251,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
         if (!data)
             return false; // may happen for invalid MO files
 
-        wxString msgid;
+        std::string msgid;
         msgid = wxString(data, *inputConv);
 
         data = StringAtOfs(m_pTransTable, i);
@@ -1265,12 +1265,11 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
         {
             const char * const str = data + offset;
 
-            wxString msgstr;
-            msgstr = wxString(str, *inputConv);
+            auto msgstr = wxString(str, *inputConv).ToStdString();
 
             if ( !msgstr.empty() )
             {
-                hash[index == 0 ? msgid : msgid + wxChar(index)] = msgstr;
+                hash[index == 0 ? msgid : msgid + char(index)] = msgstr;
             }
 
             // skip this string
@@ -1293,8 +1292,8 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
 // ----------------------------------------------------------------------------
 
 /* static */
-wxMsgCatalog *wxMsgCatalog::CreateFromFile(const wxString& filename,
-                                           const wxString& domain)
+wxMsgCatalog *wxMsgCatalog::CreateFromFile(const std::string& filename,
+                                           const std::string& domain)
 {
     std::unique_ptr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
 
@@ -1311,7 +1310,7 @@ wxMsgCatalog *wxMsgCatalog::CreateFromFile(const wxString& filename,
 
 /* static */
 wxMsgCatalog *wxMsgCatalog::CreateFromData(const wxScopedCharBuffer& data,
-                                           const wxString& domain)
+                                           const std::string& domain)
 {
     std::unique_ptr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
 
@@ -1326,7 +1325,7 @@ wxMsgCatalog *wxMsgCatalog::CreateFromData(const wxScopedCharBuffer& data,
     return cat.release();
 }
 
-const wxString *wxMsgCatalog::GetString(const wxString& str, unsigned n, const wxString& context) const
+const std::string *wxMsgCatalog::GetString(const std::string& str, unsigned n, const std::string& context) const
 {
     int index = 0;
     if (n != std::numeric_limits<unsigned int>::max())
@@ -1336,17 +1335,17 @@ const wxString *wxMsgCatalog::GetString(const wxString& str, unsigned n, const w
     wxStringToStringHashMap::const_iterator i;
     if (index != 0)
     {
-        if (context.IsEmpty())
-            i = m_messages.find(wxString(str) + wxChar(index));   // plural, no context
+        if (context.empty())
+            i = m_messages.find(std::string{str + char(index)});   // plural, no context
         else
-            i = m_messages.find(wxString(context) + wxString('\x04') + wxString(str) + wxChar(index));   // plural, context
+            i = m_messages.find(context + std::to_string('\x04') + str + char(index));   // plural, context
     }
     else
     {
-        if (context.IsEmpty())
+        if (context.empty())
             i = m_messages.find(str); // no context
         else
-            i = m_messages.find(wxString(context) + wxString('\x04') + wxString(str)); // context
+            i = m_messages.find(context + std::to_string('\x04') + str); // context
     }
 
     if ( i != m_messages.end() )
@@ -1428,12 +1427,12 @@ void wxTranslations::SetLoader(wxTranslationsLoader *loader)
 void wxTranslations::SetLanguage(wxLanguage lang)
 {
     if ( lang == wxLANGUAGE_DEFAULT )
-        SetLanguage(wxString());
+        SetLanguage(std::string{});
     else
         SetLanguage(wxLocale::GetLanguageCanonicalName(lang));
 }
 
-void wxTranslations::SetLanguage(const wxString& lang)
+void wxTranslations::SetLanguage(const std::string& lang)
 {
     m_lang = lang;
 }
@@ -1462,11 +1461,11 @@ bool wxTranslations::AddStdCatalog()
     return false;
 }
 
-bool wxTranslations::AddCatalog(const wxString& domain,
+bool wxTranslations::AddCatalog(const std::string& domain,
                                 wxLanguage msgIdLanguage)
 {
-    const wxString msgIdLang = wxLocale::GetLanguageCanonicalName(msgIdLanguage);
-    const wxString domain_lang = GetBestTranslation(domain, msgIdLang);
+    const std::string msgIdLang = wxLocale::GetLanguageCanonicalName(msgIdLanguage);
+    const std::string domain_lang = GetBestTranslation(domain, msgIdLang);
 
     if ( domain_lang.empty() )
     {
@@ -1484,7 +1483,7 @@ bool wxTranslations::AddCatalog(const wxString& domain,
 }
 
 
-bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, const wxString& msgIdLang)
+bool wxTranslations::LoadCatalog(const std::string& domain, const std::string& lang, const std::string& msgIdLang)
 {
     wxCHECK_MSG( m_loader, false, "loader can't be NULL" );
 
@@ -1498,8 +1497,7 @@ bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, c
     const wxFontEncoding encSys = wxLocale::GetSystemEncoding();
     if ( encSys != wxFONTENCODING_SYSTEM )
     {
-        wxString fullname(lang);
-        fullname << wxS('.') << wxFontMapperBase::GetEncodingName(encSys);
+        std::string fullname = fmt::format("{}.{}", lang, wxFontMapperBase::GetEncodingName(encSys));
 
         cat = m_loader->LoadCatalog(domain, fullname);
     }
@@ -1516,7 +1514,7 @@ bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, c
         // Also try just base locale name: for things like "fr_BE" (Belgium
         // French) we should use fall back on plain "fr" if no Belgium-specific
         // message catalogs exist
-        wxString baselang = lang.BeforeFirst('_');
+        std::string baselang = wx::utils::BeforeFirst(lang, '_');
         if ( lang != baselang )
             cat = m_loader->LoadCatalog(domain, baselang);
     }
@@ -1552,7 +1550,7 @@ bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, c
 }
 
 // check if the given catalog is loaded
-bool wxTranslations::IsLoaded(const wxString& domain) const
+bool wxTranslations::IsLoaded(const std::string& domain) const
 {
     return FindCatalog(domain) != nullptr;
 }
@@ -1586,7 +1584,7 @@ std::string wxTranslations::GetBestTranslation(const std::string& domain,
 
 
 /* static */
-const wxString& wxTranslations::GetUntranslatedString(const wxString& str)
+const std::string& wxTranslations::GetUntranslatedString(const std::string& str)
 {
     wxLocaleUntranslatedStrings& strings = wxThreadInfo.untranslatedStrings;
 
@@ -1598,22 +1596,22 @@ const wxString& wxTranslations::GetUntranslatedString(const wxString& str)
 }
 
 
-const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
-                                                    const wxString& domain,
-                                                    const wxString& context) const
+const std::string *wxTranslations::GetTranslatedString(const std::string& origString,
+                                                    const std::string& domain,
+                                                    const std::string& context) const
 {
     return GetTranslatedString(origString, std::numeric_limits<unsigned int>::max(), domain, context);
 }
 
-const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
+const std::string *wxTranslations::GetTranslatedString(const std::string& origString,
                                                     unsigned n,
-                                                    const wxString& domain,
-                                                    const wxString& context) const
+                                                    const std::string& domain,
+                                                    const std::string& context) const
 {
     if ( origString.empty() )
         return nullptr;
 
-    const wxString *trans = nullptr;
+    const std::string* trans = nullptr;
 
     if ( !domain.empty() )
     {
@@ -1641,9 +1639,9 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
             TRACE_I18N,
             "string \"%s\"%s not found in %s%slocale '%s'.",
             origString,
-            (n != std::numeric_limits<unsigned int>::max() ? wxString::Format("[%ld]", (long)n) : wxString()),
-            (!domain.empty() ? wxString::Format("domain '%s' ", domain) : wxString()),
-            (!context.empty() ? wxString::Format("context '%s' ", context) : wxString()),
+            (n != std::numeric_limits<unsigned int>::max() ? fmt::format("[{:ld}]", n) : std::string{}),
+            (!domain.empty() ? fmt::format("domain '{:s}' ", domain) : std::string{}),
+            (!context.empty() ? fmt::format("context '{:s}' ", context) : std::string{}),
             m_lang
         );
     }
@@ -1651,13 +1649,13 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
     return trans;
 }
 
-wxString wxTranslations::GetHeaderValue(const wxString& header,
-                                        const wxString& domain) const
+std::string wxTranslations::GetHeaderValue(const std::string& header,
+                                           const std::string& domain) const
 {
     if ( header.empty() )
         return {};
 
-    const wxString *trans = nullptr;
+    const std::string* trans = nullptr;
 
     if ( !domain.empty() )
     {
@@ -1684,27 +1682,27 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
         return {};
 
     size_t found = trans->find(header + ": ");
-    if ( found == wxString::npos )
+    if ( found == std::string::npos )
         return {};
 
     found += header.length() + 2 /* ': ' */;
 
     // Every header is separated by \n
 
-    size_t endLine = trans->find(wxS('\n'), found);
-    size_t len = (endLine == wxString::npos) ?
-                wxString::npos : (endLine - found);
+    size_t endLine = trans->find('\n', found);
+    size_t len = (endLine == std::string::npos) ?
+                std::string::npos : (endLine - found);
 
     return trans->substr(found, len);
 }
 
 
 // find catalog by name
-wxMsgCatalog *wxTranslations::FindCatalog(const wxString& domain) const
+wxMsgCatalog *wxTranslations::FindCatalog(const std::string& domain) const
 {
     const wxMsgCatalogMap::const_iterator found = m_catalogMap.find(domain);
 
-    return found == m_catalogMap.end() ? NULL : found->second;
+    return found == m_catalogMap.end() ? nullptr : found->second;
 }
 
 // ----------------------------------------------------------------------------
@@ -1719,7 +1717,7 @@ std::vector<std::string> gs_searchPrefixes;
 
 // return the directories to search for message catalogs under the given
 // prefix, separated by wxPATH_SEP
-wxString GetMsgCatalogSubdirs(const wxString& prefix, const wxString& lang)
+std::string GetMsgCatalogSubdirs(const std::string& prefix, const std::string& lang)
 {
     // Search first in Unix-standard prefix/lang/LC_MESSAGES, then in
     // prefix/lang.
@@ -1732,24 +1730,15 @@ wxString GetMsgCatalogSubdirs(const wxString& prefix, const wxString& lang)
     //    breaking apps after they are recompiled against the latest wx
     // b) it makes it possible to package app's support files in the same
     //    way on all target platforms
-    const wxString prefixAndLang = wxFileName(prefix, lang).GetFullPath();
+    const std::string prefixAndLang = wxFileName(prefix, lang).GetFullPath();
 
-    wxString searchPath;
-    searchPath.reserve(4*prefixAndLang.length());
-
-    searchPath
 #ifdef __WXOSX__
-               << prefixAndLang << ".lproj/LC_MESSAGES" << wxPATH_SEP
-               << prefixAndLang << ".lproj" << wxPATH_SEP
+        return fmt::format("{}.lproj/LC_MESSAGES{}{}.lproj{}{}{}LC_MESSAGES{}{}{}", prefixAndLang, wxPATH_SEP, prefixAndLang, wxPATH_SEP, prefixAndLang, wxFILE_SEP_PATH, wxPATH_SEP, prefixAndLang, wxPATH_SEP);
 #endif
-               << prefixAndLang << wxFILE_SEP_PATH << "LC_MESSAGES" << wxPATH_SEP
-               << prefixAndLang << wxPATH_SEP
-               ;
-
-    return searchPath;
+        return fmt::format("{}{}LC_MESSAGES{}{}{}", prefixAndLang, wxFILE_SEP_PATH, wxPATH_SEP, prefixAndLang, wxPATH_SEP);
 }
 
-bool HasMsgCatalogInDir(const wxString& dir, const wxString& domain)
+bool HasMsgCatalogInDir(const std::string& dir, const std::string& domain)
 {
     return wxFileName(dir, domain, "mo").FileExists() ||
            wxFileName(dir + wxFILE_SEP_PATH + "LC_MESSAGES", domain, "mo").FileExists();
@@ -1766,8 +1755,7 @@ std::vector<std::string> GetSearchPrefixes()
 
 #if wxUSE_STDPATHS
     // then look in the standard location
-    wxString stdp;
-    stdp = wxStandardPaths::Get().GetResourcesDir();
+    auto stdp = wxStandardPaths::Get().GetResourcesDir();
     const auto path_iter = std::find_if(paths.cbegin(), paths.cend(),
         [stdp](const auto& path){
             return stdp.IsSameAs(path);
@@ -1789,13 +1777,13 @@ std::vector<std::string> GetSearchPrefixes()
     const char *pszLcPath = wxGetenv("LC_PATH");
     if ( pszLcPath )
     {
-        const wxString lcp = pszLcPath;
+        const std::string lcp = pszLcPath;
         if ( paths.Index(lcp) == wxNOT_FOUND )
             paths.Add(lcp);
     }
 
     // also add the one from where wxWin was installed:
-    wxString wxp = wxGetInstallPrefix();
+    std::string wxp = wxGetInstallPrefix();
     if ( !wxp.empty() )
     {
         wxp += "/share/locale";
@@ -1808,14 +1796,14 @@ std::vector<std::string> GetSearchPrefixes()
 }
 
 // construct the search path for the given language
-wxString GetFullSearchPath(const wxString& lang)
+std::string GetFullSearchPath(const std::string& lang)
 {
-    wxString searchPath;
+    std::string searchPath;
     searchPath.reserve(500);
 
     for ( const auto& i : GetSearchPrefixes() )
     {
-        const wxString p = GetMsgCatalogSubdirs(i, lang);
+        const std::string p = GetMsgCatalogSubdirs(i, lang);
 
         if ( !searchPath.empty() )
             searchPath += wxPATH_SEP;
@@ -1845,12 +1833,12 @@ void wxFileTranslationsLoader::AddCatalogLookupPathPrefix(const std::string& pre
 wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const std::string& domain,
                                                     const std::string& lang)
 {
-    std::string searchPath = GetFullSearchPath(lang).ToStdString();
+    std::string searchPath = GetFullSearchPath(lang);
 
     //LogTraceLargeArray
     //(
-        // FIXME: Add Format overload for std::vector<wxString>
-    //    wxString::Format("looking for \"%s.mo\" in search path", domain),
+        // FIXME: Add Format overload for std::vector<std::string>
+    //    fmt::format("looking for \"%s.mo\" in search path", domain),
     //    wxSplit(searchPath, wxPATH_SEP[0])
     //);
 

@@ -46,14 +46,14 @@ void wxGenericCredentialEntryDialog::Init(const std::string& message,
 
     topsizer->Add(CreateTextSizer(message), wxSizerFlags().Border());
 
-    topsizer->Add(new wxStaticText(this, wxID_ANY, _("Username:").ToStdString()),
+    topsizer->Add(new wxStaticText(this, wxID_ANY, _("Username:")),
         wxSizerFlags().HorzBorder());
     m_userTextCtrl = new wxTextCtrl(this, wxID_ANY, cred.GetUser().ToStdString(),
                                     wxDefaultPosition,
                                     wxSize(FromDIP(300), wxDefaultCoord));
     topsizer->Add(m_userTextCtrl, wxSizerFlags().Expand().Border());
 
-    topsizer->Add(new wxStaticText(this, wxID_ANY, _("Password:").ToStdString()),
+    topsizer->Add(new wxStaticText(this, wxID_ANY, _("Password:")),
         wxSizerFlags().HorzBorder());
     m_passwordTextCtrl = new wxTextCtrl(this, wxID_ANY,
                                         wxSecretString(cred.GetPassword()).ToStdString(),

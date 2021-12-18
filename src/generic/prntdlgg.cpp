@@ -838,8 +838,8 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     wxBoxSizer *table = new wxBoxSizer( wxHORIZONTAL );
 
     wxBoxSizer *column1 = new wxBoxSizer( wxVERTICAL );
-    column1->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Left margin (mm):").ToStdString()),1,wxALL|wxALIGN_RIGHT,5 );
-    column1->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Top margin (mm):").ToStdString()),1,wxALL|wxALIGN_RIGHT,5 );
+    column1->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Left margin (mm):")),1,wxALL|wxALIGN_RIGHT,5 );
+    column1->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Top margin (mm):")),1,wxALL|wxALIGN_RIGHT,5 );
     table->Add( column1, 0, wxALL | wxEXPAND, 5 );
 
     wxBoxSizer *column2 = new wxBoxSizer( wxVERTICAL );
@@ -850,8 +850,8 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     table->Add( column2, 0, wxRIGHT|wxTOP|wxBOTTOM | wxEXPAND, 5 );
 
     wxBoxSizer *column3 = new wxBoxSizer( wxVERTICAL );
-    column3->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Right margin (mm):").ToStdString()),1,wxALL|wxALIGN_RIGHT,5 );
-    column3->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Bottom margin (mm):").ToStdString()),1,wxALL|wxALIGN_RIGHT,5 );
+    column3->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Right margin (mm):")),1,wxALL|wxALIGN_RIGHT,5 );
+    column3->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Bottom margin (mm):")),1,wxALL|wxALIGN_RIGHT,5 );
     table->Add( column3, 0, wxALL | wxEXPAND, 5 );
 
     wxBoxSizer *column4 = new wxBoxSizer( wxVERTICAL );
@@ -1004,12 +1004,12 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
     }
 
     // FIXME: This isn't good.
-    (void) new wxStaticText(this, wxPRINTID_STATIC, _("Paper size").ToStdString(), wxPoint(*x, *y));
+    (void) new wxStaticText(this, wxPRINTID_STATIC, _("Paper size"), wxPoint(*x, *y));
     *y += 25;
 
     wxComboBox *choice = new wxComboBox( this,
                                          wxPRINTID_PAPERSIZE,
-                                         _("Paper size").ToStdString(),
+                                         _("Paper size"),
                                          wxPoint(*x, *y),
                                          wxSize(300, wxDefaultCoord),
                                          choices );

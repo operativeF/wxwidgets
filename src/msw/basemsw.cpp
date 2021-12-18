@@ -25,8 +25,8 @@ import WX.WinDef;
 // wxAppTraits implementation
 // ============================================================================
 
-bool wxAppTraits::SafeMessageBox(const std::string& text,
-                                 const std::string& title)
+bool wxAppTraits::SafeMessageBox(std::string_view text,
+                                 std::string_view title)
 {
     const WXHWND hwndParent = GetMainHWND();
     unsigned int flags = MB_OK | MB_ICONSTOP;

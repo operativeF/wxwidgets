@@ -312,7 +312,7 @@ namespace
 
 std::string PossiblyLocalize(const std::string& str, bool localize)
 {
-    return localize ? wxGetTranslation(str).ToStdString() : str;
+    return localize ? wxGetTranslation(str) : str;
 }
 
 }

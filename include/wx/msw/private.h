@@ -862,7 +862,7 @@ wxWinVersion wxGetWinVersion();
 
 // This is similar to wxSysErrorMsgStr(), but takes an extra WXHMODULE parameter
 // specific to wxMSW.
-wxString wxMSWFormatMessage(WXDWORD nErrCode, WXHMODULE hModule = nullptr);
+std::string wxMSWFormatMessage(WXDWORD nErrCode, WXHMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 

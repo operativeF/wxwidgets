@@ -633,7 +633,7 @@ void wxGridCellTextEditor::SetParameters(const std::string& params)
         }
         else
         {
-            wxLogDebug( "Invalid wxGridCellTextEditor parameter string '%s' ignored", params.c_str() );
+            wxLogDebug( "Invalid wxGridCellTextEditor parameter string '{:s}' ignored", params.c_str() );
         }
     }
 }

@@ -1267,8 +1267,7 @@ bool wxFileDataObject::SetData([[maybe_unused]] size_t size,
         m_filenames.push_back(str);
 
         if ( len2 != len - 1 ) {
-            wxLogDebug(wxT("In wxFileDropTarget::OnDrop DragQueryFile returned\
- %d characters, %d expected."), len2, len - 1);
+            wxLogDebug(fmt::format("In wxFileDropTarget::OnDrop DragQueryFile returned %d characters, %d expected.", len2, len - 1));
         }
     }
 

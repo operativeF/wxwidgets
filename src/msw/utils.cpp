@@ -1035,9 +1035,9 @@ int wxIsWindowsServer()
 
 } // anonymous namespace
 
-wxString wxGetOsDescription()
+std::string wxGetOsDescription()
 {
-    wxString str;
+    std::string str;
 
     const OSVERSIONINFOEXW info = wxGetWindowsVersionInfo();
     switch ( info.dwPlatformId )
@@ -1104,21 +1104,20 @@ wxString wxGetOsDescription()
 
             if ( str.empty() )
             {
-                str.Printf("Windows %lu.%lu",
-                           info.dwMajorVersion,
-                           info.dwMinorVersion);
+                str = fmt::format("Windows %lu.%lu", info.dwMajorVersion, info.dwMinorVersion);
             }
 
-            str << " ("
-                << wxString::Format(_("build %lu"), info.dwBuildNumber);
+            str += fmt::format(" (build {:lu}", info.dwBuildNumber);
+
             if ( !wxIsEmpty(info.szCSDVersion) )
             {
-                str << ", " << info.szCSDVersion;
+                str += fmt::format(", {}", boost::nowide::narrow(info.szCSDVersion));
             }
-            str << wxT(')');
+
+            str += ')';
 
             if ( wxIsPlatform64Bit() )
-                str << _(", 64-bit edition");
+                str += _(", 64-bit edition");
             break;
     }
 

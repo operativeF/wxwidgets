@@ -175,15 +175,15 @@ public:
 
     // the file name and line number of the file where the log record was
     // generated, if available or NULL and 0 otherwise
-    const char *filename;
+    std::string_view filename;
 
     // the name of the function where the log record was generated (may be NULL
     // if the compiler doesn't support __FUNCTION__)
-    const char *func;
+    std::string_view func;
 
     // the name of the component which generated this message, may be NULL if
     // not set (i.e. wxLOG_COMPONENT not defined). It must be in ASCII.
-    const char *component;
+    std::string_view component;
 
     int line;
 
@@ -195,7 +195,7 @@ public:
     // store an arbitrary value in this record context
     //
     // wxWidgets always uses keys starting with "wx.", e.g. "wx.sys_error"
-    void StoreValue(const wxString& key, wxUIntPtr val)
+    void StoreValue(const std::string& key, wxUIntPtr val)
     {
         if ( !m_data )
             m_data = new ExtraData;
@@ -203,7 +203,7 @@ public:
         m_data->numValues[key] = val;
     }
 
-    void StoreValue(const wxString& key, const wxString& val)
+    void StoreValue(const std::string& key, const std::string& val)
     {
         if ( !m_data )
             m_data = new ExtraData;
@@ -214,7 +214,7 @@ public:
 
     // these functions retrieve the value of either numeric or string key,
     // return false if not found
-    bool GetNumValue(const wxString& key, wxUIntPtr *val) const
+    bool GetNumValue(const std::string& key, wxUIntPtr *val) const
     {
         if ( !m_data )
             return false;
@@ -228,7 +228,7 @@ public:
         return true;
     }
 
-    bool GetStrValue(const wxString& key, wxString *val) const
+    bool GetStrValue(const std::string& key, std::string *val) const
     {
         if ( !m_data )
             return false;
@@ -272,7 +272,7 @@ private:
 struct wxLogRecord
 {
     wxLogRecord(wxLogLevel level_,
-                const wxString& msg_,
+                std::string msg_,
                 const wxLogRecordInfo& info_)
         : level(level_),
           msg(msg_),
@@ -281,7 +281,7 @@ struct wxLogRecord
     }
 
     wxLogLevel level;
-    wxString msg;
+    std::string msg;
     wxLogRecordInfo info;
 };
 
@@ -298,14 +298,14 @@ public:
     // Override this method to implement custom formatting of the given log
     // record. The default implementation simply prepends a level-dependent
     // prefix to the message and optionally adds a time stamp.
-    virtual wxString Format(wxLogLevel level,
-                            const wxString& msg,
+    virtual std::string Format(wxLogLevel level,
+                            std::string_view msg,
                             const wxLogRecordInfo& info) const;
 
 protected:
     // Override this method to change just the time stamp formatting. It is
     // called by default Format() implementation.
-    virtual wxString FormatTimeMS(wxLongLong_t msec) const;
+    virtual std::string FormatTimeMS(wxLongLong_t msec) const;
 };
 
 
@@ -361,17 +361,17 @@ public:
     static void SetLogLevel(wxLogLevel logLevel) { ms_logLevel = logLevel; }
 
     // set the log level for the given component
-    static void SetComponentLevel(const wxString& component, wxLogLevel level);
+    static void SetComponentLevel(const std::string& component, wxLogLevel level);
 
     // return the effective log level for this component, falling back to
     // parent component and to the default global log level if necessary
-    static wxLogLevel GetComponentLevel(const wxString& component);
+    static wxLogLevel GetComponentLevel(std::string_view component);
 
 
     // is logging of messages from this component enabled at this level?
     //
     // usually always called with wxLOG_COMPONENT as second argument
-    static bool IsLevelEnabled(wxLogLevel level, const wxString& component)
+    static bool IsLevelEnabled(wxLogLevel level, std::string_view component)
     {
         return IsEnabled() && level <= GetComponentLevel(component);
     }
@@ -437,20 +437,20 @@ public:
     static bool GetRepetitionCounting() { return ms_bRepetCounting; }
 
     // add string trace mask
-    static void AddTraceMask(const wxString& str);
+    static void AddTraceMask(const std::string& str);
 
     // add string trace mask
-    static void RemoveTraceMask(const wxString& str);
+    static void RemoveTraceMask(const std::string& str);
 
     // remove all string trace masks
     static void ClearTraceMasks();
 
     // get string trace masks: note that this is MT-unsafe if other threads can
     // call AddTraceMask() concurrently
-    static const std::vector<wxString>& GetTraceMasks();
+    static const std::vector<std::string>& GetTraceMasks();
 
     // is this trace mask in the list?
-    static bool IsAllowedTraceMask(const wxString& mask);
+    static bool IsAllowedTraceMask(std::string_view mask);
 
 
     // log formatting
@@ -472,14 +472,14 @@ public:
     // sets the time stamp string format: this is used as strftime() format
     // string for the log targets which add time stamps to the messages; set
     // it to empty string to disable time stamping completely.
-    static void SetTimestamp(const wxString& ts) { ms_timestamp = ts; }
+    static void SetTimestamp(const std::string& ts) { ms_timestamp = ts; }
 
     // disable time stamping of log messages
     static void DisableTimestamp() { SetTimestamp({}); }
 
 
     // get the current timestamp format string (maybe empty)
-    static const wxString& GetTimestamp() { return ms_timestamp; }
+    static const std::string& GetTimestamp() { return ms_timestamp; }
 
 
 
@@ -488,26 +488,26 @@ public:
 
     // put the time stamp into the string if ms_timestamp is not empty (don't
     // change it otherwise); the first overload uses the current time.
-    static void TimeStamp(wxString *str);
-    static void TimeStamp(wxString *str, time_t t);
-    static void TimeStampMS(wxString *str, wxLongLong_t msec);
+    static void TimeStamp(std::string* str);
+    static void TimeStamp(std::string* str, time_t t);
+    static void TimeStampMS(std::string* str, wxLongLong_t msec);
 
     // these methods should only be called from derived classes DoLogRecord(),
     // DoLogTextAtLevel() and DoLogText() implementations respectively and
     // shouldn't be called directly, use logging functions instead
     void LogRecord(wxLogLevel level,
-                   const wxString& msg,
+                   std::string_view msg,
                    const wxLogRecordInfo& info)
     {
         DoLogRecord(level, msg, info);
     }
 
-    void LogTextAtLevel(wxLogLevel level, const wxString& msg)
+    void LogTextAtLevel(wxLogLevel level, std::string_view msg)
     {
         DoLogTextAtLevel(level, msg);
     }
 
-    void LogText(const wxString& msg)
+    void LogText(std::string_view msg)
     {
         DoLogText(msg);
     }
@@ -515,16 +515,16 @@ public:
     // this is a helper used by wxLogXXX() functions, don't call it directly
     // and see DoLog() for function to overload in the derived classes
     static void OnLog(wxLogLevel level,
-                      const wxString& msg,
+                      std::string_view msg,
                       const wxLogRecordInfo& info);
 
     // version called when no information about the location of the log record
     // generation is available (but the time stamp is), it mainly exists for
     // backwards compatibility, don't use it in new code
-    static void OnLog(wxLogLevel level, const wxString& msg, time_t t);
+    static void OnLog(wxLogLevel level, std::string_view msg, time_t t);
 
     // a helper calling the above overload with current time
-    static void OnLog(wxLogLevel level, const wxString& msg)
+    static void OnLog(wxLogLevel level, std::string_view msg)
     {
         OnLog(level, msg, time(nullptr));
     }
@@ -542,19 +542,19 @@ protected:
     // override this method if you want to change message formatting or do
     // dynamic filtering
     virtual void DoLogRecord(wxLogLevel level,
-                             const wxString& msg,
+                             std::string_view msg,
                              const wxLogRecordInfo& info);
 
     // override this method to redirect output to different channels depending
     // on its level only; if even the level doesn't matter, override
     // DoLogText() instead
-    virtual void DoLogTextAtLevel(wxLogLevel level, const wxString& msg);
+    virtual void DoLogTextAtLevel(wxLogLevel level, std::string_view msg);
 
     // this function is not pure virtual as it might not be needed if you do
     // the logging in overridden DoLogRecord() or DoLogTextAtLevel() directly
     // but if you do not override them in your derived class you must override
     // this one as the default implementation of it simply asserts
-    virtual void DoLogText(const wxString& msg);
+    virtual void DoLogText(std::string_view msg);
 
     // log a message indicating the number of times the previous message was
     // repeated if previous repetition counter is strictly positive, does
@@ -584,7 +584,7 @@ private:
     // (presumably MT-safe) thread-specific logger and by FlushThreadMessages()
     // when it plays back the buffered messages logged from the other threads
     void CallDoLogNow(wxLogLevel level,
-                      const wxString& msg,
+                      std::string_view msg,
                       const wxLogRecordInfo& info);
 
 
@@ -612,7 +612,7 @@ private:
 
     // format string for strftime(), if empty, time stamping log messages is
     // disabled
-    inline static wxString    ms_timestamp{"%X"}; // time only, no date
+    inline static std::string    ms_timestamp{"%X"}; // time only, no date
 };
 
 // ----------------------------------------------------------------------------
@@ -627,17 +627,17 @@ public:
     wxLogBuffer& operator=(wxLogBuffer&&) = delete;
 
     // get the string contents with all messages logged
-    const wxString& GetBuffer() const { return m_str; }
+    const std::string& GetBuffer() const { return m_str; }
 
     // show the buffer contents to the user in the best possible way (this uses
     // wxMessageOutputMessageBox) and clear it
     void Flush() override;
 
 protected:
-    void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
+    void DoLogTextAtLevel(wxLogLevel level, std::string_view msg) override;
 
 private:
-    wxString m_str;
+    std::string m_str;
 };
 
 
@@ -654,7 +654,7 @@ public:
 
 protected:
     // implement sink function
-    void DoLogText(const wxString& msg) override;
+    void DoLogText(std::string_view msg) override;
 };
 
 // log everything to an "ostream", cerr by default
@@ -670,7 +670,7 @@ public:
 
 protected:
     // implement sink function
-    void DoLogText(const wxString& msg) override;
+    void DoLogText(std::string_view msg) override;
 
     // using ptr here to avoid including <iostream.h> from this file
     std::ostream *m_ostr;
@@ -745,8 +745,8 @@ public:
 protected:
     // pass the record to the old logger if needed
     void DoLogRecord(wxLogLevel level,
-                             const wxString& msg,
-                             const wxLogRecordInfo& info) override;
+                     std::string_view msg,
+                     const wxLogRecordInfo& info) override;
 
 private:
     // the current log target
@@ -815,7 +815,7 @@ public:
     // store extra data in our log record and return this object itself (so
     // that further calls to its functions could be chained)
     template <typename T>
-    wxLogger& Store(const wxString& key, T val)
+    wxLogger& Store(const std::string& key, T val)
     {
         m_info.StoreValue(key, val);
         return *this;
@@ -825,7 +825,7 @@ public:
     // indicates that we may have an extra first argument preceding the format
     // string and that if we do have it, we should store it in m_info using the
     // given key (while by default 0 value will be used)
-    wxLogger& MaybeStore(const wxString& key, wxUIntPtr value = 0)
+    wxLogger& MaybeStore(const std::string& key, wxUIntPtr value = 0)
     {
         wxASSERT_MSG( m_optKey.empty(), "can only have one optional value" );
         m_optKey = key;
@@ -839,38 +839,38 @@ public:
 
     // log the message at the level specified in the ctor if this log message
     // is enabled
-    void LogV(const wxString& format, va_list argptr)
+    void LogV(std::string_view format, auto&&... args)
     {
         // remember that fatal errors can't be disabled
         if ( m_level == wxLOG_FatalError ||
-                wxLog::IsLevelEnabled(m_level, wxASCII_STR(m_info.component)) )
-            DoCallOnLog(format, argptr);
+                wxLog::IsLevelEnabled(m_level, m_info.component) )
+            DoCallOnLog(format, args...);
     }
 
     // overloads used by functions with optional leading arguments (whose
     // values are stored in the key passed to MaybeStore())
-    void LogV(long num, const wxString& format, va_list argptr)
+    void LogV(long num, std::string_view format, auto&&... args)
     {
         Store(m_optKey, num);
 
-        LogV(format, argptr);
+        LogV(format, args...);
     }
 
-    void LogV(void *ptr, const wxString& format, va_list argptr)
+    void LogV(void *ptr, std::string_view format, auto&&... args)
     {
         Store(m_optKey, wxPtrToUInt(ptr));
 
-        LogV(format, argptr);
+        LogV(format, args...);
     }
 
-    void LogVTrace(const wxString& mask, const wxString& format, va_list argptr)
+    void LogVTrace(const std::string& mask, std::string_view format, auto&&... args)
     {
         if ( !wxLog::IsAllowedTraceMask(mask) )
             return;
 
         Store(wxLOG_KEY_TRACE_MASK, mask);
 
-        LogV(format, argptr);
+        LogV(format, args...);
     }
 
 
@@ -883,7 +883,7 @@ public:
     WX_DEFINE_VARARG_FUNC_VOID
     (
         Log,
-        1, (const wxFormatString&),
+        1, (const std::string&),
         DoLog, DoLogUtf8
     )
 
@@ -894,19 +894,19 @@ public:
     WX_DEFINE_VARARG_FUNC_VOID
     (
         Log,
-        2, (long, const wxFormatString&),
+        2, (long, const std::string&),
         DoLogWithNum, DoLogWithNumUtf8
     )
 
     // unfortunately we can't use "void *" here as we get overload ambiguities
-    // with Log(wxFormatString, ...) when the first argument is a "char *" or
+    // with Log(std::string, ...) when the first argument is a "char *" or
     // "wchar_t *" then -- so we only allow passing wxObject here, which is
     // ugly but fine in practice as this overload is only used by wxLogStatus()
     // whose first argument is a wxFrame
     WX_DEFINE_VARARG_FUNC_VOID
     (
         Log,
-        2, (wxObject *, const wxFormatString&),
+        2, (wxObject *, const std::string&),
         DoLogWithPtr, DoLogWithPtrUtf8
     )
 
@@ -917,7 +917,7 @@ public:
     WX_DEFINE_VARARG_FUNC_VOID
     (
         LogAtLevel,
-        2, (wxLogLevel, const wxFormatString&),
+        2, (wxLogLevel, const std::string&),
         DoLogAtLevel, DoLogAtLevelUtf8
     )
 
@@ -927,141 +927,110 @@ public:
     WX_DEFINE_VARARG_FUNC_VOID
     (
         LogTrace,
-        2, (const wxString&, const wxFormatString&),
+        2, (const std::string&, const std::string&),
         DoLogTrace, DoLogTraceUtf8
     )
 
 private:
 #if !wxUSE_UTF8_LOCALE_ONLY
-    void DoLog(const wxChar *format, ...)
+    void DoLog(std::string_view format, auto&&... args)
     {
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogWithNum(long num, const wxChar *format, ...)
+    void DoLogWithNum(long num, std::string_view format, auto&&... args)
     {
         Store(m_optKey, num);
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogWithPtr(void *ptr, const wxChar *format, ...)
+    void DoLogWithPtr(void *ptr, std::string_view format, auto&&... args)
     {
         Store(m_optKey, wxPtrToUInt(ptr));
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogAtLevel(wxLogLevel level, const wxChar *format, ...)
+    void DoLogAtLevel(wxLogLevel level, std::string_view format, auto&&... args)
     {
-        if ( !wxLog::IsLevelEnabled(level, wxASCII_STR(m_info.component)) )
+        if ( !wxLog::IsLevelEnabled(level, m_info.component) )
             return;
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(level, format, argptr);
-        va_end(argptr);
+        DoCallOnLog(level, format, args...);
     }
 
-    void DoLogTrace(const wxString& mask, const wxChar *format, ...)
+    void DoLogTrace(const std::string& mask, std::string_view format, auto&&... args)
     {
         if ( !wxLog::IsAllowedTraceMask(mask) )
             return;
 
         Store(wxLOG_KEY_TRACE_MASK, mask);
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 
 #if wxUSE_UNICODE_UTF8
-    void DoLogUtf8(const char *format, ...)
+    void DoLogUtf8(const char *format, auto&&... args)
     {
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogWithNumUtf8(long num, const char *format, ...)
+    void DoLogWithNumUtf8(long num, const char *format, auto&&... args)
     {
         Store(m_optKey, num);
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogWithPtrUtf8(void *ptr, const char *format, ...)
+    void DoLogWithPtrUtf8(void *ptr, const char *format, auto&&... args)
     {
         Store(m_optKey, wxPtrToUInt(ptr));
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
-    void DoLogAtLevelUtf8(wxLogLevel level, const char *format, ...)
+    void DoLogAtLevelUtf8(wxLogLevel level, const char* format, auto&&... args)
     {
         if ( !wxLog::IsLevelEnabled(level, wxASCII_STR(m_info.component)) )
             return;
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(level, format, argptr);
-        va_end(argptr);
+        DoCallOnLog(level, format, args...);
     }
 
-    void DoLogTraceUtf8(const wxString& mask, const char *format, ...)
+    void DoLogTraceUtf8(const std::string& mask, const char *format, auto&&... args)
     {
         if ( !wxLog::IsAllowedTraceMask(mask) )
             return;
 
         Store(wxLOG_KEY_TRACE_MASK, mask);
 
-        va_list argptr;
-        va_start(argptr, format);
-        DoCallOnLog(format, argptr);
-        va_end(argptr);
+        DoCallOnLog(format, args...);
     }
 
 #endif // wxUSE_UNICODE_UTF8
 
-    void DoCallOnLog(wxLogLevel level, const wxString& format, va_list argptr)
+    void DoCallOnLog(wxLogLevel level, std::string_view format, auto&&... args)
     {
         // As explained in wxLogRecordInfo ctor, we don't initialize its
         // timestamp to avoid calling time() unnecessary, but now that we are
         // about to log the message, we do need to do it.
         m_info.timestampMS = wxGetUTCTimeMillis().GetValue();
 
-        wxLog::OnLog(level, wxString::FormatV(format, argptr), m_info);
+        wxLog:: OnLog(level, fmt::format(format, args...), m_info);
     }
 
-    void DoCallOnLog(const wxString& format, va_list argptr)
+    void DoCallOnLog(std::string_view format, auto&&... args)
     {
-        DoCallOnLog(m_level, format, argptr);
+        DoCallOnLog(m_level, format, args...);
     }
-
 
     const wxLogLevel m_level;
     wxLogRecordInfo m_info;
 
-    wxString m_optKey;
+    std::string m_optKey;
 };
 
 // ============================================================================
@@ -1076,10 +1045,10 @@ private:
 unsigned long wxSysErrorCode();
 
 // return the error message for given (or last if 0) error code
-const wxChar* wxSysErrorMsg(unsigned long nErrCode = 0);
+std::string_view wxSysErrorMsg(unsigned long nErrCode = 0);
 
 // return the error message for given (or last if 0) error code
-wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
+std::string wxSysErrorMsgStr(unsigned long nErrCode = 0);
 
 // ----------------------------------------------------------------------------
 // define wxLog<level>() functions which can be used by application instead of
@@ -1132,7 +1101,7 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
 
 // Macro evaluating to true if logging at the given level is enabled.
 #define wxLOG_IS_ENABLED(level) \
-    wxLog::IsLevelEnabled(wxLOG_##level, wxASCII_STR(wxLOG_COMPONENT))
+    wxLog::IsLevelEnabled(wxLOG_##level, wxLOG_COMPONENT)
 
 // Macro used to define most of the actual wxLogXXX() macros: just calls
 // wxLogger::Log(), if logging at the specified level is enabled.
@@ -1230,14 +1199,14 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode = 0);
 
 // define macros for defining log functions which do nothing at all
 #define wxDEFINE_EMPTY_LOG_FUNCTION(level)                                  \
-    WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 1, (const wxFormatString&))     \
-    inline void wxVLog##level([[maybe_unused]] const wxFormatString& format,       \
+    WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 1, (const std::string&))     \
+    inline void wxVLog##level([[maybe_unused]] const std::string& format,       \
                               [[maybe_unused]] va_list argptr) { }                 \
 
 #define wxDEFINE_EMPTY_LOG_FUNCTION2(level, argclass)                       \
-    WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 2, (argclass, const wxFormatString&)) \
+    WX_DEFINE_VARARG_FUNC_NOP(wxLog##level, 2, (argclass, const std::string&)) \
     inline void wxVLog##level([[maybe_unused]] argclass arg,                       \
-                              [[maybe_unused]] const wxFormatString& format,       \
+                              [[maybe_unused]] const std::string& format,       \
                               [[maybe_unused]] va_list argptr) {}
 
 wxDEFINE_EMPTY_LOG_FUNCTION(FatalError);
@@ -1265,7 +1234,7 @@ public:
 
 // Dummy macros to replace some functions.
 #define wxSysErrorCode() (unsigned long)0
-#define wxSysErrorMsg( X ) (const wxChar*)NULL
+#define wxSysErrorMsg( X ) (const char*)NULL
 #define wxSysErrorMsgStr( X ) {}
 
 // Fake symbolic trace masks... for those that are used frequently
@@ -1298,7 +1267,7 @@ inline void wxLogNop() { }
     #ifdef HAVE_VARIADIC_MACROS
         #define wxLogDebug(fmt, ...) wxLogNop()
     #else // !HAVE_VARIADIC_MACROS
-        WX_DEFINE_VARARG_FUNC_NOP(wxLogDebug, 1, (const wxFormatString&))
+        WX_DEFINE_VARARG_FUNC_NOP(wxLogDebug, 1, (const std::string&))
     #endif
 #endif // wxUSE_LOG_DEBUG/!wxUSE_LOG_DEBUG
 
@@ -1311,13 +1280,13 @@ inline void wxLogNop() { }
     #ifdef HAVE_VARIADIC_MACROS
         #define wxLogTrace(mask, fmt, ...) wxLogNop()
     #else // !HAVE_VARIADIC_MACROS
-        WX_DEFINE_VARARG_FUNC_NOP(wxLogTrace, 2, (const wxString&, const wxFormatString&))
+        WX_DEFINE_VARARG_FUNC_NOP(wxLogTrace, 2, (const std::string&, const std::string&))
     #endif // HAVE_VARIADIC_MACROS/!HAVE_VARIADIC_MACROS
 #endif // wxUSE_LOG_TRACE/!wxUSE_LOG_TRACE
 
 // wxLogFatalError helper: show the (fatal) error to the user in a safe way,
 // i.e. without using wxMessageBox() for example because it could crash
-bool wxSafeShowMessage(const wxString& title, const wxString& text);
+bool wxSafeShowMessage(std::string_view title, std::string_view text);
 
 // ----------------------------------------------------------------------------
 // debug only logging functions: use them with API name and error code

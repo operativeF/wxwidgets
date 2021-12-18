@@ -499,7 +499,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
         (event.GetLabel().find('\\') != std::string::npos) ||
         (event.GetLabel().find('|') != std::string::npos))
     {
-        wxMessageDialog dialog(this, _("Illegal directory name.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
         return;
@@ -517,7 +517,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
 
     if (wxFileExists(new_name))
     {
-        wxMessageDialog dialog(this, _("File name exists already.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -528,7 +528,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
     }
     else
     {
-        wxMessageDialog dialog(this, _("Operation not permitted.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }

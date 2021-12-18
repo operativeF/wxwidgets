@@ -558,8 +558,8 @@ bool wxGUIAppTraitsBase::HasStderr()
 
 #ifndef __WIN32__
 
-bool wxGUIAppTraitsBase::SafeMessageBox(const std::string& text,
-                                        const std::string& title)
+bool wxGUIAppTraitsBase::SafeMessageBox(std::string_view text,
+                                        std::string_view title)
 {
     // The modules are initialized only after a successful call to
     // wxApp::Initialize() in wxEntryStart, so it can be used as a proxy for

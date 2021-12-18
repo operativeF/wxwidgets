@@ -257,7 +257,7 @@ protected:
 class wxPrintout
 {
 public:
-    wxPrintout(std::string_view title = wxGetTranslation("Printout").ToStdString()) :
+    wxPrintout(std::string_view title = wxGetTranslation("Printout")) :
         m_printoutTitle(title)    
     {
     }

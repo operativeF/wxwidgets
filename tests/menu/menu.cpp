@@ -65,10 +65,9 @@ void RecursivelyCountMenuItems(const wxMenu* menu, size_t& count)
 
 #if wxUSE_INTL
 
-static wxString
-GetTranslatedString(const wxTranslations& trans, const wxString& s)
+static std::string GetTranslatedString(const wxTranslations& trans, const std::string& s)
 {
-    const wxString* t = trans.GetTranslatedString(s);
+    const std::string* t = trans.GetTranslatedString(s);
     return t ? *t : s;
 }
 

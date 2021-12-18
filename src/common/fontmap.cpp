@@ -168,7 +168,7 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
         // the dialog title
         std::string title{m_titleDialog};
         if ( title.empty() )
-            title += fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown charset").ToStdString());
+            title += fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown charset"));
 
         // the message
         // FIXME: Translation removed for fmt::print
@@ -384,7 +384,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
         std::string title{m_titleDialog};
 
         if ( title.empty() )
-            title = fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown encoding").ToStdString());
+            title = fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown encoding"));
 
         // built the message
         std::string encDesc = GetEncodingDescription(encoding);

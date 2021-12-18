@@ -230,11 +230,11 @@ void wxFileData::ReadData()
 std::string wxFileData::GetFileType() const
 {
     if (IsDir())
-        return _("<DIR>").ToStdString();
+        return _("<DIR>");
     else if (IsLink())
-        return _("<LINK>").ToStdString();
+        return _("<LINK>");
     else if (IsDrive())
-        return _("<DRIVE>").ToStdString();
+        return _("<DRIVE>");
     else if (m_fileName.rfind('.') != std::string::npos)
         return wx::utils::AfterLast(m_fileName, '.');
 
@@ -581,7 +581,7 @@ void wxFileListCtrl::SetWild( const std::string &wild )
 
 void wxFileListCtrl::MakeDir()
 {
-    std::string new_name{_("NewName").ToStdString()};
+    std::string new_name{_("NewName")};
     std::string path{m_dirName};
     path += wxFILE_SEP_PATH;
     path += new_name;
@@ -605,7 +605,7 @@ void wxFileListCtrl::MakeDir()
     wxLogNull log;
     if (!wxMkdir(path))
     {
-        wxMessageDialog dialog(this, _("Operation not permitted.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         return;
     }
@@ -719,7 +719,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
         (event.GetLabel() == "..") ||
         (event.GetLabel().find( wxFILE_SEP_PATH ) != std::string::npos))
     {
-        wxMessageDialog dialog(this, _("Illegal directory name.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
         return;
@@ -733,7 +733,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
 
     if (wxFileExists(new_name))
     {
-        wxMessageDialog dialog(this, _("File name exists already.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -749,7 +749,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     }
     else
     {
-        wxMessageDialog dialog(this, _("Operation not permitted.").ToStdString(), _("Error").ToStdString(), wxOK | wxICON_ERROR );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -901,7 +901,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 
     wxBoxSizer *staticsizer = new wxBoxSizer( wxHORIZONTAL );
     if ( is_pda )
-        staticsizer->Add( new wxStaticText( this, wxID_ANY, _( "Current directory:" ).ToStdString()),
+        staticsizer->Add( new wxStaticText( this, wxID_ANY, _( "Current directory:" )),
                           wxSizerFlags().DoubleBorder(wxRIGHT) );
     m_static = new wxStaticText( this, wxID_ANY, m_dir );
     staticsizer->Add( m_static, 1 );
@@ -1325,8 +1325,8 @@ void wxGenericFileCtrl::HandleAction( const std::string &fn )
         {
             if ( filename.find( wxFILE_SEP_PATH ) != std::string::npos )
             {
-                wxMessageBox( _( "Illegal file specification." ).ToStdString(),
-                              _( "Error" ).ToStdString(), wxOK | wxICON_ERROR, this );
+                wxMessageBox( _( "Illegal file specification." ),
+                              _( "Error" ), wxOK | wxICON_ERROR, this );
                 return;
             }
             m_list->SetWild( filename );
@@ -1357,7 +1357,7 @@ void wxGenericFileCtrl::HandleAction( const std::string &fn )
     // they really wanted a dir, but it doesn't exist
     if ( want_dir )
     {
-        wxMessageBox( _( "Directory doesn't exist." ).ToStdString(), _( "Error" ).ToStdString(),
+        wxMessageBox( _( "Directory doesn't exist." ), _( "Error" ),
                       wxOK | wxICON_ERROR, this );
         return;
     }

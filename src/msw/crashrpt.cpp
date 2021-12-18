@@ -54,7 +54,7 @@ private:
 class wxCrashReportImpl
 {
 public:
-    explicit wxCrashReportImpl(const wxChar *filename);
+    explicit wxCrashReportImpl(const std::string& filename);
 
     bool Generate(unsigned int flags, EXCEPTION_POINTERS *ep);
 
@@ -68,10 +68,10 @@ public:
 
 private:
     // formatted output to m_hFile
-    void Output(const wxChar* format, ...);
+    void Output(const char* format, ...);
 
     // output end of line
-    void OutputEndl() { Output(L"\r\n"); } // FIXME: Change to narrow string.
+    void OutputEndl() { Output("\r\n"); } // FIXME: Change to narrow string.
 
     // the handle of the report file
     HANDLE m_hFile;
@@ -87,7 +87,7 @@ private:
 //
 // we use fixed buffer to avoid (big) dynamic allocations when the program
 // crashes
-static wxChar gs_reportFilename[MAX_PATH];
+static char gs_reportFilename[MAX_PATH];
 
 // ============================================================================
 // implementation
@@ -97,11 +97,12 @@ static wxChar gs_reportFilename[MAX_PATH];
 // wxCrashReportImpl
 // ----------------------------------------------------------------------------
 
-wxCrashReportImpl::wxCrashReportImpl(const wxChar *filename)
+wxCrashReportImpl::wxCrashReportImpl(const std::string& filename)
 {
+    boost::nowide::wstackstring stackFilename{filename.c_str()};
     m_hFile = ::CreateFileW
                 (
-                    filename,
+                    stackFilename.get(),
                     GENERIC_WRITE,
                     0,                          // no sharing
                     nullptr,                       // default security
@@ -111,7 +112,7 @@ wxCrashReportImpl::wxCrashReportImpl(const wxChar *filename)
                 );
 }
 
-void wxCrashReportImpl::Output(const wxChar* format, ...)
+void wxCrashReportImpl::Output(const char* format, ...)
 {
     va_list argptr;
     va_start(argptr, format);
@@ -223,7 +224,7 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
     wxUnusedVar(flags);
     wxUnusedVar(ep);
 
-    Output(L"Support for crash report generation was not included "
+    Output("Support for crash report generation was not included "
            "in this wxWidgets version.");
 #endif // wxUSE_DBGHELP/!wxUSE_DBGHELP
 
@@ -235,13 +236,13 @@ bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
 // ----------------------------------------------------------------------------
 
 /* static */
-void wxCrashReport::SetFileName(const wxString& filename)
+void wxCrashReport::SetFileName(const std::string& filename)
 {
-    wxStrlcpy(gs_reportFilename, filename.t_str(), WXSIZEOF(gs_reportFilename));
+    wxStrlcpy(gs_reportFilename, filename.c_str(), WXSIZEOF(gs_reportFilename));
 }
 
 /* static */
-wxString wxCrashReport::GetFileName()
+std::string wxCrashReport::GetFileName()
 {
     return gs_reportFilename;
 }

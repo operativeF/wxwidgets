@@ -243,7 +243,7 @@ std::string wxNativePrintFactory::CreatePrinterLine()
     // Only relevant for PostScript for now
 
     // We should query "lpstat -d" here
-    return _("Generic PostScript").ToStdString();
+    return _("Generic PostScript");
 }
 
 bool wxNativePrintFactory::HasStatusLine()
@@ -257,7 +257,7 @@ std::string wxNativePrintFactory::CreateStatusLine()
     // Only relevant for PostScript for now
 
     // We should query "lpstat -r" or "lpstat -p" here
-    return _("Ready").ToStdString();
+    return _("Ready");
 }
 
 wxPrintNativeDataBase *wxNativePrintFactory::CreatePrintNativeData()
@@ -306,7 +306,7 @@ wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintou
 
 void wxPrinterBase::ReportError(wxWindow *parent, [[maybe_unused]] wxPrintout *printout, std::string_view message)
 {
-    wxMessageBox(message, _("Printing Error").ToStdString(), wxOK, parent);
+    wxMessageBox(message, _("Printing Error"), wxOK, parent);
 }
 
 wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
@@ -383,7 +383,7 @@ wxPrintDialogBase::wxPrintDialogBase(wxWindow *parent,
                                      const wxPoint &pos,
                                      const wxSize &size,
                                      unsigned int style)
-    : wxDialog( parent, id, title.empty() ? _("Print").ToStdString() : title,
+    : wxDialog( parent, id, title.empty() ? _("Print") : title,
                 pos, size, style )
 {
 }
@@ -439,7 +439,7 @@ wxPageSetupDialogBase::wxPageSetupDialogBase(wxWindow *parent,
                                      const wxPoint &pos,
                                      const wxSize &size,
                                      unsigned int style)
-    : wxDialog( parent, id, title.empty() ? _("Page setup").ToStdString() : title,
+    : wxDialog( parent, id, title.empty() ? _("Page setup") : title,
                 pos, size, style )
 {
 }
@@ -488,18 +488,18 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
                                        const wxSize& size,
                                        unsigned int style,
                                        std::string_view name)
-    : wxDialog(parent, wxID_ANY, _("Printing").ToStdString(), pos, size, style, name) // FIXME: Use std::string
+    : wxDialog(parent, wxID_ANY, _("Printing"), pos, size, style, name) // FIXME: Use std::string
 {
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
-    mainSizer->Add(new wxStaticText(this, wxID_ANY, _("Please wait while printing...").ToStdString()),
+    mainSizer->Add(new wxStaticText(this, wxID_ANY, _("Please wait while printing...")),
                    wxSizerFlags().Expand().DoubleBorder());
 
     wxFlexGridSizer *gridSizer = new wxFlexGridSizer(2, wxSize(20, 0));
-    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Document:").ToStdString()));
+    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Document:")));
     gridSizer->AddGrowableCol(1);
     gridSizer->Add(new wxStaticText(this, wxID_ANY, documentTitle));
-    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Progress:").ToStdString()));
-    m_progress = new wxStaticText(this, wxID_ANY, _("Preparing").ToStdString());
+    gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Progress:")));
+    m_progress = new wxStaticText(this, wxID_ANY, _("Preparing"));
     m_progress->SetMinSize(wxSize(250, -1));
     gridSizer->Add(m_progress);
     mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxLEFT | wxRIGHT));
@@ -1952,7 +1952,7 @@ bool wxPrintPreviewBase::RenderPageIntoDC(wxDC& dc, int pageNum)
 
     if (!m_previewPrintout->OnBeginDocument(m_printDialogData.GetFromPage(), m_printDialogData.GetToPage()))
     {
-        wxMessageBox(_("Could not start document preview.").ToStdString(), _("Print Preview Failure").ToStdString(), wxOK);
+        wxMessageBox(_("Could not start document preview."), _("Print Preview Failure"), wxOK);
         return false;
     }
 
@@ -1994,7 +1994,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
         if (!m_previewBitmap || !m_previewBitmap->IsOk())
         {
             InvalidatePreviewBitmap();
-            wxMessageBox(_("Sorry, not enough memory to create a preview.").ToStdString(), _("Print Preview Failure").ToStdString(), wxOK);
+            wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
             return false;
         }
     }
@@ -2002,16 +2002,16 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
     if ( !RenderPageIntoBitmap(*m_previewBitmap, pageNum) )
     {
         InvalidatePreviewBitmap();
-        wxMessageBox(_("Sorry, not enough memory to create a preview.").ToStdString(), _("Print Preview Failure").ToStdString(), wxOK);
+        wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
         return false;
     }
 
 #if wxUSE_STATUSBAR
     std::string status;
     if (m_maxPage != 0)
-        status = wxString::Format(_("Page %d of %d"), pageNum, m_maxPage).ToStdString();
+        status = fmt::format(_("Page %d of %d"), pageNum, m_maxPage);
     else
-        status = wxString::Format(_("Page %d"), pageNum).ToStdString();
+        status = fmt::format(_("Page %d"), pageNum);
 
     if (m_previewFrame)
         m_previewFrame->SetStatusText(status);

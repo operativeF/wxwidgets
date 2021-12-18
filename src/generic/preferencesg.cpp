@@ -98,7 +98,7 @@ protected:
             // under both MSW and GTK (and OSX uses its own native
             // implementation anyhow).
             // TODO: Is this possible with fmt?
-            auto str = _("{:s} Preferences").ToStdString();
+            auto str = _("{:s} Preferences");
             m_title = (str, wxTheApp->GetAppDisplayName());
         }
 

@@ -38,7 +38,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
     std::string labelButton;
     if ( m_pickerStyle & wxPB_SMALL )
     {
-        labelButton = _("...").ToStdString();
+        labelButton = _("...");
         styleButton = wxBU_EXACTFIT;
     }
     else

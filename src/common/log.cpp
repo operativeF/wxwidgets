@@ -17,7 +17,6 @@
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/intl.h"
-#include "wx/string.h"
 #include "wx/utils.h"
 
 #include "wx/apptrait.h"
@@ -35,10 +34,12 @@ import WX.Utils.Cast;
 
 import <algorithm>;
 import <iostream>;
+import <string>;
+import <string_view>;
 import <vector>;
 
 #undef wxLOG_COMPONENT
-const char *wxLOG_COMPONENT = "";
+const char* wxLOG_COMPONENT = "";
 
 // this macro allows to define an object which will be initialized before any
 // other function in this file is called: this is necessary to allow log
@@ -109,7 +110,7 @@ namespace
 struct PreviousLogInfo
 {
     // previous message itself
-    wxString msg;
+    std::string msg;
 
     // other information about it
     wxLogRecordInfo info;
@@ -138,13 +139,12 @@ class wxLogOutputBest : public wxLog
 public:
     wxLogOutputBest() = default;
 
-    wxLogOutputBest(const wxLogOutputBest&) = delete;
-	wxLogOutputBest& operator=(const wxLogOutputBest&) = delete;
+	wxLogOutputBest& operator=(wxLogOutputBest&&) = delete;
     
 protected:
-    void DoLogText(const wxString& msg) override
+    void DoLogText(std::string_view msg) override
     {
-        wxMessageOutputBest().Output(msg.ToStdString());
+        wxMessageOutputBest().Output(msg);
     }
 };
 
@@ -158,12 +158,11 @@ protected:
 // helper global functions
 // ----------------------------------------------------------------------------
 
-bool wxSafeShowMessage(const wxString& title, const wxString& text)
+bool wxSafeShowMessage(std::string_view title, std::string_view text)
 {
-    if ( !wxApp::GetValidTraits().SafeMessageBox(text.ToStdString(), title.ToStdString()) )
+    if ( !wxApp::GetValidTraits().SafeMessageBox(text, title) )
     {
-        wxFprintf(stderr, "%s: %s\n", title.c_str(), text.c_str());
-        fflush(stderr);
+        fmt::print(stderr, "{:s}: {:s}\n", title, text);
         return false;
     }
 
@@ -175,12 +174,11 @@ bool wxSafeShowMessage(const wxString& title, const wxString& text)
 // wxLogFormatter class implementation
 // ----------------------------------------------------------------------------
 
-wxString
-wxLogFormatter::Format(wxLogLevel level,
-                       const wxString& msg,
-                       const wxLogRecordInfo& info) const
+std::string wxLogFormatter::Format(wxLogLevel level,
+                                   std::string_view msg,
+                                   const wxLogRecordInfo& info) const
 {
-    wxString prefix;
+    std::string prefix;
 
     // don't time stamp debug messages under MSW as debug viewers usually
     // already have an option to do it
@@ -216,13 +214,13 @@ wxLogFormatter::Format(wxLogLevel level,
 #endif // !WX_WINDOWS
     }
 
-    return prefix + msg;
+    return prefix + std::string{msg.begin(), msg.end()};
 }
 
-wxString
+std::string
 wxLogFormatter::FormatTimeMS(wxLongLong_t msec) const
 {
-    wxString str;
+    std::string str;
 
     wxLog::TimeStampMS(&str, msec);
 
@@ -240,7 +238,7 @@ unsigned wxLog::LogLastRepeatIfNeeded()
 
     if ( gs_prevLog.numRepeated )
     {
-        wxString msg;
+        std::string msg;
 #if wxUSE_INTL
         if ( gs_prevLog.numRepeated == 1 )
         {
@@ -253,13 +251,13 @@ unsigned wxLog::LogLastRepeatIfNeeded()
             // Notice that we still use wxPLURAL() to ensure that multiple
             // numbers of times are correctly formatted, even though we never
             // actually use the singular string.
-            msg.Printf(wxPLURAL("The previous message repeated %u time.",
-                                "The previous message repeated %u times.",
-                                gs_prevLog.numRepeated),
-                       gs_prevLog.numRepeated);
+            msg = fmt::format(wxPLURAL("The previous message repeated %u time.",
+                                       "The previous message repeated %u times.",
+                                       gs_prevLog.numRepeated),
+                                       gs_prevLog.numRepeated);
         }
 #else
-        msg.Printf("The previous message was repeated %u time(s).",
+        msg = fmt::format("The previous message was repeated %u time(s).",
                    gs_prevLog.numRepeated);
 #endif
         gs_prevLog.numRepeated = 0;
@@ -276,7 +274,7 @@ wxLog::~wxLog()
     // messages could be lost
     if ( gs_prevLog.numRepeated )
     {
-        wxMessageOutputDebug().Printf
+        fmt::print
         (
 #if wxUSE_INTL
             wxPLURAL
@@ -302,7 +300,7 @@ wxLog::~wxLog()
 
 /* static */
 void
-wxLog::OnLog(wxLogLevel level, const wxString& msg, time_t t)
+wxLog::OnLog(wxLogLevel level, std::string_view msg, time_t t)
 {
     wxLogRecordInfo info;
     info.timestampMS = 1000*t;
@@ -316,7 +314,7 @@ wxLog::OnLog(wxLogLevel level, const wxString& msg, time_t t)
 /* static */
 void
 wxLog::OnLog(wxLogLevel level,
-             const wxString& msg,
+             std::string_view msg,
              const wxLogRecordInfo& info)
 {
     // fatal errors can't be suppressed nor handled by the custom log target
@@ -342,7 +340,7 @@ wxLog::OnLog(wxLogLevel level,
                 // thread
                 wxCriticalSectionLocker lock(GetBackgroundLogCS());
 
-                gs_bufferedLogRecords.push_back(wxLogRecord(level, msg, info));
+                gs_bufferedLogRecords.push_back(wxLogRecord(level, std::string{msg.begin(), msg.end()}, info));
 
                 // ensure that our Flush() will be called soon
                 wxWakeUpIdle();
@@ -368,7 +366,7 @@ wxLog::OnLog(wxLogLevel level,
 
 void
 wxLog::CallDoLogNow(wxLogLevel level,
-                    const wxString& msg,
+                    std::string_view msg,
                     const wxLogRecordInfo& info)
 {
     if ( GetRepetitionCounting() )
@@ -391,28 +389,29 @@ wxLog::CallDoLogNow(wxLogLevel level,
     }
 
     // handle extra data which may be passed to us by wxLogXXX()
-    wxString prefix, suffix;
+    std::string prefix;
+    std::string suffix;
     wxUIntPtr num = 0;
     if ( info.GetNumValue(wxLOG_KEY_SYS_ERROR_CODE, &num) )
     {
         const long err = wx::narrow_cast<long>(num);
 
-        suffix.Printf(_(" (error %ld: %s)"), err, wxSysErrorMsgStr(err));
+        suffix = fmt::format(_(" (error %ld: %s)"), err, wxSysErrorMsgStr(err));
     }
 
 #if wxUSE_LOG_TRACE
-    wxString str;
+    std::string str;
     if ( level == wxLOG_Trace && info.GetStrValue(wxLOG_KEY_TRACE_MASK, &str) )
     {
-        prefix = "(" + str + ") ";
+        prefix = fmt::format("({}) ", str);
     }
 #endif // wxUSE_LOG_TRACE
 
-    DoLogRecord(level, prefix + msg + suffix, info);
+    DoLogRecord(level, prefix + std::string{msg.begin(), msg.end()} + suffix, info);
 }
 
 void wxLog::DoLogRecord(wxLogLevel level,
-                             const wxString& msg,
+                             std::string_view msg,
                              const wxLogRecordInfo& info)
 {
     wxUnusedVar(info);
@@ -421,14 +420,15 @@ void wxLog::DoLogRecord(wxLogLevel level,
     DoLogTextAtLevel(level, m_formatter->Format (level, msg, info));
 }
 
-void wxLog::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
+void wxLog::DoLogTextAtLevel(wxLogLevel level, std::string_view msg)
 {
     // we know about debug messages (because using wxMessageOutputDebug is the
     // right thing to do in 99% of all cases and also for compatibility) but
     // anything else needs to be handled in the derived class
     if ( level == wxLOG_Debug || level == wxLOG_Trace )
     {
-        wxMessageOutputDebug().Output(msg.ToStdString() + '\n');
+        auto msgWithBreak = fmt::format("{}\n", msg);
+        wxMessageOutputDebug().Output(msgWithBreak);
     }
     else
     {
@@ -436,7 +436,7 @@ void wxLog::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
     }
 }
 
-void wxLog::DoLogText([[maybe_unused]] const wxString& msg)
+void wxLog::DoLogText([[maybe_unused]] std::string_view msg)
 {
     // in 2.8-compatible build the derived class might override DoLog() or
     // DoLogString() instead so we can't have this assert there
@@ -540,7 +540,7 @@ void wxLog::DoCreateOnDemand()
 // ----------------------------------------------------------------------------
 
 /* static */
-void wxLog::SetComponentLevel(const wxString& component, wxLogLevel level)
+void wxLog::SetComponentLevel(const std::string& component, wxLogLevel level)
 {
     if ( component.empty() )
     {
@@ -555,12 +555,12 @@ void wxLog::SetComponentLevel(const wxString& component, wxLogLevel level)
 }
 
 /* static */
-wxLogLevel wxLog::GetComponentLevel(const wxString& componentOrig)
+wxLogLevel wxLog::GetComponentLevel(std::string_view componentOrig)
 {
     wxCRIT_SECT_LOCKER(lock, GetLevelsCS());
 
     // Make a copy before modifying it in the loop.
-    wxString component = componentOrig;
+    std::string component = {componentOrig.begin(), componentOrig.end()};
 
     const wxStringToNumHashMap& componentLevels = GetComponentLevels();
     while ( !component.empty() )
@@ -570,7 +570,7 @@ wxLogLevel wxLog::GetComponentLevel(const wxString& componentOrig)
         if ( it != componentLevels.end() )
             return static_cast<wxLogLevel>(it->second);
 
-        component = component.BeforeLast('/');
+        component = wx::utils::BeforeLast(component, "/");
     }
 
     return GetLogLevel();
@@ -591,16 +591,16 @@ namespace
 //
 // notice that this doesn't make accessing it MT-safe, of course, you need to
 // serialize accesses to it using GetTraceMaskCS() for this
-std::vector<wxString>& TraceMasks()
+std::vector<std::string>& TraceMasks()
 {
-    static std::vector<wxString> s_traceMasks;
+    static std::vector<std::string> s_traceMasks;
 
     return s_traceMasks;
 }
 
 } // anonymous namespace
 
-/* static */ const std::vector<wxString>& wxLog::GetTraceMasks()
+/* static */ const std::vector<std::string>& wxLog::GetTraceMasks()
 {
     // because of this function signature (it returns a reference, not the
     // object), it is inherently MT-unsafe so there is no need to acquire the
@@ -609,14 +609,14 @@ std::vector<wxString>& TraceMasks()
     return TraceMasks();
 }
 
-void wxLog::AddTraceMask(const wxString& str)
+void wxLog::AddTraceMask(const std::string& str)
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
     TraceMasks().push_back(str);
 }
 
-void wxLog::RemoveTraceMask(const wxString& str)
+void wxLog::RemoveTraceMask(const std::string& str)
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
@@ -634,7 +634,7 @@ void wxLog::ClearTraceMasks()
 }
 
 // TODO: std::find
-/*static*/ bool wxLog::IsAllowedTraceMask(const wxString& mask)
+/*static*/ bool wxLog::IsAllowedTraceMask(std::string_view mask)
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
@@ -653,7 +653,7 @@ void wxLog::ClearTraceMasks()
 
 #if wxUSE_DATETIME
 
-void wxLog::TimeStamp(wxString *str)
+void wxLog::TimeStamp(std::string *str)
 {
     if ( !ms_timestamp.empty() )
     {
@@ -662,7 +662,7 @@ void wxLog::TimeStamp(wxString *str)
     }
 }
 
-void wxLog::TimeStamp(wxString *str, time_t t)
+void wxLog::TimeStamp(std::string *str, time_t t)
 {
     if ( !ms_timestamp.empty() )
     {
@@ -671,7 +671,7 @@ void wxLog::TimeStamp(wxString *str, time_t t)
     }
 }
 
-void wxLog::TimeStampMS(wxString *str, wxLongLong_t msec)
+void wxLog::TimeStampMS(std::string *str, wxLongLong_t msec)
 {
     if ( !ms_timestamp.empty() )
     {
@@ -682,15 +682,15 @@ void wxLog::TimeStampMS(wxString *str, wxLongLong_t msec)
 
 #else // !wxUSE_DATETIME
 
-void wxLog::TimeStamp(wxString*)
+void wxLog::TimeStamp(std::string*)
 {
 }
 
-void wxLog::TimeStamp(wxString*, time_t)
+void wxLog::TimeStamp(std::string*, time_t)
 {
 }
 
-void wxLog::TimeStampMS(wxString*, wxLongLong_t)
+void wxLog::TimeStampMS(std::string*, wxLongLong_t)
 {
 }
 
@@ -785,7 +785,7 @@ void wxLogBuffer::Flush()
     }
 }
 
-void wxLogBuffer::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
+void wxLogBuffer::DoLogTextAtLevel(wxLogLevel level, std::string_view msg)
 {
     // don't put debug messages in the buffer, we don't want to show
     // them to the user in a msg box, log them immediately
@@ -797,7 +797,7 @@ void wxLogBuffer::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
             break;
 
         default:
-            m_str << msg << "\n";
+            m_str += fmt::format("{}\n", msg);
     }
 }
 
@@ -810,12 +810,12 @@ wxLogStderr::wxLogStderr(FILE *fp, const wxMBConv& conv)
 {
 }
 
-void wxLogStderr::DoLogText(const wxString& msg)
+void wxLogStderr::DoLogText(std::string_view msg)
 {
     // First send it to stderr, even if we don't have it (e.g. in a Windows GUI
     // application under) it's not a problem to try to use it and it's easier
     // than determining whether we do have it or not.
-    wxMessageOutputStderr::Output(msg.ToStdString());
+    wxMessageOutputStderr::Output(msg);
 
     // under GUI systems such as Windows or Mac, programs usually don't have
     // stderr at all, so show the messages also somewhere else, typically in
@@ -826,7 +826,8 @@ void wxLogStderr::DoLogText(const wxString& msg)
         wxAppTraits *traits = wxApp::GetTraitsIfExists();
         if ( traits && !traits->HasStderr() )
         {
-            wxMessageOutputDebug().Output(msg.ToStdString() + '\n');
+            auto msgWithBreak = fmt::format("{}\n", msg);
+            wxMessageOutputDebug().Output(msgWithBreak);
         }
     }
 }
@@ -844,10 +845,10 @@ wxLogStream::wxLogStream(std::ostream *ostr, const wxMBConv& conv)
         m_ostr = ostr;
 }
 
-void wxLogStream::DoLogText(const wxString& msg)
+void wxLogStream::DoLogText(std::string_view msg)
 {
-    const wxCharBuffer& buf = PrepareForOutput(msg);
-    m_ostr->write(buf, buf.length());
+    const auto buf = PrepareForOutput(msg);
+    m_ostr->write(buf.data(), buf.length());
 }
 
 // ----------------------------------------------------------------------------
@@ -893,7 +894,7 @@ void wxLogChain::Flush()
 }
 
 void wxLogChain::DoLogRecord(wxLogLevel level,
-                             const wxString& msg,
+                             std::string_view msg,
                              const wxLogRecordInfo& info)
 {
     // let the previous logger show it
@@ -988,7 +989,7 @@ unsigned long wxSysErrorCode()
 
 #if defined(WX_WINDOWS)
 
-wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
+std::string wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
 {
     DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER |
                   FORMAT_MESSAGE_FROM_SYSTEM |
@@ -1016,13 +1017,13 @@ wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
         return fmt::format("unknown error 0x{:lx}", nErrCode);
     }
 
-    wxString str;
+    std::string str;
 
     // copy it to our buffer and free memory
     // Crashes on SmartPhone (FIXME)
     if( lpMsgBuf != nullptr )
     {
-        str = static_cast<const wxChar *>(lpMsgBuf);
+        str = static_cast<const char*>(lpMsgBuf);
 
         LocalFree(lpMsgBuf);
 
@@ -1030,8 +1031,8 @@ wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
         size_t len = str.length();
         if ( len >= 2 ) {
             // truncate string
-            if ( str[len - 2] == wxS('\r') )
-                str.Truncate(len - 2);
+            if ( str[len - 2] == '\r' )
+                str = str.substr(0, len - 2);
         }
     }
 
@@ -1040,7 +1041,7 @@ wxString wxMSWFormatMessage(DWORD nErrCode, WXHMODULE hModule)
 
 #endif // WX_WINDOWS
 
-wxString wxSysErrorMsgStr(unsigned long nErrCode)
+std::string wxSysErrorMsgStr(unsigned long nErrCode)
 {
     if ( nErrCode == 0 )
         nErrCode = wxSysErrorCode();
@@ -1073,11 +1074,11 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode)
 
 // get error message from system as a char pointer: this function has to use a
 // static buffer of fixed size, so should be avoided in favour of the function
-// returning wxString
-const wxChar *wxSysErrorMsg(unsigned long nErrCode)
+// returning std::string
+std::string_view wxSysErrorMsg(unsigned long nErrCode)
 {
-    static wxChar s_szBuf[1024];
-    wxStrlcpy(s_szBuf, (const wxChar*)wxSysErrorMsgStr(nErrCode).c_str(),
+    static char s_szBuf[1024];
+    wxStrlcpy(s_szBuf, wxSysErrorMsgStr(nErrCode).c_str(),
               WXSIZEOF(s_szBuf));
     return s_szBuf;
 }

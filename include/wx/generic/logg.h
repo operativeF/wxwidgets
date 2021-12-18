@@ -11,9 +11,8 @@
 #ifndef   _WX_LOGG_H_
 #define   _WX_LOGG_H_
 
-#include "wx/string.h"
-
 import <string>;
+import <string_view>;
 import <vector>;
 
 #if wxUSE_GUI
@@ -40,7 +39,7 @@ public:
 
 protected:
     // implement sink function
-    void DoLogText(const wxString& msg) override;
+    void DoLogText(std::string_view msg) override;
 
 private:
     // the control we use
@@ -66,12 +65,12 @@ public:
 
 protected:
     void DoLogRecord(wxLogLevel level,
-                     const wxString& msg,
+                     std::string_view msg,
                      const wxLogRecordInfo& info) override;
 
     // return the title to be used for the log dialog, depending on m_bErrors
     // and m_bWarnings values
-    wxString GetTitle() const;
+    std::string GetTitle() const;
 
     // return the icon (one of wxICON_XXX constants) to be used for the dialog
     // depending on m_bErrors/m_bWarnings
@@ -81,7 +80,7 @@ protected:
     void Clear();
 
 
-    std::vector<wxString> m_aMessages;      // the log message texts
+    std::vector<std::string> m_aMessages;      // the log message texts
     std::vector<int>    m_aSeverity;      // one of wxLOG_XXX values
     std::vector<long>   m_aTimes;   // the time of each message
     bool          m_bErrors,        // do we have any errors?
@@ -91,12 +90,12 @@ protected:
 private:
     // this method is called to show a single log message, it uses
     // wxMessageBox() by default
-    virtual void DoShowSingleLogMessage(const wxString& message,
-                                        const wxString& title,
+    virtual void DoShowSingleLogMessage(std::string_view message,
+                                        std::string_view title,
                                         unsigned int style);
 
     // this method is called to show multiple log messages, it uses wxLogDialog
-    virtual void DoShowMultipleLogMessages(const std::vector<wxString>& messages,
+    virtual void DoShowMultipleLogMessages(const std::vector<std::string>& messages,
                                            const std::vector<int>& severities,
                                            const std::vector<long>& times,
                                            std::string_view title,
@@ -143,7 +142,7 @@ public:
     virtual void OnFrameDelete(wxFrame *frame);
 
 protected:
-    void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
+    void DoLogTextAtLevel(wxLogLevel level, std::string_view msg) override;
 
 private:
     wxLogFrame *m_pLogFrame{nullptr};      // the log frame

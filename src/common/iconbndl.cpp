@@ -179,7 +179,7 @@ void wxIconBundle::AddIcon(const std::string& file, wxBitmapType type)
     (
         *this,
         stream, type,
-        wxString::Format(_("Failed to load image %%d from file '%s'."), file)
+        fmt::format(_("Failed to load image %%d from file '{:s}'."), file)
     );
 }
 

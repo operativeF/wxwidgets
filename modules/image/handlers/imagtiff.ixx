@@ -225,12 +225,12 @@ extern "C"
 
 void TIFFwxWarningHandler(const char* module, const char* fmt, va_list ap)
 {
-    wxLogWarning("%s", FormatTiffMessage(module, fmt, ap));
+    wxLogWarning("{:s}", FormatTiffMessage(module, fmt, ap));
 }
 
 void TIFFwxErrorHandler(const char* module, const char* fmt, va_list ap)
 {
-    wxLogError("%s", FormatTiffMessage(module, fmt, ap));
+    wxLogError("{:s}", FormatTiffMessage(module, fmt, ap));
 }
 
 } // extern "C"

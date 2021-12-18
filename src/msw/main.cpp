@@ -111,7 +111,7 @@ bool wxHandleFatalExceptions(bool doit)
     if ( doit )
     {
         // try to find a place where we can put out report file later
-        wxChar fullname[MAX_PATH];
+        wchar_t fullname[MAX_PATH];
         if ( !::GetTempPathW(WXSIZEOF(fullname), fullname) )
         {
             wxLogLastError("GetTempPath");
@@ -121,24 +121,24 @@ bool wxHandleFatalExceptions(bool doit)
         }
 
         // use PID and date to make the report file name more unique
-        wxString name = wxString::Format
+        std::string name = fmt::format
                         (
 #if wxUSE_DATETIME
                             "%s_%s_%lu.dmp",
 #else
                             "%s_%lu.dmp",
 #endif
-                            wxTheApp ? (const wxChar*)wxTheApp->GetAppDisplayName().c_str()
-                                     : L"wxwindows", // TODO: Temporary, convert to narrow string.
+                            wxTheApp ? wxTheApp->GetAppDisplayName().c_str()
+                                     : "wxwindows",
 #if wxUSE_DATETIME
                             wxDateTime::Now().Format("%Y%m%dT%H%M%S").c_str(),
 #endif
                             ::GetCurrentProcessId()
                         );
 
-        wxStrncat(fullname, name, WXSIZEOF(fullname) - wxStrlen(fullname) - 1);
+        std::strncat(fullname.data(), name.c_str(), WXSIZEOF(fullname) - wxStrlen(fullname) - 1);
 
-        wxCrashReport::SetFileName(fullname);
+        wxCrashReport::SetFileName(boost::nowide::narrow(fullname));
     }
 #endif // wxUSE_CRASHREPORT
 

@@ -133,7 +133,7 @@ bool wxTextValidator::Validate(wxWindow *parent)
     if ( !errormsg.empty() )
     {
         m_validatorWindow->SetFocus();
-        wxMessageBox(errormsg.ToStdString(), _("Validation conflict").ToStdString(),
+        wxMessageBox(errormsg.ToStdString(), _("Validation conflict"),
                      wxOK | wxICON_EXCLAMATION, parent);
 
         return false;
@@ -172,23 +172,21 @@ bool wxTextValidator::TransferFromWindow()
     return true;
 }
 
-wxString wxTextValidator::IsValid(const wxString& str) const
+std::string wxTextValidator::IsValid(std::string_view str) const
 {
     if ( HasFlag(wxFILTER_EMPTY) && str.empty() )
         return _("Required information entry is empty.");
-    else if ( IsExcluded(str) )
-        return wxString::Format(_("'%s' is one of the invalid strings"), str);
-    else if ( !IsIncluded(str) )
-        return wxString::Format(_("'%s' is not one of the valid strings"), str);
+    else if ( IsExcluded(std::string{str.begin(), str.end()}) )
+        return fmt::format(_("'%s' is one of the invalid strings"), str);
+    else if ( !IsIncluded(std::string{str.begin(), str.end()}) )
+        return fmt::format(_("'%s' is not one of the valid strings"), str);
 
     // check the whole string for invalid chars.
-    for ( wxString::const_iterator i = str.begin(), end = str.end();
-          i != end; ++i )
+    for ( auto i = str.begin(), end = str.end(); i != end; ++i )
     {
         if ( !IsValidChar(*i) )
         {
-            return wxString::Format(
-                _("'%s' contains invalid character(s)"), str);
+            return fmt::format(_("'{:s}' contains invalid character(s)"), str);
         }
     }
 

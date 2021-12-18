@@ -718,8 +718,8 @@ int wxIFFDecoder::ReadIFF()
         m_image->h = height;
         m_image->transparent = bmhd_transcol;
 
-        wxLogTrace("iff", "Loaded IFF picture %s",
-            truncated? "truncated" : "completely");
+        wxLogTrace("iff", "Loaded IFF picture {:s}",
+            truncated ? "truncated" : "completely");
 
         return (truncated? wxIFF_TRUNCATED : wxIFF_OK);
     } else {

@@ -97,7 +97,7 @@ public:
     // it's supposed to be always safe to call -- hence the name
     //
     // return true if the message box was shown, false if nothing was done
-    virtual bool SafeMessageBox(const std::string& text, const std::string& title) = 0;
+    virtual bool SafeMessageBox(std::string_view text, std::string_view title) = 0;
 
     // return true if fprintf(stderr) goes somewhere, false otherwise
     virtual bool HasStderr() = 0;
@@ -213,8 +213,8 @@ public:
 
     bool ShowAssertDialog(const std::string& msg) override;
     bool HasStderr() override;
-    bool SafeMessageBox(const std::string& text,
-                        const std::string& title) override;
+    bool SafeMessageBox(std::string_view text,
+                        std::string_view title) override;
 
     // the GetToolkitVersion for console application is always the same
     wxPortId GetToolkitVersion(int *verMaj = nullptr,
@@ -254,8 +254,8 @@ public:
     // Win32 has its own implementation using native message box directly in
     // the base class, don't override it.
 #ifndef __WIN32__
-    bool SafeMessageBox(const std::string& text,
-                        const std::string& title) override;
+    bool SafeMessageBox(std::string_view text,
+                        std::string_view title) override;
 #endif // !__WIN32__
 
     bool IsUsingUniversalWidgets() const override

@@ -85,7 +85,7 @@ void wxInfoMessageBox(wxWindow* parent);
 wxVersionInfo wxGetLibraryVersionInfo();
 
 // Get OS description as a user-readable string
-wxString wxGetOsDescription();
+std::string wxGetOsDescription();
 
 // Get OS version
 wxOperatingSystemId wxGetOsVersion(int *verMaj = nullptr,

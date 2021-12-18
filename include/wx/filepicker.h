@@ -285,7 +285,7 @@ protected:
                                             const std::string& wildcard) override
     {
         return std::make_unique<wxFilePickerWidget>(parent, wxID_ANY,
-                                      wxGetTranslation(wxFilePickerWidgetLabel).ToStdString(),
+                                      wxGetTranslation(wxFilePickerWidgetLabel),
                                       path, message, wildcard,
                                       wxDefaultPosition, wxDefaultSize,
                                       GetPickerStyle(wxGetWindowStyle()));
@@ -381,7 +381,7 @@ protected:
                                             [[maybe_unused]] const std::string& wildcard) override
     {
         return std::make_unique<wxDirPickerWidget>(parent, wxID_ANY,
-                                     wxGetTranslation(wxDirPickerWidgetLabel).ToStdString(),
+                                     wxGetTranslation(wxDirPickerWidgetLabel),
                                      path, message,
                                      wxDefaultPosition, wxDefaultSize,
                                      GetPickerStyle(wxGetWindowStyle()));
