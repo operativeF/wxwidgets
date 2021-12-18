@@ -2468,7 +2468,7 @@ void wxImage::SetPalette(const wxPalette& palette)
 // Option functions (arbitrary name/value mapping)
 // ----------------------------------------------------------------------------
 
-void wxImage::SetOption(const std::string& name, std::string_view value)
+void wxImage::SetOption(std::string_view name, std::string_view value)
 {
     AllocExclusive();
 
@@ -2479,7 +2479,7 @@ void wxImage::SetOption(const std::string& name, std::string_view value)
 
     if ( match == M_IMGDATA->m_optionNames.end() )
     {
-        M_IMGDATA->m_optionNames.push_back(name);
+        M_IMGDATA->m_optionNames.emplace_back(name.begin(), name.end());
         M_IMGDATA->m_optionValues.emplace_back(value.begin(), value.end());
     }
     else
@@ -2490,13 +2490,13 @@ void wxImage::SetOption(const std::string& name, std::string_view value)
     }
 }
 
-void wxImage::SetOption(const std::string& name, int value)
+void wxImage::SetOption(std::string_view name, int value)
 {
     std::string valStr{fmt::format("{:d}", value)};
     SetOption(name, valStr);
 }
 
-std::string wxImage::GetOption(const std::string& name) const
+std::string wxImage::GetOption(std::string_view name) const
 {
     if ( !M_IMGDATA )
         return {};
@@ -2515,12 +2515,12 @@ std::string wxImage::GetOption(const std::string& name) const
     }
 }
 
-int wxImage::GetOptionInt(const std::string& name) const
+int wxImage::GetOptionInt(std::string_view name) const
 {
     return wxAtoi(GetOption(name));
 }
 
-bool wxImage::HasOption(const std::string& name) const
+bool wxImage::HasOption(std::string_view name) const
 {
     if(M_IMGDATA)
     {
@@ -2563,7 +2563,7 @@ unsigned int wxImage::GetLoadFlags() const
 
 #ifdef HAS_LOAD_FROM_RESOURCE
 
-static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
+static wxImage LoadImageFromResource(std::string_view name, wxBitmapType type)
 {
     using msw::utils::unique_bitmap;
 
@@ -2576,7 +2576,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 
         if ( !hBitmap )
         {
-            wxLogError(_("Failed to load bitmap \"%s\" from resources."), name);
+            wxLogError(_("Failed to load bitmap \"%s\" from resources."), std::string{name.begin(), name.end()});
         }
     }
     else if ( type == wxBitmapType::ICO_Resource )
@@ -2585,7 +2585,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 
         if ( !hIcon )
         {
-            wxLogError(_("Failed to load icon \"%s\" from resources."), name);
+            wxLogError(_("Failed to load icon \"%s\" from resources."), std::string{name.begin(), name.end()});
         }
         else
         {

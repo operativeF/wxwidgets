@@ -163,7 +163,7 @@ void CompareImage(const wxImageHandler& handler, const wxImage& image,
 }
 
 #if wxUSE_LIBTIFF
-static void TestTIFFImage(const std::string& option, int value,
+static void TestTIFFImage(std::string_view option, int value,
     const wxImage* compareImage = nullptr)
 {
     wxImage image;

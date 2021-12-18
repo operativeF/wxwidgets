@@ -20,6 +20,8 @@ module;
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 
+#include <fmt/core.h>
+
 export module WX.Image.TIFF;
 
 import WX.Image.Base;
@@ -29,6 +31,7 @@ import Utils.Strings;
 import Utils.Geometry;
 import WX.Utils.Cast;
 
+import <charconv>;
 import <cstdlib>;
 
 //-----------------------------------------------------------------------------
@@ -59,11 +62,11 @@ std::string FormatTiffMessage(const char *module, const char *fmt, va_list ap)
     }
     buf[WXSIZEOF(buf)-1] = 0; // make sure it is always NULL-terminated
 
-    wxString msg(buf);
-    if ( module )
-        msg += wxString::Format(_(" (in module \"%s\")"), module);
+    std::string msg(buf, 512);
+    if ( module ) // FIXME: Removed translation for fmt lib
+        msg += fmt::format(" (in module \"%s\")", module);
 
-    return msg.ToStdString();
+    return msg;
 }
 
 // helper to translate our, possibly 64 bit, wxFileOffset to TIFF, always 32
@@ -255,17 +258,11 @@ TIFF* TIFFwxOpen(wxOutputStream& stream, const char* name, const char* mode)
 }
 
 // defines for wxImage::SetOption
-inline const wxString wxIMAGE_OPTION_TIFF_BITSPERSAMPLE   = "BitsPerSample";
-inline const wxString wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL = "SamplesPerPixel";
-inline const wxString wxIMAGE_OPTION_TIFF_COMPRESSION     = "Compression";
-inline const wxString wxIMAGE_OPTION_TIFF_PHOTOMETRIC     = "Photometric";
-inline const wxString wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR = "ImageDescriptor";
-
-// for backwards compatibility
-inline const wxString wxIMAGE_OPTION_BITSPERSAMPLE        = wxIMAGE_OPTION_TIFF_BITSPERSAMPLE;
-inline const wxString wxIMAGE_OPTION_SAMPLESPERPIXEL      = wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL;
-inline const wxString wxIMAGE_OPTION_COMPRESSION          = wxIMAGE_OPTION_TIFF_COMPRESSION;
-inline const wxString wxIMAGE_OPTION_IMAGEDESCRIPTOR      = wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR;
+inline constexpr std::string_view wxIMAGE_OPTION_TIFF_BITSPERSAMPLE   = "BitsPerSample";
+inline constexpr std::string_view wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL = "SamplesPerPixel";
+inline constexpr std::string_view wxIMAGE_OPTION_TIFF_COMPRESSION     = "Compression";
+inline constexpr std::string_view wxIMAGE_OPTION_TIFF_PHOTOMETRIC     = "Photometric";
+inline constexpr std::string_view wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR = "ImageDescriptor";
 
 class wxTIFFHandler: public wxImageHandler
 {
@@ -584,14 +581,18 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
         result in whole integer rounding error, eg. 201 instead of 200 dpi.
         If an app wants an int, GetOptionInt will convert and round down.
         */
-        image->SetOption(wxIMAGE_OPTION_RESOLUTIONX,
-            wxString::FromCDouble((double) resX).ToStdString());
+        std::string str;
+        str.resize(15); // Floating point - 15 chars
+        auto [p, ec] = std::to_chars(str.data(), str.data() + str.size(), resX);
+        image->SetOption(wxIMAGE_OPTION_RESOLUTIONX, static_cast<double>(resX));
     }
 
     if ( TIFFGetField(tif, TIFFTAG_YRESOLUTION, &resY) )
     {
-        image->SetOption(wxIMAGE_OPTION_RESOLUTIONY,
-            wxString::FromCDouble((double) resY).ToStdString());
+        std::string str;
+        str.resize(15); // Floating point - 15 chars
+        auto [p, ec] = std::to_chars(str.data(), str.data() + str.size(), resY);
+        image->SetOption(wxIMAGE_OPTION_RESOLUTIONY, static_cast<double>(resY));
     }
 
     _TIFFfree( raster );

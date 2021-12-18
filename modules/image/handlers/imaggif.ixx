@@ -274,7 +274,7 @@ bool wxGIFHandler_WriteControl(wxOutputStream* stream,
     return wxGIFHandler_Write(stream, buf, sizeof(buf));
 }
 
-bool wxGIFHandler_WriteComment(wxOutputStream* stream, const wxString& comment)
+bool wxGIFHandler_WriteComment(wxOutputStream* stream, const std::string& comment)
 {
     if (comment.empty())
     {
@@ -294,16 +294,15 @@ bool wxGIFHandler_WriteComment(wxOutputStream* stream, const wxString& comment)
     If comment is longer than 255 bytes write it in blocks of maximum 255
     bytes each.
     */
-    wxCharBuffer text(comment.mb_str());
-
-    size_t pos = 0, fullLength = text.length();
+    size_t pos = 0;
+    size_t fullLength = comment.length();
 
     do
     {
         size_t blockLength = std::min(fullLength - pos, std::size_t{ 255 });
 
         if (!wxGIFHandler_WriteByte(stream, (std::uint8_t)blockLength)
-            || !wxGIFHandler_Write(stream, &text.data()[pos], blockLength))
+            || !wxGIFHandler_Write(stream, &comment.data()[pos], blockLength))
         {
             return false;
         }

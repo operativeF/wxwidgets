@@ -587,11 +587,11 @@ public:
 #endif // wxUSE_PALETTE
 
     // Option functions (arbitrary name/value mapping)
-    void SetOption(const std::string& name, std::string_view value);
-    void SetOption(const std::string& name, int value);
-    std::string GetOption(const std::string& name) const;
-    int GetOptionInt(const std::string& name) const;
-    bool HasOption(const std::string& name) const;
+    void SetOption(std::string_view name, std::string_view value);
+    void SetOption(std::string_view name, int value);
+    std::string GetOption(std::string_view name) const;
+    int GetOptionInt(std::string_view name) const;
+    bool HasOption(std::string_view name) const;
 
     unsigned long CountColours( unsigned long stopafter = (unsigned long) -1 ) const;
 
