@@ -35,15 +35,15 @@ import <vector>;
 
 static std::string GetTypeName(wxCmdLineParamType type);
 
-static std::string GetOptionName(std::string::const_iterator p,
-                              std::string::const_iterator end,
-                              const wxChar *allowedChars);
+static std::string GetOptionName(wxString::const_iterator p,
+                                 wxString::const_iterator end,
+                                 const wxChar *allowedChars);
 
-static std::string GetShortOptionName(std::string::const_iterator p,
-                                   std::string::const_iterator end);
+static std::string GetShortOptionName(wxString::const_iterator p,
+                                      wxString::const_iterator end);
 
-static std::string GetLongOptionName(std::string::const_iterator p,
-                                  std::string::const_iterator end);
+static std::string GetLongOptionName(wxString::const_iterator p,
+                                     wxString::const_iterator end);
 
 // ----------------------------------------------------------------------------
 // private structs
@@ -182,7 +182,7 @@ struct wxCmdLineParserData
     wxArrayParams m_paramDesc;  // description of all possible params
     wxArrayArgs m_parsedArguments; // all options and parameters in parsing order
 
-    std::vector<std::string> m_arguments;  // == argv, argc == m_arguments.GetCount()
+    std::vector<wxString> m_arguments;  // == argv, argc == m_arguments.GetCount()
     std::vector<wxString> m_parameters; // all params found
 
     bool m_enableLongOptions{ true };   // true if long options are enabled
@@ -431,7 +431,7 @@ void wxCmdLineParserData::SetArguments(int argc, wxChar **argv)
 
     for ( int n = 0; n < argc; n++ )
     {
-        m_arguments.push_back(argv[n]);
+        m_arguments.push_back(boost::nowide::narrow(argv[n]));
     }
 }
 
@@ -797,7 +797,7 @@ int wxCmdLineParser::Parse(bool showUsage)
 
     // parse everything
     m_data->m_parameters.clear();
-    std::string arg;
+    wxString arg;
     size_t count = m_data->m_arguments.size();
     for ( size_t n = 1; ok && (n < count); n++ )    // 0 is program name
     {
@@ -1047,7 +1047,8 @@ int wxCmdLineParser::Parse(bool showUsage)
 
                 if ( ok )
                 {
-                    std::string value{p, end};
+                    // FIXME: Indexing with arguments from wxString.
+                    wxString value{p, end};
                     switch ( opt.type )
                     {
                         default:
@@ -1069,7 +1070,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 }
                                 else
                                 {
-                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value, name);
+                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value.ToStdString(), name);
 
                                     ok = false;
                                 }
@@ -1087,7 +1088,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 }
                                 else
                                 {
-                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value, name);
+                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value.ToStdString(), name);
 
                                     ok = false;
                                 }
@@ -1102,7 +1103,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 wxString tmpValue{value};
                                 if ( !dt.ParseDate(tmpValue, &endDate) || endDate != tmpValue.end() )
                                 {
-                                    errorMsg += fmt::format(_("Option '{:s}': '{:s}' cannot be converted to a date.\n"), name, value);
+                                    errorMsg += fmt::format(_("Option '{:s}': '{:s}' cannot be converted to a date.\n"), name, value.ToStdString());
 
                                     ok = false;
                                 }
@@ -1148,7 +1149,7 @@ int wxCmdLineParser::Parse(bool showUsage)
             }
             else
             {
-                errorMsg += fmt::format(_("Unexpected parameter '{:s}'\n"), arg);
+                errorMsg += fmt::format(_("Unexpected parameter '{:s}'\n"), arg.ToStdString());
 
                 ok = false;
             }
@@ -1201,7 +1202,7 @@ int wxCmdLineParser::Parse(bool showUsage)
 
             if ( !(param.flags & wxCMD_LINE_PARAM_OPTIONAL) )
             {
-                errorMsg += fmt::format(_("The required parameter '%s' was not specified.\n"), param.description);
+                errorMsg += fmt::format(_("The required parameter '%s' was not specified.\n"), param.description.ToStdString());
 
                 ok = false;
             }
@@ -1461,13 +1462,13 @@ the parameter allowedChars.
 For example, if p points to "abcde-@-_", and allowedChars is "-_",
 this function returns "abcde-".
 */
-static std::string GetOptionName(std::string::const_iterator p,
-                              std::string::const_iterator end,
-                              const char* allowedChars)
+static std::string GetOptionName(wxString::const_iterator p,
+                                 wxString::const_iterator end,
+                                 const wxChar* allowedChars)
 {
     std::string argName;
 
-    while ( p != end && (wx::utils::isAlNum(*p) || std::strchr(allowedChars, *p)) )
+    while ( p != end && (wx::utils::isAlNum(*p) || wxStrchr(allowedChars, *p)) )
     {
         argName += *p++;
     }
@@ -1485,14 +1486,14 @@ static std::string GetOptionName(std::string::const_iterator p,
 #define wxCMD_LINE_CHARS_ALLOWED_BY_LONG_OPTION \
     wxCMD_LINE_CHARS_ALLOWED_BY_SHORT_OPTION L"-"
 
-static std::string GetShortOptionName(std::string::const_iterator p,
-                                  std::string::const_iterator end)
+static std::string GetShortOptionName(wxString::const_iterator p,
+                                      wxString::const_iterator end)
 {
     return GetOptionName(p, end, wxCMD_LINE_CHARS_ALLOWED_BY_SHORT_OPTION);
 }
 
-static std::string GetLongOptionName(std::string::const_iterator p,
-                                  std::string::const_iterator end)
+static std::string GetLongOptionName(wxString::const_iterator p,
+                                     wxString::const_iterator end)
 {
     return GetOptionName(p, end, wxCMD_LINE_CHARS_ALLOWED_BY_LONG_OPTION);
 }

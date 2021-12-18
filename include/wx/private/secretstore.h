@@ -82,13 +82,13 @@ public:
     virtual bool Save(const wxString& service,
                       const wxString& username,
                       const wxSecretValueImpl& password,
-                      wxString& errmsg) = 0;
+                      std::string& errmsg) = 0;
     virtual bool Load(const wxString& service,
                       wxString* username,
                       wxSecretValueImpl** password,
-                      wxString& errmsg) const = 0;
+                      std::string& errmsg) const = 0;
     virtual bool Delete(const wxString& service,
-                        wxString& errmsg) = 0;
+                        std::string& errmsg) = 0;
 };
 
 #endif // _WX_PRIVATE_SECRETSTORE_H_

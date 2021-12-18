@@ -136,9 +136,9 @@ bool wxHandleFatalExceptions(bool doit)
                             ::GetCurrentProcessId()
                         );
 
-        std::strncat(fullname.data(), name.c_str(), WXSIZEOF(fullname) - wxStrlen(fullname) - 1);
+        name = boost::nowide::narrow(fullname) + name;
 
-        wxCrashReport::SetFileName(boost::nowide::narrow(fullname));
+        wxCrashReport::SetFileName(name);
     }
 #endif // wxUSE_CRASHREPORT
 

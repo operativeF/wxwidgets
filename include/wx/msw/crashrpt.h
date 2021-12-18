@@ -69,7 +69,7 @@ struct wxCrashContext
     wxCrashContext(_EXCEPTION_POINTERS *ep = nullptr);
 
     // get the name for this exception code
-    wxString GetExceptionString() const;
+    std::string GetExceptionString() const;
 
 
     // exception code

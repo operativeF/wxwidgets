@@ -317,11 +317,11 @@ wxCrashContext::wxCrashContext(_EXCEPTION_POINTERS *ep)
 #endif // __INTEL__
 }
 
-wxString wxCrashContext::GetExceptionString() const
+std::string wxCrashContext::GetExceptionString() const
 {
-    wxString s;
+    std::string s;
 
-    #define CASE_EXCEPTION( x ) case EXCEPTION_##x: s = wxT(#x); break
+    #define CASE_EXCEPTION( x ) case EXCEPTION_##x: s = #x; break
 
     switch ( code )
     {
@@ -348,9 +348,12 @@ wxString wxCrashContext::GetExceptionString() const
         CASE_EXCEPTION(GUARD_PAGE);
         CASE_EXCEPTION(INVALID_HANDLE);
 
-        default:
-            // unknown exception, ask NTDLL for the name
-            s = wxMSWFormatMessage(code, ::GetModuleHandleW(L"NTDLL.DLL"));
+        // FIXME: Can't compile without using log
+        // default:
+        //     // unknown exception, ask NTDLL for the name
+        //     #if wxUSE_LOG
+        //     s = wxMSWFormatMessage(code, ::GetModuleHandleW(L"NTDLL.DLL"));
+        //     #endif
     }
 
     #undef CASE_EXCEPTION

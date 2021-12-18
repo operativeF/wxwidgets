@@ -257,7 +257,7 @@ bool wxDDEServer::Create(const wxString& server)
 
     if (!success)
     {
-        DDELogError(fmt::format(_("Failed to register DDE server '{:s}'"), server));
+        DDELogError(fmt::format(_("Failed to register DDE server '{:s}'"), server.ToStdString()));
     }
 
     DDEFreeString(hsz);
@@ -276,7 +276,7 @@ wxDDEServer::~wxDDEServer()
             if ( !DdeNameService(DDEIdInst, hsz,
                 (HSZ) nullptr, DNS_UNREGISTER) )
             {
-                DDELogError(fmt::format(_("Failed to unregister DDE server '{:s}'"), m_serviceName));
+                DDELogError(fmt::format(_("Failed to unregister DDE server '{:s}'"), m_serviceName.ToStdString()));
             }
 
             DDEFreeString(hsz);

@@ -860,9 +860,12 @@ enum wxWinVersion
 
 wxWinVersion wxGetWinVersion();
 
+#if wxUSE_LOG
 // This is similar to wxSysErrorMsgStr(), but takes an extra WXHMODULE parameter
 // specific to wxMSW.
 std::string wxMSWFormatMessage(WXDWORD nErrCode, WXHMODULE hModule = nullptr);
+
+#endif
 
 #if wxUSE_GUI && defined(__WXMSW__)
 

@@ -162,7 +162,7 @@ wxSecretStore::Save(const wxString& service,
     if ( !secret.m_impl )
         return false;
 
-    wxString err;
+    std::string err;
     if ( !m_impl->Save(service, user, *secret.m_impl, err) )
     {
         wxLogError(_("Saving password for \"%s\" failed: %s."),
@@ -181,7 +181,7 @@ wxSecretStore::Load(const wxString& service,
     if ( !m_impl )
         return false;
 
-    wxString err;
+    std::string err;
     wxSecretValueImpl* secretImpl = nullptr;
     if ( !m_impl->Load(service, &user, &secretImpl, err) )
     {
@@ -205,7 +205,7 @@ wxSecretStore::Delete(const wxString& service)
     if ( !m_impl )
         return false;
 
-    wxString err;
+    std::string err;
     if ( !m_impl->Delete(service, err) )
     {
         if ( !err.empty() )

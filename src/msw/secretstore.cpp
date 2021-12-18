@@ -49,7 +49,7 @@ public:
     bool Save(const wxString& service,
                       const wxString& user,
                       const wxSecretValueImpl& secret,
-                      wxString& errmsg) override
+                      std::string& errmsg) override
     {
         CREDENTIALW cred;
         wxZeroMemory(cred);
@@ -79,7 +79,7 @@ public:
     bool Load(const wxString& service,
                       wxString* user,
                       wxSecretValueImpl** secret,
-                      wxString& errmsg) const override
+                      std::string& errmsg) const override
     {
         CREDENTIALW* pcred = nullptr;
         if ( !::CredReadW(service.t_str(), CRED_TYPE_GENERIC, 0, &pcred) || !pcred )
@@ -102,7 +102,7 @@ public:
     }
 
     bool Delete(const wxString& service,
-                        wxString& errmsg) override
+                std::string& errmsg) override
     {
         if ( !::CredDeleteW(service.t_str(), CRED_TYPE_GENERIC, 0) )
         {

@@ -27,6 +27,8 @@
 
 #include "wx/except.h"
 
+#include <fmt/core.h>
+
 #include <cassert>
 
 import WX.Utils.Cast;
@@ -1368,13 +1370,8 @@ void wxWakeUpMainThread()
         // wxLog here as it would result in reentrancy because logging from a
         // thread calls wxWakeUpIdle() which calls this function itself again
         const unsigned long ec = wxSysErrorCode();
-        wxMessageOutputDebug().Printf
-        (
-            "Failed to wake up main thread: PostThreadMessage(WM_NULL) "
-            "failed with error 0x%08lx (%s).",
-            ec,
-            wxSysErrorMsgStr(ec)
-        );
+        // FIXME: Correct to print out from here?
+        //fmt::print("Failed to wake up main thread: PostThreadMessage(WM_NULL) failed with error 0x%08lx (%s).", ec, wxSysErrorMsgStr(ec));
     }
 }
 

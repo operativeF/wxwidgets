@@ -1541,7 +1541,7 @@ wxOutputStream& wxEndL(wxOutputStream& stream)
 {
     static std::string eol = wxTextFile::GetEOL();
 
-    return stream.Write(eol.c_str(), wxStrlen(eol));
+    return stream.Write(eol.c_str(), eol.size());
 }
 
 #endif // wxUSE_STREAMS
