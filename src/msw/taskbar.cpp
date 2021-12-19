@@ -19,13 +19,14 @@
 
 #include "wx/msw/wrapshl.h"
 
-#include "wx/platinfo.h"
 #include "wx/taskbar.h"
 
 #include <boost/nowide/convert.hpp>
 
 #include <chrono>
 #include <memory>
+
+import WX.Cmn.PlatInfo;
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404

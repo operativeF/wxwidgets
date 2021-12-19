@@ -29,9 +29,6 @@
 // wxLongLong
 #include "wx/longlong.h"
 
-// needed for wxOperatingSystemId, wxLinuxDistributionInfo
-#include "wx/platinfo.h"
-
 #if defined(__X__)
     #include <dirent.h>
     #include <unistd.h>
@@ -39,6 +36,7 @@
 
 import WX.WinDef;
 import WX.Utils.VersionInfo;
+import WX.Cmn.PlatInfo;
 
 import Utils.Geometry;
 

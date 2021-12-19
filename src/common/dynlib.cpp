@@ -20,7 +20,8 @@
 #include "wx/utils.h"
 #include "wx/filefn.h"
 #include "wx/filename.h"        // for SplitPath()
-#include "wx/platinfo.h"
+
+import WX.Cmn.PlatInfo;
 
 // ============================================================================
 // implementation

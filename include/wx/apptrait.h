@@ -11,9 +11,9 @@
 #ifndef _WX_APPTRAIT_H_
 #define _WX_APPTRAIT_H_
 
-#include "wx/platinfo.h"
-
 #include "wx/evtloop.h"
+
+import WX.Cmn.PlatInfo;
 
 import <string>;
 import <vector>;

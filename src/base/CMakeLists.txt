@@ -127,7 +127,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
-
+    ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
 )

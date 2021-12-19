@@ -54,11 +54,11 @@
 #endif
 
 #include "wx/display.h"
-#include "wx/platinfo.h"
 #include "wx/recguard.h"
 #include "wx/private/window.h"
 
 import WX.Utils.Settings;
+import WX.Cmn.PlatInfo;
 
 import WX.Cfg.Flags;
 

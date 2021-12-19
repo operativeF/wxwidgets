@@ -8,12 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/platinfo.h"
+module;
+
 #include "wx/app.h"
 #include "wx/utils.h"
 #include "wx/apptrait.h"
 
 #include <cassert>
+
+module WX.Cmn.PlatInfo;
 
 namespace
 {

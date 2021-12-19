@@ -8,13 +8,17 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_PLATINFO_H_
-#define _WX_PLATINFO_H_
+module;
 
 #include "wx/string.h"
 
+export module WX.Cmn.PlatInfo;
+
 import <bit>;
 import <string>;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // wxPlatformInfo enums & structs
@@ -405,6 +409,4 @@ protected:
     wxString m_cpuArch;
 };
 
-
-
-#endif // _WX_PLATINFO_H_
+} // export

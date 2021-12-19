@@ -30,7 +30,6 @@
 #include "wx/xml/xml.h"
 #include "wx/hashset.h"
 #include "wx/config.h"
-#include "wx/platinfo.h"
 
 #include <boost/nowide/convert.hpp>
 
@@ -38,6 +37,7 @@ import WX.Image;
 import Utils.Strings;
 import WX.Utils.Cast;
 import WX.Utils.Settings;
+import WX.Cmn.PlatInfo;
 
 import <clocale>;
 import <vector>;
