@@ -11,7 +11,6 @@
 #include "wx/log.h"
 #include "wx/wxcrtvararg.h"
 
-#include "wx/cmdline.h"
 #include "wx/xml/xml.h"
 #include "wx/filename.h"
 #include "wx/wfstream.h"
@@ -20,6 +19,7 @@
 #include "wx/mimetype.h"
 
 import WX.Cmn.FFile;
+import WX.Cmn.CommandLine;
 
 import <vector>;
 

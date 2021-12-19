@@ -16,14 +16,16 @@
     #include "wx/log.h"
 #endif // WX_PRECOMP
 
-#include "wx/cmdline.h"
-import <vector>;
 #include "wx/process.h"
 #include "wx/sstream.h"
 #include "wx/utils.h"
 #include "wx/filename.h"
 #include "wx/app.h"
 #include "wx/log.h"
+
+import WX.Cmn.CommandLine;
+
+import <vector>;
 
 // ============================================================================
 // implementation

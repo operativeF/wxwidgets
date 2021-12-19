@@ -10,7 +10,6 @@
 
 #include "wx/confbase.h"
 #include "wx/fileconf.h"
-#include "wx/cmdline.h"
 #include "wx/file.h"
 #include "wx/filename.h"
 
@@ -21,6 +20,7 @@
 #include "emulator.h"
 
 import WX.Image;
+import WX.Cmn.CommandLine;
 
 // ----------------------------------------------------------------------------
 // resources

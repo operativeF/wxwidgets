@@ -133,6 +133,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/base64.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/cmdline.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

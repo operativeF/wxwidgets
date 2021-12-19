@@ -9,7 +9,6 @@
 
 #include "wx/app.h"
 #include "wx/frame.h"
-#include "wx/cmdline.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
@@ -25,6 +24,7 @@
 #endif // wxUSE_GLCANVAS
 
 import WX.Image;
+import WX.Cmn.CommandLine;
 
 #if wxUSE_GLCANVAS
 

@@ -11,7 +11,6 @@
 #include "doctest.h"
 
 #include "wx/apptrait.h"
-#include "wx/cmdline.h"
 
 #if wxUSE_GUI
     #include "testableframe.h"
@@ -29,6 +28,7 @@
 
 import Utils.Strings;
 import WX.Test.Prec;
+import WX.Cmn.CommandLine;
 
 // for all others, include the necessary headers
 import <iostream>;

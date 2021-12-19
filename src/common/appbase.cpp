@@ -16,7 +16,6 @@
 #include "wx/wxcrtvararg.h"
 
 #include "wx/apptrait.h"
-#include "wx/cmdline.h"
 #include "wx/confbase.h"
 #include "wx/evtloop.h"
 #include "wx/filename.h"
@@ -34,6 +33,7 @@
 
 import Utils.Strings;
 import WX.Cmn.SysOpt;
+import WX.Cmn.CommandLine;
 
 import <clocale>;
 import <ranges>;

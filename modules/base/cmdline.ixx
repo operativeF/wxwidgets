@@ -9,13 +9,17 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_CMDLINE_H_
-#define _WX_CMDLINE_H_
+module;
 
 #include "wx/string.h"
 #include "wx/cmdargs.h"
 
+export module WX.Cmn.CommandLine;
+
 import <vector>;
+
+export
+{
 
 // determines ConvertStringToArgs() behaviour
 enum class wxCmdLineSplitType
@@ -87,8 +91,15 @@ struct wxCmdLineEntryDesc
 };
 
 // the list of wxCmdLineEntryDesc objects should be terminated with this one
-#define wxCMD_LINE_DESC_END \
-        { wxCmdLineEntryType::None, NULL, NULL, NULL, wxCmdLineParamType::None, 0x0 }
+inline constexpr wxCmdLineEntryDesc wxCMD_LINE_DESC_END
+{
+    .kind = wxCmdLineEntryType::None,
+    .shortName = nullptr,
+    .longName = nullptr,
+    .description = nullptr,
+    .type = wxCmdLineParamType::None,
+    .flags = 0x0
+};
 
 // ----------------------------------------------------------------------------
 // wxCmdLineArg contains the value for one command line argument
@@ -371,4 +382,4 @@ public:
 
 #endif // wxUSE_CMDLINE_PARSER/!wxUSE_CMDLINE_PARSER
 
-#endif // _WX_CMDLINE_H_
+} // export

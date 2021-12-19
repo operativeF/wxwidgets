@@ -19,7 +19,6 @@
 #include "wx/wxcrtvararg.h"
 
 #include "wx/apptrait.h"
-#include "wx/cmdline.h"
 #include "wx/msgout.h"
 #include "wx/richmsgdlg.h"
 #include "wx/thread.h"
@@ -33,6 +32,8 @@
 // DLL options compatibility check:
 #include "wx/build.h"
 WX_CHECK_BUILD_OPTIONS("wxCore")
+
+import WX.Cmn.CommandLine;
 
 // ============================================================================
 // wxAppBase implementation

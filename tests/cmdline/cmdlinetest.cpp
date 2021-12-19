@@ -13,11 +13,12 @@
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
 
-#include "wx/cmdline.h"
 #include "wx/msgout.h"
 #include "wx/scopeguard.h"
 
 #include "testdate.h"
+
+import WX.Cmn.CommandLine;
 
 // --------------------------------------------------------------------------
 // test class

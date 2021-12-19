@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/app.h"
-#include "wx/cmdline.h"
 #include "wx/stopwatch.h"
 
 #if wxUSE_GUI
@@ -16,6 +15,8 @@
 #endif
 
 #include "bench.h"
+
+import WX.Cmn.CommandLine;
 
 // ----------------------------------------------------------------------------
 // constants

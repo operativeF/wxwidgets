@@ -8,12 +8,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/app.h"
-#include "wx/cmdline.h"
-
-#if wxUSE_CMDLINE_PARSER
 
 #include "wx/datetime.h"
 #include "wx/msgout.h"
@@ -23,11 +22,15 @@
 
 #include <boost/nowide/convert.hpp>
 
+module WX.Cmn.CommandLine;
+
 import Utils.Chars;
 
 import <charconv>;
 import <clocale>;             // for LC_ALL
 import <vector>;
+
+#if wxUSE_CMDLINE_PARSER
 
 // ----------------------------------------------------------------------------
 // private functions
