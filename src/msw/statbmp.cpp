@@ -22,7 +22,7 @@
 #include "wx/msw/dib.h"
 #include "wx/msw/private/winstyle.h"
 
-#include "wx/sysopt.h"
+import WX.Cmn.SysOpt;
 
 import WX.WinDef;
 

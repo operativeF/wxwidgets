@@ -13,7 +13,6 @@
 #include "wx/icon.h"
 #include "wx/toolbar.h"
 #include "wx/imaglist.h"
-#include "wx/sysopt.h"
 #include "wx/toolbook.h"
 
 #if defined(__WXMAC__) && wxUSE_TOOLBAR && wxUSE_BMPBUTTON
@@ -21,6 +20,7 @@
 #endif
 
 import WX.Utils.Settings;
+import WX.Cmn.SysOpt;
 
 // ----------------------------------------------------------------------------
 // event table

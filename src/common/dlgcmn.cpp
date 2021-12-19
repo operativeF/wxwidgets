@@ -17,7 +17,6 @@
 #include "wx/sizer.h"
 #include "wx/containr.h"
 #include "wx/statline.h"
-#include "wx/sysopt.h"
 #include "wx/module.h"
 #include "wx/bookctrl.h"
 #include "wx/scrolwin.h"
@@ -25,6 +24,8 @@
 #include "wx/modalhook.h"
 
 #include "wx/display.h"
+
+import WX.Cmn.SysOpt;
 
 import WX.Utils.Settings;
 

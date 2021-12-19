@@ -130,6 +130,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/base64.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

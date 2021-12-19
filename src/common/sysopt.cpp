@@ -8,13 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_SYSTEM_OPTIONS
+module;
 
-#include "wx/sysopt.h"
 #include "wx/app.h"
 #include "wx/string.h"
 
+module WX.Cmn.SysOpt;
+
 import Utils.Strings;
+
+#if wxUSE_SYSTEM_OPTIONS
 
 // ----------------------------------------------------------------------------
 // private globals

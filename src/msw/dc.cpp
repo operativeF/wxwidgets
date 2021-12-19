@@ -21,7 +21,6 @@
 #include "wx/module.h"
 
 #include "wx/msw/dc.h"
-#include "wx/sysopt.h"
 
 #ifdef wxHAS_RAW_BITMAP
     #include "wx/rawbmp.h"
@@ -34,6 +33,7 @@
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;
+import WX.Cmn.SysOpt;
 
 import WX.Utils.Cast;
 import Utils.Strings;

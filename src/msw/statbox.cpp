@@ -21,7 +21,6 @@
 #include "wx/sizer.h"
 
 #include "wx/notebook.h"
-#include "wx/sysopt.h"
 
 #include "wx/msw/uxtheme.h"
 
@@ -29,6 +28,8 @@
 #include "wx/msw/private/winstyle.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Cmn.SysOpt;
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;

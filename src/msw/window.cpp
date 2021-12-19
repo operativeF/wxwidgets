@@ -44,7 +44,6 @@
 #include "wx/popupwin.h"
 #include "wx/power.h"
 #include "wx/scopeguard.h"
-#include "wx/sysopt.h"
 
 #if wxUSE_DRAG_AND_DROP
     #include "wx/dnd.h"
@@ -95,6 +94,7 @@
 
 import WX.Utils.Cast;
 import WX.Utils.Settings;
+import WX.Cmn.SysOpt;
 
 import WX.Cfg.Flags;
 

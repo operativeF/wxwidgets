@@ -14,7 +14,8 @@
 #define _WX_CONFBASE_H_
 
 #include "wx/object.h"
-#include "wx/base64.h"
+
+import WX.Cmn.Base64;
 
 import <string>;
 import <vector>;

@@ -24,7 +24,6 @@
 #include "wx/panel.h"
 
 #include "wx/imaglist.h"
-#include "wx/sysopt.h"
 
 #include "wx/msw/dc.h"
 
@@ -34,6 +33,8 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import WX.Cmn.SysOpt;
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;

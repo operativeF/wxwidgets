@@ -22,7 +22,6 @@
 #include "wx/wxcrtvararg.h"
 
 #include "wx/fontutil.h"
-#include "wx/sysopt.h"
 
 #if wxUSE_CLIPBOARD
     #include "wx/clipbrd.h"
@@ -61,6 +60,7 @@
 
 import WX.WinDef;
 import WX.Cmn.TextFile;
+import WX.Cmn.SysOpt;
 
 import WX.Utils.Settings;
 

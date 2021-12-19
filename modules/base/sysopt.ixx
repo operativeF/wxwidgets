@@ -8,12 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_SYSOPT_H_
-#define _WX_SYSOPT_H_
+module;
 
 #include "wx/string.h"
 
+export module WX.Cmn.SysOpt;
+
 import <string_view>;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // Enables an application to influence the wxWidgets implementation
@@ -65,6 +69,4 @@ bool wxSystemOptions::HasOption([[maybe_unused]] const wxString& name)
 
 #endif // !wxUSE_SYSTEM_OPTIONS
 
-#endif
-    // _WX_SYSOPT_H_
-
+} // export

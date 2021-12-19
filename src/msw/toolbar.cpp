@@ -29,7 +29,6 @@
 #include "wx/stattext.h"
 
 #include "wx/artprov.h"
-#include "wx/sysopt.h"
 #include "wx/rawbmp.h"
 
 #include "wx/msw/dib.h"
@@ -42,6 +41,7 @@
 
 import WX.Utils.Cast;
 import WX.Utils.Settings;
+import WX.Cmn.SysOpt;
 
 import WX.Image;
 import WX.WinDef;

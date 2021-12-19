@@ -26,8 +26,6 @@
 #include  "wx/fileconf.h"
 #include  "wx/filefn.h"
 
-#include "wx/base64.h"
-
 #include  "wx/stdpaths.h"
 
 #if defined(WX_WINDOWS)
@@ -38,6 +36,7 @@
 
 import Utils.Strings;
 import WX.Cmn.TextFile;
+import WX.Cmn.Base64;
 
 import <cctype>;
 import <cstdlib>;

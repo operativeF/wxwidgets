@@ -22,7 +22,6 @@
 #include "wx/filename.h"
 #include "wx/msgout.h"
 
-#include "wx/sysopt.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
 
@@ -34,6 +33,7 @@
 #endif
 
 import Utils.Strings;
+import WX.Cmn.SysOpt;
 
 import <clocale>;
 import <ranges>;

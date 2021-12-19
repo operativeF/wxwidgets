@@ -6,9 +6,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_BASE64
+module;
 
-#include "wx/base64.h"
+#include "wx/debug.h"
+#include "wx/strconv.h"
+
+module WX.Cmn.Base64;
 
 import WX.Utils.Cast;
 
@@ -233,4 +236,3 @@ wxMemoryBuffer wxBase64Decode(const char *src,
     return buf;
 }
 
-#endif // wxUSE_BASE64

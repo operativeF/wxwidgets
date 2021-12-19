@@ -50,7 +50,7 @@
 #endif // wxUSE_CARET
 
 #if wxUSE_SYSTEM_OPTIONS
-    #include "wx/sysopt.h"
+import WX.Cmn.SysOpt;
 #endif
 
 #include "wx/display.h"

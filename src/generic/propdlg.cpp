@@ -35,7 +35,8 @@
 #endif
 
 #include "wx/generic/propdlg.h"
-#include "wx/sysopt.h"
+
+import WX.Cmn.SysOpt;
 
 //-----------------------------------------------------------------------------
 // wxPropertySheetDialog

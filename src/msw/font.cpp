@@ -21,12 +21,11 @@
 #include "wx/fontutil.h"
 #include "wx/fontmap.h"
 
-#include "wx/sysopt.h"
-
 #include "wx/scopeguard.h"
 
 import WX.WinDef;
 import Utils.Strings;
+import WX.Cmn.SysOpt;
 
 import WX.Win.UniqueHnd;
 

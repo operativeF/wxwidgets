@@ -79,13 +79,14 @@ protected:
 #include "wx/app.h"
 #include "wx/frame.h"
 #include "wx/dynlib.h"
-#include "wx/sysopt.h"
 
 #include "wx/msw/private/hiddenwin.h"
 
 #ifndef DPI_ENUMS_DECLARED
     #define MDT_EFFECTIVE_DPI 0
 #endif
+
+import WX.Cmn.SysOpt;
 
 namespace
 {

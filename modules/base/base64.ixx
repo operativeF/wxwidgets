@@ -6,13 +6,17 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_BASE64_H_
-#define _WX_BASE64_H_
-
-#if wxUSE_BASE64
+module;
 
 #include "wx/string.h"
 #include "wx/buffer.h"
+
+export module WX.Cmn.Base64;
+
+#if wxUSE_BASE64
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // encoding functions
@@ -116,6 +120,6 @@ wxBase64Decode(const wxString& src,
     return wxBase64Decode(src.ToAscii(), wxNO_LEN, mode, posErr);
 }
 
-#endif // wxUSE_BASE64
+} // export
 
-#endif // _WX_BASE64_H_
+#endif // wxUSE_BASE64

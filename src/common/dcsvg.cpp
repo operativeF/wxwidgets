@@ -11,7 +11,6 @@
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
 #include "wx/icon.h"
-#include "wx/base64.h"
 #include "wx/dcsvg.h"
 #include "wx/wfstream.h"
 #include "wx/filename.h"
@@ -21,6 +20,8 @@
 #if wxUSE_MARKUP
     #include "wx/private/markupparser.h"
 #endif
+
+import WX.Cmn.Base64;
 
 import WX.Image;
 import WX.Cfg.Flags;

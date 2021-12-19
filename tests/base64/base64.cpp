@@ -7,13 +7,9 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
 #if wxUSE_BASE64
 
-#include "wx/base64.h"
+import WX.Cmn.Base64;
 
 static const char encoded0to255[] =
     "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIj"
