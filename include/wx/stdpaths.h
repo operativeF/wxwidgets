@@ -85,7 +85,7 @@ public:
     // return the directory with system config files:
     // /etc under Unix, c:\Documents and Settings\All Users\Application Data
     // under Windows, /Library/Preferences for Mac
-    virtual wxString GetConfigDir() const = 0;
+    virtual std::string GetConfigDir() const = 0;
 
     // return the directory for the user config files:
     // $HOME under Unix, c:\Documents and Settings\username under Windows,
@@ -93,46 +93,46 @@ public:
     //
     // only use this if you have a single file to put there, otherwise
     // GetUserDataDir() is more appropriate
-    virtual wxString GetUserConfigDir() const = 0;
+    virtual std::string GetUserConfigDir() const = 0;
 
     // return the location of the applications global, i.e. not user-specific,
     // data files
     //
     // prefix/share/appname under Unix, c:\Program Files\appname under Windows,
     // appname.app/Contents/SharedSupport app bundle directory under Mac
-    virtual wxString GetDataDir() const = 0;
+    virtual std::string GetDataDir() const = 0;
 
     // return the location for application data files which are host-specific
     //
     // same as GetDataDir() except under Unix where it is /etc/appname
-    virtual wxString GetLocalDataDir() const;
+    virtual std::string GetLocalDataDir() const;
 
     // return the directory for the user-dependent application data files
     //
     // $HOME/.appname under Unix,
     // c:\Documents and Settings\username\Application Data\appname under Windows
     // and ~/Library/Application Support/appname under Mac
-    virtual wxString GetUserDataDir() const = 0;
+    virtual std::string GetUserDataDir() const = 0;
 
     // return the directory for user data files which shouldn't be shared with
     // the other machines
     //
     // same as GetUserDataDir() for all platforms except Windows where it is
     // the "Local Settings\Application Data\appname" directory
-    virtual wxString GetUserLocalDataDir() const;
+    virtual std::string GetUserLocalDataDir() const;
 
     // return the directory where the loadable modules (plugins) live
     //
     // prefix/lib/appname under Unix, program directory under Windows and
     // Contents/Plugins app bundle subdirectory under Mac
-    virtual wxString GetPluginsDir() const = 0;
+    virtual std::string GetPluginsDir() const = 0;
 
     // get resources directory: resources are auxiliary files used by the
     // application and include things like image and sound files
     //
     // same as GetDataDir() for all platforms except Mac where it returns
     // Contents/Resources subdirectory of the app bundle
-    virtual wxString GetResourcesDir() const { return GetDataDir(); }
+    virtual std::string GetResourcesDir() const { return GetDataDir(); }
 
     // get localized resources directory containing the resource files of the
     // specified category for the given language
@@ -141,8 +141,8 @@ public:
     // and GetResourcesDir()/lang.lproj under Mac but is something quite
     // different under Unix for message catalog category (namely the standard
     // prefix/share/locale/lang/LC_MESSAGES)
-    virtual wxString
-    GetLocalizedResourcesDir(const wxString& lang,
+    virtual std::string
+    GetLocalizedResourcesDir(const std::string& lang,
                              [[maybe_unused]] ResourceCat category
                                 = ResourceCat_None) const
     {
@@ -153,7 +153,7 @@ public:
     //
     // C:\Documents and Settings\username\My Documents under Windows,
     // $HOME under Unix and ~/Documents under Mac
-    virtual wxString GetDocumentsDir() const
+    virtual std::string GetDocumentsDir() const
     {
         return GetUserDir(Dir_Documents);
     }
@@ -161,15 +161,15 @@ public:
     // return the directory for the documents files used by this application:
     // it's a subdirectory of GetDocumentsDir() constructed using the
     // application name/vendor if it exists or just GetDocumentsDir() otherwise
-    virtual wxString GetAppDocumentsDir() const;
+    virtual std::string GetAppDocumentsDir() const;
 
     // return the temporary directory for the current user
-    virtual wxString GetTempDir() const;
+    virtual std::string GetTempDir() const;
 
-    virtual wxString GetUserDir(Dir userDir) const;
+    virtual std::string GetUserDir(Dir userDir) const;
 
-    virtual wxString
-    MakeConfigFileName(const wxString& basename,
+    virtual std::string
+    MakeConfigFileName(const std::string& basename,
                        ConfigFileConv conv = ConfigFileConv_Ext) const = 0;
 
     // virtual dtor for the base class
@@ -200,10 +200,10 @@ protected:
 
     // append the path component, with a leading path separator if a
     // path separator or dot (.) is not already at the end of dir
-    static wxString AppendPathComponent(const wxString& dir, const wxString& component);
+    static std::string AppendPathComponent(const std::string& dir, const std::string& component);
 
     // append application information determined by m_usedAppInfo to dir
-    wxString AppendAppInfo(const wxString& dir) const;
+    std::string AppendAppInfo(const std::string& dir) const;
 
 
     // combination of AppInfo_XXX flags used by AppendAppInfo()
@@ -243,15 +243,15 @@ public:
     std::string GetInstallPrefix() const { return m_prefix; }
 
     virtual std::string GetExecutablePath() const { return m_prefix; }
-    virtual wxString GetConfigDir() const { return m_prefix; }
-    virtual wxString GetUserConfigDir() const { return m_prefix; }
-    virtual wxString GetDataDir() const { return m_prefix; }
-    virtual wxString GetLocalDataDir() const { return m_prefix; }
-    virtual wxString GetUserDataDir() const { return m_prefix; }
-    virtual wxString GetPluginsDir() const { return m_prefix; }
-    virtual wxString GetUserDir([[maybe_unused]] Dir userDir) const { return m_prefix; }
-    virtual wxString
-    MakeConfigFileName(const wxString& basename,
+    virtual std::string GetConfigDir() const { return m_prefix; }
+    virtual std::string GetUserConfigDir() const { return m_prefix; }
+    virtual std::string GetDataDir() const { return m_prefix; }
+    virtual std::string GetLocalDataDir() const { return m_prefix; }
+    virtual std::string GetUserDataDir() const { return m_prefix; }
+    virtual std::string GetPluginsDir() const { return m_prefix; }
+    virtual std::string GetUserDir([[maybe_unused]] Dir userDir) const { return m_prefix; }
+    virtual std::string
+    MakeConfigFileName(const std::string& basename,
                        [[maybe_unused]] ConfigFileConv conv = ConfigFileConv_Ext) const
     {
         return m_prefix + "/" + basename;

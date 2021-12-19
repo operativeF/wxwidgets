@@ -574,7 +574,7 @@ bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
     if ( !wxLoadUserResource(&pngData,
                              &pngSize,
                              name,
-                             RT_RCDATA,
+                             MAKEINTRESOURCEA(10), // FIXME: Was RT_RCDATA.
                              wxGetInstance()) )
     {
         // Notice that this message is not translated because only the

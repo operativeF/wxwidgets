@@ -143,7 +143,7 @@ public:
     // find best translation language for given domain
     std::string GetBestTranslation(const std::string& domain, wxLanguage msgIdLanguage);
     std::string GetBestTranslation(const std::string& domain,
-                                   const std::string& msgIdLanguage = wxASCII_STR("en"));
+                                   const std::string& msgIdLanguage = "en");
 
     // add standard wxWidgets catalog ("wxstd")
     bool AddStdCatalog();
@@ -238,7 +238,8 @@ public:
 
 protected:
     // returns resource type to use for translations
-    virtual std::string GetResourceType() const { return "MOFILE"; }
+
+    static constexpr std::string_view m_restype = "MOFILE";
 
     // returns module to load resources from
     virtual WXHINSTANCE GetModule() const { return nullptr; }

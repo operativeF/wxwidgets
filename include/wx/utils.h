@@ -750,7 +750,7 @@ bool wxYieldIfNeeded();
 // Windows only: get user-defined resource from the .res file.
 #ifdef WX_WINDOWS
     // default resource type for wxLoadUserResource()
-    extern const wxChar* wxUserResourceStr;
+    inline constexpr std::string_view wxUserResourceStr{"TEXT"};
 
     // Return the pointer to the resource data. This pointer is read-only, use
     // the overload below if you need to modify the data.
@@ -766,7 +766,7 @@ bool wxYieldIfNeeded();
     wxLoadUserResource(const void **outData,
                        size_t *outLen,
                        const std::string& resourceName,
-                       const wxChar* resourceType = wxUserResourceStr,
+                       std::string_view resourceType = wxUserResourceStr,
                        WXHINSTANCE module = nullptr);
 
     // This function allocates a new buffer and makes a copy of the resource
@@ -775,8 +775,8 @@ bool wxYieldIfNeeded();
     //
     // Returns NULL on failure.
     char*
-    wxLoadUserResource(const wxString& resourceName,
-                       const wxChar* resourceType = wxUserResourceStr,
+    wxLoadUserResource(const std::string& resourceName,
+                       std::string_view resourceType = wxUserResourceStr,
                        int* pLen = nullptr,
                        WXHINSTANCE module = nullptr);
 #endif // WX_WINDOWS

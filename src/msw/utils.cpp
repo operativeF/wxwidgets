@@ -913,14 +913,14 @@ bool
 wxLoadUserResource(const void **outData,
                    size_t *outLen,
                    const std::string& resourceName,
-                   const wxChar* resourceType,
+                   std::string_view resourceType,
                    WXHINSTANCE instance)
 {
     wxCHECK_MSG( outData && outLen, false, "output pointers can't be NULL" );
 
     HRSRC hResource = ::FindResourceW(instance,
                                       boost::nowide::widen(resourceName).c_str(),
-                                      resourceType);
+                                      boost::nowide::widen(resourceType).c_str());
     if ( !hResource )
         return false;
 
@@ -947,9 +947,8 @@ wxLoadUserResource(const void **outData,
     return true;
 }
 
-char *
-wxLoadUserResource(const std::string& resourceName,
-                   const wxChar* resourceType,
+char* wxLoadUserResource(const std::string& resourceName,
+                   std::string_view resourceType,
                    int* pLen,
                    WXHINSTANCE instance)
 {
@@ -959,7 +958,7 @@ wxLoadUserResource(const std::string& resourceName,
         return nullptr;
 
     char *s = new char[len + 1];
-    memcpy(s, data, len);
+    std::memcpy(s, data, len);
     s[len] = '\0'; // NUL-terminate in case the resource itself wasn't
 
     if (pLen)

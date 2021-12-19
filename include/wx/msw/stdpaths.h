@@ -22,14 +22,14 @@ class wxStandardPaths : public wxStandardPathsBase
 public:
     
     std::string GetExecutablePath() const override;
-    wxString GetConfigDir() const override;
-    wxString GetUserConfigDir() const override;
-    wxString GetDataDir() const override;
-    wxString GetUserDataDir() const override;
-    wxString GetUserLocalDataDir() const override;
-    wxString GetPluginsDir() const override;
-    wxString GetUserDir(Dir userDir) const override;
-    wxString MakeConfigFileName(const wxString& basename,
+    std::string GetConfigDir() const override;
+    std::string GetUserConfigDir() const override;
+    std::string GetDataDir() const override;
+    std::string GetUserDataDir() const override;
+    std::string GetUserLocalDataDir() const override;
+    std::string GetPluginsDir() const override;
+    std::string GetUserDir(Dir userDir) const override;
+    std::string MakeConfigFileName(const std::string& basename,
                                         ConfigFileConv conv = ConfigFileConv_Ext
                                         ) const override;
 
@@ -53,7 +53,7 @@ public:
     // Finally note that the argument can contain wild cards so you can also
     // call IgnoreAppSubDir("vc*msw*") to ignore all build directories at once
     // when using wxWidgets-inspired output directories names.
-    void IgnoreAppSubDir(const wxString& subdirPattern);
+    void IgnoreAppSubDir(const std::string& subdirPattern);
 
     // This function is used to ignore all common build directories and is
     // called from the ctor -- use DontIgnoreAppSubDir() to undo this.
@@ -64,7 +64,7 @@ public:
 
 
     // Returns the directory corresponding to the specified Windows shell CSIDL
-    static wxString MSWGetShellDir(const _GUID& rfid);
+    static std::string MSWGetShellDir(const _GUID& rfid);
 
 protected:
     // Ctor is protected, use wxStandardPaths::Get() instead of instantiating
@@ -74,26 +74,13 @@ protected:
     // both vendor and application name by default.
     wxStandardPaths();
 
-    static wxString DoGetKnownFolder(const _GUID& rfid);
+    static std::string DoGetKnownFolder(const _GUID& rfid);
 
     // return the directory of the application itself
-    wxString GetAppDir() const;
+    std::string GetAppDir() const;
 
     // directory returned by GetAppDir()
-    mutable wxString m_appDir;
-};
-
-// ----------------------------------------------------------------------------
-// wxStandardPathsWin16: this class is for internal use only
-// ----------------------------------------------------------------------------
-
-// override config file locations to be compatible with the values used by
-// wxFileConfig (dating from Win16 days which explains the class name)
-class wxStandardPathsWin16 : public wxStandardPaths
-{
-public:
-    wxString GetConfigDir() const override;
-    wxString GetUserConfigDir() const override;
+    mutable std::string m_appDir;
 };
 
 #endif // _WX_MSW_STDPATHS_H_

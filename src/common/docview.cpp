@@ -1001,7 +1001,7 @@ fs::path wxDocManager::GetLastDirectory() const
         // system-dependent default location for the document files
         if ( m_lastDirectory.empty() )
         {
-            self->m_lastDirectory = fs::path{wxStandardPaths::Get().GetAppDocumentsDir().ToStdString()};
+            self->m_lastDirectory = fs::path{wxStandardPaths::Get().GetAppDocumentsDir()};
         }
     }
 

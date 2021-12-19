@@ -203,7 +203,7 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
     size_t outLen = 0;
 
     // load the icon directory resource
-    if ( !wxLoadUserResource(&data, &outLen, resourceName, RT_GROUP_ICON, module) )
+    if ( !wxLoadUserResource(&data, &outLen, resourceName, MAKEINTRESOURCEA(14), module) ) // FIXME: Was RT_GROUP_ICON
     {
         wxLogError(_("Failed to load icons from resource '%s'."), resourceName);
         return;
@@ -216,7 +216,7 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
     {
         const WXWORD iconID = grpIconDir->idEntries[i].nID;
 
-        if ( wxLoadUserResource(&data, &outLen, wxString::Format(wxS("#%u"), iconID), RT_ICON, module) )
+        if ( wxLoadUserResource(&data, &outLen, wxString::Format(wxS("#%u"), iconID), MAKEINTRESOURCEA(3), module) ) // FIXME: Was RT_ICON
         {
             WXHICON hIcon = ::CreateIconFromResourceEx(static_cast<PBYTE>(const_cast<void*>(data)),
                                 static_cast<DWORD>(outLen), TRUE, 0x00030000, 0, 0, LR_DEFAULTCOLOR);

@@ -71,7 +71,7 @@ void ResolveShellFunctions()
 
     // start with the newest functions, fall back to the oldest ones
     // first check for SHGetFolderPath (shell32.dll 5.0)
-    wxString shellDllName("shell32");
+    std::string shellDllName("shell32");
 
     wxDynamicLibrary dllShellFunctions( shellDllName );
     if ( !dllShellFunctions.IsLoaded() )
@@ -103,20 +103,21 @@ void ResolveShellFunctions()
 // private helpers
 // ----------------------------------------------------------------------------
 
-wxString wxStandardPaths::DoGetKnownFolder(const GUID& rfid)
+std::string wxStandardPaths::DoGetKnownFolder(const GUID& rfid)
 {
     if (!gs_shellFuncs.initialized)
         ResolveShellFunctions();
 
-    wxString dir;
+    std::string dir;
 
     if ( gs_shellFuncs.pSHGetKnownFolderPath )
     {
-        wxCoTaskMemPtr<wchar_t> pDir;
+        wxCoTaskMemPtr<WCHAR> pDir;
         HRESULT hr = gs_shellFuncs.pSHGetKnownFolderPath(rfid, 0, nullptr, &pDir);
         if ( SUCCEEDED(hr) )
         {
-            dir = pDir;
+            boost::nowide::stackstring stackDir{pDir};
+            dir = stackDir.get();
         }
     }
 
@@ -124,7 +125,7 @@ wxString wxStandardPaths::DoGetKnownFolder(const GUID& rfid)
 }
 
 
-wxString wxStandardPaths::GetAppDir() const
+std::string wxStandardPaths::GetAppDir() const
 {
     if ( m_appDir.empty() )
     {
@@ -134,7 +135,7 @@ wxString wxStandardPaths::GetAppDir() const
     return m_appDir;
 }
 
-wxString wxStandardPaths::GetUserDir(Dir userDir) const
+std::string wxStandardPaths::GetUserDir(Dir userDir) const
 {
     const GUID knownID = [userDir]() {
         switch (userDir)
@@ -169,7 +170,7 @@ wxString wxStandardPaths::GetUserDir(Dir userDir) const
 // MSW-specific functions
 // ----------------------------------------------------------------------------
 
-void wxStandardPaths::IgnoreAppSubDir(const wxString& subdirPattern)
+void wxStandardPaths::IgnoreAppSubDir(const std::string& subdirPattern)
 {
     wxFileName fn = wxFileName::DirName(GetAppDir());
 
@@ -180,7 +181,7 @@ void wxStandardPaths::IgnoreAppSubDir(const wxString& subdirPattern)
     }
 
     const wxString lastdir = wx::utils::ToLowerCopy(fn.GetDirs().back());
-    if ( lastdir.Matches(subdirPattern.Lower()) )
+    if ( lastdir.Matches(wx::utils::ToLowerCopy(subdirPattern)) )
     {
         fn.RemoveLastDir();
 
@@ -207,7 +208,7 @@ void wxStandardPaths::IgnoreAppBuildSubDirs()
     IgnoreAppSubDir("x86");
 #endif // __WIN64__/__WIN32__
 
-    wxString compilerPrefix;
+    std::string compilerPrefix;
 #ifdef __VISUALC__
     compilerPrefix = "vc";
 #elif defined(__GNUG__)
@@ -227,7 +228,7 @@ void wxStandardPaths::DontIgnoreAppSubDir()
 }
 
 /* static */
-wxString wxStandardPaths::MSWGetShellDir(const GUID& rfid)
+std::string wxStandardPaths::MSWGetShellDir(const GUID& rfid)
 {
     return DoGetKnownFolder(rfid);
 }
@@ -247,34 +248,34 @@ std::string wxStandardPaths::GetExecutablePath() const
     return wxGetFullModuleName();
 }
 
-wxString wxStandardPaths::GetConfigDir() const
+std::string wxStandardPaths::GetConfigDir() const
 {
     return AppendAppInfo(DoGetKnownFolder(FOLDERID_ProgramData));
 }
 
-wxString wxStandardPaths::GetUserConfigDir() const
+std::string wxStandardPaths::GetUserConfigDir() const
 {
     return DoGetKnownFolder(FOLDERID_RoamingAppData);
 }
 
-wxString wxStandardPaths::GetDataDir() const
+std::string wxStandardPaths::GetDataDir() const
 {
     // under Windows each program is usually installed in its own directory and
     // so its datafiles are in the same directory as its main executable
     return GetAppDir();
 }
 
-wxString wxStandardPaths::GetUserDataDir() const
+std::string wxStandardPaths::GetUserDataDir() const
 {
     return AppendAppInfo(GetUserConfigDir());
 }
 
-wxString wxStandardPaths::GetUserLocalDataDir() const
+std::string wxStandardPaths::GetUserLocalDataDir() const
 {
     return AppendAppInfo(DoGetKnownFolder(FOLDERID_LocalAppData));
 }
 
-wxString wxStandardPaths::GetPluginsDir() const
+std::string wxStandardPaths::GetPluginsDir() const
 {
     // there is no standard location for plugins, suppose they're in the same
     // directory as the .exe
@@ -282,36 +283,13 @@ wxString wxStandardPaths::GetPluginsDir() const
 }
 
 
-wxString
-wxStandardPaths::MakeConfigFileName(const wxString& basename,
+std::string
+wxStandardPaths::MakeConfigFileName(const std::string& basename,
                                     [[maybe_unused]] ConfigFileConv conv) const
 {
     wxFileName fn({}, basename);
     fn.SetExt("ini");
     return fn.GetFullName();
-}
-
-// ============================================================================
-// wxStandardPathsWin16 implementation
-// ============================================================================
-
-wxString wxStandardPathsWin16::GetConfigDir() const
-{
-    // this is for compatibility with earlier wxFileConfig versions
-    // which used the Windows directory for the global files
-    wxString dir;
-    if ( !::GetWindowsDirectoryW(wxStringBuffer(dir, MAX_PATH), MAX_PATH) )
-    {
-        wxLogLastError("GetWindowsDirectory");
-    }
-
-    return dir;
-}
-
-wxString wxStandardPathsWin16::GetUserConfigDir() const
-{
-    // again, for wxFileConfig which uses $HOME for its user config file
-    return wxGetHomeDir();
 }
 
 #endif // wxUSE_STDPATHS

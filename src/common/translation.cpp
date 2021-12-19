@@ -48,21 +48,16 @@ import WX.Utils.Cast;
 
 import <algorithm>;
 import <span>;
+import <string_view>;
 import <vector>;
-
-// ----------------------------------------------------------------------------
-// simple types
-// ----------------------------------------------------------------------------
-
-using size_t32 = std::uint32_t;
 
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
 
 // magic number identifying the .mo format file
-constexpr size_t32 MSGCATALOG_MAGIC    = 0x950412de;
-constexpr size_t32 MSGCATALOG_MAGIC_SW = 0xde120495;
+constexpr std::uint32_t MSGCATALOG_MAGIC    = 0x950412de;
+constexpr std::uint32_t MSGCATALOG_MAGIC_SW = 0xde120495;
 
 constexpr char TRACE_I18N[] = "i18n";
 
@@ -1008,10 +1003,7 @@ class wxMsgCatalogFile
 public:
     using DataBuffer = wxScopedCharBuffer;
 
-    wxMsgCatalogFile() = default;
-
-    wxMsgCatalogFile(const wxMsgCatalogFile&) = delete;
-	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;
+	wxMsgCatalogFile& operator=(wxMsgCatalogFile&&) = delete;
 
     // load the catalog from disk
     bool LoadFile(const std::string& filename,
@@ -1032,19 +1024,19 @@ private:
     // an entry in the string table
     struct wxMsgTableEntry
     {
-        size_t32   nLen;           // length of the string
-        size_t32   ofsString;      // pointer to the string
+        std::uint32_t   nLen;           // length of the string
+        std::uint32_t   ofsString;      // pointer to the string
     };
 
     // header of a .mo file
     struct wxMsgCatalogHeader
     {
-        size_t32  magic,          // offset +00:  magic id
+        std::uint32_t  magic,          // offset +00:  magic id
                   revision,       //        +04:  revision
                   numStrings;     //        +08:  number of strings in the file
-        size_t32  ofsOrigTable,   //        +0C:  start of original string table
+        std::uint32_t  ofsOrigTable,   //        +0C:  start of original string table
                   ofsTransTable;  //        +10:  start of translated string table
-        size_t32  nHashSize,      //        +14:  hash table size
+        std::uint32_t  nHashSize,      //        +14:  hash table size
                   ofsHashTable;   //        +18:  offset of hash table start
     };
 
@@ -1052,7 +1044,7 @@ private:
     DataBuffer m_data;
 
     // data description
-    size_t32          m_numStrings;   // number of strings in this domain
+    std::uint32_t          m_numStrings;   // number of strings in this domain
     const
     wxMsgTableEntry  *m_pOrigTable,   // pointer to original   strings
                      *m_pTransTable;  //            translated
@@ -1061,19 +1053,19 @@ private:
 
 
     // swap the 2 halves of 32 bit integer if needed
-    size_t32 Swap(size_t32 ui) const
+    std::uint32_t Swap(std::uint32_t ui) const
     {
         return m_bSwapped ? (ui << 24) | ((ui & 0xff00) << 8) |
                             ((ui >> 8) & 0xff00) | (ui >> 24)
                             : ui;
     }
 
-    const char* StringAtOfs(const wxMsgTableEntry* pTable, size_t32 n) const
+    const char* StringAtOfs(const wxMsgTableEntry* pTable, std::uint32_t n) const
     {
         const wxMsgTableEntry * const ent = pTable + n;
 
         // this check could fail for a corrupt message catalog
-        size_t32 ofsString = Swap(ent->ofsString);
+        std::uint32_t ofsString = Swap(ent->ofsString);
         if ( ofsString + Swap(ent->nLen) > m_data.length())
         {
             return nullptr;
@@ -1245,7 +1237,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
         inputConv = wxConvCurrent;
     }
 
-    for (size_t32 i = 0; i < m_numStrings; i++)
+    for (std::uint32_t i = 0; i < m_numStrings; i++)
     {
         const char *data = StringAtOfs(m_pOrigTable, i);
         if (!data)
@@ -1758,7 +1750,7 @@ std::vector<std::string> GetSearchPrefixes()
     auto stdp = wxStandardPaths::Get().GetResourcesDir();
     const auto path_iter = std::find_if(paths.cbegin(), paths.cend(),
         [stdp](const auto& path){
-            return stdp.IsSameAs(path);
+            return wx::utils::IsSameAsCase(path, stdp); // FIXME: Case sensitive ok?
         });
     if ( path_iter == std::cend(paths) )
         paths.push_back(stdp);
@@ -1916,12 +1908,9 @@ wxMsgCatalog *wxResourceTranslationsLoader::LoadCatalog(const std::string& domai
 
     const std::string resname = fmt::format("%s_%s", domain, lang);
 
-    const auto resType = GetResourceType();
-    boost::nowide::wstackstring stackResType{resType.c_str()};
-
     if ( !wxLoadUserResource(&mo_data, &mo_size,
                              resname,
-                             stackResType.get(),
+                             m_restype,
                              GetModule()) )
         return nullptr;
 
@@ -1978,9 +1967,7 @@ std::vector<std::string> wxResourceTranslationsLoader::GetAvailableTranslations(
     data.prefix = domain + "_";
     wx::utils::ToLower(data.prefix); // resource names are case insensitive
 
-    auto resType = GetResourceType();
-
-    boost::nowide::wstackstring stackResType{resType.c_str()};
+    boost::nowide::wstackstring stackResType{m_restype.data()};
     if ( !::EnumResourceNamesW(GetModule(),
                             stackResType.get(),
                             EnumTranslations,

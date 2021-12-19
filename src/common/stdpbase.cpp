@@ -82,39 +82,39 @@ wxStandardPathsBase::wxStandardPathsBase()
     SetFileLayout(FileLayout_Classic);
 }
 
-wxString wxStandardPathsBase::GetLocalDataDir() const
+std::string wxStandardPathsBase::GetLocalDataDir() const
 {
     return GetDataDir();
 }
 
-wxString wxStandardPathsBase::GetUserLocalDataDir() const
+std::string wxStandardPathsBase::GetUserLocalDataDir() const
 {
     return GetUserDataDir();
 }
 
-wxString wxStandardPathsBase::GetAppDocumentsDir() const
+std::string wxStandardPathsBase::GetAppDocumentsDir() const
 {
-    const wxString docsDir = GetDocumentsDir();
-    wxString appDocsDir = AppendAppInfo(docsDir);
+    const std::string docsDir = GetDocumentsDir();
+    std::string appDocsDir = AppendAppInfo(docsDir);
 
     return wxDirExists(appDocsDir) ? appDocsDir : docsDir;
 }
 
 // return the temporary directory for the current user
-wxString wxStandardPathsBase::GetTempDir() const
+std::string wxStandardPathsBase::GetTempDir() const
 {
     return wxFileName::GetTempDir();
 }
 
-wxString wxStandardPathsBase::GetUserDir([[maybe_unused]] Dir userDir) const
+std::string wxStandardPathsBase::GetUserDir([[maybe_unused]] Dir userDir) const
 {
     return wxFileName::GetHomeDir();
 }
 
 /* static */
-wxString
-wxStandardPathsBase::AppendPathComponent(const wxString& dir,
-                                         const wxString& component)
+std::string
+wxStandardPathsBase::AppendPathComponent(const std::string& dir,
+                                         const std::string& component)
 {
     wxString subdir(dir);
 
@@ -131,13 +131,13 @@ wxStandardPathsBase::AppendPathComponent(const wxString& dir,
         }
     }
 
-    return subdir;
+    return subdir.ToStdString();
 }
 
 
-wxString wxStandardPathsBase::AppendAppInfo(const wxString& dir) const
+std::string wxStandardPathsBase::AppendAppInfo(const std::string& dir) const
 {
-    wxString subdir(dir);
+    std::string subdir(dir);
 
     if ( UsesAppInfo(AppInfo_VendorName) )
     {
