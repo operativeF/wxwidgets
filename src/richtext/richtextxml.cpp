@@ -26,9 +26,10 @@
 #include "wx/wfstream.h"
 #include "wx/sstream.h"
 #include "wx/mstream.h"
-#include "wx/tokenzr.h"
 #include "wx/stopwatch.h"
 #include "wx/xml/xml.h"
+
+import Utils.Strings;
 
 import WX.Cmn.TextStream;
 

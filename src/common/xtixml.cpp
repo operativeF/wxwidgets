@@ -18,11 +18,11 @@
 #include "wx/hash.h"
 #include "wx/event.h"
 #include "wx/xml/xml.h"
-#include "wx/tokenzr.h"
 #include "wx/xtistrm.h"
 #include "wx/xtixml.h"
 
 import WX.Cmn.TextStream;
+import Utils.Strings;
 
 import <map>;
 import <string>;

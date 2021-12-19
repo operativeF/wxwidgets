@@ -11,8 +11,9 @@
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
 #include "wx/fontenum.h"
-#include "wx/tokenzr.h"
 #include "wx/html/styleparams.h"
+
+import Utils.Strings;
 
 FORCE_LINK_ME(m_span)
 

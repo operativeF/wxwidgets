@@ -17,7 +17,6 @@
 #include "wx/filesys.h"
 #include "wx/dynlib.h"
 #include "wx/scopeguard.h"
-#include "wx/tokenzr.h"
 
 #include "wx/msw/private/webview_ie.h"
 #include "wx/private/jsscriptwrapper.h"

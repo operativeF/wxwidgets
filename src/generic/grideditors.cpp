@@ -22,7 +22,6 @@ module;
 
 #include "wx/valnum.h"
 #include "wx/spinctrl.h"
-#include "wx/tokenzr.h"
 #include "wx/datectrl.h"
 
 #ifdef __WXOSX__
@@ -32,6 +31,7 @@ module;
 module WX.Grid.Editors;
 
 import WX.Grid.Selection;
+import Utils.Strings;
 
 import WX.Utils.Settings;
 

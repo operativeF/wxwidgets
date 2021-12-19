@@ -22,7 +22,6 @@
 #include "wx/filename.h"
 
 #include "wx/scopeguard.h"
-#include "wx/tokenzr.h"
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 

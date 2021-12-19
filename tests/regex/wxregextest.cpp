@@ -11,7 +11,8 @@
 #if wxUSE_REGEX
 
 #include "wx/regex.h"
-#include "wx/tokenzr.h"
+
+import Utils.Strings;
 
 import <string>;
 

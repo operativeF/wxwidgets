@@ -34,7 +34,6 @@
 #include "wx/notebook.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
-#include "wx/tokenzr.h"
 #include "wx/wfstream.h"
 #include "wx/html/htmlwin.h"
 #include "wx/busyinfo.h"
@@ -44,6 +43,7 @@
 #include "wx/spinctrl.h"
 
 import WX.Utils.Settings;
+import Utils.Strings;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlHelpFrame, wxFrame);
 

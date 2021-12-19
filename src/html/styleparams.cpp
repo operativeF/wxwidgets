@@ -8,9 +8,10 @@
 
 #if wxUSE_HTML
 
-#include "wx/tokenzr.h"
 #include "wx/html/htmltag.h"
 #include "wx/html/styleparams.h"
+
+import Utils.Strings;
 
 wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
 {

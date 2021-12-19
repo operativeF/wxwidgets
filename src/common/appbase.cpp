@@ -23,7 +23,6 @@
 #include "wx/msgout.h"
 
 #include "wx/sysopt.h"
-#include "wx/tokenzr.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
 
@@ -33,6 +32,8 @@
     import <exception>;        // for std::current_exception()
     import <utility>;          // for std::swap()
 #endif
+
+import Utils.Strings;
 
 import <clocale>;
 import <ranges>;

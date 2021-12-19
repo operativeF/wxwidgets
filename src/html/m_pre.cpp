@@ -12,8 +12,9 @@
 #include "wx/html/m_templ.h"
 
 #include "wx/html/htmlcell.h"
-#include "wx/tokenzr.h"
 #include "wx/encconv.h"
+
+import Utils.Strings;
 
 FORCE_LINK_ME(m_pre)
 

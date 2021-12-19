@@ -18,7 +18,6 @@
 #include "wx/log.h"
 #include "wx/stdpaths.h"
 #include "wx/thread.h"
-#include "wx/tokenzr.h"
 #include "wx/private/jsscriptwrapper.h"
 #include "wx/private/json.h"
 #include "wx/msw/private/cotaskmemptr.h"
@@ -31,6 +30,8 @@ using namespace Microsoft::WRL;
 #else
 #include <wx/msw/wrl/event.h>
 #endif // !__VISUALC__
+
+import Utils.Strings;
 
 #define WX_ERROR2_CASE(error, wxerror) \
         case error: \

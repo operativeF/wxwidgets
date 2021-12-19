@@ -19,7 +19,6 @@
 #include "wx/control.h"
 #include "wx/module.h"
 #include "wx/toplevel.h"
-#include "wx/tokenzr.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>

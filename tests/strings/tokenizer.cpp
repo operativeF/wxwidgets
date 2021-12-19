@@ -10,7 +10,7 @@
 
 #include "testprec.h"
 
-#include "wx/tokenzr.h"
+import Utils.Strings;
 
 static constexpr struct TokenizerTestData
 {

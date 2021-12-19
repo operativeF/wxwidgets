@@ -13,9 +13,10 @@
 #include "wx/fontpicker.h"
 #include "wx/textctrl.h"
 #include "wx/fontenum.h"
-#include "wx/tokenzr.h"
 
 #include <fmt/core.h>
+
+import Utils.Strings;
 
 import <charconv>;
 

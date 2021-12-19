@@ -36,7 +36,6 @@
 #include "wx/notebook.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
-#include "wx/tokenzr.h"
 #include "wx/wfstream.h"
 #include "wx/html/htmlwin.h"
 #include "wx/busyinfo.h"
@@ -49,6 +48,7 @@
 import WX.Cfg.Flags;
 
 import WX.Utils.Settings;
+import Utils.Strings;
 
 // what is considered "small index"?
 constexpr int INDEX_IS_SMALL = 1000;

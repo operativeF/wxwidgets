@@ -34,7 +34,6 @@
 #include "wx/file.h"
 #include "wx/ffile.h"
 #include "wx/cmdproc.h"
-#include "wx/tokenzr.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 #include "wx/scopedarray.h"

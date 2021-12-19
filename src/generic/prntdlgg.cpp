@@ -38,7 +38,6 @@
 #include "wx/printdlg.h"
 #include "wx/paper.h"
 #include "wx/filename.h"
-#include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
 #ifndef __WXUNIVERSAL__
@@ -51,6 +50,8 @@
 #endif // !wxUniv
 
 #include <fmt/core.h>
+
+import Utils.Strings;
 
 import <array>;
 import <string>;

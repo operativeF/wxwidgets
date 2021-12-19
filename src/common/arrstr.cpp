@@ -30,14 +30,14 @@
     #endif
 #endif
 
+import Utils.Strings;
+
 import <algorithm>;
 import <functional>;
 
 // ===========================================================================
 // wxJoin and wxSplit
 // ===========================================================================
-
-#include "wx/tokenzr.h"
 
 wxString wxJoin(const std::vector<wxString>& arr, const wxChar sep, const wxChar escape)
 {

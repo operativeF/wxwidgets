@@ -21,7 +21,6 @@
 #include "wx/file.h"
 #include "wx/filename.h"
 #include "wx/dir.h"
-#include "wx/tokenzr.h"
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers
@@ -53,6 +52,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Chars;
+import Utils.Strings;
 
 import <algorithm>;
 import <array>;

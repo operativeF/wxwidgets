@@ -14,7 +14,6 @@
 #if wxUSE_PROTOCOL_HTTP
 
 #include "wx/string.h"
-#include "wx/tokenzr.h"
 #include "wx/socket.h"
 #include "wx/protocol/protocol.h"
 #include "wx/url.h"
@@ -22,6 +21,7 @@
 #include "wx/sckstrm.h"
 #include "wx/thread.h"
 
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // wxHTTP

@@ -8,7 +8,8 @@
 #if wxUSE_COLOURDLG || wxUSE_COLOURPICKERCTRL
 
 #include "wx/colourdata.h"
-#include "wx/tokenzr.h"
+
+import Utils.Strings;
 
 // ----------------------------------------------------------------------------
 // wxColourData
@@ -65,8 +66,8 @@ bool wxColourData::FromString(const std::string& str)
 {
     wxStringTokenizer tokenizer(str, std::string{wxCOL_DATA_SEP});
     std::string token = tokenizer.GetNextToken();
-    m_chooseFull = token == '1';
-    bool success = m_chooseFull || token == '0';
+    m_chooseFull = token == "1";
+    bool success = m_chooseFull || token == "0";
     for (int i = 0; success && i < NUM_CUSTOM; i++)
     {
         token = tokenizer.GetNextToken();

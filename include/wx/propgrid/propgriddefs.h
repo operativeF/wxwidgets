@@ -19,6 +19,7 @@
 class  wxFont;
 
 import Utils.Geometry;
+import Utils.Strings;
 
 import <numeric>;
 
@@ -609,8 +610,6 @@ template<> inline wxVariant WXVARIANT( const wxColour& value )
 //   wise) use wxStringTokenizer and better ones (may have unfound bugs)
 //   use custom code.
 //
-
-#include "wx/tokenzr.h"
 
 // TOKENIZER1 can be done with wxStringTokenizer
 #define WX_PG_TOKENIZER1_BEGIN(WXSTRING,DELIMITER) \

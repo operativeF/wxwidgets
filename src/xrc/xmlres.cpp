@@ -22,7 +22,6 @@
 #include "wx/wfstream.h"
 #include "wx/filesys.h"
 #include "wx/filename.h"
-#include "wx/tokenzr.h"
 #include "wx/fontenum.h"
 #include "wx/fontmap.h"
 #include "wx/artprov.h"

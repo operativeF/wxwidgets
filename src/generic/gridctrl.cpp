@@ -15,7 +15,6 @@ module;
 #include "wx/log.h"
 #include "wx/checkbox.h"
 
-#include "wx/tokenzr.h"
 #include "wx/renderer.h"
 
 #include "wx/generic/private/grid.h"
@@ -28,6 +27,7 @@ module WX.Grid.Ctrl;
 import WX.Grid.Editors;
 
 import WX.Utils.Settings;
+import Utils.Strings;
 
 import <charconv>;
 

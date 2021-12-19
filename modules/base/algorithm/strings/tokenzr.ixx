@@ -8,12 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TOKENZRH
-#define _WX_TOKENZRH
+module;
 
-#include "wx/string.h"
+export module Utils.Strings.Tokenizer;
 
+import <string>;
+import <string_view>;
 import <vector>;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // constants
@@ -69,7 +73,7 @@ public:
         // get the delimiter which terminated the token last retrieved by
         // GetNextToken() or NUL if there had been no tokens yet or the last
         // one wasn't terminated (but ran to the end of the string)
-    wxChar GetLastDelimiter() const { return m_lastDelim; }
+    char GetLastDelimiter() const { return m_lastDelim; }
 
     // get current tokenizer state
         // returns the part of the string which remains to tokenize (*not* the
@@ -130,4 +134,4 @@ wxStringTokenize(std::string_view str,
                  std::string_view delims = wxDEFAULT_DELIMITERS,
                  wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
-#endif // _WX_TOKENZRH
+} // export

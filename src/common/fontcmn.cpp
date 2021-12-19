@@ -23,9 +23,8 @@
 #include "wx/fontmap.h"
 #include "wx/fontenum.h"
 
-#include "wx/tokenzr.h"
-
 import Utils.Geometry;
+import Utils.Strings;
 
 import <charconv>;
 

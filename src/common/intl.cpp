@@ -34,7 +34,6 @@
 
 #include "wx/file.h"
 #include "wx/filename.h"
-#include "wx/tokenzr.h"
 #include "wx/fontmap.h"
 
 #include "wx/apptrait.h"
@@ -47,6 +46,8 @@
     #include <CoreFoundation/CFDateFormatter.h>
     #include <CoreFoundation/CFString.h>
 #endif
+
+import Utils.Strings;
 
 import <clocale>;
 import <string>;

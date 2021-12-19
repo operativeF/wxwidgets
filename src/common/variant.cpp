@@ -27,7 +27,7 @@ import <fstream>;
 import WX.Cmn.TextStream;
 #endif
 
-#include "wx/tokenzr.h"
+import Utils.Strings;
 
 wxVariant wxNullVariant;
 

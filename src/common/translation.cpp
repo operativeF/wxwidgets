@@ -20,7 +20,6 @@
 #include "wx/dir.h"
 #include "wx/file.h"
 #include "wx/filename.h"
-#include "wx/tokenzr.h"
 #include "wx/fontmap.h"
 #include "wx/scopedptr.h"
 #include "wx/stdpaths.h"
@@ -45,6 +44,7 @@
 #include <boost/nowide/stackstring.hpp>
 
 import WX.Utils.Cast;
+import Utils.Strings;
 
 import <algorithm>;
 import <span>;

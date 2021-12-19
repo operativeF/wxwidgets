@@ -25,11 +25,11 @@
 #include "wx/gbsizer.h"
 #include "wx/wrapsizer.h"
 #include "wx/notebook.h"
-#include "wx/tokenzr.h"
 
 #include "wx/xml/xml.h"
 
 import WX.Utils.Cast;
+import Utils.Strings;
 
 //-----------------------------------------------------------------------------
 // wxSizerXmlHandler

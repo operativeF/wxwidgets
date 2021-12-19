@@ -14,7 +14,6 @@
 #include "wx/log.h"
 
 #include "wx/html/helpdata.h"
-#include "wx/tokenzr.h"
 #include "wx/wfstream.h"
 #include "wx/busyinfo.h"
 #include "wx/encconv.h"
@@ -23,6 +22,8 @@
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlfilt.h"
 #include "wx/filename.h"
+
+import Utils.Strings;
 
 WX_DEFINE_OBJARRAY(wxHtmlBookRecArray)
 WX_DEFINE_OBJARRAY(wxHtmlHelpDataItems)

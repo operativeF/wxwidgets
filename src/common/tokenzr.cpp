@@ -8,8 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/tokenzr.h"
+module;
+
 #include "wx/crt.h"
+
+module Utils.Strings.Tokenizer;
 
 import Utils.Chars;
 

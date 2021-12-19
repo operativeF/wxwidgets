@@ -16,11 +16,12 @@
 #include "wx/app.h"
 
 #include "wx/crt.h"
-#include "wx/tokenzr.h"
 #include "wx/wfstream.h"
 #include "wx/url.h"
 #include "wx/fontmap.h"
 #include "wx/html/htmldefs.h"
+
+import Utils.Strings;
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")

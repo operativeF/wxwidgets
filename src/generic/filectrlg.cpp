@@ -21,12 +21,12 @@
 #include "wx/file.h"        // for wxS_IXXX constants only
 #include "wx/generic/dirctrlg.h" // for wxFileIconsTable
 #include "wx/dir.h"
-#include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
 #include <boost/nowide/convert.hpp>
 
 import WX.Utils.Settings;
+import Utils.Strings;
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

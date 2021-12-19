@@ -16,8 +16,9 @@
 #include "wx/hash.h"
 #include "wx/xti.h"
 #include "wx/xml/xml.h"
-#include "wx/tokenzr.h"
 #include "wx/range.h"
+
+import Utils.Strings;
 
 import <cstring>;
 import <list>;

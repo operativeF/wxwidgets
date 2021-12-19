@@ -43,13 +43,13 @@
 #include "wx/filename.h"
 #include "wx/filefn.h"
 #include "wx/imaglist.h"
-#include "wx/tokenzr.h"
 #include "wx/dir.h"
 #include "wx/artprov.h"
 #include "wx/mimetype.h"
 
 import WX.Image;
 
+import Utils.Strings;
 import WX.Utils.Settings;
 import Utils.Geometry;
 

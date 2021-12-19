@@ -18,7 +18,8 @@
 
 #include "wx/encinfo.h"
 #include "wx/fontmap.h"
-#include "wx/tokenzr.h"
+
+import Utils.Strings;
 
 import WX.Win.UniqueHnd;
 

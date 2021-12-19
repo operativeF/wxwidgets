@@ -24,9 +24,9 @@
 #include "wx/sysopt.h"
 
 #include "wx/scopeguard.h"
-#include "wx/tokenzr.h"
 
 import WX.WinDef;
+import Utils.Strings;
 
 import WX.Win.UniqueHnd;
 
