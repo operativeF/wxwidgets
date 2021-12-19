@@ -30,7 +30,7 @@
 #include "wx/fontdlg.h"
 #include "wx/encinfo.h"
 
-#include "wx/encconv.h"
+import WX.Cmn.EncConv;
 
 // ----------------------------------------------------------------------------
 // XTI

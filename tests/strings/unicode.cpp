@@ -10,7 +10,7 @@
 
 #include "testprec.h"
 
-#include "wx/encconv.h"
+import WX.Cmn.EncConv;
 
 // ----------------------------------------------------------------------------
 // helper class holding the matching MB and WC strings

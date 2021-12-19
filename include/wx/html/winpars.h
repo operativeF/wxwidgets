@@ -15,7 +15,8 @@
 #include "wx/font.h"
 #include "wx/html/htmlpars.h"
 #include "wx/html/htmlcell.h"
-#include "wx/encconv.h"
+
+import WX.Cmn.EncConv;
 
 class wxHtmlWindow;
 class wxHtmlWindowInterface;

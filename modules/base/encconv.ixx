@@ -7,24 +7,23 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_ENCCONV_H_
-#define _WX_ENCCONV_H_
+module;
 
 #include "wx/object.h"
 #include "wx/fontenc.h"
 
+export module WX.Cmn.EncConv;
+
 import <vector>;
 
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
+export
+{
 
 enum
 {
     wxCONVERT_STRICT,
     wxCONVERT_SUBSTITUTE
 };
-
 
 enum
 {
@@ -148,4 +147,4 @@ class wxEncodingConverter
             bool m_JustCopy{false};
 };
 
-#endif  // _WX_ENCCONV_H_
+} // export

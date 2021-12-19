@@ -16,12 +16,13 @@
 #include "wx/html/helpdata.h"
 #include "wx/wfstream.h"
 #include "wx/busyinfo.h"
-#include "wx/encconv.h"
 #include "wx/fontmap.h"
 #include "wx/html/htmlpars.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlfilt.h"
 #include "wx/filename.h"
+
+import WX.Cmn.EncConv;
 
 import Utils.Strings;
 

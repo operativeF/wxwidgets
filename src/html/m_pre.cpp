@@ -12,7 +12,8 @@
 #include "wx/html/m_templ.h"
 
 #include "wx/html/htmlcell.h"
-#include "wx/encconv.h"
+
+import WX.Cmn.EncConv;
 
 import Utils.Strings;
 

@@ -27,13 +27,14 @@
     #include "wx/thread.h"
 #endif
 
-#include "wx/encconv.h"
 #include "wx/fontmap.h"
 #include "wx/private/unicode.h"
 
 #ifdef __DARWIN__
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
+
+import WX.Cmn.EncConv;
 
 import <unordered_map>;
 
