@@ -48,7 +48,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/fontutilcmn.cpp
     ${CORE_SRC_DIR}/common/framecmn.cpp
     ${CORE_SRC_DIR}/common/gaugecmn.cpp
-    ${CORE_SRC_DIR}/common/gbsizer.cpp
     ${CORE_SRC_DIR}/common/gdicmn.cpp
     ${CORE_SRC_DIR}/common/graphcmn.cpp
     ${CORE_SRC_DIR}/common/headercolcmn.cpp
