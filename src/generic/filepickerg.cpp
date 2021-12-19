@@ -43,7 +43,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
     }
     else
     {
-        labelButton = label;
+        labelButton = {label.begin(), label.end()};
     }
 
     // create this button

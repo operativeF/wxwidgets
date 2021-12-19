@@ -14,7 +14,7 @@ class wxLog;
 
 #if wxUSE_INTL
 #include "wx/hashset.h"
-WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual,
+WX_DECLARE_HASH_SET(std::string, wxStringHash, wxStringEqual,
                     wxLocaleUntranslatedStrings);
 #endif
 

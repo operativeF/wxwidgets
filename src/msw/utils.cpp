@@ -1104,10 +1104,10 @@ std::string wxGetOsDescription()
 
             if ( str.empty() )
             {
-                str = fmt::format("Windows %lu.%lu", info.dwMajorVersion, info.dwMinorVersion);
+                str = fmt::format("Windows {:d}.{:d}", info.dwMajorVersion, info.dwMinorVersion);
             }
 
-            str += fmt::format(" (build {:lu}", info.dwBuildNumber);
+            str += fmt::format(" (build {:d}", info.dwBuildNumber);
 
             if ( !wxIsEmpty(info.szCSDVersion) )
             {
