@@ -172,6 +172,10 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/generic/animateg.cpp
 )
 
+set(GUI_CMN_IXX
+    ${CMAKE_SOURCE_DIR}/modules/core/cmndata.ixx
+)
+
 set(CORE_GRID_SRC
     ${CORE_SRC_DIR}/generic/grideditors.cpp
     ${CORE_SRC_DIR}/generic/gridctrl.cpp
@@ -389,6 +393,7 @@ add_library(wxcore
     ${CORE_GRID_SRC}
     ${CORE_GRID_IXX}
     ${GUI_CMN_SRC}
+    ${GUI_CMN_IXX}
     ${MSW_LOWLEVEL_SRC}
     ${MSW_DESKTOP_SRC}
     ${MSW_DESKTOP_LOWLEVEL_SRC}

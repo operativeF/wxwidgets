@@ -14,7 +14,6 @@
 #if wxUSE_PRINTING_ARCHITECTURE
 
 #include "wx/event.h"
-#include "wx/cmndata.h"
 #include "wx/panel.h"
 #include "wx/scrolwin.h"
 #include "wx/dialog.h"
@@ -23,6 +22,7 @@
 #include "wx/sizer.h"
 
 import Utils.Geometry;
+import WX.Core.Cmndata;
 
 import <string>;
 

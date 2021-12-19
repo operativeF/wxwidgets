@@ -16,7 +16,6 @@
 
 #include "wx/app.h"
 #include "wx/dcprint.h"
-#include "wx/cmndata.h"
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 #include "wx/msw/dcprint.h"
@@ -26,6 +25,7 @@
 #include <boost/nowide/stackstring.hpp>
 
 import WX.WinDef;
+import WX.Core.Cmndata;
 
 import <cstdlib>;
 import <string>;

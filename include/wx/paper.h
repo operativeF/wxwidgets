@@ -12,9 +12,11 @@
 #define _WX_PAPERH__
 
 #include "wx/event.h"
-#include "wx/cmndata.h"
 #include "wx/intl.h"
 #include "wx/hashmap.h"
+
+import WX.Core.Cmndata;
+import WX.Print.Cfg;
 
 /*
  * Paper type: see printercfg.h for wxPaperSize enum.

@@ -8,15 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#if wxUSE_PRINTING_ARCHITECTURE
-
-#include "wx/cmndata.h"
+module;
 
 #if defined(__WXMSW__)
-    #include "wx/msw/wrapcdlg.h"
+#include "wx/msw/wrapcdlg.h"
 #endif // MSW
 
 #include "wx/gdicmn.h"
@@ -27,7 +22,11 @@
 #include "wx/printdlg.h"
 #include "wx/paper.h"
 
+module WX.Core.Cmndata;
+
 import Utils.Geometry;
+
+#if wxUSE_PRINTING_ARCHITECTURE
 
 // ----------------------------------------------------------------------------
 // Print data

@@ -16,7 +16,8 @@
 #include "wx/event.h"
 #include "wx/dialog.h"
 #include "wx/intl.h"
-#include "wx/cmndata.h"
+
+import WX.Core.Cmndata;
 
 import <string>;
 

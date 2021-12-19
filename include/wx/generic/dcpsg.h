@@ -16,8 +16,9 @@
 #include "wx/dcprint.h"
 #include "wx/dialog.h"
 #include "wx/module.h"
-#include "wx/cmndata.h"
 #include "wx/strvararg.h"
+
+import WX.Core.Cmndata;
 
 //-----------------------------------------------------------------------------
 // wxPostScriptDC

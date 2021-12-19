@@ -14,10 +14,10 @@
 #if wxUSE_PRINTING_ARCHITECTURE
 
 #include "wx/dcprint.h"
-#include "wx/cmndata.h"
 #include "wx/msw/dc.h"
 
 import Utils.Geometry;
+import WX.Core.Cmndata;
 
 import <string>;
 

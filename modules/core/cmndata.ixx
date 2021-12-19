@@ -8,15 +8,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_CMNDATA_H_BASE_
-#define _WX_CMNDATA_H_BASE_
+module;
 
-#if wxUSE_PRINTING_ARCHITECTURE
+export module WX.Core.Cmndata;
 
 import WX.Print;
 import Utils.Geometry;
 
 import <string>;
+
+#if wxUSE_PRINTING_ARCHITECTURE
+
+export
+{
 
 class wxPrintNativeDataBase;
 
@@ -258,7 +262,6 @@ private:
     bool            m_enableHelp{false};
 };
 
-#endif // wxUSE_PRINTING_ARCHITECTURE
+} // export
 
-#endif
-// _WX_CMNDATA_H_BASE_
+#endif // wxUSE_PRINTING_ARCHITECTURE
