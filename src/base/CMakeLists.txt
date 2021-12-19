@@ -79,7 +79,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/secretstore.cpp
     ${BASE_SRC_DIR}/common/stdpbase.cpp
     ${BASE_SRC_DIR}/common/sstream.cpp
-    ${BASE_SRC_DIR}/common/stdstream.cpp
     ${BASE_SRC_DIR}/common/stopwatch.cpp
     ${BASE_SRC_DIR}/common/strconv.cpp
     ${BASE_SRC_DIR}/common/stream.cpp
@@ -88,7 +87,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/stringops.cpp
     ${BASE_SRC_DIR}/common/strvararg.cpp
     ${BASE_SRC_DIR}/common/sysopt.cpp
-    ${BASE_SRC_DIR}/common/tarstrm.cpp
     ${BASE_SRC_DIR}/common/textbuf.cpp
     ${BASE_SRC_DIR}/common/textfile.cpp
     ${BASE_SRC_DIR}/common/threadinfo.cpp
@@ -114,6 +112,14 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/generic/fswatcherg.cpp
     ${BASE_SRC_DIR}/common/lzmastream.cpp
 )
+
+set(BASE_CMN_HDR
+)
+
+if(wxUSE_TARSTREAM)
+    list(APPEND BASE_CMN_SRC ${BASE_SRC_DIR}/common/tarstrm.cpp)
+    list(APPEND BASE_CMN_HDR ${CMAKE_SOURCE_DIR}/include/wx/tarstrm.h)
+endif()
 
 set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/bitfield.ixx

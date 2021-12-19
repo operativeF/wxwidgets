@@ -9,8 +9,6 @@
 #ifndef _WX_WXTARSTREAM_H__
 #define _WX_WXTARSTREAM_H__
 
-#if wxUSE_TARSTREAM
-
 #include "wx/archive.h"
 #include "wx/hashmap.h"
 
@@ -337,8 +335,5 @@ protected:
     wxArchiveOutputStream *DoNewStream(wxOutputStream *stream) const override
         { return NewStream(stream); }
 };
-
-
-#endif // wxUSE_TARSTREAM
 
 #endif // _WX_WXTARSTREAM_H__
