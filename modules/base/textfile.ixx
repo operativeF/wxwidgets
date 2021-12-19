@@ -12,10 +12,11 @@
 
 module;
 
-#include "wx/textbuf.h"
 #include "wx/file.h"
 
 export module WX.Cmn.TextFile;
+
+import WX.Cmn.TextBuffer;
 
 import <string>;
 

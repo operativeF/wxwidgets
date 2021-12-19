@@ -12,12 +12,12 @@
 
 #include "wx/dataobj.h"
 #include "wx/mstream.h"
-#include "wx/textbuf.h"
 
 #include "wx/listimpl.cpp"
 
 WX_DEFINE_LIST(wxSimpleDataObjectList)
 
+import WX.Cmn.TextBuffer;
 import WX.Image;
 
 // ----------------------------------------------------------------------------

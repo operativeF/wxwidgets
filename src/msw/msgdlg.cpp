@@ -24,11 +24,12 @@
 #include "wx/msw/private/msgdlg.h"
 #include "wx/modalhook.h"
 #include "wx/fontutil.h"
-#include "wx/textbuf.h"
 #include "wx/display.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+
+import WX.Cmn.TextBuffer;
 
 import WX.WinDef;
 

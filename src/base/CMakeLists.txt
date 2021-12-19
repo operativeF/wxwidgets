@@ -134,6 +134,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/cmdline.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

@@ -9,13 +9,18 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TEXTBUFFER_H
-#define _WX_TEXTBUFFER_H
+module;
 
 #include "wx/convauto.h"
+#include "wx/string.h"
+
+export module WX.Cmn.TextBuffer;
 
 import <string>;
 import <vector>;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // constants
@@ -30,8 +35,6 @@ enum class wxTextFileType
     Mac,      //                         'CR' = 0xD = 13 = '\r'
     Os2 = Dos //                         'CR' 'LF'
 };
-
-#include "wx/string.h"
 
 #if wxUSE_TEXTBUFFER
 
@@ -198,5 +201,4 @@ private:
 #endif // wxUSE_TEXTBUFFER
 };
 
-#endif // _WX_TEXTBUFFER_H
-
+} // export

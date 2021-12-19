@@ -16,8 +16,8 @@
 
 #include "wx/confbase.h"
 #include "wx/filename.h"
-#include "wx/textbuf.h"
 
+import WX.Cmn.TextBuffer;
 import WX.Cmn.TextFile;
 
 // ----------------------------------------------------------------------------

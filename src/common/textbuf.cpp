@@ -7,10 +7,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/textbuf.h"
+
+module WX.Cmn.TextBuffer;
+
+import <string>;
 
 // ============================================================================
 // wxTextBuffer class implementation
