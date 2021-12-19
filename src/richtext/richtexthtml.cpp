@@ -21,12 +21,13 @@
 
 #include "wx/filename.h"
 #include "wx/wfstream.h"
-#include "wx/txtstrm.h"
 
 #if wxUSE_FILESYSTEM
 #include "wx/filesys.h"
 #include "wx/fs_mem.h"
 #endif
+
+import WX.Cmn.TextStream;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextHTMLHandler, wxRichTextFileHandler);
 

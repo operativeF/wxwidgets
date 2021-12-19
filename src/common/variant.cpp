@@ -24,7 +24,7 @@ import Utils.Strings;
 import <fstream>;
 
 #if wxUSE_STREAMS
-    #include "wx/txtstrm.h"
+import WX.Cmn.TextStream;
 #endif
 
 #include "wx/tokenzr.h"

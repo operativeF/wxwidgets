@@ -12,8 +12,9 @@
 
 #include "wx/strconv.h"
 #include "wx/string.h"
-#include "wx/txtstrm.h"
 #include "wx/mstream.h"
+
+import WX.Cmn.TextStream;
 
 #if defined wxHAVE_TCHAR_SUPPORT && !defined HAVE_WCHAR_H
     #define HAVE_WCHAR_H

@@ -62,7 +62,6 @@ import Utils.Position;
 #include "wx/textctrl.h"
 #include "wx/bitmap.h"
 #include "wx/cmdproc.h"
-#include "wx/txtstrm.h"
 #include "wx/variant.h"
 #include "wx/position.h"
 
@@ -71,6 +70,7 @@ import Utils.Position;
 #endif
 
 import WX.Utils.Cast;
+import WX.Cmn.TextStream;
 
 import WX.Image;
 

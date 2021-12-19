@@ -8,15 +8,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TXTSTREAM_H_
-#define _WX_TXTSTREAM_H_
+module;
 
 #include "wx/stream.h"
 #include "wx/convauto.h"
 
-#if wxUSE_STREAMS
+export module WX.Cmn.TextStream;
 
 import <cstdint>;
+
+export
+{
+
+#if wxUSE_STREAMS
 
 class wxTextInputStream;
 class wxTextOutputStream;
@@ -186,5 +190,4 @@ protected:
 #endif
   // wxUSE_STREAMS
 
-#endif
-    // _WX_DATSTREAM_H_
+} // export

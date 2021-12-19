@@ -11,10 +11,11 @@
 #include "wx/zstream.h"
 #include "wx/wfstream.h"
 #include "wx/mstream.h"
-#include "wx/txtstrm.h"
 #include "wx/buffer.h"
 
 #include "bstream.h"
+
+import WX.Cmn.TextStream;
 
 using std::string;
 

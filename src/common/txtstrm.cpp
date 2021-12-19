@@ -8,14 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/txtstrm.h"
 #include "wx/crt.h"
 
 #include <fmt/core.h>
 
+module WX.Cmn.TextStream;
+
 import <string>;
+
+#if wxUSE_STREAMS
 
 // ----------------------------------------------------------------------------
 // wxTextInputStream
@@ -669,5 +672,4 @@ wxTextOutputStream &endl( wxTextOutputStream &stream )
     return stream.PutChar(wxT('\n'));
 }
 
-#endif
-  // wxUSE_STREAMS
+#endif // wxUSE_STREAMS

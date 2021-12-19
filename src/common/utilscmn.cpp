@@ -59,7 +59,6 @@
 #include "wx/apptrait.h"
 
 #include "wx/process.h"
-#include "wx/txtstrm.h"
 #include "wx/uri.h"
 #include "wx/mimetype.h"
 #include "wx/config.h"
@@ -96,15 +95,17 @@
 
 #include <memory>
 
+import WX.Cmn.TextStream;
+
+import WX.Utils.VersionInfo;
+
+import WX.Cfg.Flags;
+
 import <algorithm>;
 import <ctime>;
 import <string>;
 import <vector>;
 import <utility>;
-
-import WX.Utils.VersionInfo;
-
-import WX.Cfg.Flags;
 
 #if wxUSE_BASE
 

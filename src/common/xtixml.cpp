@@ -19,9 +19,10 @@
 #include "wx/event.h"
 #include "wx/xml/xml.h"
 #include "wx/tokenzr.h"
-#include "wx/txtstrm.h"
 #include "wx/xtistrm.h"
 #include "wx/xtixml.h"
+
+import WX.Cmn.TextStream;
 
 import <map>;
 import <string>;

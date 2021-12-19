@@ -15,7 +15,7 @@
 #include "wx/longlong.h"
 
 #if wxUSE_STREAMS
-    #include "wx/txtstrm.h"
+import WX.Cmn.TextStream;
 #endif
 
 // ============================================================================

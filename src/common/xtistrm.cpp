@@ -15,7 +15,8 @@
 #include "wx/hash.h"
 #include "wx/event.h"
 #include "wx/tokenzr.h"
-#include "wx/txtstrm.h"
+
+import WX.Cmn.TextStream;
 
 import <map>;
 import <string>;

@@ -13,7 +13,8 @@
 #include "wx/convauto.h"
 
 #include "wx/mstream.h"
-#include "wx/txtstrm.h"
+
+import WX.Cmn.TextStream;
 
 // ----------------------------------------------------------------------------
 // tests

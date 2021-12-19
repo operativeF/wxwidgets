@@ -25,11 +25,12 @@
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
 #include "wx/sstream.h"
-#include "wx/txtstrm.h"
 #include "wx/mstream.h"
 #include "wx/tokenzr.h"
 #include "wx/stopwatch.h"
 #include "wx/xml/xml.h"
+
+import WX.Cmn.TextStream;
 
 // Set to 1 for slower wxXmlDocument method, 0 for faster direct method.
 // If we make wxXmlDocument::Save more efficient, we might switch to this

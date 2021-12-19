@@ -11,12 +11,12 @@ module;
 #include "wx/gdicmn.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/txtstrm.h"
 #include "wx/stream.h"
 
 export module WX.Image.PNM;
 
 import WX.Image.Base;
+import WX.Cmn.TextStream;
 
 //-----------------------------------------------------------------------------
 // wxPNMHandler

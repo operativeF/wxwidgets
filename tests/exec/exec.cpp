@@ -19,8 +19,9 @@
 #include "wx/filename.h"
 #include "wx/mstream.h"
 #include "wx/scopeguard.h"
-#include "wx/txtstrm.h"
 #include "wx/timer.h"
+
+import WX.Cmn.TextStream;
 
 import WX.Test.Prec;
 

@@ -8,7 +8,6 @@
 
 #include "testprec.h"
 
-#include "wx/txtstrm.h"
 #include "wx/wfstream.h"
 
 #if wxUSE_LONGLONG
@@ -18,6 +17,8 @@
 #include "wx/mstream.h"
 
 #include "testfile.h"
+
+import WX.Cmn.TextStream;
 
 // ----------------------------------------------------------------------------
 // test class

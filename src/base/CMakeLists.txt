@@ -128,6 +128,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
 
     ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
 )
 
 set(SHARED_BASE_CMN_SRC
