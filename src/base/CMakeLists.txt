@@ -142,6 +142,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/cmdline.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/encconv.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/mousestate.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

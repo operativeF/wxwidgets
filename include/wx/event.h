@@ -17,13 +17,14 @@
 
 #if wxUSE_GUI
     #include "wx/cursor.h"
-    #include "wx/mousestate.h"
 #endif
 
 #include "wx/thread.h"
 #include "wx/tracker.h"
 #include "wx/any.h"
 #include "wx/typeinfo.h"
+
+import WX.Cmn.MouseState;
 
 import Utils.Geometry;
 

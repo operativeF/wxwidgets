@@ -7,8 +7,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_KBDSTATE_H_
-#define _WX_KBDSTATE_H_
+export module WX.Cmn.KbdState;
+
+export
+{
 
 /* This enum contains bit mask constants used in wxKeyEvent */
 enum wxKeyModifier
@@ -132,5 +134,4 @@ public:
 #endif
 };
 
-#endif // _WX_KBDSTATE_H_
-
+} // export

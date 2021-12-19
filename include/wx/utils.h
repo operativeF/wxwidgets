@@ -21,7 +21,6 @@
 #include "wx/hashmap.h"
 
 #if wxUSE_GUI
-    #include "wx/mousestate.h"
     #include "wx/gdicmn.h"
 #endif
 
@@ -37,6 +36,7 @@
 import WX.WinDef;
 import WX.Utils.VersionInfo;
 import WX.Cmn.PlatInfo;
+import WX.Cmn.MouseState;
 
 import Utils.Geometry;
 

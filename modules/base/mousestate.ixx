@@ -7,13 +7,17 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_MOUSESTATE_H_
-#define _WX_MOUSESTATE_H_
+module;
 
 #include "wx/debug.h"
-#include "wx/kbdstate.h"
 
+export module WX.Cmn.MouseState;
+
+import WX.Cmn.KbdState;
 import Utils.Geometry;
+
+export
+{
 
 // the symbolic names for the mouse buttons
 enum wxMouseButton
@@ -111,5 +115,4 @@ public:
     wxCoord m_y{0};
 };
 
-#endif // _WX_MOUSESTATE_H_
-
+} // export

@@ -12,11 +12,11 @@ module;
 
 #include "wx/control.h"
 #include "wx/event.h"
-#include "wx/kbdstate.h"
 
 export module WX.Grid.Event;
 
 import WX.Grid.CellCoords;
+import WX.Cmn.KbdState;
 
 export
 {

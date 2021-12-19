@@ -14,7 +14,9 @@
 
 #if wxUSE_UIACTIONSIMULATOR
 
-#include "wx/mousestate.h"  // for wxMOUSE_BTN_XXX constants
+import WX.Cmn.KbdState;
+import WX.Cmn.MouseState;
+import Utils.Geometry;
 
 import <string>;
 import <string_view>;
