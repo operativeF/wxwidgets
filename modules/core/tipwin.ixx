@@ -9,16 +9,21 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TIPWIN_H_
-#define _WX_TIPWIN_H_
-
-#if wxUSE_TIPWINDOW
+module;
 
 #include "wx/popupwin.h"
+
+export module WX.Core.TipWin;
 
 import Utils.Geometry;
 
 import <string>;
+
+
+#if wxUSE_TIPWINDOW
+
+export
+{
 
 class wxTipWindowView;
 
@@ -79,6 +84,6 @@ private:
     friend class wxTipWindowView;
 };
 
-#endif // wxUSE_TIPWINDOW
+} // export
 
-#endif // _WX_TIPWIN_H_
+#endif // wxUSE_TIPWINDOW

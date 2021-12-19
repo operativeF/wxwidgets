@@ -12,7 +12,6 @@
 
 #include "wx/app.h"
 #include "wx/module.h"
-#include "wx/tipwin.h"
 #include "wx/cshelp.h"
 
 #if wxUSE_MS_HTML_HELP
@@ -21,6 +20,8 @@
 #endif
 
 #include <fmt/core.h>
+
+import WX.Core.TipWin;
 
 import <charconv>;
 

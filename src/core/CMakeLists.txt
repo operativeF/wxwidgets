@@ -173,6 +173,7 @@ set(GUI_CMN_SRC
 
 set(GUI_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/core/cmndata.ixx
+    ${CMAKE_SOURCE_DIR}/modules/core/tipwin.ixx
 )
 
 set(CORE_GRID_SRC

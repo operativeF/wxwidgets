@@ -8,19 +8,22 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_TIPWINDOW
+module;
 
-#include "wx/tipwin.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
 
 #include "wx/display.h"
+
+module WX.Core.TipWin;
 
 import WX.Utils.Cast;
 import WX.Utils.Settings;
 
 import <vector>;
 
+#if wxUSE_TIPWINDOW
+    
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------

@@ -21,7 +21,7 @@
 #include "wx/html/helpdlg.h"
 
 #if wxUSE_HELP
-    #include "wx/tipwin.h"
+import WX.Core.TipWin;
 #endif
 
 #if wxUSE_LIBMSPACK
