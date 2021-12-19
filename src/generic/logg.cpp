@@ -28,7 +28,6 @@
 #include "wx/file.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
-#include "wx/textfile.h"
 #include "wx/statline.h"
 #include "wx/artprov.h"
 #include "wx/collpane.h"
@@ -47,6 +46,8 @@
 #endif // wxUSE_LOG_DIALOG/!wxUSE_LOG_DIALOG
 
 #include "wx/time.h"
+
+import WX.Cmn.TextFile;
 
 import WX.Utils.Settings;
 

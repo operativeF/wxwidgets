@@ -15,8 +15,8 @@
 #include "wx/log.h"
 #include "wx/datstrm.h"
 #include "wx/scopeguard.h"
-#include "wx/textfile.h"
 
+import WX.Cmn.TextFile;
 import WX.Utils.Cast;
 
 import <string>;

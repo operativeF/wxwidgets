@@ -18,10 +18,11 @@
 #endif
 
 #include "wx/cmdline.h"
-#include "wx/textfile.h"
 #include "wx/filename.h"
 #include "wx/stopwatch.h"       // for wxGetLocalTime
 #include "xmlparser.h"
+
+import WX.Cmn.TextFile;
 
 // global verbosity flag
 bool g_verbose = false;

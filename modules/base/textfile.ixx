@@ -10,11 +10,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TEXTFILE_H
-#define _WX_TEXTFILE_H
+module;
 
 #include "wx/textbuf.h"
 #include "wx/file.h"
+
+export module WX.Cmn.TextFile;
 
 import <string>;
 
@@ -22,7 +23,7 @@ import <string>;
 // wxTextFile
 // ----------------------------------------------------------------------------
 
-class wxTextFile : public wxTextBuffer
+export class wxTextFile : public wxTextBuffer
 {
 public:
     // constructors
@@ -42,8 +43,4 @@ protected:
 
 private:
     wxFile m_file;
-};
-
-
-#endif // _WX_TEXTFILE_H
-
+}; // export class wxTextFile

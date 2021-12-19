@@ -17,7 +17,8 @@
 #endif // WX_PRECOMP
 
 #include "wx/ffile.h"
-#include "wx/textfile.h"
+
+import WX.Cmn.TextFile;
 
 #ifdef __VISUALC__
     #define unlink _unlink

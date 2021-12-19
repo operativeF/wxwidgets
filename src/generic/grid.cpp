@@ -26,7 +26,6 @@ module;
 #include "wx/intl.h"
 #include "wx/listbox.h"
 #include "wx/dcbuffer.h"
-#include "wx/textfile.h"
 #include "wx/spinctrl.h"
 #include "wx/tokenzr.h"
 #include "wx/renderer.h"
@@ -48,6 +47,7 @@ import WX.Grid.Editors;
 import WX.Utils.Cast;
 import Utils.Strings;
 import WX.Utils.Settings;
+import WX.Cmn.TextFile;
 
 import <algorithm>;
 import <string>;

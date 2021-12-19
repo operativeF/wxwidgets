@@ -17,7 +17,7 @@
 
 #if wxUSE_STARTUP_TIPS
 
-#include "wx/textfile.h"
+import WX.Cmn.TextFile;
 
 import <string>;
 

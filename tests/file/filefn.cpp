@@ -10,12 +10,13 @@
 
 #include "wx/ffile.h"
 #include "wx/filefn.h"
-#include "wx/textfile.h"
 #include "wx/filesys.h"
 
 #include "testfile.h"
 
 #include <fmt/core.h>
+
+import WX.Cmn.TextFile;
 
 // ----------------------------------------------------------------------------
 // test class

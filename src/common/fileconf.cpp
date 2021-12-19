@@ -21,7 +21,6 @@
 #endif // wxUSE_STREAMS
 
 #include  "wx/file.h"
-#include  "wx/textfile.h"
 #include  "wx/memtext.h"
 #include  "wx/config.h"
 #include  "wx/fileconf.h"
@@ -38,6 +37,7 @@
 #include <fmt/core.h>
 
 import Utils.Strings;
+import WX.Cmn.TextFile;
 
 import <cctype>;
 import <cstdlib>;

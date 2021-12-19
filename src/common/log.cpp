@@ -23,7 +23,6 @@
 #include "wx/datetime.h"
 #include "wx/file.h"
 #include "wx/msgout.h"
-#include "wx/textfile.h"
 #include "wx/thread.h"
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
@@ -31,6 +30,7 @@
 #include <fmt/core.h>
 
 import WX.Utils.Cast;
+import WX.Cmn.TextFile;
 
 import <algorithm>;
 import <iostream>;

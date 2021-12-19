@@ -24,6 +24,7 @@
 #include "wx/artprov.h"
 #include "wx/tipdlg.h"
 
+import WX.Cmn.TextFile;
 import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------

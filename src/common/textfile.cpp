@@ -8,20 +8,24 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if !wxUSE_FILE || !wxUSE_TEXTBUFFER
-    #undef wxUSE_TEXTFILE
-    #define wxUSE_TEXTFILE 0
-#endif // wxUSE_FILE
+// FIXME: Move to cmake file.
+// #if !wxUSE_FILE || !wxUSE_TEXTBUFFER
+//     #undef wxUSE_TEXTFILE
+//     #define wxUSE_TEXTFILE 0
+// #endif // wxUSE_FILE
 
-#if wxUSE_TEXTFILE
+module;
 
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/file.h"
 #include "wx/log.h"
-#include "wx/textfile.h"
 #include "wx/filename.h"
 #include "wx/buffer.h"
+
+module WX.Cmn.TextFile;
+
+#if wxUSE_TEXTFILE
 
 // ============================================================================
 // wxTextFile class implementation

@@ -11,7 +11,7 @@
 
 #include "testprec.h"
 
-#include "wx/textfile.h"
+import WX.Cmn.TextFile;
 
 // ----------------------------------------------------------------------------
 // constants

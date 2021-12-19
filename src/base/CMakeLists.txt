@@ -126,6 +126,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

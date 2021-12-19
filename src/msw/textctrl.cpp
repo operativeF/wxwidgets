@@ -29,8 +29,6 @@
     #include "wx/dataobj.h"
 #endif
 
-#include "wx/textfile.h"
-
 #if wxUSE_RICHEDIT
     #include <richedit.h>
     #include <richole.h>
@@ -62,6 +60,7 @@
 #include <cassert>
 
 import WX.WinDef;
+import WX.Cmn.TextFile;
 
 import WX.Utils.Settings;
 

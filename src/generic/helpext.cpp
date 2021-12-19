@@ -19,7 +19,6 @@
 #include "wx/log.h"
 
 #include "wx/filename.h"
-#include "wx/textfile.h"
 #include "wx/generic/helpext.h"
 
 #include <sys/stat.h>
@@ -29,6 +28,8 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Cmn.TextFile;
 
 import <string>;
 import <vector>;
