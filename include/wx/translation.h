@@ -94,13 +94,13 @@ public:
                                         const std::string& domain);
 
     // get name of the catalog
-    wxString GetDomain() const { return m_domain; }
+    std::string GetDomain() const { return m_domain; }
 
     // get the translated string: returns nullptr if not found
     const std::string* GetString(const std::string& sz, unsigned n = UINT_MAX, const std::string& ct = {}) const;
 
 protected:
-    wxMsgCatalog(const wxString& domain)
+    wxMsgCatalog(const std::string& domain)
         : m_pNext(nullptr), m_domain(domain)
     {}
 

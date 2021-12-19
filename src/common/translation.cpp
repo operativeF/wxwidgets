@@ -1252,7 +1252,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
             return false; // may happen for invalid MO files
 
         std::string msgid;
-        msgid = wxString(data, *inputConv);
+        msgid = wxString(data, *inputConv).ToStdString();
 
         data = StringAtOfs(m_pTransTable, i);
         if (!data)
