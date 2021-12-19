@@ -16,7 +16,6 @@
 #endif
 
 #include "wx/file.h"
-#include "wx/ffile.h"
 #include "wx/wfstream.h"
 #include "wx/filename.h"
 #include "wx/socket.h"
@@ -30,6 +29,8 @@
 #endif
 
 #include "testfile.h"
+
+import WX.Cmn.FFile;
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

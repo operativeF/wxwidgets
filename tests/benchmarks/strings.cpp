@@ -8,10 +8,11 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/string.h"
-#include "wx/ffile.h"
 
 #include "bench.h"
 #include "htmlparser/htmlpars.h"
+
+import WX.Cmn.FFile;
 
 constexpr char asciistr[] =
     "This is just the first line of a very long 7 bit ASCII string"

@@ -17,8 +17,9 @@
 
 #include "wx/buffer.h"
 #include "wx/crt.h"
-#include "wx/ffile.h"
 #include "wx/init.h"
+
+import WX.Cmn.FFile;
 
 // The fuzzer entry function.
 extern "C" int LLVMFuzzerTestOneInput(const wxUint8 *data, size_t size);

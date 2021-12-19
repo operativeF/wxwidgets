@@ -8,19 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_FFILE
+module;
 
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
 #include "wx/filename.h"
-#include "wx/ffile.h"
+
+module WX.Cmn.FFile;
 
 import WX.Utils.Cast;
 
-// ============================================================================
-// implementation of wxFFile
-// ============================================================================
+#if wxUSE_FFILE
 
 // ----------------------------------------------------------------------------
 // opening the file

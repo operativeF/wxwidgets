@@ -14,9 +14,10 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/event.h"
-#include "wx/ffile.h"
 
 #include <fmt/core.h>
+
+import WX.Cmn.FFile;
 
 // ----------------------------------------------------------------------------
 // macros

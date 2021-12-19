@@ -13,7 +13,6 @@
 #endif
 
 #include "wx/string.h"
-#include "wx/ffile.h"
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -27,6 +26,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
+import WX.Cmn.FFile;
 
 // ===========================================================================
 // implementation

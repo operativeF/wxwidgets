@@ -17,7 +17,8 @@
 #include "wx/string.h"
 #include "wx/stream.h"
 #include "wx/file.h"
-#include "wx/ffile.h"
+
+import WX.Cmn.FFile;
 
 #if wxUSE_FILE
 

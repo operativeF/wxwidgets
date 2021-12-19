@@ -10,11 +10,10 @@
 #ifndef _WX_PRIVATE_WEBREQUEST_H_
 #define _WX_PRIVATE_WEBREQUEST_H_
 
-#include "wx/ffile.h"
 #include "wx/hashmap.h"
-
-
 #include "wx/private/refcountermt.h"
+
+import WX.Cmn.FFile;
 
 WX_DECLARE_STRING_HASH_MAP(wxString, wxWebRequestHeaderMap);
 

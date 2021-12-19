@@ -13,12 +13,14 @@
 
 #include "wx/cmdline.h"
 #include "wx/xml/xml.h"
-#include "wx/ffile.h"
 #include "wx/filename.h"
 #include "wx/wfstream.h"
 #include "wx/utils.h"
 #include "wx/hashset.h"
 #include "wx/mimetype.h"
+
+import WX.Cmn.FFile;
+
 import <vector>;
 
 WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, StringSet);

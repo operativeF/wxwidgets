@@ -19,7 +19,7 @@ WX_CHECK_BUILD_OPTIONS("wxQA")
 
 #include "wx/debugrpt.h"
 #if wxUSE_FFILE
-    #include "wx/ffile.h"
+import WX.Cmn.FFile;
 #elif wxUSE_FILE
     #include "wx/file.h"
 #endif

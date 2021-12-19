@@ -8,14 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef   _WX_FFILE_H_
-#define   _WX_FFILE_H_
-
-#if wxUSE_FFILE
+module;
 
 #include  "wx/string.h"
 #include  "wx/filefn.h"
 #include  "wx/convauto.h"
+
+export module WX.Cmn.FFile;
+
+#if wxUSE_FFILE
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // class wxFFile: standard C stream library IO
@@ -157,7 +161,6 @@ private:
   wxFFile   m_file;     // the temporary file
 };
 
+} // export
+
 #endif // wxUSE_FFILE
-
-#endif // _WX_FFILE_H_
-

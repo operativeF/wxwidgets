@@ -8,7 +8,6 @@
 
 #include "doctest.h"
 
-#include "wx/ffile.h"
 #include "wx/filefn.h"
 #include "wx/filesys.h"
 
@@ -16,6 +15,7 @@
 
 #include <fmt/core.h>
 
+import WX.Cmn.FFile;
 import WX.Cmn.TextFile;
 
 // ----------------------------------------------------------------------------

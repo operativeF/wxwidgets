@@ -23,7 +23,7 @@
 
 #include "wx/filename.h"
 #ifdef wxUSE_FFILE
-    #include "wx/ffile.h"
+import WX.Cmn.FFile;
 #else
     #include "wx/file.h"
 #endif

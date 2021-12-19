@@ -13,10 +13,7 @@
 
 #if wxUSE_TEXTFILE
 
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
-#include "wx/ffile.h"
+import WX.Cmn.FFile;
 
 import WX.Cmn.TextFile;
 
