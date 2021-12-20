@@ -11,6 +11,7 @@ endif()
 
 add_subdirectory(base)
 add_subdirectory(core)
+add_subdirectory(grid)
 #add_subdirectory(html)
 #add_subdirectory(net)
 # add_subdirectory(propgrid)

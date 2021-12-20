@@ -176,23 +176,6 @@ set(GUI_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/core/tipwin.ixx
 )
 
-set(CORE_GRID_SRC
-    ${CORE_SRC_DIR}/generic/grideditors.cpp
-    ${CORE_SRC_DIR}/generic/gridctrl.cpp
-    ${CORE_SRC_DIR}/generic/grid.cpp
-    ${CORE_SRC_DIR}/generic/gridsel.cpp
-)
-
-set(CORE_GRID_IXX
-    ${CMAKE_SOURCE_DIR}/modules/grid/grid.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/gridcoord.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/gridctrl.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/grideditors.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/gridevt.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/gridinf.ixx
-    ${CMAKE_SOURCE_DIR}/modules/grid/gridsel.ixx
-)
-
 set(MSW_DESKTOP_LOWLEVEL_SRC
     ${CORE_SRC_DIR}/msw/helpchm.cpp
     ${CORE_SRC_DIR}/msw/helpwin.cpp

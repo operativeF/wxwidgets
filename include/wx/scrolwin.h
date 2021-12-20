@@ -18,6 +18,10 @@
     #include "wx/scrolbar.h"
 #endif
 
+#ifdef __WXMSW__
+import WX.WinDef;
+#endif
+
 import Utils.Geometry;
 
 import <string>;
@@ -386,9 +390,9 @@ struct wxScrolledT_Helper
     static constexpr WXLRESULT FilterMSWWindowProc(WXUINT nMsg, WXLRESULT origResult)
     {
         // we need to process arrows ourselves for scrolling
-        if (nMsg == WM_GETDLGCODE)
+        if (nMsg == WXWM_GETDLGCODE)
         {
-            origResult |= DLGC_WANTARROWS;
+            origResult |= WXDLGC_WANTARROWS;
         }
         return origResult;
     }

@@ -149,6 +149,7 @@ target_link_libraries(test_gui
     PRIVATE
         wxbase
         wxcore
+        wxgrid
 
         doctest::doctest
         ${JPEG_LIBRARIES}
