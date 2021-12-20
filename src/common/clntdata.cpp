@@ -8,7 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/clntdata.h"
+module;
+
+#include "wx/debug.h"
+
+module WX.Cmn.ClntData;
 
 wxClientDataContainer::wxClientDataContainer()
 {
@@ -61,8 +65,3 @@ void *wxClientDataContainer::DoGetClientData() const
 
     return m_clientData;
 }
-
-
-// ----------------------------------------------------------------------------
-
-

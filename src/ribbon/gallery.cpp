@@ -14,11 +14,12 @@
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/bar.h"
 #include "wx/dcbuffer.h"
-#include "wx/clntdata.h"
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #endif
+
+import WX.Cmn.ClntData;
 
 wxDEFINE_EVENT(wxEVT_RIBBONGALLERY_HOVER_CHANGED, wxRibbonGalleryEvent);
 wxDEFINE_EVENT(wxEVT_RIBBONGALLERY_SELECTED, wxRibbonGalleryEvent);

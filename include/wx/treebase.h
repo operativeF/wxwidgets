@@ -17,9 +17,10 @@
 
 #if wxUSE_TREECTRL
 
-#include "wx/clntdata.h"
 #include "wx/event.h"
 #include "wx/itemid.h"
+
+import WX.Cmn.ClntData;
 
 // ----------------------------------------------------------------------------
 // wxTreeItemId identifies an element of the tree. It's opaque for the

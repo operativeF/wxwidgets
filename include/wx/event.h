@@ -13,7 +13,6 @@
 
 #include "wx/cpp.h"
 #include "wx/object.h"
-#include "wx/clntdata.h"
 
 #if wxUSE_GUI
     #include "wx/cursor.h"
@@ -25,7 +24,7 @@
 #include "wx/typeinfo.h"
 
 import WX.Cmn.MouseState;
-
+import WX.Cmn.ClntData;
 import Utils.Geometry;
 
 import <bit>;

@@ -8,11 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_CLNTDATAH__
-#define _WX_CLNTDATAH__
+module;
 
 #include "wx/string.h"
 #include "wx/hashmap.h"
+
+export module WX.Cmn.ClntData;
+
+export
+{
 
 typedef int (*wxShadowObjectMethod)(void*, void*);
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
@@ -155,5 +159,4 @@ protected:
 
 };
 
-#endif // _WX_CLNTDATAH__
-
+} // export

@@ -17,13 +17,14 @@
 #include "wx/msgdlg.h"
 #include "wx/log.h"
 #include "wx/filedlg.h"
-#include "wx/clntdata.h"
 #include "wx/file.h"        // for wxS_IXXX constants only
 #include "wx/generic/dirctrlg.h" // for wxFileIconsTable
 #include "wx/dir.h"
 #include "wx/imaglist.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Cmn.ClntData;
 
 import WX.Utils.Settings;
 import Utils.Strings;
