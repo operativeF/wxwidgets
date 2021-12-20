@@ -24,7 +24,6 @@ module;
 #include "wx/toolbar.h"
 #include "wx/statusbr.h"
 #include "wx/timer.h"
-#include "wx/sizer.h"
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes
@@ -47,6 +46,7 @@ import WX.AUI.TabMDI;
 import WX.Utils.Settings;
 import WX.Image;
 import WX.Cfg.Flags;
+import WX.Core.Sizer;
 
 import <charconv>;
 

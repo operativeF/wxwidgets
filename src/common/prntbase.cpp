@@ -28,7 +28,6 @@
 #include "wx/stattext.h"
 #include "wx/intl.h"
 #include "wx/textdlg.h"
-#include "wx/sizer.h"
 #include "wx/module.h"
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
@@ -58,6 +57,8 @@
 #endif // __WXMSW__
 
 #include <fmt/core.h>
+
+import WX.Core.Sizer;
 
 import WX.Utils.Cast;
 import WX.Utils.Settings;

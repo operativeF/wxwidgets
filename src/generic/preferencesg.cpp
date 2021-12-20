@@ -13,16 +13,15 @@
 
 #ifndef wxHAS_PREF_EDITOR_NATIVE
 
-#ifndef WX_PRECOMP
-    import <vector>;
-#endif
-
 #include "wx/app.h"
 #include "wx/dialog.h"
 
 #include "wx/notebook.h"
-#include "wx/sizer.h"
 #include "wx/scopeguard.h"
+
+import WX.Core.Sizer;
+
+import <vector>;
 
 namespace
 {

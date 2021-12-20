@@ -14,8 +14,9 @@
 
 #if wxUSE_XRC
 
-#include "wx/sizer.h"
 #include "wx/gbsizer.h"
+
+import WX.Core.Sizer;
 
 class wxSizerXmlHandler : public wxXmlResourceHandler
 {

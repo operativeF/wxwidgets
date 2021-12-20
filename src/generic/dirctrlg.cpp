@@ -35,7 +35,6 @@
 #include "wx/msgdlg.h"
 #include "wx/choice.h"
 #include "wx/textctrl.h"
-#include "wx/sizer.h"
 #include "wx/textdlg.h"
 #include "wx/gdicmn.h"
 #include "wx/module.h"
@@ -52,6 +51,7 @@ import WX.Image;
 import Utils.Strings;
 import WX.Utils.Settings;
 import Utils.Geometry;
+import WX.Core.Sizer;
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"

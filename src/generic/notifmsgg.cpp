@@ -11,7 +11,6 @@
 
 #include "wx/frame.h"
 #include "wx/timer.h"
-#include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/panel.h"
 #include "wx/artprov.h"
@@ -28,6 +27,8 @@
 #include "wx/generic/private/notifmsg.h"
 #include "wx/display.h"
 #include "wx/textwrapper.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

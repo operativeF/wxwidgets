@@ -9,7 +9,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/sizer.h"
+module;
+
 #include "wx/private/flagscheck.h"
 
 #include "wx/intl.h"
@@ -24,10 +25,16 @@
 
 #include <memory>
 
+module WX.Core.Sizer;
+
 import WX.Utils.Settings;
 
 import <string>;
 import <vector>;
+
+#if (!defined(__WXGTK20__) || !defined(__WXMAC__))
+        #define wxNEEDS_BORDER_IN_PX
+#endif
 
 //---------------------------------------------------------------------------
 

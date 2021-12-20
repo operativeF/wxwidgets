@@ -9,11 +9,12 @@
 #if wxUSE_EDITABLELISTBOX
 
 #include "wx/editlbox.h"
-#include "wx/sizer.h"
 #include "wx/listctrl.h"
 #include "wx/artprov.h"
 #include "wx/bmpbuttn.h"
 #include "wx/stattext.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

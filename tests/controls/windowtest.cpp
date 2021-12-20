@@ -11,7 +11,6 @@
 #include "wx/app.h"
 #include "wx/window.h"
 #include "wx/button.h"
-#include "wx/sizer.h"
 
 #include "wx/uiaction.h"
 #include "wx/caret.h"
@@ -23,6 +22,8 @@
 #include "asserthelper.h"
 #include "testableframe.h"
 #include "testwindow.h"
+
+import WX.Core.Sizer;
 
 import WX.Test.Prec;
 

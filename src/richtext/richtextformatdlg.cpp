@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RICHTEXT
 
 #include "wx/richtext/richtextformatdlg.h"
@@ -18,7 +15,6 @@
 #include "wx/listbox.h"
 #include "wx/combobox.h"
 #include "wx/textctrl.h"
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 #include "wx/statline.h"
 #include "wx/radiobut.h"
@@ -61,6 +57,8 @@
 #include "richtextliststylepage.cpp"
 #include "richtextstylepage.cpp"
 #endif
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

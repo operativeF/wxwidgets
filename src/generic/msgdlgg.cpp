@@ -17,7 +17,6 @@
 #include "wx/statbmp.h"
 #include "wx/intl.h"
 #include "wx/icon.h"
-#include "wx/sizer.h"
 #include "wx/app.h"
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
@@ -31,6 +30,7 @@
 #endif
 
 import WX.Utils.Settings;
+import WX.Core.Sizer;
 
 import <string>;
 import <string_view>;

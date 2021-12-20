@@ -11,7 +11,6 @@
 
 #include "wx/dcmemory.h"
 #include "wx/icon.h"
-#include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/timer.h"
@@ -32,6 +31,8 @@
         #define HAVE_MSW_THEME
     #endif
 #endif
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

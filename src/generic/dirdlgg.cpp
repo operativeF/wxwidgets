@@ -13,7 +13,6 @@
 #include "wx/textctrl.h"
 #include "wx/button.h"
 #include "wx/checkbox.h"
-#include "wx/sizer.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/msgdlg.h"
@@ -24,6 +23,8 @@
 #include "wx/generic/dirdlgg.h"
 #include "wx/artprov.h"
 #include "wx/menu.h"
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // constants

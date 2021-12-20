@@ -14,13 +14,14 @@
 #include "wx/dc.h"
 #include "wx/msgdlg.h"
 #include "wx/module.h"
-#include "wx/sizer.h"
 #include "wx/print.h"
 #include "wx/printdlg.h"
 #include "wx/html/htmprint.h"
 #include "wx/wxhtml.h"
 #include "wx/wfstream.h"
 #include "wx/infobar.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

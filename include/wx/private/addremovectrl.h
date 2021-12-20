@@ -11,7 +11,8 @@
 #define _WX_PRIVATE_ADDREMOVECTRL_H_
 
 #include "wx/button.h"
-#include "wx/sizer.h"
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // wxAddRemoveImplBase: implementation-only part of wxAddRemoveCtrl, base part

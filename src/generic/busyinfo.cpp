@@ -13,7 +13,6 @@
 #include "wx/stattext.h"
 #include "wx/panel.h"
 #include "wx/frame.h"
-#include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/utils.h"
 
@@ -28,6 +27,8 @@
 #else
     #define wxStaticTextWithMarkupSupport wxStaticText
 #endif
+
+import WX.Core.Sizer;
 
 void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
 {

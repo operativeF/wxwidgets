@@ -13,10 +13,11 @@
 #include "wx/collpane.h"
 
 #include "wx/toplevel.h"
-#include "wx/sizer.h"
 #include "wx/panel.h"
 
 #include "wx/collheaderctrl.h"
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -17,13 +17,14 @@
 #include "wx/intl.h"
 #include "wx/statbmp.h"
 #include "wx/button.h"
-#include "wx/sizer.h"
 
 #include "wx/statline.h"
 
 #include "wx/scrolwin.h"
 #include "wx/wizard.h"
 #include "wx/dcmemory.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

@@ -14,12 +14,13 @@
 #include "wx/button.h"
 #include "wx/panel.h"
 #include "wx/radiobut.h"
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 #include "wx/uiaction.h"
 
 #include "testableframe.h"
 #include "testwindow.h"
+
+import WX.Core.Sizer;
 
 import WX.Test.Prec;
 

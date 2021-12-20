@@ -25,7 +25,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
 #include "wx/scrolbar.h"
-#include "wx/sizer.h"
 #include "wx/menu.h"
 #include "wx/button.h"
 
@@ -59,6 +58,7 @@ import WX.Cmn.SysOpt;
 
 import WX.Utils.Settings;
 import WX.Cmn.PlatInfo;
+import WX.Core.Sizer;
 
 import WX.Cfg.Flags;
 

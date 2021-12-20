@@ -14,7 +14,6 @@
 #include "wx/dialog.h"
 #include "wx/intl.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 #include "wx/containr.h"
 #include "wx/statline.h"
 #include "wx/module.h"
@@ -26,6 +25,7 @@
 #include "wx/display.h"
 
 import WX.Cmn.SysOpt;
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

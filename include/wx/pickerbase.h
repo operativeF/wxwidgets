@@ -12,8 +12,9 @@
 #define _WX_PICKERBASE_H_BASE_
 
 #include "wx/control.h"
-#include "wx/sizer.h"
 #include "wx/containr.h"
+
+import WX.Core.Sizer;
 
 import <string>;
 

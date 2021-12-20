@@ -24,7 +24,6 @@
 #include "wx/choice.h"
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
-#include "wx/sizer.h"
 #include "wx/filedlg.h"     // wxFD_OPEN, wxFD_SAVE...
 
 #include "wx/longlong.h"
@@ -62,6 +61,7 @@
 import <ctime>;
 
 import WX.Utils.Settings;
+import WX.Core.Sizer;
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

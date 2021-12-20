@@ -14,13 +14,12 @@
 
 #include "wx/xrc/xh_notbk.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/sizer.h"
-#endif
+#include "wx/log.h"
 
 #include "wx/notebook.h"
 #include "wx/imaglist.h"
+
+import WX.Core.Sizer;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxNotebookXmlHandler, wxXmlResourceHandler);
 

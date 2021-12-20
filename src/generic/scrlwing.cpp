@@ -15,7 +15,6 @@
 #include "wx/panel.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/sizer.h"
 
 #ifdef __WXMAC__
 #include "wx/scrolbar.h"
@@ -32,6 +31,8 @@
 # pragma message enable nosimpint
 #endif
 #endif
+
+import WX.Core.Sizer;
 
 import Utils.Position;
 import WX.Utils.Settings;

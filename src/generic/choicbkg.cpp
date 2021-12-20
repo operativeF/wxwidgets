@@ -13,8 +13,9 @@
 #include "wx/choicebk.h"
 
 #include "wx/choice.h"
-#include "wx/sizer.h"
 #include "wx/imaglist.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

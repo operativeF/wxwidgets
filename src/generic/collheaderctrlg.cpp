@@ -11,15 +11,14 @@
 
 #include "wx/collheaderctrl.h"
 #include "wx/dcclient.h"
-#include "wx/sizer.h"
 
 #include "wx/renderer.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif // __WXMSW__
-#endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
+#endif // __WXMSW__
+
+import WX.Core.Sizer;
 
 // if we have another implementation of this class we should extract
 // the lines below to a common file

@@ -10,7 +10,8 @@
 #ifndef _WX_WRAPSIZER_H_
 #define _WX_WRAPSIZER_H_
 
-#include "wx/sizer.h"
+import WX.Core.Sizer;
+import WX.Cfg.Flags;
 
 // flags for wxWrapSizer
 enum

@@ -19,7 +19,6 @@
     #include "wx/stattext.h"
     #include "wx/layout.h"
     #include "wx/dcclient.h"
-    #include "wx/sizer.h"
     #include "wx/slider.h"
 #endif
 
@@ -35,6 +34,8 @@
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
 #endif // wxCLRDLGG_USE_PREVIEW_WITH_ALPHA
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

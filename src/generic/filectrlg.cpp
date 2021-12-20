@@ -11,7 +11,6 @@
 
 #include "wx/generic/filectrlg.h"
 
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 #include "wx/checkbox.h"
 #include "wx/msgdlg.h"
@@ -25,6 +24,8 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.Cmn.ClntData;
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 import Utils.Strings;

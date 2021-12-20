@@ -9,10 +9,11 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/dc.h"
-#include "wx/sizer.h"
 #include "wx/vscroll.h"
 
 #include "wx/utils.h"   // For std::min/std::max().
+
+import WX.Core.Sizer;
 
 import Utils.Position;
 

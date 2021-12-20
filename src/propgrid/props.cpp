@@ -13,13 +13,14 @@
 #include "wx/dirdlg.h"
 #include "wx/filedlg.h"
 #include "wx/log.h"
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 
 #include "wx/numformatter.h"
 
 #include "wx/propgrid/propgrid.h"
 #include "wx/propgrid/editors.h"
+
+import WX.Core.Sizer;
 
 // MinGW in strict ANSI mode doesn't define those in its limits.h.
 #if defined(wxNEEDS_STRICT_ANSI_WORKAROUNDS) && !defined(LLONG_MAX)

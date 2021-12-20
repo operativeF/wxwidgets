@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XRC
 
 #include "wx/xrc/xh_sizer.h"
@@ -17,7 +14,6 @@
 #include "wx/log.h"
 #include "wx/panel.h"
 #include "wx/statbox.h"
-#include "wx/sizer.h"
 #include "wx/frame.h"
 #include "wx/dialog.h"
 #include "wx/button.h"
@@ -28,6 +24,7 @@
 
 #include "wx/xml/xml.h"
 
+import WX.Core.Sizer;
 import WX.Utils.Cast;
 import Utils.Strings;
 

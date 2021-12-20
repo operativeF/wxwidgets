@@ -19,10 +19,10 @@
 #include "wx/dialog.h"
 #include "wx/frame.h"
 #include "wx/dc.h"
-#include "wx/sizer.h"
 
 import Utils.Geometry;
 import WX.Core.Cmndata;
+import WX.Core.Sizer;
 
 import <string>;
 

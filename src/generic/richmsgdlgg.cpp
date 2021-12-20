@@ -12,11 +12,12 @@
 #include "wx/checkbox.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 #include "wx/collpane.h"
 #include "wx/richmsgdlg.h"
 #include "wx/statline.h"
 #include "wx/artprov.h"
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // Events and handlers

@@ -9,7 +9,6 @@
 
 #if wxUSE_ABOUTDLG
 
-#include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
 #include "wx/display.h"
@@ -22,6 +21,8 @@
 
 #include <fmt/core.h>
 #include <fmt/format.h>
+
+import WX.Core.Sizer;
 
 import <span>;
 import <string>;

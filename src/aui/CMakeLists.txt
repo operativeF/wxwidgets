@@ -66,6 +66,7 @@ target_include_directories(wxaui
 target_link_libraries(wxaui
     PRIVATE
         wxbase
+        wxcore
         stdlibcore
 )
 

@@ -15,12 +15,13 @@
 #include "wx/ribbon/bar.h"
 #include "wx/dcbuffer.h"
 #include "wx/display.h"
-#include "wx/sizer.h"
 #include "wx/frame.h"
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #endif
+
+import WX.Core.Sizer;
 
 wxDEFINE_EVENT(wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED, wxRibbonPanelEvent);
 

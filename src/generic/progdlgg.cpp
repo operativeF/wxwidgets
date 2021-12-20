@@ -13,13 +13,14 @@
 #include "wx/utils.h"
 #include "wx/button.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 #include "wx/event.h"
 #include "wx/gauge.h"
 #include "wx/intl.h"
 #include "wx/progdlg.h"
 #include "wx/evtloop.h"
 #include "wx/timer.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

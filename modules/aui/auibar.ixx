@@ -12,7 +12,6 @@ module;
 
 #include "wx/dcclient.h"
 #include "wx/control.h"
-#include "wx/sizer.h"
 #include "wx/pen.h"
 #include "wx/bitmap.h"
 #include "wx/dcbuffer.h"
@@ -34,6 +33,7 @@ import Utils.Geometry;
 
 import WX.Utils.Cast;
 import WX.Utils.Settings;
+import WX.Core.Sizer;
 
 
 export

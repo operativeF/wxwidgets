@@ -18,7 +18,6 @@
 
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
-#include "wx/sizer.h"
 
 #include "wx/notebook.h"
 
@@ -30,6 +29,7 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.Cmn.SysOpt;
+import WX.Core.Sizer;
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;

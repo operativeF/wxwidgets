@@ -17,8 +17,6 @@
     #include "wx/stream.h"
 #endif
 
-#include "wx/sizer.h"
-
 #include "wx/bmpbuttn.h"
 #include "wx/statbox.h"
 #include "wx/radiobox.h"
@@ -41,6 +39,8 @@
 #include "wx/fontenum.h"
 #include "wx/artprov.h"
 #include "wx/spinctrl.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 import Utils.Strings;

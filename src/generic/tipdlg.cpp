@@ -19,10 +19,11 @@
 #include "wx/textctrl.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 #include "wx/statline.h"
 #include "wx/artprov.h"
 #include "wx/tipdlg.h"
+
+import WX.Core.Sizer;
 
 import WX.Cmn.TextFile;
 import WX.Utils.Settings;

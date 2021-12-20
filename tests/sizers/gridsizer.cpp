@@ -9,10 +9,11 @@
 #include "doctest.h"
 
 #include "wx/app.h"
-#include "wx/sizer.h"
 #include "wx/window.h"
 
 #include "asserthelper.h"
+
+import WX.Core.Sizer;
 
 import WX.Test.Prec;
 

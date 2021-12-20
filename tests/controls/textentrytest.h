@@ -16,7 +16,6 @@
 #include "wx/dialog.h"
 #include "wx/event.h"
 #include "wx/odcombo.h"
-#include "wx/sizer.h"
 #include "wx/textctrl.h"
 #include "wx/textentry.h"
 #include "wx/timer.h"
@@ -26,6 +25,8 @@
 #include "testableframe.h"
 
 #include "wx/uiaction.h"
+
+import WX.Core.Sizer;
 
 import WX.Test.Prec;
 

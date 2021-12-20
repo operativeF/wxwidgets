@@ -20,7 +20,6 @@
 #include "wx/statusbr.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/sizer.h"
 
 #include "wx/stockitem.h"
 #include "wx/msw/private/winstyle.h"
@@ -31,6 +30,8 @@
 #include <boost/nowide/stackstring.hpp>
 
 import WX.WinDef;
+import WX.Core.Sizer;
+
 import WX.Utils.Settings;
 
 import <algorithm>;

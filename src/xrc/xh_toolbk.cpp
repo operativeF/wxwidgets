@@ -7,22 +7,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XRC && wxUSE_TOOLBOOK
 
 #include "wx/xrc/xh_toolbk.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/sizer.h"
-#endif
+#include "wx/log.h"
 
 #include "wx/toolbook.h"
 #include "wx/imaglist.h"
 
 #include "wx/xml/xml.h"
+
+import WX.Core.Sizer;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxToolbookXmlHandler, wxXmlResourceHandler);
 

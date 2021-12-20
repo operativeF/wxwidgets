@@ -19,7 +19,6 @@
 #include "wx/filedlg.h"
 #include "wx/msgdlg.h"
 #include "wx/textctrl.h"
-#include "wx/sizer.h"
 #include "wx/statbmp.h"
 #include "wx/wxcrtvararg.h"
 
@@ -48,6 +47,7 @@
 #include "wx/time.h"
 
 import WX.Cmn.TextFile;
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

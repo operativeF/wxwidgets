@@ -13,8 +13,6 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 
-#include "wx/sizer.h"
-
 #include "wx/bmpbuttn.h"
 #include "wx/statbox.h"
 #include "wx/radiobox.h"
@@ -25,6 +23,8 @@
 #include "wx/html/helpdlg.h"
 #include "wx/html/helpctrl.h"
 #include "wx/artprov.h"
+
+import WX.Core.Sizer;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlHelpDialog, wxDialog);
 

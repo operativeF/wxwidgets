@@ -23,7 +23,6 @@
 #include "wx/filedlg.h"
 #include "wx/combobox.h"
 #include "wx/intl.h"
-#include "wx/sizer.h"
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"
@@ -52,6 +51,7 @@
 
 import Utils.Strings;
 import WX.Core.Cmndata;
+import WX.Core.Sizer;
 
 import <array>;
 import <string>;

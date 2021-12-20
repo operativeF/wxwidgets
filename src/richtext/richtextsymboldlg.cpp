@@ -12,7 +12,6 @@
 
 #include "wx/richtext/richtextsymboldlg.h"
 
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 #include "wx/combobox.h"
 #include "wx/button.h"
@@ -23,6 +22,8 @@
 
 // Only for cached font name
 #include "wx/richtext/richtextctrl.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

@@ -30,7 +30,6 @@
 #include "wx/stattext.h"
 #include "wx/scrolwin.h"
 #include "wx/dirdlg.h"
-#include "wx/sizer.h"
 #include "wx/textdlg.h"
 #include "wx/filedlg.h"
 #include "wx/statusbr.h"
@@ -74,6 +73,8 @@
     #include "default_expand.xpm"
   #endif
 #endif
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

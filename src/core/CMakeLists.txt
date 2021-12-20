@@ -174,6 +174,7 @@ set(GUI_CMN_SRC
 set(GUI_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/core/cmndata.ixx
     ${CMAKE_SOURCE_DIR}/modules/core/tipwin.ixx
+    ${CMAKE_SOURCE_DIR}/modules/core/sizer.ixx
 )
 
 set(MSW_DESKTOP_LOWLEVEL_SRC

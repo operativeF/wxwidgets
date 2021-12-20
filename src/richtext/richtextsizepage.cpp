@@ -10,7 +10,7 @@
 
 #include "wx/richtext/richtextsizepage.h"
 
-#include "wx/sizer.h"
+import WX.Core.Sizer;
 
 ////@begin XPM images
 ////@end XPM images

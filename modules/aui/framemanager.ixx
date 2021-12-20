@@ -11,7 +11,6 @@
 module;
 
 #include "wx/timer.h"
-#include "wx/sizer.h"
 #include "wx/bitmap.h"
 #include "wx/window.h"
 
@@ -22,6 +21,8 @@ import WX.Cfg.Flags;
 import WX.AUI.DockInfo;
 import WX.AUI.Flags;
 import WX.AUI.PaneInfo;
+
+import WX.Core.Sizer;
 
 import Utils.Geometry;
 

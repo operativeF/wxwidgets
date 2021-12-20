@@ -14,15 +14,14 @@
 
 #include "wx/xrc/xh_propdlg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/sizer.h"
-    #include "wx/frame.h"
-#endif
+#include "wx/log.h"
+#include "wx/frame.h"
 
 #include "wx/bookctrl.h"
 #include "wx/propdlg.h"
 #include "wx/imaglist.h"
+
+import WX.Core.Sizer;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPropertySheetDialogXmlHandler, wxXmlResourceHandler);
 

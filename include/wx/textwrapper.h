@@ -10,6 +10,10 @@
 #ifndef _WX_TEXTWRAPPER_H_
 #define _WX_TEXTWRAPPER_H_
 
+#ifdef wxUSE_STATTEXT
+import WX.Core.Sizer;
+#endif
+
 import <string>;
 
 class wxWindow;
@@ -66,7 +70,6 @@ private:
 
 #if wxUSE_STATTEXT
 
-#include "wx/sizer.h"
 #include "wx/stattext.h"
 
 // A class creating a sizer with one static text per line of text. Creation of

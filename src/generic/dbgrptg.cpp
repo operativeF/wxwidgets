@@ -12,7 +12,6 @@
 
 #include "wx/debugrpt.h"
 
-#include "wx/sizer.h"
 #include "wx/checklst.h"
 #include "wx/textctrl.h"
 #include "wx/intl.h"
@@ -35,6 +34,8 @@ import WX.Cmn.FFile;
     #include "wx/evtloop.h"     // for SetCriticalWindow()
     #include "wx/scopeguard.h"
 #endif // __WXMSW__
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // wxDumpPreviewDlg: simple class for showing ASCII preview of dump files

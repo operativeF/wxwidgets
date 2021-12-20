@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_CREDENTIALDLG
 
 #include "wx/dialog.h"
@@ -16,9 +14,10 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 #include "wx/intl.h"
-#include "wx/sizer.h"
 
 #include "wx/generic/creddlgg.h"
+
+import WX.Core.Sizer;
 
 wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog(
     wxWindow* parent, const std::string& message, const std::string& title,

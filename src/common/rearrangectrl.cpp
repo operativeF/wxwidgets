@@ -11,8 +11,9 @@
 
 #include "wx/button.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 #include "wx/rearrangectrl.h"
+
+import WX.Core.Sizer;
 
 import WX.Utils.Cast;
 

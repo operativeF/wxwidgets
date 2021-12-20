@@ -16,12 +16,13 @@
 #include "wx/dcmemory.h"
 #include "wx/statbmp.h"
 #include "wx/stattext.h"
-#include "wx/sizer.h"
 
 #include "wx/artprov.h"
 #include "wx/scopeguard.h"
 
 #include <fmt/core.h>
+
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

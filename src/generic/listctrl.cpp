@@ -20,7 +20,6 @@
 #include "wx/timer.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
-#include "wx/sizer.h"
 
 #include "wx/imaglist.h"
 #include "wx/renderer.h"
@@ -30,6 +29,8 @@
 #ifdef __WXMAC__
     #include "wx/osx/private.h"
 #endif
+
+import WX.Core.Sizer;
 
 import WX.Cfg.Flags;
 

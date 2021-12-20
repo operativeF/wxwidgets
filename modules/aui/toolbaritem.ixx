@@ -1,10 +1,11 @@
 module;
 
 #include "wx/bitmap.h"
-#include "wx/sizer.h"
 #include "wx/window.h"
 
 export module WX.AUI.ToolBar.Item;
+
+import WX.Core.Sizer;
 
 import <string>;
 

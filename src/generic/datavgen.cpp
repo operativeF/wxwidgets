@@ -26,7 +26,6 @@
 #endif
 
 #include "wx/app.h"          // GetRegisteredClassName()
-#include "wx/sizer.h"
 #include "wx/log.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
@@ -56,6 +55,7 @@
 #endif // wxUSE_ACCESSIBILITY
 
 import WX.Cfg.Flags;
+import WX.Core.Sizer;
 
 import WX.Utils.Settings;
 

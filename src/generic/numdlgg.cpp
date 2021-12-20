@@ -16,7 +16,6 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 #include "wx/intl.h"
-#include "wx/sizer.h"
 #include "wx/wxcrtvararg.h"
 
 #if wxUSE_STATLINE
@@ -29,6 +28,8 @@
 
 // this is where wxGetNumberFromUser() is declared
 #include "wx/numdlg.h"
+
+import WX.Core.Sizer;
 
 import <string>;
 

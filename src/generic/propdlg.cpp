@@ -11,7 +11,6 @@
 #if wxUSE_BOOKCTRL
 
 #include "wx/button.h"
-#include "wx/sizer.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/msgdlg.h"
@@ -35,6 +34,8 @@
 #endif
 
 #include "wx/generic/propdlg.h"
+
+import WX.Core.Sizer;
 
 import WX.Cmn.SysOpt;
 

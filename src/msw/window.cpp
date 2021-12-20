@@ -28,7 +28,6 @@
 #include "wx/button.h"
 #include "wx/msgdlg.h"
 #include "wx/statbox.h"
-#include "wx/sizer.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/textctrl.h"
@@ -95,6 +94,7 @@
 import WX.Utils.Cast;
 import WX.Utils.Settings;
 import WX.Cmn.SysOpt;
+import WX.Core.Sizer;
 
 import WX.Cfg.Flags;
 

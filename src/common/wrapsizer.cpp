@@ -7,7 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
+#include "wx/debug.h"
 #include "wx/wrapsizer.h"
 
 import <vector>;

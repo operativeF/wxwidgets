@@ -18,11 +18,12 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 #include "wx/intl.h"
-#include "wx/sizer.h"
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"
 #endif
+
+import WX.Core.Sizer;
 
 // ----------------------------------------------------------------------------
 // constants

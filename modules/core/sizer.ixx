@@ -8,10 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef __WXSIZER_H__
-#define __WXSIZER_H__
+module;
 
+#include "wx/object.h"
 #include "wx/window.h"
+
+export module WX.Core.Sizer;
 
 import WX.Cfg.Flags;
 
@@ -24,13 +26,11 @@ import <vector>;
 // classes
 //---------------------------------------------------------------------------
 
-class wxButton;
-class wxBoxSizer;
-class wxSizerItem;
-class wxSizer;
+export
+{
 
-#ifndef wxUSE_BORDER_BY_DEFAULT
-    #define wxUSE_BORDER_BY_DEFAULT 1
+#if (!defined(__WXGTK20__) || !defined(__WXMAC__))
+    #define wxNEEDS_BORDER_IN_PX
 #endif
 
 // ----------------------------------------------------------------------------
@@ -152,7 +152,6 @@ public:
 
     static float GetDefaultBorderFractional()
     {
-#if wxUSE_BORDER_BY_DEFAULT
     #ifdef __WXGTK20__
         // GNOME HIG says to use 6px as the base unit:
         // http://library.gnome.org/devel/hig-book/stable/design-window.html.en
@@ -163,13 +162,8 @@ public:
     #else
         // For the other platforms, we need to scale raw pixel values using the
         // current DPI, do it once (and cache the result) in another function.
-        #define wxNEEDS_BORDER_IN_PX
-
         return DoGetDefaultBorderInPx();
     #endif
-#else
-        return 0;
-#endif
     }
 
 
@@ -189,54 +183,27 @@ public:
 
     wxSizerFlags& Border(unsigned int direction = wxALL)
     {
-#if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(GetDefaultBorderFractional()));
-#else
-        // no borders by default on limited size screen
-        wxUnusedVar(direction);
-
-        return *this;
-#endif
     }
 
     wxSizerFlags& DoubleBorder(unsigned int direction = wxALL)
     {
-#if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(2 * GetDefaultBorderFractional()));
-#else
-        wxUnusedVar(direction);
-
-        return *this;
-#endif
     }
 
     wxSizerFlags& TripleBorder(unsigned int direction = wxALL)
     {
-#if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(3 * GetDefaultBorderFractional()));
-#else
-        wxUnusedVar(direction);
-
-        return *this;
-#endif
     }
 
     wxSizerFlags& HorzBorder()
     {
-#if wxUSE_BORDER_BY_DEFAULT
         return Border(wxLEFT | wxRIGHT, std::lround(GetDefaultBorderFractional()));
-#else
-        return *this;
-#endif
     }
 
     wxSizerFlags& DoubleHorzBorder()
     {
-#if wxUSE_BORDER_BY_DEFAULT
         return Border(wxLEFT | wxRIGHT, std::lround(2 * GetDefaultBorderFractional()));
-#else
-        return *this;
-#endif
     }
 
     // setters for the others flags
@@ -1124,6 +1091,7 @@ protected:
 
 #endif // wxUSE_BUTTON
 
+} // export
 
 // ----------------------------------------------------------------------------
 // inline functions implementation
@@ -1307,5 +1275,3 @@ wxSizer::InsertStretchSpacer(size_t index, int prop)
 {
     return Insert(index, 0, 0, prop);
 }
-
-#endif // __WXSIZER_H__
