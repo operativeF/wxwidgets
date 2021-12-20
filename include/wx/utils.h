@@ -530,37 +530,6 @@ private:
 };
 
 // ----------------------------------------------------------------------------
-// Cursors
-// ----------------------------------------------------------------------------
-
-// Set the cursor to the busy cursor for all windows
-void wxBeginBusyCursor(const wxCursor *cursor = wxHOURGLASS_CURSOR);
-
-// Restore cursor to normal
-void wxEndBusyCursor();
-
-// true if we're between the above two calls
-bool wxIsBusy();
-
-// Convenience class so we can just create a wxBusyCursor object on the stack
-class wxBusyCursor
-{
-public:
-    wxBusyCursor(const wxCursor* cursor = wxHOURGLASS_CURSOR)
-        { wxBeginBusyCursor(cursor); }
-    ~wxBusyCursor()
-        { wxEndBusyCursor(); }
-
-    // FIXME: These two methods are currently only implemented (and needed?)
-    //        in wxGTK.  BusyCursor handling should probably be moved to
-    //        common code since the wxGTK and wxMSW implementations are very
-    //        similar except for wxMSW using WXHCURSOR directly instead of
-    //        wxCursor..  -- RL.
-    static const wxCursor &GetStoredCursor();
-    static const wxCursor GetBusyCursor();
-};
-
-// ----------------------------------------------------------------------------
 // X11 Display access
 // ----------------------------------------------------------------------------
 

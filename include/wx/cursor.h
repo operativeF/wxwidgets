@@ -13,6 +13,7 @@
 
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
+#include "wx/utils.h"
 
 // Under most ports, wxCursor derives directly from wxGDIObject, but in wxMSW
 // there is an intermediate wxGDIImage class.
@@ -76,7 +77,37 @@ public:
     #include "wx/qt/cursor.h"
 #endif
 
-#include "wx/utils.h"
+// Set the cursor to the busy cursor for all windows
+void wxBeginBusyCursor(const wxCursor *cursor = wxHOURGLASS_CURSOR);
+
+// Restore cursor to normal
+void wxEndBusyCursor();
+
+// true if we're between the above two calls
+bool wxIsBusy();
+
+const wxCursor *wxGetGlobalCursor();
+
+// Convenience class so we can just create a wxBusyCursor object on the stack
+class wxBusyCursor
+{
+public:
+    wxBusyCursor(const wxCursor* cursor = wxHOURGLASS_CURSOR)
+        { wxBeginBusyCursor(cursor); }
+    ~wxBusyCursor()
+        { wxEndBusyCursor(); }
+
+    // FIXME: These two methods are currently only implemented (and needed?)
+    //        in wxGTK.  BusyCursor handling should probably be moved to
+    //        common code since the wxGTK and wxMSW implementations are very
+    //        similar except for wxMSW using WXHCURSOR directly instead of
+    //        wxCursor..  -- RL.
+
+#ifdef __WXGTK__
+    static const wxCursor &GetStoredCursor();
+    static const wxCursor GetBusyCursor();
+#endif // __WXGTK__
+};
 
 /* This is a small class which can be used by all ports
    to temporarily suspend the busy cursor. Useful in modal
@@ -95,6 +126,9 @@ public:
    interfere with the state of wxIsBusy() -- RL
 
 */
+
+#ifdef __WXGTK__
+
 class wxBusyCursorSuspender
 {
 public:
@@ -113,5 +147,8 @@ public:
         }
     }
 };
+
+#endif // __WXGTK__
+
 #endif
     // _WX_CURSOR_H_BASE_

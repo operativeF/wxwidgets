@@ -30,48 +30,6 @@ void wxBell()
     ::MessageBeep((WXUINT)-1);        // default sound
 }
 
-// ---------------------------------------------------------------------------
-// helper functions for showing a "busy" cursor
-// ---------------------------------------------------------------------------
-
-static WXHCURSOR gs_wxBusyCursor = nullptr;     // new, busy cursor
-static WXHCURSOR gs_wxBusyCursorOld = nullptr;  // old cursor
-static int gs_wxBusyCursorCount = 0;
-
-extern WXHCURSOR wxGetCurrentBusyCursor()
-{
-    return gs_wxBusyCursor;
-}
-
-// Set the cursor to the busy cursor for all windows
-void wxBeginBusyCursor(const wxCursor *cursor)
-{
-    if ( gs_wxBusyCursorCount++ == 0 )
-    {
-        gs_wxBusyCursor = (WXHCURSOR)cursor->GetHCURSOR();
-        gs_wxBusyCursorOld = ::SetCursor(gs_wxBusyCursor);
-    }
-    //else: nothing to do, already set
-}
-
-// Restore cursor to normal
-void wxEndBusyCursor()
-{
-    wxCHECK_RET( gs_wxBusyCursorCount > 0,
-                 "no matching wxBeginBusyCursor() for wxEndBusyCursor()" );
-
-    if ( --gs_wxBusyCursorCount == 0 )
-    {
-        ::SetCursor(gs_wxBusyCursorOld);
-        gs_wxBusyCursorOld = nullptr;
-    }
-}
-
-// true if we're between the above two calls
-bool wxIsBusy()
-{
-  return gs_wxBusyCursorCount > 0;
-}
 
 // Check whether this window wants to process messages, e.g. Stop button
 // in long calculations.

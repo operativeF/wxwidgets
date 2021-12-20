@@ -46,4 +46,6 @@ private:
 #endif // wxUSE_IMAGE
 };
 
+WXHCURSOR wxGetCurrentBusyCursor();
+
 #endif // _WX_CURSOR_H_

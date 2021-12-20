@@ -12,7 +12,6 @@
 #define _WX_EVTLOOP_H_
 
 #include "wx/event.h"
-#include "wx/utils.h"
 
 #include <memory>
 

@@ -17,7 +17,6 @@
 
 #include "wx/crt.h"
 #include "wx/log.h"
-#include "wx/utils.h"
 
 import <cstring>;
 

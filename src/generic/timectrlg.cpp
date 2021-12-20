@@ -12,7 +12,6 @@
 #include "wx/timectrl.h"
 
 #include "wx/textctrl.h"
-#include "wx/utils.h"           // std::max()
 
 #include <cassert>
 

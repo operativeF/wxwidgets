@@ -10,8 +10,6 @@
 #ifndef _WX_DLIST_H_
 #define _WX_DLIST_H_
 
-#include "wx/utils.h"
-
 import <algorithm>;
 import <iterator>;
 import <list>;

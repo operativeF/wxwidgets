@@ -869,10 +869,6 @@ std::string wxMSWFormatMessage(WXDWORD nErrCode, WXHMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 
-// cursor stuff
-extern WXHCURSOR wxGetCurrentBusyCursor();    // from msw/utils.cpp
-extern const wxCursor *wxGetGlobalCursor(); // from msw/cursor.cpp
-
 // GetCursorPos can fail without populating the POINT. This falls back to GetMessagePos.
 void wxGetCursorPosMSW(POINT* pt);
 

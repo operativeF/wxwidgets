@@ -12,7 +12,6 @@
 #define _WX_PROCESSH__
 
 #include "wx/event.h"
-#include "wx/utils.h"       // for wxSignal
 
 #if wxUSE_STREAMS
     #include "wx/stream.h"

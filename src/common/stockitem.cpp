@@ -9,9 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/stockitem.h"
-
 #include "wx/intl.h"
-#include "wx/utils.h" // for wxStripMenuCodes()
 
 #include <fmt/core.h>
 
