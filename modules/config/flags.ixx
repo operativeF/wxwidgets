@@ -716,4 +716,134 @@ inline constexpr auto wxSIZE_FORCE_EVENT      = 0x0020;
    for e.g. timer IDs. */
 using wxWindowID = int;
 
+enum wxKillError
+{
+    wxKILL_OK,              // no error
+    wxKILL_BAD_SIGNAL,      // no such signal
+    wxKILL_ACCESS_DENIED,   // permission denied
+    wxKILL_NO_PROCESS,      // no such process
+    wxKILL_ERROR            // another, unspecified error
+};
+
+enum wxKillFlags
+{
+    wxKILL_NOCHILDREN = 0,  // don't kill children
+    wxKILL_CHILDREN = 1     // kill children
+};
+
+enum wxShutdownFlags
+{
+    wxSHUTDOWN_FORCE    = 1,// can be combined with other flags (MSW-only)
+    wxSHUTDOWN_POWEROFF = 2,// power off the computer
+    wxSHUTDOWN_REBOOT   = 4,// shutdown and reboot
+    wxSHUTDOWN_LOGOFF   = 8 // close session (currently MSW-only)
+};
+
+enum wxSignal
+{
+    wxSIGNONE = 0,  // verify if the process exists under Unix
+    wxSIGHUP,
+    wxSIGINT,
+    wxSIGQUIT,
+    wxSIGILL,
+    wxSIGTRAP,
+    wxSIGABRT,
+    wxSIGIOT = wxSIGABRT,   // another name
+    wxSIGEMT,
+    wxSIGFPE,
+    wxSIGKILL,
+    wxSIGBUS,
+    wxSIGSEGV,
+    wxSIGSYS,
+    wxSIGPIPE,
+    wxSIGALRM,
+    wxSIGTERM
+
+    // further signals are different in meaning between different Unix systems
+};
+
+enum
+{
+    // execute the process asynchronously
+    wxEXEC_ASYNC    = 0,
+
+    // execute it synchronously, i.e. wait until it finishes
+    wxEXEC_SYNC     = 1,
+
+    // under Windows, don't hide the child even if it's IO is redirected (this
+    // is done by default)
+    wxEXEC_SHOW_CONSOLE   = 2,
+
+    // deprecated synonym for wxEXEC_SHOW_CONSOLE, use the new name as it's
+    // more clear
+    wxEXEC_NOHIDE = wxEXEC_SHOW_CONSOLE,
+
+    // under Unix, if the process is the group leader then passing wxKILL_CHILDREN to wxKill
+    // kills all children as well as pid
+    // under Windows (NT family only), sets the CREATE_NEW_PROCESS_GROUP flag,
+    // which allows to target Ctrl-Break signal to the spawned process.
+    // applies to console processes only.
+    wxEXEC_MAKE_GROUP_LEADER = 4,
+
+    // by default synchronous execution disables all program windows to avoid
+    // that the user interacts with the program while the child process is
+    // running, you can use this flag to prevent this from happening
+    wxEXEC_NODISABLE = 8,
+
+    // by default, the event loop is run while waiting for synchronous execution
+    // to complete and this flag can be used to simply block the main process
+    // until the child process finishes
+    wxEXEC_NOEVENTS = 16,
+
+    // under Windows, hide the console of the child process if it has one, even
+    // if its IO is not redirected
+    wxEXEC_HIDE_CONSOLE = 32,
+
+    // convenient synonym for flags given system()-like behaviour
+    wxEXEC_BLOCK = wxEXEC_SYNC | wxEXEC_NOEVENTS
+};
+
+// flags for wxLaunchDefaultBrowser
+enum
+{
+    wxBROWSER_NEW_WINDOW   = 0x01,
+    wxBROWSER_NOBUSYCURSOR = 0x02
+};
+
+// flags for wxStripMenuCodes
+enum
+{
+    // strip '&' characters
+    wxStrip_Mnemonics = 1,
+
+    // strip everything after '\t'
+    wxStrip_Accel = 2,
+
+    // strip mnemonics of the form "(&X)" appended to the string (used in CJK
+    // translations)
+    wxStrip_CJKMnemonics = 4,
+
+    // strip everything (this doesn't include wxStrip_CJKMnemonics for
+    // compatibility)
+    wxStrip_All = wxStrip_Mnemonics | wxStrip_Accel,
+
+    // strip everything including CJK mnemonics, suitable for menu items labels
+    // only (despite its name, wxStripMenuCodes() is currently used for control
+    // labels too)
+    wxStrip_Menu = wxStrip_All | wxStrip_CJKMnemonics
+};
+
+#if defined(__X__) || (defined(__WXGTK__) && defined(__UNIX__))
+
+#ifdef __WXGTK__
+    enum wxDisplayType
+    {
+        wxDisplayNone,
+        wxDisplayX11,
+        wxDisplayWayland
+    };
+#endif // __WXGTK__
+
+#endif // defined(__X__) || (defined(__WXGTK__) && defined(__UNIX__))
+
 } // export
