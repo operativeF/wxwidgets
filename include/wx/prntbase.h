@@ -46,6 +46,7 @@ class wxPrintAbortDialog;
 class wxStaticText;
 class wxPrintPageMaxCtrl;
 class wxPrintPageTextCtrl;
+class wxWindowDisabler;
 
 //----------------------------------------------------------------------------
 // error consts

@@ -397,37 +397,6 @@ bool wxSafeYield(wxWindow *win = nullptr, bool onlyIfNeeded = false);
 // in long calculations.
 bool wxCheckForInterrupt(wxWindow *wnd);
 
-// a class which disables all windows (except, may be, the given one) in its
-// ctor and enables them back in its dtor
-class wxWindowDisabler
-{
-public:
-    // this ctor conditionally disables all windows: if the argument is false,
-    // it doesn't do anything
-    wxWindowDisabler(bool disable = true);
-
-    // ctor disables all windows except winToSkip
-    wxWindowDisabler(wxWindow *winToSkip);
-
-    // dtor enables back all windows disabled by the ctor
-    ~wxWindowDisabler();
-
-   wxWindowDisabler& operator=(wxWindowDisabler&&) = delete;
-
-private:
-    // disable all windows except the given one (used by both ctors)
-    void DoDisable(wxWindow *winToSkip = nullptr);
-
-#if defined(__WXOSX__) && wxOSX_USE_COCOA
-    void AfterDisable(wxWindow* winToSkip);
-    void BeforeEnable();
-
-    wxEventLoop* m_modalEventLoop = NULL;
-#endif
-    std::vector<wxWindow*> m_winDisabled;
-    bool m_disabled;
-};
-
 // ----------------------------------------------------------------------------
 // X11 Display access
 // ----------------------------------------------------------------------------

@@ -1198,67 +1198,6 @@ std::string wxGetPasswordFromUser(std::string_view message,
 // wxSafeYield and supporting functions
 // ----------------------------------------------------------------------------
 
-wxWindowDisabler::wxWindowDisabler(bool disable)
-{
-    m_disabled = disable;
-    if ( disable )
-        DoDisable();
-}
-
-wxWindowDisabler::wxWindowDisabler(wxWindow *winToSkip)
-{
-    m_disabled = true;
-    DoDisable(winToSkip);
-}
-
-void wxWindowDisabler::DoDisable(wxWindow *winToSkip)
-{
-    // remember the top level windows which were already disabled, so that we
-    // don't reenable them later
-    wxWindowList::compatibility_iterator node;
-    for ( node = wxTopLevelWindows.GetFirst(); node; node = node->GetNext() )
-    {
-        wxWindow *winTop = node->GetData();
-        if ( winTop == winToSkip )
-            continue;
-
-        // we don't need to disable the hidden or already disabled windows
-        if ( winTop->IsEnabled() && winTop->IsShown() )
-        {
-            winTop->Disable();
-        }
-        else
-        {
-            m_winDisabled.push_back(winTop);
-        }
-    }
-
-#if defined(__WXOSX__) && wxOSX_USE_COCOA
-    AfterDisable(winToSkip);
-#endif
-}
-
-wxWindowDisabler::~wxWindowDisabler()
-{
-    if ( !m_disabled )
-        return;
-
-#if defined(__WXOSX__) && wxOSX_USE_COCOA
-    BeforeEnable();
-#endif
-
-    wxWindowList::compatibility_iterator node;
-    for ( node = wxTopLevelWindows.GetFirst(); node; node = node->GetNext() )
-    {
-        wxWindow *winTop = node->GetData();
-        if ( !wxVectorContains(m_winDisabled, winTop) )
-        {
-            winTop->Enable();
-        }
-        //else: had been already disabled, don't reenable
-    }
-}
-
 // Yield to other apps/messages and disable user input to all windows except
 // the given one
 bool wxSafeYield(wxWindow *win, bool onlyIfNeeded)

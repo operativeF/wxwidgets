@@ -13,6 +13,8 @@
 #include "wx/apptrait.h"
 #include "wx/scopeguard.h"
 #include "wx/private/eventloopsourcesmanager.h"
+#include "wx/window.h"
+#include "wx/vector.h"
 
 // Counts currently existing event loops.
 //
@@ -375,3 +377,63 @@ void wxEventLoopManual::ScheduleExit(int rc)
 
 #endif // WX_WINDOWS || __WXMAC__ || __WXDFB__
 
+wxWindowDisabler::wxWindowDisabler(bool disable)
+{
+    m_disabled = disable;
+    if ( disable )
+        DoDisable();
+}
+
+wxWindowDisabler::wxWindowDisabler(wxWindow *winToSkip)
+{
+    m_disabled = true;
+    DoDisable(winToSkip);
+}
+
+void wxWindowDisabler::DoDisable(wxWindow *winToSkip)
+{
+    // remember the top level windows which were already disabled, so that we
+    // don't reenable them later
+    wxWindowList::compatibility_iterator node;
+    for ( node = wxTopLevelWindows.GetFirst(); node; node = node->GetNext() )
+    {
+        wxWindow *winTop = node->GetData();
+        if ( winTop == winToSkip )
+            continue;
+
+        // we don't need to disable the hidden or already disabled windows
+        if ( winTop->IsEnabled() && winTop->IsShown() )
+        {
+            winTop->Disable();
+        }
+        else
+        {
+            m_winDisabled.push_back(winTop);
+        }
+    }
+
+#if defined(__WXOSX__) && wxOSX_USE_COCOA
+    AfterDisable(winToSkip);
+#endif
+}
+
+wxWindowDisabler::~wxWindowDisabler()
+{
+    if ( !m_disabled )
+        return;
+
+#if defined(__WXOSX__) && wxOSX_USE_COCOA
+    BeforeEnable();
+#endif
+
+    wxWindowList::compatibility_iterator node;
+    for ( node = wxTopLevelWindows.GetFirst(); node; node = node->GetNext() )
+    {
+        wxWindow *winTop = node->GetData();
+        if ( !wxVectorContains(m_winDisabled, winTop) )
+        {
+            winTop->Enable();
+        }
+        //else: had been already disabled, don't reenable
+    }
+}
