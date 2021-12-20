@@ -953,31 +953,6 @@ wxString wxStripMenuCodes(const wxString& in, unsigned int flags)
 // Window search functions
 // ----------------------------------------------------------------------------
 
-/*
- * If parent is non-NULL, look through children for a label or title
- * matching the specified string. If NULL, look through all top-level windows.
- *
- */
-
-wxWindow *
-wxFindWindowByLabel (const std::string& title, wxWindow * parent)
-{
-    return wxWindow::FindWindowByLabel( title, parent );
-}
-
-
-/*
- * If parent is non-NULL, look through children for a name
- * matching the specified string. If NULL, look through all top-level windows.
- *
- */
-
-wxWindow *
-wxFindWindowByName (const wxString& name, wxWindow * parent)
-{
-    return wxWindow::FindWindowByName( name, parent );
-}
-
 // Returns menu item id or wxNOT_FOUND if none.
 int
 wxFindMenuItemId(wxFrame *frame,
@@ -1222,13 +1197,6 @@ std::string wxGetPasswordFromUser(std::string_view message,
 // ----------------------------------------------------------------------------
 // wxSafeYield and supporting functions
 // ----------------------------------------------------------------------------
-
-void wxEnableTopLevelWindows(bool enable)
-{
-    wxWindowList::compatibility_iterator node;
-    for ( node = wxTopLevelWindows.GetFirst(); node; node = node->GetNext() )
-        node->GetData()->Enable(enable);
-}
 
 wxWindowDisabler::wxWindowDisabler(bool disable)
 {

@@ -386,18 +386,6 @@ int wxFindMenuItemId(wxFrame *frame, const wxString& menuString, const wxString&
 wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt);
 wxWindow* wxFindWindowAtPoint(const wxPoint& pt);
 
-// NB: this function is obsolete, use wxWindow::FindWindowByLabel() instead
-//
-// Find the window/widget with the given title or label.
-// Pass a parent to begin the search from, or NULL to look through
-// all windows.
-wxWindow* wxFindWindowByLabel(const std::string& title, wxWindow *parent = nullptr);
-
-// NB: this function is obsolete, use wxWindow::FindWindowByName() instead
-//
-// Find window by name, and if that fails, by label.
-wxWindow* wxFindWindowByName(const wxString& name, wxWindow *parent = nullptr);
-
 // ----------------------------------------------------------------------------
 // Message/event queue helpers
 // ----------------------------------------------------------------------------
@@ -405,15 +393,9 @@ wxWindow* wxFindWindowByName(const wxString& name, wxWindow *parent = nullptr);
 // Yield to other apps/messages and disable user input
 bool wxSafeYield(wxWindow *win = nullptr, bool onlyIfNeeded = false);
 
-// Enable or disable input to all top level windows
-void wxEnableTopLevelWindows(bool enable = true);
-
 // Check whether this window wants to process messages, e.g. Stop button
 // in long calculations.
 bool wxCheckForInterrupt(wxWindow *wnd);
-
-// Consume all events until no more left
-void wxFlushEvents();
 
 // a class which disables all windows (except, may be, the given one) in its
 // ctor and enables them back in its dtor
