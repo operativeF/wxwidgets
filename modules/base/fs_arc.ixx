@@ -6,13 +6,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FS_ARC_H_
-#define _WX_FS_ARC_H_
-
-#if wxUSE_FS_ARCHIVE
+module;
 
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
+
+export module WX.FileSys.Arc;
+
+import <string>;
+
+#if wxUSE_FS_ARCHIVE
+
+export
+{
 
 WX_DECLARE_STRING_HASH_MAP(int, wxArchiveFilenameHashMap);
 
@@ -49,6 +55,6 @@ private:
     std::string DoFind();
 };
 
-#endif // wxUSE_FS_ARCHIVE
+} // export
 
-#endif // _WX_FS_ARC_H_
+#endif // wxUSE_FS_ARCHIVE

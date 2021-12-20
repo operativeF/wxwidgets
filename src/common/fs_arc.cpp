@@ -6,13 +6,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_FS_ARCHIVE
-
-#include "wx/fs_arc.h"
+module;
 
 #include "wx/intl.h"
 #include "wx/archive.h"
 #include "wx/private/fileback.h"
+
+module WX.FileSys.Arc;
 
 //---------------------------------------------------------------------------
 // wxArchiveFSCacheDataImpl
@@ -494,5 +494,3 @@ std::string wxArchiveFSHandler::DoFind()
 
     return match;
 }
-
-#endif // wxUSE_FS_ARCHIVE

@@ -6,12 +6,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FS_FILTER_H_
-#define _WX_FS_FILTER_H_
+module;
+
+#include "wx/filesys.h"
+
+export module WX.FileSys.Filter;
 
 #if wxUSE_FILESYSTEM
 
-#include "wx/filesys.h"
+export
+{
 
 //---------------------------------------------------------------------------
 // wxFilterFSHandler
@@ -29,6 +33,6 @@ public:
     std::string FindNext() override;
 };
 
-#endif // wxUSE_FILESYSTEM
+} // export
 
-#endif // _WX_FS_FILTER_H_
+#endif // wxUSE_FILESYSTEM

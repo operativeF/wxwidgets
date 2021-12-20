@@ -145,6 +145,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/mousestate.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/clntdata.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

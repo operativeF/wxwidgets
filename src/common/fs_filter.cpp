@@ -6,13 +6,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_FILESYSTEM
+module;
 
 #include "wx/filesys.h"
-#include "wx/fs_filter.h"
 #include "wx/stream.h"
 
 #include <memory>
+
+module WX.FileSys.Filter;
+
+import <string>;
+
+#if wxUSE_FILESYSTEM
 
 //----------------------------------------------------------------------------
 // wxFilterFSHandler
