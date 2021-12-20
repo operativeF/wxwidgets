@@ -115,18 +115,10 @@ std::string wxGetDataDir();
 
 #if wxUSE_GUI
 
-// Get the state of a key (true if pressed, false if not)
-// This is generally most useful getting the state of
-// the modifier or toggle keys.
-bool wxGetKeyState(wxKeyCode key);
-
 // Don't synthesize KeyUp events holding down a key and producing
 // KeyDown events with autorepeat. On by default and always on
 // in wxMSW.
 bool wxSetDetectableAutoRepeat( bool flag );
-
-// Returns the current state of the mouse position, buttons and modifiers
-wxMouseState wxGetMouseState();
 
 #endif // wxUSE_GUI
 
@@ -567,8 +559,6 @@ public:
     static const wxCursor &GetStoredCursor();
     static const wxCursor GetBusyCursor();
 };
-
-void wxGetMousePosition( int* x, int* y );
 
 // ----------------------------------------------------------------------------
 // X11 Display access

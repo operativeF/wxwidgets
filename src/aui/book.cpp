@@ -2454,7 +2454,7 @@ void wxAuiNotebook::OnTabBeginDrag(wxAuiNotebookEvent&)
 
 void wxAuiNotebook::OnTabDragMotion(wxAuiNotebookEvent& evt)
 {
-    wxPoint screen_pt = ::wxGetMousePosition();
+    wxPoint screen_pt = wxGetMousePosition();
     wxPoint client_pt = ScreenToClient(screen_pt);
     wxPoint zero(0,0);
 
@@ -2595,7 +2595,7 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
     src_tabs->SetCursor(wxCursor(wxCURSOR_ARROW));
 
     // get the mouse position, which will be used to determine the drop point
-    wxPoint mouse_screen_pt = ::wxGetMousePosition();
+    wxPoint mouse_screen_pt = wxGetMousePosition();
     wxPoint mouse_client_pt = ScreenToClient(mouse_screen_pt);
 
     // Update our selection (it may be updated again below but the code below

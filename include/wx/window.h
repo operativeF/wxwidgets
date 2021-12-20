@@ -2016,13 +2016,21 @@ wxWindowBase::ToDIP(const wxSize& sz, [[maybe_unused]] const wxWindowBase* w)
 extern wxWindow* wxFindWindowAtPointer(wxPoint& pt);
 
 // Get the current mouse position.
-extern wxPoint wxGetMousePosition();
+wxPoint wxGetMousePosition();
+
+// Returns the current state of the mouse position, buttons and modifiers
+wxMouseState wxGetMouseState();
 
 // get the currently active window of this application or NULL
 extern wxWindow *wxGetActiveWindow();
 
 // get the (first) top level parent window
 wxWindow* wxGetTopLevelParent(wxWindowBase *win);
+
+// Get the state of a key (true if pressed, false if not)
+// This is generally most useful getting the state of
+// the modifier or toggle keys.
+bool wxGetKeyState(wxKeyCode key);
 
 #if wxUSE_ACCESSIBILITY
 // ----------------------------------------------------------------------------

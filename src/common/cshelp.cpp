@@ -16,7 +16,6 @@
 
 #if wxUSE_MS_HTML_HELP
     #include "wx/msw/helpchm.h"     // for ShowContextHelpPopup
-    #include "wx/utils.h"           // for wxGetMousePosition()
 #endif
 
 #include <fmt/core.h>

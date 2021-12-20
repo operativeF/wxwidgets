@@ -1004,7 +1004,7 @@ void wxAuiToolBar::RefreshOverflowState()
 
 
     // find out the mouse's current position
-    wxPoint pt = ::wxGetMousePosition();
+    wxPoint pt = wxGetMousePosition();
     pt = this->ScreenToClient(pt);
 
     // find out if the mouse cursor is inside the dropdown rectangle

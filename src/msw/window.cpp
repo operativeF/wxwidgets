@@ -6949,7 +6949,6 @@ bool wxGetKeyState(wxKeyCode key)
     }
 }
 
-
 wxMouseState wxGetMouseState()
 {
     wxMouseState ms;
@@ -6971,7 +6970,6 @@ wxMouseState wxGetMouseState()
 
     return ms;
 }
-
 
 wxWindow *wxGetActiveWindow()
 {

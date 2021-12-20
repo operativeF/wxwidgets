@@ -107,15 +107,15 @@ wxTipWindow::wxTipWindow(wxWindow *parent,
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOTEXT));
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOBK));
 
-    int x, y;
-    wxGetMousePosition(&x, &y);
+    
+    auto mousePos = wxGetMousePosition();
 
     // move to the center of the target display so wxTipWindowView will use the
     // correct DPI
     wxPoint posScreen;
     wxSize sizeScreen;
 
-    const int displayNum = wxDisplay::GetFromPoint(wxPoint(x, y));
+    const int displayNum = wxDisplay::GetFromPoint(mousePos);
     if ( displayNum != wxNOT_FOUND )
     {
         const wxRect rectScreen = wxDisplay(displayNum).GetGeometry();
@@ -143,11 +143,11 @@ wxTipWindow::wxTipWindow(wxWindow *parent,
     //     cursors hot spot is... it would be nice if we could find this out
     //     though
     int cursorOffset = wxSystemSettings::GetMetric(wxSYS_CURSOR_Y, this) / 2;
-    if (y + cursorOffset >= posScreen.y + sizeScreen.y)
-        cursorOffset = posScreen.y + sizeScreen.y - y - 1;
-    y += cursorOffset;
+    if (mousePos.y + cursorOffset >= posScreen.y + sizeScreen.y)
+        cursorOffset = posScreen.y + sizeScreen.y - mousePos.y - 1;
+    mousePos.y += cursorOffset;
 
-    Position(wxPoint(x, y), wxSize(0,0));
+    Position(mousePos, wxSize(0,0));
     Popup(m_view);
     #ifdef __WXGTK__
         m_view->CaptureMouse();

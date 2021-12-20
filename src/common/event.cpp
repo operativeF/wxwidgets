@@ -737,7 +737,10 @@ void wxKeyEvent::InitPositionIfNecessary() const
 
     // The only position we can possibly associate with the keyboard event on
     // the platforms where it doesn't carry it already is the mouse position.
-    wxGetMousePosition(&self.m_x, &self.m_y);
+    auto mousePos = wxGetMousePosition();
+
+    self.m_x = mousePos.x;
+    self.m_y = mousePos.y;
 
     // If this event is associated with a window, the position should be in its
     // client coordinates, but otherwise leave it in screen coordinates as what

@@ -1618,7 +1618,7 @@ wxPGWindowList wxPGCheckBoxEditor::CreateControls( wxPropertyGrid* propGrid,
         if ( propGrid->HasInternalFlag(wxPG_FL_ACTIVATION_BY_CLICK) )
         {
             // Send the event to toggle the value (if mouse cursor is on the item)
-            wxPoint point = cb->ScreenToClient(::wxGetMousePosition());
+            wxPoint point = cb->ScreenToClient(wxGetMousePosition());
             wxCommandEvent *evt = new wxCommandEvent(wxEVT_CB_LEFT_CLICK_ACTIVATE, cb->GetId());
             // Store mouse pointer position
             evt->SetInt(point.x);

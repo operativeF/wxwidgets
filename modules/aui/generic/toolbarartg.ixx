@@ -846,7 +846,7 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
     }
 
     // find out where to put the popup menu of window items
-    wxPoint pt = ::wxGetMousePosition();
+    wxPoint pt = wxGetMousePosition();
     pt = wnd->ScreenToClient(pt);
 
     // find out the screen coordinate at the bottom of the tab ctrl

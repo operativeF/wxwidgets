@@ -5344,7 +5344,7 @@ void wxPropertyGrid::OnMouseEntry( wxMouseEvent &event )
         SetCursor( wxNullCursor );
 
         // Get real cursor position
-        wxPoint pt = ScreenToClient(::wxGetMousePosition());
+        wxPoint pt = ScreenToClient(wxGetMousePosition());
 
         if ( ( pt.x <= 0 || pt.y <= 0 || pt.x >= m_width || pt.y >= m_height ) )
         {

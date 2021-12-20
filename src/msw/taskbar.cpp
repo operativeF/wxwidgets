@@ -294,10 +294,9 @@ bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
 
     s_inPopup = true;
 
-    int         x, y;
-    wxGetMousePosition(&x, &y);
+    auto mousePos = wxGetMousePosition();
 
-    m_win->Move(wxPoint{x, y});
+    m_win->Move(mousePos);
 
     m_win->PushEventHandler(this);
 
