@@ -26,6 +26,7 @@ set(AUI_CMN_INF
 
 set(AUI_MSW_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/msw/tabartmsw.ixx
+    ${CMAKE_SOURCE_DIR}/src/aui/msw/tabartmsw.cpp
 )
 
 if(wxUSE_MDI)
