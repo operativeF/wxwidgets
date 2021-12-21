@@ -430,20 +430,12 @@ bool wxGetDiskSpace(const std::string& path,
     #define UL(ul) ul
     if ( pTotal )
     {
-#if wxUSE_LONGLONG
-        *pTotal = wxDiskspaceSize_t(UL(bytesTotal).HighPart, UL(bytesTotal).LowPart);
-#else
-        *pTotal = wxDiskspaceSize_t(UL(bytesTotal).LowPart);
-#endif
+        *pTotal = wxDiskspaceSize_t(bytesTotal.QuadPart);
     }
 
     if ( pFree )
     {
-#if wxUSE_LONGLONG
-        *pFree = wxLongLong(UL(bytesFree).HighPart, UL(bytesFree).LowPart);
-#else
-        *pFree = wxDiskspaceSize_t(UL(bytesFree).LowPart);
-#endif
+        *pFree = wxDiskspaceSize_t(bytesFree.QuadPart);
     }
 
     return true;

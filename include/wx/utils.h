@@ -24,10 +24,6 @@
     #include "wx/gdicmn.h"
 #endif
 
-// need this for wxGetDiskSpace() as we can't, unfortunately, forward declare
-// wxLongLong
-#include "wx/longlong.h"
-
 #if defined(__X__)
     #include <dirent.h>
     #include <unistd.h>
@@ -63,11 +59,7 @@ class wxEventLoop;
 // wxGetFreeMemory can return huge amount of memory on 32-bit platforms as well
 // so to always use long long for its result type on all platforms which
 // support it
-#if wxUSE_LONGLONG
-    using wxMemorySize = wxLongLong;
-#else
-    using wxMemorySize = long;
-#endif
+using wxMemorySize = std::int64_t;
 
 // ----------------------------------------------------------------------------
 // Miscellaneous functions
@@ -323,12 +315,7 @@ std::string wxGetHomeDir(std::string* pstr);
 // return empty string on error
 std::string wxGetUserHome(const std::string& user = {});
 
-
-#if wxUSE_LONGLONG
-    using wxDiskspaceSize_t = wxLongLong;
-#else
-    using wxDiskspaceSize_t = long;
-#endif
+using wxDiskspaceSize_t = std::int64_t;
 
 // get number of total/free bytes on the disk where path belongs
 bool wxGetDiskSpace(const std::string& path,
