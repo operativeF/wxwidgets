@@ -11,6 +11,7 @@
 module;
 
 #include "wx/colour.h"
+#include "wx/dc.h"
 #include "wx/font.h"
 #include "wx/pen.h"
 #include "wx/brush.h"
@@ -29,8 +30,6 @@ import <string>;
 
 export
 {
-
-class wxDC;
 
 class wxAuiTabArt
 {
