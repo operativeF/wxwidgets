@@ -335,25 +335,6 @@ bool wxGetDiskSpace(const std::string& path,
                                      wxDiskspaceSize_t *pTotal = nullptr,
                                      wxDiskspaceSize_t *pFree = nullptr);
 
-
-
-// See wx/vector.h for more about this hack.
-#ifndef wxQSORT_DECLARED
-
-#define wxQSORT_DECLARED
-
-typedef int (*wxSortCallback)(const void* pItem1,
-                              const void* pItem2,
-                              const void* user_data);
-
-
-void wxQsort(void* pbase, size_t total_elems,
-                              size_t size, wxSortCallback cmp,
-                              const void* user_data);
-
-#endif // !wxQSORT_DECLARED
-
-
 #if wxUSE_GUI // GUI only things from now on
 
 // ----------------------------------------------------------------------------
