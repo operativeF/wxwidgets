@@ -36,7 +36,10 @@ if(wxUSE_MDI)
 endif()
 
 if(wxUSE_UXTHEME AND WIN32)
-    set(AUI_BAR_ART_SRC ${CMAKE_SOURCE_DIR}/modules/aui/msw/barartmsw.ixx)
+    list(APPEND AUI_BAR_ART_SRC
+        ${CMAKE_SOURCE_DIR}/modules/aui/msw/barartmsw.ixx
+        ${CMAKE_SOURCE_DIR}/src/aui/msw/barartmsw.cpp
+    )
 endif()
 
 if(wxUSE_XRC)
