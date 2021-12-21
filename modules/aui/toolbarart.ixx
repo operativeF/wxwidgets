@@ -97,6 +97,6 @@ public:
 
     // Provide opportunity for subclasses to recalculate colours
     virtual void UpdateColoursFromSystem() {}
-}; // export wxAuiToolBarArt
+};
 
 } // export

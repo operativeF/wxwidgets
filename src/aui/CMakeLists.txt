@@ -1,9 +1,9 @@
 set(AUI_CMN_SRC
     ${CMAKE_SOURCE_DIR}/src/aui/auibar.cpp
+    ${CMAKE_SOURCE_DIR}/src/aui/floatpane.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/framemanager.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/book.cpp
     ${CMAKE_SOURCE_DIR}/src/aui/tabart.cpp
-    ${CMAKE_SOURCE_DIR}/src/aui/tabmdi.cpp
 )
 
 set(AUI_CMN_INF
@@ -28,7 +28,10 @@ set(AUI_MSW_INF
 )
 
 if(wxUSE_MDI)
-    set(AUI_MDI_SRC ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx)
+    list(APPEND AUI_MDI_SRC
+            ${CMAKE_SOURCE_DIR}/modules/aui/tabmdi.ixx
+            ${CMAKE_SOURCE_DIR}/src/aui/tabmdi.cpp
+    )
 endif()
 
 if(wxUSE_UXTHEME AND WIN32)
