@@ -10,6 +10,7 @@
 
 #include "wx/process.h"
 #include "wx/stream.h"
+#include "wx/utils.h"
 
 // ----------------------------------------------------------------------------
 // event tables and such

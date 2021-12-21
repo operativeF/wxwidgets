@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MENUS
 
 #include "wx/intl.h"
@@ -18,6 +15,7 @@
 #include "wx/menu.h"
 #include "wx/frame.h"
 #include "wx/stockitem.h"
+#include "wx/utils.h"
 
 import Utils.Strings;
 

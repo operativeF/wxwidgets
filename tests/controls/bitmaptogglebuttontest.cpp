@@ -19,6 +19,7 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/artprov.h"
+#include "wx/utils.h"
 
 import WX.Test.Prec;
 

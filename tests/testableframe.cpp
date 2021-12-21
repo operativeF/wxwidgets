@@ -10,6 +10,7 @@
 
 #include "wx/app.h"
 #include "testableframe.h"
+#include "wx/utils.h"
 
 import WX.Test.Prec;
 

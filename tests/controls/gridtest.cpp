@@ -17,6 +17,7 @@
 #include "testableframe.h"
 #include "asserthelper.h"
 #include "wx/uiaction.h"
+#include "wx/utils.h"
 
 #ifdef __WXGTK__
     #include "wx/stopwatch.h"

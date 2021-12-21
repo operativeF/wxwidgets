@@ -15,6 +15,7 @@ module;
 #include "wx/pen.h"
 #include "wx/bitmap.h"
 #include "wx/dcbuffer.h"
+#include "wx/utils.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"

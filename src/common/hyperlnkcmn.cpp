@@ -16,6 +16,7 @@
 
 #include "wx/hyperlink.h"
 #include "wx/log.h"
+#include "wx/utils.h"
 
 // ============================================================================
 // implementation

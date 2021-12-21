@@ -25,6 +25,7 @@
 #include "wx/log.h"
 #include "wx/socket.h"
 #include "wx/evtloop.h"
+#include "wx/utils.h"
 
 import Utils.Strings;
 import WX.Test.Prec;

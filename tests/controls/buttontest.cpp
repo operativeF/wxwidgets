@@ -16,6 +16,8 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/artprov.h"
+#include "wx/utils.h"
+
 //For CHECK_EQ to work a class must have a stream output function
 //for those classes which do not have them by default we define them in
 //asserthelper.h so they can be reused

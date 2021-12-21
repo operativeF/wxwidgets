@@ -12,6 +12,7 @@
 #include "wx/app.h"
 #include "wx/bitmap.h"
 #include "wx/icon.h"
+#include "wx/utils.h"
 
 #if wxUSE_PNG_RESOURCE_HANDLER
     import WX.Image;

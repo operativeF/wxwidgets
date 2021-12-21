@@ -16,6 +16,7 @@
 
 #include "wx/msw/private.h"
 
+#include "wx/utils.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 

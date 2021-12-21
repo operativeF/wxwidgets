@@ -15,6 +15,7 @@
 #include "wx/icon.h"
 #include "wx/palette.h"
 #include "wx/log.h"
+#include "wx/utils.h"
 
 #include "wx/url.h"
 #include "wx/mstream.h"

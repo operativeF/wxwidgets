@@ -16,6 +16,7 @@
 #include "wx/textctrl.h"
 #include "wx/translation.h"
 #include "wx/uiaction.h"
+#include "wx/utils.h"
 
 import WX.Test.Prec;
 

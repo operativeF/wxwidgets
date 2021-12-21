@@ -20,6 +20,7 @@
 #include "wx/generic/dirctrlg.h" // for wxFileIconsTable
 #include "wx/dir.h"
 #include "wx/imaglist.h"
+#include "wx/utils.h"
 
 #include <boost/nowide/convert.hpp>
 

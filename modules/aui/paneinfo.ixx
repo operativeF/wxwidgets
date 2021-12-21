@@ -11,6 +11,7 @@
 module;
 
 #include "wx/bitmap.h"
+#include "wx/frame.h"
 #include "wx/window.h"
 
 export module WX.AUI.PaneInfo;

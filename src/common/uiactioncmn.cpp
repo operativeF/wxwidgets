@@ -22,6 +22,7 @@
 #endif // wxNO_RTTI
 
 #include "wx/private/uiaction.h"
+#include "wx/utils.h"
 
 #include <cassert>
 

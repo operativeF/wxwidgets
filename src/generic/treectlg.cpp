@@ -20,6 +20,7 @@
 #include "wx/generic/treectlg.h"
 #include "wx/imaglist.h"
 #include "wx/itemattr.h"
+#include "wx/utils.h"
 
 #include "wx/renderer.h"
 

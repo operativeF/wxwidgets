@@ -14,6 +14,7 @@
 #include "wx/event.h"
 #include "wx/log.h"
 #include "wx/ctrlsub.h"
+#include "wx/utils.h"
 
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"

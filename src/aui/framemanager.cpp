@@ -17,6 +17,7 @@ module;
 #include "wx/app.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
+#include "wx/frame.h"
 #include "wx/panel.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
@@ -24,6 +25,7 @@ module;
 #include "wx/toolbar.h"
 #include "wx/statusbr.h"
 #include "wx/timer.h"
+#include "wx/window.h"
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes

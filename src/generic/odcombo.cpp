@@ -16,6 +16,7 @@
 #include "wx/dcclient.h"
 #include "wx/dialog.h"
 #include "wx/textctrl.h"
+#include "wx/utils.h"
 
 #include "wx/combo.h"
 

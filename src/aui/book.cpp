@@ -17,6 +17,7 @@ module;
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/frame.h"
+#include "wx/utils.h"
 #include "wx/window.h"
 
 #ifdef __WXMAC__

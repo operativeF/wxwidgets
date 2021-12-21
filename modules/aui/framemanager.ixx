@@ -12,6 +12,7 @@ module;
 
 #include "wx/timer.h"
 #include "wx/bitmap.h"
+#include "wx/frame.h"
 #include "wx/window.h"
 
 export module WX.AUI.FrameManager;

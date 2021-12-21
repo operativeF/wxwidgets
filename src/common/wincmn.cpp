@@ -27,6 +27,7 @@
 #include "wx/scrolbar.h"
 #include "wx/menu.h"
 #include "wx/button.h"
+#include "wx/utils.h"
 
 #if wxUSE_DRAG_AND_DROP
     #include "wx/dnd.h"

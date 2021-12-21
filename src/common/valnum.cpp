@@ -13,6 +13,7 @@
 #include "wx/combobox.h"
 #include "wx/valnum.h"
 #include "wx/numformatter.h"
+#include "wx/utils.h"
 
 import WX.Utils.Cast;
 

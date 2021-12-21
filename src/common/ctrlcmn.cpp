@@ -16,6 +16,7 @@
 #include "wx/radiobut.h"
 #include "wx/statbmp.h"
 #include "wx/bitmap.h"
+#include "wx/utils.h"
 
 #include "wx/private/markupparser.h"
 
