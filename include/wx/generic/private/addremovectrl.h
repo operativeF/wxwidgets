@@ -22,10 +22,10 @@ public:
                     wxWindow* ctrlItems)
         : wxAddRemoveImplWithButtons(adaptor, parent, ctrlItems)
     {
-        m_btnAdd = new wxButton(parent, wxID_ADD, GetAddButtonLabel(),
+        m_btnAdd = new wxButton(parent, wxID_ADD, AddButtonLabel,
                                 wxDefaultPosition, wxDefaultSize,
                                 wxBU_EXACTFIT | wxBORDER_NONE);
-        m_btnRemove = new wxButton(parent, wxID_REMOVE, GetRemoveButtonLabel(),
+        m_btnRemove = new wxButton(parent, wxID_REMOVE, RemoveButtonLabel,
                                    wxDefaultPosition, wxDefaultSize,
                                    wxBU_EXACTFIT | wxBORDER_NONE);
 
@@ -42,16 +42,8 @@ public:
     }
 
 private:
-    static wxString GetAddButtonLabel()
-    {
-        return wchar_t{0xFF0B}; // FULLWIDTH PLUS SIGN
-    }
-
-    static wxString GetRemoveButtonLabel()
-    {
-        return wchar_t{0x2012}; // FIGURE DASH
-    }
-
+    static constexpr char AddButtonLabel[] = "\uFF0B"; // FULLWIDTH PLUS SIGN
+    static constexpr char RemoveButtonLabel[] = "\u2012"; // FIGURE DASH
 };
 
 #endif // _WX_GENERIC_PRIVATE_ADDREMOVECTRL_H_
