@@ -12,11 +12,12 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/mstream.h"
 
 #if wxUSE_GUI
     import WX.Image;
 #endif // wxUSE_GUI
+
+import WX.Cmn.MemStream;
 
 // represents a file entry in wxMemoryFS
 class wxMemoryFSFile

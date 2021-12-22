@@ -7,8 +7,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/log.h"
-#include "wx/mstream.h"
 #include "wx/zipstrm.h"
+
+import WX.Cmn.MemStream;
 
 #if wxDEBUG_LEVEL
 

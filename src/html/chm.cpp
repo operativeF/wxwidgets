@@ -15,12 +15,12 @@
 #include "wx/module.h"
 
 #include "wx/filesys.h"
-#include "wx/mstream.h"
 
 #include "wx/html/forcelnk.h"
 FORCE_LINK_ME(wxhtml_chm_support)
 
 import WX.Cmn.WFStream;
+import WX.Cmn.MemStream;
 
 import WX.File.Flags;
 

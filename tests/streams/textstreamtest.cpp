@@ -12,12 +12,11 @@
     #include "wx/longlong.h"
 #endif
 
-#include "wx/mstream.h"
-
 #include "testfile.h"
 
 import WX.Cmn.TextStream;
 import WX.Cmn.WFStream;
+import WX.Cmn.MemStream;
 
 // ----------------------------------------------------------------------------
 // test class

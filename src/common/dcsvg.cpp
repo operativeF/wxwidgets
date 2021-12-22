@@ -13,7 +13,6 @@
 #include "wx/icon.h"
 #include "wx/dcsvg.h"
 #include "wx/filename.h"
-#include "wx/mstream.h"
 #include "wx/scopedarray.h"
 
 #if wxUSE_MARKUP
@@ -25,6 +24,7 @@ import WX.Cmn.Base64;
 import WX.Image;
 import WX.Cfg.Flags;
 import WX.Cmn.WFStream;
+import WX.Cmn.MemStream;
 
 import Utils.Strings;
 

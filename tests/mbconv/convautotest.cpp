@@ -12,8 +12,7 @@
 
 #include "wx/convauto.h"
 
-#include "wx/mstream.h"
-
+import WX.Cmn.MemStream;
 import WX.Cmn.TextStream;
 
 // ----------------------------------------------------------------------------

@@ -11,7 +11,6 @@
 
 #include "wx/log.h"
 #include "wx/artprov.h"
-#include "wx/mstream.h"
 
 // ----------------------------------------------------------------------------
 // image data
@@ -55,6 +54,7 @@
 #include "../../art/tango/list_remove.h"
 
 import WX.Image;
+import WX.Cmn.MemStream;
 
 // ----------------------------------------------------------------------------
 // art provider class

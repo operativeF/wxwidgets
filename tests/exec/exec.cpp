@@ -16,12 +16,12 @@
 #include "wx/evtloop.h"
 #include "wx/file.h"
 #include "wx/filename.h"
-#include "wx/mstream.h"
 #include "wx/scopeguard.h"
 #include "wx/timer.h"
 
 import WX.Cmn.TextStream;
 import WX.Cmn.StrStream;
+import WX.Cmn.MemStream;
 
 import WX.Test.Prec;
 

@@ -11,8 +11,9 @@
 #include "testprec.h"
 
 #include "wx/url.h"
-#include "wx/mstream.h"
 #include "wx/utils.h"
+
+import WX.Cmn.MemStream;
 
 // ----------------------------------------------------------------------------
 // test class

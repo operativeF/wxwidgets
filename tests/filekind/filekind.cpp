@@ -19,7 +19,6 @@
 #include "wx/filename.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"
-#include "wx/mstream.h"
 
 #ifdef __VISUALC__
     #define isatty _isatty
@@ -31,6 +30,7 @@
 
 import WX.Cmn.FFile;
 import WX.Cmn.WFStream;
+import WX.Cmn.MemStream;
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

@@ -11,7 +11,6 @@
 
 #if wxUSE_WEBREQUEST && wxUSE_WEBREQUEST_WINHTTP
 
-#include "wx/mstream.h"
 #include "wx/dynlib.h"
 #include "wx/msw/private/webrequest_winhttp.h"
 
@@ -24,6 +23,7 @@
 #include <fmt/core.h>
 
 import WX.WinDef;
+import WX.Cmn.MemStream;
 
 // Helper class used to dynamically load the required symbols from winhttp.dll
 class wxWinHTTP

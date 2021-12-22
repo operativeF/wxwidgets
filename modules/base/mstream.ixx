@@ -8,16 +8,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WXMMSTREAM_H__
-#define _WX_WXMMSTREAM_H__
-
-#if wxUSE_STREAMS
+module;
 
 #include "wx/filefn.h"
 
-import WX.Cmn.Stream;
+export module WX.Cmn.MemStream;
 
+import WX.Cmn.Stream;
 import WX.File.Flags;
+
+#if wxUSE_STREAMS
+
+export
+{
 
 class wxMemoryOutputStream;
 
@@ -93,6 +96,6 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxMemoryOutputStream);
 };
 
-#endif // wxUSE_STREAMS
+} // export
 
-#endif // _WX_WXMMSTREAM_H__
+#endif // wxUSE_STREAMS

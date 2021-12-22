@@ -8,9 +8,10 @@
 
 #include "testprec.h"
 
-#include "wx/mstream.h"
 #include "wx/private/fileback.h"
 #include "bstream.h"
+
+import WX.Cmn.MemStream;
 
 const size_t TESTSIZE = 256;
 const size_t BUFSIZE = 100;

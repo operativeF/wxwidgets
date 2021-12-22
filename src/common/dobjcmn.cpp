@@ -11,13 +11,14 @@
 #if wxUSE_DATAOBJ
 
 #include "wx/dataobj.h"
-#include "wx/mstream.h"
 
 #include "wx/listimpl.cpp"
 
 WX_DEFINE_LIST(wxSimpleDataObjectList)
 
 import WX.Cmn.TextBuffer;
+import WX.Cmn.MemStream;
+
 import WX.Image;
 
 // ----------------------------------------------------------------------------

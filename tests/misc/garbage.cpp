@@ -13,13 +13,13 @@
 #include "wx/filename.h"
 #include "wx/icon.h"
 #include "wx/animate.h"
-#include "wx/mstream.h"
 #include "wx/dynlib.h"
 #include "wx/mediactrl.h"
 #include "wx/html/htmlwin.h"
 #include "wx/xrc/xmlres.h"
 
 import WX.Image;
+import WX.Cmn.MemStream;
 
 constexpr int GARBAGE_DATA_SIZE   = 1000000; // in bytes; ~ 1MB
 

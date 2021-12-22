@@ -8,14 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/mstream.h"
+#include "wx/filefn.h"
+
+module WX.Cmn.MemStream;
 
 import WX.Cmn.Stream;
 import WX.File.Flags;
-
 import WX.Utils.Cast;
+
+#if wxUSE_STREAMS
 
 // ----------------------------------------------------------------------------
 // wxMemoryInputStream

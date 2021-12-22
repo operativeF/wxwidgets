@@ -10,7 +10,6 @@
 #if wxUSE_WEBREQUEST
 
 #include "wx/webrequest.h"
-#include "wx/mstream.h"
 #include "wx/module.h"
 #include "wx/uri.h"
 #include "wx/filefn.h"
@@ -34,6 +33,7 @@
 #endif
 
 import WX.Cmn.WFStream;
+import WX.Cmn.MemStream;
 
 import WX.File.Flags;
 

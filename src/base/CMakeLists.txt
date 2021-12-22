@@ -153,6 +153,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/sstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/mstream.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

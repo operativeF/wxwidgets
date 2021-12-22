@@ -8,11 +8,10 @@
 
 #include "testprec.h"
 
-#include "wx/mstream.h"
-
 #include "bstream.h"
 
 import WX.File.Flags;
+import WX.Cmn.MemStream;
 
 #define DATABUFFER_SIZE     256
 

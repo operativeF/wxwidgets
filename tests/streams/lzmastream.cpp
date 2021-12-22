@@ -12,10 +12,11 @@
 
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
-#include "wx/mstream.h"
 #include "wx/lzmastream.h"
 
 #include "bstream.h"
+
+import WX.Cmn.MemStream;
 
 class LZMAStream : public BaseStreamTestCase<wxLZMAInputStream, wxLZMAOutputStream>
 {

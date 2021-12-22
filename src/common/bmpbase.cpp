@@ -13,11 +13,10 @@
 
 #if wxUSE_IMAGE && wxUSE_LIBPNG && wxUSE_STREAMS
     #define wxHAS_PNG_LOAD
-
-    #include "wx/mstream.h"
 #endif
 
 import WX.Image;
+import WX.Cmn.MemStream;
 
 // ----------------------------------------------------------------------------
 // wxVariant support
