@@ -251,8 +251,8 @@ wxString wxCallStrftime(const wxString& format, const tm* tm)
 static void ReplaceDefaultYearMonthWithCurrent(int *year,
                                                wxDateTime::Month *month)
 {
-    struct tm *tmNow = nullptr;
-    struct tm tmstruct;
+    std::tm *tmNow = nullptr;
+    std::tm tmstruct;
 
     if ( *year == wxDateTime::Inv_Year )
     {
@@ -270,13 +270,13 @@ static void ReplaceDefaultYearMonthWithCurrent(int *year,
     }
 }
 
-// fill the struct tm with default values
+// fill the std::tm with default values
 // NOTE: not static because used by datetimefmt.cpp
-void wxInitTm(struct tm& tm)
+void wxInitTm(std::tm& tm)
 {
-    // struct tm may have etxra fields (undocumented and with unportable
+    // std::tm may have etxra fields (undocumented and with unportable
     // names) which, nevertheless, must be set to 0
-    memset(&tm, 0, sizeof(struct tm));
+    memset(&tm, 0, sizeof(std::tm));
 
     tm.tm_mday = 1;   // mday 0 is invalid
     tm.tm_year = 76;  // any valid year
@@ -318,7 +318,7 @@ static int GetDSTOffset(wxLongLong t)
 // struct Tm
 // ----------------------------------------------------------------------------
 
-wxDateTime::Tm::Tm(const struct tm& tm, const TimeZone& tz)
+wxDateTime::Tm::Tm(const std::tm& tm, const TimeZone& tz)
     : m_tz(tz),
       sec((wxDateTime::wxDateTime_t)tm.tm_sec),
       min((wxDateTime::wxDateTime_t)tm.tm_min),
@@ -469,7 +469,7 @@ long wxDateTime::TimeZone::GetOffset() const
 // ----------------------------------------------------------------------------
 
 /* static */
-struct tm *wxDateTime::GetTmNow(struct tm *tmstruct)
+std::tm *wxDateTime::GetTmNow(std::tm *tmstruct)
 {
     time_t t = GetTimeNow();
     return wxLocaltime_r(&t, tmstruct);
@@ -815,8 +815,8 @@ wxDateTime::Country wxDateTime::GetCountry()
     {
         // try to guess from the time zone name
         time_t t = time(nullptr);
-        struct tm tmstruct;
-        struct tm *tm = wxLocaltime_r(&t, &tmstruct);
+        std::tm tmstruct;
+        std::tm *tm = wxLocaltime_r(&t, &tmstruct);
 
         wxString tz = wxCallStrftime("%Z", tm);
         if ( tz == "WET" || tz == "WEST" ||
@@ -1113,9 +1113,9 @@ wxDateTime wxDateTime::GetEndDST(int year, Country country)
 }
 
 // the values in the tm structure contain the local time
-wxDateTime& wxDateTime::Set(const struct tm& tm)
+wxDateTime& wxDateTime::Set(const std::tm& tm)
 {
-    struct tm tm2(tm);
+    std::tm tm2(tm);
     time_t timet = mktime(&tm2);
 
     if ( timet == (time_t)-1 )
@@ -1184,13 +1184,13 @@ wxDateTime& wxDateTime::Set(wxDateTime_t hour,
                       "Invalid time in wxDateTime::Set()" );
 
     // get the current date from system
-    struct tm tmstruct;
-    struct tm *tm = GetTmNow(&tmstruct);
+    std::tm tmstruct;
+    std::tm *tm = GetTmNow(&tmstruct);
 
     wxDATETIME_CHECK( tm, "wxLocaltime_r() failed" );
 
     // make a copy so it isn't clobbered by the call to mktime() below
-    struct tm tm1(*tm);
+    std::tm tm1(*tm);
 
     // adjust the time
     tm1.tm_hour = hour;
@@ -1198,7 +1198,7 @@ wxDateTime& wxDateTime::Set(wxDateTime_t hour,
     tm1.tm_sec = second;
 
     // and the DST in case it changes on this date
-    struct tm tm2(tm1);
+    std::tm tm2(tm1);
     mktime(&tm2);
     if ( tm2.tm_isdst != tm1.tm_isdst )
         tm1.tm_isdst = tm2.tm_isdst;
@@ -1238,7 +1238,7 @@ wxDateTime& wxDateTime::Set(wxDateTime_t day,
     {
         // use the standard library version if the date is in range - this is
         // probably more efficient than our code
-        struct tm tm;
+        std::tm tm;
         tm.tm_year = year - 1900;
         tm.tm_mon = month;
         tm.tm_mday = day;
@@ -1328,7 +1328,7 @@ wxDateTime wxDateTime::GetDateOnly() const
 
 wxDateTime& wxDateTime::SetFromDOS(unsigned long ddt)
 {
-    struct tm tm;
+    std::tm tm;
     wxInitTm(tm);
 
     long year = ddt & 0xFE000000;
@@ -1362,8 +1362,8 @@ wxDateTime& wxDateTime::SetFromDOS(unsigned long ddt)
 unsigned long wxDateTime::GetAsDOS() const
 {
     time_t ticks = GetTicks();
-    struct tm tmstruct;
-    struct tm *tm = wxLocaltime_r(&ticks, &tmstruct);
+    std::tm tmstruct;
+    std::tm *tm = wxLocaltime_r(&ticks, &tmstruct);
     wxCHECK_MSG( tm, ULONG_MAX, "time can't be represented in DOS format" );
 
     long year = tm->tm_year;
@@ -1419,7 +1419,7 @@ wxDateTime::Tm wxDateTime::GetTm(const TimeZone& tz) const
     if ( time != (time_t)-1 )
     {
         // Try to use the RTL.
-        struct tm tmstruct;
+        std::tm tmstruct;
         if ( const tm* tm = wxTryGetTm(tmstruct, time, tz) )
         {
             // adjust the milliseconds
@@ -2039,7 +2039,7 @@ int wxDateTime::IsDST(wxDateTime::Country country) const
     const time_t timet = GetTicks();
     if ( timet != (time_t)-1 )
     {
-        struct tm tmstruct;
+        std::tm tmstruct;
         const tm *tm = wxLocaltime_r(&timet, &tmstruct);
 
         wxCHECK_MSG( tm, -1, "wxLocaltime_r() failed" );

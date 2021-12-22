@@ -25,9 +25,11 @@ struct _SYSTEMTIME;
 #endif
 
 #include <fmt/core.h>
+
+#include <chrono>
+
 import WX.Utils.Cast;
 
-import <ctime>;
 import <vector>;
 
 // not all c-runtimes are based on 1/1/1970 being (time_t) 0
@@ -312,7 +314,7 @@ public:
         long m_offset{};
     };
 
-        // standard struct tm is limited to the years from 1900 (because
+        // standard std::tm is limited to the years from 1900 (because
         // tm_year field is the offset from 1900), so we use our own struct
         // instead to represent broken down time
         //
@@ -334,7 +336,7 @@ public:
         Tm() = default;
 
         // ctor from struct tm and the timezone
-        Tm(const struct tm& tm, const TimeZone& tz);
+        Tm(const std::tm& tm, const TimeZone& tz);
 
         // check that the given date/time is valid (in Gregorian calendar)
         bool IsValid() const;
@@ -469,7 +471,7 @@ public:
         // from time_t: seconds since the Epoch 00:00:00 UTC, Jan 1, 1970)
     inline wxDateTime(time_t timet);
         // from broken down time/date (only for standard Unix range)
-    inline wxDateTime(const struct tm& tm);
+    inline wxDateTime(const std::tm& tm);
         // from broken down time/date (any range)
     inline wxDateTime(const Tm& tm);
 
@@ -512,7 +514,7 @@ public:
     inline wxDateTime& Set(time_t timet);
 
         // set to given broken down time/date
-    wxDateTime& Set(const struct tm& tm);
+    wxDateTime& Set(const std::tm& tm);
 
         // set to given broken down time/date
     inline wxDateTime& Set(const Tm& tm);
@@ -565,7 +567,7 @@ public:
     wxDateTime& operator=(time_t timet) { return Set(timet); }
 
         // assignment operator from broken down time/date
-    wxDateTime& operator=(const struct tm& tm) { return Set(tm); }
+    wxDateTime& operator=(const std::tm& tm) { return Set(tm); }
 
         // assignment operator from broken down time/date
     wxDateTime& operator=(const Tm& tm) { return Set(tm); }
@@ -1123,14 +1125,14 @@ public:
     static time_t GetTimeNow() { return time(nullptr); }
 
     // another one to get the current time broken down
-    static struct tm *GetTmNow()
+    static std::tm *GetTmNow()
     {
-        static struct tm l_CurrentTime;
+        static std::tm l_CurrentTime;
         return GetTmNow(&l_CurrentTime);
     }
 
     // get current time using thread-safe function
-    static struct tm *GetTmNow(struct tm *tmstruct);
+    static std::tm *GetTmNow(std::tm *tmstruct);
 
 private:
     // the current country - as it's the same for all program objects (unless
@@ -1626,7 +1628,7 @@ inline bool wxDateTime::IsInStdRange() const
 /* static */
 inline wxDateTime wxDateTime::Now()
 {
-    struct tm tmstruct;
+    std::tm tmstruct;
     return wxDateTime(*GetTmNow(&tmstruct));
 }
 
@@ -1666,7 +1668,7 @@ inline wxDateTime::wxDateTime(time_t timet)
     Set(timet);
 }
 
-inline wxDateTime::wxDateTime(const struct tm& tm)
+inline wxDateTime::wxDateTime(const std::tm& tm)
 {
     Set(tm);
 }
