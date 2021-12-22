@@ -15,10 +15,12 @@
 
 #include "wx/object.h"
 #include "wx/string.h"
-#include "wx/stream.h"
 #include "wx/file.h"
 
+import WX.Cmn.Stream;
 import WX.Cmn.FFile;
+
+import WX.File.Flags;
 
 #if wxUSE_FILE
 

@@ -14,7 +14,8 @@
 #include "wx/datetime.h"
 #include "wx/filename.h"
 #include "wx/hashmap.h"
-#include "wx/stream.h"
+
+import WX.Cmn.Stream;
 
 import Utils.Strings;
 

@@ -17,6 +17,8 @@
 #include "wx/geometry/rect.h"
 #include "wx/uri.h"
 
+import WX.File.Flags;
+
 enum class wxMediaState
 {
     Stopped,

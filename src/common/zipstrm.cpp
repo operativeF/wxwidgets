@@ -23,6 +23,7 @@
 #include "zlib.h"
 
 import WX.Utils.Cast;
+import WX.File.Flags;
 
 // signatures for the various records (PKxx)
 enum {

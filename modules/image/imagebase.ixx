@@ -12,13 +12,12 @@ module;
 #include "wx/object.h"
 #include "wx/hashmap.h"
 
-#include "wx/stream.h"
-
 export module WX.Image.Base;
 
 import WX.Utils.Cast;
 import Utils.Geometry;
 import WX.WinDef;
+import WX.Cmn.Stream;
 
 import <string>;
 import <vector>;

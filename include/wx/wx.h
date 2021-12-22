@@ -22,7 +22,6 @@
 #include "wx/module.h"
 #include "wx/object.h"
 #include "wx/stopwatch.h"
-#include "wx/stream.h"
 #include "wx/string.h"
 #include "wx/timer.h"
 #include "wx/utils.h"

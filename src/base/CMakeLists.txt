@@ -147,6 +147,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/clntdata.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/stream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

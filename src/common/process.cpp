@@ -9,8 +9,9 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/process.h"
-#include "wx/stream.h"
 #include "wx/utils.h"
+
+import WX.Cmn.Stream;
 
 // ----------------------------------------------------------------------------
 // event tables and such

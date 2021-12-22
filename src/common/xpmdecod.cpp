@@ -98,8 +98,9 @@ license is as follows:
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/stream.h"
 #include "wx/palette.h"
+
+import WX.Cmn.Stream;
 
 import WX.Image;
 

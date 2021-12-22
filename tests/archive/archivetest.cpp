@@ -8,12 +8,6 @@
 
 #include "testprec.h"
 
-#ifndef WX_PRECOMP
-    import <string>;
-    import <list>;
-    import <map>;
-#endif
-
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
 
 #include "archivetest.h"
@@ -22,8 +16,13 @@
 
 #include "wx/zipstrm.h"
 
-using std::string;
+import WX.File.Flags;
 
+import <string>;
+import <list>;
+import <map>;
+
+using std::string;
 
 // Check whether member templates can be used
 //

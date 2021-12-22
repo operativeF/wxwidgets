@@ -23,8 +23,8 @@ module;
 export module WX.Image.JPEG;
 
 import WX.Utils.VersionInfo;
-
 import WX.Image.Base;
+import WX.File.Flags;
 
 //-----------------------------------------------------------------------------
 // wxJPEGHandler

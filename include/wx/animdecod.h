@@ -12,11 +12,12 @@
 #if wxUSE_STREAMS
 
 #include "wx/colour.h"
+#include "wx/filefn.h"
 #include "wx/log.h"
-#include "wx/stream.h"
 
 #include <chrono>
 
+import WX.Cmn.Stream;
 import Utils.Geometry;
 
 class wxImage;

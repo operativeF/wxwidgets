@@ -9,17 +9,22 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/stream.h"
+#include "wx/filefn.h"
 #include "wx/log.h"
 #include "wx/datstrm.h"
 #include "wx/scopeguard.h"
 
+module WX.Cmn.Stream;
+
 import WX.Cmn.TextFile;
 import WX.Utils.Cast;
+import WX.File.Flags;
 
 import <string>;
+
+#if wxUSE_STREAMS
 
 // ----------------------------------------------------------------------------
 // constants

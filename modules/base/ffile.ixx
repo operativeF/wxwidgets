@@ -16,6 +16,8 @@ module;
 
 export module WX.Cmn.FFile;
 
+import WX.File.Flags;
+
 #if wxUSE_FFILE
 
 export

@@ -1,8 +1,8 @@
 module;
 
-#include "wx/stream.h"
-
 export module WX.Image.CUR;
+
+import WX.Cmn.Stream;
 
 import WX.Image.ICO;
 

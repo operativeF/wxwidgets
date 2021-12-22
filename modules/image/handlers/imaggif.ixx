@@ -13,10 +13,11 @@ module;
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/utils.h"
-#include "wx/stream.h"
 #include "wx/scopedarray.h"
 
 export module WX.Image.GIF;
+
+import WX.Cmn.Stream;
 
 import WX.Image.Base;
 import WX.Image.Decoder.GIF;

@@ -10,9 +10,11 @@
 #ifndef __SCK_STREAM_H__
 #define __SCK_STREAM_H__
 
-#include "wx/stream.h"
 
 #if wxUSE_SOCKETS && wxUSE_STREAMS
+
+import WX.Cmn.Stream;
+import WX.File.Flags;
 
 class wxSocketBase;
 

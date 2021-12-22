@@ -31,6 +31,8 @@ import WX.Image.PNG;
 
 import Utils.Math;
 
+import WX.File.Flags;
+
 import <array>;
 
 export

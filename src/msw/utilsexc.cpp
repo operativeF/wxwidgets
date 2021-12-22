@@ -15,7 +15,7 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #if wxUSE_STREAMS
-    #include "wx/stream.h"
+import WX.Cmn.Stream;
 #endif
 #include "wx/module.h"
 

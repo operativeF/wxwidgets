@@ -11,8 +11,9 @@
 
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
 
-#include "wx/stream.h"
 #include "wx/filename.h"
+
+import WX.Cmn.Stream;
 
 import <utility>;
 

@@ -16,6 +16,8 @@
 #include "wx/log.h"
 #include "wx/mediactrl.h"
 
+import WX.File.Flags;
+
 //===========================================================================
 //
 // Implementation

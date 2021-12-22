@@ -11,8 +11,11 @@
 #if wxUSE_STREAMS
 
 #include "wx/sstream.h"
+#include "wx/string.h"
 
 import WX.Utils.Cast;
+
+import WX.File.Flags;
 
 // ============================================================================
 // wxStringInputStream implementation

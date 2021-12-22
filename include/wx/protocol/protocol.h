@@ -14,11 +14,12 @@
 #if wxUSE_PROTOCOL
 
 #include "wx/object.h"
-#include "wx/stream.h"
 
 #if wxUSE_SOCKETS
     #include "wx/socket.h"
 #endif
+
+import WX.Cmn.Stream;
 
 class wxProtocolLog;
 

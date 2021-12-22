@@ -14,7 +14,7 @@
 #include "wx/event.h"
 
 #if wxUSE_STREAMS
-    #include "wx/stream.h"
+import WX.Cmn.Stream;
 #endif
 
 // the wxProcess creation flags

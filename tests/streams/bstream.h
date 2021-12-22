@@ -21,6 +21,8 @@
 #define STREAM_TEST_SUBSUITE_NAMED_REGISTRATION(Name) \
     CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( Name, COMPOSE_TEST_NAME(Name) );
 
+import WX.File.Flags;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Template class that implements a test for all base stream functions.
 //

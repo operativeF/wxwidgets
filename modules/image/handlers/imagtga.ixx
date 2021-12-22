@@ -8,16 +8,18 @@
 
 module;
 
+#include "wx/filefn.h"
 #include "wx/gdicmn.h"
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/scopedarray.h"
-#include "wx/stream.h"
 
 export module WX.Image.TGA;
 
+import WX.Cmn.Stream;
 import WX.Image.Base;
 import WX.Utils.Cast;
+import WX.File.Flags;
 
 //-----------------------------------------------------------------------------
 // wxTGAHandler

@@ -12,13 +12,14 @@ module;
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/palette.h"
-#include "wx/stream.h"
 
 #include <png.h>
 
 #include <fmt/core.h>
 
 export module WX.Image.PNG;
+
+import WX.Cmn.Stream;
 
 import WX.Utils.VersionInfo;
 

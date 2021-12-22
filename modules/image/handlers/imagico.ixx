@@ -1,15 +1,20 @@
 module;
 
 #include "wx/private/icondir.h"
-#include "wx/stream.h"
+
+#include "wx/filefn.h"
 #include "wx/log.h"
 #include "wx/translation.h"
 
 export module WX.Image.ICO;
 
+import WX.Cmn.Stream;
+
 import WX.Image.Base;
 import WX.Image.BMP;
 import WX.Image.PNG;
+
+import WX.File.Flags;
 
 #if wxUSE_ICO_CUR
 

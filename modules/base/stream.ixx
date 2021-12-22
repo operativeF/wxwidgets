@@ -8,15 +8,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WXSTREAM_H__
-#define _WX_WXSTREAM_H__
+module;
+
+#include "wx/filefn.h"
+#include "wx/string.h"
+
+export module WX.Cmn.Stream;
+
+import WX.File.Flags;
+import WX.Cfg.Flags;
 
 #if wxUSE_STREAMS
 
-#include "wx/filefn.h"  // for wxFileOffset, wxInvalidOffset and wxSeekMode
-#include "wx/string.h"
-
-import WX.Cfg.Flags;
+export
+{
 
 class wxStreamBase;
 class wxInputStream;
@@ -654,7 +659,6 @@ protected:
     void InitParentStream(wxInputStream* stream);
 };
 
+} // export
 
 #endif // wxUSE_STREAMS
-
-#endif // _WX_WXSTREAM_H__

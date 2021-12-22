@@ -12,6 +12,8 @@
 #include "wx/archive.h"
 #include "wx/hashmap.h"
 
+import WX.File.Flags;
+
 import <cstdint>;
 import <utility>;
 

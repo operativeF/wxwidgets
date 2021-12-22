@@ -9,10 +9,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+#if wxUSE_FILE
+
 import <cstdio>;       // SEEK_xxx constants
 #include <cerrno>
 
-#if wxUSE_FILE
+import WX.File.Flags;
 
 // standard
 #if defined(WX_WINDOWS) && !defined(__GNUWIN32__)

@@ -9,7 +9,6 @@
 
 module;
 
-#include "wx/stream.h"
 #include "wx/animdecod.h"
 #include "wx/filefn.h"
 #include "wx/gdicmn.h"
@@ -24,6 +23,8 @@ export module WX.Image.Decoder.GIF;
 import WX.Image.Base;
 
 import WX.Utils.Cast;
+import WX.Cmn.Stream;
+import WX.File.Flags;
 
 import <array>;
 import <string>;

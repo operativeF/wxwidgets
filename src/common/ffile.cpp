@@ -18,6 +18,7 @@ module;
 module WX.Cmn.FFile;
 
 import WX.Utils.Cast;
+import WX.File.Flags;
 
 #if wxUSE_FFILE
 

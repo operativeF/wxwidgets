@@ -14,6 +14,8 @@
 #include "wx/utils.h"
 #include "wx/log.h"
 
+import WX.File.Flags;
+
 import <cctype>;
 import <cstring>;
 

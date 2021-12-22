@@ -18,6 +18,8 @@
 #include  "wx/filefn.h"
 #include  "wx/convauto.h"
 
+import WX.File.Flags;
+
 // ----------------------------------------------------------------------------
 // class wxFile: raw file IO
 //

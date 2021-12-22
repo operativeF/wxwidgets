@@ -8,14 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SOCKETS && wxUSE_STREAMS
 
 #include "wx/sckstrm.h"
-#include "wx/stream.h"
 #include "wx/socket.h"
+
+import WX.Cmn.Stream;
 
 // ---------------------------------------------------------------------------
 // wxSocketOutputStream

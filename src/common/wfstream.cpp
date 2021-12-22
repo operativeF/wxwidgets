@@ -11,7 +11,9 @@
 #if wxUSE_STREAMS
 
 #include "wx/wfstream.h"
-#include "wx/stream.h"
+
+import WX.Cmn.Stream;
+import WX.File.Flags;
 
 #if wxUSE_FILE
 

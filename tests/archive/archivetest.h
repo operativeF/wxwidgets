@@ -15,8 +15,11 @@
 
 #include "wx/wfstream.h"
 
-import <map>;
 #include <memory>
+
+import WX.File.Flags;
+
+import <map>;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Bit flags for options for the tests

@@ -12,7 +12,7 @@
 
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
-#include "wx/stream.h"
+import WX.Cmn.Stream;
 
 import WX.Utils.VersionInfo;
 

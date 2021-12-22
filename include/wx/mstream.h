@@ -13,7 +13,11 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/stream.h"
+#include "wx/filefn.h"
+
+import WX.Cmn.Stream;
+
+import WX.File.Flags;
 
 class wxMemoryOutputStream;
 

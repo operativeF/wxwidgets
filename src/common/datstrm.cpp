@@ -10,8 +10,9 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/stream.h"
 #include "wx/datstrm.h"
+
+import WX.Cmn.Stream;
 
 namespace
 {

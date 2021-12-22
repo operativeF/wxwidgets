@@ -10,12 +10,14 @@
 
 module;
 
-#include "wx/stream.h"
 #include "wx/convauto.h"
+#include "wx/string.h"
 
 #include <fmt/core.h>
 
 export module WX.Cmn.TextStream;
+
+import WX.Cmn.Stream;
 
 import <cstdint>;
 

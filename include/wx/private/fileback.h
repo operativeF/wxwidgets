@@ -11,7 +11,14 @@
 
 #if wxUSE_FILESYSTEM
 
-#include "wx/stream.h"
+#include "wx/filefn.h"
+
+import WX.Cmn.Stream;
+
+import WX.File.Flags;
+
+import <cstdint>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // Backs an input stream with memory or a file to make it seekable.

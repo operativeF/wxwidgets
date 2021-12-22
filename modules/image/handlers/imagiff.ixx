@@ -22,6 +22,8 @@ export module WX.Image.IFF;
 
 import WX.Image.Base;
 
+import WX.File.Flags;
+
 import <array>;
 
 //-----------------------------------------------------------------------------

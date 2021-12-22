@@ -30,6 +30,7 @@ import WX.Utils.VersionInfo;
 import Utils.Strings;
 import Utils.Geometry;
 import WX.Utils.Cast;
+import WX.File.Flags;
 
 import <charconv>;
 import <cstdlib>;

@@ -21,6 +21,8 @@
 #include "wx/html/forcelnk.h"
 FORCE_LINK_ME(wxhtml_chm_support)
 
+import WX.File.Flags;
+
 // ----------------------------------------------------------------------------
 /// wxChmTools
 /// <p>

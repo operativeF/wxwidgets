@@ -8,7 +8,7 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/stream.h"
+import WX.Cmn.Stream;
 
 // These functions are in a separate file so that statically linked apps
 // that do not call them to search for filter handlers will only link in

@@ -10,11 +10,12 @@ module;
 
 #include "wx/animdecod.h"
 #include "wx/gdicmn.h"
-#include "wx/stream.h"
 
 #include <chrono>
 
 export module WX.Image.Decoder.ANI;
+
+import WX.Cmn.Stream;
 
 import Utils.Geometry;
 

@@ -11,9 +11,13 @@
 #ifndef _WX_SSTREAM_H_
 #define _WX_SSTREAM_H_
 
-#include "wx/stream.h"
-
 #if wxUSE_STREAMS
+
+#include "wx/filefn.h"
+#include "wx/string.h"
+
+import WX.Cmn.Stream;
+import WX.File.Flags;
 
 // ----------------------------------------------------------------------------
 // wxStringInputStream is a stream reading from the given (fixed size) string

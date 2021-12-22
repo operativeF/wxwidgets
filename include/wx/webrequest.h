@@ -36,7 +36,7 @@ private:
 
 #include "wx/event.h"
 #include "wx/object.h"
-#include "wx/stream.h"
+import WX.Cmn.Stream;
 
 import WX.Utils.VersionInfo;
 

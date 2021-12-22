@@ -9,7 +9,6 @@
 module;
 
 #include "wx/gdicmn.h"
-#include "wx/stream.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/utils.h"
@@ -18,6 +17,8 @@ module;
 #include "wx/filename.h"
 
 export module WX.Image.XPM;
+
+import WX.Cmn.Stream;
 
 import WX.Image.Base;
 import Utils.Chars;

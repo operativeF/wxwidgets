@@ -9,11 +9,12 @@
 module;
 
 #include "wx/filesys.h"
-#include "wx/stream.h"
 
 #include <memory>
 
 module WX.FileSys.Filter;
+
+import WX.Cmn.Stream;
 
 import <string>;
 

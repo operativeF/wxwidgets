@@ -1,13 +1,14 @@
 module;
 
-#include "wx/stream.h"
+#include "wx/defs.h"
 
 export module WX.Image.ANI;
 
 import WX.Image.CUR;
-
 import WX.Image.Base;
 import WX.Image.Decoder.ANI;
+
+import WX.Cmn.Stream;
 
 #ifdef wxUSE_ICO_CUR
 

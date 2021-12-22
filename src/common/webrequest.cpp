@@ -34,6 +34,8 @@
 #include "wx/private/webrequest_curl.h"
 #endif
 
+import WX.File.Flags;
+
 extern const char wxWebSessionBackendWinHTTP[] = "WinHTTP";
 extern const char wxWebSessionBackendURLSession[] = "URLSession";
 extern const char wxWebSessionBackendCURL[] = "CURL";
