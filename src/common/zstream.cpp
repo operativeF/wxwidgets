@@ -8,25 +8,29 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_ZLIB && wxUSE_STREAMS
+module;
 
-#include "wx/zstream.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-
-import WX.Utils.VersionInfo;
-
 
 // normally, the compiler options should contain -I../zlib, but it is
 // apparently not the case for all MSW makefiles and so, unless we use
 // configure (which defines __WX_SETUP_H__) or it is explicitly overridden by
 // the user (who can define wxUSE_ZLIB_H_IN_PATH), we hardcode the path here
-#if defined(WX_WINDOWS) && !defined(__WX_SETUP_H__) && !defined(wxUSE_ZLIB_H_IN_PATH)
-    #include "../zlib/zlib.h"
-#else
-    #include "zlib.h"
+#if wxUSE_ZLIB
+    #if defined(WX_WINDOWS) && !defined(__WX_SETUP_H__) && !defined(wxUSE_ZLIB_H_IN_PATH)
+        #include "../zlib/zlib.h"
+    #else
+        #include "zlib.h"
+    #endif
 #endif
+
+module WX.Cmn.ZStream;
+
+import WX.Utils.VersionInfo;
+
+#if wxUSE_ZLIB && wxUSE_STREAMS
 
 enum {
     ZSTREAM_BUFFER_SIZE = 16384,

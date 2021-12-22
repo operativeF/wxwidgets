@@ -18,7 +18,6 @@
 #include "wx/utils.h"
 
 #include "wx/url.h"
-#include "wx/zstream.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
@@ -27,6 +26,7 @@ import WX.Test.Prec;
 
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
+import WX.Cmn.ZStream;
 
 import <algorithm>;
 import <iostream>;

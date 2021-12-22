@@ -7,14 +7,19 @@
 // Copyright:   (c) Guilhem Lavaux
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
-#ifndef _WX_WXZSTREAM_H__
-#define _WX_WXZSTREAM_H__
 
-#if wxUSE_ZLIB && wxUSE_STREAMS
+module;
+
+export module WX.Cmn.ZStream;
 
 import WX.Cmn.Stream;
 
 import WX.Utils.VersionInfo;
+
+#if wxUSE_ZLIB && wxUSE_STREAMS
+
+export
+{
 
 // Compression level
 enum wxZlibCompressionLevels {
@@ -140,9 +145,7 @@ private:
 
 wxVersionInfo wxGetZlibVersionInfo();
 
+} // export
+
 #endif
   // wxUSE_ZLIB && wxUSE_STREAMS
-
-#endif
-   // _WX_WXZSTREAM_H__
-

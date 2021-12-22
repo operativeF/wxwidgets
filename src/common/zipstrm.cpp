@@ -14,7 +14,6 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/zstream.h"
 #include "wx/scopedptr.h"
 
 #include "zlib.h"
@@ -24,6 +23,7 @@ import WX.File.Flags;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
 import WX.Cmn.DataStream;
+import WX.Cmn.ZStream;
 
 // signatures for the various records (PKxx)
 enum {

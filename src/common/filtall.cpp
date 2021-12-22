@@ -9,7 +9,7 @@
 #if wxUSE_STREAMS
 
 #if wxUSE_ZLIB
-#include "wx/zstream.h"
+import WX.Cmn.ZStream;
 #endif
 
 // Reference filter classes to ensure they are linked into a statically

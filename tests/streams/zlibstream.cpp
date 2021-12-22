@@ -8,7 +8,6 @@
 
 #include "testprec.h"
 
-#include "wx/zstream.h"
 #include "wx/buffer.h"
 
 #include "bstream.h"
@@ -16,6 +15,7 @@
 import WX.Cmn.TextStream;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
+import WX.Cmn.ZStream;
 
 using std::string;
 
