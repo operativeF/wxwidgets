@@ -1,13 +1,13 @@
 module;
 
-#include "wx/datstrm.h"
-
 export module Utils.Geometry.RectAA;
 
 import Utils.Bitfield;
 import Utils.Geometry.Point;
 import Utils.Geometry.Size;
 import Utils.Geometry.Rect;
+
+import WX.Cmn.DataStream;
 
 import <algorithm>;
 import <concepts>;

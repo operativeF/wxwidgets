@@ -10,10 +10,9 @@
 
 #include "testprec.h"
 
-#include "wx/datstrm.h"
-
 #include "testfile.h"
 
+import WX.Cmn.DataStream;
 import WX.Cmn.WFStream;
 
 import <vector>;

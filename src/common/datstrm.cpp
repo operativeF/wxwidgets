@@ -8,11 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/datstrm.h"
+#include "wx/defs.h"
+#include "wx/longlong.h"
+
+module WX.Cmn.DataStream;
 
 import WX.Cmn.Stream;
+
+#if wxUSE_STREAMS
 
 namespace
 {
@@ -782,5 +787,4 @@ wxDataOutputStream& wxDataOutputStream::operator<<(float f)
   return *this;
 }
 
-#endif
-  // wxUSE_STREAMS
+#endif // wxUSE_STREAMS

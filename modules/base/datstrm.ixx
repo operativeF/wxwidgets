@@ -8,14 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_DATSTREAM_H_
-#define _WX_DATSTREAM_H_
+module;
 
 #include "wx/longlong.h"
+
+export module WX.Cmn.DataStream;
 
 import <cstdint>;
 
 #if wxUSE_STREAMS
+
+export
+{
 
 class wxMBConv;
 class wxInputStream;
@@ -178,8 +182,7 @@ protected:
     wxOutputStream *m_output;
 };
 
-#endif
-  // wxUSE_STREAMS
+} // export
 
 #endif
-    // _WX_DATSTREAM_H_
+  // wxUSE_STREAMS

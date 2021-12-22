@@ -18,7 +18,6 @@
 #include "wx/log.h"
 #include "wx/app.h"
 
-#include "wx/datstrm.h"
 #include "wx/zstream.h"
 #include "wx/strconv.h"
 
@@ -26,6 +25,7 @@
 
 import WX.Utils.VersionInfo;
 import WX.Cmn.WFStream;
+import WX.Cmn.DataStream;
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxXML")

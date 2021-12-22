@@ -20,7 +20,8 @@
 #include "wx/ipcbase.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"
-#include "wx/datstrm.h"
+
+import WX.Cmn.DataStream;
 
 /*
  * Mini-DDE implementation
