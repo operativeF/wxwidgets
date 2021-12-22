@@ -20,12 +20,13 @@
 #include "wx/url.h"
 #include "wx/mstream.h"
 #include "wx/zstream.h"
-#include "wx/wfstream.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
 import WX.Image;
 import WX.Test.Prec;
+
+import WX.Cmn.WFStream;
 
 import <algorithm>;
 import <iostream>;

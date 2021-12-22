@@ -20,7 +20,6 @@
 
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
-#include "wx/wfstream.h"
 #include "wx/mstream.h"
 #include "wx/hashmap.h"
 
@@ -35,6 +34,7 @@
 
 import WX.Cmn.TextFile;
 import WX.Cmn.StrStream;
+import WX.Cmn.WFStream;
 
 import Utils.Position;
 import WX.Utils.Settings;

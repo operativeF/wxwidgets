@@ -17,10 +17,10 @@
 #include "wx/print.h"
 #include "wx/printdlg.h"
 #include "wx/richtext/richtextprint.h"
-#include "wx/wfstream.h"
 
 import Utils.Strings;
 import WX.Utils.Settings;
+import WX.Cmn.WFStream;
 
 /*!
  * wxRichTextPrintout

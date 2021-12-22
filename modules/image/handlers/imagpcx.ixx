@@ -12,11 +12,12 @@ module;
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/palette.h"
-#include "wx/wfstream.h"
 
 export module WX.Image.PCX;
 
 import WX.Image.Base;
+import WX.Cmn.Stream;
+import WX.Cmn.WFStream;
 
 #if wxUSE_PCX
 

@@ -15,13 +15,14 @@ module;
 #include "jpeglib.h"
 
 #include "wx/filefn.h"
-#include "wx/wfstream.h"
 
 // For JPEG library error handling
 #include <csetjmp>
 
 export module WX.Image.JPEG;
 
+import WX.Cmn.Stream;
+import WX.Cmn.WFStream;
 import WX.Utils.VersionInfo;
 import WX.Image.Base;
 import WX.File.Flags;

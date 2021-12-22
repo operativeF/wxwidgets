@@ -16,10 +16,11 @@
 
 #include "wx/filesys.h"
 #include "wx/mstream.h"
-#include "wx/wfstream.h"
 
 #include "wx/html/forcelnk.h"
 FORCE_LINK_ME(wxhtml_chm_support)
+
+import WX.Cmn.WFStream;
 
 import WX.File.Flags;
 

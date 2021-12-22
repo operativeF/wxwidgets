@@ -11,7 +11,8 @@
 #if wxUSE_STREAMS
 
 #include "wx/filename.h"
-#include "wx/wfstream.h"
+
+import WX.Cmn.WFStream;
 
 // --------------------------------------------------------------------------
 // test class

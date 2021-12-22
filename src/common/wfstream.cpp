@@ -8,12 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/wfstream.h"
+#include "wx/filefn.h"
+
+module WX.Cmn.WFStream;
 
 import WX.Cmn.Stream;
 import WX.File.Flags;
+
+import <cstdint>;
+
+#if wxUSE_STREAMS
 
 #if wxUSE_FILE
 

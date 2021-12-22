@@ -14,13 +14,13 @@
 #include "wx/imagxpm.h"
 #include "wx/xml/xml.h"
 
-#include "wx/wfstream.h"
 #include "wx/xrc/xmlres.h"
 #include "wx/xrc/xh_bmp.h"
 
 #include "testfile.h"
 
 import WX.Cmn.StrStream;
+import WX.Cmn.WFStream;
 
 import WX.Test.Prec;
 

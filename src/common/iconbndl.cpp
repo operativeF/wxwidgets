@@ -14,13 +14,13 @@
 #include "wx/intl.h"
 #include "wx/bitmap.h"
 #include "wx/utils.h"
-#include "wx/wfstream.h"
 
 #ifdef WX_WINDOWS
     #include "wx/private/icondir.h"
 #endif
 
 import WX.Cmn.Stream;
+import WX.Cmn.WFStream;
 
 import WX.Image;
 import WX.Utils.Settings;

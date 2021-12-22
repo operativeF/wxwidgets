@@ -10,13 +10,13 @@
 
 #include "wx/filesys.h"
 #include "wx/module.h"
-#include "wx/wfstream.h"
 #include "wx/mimetype.h"
 #include "wx/filename.h"
 #include "wx/private/fileback.h"
 #include "wx/utils.h"
 
 import WX.Cmn.SysOpt;
+import WX.Cmn.WFStream;
 
 import Utils.Chars;
 import Utils.Strings;

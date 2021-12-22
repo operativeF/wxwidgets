@@ -18,12 +18,12 @@
 #include "wx/zstream.h"
 #include "wx/mstream.h"
 #include "wx/scopedptr.h"
-#include "wx/wfstream.h"
 
 #include "zlib.h"
 
 import WX.Utils.Cast;
 import WX.File.Flags;
+import WX.Cmn.WFStream;
 
 // signatures for the various records (PKxx)
 enum {

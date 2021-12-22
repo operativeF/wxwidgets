@@ -22,7 +22,6 @@
 #include "testprec.h"
 
 #include "wx/filename.h"
-#include "wx/wfstream.h"
 
 #ifdef WX_WINDOWS
     #include <winioctl.h>
@@ -32,6 +31,7 @@
     #define fileno _fileno
 #endif
 
+import WX.Cmn.WFStream;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers

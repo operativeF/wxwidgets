@@ -19,7 +19,6 @@
 #include "wx/bitmap.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/wfstream.h"
 #include "wx/filesys.h"
 #include "wx/filename.h"
 #include "wx/fontenum.h"
@@ -38,6 +37,7 @@ import Utils.Strings;
 import WX.Utils.Cast;
 import WX.Utils.Settings;
 import WX.Cmn.PlatInfo;
+import WX.Cmn.WFStream;
 
 import <clocale>;
 import <vector>;

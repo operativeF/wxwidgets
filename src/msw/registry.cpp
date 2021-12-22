@@ -21,7 +21,6 @@
 #include "wx/utils.h"
 #include "wx/dynlib.h"
 #include "wx/file.h"
-#include "wx/wfstream.h"
 
 #include <fmt/core.h>
 
@@ -34,6 +33,7 @@
 #include  "wx/msw/registry.h"
 
 import WX.WinDef;
+import WX.Cmn.WFStream;
 
 import <string>;
 

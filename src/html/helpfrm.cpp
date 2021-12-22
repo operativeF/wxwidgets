@@ -32,7 +32,6 @@ import WX.Cmn.Stream;
 #include "wx/notebook.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
-#include "wx/wfstream.h"
 #include "wx/html/htmlwin.h"
 #include "wx/busyinfo.h"
 #include "wx/progdlg.h"
@@ -41,6 +40,7 @@ import WX.Cmn.Stream;
 #include "wx/spinctrl.h"
 
 import WX.Core.Sizer;
+import WX.Cmn.WFStream;
 
 import WX.Utils.Settings;
 import Utils.Strings;

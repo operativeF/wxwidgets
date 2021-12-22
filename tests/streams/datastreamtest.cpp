@@ -11,9 +11,10 @@
 #include "testprec.h"
 
 #include "wx/datstrm.h"
-#include "wx/wfstream.h"
 
 #include "testfile.h"
+
+import WX.Cmn.WFStream;
 
 import <vector>;
 

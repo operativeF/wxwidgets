@@ -20,7 +20,6 @@
 #endif
 
 #include "wx/filename.h"
-#include "wx/wfstream.h"
 
 #if wxUSE_FILESYSTEM
 #include "wx/filesys.h"
@@ -28,6 +27,7 @@
 #endif
 
 import WX.Cmn.TextStream;
+import WX.Cmn.WFStream;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextHTMLHandler, wxRichTextFileHandler);
 

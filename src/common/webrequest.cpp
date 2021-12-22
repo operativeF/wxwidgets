@@ -16,7 +16,6 @@
 #include "wx/filefn.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
-#include "wx/wfstream.h"
 
 #include "wx/app.h"
 #include "wx/translation.h"
@@ -33,6 +32,8 @@
 #if wxUSE_WEBREQUEST_CURL
 #include "wx/private/webrequest_curl.h"
 #endif
+
+import WX.Cmn.WFStream;
 
 import WX.File.Flags;
 

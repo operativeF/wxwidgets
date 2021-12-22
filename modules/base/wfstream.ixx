@@ -8,19 +8,23 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WXFSTREAM_H__
-#define _WX_WXFSTREAM_H__
-
-#if wxUSE_STREAMS
+module;
 
 #include "wx/object.h"
 #include "wx/string.h"
 #include "wx/file.h"
 
+export module WX.Cmn.WFStream;
+
 import WX.Cmn.Stream;
 import WX.Cmn.FFile;
 
 import WX.File.Flags;
+
+#if wxUSE_STREAMS
+
+export
+{
 
 #if wxUSE_FILE
 
@@ -279,6 +283,7 @@ protected:
 
 #endif //wxUSE_FFILE
 
+} // export
+
 #endif // wxUSE_STREAMS
 
-#endif // _WX_WXFSTREAM_H__

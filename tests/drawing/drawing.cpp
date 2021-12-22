@@ -12,13 +12,13 @@
 
 #if wxUSE_TEST_GC_DRAWING
 
-#include "wx/wfstream.h"
 #include "wx/stdpaths.h"
 #include "wx/scopeguard.h"
 
 #include "testimagefile.h"
 
 import WX.Image;
+import WX.Cmn.WFStream;
 
 import <stdexcept>;
 

@@ -12,7 +12,6 @@ module;
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/utils.h"
-#include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 #include "wx/filename.h"
 
@@ -23,6 +22,7 @@ import WX.Cmn.Stream;
 import WX.Image.Base;
 import Utils.Chars;
 import Utils.Strings;
+import WX.Cmn.WFStream;
 
 #if wxUSE_XPM
 

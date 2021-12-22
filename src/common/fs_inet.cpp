@@ -14,10 +14,11 @@
 #if wxUSE_FILESYSTEM && wxUSE_FS_INET
 
 #include "wx/module.h"
-#include "wx/wfstream.h"
 #include "wx/url.h"
 #include "wx/filesys.h"
 #include "wx/fs_inet.h"
+
+import WX.Cmn.WFStream;
 
 import Utils.Strings;
 

@@ -18,9 +18,9 @@
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
 
-#include "wx/wfstream.h"
-
 #include <chrono>
+
+import WX.Cmn.WFStream;
 
 import WX.Image;
 

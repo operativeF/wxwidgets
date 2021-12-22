@@ -12,7 +12,6 @@
 #include "wx/dcscreen.h"
 #include "wx/icon.h"
 #include "wx/dcsvg.h"
-#include "wx/wfstream.h"
 #include "wx/filename.h"
 #include "wx/mstream.h"
 #include "wx/scopedarray.h"
@@ -25,6 +24,7 @@ import WX.Cmn.Base64;
 
 import WX.Image;
 import WX.Cfg.Flags;
+import WX.Cmn.WFStream;
 
 import Utils.Strings;
 

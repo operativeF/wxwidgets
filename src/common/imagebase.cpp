@@ -16,7 +16,6 @@ module;
 #include "wx/intl.h"
 #include "wx/colour.h"
 
-#include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 
 // Under Windows we can load wxImage not only from files but also from
@@ -36,6 +35,7 @@ module WX.Image.Base;
 import WX.WinDef;
 
 import Utils.Strings;
+import WX.Cmn.WFStream;
 
 import WX.Utils.Cast;
 

@@ -14,7 +14,6 @@
 #include "wx/log.h"
 
 #include "wx/html/helpdata.h"
-#include "wx/wfstream.h"
 #include "wx/busyinfo.h"
 #include "wx/fontmap.h"
 #include "wx/html/htmlpars.h"
@@ -23,6 +22,7 @@
 #include "wx/filename.h"
 
 import WX.Cmn.EncConv;
+import WX.Cmn.WFStream;
 
 import Utils.Strings;
 

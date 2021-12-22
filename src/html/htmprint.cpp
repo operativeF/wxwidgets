@@ -18,10 +18,10 @@
 #include "wx/printdlg.h"
 #include "wx/html/htmprint.h"
 #include "wx/wxhtml.h"
-#include "wx/wfstream.h"
 #include "wx/infobar.h"
 
 import WX.Core.Sizer;
+import WX.Cmn.WFStream;
 
 import WX.Utils.Settings;
 

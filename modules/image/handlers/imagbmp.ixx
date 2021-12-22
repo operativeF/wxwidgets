@@ -14,7 +14,6 @@ module;
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
-#include "wx/wfstream.h"
 #include "wx/quantize.h"
 #include "wx/scopeguard.h"
 #include "wx/scopedarray.h"
@@ -29,6 +28,7 @@ export module WX.Image.BMP;
 import WX.Image.Base;
 import WX.Image.PNG;
 
+import WX.Cmn.WFStream;
 import Utils.Math;
 
 import WX.File.Flags;

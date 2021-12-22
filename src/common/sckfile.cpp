@@ -8,15 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STREAMS && wxUSE_PROTOCOL_FILE
 
 #include "wx/uri.h"
-#include "wx/wfstream.h"
 #include "wx/protocol/file.h"
 
+import WX.Cmn.WFStream;
 
 // ----------------------------------------------------------------------------
 // wxFileProto

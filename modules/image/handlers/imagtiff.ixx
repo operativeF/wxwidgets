@@ -18,7 +18,6 @@ module;
 #include "tiffio.h"
 
 #include "wx/filefn.h"
-#include "wx/wfstream.h"
 
 #include <fmt/core.h>
 
@@ -26,6 +25,8 @@ export module WX.Image.TIFF;
 
 import WX.Image.Base;
 import WX.Utils.VersionInfo;
+import WX.Cmn.Stream;
+import WX.Cmn.WFStream;
 
 import Utils.Strings;
 import Utils.Geometry;

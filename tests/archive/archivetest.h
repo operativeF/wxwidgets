@@ -13,11 +13,10 @@
 
 #include "wx/archive.h"
 
-#include "wx/wfstream.h"
-
 #include <memory>
 
 import WX.File.Flags;
+import WX.Cmn.WFStream;
 
 import <map>;
 

@@ -8,9 +8,9 @@
 
 #include "testprec.h"
 
-#include "wx/wfstream.h"
-
 #include "bstream.h"
+
+import WX.Cmn.WFStream;
 
 constexpr unsigned int DATABUFFER_SIZE =     1024;
 

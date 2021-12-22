@@ -8,6 +8,7 @@
 
 module;
 
+#include "wx/filefn.h"
 #include "wx/gdicmn.h"
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -16,11 +17,10 @@ module;
     #include "wx/palette.h"
 #endif // wxUSE_PALETTE
 
-#include "wx/wfstream.h"
-
 export module WX.Image.IFF;
 
 import WX.Image.Base;
+import WX.Cmn.WFStream;
 
 import WX.File.Flags;
 
