@@ -11,10 +11,11 @@
 
 module;
 
-#include "wx/convauto.h"
 #include "wx/string.h"
 
 export module WX.Cmn.TextBuffer;
+
+import WX.Cmn.ConvAuto;
 
 import <string>;
 import <vector>;

@@ -7,11 +7,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_CONVAUTO_H_
-#define _WX_CONVAUTO_H_
+module;
 
 #include "wx/strconv.h"
 #include "wx/fontenc.h"
+
+export module WX.Cmn.ConvAuto;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // wxConvAuto: uses BOM to automatically detect input encoding
@@ -168,5 +172,4 @@ private:
     bool m_consumedBOM;
 };
 
-#endif // _WX_CONVAUTO_H_
-
+} // export

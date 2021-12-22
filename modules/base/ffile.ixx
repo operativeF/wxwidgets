@@ -12,10 +12,10 @@ module;
 
 #include  "wx/string.h"
 #include  "wx/filefn.h"
-#include  "wx/convauto.h"
 
 export module WX.Cmn.FFile;
 
+import WX.Cmn.ConvAuto;
 import WX.File.Flags;
 
 #if wxUSE_FFILE

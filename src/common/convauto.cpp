@@ -7,8 +7,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/convauto.h"
+module;
+
 #include "wx/private/unicode.h"
+
+#include "wx/debug.h"
+#include "wx/strconv.h"
+
+module WX.Cmn.ConvAuto;
 
 constexpr char BOM_UTF32BE[] = { '\x00', '\x00', '\xFE', '\xFF' };
 constexpr char BOM_UTF32LE[] = { '\xFF', '\xFE', '\x00', '\x00' };

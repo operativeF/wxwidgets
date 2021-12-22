@@ -16,8 +16,8 @@
 
 #include  "wx/string.h"
 #include  "wx/filefn.h"
-#include  "wx/convauto.h"
 
+import WX.Cmn.ConvAuto;
 import WX.File.Flags;
 
 // ----------------------------------------------------------------------------
