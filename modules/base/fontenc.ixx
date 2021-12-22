@@ -8,10 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FONTENC_H_
-#define _WX_FONTENC_H_
+export module WX.Base.FontEnc;
 
-enum wxFontEncoding
+export enum wxFontEncoding
 {
     wxFONTENCODING_SYSTEM = -1,     // system default
     wxFONTENCODING_DEFAULT,         // current default encoding
@@ -157,6 +156,3 @@ enum wxFontEncoding
         // Vietnamese
     wxFONTENCODING_VIETNAMESE = wxFONTENCODING_CP1258
 };
-
-#endif // _WX_FONTENC_H_
-

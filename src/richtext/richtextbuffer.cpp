@@ -22,7 +22,6 @@
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
 #include "wx/mstream.h"
-#include "wx/sstream.h"
 #include "wx/hashmap.h"
 
 #include "wx/richtext/richtextctrl.h"
@@ -35,6 +34,7 @@
 #include "wx/listimpl.cpp"
 
 import WX.Cmn.TextFile;
+import WX.Cmn.StrStream;
 
 import Utils.Position;
 import WX.Utils.Settings;

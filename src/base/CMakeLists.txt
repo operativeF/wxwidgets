@@ -150,6 +150,8 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/stream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/convauto.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/sstream.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

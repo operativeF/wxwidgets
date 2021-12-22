@@ -16,8 +16,9 @@
 // ---------------------------------------------------------------------------
 
 #include "wx/list.h"
-#include "wx/fontenc.h"
 #include "wx/hashmap.h"
+
+import WX.Base.FontEnc;
 
 import Utils.Bitfield;
 import Utils.Geometry;

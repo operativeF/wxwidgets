@@ -10,9 +10,10 @@
 module;
 
 #include "wx/object.h"
-#include "wx/fontenc.h"
 
 export module WX.Cmn.EncConv;
+
+import WX.Base.FontEnc;
 
 import <vector>;
 

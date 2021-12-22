@@ -29,8 +29,9 @@ enum class wxLayoutDirection
 
 #if wxUSE_INTL
 
-#include "wx/fontenc.h"
 #include "wx/language.h"
+
+import WX.Base.FontEnc;
 
 class wxLocale;
 

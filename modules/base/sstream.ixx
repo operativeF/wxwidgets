@@ -8,13 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_SSTREAM_H_
-#define _WX_SSTREAM_H_
-
-#if wxUSE_STREAMS
+module;
 
 #include "wx/filefn.h"
 #include "wx/string.h"
+
+export module WX.Cmn.StrStream;
 
 import WX.Cmn.Stream;
 import WX.File.Flags;
@@ -22,6 +21,11 @@ import WX.File.Flags;
 // ----------------------------------------------------------------------------
 // wxStringInputStream is a stream reading from the given (fixed size) string
 // ----------------------------------------------------------------------------
+
+#if wxUSE_STREAMS
+
+export
+{
 
 class wxStringInputStream : public wxInputStream
 {
@@ -97,7 +101,6 @@ private:
     wxMemoryBuffer m_unconv;
 };
 
+} // export
+
 #endif // wxUSE_STREAMS
-
-#endif // _WX_SSTREAM_H_
-

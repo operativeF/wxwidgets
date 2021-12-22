@@ -24,13 +24,13 @@
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
-#include "wx/sstream.h"
 #include "wx/mstream.h"
 #include "wx/stopwatch.h"
 #include "wx/xml/xml.h"
 
 import Utils.Strings;
 
+import WX.Cmn.StrStream;
 import WX.Cmn.TextStream;
 
 // Set to 1 for slower wxXmlDocument method, 0 for faster direct method.

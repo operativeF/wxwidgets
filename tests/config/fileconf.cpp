@@ -13,8 +13,9 @@
 #if wxUSE_FILECONFIG
 
 #include "wx/fileconf.h"
-#include "wx/sstream.h"
 #include "wx/log.h"
+
+import WX.Cmn.StrStream;
 
 static const char *testconfig =
 "[root]\n"

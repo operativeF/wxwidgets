@@ -12,9 +12,10 @@
 #include "wx/intl.h"
 
 #include "wx/strconv.h"
-#include "wx/sstream.h"
 #include "wx/html/htmlfilt.h"
 #include "wx/html/htmlwin.h"
+
+import WX.Cmn.StrStream;
 
 // utility function: read entire contents of an wxInputStream into a wxString
 //

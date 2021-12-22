@@ -15,6 +15,8 @@
 #include "wx/chartype.h"
 #include "wx/buffer.h"
 
+import WX.Base.FontEnc;
+
 import <limits>;
 
 class wxString;
@@ -480,8 +482,6 @@ public:
 // ----------------------------------------------------------------------------
 // wxCSConv (for conversion based on loadable char sets)
 // ----------------------------------------------------------------------------
-
-#include "wx/fontenc.h"
 
 class wxCSConv : public wxMBConv
 {

@@ -11,7 +11,8 @@
 #include "testprec.h"
 
 #include "wx/xml/xml.h"
-#include "wx/sstream.h"
+
+import WX.Cmn.StrStream;
 
 // ----------------------------------------------------------------------------
 // helpers for testing XML tree

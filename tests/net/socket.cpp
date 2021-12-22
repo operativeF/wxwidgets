@@ -23,9 +23,9 @@
 
 #include "wx/socket.h"
 #include "wx/url.h"
-
-#include "wx/sstream.h"
 #include "wx/evtloop.h"
+
+import WX.Cmn.StrStream;
 
 typedef std::unique_ptr<wxSockAddress> wxSockAddressPtr;
 typedef std::unique_ptr<wxSocketClient> wxSocketClientPtr;

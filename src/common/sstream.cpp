@@ -8,14 +8,18 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STREAMS
+module;
 
-#include "wx/sstream.h"
+#include "wx/filefn.h"
 #include "wx/string.h"
+
+module WX.Cmn.StrStream;
 
 import WX.Utils.Cast;
 
 import WX.File.Flags;
+
+#if wxUSE_STREAMS
 
 // ============================================================================
 // wxStringInputStream implementation

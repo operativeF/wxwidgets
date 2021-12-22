@@ -13,7 +13,6 @@
 
 #include "wx/control.h"
 #include "wx/event.h"
-#include "wx/sstream.h"
 
 #if defined(__WXOSX__)
     #include "wx/osx/webviewhistoryitem_webkit.h"
@@ -28,6 +27,7 @@
 #include <memory>
 
 import WX.Utils.VersionInfo;
+import WX.Cmn.StrStream;
 
 import <string>;
 import <vector>;

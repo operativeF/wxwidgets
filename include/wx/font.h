@@ -15,9 +15,10 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/fontenc.h"     // the font encoding constants
 #include "wx/gdiobj.h"      // the base class
 #include "wx/gdicmn.h"      // for wxGDIObjListBase
+
+import WX.Base.FontEnc;
 
 // ----------------------------------------------------------------------------
 // forward declarations

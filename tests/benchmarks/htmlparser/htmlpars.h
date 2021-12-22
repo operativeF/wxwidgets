@@ -12,9 +12,10 @@
 #include "wx/defs.h"
 #include "wx/filesys.h"
 #include "wx/hash.h"
-#include "wx/fontenc.h"
 
 #include "htmltag.h"
+
+import WX.Base.FontEnc;
 
 class  wxMBConv;
 class  wx28HtmlParser;

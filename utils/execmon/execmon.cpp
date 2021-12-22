@@ -8,22 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/log.h"
 
 #include "wx/process.h"
-#include "wx/sstream.h"
 #include "wx/utils.h"
 #include "wx/filename.h"
 #include "wx/app.h"
 #include "wx/log.h"
 
 import WX.Cmn.CommandLine;
+import WX.Cmn.StrStream;
 
 import <vector>;
 

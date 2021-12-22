@@ -20,7 +20,6 @@
 #include "wx/dynload.h"
 #include "wx/scopeguard.h"
 #include "wx/filename.h"
-#include "wx/fontenc.h"
 
 #include "wx/confbase.h"        // for wxExpandEnvVars()
 
@@ -76,6 +75,8 @@
 #include <tlhelp32.h>
 
 #include <boost/nowide/convert.hpp>
+
+import WX.Base.FontEnc;
 
 import <tuple>;
 

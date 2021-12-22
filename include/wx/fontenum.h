@@ -14,7 +14,7 @@
 
 #if wxUSE_FONTENUM
 
-#include "wx/fontenc.h"
+import WX.Base.FontEnc;
 
 import <string>;
 import <vector>;

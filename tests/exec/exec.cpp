@@ -13,7 +13,6 @@
 
 #include "wx/utils.h"
 #include "wx/process.h"
-#include "wx/sstream.h"
 #include "wx/evtloop.h"
 #include "wx/file.h"
 #include "wx/filename.h"
@@ -22,6 +21,7 @@
 #include "wx/timer.h"
 
 import WX.Cmn.TextStream;
+import WX.Cmn.StrStream;
 
 import WX.Test.Prec;
 

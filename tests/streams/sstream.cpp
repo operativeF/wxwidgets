@@ -8,9 +8,9 @@
 
 #include "testprec.h"
 
-#include "wx/sstream.h"
-
 #include "bstream.h"
+
+import WX.Cmn.StrStream;
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

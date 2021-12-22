@@ -10,9 +10,10 @@
 module;
 
 #include "wx/strconv.h"
-#include "wx/fontenc.h"
 
 export module WX.Cmn.ConvAuto;
+
+import WX.Base.FontEnc;
 
 export
 {

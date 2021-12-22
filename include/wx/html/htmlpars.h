@@ -15,7 +15,8 @@
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-#include "wx/fontenc.h"
+
+import WX.Base.FontEnc;
 
 import <vector>;
 
