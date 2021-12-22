@@ -17,9 +17,13 @@
 #include "wx/msw/seh.h"
 
 #if wxUSE_ON_FATAL_EXCEPTION
-    #include "wx/datetime.h"
     #include "wx/msw/crashrpt.h"
 #endif // wxUSE_ON_FATAL_EXCEPTION
+
+#include <fmt/core.h>
+#include <fmt/chrono.h>
+
+#include <chrono>
 
 import WX.WinDef;
 
@@ -131,7 +135,7 @@ bool wxHandleFatalExceptions(bool doit)
                             wxTheApp ? wxTheApp->GetAppDisplayName().c_str()
                                      : "wxwindows",
 #if wxUSE_DATETIME
-                            wxDateTime::Now().Format("%Y%m%dT%H%M%S").c_str(),
+                            "%Y%m%dT%H%M%S{}", fmt::localtime(std::time(nullptr)),
 #endif
                             ::GetCurrentProcessId()
                         );
