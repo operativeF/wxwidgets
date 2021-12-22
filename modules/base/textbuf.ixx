@@ -146,7 +146,7 @@ public:
     wxTextFileType GetLineType(size_t n) const { return m_aTypes[n]; }
 
     // get the name of the buffer
-    const wxString& GetName() const { return m_strBufferName; }
+    const std::string& GetName() const { return m_strBufferName; }
 
     // add/remove lines
     // ----------------
@@ -190,7 +190,7 @@ protected:
     virtual bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) = 0;
 
     inline static wxString ms_eof;     // dummy string returned at EOF
-    wxString m_strBufferName;   // name of the buffer
+    std::string m_strBufferName;   // name of the buffer
 
 private:
     wxArrayLinesType m_aTypes;   // type of each line

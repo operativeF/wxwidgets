@@ -120,10 +120,12 @@ public:
     // default
   wxTempFFile() = default;
     // associates the temp file with the file to be replaced and opens it
-  explicit wxTempFFile(const wxString& strName);
+  explicit wxTempFFile(const std::string& strName);
+
+  wxTempFFile& operator=(wxTempFFile&&) = delete;
 
   // open the temp file (strName is the name of file to be replaced)
-  bool Open(const wxString& strName);
+  bool Open(const std::string& strName);
 
   // is the file opened?
   bool IsOpened() const { return m_file.IsOpened(); }
@@ -154,12 +156,9 @@ public:
  ~wxTempFFile();
 
 private:
-  // no copy ctor/assignment operator
-  wxTempFFile(const wxTempFFile&);
-  wxTempFFile& operator=(const wxTempFFile&);
-
-  wxString  m_strName,  // name of the file to replace in Commit()
-            m_strTemp;  // temporary file name
+  std::string  m_strName;  // name of the file to replace in Commit()
+  std::string  m_strTemp;  // temporary file name
+  
   wxFFile   m_file;     // the temporary file
 };
 

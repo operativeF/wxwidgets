@@ -113,7 +113,7 @@ size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<std::st
                 imageId = wxFileIconsTable::cdrom;
                 break;
             case wxFSVolumeKind::Network:
-                if (path[0] == wxT('\\'))
+                if (path[0] == '\\')
                     continue; // skip "\\computer\folder"
                 imageId = wxFileIconsTable::drive;
                 break;

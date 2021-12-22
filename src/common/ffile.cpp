@@ -281,12 +281,12 @@ bool wxFFile::Error() const
 // construction
 // ----------------------------------------------------------------------------
 
-wxTempFFile::wxTempFFile(const wxString& strName)
+wxTempFFile::wxTempFFile(const std::string& strName)
 {
     Open(strName);
 }
 
-bool wxTempFFile::Open(const wxString& strName)
+bool wxTempFFile::Open(const std::string& strName)
 {
     // we must have an absolute filename because otherwise CreateTempFileName()
     // would create the temp file in $TMP (i.e. the system standard location
