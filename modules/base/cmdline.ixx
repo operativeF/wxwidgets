@@ -245,7 +245,7 @@ public:
     // by default, '-' is switch char under Unix, '-' or '/' under Win:
     // switchChars contains all characters with which an option or switch may
     // start
-    void SetSwitchChars(const wxString& switchChars);
+    void SetSwitchChars(const std::string& switchChars);
 
     // long options are not POSIX-compliant, this option allows to disable them
     void EnableLongOptions(bool enable = true);
@@ -254,7 +254,7 @@ public:
     bool AreLongOptionsEnabled() const;
 
     // extra text may be shown by Usage() method if set by this function
-    void SetLogo(const wxString& logo);
+    void SetLogo(const std::string& logo);
 
     // construct the cmd line description
     // ----------------------------------
@@ -309,7 +309,7 @@ public:
     void Usage() const;
 
     // return the usage string, call Usage() to directly show it to the user
-    wxString GetUsageString() const;
+    std::string GetUsageString() const;
 
     // get the command line arguments
     // ------------------------------

@@ -177,8 +177,8 @@ using wxArrayArgs    = std::vector<wxCmdLineArgImpl>;
 struct wxCmdLineParserData
 {
     // options
-    wxString m_switchChars;     // characters which may start an option
-    wxString m_logo;            // some extra text to show in Usage()
+    std::string m_switchChars;     // characters which may start an option
+    std::string m_logo;            // some extra text to show in Usage()
 
     // cmd line data
     wxArrayOptions m_options;   // all possible options and switches
@@ -197,13 +197,13 @@ struct wxCmdLineParserData
     void SetArguments(int argc, const wxCmdLineArgsArray& argv);
     void SetArguments(const wxString& cmdline);
 
-    int FindOption(const wxString& name);
-    int FindOptionByLongName(const wxString& name);
+    std::size_t FindOption(const std::string& name);
+    std::size_t FindOptionByLongName(const std::string& name);
 
     // Find the option by either its short or long name.
     //
     // Asserts and returns NULL if option with this name is not found.
-    const wxCmdLineOption* FindOptionByAnyName(const wxString& name);
+    const wxCmdLineOption* FindOptionByAnyName(const std::string& name);
 };
 
 // ============================================================================
@@ -458,7 +458,7 @@ void wxCmdLineParserData::SetArguments(const wxString& cmdLine)
     m_arguments.insert(m_arguments.end(), args.begin(), args.end()); 
 }
 
-int wxCmdLineParserData::FindOption(const wxString& name)
+std::size_t wxCmdLineParserData::FindOption(const std::string& name)
 {
     if ( !name.empty() )
     {
@@ -473,13 +473,13 @@ int wxCmdLineParserData::FindOption(const wxString& name)
         }
     }
 
-    return wxNOT_FOUND;
+    return std::string::npos;
 }
 
-int wxCmdLineParserData::FindOptionByLongName(const wxString& name)
+std::size_t wxCmdLineParserData::FindOptionByLongName(const std::string& name)
 {
-    const size_t count = m_options.size();
-    for ( size_t n = 0; n < count; n++ )
+    const std::size_t count = m_options.size();
+    for ( std::size_t n = 0; n < count; n++ )
     {
         if ( m_options[n].longName == name )
         {
@@ -488,25 +488,25 @@ int wxCmdLineParserData::FindOptionByLongName(const wxString& name)
         }
     }
 
-    return wxNOT_FOUND;
+    return std::string::npos;
 }
 
 const wxCmdLineOption*
-wxCmdLineParserData::FindOptionByAnyName(const wxString& name)
+wxCmdLineParserData::FindOptionByAnyName(const std::string& name)
 {
-    int i = FindOption(name);
-    if ( i == wxNOT_FOUND )
+    auto i = FindOption(name);
+    if ( i == std::string::npos )
     {
         i = FindOptionByLongName(name);
 
-        if ( i == wxNOT_FOUND )
+        if ( i == std::string::npos )
         {
             wxFAIL_MSG( "Unknown option " + name );
             return nullptr;
         }
     }
 
-    return &m_options[(size_t)i];
+    return &m_options[i];
 }
 
 // ----------------------------------------------------------------------------
@@ -547,7 +547,7 @@ wxCmdLineParser::~wxCmdLineParser()
 // options
 // ----------------------------------------------------------------------------
 
-void wxCmdLineParser::SetSwitchChars(const wxString& switchChars)
+void wxCmdLineParser::SetSwitchChars(const std::string& switchChars)
 {
     m_data->m_switchChars = switchChars;
 }
@@ -562,7 +562,7 @@ bool wxCmdLineParser::AreLongOptionsEnabled() const
     return m_data->m_enableLongOptions;
 }
 
-void wxCmdLineParser::SetLogo(const wxString& logo)
+void wxCmdLineParser::SetLogo(const std::string& logo)
 {
     m_data->m_logo = logo;
 }
@@ -1251,9 +1251,9 @@ void wxCmdLineParser::Usage() const
     }
 }
 
-wxString wxCmdLineParser::GetUsageString() const
+std::string wxCmdLineParser::GetUsageString() const
 {
-    wxString appname;
+    std::string appname;
     if ( m_data->m_arguments.empty() )
     {
         if ( wxTheApp )
@@ -1268,21 +1268,21 @@ wxString wxCmdLineParser::GetUsageString() const
     // help message below because we want to align the options descriptions
     // and for this we must first know the longest one of them
     std::string usage;
+
     std::vector<std::string> namesOptions;
     std::vector<std::string> descOptions;
 
     if ( !m_data->m_logo.empty() )
     {
-        usage += fmt::format("{}\n", m_data->m_logo.ToStdString());
+        usage += fmt::format("{}\n", m_data->m_logo);
     }
 
-    usage += fmt::format("Usage: {:s}", appname.ToStdString());
     // FIXME: Provide a way to have translations in fmt lib strings.
-    //usage << wxString::Format(_("Usage: %s"), appname.c_str());
+    usage +=  fmt::format(_("Usage: %s"), appname);
 
     // the switch char is usually '-' but this can be changed with
     // SetSwitchChars() and then the first one of possible chars is used
-    wxChar chSwitch = !m_data->m_switchChars ? wxT('-')
+    char chSwitch = m_data->m_switchChars.empty() ? '-'
                                              : m_data->m_switchChars[0u];
 
     bool areLongOptionsEnabled = AreLongOptionsEnabled();
@@ -1290,6 +1290,7 @@ wxString wxCmdLineParser::GetUsageString() const
     for ( size_t n = 0; n < count; n++ )
     {
         wxCmdLineOption& opt = m_data->m_options[n];
+
         std::string option;
         std::string negator;
 
