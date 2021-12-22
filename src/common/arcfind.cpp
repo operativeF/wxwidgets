@@ -8,7 +8,7 @@
 
 #if wxUSE_ARCHIVE_STREAMS
 
-#include "wx/archive.h"
+import WX.Cmn.ArchStream;
 
 // These functions are in a separate file so that statically linked apps
 // that do not call them to search for archive handlers will only link in

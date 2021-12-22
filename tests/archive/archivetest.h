@@ -11,12 +11,11 @@
 
 #define WX_TEST_ARCHIVE_ITERATOR
 
-#include "wx/archive.h"
-
 #include <memory>
 
 import WX.File.Flags;
 import WX.Cmn.WFStream;
+import WX.Cmn.ArchStream;
 
 import <map>;
 

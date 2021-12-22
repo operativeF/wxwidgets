@@ -6,16 +6,25 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_ARCHIVE_H__
-#define _WX_ARCHIVE_H__
-
-#if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
+module;
 
 #include "wx/filename.h"
 
+export module WX.Cmn.ArchStream;
+
 import WX.Cmn.Stream;
 
+#if defined WX_TEST_ARCHIVE_ITERATOR
+import <iterator>;
 import <utility>;
+#endif
+
+import <utility>;
+
+#if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
+
+export
+{
 
 class wxArchiveNotifier
 {
@@ -359,6 +368,7 @@ private:
     wxArchiveClassFactory *m_next;
 };
 
+} // export
+
 #endif // wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
 
-#endif // _WX_ARCHIVE_H__

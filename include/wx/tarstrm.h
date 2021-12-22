@@ -9,10 +9,10 @@
 #ifndef _WX_WXTARSTREAM_H__
 #define _WX_WXTARSTREAM_H__
 
-#include "wx/archive.h"
 #include "wx/hashmap.h"
 
 import WX.File.Flags;
+import WX.Cmn.ArchStream;
 
 import <cstdint>;
 import <utility>;

@@ -9,10 +9,14 @@
 module;
 
 #include "wx/intl.h"
-#include "wx/archive.h"
 #include "wx/private/fileback.h"
+#include "wx/filename.h"
+
+#include <fmt/core.h>
 
 module WX.FileSys.Arc;
+
+import WX.Cmn.ArchStream;
 
 //---------------------------------------------------------------------------
 // wxArchiveFSCacheDataImpl
