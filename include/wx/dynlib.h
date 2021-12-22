@@ -217,7 +217,26 @@ public:
     static wxDllType         GetProgramHandle();
 
     // return the platform standard DLL extension (with leading dot)
-    static std::string GetDllExt(wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
+    static constexpr std::string GetDllExt([[maybe_unused]] wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library)
+    {
+    #if defined(WX_WINDOWS)
+        return ".dll";
+    #elif defined(__HPUX__)
+        return ".sl";
+    #elif defined(__DARWIN__)
+        switch ( cat )
+        {
+            case wxDynamicLibraryCategory::Library:
+                return ".dylib";
+            case wxDynamicLibraryCategory::Module:
+                return ".bundle";
+        }
+        wxFAIL_MSG("unreachable");
+        return {}; // silence gcc warning
+    #else
+        return ".so";
+    #endif
+    }
 
     wxDynamicLibrary()  = default;
     wxDynamicLibrary(const std::string& libname, int flags = wxDL_DEFAULT)

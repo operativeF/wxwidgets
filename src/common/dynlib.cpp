@@ -99,37 +99,14 @@ void *wxDynamicLibrary::GetSymbol(const std::string& name, bool *success) const
 // ----------------------------------------------------------------------------
 
 /*static*/
-std::string wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
-{
-    wxUnusedVar(cat);
-#if defined(WX_WINDOWS)
-    return ".dll";
-#elif defined(__HPUX__)
-    return ".sl";
-#elif defined(__DARWIN__)
-    switch ( cat )
-    {
-        case wxDynamicLibraryCategory::Library:
-            return ".dylib";
-        case wxDynamicLibraryCategory::Module:
-            return ".bundle";
-    }
-    wxFAIL_MSG("unreachable");
-    return {}; // silence gcc warning
-#else
-    return ".so";
-#endif
-}
-
-/*static*/
 std::string
 wxDynamicLibrary::CanonicalizeName(const std::string& name,
                                    wxDynamicLibraryCategory cat)
 {
-    std::string nameCanonic;
-
     // under Unix the library names usually start with "lib" prefix, add it
 #if defined(__UNIX__)
+    std::string nameCanonic;
+
     switch ( cat )
     {
         case wxDynamicLibraryCategory::Library:
@@ -140,11 +117,11 @@ wxDynamicLibrary::CanonicalizeName(const std::string& name,
             // Module names are arbitrary and should have no prefix added.
             break;
     }
+
+    return fmt::format("{}{}{}", nameCanonic, name, GetDllExt(cat));
+#else
+    return fmt::format("{}{}", name, GetDllExt(cat));
 #endif
-
-    nameCanonic += fmt::format("{}{}", name, GetDllExt(cat));
-
-    return nameCanonic;
 }
 
 /*static*/
