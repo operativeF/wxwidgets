@@ -13,7 +13,7 @@
 
 // just some classes using wxRTTI for wxStaticCast() test
 #include "wx/tarstrm.h"
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 
 
 static bool AssertIfOdd(int n)

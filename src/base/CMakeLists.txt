@@ -156,6 +156,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/mstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/datstrm.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zstream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/zipstrm.ixx
 )
 
 set(SHARED_BASE_CMN_SRC

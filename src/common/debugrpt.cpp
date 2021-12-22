@@ -39,7 +39,7 @@ import WX.Cmn.FFile;
 #endif
 
 #if wxUSE_ZIPSTREAM
-    #include "wx/zipstrm.h"
+    import WX.Cmn.ZipStream;
     import WX.Cmn.WFStream;
 #endif // wxUSE_ZIPSTREAM
 

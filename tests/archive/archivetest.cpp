@@ -14,7 +14,7 @@
 #include "wx/dir.h"
 #include <sys/stat.h>
 
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 
 import WX.File.Flags;
 
@@ -1418,7 +1418,7 @@ string ArchiveTestSuite::Description(const wxString& type,
 template class ArchiveTestCase<wxArchiveClassFactory>;
 
 #if wxUSE_ZIPSTREAM
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 template class ArchiveTestCase<wxZipClassFactory>;
 #endif
 

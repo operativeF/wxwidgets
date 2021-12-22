@@ -6,9 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_ZIPSTREAM
-
-#include "wx/zipstrm.h"
+module;
 
 #include "wx/hashmap.h"
 #include "wx/intl.h"
@@ -18,12 +16,16 @@
 
 #include "zlib.h"
 
+module WX.Cmn.ZipStream;
+
 import WX.Utils.Cast;
 import WX.File.Flags;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
 import WX.Cmn.DataStream;
 import WX.Cmn.ZStream;
+
+#if wxUSE_ZIPSTREAM
 
 // signatures for the various records (PKxx)
 enum {

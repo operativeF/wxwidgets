@@ -7,7 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "wx/log.h"
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 
 import WX.Cmn.MemStream;
 

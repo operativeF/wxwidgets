@@ -6,15 +6,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WXZIPSTREAM_H__
-#define _WX_WXZIPSTREAM_H__
-
-#if wxUSE_ZIPSTREAM
+module;
 
 #include "wx/archive.h"
 #include "wx/filename.h"
 
+export module WX.Cmn.ZipStream;
+
 import <cstdint>;
+
+#if wxUSE_ZIPSTREAM
+
+export
+{
 
 // some methods from wxZipInputStream and wxZipOutputStream stream do not get
 // exported/imported when compiled with Mingw versions before 3.4.2. So they
@@ -594,7 +598,6 @@ inline void wxZipEntry::SetName(const wxString& name,
     SetIsDir(isDir);
 }
 
+} // export
 
 #endif // wxUSE_ZIPSTREAM
-
-#endif // _WX_WXZIPSTREAM_H__

@@ -14,7 +14,7 @@
 #if wxUSE_STREAMS && wxUSE_ZIPSTREAM
 
 #include "archivetest.h"
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 
 using std::string;
 

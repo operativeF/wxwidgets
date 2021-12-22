@@ -9,7 +9,7 @@
 #if wxUSE_ARCHIVE_STREAMS
 
 #if wxUSE_ZIPSTREAM
-#include "wx/zipstrm.h"
+import WX.Cmn.ZipStream;
 #endif
 #if wxUSE_TARSTREAM
 #include "wx/tarstrm.h"
