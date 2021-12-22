@@ -172,7 +172,7 @@ public:
     static void RegisterFactory(const wxString& backend,
                                 std::shared_ptr<wxWebViewFactory> factory);
     static bool IsBackendAvailable(const wxString& backend);
-    static wxVersionInfo GetBackendVersionInfo(const wxString& backend = wxASCII_STR(wxWebViewBackendDefault));
+    static wxVersionInfo GetBackendVersionInfo(const wxString& backend = wxWebViewBackendDefault);
 
     // General methods
     virtual void EnableContextMenu(bool enable = true)

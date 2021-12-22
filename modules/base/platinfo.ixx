@@ -158,7 +158,7 @@ public:
         // Under MSW we also support "win" platform name for compatibility with
         // the existing XRC files using it.
 #ifdef WX_WINDOWS
-        if (s == wxASCII_STR("win"))
+        if (s == "win")
             return true;
 #endif // WX_WINDOWS
 

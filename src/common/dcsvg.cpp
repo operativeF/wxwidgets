@@ -1094,22 +1094,36 @@ void wxSVGFileDCImpl::DoGradientFillConcentric(const wxRect& rect,
 
 void wxSVGFileDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
-    wxString svg;
-
     // End current graphics group to ensure proper xml nesting (e.g. so that
     // graphics can be subsequently changed inside the clipping region)
-    svg << "</g>\n"
-           "<defs>\n"
-           "  <clipPath id=\"clip" << m_clipNestingLevel << "\">\n"
-           "    <rect id=\"cliprect" << m_clipNestingLevel << "\" "
-                "x=\"" << x << "\" "
-                "y=\"" << y << "\" "
-                "width=\"" << width << "\" "
-                "height=\"" << height << "\" "
-                "style=\"stroke: gray; fill: none;\"/>\n"
-           "  </clipPath>\n"
-           "</defs>\n"
-           "<g style=\"clip-path: url(#clip" << m_clipNestingLevel << ");\">\n";
+    wxString svg =
+fmt::format(R"svg_data(</g>
+<defs>
+  <clipPath id="clip{}">
+    <rect id="cliprect{}"
+    x="{}"
+    y="{}"
+    width="{}"
+    height="{}"
+    style="stroke: gray; fill: none;"
+  </clipPath>
+</defs>
+<g style="clip-path: url(#clip{});">
+
+)svg_data");
+
+ //   wxString svg = "</g>\n"
+ //          "<defs>\n"
+ //          "  <clipPath id=\"clip" << m_clipNestingLevel << "\">\n"
+ //          "    <rect id=\"cliprect" << m_clipNestingLevel << "\" "
+ //               "x=\"" << x << "\" "
+ //               "y=\"" << y << "\" "
+ //               "width=\"" << width << "\" "
+ //               "height=\"" << height << "\" "
+ //               "style=\"stroke: gray; fill: none;\"/>\n"
+ //          "  </clipPath>\n"
+ //          "</defs>\n"
+ //          "<g style=\"clip-path: url(#clip" << m_clipNestingLevel << ");\">\n";
 
     write(svg);
 

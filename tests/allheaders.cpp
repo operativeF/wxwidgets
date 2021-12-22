@@ -92,7 +92,7 @@ struct DerivedWithOverride : Base
 
 TEST_CASE("wxNO_IMPLICIT_WXSTRING_ENCODING", "[string]")
 {
-    wxString s = wxASCII_STR("Hello, ASCII");
+    wxString s = "Hello, ASCII";
     REQUIRE(s == L"Hello, ASCII");
 #ifdef TEST_IMPLICIT_WXSTRING_ENCODING
     // Compilation of this should fail, because the macro

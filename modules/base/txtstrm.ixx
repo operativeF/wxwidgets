@@ -13,6 +13,8 @@ module;
 #include "wx/stream.h"
 #include "wx/convauto.h"
 
+#include <fmt/core.h>
+
 export module WX.Cmn.TextStream;
 
 import <cstdint>;
@@ -137,12 +139,12 @@ public:
 
     void SetMode( wxEOL mode = wxEOL::Native );
     wxEOL GetMode() { return m_mode; }
-
+    
+    // FIXME: constraint type?
     template<typename T>
     void Write(const T& i)
     {
-        wxString str;
-        str << i;
+        wxString str = fmt::format("{}", i);
 
         WriteString(str);
     }

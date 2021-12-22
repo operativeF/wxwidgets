@@ -11,6 +11,8 @@ module;
 
 #include <clocale>
 
+#include <fmt/printf.h>
+
 export module WX.Test.Prec;
 
 import Utils.Strings;
@@ -104,8 +106,7 @@ public:
     // show some details about the exception along the way.
     bool OnExceptionInMainLoop() override
     {
-        wxFprintf(stderr, wxASCII_STR("Unhandled exception in the main loop: %s\n"),
-                  wxASCII_STR("Nil")); // FIXME: Doctest
+        fmt::print(stderr, "Unhandled exception in the main loop: %s\n", "Nil"); // FIXME: Doctest
 
         throw;
     }
@@ -206,7 +207,7 @@ inline bool IsNetworkAvailable()
     // under Travis to avoid false positives.
     static int s_isTravis = -1;
     if ( s_isTravis == -1 )
-        s_isTravis = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr);
+        s_isTravis = wxGetEnv("TRAVIS"), nullptr;
 
     if ( s_isTravis )
         return false;
@@ -217,7 +218,7 @@ inline bool IsNetworkAvailable()
     wxSocketBase::Initialize();
 
     wxIPV4address addr;
-    if (!addr.Hostname(wxASCII_STR("www.google.com")) || !addr.Service(wxASCII_STR("www")))
+    if (!addr.Hostname("www.google.com")) || !addr.Service("www")
     {
         wxSocketBase::Shutdown();
         return false;
@@ -296,14 +297,14 @@ inline bool EnableUITests()
         // Allow explicitly configuring this via an environment variable under
         // all platforms.
         std::string enabled;
-        if ( wxGetEnv(wxASCII_STR("WX_UI_TESTS"), &enabled) )
+        if ( wxGetEnv("WX_UI_TESTS", &enabled) )
         {
             if ( enabled == "1" )
                 s_enabled = 1;
             else if ( enabled == "0" )
                 s_enabled = 0;
             else
-                wxFprintf(stderr, wxASCII_STR("Unknown \"WX_UI_TESTS\" value \"%s\" ignored.\n"), enabled);
+                fmt::print(stderr, "Unknown \"WX_UI_TESTS\" value \"%s\" ignored.\n", enabled);
         }
 
         if ( s_enabled == -1 )

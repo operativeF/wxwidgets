@@ -197,7 +197,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                unsigned int style = 0,
-               const wxString& name = wxASCII_STR(wxPanelNameStr))
+               const wxString& name = wxPanelNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -211,7 +211,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxString& name = wxASCII_STR(wxPanelNameStr));
+                const wxString& name = wxPanelNameStr);
 
     wxSymbolListCtrl(const wxSymbolListCtrl&) = delete;
 	wxSymbolListCtrl& operator=(const wxSymbolListCtrl&) = delete;

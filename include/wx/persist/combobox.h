@@ -16,11 +16,11 @@
 
 #include "wx/combobox.h"
 
-#define wxPERSIST_COMBOBOX_KIND wxASCII_STR("Combobox")
+#define wxPERSIST_COMBOBOX_KIND "Combobox"
 
 // Stores semicolon-separated list of combobox entries (real semicolons are
 // escaped using backslash), i.e. "first;second;...".
-#define wxPERSIST_COMBOBOX_ITEMS wxASCII_STR("Items")
+#define wxPERSIST_COMBOBOX_ITEMS "Items"
 
 #define wxPERSIST_COMBOBOX_ITEMS_SEP ';'
 

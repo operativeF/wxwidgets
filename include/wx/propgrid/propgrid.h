@@ -624,7 +624,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = wxPG_DEFAULT_STYLE,
-                    const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
+                    const wxString& name = wxPropertyGridNameStr) ;
 
     // Destructor
     ~wxPropertyGrid();
@@ -688,7 +688,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  unsigned int style = wxPG_DEFAULT_STYLE,
-                 const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
+                 const wxString& name = wxPropertyGridNameStr) ;
 
     // Call when editor widget's contents is modified.
     // For example, this is called when changes text in wxTextCtrl (used in

@@ -183,7 +183,7 @@ protected:
 class wxFFileInputStream : public wxInputStream
 {
 public:
-    wxFFileInputStream(const wxString& fileName, const wxString& mode = wxASCII_STR("rb"));
+    wxFFileInputStream(const wxString& fileName, const wxString& mode = "rb");
     wxFFileInputStream(wxFFile& file);
     wxFFileInputStream(FILE *file);
     ~wxFFileInputStream();
@@ -212,7 +212,7 @@ protected:
 class wxFFileOutputStream : public wxOutputStream
 {
 public:
-    wxFFileOutputStream(const wxString& fileName, const wxString& mode = wxASCII_STR("wb"));
+    wxFFileOutputStream(const wxString& fileName, const wxString& mode = "wb");
     wxFFileOutputStream(wxFFile& file);
     wxFFileOutputStream(FILE *file);
     ~wxFFileOutputStream();
@@ -244,7 +244,7 @@ class wxFFileStream : public wxFFileInputStream,
                                        public wxFFileOutputStream
 {
 public:
-    wxFFileStream(const wxString& fileName, const wxString& mode = wxASCII_STR("w+b"));
+    wxFFileStream(const wxString& fileName, const wxString& mode = "w+b");
 
     wxFFileStream& operator=(wxFFileStream&&) = delete;
 

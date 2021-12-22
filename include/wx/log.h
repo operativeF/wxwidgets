@@ -263,7 +263,7 @@ private:
     ExtraData *m_data;
 };
 
-#define wxLOG_KEY_TRACE_MASK wxASCII_STR("wx.trace_mask")
+#define wxLOG_KEY_TRACE_MASK "wx.trace_mask"
 
 // ----------------------------------------------------------------------------
 // log record: a unit of log output
@@ -994,7 +994,7 @@ private:
 
     void DoLogAtLevelUtf8(wxLogLevel level, const char* format, auto&&... args)
     {
-        if ( !wxLog::IsLevelEnabled(level, wxASCII_STR(m_info.component)) )
+        if ( !wxLog::IsLevelEnabled(level, m_info.component)) 
             return;
 
         DoCallOnLog(level, format, args...);

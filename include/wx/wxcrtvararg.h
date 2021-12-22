@@ -267,21 +267,6 @@ import <cstdarg>;
 #define wxCRT_PrintfNative wxCRT_PrintfW
 #define wxCRT_FprintfNative wxCRT_FprintfW
 
-
-WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxPrintf, 1, (const wxFormatString&),
-                              wxCRT_PrintfNative, wxCRT_PrintfA)
-inline int wxPrintf(const wxFormatString& s)
-{
-    return wxPrintf(wxASCII_STR("%s"), s.InputAsString());
-}
-
-WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxFprintf, 2, (FILE*, const wxFormatString&),
-                              wxCRT_FprintfNative, wxCRT_FprintfA)
-inline int wxFprintf(FILE *f, const wxFormatString& s)
-{
-    return wxFprintf(f, wxASCII_STR("%s"), s.InputAsString());
-}
-
 // va_list versions of printf functions simply forward to the respective
 // CRT function; note that they assume that va_list was created using
 // wxArgNormalizer<T>!

@@ -97,13 +97,6 @@ namespace wxPrivate
     template <typename T> struct wxStringAsBufHelper;
 }
 
-// ---------------------------------------------------------------------------
-// macros
-// ---------------------------------------------------------------------------
-
-// Shorthand for instantiating ASCII strings
-#define wxASCII_STR(s) wxString::FromAscii(s)
-
 // ----------------------------------------------------------------------------
 // wxCStrData
 // ----------------------------------------------------------------------------
@@ -282,7 +275,7 @@ private:
   // these methods are not implemented - there is _no_ conversion from int to
   // string, you're doing something wrong if the compiler wants to call it!
   //
-  // try `s << i' or `s.Printf(wxASCII_STR("%d"), i)' instead
+  // try `s << i' or `s.Printf("%d"), i' instead
   wxString(int);
 
 #ifdef wxNO_IMPLICIT_WXSTRING_ENCODING
@@ -1943,18 +1936,6 @@ public:
       // insert an unsigned long into string
   wxString& operator<<(unsigned long ul)
     { return (*this) << Format("%lu", ul); }
-#ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-      // insert a long long if they exist and aren't longs
-  wxString& operator<<(wxLongLong_t ll)
-    {
-      return (*this) << Format(wxASCII_STR("%" wxLongLongFmtSpec "d"), ll);
-    }
-      // insert an unsigned long long
-  wxString& operator<<(wxULongLong_t ull)
-    {
-      return (*this) << Format(wxASCII_STR("%" wxLongLongFmtSpec "u") , ull);
-    }
-#endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
       // insert a float into string
   wxString& operator<<(float f)
     { return *this << Format("%f", static_cast<double>(f)); }

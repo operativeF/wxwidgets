@@ -81,7 +81,7 @@ public:
                 const std::vector<std::string>& choices,
                 unsigned int style = 0,
                 const wxValidator& validator = {},
-                const std::string& name = wxASCII_STR(wxBitmapComboBoxNameStr));
+                const std::string& name = wxBitmapComboBoxNameStr);
 
     ~wxBitmapComboBox();
 

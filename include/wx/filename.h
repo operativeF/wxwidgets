@@ -577,12 +577,12 @@ public:
 
         // returns the size in a human readable form
     std::string
-    GetHumanReadableSize(const std::string& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
+    GetHumanReadableSize(const std::string& nullsize = wxGetTranslation("Not available"),
                          int precision = 1,
                          wxSizeConvention conv = wxSizeConvention::Traditional) const;
     static std::string
     GetHumanReadableSize(const wxULongLong& sz,
-                         const std::string& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
+                         const std::string& nullsize = wxGetTranslation("Not available"),
                          int precision = 1,
                          wxSizeConvention conv = wxSizeConvention::Traditional);
 #endif // wxUSE_LONGLONG

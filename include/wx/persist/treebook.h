@@ -20,11 +20,11 @@
 // string constants used by wxPersistentTreeBookCtrl
 // ----------------------------------------------------------------------------
 
-#define wxPERSIST_TREEBOOK_KIND wxASCII_STR("TreeBook")
+#define wxPERSIST_TREEBOOK_KIND "TreeBook"
 
 // this key contains the indices of all expanded nodes in the tree book
 // separated by wxPERSIST_TREEBOOK_EXPANDED_SEP
-#define wxPERSIST_TREEBOOK_EXPANDED_BRANCHES wxASCII_STR("Expanded")
+#define wxPERSIST_TREEBOOK_EXPANDED_BRANCHES "Expanded"
 #define wxPERSIST_TREEBOOK_EXPANDED_SEP ','
 
 // ----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ public:
                 if ( !expanded.empty() )
                     expanded += wxPERSIST_TREEBOOK_EXPANDED_SEP;
 
-                expanded += wxString::Format(wxASCII_STR("%u"), static_cast<unsigned>(n));
+                expanded += wxString::Format("%u"), static_cast<unsigned>(n);
             }
         }
 

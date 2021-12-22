@@ -322,7 +322,7 @@ inline const wxString& wxGetTranslation(const char *str1,
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
         #define _(s)                 (s)
 #else
-        #define _(s)                 wxASCII_STR(s)
+        #define _(s)                 (s)
 #endif
     #endif
     #define wxPLURAL(sing, plur, n)  ((n) == 1 ? (sing) : (plur))

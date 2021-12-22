@@ -73,10 +73,10 @@ static wxString FormatAssertMessage(const wxString& file,
                                     const wxString& msg)
 {
     wxString str;
-    str << wxASCII_STR("wxWidgets assert: ") << cond
-        << wxASCII_STR(" failed at ") << file << wxASCII_STR(":") << line
-        << wxASCII_STR(" in ") << func << wxASCII_STR(" with message '")
-        << msg << wxASCII_STR("'");
+    str << "wxWidgets assert: " << cond
+        << " failed at " << file << ":" << line
+        << " in " << func << " with message '"
+        << msg << "'";
     return str;
 }
 
@@ -98,7 +98,7 @@ static void TestAssertHandler(const std::string& file,
     {
         // Exceptions thrown from worker threads are not caught currently and
         // so we'd just die without any useful information -- abort instead.
-        abortReason << assertMessage << wxASCII_STR(" in a worker thread.");
+        abortReason << assertMessage << " in a worker thread.";
     }
     else if ( std::uncaught_exceptions() )
     {
@@ -108,13 +108,13 @@ static void TestAssertHandler(const std::string& file,
         if ( s_lastAssertMessage.empty() )
         {
             abortReason << assertMessage
-                        << wxASCII_STR("while handling an exception");
+                        << "while handling an exception";
         }
         else // In this case the exception is due to a previous assert.
         {
             abortReason << s_lastAssertMessage
-                        << wxASCII_STR("\n  and another ") << assertMessage
-                        << wxASCII_STR(" while handling it.");
+                        << "\n  and another " << assertMessage
+                        << " while handling it.";
         }
     }
     else // Can "safely" throw from here.
@@ -130,7 +130,7 @@ static void TestAssertHandler(const std::string& file,
 #if wxUSE_STACKWALKER
     const wxString& stackTrace = wxApp::GetValidTraits().GetAssertStackTrace();
     if ( !stackTrace.empty() )
-        abortReason << wxASCII_STR("\n\nAssert call stack:\n") << stackTrace;
+        abortReason << "\n\nAssert call stack:\n" << stackTrace;
 #endif // wxUSE_STACKWALKER
 
     wxFputs(abortReason, stderr);
@@ -260,7 +260,7 @@ int TestApp::RunTests()
     // Switch off logging to avoid interfering with the tests output unless
     // WXTRACE is set, as otherwise setting it would have no effect while
     // running the tests.
-    if ( !wxGetEnv(wxASCII_STR("WXTRACE"), nullptr) )
+    if ( !wxGetEnv("WXTRACE"), nullptr) 
         wxLog::EnableLogging(false);
     else
         wxLog::SetTimestamp("%Y-%m-%d %H:%M:%S.%l");

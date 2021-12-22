@@ -14,7 +14,7 @@
 
 import WX.Test.Prec;
 
-wxTestableFrame::wxTestableFrame() : wxFrame(nullptr, wxID_ANY, wxASCII_STR("Test Frame"))
+wxTestableFrame::wxTestableFrame() : wxFrame(nullptr, wxID_ANY, "Test Frame")
 {
     // Use fixed position to facilitate debugging.
     Move(wxPoint{200, 200});
