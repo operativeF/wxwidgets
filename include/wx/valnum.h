@@ -284,13 +284,8 @@ protected:
     // Define the type we use here, it should be the maximal-sized integer type
     // we support to make it possible to base wxIntegerValidator<> for any type
     // on it.
-#ifdef wxLongLong_t
-    using LongestValueType = long long;
-    using ULongestValueType = unsigned long long;
-#else
-    using LongestValueType = long;
-    using ULongestValueType = unsigned long;
-#endif
+    using LongestValueType = std::int64_t;
+    using ULongestValueType = std::uint64_t;
 
     wxIntegerValidatorBase(unsigned int style)
         : wxNumValidatorBase(style)

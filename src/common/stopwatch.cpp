@@ -73,7 +73,7 @@ void wxStopWatch::DoStart()
     m_t0 = GetCurrentClockValue();
 }
 
-wxLongLong wxStopWatch::GetClockFreq() const
+std::int64_t wxStopWatch::GetClockFreq() const
 {
 #ifdef WX_WINDOWS
     // Under MSW we use the high resolution performance counter timer which has
@@ -90,7 +90,7 @@ wxLongLong wxStopWatch::GetClockFreq() const
 #endif // WX_WINDOWS/HAVE_GETTIMEOFDAY/else
 }
 
-void wxStopWatch::Start(long t0)
+void wxStopWatch::Start(std::int32_t t0)
 {
     // Calling Start() makes the stop watch run however many times it was
     // paused before.
@@ -98,10 +98,10 @@ void wxStopWatch::Start(long t0)
 
     DoStart();
 
-    m_t0 -= (wxLongLong(t0)*GetClockFreq())/MILLISECONDS_PER_SECOND;
+    m_t0 -= (std::int64_t{t0} * GetClockFreq() ) / MILLISECONDS_PER_SECOND;
 }
 
-wxLongLong wxStopWatch::GetCurrentClockValue() const
+std::int64_t wxStopWatch::GetCurrentClockValue() const
 {
 #ifdef WX_WINDOWS
     LARGE_INTEGER counter;
@@ -114,12 +114,12 @@ wxLongLong wxStopWatch::GetCurrentClockValue() const
 #endif // WX_WINDOWS/HAVE_GETTIMEOFDAY/else
 }
 
-wxLongLong wxStopWatch::TimeInMicro() const
+std::int64_t wxStopWatch::TimeInMicro() const
 {
-    const wxLongLong elapsed(m_pauseCount ? m_elapsedBeforePause
+    const std::int64_t elapsed(m_pauseCount ? m_elapsedBeforePause
                                           : GetCurrentClockValue() - m_t0);
 
-    return (elapsed*MICROSECONDS_PER_SECOND)/GetClockFreq();
+    return (elapsed * MICROSECONDS_PER_SECOND) / GetClockFreq();
 }
 
 #endif // wxUSE_STOPWATCH
@@ -130,7 +130,7 @@ wxLongLong wxStopWatch::TimeInMicro() const
 
 #if wxUSE_LONGLONG
 
-static wxLongLong wxStartTime = 0l;
+static std::int64_t wxStartTime = 0;
 
 // starts the global timer
 void wxStartTimer()
@@ -139,15 +139,16 @@ void wxStartTimer()
 }
 
 // Returns elapsed time in milliseconds
-long wxGetElapsedTime(bool resetTimer)
+std::int32_t wxGetElapsedTime(bool resetTimer)
 {
-    wxLongLong oldTime = wxStartTime;
-    wxLongLong newTime = wxGetUTCTimeMillis();
+    std::int64_t oldTime = wxStartTime;
+    std::int64_t newTime = wxGetUTCTimeMillis();
 
     if ( resetTimer )
         wxStartTime = newTime;
 
-    return (newTime - oldTime).GetLo();
+    // NOTE: Truncating by design.
+    return wx::narrow_cast<std::int32_t>(newTime - oldTime);
 }
 
 #endif // wxUSE_LONGLONG

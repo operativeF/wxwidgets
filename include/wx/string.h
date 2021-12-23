@@ -2121,15 +2121,13 @@ public:
   // done and must be comprised between 2 and 36 or be 0 in which case the
   // standard C rules apply (leading '0' => octal, "0x" => hex)
       // convert to a signed integer
-  bool ToLong(long *val, int base = 10) const;
+  bool ToLong(std::int32_t *val, int base = 10) const;
       // convert to an unsigned integer
-  bool ToULong(unsigned long *val, int base = 10) const;
-      // convert to wxLongLong
-#if defined(wxLongLong_t)
-  bool ToLongLong(wxLongLong_t *val, int base = 10) const;
-      // convert to wxULongLong
-  bool ToULongLong(wxULongLong_t *val, int base = 10) const;
-#endif // wxLongLong_t
+  bool ToULong(std::uint32_t *val, int base = 10) const;
+      // convert to std::int64_t
+  bool ToLongLong(std::int64_t *val, int base = 10) const;
+      // convert to std::uint64_t
+  bool ToULongLong(std::uint64_t *val, int base = 10) const;
       // convert to a double
   bool ToDouble(double *val) const;
 

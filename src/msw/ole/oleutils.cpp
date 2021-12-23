@@ -451,7 +451,7 @@ wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long fla
 
 #if wxUSE_LONGLONG
             case VT_I8:
-                variant = wxLongLong(oleVariant.llVal);
+                variant = std::int64_t(oleVariant.llVal);
                 break;
 #endif // wxUSE_LONGLONG
 

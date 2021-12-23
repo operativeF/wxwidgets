@@ -471,7 +471,7 @@ void wxUpdateUIEvent::ResetUpdateTime()
 #if wxUSE_STOPWATCH && wxUSE_LONGLONG
     if (sm_updateInterval > 0)
     {
-        const wxLongLong now = wxGetLocalTimeMillis();
+        const auto now = wxGetLocalTimeMillis();
         if (now > (sm_lastUpdate + sm_updateInterval))
         {
             sm_lastUpdate = now;

@@ -285,7 +285,7 @@ std::string wxFileData::GetEntry( fileListFieldType num ) const
 
         case FileList_Size:
             if (!IsDir() && !IsLink() && !IsDrive())
-                s = wxLongLong(m_size).ToString();
+                s = fmt::format("{}", m_size);
             break;
 
         case FileList_Type:

@@ -443,34 +443,27 @@ void wxTextOutputStream::SetMode(wxEOL mode)
 
 void wxTextOutputStream::Write64(std::uint64_t i)
 {
-    WriteString(wxString::Format("%" wxLongLongFmtSpec "u", i));
+    WriteString(fmt::format("{}", i));
 }
 
 void wxTextOutputStream::Write32(std::uint32_t i)
 {
-    std::string str = fmt::format("%u", i);
-
-    WriteString(str);
+    WriteString(fmt::format("%u", i));
 }
 
 void wxTextOutputStream::Write16(std::uint16_t i)
 {
-    std::string str = fmt::format("%u", (unsigned)i);
-
-    WriteString(str);
+    WriteString(fmt::format("%u", i));
 }
 
 void wxTextOutputStream::Write8(std::uint8_t i)
 {
-    std::string str = fmt::format("%u", (unsigned)i);
-
-    WriteString(str);
+    WriteString(fmt::format("%u", (unsigned)i));
 }
 
 void wxTextOutputStream::WriteDouble(double d)
 {
-    std::string str = fmt::format("{:d}", d);
-    WriteString(str);
+    WriteString(fmt::format("{:d}", d));
 }
 
 void wxTextOutputStream::WriteString(const wxString& string)

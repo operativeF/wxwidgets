@@ -43,7 +43,7 @@ bool TryGetValue(const wxRegKey& key, const std::string& str, long *plVal)
   return key.IsOpened() && key.HasValue(str) && key.QueryValue(str, plVal);
 }
 
-bool TryGetValue(const wxRegKey& key, const std::string& str, wxLongLong_t *pll)
+bool TryGetValue(const wxRegKey& key, const std::string& str, std::int64_t *pll)
 {
   return key.IsOpened() && key.HasValue(str) && key.QueryValue64(str, pll);
 }
@@ -61,7 +61,7 @@ bool SetKeyValue(wxRegKey& key, const std::string& name, const T& value)
     return key.SetValue(name, value);
 }
 
-bool SetKeyValue(wxRegKey& key, const std::string& name, wxLongLong_t value)
+bool SetKeyValue(wxRegKey& key, const std::string& name, std::int64_t value)
 {
     return key.SetValue64(name, value);
 }
@@ -607,7 +607,7 @@ bool wxRegConfig::DoReadLong(const std::string& key, long *plResult) const
   return DoReadValue(key, plResult);
 }
 
-bool wxRegConfig::DoReadLongLong(const std::string& key, wxLongLong_t *pll) const
+bool wxRegConfig::DoReadLongLong(const std::string& key, std::int64_t *pll) const
 {
   return DoReadValue(key, pll);
 }
@@ -642,7 +642,7 @@ bool wxRegConfig::DoWriteLong(const std::string& key, long lValue)
   return DoWriteValue(key, lValue);
 }
 
-bool wxRegConfig::DoWriteLongLong(const std::string& key, wxLongLong_t llValue)
+bool wxRegConfig::DoWriteLongLong(const std::string& key, std::int64_t llValue)
 {
   return DoWriteValue(key, llValue);
 }

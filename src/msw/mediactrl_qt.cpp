@@ -347,9 +347,9 @@ public:
 
     wxMediaState GetState() override;
 
-    bool SetPosition(wxLongLong where) override;
-    wxLongLong GetPosition() override;
-    wxLongLong GetDuration() override;
+    bool SetPosition(std::int64_t where) override;
+    std::int64_t GetPosition() override;
+    std::int64_t GetDuration() override;
 
     void Move(wxRect boundary) override;
     wxSize GetVideoSize() const override;
@@ -911,7 +911,7 @@ bool wxQTMediaBackend::SetPlaybackRate(double dRate)
 // 1) Create a time record struct (TimeRecord) with appropriate values
 // 2) Pass struct to SetMovieTime
 //---------------------------------------------------------------------------
-bool wxQTMediaBackend::SetPosition(wxLongLong where)
+bool wxQTMediaBackend::SetPosition(std::int64_t where)
 {
     // NB:  For some reason SetMovieTime does not work
     // correctly with the Quicktime Windows SDK (6)
@@ -939,7 +939,7 @@ bool wxQTMediaBackend::SetPosition(wxLongLong where)
 // 1) Calls GetMovieTime to get the position we are in in the movie
 // in milliseconds (we called
 //---------------------------------------------------------------------------
-wxLongLong wxQTMediaBackend::GetPosition()
+std::int64_t wxQTMediaBackend::GetPosition()
 {
     return m_lib.GetMovieTime(m_movie, nullptr);
 }
@@ -996,7 +996,7 @@ bool wxQTMediaBackend::SetVolume(double dVolume)
 //
 // Calls GetMovieDuration
 //---------------------------------------------------------------------------
-wxLongLong wxQTMediaBackend::GetDuration()
+std::int64_t wxQTMediaBackend::GetDuration()
 {
     return m_lib.GetMovieDuration(m_movie);
 }

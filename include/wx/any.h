@@ -362,13 +362,8 @@ _WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE)\
 //  Integer value types
 //
 
-#ifdef wxLongLong_t
-    using wxAnyBaseIntType = long long;
-    using wxAnyBaseUintType = unsigned long long;
-#else
-    using wxAnyBaseIntType = long;
-    using wxAnyBaseUintType = unsigned long;
-#endif
+using wxAnyBaseIntType = std::int64_t;
+using wxAnyBaseUintType = std::uint64_t;
 
 
 class wxAnyValueTypeImplInt :
@@ -397,18 +392,13 @@ WX_ANY_DEFINE_SUB_TYPE(signed long, Int)
 WX_ANY_DEFINE_SUB_TYPE(signed int, Int)
 WX_ANY_DEFINE_SUB_TYPE(signed short, Int)
 WX_ANY_DEFINE_SUB_TYPE(signed char, Int)
-#ifdef wxLongLong_t
-WX_ANY_DEFINE_SUB_TYPE(wxLongLong_t, Int)
-#endif
+WX_ANY_DEFINE_SUB_TYPE(std::int64_t, Int)
 
 WX_ANY_DEFINE_SUB_TYPE(unsigned long, Uint)
 WX_ANY_DEFINE_SUB_TYPE(unsigned int, Uint)
 WX_ANY_DEFINE_SUB_TYPE(unsigned short, Uint)
 WX_ANY_DEFINE_SUB_TYPE(unsigned char, Uint)
-#ifdef wxLongLong_t
-WX_ANY_DEFINE_SUB_TYPE(wxULongLong_t, Uint)
-#endif
-
+WX_ANY_DEFINE_SUB_TYPE(std::uint64_t, Uint)
 
 //
 // This macro is used in header, but then in source file we must have:
@@ -841,9 +831,7 @@ public:
     WXANY_IMPLEMENT_INT_EQ_OP(signed short, unsigned short)
     WXANY_IMPLEMENT_INT_EQ_OP(signed int, unsigned int)
     WXANY_IMPLEMENT_INT_EQ_OP(signed long, unsigned long)
-#ifdef wxLongLong_t
-    WXANY_IMPLEMENT_INT_EQ_OP(wxLongLong_t, wxULongLong_t)
-#endif
+    WXANY_IMPLEMENT_INT_EQ_OP(std::int64_t, std::uint64_t)
 
     bool operator==(float value) const
     {

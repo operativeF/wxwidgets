@@ -18,14 +18,14 @@ import WX.Utils.Cast;
 int wxGetTimeZone();
 
 // Get number of seconds since local time 00:00:00 Jan 1st 1970.
-extern long wxGetLocalTime();
+extern std::int32_t wxGetLocalTime();
 
 // Get number of seconds since GMT 00:00:00, Jan 1st 1970.
-extern long wxGetUTCTime();
+extern std::int32_t wxGetUTCTime();
 
 #if wxUSE_LONGLONG
-    using wxMilliClock_t = wxLongLong;
-    inline long wxMilliClockToLong(wxLongLong ll) { return ll.ToLong(); }
+    using wxMilliClock_t = std::int64_t;
+    inline std::int32_t wxMilliClockToLong(std::int64_t ll) { return wx::narrow_cast<std::int32_t>(ll); }
 #else
     using wxMilliClock_t = double;
     inline long wxMilliClockToLong(double d) { return wx::narrow_cast<long>(d); }
@@ -37,8 +37,8 @@ extern wxMilliClock_t wxGetLocalTimeMillis();
 #if wxUSE_LONGLONG
 
 // Get the number of milliseconds or microseconds since the Epoch.
-wxLongLong wxGetUTCTimeMillis();
-wxLongLong wxGetUTCTimeUSec();
+std::int64_t wxGetUTCTimeMillis();
+std::int64_t wxGetUTCTimeUSec();
 
 #endif // wxUSE_LONGLONG
 

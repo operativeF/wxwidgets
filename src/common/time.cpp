@@ -165,7 +165,7 @@ int wxGetTimeZone()
 }
 
 // Get local time as seconds since 00:00:00, Jan 1st 1970
-long wxGetLocalTime()
+std::int32_t wxGetLocalTime()
 {
     struct tm tm;
     time_t t0, t1;
@@ -196,14 +196,12 @@ long wxGetLocalTime()
 }
 
 // Get UTC time as seconds since 00:00:00, Jan 1st 1970
-long wxGetUTCTime()
+std::int32_t wxGetUTCTime()
 {
-    return (long)time(nullptr);
+    return static_cast<std::int32_t>(time(nullptr));
 }
 
-#if wxUSE_LONGLONG
-
-wxLongLong wxGetUTCTimeUSec()
+std::int64_t wxGetUTCTimeUSec()
 {
 #if defined(WX_WINDOWS)
     FILETIME ft;
@@ -211,7 +209,7 @@ wxLongLong wxGetUTCTimeUSec()
 
     // FILETIME is in 100ns or 0.1us since 1601-01-01, transform to us since
     // 1970-01-01.
-    wxLongLong t(ft.dwHighDateTime, ft.dwLowDateTime);
+    std::int64_t t = (ft.dwHighDateTime, ft.dwLowDateTime);
     t /= 10;
     t -= 11644473600000000LL; // Unix - Windows epochs difference in us.
     return t;
@@ -221,7 +219,7 @@ wxLongLong wxGetUTCTimeUSec()
     timeval tv;
     if ( wxGetTimeOfDay(&tv) != -1 )
     {
-        wxLongLong val(tv.tv_sec);
+        std::int64_t val(tv.tv_sec);
         val *= MICROSECONDS_PER_SECOND;
         val += tv.tv_usec;
         return val;
@@ -234,7 +232,7 @@ wxLongLong wxGetUTCTimeUSec()
 }
 
 // Get local time as milliseconds since 00:00:00, Jan 1st 1970
-wxLongLong wxGetUTCTimeMillis()
+std::int64_t wxGetUTCTimeMillis()
 {
     // If possible, use a function which avoids conversions from
     // broken-up time structures to milliseconds
@@ -244,12 +242,13 @@ wxLongLong wxGetUTCTimeMillis()
 
     // FILETIME is expressed in 100ns (or 0.1us) units since 1601-01-01,
     // transform them to ms since 1970-01-01.
-    wxLongLong t(ft.dwHighDateTime, ft.dwLowDateTime);
+    std::int64_t t = ((static_cast<std::int64_t>(ft.dwHighDateTime) << 32) +
+                      static_cast<std::int64_t>(ft.dwLowDateTime));
     t /= 10000;
     t -= 11644473600000LL; // Unix - Windows epochs difference in ms.
     return t;
 #else // !WX_WINDOWS
-    wxLongLong val = MILLISECONDS_PER_SECOND;
+    std::int64_t val = MILLISECONDS_PER_SECOND;
 
 #if defined(HAVE_GETTIMEOFDAY)
     struct timeval tp;
@@ -289,16 +288,8 @@ wxLongLong wxGetUTCTimeMillis()
 #endif // WX_WINDOWS/!WX_WINDOWS
 }
 
-wxLongLong wxGetLocalTimeMillis()
+std::int64_t wxGetLocalTimeMillis()
 {
     return wxGetUTCTimeMillis() - wxGetTimeZone()*MILLISECONDS_PER_SECOND;
 }
 
-#else // !wxUSE_LONGLONG
-
-double wxGetLocalTimeMillis()
-{
-    return (double(clock()) / double(CLOCKS_PER_SEC)) * MILLISECONDS_PER_SECOND;
-}
-
-#endif // wxUSE_LONGLONG/!wxUSE_LONGLONG

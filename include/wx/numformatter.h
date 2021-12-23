@@ -28,13 +28,11 @@ public:
     // Format a number as a string. By default, the thousands separator is
     // used, specify Style_None to prevent this. For floating point numbers,
     // precision can also be specified.
-    static wxString ToString(long val,
+    static wxString ToString(std::int32_t val,
                              unsigned int style = Style_WithThousandsSep);
-#ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    static wxString ToString(wxLongLong_t val,
+    static wxString ToString(std::int64_t val,
                              unsigned int style = Style_WithThousandsSep);
-#endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    static wxString ToString(wxULongLong_t val,
+    static wxString ToString(std::uint64_t val,
                              unsigned int style = Style_WithThousandsSep);
     static wxString ToString(double val,
                              int precision,
@@ -44,11 +42,9 @@ public:
     //
     // Return true on success and stores the result in the provided location
     // which must be a valid non-NULL pointer.
-    static bool FromString(wxString s, long *val);
-#ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    static bool FromString(wxString s, wxLongLong_t *val);
-#endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    static bool FromString(wxString s, wxULongLong_t *val);
+    static bool FromString(wxString s, std::int32_t *val);
+    static bool FromString(wxString s, std::int64_t *val);
+    static bool FromString(wxString s, std::uint64_t *val);
     static bool FromString(wxString s, double *val);
 
 

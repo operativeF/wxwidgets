@@ -119,7 +119,7 @@ wxMarkupParser::ParseAttrs(wxString attrs, TagAndAttrs& tagAndAttrs)
         }
         else if ( name == "font_weight" || name == "weight" )
         {
-            unsigned long weight;
+            std::uint32_t weight;
 
             if ( value == "ultralight" || value == "light" || value == "normal" )
                 spanAttrs.m_isBold = wxMarkupSpanAttributes::No;
@@ -142,7 +142,7 @@ wxMarkupParser::ParseAttrs(wxString attrs, TagAndAttrs& tagAndAttrs)
         }
         else if ( name == "size" )
         {
-            unsigned long size;
+            std::uint32_t size;
             if ( value.ToULong(&size) )
             {
                 spanAttrs.m_sizeKind = wxMarkupSpanAttributes::Size_PointParts;

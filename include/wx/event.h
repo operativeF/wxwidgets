@@ -3013,7 +3013,7 @@ protected:
     bool          m_isCheckable{true};
 
 #if wxUSE_LONGLONG
-    inline static wxLongLong       sm_lastUpdate{0};
+    inline static std::int64_t     sm_lastUpdate{0};
 #endif
     inline static long             sm_updateInterval{0};
     inline static wxUpdateUIMode   sm_updateMode{wxUpdateUIMode::All};

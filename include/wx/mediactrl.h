@@ -206,11 +206,11 @@ public:
     virtual bool Load([[maybe_unused]] const wxURI& location)
     {   return false;                   }
 
-    virtual bool SetPosition([[maybe_unused]] wxLongLong where)
+    virtual bool SetPosition([[maybe_unused]] std::int64_t where)
     {   return 0;                       }
-    virtual wxLongLong GetPosition()
+    virtual std::int64_t GetPosition()
     {   return 0;                       }
-    virtual wxLongLong GetDuration()
+    virtual std::int64_t GetDuration()
     {   return 0;                       }
 
     virtual void Move([[maybe_unused]] wxRect boundary)
@@ -241,9 +241,9 @@ public:
     virtual bool   IsInterfaceShown()
     {   return false;                   }
 
-    virtual wxLongLong GetDownloadProgress()
+    virtual std::int64_t GetDownloadProgress()
     {    return 0;                      }
-    virtual wxLongLong GetDownloadTotal()
+    virtual std::int64_t GetDownloadTotal()
     {    return 0;                      }
 
     virtual void MacVisibilityChanged()

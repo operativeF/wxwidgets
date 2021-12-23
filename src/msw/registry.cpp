@@ -911,7 +911,7 @@ bool wxRegKey::QueryValue(const std::string& szValue, long *plValue) const
     return false;
 }
 
-bool wxRegKey::SetValue64(const std::string& szValue, wxLongLong_t llValue)
+bool wxRegKey::SetValue64(const std::string& szValue, std::int64_t llValue)
 {
   if ( CONST_CAST Open() ) {
     boost::nowide::wstackstring stackSzValue{szValue.c_str()};
@@ -927,10 +927,10 @@ bool wxRegKey::SetValue64(const std::string& szValue, wxLongLong_t llValue)
   return false;
 }
 
-bool wxRegKey::QueryValue64(const std::string& szValue, wxLongLong_t *pllValue) const
+bool wxRegKey::QueryValue64(const std::string& szValue, std::int64_t *pllValue) const
 {
   if ( CONST_CAST Open(Read) ) {
-    WXDWORD dwType, dwSize = sizeof(wxLongLong_t); // QWORD doesn't exist.
+    WXDWORD dwType, dwSize = sizeof(std::int64_t); // QWORD doesn't exist.
     RegString pBuf = (RegString)pllValue;
     boost::nowide::wstackstring stackSzValue{szValue.c_str()};
     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, stackSzValue.get(),

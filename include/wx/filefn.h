@@ -109,7 +109,7 @@ import <vector>;
     // types
 
     #ifdef wxHAS_HUGE_FILES
-        using wxFileOffset = long long;
+        using wxFileOffset = std::int64_t;
         #define wxFileOffsetFmtSpec wxLongLongFmtSpec
     #else
         using wxFileOffset = off_t;
@@ -259,7 +259,7 @@ import <vector>;
     using wxFileOffset = off_t;
     #ifdef HAVE_LARGEFILE_SUPPORT
         #define wxFileOffsetFmtSpec wxLongLongFmtSpec
-        static_assert( sizeof(off_t) == sizeof(wxLongLong_t), "Bad file size type");
+        static_assert( sizeof(off_t) == sizeof(std::int64_t), "Bad file size type");
         // wxFile is present and supports large files
         #if wxUSE_FILE
             #define wxHAS_LARGE_FILES

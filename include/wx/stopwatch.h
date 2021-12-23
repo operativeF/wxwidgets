@@ -12,8 +12,6 @@
 #ifndef _WX_STOPWATCH_H_
 #define _WX_STOPWATCH_H_
 
-#include "wx/longlong.h"
-
 // Time-related functions are also available via this header for compatibility
 // but you should include wx/time.h directly if you need only them and not
 // wxStopWatch itself.
@@ -34,7 +32,7 @@ public:
     // Start the stop watch at the moment t0 expressed in milliseconds (i.e.
     // calling Time() immediately afterwards returns t0). This can be used to
     // restart an existing stopwatch.
-    void Start(long t0 = 0);
+    void Start(std::int32_t t0 = 0);
 
     // pause the stop watch
     void Pause()
@@ -57,10 +55,10 @@ public:
     }
 
     // Get elapsed time since the last Start() in microseconds.
-    wxLongLong TimeInMicro() const;
+    std::int64_t TimeInMicro() const;
 
     // get elapsed time since the last Start() in milliseconds
-    long Time() const { return (TimeInMicro()/1000).ToLong(); }
+    std::int32_t Time() const { return TimeInMicro() / 1000; }
 
 private:
     // Really starts the stop watch. The initial time is set to current clock
@@ -68,19 +66,19 @@ private:
     void DoStart();
 
     // Returns the current clock value in its native units.
-    wxLongLong GetCurrentClockValue() const;
+    std::int64_t GetCurrentClockValue() const;
 
     // Return the frequency of the clock used in its ticks per second.
-    wxLongLong GetClockFreq() const;
+    std::int64_t GetClockFreq() const;
 
 
     // The clock value when the stop watch was last started. Its units vary
     // depending on the platform.
-    wxLongLong m_t0;
+    std::int64_t m_t0;
 
     // The elapsed time as of last Pause() call (only valid if m_pauseCount >
     // 0) in the same units as m_t0.
-    wxLongLong m_elapsedBeforePause;
+    std::int64_t m_elapsedBeforePause;
 
     // if > 0, the stop watch is paused, otherwise it is running
     int m_pauseCount{0};

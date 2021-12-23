@@ -26,7 +26,7 @@
 
 #define GetMillisecondsTime wxGetLocalTimeMillis
 
-using wxTimerTick_t = wxLongLong;
+using wxTimerTick_t = std::int64_t;
 
 #if wxUSE_LONGLONG_WX
     #define wxTimerTickFmtSpec wxLongLongFmtSpec "d"

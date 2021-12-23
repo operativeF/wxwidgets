@@ -70,7 +70,7 @@ namespace
 bool GetNumericToken(size_t len,
                      wxString::const_iterator& p,
                      const wxString::const_iterator& end,
-                     unsigned long *number,
+                     std::uint32_t *number,
                      size_t *numScannedDigits = nullptr)
 {
     size_t n = 1;
@@ -968,7 +968,7 @@ wxDateTime::ParseFormat(const wxString& date,
     wxCHECK_MSG( endParse, false, "end iterator pointer must be specified" );
 
     wxString str;
-    unsigned long num;
+    std::uint32_t num;
 
     // what fields have we found?
     bool haveWDay = false,
@@ -1469,7 +1469,7 @@ wxDateTime::ParseFormat(const wxString& date,
                     static constexpr size_t numRequiredDigits = 2;
                     size_t numScannedDigits;
 
-                    unsigned long hours;
+                    std::uint32_t hours;
                     if ( !GetNumericToken(numRequiredDigits, input, end,
                                           &hours, &numScannedDigits)
                          || numScannedDigits != numRequiredDigits)
@@ -1486,7 +1486,7 @@ wxDateTime::ParseFormat(const wxString& date,
                     }
 
                     // Optionally followed by exactly 2 digits for minutes (MM).
-                    unsigned long minutes = 0;
+                    std::uint32_t minutes = 0;
                     if ( !GetNumericToken(numRequiredDigits, input, end,
                                           &minutes, &numScannedDigits)
                          || numScannedDigits != numRequiredDigits)
@@ -1825,7 +1825,7 @@ wxDateTime::ParseDate(const wxString& date, wxString::const_iterator *end)
 
         // we can have either alphabetic or numeric token, start by testing if
         // it's the latter
-        unsigned long val;
+        std::uint32_t val;
         if ( GetNumericToken(10 /* max length */, pCopy, pEnd, &val) )
         {
             // guess what this number is

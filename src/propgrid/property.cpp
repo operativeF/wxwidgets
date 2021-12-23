@@ -1477,7 +1477,7 @@ wxVariant wxPGProperty::GetDefaultValue() const
             return wxVariant(std::vector<wxString>());
 #if wxUSE_LONGLONG
         if ( valueType == wxPG_VARIANT_TYPE_LONGLONG )
-            return wxVariant(wxLongLong(0));
+            return wxVariant(std::int64_t(0));
         if ( valueType == wxPG_VARIANT_TYPE_ULONGLONG )
             return wxVariant(wxULongLong(0));
 #endif

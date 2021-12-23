@@ -609,7 +609,7 @@ void wxWebResponseImpl::Init()
         if ( GetContentLength() > 0 )
         {
             // Check available disk space
-            wxLongLong freeSpace;
+            std::int64_t freeSpace;
             if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), nullptr, &freeSpace) &&
                 GetContentLength() > freeSpace )
             {

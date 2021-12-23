@@ -172,25 +172,19 @@ wxString wxNumberFormatter::PostProcessIntString(wxString s, unsigned int style)
     return s;
 }
 
-wxString wxNumberFormatter::ToString(long val, unsigned int style)
+wxString wxNumberFormatter::ToString(std::int32_t val, unsigned int style)
 {
     return PostProcessIntString(fmt::format("{:d}", val), style);
 }
 
-#ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-
-wxString wxNumberFormatter::ToString(wxLongLong_t val, unsigned int style)
+wxString wxNumberFormatter::ToString(std::int64_t val, unsigned int style)
 {
-    return PostProcessIntString(wxString::Format("%" wxLongLongFmtSpec "d", val),
-                                style);
+    return PostProcessIntString(fmt::format("{}", val), style);
 }
 
-#endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-
-wxString wxNumberFormatter::ToString(wxULongLong_t val, unsigned int style)
+wxString wxNumberFormatter::ToString(std::uint64_t val, unsigned int style)
 {
-    return PostProcessIntString(wxString::Format("%" wxLongLongFmtSpec "u", val),
-                                style);
+    return PostProcessIntString(fmt::format("{}", val), style);
 }
 
 wxString wxNumberFormatter::ToString(double val, int precision, unsigned int style)
@@ -281,23 +275,19 @@ void wxNumberFormatter::RemoveThousandsSeparators(wxString& s)
     s.Replace(wxString(thousandsSep), wxString());
 }
 
-bool wxNumberFormatter::FromString(wxString s, long *val)
+bool wxNumberFormatter::FromString(wxString s, std::int32_t *val)
 {
     RemoveThousandsSeparators(s);
     return s.ToLong(val);
 }
 
-#ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-
-bool wxNumberFormatter::FromString(wxString s, wxLongLong_t *val)
+bool wxNumberFormatter::FromString(wxString s, std::int64_t *val)
 {
     RemoveThousandsSeparators(s);
     return s.ToLongLong(val);
 }
 
-#endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-
-bool wxNumberFormatter::FromString(wxString s, wxULongLong_t *val)
+bool wxNumberFormatter::FromString(wxString s, std::uint64_t *val)
 {
     RemoveThousandsSeparators(s);
 

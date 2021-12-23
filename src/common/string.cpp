@@ -1457,16 +1457,16 @@ int wxString::Find(wxUniChar ch, bool bFromEnd) const
     *pVal = val;                                                            \
     return !*end;
 
-bool wxString::ToLong(long *pVal, int base) const
+bool wxString::ToLong(std::int32_t *pVal, int base) const
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
 
     WX_STRING_TO_X_TYPE_START
-    long val = wxStrtol(start, &end, base);
+    std::uint32_t val = wxStrtol(start, &end, base);
     WX_STRING_TO_X_TYPE_END
 }
 
-bool wxString::ToULong(unsigned long *pVal, int base) const
+bool wxString::ToULong(std::uint32_t *pVal, int base) const
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
 
@@ -1475,21 +1475,21 @@ bool wxString::ToULong(unsigned long *pVal, int base) const
     WX_STRING_TO_X_TYPE_END
 }
 
-bool wxString::ToLongLong(wxLongLong_t *pVal, int base) const
+bool wxString::ToLongLong(std::int64_t *pVal, int base) const
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
 
     WX_STRING_TO_X_TYPE_START
-    wxLongLong_t val = wxStrtoll(start, &end, base);
+    std::int64_t val = wxStrtoll(start, &end, base);
     WX_STRING_TO_X_TYPE_END
 }
 
-bool wxString::ToULongLong(wxULongLong_t *pVal, int base) const
+bool wxString::ToULongLong(std::uint64_t *pVal, int base) const
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), "invalid base" );
 
     WX_STRING_TO_X_TYPE_START
-    wxULongLong_t val = wxStrtoull(start, &end, base);
+    std::uint64_t val = wxStrtoull(start, &end, base);
     WX_STRING_TO_X_TYPE_END
 }
 

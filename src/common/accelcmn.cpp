@@ -125,7 +125,7 @@ static int IsNumberedAccelKey(const wxString& str,
     if ( !CompareAccelString(str.Left(lenPrefix), prefix) )
         return 0;
 
-    unsigned long num{0};
+    std::uint32_t num{0};
     if ( !str.Mid(lenPrefix).ToULong(&num) )
         return 0;
 

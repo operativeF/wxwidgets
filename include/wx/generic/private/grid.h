@@ -28,7 +28,7 @@ import <vector>;
 
 using wxArrayAttrs = std::vector<wxGridCellAttr*>;
 
-WX_DECLARE_HASH_MAP_WITH_DECL(wxLongLong_t, wxGridCellAttr*,
+WX_DECLARE_HASH_MAP_WITH_DECL(std::int64_t, wxGridCellAttr*,
                               wxIntegerHash, wxIntegerEqual,
                               wxGridCoordsToAttrMap, class);
 
