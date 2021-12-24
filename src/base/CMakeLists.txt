@@ -30,22 +30,14 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/appbase.cpp
     ${BASE_SRC_DIR}/common/arcall.cpp
     ${BASE_SRC_DIR}/common/arcfind.cpp
-    ${BASE_SRC_DIR}/common/archive.cpp
     ${BASE_SRC_DIR}/common/arrstr.cpp
-    ${BASE_SRC_DIR}/common/base64.cpp
-    ${BASE_SRC_DIR}/common/clntdata.cpp
-    ${BASE_SRC_DIR}/common/cmdline.cpp
     ${BASE_SRC_DIR}/common/config.cpp
-    ${BASE_SRC_DIR}/common/convauto.cpp
     ${BASE_SRC_DIR}/common/datetime.cpp
     ${BASE_SRC_DIR}/common/datetimefmt.cpp
-    ${BASE_SRC_DIR}/common/datstrm.cpp
     ${BASE_SRC_DIR}/common/dircmn.cpp
     ${BASE_SRC_DIR}/common/dynlib.cpp
     ${BASE_SRC_DIR}/common/dynload.cpp
-    ${BASE_SRC_DIR}/common/encconv.cpp
     ${BASE_SRC_DIR}/common/evtloopcmn.cpp
-    ${BASE_SRC_DIR}/common/ffile.cpp
     ${BASE_SRC_DIR}/common/file.cpp
     ${BASE_SRC_DIR}/common/fileback.cpp
     ${BASE_SRC_DIR}/common/fileconf.cpp
@@ -55,8 +47,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/filtall.cpp
     ${BASE_SRC_DIR}/common/filtfind.cpp
     ${BASE_SRC_DIR}/common/fmapbase.cpp
-    ${BASE_SRC_DIR}/common/fs_arc.cpp
-    ${BASE_SRC_DIR}/common/fs_filter.cpp
     ${BASE_SRC_DIR}/common/hash.cpp
     ${BASE_SRC_DIR}/common/hashmap.cpp
     ${BASE_SRC_DIR}/common/init.cpp
@@ -69,48 +59,60 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/memory.cpp
     ${BASE_SRC_DIR}/common/mimecmn.cpp
     ${BASE_SRC_DIR}/common/module.cpp
-    ${BASE_SRC_DIR}/common/mstream.cpp
     ${BASE_SRC_DIR}/common/numformatter.cpp
     ${BASE_SRC_DIR}/common/object.cpp
-    ${BASE_SRC_DIR}/common/platinfo.cpp
     ${BASE_SRC_DIR}/common/powercmn.cpp
     ${BASE_SRC_DIR}/common/process.cpp
     ${BASE_SRC_DIR}/common/regex.cpp
     ${BASE_SRC_DIR}/common/secretstore.cpp
     ${BASE_SRC_DIR}/common/stdpbase.cpp
-    ${BASE_SRC_DIR}/common/sstream.cpp
     ${BASE_SRC_DIR}/common/stopwatch.cpp
     ${BASE_SRC_DIR}/common/strconv.cpp
-    ${BASE_SRC_DIR}/common/stream.cpp
     ${BASE_SRC_DIR}/common/string.cpp
     ${BASE_SRC_DIR}/common/stringimpl.cpp
     ${BASE_SRC_DIR}/common/stringops.cpp
     ${BASE_SRC_DIR}/common/strvararg.cpp
-    ${BASE_SRC_DIR}/common/sysopt.cpp
-    ${BASE_SRC_DIR}/common/textbuf.cpp
-    ${BASE_SRC_DIR}/common/textfile.cpp
     ${BASE_SRC_DIR}/common/threadinfo.cpp
     ${BASE_SRC_DIR}/common/time.cpp
     ${BASE_SRC_DIR}/common/timercmn.cpp
     ${BASE_SRC_DIR}/common/timerimpl.cpp
     ${BASE_SRC_DIR}/common/tokenzr.cpp
     ${BASE_SRC_DIR}/common/translation.cpp
-    ${BASE_SRC_DIR}/common/txtstrm.cpp
     ${BASE_SRC_DIR}/common/unichar.cpp
     ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/ustring.cpp
     ${BASE_SRC_DIR}/common/variant.cpp
-    ${BASE_SRC_DIR}/common/wfstream.cpp
     ${BASE_SRC_DIR}/common/wxcrt.cpp
     ${BASE_SRC_DIR}/common/wxprintf.cpp
     ${BASE_SRC_DIR}/common/xlocale.cpp
     ${BASE_SRC_DIR}/common/xti.cpp
     ${BASE_SRC_DIR}/common/xtistrm.cpp
-    ${BASE_SRC_DIR}/common/zipstrm.cpp
-    ${BASE_SRC_DIR}/common/zstream.cpp
     ${BASE_SRC_DIR}/common/fswatchercmn.cpp
     ${BASE_SRC_DIR}/generic/fswatcherg.cpp
     ${BASE_SRC_DIR}/common/lzmastream.cpp
+
+    # Modularized source files.
+    ${BASE_SRC_DIR}/common/archive.cpp
+    ${BASE_SRC_DIR}/common/base64.cpp
+    ${BASE_SRC_DIR}/common/clntdata.cpp
+    ${BASE_SRC_DIR}/common/cmdline.cpp
+    ${BASE_SRC_DIR}/common/convauto.cpp
+    ${BASE_SRC_DIR}/common/datstrm.cpp
+    ${BASE_SRC_DIR}/common/encconv.cpp
+    ${BASE_SRC_DIR}/common/ffile.cpp
+    ${BASE_SRC_DIR}/common/fs_arc.cpp
+    ${BASE_SRC_DIR}/common/fs_filter.cpp
+    ${BASE_SRC_DIR}/common/mstream.cpp
+    ${BASE_SRC_DIR}/common/platinfo.cpp
+    ${BASE_SRC_DIR}/common/sstream.cpp
+    ${BASE_SRC_DIR}/common/stream.cpp
+    ${BASE_SRC_DIR}/common/sysopt.cpp
+    ${BASE_SRC_DIR}/common/textbuf.cpp
+    ${BASE_SRC_DIR}/common/textfile.cpp
+    ${BASE_SRC_DIR}/common/txtstrm.cpp
+    ${BASE_SRC_DIR}/common/wfstream.cpp
+    ${BASE_SRC_DIR}/common/zipstrm.cpp
+    ${BASE_SRC_DIR}/common/zstream.cpp
 )
 
 set(BASE_CMN_HDR
@@ -131,33 +133,34 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/modifying.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/base/archive.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/base64.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/clntdata.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/cmdline.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/convauto.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/datstrm.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/encconv.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/mousestate.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/clntdata.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/stream.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/convauto.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/sstream.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/mstream.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/datstrm.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/sstream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/stream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zipstrm.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/archive.ixx
 )
 
 set(SHARED_BASE_CMN_SRC
