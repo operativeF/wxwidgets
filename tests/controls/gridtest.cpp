@@ -20,7 +20,7 @@
 #include "wx/utils.h"
 
 #ifdef __WXGTK__
-    #include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 #endif // __WXGTK__
 
 #include "waitforpaint.h"

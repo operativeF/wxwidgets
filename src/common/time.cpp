@@ -7,22 +7,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/time.h"
-
-import <ctime>;
+module;
 
 #include "wx/intl.h"
 #include "wx/log.h"
-
-#ifndef WX_GMTOFF_IN_TM
-    // Define it for some systems which don't (always) use configure but are
-    // known to have tm_gmtoff field.
-    #if defined(__DARWIN__)
-        #define WX_GMTOFF_IN_TM
-    #endif
-#endif
-
-wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
 
 #if !defined(__WXMAC__)
     #include <sys/types.h>      // for time_t
@@ -39,6 +27,20 @@ wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
     #include <sys/timeb.h>
     #include <values.h>
 #endif
+
+module WX.Cmn.Time;
+
+import <ctime>;
+
+#ifndef WX_GMTOFF_IN_TM
+    // Define it for some systems which don't (always) use configure but are
+    // known to have tm_gmtoff field.
+    #if defined(__DARWIN__)
+        #define WX_GMTOFF_IN_TM
+    #endif
+#endif
+
+wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
 
 constexpr int MILLISECONDS_PER_SECOND = 1000;
 #if !defined(WX_WINDOWS)
@@ -217,7 +219,7 @@ std::int64_t wxGetUTCTimeUSec()
 
 #ifdef HAVE_GETTIMEOFDAY
     timeval tv;
-    if ( wxGetTimeOfDay(&tv) != -1 )
+    if ( gettimeofday(&tv, nullptr) != -1 )
     {
         std::int64_t val(tv.tv_sec);
         val *= MICROSECONDS_PER_SECOND;
@@ -252,14 +254,14 @@ std::int64_t wxGetUTCTimeMillis()
 
 #if defined(HAVE_GETTIMEOFDAY)
     struct timeval tp;
-    if ( wxGetTimeOfDay(&tp) != -1 )
+    if ( gettimeofday(&tp, nullptr) != -1 )
     {
         val *= tp.tv_sec;
         return (val + (tp.tv_usec / MICROSECONDS_PER_MILLISECOND));
     }
     else
     {
-        wxLogError(_("wxGetTimeOfDay failed."));
+        wxLogError(_("gettimeofday failed."));
         return 0;
     }
 #elif defined(HAVE_FTIME)

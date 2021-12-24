@@ -15,7 +15,6 @@
 #include "wx/log.h"
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
-#include "wx/stopwatch.h"
 #include "wx/dcbuffer.h"
 
 #include "wx/msw/registry.h"
@@ -25,6 +24,7 @@
 #include <chrono>
 
 import WX.Utils.Settings;
+import WX.Cmn.Stopwatch;
 
 constexpr int NATIVE_TEXT_INDENT_XP = 4;
 constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;

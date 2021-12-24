@@ -29,7 +29,6 @@
 #include "wx/timer.h"
 #include "wx/module.h"
 #include "wx/filefn.h"
-#include "wx/stopwatch.h"
 
 #include "wx/apptrait.h"
 #include "wx/sckaddr.h"
@@ -42,6 +41,7 @@
 #include "wx/private/socket.h"
 
 import WX.Utils.Cast;
+import WX.Cmn.Stopwatch;
 
 import <string>;
 

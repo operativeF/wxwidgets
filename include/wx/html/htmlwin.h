@@ -13,7 +13,6 @@
 
 #include "wx/scrolwin.h"
 #include "wx/config.h"
-#include "wx/stopwatch.h"
 #include "wx/html/winpars.h"
 #include "wx/html/htmlcell.h"
 #include "wx/html/htmlfilt.h"
@@ -21,6 +20,8 @@
 #include "wx/bitmap.h"
 
 import Utils.Geometry;
+
+import WX.Cmn.Stopwatch;
 
 class wxHtmlProcessor;
 class wxHtmlWinModule;

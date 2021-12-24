@@ -15,7 +15,7 @@
 #include "wx/dataview.h"
 
 #ifdef __WXGTK__
-    #include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 #endif // __WXGTK__
 
 #include "wx/persist/dataview.h"

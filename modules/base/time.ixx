@@ -7,12 +7,16 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_TIME_H_
-#define _WX_TIME_H_
+module;
 
 #include "wx/longlong.h"
 
+export module WX.Cmn.Time;
+
 import WX.Utils.Cast;
+
+export
+{
 
 // Returns the difference between UTC and local time in seconds.
 int wxGetTimeZone();
@@ -42,21 +46,9 @@ std::int64_t wxGetUTCTimeUSec();
 
 #endif // wxUSE_LONGLONG
 
-#define wxGetCurrentTime() wxGetLocalTime()
-
-// on some really old systems gettimeofday() doesn't have the second argument,
-// define wxGetTimeOfDay() to hide this difference
-#ifdef HAVE_GETTIMEOFDAY
-    #ifdef WX_GETTIMEOFDAY_NO_TZ
-        #define wxGetTimeOfDay(tv)      gettimeofday(tv)
-    #else
-        #define wxGetTimeOfDay(tv)      gettimeofday((tv), NULL)
-    #endif
-#endif // HAVE_GETTIMEOFDAY
-
 /* Two wrapper functions for thread safety */
 #ifdef HAVE_LOCALTIME_R
-#define wxLocaltime_r localtime_r
+using wxLocaltime_r = localtime_r;
 #else
 struct tm *wxLocaltime_r(const time_t*, struct tm*);
 #if wxUSE_THREADS && !defined(WX_WINDOWS)
@@ -66,7 +58,7 @@ struct tm *wxLocaltime_r(const time_t*, struct tm*);
 #endif
 
 #ifdef HAVE_GMTIME_R
-#define wxGmtime_r gmtime_r
+using wxGmtime_r = gmtime_r;
 #else
 struct tm *wxGmtime_r(const time_t*, struct tm*);
 #if wxUSE_THREADS && !defined(WX_WINDOWS)
@@ -75,4 +67,4 @@ struct tm *wxGmtime_r(const time_t*, struct tm*);
 #endif
 #endif
 
-#endif // _WX_TIME_H_
+} // export

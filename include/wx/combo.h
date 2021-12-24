@@ -42,9 +42,9 @@
 #include "wx/renderer.h" // this is needed for wxCONTROL_XXX flags
 #include "wx/bitmap.h" // wxBitmap used by-value
 #include "wx/textentry.h"
-#include "wx/time.h" // needed for wxMilliClock_t
 
 import Utils.Geometry;
+import WX.Cmn.Time;
 
 import <cstdint>;
 import <string>;

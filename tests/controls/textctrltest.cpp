@@ -20,7 +20,7 @@
 #endif // wxUSE_CLIPBOARD
 
 #ifdef __WXGTK__
-    #include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 #endif
 
 #include "textentrytest.h"

@@ -328,7 +328,6 @@
 #include <wx/tglbtn.h>
 #include <wx/thread.h>
 #include <wx/timectrl.h>
-#include <wx/time.h>
 #include <wx/timer.h>
 #include <wx/tipdlg.h>
 #include <wx/tipwin.h>

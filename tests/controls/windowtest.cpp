@@ -16,7 +16,6 @@
 #include "wx/caret.h"
 #include "wx/cshelp.h"
 
-#include "wx/stopwatch.h"
 #include "wx/tooltip.h"
 
 #include "asserthelper.h"
@@ -24,6 +23,7 @@
 #include "testwindow.h"
 
 import WX.Core.Sizer;
+import WX.Cmn.Stopwatch;
 
 import WX.Test.Prec;
 

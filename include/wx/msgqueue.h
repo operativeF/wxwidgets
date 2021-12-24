@@ -18,7 +18,7 @@
 
 #if wxUSE_THREADS
 
-#include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 
 import <queue>;
 import <utility>;

@@ -14,11 +14,12 @@
 #if wxUSE_DATETIME
 
 #ifndef WX_PRECOMP
-    #include "wx/time.h"    // wxGetTimeZone()
     #include "wx/utils.h"   // wxMilliSleep()
 #endif // WX_PRECOMP
 
 #include "wx/wxcrt.h"       // for wxStrstr()
+
+import WX.Cmn.Time;
 
 // to test Today() meaningfully we must be able to change the system date which
 // is not usually the case, but if we're under Win32 we can try it -- define

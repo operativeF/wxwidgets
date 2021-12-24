@@ -13,7 +13,6 @@
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
 #include "wx/rawbmp.h"
-#include "wx/stopwatch.h"
 #include "wx/crt.h"
 
 #if wxUSE_GLCANVAS
@@ -25,6 +24,7 @@
 
 import WX.Image;
 import WX.Cmn.CommandLine;
+import WX.Cmn.Stopwatch;
 
 #if wxUSE_GLCANVAS
 

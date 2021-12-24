@@ -36,7 +36,6 @@
 #include "wx/log.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/stopwatch.h"
 
 #include "wx/dynlib.h"
 
@@ -48,6 +47,7 @@
 #include "wx/msw/private.h" // user info and wndproc setting/getting
 
 import WX.Utils.Cast;
+import WX.Cmn.Stopwatch;
 
 import WX.WinDef;
 

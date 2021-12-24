@@ -9,8 +9,9 @@
 #ifndef _WX_TESTS_WAITFORPAINT_H_
 #define _WX_TESTS_WAITFORPAINT_H_
 
-#include "wx/stopwatch.h"
 #include "wx/window.h"
+
+import WX.Cmn.Stopwatch;
 
 // Class used to check if we received the (first) paint event: this is
 // currently used under GTK only, as MSW doesn't seem to need to wait for the

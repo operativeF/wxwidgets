@@ -16,8 +16,9 @@
 
 #include <time.h>
 
-#include "wx/stopwatch.h"
 #include "wx/utils.h"
+
+import WX.Cmn.Stopwatch;
 
 namespace
 {

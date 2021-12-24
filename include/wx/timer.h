@@ -16,9 +16,10 @@
 
 #include "wx/longlong.h"
 #include "wx/event.h"
-#include "wx/stopwatch.h" // for backwards compatibility
 
 #include <chrono>
+
+import WX.Cmn.Stopwatch;
 
 // more readable flags for Start():
 

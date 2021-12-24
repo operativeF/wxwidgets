@@ -37,11 +37,8 @@ class wxObject;
 
 #if wxUSE_LOG
 
-import <ctime>;   // for time_t
-
 #include "wx/hashmap.h"
 #include "wx/msgout.h"
-#include "wx/time.h"
 
 #if wxUSE_THREADS
     #include "wx/thread.h"
@@ -77,6 +74,10 @@ import <ctime>;   // for time_t
         #define wxLOG_COMPONENT "wx"
     #endif
 #endif
+
+import WX.Cmn.Time;
+
+import <ctime>;   // for time_t
 
 // ----------------------------------------------------------------------------
 // constants

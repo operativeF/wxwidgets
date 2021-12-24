@@ -15,7 +15,6 @@
 
 #include "wx/app.h"
 #include "wx/msgdlg.h"
-#include "wx/stopwatch.h"
 
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"
@@ -24,6 +23,7 @@
 #include <boost/nowide/stackstring.hpp>
 
 import WX.Utils.Cast;
+import WX.Cmn.Stopwatch;
 
 import WX.WinDef;
 
@@ -1161,7 +1161,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
                                 ::SendMessageW(hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE);
                                 EnableCloseButtons(hwnd, false);
 
-                                sharedData->m_timeStop = wxGetCurrentTime();
+                                sharedData->m_timeStop = wxGetLocalTime();
                                 sharedData->m_state = wxProgressDialog::State::Canceled;
                                 break;
 

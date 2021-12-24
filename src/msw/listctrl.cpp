@@ -15,7 +15,6 @@
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/stopwatch.h"
 #include "wx/dcclient.h"
 #include "wx/textctrl.h"
 
@@ -29,6 +28,7 @@
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;
+import WX.Cmn.Stopwatch;
 
 import WX.Utils.Settings;
 

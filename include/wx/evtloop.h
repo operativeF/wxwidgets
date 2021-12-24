@@ -299,7 +299,7 @@ private:
     #include "wx/qt/evtloop.h"
 #else // other platform
 
-#include "wx/stopwatch.h"   // for wxMilliClock_t
+import WX.Cmn.Stopwatch;
 
 class wxEventLoopImpl;
 

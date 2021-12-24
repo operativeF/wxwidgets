@@ -50,7 +50,6 @@
 #include "wx/intl.h"
 #include "wx/module.h"
 #include "wx/crt.h"
-#include "wx/time.h"
 
 #ifdef WX_WINDOWS
     import <clocale>;
@@ -60,6 +59,8 @@
 #include "wx/datetime.h"
 
 #include <fmt/core.h>
+
+import WX.Cmn.Time;
 
 // ----------------------------------------------------------------------------
 // macros

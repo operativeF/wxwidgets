@@ -45,7 +45,6 @@
 #include "wx/headerctrl.h"
 #include "wx/dnd.h"
 #include "wx/selstore.h"
-#include "wx/stopwatch.h"
 #include "wx/weakref.h"
 #include "wx/generic/private/markuptext.h"
 #include "wx/generic/private/rowheightcache.h"
@@ -56,6 +55,7 @@
 
 import WX.Cfg.Flags;
 import WX.Core.Sizer;
+import WX.Cmn.Stopwatch;
 
 import WX.Utils.Settings;
 

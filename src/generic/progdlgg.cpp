@@ -21,7 +21,7 @@
 #include "wx/timer.h"
 
 import WX.Core.Sizer;
-
+import WX.Cmn.Time;
 import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ wxGenericProgressDialog::wxGenericProgressDialog()
     // Initialize all our members that we always use (even when we don't
     // create a valid window in this class).
 
-    m_timeStart = wxGetCurrentTime();
+    m_timeStart = wxGetLocalTime();
 
     SetWindowStyle(wxDEFAULT_DIALOG_STYLE);
 
@@ -70,7 +70,7 @@ wxGenericProgressDialog::wxGenericProgressDialog(const std::string& title,
 
     // Initialize all our members that we always use (even when we don't
     // create a valid window in this class).
-    m_timeStart = wxGetCurrentTime();
+    m_timeStart = wxGetLocalTime();
 
     SetWindowStyle(wxDEFAULT_DIALOG_STYLE);
 
@@ -235,7 +235,7 @@ void wxGenericProgressDialog::UpdateTimeEstimates(int value,
                                                   unsigned long &estimatedTime,
                                                   unsigned long &remainingTime)
 {
-    unsigned long elapsed = wxGetCurrentTime() - m_timeStart;
+    unsigned long elapsed = wxGetLocalTime() - m_timeStart;
     if ( value != 0 && (m_last_timeupdate < elapsed || value == m_maximum) )
     {
         m_last_timeupdate = elapsed;
@@ -436,7 +436,7 @@ bool wxGenericProgressDialog::Pulse(const std::string& newmsg, bool *skip)
 
     if (m_elapsed || m_remaining || m_estimated)
     {
-        unsigned long elapsed = wxGetCurrentTime() - m_timeStart;
+        unsigned long elapsed = wxGetLocalTime() - m_timeStart;
 
         SetTimeLabel(elapsed, m_elapsed);
         SetTimeLabel((unsigned long)-1, m_estimated);
@@ -480,7 +480,7 @@ void wxGenericProgressDialog::Resume()
 {
     m_state = State::Continue;
     m_ctdelay = m_delay; // force an update of the elapsed/estimated/remaining time
-    m_break += wxGetCurrentTime()-m_timeStop;
+    m_break += wxGetLocalTime()-m_timeStop;
 
     EnableAbort();
     EnableSkip();
@@ -595,7 +595,7 @@ void wxGenericProgressDialog::OnCancel(wxCommandEvent& event)
         DisableSkip();
 
         // save the time when the dialog was stopped
-        m_timeStop = wxGetCurrentTime();
+        m_timeStop = wxGetLocalTime();
     }
 }
 
@@ -624,7 +624,7 @@ void wxGenericProgressDialog::OnClose(wxCloseEvent& event)
         DisableAbort();
         DisableSkip();
 
-        m_timeStop = wxGetCurrentTime();
+        m_timeStop = wxGetLocalTime();
     }
 }
 

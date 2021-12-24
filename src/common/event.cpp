@@ -15,7 +15,6 @@
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/utils.h"
-#include "wx/stopwatch.h"
 #include "wx/module.h"
 
 #if wxUSE_GUI
@@ -29,7 +28,8 @@
 #include "wx/thread.h"
 
 import WX.Cfg.Flags;
-
+import WX.Cmn.Stopwatch;
+import WX.Cmn.Time;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

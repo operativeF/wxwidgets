@@ -9,19 +9,27 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_STOPWATCH_H_
-#define _WX_STOPWATCH_H_
+module;
+
+#include "wx/debug.h"
+
+export module WX.Cmn.Stopwatch;
 
 // Time-related functions are also available via this header for compatibility
 // but you should include wx/time.h directly if you need only them and not
 // wxStopWatch itself.
-#include "wx/time.h"
+import WX.Cmn.Time;
+
+import <cstdint>;
 
 // ----------------------------------------------------------------------------
 // wxStopWatch: measure time intervals with up to 1ms resolution
 // ----------------------------------------------------------------------------
 
 #if wxUSE_STOPWATCH
+
+export
+{
 
 class wxStopWatch
 {
@@ -84,6 +92,6 @@ private:
     int m_pauseCount{0};
 };
 
-#endif // wxUSE_STOPWATCH
+} // export
 
-#endif // _WX_STOPWATCH_H_
+#endif // wxUSE_STOPWATCH

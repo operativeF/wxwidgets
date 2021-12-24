@@ -29,7 +29,7 @@
 #include "wx/textwrapper.h"
 
 import WX.Core.Sizer;
-
+import WX.Cmn.Time;
 import WX.Utils.Settings;
 
 // ----------------------------------------------------------------------------

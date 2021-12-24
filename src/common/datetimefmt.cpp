@@ -27,7 +27,8 @@
 #endif
 
 #include "wx/datetime.h"
-#include "wx/time.h"
+
+import WX.Cmn.Time;
 
 // ============================================================================
 // implementation of wxDateTime

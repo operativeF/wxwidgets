@@ -23,7 +23,6 @@
 
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
-#include "wx/stopwatch.h"
 #include "wx/xml/xml.h"
 
 import Utils.Strings;
@@ -32,6 +31,7 @@ import WX.Cmn.StrStream;
 import WX.Cmn.TextStream;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
+import WX.Cmn.Stopwatch;
 
 // Set to 1 for slower wxXmlDocument method, 0 for faster direct method.
 // If we make wxXmlDocument::Save more efficient, we might switch to this

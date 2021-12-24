@@ -21,7 +21,7 @@
     #include "wx/msw/webview_ie.h"
 #endif
 #if wxUSE_WEBVIEW_WEBKIT2
-    #include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 #endif
 
 //Convenience macro

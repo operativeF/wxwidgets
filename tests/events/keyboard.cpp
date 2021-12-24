@@ -17,7 +17,7 @@
 #include "wx/uiaction.h"
 
 #ifdef __WXGTK__
-#include "wx/stopwatch.h"
+import WX.Cmn.Stopwatch;
 #endif
 
 import WX.Test.Prec;

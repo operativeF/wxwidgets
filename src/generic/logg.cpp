@@ -44,8 +44,7 @@
     #include "wx/imaglist.h"
 #endif // wxUSE_LOG_DIALOG/!wxUSE_LOG_DIALOG
 
-#include "wx/time.h"
-
+import WX.Cmn.Time;
 import WX.Cmn.TextFile;
 import WX.Core.Sizer;
 

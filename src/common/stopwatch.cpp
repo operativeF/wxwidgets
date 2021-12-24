@@ -12,11 +12,17 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STOPWATCH
-
-#include "wx/stopwatch.h"
+module;
 
 #include "wx/thread.h"
+
+module WX.Cmn.Stopwatch;
+
+import WX.Utils.Cast;
+
+import <cstdint>;
+
+#if wxUSE_STOPWATCH
 
 // ============================================================================
 // implementation
