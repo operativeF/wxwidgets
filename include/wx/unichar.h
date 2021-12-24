@@ -11,7 +11,10 @@
 #define _WX_UNICHAR_H_
 
 #include "wx/chartype.h"
-#include "wx/stringimpl.h"
+#include "wx/defs.h"
+
+import WX.Cmn.StringImpl;
+import WX.Utils.Cast;
 
 // We need to get std::swap() declaration in order to specialize it below and
 // it is declared in different headers for C++98 and C++11. Instead of testing
@@ -20,8 +23,6 @@
 import <algorithm>;        // std::swap() for C++98
 import <cstdint>;
 import <utility>;          // std::swap() for C++11
-
-import WX.Utils.Cast;
 
 class wxUniCharRef;
 class wxString;

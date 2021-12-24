@@ -16,7 +16,6 @@
 #include "wx/log.h"
 #include "wx/translation.h"
 #include "wx/utils.h"
-#include "wx/uri.h"
 #include "wx/private/socket.h"
 #include "wx/evtloop.h"
 
@@ -27,6 +26,7 @@
     #include "wx/evtloop.h"
 #endif
 
+import WX.Cmn.Uri;
 
 // Define symbols that might be missing from older libcurl headers
 #ifndef CURL_AT_LEAST_VERSION

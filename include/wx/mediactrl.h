@@ -15,8 +15,8 @@
 
 #include "wx/control.h"
 #include "wx/geometry/rect.h"
-#include "wx/uri.h"
 
+import WX.Cmn.Uri;
 import WX.File.Flags;
 
 enum class wxMediaState

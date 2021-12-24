@@ -59,7 +59,6 @@
 #include "wx/apptrait.h"
 
 #include "wx/process.h"
-#include "wx/uri.h"
 #include "wx/mimetype.h"
 #include "wx/config.h"
 
@@ -96,6 +95,7 @@
 #include <memory>
 
 import WX.Cmn.TextStream;
+import WX.Cmn.Uri;
 
 import WX.Utils.VersionInfo;
 

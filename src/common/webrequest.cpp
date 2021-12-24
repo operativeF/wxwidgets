@@ -11,7 +11,6 @@
 
 #include "wx/webrequest.h"
 #include "wx/module.h"
-#include "wx/uri.h"
 #include "wx/filefn.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
@@ -34,6 +33,7 @@
 
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
+import WX.Cmn.Uri;
 
 import WX.File.Flags;
 

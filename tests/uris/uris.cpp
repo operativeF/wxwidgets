@@ -8,8 +8,9 @@
 
 #include "doctest.h"
 
-#include "wx/uri.h"
 #include "wx/url.h"
+
+import WX.Cmn.Uri;
 
 // Test wxURL & wxURI compat?
 #define TEST_URL wxUSE_URL

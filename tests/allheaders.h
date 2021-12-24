@@ -308,7 +308,6 @@
 #include <wx/strconv.h>
 #include <wx/stream.h>
 #include <wx/string.h>
-#include <wx/stringimpl.h>
 #include <wx/stringops.h>
 #include <wx/strvararg.h>
 #include <wx/sysopt.h>
@@ -348,7 +347,6 @@
 #include <wx/types.h>
 #include <wx/uiaction.h>
 #include <wx/unichar.h>
-#include <wx/uri.h>
 #include <wx/url.h>
 #include <wx/ustring.h>
 #include <wx/utils.h>

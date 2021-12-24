@@ -12,44 +12,23 @@
     wxStringImpl is just a typedef to std:: string class.
 */
 
-#ifndef _WX_WXSTRINGIMPL_H__
-#define _WX_WXSTRINGIMPL_H__
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+module;
 
 #include "wx/chartype.h"    // for wxChar
 #include "wx/wxcrtbase.h"   // for wxStrlen() etc.
 
+export module WX.Cmn.StringImpl;
+
 import <string>;
 
-// ---------------------------------------------------------------------------
-// macros
-// ---------------------------------------------------------------------------
-
-// implementation only
-#define   wxASSERT_VALID_INDEX(i) \
-    wxASSERT_MSG( (size_t)(i) <= length(), "invalid index in wxString" )
-
-
-// ----------------------------------------------------------------------------
-// global data
-// ----------------------------------------------------------------------------
-
-#if wxUSE_UNICODE_UTF8
-// FIXME-UTF8: we should have only one {}
-extern const wxStringCharType* {}
-#endif
-
+export
+{
 
 // ----------------------------------------------------------------------------
 // deal with various build options
 // ----------------------------------------------------------------------------
 
 // we use STL-based string internally
-
-import <string>;
 
 using wxStdWideString = std::wstring;
 
@@ -61,7 +40,4 @@ using wxStdWideString = std::wstring;
 
 using wxStringImpl = wxStdString;
 
-// don't pollute the library user's name space
-#undef wxASSERT_VALID_INDEX
-
-#endif  // _WX_WXSTRINGIMPL_H__
+} // export

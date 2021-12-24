@@ -9,13 +9,17 @@
 // Licence:     wxWindows Licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_URI_H_
-#define _WX_URI_H_
+module;
 
 #include "wx/object.h"
 #include "wx/string.h"
 
+export module WX.Cmn.Uri;
+
 import <vector>;
+
+export
+{
 
 // Host Type that the server component can be
 enum wxURIHostType
@@ -179,5 +183,4 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxURI);
 };
 
-#endif // _WX_URI_H_
-
+} // export

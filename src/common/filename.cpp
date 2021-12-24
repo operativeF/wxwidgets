@@ -74,7 +74,6 @@
 #include "wx/dynlib.h"
 #include "wx/dir.h"
 #include "wx/longlong.h"
-#include "wx/uri.h"
 
 #if defined(__WIN32__) && defined(__MINGW32__)
     #include "wx/msw/gccpriv.h"
@@ -99,6 +98,7 @@
 #endif
 
 import Utils.Strings;
+import WX.Cmn.Uri;
 
 #include <cassert>
 #if defined(wxHAS_NATIVE_READLINK)

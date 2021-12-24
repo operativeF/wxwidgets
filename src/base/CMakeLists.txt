@@ -68,7 +68,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/stdpbase.cpp
     ${BASE_SRC_DIR}/common/strconv.cpp
     ${BASE_SRC_DIR}/common/string.cpp
-    ${BASE_SRC_DIR}/common/stringimpl.cpp
     ${BASE_SRC_DIR}/common/stringops.cpp
     ${BASE_SRC_DIR}/common/strvararg.cpp
     ${BASE_SRC_DIR}/common/threadinfo.cpp
@@ -77,7 +76,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/tokenzr.cpp
     ${BASE_SRC_DIR}/common/translation.cpp
     ${BASE_SRC_DIR}/common/unichar.cpp
-    ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/ustring.cpp
     ${BASE_SRC_DIR}/common/variant.cpp
     ${BASE_SRC_DIR}/common/wxcrt.cpp
@@ -110,6 +108,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/textfile.cpp
     ${BASE_SRC_DIR}/common/time.cpp
     ${BASE_SRC_DIR}/common/txtstrm.cpp
+    ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/wfstream.cpp
     ${BASE_SRC_DIR}/common/zipstrm.cpp
     ${BASE_SRC_DIR}/common/zstream.cpp
@@ -154,11 +153,13 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/sstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/stopwatch.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/stream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/stringimpl.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/sysopt.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/time.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/uri.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zstream.ixx

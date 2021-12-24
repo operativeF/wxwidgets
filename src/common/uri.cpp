@@ -9,9 +9,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/arrstr.h"
 #include "wx/crt.h"
-#include "wx/uri.h"
+#include "wx/object.h"
+
+module WX.Cmn.Uri;
 
 import Utils.Strings;
 

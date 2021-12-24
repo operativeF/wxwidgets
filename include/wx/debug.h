@@ -14,6 +14,7 @@
 #include "wx/cpp.h"          // for __WXFUNCTION__
 
 #include <cassert>
+
 import <climits>;          // for CHAR_BIT used below
 import <string>;
 

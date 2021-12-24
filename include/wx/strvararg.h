@@ -21,6 +21,7 @@ import <string>;
 import <type_traits>;
 
 import WX.Utils.Cast;
+import WX.Cmn.StringImpl;
 
 class wxCStrData;
 class wxString;
@@ -729,9 +730,6 @@ WX_ARG_NORMALIZER_FORWARD(const wxCharBuffer&, const char*);
 #endif
 WX_ARG_NORMALIZER_FORWARD(wxWCharBuffer, const wchar_t*);
 WX_ARG_NORMALIZER_FORWARD(const wxWCharBuffer&, const wchar_t*);
-
-// versions for std::[w]string:
-#include "wx/stringimpl.h"
 
 #if !wxUSE_UTF8_LOCALE_ONLY
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING

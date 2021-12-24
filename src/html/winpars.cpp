@@ -16,9 +16,9 @@
 #include "wx/html/htmlwin.h"
 #include "wx/html/styleparams.h"
 #include "wx/fontmap.h"
-#include "wx/uri.h"
 
 import WX.Utils.Settings;
+import WX.Cmn.Uri;
 
 //-----------------------------------------------------------------------------
 // wxHtmlWinParser

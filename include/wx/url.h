@@ -13,12 +13,13 @@
 
 #if wxUSE_URL
 
-#include "wx/uri.h"
 #include "wx/protocol/protocol.h"
 
 #if wxUSE_PROTOCOL_HTTP
   #include "wx/protocol/http.h"
 #endif
+
+import WX.Cmn.Uri;
 
 import <string>;
 

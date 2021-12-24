@@ -10,9 +10,9 @@
 
 #if wxUSE_STREAMS && wxUSE_PROTOCOL_FILE
 
-#include "wx/uri.h"
 #include "wx/protocol/file.h"
 
+import WX.Cmn.Uri;
 import WX.Cmn.WFStream;
 
 // ----------------------------------------------------------------------------

@@ -29,11 +29,11 @@
 #include "wx/strvararg.h"
 #include "wx/buffer.h"      // for wxCharBuffer
 #include "wx/strconv.h"     // for wxConvertXXX() macros and wxMBConv classes
-#include "wx/stringimpl.h"
 #include "wx/stringops.h"
 #include "wx/unichar.h"
 
 import WX.Cfg.Flags;
+import WX.Cmn.StringImpl;
 
 import <iterator>;
 import <string>;
