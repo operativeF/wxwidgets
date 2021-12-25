@@ -347,7 +347,6 @@
 #include <wx/uiaction.h>
 #include <wx/unichar.h>
 #include <wx/url.h>
-#include <wx/ustring.h>
 #include <wx/utils.h>
 #include <wx/valgen.h>
 #include <wx/validate.h>

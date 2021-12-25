@@ -72,7 +72,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/timerimpl.cpp
     ${BASE_SRC_DIR}/common/translation.cpp
     ${BASE_SRC_DIR}/common/unichar.cpp
-    ${BASE_SRC_DIR}/common/ustring.cpp
     ${BASE_SRC_DIR}/common/variant.cpp
     ${BASE_SRC_DIR}/common/wxcrt.cpp
     ${BASE_SRC_DIR}/common/wxprintf.cpp
