@@ -3,6 +3,7 @@ module;
 #include <windows.h>
 
 #include <CommCtrl.h>
+#include <Uxtheme.h>
 
 export module WX.WinDef;
 

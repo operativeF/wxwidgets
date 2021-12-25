@@ -82,7 +82,7 @@ public:
                 break;
         }
 
-        wxFAIL_MSG("invalid parameter");
+        assert("invalid parameter");
         return false;
     }
 

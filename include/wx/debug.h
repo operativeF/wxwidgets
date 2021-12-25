@@ -15,7 +15,7 @@
 
 #include <cassert>
 
-import <climits>;          // for CHAR_BIT used below
+import <limits>;          // for CHAR_BIT used below
 import <string>;
 
 // ----------------------------------------------------------------------------

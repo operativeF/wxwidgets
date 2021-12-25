@@ -1,7 +1,5 @@
 module;
 
-#include "wx/defs.h"
-
 export module WX.Image.ANI;
 
 import WX.Image.CUR;
@@ -66,7 +64,7 @@ int wxANIHandler::DoGetImageCount(wxInputStream& stream)
 {
     wxANIDecoder decoder;
     if (!decoder.Load(stream))  // it's ok to modify the stream position here
-        return wxNOT_FOUND;
+        return -1; // FIXME: optional?
 
     return decoder.GetFrameCount();
 }

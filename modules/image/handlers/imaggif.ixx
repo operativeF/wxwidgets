@@ -13,7 +13,6 @@ module;
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/utils.h"
-#include "wx/scopedarray.h"
 
 export module WX.Image.GIF;
 

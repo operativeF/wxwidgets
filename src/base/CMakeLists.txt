@@ -132,13 +132,9 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/encconv.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/file.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/filename.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/mousestate.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/mstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx
@@ -240,12 +236,23 @@ set(UNIVERSAL_UTILS_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
 
+    ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/mousestate.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
+)
+
+set(WIN32_WRAP_IXX
+    ${CMAKE_SOURCE_DIR}/modules/win/windef.ixx
+    ${CMAKE_SOURCE_DIR}/modules/win/unique_hnd.ixx
 )
 
 add_library(wxbaselib
     ${GEOMETRY_IXX}
     ${UNIVERSAL_UTILS_IXX}
     ${CONFIG_FLAGS_IXX}
+    ${WIN32_WRAP_IXX}
 )
 
 target_link_libraries(wxbaselib
@@ -254,9 +261,9 @@ target_link_libraries(wxbaselib
         stdlibcore
 )
 
-set(WIN32_WRAP_IXX
-    ${CMAKE_SOURCE_DIR}/modules/win/windef.ixx
-    ${CMAKE_SOURCE_DIR}/modules/win/unique_hnd.ixx
+target_include_directories(wxbaselib
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 set(IMAGE_HANDLERS_IXX
@@ -302,7 +309,7 @@ set(BASE_FILES
 
 set(SHARED_BASE_CMN ${SHARED_BASE_CMN_SRC})
 if(WIN32)
-    list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC} ${WIN32_WRAP_IXX})
+    list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC})
     list(APPEND SHARED_BASE_CMN ${SHARED_BASE_CMN} ${SHARED_BASE_WIN32_CMN})
 elseif(APPLE)
     set(BASE_FILES ${BASE_OSX_SHARED})

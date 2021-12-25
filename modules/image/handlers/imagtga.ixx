@@ -12,7 +12,6 @@ module;
 #include "wx/gdicmn.h"
 #include "wx/log.h"
 #include "wx/palette.h"
-#include "wx/scopedarray.h"
 
 export module WX.Image.TGA;
 
