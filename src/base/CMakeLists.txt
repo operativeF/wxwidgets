@@ -71,7 +71,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/threadinfo.cpp
     ${BASE_SRC_DIR}/common/timercmn.cpp
     ${BASE_SRC_DIR}/common/timerimpl.cpp
-    ${BASE_SRC_DIR}/common/tokenzr.cpp
     ${BASE_SRC_DIR}/common/translation.cpp
     ${BASE_SRC_DIR}/common/unichar.cpp
     ${BASE_SRC_DIR}/common/ustring.cpp
@@ -107,6 +106,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/textbuf.cpp
     ${BASE_SRC_DIR}/common/textfile.cpp
     ${BASE_SRC_DIR}/common/time.cpp
+    ${BASE_SRC_DIR}/common/tokenzr.cpp
     ${BASE_SRC_DIR}/common/txtstrm.cpp
     ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/wfstream.cpp
@@ -123,16 +123,6 @@ if(wxUSE_TARSTREAM)
 endif()
 
 set(BASE_CMN_IXX
-    ${CMAKE_SOURCE_DIR}/modules/base/bitfield.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/position.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/math.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/charutils.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/stringutils.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/nonmodifying.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/modifying.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
-    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
-
     ${CMAKE_SOURCE_DIR}/modules/base/archive.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/base64.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/clntdata.ixx
@@ -239,6 +229,29 @@ set(CONFIG_FLAGS_IXX
 
 set(UNIVERSAL_UTILS_IXX
     ${CMAKE_SOURCE_DIR}/modules/utils/cast.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/base/bitfield.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/position.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/math.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/charutils.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/stringutils.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/nonmodifying.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/modifying.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
+
+)
+
+add_library(wxbaselib
+    ${GEOMETRY_IXX}
+    ${UNIVERSAL_UTILS_IXX}
+    ${CONFIG_FLAGS_IXX}
+)
+
+target_link_libraries(wxbaselib
+    PRIVATE
+        boost_tmp
+        stdlibcore
 )
 
 set(WIN32_WRAP_IXX
@@ -282,9 +295,7 @@ set(PRINTER_IXX
 
 set(BASE_FILES
     ${BASE_CMN_SRC}
-    ${CONFIG_FLAGS_IXX}
     ${BASE_CMN_IXX}
-    ${GEOMETRY_IXX}
     ${PRINTER_IXX}
     ${IMAGE_DECODERS_IXX}
 )
@@ -307,7 +318,6 @@ add_library(wxbase
     ${IMAGE_HANDLERS_IXX}
     ${IMAGE_HANDLERS_SRC}
     ${SHARED_BASE_CMN}
-    ${UNIVERSAL_UTILS_IXX}
 )
 
 target_include_directories(wxbase
@@ -367,6 +377,9 @@ elseif(UNIX)
 endif()
 
 target_link_libraries(wxbase
+    PUBLIC
+        wxbaselib
+
     PRIVATE
         stdlibcore
         Boost::nowide

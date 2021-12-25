@@ -2,10 +2,9 @@ module;
 
 export module Utils.Geometry.Rect;
 
-import WX.Cfg.Flags;
-
 import Utils.Geometry.Point;
 import Utils.Geometry.Size;
+import WX.Cfg.Flags;
 
 import <algorithm>;
 

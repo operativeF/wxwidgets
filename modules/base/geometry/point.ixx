@@ -1,6 +1,3 @@
-module;
-
-#include "wx/list.h"
 
 export module Utils.Geometry.Point;
 
@@ -267,8 +264,6 @@ using wxRealPoint = wxPoint2DDouble;
 using wxScale     = wxPoint2DDouble;
 
 constexpr bool IsFullySpecified(const wxPoint& pt) { return pt.x != wxDefaultCoord && pt.y != wxDefaultCoord; }
-
-WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class);
 
 inline constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
 

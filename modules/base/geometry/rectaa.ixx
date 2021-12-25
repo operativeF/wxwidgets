@@ -7,8 +7,6 @@ import Utils.Geometry.Point;
 import Utils.Geometry.Size;
 import Utils.Geometry.Rect;
 
-import WX.Cmn.DataStream;
-
 import <algorithm>;
 import <concepts>;
 import <cstdint>;
@@ -242,22 +240,6 @@ public:
         return !(*this == rect);
     }
 
-#if wxUSE_STREAMS
-       void WriteTo( wxDataOutputStream &stream ) const
-       {
-            stream.Write32( m_x );
-            stream.Write32( m_y );
-            stream.Write32( m_width );
-            stream.Write32( m_height );
-       }
-       void ReadFrom( wxDataInputStream &stream )
-       {
-            m_x = stream.Read32();
-            m_y = stream.Read32();
-            m_width = stream.Read32();
-            m_height = stream.Read32();
-       }
-#endif // wxUSE_STREAMS
     T m_x;
     T m_y;
     T m_width;

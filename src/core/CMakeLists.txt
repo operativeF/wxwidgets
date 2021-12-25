@@ -394,7 +394,8 @@ target_include_directories(wxcore
 target_link_libraries(wxcore
     PUBLIC
         wxbase
-
+        wxbaselib
+        
     PRIVATE
         stdlibcore
         Boost::nowide

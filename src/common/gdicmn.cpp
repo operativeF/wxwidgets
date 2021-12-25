@@ -18,6 +18,7 @@
 #include "wx/gdiobj.h"
 #include "wx/icon.h"
 #include "wx/iconbndl.h"
+#include "wx/list.h"
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/pen.h"
@@ -47,6 +48,8 @@ wxPen     wxNullPen;
 wxPalette wxNullPalette;
 #endif
 wxIconBundle wxNullIconBundle;
+
+WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class);
 
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxPointList)

@@ -87,6 +87,8 @@ enum class wxMappingMode
     Points
 };
 
+WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class);
+
 // Description of text characteristics.
 struct wxFontMetrics
 {
