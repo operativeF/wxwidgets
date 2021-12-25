@@ -389,7 +389,7 @@ bool wxPGTextCtrlEditor::OnEvent( wxPropertyGrid* propGrid,
 
 bool wxPGTextCtrlEditor::GetTextCtrlValueFromControl( wxVariant& variant, wxPGProperty* property, wxWindow* ctrl )
 {
-    wxTextCtrl* tc = wxStaticCast(ctrl, wxTextCtrl);
+    auto tc = dynamic_cast<wxTextCtrl*>(ctrl);
     wxString textVal = tc->GetValue();
 
     if ( property->UsesAutoUnspecified() && textVal.empty() )
@@ -418,7 +418,7 @@ bool wxPGTextCtrlEditor::GetValueFromControl( wxVariant& variant, wxPGProperty* 
 
 void wxPGTextCtrlEditor::SetControlStringValue( wxPGProperty* property, wxWindow* ctrl, const wxString& txt ) const
 {
-    wxTextCtrl* tc = wxStaticCast(ctrl, wxTextCtrl);
+    auto tc = dynamic_cast<wxTextCtrl*>(ctrl);
 
     wxPropertyGrid* pg = property->GetGrid();
     wxASSERT(pg);  // Really, property grid should exist if editor does
@@ -452,7 +452,7 @@ void wxPGTextCtrlEditor_OnFocus( wxPGProperty* property,
 void wxPGTextCtrlEditor::OnFocus( wxPGProperty* property,
                                   wxWindow* wnd ) const
 {
-    wxTextCtrl* tc = wxStaticCast(wnd, wxTextCtrl);
+    auto tc = dynamic_cast<wxTextCtrl*>(wnd);
     wxPGTextCtrlEditor_OnFocus(property, tc);
 }
 

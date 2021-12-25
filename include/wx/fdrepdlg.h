@@ -147,7 +147,7 @@ public:
     const std::string& GetReplaceString() const { return m_strReplace; }
 
     wxFindReplaceDialog *GetDialog() const
-        { return wxStaticCast(GetEventObject(), wxFindReplaceDialog); }
+        { return dynamic_cast<wxFindReplaceDialog*>(GetEventObject()); }
 
     // implementation only
     void SetFlags(FindReplaceFlags flags) { SetInt(flags.as_value()); }

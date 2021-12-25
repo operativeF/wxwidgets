@@ -911,7 +911,7 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
 
     if ( valType == "wxColour*" )
     {
-        wxColour* pCol = wxStaticCast(pVariant->GetWxObjectPtr(), wxColour);
+        auto pCol = dynamic_cast<wxColour*>(pVariant->GetWxObjectPtr());
         col = *pCol;
     }
     else if ( valType == "wxColour" )
@@ -991,7 +991,7 @@ void wxSystemColourProperty::OnSetValue()
     // Convert from generic wxobject ptr to wxPGVariantDataColour
     if ( m_value.IsType("wxColour*") )
     {
-        wxColour* pCol = wxStaticCast(m_value.GetWxObjectPtr(), wxColour);
+        auto pCol = dynamic_cast<wxColour*>(m_value.GetWxObjectPtr());
         m_value = WXVARIANT(*pCol);
     }
 

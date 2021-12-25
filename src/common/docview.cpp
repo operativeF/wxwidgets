@@ -1355,7 +1355,7 @@ wxDocument* wxDocManager::FindDocumentByPath(const fs::path& path) const
     const fs::path& fileName = path;
     for ( wxList::const_iterator i = m_docs.begin(); i != m_docs.end(); ++i )
     {
-        wxDocument * const doc = wxStaticCast(*i, wxDocument);
+        const auto doc = dynamic_cast<wxDocument*>(*i);
 
         if ( fileName == doc->GetFilename() )
             return doc;
@@ -1901,7 +1901,7 @@ wxDocTemplate* wxDocManager::FindTemplate(const wxClassInfo* classinfo)
          node;
          node = node->GetNext() )
    {
-      wxDocTemplate* t = wxStaticCast(node->GetData(), wxDocTemplate);
+      auto t = dynamic_cast<wxDocTemplate*>(node->GetData());
       if ( t->GetDocClassInfo() == classinfo )
          return t;
    }

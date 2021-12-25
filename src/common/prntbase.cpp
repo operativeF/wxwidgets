@@ -1001,8 +1001,7 @@ void wxPreviewCanvas::OnChar(wxKeyEvent &event)
 
 void wxPreviewCanvas::OnMouseWheel(wxMouseEvent& event)
 {
-    wxPreviewControlBar *
-        controlBar = wxStaticCast(GetParent(), wxPreviewFrame)->GetControlBar();
+    auto controlBar = dynamic_cast<wxPreviewFrame*>(GetParent())->GetControlBar();
 
     if ( controlBar )
     {

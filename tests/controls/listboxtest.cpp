@@ -110,8 +110,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 #if wxUSE_UIACTIONSIMULATOR
     SUBCASE("ClickEvents")
     {
-        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-                                                  wxTestableFrame);
+        auto frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
         EventCounter selected(frame, wxEVT_LISTBOX);
         EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
@@ -145,8 +144,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
     SUBCASE("ClickNotOnItem")
     {
-        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-                                                  wxTestableFrame);
+        auto frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
         EventCounter selected(frame, wxEVT_LISTBOX);
         EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
@@ -297,8 +295,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
     SUBCASE("ClickEvents")
     {
-        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-            wxTestableFrame);
+        auto frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
         EventCounter selected(frame, wxEVT_LISTBOX);
         EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
@@ -332,8 +329,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
     SUBCASE("ClickNotOnItem")
     {
-        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-            wxTestableFrame);
+        auto frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
         EventCounter selected(frame, wxEVT_LISTBOX);
         EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);

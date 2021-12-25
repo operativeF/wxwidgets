@@ -44,7 +44,7 @@ EventCounter::EventCounter(wxWindow* win, wxEventType type) : m_type(type),
                                                               m_win(win)
 
 {
-    m_frame = wxStaticCast(wxTheApp->GetTopWindow(), wxTestableFrame);
+    m_frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
     m_win->Connect(m_type, wxEventHandler(wxTestableFrame::OnEvent),
                    nullptr, m_frame);

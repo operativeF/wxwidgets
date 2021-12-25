@@ -135,22 +135,22 @@ public:
         base->SetSelection(0);
 
         CHECK_EQ(0, base->GetSelection());
-        CHECK_EQ(wxStaticCast(m_panel1, wxWindow), base->GetCurrentPage());
+        CHECK_EQ(dynamic_cast<wxWindow*>(m_panel1), base->GetCurrentPage());
 
         base->AdvanceSelection(false);
 
         CHECK_EQ(2, base->GetSelection());
-        CHECK_EQ(wxStaticCast(m_panel3, wxWindow), base->GetCurrentPage());
+        CHECK_EQ(dynamic_cast<wxWindow*>(m_panel3), base->GetCurrentPage());
 
         base->AdvanceSelection();
 
         CHECK_EQ(0, base->GetSelection());
-        CHECK_EQ(wxStaticCast(m_panel1, wxWindow), base->GetCurrentPage());
+        CHECK_EQ(dynamic_cast<wxWindow*>(m_panel1), base->GetCurrentPage());
 
         base->ChangeSelection(1);
 
         CHECK_EQ(1, base->GetSelection());
-        CHECK_EQ(wxStaticCast(m_panel2, wxWindow), base->GetCurrentPage());
+        CHECK_EQ(dynamic_cast<wxWindow*>(m_panel2), base->GetCurrentPage());
     }
 
     void Text()

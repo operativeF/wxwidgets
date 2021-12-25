@@ -1181,8 +1181,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
 void TextCtrlTestCase::ProcessEnter()
 {
 #if wxUSE_UIACTIONSIMULATOR
-    wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-        wxTestableFrame);
+    auto frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
 
     EventCounter count(m_entry, wxEVT_TEXT_ENTER);
 

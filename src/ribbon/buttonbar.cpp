@@ -1425,7 +1425,7 @@ void wxRibbonButtonBar::OnMouseUp(wxMouseEvent& evt)
                 ProcessWindowEvent(notification);
                 m_lock_active_state = false;
 
-                wxStaticCast(m_parent, wxRibbonPanel)->HideIfExpanded();
+                dynamic_cast<wxRibbonPanel*>(m_parent)->HideIfExpanded();
             } while(false);
             if(m_active_button) // may have been NULLed by event handler
             {

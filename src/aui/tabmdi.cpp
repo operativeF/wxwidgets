@@ -710,7 +710,7 @@ wxAuiMDIChildFrame* wxAuiMDIClientWindow::GetActiveChild()
     if ( sel == wxNOT_FOUND || sel >= (int)GetPageCount() )
         return nullptr;
 
-    return wxStaticCast(GetPage(sel), wxAuiMDIChildFrame);
+    return dynamic_cast<wxAuiMDIChildFrame*>(GetPage(sel));
 }
 
 void wxAuiMDIClientWindow::PageChanged(int old_selection, int new_selection)

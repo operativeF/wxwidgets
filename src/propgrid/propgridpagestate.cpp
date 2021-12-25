@@ -1595,7 +1595,7 @@ bool wxPropertyGridPageState::PrepareToAddItem( wxPGProperty* property,
 
     if ( property->IsCategory() )
     {
-        wxPropertyCategory* pc = wxStaticCast(property, wxPropertyCategory);
+        auto pc = dynamic_cast<wxPropertyCategory*>(property);
 
         m_currentCategory = pc;
 

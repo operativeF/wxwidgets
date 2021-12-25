@@ -965,7 +965,7 @@ void wxPropertyGrid::DoBeginLabelEdit( unsigned int colIndex,
 
     tc->SetFocus();
 
-    m_labelEditor = wxStaticCast(tc, wxTextCtrl);
+    m_labelEditor = dynamic_cast<wxTextCtrl*>(tc);
     // Get actual position within required rectangle
     m_labelEditorPosRel = m_labelEditor->GetPosition() - r.GetPosition();
     m_labelEditorProperty = selected;
@@ -3015,7 +3015,7 @@ bool wxPropertyGrid::PerformValidation( wxPGProperty* p, wxVariant& pendingValue
             {
                 wxWindow* editor = GetEditorControl();
                 wxASSERT( wxDynamicCast(editor, wxTextCtrl) );
-                evtChangingValue = wxStaticCast(editor, wxTextCtrl)->GetValue();
+                evtChangingValue = dynamic_cast<wxTextCtrl*>(editor)->GetValue();
             }
             else
             {

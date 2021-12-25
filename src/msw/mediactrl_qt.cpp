@@ -622,7 +622,7 @@ bool wxQTMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
         return false;
     }
 
-    m_ctrl = wxStaticCast(ctrl, wxMediaCtrl);
+    m_ctrl = dynamic_cast<wxMediaCtrl*>(ctrl);
 
     // Create a port association for our window so we
     // can use it as a WindowRef

@@ -94,15 +94,6 @@ class const_iterator                                    \
 #define wxDynamicCastThis(className) \
      (IsKindOf(&className::ms_classInfo) ? (className*)this : NULL)
 
-template <class T>
-inline T *wxCheckCast(const void *ptr)
-{
-    wxASSERT_MSG( wxDynamicCast(ptr, T), "wxStaticCast() used incorrectly" );
-    return const_cast<T *>(static_cast<const T *>(ptr));
-}
-
-#define wxStaticCast(obj, className) wxCheckCast<className>(obj)
-
 // ----------------------------------------------------------------------------
 // set up memory debugging macros
 // ----------------------------------------------------------------------------

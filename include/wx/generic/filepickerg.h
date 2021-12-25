@@ -148,9 +148,9 @@ public:     // overridable
 
 protected:
     void UpdateDialogPath(wxDialog *p) override
-        { wxStaticCast(p, wxFileDialog)->SetPath(m_path); }
+        { dynamic_cast<wxFileDialog*>(p)->SetPath(m_path); }
     void UpdatePathFromDialog(wxDialog *p) override
-        { m_path = wxStaticCast(p, wxFileDialog)->GetPath(); }
+        { m_path = dynamic_cast<wxFileDialog*>(p)->GetPath(); }
 };
 
 
@@ -200,9 +200,9 @@ public:     // overridable
 
 protected:
     void UpdateDialogPath(wxDialog *p) override
-        { wxStaticCast(p, wxDirDialog)->SetPath(m_path); }
+        { dynamic_cast<wxDirDialog*>(p)->SetPath(m_path); }
     void UpdatePathFromDialog(wxDialog *p) override
-        { m_path = wxStaticCast(p, wxDirDialog)->GetPath(); }
+        { m_path = dynamic_cast<wxDirDialog*>(p)->GetPath(); }
 };
 
 #endif // _WX_FILEDIRPICKER_H_

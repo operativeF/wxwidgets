@@ -1037,7 +1037,7 @@ bool wxAMMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     // Now create the ActiveX container along with the media player
     // interface and query them
     //
-    m_ctrl = wxStaticCast(ctrl, wxMediaCtrl);
+    m_ctrl = dynamic_cast<wxMediaCtrl*>(ctrl);
     m_pAX = new wxActiveXContainer(ctrl,
                 m_pMP ? IID_IMediaPlayer : IID_IActiveMovie, m_pAM
                                   );

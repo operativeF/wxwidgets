@@ -569,7 +569,7 @@ void wxComboPopup::OnDismiss()
 
 wxComboCtrl* wxComboPopup::GetComboCtrl() const
 {
-    return wxStaticCast(m_combo, wxComboCtrl);
+    return dynamic_cast<wxComboCtrl*>(m_combo);
 }
 
 wxSize wxComboPopup::GetAdjustedSize( int minWidth,

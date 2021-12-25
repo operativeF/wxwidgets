@@ -752,7 +752,7 @@ public:
     // get the backpointer to the list ctrl
     wxGenericListCtrl *GetListCtrl() const
     {
-        return wxStaticCast(GetParent(), wxGenericListCtrl);
+        return dynamic_cast<wxGenericListCtrl*>(GetParent());
     }
 
     // get the height of all lines (assuming they all do have the same height)

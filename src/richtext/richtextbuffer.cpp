@@ -11234,7 +11234,7 @@ bool wxRichTextTable::DeleteRows(int startRow, int noRows)
     if (!rtc->SuppressingUndo())
     {
         // Create a clone containing the current state of the table. It will be used to Undo the action
-        clone = wxStaticCast(this->Clone(), wxRichTextTable);
+        clone = dynamic_cast<wxRichTextTable*>(this->Clone());
         clone->SetParent(GetParent());
         action = new wxRichTextAction(nullptr, _("Delete Row"), wxRICHTEXT_CHANGE_OBJECT, buffer, this, rtc);
         action->SetObject(this);
@@ -11284,7 +11284,7 @@ bool wxRichTextTable::DeleteColumns(int startCol, int noCols)
     if (!rtc->SuppressingUndo())
     {
         // Create a clone containing the current state of the table. It will be used to Undo the action
-        clone = wxStaticCast(this->Clone(), wxRichTextTable);
+        clone = dynamic_cast<wxRichTextTable*>(this->Clone());
         clone->SetParent(GetParent());
         action = new wxRichTextAction(nullptr, _("Delete Column"), wxRICHTEXT_CHANGE_OBJECT, buffer, this, rtc);
         action->SetObject(this);
@@ -11335,7 +11335,7 @@ bool wxRichTextTable::AddRows(int startRow, int noRows, const wxRichTextAttr& at
     if (!buffer->GetRichTextCtrl()->SuppressingUndo())
     {
         // Create a clone containing the current state of the table. It will be used to Undo the action
-        clone = wxStaticCast(this->Clone(), wxRichTextTable);
+        clone = dynamic_cast<wxRichTextTable*>(this->Clone());
         clone->SetParent(GetParent());
         action = new wxRichTextAction(nullptr, _("Add Row"), wxRICHTEXT_CHANGE_OBJECT, buffer, this, buffer->GetRichTextCtrl());
         action->SetObject(this);
@@ -11398,7 +11398,7 @@ bool wxRichTextTable::AddColumns(int startCol, int noCols, const wxRichTextAttr&
     if (!buffer->GetRichTextCtrl()->SuppressingUndo())
     {
         // Create a clone containing the current state of the table. It will be used to Undo the action
-        clone = wxStaticCast(this->Clone(), wxRichTextTable);
+        clone = dynamic_cast<wxRichTextTable*>(this->Clone());
         clone->SetParent(GetParent());
         action = new wxRichTextAction(nullptr, _("Add Column"), wxRICHTEXT_CHANGE_OBJECT, buffer, this, buffer->GetRichTextCtrl());
         action->SetObject(this);

@@ -656,7 +656,7 @@ void wxMDIParentFrame::OnMDIChild(wxCommandEvent& event)
             int childId = wxGetWindowId(child->GetHWND());
             if ( childId == event.GetId() )
             {
-                wxStaticCast(child, wxMDIChildFrame)->Activate();
+                dynamic_cast<wxMDIChildFrame*>(child)->Activate();
                 return;
             }
         }
