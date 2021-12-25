@@ -96,7 +96,6 @@ set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/valtext.cpp
     ${CORE_SRC_DIR}/common/valnum.cpp
     ${CORE_SRC_DIR}/common/wincmn.cpp
-    ${CORE_SRC_DIR}/common/windowid.cpp
     ${CORE_SRC_DIR}/common/wrapsizer.cpp
     ${CORE_SRC_DIR}/common/xpmdecod.cpp
     ${CORE_SRC_DIR}/generic/busyinfo.cpp

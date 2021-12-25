@@ -18,7 +18,8 @@
 // ----------------------------------------------------------------------------
 
 #include "wx/object.h"
-#include "wx/windowid.h"
+
+import WX.Base.WinId;
 
 #include <memory>
 import <optional>;

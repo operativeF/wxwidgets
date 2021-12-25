@@ -7,9 +7,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/windowid.h"
+
+module WX.Base.WinId;
 
 // initially no ids are in use and we allocate them consecutively, but after we
 // exhaust the entire range, we wrap around and reuse the ids freed in the

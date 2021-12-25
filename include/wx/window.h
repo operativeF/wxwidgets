@@ -26,7 +26,6 @@
 #include "wx/intl.h"
 
 #include "wx/validate.h"        // for wxDefaultValidator (always include it)
-#include "wx/windowid.h"
 
 #if wxUSE_PALETTE
     #include "wx/palette.h"
@@ -41,6 +40,7 @@
 #endif
 
 import WX.Cfg.Flags;
+import WX.Base.WinId;
 
 import Utils.Geometry;
 

@@ -107,6 +107,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/txtstrm.cpp
     ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/wfstream.cpp
+    ${BASE_SRC_DIR}/common/windowid.cpp
     ${BASE_SRC_DIR}/common/zipstrm.cpp
     ${BASE_SRC_DIR}/common/zstream.cpp
 )
@@ -148,6 +149,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/uri.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/windowid.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zipstrm.ixx
 )

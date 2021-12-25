@@ -7,10 +7,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WINDOWID_H_
-#define _WX_WINDOWID_H_
+module;
+
+export module WX.Base.WinId;
 
 import WX.Cfg.Flags;
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // wxWindowIDRef: reference counted id value
@@ -180,4 +184,4 @@ public:
     static void UnreserveId(wxWindowID id, int count = 1);
 };
 
-#endif // _WX_WINDOWID_H_
+} // export

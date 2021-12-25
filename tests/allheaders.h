@@ -365,7 +365,6 @@
 #include <wx/webview.h>
 #include <wx/wfstream.h>
 #include <wx/window.h>
-#include <wx/windowid.h>
 #include <wx/windowptr.h>
 #include <wx/withimages.h>
 #include <wx/wizard.h>

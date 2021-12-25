@@ -12,8 +12,9 @@
 
 #if wxUSE_FILE_HISTORY
 
-#include "wx/windowid.h"
 #include "wx/list.h"
+
+import WX.Base.WinId;
 
 import <filesystem>;
 import <vector>;
