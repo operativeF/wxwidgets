@@ -11,6 +11,8 @@
 #ifndef _WX_COLOUR_H_
 #define _WX_COLOUR_H_
 
+#include "wx/defs.h"
+
 import <cstdint>;
 
 class wxColour : public wxColourBase

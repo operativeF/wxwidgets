@@ -54,7 +54,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/list.cpp
     ${BASE_SRC_DIR}/common/log.cpp
     ${BASE_SRC_DIR}/common/longlong.cpp
-    ${BASE_SRC_DIR}/common/memory.cpp
     ${BASE_SRC_DIR}/common/mimecmn.cpp
     ${BASE_SRC_DIR}/common/module.cpp
     ${BASE_SRC_DIR}/common/numformatter.cpp

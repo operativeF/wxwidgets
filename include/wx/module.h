@@ -11,6 +11,7 @@
 #ifndef _WX_MODULE_H_
 #define _WX_MODULE_H_
 
+#include "wx/debug.h"
 #include "wx/object.h"
 
 import <string>;

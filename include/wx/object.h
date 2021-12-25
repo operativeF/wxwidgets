@@ -12,7 +12,7 @@
 #ifndef _WX_OBJECTH__
 #define _WX_OBJECTH__
 
-#include "wx/memory.h"
+#include "wx/debug.h"
 
 import WX.Cfg.Flags;
 

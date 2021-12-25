@@ -13,6 +13,8 @@
 #ifndef _WX_CONFBASE_H_
 #define _WX_CONFBASE_H_
 
+#include "wx/buffer.h"
+#include "wx/longlong.h"
 #include "wx/object.h"
 
 import WX.Cmn.Base64;

@@ -16,6 +16,7 @@
 #include "wx/init.h"
 #include "wx/scopedptr.h"
 #include "wx/except.h"
+#include "wx/msgout.h"
 
 #if defined(WX_WINDOWS)
     #include "wx/msw/private.h"

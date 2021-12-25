@@ -10,6 +10,7 @@
 module;
 
 #include "wx/object.h"
+#include "wx/string.h"
 
 export module WX.Cmn.EncConv;
 

@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_XML
 
 #include "wx/xml/xml.h"
@@ -23,6 +20,7 @@
 #include "expat.h" // from Expat
 
 import WX.Utils.VersionInfo;
+import WX.Cmn.Stream;
 import WX.Cmn.WFStream;
 import WX.Cmn.DataStream;
 import WX.Cmn.ZStream;

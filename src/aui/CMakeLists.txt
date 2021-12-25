@@ -23,6 +23,8 @@ set(AUI_CMN_INF
     ${CMAKE_SOURCE_DIR}/modules/aui/toolbarart.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/toolbaritem.ixx
     ${CMAKE_SOURCE_DIR}/modules/aui/generic/toolbarartg.ixx
+
+    ${CMAKE_SOURCE_DIR}/modules/core/sizer.ixx
 )
 
 set(AUI_MSW_INF
@@ -78,7 +80,6 @@ target_link_libraries(wxaui
     PRIVATE
         wxbaselib
         wxbase
-        wxcore
         stdlibcore
 )
 

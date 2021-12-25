@@ -29,9 +29,6 @@ import WX.AUI.ToolBar.Item;
 import Utils.Geometry;
 import WX.Utils.Settings;
 
-
-import Utils.Geometry;
-
 export
 {
 
