@@ -11,7 +11,6 @@
 #ifndef _WX_IPCBASEH__
 #define _WX_IPCBASEH__
 
-#include "wx/object.h"
 #include "wx/string.h"
 
 enum wxIPCFormat

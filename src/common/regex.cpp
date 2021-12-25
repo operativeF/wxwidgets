@@ -13,7 +13,6 @@
 
 #include "wx/regex.h"
 
-#include "wx/object.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/crt.h"

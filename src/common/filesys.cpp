@@ -11,7 +11,6 @@
 #include "wx/filesys.h"
 #include "wx/module.h"
 #include "wx/mimetype.h"
-#include "wx/object.h"
 #include "wx/private/fileback.h"
 #include "wx/utils.h"
 

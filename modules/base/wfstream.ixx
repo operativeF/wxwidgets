@@ -11,7 +11,6 @@
 module;
 
 #include "wx/filefn.h"
-#include "wx/object.h"
 #include "wx/string.h"
 
 export module WX.Cmn.WFStream;
