@@ -65,7 +65,7 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
             m_isInside = false;
             wxObject *item = CreateResFromNode(n, bookctrl, nullptr);
             m_isInside = old_ins;
-            wxWindow *wnd = wxDynamicCast(item, wxWindow);
+            wxWindow *wnd = dynamic_cast<wxWindow*>(item);
 
             if (wnd)
             {

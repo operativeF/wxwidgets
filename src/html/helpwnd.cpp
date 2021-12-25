@@ -674,8 +674,8 @@ void wxHtmlHelpWindow::AddToolbarButtons(wxToolBar *toolBar, unsigned int style)
     toolBar->AddTool(wxID_HTML_OPTIONS, "", woptionsBitmap, "Display options dialog");
 
     // Allow application to add custom buttons
-    wxHtmlHelpFrame* parentFrame = wxDynamicCast(GetParent(), wxHtmlHelpFrame);
-    wxHtmlHelpDialog* parentDialog = wxDynamicCast(GetParent(), wxHtmlHelpDialog);
+    wxHtmlHelpFrame* parentFrame = dynamic_cast<wxHtmlHelpFrame*>(GetParent());
+    wxHtmlHelpDialog* parentDialog = dynamic_cast<wxHtmlHelpDialog*>(GetParent());
     if (parentFrame)
         parentFrame->AddToolbarButtons(toolBar, style);
     if (parentDialog)

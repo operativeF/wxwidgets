@@ -114,7 +114,7 @@ public:
                       wxBitmapType flags,
                       wxSize desiredSz) override
     {
-        wxIcon *icon = wxDynamicCast(image, wxIcon);
+        wxIcon *icon = dynamic_cast<wxIcon*>(image);
         wxCHECK_MSG( icon, false, "wxIconHandler only works with icons" );
 
         return wxLoadIcon(icon, name, flags, desiredSz);

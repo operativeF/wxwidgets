@@ -185,9 +185,9 @@ void wxPluginLibrary::RegisterModules()
         {
             if( info->IsKindOf(wxCLASSINFO(wxModule)) )
             {
-                wxModule *m = wxDynamicCast(info->CreateObject(), wxModule);
+                wxModule *m = dynamic_cast<wxModule*>(info->CreateObject());
 
-                wxASSERT_MSG( m, "wxDynamicCast of wxModule failed" );
+                wxASSERT_MSG( m, "Dynamic cast of wxModule failed" );
 
                 m_wxmodules.push_back(m);
                 wxModule::RegisterModule(m);

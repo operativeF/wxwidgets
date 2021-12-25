@@ -42,7 +42,7 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
         m_insideMenu = oldins;
 
 #if wxUSE_MENUBAR
-        wxMenuBar *p_bar = wxDynamicCast(m_parent, wxMenuBar);
+        wxMenuBar *p_bar = dynamic_cast<wxMenuBar*>(m_parent);
         if (p_bar)
         {
             p_bar->Append(menu, title);
@@ -50,7 +50,7 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
         else
 #endif // wxUSE_MENUBAR
         {
-            wxMenu *p_menu = wxDynamicCast(m_parent, wxMenu);
+            wxMenu *p_menu = dynamic_cast<wxMenu*>(m_parent);
             if (p_menu)
             {
                 p_menu->Append(GetID(), title, menu, help);
@@ -64,7 +64,7 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
 
     else
     {
-        wxMenu *p_menu = wxDynamicCast(m_parent, wxMenu);
+        wxMenu *p_menu = dynamic_cast<wxMenu*>(m_parent);
 
         if (m_class == "separator")
             p_menu->AppendSeparator();
@@ -159,7 +159,7 @@ wxObject *wxMenuBarXmlHandler::DoCreateResource()
                  "cannot use <style> with pre-created menubar");
 
     if ( m_instance )
-        menubar = wxDynamicCast(m_instance, wxMenuBar);
+        menubar = dynamic_cast<wxMenuBar*>(m_instance);
     if ( !menubar )
         menubar = new wxMenuBar(style);
 
@@ -167,7 +167,7 @@ wxObject *wxMenuBarXmlHandler::DoCreateResource()
 
     if (m_parentAsWindow)
     {
-        wxFrame *parentFrame = wxDynamicCast(m_parent, wxFrame);
+        wxFrame *parentFrame = dynamic_cast<wxFrame*>(m_parent);
         if (parentFrame)
             parentFrame->SetMenuBar(menubar);
     }

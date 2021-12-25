@@ -66,7 +66,7 @@ wxObject *wxSplitterWindowXmlHandler::DoCreateResource()
              n->GetName() == "object_ref"))
         {
             wxObject *created = CreateResFromNode(n, splitter, nullptr);
-            wxWindow *win = wxDynamicCast(created, wxWindow);
+            wxWindow *win = dynamic_cast<wxWindow*>(created);
             if (win1 == nullptr)
             {
                 win1 = win;

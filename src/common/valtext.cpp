@@ -88,21 +88,21 @@ bool wxTextValidator::Copy(const wxTextValidator& val)
 wxTextEntry *wxTextValidator::GetTextEntry()
 {
 #if wxUSE_TEXTCTRL
-    if (wxDynamicCast(m_validatorWindow, wxTextCtrl))
+    if (dynamic_cast<wxTextCtrl*>(m_validatorWindow))
     {
         return (wxTextCtrl*)m_validatorWindow;
     }
 #endif
 
 #if wxUSE_COMBOBOX
-    if (wxDynamicCast(m_validatorWindow, wxComboBox))
+    if (dynamic_cast<wxComboBox*>(m_validatorWindow))
     {
         return (wxComboBox*)m_validatorWindow;
     }
 #endif
 
 #if wxUSE_COMBOCTRL
-    if (wxDynamicCast(m_validatorWindow, wxComboCtrl))
+    if (dynamic_cast<wxComboCtrl*>(m_validatorWindow))
     {
         return (wxComboCtrl*)m_validatorWindow;
     }

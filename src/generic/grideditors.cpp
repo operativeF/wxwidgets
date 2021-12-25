@@ -1548,7 +1548,7 @@ void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
     {
         // This event handler is needed to properly dismiss the editor when the popup is closed
         m_control->Bind(wxEVT_COMBOBOX_CLOSEUP, &wxGridCellChoiceEditor::OnComboCloseUp, this);
-        evtHandler = wxDynamicCast(m_control->GetEventHandler(), wxGridCellEditorEvtHandler);
+        evtHandler = dynamic_cast<wxGridCellEditorEvtHandler*>(m_control->GetEventHandler());
     }
 
     // Don't immediately end if we get a kill focus event within BeginEdit
@@ -1651,8 +1651,7 @@ std::string wxGridCellChoiceEditor::GetValue() const
 
 void wxGridCellChoiceEditor::OnComboCloseUp([[maybe_unused]] wxCommandEvent& evt)
 {
-    wxGridCellEditorEvtHandler* evtHandler = wxDynamicCast(m_control->GetEventHandler(),
-                                                           wxGridCellEditorEvtHandler);
+    auto evtHandler = dynamic_cast<wxGridCellEditorEvtHandler*>(m_control->GetEventHandler());
 
     if ( !evtHandler )
         return;
@@ -1694,7 +1693,7 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
 
     wxGridCellEditorEvtHandler* evtHandler = nullptr;
     if (m_control)
-        evtHandler = wxDynamicCast(m_control->GetEventHandler(), wxGridCellEditorEvtHandler);
+        evtHandler = dynamic_cast<wxGridCellEditorEvtHandler*>(m_control->GetEventHandler());
 
     // Don't immediately end if we get a kill focus event within BeginEdit
     if (evtHandler)
@@ -1862,7 +1861,7 @@ void wxGridCellDateEditor::Create(wxWindow* parent, wxWindowID id,
 #if defined ( __WXGTK__ )
     // Install a handler for ESC and ENTER keys.
     wxGridCellEditorEvtHandler* handler =
-        wxDynamicCast(evtHandler, wxGridCellEditorEvtHandler);
+        dynamic_cast<wxGridCellEditorEvtHandler*>(evtHandler);
     if ( handler )
     {
         handler->Bind(wxEVT_CHAR, wxGridCellDateEditorKeyHandler(handler));

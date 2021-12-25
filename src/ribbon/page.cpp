@@ -189,7 +189,7 @@ void wxRibbonPage::CommonInit(const wxString& label, const wxBitmap& icon)
 
     SetBackgroundStyle(wxBackgroundStyle::Paint);
 
-    wxDynamicCast(GetParent(), wxRibbonBar)->AddPage(this);
+    dynamic_cast<wxRibbonBar*>(GetParent())->AddPage(this);
 }
 
 void wxRibbonPage::SetArtProvider(wxRibbonArtProvider* art)
@@ -200,7 +200,7 @@ void wxRibbonPage::SetArtProvider(wxRibbonArtProvider* art)
           node = node->GetNext() )
     {
         wxWindow* child = node->GetData();
-        wxRibbonControl* ribbon_child = wxDynamicCast(child, wxRibbonControl);
+        wxRibbonControl* ribbon_child = dynamic_cast<wxRibbonControl*>(child);
         if(ribbon_child)
         {
             ribbon_child->SetArtProvider(art);
@@ -585,7 +585,7 @@ bool wxRibbonPage::Realize()
                   node;
                   node = node->GetNext())
     {
-        wxRibbonControl* child = wxDynamicCast(node->GetData(), wxRibbonControl);
+        wxRibbonControl* child = dynamic_cast<wxRibbonControl*>(node->GetData());
         if(child == nullptr)
         {
             continue;
@@ -621,7 +621,7 @@ void wxRibbonPage::PopulateSizeCalcArray(wxSize (wxWindow::*get_size)() const)
           node = node->GetNext(), ++node_size )
     {
         wxWindow* child = node->GetData();
-        wxRibbonPanel* panel = wxDynamicCast(child, wxRibbonPanel);
+        wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(child);
         if (panel && panel->GetFlags() & wxRIBBON_PANEL_FLEXIBLE)
             *node_size = panel->GetBestSizeForParentSize(parentSize);
         else
@@ -873,7 +873,7 @@ bool wxRibbonPage::ShowScrollButtons()
 
     if(reposition)
     {
-        wxDynamicCast(GetParent(), wxRibbonBar)->RepositionPage(this);
+        dynamic_cast<wxRibbonBar*>(GetParent())->RepositionPage(this);
     }
 
     return reposition;
@@ -903,7 +903,7 @@ bool wxRibbonPage::ExpandPanels(wxOrientation direction, int maximum_amount)
                   node;
                   node = node->GetNext(), ++panel_size )
         {
-            wxRibbonPanel* panel = wxDynamicCast(node->GetData(), wxRibbonPanel);
+            wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(node->GetData());
             if(panel == nullptr)
             {
                 continue;
@@ -997,13 +997,13 @@ bool wxRibbonPage::CollapsePanels(wxOrientation direction, int minimum_amount)
         {
             // For a more consistent panel layout, try to collapse panels which
             // were recently expanded.
-            largest_panel = wxDynamicCast(m_collapse_stack.Last(), wxRibbonPanel);
+            largest_panel = dynamic_cast<wxRibbonPanel*>(m_collapse_stack.Last());
             m_collapse_stack.RemoveAt(m_collapse_stack.GetCount() - 1);
             for(wxWindowList::compatibility_iterator node = GetChildren().GetFirst();
                       node;
                       node = node->GetNext(), ++panel_size )
             {
-                wxRibbonPanel* panel = wxDynamicCast(node->GetData(), wxRibbonPanel);
+                wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(node->GetData());
                 if(panel == largest_panel)
                 {
                     largest_panel_size = panel_size;
@@ -1018,7 +1018,7 @@ bool wxRibbonPage::CollapsePanels(wxOrientation direction, int minimum_amount)
                       node;
                       node = node->GetNext(), ++panel_size )
             {
-                wxRibbonPanel* panel = wxDynamicCast(node->GetData(), wxRibbonPanel);
+                wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(node->GetData());
                 if(panel == nullptr)
                 {
                     continue;
@@ -1094,7 +1094,7 @@ bool wxRibbonPage::DismissExpandedPanel()
               node;
               node = node->GetNext() )
     {
-        wxRibbonPanel* panel = wxDynamicCast(node->GetData(), wxRibbonPanel);
+        wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(node->GetData());
         if(panel == nullptr)
         {
             continue;

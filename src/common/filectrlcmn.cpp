@@ -76,7 +76,7 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
 
 std::string wxFileCtrlEvent::GetFile() const
 {
-    wxASSERT_MSG( !wxDynamicCast( GetEventObject(), wxFileCtrl )->HasMultipleFileSelection(),
+    wxASSERT_MSG( !dynamic_cast<wxFileCtrl*>( GetEventObject() )->HasMultipleFileSelection(),
                   "Please use GetFiles() to get all files instead of this function" );
 
     std::string string;

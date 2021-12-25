@@ -110,7 +110,7 @@ wxObject *wxTreebookXmlHandler::DoCreateResource()
         m_isInside = false;
         wxObject *item = CreateResFromNode(n, m_tbk, nullptr);
         m_isInside = old_ins;
-        wnd = wxDynamicCast(item, wxWindow);
+        wnd = dynamic_cast<wxWindow*>(item);
 
         if (wnd == nullptr && item != nullptr)
         {

@@ -80,7 +80,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
             if ( nodeMenu )
             {
                 wxObject *res = CreateResFromNode(nodeMenu, nullptr);
-                menu = wxDynamicCast(res, wxMenu);
+                menu = dynamic_cast<wxMenu*>(res);
                 if ( !menu )
                 {
                     ReportError
@@ -225,7 +225,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
             if (IsObjectNode(n))
             {
                 wxObject *created = CreateResFromNode(n, toolbar, nullptr);
-                wxControl *control = wxDynamicCast(created, wxControl);
+                wxControl *control = dynamic_cast<wxControl*>(created);
                 if (!IsOfClass(n, "tool") &&
                     !IsOfClass(n, "separator") &&
                     !IsOfClass(n, "label") &&
@@ -258,7 +258,7 @@ void wxAuiToolBarXmlHandler::MenuHandler::OnDropDown(wxAuiToolBarEvent& event)
 {
     if (event.IsDropDownClicked())
     {
-        wxAuiToolBar *toobar = wxDynamicCast(event.GetEventObject(), wxAuiToolBar);
+        wxAuiToolBar *toobar = dynamic_cast<wxAuiToolBar*>(event.GetEventObject());
         if (toobar != nullptr)
         {
             wxAuiToolBarItem *item = toobar->FindTool(event.GetId());

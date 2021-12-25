@@ -1901,8 +1901,8 @@ void wxToolBar::OnDPIChanged(wxDPIChangedEvent& event)
             // Use the best height for choice-based controls.
             // Scaling the current size does not work, because the control
             // automatically increases size when the font-size increases.
-            if ( wxDynamicCast(control, wxComboBox) ||
-                 wxDynamicCast(control, wxChoice) )
+            if ( dynamic_cast<wxComboBox*>(control) ||
+                 dynamic_cast<wxChoice*>(control) )
             {
                 const wxSize bestSize = control->GetBestSize();
                 newSize.y = bestSize.y;

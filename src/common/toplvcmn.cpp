@@ -61,7 +61,7 @@ wxTopLevelWindowBase::~wxTopLevelWindowBase()
           i != wxPendingDelete.end();
           )
     {
-        wxWindow * const win = wxDynamicCast(*i, wxWindow);
+        wxWindow * const win = dynamic_cast<wxWindow*>(*i);
         if ( win && wxGetTopLevelParent(win->GetParent()) == this )
         {
             wxPendingDelete.erase(i);

@@ -189,7 +189,7 @@ void wxHtmlHelpFrame::AddGrabIfNeeded()
           ++it )
     {
         wxWindow *win = *it;
-        wxDialog *dialog = wxDynamicCast(win, wxDialog);
+        wxDialog *dialog = dynamic_cast<wxDialog*>(win);
 
         if (dialog && dialog->IsModal())
             needGrab = true;

@@ -546,7 +546,7 @@ wxRichTextParagraphLayoutBox* wxRichTextObject::GetContainer() const
     {
         if (p->IsTopLevel())
         {
-            return wxDynamicCast(p, wxRichTextParagraphLayoutBox);
+            return dynamic_cast<wxRichTextParagraphLayoutBox*>(p);
         }
         p = p->GetParent();
     }
@@ -790,7 +790,7 @@ bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, con
 
         if (obj)
         {
-            wxRichTextCell* cell = wxDynamicCast(obj, wxRichTextCell);
+            wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(obj);
             if (cell)
             {
                 // This ensures that thin lines drawn by adjacent cells (left and above)
@@ -1195,9 +1195,9 @@ void wxRichTextObject::Dump(wxTextOutputStream& stream)
 wxRichTextBuffer* wxRichTextObject::GetBuffer() const
 {
     const wxRichTextObject* obj = this;
-    while (obj && !wxDynamicCast(obj, wxRichTextBuffer))
+    while (obj && !dynamic_cast<wxRichTextBuffer*>(obj))
         obj = obj->GetParent();
-    return wxDynamicCast(obj, wxRichTextBuffer);
+    return dynamic_cast<wxRichTextBuffer*>(obj);
 }
 
 // Get the absolute object position, by traversing up the child/parent hierarchy
@@ -1622,7 +1622,7 @@ bool wxRichTextCompositeObject::Defragment(wxRichTextDrawingContext& context, co
         wxRichTextObject* child = node->GetData();
         if (range == wxRICHTEXT_ALL || !child->GetRange().IsOutside(range))
         {
-            wxRichTextCompositeObject* composite = wxDynamicCast(child, wxRichTextCompositeObject);
+            wxRichTextCompositeObject* composite = dynamic_cast<wxRichTextCompositeObject*>(child);
             if (composite)
             {
                 composite->Defragment(context);
@@ -1956,7 +1956,7 @@ bool wxRichTextParagraphLayoutBox::UpdateFloatingObjects(const wxRect& available
     // Only gather floats up to the point we'll start formatting paragraphs.
     while (untilObj && node && node->GetData() != untilObj)
     {
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         wxASSERT (child != nullptr);
         if (child)
             m_floatCollector->CollectFloat(child);
@@ -2200,7 +2200,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
             {
                 if (previousNode)
                 {
-                    wxRichTextParagraph* previousParagraph = wxDynamicCast(previousNode->GetData(), wxRichTextParagraph);
+                    wxRichTextParagraph* previousParagraph = dynamic_cast<wxRichTextParagraph*>(previousNode->GetData());
                     availableSpace.y = previousParagraph->GetPosition().y + previousParagraph->GetCachedSize().y;
                 }
 
@@ -2224,7 +2224,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
     wxRichTextObjectList::compatibility_iterator n = m_children.GetFirst();
     while (n && n != node)
     {
-        wxRichTextParagraph* child = wxDynamicCast(n->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(n->GetData());
         if (child)
         {
             maxWidth = std::max(maxWidth, child->GetCachedSize().x);
@@ -2238,7 +2238,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
     {
         // Assume this box only contains paragraphs
 
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // Unsure if this is needed
         // wxCHECK_MSG( child, false, "Unknown object in layout" );
 
@@ -2279,7 +2279,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
                 {
                     while (node)
                     {
-                        child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+                        child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
                         if (child)
                         {
                             int oldImpactedByFloats = child->GetImpactedByFloatingObjects();
@@ -2311,13 +2311,13 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
                 int inc = 0;
                 if (node)
                 {
-                    child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+                    child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
                     inc = availableSpace.y - child->GetPosition().y;
                 }
 
                 while (node)
                 {
-                    wxRichTextParagraph* nodeChild = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+                    wxRichTextParagraph* nodeChild = dynamic_cast<wxRichTextParagraph*>(node->GetData());
                     if (nodeChild)
                     {
                         if (nodeChild->GetLines().GetCount() == 0)
@@ -2447,7 +2447,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
             wxRichTextObjectList::compatibility_iterator childNode = m_children.GetFirst();
             while (childNode)
             {
-                wxRichTextParagraph* child = wxDynamicCast(childNode->GetData(), wxRichTextParagraph);
+                wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(childNode->GetData());
                 if (child)
                     child->Move(wxPoint(child->GetPosition().x, child->GetPosition().y + yOffset));
 
@@ -2548,7 +2548,7 @@ wxRichTextParagraph* wxRichTextParagraphLayoutBox::GetParagraphAtPosition(long p
     while (node)
     {
         // child is a paragraph
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (child != NULL);
 
         if (child)
@@ -2580,7 +2580,7 @@ wxRichTextLine* wxRichTextParagraphLayoutBox::GetLineAtPosition(long pos, bool c
         if (obj->GetRange().Contains(pos))
         {
             // child is a paragraph
-            wxRichTextParagraph* child = wxDynamicCast(obj, wxRichTextParagraph);
+            wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(obj);
             // wxASSERT (child != NULL);
 
             if (child)
@@ -2620,7 +2620,7 @@ wxRichTextLine* wxRichTextParagraphLayoutBox::GetLineAtYPosition(int y) const
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (child != NULL);
 
         if (child)
@@ -2658,7 +2658,7 @@ int wxRichTextParagraphLayoutBox::GetLineCount() const
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (child != NULL);
 
         if (child)
@@ -2864,7 +2864,7 @@ bool wxRichTextParagraphLayoutBox::InsertFragment(long position, wxRichTextParag
                 return false;
 
             // Iterate through the fragment paragraph inserting the content into this paragraph.
-            wxRichTextParagraph* firstPara = wxDynamicCast(firstParaNode->GetData(), wxRichTextParagraph);
+            wxRichTextParagraph* firstPara = dynamic_cast<wxRichTextParagraph*>(firstParaNode->GetData());
             wxASSERT (firstPara != nullptr);
 
             wxRichTextObjectList::compatibility_iterator objectNode = firstPara->GetChildren().GetFirst();
@@ -2911,7 +2911,7 @@ bool wxRichTextParagraphLayoutBox::InsertFragment(long position, wxRichTextParag
             if (!firstParaNode)
                 return false;
 
-            wxRichTextParagraph* firstPara = wxDynamicCast(firstParaNode->GetData(), wxRichTextParagraph);
+            wxRichTextParagraph* firstPara = dynamic_cast<wxRichTextParagraph*>(firstParaNode->GetData());
             wxASSERT(firstPara != nullptr);
 
             if (!(fragment.GetAttributes().GetFlags() & wxTEXT_ATTR_KEEP_FIRST_PARA_STYLE))
@@ -2954,7 +2954,7 @@ bool wxRichTextParagraphLayoutBox::InsertFragment(long position, wxRichTextParag
             // If there was only one paragraph, we need to insert a new one.
             while (i)
             {
-                wxRichTextParagraph* searchPara = wxDynamicCast(i->GetData(), wxRichTextParagraph);
+                wxRichTextParagraph* searchPara = dynamic_cast<wxRichTextParagraph*>(i->GetData());
                 wxASSERT( searchPara != nullptr );
 
                 finalPara = (wxRichTextParagraph*) searchPara->Clone();
@@ -3015,7 +3015,7 @@ bool wxRichTextParagraphLayoutBox::InsertFragment(long position, wxRichTextParag
         wxRichTextObjectList::compatibility_iterator i = fragment.GetChildren().GetFirst();
         while (i)
         {
-            wxRichTextParagraph* searchPara = wxDynamicCast(i->GetData(), wxRichTextParagraph);
+            wxRichTextParagraph* searchPara = dynamic_cast<wxRichTextParagraph*>(i->GetData());
             wxASSERT( searchPara != nullptr );
 
             AppendChild(searchPara->Clone());
@@ -3034,7 +3034,7 @@ bool wxRichTextParagraphLayoutBox::CopyFragment(const wxRichTextRange& range, wx
     wxRichTextObjectList::compatibility_iterator i = GetChildren().GetFirst();
     while (i)
     {
-        wxRichTextParagraph* para = wxDynamicCast(i->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(i->GetData());
         wxASSERT( para != nullptr );
 
         if (!para->GetRange().IsOutside(range))
@@ -3047,10 +3047,10 @@ bool wxRichTextParagraphLayoutBox::CopyFragment(const wxRichTextRange& range, wx
     // Now top and tail the first and last paragraphs in our new fragment (which might be the same).
     if (!fragment.IsEmpty())
     {
-        wxRichTextParagraph* firstPara = wxDynamicCast(fragment.GetChildren().GetFirst()->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* firstPara = dynamic_cast<wxRichTextParagraph*>(fragment.GetChildren().GetFirst()->GetData());
         wxASSERT( firstPara != nullptr );
 
-        wxRichTextParagraph* lastPara = wxDynamicCast(fragment.GetChildren().GetLast()->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* lastPara = dynamic_cast<wxRichTextParagraph*>(fragment.GetChildren().GetLast()->GetData());
         wxASSERT( lastPara != nullptr );
 
         if (!firstPara || !lastPara)
@@ -3120,7 +3120,7 @@ long wxRichTextParagraphLayoutBox::GetVisibleLineNumber(long pos, bool caretPosi
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT( child != NULL );
 
         if (child)
@@ -3171,7 +3171,7 @@ wxRichTextLine* wxRichTextParagraphLayoutBox::GetLineForVisibleLineNumber(long l
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT(child != NULL);
 
         if (child)
@@ -3210,7 +3210,7 @@ bool wxRichTextParagraphLayoutBox::DeleteRange(const wxRichTextRange& range)
     wxRichTextParagraph* firstPara = nullptr;
     while (node)
     {
-        wxRichTextParagraph* obj = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* obj = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (obj != NULL);
 
         wxRichTextObjectList::compatibility_iterator next = node->GetNext();
@@ -3252,7 +3252,7 @@ bool wxRichTextParagraphLayoutBox::DeleteRange(const wxRichTextRange& range)
                     {
                         // We're ending at the end of the paragraph, so merge the _next_ paragraph.
                         if (next)
-                            nextParagraph = wxDynamicCast(next->GetData(), wxRichTextParagraph);
+                            nextParagraph = dynamic_cast<wxRichTextParagraph*>(next->GetData());
                     }
 
                     bool applyFinalParagraphStyle = firstPara && nextParagraph && nextParagraph != firstPara;
@@ -3495,7 +3495,7 @@ bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const 
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para && para->GetChildCount() > 0)
@@ -3728,7 +3728,7 @@ bool wxRichTextParagraphLayoutBox::DoGetStyle(long position, wxRichTextAttr& sty
         {
             if (combineStyles)
             {
-                wxRichTextParagraph* para = wxDynamicCast(obj->GetParent(), wxRichTextParagraph);
+                wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(obj->GetParent());
                 style = para ? para->GetCombinedAttributes(obj->GetAttributes()) : obj->GetAttributes();
             }
             else
@@ -3768,7 +3768,7 @@ bool wxRichTextParagraphLayoutBox::GetStyleForRange(const wxRichTextRange& range
     wxRichTextObjectList::compatibility_iterator node = GetChildren().GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         if (para && !(para->GetRange().GetStart() > range.GetEnd() || para->GetRange().GetEnd() < range.GetStart()))
         {
             if (para->GetChildren().GetCount() == 0)
@@ -3830,7 +3830,7 @@ bool wxRichTextParagraphLayoutBox::HasCharacterAttributes(const wxRichTextRange&
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para)
@@ -3851,7 +3851,7 @@ bool wxRichTextParagraphLayoutBox::HasCharacterAttributes(const wxRichTextRange&
                     if (childRange.GetLength() == 0 && GetRange().GetLength() == 1)
                         childRange.SetEnd(childRange.GetEnd()+1);
 
-                    if (!childRange.IsOutside(range) && wxDynamicCast(child, wxRichTextPlainText))
+                    if (!childRange.IsOutside(range) && dynamic_cast<wxRichTextPlainText*>(child))
                     {
                         foundCount ++;
                         wxRichTextAttr textAttr = para->GetCombinedAttributes(child->GetAttributes());
@@ -3884,7 +3884,7 @@ bool wxRichTextParagraphLayoutBox::HasParagraphAttributes(const wxRichTextRange&
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para)
@@ -3951,7 +3951,7 @@ bool wxRichTextParagraphLayoutBox::SetProperties(const wxRichTextRange& range, c
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para && para->GetChildCount() > 0)
@@ -4141,7 +4141,7 @@ void wxRichTextParagraphLayoutBox::InvalidateHierarchy(const wxRichTextRange& in
         wxRichTextObject* p = GetParent();
         while (p)
         {
-            wxRichTextParagraphLayoutBox* l = wxDynamicCast(p, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* l = dynamic_cast<wxRichTextParagraphLayoutBox*>(p);
             if (l)
                 l->DoInvalidate(thisObj->GetRange());
 
@@ -4207,7 +4207,7 @@ bool wxRichTextParagraphLayoutBox::ApplyStyleSheet(wxRichTextStyleSheet* styleSh
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para)
@@ -4323,7 +4323,7 @@ bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wx
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para && para->GetChildCount() > 0)
@@ -4496,7 +4496,7 @@ bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, co
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         // wxASSERT (para != NULL);
 
         if (para && para->GetChildCount() > 0)
@@ -4678,7 +4678,7 @@ bool wxRichTextParagraphLayoutBox::FindNextParagraphNumber(wxRichTextParagraph* 
         {
             node = node->GetPrevious();
             if (node)
-                previousParagraph = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+                previousParagraph = dynamic_cast<wxRichTextParagraph*>(node->GetData());
             else
                 previousParagraph = nullptr;
         }
@@ -5466,7 +5466,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // If floating, ignore. We already laid out floats.
             // Also ignore if empty object, except if we haven't got any
             // size yet.
-            if ((!child->IsFloating() || !wxRichTextBuffer::GetFloatingLayoutMode()) && child->GetRange().GetLength() != 0 && !wxDynamicCast(child, wxRichTextPlainText))
+            if ((!child->IsFloating() || !wxRichTextBuffer::GetFloatingLayoutMode()) && child->GetRange().GetLength() != 0 && !dynamic_cast<wxRichTextPlainText*>(child))
             {
                 if (child->GetCachedSize().x > minWidth)
                     minWidth = child->GetMinSize().x;
@@ -5595,7 +5595,7 @@ bool wxRichTextParagraph::InsertText(long pos, const wxString& text)
 
     if (childToUse)
     {
-        wxRichTextPlainText* textObject = wxDynamicCast(childToUse, wxRichTextPlainText);
+        wxRichTextPlainText* textObject = dynamic_cast<wxRichTextPlainText*>(childToUse);
         if (textObject)
         {
             int posInString = pos - textObject->GetRange().GetStart();
@@ -5916,7 +5916,7 @@ bool wxRichTextParagraph::FindPosition(wxDC& dc, wxRichTextDrawingContext& conte
     // at the start of the next paragraph.
     if (index == GetRange().GetEnd())
     {
-        wxRichTextParagraphLayoutBox* parent = wxDynamicCast(GetParent(), wxRichTextParagraphLayoutBox);
+        wxRichTextParagraphLayoutBox* parent = dynamic_cast<wxRichTextParagraphLayoutBox*>(GetParent());
         wxASSERT( parent != nullptr );
 
         // Find the height at the next paragraph, if any
@@ -6263,7 +6263,7 @@ bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTex
             wxRichTextObject* obj = node->GetData();
             if (!obj->GetRange().IsOutside(range))
             {
-                wxRichTextPlainText* textObj = wxDynamicCast(obj, wxRichTextPlainText);
+                wxRichTextPlainText* textObj = dynamic_cast<wxRichTextPlainText*>(obj);
                 if (textObj)
                 {
                     text += textObj->GetTextForRange(range);
@@ -6285,7 +6285,7 @@ bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTex
             wxRichTextObject* obj = node->GetData();
             if (!obj->GetRange().IsOutside(range))
             {
-                wxRichTextPlainText* textObj = wxDynamicCast(obj, wxRichTextPlainText);
+                wxRichTextPlainText* textObj = dynamic_cast<wxRichTextPlainText*>(obj);
                 if (textObj)
                 {
                     text = textObj->GetTextForRange(range) + text;
@@ -6519,7 +6519,7 @@ bool wxRichTextParagraph::ClearUnusedLines(int lineCount)
 wxRichTextAttr wxRichTextParagraph::GetCombinedAttributes(const wxRichTextAttr& contentStyle, bool includingBoxAttr) const
 {
     wxRichTextAttr attr;
-    wxRichTextParagraphLayoutBox* buf = wxDynamicCast(GetParent(), wxRichTextParagraphLayoutBox);
+    wxRichTextParagraphLayoutBox* buf = dynamic_cast<wxRichTextParagraphLayoutBox*>(GetParent());
     if (buf)
     {
         attr = buf->GetBasicStyle();
@@ -6549,7 +6549,7 @@ wxRichTextAttr wxRichTextParagraph::GetCombinedAttributes(const wxRichTextAttr& 
 wxRichTextAttr wxRichTextParagraph::GetCombinedAttributes(bool includingBoxAttr) const
 {
     wxRichTextAttr attr;
-    wxRichTextParagraphLayoutBox* buf = wxDynamicCast(GetParent(), wxRichTextParagraphLayoutBox);
+    wxRichTextParagraphLayoutBox* buf = dynamic_cast<wxRichTextParagraphLayoutBox*>(GetParent());
     if (buf)
     {
         attr = buf->GetBasicStyle();
@@ -6663,7 +6663,7 @@ long wxRichTextParagraph::GetFirstLineBreakPosition(long pos)
         wxRichTextObject* obj = node->GetData();
         if (pos >= obj->GetRange().GetStart() && pos <= obj->GetRange().GetEnd())
         {
-            wxRichTextPlainText* textObj = wxDynamicCast(obj, wxRichTextPlainText);
+            wxRichTextPlainText* textObj = dynamic_cast<wxRichTextPlainText*>(obj);
             if (textObj)
             {
                 long breakPos = textObj->GetFirstLineBreakPosition(pos);
@@ -6748,7 +6748,7 @@ wxRichTextPlainText::wxRichTextPlainText(const wxString& text, wxRichTextObject*
 /// Draw the item
 bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, [[maybe_unused]] unsigned int style)
 {
-    wxRichTextParagraph* para = wxDynamicCast(GetParent(), wxRichTextParagraph);
+    wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(GetParent());
     wxASSERT (para != nullptr);
 
     wxRichTextAttr textAttr(para ? para->GetCombinedAttributes(GetAttributes(), false /* no box attributes */) : GetAttributes());
@@ -7126,7 +7126,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
     if (!range.IsWithin(GetRange()))
         return false;
 
-    wxRichTextParagraph* para = wxDynamicCast(GetParent(), wxRichTextParagraph);
+    wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(GetParent());
     wxASSERT (para != nullptr);
 
     int relativeX = position.x - GetParent()->GetPosition().x;
@@ -7395,7 +7395,7 @@ bool wxRichTextPlainText::CanMerge(wxRichTextObject* object, wxRichTextDrawingCo
     }
     else
     {
-        wxRichTextPlainText* otherObj = wxDynamicCast(object, wxRichTextPlainText);
+        wxRichTextPlainText* otherObj = dynamic_cast<wxRichTextPlainText*>(object);
         if (!otherObj || m_text.empty())
             return false;
 
@@ -7424,7 +7424,7 @@ bool wxRichTextPlainText::CanMerge(wxRichTextObject* object, wxRichTextDrawingCo
 /// The calling code will then delete the given object.
 bool wxRichTextPlainText::Merge(wxRichTextObject* object, [[maybe_unused]] wxRichTextDrawingContext& context)
 {
-    wxRichTextPlainText* textObject = wxDynamicCast(object, wxRichTextPlainText);
+    wxRichTextPlainText* textObject = dynamic_cast<wxRichTextPlainText*>(object);
     wxASSERT( textObject != nullptr );
 
     if (textObject)
@@ -7450,7 +7450,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
     int count = context.GetVirtualSubobjectAttributesCount(this);
     if (count > 0 && GetParent())
     {
-        wxRichTextCompositeObject* parent = wxDynamicCast(GetParent(), wxRichTextCompositeObject);
+        wxRichTextCompositeObject* parent = dynamic_cast<wxRichTextCompositeObject*>(GetParent());
         wxRichTextObjectList::compatibility_iterator node = parent->GetChildren().Find(this);
         if (node)
         {
@@ -8028,7 +8028,7 @@ wxRichTextField* wxRichTextParagraphLayoutBox::InsertFieldWithUndo(wxRichTextBuf
 
     buffer->SubmitAction(action);
 
-    wxRichTextField* obj = wxDynamicCast(GetLeafObjectAtPosition(pos), wxRichTextField);
+    wxRichTextField* obj = dynamic_cast<wxRichTextField*>(GetLeafObjectAtPosition(pos));
     return obj;
 }
 
@@ -9687,7 +9687,7 @@ bool wxRichTextCell::AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingCon
 {
     wxRichTextObject::AdjustAttributes(attr, context);
 
-    wxRichTextTable* table = wxDynamicCast(GetParent(), wxRichTextTable);
+    wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(GetParent());
     if (IsShown() && table && table->GetAttributes().GetTextBoxAttr().HasCollapseBorders() &&
         table->GetAttributes().GetTextBoxAttr().GetCollapseBorders() == wxTEXT_BOX_ATTR_COLLAPSE_FULL)
     {
@@ -9831,7 +9831,7 @@ bool wxRichTextCell::EditProperties(wxWindow* parent, wxRichTextBuffer* buffer)
 {
     // We need to gather common attributes for all selected cells.
 
-    wxRichTextTable* table = wxDynamicCast(GetParent(), wxRichTextTable);
+    wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(GetParent());
     bool multipleCells = false;
     wxRichTextAttr attr;
 
@@ -11009,7 +11009,7 @@ void wxRichTextTable::Copy(const wxRichTextTable& obj)
         wxRichTextObjectPtrArray& colArray = m_cells[i];
         for (j = 0; j < m_colCount; j++)
         {
-            wxRichTextCell* cell = wxDynamicCast(obj.GetCell(i, j)->Clone(), wxRichTextCell);
+            wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(obj.GetCell(i, j)->Clone());
             AppendChild(cell);
 
             colArray.Add(cell);
@@ -11065,7 +11065,7 @@ wxRichTextCell* wxRichTextTable::GetCell(int row, int col) const
     {
         wxRichTextObjectPtrArray& colArray = m_cells[row];
         wxRichTextObject* obj = colArray[col];
-        return wxDynamicCast(obj, wxRichTextCell);
+        return dynamic_cast<wxRichTextCell*>(obj);
     }
     else
         return nullptr;
@@ -11167,7 +11167,7 @@ bool wxRichTextTable::SetCellStyle(const wxRichTextSelection& selection, const w
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
-        wxRichTextCell* cell = wxDynamicCast(node->GetData(), wxRichTextCell);
+        wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(node->GetData());
         if (cell && selection.WithinSelection(cell->GetRange().GetStart()))
             SetStyle(cell, style, flags);
         node = node->GetNext();
@@ -11505,7 +11505,7 @@ bool wxRichTextTableBlock::ComputeBlockForSelection(wxRichTextTable* table, wxRi
     {
         // See if a whole cell's contents is selected, in which case we can treat the cell as selected.
         // wxRTC lacks the ability to select a single cell.
-        wxRichTextCell* cell = wxDynamicCast(ctrl->GetFocusObject(), wxRichTextCell);
+        wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(ctrl->GetFocusObject());
         if (cell && (!requireCellSelection || (ctrl->HasSelection() && ctrl->GetSelectionRange() == cell->GetOwnRange())))
         {
             int row, col;
@@ -11534,7 +11534,7 @@ wxRichTextCell* wxRichTextTableBlock::GetFocusedCell(wxRichTextCtrl* ctrl)
     if (!ctrl)
         return nullptr;
 
-    wxRichTextCell* cell = wxDynamicCast(ctrl->GetFocusObject(), wxRichTextCell);
+    wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(ctrl->GetFocusObject());
     return cell;
 }
 
@@ -11695,7 +11695,7 @@ wxRichTextAction::~wxRichTextAction()
 // Returns the container that this action refers to, using the container address and top-level buffer.
 wxRichTextParagraphLayoutBox* wxRichTextAction::GetContainer() const
 {
-    wxRichTextParagraphLayoutBox* container = wxDynamicCast(GetContainerAddress().wxGetObject(m_buffer), wxRichTextParagraphLayoutBox);
+    wxRichTextParagraphLayoutBox* container = dynamic_cast<wxRichTextParagraphLayoutBox*>(GetContainerAddress().wxGetObject(m_buffer));
     return container;
 }
 
@@ -11963,7 +11963,7 @@ bool wxRichTextAction::Do()
                 // The plan is to swap the current object with the stored, previous-state, clone
                 // We can't get 'node' from the containing buffer (as it doesn't directly store objects)
                 // so use the parent paragraph
-                wxRichTextCompositeObject* parent = wxDynamicCast(obj->GetParent(), wxRichTextCompositeObject);
+                wxRichTextCompositeObject* parent = dynamic_cast<wxRichTextCompositeObject*>(obj->GetParent());
                 wxCHECK_MSG(parent, false, "Invalid parent");
 
                 // Check that at least one is a paragraph, but not both.
@@ -12336,7 +12336,7 @@ void wxRichTextAction::ApplyParagraphs(const wxRichTextParagraphLayoutBox& fragm
     wxRichTextObjectList::compatibility_iterator node = fragment.GetChildren().GetFirst();
     while (node)
     {
-        wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+        wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
         wxASSERT (para != nullptr);
 
         // We'll replace the existing paragraph by finding the paragraph at this position,
@@ -15194,7 +15194,7 @@ wxRichTextObject* wxRichTextObjectAddress::wxGetObject(wxRichTextParagraphLayout
         if (i == (m_address.size()-1))
             return p1;
 
-        p = wxDynamicCast(p1, wxRichTextCompositeObject);
+        p = dynamic_cast<wxRichTextCompositeObject*>(p1);
         i ++;
     }
     return nullptr;
@@ -15210,7 +15210,7 @@ bool wxRichTextObjectAddress::Create(wxRichTextParagraphLayoutBox* topLevelConta
     wxRichTextObject* o = obj;
     while (o)
     {
-        wxRichTextCompositeObject* p = wxDynamicCast(o->GetParent(), wxRichTextCompositeObject);
+        wxRichTextCompositeObject* p = dynamic_cast<wxRichTextCompositeObject*>(o->GetParent());
         if (!p)
             return false;
 

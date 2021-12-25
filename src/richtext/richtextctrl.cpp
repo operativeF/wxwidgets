@@ -595,7 +595,7 @@ void wxRichTextCtrl::OnLeftClick(wxMouseEvent& event)
     if (hit != wxRICHTEXT_HITTEST_NONE && hitObj)
     {
         wxRichTextParagraphLayoutBox* oldFocusObject = GetFocusObject();
-        wxRichTextParagraphLayoutBox* container = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+        wxRichTextParagraphLayoutBox* container = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
         bool needsCaretSet = false;
         if (container && container != GetFocusObject() && container->AcceptsFocus())
         {
@@ -664,7 +664,7 @@ void wxRichTextCtrl::OnLeftUp(wxMouseEvent& event)
             wxRichTextObject* preContextObj = nullptr;
             int preHit = GetBuffer().HitTest(dc, context, GetUnscaledPoint(event.GetLogicalPosition(dc)), prePosition, & preHitObj, & preContextObj, wxRICHTEXT_HITTEST_HONOUR_ATOMIC);
             wxRichTextParagraphLayoutBox* oldFocusObject = GetFocusObject();
-            wxRichTextParagraphLayoutBox* container = wxDynamicCast(preContextObj, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* container = dynamic_cast<wxRichTextParagraphLayoutBox*>(preContextObj);
             bool needsCaretSet = false;
             if (container && container != GetFocusObject() && container->AcceptsFocus())
             {
@@ -870,7 +870,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
     {
         if (hit != wxRICHTEXT_HITTEST_NONE && !(hit & wxRICHTEXT_HITTEST_OUTSIDE) && hitObj)
         {
-            wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
             if (actualContainer)
                 ProcessMouseMovement(actualContainer, hitObj, position, logicalPt);
         }
@@ -909,14 +909,14 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
             if (m_selectionState == wxRichTextCtrlSelectionState_Normal)
             {
                 firstContainer = GetFocusObject();
-                commonAncestor = wxDynamicCast(firstContainer->GetParent(), wxRichTextParagraphLayoutBox);
+                commonAncestor = dynamic_cast<wxRichTextParagraphLayoutBox*>(firstContainer->GetParent());
             }
             else
             {
-                firstContainer = wxDynamicCast(m_selectionAnchorObject, wxRichTextParagraphLayoutBox);
+                firstContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(m_selectionAnchorObject);
                 //commonAncestor = GetFocusObject(); // when the selection state is not normal, the focus object (e.g. table)
                                                    // is the common ancestor.
-                commonAncestor = wxDynamicCast(firstContainer->GetParent(), wxRichTextParagraphLayoutBox);
+                commonAncestor = dynamic_cast<wxRichTextParagraphLayoutBox*>(firstContainer->GetParent());
             }
 
             if (commonAncestor && commonAncestor->HandlesChildSelections())
@@ -926,7 +926,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
                 {
                     if (p->GetParent() == commonAncestor)
                     {
-                        otherContainer = wxDynamicCast(p, wxRichTextParagraphLayoutBox);
+                        otherContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(p);
                         break;
                     }
                     p = p->GetParent();
@@ -998,7 +998,7 @@ void wxRichTextCtrl::OnRightClick(wxMouseEvent& event)
 
     if (hitObj && hitObj->GetContainer() != GetFocusObject())
     {
-        wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+        wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
         if (actualContainer && actualContainer->AcceptsFocus())
         {
             SetFocusObject(actualContainer, false /* don't set caret position yet */);
@@ -1503,7 +1503,7 @@ bool wxRichTextCtrl::ProcessBackKey(wxKeyEvent& event, int flags)
     if (!HasSelection() && para && ((m_caretPosition+1) == para->GetRange().GetStart()) &&
         para->GetAttributes().HasBulletStyle() && (para->GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_CONTINUATION) == 0)
     {
-        wxRichTextParagraph* newPara = wxDynamicCast(para->Clone(), wxRichTextParagraph);
+        wxRichTextParagraph* newPara = dynamic_cast<wxRichTextParagraph*>(para->Clone());
         newPara->GetAttributes().SetBulletStyle(newPara->GetAttributes().GetBulletStyle() | wxTEXT_ATTR_BULLET_STYLE_CONTINUATION);
 
         wxRichTextAction* action = new wxRichTextAction(nullptr, _("Remove Bullet"), wxRICHTEXT_CHANGE_STYLE, & GetBuffer(), GetFocusObject(), this);
@@ -2056,7 +2056,7 @@ bool wxRichTextCtrl::MoveRight(int noPositions, int flags)
     {
         if (m_selection.GetContainer() && m_selection.GetContainer()->IsKindOf(CLASSINFO(wxRichTextTable)))
         {
-            wxRichTextTable* table = wxDynamicCast(m_selection.GetContainer(), wxRichTextTable);
+            wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(m_selection.GetContainer());
             if (GetFocusObject() && GetFocusObject()->GetParent() == m_selection.GetContainer())
             {
                 ExtendCellSelection(table, 0, noPositions);
@@ -2099,7 +2099,7 @@ bool wxRichTextCtrl::MoveRight(int noPositions, int flags)
             (! (hitObj == (& m_buffer) && ((hitTest & wxRICHTEXT_HITTEST_OUTSIDE) != 0))) // outside the buffer counts as 'do nothing'
             )
         {
-            wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
             if (actualContainer && actualContainer != GetFocusObject() && actualContainer->AcceptsFocus() && actualContainer->IsShown())
             {
                 if ((flags & wxRICHTEXT_SHIFT_DOWN) &&
@@ -2108,7 +2108,7 @@ bool wxRichTextCtrl::MoveRight(int noPositions, int flags)
                     GetFocusObject()->GetParent() == actualContainer->GetParent())
                 {
                     // Start selecting cells in a table
-                    wxRichTextTable* table = wxDynamicCast(actualContainer->GetParent(), wxRichTextTable);
+                    wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(actualContainer->GetParent());
                     if (table)
                     {
                         StartCellSelection(table, actualContainer);
@@ -2219,7 +2219,7 @@ bool wxRichTextCtrl::MoveDown(int noLines, int flags)
     {
         if (m_selection.GetContainer() && m_selection.GetContainer()->IsKindOf(CLASSINFO(wxRichTextTable)))
         {
-            wxRichTextTable* table = wxDynamicCast(m_selection.GetContainer(), wxRichTextTable);
+            wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(m_selection.GetContainer());
             if (GetFocusObject() && GetFocusObject()->GetParent() == m_selection.GetContainer())
             {
                 ExtendCellSelection(table, noLines, 0);
@@ -2299,7 +2299,7 @@ bool wxRichTextCtrl::MoveDown(int noLines, int flags)
     {
         if (notInThisObject)
         {
-            wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
             if (actualContainer && actualContainer != GetFocusObject() && actualContainer->AcceptsFocus())
             {
                 if ((flags & wxRICHTEXT_SHIFT_DOWN) &&
@@ -2308,7 +2308,7 @@ bool wxRichTextCtrl::MoveDown(int noLines, int flags)
                     GetFocusObject()->GetParent() == actualContainer->GetParent())
                 {
                     // Start selecting cells in a table
-                    wxRichTextTable* table = wxDynamicCast(actualContainer->GetParent(), wxRichTextTable);
+                    wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(actualContainer->GetParent());
                     if (table)
                     {
                         StartCellSelection(table, actualContainer);
@@ -3226,7 +3226,7 @@ wxRichTextCtrl::FindContainerAtPoint(const wxPoint& pt, long& position, int& hit
     wxRichTextDrawingContext context(& GetBuffer());
     hit = GetBuffer().HitTest(dc, context, GetUnscaledPoint(GetLogicalPoint(pt)), position, &hitObj, &contextObj, flags);
 
-    return wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+    return dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
 }
 
 
@@ -3373,7 +3373,7 @@ wxRichTextBox* wxRichTextCtrl::WriteTextBox(const wxRichTextAttr& textAttr)
     // while the original one is deleted.
     wxRichTextObject* obj = GetFocusObject()->InsertObjectWithUndo(& GetBuffer(), m_caretPosition+1, textBox, this, wxRICHTEXT_INSERT_WITH_PREVIOUS_PARAGRAPH_STYLE);
 
-    return wxDynamicCast(obj, wxRichTextBox);
+    return dynamic_cast<wxRichTextBox*>(obj);
 }
 
 wxRichTextField* wxRichTextCtrl::WriteField(const std::string& fieldType, const wxRichTextProperties& properties,
@@ -3418,7 +3418,7 @@ wxRichTextTable* wxRichTextCtrl::WriteTable(int rows, int cols, const wxRichText
     // The object returned is the one actually inserted into the buffer,
     // while the original one is deleted.
     wxRichTextObject* obj = GetFocusObject()->InsertObjectWithUndo(& GetBuffer(), m_caretPosition+1, table, this, wxRICHTEXT_INSERT_WITH_PREVIOUS_PARAGRAPH_STYLE);
-    wxRichTextTable* tableResult = wxDynamicCast(obj, wxRichTextTable);
+    wxRichTextTable* tableResult = dynamic_cast<wxRichTextTable*>(obj);
     return tableResult;
 }
 
@@ -3863,7 +3863,7 @@ int wxRichTextCtrl::PrepareContextMenu(wxMenu* menu, const wxPoint& pt, bool add
 
         if (hit == wxRICHTEXT_HITTEST_ON || hit == wxRICHTEXT_HITTEST_BEFORE || hit == wxRICHTEXT_HITTEST_AFTER)
         {
-            wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+            wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
             if (hitObj && actualContainer)
             {
                 if (actualContainer->AcceptsFocus())
@@ -3897,7 +3897,7 @@ int wxRichTextCtrl::PrepareContextMenu(wxMenu* menu, const wxPoint& pt, bool add
         else
             contextObj = GetFocusObject();
 
-        wxRichTextParagraphLayoutBox* actualContainer = wxDynamicCast(contextObj, wxRichTextParagraphLayoutBox);
+        wxRichTextParagraphLayoutBox* actualContainer = dynamic_cast<wxRichTextParagraphLayoutBox*>(contextObj);
         if (hitObj && actualContainer)
         {
             if (addPropertyCommands)
@@ -4504,7 +4504,7 @@ bool wxRichTextCtrl::ApplyStyle(wxRichTextStyleDefinition* def)
 
     int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO|wxRICHTEXT_SETSTYLE_OPTIMIZE|wxRICHTEXT_SETSTYLE_RESET;
 
-    if (wxDynamicCast(def, wxRichTextListStyleDefinition))
+    if (dynamic_cast<wxRichTextListStyleDefinition*>(def))
     {
         flags |= wxRICHTEXT_SETSTYLE_PARAGRAPHS_ONLY;
 
@@ -4524,7 +4524,7 @@ bool wxRichTextCtrl::ApplyStyle(wxRichTextStyleDefinition* def)
     bool isPara = false;
 
     // Make sure the attr has the style name
-    if (wxDynamicCast(def, wxRichTextParagraphStyleDefinition))
+    if (dynamic_cast<wxRichTextParagraphStyleDefinition*>(def))
     {
         isPara = true;
         attr.SetParagraphStyleName(def->GetName());
@@ -4534,12 +4534,12 @@ bool wxRichTextCtrl::ApplyStyle(wxRichTextStyleDefinition* def)
         // to change its style independently.
         flags |= wxRICHTEXT_SETSTYLE_PARAGRAPHS_ONLY;
     }
-    else if (wxDynamicCast(def, wxRichTextCharacterStyleDefinition))
+    else if (dynamic_cast<wxRichTextCharacterStyleDefinition*>(def))
         attr.SetCharacterStyleName(def->GetName());
-    else if (wxDynamicCast(def, wxRichTextBoxStyleDefinition))
+    else if (dynamic_cast<wxRichTextBoxStyleDefinition*>(def))
         attr.GetTextBoxAttr().SetBoxStyleName(def->GetName());
 
-    if (wxDynamicCast(def, wxRichTextBoxStyleDefinition))
+    if (dynamic_cast<wxRichTextBoxStyleDefinition*>(def))
     {
         if (GetFocusObject() && (GetFocusObject() != & GetBuffer()))
         {
@@ -4735,7 +4735,7 @@ wxRichTextRange wxRichTextCtrl::FindRangeForList(long pos, bool& isNumberedList)
             wxRichTextObjectList::compatibility_iterator startNode = initialNode->GetPrevious();
             while (startNode)
             {
-                wxRichTextParagraph* p = wxDynamicCast(startNode->GetData(), wxRichTextParagraph);
+                wxRichTextParagraph* p = dynamic_cast<wxRichTextParagraph*>(startNode->GetData());
                 if (p)
                 {
                     if (!p->GetAttributes().HasListStyleName() || p->GetAttributes().GetListStyleName() != listStyle)
@@ -4751,7 +4751,7 @@ wxRichTextRange wxRichTextCtrl::FindRangeForList(long pos, bool& isNumberedList)
             wxRichTextObjectList::compatibility_iterator endNode = initialNode->GetNext();
             while (endNode)
             {
-                wxRichTextParagraph* p = wxDynamicCast(endNode->GetData(), wxRichTextParagraph);
+                wxRichTextParagraph* p = dynamic_cast<wxRichTextParagraph*>(endNode->GetData());
                 if (p)
                 {
                     if (!p->GetAttributes().HasListStyleName() || p->GetAttributes().GetListStyleName() != listStyle)
@@ -5190,9 +5190,9 @@ bool wxRichTextCtrl::ProcessDelayedImageLoading(const wxRect& screenRect, wxRich
     while (node)
     {
         // Could be a cell or a paragraph
-        wxRichTextCompositeObject* composite = wxDynamicCast(node->GetData(), wxRichTextCompositeObject);
+        wxRichTextCompositeObject* composite = dynamic_cast<wxRichTextCompositeObject*>(node->GetData());
         if (composite->IsTopLevel())
-            ProcessDelayedImageLoading(screenRect, wxDynamicCast(composite, wxRichTextParagraphLayoutBox), loadCount);
+            ProcessDelayedImageLoading(screenRect, dynamic_cast<loadCount*>(composite, wxRichTextParagraphLayoutBox));
         else // assume a paragraph
         {
             wxRichTextObjectList::compatibility_iterator node2 = composite->GetChildren().GetFirst();
@@ -5200,10 +5200,10 @@ bool wxRichTextCtrl::ProcessDelayedImageLoading(const wxRect& screenRect, wxRich
             {
                 wxRichTextObject* obj = node2->GetData();
                 if (obj->IsTopLevel())
-                    ProcessDelayedImageLoading(screenRect, wxDynamicCast(obj, wxRichTextParagraphLayoutBox), loadCount);
+                    ProcessDelayedImageLoading(screenRect, dynamic_cast<loadCount*>(obj, wxRichTextParagraphLayoutBox));
                 else
                 {
-                    wxRichTextImage* imageObj = wxDynamicCast(obj, wxRichTextImage);
+                    wxRichTextImage* imageObj = dynamic_cast<wxRichTextImage*>(obj);
                     if (imageObj && imageObj->IsShown())
                     {
                         const wxRect& rect(imageObj->GetRect());

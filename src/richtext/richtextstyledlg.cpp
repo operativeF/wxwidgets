@@ -402,8 +402,8 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
     }
 
     wxRichTextStyleDefinition* def = m_stylesListBox->GetStyleListBox()->GetStyle(sel);
-    wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
-    wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
+    wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
+    wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(def);
 
     wxStaticText* labelCtrl = (wxStaticText*) wxFindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
     if (labelCtrl)
@@ -494,7 +494,7 @@ bool wxRichTextStyleOrganiserDialog::ApplyStyle(wxRichTextCtrl* ctrl)
         return false;
 
     wxRichTextStyleDefinition* def = m_stylesListBox->GetStyleListBox()->GetStyle(sel);
-    wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
+    wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
 
     if (listDef && m_restartNumberingCtrl->GetValue() && ctrl->HasSelection())
     {
@@ -576,7 +576,7 @@ void wxRichTextStyleOrganiserDialog::OnNewCharClick( [[maybe_unused]] wxCommandE
 
         if (formatDlg.ShowModal() == wxID_OK)
         {
-            wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextCharacterStyleDefinition);
+            wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(formatDlg.GetStyleDefinition());
 
             (*((wxRichTextCharacterStyleDefinition* ) style)) = (*charDef);
 
@@ -624,7 +624,7 @@ void wxRichTextStyleOrganiserDialog::OnNewParaClick( [[maybe_unused]] wxCommandE
 
         if (formatDlg.ShowModal() == wxID_OK)
         {
-            wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextParagraphStyleDefinition);
+            wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(formatDlg.GetStyleDefinition());
 
             (*((wxRichTextParagraphStyleDefinition* ) style)) = (*paraDef);
 
@@ -661,19 +661,19 @@ void wxRichTextStyleOrganiserDialog::OnEditClick( [[maybe_unused]] wxCommandEven
 
         int pages = wxRICHTEXT_FORMAT_STYLE_EDITOR;
 
-        if (wxDynamicCast(def, wxRichTextCharacterStyleDefinition))
+        if (dynamic_cast<wxRichTextCharacterStyleDefinition*>(def))
         {
             pages |= wxRICHTEXT_FORMAT_FONT;
         }
-        else if (wxDynamicCast(def, wxRichTextListStyleDefinition))
+        else if (dynamic_cast<wxRichTextListStyleDefinition*>(def))
         {
             pages |= wxRICHTEXT_FORMAT_LIST_STYLE|wxRICHTEXT_FORMAT_FONT|wxRICHTEXT_FORMAT_INDENTS_SPACING;
         }
-        else if (wxDynamicCast(def, wxRichTextParagraphStyleDefinition))
+        else if (dynamic_cast<wxRichTextParagraphStyleDefinition*>(def))
         {
             pages |= wxRICHTEXT_FORMAT_FONT|wxRICHTEXT_FORMAT_INDENTS_SPACING|wxRICHTEXT_FORMAT_TABS|wxRICHTEXT_FORMAT_BULLETS;
         }
-        else if (wxDynamicCast(def, wxRichTextBoxStyleDefinition))
+        else if (dynamic_cast<wxRichTextBoxStyleDefinition*>(def))
         {
             pages |= wxRICHTEXT_FORMAT_MARGINS|wxRICHTEXT_FORMAT_SIZE|wxRICHTEXT_FORMAT_BORDERS|wxRICHTEXT_FORMAT_BACKGROUND;
         }
@@ -684,10 +684,10 @@ void wxRichTextStyleOrganiserDialog::OnEditClick( [[maybe_unused]] wxCommandEven
 
         if (formatDlg.ShowModal() == wxID_OK)
         {
-            wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextParagraphStyleDefinition);
-            wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextCharacterStyleDefinition);
-            wxRichTextListStyleDefinition* listDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextListStyleDefinition);
-            wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextBoxStyleDefinition);
+            wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(formatDlg.GetStyleDefinition());
+            wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(formatDlg.GetStyleDefinition());
+            wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(formatDlg.GetStyleDefinition());
+            wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(formatDlg.GetStyleDefinition());
 
             if (listDef)
             {
@@ -738,13 +738,13 @@ void wxRichTextStyleOrganiserDialog::OnDeleteClick( [[maybe_unused]] wxCommandEv
         {
             m_stylesListBox->GetStyleListBox()->SetItemCount(0);
 
-            if (wxDynamicCast(def, wxRichTextListStyleDefinition))
+            if (dynamic_cast<wxRichTextListStyleDefinition*>(def))
                 GetStyleSheet()->RemoveListStyle((wxRichTextListStyleDefinition*) def, true);
-            else if (wxDynamicCast(def, wxRichTextParagraphStyleDefinition))
+            else if (dynamic_cast<wxRichTextParagraphStyleDefinition*>(def))
                 GetStyleSheet()->RemoveParagraphStyle((wxRichTextParagraphStyleDefinition*) def, true);
-            else if (wxDynamicCast(def, wxRichTextCharacterStyleDefinition))
+            else if (dynamic_cast<wxRichTextCharacterStyleDefinition*>(def))
                 GetStyleSheet()->RemoveCharacterStyle((wxRichTextCharacterStyleDefinition*) def, true);
-            else if (wxDynamicCast(def, wxRichTextBoxStyleDefinition))
+            else if (dynamic_cast<wxRichTextBoxStyleDefinition*>(def))
                 GetStyleSheet()->RemoveBoxStyle((wxRichTextBoxStyleDefinition*) def, true);
 
             m_stylesListBox->UpdateStyles();
@@ -809,7 +809,7 @@ void wxRichTextStyleOrganiserDialog::OnNewListClick( [[maybe_unused]] wxCommandE
 
         if (formatDlg.ShowModal() == wxID_OK)
         {
-            wxRichTextListStyleDefinition* listDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextListStyleDefinition);
+            wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(formatDlg.GetStyleDefinition());
 
             (*((wxRichTextListStyleDefinition* ) style)) = (*listDef);
 
@@ -904,7 +904,7 @@ void wxRichTextStyleOrganiserDialog::OnNewBoxClick( [[maybe_unused]] wxCommandEv
 
         if (formatDlg.ShowModal() == wxID_OK)
         {
-            wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(formatDlg.GetStyleDefinition(), wxRichTextBoxStyleDefinition);
+            wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(formatDlg.GetStyleDefinition());
 
             (*((wxRichTextBoxStyleDefinition* ) style)) = (*boxDef);
 

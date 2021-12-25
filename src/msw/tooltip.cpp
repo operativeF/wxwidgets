@@ -332,7 +332,7 @@ void wxToolTip::UpdateVisibility()
     {
         // Even if it's not hidden, it could also be iconized.
         wxTopLevelWindow* const
-            frame = wxDynamicCast(wxGetTopLevelParent(associatedWindow), wxTopLevelWindow);
+            frame = dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(associatedWindow));
 
         if ( frame && frame->IsIconized() )
             hideTT = true;

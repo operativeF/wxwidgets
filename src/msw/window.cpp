@@ -381,7 +381,7 @@ wxWindow *wxWindowMSW::FindItemByHWND(WXHWND hWnd, bool controlOnly) const
 
         if ( !controlOnly
 #if wxUSE_CONTROLS
-                || wxDynamicCast(parent, wxControl)
+                || dynamic_cast<wxControl*>(parent)
 #endif // wxUSE_CONTROLS
            )
         {
@@ -1684,7 +1684,7 @@ static void AdjustStaticBoxZOrder(wxWindow *parent)
           node;
           node = node->GetNext() )
     {
-        wxStaticBox *statbox = wxDynamicCast(node->GetData(), wxStaticBox);
+        wxStaticBox *statbox = dynamic_cast<wxStaticBox*>(node->GetData());
         if ( statbox )
         {
             ::SetWindowPos(GetHwndOf(statbox), HWND_BOTTOM, 0, 0, 0, 0,
@@ -2353,7 +2353,7 @@ wxWindowMSW::HandleMenuSelect(WXWORD nItem, WXWORD flags, WXHMENU hMenu)
     // is selected
     if ( item == wxID_NONE )
     {
-        wxFrame *frame = wxDynamicCast(wxGetTopLevelParent(this), wxFrame);
+        wxFrame *frame = dynamic_cast<wxFrame*>(wxGetTopLevelParent(this));
         if ( frame )
             frame->DoGiveHelp({}, true);
     }
@@ -2513,11 +2513,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
                             unsigned int style = ::GetWindowLongPtrW(msg->hwnd, GWL_STYLE);
                             if ( (style & BS_OWNERDRAW) == BS_OWNERDRAW )
                             {
-                                btn = wxDynamicCast
-                                      (
-                                        wxFindWinFromHandle(msg->hwnd),
-                                        wxButton
-                                      );
+                                btn = dynamic_cast<wxButton*>(wxFindWinFromHandle(msg->hwnd));
                             }
                         }
                         else // not a button itself, do we have default button?
@@ -2731,9 +2727,9 @@ wxButton* wxWindowMSW::MSWGetDefaultButtonFor(wxWindow* win)
 #if wxUSE_BUTTON
     win = wxGetTopLevelParent(win);
 
-    wxTopLevelWindow *const tlw = wxDynamicCast(win, wxTopLevelWindow);
+    wxTopLevelWindow *const tlw = dynamic_cast<wxTopLevelWindow*>(win);
     if ( tlw )
-        return wxDynamicCast(tlw->GetDefaultItem(), wxButton);
+        return dynamic_cast<wxButton*>(tlw->GetDefaultItem());
 #endif // wxUSE_BUTTON
 
     return nullptr;
@@ -4388,7 +4384,7 @@ bool wxWindowMSW::HandleSetCursor([[maybe_unused]] WXHWND hWnd,
     if ( wxIsBusy() )
     {
         wxDialog* const
-            dlg = wxDynamicCast(wxGetTopLevelParent((wxWindow *)this), wxDialog);
+            dlg = dynamic_cast<wxDialog*>(wxGetTopLevelParent((wxWindow *)this));
         if ( !dlg || !dlg->IsModal() )
             isBusy = true;
     }
@@ -4583,13 +4579,13 @@ wxWindowMSW::MSWOnDrawItem(int WXUNUSED_UNLESS_ODRAWN(id),
 #if wxUSE_CONTROLS && !defined(__WXUNIVERSAL__)
 
 #if wxUSE_OWNER_DRAWN
-    wxControl *item = wxDynamicCast(FindItem(id), wxControl);
+    wxControl *item = dynamic_cast<wxControl*>(FindItem(id));
 #else // !wxUSE_OWNER_DRAWN
     // we may still have owner-drawn buttons internally because we have to make
     // them owner-drawn to support colour change
     wxControl *item =
 #                     if wxUSE_BUTTON
-                         wxDynamicCast(FindItem(id), wxButton)
+                         dynamic_cast<wxButton*>(FindItem(id))
 #                     else
                          NULL
 #                     endif
@@ -4636,7 +4632,7 @@ wxWindowMSW::MSWOnMeasureItem(int id, WXMEASUREITEMSTRUCT *itemStruct)
         return rc;
     }
 
-    wxControl *item = wxDynamicCast(FindItem(id), wxControl);
+    wxControl *item = dynamic_cast<wxControl*>(FindItem(id));
     if ( item )
     {
         return item->MSWOnMeasure(itemStruct);
@@ -4926,7 +4922,7 @@ bool wxWindowMSW::HandleCtlColor(WXHBRUSH *brush, WXHDC hDC, WXHWND hWnd)
     wxUnusedVar(hDC);
     wxUnusedVar(hWnd);
 #else
-    wxControl *item = wxDynamicCast(FindItemByHWND(hWnd, true), wxControl);
+    wxControl *item = dynamic_cast<wxControl*>(FindItemByHWND(hWnd, true));
 
     if ( item )
         *brush = item->MSWControlColor(hDC, hWnd);

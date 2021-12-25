@@ -437,19 +437,19 @@ bool wxRichTextStyleSheet::AddBoxStyle(wxRichTextBoxStyleDefinition* def)
 /// Add a definition to the appropriate style list
 bool wxRichTextStyleSheet::AddStyle(wxRichTextStyleDefinition* def)
 {
-    wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
+    wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
     if (listDef)
         return AddListStyle(listDef);
 
-    wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(def, wxRichTextParagraphStyleDefinition);
+    wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(def);
     if (paraDef)
         return AddParagraphStyle(paraDef);
 
-    wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(def, wxRichTextCharacterStyleDefinition);
+    wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(def);
     if (charDef)
         return AddCharacterStyle(charDef);
 
-    wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
+    wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(def);
     if (boxDef)
         return AddBoxStyle(boxDef);
 

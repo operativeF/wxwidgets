@@ -238,7 +238,7 @@ wxSpinCtrlGenericBase::~wxSpinCtrlGenericBase()
     if (m_textCtrl)
     {
         // null this since MSW sends KILL_FOCUS on deletion, see ~wxSpinCtrlTextGeneric
-        wxDynamicCast(m_textCtrl, wxSpinCtrlTextGeneric)->m_spin = nullptr;
+        dynamic_cast<wxSpinCtrlTextGeneric*>(m_textCtrl)->m_spin = nullptr;
 
         wxSpinCtrlTextGeneric *text = (wxSpinCtrlTextGeneric*)m_textCtrl;
         m_textCtrl = nullptr;

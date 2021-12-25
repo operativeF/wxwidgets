@@ -167,7 +167,7 @@ bool wxNumericPropertyValidator::Validate(wxWindow* parent)
     if ( !wxTextValidator::Validate(parent) )
         return false;
 
-    wxTextCtrl* tc = wxDynamicCast(GetWindow(), wxTextCtrl);
+    wxTextCtrl* tc = dynamic_cast<wxTextCtrl*>(GetWindow());
     if ( !tc )
         return true;
 
@@ -1785,7 +1785,7 @@ struct wxPGDialogAdapter : public wxPGEditorDialogAdapter
 {
     bool DoShowDialog(wxPropertyGrid* pg, wxPGProperty* prop) override
     {
-        wxEditorDialogProperty* dlgProp = wxDynamicCast(prop, wxEditorDialogProperty);
+        wxEditorDialogProperty* dlgProp = dynamic_cast<wxEditorDialogProperty*>(prop);
         wxCHECK_MSG(dlgProp, false, "Function called for incompatible property");
 
         wxVariant val = pg->GetUncommittedPropertyValue();
@@ -2634,7 +2634,7 @@ bool wxArrayStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
     wxPGInDialogValidator dialogValidator;
 #endif
 
-    wxPGArrayStringEditorDialog* strEdDlg = wxDynamicCast(dlg, wxPGArrayStringEditorDialog);
+    wxPGArrayStringEditorDialog* strEdDlg = dynamic_cast<wxPGArrayStringEditorDialog*>(dlg);
 
     if ( strEdDlg )
         strEdDlg->SetCustomButton(m_customBtnText, this);

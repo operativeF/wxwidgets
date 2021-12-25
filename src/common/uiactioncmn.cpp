@@ -189,11 +189,11 @@ bool wxUIActionSimulator::Select(std::string_view text)
 #ifdef wxNO_RTTI
     wxItemContainer* container = NULL;
 
-    if ( wxComboBox* combo = wxDynamicCast(focus, wxComboBox) )
+    if ( wxComboBox* combo = dynamic_cast<wxComboBox*>(focus) )
         container = combo;
-    else if ( wxChoice* choice = wxDynamicCast(focus, wxChoice) )
+    else if ( wxChoice* choice = dynamic_cast<wxChoice*>(focus) )
         container = choice;
-    else if ( wxListBox* listbox = wxDynamicCast(focus, wxListBox) )
+    else if ( wxListBox* listbox = dynamic_cast<wxListBox*>(focus) )
         container = listbox;
 #else // !wxNO_RTTI
     wxItemContainer* const container = dynamic_cast<wxItemContainer*>(focus);

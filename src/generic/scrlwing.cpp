@@ -1057,7 +1057,7 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
     //
     // TODO: This affects all wxControlContainer objects, but
     // wxControlContainer is not part of the wxWidgets RTTI and so
-    // wxDynamicCast(win, wxControlContainer) does not compile.  Find a way to
+    // dynamic_cast<wxControlContainer*>(win) does not compile.  Find a way to
     // determine if 'win' derives from wxControlContainer. Until then, testing
     // if 'win' derives from wxPanel will probably get >90% of all cases.
 
@@ -1065,7 +1065,7 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
     for ( wxWindow* w = win; w; w = w->GetParent() )
     {
         if ( w != actual_focus &&
-             wxDynamicCast(w, wxPanel) != nullptr &&
+             dynamic_cast<wxPanel*>(w) != nullptr &&
              w->GetParent() == m_targetWindow )
         {
             // if it is a wxPanel and receives the focus, it should not be

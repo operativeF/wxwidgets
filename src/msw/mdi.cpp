@@ -234,7 +234,7 @@ wxMDIChildFrame *wxMDIParentFrame::GetActiveChild() const
 int wxMDIParentFrame::GetChildFramesCount() const
 {
     return std::count_if(GetChildren().begin(), GetChildren().end(),
-        [](const auto i){ return wxDynamicCast(i, wxMDIChildFrame) != nullptr; });
+        [](const auto i){ return dynamic_cast<wxMDIChildFrame*>(i) != nullptr; });
 }
 
 #if wxUSE_MENUS
@@ -1392,7 +1392,7 @@ void wxMDIClientWindow::DoSetSize(wxRect boundary, unsigned int sizeFlags)
             while (node)
             {
                 wxWindow *child = node->GetData();
-                if (wxDynamicCast(child, wxMDIChildFrame))
+                if (dynamic_cast<wxMDIChildFrame*>(child))
                 {
                    ::RedrawWindow(GetHwndOf(child),
                                   nullptr,

@@ -28,7 +28,7 @@ bool wxRibbonControl::Create(wxWindow *parent, wxWindowID id,
     if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
         return false;
 
-    wxRibbonControl *ribbon_parent = wxDynamicCast(parent, wxRibbonControl);
+    wxRibbonControl *ribbon_parent = dynamic_cast<wxRibbonControl*>(parent);
     if(ribbon_parent)
     {
         m_art = ribbon_parent->GetArtProvider();
@@ -104,7 +104,7 @@ wxRibbonBar* wxRibbonControl::GetAncestorRibbonBar()const
 {
     for ( wxWindow* win = GetParent(); win; win = win->GetParent() )
     {
-        wxRibbonBar* bar = wxDynamicCast(win, wxRibbonBar);
+        wxRibbonBar* bar = dynamic_cast<wxRibbonBar*>(win);
         if ( bar )
             return bar;
     }

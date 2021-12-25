@@ -1650,7 +1650,7 @@ wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview,
 {
     // Give the application icon
 #ifdef __WXMSW__
-    wxFrame* topFrame = wxDynamicCast(wxTheApp->GetTopWindow(), wxFrame);
+    wxFrame* topFrame = dynamic_cast<wxFrame*>(wxTheApp->GetTopWindow());
     if (topFrame)
         SetIcons(topFrame->GetIcons());
 #endif

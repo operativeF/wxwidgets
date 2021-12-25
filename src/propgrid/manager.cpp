@@ -1215,7 +1215,7 @@ bool wxPropertyGridManager::ProcessEvent( wxEvent& event )
          m_selPage >= 0 )
     {
         wxPropertyGridPage* page = GetPage(m_selPage);
-        wxPropertyGridEvent* pgEvent = wxDynamicCast(&event, wxPropertyGridEvent);
+        wxPropertyGridEvent* pgEvent = dynamic_cast<wxPropertyGridEvent*>(&event);
 
         // Add property grid events to appropriate custom pages
         // but stop propagating to parent if page says it is
@@ -1757,7 +1757,7 @@ void wxPropertyGridManager::OnToolbarClick( wxCommandEvent &event )
         else
         {
             // Restore button state on toolbar.
-            wxToolBar* tb = wxDynamicCast(event.GetEventObject(), wxToolBar);
+            wxToolBar* tb = dynamic_cast<wxToolBar*>(event.GetEventObject());
             wxASSERT( tb );
 
             // Release the current button.

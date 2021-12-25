@@ -871,7 +871,7 @@ namespace
 void ShowWnd(wxWindow* wnd, bool show)
 {
 #if wxUSE_MDI
-    if (wxDynamicCast(wnd, wxAuiMDIChildFrame))
+    if (dynamic_cast<wxAuiMDIChildFrame*>(wnd))
     {
         wxAuiMDIChildFrame* cf = (wxAuiMDIChildFrame*)wnd;
         cf->wxWindow::Show(show);
@@ -995,7 +995,7 @@ void wxAuiTabCtrl::OnLeftDown(wxMouseEvent& evt)
         // even if the tab is already active, because they may
         // have multiple tab controls
         if ((new_selection != GetActivePage() ||
-            wxDynamicCast(GetParent(), wxAuiNotebook)) && !m_hoverButton)
+            dynamic_cast<wxAuiNotebook*>(GetParent())) && !m_hoverButton)
         {
             wxAuiNotebookEvent e(wxEVT_AUINOTEBOOK_PAGE_CHANGING, m_windowId);
             e.SetSelection(new_selection);
@@ -1342,7 +1342,7 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
             return;
         }
 
-        wxAuiNotebook* nb = wxDynamicCast(GetParent(), wxAuiNotebook);
+        wxAuiNotebook* nb = dynamic_cast<wxAuiNotebook*>(GetParent());
         if (!nb)
         {
             event.Skip();
@@ -1941,7 +1941,7 @@ bool wxAuiNotebook::DeletePage(size_t page_idx)
 
 #if wxUSE_MDI
     // actually destroy the window now
-    if (wxDynamicCast(wnd, wxAuiMDIChildFrame))
+    if (dynamic_cast<wxAuiMDIChildFrame*>(wnd))
     {
         // delete the child frame with pending delete, as is
         // customary with frame windows
@@ -2522,11 +2522,11 @@ void wxAuiNotebook::OnTabDragMotion(wxAuiNotebookEvent& evt)
             return;
 
         // make sure we are not over the hint window
-        if (!wxDynamicCast(tab_ctrl, wxFrame))
+        if (!dynamic_cast<wxFrame*>(tab_ctrl))
         {
             while (tab_ctrl)
             {
-                if (wxDynamicCast(tab_ctrl, wxAuiTabCtrl))
+                if (dynamic_cast<wxAuiTabCtrl*>(tab_ctrl))
                     break;
                 tab_ctrl = tab_ctrl->GetParent();
             }
@@ -2611,7 +2611,7 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
 
         while (tab_ctrl)
         {
-            if (wxDynamicCast(tab_ctrl, wxAuiTabCtrl))
+            if (dynamic_cast<wxAuiTabCtrl*>(tab_ctrl))
                 break;
             tab_ctrl = tab_ctrl->GetParent();
         }
@@ -3066,7 +3066,7 @@ void wxAuiNotebook::OnTabButton(wxAuiNotebookEvent& evt)
 
 
 #if wxUSE_MDI
-            if (wxDynamicCast(close_wnd, wxAuiMDIChildFrame))
+            if (dynamic_cast<wxAuiMDIChildFrame*>(close_wnd))
             {
                 close_wnd->Close();
             }

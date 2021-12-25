@@ -706,7 +706,7 @@ bool wxBitmap::Create(wxSize sz, const wxDC& dc)
 {
     wxCHECK_MSG( dc.IsOk(), false, "invalid WXHDC in wxBitmap::Create()" );
 
-    const wxMSWDCImpl *impl = wxDynamicCast( dc.GetImpl(), wxMSWDCImpl );
+    const auto impl = dynamic_cast<const wxMSWDCImpl*>( dc.GetImpl() );
 
     if (impl)
         return DoCreate(sz, -1, impl->GetHDC());
@@ -794,7 +794,7 @@ bool wxBitmap::CreateFromImage(const wxImage& image, const wxDC& dc)
     wxCHECK_MSG( dc.IsOk(), false,
                     "invalid WXHDC in wxBitmap::CreateFromImage()" );
 
-    const wxMSWDCImpl *impl = wxDynamicCast( dc.GetImpl(), wxMSWDCImpl );
+    const auto impl = dynamic_cast<const wxMSWDCImpl*>( dc.GetImpl() );
 
     if (impl)
         return CreateFromImage(image, -1, impl->GetHDC());
@@ -1652,7 +1652,7 @@ bool wxBitmapHandler::Create(wxGDIImage *image,
                              wxBitmapType type,
                              wxSize sz, int depth)
 {
-    wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
+    wxBitmap *bitmap = dynamic_cast<wxBitmap*>(image);
 
     return bitmap && Create(bitmap, data, type, sz, depth);
 }
@@ -1662,7 +1662,7 @@ bool wxBitmapHandler::Load(wxGDIImage *image,
                            wxBitmapType type,
                            wxSize sz)
 {
-    wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
+    wxBitmap *bitmap = dynamic_cast<wxBitmap*>(image);
 
     return bitmap && LoadFile(bitmap, name, type, sz);
 }
@@ -1671,7 +1671,7 @@ bool wxBitmapHandler::Save(const wxGDIImage *image,
                            const std::string& name,
                            wxBitmapType type) const
 {
-    wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
+    const wxBitmap *bitmap = dynamic_cast<const wxBitmap*>(image);
 
     return bitmap && SaveFile(bitmap, name, type);
 }

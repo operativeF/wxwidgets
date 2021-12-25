@@ -93,7 +93,7 @@ wxStatusBarBase::~wxStatusBarBase()
 {
     // notify the frame that it doesn't have a status bar any longer to avoid
     // dangling pointers
-    wxFrame *frame = wxDynamicCast(GetParent(), wxFrame);
+    wxFrame *frame = dynamic_cast<wxFrame*>(GetParent());
     if ( frame && frame->GetStatusBar() == this )
         frame->SetStatusBar(nullptr);
 }

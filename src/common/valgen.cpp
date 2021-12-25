@@ -129,7 +129,7 @@ bool wxGenericValidator::TransferToWindow()
 
     // bool controls
 #if wxUSE_CHECKBOX
-    if (wxDynamicCast(m_validatorWindow, wxCheckBox))
+    if (dynamic_cast<wxCheckBox*>(m_validatorWindow))
     {
         wxCheckBox* pControl = (wxCheckBox*) m_validatorWindow;
         if (m_pBool)
@@ -140,7 +140,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_RADIOBTN
-    if (wxDynamicCast(m_validatorWindow, wxRadioButton))
+    if (dynamic_cast<wxRadioButton*>(m_validatorWindow))
     {
         wxRadioButton* pControl = (wxRadioButton*) m_validatorWindow;
         if (m_pBool)
@@ -152,7 +152,7 @@ bool wxGenericValidator::TransferToWindow()
 #endif
 
 #if wxUSE_TOGGLEBTN
-    if (wxDynamicCast(m_validatorWindow, wxToggleButton))
+    if (dynamic_cast<wxToggleButton*>(m_validatorWindow))
     {
         wxToggleButton * pControl = (wxToggleButton *) m_validatorWindow;
         if (m_pBool)
@@ -162,7 +162,7 @@ bool wxGenericValidator::TransferToWindow()
         }
     } else
 #if (defined(__WXMAC__) || defined(__WXMSW__) || defined(__WXGTK20__)) && !defined(__WXUNIVERSAL__)
-    if (wxDynamicCast(m_validatorWindow, wxBitmapToggleButton))
+    if (dynamic_cast<wxBitmapToggleButton*>(m_validatorWindow))
     {
         wxBitmapToggleButton * pControl = (wxBitmapToggleButton *) m_validatorWindow;
         if (m_pBool)
@@ -176,7 +176,7 @@ bool wxGenericValidator::TransferToWindow()
 
     // int controls
 #if wxUSE_GAUGE
-    if (wxDynamicCast(m_validatorWindow, wxGauge))
+    if (dynamic_cast<wxGauge*>(m_validatorWindow))
     {
         wxGauge* pControl = (wxGauge*) m_validatorWindow;
         if (m_pInt)
@@ -187,7 +187,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_RADIOBOX
-    if (wxDynamicCast(m_validatorWindow, wxRadioBox))
+    if (dynamic_cast<wxRadioBox*>(m_validatorWindow))
     {
         wxRadioBox* pControl = (wxRadioBox*) m_validatorWindow;
         if (m_pInt)
@@ -198,7 +198,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_SCROLLBAR
-    if (wxDynamicCast(m_validatorWindow, wxScrollBar))
+    if (dynamic_cast<wxScrollBar*>(m_validatorWindow))
     {
         wxScrollBar* pControl = (wxScrollBar*) m_validatorWindow;
         if (m_pInt)
@@ -209,7 +209,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_SPINCTRL && !defined(__WXMOTIF__)
-    if (wxDynamicCast(m_validatorWindow, wxSpinCtrl))
+    if (dynamic_cast<wxSpinCtrl*>(m_validatorWindow))
     {
         wxSpinCtrl* pControl = (wxSpinCtrl*) m_validatorWindow;
         if (m_pInt)
@@ -220,7 +220,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_SPINBTN
-    if (wxDynamicCast(m_validatorWindow, wxSpinButton))
+    if (dynamic_cast<wxSpinButton*>(m_validatorWindow))
     {
         wxSpinButton* pControl = (wxSpinButton*) m_validatorWindow;
         if (m_pInt)
@@ -231,7 +231,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_SLIDER
-    if (wxDynamicCast(m_validatorWindow, wxSlider))
+    if (dynamic_cast<wxSlider*>(m_validatorWindow))
     {
         wxSlider* pControl = (wxSlider*) m_validatorWindow;
         if (m_pInt)
@@ -244,7 +244,7 @@ bool wxGenericValidator::TransferToWindow()
 
     // date time controls
 #if 0 // wxUSE_DATEPICKCTRL -- temporary fix for shared build linking
-    if (wxDynamicCast(m_validatorWindow, wxDatePickerCtrl))
+    if (dynamic_cast<wxDatePickerCtrl*>(m_validatorWindow))
     {
         wxDatePickerCtrl* pControl = (wxDatePickerCtrl*) m_validatorWindow;
         if (m_pDateTime)
@@ -257,7 +257,7 @@ bool wxGenericValidator::TransferToWindow()
 
     // string controls
 #if wxUSE_BUTTON
-    if (wxDynamicCast(m_validatorWindow, wxButton))
+    if (dynamic_cast<wxButton*>(m_validatorWindow))
     {
         wxButton* pControl = (wxButton*) m_validatorWindow;
         if (m_pString)
@@ -268,7 +268,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_COMBOBOX
-    if (wxDynamicCast(m_validatorWindow, wxComboBox))
+    if (dynamic_cast<wxComboBox*>(m_validatorWindow))
     {
         wxComboBox* pControl = (wxComboBox*) m_validatorWindow;
         if (m_pInt)
@@ -291,7 +291,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_CHOICE
-    if (wxDynamicCast(m_validatorWindow, wxChoice))
+    if (dynamic_cast<wxChoice*>(m_validatorWindow))
     {
         wxChoice* pControl = (wxChoice*) m_validatorWindow;
         if (m_pInt)
@@ -310,7 +310,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_STATTEXT
-    if (wxDynamicCast(m_validatorWindow, wxStaticText))
+    if (dynamic_cast<wxStaticText*>(m_validatorWindow))
     {
         wxStaticText* pControl = (wxStaticText*) m_validatorWindow;
         if (m_pString)
@@ -321,7 +321,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_TEXTCTRL
-    if (wxDynamicCast(m_validatorWindow, wxTextCtrl))
+    if (dynamic_cast<wxTextCtrl*>(m_validatorWindow))
     {
         wxTextCtrl* pControl = (wxTextCtrl*) m_validatorWindow;
         if (m_pString)
@@ -357,7 +357,7 @@ bool wxGenericValidator::TransferToWindow()
     // array controls
 #if wxUSE_CHECKLISTBOX
     // NOTE: wxCheckListBox is a wxListBox, so wxCheckListBox MUST come first:
-    if (wxDynamicCast(m_validatorWindow, wxCheckListBox))
+    if (dynamic_cast<wxCheckListBox*>(m_validatorWindow))
     {
         wxCheckListBox* pControl = (wxCheckListBox*) m_validatorWindow;
         if (m_pArrayInt)
@@ -379,7 +379,7 @@ bool wxGenericValidator::TransferToWindow()
     } else
 #endif
 #if wxUSE_LISTBOX
-    if (wxDynamicCast(m_validatorWindow, wxListBox))
+    if (dynamic_cast<wxListBox*>(m_validatorWindow))
     {
         wxListBox* pControl = (wxListBox*) m_validatorWindow;
         if (m_pArrayInt)
@@ -413,7 +413,7 @@ bool wxGenericValidator::TransferFromWindow()
 
     // BOOL CONTROLS **************************************
 #if wxUSE_CHECKBOX
-    if (wxDynamicCast(m_validatorWindow, wxCheckBox))
+    if (dynamic_cast<wxCheckBox*>(m_validatorWindow))
     {
         wxCheckBox* pControl = (wxCheckBox*) m_validatorWindow;
         if (m_pBool)
@@ -424,7 +424,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_RADIOBTN
-    if (wxDynamicCast(m_validatorWindow, wxRadioButton))
+    if (dynamic_cast<wxRadioButton*>(m_validatorWindow))
     {
         wxRadioButton* pControl = (wxRadioButton*) m_validatorWindow;
         if (m_pBool)
@@ -435,7 +435,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_TOGGLEBTN
-    if (wxDynamicCast(m_validatorWindow, wxToggleButton))
+    if (dynamic_cast<wxToggleButton*>(m_validatorWindow))
     {
         wxToggleButton *pControl = (wxToggleButton *) m_validatorWindow;
         if (m_pBool)
@@ -445,7 +445,7 @@ bool wxGenericValidator::TransferFromWindow()
         }
     } else
 #if (defined(__WXMAC__) || defined(__WXMSW__) || defined(__WXGTK20__)) && !defined(__WXUNIVERSAL__)
-    if (wxDynamicCast(m_validatorWindow, wxBitmapToggleButton))
+    if (dynamic_cast<wxBitmapToggleButton*>(m_validatorWindow))
     {
         wxBitmapToggleButton *pControl = (wxBitmapToggleButton *) m_validatorWindow;
         if (m_pBool)
@@ -459,7 +459,7 @@ bool wxGenericValidator::TransferFromWindow()
 
     // INT CONTROLS ***************************************
 #if wxUSE_GAUGE
-    if (wxDynamicCast(m_validatorWindow, wxGauge))
+    if (dynamic_cast<wxGauge*>(m_validatorWindow))
     {
         wxGauge* pControl = (wxGauge*) m_validatorWindow;
         if (m_pInt)
@@ -470,7 +470,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_RADIOBOX
-    if (wxDynamicCast(m_validatorWindow, wxRadioBox))
+    if (dynamic_cast<wxRadioBox*>(m_validatorWindow))
     {
         wxRadioBox* pControl = (wxRadioBox*) m_validatorWindow;
         if (m_pInt)
@@ -481,7 +481,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_SCROLLBAR
-    if (wxDynamicCast(m_validatorWindow, wxScrollBar))
+    if (dynamic_cast<wxScrollBar*>(m_validatorWindow))
     {
         wxScrollBar* pControl = (wxScrollBar*) m_validatorWindow;
         if (m_pInt)
@@ -492,7 +492,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_SPINCTRL && !defined(__WXMOTIF__)
-    if (wxDynamicCast(m_validatorWindow, wxSpinCtrl))
+    if (dynamic_cast<wxSpinCtrl*>(m_validatorWindow))
     {
         wxSpinCtrl* pControl = (wxSpinCtrl*) m_validatorWindow;
         if (m_pInt)
@@ -503,7 +503,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_SPINBTN
-    if (wxDynamicCast(m_validatorWindow, wxSpinButton))
+    if (dynamic_cast<wxSpinButton*>(m_validatorWindow))
     {
         wxSpinButton* pControl = (wxSpinButton*) m_validatorWindow;
         if (m_pInt)
@@ -514,7 +514,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_SLIDER
-    if (wxDynamicCast(m_validatorWindow, wxSlider))
+    if (dynamic_cast<wxSlider*>(m_validatorWindow))
     {
         wxSlider* pControl = (wxSlider*) m_validatorWindow;
         if (m_pInt)
@@ -527,7 +527,7 @@ bool wxGenericValidator::TransferFromWindow()
 
     // DATE TIME CONTROLS ************************************
 #if 0 // wxUSE_DATEPICKCTRL -- temporary fix for shared build linking
-    if (wxDynamicCast(m_validatorWindow, wxDatePickerCtrl))
+    if (dynamic_cast<wxDatePickerCtrl*>(m_validatorWindow))
     {
         wxDatePickerCtrl* pControl = (wxDatePickerCtrl*) m_validatorWindow;
         if (m_pDateTime)
@@ -540,7 +540,7 @@ bool wxGenericValidator::TransferFromWindow()
 
     // STRING CONTROLS ************************************
 #if wxUSE_BUTTON
-    if (wxDynamicCast(m_validatorWindow, wxButton))
+    if (dynamic_cast<wxButton*>(m_validatorWindow))
     {
         wxButton* pControl = (wxButton*) m_validatorWindow;
         if (m_pString)
@@ -551,7 +551,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_COMBOBOX
-    if (wxDynamicCast(m_validatorWindow, wxComboBox))
+    if (dynamic_cast<wxComboBox*>(m_validatorWindow))
     {
         wxComboBox* pControl = (wxComboBox*) m_validatorWindow;
         if (m_pInt)
@@ -570,7 +570,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_CHOICE
-    if (wxDynamicCast(m_validatorWindow, wxChoice))
+    if (dynamic_cast<wxChoice*>(m_validatorWindow))
     {
         wxChoice* pControl = (wxChoice*) m_validatorWindow;
         if (m_pInt)
@@ -586,7 +586,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_STATTEXT
-    if (wxDynamicCast(m_validatorWindow, wxStaticText))
+    if (dynamic_cast<wxStaticText*>(m_validatorWindow))
     {
         wxStaticText* pControl = (wxStaticText*) m_validatorWindow;
         if (m_pString)
@@ -597,7 +597,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_TEXTCTRL
-    if (wxDynamicCast(m_validatorWindow, wxTextCtrl))
+    if (dynamic_cast<wxTextCtrl*>(m_validatorWindow))
     {
         wxTextCtrl* pControl = (wxTextCtrl*) m_validatorWindow;
         if (m_pString)
@@ -638,7 +638,7 @@ bool wxGenericValidator::TransferFromWindow()
     // ARRAY CONTROLS *************************************
 #if wxUSE_CHECKLISTBOX
     // NOTE: wxCheckListBox isa wxListBox, so wxCheckListBox MUST come first:
-    if (wxDynamicCast(m_validatorWindow, wxCheckListBox))
+    if (dynamic_cast<wxCheckListBox*>(m_validatorWindow))
     {
         wxCheckListBox* pControl = (wxCheckListBox*) m_validatorWindow;
         if (m_pArrayInt)
@@ -660,7 +660,7 @@ bool wxGenericValidator::TransferFromWindow()
     } else
 #endif
 #if wxUSE_LISTBOX
-    if (wxDynamicCast(m_validatorWindow, wxListBox))
+    if (dynamic_cast<wxListBox*>(m_validatorWindow))
     {
         wxListBox* pControl = (wxListBox*) m_validatorWindow;
         if (m_pArrayInt)

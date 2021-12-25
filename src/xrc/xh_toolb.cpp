@@ -97,7 +97,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
             if ( nodeMenu )
             {
                 wxObject *res = CreateResFromNode(nodeMenu, nullptr);
-                menu = wxDynamicCast(res, wxMenu);
+                menu = dynamic_cast<wxMenu*>(res);
                 if ( !menu )
                 {
                     ReportError
@@ -220,7 +220,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
                 (n->GetName() == "object") || n->GetName() == wxT("object_ref"))
             {
                 wxObject *created = CreateResFromNode(n, toolbar, nullptr);
-                wxControl *control = wxDynamicCast(created, wxControl);
+                wxControl *control = dynamic_cast<wxControl*>(created);
                 if (!IsOfClass(n, "tool") &&
                     !IsOfClass(n, "separator") &&
                     !IsOfClass(n, "space") &&
@@ -235,7 +235,7 @@ wxObject *wxToolBarXmlHandler::DoCreateResource()
 
         if (m_parentAsWindow && !GetBool("dontattachtoframe"))
         {
-            wxFrame *parentFrame = wxDynamicCast(m_parent, wxFrame);
+            wxFrame *parentFrame = dynamic_cast<wxFrame*>(m_parent);
             if (parentFrame)
                 parentFrame->SetToolBar(toolbar);
         }

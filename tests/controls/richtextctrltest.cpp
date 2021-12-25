@@ -24,7 +24,7 @@
 // Helper function for Table test
 static wxRichTextTable* GetCurrentTableInstance(wxRichTextParagraph* para)
 {
-    wxRichTextTable* table = wxDynamicCast(para->FindObjectAtPosition(0), wxRichTextTable);
+    wxRichTextTable* table = dynamic_cast<wxRichTextTable*>(para->FindObjectAtPosition(0));
     CHECK(table);
     return table;
 }
@@ -444,7 +444,7 @@ TEST_CASE("Richtext control test")
         {
             // Undo() and Redo() switch table instances, so invalidating 'table'
             // The containing paragraph isn't altered, and so can be used to find the current object
-            wxRichTextParagraph* para = wxDynamicCast(table->GetParent(), wxRichTextParagraph);
+            wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(table->GetParent());
             CHECK(para);
 
             CHECK(table->GetColumnCount() == 1);

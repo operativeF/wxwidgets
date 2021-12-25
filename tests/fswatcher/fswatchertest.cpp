@@ -335,7 +335,7 @@ private:
     void OnFileSystemEvent(wxFileSystemWatcherEvent& evt)
     {
         wxLogDebug("--- %s ---", evt.ToString());
-        m_events.push_back(wxDynamicCast(evt.Clone(), wxFileSystemWatcherEvent));
+        m_events.push_back(dynamic_cast<wxFileSystemWatcherEvent*>(evt.Clone()));
 
         // test finished
         SendIdle();

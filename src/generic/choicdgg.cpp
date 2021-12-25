@@ -274,7 +274,7 @@ bool wxMultiChoiceDialog::Create( wxWindow *parent,
 void wxMultiChoiceDialog::SetSelections(const std::vector<int>& selections)
 {
 #if wxUSE_CHECKLISTBOX
-    wxCheckListBox* checkListBox = wxDynamicCast(m_listbox, wxCheckListBox);
+    wxCheckListBox* checkListBox = dynamic_cast<wxCheckListBox*>(m_listbox);
     if (checkListBox)
     {
         // first clear all currently selected items
@@ -318,7 +318,7 @@ bool wxMultiChoiceDialog::TransferDataFromWindow()
     m_selections.clear();
 
 #if wxUSE_CHECKLISTBOX
-    wxCheckListBox* checkListBox = wxDynamicCast(m_listbox, wxCheckListBox);
+    wxCheckListBox* checkListBox = dynamic_cast<wxCheckListBox*>(m_listbox);
     if (checkListBox)
     {
         size_t count = checkListBox->GetCount();

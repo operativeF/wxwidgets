@@ -21,7 +21,7 @@ import WX.Cfg.Flags;
 wxWindow *wxButtonBase::SetDefault()
 {
     wxTopLevelWindow * const
-        tlw = wxDynamicCast(wxGetTopLevelParent(this), wxTopLevelWindow);
+        tlw = dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(this));
 
     wxCHECK_MSG( tlw, nullptr, "button without top level window?");
 

@@ -742,7 +742,7 @@ wxWindow* wxFindWindowAtPoint(wxWindow* win, const wxPoint& pt)
     // Hack for wxNotebook case: at least in wxGTK, all pages
     // claim to be shown, so we must only deal with the selected one.
 #if wxUSE_NOTEBOOK
-    if (wxDynamicCast(win, wxNotebook))
+    if (dynamic_cast<wxNotebook*>(win))
     {
       wxNotebook* nb = (wxNotebook*) win;
       int sel = nb->GetSelection();

@@ -147,7 +147,7 @@ public:
         //       controls.
         if ( m_canUseNative && !rect )
         {
-            wxTextCtrl* const text = wxDynamicCast(win, wxTextCtrl);
+            wxTextCtrl* const text = dynamic_cast<wxTextCtrl*>(win);
             if ( text )
             {
                 boost::nowide::wstackstring stackTitle(m_title.c_str());

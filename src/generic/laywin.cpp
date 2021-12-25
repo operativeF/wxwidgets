@@ -216,7 +216,7 @@ bool wxLayoutAlgorithm::LayoutWindow(wxWindow* parent, wxWindow* mainWindow)
 
     int leftMargin = 0, rightMargin = 0, topMargin = 0, bottomMargin = 0;
 #if wxUSE_SASH
-    if (wxDynamicCast(parent, wxSashWindow))
+    if (dynamic_cast<wxSashWindow*>(parent))
     {
         const wxSashWindow* sashWindow = (wxSashWindow*) parent;
 

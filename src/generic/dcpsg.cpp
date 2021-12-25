@@ -1788,7 +1788,7 @@ void wxPostScriptDCImpl::EndDoc ()
     // e.g. under wxGTK it can point to wxGtkPrintNativeData and so calling
     // wxPostScriptPrintNativeData methods on it crashes.
     wxPostScriptPrintNativeData *data =
-        wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
+        dynamic_cast<wxPostScriptPrintNativeData*>(m_printData.GetNativeData());
 
     if (m_ok && data && (m_printData.GetPrintMode() == wxPrintMode::Printer))
     {
@@ -1815,7 +1815,7 @@ void wxPostScriptDCImpl::StartPage()
 
 #if 0
     wxPostScriptPrintNativeData *data =
-        wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
+        dynamic_cast<wxPostScriptPrintNativeData*>(m_printData.GetNativeData());
     wxCHECK_RET( data, "No PostScript print data" );
 
     wxCoord translate_x = (wxCoord)data->GetPrinterTranslateX();
@@ -1897,7 +1897,7 @@ void wxPostScriptDCImpl::PsPrint( const wxString& str )
                 // e.g. under wxGTK it can point to wxGtkPrintNativeData and so calling
                 // wxPostScriptPrintNativeData methods on it crashes.
                 wxPostScriptPrintNativeData *data =
-                    wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
+                    dynamic_cast<wxPostScriptPrintNativeData*>(m_printData.GetNativeData());
                 wxCHECK_RET( data, "Cannot obtain output stream" );
                 wxOutputStream* outputstream = data->GetOutputStream();
                 wxCHECK_RET( outputstream, "invalid outputstream" );
@@ -2067,7 +2067,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
         //     it just crashes
 #ifndef __WIN32__
         wxPostScriptPrintNativeData *data =
-            wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
+            dynamic_cast<wxPostScriptPrintNativeData*>(m_printData.GetNativeData());
 
         if (data && !data->GetFontMetricPath().empty())
         {

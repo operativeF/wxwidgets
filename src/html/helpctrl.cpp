@@ -77,7 +77,7 @@ void wxHtmlHelpController::DestroyHelpWindow()
     wxWindow* parent = FindTopLevelWindow();
     if (parent)
     {
-        wxDialog* dialog = wxDynamicCast(parent, wxDialog);
+        wxDialog* dialog = dynamic_cast<wxDialog*>(parent);
         if (dialog && dialog->IsModal())
         {
             dialog->EndModal(wxID_OK);
@@ -117,8 +117,8 @@ void wxHtmlHelpController::SetShouldPreventAppExit(bool enable)
 void wxHtmlHelpController::SetTitleFormat(const std::string& title)
 {
     m_titleFormat = title;
-    wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
-    wxHtmlHelpDialog* dialog = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpDialog);
+    wxHtmlHelpFrame* frame = dynamic_cast<wxHtmlHelpFrame*>(FindTopLevelWindow());
+    wxHtmlHelpDialog* dialog = dynamic_cast<wxHtmlHelpDialog*>(FindTopLevelWindow());
     if (frame)
     {
         frame->SetTitleFormat(title);
@@ -336,8 +336,8 @@ void wxHtmlHelpController::SetFrameParameters(const std::string& titleFormat,
                                    [[maybe_unused]] bool newFrameEachTime)
 {
     SetTitleFormat(titleFormat);
-    wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
-    wxHtmlHelpDialog* dialog = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpDialog);
+    wxHtmlHelpFrame* frame = dynamic_cast<wxHtmlHelpFrame*>(FindTopLevelWindow());
+    wxHtmlHelpDialog* dialog = dynamic_cast<wxHtmlHelpDialog*>(FindTopLevelWindow());
     if (frame)
         frame->SetSize(wxRect{pos, size});
     else if (dialog)
@@ -351,8 +351,8 @@ wxFrame* wxHtmlHelpController::GetFrameParameters(wxSize *size,
     if (newFrameEachTime)
         (* newFrameEachTime) = false;
 
-    wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
-    wxHtmlHelpDialog* dialog = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpDialog);
+    wxHtmlHelpFrame* frame = dynamic_cast<wxHtmlHelpFrame*>(FindTopLevelWindow());
+    wxHtmlHelpDialog* dialog = dynamic_cast<wxHtmlHelpDialog*>(FindTopLevelWindow());
     if (frame)
     {
         if (size)
@@ -384,8 +384,8 @@ void wxHtmlHelpController::MakeModalIfNeeded()
 {
     if ((m_FrameStyle & wxHF_EMBEDDED) == 0)
     {
-        wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
-        wxHtmlHelpDialog* dialog = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpDialog);
+        wxHtmlHelpFrame* frame = dynamic_cast<wxHtmlHelpFrame*>(FindTopLevelWindow());
+        wxHtmlHelpDialog* dialog = dynamic_cast<wxHtmlHelpDialog*>(FindTopLevelWindow());
         if (frame)
             frame->AddGrabIfNeeded();
         else if (dialog && (m_FrameStyle & wxHF_MODAL))

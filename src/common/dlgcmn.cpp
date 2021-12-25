@@ -347,7 +347,7 @@ void wxDialogBase::SetEscapeId(int escapeId)
 bool wxDialogBase::EmulateButtonClickIfPresent(int id)
 {
 #if wxUSE_BUTTON
-    wxButton *btn = wxDynamicCast(wxFindWindow(id), wxButton);
+    wxButton *btn = dynamic_cast<wxButton*>(wxFindWindow(id));
 
     if ( !btn || !btn->IsEnabled() || !btn->IsShown() )
         return false;
@@ -585,7 +585,7 @@ bool wxStandardDialogLayoutAdapter::DoLayoutAdaptation(wxDialog* dialog)
     if (dialog->GetSizer())
     {
 #if wxUSE_BOOKCTRL
-        wxBookCtrlBase* bookContentWindow = wxDynamicCast(dialog->GetContentWindow(), wxBookCtrlBase);
+        wxBookCtrlBase* bookContentWindow = dynamic_cast<wxBookCtrlBase*>(dialog->GetContentWindow());
 
         if (bookContentWindow)
         {
@@ -595,7 +595,7 @@ bool wxStandardDialogLayoutAdapter::DoLayoutAdaptation(wxDialog* dialog)
             {
                 wxWindow* page = bookContentWindow->GetPage(i);
 
-                wxScrolledWindow* scrolledWindow = wxDynamicCast(page, wxScrolledWindow);
+                wxScrolledWindow* scrolledWindow = dynamic_cast<wxScrolledWindow*>(page);
                 if (scrolledWindow)
                     windows.Append(scrolledWindow);
                 else if (page->GetSizer())
@@ -703,7 +703,7 @@ wxSizer* wxStandardDialogLayoutAdapter::FindButtonSizer(bool stdButtonSizer, wxD
 
             if (stdButtonSizer) // find wxStdDialogButtonSizer
             {
-                wxStdDialogButtonSizer* buttonSizer = wxDynamicCast(childSizer, wxStdDialogButtonSizer);
+                wxStdDialogButtonSizer* buttonSizer = dynamic_cast<wxStdDialogButtonSizer*>(childSizer);
                 if (buttonSizer)
                 {
                     sizer->Detach(childSizer);
@@ -713,7 +713,7 @@ wxSizer* wxStandardDialogLayoutAdapter::FindButtonSizer(bool stdButtonSizer, wxD
             }
             else // find a horizontal box sizer containing standard buttons
             {
-                wxBoxSizer* buttonSizer = wxDynamicCast(childSizer, wxBoxSizer);
+                wxBoxSizer* buttonSizer = dynamic_cast<wxBoxSizer*>(childSizer);
                 if (buttonSizer && IsOrdinaryButtonSizer(dialog, buttonSizer))
                 {
                     sizer->Detach(childSizer);
@@ -740,7 +740,7 @@ bool wxStandardDialogLayoutAdapter::IsOrdinaryButtonSizer(wxDialog* dialog, wxBo
           node; node = node->GetNext() )
     {
         wxSizerItem *item = node->GetData();
-        wxButton *childButton = wxDynamicCast(item->GetWindow(), wxButton);
+        wxButton *childButton = dynamic_cast<wxButton*>(item->GetWindow());
 
         if (childButton && IsStandardButton(dialog, childButton))
             return true;
@@ -766,7 +766,7 @@ bool wxStandardDialogLayoutAdapter::FindLooseButtons(wxDialog* dialog, wxStdDial
         wxSizerItemList::compatibility_iterator next = node->GetNext();
         wxSizerItem *item = node->GetData();
         wxSizer *childSizer = item->GetSizer();
-        wxButton *childButton = wxDynamicCast(item->GetWindow(), wxButton);
+        wxButton *childButton = dynamic_cast<wxButton*>(item->GetWindow());
 
         if (childButton && IsStandardButton(dialog, childButton))
         {
@@ -893,7 +893,7 @@ bool wxStandardDialogLayoutAdapter::DoFitWithScrolling(wxDialog* dialog, wxWindo
         while (node)
         {
             wxWindow *win = node->GetData();
-            wxScrolledWindow* scrolledWindow = wxDynamicCast(win, wxScrolledWindow);
+            wxScrolledWindow* scrolledWindow = dynamic_cast<wxScrolledWindow*>(win);
             if (scrolledWindow)
             {
                 scrolledWindow->SetScrollRate(resizeHorizontally ? 10 : 0, resizeVertically ? 10 : 0);

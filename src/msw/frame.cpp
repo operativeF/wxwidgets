@@ -622,7 +622,7 @@ void wxFrame::IconizeChildFrames(bool bIconize)
 
         // the child MDI frames are a special case and should not be touched by
         // the parent frame - instead, they are managed by the user
-        wxFrame *frame = wxDynamicCast(win, wxFrame);
+        wxFrame *frame = dynamic_cast<wxFrame*>(win);
         if ( frame
 #if wxUSE_MDI_ARCHITECTURE
                 && !frame->IsMDIChild()

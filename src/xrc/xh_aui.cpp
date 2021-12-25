@@ -66,7 +66,7 @@ wxAuiManager *wxAuiXmlHandler::GetAuiManager( wxWindow *managed ) const
 
 void wxAuiXmlHandler::OnManagedWindowClose( wxWindowDestroyEvent &event )
 {
-    wxWindow *window = wxDynamicCast( event.GetEventObject(), wxWindow );
+    auto window = dynamic_cast<wxWindow*>( event.GetEventObject() );
     for ( Managers::iterator it = m_managers.begin();
           it != m_managers.end();
           ++it )
@@ -148,7 +148,7 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
             wxObject *object = CreateResFromNode(node, m_window, nullptr);
 
             m_mgrInside = old_ins;
-            window = wxDynamicCast( object, wxWindow );
+            window = dynamic_cast<wxWindow*>( object );
 
             if (!window && object)
             {
@@ -230,7 +230,7 @@ wxObject *wxAuiXmlHandler::DoCreateResource()
             m_anbInside = false;
             wxObject *item = CreateResFromNode(anb, m_notebook, nullptr);
             m_anbInside = old_ins;
-            wxWindow *wnd = wxDynamicCast(item, wxWindow);
+            wxWindow *wnd = dynamic_cast<wxWindow*>(item);
 
             if (wnd)
             {

@@ -459,7 +459,7 @@ wxBrushAttrsSetter::wxBrushAttrsSetter(wxMSWDCImpl& dc)
 
 WXHDC wxDC::GetHDC() const
 {
-    wxMSWDCImpl * const impl = wxDynamicCast(GetImpl(), wxMSWDCImpl);
+    const wxMSWDCImpl* impl = dynamic_cast<const wxMSWDCImpl*>(GetImpl());
     return impl ? impl->GetHDC() : nullptr;
 }
 
@@ -2221,7 +2221,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 {
     wxCHECK_MSG( source, false, "wxMSWDCImpl::Blit(): NULL wxDC pointer" );
 
-    wxMSWDCImpl *implSrc = wxDynamicCast( source->GetImpl(), wxMSWDCImpl );
+    auto implSrc = dynamic_cast<wxMSWDCImpl*>( source->GetImpl() );
     if ( !implSrc )
     {
         // TODO: Do we want to be able to blit from other DCs too?

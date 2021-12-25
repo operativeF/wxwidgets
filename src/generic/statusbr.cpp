@@ -187,7 +187,7 @@ bool wxStatusBarGeneric::ShowsSizeGrip() const
         return false;
 
     wxTopLevelWindow * const
-        tlw = wxDynamicCast(wxGetTopLevelParent(GetParent()), wxTopLevelWindow);
+        tlw = dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(GetParent()));
     return tlw && !tlw->wxIsMaximized() && tlw->HasFlag(wxRESIZE_BORDER);
 #else // !__WXGTK20__
     return false;

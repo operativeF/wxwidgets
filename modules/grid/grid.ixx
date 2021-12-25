@@ -452,7 +452,7 @@ public:
 
     // These functions exist only for backward compatibility, use Get and
     // SetWindow() instead in the new code.
-    wxControl* GetControl() { return wxDynamicCast(m_control, wxControl); }
+    wxControl* GetControl() { return dynamic_cast<wxControl*>(m_control); }
     void SetControl(wxControl* control) { m_control = control; }
 
 

@@ -106,7 +106,7 @@ wxObject *wxStatusBarXmlHandler::DoCreateResource()
 
     if (m_parentAsWindow)
     {
-        wxFrame *parentFrame = wxDynamicCast(m_parent, wxFrame);
+        wxFrame *parentFrame = dynamic_cast<wxFrame*>(m_parent);
         if (parentFrame)
             parentFrame->SetStatusBar(statbar);
     }

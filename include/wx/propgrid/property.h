@@ -1695,7 +1695,7 @@ public:
     // Sets wxValidator for a property.
     void SetValidator( const wxValidator& validator )
     {
-        m_validator = wxDynamicCast(validator.Clone(),wxValidator);
+        m_validator = dynamic_cast<wxValidator*>(validator.Clone());
     }
 
     // Gets assignable version of property's validator.

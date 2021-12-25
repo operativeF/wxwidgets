@@ -74,7 +74,7 @@ wxIcon wxAboutDialogInfo::GetIcon() const
     if ( !icon.IsOk() )
     {
         const wxTopLevelWindow * const
-            tlw = wxDynamicCast(wxApp::GetMainTopWindow(), wxTopLevelWindow);
+            tlw = dynamic_cast<wxTopLevelWindow*>(wxApp::GetMainTopWindow());
         if ( tlw )
             icon = tlw->GetIcon();
     }

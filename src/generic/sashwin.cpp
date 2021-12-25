@@ -75,8 +75,8 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
             // the area to draw on.
             wxWindow* parent = this;
 
-            while (parent && !wxDynamicCast(parent, wxDialog) &&
-                             !wxDynamicCast(parent, wxFrame))
+            while (parent && !dynamic_cast<wxDialog*>(parent) &&
+                             !dynamic_cast<wxFrame*>(parent))
               parent = parent->GetParent();
 
             wxScreenDC::StartDrawingOnTop(parent);

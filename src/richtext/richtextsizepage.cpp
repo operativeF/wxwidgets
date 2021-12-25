@@ -704,7 +704,7 @@ bool wxRichTextSizePage::TransferDataToWindow()
 
     wxRichTextImage* imageObj = nullptr;
     if (dialog)
-        imageObj = wxDynamicCast(dialog->wxGetObject(), wxRichTextImage);
+        imageObj = dynamic_cast<wxRichTextImage*>(dialog->wxGetObject());
 
     // For an image, show the original width and height if the size is not explicitly specified.
     if (imageObj && !GetAttributes()->GetTextBoxAttr().GetWidth().IsValid() && !GetAttributes()->GetTextBoxAttr().GetHeight().IsValid() &&

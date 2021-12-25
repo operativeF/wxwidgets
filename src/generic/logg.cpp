@@ -353,7 +353,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 // find the top window and set it's status text if it has any
                 if ( pFrame == nullptr ) {
                     wxWindow *pWin = wxTheApp->GetTopWindow();
-                    if ( wxDynamicCast(pWin, wxFrame) ) {
+                    if ( dynamic_cast<wxFrame*>(pWin) ) {
                         pFrame = (wxFrame *)pWin;
                     }
                 }

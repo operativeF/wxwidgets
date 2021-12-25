@@ -1509,7 +1509,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
     m_handler->m_node = node;
     m_handler->m_class = node->GetAttribute("class", "");
     m_handler->m_parent = parent;
-    m_handler->m_parentAsWindow = wxDynamicCast(m_handler->m_parent, wxWindow);
+    m_handler->m_parentAsWindow = dynamic_cast<wxWindow*>(m_handler->m_parent);
 
     wxObject *returned = GetHandler()->DoCreateResource();
 

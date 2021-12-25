@@ -376,7 +376,7 @@ void wxAuiDefaultDockArt::DrawBorder(wxDC& dc, wxWindow* window, const wxRect& _
     {
         // notebooks draw the border themselves, so they can use native rendering (e.g. tabartgtk)
         wxAuiTabArt* art = nullptr;
-        wxAuiNotebook* nb = wxDynamicCast(window, wxAuiNotebook);
+        wxAuiNotebook* nb = dynamic_cast<wxAuiNotebook*>(window);
         if (nb)
             art = nb->GetArtProvider();
 

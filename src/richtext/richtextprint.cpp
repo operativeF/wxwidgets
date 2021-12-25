@@ -65,7 +65,7 @@ void wxRichTextPrintout::OnPreparePrinting()
         while (node)
         {
             // child is a paragraph
-            wxRichTextParagraph* child = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+            wxRichTextParagraph* child = dynamic_cast<wxRichTextParagraph*>(node->GetData());
             wxASSERT (child != nullptr);
             if (child)
             {

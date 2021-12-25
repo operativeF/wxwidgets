@@ -46,7 +46,7 @@ wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap )
 bool wxMemoryDCImpl::CreateCompatible(wxDC *dc)
 {
     wxDCImpl *impl = dc ? dc->GetImpl() : nullptr;
-    wxMSWDCImpl *msw_impl = wxDynamicCast( impl, wxMSWDCImpl );
+    auto msw_impl = dynamic_cast<wxMSWDCImpl*>( impl );
     if ( dc && !msw_impl)
     {
         m_ok = false;

@@ -332,7 +332,7 @@ bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
     // WS_EX_CONTEXTHELP style, so let's set a reasonable icon
     if ( HasExtraStyle(wxWS_EX_CONTEXTHELP) )
     {
-        wxFrame *winTop = wxDynamicCast(wxTheApp->GetTopWindow(), wxFrame);
+        wxFrame *winTop = dynamic_cast<wxFrame*>(wxTheApp->GetTopWindow());
         if ( winTop )
         {
             wxIcon icon = winTop->GetIcon();

@@ -207,7 +207,7 @@ wxSize wxWizardSizer::SiblingSize(wxSizerItem *child)
 
     if ( child->IsWindow() )
     {
-        wxWizardPage *page = wxDynamicCast(child->GetWindow(), wxWizardPage);
+        wxWizardPage *page = dynamic_cast<wxWizardPage*>(child->GetWindow());
         if ( page )
         {
             for ( wxWizardPage *sibling = page->GetNext();
@@ -841,7 +841,7 @@ bool wxWizard::DoLayoutAdaptation()
         wxSizerItem * const item = node->GetData();
         if ( item->IsWindow() )
         {
-            wxWizardPage* page = wxDynamicCast(item->GetWindow(), wxWizardPage);
+            wxWizardPage* page = dynamic_cast<wxWizardPage*>(item->GetWindow());
             if (page)
             {
                 while (page)

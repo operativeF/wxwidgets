@@ -1262,7 +1262,7 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
             if ( !selected )
             {
                 wxTopLevelWindow *
-                    tlw = wxDynamicCast(wxGetTopLevelParent(this), wxTopLevelWindow);
+                    tlw = dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(this));
                 if ( tlw )
                 {
                     selected = tlw->GetDefaultItem() == this;

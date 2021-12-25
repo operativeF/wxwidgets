@@ -305,7 +305,7 @@ bool wxImageList::Draw(int index,
                        bool solidBackground)
 {
     wxDCImpl *impl = dc.GetImpl();
-    wxMSWDCImpl *msw_impl = wxDynamicCast( impl, wxMSWDCImpl );
+    auto msw_impl = dynamic_cast<wxMSWDCImpl*>( impl );
     if (!msw_impl)
        return false;
 

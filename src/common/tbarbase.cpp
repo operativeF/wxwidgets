@@ -452,7 +452,7 @@ wxToolBarBase::~wxToolBarBase()
 
     // notify the frame that it doesn't have a tool bar any longer to avoid
     // dangling pointers
-    wxFrame *frame = wxDynamicCast(GetParent(), wxFrame);
+    wxFrame *frame = dynamic_cast<wxFrame*>(GetParent());
     if ( frame && frame->GetToolBar() == this )
     {
         frame->SetToolBar(nullptr);
@@ -666,7 +666,7 @@ void wxToolBarBase::OnMouseEnter(int toolid)
     event.SetEventObject(this);
     event.SetInt(toolid);
 
-    wxFrame *frame = wxDynamicCast(wxGetTopLevelParent(this), wxFrame);
+    wxFrame *frame = dynamic_cast<wxFrame*>(wxGetTopLevelParent(this));
     if ( frame )
     {
         std::string help;

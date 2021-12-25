@@ -227,7 +227,7 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
     wxSpinButton* wnd2;
     wxSize tcSz;
 
-    wxNumericProperty* prop = wxDynamicCast(property, wxNumericProperty);
+    wxNumericProperty* prop = dynamic_cast<wxNumericProperty*>(property);
     if ( prop )
     {
         static constexpr int margin = 1;
@@ -281,7 +281,7 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
 bool wxPGSpinCtrlEditor::OnEvent(wxPropertyGrid* propgrid, wxPGProperty* property,
     wxWindow* wnd, wxEvent& event) const
 {
-    wxNumericProperty* prop = wxDynamicCast(property, wxNumericProperty);
+    wxNumericProperty* prop = dynamic_cast<wxNumericProperty*>(property);
     if ( prop )
     {
         wxEventType evtType = event.GetEventType();
@@ -381,11 +381,11 @@ wxPGWindowList wxPGDatePickerCtrlEditor::CreateControls( wxPropertyGrid* propgri
                                                          const wxPoint& pos,
                                                          const wxSize& sz ) const
 {
-    wxCHECK_MSG( wxDynamicCast(property, wxDateProperty),
+    wxCHECK_MSG( dynamic_cast<wxDateProperty*>(property),
                  nullptr,
                  "DatePickerCtrl editor can only be used with wxDateProperty or derivative." );
 
-    wxDateProperty* prop = wxDynamicCast(property, wxDateProperty);
+    wxDateProperty* prop = dynamic_cast<wxDateProperty*>(property);
 
     // Use two stage creation to allow cleaner display on wxMSW
     wxDatePickerCtrl* ctrl = new wxDatePickerCtrl();
@@ -422,7 +422,7 @@ void wxPGDatePickerCtrlEditor::UpdateControl( wxPGProperty* property,
                                               wxWindow* wnd ) const
 {
     wxDatePickerCtrl* ctrl = (wxDatePickerCtrl*) wnd;
-    wxASSERT( wxDynamicCast(ctrl, wxDatePickerCtrl) );
+    wxASSERT( dynamic_cast<wxDatePickerCtrl*>(ctrl) );
 
     wxDateTime dateValue(wxInvalidDateTime);
     wxVariant v(property->GetValue());
@@ -444,7 +444,7 @@ bool wxPGDatePickerCtrlEditor::OnEvent( [[maybe_unused]] wxPropertyGrid* propgri
 bool wxPGDatePickerCtrlEditor::GetValueFromControl( wxVariant& variant, [[maybe_unused]] wxPGProperty* property, wxWindow* wnd ) const
 {
     wxDatePickerCtrl* ctrl = (wxDatePickerCtrl*) wnd;
-    wxASSERT( wxDynamicCast(ctrl, wxDatePickerCtrl) );
+    wxASSERT( dynamic_cast<wxDatePickerCtrl*>(ctrl) );
 
     variant = ctrl->GetValue();
 
@@ -455,9 +455,9 @@ void wxPGDatePickerCtrlEditor::SetValueToUnspecified( wxPGProperty* property,
                                                       wxWindow* wnd ) const
 {
     wxDatePickerCtrl* ctrl = (wxDatePickerCtrl*) wnd;
-    wxASSERT( wxDynamicCast(ctrl, wxDatePickerCtrl) );
+    wxASSERT( dynamic_cast<wxDatePickerCtrl*>(ctrl) );
 
-    wxDateProperty* prop = wxDynamicCast(property, wxDateProperty);
+    wxDateProperty* prop = dynamic_cast<wxDateProperty*>(property);
 
     if ( prop )
     {
@@ -1246,7 +1246,7 @@ public:
                          const wxPropertyGrid* propertyGrid, wxPGProperty* property,
                          [[maybe_unused]] int column, int item, [[maybe_unused]] int flags ) const
     {
-        wxASSERT( wxDynamicCast(property, wxSystemColourProperty) );
+        wxASSERT( dynamic_cast<wxSystemColourProperty*>(property) );
         wxSystemColourProperty* prop = wxStaticCast(property, wxSystemColourProperty);
 
         dc.SetPen(*wxBLACK_PEN);
@@ -1315,16 +1315,16 @@ void wxSystemColourProperty::OnCustomPaint( wxDC& dc, const wxRect& rect,
         wxGCDC *gdc = nullptr;
         if ( col.Alpha() != wxALPHA_OPAQUE )
         {
-            if ( wxPaintDC *paintdc = wxDynamicCast(&dc, wxPaintDC) )
+            if ( wxPaintDC *paintdc = dynamic_cast<wxPaintDC*>(&dc) )
             {
                 gdc = new wxGCDC(*paintdc);
             }
-            else if ( wxMemoryDC *memdc = wxDynamicCast(&dc, wxMemoryDC) )
+            else if ( wxMemoryDC *memdc = dynamic_cast<wxMemoryDC*>(&dc) )
             {
                 gdc = new wxGCDC(*memdc);
             }
 #if wxUSE_METAFILE && defined(wxMETAFILE_IS_ENH)
-            else if ( wxMetafileDC *metadc = wxDynamicCast(&dc, wxMetafileDC) )
+            else if ( wxMetafileDC *metadc = dynamic_cast<wxMetafileDC*>(&dc) )
             {
                 gdc = new wxGCDC(*metadc);
             }

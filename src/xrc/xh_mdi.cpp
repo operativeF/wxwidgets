@@ -68,7 +68,7 @@ wxWindow *wxMdiXmlHandler::CreateFrame()
     }
     else // wxMDIChildFrame
     {
-        wxMDIParentFrame *mdiParent = wxDynamicCast(m_parent, wxMDIParentFrame);
+        wxMDIParentFrame *mdiParent = dynamic_cast<wxMDIParentFrame*>(m_parent);
 
         if ( !mdiParent )
         {
@@ -99,7 +99,7 @@ wxObject *wxMdiXmlHandler::DoCreateResource()
         frame->Move(GetPosition());
     if (HasParam("icon"))
     {
-        wxFrame* f = wxDynamicCast(frame, wxFrame);
+        wxFrame* f = dynamic_cast<wxFrame*>(frame);
         if (f)
             f->SetIcons(GetIconBundle("icon", wxART_FRAME_ICON));
     }

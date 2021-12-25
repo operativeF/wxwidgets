@@ -116,7 +116,7 @@ void wxGenericCollapsiblePane::OnStateChange(const wxSize& sz)
 
 
     wxTopLevelWindow *top =
-        wxDynamicCast(wxGetTopLevelParent(this), wxTopLevelWindow);
+        dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(this));
     if ( !top )
         return;
 

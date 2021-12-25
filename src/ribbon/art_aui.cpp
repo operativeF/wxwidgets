@@ -434,7 +434,7 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
     wxRect old_clip;
     dc.GetClippingBox(old_clip);
     bool is_first_tab = false;
-    wxRibbonBar* bar = wxDynamicCast(tab.page->GetParent(), wxRibbonBar);
+    wxRibbonBar* bar = dynamic_cast<wxRibbonBar*>(tab.page->GetParent());
     if(bar && bar->GetPage(0) == tab.page)
         is_first_tab = true;
 
@@ -894,7 +894,7 @@ void wxRibbonAUIArtProvider::DrawPartialPanelBackground(wxDC& dc,
 
     for(; parent; parent = parent->GetParent())
     {
-        panel = wxDynamicCast(parent, wxRibbonPanel);
+        panel = dynamic_cast<wxRibbonPanel*>(parent);
         if(panel != nullptr)
         {
             if(!panel->IsHovered())

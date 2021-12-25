@@ -2410,7 +2410,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
     wxPoint offset(wnd->GetPosition());
     wxRibbonPage* page = nullptr;
     wxWindow* parent = wnd->GetParent();
-    wxRibbonPanel* panel = wxDynamicCast(wnd, wxRibbonPanel);
+    wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(wnd);
     bool hovered = false;
 
     if(panel != nullptr)
@@ -2426,7 +2426,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
     {
         if(panel == nullptr)
         {
-            panel = wxDynamicCast(parent, wxRibbonPanel);
+            panel = dynamic_cast<wxRibbonPanel*>(parent);
             if(panel != nullptr)
             {
                 hovered = allow_hovered && panel->IsHovered();
@@ -2436,7 +2436,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(
                 }
             }
         }
-        page = wxDynamicCast(parent, wxRibbonPage);
+        page = dynamic_cast<wxRibbonPage*>(parent);
         if(page != nullptr)
         {
             break;

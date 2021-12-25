@@ -67,7 +67,7 @@ wxObject *wxInfoBarXmlHandler::DoCreateResource()
         // inside the element now,
         // handle buttons
 
-        wxInfoBar * const infoBar = wxDynamicCast(m_parentAsWindow, wxInfoBar);
+        wxInfoBar * const infoBar = dynamic_cast<wxInfoBar*>(m_parentAsWindow);
         wxCHECK_MSG(infoBar, nullptr, "must have wxInfoBar parent");
 
         infoBar->AddButton(GetID(), GetText("label"));

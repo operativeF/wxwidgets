@@ -3014,7 +3014,7 @@ bool wxPropertyGrid::PerformValidation( wxPGProperty* p, wxVariant& pendingValue
             if ( changedProperty == GetSelection() )
             {
                 wxWindow* editor = GetEditorControl();
-                wxASSERT( wxDynamicCast(editor, wxTextCtrl) );
+                wxASSERT( dynamic_cast<wxTextCtrl*>(editor) );
                 evtChangingValue = dynamic_cast<wxTextCtrl*>(editor)->GetValue();
             }
             else
@@ -3069,7 +3069,7 @@ bool wxPropertyGrid::PerformValidation( wxPGProperty* p, wxVariant& pendingValue
 wxStatusBar* wxPropertyGrid::GetStatusBar()
 {
     wxWindow* topWnd = ::wxGetTopLevelParent(this);
-    wxFrame* frame = wxDynamicCast(topWnd, wxFrame);
+    wxFrame* frame = dynamic_cast<wxFrame*>(topWnd);
     if ( frame )
     {
         return frame->GetStatusBar();
@@ -3152,7 +3152,7 @@ bool wxPropertyGrid::OnValidationFailure( wxPGProperty* property,
 
     //
     // For non-wxTextCtrl editors, we do need to revert the value
-    if ( !wxDynamicCast(editor, wxTextCtrl) &&
+    if ( !dynamic_cast<wxTextCtrl*>(editor) &&
          property == GetSelection() )
     {
         property->GetEditorClass()->UpdateControl(property, editor);
@@ -3511,7 +3511,7 @@ bool wxPropertyGrid::HandleCustomEditorEvent( wxEvent &event )
 
     wxVariant pendingValue(selected->GetValueRef());
     wxWindow* wnd = GetEditorControl();
-    wxWindow* editorWnd = wxDynamicCast(event.GetEventObject(), wxWindow);
+    wxWindow* editorWnd = dynamic_cast<wxWindow*>(event.GetEventObject());
     int selFlags = 0;
     bool wasUnspecified = selected->IsValueUnspecified();
     int usesAutoUnspecified = selected->UsesAutoUnspecified();
@@ -3525,7 +3525,7 @@ bool wxPropertyGrid::HandleCustomEditorEvent( wxEvent &event )
     // Ignore focus changes within the composite editor control
     if ( event.GetEventType() == wxEVT_SET_FOCUS || event.GetEventType() == wxEVT_KILL_FOCUS )
     {
-        wxFocusEvent* fevt = wxDynamicCast(&event, wxFocusEvent);
+        wxFocusEvent* fevt = dynamic_cast<wxFocusEvent*>(&event);
         wxWindow* win = fevt->GetWindow();
         while ( win )
         {
@@ -3541,7 +3541,7 @@ bool wxPropertyGrid::HandleCustomEditorEvent( wxEvent &event )
     // Filter out excess wxTextCtrl modified events
     else if ( event.GetEventType() == wxEVT_TEXT && wnd )
     {
-        if ( wxDynamicCast(wnd, wxTextCtrl) )
+        if ( dynamic_cast<wxTextCtrl*>(wnd) )
         {
             wxTextCtrl* tc = (wxTextCtrl*) wnd;
 
@@ -3550,12 +3550,12 @@ bool wxPropertyGrid::HandleCustomEditorEvent( wxEvent &event )
                 return true;
             m_prevTcValue = newTcValue;
         }
-        else if ( wxDynamicCast(wnd, wxComboCtrl) )
+        else if ( dynamic_cast<wxComboCtrl*>(wnd) )
         {
             // In some cases we might stumble unintentionally on
             // wxComboCtrl's embedded wxTextCtrl's events. Let's
             // avoid them.
-            if ( wxDynamicCast(editorWnd, wxTextCtrl) )
+            if ( dynamic_cast<wxTextCtrl*>(editorWnd) )
                 return false;
 
             wxComboCtrl* cc = (wxComboCtrl*) wnd;
@@ -5220,7 +5220,7 @@ bool wxPropertyGrid::OnMouseCommon( wxMouseEvent& event, int* px, int* py )
 
     // Hide popup on clicks
     if ( event.GetEventType() != wxEVT_MOTION )
-        if ( wxDynamicCast(wnd, wxOwnerDrawnComboBox) )
+        if ( dynamic_cast<wxOwnerDrawnComboBox*>(wnd) )
         {
             ((wxOwnerDrawnComboBox*)wnd)->HidePopup();
         }

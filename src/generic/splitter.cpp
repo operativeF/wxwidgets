@@ -384,7 +384,7 @@ void wxSplitterWindow::OnSize(wxSizeEvent& event)
     wxWindow *parent = wxGetTopLevelParent(this);
     bool iconized;
 
-    wxTopLevelWindow *winTop = wxDynamicCast(parent, wxTopLevelWindow);
+    wxTopLevelWindow *winTop = dynamic_cast<wxTopLevelWindow*>(parent);
     if ( winTop )
     {
         iconized = winTop->IsIconized();

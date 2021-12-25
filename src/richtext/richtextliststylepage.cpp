@@ -485,8 +485,7 @@ Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n";
     static constexpr char s_para3[] = "Integer convallis dolor at augue \
 iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
-    wxRichTextListStyleDefinition* def = wxDynamicCast(wxRichTextFormattingDialog::GetDialogStyleDefinition(this),
-        wxRichTextListStyleDefinition);
+    auto def = dynamic_cast<wxRichTextListStyleDefinition*>(wxRichTextFormattingDialog::GetDialogStyleDefinition(this));
 
     wxRichTextStyleSheet* styleSheet = wxRichTextFormattingDialog::GetDialog(this)->GetStyleSheet();
 
@@ -836,8 +835,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
 /// Get attributes for selected level
 wxRichTextAttr* wxRichTextListStylePage::GetAttributesForSelection()
 {
-    wxRichTextListStyleDefinition* def = wxDynamicCast(wxRichTextFormattingDialog::GetDialogStyleDefinition(this),
-        wxRichTextListStyleDefinition);
+    auto def = dynamic_cast<wxRichTextListStyleDefinition*>(wxRichTextFormattingDialog::GetDialogStyleDefinition(this));
 
     int value = m_levelCtrl->GetValue();
 

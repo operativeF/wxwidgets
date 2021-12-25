@@ -445,7 +445,7 @@ static bool wxHasRealChildren(const wxWindowBase* win)
         wxWindow *win = node->GetData();
         if ( !win->IsTopLevel() && win->IsShown()
 #if wxUSE_SCROLLBAR
-            && !wxDynamicCast(win, wxScrollBar)
+            && !dynamic_cast<wxScrollBar*>(win)
 #endif
             )
             realChildCount ++;
@@ -494,7 +494,7 @@ wxSize wxWindowBase::DoGetBestSize() const
             if ( win->IsTopLevel()
                     || !win->IsShown()
 #if wxUSE_STATUSBAR
-                        || wxDynamicCast(win, wxStatusBar)
+                        || dynamic_cast<wxStatusBar*>(win)
 #endif // wxUSE_STATUSBAR
                )
             {
@@ -3057,7 +3057,7 @@ wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
     if (win)
     {
         rect = win->GetRect();
-        if (win->GetParent() && !wxDynamicCast(win, wxTopLevelWindow))
+        if (win->GetParent() && !dynamic_cast<wxTopLevelWindow*>(win))
             rect.SetPosition(win->GetParent()->ClientToScreen(rect.GetPosition()));
         return wxAccStatus::Ok;
     }
@@ -3172,7 +3172,7 @@ wxAccStatus wxWindowAccessible::GetName(int childId, std::string* name)
     // accessible classes, one for each kind of wxWidgets
     // control or window.
 #if wxUSE_BUTTON
-    if (wxDynamicCast(GetWindow(), wxButton))
+    if (dynamic_cast<wxButton*>(GetWindow()))
         title = ((wxButton*) GetWindow())->GetLabel();
     else
 #endif
@@ -3323,14 +3323,14 @@ wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccSystemRole* role)
     if (childId > 0)
         return wxAccStatus::NotImplemented;
 
-    if (wxDynamicCast(GetWindow(), wxControl))
+    if (dynamic_cast<wxControl*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 #if wxUSE_STATUSBAR
-    if (wxDynamicCast(GetWindow(), wxStatusBar))
+    if (dynamic_cast<wxStatusBar*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 #endif
 #if wxUSE_TOOLBAR
-    if (wxDynamicCast(GetWindow(), wxToolBar))
+    if (dynamic_cast<wxToolBar*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 #endif
 
@@ -3353,15 +3353,15 @@ wxAccStatus wxWindowAccessible::GetState(int childId, unsigned int* state)
     if (childId > 0)
         return wxAccStatus::NotImplemented;
 
-    if (wxDynamicCast(GetWindow(), wxControl))
+    if (dynamic_cast<wxControl*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 
 #if wxUSE_STATUSBAR
-    if (wxDynamicCast(GetWindow(), wxStatusBar))
+    if (dynamic_cast<wxStatusBar*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 #endif
 #if wxUSE_TOOLBAR
-    if (wxDynamicCast(GetWindow(), wxToolBar))
+    if (dynamic_cast<wxToolBar*>(GetWindow()))
         return wxAccStatus::NotImplemented;
 #endif
 

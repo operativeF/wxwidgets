@@ -219,7 +219,7 @@ void wxBalloonNotifMsgImpl::SetUpIcon(wxWindow *win)
         if ( win )
         {
             const wxTopLevelWindow * const
-                tlw = wxDynamicCast(win, wxTopLevelWindow);
+                tlw = dynamic_cast<wxTopLevelWindow*>(win);
             if ( tlw )
                 icon = tlw->GetIcon();
         }

@@ -1024,20 +1024,20 @@ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create()
 
 std::unique_ptr<wxGraphicsContext> wxGraphicsRenderer::CreateContextFromUnknownDC(const wxDC& dc)
 {
-    if ( const wxWindowDC *windc = wxDynamicCast(&dc, wxWindowDC) )
+    if ( const wxWindowDC *windc = dynamic_cast<const wxWindowDC*>(&dc) )
         return CreateContext(*windc);
 
-    if ( const wxMemoryDC *memdc = wxDynamicCast(&dc, wxMemoryDC) )
+    if ( const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*>(&dc) )
         return CreateContext(*memdc);
 
 #if wxUSE_PRINTING_ARCHITECTURE
-    if ( const wxPrinterDC *printdc = wxDynamicCast(&dc, wxPrinterDC) )
+    if ( const wxPrinterDC *printdc = dynamic_cast<const wxPrinterDC*>(&dc) )
         return CreateContext(*printdc);
 #endif
 
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-    if ( const wxEnhMetaFileDC *mfdc = wxDynamicCast(&dc, wxEnhMetaFileDC) )
+    if ( const wxEnhMetaFileDC *mfdc = dynamic_cast<wxEnhMetaFileDC*>(&dc) )
         return CreateContext(*mfdc);
 #endif
 #endif

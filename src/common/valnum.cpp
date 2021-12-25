@@ -44,12 +44,12 @@ void wxNumValidatorBase::SetWindow(wxWindow *win)
     wxValidator::SetWindow(win);
 
 #if wxUSE_TEXTCTRL
-    if ( wxDynamicCast(m_validatorWindow, wxTextCtrl) )
+    if ( dynamic_cast<wxTextCtrl*>(m_validatorWindow) )
         return;
 #endif // wxUSE_TEXTCTRL
 
 #if wxUSE_COMBOBOX
-    if ( wxDynamicCast(m_validatorWindow, wxComboBox) )
+    if ( dynamic_cast<wxComboBox*>(m_validatorWindow) )
         return;
 #endif // wxUSE_COMBOBOX
 
@@ -59,12 +59,12 @@ void wxNumValidatorBase::SetWindow(wxWindow *win)
 wxTextEntry *wxNumValidatorBase::GetTextEntry() const
 {
 #if wxUSE_TEXTCTRL
-    if ( wxTextCtrl *text = wxDynamicCast(m_validatorWindow, wxTextCtrl) )
+    if ( wxTextCtrl *text = dynamic_cast<wxTextCtrl*>(m_validatorWindow) )
         return text;
 #endif // wxUSE_TEXTCTRL
 
 #if wxUSE_COMBOBOX
-    if ( wxComboBox *combo = wxDynamicCast(m_validatorWindow, wxComboBox) )
+    if ( wxComboBox *combo = dynamic_cast<wxComboBox*>(m_validatorWindow) )
         return combo;
 #endif // wxUSE_COMBOBOX
 
@@ -195,7 +195,7 @@ void wxNumValidatorBase::OnKillFocus(wxFocusEvent& event)
     //
     // Notice that only wxTextCtrl (and not wxTextEntry) has
     // IsModified()/MarkDirty() methods hence the need for dynamic cast.
-    wxTextCtrl * const text = wxDynamicCast(m_validatorWindow, wxTextCtrl);
+    wxTextCtrl * const text = dynamic_cast<wxTextCtrl*>(m_validatorWindow);
     const bool wasModified = text ? text->IsModified() : false;
 
     control->ChangeValue(valueNorm);

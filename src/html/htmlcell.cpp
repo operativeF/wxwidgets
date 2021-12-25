@@ -1583,7 +1583,7 @@ void wxHtmlWidgetCell::Draw([[maybe_unused]] wxDC& dc,
     }
 
     wxScrolledWindow *scrolwin =
-        wxDynamicCast(m_Wnd->GetParent(), wxScrolledWindow);
+        dynamic_cast<wxScrolledWindow*>(m_Wnd->GetParent());
     wxCHECK_RET( scrolwin,
                  "widget cells can only be placed in wxHtmlWindow" );
 

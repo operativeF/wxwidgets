@@ -114,7 +114,7 @@ wxRichTextObject* wxRichTextXMLHandler::CreateObjectForXMLName([[maybe_unused]] 
     if (it == sm_nodeNameToClassMap.end())
         return nullptr;
     else
-        return wxDynamicCast(wxCreateDynamicObject(it->second), wxRichTextObject);
+        return dynamic_cast<wxRichTextObject*>(wxCreateDynamicObject(it->second));
 }
 
 /// Recursively import an object
@@ -125,7 +125,7 @@ bool wxRichTextXMLHandler::ImportXML(wxRichTextBuffer* buffer, wxRichTextObject*
 
     // TODO: how to control whether to import children.
 
-    wxRichTextCompositeObject* compositeParent = wxDynamicCast(obj, wxRichTextCompositeObject);
+    wxRichTextCompositeObject* compositeParent = dynamic_cast<wxRichTextCompositeObject*>(obj);
     if (recurse && compositeParent)
     {
         wxXmlNode* child = node->GetChildren();
@@ -353,7 +353,7 @@ bool wxRichTextObject::ExportXML(wxOutputStream& stream, int indent, wxRichTextX
         handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
     }
 
-    wxRichTextCompositeObject* composite = wxDynamicCast(this, wxRichTextCompositeObject);
+    wxRichTextCompositeObject* composite = dynamic_cast<wxRichTextCompositeObject*>(this);
     if (composite)
     {
         size_t i;
@@ -379,7 +379,7 @@ bool wxRichTextObject::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handle
     wxRichTextXMLHelper::AddAttributes(elementNode, this, true);
     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
-    wxRichTextCompositeObject* composite = wxDynamicCast(this, wxRichTextCompositeObject);
+    wxRichTextCompositeObject* composite = dynamic_cast<wxRichTextCompositeObject*>(this);
     if (composite)
     {
         size_t i;
@@ -956,7 +956,7 @@ bool wxRichTextTable::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, w
             int idx = i * m_colCount + j;
             if (idx < (int) GetChildren().GetCount())
             {
-                wxRichTextCell* cell = wxDynamicCast(GetChildren().Item(idx)->GetData(), wxRichTextCell);
+                wxRichTextCell* cell = dynamic_cast<wxRichTextCell*>(GetChildren().Item(idx)->GetData());
                 if (cell)
                     colArray.Add(cell);
             }
@@ -2250,10 +2250,10 @@ bool wxRichTextXMLHelper::WriteProperties(wxOutputStream& stream, const wxRichTe
 
 bool wxRichTextXMLHelper::ExportStyleDefinition(wxOutputStream& stream, wxRichTextStyleDefinition* def, int level)
 {
-    wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(def, wxRichTextCharacterStyleDefinition);
-    wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(def, wxRichTextParagraphStyleDefinition);
-    wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
-    wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
+    wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(def);
+    wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(def);
+    wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
+    wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(def);
 
     wxString name = def->GetName();
     wxString nameProp;
@@ -2454,10 +2454,10 @@ void wxRichTextXMLHelper::AddAttribute(wxXmlNode* node, const wxString& rootName
 
 bool wxRichTextXMLHelper::ExportStyleDefinition(wxXmlNode* parent, wxRichTextStyleDefinition* def)
 {
-    wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(def, wxRichTextCharacterStyleDefinition);
-    wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(def, wxRichTextParagraphStyleDefinition);
-    wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
-    wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
+    wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(def);
+    wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(def);
+    wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(def);
+    wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
 
     wxString baseStyle = def->GetBaseStyle();
     wxString descr = def->GetDescription();

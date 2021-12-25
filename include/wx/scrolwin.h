@@ -315,7 +315,7 @@ protected:
     virtual bool ShouldScrollToChildOnFocus(wxWindow* child)
     {
 #if defined(__WXOSX__) && wxUSE_SCROLLBAR
-        if ( wxDynamicCast(child, wxScrollBar) )
+        if ( dynamic_cast<wxScrollBar*>(child) )
             return false;
 #else
         wxUnusedVar(child);

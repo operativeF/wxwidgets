@@ -87,7 +87,7 @@ void wxRibbonPanel::SetArtProvider(wxRibbonArtProvider* art)
           node = node->GetNext() )
     {
         wxWindow* child = node->GetData();
-        wxRibbonControl* ribbon_child = wxDynamicCast(child, wxRibbonControl);
+        wxRibbonControl* ribbon_child = dynamic_cast<wxRibbonControl*>(child);
         if(ribbon_child)
         {
             ribbon_child->SetArtProvider(art);
@@ -115,7 +115,7 @@ void wxRibbonPanel::CommonInit(const wxString& label, const wxBitmap& icon, unsi
 
     if(m_art == nullptr)
     {
-        wxRibbonControl* parent = wxDynamicCast(GetParent(), wxRibbonControl);
+        wxRibbonControl* parent = dynamic_cast<wxRibbonControl*>(GetParent());
         if(parent != nullptr)
         {
             m_art = parent->GetArtProvider();
@@ -150,7 +150,7 @@ void wxRibbonPanel::OnMouseEnter(wxMouseEvent& evt)
 void wxRibbonPanel::OnMouseEnterChild(wxMouseEvent& evt)
 {
     wxPoint pos = evt.GetPosition();
-    wxWindow *child = wxDynamicCast(evt.GetEventObject(), wxWindow);
+    wxWindow *child = dynamic_cast<wxWindow*>(evt.GetEventObject());
     if(child)
     {
         pos += child->GetPosition();
@@ -167,7 +167,7 @@ void wxRibbonPanel::OnMouseLeave(wxMouseEvent& evt)
 void wxRibbonPanel::OnMouseLeaveChild(wxMouseEvent& evt)
 {
     wxPoint pos = evt.GetPosition();
-    wxWindow *child = wxDynamicCast(evt.GetEventObject(), wxWindow);
+    wxWindow *child = dynamic_cast<wxWindow*>(evt.GetEventObject());
     if(child)
     {
         pos += child->GetPosition();
@@ -334,7 +334,7 @@ wxSize wxRibbonPanel::GetBestSizeForParentSize(const wxSize& parentSize) const
     if (GetChildren().GetCount() == 1)
     {
         wxWindow* win = GetChildren().GetFirst()->GetData();
-        wxRibbonControl* control = wxDynamicCast(win, wxRibbonControl);
+        wxRibbonControl* control = dynamic_cast<wxRibbonControl*>(win);
         if (control)
         {
             wxClientDC temp_dc(const_cast<wxRibbonPanel*>(this));
@@ -386,7 +386,7 @@ wxSize wxRibbonPanel::DoGetNextSmallerSize(wxOrientation direction,
         {
             // Simple (and common) case of single ribbon child or Sizer
             wxWindow* child = GetChildren().Item(0)->GetData();
-            wxRibbonControl* ribbon_child = wxDynamicCast(child, wxRibbonControl);
+            wxRibbonControl* ribbon_child = dynamic_cast<wxRibbonControl*>(child);
             if(ribbon_child != nullptr)
             {
                 smaller = ribbon_child->GetNextSmallerSize(direction, child_relative);
@@ -504,7 +504,7 @@ wxSize wxRibbonPanel::DoGetNextLargerSize(wxOrientation direction,
         {
             // Simple (and common) case of single ribbon child
             wxWindow* child = GetChildren().Item(0)->GetData();
-            wxRibbonControl* ribbon_child = wxDynamicCast(child, wxRibbonControl);
+            wxRibbonControl* ribbon_child = dynamic_cast<wxRibbonControl*>(child);
             if(ribbon_child != nullptr)
             {
                 larger = ribbon_child->GetNextLargerSize(direction, child_relative);
@@ -643,7 +643,7 @@ bool wxRibbonPanel::Realize()
                   node;
                   node = node->GetNext())
     {
-        wxRibbonControl* child = wxDynamicCast(node->GetData(), wxRibbonControl);
+        wxRibbonControl* child = dynamic_cast<wxRibbonControl*>(node->GetData());
         if(child == nullptr)
         {
             continue;
@@ -1092,7 +1092,7 @@ wxRect wxRibbonPanel::GetExpandedPosition(wxRect panel,
 
 void wxRibbonPanel::HideIfExpanded()
 {
-    wxRibbonPage* const containingPage = wxDynamicCast(m_parent, wxRibbonPage);
+    wxRibbonPage* const containingPage = dynamic_cast<wxRibbonPage*>(m_parent);
     if (containingPage)
         containingPage->HideIfExpanded();
 }

@@ -100,7 +100,7 @@ bool wxButton::Create(wxWindow *parent,
 
 wxButton::~wxButton()
 {
-    wxTopLevelWindow *tlw = wxDynamicCast(wxGetTopLevelParent(this), wxTopLevelWindow);
+    wxTopLevelWindow *tlw = dynamic_cast<wxTopLevelWindow*>(wxGetTopLevelParent(this));
     if ( tlw && tlw->GetTmpDefaultItem() == this )
     {
         UnsetTmpDefault();
@@ -234,7 +234,7 @@ wxWindow *wxButton::SetDefault()
     wxWindow *winOldDefault = wxButtonBase::SetDefault();
 
     // ... and Windows
-    SetDefaultStyle(wxDynamicCast(winOldDefault, wxButton), false);
+    SetDefaultStyle(dynamic_cast<wxButton*>(winOldDefault), false);
     SetDefaultStyle(this, true);
 
     return winOldDefault;
@@ -263,7 +263,7 @@ static wxTopLevelWindow *GetTLWParentIfNotBeingDeleted(wxWindow *win)
     wxASSERT_MSG( win, "button without top level parent?" );
 
     // Note that this may still return null for a button inside wxPopupWindow.
-    return wxDynamicCast(win, wxTopLevelWindow);
+    return dynamic_cast<wxTopLevelWindow*>(win);
 }
 
 // set this button as being currently default
@@ -285,7 +285,7 @@ void wxButton::SetTmpDefault()
     {
         // But we mustn't reset the default style on this button itself if it
         // had already been the default.
-        SetDefaultStyle(wxDynamicCast(winOldDefault, wxButton), false);
+        SetDefaultStyle(dynamic_cast<wxButton*>(winOldDefault), false);
     }
 }
 
@@ -301,7 +301,7 @@ void wxButton::UnsetTmpDefault()
     wxWindow *winOldDefault = tlw->GetDefaultItem();
 
     // Just as in SetTmpDefault() above, the order is important here.
-    SetDefaultStyle(wxDynamicCast(winOldDefault, wxButton), true);
+    SetDefaultStyle(dynamic_cast<wxButton*>(winOldDefault), true);
     if ( winOldDefault != this )
     {
         SetDefaultStyle(this, false);

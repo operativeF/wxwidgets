@@ -810,7 +810,7 @@ bool wxRibbonToolBar::Realize()
 
     // See if we're sizing flexibly (i.e. wrapping), and set min size differently
     bool sizingFlexibly = false;
-    wxRibbonPanel* panel = wxDynamicCast(GetParent(), wxRibbonPanel);
+    wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(GetParent());
     if (panel && (panel->GetFlags() & wxRIBBON_PANEL_FLEXIBLE))
         sizingFlexibly = true;
 
@@ -891,7 +891,7 @@ void wxRibbonToolBar::OnSize(wxSizeEvent& evt)
 
     // See if we're sizing flexibly, and set min size differently
     bool sizingFlexibly = false;
-    wxRibbonPanel* panel = wxDynamicCast(GetParent(), wxRibbonPanel);
+    wxRibbonPanel* panel = dynamic_cast<wxRibbonPanel*>(GetParent());
     if (panel && (panel->GetFlags() & wxRIBBON_PANEL_FLEXIBLE))
         sizingFlexibly = true;
 

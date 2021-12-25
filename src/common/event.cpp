@@ -401,7 +401,7 @@ std::string wxCommandEvent::GetString() const
         // Only windows generate wxEVT_TEXT events, so this cast should really
         // succeed, but err on the side of caution just in case somebody
         // created a bogus event of this type.
-        if ( wxWindow* const w = wxDynamicCast(m_eventObject, wxWindow) )
+        if ( wxWindow* const w = dynamic_cast<wxWindow*>(m_eventObject) )
         {
             if ( const wxTextEntry* const entry = w->WXGetTextEntry() )
                 return entry->GetValue();
@@ -745,7 +745,7 @@ void wxKeyEvent::InitPositionIfNecessary() const
     // If this event is associated with a window, the position should be in its
     // client coordinates, but otherwise leave it in screen coordinates as what
     // else can we use?
-    wxWindow* const win = wxDynamicCast(GetEventObject(), wxWindow);
+    wxWindow* const win = dynamic_cast<wxWindow*>(GetEventObject());
     if ( win )
         win->ScreenToClient(&self.m_x, &self.m_y);
 }

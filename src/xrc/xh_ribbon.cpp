@@ -113,7 +113,7 @@ wxObject* wxRibbonXmlHandler::Handle_buttonbar()
 {
     XRC_MAKE_INSTANCE (buttonBar, wxRibbonButtonBar)
 
-    if (!buttonBar->Create (wxDynamicCast(m_parent, wxWindow), GetID(),
+    if (!buttonBar->Create (dynamic_cast<wxWindow*>(m_parent), GetID(),
             GetPosition(), GetSize(), GetStyle()))
     {
         ReportError("could not create ribbon panel");
@@ -164,7 +164,7 @@ wxObject* wxRibbonXmlHandler::Handle_button()
         if ( nodeMenu )
         {
             wxObject *res = CreateResFromNode(nodeMenu, NULL);
-            menu = wxDynamicCast(res, wxMenu);
+            menu = dynamic_cast<wxMenu*>(res);
             if ( !menu )
             {
                 ReportError
@@ -206,14 +206,14 @@ wxObject* wxRibbonXmlHandler::Handle_button()
 
 wxObject* wxRibbonXmlHandler::Handle_control()
 {
-    wxRibbonControl *control = wxDynamicCast (m_instance, wxRibbonControl);
+    auto control = dynamic_cast<wxRibbonControl*>(m_instance);
 
     if (!m_instance)
         ReportError("wxRibbonControl must be subclassed");
     else if (!control)
         ReportError("controls must derive from wxRibbonControl");
 
-    control->Create(wxDynamicCast(m_parent, wxWindow), GetID(),
+    control->Create(dynamic_cast<wxWindow*>(m_parent), GetID(),
                     GetPosition(), GetSize(), GetStyle());
 
     return m_instance;
@@ -223,7 +223,7 @@ wxObject* wxRibbonXmlHandler::Handle_page()
 {
     XRC_MAKE_INSTANCE (ribbonPage, wxRibbonPage)
 
-    if (!ribbonPage->Create (wxDynamicCast(m_parent, wxRibbonBar), GetID(),
+    if (!ribbonPage->Create (dynamic_cast<wxRibbonBar*>(m_parent), GetID(),
             GetText ("label"), GetBitmap ("icon"), GetStyle()))
     {
         ReportError("could not create ribbon page");
@@ -246,7 +246,7 @@ wxObject* wxRibbonXmlHandler::Handle_gallery()
 {
     XRC_MAKE_INSTANCE (ribbonGallery, wxRibbonGallery)
 
-    if (!ribbonGallery->Create (wxDynamicCast(m_parent, wxWindow), GetID(),
+    if (!ribbonGallery->Create (dynamic_cast<wxWindow*>(m_parent), GetID(),
             GetPosition(), GetSize(), GetStyle()))
     {
         ReportError("could not create ribbon gallery");
@@ -279,7 +279,7 @@ wxObject* wxRibbonXmlHandler::Handle_panel()
 {
     XRC_MAKE_INSTANCE (ribbonPanel, wxRibbonPanel)
 
-    if (!ribbonPanel->Create (wxDynamicCast(m_parent, wxWindow), GetID(),
+    if (!ribbonPanel->Create (dynamic_cast<wxWindow*>(m_parent), GetID(),
             GetText ("label"), GetBitmap ("icon"), GetPosition(), GetSize(),
             GetStyle("style", wxRIBBON_PANEL_DEFAULT_STYLE)))
     {
@@ -301,7 +301,7 @@ wxObject* wxRibbonXmlHandler::Handle_bar()
 
     Handle_RibbonArtProvider (ribbonBar);
 
-    if ( !ribbonBar->Create(wxDynamicCast(m_parent, wxWindow),
+    if ( !ribbonBar->Create(dynamic_cast<wxWindow*>(m_parent),
                             GetID(),
                             GetPosition(),
                             GetSize(),

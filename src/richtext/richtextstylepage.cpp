@@ -124,7 +124,7 @@ bool wxRichTextStylePage::TransferDataFromWindow()
     wxRichTextStyleDefinition* def = wxRichTextFormattingDialog::GetDialogStyleDefinition(this);
     if (def)
     {
-        wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(def, wxRichTextParagraphStyleDefinition);
+        wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(def);
         if (paraDef)
             paraDef->SetNextStyle(m_nextStyle->GetValue());
 
@@ -147,11 +147,11 @@ bool wxRichTextStylePage::TransferDataToWindow()
         m_basedOn->Freeze();
         m_nextStyle->Freeze();
 
-        wxRichTextParagraphStyleDefinition* paraDef = wxDynamicCast(def, wxRichTextParagraphStyleDefinition);
-        wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
-        wxRichTextCharacterStyleDefinition* charDef = wxDynamicCast(def, wxRichTextCharacterStyleDefinition);
+        wxRichTextParagraphStyleDefinition* paraDef = dynamic_cast<wxRichTextParagraphStyleDefinition*>(def);
+        wxRichTextListStyleDefinition* listDef = dynamic_cast<wxRichTextListStyleDefinition*>(def);
+        wxRichTextCharacterStyleDefinition* charDef = dynamic_cast<wxRichTextCharacterStyleDefinition*>(def);
         wxRichTextStyleSheet* sheet = wxRichTextFormattingDialog::GetDialog(this)->GetStyleSheet();
-        wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
+        wxRichTextBoxStyleDefinition* boxDef = dynamic_cast<wxRichTextBoxStyleDefinition*>(def);
 
         m_styleName->SetValue(def->GetName());
 
@@ -164,7 +164,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetListStyleCount(); i++)
                     {
-                        wxRichTextListStyleDefinition* p = wxDynamicCast(sheet->GetListStyle(i), wxRichTextListStyleDefinition);
+                        wxRichTextListStyleDefinition* p = dynamic_cast<wxRichTextListStyleDefinition*>(sheet->GetListStyle(i));
                         if (p)
                             m_nextStyle->Append(p->GetName());
                     }
@@ -181,7 +181,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetParagraphStyleCount(); i++)
                     {
-                        wxRichTextParagraphStyleDefinition* p = wxDynamicCast(sheet->GetParagraphStyle(i), wxRichTextParagraphStyleDefinition);
+                        wxRichTextParagraphStyleDefinition* p = dynamic_cast<wxRichTextParagraphStyleDefinition*>(sheet->GetParagraphStyle(i));
                         if (p)
                             m_nextStyle->Append(p->GetName());
                     }
@@ -199,7 +199,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetListStyleCount(); i++)
                     {
-                        wxRichTextListStyleDefinition* p = wxDynamicCast(sheet->GetListStyle(i), wxRichTextListStyleDefinition);
+                        wxRichTextListStyleDefinition* p = dynamic_cast<wxRichTextListStyleDefinition*>(sheet->GetListStyle(i));
                         if (p)
                             m_basedOn->Append(p->GetName());
                     }
@@ -209,7 +209,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetParagraphStyleCount(); i++)
                     {
-                        wxRichTextParagraphStyleDefinition* p = wxDynamicCast(sheet->GetParagraphStyle(i), wxRichTextParagraphStyleDefinition);
+                        wxRichTextParagraphStyleDefinition* p = dynamic_cast<wxRichTextParagraphStyleDefinition*>(sheet->GetParagraphStyle(i));
                         if (p)
                             m_basedOn->Append(p->GetName());
                     }
@@ -219,7 +219,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetBoxStyleCount(); i++)
                     {
-                        wxRichTextBoxStyleDefinition* p = wxDynamicCast(sheet->GetBoxStyle(i), wxRichTextBoxStyleDefinition);
+                        wxRichTextBoxStyleDefinition* p = dynamic_cast<wxRichTextBoxStyleDefinition*>(sheet->GetBoxStyle(i));
                         if (p)
                             m_basedOn->Append(p->GetName());
                     }
@@ -229,7 +229,7 @@ bool wxRichTextStylePage::TransferDataToWindow()
                     size_t i;
                     for (i = 0; i < sheet->GetCharacterStyleCount(); i++)
                     {
-                        wxRichTextCharacterStyleDefinition* p = wxDynamicCast(sheet->GetCharacterStyle(i), wxRichTextCharacterStyleDefinition);
+                        wxRichTextCharacterStyleDefinition* p = dynamic_cast<wxRichTextCharacterStyleDefinition*>(sheet->GetCharacterStyle(i));
                         if (p)
                             m_basedOn->Append(p->GetName());
                     }
@@ -292,7 +292,7 @@ wxIcon wxRichTextStylePage::GetIconResource( const wxString& name )
 void wxRichTextStylePage::OnNextStyleUpdate( wxUpdateUIEvent& event )
 {
     wxRichTextStyleDefinition* def = wxRichTextFormattingDialog::GetDialogStyleDefinition(this);
-    event.Enable(wxDynamicCast(def, wxRichTextParagraphStyleDefinition) != nullptr);
+    event.Enable(dynamic_cast<wxRichTextParagraphStyleDefinition*>(def) != nullptr);
 }
 
 #endif // wxUSE_RICHTEXT

@@ -174,8 +174,8 @@ wxObject* wxSizerXmlHandler::Handle_sizeritem()
         m_isGBS = old_gbs;
 
         // and figure out what type it is
-        wxSizer *sizer = wxDynamicCast(item, wxSizer);
-        wxWindow *wnd = wxDynamicCast(item, wxWindow);
+        wxSizer *sizer = dynamic_cast<wxSizer*>(item);
+        wxWindow *wnd = dynamic_cast<wxWindow*>(item);
 
         if (sizer)
             sitem->AssignSizer(sizer);
@@ -250,7 +250,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
 #if wxUSE_STATBOX
     // wxStaticBoxSizer's child controls should be parented by the box itself,
     // not its parent.
-    wxStaticBoxSizer* const stsizer = wxDynamicCast(sizer, wxStaticBoxSizer);
+    wxStaticBoxSizer* const stsizer = dynamic_cast<wxStaticBoxSizer*>(sizer);
     if ( stsizer )
         parent = stsizer->GetStaticBox();
 #endif // wxUSE_STATBOX
@@ -262,7 +262,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
         sizer->ShowItems(false);
 
     // set growable rows and cols for sizers which support this
-    if ( wxFlexGridSizer *flexsizer = wxDynamicCast(sizer, wxFlexGridSizer) )
+    if ( wxFlexGridSizer *flexsizer = dynamic_cast<wxFlexGridSizer*>(sizer) )
     {
         SetFlexibleMode(flexsizer);
         SetGrowables(flexsizer, "growablerows", true);
@@ -281,7 +281,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
         m_node = parentNode;
         if (GetSize() == wxDefaultSize)
         {
-            if ( wxDynamicCast(m_parentAsWindow, wxScrolledWindow) != nullptr )
+            if ( dynamic_cast<wxScrolledWindow*>(m_parentAsWindow) != nullptr )
             {
                 sizer->FitInside(m_parentAsWindow);
             }
@@ -337,7 +337,7 @@ wxSizer*  wxSizerXmlHandler::Handle_wxStaticBoxSizer()
         }
 
         wxObject* const item = CreateResFromNode(n, m_parent, nullptr);
-        wxWindow* const wndLabel = wxDynamicCast(item, wxWindow);
+        wxWindow* const wndLabel = dynamic_cast<wxWindow*>(item);
         if ( !wndLabel )
         {
             ReportError(n, "windowlabel child must be a window");
@@ -623,7 +623,7 @@ int wxSizerXmlHandler::GetSizerFlags()
     // Find out the sizer orientation: it is the principal/major size direction
     // for the 1D sizers and undefined/invalid for the 2D ones.
     Orient orientSizer;
-    if ( wxBoxSizer* const boxSizer = wxDynamicCast(m_parentSizer, wxBoxSizer) )
+    if ( wxBoxSizer* const boxSizer = dynamic_cast<wxBoxSizer*>(m_parentSizer) )
     {
         orientSizer = boxSizer->GetOrientation() == wxHORIZONTAL
                         ? Orient_Horz
@@ -959,7 +959,7 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
         if (n)
         {
             wxObject *item = CreateResFromNode(n, m_parent, nullptr);
-            wxButton *button = wxDynamicCast(item, wxButton);
+            wxButton *button = dynamic_cast<wxButton*>(item);
 
             if (button)
                 m_parentSizer->AddButton(button);

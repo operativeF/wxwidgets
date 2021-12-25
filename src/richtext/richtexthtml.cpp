@@ -106,7 +106,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
         wxRichTextObjectList::compatibility_iterator node = buffer->GetChildren().GetFirst();
         while (node)
         {
-            wxRichTextParagraph* para = wxDynamicCast(node->GetData(), wxRichTextParagraph);
+            wxRichTextParagraph* para = dynamic_cast<wxRichTextParagraph*>(node->GetData());
             wxASSERT (para != nullptr);
 
             if (para)
@@ -119,7 +119,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
                 while (node2)
                 {
                     wxRichTextObject* obj = node2->GetData();
-                    wxRichTextPlainText* textObj = wxDynamicCast(obj, wxRichTextPlainText);
+                    wxRichTextPlainText* textObj = dynamic_cast<wxRichTextPlainText*>(obj);
                     if (textObj && !textObj->IsEmpty())
                     {
                         wxRichTextAttr charStyle(para->GetCombinedAttributes(obj->GetAttributes()));
@@ -138,7 +138,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
                         EndCharacterFormatting(currentCharStyle, charStyle, paraStyle, str);
                     }
 
-                    wxRichTextImage* image = wxDynamicCast(obj, wxRichTextImage);
+                    wxRichTextImage* image = dynamic_cast<wxRichTextImage*>(obj);
                     if( image && (!image->IsEmpty() || image->GetImageBlock().GetData()))
                         WriteImage( image, stream );
 

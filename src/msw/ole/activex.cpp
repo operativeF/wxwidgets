@@ -1175,7 +1175,7 @@ void wxActiveXContainer::OnPaint([[maybe_unused]] wxPaintEvent& event)
 
         ::RedrawWindow(m_oleObjectHWND, nullptr, nullptr, RDW_INTERNALPAINT);
         RECTL *prcBounds = (RECTL *) &posRect;
-        wxMSWDCImpl *msw = wxDynamicCast( dc.GetImpl() , wxMSWDCImpl );
+        auto msw = dynamic_cast<wxMSWDCImpl*>( dc.GetImpl() );
         m_viewObject->Draw(DVASPECT_CONTENT, -1, nullptr, nullptr, nullptr,
             (WXHDC)msw->GetHDC(), prcBounds, nullptr, nullptr, 0);
     }

@@ -331,7 +331,7 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                          [[maybe_unused]] wxPoint srcMask)
 {
     wxDCImpl *impl = source->GetImpl();
-    wxMSWDCImpl *msw_impl = wxDynamicCast(impl, wxMSWDCImpl);
+    wxMSWDCImpl *msw_impl = dynamic_cast<wxMSWDCImpl*>(impl);
     if (!msw_impl)
         return false;
 

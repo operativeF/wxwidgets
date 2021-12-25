@@ -651,7 +651,7 @@ bool wxSetFocusToChild(wxWindow *win, wxWindow **childLastFocused)
 #if defined(USE_RADIOBTN_NAV)
             // If a radiobutton is the first focusable child, search for the
             // selected radiobutton in the same group
-            wxRadioButton* btn = wxDynamicCast(child, wxRadioButton);
+            wxRadioButton* btn = dynamic_cast<wxRadioButton*>(child);
             if (btn)
             {
                 wxRadioButton* selected = wxGetSelectedButtonInGroup(btn);

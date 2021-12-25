@@ -113,7 +113,7 @@ wxComboEditWndProc(WXHWND hWnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam
 
     if ( ShouldForwardFromEditToCombo(message) )
     {
-        wxComboBox *combo = wxDynamicCast(win, wxComboBox);
+        wxComboBox *combo = dynamic_cast<wxComboBox*>(win);
         if ( !combo )
         {
             // we can get WM_KILLFOCUS while our parent is already half

@@ -167,13 +167,13 @@ void wxPGEditor::SetControlAppearance( wxPropertyGrid* pg,
     // Get old editor appearance
     wxTextCtrl* tc = nullptr;
     wxComboCtrl* cb = nullptr;
-    if ( wxDynamicCast(ctrl, wxTextCtrl) )
+    if ( dynamic_cast<wxTextCtrl*>(ctrl) )
     {
         tc = (wxTextCtrl*) ctrl;
     }
     else
     {
-        if ( wxDynamicCast(ctrl, wxComboCtrl) )
+        if ( dynamic_cast<wxComboCtrl*>(ctrl) )
         {
             cb = (wxComboCtrl*) ctrl;
             tc = cb->GetTextCtrl();
@@ -293,7 +293,7 @@ wxPGWindowList wxPGTextCtrlEditor::CreateControls( wxPropertyGrid* propGrid,
 
     int flags = 0;
     if ( property->HasFlag(wxPG_PROP_PASSWORD) &&
-         wxDynamicCast(property, wxStringProperty) )
+         dynamic_cast<wxStringProperty*>(property) )
         flags |= wxTE_PASSWORD;
 
     wxWindow* wnd = propGrid->GenerateEditorTextCtrl(pos,sz,text,nullptr,flags,
@@ -312,7 +312,7 @@ void wxPGTextCtrlEditor::DrawValue( wxDC& dc, wxPGProperty* property, const wxRe
         // Code below should no longer be needed, as the obfuscation
         // is now done in GetValueAsString.
         /*if ( property->HasFlag(wxPG_PROP_PASSWORD) &&
-             wxDynamicCast(property, wxStringProperty) )
+             dynamic_cast<wxStringProperty*>(property) )
         {
             size_t a = drawStr.length();
             drawStr.Empty();
@@ -325,7 +325,7 @@ void wxPGTextCtrlEditor::DrawValue( wxDC& dc, wxPGProperty* property, const wxRe
 
 void wxPGTextCtrlEditor::UpdateControl( wxPGProperty* property, wxWindow* ctrl ) const
 {
-    wxTextCtrl* tc = wxDynamicCast(ctrl, wxTextCtrl);
+    wxTextCtrl* tc = dynamic_cast<wxTextCtrl*>(ctrl);
     if (!tc) return;
 
     wxString s;
@@ -594,7 +594,7 @@ public:
         // only for wxBoolProperty.
         m_selProp = GetGrid()->GetSelection();
         wxASSERT(m_selProp);
-        wxBoolProperty* boolProp = wxDynamicCast(m_selProp, wxBoolProperty);
+        wxBoolProperty* boolProp = dynamic_cast<wxBoolProperty*>(m_selProp);
         if ( boolProp )
         {
             m_dclickProcessor = new wxPGDoubleClickProcessor(this, boolProp);
@@ -636,8 +636,7 @@ public:
 
     wxPropertyGrid* GetGrid() const
     {
-        wxPropertyGrid* pg = wxDynamicCast(GetParent(),
-                                           wxPropertyGrid);
+        auto pg = dynamic_cast<wxPropertyGrid*>(GetParent());
         wxASSERT(pg);
         return pg;
     }
@@ -960,7 +959,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
     int odcbFlags = extraStyle | wxBORDER_NONE | wxTE_PROCESS_ENTER;
 
     if ( property->HasFlag(wxPG_PROP_USE_DCC) &&
-         wxDynamicCast(property, wxBoolProperty) )
+         dynamic_cast<wxBoolProperty*>(property) )
         odcbFlags |= wxODCB_DCLICK_CYCLES;
 
     //
@@ -1044,7 +1043,7 @@ void wxPGChoiceEditor::UpdateControl( wxPGProperty* property, wxWindow* ctrl ) c
 {
     wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxASSERT( dynamic_cast<wxOwnerDrawnComboBox*>(cb));
     int ind = property->GetChoiceSelection();
     cb->SetSelection(ind);
 }
@@ -1060,7 +1059,7 @@ int wxPGChoiceEditor::InsertItem( wxWindow* ctrl, const wxString& label, int ind
 {
     wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxASSERT( dynamic_cast<wxOwnerDrawnComboBox*>(cb));
 
     if (index < 0)
         index = cb->GetCount();
@@ -1073,7 +1072,7 @@ void wxPGChoiceEditor::DeleteItem( wxWindow* ctrl, int index ) const
 {
     wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
-    wxASSERT( wxDynamicCast(cb, wxOwnerDrawnComboBox));
+    wxASSERT( dynamic_cast<wxOwnerDrawnComboBox*>(cb));
 
     cb->Delete(index);
 }
@@ -1081,7 +1080,7 @@ void wxPGChoiceEditor::DeleteItem( wxWindow* ctrl, int index ) const
 void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const std::vector<std::string>& labels) const
 {
     wxASSERT( ctrl );
-    wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
+    wxOwnerDrawnComboBox* cb = dynamic_cast<wxOwnerDrawnComboBox*>(ctrl);
     wxASSERT( cb );
 
     cb->Set(labels);
@@ -1580,7 +1579,7 @@ void wxSimpleCheckBox::SetValue( int value )
     wxCommandEvent evt(wxEVT_CHECKBOX,GetParent()->GetId());
 
     wxPropertyGrid* propGrid = (wxPropertyGrid*) GetParent();
-    wxASSERT( wxDynamicCast(propGrid, wxPropertyGrid) );
+    wxASSERT( dynamic_cast<wxPropertyGrid*>(propGrid) );
     propGrid->HandleCustomEditorEvent(evt);
 }
 
@@ -1749,7 +1748,7 @@ void wxPropertyGrid::CorrectEditorWidgetSizeX()
 #ifdef __WXMAC__
         if ( m_wndEditor )
 #else
-        if ( wxDynamicCast(m_wndEditor, wxTextCtrl) )
+        if ( dynamic_cast<wxTextCtrl*>(m_wndEditor) )
 #endif
             secWid += wxPG_TEXTCTRL_AND_BUTTON_SPACING;
     }
@@ -2061,11 +2060,11 @@ wxTextCtrl* wxPropertyGrid::GetEditorTextCtrl() const
     if ( !wnd )
         return nullptr;
 
-    wxTextCtrl* tc = wxDynamicCast(wnd, wxTextCtrl);
+    wxTextCtrl* tc = dynamic_cast<wxTextCtrl*>(wnd);
     if ( tc )
         return tc;
 
-    wxOwnerDrawnComboBox* cb = wxDynamicCast(wnd, wxOwnerDrawnComboBox);
+    wxOwnerDrawnComboBox* cb = dynamic_cast<wxOwnerDrawnComboBox*>(wnd);
     if ( cb )
     {
         return cb->GetTextCtrl();

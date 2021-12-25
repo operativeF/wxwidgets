@@ -928,7 +928,7 @@ wxSize wxSizer::ComputeFittingClientSize(wxWindow *window)
     wxSize size = GetMinClientSize(window);
     wxSize sizeMax;
 
-    wxTopLevelWindow *tlw = wxDynamicCast(window, wxTopLevelWindow);
+    wxTopLevelWindow *tlw = dynamic_cast<wxTopLevelWindow*>(window);
     if ( tlw )
     {
         // hack for small screen devices where TLWs are always full screen

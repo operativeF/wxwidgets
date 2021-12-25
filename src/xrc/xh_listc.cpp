@@ -111,7 +111,7 @@ void wxListCtrlXmlHandler::HandleCommonItemAttrs(wxListItem& item)
 
 void wxListCtrlXmlHandler::HandleListCol()
 {
-    wxListCtrl * const list = wxDynamicCast(m_parentAsWindow, wxListCtrl);
+    wxListCtrl * const list = dynamic_cast<wxListCtrl*>(m_parentAsWindow);
     wxCHECK_RET( list, "must have wxListCtrl parent" );
 
     if ( !list->HasFlag(wxLC_REPORT) )
@@ -133,7 +133,7 @@ void wxListCtrlXmlHandler::HandleListCol()
 
 void wxListCtrlXmlHandler::HandleListItem()
 {
-    wxListCtrl * const list = wxDynamicCast(m_parentAsWindow, wxListCtrl);
+    wxListCtrl * const list = dynamic_cast<wxListCtrl*>(m_parentAsWindow);
     wxCHECK_RET( list, "must have wxListCtrl parent" );
 
     wxListItem item;

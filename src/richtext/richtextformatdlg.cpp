@@ -422,7 +422,7 @@ bool wxRichTextFormattingDialogFactory::ShowHelp([[maybe_unused]] int page, wxRi
     wxRichTextDialogPage* window = nullptr;
     int sel = dialog->GetBookCtrl()->GetSelection();
     if (sel != -1)
-        window = wxDynamicCast(dialog->GetBookCtrl()->GetPage(sel), wxRichTextDialogPage);
+        window = dynamic_cast<wxRichTextDialogPage*>(dialog->GetBookCtrl()->GetPage(sel));
     if (window && window->GetHelpId() != -1)
     {
         if (window->GetUICustomization())
@@ -520,9 +520,9 @@ void wxRichTextFontPreviewCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
 wxRichTextFormattingDialog* wxRichTextFormattingDialog::GetDialog(wxWindow* win)
 {
     wxWindow* p = win->GetParent();
-    while (p && !wxDynamicCast(p, wxRichTextFormattingDialog))
+    while (p && !dynamic_cast<wxRichTextFormattingDialog*>(p))
         p = p->GetParent();
-    wxRichTextFormattingDialog* dialog = wxDynamicCast(p, wxRichTextFormattingDialog);
+    wxRichTextFormattingDialog* dialog = dynamic_cast<wxRichTextFormattingDialog*>(p);
     return dialog;
 }
 
@@ -718,10 +718,10 @@ void wxRichTextColourSwatchCtrl::OnMouseEvent(wxMouseEvent& event)
     if (event.LeftDown())
     {
         wxWindow* parent = GetParent();
-        while (parent != nullptr && !wxDynamicCast(parent, wxDialog) && !wxDynamicCast(parent, wxFrame))
+        while (parent != nullptr && !dynamic_cast<wxDialog*>(parent) && !dynamic_cast<wxFrame*>(parent))
             parent = parent->GetParent();
 
-        wxRichTextFormattingDialog* dlg = wxDynamicCast(parent, wxRichTextFormattingDialog);
+        wxRichTextFormattingDialog* dlg = dynamic_cast<wxRichTextFormattingDialog*>(parent);
         wxColourData data;
         if (dlg)
             data = wxRichTextFormattingDialog::GetColourData();

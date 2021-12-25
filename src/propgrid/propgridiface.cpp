@@ -654,7 +654,7 @@ bool wxPropertyGridInterface::SetPropertyMaxLength( wxPGPropArg id, int maxLen )
     if ( pg == p->GetGrid() && p == m_pState->GetSelection() )
     {
         wxWindow* wnd = pg->GetEditorControl();
-        wxTextCtrl* tc = wxDynamicCast(wnd, wxTextCtrl);
+        wxTextCtrl* tc = dynamic_cast<wxTextCtrl*>(wnd);
         wxCHECK_MSG(tc, false, "Text ctrl is expected here");
         tc->SetMaxLength(maxLen);
     }

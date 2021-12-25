@@ -983,7 +983,7 @@ public:
     void SetCurrentCategory( wxPGPropArg id )
     {
         wxPG_PROP_ARG_CALL_PROLOG()
-        wxPropertyCategory* pc = wxDynamicCast(p, wxPropertyCategory);
+        wxPropertyCategory* pc = dynamic_cast<wxPropertyCategory*>(p);
         wxASSERT(pc);
         m_pState->m_currentCategory = pc;
     }

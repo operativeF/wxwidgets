@@ -56,7 +56,7 @@ static wxGDIImage* ConvertImage( const wxGDIImage& bitmap )
 
     if( !isIcon )
     {
-        wxASSERT_MSG( wxDynamicCast(&bitmap, wxBitmap),
+        wxASSERT_MSG( dynamic_cast<const wxBitmap*>(&bitmap),
                       "not an icon and not a bitmap?" );
 
         const wxBitmap& bmp = (const wxBitmap&)bitmap;

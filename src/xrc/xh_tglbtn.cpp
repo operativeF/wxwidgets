@@ -53,7 +53,7 @@ wxObject *wxToggleButtonXmlHandler::DoCreateResource()
         DoCreateToggleButton(control);
     }
 
-    SetupWindow(wxDynamicCast(control, wxWindow));
+    SetupWindow(dynamic_cast<wxWindow*>(control));
 
     return control;
 }
@@ -68,7 +68,7 @@ bool wxToggleButtonXmlHandler::CanHandle(wxXmlNode *node)
 
 void wxToggleButtonXmlHandler::DoCreateToggleButton(wxObject *control)
 {
-    wxToggleButton *button = wxDynamicCast(control, wxToggleButton);
+    wxToggleButton *button = dynamic_cast<wxToggleButton*>(control);
 
     button->Create(m_parentAsWindow,
                    GetID(),
@@ -92,7 +92,7 @@ void wxToggleButtonXmlHandler::DoCreateToggleButton(wxObject *control)
 #ifdef wxHAVE_BITMAPS_IN_BUTTON
 void wxToggleButtonXmlHandler::DoCreateBitmapToggleButton(wxObject *control)
 {
-    wxBitmapToggleButton *button = wxDynamicCast(control, wxBitmapToggleButton);
+    wxBitmapToggleButton *button = dynamic_cast<wxBitmapToggleButton*>(control);
 
     button->Create(m_parentAsWindow,
                    GetID(),
