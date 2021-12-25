@@ -23,7 +23,6 @@ module;
 #include "wx/stdpaths.h"
 #include "wx/version.h"
 #include "wx/private/threadinfo.h"
-#include "wx/arrstr.h"
 
 #ifdef WX_WINDOWS
     #include "wx/dynlib.h"

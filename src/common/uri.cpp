@@ -11,7 +11,6 @@
 
 module;
 
-#include "wx/arrstr.h"
 #include "wx/crt.h"
 #include "wx/object.h"
 

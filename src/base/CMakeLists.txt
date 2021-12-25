@@ -30,7 +30,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/appbase.cpp
     ${BASE_SRC_DIR}/common/arcall.cpp
     ${BASE_SRC_DIR}/common/arcfind.cpp
-    ${BASE_SRC_DIR}/common/arrstr.cpp
     ${BASE_SRC_DIR}/common/config.cpp
     ${BASE_SRC_DIR}/common/datetime.cpp
     ${BASE_SRC_DIR}/common/datetimefmt.cpp
@@ -70,7 +69,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/threadinfo.cpp
     ${BASE_SRC_DIR}/common/timercmn.cpp
     ${BASE_SRC_DIR}/common/timerimpl.cpp
-    ${BASE_SRC_DIR}/common/translation.cpp
     ${BASE_SRC_DIR}/common/unichar.cpp
     ${BASE_SRC_DIR}/common/variant.cpp
     ${BASE_SRC_DIR}/common/wxcrt.cpp
@@ -105,6 +103,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/textfile.cpp
     ${BASE_SRC_DIR}/common/time.cpp
     ${BASE_SRC_DIR}/common/tokenzr.cpp
+    ${BASE_SRC_DIR}/common/translation.cpp
     ${BASE_SRC_DIR}/common/txtstrm.cpp
     ${BASE_SRC_DIR}/common/uri.cpp
     ${BASE_SRC_DIR}/common/wfstream.cpp
