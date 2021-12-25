@@ -12,7 +12,6 @@
 #include "wx/wxcrtvararg.h"
 
 #include "wx/xml/xml.h"
-#include "wx/filename.h"
 #include "wx/utils.h"
 #include "wx/hashset.h"
 #include "wx/mimetype.h"
@@ -20,6 +19,7 @@
 import WX.Cmn.FFile;
 import WX.Cmn.CommandLine;
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 import <vector>;
 

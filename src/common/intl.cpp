@@ -32,8 +32,6 @@
     #endif
 #endif
 
-#include "wx/file.h"
-#include "wx/filename.h"
 #include "wx/fontmap.h"
 
 #include "wx/apptrait.h"
@@ -48,6 +46,8 @@
 #endif
 
 import Utils.Strings;
+import WX.File.Filename;
+import WX.File.File;
 
 import <clocale>;
 import <string>;

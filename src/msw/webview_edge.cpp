@@ -13,7 +13,6 @@
 
 #include "wx/msw/private.h"
 
-#include "wx/filename.h"
 #include "wx/module.h"
 #include "wx/log.h"
 #include "wx/stdpaths.h"
@@ -32,6 +31,7 @@ using namespace Microsoft::WRL;
 #endif // !__VISUALC__
 
 import Utils.Strings;
+import WX.File.Filename;
 
 #define WX_ERROR2_CASE(error, wxerror) \
         case error: \

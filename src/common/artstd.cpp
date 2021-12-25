@@ -11,6 +11,7 @@
 #if wxUSE_ARTPROVIDER_STD
 
 #include "wx/artprov.h"
+#include "wx/bitmap.h"
 
 import WX.Image;
 

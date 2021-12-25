@@ -15,8 +15,6 @@
     #include <sys/socket.h>
 #endif
 
-#include "wx/file.h"
-#include "wx/filename.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"
 
@@ -31,6 +29,8 @@
 import WX.Cmn.FFile;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
+import WX.File.Filename;
+import WX.File.File;
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

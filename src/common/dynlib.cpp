@@ -19,7 +19,10 @@
 #include "wx/intl.h"
 #include "wx/utils.h"
 #include "wx/filefn.h"
-#include "wx/filename.h"        // for SplitPath()
+
+#include <fmt/core.h>
+
+import WX.File.Filename;
 
 import WX.Cmn.PlatInfo;
 

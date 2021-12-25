@@ -15,6 +15,8 @@
 
 #include "wx/helpbase.h"
 
+import WX.WinDef;
+
 import <filesystem>;
 import <string>;
 

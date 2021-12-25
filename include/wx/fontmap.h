@@ -17,8 +17,9 @@
 
 #if wxUSE_FONTMAP
 
-import WX.Base.FontEnc;
 #include "wx/translation.h"
+
+import WX.Base.FontEnc;
 
 #if wxUSE_GUI
     #include "wx/fontutil.h"    // for wxNativeEncodingInfo

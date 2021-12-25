@@ -10,7 +10,8 @@
 #define _WX_TESTS_TEMPFILE_H_
 
 #include "wx/filefn.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import <ostream>;
 

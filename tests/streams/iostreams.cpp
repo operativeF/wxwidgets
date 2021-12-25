@@ -10,8 +10,7 @@
 
 #if wxUSE_STREAMS
 
-#include "wx/filename.h"
-
+import WX.File.Filename;
 import WX.Cmn.WFStream;
 
 // --------------------------------------------------------------------------

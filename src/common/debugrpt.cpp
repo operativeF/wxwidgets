@@ -21,10 +21,9 @@ WX_CHECK_BUILD_OPTIONS("wxQA")
 #if wxUSE_FFILE
 import WX.Cmn.FFile;
 #elif wxUSE_FILE
-    #include "wx/file.h"
+import WX.File.File;
 #endif
 
-#include "wx/filename.h"
 #include "wx/dir.h"
 #include "wx/dynlib.h"
 
@@ -42,6 +41,8 @@ import WX.Cmn.FFile;
     import WX.Cmn.ZipStream;
     import WX.Cmn.WFStream;
 #endif // wxUSE_ZIPSTREAM
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // XmlStackWalker: stack walker specialization which dumps stack in XML

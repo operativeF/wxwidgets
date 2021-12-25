@@ -20,7 +20,6 @@
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/ole/comimpl.h"
 
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
 
 #include <roapi.h>
@@ -32,6 +31,7 @@
 #include <boost/nowide/convert.hpp>
 
 import Utils.Strings;
+import WX.File.Filename;
 
 import <string>;
 

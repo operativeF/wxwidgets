@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-#include "wx/filename.h"
 #include "wx/icon.h"
 #include "wx/animate.h"
 #include "wx/dynlib.h"
@@ -20,6 +19,7 @@
 
 import WX.Image;
 import WX.Cmn.MemStream;
+import WX.File.Filename;
 
 constexpr int GARBAGE_DATA_SIZE   = 1000000; // in bytes; ~ 1MB
 

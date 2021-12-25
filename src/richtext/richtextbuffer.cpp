@@ -18,7 +18,6 @@
 #include "wx/dataobj.h"
 #include "wx/module.h"
 
-#include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/hashmap.h"
 
@@ -38,6 +37,7 @@ import WX.Cmn.MemStream;
 
 import Utils.Position;
 import WX.Utils.Settings;
+import WX.File.Filename;
 
 import <cmath>;
 

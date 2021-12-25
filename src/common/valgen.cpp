@@ -34,11 +34,12 @@
 #if wxUSE_TOGGLEBTN
     #include "wx/tglbtn.h"
 #endif
-#include "wx/filename.h"
 
 #include "wx/valgen.h"
 
 #include <fmt/core.h>
+
+import WX.File.Filename;
 
 import <charconv>;
 

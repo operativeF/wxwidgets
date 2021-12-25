@@ -15,7 +15,6 @@
 #include "wx/buffer.h"
 #include "wx/datetime.h"
 
-#include "wx/filename.h"
 #include "wx/thread.h"
 
 #ifdef __UNIX__
@@ -24,6 +23,7 @@
 #endif
 
 import WX.File.Flags;
+import WX.File.Filename;
 
 /////////////////////////////////////////////////////////////////////////////
 // constants

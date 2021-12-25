@@ -16,9 +16,9 @@
 #if wxUSE_WEBREQUEST
 
 #include "wx/webrequest.h"
-#include "wx/filename.h"
 
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 // This test uses httpbin service and by default uses the mirror at the
 // location below, which seems to be more reliable than the main site at

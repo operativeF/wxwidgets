@@ -18,7 +18,6 @@
 #include "wx/log.h"
 #include "wx/module.h"
 #include "wx/crt.h"
-#include "wx/file.h"
 #include "wx/iconloc.h"
 #include "wx/confbase.h"
 
@@ -32,6 +31,8 @@
 #endif
 
 #include <fmt/core.h>
+
+import WX.File.File;
 
 // ----------------------------------------------------------------------------
 // wxMimeTypeCommands

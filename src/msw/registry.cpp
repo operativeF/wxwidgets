@@ -20,7 +20,6 @@
 #include "wx/crt.h"
 #include "wx/utils.h"
 #include "wx/dynlib.h"
-#include "wx/file.h"
 
 #include <fmt/core.h>
 
@@ -34,6 +33,7 @@
 
 import WX.WinDef;
 import WX.Cmn.WFStream;
+import WX.File.File;
 
 import <string>;
 

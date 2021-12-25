@@ -13,11 +13,10 @@
 
 #if wxUSE_SVG
 
-#include "wx/filename.h"
 #include "wx/dc.h"
 
 import WX.Cfg.Flags;
-
+import WX.File.Filename;
 import Utils.Geometry;
 
 #include <memory>

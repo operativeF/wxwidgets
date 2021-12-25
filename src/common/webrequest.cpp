@@ -12,7 +12,6 @@
 #include "wx/webrequest.h"
 #include "wx/module.h"
 #include "wx/filefn.h"
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
 
 #include "wx/app.h"
@@ -36,6 +35,7 @@ import WX.Cmn.MemStream;
 import WX.Cmn.Uri;
 
 import WX.File.Flags;
+import WX.File.Filename;
 
 extern const char wxWebSessionBackendWinHTTP[] = "WinHTTP";
 extern const char wxWebSessionBackendURLSession[] = "URLSession";

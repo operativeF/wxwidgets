@@ -19,8 +19,9 @@
 #endif
 
 #include "wx/bitmap.h"
-#include "wx/filename.h"
 #include "wx/notebook.h"
+
+import WX.File.Filename;
 
 import <ctime>;
 

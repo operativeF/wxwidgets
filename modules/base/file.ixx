@@ -9,16 +9,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_FILEH__
-#define _WX_FILEH__
-
-#if wxUSE_FILE
+module;
 
 #include  "wx/string.h"
 #include  "wx/filefn.h"
 
+export module WX.File.File;
+
 import WX.Cmn.ConvAuto;
 import WX.File.Flags;
+
+#if wxUSE_FILE
+
+export
+{
 
 // ----------------------------------------------------------------------------
 // class wxFile: raw file IO
@@ -177,6 +181,6 @@ private:
   wxFile    m_file;     // the temporary file
 };
 
-#endif // wxUSE_FILE
+} // export
 
-#endif // _WX_FILEH__
+#endif // wxUSE_FILE

@@ -16,6 +16,7 @@
 #include "wx/utils.h"
 
 import WX.Utils.Cast;
+import WX.File.File;
 
 import Utils.Strings;
 
@@ -27,7 +28,6 @@ import <vector>;
 #if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE))
 
 #include "wx/apptrait.h"
-#include "wx/file.h"
 
 
 // ============================================================================

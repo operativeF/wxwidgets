@@ -60,6 +60,8 @@
                  ] between directory and file
  */
 
+module;
+
 #ifdef WX_WINDOWS
     #include "wx/msw/private.h"
 #endif
@@ -68,7 +70,6 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/crt.h"
-#include "wx/filename.h"
 #include "wx/private/filename.h"
 #include "wx/config.h"          // for wxExpandEnvVars
 #include "wx/dynlib.h"
@@ -97,10 +98,13 @@
 #include <unistd.h>
 #endif
 
+#include <cassert>
+
+module WX.File.Filename;
+
 import Utils.Strings;
 import WX.Cmn.Uri;
 
-#include <cassert>
 #if defined(wxHAS_NATIVE_READLINK)
     import <vector>;
 #endif
@@ -2300,7 +2304,7 @@ wxPathFormat wxFileName::GetFormat( wxPathFormat format )
     return format;
 }
 
-#ifdef wxHAS_FILESYSTEM_VOLUMES
+#ifdef WX_WINDOWS
 
 /* static */
 std::string wxFileName::GetVolumeString(char drive, unsigned int flags)
@@ -2315,7 +2319,7 @@ std::string wxFileName::GetVolumeString(char drive, unsigned int flags)
     return vol;
 }
 
-#endif // wxHAS_FILESYSTEM_VOLUMES
+#endif // wxHAS_FILESYSTEM_VOLUMES (WX_WINDOWS)
 
 // ----------------------------------------------------------------------------
 // path splitting function

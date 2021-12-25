@@ -65,7 +65,6 @@
 #include "wx/vector.h"
 
 #if wxUSE_GUI
-    #include "wx/filename.h"
     #include "wx/filesys.h"
     #include "wx/notebook.h"
     #include "wx/statusbr.h"
@@ -96,6 +95,7 @@
 
 import WX.Cmn.TextStream;
 import WX.Cmn.Uri;
+import WX.File.Filename;
 
 import WX.Utils.VersionInfo;
 

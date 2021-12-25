@@ -13,7 +13,6 @@
     #include "wx/utils.h"
 #endif // WX_PRECOMP
 
-#include "wx/filename.h"
 #include "wx/filefn.h"
 #include "wx/stdpaths.h"
 #include "wx/scopeguard.h"
@@ -31,6 +30,8 @@
 
 #include "testfile.h"
 #include "testdate.h"
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // test data

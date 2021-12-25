@@ -18,8 +18,6 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/crt.h"
-#include "wx/file.h"
-#include "wx/filename.h"
 #include "wx/dir.h"
 
 #if defined(__WXMAC__)
@@ -53,6 +51,8 @@
 
 import Utils.Chars;
 import Utils.Strings;
+import WX.File.Filename;
+import WX.File.File;
 
 import <algorithm>;
 import <array>;

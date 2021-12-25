@@ -299,7 +299,8 @@ TEST_CASE("File scheme")
 #if TEST_URL
 
 #include "wx/url.h"
-#include "wx/file.h"
+
+import WX.File.File;
 
 TEST_CASE("URL Compat")
 {

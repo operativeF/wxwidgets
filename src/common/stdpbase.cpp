@@ -10,8 +10,9 @@
 
 #include "wx/app.h"
 #include "wx/apptrait.h"
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // module globals

@@ -21,7 +21,6 @@
 
 #include "wx/apptrait.h"
 #include "wx/datetime.h"
-#include "wx/file.h"
 #include "wx/msgout.h"
 #include "wx/thread.h"
 #include "wx/private/threadinfo.h"
@@ -31,6 +30,7 @@
 
 import WX.Utils.Cast;
 import WX.Cmn.TextFile;
+import WX.File.File;
 
 import <algorithm>;
 import <iostream>;

@@ -8,17 +8,19 @@
 
 module;
 
-#include "wx/filename.h"
+#include "wx/datetime.h"
+#include "wx/filefn.h"
 
 export module WX.Cmn.ArchStream;
 
 import WX.Cmn.Stream;
+import WX.File.Filename;
 
 #if defined WX_TEST_ARCHIVE_ITERATOR
 import <iterator>;
-import <utility>;
 #endif
 
+import <string>;
 import <utility>;
 
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS

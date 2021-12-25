@@ -20,11 +20,10 @@
 #include "wx/valtext.h"
 #include "wx/button.h"
 
-#include "wx/filename.h"
 #ifdef wxUSE_FFILE
 import WX.Cmn.FFile;
 #else
-    #include "wx/file.h"
+import WX.File.File;
 #endif
 #include "wx/mimetype.h"
 
@@ -36,6 +35,7 @@ import WX.Cmn.FFile;
 #endif // __WXMSW__
 
 import WX.Core.Sizer;
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // wxDumpPreviewDlg: simple class for showing ASCII preview of dump files

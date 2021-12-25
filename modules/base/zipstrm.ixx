@@ -8,11 +8,10 @@
 
 module;
 
-#include "wx/filename.h"
-
 export module WX.Cmn.ZipStream;
 
 import WX.Cmn.ArchStream;
+import WX.File.Filename;
 
 import <cstdint>;
 

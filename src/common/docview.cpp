@@ -30,10 +30,7 @@
 #endif
 
 #include "wx/confbase.h"
-#include "wx/filename.h"
-#include "wx/file.h"
 #include "wx/cmdproc.h"
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
 #include "wx/scopedarray.h"
 
@@ -44,6 +41,8 @@ import WX.Utils.Cast;
 
 import Utils.Strings;
 import WX.Cmn.FFile;
+import WX.File.Filename;
+import WX.File.File;
 
 import <fstream>;
 import <filesystem>;

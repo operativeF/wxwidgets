@@ -13,8 +13,8 @@
 #include "wx/utils.h"
 
 #include "wx/metafile.h"
-#include "wx/filename.h"
 
+import WX.File.Filename;
 import WX.WinDef;
 
 import <cstdio>;

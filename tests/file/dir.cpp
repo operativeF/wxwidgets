@@ -11,8 +11,9 @@
 #include "testprec.h"
 
 #include "wx/dir.h"
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
+
+import WX.File.Filename;
 
 #define DIRTEST_FOLDER      wxString("dirTest_folder")
 #define SEP                 wxFileName::GetPathSeparator()

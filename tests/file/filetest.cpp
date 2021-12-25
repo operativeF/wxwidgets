@@ -9,9 +9,9 @@
 
 #include "doctest.h"
 
-#include "wx/file.h"
-
 #include "testfile.h"
+
+import WX.File.File;
 
 // ----------------------------------------------------------------------------
 // test class

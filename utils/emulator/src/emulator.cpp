@@ -10,8 +10,6 @@
 
 #include "wx/confbase.h"
 #include "wx/fileconf.h"
-#include "wx/file.h"
-#include "wx/filename.h"
 
 #ifdef __WXX11__
 #include "wx/x11/reparent.h"
@@ -21,6 +19,8 @@
 
 import WX.Image;
 import WX.Cmn.CommandLine;
+import WX.File.Filename;
+import WX.File.File;
 
 // ----------------------------------------------------------------------------
 // resources

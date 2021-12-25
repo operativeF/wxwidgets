@@ -16,11 +16,6 @@
 #include "wx/richtext/richtexthtml.h"
 #include "wx/richtext/richtextstyles.h"
 
-#ifndef WX_PRECOMP
-#endif
-
-#include "wx/filename.h"
-
 #if wxUSE_FILESYSTEM
 #include "wx/filesys.h"
 #include "wx/fs_mem.h"
@@ -28,6 +23,8 @@
 
 import WX.Cmn.TextStream;
 import WX.Cmn.WFStream;
+
+import WX.File.Filename;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextHTMLHandler, wxRichTextFileHandler);
 

@@ -13,11 +13,12 @@
 
 #include "wx/menu.h"
 #include "wx/confbase.h"
-#include "wx/filename.h"
 
 #include <boost/nowide/convert.hpp>
 #include <fmt/core.h>
 #include <fmt/compile.h>
+
+import WX.File.Filename;
 
 import Utils.Strings;
 

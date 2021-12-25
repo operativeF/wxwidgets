@@ -20,7 +20,7 @@
 
 #if wxUSE_TEST_GC_DRAWING
 
-#include "wx/filename.h"
+import WX.File.Filename;
 
 class wxGraphicsContext;
 

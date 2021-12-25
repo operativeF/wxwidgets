@@ -9,7 +9,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_INTL
+module;
 
 #include "wx/string.h"
 #include "wx/intl.h"
@@ -18,8 +18,6 @@
 #include "wx/hashmap.h"
 #include "wx/module.h"
 #include "wx/dir.h"
-#include "wx/file.h"
-#include "wx/filename.h"
 #include "wx/fontmap.h"
 #include "wx/scopedptr.h"
 #include "wx/stdpaths.h"
@@ -42,14 +40,21 @@
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
+#include <fmt/core.h>
+
+module WX.Cmn.Translation;
 
 import WX.Utils.Cast;
 import Utils.Strings;
+import WX.File.Filename;
+import WX.File.File;
 
 import <algorithm>;
 import <span>;
 import <string_view>;
 import <vector>;
+
+#if wxUSE_INTL
 
 // ----------------------------------------------------------------------------
 // constants

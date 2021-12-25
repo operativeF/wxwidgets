@@ -19,13 +19,14 @@
 #if wxUSE_FSWATCHER
 
 #include "wx/evtloop.h"
-#include "wx/filename.h"
 #include "wx/filefn.h"
 #include "wx/fswatcher.h"
 
 #include "wx/stdpaths.h"
 
 #include "testfile.h"
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // local functions

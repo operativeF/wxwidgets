@@ -10,8 +10,9 @@
 
 #if wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
 
-#include "wx/filename.h"
 #include "wx/filepicker.h"
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // wxGenericFileButton

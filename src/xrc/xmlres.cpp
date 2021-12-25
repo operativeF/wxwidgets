@@ -20,7 +20,6 @@
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
 #include "wx/filesys.h"
-#include "wx/filename.h"
 #include "wx/fontenum.h"
 #include "wx/fontmap.h"
 #include "wx/artprov.h"
@@ -38,6 +37,7 @@ import WX.Utils.Cast;
 import WX.Utils.Settings;
 import WX.Cmn.PlatInfo;
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 import <clocale>;
 import <vector>;

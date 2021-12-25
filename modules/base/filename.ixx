@@ -8,16 +8,22 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef   _WX_FILENAME_H_
-#define   _WX_FILENAME_H_
+module;
 
 #include "wx/filefn.h"
 #include "wx/datetime.h"
 #include "wx/intl.h"
 #include "wx/longlong.h"
-#include "wx/file.h"
+#include "wx/translation.h"
+
+export module WX.File.Filename;
+
+import WX.File.File;
 
 import <vector>;
+
+export
+{
 
 #if wxUSE_FILE
 class wxFile;
@@ -25,12 +31,6 @@ class wxFile;
 
 #if wxUSE_FFILE
 class wxFFile;
-#endif
-
-// this symbol is defined for the platforms where file systems use volumes in
-// paths
-#if defined(WX_WINDOWS)
-    #define wxHAS_FILESYSTEM_VOLUMES
 #endif
 
 // ----------------------------------------------------------------------------
@@ -563,10 +563,10 @@ public:
         // strip the file extension: "foo.bar" => "foo" (but ".baz" => ".baz")
     static std::string StripExtension(const std::string& fullpath);
 
-#ifdef wxHAS_FILESYSTEM_VOLUMES
+#ifdef WX_WINDOWS
         // return the string representing a file system volume, or drive
     static std::string GetVolumeString(char drive, unsigned int flags = wxPATH_GET_SEPARATOR);
-#endif // wxHAS_FILESYSTEM_VOLUMES
+#endif // wxHAS_FILESYSTEM_VOLUMES (WX_WINDOWS)
 
     // File size
 
@@ -624,5 +624,4 @@ private:
     bool            m_dontFollowLinks;
 };
 
-#endif // _WX_FILENAME_H_
-
+} // export

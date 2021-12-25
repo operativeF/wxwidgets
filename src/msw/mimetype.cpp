@@ -21,7 +21,6 @@
     #include "wx/msgdlg.h"
 #endif
 
-#include "wx/file.h"
 #include "wx/iconloc.h"
 #include "wx/confbase.h"
 #include "wx/dynlib.h"
@@ -40,6 +39,7 @@
 #include <fmt/core.h>
 
 import WX.WinDef;
+import WX.File.File;
 
 import <cctype>;
 import <string>;

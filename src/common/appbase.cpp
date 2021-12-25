@@ -18,7 +18,6 @@
 #include "wx/apptrait.h"
 #include "wx/confbase.h"
 #include "wx/evtloop.h"
-#include "wx/filename.h"
 #include "wx/msgout.h"
 
 #include "wx/thread.h"
@@ -34,6 +33,7 @@
 import Utils.Strings;
 import WX.Cmn.SysOpt;
 import WX.Cmn.CommandLine;
+import WX.File.Filename;
 
 import <clocale>;
 import <ranges>;

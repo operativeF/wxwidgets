@@ -18,7 +18,6 @@
 #include "wx/choicdlg.h"
 #include "wx/log.h"
 
-#include "wx/filename.h"
 #include "wx/generic/helpext.h"
 
 #include <sys/stat.h>
@@ -30,6 +29,7 @@
 #include <boost/nowide/convert.hpp>
 
 import WX.Cmn.TextFile;
+import WX.File.Filename;
 
 import <string>;
 import <vector>;

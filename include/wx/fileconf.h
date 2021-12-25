@@ -15,7 +15,8 @@
 #if wxUSE_CONFIG
 
 #include "wx/confbase.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import WX.Cmn.TextBuffer;
 import WX.Cmn.TextFile;

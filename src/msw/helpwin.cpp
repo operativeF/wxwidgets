@@ -11,12 +11,13 @@
 #if wxUSE_HELP
 
 #include "wx/app.h"
-#include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
 #ifdef __WXMSW__
     #include "wx/msw/private.h"
 #endif
+
+import WX.File.Filename;
 
 import WX.WinDef;
     

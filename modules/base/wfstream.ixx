@@ -10,14 +10,15 @@
 
 module;
 
+#include "wx/filefn.h"
 #include "wx/object.h"
 #include "wx/string.h"
-#include "wx/file.h"
 
 export module WX.Cmn.WFStream;
 
 import WX.Cmn.Stream;
 import WX.Cmn.FFile;
+import WX.File.File;
 
 import WX.File.Flags;
 

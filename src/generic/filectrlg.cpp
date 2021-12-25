@@ -16,7 +16,6 @@
 #include "wx/msgdlg.h"
 #include "wx/log.h"
 #include "wx/filedlg.h"
-#include "wx/file.h"        // for wxS_IXXX constants only
 #include "wx/generic/dirctrlg.h" // for wxFileIconsTable
 #include "wx/dir.h"
 #include "wx/imaglist.h"
@@ -27,6 +26,7 @@
 import WX.Cmn.ClntData;
 
 import WX.Core.Sizer;
+import WX.File.File;
 
 import WX.Utils.Settings;
 import Utils.Strings;

@@ -16,10 +16,11 @@
 
 #include "wx/utils.h"
 #include "wx/dynlib.h"
-#include "wx/filename.h"
 
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/cotaskmemptr.h"
+
+import WX.File.Filename;
 
 import WX.WinDef;
 

@@ -35,7 +35,6 @@
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 #include "wx/paper.h"
-#include "wx/filename.h"
 #include "wx/imaglist.h"
 
 #ifndef __WXUNIVERSAL__
@@ -52,6 +51,7 @@
 import Utils.Strings;
 import WX.Core.Cmndata;
 import WX.Core.Sizer;
+import WX.File.Filename;
 
 import <array>;
 import <string>;

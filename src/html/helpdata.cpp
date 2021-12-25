@@ -19,7 +19,8 @@
 #include "wx/html/htmlpars.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlfilt.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import WX.Cmn.EncConv;
 import WX.Cmn.WFStream;

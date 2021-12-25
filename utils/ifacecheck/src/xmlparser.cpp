@@ -18,11 +18,11 @@
 
 #include "wx/xml/xml.h"
 #include "wx/hashmap.h"
-#include "wx/filename.h"
 #include "xmlparser.h"
 #include <errno.h>
 
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 WX_DEFINE_OBJARRAY(wxTypeArray)
 WX_DEFINE_OBJARRAY(wxArgumentTypeArray)

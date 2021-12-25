@@ -29,6 +29,8 @@
     using wxFSWatchEntry = wxFSWatchEntryPolling;
 #endif
 
+#include "wx/filefn.h"
+
 class wxFSWatcherImpl
 {
 public:

@@ -10,14 +10,14 @@
 
 #include "wx/log.h"
 
-#include "wx/filename.h"
-
 #if wxUSE_HELP && wxUSE_MS_HTML_HELP \
     && wxUSE_WXHTML_HELP && !defined(__WXUNIVERSAL__)
 
 #include "wx/msw/helpchm.h"
 #include "wx/html/helpctrl.h"
 #include "wx/msw/helpbest.h"
+
+import WX.File.Filename;
 
 bool wxBestHelpController::Initialize( const std::string& filename )
 {

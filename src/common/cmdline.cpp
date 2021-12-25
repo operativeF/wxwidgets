@@ -16,7 +16,6 @@ module;
 
 #include "wx/datetime.h"
 #include "wx/msgout.h"
-#include "wx/filename.h"
 #include "wx/apptrait.h"
 #include "wx/scopeguard.h"
 
@@ -25,6 +24,7 @@ module;
 module WX.Cmn.CommandLine;
 
 import Utils.Chars;
+import WX.File.Filename;
 
 import <charconv>;
 import <clocale>;             // for LC_ALL

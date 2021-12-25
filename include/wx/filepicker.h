@@ -14,7 +14,8 @@
 #if wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
 
 #include "wx/pickerbase.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 #include <memory>
 import <string>;

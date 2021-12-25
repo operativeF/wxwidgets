@@ -38,11 +38,9 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/dynlib.cpp
     ${BASE_SRC_DIR}/common/dynload.cpp
     ${BASE_SRC_DIR}/common/evtloopcmn.cpp
-    ${BASE_SRC_DIR}/common/file.cpp
     ${BASE_SRC_DIR}/common/fileback.cpp
     ${BASE_SRC_DIR}/common/fileconf.cpp
     ${BASE_SRC_DIR}/common/filefn.cpp
-    ${BASE_SRC_DIR}/common/filename.cpp
     ${BASE_SRC_DIR}/common/filesys.cpp
     ${BASE_SRC_DIR}/common/filtall.cpp
     ${BASE_SRC_DIR}/common/filtfind.cpp
@@ -96,6 +94,8 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/datstrm.cpp
     ${BASE_SRC_DIR}/common/encconv.cpp
     ${BASE_SRC_DIR}/common/ffile.cpp
+    ${BASE_SRC_DIR}/common/file.cpp
+    ${BASE_SRC_DIR}/common/filename.cpp
     ${BASE_SRC_DIR}/common/fs_arc.cpp
     ${BASE_SRC_DIR}/common/fs_filter.cpp
     ${BASE_SRC_DIR}/common/mstream.cpp
@@ -141,7 +141,9 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/datstrm.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/encconv.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/ffile.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/file.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/filename.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
@@ -158,6 +160,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/textbuf.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/textfile.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/time.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/translation.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/txtstrm.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/uri.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx

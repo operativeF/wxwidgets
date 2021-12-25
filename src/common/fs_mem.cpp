@@ -8,6 +8,7 @@
 
 #if wxUSE_FILESYSTEM && wxUSE_STREAMS
 
+#include "wx/filefn.h"
 #include "wx/fs_mem.h"
 #include "wx/intl.h"
 #include "wx/log.h"

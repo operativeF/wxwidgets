@@ -10,15 +10,16 @@
 
 module;
 
+#include "wx/filefn.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
-#include "wx/filename.h"
 
 module WX.Cmn.FFile;
 
 import WX.Utils.Cast;
 import WX.File.Flags;
+import WX.File.Filename;
 
 #if wxUSE_FFILE
 

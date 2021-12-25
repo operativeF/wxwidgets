@@ -19,7 +19,6 @@
 #include "wx/log.h"
 
 #include "wx/dynlib.h"
-#include "wx/filename.h"
 
 #include "wx/scopeguard.h"
 #include "wx/modalhook.h"
@@ -28,6 +27,7 @@
 #include <memory>
 
 import WX.WinDef;
+import WX.File.Filename;
 
 import Utils.Strings;
 import Utils.Geometry;

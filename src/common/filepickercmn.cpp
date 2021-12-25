@@ -11,8 +11,9 @@
 #if wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
 
 #include "wx/filepicker.h"
-#include "wx/filename.h"
 #include "wx/textctrl.h"
+
+import WX.File.Filename;
 
 // ============================================================================
 // implementation

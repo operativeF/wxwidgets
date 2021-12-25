@@ -15,8 +15,9 @@
 #include "wx/log.h"
 #include "wx/event.h"
 #include "wx/evtloop.h"
-#include "wx/filename.h"
 #include "wx/hashmap.h"
+
+import WX.File.Filename;
 
 import <vector>;
 

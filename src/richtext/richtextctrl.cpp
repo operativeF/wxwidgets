@@ -15,7 +15,6 @@
 
 #include "wx/menu.h"
 #include "wx/timer.h"
-#include "wx/filename.h"
 #include "wx/dcbuffer.h"
 #include "wx/fontenum.h"
 #include "wx/accel.h"
@@ -38,6 +37,7 @@ import WX.Utils.Settings;
 import WX.Utils.Cast;
 import WX.Cmn.TextFile;
 import WX.Cmn.FFile;
+import WX.File.Filename;
 
 wxDEFINE_EVENT( wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );
 wxDEFINE_EVENT( wxEVT_RICHTEXT_MIDDLE_CLICK, wxRichTextEvent );

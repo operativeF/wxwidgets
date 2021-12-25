@@ -13,7 +13,8 @@
 #include "wx/msw/private.h"
 #include "wx/dynlib.h"
 #include "wx/msw/debughlp.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import WX.WinDef;
 

@@ -10,7 +10,6 @@
 
 #if wxUSE_HELP && wxUSE_MS_HTML_HELP
 
-#include "wx/filename.h"
 #include "wx/msw/helpchm.h"
 
 #include "wx/dynload.h"
@@ -25,6 +24,7 @@
 #include <boost/nowide/stackstring.hpp>
 
 import WX.Utils.Cast;
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // utility functions to manage the loading/unloading

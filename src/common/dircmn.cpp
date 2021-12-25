@@ -12,7 +12,8 @@
 #include "wx/intl.h"
 #include "wx/filefn.h"
 #include "wx/dir.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import <string>;
 

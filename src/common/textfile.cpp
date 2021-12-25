@@ -18,12 +18,13 @@ module;
 
 #include "wx/string.h"
 #include "wx/intl.h"
-#include "wx/file.h"
 #include "wx/log.h"
-#include "wx/filename.h"
 #include "wx/buffer.h"
 
 module WX.Cmn.TextFile;
+
+import WX.File.Filename;
+import WX.File.File;
 
 #if wxUSE_TEXTFILE
 

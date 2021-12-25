@@ -8,10 +8,10 @@
 
 #include "testprec.h"
 
-#include "wx/filename.h"
 #include "bstream.h"
 
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 #if wxUSE_STREAMS && wxUSE_FILE
 

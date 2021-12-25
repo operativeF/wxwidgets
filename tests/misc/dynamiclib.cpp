@@ -13,9 +13,10 @@
 #include "wx/dynlib.h"
 
 #ifdef __UNIX__
-    #include "wx/filename.h"
     #include "wx/log.h"
 #endif
+
+import WX.File.Filename;
 
 // ----------------------------------------------------------------------------
 // test class

@@ -12,7 +12,6 @@
 
 #include "wx/richtext/richtextstyles.h"
 
-#include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"
@@ -22,6 +21,7 @@
 import WX.Utils.Settings;
 import WX.Core.Sizer;
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 import WX.Cfg.Flags;
 

@@ -10,10 +10,11 @@
 #ifndef WX_MSW_PRIVATE_FSWATCHER_H_
 #define WX_MSW_PRIVATE_FSWATCHER_H_
 
-#include "wx/filename.h"
 #include "wx/msw/private.h"
 
 #include <boost/nowide/convert.hpp>
+
+import WX.File.Filename;
 
 import WX.WinDef;
 

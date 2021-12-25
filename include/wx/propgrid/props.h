@@ -19,7 +19,6 @@ class wxPGArrayEditorDialog;
 
 #include "wx/propgrid/property.h"
 
-#include "wx/filename.h"
 #include "wx/dialog.h"
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
@@ -31,6 +30,7 @@ class wxPGArrayEditorDialog;
     import WX.Utils.Cast;
 #endif
 
+import WX.File.Filename;
 
 enum
 {

@@ -13,7 +13,8 @@ module;
 #include "wx/intl.h"
 #include "wx/utils.h"
 #include "wx/xpmdecod.h"
-#include "wx/filename.h"
+
+#include <fmt/core.h>
 
 export module WX.Image.XPM;
 
@@ -23,6 +24,7 @@ import WX.Image.Base;
 import Utils.Chars;
 import Utils.Strings;
 import WX.Cmn.WFStream;
+import WX.File.Filename;
 
 #if wxUSE_XPM
 

@@ -24,7 +24,6 @@
 
 #if wxUSE_LOGGUI || wxUSE_LOGWINDOW
 
-#include "wx/file.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 #include "wx/statline.h"
@@ -47,6 +46,7 @@
 import WX.Cmn.Time;
 import WX.Cmn.TextFile;
 import WX.Core.Sizer;
+import WX.File.File;
 
 import WX.Utils.Settings;
 

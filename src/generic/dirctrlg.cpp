@@ -39,7 +39,6 @@
 #include "wx/gdicmn.h"
 #include "wx/module.h"
 #include "wx/filedlg.h"
-#include "wx/filename.h"
 #include "wx/filefn.h"
 #include "wx/imaglist.h"
 #include "wx/dir.h"
@@ -52,6 +51,7 @@ import Utils.Strings;
 import WX.Utils.Settings;
 import Utils.Geometry;
 import WX.Core.Sizer;
+import WX.File.Filename;
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"
@@ -89,7 +89,7 @@ extern size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<
 #else
 size_t wxGetAvailableDrives(std::vector<std::string> &paths, std::vector<std::string> &names, std::vector<int> &icon_ids)
 {
-#ifdef wxHAS_FILESYSTEM_VOLUMES
+#ifdef WX_WINDOWS
 
 #if defined(__WIN32__) && wxUSE_FSVOLUME
     // TODO: this code (using wxFSVolumeBase) should be used for all platforms

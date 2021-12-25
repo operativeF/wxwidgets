@@ -20,10 +20,11 @@
 #include "wx/prntbase.h"
 #include "wx/generic/prntdlgg.h"
 #include "wx/paper.h"
-#include "wx/filename.h"
 #include "wx/stdpaths.h"
 
 import WX.Image;
+
+import WX.File.Filename;
 
 import <cmath>;
 import <numbers>;

@@ -13,12 +13,12 @@
 
 #include "wx/process.h"
 #include "wx/utils.h"
-#include "wx/filename.h"
 #include "wx/app.h"
 #include "wx/log.h"
 
 import WX.Cmn.CommandLine;
 import WX.Cmn.StrStream;
+import WX.File.Filename;
 
 import <vector>;
 

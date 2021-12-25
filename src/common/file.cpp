@@ -9,12 +9,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_FILE
+module;
 
-import <cstdio>;       // SEEK_xxx constants
-#include <cerrno>
-
-import WX.File.Flags;
+// wxWidgets
+#include  "wx/string.h"
+#include  "wx/intl.h"
+#include  "wx/log.h"
+#include  "wx/crt.h"
+#include  "wx/filefn.h"
 
 // standard
 #if defined(WX_WINDOWS) && !defined(__GNUWIN32__)
@@ -59,6 +61,17 @@ import WX.File.Flags;
     #error  "Please specify the header with file functions declarations."
 #endif  //Win/UNIX
 
+#include <cerrno>
+
+module WX.File.File;
+
+import WX.File.Filename;
+import WX.File.Flags;
+
+import <cstdio>;       // SEEK_xxx constants
+
+#if wxUSE_FILE
+
 // Windows compilers don't have these constants
 #ifndef W_OK
     enum class wxFilePermissions
@@ -70,14 +83,6 @@ import WX.File.Flags;
     };
 #endif // W_OK
 
-// wxWidgets
-#include  "wx/string.h"
-#include  "wx/intl.h"
-#include  "wx/log.h"
-#include  "wx/crt.h"
-#include  "wx/filename.h"
-#include  "wx/file.h"
-#include  "wx/filefn.h"
 
 // there is no distinction between text and binary files under Unix, so define
 // O_BINARY as 0 if the system headers don't do it already

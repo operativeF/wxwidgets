@@ -11,12 +11,13 @@
 #if wxUSE_FILEDLG
 
 #include "wx/filedlg.h"
+#include "wx/filefn.h"
 #include "wx/dirdlg.h"
-#include "wx/filename.h"
 #include "wx/intl.h"
 #include "wx/window.h"
 
 import Utils.Strings;
+import WX.File.Filename;
 
 import <string>;
 

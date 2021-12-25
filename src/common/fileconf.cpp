@@ -17,7 +17,6 @@
 #include  "wx/app.h"
 #include  "wx/utils.h"    // for wxGetHomeDir
 
-#include  "wx/file.h"
 #include  "wx/memtext.h"
 #include  "wx/config.h"
 #include  "wx/fileconf.h"
@@ -34,6 +33,7 @@
 import Utils.Strings;
 import WX.Cmn.TextFile;
 import WX.Cmn.Base64;
+import WX.File.File;
 
 #if wxUSE_STREAMS
 import WX.Cmn.Stream;

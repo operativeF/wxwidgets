@@ -12,10 +12,11 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/datetime.h"
-#include "wx/filename.h"
 #include "wx/hashmap.h"
+#include "wx/list.h"
 
 import WX.Cmn.Stream;
+import WX.File.Filename;
 
 import Utils.Strings;
 

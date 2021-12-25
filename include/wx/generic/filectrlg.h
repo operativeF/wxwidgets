@@ -18,7 +18,8 @@
 #include "wx/listctrl.h"
 #include "wx/filectrl.h"
 #include "wx/filedlg.h"
-#include "wx/filename.h"
+
+import WX.File.Filename;
 
 import <string>;
 import <vector>;

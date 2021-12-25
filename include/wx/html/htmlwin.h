@@ -16,10 +16,10 @@
 #include "wx/html/winpars.h"
 #include "wx/html/htmlcell.h"
 #include "wx/html/htmlfilt.h"
-#include "wx/filename.h"
 #include "wx/bitmap.h"
 
 import Utils.Geometry;
+import WX.File.Filename;
 
 import WX.Cmn.Stopwatch;
 

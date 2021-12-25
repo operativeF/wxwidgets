@@ -13,7 +13,6 @@
 // need because it includes almost all "standard" wxWidgets headers
 #include "wx/wx.h"
 
-#include "wx/filename.h"
 #include "wx/wxhtml.h"
 #include "wx/fs_zip.h"
 #include "wx/log.h"
@@ -23,6 +22,7 @@
 #include "helpview.h"
 
 import WX.Image;
+import WX.File.Filename;
 
 class AlternateArtProvider : public wxArtProvider
 {

@@ -11,8 +11,7 @@
 #ifndef _WX_PRIVATE_FILENAME_H_
 #define _WX_PRIVATE_FILENAME_H_
 
-#include "wx/file.h"
-
+import WX.File.File;
 import WX.Cmn.FFile;
 
 // Self deleting temp files aren't supported on all platforms. Therefore
