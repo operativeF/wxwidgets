@@ -183,7 +183,7 @@ void wxRichTextBackgroundPage::CreateControls()
     m_offsetX->SetHelpText(_("The horizontal offset."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_offsetX->SetToolTip(_("The horizontal offset."));
-    itemBoxSizer24->Add(m_offsetX, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer24->Add(m_offsetX, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsHorizontalOffsetStrings;
     m_unitsHorizontalOffsetStrings.push_back("px");
@@ -206,7 +206,7 @@ void wxRichTextBackgroundPage::CreateControls()
     m_offsetY->SetHelpText(_("The vertical offset."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_offsetY->SetToolTip(_("The vertical offset."));
-    itemBoxSizer28->Add(m_offsetY, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer28->Add(m_offsetY, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsVerticalOffsetStrings;
     m_unitsVerticalOffsetStrings.push_back("px");
@@ -246,7 +246,7 @@ void wxRichTextBackgroundPage::CreateControls()
     m_spread->SetHelpText(_("The shadow spread."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_spread->SetToolTip(_("The shadow spread."));
-    itemBoxSizer34->Add(m_spread, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer34->Add(m_spread, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsShadowSpreadStrings;
     m_unitsShadowSpreadStrings.push_back("px");
@@ -273,7 +273,7 @@ void wxRichTextBackgroundPage::CreateControls()
     m_blurDistance->SetHelpText(_("The shadow blur distance."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_blurDistance->SetToolTip(_("The shadow blur distance."));
-    itemBoxSizer38->Add(m_blurDistance, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer38->Add(m_blurDistance, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsBlurDistanceStrings;
     m_unitsBlurDistanceStrings.push_back("px");
@@ -300,7 +300,7 @@ void wxRichTextBackgroundPage::CreateControls()
     m_opacity->SetHelpText(_("The shadow opacity."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_opacity->SetToolTip(_("The shadow opacity."));
-    itemBoxSizer42->Add(m_opacity, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer42->Add(m_opacity, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxStaticText* itemStaticText44 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("%"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer42->Add(itemStaticText44, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);

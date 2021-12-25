@@ -503,7 +503,7 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
     m_progress = new wxStaticText(this, wxID_ANY, _("Preparing"));
     m_progress->SetMinSize(wxSize(250, -1));
     gridSizer->Add(m_progress);
-    mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxLEFT | wxRIGHT));
+    mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxDirection::wxLEFT | wxDirection::wxRIGHT));
 
     mainSizer->Add(CreateStdDialogButtonSizer(wxCANCEL),
                    wxSizerFlags().Expand().DoubleBorder());
@@ -1452,7 +1452,7 @@ public:
         m_hasContents = true;
 
         m_sizer->Add(win,
-                     wxSizerFlags().Border(wxLEFT | wxTOP | wxBOTTOM).Center());
+                     wxSizerFlags().Border(wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM).Center());
     }
 
     // Add a button with the specified id, bitmap and tooltip.

@@ -394,11 +394,11 @@ void wxAuiMDIParentFrame::Tile(wxOrientation orient)
 
     if (orient == wxVERTICAL)
     {
-        client_window->Split(cur_idx, wxLEFT);
+        client_window->Split(cur_idx, wxDirection::wxLEFT);
     }
     else if (orient == wxHORIZONTAL)
     {
-        client_window->Split(cur_idx, wxTOP);
+        client_window->Split(cur_idx, wxDirection::wxTOP);
     }
 }
 

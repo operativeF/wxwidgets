@@ -85,7 +85,7 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
 #if wxUSE_STATTEXT
     // prompt if any
     if (!prompt.empty())
-        inputsizer->Add( new wxStaticText( this, wxID_ANY, prompt ), 0, wxCENTER | wxLEFT, 10 );
+        inputsizer->Add( new wxStaticText( this, wxID_ANY, prompt ), 0, wxCENTER | wxDirection::wxLEFT, 10 );
 #endif
 
     // spin ctrl
@@ -96,9 +96,9 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
 #else
     m_spinctrl = new wxTextCtrl(this, wxID_ANY, valStr, wxDefaultPosition, wxSize( 140, wxDefaultCoord ));
 #endif
-    inputsizer->Add( m_spinctrl, 1, wxCENTER | wxLEFT | wxRIGHT, 10 );
+    inputsizer->Add( m_spinctrl, 1, wxCENTER | wxDirection::wxLEFT | wxDirection::wxRIGHT, 10 );
     // add both
-    topsizer->Add( inputsizer, 0, wxEXPAND | wxLEFT|wxRIGHT, 5 );
+    topsizer->Add( inputsizer, 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT, 5 );
 
     // 3) buttons if any
     wxSizer *buttonSizer = CreateSeparatedButtonSizer(wxOK | wxCANCEL);

@@ -147,19 +147,19 @@ wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMe
     PrepareNotificationControl(m_messageTitle);
 
     m_messageText = new wxStaticText(m_messagePanel, wxID_ANY, "");
-    textSizer->Add(m_messageText, wxSizerFlags(0).Border(wxLEFT | wxRIGHT | wxBOTTOM));
+    textSizer->Add(m_messageText, wxSizerFlags(0).Border(wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM));
     PrepareNotificationControl(m_messageText);
 
     msgSizer->Add(textSizer, wxSizerFlags(1).Center());
 
     // Add a single close button if no actions are specified
     m_closeBtn = wxBitmapButton::NewCloseButton(m_messagePanel, wxID_ANY);
-    msgSizer->Add(m_closeBtn, wxSizerFlags(0).Border(wxALL, 3).Top());
+    msgSizer->Add(m_closeBtn, wxSizerFlags(0).Border(wxDirection::wxALL, 3).Top());
     m_closeBtn->Bind(wxEVT_BUTTON, &wxNotificationMessageWindow::OnCloseClicked, this);
     PrepareNotificationControl(m_closeBtn, false);
 
     wxSizer * const sizerTop = new wxBoxSizer(wxHORIZONTAL);
-    sizerTop->Add(m_messagePanel, wxSizerFlags().Border(wxALL, FromDIP(1)));
+    sizerTop->Add(m_messagePanel, wxSizerFlags().Border(wxDirection::wxALL, FromDIP(1)));
     SetSizer(sizerTop);
 }
 

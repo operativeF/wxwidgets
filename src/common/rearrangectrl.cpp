@@ -254,12 +254,12 @@ wxRearrangeCtrl::Create(wxWindow *parent,
 
     // arrange them in a sizer
     wxSizer * const sizerBtns = new wxBoxSizer(wxVERTICAL);
-    sizerBtns->Add(btnUp, wxSizerFlags().Centre().Border(wxBOTTOM));
-    sizerBtns->Add(btnDown, wxSizerFlags().Centre().Border(wxTOP));
+    sizerBtns->Add(btnUp, wxSizerFlags().Centre().Border(wxDirection::wxBOTTOM));
+    sizerBtns->Add(btnDown, wxSizerFlags().Centre().Border(wxDirection::wxTOP));
 
     wxSizer * const sizerTop = new wxBoxSizer(wxHORIZONTAL);
-    sizerTop->Add(m_list, wxSizerFlags(1).Expand().Border(wxRIGHT));
-    sizerTop->Add(sizerBtns, wxSizerFlags(0).Centre().Border(wxLEFT));
+    sizerTop->Add(m_list, wxSizerFlags(1).Expand().Border(wxDirection::wxRIGHT));
+    sizerTop->Add(sizerBtns, wxSizerFlags(0).Centre().Border(wxDirection::wxLEFT));
     SetSizer(sizerTop);
 
     m_list->SetFocus();

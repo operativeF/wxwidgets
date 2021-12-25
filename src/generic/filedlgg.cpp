@@ -202,7 +202,7 @@ bool wxGenericFileDialog::Create( wxWindow *parent,
         mainsizer->Add( buttonsizer, wxSizerFlags().Expand() );
     else
         mainsizer->Add( buttonsizer, wxSizerFlags().Expand()
-                                                   .Border( wxLEFT | wxRIGHT | wxTOP ) );
+                                                   .Border( wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP ) );
 
     long style2 = 0;
     if ( HasFdFlag(wxFD_MULTIPLE) )

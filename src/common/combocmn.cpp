@@ -1174,12 +1174,12 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
     m_btnSize.x = butWidth;
     m_btnSize.y = butHeight;
 
-    m_btnArea.x = ( m_btnSide==wxRIGHT ? sz.x - butAreaWid - btnBorder : btnBorder );
+    m_btnArea.x = ( m_btnSide == wxDirection::wxRIGHT ? sz.x - butAreaWid - btnBorder : btnBorder );
     m_btnArea.y = btnBorder + FOCUS_RING;
     m_btnArea.width = butAreaWid;
     m_btnArea.height = sz.y - ((btnBorder+FOCUS_RING)*2);
 
-    m_tcArea.x = ( m_btnSide==wxRIGHT ? 0 : butAreaWid ) + customBorder;
+    m_tcArea.x = ( m_btnSide == wxDirection::wxRIGHT ? 0 : butAreaWid ) + customBorder;
     m_tcArea.y = customBorder + FOCUS_RING;
     m_tcArea.width = sz.x - butAreaWid - (customBorder*2) - FOCUS_RING;
     m_tcArea.height = sz.y - ((customBorder+FOCUS_RING)*2);
@@ -2250,9 +2250,9 @@ void wxComboCtrlBase::ShowPopup()
     int popupY = scrPos.y + ctrlSz.y;
 
     // Default anchor is wxLEFT
-    int anchorSide = m_anchorSide;
+    wxDirection anchorSide = m_anchorSide;
     if ( !anchorSide )
-        anchorSide = wxLEFT;
+        anchorSide = wxDirection::wxLEFT;
 
     const int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
     int leftX = scrPos.x - m_extLeft;
@@ -2264,14 +2264,14 @@ void wxComboCtrlBase::ShowPopup()
 
     // If there is not enough horizontal space, anchor on the other side.
     // If there is no space even then, place the popup at x 0.
-    if ( anchorSide == wxRIGHT )
+    if ( anchorSide == wxDirection::wxRIGHT )
     {
         if ( rightX < 0 )
         {
             if ( (leftX+szp.x) < screenWidth )
-                anchorSide = wxLEFT;
+                anchorSide = wxDirection::wxLEFT;
             else
-                anchorSide = 0;
+                anchorSide = wxDirection::wxNO_DIRECTION;
         }
     }
     else
@@ -2279,16 +2279,16 @@ void wxComboCtrlBase::ShowPopup()
         if ( (leftX+szp.x) >= screenWidth )
         {
             if ( rightX >= 0 )
-                anchorSide = wxRIGHT;
+                anchorSide = wxDirection::wxRIGHT;
             else
-                anchorSide = 0;
+                anchorSide = wxDirection::wxNO_DIRECTION;
         }
     }
 
     // Select x coordinate according to the anchor side
-    if ( anchorSide == wxRIGHT )
+    if ( anchorSide == wxDirection::wxRIGHT )
         popupX = rightX;
-    else if ( anchorSide == wxLEFT )
+    else if ( anchorSide == wxDirection::wxLEFT )
         popupX = leftX;
     else
         popupX = 0;
@@ -2495,7 +2495,7 @@ void wxComboCtrlBase::HidePopup(bool generateEvent)
 // ----------------------------------------------------------------------------
 
 void wxComboCtrlBase::SetButtonPosition( int width, int height,
-                                         int side, int spacingX )
+                                         wxDirection side, int spacingX )
 {
     m_btnWid = width;
     m_btnHei = height;

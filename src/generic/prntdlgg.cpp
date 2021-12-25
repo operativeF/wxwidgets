@@ -180,7 +180,7 @@ void wxGenericPrintDialog::Init([[maybe_unused]] wxWindow * parent)
             0, wxALIGN_CENTER_VERTICAL|(wxALL-wxTOP), 5 );
     }
 
-    mainsizer->Add( topsizer, 0, wxLEFT|wxTOP|wxRIGHT|wxGROW, 10 );
+    mainsizer->Add( topsizer, 0, wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxRIGHT|wxGROW, 10 );
 
     // 2) middle row with radio box
 
@@ -200,7 +200,7 @@ void wxGenericPrintDialog::Init([[maybe_unused]] wxWindow * parent)
                                          2, choices);
         m_rangeRadioBox->SetSelection(1);
 
-        mainsizer->Add( m_rangeRadioBox, 0, wxLEFT|wxTOP|wxRIGHT, 10 );
+        mainsizer->Add( m_rangeRadioBox, 0, wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxRIGHT, 10 );
     }
 
     // 3) bottom row
@@ -222,7 +222,7 @@ void wxGenericPrintDialog::Init([[maybe_unused]] wxWindow * parent)
     m_noCopiesText = new wxTextCtrl(this, wxPRINTID_COPIES, "", wxPoint(252, 130), wxSize(40, wxDefaultCoord));
     bottomsizer->Add( m_noCopiesText, 1, wxCENTER|wxRIGHT, 10 );
 
-    mainsizer->Add( bottomsizer, 0, wxTOP|wxLEFT|wxRIGHT, 12 );
+    mainsizer->Add( bottomsizer, 0, wxDirection::wxTOP | wxDirection::wxLEFT | wxDirection::wxRIGHT, 12 );
 
     // 4) buttons
 
@@ -627,7 +627,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
 #if wxUSE_STATLINE
     // static line
-    main_sizer->Add( new wxStaticLine( this, wxID_ANY ), 0, wxEXPAND | wxLEFT|wxRIGHT|wxTOP, 10 );
+    main_sizer->Add( new wxStaticLine( this, wxID_ANY ), 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 10 );
 #endif
 
     // buttons
@@ -821,7 +821,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     topsizer->Add( m_paperTypeChoice, 1, wxEXPAND|wxALL, 5 );
 //  m_paperTypeChoice->SetSelection(sel);
 
-    mainsizer->Add( topsizer, 0, wxTOP|wxLEFT|wxRIGHT | wxEXPAND, 10 );
+    mainsizer->Add( topsizer, 0, wxDirection::wxTOP | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxEXPAND, 10 );
 
     // 2) middle sizer with radio box
 
@@ -832,7 +832,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
         wxDefaultPosition, wxDefaultSize, choices2, 2);
     m_orientationRadioBox->SetSelection(0);
 
-    mainsizer->Add( m_orientationRadioBox, 0, wxTOP|wxLEFT|wxRIGHT, 10 );
+    mainsizer->Add( m_orientationRadioBox, 0, wxDirection::wxTOP | wxDirection::wxLEFT | wxDirection::wxRIGHT, 10 );
 
     // 3) margins
 
@@ -860,13 +860,13 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     m_marginBottomText = new wxTextCtrl(this, wxPRINTID_BOTTOMMARGIN, "", wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
     column4->Add( m_marginRightText, 1, wxALL, 5 );
     column4->Add( m_marginBottomText, 1, wxALL, 5 );
-    table->Add( column4, 0, wxRIGHT|wxTOP|wxBOTTOM | wxEXPAND, 5 );
+    table->Add( column4, 0, wxDirection::wxRIGHT | wxDirection::wxTOP | wxDirection::wxBOTTOM | wxEXPAND, 5 );
 
     mainsizer->Add( table, 0 );
 
 #if wxUSE_STATLINE
     // 5) static line
-    mainsizer->Add( new wxStaticLine( this, wxID_ANY ), 0, wxEXPAND | wxLEFT|wxRIGHT|wxTOP, 10 );
+    mainsizer->Add( new wxStaticLine( this, wxID_ANY ), 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 10 );
 #endif
 
     // 6) buttons
@@ -876,7 +876,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     if (wxPrintFactory::GetFactory()->HasPrintSetupDialog())
     {
         m_printerButton = new wxButton(this, wxPRINTID_SETUP, _("Printer...") );
-        buttonsizer->Add( m_printerButton, 0, wxLEFT|wxRIGHT, 10 );
+        buttonsizer->Add( m_printerButton, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT, 10 );
         if ( !m_pageData.GetEnablePrinter() )
             m_printerButton->Enable(false);
     }

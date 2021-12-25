@@ -1049,17 +1049,17 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
 }
 
 bool wxAuiManager::AddPane(wxWindow* window,
-                           int direction,
+                           wxDirection direction,
                            const std::string& caption)
 {
     wxAuiPaneInfo pinfo;
     pinfo.Caption(caption);
     switch (direction)
     {
-        case wxTOP:    pinfo.Top(); break;
-        case wxBOTTOM: pinfo.Bottom(); break;
-        case wxLEFT:   pinfo.Left(); break;
-        case wxRIGHT:  pinfo.Right(); break;
+        case wxDirection::wxTOP:    pinfo.Top(); break;
+        case wxDirection::wxBOTTOM: pinfo.Bottom(); break;
+        case wxDirection::wxLEFT:   pinfo.Left(); break;
+        case wxDirection::wxRIGHT:  pinfo.Right(); break;
         case wxCENTER: pinfo.CenterPane(); break;
     }
     return AddPane(window, pinfo);
@@ -2666,14 +2666,14 @@ void wxAuiManager::DoFrameLayout()
             part.rect.y -= border;
             part.rect.height += border;
         }
-        if (flag & wxLEFT)
+        if (flag & wxDirection::wxLEFT)
         {
             part.rect.x -= border;
             part.rect.width += border;
         }
-        if (flag & wxBOTTOM)
+        if (flag & wxDirection::wxBOTTOM)
             part.rect.height += border;
-        if (flag & wxRIGHT)
+        if (flag & wxDirection::wxRIGHT)
             part.rect.width += border;
 
 

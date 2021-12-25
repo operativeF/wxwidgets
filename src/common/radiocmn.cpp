@@ -66,7 +66,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
     {
         switch ( dir )
         {
-            case wxUP:
+            case wxDirection::wxUP:
                 if ( horz )
                 {
                     item -= numCols;
@@ -78,7 +78,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxLEFT:
+            case wxDirection::wxLEFT:
                 if ( horz )
                 {
                     if ( !item-- )
@@ -90,7 +90,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxDOWN:
+            case wxDirection::wxDOWN:
                 if ( horz )
                 {
                     item += numCols;
@@ -102,7 +102,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxRIGHT:
+            case wxDirection::wxRIGHT:
                 if ( horz )
                 {
                     if ( ++item == count )

@@ -130,7 +130,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_leftMarginCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_MARGIN_CHECKBOX, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_leftMarginCheckbox->SetValue(false);
-    itemFlexGridSizer9->Add(m_leftMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer9->Add(m_leftMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL| wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer11, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -139,7 +139,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_marginLeft->SetHelpText(_("The left margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginLeft->SetToolTip(_("The left margin size."));
-    itemBoxSizer11->Add(m_marginLeft, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer11->Add(m_marginLeft, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMarginLeftStrings;
     m_unitsMarginLeftStrings.push_back("px");
@@ -155,7 +155,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_rightMarginCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_MARGIN_CHECKBOX, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_rightMarginCheckbox->SetValue(false);
-    itemFlexGridSizer9->Add(m_rightMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer9->Add(m_rightMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer16 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer16, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -164,7 +164,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_marginRight->SetHelpText(_("The right margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginRight->SetToolTip(_("The right margin size."));
-    itemBoxSizer16->Add(m_marginRight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer16->Add(m_marginRight, 0, wxALIGN_CENTER_VERTICAL| wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMarginRightStrings;
     m_unitsMarginRightStrings.push_back("px");
@@ -178,7 +178,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_topMarginCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_MARGIN_CHECKBOX, _("&Top:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_topMarginCheckbox->SetValue(false);
-    itemFlexGridSizer9->Add(m_topMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer9->Add(m_topMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer20 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer20, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -187,7 +187,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_marginTop->SetHelpText(_("The top margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginTop->SetToolTip(_("The top margin size."));
-    itemBoxSizer20->Add(m_marginTop, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer20->Add(m_marginTop, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMarginTopStrings;
     m_unitsMarginTopStrings.push_back("px");
@@ -203,7 +203,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_bottomMarginCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_MARGIN_CHECKBOX, _("&Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bottomMarginCheckbox->SetValue(false);
-    itemFlexGridSizer9->Add(m_bottomMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer9->Add(m_bottomMarginCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer25 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer25, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -212,7 +212,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_marginBottom->SetHelpText(_("The bottom margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginBottom->SetToolTip(_("The bottom margin size."));
-    itemBoxSizer25->Add(m_marginBottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer25->Add(m_marginBottom, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMarginBottomStrings;
     m_unitsMarginBottomStrings.push_back("px");
@@ -244,7 +244,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_leftPaddingCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_PADDING_CHECKBOX, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_leftPaddingCheckbox->SetValue(false);
-    itemFlexGridSizer33->Add(m_leftPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer33->Add(m_leftPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer35, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -253,7 +253,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_paddingLeft->SetHelpText(_("The left padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingLeft->SetToolTip(_("The left padding size."));
-    itemBoxSizer35->Add(m_paddingLeft, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer35->Add(m_paddingLeft, 0, wxALIGN_CENTER_VERTICAL| wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsPaddingLeftStrings;
     m_unitsPaddingLeftStrings.push_back("px");
@@ -269,7 +269,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_rightPaddingCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_PADDING_CHECKBOX, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_rightPaddingCheckbox->SetValue(false);
-    itemFlexGridSizer33->Add(m_rightPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer33->Add(m_rightPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer40, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -278,7 +278,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_paddingRight->SetHelpText(_("The right padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingRight->SetToolTip(_("The right padding size."));
-    itemBoxSizer40->Add(m_paddingRight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer40->Add(m_paddingRight, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsPaddingRightStrings;
     m_unitsPaddingRightStrings.push_back("px");
@@ -292,7 +292,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_topPaddingCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_PADDING_CHECKBOX, _("&Top:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_topPaddingCheckbox->SetValue(false);
-    itemFlexGridSizer33->Add(m_topPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer33->Add(m_topPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer44 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer44, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -301,7 +301,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_paddingTop->SetHelpText(_("The top padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingTop->SetToolTip(_("The top padding size."));
-    itemBoxSizer44->Add(m_paddingTop, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer44->Add(m_paddingTop, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsPaddingTopStrings;
     m_unitsPaddingTopStrings.push_back("px");
@@ -317,7 +317,7 @@ void wxRichTextMarginsPage::CreateControls()
 
     m_bottomPaddingCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_PADDING_CHECKBOX, _("&Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bottomPaddingCheckbox->SetValue(false);
-    itemFlexGridSizer33->Add(m_bottomPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemFlexGridSizer33->Add(m_bottomPaddingCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer49 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer49, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -326,7 +326,7 @@ void wxRichTextMarginsPage::CreateControls()
     m_paddingBottom->SetHelpText(_("The bottom padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingBottom->SetToolTip(_("The bottom padding size."));
-    itemBoxSizer49->Add(m_paddingBottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer49->Add(m_paddingBottom, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsPaddingBottomStrings;
     m_unitsPaddingBottomStrings.push_back("px");

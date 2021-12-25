@@ -41,10 +41,10 @@ public:
 
 #ifdef __WXGTK__
         SetEscapeId(wxID_CLOSE);
-        sizer->Add(CreateButtonSizer(wxCLOSE), wxSizerFlags().Expand().DoubleBorder(wxBOTTOM));
+        sizer->Add(CreateButtonSizer(wxCLOSE), wxSizerFlags().Expand().DoubleBorder(wxDirection::wxBOTTOM));
 #else
         sizer->Add(CreateButtonSizer(wxOK | wxCANCEL),
-                   wxSizerFlags().Expand().DoubleBorder(wxLEFT|wxRIGHT|wxBOTTOM));
+                   wxSizerFlags().Expand().DoubleBorder(wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM));
 #endif
         SetSizer(sizer);
     }

@@ -1023,10 +1023,10 @@ void wxSVGFileDCImpl::DoGradientFillLinear(const wxRect& rect,
     wxString initCol = Col2SVG(initialColour, &initOpacity);
     wxString destCol = Col2SVG(destColour, &destOpacity);
 
-    const int x1 = ((nDirection & wxLEFT) > 0) ? 100 : 0;
-    const int y1 = ((nDirection & wxUP) > 0) ? 100 : 0;
-    const int x2 = ((nDirection & wxRIGHT) > 0) ? 100 : 0;
-    const int y2 = ((nDirection & wxDOWN) > 0) ? 100 : 0;
+    const int x1 = ((nDirection & wxDirection::wxLEFT) > 0) ? 100 : 0;
+    const int y1 = ((nDirection & wxDirection::wxUP) > 0) ? 100 : 0;
+    const int x2 = ((nDirection & wxDirection::wxRIGHT) > 0) ? 100 : 0;
+    const int y2 = ((nDirection & wxDirection::wxDOWN) > 0) ? 100 : 0;
 
     wxString s;
     s += "  <defs>\n";

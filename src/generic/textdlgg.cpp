@@ -83,7 +83,7 @@ bool wxTextEntryDialog::Create(wxWindow *parent,
     topsizer->Add(m_textctrl,
                   wxSizerFlags(style & wxTE_MULTILINE ? 1 : 0).
                     Expand().
-                    TripleBorder(wxLEFT | wxRIGHT));
+                    TripleBorder(wxDirection::wxLEFT | wxDirection::wxRIGHT));
 
     // 3) buttons if any
     wxSizer *buttonSizer = CreateSeparatedButtonSizer(style & (wxOK | wxCANCEL));

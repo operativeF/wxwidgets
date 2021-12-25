@@ -129,7 +129,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
     wxSizer * const sizerTop = new wxBoxSizer(wxVERTICAL);
 
     m_msg = new wxStaticText(this, wxID_ANY, message);
-    sizerTop->Add(m_msg, 0, wxLEFT | wxRIGHT | wxTOP, 2*LAYOUT_MARGIN);
+    sizerTop->Add(m_msg, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 2*LAYOUT_MARGIN);
 
     int gauge_style = wxGA_HORIZONTAL;
     if ( style & wxPD_SMOOTH )
@@ -151,7 +151,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
                     gauge_style
                   );
 
-    sizerTop->Add(m_gauge, 0, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 2*LAYOUT_MARGIN);
+    sizerTop->Add(m_gauge, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP | wxEXPAND, 2*LAYOUT_MARGIN);
     m_gauge->SetValue(0);
 
     // also count how many labels we really have
@@ -324,7 +324,7 @@ wxGenericProgressDialog::CreateLabel(const std::string& text, wxSizer *sizer)
 #else
     // value and time to the right in one row
     sizer->Add(label);
-    sizer->Add(value, 0, wxLEFT, LAYOUT_MARGIN);
+    sizer->Add(value, 0, wxDirection::wxLEFT, LAYOUT_MARGIN);
 #endif
 
     return value;

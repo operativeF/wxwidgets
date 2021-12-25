@@ -111,7 +111,7 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
     wxSizer *subsizer = new wxBoxSizer(wxHORIZONTAL);
 
     subsizer->Add(new wxStaticText(subp, wxID_ANY, label),
-                  wxSizerFlags(1).Center().Border(wxLEFT));
+                  wxSizerFlags(1).Center().Border(wxDirection::wxLEFT));
 
     const wxSizerFlags flagsCentered = wxSizerFlags().Center();
 

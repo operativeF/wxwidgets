@@ -56,7 +56,7 @@ public:
     
     // show the image in the button in addition to the label: this method is
     // supported on all (major) platforms
-    void SetBitmap(const wxBitmap& bitmap, wxDirection dir = wxLEFT)
+    void SetBitmap(const wxBitmap& bitmap, wxDirection dir = wxDirection::wxLEFT)
     {
         SetBitmapLabel(bitmap);
         SetBitmapPosition(dir);

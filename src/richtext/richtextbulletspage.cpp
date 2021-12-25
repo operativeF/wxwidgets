@@ -114,7 +114,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer4->Add(itemBoxSizer5, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Bullet style:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_styleListBoxStrings;
     m_styleListBox = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_STYLELISTBOX, wxDefaultPosition, wxSize(-1, 90), m_styleListBoxStrings, wxLB_SINGLE );
@@ -150,7 +150,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer5->Add(5, 5, 0, wxALIGN_CENTER_HORIZONTAL, 5);
 
     wxStaticText* itemStaticText13 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Bullet &Alignment:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText13, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(itemStaticText13, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_bulletAlignmentCtrlStrings;
     m_bulletAlignmentCtrlStrings.push_back("Left");
@@ -166,7 +166,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer4->Add(2, 1, 1, wxALIGN_CENTER_VERTICAL|wxTOP|wxBOTTOM, 5);
 
     wxStaticLine* itemStaticLine16 = new wxStaticLine( itemRichTextDialogPage1, wxID_STATIC, wxDefaultPosition, wxDefaultSize, wxLI_VERTICAL );
-    itemBoxSizer4->Add(itemStaticLine16, 0, wxGROW|wxLEFT|wxRIGHT, 5);
+    itemBoxSizer4->Add(itemStaticLine16, 0, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT, 5);
 
     itemBoxSizer4->Add(2, 1, 1, wxALIGN_CENTER_VERTICAL|wxTOP|wxBOTTOM, 5);
 
@@ -195,7 +195,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer18->Add(5, 5, 0, wxALIGN_CENTER_HORIZONTAL, 5);
 
     wxStaticText* itemStaticText24 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLSTATIC, _("Symbol &font:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer18->Add(itemStaticText24, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer18->Add(itemStaticText24, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_symbolFontCtrlStrings;
     m_symbolFontCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLFONTCTRL, "", wxDefaultPosition, wxDefaultSize, m_symbolFontCtrlStrings, wxCB_DROPDOWN );
@@ -207,7 +207,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer18->Add(5, 5, 1, wxALIGN_CENTER_HORIZONTAL, 5);
 
     wxStaticText* itemStaticText27 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NAMESTATIC, _("S&tandard bullet name:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer18->Add(itemStaticText27, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer18->Add(itemStaticText27, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_bulletNameCtrlStrings;
     m_bulletNameCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NAMECTRL, "", wxDefaultPosition, wxDefaultSize, m_bulletNameCtrlStrings, wxCB_DROPDOWN );
@@ -219,7 +219,7 @@ void wxRichTextBulletsPage::CreateControls()
     itemBoxSizer18->Add(5, 5, 1, wxALIGN_CENTER_HORIZONTAL, 5);
 
     wxStaticText* itemStaticText30 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NUMBERSTATIC, _("&Number:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer18->Add(itemStaticText30, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer18->Add(itemStaticText30, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     m_numberCtrl = new wxSpinCtrl( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NUMBERCTRL, "0", wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 100000, 0 );
     m_numberCtrl->SetHelpText(_("The list item number."));

@@ -87,7 +87,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
     wxBitmapButton* homeButton =
         new wxBitmapButton(this, ID_GO_HOME,
                            wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_BUTTON));
-    buttonsizer->Add( homeButton, 0, wxLEFT|wxRIGHT, 10 );
+    buttonsizer->Add( homeButton, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT, 10 );
 
     // I'm not convinced we need a New button, and we tend to get annoying
     // accidental-editing with label editing enabled.
@@ -128,7 +128,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
                                      dirStyle);
 
     wxSizerFlags flagsBorder2;
-    flagsBorder2.DoubleBorder(wxTOP | wxLEFT | wxRIGHT);
+    flagsBorder2.DoubleBorder(wxDirection::wxTOP | wxDirection::wxLEFT | wxDirection::wxRIGHT);
 
     topsizer->Add(m_dirCtrl, wxSizerFlags(flagsBorder2).Proportion(1).Expand());
 

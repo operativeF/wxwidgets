@@ -35,7 +35,7 @@ public:
 
         wxSizer* const sizerTop = new wxBoxSizer(wxHORIZONTAL);
         sizerTop->Add(ctrlItems, wxSizerFlags(1).Expand());
-        sizerTop->Add(sizerBtns, wxSizerFlags().Centre().Border(wxLEFT));
+        sizerTop->Add(sizerBtns, wxSizerFlags().Centre().Border(wxDirection::wxLEFT));
         parent->SetSizer(sizerTop);
 
         SetUpEvents();

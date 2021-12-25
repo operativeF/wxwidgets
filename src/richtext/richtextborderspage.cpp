@@ -173,7 +173,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer15 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer13->Add(itemBoxSizer15, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_leftBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_LEFT, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer15->Add(m_leftBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer15->Add(m_leftBorderWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_leftBorderWidthUnitsStrings;
     m_leftBorderWidthUnitsStrings.push_back("px");
@@ -207,7 +207,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer23 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer13->Add(itemBoxSizer23, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_rightBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_RIGHT, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer23->Add(m_rightBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer23->Add(m_rightBorderWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_rightBorderWidthUnitsStrings;
     m_rightBorderWidthUnitsStrings.push_back("px");
@@ -241,7 +241,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer31 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer13->Add(itemBoxSizer31, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_topBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_TOP, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer31->Add(m_topBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer31->Add(m_topBorderWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_topBorderWidthUnitsStrings;
     m_topBorderWidthUnitsStrings.push_back("px");
@@ -275,7 +275,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer13->Add(itemBoxSizer39, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_bottomBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_BOTTOM, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer39->Add(m_bottomBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer39->Add(m_bottomBorderWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_bottomBorderWidthUnitsStrings;
     m_bottomBorderWidthUnitsStrings.push_back("px");
@@ -341,7 +341,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer58 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer56->Add(itemBoxSizer58, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_leftOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_LEFT, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer58->Add(m_leftOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer58->Add(m_leftOutlineWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_leftOutlineWidthUnitsStrings;
     m_leftOutlineWidthUnitsStrings.push_back("px");
@@ -375,7 +375,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer66 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer56->Add(itemBoxSizer66, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_rightOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_RIGHT, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer66->Add(m_rightOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer66->Add(m_rightOutlineWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_rightOutlineWidthUnitsStrings;
     m_rightOutlineWidthUnitsStrings.push_back("px");
@@ -409,7 +409,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer74 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer56->Add(itemBoxSizer74, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_topOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_TOP, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer74->Add(m_topOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer74->Add(m_topOutlineWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_topOutlineWidthUnitsStrings;
     m_topOutlineWidthUnitsStrings.push_back("px");
@@ -443,7 +443,7 @@ void wxRichTextBordersPage::CreateControls()
     wxBoxSizer* itemBoxSizer82 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer56->Add(itemBoxSizer82, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
     m_bottomOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_BOTTOM, "", wxDefaultPosition, wxSize(50, -1), 0 );
-    itemBoxSizer82->Add(m_bottomOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer82->Add(m_bottomOutlineWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_bottomOutlineWidthUnitsStrings;
     m_bottomOutlineWidthUnitsStrings.push_back("px");
@@ -511,7 +511,7 @@ void wxRichTextBordersPage::CreateControls()
     m_cornerRadiusText->SetHelpText(_("The value of the corner radius."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_cornerRadiusText->SetToolTip(_("The value of the corner radius."));
-    itemBoxSizer99->Add(m_cornerRadiusText, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer99->Add(m_cornerRadiusText, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_cornerRadiusUnitsStrings;
     m_cornerRadiusUnitsStrings.push_back("px");
@@ -529,7 +529,7 @@ void wxRichTextBordersPage::CreateControls()
     itemBoxSizer3->Add(itemNotebook4, 0, wxGROW|wxALL, 5);
 
     m_borderPreviewCtrl = new wxRichTextBorderPreviewCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BORDER_PREVIEW, wxDefaultPosition, wxSize(60, 60), wxBORDER_THEME|wxFULL_REPAINT_ON_RESIZE );
-    itemBoxSizer3->Add(m_borderPreviewCtrl, 1, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    itemBoxSizer3->Add(m_borderPreviewCtrl, 1, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 5);
 
 ////@end wxRichTextBordersPage content construction
     // FIXME: Use ref emplace_back

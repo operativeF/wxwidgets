@@ -713,7 +713,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     wxSizer *szText = CreateTextSizer(message);
     szText->SetMinSize(wxSize{std::min(300, wxDisplay().GetGeometry().GetSize().x / 3), -1});
 
-    sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxLEFT | wxRIGHT));
+    sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxDirection::wxLEFT | wxDirection::wxRIGHT));
 
     wxButton *btnOk = new wxButton(this, wxID_OK);
     sizerAll->Add(btnOk, wxSizerFlags().Centre());
@@ -742,7 +742,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     wxBoxSizer * const btnSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxSizerFlags flagsBtn;
-    flagsBtn.Border(wxLEFT);
+    flagsBtn.Border(wxDirection::wxLEFT);
 
 #if wxUSE_CLIPBOARD
     btnSizer->Add(new wxButton(win, wxID_COPY), flagsBtn);

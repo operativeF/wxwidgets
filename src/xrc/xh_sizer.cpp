@@ -42,15 +42,15 @@ wxSizerXmlHandler::wxSizerXmlHandler()
     XRC_ADD_STYLE(wxVERTICAL);
 
     // and flags
-    XRC_ADD_STYLE(wxLEFT);
-    XRC_ADD_STYLE(wxRIGHT);
-    XRC_ADD_STYLE(wxTOP);
-    XRC_ADD_STYLE(wxBOTTOM);
-    XRC_ADD_STYLE(wxNORTH);
-    XRC_ADD_STYLE(wxSOUTH);
-    XRC_ADD_STYLE(wxEAST);
-    XRC_ADD_STYLE(wxWEST);
-    XRC_ADD_STYLE(wxALL);
+    XRC_ADD_STYLE(wxDirection::wxLEFT);
+    XRC_ADD_STYLE(wxDirection::wxRIGHT);
+    XRC_ADD_STYLE(wxDirection::wxTOP);
+    XRC_ADD_STYLE(wxDirection::wxBOTTOM);
+    XRC_ADD_STYLE(wxDirection::wxNORTH);
+    XRC_ADD_STYLE(wxDirection::wxSOUTH);
+    XRC_ADD_STYLE(wxDirection::wxEAST);
+    XRC_ADD_STYLE(wxDirection::wxWEST);
+    XRC_ADD_STYLE(wxDirection::wxALL);
 
     XRC_ADD_STYLE(wxGROW);
     XRC_ADD_STYLE(wxEXPAND);

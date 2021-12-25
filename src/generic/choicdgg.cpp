@@ -152,7 +152,7 @@ bool wxAnyChoiceDialog::Create(wxWindow *parent,
         m_listbox->SetSelection(0);
 
     topsizer->
-        Add(m_listbox, wxSizerFlags().Expand().Proportion(1).TripleBorder(wxLEFT | wxRIGHT));
+        Add(m_listbox, wxSizerFlags().Expand().Proportion(1).TripleBorder(wxDirection::wxLEFT | wxDirection::wxRIGHT));
 
     // 3) buttons if any
     wxSizer *

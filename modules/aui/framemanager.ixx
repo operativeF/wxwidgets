@@ -122,7 +122,7 @@ public:
                  const wxPoint& dropPos);
 
     bool AddPane(wxWindow* window,
-                 int direction = wxLEFT,
+                 wxDirection direction = wxDirection::wxLEFT,
                  const std::string& caption = {});
 
     bool InsertPane(wxWindow* window,

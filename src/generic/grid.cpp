@@ -8593,15 +8593,15 @@ void wxGrid::SetRowLabelAlignment( int horiz, int vert )
     // allow old (incorrect) defs to be used
     switch ( horiz )
     {
-        case wxLEFT:   horiz = wxALIGN_LEFT; break;
-        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxDirection::wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxDirection::wxRIGHT:  horiz = wxALIGN_RIGHT; break;
         case wxCENTRE: horiz = wxALIGN_CENTRE; break;
     }
 
     switch ( vert )
     {
-        case wxTOP:    vert = wxALIGN_TOP;    break;
-        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxDirection::wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxDirection::wxBOTTOM: vert = wxALIGN_BOTTOM; break;
         case wxCENTRE: vert = wxALIGN_CENTRE; break;
     }
 
@@ -8627,15 +8627,15 @@ void wxGrid::SetColLabelAlignment( int horiz, int vert )
     // allow old (incorrect) defs to be used
     switch ( horiz )
     {
-        case wxLEFT:   horiz = wxALIGN_LEFT; break;
-        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxDirection::wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxDirection::wxRIGHT:  horiz = wxALIGN_RIGHT; break;
         case wxCENTRE: horiz = wxALIGN_CENTRE; break;
     }
 
     switch ( vert )
     {
-        case wxTOP:    vert = wxALIGN_TOP;    break;
-        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxDirection::wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxDirection::wxBOTTOM: vert = wxALIGN_BOTTOM; break;
         case wxCENTRE: vert = wxALIGN_CENTRE; break;
     }
 
@@ -8661,15 +8661,15 @@ void wxGrid::SetCornerLabelAlignment( int horiz, int vert )
     // allow old (incorrect) defs to be used
     switch ( horiz )
     {
-        case wxLEFT:   horiz = wxALIGN_LEFT; break;
-        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxDirection::wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxDirection::wxRIGHT:  horiz = wxALIGN_RIGHT; break;
         case wxCENTRE: horiz = wxALIGN_CENTRE; break;
     }
 
     switch ( vert )
     {
-        case wxTOP:    vert = wxALIGN_TOP;    break;
-        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxDirection::wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxDirection::wxBOTTOM: vert = wxALIGN_BOTTOM; break;
         case wxCENTRE: vert = wxALIGN_CENTRE; break;
     }
 

@@ -716,26 +716,26 @@ wxRadioBtnWndProc(WXHWND hwnd, WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
                 switch ( wParam )
                 {
                     case VK_UP:
-                        dir = wxUP;
+                        dir = wxDirection::wxUP;
                         break;
 
                     case VK_LEFT:
-                        dir = wxLEFT;
+                        dir = wxDirection::wxLEFT;
                         break;
 
                     case VK_DOWN:
-                        dir = wxDOWN;
+                        dir = wxDirection::wxDOWN;
                         break;
 
                     case VK_RIGHT:
-                        dir = wxRIGHT;
+                        dir = wxDirection::wxRIGHT;
                         break;
 
                     default:
                         processed = false;
 
                         // just to suppress the compiler warning
-                        dir = wxALL;
+                        dir = wxDirection::wxALL;
                 }
 
                 if ( processed )

@@ -111,7 +111,7 @@ public:
 
         wxBoxSizer* const sizerTop = new wxBoxSizer(wxVERTICAL);
         sizerTop->Add(sizerTitle,
-                        wxSizerFlags().DoubleBorder(wxLEFT|wxRIGHT|wxTOP));
+                        wxSizerFlags().DoubleBorder(wxDirection::wxLEFT|wxDirection::wxRIGHT|wxDirection::wxTOP));
 
         // Use a spacer as we don't want to have a double border between the
         // elements, just a simple one will do.
@@ -128,13 +128,13 @@ public:
             wxBoxSizer* const sizerTextIndent = new wxBoxSizer(wxHORIZONTAL);
             sizerTextIndent->AddSpacer(icon.GetWidth());
             sizerTextIndent->Add(sizerText,
-                                    wxSizerFlags().Border(wxLEFT).Centre());
+                                    wxSizerFlags().Border(wxDirection::wxLEFT).Centre());
 
             sizerText = sizerTextIndent;
         }
 #endif // HAVE_MSW_THEME
         sizerTop->Add(sizerText,
-                        wxSizerFlags().DoubleBorder(wxLEFT|wxRIGHT|wxBOTTOM)
+                        wxSizerFlags().DoubleBorder(wxDirection::wxLEFT|wxDirection::wxRIGHT|wxDirection::wxBOTTOM)
                                       .Centre());
 
         SetSizer(sizerTop);

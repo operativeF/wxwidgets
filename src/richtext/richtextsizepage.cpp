@@ -230,7 +230,7 @@ void wxRichTextSizePage::CreateControls()
     m_widthCheckbox->SetHelpText(_("Enable the width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_widthCheckbox->SetToolTip(_("Enable the width value."));
-    m_widthSizer->Add(m_widthCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_widthSizer->Add(m_widthCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_widthLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Width:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_widthLabel->Show(false);
@@ -243,7 +243,7 @@ void wxRichTextSizePage::CreateControls()
     m_width->SetHelpText(_("The object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_width->SetToolTip(_("The object width."));
-    itemBoxSizer33->Add(m_width, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer33->Add(m_width, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsWStrings;
     m_unitsWStrings.push_back("px");
@@ -264,7 +264,7 @@ void wxRichTextSizePage::CreateControls()
     m_heightCheckbox->SetHelpText(_("Enable the height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_heightCheckbox->SetToolTip(_("Enable the height value."));
-    m_heightSizer->Add(m_heightCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_heightSizer->Add(m_heightCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_heightLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Height:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_heightLabel->Show(false);
@@ -277,7 +277,7 @@ void wxRichTextSizePage::CreateControls()
     m_height->SetHelpText(_("The object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_height->SetToolTip(_("The object height."));
-    itemBoxSizer39->Add(m_height, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer39->Add(m_height, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsHStrings;
     m_unitsHStrings.push_back("px");
@@ -295,7 +295,7 @@ void wxRichTextSizePage::CreateControls()
     m_minWidthCheckbox->SetHelpText(_("Enable the minimum width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minWidthCheckbox->SetToolTip(_("Enable the minimum width value."));
-    m_sizeSizer->Add(m_minWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_sizeSizer->Add(m_minWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_minWidthSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_minWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -304,7 +304,7 @@ void wxRichTextSizePage::CreateControls()
     m_minWidth->SetHelpText(_("The object minimum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minWidth->SetToolTip(_("The object minimum width."));
-    m_minWidthSizer->Add(m_minWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_minWidthSizer->Add(m_minWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMinWStrings;
     m_unitsMinWStrings.push_back("px");
@@ -322,7 +322,7 @@ void wxRichTextSizePage::CreateControls()
     m_minHeightCheckbox->SetHelpText(_("Enable the minimum height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minHeightCheckbox->SetToolTip(_("Enable the minimum height value."));
-    m_sizeSizer->Add(m_minHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_sizeSizer->Add(m_minHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_minHeightSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_minHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -331,7 +331,7 @@ void wxRichTextSizePage::CreateControls()
     m_minHeight->SetHelpText(_("The object minimum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minHeight->SetToolTip(_("The object minimum height."));
-    m_minHeightSizer->Add(m_minHeight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_minHeightSizer->Add(m_minHeight, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMinHStrings;
     m_unitsMinHStrings.push_back("px");
@@ -349,7 +349,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxWidthCheckbox->SetHelpText(_("Enable the maximum width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxWidthCheckbox->SetToolTip(_("Enable the maximum width value."));
-    m_sizeSizer->Add(m_maxWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_sizeSizer->Add(m_maxWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_maxWidthSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_maxWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -358,7 +358,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxWidth->SetHelpText(_("The object maximum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxWidth->SetToolTip(_("The object maximum width."));
-    m_maxWidthSizer->Add(m_maxWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_maxWidthSizer->Add(m_maxWidth, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMaxWStrings;
     m_unitsMaxWStrings.push_back("px");
@@ -376,7 +376,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxHeightCheckbox->SetHelpText(_("Enable the height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxHeightCheckbox->SetToolTip(_("Enable the height value."));
-    m_sizeSizer->Add(m_maxHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_sizeSizer->Add(m_maxHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_maxHeightSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_maxHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
@@ -385,7 +385,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxHeight->SetHelpText(_("The object maximum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxHeight->SetToolTip(_("The object maximum height."));
-    m_maxHeightSizer->Add(m_maxHeight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_maxHeightSizer->Add(m_maxHeight, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMaxHStrings;
     m_unitsMaxHStrings.push_back("px");
@@ -445,7 +445,7 @@ void wxRichTextSizePage::CreateControls()
     m_positionLeftCheckbox->SetHelpText(_("The left position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionLeftCheckbox->SetToolTip(_("The left position."));
-    m_leftSizer->Add(m_positionLeftCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_leftSizer->Add(m_positionLeftCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_leftLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_leftLabel->Show(false);
@@ -459,7 +459,7 @@ void wxRichTextSizePage::CreateControls()
     m_left->SetHelpText(_("The left position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_left->SetToolTip(_("The left position."));
-    itemBoxSizer72->Add(m_left, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer72->Add(m_left, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsLeftStrings;
     m_unitsLeftStrings.push_back("px");
@@ -480,7 +480,7 @@ void wxRichTextSizePage::CreateControls()
     m_positionTopCheckbox->SetHelpText(_("The top position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionTopCheckbox->SetToolTip(_("The top position."));
-    m_topSizer->Add(m_positionTopCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_topSizer->Add(m_positionTopCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_topLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Top:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_topLabel->Show(false);
@@ -494,7 +494,7 @@ void wxRichTextSizePage::CreateControls()
     m_top->SetHelpText(_("The top position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_top->SetToolTip(_("The top position."));
-    itemBoxSizer78->Add(m_top, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer78->Add(m_top, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsTopStrings;
     m_unitsTopStrings.push_back("px");
@@ -515,7 +515,7 @@ void wxRichTextSizePage::CreateControls()
     m_positionRightCheckbox->SetHelpText(_("The right position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionRightCheckbox->SetToolTip(_("The right position."));
-    m_rightSizer->Add(m_positionRightCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_rightSizer->Add(m_positionRightCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_rightLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_rightLabel->Show(false);
@@ -529,7 +529,7 @@ void wxRichTextSizePage::CreateControls()
     m_right->SetHelpText(_("The right position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_right->SetToolTip(_("The right position."));
-    m_rightPositionSizer->Add(m_right, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_rightPositionSizer->Add(m_right, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsRightStrings;
     m_unitsRightStrings.push_back("px");
@@ -550,7 +550,7 @@ void wxRichTextSizePage::CreateControls()
     m_positionBottomCheckbox->SetHelpText(_("The bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionBottomCheckbox->SetToolTip(_("The bottom position."));
-    m_bottomSizer->Add(m_positionBottomCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_bottomSizer->Add(m_positionBottomCheckbox, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     m_bottomLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bottomLabel->Show(false);
@@ -564,7 +564,7 @@ void wxRichTextSizePage::CreateControls()
     m_bottom->SetHelpText(_("The bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_bottom->SetToolTip(_("The bottom position."));
-    m_bottomPositionSizer->Add(m_bottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
+    m_bottomPositionSizer->Add(m_bottom, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP | wxDirection::wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsBottomStrings;
     m_unitsBottomStrings.push_back("px");

@@ -434,7 +434,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
             sizer->Add(bmpbt1, 0, wxALIGN_CENTRE_VERTICAL | wxRIGHT, 2);
             sizer->Add(bmpbt2, 0, wxALIGN_CENTRE_VERTICAL, 0);
 
-            topsizer->Add(sizer, 0, wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT, 10);
+            topsizer->Add(sizer, 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxBOTTOM | wxDirection::wxRIGHT, 10);
         }
 
         m_ContentsBox = new wxTreeCtrl(dummy, wxID_HTML_TREECTRL,
@@ -464,7 +464,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_ContentsBox->AssignImageList(ContentsImageList);
 
         topsizer->Add(m_ContentsBox, 1,
-                      wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT,
+                      wxEXPAND | wxDirection::wxLEFT | wxDirection::wxBOTTOM | wxDirection::wxRIGHT,
                       2);
 
         m_NavigNotebook->AddPage(dummy, _("Contents"));
@@ -498,14 +498,14 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_IndexButtonAll->SetToolTip(_("Show all items in index"));
 #endif //wxUSE_TOOLTIPS
 
-        topsizer->Add(m_IndexText, 0, wxEXPAND | wxALL, 10);
+        topsizer->Add(m_IndexText, 0, wxEXPAND | wxDirection::wxALL, 10);
         wxSizer *btsizer = new wxBoxSizer(wxHORIZONTAL);
-        btsizer->Add(m_IndexButton, 0, wxRIGHT, 2);
+        btsizer->Add(m_IndexButton, 0, wxDirection::wxRIGHT, 2);
         btsizer->Add(m_IndexButtonAll);
         topsizer->Add(btsizer, 0,
-                      wxALIGN_RIGHT | wxLEFT | wxRIGHT | wxBOTTOM, 10);
-        topsizer->Add(m_IndexCountInfo, 0, wxEXPAND | wxLEFT | wxRIGHT, 2);
-        topsizer->Add(m_IndexList, 1, wxEXPAND | wxALL, 2);
+                      wxALIGN_RIGHT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 10);
+        topsizer->Add(m_IndexCountInfo, 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT, 2);
+        topsizer->Add(m_IndexList, 1, wxEXPAND | wxDirection::wxALL, 2);
 
         m_NavigNotebook->AddPage(dummy, _("Index"));
         m_IndexPage = notebook_page++;
@@ -535,12 +535,12 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
                                      wxDefaultPosition, wxDefaultSize,
                                      {}, wxLB_SINGLE);
 
-        sizer->Add(m_SearchText, 0, wxEXPAND | wxALL, 10);
-        sizer->Add(m_SearchChoice, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 10);
-        sizer->Add(m_SearchCaseSensitive, 0, wxLEFT | wxRIGHT, 10);
-        sizer->Add(m_SearchWholeWords, 0, wxLEFT | wxRIGHT, 10);
-        sizer->Add(m_SearchButton, 0, wxALL | wxALIGN_RIGHT, 8);
-        sizer->Add(m_SearchList, 1, wxALL | wxEXPAND, 2);
+        sizer->Add(m_SearchText, 0, wxEXPAND | wxDirection::wxALL, 10);
+        sizer->Add(m_SearchChoice, 0, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 10);
+        sizer->Add(m_SearchCaseSensitive, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT, 10);
+        sizer->Add(m_SearchWholeWords, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT, 10);
+        sizer->Add(m_SearchButton, 0, wxDirection::wxALL | wxALIGN_RIGHT, 8);
+        sizer->Add(m_SearchList, 1, wxDirection::wxALL | wxEXPAND, 2);
 
         m_NavigNotebook->AddPage(dummy, _("Search"));
         m_SearchPage = notebook_page;
@@ -1213,16 +1213,16 @@ public:
         sizer->Add(FontSize = new wxSpinCtrl(this, wxID_ANY, "", wxDefaultPosition,
                       wxDefaultSize, wxSP_ARROW_KEYS, 2, 100, 2, "wxSpinCtrl"));
 
-        topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
+        topsizer->Add(sizer, 0, wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 10);
 
         topsizer->Add(new wxStaticText(this, wxID_ANY, _("Preview:")),
-                        0, wxLEFT | wxTOP, 10);
+                        0, wxDirection::wxLEFT | wxDirection::wxTOP, 10);
 
         topsizer->AddSpacer(5);
 
         topsizer->Add(TestWin = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxSize(20, 150),
                                                  wxHW_SCROLLBAR_AUTO|wxBORDER_THEME),
-                        1, wxEXPAND | wxLEFT | wxRIGHT, 10);
+                        1, wxEXPAND | wxDirection::wxLEFT | wxDirection::wxRIGHT, 10);
 
         wxBoxSizer *sizer2 = new wxBoxSizer(wxHORIZONTAL);
         wxButton *ok;

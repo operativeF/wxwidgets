@@ -90,7 +90,7 @@ void wxRichTextTabsPage::CreateControls()
     itemBoxSizer4->Add(itemBoxSizer5, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Position (tenths of a mm):"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     m_tabEditCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABEDIT, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_tabEditCtrl->SetHelpText(_("The tab position."));
@@ -101,7 +101,7 @@ void wxRichTextTabsPage::CreateControls()
     std::vector<std::string> m_tabListCtrlStrings;
     m_tabListCtrlStrings.push_back("The tab positions.");
     m_tabListCtrl = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABLIST, wxDefaultPosition, wxSize(80, 200), m_tabListCtrlStrings, wxLB_SINGLE );
-    itemBoxSizer5->Add(m_tabListCtrl, 1, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    itemBoxSizer5->Add(m_tabListCtrl, 1, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 5);
 
     itemBoxSizer4->Add(2, 1, 0, wxALIGN_CENTER_VERTICAL|wxTOP|wxBOTTOM, 5);
 
@@ -121,13 +121,13 @@ void wxRichTextTabsPage::CreateControls()
     itemButton13->SetHelpText(_("Click to delete the selected tab position."));
     if (wxRichTextTabsPage::ShowToolTips())
         itemButton13->SetToolTip(_("Click to delete the selected tab position."));
-    itemBoxSizer10->Add(itemButton13, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    itemBoxSizer10->Add(itemButton13, 0, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 5);
 
     wxButton* itemButton14 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_DELETE_ALL_TABS, _("Delete A&ll"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton14->SetHelpText(_("Click to delete all tab positions."));
     if (wxRichTextTabsPage::ShowToolTips())
         itemButton14->SetToolTip(_("Click to delete all tab positions."));
-    itemBoxSizer10->Add(itemButton14, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    itemBoxSizer10->Add(itemButton14, 0, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxBOTTOM, 5);
 
 ////@end wxRichTextTabsPage content construction
 }

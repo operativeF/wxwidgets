@@ -97,7 +97,7 @@ protected:
 
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
     // in case we need to emulate indeterminate mode...
-    int m_nDirection{wxRIGHT};       // can be wxRIGHT or wxLEFT
+    wxDirection m_nDirection{wxDirection::wxRIGHT};       // can be wxRIGHT or wxLEFT
 #endif
 
     std::unique_ptr<wxAppProgressIndicator> m_appProgressIndicator;

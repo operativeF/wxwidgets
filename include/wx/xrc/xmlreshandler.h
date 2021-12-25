@@ -82,7 +82,7 @@ public:
     virtual wxCoord GetDimension(const wxString& param, wxCoord defaultv = 0,
                                  wxWindow *windowToUse = nullptr) = 0;
     virtual wxSize GetPairInts(const wxString& param) = 0;
-    virtual wxDirection GetDirection(const wxString& param, wxDirection dir = wxLEFT) = 0;
+    virtual wxDirection GetDirection(const wxString& param, wxDirection dir = wxDirection::wxLEFT) = 0;
     virtual wxBitmap GetBitmap(const wxString& param = "bitmap",
                                const wxArtClient& defaultArtClient = wxART_OTHER,
                                wxSize size = wxDefaultSize) = 0;
@@ -315,7 +315,7 @@ protected:
     {
         return GetImpl()->GetPairInts(param);
     }
-    wxDirection GetDirection(const wxString& param, wxDirection dir = wxLEFT)
+    wxDirection GetDirection(const wxString& param, wxDirection dir = wxDirection::wxLEFT)
     {
         return GetImpl()->GetDirection(param, dir);
     }

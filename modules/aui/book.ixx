@@ -39,7 +39,7 @@ struct wxAuiTabContainerButton
     wxRect rect;         // button's hit rectangle
     unsigned int curState{}; // current state (normal, hover, pressed, etc.)
     int id{};            // button's id
-    int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
+    wxDirection location{wxDirection::wxLEFT}; // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
 using wxAuiTabContainerButtonArray = std::vector<wxAuiTabContainerButton>;
@@ -82,7 +82,7 @@ public:
 
     void RemoveButton(int id);
     void AddButton(int id,
-                   int location,
+                   wxDirection location,
                    const wxBitmap& normalBitmap = wxNullBitmap,
                    const wxBitmap& disabledBitmap = wxNullBitmap);
 

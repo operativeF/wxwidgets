@@ -166,7 +166,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
                                     wxArtProvider::GetMessageBoxIcon(m_dialogStyle)
                                    );
         if ( wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA )
-            topsizer->Add( icon, 0, wxTOP|wxLEFT|wxRIGHT | wxALIGN_LEFT, 10 );
+            topsizer->Add( icon, 0, wxDirection::wxTOP | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxALIGN_LEFT, 10 );
         else
             icon_text->Add(icon, wxSizerFlags().Top().Border(wxRIGHT, 20));
     }
@@ -197,7 +197,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     textsizer->Add(CreateTextSizer(lowerMessage));
 
     icon_text->Add(textsizer, 0, wxALIGN_CENTER, 10);
-    topsizer->Add( icon_text, 1, wxLEFT|wxRIGHT|wxTOP, 10 );
+    topsizer->Add( icon_text, 1, wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 10 );
 #endif // wxUSE_STATTEXT
 
     // 3) optional checkbox and detailed text
@@ -207,7 +207,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     // 4) buttons
     wxSizer *sizerBtn = CreateMsgDlgButtonSizer();
     if ( sizerBtn )
-        topsizer->Add(sizerBtn, 0, wxEXPAND | wxALL, 10 );
+        topsizer->Add(sizerBtn, 0, wxEXPAND | wxDirection::wxALL, 10 );
 
     SetAutoLayout( true );
     SetSizer( topsizer );

@@ -44,6 +44,7 @@
 #include "wx/textentry.h"
 
 import Utils.Geometry;
+import WX.Cfg.Flags;
 import WX.Cmn.Time;
 
 import <cstdint>;
@@ -321,7 +322,7 @@ public:
     // Set side of the control to which the popup will align itself.
     // Valid values are wxLEFT, wxRIGHT and 0. The default value 0 wmeans
     // that the side of the button will be used.
-    void SetPopupAnchor( int anchorSide )
+    void SetPopupAnchor( wxDirection anchorSide )
     {
         m_anchorSide = anchorSide;
     }
@@ -335,7 +336,7 @@ public:
     //   There is no spacingY - the button will be centred vertically.
     void SetButtonPosition( int width = -1,
                             int height = -1,
-                            int side = wxRIGHT,
+                            wxDirection side = wxDirection::wxRIGHT,
                             int spacingX = 0 );
 
     // Returns current size of the dropdown button.
@@ -677,7 +678,7 @@ protected:
     wxCoord                 m_marginLeft{-1};
 
     // side on which the popup is aligned
-    int                     m_anchorSide{0};
+    wxDirection             m_anchorSide{wxDirection::wxLEFT};
 
     // Width of the "fake" border
     wxCoord                 m_widthCustomBorder{0};
@@ -688,7 +689,7 @@ protected:
     // button position
     int                     m_btnWid{-1};
     int                     m_btnHei{-1};
-    int                     m_btnSide{wxRIGHT};
+    wxDirection             m_btnSide{wxDirection::wxRIGHT};
     int                     m_btnSpacingX{0};
 
     // last default button width

@@ -948,7 +948,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
         if ( !( m_style & wxFC_NOSHOWHIDDEN ) )
         {
             m_check = new wxCheckBox( this, ID_CHECK, _( "Show &hidden files" ) );
-            choicesizer->Add( m_check, wxSizerFlags().Centre().DoubleBorder(wxLEFT) );
+            choicesizer->Add( m_check, wxSizerFlags().Centre().DoubleBorder(wxDirection::wxLEFT) );
         }
 
         mainsizer->Add( choicesizer, wxSizerFlags().Expand().Border() );

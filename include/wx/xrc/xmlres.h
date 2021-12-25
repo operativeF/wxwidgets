@@ -568,7 +568,7 @@ public:
     wxSize GetPairInts(const wxString& param) override;
 
     // Gets a direction, complains if the value is invalid.
-    wxDirection GetDirection(const wxString& param, wxDirection dirDefault = wxLEFT) override;
+    wxDirection GetDirection(const wxString& param, wxDirection dirDefault = wxDirection::wxLEFT) override;
 
     // Gets a bitmap.
     wxBitmap GetBitmap(const wxString& param = "bitmap",

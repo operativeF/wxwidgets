@@ -297,13 +297,13 @@ void GUIFrame::AddPanel_3()
 
     m_textCtrl1 = new wxTextCtrl( m_panel3, wxID_ANY, _("Single-line"), wxDefaultPosition, wxDefaultSize, 0 );
     m_textCtrl1->SetToolTip( _("wxTextCtrl") );
-    bSizer2->Add( m_textCtrl1, 0, wxTOP|wxRIGHT|wxLEFT, 20 );
+    bSizer2->Add( m_textCtrl1, 0, wxDirection::wxTOP | wxDirection::wxRIGHT | wxDirection::wxLEFT, 20 );
 
     bSizer2->Add( 0, 10, 0, 0, 5 );
 
     m_textCtrl2 = new wxTextCtrl( m_panel3, wxID_ANY, _("Multi-line\nLine1\nLine2\n"), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
     m_textCtrl2->SetToolTip( _("wxTextCtrl") );
-    bSizer2->Add( m_textCtrl2, 0, wxBOTTOM|wxRIGHT|wxLEFT, 20 );
+    bSizer2->Add( m_textCtrl2, 0, wxDirection::wxBOTTOM | wxDirection::wxRIGHT | wxDirection::wxLEFT, 20 );
 
     m_richText1 = new wxRichTextCtrl( m_panel3, wxID_ANY, {}, wxDefaultPosition, wxSize( -1,-1 ), 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
     m_richText1->LoadFile("richtext.xml");

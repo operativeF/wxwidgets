@@ -740,7 +740,7 @@ void wxAuiGenericTabArt::DrawButton(wxDC& dc,
 
     rect = in_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::wxLEFT)
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));
@@ -1254,7 +1254,7 @@ void wxAuiSimpleTabArt::DrawButton(wxDC& dc,
 
     rect = in_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::wxLEFT)
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));

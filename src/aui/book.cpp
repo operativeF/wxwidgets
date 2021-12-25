@@ -60,10 +60,10 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAuiNotebookEvent, wxBookCtrlEvent);
 wxAuiTabContainer::wxAuiTabContainer()
     : m_art{std::make_unique<wxAuiDefaultTabArt>()}
 {
-    AddButton(wxAUI_BUTTON_LEFT, wxLEFT);
-    AddButton(wxAUI_BUTTON_RIGHT, wxRIGHT);
-    AddButton(wxAUI_BUTTON_WINDOWLIST, wxRIGHT);
-    AddButton(wxAUI_BUTTON_CLOSE, wxRIGHT);
+    AddButton(wxAUI_BUTTON_LEFT, wxDirection::wxLEFT);
+    AddButton(wxAUI_BUTTON_RIGHT, wxDirection::wxRIGHT);
+    AddButton(wxAUI_BUTTON_WINDOWLIST, wxDirection::wxRIGHT);
+    AddButton(wxAUI_BUTTON_CLOSE, wxDirection::wxRIGHT);
 }
 
 void wxAuiTabContainer::SetArtProvider(std::unique_ptr<wxAuiTabArt> art)
@@ -93,18 +93,18 @@ void wxAuiTabContainer::SetFlags(unsigned int flags)
 
     if (flags & wxAUI_NB_SCROLL_BUTTONS)
     {
-        AddButton(wxAUI_BUTTON_LEFT, wxLEFT);
-        AddButton(wxAUI_BUTTON_RIGHT, wxRIGHT);
+        AddButton(wxAUI_BUTTON_LEFT, wxDirection::wxLEFT);
+        AddButton(wxAUI_BUTTON_RIGHT, wxDirection::wxRIGHT);
     }
 
     if (flags & wxAUI_NB_WINDOWLIST_BUTTON)
     {
-        AddButton(wxAUI_BUTTON_WINDOWLIST, wxRIGHT);
+        AddButton(wxAUI_BUTTON_WINDOWLIST, wxDirection::wxRIGHT);
     }
 
     if (flags & wxAUI_NB_CLOSE_BUTTON)
     {
-        AddButton(wxAUI_BUTTON_CLOSE, wxRIGHT);
+        AddButton(wxAUI_BUTTON_CLOSE, wxDirection::wxRIGHT);
     }
 
     if (m_art)
@@ -328,7 +328,7 @@ size_t wxAuiTabContainer::GetPageCount() const
 }
 
 void wxAuiTabContainer::AddButton(int id,
-                                  int location,
+                                  wxDirection location,
                                   const wxBitmap& normalBitmap,
                                   const wxBitmap& disabledBitmap)
 {
@@ -536,7 +536,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
 
     for(auto& button : std::ranges::reverse_view(m_buttons))
     {
-        if (button.location != wxLEFT)
+        if (button.location != wxDirection::wxLEFT)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -548,7 +548,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
                           button_rect,
                           button.id,
                           button.curState,
-                          wxLEFT,
+                          wxDirection::wxLEFT,
                           &button.rect);
 
         offset += button.rect.GetWidth();
@@ -571,7 +571,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     {
         wxAuiTabContainerButton tempbtn;
         tempbtn.id = wxAUI_BUTTON_CLOSE;
-        tempbtn.location = wxCENTER;
+        tempbtn.location = static_cast<wxDirection>(wxCENTER); // FIXME: Need bitflags classes instead of this.
         tempbtn.curState = wxAUI_BUTTON_STATE_HIDDEN;
         m_tabCloseButtons.push_back(tempbtn);
     }
@@ -608,7 +608,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
             {
                 tab_button.id = wxAUI_BUTTON_CLOSE;
                 tab_button.curState = wxAUI_BUTTON_STATE_NORMAL;
-                tab_button.location = wxCENTER;
+                tab_button.location = static_cast<wxDirection>(wxCENTER); // FIXME: Need bitflags instead of this.
             }
         }
         else
@@ -730,7 +730,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     // calculate size of the buttons on the left side
     for (auto& button : std::ranges::reverse_view(m_buttons))
     {
-        if (button.location != wxLEFT)
+        if (button.location != wxDirection::wxLEFT)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -2353,17 +2353,17 @@ void wxAuiNotebook::Split(size_t page, int direction)
     wxAuiPaneInfo paneInfo = wxAuiPaneInfo().Bottom().CaptionVisible(false);
     wxPoint mouse_pt;
 
-    if (direction == wxLEFT)
+    if (direction == wxDirection::wxLEFT)
     {
         paneInfo.Left();
         mouse_pt = wxPoint(0, cli_size.y/2);
     }
-    else if (direction == wxRIGHT)
+    else if (direction == wxDirection::wxRIGHT)
     {
         paneInfo.Right();
         mouse_pt = wxPoint(cli_size.x, cli_size.y/2);
     }
-    else if (direction == wxTOP)
+    else if (direction == wxDirection::wxTOP)
     {
         paneInfo.Top();
         mouse_pt = wxPoint(cli_size.x/2, 0);

@@ -358,7 +358,7 @@ void wxAuiMSWTabArt::DrawButton(wxDC& dc,
 
     wxRect rect = in_rect;
 
-    if ( orientation == wxLEFT )
+    if ( orientation == wxDirection::wxLEFT )
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.y / 2));

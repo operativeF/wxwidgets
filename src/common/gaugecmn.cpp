@@ -111,14 +111,14 @@ void wxGaugeBase::Pulse()
     const int curr = GetValue();
     const int max = GetRange();
 
-    if (m_nDirection == wxRIGHT)
+    if (m_nDirection == wxDirection::wxRIGHT)
     {
         if (curr < max)
             SetValue(curr + 1);
         else
         {
             SetValue(max - 1);
-            m_nDirection = wxLEFT;
+            m_nDirection = wxDirection::wxLEFT;
         }
     }
     else
@@ -128,7 +128,7 @@ void wxGaugeBase::Pulse()
         else
         {
             SetValue(1);
-            m_nDirection = wxRIGHT;
+            m_nDirection = wxDirection::wxRIGHT;
         }
     }
 #endif

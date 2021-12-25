@@ -44,7 +44,7 @@ public:
     // defines where is the bitmap truncated if it's too big to fit but doesn't
     // do anything for the banner position, this is supposed to be taken care
     // of in the usual way, e.g. using sizers.
-    wxBannerWindow(wxWindow* parent, wxDirection dir = wxLEFT)
+    wxBannerWindow(wxWindow* parent, wxDirection dir = wxDirection::wxLEFT)
     {
         Create(parent, wxID_ANY, dir);
     }
@@ -52,7 +52,7 @@ public:
     // Full constructor provided for consistency with the other classes only.
     wxBannerWindow(wxWindow* parent,
                    wxWindowID winid,
-                   wxDirection dir = wxLEFT,
+                   wxDirection dir = wxDirection::wxLEFT,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
@@ -66,7 +66,7 @@ public:
     // Can be only called on objects created with the default constructor.
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID winid,
-                wxDirection dir = wxLEFT,
+                wxDirection dir = wxDirection::wxLEFT,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
@@ -130,7 +130,7 @@ private:
     wxBitmap m_bitmap;
 
     // The window side along which the banner is laid out.
-    wxDirection m_direction{wxLEFT};
+    wxDirection m_direction{wxDirection::wxLEFT};
 
     wxDECLARE_EVENT_TABLE();
 };

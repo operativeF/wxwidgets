@@ -198,12 +198,12 @@ public:
 
     wxSizerFlags& HorzBorder()
     {
-        return Border(wxLEFT | wxRIGHT, std::lround(GetDefaultBorderFractional()));
+        return Border(wxDirection::wxLEFT | wxDirection::wxRIGHT, std::lround(GetDefaultBorderFractional()));
     }
 
     wxSizerFlags& DoubleHorzBorder()
     {
-        return Border(wxLEFT | wxRIGHT, std::lround(2 * GetDefaultBorderFractional()));
+        return Border(wxDirection::wxLEFT | wxDirection::wxRIGHT, std::lround(2 * GetDefaultBorderFractional()));
     }
 
     // setters for the others flags

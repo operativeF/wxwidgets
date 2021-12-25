@@ -106,19 +106,19 @@ void wxRichTextFontPage::CreateControls()
     itemBoxSizer4->Add(itemBoxSizer5, 1, wxGROW, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Font:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     m_faceTextCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_FACETEXTCTRL, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_faceTextCtrl->SetHelpText(_("Type a font name."));
     if (wxRichTextFontPage::ShowToolTips())
         m_faceTextCtrl->SetToolTip(_("Type a font name."));
-    itemBoxSizer5->Add(m_faceTextCtrl, 0, wxGROW|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(m_faceTextCtrl, 0, wxGROW | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     wxBoxSizer* itemBoxSizer8 = new wxBoxSizer(wxVERTICAL);
     itemBoxSizer4->Add(itemBoxSizer8, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText9 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Size:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer8->Add(itemStaticText9, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer8->Add(itemStaticText9, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     wxBoxSizer* itemBoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
     itemBoxSizer8->Add(itemBoxSizer10, 0, wxGROW, 5);
@@ -127,7 +127,7 @@ void wxRichTextFontPage::CreateControls()
     m_sizeTextCtrl->SetHelpText(_("Type a size in points."));
     if (wxRichTextFontPage::ShowToolTips())
         m_sizeTextCtrl->SetToolTip(_("Type a size in points."));
-    itemBoxSizer10->Add(m_sizeTextCtrl, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP, 5);
+    itemBoxSizer10->Add(m_sizeTextCtrl, 0, wxALIGN_CENTER_VERTICAL | wxDirection::wxLEFT | wxDirection::wxTOP, 5);
 
     m_fontSizeSpinButtons = new wxSpinButton( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_SPINBUTTONS, wxDefaultPosition, wxSize(-1, 20), wxSP_VERTICAL );
     m_fontSizeSpinButtons->SetRange(0, 100);
@@ -167,7 +167,7 @@ void wxRichTextFontPage::CreateControls()
     itemBoxSizer17->Add(itemBoxSizer18, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText19 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Font st&yle:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer18->Add(itemStaticText19, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer18->Add(itemStaticText19, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_styleCtrlStrings;
     m_styleCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_STYLECTRL, "", wxDefaultPosition, wxSize(110, -1), m_styleCtrlStrings, wxCB_READONLY );
@@ -180,7 +180,7 @@ void wxRichTextFontPage::CreateControls()
     itemBoxSizer17->Add(itemBoxSizer21, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText22 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Font &weight:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer21->Add(itemStaticText22, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer21->Add(itemStaticText22, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_weightCtrlStrings;
     m_weightCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_WEIGHTCTRL, "", wxDefaultPosition, wxSize(110, -1), m_weightCtrlStrings, wxCB_READONLY );
@@ -193,7 +193,7 @@ void wxRichTextFontPage::CreateControls()
     itemBoxSizer17->Add(itemBoxSizer24, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText25 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Underlining:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer24->Add(itemStaticText25, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer24->Add(itemStaticText25, 0, wxALIGN_LEFT | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     std::vector<std::string> m_underliningCtrlStrings;
     m_underliningCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_UNDERLINING_CTRL, "", wxDefaultPosition, wxSize(110, -1), m_underliningCtrlStrings, wxCB_READONLY );
@@ -209,7 +209,7 @@ void wxRichTextFontPage::CreateControls()
 
     m_textColourLabel = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_COLOURCTRL_LABEL, _("&Colour:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_textColourLabel->SetValue(false);
-    itemBoxSizer28->Add(m_textColourLabel, 0, wxALIGN_CENTER_HORIZONTAL|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer28->Add(m_textColourLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     m_colourCtrl = new wxRichTextColourSwatchCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_COLOURCTRL, wxDefaultPosition, wxSize(40, 20), 0 );
     m_colourCtrl->SetHelpText(_("Click to change the text colour."));
@@ -222,7 +222,7 @@ void wxRichTextFontPage::CreateControls()
 
     m_bgColourLabel = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_BGCOLOURCTRL_LABEL, _("&Bg colour:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bgColourLabel->SetValue(false);
-    itemBoxSizer31->Add(m_bgColourLabel, 0, wxALIGN_CENTER_HORIZONTAL|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer31->Add(m_bgColourLabel, 0, wxALIGN_CENTER_HORIZONTAL | wxDirection::wxLEFT | wxDirection::wxRIGHT | wxDirection::wxTOP, 5);
 
     m_bgColourCtrl = new wxRichTextColourSwatchCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_BGCOLOURCTRL, wxDefaultPosition, wxSize(40, 20), 0 );
     m_bgColourCtrl->SetHelpText(_("Click to change the text background colour."));

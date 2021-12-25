@@ -187,7 +187,7 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
                                     wxDefaultPosition, wxDefaultSize,
                                     wxBU_EXACTFIT);
     sizerH->Add(browse,
-                wxSizerFlags(0).Align(wxALIGN_CENTER_VERTICAL). Border(wxLEFT));
+                wxSizerFlags(0).Align(wxALIGN_CENTER_VERTICAL). Border(wxDirection::wxLEFT));
 
 #endif // wxUSE_FILEDLG
 

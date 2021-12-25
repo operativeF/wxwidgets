@@ -32,10 +32,10 @@ wxWindow *wxButtonBase::SetDefault()
 void wxAnyButtonBase::SetBitmapPosition(wxDirection dir)
 {
     wxASSERT_MSG( !(dir & ~wxDIRECTION_MASK), "non-direction flag used" );
-    wxASSERT_MSG( !!(dir & wxLEFT) +
-                    !!(dir & wxRIGHT) +
-                      !!(dir & wxTOP) +
-                       !!(dir & wxBOTTOM) == 1,
+    wxASSERT_MSG( !!(dir & wxDirection::wxLEFT) +
+                    !!(dir & wxDirection::wxRIGHT) +
+                      !!(dir & wxDirection::wxTOP) +
+                       !!(dir & wxDirection::wxBOTTOM) == 1,
                    "exactly one direction flag must be set" );
 
     DoSetBitmapPosition(dir);
