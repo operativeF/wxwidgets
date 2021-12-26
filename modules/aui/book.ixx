@@ -10,6 +10,7 @@
 
 module;
 
+#include "wx/bitmap.h"
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 #include "wx/window.h"

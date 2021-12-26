@@ -99,7 +99,7 @@ public:
                   wxNotebookPage *pPage,
                   const std::string& strText,
                   bool bSelect = false,
-                  int imageId = NO_IMAGE) override;
+                  int imageId = wxWithImages::NO_IMAGE) override;
 
     // Windows-only at present. Also, you must use the wxNB_FIXEDWIDTH
     // style.

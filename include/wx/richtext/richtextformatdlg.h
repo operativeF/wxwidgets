@@ -19,7 +19,6 @@
 
 #include "wx/propdlg.h"
 #include "wx/bookctrl.h"
-#include "wx/withimages.h"
 #include "wx/colourdata.h"
 
 #if wxUSE_HTML
@@ -29,6 +28,8 @@
 #include "wx/richtext/richtextbuffer.h"
 #include "wx/richtext/richtextstyles.h"
 #include "wx/richtext/richtextuicustomization.h"
+
+import WX.Core.WithImages;
 
 class wxRichTextFormattingDialog;
 class wxComboBox;

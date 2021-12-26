@@ -7,11 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/toplevel.h"
-#include "wx/dcclient.h"
 #include "wx/app.h"
 #include "wx/display.h"
 

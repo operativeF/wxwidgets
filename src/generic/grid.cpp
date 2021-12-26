@@ -22,8 +22,6 @@ module;
 #include "wx/dcclient.h"
 #include "wx/dnd.h"
 #include "wx/log.h"
-#include "wx/valtext.h"
-#include "wx/intl.h"
 #include "wx/listbox.h"
 #include "wx/dcbuffer.h"
 #include "wx/spinctrl.h"

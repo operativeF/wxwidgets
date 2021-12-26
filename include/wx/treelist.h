@@ -18,7 +18,9 @@
 #include "wx/headercol.h"
 #include "wx/itemid.h"
 #include "wx/window.h"
-#include "wx/withimages.h"
+
+import WX.Utils.Cast;
+import WX.Core.WithImages;
 
 import <string>;
 import <vector>;

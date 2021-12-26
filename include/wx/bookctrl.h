@@ -14,9 +14,9 @@
 #if wxUSE_BOOKCTRL
 
 #include "wx/control.h"
-#include "wx/withimages.h"
 
 import WX.Cfg.Flags;
+import WX.Core.WithImages;
 
 import Utils.Geometry;
 
@@ -179,7 +179,7 @@ public:
     virtual bool AddPage(wxWindow *page,
                          const std::string& text,
                          bool bSelect = false,
-                         int imageId = NO_IMAGE)
+                         int imageId = wxWithImages::NO_IMAGE)
     {
         DoInvalidateBestSize();
         return InsertPage(GetPageCount(), page, text, bSelect, imageId);

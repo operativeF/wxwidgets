@@ -151,6 +151,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/versioninfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/wfstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/windowid.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/withimages.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/zipstrm.ixx
 )

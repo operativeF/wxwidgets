@@ -7,35 +7,32 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_WITHIMAGES_H_
-#define _WX_WITHIMAGES_H_
+module;
 
 #include "wx/icon.h"
 #include "wx/imaglist.h"
 #include "wx/gdicmn.h"
 
+export module WX.Core.WithImages;
+
 // ----------------------------------------------------------------------------
 // wxWithImages: mix-in class providing access to wxImageList.
 // ----------------------------------------------------------------------------
 
+export
+{
+
 class wxWithImages
 {
 public:
-    enum
-    {
-        NO_IMAGE = -1
-    };
-
-    wxWithImages()
-    {
-        m_imageList = nullptr;
-        m_ownsImageList = false;
-    }
+    static constexpr auto NO_IMAGE{-1};
 
     virtual ~wxWithImages()
     {
         FreeIfNeeded();
     }
+
+    wxWithImages& operator=(wxWithImages&&) = delete;
 
     // Sets the image list to use, it is *not* deleted by the control.
     virtual void SetImageList(wxImageList* imageList)
@@ -84,13 +81,11 @@ private:
     }
 
 
-    // The associated image list or NULL.
-    wxImageList* m_imageList;
+    // The associated image list or nullptr.
+    wxImageList* m_imageList{nullptr};
 
     // False by default, if true then we delete m_imageList.
-    bool m_ownsImageList;
-
-   wxWithImages& operator=(wxWithImages&&) = delete;
+    bool m_ownsImageList{false};
 };
 
-#endif // _WX_WITHIMAGES_H_
+} // export

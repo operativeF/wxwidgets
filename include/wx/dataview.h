@@ -20,10 +20,10 @@
 #include "wx/itemid.h"
 #include "wx/weakref.h"
 #include "wx/dataobj.h"
-#include "wx/withimages.h"
 #include "wx/systhemectrl.h"
 
 import Utils.Geometry;
+import WX.Core.WithImages;
 
 import <string>;
 import <vector>;

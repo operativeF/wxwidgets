@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TEXTCTRL || wxUSE_COMBOBOX
 
 #include "wx/window.h"
