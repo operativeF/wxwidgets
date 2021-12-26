@@ -48,7 +48,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/hashmap.cpp
     ${BASE_SRC_DIR}/common/init.cpp
     ${BASE_SRC_DIR}/common/intl.cpp
-    ${BASE_SRC_DIR}/common/ipcbase.cpp
     ${BASE_SRC_DIR}/common/languageinfo.cpp
     ${BASE_SRC_DIR}/common/list.cpp
     ${BASE_SRC_DIR}/common/log.cpp
@@ -93,6 +92,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/filename.cpp
     ${BASE_SRC_DIR}/common/fs_arc.cpp
     ${BASE_SRC_DIR}/common/fs_filter.cpp
+    ${BASE_SRC_DIR}/common/ipcbase.cpp
     ${BASE_SRC_DIR}/common/mstream.cpp
     ${BASE_SRC_DIR}/common/platinfo.cpp
     ${BASE_SRC_DIR}/common/sstream.cpp
@@ -133,6 +133,7 @@ set(BASE_CMN_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/filename.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_arc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fs_filter.ixx
+    ${CMAKE_SOURCE_DIR}/modules/base/ipcbase.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/mstream.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/platinfo.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/settings.ixx

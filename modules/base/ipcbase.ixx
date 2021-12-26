@@ -8,10 +8,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _WX_IPCBASEH__
-#define _WX_IPCBASEH__
+module;
 
 #include "wx/string.h"
+
+export module WX.Cmn.IpcBase;
+
+export
+{
 
 enum wxIPCFormat
 {
@@ -251,4 +255,4 @@ public:
   virtual wxConnectionBase *OnMakeConnection() = 0;
 };
 
-#endif // _WX_IPCBASEH__
+} // export

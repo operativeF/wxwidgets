@@ -8,8 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/ipcbase.h"
+module;
 
+#include "wx/string.h"
+
+module WX.Cmn.IpcBase;
 
 wxConnectionBase::wxConnectionBase(void *buffer, size_t bytes)
     : m_buffer((char *)buffer),

@@ -17,11 +17,11 @@
 
 #if wxUSE_SOCKETS && wxUSE_IPC
 
-#include "wx/ipcbase.h"
 #include "wx/socket.h"
 #include "wx/sckstrm.h"
 
 import WX.Cmn.DataStream;
+import WX.Cmn.IpcBase;
 
 /*
  * Mini-DDE implementation

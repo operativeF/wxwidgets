@@ -11,7 +11,7 @@
 #ifndef _WX_DDE_H_
 #define _WX_DDE_H_
 
-#include "wx/ipcbase.h"
+import WX.Cmn.IpcBase;
 
 /*
  * Mini-DDE implementation
