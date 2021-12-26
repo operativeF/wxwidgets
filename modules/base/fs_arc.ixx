@@ -9,18 +9,18 @@
 module;
 
 #include "wx/filesys.h"
-#include "wx/hashmap.h"
 
 export module WX.FileSys.Arc;
 
 import <string>;
+import <unordered_map>;
 
 #if wxUSE_FS_ARCHIVE
 
 export
 {
 
-WX_DECLARE_STRING_HASH_MAP(int, wxArchiveFilenameHashMap);
+using wxArchiveFilenameHashMap = std::unordered_map<std::string, int>;
 
 //---------------------------------------------------------------------------
 // wxArchiveFSHandler
@@ -35,24 +35,26 @@ public:
     wxFSFile* OpenFile(wxFileSystem& fs, const std::string& location) override;
     std::string FindFirst(const std::string& spec, unsigned int flags = 0) override;
     std::string FindNext() override;
-    void Cleanup();
-    ~wxArchiveFSHandler();
 
 private:
-    class wxArchiveFSCache *m_cache{nullptr};
+    std::string DoFind();
+
+    wxArchiveFilenameHashMap m_DirsFound;
+
     wxFileSystem m_fs;
+
+    class wxArchiveFSCache *m_cache{nullptr};
 
     // these vars are used by FindFirst/Next:
     class wxArchiveFSCacheData *m_Archive{nullptr};
     struct wxArchiveFSEntry *m_FindEntry{nullptr};
+
     std::string m_Pattern;
     std::string m_BaseDir;
     std::string m_ZipFile;
+
     bool m_AllowDirs{true};
     bool m_AllowFiles{true};
-    wxArchiveFilenameHashMap *m_DirsFound{nullptr};
-
-    std::string DoFind();
 };
 
 } // export

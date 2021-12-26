@@ -297,17 +297,6 @@ wxArchiveFSCacheData *wxArchiveFSCache::Get(const std::string& name)
 // wxArchiveFSHandler
 //----------------------------------------------------------------------------
 
-wxArchiveFSHandler::~wxArchiveFSHandler()
-{
-    Cleanup();
-    delete m_cache;
-}
-
-void wxArchiveFSHandler::Cleanup()
-{
-    wxDELETE(m_DirsFound);
-}
-
 bool wxArchiveFSHandler::CanOpen(const std::string& location)
 {
     std::string p = GetProtocol(location);
@@ -437,8 +426,8 @@ std::string wxArchiveFSHandler::FindFirst(const std::string& spec, unsigned int 
     {
         if (m_AllowDirs)
         {
-            delete m_DirsFound;
-            m_DirsFound = new wxArchiveFilenameHashMap();
+            m_DirsFound.clear();
+
             if (right.empty())  // allow "/" to match the archive root
                 return spec;
         }
@@ -475,9 +464,9 @@ std::string wxArchiveFSHandler::DoFind()
             dir = wx::utils::BeforeLast(namestr, '/');
             while (!dir.empty())
             {
-                if( m_DirsFound->find(dir) == m_DirsFound->end() )
+                if( !m_DirsFound.contains(dir) )
                 {
-                    (*m_DirsFound)[dir] = 1;
+                    m_DirsFound[dir] = 1;
                     filename = wx::utils::AfterLast(dir, '/');
                     dir = wx::utils::BeforeLast(dir, '/');
                     if (!filename.empty() && m_BaseDir == dir &&
