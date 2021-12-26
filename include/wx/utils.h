@@ -316,11 +316,6 @@ std::string wxGetUserHome(const std::string& user = {});
 
 using wxDiskspaceSize_t = std::int64_t;
 
-// get number of total/free bytes on the disk where path belongs
-bool wxGetDiskSpace(const std::string& path,
-                                     wxDiskspaceSize_t *pTotal = nullptr,
-                                     wxDiskspaceSize_t *pFree = nullptr);
-
 #if wxUSE_GUI // GUI only things from now on
 
 // ----------------------------------------------------------------------------

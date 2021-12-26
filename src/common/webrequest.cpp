@@ -37,6 +37,8 @@ import WX.Cmn.Uri;
 import WX.File.Flags;
 import WX.File.Filename;
 
+import <filesystem>;
+
 extern const char wxWebSessionBackendWinHTTP[] = "WinHTTP";
 extern const char wxWebSessionBackendURLSession[] = "URLSession";
 extern const char wxWebSessionBackendCURL[] = "CURL";
@@ -609,9 +611,9 @@ void wxWebResponseImpl::Init()
         if ( GetContentLength() > 0 )
         {
             // Check available disk space
-            std::int64_t freeSpace;
-            if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), nullptr, &freeSpace) &&
-                GetContentLength() > freeSpace )
+            std::error_code ec;
+            auto freeSpace = std::filesystem::space(tmpPrefix.GetFullPath(), ec);
+            if ( ec == std::errc() && GetContentLength() > freeSpace.available() )
             {
                 m_request.SetState(wxWebRequest::State_Failed, _("Not enough free disk space for download."));
                 return;

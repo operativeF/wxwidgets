@@ -406,42 +406,6 @@ std::string wxGetUserHome(const std::string& user)
     return home;
 }
 
-bool wxGetDiskSpace(const std::string& path,
-                    wxDiskspaceSize_t *pTotal,
-                    wxDiskspaceSize_t *pFree)
-{
-    if ( path.empty() )
-        return false;
-
-    ULARGE_INTEGER bytesFree, bytesTotal;
-
-    // may pass the path as is, GetDiskFreeSpaceEx() is smart enough
-    if ( !::GetDiskFreeSpaceExW(boost::nowide::widen(path).c_str(),
-                               &bytesFree,
-                               &bytesTotal,
-                               nullptr) )
-    {
-        wxLogLastError("GetDiskFreeSpaceEx");
-
-        return false;
-    }
-
-    // ULARGE_INTEGER is a union of a 64 bit value and a struct containing
-    // two 32 bit fields which may be or may be not named
-    #define UL(ul) ul
-    if ( pTotal )
-    {
-        *pTotal = wxDiskspaceSize_t(bytesTotal.QuadPart);
-    }
-
-    if ( pFree )
-    {
-        *pFree = wxDiskspaceSize_t(bytesFree.QuadPart);
-    }
-
-    return true;
-}
-
 // ----------------------------------------------------------------------------
 // env vars
 // ----------------------------------------------------------------------------
