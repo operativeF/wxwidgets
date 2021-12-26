@@ -11,8 +11,6 @@
 #include "wx/app.h"
 #include "wx/window.h"
 
-#include "asserthelper.h"
-
 import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------

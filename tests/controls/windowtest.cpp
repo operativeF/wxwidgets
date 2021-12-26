@@ -18,7 +18,6 @@
 
 #include "wx/tooltip.h"
 
-#include "asserthelper.h"
 #include "testableframe.h"
 #include "testwindow.h"
 

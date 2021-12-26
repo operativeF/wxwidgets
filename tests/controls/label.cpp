@@ -10,9 +10,7 @@
 
 #include "wx/app.h"
 #include "wx/checkbox.h"
-
 #include "wx/control.h"
-
 #include "wx/stattext.h"
 
 #include "wx/generic/stattextg.h"

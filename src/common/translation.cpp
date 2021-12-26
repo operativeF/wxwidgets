@@ -15,7 +15,6 @@ module;
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/hashmap.h"
 #include "wx/module.h"
 #include "wx/dir.h"
 #include "wx/fontmap.h"

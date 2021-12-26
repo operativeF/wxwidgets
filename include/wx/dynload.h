@@ -15,14 +15,14 @@
 #if wxUSE_DYNAMIC_LOADER
 
 #include "wx/dynlib.h"
-#include "wx/hashmap.h"
 #include "wx/module.h"
+
+import <unordered_map>;
 
 class wxPluginLibrary;
 
+using wxDLManifest = std::unordered_map<std::string, wxPluginLibrary*>;
 
-WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxPluginLibrary *, wxDLManifest,
-                                     class);
 using wxDLImports = wxDLManifest;
 
 // ---------------------------------------------------------------------------

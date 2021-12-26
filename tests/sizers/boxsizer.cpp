@@ -11,8 +11,6 @@
 #include "wx/app.h"
 #include "wx/listbox.h"
 
-#include "asserthelper.h"
-
 import WX.Core.Sizer;
 
 import WX.Test.Prec;

@@ -15,7 +15,6 @@
 
 #include "wx/headerctrl.h"
 #include "testableframe.h"
-#include "asserthelper.h"
 #include "wx/uiaction.h"
 #include "wx/utils.h"
 

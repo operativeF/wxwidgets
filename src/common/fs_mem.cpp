@@ -14,6 +14,8 @@
 #include "wx/log.h"
 #include "wx/wxcrtvararg.h"
 
+#include <memory>
+
 #if wxUSE_GUI
     import WX.Image;
 #endif // wxUSE_GUI
@@ -78,7 +80,6 @@ wxMemoryFSHandlerBase::~wxMemoryFSHandlerBase()
     // as only one copy of FS handler is supposed to exist, we may silently
     // delete static data here. (There is no way how to remove FS handler from
     // wxFileSystem other than releasing _all_ handlers.)
-    WX_CLEAR_HASH_MAP(wxMemoryFSHash, m_Hash);
 }
 
 bool wxMemoryFSHandlerBase::CanOpen(const std::string& location)
@@ -89,11 +90,11 @@ bool wxMemoryFSHandlerBase::CanOpen(const std::string& location)
 wxFSFile * wxMemoryFSHandlerBase::OpenFile([[maybe_unused]] wxFileSystem& fs,
                                            const std::string& location)
 {
-    wxMemoryFSHash::const_iterator i = m_Hash.find(GetRightLocation(location));
+    auto i = m_Hash.find(GetRightLocation(location));
     if ( i == m_Hash.end() )
         return nullptr;
 
-    const wxMemoryFSFile * const obj = i->second;
+    const wxMemoryFSFile* const obj = i->second.get();
 
     return new wxFSFile
                (
@@ -183,7 +184,7 @@ void wxMemoryFSHandlerBase::AddFileWithMimeType(const std::string& filename,
     if ( !CheckDoesntExist(filename) )
         return;
 
-    m_Hash[filename] = new wxMemoryFSFile(binarydata, size, mimetype);
+    m_Hash[filename] = std::make_unique<wxMemoryFSFile>(binarydata, size, mimetype);
 }
 
 /*static*/
@@ -205,7 +206,7 @@ void wxMemoryFSHandlerBase::AddFile(const std::string& filename,
 
 /*static*/ void wxMemoryFSHandlerBase::RemoveFile(const std::string& filename)
 {
-    wxMemoryFSHash::iterator i = m_Hash.find(filename);
+    auto i = m_Hash.find(filename);
     if ( i == m_Hash.end() )
     {
         wxLogError(_("Trying to remove file '%s' from memory VFS, "
@@ -214,7 +215,6 @@ void wxMemoryFSHandlerBase::AddFile(const std::string& filename,
         return;
     }
 
-    delete i->second;
     m_Hash.erase(i);
 }
 
@@ -234,7 +234,7 @@ wxMemoryFSHandler::AddFile(const std::string& filename,
     wxMemoryOutputStream mems;
     if ( image.IsOk() && image.SaveFile(mems, type) )
     {
-        m_Hash[filename] = new wxMemoryFSFile
+        m_Hash[filename] = std::make_unique<wxMemoryFSFile>
                                (
                                     mems,
                                     wxImage::FindHandler(type)->GetMimeType()

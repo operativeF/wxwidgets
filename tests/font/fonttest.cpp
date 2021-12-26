@@ -13,7 +13,12 @@
 
 #include "asserthelper.h"
 
+#include <fmt/core.h>
+
 import WX.Test.Prec;
+import Utils.Strings;
+
+import <string>;
 
 // ----------------------------------------------------------------------------
 // local helpers

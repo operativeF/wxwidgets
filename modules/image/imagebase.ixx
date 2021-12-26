@@ -10,7 +10,6 @@ module;
 
 #include "wx/gdicmn.h"
 #include "wx/object.h"
-#include "wx/hashmap.h"
 
 export module WX.Image.Base;
 
@@ -20,6 +19,7 @@ import WX.WinDef;
 import WX.Cmn.Stream;
 
 import <string>;
+import <unordered_map>;
 import <vector>;
 
 #if wxUSE_IMAGE
@@ -240,9 +240,7 @@ struct wxImageHistogramEntry
     unsigned long value{0};
 };
 
-WX_DECLARE_HASH_MAP(unsigned long, wxImageHistogramEntry,
-                             wxIntegerHash, wxIntegerEqual,
-                             wxImageHistogramBase);
+using wxImageHistogramBase = std::unordered_map<unsigned long, wxImageHistogramEntry>;
 
 class wxImageHistogram : public wxImageHistogramBase
 {

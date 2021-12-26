@@ -10,7 +10,6 @@
 
 #include "testprec.h"
 
-
 #include "wx/testing.h"
 
 #ifdef HAVE_VARIADIC_MACROS

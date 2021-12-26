@@ -15,7 +15,6 @@
 #include "wx/uiaction.h"
 
 #include "testableframe.h"
-#include "asserthelper.h"
 
 import WX.Test.Prec;
 

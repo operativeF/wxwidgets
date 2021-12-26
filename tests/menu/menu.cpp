@@ -21,6 +21,7 @@
 import WX.Test.Prec;
 
 import <cstdarg>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // helper

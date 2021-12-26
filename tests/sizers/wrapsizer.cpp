@@ -12,8 +12,6 @@
 #include "wx/window.h"
 #include "wx/wrapsizer.h"
 
-#include "asserthelper.h"
-
 import WX.Test.Prec;
 
 TEST_CASE("wxWrapSizer::CalcMin")

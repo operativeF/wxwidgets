@@ -17,7 +17,6 @@
 #include "wx/richtext/richtextctrl.h"
 #include "wx/richtext/richtextstyles.h"
 #include "testableframe.h"
-#include "asserthelper.h"
 #include "wx/uiaction.h"
 
 

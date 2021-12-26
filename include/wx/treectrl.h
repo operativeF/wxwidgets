@@ -21,6 +21,7 @@
 #include "wx/treebase.h"
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through wxCLASSINFO macro
 #include "wx/systhemectrl.h"
+#include "wx/wxcrt.h"
 
 import Utils.Geometry;
 

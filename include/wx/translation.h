@@ -16,7 +16,6 @@
 
 #include "wx/buffer.h"
 #include "wx/language.h"
-#include "wx/hashmap.h"
 #include "wx/strconv.h"
 #include "wx/scopedptr.h"
 

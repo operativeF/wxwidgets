@@ -17,7 +17,6 @@
 
 #include "textentrytest.h"
 #include "itemcontainertest.h"
-#include "asserthelper.h"
 
 import WX.Test.Prec;
 

@@ -12,7 +12,6 @@
 #include "wx/frame.h"
 #include "wx/window.h"
 
-#include "asserthelper.h"
 #include "waitforpaint.h"
 
 import WX.Test.Prec;

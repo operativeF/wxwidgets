@@ -13,14 +13,15 @@
 
 #include "wx/filesys.h"
 
-#include "wx/hashmap.h"
-
-class wxMemoryFSFile;
-WX_DECLARE_STRING_HASH_MAP(wxMemoryFSFile *, wxMemoryFSHash);
-
 #if wxUSE_GUI
     #include "wx/bitmap.h"
 #endif // wxUSE_GUI
+
+import <unordered_map>;
+
+class wxMemoryFSFile;
+
+using wxMemoryFSHash = std::unordered_map<std::string, std::unique_ptr<wxMemoryFSFile>>;
 
 // ----------------------------------------------------------------------------
 // wxMemoryFSHandlerBase

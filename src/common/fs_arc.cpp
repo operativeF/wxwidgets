@@ -8,6 +8,7 @@
 
 module;
 
+#include "wx/hashmap.h"
 #include "wx/intl.h"
 #include "wx/private/fileback.h"
 
@@ -130,7 +131,7 @@ void wxArchiveFSCacheDataImpl::CloseStreams()
 
 wxArchiveEntry *wxArchiveFSCacheDataImpl::Get(const std::string& name)
 {
-    wxArchiveFSEntryHash::iterator it = m_hash.find(name);
+    auto it = m_hash.find(name);
 
     if (it != m_hash.end())
         return it->second;

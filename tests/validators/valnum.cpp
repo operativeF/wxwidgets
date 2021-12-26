@@ -16,7 +16,6 @@
 #include "wx/scopeguard.h"
 #include "wx/uiaction.h"
 
-#include "asserthelper.h"
 #include "testableframe.h"
 
 import WX.Test.Prec;

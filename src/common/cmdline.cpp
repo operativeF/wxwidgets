@@ -18,6 +18,7 @@ module;
 #include "wx/msgout.h"
 #include "wx/apptrait.h"
 #include "wx/scopeguard.h"
+#include "wx/wxcrt.h"
 
 #include <boost/nowide/convert.hpp>
 

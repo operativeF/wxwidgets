@@ -16,9 +16,9 @@
     #include "wx/icon.h"
 #endif
 
+#include "wx/wxcrt.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/hashmap.h"
 #include "wx/filefn.h"
 
 #include "wx/dir.h"
@@ -30,8 +30,10 @@
 #include <boost/nowide/stackstring.hpp>
 
 import Utils.Strings;
-
 import WX.WinDef;
+
+import <string>;
+import <unordered_map>;
 
 #if wxUSE_BASE
 
@@ -76,7 +78,9 @@ struct FileInfo
     unsigned m_flags;
     wxFSVolumeKind m_type;
 };
-WX_DECLARE_STRING_HASH_MAP(FileInfo, FileInfoMap);
+
+using FileInfoMap = std::unordered_map<std::string, FileInfo>;
+
 // Cygwin bug (?) destructor for global s_fileInfo is called twice...
 static FileInfoMap& GetFileInfoMap()
 {

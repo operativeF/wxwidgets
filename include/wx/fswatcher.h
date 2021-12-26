@@ -15,10 +15,10 @@
 #include "wx/log.h"
 #include "wx/event.h"
 #include "wx/evtloop.h"
-#include "wx/hashmap.h"
 
 import WX.File.Filename;
 
+import <unordered_map>;
 import <vector>;
 
 inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
@@ -276,7 +276,7 @@ protected:
     int m_refcount{-1};
 };
 
-WX_DECLARE_STRING_HASH_MAP(wxFSWatchInfo, wxFSWatchInfoMap);
+using wxFSWatchInfoMap = std::unordered_map<std::string, wxFSWatchInfo>;
 
 /**
  * Encapsulation of platform-specific file system event mechanism

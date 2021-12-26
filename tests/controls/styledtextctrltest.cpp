@@ -13,10 +13,7 @@
 
 #if defined(WXUSINGDLL)
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/stc/stc.h"
 #include "wx/uiaction.h"

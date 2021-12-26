@@ -15,10 +15,11 @@
 
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/hashmap.h"
 #include "wx/module.h"
 
 #include "wx/msw/private/hiddenwin.h"
+
+import <unordered_map>;
 
 // ----------------------------------------------------------------------------
 // private globals
@@ -26,7 +27,7 @@
 
 // define a hash containing all the timers: it is indexed by timer id and
 // contains the corresponding timer
-using wxTimerMap = std::unordered_map< WXWPARAM, wxMSWTimerImpl *, wxIntegerHash, wxIntegerEqual >;
+using wxTimerMap = std::unordered_map<WXWPARAM, wxMSWTimerImpl*>;
 
 
 // instead of using a global here, wrap it in a static function as otherwise it

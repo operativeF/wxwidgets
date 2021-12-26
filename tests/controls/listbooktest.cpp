@@ -11,7 +11,6 @@
 #if wxUSE_LISTBOOK
 
 #include "wx/app.h"
-#include "wx/panel.h"
 #include "wx/listbook.h"
 #include "wx/listctrl.h"
 

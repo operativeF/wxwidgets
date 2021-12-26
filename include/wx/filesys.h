@@ -12,7 +12,6 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/datetime.h"
-#include "wx/hashmap.h"
 #include "wx/list.h"
 
 import WX.Cmn.Stream;
@@ -21,6 +20,7 @@ import WX.File.Filename;
 import Utils.Strings;
 
 import <string>;
+import <unordered_map>;
 
 class wxFSFile;
 class wxFileSystemHandler;
@@ -167,7 +167,7 @@ enum wxFileSystemOpenFlags
     wxFS_SEEKABLE = 4   // Returned stream will be seekable
 };
 
-WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL(wxFileSystemHandler*, wxFSHandlerHash, class);
+using wxFSHandlerHash = std::unordered_map<void*, wxFileSystemHandler*>;
 
 class wxFileSystem : public wxObject
 {

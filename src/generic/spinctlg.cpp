@@ -13,7 +13,7 @@
 #include "wx/private/spinctrl.h"
 
 #include "wx/textctrl.h"
-
+#include "wx/wxcrt.h"
 #include "wx/spinctrl.h"
 #include "wx/tooltip.h"
 

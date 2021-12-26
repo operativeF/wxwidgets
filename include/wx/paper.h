@@ -13,10 +13,13 @@
 
 #include "wx/event.h"
 #include "wx/intl.h"
-#include "wx/hashmap.h"
 
 import WX.Core.Cmndata;
 import WX.Print.Cfg;
+
+import <string>;
+import <string_view>;
+import <unordered_map>;
 
 /*
  * Paper type: see printercfg.h for wxPaperSize enum.

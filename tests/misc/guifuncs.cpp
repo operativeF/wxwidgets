@@ -11,13 +11,10 @@
 #include "wx/gdicmn.h"
 #include "wx/filefn.h"
 #include "wx/app.h"
-#include "wx/button.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 #include "wx/panel.h"
 #include "wx/utils.h"
-
-#include "asserthelper.h"
 
 import WX.Test.Prec;
 

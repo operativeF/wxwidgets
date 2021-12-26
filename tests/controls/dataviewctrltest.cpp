@@ -18,7 +18,6 @@ import WX.Cmn.Stopwatch;
 #endif // __WXGTK__
 
 #include "testableframe.h"
-#include "asserthelper.h"
 
 import WX.Test.Prec;
 

@@ -20,7 +20,6 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/utils.h"
-#include "wx/hashmap.h"
 
 #ifdef HAVE_ICONV
     #include <iconv.h>
@@ -2867,7 +2866,7 @@ void wxCSConv::SetName(const char *charset)
 
 #if wxUSE_FONTMAP
 
-using wxEncodingNameCache = std::unordered_map< wxFontEncoding, wxString, wxIntegerHash, wxIntegerEqual >;
+using wxEncodingNameCache = std::unordered_map<wxFontEncoding, wxString>;
 
 static wxEncodingNameCache gs_nameCache;
 #endif

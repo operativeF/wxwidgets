@@ -25,7 +25,6 @@ import WX.Cmn.Stopwatch;
 
 #include "textentrytest.h"
 #include "testableframe.h"
-#include "asserthelper.h"
 
 #include <fmt/core.h>
 

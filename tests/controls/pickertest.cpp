@@ -20,7 +20,6 @@
 #include "wx/fontpicker.h"
 
 #include "pickerbasetest.h"
-#include "asserthelper.h"
 
 import WX.Test.Prec;
 

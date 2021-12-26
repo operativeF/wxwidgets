@@ -15,8 +15,6 @@
 
 #include "wx/help.h"
 
-#include "wx/hashmap.h"
-
 #if wxUSE_BMPBUTTON
 #include "wx/bmpbuttn.h"
 #endif
@@ -24,6 +22,7 @@
 #include "wx/event.h"
 
 import <string>;
+import <unordered_map>;
 
 // ----------------------------------------------------------------------------
 // classes used to implement context help UI
@@ -196,7 +195,7 @@ private:
     inline static wxHelpProvider *ms_helpProvider{nullptr};
 };
 
-WX_DECLARE_HASH_MAP( wxUIntPtr, std::string, wxIntegerHash, wxIntegerEqual, wxSimpleHelpProviderHashMap );
+using wxSimpleHelpProviderHashMap = std::unordered_map<wxUIntPtr, std::string>;
 
 // wxSimpleHelpProvider is an implementation of wxHelpProvider which supports
 // only plain text help strings and shows the string associated with the

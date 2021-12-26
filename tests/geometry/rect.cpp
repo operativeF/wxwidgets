@@ -10,8 +10,6 @@
 
 #include "wx/gdicmn.h"
 
-#include "asserthelper.h"
-
 import WX.Test.Prec;
 
 import <algorithm>;

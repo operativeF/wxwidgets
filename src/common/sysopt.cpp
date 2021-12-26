@@ -12,6 +12,8 @@ module;
 
 #include "wx/app.h"
 #include "wx/string.h"
+#include "wx/utils.h"
+#include "wx/wxcrt.h"
 
 module WX.Cmn.SysOpt;
 
