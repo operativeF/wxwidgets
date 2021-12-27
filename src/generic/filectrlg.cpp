@@ -1157,8 +1157,7 @@ void wxGenericFileCtrl::SetWildcard( const std::string& wildCard )
 {
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        // FIXME: Removed translation for fmt lib
-        m_wildCard = fmt::format( "All files (%s)|%s",
+        m_wildCard = fmt::format( _("All files (%s)|%s"),
                                        wxFileSelectorDefaultWildcardStr,
                                        wxFileSelectorDefaultWildcardStr );
     }

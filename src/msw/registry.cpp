@@ -130,8 +130,8 @@ static std::string GetTypeString(WXDWORD dwType)
         REG_TYPE_TO_STR(QWORD);
         // REG_TYPE_TO_STR(QWORD_LITTLE_ENDIAN); -- same as REG_QWORD
 
-        default:  // FIXME: Removed translation for fmt lib
-            return fmt::format("unknown (%lu)", dwType);
+        default:
+            return fmt::format(_("unknown (%lu)"), dwType);
     }
 }
 

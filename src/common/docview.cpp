@@ -305,7 +305,6 @@ bool wxDocument::SaveAs()
                 if ( !filter.empty() )
                     filter += '|';
 
-                // FIXME: use fmt lib
                 filter += fmt::format("{} ({}) |{}", t->GetDescription(),
                                                      t->GetFileFilter(),
                                                      t->GetFileFilter());

@@ -124,8 +124,7 @@ void wxAboutDialogInfo::SetVersion(const std::string& version,
 
 bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* parent)
 {
-    // FIXME: Removed translation for fmt lib
-    if ( !wxDialog::Create(parent, wxID_ANY, fmt::format("About %s", info.GetName()),
+    if ( !wxDialog::Create(parent, wxID_ANY, fmt::format(_("About %s"), info.GetName()),
                            wxDefaultPosition, wxDefaultSize, wxRESIZE_BORDER|wxDEFAULT_DIALOG_STYLE) )
         return false;
 

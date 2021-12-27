@@ -77,8 +77,7 @@ bool wxFileDialogBase::Create(wxWindow *parent,
 
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        // FIXME: Translation removed for fmt lib
-        m_wildCard = fmt::format("All files (%s)|%s",
+        m_wildCard = fmt::format(_("All files (%s)|%s"),
                                       wxFileSelectorDefaultWildcardStr,
                                       wxFileSelectorDefaultWildcardStr);
     }
@@ -94,8 +93,8 @@ bool wxFileDialogBase::Create(wxWindow *parent,
                 nDot = 0;
 
             m_wildCard = fmt::format
-                         (// FIXME: Translation removed for fmt lib
-                            "%s files (%s)|%s",
+                         (
+                            _("%s files (%s)|%s"),
                             wildCard.c_str() + nDot,
                             wildCard.c_str(),
                             wildCard.c_str()

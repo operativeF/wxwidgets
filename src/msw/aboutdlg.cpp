@@ -42,8 +42,7 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
         // add everything remaining
         msg += info.GetDescriptionAndCredits();
 
-        // FIXME: Translation removed for fmt
-        wxMessageBox(msg, fmt::format("About {:s}", name), wxOK | wxCENTRE, parent);
+        wxMessageBox(msg, fmt::format(_("About {:s}"), name), wxOK | wxCENTRE, parent);
     }
     else // simple "native" version is not enough
     {

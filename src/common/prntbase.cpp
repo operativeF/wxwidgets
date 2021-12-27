@@ -519,17 +519,15 @@ void wxPrintAbortDialog::SetProgress(int currentPage, int totalPages,
   {
     // This means that the user has not supplied a total number of pages so it
     // is better not to show this value.
-    // FIXME: Removed translation for fmt lib
-    text = fmt::format("Printing page {:d}", currentPage);
+    text = fmt::format(_("Printing page {:d}"), currentPage);
   }
   else
   {
-    // FIXME: Removed translation for fmt lib
     // We have a valid total number of pages so we show it.
-    text = fmt::format("Printing page {:d} of {:d}", currentPage, totalPages);
+    text = fmt::format(_("Printing page {:d} of {:d}"), currentPage, totalPages);
   }
-  if ( totalCopies > 1 ) // FIXME: Removed translation for fmt lib
-      text += fmt::format(" (copy {:d} of {:d})", currentCopy, totalCopies);
+  if ( totalCopies > 1 )
+      text += fmt::format(_(" (copy {:d} of {:d})"), currentCopy, totalCopies);
   m_progress->SetLabel(text);
 }
 

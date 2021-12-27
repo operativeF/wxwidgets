@@ -11,6 +11,7 @@ module;
 
 #include "wx/filefn.h"
 #include "wx/log.h"
+#include "wx/translation.h"
 #include "wx/wxcrtvararg.h"
 
 #include <fmt/core.h>
@@ -55,8 +56,8 @@ std::string FormatTiffMessage(const char *module, const char *fmt, va_list ap)
     buf[WXSIZEOF(buf)-1] = 0; // make sure it is always NULL-terminated
 
     std::string msg(buf, 512);
-    if ( module ) // FIXME: Removed translation for fmt lib
-        msg += fmt::format(" (in module \"%s\")", module);
+    if ( module )
+        msg += fmt::format(_(" (in module \"%s\")"), module);
 
     return msg;
 }

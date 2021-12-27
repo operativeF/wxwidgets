@@ -958,8 +958,7 @@ std::size_t wxParseCommonDialogsFilter(const std::string& filterStr,
     {
         if ( descriptions[j].empty() && !filters[j].empty() )
         {
-            // FIXME: Translation removed for fmt lib
-            descriptions[j] = fmt::format("Files (%s)", filters[j]);
+            descriptions[j] = fmt::format(_("Files (%s)"), filters[j]);
         }
     }
 

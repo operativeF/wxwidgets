@@ -171,8 +171,7 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
             title += fmt::format("{}{}", wxTheApp->GetAppDisplayName(), _(": unknown charset"));
 
         // the message
-        // FIXME: Translation removed for fmt::print
-        std::string msg = fmt::format("The charset '%s' is unknown. You may select\nanother charset to replace it with or choose\n[Cancel] if it cannot be replaced", charset);
+        std::string msg = fmt::format(_("The charset '%s' is unknown. You may select\nanother charset to replace it with or choose\n[Cancel] if it cannot be replaced"), charset);
 
         // the list of choices
         const size_t count = GetSupportedEncodingsCount();
@@ -392,14 +391,12 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
         if ( foundEquivEncoding )
         {
             // ask the user if he wants to override found alternative encoding
-            // FIXME: Translation removed for fmt lib
-            msg = fmt::format("No font for displaying text in encoding '%s' found,\nbut an alternative encoding '%s' is available.\nDo you want to use this encoding (otherwise you will have to choose another one)?",
+            msg = fmt::format(_("No font for displaying text in encoding '%s' found,\nbut an alternative encoding '%s' is available.\nDo you want to use this encoding (otherwise you will have to choose another one)?"),
                        encDesc, GetEncodingDescription(equivEncoding));
         }
         else
         {
-            // FIXME: Translation removed for fmt lib
-            msg = fmt::format("No font for displaying text in encoding '%s' found.\nWould you like to select a font to be used for this encoding\n(otherwise the text in this encoding will not be shown correctly)?",
+            msg = fmt::format(_("No font for displaying text in encoding '%s' found.\nWould you like to select a font to be used for this encoding\n(otherwise the text in this encoding will not be shown correctly)?"),
                        encDesc);
         }
 

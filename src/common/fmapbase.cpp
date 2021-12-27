@@ -465,8 +465,7 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
         return wxGetTranslation(std::string{possibleMatch->description});
     }
 
-    // FIXME: Removed translation for fmt lib
-    return fmt::format("Unknown encoding (%d)", encoding);
+    return fmt::format(_("Unknown encoding (%d)"), encoding);
 }
 
 /* static */
@@ -488,8 +487,7 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
         return std::string{possibleMatch->names.substr(0, possibleMatch->names.find_first_of(','))};
     }
 
-    // FIXME: Removed translation for fmt lib
-    return fmt::format("unknown-%d", encoding);
+    return fmt::format(_("unknown-%d"), encoding);
 }
 
 #endif // wxUSE_FONTMAP
