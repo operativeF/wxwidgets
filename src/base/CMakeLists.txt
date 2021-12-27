@@ -289,7 +289,19 @@ set(IMAGE_HANDLERS_IXX
 )
 
 set(IMAGE_HANDLERS_SRC
+    ${CMAKE_SOURCE_DIR}/src/common/imagani.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagbmp.cpp
     ${CMAKE_SOURCE_DIR}/src/common/imagebase.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imaggif.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagico.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagiff.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagjpeg.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpcx.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpng.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagpnm.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagtga.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagtiff.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/imagxpm.cpp
 )
 
 set(IMAGE_DECODERS_IXX

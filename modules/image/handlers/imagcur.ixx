@@ -1,9 +1,15 @@
-module;
+// Original by:
+/////////////////////////////////////////////////////////////////////////////
+// Name:        modules/image/handlers/imagcur.ixx
+// Purpose:     wxImage BMP, ICO, CUR and ANI handlers
+// Author:      Robert Roebling, Chris Elliott
+// Copyright:   (c) Robert Roebling, Chris Elliott
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
 
 export module WX.Image.CUR;
 
 import WX.Cmn.Stream;
-
 import WX.Image.ICO;
 
 #ifdef wxUSE_ICO_CUR
@@ -32,15 +38,13 @@ public:
 
 protected:
 #if wxUSE_STREAMS
-    bool DoCanRead( wxInputStream& stream ) override;
+    bool DoCanRead( wxInputStream& stream ) override
+    {
+        return CanReadICOOrCUR(&stream, 2 /*for identifying a cursor*/);
+    }
 #endif // wxUSE_STREAMS
 };
 
 } // export
-
-bool wxCURHandler::DoCanRead(wxInputStream& stream)
-{
-    return CanReadICOOrCUR(&stream, 2 /*for identifying a cursor*/);
-}
 
 #endif // wxUSE_ICO_CUR
