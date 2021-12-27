@@ -29,8 +29,6 @@ TEST_CASE_FIXTURE(wxNotebookTest, "wxChoicebook Test")
                                               wxDefaultPosition, wxSize(400, 200));
     AddPanels();
 
-    int m_numPageChanges{0};
-
     SUBCASE("RowCount")
     {
         CHECK_EQ(1, m_bookctrl->GetRowCount());

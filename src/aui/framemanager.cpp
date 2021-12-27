@@ -416,8 +416,8 @@ void FindDocks(wxAuiDockInfoArray& docks,
     int end_layer = dock_layer;
     int begin_row = dock_row;
     int end_row = dock_row;
-    int dock_count = docks.size();
-    int layer, row, i, max_row = 0, max_layer = 0;
+
+    int layer, row, max_row = 0, max_layer = 0;
 
     // discover the maximum dock layer and the max row
     for (const auto& dock : docks)
@@ -613,7 +613,7 @@ wxAuiFloatingFrame* wxAuiManager::CreateFloatingFrame(wxWindow* parent,
     return new wxAuiFloatingFrame(parent, this, paneInfo);
 }
 
-bool wxAuiManager::CanDockPanel(const [[maybe_unused]] wxAuiPaneInfo & p)
+bool wxAuiManager::CanDockPanel([[maybe_unused]] const wxAuiPaneInfo & p)
 {
     // if a key modifier is pressed while dragging the frame,
     // don't dock the window
@@ -1060,7 +1060,7 @@ bool wxAuiManager::AddPane(wxWindow* window,
         case wxDirection::wxBOTTOM: pinfo.Bottom(); break;
         case wxDirection::wxLEFT:   pinfo.Left(); break;
         case wxDirection::wxRIGHT:  pinfo.Right(); break;
-        case wxCENTER: pinfo.CenterPane(); break;
+        case wxDirection::wxALL:    pinfo.CenterPane(); break;
     }
     return AddPane(window, pinfo);
 }
@@ -1529,10 +1529,10 @@ bool wxAuiManager::LoadPerspective(const std::string& layout, bool update)
             auto layer_val = wx::utils::BeforeFirst(piece, ",");
             auto row_val   = wx::utils::AfterFirst(piece, ",");
 
-            auto [pDir, ecDir] = std::from_chars(dir_val.data(), dir_val.data() + dir_val.size(), dir);
-            auto [pLay, ecLay] = std::from_chars(layer_val.data(), layer_val.data() + layer_val.size(), layer);
-            auto [pRow, ecRow] = std::from_chars(row_val.data(), row_val.data() + row_val.size(), row);
-            auto [pVal, ecVal] = std::from_chars(value.data(), value.data() + value.size(), size);
+            /*auto [pDir, ecDir]*/ std::ignore = std::from_chars(dir_val.data(), dir_val.data() + dir_val.size(), dir);
+            /*auto [pLay, ecLay]*/ std::ignore = std::from_chars(layer_val.data(), layer_val.data() + layer_val.size(), layer);
+            /*auto [pRow, ecRow]*/ std::ignore = std::from_chars(row_val.data(), row_val.data() + row_val.size(), row);
+            /*auto [pVal, ecVal]*/ std::ignore = std::from_chars(value.data(), value.data() + value.size(), size);
 
             // TODO: Just return if there's an error?
 

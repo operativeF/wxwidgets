@@ -634,7 +634,6 @@ void wxFileListCtrl::GoToParentDir()
 {
     if (!IsTopMostDir(m_dirName))
     {
-        size_t len = m_dirName.length();
         if (wxEndsWithPathSeparator(m_dirName))
             m_dirName.pop_back();
         std::string fname( wxFileNameFromPath(m_dirName) );

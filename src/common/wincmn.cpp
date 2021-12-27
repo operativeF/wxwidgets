@@ -1949,7 +1949,7 @@ void wxWindowBase::SetHelpText(const std::string& text)
 // get the help string associated with this window (may be empty)
 // default implementation forwards calls to the help provider
 std::string
-wxWindowBase::GetHelpTextAtPoint(const [[maybe_unused]] wxPoint & pt,
+wxWindowBase::GetHelpTextAtPoint([[maybe_unused]] const wxPoint & pt,
                                  [[maybe_unused]] wxHelpEvent::Origin origin) const
 {
     wxHelpProvider *helpProvider = wxHelpProvider::Get();

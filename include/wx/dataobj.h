@@ -171,7 +171,7 @@ public:
     // get data from the buffer of specified length (in the given format),
     // return true if the data was read successfully, false otherwise
     virtual bool SetData([[maybe_unused]] const wxDataFormat& format,
-                         [[maybe_unused]] size_t len, const [[maybe_unused]] void * buf)
+                         [[maybe_unused]] size_t len, [[maybe_unused]] const void * buf)
     {
         return false;
     }

@@ -71,8 +71,8 @@ bool wxNativeEncodingInfo::FromString(std::string_view s)
     }
     else
     {
-        auto [p, ec] = std::from_chars(tmp.data(), tmp.data() + tmp.size(), charset);
-        if ( ec != std::errc() )
+        auto [p, chsetEc] = std::from_chars(tmp.data(), tmp.data() + tmp.size(), charset);
+        if ( chsetEc != std::errc() )
         {
             // should be a number!
             return false;

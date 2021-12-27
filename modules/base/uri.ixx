@@ -80,13 +80,13 @@ public:
     bool HasQuery() const       { return (m_fields & wxURI_QUERY) != 0;    }
     bool HasFragment() const    { return (m_fields & wxURI_FRAGMENT) != 0; }
 
-    const wxString& GetScheme() const    { return m_scheme;   }
-    const wxString& GetPath() const      { return m_path;     }
-    const wxString& GetQuery() const     { return m_query;    }
-    const wxString& GetFragment() const  { return m_fragment; }
-    const wxString& GetPort() const      { return m_port;     }
-    const wxString& GetUserInfo() const  { return m_userinfo; }
-    const wxString& GetServer() const    { return m_server;   }
+    const std::string& GetScheme() const    { return m_scheme;   }
+    const std::string& GetPath() const      { return m_path;     }
+    const std::string& GetQuery() const     { return m_query;    }
+    const std::string& GetFragment() const  { return m_fragment; }
+    const std::string& GetPort() const      { return m_port;     }
+    const std::string& GetUserInfo() const  { return m_userinfo; }
+    const std::string& GetServer() const    { return m_server;   }
     wxURIHostType GetHostType() const    { return m_hostType; }
 
     // these functions only work if the user information part of the URI is in
@@ -167,14 +167,14 @@ protected:
     static bool IsDigit(char c);
     static bool IsEndPath(char c);
 
-    wxString m_scheme;
+    std::string m_scheme;
     std::string m_path;
     std::string m_query;
     std::string m_fragment;
 
     std::string m_userinfo;
     std::string m_server;
-    wxString m_port;
+    std::string m_port;
 
     wxURIHostType m_hostType{wxURI_REGNAME};
 

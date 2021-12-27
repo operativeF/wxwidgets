@@ -672,9 +672,9 @@ public:
     void SetDefaultLineSize(wxGrid *grid, int size, bool resizeExisting) const override
         {  grid->SetDefaultRowSize(size, resizeExisting); }
 
-    int GetLineAt(const [[maybe_unused]] wxGrid * grid, int pos) const override
+    int GetLineAt([[maybe_unused]] const wxGrid * grid, int pos) const override
         { return pos; } // TODO: implement row reordering
-    int GetLinePos(const [[maybe_unused]] wxGrid * grid, int line) const override
+    int GetLinePos([[maybe_unused]] const wxGrid * grid, int line) const override
         { return line; } // TODO: implement row reordering
 
     int GetLineBefore([[maybe_unused]] const wxGrid* grid, int line) const override

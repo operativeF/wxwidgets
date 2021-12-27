@@ -1571,8 +1571,6 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
         return {static_cast<short>(LOWORD(rc)),
                 static_cast<short>(HIWORD(rc))};
     }
-
-    return wxDefaultPosition;
 }
 
 

@@ -609,7 +609,7 @@ static bool DoLaunchDefaultBrowserHelper(const std::string& url, unsigned int fl
     else if ( hasValidScheme )
     {
         params.url = url;
-        params.scheme = uri.GetScheme().ToStdString();
+        params.scheme = uri.GetScheme();
 
         if ( params.scheme == "file" )
         {

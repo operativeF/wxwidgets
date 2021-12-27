@@ -1710,7 +1710,7 @@ STDMETHODIMP wxIAccessible::GetIDsOfNames([[maybe_unused]] REFIID riid, [[maybe_
 STDMETHODIMP wxIAccessible::Invoke([[maybe_unused]] DISPID dispIdMember, [[maybe_unused]] REFIID riid, [[maybe_unused]] LCID lcid,
                         [[maybe_unused]] WXWORD wFlags, [[maybe_unused]] DISPPARAMS *pDispParams,
                         [[maybe_unused]] VARIANT *pVarResult, [[maybe_unused]] EXCEPINFO *pExcepInfo,
-                        unsigned [[maybe_unused]] int *puArgErr )
+                        [[maybe_unused]] unsigned int *puArgErr )
 {
     return E_NOTIMPL;
 }

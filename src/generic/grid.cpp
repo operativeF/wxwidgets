@@ -6518,7 +6518,7 @@ wxGrid::DrawRangeGridLines(wxDC& dc,
 // This is used to redraw all grid lines e.g. when the grid line colour
 // has been changed
 //
-void wxGrid::DrawAllGridWindowLines(wxDC& dc, const [[maybe_unused]] wxRegion & reg, wxGridWindow *gridWindow)
+void wxGrid::DrawAllGridWindowLines(wxDC& dc, const wxRegion& reg, wxGridWindow *gridWindow)
 {
     if ( !m_gridLinesEnabled || !gridWindow )
          return;

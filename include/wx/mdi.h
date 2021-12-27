@@ -214,7 +214,7 @@ public:
                        [[maybe_unused]] int number=0) override
         { }
     void SetStatusWidths([[maybe_unused]] int n,
-                         const [[maybe_unused]] int widths[]) override
+                         [[maybe_unused]] const int widths[]) override
         { }
 #endif // wxUSE_STATUSBAR
 

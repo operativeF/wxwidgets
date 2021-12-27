@@ -140,7 +140,8 @@ void CompareImage(const wxImageHandler& handler, const wxImage& image,
     wxImage actual(memIn);
     CHECK(actual.IsOk());
 
-    const wxImage* expected = compareTo ? compareTo : &image;
+    // FIXME: RGBSameAs
+    //const wxImage* expected = compareTo ? compareTo : &image;
 
     unsigned bitsPerPixel = testPalette ? 8 : (testAlpha ? 32 : 24);
     INFO("Compare test '%s (%d-bit)' for saving",

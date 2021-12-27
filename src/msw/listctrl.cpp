@@ -478,7 +478,7 @@ void wxListCtrl::SetWindowStyleFlag(unsigned int flag)
 
         // we don't have wxVSCROLL style, but the list control may have it,
         // don't change it then in the call to parent's SetWindowStyleFlags()
-        WXDWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+        auto dwStyle = wx::narrow_cast<WXDWORD>(::GetWindowLongPtrW(GetHwnd(), GWL_STYLE));
         flag &= ~(wxHSCROLL | wxVSCROLL);
         if ( dwStyle & WS_HSCROLL )
             flag |= wxHSCROLL;
