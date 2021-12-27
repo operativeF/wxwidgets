@@ -343,9 +343,13 @@ wxSemaError wxSemaphore::Post()
 #include "wx/private/threadinfo.h"
 #include "wx/scopeguard.h"
 
-void wxThread::Sleep(unsigned long milliseconds)
+#include <chrono>
+
+using namespace std::chrono_literals;
+
+void wxThread::Sleep(std::chrono::milliseconds msecs)
 {
-    wxMilliSleep(milliseconds);
+    wxSleep(msecs);
 }
 
 void *wxThread::CallEntry()

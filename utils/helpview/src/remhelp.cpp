@@ -198,7 +198,8 @@ bool wxRemoteHtmlHelpController::DoConnection()
         while ( !isconn_1 )
         {
             //try every second for a while, then leave it to user
-            wxSleep(1);
+            using namespace std::chrono_literals;
+            wxSleep(1s);
             if( nsleep > 4 ) {
                 if ( wxMessageBox( "Failed to make connection to Help server.\nRetry?" ,
                                    "wxRemoteHtmlHelpController Error",

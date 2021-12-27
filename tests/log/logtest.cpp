@@ -364,8 +364,10 @@ TEST_CASE("wxLog::Trace", "[log][.]")
     // Running this test without setting WXTRACE is useless.
     REQUIRE( wxGetEnv("WXTRACE", NULL) );
 
+    using namespace std::chrono_literals;
+
     wxLogTrace("logtest", "Starting test");
-    wxMilliSleep(250);
+    wxSleep(250ms);
     wxLogTrace("logtest", "Ending test 1/4s later");
 }
 

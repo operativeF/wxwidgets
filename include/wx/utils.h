@@ -28,6 +28,8 @@
     #include <unistd.h>
 #endif
 
+#include <chrono>
+
 import WX.WinDef;
 import WX.Cfg.Flags;
 import WX.Utils.VersionInfo;
@@ -240,14 +242,11 @@ bool wxShell(const wxString& command = {});
 // be returned in output array
 bool wxShell(const wxString& command, std::vector<wxString>& output);
 
-// Sleep for nSecs seconds
-void wxSleep(int nSecs);
-
-// Sleep for a given amount of milliseconds
-void wxMilliSleep(unsigned long milliseconds);
-
-// Sleep for a given amount of microseconds
-void wxMicroSleep(unsigned long microseconds);
+template<typename DurationType>
+void wxSleep(DurationType t)
+{
+    ::Sleep(std::chrono::duration_cast<std::chrono::milliseconds>(t).count());
+}
 
 // Get the process id of the current process
 unsigned long wxGetProcessId();

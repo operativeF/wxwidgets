@@ -64,9 +64,11 @@ EventCounter::~EventCounter()
 
 bool EventCounter::WaitEvent(int timeInMs)
 {
-    static constexpr int SINGLE_WAIT_DURATION = 50;
+    using namespace std::chrono_literals;
 
-    for ( int i = 0; i < timeInMs / SINGLE_WAIT_DURATION; ++i )
+    static constexpr auto SINGLE_WAIT_DURATION = 50ms;
+
+    for ( int i = 0; i < timeInMs / SINGLE_WAIT_DURATION.count(); ++i )
     {
         wxYield();
 
@@ -79,7 +81,7 @@ bool EventCounter::WaitEvent(int timeInMs)
             return true;
         }
 
-        wxMilliSleep(SINGLE_WAIT_DURATION);
+        wxSleep(SINGLE_WAIT_DURATION);
     }
 
     return false;

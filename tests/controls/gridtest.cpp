@@ -1640,7 +1640,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::DrawInvalidCell")
     // two updates (not yields). This test does all unconditionally.
     m_grid->Update();
     wxYield();
-    wxMilliSleep(20);
+    using namespace std::chrono_literals;
+    wxSleep(20ms);
 
     // Try to force redrawing of the inside cell: if it still draws there will
     // be an infinite recursion.

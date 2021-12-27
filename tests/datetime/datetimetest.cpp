@@ -13,10 +13,7 @@
 
 #if wxUSE_DATETIME
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"   // wxMilliSleep()
-#endif // WX_PRECOMP
-
+#include "wx/utils.h"   // wxSleep()
 #include "wx/wxcrt.h"       // for wxStrstr()
 
 import WX.Cmn.Time;
@@ -1626,7 +1623,8 @@ TEST_CASE("wxDateTime::UNow")
         //     << now.GetSecond() << " and " << unow.GetSecond() <<
         //     "), retrying.");
 
-        wxMilliSleep(123);
+        using namespace std::chrono_literals;
+        wxSleep(123ms);
     }
 
     CHECK( now.GetYear() == unow.GetYear() );
@@ -1642,6 +1640,7 @@ TEST_CASE("wxDateTime::UNow")
     // runs on average, which is certainly not a lot, but still try to avoid
     // such spurious failures.
     bool gotMS = false;
+    using namespace std::chrono_literals;
     for ( int i = 0; i < 3; ++i )
     {
         if ( wxDateTime::UNow().GetMillisecond() != 0 )
@@ -1650,7 +1649,7 @@ TEST_CASE("wxDateTime::UNow")
             break;
         }
 
-        wxMilliSleep(123);
+        wxSleep(123ms);
     }
 
     CHECK( gotMS );

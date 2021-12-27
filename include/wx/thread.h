@@ -14,6 +14,8 @@
 
 #if wxUSE_THREADS
 
+#include <chrono>
+
 import WX.WinDef;
 
 // ----------------------------------------------------------------------------
@@ -454,7 +456,7 @@ public:
         // Sleep during the specified period of time in milliseconds
         //
         // This is the same as wxMilliSleep().
-    static void Sleep(unsigned long milliseconds);
+    static void Sleep(std::chrono::milliseconds msecs);
 
         // get the number of system CPUs - useful with SetConcurrency()
         // (the "best" value for it is usually number of CPUs + 1)

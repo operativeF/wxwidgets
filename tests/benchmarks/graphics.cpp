@@ -284,6 +284,8 @@ private:
     }
 #endif // wxUSE_GLCANVAS
 
+    using namespace std::chrono_literals;
+
     void OnPaint([[maybe_unused]] wxPaintEvent& event)
     {
         if ( opts.usePaint )
@@ -302,7 +304,7 @@ private:
             // drawing results are not displayed when the test
             // is running then wait a second after graphics
             // contents is commited to DC to present the output.
-            wxSleep(1);
+            wxSleep(1s);
         }
 
         if ( opts.useClient )
@@ -321,7 +323,7 @@ private:
             // drawing results are not displayed when the test
             // is running then wait a second after graphics
             // contents is commited to DC to present the output.
-            wxSleep(1);
+            wxSleep(1s);
         }
 
         if ( opts.useMemory )

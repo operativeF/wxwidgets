@@ -282,7 +282,8 @@ protected:
         // For some reason, wxBitmapComboBox doesn't appear on the screen without
         // this (due to wxTLW size hacks perhaps?). It would be nice to avoid doing
         // this, but without this hack the test often (although not always) fails.
-        wxMilliSleep(50);
+        using namespace std::chrono_literals;
+        wxSleep(50ms);
     #endif // __WGTK__
 
         // Check that we get the expected number of events.

@@ -288,7 +288,8 @@ TEST_CASE("Tree control test")
     #ifdef __WXGTK__
         // Don't even know the reason why, but GTK has to sleep
         // no less than 1200 for the test case to succeed.
-        wxMilliSleep(1200);
+        using namespace std::chrono_literals;
+        wxSleep(1.2s);
     #endif
 
         sim.MouseDblClick();

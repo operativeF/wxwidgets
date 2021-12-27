@@ -200,8 +200,9 @@ TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
         // another process via proxy and there doesn't seem to be any way to
         // wait until this request is actually handled, so loop here for some a
         // bit before giving up.
+        using namespace std::chrono_literals;
         for ( wxStopWatch sw; !m_browser->HasSelection() && sw.Time() < 50; )
-            wxMilliSleep(1);
+            wxSleep(1ms);
 #endif // wxUSE_WEBVIEW_WEBKIT2
 
         CHECK(m_browser->HasSelection());

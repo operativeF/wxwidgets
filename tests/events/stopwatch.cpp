@@ -20,11 +20,13 @@
 
 import WX.Cmn.Stopwatch;
 
+using namespace std::chrono_literals;
+
 namespace
 {
 
-const long tolerance = 50;  // in ms
-const int sleepTime = 500;
+const auto tolerance = 50ms;  // in ms
+const auto sleepTime = 500ms;
 
 } // anonymous namespace
 
@@ -57,7 +59,7 @@ TEST_CASE("Misc")
         ("Elapsed time was %" wxLongLongFmtSpec "dus", usec)
     );
 
-    wxSleep(1);
+    wxSleep(1s);
     t = sw.Time();
 
     // check that the stop watch doesn't advance while paused

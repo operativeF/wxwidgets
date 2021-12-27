@@ -75,6 +75,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <chrono>
+
 import WX.Base.FontEnc;
 import WX.File.Filename;
 
@@ -1233,25 +1235,6 @@ wxString wxGetCpuArchitectureName()
     default:
         return {};
     }
-}
-
-// ----------------------------------------------------------------------------
-// sleep functions
-// ----------------------------------------------------------------------------
-
-void wxMilliSleep(unsigned long milliseconds)
-{
-    ::Sleep(milliseconds);
-}
-
-void wxMicroSleep(unsigned long microseconds)
-{
-    wxMilliSleep(microseconds/1000);
-}
-
-void wxSleep(int nSecs)
-{
-    wxMilliSleep(1000*nSecs);
 }
 
 // ----------------------------------------------------------------------------

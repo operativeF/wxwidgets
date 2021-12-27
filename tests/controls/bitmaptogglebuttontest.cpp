@@ -54,7 +54,8 @@ TEST_CASE("Bitmap toggle button test")
         clicked.Clear();
 
     #ifdef __WXMSW__
-        wxMilliSleep(1000);
+        using namespace std::chrono_literals;
+        wxSleep(1s);
     #endif
 
         sim.MouseClick();
