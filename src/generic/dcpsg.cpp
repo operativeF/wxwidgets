@@ -25,6 +25,7 @@
 import WX.Image;
 
 import WX.File.Filename;
+import WX.GDI.Flags;
 
 import <cmath>;
 import <numbers>;

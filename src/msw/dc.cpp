@@ -34,6 +34,7 @@
 import WX.WinDef;
 import WX.Win.UniqueHnd;
 import WX.Cmn.SysOpt;
+import WX.GDI.Flags;
 
 import WX.Utils.Cast;
 import Utils.Strings;

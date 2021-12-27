@@ -87,7 +87,7 @@ TEST_CASE("Intersect")
         wxPoint(310, 421)
     };
 
-    wxRegion region1(WXSIZEOF(points1), points1);
+    wxRegion region1(4, points1);
 
     static constexpr wxPoint points2[] = {
         wxPoint(54, 104),
@@ -96,7 +96,7 @@ TEST_CASE("Intersect")
         wxPoint(37,  80)
     };
 
-    wxRegion region2(4,points2);
+    wxRegion region2(4, points2);
 
     CHECK( region1.Intersect(region2) );
     CHECK( region1.IsEmpty() );

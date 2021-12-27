@@ -237,6 +237,7 @@ set(UNIVERSAL_UTILS_IXX
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/unsafe.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/algorithm/strings/tokenzr.ixx
 
+    ${CMAKE_SOURCE_DIR}/modules/base/gdiflags.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fileflags.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/fontenc.ixx
     ${CMAKE_SOURCE_DIR}/modules/base/kbdstate.ixx

@@ -22,6 +22,7 @@ import WX.Cmn.Base64;
 
 import WX.Image;
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 import WX.Cmn.WFStream;
 import WX.Cmn.MemStream;
 import WX.File.Filename;

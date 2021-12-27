@@ -17,6 +17,7 @@
 #include "wx/graphics.h"
 
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 
 import Utils.Strings;
 

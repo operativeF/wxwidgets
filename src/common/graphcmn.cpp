@@ -28,6 +28,8 @@
 
 #include <memory>
 
+import WX.GDI.Flags;
+
 import <cmath>;
 import <numbers>;
 

@@ -18,11 +18,13 @@
 #include "wx/peninfobase.h"
 #include "wx/window.h"
 
+#include <memory>
+
 import WX.Image;
+import WX.GDI.Flags;
 
 import Utils.Geometry;
 
-#include <memory>
 import <string>;
 import <string_view>;
 import <utility>;

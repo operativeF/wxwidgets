@@ -38,6 +38,8 @@ bool wxCairoInit();
     #include "wx/msw/enhmeta.h"
 #endif
 
+import WX.GDI.Flags;
+
 import <vector>;
 
 using namespace std;

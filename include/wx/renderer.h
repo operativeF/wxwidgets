@@ -29,6 +29,7 @@
 #include "wx/bitmap.h"
 
 import Utils.Geometry;
+import WX.GDI.Flags;
 
 import <string>;
 

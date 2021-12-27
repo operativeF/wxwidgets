@@ -25,6 +25,7 @@
 #include <fmt/compile.h>
 
 import WX.Utils.Settings;
+import WX.GDI.Flags;
 
 #define DEBUG_PAINT 0
 

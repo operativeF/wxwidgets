@@ -14,6 +14,7 @@
 #include "wx/dc.h"
 
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 
 import WX.WinDef;
 

@@ -19,6 +19,7 @@
 #include "wx/strvararg.h"
 
 import WX.Core.Cmndata;
+import WX.GDI.Flags;
 
 //-----------------------------------------------------------------------------
 // wxPostScriptDC

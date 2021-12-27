@@ -14,9 +14,9 @@
 #if wxUSE_CONTROLS
 
 #include "wx/window.h"      // base class
-#include "wx/gdicmn.h"      // wxEllipsize...
 
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 
 import Utils.Geometry;
 

@@ -24,9 +24,9 @@
 #include "wx/brush.h"
 #include "wx/pen.h"
 #include "wx/palette.h"
-#include "wx/region.h"
 
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 
 import Utils.Geometry;
 

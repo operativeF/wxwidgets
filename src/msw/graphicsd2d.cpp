@@ -65,6 +65,8 @@
 
 import WX.Image;
 import WX.Utils.Cast;
+import WX.GDI.Flags;
+
 import WX.Win.UniqueHnd;
 
 import <algorithm>;

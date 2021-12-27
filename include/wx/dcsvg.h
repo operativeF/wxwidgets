@@ -15,11 +15,13 @@
 
 #include "wx/dc.h"
 
+#include <memory>
+
+import WX.GDI.Flags;
 import WX.Cfg.Flags;
 import WX.File.Filename;
 import Utils.Geometry;
 
-#include <memory>
 import <string>;
 import <string_view>;
 

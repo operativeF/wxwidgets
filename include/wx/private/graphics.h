@@ -15,6 +15,8 @@
 
 #include "wx/graphics.h"
 
+import WX.GDI.Flags;
+
 class wxGraphicsObjectRefData : public wxObjectRefData
 {
 public :

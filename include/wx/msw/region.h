@@ -11,13 +11,11 @@
 #ifndef _WX_MSW_REGION_H_
 #define _WX_MSW_REGION_H_
 
-#include "wx/gdicmn.h"
+#include <memory>
 
 import WX.WinDef;
-
+import WX.GDI.Flags;
 import Utils.Geometry;
-
-#include <memory>
 
 class wxRegion : public wxRegionWithCombine
 {

@@ -70,6 +70,7 @@
 #endif
 
 import WX.Cfg.Flags;
+import WX.GDI.Flags;
 
 import <array>;
 import <cmath>;

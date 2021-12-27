@@ -16,11 +16,12 @@
 #include "wx/dc.h"
 #include "wx/graphics.h"
 
+#include <memory>
+
 import WX.Cfg.Flags;
 
 import Utils.Geometry;
 
-#include <memory>
 import <string>;
 import <string_view>;
 import <vector>;
