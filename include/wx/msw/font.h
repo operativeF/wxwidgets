@@ -149,4 +149,6 @@ protected:
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 };
 
+inline const wxFont wxNullFont;
+
 #endif // _WX_FONT_H_

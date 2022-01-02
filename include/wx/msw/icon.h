@@ -85,5 +85,7 @@ protected:
     void CreateIconFromXpm(const char* const* data);
 };
 
+inline const wxIcon wxNullIcon;
+
 #endif
     // _WX_ICON_H_

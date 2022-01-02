@@ -30,19 +30,7 @@ import <cmath>;
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
 
-wxColourDatabase* wxTheColourDatabase;
-
 wxBitmap  wxNullBitmap;
-wxBrush   wxNullBrush;
-wxColour  wxNullColour;
-wxCursor  wxNullCursor;
-wxFont    wxNullFont;
-wxIcon    wxNullIcon;
-wxPen     wxNullPen;
-#if wxUSE_PALETTE
-wxPalette wxNullPalette;
-#endif
-wxIconBundle wxNullIconBundle;
 
 WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class);
 

@@ -66,4 +66,6 @@ protected:
     bool Recreate();
 };
 
+inline const wxPen wxNullPen;
+
 #endif // _WX_PEN_H_

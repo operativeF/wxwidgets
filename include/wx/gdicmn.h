@@ -360,16 +360,8 @@ protected:
 
 // 'Null' objects
 extern wxBitmap     wxNullBitmap;
-extern wxIcon       wxNullIcon;
-extern wxCursor     wxNullCursor;
-extern wxPen        wxNullPen;
-extern wxBrush      wxNullBrush;
-extern wxPalette    wxNullPalette;
-extern wxFont       wxNullFont;
-extern wxColour     wxNullColour;
-extern wxIconBundle wxNullIconBundle;
 
-extern wxColourDatabase*  wxTheColourDatabase;
+inline wxColourDatabase*  wxTheColourDatabase;
 
 inline constexpr std::string_view wxPanelNameStr = "panel";
 

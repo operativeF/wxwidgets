@@ -48,4 +48,6 @@ private:
 
 WXHCURSOR wxGetCurrentBusyCursor();
 
+inline const wxCursor wxNullCursor;
+
 #endif // _WX_CURSOR_H_

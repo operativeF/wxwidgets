@@ -46,4 +46,6 @@ protected:
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 };
 
+inline const wxBrush wxNullBrush;
+
 #endif // _WX_BRUSH_H_

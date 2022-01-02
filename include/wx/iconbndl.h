@@ -120,4 +120,6 @@ private:
     void DeleteIcons();
 };
 
+inline const wxIconBundle wxNullIconBundle;
+
 #endif // _WX_ICONBNDL_H_

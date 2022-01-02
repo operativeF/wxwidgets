@@ -59,4 +59,6 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxColour);
 };
 
+inline const wxColour wxNullColour;
+
 #endif // _WX_COLOUR_H_

@@ -46,4 +46,6 @@ protected:
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 };
 
+inline const wxPalette wxNullPalette;
+
 #endif // _WX_PALETTE_H_
