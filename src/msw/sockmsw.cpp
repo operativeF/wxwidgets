@@ -16,8 +16,9 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-import <array>;
 #include <memory>
+
+import <array>;
 import <string_view>;
 
 /* including rasasync.h (included from windows.h itself included from

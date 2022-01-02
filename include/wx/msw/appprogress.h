@@ -11,6 +11,7 @@
 #define _WX_MSW_APPPROG_H_
 
 #include <memory>
+
 import <vector>;
 
 class wxTaskBarButton;

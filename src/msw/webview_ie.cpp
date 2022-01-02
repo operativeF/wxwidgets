@@ -24,8 +24,13 @@
 #include <exdispid.h>
 #include <mshtml.h>
 
+#include <memory>
+
 import WX.WinDef;
 import Utils.Strings;
+
+import <string>;
+import <vector>;
 
 
 /* These GUID definitions are our own implementation to support interfaces

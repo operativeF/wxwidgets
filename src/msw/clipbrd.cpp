@@ -33,7 +33,11 @@
     #include "wx/msw/dib.h"
 #endif
 
+#include <memory>
+
 import WX.WinDef;
+
+import <cmath>;
 
 #if wxUSE_OLE
     // use OLE clipboard

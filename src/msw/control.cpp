@@ -32,6 +32,12 @@ import WX.Utils.Settings;
 import WX.Cfg.Flags;
 import WX.WinDef;
 
+import <algorithm>;
+import <ranges>;
+import <string>;
+import <string_view>;
+import <vector>;
+
 // ============================================================================
 // wxControl implementation
 // ============================================================================

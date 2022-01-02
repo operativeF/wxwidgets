@@ -16,11 +16,16 @@ module;
 #include "wx/toplevel.h"
 #include "wx/translation.h"
 
+#include <memory>
+
 module WX.AUI.TabMDI;
 
 import WX.AUI.Flags;
 import WX.AUI.DockArt;
 import WX.Utils.Settings;
+
+import <string>;
+import <string_view>;
 
 enum MDI_MENU_ID
 {

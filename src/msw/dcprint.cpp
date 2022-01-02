@@ -29,6 +29,8 @@
 
 import WX.Win.UniqueHnd;
 
+import <string>;
+
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)
     #undef GDI_ERROR

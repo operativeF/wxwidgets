@@ -27,6 +27,8 @@
 import WX.WinDef;
 import Utils.Geometry;
 
+import <array>;
+import <cstdint>;
 import <string>;
 
 // ============================================================================

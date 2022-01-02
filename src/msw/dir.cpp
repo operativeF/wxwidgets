@@ -15,6 +15,9 @@
 
 import WX.WinDef;
 
+import <string>;
+import <tuple>;
+
 // ----------------------------------------------------------------------------
 // define the types and functions used for file searching
 // ----------------------------------------------------------------------------

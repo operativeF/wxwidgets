@@ -31,6 +31,7 @@ import WX.Win.UniqueHnd;
 import WX.Utils.Settings;
 
 import <string>;
+import <string_view>;
 import <vector>;
 
 // ----------------------------------------------------------------------------

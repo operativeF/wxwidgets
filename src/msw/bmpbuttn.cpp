@@ -19,6 +19,8 @@
 
 import WX.Image;
 
+import <string_view>;
+
 #ifndef ODS_NOFOCUSRECT
     #define ODS_NOFOCUSRECT     0x0200
 #endif

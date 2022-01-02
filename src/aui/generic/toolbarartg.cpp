@@ -9,6 +9,9 @@ module;
 
 module WX.AUI.ToolBarArt.Generic;
 
+import <algorithm>;
+import <cmath>;
+
 namespace
 {
 

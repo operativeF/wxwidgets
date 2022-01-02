@@ -20,6 +20,9 @@
 
 import WX.WinDef;
 
+import <string>;
+import <string_view>;
+
 #ifndef BCM_SETNOTE
 constexpr unsigned int BCM_SETNOTE = 0x1609;
 #endif

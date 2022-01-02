@@ -32,6 +32,9 @@ import WX.WinDef;
 import Utils.Strings;
 
 import <array>;
+import <string>;
+import <string_view>;
+import <vector>;
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available

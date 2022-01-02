@@ -33,6 +33,9 @@ import WX.Utils.Settings;
 
 import WX.WinDef;
 
+import <string>;
+import <string_view>;
+
 // set the value for BCM_SETSHIELD (for the UAC shield) if it's not defined in
 // the header
 #ifndef BCM_SETSHIELD

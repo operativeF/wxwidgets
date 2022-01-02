@@ -6,6 +6,8 @@ module;
 #include "wx/dcbuffer.h"
 #include "wx/utils.h"
 
+#include <memory>
+
 module WX.AUI.AUIBar;
 
 import WX.AUI.ToolBarArt;
@@ -13,6 +15,10 @@ import WX.AUI.Flags;
 import WX.AUI.FrameManager;
 
 import WX.Core.Sizer;
+
+import <cmath>;
+import <string>;
+import <utility>;
 
 namespace
 {

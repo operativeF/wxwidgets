@@ -22,6 +22,8 @@ module;
 #include "wx/osx/private.h"
 #endif
 
+#include <memory>
+
 module WX.AUI.TabArt.Base;
 
 import WX.AUI.Book;
@@ -31,7 +33,10 @@ import WX.AUI.FrameManager;
 
 import WX.Utils.Settings;
 
+import <algorithm>;
 import <array>;
+import <cmath>;
+import <string>;
 
 // -- GUI helper classes and functions --
 

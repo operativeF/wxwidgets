@@ -41,6 +41,9 @@ import Utils.Strings;
 
 import <cmath>;
 import <numeric>;
+import <string>;
+import <string_view>;
+import <vector>;
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically

@@ -22,9 +22,14 @@
 #include "wx/msw/dc.h"
 
 #include <chrono>
+#include <memory>
 
 import WX.Utils.Settings;
 import WX.Cmn.Stopwatch;
+
+import <cstdint>;
+import <string>;
+import <string_view>;
 
 constexpr int NATIVE_TEXT_INDENT_XP = 4;
 constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;

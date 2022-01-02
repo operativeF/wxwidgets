@@ -13,7 +13,10 @@
 #include "wx/appprogress.h"
 #include "wx/msw/taskbarbutton.h"
 
+#include <memory>
+
 import <algorithm>;
+import <utility>;
 
 // ----------------------------------------------------------------------------
 // wxAppProgressIndicator Implementation.

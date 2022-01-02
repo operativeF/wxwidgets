@@ -17,6 +17,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/paint.h"
 
+#include <memory>
+
 import <unordered_map>;
 
 // ----------------------------------------------------------------------------

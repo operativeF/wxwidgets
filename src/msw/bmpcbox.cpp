@@ -24,6 +24,8 @@ import WX.Utils.Settings;
 
 import WX.WinDef;
 
+import <string>;
+import <string_view>;
 import <vector>;
 
 // ============================================================================

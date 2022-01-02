@@ -19,6 +19,10 @@
 
 import WX.WinDef;
 
+import <string>;
+import <tuple>;
+import <vector>;
+
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {
 public:

@@ -4,8 +4,12 @@ module;
 
 #include "wx/renderer.h"
 
+#include <memory>
+
 module WX.AUI.TabArt;
 
+import <algorithm>;
+import <string>;
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()
 {

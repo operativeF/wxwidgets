@@ -4,8 +4,12 @@ module;
 #include "wx/gdicmn.h"
 #include "wx/window.h"
 
+#include <memory>
+
 module WX.AUI.DockArt;
 
+import <cmath>;
+import <string>;
 
 // -- wxAuiDefaultDockArt class implementation --
 

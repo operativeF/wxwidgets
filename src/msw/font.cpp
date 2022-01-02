@@ -30,6 +30,9 @@ import WX.Cmn.SysOpt;
 import WX.Win.UniqueHnd;
 
 import <charconv>;
+import <cmath>;
+import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // constants

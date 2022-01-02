@@ -38,6 +38,8 @@ module;
     #include "wx/msw/dc.h"
 #endif
 
+#include <memory>
+
 module WX.AUI.FrameManager;
 
 import WX.AUI.AUIBar;
@@ -51,6 +53,9 @@ import WX.Cfg.Flags;
 import WX.Core.Sizer;
 
 import <charconv>;
+import <ranges>;
+import <string>;
+import <vector>;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiManagerEvent, wxEvent);
 wxIMPLEMENT_CLASS(wxAuiManager, wxEvtHandler);

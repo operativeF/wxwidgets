@@ -16,8 +16,6 @@
 
 #include "wx/msw/uxtheme.h"
 
-import <string>;
-
 bool wxUxThemeIsActive()
 {
     return ::IsAppThemed() && ::IsThemeActive();

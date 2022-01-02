@@ -19,7 +19,12 @@
 #include <boost/nowide/convert.hpp>
 #include <fmt/printf.h>
 
+#include <memory>
+
 import WX.WinDef;
+
+import <string>;
+import <string_view>;
 
 // ============================================================================
 // wxAppTraits implementation

@@ -35,6 +35,10 @@ import WX.Utils.Settings;
     #define DTM_GETIDEALSIZE 0x100f
 #endif
 
+import <algorithm>;
+import <string>;
+import <string_view>;
+
 // ============================================================================
 // wxDateTimePickerCtrl implementation
 // ============================================================================

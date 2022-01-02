@@ -33,11 +33,17 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <memory>
+
 import Utils.Strings;
 import WX.Utils.Settings;
 
 import WX.WinDef;
 import WX.Win.UniqueHnd;
+
+import <string>;
+import <string_view>;
+import <vector>;
 
 using namespace wxMSWImpl;
 

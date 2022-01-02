@@ -35,6 +35,9 @@ import WX.Core.Sizer;
 import WX.WinDef;
 import WX.Win.UniqueHnd;
 
+import <string>;
+import <string_view>;
+
 namespace
 {
 

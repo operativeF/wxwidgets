@@ -15,6 +15,7 @@
 #include "wx/scopedarray.h"
 
 #include <cassert>
+#include <memory>
 
 import WX.WinDef;
 

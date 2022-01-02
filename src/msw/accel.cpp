@@ -19,9 +19,14 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <memory>
+
 import WX.Utils.Cast;
 
 import WX.Win.UniqueHnd;
+
+import <span>;
+import <string>;
 
 // ----------------------------------------------------------------------------
 // data defining wxAcceleratorTable

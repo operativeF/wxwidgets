@@ -19,6 +19,8 @@
 
 import WX.WinDef;
 
+import <string_view>;
+
 #ifndef PBM_SETBARCOLOR
     #define PBM_SETBARCOLOR         (WM_USER+9)
 #endif

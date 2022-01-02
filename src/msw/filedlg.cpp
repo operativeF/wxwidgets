@@ -32,6 +32,7 @@ import WX.File.Filename;
 import Utils.Strings;
 import Utils.Geometry;
 
+import <algorithm>;
 import <string>;
 import <tuple>;
 import <vector>;

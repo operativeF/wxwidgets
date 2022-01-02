@@ -38,6 +38,8 @@ import WX.Utils.Settings;
 
 import <numeric>;
 import <ranges>;
+import <string>;
+import <tuple>;
 import <utility>;
 
 wxIMPLEMENT_CLASS(wxAuiNotebook, wxControl);

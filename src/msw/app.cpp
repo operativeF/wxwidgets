@@ -282,7 +282,7 @@ std::unique_ptr<wxEventLoopBase> wxGUIAppTraits::CreateEventLoop()
 
 #if wxUSE_DYNLIB_CLASS
 
-#include <wx/dynlib.h>
+#include "wx/dynlib.h"
 
 namespace
 {

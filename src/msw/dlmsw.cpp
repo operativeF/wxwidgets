@@ -18,6 +18,7 @@ import WX.File.Filename;
 
 import WX.WinDef;
 
+import <ranges>;
 import <string>;
 
 // For MSVC we can link in the required library explicitly, for the other

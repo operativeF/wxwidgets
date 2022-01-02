@@ -21,6 +21,9 @@
 
 import WX.WinDef;
 
+import <string>;
+import <vector>;
+
 #ifdef SHGSI_ICON
     #define wxHAS_SHGetStockIconInfo
 #endif

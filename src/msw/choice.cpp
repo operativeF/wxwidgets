@@ -24,6 +24,11 @@ import WX.WinDef;
 
 import WX.Utils.Settings;
 
+import <algorithm>;
+import <string>;
+import <string_view>;
+import <vector>;
+
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxPoint& pos,

@@ -49,7 +49,7 @@
 #endif // wxUSE_RICHEDIT
 
 #if wxUSE_INKEDIT
-    #include <wx/dynlib.h>
+    #include "wx/dynlib.h"
 #endif
 
 #include <sys/types.h>

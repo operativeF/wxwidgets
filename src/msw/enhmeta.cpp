@@ -22,7 +22,10 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <memory>
+
 import <string>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // macros

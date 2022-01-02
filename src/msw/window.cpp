@@ -91,6 +91,8 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <memory>
+
 import WX.Utils.Cast;
 import WX.Utils.Settings;
 import WX.Cmn.SysOpt;
@@ -102,6 +104,9 @@ import WX.WinDef;
 
 import <array>;
 import <numbers>;
+import <string>;
+import <string_view>;
+import <unordered_map>;
 import <vector>;
 
 #if wxUSE_DYNLIB_CLASS

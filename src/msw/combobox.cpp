@@ -31,9 +31,15 @@
 
 #include <boost/nowide/convert.hpp>
 
+#include <memory>
+
 import WX.Utils.Settings;
 
 import WX.WinDef;
+
+import <string>;
+import <string_view>;
+import <vector>;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

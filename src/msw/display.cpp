@@ -23,6 +23,9 @@
 
 import WX.Win.UniqueHnd;
 
+import <string>;
+import <vector>;
+
 namespace
 {
 

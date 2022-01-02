@@ -4,6 +4,8 @@ module;
 
 module WX.AUI.FloatPane;
 
+import <cmath>;
+
 wxIMPLEMENT_CLASS(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass);
 
 wxAuiFloatingFrame::wxAuiFloatingFrame(wxWindow* parent,

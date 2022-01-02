@@ -16,7 +16,9 @@
 #endif
 
 #include <memory>
+
 import <string>;
+import <string_view>;
 import <vector>;
 
 struct wxOwnerDrawn;
