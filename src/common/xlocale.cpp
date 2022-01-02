@@ -23,9 +23,6 @@ import <clocale>;
 // This is the C locale object, it is created on demand
 static wxXLocale *gs_cLocale = nullptr;
 
-wxXLocale wxNullXLocale;
-
-
 // ============================================================================
 // implementation
 // ============================================================================

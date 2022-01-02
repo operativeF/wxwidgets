@@ -5212,14 +5212,6 @@ wxColour wxWindowMSW::MSWGetThemeColour(std::string_view themeName,
 // painting
 // ---------------------------------------------------------------------------
 
-// this variable is used to check that a paint event handler which processed
-// the event did create a wxPaintDC inside its code and called BeginPaint() to
-// validate the invalidated window area as otherwise we'd keep getting an
-// endless stream of WM_PAINT messages for this window resulting in a lot of
-// difficult to debug problems (e.g. impossibility to repaint other windows,
-// lack of timer and idle events and so on)
-std::stack<wxMSWImpl::PaintData> wxMSWImpl::paintStack;
-
 bool wxWindowMSW::HandlePaint()
 {
     WXHRGN hRegion = ::CreateRectRgn(0, 0, 0, 0); // Dummy call to get a handle

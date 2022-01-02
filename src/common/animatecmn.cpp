@@ -22,9 +22,6 @@
 
 import WX.Image;
 
-// global objects
-wxAnimation wxNullAnimation;
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxAnimation, wxObject);
 
 #if !defined(wxHAS_NATIVE_ANIMATIONCTRL)

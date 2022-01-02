@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TASKBARICON
 
 #include "wx/taskbar.h"
 #include "wx/app.h"
 #include "wx/list.h"
 #include "wx/menu.h"
-
-
-extern wxList wxPendingDelete;
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxAdvanced")

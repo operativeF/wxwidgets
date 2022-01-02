@@ -25,7 +25,6 @@ import <string>;
 class wxAnimation;
 class wxAnimationImpl;
 
-extern wxAnimation wxNullAnimation;
 inline constexpr char wxAnimationCtrlNameStr[] = "animationctrl";
 
 WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class);
@@ -79,6 +78,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxAnimation);
 };
 
+inline const wxAnimation wxNullAnimation;
 
 // ----------------------------------------------------------------------------
 // wxAnimationCtrlBase

@@ -179,7 +179,8 @@ private:
 
 // A shorter synonym for the most commonly used locale object
 #define wxCLocale (wxXLocale::GetCLocale())
-extern wxXLocale wxNullXLocale;
+
+inline const wxXLocale wxNullXLocale;
 
 // Wrappers for various functions:
 #ifdef wxHAS_XLOCALE_SUPPORT

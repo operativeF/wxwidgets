@@ -490,8 +490,12 @@ private:
 // global variables
 // ----------------------------------------------------------------------------
 
-// the default mime manager for wxWidgets programs
-extern wxMimeTypesManager* wxTheMimeTypesManager;
+// FIXME: make private when modularized.
+// private object
+static inline wxMimeTypesManager gs_mimeTypesManager;
+
+// and public pointer
+inline wxMimeTypesManager *wxTheMimeTypesManager = &gs_mimeTypesManager;
 
 #endif // wxUSE_MIMETYPE
 
