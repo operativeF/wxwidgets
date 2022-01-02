@@ -116,10 +116,6 @@ import WX.Cmn.Uri;
     #define S_ISDIR(mode) ((mode) & S_IFDIR)
 #endif
 
-#if wxUSE_LONGLONG
-extern const wxULongLong wxInvalidSize = (unsigned)-1;
-#endif // wxUSE_LONGLONG
-
 namespace
 {
 

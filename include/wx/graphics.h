@@ -146,19 +146,19 @@ class wxGraphicsPen : public wxGraphicsObject
 {
 };
 
-extern wxGraphicsPen wxNullGraphicsPen;
+inline const wxGraphicsPen wxNullGraphicsPen;
 
 class wxGraphicsBrush : public wxGraphicsObject
 {
 };
 
-extern wxGraphicsBrush wxNullGraphicsBrush;
+inline const wxGraphicsBrush wxNullGraphicsBrush;
 
 class wxGraphicsFont : public wxGraphicsObject
 {
 };
 
-extern wxGraphicsFont wxNullGraphicsFont;
+inline const wxGraphicsFont wxNullGraphicsFont;
 
 class wxGraphicsBitmap : public wxGraphicsObject
 {
@@ -178,7 +178,7 @@ public:
     { return (wxGraphicsBitmapData*) GetRefData(); }
 };
 
-extern wxGraphicsBitmap wxNullGraphicsBitmap;
+inline const wxGraphicsBitmap wxNullGraphicsBitmap;
 
 class wxGraphicsMatrix : public wxGraphicsObject
 {
@@ -237,7 +237,7 @@ public:
     { return (wxGraphicsMatrixData*) GetRefData(); }
 };
 
-extern wxGraphicsMatrix wxNullGraphicsMatrix;
+inline const wxGraphicsMatrix wxNullGraphicsMatrix;
 
 // ----------------------------------------------------------------------------
 // wxGradientStop and wxGradientStops: Specify what intermediate colors are used
@@ -515,7 +515,7 @@ public:
     { return (wxGraphicsPathData*) GetRefData(); }
 };
 
-extern wxGraphicsPath wxNullGraphicsPath;
+inline const wxGraphicsPath wxNullGraphicsPath;
 
 
 class wxGraphicsContext : public wxGraphicsObject

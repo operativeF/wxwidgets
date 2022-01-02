@@ -92,19 +92,8 @@ wxObjectRefData* wxGraphicsObject::CloneRefData(const wxObjectRefData* data) con
 }
 
 //-----------------------------------------------------------------------------
-// pens etc.
-//-----------------------------------------------------------------------------
-
-wxGraphicsPen wxNullGraphicsPen;
-wxGraphicsBrush wxNullGraphicsBrush;
-wxGraphicsFont wxNullGraphicsFont;
-wxGraphicsBitmap wxNullGraphicsBitmap;
-
-//-----------------------------------------------------------------------------
 // matrix
 //-----------------------------------------------------------------------------
-
-wxGraphicsMatrix wxNullGraphicsMatrix;
 
 // concatenates the matrix
 void wxGraphicsMatrix::Concat( const wxGraphicsMatrix *t )
@@ -193,8 +182,6 @@ void * wxGraphicsMatrix::GetNativeMatrix() const
 //-----------------------------------------------------------------------------
 // path
 //-----------------------------------------------------------------------------
-
-wxGraphicsPath wxNullGraphicsPath;
 
 // convenience functions, for using wxPoint2DFloat etc
 

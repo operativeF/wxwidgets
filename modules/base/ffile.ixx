@@ -18,6 +18,8 @@ export module WX.Cmn.FFile;
 import WX.Cmn.ConvAuto;
 import WX.File.Flags;
 
+import <string>;
+
 #if wxUSE_FFILE
 
 export

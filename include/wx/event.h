@@ -94,9 +94,6 @@ inline constexpr wxEventType wxEVT_ANY = -1;
 #define wxDECLARE_EVENT_TABLE_TERMINATOR() \
     wxEventTableEntry(wxEVT_NULL, 0, 0, NULL, NULL)
 
-// generate a new unique event type
-extern wxEventType wxNewEventType();
-
 // events are represented by an instance of wxEventTypeTag and the
 // corresponding type must be specified for type-safety checks
 
@@ -649,7 +646,20 @@ wxNewEventTableFunctor(const EventTag&, void (Class::*method)(EventArg&))
 inline constexpr wxEventType wxEVT_FIRST = 10000;
 inline constexpr wxEventType wxEVT_USER_FIRST = wxEVT_FIRST + 2000;
 
-extern const wxEventType wxEVT_NULL;
+// ----------------------------------------------------------------------------
+// event initialization
+// ----------------------------------------------------------------------------
+
+// FIXME: Unsafe and stupid.
+inline int wxNewEventType()
+{
+    // MT-FIXME
+    static int s_lastUsedEventType = wxEVT_FIRST;
+
+    return s_lastUsedEventType++;
+}
+
+inline const wxEventType wxEVT_NULL = wxNewEventType();
 
     // Need events declared to do this
 class wxIdleEvent;

@@ -1,8 +1,4 @@
 
-module;
-
-#include <sys/types.h>
-
 export module WX.File.Flags;
 
 export
@@ -16,7 +12,7 @@ export
 // had already predefined it.
 
 using mode_t = unsigned int;
-using off_t = _off_t;
+using off_t = long;
 
 enum class wxSeekMode
 {

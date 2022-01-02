@@ -30,11 +30,6 @@ import <cmath>;
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
 
-
-wxBrushList* wxTheBrushList;
-wxFontList*  wxTheFontList;
-wxPenList*   wxThePenList;
-
 wxColourDatabase* wxTheColourDatabase;
 
 wxBitmap  wxNullBitmap;

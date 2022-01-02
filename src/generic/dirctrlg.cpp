@@ -1336,9 +1336,6 @@ static const char* const file_icons_tbl_computer_xpm[] = {
 // wxFileIconsTable & friends
 // ----------------------------------------------------------------------------
 
-// global instance of a wxFileIconsTable
-wxFileIconsTable* wxTheFileIconsTable = nullptr;
-
 // A module to allow icons table cleanup
 
 class wxFileIconsTableModule: public wxModule

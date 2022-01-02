@@ -580,9 +580,6 @@ IDWriteFactory* wxDWriteFactory()
     return gs_IDWriteFactory;
 }
 
-extern wxGraphicsPen wxNullGraphicsPen;
-extern wxGraphicsBrush wxNullGraphicsBrush;
-
 // We use the notion of a context supplier because the context
 // needed to create Direct2D resources (namely the RenderTarget)
 // is itself device-dependent and might change during the lifetime

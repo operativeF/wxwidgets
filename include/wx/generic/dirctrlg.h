@@ -307,7 +307,7 @@ protected:
 };
 
 // The global fileicons table
-extern wxFileIconsTable* wxTheFileIconsTable;
+inline wxFileIconsTable* wxTheFileIconsTable{nullptr};
 
 #endif // wxUSE_DIRDLG || wxUSE_FILEDLG || wxUSE_FILECTRL
 

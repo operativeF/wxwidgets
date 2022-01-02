@@ -113,10 +113,8 @@ enum
     wxFILE_EXISTS_ANY       = 0x1FFF   // check for existence of anything
 };
 
-#if wxUSE_LONGLONG
 // error code of wxFileName::GetSize()
-extern const wxULongLong wxInvalidSize;
-#endif // wxUSE_LONGLONG
+inline constexpr auto wxInvalidSize = std::numeric_limits<std::uint64_t>::max();
 
 // ----------------------------------------------------------------------------
 // wxFileName: encapsulates a file path

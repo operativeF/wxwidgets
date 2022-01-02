@@ -121,6 +121,6 @@ public:
                            wxPenStyle style = wxPenStyle::Solid);
 };
 
-extern wxPenList*   wxThePenList;
+inline wxPenList*   wxThePenList;
 
 #endif // _WX_PEN_H_BASE_

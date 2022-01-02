@@ -134,8 +134,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxEventTableEntryModule, wxModule);
 // common event types are defined here, other event types are defined by the
 // components which use them
 
-const wxEventType wxEVT_NULL = wxNewEventType();
-
 wxDEFINE_EVENT( wxEVT_IDLE, wxIdleEvent );
 
 // Thread and asynchronous call events
@@ -315,18 +313,6 @@ wxDEFINE_EVENT( wxEVT_DETAILED_HELP, wxHelpEvent );
 // ============================================================================
 // implementation
 // ============================================================================
-
-// ----------------------------------------------------------------------------
-// event initialization
-// ----------------------------------------------------------------------------
-
-int wxNewEventType()
-{
-    // MT-FIXME
-    static int s_lastUsedEventType = wxEVT_FIRST;
-
-    return s_lastUsedEventType++;
-}
 
 // ----------------------------------------------------------------------------
 // wxEvent

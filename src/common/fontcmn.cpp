@@ -30,18 +30,6 @@ import <charconv>;
 
 #include <cassert>
 
-// debugger helper: this function can be called from a debugger to show what
-// the date really is
-extern const std::string wxDumpFont(const wxFont *font)
-{
-    return fmt::format("%s-%d-%s-%.2f-%d",
-             font->GetFaceName(),
-             font->GetNumericWeight(),
-             font->GetStyle() == wxFontStyle::Normal ? "regular" : "italic",
-             font->GetFractionalPointSize(),
-             font->GetEncoding());
-}
-
 // ----------------------------------------------------------------------------
 // XTI
 // ----------------------------------------------------------------------------

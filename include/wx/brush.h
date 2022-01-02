@@ -86,7 +86,7 @@ public:
                                wxBrushStyle style = wxBrushStyle::Solid);
 };
 
-extern wxBrushList*   wxTheBrushList;
+inline wxBrushList*   wxTheBrushList;
 
 // provide comparison operators to allow code such as
 //
