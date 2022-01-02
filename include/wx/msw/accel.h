@@ -13,8 +13,12 @@
 
 #include "wx/object.h"
 
-import WX.WinDef;
+#include <memory>
 
+import WX.WinDef;
+import WX.Win.UniqueHnd;
+
+import <string>;
 import <span>;
 
 class wxWindow;
@@ -23,7 +27,7 @@ class wxWindow;
 // the accel table has all accelerators for a given window or menu
 // ----------------------------------------------------------------------------
 
-class wxAcceleratorTable : public wxObject
+class wxAcceleratorTable
 {
 public:
     // default ctor
@@ -32,7 +36,7 @@ public:
     // load from .rc resource (Windows specific)
     explicit wxAcceleratorTable(const std::string& resource);
 
-    // initialize from array
+    // initialize from a contiguous container
     wxAcceleratorTable(std::span<wxAcceleratorEntry> entries);
 
     bool IsOk() const;
@@ -41,6 +45,11 @@ public:
 
     // translate the accelerator, return true if done
     bool Translate(wxWindow *window, WXMSG *msg) const;
+
+private:
+    msw::utils::unique_accel m_hAccel;
+
+    bool m_ok{false};
 };
 
 #endif

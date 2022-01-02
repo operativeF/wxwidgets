@@ -152,7 +152,7 @@ private:
     void UpdateWindowMenu(bool enable);
 
 #if wxUSE_ACCEL
-    std::unique_ptr<wxAcceleratorTable> m_accelWindowMenu;
+    wxAcceleratorTable m_accelWindowMenu;
 #endif // wxUSE_ACCEL
 #endif // wxUSE_MENUS
 

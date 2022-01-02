@@ -22,38 +22,10 @@
 #include <memory>
 
 import WX.Utils.Cast;
-
 import WX.Win.UniqueHnd;
 
 import <span>;
 import <string>;
-
-// ----------------------------------------------------------------------------
-// data defining wxAcceleratorTable
-// ----------------------------------------------------------------------------
-
-using msw::utils::unique_accel;
-
-class wxAcceleratorRefData: public wxObjectRefData
-{
-    friend class wxAcceleratorTable;
-public:
-    inline WXHACCEL GetHACCEL() const { return m_hAccel.get(); }
-
-protected:
-    unique_accel m_hAccel;
-    bool         m_ok{false};
-};
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxAcceleratorRefData
-// ----------------------------------------------------------------------------
-
-#define M_ACCELDATA ((wxAcceleratorRefData *)m_refData)
 
 // ----------------------------------------------------------------------------
 // wxAcceleratorTable
@@ -62,18 +34,14 @@ protected:
 // Load from .rc resource
 wxAcceleratorTable::wxAcceleratorTable(const std::string& resource)
 {
-    m_refData = new wxAcceleratorRefData;
-
-    M_ACCELDATA->m_hAccel = unique_accel(::LoadAcceleratorsW(wxGetInstance(),
+    m_hAccel = msw::utils::unique_accel(::LoadAcceleratorsW(wxGetInstance(),
                                                              boost::nowide::widen(resource).c_str()));
-    M_ACCELDATA->m_ok = M_ACCELDATA->m_hAccel != nullptr;
+    m_ok = m_hAccel != nullptr;
 }
 
-// Create from an array
+// Create from a continguous container
 wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
 {
-    m_refData = new wxAcceleratorRefData;
-
     auto arr = std::make_unique<ACCEL[]>(entries.size());
 
     for ( size_t i = 0; i < entries.size(); ++i )
@@ -95,34 +63,32 @@ wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
                    .cmd{(WXWORD)entries[i].GetCommand()} };    
     }
 
-    M_ACCELDATA->m_hAccel = unique_accel(::CreateAcceleratorTableW(arr.get(), wx::narrow_cast<int>(entries.size())));
+    m_hAccel = msw::utils::unique_accel(::CreateAcceleratorTableW(arr.get(), wx::narrow_cast<int>(entries.size())));
 
-    M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != nullptr);
+    m_ok = m_hAccel != nullptr;
 }
 
 bool wxAcceleratorTable::IsOk() const
 {
-    return (M_ACCELDATA && (M_ACCELDATA->m_ok));
+    return m_hAccel && m_ok;
 }
 
 void wxAcceleratorTable::SetHACCEL(WXHACCEL hAccel)
 {
-    if (!M_ACCELDATA)
-        m_refData = new wxAcceleratorRefData;
-
-    M_ACCELDATA->m_hAccel = unique_accel(hAccel);
+    m_hAccel = msw::utils::unique_accel(hAccel);
 }
 
 WXHACCEL wxAcceleratorTable::GetHACCEL() const
 {
-    if (!M_ACCELDATA)
-        return nullptr;
-    return (WXHACCEL) M_ACCELDATA->m_hAccel.get();
+    if (m_hAccel)
+        return m_hAccel.get();
+
+    return nullptr;
 }
 
 bool wxAcceleratorTable::Translate(wxWindow *window, WXMSG *wxmsg) const
 {
-    return IsOk() && ::TranslateAcceleratorW(GetHwndOf(window), GetHaccel(), wxmsg);
+    return m_ok && ::TranslateAcceleratorW(GetHwndOf(window), GetHaccel(), wxmsg);
 }
 
 #endif // wxUSE_ACCEL

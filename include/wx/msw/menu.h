@@ -126,7 +126,7 @@ public:
     // used only by wxMDIParentFrame currently but could be useful elsewhere:
     // returns a new accelerator table with accelerators for just this menu
     // (shouldn't be called if we don't have any accelerators)
-    std::unique_ptr<wxAcceleratorTable> CreateAccelTable() const;
+    wxAcceleratorTable CreateAccelTable() const;
 #endif // wxUSE_ACCEL
 
     // get the menu with given handle (recursively)

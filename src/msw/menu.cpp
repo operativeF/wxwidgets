@@ -622,11 +622,11 @@ void wxMenu::CopyAccels(std::vector<wxAcceleratorEntry>& accels) const
     std::copy(m_accels.begin(), m_accels.end(), std::back_inserter(accels));
 }
 
-std::unique_ptr<wxAcceleratorTable> wxMenu::CreateAccelTable() const
+wxAcceleratorTable wxMenu::CreateAccelTable() const
 {
     std::vector<wxAcceleratorEntry> entries;
     CopyAccels(entries);
-    return std::make_unique<wxAcceleratorTable>(entries);
+    return wxAcceleratorTable{entries};
 }
 
 #endif // wxUSE_ACCEL

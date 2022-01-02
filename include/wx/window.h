@@ -956,8 +956,8 @@ public:
 #if wxUSE_ACCEL
     // accelerators
     // ------------
-    virtual void SetAcceleratorTable( const wxAcceleratorTable& accel )
-        { m_acceleratorTable = accel; }
+    virtual void SetAcceleratorTable( wxAcceleratorTable&& accel )
+        { m_acceleratorTable = std::move(accel); }
     wxAcceleratorTable *GetAcceleratorTable()
         { return &m_acceleratorTable; }
 
