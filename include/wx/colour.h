@@ -12,7 +12,6 @@
 #define _WX_COLOUR_H_BASE_
 
 #include "wx/gdiobj.h"
-#include "wx/colorspace.h"
 
 #include <fmt/core.h>
 #include <fmt/format.h>
