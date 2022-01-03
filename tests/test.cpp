@@ -8,6 +8,8 @@
 
 #define DOCTEST_CONFIG_IMPLEMENT
 
+#define DOCTEST_CONFIG_SUPER_FAST_ASSERTS // defined so the asserts are crazy fast - both for compilation and execution
+
 #include "doctest.h"
 
 #include "wx/apptrait.h"
@@ -27,6 +29,9 @@
 #include "wx/evtloop.h"
 #include "wx/utils.h"
 
+#include <boost/nowide/args.hpp>
+#include <fmt/core.h>
+
 import Utils.Strings;
 import WX.Test.Prec;
 import WX.Cmn.CommandLine;
@@ -40,8 +45,6 @@ namespace wxPrivate
 {
     std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 }
-
-using namespace std;
 
 // ----------------------------------------------------------------------------
 // helper classes
@@ -159,9 +162,11 @@ int TestCrtReportHook(int reportType, char *message, int *)
 
 int main(int argc, char** argv)
 {
- // tests can be ran non-interactively so make sure we don't show any assert
-// dialog boxes -- neither our own nor from MSVC debug CRT -- which would
-// prevent them from completing
+
+    boost::nowide::args a(argc, argv);
+    // tests can be ran non-interactively so make sure we don't show any assert
+    // dialog boxes -- neither our own nor from MSVC debug CRT -- which would
+    // prevent them from completing
 
 #if wxDEBUG_LEVEL
     wxSetAssertHandler(TestAssertHandler);
@@ -181,40 +186,29 @@ int main(int argc, char** argv)
     return res; // the result from doctest is propagated here as well
 }
 
-
-// ----------------------------------------------------------------------------
-// TestApp
-// ----------------------------------------------------------------------------
-
-TestApp::TestApp()
-{
-    m_runTests = true;
-
-    m_filterEventFunc = nullptr;
-    m_processEventFunc = nullptr;
-
-#if wxUSE_GUI
-    m_exitcode = EXIT_SUCCESS;
-#endif // wxUSE_GUI
-}
-
 // Init
 //
 bool TestApp::OnInit()
 {
     // Hack: don't call TestAppBase::OnInit() to let CATCH handle command line.
-
     // Output some important information about the test environment.
+
+    static constexpr std::string_view TestTypeStr =
 #if wxUSE_GUI
-    cout << "Test program for wxWidgets GUI features\n"
+        "GUI";
 #else
-    cout << "Test program for wxWidgets non-GUI features\n"
+        "non-GUI";
 #endif
-         << "build: " << WX_BUILD_OPTIONS_SIGNATURE << "\n"
-         << "running under " << wxGetOsDescription()
-         << " as " << wxGetUserId()
-         << ", locale is " << setlocale(LC_ALL, nullptr)
-         << std::endl;
+
+    fmt::print("Test program for wxWidgets {} features\n"
+               "build: {}\n"
+               "running under {} as {}, locale is {}\n",
+        TestTypeStr,
+        WX_BUILD_OPTIONS_SIGNATURE,
+        wxGetOsDescription(),
+        wxGetUserId().ToStdString(),
+        setlocale(LC_ALL, nullptr)
+        );
 
 #if wxUSE_GUI
     // create a parent window to be used as parent for the GUI controls
@@ -266,16 +260,12 @@ int TestApp::RunTests()
         wxLog::SetTimestamp("%Y-%m-%d %H:%M:%S.%l");
 #endif
 
-    // Cast is needed under MSW where Catch also provides an overload taking
-    // wchar_t, but as it simply converts arguments to char internally anyhow,
-    // we can just as well always use the char version.
-    // return Catch::Session().run(argc, static_cast<char**>(argv));
     m_context.applyCommandLine(argc, argv);
 
     // overrides
     m_context.setOption("no-breaks", true);             // don't break in the debugger when assertions fail
 
-    return m_context.run(); // FIXME: Doctest?
+    return m_context.run();
 }
 
 int TestApp::OnExit()

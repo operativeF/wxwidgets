@@ -993,6 +993,7 @@ int wxIsWindowsServer()
 
 } // anonymous namespace
 
+// FIXME: Update for Windows 11.
 std::string wxGetOsDescription()
 {
     std::string str;

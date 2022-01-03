@@ -25,6 +25,8 @@
 #include "wx/intl.h"        // for wxLayoutDirection
 #include "wx/log.h"         // for wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD()
 
+#include <boost/nowide/args.hpp>
+
 import WX.Cfg.Flags;
 
 import <string>;
@@ -796,33 +798,14 @@ public:
 // locale (under Unix UTF-8, capable of representing any Unicode string, is
 // almost always used and there is no way to retrieve the Unicode command line
 // anyhow).
-#if defined(WX_WINDOWS)
-    #ifdef __VISUALC__
-        #define wxIMPLEMENT_WXWIN_MAIN_CONSOLE                                \
-            int wmain(int argc, wchar_t **argv)                               \
-            {                                                                 \
-                wxDISABLE_DEBUG_SUPPORT();                                    \
-                                                                              \
-                return wxEntry(argc, argv);                                   \
-            }
-    #else // No wmain(), use main() but don't trust its arguments.
-        #define wxIMPLEMENT_WXWIN_MAIN_CONSOLE                                \
-            int main(int, char **)                                            \
-            {                                                                 \
-                wxDISABLE_DEBUG_SUPPORT();                                    \
-                                                                              \
-                return wxEntry();                                             \
-            }
-    #endif
-#else // Use standard main()
-    #define wxIMPLEMENT_WXWIN_MAIN_CONSOLE                                    \
-        int main(int argc, char **argv)                                       \
-        {                                                                     \
-            wxDISABLE_DEBUG_SUPPORT();                                        \
-                                                                              \
-            return wxEntry(argc, argv);                                       \
-        }
-#endif
+#define wxIMPLEMENT_WXWIN_MAIN_CONSOLE                                    \
+    int main(int argc, char **argv)                                       \
+    {                                                                     \
+        boost::nowide::args a(argc, argv);                                \
+        wxDISABLE_DEBUG_SUPPORT();                                        \
+                                                                          \
+        return wxEntry(argc, argv);                                       \
+    }
 
 // port-specific header could have defined it already in some special way
 #ifndef wxIMPLEMENT_WXWIN_MAIN

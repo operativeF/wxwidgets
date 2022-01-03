@@ -1,5 +1,7 @@
 module;
 
+#define DOCTEST_CONFIG_SUPER_FAST_ASSERTS // defined so the asserts are crazy fast - both for compilation and execution
+
 #include "doctest.h"
 
 #include "wx/app.h"
@@ -54,11 +56,11 @@ typedef int (*FilterEventFunc)(wxEvent&);
 typedef bool (*ProcessEventFunc)(wxEvent&);
 
 #if wxUSE_GUI
-    typedef wxApp TestAppBase;
-    typedef wxGUIAppTraits TestAppTraitsBase;
+    using TestAppBase = wxApp;
+    using TestAppTraitsBase = wxGUIAppTraits;
 #else
-    typedef wxAppConsole TestAppBase;
-    typedef wxConsoleAppTraits TestAppTraitsBase;
+    using TestAppBase = wxAppConsole;
+    using TestAppTraitsBase = wxConsoleAppTraits;
 #endif
 
 // The application class
@@ -66,8 +68,6 @@ typedef bool (*ProcessEventFunc)(wxEvent&);
 class TestApp : public TestAppBase
 {
 public:
-    TestApp();
-
     // standard overrides
     bool OnInit() override;
     int  OnExit() override;
@@ -169,15 +169,15 @@ private:
     int RunTests();
 
     // flag telling us whether we should run tests from our EVT_IDLE handler
-    bool m_runTests;
+    bool m_runTests{true};
 
     // event handling hooks
-    FilterEventFunc m_filterEventFunc;
-    ProcessEventFunc m_processEventFunc;
+    FilterEventFunc m_filterEventFunc{nullptr};
+    ProcessEventFunc m_processEventFunc{nullptr};
 
 #if wxUSE_GUI
     // the program exit code
-    int m_exitcode;
+    int m_exitcode{EXIT_SUCCESS};
 #endif // wxUSE_GUI
 
     doctest::Context m_context;
