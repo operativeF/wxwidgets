@@ -10,9 +10,9 @@
 #ifndef _WX_MSW_ANYBUTTON_H_
 #define _WX_MSW_ANYBUTTON_H_
 
-// ----------------------------------------------------------------------------
-// button image data
-// ----------------------------------------------------------------------------
+#include "wx/generic/private/markuptext.h"
+
+#include <memory>
 
 import WX.Cfg.Flags;
 
@@ -43,9 +43,7 @@ public:
 
 class wxAnyButton : public wxAnyButtonBase
 {
-public:
-    ~wxAnyButton();
-    
+public:    
     wxAnyButton& operator=(wxAnyButton&&) = delete;
 
     void SetLabel(std::string_view label) override;
@@ -82,7 +80,7 @@ protected:
     std::unique_ptr<wxButtonImageData> m_imageData;
 
 #if wxUSE_MARKUP
-    class wxMarkupText *m_markupText{nullptr};
+    std::unique_ptr<wxMarkupText> m_markupText;
 #endif // wxUSE_MARKUP
 
     // Switches button into owner-drawn mode: this is used if we need to draw
