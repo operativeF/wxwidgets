@@ -92,10 +92,10 @@ wxPrintFactory *wxPrintFactory::GetFactory()
 // wxNativePrintFactory
 //----------------------------------------------------------------------------
 
-wxPrinterBase *wxNativePrintFactory::CreatePrinter( wxPrintDialogData *data )
+std::unique_ptr<wxPrinterBase> wxNativePrintFactory::CreatePrinter( wxPrintDialogData *data )
 {
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    return new wxWindowsPrinter( data );
+    return std::make_unique<wxWindowsPrinter>( data );
 #elif defined(__WXMAC__)
     return new wxMacPrinter( data );
 #elif defined(__WXQT__)
@@ -322,11 +322,6 @@ wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
 wxPrinter::wxPrinter(wxPrintDialogData *data)
     : m_pimpl(wxPrintFactory::GetFactory()->CreatePrinter( data ))
 {
-}
-
-wxPrinter::~wxPrinter()
-{
-    delete m_pimpl;
 }
 
 wxPrintAbortDialog *wxPrinter::CreateAbortWindow(wxWindow *parent, wxPrintout *printout)

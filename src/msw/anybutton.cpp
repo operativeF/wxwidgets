@@ -391,13 +391,6 @@ wxSize wxMSWButton::IncreaseToStdSizeAndCache(wxControl *btn, const wxSize& size
 // creation/destruction
 // ----------------------------------------------------------------------------
 
-wxAnyButton::~wxAnyButton()
-{
-#if wxUSE_MARKUP
-    delete m_markupText;
-#endif // wxUSE_MARKUP
-}
-
 void wxAnyButton::SetLabel(std::string_view label)
 {
     wxMSWButton::UpdateMultilineStyle(GetHwnd(), label);
@@ -408,8 +401,7 @@ void wxAnyButton::SetLabel(std::string_view label)
     // If we have a plain text label, we shouldn't be using markup any longer.
     if ( m_markupText )
     {
-        delete m_markupText;
-        m_markupText = nullptr;
+        m_markupText.reset();
 
         // Unfortunately we don't really know whether we can reset the button
         // to be non-owner-drawn or not: if we had made it owner-drawn just
@@ -749,7 +741,7 @@ bool wxAnyButton::DoSetLabelMarkup(const std::string& markup)
 
     if ( !m_markupText )
     {
-        m_markupText = new wxMarkupText(markup);
+        m_markupText = std::make_unique<wxMarkupText>(markup);
         MakeOwnerDrawn();
     }
     else
