@@ -81,7 +81,7 @@ class wxPrintFactory
 public:
     virtual ~wxPrintFactory() = default;
 
-    virtual wxPrinterBase *CreatePrinter( wxPrintDialogData* data ) = 0;
+    virtual std::unique_ptr<wxPrinterBase> CreatePrinter( wxPrintDialogData* data ) = 0;
 
     virtual std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
                                                     std::unique_ptr<wxPrintout> printout = nullptr,
@@ -125,7 +125,7 @@ private:
 class wxNativePrintFactory: public wxPrintFactory
 {
 public:
-    wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
+    std::unique_ptr<wxPrinterBase> CreatePrinter( wxPrintDialogData *data ) override;
 
     std::unique_ptr<wxPrintPreviewBase> CreatePrintPreview( std::unique_ptr<wxPrintout> preview,
                                                     std::unique_ptr<wxPrintout> printout = {},
@@ -227,7 +227,6 @@ class wxPrinter: public wxPrinterBase
 {
 public:
     wxPrinter(wxPrintDialogData *data = nullptr);
-    ~wxPrinter();
 
     wxPrinter& operator=(wxPrinter&&) = delete;
 
@@ -241,7 +240,7 @@ public:
     wxPrintDialogData& GetPrintDialogData() const override;
 
 protected:
-    wxPrinterBase    *m_pimpl;
+    std::unique_ptr<wxPrinterBase>    m_pimpl;
 };
 
 //----------------------------------------------------------------------------
@@ -360,7 +359,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     unsigned int style = 0,
-                    std::string_view name = std::string_view{"canvas"});
+                    std::string_view name = "canvas");
 
     wxPreviewCanvas& operator=(wxPreviewCanvas&&) = delete;
 

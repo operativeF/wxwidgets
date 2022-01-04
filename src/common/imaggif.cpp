@@ -33,12 +33,12 @@ constexpr char NETSCAPE_LOOP[] = "NETSCAPE2.0";
 // see members.aol.com/royalef/gifabout.htm
 //     members.aol.com/royalef/gif89a.txt
 
-#define LZ_MAX_CODE         4095    // Biggest code possible in 12 bits.
-#define FLUSH_OUTPUT        4096    // Impossible code, to signal flush.
-#define FIRST_CODE          4097    // Impossible code, to signal first.
+constexpr auto LZ_MAX_CODE         = 4095;    // Biggest code possible in 12 bits.
+constexpr auto FLUSH_OUTPUT        = 4096;    // Impossible code, to signal flush.
+constexpr auto FIRST_CODE          = 4097;    // Impossible code, to signal first.
 
-#define HT_SIZE         8192        // 12bits = 4096 or twice as big!
-#define HT_KEY_MASK     0x1FFF      // 13bits keys
+constexpr auto HT_SIZE         = 8192;        // 12bits = 4096 or twice as big!
+constexpr auto HT_KEY_MASK     = 0x1FFF;      // 13bits keys
 
 #define HT_GET_KEY(l)   (l >> 12)
 #define HT_GET_CODE(l)  (l & 0x0FFF)
@@ -64,14 +64,14 @@ struct GifHashTableType
 namespace
 {
 
-int wxGIFHandler_KeyItem(unsigned long item)
+constexpr int wxGIFHandler_KeyItem(unsigned long item)
 {
     return ((item >> 12) ^ item) & HT_KEY_MASK;
 }
 
 #if wxUSE_STREAMS
 
-int wxGIFHandler_BitSize(int n)
+constexpr int wxGIFHandler_BitSize(int n)
 {
     int i;
     for (i = 1; i <= 8; i++)
