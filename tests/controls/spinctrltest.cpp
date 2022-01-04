@@ -314,11 +314,12 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Base")
     CHECK(m_spin->GetBase() == 10);
 }
 
+#if wxUSE_UIACTIONSIMULATOR
+
 TEST_CASE_FIXTURE(SpinCtrlTestCase3, "SpinCtrl::SetValueInsideEventHandler")
 {
-#if wxUSE_UIACTIONSIMULATOR
     // A dummy control with which we change the focus.
-    wxTextCtrl* text = new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY);
+    auto text = std::make_unique<wxTextCtrl>(wxTheApp->GetTopWindow(), wxID_ANY);
     text->Move(wxPoint{m_spin->GetSize().x, m_spin->GetSize().y * 3});
 
     wxUIActionSimulator sim;
@@ -339,9 +340,8 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase3, "SpinCtrl::SetValueInsideEventHandler")
 
         CHECK(m_spin->GetValue() == 32);
     }
-
-    delete text;
-#endif // wxUSE_UIACTIONSIMULATOR
 }
+
+#endif // wxUSE_UIACTIONSIMULATOR
 
 #endif

@@ -16,6 +16,8 @@
 
 #include "testableframe.h"
 
+#include <memory>
+
 import WX.Test.Prec;
 
 TEST_CASE("Virtual list control test.")
@@ -39,7 +41,7 @@ TEST_CASE("Virtual list control test.")
         }
     };
 
-    auto m_list = new VirtListCtrl;
+    auto m_list = std::make_unique<VirtListCtrl>();
 
     SUBCASE("UpdateSelection")
     {
@@ -58,12 +60,13 @@ TEST_CASE("Virtual list control test.")
         CHECK_EQ( 1, m_list->GetSelectedItemCount() );
     }
 
+#if wxUSE_UIACTIONSIMULATOR
+
     SUBCASE("DeselectedEvent")
     {
-    #if wxUSE_UIACTIONSIMULATOR
         m_list->AppendColumn("Col0");
         m_list->SetItemCount(1);
-        wxListCtrl* const list = m_list;
+        wxListCtrl* const list = m_list.get();
 
         EventCounter selected(list, wxEVT_LIST_ITEM_SELECTED);
         EventCounter deselected(list, wxEVT_LIST_ITEM_DESELECTED);
@@ -93,11 +96,10 @@ TEST_CASE("Virtual list control test.")
 
         CHECK_EQ(1, selected.GetCount());
         CHECK_EQ(1, deselected.GetCount());
-    #endif
     }
 
-    delete m_list;
-    m_list = nullptr;
+#endif
+
 }
 
 #endif // wxUSE_LISTCTRL

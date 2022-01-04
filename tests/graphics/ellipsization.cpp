@@ -15,6 +15,9 @@ import WX.Test.Prec;
 
 import Utils.Strings;
 
+import <array>;
+import <string_view>;
+
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
@@ -23,7 +26,7 @@ TEST_CASE("Ellipsization::NormalCase")
 {
     wxMemoryDC dc;
 
-    static const char *stringsToTest[] =
+    static constexpr std::array<std::string_view, 19> stringsToTest =
     {
         "N",
         ".",
@@ -34,13 +37,20 @@ TEST_CASE("Ellipsization::NormalCase")
         "a very very very very very very very long string",
         // alpha+beta+gamma+delta+epsilon+zeta+eta+theta+iota
         "\xCE\xB1\xCE\xB2\xCE\xB3\xCE\xB4\xCE\xB5\xCE\xB6\xCE\xB7\xCE\xB8\xCE\xB9",
-        "\t", "\t\t\t\t\t", "a\tstring\twith\ttabs",
-        "\n", "\n\n\n\n\n", "a\nstring\nwith\nnewlines",
-        "&", "&&&&&&&", "a&string&with&newlines",
-        "\t\n&", "a\t\n&string\t\n&with\t\n&many\t\n&chars"
+        "\t",
+        "\t\t\t\t\t",
+        "a\tstring\twith\ttabs",
+        "\n",
+        "\n\n\n\n\n",
+        "a\nstring\nwith\nnewlines",
+        "&",
+        "&&&&&&&",
+        "a&string&with&newlines",
+        "\t\n&",
+        "a\t\n&string\t\n&with\t\n&many\t\n&chars"
     };
 
-    static constexpr EllipsizeFlags flagsToTest[] =
+    static constexpr std::array<EllipsizeFlags, 4> flagsToTest =
     {
         EllipsizeFlags{},
         EllipsizeFlags{wxEllipsizeFlags::ProcessMnemonics},
@@ -48,7 +58,7 @@ TEST_CASE("Ellipsization::NormalCase")
         EllipsizeFlags{wxEllipsizeFlags::Default}
     };
 
-    static constexpr wxEllipsizeMode modesToTest[] =
+    static constexpr std::array<wxEllipsizeMode, 3> modesToTest =
     {
         wxEllipsizeMode::Start,
         wxEllipsizeMode::Middle,
@@ -58,30 +68,28 @@ TEST_CASE("Ellipsization::NormalCase")
     const int charWidth = dc.wxGetCharWidth();
     int widthsToTest[] = { 6*charWidth, 10*charWidth, 15*charWidth };
 
-    for ( unsigned int s = 0; s < WXSIZEOF(stringsToTest); s++ )
+    for ( auto&& str : stringsToTest )
     {
-        const std::string str = std::string(stringsToTest[s]);
-
-        for ( unsigned int  f = 0; f < WXSIZEOF(flagsToTest); f++ )
+        for ( auto&& flagTT : flagsToTest )
         {
-            for ( unsigned int m = 0; m < WXSIZEOF(modesToTest); m++ )
+            for ( auto&& modeTT : modesToTest )
             {
-                for ( unsigned int w = 0; w < WXSIZEOF(widthsToTest); w++ )
+                for ( auto&& widthTT : widthsToTest )
                 {
                     std::string ret = wxControl::Ellipsize
                                    (
                                     str,
                                     dc,
-                                    modesToTest[m],
-                                    widthsToTest[w],
-                                    flagsToTest[f]
+                                    modeTT,
+                                    widthTT,
+                                    flagTT
                                    );
 
                     // Note that we must measure the width of the text that
                     // will be rendered, and when mnemonics are used, this
                     // means we have to remove them first.
                     const std::string
-                        displayed = flagsToTest[f] & wxEllipsizeFlags::ProcessMnemonics
+                        displayed = flagTT & wxEllipsizeFlags::ProcessMnemonics
                                         ? wxControl::RemoveMnemonics(ret)
                                         : ret;
                     const int
@@ -89,15 +97,14 @@ TEST_CASE("Ellipsization::NormalCase")
 
                     CHECK_MESSAGE
                     (
-                        width <= widthsToTest[w],
+                        width <= widthTT,
                      (
-                        "Test #(%u,%u.%u): %s\n\"%s\" -> \"%s\"; width=%dpx > %dpx",
-                        s, f, m,
+                        "Test: %s\n\"%s\" -> \"%s\"; width=%dpx > %dpx",
                         dc.GetFont().GetNativeFontInfoUserDesc(),
                         str,
                         ret,
                         width,
-                        widthsToTest[w]
+                        widthTT
                      )
                     );
                 }
@@ -113,7 +120,7 @@ TEST_CASE("Ellipsization::EnoughSpace")
 
     wxMemoryDC dc;
 
-    std::string testString{"some label"};
+    std::string_view testString{"some label"};
     const int width = dc.GetTextExtent(testString).GetWidth() + 50;
 
     CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Start, width) == testString );
@@ -141,7 +148,7 @@ TEST_CASE("Ellipsization::HasThreeDots")
 {
     wxMemoryDC dc;
 
-    std::string testString("some longer text");
+    std::string_view testString("some longer text");
     const int width = dc.GetTextExtent(testString).GetWidth() - 5;
 
     CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Start, width).starts_with("..."));
