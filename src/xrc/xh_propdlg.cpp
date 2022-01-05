@@ -38,7 +38,6 @@ wxPropertySheetDialogXmlHandler::wxPropertySheetDialogXmlHandler()
     XRC_ADD_STYLE(wxDIALOG_NO_PARENT);
 
     XRC_ADD_STYLE(wxTAB_TRAVERSAL);
-    XRC_ADD_STYLE(wxWS_EX_VALIDATE_RECURSIVELY);
 #ifdef __WXMAC__
     XRC_ADD_STYLE(wxDIALOG_EX_METAL);
 #endif

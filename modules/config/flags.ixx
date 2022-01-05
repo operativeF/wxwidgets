@@ -126,10 +126,6 @@ inline constexpr auto wxNO_FULL_REPAINT_ON_RESIZE = 0;
  * should be passed to wxWindow::SetExtraStyle(), not SetWindowStyle())
  */
 
-/* This flag is obsolete as recursive validation is now the default (and only
- * possible) behaviour. Simply don't use it any more in the new code. */
-inline constexpr auto wxWS_EX_VALIDATE_RECURSIVELY    = 0x00000000; /* used to be 1 */
-
 /*  wxCommandEvents and the objects of the derived classes are forwarded to the */
 /*  parent window and so on recursively by default. Using this flag for the */
 /*  given window allows to block this propagation at this window, i.e. prevent */

@@ -26,7 +26,6 @@ wxScrolledWindowXmlHandler::wxScrolledWindowXmlHandler()
 
     // wxPanel styles
     XRC_ADD_STYLE(wxTAB_TRAVERSAL);
-    XRC_ADD_STYLE(wxWS_EX_VALIDATE_RECURSIVELY);
 
     AddWindowStyles();
 }

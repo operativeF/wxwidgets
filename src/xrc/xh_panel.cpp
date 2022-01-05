@@ -22,7 +22,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPanelXmlHandler, wxXmlResourceHandler);
 wxPanelXmlHandler::wxPanelXmlHandler()  
 {
     XRC_ADD_STYLE(wxTAB_TRAVERSAL);
-    XRC_ADD_STYLE(wxWS_EX_VALIDATE_RECURSIVELY);
 
     AddWindowStyles();
 }
