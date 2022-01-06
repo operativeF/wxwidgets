@@ -24,6 +24,46 @@
 #         doctest::doctest
 # )
 
+set(METATEST_IXX
+    ${CMAKE_SOURCE_DIR}/modules/testing/metatest.ixx
+)
+
+set(METATEST_SRC
+    ${CMAKE_SOURCE_DIR}/modules/testing/metatest.cpp
+)
+
+add_executable(metatest
+    ${METATEST_IXX}
+    ${METATEST_SRC}
+)
+
+target_compile_features(metatest PRIVATE cxx_std_23)
+
+target_include_directories(metatest 
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
+)
+
+target_link_libraries(metatest
+    PRIVATE
+        boost_tmp
+        stdlibcore
+
+        kernel32
+        user32
+        comdlg32
+        winspool
+        shell32
+        comctl32
+        ole32
+        oleaut32
+        uuid
+        rpcrt4
+        advapi32
+        wininet
+)
+
+
 set(TEST_GUI_SRC
     testprec.ixx
     asserthelper.cpp

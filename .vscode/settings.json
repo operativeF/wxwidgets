@@ -107,6 +107,7 @@
         "ranges": "cpp",
         "gsl_util": "cpp",
         "*.ixx": "cpp",
-        "string_span": "cpp"
+        "string_span": "cpp",
+        "source_location": "cpp"
     }
 }
