@@ -313,31 +313,15 @@ struct function_traits<R (T::*)(TArgs...) const> {
 
 template <class T>
 T&& declval();
-template <class... Ts, class TExpr>
-constexpr auto is_valid(TExpr expr)
-    -> decltype(expr(declval<Ts...>()), bool()) {
-  return true;
-}
-template <class...>
-constexpr auto is_valid(...) -> bool {
-  return false;
-}
 
-template <class T>
-static constexpr auto is_container_v =
-    is_valid<T>([](auto t) -> decltype(t.begin(), t.end(), void()) {});
+template<class T>
+concept StringLike = requires{ T::npos; };
 
-template <class T>
-static constexpr auto has_npos_v = is_valid<T>([](auto t) -> decltype(void(t.npos)) {
-});
+template<class T>
+concept HasValue = requires{ T::value(); };
 
-template <class T>
-static constexpr auto has_value_v = is_valid<T>([](auto t) -> decltype(void(t.value)) {
-});
-
-template <class T>
-static constexpr auto has_epsilon_v =
-    is_valid<T>([](auto t) -> decltype(void(t.epsilon)) {});
+template<class T>
+concept HasEpsilon = requires{ T::epsilon; };
 
 }  // namespace type_traits
 
@@ -569,16 +553,16 @@ struct eq_ : op {
           using std::operator==;
           using std::operator<;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value == TRhs::value;
-          } else if constexpr (type_traits::has_epsilon_v<TLhs> &&
-                               type_traits::has_epsilon_v<TRhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TLhs> &&
+                               type_traits::HasEpsilon<TRhs>) {
             return math::abs(get(lhs) - get(rhs)) <
                    math::min_value(TLhs::epsilon, TRhs::epsilon);
-          } else if constexpr (type_traits::has_epsilon_v<TLhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TLhs>) {
             return math::abs(get(lhs) - get(rhs)) < TLhs::epsilon;
-          } else if constexpr (type_traits::has_epsilon_v<TRhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TRhs>) {
             return math::abs(get(lhs) - get(rhs)) < TRhs::epsilon;
           } else {
             return get(lhs) == get(rhs);
@@ -602,16 +586,16 @@ struct neq_ : op {
           using std::operator!=;
           using std::operator>;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value != TRhs::value;
-          } else if constexpr (type_traits::has_epsilon_v<TLhs> &&
-                               type_traits::has_epsilon_v<TRhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TLhs> &&
+                               type_traits::HasEpsilon<TRhs>) {
             return math::abs(get(lhs_) - get(rhs_)) >
                    math::min_value(TLhs::epsilon, TRhs::epsilon);
-          } else if constexpr (type_traits::has_epsilon_v<TLhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TLhs>) {
             return math::abs(get(lhs_) - get(rhs_)) > TLhs::epsilon;
-          } else if constexpr (type_traits::has_epsilon_v<TRhs>) {
+          } else if constexpr (type_traits::HasEpsilon<TRhs>) {
             return math::abs(get(lhs_) - get(rhs_)) > TRhs::epsilon;
           } else {
             return get(lhs_) != get(rhs_);
@@ -633,8 +617,8 @@ struct gt_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator>;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value > TRhs::value;
           } else {
             return get(lhs_) > get(rhs_);
@@ -656,8 +640,8 @@ struct ge_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator>=;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value >= TRhs::value;
           } else {
             return get(lhs_) >= get(rhs_);
@@ -679,8 +663,8 @@ struct lt_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator<;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value < TRhs::value;
           } else {
             return get(lhs_) < get(rhs_);
@@ -703,8 +687,8 @@ struct le_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator<=;
 
-          if constexpr (type_traits::has_value_v<TLhs> &&
-                        type_traits::has_value_v<TRhs>) {
+          if constexpr (type_traits::HasValue<TLhs> &&
+                        type_traits::HasValue<TRhs>) {
             return TLhs::value <= TRhs::value;
           } else {
             return get(lhs_) <= get(rhs_);
@@ -843,9 +827,10 @@ struct aborts_ : op {
 #endif
 }  // namespace detail
 
-namespace type_traits {
-template <class T>
-inline constexpr auto is_op_v = std::is_base_of_v<detail::op, T>;
+namespace type_traits
+{
+template<class T>
+concept DerivedFromOp = std::is_base_of_v<detail::op, T>;
 }  // namespace type_traits
 
 struct colors {
@@ -869,7 +854,7 @@ class printer {
     return *this;
   }
 
-  template <class T> requires(type_traits::is_container_v<T> && !type_traits::has_npos_v<T>)
+  template <std::ranges::range T> requires(!type_traits::StringLike<T>)
   auto& operator<<(T&& t) {
     *this << '{';
     auto first = true;
@@ -1603,57 +1588,57 @@ namespace operators {
   return detail::neq_{lhs, rhs};
 }
 
-template <class T> requires(type_traits::is_container_v<T>)
+template <std::ranges::range T>
 [[nodiscard]] constexpr auto operator==(T&& lhs, T&& rhs) {
   return detail::eq_{static_cast<T&&>(lhs), static_cast<T&&>(rhs)};
 }
 
-template <class T> requires(type_traits::is_container_v<T>)
+template <std::ranges::range T>
 [[nodiscard]] constexpr auto operator!=(T&& lhs, T&& rhs) {
   return detail::neq_{static_cast<T&&>(lhs), static_cast<T&&>(rhs)};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator==(const TLhs& lhs, const TRhs& rhs) {
   return detail::eq_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator!=(const TLhs& lhs, const TRhs& rhs) {
   return detail::neq_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator>(const TLhs& lhs, const TRhs& rhs) {
   return detail::gt_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator>=(const TLhs& lhs, const TRhs& rhs) {
   return detail::ge_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator<(const TLhs& lhs, const TRhs& rhs) {
   return detail::lt_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator<=(const TLhs& lhs, const TRhs& rhs) {
   return detail::le_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator &&(const TLhs& lhs, const TRhs& rhs) {
   return detail::and_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 [[nodiscard]] constexpr auto operator ||(const TLhs& lhs, const TRhs& rhs) {
   return detail::or_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 [[nodiscard]] constexpr auto operator !(const T& t) {
   return detail::not_{t};
 }
@@ -1684,7 +1669,7 @@ template <class Test>
   return detail::tag{tag};
 }
 
-template <class F, class T> requires(type_traits::is_container_v<T>)
+template <class F, std::ranges::range T>
 [[nodiscard]] constexpr auto operator|(const F& f, const T& t) {
   return [f, t](const auto name) {
     for (const auto& arg : t) {
@@ -1698,7 +1683,7 @@ template <class F, class T> requires(type_traits::is_container_v<T>)
   };
 }
 
-template <class F, template <class...> class T, class... Ts> requires(!type_traits::is_container_v<T<Ts...>>)
+template <class F, template<class...> class T, class... Ts> requires(!std::ranges::range<T<Ts...>>)
 [[nodiscard]] constexpr auto operator|(const F& f, const T<Ts...>& t) {
   return [f, t](const auto name) {
     apply(
@@ -1740,7 +1725,7 @@ inline auto operator>>(const T& t,
   return fatal_{t};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator==(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using eq_t = detail::eq_<T, detail::value_location<typename T::value_type>>;
@@ -1752,7 +1737,7 @@ constexpr auto operator==(
   return eq_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator==(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using eq_t = detail::eq_<detail::value_location<typename T::value_type>, T>;
@@ -1764,7 +1749,7 @@ constexpr auto operator==(
   return eq_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator!=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using neq_t = detail::neq_<T, detail::value_location<typename T::value_type>>;
@@ -1776,7 +1761,7 @@ constexpr auto operator!=(
   return neq_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator!=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using neq_t = detail::neq_<detail::value_location<typename T::value_type>, T>;
@@ -1788,7 +1773,7 @@ constexpr auto operator!=(
   return neq_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator>(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using gt_t = detail::gt_<T, detail::value_location<typename T::value_type>>;
@@ -1800,7 +1785,7 @@ constexpr auto operator>(
   return gt_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator>(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using gt_t = detail::gt_<detail::value_location<typename T::value_type>, T>;
@@ -1812,7 +1797,7 @@ constexpr auto operator>(
   return gt_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator>=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using ge_t = detail::ge_<T, detail::value_location<typename T::value_type>>;
@@ -1824,7 +1809,7 @@ constexpr auto operator>=(
   return ge_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator>=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using ge_t = detail::ge_<detail::value_location<typename T::value_type>, T>;
@@ -1836,7 +1821,7 @@ constexpr auto operator>=(
   return ge_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator<(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using lt_t = detail::lt_<T, detail::value_location<typename T::value_type>>;
@@ -1848,7 +1833,7 @@ constexpr auto operator<(
   return lt_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator<(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using lt_t = detail::lt_<detail::value_location<typename T::value_type>, T>;
@@ -1860,7 +1845,7 @@ constexpr auto operator<(
   return lt_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator<=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using le_t = detail::le_<T, detail::value_location<typename T::value_type>>;
@@ -1872,7 +1857,7 @@ constexpr auto operator<=(
   return le_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator<=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using le_t = detail::le_<detail::value_location<typename T::value_type>, T>;
@@ -1884,7 +1869,7 @@ constexpr auto operator<=(
   return le_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 constexpr auto operator &&(const TLhs& lhs, const TRhs& rhs) {
   using and_t = detail::and_<typename TLhs::type, typename TRhs::type>;
   struct and_ : and_t, detail::log {
@@ -1895,8 +1880,7 @@ constexpr auto operator &&(const TLhs& lhs, const TRhs& rhs) {
   return and_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> ||
-                                           std::is_base_of_v<detail::op, TRhs>)
+template <class TLhs, class TRhs> requires(type_traits::DerivedFromOp<TLhs> || type_traits::DerivedFromOp<TRhs>)
 constexpr auto operator ||(const TLhs& lhs, const TRhs& rhs) {
   using or_t = detail::or_<typename TLhs::type, typename TRhs::type>;
   struct or_ : or_t, detail::log {
@@ -1907,7 +1891,7 @@ constexpr auto operator ||(const TLhs& lhs, const TRhs& rhs) {
   return or_{lhs, rhs};
 }
 
-template <class T> requires(std::is_base_of_v<detail::op, T>)
+template <type_traits::DerivedFromOp T>
 constexpr auto operator !(const T& t) {
   using not_t = detail::not_<typename T::type>;
   struct not_ : not_t, detail::log {
@@ -1921,7 +1905,7 @@ constexpr auto operator !(const T& t) {
 }  // namespace terse
 }  // namespace operators
 
-template <class TExpr> requires(std::is_base_of_v<detail::op, TExpr> || std::is_convertible_v<TExpr, bool>)
+template <class TExpr> requires(type_traits::DerivedFromOp<TExpr> || std::is_convertible_v<TExpr, bool>)
 constexpr auto expect(const TExpr& expr,
                       const std::source_location& sl =
                           std::source_location::current()) {

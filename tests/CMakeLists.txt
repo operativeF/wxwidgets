@@ -47,6 +47,7 @@ target_include_directories(metatest
 target_link_libraries(metatest
     PRIVATE
         boost_tmp
+        fmt::fmt
         stdlibcore
 
         kernel32

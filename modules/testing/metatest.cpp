@@ -20,6 +20,8 @@ import <map>;
 import <numeric>;
 import <ranges>;
 
+#include <fmt/ostream.h>
+
 namespace ut = boost::ut;
 
 constexpr auto to_string = [](const auto expr) {
@@ -31,8 +33,7 @@ constexpr auto to_string = [](const auto expr) {
 constexpr auto test_assert =
     [](const bool result, const std::source_location& sl = std::source_location::current()) {
       if (!result) {
-        std::cerr << sl.file_name() << ':' << sl.line() << ":FAILED"
-                  << std::endl;
+        fmt::print("{}:{}:FAILED\n", sl.file_name(), sl.line());
         std::abort();
       }
     };
@@ -278,30 +279,6 @@ int main() {
       static_assert(
           std::is_same_v<int,
                          type_traits::function_traits<int()>::result_type>);
-    }
-
-    {
-      struct foo {
-        int value;
-      };
-      struct bar {};
-      constexpr auto value = [](auto t) -> decltype(t.value, void()) {};
-      static_assert(type_traits::is_valid<foo>(value));
-      static_assert(!type_traits::is_valid<bar>(value));
-      static_assert(!type_traits::is_valid<int>(value));
-      static_assert(!type_traits::is_valid<void>(value));
-    }
-
-    {
-      struct foo {};
-      static_assert(type_traits::is_container_v<std::vector<int>>);
-      static_assert(type_traits::is_container_v<std::array<bool, 0>>);
-      static_assert(type_traits::is_container_v<std::string>);
-      static_assert(type_traits::is_container_v<std::string_view>);
-      static_assert(type_traits::is_container_v<std::map<int, int>>);
-      static_assert(!type_traits::is_container_v<int>);
-      static_assert(!type_traits::is_container_v<foo>);
-      static_assert(!type_traits::is_container_v<void>);
     }
 
     {
