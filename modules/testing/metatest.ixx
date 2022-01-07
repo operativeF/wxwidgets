@@ -14,33 +14,34 @@ module;
 #include <unistd.h>
 #endif
 
-#if __has_include(<iso646.h>)
-#include <iso646.h>  // and, or, not, ...
-#endif
-
 export module WX.MetaTest;
 
-import Boost.TMP;
+export import Boost.TMP;
 
-import <array>;
-import <concepts>;
-import <exception>;
-import <iostream>;
-import <source_location>;
-import <sstream>;
-import <string_view>;
-import <type_traits>;
-import <utility>;
-import <vector>;
+export import <array>;
+export import <concepts>;
+
+#if defined(__cpp_exceptions)
+export import <exception>;
+#endif
+
+export import <iostream>;
+export import <source_location>;
+export import <sstream>;
+export import <string>;
+export import <string_view>;
+export import <type_traits>;
+export import <utility>;
+export import <vector>;
 
 #define BOOST_UT_VERSION 1'1'8
 
 #if defined(__has_builtin) && defined(__GNUC__) && (__GNUC__ < 10) && \
-    not defined(__clang__)
+    !defined(__clang__)
 #undef __has_builtin
 #endif
 
-#if not defined(__has_builtin)
+#if !defined(__has_builtin)
 #if defined(__GNUC__) && (__GNUC__ >= 9)
 #define __has___builtin_FILE 1
 #define __has___builtin_LINE 1
@@ -48,9 +49,9 @@ import <vector>;
 #define __has_builtin(...) __has_##__VA_ARGS__
 #endif
 
-#if defined(__cpp_modules) && !defined(BOOST_UT_DISABLE_MODULE)
 export
-#endif
+{
+
 namespace boost::inline ext::ut::inline v1_1_8 {
 namespace utility {
 template <class>
@@ -156,7 +157,7 @@ template <class TPattern, class TStr>
     ++si;
   }
 
-  if (si < str.size() ||  pi < std::size(pattern)) {
+  if (si < str.size() || pi < std::size(pattern)) {
     return {};
   }
 
@@ -181,15 +182,14 @@ template <class T = std::string_view, class TDelim>
 }
 }  // namespace utility
 
-namespace reflection
-{
+namespace reflection {
 template <class T>
 [[nodiscard]] constexpr auto type_name() -> std::string_view {
 #if defined(_MSC_VER) && !defined(__clang__)
   return {&__FUNCSIG__[120], sizeof(__FUNCSIG__) - 128};
 #elif defined(__clang_analyzer__)
   return {&__PRETTY_FUNCTION__[57], sizeof(__PRETTY_FUNCTION__) - 59};
-#elif defined(__clang__) && (__clang_major__ >= 12) && not defined(__APPLE__)
+#elif defined(__clang__) && (__clang_major__ >= 12) && !defined(__APPLE__)
   return {&__PRETTY_FUNCTION__[57], sizeof(__PRETTY_FUNCTION__) - 59};
 #elif defined(__clang__)
   return {&__PRETTY_FUNCTION__[70], sizeof(__PRETTY_FUNCTION__) - 72};
@@ -215,10 +215,12 @@ template <class T, class TExp>
   return exp ? T(base * pow(base, exp - TExp(1))) : T(1);
 }
 
+// FIXME: Fails if constexpr; most likely compiler bug. Works if consteval instead.
+// (compiler file 'd:\a01\_work\5\s\src\vctools\Compiler\CxxFE\sl\p1\c\constexpr\constexpr.cpp', line 8601)
 template <class T, char... Cs>
-[[nodiscard]] constexpr auto num() -> T {
+[[nodiscard]] consteval auto num() -> T {
   static_assert(
-      ((Cs == '.' ||  Cs == '\'' ||  (Cs >= '0' && Cs <= '9')) && ...));
+      ((Cs == '.' || Cs == '\'' || (Cs >= '0' && Cs <= '9')) && ...));
   T result{};
   for (const char c : {Cs...}) {
     if (c == '.') {
@@ -272,7 +274,6 @@ template <class T, class TValue>
 }  // namespace math
 
 namespace type_traits {
-
 template <class T, class...>
 struct identity {
   using type = T;
@@ -332,9 +333,8 @@ static constexpr auto has_value_v = is_valid<T>([](auto t) -> decltype(void(t.va
 template <class T>
 static constexpr auto has_epsilon_v =
     is_valid<T>([](auto t) -> decltype(void(t.epsilon)) {});
-}  // namespace type_traits
 
-using none = boost::tmp::nothing_;
+}  // namespace type_traits
 
 namespace events {
 struct test_begin {
@@ -342,7 +342,7 @@ struct test_begin {
   std::string_view name{};
   std::source_location location{};
 };
-template <class Test, class TArg = none>
+template <class Test, class TArg = boost::tmp::nothing_>
 struct test {
   std::string_view type{};
   std::string_view name{};
@@ -355,7 +355,7 @@ struct test {
   constexpr auto operator()() const { run_impl(static_cast<Test&&>(run), arg); }
 
  private:
-  static constexpr auto run_impl(Test test, const none&) { test(); }
+  static constexpr auto run_impl(Test test, const boost::tmp::nothing_&) { test(); }
 
   template <class T>
   static constexpr auto run_impl(T test, const TArg& arg)
@@ -384,7 +384,7 @@ struct test_run {
   std::string_view type{};
   std::string_view name{};
 };
-template <class TArg = none>
+template <class TArg = boost::tmp::nothing_>
 struct skip {
   std::string_view type{};
   std::string_view name{};
@@ -495,7 +495,8 @@ struct value : op {
 };
 
 template <std::floating_point T>
-struct value<T> : op {
+struct value<T> : op
+{
   using value_type = T;
   static inline auto epsilon = T{};
 
@@ -563,10 +564,10 @@ struct eq_ : op {
           using std::operator==;
           using std::operator<;
 
-          if constexpr (type_traits::has_value_v<TLhs> and
+          if constexpr (type_traits::has_value_v<TLhs> &&
                         type_traits::has_value_v<TRhs>) {
             return TLhs::value == TRhs::value;
-          } else if constexpr (type_traits::has_epsilon_v<TLhs> and
+          } else if constexpr (type_traits::has_epsilon_v<TLhs> &&
                                type_traits::has_epsilon_v<TRhs>) {
             return math::abs(get(lhs) - get(rhs)) <
                    math::min_value(TLhs::epsilon, TRhs::epsilon);
@@ -627,7 +628,7 @@ struct gt_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator>;
 
-          if constexpr (type_traits::has_value_v<TLhs> and
+          if constexpr (type_traits::has_value_v<TLhs> &&
                         type_traits::has_value_v<TRhs>) {
             return TLhs::value > TRhs::value;
           } else {
@@ -650,7 +651,7 @@ struct ge_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator>=;
 
-          if constexpr (type_traits::has_value_v<TLhs> and
+          if constexpr (type_traits::has_value_v<TLhs> &&
                         type_traits::has_value_v<TRhs>) {
             return TLhs::value >= TRhs::value;
           } else {
@@ -673,7 +674,7 @@ struct lt_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator<;
 
-          if constexpr (type_traits::has_value_v<TLhs> and
+          if constexpr (type_traits::has_value_v<TLhs> &&
                         type_traits::has_value_v<TRhs>) {
             return TLhs::value < TRhs::value;
           } else {
@@ -697,7 +698,7 @@ struct le_ : op {
       : lhs_{lhs}, rhs_{rhs}, value_{[&] {
           using std::operator<=;
 
-          if constexpr (type_traits::has_value_v<TLhs> and
+          if constexpr (type_traits::has_value_v<TLhs> &&
                         type_traits::has_value_v<TRhs>) {
             return TLhs::value <= TRhs::value;
           } else {
@@ -735,7 +736,7 @@ struct or_ : op {
   constexpr or_(const TLhs& lhs = {}, const TRhs& rhs = {})
       : lhs_{lhs},
         rhs_{rhs},
-        value_{static_cast<bool>(lhs) ||  static_cast<bool>(rhs)} {}
+        value_{static_cast<bool>(lhs) || static_cast<bool>(rhs)} {}
 
   [[nodiscard]] constexpr operator bool() const { return value_; }
   [[nodiscard]] constexpr auto lhs() const { return get(lhs_); }
@@ -749,7 +750,7 @@ struct or_ : op {
 template <class T>
 struct not_ : op {
   explicit constexpr not_(const T& t = {})
-      : t_{t}, value_{not static_cast<bool>(t)} {}
+      : t_{t}, value_{!static_cast<bool>(t)} {}
 
   [[nodiscard]] constexpr operator bool() const { return value_; }
   [[nodiscard]] constexpr auto value() const { return get(t_); }
@@ -821,7 +822,7 @@ template <class TExpr>
 struct aborts_ : op {
   constexpr explicit aborts_(const TExpr& expr)
       : value_{[&expr]() -> bool {
-          if (const auto pid = fork(); not pid) {
+          if (const auto pid = fork(); !pid) {
             expr();
             exit(0);
           }
@@ -838,10 +839,8 @@ struct aborts_ : op {
 }  // namespace detail
 
 namespace type_traits {
-
-template<class T>
-concept Operable = std::derived_from<detail::op, T>;
-
+template <class T>
+inline constexpr auto is_op_v = std::is_base_of_v<detail::op, T>;
 }  // namespace type_traits
 
 struct colors {
@@ -1049,7 +1048,7 @@ class reporter {
   auto on(events::summary) -> void {
     if (static auto once = true; once) {
       once = false;
-      if (tests_.fail ||  asserts_.fail) {
+      if (tests_.fail || asserts_.fail) {
         printer_ << "\n========================================================"
                     "=======================\n"
                  << "tests:   " << (tests_.pass + tests_.fail) << " | "
@@ -1115,7 +1114,7 @@ class runner {
     constexpr auto operator()(const std::size_t level, const TPath& path) const
         -> bool {
       for (auto i = 0u; i < math::min_value(level + 1, std::size(path_)); ++i) {
-        if (not utility::is_match(path[i], path_[i])) {
+        if (!utility::is_match(path[i], path_[i])) {
           return false;
         }
       }
@@ -1132,13 +1131,13 @@ class runner {
       : reporter_{std::move(reporter)}, suites_(suites_size) {}
 
   ~runner() {
-    const auto should_run = not run_;
+    const auto should_run = !run_;
 
     if (should_run) {
       static_cast<void>(run());
     }
 
-    if (not dry_run_) {
+    if (!dry_run_) {
       reporter_.on(events::summary{});
     }
 
@@ -1178,13 +1177,13 @@ class runner {
       }
     }
 
-    if (not execute) {
+    if (!execute) {
       on(events::skip<>{.type = test.type, .name = test.name});
       return;
     }
 
     if (filter_(level_, path_)) {
-      if (not level_++) {
+      if (!level_++) {
         reporter_.on(events::test_begin{
             .type = test.type, .name = test.name, .location = test.location});
       } else {
@@ -1213,7 +1212,7 @@ class runner {
       }
 #endif
 
-      if (not --level_) {
+      if (!(--level_)) {
         reporter_.on(events::test_end{.type = test.type, .name = test.name});
       }
     }
@@ -1246,7 +1245,7 @@ class runner {
     reporter_.on(fatal_assertion);
 
 #if defined(__cpp_exceptions)
-    if (not level_) {
+    if (!level_) {
       reporter_.on(events::summary{});
     }
     throw fatal_assertion;
@@ -1329,19 +1328,19 @@ struct test {
                                        .name = name,
                                        .tag = tag,
                                        .location = _test.location,
-                                       .arg = none{},
+                                       .arg = boost::tmp::nothing_{},
                                        .run = _test.test});
     return _test.test;
   }
 
-  template <class Test> requires(!std::convertible_to<Test, void(*)()>)
+  template <class Test> requires(!std::is_convertible_v<Test, void (*)()>)
   constexpr auto operator=(Test _test) ->
       typename type_traits::identity<Test, decltype(_test())>::type {
     on<Test>(events::test<Test>{.type = type,
                                 .name = name,
                                 .tag = tag,
                                 .location = {},
-                                .arg = none{},
+                                .arg = boost::tmp::nothing_{},
                                 .run = static_cast<Test&&>(_test)});
     return _test;
   }
@@ -1350,8 +1349,9 @@ struct test {
     return _test(name);
   }
 
-  template <class Test> requires(!std::convertible_to<Test, void (*)(std::string_view)>)
-  constexpr auto operator=(Test _test) -> decltype(_test(type_traits::declval<std::string_view>())) {
+  template <class Test> requires(!std::is_convertible_v<Test, void(*)(std::string_view)>)
+  constexpr auto operator=(Test _test)
+      -> decltype(_test(type_traits::declval<std::string_view>())) {
     return _test(name);
   }
 };
@@ -1476,7 +1476,7 @@ struct expect_ {
 
   template <class TMsg>
   auto& operator<<(const TMsg& msg) {
-    if (not value_) {
+    if (!value_) {
       on<T>(events::log{' '});
       on<T>(events::log{msg});
     }
@@ -1608,48 +1608,48 @@ template <class T> requires(type_traits::is_container_v<T>)
   return detail::neq_{static_cast<T&&>(lhs), static_cast<T&&>(rhs)};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator==(const TLhs& lhs, const TRhs& rhs) {
   return detail::eq_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator!=(const TLhs& lhs, const TRhs& rhs) {
   return detail::neq_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator>(const TLhs& lhs, const TRhs& rhs) {
   return detail::gt_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator>=(const TLhs& lhs, const TRhs& rhs) {
   return detail::ge_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator<(const TLhs& lhs, const TRhs& rhs) {
   return detail::lt_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
 [[nodiscard]] constexpr auto operator<=(const TLhs& lhs, const TRhs& rhs) {
   return detail::le_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
-[[nodiscard]] constexpr auto operator and(const TLhs& lhs, const TRhs& rhs) {
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+[[nodiscard]] constexpr auto operator &&(const TLhs& lhs, const TRhs& rhs) {
   return detail::and_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
-[[nodiscard]] constexpr auto operator or(const TLhs& lhs, const TRhs& rhs) {
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+[[nodiscard]] constexpr auto operator ||(const TLhs& lhs, const TRhs& rhs) {
   return detail::or_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
-[[nodiscard]] constexpr auto operator not(const T& t) {
+template <class T> requires(std::is_base_of_v<detail::op, T>)
+[[nodiscard]] constexpr auto operator !(const T& t) {
   return detail::not_{t};
 }
 
@@ -1693,7 +1693,7 @@ template <class F, class T> requires(type_traits::is_container_v<T>)
   };
 }
 
-template<class F, template <class...> class T, class... Ts> requires(!type_traits::is_container_v<T<Ts...>>)
+template <class F, template <class...> class T, class... Ts> requires(!type_traits::is_container_v<T<Ts...>>)
 [[nodiscard]] constexpr auto operator|(const F& f, const T<Ts...>& t) {
   return [f, t](const auto name) {
     apply(
@@ -1735,7 +1735,7 @@ inline auto operator>>(const T& t,
   return fatal_{t};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator==(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using eq_t = detail::eq_<T, detail::value_location<typename T::value_type>>;
@@ -1747,7 +1747,7 @@ constexpr auto operator==(
   return eq_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator==(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using eq_t = detail::eq_<detail::value_location<typename T::value_type>, T>;
@@ -1759,7 +1759,7 @@ constexpr auto operator==(
   return eq_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator!=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using neq_t = detail::neq_<T, detail::value_location<typename T::value_type>>;
@@ -1771,7 +1771,7 @@ constexpr auto operator!=(
   return neq_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator!=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using neq_t = detail::neq_<detail::value_location<typename T::value_type>, T>;
@@ -1783,7 +1783,7 @@ constexpr auto operator!=(
   return neq_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator>(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using gt_t = detail::gt_<T, detail::value_location<typename T::value_type>>;
@@ -1795,7 +1795,7 @@ constexpr auto operator>(
   return gt_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator>(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using gt_t = detail::gt_<detail::value_location<typename T::value_type>, T>;
@@ -1807,7 +1807,7 @@ constexpr auto operator>(
   return gt_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator>=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using ge_t = detail::ge_<T, detail::value_location<typename T::value_type>>;
@@ -1819,7 +1819,7 @@ constexpr auto operator>=(
   return ge_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator>=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using ge_t = detail::ge_<detail::value_location<typename T::value_type>, T>;
@@ -1831,7 +1831,7 @@ constexpr auto operator>=(
   return ge_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator<(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using lt_t = detail::lt_<T, detail::value_location<typename T::value_type>>;
@@ -1843,7 +1843,7 @@ constexpr auto operator<(
   return lt_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator<(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using lt_t = detail::lt_<detail::value_location<typename T::value_type>, T>;
@@ -1855,7 +1855,7 @@ constexpr auto operator<(
   return lt_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator<=(
     const T& lhs, const detail::value_location<typename T::value_type>& rhs) {
   using le_t = detail::le_<T, detail::value_location<typename T::value_type>>;
@@ -1867,7 +1867,7 @@ constexpr auto operator<=(
   return le_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
+template <class T> requires(std::is_base_of_v<detail::op, T>)
 constexpr auto operator<=(
     const detail::value_location<typename T::value_type>& lhs, const T& rhs) {
   using le_t = detail::le_<detail::value_location<typename T::value_type>, T>;
@@ -1879,8 +1879,8 @@ constexpr auto operator<=(
   return le_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
-constexpr auto operator and(const TLhs& lhs, const TRhs& rhs) {
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> || std::is_base_of_v<detail::op, TRhs>)
+constexpr auto operator &&(const TLhs& lhs, const TRhs& rhs) {
   using and_t = detail::and_<typename TLhs::type, typename TRhs::type>;
   struct and_ : and_t, detail::log {
     using type [[maybe_unused]] = and_t;
@@ -1890,8 +1890,9 @@ constexpr auto operator and(const TLhs& lhs, const TRhs& rhs) {
   return and_{lhs, rhs};
 }
 
-template <class TLhs, class TRhs> requires(Operable<TLhs> || Operable<TRhs>)
-constexpr auto operator or(const TLhs& lhs, const TRhs& rhs) {
+template <class TLhs, class TRhs> requires(std::is_base_of_v<detail::op, TLhs> ||
+                                           std::is_base_of_v<detail::op, TRhs>)
+constexpr auto operator ||(const TLhs& lhs, const TRhs& rhs) {
   using or_t = detail::or_<typename TLhs::type, typename TRhs::type>;
   struct or_ : or_t, detail::log {
     using type [[maybe_unused]] = or_t;
@@ -1901,8 +1902,8 @@ constexpr auto operator or(const TLhs& lhs, const TRhs& rhs) {
   return or_{lhs, rhs};
 }
 
-template <class T> requires(Operable<T>)
-constexpr auto operator not(const T& t) {
+template <class T> requires(std::is_base_of_v<detail::op, T>)
+constexpr auto operator !(const T& t) {
   using not_t = detail::not_<typename T::type>;
   struct not_ : not_t, detail::log {
     using type [[maybe_unused]] = not_t;
@@ -1915,7 +1916,7 @@ constexpr auto operator not(const T& t) {
 }  // namespace terse
 }  // namespace operators
 
-template <class TExpr> requires(Operable<TExpr> || std::convertible_to<TExpr, bool>)
+template <class TExpr> requires(std::is_base_of_v<detail::op, TExpr> || std::is_convertible_v<TExpr, bool>)
 constexpr auto expect(const TExpr& expr,
                       const std::source_location& sl =
                           std::source_location::current()) {
@@ -1925,11 +1926,8 @@ constexpr auto expect(const TExpr& expr,
 
 [[maybe_unused]] constexpr auto fatal = detail::fatal{};
 
-#if defined(__cpp_nontype_template_parameter_class)
-template <auto Constant>
-#else
+
 template <bool Constant>
-#endif
 constexpr auto constant = Constant;
 
 #if defined(__cpp_exceptions)
@@ -2137,7 +2135,7 @@ class steps {
   auto next(const TPattern& pattern) -> void {
     const auto is_scenario = [&pattern](const auto& _step) {
       constexpr auto scenario = "Scenario";
-      return pattern.find(scenario) == std::string::npos and
+      return pattern.find(scenario) == std::string::npos &&
              _step.find(scenario) != std::string::npos;
     };
 
@@ -2148,8 +2146,8 @@ class steps {
           break;
         }
 
-        if (utility::is_match(_step, name) or
-            not std::empty(utility::match(name, _step))) {
+        if (utility::is_match(_step, name) ||
+            !std::empty(utility::match(name, _step))) {
           step_ = i;
           call(_step);
         }
@@ -2207,10 +2205,12 @@ using operators::operator>;
 using operators::operator>=;
 using operators::operator<;
 using operators::operator<=;
-using operators::operator and;
-using operators::operator or;
-using operators::operator not;
+using operators::operator&&;
+using operators::operator||;
+using operators::operator!;
 using operators::operator|;
 using operators::operator/;
 using operators::operator>>;
 }  // namespace boost::ext::ut::v1_1_8
+
+} // export
