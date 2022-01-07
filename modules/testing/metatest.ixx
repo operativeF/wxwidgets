@@ -217,6 +217,11 @@ template <class T, class TExp>
 
 // FIXME: Fails if constexpr; most likely compiler bug. Works if consteval instead.
 // (compiler file 'd:\a01\_work\5\s\src\vctools\Compiler\CxxFE\sl\p1\c\constexpr\constexpr.cpp', line 8601)
+// [build] C:\dev\wxWidgets\modules\testing\metatest.ixx(1499,1): error C2975: 'N': invalid template argument for 'boost::ext::ut::v1_1_8::detail::integral_constant', expected compile-time constant expression [C:\dev\wxWidgets\build\tests\metatest.vcxproj]
+// [build] C:\dev\wxWidgets\modules\testing\metatest.ixx(534): message : see declaration of 'N' [C:\dev\wxWidgets\build\tests\metatest.vcxproj]
+// [build] C:\dev\wxWidgets\modules\testing\metatest.cpp(349): message : see reference to function template instantiation 'auto boost::ext::ut::v1_1_8::literals::operator ""_i<52,50>(void)' being compiled [C:\dev\wxWidgets\build\tests\metatest.vcxproj]
+// [build] C:\dev\wxWidgets\modules\testing\metatest.cpp(349,1): fatal error C1903: unable to recover from previous error(s); stopping compilation [C:\dev\wxWidgets\build\tests\metatest.vcxproj]
+// [build] Build finished with exit code 1
 template <class T, char... Cs>
 [[nodiscard]] consteval auto num() -> T {
   static_assert(

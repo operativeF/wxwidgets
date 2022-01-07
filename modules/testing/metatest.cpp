@@ -13,12 +13,12 @@
 #define __has_builtin(...) __has_##__VA_ARGS__
 #endif
 
-
 import WX.MetaTest;
 
 import <any>;
 import <map>;
 import <numeric>;
+import <ranges>;
 
 namespace ut = boost::ut;
 
@@ -53,7 +53,7 @@ struct fake_cfg {
 
   template <class... Ts>
   auto on(ut::events::test<Ts...> test) -> void {
-    if (std::find_if(std::cbegin(test.tag), std::cend(test.tag),
+    if (std::ranges::find_if(test.tag,
                      [](const auto& name) {
                        return ut::utility::is_match(name, "skip");
                      }) != std::cend(test.tag)) {
