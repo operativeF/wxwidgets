@@ -1098,7 +1098,7 @@ void wxSVGFileDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, w
     // End current graphics group to ensure proper xml nesting (e.g. so that
     // graphics can be subsequently changed inside the clipping region)
     wxString svg =
-fmt::format(R"svg_data(</g>
+fmt::format(fmt::runtime(R"svg_data(</g>
 <defs>
   <clipPath id="clip{}">
     <rect id="cliprect{}"
@@ -1111,7 +1111,7 @@ fmt::format(R"svg_data(</g>
 </defs>
 <g style="clip-path: url(#clip{});">
 
-)svg_data");
+)svg_data"), m_clipNestingLevel, m_clipNestingLevel, x, y, width, height);
 
  //   wxString svg = "</g>\n"
  //          "<defs>\n"

@@ -77,7 +77,7 @@ bool wxFileDialogBase::Create(wxWindow *parent,
 
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        m_wildCard = fmt::format(_("All files (%s)|%s"),
+        m_wildCard = fmt::format(fmt::runtime(_("All files (%s)|%s")),
                                       wxFileSelectorDefaultWildcardStr,
                                       wxFileSelectorDefaultWildcardStr);
     }
@@ -94,7 +94,7 @@ bool wxFileDialogBase::Create(wxWindow *parent,
 
             m_wildCard = fmt::format
                          (
-                            _("%s files (%s)|%s"),
+                            fmt::runtime(_("%s files (%s)|%s")),
                             wildCard.c_str() + nDot,
                             wildCard.c_str(),
                             wildCard.c_str()

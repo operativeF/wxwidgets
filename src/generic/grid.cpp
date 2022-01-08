@@ -1761,10 +1761,10 @@ bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
     {
         wxFAIL_MSG( fmt::format
                     (
-                        "Called wxGridStringTable::DeleteRows(pos={:lu}, N={:lu})\nPos value is invalid for present table with {:lu} rows",
-                        (unsigned long)pos,
-                        (unsigned long)numRows,
-                        (unsigned long)curNumRows
+                        "Called wxGridStringTable::DeleteRows(pos={}, N={})\nPos value is invalid for present table with {} rows",
+                        pos,
+                        numRows,
+                        curNumRows
                     ) );
 
         return false;
@@ -1866,10 +1866,10 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
     {
         wxFAIL_MSG( fmt::format
                     (
-                        "Called wxGridStringTable::DeleteCols(pos={:lu}, N={:lu})\nPos value is invalid for present table with {:lu} cols",
-                        (unsigned long)pos,
-                        (unsigned long)numCols,
-                        (unsigned long)curNumCols
+                        "Called wxGridStringTable::DeleteCols(pos={}, N={})\nPos value is invalid for present table with {} cols",
+                        pos,
+                        numCols,
+                        curNumCols
                     ) );
         return false;
     }

@@ -177,16 +177,16 @@ std::string wxTextValidator::IsValid(std::string_view str) const
     if ( HasFlag(wxFILTER_EMPTY) && str.empty() )
         return _("Required information entry is empty.");
     else if ( IsExcluded(std::string{str.begin(), str.end()}) )
-        return fmt::format(_("'%s' is one of the invalid strings"), str);
+        return fmt::format(fmt::runtime(_("'%s' is one of the invalid strings")), str);
     else if ( !IsIncluded(std::string{str.begin(), str.end()}) )
-        return fmt::format(_("'%s' is not one of the valid strings"), str);
+        return fmt::format(fmt::runtime(_("'%s' is not one of the valid strings")), str);
 
     // check the whole string for invalid chars.
     for ( auto i = str.begin(), end = str.end(); i != end; ++i )
     {
         if ( !IsValidChar(*i) )
         {
-            return fmt::format(_("'{:s}' contains invalid character(s)"), str);
+            return fmt::format(fmt::runtime(_("'{:s}' contains invalid character(s)")), str);
         }
     }
 

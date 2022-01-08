@@ -869,7 +869,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 if ( !(m_data->m_options[optInd].flags &
                                         wxCMD_LINE_SWITCH_NEGATABLE) )
                                 {
-                                    errorOpt = fmt::format(_("Option '{:s}' can't be negated"), name);
+                                    errorOpt = fmt::format(fmt::runtime(_("Option '{}' can't be negated")), name);
                                     optInd = wxNOT_FOUND;
                                 }
                             }
@@ -879,7 +879,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                         {
                             if ( errorOpt.empty() )
                             {
-                                errorOpt = fmt::format(_("Unknown long option '%s'"), name);
+                                errorOpt = fmt::format(fmt::runtime(_("Unknown long option '{}'")), name);
                             }
 
                             errorMsg += fmt::format("{}\n", errorOpt);
@@ -893,7 +893,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                     // Print the argument including leading "--"
                     name.insert(0, "--");
                     // name.Prepend( "--" );
-                    errorMsg += fmt::format(_("Unknown option '{:s}'\n"), name);
+                    errorMsg += fmt::format(fmt::runtime(_("Unknown option '{}'\n")), name);
                 }
 
             }
@@ -914,7 +914,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                     {
                         // we couldn't find a valid option name in the
                         // beginning of this string
-                        errorMsg += fmt::format(_("Unknown option '{:s}'\n"), name);
+                        errorMsg += fmt::format(fmt::runtime(_("Unknown option '{}'\n")), name);
 
                         break;
                     }
@@ -991,7 +991,7 @@ int wxCmdLineParser::Parse(bool showUsage)
 
                 if ( !negated && p != arg.end() )
                 {
-                    errorMsg += fmt::format(_("Unexpected characters following option '{:s}'.\n"), name);
+                    errorMsg += fmt::format(fmt::runtime(_("Unexpected characters following option '{}'.\n")), name);
 
                     ok = false;
                 }
@@ -1026,7 +1026,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                         if ( ++n == count )
                         {
                             // ... but there is none
-                            errorMsg += fmt::format(_("Option '{:s}' requires a value.\n"), name);
+                            errorMsg += fmt::format(fmt::runtime(_("Option '{}' requires a value.\n")), name);
 
                             ok = false;
                         }
@@ -1043,7 +1043,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                         // not depending on the option style
                         if ( opt.flags & wxCMD_LINE_NEEDS_SEPARATOR )
                         {
-                            errorMsg += fmt::format(_("Separator expected after the option '{:s}'.\n"), name);
+                            errorMsg += fmt::format(fmt::runtime(_("Separator expected after the option '{}'.\n")), name);
 
                             ok = false;
                         }
@@ -1074,7 +1074,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 }
                                 else
                                 {
-                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value.ToStdString(), name);
+                                    errorMsg += fmt::format(fmt::runtime(_("'{}' is not a correct numeric value for option '{}'.\n")), value.ToStdString(), name);
 
                                     ok = false;
                                 }
@@ -1092,7 +1092,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 }
                                 else
                                 {
-                                    errorMsg += fmt::format(_("'{:s}' is not a correct numeric value for option '{:s}'.\n"), value.ToStdString(), name);
+                                    errorMsg += fmt::format(fmt::runtime(_("'{}' is not a correct numeric value for option '{}'.\n")), value.ToStdString(), name);
 
                                     ok = false;
                                 }
@@ -1107,7 +1107,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                                 wxString tmpValue{value};
                                 if ( !dt.ParseDate(tmpValue, &endDate) || endDate != tmpValue.end() )
                                 {
-                                    errorMsg += fmt::format(_("Option '{:s}': '{:s}' cannot be converted to a date.\n"), name, value.ToStdString());
+                                    errorMsg += fmt::format(fmt::runtime(_("Option '{}': '{}' cannot be converted to a date.\n")), name, value.ToStdString());
 
                                     ok = false;
                                 }
@@ -1153,7 +1153,7 @@ int wxCmdLineParser::Parse(bool showUsage)
             }
             else
             {
-                errorMsg += fmt::format(_("Unexpected parameter '{:s}'\n"), arg.ToStdString());
+                errorMsg += fmt::format(fmt::runtime(_("Unexpected parameter '{}'\n")), arg.ToStdString());
 
                 ok = false;
             }
@@ -1178,15 +1178,15 @@ int wxCmdLineParser::Parse(bool showUsage)
                 {
                     if ( AreLongOptionsEnabled() )
                     {
-                        optName = fmt::format( _("%s (or %s)"), opt.shortName, opt.longName );
+                        optName = fmt::format( fmt::runtime(_("{} (or {})")), opt.shortName, opt.longName );
                     }
                     else
                     {
-                        optName = fmt::format( "{:s}", opt.shortName );
+                        optName = fmt::format( "{}", opt.shortName );
                     }
                 }
 
-                errorMsg += fmt::format(_("The value for the option '{:s}' must be specified.\n"), optName);
+                errorMsg += fmt::format(fmt::runtime(_("The value for the option '{}' must be specified.\n")), optName);
 
                 ok = false;
             }
@@ -1206,7 +1206,7 @@ int wxCmdLineParser::Parse(bool showUsage)
 
             if ( !(param.flags & wxCMD_LINE_PARAM_OPTIONAL) )
             {
-                errorMsg += fmt::format(_("The required parameter '%s' was not specified.\n"), param.description.ToStdString());
+                errorMsg += fmt::format(fmt::runtime(_("The required parameter '{}' was not specified.\n")), param.description.ToStdString());
 
                 ok = false;
             }
@@ -1279,7 +1279,7 @@ std::string wxCmdLineParser::GetUsageString() const
     }
 
     // FIXME: Provide a way to have translations in fmt lib strings.
-    usage +=  fmt::format(_("Usage: %s"), appname);
+    usage +=  fmt::format(fmt::runtime(_("Usage: {}")), appname);
 
     // the switch char is usually '-' but this can be changed with
     // SetSwitchChars() and then the first one of possible chars is used

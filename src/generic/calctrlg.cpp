@@ -925,7 +925,7 @@ void wxGenericCalendarCtrl::OnPaint([[maybe_unused]] wxPaintEvent& event)
             {
                 // don't use wxDate::Format() which prepends 0s
                 unsigned int day = date.GetDay();
-                std::string dayStr = fmt::format("{:u}", day);
+                std::string dayStr = fmt::format("{}", day);
                 wxCoord width;
                 dc.GetTextExtent(dayStr, &width, nullptr);
 

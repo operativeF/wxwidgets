@@ -390,7 +390,6 @@ wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
     m_linesTail = nullptr;
 
     // read the entire stream contents in memory
-    wxWxCharBuffer cbuf;
     static constexpr size_t chunkLen = 1024;
 
     wxMemoryBuffer buf(chunkLen);
@@ -409,21 +408,19 @@ wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
     }
     while ( !inStream.Eof() );
 
-    size_t len;
-    cbuf = conv.cMB2WC((char *)buf.GetData(), buf.GetDataLen() + 1, &len);
-    if ( !len && buf.GetDataLen() )
+    if ( buf.GetDataLen() )
     {
         wxLogError(_("Failed to read config options."));
     }
 
     // parse the input contents if there is anything to parse
-    if ( cbuf )
+    if ( buf )
     {
         // now break it into lines
         wxMemoryText memText;
-        for ( const wxChar *s = cbuf; ; ++s )
+        for ( const char *s = buf; ; ++s )
         {
-            const wxChar *e = s;
+            const char *e = s;
             while ( *e != '\0' && *e != '\n' && *e != '\r' )
                 ++e;
 
@@ -2019,7 +2016,7 @@ static std::string FilterOutValue(const std::string& str)
   if ( bQuote )
     strResult += '"';
 
-  wxChar c;
+  char c;
   for ( size_t n = 0; n != str.length(); n++ ) {
     switch ( str[n] ) {
       case '\n':

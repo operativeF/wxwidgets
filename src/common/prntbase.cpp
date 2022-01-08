@@ -514,15 +514,15 @@ void wxPrintAbortDialog::SetProgress(int currentPage, int totalPages,
   {
     // This means that the user has not supplied a total number of pages so it
     // is better not to show this value.
-    text = fmt::format(_("Printing page {:d}"), currentPage);
+    text = fmt::format(fmt::runtime(_("Printing page {:d}")), currentPage);
   }
   else
   {
     // We have a valid total number of pages so we show it.
-    text = fmt::format(_("Printing page {:d} of {:d}"), currentPage, totalPages);
+    text = fmt::format(fmt::runtime(_("Printing page {:d} of {:d}")), currentPage, totalPages);
   }
   if ( totalCopies > 1 )
-      text += fmt::format(_(" (copy {:d} of {:d})"), currentCopy, totalCopies);
+      text += fmt::format(fmt::runtime(_(" (copy {:d} of {:d})")), currentCopy, totalCopies);
   m_progress->SetLabel(text);
 }
 
@@ -2002,9 +2002,9 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
 #if wxUSE_STATUSBAR
     std::string status;
     if (m_maxPage != 0)
-        status = fmt::format(_("Page %d of %d"), pageNum, m_maxPage);
+        status = fmt::format(fmt::runtime(_("Page %d of %d")), pageNum, m_maxPage);
     else
-        status = fmt::format(_("Page %d"), pageNum);
+        status = fmt::format(fmt::runtime(_("Page %d")), pageNum);
 
     if (m_previewFrame)
         m_previewFrame->SetStatusText(status);

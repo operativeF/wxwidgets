@@ -69,7 +69,7 @@ aStdKeys[] =
 };
 
 // the registry name separator (perhaps one day MS will change it to '/' ;-)
-#define   REG_SEPARATOR     wxT('\\')
+#define   REG_SEPARATOR     '\\'
 
 // ----------------------------------------------------------------------------
 // macros
@@ -131,7 +131,7 @@ static std::string GetTypeString(WXDWORD dwType)
         // REG_TYPE_TO_STR(QWORD_LITTLE_ENDIAN); -- same as REG_QWORD
 
         default:
-            return fmt::format(_("unknown (%lu)"), dwType);
+            return fmt::format(fmt::runtime(_("unknown (%lu)")), dwType);
     }
 }
 

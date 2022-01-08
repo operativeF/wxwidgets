@@ -787,7 +787,7 @@ bool wxGridCellNumberEditor::EndEdit([[maybe_unused]] int row,
         if ( value == m_value )
             return false;
 
-        text = fmt::format("{:ld}", value);
+        text = fmt::format("{}", value);
     }
     else // using unconstrained input
 #endif // wxUSE_SPINCTRL
@@ -826,7 +826,7 @@ void wxGridCellNumberEditor::ApplyEdit(int row, int col, wxGrid* grid)
     if ( table->CanSetValueAs(row, col, wxGRID_VALUE_NUMBER) )
         table->SetValueAsLong(row, col, m_value);
     else
-        table->SetValue(row, col, fmt::format("{:ld}", m_value));
+        table->SetValue(row, col, fmt::format("{}", m_value));
 }
 
 void wxGridCellNumberEditor::Reset()
@@ -940,7 +940,7 @@ std::string wxGridCellNumberEditor::GetValue() const
     if ( HasRange() )
     {
         long value = Spin()->GetValue();
-        return fmt::format("{:ld}", value);
+        return fmt::format("{}", value);
     }
     else
 #endif
@@ -1178,7 +1178,7 @@ std::string wxGridCellFloatEditor::GetString()
             m_format += 'f';
     }
 
-    return fmt::format(m_format, m_value);
+    return fmt::format(fmt::runtime(m_format), m_value);
 }
 
 bool wxGridCellFloatEditor::IsAcceptedKey(wxKeyEvent& event)
@@ -1752,7 +1752,7 @@ bool wxGridCellEnumEditor::EndEdit([[maybe_unused]] int row,
     m_index = idx;
 
     if ( newval )
-        *newval = fmt::format("{:ld}", m_index);
+        *newval = fmt::format("{}", m_index);
 
     return true;
 }
@@ -1763,7 +1763,7 @@ void wxGridCellEnumEditor::ApplyEdit(int row, int col, wxGrid* grid)
     if ( table->CanSetValueAs(row, col, wxGRID_VALUE_NUMBER) )
         table->SetValueAsLong(row, col, m_index);
     else
-        table->SetValue(row, col, fmt::format("{:ld}", m_index));
+        table->SetValue(row, col, fmt::format("{}", m_index));
 }
 
 #endif // wxUSE_COMBOBOX

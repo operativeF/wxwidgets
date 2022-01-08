@@ -44,7 +44,7 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
         // add everything remaining
         msg += info.GetDescriptionAndCredits();
 
-        wxMessageBox(msg, fmt::format(_("About {:s}"), name), wxOK | wxCENTRE, parent);
+        wxMessageBox(msg, fmt::format(fmt::runtime(_("About {:s}")), name), wxOK | wxCENTRE, parent);
     }
     else // simple "native" version is not enough
     {

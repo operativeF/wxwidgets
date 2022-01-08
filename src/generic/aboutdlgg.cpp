@@ -124,7 +124,7 @@ void wxAboutDialogInfo::SetVersion(const std::string& version,
 
 bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* parent)
 {
-    if ( !wxDialog::Create(parent, wxID_ANY, fmt::format(_("About %s"), info.GetName()),
+    if ( !wxDialog::Create(parent, wxID_ANY, fmt::format(fmt::runtime(_("About %s")), info.GetName()),
                            wxDefaultPosition, wxDefaultSize, wxRESIZE_BORDER|wxDEFAULT_DIALOG_STYLE) )
         return false;
 

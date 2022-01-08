@@ -49,16 +49,17 @@ std::string DumpFont(const wxFont *font)
 
     wxASSERT(font->IsOk());
 
-    return fmt::format("%d-%d;%d-%d-%d-%d-%d-%s-%d",
+    // FIXME: Could use source_location to get enum names.
+    return fmt::format("{}-{};{}-{}-{}-{}-{}-{}-{}",
              font->GetPointSize(),
              font->GetPixelSize().x,
              font->GetPixelSize().y,
-             font->GetFamily(),
-             font->GetStyle(),
-             font->GetWeight(),
+             static_cast<int>(font->GetFamily()),
+             static_cast<int>(font->GetStyle()),
+             static_cast<int>(font->GetWeight()),
              font->GetUnderlined() ? 1 : 0,
              font->GetFaceName(),
-             font->GetEncoding());
+             static_cast<int>(font->GetEncoding()));
 }
 
 // ----------------------------------------------------------------------------

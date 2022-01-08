@@ -259,7 +259,7 @@ bool wxDDEServer::Create(const wxString& server)
 
     if (!success)
     {
-        DDELogError(fmt::format(_("Failed to register DDE server '{:s}'"), server.ToStdString()));
+        DDELogError(fmt::format(fmt::runtime(_("Failed to register DDE server '{:s}'")), server.ToStdString()));
     }
 
     DDEFreeString(hsz);
@@ -278,7 +278,7 @@ wxDDEServer::~wxDDEServer()
             if ( !DdeNameService(DDEIdInst, hsz,
                 (HSZ) nullptr, DNS_UNREGISTER) )
             {
-                DDELogError(fmt::format(_("Failed to unregister DDE server '{:s}'"), m_serviceName.ToStdString()));
+                DDELogError(fmt::format(fmt::runtime(_("Failed to unregister DDE server '{:s}'")), m_serviceName.ToStdString()));
             }
 
             DDEFreeString(hsz);
@@ -404,7 +404,7 @@ wxConnectionBase *wxDDEClient::MakeConnection([[maybe_unused]] const wxString& h
 
     if ( !hConv )
     {
-        DDELogError( fmt::format(_("Failed to create connection to server '{:s}' on topic '{:s}'"), server.ToStdString(), topic.ToStdString()) );
+        DDELogError( fmt::format(fmt::runtime(_("Failed to create connection to server '{:s}' on topic '{:s}'")), server.ToStdString(), topic.ToStdString()) );
     }
     else
     {
@@ -1152,7 +1152,7 @@ static wxString DDEGetErrorMsg(WXUINT error)
             err = _("an invalid transaction identifier was passed to a DDEML function.\nOnce the application has returned from an XTYP_XACT_COMPLETE callback,\nthe transaction identifier for that callback is no longer valid.");
             break;
         default:
-            err += fmt::format(_("Unknown DDE error %08x"), error);
+            err += fmt::format(fmt::runtime(_("Unknown DDE error %08x")), error);
     }
 
     return err;

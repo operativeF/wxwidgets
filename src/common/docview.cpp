@@ -463,7 +463,7 @@ bool wxDocument::OnSaveModified()
                  (
                     fmt::format
                     (
-                     _("Do you want to save changes to %s?"),
+                     fmt::runtime(_("Do you want to save changes to %s?")),
                      GetUserReadableName()
                     ),
                     wxTheApp->GetAppDisplayName(),

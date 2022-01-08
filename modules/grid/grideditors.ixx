@@ -156,7 +156,7 @@ protected:
 
     // string representation of our value
     std::string GetString() const
-        { return fmt::format("{:ld}", m_value); }
+        { return fmt::format("{}", m_value); }
 
 private:
     int m_min,

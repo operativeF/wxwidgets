@@ -3175,7 +3175,7 @@ std::string wxImage::GetImageExtWildcard()
         if ( Node ) fmts += ";";
     }
 
-    return fmt::format("({})|{}", fmts);
+    return fmt::format("({})|{}", fmts, fmts);
 }
 
 wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)

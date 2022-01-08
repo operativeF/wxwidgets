@@ -1156,7 +1156,7 @@ void wxGenericFileCtrl::SetWildcard( const std::string& wildCard )
 {
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
-        m_wildCard = fmt::format( _("All files (%s)|%s"),
+        m_wildCard = fmt::format( fmt::runtime(_("All files (%s)|%s")),
                                        wxFileSelectorDefaultWildcardStr,
                                        wxFileSelectorDefaultWildcardStr );
     }

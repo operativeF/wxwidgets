@@ -958,7 +958,7 @@ std::size_t wxParseCommonDialogsFilter(const std::string& filterStr,
     {
         if ( descriptions[j].empty() && !filters[j].empty() )
         {
-            descriptions[j] = fmt::format(_("Files (%s)"), filters[j]);
+            descriptions[j] = fmt::format(fmt::runtime(_("Files (%s)")), filters[j]);
         }
     }
 

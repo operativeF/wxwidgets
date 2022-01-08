@@ -1276,7 +1276,7 @@ void ShowAssertDialog(const std::string& file,
 #if wxUSE_THREADS
     if ( !wxThread::IsMain() )
     {
-        msg += fmt::format(" [in thread {%lx}", wxThread::GetCurrentId());
+        msg += fmt::format(" [in thread {}", wxThread::GetCurrentId());
     }
 #endif // wxUSE_THREADS
 

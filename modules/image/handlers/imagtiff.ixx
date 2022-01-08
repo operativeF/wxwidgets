@@ -57,7 +57,7 @@ std::string FormatTiffMessage(const char *module, const char *fmt, va_list ap)
 
     std::string msg(buf, 512);
     if ( module )
-        msg += fmt::format(_(" (in module \"%s\")"), module);
+        msg += fmt::format(fmt::runtime(_(" (in module \"{:s}\")")), module);
 
     return msg;
 }

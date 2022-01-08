@@ -731,7 +731,7 @@ std::string wxGridCellNumberRenderer::GetString(const wxGrid& grid, int row, int
 
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_NUMBER) )
     {
-        return fmt::format("{:ld}", table->GetValueAsLong(row, col));
+        return fmt::format("{}", table->GetValueAsLong(row, col));
     }
     else
     {
@@ -774,8 +774,8 @@ wxSize wxGridCellNumberRenderer::GetMaxBestSize([[maybe_unused]] wxGrid& grid,
     // is longer than both min and max, e.g. we could conceivably have "88" be
     // wider than both "87" and "91" with some fonts, but it seems something
     // too exotic to worry about in practice.
-    wxSize size = DoGetBestSize(attr, dc, fmt::format("{:ld}", m_minValue));
-    size.IncTo(DoGetBestSize(attr, dc, fmt::format("{:ld}", m_maxValue)));
+    wxSize size = DoGetBestSize(attr, dc, fmt::format("{}", m_minValue));
+    size.IncTo(DoGetBestSize(attr, dc, fmt::format("{}", m_maxValue)));
 
     return size;
 }
@@ -868,14 +868,14 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
 
             bool isUpper = ( ( m_style & wxGRID_FLOAT_FORMAT_UPPER ) == wxGRID_FLOAT_FORMAT_UPPER);
             if ( ( m_style & wxGRID_FLOAT_FORMAT_SCIENTIFIC ) == wxGRID_FLOAT_FORMAT_SCIENTIFIC)
-                m_format += isUpper ? wxT('E') : wxT('e');
+                m_format += isUpper ? 'E' : 'e';
             else if ( ( m_style & wxGRID_FLOAT_FORMAT_COMPACT ) == wxGRID_FLOAT_FORMAT_COMPACT)
-                m_format += isUpper ? wxT('G') : wxT('g');
+                m_format += isUpper ? 'G' : 'g';
             else
-                m_format += wxT('f');
+                m_format += 'f';
         }
 
-        text = fmt::format(m_format, val);
+        text = fmt::format(fmt::runtime(m_format), val);
 
     }
     //else: text already contains the string

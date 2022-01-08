@@ -463,7 +463,7 @@ void wxTextOutputStream::Write8(std::uint8_t i)
 
 void wxTextOutputStream::WriteDouble(double d)
 {
-    WriteString(fmt::format("{:d}", d));
+    WriteString(fmt::format("{}", d));
 }
 
 void wxTextOutputStream::WriteString(const wxString& string)
