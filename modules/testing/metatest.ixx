@@ -9,31 +9,6 @@
 
 module;
 
-#if __has_include(<unistd.h>) && __has_include(<sys/wait.h>)
-#include <sys/wait.h>
-#include <unistd.h>
-#endif
-
-export module WX.MetaTest;
-
-export import Boost.TMP;
-
-export import <array>;
-export import <concepts>;
-
-#if defined(__cpp_exceptions)
-export import <exception>;
-#endif
-
-export import <iostream>;
-export import <source_location>;
-export import <sstream>;
-export import <string>;
-export import <string_view>;
-export import <type_traits>;
-export import <utility>;
-export import <vector>;
-
 #define BOOST_UT_VERSION 1'1'8
 
 #if defined(__has_builtin) && defined(__GNUC__) && (__GNUC__ < 10) && \
@@ -49,10 +24,32 @@ export import <vector>;
 #define __has_builtin(...) __has_##__VA_ARGS__
 #endif
 
-export
-{
+#if __has_include(<unistd.h>) && __has_include(<sys/wait.h>)
+#include <sys/wait.h>
+#include <unistd.h>
+#endif
 
-namespace boost::inline ext::ut::inline v1_1_8 {
+export module WX.MetaTest;
+
+import Boost.TMP;
+
+import <array>;
+import <concepts>;
+
+#if defined(__cpp_exceptions)
+import <exception>;
+#endif
+
+import <iostream>;
+import <source_location>;
+import <sstream>;
+import <string>;
+import <string_view>;
+import <type_traits>;
+import <utility>;
+import <vector>;
+
+export namespace boost::inline ext::ut::inline v1_1_8 {
 namespace utility {
 template <class>
 class function;
@@ -2201,5 +2198,3 @@ using operators::operator|;
 using operators::operator/;
 using operators::operator>>;
 }  // namespace boost::ext::ut::v1_1_8
-
-} // export

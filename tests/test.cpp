@@ -33,6 +33,7 @@
 #include <fmt/core.h>
 
 import Utils.Strings;
+import WX.MetaTest;
 import WX.Test.Prec;
 import WX.Cmn.CommandLine;
 
@@ -156,6 +157,13 @@ int TestCrtReportHook(int reportType, char *message, int *)
     throw CrtAssertFailure(message);
 }
 
+namespace ut = boost::ut;
+
+ut::suite basic = [] {
+    using namespace ut;
+    should("equal") = [] { expect(42_i == 42); };
+};
+
 } // namespace anonymous
 
 #endif // wxUSE_VC_CRTDBG
@@ -183,7 +191,15 @@ int main(int argc, char** argv)
     wxTheApp->OnExit();
     wxEntryCleanup();
 
-    return res; // the result from doctest is propagated here as well
+    namespace ut = boost::ut;
+
+    const auto result = ut::cfg<>.run(
+        { .report_errors =
+             true });  // explicitly run registered test suites and report errors
+    std::cout << "After report\n";
+    return result;
+
+    //return res; // the result from doctest is propagated here as well
 }
 
 // Init

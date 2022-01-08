@@ -28,13 +28,12 @@ set(METATEST_IXX
     ${CMAKE_SOURCE_DIR}/modules/testing/metatest.ixx
 )
 
-set(METATEST_SRC
-    ${CMAKE_SOURCE_DIR}/modules/testing/metatest.cpp
-)
+# set(METATEST_SRC
+#     ${CMAKE_SOURCE_DIR}/modules/testing/metatest.cpp
+# )
 
-add_executable(metatest
+add_library(metatest
     ${METATEST_IXX}
-    ${METATEST_SRC}
 )
 
 target_compile_features(metatest PRIVATE cxx_std_23)
@@ -174,6 +173,7 @@ set(TEST_GUI_SRC
 
 add_executable(test_gui
     ${TEST_GUI_SRC}
+    ${METATEST_IXX}
     ${CMAKE_SOURCE_DIR}/include/wx/msw/amd64_dpi_aware_pmv2.manifest
 )
 
@@ -191,7 +191,6 @@ target_link_libraries(test_gui
         wxbase
         wxcore
         wxgrid
-
         doctest::doctest
         ${JPEG_LIBRARIES}
     # Windows libraries
