@@ -33,21 +33,21 @@ export module WX.MetaTest;
 
 import Boost.TMP;
 
-import <array>;
-import <concepts>;
+export import <array>;
+export import <concepts>;
 
 #if defined(__cpp_exceptions)
-import <exception>;
+export import <exception>;
 #endif
 
-import <iostream>;
-import <source_location>;
-import <sstream>;
-import <string>;
-import <string_view>;
-import <type_traits>;
-import <utility>;
-import <vector>;
+export import <iostream>;
+export import <source_location>;
+export import <sstream>;
+export import <string>;
+export import <string_view>;
+export import <type_traits>;
+export import <utility>;
+export import <vector>;
 
 export namespace boost::inline ext::ut::inline v1_1_8 {
 namespace utility {
@@ -424,10 +424,16 @@ struct summary {};
 namespace detail {
 struct op {};
 struct fatal {};
+
+// NOTE / NEEDS FIX: In VS2022 17.0 Preview 2, inline static does not work
+// here. Use of inline static results in an unresolved external symbol error.
 struct cfg {
-  static inline std::source_location location{};
-  static inline bool wip{};
+  static std::source_location location;
+  static bool wip;
 };
+
+std::source_location cfg::location{};
+bool cfg::wip{};
 
 template <class T>
 [[nodiscard]] constexpr auto get_impl(const T& t, int) -> decltype(t.get()) {

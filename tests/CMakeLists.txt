@@ -24,46 +24,6 @@
 #         doctest::doctest
 # )
 
-set(METATEST_IXX
-    ${CMAKE_SOURCE_DIR}/modules/testing/metatest.ixx
-)
-
-# set(METATEST_SRC
-#     ${CMAKE_SOURCE_DIR}/modules/testing/metatest.cpp
-# )
-
-add_library(metatest
-    ${METATEST_IXX}
-)
-
-target_compile_features(metatest PRIVATE cxx_std_23)
-
-target_include_directories(metatest 
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
-)
-
-target_link_libraries(metatest
-    PRIVATE
-        boost_tmp
-        fmt::fmt
-        stdlibcore
-
-        kernel32
-        user32
-        comdlg32
-        winspool
-        shell32
-        comctl32
-        ole32
-        oleaut32
-        uuid
-        rpcrt4
-        advapi32
-        wininet
-)
-
-
 set(TEST_GUI_SRC
     testprec.ixx
     asserthelper.cpp
@@ -173,7 +133,7 @@ set(TEST_GUI_SRC
 
 add_executable(test_gui
     ${TEST_GUI_SRC}
-    ${METATEST_IXX}
+    ${CMAKE_SOURCE_DIR}/modules/testing/metatest.ixx
     ${CMAKE_SOURCE_DIR}/include/wx/msw/amd64_dpi_aware_pmv2.manifest
 )
 

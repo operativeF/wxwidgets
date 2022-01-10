@@ -157,13 +157,6 @@ int TestCrtReportHook(int reportType, char *message, int *)
     throw CrtAssertFailure(message);
 }
 
-namespace ut = boost::ut;
-
-ut::suite basic = [] {
-    using namespace ut;
-    should("equal") = [] { expect(42_i == 42); };
-};
-
 } // namespace anonymous
 
 #endif // wxUSE_VC_CRTDBG
