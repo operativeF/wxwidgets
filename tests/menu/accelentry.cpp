@@ -6,87 +6,95 @@
 // Copyright:   (c) 2010 Vadim Zeitlin
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
 #include "wx/accel.h"
 #include "wx/defs.h"
 
 import WX.Test.Prec;
+import WX.MetaTest;
 
 namespace
 {
 
 void CheckAccelEntry(const wxAcceleratorEntry& accel, int keycode, int flags)
 {
-    CHECK( keycode == accel.GetKeyCode() );
-    CHECK( flags == accel.GetFlags() );
+    using namespace boost::ut;
+
+    expect( keycode == accel.GetKeyCode() );
+    expect( flags == accel.GetFlags() );
 }
 
 } // anonymous namespace
 
+namespace ut = boost::ut;
 
 /*
  * Test the creation of accelerator keys using the Create function
  */
-TEST_CASE( "wxAcceleratorEntry::Create")
+ut::suite wxAcceleratorEntryCreation = []
 {
-    std::optional<wxAcceleratorEntry> pa;
+    using namespace ut;
 
-    SUBCASE( "Correct behavior" )
+    "Correct behavior"_test = []
     {
-        pa = wxAcceleratorEntry::Create("Foo\tCtrl+Z");
+        auto pa = wxAcceleratorEntry::Create("Foo\tCtrl+Z");
 
-        CHECK( pa );
-        CHECK( pa->IsOk() );
-        CheckAccelEntry(*pa, 'Z', wxACCEL_CTRL);
-    }
+        expect( pa.has_value() );
+        expect( pa->IsOk() );
+        CheckAccelEntry(pa.value(), 'Z', wxACCEL_CTRL);
+    };
 
-    SUBCASE( "Tab missing" )
+    "Tab missing"_test = []
     {
-        pa = wxAcceleratorEntry::Create("Shift-Q");
+        auto pa = wxAcceleratorEntry::Create("Shift-Q");
 
-        CHECK( !pa );
-    }
+        expect( !pa.has_value() );
+    };
 
-    SUBCASE( "No accelerator key specified" )
+    "No accelerator key specified"_test = []
     {
-        pa = wxAcceleratorEntry::Create("bloordyblop");
+        auto pa = wxAcceleratorEntry::Create("bloordyblop");
 
-        CHECK( !pa );
-    }
+        expect( !pa.has_value() );
+    };
 
-    SUBCASE( "Display name parsing" )
+    "Display name parsing"_test = []
     {
-        pa = wxAcceleratorEntry::Create("Test\tBackSpace");
+        auto pa = wxAcceleratorEntry::Create("Test\tBackSpace");
 
-        CHECK( pa );
-        CHECK( pa->IsOk() );
-        CheckAccelEntry(*pa, WXK_BACK, wxACCEL_NORMAL);
-    }
-}
+        expect( pa.has_value() );
+        expect( pa->IsOk() );
+        CheckAccelEntry(pa.value(), WXK_BACK, wxACCEL_NORMAL);
+    };
+};
 
 
 /*
  * Test the creation of accelerator keys from strings and also the
  * creation of strings from an accelerator key
  */
-TEST_CASE( "wxAcceleratorEntry::StringTests")
+ut::suite wxAcceleratorEntryStringTests = []
 {
-    wxAcceleratorEntry a(wxACCEL_ALT, 'X', 0, nullptr);
+    using namespace ut;
 
-    SUBCASE( "Create string from key" )
+    "Create string from key"_test = []
     {
-        CHECK( "Alt+X" == a.ToString() );
-    }
+        wxAcceleratorEntry a{ wxACCEL_ALT, 'X', 0, nullptr };
 
-    SUBCASE( "Create from valid string" )
+        expect("Alt+X" == a.ToString());
+    };
+
+    "Create from valid string"_test = []
     {
-        CHECK( a.FromString("Alt+Shift+F1") );
+        wxAcceleratorEntry a{ wxACCEL_ALT, 'X', 0, nullptr };
+
+        expect( a.FromString("Alt+Shift+F1") );
         CheckAccelEntry(a, WXK_F1, wxACCEL_ALT | wxACCEL_SHIFT);
-    }
+    };
 
-    SUBCASE( "Create from invalid string" )
+    "Create from invalid string"_test = []
     {
-        CHECK( !a.FromString("bloordyblop") );
-    }
-}
+        wxAcceleratorEntry a{ wxACCEL_ALT, 'X', 0, nullptr };
+
+        expect( !a.FromString("bloordyblop") );
+    };
+};
