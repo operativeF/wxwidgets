@@ -33,6 +33,8 @@ export module WX.MetaTest;
 
 import Boost.TMP;
 
+import Utils.Strings;
+
 export import <array>;
 export import <concepts>;
 
@@ -95,71 +97,6 @@ class function<R(TArgs...)> {
   void (*destroy_)(void*){};
   void* data_{};
 };
-
-[[nodiscard]] inline auto is_match(std::string_view input,
-                                   std::string_view pattern) -> bool {
-  if (std::empty(pattern)) {
-    return std::empty(input);
-  }
-
-  if (std::empty(input)) {
-    return pattern[0] == '*' ? is_match(input, pattern.substr(1)) : false;
-  }
-
-  if (pattern[0] != '?' && pattern[0] != '*' && pattern[0] != input[0]) {
-    return false;
-  }
-
-  if (pattern[0] == '*') {
-    for (decltype(std::size(input)) i = 0u; i <= std::size(input); ++i) {
-      if (is_match(input.substr(i), pattern.substr(1))) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  return is_match(input.substr(1), pattern.substr(1));
-}
-
-template <class TPattern, class TStr>
-[[nodiscard]] constexpr auto match(const TPattern& pattern, const TStr& str)
-    -> std::vector<TStr> {
-  std::vector<TStr> groups{};
-  auto pi = 0u;
-  auto si = 0u;
-
-  const auto matcher = [&](char b, char e, char c = 0) {
-    const auto match = si;
-    while (str[si] && str[si] != b && str[si] != c) {
-      ++si;
-    }
-    groups.emplace_back(str.substr(match, si - match));
-    while (pattern[pi] && pattern[pi] != e) {
-      ++pi;
-    }
-    pi++;
-  };
-
-  while (pi < std::size(pattern) && si < std::size(str)) {
-    if (pattern[pi] == '\'' && str[si] == '\'' && pattern[pi + 1] == '{') {
-      ++si;
-      matcher('\'', '}');
-    } else if (pattern[pi] == '{') {
-      matcher(' ', '}', ',');
-    } else if (pattern[pi] != str[si]) {
-      return {};
-    }
-    ++pi;
-    ++si;
-  }
-
-  if (si < str.size() || pi < std::size(pattern)) {
-    return {};
-  }
-
-  return groups;
-}
 
 template <class T = std::string_view, class TDelim>
 [[nodiscard]] inline auto split(T input, TDelim delim) -> std::vector<T> {
@@ -1107,7 +1044,7 @@ class runner {
     constexpr auto operator()(const std::size_t level, const TPath& path) const
         -> bool {
       for (auto i = 0u; i < math::min_value(level + 1, std::size(path_)); ++i) {
-        if (!utility::is_match(path[i], path_[i])) {
+        if (!wx::utils::IsMatch(path[i], path_[i])) {
           return false;
         }
       }
@@ -1157,13 +1094,13 @@ class runner {
 
     auto execute = std::empty(test.tag);
     for (const auto& tag_element : test.tag) {
-      if (utility::is_match(tag_element, "skip")) {
+      if (wx::utils::IsMatch(tag_element, "skip")) {
         on(events::skip<>{.type = test.type, .name = test.name});
         return;
       }
 
       for (const auto& ftag : tag_) {
-        if (utility::is_match(tag_element, ftag)) {
+        if (wx::utils::IsMatch(tag_element, ftag)) {
           execute = true;
           break;
         }
@@ -2065,7 +2002,7 @@ class steps {
             [=]<class... TArgs>(boost::tmp::list_<TArgs...>) {
               log << _step;
               auto i = 0u;
-              const auto& ms = utility::match(pattern, _step);
+              const auto& ms = wx::utils::Match(pattern, _step);
               expr(lexical_cast<TArgs>(ms[i++])...);
             }
             (typename type_traits::function_traits<TExpr>::args{});
@@ -2138,8 +2075,8 @@ class steps {
           break;
         }
 
-        if (utility::is_match(_step, name) ||
-            !std::empty(utility::match(name, _step))) {
+        if (wx::utils::IsMatch(_step, name) ||
+            !std::empty(wx::utils::Match(name, _step))) {
           step_ = i;
           call(_step);
         }

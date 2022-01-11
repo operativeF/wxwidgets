@@ -369,6 +369,12 @@ template<typename... Cs>
     return (Contains(strView, cs) || ...);
 }
 
+template<typename... Cs>
+[[nodiscard]] constexpr bool ContainsOnly(std::string_view strView, Cs&&... cs) noexcept
+{
+
+}
+
 [[nodiscard]] constexpr bool Contains(std::string_view strView, std::string_view strToFind) noexcept
 {
     return strView.find(strToFind, 0) != std::string_view::npos;
@@ -380,5 +386,68 @@ template<typename... Cs>
     return std::ranges::search(strView, strToFind, {}, ToLowerCh, ToLowerCh).begin() != strView.end();
 }
 
+[[nodiscard]] inline bool IsMatch(std::string_view input,
+                                  std::string_view pattern) {
+  if (std::empty(pattern)) {
+    return std::empty(input);
+  }
+
+  if (std::empty(input)) {
+    return pattern[0] == '*' ? IsMatch(input, pattern.substr(1)) : false;
+  }
+
+  if (pattern[0] != '?' && pattern[0] != '*' && pattern[0] != input[0]) {
+    return false;
+  }
+
+  if (pattern[0] == '*') {
+    for (decltype(std::size(input)) i = 0u; i <= std::size(input); ++i) {
+      if (IsMatch(input.substr(i), pattern.substr(1))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  return IsMatch(input.substr(1), pattern.substr(1));
+}
+
+template <class TPattern, class TStr>
+[[nodiscard]] constexpr std::vector<TStr> Match(const TPattern& pattern, const TStr& str) {
+  std::vector<TStr> groups{};
+  auto pi = 0u;
+  auto si = 0u;
+
+  const auto matcher = [&](char b, char e, char c = 0) {
+    const auto match = si;
+    while (str[si] && str[si] != b && str[si] != c) {
+      ++si;
+    }
+    groups.emplace_back(str.substr(match, si - match));
+    while (pattern[pi] && pattern[pi] != e) {
+      ++pi;
+    }
+    pi++;
+  };
+
+  while (pi < std::size(pattern) && si < std::size(str)) {
+    if (pattern[pi] == '\'' && str[si] == '\'' && pattern[pi + 1] == '{') {
+      ++si;
+      matcher('\'', '}');
+    } else if (pattern[pi] == '{') {
+      matcher(' ', '}', ',');
+    } else if (pattern[pi] != str[si]) {
+      return {};
+    }
+    ++pi;
+    ++si;
+  }
+
+  if (si < str.size() || pi < std::size(pattern)) {
+    return {};
+  }
+
+  return groups;
+}
 
 } // export namespace wx::utils
