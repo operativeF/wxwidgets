@@ -15,6 +15,7 @@
 #include "wx/dcgraph.h"
 
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import <numbers>;
 
@@ -40,6 +41,39 @@ TEST_CASE("GraphicsPathTestCaseCairo", "[path][cairo]")
 }
 #endif // wxUSE_CAIRO
 
+namespace ut = boost::ut;
+
+ut::suite GraphPathsTest = []
+{
+    using namespace ut;
+
+    wxBitmap bmp{wxSize{500, 500}};
+    wxMemoryDC mdc{bmp};
+
+    // FIXME: make this a little more clear up front;
+#ifndef __WXMSW__
+    std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(mdc));
+#else
+    std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDirect2DRenderer()->CreateContext(mdc));
+#endif
+
+    expect(gc != nullptr);
+
+    gc->DisableOffset();
+
+    "Points"_test = [&]
+    {
+        should("No current point.") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            // Should return (0, 0) if current point is not yet set.
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            expect(std::fabs(cp.x - 0.0F) == 0.0F);
+            expect(std::fabs(cp.y - 0.0F) == 0.0F);
+        };
+    };
+};
+
 // FIXME: Templatize for running Cairo / other renderers.
 TEST_SUITE("Graphing path tests.")
 {
@@ -58,14 +92,6 @@ TEST_SUITE("Graphing path tests.")
         REQUIRE(gc.get());
 
         gc->DisableOffset();
-
-        SUBCASE("No current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            // Should return (0, 0) if current point is not yet set.
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(0, 0), 0);
-        }
 
         SUBCASE("MoveToPoint")
         {
