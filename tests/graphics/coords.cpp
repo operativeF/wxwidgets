@@ -14,6 +14,7 @@
 
 import WX.Test.Prec;
 
+import WX.MetaTest;
 import Utils.Geometry;
 
 import <numbers>;
@@ -598,7 +599,6 @@ public:
         m_bmp = wxNullBitmap;
     }
 
-protected:
     wxBitmap m_bmp;
     wxDC* m_dc{ nullptr };
 };
@@ -621,7 +621,6 @@ public:
         m_mdc.SelectObject(wxNullBitmap);
     }
 
-protected:
     wxMemoryDC m_mdc;
 };
 
@@ -644,7 +643,6 @@ public:
         m_dc = m_gcdc.get();
     }
 
-protected:
     std::unique_ptr<wxGCDC> m_gcdc;
 };
 #endif //  wxUSE_GRAPHICS_CONTEXT
@@ -652,11 +650,58 @@ protected:
 // For GTK+ 3 and OSX wxDC is equivalent to wxGCDC
 // so it doesn't need to be tested individually.
 #if !defined(__WXGTK3__) && !defined(__WXOSX__)
-TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::InitialState")
+
+namespace ut = boost::ut;
+
+ut::suite CoordinatesDC = [] /*typename CoordDC>*/
 {
-    // Check initial state
-    InitialState(m_dc);
-}
+    using namespace ut;
+
+    CoordinatesDCTestCase testDC{};
+
+    "InitialState"_test = [&testDC]
+    {
+        // Check initial state
+
+        expect(testDC.m_dc->GetDeviceOrigin() == wxPoint{0, 0});
+
+        expect(testDC.m_dc->GetLogicalOrigin() == wxPoint{0, 0});
+
+        expect(testDC.m_dc->GetUserScale() == wxScale(1.0, 1.0));
+
+        expect(testDC.m_dc->GetLogicalScale() == wxScale{1.0, 1.0});
+
+    #if wxUSE_DC_TRANSFORM_MATRIX
+        if ( testDC.m_dc->CanUseTransformMatrix() )
+        {
+            wxAffineMatrix2D m = testDC.m_dc->GetTransformMatrix();
+            expect(m.IsIdentity() == true);
+        }
+    #endif // wxUSE_DC_TRANSFORM_MATRIX
+    };
+
+    "NoTransforms"_test = [&testDC]
+    {
+        // No transformations
+        // First convert from device to logical coordinates
+        const wxPoint posLog = {testDC.m_dc->DeviceToLogicalX(s_posDev.x),
+                                testDC.m_dc->DeviceToLogicalY(s_posDev.y)};
+        expect(posLog == s_posDev);
+
+        const wxSize dimLog = {testDC.m_dc->DeviceToLogicalXRel(s_dimDev.x),
+                            testDC.m_dc->DeviceToLogicalYRel(s_dimDev.y)};
+        expect(dimLog == s_dimDev);
+
+        // And next back from logical to device coordinates
+        const wxPoint posDev = {testDC.m_dc->LogicalToDeviceX(posLog.x),
+                                testDC.m_dc->LogicalToDeviceY(posLog.y)};
+        expect(posDev == s_posDev);
+
+        const wxSize dimDev = {testDC.m_dc->LogicalToDeviceXRel(dimLog.x),
+                            testDC.m_dc->LogicalToDeviceYRel(dimLog.y)};
+        expect(dimDev == s_dimDev);
+    };
+};
 
 TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::NoTransform")
 {

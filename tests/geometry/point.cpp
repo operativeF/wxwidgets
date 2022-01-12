@@ -10,11 +10,74 @@ import WX.Test.Prec;
 import WX.MetaTest;
 
 import Utils.Geometry;
+import Utils.Strings;
 
 import <cmath>;
 import <numeric>;
 
+namespace boost::ext::ut::v1_1_8::literals
+{
+
+template<StrLit TStr>
+consteval auto operator""_pt()
+{
+    wxPoint result{};
+
+    if(TStr.value[0] == '{' &&
+       TStr.value[sizeof(TStr.value) - 2] == '}')
+    {
+        bool nocomma{false};
+        bool negativex{false};
+        bool negativey{false};
+
+        for(const auto& c : TStr.value)
+        {
+            if(c == '-' && nocomma)
+            {
+                negativey = true;
+            }
+
+            if(c == '-' && !nocomma)
+            {
+                negativex = true;
+            }
+
+            if (c >= '0' && c <= '9' && !nocomma)
+            {
+                result.x = result.x * int(10) + int(c - '0');
+            }
+
+            if (c >= '0' && c <= '9' && nocomma)
+            {
+                result.y = result.y * int(10) + int(c - '0');
+            }
+
+            if(c == ',')
+            {
+                nocomma = true;
+            }
+        }
+
+        if(negativex)
+        {
+            result.x *= int{-1};
+        }
+
+        if(negativey)
+        {
+            result.y *= int{-1};
+        }
+
+        return result;
+    }
+
+    return wxPoint{};
+}
+
+} // namespace literals
+
 namespace ut = boost::ut;
+using namespace ut::literals;
 
 ut::suite PointOperations = []
 {
@@ -47,7 +110,7 @@ ut::suite PointOperations = []
 
         wxPoint p3 = p1 + p2;
         
-        expect(p3 == wxPoint{3, -2});
+        expect(p3 == "{3, -2}"_pt);
         expect(p3.x == 3);
         expect(p3.y == (-2));
     };
@@ -59,7 +122,7 @@ ut::suite PointOperations = []
 
         wxPoint p3 = p1 - p2;
 
-        expect(p3 == wxPoint{-2, 3});
+        expect(p3 == "{-2, 3}"_pt);
         expect(p3.x == (-2));
         expect(p3.y == 3);
     };

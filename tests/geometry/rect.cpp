@@ -92,8 +92,6 @@ ut::suite RectOperations = []
 
     "Union"_test = []
     {
-        using namespace ut;
-
         std::ranges::for_each(s_rects,
             [](const auto& rect) {
                 expect(rect.GetFirst().Union(rect.GetSecond()) == rect.GetResult());

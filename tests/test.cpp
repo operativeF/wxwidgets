@@ -181,18 +181,18 @@ int main(int argc, char** argv)
     wxTheApp->CallOnInit();
 
     int res = wxTheApp->OnRun();
-    wxTheApp->OnExit();
-    wxEntryCleanup();
 
     namespace ut = boost::ut;
 
-    const auto result = ut::cfg<>.run(
+    const auto result = ut::cfg<ut::override>.run(
         { .report_errors =
              true });  // explicitly run registered test suites and report errors
     std::cout << "After report\n";
-    return result;
 
-    //return res; // the result from doctest is propagated here as well
+    wxTheApp->OnExit();
+    wxEntryCleanup();
+
+    return res + result; // the result from doctest is propagated here as well
 }
 
 // Init

@@ -7,6 +7,7 @@ export import Utils.Strings.Unsafe;
 
 import <algorithm>;
 import <cstdint>;
+import <ranges>;
 
 export
 {
@@ -16,7 +17,7 @@ struct StrLit
 {
     constexpr StrLit(const char (&str)[N])
     {
-        std::copy_n(std::begin(str), std::end(str), std::begin(value));
+        std::ranges::copy_n(str, N, value);
     }
 
     char value[N];

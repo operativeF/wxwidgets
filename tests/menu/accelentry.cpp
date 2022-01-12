@@ -9,21 +9,7 @@
 #include "wx/accel.h"
 #include "wx/defs.h"
 
-import WX.Test.Prec;
 import WX.MetaTest;
-
-namespace
-{
-
-void CheckAccelEntry(const wxAcceleratorEntry& accel, int keycode, int flags)
-{
-    using namespace boost::ut;
-
-    expect( keycode == accel.GetKeyCode() );
-    expect( flags == accel.GetFlags() );
-}
-
-} // anonymous namespace
 
 namespace ut = boost::ut;
 
@@ -40,7 +26,9 @@ ut::suite wxAcceleratorEntryCreation = []
 
         expect( pa.has_value() );
         expect( pa->IsOk() );
-        CheckAccelEntry(pa.value(), 'Z', wxACCEL_CTRL);
+
+        expect( 'Z' == pa->GetKeyCode() );
+        expect( wxACCEL_CTRL == pa->GetFlags() );
     };
 
     "Tab missing"_test = []
@@ -63,7 +51,9 @@ ut::suite wxAcceleratorEntryCreation = []
 
         expect( pa.has_value() );
         expect( pa->IsOk() );
-        CheckAccelEntry(pa.value(), WXK_BACK, wxACCEL_NORMAL);
+
+        expect( WXK_BACK == pa->GetKeyCode() );
+        expect( wxACCEL_NORMAL == pa->GetFlags() );
     };
 };
 
@@ -88,7 +78,9 @@ ut::suite wxAcceleratorEntryStringTests = []
         wxAcceleratorEntry a{ wxACCEL_ALT, 'X', 0, nullptr };
 
         expect( a.FromString("Alt+Shift+F1") );
-        CheckAccelEntry(a, WXK_F1, wxACCEL_ALT | wxACCEL_SHIFT);
+        
+        expect( WXK_F1 == a.GetKeyCode() );
+        expect( (wxACCEL_ALT | wxACCEL_SHIFT) == a.GetFlags() );
     };
 
     "Create from invalid string"_test = []
