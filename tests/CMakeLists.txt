@@ -101,7 +101,7 @@ set(TEST_GUI_SRC
     # console and GUI applications.
     exec/exec.cpp
     font/fonttest.cpp
-    image/image.cpp
+    image/image.ixx
     image/rawbmp.cpp
     #html/htmlparser.cpp # FIXME: Need to get rid of wxArrayString.
     #html/htmlwindow.cpp
