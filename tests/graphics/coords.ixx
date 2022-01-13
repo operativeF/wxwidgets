@@ -6,11 +6,15 @@
 // Copyright:   (c) 2020 wxWidgets development team
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "doctest.h"
 
 #include "wx/bitmap.h"
 #include "wx/dcgraph.h"
 #include "wx/dcmemory.h"
+
+export module WX.Test.Coords;
 
 import WX.Test.Prec;
 

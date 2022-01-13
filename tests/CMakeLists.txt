@@ -29,9 +29,9 @@ set(TEST_GUI_SRC
     asserthelper.cpp
     test.cpp
     testableframe.cpp
-    geometry/rect.cpp
+    geometry/rect.ixx
     geometry/size.cpp
-    geometry/point.cpp
+    geometry/point.ixx
     geometry/region.cpp
     graphics/bitmap.cpp
     #graphics/colour.cpp # Doesn't work yet.
@@ -40,10 +40,10 @@ set(TEST_GUI_SRC
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
     graphics/boundingbox.cpp
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
-    graphics/coords.cpp
+    graphics/coords.ixx
     #graphics/graphbitmap.cpp # FIXME: Works but doesn't test with matchers yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
-    graphics/graphpath.cpp
+    graphics/graphpath.ixx
     graphics/imagelist.cpp
     #config/config.cpp # FIXME: Use a more robust system for writing to file. Currently very fragile.
     controls/auitest.cpp
@@ -106,7 +106,7 @@ set(TEST_GUI_SRC
     #html/htmlparser.cpp # FIXME: Need to get rid of wxArrayString.
     #html/htmlwindow.cpp
     #html/htmprint.cpp
-    menu/accelentry.cpp
+    menu/accelentry.ixx
     menu/menu.cpp
     misc/guifuncs.cpp
     misc/selstoretest.cpp

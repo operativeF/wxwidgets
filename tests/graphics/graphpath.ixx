@@ -6,13 +6,19 @@
 // Copyright:   (c) 2018 wxWidgets development team
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_GRAPHICS_CONTEXT
+#include "doctest.h"
 
 #include "wx/bitmap.h"
 #include "wx/dcmemory.h"
 #include "wx/dcgraph.h"
+
+#include <fmt/core.h>
+
+export module WX.Test.GraphPath;
+
+#if wxUSE_GRAPHICS_CONTEXT
 
 import WX.Test.Prec;
 import WX.MetaTest;
@@ -50,6 +56,14 @@ ut::suite GraphPathsTest = []
     wxBitmap bmp{wxSize{500, 500}};
     wxMemoryDC mdc{bmp};
 
+    const auto TestPointProximity = [](auto p1, auto p2, auto tol)
+    {
+        using namespace ut;
+
+        expect(std::fabs(p1.x - p2.x) <= tol);
+        expect(std::fabs(p1.y - p2.y) <= tol);
+    };
+
     // FIXME: make this a little more clear up front;
 #ifndef __WXMSW__
     std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(mdc));
@@ -68,8 +82,398 @@ ut::suite GraphPathsTest = []
             wxGraphicsPath path = gc->CreatePath();
             // Should return (0, 0) if current point is not yet set.
             wxPoint2DFloat cp = path.GetCurrentPoint();
-            expect(std::fabs(cp.x - 0.0F) == 0.0F);
-            expect(std::fabs(cp.y - 0.0F) == 0.0F);
+            TestPointProximity(cp, wxPoint2DFloat{}, 1E-3);
+        };
+
+        should("Move to point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            wxPoint2DFloat pt(27.0F, 35.0F);
+            path.MoveToPoint(pt);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddLineToPoint - no current point.") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            wxPoint2DFloat pt(27.0F, 35.0F);
+            path.AddLineToPoint(pt);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddLineToPoint") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(10.0F, 18.0F);
+            wxPoint2DFloat pt(37.0F, 45.0F);
+            path.AddLineToPoint(pt);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddArc - no current point.") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float r = 40.0F;
+            path.AddArc(x, y, r, 0.0F, std::numbers::pi_v<float> / 2.0F, true);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt = {x, y + r};
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddArc") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(20.0F, 38.0F);
+            const float x = 200.0F;
+            const float y = 50.0F;
+            const float r = 40.0F;
+            path.AddArc(x, y, r, 0.0F, std::numbers::pi_v<float> / 2.0F, true);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt = {x, y + r};
+            TestPointProximity(cp, pt, 1E-3);
+        };
+        
+        should("AddArcToPoint - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            const float x1 = 80.0F;
+            const float y1 = 80.0F;
+            const float x2 = -30.0F;
+            const float y2 = y1;
+            const float r = 20.0F;
+
+            float d = r / std::tan(45.0F / 180.0F * std::numbers::pi_v<float> / 2.0F);
+
+            path.AddArcToPoint(x1, y1, x2, y2, r);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x1 - d, y2};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddArcToPoint") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x0 = 20.0F;
+            const float y0 = 20.0F;            
+            const float x1 = 80.0F;
+            const float y1 = 80.0F;
+            const float x2 = 140.0F;
+            const float y2 = y1;
+            const float r = 20.0F;
+
+            path.MoveToPoint(x0, y0);
+
+            float d = r / std::tan(135.0F / 180.0F * std::numbers::pi_v<float> / 2.0F);
+
+            path.AddArcToPoint(x1, y1, x2, y2, r);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x1 + d, y2};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddCurveToPoint - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x1 = 102.0F;
+            const float y1 = 230.0F;
+            const float x2 = 153.0F;
+            const float y2 = 25.0F;
+            const float x3 = 230.0F;
+            const float y3 = 128.0F;
+
+            path.AddCurveToPoint(x1, y1, x2, y2, x3, y3);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x3, y3};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddCurveToPoint") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x1 = 102.0F;
+            const float y1 = 230.0F;
+            const float x2 = 153.0F;
+            const float y2 = 25.0F;
+            const float x3 = 230.0F;
+            const float y3 = 128.0F;
+
+            path.MoveToPoint(25.0F, 128.0F);
+
+            path.AddCurveToPoint(x1, y1, x2, y2, x3, y3);
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x3, y3};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddQuadCurveToPoint - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x1 = 200.0F;
+            const float y1 = 200.0F;
+            const float x2 = 300.0F;
+            const float y2 = 100.0F;
+
+            path.AddQuadCurveToPoint(x1, y1, x2, y2);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x2, y2};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddQuadCurveToPoint") = [&]
+        {
+            const float x1 = 200.0F;
+            const float y1 = 200.0F;
+            const float x2 = 300.0F;
+            const float y2 = 100.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+
+            path.MoveToPoint(20.0F, 100.0F);
+
+            path.AddQuadCurveToPoint(x1, y1, x2, y2);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x2, y2};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddCircle - no current point") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float r = 30.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.AddCircle(x, y, r);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + r, y};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddCircle") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 140.0F;
+            const float r = 40.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(50.0F, 80.0F);
+            path.AddCircle(x, y, r);
+            
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + r, y};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+    
+        should("AddEllipse - no current point") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float w = 40.0F;
+            const float h = 20.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.AddEllipse(x, y, w, h);
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + w, y + h / 2.0F};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddEllipse") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float w = 40.0F;
+            const float h = 20.0F;
+            
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(50.0F, 60.0F);
+            path.AddEllipse(x, y, w, h);
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + w, y + h / 2.0F};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddRectangle - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            const float x = 100.0F;
+            const float y = 150.0F;
+            path.AddRectangle(x, y, 40.0F, 20.0F);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x, y};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddRectangle") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 150.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(50.0F, 60.0F);
+            path.AddRectangle(x, y, 50.0F, 30.0F);
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x, y};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddRoundedRectangle - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float w = 40.0F;
+            const float h = 20.0F;
+            path.AddRoundedRectangle(x, y, w, h, 5.0F);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + w, y + h / 2.0F};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddRoundedRectangle - no current point, radius = 0") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x = 100.0F;
+            const float y = 150.0F;
+            path.AddRoundedRectangle(x, y, 40.0F, 20.0F, 0.0F); // Should behave like AddRectangle
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x, y};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+        
+        should("AddRoundedRectangle") = [&]
+        {
+            const float x = 100.0F;
+            const float y = 150.0F;
+            const float w = 40.0F;
+            const float h = 20.0F;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(50.0F, 60.0F);
+            path.AddRoundedRectangle(x, y, w, h, 5.0F);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x + w, y + h / 2.0F};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddRoundedRectangle - radius = 0") = [&]
+        {
+            const float x = 100;
+            const float y = 150;
+            const float w = 40;
+            const float h = 20;
+
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(50.0F, 60.0F);
+            path.AddRoundedRectangle(x, y, w, h, 0.0F); // Should behave like AddRectangle
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x, y};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("CloseSubpath - no current point") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+            const float x0 = 50.0F;
+            const float y0 = 80.0F;
+            path.AddLineToPoint(x0, y0);
+            path.AddArcToPoint(100.0F, 160.0F, 50.0F, 200.0F, 30.0F);
+            path.CloseSubpath();
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x0, y0};
+
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("CloseSubpath") = [&]
+        {
+            wxGraphicsPath path = gc->CreatePath();
+
+            const float x0 = 10.0F;
+            const float y0 = 20.0F;
+            path.MoveToPoint(x0, y0);
+            path.AddLineToPoint(50.0F, 80.0F);
+            path.AddArcToPoint(100.0F, 160.0F, 50.0F, 200.0F, 30.0F);
+            path.CloseSubpath();
+
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            wxPoint2DFloat pt{x0, y0};
+            
+            TestPointProximity(cp, pt, 1E-3);
+        };
+
+        should("AddPath - no current point") = [&]
+        {
+            // Path to be added
+            wxGraphicsPath path2 = gc->CreatePath();
+            path2.AddArcToPoint(100.0F, 160.0F, 50.0F, 200.0F, 30.0F);
+            path2.AddLineToPoint(50.0F, 80.0F);
+            path2.CloseSubpath();
+            wxPoint2DFloat cp2 = path2.GetCurrentPoint();
+            // Main path
+            wxGraphicsPath path = gc->CreatePath();
+            path.AddLineToPoint(50.0F, 80.0F);
+            const float x = 100.0F;
+            const float y = 140.0F;
+            path.AddRectangle(x, y, 50.0F, 200.0F);
+            path.AddPath(path2);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+
+            TestPointProximity(cp, cp2, 1E-3);
+        };
+
+        should("AddPath") = [&]
+        {
+            // Path to be added
+            wxGraphicsPath path2 = gc->CreatePath();
+            path2.AddArcToPoint(100.0F, 160.0F, 50.0F, 200.0F, 30.0F);
+            path2.AddLineToPoint(50.0F, 80.0F);
+            path2.CloseSubpath();
+            wxPoint2DFloat cp2 = path2.GetCurrentPoint();
+            // Main path
+            wxGraphicsPath path = gc->CreatePath();
+            path.MoveToPoint(15.0F, 35.0F);
+            path.AddLineToPoint(50.0F, 80.0F);
+            const float x = 100.0F;
+            const float y = 140.0F;
+            const float r = 20.0F;
+            path.AddCircle(x, y, r);
+            path.AddPath(path2);
+            wxPoint2DFloat cp = path.GetCurrentPoint();
+            
+            TestPointProximity(cp, cp2, 1E-3);
         };
     };
 };
@@ -77,353 +481,10 @@ ut::suite GraphPathsTest = []
 // FIXME: Templatize for running Cairo / other renderers.
 TEST_SUITE("Graphing path tests.")
 {
-    TEST_CASE("Points")
-    {
-        wxBitmap bmp{wxSize{500, 500}};
-        wxMemoryDC mdc{bmp};
-
-        // FIXME: make this a little more clear up front;
-#ifndef __WXMSW__
-        std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(mdc));
-#else
-        std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDirect2DRenderer()->CreateContext(mdc));
-#endif
-
-        REQUIRE(gc.get());
-
-        gc->DisableOffset();
-
-        SUBCASE("MoveToPoint")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            wxPoint2DFloat pt(27, 35);
-            path.MoveToPoint(pt);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, pt, 1E-3);
-        }
-        
-        SUBCASE("AddLineToPoint - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            wxPoint2DFloat pt(27, 35);
-            path.AddLineToPoint(pt);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, pt, 1E-3);
-        }
-        
-        SUBCASE("AddLineToPoint")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(10, 18);
-            wxPoint2DFloat pt(37, 45);
-            path.AddLineToPoint(pt);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, pt, 1E-3);
-        }
-
-        SUBCASE("AddArc - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            const double r = 40;
-            path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y + r), 1E-3);
-        }
-        
-        SUBCASE("AddArc")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(20, 38);
-            const double x = 200;
-            const double y = 50;
-            const double r = 40;
-            path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y + r), 1E-3);
-        }
-
-        SUBCASE("AddArcToPoint - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x1 = 80;
-            const double y1 = 80;
-            const double x2 = -30;
-            const double y2 = y1;
-            const double r = 20;
-            wxASSERT(x1 == y1 && y2 == y1); // alpha = 45 deg
-            double d = r / std::tan(45 / 180.0 * std::numbers::pi_v<float> / 2.0);
-            path.AddArcToPoint(x1, y1, x2, y2, r);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x1 - d, y2), 1E-3);
-        }
-        
-        SUBCASE("AddArcToPoint")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 20;
-            const double y0 = 20;
-            path.MoveToPoint(x0, y0);
-            const double x1 = 80;
-            const double y1 = 80;
-            const double x2 = 140;
-            const double y2 = y1;
-            const double r = 20;
-            wxASSERT(x0 == y0 && x1 == y1 && y2 == y1); // alpha = 135 deg
-            double d = r / std::tan(135 / 180.0 * std::numbers::pi / 2.0);
-            path.AddArcToPoint(x1, y1, x2, y2, r);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x1 + d, y2), 1E-3);
-        }
-
-        SUBCASE("AddCurveToPoint - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x1 = 102;
-            const double y1 = 230;
-            const double x2 = 153;
-            const double y2 = 25;
-            const double x3 = 230;
-            const double y3 = 128;
-            path.AddCurveToPoint(x1, y1, x2, y2, x3, y3);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x3, y3), 1E-3);
-        }
-
-        SUBCASE("AddCurveToPoint")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 25;
-            const double y0 = 128;
-            path.MoveToPoint(x0, y0);
-            const double x1 = 102;
-            const double y1 = 230;
-            const double x2 = 153;
-            const double y2 = 25;
-            const double x3 = 230;
-            const double y3 = 128;
-            path.AddCurveToPoint(x1, y1, x2, y2, x3, y3);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x3, y3), 1E-3);
-        }
-
-        SUBCASE("AddQuadCurveToPoint - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x1 = 200;
-            const double y1 = 200;
-            const double x2 = 300;
-            const double y2 = 100;
-            path.AddQuadCurveToPoint(x1, y1, x2, y2);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x2, y2), 1E-3);
-        }
-
-        SUBCASE("AddQuadCurveToPoint")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 20;
-            const double y0 = 100;
-            path.MoveToPoint(x0, y0);
-            const double x1 = 200;
-            const double y1 = 200;
-            const double x2 = 300;
-            const double y2 = 100;
-            path.AddQuadCurveToPoint(x1, y1, x2, y2);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x2, y2), 1E-3);
-        }
-
-        SUBCASE("AddCircle - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            const double r = 30;
-            path.AddCircle(x, y, r);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + r, y), 1E-3);
-        }
-
-        SUBCASE("AddCircle")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(50, 80);
-            const double x = 100;
-            const double y = 140;
-            const double r = 40;
-            path.AddCircle(x, y, r);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + r, y), 1E-3);
-        }
-
-        SUBCASE("AddEllipse - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            const double w = 40;
-            const double h = 20;
-            path.AddEllipse(x, y, w, h);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + w, y + h / 2), 1E-3);
-        }
-
-        SUBCASE("AddEllipse")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(50, 60);
-            const double x = 100;
-            const double y = 150;
-            const double w = 40;
-            const double h = 20;
-            path.AddEllipse(x, y, w, h);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + w, y + h / 2), 1E-3);
-        }
-
-        SUBCASE("AddRectangle - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            path.AddRectangle(x, y, 40, 20);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y), 1E-3);
-        }
-
-        SUBCASE("AddRectangle")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(50, 60);
-            const double x = 100;
-            const double y = 150;
-            path.AddRectangle(x, y, 50, 30);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y), 1E-3);
-        }
-
-        SUBCASE("AddRoundedRectangle - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            const double w = 40;
-            const double h = 20;
-            path.AddRoundedRectangle(x, y, w, h, 5);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + w, y + h / 2), 1E-3);
-        }
-
-        SUBCASE("AddRoundedRectangle - no current point, radius = 0")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x = 100;
-            const double y = 150;
-            path.AddRoundedRectangle(x, y, 40, 20, 0); // Should behave like AddRectangle
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y), 1E-3);
-        }
-
-        SUBCASE("AddRoundedRectangle")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(50, 60);
-            const double x = 100;
-            const double y = 150;
-            const double w = 40;
-            const double h = 20;
-            path.AddRoundedRectangle(x, y, w, h, 5);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x + w, y + h / 2), 1E-3);
-        }
-        
-        SUBCASE("AddRoundedRectangle - radius = 0")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 50;
-            const double y0 = 60;
-            path.MoveToPoint(x0, y0);
-            const double x = 100;
-            const double y = 150;
-            const double w = 40;
-            const double h = 20;
-            path.AddRoundedRectangle(x, y, w, h, 0); // Should behave like AddRectangle
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x, y), 1E-3);
-        }
-
-        SUBCASE("CloseSubpath - no current point")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 50;
-            const double y0 = 80;
-            path.AddLineToPoint(x0, y0);
-            path.AddArcToPoint(100, 160, 50, 200, 30);
-            path.CloseSubpath();
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x0, y0), 1E-3);
-        }
-
-        SUBCASE("CloseSubpath")
-        {
-            wxGraphicsPath path = gc->CreatePath();
-            const double x0 = 10;
-            const double y0 = 20;
-            path.MoveToPoint(x0, y0);
-            path.AddLineToPoint(50, 80);
-            path.AddArcToPoint(100, 160, 50, 200, 30);
-            path.CloseSubpath();
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, wxPoint2DFloat(x0, y0), 1E-3);
-        }
-
-        SUBCASE("AddPath - no current point")
-        {
-            // Path to be added
-            wxGraphicsPath path2 = gc->CreatePath();
-            path2.AddArcToPoint(100, 160, 50, 200, 30);
-            path2.AddLineToPoint(50, 80);
-            path2.CloseSubpath();
-            wxPoint2DFloat cp2 = path2.GetCurrentPoint();
-            // Main path
-            wxGraphicsPath path = gc->CreatePath();
-            path.AddLineToPoint(50, 80);
-            const double x = 100;
-            const double y = 140;
-            path.AddRectangle(x, y, 50, 200);
-            path.AddPath(path2);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, cp2, 1E-3);
-        }
-
-        SUBCASE("AddPath")
-        {
-            // Path to be added
-            wxGraphicsPath path2 = gc->CreatePath();
-            path2.AddArcToPoint(100, 160, 50, 200, 30);
-            path2.AddLineToPoint(50, 80);
-            path2.CloseSubpath();
-            wxPoint2DFloat cp2 = path2.GetCurrentPoint();
-            // Main path
-            wxGraphicsPath path = gc->CreatePath();
-            path.MoveToPoint(15, 35);
-            path.AddLineToPoint(50, 80);
-            const double x = 100;
-            const double y = 140;
-            const double r = 20;
-            path.AddCircle(x, y, r);
-            path.AddPath(path2);
-            wxPoint2DFloat cp = path.GetCurrentPoint();
-            WX_CHECK_POINT(cp, cp2, 1E-3);
-        }
-    } // TEST_CASE("Points")
-
     TEST_CASE("Boxes")
     {
-        wxBitmap bmp{wxSize{500, 500}};
-        wxMemoryDC mdc{bmp};
+        wxBitmap bmp{ wxSize{500, 500} };
+        wxMemoryDC mdc{ bmp };
 
         // FIXME: make this a little more clear up front;
 #ifndef __WXMSW__
@@ -436,11 +497,12 @@ TEST_SUITE("Graphing path tests.")
 
         gc->DisableOffset();
 
+        /*
         SUBCASE("No current point")
         {
             wxGraphicsPath path = gc->CreatePath();
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(0, 0, 0, 0), 0);
+            WX_CHECK_BOX(b, wxRect2DDouble{0.0, 0.0, 0.0, 0.0}, 0.0);
         }
 
         SUBCASE("MoveToPoint")
@@ -448,7 +510,7 @@ TEST_SUITE("Graphing path tests.")
             wxGraphicsPath path = gc->CreatePath();
             path.MoveToPoint(28, 38);
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(0, 0, 0, 0), 0);
+            WX_CHECK_BOX(b, wxRect2DDouble{0.0, 0.0, 0.0, 0.0}, 0.0);
         }
 
         SUBCASE("AddLineToPoint - no current point")
@@ -456,8 +518,10 @@ TEST_SUITE("Graphing path tests.")
             wxGraphicsPath path = gc->CreatePath();
             path.AddLineToPoint(28, 36);
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(0, 0, 0, 0), 0);
+            WX_CHECK_BOX(b, wxRect2DDouble{0.0, 0.0, 0.0, 0.0}, 0.0);
         }
+
+        */
 
         SUBCASE("AddLineToPoint")
         {
@@ -469,7 +533,7 @@ TEST_SUITE("Graphing path tests.")
             const double h = 46;
             path.AddLineToPoint(x0 + w, y0 + h);
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(x0, y0, w, h), 0);
+            WX_CHECK_BOX(b, wxRect2DDouble(x0, y0, w, h), 0.0);
         }
 
         SUBCASE("AddArc - no current point")
@@ -510,7 +574,7 @@ TEST_SUITE("Graphing path tests.")
             wxASSERT(y1 == 0 && x2 == x1); // alpha = 90 deg
             path.AddArcToPoint(x1, y1, x2, y2, r);
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(0, 0, x1, r), 1E-3);
+            WX_CHECK_BOX(b, wxRect2DDouble(0.0, 0.0, x1, r), 1E-3);
         }
 
         SUBCASE("AddArcToPoint")
@@ -741,19 +805,19 @@ TEST_SUITE("Graphing path tests.")
             const double y = 150;
             const double w = 40;
             const double h = 20;
-            path.AddRoundedRectangle(x, y, w, h, 0);
+            path.AddRoundedRectangle(x, y, w, h, 0.0);
             wxRect2DDouble b = path.GetBox();
             WX_CHECK_BOX(b, wxRect2DDouble(x, y, w, h), 1E-3);
         }
-
+        /*
         SUBCASE("CloseSubpath - empty path")
         {
             wxGraphicsPath path = gc->CreatePath();
             path.CloseSubpath();
             wxRect2DDouble b = path.GetBox();
-            WX_CHECK_BOX(b, wxRect2DDouble(0, 0, 0, 0), 0);
+            WX_CHECK_BOX(b, wxRect2DDouble{0.0, 0.0, 0.0, 0.0}, 0.0);
         }
-
+        */
         SUBCASE("CloseSubpath - no current point")
         {
             wxGraphicsPath path = gc->CreatePath();
@@ -807,7 +871,7 @@ TEST_SUITE("Graphing path tests.")
             wxRect2DDouble b1 = path.GetBox();
             WX_CHECK_BOX(b0, b1, 1E-3);
         }
-        
+
         SUBCASE("AddPath")
         {
             // Path to be added
@@ -830,7 +894,7 @@ TEST_SUITE("Graphing path tests.")
             wxRect2DDouble b1 = path.GetBox();
             WX_CHECK_BOX(b0, b1, 1E-3);
         }
-        
+
         SUBCASE("Overlapping figures")
         {
             wxGraphicsPath path = gc->CreatePath();

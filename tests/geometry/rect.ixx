@@ -6,7 +6,11 @@
 // Copyright:   (c) 2004 wxWindows
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/gdicmn.h"
+
+export module WX.Test.Rect;
 
 import WX.Test.Prec;
 import WX.MetaTest;

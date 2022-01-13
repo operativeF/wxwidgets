@@ -6,8 +6,12 @@
 // Copyright:   (c) 2010 Vadim Zeitlin
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "wx/accel.h"
 #include "wx/defs.h"
+
+export module WX.Test.AccelEntry;
 
 import WX.MetaTest;
 

@@ -6,6 +6,8 @@
 // Copyright:   (c) 2004 wxWindows
 ///////////////////////////////////////////////////////////////////////////////
 
+export module WX.Test.Point;
+
 import WX.Test.Prec;
 import WX.MetaTest;
 
@@ -144,7 +146,6 @@ ut::suite RealPointOperations = []
         expect(std::abs(5.5 - rp3.y) <= std::numeric_limits<double>::epsilon());
     };
 };
-
 
 // TEST_CASE("Operators")
 // {
