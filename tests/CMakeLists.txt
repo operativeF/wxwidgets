@@ -30,12 +30,12 @@ set(TEST_GUI_SRC
     test.cpp
     testableframe.cpp
     geometry/rect.ixx
-    geometry/size.cpp
+    geometry/size.ixx
     geometry/point.ixx
-    geometry/region.cpp
+    geometry/region.ixx
     graphics/bitmap.cpp
     #graphics/colour.cpp # Doesn't work yet.
-    graphics/ellipsization.cpp
+    graphics/ellipsization.ixx
     graphics/measuring.cpp
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
     graphics/boundingbox.cpp
