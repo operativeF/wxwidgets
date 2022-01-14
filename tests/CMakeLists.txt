@@ -92,7 +92,7 @@ set(TEST_GUI_SRC
     #controls/webtest.cpp # FIXME
     controls/windowtest.cpp
     #controls/dialogtest.cpp
-    events/clone.cpp
+    events/clone.ixx
     # Duplicate this file here to test GUI event loops too.
     events/evtlooptest.cpp
     #events/propagation.cpp # Needs some fixes.

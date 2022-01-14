@@ -6,15 +6,22 @@
 // Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
 #include "wx/event.h"
 #include "wx/timer.h"
 
+export module WX.Test.EventClone;
+
+import WX.MetaTest;
 import WX.Test.Prec;
 
-TEST_CASE("EventClone")
+namespace ut = boost::ut;
+
+ut::suite EventCloneTest = []
 {
+    using namespace ut;
+    
     // Dummy timer needed just to create a wxTimerEvent.
     wxTimer dummyTimer;
 
@@ -23,6 +30,7 @@ TEST_CASE("EventClone")
     //       the executable currently running, which are not necessarily all
     //       wxWidgets event classes.
     const wxClassInfo *ci = wxClassInfo::GetFirst();
+
     for (; ci; ci = ci->GetNext())
     {
         auto cn = std::string(ci->wxGetClassName());
@@ -32,7 +40,8 @@ TEST_CASE("EventClone")
              cn == "wxEvent" )
             continue;
 
-        INFO("Event class \"" << cn << "\"");
+        // FIXME: Info for metatest?
+        //INFO("Event class \"" << cn << "\"");
 
         wxEvent* test;
         if ( ci->IsDynamic() )
@@ -43,19 +52,14 @@ TEST_CASE("EventClone")
         {
             test = new wxTimerEvent(dummyTimer);
         }
-        else
-        {
-            FAIL(("Can't create objects of type " + cn));
-            continue;
-        }
 
-        REQUIRE( test );
+        expect( test ) << fmt::format("Can't create objects of type {}.", cn);
 
         auto cloned = test->Clone();
         delete test;
 
-        REQUIRE( cloned );
-        CHECK( cloned->wxGetClassInfo() == ci );
+        expect( cloned.get() );
+        expect( cloned->wxGetClassInfo() == ci );
     }
-}
+};
 

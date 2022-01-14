@@ -7,21 +7,22 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#if wxUSE_FONTMAP
+module;
 
 #include "wx/fontmap.h"
 
+export module WX.Test.FontMap;
+
 import Utils.Strings;
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
+#if wxUSE_FONTMAP
 
+namespace ut = boost::ut;
 
-TEST_CASE("Names and Descriptions")
+ut::suite FontMapTests = []
 {
+    using namespace ut;
+    
     static const char* charsets[] =
     {
         // some valid charsets
@@ -80,9 +81,9 @@ TEST_CASE("Names and Descriptions")
     for ( size_t n = 0; n < WXSIZEOF(charsets); n++ )
     {
         wxFontEncoding enc = fmap.CharsetToEncoding(charsets[n]);
-        CHECK_EQ( names[n], wx::utils::ToLowerCopy(fmap.GetEncodingName(enc)) );
-        CHECK_EQ( descriptions[n], fmap.GetEncodingDescription(enc) );
+        expect( names[n] == wx::utils::ToLowerCopy(fmap.GetEncodingName(enc)) );
+        expect( descriptions[n] == fmap.GetEncodingDescription(enc) );
     }
-}
+};
 
 #endif // wxUSE_FONTMAP

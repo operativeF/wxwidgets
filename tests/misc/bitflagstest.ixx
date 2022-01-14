@@ -6,13 +6,14 @@
 // Copyright:   (c) 2021 Thomas Figueroa
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#include "testprec.h"
+export module WX.Test.Bitfields;
 
 import Utils.Bitfield;
+import WX.MetaTest;
 
-TEST_CASE("Bitflags")
+namespace ut = boost::ut;
+
+ut::suite BitfieldTests = []
 {
     // Exclusive bitflag example
     enum class Borders
@@ -35,102 +36,114 @@ TEST_CASE("Bitflags")
     };
 
     using StyleFlags = InclBitfield<Styles>;
+    
+    using namespace ut;
 
-    StyleFlags styles;
-
-    SUBCASE("Multiple value construction")
+    "Multiple value construction"_test = []
     {
         StyleFlags newStyles{Styles::Bold, Styles::Italic, Styles::Underline};
 
         constexpr auto newStylesSetFlags = StyleFlags::bitmask(Styles::Italic, Styles::Bold, Styles::Underline);
 
-        CHECK(newStyles.as_value() == newStylesSetFlags);
-    }
+        expect(newStyles.as_value() == newStylesSetFlags);
+    };
 
-    SUBCASE("Toggle On / Off")
+    "Toggle On / Off"_test = []
     {
+        StyleFlags styles;
+
         styles.toggle(Styles::Italic);
 
-        CHECK(styles.as_value() == StyleFlags::bitmask(Styles::Italic));
+        expect(styles.as_value() == StyleFlags::bitmask(Styles::Italic));
 
         styles.toggle(Styles::Italic);
 
-        CHECK(styles.as_value() == 0);
-    }
+        expect(styles.as_value() == 0);
+    };
 
-    SUBCASE("Set / Reset")
+    "Set / Reset"_test = []
     {
+        StyleFlags styles;
+
         styles.set(Styles::Bold);
 
-        CHECK(styles.as_value() == StyleFlags::bitmask(Styles::Bold));
+        expect(styles.as_value() == StyleFlags::bitmask(Styles::Bold));
 
         styles.reset(Styles::Bold);
 
-        CHECK(styles.as_value() == 0);
-    }
+        expect(styles.as_value() == 0);
+    };
 
-    SUBCASE("Set All / Clear")
+    "Set All / Clear"_test = []
     {
+        StyleFlags styles;
+
         styles.set_all();
 
-        CHECK(styles.as_value() == StyleFlags::AllFlagsSet);
+        expect(styles.as_value() == StyleFlags::AllFlagsSet);
 
         styles.clear();
 
-        CHECK(styles.as_value() == 0);
-    }
+        expect(styles.as_value() == 0);
+    };
 
-    SUBCASE("Binary operators")
+    "Binary operators"_test = []
     {
-        SUBCASE("&= operator")
+        "&= operator"_test = [styles]
         {
+            StyleFlags styles;
+
             styles.set(Styles::Strikethrough);
 
             styles &= Styles::Strikethrough;
 
-            CHECK(styles.as_value() == StyleFlags::bitmask(Styles::Strikethrough));
+            expect(styles.as_value() == StyleFlags::bitmask(Styles::Strikethrough));
 
             styles.set(Styles::Italic);
 
             styles &= Styles::Bold;
 
-            CHECK(styles.as_value() == 0);
-        }
+            expect(styles.as_value() == 0);
+        };
     
-        SUBCASE("|= operator")
+        "|= operator"_test = [styles]
         {
+            StyleFlags styles;
+
             styles |= Styles::Bold;
             styles |= Styles::Strikethrough;
 
-            CHECK(styles.as_value() == StyleFlags::bitmask(Styles::Bold, Styles::Strikethrough));
+            expect(styles.as_value() == StyleFlags::bitmask(Styles::Bold, Styles::Strikethrough));
+        };
+    };
 
-            styles.clear();
-        }
-    }
-
-    SUBCASE("Unary operators")
+    "Unary operators"_test = []
     {
-        SUBCASE("& operator")
+        StyleFlags styles;
+
+        "& operator"_test = [styles]
         {
             styles.set(Styles::Strikethrough, Styles::Bold);
 
             auto resultStyle = styles & Styles::Bold;
 
-            CHECK(resultStyle.as_value() == StyleFlags::bitmask(Styles::Bold));
-        }
+            expect(resultStyle.as_value() == StyleFlags::bitmask(Styles::Bold));
+        };
 
-        SUBCASE("| operator")
-        {
+        // SUBCASE("| operator")
+        // {
 
-        }
-    }
+        // }
+    };
 
-    SUBCASE("Comparison operators")
+    "Comparison operators"_test = []
     {
         StyleFlags newStyles;
-        CHECK(styles == newStyles);
+        StyleFlags styles;
+
+        expect(styles == newStyles);
 
         newStyles.set(Styles::Bold);
-        CHECK(styles != newStyles);
-    }
-}
+        expect(styles != newStyles);
+    };
+};
