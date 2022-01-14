@@ -43,16 +43,19 @@ import <string>;
 
 #if wxUSE_IMAGE
 
+namespace ut = boost::ut;
+
+// FIXME: Define equality operator for colors.
 #define CHECK_EQUAL_COLOUR_RGB(c1, c2) \
-    CHECK( (int)c1.Red()   == (int)c2.Red() ); \
-    CHECK( (int)c1.Green() == (int)c2.Green() ); \
-    CHECK( (int)c1.Blue()  == (int)c2.Blue() )
+    expect( (int)c1.Red()   == (int)c2.Red() ); \
+    expect( (int)c1.Green() == (int)c2.Green() ); \
+    expect( (int)c1.Blue()  == (int)c2.Blue() )
 
 #define CHECK_EQUAL_COLOUR_RGBA(c1, c2) \
-    CHECK( (int)c1.Red()   == (int)c2.Red() ); \
-    CHECK( (int)c1.Green() == (int)c2.Green() ); \
-    CHECK( (int)c1.Blue()  == (int)c2.Blue() ); \
-    CHECK( (int)c1.Alpha() == (int)c2.Alpha() )
+    expect( (int)c1.Red()   == (int)c2.Red() ); \
+    expect( (int)c1.Green() == (int)c2.Green() ); \
+    expect( (int)c1.Blue()  == (int)c2.Blue() ); \
+    expect( (int)c1.Alpha() == (int)c2.Alpha() )
 
 enum
 {
@@ -81,8 +84,6 @@ constexpr std::array<testData, 12> g_testfiles =
     { "image/data/horse.tga", wxBitmapType::TGA, 8 },
     { "image/data/horse.tif", wxBitmapType::TIFF, 8 }
 }};
-
-namespace ut = boost::ut;
 
 void SetAlpha(wxImage* image)
 {
@@ -199,36 +200,35 @@ void TestTIFFImage(std::string_view option, int value,
     expect(image.SaveFile(memOut, wxBitmapType::TIFF));
 
     wxMemoryInputStream memIn(memOut);
-    CHECK(memIn.IsOk());
+    expect(memIn.IsOk());
 
     wxImage savedImage(memIn);
-    CHECK(savedImage.IsOk());
+    expect(savedImage.IsOk());
 
     expect(savedImage.HasOption(option) == true) << fmt::format("While checking for option %s", option);
 
     expect(value == savedImage.GetOptionInt(option)) << fmt::format("While testing for %s", option);
 
-    // FIXME:
-    // CHECK_MESSAGE(("HasAlpha() not equal"), image.HasAlpha(), savedImage.HasAlpha());
+    expect(image.HasAlpha() == savedImage.HasAlpha()) << "HasAlpha() not equal";
 }
-
 #endif // wxUSE_LIBTIFF
-
 
 #if wxUSE_GIF
 
 void TestGIFComment(std::string_view comment)
 {
+    using namespace ut;
+
     wxImage image("image/data/horse.gif");
 
     image.SetOption(wxIMAGE_OPTION_GIF_COMMENT, comment);
     wxMemoryOutputStream memOut;
-    CHECK(image.SaveFile(memOut, wxBitmapType::GIF));
+    expect(image.SaveFile(memOut, wxBitmapType::GIF));
 
     wxMemoryInputStream memIn(memOut);
-    CHECK(image.LoadFile(memIn));
+    expect(image.LoadFile(memIn));
 
-    CHECK_EQ(comment,
+    expect(comment ==
         image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
 }
 
@@ -236,11 +236,13 @@ void TestGIFComment(std::string_view comment)
 
 void CompareBMPImage(const std::string& file1, const std::string& file2)
 {
+    using namespace ut;
+
     wxImage image1(file1);
-    CHECK(image1.IsOk());
+    expect(image1.IsOk());
 
     wxImage image2(file2);
-    CHECK(image2.IsOk());
+    expect(image2.IsOk());
 
     CompareImage(*wxImage::FindHandler(wxBitmapType::BMP), image1, 0, &image2);
 }
@@ -1077,244 +1079,244 @@ ut::suite BaseImageTest = []
             expected8, wxIMAGE_HAVE_ALPHA);
     };
 
-//     #if wxUSE_ZLIB
-//     SUBCASE("LoadFromZipStream")
-//     {
-//         for (const auto& testFile : g_testfiles)
-//         {
-//             switch (testFile.type)
-//             {
-//                 case wxBitmapType::XPM:
-//                 case wxBitmapType::GIF:
-//                 case wxBitmapType::PCX:
-//                 case wxBitmapType::TGA:
-//                 case wxBitmapType::TIFF:
-//                 continue;       // skip testing those wxImageHandlers which cannot
-//                                 // load data from non-seekable streams
+#if wxUSE_ZLIB
+    "LoadFromZipStream"_test = []
+    {
+        for (const auto& testFile : g_testfiles)
+        {
+            switch (testFile.type)
+            {
+                case wxBitmapType::XPM:
+                case wxBitmapType::GIF:
+                case wxBitmapType::PCX:
+                case wxBitmapType::TGA:
+                case wxBitmapType::TIFF:
+                continue;       // skip testing those wxImageHandlers which cannot
+                                // load data from non-seekable streams
 
-//                 default:
-//                     ; // proceed
-//             }
+                default:
+                    ; // proceed
+            }
 
-//             // compress the test file on the fly:
-//             wxMemoryOutputStream memOut;
-//             {
-//                 wxFileInputStream file(testFile.file);
-//                 CHECK(file.IsOk());
+            // compress the test file on the fly:
+            wxMemoryOutputStream memOut;
+            {
+                wxFileInputStream file(testFile.file);
+                expect(file.IsOk());
 
-//                 wxZlibOutputStream compressFilter(memOut, 5, wxZLIB_GZIP);
-//                 CHECK(compressFilter.IsOk());
+                wxZlibOutputStream compressFilter(memOut, 5, wxZLIB_GZIP);
+                expect(compressFilter.IsOk());
 
-//                 file.Read(compressFilter);
-//                 CHECK(file.GetLastError() == wxSTREAM_EOF);
-//             }
+                file.Read(compressFilter);
+                expect(file.GetLastError() == wxSTREAM_EOF);
+            }
 
-//             // now fetch the compressed memory to wxImage, decompressing it on the fly; this
-//             // allows us to test loading images from non-seekable streams other than socket streams
-//             wxMemoryInputStream memIn(memOut);
-//             CHECK(memIn.IsOk());
-//             wxZlibInputStream decompressFilter(memIn, wxZLIB_GZIP);
-//             CHECK(decompressFilter.IsOk());
+            // now fetch the compressed memory to wxImage, decompressing it on the fly; this
+            // allows us to test loading images from non-seekable streams other than socket streams
+            wxMemoryInputStream memIn(memOut);
+            expect(memIn.IsOk());
+            wxZlibInputStream decompressFilter(memIn, wxZLIB_GZIP);
+            expect(decompressFilter.IsOk());
 
-//             wxImage img;
+            wxImage img;
 
-//             // NOTE: it's important to inform wxImage about the type of the image being
-//             //       loaded otherwise it will try to autodetect the format, but that
-//             //       requires a seekable stream!
-//             CHECK_MESSAGE(img.LoadFile(decompressFilter, testFile.type),
-//                          ("Could not load file type '%d' after it was zipped", testFile.type));
-//         }
-//     }
-//     #endif
+            // NOTE: it's important to inform wxImage about the type of the image being
+            //       loaded otherwise it will try to autodetect the format, but that
+            //       requires a seekable stream!
+            expect(img.LoadFile(decompressFilter, testFile.type)) <<
+                   fmt::format("Could not load file type '%d' after it was zipped", testFile.type);
+        }
+    };
+#endif
 
-// #if wxUSE_LIBTIFF
-//     SUBCASE("SaveTIFF")
-//     {
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_BITSPERSAMPLE, 1);
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL, 1);
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_PHOTOMETRIC, 0/*PHOTOMETRIC_MINISWHITE*/);
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_PHOTOMETRIC, 1/*PHOTOMETRIC_MINISBLACK*/);
+#if wxUSE_LIBTIFF
+    // FIXME: Can't reach string_view constants in WX.Image.TIFF module
+    "SaveTIFF"_test = []
+    {
+        TestTIFFImage("BitsPerSample", 1);
+        TestTIFFImage("SamplesPerPixel", 1);
+        TestTIFFImage("Photometric", 0/*PHOTOMETRIC_MINISWHITE*/);
+        TestTIFFImage("Photometric", 1/*PHOTOMETRIC_MINISBLACK*/);
 
-//         wxImage alphaImage("image/data/horse.png");
-//         CHECK(alphaImage.IsOk());
-//         SetAlpha(&alphaImage);
+        wxImage alphaImage("image/data/horse.png");
+        expect(alphaImage.IsOk());
+        SetAlpha(&alphaImage);
 
-//         // RGB with alpha
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL, 4, &alphaImage);
+        // RGB with alpha
+        TestTIFFImage("SamplesPerPixel", 4, &alphaImage);
 
-//         // Grey with alpha
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL, 2, &alphaImage);
+        // Grey with alpha
+        TestTIFFImage("SamplesPerPixel", 2, &alphaImage);
 
-//         // B/W with alpha
-//         alphaImage.SetOption(wxIMAGE_OPTION_TIFF_BITSPERSAMPLE, 1);
-//         TestTIFFImage(wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL, 2, &alphaImage);
-//     }
-// #endif // wxUSE_LIBTIFF
+        // B/W with alpha
+        alphaImage.SetOption("BitsPerSample", 1);
+        TestTIFFImage("SamplesPerPixel", 2, &alphaImage);
+    };
+#endif // wxUSE_LIBTIFF
 
-//     SUBCASE("ReadCorruptedTGA")
-//     {
-//         static std::array<unsigned char, 18 + 1 + 3> corruptTGA =
-//         {
-//             0,
-//             0,
-//             10, // RLE compressed image.
-//             0, 0,
-//             0, 0,
-//             0,
-//             0, 0,
-//             0, 0,
-//             1, 0, // Width is 1.
-//             1, 0, // Height is 1.
-//             24, // Bits per pixel.
-//             0,
+    "ReadCorruptedTGA"_test = []
+    {
+        static std::array<unsigned char, 18 + 1 + 3> corruptTGA =
+        {
+            0,
+            0,
+            10, // RLE compressed image.
+            0, 0,
+            0, 0,
+            0,
+            0, 0,
+            0, 0,
+            1, 0, // Width is 1.
+            1, 0, // Height is 1.
+            24, // Bits per pixel.
+            0,
 
-//             0xff, // Run length (repeat next pixel 127+1 times).
-//             0xff, 0xff, 0xff // One 24-bit pixel.
-//         };
+            0xff, // Run length (repeat next pixel 127+1 times).
+            0xff, 0xff, 0xff // One 24-bit pixel.
+        };
 
-//         // FIXME: Add std::array (or span) interface to wxMemoryInputStream
-//         wxMemoryInputStream memIn(corruptTGA.data(), WXSIZEOF(corruptTGA));
-//         CHECK(memIn.IsOk());
+        // FIXME: Add std::array (or span) interface to wxMemoryInputStream
+        wxMemoryInputStream memIn(corruptTGA.data(), WXSIZEOF(corruptTGA));
+        expect(memIn.IsOk());
 
-//         wxImage tgaImage;
-//         CHECK(!tgaImage.LoadFile(memIn));
-
-
-//         /*
-//         Instead of repeating a pixel 127+1 times, now tell it there will
-//         follow 127+1 uncompressed pixels (while we only should have 1 in total).
-//         */
-//         corruptTGA[18] = 0x7f;
-//         CHECK(!tgaImage.LoadFile(memIn));
-//     }
-
-// #if wxUSE_GIF
-
-//     SUBCASE("SaveAnimatedGIF")
-//     {
-// #if wxUSE_PALETTE
-//         wxImage image("image/data/horse.gif");
-//         CHECK(image.IsOk());
-
-//         wxImageArray images;
-//         images.push_back(image);
-//         for (int i = 0; i < 4 - 1; ++i)
-//         {
-//             images.push_back(images[i].Rotate90());
-
-//             images[i + 1].SetPalette(images[0].GetPalette());
-//         }
-
-//         wxMemoryOutputStream memOut;
-//         CHECK(wxGIFHandler().SaveAnimation(images, &memOut));
-
-//         wxGIFHandler handler;
-//         wxMemoryInputStream memIn(memOut);
-//         CHECK(memIn.IsOk());
-//         const int imageCount = handler.GetImageCount(memIn);
-//         CHECK_EQ(4, imageCount);
-
-//         for (int i = 0; i < imageCount; ++i)
-//         {
-//             wxFileOffset pos = memIn.TellI();
-//             CHECK(handler.LoadFile(&image, memIn, true, i));
-//             memIn.SeekI(pos);
-
-//             INFO("Compare test for GIF frame number %d failed", i);
-//             // FIXME: Find better way.
-//             //CHECK_THAT(image, RGBSameAs(images[i]));
-//         }
-// #endif // #if wxUSE_PALETTE
-//     }
-
-//     SUBCASE("GIFComment")
-//     {
-//         // Test reading a comment.
-//         wxImage image("image/data/horse.gif");
-//         CHECK_EQ("  Imported from GRADATION image: gray",
-//             image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
+        wxImage tgaImage;
+        expect(!tgaImage.LoadFile(memIn));
 
 
-//         // Test writing a comment and reading it back.
-//         TestGIFComment("Giving the GIF a gifted giraffe as a gift");
+        /*
+        Instead of repeating a pixel 127+1 times, now tell it there will
+        follow 127+1 uncompressed pixels (while we only should have 1 in total).
+        */
+        corruptTGA[18] = 0x7f;
+        expect(!tgaImage.LoadFile(memIn));
+    };
+
+#if wxUSE_GIF
+
+    "SaveAnimatedGIF"_test = []
+    {
+#if wxUSE_PALETTE
+        wxImage image("image/data/horse.gif");
+        expect(image.IsOk());
+
+        wxImageArray images;
+        images.push_back(image);
+        for (int i = 0; i < 4 - 1; ++i)
+        {
+            images.push_back(images[i].Rotate90());
+
+            images[i + 1].SetPalette(images[0].GetPalette());
+        }
+
+        wxMemoryOutputStream memOut;
+        expect(wxGIFHandler().SaveAnimation(images, &memOut));
+
+        wxGIFHandler handler;
+        wxMemoryInputStream memIn(memOut);
+        expect(memIn.IsOk());
+        const int imageCount = handler.GetImageCount(memIn);
+        expect(imageCount == 4);
+
+        for (int i = 0; i < imageCount; ++i)
+        {
+            wxFileOffset pos = memIn.TellI();
+            expect(handler.LoadFile(&image, memIn, true, i)) <<
+                fmt::format("Compare test for GIF frame number %d failed", i);
+            memIn.SeekI(pos);
+
+            // FIXME: Find better way.
+            //CHECK_THAT(image, RGBSameAs(images[i]));
+        }
+#endif // #if wxUSE_PALETTE
+    };
+
+    "GIFComment"_test = []
+    {
+        // Test reading a comment.
+        wxImage image("image/data/horse.gif");
+        expect("  Imported from GRADATION image: gray" ==
+            image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
 
 
-//         // Test writing and reading a comment again but with a long comment.
-//         static constexpr std::string_view longStr("c", 768);
-//         TestGIFComment(longStr);
+        // Test writing a comment and reading it back.
+        TestGIFComment("Giving the GIF a gifted giraffe as a gift");
 
 
-//         // Test writing comments in an animated GIF and reading them back.
-//         CHECK(image.LoadFile("image/data/horse.gif"));
+        // Test writing and reading a comment again but with a long comment.
+        static constexpr std::string_view longStr("c", 768);
+        TestGIFComment(longStr);
 
-// #if wxUSE_PALETTE
-//         wxImageArray images;
+        // Test writing comments in an animated GIF and reading them back.
+        expect(image.LoadFile("image/data/horse.gif"));
 
-//         for (int i = 0; i < 4; ++i)
-//         {
-//             if (i)
-//             {
-//                 images.push_back(images[i - 1].Rotate90());
-//                 images[i].SetPalette(images[0].GetPalette());
-//             }
-//             else
-//             {
-//                 images.push_back(image);
-//             }
+#if wxUSE_PALETTE
+        wxImageArray images;
 
-//             images[i].SetOption(wxIMAGE_OPTION_GIF_COMMENT,
-//                 fmt::format("GIF comment for frame #%d", i + 1));
+        for (int i = 0; i < 4; ++i)
+        {
+            if (i)
+            {
+                images.push_back(images[i - 1].Rotate90());
+                images[i].SetPalette(images[0].GetPalette());
+            }
+            else
+            {
+                images.push_back(image);
+            }
 
-//         }
+            images[i].SetOption(wxIMAGE_OPTION_GIF_COMMENT,
+                fmt::format("GIF comment for frame #%d", i + 1));
 
+        }
 
-//         wxMemoryOutputStream memOut;
-//         CHECK(wxGIFHandler().SaveAnimation(images, &memOut));
+        wxMemoryOutputStream memOut;
+        expect(wxGIFHandler().SaveAnimation(images, &memOut));
 
-//         wxGIFHandler handler;
-//         wxMemoryInputStream memIn(memOut);
-//         CHECK(memIn.IsOk());
-//         const int imageCount = handler.GetImageCount(memIn);
-//         for (int i = 0; i < imageCount; ++i)
-//         {
-//             wxFileOffset pos = memIn.TellI();
-//             CHECK(handler.LoadFile(&image, memIn, true /*verbose?*/, i));
+        wxGIFHandler handler;
+        wxMemoryInputStream memIn(memOut);
+        expect(memIn.IsOk());
+        const int imageCount = handler.GetImageCount(memIn);
 
-//             CHECK_EQ(
-//                 fmt::format("GIF comment for frame #%d", i + 1),
-//                 image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
-//             memIn.SeekI(pos);
-//         }
-// #endif //wxUSE_PALETTE
-//     }
-// #endif // wxUSE_GIF
+        for (int i = 0; i < imageCount; ++i)
+        {
+            wxFileOffset pos = memIn.TellI();
+            expect(handler.LoadFile(&image, memIn, true /*verbose?*/, i));
 
-//     SUBCASE("DibPadding")
-//     {
-//         /*
-//         There used to be an error with calculating the DWORD aligned scan line
-//         pitch for a BMP/ICO resulting in buffer overwrites (with at least MSVC9
-//         Debug this gave a heap corruption assertion when saving the mask of
-//         an ICO). Test for it here.
-//         */
-//         wxImage image("image/data/horse.gif");
-//         CHECK(image.IsOk());
+            expect(fmt::format("GIF comment for frame #%d", i + 1) ==
+                image.GetOption(wxIMAGE_OPTION_GIF_COMMENT));
 
-//         image = image.Scale(99, 99);
+            memIn.SeekI(pos);
+        }
+#endif //wxUSE_PALETTE
+    };
+#endif // wxUSE_GIF
 
-//         wxMemoryOutputStream memOut;
-//         CHECK(image.SaveFile(memOut, wxBitmapType::ICO));
-//     }
+    "DibPadding"_test = []
+    {
+        /*
+        There used to be an error with calculating the DWORD aligned scan line
+        pitch for a BMP/ICO resulting in buffer overwrites (with at least MSVC9
+        Debug this gave a heap corruption assertion when saving the mask of
+        an ICO). Test for it here.
+        */
+        wxImage image("image/data/horse.gif");
+        expect(image.IsOk());
 
-//     SUBCASE("BMPFlippingAndRLECompression")
-//     {
-//         CompareBMPImage("image/data/horse_grey.bmp", "image/data/horse_grey_flipped.bmp");
+        image = image.Scale(99, 99);
 
-//         CompareBMPImage("image/data/horse_rle8.bmp", "image/data/horse_grey.bmp");
-//         CompareBMPImage("image/data/horse_rle8.bmp", "image/data/horse_rle8_flipped.bmp");
+        wxMemoryOutputStream memOut;
+        expect(image.SaveFile(memOut, wxBitmapType::ICO));
+    };
 
-//         CompareBMPImage("image/data/horse_rle4.bmp", "image/data/horse_rle4_flipped.bmp");
-//     }
+    "BMPFlippingAndRLECompression"_test = []
+    {
+        CompareBMPImage("image/data/horse_grey.bmp", "image/data/horse_grey_flipped.bmp");
+
+        CompareBMPImage("image/data/horse_rle8.bmp", "image/data/horse_grey.bmp");
+        CompareBMPImage("image/data/horse_rle8.bmp", "image/data/horse_rle8_flipped.bmp");
+
+        CompareBMPImage("image/data/horse_rle4.bmp", "image/data/horse_rle4_flipped.bmp");
+    };
 
 //     SUBCASE("ScaleCompare")
 //     {
@@ -1379,58 +1381,58 @@ ut::suite BaseImageTest = []
 //             "image/data/cross_nearest_neighb_256x256.png");
 //     }
 
-//     SUBCASE("CreateBitmapFromCursor")
-//     {
-// #if !defined __WXOSX_IPHONE__ && !defined __WXDFB__ && !defined __WXMOTIF__ && !defined __WXX11__
+    "CreateBitmapFromCursor"_test = []
+    {
+#if !defined __WXOSX_IPHONE__ && !defined __WXDFB__ && !defined __WXMOTIF__ && !defined __WXX11__
 
-//         wxImage image("image/data/wx.png");
-//         wxCursor cursor(image);
-//         wxBitmap bitmap(cursor);
+        wxImage image("image/data/wx.png");
+        wxCursor cursor(image);
+        wxBitmap bitmap(cursor);
 
-// #if defined(__WXGTK__)
-//         // cursor to bitmap could fail depending on windowing system and cursor (gdk-cursor-get-image)
-//         if (!bitmap.IsOk())
-//             return;
-// #endif
+#if defined(__WXGTK__)
+        // cursor to bitmap could fail depending on windowing system and cursor (gdk-cursor-get-image)
+        if (!bitmap.IsOk())
+            return;
+#endif
 
-//         wxImage result = bitmap.ConvertToImage();
+        wxImage result = bitmap.ConvertToImage();
 
-//         // on Windows the cursor is always scaled to 32x32px (96 DPI)
-//         // on macOS the resulting bitmap size depends on the DPI
-//         if (image.GetSize() == result.GetSize())
-//         {
-//             // FIXME: Figure out better way.
-//             //CHECK_THAT(image, RGBASimilarTo(result, 2));
-//         }
-//         else
-//         {
-//             std::vector<wxPoint> coords = {
-//                 wxPoint(14, 10), // blue square
-//                 wxPoint(8, 22),  // red square
-//                 wxPoint(26, 18), // yellow square
-//                 wxPoint(25, 5)   // empty / tranparent
-//             };
+        // on Windows the cursor is always scaled to 32x32px (96 DPI)
+        // on macOS the resulting bitmap size depends on the DPI
+        if (image.GetSize() == result.GetSize())
+        {
+            // FIXME: Figure out better way.
+            //CHECK_THAT(image, RGBASimilarTo(result, 2));
+        }
+        else
+        {
+            std::vector<wxPoint> coords = {
+                wxPoint(14, 10), // blue square
+                wxPoint(8, 22),  // red square
+                wxPoint(26, 18), // yellow square
+                wxPoint(25, 5)   // empty / tranparent
+            };
 
-//             for (const auto p1 : coords)
-//             {
-//                 wxPoint p2 = wxPoint(p1.x * (result.GetWidth() / (double)image.GetWidth()), p1.y * (result.GetHeight() / (double)image.GetHeight()));
+            for (const auto p1 : coords)
+            {
+                wxPoint p2 = wxPoint(p1.x * (result.GetWidth() / (double)image.GetWidth()), p1.y * (result.GetHeight() / (double)image.GetHeight()));
 
-// #if defined(__WXMSW__)
-//                 // when the cursor / result image is larger than the source image, the original image is centered in the result image
-//                 if (result.GetWidth() > image.GetWidth())
-//                     p2.x = (result.GetWidth() / 2) + (p1.x - (image.GetWidth() / 2));
-//                 if (result.GetHeight() > image.GetHeight())
-//                     p2.y = (result.GetHeight() / 2) + (p1.y - (image.GetHeight() / 2));
-// #endif
+#if defined(__WXMSW__)
+                // when the cursor / result image is larger than the source image, the original image is centered in the result image
+                if (result.GetWidth() > image.GetWidth())
+                    p2.x = (result.GetWidth() / 2) + (p1.x - (image.GetWidth() / 2));
+                if (result.GetHeight() > image.GetHeight())
+                    p2.y = (result.GetHeight() / 2) + (p1.y - (image.GetHeight() / 2));
+#endif
 
-//                 wxColour cSrc(image.GetRed(p1.x, p1.y), image.GetGreen(p1.x, p1.y), image.GetBlue(p1.x, p1.y), image.GetAlpha(p1.x, p1.y));
-//                 wxColour cRes(result.GetRed(p2.x, p2.y), result.GetGreen(p2.x, p2.y), result.GetBlue(p2.x, p2.y), result.GetAlpha(p2.x, p2.y));
+                wxColour cSrc(image.GetRed(p1.x, p1.y), image.GetGreen(p1.x, p1.y), image.GetBlue(p1.x, p1.y), image.GetAlpha(p1.x, p1.y));
+                wxColour cRes(result.GetRed(p2.x, p2.y), result.GetGreen(p2.x, p2.y), result.GetBlue(p2.x, p2.y), result.GetAlpha(p2.x, p2.y));
 
-//                 CHECK_EQUAL_COLOUR_RGBA(cRes, cSrc);
-//             }
-//         }
-// #endif
-//     }
+                CHECK_EQUAL_COLOUR_RGBA(cRes, cSrc);
+            }
+        }
+#endif
+    };
 };
 
 // TEST_CASE("Image test")
@@ -1965,7 +1967,6 @@ TEST_CASE("wxImage::Paste")
         target.InitAlpha();
         target.Paste(to_be_pasted, -12325, 48, wxIMAGE_ALPHA_BLEND_COMPOSE);
     }
-
 }
 
 TEST_CASE("wxImage::RGBtoHSV")
