@@ -7,13 +7,11 @@
 //              (c) 2012 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
 #include "wx/app.h"
 #include "wx/font.h"
 #include "wx/window.h"
-
-import WX.Test.Prec;
 
 // wxCairoRenderer::CreateMeasuringContext() is not implement for wxX11
 #if wxUSE_GRAPHICS_CONTEXT && !defined(__WXX11__)
@@ -27,9 +25,16 @@ import WX.Test.Prec;
 
 #include "asserthelper.h"
 
+export module WX.Test.Measuring;
+
+import WX.MetaTest;
+import WX.Test.Prec;
+
 // ----------------------------------------------------------------------------
 // helper for XXXTextExtent() methods
 // ----------------------------------------------------------------------------
+
+namespace ut = boost::ut;
 
 template <typename T>
 struct GetTextExtentTester
@@ -37,42 +42,42 @@ struct GetTextExtentTester
     // Constructor runs a couple of simple tests for GetTextExtent().
     GetTextExtentTester(const T& obj)
     {
+        using namespace ut;
+
         // Test that getting the height only doesn't crash.
         auto y = obj.GetTextExtent("H").y;
 
-        CHECK( y > 1 );
+        expect( y > 1 );
 
         auto size = obj.GetTextExtent("Hello");
-        CHECK( size.x > 1 );
-        CHECK( size.y == y );
+        expect( size.x > 1 );
+        expect( size.y == y );
 
         // Test that getting text extent of an empty string returns (0, 0).
-        CHECK( obj.GetTextExtent("") == wxSize(0, 0) );
+        expect( obj.GetTextExtent("") == wxSize(0, 0) );
     }
 };
 
-// ----------------------------------------------------------------------------
-// tests themselves
-// ----------------------------------------------------------------------------
-
-TEST_CASE("wxDC::GetTextExtent")
+ut::suite WindowGetTextExtentTest = []
 {
-    wxClientDC dc(wxTheApp->GetTopWindow());
+    using namespace ut;
+
+    wxClientDC dc = wxTheApp->GetTopWindow();
 
     GetTextExtentTester<wxClientDC> testDC(dc);
 
     int w;
     dc.GetMultiLineTextExtent("Good\nbye", &w, nullptr);
     const wxSize sz = dc.GetTextExtent("Good");
-    CHECK( w == sz.x );
+    expect( w == sz.x );
 
-    CHECK( dc.GetMultiLineTextExtent("Good\nbye").y >= 2*sz.y );
+    expect( dc.GetMultiLineTextExtent("Good\nbye").y >= 2*sz.y );
 
     // Check that empty lines get counted
-    CHECK( dc.GetMultiLineTextExtent("\n\n\n").y >= 3*sz.y );
+    expect( dc.GetMultiLineTextExtent("\n\n\n").y >= 3*sz.y );
 
     // And even empty strings count like one line.
-    CHECK( dc.GetMultiLineTextExtent("") == wxSize(0, sz.y) );
+    expect( dc.GetMultiLineTextExtent("") == wxSize(0, sz.y) );
 
     // Test the functions with some other DC kinds also.
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
@@ -89,73 +94,78 @@ TEST_CASE("wxDC::GetTextExtent")
     wxEnhMetaFileDC metadc;
     GetTextExtentTester<wxEnhMetaFileDC> testMF(metadc);
 #endif
-}
+};
 
-TEST_CASE("wxDC::LeadingAndDescent")
+ut::suite DCLeadingAndDescentTest = []
 {
-    wxClientDC dc(wxTheApp->GetTopWindow());
+    using namespace ut;
+
+    wxClientDC dc = wxTheApp->GetTopWindow();
 
     // Retrieving just the descent should work.
     int descent = -17;
     dc.GetTextExtent("foo", &descent, nullptr);
-    CHECK( descent != -17 );
+    expect( descent != -17 );
 
     // Same for external leading.
     int leading = -289;
     dc.GetTextExtent("foo", nullptr, &leading);
-    CHECK( leading != -289 );
+    expect( leading != -289 );
 
     // And both should also work for the empty string as they retrieve the
     // values valid for the entire font and not just this string.
-    int descent2,
-        leading2;
+    int descent2;
+    int leading2;
     dc.GetTextExtent("", &descent2, &leading2);
 
-    CHECK( descent2 == descent );
-    CHECK( leading2 == leading );
-}
+    expect( descent2 == descent );
+    expect( leading2 == leading );
+};
 
-TEST_CASE("wxWindow::GetTextExtent")
+ut::suite DCGetTextExtentTest = []
 {
     wxWindow* const win = wxTheApp->GetTopWindow();
 
     GetTextExtentTester<wxWindow> testWin(*win);
-}
+};
 
-TEST_CASE("wxDC::GetPartialTextExtent")
+ut::suite DCGetPartialTextExtentTest = []
 {
-    wxClientDC dc(wxTheApp->GetTopWindow());
+    using namespace ut;
+
+    wxClientDC dc = wxTheApp->GetTopWindow();
 
     std::vector<int> widths = dc.GetPartialTextExtents("Hello");
     
-    REQUIRE( widths.size() == 5 );
-    CHECK( widths[0] == dc.GetTextExtent("H").x );
-    CHECK( widths[4] == dc.GetTextExtent("Hello").x );
-}
+    expect( widths.size() == 5 );
+    expect( widths[0] == dc.GetTextExtent("H").x );
+    expect( widths[4] == dc.GetTextExtent("Hello").x );
+};
 
 #ifdef TEST_GC
 
-TEST_CASE("wxGC::GetTextExtent")
+ut::suite GCGetTextExtentTest = []
 {
+    using namespace ut;
+
 #ifndef __WXMSW__
     wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDefaultRenderer();
 #else
     wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDirect2DRenderer();
 #endif
 
-    REQUIRE(renderer);
+    expect(renderer);
     std::unique_ptr<wxGraphicsContext> context = renderer->CreateMeasuringContext();
-    REQUIRE(context);
+    expect(context.get() != nullptr);
     wxFont font(12, wxFontFamily::Default, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
-    REQUIRE(font.IsOk());
+    expect(font.IsOk());
     context->SetFont(font, *wxBLACK);
     float descent, externalLeading = 0.0F;
     auto [width, height] = context->GetTextExtent("x", &descent, &externalLeading);
 
     // TODO: Determine a way to make these tests more robust.
-    CHECK(width > 0.0F);
-    CHECK(height > 0.0F);
-
-}
+    expect(width > 0.0F);
+    expect(height > 0.0F);
+};
 
 #endif // TEST_GC

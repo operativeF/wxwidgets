@@ -36,7 +36,7 @@ set(TEST_GUI_SRC
     graphics/bitmap.cpp
     #graphics/colour.cpp # Doesn't work yet.
     graphics/ellipsization.ixx
-    graphics/measuring.cpp
+    graphics/measuring.ixx
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
     graphics/boundingbox.ixx
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
