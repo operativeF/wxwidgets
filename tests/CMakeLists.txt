@@ -100,7 +100,7 @@ set(TEST_GUI_SRC
     # And duplicate this one too as wxExecute behaves differently in
     # console and GUI applications.
     exec/exec.cpp
-    font/fonttest.cpp
+    font/fonttest.ixx
     image/image.ixx
     image/rawbmp.cpp
     #html/htmlparser.cpp # FIXME: Need to get rid of wxArrayString.
