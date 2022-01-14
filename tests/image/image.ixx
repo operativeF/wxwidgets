@@ -1435,90 +1435,10 @@ ut::suite BaseImageTest = []
     };
 };
 
-// TEST_CASE("Image test")
-// {
-//     // the formats we're going to test:
-//     wxImage::AddHandler(new wxICOHandler);
-//     wxImage::AddHandler(new wxXPMHandler);
-//     wxImage::AddHandler(new wxPNGHandler);
-//     wxImage::AddHandler(new wxANIHandler);
-//     wxImage::AddHandler(new wxBMPHandler);
-//     wxImage::AddHandler(new wxCURHandler);
-// #if wxUSE_GIF
-//     wxImage::AddHandler(new wxGIFHandler);
-// #endif // wxUSE_GIF
-// #if wxUSE_JPEG
-//     wxImage::AddHandler(new wxJPEGHandler);
-// #endif
-//     wxImage::AddHandler(new wxPCXHandler);
-//     wxImage::AddHandler(new wxPNMHandler);
-//     wxImage::AddHandler(new wxTGAHandler);
-// #if wxUSE_LIBTIFF
-//     wxImage::AddHandler(new wxTIFFHandler);
-// #endif // wxUSE_LIBTIFF
-
-//     // FIXME: Until performance improves, we're not using sockets.
-//     // Maybe sockets should just be gutted for Networking TS or Boost Beast.
-//     /*
-//     SUBCASE("LoadFromSocketStream")
-//     {
-//         wxSocketBase::Initialize();
-
-//         if (!IsNetworkAvailable())      // implemented in test.cpp
-//         {
-//             wxLogWarning("No network connectivity; skipping the "
-//                          "ImageTestCase::LoadFromSocketStream test unit.");
-//             return;
-//         }
-
-//         struct {
-//             const char* url;
-//             wxBitmapType type;
-//         } testData[] =
-//         {
-//             { "http://www.wxwidgets.org/assets/img/header-logo.png", wxBitmapType::PNG },
-//             { "http://www.wxwidgets.org/assets/ico/favicon-1.ico", wxBitmapType::ICO }
-//         };
-
-//         for (unsigned int i=0; i<WXSIZEOF(testData); i++)
-//         {
-//             wxURL url(testData[i].url);
-//             CHECK_MESSAGE
-//             (
-//                 wxURLError::None == url.GetError(),
-//                 ("Constructing URL \"%s\" failed.", testData[i].url)
-//             );
-
-//             wxInputStream *in_stream = url.GetInputStream();
-//             CHECK_MESSAGE
-//             (
-//                 (in_stream&& in_stream->IsOk()),
-//                 ("Opening URL \"%s\" failed.", testData[i].url)
-//             );
-
-//             wxImage img;
-
-//             // NOTE: it's important to inform wxImage about the type of the image being
-//             //       loaded otherwise it will try to autodetect the format, but that
-//             //       requires a seekable stream!
-//             CHECK_MESSAGE
-//             (
-//                 img.LoadFile(*in_stream, testData[i].type),
-//                 ("Loading image from \"%s\" failed.", testData[i].url)
-//             );
-
-//             delete in_stream;
-//         }
-
-//         wxSocketBase::Shutdown();
-//     }
-//     */
-// }
-
-/*
-
-TEST_CASE("wxImage::Paste")
+ut::suite wxImagePasteTest = []
 {
+    using namespace ut;
+    
     const static char* squares_xpm[] =
     {
         "9 9 7 1",
@@ -1596,7 +1516,7 @@ TEST_CASE("wxImage::Paste")
     static const bool
         registeredHandler = (wxImage::AddHandler(new wxPNGHandler()), true);
 
-    SUBCASE("Paste same size image")
+    "Paste same size image"_test = []
     {
         wxImage actual(squares_xpm);
         wxImage paste(toggle_equal_size_xpm);
@@ -1609,9 +1529,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste larger image")
+    "Paste larger image"_test = []
     {
         const static char* toggle_larger_size_xpm[] =
         {
@@ -1639,9 +1559,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, -2, -2);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste smaller image")
+    "Paste smaller image"_test = []
     {
         const static char* toggle_smaller_size_xpm[] =
         {
@@ -1682,9 +1602,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 2, 2);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste beyond top left corner")
+    "Paste beyond top left corner"_test = []
     {
         const static char* expected_xpm[] =
         {
@@ -1713,9 +1633,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, -5, -5);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste beyond top right corner")
+    "Paste beyond top right corner"_test = []
     {
         const static char* expected_xpm[] =
         {
@@ -1743,9 +1663,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 5, -5);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste beyond bottom right corner")
+    "Paste beyond bottom right corner"_test = []
     {
         const static char* expected_xpm[] =
         {
@@ -1773,9 +1693,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 5, 5);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste beyond bottom left corner")
+    "Paste beyond bottom left corner"_test = []
     {
         const static char* expected_xpm[] =
         {
@@ -1803,23 +1723,24 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, -5, 5);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
+    };
 
-    SUBCASE("Paste fully opaque image onto blank image without alpha")
+    "Paste fully opaque image onto blank image without alpha"_test = []
     {
         const wxImage background("image/data/paste_input_background.png");
-        REQUIRE(background.IsOk());
+        expect(background.IsOk());
 
         wxImage actual(background.GetSize());
         actual.Paste(background, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(background));
-        CHECK(!actual.HasAlpha());
-    }
-    SUBCASE("Paste fully opaque image onto blank image with alpha")
+        expect(!actual.HasAlpha());
+    };
+
+    "Paste fully opaque image onto blank image with alpha"_test = []
     {
         const wxImage background("image/data/paste_input_background.png");
-        REQUIRE(background.IsOk());
+        expect(background.IsOk());
 
         wxImage actual(background.GetSize());
         actual.InitAlpha();
@@ -1827,11 +1748,12 @@ TEST_CASE("wxImage::Paste")
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(background));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste fully transparent image")
+    };
+
+    "Paste fully transparent image"_test = []
     {
         const wxImage background("image/data/paste_input_background.png");
-        REQUIRE(background.IsOk());
+        expect(background.IsOk());
 
         wxImage actual = background.Copy();
         wxImage transparent(actual.GetSize());
@@ -1841,60 +1763,64 @@ TEST_CASE("wxImage::Paste")
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(background));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste image with transparent region")
+    };
+
+    "Paste image with transparent region"_test = []
     {
         wxImage actual("image/data/paste_input_background.png");
-        REQUIRE(actual.IsOk());
+        expect(actual.IsOk());
 
         const wxImage opaque_square("image/data/paste_input_overlay_transparent_border_opaque_square.png");
-        REQUIRE(opaque_square.IsOk());
+        expect(opaque_square.IsOk());
 
         actual.Paste(opaque_square, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(wxImage("image/data/paste_result_background_plus_overlay_transparent_border_opaque_square.png")));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste image with semi transparent region")
+    };
+
+    "Paste image with semi transparent region"_test = []
     {
         wxImage actual("image/data/paste_input_background.png");
-        REQUIRE(actual.IsOk());
+        expect(actual.IsOk());
 
         const wxImage transparent_square("image/data/paste_input_overlay_transparent_border_semitransparent_square.png");
-        REQUIRE(transparent_square.IsOk());
+        expect(transparent_square.IsOk());
 
         actual.Paste(transparent_square, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(wxImage("image/data/paste_result_background_plus_overlay_transparent_border_semitransparent_square.png")));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste two semi transparent images on top of background")
+    };
+
+    "Paste two semi transparent images on top of background"_test = []
     {
         wxImage actual("image/data/paste_input_background.png");
-        REQUIRE(actual.IsOk());
+        expect(actual.IsOk());
 
         const wxImage transparent_square("image/data/paste_input_overlay_transparent_border_semitransparent_square.png");
-        REQUIRE(transparent_square.IsOk());
+        expect(transparent_square.IsOk());
 
         const wxImage transparent_circle("image/data/paste_input_overlay_transparent_border_semitransparent_circle.png");
-        REQUIRE(transparent_circle.IsOk());
+        expect(transparent_circle.IsOk());
 
         actual.Paste(transparent_circle, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         actual.Paste(transparent_square, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSimilarTo(wxImage("image/data/paste_result_background_plus_circle_plus_square.png"), 1));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste two semi transparent images together first, then on top of background")
+    };
+
+    "Paste two semi transparent images together first, then on top of background"_test = []
     {
         wxImage actual("image/data/paste_input_background.png");
-        REQUIRE(actual.IsOk());
+        expect(actual.IsOk());
 
         const wxImage transparent_square("image/data/paste_input_overlay_transparent_border_semitransparent_square.png");
-        REQUIRE(transparent_square.IsOk());
+        expect(transparent_square.IsOk());
 
         const wxImage transparent_circle("image/data/paste_input_overlay_transparent_border_semitransparent_circle.png");
-        REQUIRE(transparent_circle.IsOk());
+        expect(transparent_circle.IsOk());
 
         wxImage circle = transparent_circle.Copy();
         circle.Paste(transparent_square, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
@@ -1903,14 +1829,15 @@ TEST_CASE("wxImage::Paste")
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSimilarTo(wxImage("image/data/paste_result_background_plus_circle_plus_square.png"), 2));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(wxALPHA_OPAQUE));
-    }
-    SUBCASE("Paste semitransparent image over transparent image")
+    };
+
+    "Paste semitransparent image over transparent image"_test = []
     {
         const wxImage transparent_square("image/data/paste_input_overlay_transparent_border_semitransparent_square.png");
-        REQUIRE(transparent_square.IsOk());
+        expect(transparent_square.IsOk());
 
         const wxImage transparent_circle("image/data/paste_input_overlay_transparent_border_semitransparent_circle.png");
-        REQUIRE(transparent_circle.IsOk());
+        expect(transparent_circle.IsOk());
 
         wxImage actual(transparent_circle.GetSize());
         actual.InitAlpha();
@@ -1922,8 +1849,10 @@ TEST_CASE("wxImage::Paste")
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSimilarTo(wxImage("image/data/paste_result_no_background_square_over_circle.png"), 1));
         //CHECK_THAT(actual, CenterAlphaPixelEquals(224));
-    }
-    SUBCASE("Paste fully transparent (masked) image over light image") // todo make test case for 'blend with mask'
+    };
+
+    // todo make test case for 'blend with mask'
+    "Paste fully transparent (masked) image over light image"_test = []
     {
         wxImage actual(light_image_xpm);
         actual.InitAlpha();
@@ -1932,8 +1861,10 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
-    SUBCASE("Paste fully black (masked) image over light image") // todo make test case for 'blend with mask'
+    };
+
+    // todo make test case for 'blend with mask'
+    "Paste fully black (masked) image over light image"_test = []
     {
         wxImage actual(light_image_xpm);
         actual.InitAlpha();
@@ -1942,8 +1873,9 @@ TEST_CASE("wxImage::Paste")
         actual.Paste(paste, 0, 0, wxIMAGE_ALPHA_BLEND_COMPOSE);
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, RGBSameAs(expected));
-    }
-    SUBCASE("Paste dark image over light image")
+    };
+
+    "Paste dark image over light image"_test = []
     {
         wxImage black("image/data/paste_input_black.png");
         wxImage actual("image/data/paste_input_background.png");
@@ -1952,53 +1884,59 @@ TEST_CASE("wxImage::Paste")
         // FIXME: Figure out better way.
         //CHECK_THAT(actual, CenterAlphaPixelEquals(255));
         //CHECK_THAT(actual, RGBSameAs(black));
-    }
-    SUBCASE("Paste large image with negative vertical offset")
+    };
+
+    "Paste large image with negative vertical offset"_test = []
     {
         wxImage target(442, 249);
         wxImage to_be_pasted(345, 24900);
         target.InitAlpha();
         target.Paste(to_be_pasted, 48, -12325, wxIMAGE_ALPHA_BLEND_COMPOSE);
-    }
-    SUBCASE("Paste large image with negative horizontal offset")
+    };
+    
+    "Paste large image with negative horizontal offset"_test = []
     {
         wxImage target(249, 442);
         wxImage to_be_pasted(24900, 345);
         target.InitAlpha();
         target.Paste(to_be_pasted, -12325, 48, wxIMAGE_ALPHA_BLEND_COMPOSE);
-    }
-}
+    };
+};
 
-TEST_CASE("wxImage::RGBtoHSV")
+ut::suite ImageRGBtoHSVTests = []
 {
-    SUBCASE("RGB(0,0,0) (Black) to HSV")
+    using namespace ut;
+
+    "RGB(0,0,0) (Black) to HSV"_test = []
     {
        RGBValue rgbBlack(0, 0, 0);
        wxImage::HSVValue hsvBlack = wxImage::RGBtoHSV(rgbBlack);
 
-       CHECK(hsvBlack.value == doctest::Approx(0.0));
+       expect(hsvBlack.value == doctest::Approx(0.0));
        // saturation and hue are undefined
-    }
-    SUBCASE("RGB(255,255,255) (White) to HSV")
+    };
+    
+    "RGB(255,255,255) (White) to HSV"_test = []
     {
        RGBValue rgbWhite(255, 255, 255);
        wxImage::HSVValue hsvWhite = wxImage::RGBtoHSV(rgbWhite);
 
-       CHECK(hsvWhite.saturation == doctest::Approx(0.0));
-       CHECK(hsvWhite.value == doctest::Approx(1.0));
+       expect(hsvWhite.saturation == doctest::Approx(0.0));
+       expect(hsvWhite.value == doctest::Approx(1.0));
        // hue is undefined
-    }
-    SUBCASE("RGB(0,255,0) (Green) to HSV")
+    };
+
+    "RGB(0,255,0) (Green) to HSV"_test = []
     {
        RGBValue rgbGreen(0, 255, 0);
        wxImage::HSVValue hsvGreen = wxImage::RGBtoHSV(rgbGreen);
 
-       CHECK(hsvGreen.hue == doctest::Approx(1.0/3.0));
-       CHECK(hsvGreen.saturation == doctest::Approx(1.0));
-       CHECK(hsvGreen.value == doctest::Approx(1.0));
-    }
+       expect(hsvGreen.hue == doctest::Approx(1.0/3.0));
+       expect(hsvGreen.saturation == doctest::Approx(1.0));
+       expect(hsvGreen.value == doctest::Approx(1.0));
+    };
 
-    SUBCASE("RGB to HSV to RGB")
+    "RGB to HSV to RGB"_test = []
     {
         static constexpr std::array<RGBValue, 10> rgbValues =
         {{
@@ -2019,25 +1957,27 @@ TEST_CASE("wxImage::RGBtoHSV")
             wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
             RGBValue rgbRoundtrip = wxImage::HSVtoRGB(hsvValue);
 
-            CHECK(rgbRoundtrip.red == rgbValue.red);
-            CHECK(rgbRoundtrip.green == rgbValue.green);
-            CHECK(rgbRoundtrip.blue == rgbValue.blue);
+            expect(rgbRoundtrip.red == rgbValue.red);
+            expect(rgbRoundtrip.green == rgbValue.green);
+            expect(rgbRoundtrip.blue == rgbValue.blue);
         }
-    }
-}
+    };
+};
 
-TEST_CASE("wxImage::Clipboard")
+ut::suite ImageClipboardTests = []
 {
+    using namespace ut;
+
 #if wxUSE_CLIPBOARD && wxUSE_DATAOBJ
     wxInitAllImageHandlers();
 
     wxImage imgOriginal;
-    REQUIRE(imgOriginal.LoadFile("image/data/horse.png") == true);
+    expect(imgOriginal.LoadFile("image/data/horse.png") == true);
 
     wxImageDataObject* dobj1 = new wxImageDataObject(imgOriginal);
     {
         wxClipboardLocker lockClip;
-        REQUIRE(wxTheClipboard->SetData(dobj1) == true);
+        expect(wxTheClipboard->SetData(dobj1) == true);
     }
 
     wxYield();
@@ -2045,35 +1985,37 @@ TEST_CASE("wxImage::Clipboard")
     wxImageDataObject dobj2;
     {
         wxClipboardLocker lockClip;
-        REQUIRE(wxTheClipboard->GetData(dobj2) == true);
+        expect(wxTheClipboard->GetData(dobj2) == true);
     }
     wxImage imgRetrieved = dobj2.GetImage();
-    REQUIRE(imgRetrieved.IsOk());
+    expect(imgRetrieved.IsOk());
 
     // FIXME: Figure out better way to do this.
     //CHECK_THAT(imgOriginal, RGBASameAs(imgRetrieved));
 #endif // wxUSE_CLIPBOARD && wxUSE_DATAOBJ
-}
+};
 
-TEST_CASE("wxImage::InitAlpha")
+ut::suite ImageAlphaTests = []
 {
+    using namespace ut;
+
     const wxColour maskCol(*wxRED);
     const wxColour fillCol(*wxGREEN);
 
-    SUBCASE("RGB image without mask")
+    "RGB image without mask"_test = [=]
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
         img.SetRGB(0, 1, maskCol.Red(), maskCol.Green(), maskCol.Blue());
         img.SetRGB(1, 0, fillCol.Red(), fillCol.Green(), fillCol.Blue());
         img.SetRGB(1, 1, fillCol.Red(), fillCol.Green(), fillCol.Blue());
-        REQUIRE_FALSE(img.HasAlpha());
-        REQUIRE_FALSE(img.HasMask());
+        expect(!img.HasAlpha());
+        expect(!img.HasMask());
 
         wxImage imgRes = img;
         imgRes.InitAlpha();
-        REQUIRE(imgRes.HasAlpha() == true);
-        REQUIRE_FALSE(imgRes.HasMask());
+        expect(imgRes.HasAlpha() == true);
+        expect(!imgRes.HasMask());
 
         for (int y = 0; y < img.GetHeight(); y++)
             for (int x = 0; x < img.GetWidth(); x++)
@@ -2082,11 +2024,11 @@ TEST_CASE("wxImage::InitAlpha")
                 wxColour cRes(imgRes.GetRed(x, y), imgRes.GetGreen(x, y), imgRes.GetBlue(x, y), imgRes.GetAlpha(x, y));
 
                 CHECK_EQUAL_COLOUR_RGB(cRes, cSrc);
-                CHECK((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_OPAQUE);
+                expect((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_OPAQUE);
             }
-    }
+    };
 
-    SUBCASE("RGB image with mask")
+    "RGB image with mask"_test = [=]
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -2094,13 +2036,13 @@ TEST_CASE("wxImage::InitAlpha")
         img.SetRGB(1, 0, fillCol.Red(), fillCol.Green(), fillCol.Blue());
         img.SetRGB(1, 1, fillCol.Red(), fillCol.Green(), fillCol.Blue());
         img.SetMaskColour(maskCol.Red(), maskCol.Green(), maskCol.Blue());
-        REQUIRE_FALSE(img.HasAlpha());
-        REQUIRE(img.HasMask() == true);
+        expect(!img.HasAlpha());
+        expect(img.HasMask() == true);
 
         wxImage imgRes = img;
         imgRes.InitAlpha();
-        REQUIRE(imgRes.HasAlpha() == true);
-        REQUIRE_FALSE(imgRes.HasMask());
+        expect(imgRes.HasAlpha() == true);
+        expect(!imgRes.HasMask());
 
         for ( int y = 0; y < img.GetHeight(); y++ )
             for ( int x = 0; x < img.GetWidth(); x++ )
@@ -2111,16 +2053,16 @@ TEST_CASE("wxImage::InitAlpha")
                 CHECK_EQUAL_COLOUR_RGB(cRes, cSrc);
                 if ( cSrc == maskCol )
                 {
-                    CHECK((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_TRANSPARENT);
+                    expect((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_TRANSPARENT);
                 }
                 else
                 {
-                    CHECK((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_OPAQUE);
+                    expect((int)cRes.Alpha() == (int)wxIMAGE_ALPHA_OPAQUE);
                 }
             }
-    }
+    };
 
-    SUBCASE("RGBA image without mask")
+    "RGBA image without mask"_test = [=]
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -2132,13 +2074,13 @@ TEST_CASE("wxImage::InitAlpha")
         img.SetAlpha(0, 1, 0);
         img.SetAlpha(1, 0, 128);
         img.SetAlpha(1, 1, 0);
-        REQUIRE(img.HasAlpha() == true);
-        REQUIRE_FALSE(img.HasMask());
+        expect(img.HasAlpha() == true);
+        expect(!img.HasMask());
 
         wxImage imgRes = img;
-        CHECK_THROWS(imgRes.InitAlpha());
-        REQUIRE(imgRes.HasAlpha() == true);
-        REQUIRE_FALSE(imgRes.HasMask());
+        expect(throws([&imgRes] { imgRes.InitAlpha(); } ));
+        expect(imgRes.HasAlpha() == true);
+        expect(!imgRes.HasMask());
 
         for ( int y = 0; y < img.GetHeight(); y++ )
             for ( int x = 0; x < img.GetWidth(); x++ )
@@ -2148,9 +2090,9 @@ TEST_CASE("wxImage::InitAlpha")
 
                 CHECK_EQUAL_COLOUR_RGBA(cRes, cSrc);
             }
-    }
+    };
 
-    SUBCASE("RGBA image with mask")
+    "RGBA image with mask"_test = [=]
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -2163,13 +2105,13 @@ TEST_CASE("wxImage::InitAlpha")
         img.SetAlpha(1, 0, 128);
         img.SetAlpha(1, 1, 0);
         img.SetMaskColour(maskCol.Red(), maskCol.Green(), maskCol.Blue());
-        REQUIRE(img.HasAlpha() == true);
-        REQUIRE(img.HasMask() == true);
+        expect(img.HasAlpha() == true);
+        expect(img.HasMask() == true);
 
         wxImage imgRes = img;
-        CHECK_THROWS(imgRes.InitAlpha());
-        REQUIRE(imgRes.HasAlpha() == true);
-        REQUIRE(imgRes.HasMask() == true);
+        expect(throws([&imgRes] { imgRes.InitAlpha(); }));
+        expect(imgRes.HasAlpha() == true);
+        expect(imgRes.HasMask() == true);
 
         for ( int y = 0; y < img.GetHeight(); y++ )
             for ( int x = 0; x < img.GetWidth(); x++ )
@@ -2179,11 +2121,13 @@ TEST_CASE("wxImage::InitAlpha")
 
                 CHECK_EQUAL_COLOUR_RGBA(cRes, cSrc);
             }
-    }
-}
+    };
+};
 
-TEST_CASE("wxImage::XPM")
+ut::suite ImageXPMTests = []
 {
+    using namespace ut;
+
    static const char * dummy_xpm[] = {
       "16 16 2 1",
       "@ c Black",
@@ -2207,73 +2151,73 @@ TEST_CASE("wxImage::XPM")
    };
 
    wxImage image(dummy_xpm);
-   CHECK( image.IsOk() );
+   expect( image.IsOk() );
 
    // The goal here is mostly just to check that this code compiles, i.e. that
    // creating all these classes from XPM works.
-   CHECK( wxBitmap(dummy_xpm).IsOk() );
-   CHECK( wxCursor(dummy_xpm).IsOk() );
-   CHECK( wxIcon(dummy_xpm).IsOk() );
-}
+   expect( wxBitmap(dummy_xpm).IsOk() );
+   expect( wxCursor(dummy_xpm).IsOk() );
+   expect( wxIcon(dummy_xpm).IsOk() );
+};
 
-TEST_CASE("wxImage::ChangeColours")
+ut::suite ImageColorChangeTests = []
 {
+    using namespace ut;
+
     wxImage original;
-    REQUIRE(original.LoadFile("image/data/toucan.png", wxBitmapType::PNG));
+    expect(original.LoadFile("image/data/toucan.png", wxBitmapType::PNG));
 
     wxImage test;
     wxImage expected;
 
     test = original;
     test.RotateHue(0.538);
-    REQUIRE(expected.LoadFile("image/data/toucan_hue_0.538.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_hue_0.538.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeSaturation(-0.41);
-    REQUIRE(expected.LoadFile("image/data/toucan_sat_-0.41.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_sat_-0.41.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeBrightness(-0.259);
-    REQUIRE(expected.LoadFile("image/data/toucan_bright_-0.259.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_bright_-0.259.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeHSV(0.538, -0.41, -0.259);
-    REQUIRE(expected.LoadFile("image/data/toucan_hsv_0.538_-0.41_-0.259.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_hsv_0.538_-0.41_-0.259.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ChangeLightness(46);
-    REQUIRE(expected.LoadFile("image/data/toucan_light_46.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_light_46.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToDisabled(240);
-    REQUIRE(expected.LoadFile("image/data/toucan_dis_240.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_dis_240.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToGreyscale();
-    REQUIRE(expected.LoadFile("image/data/toucan_grey.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_grey.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToMono(255, 255, 255);
-    REQUIRE(expected.LoadFile("image/data/toucan_mono_255_255_255.png", wxBitmapType::PNG));
+    expect(expected.LoadFile("image/data/toucan_mono_255_255_255.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
-}
-
-*/
+};
 
 /*
     TODO: add lots of more tests to wxImage functions
