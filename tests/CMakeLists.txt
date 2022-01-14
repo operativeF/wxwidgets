@@ -50,14 +50,14 @@ set(TEST_GUI_SRC
     controls/bitmapcomboboxtest.cpp
     controls/bitmaptogglebuttontest.cpp
     controls/buttontest.cpp
-    controls/checkboxtest.cpp
+    controls/checkboxtest.ixx
     controls/checklistboxtest.cpp
     controls/choicebooktest.cpp
     controls/choicetest.cpp
     controls/comboboxtest.cpp
     controls/dataviewctrltest.cpp
     controls/datepickerctrltest.cpp
-    controls/frametest.cpp
+    controls/frametest.ixx
     controls/gaugetest.cpp
     controls/gridtest.cpp
     controls/headerctrltest.cpp
@@ -108,7 +108,7 @@ set(TEST_GUI_SRC
     #html/htmprint.cpp
     menu/accelentry.ixx
     menu/menu.cpp
-    misc/guifuncs.cpp
+    misc/guifuncs.ixx
     misc/selstoretest.cpp
     #misc/garbage.cpp
     misc/safearrayconverttest.cpp

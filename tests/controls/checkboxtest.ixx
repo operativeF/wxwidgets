@@ -6,19 +6,23 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#if wxUSE_CHECKBOX
+module;
 
 #include "wx/app.h"
 #include "wx/checkbox.h"
 
 #include "testableframe.h"
 
+#include <memory>
+
+export module WX.Test.Checkbox;
+
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import <tuple>;
 
+#if wxUSE_CHECKBOX
 
 // Initialize m_check with a new checkbox with the specified style
 //
@@ -26,79 +30,88 @@ import <tuple>;
 // use inside CHECK_THROWS(), its return value doesn't have
 // any meaning otherwise
 
-TEST_CASE("Check")
+namespace ut = boost::ut;
+
+ut::suite StandardCheckBoxTest = []
 {
+    using namespace ut;
+
     auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(),
                                                 wxID_ANY, "Check box");
 
     EventCounter clicked(m_check.get(), wxEVT_CHECKBOX);
 
     //We should be unchecked by default
-    CHECK(!m_check->IsChecked());
+    expect(!m_check->IsChecked());
 
     m_check->SetValue(true);
 
-    CHECK(m_check->IsChecked());
+    expect(m_check->IsChecked());
 
     m_check->SetValue(false);
 
-    CHECK(!m_check->IsChecked());
+    expect(!m_check->IsChecked());
 
     m_check->Set3StateValue(wxCheckBoxState::Checked);
 
-    CHECK(m_check->IsChecked());
+    expect(m_check->IsChecked());
 
     m_check->Set3StateValue(wxCheckBoxState::Unchecked);
 
-    CHECK(!m_check->IsChecked());
+    expect(!m_check->IsChecked());
 
     //None of these should send events
-    CHECK_EQ(0, clicked.GetCount());
-}
+    expect(0 == clicked.GetCount());
+};
 
 #ifdef wxHAS_3STATE_CHECKBOX
-TEST_CASE("ThirdState")
+ut::suite ThirdStateCBTest = []
 {
+    using namespace ut;
+
     auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
                                             wxDefaultPosition, wxDefaultSize, wxCHK_3STATE);
 
-    CHECK_EQ(wxCheckBoxState::Unchecked, m_check->Get3StateValue());
-    CHECK(m_check->Is3State());
-    CHECK(!m_check->Is3rdStateAllowedForUser());
+    expect(wxCheckBoxState::Unchecked == m_check->Get3StateValue());
+    expect(m_check->Is3State());
+    expect(!m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CHECK_EQ(wxCheckBoxState::Checked, m_check->Get3StateValue());
+    expect(wxCheckBoxState::Checked == m_check->Get3StateValue());
 
     m_check->Set3StateValue(wxCheckBoxState::Indeterminate);
 
-    CHECK_EQ(wxCheckBoxState::Indeterminate, m_check->Get3StateValue());
-}
+    expect(wxCheckBoxState::Indeterminate == m_check->Get3StateValue());
+};
 
-TEST_CASE("ThirdStateUser")
+ut::suite ThirdStateCBUserTest = []
 {
+    using namespace ut;
+
     auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize, wxCHK_3STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER);
 
-    CHECK_EQ(wxCheckBoxState::Unchecked, m_check->Get3StateValue());
-    CHECK(m_check->Is3State());
-    CHECK(m_check->Is3rdStateAllowedForUser());
+    expect(wxCheckBoxState::Unchecked == m_check->Get3StateValue());
+    expect(m_check->Is3State());
+    expect(m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CHECK_EQ(wxCheckBoxState::Checked, m_check->Get3StateValue());
+    expect(wxCheckBoxState::Checked == m_check->Get3StateValue());
 
     m_check->Set3StateValue(wxCheckBoxState::Indeterminate);
 
-    CHECK_EQ(wxCheckBoxState::Indeterminate, m_check->Get3StateValue());
-}
+    expect(wxCheckBoxState::Indeterminate == m_check->Get3StateValue());
+};
 
-TEST_CASE("InvalidStyles")
+ut::suite InvalidStylesCBTest = []
 {
+    using namespace ut;
     // Check that using incompatible styles doesn't work.
-    CHECK_THROWS( std::ignore = std::make_unique<wxCheckBox>(
+    expect(throws([] { std::ignore = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
-        wxDefaultPosition, wxDefaultSize, wxCHK_2STATE | wxCHK_3STATE) );
+        wxDefaultPosition, wxDefaultSize, wxCHK_2STATE | wxCHK_3STATE); }));
 
     // FIXME: out of scope wxCheckbox instance
 #if !wxDEBUG_LEVEL
@@ -106,10 +119,10 @@ TEST_CASE("InvalidStyles")
     //CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
-    CHECK_THROWS( std::ignore = std::make_unique<wxCheckBox>(
+    expect(throws([] { std::ignore = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize,
-        wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER));
+        wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER); }));
 
     // FIXME: out of scope wxCheckbox instance
 #if !wxDEBUG_LEVEL
@@ -118,11 +131,11 @@ TEST_CASE("InvalidStyles")
 #endif
 
     // wxCHK_ALLOW_3RD_STATE_FOR_USER without wxCHK_3STATE doesn't work.
-    CHECK_THROWS( std::ignore = std::make_unique<wxCheckBox>(
+    expect(throws([] { std::ignore = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize,
-        wxCHK_ALLOW_3RD_STATE_FOR_USER));
-}
+        wxCHK_ALLOW_3RD_STATE_FOR_USER); }));
+};
 
 #endif // wxHAS_3STATE_CHECKBOX
 
