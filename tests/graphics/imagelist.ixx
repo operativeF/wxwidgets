@@ -6,7 +6,7 @@
 // Copyright:   (c) 2021 wxWidgets development team
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
 #include "wx/bitmap.h"
 #include "wx/graphics.h"
@@ -15,14 +15,23 @@
 
 #include "wx/dcmemory.h"
 
+#include <fmt/format.h>
+
+export module WX.Test.ImageList;
+
+import WX.MetaTest;
 import WX.Test.Prec;
 
 // ----------------------------------------------------------------------------
 // tests
 // ----------------------------------------------------------------------------
 
-TEST_CASE("ImageList:WithMask")
+namespace ut = boost::ut;
+
+ut::suite ImageListWithMaskTest = []
 {
+    using namespace ut;
+
     wxInitAllImageHandlers();
 
     wxBitmap bmpRGB(wxSize{32, 32}, 24);
@@ -33,11 +42,12 @@ TEST_CASE("ImageList:WithMask")
         mdc.SetBrush(*wxRED_BRUSH);
         mdc.DrawRectangle(4, 4, 24, 24);
     }
-    REQUIRE(bmpRGB.IsOk());
+
+    expect(bmpRGB.IsOk());
 
     wxBitmap bmpRGBA;
     bmpRGBA.LoadFile("image/data/wx.png", wxBitmapType::PNG);
-    REQUIRE(bmpRGBA.IsOk());
+    expect(bmpRGBA.IsOk());
 
     wxBitmap bmpMask(wxSize{32, 32}, 1);
     {
@@ -55,145 +65,145 @@ TEST_CASE("ImageList:WithMask")
 
     wxBitmap bmpRGBWithMask(bmpRGB);
     bmpRGBWithMask.SetMask(new wxMask(bmpMask));
-    REQUIRE(bmpRGBWithMask.IsOk());
+    expect(bmpRGBWithMask.IsOk());
 
     wxBitmap bmpRGBAWithMask(bmpRGBA);
     bmpRGBAWithMask.SetMask(new wxMask(bmpMask));
-    REQUIRE(bmpRGBAWithMask.IsOk());
+    expect(bmpRGBAWithMask.IsOk());
 
     wxIcon ico;
     ico.LoadFile("image/data/wx.ico", wxBitmapType::ICO);
-    REQUIRE(ico.IsOk());
+    expect(ico.IsOk());
 
-    REQUIRE(bmpRGB.HasAlpha() == false);
-    REQUIRE(bmpRGB.GetMask() == nullptr);
+    expect(bmpRGB.HasAlpha() == false);
+    expect(bmpRGB.GetMask() == nullptr);
 
-    REQUIRE(bmpRGBWithMask.HasAlpha() == false);
-    REQUIRE(bmpRGBWithMask.GetMask() != nullptr);
+    expect(bmpRGBWithMask.HasAlpha() == false);
+    expect(bmpRGBWithMask.GetMask() != nullptr);
 
-    REQUIRE(bmpRGBA.HasAlpha() == true);
-    REQUIRE(bmpRGBA.GetMask() == nullptr);
+    expect(bmpRGBA.HasAlpha() == true);
+    expect(bmpRGBA.GetMask() == nullptr);
 
-    REQUIRE(bmpRGBAWithMask.HasAlpha() == true);
-    REQUIRE(bmpRGBAWithMask.GetMask() != nullptr);
+    expect(bmpRGBAWithMask.HasAlpha() == true);
+    expect(bmpRGBAWithMask.GetMask() != nullptr);
 
     wxImageList il(32, 32, true);
 
-    SUBCASE("Add RGB image to list")
+    "Add RGB image to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGB);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxBitmap bmp1 = il.GetBitmap(idx);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() != nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() != nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         idx = il.Add(bmpRGBWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
         wxBitmap bmp2 = il.GetBitmap(idx);
-        CHECK(bmp2.HasAlpha() == false);
-        CHECK(bmp2.GetMask() != nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
+        expect(bmp2.HasAlpha() == false);
+        expect(bmp2.GetMask() != nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
 
         idx = il.Add(bmpRGB, *wxRED);
-        CHECK(il.GetImageCount() == 3);
+        expect(il.GetImageCount() == 3);
         wxBitmap bmp3 = il.GetBitmap(idx);
-        CHECK(bmp3.HasAlpha() == false);
-        CHECK(bmp3.GetMask() != nullptr);
-        CHECK(bmp3.GetWidth() == 32);
-        CHECK(bmp3.GetHeight() == 32);
-    }
+        expect(bmp3.HasAlpha() == false);
+        expect(bmp3.GetMask() != nullptr);
+        expect(bmp3.GetWidth() == 32);
+        expect(bmp3.GetHeight() == 32);
+    };
 
-    SUBCASE("Add RGBA image to list")
+    "Add RGBA image to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGBA);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxBitmap bmp1 = il.GetBitmap(idx);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() != nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() != nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         idx = il.Add(bmpRGBAWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
         wxBitmap bmp2 = il.GetBitmap(idx);
-        CHECK(bmp2.HasAlpha() == false);
-        CHECK(bmp2.GetMask() != nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
+        expect(bmp2.HasAlpha() == false);
+        expect(bmp2.GetMask() != nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
 
         idx = il.Add(bmpRGBA, *wxRED);
-        CHECK(il.GetImageCount() == 3);
+        expect(il.GetImageCount() == 3);
         wxBitmap bmp3 = il.GetBitmap(idx);
-        CHECK(bmp3.HasAlpha() == false);
-        CHECK(bmp3.GetMask() != nullptr);
-        CHECK(bmp3.GetWidth() == 32);
-        CHECK(bmp3.GetHeight() == 32);
-    }
+        expect(bmp3.HasAlpha() == false);
+        expect(bmp3.GetMask() != nullptr);
+        expect(bmp3.GetWidth() == 32);
+        expect(bmp3.GetHeight() == 32);
+    };
 
-    SUBCASE("Add icon to list")
+    "Add icon to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(ico);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxIcon icon1 = il.GetIcon(idx);
-        CHECK(icon1.GetWidth() == 32);
-        CHECK(icon1.GetHeight() == 32);
-    }
+        expect(icon1.GetWidth() == 32);
+        expect(icon1.GetHeight() == 32);
+    };
 
-    SUBCASE("Replace with RGB image")
+    "Replace with RGB image"_test = [&]
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGBA);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         int idx2 = il.Add(bmpRGBAWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
 
         il.Replace(idx1, bmpRGB);
         il.Replace(idx2, bmpRGBWithMask);
 
         wxBitmap bmp1 = il.GetBitmap(idx1);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() != nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() != nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         wxBitmap bmp2 = il.GetBitmap(idx2);
-        CHECK(bmp2.HasAlpha() == false);
-        CHECK(bmp2.GetMask() != nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
-    }
+        expect(bmp2.HasAlpha() == false);
+        expect(bmp2.GetMask() != nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
+    };
 
-    SUBCASE("Replace with RGBA image")
+    "Replace with RGBA image"_test = [&]
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGB);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         int idx2 = il.Add(bmpRGBWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
 
         il.Replace(idx1, bmpRGBA);
         il.Replace(idx2, bmpRGBAWithMask);
 
         wxBitmap bmp1 = il.GetBitmap(idx1);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() != nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() != nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         wxBitmap bmp2 = il.GetBitmap(idx2);
-        CHECK(bmp2.HasAlpha() == false);
-        CHECK(bmp2.GetMask() != nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
-    }
+        expect(bmp2.HasAlpha() == false);
+        expect(bmp2.GetMask() != nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
+    };
 
-    SUBCASE("Add images with incompatible sizes")
+    "Add images with incompatible sizes"_test = [&]
     {
         il.RemoveAll();
         wxSize sz = il.GetSize();
@@ -204,7 +214,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpSmallerW.IsOk());
+
+        expect(bmpSmallerW.IsOk());
 
         wxBitmap bmpSmallerH(wxSize{sz.GetWidth(), sz.GetHeight() / 2}, 24);
         {
@@ -212,7 +223,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpSmallerH.IsOk());
+
+        expect(bmpSmallerH.IsOk());
 
         wxBitmap bmpSmallerWH(wxSize{sz.GetWidth() / 2, sz.GetHeight() / 2}, 24);
         {
@@ -220,7 +232,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpSmallerWH.IsOk());
+
+        expect(bmpSmallerWH.IsOk());
 
         wxBitmap bmpBiggerW(wxSize{sz.GetWidth() * 3 / 2, sz.GetHeight()}, 24);
         {
@@ -228,7 +241,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerW.IsOk());
+
+        expect(bmpBiggerW.IsOk());
 
         wxBitmap bmpBiggerW2x(wxSize{sz.GetWidth() * 2, sz.GetHeight()}, 24);
         {
@@ -236,7 +250,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerW2x.IsOk());
+
+        expect(bmpBiggerW2x.IsOk());
 
         wxBitmap bmpBiggerH(wxSize{sz.GetWidth(), sz.GetHeight() * 3 / 2}, 24);
         {
@@ -244,7 +259,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerH.IsOk());
+
+        expect(bmpBiggerH.IsOk());
 
         wxBitmap bmpBiggerH2x(wxSize{sz.GetWidth(), sz.GetHeight() * 2}, 24);
         {
@@ -252,7 +268,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerH2x.IsOk());
+
+        expect(bmpBiggerH2x.IsOk());
 
         wxBitmap bmpBiggerWH(wxSize{sz.GetWidth() * 3 / 2, sz.GetHeight() * 3 / 2}, 24);
         {
@@ -260,7 +277,8 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerWH.IsOk());
+
+        expect(bmpBiggerWH.IsOk());
 
         wxBitmap bmpBiggerWH2x(wxSize{sz.GetWidth() * 2, sz.GetHeight() * 2}, 24);
         {
@@ -268,171 +286,174 @@ TEST_CASE("ImageList:WithMask")
             mdc.SetBackground(*wxBLUE_BRUSH);
             mdc.Clear();
         }
-        REQUIRE(bmpBiggerWH2x.IsOk());
+
+        expect(bmpBiggerWH2x.IsOk());
 
         // Adding
         int cnt = il.GetImageCount();
         int idx = il.Add(bmpSmallerW);
-        CHECK(idx == -1);
-        CHECK(il.GetImageCount() == cnt);
+        expect(idx == -1);
+        expect(il.GetImageCount() == cnt);
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpSmallerH);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 1);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 1);
         wxBitmap bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpSmallerWH);
-        CHECK(idx == -1);
-        CHECK(il.GetImageCount() == cnt);
+        expect(idx == -1);
+        expect(il.GetImageCount() == cnt);
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerW);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 1);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 1);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerW2x);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 2);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 2);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerH);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 1);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 1);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerH2x);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 1);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 1);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerWH);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 1);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 1);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         idx = il.Add(bmpBiggerWH2x);
-        CHECK(idx >= 0);
-        CHECK(il.GetImageCount() == cnt + 2);
+        expect(idx >= 0);
+        expect(il.GetImageCount() == cnt + 2);
         bmp = il.GetBitmap(idx);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         // Replacing
         il.RemoveAll();
 
         cnt = il.GetImageCount();
         bool ok = il.Replace(0, bmpRGBA);
-        CHECK(ok == false);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == false);
+        expect(il.GetImageCount() == cnt);
 
         // List with 1 image
         idx = il.Add(bmpRGB);
-        CHECK(idx >= 0);
+        expect(idx >= 0);
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpRGBA);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpSmallerW);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpSmallerH);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpSmallerWH);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerW);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerW2x);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerH);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerH2x);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerWH);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
 
         cnt = il.GetImageCount();
         ok = il.Replace(0, bmpBiggerWH2x);
-        CHECK(ok == true);
-        CHECK(il.GetImageCount() == cnt);
+        expect(ok == true);
+        expect(il.GetImageCount() == cnt);
         bmp = il.GetBitmap(0);
-        CHECK(bmp.GetWidth() == sz.GetWidth());
-        CHECK(bmp.GetHeight() == sz.GetHeight());
-    }
-}
+        expect(bmp.GetWidth() == sz.GetWidth());
+        expect(bmp.GetHeight() == sz.GetHeight());
+    };
+};
 
-TEST_CASE("ImageList:NoMask")
+ut::suite ImageListNoMaskTest = []
 {
+    using namespace ut;
+
     wxInitAllImageHandlers();
 
     wxBitmap bmpRGB(wxSize{32, 32}, 24);
@@ -443,11 +464,12 @@ TEST_CASE("ImageList:NoMask")
         mdc.SetBrush(*wxRED_BRUSH);
         mdc.DrawRectangle(4, 4, 24, 24);
     }
-    REQUIRE(bmpRGB.IsOk());
+
+    expect(bmpRGB.IsOk());
 
     wxBitmap bmpRGBA;
     bmpRGBA.LoadFile("image/data/wx.png", wxBitmapType::PNG);
-    REQUIRE(bmpRGBA.IsOk());
+    expect(bmpRGBA.IsOk());
 
     wxBitmap bmpMask(wxSize{32, 32}, 1);
     {
@@ -465,147 +487,149 @@ TEST_CASE("ImageList:NoMask")
 
     wxBitmap bmpRGBWithMask(bmpRGB);
     bmpRGBWithMask.SetMask(new wxMask(bmpMask));
-    REQUIRE(bmpRGBWithMask.IsOk());
+    expect(bmpRGBWithMask.IsOk());
 
     wxBitmap bmpRGBAWithMask(bmpRGBA);
     bmpRGBAWithMask.SetMask(new wxMask(bmpMask));
-    REQUIRE(bmpRGBAWithMask.IsOk());
+    expect(bmpRGBAWithMask.IsOk());
 
     wxIcon ico;
     ico.LoadFile("image/data/wx.ico", wxBitmapType::ICO);
-    REQUIRE(ico.IsOk());
+    expect(ico.IsOk());
 
-    REQUIRE(bmpRGB.HasAlpha() == false);
-    REQUIRE(bmpRGB.GetMask() == nullptr);
+    expect(bmpRGB.HasAlpha() == false);
+    expect(bmpRGB.GetMask() == nullptr);
 
-    REQUIRE(bmpRGBWithMask.HasAlpha() == false);
-    REQUIRE(bmpRGBWithMask.GetMask() != nullptr);
+    expect(bmpRGBWithMask.HasAlpha() == false);
+    expect(bmpRGBWithMask.GetMask() != nullptr);
 
-    REQUIRE(bmpRGBA.HasAlpha() == true);
-    REQUIRE(bmpRGBA.GetMask() == nullptr);
+    expect(bmpRGBA.HasAlpha() == true);
+    expect(bmpRGBA.GetMask() == nullptr);
 
-    REQUIRE(bmpRGBAWithMask.HasAlpha() == true);
-    REQUIRE(bmpRGBAWithMask.GetMask() != nullptr);
+    expect(bmpRGBAWithMask.HasAlpha() == true);
+    expect(bmpRGBAWithMask.GetMask() != nullptr);
 
     wxImageList il(32, 32, false);
 
-    SUBCASE("Add RGB image to list")
+    "Add RGB image to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGB);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxBitmap bmp1 = il.GetBitmap(idx);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() == nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() == nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         idx = il.Add(bmpRGBWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
         wxBitmap bmp2 = il.GetBitmap(idx);
-        CHECK(bmp2.HasAlpha() == true);
-        CHECK(bmp2.GetMask() == nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
+        expect(bmp2.HasAlpha() == true);
+        expect(bmp2.GetMask() == nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
 
         idx = il.Add(bmpRGB, *wxRED);
-        CHECK(il.GetImageCount() == 3);
+        expect(il.GetImageCount() == 3);
         wxBitmap bmp3 = il.GetBitmap(idx);
-        CHECK(bmp3.HasAlpha() == true);
-        CHECK(bmp3.GetMask() == nullptr);
-        CHECK(bmp3.GetWidth() == 32);
-        CHECK(bmp3.GetHeight() == 32);
-    }
+        expect(bmp3.HasAlpha() == true);
+        expect(bmp3.GetMask() == nullptr);
+        expect(bmp3.GetWidth() == 32);
+        expect(bmp3.GetHeight() == 32);
+    };
 
-    SUBCASE("Add RGBA image to list")
+    "Add RGBA image to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGBA);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxBitmap bmp1 = il.GetBitmap(idx);
-        CHECK(bmp1.HasAlpha() == true);
-        CHECK(bmp1.GetMask() == nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == true);
+        expect(bmp1.GetMask() == nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         idx = il.Add(bmpRGBAWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
         wxBitmap bmp2 = il.GetBitmap(idx);
-        CHECK(bmp2.HasAlpha() == true);
-        CHECK(bmp2.GetMask() == nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
+        expect(bmp2.HasAlpha() == true);
+        expect(bmp2.GetMask() == nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
 
         idx = il.Add(bmpRGBA, *wxRED);
-        CHECK(il.GetImageCount() == 3);
+        expect(il.GetImageCount() == 3);
         wxBitmap bmp3 = il.GetBitmap(idx);
-        CHECK(bmp3.HasAlpha() == true);
-        CHECK(bmp3.GetMask() == nullptr);
-        CHECK(bmp3.GetWidth() == 32);
-        CHECK(bmp3.GetHeight() == 32);
-    }
+        expect(bmp3.HasAlpha() == true);
+        expect(bmp3.GetMask() == nullptr);
+        expect(bmp3.GetWidth() == 32);
+        expect(bmp3.GetHeight() == 32);
+    };
 
-    SUBCASE("Add icon to list")
+    "Add icon to list"_test = [&]
     {
         il.RemoveAll();
         int idx = il.Add(ico);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         wxIcon icon1 = il.GetIcon(idx);
-        CHECK(icon1.GetWidth() == 32);
-        CHECK(icon1.GetHeight() == 32);
-    }
+        expect(icon1.GetWidth() == 32);
+        expect(icon1.GetHeight() == 32);
+    };
 
-    SUBCASE("Replace with RGB image")
+    "Replace with RGB image"_test = [&]
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGBA);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         int idx2 = il.Add(bmpRGBAWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
 
         il.Replace(idx1, bmpRGB);
         il.Replace(idx2, bmpRGBWithMask);
 
         wxBitmap bmp1 = il.GetBitmap(idx1);
-        CHECK(bmp1.HasAlpha() == false);
-        CHECK(bmp1.GetMask() == nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == false);
+        expect(bmp1.GetMask() == nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         wxBitmap bmp2 = il.GetBitmap(idx2);
-        CHECK(bmp2.HasAlpha() == true);
-        CHECK(bmp2.GetMask() == nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
-    }
+        expect(bmp2.HasAlpha() == true);
+        expect(bmp2.GetMask() == nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
+    };
 
-    SUBCASE("Replace with RGBA image")
+    "Replace with RGBA image"_test = [&]
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGB);
-        CHECK(il.GetImageCount() == 1);
+        expect(il.GetImageCount() == 1);
         int idx2 = il.Add(bmpRGBWithMask);
-        CHECK(il.GetImageCount() == 2);
+        expect(il.GetImageCount() == 2);
 
         il.Replace(idx1, bmpRGBA);
         il.Replace(idx2, bmpRGBAWithMask);
 
         wxBitmap bmp1 = il.GetBitmap(idx1);
-        CHECK(bmp1.HasAlpha() == true);
-        CHECK(bmp1.GetMask() == nullptr);
-        CHECK(bmp1.GetWidth() == 32);
-        CHECK(bmp1.GetHeight() == 32);
+        expect(bmp1.HasAlpha() == true);
+        expect(bmp1.GetMask() == nullptr);
+        expect(bmp1.GetWidth() == 32);
+        expect(bmp1.GetHeight() == 32);
 
         wxBitmap bmp2 = il.GetBitmap(idx2);
-        CHECK(bmp2.HasAlpha() == true);
-        CHECK(bmp2.GetMask() == nullptr);
-        CHECK(bmp2.GetWidth() == 32);
-        CHECK(bmp2.GetHeight() == 32);
-    }
-}
+        expect(bmp2.HasAlpha() == true);
+        expect(bmp2.GetMask() == nullptr);
+        expect(bmp2.GetWidth() == 32);
+        expect(bmp2.GetHeight() == 32);
+    };
+};
 
-TEST_CASE("ImageList:NegativeTests")
+ut::suite ImageListNegativeTests = []
 {
+    using namespace ut;
+
     wxBitmap bmp(wxSize{32, 32}, 24);
     {
         wxMemoryDC mdc(bmp);
@@ -614,146 +638,145 @@ TEST_CASE("ImageList:NegativeTests")
         mdc.SetBrush(*wxRED_BRUSH);
         mdc.DrawRectangle(4, 4, 24, 24);
     }
-    REQUIRE(bmp.IsOk());
 
-    SUBCASE("Invalid size (negative)")
+    expect(bmp.IsOk());
+
+    "Invalid size (negative)"_test = [&]
     {
         wxImageList il;
         bool ok = il.Create(-1, -1);
-        CHECK_FALSE(ok);
+        expect(!ok);
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetImageCount());
+        expect(throws([&il] { il.GetImageCount(); }));
 #else
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 #endif
 
         wxSize sz = il.GetSize();
-        CHECK(sz.x == 0);
-        CHECK(sz.y == 0);
+        expect(sz.x == 0);
+        expect(sz.y == 0);
 
         int w = -1;
         int h = -1;
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetSize(0, w, h));
+        expect(throws([&]{ il.GetSize(0, w, h); }));
 #else
         ok = il.GetSize(0, w, h);
-        CHECK_FALSE(ok);
-        CHECK(w == 0);
-        CHECK(h == 0);
+        expect(!ok);
+        expect(w == 0);
+        expect(h == 0);
 #endif
 
         int idx = il.Add(bmp);
-        CHECK(idx == -1);
+        expect(idx == -1);
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetImageCount());
+        expect(throws([&]{ il.GetImageCount(); }));
 #else
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 #endif
-    }
+    };
 
-    SUBCASE("Invalid size (zero)")
+    "Invalid size (zero)"_test = [&]
     {
         wxImageList il;
         bool ok = il.Create(0, 0);
-        CHECK_FALSE(ok);
+        expect(!ok);
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetImageCount());
+        expect(throws([&]{ il.GetImageCount(); }));
 #else
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 #endif
 
         wxSize sz = il.GetSize();
-        CHECK(sz.x == 0);
-        CHECK(sz.y == 0);
+        expect(sz.x == 0);
+        expect(sz.y == 0);
 
         int w = -1;
         int h = -1;
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(ok = il.GetSize(0, w, h));
+        expect(throws([&]{ ok = il.GetSize(0, w, h); }));
 #else
         ok = il.GetSize(0, w, h);
-        CHECK_FALSE(ok);
-        CHECK(w == 0);
-        CHECK(h == 0);
+        expect(!ok);
+        expect(w == 0);
+        expect(h == 0);
 #endif
 
         int idx = il.Add(bmp);
-        CHECK(idx == -1);
+        expect(idx == -1);
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetImageCount());
+        expect(throws([&]{ il.GetImageCount(); }));
 #else
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 #endif
 
         ok = il.Replace(0, bmp);
-        CHECK_FALSE(ok);
+        expect(!ok);
 #ifdef __WXDEBUG__
-        REQUIRE_THROWS(il.GetImageCount());
+        expect(throws([&]{ il.GetImageCount(); }));
 #else
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 #endif
-    }
+    };
 
-    SUBCASE("Invalid Get/Replace/Remove indices")
+    "Invalid Get/Replace/Remove indices"_test = [&]
     {
         wxImageList il(32, 32, false);
-        CHECK(il.GetImageCount() == 0);
+        expect(il.GetImageCount() == 0);
 
         wxSize sz = il.GetSize();
-        CHECK(sz.x == 32);
-        CHECK(sz.y == 32);
+        expect(sz.x == 32);
+        expect(sz.y == 32);
 
         int w = -1;
         int h = -1;
         bool ok = il.GetSize(0, w, h);
-        CHECK(ok == true);
-        CHECK(w == 32);
-        CHECK(h == 32);
+        expect(ok == true);
+        expect(w == 32);
+        expect(h == 32);
 
         int idx = il.Add(bmp);
-        CHECK(idx == 0);
-        CHECK(il.GetImageCount() == 1);
+        expect(idx == 0);
+        expect(il.GetImageCount() == 1);
 
         wxBitmap bmp2 = il.GetBitmap(-1);
-        CHECK_FALSE(bmp2.IsOk());
-        CHECK(il.GetImageCount() == 1);
+        expect(!bmp2.IsOk());
+        expect(il.GetImageCount() == 1);
 
         wxBitmap bmp3 = il.GetBitmap(5);
-        CHECK_FALSE(bmp3.IsOk());
-        CHECK(il.GetImageCount() == 1);
+        expect(!bmp3.IsOk());
+        expect(il.GetImageCount() == 1);
 
         wxIcon icon2 = il.GetIcon(-1);
-        CHECK_FALSE(icon2.IsOk());
-        CHECK(il.GetImageCount() == 1);
+        expect(!icon2.IsOk());
+        expect(il.GetImageCount() == 1);
 
         wxBitmap icon3 = il.GetIcon(5);
-        CHECK_FALSE(icon3.IsOk());
-        CHECK(il.GetImageCount() == 1);
+        expect(!icon3.IsOk());
+        expect(il.GetImageCount() == 1);
 
         ok = il.Replace(-1, bmp);
-        CHECK_FALSE(ok);
-        CHECK(il.GetImageCount() == 1);
+        expect(!ok);
+        expect(il.GetImageCount() == 1);
 
         ok = il.Replace(5, bmp);
-        CHECK_FALSE(ok);
-        CHECK(il.GetImageCount() == 1);
+        expect(!ok);
+        expect(il.GetImageCount() == 1);
 
         ok = il.Remove(-1);
-        CHECK_FALSE(ok);
-        CHECK(il.GetImageCount() == 1);
+        expect(!ok);
+        expect(il.GetImageCount() == 1);
 
         ok = il.Remove(5);
-        CHECK_FALSE(ok);
-        CHECK(il.GetImageCount() == 1);
-    }
-}
+        expect(!ok);
+        expect(il.GetImageCount() == 1);
+    };
+};
 
+// Skipping HiDPI image tests known not to work in wxMSW and wxGTK2.
+#if !defined(__WXMSW__)  || ( !defined(__WXGTK20__) && defined(__WXGTK3__) )
 TEST_CASE("ImageList:HiDPI")
 {
-#if defined(__WXMSW__)  || ( defined(__WXGTK20__) && !defined(__WXGTK3__) )
-
-    WARN("Skipping HiDPI image tests known not to work in wxMSW and wxGTK2.");
-#else
     wxImage img(16, 8);
     img.SetRGB(wxRect(0, 0, 16, 8), 255, 128, 64);
     REQUIRE(img.IsOk());
@@ -967,5 +990,5 @@ TEST_CASE("ImageList:HiDPI")
         CHECK_FALSE(bmp.HasAlpha());
         CHECK(bmp.GetMask() == nullptr);
     }
-#endif // !__WXMSW__
 }
+#endif // !__WXMSW__

@@ -7,9 +7,7 @@
 //              (c) 2014 Toni Ruža <toni.ruza@gmail.com>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#if wxUSE_GRAPHICS_CONTEXT
+module;
 
 #include "wx/bitmap.h"
 #include "wx/dcmemory.h"
@@ -17,41 +15,57 @@
 #include "wx/icon.h"
 #include "wx/gdicmn.h"
 
+#include <fmt/core.h>
+
+export module WX.Test.BoundingBox;
+
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import Utils.Geometry;
 
-static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int height, int margin = 0)
+import <cstdlib>;
+
+#if wxUSE_GRAPHICS_CONTEXT
+
+namespace ut = boost::ut;
+
+void AssertBox(wxGCDC* aGCDC, int minX, int minY, int width, int height, int margin = 0)
 {
+    using namespace ut;
+
     const int maxX = minX + width;
     const int maxY = minY + height;
 
     // Allow for a margin of error due to different implementation
     // specificities regarding drawing paths.
+
+    const auto AssertClose = [](auto expected, auto actual, auto delta)
+    {
+        expect(std::abs(actual - expected) <= delta) << fmt::format("{} != {}", actual, expected); 
+    };
+
     if ( margin )
     {
-        #define WX_ASSERT_CLOSE(expected, actual, delta) \
-            CHECK_MESSAGE(std::abs(actual - expected) <= delta, \
-                         ("%d != %d", actual, expected))
-
-        WX_ASSERT_CLOSE(minX, aGCDC->MinX(), margin);
-        WX_ASSERT_CLOSE(minY, aGCDC->MinY(), margin);
-        WX_ASSERT_CLOSE(maxX, aGCDC->MaxX(), margin);
-        WX_ASSERT_CLOSE(maxY, aGCDC->MaxY(), margin);
-
-        #undef WX_ASSERT_CLOSE
+        AssertClose(minX, aGCDC->MinX(), margin);
+        AssertClose(minY, aGCDC->MinY(), margin);
+        AssertClose(maxX, aGCDC->MaxX(), margin);
+        AssertClose(maxY, aGCDC->MaxY(), margin);
     }
     else
     {
-        CHECK_EQ(minX, aGCDC->MinX());
-        CHECK_EQ(minY, aGCDC->MinY());
-        CHECK_EQ(maxX, aGCDC->MaxX());
-        CHECK_EQ(maxY, aGCDC->MaxY());
+        expect(minX == aGCDC->MinX());
+        expect(minY == aGCDC->MinY());
+        expect(maxX == aGCDC->MaxX());
+        expect(maxY == aGCDC->MaxY());
     }
+
+    aGCDC->ResetBoundingBox();
 }
 
-TEST_CASE("Bounding box tests.")
+ut::suite BoundingBoxTests = []
 {
+    using namespace ut;
 
     wxBitmap m_bmp{wxSize{100, 100}};
     wxMemoryDC m_dc;
@@ -61,15 +75,15 @@ TEST_CASE("Bounding box tests.")
 
     m_gcdc->ResetBoundingBox();
 
-    SUBCASE("DrawBitmap")
+    "DrawBitmap"_test = [&]
     {
         wxBitmap bitmap{wxSize{12, 12}};
 
         m_gcdc->DrawBitmap(bitmap, 5, 5);
         AssertBox(m_gcdc.get(), 5, 5, 12, 12);
-    }
+    };
 
-    SUBCASE("DrawIcon")
+    "DrawIcon"_test = [&]
     {
         wxBitmap bitmap{wxSize{16, 16}};
         wxIcon icon;
@@ -77,41 +91,41 @@ TEST_CASE("Bounding box tests.")
 
         m_gcdc->DrawIcon(icon, 42, 42);
         AssertBox(m_gcdc.get(), 42, 42, 16, 16);
-    }
+    };
 
-    SUBCASE("DrawLine")
+    "DrawLine"_test = [&]
     {
         m_gcdc->DrawLine(10, 10, 20, 15);
         AssertBox(m_gcdc.get(), 10, 10, 10, 5);
-    }
+    };
 
-    SUBCASE("Crosshair")
+    "Crosshair"_test = [&]
     {
         wxSize gcdcSize = m_gcdc->GetSize();
 
         m_gcdc->CrossHair(33, 33);
         AssertBox(m_gcdc.get(), 0, 0, gcdcSize.x, gcdcSize.y);
-    }
+    };
 
-    SUBCASE("DrawArc")
+    "DrawArc"_test = [&]
     {
         m_gcdc->DrawArc(25, 30, 15, 40, 25, 40);  // quarter circle
         AssertBox(m_gcdc.get(), 15, 30, 10, 10, 3);
-    }
+    };
 
-    SUBCASE("DrawEllipticArc")
+    "DrawEllipticArc"_test = [&]
     {
         m_gcdc->DrawEllipticArc(40, 50, 30, 20, 0, 180);  // half circle
         AssertBox(m_gcdc.get(), 40, 50, 30, 10, 3);
-    }
+    };
 
-    SUBCASE("DrawPoint")
+    "DrawPoint"_test = [&]
     {
         m_gcdc->DrawPoint(20, 20);
         AssertBox(m_gcdc.get(), 20, 20, 0, 0);
-    }
+    };
 
-    SUBCASE("DrawLines")
+    "DrawLines"_test = [&]
     {
         static const wxPoint points[4] = {
             {10, 20},
@@ -122,10 +136,10 @@ TEST_CASE("Bounding box tests.")
 
         m_gcdc->DrawLines(4, points, 7, 8);
         AssertBox(m_gcdc.get(), 17, 18, 20, 20);
-    }
+    };
 
 #if wxUSE_SPLINES
-    SUBCASE("DrawSpline")
+    "DrawSpline"_test = [&]
     {
         static const wxPoint points[3] = {
             {10, 30},
@@ -135,10 +149,10 @@ TEST_CASE("Bounding box tests.")
 
         m_gcdc->DrawSpline(3, points);
         AssertBox(m_gcdc.get(), 10, 20, 30, 30, 5);
-    }
+    };
 #endif  // wxUSE_SPLINES
 
-    SUBCASE("DrawPolygon")
+    "DrawPolygon"_test = [&]
     {
         static const wxPoint points[3] = {
             {10, 30},
@@ -148,9 +162,9 @@ TEST_CASE("Bounding box tests.")
 
         m_gcdc->DrawPolygon(3, points, -5, -7);
         AssertBox(m_gcdc.get(), 5, 3, 20, 20);
-    }
+    };
 
-    SUBCASE("DrawPolyPolygon")
+    "DrawPolyPolygon"_test = [&]
     {
         static const int lengths[2] = {3, 3};
 
@@ -165,27 +179,27 @@ TEST_CASE("Bounding box tests.")
 
         m_gcdc->DrawPolyPolygon(2, lengths, points, 12, 5);
         AssertBox(m_gcdc.get(), 22, 15, 30, 50, 4);
-    }
+    };
 
-    SUBCASE("DrawRectangle")
+    "DrawRectangle"_test = [&]
     {
         m_gcdc->DrawRectangle(2, 2, 12, 12);
         AssertBox(m_gcdc.get(), 2, 2, 12, 12);
-    }
+    };
 
-    SUBCASE("DrawRoundedRectangle")
+    "DrawRoundedRectangle"_test = [&]
     {
         m_gcdc->DrawRoundedRectangle(27, 27, 12, 12, 2);
         AssertBox(m_gcdc.get(), 27, 27, 12, 12);
-    }
+    };
 
-    SUBCASE("DrawEllipse")
+    "DrawEllipse"_test = [&]
     {
         m_gcdc->DrawEllipse(54, 45, 23, 12);
         AssertBox(m_gcdc.get(), 54, 45, 23, 12);
-    }
+    };
 
-    SUBCASE("Blit")
+    "Blit"_test = [&]
     {
         wxBitmap bitmap{wxSize{20, 20}};
 
@@ -195,9 +209,9 @@ TEST_CASE("Bounding box tests.")
         AssertBox(m_gcdc.get(), 20, 10, 12, 7);
 
         dc.SelectObject(wxNullBitmap);
-    }
+    };
 
-    SUBCASE("StretchBlit")
+    "StretchBlit"_test = [&]
     {
         wxBitmap bitmap{wxSize{20, 20}};
 
@@ -207,9 +221,9 @@ TEST_CASE("Bounding box tests.")
         AssertBox(m_gcdc.get(), 30, 50, 5, 5);
 
         dc.SelectObject(wxNullBitmap);
-    }
+    };
 
-    SUBCASE("DrawRotatedText")
+    "DrawRotatedText"_test = [&]
     {
         std::string text("vertical");
         auto textExtent = m_gcdc->GetTextExtent(text);
@@ -217,63 +231,63 @@ TEST_CASE("Bounding box tests.")
         m_gcdc->DrawRotatedText(text, wxPoint{43, 22}, -90);
         AssertBox(m_gcdc.get(), 43 - textExtent.y, 22,
                                 textExtent.y, textExtent.x, 3);
-    }
+    };
 
-    SUBCASE("wxDrawText")
+    "wxDrawText"_test = [&]
     {
         std::string text("H");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
         m_gcdc->wxDrawText(text, wxPoint{3, 3});
         AssertBox(m_gcdc.get(), 3, 3, textExtent.x, textExtent.y, 3);
-    }
+    };
 
-    SUBCASE("GradientFillLinear")
+    "GradientFillLinear"_test = [&]
     {
         wxRect rect(16, 16, 30, 40);
         m_gcdc->GradientFillLinear(rect, *wxWHITE, *wxBLACK, wxNORTH);
         AssertBox(m_gcdc.get(), 16, 16, 30, 40);
-    }
+    };
 
-    SUBCASE("GradientFillConcentric")
+    "GradientFillConcentric"_test = [&]
     {
         wxRect rect(6, 6, 30, 40);
         m_gcdc->GradientFillConcentric(rect, *wxWHITE, *wxBLACK, wxPoint(10, 10));
         AssertBox(m_gcdc.get(), 6, 6, 30, 40);
-    }
+    };
 
-    SUBCASE("DrawCheckMark")
+    "DrawCheckMark"_test = [&]
     {
         m_gcdc->DrawCheckMark(32, 24, 16, 16);
         AssertBox(m_gcdc.get(), 32, 24, 16, 16);
-    }
+    };
 
-    SUBCASE("DrawRectangleAndReset")
+    "DrawRectangleAndReset"_test = [&]
     {
         m_gcdc->DrawRectangle(2, 2, 12, 12);
         m_gcdc->ResetBoundingBox();
         AssertBox(m_gcdc.get(), 0, 0, 0, 0);
-    }
+    };
 
-    SUBCASE("DrawTwoRectangles")
+    "DrawTwoRectangles"_test = [&]
     {
         m_gcdc->DrawRectangle(10, 15, 50, 30);
         m_gcdc->DrawRectangle(15, 20, 55, 35);
         AssertBox(m_gcdc.get(), 10, 15, 60, 40);
-    }
+    };
 
-    SUBCASE("DrawRectsOnTransformedDC")
+    "DrawRectsOnTransformedDC"_test = [&]
     {
         m_gcdc->DrawRectangle(10, 15, 50, 30);
         m_gcdc->SetDeviceOrigin({15, 20});
         m_gcdc->DrawRectangle(15, 20, 45, 35);
         m_gcdc->SetDeviceOrigin({5, 10});
         AssertBox(m_gcdc.get(), 5, 5, 65, 60);
-    }
+    };
 
     m_dc.SelectObject(wxNullBitmap);
     m_bmp = wxNullBitmap;
 
-} // TEST_CASE("Bounding box tests.")
+};
 
 #endif // wxUSE_GRAPHICS_CONTEXT

@@ -69,8 +69,8 @@ struct testData {
     unsigned bitDepth;
 };
 
-constexpr std::array<testData, 12> g_testfiles =
-{{
+constexpr auto g_testfiles = std::to_array<testData>
+({
     { "image/data/horse.ico", wxBitmapType::ICO, 4 },
     { "image/data/horse.xpm", wxBitmapType::XPM, 8 },
     { "image/data/horse.png", wxBitmapType::PNG, 24 },
@@ -78,12 +78,14 @@ constexpr std::array<testData, 12> g_testfiles =
     { "image/data/horse.bmp", wxBitmapType::BMP, 8 },
     { "image/data/horse.cur", wxBitmapType::CUR, 1 },
     { "image/data/horse.gif", wxBitmapType::GIF, 8 },
+#if wxUSE_JPEG
     { "image/data/horse.jpg", wxBitmapType::JPEG, 24 },
+#endif // wxUSE_JPEG
     { "image/data/horse.pcx", wxBitmapType::PCX, 8 },
     { "image/data/horse.pnm", wxBitmapType::PNM, 24 },
     { "image/data/horse.tga", wxBitmapType::TGA, 8 },
     { "image/data/horse.tif", wxBitmapType::TIFF, 8 }
-}};
+});
 
 void SetAlpha(wxImage* image)
 {
@@ -323,7 +325,7 @@ ut::suite BaseImageTest = []
     {
         wxImage img;
         for (const auto& testFile : g_testfiles)
-            expect(img.LoadFile(testFile.file));
+            expect(img.LoadFile(testFile.file)) << fmt::format("{}", testFile.file);
     };
 
     "SizeImage"_test = []

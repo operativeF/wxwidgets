@@ -38,13 +38,13 @@ set(TEST_GUI_SRC
     graphics/ellipsization.ixx
     graphics/measuring.cpp
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
-    graphics/boundingbox.cpp
+    graphics/boundingbox.ixx
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
     graphics/coords.ixx
     #graphics/graphbitmap.cpp # FIXME: Works but doesn't test with matchers yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
     graphics/graphpath.ixx
-    graphics/imagelist.cpp
+    graphics/imagelist.ixx
     #config/config.cpp # FIXME: Use a more robust system for writing to file. Currently very fragile.
     controls/auitest.cpp
     controls/bitmapcomboboxtest.cpp
