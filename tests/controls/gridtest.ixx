@@ -6,9 +6,9 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_GRID
+#include "doctest.h"
 
 #include "wx/app.h"
 #include "wx/dcclient.h"
@@ -24,8 +24,15 @@ import WX.Cmn.Stopwatch;
 
 #include "waitforpaint.h"
 
+export module WX.Test.Grid;
+
 import WX.Grid;
 import WX.Test.Prec;
+import WX.MetaTest;
+
+#if wxUSE_GRID
+
+namespace ut = boost::ut;
 
 namespace
 {
@@ -2037,182 +2044,192 @@ std::ostream& operator<<(std::ostream& os, const wxGridBlockCoords& block) {
     return os;
 }
 
-TEST_CASE("GridBlockCoords::Canonicalize")
+ut::suite GridBlockCoordsCanonicalizeTest = []
 {
+    using namespace ut;
+    
     const wxGridBlockCoords block =
         wxGridBlockCoords(4, 3, 2, 1).Canonicalize();
 
-    CHECK(block.GetTopRow() == 2);
-    CHECK(block.GetLeftCol() == 1);
-    CHECK(block.GetBottomRow() == 4);
-    CHECK(block.GetRightCol() == 3);
-}
+    expect(block.GetTopRow() == 2);
+    expect(block.GetLeftCol() == 1);
+    expect(block.GetBottomRow() == 4);
+    expect(block.GetRightCol() == 3);
+};
 
-TEST_CASE("GridBlockCoords::Intersects")
+ut::suite GridBlockCoordsIntersectTest = []
 {
+    using namespace ut;
+
     // Inside.
-    CHECK(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(1, 2, 2, 3)));
+    expect(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(1, 2, 2, 3)));
 
     // Intersects.
-    CHECK(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(2, 2, 4, 4)));
+    expect(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(2, 2, 4, 4)));
 
     // Doesn't intersects.
-    CHECK_FALSE(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(4, 4, 6, 6)));
-}
+    expect(!wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(4, 4, 6, 6)));
+};
 
-TEST_CASE("GridBlockCoords::Contains")
+ut::suite GridBlockCoordsContainsTest = []
 {
+    using namespace ut;
+
     // Inside.
-    CHECK(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(2, 2)));
+    expect(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(2, 2)));
 
     // Outside.
-    CHECK_FALSE(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(5, 5)));
+    expect(!wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(5, 5)));
 
     wxGridBlockCoords block1(1, 1, 5, 5);
     wxGridBlockCoords block2(1, 1, 3, 3);
     wxGridBlockCoords block3(2, 2, 7, 7);
     wxGridBlockCoords block4(10, 10, 12, 12);
 
-    CHECK( block1.Contains(block2));
-    CHECK_FALSE(block2.Contains(block1));
-    CHECK_FALSE(block1.Contains(block3));
-    CHECK_FALSE(block1.Contains(block4));
-    CHECK_FALSE(block3.Contains(block1));
-    CHECK_FALSE(block4.Contains(block1));
-}
+    expect(block1.Contains(block2));
 
-TEST_CASE("GridBlockCoords::Difference")
+    expect(!block2.Contains(block1));
+    expect(!block1.Contains(block3));
+    expect(!block1.Contains(block4));
+    expect(!block3.Contains(block1));
+    expect(!block4.Contains(block1));
+};
+
+ut::suite GridBlockCoordsDifferenceTests = []
 {
-    SUBCASE("Subtract contained block (splitted horizontally)")
+    using namespace ut;
+
+    "Subtract contained block (splitted horizontally)"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxHORIZONTAL);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 7));
-        CHECK(result.m_parts[1] == wxGridBlockCoords(6, 1, 7, 7));
-        CHECK(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
-        CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 7));
+        expect(result.m_parts[1] == wxGridBlockCoords(6, 1, 7, 7));
+        expect(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
+        expect(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
+    };
 
-    SUBCASE("Subtract contained block (splitted vertically)")
+    "Subtract contained block (splitted vertically)"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxVERTICAL);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 7, 2));
-        CHECK(result.m_parts[1] == wxGridBlockCoords(1, 6, 7, 7));
-        CHECK(result.m_parts[2] == wxGridBlockCoords(1, 3, 2, 5));
-        CHECK(result.m_parts[3] == wxGridBlockCoords(6, 3, 7, 5));
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 7, 2));
+        expect(result.m_parts[1] == wxGridBlockCoords(1, 6, 7, 7));
+        expect(result.m_parts[2] == wxGridBlockCoords(1, 3, 2, 5));
+        expect(result.m_parts[3] == wxGridBlockCoords(6, 3, 7, 5));
+    };
 
-    SUBCASE("Blocks intersect by the corner (splitted horizontally)")
+    "Blocks intersect by the corner (splitted horizontally)"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxHORIZONTAL);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 5));
-        CHECK(result.m_parts[1] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 5));
+        expect(result.m_parts[1] == wxGridNoBlockCoords);
+        expect(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
 
-    SUBCASE("Blocks intersect by the corner (splitted vertically)")
+    "Blocks intersect by the corner (splitted vertically)"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxVERTICAL);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 5, 2));
-        CHECK(result.m_parts[1] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[2] == wxGridBlockCoords(1, 3, 2, 5));
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 5, 2));
+        expect(result.m_parts[1] == wxGridNoBlockCoords);
+        expect(result.m_parts[2] == wxGridBlockCoords(1, 3, 2, 5));
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
 
-    SUBCASE("Blocks are the same")
+    "Blocks are the same"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(1, 1, 3, 3);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxHORIZONTAL);
 
-        CHECK(result.m_parts[0] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[1] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[2] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
+        expect(result.m_parts[0] == wxGridNoBlockCoords);
+        expect(result.m_parts[1] == wxGridNoBlockCoords);
+        expect(result.m_parts[2] == wxGridNoBlockCoords);
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
 
-    SUBCASE("Blocks doesn't intersects")
+    "Blocks doesn't intersects"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(5, 5, 7, 7);
         const wxGridBlockDiffResult result =
             block1.Difference(block2, wxHORIZONTAL);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 3, 3));
-        CHECK(result.m_parts[1] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[2] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
-}
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 3, 3));
+        expect(result.m_parts[1] == wxGridNoBlockCoords);
+        expect(result.m_parts[2] == wxGridNoBlockCoords);
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
+};
 
-
-TEST_CASE("GridBlockCoords::SymDifference")
+ut::suite GridBlockCoordsSymDifferenceTests = []
 {
-    SUBCASE("With contained block")
+    using namespace ut;
+
+    "With contained block"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
         const wxGridBlockDiffResult result = block1.SymDifference(block2);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 7));
-        CHECK(result.m_parts[1] == wxGridBlockCoords(6, 1, 7, 7));
-        CHECK(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
-        CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 7));
+        expect(result.m_parts[1] == wxGridBlockCoords(6, 1, 7, 7));
+        expect(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
+        expect(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
+    };
 
-    SUBCASE("Blocks intersect by the corner")
+    "Blocks intersect by the corner"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
         const wxGridBlockDiffResult result = block1.SymDifference(block2);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 5));
-        CHECK(result.m_parts[1] == wxGridBlockCoords(6, 3, 7, 7));
-        CHECK(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
-        CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
-    }
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 2, 5));
+        expect(result.m_parts[1] == wxGridBlockCoords(6, 3, 7, 7));
+        expect(result.m_parts[2] == wxGridBlockCoords(3, 1, 5, 2));
+        expect(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
+    };
 
-    SUBCASE("Blocks are the same")
+    "Blocks are the same"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(1, 1, 3, 3);
         const wxGridBlockDiffResult result = block1.SymDifference(block2);
 
-        CHECK(result.m_parts[0] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[1] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[2] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
+        expect(result.m_parts[0] == wxGridNoBlockCoords);
+        expect(result.m_parts[1] == wxGridNoBlockCoords);
+        expect(result.m_parts[2] == wxGridNoBlockCoords);
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
 
-    SUBCASE("Blocks doesn't intersects")
+    "Blocks doesn't intersects"_test = []
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(5, 5, 7, 7);
         const wxGridBlockDiffResult result = block1.SymDifference(block2);
 
-        CHECK(result.m_parts[0] == wxGridBlockCoords(1, 1, 3, 3));
-        CHECK(result.m_parts[1] == wxGridBlockCoords(5, 5, 7, 7));
-        CHECK(result.m_parts[2] == wxGridNoBlockCoords);
-        CHECK(result.m_parts[3] == wxGridNoBlockCoords);
-    }
-}
+        expect(result.m_parts[0] == wxGridBlockCoords(1, 1, 3, 3));
+        expect(result.m_parts[1] == wxGridBlockCoords(5, 5, 7, 7));
+        expect(result.m_parts[2] == wxGridNoBlockCoords);
+        expect(result.m_parts[3] == wxGridNoBlockCoords);
+    };
+};
 
 //
 // TestableGrid

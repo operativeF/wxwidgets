@@ -6,56 +6,68 @@
 // Copyright:   (c) 2008 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
 #include "wx/app.h"
 #include "wx/headerctrl.h"
 
+export module WX.Test.HeaderCtrl;
+
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import <algorithm>;
 import <array>;
+import <ranges>;
 
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
 
-TEST_CASE("Header control test")
+namespace ut = boost::ut;
+
+ut::suite HeaderCtrlTests = []
 {
+    using namespace ut;
+
     auto m_header = std::make_unique<wxHeaderCtrlSimple>(wxTheApp->GetTopWindow());
 
-    SUBCASE("AddDelete")
+    "AddDelete"_test = [&]
     {
-        CHECK_EQ( 0, m_header->GetColumnCount() );
+        expect( 0 == m_header->GetColumnCount() );
 
         m_header->AppendColumn(wxHeaderColumnSimple("Column 1"));
-        CHECK_EQ( 1, m_header->GetColumnCount() );
+        expect( 1 == m_header->GetColumnCount() );
 
         m_header->AppendColumn(wxHeaderColumnSimple("Column 2"));
-        CHECK_EQ( 2, m_header->GetColumnCount() );
+        expect( 2 == m_header->GetColumnCount() );
 
         m_header->InsertColumn(wxHeaderColumnSimple("Column 0"), 0);
-        CHECK_EQ( 3, m_header->GetColumnCount() );
+        expect( 3 == m_header->GetColumnCount() );
 
         m_header->DeleteColumn(2);
-        CHECK_EQ( 2, m_header->GetColumnCount() );
-    }
+        expect( 2 == m_header->GetColumnCount() );
 
-    SUBCASE("BestSize")
+        m_header->DeleteAllColumns();
+    };
+
+    "BestSize"_test = [&]
     {
         const wxSize sizeEmpty = m_header->GetBestSize();
         // this fails under wxGTK where wxControl::GetBestSize() is 0 in horizontal
         // direction
-        //CHECK( sizeEmpty.x > 0 );
-        CHECK( sizeEmpty.y > 0 );
+        //expect( sizeEmpty.x > 0 );
+        expect( sizeEmpty.y > 0 );
 
         m_header->AppendColumn(wxHeaderColumnSimple("Foo"));
         m_header->AppendColumn(wxHeaderColumnSimple("Bar"));
         const wxSize size = m_header->GetBestSize();
-        CHECK_EQ( sizeEmpty.y, size.y );
-    }
+        expect( sizeEmpty.y == size.y );
 
-    SUBCASE("Reorder")
+        m_header->DeleteAllColumns();
+    };
+
+    "Reorder"_test = [&]
     {
         for ( int n = 0; n < 4; n++ )
             m_header->AppendColumn(wxHeaderColumnSimple(fmt::format("{:d}", n)));
@@ -66,8 +78,7 @@ TEST_CASE("Header control test")
 
         constexpr std::array<int, 4> initOrder{ 0, 1, 2, 3 };
 
-        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
-                         initOrder.cbegin(), initOrder.cend()));
+        expect(std::ranges::equal(ordering, initOrder));
 
         // "Check reorder [1, 2, 0, 3]"
 
@@ -78,8 +89,7 @@ TEST_CASE("Header control test")
 
         ordering = m_header->GetColumnsOrder();
 
-        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
-                         reorderA.cbegin(), reorderA.cend()));
+        expect(std::ranges::equal(ordering, reorderA));
 
         // "Check reorder [1, 2, 3, 0]"
 
@@ -91,8 +101,7 @@ TEST_CASE("Header control test")
 
         constexpr std::array<int, 4> reorderB{ 1, 2, 3, 0 };
 
-        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
-                         reorderB.cbegin(), reorderB.cend()));
+        expect(std::ranges::equal(ordering, reorderB));
 
         // "Check reorder [2, 3, 0, 1]"
 
@@ -102,7 +111,6 @@ TEST_CASE("Header control test")
 
         constexpr std::array<int, 4> reorderC{ 2, 3, 0, 1 };
 
-        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
-                         reorderC.cbegin(), reorderC.cend()));
-    }
-}
+        expect(std::ranges::equal(ordering, reorderC));
+    };
+};

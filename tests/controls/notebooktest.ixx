@@ -6,9 +6,9 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_NOTEBOOK
+#include "doctest.h"
 
 #include "wx/app.h"
 #include "wx/panel.h"
@@ -17,7 +17,14 @@
 #include "bookctrlbasetest.h"
 #include "testableframe.h"
 
+export module WX.Test.Notebook;
+
+import WX.MetaTest;
 import WX.Test.Prec;
+
+#if wxUSE_NOTEBOOK
+
+namespace ut = boost::ut;
 
 //void OnPageChanged(wxBookCtrlEvent&) { }
 
@@ -73,49 +80,56 @@ TEST_CASE_FIXTURE(wxNotebookTest, "wxChoicebook Test")
     */
 }
 
-TEST_CASE("wxNotebook::AddPageEvents")
+// NOTE / FIXME: Cannot use new here for wxNotebook; make_unique DOES work though.
+// Fails with ICE. 
+//
+// d:\a01\_work\20\s\src\vctools\Compiler\CxxFE\sl\p1\c\module\writer.cpp:6090 : sorry : not yet implemented
+// fatal error C1001 : Internal compiler error.
+// (compiler file 'd:\a01\_work\20\s\src\vctools\Compiler\CxxFE\sl\p1\c\module\utilities.h', line 34)
+
+ut::suite wxNotebookAddPageEventsTests = []
 {
-    wxNotebook* const
-        notebook = new wxNotebook(wxTheApp->GetTopWindow(), wxID_ANY,
+    using namespace ut;
+    
+    const auto notebook = std::make_unique<wxNotebook>(wxTheApp->GetTopWindow(), wxID_ANY,
                                   wxDefaultPosition, wxSize(400, 200));
-    std::unique_ptr<wxNotebook> cleanup(notebook);
 
-    CHECK( notebook->GetSelection() == wxNOT_FOUND );
+    expect( notebook->GetSelection() == wxNOT_FOUND );
 
-    EventCounter countPageChanging(notebook, wxEVT_NOTEBOOK_PAGE_CHANGING);
-    EventCounter countPageChanged(notebook, wxEVT_NOTEBOOK_PAGE_CHANGED);
+    EventCounter countPageChanging(notebook.get(), wxEVT_NOTEBOOK_PAGE_CHANGING);
+    EventCounter countPageChanged(notebook.get(), wxEVT_NOTEBOOK_PAGE_CHANGED);
 
     // Add the first page, it is special.
-    notebook->AddPage(new wxPanel(notebook), "Initial page");
+    notebook->AddPage(new wxPanel(notebook.get()), "Initial page");
 
     // The selection should have been changed.
-    CHECK( notebook->GetSelection() == 0 );
+    expect( notebook->GetSelection() == 0 );
 
     // But no events should have been generated.
-    CHECK( countPageChanging.GetCount() == 0 );
-    CHECK( countPageChanged.GetCount() == 0 );
+    expect( countPageChanging.GetCount() == 0 );
+    expect( countPageChanged.GetCount() == 0 );
 
 
     // Add another page without selecting it.
-    notebook->AddPage(new wxPanel(notebook), "Unselected page");
+    notebook->AddPage(new wxPanel(notebook.get()), "Unselected page");
 
     // Selection shouldn't have changed.
-    CHECK( notebook->GetSelection() == 0 );
+    expect( notebook->GetSelection() == 0 );
 
     // And no events should have been generated, of course.
-    CHECK( countPageChanging.GetCount() == 0 );
-    CHECK( countPageChanged.GetCount() == 0 );
+    expect( countPageChanging.GetCount() == 0 );
+    expect( countPageChanged.GetCount() == 0 );
 
 
     // Finally add another page and do select it.
-    notebook->AddPage(new wxPanel(notebook), "Selected page", true);
+    notebook->AddPage(new wxPanel(notebook.get()), "Selected page", true);
 
     // It should have become selected.
-    CHECK( notebook->GetSelection() == 2 );
+    expect( notebook->GetSelection() == 2 );
 
     // And events for the selection change should have been generated.
-    CHECK( countPageChanging.GetCount() == 1 );
-    CHECK( countPageChanged.GetCount() == 1 );
-}
+    expect( countPageChanging.GetCount() == 1 );
+    expect( countPageChanged.GetCount() == 1 );
+};
 
 #endif //wxUSE_NOTEBOOK

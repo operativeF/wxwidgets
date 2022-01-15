@@ -6,117 +6,127 @@
 // Copyright:   (c) 2018 Sebastian Walderich
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_AUI
+#include "doctest.h"
 
 #include "wx/app.h"
 #include "wx/panel.h"
 
+export module WX.Test.AUI;
+
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import WX.AUI;
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
+#if wxUSE_AUI
 
-TEST_CASE( "wxAuiNotebook::DoGetBestSize")
+namespace ut = boost::ut;
+
+ut::suite wxAuiNotebookDoGetBestSizeTest = []
 {
-    wxWindow *frame = wxTheApp->GetTopWindow();
-    REQUIRE( frame );
-    wxAuiNotebook *nb = new wxAuiNotebook(frame);
-    std::unique_ptr<wxAuiNotebook> cleanUp(nb);
+    using namespace ut;
 
-    wxPanel *p = new wxPanel(nb);
+    wxWindow *frame = wxTheApp->GetTopWindow();
+    expect( frame );
+    auto nb = std::make_unique<wxAuiNotebook>(frame);
+
+    wxPanel *p = new wxPanel(nb.get());
     p->SetMinSize(wxSize(100, 100));
-    REQUIRE( nb->AddPage(p, "Center Pane") );
+    expect( nb->AddPage(p, "Center Pane") );
 
     const int tabHeight = nb->GetTabCtrlHeight();
 
-    SUBCASE( "Single pane with multiple tabs" )
+    "Single pane with multiple tabs"_test = [&]
     {
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(300, 100));
         nb->AddPage(p, "Center Tab 2");
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(100, 200));
         nb->AddPage(p, "Center Tab 3");
 
-        CHECK( nb->GetBestSize() == wxSize(300, 200 + tabHeight) );
-    }
+        expect( nb->GetBestSize().x == 300 );
+        expect( nb->GetBestSize().y == (200 + tabHeight));
+    };
 
-    SUBCASE( "Horizontal split" )
+    "Horizontal split"_test = [&]
     {
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(25, 0));
         nb->AddPage(p, "Left Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxLEFT);
 
-        CHECK( nb->GetBestSize() == wxSize(125, 100 + tabHeight) );
+        expect( nb->GetBestSize().x == 325 ) << fmt::format("{}", nb->GetBestSize().x);
+        expect( nb->GetBestSize().y == (200 + tabHeight)) << fmt::format("{}", nb->GetBestSize().y);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(50, 0));
         nb->AddPage(p, "Right Pane 1");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxRIGHT);
 
-        CHECK( nb->GetBestSize() == wxSize(175, 100 + tabHeight) );
+        expect( nb->GetBestSize().x == 375 ) << fmt::format("{}", nb->GetBestSize().x);
+        expect( nb->GetBestSize().y == (200 + tabHeight)) << fmt::format("{}", nb->GetBestSize().y);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(100, 0));
         nb->AddPage(p, "Right Pane 2");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxRIGHT);
 
-        CHECK( nb->GetBestSize() == wxSize(275, 100 + tabHeight) );
-    }
+        expect( nb->GetBestSize().x == 475 ) << fmt::format("{}", nb->GetBestSize().x);
+        expect( nb->GetBestSize().y == (200 + tabHeight)) << fmt::format("{}", nb->GetBestSize().y);
+    };
 
-    SUBCASE( "Vertical split" )
+    "Vertical split"_test = [&]
     {
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(0, 100));
         nb->AddPage(p, "Top Pane 1");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxTOP);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(0, 50));
         nb->AddPage(p, "Top Pane 2");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxTOP);
 
-        CHECK( nb->GetBestSize() == wxSize(100, 250 + 3*tabHeight) );
+        expect( nb->GetBestSize().x == 475 ) << fmt::format("{}", nb->GetBestSize().x);
+        expect( nb->GetBestSize().y == (350 + 3 * tabHeight)) << fmt::format("{}", nb->GetBestSize().y);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(0, 25));
         nb->AddPage(p, "Bottom Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxBOTTOM);
 
-        CHECK( nb->GetBestSize() == wxSize(100, 275 + 4*tabHeight) );
-    }
+        expect( nb->GetBestSize().y == (375 + 4 * tabHeight)) << fmt::format("{}", nb->GetBestSize().y);
+    };
 
-    SUBCASE( "Surrounding panes" )
+    "Surrounding panes"_test = [&]
     {
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(50, 25));
         nb->AddPage(p, "Bottom Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxBOTTOM);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(50, 120));
         nb->AddPage(p, "Right Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxRIGHT);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(225, 50));
         nb->AddPage(p, "Top Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxTOP);
 
-        p = new wxPanel(nb);
+        p = new wxPanel(nb.get());
         p->SetMinSize(wxSize(25, 105));
         nb->AddPage(p, "Left Pane");
         nb->Split(nb->GetPageCount()-1, wxDirection::wxLEFT);
 
-        CHECK( nb->GetBestSize() == wxSize(250, 175 + 3*tabHeight) );
-    }
-}
+        expect( nb->GetBestSize().x == 550 ) << fmt::format("{}", nb->GetBestSize().x);
+        expect( nb->GetBestSize().y == (522 + 3*tabHeight)) << fmt::format("{} {}", nb->GetBestSize().y, tabHeight);
+    };
+};
 
 #endif

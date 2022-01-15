@@ -6,68 +6,75 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#if wxUSE_GAUGE
+module;
 
 #include "wx/app.h"
 #include "wx/gauge.h"
 
+export module WX.Test.Gauge;
+
+import WX.MetaTest;
 import WX.Test.Prec;
 
-TEST_CASE("Gauge test")
+#if wxUSE_GAUGE
+
+namespace ut = boost::ut;
+
+ut::suite GaugeTests = []
 {
+    using namespace ut;
+    
     auto m_gauge = new wxGauge(wxTheApp->GetTopWindow(), wxID_ANY, 100);
 
-    SUBCASE("Direction")
+    "Direction"_test = [&]
     {
         //We should default to a horizontal gauge
-        CHECK(!m_gauge->IsVertical());
+        expect(!m_gauge->IsVertical());
 
         wxDELETE(m_gauge);
         m_gauge = new wxGauge(wxTheApp->GetTopWindow(), wxID_ANY, 100,
                               wxDefaultPosition, wxDefaultSize, wxGA_VERTICAL);
 
-        CHECK(m_gauge->IsVertical());
+        expect(m_gauge->IsVertical());
 
         wxDELETE(m_gauge);
         m_gauge = new wxGauge(wxTheApp->GetTopWindow(), wxID_ANY, 100,
                               wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
 
-        CHECK(!m_gauge->IsVertical());
-    }
+        expect(!m_gauge->IsVertical());
+    };
 
-    SUBCASE("Range")
+    "Range"_test = [&]
     {
-        CHECK_EQ(100, m_gauge->GetRange());
+        expect(100 == m_gauge->GetRange());
 
         m_gauge->SetRange(50);
 
-        CHECK_EQ(50, m_gauge->GetRange());
+        expect(50 == m_gauge->GetRange());
 
         m_gauge->SetRange(0);
 
-        CHECK_EQ(0, m_gauge->GetRange());
-    }
+        expect(0 == m_gauge->GetRange());
+    };
 
-    SUBCASE("Value")
+    "Value"_test = [&]
     {
-        CHECK_EQ(0, m_gauge->GetValue());
+        expect(0 == m_gauge->GetValue());
 
         m_gauge->SetValue(50);
 
-        CHECK_EQ(50, m_gauge->GetValue());
+        expect(50 == m_gauge->GetValue());
 
         m_gauge->SetValue(0);
 
-        CHECK_EQ(0, m_gauge->GetValue());
+        expect(0 == m_gauge->GetValue());
 
         m_gauge->SetValue(100);
 
-        CHECK_EQ(100, m_gauge->GetValue());
-    }
+        expect(100 == m_gauge->GetValue());
+    };
 
     wxTheApp->GetTopWindow()->DestroyChildren();
-}
+};
 
 #endif //wxUSE_GAUGE

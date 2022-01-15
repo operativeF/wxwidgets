@@ -46,7 +46,7 @@ set(TEST_GUI_SRC
     graphics/graphpath.ixx
     graphics/imagelist.ixx
     #config/config.cpp # FIXME: Use a more robust system for writing to file. Currently very fragile.
-    controls/auitest.cpp
+    controls/auitest.ixx
     controls/bitmapcomboboxtest.cpp
     controls/bitmaptogglebuttontest.cpp
     controls/buttontest.cpp
@@ -58,21 +58,21 @@ set(TEST_GUI_SRC
     controls/dataviewctrltest.cpp
     controls/datepickerctrltest.cpp
     controls/frametest.ixx
-    controls/gaugetest.cpp
-    controls/gridtest.cpp
-    controls/headerctrltest.cpp
+    controls/gaugetest.ixx
+    controls/gridtest.ixx
+    controls/headerctrltest.ixx
     #controls/htmllboxtest.cpp # FIXME: Need to get rid of wxArrayString
     controls/hyperlinkctrltest.cpp
-    controls/label.cpp
+    controls/label.ixx
     controls/listbooktest.cpp
     controls/listboxtest.cpp
     controls/listctrltest.cpp
     controls/listviewtest.cpp
     controls/markuptest.cpp
-    controls/notebooktest.cpp
+    controls/notebooktest.ixx
     controls/ownerdrawncomboboxtest.cpp
     controls/pickertest.cpp
-    controls/radioboxtest.cpp
+    controls/radioboxtest.ixx
     controls/radiobuttontest.cpp
     controls/rearrangelisttest.cpp
     #controls/richtextctrltest.cpp # FIXME: Need to get rid of wxArrayString
