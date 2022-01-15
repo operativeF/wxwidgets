@@ -112,7 +112,7 @@ set(TEST_GUI_SRC
     misc/selstoretest.cpp
     #misc/garbage.cpp
     misc/safearrayconverttest.cpp
-    misc/settings.cpp
+    misc/settings.ixx
     # This one is intentionally duplicated here (it is also part of
     # non-GUI test) as sockets behave differently in console and GUI
     # applications.
@@ -121,8 +121,8 @@ set(TEST_GUI_SRC
     persistence/dataview.cpp
     rowheightcache/rowheightcachetest.cpp
     sizers/boxsizer.cpp
-    sizers/gridsizer.cpp
-    sizers/wrapsizer.cpp
+    sizers/gridsizer.ixx
+    sizers/wrapsizer.ixx
     toplevel/toplevel.cpp
     validators/valnum.cpp
     validators/valtext.cpp

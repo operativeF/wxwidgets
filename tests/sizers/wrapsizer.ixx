@@ -6,16 +6,26 @@
 // Copyright:   (c) 2010 wxWidgets development team
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
 #include "wx/app.h"
 #include "wx/window.h"
 #include "wx/wrapsizer.h"
 
+export module WX.Test.WrapSizer;
+
+import WX.MetaTest;
 import WX.Test.Prec;
 
-TEST_CASE("wxWrapSizer::CalcMin")
+namespace ut = boost::ut;
+
+export
 {
+
+ut::suite WrapSizerCalcMinTest = []
+{
+    using namespace ut;
+
     auto win = std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY);
     win->SetClientSize(180, 240);
 
@@ -34,7 +44,7 @@ TEST_CASE("wxWrapSizer::CalcMin")
     sizer->Add(child1);
     win->Layout();
 
-    CHECK( sizeMinExpected == sizer->CalcMin() );
+    expect( sizeMinExpected == sizer->CalcMin() );
 
     // If both children can fit in the same row, the minimal size of the sizer
     // is determined by the sum of their minimal horizontal dimensions and
@@ -49,7 +59,7 @@ TEST_CASE("wxWrapSizer::CalcMin")
     sizer->Add(child2);
     win->Layout();
 
-    CHECK( sizeMinExpected == sizer->CalcMin() );
+    expect( sizeMinExpected == sizer->CalcMin() );
 
     // Three children will take at least two rows so the minimal size in
     // vertical direction must increase.
@@ -62,11 +72,13 @@ TEST_CASE("wxWrapSizer::CalcMin")
     sizer->Add(child3);
     win->Layout();
 
-    CHECK( sizeMinExpected == sizer->CalcMin() );
-}
+    expect( sizeMinExpected == sizer->CalcMin() );
+};
 
-TEST_CASE("wxWrapSizer::CalcMinFromMinor")
+ut::suite WrapSizerCalcMinFromMinorTest = []
 {
+    using namespace ut;
+
     auto win = std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY);
     win->SetClientSize(180, 240);
 
@@ -101,5 +113,7 @@ TEST_CASE("wxWrapSizer::CalcMinFromMinor")
     // First two windows should be in a first row and the third in a second row.
     const wxSize sizeMinExpected = wxSize(sizeChild3.x, sizeChild2.y + sizeChild3.y);
     win->Layout();
-    CHECK(sizeMinExpected == wrapSizer->CalcMin());
-}
+    expect(sizeMinExpected == wrapSizer->CalcMin());
+};
+
+} // export

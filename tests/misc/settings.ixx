@@ -6,18 +6,32 @@
 // Copyright:   (c) 2009 Francesco Montorsi
 ///////////////////////////////////////////////////////////////////////////////
 
+module;
+
 #include "doctest.h"
 
 #include "wx/brush.h"
 #include "wx/pen.h"
 #include "wx/fontenum.h"
 
+#include <fmt/core.h>
+
+export module WX.Test.Settings;
+
 import WX.Test.Prec;
 
 import WX.Utils.Settings;
+import WX.MetaTest;
 
 import <algorithm>;
+import <ranges>;
 
+namespace ut = boost::ut;
+
+// NOTE / FIXME: Cannot convert to new test framework.
+// C:\dev\wxWidgets\tests\misc\settings.ixx(156,1): fatal error C1001: Internal compiler error.
+// (compiler file 'msc1.cpp', line 1691)
+// Most likely cannot reach static member functions.
 TEST_CASE("Get colour")
 {
     for (unsigned int i=wxSYS_COLOUR_SCROLLBAR; i < wxSYS_COLOUR_MAX; i++)
@@ -45,8 +59,13 @@ TEST_CASE("Get font")
         });
 }
 
-TEST_CASE("Get global colours")
+export
 {
+
+ut::suite GlobalColorTest = []
+{
+    using namespace ut;
+
     static const std::array cols =
     {
         *wxBLACK,
@@ -60,12 +79,14 @@ TEST_CASE("Get global colours")
 
     std::ranges::for_each(cols,
         [](const auto& col) {
-            CHECK( col.IsOk() );
+            expect( col.IsOk() );
         });
-}
+};
 
-TEST_CASE("Get global fonts")
+ut::suite GlobalFontTest = []
 {
+    using namespace ut;
+
     static const std::array fonts =
     {
         *wxNORMAL_FONT,
@@ -75,22 +96,24 @@ TEST_CASE("Get global fonts")
     };
 
     std::ranges::for_each(fonts,
-        [](const auto& font) {
-        CHECK( font.IsOk() );
+        [](const auto& font)
+    {
+        expect( font.IsOk() );
 
-        const wxString facename = font.GetFaceName();
+        const auto facename = font.GetFaceName();
+
         if ( !facename.empty() )
         {
-            CHECK_MESSAGE(
-                wxFontEnumerator::IsValidFacename(facename),
-                ("font #%s: facename \"%s\" is invalid", font, facename)
-            );
+            expect(wxFontEnumerator::IsValidFacename(facename)) <<
+                fmt::format("facename \"%s\" is invalid", facename);
         }
     });
-}
+};
 
-TEST_CASE("Get global brushes")
+ut::suite GlobalBrushTest = []
 {
+    using namespace ut;
+
     static const std::array brushes =
     {
         *wxBLACK_BRUSH,
@@ -107,12 +130,14 @@ TEST_CASE("Get global brushes")
 
     std::ranges::for_each(brushes,
         [](const auto& brush) {
-            CHECK(brush.IsOk());
+            expect(brush.IsOk());
         });
-}
+};
 
-TEST_CASE("Get global pens")
+ut::suite GlobalPensTest = []
 {
+    using namespace ut;
+
     static const std::array pens =
     {
         *wxBLACK_DASHED_PEN,
@@ -130,6 +155,8 @@ TEST_CASE("Get global pens")
 
     std::ranges::for_each(pens,
         [](const auto& pen) {
-            CHECK(pen.IsOk());
+            expect(pen.IsOk());
         });
-}
+};
+
+} // export
