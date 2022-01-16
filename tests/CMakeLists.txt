@@ -49,7 +49,7 @@ set(TEST_GUI_SRC
     controls/auitest.ixx
     controls/bitmapcomboboxtest.cpp
     controls/bitmaptogglebuttontest.cpp
-    controls/buttontest.cpp
+    controls/buttontest.ixx
     controls/checkboxtest.ixx
     controls/checklistboxtest.cpp
     controls/choicebooktest.cpp
