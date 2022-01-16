@@ -62,7 +62,7 @@ set(TEST_GUI_SRC
     controls/gridtest.ixx
     controls/headerctrltest.ixx
     #controls/htmllboxtest.cpp # FIXME: Need to get rid of wxArrayString
-    controls/hyperlinkctrltest.cpp
+    controls/hyperlinkctrltest.ixx
     controls/label.ixx
     controls/listbooktest.cpp
     controls/listboxtest.cpp

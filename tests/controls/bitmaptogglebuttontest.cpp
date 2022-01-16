@@ -34,9 +34,9 @@ TEST_CASE("Bitmap toggle button test")
     m_button->Update();
     m_button->Refresh();
 
+#if wxUSE_UIACTIONSIMULATOR
     SUBCASE("Click")
     {
-    #if wxUSE_UIACTIONSIMULATOR
         EventCounter clicked(m_button.get(), wxEVT_TOGGLEBUTTON);
 
         wxUIActionSimulator sim;
@@ -63,8 +63,8 @@ TEST_CASE("Bitmap toggle button test")
 
         CHECK_EQ(1, clicked.GetCount());
         CHECK(!m_button->GetValue());
-    #endif // wxUSE_UIACTIONSIMULATOR
     }
+#endif // wxUSE_UIACTIONSIMULATOR
 
     SUBCASE("Value")
     {

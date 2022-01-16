@@ -26,7 +26,7 @@ void wxTestableFrame::OnEvent(wxEvent& evt)
 {
     m_count[evt.GetEventType()]++;
 
-    if(! evt.IsCommandEvent() )
+    if(!evt.IsCommandEvent())
         evt.Skip();
 }
 
@@ -40,8 +40,8 @@ void wxTestableFrame::ClearEventCount(wxEventType type)
     m_count[type] = 0;
 }
 
-EventCounter::EventCounter(wxWindow* win, wxEventType type) : m_type(type),
-                                                              m_win(win)
+EventCounter::EventCounter(wxWindow* win, wxEventType type) : m_type{type},
+                                                              m_win{win}
 
 {
     m_frame = dynamic_cast<wxTestableFrame*>(wxTheApp->GetTopWindow());
@@ -57,9 +57,6 @@ EventCounter::~EventCounter()
 
     //This stops spurious counts from previous tests
     Clear();
-
-    m_frame = nullptr;
-    m_win = nullptr;
 }
 
 bool EventCounter::WaitEvent(int timeInMs)
