@@ -20,69 +20,69 @@ export module WX.Test.Label;
 import WX.MetaTest;
 import WX.Test.Prec;
 
+import <array>;
+
 namespace ut = boost::ut;
 
 constexpr char ORIGINAL_LABEL[] = "origin label";
-
-// The actual testing function. It will change the label of the provided
-// control, which is assumed to be ORIGINAL_LABEL initially.
-static void DoTestLabel(wxControl* c)
-{
-    using namespace ut;
-
-    expect( c->GetLabel() == ORIGINAL_LABEL );
-
-    static const std::array<std::string, 7> testLabelArray = {
-        "label without mnemonics and markup",
-        "label with &mnemonic",
-        "label with <span foreground='blue'>some</span> <b>markup</b>",
-        "label with <span foreground='blue'>some</span> <b>markup</b> and &mnemonic",
-        "label with an && (ampersand)",
-        "label with an && (&ampersand)",
-        "", // empty label should work too
-    };
-
-    for ( const auto& label : testLabelArray )
-    {
-        // GetLabel() should always return the string passed to SetLabel()
-        c->SetLabel(label);
-        expect( c->GetLabel() == label );
-
-        // GetLabelText() should always return unescaped version of the label
-        expect( c->GetLabelText() == wxControl::RemoveMnemonics(label) );
-
-        // GetLabelText() should always return the string passed to SetLabelText()
-        c->SetLabelText(label);
-        expect( c->GetLabelText() == label );
-
-        // And GetLabel() should be the escaped version of the text
-        expect( label == wxControl::RemoveMnemonics(c->GetLabel()) );
-    }
-
-    // Check that both "&" and "&amp;" work in markup.
-#if wxUSE_MARKUP
-    c->SetLabelMarkup("mnemonic in &amp;markup");
-    expect( c->GetLabel() == "mnemonic in &markup" );
-    expect( c->GetLabelText() == "mnemonic in markup" );
-
-    c->SetLabelMarkup("mnemonic in &markup");
-    expect( c->GetLabel() == "mnemonic in &markup" );
-    expect( c->GetLabelText() == "mnemonic in markup" );
-
-    c->SetLabelMarkup("&amp;&amp; finally");
-    expect( c->GetLabel() == "&& finally" );
-    expect( c->GetLabelText() == "& finally" );
-
-    c->SetLabelMarkup("&& finally");
-    expect( c->GetLabel() == "&& finally" );
-    expect( c->GetLabelText() == "& finally" );
-#endif // wxUSE_MARKUP
-}
 
 ut::suite ControlLabelTest = []
 {
     using namespace ut;
 
+    // The actual testing function. It will change the label of the provided
+    // control, which is assumed to be ORIGINAL_LABEL initially.
+    auto DoTestLabel = [&](wxControl* c)
+    {
+        expect( c->GetLabel() == ORIGINAL_LABEL );
+
+        static const auto testLabelArray = std::to_array<std::string>({
+            "label without mnemonics and markup",
+            "label with &mnemonic",
+            "label with <span foreground='blue'>some</span> <b>markup</b>",
+            "label with <span foreground='blue'>some</span> <b>markup</b> and &mnemonic",
+            "label with an && (ampersand)",
+            "label with an && (&ampersand)",
+            "", // empty label should work too
+        });
+
+        for ( auto&& label : testLabelArray )
+        {
+            // GetLabel() should always return the string passed to SetLabel()
+            c->SetLabel(label);
+            expect( c->GetLabel() == label );
+
+            // GetLabelText() should always return unescaped version of the label
+            expect( c->GetLabelText() == wxControl::RemoveMnemonics(label) );
+
+            // GetLabelText() should always return the string passed to SetLabelText()
+            c->SetLabelText(label);
+            expect( c->GetLabelText() == label );
+
+            // And GetLabel() should be the escaped version of the text
+            expect( label == wxControl::RemoveMnemonics(c->GetLabel()) );
+        }
+
+        // Check that both "&" and "&amp;" work in markup.
+    #if wxUSE_MARKUP
+        c->SetLabelMarkup("mnemonic in &amp;markup");
+        expect( c->GetLabel() == "mnemonic in &markup" );
+        expect( c->GetLabelText() == "mnemonic in markup" );
+
+        c->SetLabelMarkup("mnemonic in &markup");
+        expect( c->GetLabel() == "mnemonic in &markup" );
+        expect( c->GetLabelText() == "mnemonic in markup" );
+
+        c->SetLabelMarkup("&amp;&amp; finally");
+        expect( c->GetLabel() == "&& finally" );
+        expect( c->GetLabelText() == "& finally" );
+
+        c->SetLabelMarkup("&& finally");
+        expect( c->GetLabel() == "&& finally" );
+        expect( c->GetLabelText() == "& finally" );
+    #endif // wxUSE_MARKUP
+    };
+    
     "wxStaticText"_test = [&]
     {
         const auto st = std::make_unique<wxStaticText>(wxTheApp->GetTopWindow(),

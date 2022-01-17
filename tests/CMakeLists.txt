@@ -71,7 +71,8 @@ set(TEST_GUI_SRC
     controls/markuptest.cpp
     controls/notebooktest.ixx
     controls/ownerdrawncomboboxtest.cpp
-    controls/pickertest.cpp
+    controls/pickertest.ixx
+    controls/pickerbasetest.ixx
     controls/radioboxtest.ixx
     controls/radiobuttontest.cpp
     controls/rearrangelisttest.cpp
