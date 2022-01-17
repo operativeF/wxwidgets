@@ -79,7 +79,7 @@ set(TEST_GUI_SRC
     #controls/richtextctrltest.cpp # FIXME: Need to get rid of wxArrayString
     controls/searchctrltest.cpp
     controls/simplebooktest.cpp
-    controls/slidertest.cpp
+    controls/slidertest.ixx
     controls/spinctrldbltest.cpp
     controls/spinctrltest.cpp
     controls/styledtextctrltest.cpp

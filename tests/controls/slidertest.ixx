@@ -6,9 +6,9 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_SLIDER
+#include "doctest.h"
 
 #include "wx/app.h"
 #include "wx/slider.h"
@@ -16,16 +16,107 @@
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
-import WX.Test.Prec;
+export module WX.Test.Slider;
 
-TEST_CASE("Slider control test")
+import WX.Test.Prec;
+import WX.MetaTest;
+
+#if wxUSE_SLIDER
+
+namespace ut = boost::ut;
+
+ut::suite SliderTests = []
 {
+    using namespace ut;
+
     unsigned int style = wxSL_HORIZONTAL;
 
-    auto m_slider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
+    auto testSlider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
                                           50, 0, 100,
                                           wxDefaultPosition, wxDefaultSize,
                                           style);
+    
+    "Value"_test = [&]
+    {
+        testSlider->SetValue(30);
+
+        expect(30_i == testSlider->GetValue());
+
+        //When setting a value larger that max or smaller than min
+        //max and min are set
+        testSlider->SetValue(-1);
+
+        expect(0_i == testSlider->GetValue());
+
+        testSlider->SetValue(110);
+
+        expect(100_i == testSlider->GetValue());
+    };
+
+    "Range"_test = [&]
+    {
+        expect(0_i == testSlider->GetMin());
+        expect(100_i == testSlider->GetMax());
+
+        // Changing range shouldn't change the value.
+        testSlider->SetValue(17);
+        testSlider->SetRange(0, 200);
+        expect(17_i == testSlider->GetValue());
+
+        //Test negative ranges
+        testSlider->SetRange(-50, 0);
+
+        expect(-50_i == testSlider->GetMin());
+        expect(0_i == testSlider->GetMax());
+    };
+
+    // TODO: Figure out a better way to do this?
+    testSlider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                        50, 0, 100,
+                                        wxDefaultPosition, wxDefaultSize,
+                                        wxSL_HORIZONTAL | wxSL_INVERSE);
+
+    "Inverse Value"_test = [&]
+    {
+        testSlider->SetValue(30);
+
+        expect(30_i == testSlider->GetValue());
+
+        //When setting a value larger that max or smaller than min
+        //max and min are set
+        testSlider->SetValue(-1);
+
+        expect(0_i == testSlider->GetValue());
+
+        testSlider->SetValue(110);
+
+        expect(100_i == testSlider->GetValue());
+    };
+
+    "Inverse Range"_test = [&]
+    {
+        expect(0_i == testSlider->GetMin());
+        expect(100_i == testSlider->GetMax());
+
+        // Changing range shouldn't change the value.
+        testSlider->SetValue(17);
+        testSlider->SetRange(0, 200);
+        expect(17_i == testSlider->GetValue());
+
+        //Test negative ranges
+        testSlider->SetRange(-50, 0);
+
+        expect(-50_i == testSlider->GetMin());
+        expect(0_i == testSlider->GetMax());
+    };
+};
+
+TEST_CASE("Slider control test")
+{
+    auto m_slider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                          50, 0, 100,
+                                          wxDefaultPosition, wxDefaultSize,
+                                          wxSL_HORIZONTAL);
 
 #if wxUSE_UIACTIONSIMULATOR
     SUBCASE("PageUpDown")
@@ -106,43 +197,6 @@ TEST_CASE("Slider control test")
         CHECK_EQ(28, m_slider->GetValue());
     }
 
-#endif
-
-    SUBCASE("Value")
-    {
-        m_slider->SetValue(30);
-
-        CHECK_EQ(30, m_slider->GetValue());
-
-        //When setting a value larger that max or smaller than min
-        //max and min are set
-        m_slider->SetValue(-1);
-
-        CHECK_EQ(0, m_slider->GetValue());
-
-        m_slider->SetValue(110);
-
-        CHECK_EQ(100, m_slider->GetValue());
-    }
-
-    SUBCASE("Range")
-    {
-        CHECK_EQ(0, m_slider->GetMin());
-        CHECK_EQ(100, m_slider->GetMax());
-
-        // Changing range shouldn't change the value.
-        m_slider->SetValue(17);
-        m_slider->SetRange(0, 200);
-        CHECK_EQ(17, m_slider->GetValue());
-
-        //Test negative ranges
-        m_slider->SetRange(-50, 0);
-
-        CHECK_EQ(-50, m_slider->GetMin());
-        CHECK_EQ(0, m_slider->GetMax());
-    }
-
-#if wxUSE_UIACTIONSIMULATOR
     SUBCASE("Thumb")
     {
         EventCounter track(m_slider.get(), wxEVT_SCROLL_THUMBTRACK);
@@ -163,45 +217,8 @@ TEST_CASE("Slider control test")
     #if defined(__WXMSW__) || defined(__WXGTK__)
         CHECK_EQ(1, changed.GetCount());
     #endif
+    }
 #endif
-    }
-
-    // TODO: Figure out a better way to do this.
-    style |= wxSL_INVERSE;
-
-    SUBCASE("Inverse Value")
-    {
-        m_slider->SetValue(30);
-
-        CHECK_EQ(30, m_slider->GetValue());
-
-        //When setting a value larger that max or smaller than min
-        //max and min are set
-        m_slider->SetValue(-1);
-
-        CHECK_EQ(0, m_slider->GetValue());
-
-        m_slider->SetValue(110);
-
-        CHECK_EQ(100, m_slider->GetValue());
-    }
-
-    SUBCASE("Inverse Range")
-    {
-        CHECK_EQ(0, m_slider->GetMin());
-        CHECK_EQ(100, m_slider->GetMax());
-
-        // Changing range shouldn't change the value.
-        m_slider->SetValue(17);
-        m_slider->SetRange(0, 200);
-        CHECK_EQ(17, m_slider->GetValue());
-
-        //Test negative ranges
-        m_slider->SetRange(-50, 0);
-
-        CHECK_EQ(-50, m_slider->GetMin());
-        CHECK_EQ(0, m_slider->GetMax());
-    }
 }
 
 #endif
