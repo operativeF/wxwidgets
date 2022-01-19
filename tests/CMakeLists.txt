@@ -74,7 +74,7 @@ set(TEST_GUI_SRC
     controls/pickertest.ixx
     controls/pickerbasetest.ixx
     controls/radioboxtest.ixx
-    controls/radiobuttontest.cpp
+    controls/radiobuttontest.ixx
     controls/rearrangelisttest.cpp
     #controls/richtextctrltest.cpp # FIXME: Need to get rid of wxArrayString
     controls/searchctrltest.cpp

@@ -6,9 +6,9 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
+module;
 
-#if wxUSE_RADIOBTN
+#include "doctest.h"
 
 #include "wx/app.h"
 #include "wx/button.h"
@@ -20,9 +20,15 @@
 #include "testableframe.h"
 #include "testwindow.h"
 
-import WX.Core.Sizer;
+export module WX.Test.RadioButton;
 
+import WX.Core.Sizer;
+import WX.MetaTest;
 import WX.Test.Prec;
+
+#if wxUSE_RADIOBTN
+
+namespace ut = boost::ut;
 
 class RadioButtonTestCase
 {
@@ -41,6 +47,74 @@ RadioButtonTestCase::RadioButtonTestCase()
     m_radio->Refresh();
 }
 
+ut::suite RadioButtonTests = []
+{
+    using namespace ut;
+
+    auto m_radio = std::make_unique<wxRadioButton>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                                   "wxRadioButton");
+    m_radio->Update();
+    m_radio->Refresh();
+
+    "RadioButtonSingle"_test = [&]
+    {
+        //Create a group of 2 buttons, having second button selected
+        auto gradio0 = std::make_unique<wxRadioButton>(wxTheApp->GetTopWindow(),
+                                                       wxID_ANY, "wxRadioButton",
+                                                       wxDefaultPosition,
+                                                       wxDefaultSize, wxRB_GROUP);
+
+        auto gradio1 = std::make_unique<wxRadioButton>(wxTheApp->GetTopWindow(),
+                                                       wxID_ANY,
+                                                       "wxRadioButton");
+
+        gradio1->SetValue(true);
+
+        //Create a "single" button (by default it will not be selected)
+        auto sradio = std::make_unique<wxRadioButton>(wxTheApp->GetTopWindow(),
+                                                      wxID_ANY,
+                                                      "wxRadioButton",
+                                                      wxDefaultPosition,
+                                                      wxDefaultSize,
+                                                      wxRB_SINGLE);
+
+        //Create a non-grouped button and select it
+        auto ngradio = std::make_unique<wxRadioButton>(wxTheApp->GetTopWindow(),
+            wxID_ANY, "wxRadioButton");
+
+        ngradio->SetValue(true);
+
+        //Select the "single" button
+        sradio->SetValue(true);
+
+        expect(gradio1->GetValue());
+        expect(ngradio->GetValue());
+
+        // Also check that navigation works as expected with "single" buttons.
+        expect(wxWindowPtr(sradio->GetFirstInGroup()) == wxWindowPtr(sradio));
+        expect(wxWindowPtr(sradio->GetLastInGroup()) == wxWindowPtr(sradio));
+        expect(wxWindowPtr(sradio->GetPreviousInGroup()) == wxWindowPtr(nullptr));
+        expect(wxWindowPtr(sradio->GetNextInGroup()) == wxWindowPtr(nullptr));
+    };
+
+#ifndef __WXGTK__
+    "RadioButtonValue"_test = [&]
+    {
+        EventCounter selected(m_radio.get(), wxEVT_RADIOBUTTON);
+
+        m_radio->SetValue(true);
+
+        expect(m_radio->GetValue());
+
+        m_radio->SetValue(false);
+
+        expect(!m_radio->GetValue());
+
+        expect(selected.GetCount() == 0);
+    };
+#endif
+};
+
 TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Click")
 {
     // OS X doesn't support selecting a single radio button
@@ -56,23 +130,6 @@ TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Click")
     wxYield();
 
     CHECK(selected.GetCount() == 1);
-#endif
-}
-
-TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Value")
-{
-#ifndef __WXGTK__
-    EventCounter selected(m_radio.get(), wxEVT_RADIOBUTTON);
-
-    m_radio->SetValue(true);
-
-    CHECK(m_radio->GetValue());
-
-    m_radio->SetValue(false);
-
-    CHECK(!m_radio->GetValue());
-
-    CHECK(selected.GetCount() == 0);
 #endif
 }
 

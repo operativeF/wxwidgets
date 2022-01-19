@@ -8,8 +8,6 @@
 
 module;
 
-#include "doctest.h"
-
 #include "wx/app.h"
 #include "wx/button.h"
 
@@ -93,15 +91,10 @@ ut::suite ButtonTests = []
         m_button->SetLabel("");
         expect(nothrow([&]{ bmp_button->Disable(); }));
     };
-};
-
-TEST_CASE("Button test")
-{
-    auto m_button = std::make_unique<wxButton>(wxTheApp->GetTopWindow(), wxID_ANY, "wxButton");
-
-#if wxUSE_UIACTIONSIMULATOR
-
-    SUBCASE("Click")
+    
+    // FIXME: Fails; currently unknown as to why, but some actions are indeed
+    // registered.
+    "Click"_test = [&]
     {
         //We use the internal class EventCounter which handles connecting and
         //disconnecting the control to the wxTestableFrame
@@ -117,27 +110,23 @@ TEST_CASE("Button test")
         sim.MouseClick();
         wxYield();
 
-        CHECK_EQ( 1, clicked.GetCount() );
-    }
+        expect( 1 == clicked.GetCount() );
+    };
 
-    SUBCASE("Disabled")
+    // // FIXME: Test will succeed whether or not actual functions work properly!
+    // // Needs to add an enabled state to verify actual functionality.
+    "Disabled"_test = [&]
     {
         wxUIActionSimulator sim;
 
         // In this test we disable the button and check events are not sent and we
         // do it once by disabling the previously enabled button and once by
         // creating the button in the disabled state.
-        SUBCASE("Disable after creation")
-        {
-            m_button->Disable();
-        }
+        m_button->Disable();
 
-        SUBCASE("Create disabled")
-        {
-            m_button = std::make_unique<wxButton>();
-            m_button->Disable();
-            m_button->Create(wxTheApp->GetTopWindow(), wxID_ANY, "wxButton");
-        }
+        m_button = std::make_unique<wxButton>();
+        m_button->Disable();
+        m_button->Create(wxTheApp->GetTopWindow(), wxID_ANY, "wxButton");
 
         EventCounter clicked(m_button.get(), wxEVT_BUTTON);
 
@@ -147,10 +136,8 @@ TEST_CASE("Button test")
         sim.MouseClick();
         wxYield();
 
-        CHECK_EQ( 0, clicked.GetCount() );
-    }
-
-#endif // wxUSE_UIACTIONSIMULATOR
-}
+        expect( 0 == clicked.GetCount() );
+    };
+};
 
 #endif //wxUSE_BUTTON
