@@ -127,9 +127,9 @@ set(TEST_GUI_SRC
     toplevel/toplevel.cpp
     validators/valnum.cpp
     validators/valtext.cpp
-    window/clientsize.cpp
-    window/setsize.cpp
-    xml/xrctest.cpp
+    window/clientsize.ixx
+    window/setsize.ixx
+    # xml/xrctest.cpp # FIXME: Not used right now.
 )
 
 add_executable(test_gui
