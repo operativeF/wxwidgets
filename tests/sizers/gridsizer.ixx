@@ -157,15 +157,10 @@ export ut::suite GridSizerLayoutTest = []
         expect( children[2]->GetPosition() == wxPoint(         0, yMid) );
         expect( children[3]->GetPosition() == wxPoint(sizeRest.x, yMid) );
     };
+
+    "IncompatibleFlags"_test = [&]
+    {
+        expect(throws([&]{ gridtest.m_sizer->Add(10, 10, wxSizerFlags().Expand().Centre()); })) <<
+            "Combining wxEXPAND and wxCENTRE should throw.";
+    };
 };
-
-
-// TEST_CASE_FIXTURE(GridSizerTestCase,
-//                  "wxGridSizer::IncompatibleFlags")
-// {
-//     CHECK_THROWS_MESSAGE
-//     (
-//         m_sizer->Add(10, 10, wxSizerFlags().Expand().Centre()),
-//         "Combining wxEXPAND and wxCENTRE should assert"
-//     );
-// }
