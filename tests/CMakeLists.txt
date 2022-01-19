@@ -121,7 +121,7 @@ set(TEST_GUI_SRC
     #persistence/tlw.cpp # FIXME: Relies on config to work correctly.
     persistence/dataview.cpp
     rowheightcache/rowheightcachetest.cpp
-    sizers/boxsizer.cpp
+    sizers/boxsizer.ixx
     sizers/gridsizer.ixx
     sizers/wrapsizer.ixx
     toplevel/toplevel.cpp
