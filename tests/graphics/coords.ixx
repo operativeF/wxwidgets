@@ -707,12 +707,6 @@ ut::suite CoordinatesDC = [] /*typename CoordDC>*/
     };
 };
 
-TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::NoTransform")
-{
-    // No transformations
-    NoTransform(m_dc);
-}
-
 TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::NoTransformEx")
 {
     // No transformations

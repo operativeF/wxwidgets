@@ -8,8 +8,6 @@
 
 module;
 
-#include "doctest.h"
-
 #include "wx/app.h"
 #include "wx/panel.h"
 

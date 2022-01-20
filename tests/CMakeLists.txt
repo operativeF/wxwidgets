@@ -108,7 +108,7 @@ set(TEST_GUI_SRC
     #html/htmlwindow.cpp
     #html/htmprint.cpp
     menu/accelentry.ixx
-    menu/menu.cpp
+    menu/menu.ixx
     misc/guifuncs.ixx
     misc/selstoretest.cpp
     #misc/garbage.cpp

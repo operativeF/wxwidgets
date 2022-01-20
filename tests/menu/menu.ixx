@@ -6,9 +6,7 @@
 // Copyright:   (c) 2010 wxWidgets team
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "doctest.h"
-
-#if wxUSE_MENUBAR
+module;
 
 #include "wx/app.h"
 #include "wx/frame.h"
@@ -18,7 +16,10 @@
 #include "wx/uiaction.h"
 #include "wx/utils.h"
 
+export module WX.Test.Menu;
+
 import WX.Test.Prec;
+import WX.MetaTest;
 
 import <cstdarg>;
 import <string>;
@@ -26,6 +27,10 @@ import <string>;
 // ----------------------------------------------------------------------------
 // helper
 // ----------------------------------------------------------------------------
+
+#if wxUSE_MENUBAR
+
+namespace ut = boost::ut;
 
 namespace
 {
@@ -50,7 +55,9 @@ void PopulateMenu(wxMenu* menu, const std::string& name,  size_t& itemcount)
 
 void RecursivelyCountMenuItems(const wxMenu* menu, size_t& count)
 {
-    CHECK( menu );
+    using namespace ut;
+
+    expect( menu );
 
     count += menu->GetMenuItemCount();
     for (size_t n=0; n < menu->GetMenuItemCount(); ++n)
@@ -95,7 +102,9 @@ public:
 
     std::unique_ptr<wxCommandEvent> GetEvent()
     {
-        CHECK(m_event);
+        using namespace ut;
+
+        expect(m_event != nullptr);
 
         return std::move(m_event);
     }
@@ -108,7 +117,9 @@ public:
 private:
     void OnMenu(wxCommandEvent& event)
     {
-        CHECK(m_event == nullptr);
+        using namespace ut;
+
+        expect(m_event == nullptr);
 
         m_event.reset(dynamic_cast<wxCommandEvent*>(event.Clone().release()));
     }
@@ -120,9 +131,11 @@ private:
 #endif // wxUSE_UIACTIONSIMULATOR
 
 
-TEST_CASE("Menu tests.")
+ut::suite MenuTests = []
 {
-    wxFrame* m_frame;
+    using namespace ut;
+
+    auto m_frame = std::make_unique<wxFrame>(wxTheApp->GetTopWindow(), wxID_ANY, "test frame");
 
     // Holds the number of menuitems contained in all the menus
     size_t m_itemCount;
@@ -137,8 +150,6 @@ TEST_CASE("Menu tests.")
 
     // The menu containing the item with MenuTestCase_Bar id.
     wxMenu* m_menuWithBar;
-
-    m_frame = new wxFrame(wxTheApp->GetTopWindow(), wxID_ANY, "test frame");
 
     wxMenu* fileMenu = new wxMenu;
     wxMenu* helpMenu = new wxMenu;
@@ -162,7 +173,7 @@ TEST_CASE("Menu tests.")
 
     // Check GetTitle() returns the correct string _before_ appending to the bar
     fileMenu->SetTitle("&Foo\tCtrl-F");
-    CHECK_EQ("&Foo\tCtrl-F", fileMenu->GetTitle());
+    expect("&Foo\tCtrl-F" == fileMenu->GetTitle());
 
     PopulateMenu(fileMenu, "Filemenu item ", m_itemCount);
 
@@ -189,84 +200,84 @@ TEST_CASE("Menu tests.")
     menuBar->Append(helpMenu, m_menuLabels[1]);
     m_frame->SetMenuBar(menuBar);
 
-    SUBCASE("FindInMenubar")
+    "FindInMenubar"_test = [&]
     {
         wxMenuBar* bar = m_frame->GetMenuBar();
 
         // Find by name:
-        CHECK( bar->FindMenu("File") != wxNOT_FOUND );
-        CHECK( bar->FindMenu("&File") != wxNOT_FOUND );
-        CHECK( bar->FindMenu("&Fail") == wxNOT_FOUND );
+        expect( bar->FindMenu("File") != wxNOT_FOUND );
+        expect( bar->FindMenu("&File") != wxNOT_FOUND );
+        expect( bar->FindMenu("&Fail") == wxNOT_FOUND );
 
         // Find by menu name plus item name:
-        CHECK( bar->FindMenuItem("File", "Foo") != wxNOT_FOUND );
-        CHECK( bar->FindMenuItem("&File", "&Foo") != wxNOT_FOUND );
+        expect( bar->FindMenuItem("File", "Foo") != wxNOT_FOUND );
+        expect( bar->FindMenuItem("&File", "&Foo") != wxNOT_FOUND );
         // and using the menu label
         int index = bar->FindMenu("&File");
-        CHECK( index != wxNOT_FOUND );
+        expect( index != wxNOT_FOUND );
         std::string menulabel = bar->GetMenuLabel(index);
-        CHECK( bar->FindMenuItem(menulabel, "&Foo") != wxNOT_FOUND );
+        expect( bar->FindMenuItem(menulabel, "&Foo") != wxNOT_FOUND );
         // and title
         std::string menutitle = bar->GetMenu(index)->GetTitle();
-        CHECK( bar->FindMenuItem(menutitle, "&Foo") != wxNOT_FOUND );
+        expect( bar->FindMenuItem(menutitle, "&Foo") != wxNOT_FOUND );
 
         // Find by position:
         for (size_t n=0; n < bar->GetMenuCount(); ++n)
         {
-            CHECK( bar->GetMenu(n) );
+            expect( bar->GetMenu(n) );
         }
 
         // Find by id:
         wxMenu* menu = nullptr;
         wxMenuItem* item = nullptr;
         item = bar->FindItem(MenuTestCase_Foo, &menu);
-        CHECK( item );
-        CHECK( menu );
+        expect( item );
+        expect( menu );
         // Check that the correct menu was found
-        CHECK( menu->FindChildItem(MenuTestCase_Foo) );
+        expect( menu->FindChildItem(MenuTestCase_Foo) );
 
         // Find submenu item:
         item = bar->FindItem(m_submenuItemId, &menu);
-        CHECK( item );
-        CHECK( menu );
+        expect( item );
+        expect( menu );
         // and, for completeness, a subsubmenu one:
         item = bar->FindItem(m_subsubmenuItemId, &menu);
-        CHECK( item );
-        CHECK( menu );
-    }
+        expect( item );
+        expect( menu );
+    };
 
-    SUBCASE("FindInMenu")
+    "FindInMenu"_test = [&]
     {
         wxMenuBar* bar = m_frame->GetMenuBar();
 
         // Find by name:
         wxMenu* menuFind = bar->GetMenu(0);
-        CHECK( menuFind->FindItem("Foo") != wxNOT_FOUND );
-        CHECK( menuFind->FindItem("&Foo") != wxNOT_FOUND );
+        expect( menuFind->FindItem("Foo") != wxNOT_FOUND );
+        expect( menuFind->FindItem("&Foo") != wxNOT_FOUND );
         // and for submenus
         wxMenu* menuHelp = bar->GetMenu(1);
-        CHECK( menuHelp->FindItem("Submenu") != wxNOT_FOUND );
-        CHECK( menuHelp->FindItem("Sub&menu") != wxNOT_FOUND );
+        expect( menuHelp->FindItem("Submenu") != wxNOT_FOUND );
+        expect( menuHelp->FindItem("Sub&menu") != wxNOT_FOUND );
 
         // Find by position:
         size_t n;
         for (n=0; n < menuHelp->GetMenuItemCount(); ++n)
         {
-            CHECK( menuHelp->FindItemByPosition(n) );
+            expect( menuHelp->FindItemByPosition(n) );
         }
 
         // Find by id:
-        CHECK( menuHelp->FindItem(MenuTestCase_Bar) );
-        CHECK( !menuHelp->FindItem(MenuTestCase_Foo) );
+        expect( menuHelp->FindItem(MenuTestCase_Bar) );
+        expect( !menuHelp->FindItem(MenuTestCase_Foo) );
 
         for (n=0; n < menuHelp->GetMenuItemCount(); ++n)
         {
             size_t locatedAt;
             wxMenuItem* itemByPos = menuHelp->FindItemByPosition(n);
-            CHECK( itemByPos );
+            expect( itemByPos );
             wxMenuItem* itemById = menuHelp->FindChildItem(itemByPos->GetId(), &locatedAt);
-            CHECK_EQ( itemByPos, itemById );
-            CHECK_EQ( locatedAt, n );
+            expect( itemByPos == itemById );
+            expect( locatedAt == n );
         }
 
         // Find submenu item:
@@ -277,119 +288,120 @@ TEST_CASE("Menu tests.")
             {
                 wxMenu* submenu;
                 wxMenuItem* submenuItem = menuHelp->FindItem(m_submenuItemId, &submenu);
-                CHECK( submenuItem );
-                CHECK( item->GetSubMenu() == submenu );
+                expect( submenuItem );
+                expect( item->GetSubMenu() == submenu );
             }
         }
-    }
+    };
 
-    SUBCASE("EnableTop")
+    "EnableTop"_test = [&]
     {
         wxMenuBar* const bar = m_frame->GetMenuBar();
-        CHECK( bar->IsEnabledTop(0) );
+        expect( bar->IsEnabledTop(0) );
         bar->EnableTop( 0, false );
-        CHECK( !bar->IsEnabledTop(0) );
+        expect( !bar->IsEnabledTop(0) );
         bar->EnableTop( 0, true );
-        CHECK( bar->IsEnabledTop(0) );
-    }
+        expect( bar->IsEnabledTop(0) );
+    };
 
-    SUBCASE("Count")
+    "Count"_test = [&]
     {
         wxMenuBar* bar = m_frame->GetMenuBar();
         // I suppose you could call this "counting menubars" :)
-        CHECK( bar );
+        expect( bar );
 
-        CHECK_EQ( bar->GetMenuCount(), 2 );
+        expect( bar->GetMenuCount() == 2 );
 
         size_t count = 0;
         for (size_t n=0; n < bar->GetMenuCount(); ++n)
         {
             RecursivelyCountMenuItems(bar->GetMenu(n), count);
         }
-        CHECK_EQ( count, m_itemCount );
-    }
 
-    SUBCASE("Labels")
+        expect( count == m_itemCount );
+    };
+
+    "Labels"_test = [&]
     {
         wxMenuBar* bar = m_frame->GetMenuBar();
-        CHECK( bar );
+        expect( bar );
         wxMenu* filemenu;
         wxMenuItem* itemFoo = bar->FindItem(MenuTestCase_Foo, &filemenu);
-        CHECK( itemFoo );
-        CHECK( filemenu );
+        expect( itemFoo );
+        expect( filemenu );
 
         // These return labels including mnemonics/accelerators:
 
         // wxMenuBar
-        CHECK_EQ( "&File", bar->GetMenuLabel(0) );
-        CHECK_EQ( "&Foo\tCtrl-F", bar->GetLabel(MenuTestCase_Foo) );
+        expect( "&File" == bar->GetMenuLabel(0) );
+        expect( "&Foo\tCtrl-F" == bar->GetLabel(MenuTestCase_Foo) );
 
         // wxMenu
-        CHECK_EQ( "&File", filemenu->GetTitle() );
-        CHECK_EQ( "&Foo\tCtrl-F", filemenu->GetLabel(MenuTestCase_Foo) );
+        expect( "&File" == filemenu->GetTitle() );
+        expect( "&Foo\tCtrl-F" == filemenu->GetLabel(MenuTestCase_Foo) );
 
         // wxMenuItem
-        CHECK_EQ( "&Foo\tCtrl-F", itemFoo->GetItemLabel() );
+        expect( "&Foo\tCtrl-F" == itemFoo->GetItemLabel() );
 
         // These return labels stripped of mnemonics/accelerators:
 
         // wxMenuBar
-        CHECK_EQ( "File", bar->GetMenuLabelText(0) );
+        expect( "File" == bar->GetMenuLabelText(0) );
 
         // wxMenu
-        CHECK_EQ( "Foo", filemenu->GetLabelText(MenuTestCase_Foo) );
+        expect( "Foo" == filemenu->GetLabelText(MenuTestCase_Foo) );
 
         // wxMenuItem
-        CHECK_EQ( "Foo", itemFoo->GetItemLabelText() );
-        CHECK_EQ( "Foo", wxMenuItem::GetLabelText("&Foo\tCtrl-F") );
-    }
+        expect( "Foo" == itemFoo->GetItemLabelText() );
+        expect( "Foo" == wxMenuItem::GetLabelText("&Foo\tCtrl-F") );
+    };
 
 
 #if wxUSE_INTL
-    SUBCASE("TranslatedMnemonics")
+    "TranslatedMnemonics"_test = [&]
     {
         // Check that appended mnemonics are correctly stripped;
         // see https://trac.wxwidgets.org/ticket/16736
         wxTranslations trans;
         trans.SetLanguage(wxLANGUAGE_JAPANESE);
         wxFileTranslationsLoader::AddCatalogLookupPathPrefix("./intl");
-        CHECK(trans.AddCatalog("internat"));
+        expect(trans.AddCatalog("internat"));
 
         // Check the translation is being used:
-        CHECK(std::string("&File") != GetTranslatedString(trans, "&File"));
+        expect(std::string("&File") != GetTranslatedString(trans, "&File"));
 
         std::string filemenu = m_frame->GetMenuBar()->GetMenuLabel(0);
-        CHECK_EQ
+        expect
         (
-            wxStripMenuCodes(GetTranslatedString(trans, "&File"), wxStrip_Menu),
+            wxStripMenuCodes(GetTranslatedString(trans, "&File"), wxStrip_Menu) ==
             wxStripMenuCodes(GetTranslatedString(trans, filemenu), wxStrip_Menu)
         );
 
         // Test strings that have shortcuts. Duplicate non-mnemonic translations
         // exist for both "Edit" and "View", for ease of comparison
-        CHECK_EQ
+        expect
         (
-            GetTranslatedString(trans, "Edit"),
+            GetTranslatedString(trans, "Edit") ==
             wxStripMenuCodes(GetTranslatedString(trans, "E&dit\tCtrl+E"), wxStrip_Menu)
         );
 
         // "Vie&w" also has a space before the (&W)
-        CHECK_EQ
+        expect
         (
-            GetTranslatedString(trans, "View"),
+            GetTranslatedString(trans, "View") ==
             wxStripMenuCodes(GetTranslatedString(trans, "Vie&w\tCtrl+V"), wxStrip_Menu)
         );
 
         // Test a 'normal' mnemonic too: the translation is "Preten&d"
-        CHECK_EQ
+        expect
         (
-            "Pretend",
+            "Pretend" ==
             wxStripMenuCodes(GetTranslatedString(trans, "B&ogus"), wxStrip_Menu)
         );
-    }
+    };
 #endif // wxUSE_INTL
 
-    SUBCASE("RadioItems")
+    "RadioItems"_test = [&]
     {
         wxMenuBar* const bar = m_frame->GetMenuBar();
         wxMenu* const menu = new wxMenu;
@@ -400,18 +412,18 @@ TEST_CASE("Menu tests.")
         menu->AppendRadioItem(MenuTestCase_First + 1, "Radio 1");
 
         // First item of a radio group is checked by default.
-        CHECK(menu->IsChecked(MenuTestCase_First));
+        expect(menu->IsChecked(MenuTestCase_First));
 
         // Subsequent items in a group are not checked.
-        CHECK(!menu->IsChecked(MenuTestCase_First + 1));
+        expect(!menu->IsChecked(MenuTestCase_First + 1));
 
 #ifdef __WXQT__
         WARN("Radio check test does not work under Qt");
 #else
         // Checking the second one make the first one unchecked however.
         menu->Check(MenuTestCase_First + 1, true);
-        CHECK(!menu->IsChecked(MenuTestCase_First));
-        CHECK(menu->IsChecked(MenuTestCase_First + 1));
+        expect(!menu->IsChecked(MenuTestCase_First));
+        expect(menu->IsChecked(MenuTestCase_First + 1));
         menu->Check(MenuTestCase_First, true);
 #endif
 
@@ -422,30 +434,30 @@ TEST_CASE("Menu tests.")
         menu->AppendRadioItem(MenuTestCase_First + 4, "Radio 4");
 
         // ... which is independent from the first one.
-        CHECK(menu->IsChecked(MenuTestCase_First));
-        CHECK(menu->IsChecked(MenuTestCase_First + 2));
+        expect(menu->IsChecked(MenuTestCase_First));
+        expect(menu->IsChecked(MenuTestCase_First + 2));
 
 #ifdef __WXQT__
         WARN("Radio check test does not work under Qt");
 #else
         menu->Check(MenuTestCase_First + 3, true);
-        CHECK(menu->IsChecked(MenuTestCase_First + 3));
-        CHECK(!menu->IsChecked(MenuTestCase_First + 2));
+        expect(menu->IsChecked(MenuTestCase_First + 3));
+        expect(!menu->IsChecked(MenuTestCase_First + 2));
 
-        CHECK(menu->IsChecked(MenuTestCase_First));
+        expect(menu->IsChecked(MenuTestCase_First));
         menu->Check(MenuTestCase_First + 2, true);
 #endif
 
         // Insert an item in the middle of an existing radio group.
         menu->InsertRadioItem(4, MenuTestCase_First + 5, "Radio 5");
-        CHECK(menu->IsChecked(MenuTestCase_First + 2));
-        CHECK(!menu->IsChecked(MenuTestCase_First + 5));
+        expect(menu->IsChecked(MenuTestCase_First + 2));
+        expect(!menu->IsChecked(MenuTestCase_First + 5));
 
 #ifdef __WXQT__
         WARN("Radio check test does not work under Qt");
 #else
         menu->Check(MenuTestCase_First + 5, true);
-        CHECK(!menu->IsChecked(MenuTestCase_First + 3));
+        expect(!menu->IsChecked(MenuTestCase_First + 3));
 
         menu->Check(MenuTestCase_First + 3, true);
 #endif
@@ -453,43 +465,50 @@ TEST_CASE("Menu tests.")
         // Prepend a couple of items before the first group.
         menu->PrependRadioItem(MenuTestCase_First + 6, "Radio 6");
         menu->PrependRadioItem(MenuTestCase_First + 7, "Radio 7");
-        CHECK(!menu->IsChecked(MenuTestCase_First + 6));
-        CHECK(!menu->IsChecked(MenuTestCase_First + 7));
+        expect(!menu->IsChecked(MenuTestCase_First + 6));
+        expect(!menu->IsChecked(MenuTestCase_First + 7));
 
 #ifdef __WXQT__
         WARN("Radio check test does not work under Qt");
 #else
         menu->Check(MenuTestCase_First + 7, true);
-        CHECK(!menu->IsChecked(MenuTestCase_First + 1));
+        expect(!menu->IsChecked(MenuTestCase_First + 1));
 
 
         // Check that the last radio group still works as expected.
         menu->Check(MenuTestCase_First + 4, true);
-        CHECK(!menu->IsChecked(MenuTestCase_First + 5));
+        expect(!menu->IsChecked(MenuTestCase_First + 5));
 #endif
-    }
+    };
 
-    SUBCASE("RemoveAdd")
+    "RemoveAdd"_test = [&]
     {
         wxMenuBar* bar = m_frame->GetMenuBar();
 
         wxMenu* menu0 = bar->GetMenu(0);
         wxMenu* menu1 = bar->GetMenu(1);
         wxMenuItem* item = new wxMenuItem(menu0, MenuTestCase_Foo + 100, "t&ext\tCtrl-E");
-        menu0->Insert(0, item);
-        CHECK(menu0->FindItemByPosition(0) == item);
-        menu0->Remove(item);
-        CHECK(menu0->FindItemByPosition(0) != item);
-        menu1->Insert(0, item);
-        CHECK(menu1->FindItemByPosition(0) == item);
-        menu1->Remove(item);
-        CHECK(menu1->FindItemByPosition(0) != item);
-        menu0->Insert(0, item);
-        CHECK(menu0->FindItemByPosition(0) == item);
-        menu0->Delete(item);
-    }
 
-    SUBCASE("ChangeBitmap")
+        menu0->Insert(0, item);
+
+        expect(menu0->FindItemByPosition(0) == item);
+        menu0->Remove(item);
+
+        expect(menu0->FindItemByPosition(0) != item);
+        menu1->Insert(0, item);
+
+        expect(menu1->FindItemByPosition(0) == item);
+        menu1->Remove(item);
+
+        expect(menu1->FindItemByPosition(0) != item);
+        menu0->Insert(0, item);
+
+        expect(menu0->FindItemByPosition(0) == item);
+        menu0->Delete(item);
+    };
+
+    // FIXME: Add actual expectations
+    "ChangeBitmap"_test = [&]
     {
         wxMenu* menu = new wxMenu;
 
@@ -509,12 +528,13 @@ TEST_CASE("Menu tests.")
         item->SetBitmap(wxBitmap(wxSize{512, 1}));
 
         wxDELETE(menu);
-    }
+    };
 
+/*
 #if wxUSE_UIACTIONSIMULATOR
-    SUBCASE("Events")
+    "Events"_test = [&]
     {
-        MenuEventHandler handler(m_frame);
+        MenuEventHandler handler(m_frame.get());
 
         // Invoke the accelerator.
         m_frame->Show();
@@ -527,48 +547,50 @@ TEST_CASE("Menu tests.")
         wxYield();
 
         const auto ev = handler.GetEvent();
-        CHECK_EQ(static_cast<int>(MenuTestCase_Bar), ev->GetId());
+        expect(static_cast<int>(MenuTestCase_Bar) == ev->GetId());
 
         wxObject* const src = ev->GetEventObject();
-        CHECK(src);
+        expect(src);
 
         // FIXME: Use typeinfo
         //CHECK_EQ("wxMenu",
         //    wxString(src->wxGetClassInfo()->wxGetClassName()));
-        CHECK_EQ(static_cast<wxObject*>(m_menuWithBar),
-            src);
+        expect(static_cast<wxObject*>(m_menuWithBar) == src);
 
         // Invoke another accelerator, it should also work.
         sim.Char('A', wxMOD_CONTROL);
         wxYield();
 
         const auto ev2 = handler.GetEvent();
-        CHECK(ev2->GetId() == static_cast<int>(MenuTestCase_SelectAll));
+        expect(ev2->GetId() == static_cast<int>(MenuTestCase_SelectAll));
 
         // Now create a text control which uses the same accelerator for itself and
         // check that when the text control has focus, the accelerator does _not_
         // work.
-        auto text = std::make_unique<wxTextCtrl>(m_frame, wxID_ANY, "Testing");
+        auto text = std::make_unique<wxTextCtrl>(m_frame.get(), wxID_ANY, "Testing");
         text->SetFocus();
 
         sim.Char('A', wxMOD_CONTROL);
         wxYield();
 
-        CHECK(!handler.GotEvent());
-    }
+        expect(!handler.GotEvent());
+    };
 #endif // wxUSE_UIACTIONSIMULATOR
+*/
 
-}
+};
 
 namespace
 {
 
 void VerifyAccelAssigned( std::string labelText, int keycode )
 {
+    using namespace ut;
+    
     auto entry = wxAcceleratorEntry::Create( labelText );
 
-    CHECK( entry );
-    CHECK( entry->GetKeyCode() == keycode );
+    expect( entry.has_value() );
+    expect( entry->GetKeyCode() == keycode );
 }
 
 struct key
@@ -690,31 +712,34 @@ key specialKeys[] =
 
 }
 
-TEST_CASE("wxMenuItemAccelEntry")
+ut::suite wxMenuItemAccelEntryTests = []
 {
+    using namespace ut;
+
     wxMenu* menu = new wxMenu;
 
     menu->Append( wxID_ANY, "Test" );
     wxMenuItem* item = menu->FindItemByPosition( 0 );
 
-    SUBCASE( "Modifier keys" )
+    "ModifierKeys"_test = [&]
     {
         for ( unsigned i = 0; i < WXSIZEOF(modKeys); i++ )
         {
             const key& k = modKeys[i];
 
-            INFO( fmt::format( "Modifier: %s",  k.name ) );
+            // FIXME: Info in new framework?
+            // INFO( fmt::format( "Modifier: %s",  k.name ) );
             wxAcceleratorEntry accelEntry( k.keycode, 'A' , wxID_ANY, item );
             item->SetAccel( &accelEntry );
 
             std::string labelText = item->GetItemLabel();
-            INFO( fmt::format( "Label text: %s", labelText ) );
+            // INFO( fmt::format( "Label text: %s", labelText ) );
 
             VerifyAccelAssigned( labelText, 'A' );
         }
-    }
+    };
 
-    SUBCASE( "Special keys" )
+    "SpecialKeys"_test = [&]
     {
         for ( unsigned i = 0; i < WXSIZEOF(specialKeys); i++ )
         {
@@ -723,16 +748,17 @@ TEST_CASE("wxMenuItemAccelEntry")
             if( k.skip )
                 continue;
 
-            INFO( fmt::format( "Keycode: %s",  k.name ) );
+            // FIXME: New framework info?
+            // INFO( fmt::format( "Keycode: %s",  k.name ) );
             wxAcceleratorEntry accelEntry( wxACCEL_CTRL, k.keycode, wxID_ANY, item );
             item->SetAccel( &accelEntry );
 
             std::string labelText = item->GetItemLabel();
-            INFO( fmt::format( "Label text: %s", labelText ) );
+            // INFO( fmt::format( "Label text: %s", labelText ) );
 
             VerifyAccelAssigned( labelText, k.keycode );
         }
-    }
-}
+    };
+};
 
 #endif

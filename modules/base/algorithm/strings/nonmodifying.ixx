@@ -362,13 +362,6 @@ bool IsSameAs(std::string_view strViewA, std::string_view strViewB, bool bCase)
     return false;
 }
 
-// FIXME: Replace template with span
-template<typename... Cs>
-[[nodiscard]] constexpr bool ContainsAnyOf(std::string_view strView, Cs&&... cs) noexcept
-{
-    return (Contains(strView, cs) || ...);
-}
-
 template<typename... Cs>
 [[nodiscard]] constexpr bool ContainsOnly(std::string_view strView, Cs&&... cs) noexcept
 {
@@ -378,6 +371,13 @@ template<typename... Cs>
 [[nodiscard]] constexpr bool Contains(std::string_view strView, std::string_view strToFind) noexcept
 {
     return strView.find(strToFind, 0) != std::string_view::npos;
+}
+
+// FIXME: Replace template with span
+template<typename... Cs>
+[[nodiscard]] constexpr bool ContainsAnyOf(std::string_view strView, Cs&&... cs) noexcept
+{
+    return (Contains(strView, cs) || ...);
 }
 
 // FIXME: Not valid for unicode strings
